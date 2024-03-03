@@ -402,7 +402,7 @@ typedef struct _LDR_MODULE
 	ULONG               TimeDateStamp;
 } LDR_MODULE, * PLDR_MODULE;
 
-
+#ifndef _WIN64
 void Secure_HideModule(HMODULE hMod)
 {
 	PLIST_ENTRY Head, Cur;
@@ -438,6 +438,9 @@ void Secure_HideModule(HMODULE hMod)
 		Cur = Cur->Flink;
 	} while (Head != Cur);
 }
+
+#endif // !_WIN64
+
 
 
 //---------------------------------------------------------------------------
@@ -504,9 +507,13 @@ _FX BOOLEAN Secure_Init(void)
     if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
         SBIEDLL_HOOK(Ldr_, NtOpenThreadToken);
     }
+#ifndef _WIN64
 	if (SbieApi_QueryConfBool(NULL, L"HideSbieDll", FALSE))
-		if(GetModuleHandleA("SbieDll.dll"))
+		if (GetModuleHandleA("SbieDll.dll"))
 			Secure_HideModule(GetModuleHandleA("SbieDll.dll"));
+#endif //! _WIN64
+
+	
     //
     // check if this is an Internet Explorer 8 tab process
     //

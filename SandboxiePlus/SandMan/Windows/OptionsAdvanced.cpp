@@ -140,7 +140,11 @@ void COptionsWindow::LoadAdvanced()
 
 	CheckOpenCOM();
 	ui.chkComTimeout->setChecked(!m_pBox->GetBool("RpcMgmtSetComTimeout", true));
-	ui.chkHideSbieDll->setChecked(m_pBox->GetBool("HideSbieDll", false));
+	ui.chkHideSbieDll->setChecked(m_pBox->GetBool("HideSbieDll", false)
+#ifdef _WIN64
+		&&false
+#endif
+	);
 	ui.chkNoSecurityIsolation->setChecked(m_pBox->GetBool("NoSecurityIsolation", false));
 	ui.chkNoSecurityFiltering->setChecked(m_pBox->GetBool("NoSecurityFiltering", false));
 

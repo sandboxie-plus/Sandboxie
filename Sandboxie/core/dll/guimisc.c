@@ -1584,24 +1584,32 @@ _FX BOOL Gui_PrintWindow(HWND hwnd, HDC  hdcBlt, UINT nFlags)
 	return __sys_PrintWindow(hwnd, hdcBlt, nFlags);
 }
 
+
 //---------------------------------------------------------------------------
 // Gui_ShutdownBlockReasonCreate
 //---------------------------------------------------------------------------
 
-_FX BOOL Gui_ShutdownBlockReasonCreate(
-	 HWND    hWnd,
-	 LPCWSTR pwszReason
-) {
+
+_FX BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason) 
+{
 	if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
+	
 		SetLastError(ERROR_ACCESS_DENIED);
 		return 0;
 	}
 	return __sys_ShutdownBlockReasonCreate(hWnd, pwszReason);
 }
-_FX EXECUTION_STATE Gui_SetThreadExecutionState(
-	EXECUTION_STATE esFlags
-) {
+
+
+//---------------------------------------------------------------------------
+// Gui_SetThreadExecutionState
+//---------------------------------------------------------------------------
+
+
+_FX EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags) 
+{
 	if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
+	
 		SetLastError(ERROR_ACCESS_DENIED);
 		return 0;
 	}

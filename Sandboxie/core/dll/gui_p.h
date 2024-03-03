@@ -420,6 +420,10 @@ typedef HDC(*P_GetDCEx)(HWND hWnd,HRGN hrgnClip,DWORD flags);
 
 typedef BOOL (*P_PrintWindow)(HWND hwnd,HDC  hdcBlt,UINT nFlags);
 
+typedef BOOL (*P_ShutdownBlockReasonCreate)(HWND    hWnd,LPCWSTR pwszReason);
+
+typedef EXECUTION_STATE (*P_SetThreadExecutionState)(EXECUTION_STATE esFlags);
+
 typedef BOOL (*P_SetThreadDesktop)(HDESK hDesktop);
 
 typedef BOOL (*P_SwitchDesktop)(HDESK hDesktop);
@@ -571,6 +575,8 @@ GUI_SYS_VAR(IsZoomed)
 GUI_SYS_VAR_2(SendMessage)
 GUI_SYS_VAR_2(SendMessageTimeout)
 //GUI_SYS_VAR_2(SendMessageCallback)
+GUI_SYS_VAR(ShutdownBlockReasonCreate)
+GUI_SYS_VAR(SetThreadExecutionState)
 GUI_SYS_VAR_2(SendNotifyMessage)
 GUI_SYS_VAR_2(PostMessage)
 GUI_SYS_VAR_2(PostThreadMessage)

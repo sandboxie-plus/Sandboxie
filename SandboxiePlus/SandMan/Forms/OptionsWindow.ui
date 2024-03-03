@@ -736,7 +736,21 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="1">
+             <item row="9" column="2">
+              <widget class="QCheckBox" name="chkOpenCredentials">
+               <property name="text">
+                <string>Open Windows Credentials Store (user mode)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkCloseClipBoard">
+               <property name="text">
+                <string>Block read access to the clipboard</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
               <widget class="QLabel" name="label_39">
                <property name="minimumSize">
                 <size>
@@ -775,10 +789,10 @@
                </property>
               </spacer>
              </item>
-             <item row="11" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkVmRead">
+             <item row="14" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkBlockCapture">
                <property name="text">
-                <string>Allow to read memory of unsandboxed processes (not recommended)</string>
+                <string>Prevents an in-sandbox process from performing cross-sandbox window image manipulation.</string>
                </property>
               </widget>
              </item>

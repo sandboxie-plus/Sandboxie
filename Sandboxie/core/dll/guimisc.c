@@ -107,6 +107,14 @@ static HDC Gui_GetDCEx(HWND hWnd, HRGN  hrgnClip, DWORD flags);
 
 static BOOL Gui_PrintWindow(HWND hwnd,HDC  hdcBlt,UINT nFlags);
 
+static BOOL Gui_ShutdownBlockReasonCreate(
+	 HWND    hWnd,
+	 LPCWSTR pwszReason
+);
+
+static EXECUTION_STATE Gui_SetThreadExecutionState(
+	 EXECUTION_STATE esFlags
+);
 
 //---------------------------------------------------------------------------
 
@@ -189,6 +197,8 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 		SBIEDLL_HOOK_GUI(GetDC);
 		SBIEDLL_HOOK_GUI(GetDCEx);
 		SBIEDLL_HOOK_GUI(PrintWindow);
+		SBIEDLL_HOOK_GUI(ShutdownBlockReasonCreate);
+		SBIEDLL_HOOK_GUI(SetThreadExecutionState);
         if (Dll_OsBuild >= 6000) {
 
             //
@@ -1572,4 +1582,28 @@ _FX BOOL Gui_PrintWindow(HWND hwnd, HDC  hdcBlt, UINT nFlags)
 		}
 	}
 	return __sys_PrintWindow(hwnd, hdcBlt, nFlags);
+}
+
+//---------------------------------------------------------------------------
+// Gui_ShutdownBlockReasonCreate
+//---------------------------------------------------------------------------
+
+_FX BOOL Gui_ShutdownBlockReasonCreate(
+	 HWND    hWnd,
+	 LPCWSTR pwszReason
+) {
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
+		SetLastError(ERROR_ACCESS_DENIED);
+		return 0;
+	}
+	return __sys_ShutdownBlockReasonCreate(hWnd, pwszReason);
+}
+_FX EXECUTION_STATE Gui_SetThreadExecutionState(
+	EXECUTION_STATE esFlags
+) {
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
+		SetLastError(ERROR_ACCESS_DENIED);
+		return 0;
+	}
+	return __sys_SetThreadExecutionState(esFlags);
 }

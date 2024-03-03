@@ -139,3 +139,8 @@
 
 extern class CSettings*		theConf;
 extern class CSbiePlusAPI*	theAPI;
+
+#pragma warning(disable:4100)
+#pragma warning(disable:4267)
+#pragma warning(disable:4189)
+#pragma warning(disable:4005)

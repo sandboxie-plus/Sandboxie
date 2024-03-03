@@ -670,7 +670,6 @@
               <widget class="QLabel" name="lblNetwork">
                <property name="font">
                 <font>
-                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>
@@ -701,7 +700,6 @@
               <widget class="QLabel" name="lblPrinting">
                <property name="font">
                 <font>
-                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>
@@ -745,7 +743,6 @@
               <widget class="QLabel" name="lblOther">
                <property name="font">
                 <font>
-                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>
@@ -812,30 +809,10 @@
                </property>
               </widget>
              </item>
-             <item row="13" column="0" rowspan="2">
-              <spacer name="verticalSpacer_12">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>43</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
              <item row="13" column="1" colspan="2">
               <widget class="QCheckBox" name="chkBlockCapture">
                <property name="text">
-                <string>Prevents an in-sandbox process from performing cross-sandbox window image manipulation.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="2">
-              <widget class="QLabel" name="label_19">
-               <property name="text">
-                <string>(for example, screenshots) </string>
+                <string>Block sandboxed process from taking cross-sandbox screenshots</string>
                </property>
               </widget>
              </item>
@@ -848,6 +825,19 @@
                 <size>
                  <width>556</width>
                  <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="14" column="0">
+              <spacer name="verticalSpacer_12">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>43</height>
                 </size>
                </property>
               </spacer>

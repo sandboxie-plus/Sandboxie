@@ -17,12 +17,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to prevent sandboxed processes from interfering with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thx Yeyixiao)
   - it can be enabled with "BlockInterferePower=y"
   - see the sandbox option "Prevents processes in the sandbox from interfering with power operations" in SandMan UI
+- added new pattern mechanism using a ** in a pattern as palceholder means an arbitrary path element but not containing a '\'
 
 ### Changed
 - reworked option for suspending all processes in SandMan (originally introduced in 1.13.1) [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)
 
 ### Fixed
 - fixed privacy mode, NormalFilePath and symbolic link issue [#3660](https://github.com/sandboxie-plus/Sandboxie/issues/3660)
+- fixed "Recycle bin for drive * is corrupted" [#3665] (https://github.com/sandboxie-plus/Sandboxie/issues/3665)
 
 
 

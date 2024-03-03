@@ -10,20 +10,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added menu entry to restart Sandman as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
 - Added the option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
 - added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thx Yeyixiao)
-- Sandman, suspend all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582)
-- added option to prevent sandboxex processes from interfearning with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thx Yeyixiao)
+- added option to prevent sandboxed processes from interfering with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thx Yeyixiao)
+
+### Changed
+- reworked option for suspending all processes in SandMan (originally introduced in 1.13.1) [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)
 
 ### Fixed
-- fixed shortcut issue with suspending all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)
-- fixed Privacy Mode, NormalFilePath and Symbolic Link Problem [#3660](https://github.com/sandboxie-plus/Sandboxie/issues/3660)
+- fixed Privacy Mode, NormalFilePath and Symbolic Link issue [#3660](https://github.com/sandboxie-plus/Sandboxie/issues/3660)
 
 
 
 ## [1.13.1 / 5.68.1] - 2024-02-27
 
 ### Added
-- added shortcut for suspending all processes in SandMan [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582) (thx Yeyixiao)
+- added option for suspending all processes in SandMan [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582) (thx Yeyixiao)
 - added "On Terminate" trigger [#3584](https://github.com/sandboxie-plus/Sandboxie/issues/3584) (thx Yeyixiao)
+
+### Changed
+- changed DynData format to add flags
+- reverted the new sandbox directory structure for volumes without drive letters [#3632](https://github.com/sandboxie-plus/Sandboxie/issues/3632)
+  - GUID usage can be re-enabled with "UseVolumeGuidWhenNoLetter=y"
 
 ### Fixed
 - added missing checkbox for API tracing
@@ -33,11 +39,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with compartment mode compatibility fallback
 - fixed missing maximum password length check [#3639](https://github.com/sandboxie-plus/Sandboxie/issues/3639)
 - fixed issue with launching executables from volumes without a drive letter in a sandbox on Windows 1803 and earlier [#3627](https://github.com/sandboxie-plus/Sandboxie/issues/3627)
-
-### Changed
-- changed DynData format to add flags
-- reverted the new sandbox directory structure for volumes without drive letters [#3632](https://github.com/sandboxie-plus/Sandboxie/issues/3632)
-  - GUID usage can be re-enabled with "UseVolumeGuidWhenNoLetter=y"
 
 ### Removed
 - removed UseNewSymlinkResolver setting, new mechanism is always used
@@ -60,11 +61,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked part of the low level code injection mechanism to add compatibility with Windows Insider build 26040 and later
 - enabled CET Shadow Stack compatible flag for core Sandboxie binaries
 
-### Removed
-- cleaned up code and removed obsolete VC 6.0 workarounds
-
 ### Fixed
 - fixed incompatibility with Windows Insider build 26040 and later
+
+### Removed
+- cleaned up code and removed obsolete VC 6.0 workarounds
 
 
 

@@ -99,6 +99,9 @@ static LONG Gui_GetRawInputDeviceInfoW(
     _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
     _Inout_ LPVOID pData, _Inout_ PUINT pcbSize);
 
+static HDC Gui_GetDC(HWND hWnd);
+static HDC Gui_GetWindowDC(HWND hWnd);
+static HDC Gui_GetDCEx(HWND hWnd, HRGN  hrgnClip, DWORD flags);
 //---------------------------------------------------------------------------
 
 

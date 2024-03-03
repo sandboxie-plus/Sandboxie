@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>9</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -55,7 +55,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsGeneral">
            <property name="currentIndex">
-            <number>3</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tabOptions">
             <attribute name="title">
@@ -1014,7 +1014,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsSecurity">
            <property name="currentIndex">
-            <number>1</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabHarden">
             <attribute name="title">
@@ -3506,102 +3506,105 @@ The process match level has a higher priority than the specificity and describes
             <attribute name="title">
              <string>Compatibility</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout_63">
-             <item row="0" column="0">
-              <layout class="QGridLayout" name="gridLayout_62">
-               <item row="3" column="1">
-                <widget class="QCheckBox" name="chkElevateCreateProcessFix">
-                 <property name="text">
-                  <string>Apply ElevateCreateProcess Workaround (legacy behaviour)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1">
-                <widget class="QCheckBox" name="chkUseSbieWndStation">
-                 <property name="text">
-                  <string>Emulate sandboxed window station for all processes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="lblCompatibility">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Compatibility</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1">
-                <widget class="QCheckBox" name="chkComTimeout">
-                 <property name="text">
-                  <string>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="chkPreferExternalManifest">
-                 <property name="text">
-                  <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
-                <widget class="QCheckBox" name="chkUseSbieDeskHack">
-                 <property name="text">
-                  <string>Use desktop object workaround for all processes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="0">
-                <spacer name="verticalSpacer_28">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="8" column="1">
-                <spacer name="horizontalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="4" column="1">
-                <widget class="QCheckBox" name="chkNestedJobs">
-                 <property name="text">
-                  <string>Allow use of nested job objects (works on Windows 8 and later)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QCheckBox" name="chkNoPanic">
-                 <property name="toolTip">
-                  <string>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</string>
-                 </property>
-                 <property name="text">
-                  <string>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+            <layout class="QGridLayout" name="gridLayout_37">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkNoPanic">
+               <property name="toolTip">
+                <string>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</string>
+               </property>
+               <property name="text">
+                <string>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="lblCompatibility">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Compatibility</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="chkPreferExternalManifest">
+               <property name="text">
+                <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="chkElevateCreateProcessFix">
+               <property name="text">
+                <string>Apply ElevateCreateProcess Workaround (legacy behaviour)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="chkNestedJobs">
+               <property name="text">
+                <string>Allow use of nested job objects (works on Windows 8 and later)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="chkUseSbieDeskHack">
+               <property name="text">
+                <string>Use desktop object workaround for all processes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="chkUseSbieWndStation">
+               <property name="text">
+                <string>Emulate sandboxed window station for all processes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="chkComTimeout">
+               <property name="text">
+                <string>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0" rowspan="2">
+              <spacer name="verticalSpacer_28">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>122</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="chkHideSbieDll">
+               <property name="text">
+                <string>Hide “SbieDll.dll” from the image list of executable files in the sandbox</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <spacer name="horizontalSpacer_12">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>617</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>

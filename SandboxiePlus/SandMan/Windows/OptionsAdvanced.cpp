@@ -29,6 +29,7 @@ void COptionsWindow::CreateAdvanced()
 
 	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHideSbieDll, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
 	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -139,7 +140,7 @@ void COptionsWindow::LoadAdvanced()
 
 	CheckOpenCOM();
 	ui.chkComTimeout->setChecked(!m_pBox->GetBool("RpcMgmtSetComTimeout", true));
-
+	ui.chkHideSbieDll->setChecked(m_pBox->GetBool("HideSbieDll", false));
 	ui.chkNoSecurityIsolation->setChecked(m_pBox->GetBool("NoSecurityIsolation", false));
 	ui.chkNoSecurityFiltering->setChecked(m_pBox->GetBool("NoSecurityFiltering", false));
 
@@ -342,7 +343,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
 
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
-
+	WriteAdvancedCheck(ui.chkHideSbieDll, "HideSbieDll", "y", "n");
 	WriteAdvancedCheck(ui.chkNoSecurityIsolation, "NoSecurityIsolation", "y", "");
 	WriteAdvancedCheck(ui.chkNoSecurityFiltering, "NoSecurityFiltering", "y", "");
 

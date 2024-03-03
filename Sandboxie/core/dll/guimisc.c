@@ -1472,7 +1472,7 @@ _FX BOOL Gui_ImmAssociateContextEx(
 _FX HDC Gui_GetDC(HWND hWnd)
 {
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
-		if (hWnd == NULL || hWnd == GetDesktopWindow()) {
+		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
@@ -1488,7 +1488,7 @@ _FX HDC Gui_GetDC(HWND hWnd)
 _FX HDC Gui_GetWindowDC(HWND hWnd)
 {
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
-		if (hWnd == NULL || hWnd == GetDesktopWindow()) {
+		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
@@ -1504,7 +1504,7 @@ _FX HDC Gui_GetWindowDC(HWND hWnd)
 _FX HDC Gui_GetDCEx(HWND hWnd,HRGN  hrgnClip,DWORD flags)
 {
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
-		if (hWnd == NULL || hWnd == GetDesktopWindow()) {
+		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}

@@ -1519,7 +1519,7 @@ _FX HDC Gui_GetDCEx(HWND hWnd,HRGN  hrgnClip,DWORD flags)
 	}
 	return __sys_GetWindowDC(hWnd);
 }
-_FX BOOL PrintWindow(
+_FX BOOL Gui_PrintWindow(
 	HWND hwnd,
 	HDC  hdcBlt,
 	UINT nFlags

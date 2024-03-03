@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added the option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
 - added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thx Yeyixiao)
 - Sandman, suspend all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582)
+- added option to prevent sandboxex processes from interfearning with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thx Yeyixiao)
 
 ### Fixed
 - fixed shortcut issue with suspending all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)

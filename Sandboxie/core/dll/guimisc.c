@@ -100,16 +100,22 @@ static LONG Gui_GetRawInputDeviceInfoW(
     _Inout_ LPVOID pData, _Inout_ PUINT pcbSize);
 
 static HDC Gui_GetDC(HWND hWnd);
+
 static HDC Gui_GetWindowDC(HWND hWnd);
+
 static HDC Gui_GetDCEx(HWND hWnd, HRGN  hrgnClip, DWORD flags);
+
 static BOOL Gui_PrintWindow(HWND hwnd,HDC  hdcBlt,UINT nFlags);
+
 static BOOL Gui_ShutdownBlockReasonCreate(
 	 HWND    hWnd,
 	 LPCWSTR pwszReason
 );
+
 static EXECUTION_STATE Gui_SetThreadExecutionState(
 	 EXECUTION_STATE esFlags
 );
+
 //---------------------------------------------------------------------------
 
 
@@ -1475,6 +1481,7 @@ _FX BOOL Gui_ImmAssociateContextEx(
     return ok;
 }
 
+
 //---------------------------------------------------------------------------
 // Gui_GetDC
 //---------------------------------------------------------------------------
@@ -1483,12 +1490,16 @@ _FX BOOL Gui_ImmAssociateContextEx(
 _FX HDC Gui_GetDC(HWND hWnd)
 {
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	
 		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
+		
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
 		ULONG_PTR pid=0, tid=0;
+		
 		if (!Gui_IsSameBox(hWnd, &pid, &tid)) {
+		
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
@@ -1496,51 +1507,76 @@ _FX HDC Gui_GetDC(HWND hWnd)
 	return __sys_GetDC(hWnd);
 }
 
+
+//---------------------------------------------------------------------------
+// Gui_GetWindowDC
+//---------------------------------------------------------------------------
+
+
 _FX HDC Gui_GetWindowDC(HWND hWnd)
 {
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
+		
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
 		ULONG_PTR pid = 0, tid = 0;
+		
 		if (!Gui_IsSameBox(hWnd, &pid, &tid)) {
+		
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
 	}
 	return __sys_GetWindowDC(hWnd);
 }
+
+
+//---------------------------------------------------------------------------
+// Gui_GetDCEx
+//---------------------------------------------------------------------------
+
 
 _FX HDC Gui_GetDCEx(HWND hWnd,HRGN  hrgnClip,DWORD flags)
 {
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	
 		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
+		
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
 		ULONG_PTR pid = 0, tid = 0;
 
 		if (!Gui_IsSameBox(hWnd, &pid, &tid)) {
+		
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
 	}
 	return __sys_GetWindowDC(hWnd);
 }
-_FX BOOL Gui_PrintWindow(
-	HWND hwnd,
-	HDC  hdcBlt,
-	UINT nFlags
-) {
+
+
+//---------------------------------------------------------------------------
+// Gui_PrintWindow
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Gui_PrintWindow(HWND hwnd, HDC  hdcBlt, UINT nFlags)
+{
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	
 		if (hwnd == NULL || hwnd == __sys_GetDesktopWindow()) {
+		
 			SetLastError(ERROR_ACCESS_DENIED);
 			return 0;
 		}
 		ULONG_PTR pid = 0, tid = 0;
 
 		if (!Gui_IsSameBox(hwnd, &pid, &tid)) {
+		
 			SetLastError(ERROR_ACCESS_DENIED);
 			return 0;
 		}

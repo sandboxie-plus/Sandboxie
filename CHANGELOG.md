@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added menu entry to restart SandMan as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
 - added option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
   - it can be enabled with "IsBlockCapture=y"
-  - see the sandbox option ~~"Block sandboxed process from taking cross-sandbox screenshots~~ (a host reference must be added here)" in SandMan UI
+  - see the sandbox option "Block process from taking screenshots of windows not belonging to the containing sandbox" in SandMan UI
 - added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thx Yeyixiao)
   - it can be enabled with "IsProtectScreen=y"
   - see the sandbox option "Prevents getting an image of the window in the sandbox" in SandMan UI

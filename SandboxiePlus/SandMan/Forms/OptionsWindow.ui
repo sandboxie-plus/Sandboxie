@@ -709,7 +709,7 @@
              <item row="13" column="1" colspan="2">
               <widget class="QCheckBox" name="chkBlockCapture">
                <property name="text">
-                <string>Block sandboxed process from taking cross-sandbox screenshots</string>
+                <string>Block process from taking screenshots of windows not belonging to the containing sandbox</string>
                </property>
               </widget>
              </item>

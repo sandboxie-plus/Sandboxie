@@ -102,6 +102,7 @@ static LONG Gui_GetRawInputDeviceInfoW(
 static HDC Gui_GetDC(HWND hWnd);
 static HDC Gui_GetWindowDC(HWND hWnd);
 static HDC Gui_GetDCEx(HWND hWnd, HRGN  hrgnClip, DWORD flags);
+static BOOL Gui_PrintWindow(HWND hwnd,HDC  hdcBlt,UINT nFlags);
 //---------------------------------------------------------------------------
 
 
@@ -179,9 +180,10 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         }
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
-		SBIEDLL_HOOK_GUI(GetWindowDC)
-		SBIEDLL_HOOK_GUI(GetDC)
-		SBIEDLL_HOOK_GUI(GetDCEx)
+		SBIEDLL_HOOK_GUI(GetWindowDC);
+		SBIEDLL_HOOK_GUI(GetDC);
+		SBIEDLL_HOOK_GUI(GetDCEx);
+		SBIEDLL_HOOK_GUI(PrintWindow);
         if (Dll_OsBuild >= 6000) {
 
             //
@@ -1516,4 +1518,23 @@ _FX HDC Gui_GetDCEx(HWND hWnd,HRGN  hrgnClip,DWORD flags)
 		}
 	}
 	return __sys_GetWindowDC(hWnd);
+}
+_FX BOOL PrintWindow(
+	HWND hwnd,
+	HDC  hdcBlt,
+	UINT nFlags
+) {
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+		if (hwnd == NULL || hwnd == __sys_GetDesktopWindow()) {
+			SetLastError(ERROR_ACCESS_DENIED);
+			return 0;
+		}
+		ULONG_PTR pid = 0, tid = 0;
+
+		if (!Gui_IsSameBox(hwnd, &pid, &tid)) {
+			SetLastError(ERROR_ACCESS_DENIED);
+			return 0;
+		}
+	}
+	return __sys_PrintWindow(hwnd, hdcBlt, nFlags);
 }

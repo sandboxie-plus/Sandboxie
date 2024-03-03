@@ -1476,7 +1476,7 @@ _FX HDC Gui_GetDC(HWND hWnd)
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
-		ULONG_PTR pid, tid;
+		ULONG_PTR pid=0, tid=0;
 		if (!Gui_IsSameBox(hWnd, pid, tid)) {
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
@@ -1492,7 +1492,7 @@ _FX HDC Gui_GetWindowDC(HWND hWnd)
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
-		ULONG_PTR pid, tid;
+		ULONG_PTR pid = 0, tid = 0;
 		if (!Gui_IsSameBox(hWnd, pid, tid)) {
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
@@ -1508,7 +1508,7 @@ _FX HDC Gui_GetDCEx(HWND hWnd,HRGN  hrgnClip,DWORD flags)
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;
 		}
-		ULONG_PTR pid, tid;
+		ULONG_PTR pid = 0, tid = 0;
 		if (!Gui_IsSameBox(hWnd, pid, tid)) {
 			SetLastError(ERROR_ACCESS_DENIED);
 			return NULL;

@@ -7,16 +7,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.13.2 / 5.68.2] - 2024-02-??
 
 ### Added
-- added menu entry to restart Sandman as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
-- Added the option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
-- added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thx Yeyixiao)
+- added menu entry to restart SandMan as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
+- added option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
+  - this allows to block any sandboxed process from taking screen capture/screenshot
 - added option to prevent sandboxed processes from interfering with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thx Yeyixiao)
 
 ### Changed
 - reworked option for suspending all processes in SandMan (originally introduced in 1.13.1) [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)
 
 ### Fixed
-- fixed Privacy Mode, NormalFilePath and Symbolic Link issue [#3660](https://github.com/sandboxie-plus/Sandboxie/issues/3660)
+- fixed privacy mode, NormalFilePath and symbolic link issue [#3660](https://github.com/sandboxie-plus/Sandboxie/issues/3660)
 
 
 
@@ -1830,7 +1830,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - disabled Win32k hooking when HVCI is enabled due to an incompatibility (BSOD) [#1483](https://github.com/sandboxie-plus/Sandboxie/issues/1483)
 
 ### Fixed
-- fixed box initialization issue in Privacy mode [#1469](https://github.com/sandboxie-plus/Sandboxie/issues/1469)
+- fixed box initialization issue in privacy mode [#1469](https://github.com/sandboxie-plus/Sandboxie/issues/1469)
 - fixed issue with shortcuts creation introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
 - fixed various issues in Privacy Enhanced boxes and rule specificity
 - fixed issue with SeAccessCheckByType and alike
@@ -2054,7 +2054,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Note: this was previously part of "NoSandboxieDesktop=y"
 - added Sbie+ version to the log [#1277](https://github.com/sandboxie-plus/Sandboxie/issues/1277)
 - added uninstall clean-up of extra files for the Plus installer (by mpheath) [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
-- added set language for Sandman for the Plus installer (by mpheath) [#1241](https://github.com/sandboxie-plus/Sandboxie/issues/1241)
+- added set language for SandMan for the Plus installer (by mpheath) [#1241](https://github.com/sandboxie-plus/Sandboxie/issues/1241)
 - added EventLog messages with SbieMsg.dll for the Plus installer (by mpheath)
 - group expansion state is now saved
 - added additional filters to the trace tab
@@ -3302,7 +3302,7 @@ Fixed issue with Windows 7
 ## [0.1 / 5.40.2] - 2020-06-01
 
 ### Added
-- created a new Qt based UI names SandMan (Sandboxie Manager)
+- created a new Qt-based UI named SandMan (Sandboxie Manager)
 - Resource Monitor now shows the PID
 - added basic API call log using updated BSA LogApiDll
 

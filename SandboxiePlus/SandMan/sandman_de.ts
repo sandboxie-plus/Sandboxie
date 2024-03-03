@@ -3116,7 +3116,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <location filename="SandMan.cpp" line="540"/>
         <location filename="SandMan.cpp" line="695"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Als Admin neu starten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="826"/>
@@ -7118,7 +7118,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
         <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhindert, dass von dem Fenster in der Sandbox ein Screenshot erstellt werden kann.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1411"/>
@@ -8634,7 +8634,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Prüfe den &apos;automatisches Löschen&apos; Status der Sandboxen beim Starten von Sandman</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>

@@ -8,9 +8,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added menu entry to restart SandMan as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
-- added option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
-  - this allows to block any sandboxed process from taking screen capture/screenshot
+- added option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
+  - it can be enabled with "IsProtectScreen=y"
+  - see the sandbox option "Prevents getting an image of the window in the sandbox" in SandMan UI
+- added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thx Yeyixiao)
+  - it can be enabled with "IsBlockCapture=y"
+  - see the sandbox option "Block sandboxed process from taking cross-sandbox screenshots" in SandMan UI
 - added option to prevent sandboxed processes from interfering with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thx Yeyixiao)
+  - it can be enabled with "BlockInterferePower=y"
+  - see the sandbox option "Prevents processes in the sandbox from interfering with power operations" in SandMan UI
 
 ### Changed
 - reworked option for suspending all processes in SandMan (originally introduced in 1.13.1) [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)
@@ -1469,7 +1475,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - reworked the mechanism Sandboxie uses to mark host files as deleted
   - under the new behaviour a data file (FilePaths.dat) is created in the box root instead of dummy files
-  - it can be enabled with UseFileDeleteV2=y and also for the registry with UseRegDeleteV2=y which creates a reg file (RegPaths.dat)
+  - it can be enabled with "UseFileDeleteV2=y" and also for the registry with "UseRegDeleteV2=y" which creates a reg file (RegPaths.dat)
 - reworked the TlsNameBuffer mechanism to be more versatile and less error-prone
 - significantly reduced the CPU usage of SandMan.exe
 

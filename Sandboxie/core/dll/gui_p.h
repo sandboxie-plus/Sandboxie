@@ -412,11 +412,11 @@ typedef int (*P_LoadString)(
 
 typedef BOOL (*P_SetProcessWindowStation)(HWINSTA hWinSta);
 
-typedef BOOL(*P_GetWindowDC)(HWND hWnd);
+typedef HDC(*P_GetWindowDC)(HWND hWnd);
 
-typedef BOOL(*P_GetDC)(HWND hWnd);
+typedef HDC(*P_GetDC)(HWND hWnd);
 
-typedef BOOL(*P_GetDCEx)(HWND hWnd,HRGN hrgnClip,DWORD flags);
+typedef HDC(*P_GetDCEx)(HWND hWnd,HRGN hrgnClip,DWORD flags);
 
 typedef BOOL (*P_SetThreadDesktop)(HDESK hDesktop);
 

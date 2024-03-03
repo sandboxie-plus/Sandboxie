@@ -8,11 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added menu entry to restart Sandman as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
-- Added the option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
-- added option to protect the window image of the in-sandbox process from being truncated (thx Yeyixiao)
+- Added the option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
+- Sandman, suspend all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582)
 
 ### Fixed
 - fixed shortcut issue with suspending all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)
+- fixed Privacy Mode, NormalFilePath and Symbolic Link Problem [#3660](https://github.com/sandboxie-plus/Sandboxie/issues/3660)
 
 
 

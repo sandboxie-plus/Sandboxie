@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added menu entry to restart Sandman as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
-- added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thx Yeyixiao)
+- Added the option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
 - Sandman, suspend all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582)
 
 ### Fixed

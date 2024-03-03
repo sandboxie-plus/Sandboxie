@@ -373,12 +373,6 @@ _FX PSECURITY_DESCRIPTOR SbieDll_GetPublicSD()
 //---------------------------------------------------------------------------
 // Secure_HideModule
 //---------------------------------------------------------------------------
-typedef struct _LSA_UNICODE_STRING {
-	USHORT Length;
-	USHORT MaximumLength;
-	PWSTR  Buffer;
-}
-UNICODE_STRING, * PUNICODE_STRING;
 
 typedef struct _PEB_LDR_DATA
 {

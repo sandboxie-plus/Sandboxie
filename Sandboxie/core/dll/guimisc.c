@@ -1553,8 +1553,8 @@ _FX BOOL Gui_PrintWindow(
 //---------------------------------------------------------------------------
 
 _FX BOOL Gui_ShutdownBlockReasonCreate(
-	[in] HWND    hWnd,
-	[in] LPCWSTR pwszReason
+	 HWND    hWnd,
+	 LPCWSTR pwszReason
 ) {
 	if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
 		SetLastError(ERROR_ACCESS_DENIED);

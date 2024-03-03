@@ -385,7 +385,6 @@ _FX BOOLEAN Gui_Init(HMODULE module)
 	GUI_IMPORT___(GetDC)
 	GUI_IMPORT___(GetDCEx)
     GUI_IMPORT___(GetWindowThreadProcessId);
-	GUI_IMPORT___(SetThreadExecutionState);
     GUI_IMPORT___(SetThreadDesktop);
     GUI_IMPORT___(SwitchDesktop);
     GUI_IMPORT___(UserHandleGrantAccess);

@@ -416,11 +416,11 @@ typedef HDC(*P_GetWindowDC)(HWND hWnd);
 
 typedef HDC(*P_GetDC)(HWND hWnd);
 
-typedef HDC(*P_GetDCEx)(HWND hWnd,HRGN hrgnClip,DWORD flags);
+typedef HDC(*P_GetDCEx)(HWND hWnd, HRGN hrgnClip,DWORD flags);
 
-typedef BOOL (*P_PrintWindow)(HWND hwnd,HDC  hdcBlt,UINT nFlags);
+typedef BOOL (*P_PrintWindow)(HWND hwnd, HDC hdcBlt,UINT nFlags);
 
-typedef BOOL (*P_ShutdownBlockReasonCreate)(HWND    hWnd,LPCWSTR pwszReason);
+typedef BOOL (*P_ShutdownBlockReasonCreate)(HWND hWnd, LPCWSTR pwszReason);
 
 typedef EXECUTION_STATE (*P_SetThreadExecutionState)(EXECUTION_STATE esFlags);
 

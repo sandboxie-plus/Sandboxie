@@ -103,18 +103,14 @@ static HDC Gui_GetDC(HWND hWnd);
 
 static HDC Gui_GetWindowDC(HWND hWnd);
 
-static HDC Gui_GetDCEx(HWND hWnd, HRGN  hrgnClip, DWORD flags);
+static HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags);
 
-static BOOL Gui_PrintWindow(HWND hwnd,HDC  hdcBlt,UINT nFlags);
+static BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags);
 
-static BOOL Gui_ShutdownBlockReasonCreate(
-	 HWND    hWnd,
-	 LPCWSTR pwszReason
-);
+static BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason);
 
-static EXECUTION_STATE Gui_SetThreadExecutionState(
-	 EXECUTION_STATE esFlags
-);
+static EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags);
+
 
 //---------------------------------------------------------------------------
 
@@ -197,8 +193,6 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 		SBIEDLL_HOOK_GUI(GetDC);
 		SBIEDLL_HOOK_GUI(GetDCEx);
 		SBIEDLL_HOOK_GUI(PrintWindow);
-		SBIEDLL_HOOK_GUI(ShutdownBlockReasonCreate);
-		SBIEDLL_HOOK_GUI(SetThreadExecutionState);
         if (Dll_OsBuild >= 6000) {
 
             //
@@ -270,6 +264,16 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 
 	__sys_GetThreadDpiAwarenessContext = (P_GetThreadDpiAwarenessContext)
 		Ldr_GetProcAddrNew(DllName_user32, L"GetThreadDpiAwarenessContext","GetThreadDpiAwarenessContext");
+
+
+    if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
+
+        SBIEDLL_HOOK_GUI(ShutdownBlockReasonCreate);
+
+        module = Dll_Kernel32;
+
+        SBIEDLL_HOOK(Gui_, SetThreadExecutionState);
+    }
 
     return TRUE;
 }
@@ -1592,12 +1596,9 @@ _FX BOOL Gui_PrintWindow(HWND hwnd, HDC  hdcBlt, UINT nFlags)
 
 _FX BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason) 
 {
-	if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
-	
-		SetLastError(ERROR_ACCESS_DENIED);
-		return 0;
-	}
-	return __sys_ShutdownBlockReasonCreate(hWnd, pwszReason);
+	SetLastError(ERROR_ACCESS_DENIED);
+	return 0;
+	//return __sys_ShutdownBlockReasonCreate(hWnd, pwszReason);
 }
 
 
@@ -1608,10 +1609,7 @@ _FX BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason)
 
 _FX EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags) 
 {
-	if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
-	
-		SetLastError(ERROR_ACCESS_DENIED);
-		return 0;
-	}
-	return __sys_SetThreadExecutionState(esFlags);
+	SetLastError(ERROR_ACCESS_DENIED);
+	return 0;
+	//return __sys_SetThreadExecutionState(esFlags);
 }

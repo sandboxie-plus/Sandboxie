@@ -1584,7 +1584,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="886"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>在终端内</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="896"/>
@@ -4098,7 +4098,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2265"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙盒内的终端执行</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2317"/>
@@ -8115,12 +8115,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3967"/>
         <source>This command runs after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>此命令在沙盒中的所有进程终止后运行。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3970"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙盒的终端内</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4037"/>
@@ -8196,7 +8196,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4823"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation>以下设置允许 Sandboxie 与辅助功能软件结合，请注意当这些设置生效时，会使 Sandboxie 的部分保护措施失效</translation>
+        <translation>以下设置允许 Sandboxie 与辅助功能软件结合，请注意：当这些设置生效时，会使 Sandboxie 的部分保护措施失效</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4876"/>
@@ -9120,7 +9120,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="131"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation>将Sandman窗口置顶的快捷键:</translation>
+        <translation>将 Sandman 窗口置顶的快捷键：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="145"/>
@@ -9130,7 +9130,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="159"/>
         <source>Hotkey for suspending all process</source>
-        <translation type="unfinished"></translation>
+        <translation>暂停沙盒内所有进程的热键：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="618"/>

@@ -765,7 +765,21 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="1">
+             <item row="9" column="2">
+              <widget class="QCheckBox" name="chkOpenCredentials">
+               <property name="text">
+                <string>Open Windows Credentials Store (user mode)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkCloseClipBoard">
+               <property name="text">
+                <string>Block read access to the clipboard</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
               <widget class="QLabel" name="label_39">
                <property name="minimumSize">
                 <size>
@@ -784,35 +798,35 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="2">
-              <widget class="QCheckBox" name="chkOpenCredentials">
-               <property name="text">
-                <string>Open Windows Credentials Store (user mode)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkCloseClipBoard">
-               <property name="text">
-                <string>Block read access to the clipboard</string>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="1" colspan="2">
+             <item row="12" column="1" colspan="2">
               <widget class="QCheckBox" name="chkVmRead">
                <property name="text">
                 <string>Allow to read memory of unsandboxed processes (not recommended)</string>
                </property>
               </widget>
              </item>
-             <item row="12" column="2">
+             <item row="13" column="2">
               <widget class="QCheckBox" name="chkVmReadNotify">
                <property name="text">
                 <string>Issue message 2111 when a process access is denied</string>
                </property>
               </widget>
              </item>
-             <item row="13" column="0" rowspan="2">
+             <item row="14" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkBlockCapture">
+               <property name="text">
+                <string>Prevents an in-sandbox process from performing cross-sandbox window image manipulation.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="2">
+              <widget class="QLabel" name="label_19">
+               <property name="text">
+                <string>(for example, screenshots) </string>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="0">
               <spacer name="verticalSpacer_12">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -825,21 +839,14 @@
                </property>
               </spacer>
              </item>
-             <item row="13" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkBlockCapture">
+             <item row="16" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkProtectPower">
                <property name="text">
-                <string>Prevents an in-sandbox process from performing cross-sandbox window image manipulation.</string>
+                <string>Prevents processes in the sandbox from interfering with power operation</string>
                </property>
               </widget>
              </item>
-             <item row="14" column="2">
-              <widget class="QLabel" name="label_19">
-               <property name="text">
-                <string>(for example, screenshots) </string>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="2">
+             <item row="17" column="2">
               <spacer name="horizontalSpacer_5">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>

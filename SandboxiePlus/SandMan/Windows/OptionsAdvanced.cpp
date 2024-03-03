@@ -522,6 +522,7 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkVmRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkBlockCapture->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkProtectPower->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkCloseForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkNoOpenForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());

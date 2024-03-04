@@ -3608,7 +3608,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </message>
     <message>
         <location filename="SandMan.cpp" line="2468"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</oldsource>
@@ -4089,7 +4089,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="540"/>
         <location filename="SandMan.cpp" line="695"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>重启为管理员权限</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1563"/>
@@ -8030,12 +8030,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="712"/>
         <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止进程对不属于包含沙盒的窗口进行屏幕截图</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="848"/>
         <source>Prevents processes in the sandbox from interfering with power operation</source>
-        <translation type="unfinished"></translation>
+        <translation>防止沙盒中的进程干扰电源操作</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1252"/>
@@ -8051,7 +8051,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1390"/>
         <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止获取在沙盒中的窗口的图像。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1418"/>
@@ -9156,7 +9156,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>当沙盒管理器启动时检查沙盒的自动删除状态</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>

@@ -7128,7 +7128,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1390"/>
         <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation>Verhindern, dass von den Fenstern in der Sandbox ein Screenshot erstellt wird.</translation>
+        <translation>Verhindern, dass von Fenstern in der Sandbox ein Screenshot erstellt wird.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1418"/>

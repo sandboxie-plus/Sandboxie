@@ -3952,12 +3952,12 @@ Bitte überprüfen Sie, ob es ein Update für Sandboxie gibt.</translation>
     <message>
         <location filename="SandMan.cpp" line="3382"/>
         <source>Maintenance operation failed (%1)</source>
-        <translation>Wartungsoperation fehlgeschlagen (%1)</translation>
+        <translation>Wartungsvorgang fehlgeschlagen (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3387"/>
         <source>Maintenance operation completed</source>
-        <translation>Wartungsoperation abgeschlossen</translation>
+        <translation>Wartungsvorgang abgeschlossen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3407"/>
@@ -7118,17 +7118,17 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="712"/>
         <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockieren, dass Prozesse Screenshots von Fenstern erstellen, die nicht zur Sandbox gehören</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="848"/>
         <source>Prevents processes in the sandbox from interfering with power operation</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhindern, dass Prozesse in der Sandbox Energievorgänge von Windows beeinträchtigen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1390"/>
         <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation>Verhindert, dass von dem Fenster in der Sandbox ein Screenshot erstellt werden kann.</translation>
+        <translation>Verhindern, dass von den Fenstern in der Sandbox ein Screenshot erstellt wird.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1418"/>

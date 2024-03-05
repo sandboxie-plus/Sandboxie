@@ -412,13 +412,13 @@ typedef int (*P_LoadString)(
 
 typedef BOOL (*P_SetProcessWindowStation)(HWINSTA hWinSta);
 
-typedef HDC(*P_GetWindowDC)(HWND hWnd);
+/*typedef HDC(*P_GetWindowDC)(HWND hWnd);
 
 typedef HDC(*P_GetDC)(HWND hWnd);
 
 typedef HDC(*P_GetDCEx)(HWND hWnd, HRGN hrgnClip,DWORD flags);
 
-typedef BOOL (*P_PrintWindow)(HWND hwnd, HDC hdcBlt,UINT nFlags);
+typedef BOOL (*P_PrintWindow)(HWND hwnd, HDC hdcBlt,UINT nFlags);*/
 
 typedef BOOL (*P_ShutdownBlockReasonCreate)(HWND hWnd, LPCWSTR pwszReason);
 
@@ -546,10 +546,10 @@ extern ATOM Gui_WindowProcOldA_Atom;
 #endif
 #define GUI_SYS_VAR_2(nm)       GUI_SYS_VAR_AW(nm,A); GUI_SYS_VAR_AW(nm,W);
 
-GUI_SYS_VAR(GetDC)
+/*GUI_SYS_VAR(GetDC)
 GUI_SYS_VAR(GetDCEx)
 GUI_SYS_VAR(GetWindowDC)
-GUI_SYS_VAR(PrintWindow)
+GUI_SYS_VAR(PrintWindow)*/
 
 GUI_SYS_VAR(ClipCursor)
 GUI_SYS_VAR(GetClipCursor)

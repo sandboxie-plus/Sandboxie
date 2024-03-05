@@ -447,7 +447,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="231"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>沙盒将主机系统与在盒内运行的进程隔离开来，可以防止它们对计算机中的其它程序和数据进行永久性的更改。隔离级别会影响您的安全性以及与应用程序的兼容性，因此根据所选的沙盒类型会有不同的隔离级别。此外沙盒还可以保护你的个人数据不被受限制下运行的进程的访问</translation>
+        <translation>沙盒将主机系统与在沙盒内运行的进程隔离开来，可以防止它们对计算机中的其它程序和数据进行永久性的更改。隔离级别会影响您的安全性以及与应用程序的兼容性，因此根据所选的沙盒类型会有不同的隔离级别。此外沙盒还可以保护你的个人数据不被受限制下运行的进程的访问</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="242"/>
@@ -471,7 +471,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
         <translation>该沙盒类型通过显著减少主机暴露于沙盒进程的攻击面来提供最高级别的保护。
-并且它严格限制对用户数据的访问，该沙盒中的进程仅允许访问 %SystemRoot% （一般为C:\Windows） 和 %ProgramW6432%（一般为C:\Program Files）目录。
+并且它严格限制进程对用户数据的访问，该沙盒中的进程仅被允许访问 %SystemRoot% （一般为C:\Windows） 和 %ProgramW6432%（一般为C:\Program Files）目录。
 全部的用户数据及文件对沙盒进程保持隐藏状态，确保最大程度的安全性。</translation>
     </message>
     <message>
@@ -493,7 +493,7 @@ The entire user profile remains hidden, ensuring maximum security.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="304"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation>在该沙盒类型中，任何沙盒进程都将被阻止访问任何个人用户文件和数据。 重点是保护用户数据，因此，该沙盒中运行的进程只能访问 %SystemRoot% （一般为C:\Windows）和 %ProgramW6432%（一般为C:\Program Files）目录。 这可确保个人文件的安全。</translation>
+        <translation>在该沙盒类型中，任何沙盒进程都将被阻止访问任何个人用户文件和数据。 保护的重点是保护用户数据，因此，该沙盒中运行的进程只能访问 %SystemRoot% （一般为C:\Windows）和 %ProgramW6432%（一般为C:\Program Files）以及Sandboxie安装目录。 这可确保个人文件的安全。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="306"/>
@@ -517,7 +517,7 @@ Applications can be run within this sandbox, ensuring they operate within a cont
         <location filename="Wizards/NewBoxWizard.cpp" line="313"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
-        <translation>该沙盒类型优先考虑兼容性，同时仍然提供良好的隔离级别。 它设计用于在单独隔离的沙盒中运行受信任的应用程序。
+        <translation>该沙盒类型优先考虑兼容性，同时仍然提供良好的隔离级别。 它被设计用于在单独隔离的沙盒中运行受信任的应用程序。
 虽然与其他沙盒类型相比，其隔离级别有所降低，但它提供了与各种应用程序的更高兼容性，确保该沙盒环境中应用的平稳运行。</translation>
     </message>
     <message>
@@ -1487,7 +1487,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
         <source>Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.</source>
-        <translation>对选定的进程启用 Win32 钩子(注意：需要先启用全局范围的 Win32k 系统调用钩子支持)</translation>
+        <translation>对选定的进程启用 Win32 挂钩(注意：需要先启用全局范围的 Win32k 系统调用挂钩支持)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
@@ -3166,7 +3166,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="583"/>
         <source>Keep terminated</source>
-        <translation>保留终止的进程</translation>
+        <translation>在视图中保留被终止的进程</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="603"/>
@@ -3374,7 +3374,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="755"/>
         <source>Software Compatibility</source>
-        <translation>软件兼容</translation>
+        <translation>软件兼容性</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="764"/>
@@ -3714,7 +3714,7 @@ Please check if there is an update for sandboxie.</oldsource>
     <message>
         <location filename="SandMan.cpp" line="4255"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
-        <translation>Sandboxie+ 可免费用于个人和非商业用途</translation>
+        <translation>Sandboxie+ 可免费用于个人和其他非商业用途</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4258"/>
@@ -4089,7 +4089,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="540"/>
         <location filename="SandMan.cpp" line="695"/>
         <source>Restart As Admin</source>
-        <translation>重启为管理员权限</translation>
+        <translation>以管理员特权重启</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1563"/>
@@ -4893,7 +4893,7 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="161"/>
         <location filename="Views/SbieView.cpp" line="295"/>
         <source>Stop Operations</source>
-        <translation>停止作业</translation>
+        <translation>停止操作</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="190"/>
@@ -4956,7 +4956,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="239"/>
         <source>Disable Force Rules</source>
-        <translation>禁用“强制规则”</translation>
+        <translation>禁用“强制必沙规则”</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="244"/>

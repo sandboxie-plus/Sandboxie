@@ -215,11 +215,11 @@ SBIE1318 '%2'nin korumalı alan '%3' işlemine erişmeye çalışması engellend
 .
 
 1319;pop;inf;01
-SBIE1319 Dosyaya yazdırmak için engellenmiş yazdırma biriktiricisi, %2 %3
+SBIE1319 Yazdırma biriktiricisinin dosyaya yazdırması engellendi, %2 %3
 .
 
 1320;pop;wrn;01
-SBIE1320 Yazdırma biriktiricisinin bu işlem için korumalı alanın dışına yazmasına izin vermek için lütfen bu mesaj satırına çift tıklayın
+SBIE1320 Yazdırma biriktiricisinin bu işlem için korumalı alanın dışına yazmasına izin vermek istiyorsanız bu mesaj satırına çift tıklayın
 .
 
 1399;pop;inf;01

@@ -331,7 +331,9 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Parola maksimum 128 karakter uzunluğuyla sınırlıdır.
+Bu uzunluk, gerçek İngilizce kelimelerden oluşan bir parola ile yaklaşık 384 bitlik entropiye izin verir,
+Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar ve tamamen rastgele yazdırılabilir ASCII karakterlerden oluşursa 768 biti aşar.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="154"/>
@@ -2107,7 +2109,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="893"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonlandığında</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="996"/>
@@ -3101,7 +3103,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="540"/>
         <location filename="SandMan.cpp" line="695"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Yönetici Olarak Başlat</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="613"/>
@@ -3151,7 +3153,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="2283"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>OnBoxTerminate yürütülüyor: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2309"/>
@@ -3845,7 +3847,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2063"/>
         <source>Executing OnBoxDelete: %1</source>
-        <translation>AlandaSilme yürütülüyor: %1</translation>
+        <translation>OnBoxDelete yürütülüyor: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2297"/>
@@ -7141,17 +7143,17 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="712"/>
         <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu korumalı alana ait olmayan pencerelerin ekran görüntülerinin alınmasını engelle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="848"/>
         <source>Prevents processes in the sandbox from interfering with power operation</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alandaki işlemlerin güç işlevlerine müdahale etmesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1390"/>
         <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alandaki pencerelerin görüntüsünün alınmasını önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1418"/>
@@ -7292,12 +7294,12 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3977"/>
         <source>This command runs after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu komut, korumalı alandaki tüm işlemler sonlandıktan sonra çalıştırılır.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3980"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Sonlandığında</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4047"/>
@@ -7317,7 +7319,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4015"/>
         <source>Run File Checker</source>
-        <translation>Dosya Denetleyicisini Çalıştır</translation>
+        <translation>Dosya Denetleyicisini Gir</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3945"/>
@@ -7718,12 +7720,12 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="4095"/>
         <location filename="Forms/OptionsWindow.ui" line="4114"/>
         <source>Run Command</source>
-        <translation>Komut Çalıştır</translation>
+        <translation>Komut Gir</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4076"/>
         <source>Start Service</source>
-        <translation>Hizmet Başlat</translation>
+        <translation>Hizmeti Gir</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4022"/>
@@ -8587,12 +8589,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all process</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm işlemleri askıya almak için kısayol tuşu:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alanların otomatik silme durumunu SandMan başladığında denetle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>

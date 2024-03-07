@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.2 / 5.68.2] - 2024-02-??
+## [1.13.2 / 5.68.2] - 2024-03-07
 
 ### Added
 - added menu entry to restart SandMan as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thanks Yeyixiao)

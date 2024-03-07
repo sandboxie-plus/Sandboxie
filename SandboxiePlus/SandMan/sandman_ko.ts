@@ -415,7 +415,9 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>암호는 최대 128자로 제한됩니다.
+이 길이는 실제 영어 단어로 구성된 암호 문구와 함께 약 384비트의 엔트로피를 허용합니다,
+Leet (L337) 말하기 수정을 적용하면 512비트로 증가하며, 완전히 무작위로 인쇄 가능한 ASCII 문자로 구성하면 768비트를 초과합니다.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="154"/>
@@ -1823,7 +1825,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="893"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>종료 시</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="996"/>
@@ -3855,7 +3857,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="540"/>
         <location filename="SandMan.cpp" line="695"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>관리자 권한으로 다시 시작</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="562"/>
@@ -4002,7 +4004,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2283"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>OnBoxTerminate 실행 중: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2309"/>
@@ -7948,14 +7950,19 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>거부 프로세스</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="698"/>
+        <location filename="Forms/OptionsWindow.ui" line="712"/>
+        <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
+        <translation>포함 샌드박스에 속하지 않는 창의 스크린샷을 찍는 과정 차단</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="848"/>
         <source>Prevents processes in the sandbox from interfering with power operation</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스의 프로세스가 전원 작동을 방해하는 것을 방지</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
         <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스에서 창 이미지를 가져오는 것을 방지합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1411"/>
@@ -8120,12 +8127,12 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3970"/>
         <source>This command runs after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 명령은 샌드박스의 모든 프로세스가 완료된 후에 실행됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3973"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 종료 시</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4040"/>
@@ -8859,7 +8866,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all process</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 프로세스를 일시 중지하는 단축키</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>
@@ -8989,7 +8996,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드맨 시작 시 sandboxes의 자동 삭제 상태 확인</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1506"/>

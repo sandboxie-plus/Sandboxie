@@ -310,9 +310,9 @@ void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
 	}
 	else if (bUpdate)
 	{
-		for (int i = 0; i < ui.treeRecovery->topLevelItemCount(); )
+		for (int i = 0; i < ui.treeTriggers->topLevelItemCount(); )
 		{
-			QTreeWidgetItem* pItem = ui.treeRecovery->topLevelItem(i);
+			QTreeWidgetItem* pItem = ui.treeTriggers->topLevelItem(i);
 			int Type = pItem->data(0, Qt::UserRole).toInt();
 			if (Type == -1) {
 				delete pItem;

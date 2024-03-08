@@ -7950,12 +7950,11 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>거부 프로세스</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="712"/>
         <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
-        <translation>포함 샌드박스에 속하지 않는 창의 스크린샷을 찍는 과정 차단</translation>
+        <translation type="vanished">포함 샌드박스에 속하지 않는 창의 스크린샷을 찍는 과정 차단</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="848"/>
+        <location filename="Forms/OptionsWindow.ui" line="698"/>
         <source>Prevents processes in the sandbox from interfering with power operation</source>
         <translation>샌드박스의 프로세스가 전원 작동을 방해하는 것을 방지</translation>
     </message>

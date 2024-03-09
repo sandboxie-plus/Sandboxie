@@ -2644,19 +2644,31 @@ void CSandMan::CheckSupport()
 
 void CSandMan::SetupHotKeys()
 {
-	m_pHotkeyManager->unregisterAllHotkeys();
+	QString HotKey;
+	try
+	{
+		m_pHotkeyManager->unregisterAllHotkeys();
 
-	if (theConf->GetBool("Options/EnablePanicKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Shift+Pause"), HK_PANIC);
+		HotKey = "PanicKey";
+		if (theConf->GetBool("Options/EnablePanicKey", false))
+			m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Shift+Pause"), HK_PANIC);
 
-	if (theConf->GetBool("Options/EnableTopMostKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/TopMostKeySequence", "Alt+Pause"), HK_TOP);
+		HotKey = "TopMostKey";
+		if (theConf->GetBool("Options/EnableTopMostKey", false))
+			m_pHotkeyManager->registerHotkey(theConf->GetString("Options/TopMostKeySequence", "Alt+Pause"), HK_TOP);
 
-	if (theConf->GetBool("Options/EnablePauseForceKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PauseForceKeySequence", "Ctrl+Alt+F"), HK_FORCE);
-		
-	if (theConf->GetBool("Options/EnableSuspendKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/SuspendKeySequence", "Ctrl+Pause"), HK_SUSPEND);
+		HotKey = "PauseForceKey";
+		if (theConf->GetBool("Options/EnablePauseForceKey", false))
+			m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PauseForceKeySequence", "Ctrl+Alt+F"), HK_FORCE);
+
+		HotKey = "SuspendKey";
+		if (theConf->GetBool("Options/EnableSuspendKey", false))
+			m_pHotkeyManager->registerHotkey(theConf->GetString("Options/SuspendKeySequence", "Shift+Alt+Pause"), HK_SUSPEND);
+	}
+	catch (UException& err) 
+	{
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to configure hotkey %1, error: %2").arg(HotKey).arg(err.what()));
+	}
 }
 
 void CSandMan::OnHotKey(size_t id)
@@ -2679,8 +2691,11 @@ void CSandMan::OnHotKey(size_t id)
 
 	case HK_SUSPEND:
 	{
-		for (auto each : theAPI->GetAllBoxes())
-			each->SetSuspendedAll(TRUE);
+		for (auto pBox: theAPI->GetAllBoxes()) {
+			pBox->SetSuspendedAll(TRUE);
+			for (auto pProcess : pBox->GetProcessList())
+				pProcess->TestSuspended();
+		}
 		break;
 	}
 

@@ -641,9 +641,9 @@ _FX const WCHAR *Pattern_wcsnstr_ex(
             if (i == nlen)
                 return hstr;
         }
-        ++hstr;
         if (no_bs && *hstr == L'\\')
             break;
+        ++hstr;
     }
     return NULL;
 }

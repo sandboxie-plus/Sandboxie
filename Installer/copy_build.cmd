@@ -91,7 +91,9 @@ copy %srcPath%\MiscHelpers.pdb %instPath%\
 copy %srcPath%\QSbieAPI.dll %instPath%\
 copy %srcPath%\QSbieAPI.pdb %instPath%\
 copy %srcPath%\QtSingleApp.dll %instPath%\
+copy %srcPath%\QtSingleApp.pdb %instPath%\
 copy %srcPath%\UGlobalHotkey.dll %instPath%\
+copy %srcPath%\UGlobalHotkey.pdb %instPath%\
 copy %srcPath%\SandMan.exe %instPath%\
 copy %srcPath%\SandMan.pdb %instPath%\
 

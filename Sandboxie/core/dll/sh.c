@@ -430,10 +430,6 @@ HICON SH32_BorderToIcon(HICON hIcon, COLORREF color)
     typedef BOOL(*P_DeleteObject)(HGDIOBJ ho);
     typedef BOOL(*P_DeleteDC)(HDC hdc);
 
-#define GET_WIN_API(name, lib) \
-    P_##name name = Ldr_GetProcAddrNew(lib, #name, #name); \
-    if(!name) return NULL;
-
     GET_WIN_API(GetDC, DllName_user32);
     GET_WIN_API(ReleaseDC, DllName_user32);
     GET_WIN_API(GetIconInfo, DllName_user32);

@@ -263,6 +263,8 @@ static HWND Gui_CreateWindowExW(
 static BOOLEAN Gui_CanForwardMsg(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam/*, LRESULT* plResult*/);
 
+static VOID Gui_ProtectScreen(HWND hWnd);
+
 static LRESULT Gui_DefWindowProcA(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -1391,6 +1393,9 @@ _FX HWND Gui_CreateWindowExW(
 
     --TlsData->gui_create_window;
 
+    if (hwndResult && !hWndParent && Gui_UseProtectScreen)
+        Gui_ProtectScreen(hwndResult);
+
     //
     // replace window procedure
     //
@@ -1499,6 +1504,9 @@ _FX HWND Gui_CreateWindowExA(
 
     --TlsData->gui_create_window;
 
+    if (hwndResult && !hWndParent && Gui_UseProtectScreen)
+        Gui_ProtectScreen(hwndResult);
+
     //
     // replace window procedure
     //
@@ -1563,14 +1571,12 @@ _FX BOOLEAN Gui_CanForwardMsg(
 
 _FX VOID Gui_ProtectScreen(HWND hWnd)
 {
-    if (SbieApi_QueryConfBool(NULL, L"IsProtectScreen", FALSE))
-    {
-        typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
-        LPSETWINDOWDISPLAYAFFINITY pSetWindowDisplayAffinity = (LPSETWINDOWDISPLAYAFFINITY)
-            Ldr_GetProcAddrNew(DllName_user32, L"SetWindowDisplayAffinity","SetWindowDisplayAffinity");
-        if (pSetWindowDisplayAffinity)
-            pSetWindowDisplayAffinity(hWnd, 0x00000001);
-    }
+    typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
+    static LPSETWINDOWDISPLAYAFFINITY pSetWindowDisplayAffinity = NULL;
+    if(!pSetWindowDisplayAffinity)
+        pSetWindowDisplayAffinity = (LPSETWINDOWDISPLAYAFFINITY)Ldr_GetProcAddrNew(DllName_user32, L"SetWindowDisplayAffinity", "SetWindowDisplayAffinity");
+    if (pSetWindowDisplayAffinity)
+        pSetWindowDisplayAffinity(hWnd, 0x00000001);
 }
 
 
@@ -1598,9 +1604,6 @@ _FX LRESULT Gui_WindowProcW(
         new_lParam = (LPARAM)Gui_CreateTitleW((WCHAR *)lParam);
     else
         new_lParam = lParam;
-
-    if (uMsg == WM_CREATE)
-		Gui_ProtectScreen(hWnd);
 
 	if (uMsg == WM_QUERYENDSESSION)
 	{
@@ -1663,8 +1666,6 @@ _FX LRESULT Gui_WindowProcA(
     else
         new_lParam = lParam;
 		
-	if (uMsg == WM_CREATE)
-		Gui_ProtectScreen(hWnd);
 	if (uMsg == WM_QUERYENDSESSION)
 	{
 		if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE))
@@ -1693,10 +1694,8 @@ _FX LRESULT Gui_DefWindowProcW(
     if (uMsg == WM_SETTEXT && Gui_ShouldCreateTitle(hWnd))
         new_lParam = (LPARAM)Gui_CreateTitleW((WCHAR *)lParam);
 
-    else if (uMsg == WM_CREATE || uMsg == WM_NCCREATE) {
-        Gui_ProtectScreen(hWnd);
+    else if (uMsg == WM_CREATE || uMsg == WM_NCCREATE)
         Gui_CREATESTRUCT_Restore(lParam);
-    }
 
     lResult = __sys_DefWindowProcW(hWnd, uMsg, wParam, new_lParam);
 
@@ -1721,10 +1720,8 @@ _FX LRESULT Gui_DefWindowProcA(
     if (uMsg == WM_SETTEXT && Gui_ShouldCreateTitle(hWnd))
         new_lParam = (LPARAM)Gui_CreateTitleA((UCHAR *)lParam);
 
-    else if (uMsg == WM_CREATE || uMsg == WM_NCCREATE) {
-        Gui_ProtectScreen(hWnd);
+    else if (uMsg == WM_CREATE || uMsg == WM_NCCREATE)
         Gui_CREATESTRUCT_Restore(lParam);
-    }
 
     lResult = __sys_DefWindowProcA(hWnd, uMsg, wParam, new_lParam);
 

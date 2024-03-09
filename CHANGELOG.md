@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.13.3 / 5.68.3] - 2024-02-??
+
+### Fixed
+- fixed issues with "IsProtectScreen=y" [3656](https://github.com/sandboxie-plus/Sandboxie/pull/3656#discussion_r1518549704)
+
+
+
+
 ## [1.13.2 / 5.68.2] - 2024-03-07
 
 ### Added

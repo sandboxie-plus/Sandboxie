@@ -2450,7 +2450,7 @@ void CSandMan::OnStatusChanged()
 		}
 
 		int DynData = theAPI->IsDyndataActive();
-		if (DynData != 1)
+		if (DynData != 1 && COnlineUpdater::VersionToInt(theAPI->GetVersion()) >= COnlineUpdater::VersionToInt("5.68.0"))
 		{
 			RTL_OSVERSIONINFOEXW versionInfo;
 			memset(&versionInfo, 0, sizeof(RTL_OSVERSIONINFOEXW));

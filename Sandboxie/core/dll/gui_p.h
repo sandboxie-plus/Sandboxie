@@ -56,6 +56,9 @@
 #define WM_DDE_EXECUTE      (WM_DDE_FIRST+8)
 #define WM_DDE_LAST         (WM_DDE_FIRST+8)
 
+#define GET_WIN_API(name, lib) \
+    P_##name name = Ldr_GetProcAddrNew(lib, #name, #name); \
+    if(!name) return NULL;
 
 //---------------------------------------------------------------------------
 // Prototypes
@@ -468,6 +471,7 @@ typedef BOOL(*P_GetOpenFileNameW)(LPVOID lpofn);
 
 extern BOOLEAN Gui_RenameClasses;
 extern BOOLEAN Gui_OpenAllWinClasses;   // not running in a restricted job
+extern BOOLEAN Gui_UseProtectScreen;
 
 extern BOOLEAN Gui_UseProxyService;
 

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2022 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -193,7 +193,7 @@ _FX NTSTATUS SbieApi_LogMsg(ULONG64 pNtDeviceIoControlFile, ULONG64 api_device_h
 
 _FX NTSTATUS SbieApi_DebugError(SBIELOW_DATA* data, ULONG error)
 {
-    // Note: A normal string like L"text" would not resultin position independent code !!!
+    // Note: A normal string like L"text" would not result in position independent code !!!
     // hence we create a string array and fill it byte by byte
 
     wchar_t text[] = { 'L','o','w','L','e','v','e','l',' ','E','r','r','o','r',':',' ','0','x',0,0,0,0,0,0,0,0,0,0};
@@ -573,7 +573,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
 _FX NTSTATUS MyImageOptionsEx(PUNICODE_STRING SubKey, PCWSTR ValueName, 
     ULONG Type, PVOID Buffer, ULONG BufferSize, PULONG ReturnedLength, BOOLEAN Wow64, SBIELOW_DATA* data)
 {
-    // Note: A normal string like L"LoadCHPEBinaries" would not resultin position independent code !!!
+    // Note: A normal string like L"LoadCHPEBinaries" would not result in position independent code !!!
     wchar_t LoadCHPEBinaries[] = { 'L','o','a','d','C','H','P','E','B','i','n','a','r','i','e','s',0 }; 
     PCWSTR ptr = ValueName;
     for (PCWSTR tmp = LoadCHPEBinaries; *ptr && *tmp && *ptr == *tmp; ptr++, tmp++);

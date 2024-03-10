@@ -78,6 +78,8 @@ static int Gdi_EnumFontFamiliesExW(
 
 static HGDIOBJ Gdi_GetStockObject(int fnObject);
 
+
+
 //---------------------------------------------------------------------------
 
 #ifndef _WIN64
@@ -92,8 +94,8 @@ static BOOL Gdi_ClosePrinter(HANDLE hPrinter);
 //---------------------------------------------------------------------------
 
 
-typedef HDC (*P_CreateDCW)(
-    void *lpszDriver, void *lpszDevice, void *lpszOutput, void *lpInitData);
+//typedef HDC (*P_CreateDCW)(
+   // void *lpszDriver, void *lpszDevice, void *lpszOutput, void *lpInitData);
 
 typedef ULONG (*P_GdiAddFontResourceW)(
     const WCHAR *path, ULONG flags, void *reserved);
@@ -263,6 +265,115 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
     return rc;
 }
 
+//---------------------------------------------------------------------------
+// Gui_BitBlt
+// --------------------------------------------------------------------------
+_FX BOOL Gui_DeleteDC(HDC hdc) {
+	return __sys_DeleteDC(hdc);
+}
+
+
+_FX BOOL Gui_BitBlt(
+	HDC   hdc,
+	int   x,
+	int   y,
+	int   cx,
+	int   cy,
+	HDC   hdcSrc,
+	int   x1,
+	int   y1,
+	DWORD rop
+) {
+	int ret = __sys_BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop);
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+		int iWidth = GetDeviceCaps(hdc, HORZRES), iHeight = GetDeviceCaps(hdc, VERTRES);
+		int iWidth2 = GetDeviceCaps(__sys_GetDC(NULL), HORZRES), iHeight2 = GetDeviceCaps(__sys_GetDC(NULL), VERTRES);
+		if (iWidth == iWidth2 && iHeight == iHeight2) {
+			__sys_BitBlt(__sys_GetDC(NULL), x, y, cx, cy, hdcSrc, x1, y1, rop);
+		}
+	}
+	return ret;
+}
+
+_FX BOOL Gui_StretchBlt(
+	HDC   hdcDest,
+	int   xDest,
+	int   yDest,
+	int   wDest,
+	int   hDest,
+	HDC   hdcSrc,
+	int   xSrc,
+	int   ySrc,
+	int   wSrc,
+	int   hSrc,
+	DWORD rop
+)
+{
+	int ret = __sys_StretchBlt(hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+		int iWidth = GetDeviceCaps(hdcDest, HORZRES), iHeight = GetDeviceCaps(hdcDest, VERTRES);
+		int iWidth2 = GetDeviceCaps(__sys_GetDC(NULL), HORZRES), iHeight2 = GetDeviceCaps(__sys_GetDC(NULL), VERTRES);
+		if (iWidth == iWidth2 && iHeight == iHeight2) {
+			__sys_StretchBlt(__sys_GetDC(NULL), xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
+		}
+	}
+	return ret;
+}
+HBITMAP bmp = NULL;
+_FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const DEVMODEA* pdm) {
+	HDC ret = __sys_CreateDCA(pwszDriver, pwszDevice, pszPort, pdm);
+
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+
+		if (pwszDevice == NULL && strcmp(pwszDriver, "DISPLAY") == 0) {
+
+			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
+			//typedef BOOL(*P_DeleteDC)(HDC hdc);
+			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			GET_WIN_API(DeleteDC, DllName_gdi32);
+			int iWidth, iHeight;
+
+			HDC ret2 = CreateCompatibleDC(ret);
+			iWidth = GetDeviceCaps(ret, HORZRES);
+			iHeight = GetDeviceCaps(ret, VERTRES);
+			HBITMAP hBmp;
+			if (bmp == NULL)
+				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
+			hBmp = bmp;
+			SelectObject(ret2, hBmp);
+			DeleteDC(ret);
+			ret = ret2;
+		}
+	}
+	return ret;
+}
+_FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const DEVMODEW* pdm) {
+	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
+
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+
+		if (pwszDevice == NULL && lstrcmp(pwszDriver, L"DISPLAY") == 0) {
+
+			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
+			//typedef BOOL(*P_DeleteDC)(HDC hdc);
+			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			GET_WIN_API(DeleteDC, DllName_gdi32);
+			int iWidth, iHeight;
+
+			HDC ret2 = CreateCompatibleDC(ret);
+			iWidth = GetDeviceCaps(ret, HORZRES);
+			iHeight = GetDeviceCaps(ret, VERTRES);
+			HBITMAP hBmp;
+			if (bmp == NULL)
+				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
+			hBmp = bmp;
+			SelectObject(ret2, hBmp);
+			DeleteDC(ret);
+			ret = ret2;
+		}
+	}
+	return ret;
+}
 
 //---------------------------------------------------------------------------
 // Gdi_SplWow64
@@ -831,6 +942,13 @@ _FX BOOLEAN Gdi_Full_Init_impl(HMODULE module, BOOLEAN full)
 	SBIEDLL_HOOK(Gdi_, GdiAddFontResourceW);
 
 	SBIEDLL_HOOK(Gdi_, RemoveFontResourceExW);
+
+	SBIEDLL_HOOK(Gui_,DeleteDC);
+	SBIEDLL_HOOK(Gui_,BitBlt);
+	SBIEDLL_HOOK(Gui_,StretchBlt);
+	//SBIEDLL_HOOK_GUI(TransparentBlt);
+	SBIEDLL_HOOK(Gui_,CreateDCA);
+	SBIEDLL_HOOK(Gui_,CreateDCW);
 
 	if (GetFontResourceInfoW) {
 		SBIEDLL_HOOK(Gdi_, GetFontResourceInfoW);

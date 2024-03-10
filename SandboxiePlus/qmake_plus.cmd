@@ -5,21 +5,21 @@ REM echo arch: %1
 
 
 IF %1 == Win32 (
-  set qt_path=%~dp0..\..\Qt\5.15.2\msvc2019
+  set qt_path=%~dp0..\..\Qt\5.15.13\msvc2019
 
   REM get private headers for QtCore
-  Xcopy /E /I /Y /Q %~dp0..\..\Qt\5.15.2\msvc2019\include\QtCore\5.15.2\QtCore %~dp0..\..\Qt\5.15.2\msvc2019\include\QtCore
+  Xcopy /E /I /Y /Q %~dp0..\..\Qt\5.15.13\msvc2019\include\QtCore\5.15.13\QtCore %~dp0..\..\Qt\5.15.13\msvc2019\include\QtCore
   
   set build_arch=Win32
   set qt_params= 
 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
 )
 IF %1 == x64 (
-  set qt_path=%~dp0..\..\Qt\5.15.2\msvc2019_64
+  set qt_path=%~dp0..\..\Qt\5.15.13\msvc2019_64
 REM  set qt_path=%~dp0..\..\Qt\6.3.1\msvc2019_64
   
   REM get private headers for QtCore
-  Xcopy /E /I /Y /Q %~dp0..\..\Qt\5.15.2\msvc2019_64\include\QtCore\5.15.2\QtCore %~dp0..\..\Qt\5.15.2\msvc2019_64\include\QtCore
+  Xcopy /E /I /Y /Q %~dp0..\..\Qt\5.15.13\msvc2019_64\include\QtCore\5.15.13\QtCore %~dp0..\..\Qt\5.15.13\msvc2019_64\include\QtCore
 REM  Xcopy /E /I /Y /Q %~dp0..\..\Qt\6.3.1\msvc2019_64\include\QtCore\6.3.1\QtCore %~dp0..\..\Qt\6.3.1\msvc2019_64\include\QtCore
   
   set build_arch=x64

@@ -321,7 +321,7 @@ _FX BOOL Gui_StretchBlt(
 }
 HBITMAP bmp = NULL;
 _FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const DEVMODEA* pdm) {
-	HDC ret = __sys_CreateDCA(pwszDriver, pwszDevice, pszPort, pdm);
+	HDC ret = __sys_CreateDCA(pwszDriver, pwszDevice, pszPort, &pdm);
 
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 
@@ -348,7 +348,7 @@ _FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, co
 	return ret;
 }
 _FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const DEVMODEW* pdm) {
-	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
+	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, &pdm);
 
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 

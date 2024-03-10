@@ -334,6 +334,52 @@ static DWORD Gui_WaitForInputIdle(HANDLE hProcess, DWORD dwMilliseconds);
 
 static BOOL Gui_AttachThreadInput(DWORD idAttach, DWORD idAttachTo, BOOL fAttach);
 
+static BOOL Gui_DeleteDC(HDC hdc);
+
+static BOOL Gui_BitBlt(
+	HDC   hdc,
+	int   x,
+	int   y,
+	int   cx,
+	int   cy,
+	HDC   hdcSrc,
+	int   x1,
+	int   y1,
+	DWORD rop
+);
+
+static BOOL Gui_StretchBlt(
+	HDC   hdcDest,
+	int   xDest,
+	int   yDest,
+	int   wDest,
+	int   hDest,
+	HDC   hdcSrc,
+	int   xSrc,
+	int   ySrc,
+	int   wSrc,
+	int   hSrc,
+	DWORD rop
+);
+
+/*static BOOL Gui_TransparentBlt(
+	HDC  hdcDest,
+	int  xoriginDest,
+	int  yoriginDest,
+	int  wDest,
+	int  hDest,
+	HDC  hdcSrc,
+	int  xoriginSrc,
+	int  yoriginSrc,
+	int  wSrc,
+	int  hSrc,
+	UINT crTransparent
+);*/
+
+static HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const DEVMODEA* pdm);
+
+static HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const DEVMODEW* pdm);
+
 
 //---------------------------------------------------------------------------
 // GUI_IMPORT
@@ -382,10 +428,17 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     Gui_UseProxyService = !Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
     // NoSbieDesk END
 
-	/*GUI_IMPORT___(PrintWindow)
-	GUI_IMPORT___(GetWindowDC)
-	GUI_IMPORT___(GetDC)
-	GUI_IMPORT___(GetDCEx)*/
+	GUI_IMPORT___(PrintWindow);
+		GUI_IMPORT___(GetWindowDC);
+		GUI_IMPORT___(GetDC);
+		GUI_IMPORT___(GetDCEx);
+		GUI_IMPORT___(DeleteDC);
+		GUI_IMPORT___(ReleaseDC);
+		GUI_IMPORT___(BitBlt);
+		GUI_IMPORT___(StretchBlt);
+		GUI_IMPORT___(TransparentBlt);
+		GUI_IMPORT___(CreateDCA);
+		GUI_IMPORT___(CreateDCW);
     GUI_IMPORT___(GetWindowThreadProcessId);
     GUI_IMPORT___(SetThreadDesktop);
     GUI_IMPORT___(SwitchDesktop);
@@ -620,6 +673,12 @@ _FX BOOLEAN Gui_Init2(HMODULE module)
     SBIEDLL_HOOK_GUI(MessageBoxW);
     SBIEDLL_HOOK_GUI(MessageBoxExW);
 
+	SBIEDLL_HOOK_GUI(DeleteDC);
+	SBIEDLL_HOOK_GUI(BitBlt);
+	SBIEDLL_HOOK_GUI(StretchBlt);
+	//SBIEDLL_HOOK_GUI(TransparentBlt);
+	SBIEDLL_HOOK_GUI(CreateDCA);
+	SBIEDLL_HOOK_GUI(CreateDCW);
     if (! Gui_OpenAllWinClasses) {
 
         SBIEDLL_HOOK_GUI(UserHandleGrantAccess);
@@ -1576,7 +1635,7 @@ _FX VOID Gui_ProtectScreen(HWND hWnd)
     if(!pSetWindowDisplayAffinity)
         pSetWindowDisplayAffinity = (LPSETWINDOWDISPLAYAFFINITY)Ldr_GetProcAddrNew(DllName_user32, L"SetWindowDisplayAffinity", "SetWindowDisplayAffinity");
     if (pSetWindowDisplayAffinity)
-        pSetWindowDisplayAffinity(hWnd, 0x00000001);
+        pSetWindowDisplayAffinity(hWnd, 0x00000011);
 }
 
 
@@ -1667,10 +1726,8 @@ _FX LRESULT Gui_WindowProcA(
         new_lParam = lParam;
 		
 	if (uMsg == WM_QUERYENDSESSION)
-	{
 		if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE))
 			return TRUE;
-	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);
 
@@ -2742,3 +2799,110 @@ _FX BOOLEAN ComDlg32_Init(HMODULE module)
     return TRUE;
 }
 
+
+_FX BOOL Gui_DeleteDC(HDC hdc) {
+	return __sys_DeleteDC(hdc);
+}
+
+
+_FX BOOL Gui_BitBlt(
+	HDC   hdc,
+	int   x,
+	int   y,
+	int   cx,
+	int   cy,
+	HDC   hdcSrc,
+	int   x1,
+	int   y1,
+	DWORD rop
+) {
+	int ret = __sys_BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop);
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+		int iWidth = GetDeviceCaps(hdc, HORZRES), iHeight = GetDeviceCaps(hdc, VERTRES);
+		int iWidth2 = GetDeviceCaps(__sys_GetDC(NULL), HORZRES), iHeight2 = GetDeviceCaps(__sys_GetDC(NULL), VERTRES);
+		if (iWidth == iWidth2 && iHeight == iHeight2) {
+			__sys_BitBlt(__sys_GetDC(NULL), x, y, cx, cy, hdcSrc, x1, y1, rop);
+		}
+	}
+	return ret;
+}
+
+_FX BOOL Gui_StretchBlt(
+	HDC   hdcDest,
+	int   xDest,
+	int   yDest,
+	int   wDest,
+	int   hDest,
+	HDC   hdcSrc,
+	int   xSrc,
+	int   ySrc,
+	int   wSrc,
+	int   hSrc,
+	DWORD rop
+)
+{
+	int ret = __sys_StretchBlt(hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+		int iWidth = GetDeviceCaps(hdcDest, HORZRES), iHeight = GetDeviceCaps(hdcDest, VERTRES);
+		int iWidth2 = GetDeviceCaps(__sys_GetDC(NULL), HORZRES), iHeight2 = GetDeviceCaps(__sys_GetDC(NULL), VERTRES);
+		if (iWidth == iWidth2 && iHeight == iHeight2) {
+			__sys_StretchBlt(__sys_GetDC(NULL), xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
+		}
+	}
+	return ret;
+}
+HBITMAP bmp = NULL;
+_FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const DEVMODEA* pdm) {
+	HDC ret = __sys_CreateDCA(pwszDriver, pwszDevice, pszPort, pdm);
+
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+
+		if (pwszDevice == NULL && strcmp(pwszDriver, "DISPLAY") == 0) {
+
+			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
+			//typedef BOOL(*P_DeleteDC)(HDC hdc);
+			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			GET_WIN_API(DeleteDC, DllName_gdi32);
+			int iWidth, iHeight;
+
+			HDC ret2 = CreateCompatibleDC(ret);
+			iWidth = GetDeviceCaps(ret, HORZRES);
+			iHeight = GetDeviceCaps(ret, VERTRES);
+			HBITMAP hBmp;
+			if (bmp == NULL)
+				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
+			hBmp = bmp;
+			SelectObject(ret2, hBmp);
+			DeleteDC(ret);
+			ret = ret2;
+		}
+	}
+	return ret;
+}
+_FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const DEVMODEW* pdm) {
+	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
+
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+
+		if (pwszDevice == NULL && lstrcmp(pwszDriver, L"DISPLAY") == 0) {
+
+			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
+			//typedef BOOL(*P_DeleteDC)(HDC hdc);
+			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			GET_WIN_API(DeleteDC, DllName_gdi32);
+			int iWidth, iHeight;
+
+			HDC ret2 = CreateCompatibleDC(ret);
+			iWidth = GetDeviceCaps(ret, HORZRES);
+			iHeight = GetDeviceCaps(ret, VERTRES);
+			HBITMAP hBmp;
+			if (bmp == NULL)
+				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
+			hBmp = bmp;
+			SelectObject(ret2, hBmp);
+			DeleteDC(ret);
+			ret = ret2;
+		}
+	}
+	return ret;
+}

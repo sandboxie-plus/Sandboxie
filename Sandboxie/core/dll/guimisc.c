@@ -99,13 +99,17 @@ static LONG Gui_GetRawInputDeviceInfoW(
     _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
     _Inout_ LPVOID pData, _Inout_ PUINT pcbSize);
 
-/*static HDC Gui_GetDC(HWND hWnd);
+static HDC Gui_GetDC(HWND hWnd);
 
 static HDC Gui_GetWindowDC(HWND hWnd);
 
 static HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags);
 
-static BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags);*/
+static BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags);
+
+static int Gui_ReleaseDC(HWND hWnd, HDC hDc);
+
+
 
 static BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason);
 
@@ -189,10 +193,13 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         }
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
-		/*SBIEDLL_HOOK_GUI(GetWindowDC);
+		SBIEDLL_HOOK_GUI(GetWindowDC);
 		SBIEDLL_HOOK_GUI(GetDC);
 		SBIEDLL_HOOK_GUI(GetDCEx);
-		SBIEDLL_HOOK_GUI(PrintWindow);*/
+		SBIEDLL_HOOK_GUI(PrintWindow);
+		SBIEDLL_HOOK_GUI(ReleaseDC);
+
+
         if (Dll_OsBuild >= 6000) {
 
             //
@@ -1485,30 +1492,41 @@ _FX BOOL Gui_ImmAssociateContextEx(
     return ok;
 }
 
-/*
+
 //---------------------------------------------------------------------------
 // Gui_GetDC
 //---------------------------------------------------------------------------
 
-
+HBITMAP bmp=NULL;
 _FX HDC Gui_GetDC(HWND hWnd)
 {
-	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
-	
-		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
-		
-			SetLastError(ERROR_ACCESS_DENIED);
-			return NULL;
-		}
+	HDC ret = __sys_GetDC(hWnd);
 
-		ULONG_PTR pid=0, tid=0;
-		if (!Gui_IsSameBox(hWnd, &pid, &tid)) {
-		
-			SetLastError(ERROR_ACCESS_DENIED);
-			return NULL;
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+
+		ULONG_PTR pid = 0, tid = 0;
+		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow() ||
+			!Gui_IsSameBox(hWnd, &pid, &tid)) {
+
+			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
+			//typedef BOOL(*P_DeleteDC)(HDC hdc);
+			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			GET_WIN_API(DeleteDC, DllName_gdi32);
+			int iWidth, iHeight;
+
+			HDC ret2 = CreateCompatibleDC(ret);
+			iWidth = GetDeviceCaps(ret, HORZRES);
+			iHeight = GetDeviceCaps(ret, VERTRES);
+			HBITMAP hBmp;
+			if(bmp==NULL)
+				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
+			hBmp = bmp;
+			SelectObject(ret2, hBmp);
+			DeleteDC(ret);
+			ret = ret2;
 		}
 	}
-	return __sys_GetDC(hWnd);
+	return ret;
 }
 
 
@@ -1519,21 +1537,33 @@ _FX HDC Gui_GetDC(HWND hWnd)
 
 _FX HDC Gui_GetWindowDC(HWND hWnd)
 {
+	HDC ret = __sys_GetWindowDC(hWnd);
+
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
-		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
-		
-			SetLastError(ERROR_ACCESS_DENIED);
-			return NULL;
-		}
 
 		ULONG_PTR pid = 0, tid = 0;
-		if (!Gui_IsSameBox(hWnd, &pid, &tid)) {
-		
-			SetLastError(ERROR_ACCESS_DENIED);
-			return NULL;
+		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow() ||
+			!Gui_IsSameBox(hWnd, &pid, &tid)) {
+
+			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
+			//typedef BOOL(*P_DeleteDC)(HDC hdc);
+			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			GET_WIN_API(DeleteDC, DllName_gdi32);
+			int iWidth, iHeight;
+
+			HDC ret2 = CreateCompatibleDC(ret);
+			iWidth = GetDeviceCaps(ret, HORZRES);
+			iHeight = GetDeviceCaps(ret, VERTRES);
+			HBITMAP hBmp;
+			if (bmp == NULL)
+				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
+			hBmp = bmp;
+			SelectObject(ret2, hBmp);
+			DeleteDC(ret);
+			ret = ret2;
 		}
 	}
-	return __sys_GetWindowDC(hWnd);
+	return ret;
 }
 
 
@@ -1544,22 +1574,33 @@ _FX HDC Gui_GetWindowDC(HWND hWnd)
 
 _FX HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags)
 {
+	HDC ret = __sys_GetDCEx(hWnd, hrgnClip, flags);
+
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
-	
-		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow()) {
-		
-			SetLastError(ERROR_ACCESS_DENIED);
-			return NULL;
-		}
 
 		ULONG_PTR pid = 0, tid = 0;
-		if (!Gui_IsSameBox(hWnd, &pid, &tid)) {
-		
-			SetLastError(ERROR_ACCESS_DENIED);
-			return NULL;
+		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow() ||
+			!Gui_IsSameBox(hWnd, &pid, &tid)) {
+
+			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
+			//typedef BOOL(*P_DeleteDC)(HDC hdc);
+			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			GET_WIN_API(DeleteDC, DllName_gdi32);
+			int iWidth, iHeight;
+
+			HDC ret2 = CreateCompatibleDC(ret);
+			iWidth = GetDeviceCaps(ret, HORZRES);
+			iHeight = GetDeviceCaps(ret, VERTRES);
+			HBITMAP hBmp;
+			if (bmp == NULL)
+				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
+			hBmp = bmp;
+			SelectObject(ret2, hBmp);
+			DeleteDC(ret);
+			ret = ret2;
 		}
 	}
-	return __sys_GetDCEx(hWnd, hrgnClip, flags);
+	return ret;
 }
 
 
@@ -1587,7 +1628,10 @@ _FX BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags)
 	}
 	return __sys_PrintWindow(hwnd, hdcBlt, nFlags);
 }
-*/
+_FX int Gui_ReleaseDC(HWND hWnd, HDC hdc) {
+	return __sys_ReleaseDC(hWnd, hdc);
+}
+
 
 //---------------------------------------------------------------------------
 // Gui_ShutdownBlockReasonCreate

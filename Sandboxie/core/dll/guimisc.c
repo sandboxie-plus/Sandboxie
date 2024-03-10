@@ -266,7 +266,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 		Ldr_GetProcAddrNew(DllName_user32, L"GetThreadDpiAwarenessContext","GetThreadDpiAwarenessContext");
 
 
-    if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE)) {
+    if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE)) {
 
         SBIEDLL_HOOK_GUI(ShutdownBlockReasonCreate);
 

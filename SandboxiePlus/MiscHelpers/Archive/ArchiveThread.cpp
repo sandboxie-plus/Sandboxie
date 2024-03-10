@@ -76,7 +76,7 @@ QStringList CArchiveThread::GetErrors()
 }
 
 //////////////////////////////////////////////////////////////////////////
-// Buildin 7z Library worker
+// Building 7z Library worker
 //
 
 #ifdef USE_7Z

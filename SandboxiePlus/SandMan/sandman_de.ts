@@ -3210,7 +3210,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2670"/>
         <source>Failed to configure hotkey %1, error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Hotkey %1 nicht einrichten, Fehler: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2756"/>

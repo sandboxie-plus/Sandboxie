@@ -1721,10 +1721,8 @@ _FX LRESULT Gui_WindowProcA(
         new_lParam = lParam;
 
 	if (uMsg == WM_QUERYENDSESSION)
-	{
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
-	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);
 
@@ -2795,5 +2793,3 @@ _FX BOOLEAN ComDlg32_Init(HMODULE module)
 
     return TRUE;
 }
-
-

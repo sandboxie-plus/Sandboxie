@@ -1576,7 +1576,7 @@ _FX VOID Gui_ProtectScreen(HWND hWnd)
     if(!pSetWindowDisplayAffinity)
         pSetWindowDisplayAffinity = (LPSETWINDOWDISPLAYAFFINITY)Ldr_GetProcAddrNew(DllName_user32, L"SetWindowDisplayAffinity", "SetWindowDisplayAffinity");
     if (pSetWindowDisplayAffinity)
-        pSetWindowDisplayAffinity(hWnd, 0x00000001);
+        pSetWindowDisplayAffinity(hWnd, 0x00000011);
 }
 
 

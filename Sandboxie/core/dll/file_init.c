@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2023 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -885,7 +885,7 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
                 //     add reparse points for all mounted directories
 
                 //
-                // This behavioure creates \[BoxRoot]\drive\{guid} fodlers
+                // This behaviour creates \[BoxRoot]\drive\{guid} folders
                 // instead of using the first mount point on a volume with a letter
                 //
 
@@ -909,7 +909,7 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
                 //
 
                 //
-                // Note: this behavioure makes the first mounted directory
+                // Note: this behaviour makes the first mounted directory
                 // the location in the box where all files for that volume will be located
                 // other mount points will be redirected to this folder
                 //

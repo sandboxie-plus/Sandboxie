@@ -96,10 +96,11 @@ static BOOL Gdi_ClosePrinter(HANDLE hPrinter);
 
 //typedef HDC (*P_CreateDCW)(
    // void *lpszDriver, void *lpszDevice, void *lpszOutput, void *lpInitData);
-typedef HDC(*P_CreateDCA)(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, DEVMODEA* pdm);
+typedef HDC(*P_CreateDCA)(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const void* pdm);
 
-typedef HDC(*P_CreateDCW)(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, DEVMODEA* pdm);
-
+typedef HDC(*P_CreateDCW)(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const void* pdm);
+extern P_CreateDCA __sys_CreateDCA;
+extern P_CreateDCW __sys_CreateDCW;
 typedef ULONG (*P_GdiAddFontResourceW)(
     const WCHAR *path, ULONG flags, void *reserved);
 

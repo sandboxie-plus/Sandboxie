@@ -603,8 +603,7 @@ GUI_SYS_VAR(DeleteDC)
 GUI_SYS_VAR(BitBlt)
 GUI_SYS_VAR(StretchBlt)
 GUI_SYS_VAR(TransparentBlt)
-GUI_SYS_VAR(CreateDCA)
-GUI_SYS_VAR(CreateDCW)
+
 
 GUI_SYS_VAR(ClipCursor)
 GUI_SYS_VAR(GetClipCursor)

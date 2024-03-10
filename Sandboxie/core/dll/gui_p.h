@@ -427,10 +427,6 @@ typedef BOOL(*P_DeleteDC)(HDC hdc);
 
 typedef int (*P_ReleaseDC)(HWND hWnd, HDC hDc);
 
-typedef HDC(*P_CreateDCA)(LPCSTR  pwszDriver,LPCSTR  pwszDevice,LPCSTR pszPort,DEVMODEA *pdm);
-
-typedef HDC(*P_CreateDCW)(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort,DEVMODEA *pdm);
-
 typedef BOOL (*P_TransparentBlt)(
 	HDC  hdcDest,
 	int  xoriginDest,

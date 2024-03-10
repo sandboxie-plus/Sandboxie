@@ -1607,7 +1607,7 @@ _FX LRESULT Gui_WindowProcW(
 
 	if (uMsg == WM_QUERYENDSESSION)
 	{
-		if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE))
+		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
 	}
 
@@ -1668,7 +1668,7 @@ _FX LRESULT Gui_WindowProcA(
 		
 	if (uMsg == WM_QUERYENDSESSION)
 	{
-		if (SbieApi_QueryConfBool(NULL, "BlockInterferePower", FALSE))
+		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
 	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);

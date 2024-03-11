@@ -437,8 +437,8 @@ _FX BOOLEAN Gui_Init(HMODULE module)
 		GUI_IMPORT___(BitBlt);
 		GUI_IMPORT___(StretchBlt);
 		GUI_IMPORT___(TransparentBlt);
-		GUI_IMPORT___(CreateDCA);
-		GUI_IMPORT___(CreateDCW);
+	//	GUI_IMPORT___(CreateDCA);
+	//	GUI_IMPORT___(CreateDCW);
     GUI_IMPORT___(GetWindowThreadProcessId);
     GUI_IMPORT___(SetThreadDesktop);
     GUI_IMPORT___(SwitchDesktop);

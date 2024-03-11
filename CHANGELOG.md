@@ -6,10 +6,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.13.3 / 5.68.3] - 2024-02-??
 
+### Added
+- added certificate usage guide link to support page
+
 ### Fixed
 - fixed issues with "IsProtectScreen=y" [3656](https://github.com/sandboxie-plus/Sandboxie/pull/3656#discussion_r1518549704)
 - fixed issue with hotkeys and changed default suspend all hotkey to Shift+Alt+Pause
 - fixed issue with suspended state not being updated when the global hotkey was used
+- fixed issue with new ** pattern failing in some cases
 
 
 

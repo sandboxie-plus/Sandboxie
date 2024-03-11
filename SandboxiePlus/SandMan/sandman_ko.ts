@@ -8708,22 +8708,22 @@ Please note that this values are currently user specific and saved globally for 
         <translation>* 부분적으로 선택된 확인란은 보기 모드에서 확인할 동작을 남깁니다.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1918"/>
+        <location filename="Forms/SettingsWindow.ui" line="1937"/>
         <source>Advanced Config</source>
         <translation>고급 구성</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2038"/>
+        <location filename="Forms/SettingsWindow.ui" line="2057"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>커널 모드 개체 필터링 활성화</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2025"/>
+        <location filename="Forms/SettingsWindow.ui" line="2044"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>샌드박스 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;파일 시스템 루트&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2211"/>
+        <location filename="Forms/SettingsWindow.ui" line="2230"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>기본 창이 숨겨질 때 암호 지우기</translation>
     </message>
@@ -8732,22 +8732,22 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">개별 사용자 폴더</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1995"/>
+        <location filename="Forms/SettingsWindow.ui" line="2014"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>샌드박스 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc 루트&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1978"/>
+        <location filename="Forms/SettingsWindow.ui" line="1997"/>
         <source>Sandbox default</source>
         <translation>샌드박스 기본값</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2183"/>
+        <location filename="Forms/SettingsWindow.ui" line="2202"/>
         <source>Config protection</source>
         <translation>구성 보호</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1961"/>
+        <location filename="Forms/SettingsWindow.ui" line="1980"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -9048,98 +9048,103 @@ Please note that this values are currently user specific and saved globally for 
         <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1814"/>
+        <location filename="Forms/SettingsWindow.ui" line="1697"/>
+        <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1833"/>
         <source>New full installers from the selected release channel.</source>
         <translation>선택한 릴리스 채널의 새 전체 설치 프로그램입니다.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1817"/>
+        <location filename="Forms/SettingsWindow.ui" line="1836"/>
         <source>Full Upgrades</source>
         <translation>전체 업그레이드</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2045"/>
+        <location filename="Forms/SettingsWindow.ui" line="2064"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>샌드박스 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;레지스트리 루트&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2091"/>
+        <location filename="Forms/SettingsWindow.ui" line="2110"/>
         <source>Sandboxing features</source>
         <translation>샌드박스 기능</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2105"/>
+        <location filename="Forms/SettingsWindow.ui" line="2124"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>익명 토큰 대신 샌드박스 로그인 사용</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2141"/>
+        <location filename="Forms/SettingsWindow.ui" line="2160"/>
         <source>Sandboxie.ini Presets</source>
         <translation>샌드박스.ini 프리셋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2149"/>
+        <location filename="Forms/SettingsWindow.ui" line="2168"/>
         <source>Change Password</source>
         <translation>암호 변경</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2156"/>
+        <location filename="Forms/SettingsWindow.ui" line="2175"/>
         <source>Password must be entered in order to make changes</source>
         <translation>변경하려면 암호 입력</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2190"/>
+        <location filename="Forms/SettingsWindow.ui" line="2209"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>관리자 사용자 계정만 변경할 수 있음</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2197"/>
+        <location filename="Forms/SettingsWindow.ui" line="2216"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Sandboxie.ini에서 변경 내용 보기</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2325"/>
+        <location filename="Forms/SettingsWindow.ui" line="2344"/>
         <source>USB Drive Sandboxing</source>
         <translation>USB 드라이브 샌드박스</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2341"/>
+        <location filename="Forms/SettingsWindow.ui" line="2360"/>
         <source>Volume</source>
         <translation>볼륨</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2346"/>
+        <location filename="Forms/SettingsWindow.ui" line="2365"/>
         <source>Information</source>
         <translation>정보</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2354"/>
+        <location filename="Forms/SettingsWindow.ui" line="2373"/>
         <source>Sandbox for USB drives:</source>
         <translation>USB 드라이브용 샌드박스:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2367"/>
+        <location filename="Forms/SettingsWindow.ui" line="2386"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation>연결된 모든 USB 드라이브를 자동으로 샌드박스</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2394"/>
+        <location filename="Forms/SettingsWindow.ui" line="2413"/>
         <source>App Templates</source>
         <translation>앱 템플릿</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2404"/>
+        <location filename="Forms/SettingsWindow.ui" line="2423"/>
         <source>App Compatibility</source>
         <translation>앱 호환성</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2204"/>
+        <location filename="Forms/SettingsWindow.ui" line="2223"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>관리자 사용자 계정만 프로그램 일시 중지 명령을 사용할 수 있음</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1988"/>
+        <location filename="Forms/SettingsWindow.ui" line="2007"/>
         <source>Portable root folder</source>
         <translation>휴대용 루트 폴더</translation>
     </message>
@@ -9159,59 +9164,59 @@ Please note that this values are currently user specific and saved globally for 
         <translation>시스템 트레이에 아이콘 표시:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1694"/>
+        <location filename="Forms/SettingsWindow.ui" line="1713"/>
         <source>Sandboxie Updater</source>
         <translation>Sandboxie 업데이터</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1725"/>
+        <location filename="Forms/SettingsWindow.ui" line="1744"/>
         <source>Keep add-on list up to date</source>
         <translation>추가 목록을 최신 상태로 유지</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1739"/>
+        <location filename="Forms/SettingsWindow.ui" line="1758"/>
         <source>Update Settings</source>
         <translation>설정 업데이트</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1780"/>
+        <location filename="Forms/SettingsWindow.ui" line="1799"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>내부자 채널은 최종적으로 대중에게 공개될 새로운 기능과 버그 수정에 대한 조기 액세스와 안정적인 채널의 모든 관련 개선 사항을 제공합니다.
 미리 보기 채널과 달리 테스트되지 않았거나 손상되었거나 광범위하게 사용할 준비가 되지 않았을 수 있는 실험 변경 사항은 포함되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1784"/>
+        <location filename="Forms/SettingsWindow.ui" line="1803"/>
         <source>Search in the Insider channel</source>
         <translation>내부자 채널에서 검색</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1824"/>
+        <location filename="Forms/SettingsWindow.ui" line="1843"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation>새 Sandboxie-Plus 버전 주기적 검사</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1834"/>
+        <location filename="Forms/SettingsWindow.ui" line="1853"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;내부자 채널&lt;/a&gt;에 대해 자세히 알아보기</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1854"/>
+        <location filename="Forms/SettingsWindow.ui" line="1873"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation>문제 해결 스크립트를 최신 상태로 유지</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1890"/>
+        <location filename="Forms/SettingsWindow.ui" line="1909"/>
         <source>Update Check Interval</source>
         <translation>업데이트 확인 간격</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2018"/>
+        <location filename="Forms/SettingsWindow.ui" line="2037"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Windows 필터링 플랫폼을 사용하여 네트워크 액세스 제한</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2098"/>
+        <location filename="Forms/SettingsWindow.ui" line="2117"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>선택한 Win32k 시스템 호출을 후크하여 GPU 가속 (실험적) 사용</translation>
     </message>
@@ -9302,51 +9307,51 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">선택한 Win32k 시스템 호출을 후크하여 GPU 가속 (실험적) 사용</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2225"/>
+        <location filename="Forms/SettingsWindow.ui" line="2244"/>
         <source>Program Control</source>
         <translation>프로그램 제어</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="794"/>
         <location filename="Forms/SettingsWindow.ui" line="1354"/>
-        <location filename="Forms/SettingsWindow.ui" line="2257"/>
-        <location filename="Forms/SettingsWindow.ui" line="2432"/>
-        <location filename="Forms/SettingsWindow.ui" line="2565"/>
+        <location filename="Forms/SettingsWindow.ui" line="2276"/>
+        <location filename="Forms/SettingsWindow.ui" line="2451"/>
+        <location filename="Forms/SettingsWindow.ui" line="2584"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2262"/>
+        <location filename="Forms/SettingsWindow.ui" line="2281"/>
         <source>Path</source>
         <translation>경로</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2284"/>
+        <location filename="Forms/SettingsWindow.ui" line="2303"/>
         <source>Remove Program</source>
         <translation>프로그램 제거</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2270"/>
+        <location filename="Forms/SettingsWindow.ui" line="2289"/>
         <source>Add Program</source>
         <translation>프로그램 추가</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2305"/>
+        <location filename="Forms/SettingsWindow.ui" line="2324"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>다음 프로그램 중 하나가 샌드박스 외부에서 실행되면 샌드박스는 메시지 SBIE1301를 발행합니다.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2315"/>
+        <location filename="Forms/SettingsWindow.ui" line="2334"/>
         <source>Add Folder</source>
         <translation>폴더 추가</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2298"/>
+        <location filename="Forms/SettingsWindow.ui" line="2317"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>나열된 프로그램이 이 시스템에서 시작되지 않도록 합니다</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2277"/>
+        <location filename="Forms/SettingsWindow.ui" line="2296"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>프로그램이 시작되지 않을 때 메시지 1308 발행</translation>
     </message>
@@ -9380,17 +9385,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>새 구성 대화 상자 레이아웃 사용 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2235"/>
+        <location filename="Forms/SettingsWindow.ui" line="2254"/>
         <source>Program Alerts</source>
         <translation>프로그램 경고</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2291"/>
+        <location filename="Forms/SettingsWindow.ui" line="2310"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>강제 프로세스가 비활성화되면 메시지 1301을 발행</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1928"/>
+        <location filename="Forms/SettingsWindow.ui" line="1947"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie 구성</translation>
@@ -9428,7 +9433,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="899"/>
         <location filename="Forms/SettingsWindow.ui" line="1333"/>
-        <location filename="Forms/SettingsWindow.ui" line="2512"/>
+        <location filename="Forms/SettingsWindow.ui" line="2531"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
@@ -9447,7 +9452,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">샌드박스 구성</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2008"/>
+        <location filename="Forms/SettingsWindow.ui" line="2027"/>
         <source>Default sandbox:</source>
         <translation>기본 샌드박스:</translation>
     </message>
@@ -9456,62 +9461,62 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">호환성</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2424"/>
+        <location filename="Forms/SettingsWindow.ui" line="2443"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>앞으로는 소프트웨어 호환성 검사 안 함</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2440"/>
+        <location filename="Forms/SettingsWindow.ui" line="2459"/>
         <source>Enable</source>
         <translation>사용함</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2460"/>
+        <location filename="Forms/SettingsWindow.ui" line="2479"/>
         <source>Disable</source>
         <translation>사용 안 함</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2467"/>
+        <location filename="Forms/SettingsWindow.ui" line="2486"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie가 시스템에서 다음 소프트웨어 응용 프로그램을 탐지했습니다. 확인을 클릭하여 구성 설정을 적용하면 해당 응용프로그램과의 호환성이 향상됩니다. 이러한 구성 설정은 모든 기존 샌드박스 및 새 샌드박스에 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2480"/>
+        <location filename="Forms/SettingsWindow.ui" line="2499"/>
         <source>Local Templates</source>
         <translation>로컬 템플릿</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2531"/>
+        <location filename="Forms/SettingsWindow.ui" line="2550"/>
         <source>Add Template</source>
         <translation>템플릿 추가</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2551"/>
+        <location filename="Forms/SettingsWindow.ui" line="2570"/>
         <source>Text Filter</source>
         <translation>텍스트 필터</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2573"/>
+        <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>이 목록에는 샌드박스 옵션에 대해 사용자가 생성한 사용자 지정 템플릿이 포함되어 있습니다</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2590"/>
+        <location filename="Forms/SettingsWindow.ui" line="2609"/>
         <source>Edit ini Section</source>
         <translation>INI 섹션 편집</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2599"/>
+        <location filename="Forms/SettingsWindow.ui" line="2618"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2606"/>
+        <location filename="Forms/SettingsWindow.ui" line="2625"/>
         <source>Edit ini</source>
         <translation>ini 편집</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2632"/>
+        <location filename="Forms/SettingsWindow.ui" line="2651"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -9520,7 +9525,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">지원</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1763"/>
+        <location filename="Forms/SettingsWindow.ui" line="1782"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
         <translation>증분 업데이트</translation>
@@ -9534,7 +9539,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">전체 업데이트</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1760"/>
+        <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>설치된 버전의 핫패치, Templates.ini 및 변환에 대한 업데이트입니다.</translation>
     </message>
@@ -9555,7 +9560,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">라이브 채널에서 검색</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1770"/>
+        <location filename="Forms/SettingsWindow.ui" line="1789"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>미리보기 채널에는 최신 GitHub 사전 릴리스가 포함되어 있습니다.</translation>
     </message>
@@ -9564,12 +9569,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">새 버전</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1861"/>
+        <location filename="Forms/SettingsWindow.ui" line="1880"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>안정적인 채널에는 최신 안정적인 GitHub 릴리스가 포함되어 있습니다.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1864"/>
+        <location filename="Forms/SettingsWindow.ui" line="1883"/>
         <source>Search in the Stable channel</source>
         <translation>안정적인 채널에서 검색</translation>
     </message>
@@ -9578,7 +9583,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Sandboxie를 Windows의 롤링 릴리스로 최신 상태로 유지하고 모든 웹 브라우저와 호환되도록 하는 것은 결코 끝나지 않는 노력입니다. 기부금으로 이 일을 후원하는 것을 고려해 주세요.&lt;br /&gt; &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 기부금&lt;/a&gt;으로 개발을 지원할 수 있으며, 신용카드도 사용할 수 있습니다.&lt;br /&gt;또는 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 구독을 통해 지속적인 지원을 제공할 수 있습니다.&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1773"/>
+        <location filename="Forms/SettingsWindow.ui" line="1792"/>
         <source>Search in the Preview channel</source>
         <translation>미리 보기 채널에서 검색</translation>
     </message>

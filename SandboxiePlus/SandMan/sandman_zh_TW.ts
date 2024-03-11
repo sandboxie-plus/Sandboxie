@@ -8427,42 +8427,42 @@ Please note that this values are currently user specific and saved globally for 
         <translation>* 部分核取的項目核取方塊之行為取決於其檢視模式。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1918"/>
+        <location filename="Forms/SettingsWindow.ui" line="1937"/>
         <source>Advanced Config</source>
         <translation>進階組態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2038"/>
+        <location filename="Forms/SettingsWindow.ui" line="2057"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>啟動核心模式物件篩選</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2025"/>
+        <location filename="Forms/SettingsWindow.ui" line="2044"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;檔案系統根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2211"/>
+        <location filename="Forms/SettingsWindow.ui" line="2230"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>主視窗隱藏時清除密碼</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1995"/>
+        <location filename="Forms/SettingsWindow.ui" line="2014"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC 根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1978"/>
+        <location filename="Forms/SettingsWindow.ui" line="1997"/>
         <source>Sandbox default</source>
         <translation>沙箱預設</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2183"/>
+        <location filename="Forms/SettingsWindow.ui" line="2202"/>
         <source>Config protection</source>
         <translation>組態保護</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1961"/>
+        <location filename="Forms/SettingsWindow.ui" line="1980"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8759,58 +8759,63 @@ Please note that this values are currently user specific and saved globally for 
         <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2045"/>
+        <location filename="Forms/SettingsWindow.ui" line="1697"/>
+        <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="2064"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;登錄根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2091"/>
+        <location filename="Forms/SettingsWindow.ui" line="2110"/>
         <source>Sandboxing features</source>
         <translation>沙箱功能</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2141"/>
+        <location filename="Forms/SettingsWindow.ui" line="2160"/>
         <source>Sandboxie.ini Presets</source>
         <translation>Sandboxie.ini 預設選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2149"/>
+        <location filename="Forms/SettingsWindow.ui" line="2168"/>
         <source>Change Password</source>
         <translation>變更密碼</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2156"/>
+        <location filename="Forms/SettingsWindow.ui" line="2175"/>
         <source>Password must be entered in order to make changes</source>
         <translation>必須輸入密碼以進行變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2190"/>
+        <location filename="Forms/SettingsWindow.ui" line="2209"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>僅限管理員帳戶進行變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2197"/>
+        <location filename="Forms/SettingsWindow.ui" line="2216"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>追蹤 Sandboxie.ini 變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2394"/>
+        <location filename="Forms/SettingsWindow.ui" line="2413"/>
         <source>App Templates</source>
         <translation>軟體範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2404"/>
+        <location filename="Forms/SettingsWindow.ui" line="2423"/>
         <source>App Compatibility</source>
         <translation>軟體相容性</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2204"/>
+        <location filename="Forms/SettingsWindow.ui" line="2223"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>僅管理員帳戶可使用「暫停強制沙箱程式」命令</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1988"/>
+        <location filename="Forms/SettingsWindow.ui" line="2007"/>
         <source>Portable root folder</source>
         <translation>便攜化根目錄</translation>
     </message>
@@ -8830,12 +8835,12 @@ Please note that this values are currently user specific and saved globally for 
         <translation>在系統匣中顯示圖示:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2018"/>
+        <location filename="Forms/SettingsWindow.ui" line="2037"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>使用 Windows 篩選平台 (WFP) 限制區域網路存取</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2098"/>
+        <location filename="Forms/SettingsWindow.ui" line="2117"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>為選取的 Win32k 系統呼叫進行勾點以啟用 GPU 加速 (實驗性)</translation>
     </message>
@@ -8928,44 +8933,44 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="794"/>
         <location filename="Forms/SettingsWindow.ui" line="1354"/>
-        <location filename="Forms/SettingsWindow.ui" line="2257"/>
-        <location filename="Forms/SettingsWindow.ui" line="2432"/>
-        <location filename="Forms/SettingsWindow.ui" line="2565"/>
+        <location filename="Forms/SettingsWindow.ui" line="2276"/>
+        <location filename="Forms/SettingsWindow.ui" line="2451"/>
+        <location filename="Forms/SettingsWindow.ui" line="2584"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2262"/>
+        <location filename="Forms/SettingsWindow.ui" line="2281"/>
         <source>Path</source>
         <translation>路徑</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2284"/>
+        <location filename="Forms/SettingsWindow.ui" line="2303"/>
         <source>Remove Program</source>
         <translation>移除程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2270"/>
+        <location filename="Forms/SettingsWindow.ui" line="2289"/>
         <source>Add Program</source>
         <translation>加入程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2305"/>
+        <location filename="Forms/SettingsWindow.ui" line="2324"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>當下列程式在任意沙箱之外啟動時，Sandboxie 將提示錯誤代碼 SBIE1301。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2315"/>
+        <location filename="Forms/SettingsWindow.ui" line="2334"/>
         <source>Add Folder</source>
         <translation>加入資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2298"/>
+        <location filename="Forms/SettingsWindow.ui" line="2317"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>阻止下列程式在此系統中啟動</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2277"/>
+        <location filename="Forms/SettingsWindow.ui" line="2296"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>當程式啟動失敗時提示錯誤代碼 1308</translation>
     </message>
@@ -9005,22 +9010,22 @@ Please note that this values are currently user specific and saved globally for 
         <translation>使用新的組態對話框佈局 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2225"/>
+        <location filename="Forms/SettingsWindow.ui" line="2244"/>
         <source>Program Control</source>
         <translation>應用程式控制</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2235"/>
+        <location filename="Forms/SettingsWindow.ui" line="2254"/>
         <source>Program Alerts</source>
         <translation>程式警報</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2291"/>
+        <location filename="Forms/SettingsWindow.ui" line="2310"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>當強制沙箱處理程序被停用時，提示問題代碼 1301</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1928"/>
+        <location filename="Forms/SettingsWindow.ui" line="1947"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie 組態</translation>
@@ -9058,7 +9063,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="899"/>
         <location filename="Forms/SettingsWindow.ui" line="1333"/>
-        <location filename="Forms/SettingsWindow.ui" line="2512"/>
+        <location filename="Forms/SettingsWindow.ui" line="2531"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
@@ -9077,159 +9082,159 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">使 Sandboxie 與 Windows 的持續性更新相同步，並和主流網頁瀏覽器保持相容性，是一項永無止境的努力。您可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接參與專案&lt;/a&gt;來支援開發、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;購買贊助者憑證&lt;/a&gt;來表達您的支持、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上訂閱&lt;/a&gt;成為贊助者、或者透過 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐款&lt;/a&gt;。&lt;br /&gt;您的支持對 Sandboxie 的進步和維護至關重要。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1694"/>
+        <location filename="Forms/SettingsWindow.ui" line="1713"/>
         <source>Sandboxie Updater</source>
         <translation>Sandboxie 更新程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1725"/>
+        <location filename="Forms/SettingsWindow.ui" line="1744"/>
         <source>Keep add-on list up to date</source>
         <translation>保持附加元件清單為最新</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1739"/>
+        <location filename="Forms/SettingsWindow.ui" line="1758"/>
         <source>Update Settings</source>
         <translation>更新設定</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1780"/>
+        <location filename="Forms/SettingsWindow.ui" line="1799"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Insider 通道提供對「最終將公開發表的新功能和錯誤修復」的早期存取，以及包含穩定通道的所有相關改進。
 與預覽通道不同，它不包含未經測試、可能會破壞或可能尚未準備好供更廣泛使用的實驗性變更。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1784"/>
+        <location filename="Forms/SettingsWindow.ui" line="1803"/>
         <source>Search in the Insider channel</source>
         <translation>在測試人員通道中搜尋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1814"/>
+        <location filename="Forms/SettingsWindow.ui" line="1833"/>
         <source>New full installers from the selected release channel.</source>
         <translation>來自所選發行管道的全新完整安裝程式。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1817"/>
+        <location filename="Forms/SettingsWindow.ui" line="1836"/>
         <source>Full Upgrades</source>
         <translation>完整升級</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1824"/>
+        <location filename="Forms/SettingsWindow.ui" line="1843"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation>定期檢查新的 Sandboxie-Plus 版本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1834"/>
+        <location filename="Forms/SettingsWindow.ui" line="1853"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>了解更多關於 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;測試人員通道&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1854"/>
+        <location filename="Forms/SettingsWindow.ui" line="1873"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation>保持疑難排解腳本為最新</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1890"/>
+        <location filename="Forms/SettingsWindow.ui" line="1909"/>
         <source>Update Check Interval</source>
         <translation>更新檢查間隔</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2008"/>
+        <location filename="Forms/SettingsWindow.ui" line="2027"/>
         <source>Default sandbox:</source>
         <translation>預設沙箱:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2105"/>
+        <location filename="Forms/SettingsWindow.ui" line="2124"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>使用 Sandboxie 登入程序替代匿名權杖</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2325"/>
+        <location filename="Forms/SettingsWindow.ui" line="2344"/>
         <source>USB Drive Sandboxing</source>
         <translation>USB 裝置沙箱化</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2341"/>
+        <location filename="Forms/SettingsWindow.ui" line="2360"/>
         <source>Volume</source>
         <translation>磁碟區</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2346"/>
+        <location filename="Forms/SettingsWindow.ui" line="2365"/>
         <source>Information</source>
         <translation>資訊</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2354"/>
+        <location filename="Forms/SettingsWindow.ui" line="2373"/>
         <source>Sandbox for USB drives:</source>
         <translation>USB 裝置沙箱:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2367"/>
+        <location filename="Forms/SettingsWindow.ui" line="2386"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation>自動將所有加入的 USB 裝置沙箱化</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2424"/>
+        <location filename="Forms/SettingsWindow.ui" line="2443"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>以後不再檢查軟體相容性</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2440"/>
+        <location filename="Forms/SettingsWindow.ui" line="2459"/>
         <source>Enable</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2460"/>
+        <location filename="Forms/SettingsWindow.ui" line="2479"/>
         <source>Disable</source>
         <translation>停用</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2467"/>
+        <location filename="Forms/SettingsWindow.ui" line="2486"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie 偵測到您的系統中安裝了以下軟體。按下「確定」套用設定，將改進與這些軟體的相容性。這些設定作用於所有沙箱，包括現存的和未來新增的沙箱。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2480"/>
+        <location filename="Forms/SettingsWindow.ui" line="2499"/>
         <source>Local Templates</source>
         <translation>本地範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2531"/>
+        <location filename="Forms/SettingsWindow.ui" line="2550"/>
         <source>Add Template</source>
         <translation>加入範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2551"/>
+        <location filename="Forms/SettingsWindow.ui" line="2570"/>
         <source>Text Filter</source>
         <translation>篩選文字</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2573"/>
+        <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>該清單包含使用者為沙箱選項建立的自訂範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2590"/>
+        <location filename="Forms/SettingsWindow.ui" line="2609"/>
         <source>Edit ini Section</source>
         <translation>編輯 ini 區段</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2599"/>
+        <location filename="Forms/SettingsWindow.ui" line="2618"/>
         <source>Save</source>
         <translation>儲存</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2606"/>
+        <location filename="Forms/SettingsWindow.ui" line="2625"/>
         <source>Edit ini</source>
         <translation>編輯 ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2632"/>
+        <location filename="Forms/SettingsWindow.ui" line="2651"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1763"/>
+        <location filename="Forms/SettingsWindow.ui" line="1782"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
         <translation>增量升級</translation>
@@ -9239,7 +9244,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">新的來自所選取發佈通道的完整版本。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1760"/>
+        <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>更新已安裝版本的 Templates.ini 範本和翻譯的修補程式。</translation>
     </message>
@@ -9248,7 +9253,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1770"/>
+        <location filename="Forms/SettingsWindow.ui" line="1789"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>預覽通道包含最新的 GitHub 預先發佈版本。</translation>
     </message>
@@ -9257,17 +9262,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">新版本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1861"/>
+        <location filename="Forms/SettingsWindow.ui" line="1880"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>穩定通道包含最新的 GitHub 穩定版本。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1864"/>
+        <location filename="Forms/SettingsWindow.ui" line="1883"/>
         <source>Search in the Stable channel</source>
         <translation>在穩定通道中搜尋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1773"/>
+        <location filename="Forms/SettingsWindow.ui" line="1792"/>
         <source>Search in the Preview channel</source>
         <translation>在預覽通道中搜尋</translation>
     </message>

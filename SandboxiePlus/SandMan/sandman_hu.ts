@@ -8312,42 +8312,42 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>* a részlegesen bejelölt jelölőnégyzet a viselkedést a nézetmódban határozza meg.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1918"/>
+        <location filename="Forms/SettingsWindow.ui" line="1937"/>
         <source>Advanced Config</source>
         <translation>Speciális konfiguráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2038"/>
+        <location filename="Forms/SettingsWindow.ui" line="2057"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>Kernel módú objektumszűrés engedélyezése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2025"/>
+        <location filename="Forms/SettingsWindow.ui" line="2044"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;fájlrendszer-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2211"/>
+        <location filename="Forms/SettingsWindow.ui" line="2230"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>Jelszó törlése, ha a főablak rejtve van</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1995"/>
+        <location filename="Forms/SettingsWindow.ui" line="2014"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1978"/>
+        <location filename="Forms/SettingsWindow.ui" line="1997"/>
         <source>Sandbox default</source>
         <translation>Alapértelmezett homokozó</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2183"/>
+        <location filename="Forms/SettingsWindow.ui" line="2202"/>
         <source>Config protection</source>
         <translation>Konfiguráció védelem</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1961"/>
+        <location filename="Forms/SettingsWindow.ui" line="1980"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8630,103 +8630,108 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1739"/>
+        <location filename="Forms/SettingsWindow.ui" line="1697"/>
+        <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1758"/>
         <source>Update Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1814"/>
+        <location filename="Forms/SettingsWindow.ui" line="1833"/>
         <source>New full installers from the selected release channel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1817"/>
+        <location filename="Forms/SettingsWindow.ui" line="1836"/>
         <source>Full Upgrades</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1890"/>
+        <location filename="Forms/SettingsWindow.ui" line="1909"/>
         <source>Update Check Interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2045"/>
+        <location filename="Forms/SettingsWindow.ui" line="2064"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;Registry-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2091"/>
+        <location filename="Forms/SettingsWindow.ui" line="2110"/>
         <source>Sandboxing features</source>
         <translation>Homokozó funkciók</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2141"/>
+        <location filename="Forms/SettingsWindow.ui" line="2160"/>
         <source>Sandboxie.ini Presets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2149"/>
+        <location filename="Forms/SettingsWindow.ui" line="2168"/>
         <source>Change Password</source>
         <translation>Jelszó módosítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2156"/>
+        <location filename="Forms/SettingsWindow.ui" line="2175"/>
         <source>Password must be entered in order to make changes</source>
         <translation>Jelszómódosításhoz meg kell adni a jelszót</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2190"/>
+        <location filename="Forms/SettingsWindow.ui" line="2209"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>Csak a rendszergazda felhasználói fiókok végezhetnek módosításokat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2197"/>
+        <location filename="Forms/SettingsWindow.ui" line="2216"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Sandboxie.ini fájl változásainak figyelése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2325"/>
+        <location filename="Forms/SettingsWindow.ui" line="2344"/>
         <source>USB Drive Sandboxing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2341"/>
+        <location filename="Forms/SettingsWindow.ui" line="2360"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2346"/>
+        <location filename="Forms/SettingsWindow.ui" line="2365"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2354"/>
+        <location filename="Forms/SettingsWindow.ui" line="2373"/>
         <source>Sandbox for USB drives:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2367"/>
+        <location filename="Forms/SettingsWindow.ui" line="2386"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2394"/>
+        <location filename="Forms/SettingsWindow.ui" line="2413"/>
         <source>App Templates</source>
         <translation type="unfinished">Program sablonok</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2404"/>
+        <location filename="Forms/SettingsWindow.ui" line="2423"/>
         <source>App Compatibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2204"/>
+        <location filename="Forms/SettingsWindow.ui" line="2223"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>Csak a rendszergazda felhasználói fiókok használhatják a &quot;Kényszerített programok szüneteltetése&quot; parancsot</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1988"/>
+        <location filename="Forms/SettingsWindow.ui" line="2007"/>
         <source>Portable root folder</source>
         <translation>Hordozható gyökés mappa</translation>
     </message>
@@ -8746,12 +8751,12 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Ikon megjelenítése a rendszertálcán:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2018"/>
+        <location filename="Forms/SettingsWindow.ui" line="2037"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Windows szűrő platform használata a hálózati elérés korlátozásához</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2098"/>
+        <location filename="Forms/SettingsWindow.ui" line="2117"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>Kapcsolja be a kiválasztott Win32k rendszerhívásokat a GPU-gyorsítás engedélyezéséhez (kísérleti)</translation>
     </message>
@@ -8844,44 +8849,44 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
     <message>
         <location filename="Forms/SettingsWindow.ui" line="794"/>
         <location filename="Forms/SettingsWindow.ui" line="1354"/>
-        <location filename="Forms/SettingsWindow.ui" line="2257"/>
-        <location filename="Forms/SettingsWindow.ui" line="2432"/>
-        <location filename="Forms/SettingsWindow.ui" line="2565"/>
+        <location filename="Forms/SettingsWindow.ui" line="2276"/>
+        <location filename="Forms/SettingsWindow.ui" line="2451"/>
+        <location filename="Forms/SettingsWindow.ui" line="2584"/>
         <source>Name</source>
         <translation>Név</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2262"/>
+        <location filename="Forms/SettingsWindow.ui" line="2281"/>
         <source>Path</source>
         <translation>Útvonal</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2284"/>
+        <location filename="Forms/SettingsWindow.ui" line="2303"/>
         <source>Remove Program</source>
         <translation>Program eltávolítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2270"/>
+        <location filename="Forms/SettingsWindow.ui" line="2289"/>
         <source>Add Program</source>
         <translation>Program hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2305"/>
+        <location filename="Forms/SettingsWindow.ui" line="2324"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>Amikor a következő programok bármelyike elindul bármely homokozón kívül, a Sandboxie kiadja az SBIE1301 üzenetet.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2315"/>
+        <location filename="Forms/SettingsWindow.ui" line="2334"/>
         <source>Add Folder</source>
         <translation>Mappa hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2298"/>
+        <location filename="Forms/SettingsWindow.ui" line="2317"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>Akadályozza meg, hogy a felsorolt programok elinduljanak ezen a rendszeren</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2277"/>
+        <location filename="Forms/SettingsWindow.ui" line="2296"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>1308-as üzenet kiadása, ha a program nem indul el</translation>
     </message>
@@ -8911,63 +8916,63 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Új konfigurációs párbeszédpanel-elrendezés használata *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1694"/>
+        <location filename="Forms/SettingsWindow.ui" line="1713"/>
         <source>Sandboxie Updater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1725"/>
+        <location filename="Forms/SettingsWindow.ui" line="1744"/>
         <source>Keep add-on list up to date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1780"/>
+        <location filename="Forms/SettingsWindow.ui" line="1799"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1784"/>
+        <location filename="Forms/SettingsWindow.ui" line="1803"/>
         <source>Search in the Insider channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1824"/>
+        <location filename="Forms/SettingsWindow.ui" line="1843"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1834"/>
+        <location filename="Forms/SettingsWindow.ui" line="1853"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1854"/>
+        <location filename="Forms/SettingsWindow.ui" line="1873"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2105"/>
+        <location filename="Forms/SettingsWindow.ui" line="2124"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2225"/>
+        <location filename="Forms/SettingsWindow.ui" line="2244"/>
         <source>Program Control</source>
         <translation type="unfinished">Programvezérlés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2235"/>
+        <location filename="Forms/SettingsWindow.ui" line="2254"/>
         <source>Program Alerts</source>
         <translation>Programfigyelmeztetések</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2291"/>
+        <location filename="Forms/SettingsWindow.ui" line="2310"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>1301-es üzenetet küld, ha a kényszerített folyamatok le vannak tiltva</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1928"/>
+        <location filename="Forms/SettingsWindow.ui" line="1947"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie konfiguráció</translation>
@@ -9005,7 +9010,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="899"/>
         <location filename="Forms/SettingsWindow.ui" line="1333"/>
-        <location filename="Forms/SettingsWindow.ui" line="2512"/>
+        <location filename="Forms/SettingsWindow.ui" line="2531"/>
         <source>Remove</source>
         <translation>Eltávolítás</translation>
     </message>
@@ -9024,7 +9029,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Homokozó konfiguráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2008"/>
+        <location filename="Forms/SettingsWindow.ui" line="2027"/>
         <source>Default sandbox:</source>
         <translation>Alapértelmezett homokozó:</translation>
     </message>
@@ -9033,67 +9038,67 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Kompatibilitás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2424"/>
+        <location filename="Forms/SettingsWindow.ui" line="2443"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>A jövőben ne ellenőrizze a szoftverek kompatibilitását</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2440"/>
+        <location filename="Forms/SettingsWindow.ui" line="2459"/>
         <source>Enable</source>
         <translation>Engedélyezés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2460"/>
+        <location filename="Forms/SettingsWindow.ui" line="2479"/>
         <source>Disable</source>
         <translation>Tiltás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2467"/>
+        <location filename="Forms/SettingsWindow.ui" line="2486"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>A Sandboxie a következő szoftveralkalmazásokat észlelte a rendszerben. A konfigurációs beállítások alkalmazásához kattintson az OK gombra, ami javítja az ezen alkalmazásokkal való kompatibilitást. Ezek a konfigurációs beállítások érvényesek lesznek minden meglévő homokozóban és minden új homokozóban.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2480"/>
+        <location filename="Forms/SettingsWindow.ui" line="2499"/>
         <source>Local Templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2531"/>
+        <location filename="Forms/SettingsWindow.ui" line="2550"/>
         <source>Add Template</source>
         <translation type="unfinished">Sablon hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2551"/>
+        <location filename="Forms/SettingsWindow.ui" line="2570"/>
         <source>Text Filter</source>
         <translation type="unfinished">Szöveg szűrő</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2573"/>
+        <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2590"/>
+        <location filename="Forms/SettingsWindow.ui" line="2609"/>
         <source>Edit ini Section</source>
         <translation>Ini konfiguráció szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2599"/>
+        <location filename="Forms/SettingsWindow.ui" line="2618"/>
         <source>Save</source>
         <translation>Mentés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2606"/>
+        <location filename="Forms/SettingsWindow.ui" line="2625"/>
         <source>Edit ini</source>
         <translation>Ini szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2632"/>
+        <location filename="Forms/SettingsWindow.ui" line="2651"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1763"/>
+        <location filename="Forms/SettingsWindow.ui" line="1782"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
         <translation type="unfinished">Verziófrissítések</translation>
@@ -9103,7 +9108,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Új teljes verziók a kiválasztott kiadási csatornáról.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1760"/>
+        <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Gyorsjavítás a telepített verzióhoz, a templates.ini és a fordítások frissítései.</translation>
     </message>
@@ -9112,7 +9117,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Ez a tanúsítvány lejárt. Kérjük, &lt;a href=&quot;sbie://update/cert&quot;&gt;szerezzen egy frissített tanúsítványt&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1770"/>
+        <location filename="Forms/SettingsWindow.ui" line="1789"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Az előnézeti csatorna a legújabb GitHub-előzetes kiadásokat tartalmazza.</translation>
     </message>
@@ -9121,12 +9126,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Új verziók</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1861"/>
+        <location filename="Forms/SettingsWindow.ui" line="1880"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>A stabil csatorna tartalmazza a legújabb stabil GitHub-kiadásokat.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1864"/>
+        <location filename="Forms/SettingsWindow.ui" line="1883"/>
         <source>Search in the Stable channel</source>
         <translation>Keresés a stabil csatornán</translation>
     </message>
@@ -9135,7 +9140,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">A Sandboxie naprakészen tartása a Windows gördülő kiadásaival és a minden webböngészőkkel való kompatibilitás véget nem érő törekvés. Kérjük, fontolja meg adományozással a munka támogatását.&lt;br /&gt;A fejlesztést támogathatja &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, hitelkártyával is működik.&lt;br /&gt;Vagy folyamatos támogatást is nyújthat &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1773"/>
+        <location filename="Forms/SettingsWindow.ui" line="1792"/>
         <source>Search in the Preview channel</source>
         <translation>Keresés az előnézeti csatornában</translation>
     </message>

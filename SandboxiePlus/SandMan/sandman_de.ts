@@ -8718,7 +8718,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1697"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Zertifikatsverwendungsanleitung&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1713"/>

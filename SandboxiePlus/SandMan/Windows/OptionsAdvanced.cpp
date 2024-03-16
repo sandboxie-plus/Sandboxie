@@ -1239,23 +1239,23 @@ void COptionsWindow::SaveDebug()
 		DbgOption.Changed = false;
 	}
 }
-void COptionsWindow::OnCaptureChanged() {
+
+void COptionsWindow::OnCaptureChanged() 
+{
 	if (ui.chkBlockCapture->checkState()) {
 		ui.chkProtectWindow->setChecked(FALSE);
 		ui.chkProtectWindow->setCheckable(FALSE);
-	}
-	else {
+	} else
 		ui.chkProtectWindow->setCheckable(TRUE);
-	}
 	OnAdvancedChanged();
 }
-void COptionsWindow::OnProtectChanged() {
+
+void COptionsWindow::OnProtectChanged() 
+{
 	if (ui.chkProtectWindow->checkState()) {
 		ui.chkBlockCapture->setChecked(FALSE);
 		ui.chkBlockCapture->setCheckable(FALSE);
-	}
-	else {
+	} else
 		ui.chkBlockCapture->setCheckable(TRUE);
-	}
 	OnAdvancedChanged();
 }

@@ -109,8 +109,6 @@ static BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags);
 
 static int Gui_ReleaseDC(HWND hWnd, HDC hDc);
 
-
-
 static BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason);
 
 static EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags);
@@ -128,9 +126,6 @@ typedef HMETAFILE (*P_SetMetaFileBitsEx)(
 
 typedef HENHMETAFILE (*P_SetEnhMetaFileBits)(
     UINT nSize, const BYTE *lpData);
-
-typedef HBITMAP (*P_CreateCompatibleBitmap)( 
-    HDC hdc, int cx, int cy);
 
 typedef int (*P_SetDIBits)
     (HDC hdc, HBITMAP hbm, UINT start, UINT cLines, CONST VOID *lpBits, CONST BITMAPINFO * lpbmi, UINT ColorUse);
@@ -193,12 +188,14 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         }
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
-		SBIEDLL_HOOK_GUI(GetWindowDC);
-		SBIEDLL_HOOK_GUI(GetDC);
-		SBIEDLL_HOOK_GUI(GetDCEx);
-		SBIEDLL_HOOK_GUI(PrintWindow);
-		SBIEDLL_HOOK_GUI(ReleaseDC);
-
+		
+        if (Gui_UseBlockCapture) {
+            SBIEDLL_HOOK_GUI(GetWindowDC);
+            SBIEDLL_HOOK_GUI(GetDC);
+            SBIEDLL_HOOK_GUI(GetDCEx);
+            SBIEDLL_HOOK_GUI(PrintWindow);
+            SBIEDLL_HOOK_GUI(ReleaseDC);
+        }
 
         if (Dll_OsBuild >= 6000) {
 
@@ -1497,42 +1494,17 @@ _FX BOOL Gui_ImmAssociateContextEx(
 // Gui_GetDC
 //---------------------------------------------------------------------------
 
-HBITMAP bmp=NULL;
+
 _FX HDC Gui_GetDC(HWND hWnd)
 {
 	HDC ret = __sys_GetDC(hWnd);
 
-	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	ULONG_PTR pid = 0, tid = 0;
+	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
 
-		ULONG_PTR pid = 0, tid = 0;
-		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow() ||
-			!Gui_IsSameBox(hWnd, &pid, &tid)) {
-
-			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
-			typedef HGDIOBJ (*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
-			GET_WIN_API(SelectObject, DllName_gdi32);
-			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
-			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
-			typedef HBITMAP(*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int cy);
-			GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
-			
-			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
-			GET_WIN_API(DeleteDC, DllName_gdi32);
-			//typedef BOOL(*P_DeleteDC)(HDC hdc);
-			int iWidth, iHeight;
-
-			HDC ret2 = CreateCompatibleDC(ret);
-			iWidth = GetDeviceCaps(ret, HORZRES);
-			iHeight = GetDeviceCaps(ret, VERTRES);
-			HBITMAP hBmp;
-			if(bmp==NULL)
-				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
-			hBmp = bmp;
-			SelectObject(ret2, hBmp);
-			DeleteDC(ret);
-			ret = ret2;
-		}
+        return Gdi_GetDummyDC(ret);
 	}
+
 	return ret;
 }
 
@@ -1546,38 +1518,12 @@ _FX HDC Gui_GetWindowDC(HWND hWnd)
 {
 	HDC ret = __sys_GetWindowDC(hWnd);
 
-	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	ULONG_PTR pid = 0, tid = 0;
+	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
 
-		ULONG_PTR pid = 0, tid = 0;
-		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow() ||
-			!Gui_IsSameBox(hWnd, &pid, &tid)) {
-
-			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
-			//typedef BOOL(*P_DeleteDC)(HDC hdc);
-			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
-			GET_WIN_API(DeleteDC, DllName_gdi32);
-
-			typedef HGDIOBJ(*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
-			GET_WIN_API(SelectObject, DllName_gdi32);
-			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
-			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
-			typedef HBITMAP(*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int cy);
-			GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
-
-			int iWidth, iHeight;
-
-			HDC ret2 = CreateCompatibleDC(ret);
-			iWidth = GetDeviceCaps(ret, HORZRES);
-			iHeight = GetDeviceCaps(ret, VERTRES);
-			HBITMAP hBmp;
-			if (bmp == NULL)
-				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
-			hBmp = bmp;
-			SelectObject(ret2, hBmp);
-			DeleteDC(ret);
-			ret = ret2;
-		}
+		return Gdi_GetDummyDC(ret);
 	}
+
 	return ret;
 }
 
@@ -1591,38 +1537,12 @@ _FX HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags)
 {
 	HDC ret = __sys_GetDCEx(hWnd, hrgnClip, flags);
 
-	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	ULONG_PTR pid = 0, tid = 0;
+	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
 
-		ULONG_PTR pid = 0, tid = 0;
-		if (hWnd == NULL || hWnd == __sys_GetDesktopWindow() ||
-			!Gui_IsSameBox(hWnd, &pid, &tid)) {
-
-			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
-			//typedef BOOL(*P_DeleteDC)(HDC hdc);
-			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
-			GET_WIN_API(DeleteDC, DllName_gdi32);
-
-			typedef HGDIOBJ(*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
-			GET_WIN_API(SelectObject, DllName_gdi32);
-			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
-			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
-			typedef HBITMAP(*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int cy);
-			GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
-
-			int iWidth, iHeight;
-
-			HDC ret2 = CreateCompatibleDC(ret);
-			iWidth = GetDeviceCaps(ret, HORZRES);
-			iHeight = GetDeviceCaps(ret, VERTRES);
-			HBITMAP hBmp;
-			if (bmp == NULL)
-				bmp = CreateCompatibleBitmap(ret2, iWidth, iHeight);
-			hBmp = bmp;
-			SelectObject(ret2, hBmp);
-			DeleteDC(ret);
-			ret = ret2;
-		}
+		return Gdi_GetDummyDC(ret);
 	}
+
 	return ret;
 }
 
@@ -1634,7 +1554,7 @@ _FX HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags)
 
 _FX BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags)
 {
-	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	if (Gui_UseBlockCapture) {
 	
 		if (hwnd == NULL || hwnd == __sys_GetDesktopWindow()) {
 		
@@ -1651,7 +1571,16 @@ _FX BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags)
 	}
 	return __sys_PrintWindow(hwnd, hdcBlt, nFlags);
 }
-_FX int Gui_ReleaseDC(HWND hWnd, HDC hdc) {
+
+
+//---------------------------------------------------------------------------
+// Gui_ReleaseDC
+//---------------------------------------------------------------------------
+
+
+_FX int Gui_ReleaseDC(HWND hWnd, HDC hdc) 
+{
+    Gdi_OnFreeDC(hdc);
 	return __sys_ReleaseDC(hWnd, hdc);
 }
 

@@ -945,13 +945,13 @@ _FX BOOLEAN Gdi_Full_Init_impl(HMODULE module, BOOLEAN full)
 			GetProcAddress(module, "CreateScalableFontResourceW");
 	}
 
-#ifndef _WIN64
+/*#ifndef _WIN64
 
 	if (Dll_OsBuild >= 8400) {
 		SBIEDLL_HOOK(Gdi_, CreateDCW);
 	}
 
-#endif ! _WIN64
+#endif ! _WIN64*/
 
 	SBIEDLL_HOOK(Gdi_, GdiAddFontResourceW);
 

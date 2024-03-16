@@ -3083,7 +3083,7 @@ Veuillez vérifier s&apos;il y a une mise à jour pour Sandboxie.</translation>
     <message>
         <location filename="SandMan.cpp" line="2670"/>
         <source>Failed to configure hotkey %1, error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de configuration du raccourci %1 ; erreur : %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3076"/>
@@ -9406,7 +9406,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1697"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Guide d&apos;utilisation du certificat&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1713"/>

@@ -1513,6 +1513,8 @@ _FX HDC Gui_GetDC(HWND hWnd)
 			GET_WIN_API(SelectObject, DllName_gdi32);
 			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
 			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
+			typedef HBITMAP(*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int cy);
+			GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
 			
 			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
 			GET_WIN_API(DeleteDC, DllName_gdi32);
@@ -1559,6 +1561,8 @@ _FX HDC Gui_GetWindowDC(HWND hWnd)
 			GET_WIN_API(SelectObject, DllName_gdi32);
 			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
 			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
+			typedef HBITMAP(*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int cy);
+			GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
 
 			int iWidth, iHeight;
 
@@ -1602,6 +1606,9 @@ _FX HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags)
 			GET_WIN_API(SelectObject, DllName_gdi32);
 			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
 			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
+			typedef HBITMAP(*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int cy);
+			GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
+
 			int iWidth, iHeight;
 
 			HDC ret2 = CreateCompatibleDC(ret);

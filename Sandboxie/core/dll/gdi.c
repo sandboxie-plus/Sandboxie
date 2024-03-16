@@ -428,6 +428,8 @@ _FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, co
 			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
 			//typedef BOOL(*P_DeleteDC)(HDC hdc);
 			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			typedef HBITMAP (*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int cy);
+			GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
 			GET_WIN_API(DeleteDC, DllName_gdi32);
 
 			typedef HGDIOBJ(*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
@@ -470,6 +472,8 @@ _FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort,
 			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
 			//typedef BOOL(*P_DeleteDC)(HDC hdc);
 			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+			typedef HBITMAP(*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int cy);
+			GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
 			GET_WIN_API(DeleteDC, DllName_gdi32);
 
 			typedef HGDIOBJ(*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
@@ -929,6 +933,10 @@ _FX BOOLEAN Gdi_Full_Init_impl(HMODULE module, BOOLEAN full)
 	P_RemoveFontResourceExW RemoveFontResourceExW;
 	P_GetFontResourceInfoW GetFontResourceInfoW;
 	P_CreateScalableFontResourceW CreateScalableFontResourceW;
+	P_BitBlt BitBlt;
+	P_StretchBlt StretchBlt;
+	P_CreateDCA CreateDCA;
+	P_DeleteDC DeleteDC;
 
 	P_EnumFontFamiliesEx EnumFontFamiliesExA;
 	P_EnumFontFamiliesEx EnumFontFamiliesExW;
@@ -953,6 +961,18 @@ _FX BOOLEAN Gdi_Full_Init_impl(HMODULE module, BOOLEAN full)
 
 	GetFontResourceInfoW = (P_GetFontResourceInfoW)
 		GetProcAddress(module, "GetFontResourceInfoW");
+
+	CreateDCA = (P_CreateDCA)
+		GetProcAddress(module, "CreateDCA");
+
+	BitBlt = (P_BitBlt)
+		GetProcAddress(module, "BitBlt");
+
+	StretchBlt = (P_StretchBlt)
+		GetProcAddress(module, "StretchBlt");
+
+	DeleteDC = (P_DeleteDC)
+		GetProcAddress(module, "DeleteDC");
 
 	if (full) {
 		CreateScalableFontResourceW = (P_CreateScalableFontResourceW)

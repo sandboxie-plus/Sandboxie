@@ -432,7 +432,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
 		GUI_IMPORT___(GetWindowDC);
 		GUI_IMPORT___(GetDC);
 		GUI_IMPORT___(GetDCEx);
-		GUI_IMPORT___(DeleteDC);
+		//GUI_IMPORT___(DeleteDC);
 		GUI_IMPORT___(ReleaseDC);
 		GUI_IMPORT___(BitBlt);
 		GUI_IMPORT___(StretchBlt);

@@ -150,6 +150,7 @@ P_DeleteObject                  __sys_DeleteObject                  = NULL;
 P_DeleteEnhMetaFile             __sys_DeleteEnhMetaFile             = NULL;
 P_GetStockObject                __sys_GetStockObject                = NULL;
 P_CreateDCA __sys_CreateDCA=NULL;
+P_DeleteDC __sys_DeleteDC = NULL;
 
 //---------------------------------------------------------------------------
 
@@ -289,7 +290,7 @@ _FX BOOL Gui_BitBlt(
 	DWORD rop
 ) {
 	int ret = __sys_BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop);
-	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	/*if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 
 		typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
 		P_GetDeviceCaps GetDeviceCaps = Ldr_GetProcAddrNew(DllName_gdi32, "GetDeviceCaps", "GetDeviceCaps"); if (!GetDeviceCaps) return ret;
@@ -298,7 +299,7 @@ _FX BOOL Gui_BitBlt(
 		if (iWidth == iWidth2 && iHeight == iHeight2) {
 			__sys_BitBlt(__sys_GetDC(NULL), x, y, cx, cy, hdcSrc, x1, y1, rop);
 		}
-	}
+	}*/
 	return ret;
 }
 
@@ -317,7 +318,7 @@ _FX BOOL Gui_StretchBlt(
 )
 {
 	int ret = __sys_StretchBlt(hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
-	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+	/*if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 
 		typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
 		P_GetDeviceCaps GetDeviceCaps = Ldr_GetProcAddrNew(DllName_gdi32, "GetDeviceCaps", "GetDeviceCaps"); if (!GetDeviceCaps) return ret;
@@ -326,7 +327,7 @@ _FX BOOL Gui_StretchBlt(
 		if (iWidth == iWidth2 && iHeight == iHeight2) {
 			__sys_StretchBlt(__sys_GetDC(NULL), xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
 		}
-	}
+	}*/
 	return ret;
 }
 //---------------------------------------------------------------------------

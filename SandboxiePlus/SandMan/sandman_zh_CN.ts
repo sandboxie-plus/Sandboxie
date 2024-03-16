@@ -1584,7 +1584,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="893"/>
         <source>On Terminate</source>
-        <translation>在终端内</translation>
+        <translation type="unfinished">在沙盒终止时</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="903"/>

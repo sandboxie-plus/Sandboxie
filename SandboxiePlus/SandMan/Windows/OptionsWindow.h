@@ -232,6 +232,8 @@ private slots:
 	void OnAccessChanged();
 	void OnSysSvcChanged();
 	void OnAdvancedChanged();
+	void OnProtectChanged();
+	void OnCaptureChanged();
 	void OnOpenCOM();
 	void OnIsolationChanged();
 	void OnDebugChanged();

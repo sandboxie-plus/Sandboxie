@@ -324,8 +324,8 @@ _FX BOOL Gui_StretchBlt(
 	return ret;
 }
 HBITMAP bmp = NULL;
-_FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const DEVMODEA* pdm) {
-	HDC ret = __sys_CreateDCA(pwszDriver, pwszDevice, pszPort, &pdm);
+_FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const void* pdm) {
+	HDC ret = __sys_CreateDCA(pwszDriver, pwszDevice, pszPort, pdm);
 
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 
@@ -351,9 +351,16 @@ _FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, co
 	}
 	return ret;
 }
-_FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const DEVMODEW* pdm) {
-	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, &pdm);
+_FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const void* pdm) {
+#ifdef _WIN64
+	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
+#else
+	HDC ret = Gdi_CreateDCW2(pwszDriver, pwszDevice, pszPort, pdm);
+#endif // _WIN64
 
+
+
+	
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 
 		if (pwszDevice == NULL && lstrcmp(pwszDriver, L"DISPLAY") == 0) {
@@ -421,7 +428,7 @@ _FX void Gdi_SplWow64(BOOLEAN Register)
 
 #ifndef _WIN64
 
-_FX HDC Gdi_CreateDCW(
+_FX HDC Gdi_CreateDCW2(
     void *lpszDriver, void *lpszDevice, void *lpszOutput, void *lpInitData)
 {
     //

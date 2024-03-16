@@ -1240,12 +1240,22 @@ void COptionsWindow::SaveDebug()
 	}
 }
 void COptionsWindow::OnCaptureChanged() {
-	ui.chkProtectWindow->setChecked(FALSE);
-	ui.chkProtectWindow->setCheckable(FALSE);
+	if (ui.chkBlockCapture->checkState()) {
+		ui.chkProtectWindow->setChecked(FALSE);
+		ui.chkProtectWindow->setCheckable(FALSE);
+	}
+	else {
+		ui.chkProtectWindow->setCheckable(TRUE);
+	}
 	OnAdvancedChanged();
 }
 void COptionsWindow::OnProtectChanged() {
-	ui.chkBlockCapture->setChecked(FALSE);
-	ui.chkBlockCapture->setCheckable(FALSE);
+	if (ui.chkProtectWindow->checkState()) {
+		ui.chkBlockCapture->setChecked(FALSE);
+		ui.chkBlockCapture->setCheckable(FALSE);
+	}
+	else {
+		ui.chkBlockCapture->setCheckable(TRUE);
+	}
 	OnAdvancedChanged();
 }

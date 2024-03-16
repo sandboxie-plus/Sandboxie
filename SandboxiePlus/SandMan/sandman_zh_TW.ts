@@ -412,7 +412,9 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>密碼的最大長度限制為 128 個字元。
+這個長度允許大約 384 位元的熵，密碼短語由實際的英語單字組成，
+透過套用 Leet (L337) 語言修改，可以增加至 512 位元，並且當由完全隨機的可列印 ASCII 字元組成時，可以超過 768 位元。</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="154"/>
@@ -1797,7 +1799,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="893"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>終止階段</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="903"/>
@@ -3655,7 +3657,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="4268"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
-        <translation>此 Sandboxie+ 複本已授權給: %1</translation>
+        <translation>這一份 Sandboxie+ 已授權給: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4270"/>
@@ -3929,7 +3931,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="540"/>
         <location filename="SandMan.cpp" line="695"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>以管理員權限重新啟動</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1563"/>
@@ -3944,12 +3946,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2283"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>執行 沙箱終止階段 中: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2670"/>
         <source>Failed to configure hotkey %1, error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>設定快速鍵組態 %1 失敗，錯誤: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2849"/>
@@ -7014,12 +7016,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="698"/>
         <source>Prevents processes in the sandbox from interfering with power operation</source>
-        <translation type="unfinished"></translation>
+        <translation>防止沙箱中的執行緒幹擾電源作業</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
         <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止對沙箱中視窗進行畫面擷取。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1411"/>
@@ -7148,7 +7150,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="539"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation>當一個檔案沒有被完全遷移時，提示問題代碼：2113/2114/2115</translation>
+        <translation>當一個檔案沒有被完全遷移時，提示錯誤代碼 2113/2114/2115</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
@@ -7217,7 +7219,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3669"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation>當一個程式試圖載入一個沙箱內部的應用程式擴充 (DLL) 檔案時，提示問題代碼 1305</translation>
+        <translation>當一個程式試圖載入一個沙箱內部的應用程式擴充 (DLL) 檔案時，提示錯誤代碼 1305</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3662"/>
@@ -7526,7 +7528,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="841"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation>處理程序被拒絕存取非沙箱處理程序記憶體時提示問題代碼 2111</translation>
+        <translation>處理程序被拒絕存取非沙箱處理程序記憶體時提示錯誤代碼 2111</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1607"/>
@@ -7819,12 +7821,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3970"/>
         <source>This command runs after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>此命令在沙箱中所有執行緒完成後執行。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3973"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱終止階段</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3983"/>
@@ -7859,7 +7861,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3480"/>
         <source>Various Options</source>
-        <translation>多種選項</translation>
+        <translation>差異性選項</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3505"/>
@@ -8005,8 +8007,8 @@ instead of &quot;*&quot;.</source>
 
 這些選項將事件遮罩設定為 &quot;*&quot; - 所有存取事件
 您可透過 ini 來詳細自訂日誌行為
-&quot;A&quot; - 允許的存取
-&quot;D&quot; - 拒絕的存取
+&quot;A&quot; - 允許存取
+&quot;D&quot; - 拒絕存取
 &quot;I&quot; - 忽略存取請求
 來代替 &quot;*&quot;。</translation>
     </message>
@@ -8571,22 +8573,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="164"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation>將 Sandboxie 管理員視窗置頂的快速鍵:</translation>
+        <translation>用於置頂 Sandboxie 管理員視窗的快速鍵:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="212"/>
         <source>Hotkey for suspending process/folder forcing:</source>
-        <translation>暫停使用強制執行緒/資料夾的快速鍵:</translation>
+        <translation>用於暫停 強制執行緒/資料夾 的快速鍵:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all process</source>
-        <translation type="unfinished"></translation>
+        <translation>用於暫停全部執行緒的快速鍵</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>當 Sandboxie 管理員啟動時檢查沙箱的自動刪除狀態</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>
@@ -8761,7 +8763,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1697"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;憑證使用指南&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2064"/>
@@ -9022,7 +9024,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2310"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation>當強制沙箱處理程序被停用時，提示問題代碼 1301</translation>
+        <translation>當強制沙箱處理程序被停用時，提示錯誤代碼 1301</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1947"/>

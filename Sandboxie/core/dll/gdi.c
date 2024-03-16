@@ -292,7 +292,7 @@ _FX BOOL Gui_BitBlt(
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 
 		typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
-		GET_WIN_API(GetDeviceCaps, DllName_gdi32);
+		P_GetDeviceCaps GetDeviceCaps = Ldr_GetProcAddrNew(DllName_gdi32, "GetDeviceCaps", "GetDeviceCaps"); if (!GetDeviceCaps) return ret;
 		int iWidth = GetDeviceCaps(hdc, HORZRES), iHeight = GetDeviceCaps(hdc, VERTRES);
 		int iWidth2 = GetDeviceCaps(__sys_GetDC(NULL), HORZRES), iHeight2 = GetDeviceCaps(__sys_GetDC(NULL), VERTRES);
 		if (iWidth == iWidth2 && iHeight == iHeight2) {
@@ -320,7 +320,7 @@ _FX BOOL Gui_StretchBlt(
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 
 		typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
-		GET_WIN_API(GetDeviceCaps, DllName_gdi32);
+		P_GetDeviceCaps GetDeviceCaps = Ldr_GetProcAddrNew(DllName_gdi32, "GetDeviceCaps", "GetDeviceCaps"); if (!GetDeviceCaps) return ret;
 		int iWidth = GetDeviceCaps(hdcDest, HORZRES), iHeight = GetDeviceCaps(hdcDest, VERTRES);
 		int iWidth2 = GetDeviceCaps(__sys_GetDC(NULL), HORZRES), iHeight2 = GetDeviceCaps(__sys_GetDC(NULL), VERTRES);
 		if (iWidth == iWidth2 && iHeight == iHeight2) {

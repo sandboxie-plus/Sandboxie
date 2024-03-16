@@ -940,9 +940,9 @@ static HRESULT Gui_D3D11CreateDevice(
 
 VOID Gdi_InitDCCache();
 
-HDC Gdi_GetDummyDC(HDC ret);
+HDC Gdi_GetDummyDC(HDC ret, HWND hWnd);
 
-void* Gdi_OnFreeDC(HDC dc);
+HDC Gdi_OnFreeDC(HDC dc);
 
 //---------------------------------------------------------------------------
 

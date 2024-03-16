@@ -1502,7 +1502,7 @@ _FX HDC Gui_GetDC(HWND hWnd)
 	ULONG_PTR pid = 0, tid = 0;
 	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
 
-        return Gdi_GetDummyDC(ret);
+        return Gdi_GetDummyDC(ret, hWnd);
 	}
 
 	return ret;
@@ -1521,7 +1521,7 @@ _FX HDC Gui_GetWindowDC(HWND hWnd)
 	ULONG_PTR pid = 0, tid = 0;
 	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
 
-		return Gdi_GetDummyDC(ret);
+		return Gdi_GetDummyDC(ret, hWnd);
 	}
 
 	return ret;
@@ -1540,7 +1540,7 @@ _FX HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags)
 	ULONG_PTR pid = 0, tid = 0;
 	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
 
-		return Gdi_GetDummyDC(ret);
+		return Gdi_GetDummyDC(ret, hWnd);
 	}
 
 	return ret;
@@ -1580,7 +1580,9 @@ _FX BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags)
 
 _FX int Gui_ReleaseDC(HWND hWnd, HDC hdc) 
 {
-    Gdi_OnFreeDC(hdc);
+    hdc = Gdi_OnFreeDC(hdc);
+    if (!hdc) 
+        return 1;
 	return __sys_ReleaseDC(hWnd, hdc);
 }
 

@@ -295,7 +295,9 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
 
 _FX BOOL Gdi_DeleteDC(HDC hdc) 
 {
-    Gdi_OnFreeDC(hdc);
+    hdc = Gdi_OnFreeDC(hdc);
+    if (!hdc) 
+        return TRUE;
 	return __sys_DeleteDC(hdc);
 }
 
@@ -450,7 +452,7 @@ _FX HDC Gdi_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, co
 
     if (Gui_UseBlockCapture && (pwszDevice == NULL && strcmp(pwszDriver, "DISPLAY") == 0)) {
 
-        return Gdi_GetDummyDC(ret);
+        return Gdi_GetDummyDC(ret, NULL);
     }
 
 	return ret;
@@ -472,7 +474,7 @@ _FX HDC Gdi_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort,
 	
     if (Gui_UseBlockCapture && (pwszDevice == NULL && lstrcmp(pwszDriver, L"DISPLAY") == 0)) {
 
-        return Gdi_GetDummyDC(ret);
+        return Gdi_GetDummyDC(ret, NULL);
     }
 
 	return ret;
@@ -1110,8 +1112,8 @@ static CRITICAL_SECTION Gui_DCCache_CritSec;
 
 typedef struct _DUMMY_DC{
 
-    HDC dc;
-    HBITMAP bmp;
+    BOOLEAN bDelete;
+    HBITMAP hBmp;
 
 } DUMMY_DC;
 
@@ -1132,29 +1134,31 @@ _FX VOID Gdi_InitDCCache()
 // Gdi_GetDummyDC
 //---------------------------------------------------------------------------
 
-_FX HDC Gdi_GetDummyDC(HDC dc)
+_FX HDC Gdi_GetDummyDC(HDC dc, HWND hWnd)
 {	
     GET_WIN_API(SelectObject, DllName_gdi32);
 	GET_WIN_API(GetDeviceCaps, DllName_gdi32);
 	GET_WIN_API(CreateCompatibleBitmap, DllName_gdi32);
 	GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
-	GET_WIN_API(DeleteDC, DllName_gdi32);
 
 	HDC ret = CreateCompatibleDC(dc);
 	int iWidth = GetDeviceCaps(dc, HORZRES);
 	int iHeight = GetDeviceCaps(dc, VERTRES);
     HBITMAP bmp = CreateCompatibleBitmap(ret, iWidth, iHeight);
 	SelectObject(ret, bmp);
-	DeleteDC(dc);
+    if (hWnd)
+        __sys_ReleaseDC(dc, hWnd);
+    else
+	    __sys_DeleteDC(dc);
 
     EnterCriticalSection(&Gui_DCCache_CritSec);
 
-    DUMMY_DC* dummy = map_get(&Gui_DCCache, dc);
+    DUMMY_DC* dummy = map_get(&Gui_DCCache, ret);
     if (!dummy)
-        dummy = map_insert(&Gui_DCCache, dc, NULL, sizeof(DUMMY_DC));
+        dummy = map_insert(&Gui_DCCache, ret, NULL, sizeof(DUMMY_DC));
     
-    dummy->dc = dc;
-    dummy->bmp = bmp;
+    dummy->bDelete = !!hWnd;
+    dummy->hBmp = bmp;
 
     LeaveCriticalSection(&Gui_DCCache_CritSec);
 
@@ -1163,25 +1167,32 @@ _FX HDC Gdi_GetDummyDC(HDC dc)
 
 
 //---------------------------------------------------------------------------
-// Gdi_GetDummyDC
+// Gdi_OnFreeDC
 //---------------------------------------------------------------------------
 
 
-_FX void* Gdi_OnFreeDC(HDC dc)
+_FX HDC Gdi_OnFreeDC(HDC dc)
 {
     GET_WIN_API(DeleteObject, DllName_gdi32);
+
+    HDC ret = dc;
 
     EnterCriticalSection(&Gui_DCCache_CritSec);
 
     DUMMY_DC* dummy = map_get(&Gui_DCCache, dc);
     if (dummy) {
 
-        DeleteObject(dummy->bmp);
+        DeleteObject(dummy->hBmp);
+
+        if (dummy->bDelete) {
+            __sys_DeleteDC(dc);
+            ret = NULL;
+        }
 
         map_remove(&Gui_DCCache, dc);
     }
 
     LeaveCriticalSection(&Gui_DCCache_CritSec);
 
-    return NULL;
+    return ret;
 }

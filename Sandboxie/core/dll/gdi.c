@@ -436,7 +436,8 @@ _FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, co
 	return ret;
 }
 _FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const void* pdm) {
-	void* pdm2 = pdm;
+	void* pdm2;
+	memcpy(pdm2, pdm, sizeof(pdm));
 #ifdef _WIN64
 	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
 #else

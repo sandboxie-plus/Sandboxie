@@ -1509,9 +1509,14 @@ _FX HDC Gui_GetDC(HWND hWnd)
 			!Gui_IsSameBox(hWnd, &pid, &tid)) {
 
 			typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
-			//typedef BOOL(*P_DeleteDC)(HDC hdc);
+			typedef HGDIOBJ (*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
+			GET_WIN_API(SelectObject, DllName_gdi32);
+			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
+			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
+			
 			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
 			GET_WIN_API(DeleteDC, DllName_gdi32);
+			//typedef BOOL(*P_DeleteDC)(HDC hdc);
 			int iWidth, iHeight;
 
 			HDC ret2 = CreateCompatibleDC(ret);
@@ -1549,6 +1554,12 @@ _FX HDC Gui_GetWindowDC(HWND hWnd)
 			//typedef BOOL(*P_DeleteDC)(HDC hdc);
 			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
 			GET_WIN_API(DeleteDC, DllName_gdi32);
+
+			typedef HGDIOBJ(*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
+			GET_WIN_API(SelectObject, DllName_gdi32);
+			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
+			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
+
 			int iWidth, iHeight;
 
 			HDC ret2 = CreateCompatibleDC(ret);
@@ -1586,6 +1597,11 @@ _FX HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags)
 			//typedef BOOL(*P_DeleteDC)(HDC hdc);
 			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
 			GET_WIN_API(DeleteDC, DllName_gdi32);
+
+			typedef HGDIOBJ(*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
+			GET_WIN_API(SelectObject, DllName_gdi32);
+			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
+			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
 			int iWidth, iHeight;
 
 			HDC ret2 = CreateCompatibleDC(ret);

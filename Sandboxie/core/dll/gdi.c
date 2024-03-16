@@ -290,6 +290,9 @@ _FX BOOL Gui_BitBlt(
 ) {
 	int ret = __sys_BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop);
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+
+		typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
+		GET_WIN_API(GetDeviceCaps, DllName_gdi32);
 		int iWidth = GetDeviceCaps(hdc, HORZRES), iHeight = GetDeviceCaps(hdc, VERTRES);
 		int iWidth2 = GetDeviceCaps(__sys_GetDC(NULL), HORZRES), iHeight2 = GetDeviceCaps(__sys_GetDC(NULL), VERTRES);
 		if (iWidth == iWidth2 && iHeight == iHeight2) {
@@ -315,6 +318,9 @@ _FX BOOL Gui_StretchBlt(
 {
 	int ret = __sys_StretchBlt(hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+
+		typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
+		GET_WIN_API(GetDeviceCaps, DllName_gdi32);
 		int iWidth = GetDeviceCaps(hdcDest, HORZRES), iHeight = GetDeviceCaps(hdcDest, VERTRES);
 		int iWidth2 = GetDeviceCaps(__sys_GetDC(NULL), HORZRES), iHeight2 = GetDeviceCaps(__sys_GetDC(NULL), VERTRES);
 		if (iWidth == iWidth2 && iHeight == iHeight2) {
@@ -323,6 +329,10 @@ _FX BOOL Gui_StretchBlt(
 	}
 	return ret;
 }
+//---------------------------------------------------------------------------
+// Gdi_SplWow64
+//---------------------------------------------------------------------------
+
 _FX void Gdi_SplWow64(BOOLEAN Register)
 {
 	//
@@ -419,6 +429,12 @@ _FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, co
 			//typedef BOOL(*P_DeleteDC)(HDC hdc);
 			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
 			GET_WIN_API(DeleteDC, DllName_gdi32);
+
+			typedef HGDIOBJ(*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
+			GET_WIN_API(SelectObject, DllName_gdi32);
+			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
+			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
+
 			int iWidth, iHeight;
 
 			HDC ret2 = CreateCompatibleDC(ret);
@@ -455,6 +471,11 @@ _FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort,
 			//typedef BOOL(*P_DeleteDC)(HDC hdc);
 			GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
 			GET_WIN_API(DeleteDC, DllName_gdi32);
+
+			typedef HGDIOBJ(*P_SelectObject)(_In_ HDC hdc, _In_ HGDIOBJ h);
+			GET_WIN_API(SelectObject, DllName_gdi32);
+			typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
+			GET_WIN_API(GetDeviceCaps, DllName_gdi32);
 			int iWidth, iHeight;
 
 			HDC ret2 = CreateCompatibleDC(ret);
@@ -472,9 +493,6 @@ _FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort,
 	return ret;
 }
 
-//---------------------------------------------------------------------------
-// Gdi_SplWow64
-//---------------------------------------------------------------------------
 
 
 

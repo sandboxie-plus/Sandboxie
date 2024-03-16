@@ -32,7 +32,7 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * More customization options for Start/Run and Internet access restrictions
   * Privacy mode sandboxes that protect user data from illegitimate access
   * Security enhanced sandboxes that restrict the availability of syscalls and endpoints
-  * Global hotkey to terminate all boxed processes
+  * Global hotkeys to suspend or terminate all boxed processes
   * A network firewall per sandbox which supports Windows Filtering Platform (WFP)
   * The list of sandboxes can be searched with the shortcut key Ctrl+F
   * A search function for Global Settings and Sandbox Options
@@ -42,6 +42,8 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Vintage View mode to reproduce the graphical appearance of Sandboxie Control
   * A troubleshooting wizard to assist users with their problems
   * An Add-on manager to extend or add functionality via additional components
+  * Protections of sandboxes against the host, including the prevention of taking screenshots
+  * A trigger system to perform actions, when a sandbox goes through different stages, like initialization, box start, termination or file recovery
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
@@ -107,6 +109,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - offhub - Documentation additions / Code fixes / Collaborator
 - isaak654 - Templates / Documentation / Code fixes / Collaborator
 - typpos - UI additions / Documentation / Code fixes
+- Yeyixiao - Feature additions
 - okrc - Code fixes
 - Sapour - Code fixes
 - lmou523 - Code fixes

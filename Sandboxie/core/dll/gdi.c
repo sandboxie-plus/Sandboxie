@@ -1157,6 +1157,12 @@ _FX HDC Gdi_GetDummyDC(HDC dc, HWND hWnd)
     if (!dummy)
         dummy = map_insert(&Gui_DCCache, ret, NULL, sizeof(DUMMY_DC));
     
+    //
+    // Note: GetDC GetDCEx GetWindowDC must use ReleaseDC, while CreateDC must use DeleteDC
+    // We set bDelete = TRUE to make Gdi_OnFreeDC delete the DC and return NULL
+    // then Gui_ReleaseDC will not call __sys_ReleaseDC
+    //
+
     dummy->bDelete = !!hWnd;
     dummy->hBmp = bmp;
 

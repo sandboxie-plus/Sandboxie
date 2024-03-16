@@ -334,6 +334,52 @@ static DWORD Gui_WaitForInputIdle(HANDLE hProcess, DWORD dwMilliseconds);
 
 static BOOL Gui_AttachThreadInput(DWORD idAttach, DWORD idAttachTo, BOOL fAttach);
 
+static BOOL Gui_DeleteDC(HDC hdc);
+
+static BOOL Gui_BitBlt(
+	HDC   hdc,
+	int   x,
+	int   y,
+	int   cx,
+	int   cy,
+	HDC   hdcSrc,
+	int   x1,
+	int   y1,
+	DWORD rop
+);
+
+static BOOL Gui_StretchBlt(
+	HDC   hdcDest,
+	int   xDest,
+	int   yDest,
+	int   wDest,
+	int   hDest,
+	HDC   hdcSrc,
+	int   xSrc,
+	int   ySrc,
+	int   wSrc,
+	int   hSrc,
+	DWORD rop
+);
+
+/*static BOOL Gui_TransparentBlt(
+	HDC  hdcDest,
+	int  xoriginDest,
+	int  yoriginDest,
+	int  wDest,
+	int  hDest,
+	HDC  hdcSrc,
+	int  xoriginSrc,
+	int  yoriginSrc,
+	int  wSrc,
+	int  hSrc,
+	UINT crTransparent
+);*/
+
+static HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const DEVMODEA* pdm);
+
+static HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const DEVMODEW* pdm);
+
 
 //---------------------------------------------------------------------------
 // GUI_IMPORT
@@ -382,10 +428,17 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     Gui_UseProxyService = !Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
     // NoSbieDesk END
 
-	/*GUI_IMPORT___(PrintWindow)
-	GUI_IMPORT___(GetWindowDC)
-	GUI_IMPORT___(GetDC)
-	GUI_IMPORT___(GetDCEx)*/
+	GUI_IMPORT___(PrintWindow);
+		GUI_IMPORT___(GetWindowDC);
+		GUI_IMPORT___(GetDC);
+		GUI_IMPORT___(GetDCEx);
+		//GUI_IMPORT___(DeleteDC);
+		GUI_IMPORT___(ReleaseDC);
+		//GUI_IMPORT___(BitBlt);
+		//GUI_IMPORT___(StretchBlt);
+		//GUI_IMPORT___(TransparentBlt);
+	//	GUI_IMPORT___(CreateDCA);
+	//	GUI_IMPORT___(CreateDCW);
     GUI_IMPORT___(GetWindowThreadProcessId);
     GUI_IMPORT___(SetThreadDesktop);
     GUI_IMPORT___(SwitchDesktop);
@@ -619,6 +672,7 @@ _FX BOOLEAN Gui_Init2(HMODULE module)
 
     SBIEDLL_HOOK_GUI(MessageBoxW);
     SBIEDLL_HOOK_GUI(MessageBoxExW);
+
 
     if (! Gui_OpenAllWinClasses) {
 
@@ -1665,12 +1719,10 @@ _FX LRESULT Gui_WindowProcA(
         new_lParam = (LPARAM)Gui_CreateTitleA((UCHAR *)lParam);
     else
         new_lParam = lParam;
-		
+
 	if (uMsg == WM_QUERYENDSESSION)
-	{
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
-	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);
 
@@ -2741,4 +2793,3 @@ _FX BOOLEAN ComDlg32_Init(HMODULE module)
 
     return TRUE;
 }
-

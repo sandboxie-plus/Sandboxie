@@ -104,7 +104,8 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
 	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnConfidentialChanged()));
 	connect(ui.chkLessConfidential, SIGNAL(clicked(bool)), this, SLOT(OnLessConfidentialChanged()));
-	connect(ui.chkProtectWindow, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkProtectWindow, SIGNAL(clicked(bool)), this, SLOT(OnProtectChanged()));
+	connect(ui.chkBlockCapture, SIGNAL(clicked(bool)), this, SLOT(OnCaptureChanged()));
 	connect(ui.chkNotifyProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.treeInjectDll, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnToggleInjectDll(QTreeWidgetItem *, int)));
@@ -264,6 +265,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkNotifyProtect->setChecked(m_pBox->GetBool("NotifyBoxProtected", false));
 
 	ui.chkProtectWindow->setChecked(m_pBox->GetBool("IsProtectScreen"));
+	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture"));
 
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
@@ -468,6 +470,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkNotifyProtect, "NotifyBoxProtected", "y", "");
 
 	WriteAdvancedCheck(ui.chkProtectWindow, "IsProtectScreen", "y", "n");
+	WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "n");
 
 	QStringList Users;
 	for (int i = 0; i < ui.lstUsers->count(); i++)
@@ -1235,4 +1238,24 @@ void COptionsWindow::SaveDebug()
 		WriteAdvancedCheck(pCheck, DbgOption.Name, DbgOption.Value);
 		DbgOption.Changed = false;
 	}
+}
+void COptionsWindow::OnCaptureChanged() {
+	if (ui.chkBlockCapture->checkState()) {
+		ui.chkProtectWindow->setChecked(FALSE);
+		ui.chkProtectWindow->setCheckable(FALSE);
+	}
+	else {
+		ui.chkProtectWindow->setCheckable(TRUE);
+	}
+	OnAdvancedChanged();
+}
+void COptionsWindow::OnProtectChanged() {
+	if (ui.chkProtectWindow->checkState()) {
+		ui.chkBlockCapture->setChecked(FALSE);
+		ui.chkBlockCapture->setCheckable(FALSE);
+	}
+	else {
+		ui.chkBlockCapture->setCheckable(TRUE);
+	}
+	OnAdvancedChanged();
 }

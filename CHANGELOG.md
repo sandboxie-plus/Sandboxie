@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.13.4 / 5.68.4] - 2024-02-??
 
+### Added
+- added option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thanks Yeyixiao)
+  - it can be enabled with "IsBlockCapture=y"
+  - see the sandbox option "Block process from taking screenshots of windows not belonging to the containing sandbox" in SandMan UI
+
 ### Fixed
 - fixed issue with symlinks related to startmenu folders
 

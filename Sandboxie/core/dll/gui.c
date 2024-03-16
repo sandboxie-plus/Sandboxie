@@ -429,14 +429,14 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     // NoSbieDesk END
 
 	GUI_IMPORT___(PrintWindow);
-		GUI_IMPORT___(GetWindowDC);
-		GUI_IMPORT___(GetDC);
-		GUI_IMPORT___(GetDCEx);
-		//GUI_IMPORT___(DeleteDC);
-		GUI_IMPORT___(ReleaseDC);
-		//GUI_IMPORT___(BitBlt);
-		//GUI_IMPORT___(StretchBlt);
-		//GUI_IMPORT___(TransparentBlt);
+	GUI_IMPORT___(GetWindowDC);
+	GUI_IMPORT___(GetDC);
+	GUI_IMPORT___(GetDCEx);
+	//GUI_IMPORT___(DeleteDC);
+	GUI_IMPORT___(ReleaseDC);
+	//GUI_IMPORT___(BitBlt);
+	//GUI_IMPORT___(StretchBlt);
+	//GUI_IMPORT___(TransparentBlt);
 	//	GUI_IMPORT___(CreateDCA);
 	//	GUI_IMPORT___(CreateDCW);
     GUI_IMPORT___(GetWindowThreadProcessId);
@@ -672,7 +672,6 @@ _FX BOOLEAN Gui_Init2(HMODULE module)
 
     SBIEDLL_HOOK_GUI(MessageBoxW);
     SBIEDLL_HOOK_GUI(MessageBoxExW);
-
 
     if (! Gui_OpenAllWinClasses) {
 
@@ -1697,6 +1696,7 @@ _FX LRESULT Gui_WindowProcW(
     return lResult;
 }
 
+
 //---------------------------------------------------------------------------
 // Gui_WindowProcA
 //---------------------------------------------------------------------------
@@ -1719,10 +1719,12 @@ _FX LRESULT Gui_WindowProcA(
         new_lParam = (LPARAM)Gui_CreateTitleA((UCHAR *)lParam);
     else
         new_lParam = lParam;
-
+		
 	if (uMsg == WM_QUERYENDSESSION)
+	{
 		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
 			return TRUE;
+	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);
 

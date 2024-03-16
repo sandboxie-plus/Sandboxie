@@ -79,7 +79,6 @@ static int Gdi_EnumFontFamiliesExW(
 static HGDIOBJ Gdi_GetStockObject(int fnObject);
 
 
-
 //---------------------------------------------------------------------------
 
 #ifndef _WIN64
@@ -94,12 +93,12 @@ static BOOL Gdi_ClosePrinter(HANDLE hPrinter);
 //---------------------------------------------------------------------------
 
 
-//typedef HDC (*P_CreateDCW)(
-   // void *lpszDriver, void *lpszDevice, void *lpszOutput, void *lpInitData);
-typedef HDC(*P_CreateDCA)(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const void* pdm);
+typedef HDC(*P_CreateDCA)(
+    LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const void* pdm);
 
-typedef HDC(*P_CreateDCW)(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const void* pdm);
-extern P_CreateDCW __sys_CreateDCW;
+typedef HDC(*P_CreateDCW)(
+    LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const void* pdm);
+
 typedef ULONG (*P_GdiAddFontResourceW)(
     const WCHAR *path, ULONG flags, void *reserved);
 
@@ -149,11 +148,11 @@ P_GetBitmapBits                 __sys_GetBitmapBits                 = NULL;
 P_DeleteObject                  __sys_DeleteObject                  = NULL;
 P_DeleteEnhMetaFile             __sys_DeleteEnhMetaFile             = NULL;
 P_GetStockObject                __sys_GetStockObject                = NULL;
-P_CreateDCA __sys_CreateDCA=NULL;
-P_DeleteDC __sys_DeleteDC = NULL;
-P_BitBlt __sys_BitBlt = NULL;
-P_StretchBlt __sys_StretchBlt = NULL;
-P_TransparentBlt __sys_TransparentBlt = NULL;
+P_CreateDCA                     __sys_CreateDCA                     = NULL;
+P_DeleteDC                      __sys_DeleteDC                      = NULL;
+P_BitBlt                        __sys_BitBlt                        = NULL;
+P_StretchBlt                    __sys_StretchBlt                    = NULL;
+P_TransparentBlt                __sys_TransparentBlt                = NULL;
 
 //---------------------------------------------------------------------------
 
@@ -273,12 +272,20 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
     return rc;
 }
 
+
 //---------------------------------------------------------------------------
-// Gui_BitBlt
+// Gui_DeleteDC
 // --------------------------------------------------------------------------
+
+
 _FX BOOL Gui_DeleteDC(HDC hdc) {
 	return __sys_DeleteDC(hdc);
 }
+
+
+//---------------------------------------------------------------------------
+// Gui_BitBlt
+// --------------------------------------------------------------------------
 
 
 _FX BOOL Gui_BitBlt(
@@ -333,36 +340,39 @@ _FX BOOL Gui_StretchBlt(
 	}*/
 	return ret;
 }
+
+
 //---------------------------------------------------------------------------
 // Gdi_SplWow64
 //---------------------------------------------------------------------------
 
+
 _FX void Gdi_SplWow64(BOOLEAN Register)
 {
-	//
-	// see GuiServer::SplWow64Slave
-	//
+    //
+    // see GuiServer::SplWow64Slave
+    //
 
-	// NoSbieDesk BEGIN
-	if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
-		return;
+    // NoSbieDesk BEGIN
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return;
 	// NoSbieDesk END
 
-	GUI_SPLWOW64_REQ req;
-	void* rpl;
+    GUI_SPLWOW64_REQ req;
+    void *rpl;
 
-	if (Register) {
+    if (Register) {
 
-		if (Ldr_BoxedImage || _wcsicmp(Dll_ImageName, L"splwow64.exe") != 0)
-			return;
-	}
+        if (Ldr_BoxedImage || _wcsicmp(Dll_ImageName, L"splwow64.exe") != 0)
+            return;
+    }
 
-	req.msgid = GUI_SPLWOW64;
-	req.set = Register;
-	req.win8 = (Dll_OsBuild >= 8400) ? TRUE : FALSE;
-	rpl = Gui_CallProxy(&req, sizeof(req), sizeof(ULONG));
-	if (rpl)
-		Dll_Free(rpl);
+    req.msgid = GUI_SPLWOW64;
+    req.set = Register;
+    req.win8 = (Dll_OsBuild >= 8400) ? TRUE : FALSE;
+    rpl = Gui_CallProxy(&req, sizeof(req), sizeof(ULONG));
+    if (rpl)
+        Dll_Free(rpl);
 
 }
 
@@ -375,54 +385,61 @@ _FX void Gdi_SplWow64(BOOLEAN Register)
 #ifndef _WIN64
 
 _FX HDC Gdi_CreateDCW2(
-	void* lpszDriver, void* lpszDevice, void* lpszOutput, void* lpInitData)
+    void *lpszDriver, void *lpszDevice, void *lpszOutput, void *lpInitData)
 {
-	//
-	// on 64-bit Windows 8, some 32-bit programs (Notepad, Chrome) cannot
-	// create a printer DC (via WINSPOOL) if an instance of SplWow64.exe
-	// has been terminated, since the last time that 32-bit process has
-	// connected to SplWow64.exe.  the reason for this is not clear, but
-	// it seems a possible workaround is to try recreating the DC several
-	// times, until the CreateDC call finally works.
-	//
+    //
+    // on 64-bit Windows 8, some 32-bit programs (Notepad, Chrome) cannot
+    // create a printer DC (via WINSPOOL) if an instance of SplWow64.exe
+    // has been terminated, since the last time that 32-bit process has
+    // connected to SplWow64.exe.  the reason for this is not clear, but
+    // it seems a possible workaround is to try recreating the DC several
+    // times, until the CreateDC call finally works.
+    //
 
-	HDC hdc = __sys_CreateDCW(
-		lpszDriver, lpszDevice, lpszOutput, lpInitData);
+    HDC hdc = __sys_CreateDCW(
+                        lpszDriver, lpszDevice, lpszOutput, lpInitData);
 
-	if ((!hdc) && lpszDriver && _wcsicmp(lpszDriver, L"WINSPOOL") == 0) {
+    if ((! hdc) && lpszDriver && _wcsicmp(lpszDriver, L"WINSPOOL") == 0) {
 
-		P_DocumentProperties __sys_DocumentProperties =
-			Ldr_GetProcAddrNew(L"winspool.drv", L"DocumentPropertiesW", "DocumentPropertiesW");
+        P_DocumentProperties __sys_DocumentProperties =
+            Ldr_GetProcAddrNew(L"winspool.drv", L"DocumentPropertiesW","DocumentPropertiesW");
 
-		ULONG retry = 0;
+        ULONG retry = 0;
 
-		while (__sys_DocumentProperties && (!hdc) && (retry < 20)) {
+        while (__sys_DocumentProperties && (! hdc) && (retry < 20)) {
 
-			HANDLE hPrinter;
+            HANDLE hPrinter;
 
-			Sleep(retry * 25);
+            Sleep(retry * 25);
 
-			if (!__sys_OpenPrinter2W(lpInitData, &hPrinter, NULL, NULL))
-				break;
+            if (! __sys_OpenPrinter2W(lpInitData, &hPrinter, NULL, NULL))
+                break;
 
-			__sys_DocumentProperties(
-				NULL, hPrinter, lpInitData, NULL, NULL, 0);
+            __sys_DocumentProperties(
+                NULL, hPrinter, lpInitData, NULL, NULL, 0);
 
-			hdc = __sys_CreateDCW(
-				lpszDriver, lpszDevice, lpszOutput, lpInitData);
+            hdc = __sys_CreateDCW(
+                        lpszDriver, lpszDevice, lpszOutput, lpInitData);
 
-			__sys_ClosePrinter(hPrinter);
+            __sys_ClosePrinter(hPrinter);
 
-			retry++;
-		}
-	}
+            retry++;
+        }
+    }
 
-	return hdc;
+    return hdc;
 }
 
 #endif ! _WIN64
+
+//---------------------------------------------------------------------------
+// Gui_CreateDCA
+//---------------------------------------------------------------------------
+
 HBITMAP bmp2 = NULL;
-_FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const void* pdm) {
+
+_FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, const void* pdm) 
+{
 	HDC ret = __sys_CreateDCA(pwszDriver, pwszDevice, pszPort, pdm);
 
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
@@ -457,17 +474,20 @@ _FX HDC Gui_CreateDCA(LPCSTR  pwszDriver, LPCSTR  pwszDevice, LPCSTR pszPort, co
 	}
 	return ret;
 }
-_FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const void* pdm) {
-	void* pdm2=NULL;
-	memcpy(pdm2, pdm, sizeof(pdm));
+
+
+//---------------------------------------------------------------------------
+// Gui_CreateDCW
+//---------------------------------------------------------------------------
+
+
+_FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort, const void* pdm) 
+{
 #ifdef _WIN64
 	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
 #else
-	HDC ret = Gdi_CreateDCW2((void*)pwszDriver, (void*)pwszDevice, (void*)pszPort, pdm2);
+	HDC ret = Gdi_CreateDCW2((void*)pwszDriver, (void*)pwszDevice, (void*)pszPort, (void*)pdm);
 #endif // _WIN64
-
-
-
 	
 	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
 
@@ -500,11 +520,6 @@ _FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort,
 	}
 	return ret;
 }
-
-
-
-
-
 
 //---------------------------------------------------------------------------
 // Gdi_GetFontPath

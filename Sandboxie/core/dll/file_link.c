@@ -919,7 +919,7 @@ _FX NTSTATUS File_GetFileName(HANDLE FileHandle, ULONG NameLen, WCHAR* NameBuf)
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, ULONG CreateOptions)
+_FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, BOOLEAN OpenReparsePoint)
 {
     NTSTATUS status;
     OBJECT_ATTRIBUTES objattrs;
@@ -959,9 +959,10 @@ _FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, ULONG CreateOp
             RtlInitUnicodeString(&objname, CopyPath);
 
         status = pNtCreateFile(
-            handle, FILE_GENERIC_READ | SYNCHRONIZE, &objattrs,
+            handle, (OpenReparsePoint ? FILE_GENERIC_READ : FILE_READ_ATTRIBUTES) | SYNCHRONIZE, &objattrs,
             &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
-            FILE_OPEN, CreateOptions,
+            FILE_OPEN, 
+            FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | (OpenReparsePoint ? FILE_OPEN_REPARSE_POINT : 0),
             NULL, 0);
 
         Dll_PopTlsNameBuffer(TlsData);
@@ -979,10 +980,10 @@ _FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, ULONG CreateOp
         RtlInitUnicodeString(&objname, path);
 
         status = pNtCreateFile(
-            handle, FILE_GENERIC_READ | SYNCHRONIZE, &objattrs,
+            handle, (OpenReparsePoint ? FILE_GENERIC_READ : FILE_READ_ATTRIBUTES)  | SYNCHRONIZE, &objattrs,
             &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
             FILE_OPEN, 
-            CreateOptions,
+            FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | (OpenReparsePoint ? FILE_OPEN_REPARSE_POINT : 0),
             NULL, 0);
     }
 
@@ -1020,7 +1021,12 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
     stop = TRUE;
     newpath = NULL;
     
-    status = File_OpenForAddTempLink(&handle, path, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_REPARSE_POINT);
+    /*if (wcsstr(path, L"Programme")) {
+        while (! IsDebuggerPresent()) { OutputDebugString(L"BREAK\n"); Sleep(500); }
+        __debugbreak();
+    }*/
+
+    status = File_OpenForAddTempLink(&handle, path, TRUE);
 
     if (NT_SUCCESS(status)) {
 
@@ -1086,7 +1092,7 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
     if (!newpath) {
 
-        status = File_OpenForAddTempLink(&handle, path, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT);
+        status = File_OpenForAddTempLink(&handle, path, FALSE);
 
         if (NT_SUCCESS(status)) {
 

@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.13.4 / 5.68.4] - 2024-02-??
+
+### Fixed
+- fixed issue with symlinks related to startmenu folders
+
+
+
 ## [1.13.3 / 5.68.3] - 2024-03-16
 
 ### Added

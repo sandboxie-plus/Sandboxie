@@ -44,7 +44,7 @@ static ULONG_PTR Gdi_GdiDllInitialize_Common(
 
 #ifndef _WIN64
 
-static HDC Gdi_CreateDCW(
+static HDC Gdi_CreateDCW2(
     void *lpszDriver, void *lpszDevice, void *lpszOutput, void *lpInitData);
 
 #endif ! _WIN64
@@ -439,7 +439,7 @@ _FX HDC Gui_CreateDCW(LPCWSTR  pwszDriver, LPCWSTR  pwszDevice, LPCWSTR pszPort,
 #ifdef _WIN64
 	HDC ret = __sys_CreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
 #else
-	HDC ret = Gdi_CreateDCW2(pwszDriver, pwszDevice, pszPort, pdm);
+	HDC ret = Gdi_CreateDCW2((void*)pwszDriver, (void*)pwszDevice, (void*)pszPort, pdm);
 #endif // _WIN64
 
 

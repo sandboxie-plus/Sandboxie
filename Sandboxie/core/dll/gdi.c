@@ -151,6 +151,9 @@ P_DeleteEnhMetaFile             __sys_DeleteEnhMetaFile             = NULL;
 P_GetStockObject                __sys_GetStockObject                = NULL;
 P_CreateDCA __sys_CreateDCA=NULL;
 P_DeleteDC __sys_DeleteDC = NULL;
+P_BitBlt __sys_BitBlt = NULL;
+P_StretchBlt __sys_StretchBlt = NULL;
+P_TransparentBlt __sys_TransparentBlt = NULL;
 
 //---------------------------------------------------------------------------
 

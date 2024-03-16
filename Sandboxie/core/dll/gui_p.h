@@ -599,9 +599,7 @@ GUI_SYS_VAR(GetDCEx)
 GUI_SYS_VAR(GetWindowDC)
 GUI_SYS_VAR(ReleaseDC)
 GUI_SYS_VAR(PrintWindow)
-GUI_SYS_VAR(BitBlt)
-GUI_SYS_VAR(StretchBlt)
-GUI_SYS_VAR(TransparentBlt)
+
 
 
 GUI_SYS_VAR(ClipCursor)

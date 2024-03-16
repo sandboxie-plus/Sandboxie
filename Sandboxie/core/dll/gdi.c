@@ -999,9 +999,9 @@ _FX BOOLEAN Gdi_Full_Init_impl(HMODULE module, BOOLEAN full)
 
 	SBIEDLL_HOOK(Gdi_, RemoveFontResourceExW);
 
-	SBIEDLL_HOOK(Gui_,DeleteDC);
-	SBIEDLL_HOOK(Gui_,BitBlt);
-	SBIEDLL_HOOK(Gui_,StretchBlt);
+	//SBIEDLL_HOOK(Gui_,DeleteDC);
+	//SBIEDLL_HOOK(Gui_,BitBlt);
+	//SBIEDLL_HOOK(Gui_,StretchBlt);
 	//SBIEDLL_HOOK_GUI(TransparentBlt);
 	SBIEDLL_HOOK(Gui_,CreateDCA);
 	SBIEDLL_HOOK(Gui_,CreateDCW);

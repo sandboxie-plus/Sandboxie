@@ -418,18 +418,6 @@ _FX BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo)
 
 HICON SH32_BorderToIcon(HICON hIcon, COLORREF color)
 {
-    typedef HDC(*P_GetDC)(HWND hWnd);
-    typedef int(*P_ReleaseDC)(HWND hWnd, HDC hDC);
-    typedef BOOL(*P_GetIconInfo)(HICON hIcon, PICONINFO piconinfo);
-    typedef HICON(*P_CreateIconIndirect)(PICONINFO piconinfo);
-
-    typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
-    typedef HGDIOBJ(*P_SelectObject)(HDC hdc, HGDIOBJ h);
-    typedef COLORREF(*P_GetPixel)(HDC hdc, int x, int y);
-    typedef COLORREF(*P_SetPixel)(HDC hdc, int x, int y, COLORREF color);
-    typedef BOOL(*P_DeleteObject)(HGDIOBJ ho);
-    typedef BOOL(*P_DeleteDC)(HDC hdc);
-
     GET_WIN_API(GetDC, DllName_user32);
     GET_WIN_API(ReleaseDC, DllName_user32);
     GET_WIN_API(GetIconInfo, DllName_user32);

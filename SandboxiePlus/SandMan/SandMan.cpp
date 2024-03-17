@@ -2284,7 +2284,7 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 		}
 	}
 	if (pBox->GetBool("LockWhenClose", false)) {
-		if (!pBox->GetMountRoot().isEmpty()) {
+		if (!pBox->GetMountRoot().isEmpty()){
 			pBox->TerminateAll();
 			pBox->ImBoxUnmount();
 		}

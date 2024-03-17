@@ -542,22 +542,6 @@ void CSandMan::OnBoxMenu(const QPoint& point)
 	QTreeWidgetItem* pItem = m_pTrayBoxes->currentItem();
 	if (!pItem)
 		return;
-	if (theAPI->IsConnected()) {
-		if (theConf->GetBool("LockTrayMenu", false) && theAPI->IsConfigLocked()) {
-			QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the configuration password."), QLineEdit::Password);
-			if (Value.isEmpty()) {
-				QMessageBox::warning(this, "Sandboxie-Plus", tr("Login Failed"));
-				return;
-			}
-			SB_STATUS Status = theAPI->UnlockConfig(Value);
-			if (!Status.IsError()) {
-				QMessageBox::warning(this, "Sandboxie-Plus", tr("Login Failed: %1").arg(FormatError(Status)));
-				return;
-			}
-			
-
-		}
-	}
 	CTrayBoxesItemDelegate::m_Hold = true;
 	m_pBoxView->PopUpMenu(pItem->data(0, Qt::UserRole).toString());
 	CTrayBoxesItemDelegate::m_Hold = false;

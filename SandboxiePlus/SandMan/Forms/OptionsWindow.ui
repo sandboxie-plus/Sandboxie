@@ -55,7 +55,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsGeneral">
            <property name="currentIndex">
-            <number>3</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="tabOptions">
             <attribute name="title">
@@ -284,200 +284,203 @@
             <attribute name="title">
              <string>File Options</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout_30">
+            <layout class="QGridLayout" name="gridLayout_28">
              <item row="0" column="0">
-              <layout class="QGridLayout" name="gridLayout_28">
-               <item row="11" column="0" colspan="2">
-                <widget class="QLabel" name="lblRawDisk">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Disk/File access</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1" colspan="5">
-                <widget class="QCheckBox" name="chkUseVolumeSerialNumbers">
-                 <property name="text">
-                  <string>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="13" column="1">
-                <widget class="QLabel" name="label_37">
-                 <property name="maximumSize">
-                  <size>
-                   <width>20</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="14" column="2" colspan="5">
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="5" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkEncrypt">
-                 <property name="text">
-                  <string>Encrypt sandbox content</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="1" colspan="6">
-                <widget class="QCheckBox" name="chkAutoEmpty">
-                 <property name="text">
-                  <string>Auto delete content when last sandboxed process terminates</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="2" colspan="4">
-                <widget class="QLabel" name="lblCrypto">
-                 <property name="text">
-                  <string>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor's&lt;/a&gt; AES-XTS implementation.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                 <property name="openExternalLinks">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="0" colspan="3">
-                <widget class="QLabel" name="lblDelete">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Box Delete options</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="14" column="1">
-                <spacer name="verticalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="12" column="1" colspan="6">
-                <widget class="QCheckBox" name="chkRawDiskRead">
-                 <property name="text">
-                  <string>Allow elevated sandboxed applications to read the harddrive</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="1" colspan="6">
-                <widget class="QCheckBox" name="chkProtectBox">
-                 <property name="toolTip">
-                  <string>Partially checked means prevent box removal but not content deletion.</string>
-                 </property>
-                 <property name="text">
-                  <string>Protect this sandbox from deletion or emptying</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="2" colspan="4">
-                <widget class="QLabel" name="lblImDisk">
-                 <property name="text">
-                  <string>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1" colspan="5">
-                <widget class="QCheckBox" name="chkSeparateUserFolders">
-                 <property name="text">
-                  <string>Separate user folders</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="lblStructure">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Box Structure</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkRamBox">
-                 <property name="text">
-                  <string>Store the sandbox content in a Ram Disk</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="13" column="2" colspan="5">
-                <widget class="QCheckBox" name="chkRawDiskNotify">
-                 <property name="text">
-                  <string>Warn when an application opens a harddrive handle</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3">
-                <widget class="QComboBox" name="cmbVersion"/>
-               </item>
-               <item row="5" column="5">
-                <widget class="QToolButton" name="btnPassword">
-                 <property name="text">
-                  <string>Set Password</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1" colspan="2">
-                <widget class="QLabel" name="lblScheme">
-                 <property name="text">
-                  <string>Virtualization scheme</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2" colspan="4">
-                <widget class="QLabel" name="lblWhenEmpty">
-                 <property name="text">
-                  <string>The box structure can only be changed when the sandbox is empty</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <widget class="QLabel" name="lblStructure">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Box Structure</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2" colspan="4">
+              <widget class="QLabel" name="lblWhenEmpty">
+               <property name="text">
+                <string>The box structure can only be changed when the sandbox is empty</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="3">
+              <widget class="QLabel" name="lblScheme">
+               <property name="text">
+                <string>Virtualization scheme</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QComboBox" name="cmbVersion"/>
+             </item>
+             <item row="2" column="1" colspan="4">
+              <widget class="QCheckBox" name="chkSeparateUserFolders">
+               <property name="text">
+                <string>Separate user folders</string>
+               </property>
+               <property name="tristate">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" colspan="5">
+              <widget class="QCheckBox" name="chkUseVolumeSerialNumbers">
+               <property name="text">
+                <string>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" colspan="4">
+              <widget class="QCheckBox" name="chkRamBox">
+               <property name="text">
+                <string>Store the sandbox content in a Ram Disk</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1" colspan="4">
+              <widget class="QCheckBox" name="chkEncrypt">
+               <property name="text">
+                <string>Encrypt sandbox content</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="5">
+              <widget class="QToolButton" name="btnPassword">
+               <property name="text">
+                <string>Set Password</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2" colspan="4">
+              <widget class="QLabel" name="lblCrypto">
+               <property name="text">
+                <string>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor's&lt;/a&gt; AES-XTS implementation.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="openExternalLinks">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="2" colspan="4">
+              <widget class="QLabel" name="lblImDisk">
+               <property name="text">
+                <string>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0" colspan="3">
+              <widget class="QLabel" name="lblDelete">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Box Delete options</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1" colspan="5">
+              <widget class="QCheckBox" name="chkAutoEmpty">
+               <property name="text">
+                <string>Auto delete content when last sandboxed process terminates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1" colspan="4">
+              <widget class="QCheckBox" name="chkProtectBox">
+               <property name="toolTip">
+                <string>Partially checked means prevent box removal but not content deletion.</string>
+               </property>
+               <property name="text">
+                <string>Protect this sandbox from deletion or emptying</string>
+               </property>
+               <property name="tristate">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1" colspan="5">
+              <widget class="QCheckBox" name="chkLockWhenClose">
+               <property name="text">
+                <string>Lock the encrypted sandbox when all processes in the sandbox terminate.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0" colspan="2">
+              <widget class="QLabel" name="lblRawDisk">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Disk/File access</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="1" colspan="5">
+              <widget class="QCheckBox" name="chkRawDiskRead">
+               <property name="text">
+                <string>Allow elevated sandboxed applications to read the harddrive</string>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="1">
+              <widget class="QLabel" name="label_37">
+               <property name="maximumSize">
+                <size>
+                 <width>20</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="2" colspan="4">
+              <widget class="QCheckBox" name="chkRawDiskNotify">
+               <property name="text">
+                <string>Warn when an application opens a harddrive handle</string>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="1">
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>52</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="15" column="3">
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>410</width>
+                 <height>13</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>

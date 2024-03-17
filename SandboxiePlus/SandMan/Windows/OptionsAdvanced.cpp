@@ -106,6 +106,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkLessConfidential, SIGNAL(clicked(bool)), this, SLOT(OnLessConfidentialChanged()));
 	connect(ui.chkProtectWindow, SIGNAL(clicked(bool)), this, SLOT(OnProtectChanged()));
 	connect(ui.chkBlockCapture, SIGNAL(clicked(bool)), this, SLOT(OnCaptureChanged()));
+	connect(ui.chkLockWhenClose, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNotifyProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.treeInjectDll, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnToggleInjectDll(QTreeWidgetItem *, int)));
@@ -265,7 +266,12 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkNotifyProtect->setChecked(m_pBox->GetBool("NotifyBoxProtected", false));
 
 	ui.chkProtectWindow->setChecked(m_pBox->GetBool("IsProtectScreen"));
-	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture"));
+	QString str = m_pBox->GetText("OpenWindowClass", "");
+	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture")&& QString::compare(str, "*") != 0);
+	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
+
+	ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
+	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
 
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
@@ -471,6 +477,7 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkProtectWindow, "IsProtectScreen", "y", "n");
 	WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "n");
+	WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "n");
 
 	QStringList Users;
 	for (int i = 0; i < ui.lstUsers->count(); i++)

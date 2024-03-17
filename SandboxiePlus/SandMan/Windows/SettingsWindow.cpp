@@ -429,6 +429,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnSetPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
 	connect(ui.chkAdminOnlyFP, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
 	connect(ui.chkClearPass, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
+	connect(ui.chkLockTrayMenu, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
 	m_ProtectionChanged = false;
 	//
 	
@@ -1000,6 +1001,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
 		ui.chkAdminOnlyFP->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceDisableAdminOnly", false));
 		ui.chkClearPass->setChecked(theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false));
+		ui.chkLockTrayMenu->setChecked(theAPI->GetGlobalSettings()->GetBool("LockTrayMenu", false));
 		m_HoldChange = true;
 		OnProtectionChange();
 		m_HoldChange = false;
@@ -1054,6 +1056,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkPassRequired->setEnabled(false);
 		ui.chkAdminOnlyFP->setEnabled(false);
 		ui.chkClearPass->setEnabled(false);
+		ui.chkLockTrayMenu->setEnabled(false);
 		ui.btnSetPassword->setEnabled(false);
 		ui.treeWarnProgs->setEnabled(false);
 		ui.btnAddWarnProg->setEnabled(false);
@@ -1663,6 +1666,7 @@ void CSettingsWindow::SaveSettings()
 
 				WriteAdvancedCheck(ui.chkAdminOnlyFP, "ForceDisableAdminOnly", "y", "");
 				WriteAdvancedCheck(ui.chkClearPass, "ForgetPassword", "y", "");
+				WriteAdvancedCheck(ui.chkLockTrayMenu, "LockTrayMenu", "y", "");
 			}
 
 			if (m_WarnProgsChanged)

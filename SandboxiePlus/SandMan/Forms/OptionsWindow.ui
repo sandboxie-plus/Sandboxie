@@ -824,7 +824,7 @@
                <item>
                 <widget class="QCheckBox" name="chkBlockCapture">
                  <property name="text">
-                  <string>Block obtain an image of an un-sandboxied window through Windows public method</string>
+                  <string>Block process from taking screenshots of windows not belonging to the containing sandbox</string>
                  </property>
                 </widget>
                </item>

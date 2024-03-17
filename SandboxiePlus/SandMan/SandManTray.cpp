@@ -544,10 +544,17 @@ void CSandMan::OnBoxMenu(const QPoint& point)
 		return;
 	if (theAPI->IsConnected()) {
 		if (theConf->GetBool("LockTrayMenu", false) && theAPI->IsConfigLocked()) {
-			bool bRetry = false;
-			OnNotAuthorized(true, bRetry);
-			if (bRetry)
+			QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the configuration password."), QLineEdit::Password);
+			if (Value.isEmpty()) {
+				QMessageBox::warning(this, "Sandboxie-Plus", tr("Login Failed"));
 				return;
+			}
+			SB_STATUS Status = theAPI->UnlockConfig(Value);
+			if (!Status.IsError()) {
+				QMessageBox::warning(this, "Sandboxie-Plus", tr("Login Failed: %1").arg(FormatError(Status)));
+				return;
+			}
+			
 
 		}
 	}

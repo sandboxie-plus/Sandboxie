@@ -272,6 +272,7 @@ void COptionsWindow::LoadAdvanced()
 
 	ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
 	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
+	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
 
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
@@ -1252,8 +1253,12 @@ void COptionsWindow::OnCaptureChanged()
 	if (ui.chkBlockCapture->checkState()) {
 		ui.chkProtectWindow->setChecked(FALSE);
 		ui.chkProtectWindow->setCheckable(FALSE);
-	} else
+		ui.chkProtectWindow->setEnabled(FALSE);
+	}
+	else {
 		ui.chkProtectWindow->setCheckable(TRUE);
+		ui.chkProtectWindow->setEnabled(TRUE);
+	}
 	OnAdvancedChanged();
 }
 
@@ -1262,7 +1267,11 @@ void COptionsWindow::OnProtectChanged()
 	if (ui.chkProtectWindow->checkState()) {
 		ui.chkBlockCapture->setChecked(FALSE);
 		ui.chkBlockCapture->setCheckable(FALSE);
-	} else
+		ui.chkBlockCapture->setEnabled(FALSE);
+	}
+	else {
 		ui.chkBlockCapture->setCheckable(TRUE);
+		ui.chkBlockCapture->setEnabled(TRUE);
+	}
 	OnAdvancedChanged();
 }

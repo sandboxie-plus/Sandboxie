@@ -429,6 +429,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnSetPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
 	connect(ui.chkAdminOnlyFP, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
 	connect(ui.chkClearPass, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
+	
 	m_ProtectionChanged = false;
 	//
 	
@@ -1663,6 +1664,7 @@ void CSettingsWindow::SaveSettings()
 
 				WriteAdvancedCheck(ui.chkAdminOnlyFP, "ForceDisableAdminOnly", "y", "");
 				WriteAdvancedCheck(ui.chkClearPass, "ForgetPassword", "y", "");
+				
 			}
 
 			if (m_WarnProgsChanged)

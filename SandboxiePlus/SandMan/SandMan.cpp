@@ -2283,7 +2283,6 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 			AddAsyncOp(pProgress, true, tr("Executing OnBoxTerminate: %1").arg(Value2));
 		}
 	}
-	
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))

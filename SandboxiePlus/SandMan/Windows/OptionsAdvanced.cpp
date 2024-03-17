@@ -266,7 +266,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkNotifyProtect->setChecked(m_pBox->GetBool("NotifyBoxProtected", false));
 
 	ui.chkProtectWindow->setChecked(m_pBox->GetBool("IsProtectScreen"));
-	QString str = m_pBox->GetText("OpenWindowClass", "");
+	QString str = m_pBox->GetText("OpenWinClass", "");
 	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture")&& QString::compare(str, "*") != 0);
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
 

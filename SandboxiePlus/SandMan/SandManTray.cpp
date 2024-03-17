@@ -537,11 +537,20 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 	}
 }
 
-void CSandMan::OnBoxMenu(const QPoint & point)
+void CSandMan::OnBoxMenu(const QPoint& point)
 {
 	QTreeWidgetItem* pItem = m_pTrayBoxes->currentItem();
 	if (!pItem)
 		return;
+	if (theAPI->IsConnected()) {
+		if (theConf->GetBool("LockTrayMenu", false) && theAPI->IsConfigLocked()) {
+			bool bRetry = false;
+			OnNotAuthorized(true, bRetry);
+			if (bRetry)
+				return;
+
+		}
+	}
 	CTrayBoxesItemDelegate::m_Hold = true;
 	m_pBoxView->PopUpMenu(pItem->data(0, Qt::UserRole).toString());
 	CTrayBoxesItemDelegate::m_Hold = false;

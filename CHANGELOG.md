@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thanks Yeyixiao)
   - it can be enabled with "IsBlockCapture=y"
-  - see the sandbox option "Block process from taking screenshots of windows not belonging to the containing sandbox" in SandMan UI
+  - see the sandbox option "Block obtain an image of an un-sandboxied window through Windows public method" in SandMan UI
 
 ### Fixed
 - fixed issue with symlinks related to startmenu folders

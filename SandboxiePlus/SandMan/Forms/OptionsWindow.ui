@@ -813,14 +813,14 @@
                <item>
                 <widget class="QCheckBox" name="chkProtectPower">
                  <property name="text">
-                  <string>Prevents processes in the sandbox from interfering with power operation</string>
+                  <string>Prevent sandboxed processes from interfering with power operations</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QCheckBox" name="chkBlockCapture">
                  <property name="text">
-                  <string>Block process from taking screenshots of windows not belonging to the containing sandbox</string>
+                  <string>Prevent sandboxed processes from using public methods to capture window images</string>
                  </property>
                 </widget>
                </item>
@@ -1390,7 +1390,7 @@
              <item row="4" column="1" colspan="2">
               <widget class="QCheckBox" name="chkProtectWindow">
                <property name="text">
-                <string>Prevents getting an image of the window in the sandbox.</string>
+                <string>Prevent processes from capturing window images from sandboxed windows</string>
                </property>
               </widget>
              </item>
@@ -3669,7 +3669,7 @@ The process match level has a higher priority than the specificity and describes
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</string>
                  </property>
                  <property name="text">
-                  <string>Prevent sandboxes programs installed on host from loading dll's from the sandbox</string>
+                  <string>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</string>
                  </property>
                 </widget>
                </item>

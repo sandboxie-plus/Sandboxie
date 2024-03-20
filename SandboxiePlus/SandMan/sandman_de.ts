@@ -194,8 +194,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
-        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Hindere sandgeboxte Programme, die auf dem Hostsystem installiert sind, daran DLLs aus der Sandbox zu laden</translation>
+        <translation>Hindere sandgeboxte Programme, die auf dem Hostsystem installiert sind, daran, DLLs aus der Sandbox zu laden</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -7047,8 +7046,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3672"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
-        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Hindere sandgeboxte Programme, die auf dem Hostsystem installiert sind, daran DLLs aus dieser Sandbox zu laden</translation>
+        <translation>Hindere sandgeboxte Programme, die auf dem Hostsystem installiert sind, daran, DLLs aus der Sandbox zu laden</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3610"/>
@@ -7125,20 +7123,17 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
-        <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation type="unfinished">Blockieren, dass Prozesse Screenshots von Fenstern erstellen, die nicht zur Sandbox gehören</translation>
+        <translation>Hindere sandgeboxte Prozesse daran, mittels allgemein bekannter Methoden, Screenshots zu erstellen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
         <source>Prevent sandboxed processes from interfering with power operations</source>
-        <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="unfinished">Verhindern, dass Prozesse in der Sandbox Energievorgänge von Windows beeinträchtigen</translation>
+        <translation>Hindere sandgeboxte Prozesse daran, Energievorgänge von Windows zu beeinträchtigen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1393"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
-        <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished">Verhindern, dass von Fenstern in der Sandbox ein Screenshot erstellt wird.</translation>
+        <translation>Hindere Prozesse daran, Screenshots von sandgeboxten Fenstern zu erstellen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1421"/>

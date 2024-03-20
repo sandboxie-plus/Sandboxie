@@ -199,8 +199,9 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Empêcher les programmes d&apos;un bac installé sur l&apos;hôte de charger des DLL du bac</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">Empêcher les programmes d&apos;un bac installé sur l&apos;hôte de charger des DLL du bac</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -7693,13 +7694,15 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
-        <source>Prevents processes in the sandbox from interfering with power operation</source>
-        <translation>Empêcher les processus dans le bac à sable d&apos;interférer avec des opérations d&apos;alimentation</translation>
+        <source>Prevent sandboxed processes from interfering with power operations</source>
+        <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
+        <translation type="unfinished">Empêcher les processus dans le bac à sable d&apos;interférer avec des opérations d&apos;alimentation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1393"/>
-        <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation>Empêcher d&apos;obtenir une image de la fenêtre dans le bac à sable</translation>
+        <source>Prevent processes from capturing window images from sandboxed windows</source>
+        <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
+        <translation type="unfinished">Empêcher d&apos;obtenir une image de la fenêtre dans le bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1421"/>
@@ -8573,8 +8576,9 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3672"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Empêcher les programmes dans un bac à sable installé sur l&apos;hôte de charger des DLL depuis le bac à sable</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">Empêcher les programmes dans un bac à sable installé sur l&apos;hôte de charger des DLL depuis le bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3610"/>
@@ -8606,7 +8610,8 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
+        <source>Prevent sandboxed processes from using public methods to capture window images</source>
+        <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

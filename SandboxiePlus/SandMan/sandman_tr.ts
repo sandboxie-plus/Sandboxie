@@ -193,8 +193,9 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -7064,8 +7065,9 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3672"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3610"/>
@@ -7147,18 +7149,21 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
-        <translation>Bu korumalı alana ait olmayan pencerelerin ekran görüntülerinin alınmasını engelle</translation>
+        <source>Prevent sandboxed processes from using public methods to capture window images</source>
+        <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
+        <translation type="unfinished">Bu korumalı alana ait olmayan pencerelerin ekran görüntülerinin alınmasını engelle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
-        <source>Prevents processes in the sandbox from interfering with power operation</source>
-        <translation>Korumalı alandaki işlemlerin güç işlevlerine müdahale etmesini önle</translation>
+        <source>Prevent sandboxed processes from interfering with power operations</source>
+        <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
+        <translation type="unfinished">Korumalı alandaki işlemlerin güç işlevlerine müdahale etmesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1393"/>
-        <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation>Korumalı alandaki pencerelerin görüntüsünün alınmasını önle</translation>
+        <source>Prevent processes from capturing window images from sandboxed windows</source>
+        <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
+        <translation type="unfinished">Korumalı alandaki pencerelerin görüntüsünün alınmasını önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1421"/>

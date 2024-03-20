@@ -255,8 +255,9 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>阻止安装在宿主上的沙盒程序从沙盒内部加载.dll(动态链接库)文件</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">阻止安装在宿主上的沙盒程序从沙盒内部加载.dll(动态链接库)文件</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -7337,8 +7338,9 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3672"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>防止安装在宿主上的沙盒程序从沙盒内部加载动态链接库(.dll)文件</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">防止安装在宿主上的沙盒程序从沙盒内部加载动态链接库(.dll)文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3610"/>
@@ -8043,13 +8045,15 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
-        <translation>阻止进程对不属于包含沙盒的窗口进行屏幕截图</translation>
+        <source>Prevent sandboxed processes from using public methods to capture window images</source>
+        <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
+        <translation type="unfinished">阻止进程对不属于包含沙盒的窗口进行屏幕截图</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
-        <source>Prevents processes in the sandbox from interfering with power operation</source>
-        <translation>防止沙盒中的进程干扰电源操作</translation>
+        <source>Prevent sandboxed processes from interfering with power operations</source>
+        <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
+        <translation type="unfinished">防止沙盒中的进程干扰电源操作</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1255"/>
@@ -8064,8 +8068,9 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1393"/>
-        <source>Prevents getting an image of the window in the sandbox.</source>
-        <translation>阻止获取在沙盒中的窗口的图像。</translation>
+        <source>Prevent processes from capturing window images from sandboxed windows</source>
+        <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
+        <translation type="unfinished">阻止获取在沙盒中的窗口的图像。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1421"/>

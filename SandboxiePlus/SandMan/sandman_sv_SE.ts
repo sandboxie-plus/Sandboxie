@@ -255,8 +255,9 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Förhindra sandlådeprogram installerade på värden från att ladda dll:s från sandlådan</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">Förhindra sandlådeprogram installerade på värden från att ladda dll:s från sandlådan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -7633,8 +7634,9 @@ Om ledarprocesser är definierade, behandlas alla andra som kvardröjande progra
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3672"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Förhindra sandlådade program installerade på värden från att ladda dll:s från sandlådan</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">Förhindra sandlådade program installerade på värden från att ladda dll:s från sandlådan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3610"/>
@@ -7712,12 +7714,14 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
-        <source>Prevents processes in the sandbox from interfering with power operation</source>
+        <source>Prevent sandboxed processes from interfering with power operations</source>
+        <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1393"/>
-        <source>Prevents getting an image of the window in the sandbox.</source>
+        <source>Prevent processes from capturing window images from sandboxed windows</source>
+        <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8525,7 +8529,8 @@ istället för &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
+        <source>Prevent sandboxed processes from using public methods to capture window images</source>
+        <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

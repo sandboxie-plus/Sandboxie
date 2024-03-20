@@ -199,8 +199,9 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Impedir que programas das caixas de areia instalados no host carreguem dll&apos;s da caixa de areia</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">Impedir que programas das caixas de areia instalados no host carreguem dll&apos;s da caixa de areia</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -7565,8 +7566,9 @@ Se os processos líderes forem definidos, todos os outros serão tratados como p
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3672"/>
-        <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Impedir que programas das caixas instalados no host carreguem dll&apos;s do sandbox</translation>
+        <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
+        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
+        <translation type="unfinished">Impedir que programas das caixas instalados no host carreguem dll&apos;s do sandbox</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3610"/>
@@ -7669,12 +7671,14 @@ Isso é feito para evitar que processos invasores dentro do sandbox criem uma c�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
-        <source>Prevents processes in the sandbox from interfering with power operation</source>
+        <source>Prevent sandboxed processes from interfering with power operations</source>
+        <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1393"/>
-        <source>Prevents getting an image of the window in the sandbox.</source>
+        <source>Prevent processes from capturing window images from sandboxed windows</source>
+        <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8461,7 +8465,8 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Block process from taking screenshots of windows not belonging to the containing sandbox</source>
+        <source>Prevent sandboxed processes from using public methods to capture window images</source>
+        <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

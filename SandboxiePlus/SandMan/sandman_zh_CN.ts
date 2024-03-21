@@ -257,7 +257,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">阻止安装在宿主上的沙盒程序从沙盒内部加载.dll(动态链接库)文件</translation>
+        <translation>阻止安装在宿主上的沙盒程序从沙盒内部加载DLL(动态链接库)文件</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -4128,9 +4128,10 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="SandMan.cpp" line="2467"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>您的 Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，因此禁用了基于令牌的安全隔离功能。这将使所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
+请检查 Sandboxie 是否有更新版本。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2669"/>
@@ -7340,7 +7341,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <location filename="Forms/OptionsWindow.ui" line="3672"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">防止安装在宿主上的沙盒程序从沙盒内部加载动态链接库(.dll)文件</translation>
+        <translation>阻止安装在宿主上的沙盒程序从沙盒内部加载DLL(动态链接库)文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3610"/>
@@ -8047,13 +8048,13 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
         <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation type="unfinished">阻止进程对不属于包含沙盒的窗口进行屏幕截图</translation>
+        <translation>阻止沙盒内的进程使用公共方法捕获窗口图像</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
         <source>Prevent sandboxed processes from interfering with power operations</source>
         <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="unfinished">防止沙盒中的进程干扰电源操作</translation>
+        <translation>防止沙盒中的进程干扰电源操作</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1255"/>
@@ -8070,7 +8071,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/OptionsWindow.ui" line="1393"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished">阻止获取在沙盒中的窗口的图像。</translation>
+        <translation>阻止进程捕获在沙盒中的窗口的图像</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1421"/>

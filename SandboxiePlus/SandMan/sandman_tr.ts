@@ -194,8 +194,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
-        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
+        <translation>Sistemde yüklü korumalı alanda çalışan programların alan içinden DLL yüklemesini önle</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
@@ -3990,7 +3989,6 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="SandMan.cpp" line="4259"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 by DavidXanatos&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2024, DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
@@ -7066,8 +7064,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3672"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
-        <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
+        <translation>Sistemde yüklü korumalı alanda çalışan programların alan içinden DLL yüklemesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3610"/>
@@ -7150,20 +7147,17 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
-        <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation type="unfinished">Bu korumalı alana ait olmayan pencerelerin ekran görüntülerinin alınmasını engelle</translation>
+        <translation>Korumalı alandaki işlemlerin görüntü yakalamak için genel yöntemleri kullanmasını önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="816"/>
         <source>Prevent sandboxed processes from interfering with power operations</source>
-        <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="unfinished">Korumalı alandaki işlemlerin güç işlevlerine müdahale etmesini önle</translation>
+        <translation>Korumalı alandaki işlemlerin güç işlevlerine müdahale etmesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1393"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
-        <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished">Korumalı alandaki pencerelerin görüntüsünün alınmasını önle</translation>
+        <translation>Korumalı alandaki pencerelerin görüntüsünün alınmasını önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1421"/>
@@ -8826,7 +8820,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1783"/>
         <source>Incremental Updates</source>
-        <oldsource>Version Updates</oldsource>
         <translation>Artımlı Güncellemeler</translation>
     </message>
     <message>

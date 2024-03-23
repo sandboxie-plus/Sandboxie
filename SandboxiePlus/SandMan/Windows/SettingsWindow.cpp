@@ -49,6 +49,7 @@ void FixTriStateBoxPallete(QWidget* pWidget)
 
 void AddIconToLabel(QLabel* pLabel, const QPixmap& Pixmap)
 {
+	if (pLabel->property("hidden").toBool()) return;
 	QWidget* pParent = pLabel->parentWidget();
 	QWidget* pWidget = new QWidget(pParent);
 	pParent->layout()->replaceWidget(pLabel, pWidget);
@@ -480,6 +481,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblCertExp, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblCertGuide, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
@@ -925,7 +927,7 @@ void CSettingsWindow::LoadSettings()
 	ui.keyPauseForce->setKeySequence(QKeySequence(theConf->GetString("Options/PauseForceKeySequence", "Ctrl+Alt+F")));
 
 	ui.chkSuspend->setChecked(theConf->GetBool("Options/EnableSuspendKey", false));
-	ui.keySuspend->setKeySequence(QKeySequence(theConf->GetString("Options/SuspendKeySequence", "Ctrl+Pause")));
+	ui.keySuspend->setKeySequence(QKeySequence(theConf->GetString("Options/SuspendKeySequence", "Shift+Alt+Pause")));
 
 	ui.chkMonitorSize->setChecked(theConf->GetBool("Options/WatchBoxSize", false));
 
@@ -1664,7 +1666,6 @@ void CSettingsWindow::SaveSettings()
 
 				WriteAdvancedCheck(ui.chkAdminOnlyFP, "ForceDisableAdminOnly", "y", "");
 				WriteAdvancedCheck(ui.chkClearPass, "ForgetPassword", "y", "");
-				
 			}
 
 			if (m_WarnProgsChanged)

@@ -538,7 +538,7 @@ int DoLingerLeader(void)
         // don't terminate if a lingering process has an open window
         //
 
-        if (terminate_and_stop) {
+        if (terminate_and_stop && SbieApi_QueryConfBool(NULL, L"LingerExemptWnds", TRUE)) {
 
             //
             // if a process in the PID list has a window LingerEnumWindowsProc will return FALSE
@@ -554,7 +554,7 @@ int DoLingerLeader(void)
         // don't terminate if a lingering process has just started recently
         //
 
-        if (terminate_and_stop) {
+        if (terminate_and_stop && SbieApi_QueryConfBool(NULL, L"LingerLeniency", TRUE)) {
             for (i = 0; i < process_count; ++i) {
                 HANDLE hProcess = NULL;
                 ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(

@@ -76,7 +76,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 2013 - 2017         | Invincea Inc.    |
 | 2017 - 2020         | Sophos Group plc |
 | [Open-source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
-| 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/))    |
+| 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633))    |
 
 
 ## 📌 Project support / sponsorship
@@ -110,6 +110,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - isaak654 - Templates / Documentation / Code fixes / Collaborator
 - typpos - UI additions / Documentation / Code fixes
 - Yeyixiao - Feature additions
+- Deezzir - Feature additions
 - okrc - Code fixes
 - Sapour - Code fixes
 - lmou523 - Code fixes
@@ -141,7 +142,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - isaak654, DerivativeOfLog7 - Italian
 - takahiro-itou - Japanese
 - VenusGirl - Korean
-- 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20))
+- 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=30))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - LumitoLuma, sebadamus - Spanish

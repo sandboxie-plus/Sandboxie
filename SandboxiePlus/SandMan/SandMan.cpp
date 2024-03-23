@@ -1718,7 +1718,7 @@ SB_STATUS CSandMan::ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount)
 	CBoxImageWindow window(CBoxImageWindow::eMount, this);
 	if (theGUI->SafeExec(&window) != 1)
 		return SB_ERR(SB_Canceled);
-	return pBox->ImBoxMount(window.GetPassword(), window.UseProtection(), bAutoUnmount);
+	return pBox->ImBoxMount(window.GetPassword(), window.UseProtection(), window.AutoUnMount());
 }
 
 void CSandMan::dropEvent(QDropEvent* e)

@@ -4044,7 +4044,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="11" column="1">
               <widget class="QLabel" name="label_18">
                <property name="toolTip">
-                <string>This command runs after all processes in the sandbox have finished.</string>
+                <string>These commands are run UNBOXED after all processes in the sandbox have finished.</string>
                </property>
                <property name="text">
                 <string>On Box Terminate</string>

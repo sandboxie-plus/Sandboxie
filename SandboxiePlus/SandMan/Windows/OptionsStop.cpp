@@ -25,6 +25,9 @@ void COptionsWindow::LoadStop()
 		AddLeaderEntry(Value, true);
 	LoadLeaderTmpl();
 
+	ui.chkNoStopWnd->setChecked(m_pBox->GetBool("LingerExemptWnds", true));
+	ui.chkLingerLeniency->setChecked(m_pBox->GetBool("LingerLeniency", true));
+
 	m_StopChanged = false;
 }
 
@@ -133,6 +136,9 @@ void COptionsWindow::SaveStop()
 	}
 	WriteTextList("LeaderProcess", LeaderProcess);
 	WriteTextList("LeaderProcessDisabled", LeaderProcessDisabled);
+
+	WriteAdvancedCheck(ui.chkNoStopWnd, "LingerExemptWnds", "", "n");
+	WriteAdvancedCheck(ui.chkLingerLeniency, "LingerLeniency", "", "n");
 
 	m_StopChanged = false;
 }

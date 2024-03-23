@@ -10,6 +10,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to prevent sandboxed processes from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thanks Yeyixiao)
   - it can be enabled with "IsBlockCapture=y"
   - see the sandbox option "Prevent sandboxed processes from using public methods to capture window images" in SandMan UI
+- added "LingerExemptWnds=n" to make the lingering process monitor mechanism no longer exempt lingering processes with windows from termination
+
+### Changed
+- option "LingerLeniency=n" now also disabled the 5 sec grace period for freshly started lingerers [#1892](https://github.com/sandboxie-plus/Sandboxie/issues/1892)
 
 ### Fixed
 - fixed issue with symlinks related to startmenu folders

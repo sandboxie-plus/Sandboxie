@@ -222,6 +222,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsStop->setCurrentIndex(0);
 	ui.tabsStop->setTabIcon(0, CSandMan::GetIcon("Fail"));
 	ui.tabsStop->setTabIcon(1, CSandMan::GetIcon("Pass"));
+	ui.tabsStop->setTabIcon(2, CSandMan::GetIcon("Policy"));
 		
 	ui.tabsInternet->setCurrentIndex(0);
 	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("Program"));
@@ -306,6 +307,13 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		QWidget* pWidget2 = new QWidget();
 		pWidget2->setLayout(ui.gridLayout_61);
 		ui.gridLayout_17->addWidget(pWidget2, 2, 0);
+		QWidget* pWidget3 = new QWidget();
+		pWidget3->setLayout(ui.gridLayout_82);
+		ui.gridLayout_82->setContentsMargins(3, 3, 3, 3);
+		ui.verticalSpacer_40->changeSize(0, 0);
+		ui.lblStopOpt->setVisible(false);
+		ui.lblStopOpt->setProperty("hidden", true);
+		ui.gridLayout_17->addWidget(pWidget3, 3, 0);
 		delete ui.tabsStop;
 		ui.gridLayout_17->setContentsMargins(0, 0, 0, 0);
 
@@ -363,6 +371,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblNetwork, CSandMan::GetIcon("Network").pixmap(size,size));
 	AddIconToLabel(ui.lblPrinting, CSandMan::GetIcon("Printer").pixmap(size,size));
 	AddIconToLabel(ui.lblOther, CSandMan::GetIcon("NoAccess").pixmap(size,size));
+
+	AddIconToLabel(ui.lblStopOpt, CSandMan::GetIcon("Stop").pixmap(size,size));
 
 	AddIconToLabel(ui.lblMode, CSandMan::GetIcon("Anon").pixmap(size,size));
 	AddIconToLabel(ui.lblPolicy, CSandMan::GetIcon("Policy").pixmap(size,size));
@@ -476,13 +486,16 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnDelStopProg, SIGNAL(clicked(bool)), this, SLOT(OnDelStopProg()));
 	connect(ui.chkShowStopTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowStopTmpl()));
 	ui.treeStop->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeStop, -1, this));
-	connect(ui.treeStop, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnStopChanged(QTreeWidgetItem *, int)));
+	connect(ui.treeStop, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnStopChanged()));
 
 	connect(ui.btnAddLeader, SIGNAL(clicked(bool)), this, SLOT(OnAddLeader()));
 	connect(ui.btnDelLeader, SIGNAL(clicked(bool)), this, SLOT(OnDelLeader()));
 	connect(ui.chkShowLeaderTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowLeaderTmpl()));
 	ui.treeLeader->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeLeader, -1, this));
-	connect(ui.treeLeader, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnStopChanged(QTreeWidgetItem *, int)));
+	connect(ui.treeLeader, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnStopChanged()));
+
+	connect(ui.chkNoStopWnd, SIGNAL(clicked(bool)), this, SLOT(OnStopChanged()));
+	connect(ui.chkLingerLeniency, SIGNAL(clicked(bool)), this, SLOT(OnStopChanged()));
 	//
 
 	// Start

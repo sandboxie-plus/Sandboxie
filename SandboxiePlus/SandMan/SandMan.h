@@ -251,6 +251,7 @@ private slots:
 
 	void				OnSandBoxAction();
 	void				OnSettingsAction();
+	void				OnPauseAll();
 	void				OnEmptyAll();
 	void				OnLockAll();
 	void				OnWndFinder();
@@ -373,6 +374,7 @@ private:
 	QAction*			m_pNewBox;
 	QAction*			m_pNewGroup;
 	QAction*			m_pImportBox;
+	QAction*			m_pPauseAll;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pLockAll;
 	QAction*			m_pWndFinder;

@@ -181,6 +181,7 @@
         <file>SideLogoDM.png</file>
         <file>Actions/TaskBar.png</file>
         <file>Actions/Desktop.png</file>
+        <file>Actions/Pause.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Busy">Boxes/BusyOverlay.png</file>

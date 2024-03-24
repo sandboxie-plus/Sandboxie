@@ -537,7 +537,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 	}
 }
 
-void CSandMan::OnBoxMenu(const QPoint & point)
+void CSandMan::OnBoxMenu(const QPoint& point)
 {
 	QTreeWidgetItem* pItem = m_pTrayBoxes->currentItem();
 	if (!pItem)

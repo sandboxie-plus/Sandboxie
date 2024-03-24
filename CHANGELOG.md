@@ -4,7 +4,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.3 / 5.68.3] - 2024-02-??
+## [1.13.4 / 5.68.4] - 2024-02-??
+
+### Added
+- added option to prevent sandboxed processes from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thanks Yeyixiao)
+  - it can be enabled with "IsBlockCapture=y"
+  - see the sandbox option "Prevent sandboxed processes from using public methods to capture window images" in SandMan UI
+- added "LingerExemptWnds=n" to make the lingering process monitor mechanism no longer exempt lingering processes with windows from termination
+
+### Changed
+- option "LingerLeniency=n" now also disabled the 5 sec grace period for freshly started lingerers [#1892](https://github.com/sandboxie-plus/Sandboxie/issues/1892)
+
+### Fixed
+- fixed issue with symlinks related to startmenu folders
+
+
+
+## [1.13.3 / 5.68.3] - 2024-03-16
 
 ### Added
 - added certificate usage guide link to support page
@@ -23,10 +39,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added menu entry to restart SandMan as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thanks Yeyixiao)
 - added option to block taking screen capture/screenshot of sandboxed processes (thanks Yeyixiao)
   - it can be enabled with "IsProtectScreen=y"
-  - see the sandbox option "Prevents getting an image of the window in the sandbox" in SandMan UI
+  - see the sandbox option "Prevent processes from capturing window images from sandboxed windows" in SandMan UI
 - added option to prevent sandboxed processes from interfering with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thanks Yeyixiao)
   - it can be enabled with "BlockInterferePower=y"
-  - see the sandbox option "Prevents processes in the sandbox from interfering with power operations" in SandMan UI
+  - see the sandbox option "Prevent sandboxed processes from interfering with power operations" in SandMan UI
 - added new pattern mechanism using a `**` as a placeholder to indicate an arbitrary path element not containing a `\` [1ff2867](https://github.com/sandboxie-plus/Sandboxie/commit/1ff28679b0557a642d29f1651a90a8f7fec77171)
 
 ### Changed

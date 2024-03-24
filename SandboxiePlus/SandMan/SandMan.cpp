@@ -1716,9 +1716,11 @@ SB_STATUS CSandMan::ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount)
 	}
 
 	CBoxImageWindow window(CBoxImageWindow::eMount, this);
+	window.SetForce(pBox->GetBool("ForceProtectionOnMount", false));
+	window.SetAutoUnMount(bAutoUnmount);
 	if (theGUI->SafeExec(&window) != 1)
 		return SB_ERR(SB_Canceled);
-	return pBox->ImBoxMount(window.GetPassword(), window.UseProtection(), bAutoUnmount);
+	return pBox->ImBoxMount(window.GetPassword(), window.UseProtection(), window.AutoUnMount());
 }
 
 void CSandMan::dropEvent(QDropEvent* e)
@@ -2283,7 +2285,6 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 			AddAsyncOp(pProgress, true, tr("Executing OnBoxTerminate: %1").arg(Value2));
 		}
 	}
-	
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))

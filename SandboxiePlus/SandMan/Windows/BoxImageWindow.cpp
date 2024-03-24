@@ -93,12 +93,21 @@ CBoxImageWindow::CBoxImageWindow(EAction Action, QWidget *parent)
 	ui.cmbCipher->addItem("Serpent-AES", 5);
 	ui.cmbCipher->addItem("AES-Twofish-Serpent", 6);
 
-	if (m_Action != eMount)
+	if (m_Action != eMount) {
 		ui.chkProtect->setVisible(false);
-
+		ui.chkAutoLock->setVisible(false);
+	}
+	
+		
+	
 	//restoreGeometry(theConf->GetBlob("BoxImageWindow/Window_Geometry"));
 }
-
+void CBoxImageWindow::SetForce(bool force) {
+	ui.chkProtect->setEnabled(!force);
+	ui.chkProtect->setChecked(true);
+	ui.chkAutoLock->setChecked(true);
+	ui.chkAutoLock->setEnabled(!force);
+}
 CBoxImageWindow::~CBoxImageWindow()
 {
 	//theConf->SetBlob("BoxImageWindow/Window_Geometry", saveGeometry());

@@ -101,7 +101,7 @@ private slots:
 	void OnAddLingering();
 	void OnDelStopProg();
 	void OnShowStopTmpl()			{ LoadStopTmpl(true); }	
-	void OnStopChanged(QTreeWidgetItem* pItem, int Index) { m_StopChanged = true;  OnOptChanged(); }
+	void OnStopChanged()			{ m_StopChanged = true;  OnOptChanged(); }
 	void OnAddLeader();
 	void OnDelLeader();
 	void OnShowLeaderTmpl()			{ LoadLeaderTmpl(true); }	
@@ -232,6 +232,8 @@ private slots:
 	void OnAccessChanged();
 	void OnSysSvcChanged();
 	void OnAdvancedChanged();
+	void OnProtectChanged();
+	void OnCaptureChanged();
 	void OnOpenCOM();
 	void OnIsolationChanged();
 	void OnDebugChanged();

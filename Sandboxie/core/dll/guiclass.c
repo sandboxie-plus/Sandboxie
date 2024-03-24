@@ -106,6 +106,7 @@ static ULONG_PTR Gui_HighestAddress = 0;
 BOOLEAN Gui_RenameClasses = TRUE;
 BOOLEAN Gui_OpenAllWinClasses = FALSE;
 BOOLEAN Gui_UseProtectScreen = FALSE;
+BOOLEAN Gui_UseBlockCapture = FALSE;
 
 
 //---------------------------------------------------------------------------

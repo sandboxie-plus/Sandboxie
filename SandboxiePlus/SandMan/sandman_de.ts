@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sperre die Box, wenn alle Prozesse enden.</translation>
     </message>
 </context>
 <context>
@@ -6874,10 +6874,6 @@ an Stelle von &quot;*&quot;.</translation>
         <translation>GUI-Rückverfolgung</translation>
     </message>
     <message>
-        <source>This command runs after all processes in the sandbox have finished.</source>
-        <translation type="vanished">Dieser Befehl wird ausgeführt, nachdem alle Prozesse in der Sandbox beendet wurden.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="4050"/>
         <source>On Box Terminate</source>
         <translation>Beim Box Beenden</translation>
@@ -7172,22 +7168,22 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2241"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppoptionen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2255"/>
         <source>Stop Behavioure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppverhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2262"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende nachsichtiges Verweilen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2272"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Verweilende Programme mit Fenstern nicht beenden</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2424"/>
@@ -7785,7 +7781,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4047"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Befehle werden AUẞERHALB der Sandbox ausgeführt, nachdem alle Prozesse in der Sandbox beendet wurden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4546"/>

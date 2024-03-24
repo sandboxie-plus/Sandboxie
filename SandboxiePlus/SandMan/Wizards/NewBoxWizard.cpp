@@ -176,6 +176,18 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         if(field("imagesProtection").toBool())
             pBox->SetBool("ProtectHostImages", true);
 
+        QString stName = "SharedTemplate";
+        QString stNameCheck = theAPI->SbieIniGetEx("Template_Local_" + stName, "Tmpl.Title");
+        QString stComment = tr("Add your settings after this line.");
+        if (field("sharedTemplate").toBool()) {
+            if (stNameCheck.isNull()) {
+                QString stTemplate = QString("Template_Local_%1").arg(stName);
+                QString stSettings = QString("Tmpl.Title=%1\nTmpl.Class=Local\nTmpl.Comment=%2").arg(stName,stComment);
+                theAPI->SbieIniSet(stTemplate, "", stSettings);
+            }
+            pBox->InsertText("Template", "Local_" + stName);
+        }
+
         if (!Password.isEmpty())
             pBox->ImBoxCreate(ImageSize / 1024, Password);
 
@@ -678,6 +690,14 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     layout->addWidget(pImageProtection, row++, 1, 1, 3);
     registerField("imagesProtection", pImageProtection);
 
+    QCheckBox* pSharedTemplate = new QCheckBox(tr("Use a shared local template"));
+    pSharedTemplate->setToolTip(tr("This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface."
+"\nTo change the template's settings, simply locate and edit the 'SharedTemplate' template in the App Templates list under Sandbox Options."
+"\nTo disable this template for a sandbox, simply uncheck it in the template list."));
+    pSharedTemplate->setChecked(theConf->GetBool("BoxDefaults/SharedTemplate", false));
+    layout->addWidget(pSharedTemplate, row++, 1, 1, 3);
+    registerField("sharedTemplate", pSharedTemplate);
+
     setLayout(layout);
 
 
@@ -809,6 +829,7 @@ bool CSummaryPage::validatePage()
 
         theConf->SetValue("BoxDefaults/BoxToken", field("boxToken").toBool());
         theConf->SetValue("BoxDefaults/ImagesProtection", field("imagesProtection").toBool());
+        theConf->SetValue("BoxDefaults/SharedTemplate", field("sharedTemplate").toBool());
     }
 
     theConf->SetValue("Options/InstantBoxWizard", m_pSetInstant->isChecked());

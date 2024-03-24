@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>当所有进程停止时锁定沙盒。</translation>
     </message>
 </context>
 <context>

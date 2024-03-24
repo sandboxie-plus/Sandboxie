@@ -176,16 +176,18 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         if(field("imagesProtection").toBool())
             pBox->SetBool("ProtectHostImages", true);
 
-        QString stName = "SharedTemplate";
-        QString stNameCheck = theAPI->SbieIniGetEx("Template_Local_" + stName, "Tmpl.Title");
-        QString stComment = tr("Add your settings after this line.");
+        QString templateName = "SharedTemplate";
+        QString templateFullName = QString("Template_Local_%1").arg(templateName);
+        QString templateSettings = theAPI->SbieIniGetEx(templateFullName, "");
+        QString templateComment = tr("Add your settings after this line.");
+
         if (field("sharedTemplate").toBool()) {
-            if (stNameCheck.isNull()) {
-                QString stTemplate = QString("Template_Local_%1").arg(stName);
-                QString stSettings = QString("Tmpl.Title=%1\nTmpl.Class=Local\nTmpl.Comment=%2").arg(stName,stComment);
-                theAPI->SbieIniSet(stTemplate, "", stSettings);
+            if (templateSettings.isNull()) {
+                QString templateBase = QString("Tmpl.Title=%1\r\nTmpl.Class=Local\r\nTmpl.Comment=%2\r\n").arg(templateName, templateComment);
+                theAPI->SbieIniSet(templateFullName, "", templateBase);
             }
-            pBox->InsertText("Template", "Local_" + stName);
+            QString insertValue = templateFullName.replace("Template_", "");
+            pBox->InsertText("Template", insertValue);
         }
 
         if (!Password.isEmpty())

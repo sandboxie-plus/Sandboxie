@@ -95,7 +95,7 @@ _FX BOOLEAN Gui_InitTitle(HMODULE module)
     // hook functions
     //
 
-    if (! Gui_DisableTitle||SbieApi_QueryConfBool(NULL,"NoTitle",FALSE)) {
+    if (! Gui_DisableTitle) {
 
         SBIEDLL_HOOK_GUI(GetWindowTextW);
         SBIEDLL_HOOK_GUI(GetWindowTextA);

@@ -6,18 +6,65 @@ on:
   push:
     branches: [ master ]
     paths-ignore:
-      - '**/*.md'
+      # Case-sensitive paths to ignore on push events
       - '.editorconfig'
-      - '**/LICENSE*'
-      - '**/Sandboxie.ini'
-      - '**/Sandboxie-Plus.ini'
-      - '**/COPYING'
+      - '.gitattributes'
+      - '.gitignore'
+      - 'MergeDbg.cmd'
+      - 'TestCI.cmd'
+      - '.github/codeql/codeql-config.yml'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/workflows/codeql.yml'
+      - '.github/workflows/codespell.yml'
+      - '.github/workflows/lupdate.yml'
+      - '.github/workflows/stale.yml'
+      - '.github/workflows/test.yml'
+      - '.github/workflows/winget.yml'
+      - '.github/FUNDING.yml'
+      - '.github/dependabot.yml'
+      - 'Sandboxie/msgs/report/*.txt'
+      - '**/*.md'
       - '**/*.html'
-      - '**/*.txt'
       - '**/*.png'
       - '**/*.bmp'
+      - '**/LICENSE*'
+      - '**/license*'
+      - '**/README*'
+      - '**/ReadMe*'
+      - '**/INSTALL*'
+      - '**/AUTHORS'
+      - '**/COPYING'
   pull_request:
     branches: [ master ]
+    paths-ignore:
+      # Case-sensitive paths to ignore on pull events
+      - '.editorconfig'
+      - '.gitattributes'
+      - '.gitignore'
+      - 'MergeDbg.cmd'
+      - 'TestCI.cmd'
+      - '.github/codeql/codeql-config.yml'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/workflows/codeql.yml'
+      - '.github/workflows/codespell.yml'
+      - '.github/workflows/lupdate.yml'
+      - '.github/workflows/stale.yml'
+      - '.github/workflows/test.yml'
+      - '.github/workflows/winget.yml'
+      - '.github/FUNDING.yml'
+      - '.github/dependabot.yml'
+      - 'Sandboxie/msgs/report/*.txt'
+      - '**/*.md'
+      - '**/*.html'
+      - '**/*.png'
+      - '**/*.bmp'
+      - '**/LICENSE*'
+      - '**/license*'
+      - '**/README*'
+      - '**/ReadMe*'
+      - '**/INSTALL*'
+      - '**/AUTHORS'
+      - '**/COPYING'
 
 jobs:
   Build_x64:
@@ -35,7 +82,7 @@ jobs:
     # Compile Sandboxie Core
     #
 
-      - name: Build Sandboxie x86 (dll's & svc)
+      - name: Build Sandboxie x86 (DLLs & svc)
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
       - name: Build Sandboxie x64 (all)
@@ -144,13 +191,13 @@ jobs:
     # Compile Sandboxie Core
     #
 
-      - name: Build Sandboxie x86 (dll's & svc)
+      - name: Build Sandboxie x86 (DLLs & svc)
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
       - name: Build Sandboxie ARM64 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=ARM64 -maxcpucount:8
 
-      - name: Build Sandboxie ARM64EC (dll)
+      - name: Build Sandboxie ARM64EC (DLL)
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
 
     #

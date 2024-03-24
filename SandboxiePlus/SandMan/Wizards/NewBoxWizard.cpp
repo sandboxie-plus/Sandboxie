@@ -692,8 +692,8 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
 
     QCheckBox* pSharedTemplate = new QCheckBox(tr("Use a shared local template"));
     pSharedTemplate->setToolTip(tr("This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface."
-"\nTo change the template's settings, simply locate and edit the 'SharedTemplate' template in the App Templates list under Sandbox Options."
-"\nTo disable this template for a sandbox, simply uncheck it in the template list."));
+	"\nTo change the template's settings, simply locate and edit the 'SharedTemplate' template in the App Templates list under Sandbox Options."
+	"\nTo disable this template for a sandbox, simply uncheck it in the template list."));
     pSharedTemplate->setChecked(theConf->GetBool("BoxDefaults/SharedTemplate", false));
     layout->addWidget(pSharedTemplate, row++, 1, 1, 3);
     registerField("sharedTemplate", pSharedTemplate);

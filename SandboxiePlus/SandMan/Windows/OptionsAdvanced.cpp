@@ -266,13 +266,14 @@ void COptionsWindow::LoadAdvanced()
 
 	ui.chkProtectWindow->setChecked(m_pBox->GetBool("IsProtectScreen"));
 	QString str = m_pBox->GetText("OpenWinClass", "");
-	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture")&& QString::compare(str, "*") != 0);
+	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture") && QString::compare(str, "*") != 0);
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
 
 	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
 	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
 	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
 	*/
+	
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
 	if (Users.count() > 1)

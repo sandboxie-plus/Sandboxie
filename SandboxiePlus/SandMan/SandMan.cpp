@@ -1716,6 +1716,7 @@ SB_STATUS CSandMan::ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount)
 	}
 
 	CBoxImageWindow window(CBoxImageWindow::eMount, this);
+	window.SetForce(pBox->GetBool("ForceProtectionOnMount", false));
 	window.SetAutoUnMount(bAutoUnmount);
 	if (theGUI->SafeExec(&window) != 1)
 		return SB_ERR(SB_Canceled);

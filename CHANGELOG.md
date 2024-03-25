@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.4 / 5.68.4] - 2024-02-??
+## [1.13.4 / 5.68.4] - 2024-02-25
 
 ### Added
 - added option to prevent sandboxed processes from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thanks Yeyixiao)

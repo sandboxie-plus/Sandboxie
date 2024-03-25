@@ -209,14 +209,16 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="693"/>
         <source>Use a shared local template</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende eine gemeinsame lokale Vorlage</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="694"/>
         <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Einstellung fügt der Sandboxkonfiguration eine lokale Vorlage hinzu, so dass die Einstellungen in dieser Vorlage gemeinsam von verschiedenen Sandboxen genutzt werden können. Es kann jedoch vorkommen, dass manche zu der Vorlage hinzugefügte Einstellungen nicht auf der Benutzeroberfläche widergespiegelt werden.
+Um die Einstellungen der Vorlage zu ändern, suchen und bearbeiten Sie einfach die Vorlage &apos;SharedTemplate&apos; in der Liste der Programmvorlagen unter Sandboxeinstellungen.
+Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das Häkchen in der Vorlagenliste.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="681"/>
@@ -1144,7 +1146,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="181"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fügen Sie Ihre Einstellungen nach dieser Zeile ein.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="198"/>
@@ -3132,7 +3134,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Prozesse unterbrechen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="515"/>
@@ -7156,7 +7158,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="380"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwinge Schutz beim Einhängen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1400"/>

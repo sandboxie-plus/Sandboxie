@@ -16,7 +16,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="153"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation>Защитить форму Root песочницы от доступа процессов вне песочницы</translation>
+        <translation>Защитить Root песочницы от доступа процессов вне песочницы</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="32"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокировать песочницу, когда все процессы остановятся.</translation>
     </message>
 </context>
 <context>
@@ -200,7 +200,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="686"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Запретить программам в песочнице, установленным на хосте, загружать dll из песочницы</translation>
+        <translation>Запретить программам в песочнице, установленным на хосте, загружать dll из песочницы</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="687"/>
@@ -210,14 +210,16 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="693"/>
         <source>Use a shared local template</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать общий локальный шаблон</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="694"/>
         <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот настройка добавляет локальный шаблон в конфигурацию песочницы, чтобы настройки этого шаблона были общими для всех песочниц. Однако некоторые настройки, добавленные в шаблон, могут не отображаться в пользовательском интерфейсе.
+Чтобы изменить настройки шаблона, просто найдите и отредактируйте шаблон &apos;SharedTemplate&apos; в списке &quot;Шаблоны приложений&quot; в разделе &quot;Опции песочницы&quot;.
+Чтобы отключить этот шаблон для песочницы, просто снимите флажок с него в списке шаблонов.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="681"/>
@@ -350,7 +352,9 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина пароля ограничена 128 символами.
+Эта длина позволяет использовать примерно 384 бита энтропии с парольной фразой, состоящей из настоящих английских слов.
+увеличивается до 512 бит с применением модификаций речи Leet (L337) и превышает 768 бит, если состоит из полностью случайных печатаемых символов ASCII.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="164"/>
@@ -1142,7 +1146,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="181"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавьте свои настройки после этой строки.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="198"/>
@@ -1636,7 +1640,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="904"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>При завершении</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="914"/>
@@ -3080,17 +3084,18 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="2472"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша сборка Windows %1 превышает текущие возможности поддержки вашей версии Sandboxie, что приводит к отключению изоляции безопасности на основе токенов. Следовательно, все приложения будут работать в режиме отсека приложений без безопасной изоляции.
+Пожалуйста, проверьте, есть ли обновление для Sandboxie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2481"/>
         <source>Don&apos;t show this message again for the current build.</source>
-        <translation type="unfinished"></translation>
+        <translation>Больше не показывать это сообщение для текущей сборки.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2488"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша сборка Windows %1 превышает текущие известные возможности поддержки вашей версии Sandboxie. Sandboxie попытается использовать последние известные смещения, что может привести к нестабильности системы.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2499"/>
@@ -3369,7 +3374,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="4274"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;h3&gt;О Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версия %1&lt;/p&gt;&lt;p&gt; Авторское право (c) 2020-2023 DavidXanatos&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;О Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версия %1&lt;/p&gt;&lt;p&gt; Авторское право (c) 2020-2024 DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4282"/>
@@ -3603,7 +3608,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Приостановить все процессы</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="515"/>
@@ -3615,7 +3620,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="541"/>
         <location filename="SandMan.cpp" line="697"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезапустить от имени администратора</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="627"/>
@@ -3719,7 +3724,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2288"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнение OnBoxTerminate: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2313"/>
@@ -3754,7 +3759,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2675"/>
         <source>Failed to configure hotkey %1, error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось настроить горячую клавишу %1, ошибка: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2761"/>
@@ -6788,7 +6793,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="3746"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Запретить программам в песочнице, установленным на хосте, загружать библиотеки dll из песочницы</translation>
+        <translation>Запретить программам в песочнице, установленным на хосте, загружать dll из песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3742"/>
@@ -6866,7 +6871,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="830"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
         <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Запретить процессам в песочнице использовать общедоступные методы для захвата изображений окон</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1999"/>
@@ -6971,19 +6976,19 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="380"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительная защита при монтировании</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent sandboxed processes from interfering with power operations</source>
         <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Предотвратить вмешательство процессов в песочнице в работу электропитания</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1400"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Запретить процессам захватывать изображения окон из окон в песочнице</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1428"/>
@@ -7008,22 +7013,22 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2248"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции остановки</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2262"/>
         <source>Stop Behavioure</source>
-        <translation type="unfinished"></translation>
+        <translation>Поведение остановки</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2269"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать снисхождения ко вторичным</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2279"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Не останавливать вторичные процессы с окнами</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2431"/>
@@ -7423,7 +7428,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4054"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эти команды запускаются ВНЕ ПЕСОЧНИЦЫ после завершения всех процессов в песочнице.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4206"/>
@@ -7448,7 +7453,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4057"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>При завершении песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4300"/>
@@ -7487,7 +7492,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4383"/>
         <source>API call Trace (traces all SBIE hooks)</source>
-        <translation type="unfinished"></translation>
+        <translation>API-вызов Trace (отслеживает все хуки SBIE)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4390"/>
@@ -7798,10 +7803,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/OptionsWindow.ui" line="4092"/>
         <source>Run File Checker</source>
         <translation>Запустить проверку файлов</translation>
-    </message>
-    <message>
-        <source>DNS Request Logging</source>
-        <translation type="vanished">Журналирование DNS-запросов</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4553"/>
@@ -8629,12 +8630,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all process</source>
-        <translation type="unfinished"></translation>
+        <translation>Горячая клавиша для приостановки всех процессов</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить статус автоматического удаления песочниц при запуске Sandman</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>
@@ -8704,7 +8705,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1698"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Руководство по использованию сертификата&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1714"/>

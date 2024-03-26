@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verrouille le bac quand tous les processus s&apos;arrêtent.</translation>
     </message>
 </context>
 <context>
@@ -206,7 +206,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="688"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Empêcher les programmes d&apos;un bac installé sur l&apos;hôte de charger des DLL du bac</translation>
+        <translation>Empêcher les programmes d&apos;un bac installé sur l&apos;hôte de charger des DLL depuis le bac</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="689"/>
@@ -217,14 +217,16 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="695"/>
         <source>Use a shared local template</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser un modèle local partagé</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="696"/>
         <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce paramètre ajoute un modèle local à la configuration du bac à sable, de sorte que les paramètres dans ce modèle soient partagés entre les bacs à sable. Cependant, certains paramètres ajoutés au modèle peuvent ne pas se refléter dans l&apos;interface.
+Pour changer les paramètres du modèle, il suffit de trouver et d&apos;éditer le modèle « SharedTemplate » dans la liste des modèles d&apos;applications dans les options du bac.
+Pour désactiver ce modèle pour un bac à sable, décochez-le simplement dans la liste des modèles.</translation>
     </message>
     <message>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
@@ -1268,7 +1270,7 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="182"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajoutez vos paramètres après cette ligne.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="200"/>
@@ -3518,7 +3520,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspendre tous les processus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="515"/>
@@ -7723,19 +7725,19 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="380"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer la protection lors du montage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent sandboxed processes from interfering with power operations</source>
         <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="unfinished">Empêcher les processus dans le bac à sable d&apos;interférer avec des opérations d&apos;alimentation</translation>
+        <translation>Empêcher les processus dans le bac à sable d&apos;interférer avec des opérations d&apos;alimentation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1400"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished">Empêcher d&apos;obtenir une image de la fenêtre dans le bac à sable</translation>
+        <translation>Empêcher les processus de capturer des images de la fenêtre depuis des fenêtres dans le bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1428"/>
@@ -7775,22 +7777,22 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2248"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options d&apos;arrêt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2262"/>
         <source>Stop Behavioure</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportement d&apos;arrêt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2269"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>Être clément envers les programmes persistants</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2279"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas arrêter les processus persistants en même temps que les fenêtres</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2431"/>
@@ -8440,7 +8442,7 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4054"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ces commandes s&apos;exécutent EN DEHORS DU BAC après que tous les processus dans le bac à sable se soient arrêtés.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4383"/>
@@ -8636,7 +8638,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <location filename="Forms/OptionsWindow.ui" line="3746"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Empêcher les programmes dans un bac à sable installé sur l&apos;hôte de charger des DLL depuis le bac à sable</translation>
+        <translation>Empêcher les programmes dans un bac à sable installé sur l&apos;hôte de charger des DLL depuis le bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3684"/>
@@ -8670,7 +8672,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <location filename="Forms/OptionsWindow.ui" line="830"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
         <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher les processus dans un bac à sable d&apos;utiliser des méthodes publiques afin de capturer des images de la fenêtre</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2852"/>

@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm işlemler sonlandığında kutuyu kilitle.</translation>
     </message>
 </context>
 <context>
@@ -209,14 +209,16 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="695"/>
         <source>Use a shared local template</source>
-        <translation type="unfinished"></translation>
+        <translation>Paylaşımlı yerel bir şablon kullan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="696"/>
         <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu ayar, korumalı alan yapılandırmasına yerel bir şablon ekler, böylece bu şablondaki ayarlar korumalı alanlar arasında paylaşılır. Ancak şablona eklenen bazı ayarlar kullanıcı arayüzüne yansımayabilir.
+Şablonun ayarlarını değiştirmek için Korumalı Alan Seçenekleri altındaki Uygulama Şablonları listesinde &apos;SharedTemplate&apos; şablonunu bulup düzenlemeniz yeterlidir.
+Bu şablonu bir korumalı alan için devre dışı bırakmak istiyorsanız şablon listesindeki işaretini kaldırmanız yeterlidir.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="683"/>
@@ -1142,7 +1144,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="182"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu satırdan sonra ayarlarınızı ekleyin.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="200"/>
@@ -3119,7 +3121,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm İşlemleri Askıya Al</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="515"/>
@@ -7185,7 +7187,7 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="380"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlandığında korumayı zorla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1400"/>
@@ -7225,22 +7227,22 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2248"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Durma Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2262"/>
         <source>Stop Behavioure</source>
-        <translation type="unfinished"></translation>
+        <translation>Durma Davranışı</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2269"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>Oyalanma yumuşatmayı kullan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2279"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Pencereli işlemler sonlandırılmasın</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2431"/>
@@ -7349,10 +7351,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <translation>Masaüstü nesnesi geçici çözümünü tüm işlemler için kullan</translation>
     </message>
     <message>
-        <source>This command runs after all processes in the sandbox have finished.</source>
-        <translation type="vanished">Bu komut, korumalı alandaki tüm işlemler sonlandıktan sonra çalıştırılır.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="4057"/>
         <source>On Box Terminate</source>
         <translation>Alan Sonlandığında</translation>
@@ -7411,7 +7409,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4054"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu komutlar korumalı alandaki tüm işlemler sonlandıktan sonra ALAN DIŞINDAN çalıştırılır.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4383"/>
@@ -7802,7 +7800,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="3961"/>
         <location filename="Forms/OptionsWindow.ui" line="4019"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
-        <translation>Bu komutlar, alan içeriği silinmeden hemen önce ALAN DIŞINDAN çalıştırılır</translation>
+        <translation>Bu komutlar alan içeriği silinmeden hemen önce ALAN DIŞINDAN çalıştırılır</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3993"/>

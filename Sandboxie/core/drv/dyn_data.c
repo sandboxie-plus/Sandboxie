@@ -1030,6 +1030,10 @@ _FX NTSTATUS Dyndata_LoadData()
             PSBIE_DYNCONFIG Data = (PSBIE_DYNCONFIG)((UCHAR*)Dyndata + Offset);
             if ((UCHAR*)Data > (UCHAR*)Dyndata + DyndataSize) continue;
 
+#ifdef DYN_DEBUG
+                DbgPrint("Sbie testing DYNDATA %d <= %d <= %d\r\n", Data->OsBuild_min, Driver_OsBuild, Data->OsBuild_max);
+#endif
+
             //
             // Find an exact match for the current Windows build
             //
@@ -1053,6 +1057,10 @@ _FX NTSTATUS Dyndata_LoadData()
 
         if (!DataMatch && DataExp)
         {
+            //
+            // Try detecting insider build
+            //
+
             if (GetRegDword(L"\\Registry\\Machine\\Software\\Microsoft\\WindowsSelfHost\\Applicability", L"EnablePreviewBuilds") != 0) 
             {
                 DbgPrint("Sbie detected insider build %d\r\n", Driver_OsBuild);
@@ -1067,7 +1075,7 @@ _FX NTSTATUS Dyndata_LoadData()
             // L"AllowOutdatedOffsets"
             //
 
-            else if(GetRegDword(path, L"AllowOutdatedOffsets"))
+            else if(GetRegDword(path, L"AllowOutdatedOffsets") || Driver_OsTestSigning)
             {
                 DataMatch = DataExp;
             }

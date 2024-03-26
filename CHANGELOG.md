@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.13.5 / 5.68.5] - 2024-03-??
+
+### Changed
+- on systems in test signing mode sandboxie will by default try outdated offsets
+
+
+
 ## [1.13.4 / 5.68.4] - 2024-03-25
 
 ### Added

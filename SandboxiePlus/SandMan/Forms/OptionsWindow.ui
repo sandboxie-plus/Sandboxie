@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>785</width>
-    <height>526</height>
+    <height>539</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -395,26 +395,6 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="1" colspan="3">
-              <widget class="QCheckBox" name="chkAutoEmpty">
-               <property name="text">
-                <string>Auto delete content when last sandboxed process terminates</string>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="1" colspan="3">
-              <widget class="QCheckBox" name="chkProtectBox">
-               <property name="toolTip">
-                <string>Partially checked means prevent box removal but not content deletion.</string>
-               </property>
-               <property name="text">
-                <string>Protect this sandbox from deletion or emptying</string>
-               </property>
-               <property name="tristate">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
              <item row="12" column="0" colspan="2">
               <widget class="QLabel" name="lblRawDisk">
                <property name="font">
@@ -481,6 +461,26 @@
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="10" column="1" colspan="5">
+              <widget class="QCheckBox" name="chkAutoEmpty">
+               <property name="text">
+                <string>Auto delete content when last sandboxed process terminates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1" colspan="5">
+              <widget class="QCheckBox" name="chkProtectBox">
+               <property name="toolTip">
+                <string>Partially checked means prevent box removal but not content deletion.</string>
+               </property>
+               <property name="text">
+                <string>Protect this sandbox from deletion or emptying</string>
+               </property>
+               <property name="tristate">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -2254,6 +2254,7 @@
                 <widget class="QLabel" name="lblStopOpt">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -4592,8 +4593,8 @@ instead of &quot;*&quot;.</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>92</width>
-                  <height>16</height>
+                  <width>98</width>
+                  <height>28</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="dbgLayout">

@@ -272,14 +272,16 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="695"/>
         <source>Use a shared local template</source>
-        <translation type="unfinished"></translation>
+        <translation>使用共享的本地模板</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="696"/>
         <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>此设置将本地模板添加到沙盒配置中，以便该模板中的设置在沙盒之间共享。 但是，添加到模板的某些设置可能不会反映在用户界面中。
+要更改模板的设置，只需在沙盒选项下的应用程序模板列表中找到并编辑“SharedTemplate”模板即可。
+要为沙盒禁用此模板，只需在模板列表中取消选中它即可。</translation>
     </message>
     <message>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
@@ -1298,7 +1300,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="182"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>在此行之后添加您的设置。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="200"/>
@@ -4111,7 +4113,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>暂停所有进程</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="541"/>
@@ -4156,9 +4158,10 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="SandMan.cpp" line="2472"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>您的 Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，因此禁用了基于令牌的安全隔离功能。这将使所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
+请检查 Sandboxie 是否有更新版本。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2675"/>
@@ -6994,7 +6997,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="380"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>强制挂载保护</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1772"/>
@@ -7014,22 +7017,22 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2248"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
+        <translation>停止选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2263"/>
         <source>Stop Behavioure</source>
-        <translation type="unfinished"></translation>
+        <translation>停止行为</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2270"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>使用停留宽容度</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2280"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>不要停止与Windows相关的停留进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2320"/>
@@ -7254,7 +7257,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4055"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒中的所有进程结束后，这些命令将在无沙盒的环境下运行。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4301"/>

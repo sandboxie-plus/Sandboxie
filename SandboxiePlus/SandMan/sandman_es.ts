@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear la caja cuando se paren todos los procesos.</translation>
     </message>
 </context>
 <context>
@@ -204,7 +204,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="688"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Impedir que los programas de aislamiento instalados en el ordenador carguen DLLs de la sandbox</translation>
+        <translation>Impedir que los programas de aislamiento instalados en el ordenador carguen DLLs de la sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="689"/>
@@ -215,14 +215,16 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="695"/>
         <source>Use a shared local template</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar una plantilla local compartida</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="696"/>
         <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta configuración agrega una plantilla local a la configuración del sandbox para que los ajustes en esa plantilla se compartan entre sandboxes. Sin embargo, algunos ajustes añadidos a la plantilla pueden no reflejarse en la interfaz de usuario. 
+Para cambiar los ajustes de la plantilla, simplemente ubica y edita la plantilla &apos;SharedTemplate&apos; en la lista de Plantillas de Aplicación bajo Opciones de Sandbox. 
+Para deshabilitar esta plantilla para un sandbox, simplemente desmárcala en la lista de plantillas.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="683"/>
@@ -358,7 +360,9 @@ Es recomendable elegir una contraseña de 20 o más caracteres. ¿Está seguro d
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>La contraseña está limitada a una longitud máxima de 128 caracteres.
+Esta longitud permite aproximadamente 384 bits de entropía con una frase de contraseña compuesta de palabras inglesas reales,
+aumenta a 512 bits con la aplicación de modificaciones en el lenguaje Leet (L337), y excede los 768 bits cuando está compuesta totalmente por caracteres ASCII imprimibles completamente aleatorios.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="164"/>
@@ -1240,7 +1244,7 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="182"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Añada sus configuraciones después de esta línea.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="200"/>
@@ -1553,7 +1557,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="904"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Al Finalizar</translation>
     </message>
     <message>
         <source>On Delete</source>
@@ -3372,7 +3376,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspender Todos los Procesos</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="515"/>
@@ -3384,7 +3388,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
         <location filename="SandMan.cpp" line="541"/>
         <location filename="SandMan.cpp" line="697"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar como Administrador</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="563"/>
@@ -3535,12 +3539,12 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="2288"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ejecutando OnBoxTerminate: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2675"/>
         <source>Failed to configure hotkey %1, error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al configurar tecla rápida %1, error: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2761"/>
@@ -7879,7 +7883,7 @@ en cambio de &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="3747"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Evitar que los programas en sandboxes instaladas en el host carguen dlls desde esta sandbox</translation>
+        <translation>Evitar que los programas de sandbox instalados en el host carguen DLLs desde esta sandbox</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3685"/>
@@ -7962,19 +7966,19 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="380"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar protección al montar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent sandboxed processes from interfering with power operations</source>
         <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Evitar que los procesos aislados interfieran con operaciones de energía</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1400"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Evitar que los procesos realicen capturas de pantalla de las ventanas aisladas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1428"/>
@@ -8004,22 +8008,22 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2248"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de Detención</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2263"/>
         <source>Stop Behavioure</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportamiento de Detención</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2270"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar Indulgencia Persistente</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2280"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>No detener procesos persistentes con ventanas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2432"/>
@@ -8274,7 +8278,7 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
         <location filename="Forms/OptionsWindow.ui" line="830"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
         <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Evitar que los procesos aislados usen metodos públicos de captura de imágenes de ventanas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1551"/>
@@ -8475,7 +8479,7 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4058"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Al finalizar la caja</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4068"/>
@@ -8583,7 +8587,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4055"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Estos comandos son ejecutados SIN AISLAR después de que todos los procesos en esta sandbox hayan finalizado.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4093"/>
@@ -8936,12 +8940,12 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all process</source>
-        <translation type="unfinished"></translation>
+        <translation>Atajo para suspender todos los procesos</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprobar estado de auto-eliminación de las sandboxes cuando SandMan arranca</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>
@@ -9101,7 +9105,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1698"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Guía de uso de certificado&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1714"/>

@@ -68,8 +68,8 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; 
 Name: "{group}\{cm:SandboxieStartMenu1}"; Filename: "{app}\Start.exe"; Parameters: "/box:__ask__ run_dialog"; MinVersion: 0.0,5.0
 Name: "{group}\{cm:SandboxieStartMenu2}"; Filename: "{app}\Start.exe"; Parameters: "default_browser"; MinVersion: 0.0,5.0
 Name: "{group}\{cm:SandboxieStartMenu3}"; Filename: "{app}\Start.exe"; Parameters: "/box:__ask__ start_menu"; MinVersion: 0.0,5.0
-Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0
-;Name: "{userdesktop}\{cm:SandboxedBrowser}"; Filename: "{app}\Start.exe"; Parameters: "default_browser"; Tasks: DesktopIcon2; MinVersion: 0.0,5.0
+Name: "{autodesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0
+;Name: "{autodesktop}\{cm:SandboxedBrowser}"; Filename: "{app}\Start.exe"; Parameters: "default_browser"; Tasks: DesktopIcon2; MinVersion: 0.0,5.0
 
 
 [INI]
@@ -84,23 +84,25 @@ Type: filesandordirs; Name: "{app}\translations"
 Type: files; Name: "{app}\SbieDrv.sys.w10"
 Type: files; Name: "{app}\SbieDrv.sys.rc4"
 Type: files; Name: "{app}\SbieIni.exe.sig"
+Type: files; Name: "{userdesktop}\Sandboxie-Plus.lnk"
+Type: files; Name: "{userdesktop}\{cm:SandboxedBrowser}.lnk"
 
 
 [Registry]
 ; Autostart Sandman.
-;Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "SandboxiePlus_AutoRun"; ValueType: string; ValueData: """{app}\SandMan.exe"" -autorun"; Flags: uninsdeletevalue; Tasks: AutoStartEntry
+;Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "SandboxiePlus_AutoRun"; ValueType: string; ValueData: """{app}\SandMan.exe"" -autorun"; Flags: uninsdeletevalue; Tasks: AutoStartEntry
 
 ; AddRunSandboxed all files.
-;Root: HKCU; Subkey: "Software\Classes\*\shell"; Flags: uninsdeletekeyifempty; Tasks: AddRunSandboxed
-;Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
-;Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
-;Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
+;Root: HKLM; Subkey: "Software\Classes\*\shell"; Flags: uninsdeletekeyifempty; Tasks: AddRunSandboxed
+;Root: HKLM; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
+;Root: HKLM; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
+;Root: HKLM; Subkey: "Software\Classes\*\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
 
 ; AddRunSandboxed folder.
-;Root: HKCU; Subkey: "Software\Classes\Folder\shell"; Flags: uninsdeletekeyifempty; Tasks: AddRunSandboxed
-;Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
-;Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
-;Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
+;Root: HKLM; Subkey: "Software\Classes\Folder\shell"; Flags: uninsdeletekeyifempty; Tasks: AddRunSandboxed
+;Root: HKLM; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
+;Root: HKLM; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
+;Root: HKLM; Subkey: "Software\Classes\Folder\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
 
 ; External manifest for Sbie service.
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueName: "PreferExternalManifest"; ValueType: dword; ValueData: "1"; Check: not IsPortable

@@ -8278,7 +8278,7 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
         <location filename="Forms/OptionsWindow.ui" line="830"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
         <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation>Evitar que los procesos aislados usen metodos públicos de captura de imágenes de ventanas</translation>
+        <translation>Evitar que los procesos aislados usen métodos públicos de captura de imágenes de ventanas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1551"/>

@@ -176,6 +176,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         if(field("imagesProtection").toBool())
             pBox->SetBool("ProtectHostImages", true);
 
+        // SharedTemplate
         QString templateName = "SharedTemplate";
         QString templateFullName = QString("Template_Local_%1").arg(templateName);
         QString templateSettings = theAPI->SbieIniGetEx(templateFullName, "");
@@ -185,21 +186,38 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             QString templateBase = QString("Tmpl.Title=%1\r\nTmpl.Class=Local\r\nTmpl.Comment=%2\r\n").arg(templateName, templateComment);
             theAPI->SbieIniSet(templateFullName, "", templateBase);
         }
-        
+
         if (field("sharedTemplate").toInt() == 1) { // insert template
             QString insertValue = templateFullName.replace("Template_", "");
             pBox->InsertText("Template", insertValue);
         }
         else if (field("sharedTemplate").toInt() == 2) { // append to config
             QStringList templateSettingsLines = templateSettings.split("\r\n", Qt::SkipEmptyParts);
+
             for (const QString& tLine : templateSettingsLines) {
-                if (!tLine.startsWith("Enabled=") && !tLine.startsWith("ConfigLevel=") && !tLine.startsWith("Tmpl.") && !tLine.startsWith("#")) { // skip lines
-                    QStringList tParts = tLine.split('=');
-                    if (tParts.size() == 2) {
-                        QString tKey = tParts[0].trimmed();
-                        QString tValue = tParts[1].trimmed();
-                        pBox->AppendText(tKey, tValue);
-                    }
+                if (tLine.startsWith("Enabled=") ||
+                    tLine.startsWith("ConfigLevel=") ||
+                    tLine.startsWith("Tmpl.") ||
+                    tLine.startsWith("#")) {
+                    continue; // Skip lines that start with these prefixes
+                }
+
+                QStringList tParts = tLine.split('=');
+                if (tParts.size() != 2) {
+                    continue; // Skip lines that don't have exactly one '=' character
+                }
+
+                QString tKey = tParts[0].trimmed();
+                QString tValue = tParts[1].trimmed();
+
+                if (tLine.endsWith("=y") ||
+                    tLine.endsWith("=Y") ||
+                    tLine.endsWith("=n") ||
+                    tLine.endsWith("=N")) {
+                    pBox->SetText(tKey, tValue);
+                }
+                else {
+                    pBox->AppendText(tKey, tValue);
                 }
             }
         }

@@ -75,6 +75,6 @@
 "The full message text is: %1<br />": "完整的消息文本是: %1<br />",
 "Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "访问 <a href=\"%1\">在线文档</a> to 了解更多关于这个的信息，以及其他 Sbie 信息。",
 "Would you like to collect some logs to help us resolve the issue.": "是否要收集一些日志来帮助我们解决问题？",
-"Now please run your application again to trigger the Sbie message.<br /><br />": "现在，请再次运行您的应用程序以触发 Sbie 消息。<br /><br />",
+"Now please run your application again to trigger the Sbie message.<br /><br />": "现在，请再次运行您的应用程序以触发 SBIE 消息。<br /><br />",
 "Press NEXT when you are done collecting logs.": "完成日志收集后按 下一步 。"
 }

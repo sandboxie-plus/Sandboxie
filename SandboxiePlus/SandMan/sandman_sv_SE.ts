@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lås lådan när alla processer stoppar</translation>
     </message>
 </context>
 <context>
@@ -262,7 +262,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="720"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Förhindra sandlådeprogram installerade på värden från att ladda dll:s från sandlådan</translation>
+        <translation>Förhindra sandlådade program installerade på värden från att ladda DLL:s från sandlådan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="721"/>
@@ -272,7 +272,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="727"/>
         <source>Shared template mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Delat mallläge</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="728"/>
@@ -280,22 +280,25 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denna inställning adderar en lokal mall eller dess inställningar till sandlådekonfigurationen så att inställningarna i denna mall delas mellan sandlådor. 
+Hursom, om alternativet &quot;använd som en mall&quot; är valt som delningsläge, kanske vissa inställningar inte avspeglas i användargränssnittet. 
+För att ändra mallinställningarna, lokalisera helt enkelt &quot;DeladMall&quot; mallen i listan Appmallar under sandlådealternativ, och dubbelklicka på den för redigering. 
+För att inaktivera denna mall för en sandlåda, avbocka den helt enkelt i malllistan.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="735"/>
         <source>Disabled</source>
-        <translation type="unfinished">Inaktiverad</translation>
+        <translation>Inaktiverad</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="736"/>
         <source>Use as a template</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd som en mall.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Append to the configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Bifoga till konfigurationen</translation>
     </message>
     <message>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
@@ -448,7 +451,9 @@ Det rekommenderas att välja ett lösenord bestående av 20 tecken eller mer. S�
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösenordet är begränsat till en maximilängd av 128 tecken.
+Denna längd tillåter ungefär 384-bitar av entropi med en lösenfras komponerad av faktiska Svenska ord,
+utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och övergår 768-bitar vid komponering av fullständigt slumpmässiga tryckbara ASCII tecken.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="164"/>
@@ -1344,7 +1349,7 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="183"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Addera dina inställningar efter denna rad.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="232"/>
@@ -1954,7 +1959,7 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="904"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid terminering</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1007"/>
@@ -3955,7 +3960,7 @@ Nej väljer: %2</translation>
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Upphäv alla processer</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="515"/>
@@ -3967,7 +3972,7 @@ Nej väljer: %2</translation>
         <location filename="SandMan.cpp" line="541"/>
         <location filename="SandMan.cpp" line="697"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta om som Admin</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="627"/>
@@ -4061,7 +4066,7 @@ Nej väljer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2288"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verkställer VidLådTerminering:%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2313"/>
@@ -4070,24 +4075,25 @@ Nej väljer: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2472"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditt Windows-bygge %1 överstiger de nuvarande supportförmågorna av din Sandboxie-version, vilket resulterar i inaktivering av token-based säkerhetsisolering. Följdaktligen, alla applikationer kommer att operera i applikationsutrymmesläge utan säker isolering.
+Vänligen kontrollera om det finns en uppdatering för Sandboxie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2481"/>
         <source>Don&apos;t show this message again for the current build.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2488"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditt windows-bygge %1 överstiger de nuvarande kända supportförmågorna av din Sandboxie-version, Sandboxie kommer försöka använda de senast-kända kompensationerna vilket kan orsaka systeminstabilitet.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2675"/>
         <source>Failed to configure hotkey %1, error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Lyckades inte konfigurera snabbkommando %1, fel:%2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2761"/>
@@ -7681,7 +7687,7 @@ Om ledarprocesser är definierade, behandlas alla andra som kvardröjande progra
         <location filename="Forms/OptionsWindow.ui" line="3747"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Förhindra sandlådade program installerade på värden från att ladda dll:s från sandlådan</translation>
+        <translation>Förhindra sandlådade program installerade på värden från att ladda DLL:s från sandlådan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3685"/>
@@ -7760,19 +7766,19 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
     <message>
         <location filename="Forms/OptionsWindow.ui" line="380"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Tvinga skydd vid montering</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent sandboxed processes from interfering with power operations</source>
         <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Förhindra sandlådade processer från att lägga sig i kraftfulla operationer</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1400"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Förhindra processer från att fånga fönsterbilder från sandlådade fönster</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1428"/>
@@ -7812,24 +7818,17 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2248"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2080"/>
-        <location filename="Forms/OptionsWindow.ui" line="2263"/>
-        <source>Stop Behaviour</source>
-        <oldsource>Stop Behavioure</oldsource>
-        <translation type="unfinished">Stoppa beteendet</translation>
+        <translation>Stoppalternativ</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2270"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd kvardröjningsöverseende</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2280"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppa inte kvardröjande processer med fönster</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2432"/>
@@ -8308,7 +8307,7 @@ Processmatchningsnivån har en högre prioritet än säregenheten och beskriver 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4055"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessa kommandon körs OLÅDADE efter att alla processer i sandlådan har avslutats.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4068"/>
@@ -8381,7 +8380,7 @@ Notera: Inställningarna Tvingade program och Tvinga mappar, för en sandlåda, 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4384"/>
         <source>API call Trace (traces all SBIE hooks)</source>
-        <translation type="unfinished"></translation>
+        <translation>API-anropspår (spårar alla SBIE hooks)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4391"/>
@@ -8608,7 +8607,7 @@ istället för &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="830"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
         <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Förhindra sandlådade processer från att använda allmänna metoder för att fånga fönsterbilder</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2853"/>
@@ -8648,7 +8647,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4058"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid Låd Terminerande</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4125"/>
@@ -9276,12 +9275,12 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all process</source>
-        <translation type="unfinished"></translation>
+        <translation>Snabbkommando för att upphäva alla processer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrollera sandlådors autoraderingsstatus när Sandman startar</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>
@@ -9579,7 +9578,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1698"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie plus.com/go.php?to=sbie use cert&quot;&gt;Certifikatsanvändarguide&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1714"/>

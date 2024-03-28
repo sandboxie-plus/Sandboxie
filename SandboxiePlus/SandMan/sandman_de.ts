@@ -209,7 +209,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="727"/>
         <source>Shared template mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Gemeinsamer Vorlagenmodus</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="728"/>
@@ -217,34 +217,25 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Einstellung fügt der Sandboxkonfiguration eine lokale Vorlage hinzu, sodass die Einstellungen in dieser Vorlage gemeinsam von verschiedenen Sandboxen genutzt werden können.
+Es kann jedoch vorkommen, dass, wenn die &apos;Als Vorlage verwenden&apos; Option ausgewählt wurde, manche Einstellungen nicht durch die Benutzeroberfläche widergespiegelt werden.
+Um die Einstellungen der Vorlage zu ändern, suchen Sie einfach die Vorlage &apos;SharedTemplate&apos; in der Liste der Programmvorlagen unter Sandboxeinstellungen, und bearbeiten diese durch einen Doppelklick.
+Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das Häkchen in der Vorlagenliste.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="735"/>
         <source>Disabled</source>
-        <translation type="unfinished">Deaktiviert</translation>
+        <translation>Deaktiviert</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="736"/>
         <source>Use as a template</source>
-        <translation type="unfinished"></translation>
+        <translation>Als Vorlage verwenden</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Append to the configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use a shared local template</source>
-        <translation type="vanished">Verwende eine gemeinsame lokale Vorlage</translation>
-    </message>
-    <message>
-        <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
-To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
-To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="vanished">Diese Einstellung fügt der Sandboxkonfiguration eine lokale Vorlage hinzu, so dass die Einstellungen in dieser Vorlage gemeinsam von verschiedenen Sandboxen genutzt werden können. Es kann jedoch vorkommen, dass manche zu der Vorlage hinzugefügte Einstellungen nicht auf der Benutzeroberfläche widergespiegelt werden.
-Um die Einstellungen der Vorlage zu ändern, suchen und bearbeiten Sie einfach die Vorlage &apos;SharedTemplate&apos; in der Liste der Programmvorlagen unter Sandboxeinstellungen.
-Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das Häkchen in der Vorlagenliste.</translation>
+        <translation>Zur Konfiguration hinzufügen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
@@ -7231,8 +7222,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
         <location filename="Forms/OptionsWindow.ui" line="2080"/>
         <location filename="Forms/OptionsWindow.ui" line="2263"/>
         <source>Stop Behaviour</source>
-        <oldsource>Stop Behavioure</oldsource>
-        <translation type="unfinished">Stoppverhalten</translation>
+        <translation>Stoppverhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2270"/>

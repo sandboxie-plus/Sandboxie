@@ -209,7 +209,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="727"/>
         <source>Shared template mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Paylaşımlı şablon modu</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="728"/>
@@ -217,22 +217,23 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu ayar, korumalı alan yapılandırmasına yerel bir şablon veya onun ayarlarını ekler, böylece bu şablondaki ayarlar korumalı alanlar arasında paylaşılır.
+Ancak paylaşım modu olarak &apos;Şablon olarak kullan&apos; seçeneği seçilirse bazı ayarlar kullanıcı arayüzüne yansımayabilir. Şablonun ayarlarını değiştirmek için, Korumalı Alan Seçenekleri altındaki Uygulama Şablonları listesinde &apos;SharedTemplate&apos; şablonunu bulmanız ve ardından düzenlemek için üzerine çift tıklamanız yeterlidir. Bu şablonu bir korumalı alan için devre dışı bırakmak istiyorsanız şablon listesindeki işaretini kaldırmanız yeterlidir.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="735"/>
         <source>Disabled</source>
-        <translation type="unfinished">Devre Dışı</translation>
+        <translation>Devre Dışı</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="736"/>
         <source>Use as a template</source>
-        <translation type="unfinished"></translation>
+        <translation>Şablon olarak kullan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Append to the configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırmaya ekle</translation>
     </message>
     <message>
         <source>Use a shared local template</source>
@@ -6476,12 +6477,6 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Uyumluluk</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2080"/>
-        <location filename="Forms/OptionsWindow.ui" line="2263"/>
-        <source>Stop Behaviour</source>
-        <translation>Durma Davranışı</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="3167"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>Not: Bu alana yüklenen programlar internete hiçbir şekilde erişemez.</translation>
@@ -7261,7 +7256,7 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
         <location filename="Forms/OptionsWindow.ui" line="2263"/>
         <source>Stop Behaviour</source>
         <oldsource>Stop Behavioure</oldsource>
-        <translation type="unfinished">Durma Davranışı</translation>
+        <translation>Durma Davranışı</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2270"/>

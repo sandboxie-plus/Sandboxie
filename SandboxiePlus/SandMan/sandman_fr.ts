@@ -7807,13 +7807,6 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
         <translation>Options d&apos;arrêt</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2080"/>
-        <location filename="Forms/OptionsWindow.ui" line="2263"/>
-        <source>Stop Behaviour</source>
-        <oldsource>Stop Behavioure</oldsource>
-        <translation type="unfinished">Comportement d&apos;arrêt</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2270"/>
         <source>Use Linger Leniency</source>
         <translation>Être clément envers les programmes persistants</translation>

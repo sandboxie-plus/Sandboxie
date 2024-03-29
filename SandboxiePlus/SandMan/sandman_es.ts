@@ -8028,13 +8028,6 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
         <translation>Opciones de Detención</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2080"/>
-        <location filename="Forms/OptionsWindow.ui" line="2263"/>
-        <source>Stop Behaviour</source>
-        <oldsource>Stop Behavioure</oldsource>
-        <translation type="unfinished">Comportamiento de Detencion</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2270"/>
         <source>Use Linger Leniency</source>
         <translation>Usar Indulgencia Persistente</translation>

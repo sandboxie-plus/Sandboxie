@@ -7043,13 +7043,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>Опции остановки</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2080"/>
-        <location filename="Forms/OptionsWindow.ui" line="2263"/>
-        <source>Stop Behaviour</source>
-        <oldsource>Stop Behavioure</oldsource>
-        <translation type="unfinished">Поведение остановки</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2270"/>
         <source>Use Linger Leniency</source>
         <translation>Использовать снисхождения ко вторичным</translation>

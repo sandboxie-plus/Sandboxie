@@ -4075,9 +4075,11 @@ Nej väljer: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2472"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</source>
-        <translation>Ditt Windows-bygge %1 överstiger de nuvarande supportförmågorna av din Sandboxie-version, vilket resulterar i inaktivering av token-based säkerhetsisolering. Följdaktligen, alla applikationer kommer att operera i applikationsutrymmesläge utan säker isolering.
+        <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
+Please check if there is an update for sandboxie.</oldsource>
+        <translation type="unfinished">Ditt Windows-bygge %1 överstiger de nuvarande supportförmågorna av din Sandboxie-version, vilket resulterar i inaktivering av token-based säkerhetsisolering. Följdaktligen, alla applikationer kommer att operera i applikationsutrymmesläge utan säker isolering.
 Vänligen kontrollera om det finns en uppdatering för Sandboxie.</translation>
     </message>
     <message>

@@ -333,12 +333,13 @@ void CBoxBorder::TimerProc()
 
 		ADD_SQUARE(aw, ah, 0);
 		ADD_SQUARE(aw, ah, m->BorderWidth);
-		if (m->pCurrentBox->GetBool("ShowBoxName"))
-			ADD_SQUARE(aw, 0, 5);
+
 
 		HRGN hrgn = CreatePolygonRgn(Points, PointCount, ALTERNATE);
 		SetWindowRgn(m->BorderWnd, hrgn, TRUE);
 		SetWindowPos(m->BorderWnd, NULL, ax, ay, aw, ah, SWP_SHOWWINDOW | SWP_NOACTIVATE);
+		if(pProcessBox->GetBool("ShowBoxName")&&m->BorderMode == 2)
+			TextOutA(GetDC(hWnd), aw / 2, 0, pProcessBox->GetName().toStdString().c_str(), pProcessBox->GetName().length());
 
 		m->IsBorderVisible = TRUE;
 	}

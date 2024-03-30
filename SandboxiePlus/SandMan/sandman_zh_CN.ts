@@ -4188,7 +4188,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="2472"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</source>
-        <translation>Windows 内部版本 %1 超出了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离。因此，所有应用程序都将在没有安全隔离的 应用程序隔间模式 下运行。</translation>
+        <translation>Windows 内部版本 %1 超出了该 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离。因此，所有应用程序都将在没有安全隔离的 应用程序隔间模式 下运行。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2675"/>

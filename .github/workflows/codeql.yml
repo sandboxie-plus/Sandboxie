@@ -60,11 +60,7 @@ jobs:
     #     arch:  'win64_msvc2019_64'
 
     - name: Install Qt5 x64
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: '5.15.2'
-        arch:  'win64_msvc2019_64'
-        cache: true
+      run: SandboxiePlus\install_qt.cmd x64
 
     - name: Installing Jom
       run: SandboxiePlus\install_jom.cmd

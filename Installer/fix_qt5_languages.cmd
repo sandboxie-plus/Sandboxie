@@ -1,3 +1,5 @@
+if %1 == x64 if exist %~dp0..\..\Qt\5.15.13\msvc2019_64\bin\lrelease.exe set PATH=%PATH%;%~dp0..\..\Qt\5.15.13\msvc2019_64\bin\
+if %1 == Win32 if exist %~dp0..\..\Qt\5.15.13\msvc2019\bin\lrelease.exe set PATH=%PATH%;%~dp0..\..\Qt\5.15.13\msvc2019\bin\
 mkdir %~dp0qttranslations
 mkdir %~dp0qttranslations\ts
 mkdir %~dp0qttranslations\qm

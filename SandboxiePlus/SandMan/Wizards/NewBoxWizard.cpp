@@ -176,6 +176,52 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         if(field("imagesProtection").toBool())
             pBox->SetBool("ProtectHostImages", true);
 
+        // SharedTemplate
+        QString templateName = "SharedTemplate";
+        QString templateFullName = QString("Template_Local_%1").arg(templateName);
+        QString templateSettings = theAPI->SbieIniGetEx(templateFullName, "");
+        QString templateComment = tr("Add your settings after this line.");
+
+        if (templateSettings.isNull()) {
+            QString templateBase = QString("Tmpl.Title=%1\r\nTmpl.Class=Local\r\nTmpl.Comment=%2\r\n").arg(templateName, templateComment);
+            theAPI->SbieIniSet(templateFullName, "", templateBase);
+        }
+
+        if (field("sharedTemplate").toInt() == 1) { // insert template
+            QString insertValue = templateFullName.replace("Template_", "");
+            pBox->InsertText("Template", insertValue);
+        }
+        else if (field("sharedTemplate").toInt() == 2) { // append to config
+            QStringList templateSettingsLines = templateSettings.split("\r\n", Qt::SkipEmptyParts);
+
+            for (const QString& tLine : templateSettingsLines) {
+                if (tLine.startsWith("Enabled=") ||
+                    tLine.startsWith("ConfigLevel=") ||
+                    tLine.startsWith("Tmpl.") ||
+                    tLine.startsWith("#")) {
+                    continue; // Skip lines that start with these prefixes
+                }
+
+                QStringList tParts = tLine.split('=');
+                if (tParts.size() != 2) {
+                    continue; // Skip lines that don't have exactly one '=' character
+                }
+
+                QString tKey = tParts[0].trimmed();
+                QString tValue = tParts[1].trimmed();
+
+                if (tLine.endsWith("=y") ||
+                    tLine.endsWith("=Y") ||
+                    tLine.endsWith("=n") ||
+                    tLine.endsWith("=N")) {
+                    pBox->SetText(tKey, tValue);
+                }
+                else {
+                    pBox->AppendText(tKey, tValue);
+                }
+            }
+        }
+
         if (!Password.isEmpty())
             pBox->ImBoxCreate(ImageSize / 1024, Password);
 
@@ -678,6 +724,22 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     layout->addWidget(pImageProtection, row++, 1, 1, 3);
     registerField("imagesProtection", pImageProtection);
 
+    QLabel* pSharedTemplateLbl = new QLabel(tr("Shared template mode"), this);
+    pSharedTemplateLbl->setToolTip(tr("This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes."
+        "\nHowever, if 'use as a template' option is selected as the sharing mode, some settings may not be reflected in the user interface."
+        "\nTo change the template's settings, simply locate the 'SharedTemplate' template in the App Templates list under Sandbox Options, then double-click on it to edit it."
+        "\nTo disable this template for a sandbox, simply uncheck it in the template list."));
+    layout->addWidget(pSharedTemplateLbl, row, 1);
+
+    QComboBox* pSharedTemplate = new QComboBox();
+    pSharedTemplate->addItem(tr("Disabled"));
+    pSharedTemplate->addItem(tr("Use as a template"));
+    pSharedTemplate->addItem(tr("Append to the configuration"));
+    layout->addWidget(pSharedTemplate, row++, 2);
+    pSharedTemplate->setCurrentIndex(theConf->GetInt("BoxDefaults/SharedTemplate", 0));
+    layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 3, 1, 1);
+    registerField("sharedTemplate", pSharedTemplate);
+
     setLayout(layout);
 
 
@@ -809,6 +871,7 @@ bool CSummaryPage::validatePage()
 
         theConf->SetValue("BoxDefaults/BoxToken", field("boxToken").toBool());
         theConf->SetValue("BoxDefaults/ImagesProtection", field("imagesProtection").toBool());
+        theConf->SetValue("BoxDefaults/SharedTemplate", field("sharedTemplate").toInt());
     }
 
     theConf->SetValue("Options/InstantBoxWizard", m_pSetInstant->isChecked());

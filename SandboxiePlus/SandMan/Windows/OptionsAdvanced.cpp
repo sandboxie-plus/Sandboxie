@@ -104,9 +104,8 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
 	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnConfidentialChanged()));
 	connect(ui.chkLessConfidential, SIGNAL(clicked(bool)), this, SLOT(OnLessConfidentialChanged()));
-	connect(ui.chkProtectWindow, SIGNAL(clicked(bool)), this, SLOT(OnProtectChanged()));
-	connect(ui.chkBlockCapture, SIGNAL(clicked(bool)), this, SLOT(OnCaptureChanged()));
-	//connect(ui.chkLockWhenClose, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkProtectWindow, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkBlockCapture, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNotifyProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.treeInjectDll, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnToggleInjectDll(QTreeWidgetItem *, int)));
@@ -267,13 +266,14 @@ void COptionsWindow::LoadAdvanced()
 
 	ui.chkProtectWindow->setChecked(m_pBox->GetBool("IsProtectScreen"));
 	QString str = m_pBox->GetText("OpenWinClass", "");
-	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture")&& QString::compare(str, "*") != 0);
+	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture") && QString::compare(str, "*") != 0);
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
 
 	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
 	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
 	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
 	*/
+	
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
 	if (Users.count() > 1)
@@ -1246,32 +1246,4 @@ void COptionsWindow::SaveDebug()
 		WriteAdvancedCheck(pCheck, DbgOption.Name, DbgOption.Value);
 		DbgOption.Changed = false;
 	}
-}
-
-void COptionsWindow::OnCaptureChanged() 
-{
-	if (ui.chkBlockCapture->checkState()) {
-		ui.chkProtectWindow->setChecked(FALSE);
-		ui.chkProtectWindow->setCheckable(FALSE);
-		ui.chkProtectWindow->setEnabled(FALSE);
-	}
-	else {
-		ui.chkProtectWindow->setCheckable(TRUE);
-		ui.chkProtectWindow->setEnabled(TRUE);
-	}
-	OnAdvancedChanged();
-}
-
-void COptionsWindow::OnProtectChanged() 
-{
-	if (ui.chkProtectWindow->checkState()) {
-		ui.chkBlockCapture->setChecked(FALSE);
-		ui.chkBlockCapture->setCheckable(FALSE);
-		ui.chkBlockCapture->setEnabled(FALSE);
-	}
-	else {
-		ui.chkBlockCapture->setCheckable(TRUE);
-		ui.chkBlockCapture->setEnabled(TRUE);
-	}
-	OnAdvancedChanged();
 }

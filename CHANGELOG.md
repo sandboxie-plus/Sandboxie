@@ -4,13 +4,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.4 / 5.68.4] - 2024-02-??
+
+
+## [1.13.5 / 5.68.5] - 2024-03-??
+
+### Changed
+- on systems in test signing mode sandboxie will by default try outdated offsets
+- changed Qt5 version to Qt5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)
+
+
+
+## [1.13.4 / 5.68.4] - 2024-03-25
 
 ### Added
 - added option to prevent sandboxed processes from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thanks Yeyixiao)
   - it can be enabled with "IsBlockCapture=y"
   - see the sandbox option "Prevent sandboxed processes from using public methods to capture window images" in SandMan UI
 - added "LingerExemptWnds=n" to make the lingering process monitor mechanism no longer exempt lingering processes with windows from termination
+- Added option 'SharedTemplate' to Box Wizard [#3737](https://github.com/sandboxie-plus/Sandboxie/pull/3737) (thanks offhub)
+- Added an option to force the protection of an encrypted sandbox to be enabled. [#3736](https://github.com/sandboxie-plus/Sandboxie/pull/3736) (thanks Yeyixiao)
+- Added a menu and button/icon to suspend all processes [#3741] (https://github.com/sandboxie-plus/Sandboxie/issues/3741)
 
 ### Changed
 - option "LingerLeniency=n" now also disabled the 5 sec grace period for freshly started lingerers [#1892](https://github.com/sandboxie-plus/Sandboxie/issues/1892)

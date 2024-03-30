@@ -510,6 +510,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pImportBox->setEnabled(CArchive::IsInit());
 		m_pMenuFile->addSeparator();
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
+		m_pPauseAll = m_pMenuFile->addAction(CSandMan::GetIcon("Pause"), tr("Suspend All Processes"), this, SLOT(OnPauseAll()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pLockAll = m_pMenuFile->addAction(CSandMan::GetIcon("LockClosed"), tr("Lock All Encrypted Boxes"), this, SLOT(OnLockAll()));
 		m_pMenuFile->addSeparator();
@@ -653,6 +654,7 @@ void CSandMan::CreateOldMenus()
 
 	m_pMenuFile = m_pMenuBar->addMenu(tr("&File"));
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
+		m_pPauseAll = m_pMenuFile->addAction(CSandMan::GetIcon("Pause"), tr("Suspend All Processes"), this, SLOT(OnPauseAll()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pLockAll = m_pMenuFile->addAction(CSandMan::GetIcon("LockClosed"), tr("Lock All Encrypted Boxes"), this, SLOT(OnLockAll()));
 		m_pDisableForce = m_pMenuFile->addAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
@@ -830,6 +832,7 @@ QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
 			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "RunBoxed", m_pRunBoxed },
 			ToolBarAction{ "IsBoxed", m_pWndFinder },
+			ToolBarAction{ "SuspendAll", m_pPauseAll },
 			ToolBarAction{ "TerminateAll", m_pEmptyAll },
 			ToolBarAction{ "LockAll", m_pLockAll },
 			ToolBarAction{ "", nullptr },        // separator
@@ -2577,6 +2580,7 @@ void CSandMan::UpdateState()
 	m_pNewBox->setEnabled(isConnected);
 	m_pNewGroup->setEnabled(isConnected);
 	m_pImportBox->setEnabled(isConnected);
+	m_pPauseAll->setEnabled(isConnected);
 	m_pEmptyAll->setEnabled(isConnected);
 	m_pLockAll->setEnabled(isConnected);
 	m_pDisableForce->setEnabled(isConnected);
@@ -3182,6 +3186,15 @@ void CSandMan::OnEmptyAll()
 	}
 
 	theAPI->TerminateAll();
+}
+
+void CSandMan::OnPauseAll()
+{
+	for (auto pBox: theAPI->GetAllBoxes()) {
+		pBox->SetSuspendedAll(TRUE);
+		for (auto pProcess : pBox->GetProcessList())
+			pProcess->TestSuspended();
+	}
 }
 
 void CSandMan::OnLockAll()

@@ -262,7 +262,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="720"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation>阻止安装在宿主上的沙盒程序从沙盒内部加载DLL(动态链接库)文件</translation>
+        <translation>阻止安装在宿主上的沙盒程序从沙盒内部加载(.dll)文件</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="721"/>
@@ -272,7 +272,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="727"/>
         <source>Shared template mode</source>
-        <translation type="unfinished"></translation>
+        <translation>共享模板模式</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="728"/>
@@ -280,22 +280,24 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>此设置将本地模板或其设置添加到沙盒配置中，以便在沙盒之间共享该模板中的设置。
+但是，如果 “使用共享的本地模板”&apos设置被选为共享模式，某些设置可能不会反映在用户界面中。要改变这些模板&apos;设置，只需简单地在沙盒设置中定位到&apos;SharedTemplate&apos;模板，然后双击它进行编辑。
+要为沙盒禁用此模板，只需在模板列表中取消选中它即可。 </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="735"/>
         <source>Disabled</source>
-        <translation type="unfinished">禁用</translation>
+        <translation>禁用</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="736"/>
         <source>Use as a template</source>
-        <translation type="unfinished"></translation>
+        <translation>使用共享的本地模板</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Append to the configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>附加到配置</translation>
     </message>
     <message>
         <source>Use a shared local template</source>
@@ -414,7 +416,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation>正在创建新的沙盒磁盘映像，请输入强密码，并设置映像大小。</translation>
+        <translation>正在创建新的沙盒磁盘映像。请输入强密码，并设置映像大小。</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
@@ -4186,7 +4188,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="2472"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows 内部版本 %1 超出了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离。因此，所有应用程序都将在没有安全隔离的 应用程序隔间模式 下运行。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2675"/>
@@ -9326,7 +9328,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1698"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;凭据使用指南&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;如何使用凭据？&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1714"/>

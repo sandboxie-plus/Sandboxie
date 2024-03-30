@@ -280,9 +280,7 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation>此设置将本地模板或其设置添加到沙盒配置中，以便在沙盒之间共享该模板中的设置。
-但是，如果 “使用共享的本地模板”&apos设置被选为共享模式，某些设置可能不会反映在用户界面中。要改变这些模板&apos;设置，只需简单地在沙盒设置中定位到&apos;SharedTemplate&apos;模板，然后双击它进行编辑。
-要为沙盒禁用此模板，只需在模板列表中取消选中它即可。 </translation>
+        <translation>此设置将本地模板或其设置添加到沙盒配置中，以便在沙盒之间共享该模板中的设置。但是，如果 “使用共享的本地模板”&apos设置被选为共享模式，某些设置可能不会反映在用户界面中。要改变这些模板&apos;设置，只需简单地在沙盒设置中定位到&apos;SharedTemplate&apos;模板，然后双击它进行编辑。要为沙盒禁用此模板，只需在模板列表中取消选中它即可。 </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="735"/>

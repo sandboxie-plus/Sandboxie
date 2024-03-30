@@ -53,12 +53,12 @@
 "Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "“启动/运行限制” 在运行该程序的沙盒被开启，该程序被禁止启动或运行。",
 
 "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chrome 或其他使用应用容器的软件遇到无法加载 SbieDll.dll 时，通常是由 Sandboxie 主目录的无效 DACL 条目引起的。此解决措施将修复它们，这将提示需要为 kmdutil.exe 授予管理员权限。",
-"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "“DACL 条目” 已调整，请尝试再次运行应用程序，并指示问题是否已解决。",
+"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "“DACL 条目” 已调整，请尝试再次运行应用程序，并在稍后关注/指示问题是否已解决。",
 "DACLs fix did not resolve the issue": "“DACL 条目修复” 未解决问题",
 
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "该消息指示 Sandboxie 无法启动帮助程序 SandboxieRpcSs 或 SandboxieDcomLaunch 之一。消息中记下的名称可为 rpcss 或 dcomlaunch。\n\n您可以在下一页上提交问题报告，以帮助我们分析问题。",
 
-"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie 无法执行自己的程序之一。检查对 Sandboxie 的安装文件夹 是否有访问权限和/或重新安装 Sandboxie。\n\n可能的原因:\n1. Sandboxie 被配置为阻止对包含其程序文件的文件夹的访问。\n2. 配置了第三方(HIPS)安全软件来阻止消息中提到的程序的执行。\n\n您可以在下一页提交问题报告，以帮助我们分析问题。",
+"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie 无法执行自己的程序之一。请检查您当前的用户账户对 Sandboxie 的安装文件夹 是否具有可访问权，并且(或者)重新安装 Sandboxie。\n\n可能的原因:\n1. Sandboxie 被配置为阻止对包含其程序文件的文件夹的访问。\n2. 系统中被配置了第三方(HIPS)安全软件来阻止消息中提到的程序的执行。\n\n您可以在下一页提交问题报告，以帮助我们分析问题。",
 
 "Do you want to open the box option dialog to change this preset?": "是否要打开沙盒选项对话框来更改此预设？",
 "No, it is fine as it is": "不，我觉得这样就好",
@@ -66,7 +66,7 @@
 
 "The message %1 is caused by the file migration limit being reached.": "消息 %1 是因为文件迁移请求达到限制引起的。",
 
-"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "您似乎在启用了家长控制的系统上使用非管理员用户帐户，这对于 Sandboxie 显然不会被兼容。\n您可以通过以下选项来解决此问题。",
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "您似乎在启用了家长控制的系统上使用非管理员用户帐户，这种情况下 Sandboxie 显然不会被兼容。\n您可以通过以下选项来解决此问题。",
 
 "Sbie Message Code": "Sbie 消息代码",
 "Name affected process": "受影响进程的名称",

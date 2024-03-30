@@ -338,8 +338,8 @@ void CBoxBorder::TimerProc()
 		HRGN hrgn = CreatePolygonRgn(Points, PointCount, ALTERNATE);
 		SetWindowRgn(m->BorderWnd, hrgn, TRUE);
 		SetWindowPos(m->BorderWnd, NULL, ax, ay, aw, ah, SWP_SHOWWINDOW | SWP_NOACTIVATE);
-		if(pProcessBox->GetBool("ShowBoxName")&&m->BorderMode == 2)
-			TextOutA(GetDC(hWnd), aw / 2, 0, pProcessBox->GetName().toStdString().c_str(), pProcessBox->GetName().length());
+		//if(pProcessBox->GetBool("ShowBoxName")&&m->BorderMode == 2)
+		//	TextOutA(GetDC(hWnd), aw / 2, 0, pProcessBox->GetName().toStdString().c_str(), pProcessBox->GetName().length());
 
 		m->IsBorderVisible = TRUE;
 	}

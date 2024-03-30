@@ -333,6 +333,8 @@ void CBoxBorder::TimerProc()
 
 		ADD_SQUARE(aw, ah, 0);
 		ADD_SQUARE(aw, ah, m->BorderWidth);
+		if (m->pCurrentBox->GetBool("ShowBoxName"))
+			ADD_SQUARE(aw, 0, 5);
 
 		HRGN hrgn = CreatePolygonRgn(Points, PointCount, ALTERNATE);
 		SetWindowRgn(m->BorderWnd, hrgn, TRUE);

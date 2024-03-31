@@ -2199,6 +2199,17 @@ QString CSbieAPI::GetFeatureStr()
 	return str.join(",");
 }
 
+int CSbieAPI::IsDyndataActive()
+{
+	quint32 flags = GetFeatureFlags();
+
+	if (flags & SBIE_FEATURE_FLAG_DYNDATA_EXP)
+		return -1;
+	if (flags & SBIE_FEATURE_FLAG_DYNDATA_OK)
+		return 1;
+	return 0;
+}
+
 SB_STATUS CSbieAPI::SetSecureParam(const QString& Name, const void* data, size_t size)
 {
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];

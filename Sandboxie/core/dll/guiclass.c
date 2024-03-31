@@ -105,6 +105,8 @@ static ULONG_PTR Gui_HighestAddress = 0;
 
 BOOLEAN Gui_RenameClasses = TRUE;
 BOOLEAN Gui_OpenAllWinClasses = FALSE;
+BOOLEAN Gui_UseProtectScreen = FALSE;
+BOOLEAN Gui_UseBlockCapture = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -190,6 +192,8 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
             pat = List_Next(pat);
         }
     }
+
+    Gui_UseProtectScreen = SbieApi_QueryConfBool(NULL, L"IsProtectScreen", FALSE);
 
     //
     // hook functions

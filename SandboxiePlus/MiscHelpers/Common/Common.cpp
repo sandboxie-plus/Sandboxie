@@ -43,6 +43,13 @@ time_t GetTime()
 	return time;
 }
 
+__time64_t GetTimeMs()
+{
+	QDateTime dateTime = QDateTime::currentDateTime();
+	__time64_t time = dateTime.toMSecsSinceEpoch(); // returns time in seconds (since 1970-01-01T00:00:00) in UTC !
+	return time;
+}
+
 struct SCurTick
 {
 	SCurTick()	{Timer.start();}

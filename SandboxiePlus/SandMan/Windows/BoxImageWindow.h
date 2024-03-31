@@ -22,9 +22,12 @@ public:
 
 	QString		GetPassword() const { return m_Password; }
 	QString		GetNewPassword() const { return m_NewPassword; }
+	void        SetForce(bool force);
 	void		SetImageSize(quint64 uSize) const { return ui.txtImageSize->setText(QString::number(uSize / 1024)); }
 	quint64		GetImageSize() const { return ui.txtImageSize->text().toULongLong() * 1024; }
 	bool		UseProtection() const { return ui.chkProtect->isChecked(); }
+	void		SetAutoUnMount(bool bSet) { ui.chkAutoLock->setChecked(bSet); }
+	bool        AutoUnMount() const { return ui.chkAutoLock->isChecked(); }
 
 private slots:
 	void		OnShowPassword();

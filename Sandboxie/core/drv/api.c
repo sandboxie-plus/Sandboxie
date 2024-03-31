@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@
 #include "log_buff.h"
 #define KERNEL_MODE
 #include "verify.h"
+#include "dyn_data.h"
 
 
 //---------------------------------------------------------------------------
@@ -423,7 +424,9 @@ _FX BOOLEAN Api_FastIo_DEVICE_CONTROL(
     ULONG64 user_args[API_NUM_ARGS];
     PROCESS *proc;
     P_Api_Function func_ptr;
+#ifdef _DEBUG
     BOOLEAN ApcsDisabled;
+#endif
 
     //
     // SeFilterToken in kernel mode
@@ -498,7 +501,9 @@ _FX BOOLEAN Api_FastIo_DEVICE_CONTROL(
     // find calling process
     //
 
+#ifdef _DEBUG
     ApcsDisabled = KeAreApcsDisabled();
+#endif
 
     if (PsGetCurrentProcessId() == Api_ServiceProcessId)
         proc = NULL;
@@ -1336,6 +1341,14 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
                 FeatureFlags |= SBIE_FEATURE_FLAG_COMPARTMENTS;
             }
 
+            if (Dyndata_Active) {
+
+                FeatureFlags |= SBIE_FEATURE_FLAG_DYNDATA_OK;
+
+                if (Dyndata_Config.Flags & DYNDATA_FLAG_EXP)
+                    FeatureFlags |= SBIE_FEATURE_FLAG_DYNDATA_EXP;
+            }
+
 #ifdef _M_ARM64
             FeatureFlags |= SBIE_FEATURE_FLAG_NEW_ARCH;
 #endif
@@ -1386,7 +1399,6 @@ _FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
 {
     NTSTATUS status = STATUS_SUCCESS;
     API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS *)parms;
-	HANDLE handle = NULL;
     WCHAR* name = NULL;
     ULONG  name_len = 0;
     UCHAR* data = NULL;
@@ -1404,27 +1416,15 @@ _FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
 
     __try {
 
-        UNICODE_STRING KeyPath;
-        RtlInitUnicodeString(&KeyPath, Api_ParamPath);
-
         name_len = (wcslen(args->param_name.val) + 1) * sizeof(WCHAR);
         name = Mem_Alloc(Driver_Pool, name_len);
         memcpy(name, args->param_name.val, name_len);
-        UNICODE_STRING ValueName;
-        RtlInitUnicodeString(&ValueName, name);
 
-        OBJECT_ATTRIBUTES objattrs;
-        InitializeObjectAttributes(&objattrs, &KeyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
-        ULONG Disp;
-        status = ZwCreateKey(&handle, KEY_WRITE, &objattrs, 0, NULL, REG_OPTION_NON_VOLATILE, &Disp);
-        if (status == STATUS_SUCCESS) {
+        data_len = args->param_size.val;
+        data = Mem_Alloc(Driver_Pool, data_len);
+        memcpy(data, args->param_data.val, data_len);
 
-            data_len = args->param_size.val;
-            data = Mem_Alloc(Driver_Pool, data_len);
-            memcpy(data, args->param_data.val, data_len);
-
-            status = ZwSetValueKey(handle, &ValueName, 0, REG_BINARY, (PVOID)data, data_len);
-        }
+        status = SetRegValue(Api_ParamPath, name, data, data_len);
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();
@@ -1434,9 +1434,6 @@ _FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
         Mem_Free(name, name_len);
     if (data)
         Mem_Free(data, data_len);
-
-    if(handle)
-        ZwClose(handle);
 
 finish:
     return status;
@@ -1447,7 +1444,6 @@ finish:
 // Api_GetSecureParam
 //---------------------------------------------------------------------------
 
-NTSTATUS KphVerifyBuffer(PUCHAR Buffer, ULONG BufferSize, PUCHAR Signature, ULONG SignatureSize);
 
 _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 {
@@ -1456,66 +1452,42 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 	HANDLE handle = NULL;
     WCHAR* name = NULL;
     ULONG  name_len = 0;
-    UCHAR* data = NULL;
-    ULONG  data_len = 0;
 
     if (proc) {
         status = STATUS_NOT_IMPLEMENTED;
         goto finish;
     }
 
-    __try {
+    if (!args->param_data.val || !args->param_size.val) {
+        status = STATUS_INVALID_PARAMETER;
+        goto finish;
+    }
 
-        UNICODE_STRING KeyPath;
-        RtlInitUnicodeString(&KeyPath, Api_ParamPath);
+    __try {
 
         name_len = (wcslen(args->param_name.val) + 3 + 1) * sizeof(WCHAR);
         name = Mem_Alloc(Driver_Pool, name_len);
         wcscpy(name, args->param_name.val);
-        UNICODE_STRING ValueName;
-        RtlInitUnicodeString(&ValueName, name);
 
-        OBJECT_ATTRIBUTES objattrs;
-        InitializeObjectAttributes(&objattrs, &KeyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
-        status = ZwOpenKey(&handle, KEY_WRITE, &objattrs);
-        if (status == STATUS_SUCCESS) {
+        PVOID val_ptr = args->param_data.val;
+        ULONG val_len = args->param_size.val;
+        status = GetRegValue(Api_ParamPath, name, &val_ptr, &val_len);
+        if (NT_SUCCESS(status))
+        {
+            if (args->param_size_out.val)
+                *args->param_size_out.val = val_len;
 
-            data_len = args->param_size.val + sizeof(KEY_VALUE_PARTIAL_INFORMATION);
-            data = Mem_Alloc(Driver_Pool, data_len);
-
-            ULONG length;
-        	status = ZwQueryValueKey(handle, &ValueName, KeyValuePartialInformation, data, data_len, &length);
-
-            if (NT_SUCCESS(status) && args->param_verify.val)
+            if(args->param_verify.val)
             {
                 wcscat(name, L"Sig");
-                RtlInitUnicodeString(&ValueName, name);
 
                 UCHAR data_sig[128];
-                ULONG length_sig;
-                status = ZwQueryValueKey(handle, &ValueName, KeyValuePartialInformation, data_sig, sizeof(data_sig), &length_sig);
-
+                PVOID sig_ptr = data_sig;
+                ULONG sig_len = sizeof(data_sig);
+                status = GetRegValue(Api_ParamPath, name, &sig_ptr, &sig_len);
                 if (NT_SUCCESS(status)) 
-                {
-                    PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)data;
-                    PKEY_VALUE_PARTIAL_INFORMATION info_sig = (PKEY_VALUE_PARTIAL_INFORMATION)data_sig;
-                    status = KphVerifyBuffer(info->Data, info->DataLength, info_sig->Data, info_sig->DataLength);
-                }
+                    status = KphVerifyBuffer(val_ptr, val_len, sig_ptr, sig_len);
             }
-
-	        if (NT_SUCCESS(status))
-	        {
-		        PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)data;
-                if (info->DataLength <= args->param_size.val)
-                {
-                    memcpy(args->param_data.val, info->Data, info->DataLength);
-
-                    if (args->param_size_out.val)
-                        *args->param_size_out.val = info->DataLength;
-                }
-                else
-                    status = STATUS_BUFFER_TOO_SMALL;
-	        }
         }
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
@@ -1524,8 +1496,6 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 
     if (name)
         Mem_Free(name, name_len);
-    if (data)
-        Mem_Free(data, data_len);
 
     if(handle)
         ZwClose(handle);

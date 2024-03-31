@@ -63,6 +63,7 @@ struct _PATTERN {
     // allocated as part of this PATTERN object
     struct {
         BOOLEAN hex;
+        BOOLEAN no_bs;
         USHORT len;
         WCHAR *ptr;
     } cons[0];
@@ -100,6 +101,9 @@ _Check_return_ _CRTIMP long   __cdecl wcstol(_In_z_ const wchar_t *_Str, _Out_op
 static const WCHAR *Pattern_wcsnstr(
     const WCHAR *hstr, const WCHAR *nstr, int nlen);
 
+static const WCHAR *Pattern_wcsnstr_ex(
+    const WCHAR *hstr, const WCHAR *nstr, int nlen, int no_bs);
+
 
 //---------------------------------------------------------------------------
 // Variables
@@ -125,6 +129,7 @@ _FX PATTERN *Pattern_Create(
     PATTERN *pat;
     WCHAR *optr;
     BOOLEAN any_hex_cons;
+    ULONG start_count;
 
     //
     // count number of constant parts in the input string, and
@@ -190,8 +195,11 @@ _FX PATTERN *Pattern_Create(
     iptr = string;
     while (iptr) {
 
-        while (*iptr == L'*')
+        start_count = num_cons > 0 ? 1 : 0;
+        while (*iptr == L'*') {
             ++iptr;
+            ++start_count;
+        }
         iptr2 = wcschr(iptr, L'*');
 
         if (iptr2) {
@@ -217,6 +225,8 @@ _FX PATTERN *Pattern_Create(
                 pat->cons[num_cons].hex = TRUE;
             } else
                 pat->cons[num_cons].hex = FALSE;
+
+            pat->cons[num_cons].no_bs = start_count == 2;
 
             ++num_cons;
             optr += len_ptr + 1;
@@ -404,9 +414,9 @@ _FX int Pattern_Match2(
 
         while (1) {
 
-            const WCHAR *ptr = Pattern_wcsnstr(
+            const WCHAR *ptr = Pattern_wcsnstr_ex(
                 string + str_index,
-                pat->cons[con_index].ptr, pat->cons[con_index].len);
+                pat->cons[con_index].ptr, pat->cons[con_index].len, pat->cons[con_index].no_bs);
 
             if (! ptr) {
 
@@ -608,6 +618,18 @@ _FX int Pattern_wcstol(const WCHAR *text, WCHAR **endptr)
 _FX const WCHAR *Pattern_wcsnstr(
     const WCHAR *hstr, const WCHAR *nstr, int nlen)
 {
+    return Pattern_wcsnstr_ex(hstr, nstr, nlen, FALSE);
+}
+
+
+//---------------------------------------------------------------------------
+// Pattern_wcsnstr_ex
+//---------------------------------------------------------------------------
+
+
+_FX const WCHAR *Pattern_wcsnstr_ex(
+    const WCHAR *hstr, const WCHAR *nstr, int nlen, int no_bs)
+{
     int i;
     while (*hstr) {
         if (*hstr == *nstr || *nstr == L'?') {
@@ -619,6 +641,8 @@ _FX const WCHAR *Pattern_wcsnstr(
             if (i == nlen)
                 return hstr;
         }
+        if (no_bs && *hstr == L'\\')
+            break;
         ++hstr;
     }
     return NULL;

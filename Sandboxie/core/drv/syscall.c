@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@
 #include "conf.h"
 #include "common/pattern.h"
 #include "core/low/lowdata.h"
+#include "dyn_data.h"
 
 
 //---------------------------------------------------------------------------
@@ -564,7 +565,7 @@ _FX void Syscall_ErrorForAsciiName(const UCHAR *name_a)
 //---------------------------------------------------------------------------
 // Syscall_Invoke
 //---------------------------------------------------------------------------
-extern unsigned int g_TrapFrameOffset;
+
 
 NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG count, void* args);
 
@@ -705,9 +706,10 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
             || entry->handler3_func_support_procmon(proc, entry, user_args)
             )
         {
-            if (g_TrapFrameOffset) {
+            // $Offset$
+            if (Dyndata_Active && Dyndata_Config.TrapFrame_offset) {
 
-                pTrapFrame = (PKTRAP_FRAME) *(ULONG_PTR*)((UCHAR*)pThread + g_TrapFrameOffset);
+                pTrapFrame = (PKTRAP_FRAME) *(ULONG_PTR*)((UCHAR*)pThread + Dyndata_Config.TrapFrame_offset);
                 if (pTrapFrame) {
                     ret = pTrapFrame->Rip;
                     UserStack = pTrapFrame->Rsp;
@@ -730,12 +732,12 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         //{
         //    if (strcmp(entry->name, "AlpcSendWaitReceivePort") == 0)
         //    {
-        //        HANDLE  hConnection;
-        //        hConnection = (HANDLE*)user_args[0];
+        //        HANDLE  hHandle;
+        //        hHandle = (HANDLE*)user_args[0];
         //        DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_ERROR_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, handle = %X >>>>>>\n",
         //            PsGetCurrentProcessId(), PsGetCurrentThreadId(),
         //            entry->name,
-        //            hConnection);
+        //            hHandle);
         //    }
         //}
 
@@ -751,22 +753,22 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
         // Debug tip. Display all Alpc/Rpc here.
 
+        HANDLE  hHandle = NULL;
+        UNICODE_STRING* puStr = NULL;
+
         if (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))
         {
-            HANDLE  hConnection = NULL;
-            UNICODE_STRING* puStr = NULL;
-
             if ((strcmp(entry->name, "ConnectPort") == 0) ||
                 (strcmp(entry->name, "AlpcConnectPort") == 0) )
             {
-                hConnection = *(HANDLE*)user_args[0];
+                hHandle = *(HANDLE*)user_args[0];
                 puStr = (UNICODE_STRING*)user_args[1];
 
                 //DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_INFO_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, '%.*S', status = 0x%X, handle = %X\n",
                 //    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
                 //    entry->name,
                 //    (puStr->Length / 2), puStr->Buffer,
-                //    status, hConnection);
+                //    status, hHandle);
                 //if (puStr && puStr->Buffer && wcsstr(puStr->Buffer, L"\\RPC Control\\LRPC-"))
                 //{
                     //int i = 0;          // place breakpoint here if you want to debug a particular port
@@ -775,7 +777,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
             else if ( (strcmp(entry->name, "AlpcCreatePort") == 0) ||
                 (strcmp(entry->name, "AlpcConnectPortEx") == 0) )
             {
-                hConnection = *(HANDLE*)user_args[0];
+                hHandle = *(HANDLE*)user_args[0];
                 POBJECT_ATTRIBUTES  pObjectAttributes = (POBJECT_ATTRIBUTES)user_args[1];
                 if (pObjectAttributes)
                     puStr = (UNICODE_STRING*)pObjectAttributes->ObjectName;
@@ -784,7 +786,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
                 //    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
                 //    entry->name,
                 //    (puStr->Length / 2), puStr->Buffer,
-                //    status, hConnection);
+                //    status, hHandle);
             }
             else if ((strcmp(entry->name, "ReplyWaitReceivePort") == 0) ||
                 (strcmp(entry->name, "ReceiveMessagePort") == 0) ||
@@ -794,12 +796,12 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
                 // these 2 APIs will generate a lot of output if we don't check status
                 ((status != STATUS_SUCCESS) && ((strcmp(entry->name, "AlpcSendWaitReceivePort") == 0) || (strcmp(entry->name, "RequestWaitReplyPort") == 0))) )
             {
-                hConnection = (HANDLE*)user_args[0];
+                hHandle = (HANDLE*)user_args[0];
 
                 //DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_INFO_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, status = 0x%X, handle = %X\n",
                 //    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
                 //    entry->name,
-                //    status, hConnection);
+                //    status, hHandle);
             }
             else if (strcmp(entry->name, "OpenDirectoryObject") == 0)
             {
@@ -807,25 +809,50 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
                 if (pObjectAttributes)
                     puStr = (UNICODE_STRING*)pObjectAttributes->ObjectName;
             }
+        }
 
-            if (puStr || hConnection)
+        if (proc->file_trace & (TRACE_ALLOW | TRACE_DENY))
+        {
+            if (strcmp(entry->name, "QueryFullAttributesFile") == 0)
             {
-                WCHAR trace_str[128];
-                if (hConnection) {
-                    RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
-                        max(strlen(entry->name), 64), entry->name, status, hConnection);
-                }
-                else {
-                    RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X; ", //59 chars + entry->name
-                        max(strlen(entry->name), 64), entry->name, status);
-                }
-                const WCHAR* strings[4] = { trace_str, trace_str + (entry->name_len + 2), puStr ? puStr->Buffer : NULL, NULL };
-                ULONG lengths[4] = {entry->name_len, wcslen(trace_str) - (entry->name_len + 4), puStr ? puStr->Length / 2 : 0, 0 };
-                Session_MonitorPutEx(MONITOR_SYSCALL | (entry->approved ? MONITOR_OPEN : MONITOR_TRACE), 
-                    strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
-
-                traced = TRUE;
+                POBJECT_ATTRIBUTES  pObjectAttributes = (POBJECT_ATTRIBUTES)user_args[0];
+                if (pObjectAttributes)
+                    puStr = (UNICODE_STRING*)pObjectAttributes->ObjectName;
             }
+            else if (strcmp(entry->name, "QueryInformationFile") == 0)
+            {
+                hHandle = (HANDLE*)user_args[0];
+            }
+            else if (strcmp(entry->name, "CreateFile") == 0 || strcmp(entry->name, "OpenFile") == 0)
+            {
+                hHandle = *(HANDLE*)user_args[0];
+                POBJECT_ATTRIBUTES  pObjectAttributes = (POBJECT_ATTRIBUTES)user_args[2];
+                if (pObjectAttributes)
+                    puStr = (UNICODE_STRING*)pObjectAttributes->ObjectName;
+            }
+            else if (strcmp(entry->name, "FsControlFile") == 0 || strcmp(entry->name, "Close") == 0)
+            {
+                hHandle = (HANDLE*)user_args[0];
+            }
+        }
+
+        if (puStr || hHandle)
+        {
+            WCHAR trace_str[128];
+            if (hHandle) {
+                RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
+                    max(strlen(entry->name), 64), entry->name, status, hHandle);
+            }
+            else {
+                RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X; ", //59 chars + entry->name
+                    max(strlen(entry->name), 64), entry->name, status);
+            }
+            const WCHAR* strings[4] = { trace_str, trace_str + (entry->name_len + 2), puStr ? puStr->Buffer : NULL, NULL };
+            ULONG lengths[4] = {entry->name_len, wcslen(trace_str) - (entry->name_len + 4), puStr ? puStr->Length / 2 : 0, 0 };
+            Session_MonitorPutEx(MONITOR_SYSCALL | (entry->approved ? MONITOR_OPEN : MONITOR_TRACE), 
+                strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+
+            traced = TRUE;
         }
 
         if (!traced && ((proc->call_trace & TRACE_ALLOW) || ((status != STATUS_SUCCESS) && (proc->call_trace & TRACE_DENY))))
@@ -845,7 +872,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         }
 
 #ifdef _M_AMD64
-        if (g_TrapFrameOffset) {
+        if (Dyndata_Active && Dyndata_Config.TrapFrame_offset) {
             if (pTrapFrame) {
                 pTrapFrame->Rip = ret;
                 pTrapFrame->Rsp = UserStack;

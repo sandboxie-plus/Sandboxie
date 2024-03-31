@@ -4,8 +4,8 @@ REM echo folder: %~dp0
 REM echo arch: %1
 
 set ORIGINAL_FOLDER=%cd%
-set WIN32_QT_VER=5.15.2
-set x64_QT_VER=5.15.2
+set WIN32_QT_VER=5.15.13
+set x64_QT_VER=5.15.13
 set ARM64_QT_VER=6.3.2
 
 IF "%3" == "" (

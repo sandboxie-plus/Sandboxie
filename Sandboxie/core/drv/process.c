@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@
 #include "common/my_version.h"
 #define KERNEL_MODE
 #include "verify.h"
+#include "dyn_data.h"
 
 
 //---------------------------------------------------------------------------
@@ -802,6 +803,23 @@ _FX PROCESS *Process_Create(
             Process_CreateTerminated(ProcessId, box->session_id);
             return NULL;
         }
+    }
+
+    //
+    // If we don't have valid Dyndata, we force NoSecurityIsolation=y on all boxes
+    // and issue a security warning MSG_1207
+    //
+
+    if (!Dyndata_Active && !proc->bAppCompartment) {
+
+        proc->bAppCompartment = TRUE;
+		proc->always_close_for_boxed = FALSE;
+		proc->dont_open_for_boxed = FALSE;
+		proc->protect_host_images = FALSE;
+
+        WCHAR info[12];
+        RtlStringCbPrintfW(info, sizeof(info), L"%d", Driver_OsBuild);
+        Log_Msg1(MSG_1207, info);
     }
 
     //

@@ -287,8 +287,8 @@ _FX ULONG File_GetPathFlags_internal(LIST* Root, const WCHAR* Path, WCHAR** pRel
         }
 
         //
-        // if we encounter a relocation previosue deletions on the path will be reset
-        // relocations are only allowed to exist for not deleted paths
+        // if we encounter a relocation, previous deletions on the path will be reset
+        // relocations are only allowed to exist for non-deleted paths
         //
 
         if ((Node->flags & FILE_RELOCATION_FLAG) != 0) {

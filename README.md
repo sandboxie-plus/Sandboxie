@@ -2,7 +2,7 @@
 
 [![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
 
-**Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history)).**
+[![Join our Discord Server](https://img.shields.io/badge/Join-Our%20Discord%20Server%20for%20bugs,%20feedback%20and%20more!-blue?style=for-the-badge&logo=discord)](https://discord.gg/S4tFu6Enne)
 
 |  System requirements  |      Release notes     |     Contribution guidelines   |      Security policy      |      Code of Conduct      |
 |         :---:         |          :---:         |          :---:                |          :---:            |          :---:            |
@@ -11,6 +11,8 @@
 Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
 
 Sandboxie allows you to create virtually unlimited sandboxes and run them alone or simultaneously to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
+
+**Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history)).**
 
 ## ⏬ Download
 
@@ -30,7 +32,7 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * More customization options for Start/Run and Internet access restrictions
   * Privacy mode sandboxes that protect user data from illegitimate access
   * Security enhanced sandboxes that restrict the availability of syscalls and endpoints
-  * Global hotkey to terminate all boxed processes
+  * Global hotkeys to suspend or terminate all boxed processes
   * A network firewall per sandbox which supports Windows Filtering Platform (WFP)
   * The list of sandboxes can be searched with the shortcut key Ctrl+F
   * A search function for Global Settings and Sandbox Options
@@ -40,6 +42,8 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Vintage View mode to reproduce the graphical appearance of Sandboxie Control
   * A troubleshooting wizard to assist users with their problems
   * An Add-on manager to extend or add functionality via additional components
+  * Protections of sandboxes against the host, including the prevention of taking screenshots
+  * A trigger system to perform actions, when a sandbox goes through different stages, like initialization, box start, termination or file recovery
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
@@ -72,7 +76,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 2013 - 2017         | Invincea Inc.    |
 | 2017 - 2020         | Sophos Group plc |
 | [Open-source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
-| 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/))    |
+| 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633))    |
 
 
 ## 📌 Project support / sponsorship
@@ -105,6 +109,8 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - offhub - Documentation additions / Code fixes / Collaborator
 - isaak654 - Templates / Documentation / Code fixes / Collaborator
 - typpos - UI additions / Documentation / Code fixes
+- Yeyixiao - Feature additions
+- Deezzir - Feature additions
 - okrc - Code fixes
 - Sapour - Code fixes
 - lmou523 - Code fixes
@@ -124,6 +130,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - Luro223 - Documentation additions
 - lwcorp - Documentation additions
 - wilders-soccerfan - Documentation additions
+- LumitoLuma - Qt5 patch and build script
 
 ## 🌏 Translators
 
@@ -134,8 +141,9 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - bastik-1001, APMichael - German
 - timinoun - Hungarian (provided by email)
 - isaak654, DerivativeOfLog7 - Italian
+- takahiro-itou - Japanese
 - VenusGirl - Korean
-- 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20))
+- 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=30))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - LumitoLuma, sebadamus - Spanish

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 #include "session.h"
 #include "api.h"
 #include "util.h"
+#include "dyn_data.h"
 
 
 //---------------------------------------------------------------------------
@@ -585,86 +586,19 @@ _FX NTSTATUS Thread_MyImpersonateClient(
     NTSTATUS status = PsImpersonateClient(ThreadObject, TokenObject,
                         CopyOnOpen, EffectiveOnly, SecurityIdentification);
 
-    // $Offset$ - Hard Offset Dependency
+    // $Offset$
 
     // ***** ImpersonationInfo_offset is the offset of ClientSecurity field in nt!ETHREAD structure *****
 
     if (NT_SUCCESS(status) && TokenObject) {
 
         ULONG ImpersonationInfo_offset = 0;
+        if(Dyndata_Active)
+            ImpersonationInfo_offset = Dyndata_Config.ImpersonationData_offset;
 
-#ifdef _M_ARM64
+#ifdef XP_SUPPORT
+#ifndef  _WIN64
 
-        if (Driver_OsBuild <= 19041) // win 10
-            ImpersonationInfo_offset = 0x4C8;
-
-        else // win 11
-            ImpersonationInfo_offset = 0x518;
-
-#elif _WIN64
-
-        // offset of ClientSecurity field in nt!ETHREAD structure
-
-        if (Driver_OsVersion == DRIVER_WINDOWS_VISTA)
-            ImpersonationInfo_offset = 0x3B0;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_7)
-            ImpersonationInfo_offset = 0x3E0;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_8)
-            ImpersonationInfo_offset = 0x3C8;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_81)
-            ImpersonationInfo_offset = 0x650;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_10) {
-            if (Driver_OsBuild < 14316)
-                ImpersonationInfo_offset = 0x658;
-            else if (Driver_OsBuild < 15031)
-                ImpersonationInfo_offset = 0x660;
-            else if (Driver_OsBuild < 18312)
-                ImpersonationInfo_offset = 0x668;
-            else if (Driver_OsBuild <= 18363)
-                ImpersonationInfo_offset = 0x678;
-            else if (Driver_OsBuild < 18980)
-                ImpersonationInfo_offset = 0x688;
-            else if (Driver_OsBuild < 20348)
-                ImpersonationInfo_offset = 0x4a8;
-            else
-                ImpersonationInfo_offset = 0x4f8;
-        }
-#else ! _WIN64
-
-        if (Driver_OsVersion == DRIVER_WINDOWS_XP)
-            ImpersonationInfo_offset = 0x20C;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_2003)
-            ImpersonationInfo_offset = 0x204;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_VISTA)
-            ImpersonationInfo_offset = 0x228;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_7)
-            ImpersonationInfo_offset = 0x248;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_8)
-            ImpersonationInfo_offset = 0x230;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_81)
-            ImpersonationInfo_offset = 0x380;
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_10) {
-            if (Driver_OsBuild < 14965)
-                ImpersonationInfo_offset = 0x390;
-            else if (Driver_OsBuild <= 18309) 
-                ImpersonationInfo_offset = 0x398;
-            else  if (Driver_OsBuild < 18980) 
-                ImpersonationInfo_offset = 0x3A0;
-            else if (Driver_OsBuild < 20348)
-                ImpersonationInfo_offset = 0x2c8;
-            else
-                ImpersonationInfo_offset = 0x2f0;
-        }
         //
         // on Windows XP (which is supported only in a 32-bit)
         // impersonation information is a structure
@@ -695,6 +629,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
         }
 
 #endif _WIN64
+#endif
 
         //
         // on Windows Vista and later, impersonation info is a ULONG_PTR

@@ -113,6 +113,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
@@ -123,6 +124,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">
@@ -144,6 +146,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
@@ -153,6 +156,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">

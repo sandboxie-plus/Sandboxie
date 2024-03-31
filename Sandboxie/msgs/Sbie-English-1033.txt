@@ -98,6 +98,14 @@ SBIE1152 Trampoline allocation failed %2
 SBIE1153 Sandboxie initialization failed.  Close all programs and then re-install Sandboxie  OR  restart your computer.
 .
 
+1205;evt;pop;err;01
+SBIE1205 Invalid DynData found in registry, error: %2
+.
+
+1206;evt;pop;err;01
+SBIE1206 Your Windows build (%2) is not yet supported by sandboxie, error: %3
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -118,6 +126,10 @@ SBIE1203 Cannot build path list (error in %2)
 
 1204;pop;err;01
 SBIE1204 Sandbox creation failed for %3 %2
+.
+
+1207;pop;err;01
+SBIE1207 Your Windows build (%2) is not yet supported by Sandboxie, which means applications will run without security isolation!
 .
 
 1211;pop;err;01
@@ -997,9 +1009,9 @@ Delete command failed:  %0
 # You have installed Sandboxie more than 30 days ago.
 # .
 
-# 3232;txt;01
-# Personal use of Sandboxie is permitted free of charge for as long as you wish.
-# .
+#3232;txt;01
+#Personal use of Sandboxie is permitted free of charge for as long as you wish.
+#.
 
 # 3233;txt;01
 # However, the free version will now pause for a few seconds.

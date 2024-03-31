@@ -15,6 +15,13 @@ include(uglobalhotkey-headers.pri)
 include(uglobalhotkey-sources.pri)
 include(uglobalhotkey-libs.pri)
 
+CONFIG(release, debug|release):{
+QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
+QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
+}
+
+QMAKE_CXXFLAGS_RELEASE -= -O2
+
 MY_ARCH=$$(build_arch)
 equals(MY_ARCH, ARM64) {
 #  message("Building ARM64")

@@ -101,7 +101,7 @@ private slots:
 	void OnAddLingering();
 	void OnDelStopProg();
 	void OnShowStopTmpl()			{ LoadStopTmpl(true); }	
-	void OnStopChanged(QTreeWidgetItem* pItem, int Index) { m_StopChanged = true;  OnOptChanged(); }
+	void OnStopChanged()			{ m_StopChanged = true;  OnOptChanged(); }
 	void OnAddLeader();
 	void OnDelLeader();
 	void OnShowLeaderTmpl()			{ LoadLeaderTmpl(true); }	
@@ -191,6 +191,7 @@ private slots:
 	void OnAddAutoExec();
 	void OnAddRecoveryCheck();
 	void OnAddDeleteCmd();
+	void OnAddTerminateCmd();
 	void OnDelAuto();
 
 	void OnAddProcess();
@@ -334,7 +335,8 @@ public:
 		eOnStartSvc,
 		eAutoExec,
 		eRecoveryCheck,
-		eDeleteCmd
+		eDeleteCmd,
+		eTerminateCmd
 	};
 
 	static QString AccessTypeToName(EAccessEntry Type);

@@ -24,7 +24,7 @@ class CScriptManager;
 class CAddonManager;
 
 struct ToolBarAction {
-	// Identifier of action stored in ini. Empty for separator.	
+	// Identifier of action stored in ini. Empty for separator.
 	QString scriptName = "";
 
 	// Not owned. Null for special cases.
@@ -104,7 +104,7 @@ public:
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
-	
+
 	bool				CheckCertificate(QWidget* pWidget, int iType = 0);
 
 	bool				IsAlwaysOnTop() const;
@@ -156,10 +156,10 @@ protected:
 
 	CScriptManager*		m_SbieScripts;
 	CAddonManager*		m_AddonManager;
-	
+
 	QMap<CSbieProgress*, QPair<CSbieProgressPtr, QPointer<QWidget>>> m_pAsyncProgress;
 
-	QStringList			m_MissingTemplates;
+	QMap<QString, QSet<QString>> m_MissingTemplates;
 
 	enum EBoxColors
 	{
@@ -183,7 +183,7 @@ protected:
 	struct SSbieMsg {
 		QDateTime TimeStamp;
 		quint32 MsgCode;
-		QStringList MsgData; 
+		QStringList MsgData;
 		QString ProcessName;
 	};
 	QVector<SSbieMsg>	m_MessageLog;
@@ -251,6 +251,7 @@ private slots:
 
 	void				OnSandBoxAction();
 	void				OnSettingsAction();
+	void				OnPauseAll();
 	void				OnEmptyAll();
 	void				OnLockAll();
 	void				OnWndFinder();
@@ -278,6 +279,8 @@ private slots:
 	void				OnSymbolStatus(const QString& Message);
 
 	void				CheckForUpdates(bool bManual = true);
+
+	void				OnRestartAsAdmin();
 
 	void				OnExit();
 	void				OnHelp();
@@ -366,10 +369,12 @@ private:
 	QHBoxLayout*		m_pMenuLayout;
 
 	QMenu*				m_pMenuFile;
+	QAction*			m_pRestart;
 	QAction*			m_pRunBoxed;
 	QAction*			m_pNewBox;
 	QAction*			m_pNewGroup;
 	QAction*			m_pImportBox;
+	QAction*			m_pPauseAll;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pLockAll;
 	QAction*			m_pWndFinder;

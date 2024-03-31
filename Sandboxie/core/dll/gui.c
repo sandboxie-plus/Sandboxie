@@ -50,168 +50,168 @@ BOOLEAN Gui_UseProxyService = TRUE;
 //---------------------------------------------------------------------------
 
 
-        P_SetThreadDesktop          __sys_SetThreadDesktop          = NULL;
-        P_SwitchDesktop             __sys_SwitchDesktop             = NULL;
+P_SetThreadDesktop          __sys_SetThreadDesktop          = NULL;
+P_SwitchDesktop             __sys_SwitchDesktop             = NULL;
 
-        P_UserHandleGrantAccess     __sys_UserHandleGrantAccess     = NULL;
+P_UserHandleGrantAccess     __sys_UserHandleGrantAccess     = NULL;
 
-        P_GetFocus                  __sys_GetFocus                  = NULL;
+P_GetFocus                  __sys_GetFocus                  = NULL;
 
-        P_ShowWindow                __sys_ShowWindow                = NULL;
+P_ShowWindow                __sys_ShowWindow                = NULL;
 
-        P_ExitWindowsEx             __sys_ExitWindowsEx             = NULL;
+P_ExitWindowsEx             __sys_ExitWindowsEx             = NULL;
 
-        P_EndTask                   __sys_EndTask                   = NULL;
+P_EndTask                   __sys_EndTask                   = NULL;
 
-        P_ConsoleControl            __sys_ConsoleControl            = NULL;
+P_ConsoleControl            __sys_ConsoleControl            = NULL;
 
-        P_SwapMouseButton           __sys_SwapMouseButton           = NULL;
-        P_SetDoubleClickTime        __sys_SetDoubleClickTime        = NULL;
+P_SwapMouseButton           __sys_SwapMouseButton           = NULL;
+P_SetDoubleClickTime        __sys_SetDoubleClickTime        = NULL;
 
-        P_AnimateWindow             __sys_AnimateWindow             = NULL;
+P_AnimateWindow             __sys_AnimateWindow             = NULL;
 
-        P_GetClipboardFormatName    __sys_GetClipboardFormatNameA   = NULL;
-        P_GetClipboardFormatName    __sys_GetClipboardFormatNameW   = NULL;
+P_GetClipboardFormatName    __sys_GetClipboardFormatNameA   = NULL;
+P_GetClipboardFormatName    __sys_GetClipboardFormatNameW   = NULL;
 
-        P_RegisterClipboardFormat   __sys_RegisterClipboardFormatA  = NULL;
-        P_RegisterClipboardFormat   __sys_RegisterClipboardFormatW  = NULL;
+P_RegisterClipboardFormat   __sys_RegisterClipboardFormatA  = NULL;
+P_RegisterClipboardFormat   __sys_RegisterClipboardFormatW  = NULL;
 
-        P_RealGetWindowClass        __sys_RealGetWindowClassA       = NULL;
-        P_RealGetWindowClass        __sys_RealGetWindowClassW       = NULL;
+P_RealGetWindowClass        __sys_RealGetWindowClassA       = NULL;
+P_RealGetWindowClass        __sys_RealGetWindowClassW       = NULL;
 
-        P_GetWindowText             __sys_GetWindowTextA            = NULL;
-        P_GetWindowText             __sys_GetWindowTextW            = NULL;
+P_GetWindowText             __sys_GetWindowTextA            = NULL;
+P_GetWindowText             __sys_GetWindowTextW            = NULL;
 
-        P_CallWindowProc            __sys_CallWindowProcA           = NULL;
-        P_CallWindowProc            __sys_CallWindowProcW           = NULL;
+P_CallWindowProc            __sys_CallWindowProcA           = NULL;
+P_CallWindowProc            __sys_CallWindowProcW           = NULL;
 
-        P_CreateWindowEx            __sys_CreateWindowExA           = NULL;
-        P_CreateWindowEx            __sys_CreateWindowExW           = NULL;
+P_CreateWindowEx            __sys_CreateWindowExA           = NULL;
+P_CreateWindowEx            __sys_CreateWindowExW           = NULL;
 
-        P_DefWindowProc             __sys_DefWindowProcA            = NULL;
-        P_DefWindowProc             __sys_DefWindowProcW            = NULL;
+P_DefWindowProc             __sys_DefWindowProcA            = NULL;
+P_DefWindowProc             __sys_DefWindowProcW            = NULL;
 
-        P_ActivateKeyboardLayout    __sys_ActivateKeyboardLayout    = NULL;
+P_ActivateKeyboardLayout    __sys_ActivateKeyboardLayout    = NULL;
 
-        P_MoveWindow                __sys_MoveWindow                = NULL;
-        P_SetWindowPos              __sys_SetWindowPos              = NULL;
+P_MoveWindow                __sys_MoveWindow                = NULL;
+P_SetWindowPos              __sys_SetWindowPos              = NULL;
 
-        P_GetWindowInfo             __sys_GetWindowInfo             = NULL;
+P_GetWindowInfo             __sys_GetWindowInfo             = NULL;
 
-        P_RegisterClass             __sys_RegisterClassA            = NULL;
-        P_RegisterClass             __sys_RegisterClassW            = NULL;
-        P_RegisterClass             __sys_RegisterClassExA          = NULL;
-        P_RegisterClass             __sys_RegisterClassExW          = NULL;
+P_RegisterClass             __sys_RegisterClassA            = NULL;
+P_RegisterClass             __sys_RegisterClassW            = NULL;
+P_RegisterClass             __sys_RegisterClassExA          = NULL;
+P_RegisterClass             __sys_RegisterClassExW          = NULL;
 
-        P_UnregisterClass           __sys_UnregisterClassA          = NULL;
-        P_UnregisterClass           __sys_UnregisterClassW          = NULL;
+P_UnregisterClass           __sys_UnregisterClassA          = NULL;
+P_UnregisterClass           __sys_UnregisterClassW          = NULL;
 
-        P_GetClassInfo              __sys_GetClassInfoA             = NULL;
-        P_GetClassInfo              __sys_GetClassInfoW             = NULL;
-        P_GetClassInfo              __sys_GetClassInfoExA           = NULL;
-        P_GetClassInfo              __sys_GetClassInfoExW           = NULL;
+P_GetClassInfo              __sys_GetClassInfoA             = NULL;
+P_GetClassInfo              __sys_GetClassInfoW             = NULL;
+P_GetClassInfo              __sys_GetClassInfoExA           = NULL;
+P_GetClassInfo              __sys_GetClassInfoExW           = NULL;
 
-        P_GetClassName              __sys_GetClassNameA             = NULL;
-        P_GetClassName              __sys_GetClassNameW             = NULL;
+P_GetClassName              __sys_GetClassNameA             = NULL;
+P_GetClassName              __sys_GetClassNameW             = NULL;
 
-        P_EnumWindows               __sys_EnumWindows               = NULL;
-        P_EnumChildWindows          __sys_EnumChildWindows          = NULL;
-        P_EnumThreadWindows         __sys_EnumThreadWindows         = NULL;
-        P_EnumDesktopWindows        __sys_EnumDesktopWindows        = NULL;
+P_EnumWindows               __sys_EnumWindows               = NULL;
+P_EnumChildWindows          __sys_EnumChildWindows          = NULL;
+P_EnumThreadWindows         __sys_EnumThreadWindows         = NULL;
+P_EnumDesktopWindows        __sys_EnumDesktopWindows        = NULL;
 
-        P_EnumDesktops              __sys_EnumDesktopsA             = NULL;
-        P_EnumDesktops              __sys_EnumDesktopsW             = NULL;
+P_EnumDesktops              __sys_EnumDesktopsA             = NULL;
+P_EnumDesktops              __sys_EnumDesktopsW             = NULL;
 
-        P_FindWindow                __sys_FindWindowA               = NULL;
-        P_FindWindow                __sys_FindWindowW               = NULL;
+P_FindWindow                __sys_FindWindowA               = NULL;
+P_FindWindow                __sys_FindWindowW               = NULL;
 
-        P_FindWindowEx              __sys_FindWindowExA             = NULL;
-        P_FindWindowEx              __sys_FindWindowExW             = NULL;
+P_FindWindowEx              __sys_FindWindowExA             = NULL;
+P_FindWindowEx              __sys_FindWindowExW             = NULL;
 
-        P_GetDesktopWindow          __sys_GetDesktopWindow          = NULL;
-        P_GetShellWindow            __sys_GetShellWindow            = NULL;
+P_GetDesktopWindow          __sys_GetDesktopWindow          = NULL;
+P_GetShellWindow            __sys_GetShellWindow            = NULL;
 
-        P_GetProp                   __sys_GetPropA                  = NULL;
-        P_GetProp                   __sys_GetPropW                  = NULL;
+P_GetProp                   __sys_GetPropA                  = NULL;
+P_GetProp                   __sys_GetPropW                  = NULL;
 
-        P_SetProp                   __sys_SetPropA                  = NULL;
-        P_SetProp                   __sys_SetPropW                  = NULL;
+P_SetProp                   __sys_SetPropA                  = NULL;
+P_SetProp                   __sys_SetPropW                  = NULL;
 
-        P_RemoveProp                __sys_RemovePropA               = NULL;
-        P_RemoveProp                __sys_RemovePropW               = NULL;
+P_RemoveProp                __sys_RemovePropA               = NULL;
+P_RemoveProp                __sys_RemovePropW               = NULL;
 
-        P_GetWindowLong             __sys_GetWindowLongA            = NULL;
-        P_GetWindowLong             __sys_GetWindowLongW            = NULL;
+P_GetWindowLong             __sys_GetWindowLongA            = NULL;
+P_GetWindowLong             __sys_GetWindowLongW            = NULL;
 
-        P_SetWindowLong             __sys_SetWindowLongA            = NULL;
-        P_SetWindowLong             __sys_SetWindowLongW            = NULL;
+P_SetWindowLong             __sys_SetWindowLongA            = NULL;
+P_SetWindowLong             __sys_SetWindowLongW            = NULL;
 
-        P_GetClassLong              __sys_GetClassLongA             = NULL;
-        P_GetClassLong              __sys_GetClassLongW             = NULL;
+P_GetClassLong              __sys_GetClassLongA             = NULL;
+P_GetClassLong              __sys_GetClassLongW             = NULL;
 
 #ifdef _WIN64
 
-        P_GetWindowLongPtr          __sys_GetWindowLongPtrA         = NULL;
-        P_GetWindowLongPtr          __sys_GetWindowLongPtrW         = NULL;
+P_GetWindowLongPtr          __sys_GetWindowLongPtrA         = NULL;
+P_GetWindowLongPtr          __sys_GetWindowLongPtrW         = NULL;
 
-        P_SetWindowLongPtr          __sys_SetWindowLongPtrA         = NULL;
-        P_SetWindowLongPtr          __sys_SetWindowLongPtrW         = NULL;
+P_SetWindowLongPtr          __sys_SetWindowLongPtrA         = NULL;
+P_SetWindowLongPtr          __sys_SetWindowLongPtrW         = NULL;
 
-        P_GetClassLongPtr           __sys_GetClassLongPtrA          = NULL;
-        P_GetClassLongPtr           __sys_GetClassLongPtrW          = NULL;
+P_GetClassLongPtr           __sys_GetClassLongPtrA          = NULL;
+P_GetClassLongPtr           __sys_GetClassLongPtrW          = NULL;
 
 #endif _WIN64
 
-        P_SetWindowsHookEx          __sys_SetWindowsHookExA         = NULL;
-        P_SetWindowsHookEx          __sys_SetWindowsHookExW         = NULL;
+P_SetWindowsHookEx          __sys_SetWindowsHookExA         = NULL;
+P_SetWindowsHookEx          __sys_SetWindowsHookExW         = NULL;
 
-        P_UnhookWindowsHookEx       __sys_UnhookWindowsHookEx       = NULL;
+P_UnhookWindowsHookEx       __sys_UnhookWindowsHookEx       = NULL;
 
-        P_CreateDialogParam         __sys_CreateDialogParamA        = NULL;
-        P_CreateDialogParam         __sys_CreateDialogParamW        = NULL;
+P_CreateDialogParam         __sys_CreateDialogParamA        = NULL;
+P_CreateDialogParam         __sys_CreateDialogParamW        = NULL;
 
-        P_CreateDialogIndirectParam __sys_CreateDialogIndirectParamA
-                                                                    = NULL;
-        P_CreateDialogIndirectParam __sys_CreateDialogIndirectParamW
-                                                                    = NULL;
-        P_CreateDialogIndirectParamAorW
-                                    __sys_CreateDialogIndirectParamAorW
-                                                                    = NULL;
+P_CreateDialogIndirectParam __sys_CreateDialogIndirectParamA
+                                                            = NULL;
+P_CreateDialogIndirectParam __sys_CreateDialogIndirectParamW
+                                                            = NULL;
+P_CreateDialogIndirectParamAorW
+                            __sys_CreateDialogIndirectParamAorW
+                                                            = NULL;
 
-        P_DialogBoxParam            __sys_DialogBoxParamA           = NULL;
-        P_DialogBoxParam            __sys_DialogBoxParamW           = NULL;
+P_DialogBoxParam            __sys_DialogBoxParamA           = NULL;
+P_DialogBoxParam            __sys_DialogBoxParamW           = NULL;
 
-        P_DialogBoxIndirectParam    __sys_DialogBoxIndirectParamA   = NULL;
-        P_DialogBoxIndirectParam    __sys_DialogBoxIndirectParamW   = NULL;
+P_DialogBoxIndirectParam    __sys_DialogBoxIndirectParamA   = NULL;
+P_DialogBoxIndirectParam    __sys_DialogBoxIndirectParamW   = NULL;
 
-        P_DialogBoxIndirectParamAorW
-                                    __sys_DialogBoxIndirectParamAorW
-                                                                    = NULL;
+P_DialogBoxIndirectParamAorW
+                            __sys_DialogBoxIndirectParamAorW
+                                                            = NULL;
 
-        P_LoadString                __sys_LoadStringW               = NULL;
+P_LoadString                __sys_LoadStringW               = NULL;
 
-        P_RegisterDeviceNotification
-                                    __sys_RegisterDeviceNotificationA
-                                                                    = NULL;
-        P_RegisterDeviceNotification
-                                    __sys_RegisterDeviceNotificationW
-                                                                    = NULL;
-        P_UnregisterDeviceNotification
-                                    __sys_UnregisterDeviceNotification
-                                                                    = NULL;
-        P_MsgWaitForMultipleObjects __sys_MsgWaitForMultipleObjects = NULL;
+P_RegisterDeviceNotification
+                            __sys_RegisterDeviceNotificationA
+                                                            = NULL;
+P_RegisterDeviceNotification
+                            __sys_RegisterDeviceNotificationW
+                                                            = NULL;
+P_UnregisterDeviceNotification
+                            __sys_UnregisterDeviceNotification
+                                                            = NULL;
+P_MsgWaitForMultipleObjects __sys_MsgWaitForMultipleObjects = NULL;
 
-        P_PeekMessage               __sys_PeekMessageA              = NULL;
-        P_PeekMessage               __sys_PeekMessageW              = NULL;
+P_PeekMessage               __sys_PeekMessageA              = NULL;
+P_PeekMessage               __sys_PeekMessageW              = NULL;
 
-        P_MessageBoxW               __sys_MessageBoxW               = NULL;
-        P_MessageBoxExW             __sys_MessageBoxExW             = NULL;
+P_MessageBoxW               __sys_MessageBoxW               = NULL;
+P_MessageBoxExW             __sys_MessageBoxExW             = NULL;
 
-        P_WaitForInputIdle          __sys_WaitForInputIdle          = NULL;
+P_WaitForInputIdle          __sys_WaitForInputIdle          = NULL;
 
-        P_AttachThreadInput         __sys_AttachThreadInput         = NULL;
+P_AttachThreadInput         __sys_AttachThreadInput         = NULL;
 
-        P_GetOpenFileNameW          __sys_GetOpenFileNameW          = NULL;
+P_GetOpenFileNameW          __sys_GetOpenFileNameW          = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -262,6 +262,8 @@ static HWND Gui_CreateWindowExW(
 
 static BOOLEAN Gui_CanForwardMsg(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam/*, LRESULT* plResult*/);
+
+static VOID Gui_ProtectScreen(HWND hWnd);
 
 static LRESULT Gui_DefWindowProcA(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -332,6 +334,10 @@ static DWORD Gui_WaitForInputIdle(HANDLE hProcess, DWORD dwMilliseconds);
 
 static BOOL Gui_AttachThreadInput(DWORD idAttach, DWORD idAttachTo, BOOL fAttach);
 
+static HDC Gui_CreateDCA(LPCSTR pwszDriver, LPCSTR pwszDevice, LPCSTR pszPort, const DEVMODEA* pdm);
+
+static HDC Gui_CreateDCW(LPCWSTR pwszDriver, LPCWSTR pwszDevice, LPCWSTR pszPort, const DEVMODEW* pdm);
+
 
 //---------------------------------------------------------------------------
 // GUI_IMPORT
@@ -366,6 +372,12 @@ _FX BOOLEAN Gui_Init(HMODULE module)
 
     const UCHAR *ProcName;
 
+    Gui_UseProtectScreen = SbieApi_QueryConfBool(NULL, L"IsProtectScreen", FALSE);
+
+    Gui_UseBlockCapture = SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE);
+    if (Gui_UseBlockCapture)
+        Gdi_InitDCCache();
+
     if (! Gdi_InitZero(module))       // only if Gdi_Init was not called yet
         return FALSE;
 
@@ -380,7 +392,12 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     Gui_UseProxyService = !Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
     // NoSbieDesk END
 
-    GUI_IMPORT___(GetWindowThreadProcessId);
+	GUI_IMPORT___(PrintWindow);
+	GUI_IMPORT___(GetWindowDC);
+	GUI_IMPORT___(GetDC);
+	GUI_IMPORT___(GetDCEx);
+	GUI_IMPORT___(ReleaseDC);
+	GUI_IMPORT___(GetWindowThreadProcessId);
     GUI_IMPORT___(SetThreadDesktop);
     GUI_IMPORT___(SwitchDesktop);
     GUI_IMPORT___(UserHandleGrantAccess);
@@ -505,6 +522,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT_AW(PostMessage);
     GUI_IMPORT_AW(PostThreadMessage);
     GUI_IMPORT_AW(DispatchMessage);
+	GUI_IMPORT___(ShutdownBlockReasonCreate)
 
     GUI_IMPORT_AW(SetWindowsHookEx);
     GUI_IMPORT___(UnhookWindowsHookEx);
@@ -1386,6 +1404,9 @@ _FX HWND Gui_CreateWindowExW(
 
     --TlsData->gui_create_window;
 
+    if (hwndResult && !hWndParent && Gui_UseProtectScreen)
+        Gui_ProtectScreen(hwndResult);
+
     //
     // replace window procedure
     //
@@ -1494,6 +1515,9 @@ _FX HWND Gui_CreateWindowExA(
 
     --TlsData->gui_create_window;
 
+    if (hwndResult && !hWndParent && Gui_UseProtectScreen)
+        Gui_ProtectScreen(hwndResult);
+
     //
     // replace window procedure
     //
@@ -1552,6 +1576,22 @@ _FX BOOLEAN Gui_CanForwardMsg(
 
 
 //---------------------------------------------------------------------------
+// Gui_ProtectScreen
+//---------------------------------------------------------------------------
+
+
+_FX VOID Gui_ProtectScreen(HWND hWnd)
+{
+    typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
+    static LPSETWINDOWDISPLAYAFFINITY pSetWindowDisplayAffinity = NULL;
+    if(!pSetWindowDisplayAffinity)
+        pSetWindowDisplayAffinity = (LPSETWINDOWDISPLAYAFFINITY)Ldr_GetProcAddrNew(DllName_user32, L"SetWindowDisplayAffinity", "SetWindowDisplayAffinity");
+    if (pSetWindowDisplayAffinity)
+        pSetWindowDisplayAffinity(hWnd, 0x00000011);
+}
+
+
+//---------------------------------------------------------------------------
 // Gui_WindowProcW
 //---------------------------------------------------------------------------
 
@@ -1575,6 +1615,12 @@ _FX LRESULT Gui_WindowProcW(
         new_lParam = (LPARAM)Gui_CreateTitleW((WCHAR *)lParam);
     else
         new_lParam = lParam;
+
+	if (uMsg == WM_QUERYENDSESSION)
+	{
+		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
+			return TRUE;
+	}
 
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
     if (DLL_IMAGE_OFFICE_EXCEL == Dll_ImageType) {
@@ -1631,7 +1677,12 @@ _FX LRESULT Gui_WindowProcA(
         new_lParam = (LPARAM)Gui_CreateTitleA((UCHAR *)lParam);
     else
         new_lParam = lParam;
-
+		
+	if (uMsg == WM_QUERYENDSESSION)
+	{
+		if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE))
+			return TRUE;
+	}
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);
 

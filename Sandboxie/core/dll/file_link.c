@@ -604,9 +604,6 @@ _FX WCHAR *File_TranslateTempLinks(
     WCHAR *ret;
     ULONG TruePath_len, ret_len;
 
-    if (File_NoReparse)
-        return NULL;
-
     //
     // entry
     //
@@ -918,6 +915,83 @@ _FX NTSTATUS File_GetFileName(HANDLE FileHandle, ULONG NameLen, WCHAR* NameBuf)
 
 
 //---------------------------------------------------------------------------
+// File_OpenForAddTempLink
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, BOOLEAN OpenReparsePoint)
+{
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    IO_STATUS_BLOCK IoStatusBlock;
+
+    P_NtCreateFile pNtCreateFile = __sys_NtCreateFile;
+    // special case for File_InitRecoverFolders as it's called before we hook those functions
+    if (! pNtCreateFile)
+        pNtCreateFile = NtCreateFile;
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    //
+    // first try the copy path
+    //
+
+    if (_wcsnicmp(path, Dll_BoxFilePath, Dll_BoxFilePathLen) != 0)
+    {
+        WCHAR* CopyPath = NULL;
+
+        THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
+
+        Dll_PushTlsNameBuffer(TlsData);
+
+        File_GetCopyPath(path, &CopyPath);
+
+        //
+        // get template file if present, and reparse the path
+        //
+
+        WCHAR* TmplName = File_FindSnapshotPath(CopyPath);
+        if (TmplName != NULL)
+            RtlInitUnicodeString(&objname, TmplName);
+        else
+            RtlInitUnicodeString(&objname, CopyPath);
+
+        status = pNtCreateFile(
+            handle, (OpenReparsePoint ? FILE_GENERIC_READ : FILE_READ_ATTRIBUTES) | SYNCHRONIZE, &objattrs,
+            &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+            FILE_OPEN, 
+            FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | (OpenReparsePoint ? FILE_OPEN_REPARSE_POINT : 0),
+            NULL, 0);
+
+        Dll_PopTlsNameBuffer(TlsData);
+
+    }
+    else // it's already a copy path
+        status = STATUS_BAD_INITIAL_PC;
+
+    //
+    // then try the true path
+    //
+
+    if (!NT_SUCCESS(status)) {
+
+        RtlInitUnicodeString(&objname, path);
+
+        status = pNtCreateFile(
+            handle, (OpenReparsePoint ? FILE_GENERIC_READ : FILE_READ_ATTRIBUTES)  | SYNCHRONIZE, &objattrs,
+            &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+            FILE_OPEN, 
+            FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | (OpenReparsePoint ? FILE_OPEN_REPARSE_POINT : 0),
+            NULL, 0);
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // File_AddTempLink
 //---------------------------------------------------------------------------
 
@@ -926,134 +1000,65 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 {
     NTSTATUS status;
     HANDLE handle;
-    OBJECT_ATTRIBUTES objattrs;
-    UNICODE_STRING objname;
     IO_STATUS_BLOCK IoStatusBlock;
     FILE_LINK *link;
     WCHAR *newpath;
     BOOLEAN stop;
     BOOLEAN bPermLinkPath = FALSE;
-    WCHAR* CopyPath = NULL;
 
     //
     // try to open the path
     //
 
-    P_NtCreateFile pNtCreateFile = __sys_NtCreateFile;
     P_NtClose pNtClose = __sys_NtClose;
     P_NtFsControlFile pNtFsControlFile = __sys_NtFsControlFile;
-    // special case for File_InitRecoverFolders as its called bfore we hook those functions
-    if (! pNtCreateFile)
-        pNtCreateFile = NtCreateFile;
+    // special case for File_InitRecoverFolders as it's called before we hook those functions
     if (! pNtClose)
         pNtClose = NtClose;
     if (! pNtFsControlFile)
         pNtFsControlFile = NtFsControlFile;
 
     stop = TRUE;
-
-    InitializeObjectAttributes(
-        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-    BOOLEAN UserReparse = SbieApi_QueryConfBool(NULL, L"UseNewSymlinkResolver", TRUE);
-
-    if (UserReparse) {
-        
-        //
-        // first try the copy path
-        //
-
-        if (_wcsnicmp(path, Dll_BoxFilePath, Dll_BoxFilePathLen) != 0)
-        {
-            THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
-
-            Dll_PushTlsNameBuffer(TlsData);
-
-            File_GetCopyPath(path, &CopyPath);
-
-            //
-            // get template file if present, and reparse the path
-            //
-
-            WCHAR* TmplName = File_FindSnapshotPath(CopyPath);
-            if (TmplName != NULL)
-                RtlInitUnicodeString(&objname, TmplName);
-            else
-                RtlInitUnicodeString(&objname, CopyPath);
-
-            status = pNtCreateFile(
-                &handle, FILE_GENERIC_READ | SYNCHRONIZE, &objattrs,
-                &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
-                FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_REPARSE_POINT,
-                NULL, 0);
-
-            Dll_PopTlsNameBuffer(TlsData);
-
-            if (!NT_SUCCESS(status))
-                CopyPath = NULL;
-        }
-        else // its already a copy path
-            status = STATUS_BAD_INITIAL_PC;
-
-        //
-        // then try the true path
-        //
-
-        if (!NT_SUCCESS(status)) {
-
-            RtlInitUnicodeString(&objname, path);
-
-            status = pNtCreateFile(
-                &handle, FILE_GENERIC_READ | SYNCHRONIZE, &objattrs,
-                &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
-                FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_REPARSE_POINT,
-                NULL, 0);
-
-            if (!NT_SUCCESS(status))
-                UserReparse = FALSE;
-        }
-    }
+    newpath = NULL;
     
-    if (!UserReparse) {
-        
-        RtlInitUnicodeString(&objname, path);
+    /*if (wcsstr(path, L"Programme")) {
+        while (! IsDebuggerPresent()) { OutputDebugString(L"BREAK\n"); Sleep(500); }
+        __debugbreak();
+    }*/
 
-        status = pNtCreateFile(
-            &handle, FILE_READ_ATTRIBUTES | SYNCHRONIZE, &objattrs,
-            &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
-            FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
-            NULL, 0);
-    }
+    status = File_OpenForAddTempLink(&handle, path, TRUE);
 
     if (NT_SUCCESS(status)) {
 
-        if (UserReparse) {
+        REPARSE_DATA_BUFFER* reparseDataBuffer = Dll_AllocTemp(MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
+        status = pNtFsControlFile(handle, NULL, NULL, NULL, &IoStatusBlock, FSCTL_GET_REPARSE_POINT, NULL, 0, reparseDataBuffer, MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
 
-            REPARSE_DATA_BUFFER* reparseDataBuffer = Dll_AllocTemp(MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
-            status = pNtFsControlFile(handle, NULL, NULL, NULL, &IoStatusBlock, FSCTL_GET_REPARSE_POINT, NULL, 0, reparseDataBuffer, MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
-        
-            newpath = NULL;
+        if (NT_SUCCESS(status)) {
 
-            if (NT_SUCCESS(status)) {
+            WCHAR* SubstituteNameBuffer = NULL;
+            //WCHAR* PrintNameBuffer = NULL;
+            BOOL RelativePath = FALSE;
 
-                WCHAR* SubstituteNameBuffer = NULL;
-                //WCHAR* PrintNameBuffer = NULL;
-                BOOL RelativePath = FALSE;
+            if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_SYMLINK)
+            {
+                SubstituteNameBuffer = &reparseDataBuffer->SymbolicLinkReparseBuffer.PathBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+                if (reparseDataBuffer->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE)
+                    RelativePath = TRUE;
+                SubstituteNameBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
+            }
+            else if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
+            {
+                SubstituteNameBuffer = &reparseDataBuffer->MountPointReparseBuffer.PathBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+                SubstituteNameBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
+            }
 
-                if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_SYMLINK)
+            if (SubstituteNameBuffer)
+            {
+                if (RelativePath)
                 {
-                    SubstituteNameBuffer = &reparseDataBuffer->SymbolicLinkReparseBuffer.PathBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
-                    if (reparseDataBuffer->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE)
-                        RelativePath = TRUE;
-                    SubstituteNameBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
+                        // todo RelativePath - for now we fall back to the old method
                 }
-                else if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
-                {
-                    SubstituteNameBuffer = &reparseDataBuffer->MountPointReparseBuffer.PathBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
-                    SubstituteNameBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
-                }
-
-                if (SubstituteNameBuffer && !RelativePath) // todo RelativePath - for now we fall back to UserReparse = FALSE;
+                else
                 {
                     WCHAR* input_str = SubstituteNameBuffer;
                     if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) == 0)
@@ -1073,112 +1078,117 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
                             Dll_Free(input_str);
                     }
                 }
-
-                /*THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
-
-                Dll_PushTlsNameBuffer(TlsData);
-
-                WCHAR* TruePath = NULL;
-                if (NT_SUCCESS(File_GetTruePath(newpath, &TruePath))) {
-
-                    Dll_Free(newpath);
-                    newpath = Dll_AllocTemp((wcslen(TruePath) + 1) * sizeof(WCHAR));
-                    wcscpy(newpath, TruePath);
-                }
-
-                Dll_PopTlsNameBuffer(TlsData);*/
             }
-            //else if (status == STATUS_NOT_A_REPARSE_POINT) 
-
-            if (!newpath) {
-
-                if (CopyPath) {
-                    newpath = Dll_AllocTemp((wcslen(path) + 1) * sizeof(WCHAR));
-                    wcscpy(newpath, path);
-                } else
-                    UserReparse = FALSE;
-
-                status = STATUS_SUCCESS;
-            }
-
-            Dll_Free(reparseDataBuffer);
         }
+        //else if (status == STATUS_NOT_A_REPARSE_POINT) 
+            
 
-        //
-        // get the reparsed absolute path
-        //
+        Dll_Free(reparseDataBuffer);
 
-        const ULONG PATH_BUF_LEN = 1024;
+        pNtClose(handle);
+    }
+    
+    const ULONG PATH_BUF_LEN = 1024;
 
-        if (!UserReparse) {
+    if (!newpath) {
 
-            newpath = Dll_AllocTemp(PATH_BUF_LEN);
-
-            status = File_GetFileName(handle, PATH_BUF_LEN - 4, newpath);
-        }
+        status = File_OpenForAddTempLink(&handle, path, FALSE);
 
         if (NT_SUCCESS(status)) {
 
             //
-            // make sure path does not contain duplicate backslashes
+            // get the reparsed absolute path
             //
 
-            ULONG len = wcslen(newpath);
-            WCHAR *name = newpath;
-            while (name[0]) {
-                if (name[0] == L'\\' && name[1] == L'\\') {
-                    ULONG move_len = len - (ULONG)(name - newpath) + 1;
-                    wmemmove(name, name + 1, move_len);
-                    --len;
-                } else
-                    ++name;
+            newpath = Dll_AllocTemp(PATH_BUF_LEN);
+
+            status = File_GetFileName(handle, PATH_BUF_LEN - 4, newpath);
+
+            if (!NT_SUCCESS(status)) {
+                Dll_Free(newpath);
+                newpath = NULL;
             }
 
-            //
-            // convert permanent links (i.e. drive mount points)
-            //
+            pNtClose(handle);
+        }
+    }
 
-            len = File_FixPermLinksForTempLink(
-                newpath, len, (PATH_BUF_LEN - 4) / sizeof(WCHAR));
+    if (newpath) {
 
-            //
-            // verify the link points to a local drive
-            //
+        //
+        // check if what we got is a copy path and convert it to a true path
+        //
 
-            if (File_FindPermLinksForMatchPath(newpath, len))
-            {
-                // release lock by File_FindPermLinksForMatchPath
-                LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-                bPermLinkPath = TRUE;
-            }
+        THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
 
-            if (! FILE_IS_REDIRECTOR_OR_MUP(newpath, len) && !bPermLinkPath) {
-                const FILE_DRIVE *drive = File_GetDriveForPath(newpath, len);
-                const FILE_GUID *guid = NULL;
-                if(!drive)
-                    guid = File_GetGuidForPath(newpath, len);
-                if (drive || guid) {
-                    LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-                    stop = FALSE;
-                }
-            }
+        Dll_PushTlsNameBuffer(TlsData);
 
-        } else {
+        WCHAR* TruePath = NULL;
+        if (NT_SUCCESS(File_GetTruePath(newpath, &TruePath))) {
+
             Dll_Free(newpath);
-            newpath = NULL;
+            newpath = Dll_AllocTemp((wcslen(TruePath) + 1) * sizeof(WCHAR));
+            wcscpy(newpath, TruePath);
         }
 
-        pNtClose(handle);
+        Dll_PopTlsNameBuffer(TlsData);
 
-    } else
-        newpath = NULL;
+        //
+        // make sure path does not contain duplicate backslashes
+        //
+
+        ULONG len = wcslen(newpath);
+        WCHAR *name = newpath;
+        while (name[0]) {
+            if (name[0] == L'\\' && name[1] == L'\\') {
+                ULONG move_len = len - (ULONG)(name - newpath) + 1;
+                wmemmove(name, name + 1, move_len);
+                --len;
+            } else
+                ++name;
+        }
+
+        //
+        // convert permanent links (i.e. drive mount points)
+        //
+
+        len = File_FixPermLinksForTempLink(
+            newpath, len, (PATH_BUF_LEN - 4) / sizeof(WCHAR));
+
+        //
+        // verify the link points to a local drive
+        //
+
+        if (File_FindPermLinksForMatchPath(newpath, len))
+        {
+            // release lock by File_FindPermLinksForMatchPath
+            LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+            bPermLinkPath = TRUE;
+        }
+
+        if (! FILE_IS_REDIRECTOR_OR_MUP(newpath, len) && !bPermLinkPath) {
+            const FILE_DRIVE *drive = File_GetDriveForPath(newpath, len);
+            const FILE_GUID *guid = NULL;
+            if(!drive)
+                guid = File_GetGuidForPath(newpath, len);
+            if (drive || guid) {
+                LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+                stop = FALSE;
+            }
+        }
+
+    } else {
+
+        newpath = path;
+
+        BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
+        if(use_rule_specificity)
+            stop = FALSE;
+    }
 
     //
     // add the new link and return
     //
-
-    if (! newpath)
-        newpath = path;
 
     if (File_AddLink(FALSE, path, newpath)) {
         link = List_Head(File_TempLinks);
@@ -1322,15 +1332,15 @@ _FX FILE_LINK *File_FindPermLinksForMatchPath(
     link = List_Head(File_PermLinks);
     while (link) {
 
-        const ULONG src_len = link->src_len;
+        const ULONG dst_len = link->dst_len;
 
         if (
 #ifdef WOW64_FS_REDIR
             link != File_Wow64FileLink &&
 #endif WOW64_FS_REDIR
-            name_len >= src_len &&
-                (name[src_len] == L'\\' || name[src_len] == L'\0') &&
-                _wcsnicmp(name, link->src, src_len) == 0) {
+            name_len >= dst_len &&
+                (name[dst_len] == L'\\' || name[dst_len] == L'\0') &&
+                _wcsnicmp(name, link->dst, dst_len) == 0) {
 
             return link;
         }

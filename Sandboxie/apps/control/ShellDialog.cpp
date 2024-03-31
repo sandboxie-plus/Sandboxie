@@ -68,25 +68,6 @@ END_MESSAGE_MAP()
 
 
 //---------------------------------------------------------------------------
-// Shell Exports
-//---------------------------------------------------------------------------
-
-
-#if _MSC_VER == 1200        // Visual C++ 6.0
-
-
-#define SHGFP_TYPE_CURRENT 0
-
-typedef HRESULT (*P_SHGetFolderPath)(
-    HWND hwnd, int csidl, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
-
-P_SHGetFolderPath SHGetFolderPathW;
-
-
-#endif
-
-
-//---------------------------------------------------------------------------
 // Constructor
 //---------------------------------------------------------------------------
 
@@ -277,20 +258,6 @@ void CShellDialog::OnCloseOrCancel()
 
 void CShellDialog::Sync(BOOL bUninstall)
 {
-    //
-    // initialize Shell exports (Visual C++ 6.0)
-    //
-
-#if _MSC_VER == 1200
-
-    if (! SHGetFolderPathW) {
-        HMODULE shell = GetModuleHandle(L"shell32.dll");
-        SHGetFolderPathW =
-            (P_SHGetFolderPath)GetProcAddress(shell, "SHGetFolderPathW");
-    }
-
-#endif
-
     //
     // sync
     //

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2023 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -319,6 +319,7 @@ extern BOOLEAN Ipc_OpenCOM;
 extern const WCHAR *Scm_CryptSvc;
 
 extern BOOLEAN Dll_SbieTrace;
+extern BOOLEAN Dll_ApiTrace;
 
 
 //---------------------------------------------------------------------------
@@ -566,9 +567,7 @@ BOOLEAN Sxs_FileCallback(const WCHAR *path, HANDLE *out_handle);
 HANDLE Scm_OpenKeyForService(
     const WCHAR *ServiceName, BOOLEAN ForWrite);
 
-BOOLEAN Scm_SecHostDll(HMODULE);
-
-void Scm_SecHostDll_W8(void);
+BOOLEAN SecHost_Init(HMODULE);
 
 
 //---------------------------------------------------------------------------
@@ -692,7 +691,7 @@ BOOLEAN Scm_Init_AdvApi(HMODULE);
 
 BOOLEAN Proc_Init_AdvApi(HMODULE);
 
-BOOLEAN Cred_Init_AdvApi(HMODULE);
+BOOLEAN Cred_Init(HMODULE);
 
 //BOOLEAN Lsa_Init_AdvApi(HMODULE module);
 

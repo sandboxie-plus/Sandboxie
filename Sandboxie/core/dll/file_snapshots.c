@@ -305,7 +305,7 @@ _FX ULONG File_GetPathFlagsEx(const WCHAR *TruePath, const WCHAR *CopyPath, WCHA
 	// the property that after a pop the buffers remain valid until the next push
 	// 
 	// so we can pop out of the current frame request a buffer of the required size
-	// and still read from the buffer that was filled in the previosue frame
+	// and still read from the buffer that was filled in the previous frame
 	//
 
 	Dll_PushTlsNameBuffer(TlsData);

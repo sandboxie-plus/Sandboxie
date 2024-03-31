@@ -95,9 +95,8 @@ _FX VOID Handle_SetDeleteOnClose(HANDLE FileHandle, BOOLEAN DeleteOnClose)
     EnterCriticalSection(&Handle_StatusData_CritSec);
 
     HANDLE_STATE* state = map_get(&Handle_StatusData, FileHandle);
-    if (!state) {
+    if (!state)
         state = map_insert(&Handle_StatusData, FileHandle, NULL, sizeof(HANDLE_STATE));
-    }
 
     state->DeleteOnClose = DeleteOnClose;
 
@@ -170,9 +169,9 @@ _FX VOID Handle_ExecuteCloseHandler(HANDLE FileHandle, BOOLEAN* DeleteOnClose)
         *DeleteOnClose = state->DeleteOnClose;
         CloseHandlers = state->CloseHandlers;
         if (state->RelocationPath) Dll_Free(state->RelocationPath);
-    }
 
-    map_remove(&Handle_StatusData, FileHandle);
+        map_remove(&Handle_StatusData, FileHandle);
+    }
 
     LeaveCriticalSection(&Handle_StatusData_CritSec);
 

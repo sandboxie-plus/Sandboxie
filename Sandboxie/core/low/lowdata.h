@@ -88,6 +88,8 @@ typedef struct _SBIELOW_DATA {
     ULONG       api_invoke_syscall;
 
     SBIELOW_FLAGS flags;
+    UCHAR       Init_Done;
+    UCHAR       reserved[3];
 
     __declspec(align(16))
         UCHAR   LdrInitializeThunk_tramp[48];
@@ -163,6 +165,8 @@ typedef struct _SBIELOW_EXTRA_DATA {
     ULONG Wow64SbieDll_length;
 
     ULONG InjectData_offset;
+
+    ULONG_PTR Init_Lock;
 
 } SBIELOW_EXTRA_DATA;
 

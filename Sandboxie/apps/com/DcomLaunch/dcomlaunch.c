@@ -39,9 +39,10 @@ const WCHAR *ServiceTitle = SANDBOXIE L" DcomLaunch";
 #include "../common.h"
 #include "../privs.h"
 
-HANDLE RotHintTable = NULL;
 
-const WCHAR *RotHintTable_Name = L"Global\\RotHintTable";
+//HANDLE RotHintTable = NULL;
+//
+//const WCHAR *RotHintTable_Name = L"Global\\RotHintTable";
 
 
 //---------------------------------------------------------------------------
@@ -49,35 +50,35 @@ const WCHAR *RotHintTable_Name = L"Global\\RotHintTable";
 //---------------------------------------------------------------------------
 
 
-_FX HANDLE my_CreateFileMappingW(
-    HANDLE hFile,
-    LPSECURITY_ATTRIBUTES lpAttributes,
-    DWORD flProtect,
-    DWORD dwMaximumSizeHigh,
-    DWORD dwMaximumSizeLow,
-    LPCWSTR lpName)
-{
-    typedef HANDLE (__stdcall *P_CreateFileMappingW)(
-        HANDLE hFile,
-        LPSECURITY_ATTRIBUTES lpAttributes,
-        DWORD flProtect,
-        DWORD dwMaximumSizeHigh,
-        DWORD dwMaximumSizeLow,
-        LPCWSTR lpName);
-
-    HANDLE handle = 0;
-
-    if (lpName && _wcsicmp(lpName, RotHintTable_Name) == 0)
-        handle = RotHintTable;
-
-    if (! handle) {
-        handle = ((P_CreateFileMappingW)__sys_CreateFileMappingW)(
-            hFile, lpAttributes, flProtect,
-            dwMaximumSizeHigh, dwMaximumSizeLow, lpName);
-    }
-
-    return handle;
-}
+//_FX HANDLE my_CreateFileMappingW(
+//    HANDLE hFile,
+//    LPSECURITY_ATTRIBUTES lpAttributes,
+//    DWORD flProtect,
+//    DWORD dwMaximumSizeHigh,
+//    DWORD dwMaximumSizeLow,
+//    LPCWSTR lpName)
+//{
+//    typedef HANDLE (__stdcall *P_CreateFileMappingW)(
+//        HANDLE hFile,
+//        LPSECURITY_ATTRIBUTES lpAttributes,
+//        DWORD flProtect,
+//        DWORD dwMaximumSizeHigh,
+//        DWORD dwMaximumSizeLow,
+//        LPCWSTR lpName);
+//
+//    HANDLE handle = 0;
+//
+//    if (lpName && _wcsicmp(lpName, RotHintTable_Name) == 0)
+//        handle = RotHintTable;
+//    
+//    if (! handle) {
+//        handle = ((P_CreateFileMappingW)__sys_CreateFileMappingW)(
+//            hFile, lpAttributes, flProtect,
+//            dwMaximumSizeHigh, dwMaximumSizeLow, lpName);
+//    }
+//
+//    return handle;
+//}
 
 
 //---------------------------------------------------------------------------

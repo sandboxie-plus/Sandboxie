@@ -94,6 +94,14 @@ SBIE1152 Sekme ayırması başarısız %2
 SBIE1153 Sandboxie başlatması başarısız. Tüm programları kapatıp Sandboxie'yi tekrar yükleyin veya bilgisayarınızı yeniden başlatın.
 .
 
+1205;evt;pop;err;01
+SBIE1205 Kayıt defterinde bulunan DynData verisi geçersiz, hata: %2
+.
+
+1206;evt;pop;err;01
+SBIE1206 Windows derlemeniz (%2) henüz Sandboxie tarafından desteklenmiyor, hata mesajı: %3
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -110,6 +118,10 @@ SBIE1203 Yol listesi yapılamadı (%2 hatası)
 
 1204;pop;err;01
 SBIE1204 %3 korumalı alan oluşturma %2 hatasını verdi
+.
+
+1207;pop;err;01
+SBIE1207 Windows derlemeniz (%2) henüz Sandboxie tarafından desteklenmiyor. Bu, uygulamaların güvenlik yalıtımı olmadan çalışacağı anlamına gelir!
 .
 
 1211;pop;err;01
@@ -203,11 +215,11 @@ SBIE1318 '%2'nin korumalı alan '%3' işlemine erişmeye çalışması engellend
 .
 
 1319;pop;inf;01
-SBIE1319 Dosyaya yazdırmak için engellenmiş yazdırma biriktiricisi, %2 %3
+SBIE1319 Yazdırma biriktiricisinin dosyaya yazdırması engellendi, %2 %3
 .
 
 1320;pop;wrn;01
-SBIE1320 Yazdırma biriktiricisinin bu işlem için korumalı alanın dışına yazmasına izin vermek için lütfen bu mesaj satırına çift tıklayın
+SBIE1320 Yazdırma biriktiricisinin bu işlem için korumalı alanın dışına yazmasına izin vermek istiyorsanız bu mesaj satırına çift tıklayın
 .
 
 1399;pop;inf;01

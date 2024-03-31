@@ -26,8 +26,8 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Hebrew|Yes| |
 |Hungarian|Yes|Yes - Mar 30, 2023|
 |Indonesian|Yes| |
-|Italian|Yes - Apr 24, 2023|Yes - Apr 25, 2023|
-|Japanese|Yes| |
+|Italian|Yes - Aug 25, 2023|Yes - Sep 29, 2023|
+|Japanese|Yes|Yes - Jan 25, 2024|
 |Korean|Yes - Feb 18, 2023|Yes - Apr 17, 2023|
 |Macedonian|Yes| |
 |Polish|Yes|Yes - Mar 15, 2023|

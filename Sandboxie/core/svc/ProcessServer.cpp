@@ -634,7 +634,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
 #endif
 
             HANDLE PrimaryTokenHandle = RunSandboxedGetToken(
-                        CallerProcessHandle, CallerInSandbox, boxname, cmd);
+                        CallerProcessHandle, CallerInSandbox, boxname, cmd, (HANDLE)(ULONG_PTR)CallerPid);
 
             if (PrimaryTokenHandle) {
 
@@ -808,12 +808,12 @@ WCHAR *ProcessServer::RunSandboxedCopyString(
 //---------------------------------------------------------------------------
 
 
-bool ProcessServer__RunRpcssAsSystem(const WCHAR* boxname)
+bool ProcessServer__RunRpcssAsSystem(const WCHAR* boxname, BOOLEAN CompartmentMode)
 {
     if (SbieApi_QueryConfBool(boxname, L"RunRpcssAsSystem", FALSE))
         return true;
     // OriginalToken BEGIN
-    if (SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
+    if (CompartmentMode || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
     // OriginalToken END
     
         //
@@ -833,7 +833,7 @@ bool ProcessServer__RunRpcssAsSystem(const WCHAR* boxname)
 
 
 HANDLE ProcessServer::RunSandboxedGetToken(
-    HANDLE CallerProcessHandle, bool CallerInSandbox, const WCHAR *boxname, const WCHAR* cmd)
+    HANDLE CallerProcessHandle, bool CallerInSandbox, const WCHAR *boxname, const WCHAR* cmd, HANDLE CallerPid)
 {
     const ULONG TOKEN_RIGHTS = TOKEN_QUERY          | TOKEN_DUPLICATE
                              | TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID
@@ -846,10 +846,13 @@ HANDLE ProcessServer::RunSandboxedGetToken(
     bool ShouldAdjustSessionId = true;
     bool ShouldAdjustDacl = false;
 
+    ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(CallerPid, 0);
+    BOOLEAN CompartmentMode = (ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
+
     if (CallerInSandbox) {
 
         if ((wcscmp(cmd, L"*RPCSS*") == 0 /* || wcscmp(cmd, L"*DCOM*") == 0 */) 
-          && ProcessServer__RunRpcssAsSystem(boxname)) {
+          && ProcessServer__RunRpcssAsSystem(boxname, CompartmentMode)) {
             
             //
             // use our system token
@@ -865,7 +868,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
         }
         else
         // OriginalToken BEGIN
-        if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+        if (!CompartmentMode && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
         // OriginalToken END
         {
             //
@@ -967,7 +970,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_ALL, TRUE);
         else if (SbieApi_QueryConfBool(boxname, L"AdjustBoxedSystem", TRUE))
             // OriginalToken BEGIN
-            if(!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+            if(!CompartmentMode && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
             // OriginalToken END
 			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_READ, FALSE);
     
@@ -2103,8 +2106,6 @@ MSG_HEADER *ProcessServer::SuspendOneHandler(MSG_HEADER *msg)
 
 MSG_HEADER *ProcessServer::SuspendAllHandler(MSG_HEADER *msg)
 {
-    return SHORT_REPLY(STATUS_NOT_IMPLEMENTED);
-
     HANDLE CallerProcessId;
     ULONG TargetSessionId;
     WCHAR TargetBoxName[BOXNAME_COUNT];
@@ -2155,24 +2156,26 @@ MSG_HEADER *ProcessServer::SuspendAllHandler(MSG_HEADER *msg)
     //
 
     ULONG pid_count = 0;
-    SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+    SbieApi_EnumProcessEx(TargetBoxName, FALSE, TargetSessionId, NULL, &pid_count); // query count
     pid_count += 128;
 
     ULONG* pids = (ULONG*)HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
-    SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+    SbieApi_EnumProcessEx(TargetBoxName, FALSE, TargetSessionId, pids, &pid_count); // query pids
 
     for (ULONG i = 0; i < pid_count; ++i) {
 
         DWORD pids_i = pids[i];
 
         HANDLE hProcess = OpenProcess(PROCESS_SUSPEND_RESUME, FALSE, pids_i);
+        if (hProcess) {
 
-        if (req->suspend)
-            NtSuspendProcess(hProcess);
-        else 
-            NtResumeProcess(hProcess);
+            if (req->suspend)
+                NtSuspendProcess(hProcess);
+            else
+                NtResumeProcess(hProcess);
 
-        CloseHandle(hProcess);
+            CloseHandle(hProcess);
+        }
     }
     
     HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, pids);

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -221,9 +222,12 @@ _FX BOOLEAN AdvApi_Init(HMODULE module)
     if (! ok)
         return FALSE;
 
-    ok = Cred_Init_AdvApi(module);
-    if (! ok)
-        return FALSE;
+    if (Dll_OsBuild < 8400) { // Windows 7 or earlier
+
+        ok = Cred_Init(module);
+        if (!ok)
+            return FALSE;
+    }
 
     LookupAccountNameW = __sys_LookupAccountNameW;
     SBIEDLL_HOOK(AdvApi_,LookupAccountNameW);

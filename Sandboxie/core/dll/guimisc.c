@@ -99,6 +99,21 @@ static LONG Gui_GetRawInputDeviceInfoW(
     _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
     _Inout_ LPVOID pData, _Inout_ PUINT pcbSize);
 
+static HDC Gui_GetDC(HWND hWnd);
+
+static HDC Gui_GetWindowDC(HWND hWnd);
+
+static HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags);
+
+static BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags);
+
+static int Gui_ReleaseDC(HWND hWnd, HDC hDc);
+
+static BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason);
+
+static EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags);
+
+
 //---------------------------------------------------------------------------
 
 
@@ -111,9 +126,6 @@ typedef HMETAFILE (*P_SetMetaFileBitsEx)(
 
 typedef HENHMETAFILE (*P_SetEnhMetaFileBits)(
     UINT nSize, const BYTE *lpData);
-
-typedef HBITMAP (*P_CreateCompatibleBitmap)( 
-    HDC hdc, int cx, int cy);
 
 typedef int (*P_SetDIBits)
     (HDC hdc, HBITMAP hbm, UINT start, UINT cLines, CONST VOID *lpBits, CONST BITMAPINFO * lpbmi, UINT ColorUse);
@@ -176,6 +188,14 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         }
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
+		
+        if (Gui_UseBlockCapture) {
+            SBIEDLL_HOOK_GUI(GetWindowDC);
+            SBIEDLL_HOOK_GUI(GetDC);
+            SBIEDLL_HOOK_GUI(GetDCEx);
+            SBIEDLL_HOOK_GUI(PrintWindow);
+            SBIEDLL_HOOK_GUI(ReleaseDC);
+        }
 
         if (Dll_OsBuild >= 6000) {
 
@@ -248,6 +268,16 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 
 	__sys_GetThreadDpiAwarenessContext = (P_GetThreadDpiAwarenessContext)
 		Ldr_GetProcAddrNew(DllName_user32, L"GetThreadDpiAwarenessContext","GetThreadDpiAwarenessContext");
+
+
+    if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE)) {
+
+        SBIEDLL_HOOK_GUI(ShutdownBlockReasonCreate);
+
+        module = Dll_Kernel32;
+
+        SBIEDLL_HOOK(Gui_, SetThreadExecutionState);
+    }
 
     return TRUE;
 }
@@ -1457,4 +1487,127 @@ _FX BOOL Gui_ImmAssociateContextEx(
     }
 
     return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_GetDC
+//---------------------------------------------------------------------------
+
+
+_FX HDC Gui_GetDC(HWND hWnd)
+{
+	HDC ret = __sys_GetDC(hWnd);
+
+	ULONG_PTR pid = 0, tid = 0;
+	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
+
+        return Gdi_GetDummyDC(ret, hWnd);
+	}
+
+	return ret;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_GetWindowDC
+//---------------------------------------------------------------------------
+
+
+_FX HDC Gui_GetWindowDC(HWND hWnd)
+{
+	HDC ret = __sys_GetWindowDC(hWnd);
+
+	ULONG_PTR pid = 0, tid = 0;
+	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
+
+		return Gdi_GetDummyDC(ret, hWnd);
+	}
+
+	return ret;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_GetDCEx
+//---------------------------------------------------------------------------
+
+
+_FX HDC Gui_GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags)
+{
+	HDC ret = __sys_GetDCEx(hWnd, hrgnClip, flags);
+
+	ULONG_PTR pid = 0, tid = 0;
+	if (Gui_UseBlockCapture && (hWnd == NULL || hWnd == __sys_GetDesktopWindow() || !Gui_IsSameBox(hWnd, &pid, &tid))) {
+
+		return Gdi_GetDummyDC(ret, hWnd);
+	}
+
+	return ret;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_PrintWindow
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Gui_PrintWindow(HWND hwnd, HDC hdcBlt, UINT nFlags)
+{
+	if (Gui_UseBlockCapture) {
+	
+		if (hwnd == NULL || hwnd == __sys_GetDesktopWindow()) {
+		
+			SetLastError(ERROR_ACCESS_DENIED);
+			return 0;
+		}
+
+		ULONG_PTR pid = 0, tid = 0;
+		if (!Gui_IsSameBox(hwnd, &pid, &tid)) {
+		
+			SetLastError(ERROR_ACCESS_DENIED);
+			return 0;
+		}
+	}
+	return __sys_PrintWindow(hwnd, hdcBlt, nFlags);
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_ReleaseDC
+//---------------------------------------------------------------------------
+
+
+_FX int Gui_ReleaseDC(HWND hWnd, HDC hdc) 
+{
+    hdc = Gdi_OnFreeDC(hdc);
+    if (!hdc) 
+        return 1;
+	return __sys_ReleaseDC(hWnd, hdc);
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_ShutdownBlockReasonCreate
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason) 
+{
+	SetLastError(ERROR_ACCESS_DENIED);
+	return 0;
+	//return __sys_ShutdownBlockReasonCreate(hWnd, pwszReason);
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_SetThreadExecutionState
+//---------------------------------------------------------------------------
+
+
+_FX EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags) 
+{
+	SetLastError(ERROR_ACCESS_DENIED);
+	return 0;
+	//return __sys_SetThreadExecutionState(esFlags);
 }

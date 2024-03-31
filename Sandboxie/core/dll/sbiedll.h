@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -75,6 +75,8 @@ SBIEDLL_EXPORT  void *SbieDll_Hook(
     *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)   \
         SbieDll_Hook(#proc, proc, pfx##proc, module);   \
     if (! __sys_##proc) return FALSE;
+
+SBIEDLL_EXPORT  void SbieDll_TraceModule(HMODULE module);
 
 SBIEDLL_EXPORT  void SbieDll_UnHookModule(HMODULE module);
 
@@ -224,6 +226,7 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* te
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting);
+SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInListA(const char* string, const WCHAR* boxname, const WCHAR* setting);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckPatternInList(const WCHAR* string, ULONG length, const WCHAR* boxname, const WCHAR* setting);
 

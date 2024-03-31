@@ -73,14 +73,6 @@
 
 HWND WindowFromPointEx(POINT pt, BOOL fShowHidden);
 
-#if _MSC_VER == 1200        // Visual C++ 6.0
-#define GetWindowLongPtr    GetWindowLong
-#define SetWindowLongPtr    SetWindowLong
-#define GWLP_USERDATA       GWL_USERDATA
-#define GWLP_WNDPROC        GWL_WNDPROC
-typedef LONG                LONG_PTR;
-#endif
-
 static LONG    lRefCount = 0;
 
 static HCURSOR hOldCursor;

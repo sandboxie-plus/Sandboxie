@@ -543,8 +543,11 @@ MSG_HEADER *TerminalServer::GetUserToken(MSG_HEADER *msg)
                 
                 HANDLE hFilteredToken = NULL;
 
+                ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(idProcess, 0);
+                BOOLEAN CompartmentMode = (ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
+
                 // OriginalToken BEGIN
-                if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)
+                if (!CompartmentMode && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)
                 // OriginalToken END
                 // UnfilteredToken BEGIN
                  && !SbieApi_QueryConfBool(boxname, L"UnfilteredToken", FALSE))

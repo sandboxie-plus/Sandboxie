@@ -4074,9 +4074,6 @@ OpenTruePath:
 
     status = __sys_NtOpenDirectoryObject(DirectoryHandle, DesiredAccess, &objattrs);
 
-    if (PATH_NOT_OPEN(mp_flags) && (status == STATUS_ACCESS_DENIED))
-        status = STATUS_OBJECT_NAME_NOT_FOUND;
-
     //
     // finish
     //

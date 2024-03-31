@@ -1,0 +1,80 @@
+﻿{
+"Description Text...": "説明テキスト...",
+"Fix current issues": "現在の問題を修正する",
+"Fix issues with sandboxing": "サンドボックスの問題を修正する",
+"An Application does not work properly when sandboxed": "サンドボックス化するとアプリケーションが正しく動作しない",
+"Issues with a web browser": "Web ブラウザの問題",
+"Perform Sandbox maintenance": "サンドボックスメンテナンスを実行",
+"Fix issues with the UI or Shell": "UI またはシェルの問題を修正する",
+
+"Yes": "はい",
+"No": "いいえ",
+
+"App compatibility checker": "アプリケーション互換性チェッカー",
+"This script check which app compatibility templates needs to be enabled": "このスクリプトは、どのアプリ互換性テンプレートを有効にする必要があるかをチェックします",
+"Loaded %1 templates": "%1 テンプレートをロードしました",
+
+"Browser shortcut is missing from the desktop": "ブラウザのショートカットがデスクトップに無い",
+"This procedure will add a browser shortcut to the desktop": "この手順では、ブラウザのショートカットをデスクトップに追加します",
+"Default Browser": "デフォルトのブラウザ",
+"Another": "その他",
+"Select Browser": "ブラウザを選択",
+"Select Sandbox": "サンドボックスを選択",
+"Select which browser you want to create a shortcut for and in what box": "どのボックスにどのブラウザのショートカットを作成するかを選択してください",
+"Select Browser Path": "ブラウザのパスを選択",
+
+"Explorer Context Menu extension does not work": "エクスプローラのコンテキストメニュー拡張が動作しない",
+"This procedure will re install the shell integration": "この手順では、シェル統合を再インストールします",
+"Add Run Sandboxed": "「サンドボックス化して実行」を追加",
+"Add Run Unsandboxed": "「サンドボックス化しないで実行」を追加",
+"Install legacy shell extensions": "従来のシェル拡張をインストール",
+"Select which shell options should be reinstalled": "再インストールするシェルオプションを選択してください",
+
+"Failed to install application into a sandbox": "アプリケーションをサンドボックス内にインストールできない",
+"Enter Installer Path": "インストーラのパスを入力",
+"Select a sandbox to install into": "インストールするサンドボックスを選択",
+"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "このボックスでは DropAdminRights が有効なため、インストーラーの実行が妨げられています。この制限を無効にしますか？無効にすると、セキュリティ レベルが低下します。",
+"Disable DropAdminRights": "DropAdminRights オプションを無効にする",
+"Enable FakeAdminRights": "FakeAdminRights オプションを有効にする",
+"running installer, pid: %1 press NEXT once it finishes to continue": "インストーラを実行中 (pid: %1)。 終了したら「次へ」を押下して続行してください。",
+"Was the issue resolved?": "問題は解決しましたか？",
+
+"Webcam or Sound does not work when sandboxed": "サンドボックス化するとウェブカメラまたはサウンドが動作しない",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Windows 11 で、ウェブカメラを有効にするためには、隔離レベルを下げる必要があります。続行するには、「次へ」を押下して変更するサンドボックスを選択してください。\n",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nこの必須プリセットは、有効なサポーター証明書が必要なことに注意してください！",
+"Select which box to turn into a reduced isolation app compartment box.": "どのボックスを隔離レベルを低減したアプリコンパートメントボックスに変更するか選択してください。",
+"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "緩和策が適用されました。%1 のウェブカメラを試して問題が解決したかどうかを示してください。",
+
+"Select affected sandbox": "影響を受けるサンドボックスを選択",
+"Enter Process Name": "プロセス名を入力",
+
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "インターネットアクセス制限は、プログラムが実行されているサンドボックスに対して有効です。プログラムはインターネットへのアクセスを禁止されています。",
+
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "開始／実行 制限は、プログラムが実行されているサンドボックスに対して有効です。プログラムの開始または実行は禁止されています。",
+
+"Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chrome または他のアプリコンテナを採用するソフトウェアで、SbieDll.dll のロードに失敗します。多くの場合、Sandboxie ホームディレクトリの無効な DACL エントリが原因です。この軽減策により問題は修正されます。kmdutil.exe に対して管理者権限の付与を求めるプロンプトが表示されます。",
+"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACLs が調整されました。アプリケーションを再度実行して、問題が解決したかどうかを示してください。",
+"DACLs fix did not resolve the issue": "DACLs の修正は、問題を解決しませんでした。",
+
+"The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "このメッセージは、Sandboxie が、ヘルパープログラム SandboxieRpcSs または SandboxieDcomLaunch を開始できなかったことを示しています。メッセージに記載されている名前は、rpcss または dcomlaunch。\n\n次のページで問題レポートを提出することができ、問題の分析に役立ちます。",
+
+"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie は内部のプログラムの１つを実行できませんでした。Sandboxie インストールフォルダへのアクセス権をチェックするか、Sandboxie を再インストールしてください。\n\n考えられる原因：\n1. Sandboxie プログラムファイルを含むフォルダへのアクセスがブロックされている。\n2. サードパーティ (HIPS) セキュリティソフトウェアが、メッセージに記載されているプログラムの実行をブロックするよう構成されている。\n\n次のページで問題レポートを提出することができ、私たちが問題を分析するのに役立ちます。",
+
+"Do you want to open the box option dialog to change this preset?": "ボックスオプションダイアログを開いて、このプリセットを変更しますか？",
+"No, it is fine as it is": "いいえ、そのままにします。",
+"No, but I want to report a bug": "いいえ、しかしバグを報告します。",
+
+"The message %1 is caused by the file migration limit being reached.": "メッセージ %1 は、ファイル移行の制限に達したことが原因で発生します。",
+
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "保護者によるコントロールが有効になっているシステムで、管理者以外のユーザーアカウントを利用しているようです。これは、Sandboxie と互換性が無いことが知られています。\nこの問題を解決するためには、以下のオプションがあります。",
+
+"Sbie Message Code": "Sbie メッセージコード",
+"Name affected process": "影響を受けるプロセスの名前",
+"Please enter the SBIEMSG ID you have encountered.": "遭遇した SBIEMSG ID を入力してください。",
+"There is no automated troubleshooting available for SBIE%1 yet.<br />": "SBIE%1 に対して利用可能な自動トラブルシューティングはまだありません。<br />",
+"The full message text is: %1<br />": "メッセージの全文： %1<br />",
+"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "このメッセージやその他の sbie メッセージついて、さらに詳しく学ぶには、<a href=\"%1\">オンラインドキュメント</a> をご覧ください。",
+"Would you like to collect some logs to help us resolve the issue.": "問題の解決に役立つログを収集しますか？",
+"Now please run your application again to trigger the Sbie message.<br /><br />": "Sbie メッセージをトリガーするために、アプリケーションを再度実行してください。<br /><br />",
+"Press NEXT when you are done collecting logs.": "ログの収集が完了したら、「次へ」を押下してください。"
+}

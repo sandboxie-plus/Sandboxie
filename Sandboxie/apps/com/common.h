@@ -37,6 +37,7 @@ const WCHAR *_SandboxieRpcSs = SANDBOXIE L"RpcSs.exe";
 const WCHAR *_msiexec = L"msiexec.exe";
 
 static HMODULE KernelBase = NULL;
+static HMODULE SecHost = NULL;
 static BOOLEAN IsWindows81 = FALSE;
 
 //---------------------------------------------------------------------------
@@ -63,6 +64,19 @@ static BOOLEAN IsWindows81 = FALSE;
         hook_success = FALSE;                                       \
     }
 
+#define HOOK_WIN32_SCM(func) {                                      \
+    const char *FuncName = #func;                                   \
+    void *SourceFunc = (void *)func;                                \
+    if (SecHost)                                                    \
+        SourceFunc = GetProcAddress(SecHost, FuncName);             \
+    if (! SourceFunc)                                               \
+        SourceFunc = (void *)func;                                  \
+    __sys_##func =                                                  \
+        (ULONG_PTR)SbieDll_Hook(FuncName, SourceFunc, my_##func, SourceFunc);   \
+    if (! __sys_##func)                                             \
+        hook_success = FALSE;                                       \
+    }
+
 typedef BOOL(*P_SetServiceStatus)(SERVICE_STATUS_HANDLE hServiceStatus, LPSERVICE_STATUS lpServiceStatus);
 
 //---------------------------------------------------------------------------
@@ -81,6 +95,7 @@ void Check_Windows_7(void)
         osvi.dwMajorVersion == 6 && osvi.dwMinorVersion >= 1) {
 
         KernelBase = LoadLibrary(L"KernelBase.dll");
+        SecHost = LoadLibrary(L"SecHost.dll");
 
         //
         // GetVersionEx in Windows 8.1 returns version 6.2, same as
@@ -556,14 +571,14 @@ BOOL my_QueryServiceStatus(
 
 
 //---------------------------------------------------------------------------
-// my_StartService
+// my_StartServiceW
 //---------------------------------------------------------------------------
 
 
-ULONG_PTR __sys_StartService = 0;
+ULONG_PTR __sys_StartServiceW = 0;
 
 
-BOOL my_StartService(
+BOOL my_StartServiceW(
     SC_HANDLE hService,
     DWORD NumArgs,
     void *ArgVector)
@@ -579,7 +594,7 @@ BOOL my_StartService(
 
         typedef BOOL(*P_StartService)(
             SC_HANDLE hService, DWORD NumArgs, void *ArgVector);
-        ok = ((P_StartService)__sys_StartService)(
+        ok = ((P_StartService)__sys_StartServiceW)(
             hService, NumArgs, ArgVector);
 
     }
@@ -653,21 +668,6 @@ HANDLE my_CreateEventW(
 }
 
 
-//---------------------------------------------------------------------------
-// my_CreateFileMappingW (forward reference)
-//---------------------------------------------------------------------------
-
-ULONG_PTR __sys_CreateFileMappingW = 0;
-
-HANDLE my_CreateFileMappingW(
-    HANDLE hFile,
-    LPSECURITY_ATTRIBUTES lpAttributes,
-    DWORD flProtect,
-    DWORD dwMaximumSizeHigh,
-    DWORD dwMaximumSizeLow,
-    LPCWSTR lpName);
-
-
 
 #if 0
 
@@ -718,16 +718,14 @@ ULONG my_PowerSettingRegisterNotification(
 BOOL Hook_Service_Control_Manager(void)
 {
     BOOL hook_success = TRUE;
-    HOOK_WIN32(SetServiceStatus);
-    HOOK_WIN32(StartServiceCtrlDispatcherW);
-    HOOK_WIN32(OpenServiceW);
-    HOOK_WIN32(CloseServiceHandle);
-    HOOK_WIN32(QueryServiceStatusEx);
-    HOOK_WIN32(QueryServiceStatus);
-    HOOK_WIN32(StartService);
-    HOOK_WIN32(ControlService);
-
-    HOOK_WIN32(CreateFileMappingW);
+    HOOK_WIN32_SCM(SetServiceStatus);
+    HOOK_WIN32_SCM(StartServiceCtrlDispatcherW);
+    HOOK_WIN32_SCM(OpenServiceW);
+    HOOK_WIN32_SCM(CloseServiceHandle);
+    HOOK_WIN32_SCM(QueryServiceStatusEx);
+    HOOK_WIN32_SCM(QueryServiceStatus);
+    HOOK_WIN32_SCM(StartServiceW);
+    HOOK_WIN32_SCM(ControlService);
 
 #if 0
     HOOK_WIN32(RtlSetLastWin32Error);

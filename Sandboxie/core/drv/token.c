@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2023 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@
 #include "common/arm64_asm.h"
 #endif
 #include "session.h"
+#include "dyn_data.h"
 
 
 //---------------------------------------------------------------------------
@@ -122,11 +123,6 @@ P_SepFilterToken Token_SepFilterToken = NULL;
 // Variables
 //---------------------------------------------------------------------------
 
-ULONG Token_RestrictedSidCount_offset = 0;
-ULONG Token_RestrictedSids_offset = 0;
-ULONG Token_UserAndGroups_offset = 0;
-ULONG Token_UserAndGroupCount_offset = 0;
-
 static TOKEN_PRIVILEGES *Token_FilterPrivileges = NULL;
 static TOKEN_GROUPS     *Token_FilterGroups = NULL;
 
@@ -179,55 +175,6 @@ _FX BOOLEAN Token_Init(void)
 {
     const ULONG NumBasePrivs = 7;
     const ULONG NumVistaPrivs = 1;
-
-    // $Offset$ - Hard Offset Dependency
-
-#ifdef _WIN64
-
-    if (Driver_OsVersion <= DRIVER_WINDOWS_7) {
-
-        Token_RestrictedSidCount_offset = 0x7C;
-        Token_RestrictedSids_offset = 0x98;
-        Token_UserAndGroups_offset = 0x90;
-
-    }
-    else if (Driver_OsVersion >= DRIVER_WINDOWS_8
-        && Driver_OsVersion <= DRIVER_WINDOWS_10) {
-
-        Token_RestrictedSidCount_offset = 0x80;
-        Token_RestrictedSids_offset = 0xA0;
-        Token_UserAndGroups_offset = 0x98;  //good for windows 10 - 10041
-        Token_UserAndGroupCount_offset = 0x7c;  //Good for windows 10 - 10041
-    }
-
-#else ! _WIN64
-
-    if (Driver_OsVersion >= DRIVER_WINDOWS_XP
-        && Driver_OsVersion <= DRIVER_WINDOWS_2003) {
-
-        Token_RestrictedSidCount_offset = 0x50;
-        Token_RestrictedSids_offset = 0x6C;
-        Token_UserAndGroups_offset = 0x68;
-
-    }
-    else if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA
-        && Driver_OsVersion <= DRIVER_WINDOWS_7) {
-
-        Token_RestrictedSidCount_offset = 0x7C;
-        Token_RestrictedSids_offset = 0x94;
-        Token_UserAndGroups_offset = 0x90;
-
-    }
-    else if (Driver_OsVersion >= DRIVER_WINDOWS_8
-        && Driver_OsVersion <= DRIVER_WINDOWS_10) {
-
-        Token_RestrictedSidCount_offset = 0x80;
-        Token_RestrictedSids_offset = 0x98;
-        Token_UserAndGroups_offset = 0x94;
-        Token_UserAndGroupCount_offset = 0x7c; //Good for windows 10 - 10041
-    }
-
-#endif _WIN64
 
     //
     // create a list of privileges to filter
@@ -1055,12 +1002,13 @@ _FX BOOLEAN Token_IsSharedSid_W8(void *TokenObject)
     ULONG       nUserAndGroupCount = 0;
     SID_AND_ATTRIBUTES  *SidAndAttrsInToken = NULL;
 
-    if (TokenObject
+    // $Offset$
+    if (TokenObject && Dyndata_Active
         &&  Driver_OsVersion >= DRIVER_WINDOWS_8
         &&  Driver_OsVersion <= DRIVER_WINDOWS_10) {
 
-        nUserAndGroupCount = *(ULONG*)((ULONG_PTR)TokenObject + Token_UserAndGroupCount_offset);
-        SidAndAttrsInToken = *(SID_AND_ATTRIBUTES **)((ULONG_PTR)TokenObject + Token_UserAndGroups_offset);
+        nUserAndGroupCount = *(ULONG*)((ULONG_PTR)TokenObject + Dyndata_Config.UserAndGroupCount_offset);
+        SidAndAttrsInToken = *(SID_AND_ATTRIBUTES **)((ULONG_PTR)TokenObject + Dyndata_Config.UserAndGroups_offset);
 
         if ((ULONG_PTR)SidAndAttrsInToken->Sid > (ULONG_PTR)SidAndAttrsInToken
             && (ULONG_PTR)SidAndAttrsInToken->Sid <= ((ULONG_PTR)SidAndAttrsInToken + (nUserAndGroupCount + 5) * sizeof(SID_AND_ATTRIBUTES)))
@@ -1103,7 +1051,8 @@ _FX void *Token_RestrictHelper1(
     // in Token_RestrictHelper3, see below in the next section of code
     //
 
-    if (Token_RestrictedSids_offset) {
+    // $Offset$
+    if (Dyndata_Active) {
 
         //
         // SeFilterToken will fail if the existing token has
@@ -1122,9 +1071,9 @@ _FX void *Token_RestrictHelper1(
         ULONG SidCount = 0;
 
         ULONG RestrictSidCountInToken = *(ULONG *)
-            ((ULONG_PTR)TokenObject + Token_RestrictedSidCount_offset);
+            ((ULONG_PTR)TokenObject + Dyndata_Config.RestrictedSidCount_offset);
         SID_AND_ATTRIBUTES *RestrictSidsInToken = *(SID_AND_ATTRIBUTES **)
-            ((ULONG_PTR)TokenObject + Token_RestrictedSids_offset);
+            ((ULONG_PTR)TokenObject + Dyndata_Config.RestrictedSids_offset);
 
         if (RestrictSidCountInToken && RestrictSidsInToken) {
 
@@ -1189,10 +1138,10 @@ _FX void *Token_RestrictHelper1(
 			// group.  see also:  http://support.microsoft.com/kb/278259
 			//
 
-            if (Token_UserAndGroups_offset) {
+            if (Dyndata_Config.UserAndGroups_offset) {
 
                 SidAndAttrsInToken = *(SID_AND_ATTRIBUTES **)
-                    ((ULONG_PTR)TempNewTokenObject + Token_UserAndGroups_offset);
+                    ((ULONG_PTR)TempNewTokenObject + Dyndata_Config.UserAndGroups_offset);
             }
 
             if (SidAndAttrsInToken) {
@@ -1286,11 +1235,11 @@ _FX void *Token_RestrictHelper1(
             //
 
             ULONG_PTR AddressToSetZero =
-                ((ULONG_PTR)NewTokenObject + Token_RestrictedSidCount_offset);
+                ((ULONG_PTR)NewTokenObject + Dyndata_Config.RestrictedSidCount_offset);
             *(ULONG *)AddressToSetZero = 0;
 
             AddressToSetZero =
-                ((ULONG_PTR)NewTokenObject + Token_RestrictedSids_offset);
+                ((ULONG_PTR)NewTokenObject + Dyndata_Config.RestrictedSids_offset);
             *(ULONG_PTR *)AddressToSetZero = 0;
         }
 
@@ -1546,80 +1495,20 @@ _FX NTSTATUS Token_AssignPrimaryHandle(
     // on Windows Vista and later, we need to clear the PrimaryTokenFrozen
     // bit in the EPROCESS structure before we can replace the primary token
 
-    // $Offset$ - Hard Offset Dependency
-
     // dt nt!_eprocess
 
-    if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+    // $Offset$
+    if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA && Dyndata_Active) {
 
         ULONG Flags2_Offset = 0;                // EPROCESS.Flags2
         ULONG SignatureLevel_Offset;        // EPROCESS.SignatureLevel
         ULONG MitigationFlags_Offset = 0;   // EPROCESS.MitigationFlags
 
-#ifdef _M_ARM64
+#ifdef _WIN64
 
-        Flags2_Offset = 0x418;
-        MitigationFlags_Offset = 0xA90;
-        SignatureLevel_Offset = 0x938;
-
-#elif _WIN64
-
-        if (Driver_OsVersion >= DRIVER_WINDOWS_10) {
-            if (Driver_OsBuild >= 19013) {
-                Flags2_Offset = 0x460;
-                MitigationFlags_Offset = 0x9d0;
-                SignatureLevel_Offset = 0x878;
-            }
-            else if (Driver_OsBuild >= 18980) {
-                Flags2_Offset = 0x460;
-                MitigationFlags_Offset = 0x9d0;
-                SignatureLevel_Offset = 0x879;
-            }
-            else if (Driver_OsBuild >= 18885) { //Windows 10 RS7 FR
-                Flags2_Offset = 0x318;
-                MitigationFlags_Offset = 0x890;
-                SignatureLevel_Offset = 0x738;
-            }
-            else if (Driver_OsBuild >= 18312) { // Windows 10 May 2019 Update
-                Flags2_Offset = 0x308;
-                MitigationFlags_Offset = 0x850;
-                SignatureLevel_Offset = 0x6f8;
-            }
-            else if (Driver_OsBuild >= 18290) { //Windows 10 RS6 FR
-                Flags2_Offset = 0x308;
-                MitigationFlags_Offset = 0x828;
-                SignatureLevel_Offset = 0x6d0;
-            }
-            else if (Driver_OsBuild >= 17661) { //Windows 10 RS5 FR
-                Flags2_Offset = 0x300;
-                MitigationFlags_Offset = 0x820;
-                SignatureLevel_Offset = 0x6c8;
-            }
-            else if (Driver_OsBuild >= 16241) {
-                Flags2_Offset = 0x300;
-                MitigationFlags_Offset = 0x828; //Flags4_Offset in windows 10 FCU
-                SignatureLevel_Offset = 0x6c8;
-            }
-            else if (Driver_OsBuild < 14965 || Driver_OsBuild >= 15042) {
-                Flags2_Offset = 0x300;  // Windows 10,  64-bit
-                SignatureLevel_Offset = 0x6c8;
-                MitigationFlags_Offset = 0x6cc;
-            }
-            else {
-                Flags2_Offset = 0x308;  // Windows 10 Fast Ring build 14965+,  64-bit
-                SignatureLevel_Offset = 0x6d0;
-
-            }
-        }
-        else if (Driver_OsVersion == DRIVER_WINDOWS_8 || Driver_OsVersion == DRIVER_WINDOWS_81)
-            Flags2_Offset = 0x2F8;  // Windows 8, 8.1,  64-bit
-
-        else if (Driver_OsVersion == DRIVER_WINDOWS_7)
-            Flags2_Offset = 0x43C;  // Windows 7,       64-bit
-
-        else
-            Flags2_Offset = 0x36C;  // Windows XP,      64-bit
-                                    // Windows Vista,   64-bit
+        Flags2_Offset = Dyndata_Config.Flags2_offset;
+        SignatureLevel_Offset = Dyndata_Config.SignatureLevel_offset;
+        MitigationFlags_Offset = Dyndata_Config.MitigationFlags_offset;
 
 #else ! _WIN64
 
@@ -1701,7 +1590,8 @@ _FX NTSTATUS Token_AssignPrimaryHandle(
 
     status = ZwSetInformationProcess(ProcessHandle, ProcessAccessToken, &info, sizeof(info));
 
-    if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+    // $Offset$
+    if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA && Dyndata_Active) {
 
         *PtrPrimaryTokenFrozen |= SavePrimaryTokenFrozen;
     }

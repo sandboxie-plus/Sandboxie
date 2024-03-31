@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2023 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -268,6 +268,151 @@ NTSTATUS GetRegString(ULONG RelativeTo, const WCHAR *Path, const WCHAR *ValueNam
     return status;
 }
 
+_FX ULONG GetRegDword(const WCHAR *KeyPath, const WCHAR *ValueName)
+{
+    NTSTATUS status;
+    RTL_QUERY_REGISTRY_TABLE qrt[2];
+    UNICODE_STRING uni;
+    ULONG value;
+
+    value = -1;
+
+    uni.Length = 4;
+    uni.MaximumLength = 4;
+    uni.Buffer = (WCHAR *)&value;
+
+    memzero(qrt, sizeof(qrt));
+    qrt[0].Flags =  RTL_QUERY_REGISTRY_REQUIRED |
+        RTL_QUERY_REGISTRY_DIRECT |
+        RTL_QUERY_REGISTRY_TYPECHECK |
+        RTL_QUERY_REGISTRY_NOEXPAND;
+    qrt[0].Name = (WCHAR *)ValueName;
+    qrt[0].EntryContext = &uni;
+    qrt[0].DefaultType = (REG_DWORD << RTL_QUERY_REGISTRY_TYPECHECK_SHIFT) | REG_NONE;
+
+    status = RtlQueryRegistryValues(
+        RTL_REGISTRY_ABSOLUTE, KeyPath, qrt, NULL, NULL);
+
+    if (status != STATUS_SUCCESS)
+        return 0;
+
+    if (value == -1) {
+
+        //
+        // if value is not string, RtlQueryRegistryValues writes
+        // it directly into EntryContext
+        //
+
+        value = *(ULONG *)&uni;
+    }
+
+    return value;
+}
+
+NTSTATUS SetRegValue(const WCHAR *KeyPath, const WCHAR *ValueName, const void *Data, ULONG uSize)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    HANDLE handle = NULL;
+    UNICODE_STRING keyPath;
+    UNICODE_STRING valueName;
+    OBJECT_ATTRIBUTES objattrs;
+    ULONG disp;
+
+    if (!KeyPath || !ValueName || !Data)
+        return STATUS_INVALID_PARAMETER;
+
+    RtlInitUnicodeString(&keyPath, KeyPath);
+    InitializeObjectAttributes(&objattrs, &keyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
+    status = ZwCreateKey(&handle, KEY_WRITE, &objattrs, 0, NULL, REG_OPTION_NON_VOLATILE, &disp);
+    if (status == STATUS_SUCCESS) {
+
+        RtlInitUnicodeString(&valueName, ValueName);
+        status = ZwSetValueKey(handle, &valueName, 0, REG_BINARY, (PVOID)Data, uSize);
+    }
+
+    if(handle)
+        ZwClose(handle);
+
+    return status;
+}
+
+NTSTATUS GetRegValue(const WCHAR *KeyPath, const WCHAR *ValueName, PVOID* ppData, ULONG* pSize)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    HANDLE handle = NULL;
+    UNICODE_STRING keyPath;
+    UNICODE_STRING valueName;
+    OBJECT_ATTRIBUTES objattrs;
+    ULONG disp;
+    ULONG length;
+    UCHAR buffer[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + 2048];
+    UCHAR* data = buffer;
+    ULONG data_len = 0;
+    
+    if (!KeyPath || !ValueName || !ppData || !pSize)
+        return STATUS_INVALID_PARAMETER;
+
+    RtlInitUnicodeString(&keyPath, KeyPath);
+    InitializeObjectAttributes(&objattrs, &keyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
+    status = ZwOpenKey(&handle, KEY_WRITE, &objattrs);
+    if (status == STATUS_SUCCESS) {
+
+        RtlInitUnicodeString(&valueName, ValueName);
+        status = ZwQueryValueKey(handle, &valueName, KeyValuePartialInformation, data, sizeof(buffer), &length);
+        if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL) {
+
+            data_len = length;
+            data = Mem_Alloc(Driver_Pool, data_len);
+            if (!data) {
+                data_len = 0;
+                status = STATUS_INSUFFICIENT_RESOURCES;
+                goto finish;
+            }
+
+            status = ZwQueryValueKey(handle, &valueName, KeyValuePartialInformation, data, data_len, &length);
+        }
+
+        if (NT_SUCCESS(status)) {
+
+            //
+            // guard the data copying as the pointer we get may be from user space!!!
+            //
+
+            __try {
+
+                PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)data;
+
+                if (!*ppData) {
+                    *ppData = Mem_Alloc(Driver_Pool, info->DataLength);
+                    if (!*ppData) {
+                        status = STATUS_INSUFFICIENT_RESOURCES;
+                        goto finish;
+                    }
+                }
+                else if (info->DataLength > *pSize) {
+                    status = STATUS_BUFFER_TOO_SMALL;
+                    goto finish;
+                }
+
+                *pSize = info->DataLength;
+                memcpy(*ppData, info->Data, info->DataLength);
+
+            } __except (EXCEPTION_EXECUTE_HANDLER) {
+                status = GetExceptionCode();
+            }
+        }
+    }
+
+finish:
+    if(handle)
+        ZwClose(handle);
+
+    if (data_len)
+        Mem_Free(data, data_len);
+
+    return status;
+}
+
 void *memmem(const void *pSearchBuf,
     size_t nBufSize,
     const void *pPattern,
@@ -287,32 +432,6 @@ void *memmem(const void *pSearchBuf,
     }
 
     return NULL;
-}
-
-
-//---------------------------------------------------------------------------
-// Util_GetRegistryValue
-//---------------------------------------------------------------------------
-
-
-NTSTATUS Util_GetRegistryValue(HANDLE hKey, LPCWSTR Value, PVOID pData, SIZE_T uSize)
-{
-	UCHAR buffer[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + sizeof(ULONG64)];
-	NTSTATUS status;
-	UNICODE_STRING valueName;
-	ULONG length;
-
-	RtlInitUnicodeString(&valueName, Value);
-	status = ZwQueryValueKey(hKey, &valueName, KeyValuePartialInformation, buffer, sizeof(buffer), &length);
-	if (NT_SUCCESS(status) && length <= sizeof(buffer))
-	{
-		PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)buffer;
-        if (info->DataLength == uSize)
-            memcpy(pData, info->Data, uSize);
-        else
-            return STATUS_BUFFER_TOO_SMALL;
-	}
-	return status;
 }
 
 
@@ -355,7 +474,7 @@ _FX BOOLEAN MyIsCallerSigned(void)
     NTSTATUS status;
 
     // in test signing mode don't verify the signature
-    if (MyIsTestSigning())
+    if (Driver_OsTestSigning)
         return TRUE;
 
     status = KphVerifyCurrentProcess();

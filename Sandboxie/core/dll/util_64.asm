@@ -1,5 +1,6 @@
 ;------------------------------------------------------------------------
 ; Copyright 2004-2020 Sandboxie Holdings, LLC 
+; Copyright 2020-2024 David Xanatos, xanasoft.com
 ;
 ; This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU General Public License as published by
@@ -451,5 +452,73 @@ if 0
 endif
 
 InstrumentationCallbackAsm endp
+
+endif
+
+
+
+;----------------------------------------------------------------------------
+; ApiInstrumentationProxy
+;----------------------------------------------------------------------------
+
+ifndef _M_ARM64EC
+
+extern ApiInstrumentation:near
+
+ApiInstrumentationAsm proc FRAME
+
+    ; spill arguments on the stack
+    mov [rsp+1*8],rcx
+    mov [rsp+2*8],rdx
+    mov [rsp+3*8],r8
+    mov [rsp+4*8],r9
+
+    ; prepare arguments for instrumentation
+    lea rcx,[rax + 8] ; pName
+    lea rdx,[rsp + 8] ; pArgs
+
+    ; invoke api entry instrumentation
+    push rax
+    .pushreg    rax
+    sub rsp,8+(4*8)
+    .allocstack 28h
+    .endprolog
+
+    call ApiInstrumentation
+    
+    add rsp,8+(4*8)
+    pop rax
+
+    ; restore arguments
+    mov rcx,[rsp+1*8]
+    mov rdx,[rsp+2*8]
+    mov r8,[rsp+3*8]
+    mov r9,[rsp+4*8]
+
+    ; jump to detour function
+	jmp qword ptr [rax]
+
+ApiInstrumentationAsm endp
+
+endif
+
+
+
+;----------------------------------------------------------------------------
+; ApiInstrumentationProxy
+;----------------------------------------------------------------------------
+
+ifndef _M_ARM64EC
+
+Sbie_CallNtServiceFunction_asm proc FRAME
+
+    .endprolog
+
+    mov         r10,rcx  
+    mov         eax, dword ptr [rsp+20*8]
+    syscall  
+    ret
+
+Sbie_CallNtServiceFunction_asm endp
 
 endif

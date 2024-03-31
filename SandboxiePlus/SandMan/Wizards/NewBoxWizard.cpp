@@ -779,7 +779,7 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
 
     QString SharedTemplateTip0 = tr("This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.");
     QString SharedTemplateTip1 = tr("This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.");
-    QString SharedTemplateTip2 = tr("This opiton adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.");
+    QString SharedTemplateTip2 = tr("This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.");
     QString SharedTemplateTip3 = tr("This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.");
     QComboBox* pSharedTemplate = new QComboBox();
     pSharedTemplate->addItem(tr("Disabled"));

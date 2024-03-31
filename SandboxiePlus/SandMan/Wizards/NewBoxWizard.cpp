@@ -129,8 +129,8 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         QString boxSettings = theAPI->SbieIniGetEx(BoxName, "");
         QStringList boxSettingsLines = boxSettings.split("\n", Qt::SkipEmptyParts);
 
-        int sharedTemplateType = field("sharedTemplate").toInt();
-        switch (sharedTemplateType)
+        int sharedTemplateMode = field("sharedTemplate").toInt();
+        switch (sharedTemplateMode)
         {
         case 1:
         case 2:
@@ -159,11 +159,11 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             // Default case
             break;
         }
-        if (sharedTemplateType == 1) { // Insert template
+        if (sharedTemplateMode == 1) { // Insert template
             QString insertValue = templateFullName.replace("Template_", "");
             pBox->InsertText("Template", insertValue);
         }
-        else if (sharedTemplateType == 2) { // Append to config
+        else if (sharedTemplateMode == 2) { // Append to config
             for (const QString& tLine : templateSettings.split("\n", Qt::SkipEmptyParts)) {
                 QStringList tParts = tLine.split("=", Qt::SkipEmptyParts);
                 if (tParts.size() != 2) {
@@ -185,7 +185,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             }
         }
         //
-        if (!disableWizardSettings || sharedTemplateType == 0) {
+        if (!disableWizardSettings || sharedTemplateMode == 0) {
 		    switch (BoxType)
 		    {
 		    	case CSandBoxPlus::eHardenedPlus:

@@ -7053,7 +7053,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2280"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation>不要停止与Windows相关的停留进程</translation>
+        <translation>不要停止含有窗口的驻留进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2320"/>

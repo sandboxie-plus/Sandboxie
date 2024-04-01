@@ -272,7 +272,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="771"/>
         <source>Shared template mode</source>
-        <translation type="unfinished"></translation>
+        <translation>共享模板模式</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="772"/>
@@ -280,22 +280,24 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>此设置将本地模板或其设置添加到沙盒配置中，以便在沙盒之间共享该模板中的设置。
+但是，如果选择“用作模板”选项作为共享模式，则某些设置可能不会反映在用户界面中。
+要更改模板的设置，只需在“沙盒选项”下的“应用程序模板”列表中找到“共享模板”，然后双击它进行编辑。要为沙盒禁用此模板，只需在模板列表中取消选中即可。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="779"/>
         <source>Disabled</source>
-        <translation type="unfinished">禁用</translation>
+        <translation>禁用</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>Use as a template</source>
-        <translation type="unfinished"></translation>
+        <translation>作为模板使用</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>Append to the configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>追加到配置中</translation>
     </message>
     <message>
         <source>Use a shared local template</source>
@@ -4184,9 +4186,10 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="SandMan.cpp" line="2472"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>您的 Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，因此禁用了基于令牌的安全隔离功能。这将使所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
+请检查 Sandboxie 是否有更新版本。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2675"/>

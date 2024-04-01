@@ -112,6 +112,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         QString templateFullName = TEMPLATE_PREFIX + templateName;
         QString templateSettings = theAPI->SbieIniGetEx(templateFullName, "");
         QString templateComment = tr("Add your settings after this line.");
+        QString templateTitle = tr("Shared Template");
 
         bool disableWizardSettings = templateSettings.contains(DISABLE_WIZARD_SETTINGS + "=y");
         bool removeDefaultAll = templateSettings.contains(REMOVE_DEFAULT_ALL + "=y");
@@ -120,20 +121,20 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
         // Create base template
         if (templateSettings.isEmpty()) {
-            QString templateBase = QStringLiteral("Tmpl.Title=%1\nTmpl.Class=Local\n%3=y\n%4=n\n%5=n\n%6=n\nTmpl.Comment=%2")
-                .arg(templateName, templateComment, DISABLE_WIZARD_SETTINGS, REMOVE_DEFAULT_ALL, REMOVE_DEFAULT_RECOVERS, REMOVE_DEFAULT_TEMPLATES);
+            QString templateBase = QStringLiteral("Tmpl.Title=%1\nTmpl.Class=Local\n%3=n\n%4=n\n%5=n\n%6=n\nTmpl.Comment=%2")
+                .arg(templateTitle, templateComment, DISABLE_WIZARD_SETTINGS, REMOVE_DEFAULT_ALL, REMOVE_DEFAULT_RECOVERS, REMOVE_DEFAULT_TEMPLATES);
             theAPI->SbieIniSet(templateFullName, "", templateBase);
         }
 
         QString boxSettings = theAPI->SbieIniGetEx(BoxName, "");
         QStringList boxSettingsLines = boxSettings.split("\n", Qt::SkipEmptyParts);
 
-        int sharedTemplateType = field("sharedTemplate").toInt();
-        switch (sharedTemplateType)
-		{
-        case 0:
+        int sharedTemplateMode = field("sharedTemplate").toInt();
+        switch (sharedTemplateMode)
+        {
         case 1:
         case 2:
+        case 3:
             // Remove default settings
             if (removeDefaultRecovers || removeDefaultAll) {
                 pBox->DelValue("RecoverFolder");
@@ -158,11 +159,11 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             // Default case
             break;
         }
-        if (sharedTemplateType == 1) { // Insert template
+        if (sharedTemplateMode == 1) { // Insert template
             QString insertValue = templateFullName.replace("Template_", "");
             pBox->InsertText("Template", insertValue);
         }
-        else if (sharedTemplateType == 2) { // Append to config
+        else if (sharedTemplateMode == 2) { // Append to config
             for (const QString& tLine : templateSettings.split("\n", Qt::SkipEmptyParts)) {
                 QStringList tParts = tLine.split("=", Qt::SkipEmptyParts);
                 if (tParts.size() != 2) {
@@ -184,7 +185,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             }
         }
         //
-        if (!disableWizardSettings) {
+        if (!disableWizardSettings || sharedTemplateMode == 0) {
 		    switch (BoxType)
 		    {
 		    	case CSandBoxPlus::eHardenedPlus:
@@ -768,20 +769,30 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     layout->addWidget(pImageProtection, row++, 1, 1, 3);
     registerField("imagesProtection", pImageProtection);
 
-    QLabel* pSharedTemplateLbl = new QLabel(tr("Shared template mode"), this);
+	QString SharedTemplateName = tr("Shared Template");
+	QLabel* pSharedTemplateLbl = new QLabel(tr("Shared template mode"), this);
     pSharedTemplateLbl->setToolTip(tr("This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes."
         "\nHowever, if 'use as a template' option is selected as the sharing mode, some settings may not be reflected in the user interface."
-        "\nTo change the template's settings, simply locate the 'SharedTemplate' template in the App Templates list under Sandbox Options, then double-click on it to edit it."
-        "\nTo disable this template for a sandbox, simply uncheck it in the template list."));
+        "\nTo change the template's settings, simply locate the '%1' template in the App Templates list under Sandbox Options, then double-click on it to edit it."
+        "\nTo disable this template for a sandbox, simply uncheck it in the template list.").arg(SharedTemplateName));
     layout->addWidget(pSharedTemplateLbl, row, 1);
 
+    QString SharedTemplateTip0 = tr("This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.");
+    QString SharedTemplateTip1 = tr("This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.");
+    QString SharedTemplateTip2 = tr("This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.");
+    QString SharedTemplateTip3 = tr("This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.");
     QComboBox* pSharedTemplate = new QComboBox();
     pSharedTemplate->addItem(tr("Disabled"));
+    pSharedTemplate->setItemData(0, SharedTemplateTip0, Qt::ToolTipRole);
     pSharedTemplate->addItem(tr("Use as a template"));
+    pSharedTemplate->setItemData(1, SharedTemplateTip1, Qt::ToolTipRole);
     pSharedTemplate->addItem(tr("Append to the configuration"));
+    pSharedTemplate->setItemData(2, SharedTemplateTip2, Qt::ToolTipRole);
+    pSharedTemplate->addItem(tr("Remove defaults if set"));
+    pSharedTemplate->setItemData(3, SharedTemplateTip3, Qt::ToolTipRole);
     layout->addWidget(pSharedTemplate, row++, 2);
     pSharedTemplate->setCurrentIndex(theConf->GetInt("BoxDefaults/SharedTemplate", 0));
-    layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 3, 1, 1);
+    layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 4, 1, 1);
     registerField("sharedTemplate", pSharedTemplate);
 
     setLayout(layout);

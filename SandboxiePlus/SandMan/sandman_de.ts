@@ -209,7 +209,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="772"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Gemeinsame Vorlage</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
@@ -222,42 +222,35 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Einstellung fügt der Sandboxkonfiguration eine lokale Vorlage oder deren Einstellungen hinzu, so dass die Einstellungen in dieser Vorlage gemeinsam von verschiedenen Sandboxen genutzt werden können.
+Wenn jedoch die Option &apos;Als eine Vorlage verwenden&apos; als Modus für die gemeinsame Nutzung ausgewählt ist, werden manche Einstellungen möglicherweise nicht auf der Benutzeroberfläche widergespiegelt.
+Um die Einstellungen der Vorlage zu ändern, suchen Sie einfach die Vorlage &apos;%1&apos; in der Liste der Programmvorlagen unter Sandboxeinstellungen und doppelklicken Sie darauf, um diese zu bearbeiten.
+Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das Häkchen in der Vorlagenliste.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option fügt der Boxkonfiguration keine Einstellungen hinzu und entfernt nicht die Standardboxeinstellungen, basierend auf den Löschvorgaben in der Vorlage.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option fügt die gemeinsame Vorlage der Boxkonfiguration als eine lokale Vorlage hinzu und kann auch die Standardboxeinstellungen, basierend auf den Löschvorgaben in der Vorlage, entfernen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option fügt die Einstellungen aus der gemeinsamen Vorlage der Boxkonfiguration hinzu und kann auch die Standardboxeinstellungen, basierend auf den Löschvorgaben in der Vorlage, entfernen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="783"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option fügt der Boxkonfiguration keine Einstellungen hinzu, kann aber die Standardboxeinstellungen, basierend auf den Löschvorgaben in der Vorlage, entfernen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
         <source>Remove defaults if set</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.
-However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
-To change the template&apos;s settings, simply locate the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
-To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="vanished">Diese Einstellung fügt der Sandboxkonfiguration eine lokale Vorlage oder deren Einstellungen hinzu, so dass die Einstellungen in dieser Vorlage gemeinsam von verschiedenen Sandboxen genutzt werden können.
-Wenn jedoch die Option &apos;Als eine Vorlage verwenden&apos; als Modus für die gemeinsame Nutzung ausgewählt ist, werden manche Einstellungen möglicherweise nicht auf der Benutzeroberfläche widergespiegelt.
-Um die Einstellungen der Vorlage zu ändern, suchen Sie einfach die Vorlage &apos;SharedTemplate&apos; in der Liste der Programmvorlagen unter Sandboxeinstellungen und doppelklicken Sie darauf, um diese zu bearbeiten.
-Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das Häkchen in der Vorlagenliste.</translation>
+        <translation>Standardeinstellungen entfernen, falls gesetzt</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
@@ -1205,7 +1198,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="115"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Gemeinsame Vorlage</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="276"/>

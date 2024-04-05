@@ -8,6 +8,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.13.5 / 5.68.5] - 2024-03-??
 
+### Added
+- added Setting all processes per box to a certain core [#3276](https://github.com/sandboxie-plus/Sandboxie/issues/3276)
+  - set "CpuAffinityMask=0x00000001" in the ini where 0x00000001 is a bit mask indicating which cores are to be used
+  - only supports cores 0-31 fore 32+ will be alwayd disabled when this option is used
+
 ### Changed
 - on systems in test signing mode sandboxie will by default try outdated offsets
 - changed Qt5 version to Qt5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)

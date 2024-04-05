@@ -610,6 +610,7 @@ _FX BOOLEAN Process_AddPath(
     ULONG len;
     BOOLEAN RemoveBackslashes = FALSE;
     BOOLEAN CheckReparse = FALSE;
+    BOOLEAN AddDrives = FALSE;
     BOOLEAN Reparsed;
     BOOLEAN ok;
     ULONG Level;
@@ -619,7 +620,7 @@ _FX BOOLEAN Process_AddPath(
     // if this is a file setting, also check the path for reparse points
     //
 
-    if (setting_name && AddStar) {
+    if (setting_name) {
 
         const WCHAR *setting_name_ptr = setting_name;
         if (_wcsnicmp(setting_name, Process_Normal, 6) == 0 ||
@@ -637,13 +638,16 @@ _FX BOOLEAN Process_AddPath(
 
             if (_wcsnicmp(setting_name_ptr, L"Key", 3) == 0
                   || _wcsnicmp(setting_name_ptr, L"Conf", 4) == 0) {
-                RemoveBackslashes = TRUE;
-
+                if (AddStar) {
+                    RemoveBackslashes = TRUE;
+                }
             } else if (_wcsnicmp(setting_name_ptr, L"File", 4) == 0
                   || _wcsnicmp(setting_name_ptr, L"Pipe", 4) == 0) {
-
-                RemoveBackslashes = TRUE;
-                CheckReparse = TRUE;
+                if (AddStar) {
+                    RemoveBackslashes = TRUE;
+                    CheckReparse = TRUE;
+                }
+                AddDrives = TRUE;
             }
         }
     }
@@ -682,11 +686,11 @@ _FX BOOLEAN Process_AddPath(
     }
 
     //
-    // if this is a file setting (CheckReparse == TRUE) and starts with
+    // if this is a file setting (AddDrives == TRUE) and starts with
     // *: or ?: then manually replace with each of the 26 possible drives
     //
 
-    if (ok && CheckReparse && (value[0] == L'?' || value[0] == L'*')
+    if (ok && AddDrives && (value[0] == L'?' || value[0] == L'*')
                            && (value[1] == L':')) {
 
         tmp = Mem_AllocString(proc->pool, value);

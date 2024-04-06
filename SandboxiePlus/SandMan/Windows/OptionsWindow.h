@@ -432,6 +432,9 @@ protected:
 	void LoadNetFwRules();
 	void SaveNetFwRules();
 	void LoadNetFwRulesTmpl(bool bUpdate = false);
+
+	void OnBlockDns();
+	void OnBlockSamba();
 	//
 	
 	// access

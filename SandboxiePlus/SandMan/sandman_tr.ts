@@ -7387,22 +7387,22 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3344"/>
         <source>Other Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Seçenekler</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3369"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlantı Noktası Engelleme</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3413"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Yaygın SAMBA bağlantı noktalarını engelle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3433"/>
         <source>Block DNS, UDP port 53</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS, UDP bağlantı noktası 53&apos;ü engelle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3457"/>
@@ -7648,7 +7648,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3232"/>
         <source>Port:</source>
-        <translation>Port:</translation>
+        <translation>Bağlantı Noktası:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3242"/>
@@ -7681,7 +7681,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3299"/>
         <source>Port</source>
-        <translation>Port</translation>
+        <translation>Bağlantı Noktası</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3304"/>

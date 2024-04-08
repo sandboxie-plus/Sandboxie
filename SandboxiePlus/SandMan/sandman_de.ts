@@ -7845,22 +7845,22 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3344"/>
         <source>Other Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere Optionen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3369"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>Portblockade</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3413"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockiere √ºbliche SAMBA-Ports</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3433"/>
         <source>Block DNS, UDP port 53</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockiere DNS, UPD Port 53</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3927"/>

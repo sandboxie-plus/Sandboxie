@@ -1288,7 +1288,32 @@ void CSettingsWindow::UpdateCert()
 
 void CSettingsWindow::OnGetCert()
 {
-	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(ui.txtSerial->text(), this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+	QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
+	QString Serial = ui.txtSerial->text();
+
+	QString Message;
+	if (Serial.length() > 5 && Serial.at(4).toUpper() == 'U') {
+		Message = tr("You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. "
+			"Please note that these type of key (<b>as it is clearly stated in bold on the website</b>) require you to have a preexisting valid supporter certificate, it is useless without one."
+			"<br />If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.");
+	}
+
+	if (Serial.length() > 5 && Serial.at(4).toUpper() == 'R') {
+		Message = tr("You are attempting to use a Renew-Key without having a preexisting supporter certificate. "
+			"Please note that these type of key (<b>as it is clearly stated in bold on the website</b>) require you to have a preexisting supporter certificate, it is useless without one.");
+	}
+
+	if (!Message.isEmpty()) {
+		Message += tr("<br /><br /><u>If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.</u>");
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
+		return;
+	}
+
+	QVariantMap Params;
+	if(!Certificate.isEmpty())
+		Params["key"] = GetArguments(Certificate, L'\n', L':').value("UPDATEKEY");
+
+	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(Serial, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)), Params);
 	if (Status.GetStatus() == OP_ASYNC) {
 		theGUI->AddAsyncOp(Status.GetValue());
 		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
@@ -1297,6 +1322,14 @@ void CSettingsWindow::OnGetCert()
 
 void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMap& Params)
 {
+	if (Certificate.isEmpty())
+	{
+		QString Error = Params["error"].toString();
+		qDebug() << Error;
+		QString Message = tr("Error retriving certificate: %1").arg(Error.isEmpty() ? tr("Unknown Error (probably a network issue)") : Error);
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
+		return;
+	}
 	ui.txtCertificate->setPlainText(Certificate);
 	ApplyCert();
 }

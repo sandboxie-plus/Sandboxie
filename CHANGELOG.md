@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - on systems in test signing mode sandboxie will by default try outdated offsets
 - changed Qt5 version to Qt5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)
 - moved network restrictions from general restrictions tab to an own tab on the network page
+- improved certificate retrival UI messages.
 
 ### Fixed
  - fixed Virtualization scheme Version 2 causing extremely slow file deleting speed [#3650](https://github.com/sandboxie-plus/Sandboxie/issues/3650)

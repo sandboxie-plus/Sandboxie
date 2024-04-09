@@ -2929,7 +2929,7 @@ Oyalayıcı Programların varsayılan listesi
 .
 
 4293;txt;01
-Varsayılan engellenmiş TCP/IP port listesi
+Varsayılan engellenmiş TCP/IP bağlantı noktaları listesi
 .
 
 4294;txt;01

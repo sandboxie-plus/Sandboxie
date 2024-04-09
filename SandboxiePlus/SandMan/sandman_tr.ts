@@ -5158,28 +5158,28 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1296"/>
-        <source>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
-        <translation type="unfinished"></translation>
+        <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
+        <translation>Özellik yükseltme anahtarını mevcut bir destekçi sertifikası girmeden önce kullanmaya çalışıyorsunuz. Lütfen bu tür anahtarların (&lt;b&gt;web sitesinde kalın harflerle açıkça belirtildiği gibi&lt;/b&gt;) mevcut geçerli bir destekçi sertifikasına sahip olmanızı gerektirdiğini, sertifika olmadan hiçbir işe yaramadığını unutmayın.&lt;br /&gt;Gelişmiş özellikleri kullanmak için, hem standart bir sertifika hem de gelişmiş özelliklerin kilidini açacak bir özellik yükseltme anahtarı edinmeniz gerekir.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1302"/>
-        <source>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</source>
-        <translation type="unfinished"></translation>
+        <source>You are attempting to use a Renew-Key without having a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) requires you to have a pre-existing supporter certificate; it is useless without one.</source>
+        <translation>Yenileme anahtarını mevcut bir destekçi sertifikası girmeden önce kullanmaya çalışıyorsunuz. Lütfen bu tür anahtarların (&lt;b&gt;web sitesinde kalın harflerle açıkça belirtildiği gibi&lt;/b&gt;) mevcut geçerli bir destekçi sertifikasına sahip olmanızı gerektirdiğini, sertifika olmadan hiçbir işe yaramadığını unutmayın.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1307"/>
-        <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
+        <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Ürün açıklamasını okumadan yanlışlıkla bu anahtarı aldıysanız, sorunu çözmek için lütfen e-posta (web sitemizde belirtilen) yoluyla bizimle iletişime geçin.&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
-        <source>Error retriving certificate: %1</source>
-        <translation type="unfinished"></translation>
+        <source>Error retrieving certificate: %1</source>
+        <translation>Sertifika alınırken hata oluştu: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Unknown Error (probably a network issue)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilinmeyen Hata (muhtemelen bir ağ sorunu)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1371"/>

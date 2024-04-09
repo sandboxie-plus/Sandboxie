@@ -1293,18 +1293,18 @@ void CSettingsWindow::OnGetCert()
 
 	QString Message;
 	if (Serial.length() > 5 && Serial.at(4).toUpper() == 'U') {
-		Message = tr("You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. "
-			"Please note that these type of key (<b>as it is clearly stated in bold on the website</b>) require you to have a preexisting valid supporter certificate, it is useless without one."
-			"<br />If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.");
+		Message = tr("You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. "
+			"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one."
+			"<br />If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.");
 	}
 
 	if (Serial.length() > 5 && Serial.at(4).toUpper() == 'R') {
-		Message = tr("You are attempting to use a Renew-Key without having a preexisting supporter certificate. "
-			"Please note that these type of key (<b>as it is clearly stated in bold on the website</b>) require you to have a preexisting supporter certificate, it is useless without one.");
+		Message = tr("You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. "
+			"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one.");
 	}
 
 	if (!Message.isEmpty()) {
-		Message += tr("<br /><br /><u>If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.</u>");
+		Message += tr("<br /><br /><u>If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.</u>");
 		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
 		return;
 	}
@@ -1326,7 +1326,7 @@ void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMa
 	{
 		QString Error = Params["error"].toString();
 		qDebug() << Error;
-		QString Message = tr("Error retriving certificate: %1").arg(Error.isEmpty() ? tr("Unknown Error (probably a network issue)") : Error);
+		QString Message = tr("Error retrieving certificate: %1").arg(Error.isEmpty() ? tr("Unknown Error (probably a network issue)") : Error);
 		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
 		return;
 	}

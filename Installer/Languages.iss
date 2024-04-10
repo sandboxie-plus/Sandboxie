@@ -408,7 +408,7 @@ swedish.UninstallTaskLabel2=Hur vill du avinstallera Sandboxie-Plus?
 swedish.UninstallTaskLabel3=&Behåll konfigureringsfiler och sandlådor%nDetta är det rekommenderade alternativet om du tänker installera om Sandboxie-Plus, men vill behålla dina konfigurationsfiler och sandlådor.
 swedish.UninstallTaskLabel4=Ta bort &konfigurationsfilerna%nVälj detta alternativ för att ta bort Sandboxie.ini och Sandboxie-Plus.ini:s konfigurationsfiler men behålla sandlådorna oförändrade.
 swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filroot sökvägen.
-Swedish.RefreshBuild=Nedladda senaste Mallar.ini och översättningar
+swedish.RefreshBuild=Nedladda senaste Mallar.ini och översättningar
 
 
 ; Turkish

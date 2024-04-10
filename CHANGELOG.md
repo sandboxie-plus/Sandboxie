@@ -10,16 +10,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Setting all processes per box to a certain core [#3276](https://github.com/sandboxie-plus/Sandboxie/issues/3276)
-  - set "CpuAffinityMask=0x00000001" in the ini where 0x00000001 is a bit mask indicating which cores are to be used
-  - only supports cores 0-31 fore 32+ will be alwayd disabled when this option is used
-- added checkbox for samba and dns port blocking
+  - set "CpuAffinityMask=0x00000001" in Sandboxie.ini, where 0x00000001 is a bit mask indicating which cores are to be used
+  - only supports cores 0-31, for 32+ will be always disabled when this option is used
+- added checkbox for Samba and DNS port blocking
 - added Weasel template [#3806](https://github.com/sandboxie-plus/Sandboxie/pull/3806) (thanks xWTF)
 
 ### Changed
-- on systems in test signing mode sandboxie will by default try outdated offsets
+- on systems in test signing mode, Sandboxie will try outdated offsets by default
 - changed Qt5 version to Qt5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)
 - moved network restrictions from general restrictions tab to an own tab on the network page
-- improved certificate retrival UI messages.
+- improved certificate retrieval UI messages
+- improved MPC-BE template [#3798](https://github.com/sandboxie-plus/Sandboxie/pull/3798)
 
 ### Fixed
  - fixed Virtualization scheme Version 2 causing extremely slow file deleting speed [#3650](https://github.com/sandboxie-plus/Sandboxie/issues/3650)

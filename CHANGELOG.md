@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - set "CpuAffinityMask=0x00000001" in the ini where 0x00000001 is a bit mask indicating which cores are to be used
   - only supports cores 0-31 fore 32+ will be alwayd disabled when this option is used
 - added checkbox for samba and dns port blocking
+- added Weasel template [#3806](https://github.com/sandboxie-plus/Sandboxie/pull/3806) (thanks xWTF)
 
 ### Changed
 - on systems in test signing mode sandboxie will by default try outdated offsets

@@ -25,6 +25,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
  - fixed Virtualization scheme Version 2 causing extremely slow file deleting speed [#3650](https://github.com/sandboxie-plus/Sandboxie/issues/3650)
 
+### Removed
+- removed obsolete recommendations in Templates.ini [#3802](https://github.com/sandboxie-plus/Sandboxie/pull/3802)
+
 
 
 ## [1.13.4 / 5.68.4] - 2024-03-25

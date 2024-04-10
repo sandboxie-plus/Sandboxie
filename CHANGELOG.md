@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.5 / 5.68.5] - 2024-03-??
+## [1.13.5 / 5.68.5] - 2024-04-10
 
 ### Added
 - added Setting all processes per box to a certain core [#3276](https://github.com/sandboxie-plus/Sandboxie/issues/3276)

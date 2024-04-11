@@ -6,6 +6,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.13.6 / 5.68.6] - 2024-04-
+
+
+### Fixed
+- fixed When I change the BlockDNS and BlockPorts options, the Apply button is not activated [#3807](https://github.com/sandboxie-plus/Sandboxie/issues/3807)
+
+
+
 ## [1.13.5 / 5.68.5] - 2024-04-10
 
 ### Added

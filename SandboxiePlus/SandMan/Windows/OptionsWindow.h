@@ -134,6 +134,9 @@ private slots:
 
 	void OnTestNetFwRule();
 	void OnClearNetFwTest();
+
+	void OnBlockDns();
+	void OnBlockSamba();
 	//
 	
 	// access
@@ -432,9 +435,6 @@ protected:
 	void LoadNetFwRules();
 	void SaveNetFwRules();
 	void LoadNetFwRulesTmpl(bool bUpdate = false);
-
-	void OnBlockDns();
-	void OnBlockSamba();
 	//
 	
 	// access

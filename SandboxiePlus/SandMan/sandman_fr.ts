@@ -217,12 +217,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="772"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle partagé</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
         <source>Shared template mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode de modèle partagé</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
@@ -230,47 +230,50 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce paramètre ajoute un modèle local (ou bien ses réglages) à la configuration du bac à sable de sorte que les réglages de ce modèle soient partagés entre les bacs à sable.
+Cependant, si l&apos;option « Utiliser comme modèle » est choisie comme mode de partage, certains paramètres peuvent ne pas être reflétés dans l&apos;interface.
+Pour modifier les paramètres du modèle, trouvez simplement le modèle « %1 » dans la liste des modèles d&apos;applications dans les options du bac, puis double-cliquez dessus pour l&apos;éditer.
+Pour désactiver ce modèle pour un bac à sable, décochez-le simplement de la liste des modèles.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option n&apos;ajoute aucun paramètre à la configuration du bac et ne supprime pas les paramètres de bac par défaut même s&apos;il existe des paramètres de suppression à l&apos;intérieur du modèle.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option ajoute le modèle partagé à la configuration du bac en tant que modèle local et peut également supprimer les paramètres de bac par défaut en fonction des paramètres de suppression à l&apos;intérieur du modèle.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option ajoute les paramètres du modèle partagé à la configuration du bac et peut également supprimer les paramètres de bac par défaut en fonction des paramètres de suppression à l&apos;intérieur du modèle.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="783"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option n&apos;ajoute aucun paramètre à la configuration du bac, mais peut supprimer les paramètres de bac par défaut en fonction des paramètres de suppression à l&apos;intérieur du modèle.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
         <source>Remove defaults if set</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer ceux par défaut si définis</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
         <source>Disabled</source>
-        <translation type="unfinished">Désactivé</translation>
+        <translation>Désactivé</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="787"/>
         <source>Use as a template</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser comme modèle</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="789"/>
         <source>Append to the configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter à la configuration</translation>
     </message>
     <message>
         <source>Use a shared local template</source>
@@ -1331,7 +1334,7 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="115"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle partagé</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="276"/>
@@ -6074,19 +6077,19 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="1296"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Vous essayez d&apos;utiliser une fonction « Clé de mise à jour » sans avoir saisi un certificat d&apos;adhérent pré-existant. Veuillez remarquer que ce genre de clé (&lt;b&gt;comme clairement indiqué en gras sur le site web&lt;/b) nécessite que vous ayez un certificat d&apos;adhérent pré-existant valide ; c&apos;est inutile sans lui.&lt;br /&gt;Si vous voulez utiliser les fonctions avancées, vous devez obtenir à la fois un certificat standard et la clé de mise à jour de fonction pour débloquer la fonction avancée.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1302"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Vous essayez d&apos;utiliser une clé de renouvellement sans avoir saisi un certificat d&apos;adhérent pré-existant. Veuillez remarquer que ce genre de clé (&lt;b&gt;comme clairement indiqué en gras sur le site web&lt;/b) nécessite que vous ayez un certificat d&apos;adhérent pré-existant valide ; c&apos;est inutile sans lui.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1307"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Si vous n&apos;avez pas lu la description du produit et obtenu cette clé par erreur, veuillez nous contacter par courriel (fourni sur notre site web) afin de résoudre ce problème.&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1319"/>
@@ -6097,12 +6100,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la récupération du certificat : %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Unknown Error (probably a network issue)</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur inconnue (probablement un problème de réseau)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1385"/>
@@ -8769,22 +8772,22 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3344"/>
         <source>Other Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Autres options</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3369"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>Blocage des ports</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3413"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer les ports SAMBA habituels</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3433"/>
         <source>Block DNS, UDP port 53</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer le DNS (UDP port 53)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3457"/>

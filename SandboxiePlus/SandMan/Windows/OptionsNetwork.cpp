@@ -40,7 +40,7 @@ void COptionsWindow::CreateNetwork()
 	ui.cmbProtFwTest->addItem(tr("ICMP"), (int)eIcmp);
 	connect(ui.btnClearFwTest, SIGNAL(clicked(bool)), this, SLOT(OnClearNetFwTest()));
 
-	connect(ui.chkBlockDns, SIGNAL(clicked(bool)), this, SLOT(OnBlockDNS()));
+	connect(ui.chkBlockDns, SIGNAL(clicked(bool)), this, SLOT(OnBlockDns()));
 	connect(ui.chkBlockSamba, SIGNAL(clicked(bool)), this, SLOT(OnBlockSamba()));
 }
 

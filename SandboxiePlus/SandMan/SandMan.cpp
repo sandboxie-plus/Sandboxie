@@ -2470,7 +2470,7 @@ void CSandMan::OnStatusChanged()
 			if (DynData == 0)
 			{
 				QString Message = tr("Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, "
-					"resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.\r\n"
+					"resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.\n"
 					"Please check if there is an update for sandboxie.").arg(versionInfo.dwBuildNumber);
 				OnLogMessage(Message, true);
 

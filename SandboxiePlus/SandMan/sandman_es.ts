@@ -215,12 +215,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="772"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Plantilla Compartida</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
         <source>Shared template mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de Plantilla Compartida</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
@@ -228,32 +228,35 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este ajuste añade una plantilla local o sus configuraciones a la configuración de la sandbox para que los ajustes de esa plantilla se compartan entre las sandboxes.
+Sin embargo, si se selecciona la opción &apos;usar como plantilla&apos; como modo de compartir, algunos ajustes pueden no reflejarse en la interfaz de usuario.
+Para cambiar los ajustes de la plantilla, simplemente localiza la plantilla &apos;%1&apos; en la lista de Plantillas de Aplicaciones bajo Opciones de Sandbox, luego haz doble clic en ella para editarla.
+Para desactivar esta plantilla para una sandbox, simplemente desmárcala en la lista de plantillas.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este ajuste no añade ninguna configuración a la configuración de la caja y no elimina la configuración predeterminada de la caja basada en los ajustes de eliminación dentro de la plantilla.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este ajuste agrega la plantilla compartida a la configuración de la caja como una plantilla local y también puede eliminar la configuración predeterminada de la caja en función de los ajustes de eliminación dentro de la plantilla.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este ajuste agrega la configuración de la plantilla compartida a la configuración de la caja como una plantilla local y también puede eliminar la configuración predeterminada de la caja en función de los ajustes de eliminación dentro de la plantilla.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="783"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este ajuste no añade ninguna configuración a la configuración de la caja, pero puede eliminar la configuración predeterminada de la caja en función de los ajustes de eliminación dentro de la plantilla.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
         <source>Remove defaults if set</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar valores predeterminados si establecidos</translation>
     </message>
     <message>
         <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.
@@ -267,17 +270,17 @@ Para deshabilitar esta plantilla para un sandbox, simplemente desmárcala en la 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
         <source>Disabled</source>
-        <translation type="unfinished">Deshabilitado</translation>
+        <translation>Deshabilitado</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="787"/>
         <source>Use as a template</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar como plantilla</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="789"/>
         <source>Append to the configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Anexar a la configuración</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="760"/>
@@ -1302,7 +1305,7 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="115"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Plantilla Compartida</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="276"/>
@@ -5843,19 +5846,19 @@ NO seleccionará: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="1296"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Está intentando usar una Clave de Actualización de características sin haber ingresado un certificado de patrocinador preexistente. Tenga en cuenta que este tipo de clave (&lt;b&gt;como se indica claramente en negritas en el sitio web&lt;/b&gt;) requiere que tenga un certificado de patrocinador válido preexistente; es inútil sin uno.&lt;br /&gt;Si desea usar las características avanzadas, necesita obtener tanto un certificado estándar como la clave de actualización de características para desbloquear la funcionalidad avanzada.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1302"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Está intentando usar una Clave de Renovación sin haber ingresado un certificado de patrocinador preexistente. Tenga en cuenta que este tipo de clave (&lt;b&gt;como se indica claramente en negritas en el sitio web&lt;/b&gt;) requiere que tenga un certificado de patrocinador válido preexistente; es inútil sin uno.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1307"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Si no ha leído la descripción del producto y ha obtenido esta clave por error, por favor contáctanos por email (disponible en nuestra web) para resolver esta incidencia.&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1319"/>
@@ -5866,12 +5869,12 @@ NO seleccionará: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Error obteniendo certificado: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Unknown Error (probably a network issue)</source>
-        <translation type="unfinished"></translation>
+        <translation>Error Desconocido (probablemente un problema de red)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1371"/>
@@ -8412,22 +8415,22 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3344"/>
         <source>Other Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Otras Opciones</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3369"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloqueo de Puerto</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3413"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear puertos SAMBA comunes</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3433"/>
         <source>Block DNS, UDP port 53</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear DNS, UDP puerto 53</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3457"/>

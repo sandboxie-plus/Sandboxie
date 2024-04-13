@@ -277,6 +277,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	m_HoldChange = false;
 
+	DWORD logical_drives = GetLogicalDrives();
+	for (CHAR search = 'D'; search <= 'Z'; search++) {
+		if ((logical_drives & (1 << (search - 'A'))) == 0)
+			ui.cmbRamLetter->addItem(QString("%1:\\").arg(QChar(search)));
+	}
+
 	CPathEdit* pEditor = new CPathEdit();
 	ui.txtEditor->parentWidget()->layout()->replaceWidget(ui.txtEditor, pEditor);
 	ui.txtEditor->deleteLater();
@@ -399,11 +405,6 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.txtRamLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnRamDiskChange()));
 	connect(ui.chkRamLetter, SIGNAL(stateChanged(int)), this, SLOT(OnRamDiskChange()));
 	connect(ui.cmbRamLetter, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
-	DWORD logical_drives = GetLogicalDrives();
-	for (CHAR search = 'D'; search <= 'Z'; search++) {
-		if ((logical_drives & (1 << (search - 'A'))) == 0)
-			ui.cmbRamLetter->addItem(QString("%1:\\").arg(QChar(search)));
-	}
 	//
 
 	// Advanced Config
@@ -988,7 +989,7 @@ void CSettingsWindow::LoadSettings()
 		if(uDiskLimit > 0) ui.txtRamLimit->setText(QString::number(uDiskLimit));
 		QString RamLetter = theAPI->GetGlobalSettings()->GetText("RamDiskLetter");
 		ui.chkRamLetter->setChecked(!RamLetter.isEmpty());
-		ui.cmbRamLetter->setCurrentText(RamLetter);
+		ui.cmbRamLetter->setCurrentIndex(ui.cmbRamLetter->findText(RamLetter));
 		m_HoldChange = true;
 		OnRamDiskChange();
 		m_HoldChange = false;

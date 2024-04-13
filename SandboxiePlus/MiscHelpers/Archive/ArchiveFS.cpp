@@ -182,7 +182,23 @@ QAbstractFileEngine::FileFlags C7zFileEngine::fileFlags(FileFlags type) const
 
 QString C7zFileEngine::fileName(FileName file) const
 {
-    return _filename;
+	auto filename = Split2(_filename, "/", true);
+	if (filename.second.isEmpty()) {
+		filename.second = filename.first;
+		filename.first.clear();
+	}
+	switch (file)
+	{
+	case BaseName:
+	case AbsoluteName:
+		return filename.second;
+	case PathName:
+	case AbsolutePathName:
+		return filename.first;
+	//default:
+	//case DefaultName:
+	}
+	return _filename;
 }
 
 QDateTime C7zFileEngine::fileTime(FileTime time) const

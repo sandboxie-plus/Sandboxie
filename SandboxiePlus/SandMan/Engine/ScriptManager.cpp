@@ -92,7 +92,8 @@ void CScriptManager::LoadIssues(const QString& IssueDir)
 
     //QDir Dir(IssueDir);
     //foreach(const QFileInfo & Info, Dir.entryInfoList(QStringList() << "*.js", QDir::Files)) {
-    foreach(const QString & FileName, ListDir(IssueDir, QStringList() << "*.js")) {
+    auto List = ListDir(IssueDir, QStringList() << "*.js");
+    foreach(const QString & FileName, List) {
         QFileInfo Info(IssueDir + FileName);
         QString Script = ReadFileAsString(Info.filePath());
 

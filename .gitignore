@@ -368,3 +368,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 SandboxiePlus/Build_*
+/SandboxiePlus/enc_temp_folder

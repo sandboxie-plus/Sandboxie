@@ -15,6 +15,10 @@
 #include <windows.h>
 #include <QRandomGenerator>
 
+#ifdef QT_NO_SSL
+#error Qt requires Open SSL support for the updater to work
+#endif
+
 #ifdef _DEBUG
 
 // mess with a dummy installation when debugging

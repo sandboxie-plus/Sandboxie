@@ -355,9 +355,14 @@ bool CCertificatePage::validatePage()
     if (m_pEvaluate->isChecked())
         return true;
 
+    QByteArray Certificate = m_pCertificate->toPlainText().toUtf8();
     QString Serial = m_pSerial->text();
+
     if (!Serial.isEmpty()) {
-        SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(Serial, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+        QVariantMap Params;
+	    if(!Certificate.isEmpty())
+		    Params["key"] = GetArguments(Certificate, L'\n', L':').value("UPDATEKEY");
+        SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(Serial, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)), Params);
 	    if (Status.GetStatus() == OP_ASYNC) {
 		    theGUI->AddAsyncOp(Status.GetValue());
             Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
@@ -365,7 +370,6 @@ bool CCertificatePage::validatePage()
         return false;
     }
 
-    QByteArray Certificate = m_pCertificate->toPlainText().toUtf8();
     if (!Certificate.isEmpty() && Certificate != g_Certificate)
 		return CSettingsWindow::ApplyCertificate(Certificate, this);
 

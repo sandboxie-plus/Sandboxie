@@ -516,6 +516,19 @@ _FX void Dll_InitInjected(void)
         ExitProcess(-1);
     }
 
+    //
+    // Setup soft resource restrictions
+    //
+
+    WCHAR str[32];
+    if (NT_SUCCESS(SbieApi_QueryConfAsIs(NULL, L"CpuAffinityMask", 0, str, sizeof(str) - sizeof(WCHAR))) && str[0] == L'0' && (str[1] == L'x' || str[1] == L'X')){
+
+        WCHAR* endptr;
+        KAFFINITY AffinityMask = wcstoul(str + 2, &endptr, 16); // note we only support core 0-31 as wcstoull is not exported by ntdll
+        if (AffinityMask)
+            NtSetInformationProcess(GetCurrentProcess(), ProcessAffinityMask, &AffinityMask, sizeof(KAFFINITY));
+    }
+
     Dll_InitComplete = TRUE;
 
     if (! Dll_RestrictedToken)

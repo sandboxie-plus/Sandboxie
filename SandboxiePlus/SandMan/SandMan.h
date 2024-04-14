@@ -48,6 +48,7 @@ public:
 	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
 	static QString		GetVersion();
+	static void			ShowMessageBox(QWidget* Widget, QMessageBox::Icon Icon, const QString& Message);
 
 	bool				IsImDiskReady() const { return m_ImDiskReady; }
 

@@ -2470,7 +2470,7 @@ void CSandMan::OnStatusChanged()
 			if (DynData == 0)
 			{
 				QString Message = tr("Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, "
-					"resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.\r\n"
+					"resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.\n"
 					"Please check if there is an update for sandboxie.").arg(versionInfo.dwBuildNumber);
 				OnLogMessage(Message, true);
 
@@ -2880,13 +2880,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 		if (!Message.isEmpty())
 		{
-			QMessageBox msgBox(this);
-			msgBox.setTextFormat(Qt::RichText);
-			msgBox.setIcon(QMessageBox::Critical);
-			msgBox.setWindowTitle("Sandboxie-Plus");
-			msgBox.setText(Message);
-			msgBox.setStandardButtons(QMessageBox::Ok);
-			msgBox.exec();
+			ShowMessageBox(this, QMessageBox::Critical, Message);
 			/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
 			if (msgBox.exec() == QDialogButtonBox::Yes) {
 				OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
@@ -2921,6 +2915,17 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true) && !IsDisableMessages())
 		m_pPopUpWindow->AddLogMessage(MsgCode, MsgData, ProcessId);
+}
+
+void CSandMan::ShowMessageBox(QWidget* Widget, QMessageBox::Icon Icon, const QString& Message)
+{
+	QMessageBox msgBox(Widget);
+	msgBox.setTextFormat(Qt::RichText);
+	msgBox.setIcon(Icon);
+	msgBox.setWindowTitle("Sandboxie-Plus");
+	msgBox.setText(Message);
+	msgBox.setStandardButtons(QMessageBox::Ok);
+	msgBox.exec();
 }
 
 void CSandMan::SaveMessageLog(QIODevice* pFile)

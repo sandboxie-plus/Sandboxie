@@ -277,6 +277,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	m_HoldChange = false;
 
+	DWORD logical_drives = GetLogicalDrives();
+	for (CHAR search = 'D'; search <= 'Z'; search++) {
+		if ((logical_drives & (1 << (search - 'A'))) == 0)
+			ui.cmbRamLetter->addItem(QString("%1:\\").arg(QChar(search)));
+	}
+
 	CPathEdit* pEditor = new CPathEdit();
 	ui.txtEditor->parentWidget()->layout()->replaceWidget(ui.txtEditor, pEditor);
 	ui.txtEditor->deleteLater();
@@ -399,11 +405,6 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.txtRamLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnRamDiskChange()));
 	connect(ui.chkRamLetter, SIGNAL(stateChanged(int)), this, SLOT(OnRamDiskChange()));
 	connect(ui.cmbRamLetter, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
-	DWORD logical_drives = GetLogicalDrives();
-	for (CHAR search = 'D'; search <= 'Z'; search++) {
-		if ((logical_drives & (1 << (search - 'A'))) == 0)
-			ui.cmbRamLetter->addItem(QString("%1:\\").arg(QChar(search)));
-	}
 	//
 
 	// Advanced Config
@@ -988,7 +989,7 @@ void CSettingsWindow::LoadSettings()
 		if(uDiskLimit > 0) ui.txtRamLimit->setText(QString::number(uDiskLimit));
 		QString RamLetter = theAPI->GetGlobalSettings()->GetText("RamDiskLetter");
 		ui.chkRamLetter->setChecked(!RamLetter.isEmpty());
-		ui.cmbRamLetter->setCurrentText(RamLetter);
+		ui.cmbRamLetter->setCurrentIndex(ui.cmbRamLetter->findText(RamLetter));
 		m_HoldChange = true;
 		OnRamDiskChange();
 		m_HoldChange = false;
@@ -1288,7 +1289,32 @@ void CSettingsWindow::UpdateCert()
 
 void CSettingsWindow::OnGetCert()
 {
-	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(ui.txtSerial->text(), this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+	QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
+	QString Serial = ui.txtSerial->text();
+
+	QString Message;
+	if (Serial.length() > 5 && Serial.at(4).toUpper() == 'U') {
+		Message = tr("You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. "
+			"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one."
+			"<br />If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.");
+	}
+
+	if (Serial.length() > 5 && Serial.at(4).toUpper() == 'R') {
+		Message = tr("You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. "
+			"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one.");
+	}
+
+	if (!Message.isEmpty()) {
+		Message += tr("<br /><br /><u>If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.</u>");
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
+		return;
+	}
+
+	QVariantMap Params;
+	if(!Certificate.isEmpty())
+		Params["key"] = GetArguments(Certificate, L'\n', L':').value("UPDATEKEY");
+
+	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(Serial, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)), Params);
 	if (Status.GetStatus() == OP_ASYNC) {
 		theGUI->AddAsyncOp(Status.GetValue());
 		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
@@ -1297,6 +1323,14 @@ void CSettingsWindow::OnGetCert()
 
 void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMap& Params)
 {
+	if (Certificate.isEmpty())
+	{
+		QString Error = Params["error"].toString();
+		qDebug() << Error;
+		QString Message = tr("Error retrieving certificate: %1").arg(Error.isEmpty() ? tr("Unknown Error (probably a network issue)") : Error);
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
+		return;
+	}
 	ui.txtCertificate->setPlainText(Certificate);
 	ApplyCert();
 }

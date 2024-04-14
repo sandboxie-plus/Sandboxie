@@ -15,6 +15,10 @@
 #include <windows.h>
 #include <QRandomGenerator>
 
+#ifdef QT_NO_SSL
+#error Qt requires Open SSL support for the updater to work
+#endif
+
 #ifdef _DEBUG
 
 // mess with a dummy installation when debugging
@@ -203,12 +207,12 @@ void CGetFileJob::Finish(QNetworkReply* pReply)
 
 SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* receiver, const char* member, const QVariantMap& Params)
 {
-	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
+	QString UpdateKey = Params["key"].toString();
 
 	QUrlQuery Query;
 	if (!Serial.isEmpty()) {
 		Query.addQueryItem("SN", Serial);
-		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N') { // node locked business use
+		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N') {
 			wchar_t uuid_str[40];
 			theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
 			Query.addQueryItem("HwId", QString::fromWCharArray(uuid_str));

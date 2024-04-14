@@ -39,6 +39,19 @@ void COptionsWindow::CreateNetwork()
 	ui.cmbProtFwTest->addItem(tr("UDP"), (int)eUdp);
 	ui.cmbProtFwTest->addItem(tr("ICMP"), (int)eIcmp);
 	connect(ui.btnClearFwTest, SIGNAL(clicked(bool)), this, SLOT(OnClearNetFwTest()));
+
+	connect(ui.chkBlockDns, SIGNAL(clicked(bool)), this, SLOT(OnBlockDns()));
+	connect(ui.chkBlockSamba, SIGNAL(clicked(bool)), this, SLOT(OnBlockSamba()));
+}
+
+void COptionsWindow::OnBlockDns()
+{ 
+	SetTemplate("BlockDNS", ui.chkBlockDns->isChecked());
+}
+
+void COptionsWindow::OnBlockSamba()
+{ 
+	SetTemplate("BlockPorts", ui.chkBlockSamba->isChecked());
 }
 
 void COptionsWindow::LoadINetAccess()
@@ -162,6 +175,9 @@ void COptionsWindow::LoadBlockINet()
 			ui.treeINet->addTopLevelItem(pItem);
 		}
 	}
+
+	ui.chkBlockDns->setChecked(m_BoxTemplates.contains("BlockDNS"));
+	ui.chkBlockSamba->setChecked(m_BoxTemplates.contains("BlockPorts"));
 }
 
 QString COptionsWindow::GetINetModeStr(int Mode)

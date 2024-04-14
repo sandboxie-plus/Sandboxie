@@ -40,7 +40,6 @@ Name: "vietnamese"; MessagesFile: "isl\Vietnamese.isl"
 ;Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
 
 
-
 [CustomMessages]
 
 ; English
@@ -133,6 +132,7 @@ dutch.UninstallTaskLabel2=Hoe wilt u Sandboxie-Plus verwijderen?
 dutch.UninstallTaskLabel3=Configuratiebestanden en sandboxen behouden%nDit is de aanbevolen optie als u Sandboxie-Plus opnieuw wilt installeren en uw configuratiebestanden en sandboxen wilt behouden.
 dutch.UninstallTaskLabel4=Configuratiebestanden verwijderen%nSelecteer deze optie om de configuratiebestanden Sandboxie.ini en Sandboxie-Plus.ini wilt verwijderen en de sandboxen ongewijzigd wilt laten.
 dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelecteer deze optie om alle configuratiebestanden en sandboxen te verwijderen, inclusief de Sandbox-map die zich in aangepaste paden met FileRootPath bevindt.
+dutch.RefreshBuild=Download de nieuwste Templates.ini en vertalingen
 
 ; French
 french.AddSandboxedMenu=Ajouter « Exécuter dans un bac à sable » au menu contextuel
@@ -364,6 +364,7 @@ russian.UninstallTaskLabel2=Как вы хотите удалить Sandboxie-Pl
 russian.UninstallTaskLabel3=Сохранять файлы конфигурации и песочницы (&K)%nЭто наиболее рекомендуемый вариант, если вы планируете переустановить Sandboxie-Plus, сохранив файлы конфигурации и песочницы.
 russian.UninstallTaskLabel4=Удалить файлы конфигурации (&C)%nВыберите этот параметр, чтобы удалить файлы конфигурации Sandboxie.ini и Sandboxie-Plus.ini, оставив файлы песочницы без изменений.
 russian.UninstallTaskLabel5=Удалить файлы конфигурации и песочницы (&S)%nВыберите этот параметр, чтобы удалить все файлы конфигурации и песочницы, включая папку Sandbox, расположение которой заданно в FileRootPath.
+russian.RefreshBuild=Скачать последние Templates.ini и переводы
 
 ; Spanish
 spanish.AddSandboxedMenu=Agregar "Ejecutar Aislado en una Sandbox" al menú contextual
@@ -386,6 +387,7 @@ spanish.UninstallTaskLabel2=¿Cómo le gustaría desinstalar Sandboxie-Plus?
 spanish.UninstallTaskLabel3=&Mantenga los archivos de configuración y las sandboxes%nEsta es la opción más recomendada si planea reinstalar Sandboxie-Plus mientras mantiene sus archivos de configuración y las sandboxes.
 spanish.UninstallTaskLabel4=Eliminar archivos de &configuración%nSeleccione esta opción para eliminar los archivos de configuración Sandboxie.ini y Sandboxie-Plus.ini manteniendo las sandboxes sin cambios.
 spanish.UninstallTaskLabel5=Eliminar archivos de configuración y las &sandboxes%nSeleccione esta opción para eliminar todos los archivos de configuración y las sandboxes, incluida la carpeta Sandbox ubicada en rutas personalizadas mediante FileRootPath.
+spanish.RefreshBuild=Descargar la última versión de Templates.ini y traducciones
 
 ; Swedish
 swedish.AddSandboxedMenu=Lägg till Kör sandlådad, till snabbmenyn
@@ -407,7 +409,8 @@ swedish.UninstallTaskLabel1=Välj avinstallationstyp
 swedish.UninstallTaskLabel2=Hur vill du avinstallera Sandboxie-Plus?
 swedish.UninstallTaskLabel3=&Behåll konfigureringsfiler och sandlådor%nDetta är det rekommenderade alternativet om du tänker installera om Sandboxie-Plus, men vill behålla dina konfigurationsfiler och sandlådor.
 swedish.UninstallTaskLabel4=Ta bort &konfigurationsfilerna%nVälj detta alternativ för att ta bort Sandboxie.ini och Sandboxie-Plus.ini:s konfigurationsfiler men behålla sandlådorna oförändrade.
-swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med fil-root sökvägen.
+swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filroot sökvägen.
+swedish.RefreshBuild=Nedladda senaste Mallar.ini och översättningar
 
 ; Turkish
 turkish.AddSandboxedMenu=Bağlam menüsüne "Korumalı Alanda Çalıştır" seçeneği ekle
@@ -453,6 +456,7 @@ ukrainian.UninstallTaskLabel2=Як ви хочете видалити Sandboxie-
 ukrainian.UninstallTaskLabel3=Зберігти файли конфігурації и пісочниць (&K)%nЦе найбільш рекомендований варіант, якщо ви плануете перевстановити Sandboxie-Plus, зберігши файли конфігурації и пісочниць.
 ukrainian.UninstallTaskLabel4=Видалити файли конфігурації (&C)%nОберіть цей параметр, щоб видалити файли конфігурації Sandboxie.ini та Sandboxie-Plus.ini, залишивши файли пісочниць без змін.
 ukrainian.UninstallTaskLabel5=Видалити файли конфігурації та пісочниць (&S)%nОберіть цей параметр, щоб видалити всі файли конфігурації та пісочниць, включаючи папку Sandbox, яка має місцерозташування в FileRootPath.
+ukrainian.RefreshBuild=Завантажити останні Templates.ini та переклади
 
 ; Vietnamese
 vietnamese.AddSandboxedMenu=Thêm "Chạy trong Sandbox" vào menu ngữ cảnh
@@ -475,3 +479,4 @@ vietnamese.UninstallTaskLabel2=Bạn muốn gỡ cài đặt Sandboxie-Plus như
 vietnamese.UninstallTaskLabel3=&Giữ các tệp cấu hình và Sandbox%nĐây là tùy chọn được đề xuất nhiều nhất nếu bạn định cài đặt lại Sandboxie-Plus trong khi vẫn giữ các tệp cấu hình và các Sandbox của mình.
 vietnamese.UninstallTaskLabel4=Xoá &tập tin cấu hình%nChọn tùy chọn này để xóa các tệp cấu hình Sandboxie.ini và Sandboxie-Plus.ini trong khi vẫn giữ nguyên các Sandbox.
 vietnamese.UninstallTaskLabel5=Xóa các tệp cấu hình và các &Sandbox%nChọn tùy chọn này để xóa tất cả các tệp cấu hình và Sandbox, bao gồm cả thư mục Sandbox nằm trong đường dẫn tùy chỉnh với FileRootPath.
+vietnamese.RefreshBuild=Tải xuống Templates.ini mới nhất và các bản dịch

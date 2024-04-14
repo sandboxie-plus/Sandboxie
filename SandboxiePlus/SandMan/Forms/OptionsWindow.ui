@@ -465,7 +465,7 @@
              <item row="10" column="1" colspan="5">
               <widget class="QCheckBox" name="chkAutoEmpty">
                <property name="text">
-                <string>Auto delete content when last sandboxed process terminates</string>
+                <string>Auto delete content changes when last sandboxed process terminates</string>
                </property>
               </widget>
              </item>
@@ -669,37 +669,6 @@
              <string>Restrictions</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_36">
-             <item row="0" column="0" colspan="2">
-              <widget class="QLabel" name="lblNetwork">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="toolTip">
-                <string>Protect the system from sandboxed processes</string>
-               </property>
-               <property name="text">
-                <string>Network restrictions</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkBlockNetShare">
-               <property name="text">
-                <string>Block network files and folders, unless specifically opened.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkBlockNetParam">
-               <property name="text">
-                <string>Prevent change to network and firewall parameters (user mode)</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0" colspan="2">
               <widget class="QLabel" name="lblPrinting">
                <property name="font">
@@ -3112,7 +3081,7 @@ The process match level has a higher priority than the specificity and describes
          <item row="1" column="0">
           <widget class="QTabWidget" name="tabsInternet">
            <property name="currentIndex">
-            <number>0</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tabINet">
             <attribute name="title">
@@ -3363,6 +3332,105 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabNetConfig">
+            <attribute name="title">
+             <string>Other Options</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_64">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_30">
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="chkBlockNetParam">
+                 <property name="text">
+                  <string>Prevent change to network and firewall parameters (user mode)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblPorts">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the system from sandboxed processes</string>
+                 </property>
+                 <property name="text">
+                  <string>Port Blocking</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QCheckBox" name="chkBlockNetShare">
+                 <property name="text">
+                  <string>Block network files and folders, unless specifically opened.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="lblNetwork">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the system from sandboxed processes</string>
+                 </property>
+                 <property name="text">
+                  <string>Network restrictions</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <spacer name="verticalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="chkBlockSamba">
+                 <property name="text">
+                  <string>Block common SAMBA ports</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <spacer name="horizontalSpacer_18">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="chkBlockDns">
+                 <property name="text">
+                  <string>Block DNS, UDP port 53</string>
                  </property>
                 </widget>
                </item>

@@ -6,11 +6,39 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.5 / 5.68.5] - 2024-03-??
+
+
+## [1.13.6 / 5.68.6] - 2024-04-
+
+
+### Fixed
+- fixed When I change the BlockDNS and BlockPorts options, the Apply button is not activated [#3807](https://github.com/sandboxie-plus/Sandboxie/issues/3807)
+- fixed troubleshooting wizard broke with new qt [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
+- fixed Settings dialog now showing the right ram disk letter
+
+
+
+## [1.13.5 / 5.68.5] - 2024-04-10
+
+### Added
+- added Setting all processes per box to a certain core [#3276](https://github.com/sandboxie-plus/Sandboxie/issues/3276)
+  - set "CpuAffinityMask=0x00000001" in Sandboxie.ini, where 0x00000001 is a bit mask indicating which cores are to be used
+  - only supports cores 0-31, for 32+ will be always disabled when this option is used
+- added checkbox for Samba and DNS port blocking
+- added Weasel template [#3806](https://github.com/sandboxie-plus/Sandboxie/pull/3806) (thanks xWTF)
 
 ### Changed
-- on systems in test signing mode sandboxie will by default try outdated offsets
+- on systems in test signing mode, Sandboxie will try outdated offsets by default
 - changed Qt5 version to Qt5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)
+- moved network restrictions from general restrictions tab to an own tab on the network page
+- improved certificate retrieval UI messages
+- improved MPC-BE template [#3798](https://github.com/sandboxie-plus/Sandboxie/pull/3798)
+
+### Fixed
+ - fixed Virtualization scheme Version 2 causing extremely slow file deleting speed [#3650](https://github.com/sandboxie-plus/Sandboxie/issues/3650)
+
+### Removed
+- removed obsolete recommendations in Templates.ini [#3802](https://github.com/sandboxie-plus/Sandboxie/pull/3802)
 
 
 

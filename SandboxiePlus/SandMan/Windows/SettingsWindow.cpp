@@ -487,6 +487,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	m_CertChanged = false;
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
+	connect(ui.txtSerial, SIGNAL(textChanged(const QString&)), this, SLOT(KeyChanged()));
+	ui.btnGetCert->setEnabled(false);
 	connect(theGUI, SIGNAL(CertUpdated()), this, SLOT(UpdateCert()));
 
 	ui.txtCertificate->setPlaceholderText(
@@ -1293,13 +1295,20 @@ void CSettingsWindow::OnGetCert()
 	QString Serial = ui.txtSerial->text();
 
 	QString Message;
-	if (Serial.length() > 5 && Serial.at(4).toUpper() == 'U') {
+
+	if (Serial.length() < 4 || Serial.left(4).compare("SBIE", Qt::CaseInsensitive) != 0) {
+		Message = tr("This does not look like a Sandboxie-Plus Serial Number.<br />"
+		"If you have attempted to enter the UpdateKey or the Signature from a certificate, "
+		"that is not correct, please enter the entire certificate into the text area above instead.");
+	}
+
+	else if (Serial.length() > 5 && Serial.at(4).toUpper() == 'U') {
 		Message = tr("You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. "
 			"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one."
 			"<br />If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.");
 	}
 
-	if (Serial.length() > 5 && Serial.at(4).toUpper() == 'R') {
+	else if (Serial.length() > 5 && Serial.at(4).toUpper() == 'R') {
 		Message = tr("You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. "
 			"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one.");
 	}
@@ -2479,6 +2488,11 @@ void CSettingsWindow::CertChanged()
 	QPalette palette = QApplication::palette();
 	ui.txtCertificate->setPalette(palette);
 	OnOptChanged();
+}
+
+void CSettingsWindow::KeyChanged()
+{
+	ui.btnGetCert->setEnabled(ui.txtSerial->text().length() > 5);
 }
 
 void CSettingsWindow::LoadCertificate(QString CertPath)

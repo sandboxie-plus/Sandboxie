@@ -191,6 +191,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkRamBox, SIGNAL(clicked(bool)), this, SLOT(OnDiskChanged()));
 	connect(ui.chkEncrypt, SIGNAL(clicked(bool)), this, SLOT(OnDiskChanged()));
 	connect(ui.chkForceProtection, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkUserOperation, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
 
 	bool bImDiskReady = theGUI->IsImDiskReady();
@@ -332,6 +333,7 @@ void COptionsWindow::LoadGeneral()
 	ui.chkRamBox->setChecked(m_pBox->GetBool("UseRamDisk", false));
 	ui.chkEncrypt->setChecked(m_pBox->GetBool("UseFileImage", false));
 	ui.chkForceProtection->setChecked(m_pBox->GetBool("ForceProtectionOnMount", false));
+	ui.chkUserOperation->setChecked(m_pBox->GetBool("BlockInterferenceControl", false));
 	if (ui.chkRamBox->isEnabled()) {
 		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
 		ui.chkForceProtection->setEnabled(!ui.chkRamBox->isChecked());
@@ -427,6 +429,7 @@ void COptionsWindow::SaveGeneral()
 	//WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "n");
 	WriteAdvancedCheck(ui.chkProtectPower, "BlockInterferePower", "y", "n");
 	WriteAdvancedCheck(ui.chkForceProtection, "ForceProtectionOnMount", "y", "n");
+	WriteAdvancedCheck(ui.chkUserOperation, "BlockInterferenceControl", "y", "n");
 	WriteAdvancedCheck(ui.chkVmReadNotify, "NotifyProcessAccessDenied", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
 	//WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");

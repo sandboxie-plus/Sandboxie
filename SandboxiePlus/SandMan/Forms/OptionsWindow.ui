@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>7</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -55,7 +55,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsGeneral">
            <property name="currentIndex">
-            <number>3</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="tabOptions">
             <attribute name="title">
@@ -465,7 +465,7 @@
              <item row="10" column="1" colspan="5">
               <widget class="QCheckBox" name="chkAutoEmpty">
                <property name="text">
-                <string>Auto delete content when last sandboxed process terminates</string>
+                <string>Auto delete content changes when last sandboxed process terminates</string>
                </property>
               </widget>
              </item>
@@ -4661,8 +4661,8 @@ instead of &quot;*&quot;.</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>75</width>
-                  <height>16</height>
+                  <width>98</width>
+                  <height>28</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="dbgLayout">

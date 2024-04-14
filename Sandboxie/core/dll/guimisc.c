@@ -178,14 +178,16 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         if (Gui_UseProxyService) {
             SBIEDLL_HOOK_GUI(GetWindow);
             SBIEDLL_HOOK_GUI(GetParent);
-            SBIEDLL_HOOK_GUI(SetForegroundWindow);
+            
             SBIEDLL_HOOK_GUI(MonitorFromWindow);
         
             SBIEDLL_HOOK_GUI(SetCursor);
             SBIEDLL_HOOK_GUI(GetIconInfo);
-            SBIEDLL_HOOK_GUI(SetCursorPos);
-            SBIEDLL_HOOK_GUI(ClipCursor);
+            
         }
+		SBIEDLL_HOOK_GUI(SetCursorPos);
+		SBIEDLL_HOOK_GUI(SetForegroundWindow);
+		SBIEDLL_HOOK_GUI(ClipCursor);
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
 		
@@ -350,6 +352,14 @@ _FX HWND Gui_SetParent(HWND hWndChild, HWND hWndNewParent)
 
 _FX BOOL Gui_ClipCursor(const RECT *lpRect)
 {
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE) && lpRect)
+	{
+		SetLastError(ERROR_ACCESS_DENIED);
+		return FALSE;
+	}
+	if (!Gui_UseProxyService)
+		return __sys_ClipCursor(lpRect);
+	
     GUI_CLIP_CURSOR_REQ req;
     void *rpl;
 
@@ -506,6 +516,11 @@ _FX BOOL Gui_GetIconInfo(HICON hIcon, PICONINFO piconinfo)
 
 _FX BOOL Gui_SetCursorPos(int x, int y)
 {
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE)) {
+		return FALSE;
+	}
+	if (!Gui_UseProxyService)
+		return __sys_SetCursorPos(x, y);
     GUI_SET_CURSOR_POS_REQ req;
     GUI_SET_CURSOR_POS_RPL *rpl;
     ULONG error;
@@ -539,8 +554,12 @@ _FX BOOL Gui_SetForegroundWindow(HWND hWnd)
 {
     GUI_SET_FOREGROUND_WINDOW_REQ req;
     void *rpl;
-
-    if (__sys_IsWindow(hWnd) || (! hWnd)) {
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE))
+	{
+		SetLastError(ERROR_ACCESS_DENIED);
+		return FALSE;
+	}
+    if (__sys_IsWindow(hWnd) || (! hWnd)|| !Gui_UseProxyService) {
         // window is in the same sandbox (or is NULL), no need for GUI Proxy
         return __sys_SetForegroundWindow(hWnd);
     }

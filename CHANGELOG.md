@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed When I change the BlockDNS and BlockPorts options, the Apply button is not activated [#3807](https://github.com/sandboxie-plus/Sandboxie/issues/3807)
 - fixed troubleshooting wizard broke with new qt [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
 - fixed Settings dialog now showing the right ram disk letter
+- fixed issues with updater broke with new qt due to missing SSL support [3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
 
 
 

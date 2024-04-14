@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 프로세스가 중지되면 상자를 잠급니다.</translation>
     </message>
 </context>
 <context>
@@ -262,7 +262,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="765"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">호스트에 설치된 샌드박스 프로그램이 샌드박스에서 dll을 로드하지 못하도록 방지</translation>
+        <translation>호스트에 설치된 샌드박스 프로그램이 샌드박스에서 DLL을 로드하지 못하도록 방지</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
@@ -273,12 +273,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="772"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>공유 템플릿</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
         <source>Shared template mode</source>
-        <translation type="unfinished"></translation>
+        <translation>공유 템플릿 모드</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
@@ -286,47 +286,50 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 설정은 로컬 템플릿 또는 해당 설정을 샌드박스 구성에 추가하여 해당 템플릿의 설정이 sandboxes 간에 공유되도록 합니다.
+그러나 &apos;템플릿으로 사용&apos; 옵션을 공유 모드로 선택하면 사용자 인터페이스에 일부 설정이 반영되지 않을 수 있습니다.
+템플릿의 설정을 변경하려면 샌드박스 옵션 아래의 앱 템플릿 목록에서 &apos;%1&apos; 템플릿을 찾은 다음 해당 템플릿을 두 번 클릭하여 편집하기만 하면 됩니다.
+샌드박스에 대해 이 템플릿을 비활성화하려면 템플릿 목록에서 이 템플릿의 선택을 취소하기만 하면 됩니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션은 박스 구성에 설정을 추가하지 않으며 템플릿 내의 제거 설정에 따라 기본 박스 설정을 제거하지 않습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션은 공유 템플릿을 로컬 템플릿으로 박스 구성에 추가하고 템플릿 내의 제거 설정에 따라 기본 박스 설정을 제거할 수도 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션은 공유 템플릿의 설정을 박스 구성에 추가하고 템플릿 내의 제거 설정에 따라 기본 박스 설정을 제거할 수도 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="783"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션은 박스 구성에 설정을 추가하지 않지만 템플릿 내의 제거 설정에 따라 기본 박스 설정을 제거할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
         <source>Remove defaults if set</source>
-        <translation type="unfinished"></translation>
+        <translation>설정된 경우 기본값 제거</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
         <source>Disabled</source>
-        <translation type="unfinished">사용 안 함</translation>
+        <translation>사용 안 함</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="787"/>
         <source>Use as a template</source>
-        <translation type="unfinished"></translation>
+        <translation>템플릿으로 사용</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="789"/>
         <source>Append to the configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>구성에 추가</translation>
     </message>
     <message>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
@@ -1346,12 +1349,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="114"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 행 뒤에 설정을 추가합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="115"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>공유 템플릿</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="276"/>
@@ -3518,7 +3521,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</oldsource>
-        <translation type="unfinished">Windows 빌드 %1이(가) Sandboxie 버전의 현재 지원 기능을 초과하여 토큰 기반 보안 격리가 해제됩니다. 따라서 모든 응용 프로그램이 보안 격리 없이 응용 프로그램 구획 모드로 작동합니다.
+        <translation>Windows 빌드 %1이(가) Sandboxie 버전의 현재 지원 기능을 초과하여 토큰 기반 보안 격리가 해제됩니다. 따라서 모든 응용 프로그램이 보안 격리 없이 응용 프로그램 구획 모드로 작동합니다.
 Sandboxie에 대한 업데이트가 있는지 확인 부탁드립니다.</translation>
     </message>
     <message>
@@ -3927,7 +3930,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 프로세스 일시 중단</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="515"/>
@@ -4121,7 +4124,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2675"/>
         <source>Failed to configure hotkey %1, error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>단축키 %1을(를) 구성하지 못했습니다. 오류: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2761"/>
@@ -5659,19 +5662,19 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1297"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>기존 후원자 인증서를 입력하지 않고 기능 업그레이드 키를 사용하려고 합니다. (&lt;b&gt;웹 사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 후원자 인증서가 있어야 하며, 인증서가 없으면 쓸모가 없습니다.&lt;br /&gt;고급 기능을 사용하려면 표준 인증서와 기능 업그레이드 키를 모두 받아야 합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1303"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>기존 후원자 인증서를 입력하지 않고 갱신 키를 사용하려고 합니다. (&lt;b&gt;웹사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 지원자 인증서가 있어야 하며, 해당 인증서가 없으면 쓸모가 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1308"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;제품 설명을 읽지 않고 실수로 이 키를 얻으신 경우 이메일 (홈페이지 제공)로 연락하여 이 문제를 해결해 주시기 바랍니다.&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1320"/>
@@ -5682,12 +5685,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1330"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>인증서를 검색하는 중 오류 발생: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1330"/>
         <source>Unknown Error (probably a network issue)</source>
-        <translation type="unfinished"></translation>
+        <translation>알 수 없는 오류 (아마도 네트워크 문제)</translation>
     </message>
     <message>
         <source>Retreiving certificate...</source>
@@ -7922,7 +7925,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="3815"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">호스트에 설치된 샌드박스 프로그램이 샌드박스에서 dll을 로드하지 못하도록 방지</translation>
+        <translation>호스트에 설치된 샌드박스 프로그램이 샌드박스에서 DLL을 로드하지 못하도록 방지</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3753"/>
@@ -8072,24 +8075,24 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="799"/>
         <source>Prevent sandboxed processes from using public methods to capture window images</source>
         <oldsource>Block process from taking screenshots of windows not belonging to the containing sandbox</oldsource>
-        <translation type="unfinished">포함 샌드박스에 속하지 않는 창의 스크린샷을 찍는 과정 차단</translation>
+        <translation>샌드박스화된 프로세스가 공개 방법을 사용하여 창 이미지를 캡처하는 것을 방지</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="792"/>
         <source>Prevent sandboxed processes from interfering with power operations</source>
         <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="unfinished">샌드박스의 프로세스가 전원 작동을 방해하는 것을 방지</translation>
+        <translation>샌드박스화된 프로세스가 전원 작업을 방해하는 것을 방지</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="380"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>마운트에 강제 보호</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1369"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished">샌드박스에서 창 이미지를 가져오는 것을 방지합니다.</translation>
+        <translation>샌드박스로 처리된 창에서 창 이미지를 캡처하지 못하도록 방지</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1397"/>
@@ -8135,17 +8138,17 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2217"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
+        <translation>중지 옵션</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2239"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>지연 시간 사용</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2249"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows에서 지속적인 프로세스 중지</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2401"/>
@@ -8234,22 +8237,22 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3344"/>
         <source>Other Options</source>
-        <translation type="unfinished"></translation>
+        <translation>기타 옵션</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3369"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>포트 차단</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3413"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>공통 SAMBA 포트 차단</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3433"/>
         <source>Block DNS, UDP port 53</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS, UDP 포트 53 차단</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3457"/>
@@ -8478,7 +8481,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4123"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>이러한 명령은 샌드박스의 모든 프로세스가 완료된 후 언박스 상태로 실행됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4452"/>
@@ -9212,7 +9215,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1698"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;인증서 사용 안내&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1834"/>

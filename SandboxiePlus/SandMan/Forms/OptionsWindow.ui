@@ -55,7 +55,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsGeneral">
            <property name="currentIndex">
-            <number>1</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabOptions">
             <attribute name="title">
@@ -669,7 +669,7 @@
              <string>Restrictions</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_36">
-             <item row="3" column="0" colspan="2">
+             <item row="0" column="0" colspan="2">
               <widget class="QLabel" name="lblPrinting">
                <property name="font">
                 <font>
@@ -686,21 +686,21 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="1" colspan="2">
+             <item row="1" column="1" colspan="2">
               <widget class="QCheckBox" name="chkBlockSpooler">
                <property name="text">
                 <string>Block access to the printer spooler</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="2">
+             <item row="2" column="2">
               <widget class="QCheckBox" name="chkOpenSpooler">
                <property name="text">
                 <string>Remove spooler restriction, printers can be installed outside the sandbox</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="2">
+             <item row="3" column="2">
               <widget class="QCheckBox" name="chkPrintToFile">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -713,7 +713,7 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="lblOther">
                <property name="font">
                 <font>
@@ -730,14 +730,14 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="1" colspan="2">
+             <item row="5" column="1" colspan="2">
               <widget class="QCheckBox" name="chkOpenProtectedStorage">
                <property name="text">
                 <string>Open System Protected Storage</string>
                </property>
               </widget>
              </item>
-             <item row="9" column="1">
+             <item row="6" column="1">
               <widget class="QLabel" name="label_39">
                <property name="minimumSize">
                 <size>
@@ -756,35 +756,35 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="2">
+             <item row="6" column="2">
               <widget class="QCheckBox" name="chkOpenCredentials">
                <property name="text">
                 <string>Open Windows Credentials Store (user mode)</string>
                </property>
               </widget>
              </item>
-             <item row="10" column="1" colspan="2">
+             <item row="7" column="1" colspan="2">
               <widget class="QCheckBox" name="chkCloseClipBoard">
                <property name="text">
                 <string>Block read access to the clipboard</string>
                </property>
               </widget>
              </item>
-             <item row="11" column="1" colspan="2">
+             <item row="8" column="1" colspan="2">
               <widget class="QCheckBox" name="chkVmRead">
                <property name="text">
                 <string>Allow to read memory of unsandboxed processes (not recommended)</string>
                </property>
               </widget>
              </item>
-             <item row="12" column="2">
+             <item row="9" column="2">
               <widget class="QCheckBox" name="chkVmReadNotify">
                <property name="text">
                 <string>Issue message 2111 when a process access is denied</string>
                </property>
               </widget>
              </item>
-             <item row="13" column="1" colspan="2">
+             <item row="10" column="1" colspan="2">
               <layout class="QVBoxLayout" name="verticalLayout_3">
                <item>
                 <widget class="QCheckBox" name="chkProtectPower">
@@ -802,7 +802,14 @@
                </item>
               </layout>
              </item>
-             <item row="14" column="1">
+             <item row="11" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkUserOperation">
+               <property name="text">
+                <string>Prevent interference with user control operations whatever</string>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="1">
               <spacer name="verticalSpacer_12">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -815,7 +822,7 @@
                </property>
               </spacer>
              </item>
-             <item row="15" column="2">
+             <item row="13" column="2">
               <spacer name="horizontalSpacer_5">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>

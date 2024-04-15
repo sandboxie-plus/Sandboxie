@@ -7247,7 +7247,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="808"/>
         <source>Prevent interference with user control operations (move mouse, bring in front, etc...)</source>
-        <translation>Verhindere die Beeinträchtigung von Benutzersteuerungsvorgängen (Maus bewegen, nach vorne holen, usw...)</translation>
+        <translation>Verhindere die Beeinträchtigung von Bedienvorgängen des Benutzers (Maus bewegen, nach vorne holen, usw...)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1376"/>

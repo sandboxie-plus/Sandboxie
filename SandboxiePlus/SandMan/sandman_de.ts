@@ -5210,7 +5210,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1300"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies sieht nicht nach einer Sandboxie-Plus Seriennummer aus.&lt;br /&gt;Wenn Sie versucht haben, den Update-Schlüssel oder die Signatur aus einem Zertifikat einzugeben, ist das nicht korrekt. Bitte geben Sie stattdessen das gesamte Zertifikat in das Textfeld oben ein.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1306"/>
@@ -6456,8 +6456,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="468"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
-        <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation type="unfinished">Inhalte automatisch löschen, wenn der letzte Prozess in der Sandbox beendet wurde</translation>
+        <translation>Inhaltsveränderungen automatisch löschen, wenn der letzte Prozess in der Sandbox beendet wurde</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="489"/>
@@ -7248,7 +7247,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="808"/>
         <source>Prevent interference with user control operations (move mouse, bring in front, etc...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhindere die Beeinträchtigung von Benutzersteuerungsvorgängen (Maus bewegen, nach vorne holen, usw...)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1376"/>

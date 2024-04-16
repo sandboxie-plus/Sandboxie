@@ -14,6 +14,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added "BlockInterferenceControl=y" option to prevent sandboxed processes from forcing windows on top and moving the mounse pointer (thanks Yeyixiao)
   - Note: this option may cause issues in games hence do not enable it for gaming boxes.
 
+### Changed
+- improved Avast template [#3777](https://github.com/sandboxie-plus/Sandboxie/pull/3777)
+
 ### Fixed
 - fixed When I change the BlockDNS and BlockPorts options, the Apply button is not activated [#3807](https://github.com/sandboxie-plus/Sandboxie/issues/3807)
 - fixed troubleshooting wizard broke with new qt [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)

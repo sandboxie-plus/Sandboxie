@@ -476,9 +476,9 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkConfidential, "ConfidentialBox", "y", "");
 	WriteAdvancedCheck(ui.chkNotifyProtect, "NotifyBoxProtected", "y", "");
 
-	WriteAdvancedCheck(ui.chkProtectWindow, "IsProtectScreen", "y", "n");
-	WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "n");
-	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "n");
+	WriteAdvancedCheck(ui.chkProtectWindow, "IsProtectScreen", "y", "");
+	WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "");
+	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "");
 
 	QStringList Users;
 	for (int i = 0; i < ui.lstUsers->count(); i++)

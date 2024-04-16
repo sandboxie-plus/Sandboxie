@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed troubleshooting wizard broke with new qt [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
 - fixed Settings dialog now showing the right ram disk letter
 - fixed issues with updater broke with new qt due to missing SSL support [3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
+- fixed Enabling "DropAdminRights/FakeAdminRights" adds "BlockInterferePower and ForceProtectionOnMount" to the INI [#3825](https://github.com/sandboxie-plus/Sandboxie/issues/3825)
 
 
 

@@ -458,8 +458,8 @@ typedef enum _FILE_INFORMATION_CLASS {
     FileNumaNodeInformation,                 // 53
     FileStandardLinkInformation,             // 54
     FileRemoteProtocolInformation,           // 55
-    FileRenameInformationBypassAccessCheck,  // 56
-    FileLinkInformationBypassAccessCheck,    // 57
+    FileRenameInformationBypassAccessCheck,  // 56 - kernel mode only
+    FileLinkInformationBypassAccessCheck,    // 57 - kernel mode only
     FileVolumeNameInformation,               // 58
     FileIdInformation,                       // 59
     FileIdExtdDirectoryInformation,          // 60
@@ -467,8 +467,18 @@ typedef enum _FILE_INFORMATION_CLASS {
     FileHardLinkFullIdInformation,
     FileIdExtdBothDirectoryInformation,
     FileDispositionInformationEx,
-    FileRenameInformationEx,                 // 65
-    FileRenameInformationExBypassAccessCheck,
+    FileRenameInformationEx,                        // 65
+    FileRenameInformationExBypassAccessCheck,       // 66 - kernel mode only
+    FileDesiredStorageClassInformation,             // 67
+    FileStatInformation,                            // 68
+    FileMemoryPartitionInformation,                 // 69
+    FileStatLxInformation,                          // 70
+    FileCaseSensitiveInformation,                   // 71
+    FileLinkInformationEx,                          // 72
+    FileLinkInformationExBypassAccessCheck,         // 73 - kernel mode only
+    FileStorageReserveIdInformation,                // 74
+    FileCaseSensitiveInformationForceAccessCheck,   // 75
+
     FileMaximumInformation
 } FILE_INFORMATION_CLASS, *PFILE_INFORMATION_CLASS;
 
@@ -697,6 +707,21 @@ typedef struct _FILE_ALL_INFORMATION {
     FILE_ALIGNMENT_INFORMATION AlignmentInformation;
     FILE_NAME_INFORMATION NameInformation;
 } FILE_ALL_INFORMATION, *PFILE_ALL_INFORMATION;
+
+// FileLinkInformation
+typedef struct _FILE_LINK_INFORMATION {
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+    union {
+        BOOLEAN ReplaceIfExists;  // FileLinkInformation
+        ULONG Flags;              // FileLinkInformationEx
+    } DUMMYUNIONNAME;
+#else
+    BOOLEAN ReplaceIfExists;
+#endif
+    HANDLE RootDirectory;
+    ULONG FileNameLength;
+    WCHAR FileName[1];
+} FILE_LINK_INFORMATION, *PFILE_LINK_INFORMATION;
 
 __declspec(dllimport) NTSTATUS __stdcall
 NtCreateFile(

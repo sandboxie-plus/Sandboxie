@@ -64,7 +64,8 @@ static NTSTATUS File_CreateOperation(
 
 static NTSTATUS File_RenameOperation(
     PROCESS *proc,
-    FLT_IO_PARAMETER_BLOCK *Iopb);
+    FLT_IO_PARAMETER_BLOCK *Iopb,
+    BOOLEAN LinkOp);
 
 static NTSTATUS File_QueryTeardown(
     PCFLT_RELATED_OBJECTS FltObjects,
@@ -357,9 +358,13 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
     } else if (Iopb->MajorFunction == IRP_MJ_SET_INFORMATION) {
         // we allow IRP_MJ_SET_INFORMATION to pass except for these 3 
         if ((Iopb->Parameters.SetFileInformation.FileInformationClass != FileRenameInformation) &&
+            (Iopb->Parameters.SetFileInformation.FileInformationClass != FileRenameInformationEx) &&
+
             (Iopb->Parameters.SetFileInformation.FileInformationClass != FileLinkInformation) &&
             (Iopb->Parameters.SetFileInformation.FileInformationClass != FileLinkInformationEx) &&
-            (Iopb->Parameters.SetFileInformation.FileInformationClass != FileRenameInformationEx))
+
+            (Iopb->Parameters.SetFileInformation.FileInformationClass != FileHardLinkInformation) &&
+            (Iopb->Parameters.SetFileInformation.FileInformationClass != FileHardLinkFullIdInformation))
 
             goto finish;
 
@@ -573,11 +578,13 @@ check:
         // Do not allow hard links outside the sandbox
         if (Iopb->Parameters.SetFileInformation.FileInformationClass == FileLinkInformation 
          || Iopb->Parameters.SetFileInformation.FileInformationClass == FileLinkInformationEx) {
+
+            /*
             // FILE_LINK_INFORMATION* FileInfo = (FILE_LINK_INFORMATION*)Iopb->Parameters.SetFileInformation.InfoBuffer;
             
             // For rename or link operations. If InfoBuffer->FileName contains a fully qualified file name, or if InfoBuffer->RootDirectory is non-NULL, 
             // this member is a file object pointer for the parent directory of the file that is the target of the operation. Otherwise it is NULL.
-            if (Iopb->Parameters.SetFileInformation.ParentOfTarget == NULL) {
+            //if (Iopb->Parameters.SetFileInformation.ParentOfTarget == NULL) {
 
                 FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
 
@@ -596,15 +603,20 @@ check:
                 if (pTargetFileNameInfo != NULL) {
                     FltReleaseFileNameInformation(pTargetFileNameInfo);
                 }
-            }
-            else if(!Box_IsBoxedPath(proc->box, file, &Iopb->Parameters.SetFileInformation.ParentOfTarget->FileName)) {
-                status = STATUS_ACCESS_DENIED;
-            }
-        }
-        else {
-            status = File_RenameOperation(proc, Iopb);
-        }
+            //}
+            //else if(!Box_IsBoxedPath(proc->box, file, &Iopb->Parameters.SetFileInformation.ParentOfTarget->FileName)) { // bug bug ParentOfTarget->FileName does not contain device path
+            //    status = STATUS_ACCESS_DENIED;
+            //}
+            */
 
+            status = File_RenameOperation(proc, Iopb, TRUE);
+        }
+        else if (Iopb->Parameters.SetFileInformation.FileInformationClass == FileRenameInformation 
+         || Iopb->Parameters.SetFileInformation.FileInformationClass == FileRenameInformationEx) {
+            status = File_RenameOperation(proc, Iopb, FALSE);
+        }
+        else
+            status = STATUS_ACCESS_DENIED;
     }
     else if (Iopb->MajorFunction == IRP_MJ_ACQUIRE_FOR_SECTION_SYNCHRONIZATION) {
 
@@ -759,10 +771,10 @@ _FX NTSTATUS File_CreateOperation(
 
 _FX NTSTATUS File_RenameOperation(
     PROCESS *proc,
-    FLT_IO_PARAMETER_BLOCK *Iopb)
+    FLT_IO_PARAMETER_BLOCK *Iopb,
+    BOOLEAN LinkOp)
 {
     FLT_PARAMETERS *Parms;
-    FILE_RENAME_INFORMATION *info;
     PFILE_OBJECT FileObject;
     UNICODE_STRING FileName;
     MY_CONTEXT MyContext;
@@ -773,17 +785,41 @@ _FX NTSTATUS File_RenameOperation(
 
     Parms = &Iopb->Parameters;
 
-    info = (FILE_RENAME_INFORMATION *)Parms->SetFileInformation.InfoBuffer;
-
 #ifdef _M_ARM64
-    if (! MmIsAddressValid(info)) // todo: arm64 // fix-me: why does this happen?
+    if (! MmIsAddressValid(Parms->SetFileInformation.InfoBuffer)) // todo: arm64 // fix-me: why does this happen?
         return STATUS_ACCESS_DENIED;
 #endif
 
-    FileObject = Parms->SetFileInformation.ParentOfTarget;
+    if(LinkOp) {
 
-    if ((! FileObject) || (! info) || (! info->FileNameLength))
-        return STATUS_ACCESS_DENIED;
+        FILE_LINK_INFORMATION *infoL;
+
+        infoL = (FILE_LINK_INFORMATION *)Parms->SetFileInformation.InfoBuffer;
+    
+        FileObject = Parms->SetFileInformation.ParentOfTarget;
+
+        if ((! FileObject) || (! infoL) || (! infoL->FileNameLength))
+            return STATUS_ACCESS_DENIED;
+
+        FileName.Length = (USHORT)infoL->FileNameLength;
+        FileName.MaximumLength = FileName.Length;
+        FileName.Buffer = infoL->FileName;
+
+    } else {
+
+        FILE_RENAME_INFORMATION *infoR;
+
+        infoR = (FILE_RENAME_INFORMATION *)Parms->SetFileInformation.InfoBuffer;
+
+        FileObject = Parms->SetFileInformation.ParentOfTarget;
+
+        if ((! FileObject) || (! infoR) || (! infoR->FileNameLength))
+            return STATUS_ACCESS_DENIED;
+
+        FileName.Length = (USHORT)infoR->FileNameLength;
+        FileName.MaximumLength = FileName.Length;
+        FileName.Buffer = infoR->FileName;
+    }
 
     //
     // if the target directory specifies just a filename (no leading slash)
@@ -810,10 +846,6 @@ _FX NTSTATUS File_RenameOperation(
     //
     // call the generic parser function
     //
-
-    FileName.Length = (USHORT)info->FileNameLength;
-    FileName.MaximumLength = FileName.Length;
-    FileName.Buffer = info->FileName;
 
     memzero(&MyContext, sizeof(MyContext));
     MyContext.HaveContext = TRUE;

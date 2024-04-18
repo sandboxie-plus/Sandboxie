@@ -6882,10 +6882,7 @@ _FX NTSTATUS File_RenameFile(
         if (! ReparsedPath)
             ReparsedPath = TargetTruePath;
 
-        if (!Dll_NoDriverAssist)
-            status = SbieApi_RenameFile(SourceHandle, ReparsedPath, TargetFileName, ReplaceIfExists);
-        else
-            status = File_RenameOpenFile(SourceHandle, ReparsedPath, TargetFileName, ReplaceIfExists);
+        status = SbieApi_RenameFile(SourceHandle, ReparsedPath, TargetFileName, ReplaceIfExists);
 
         if (ReparsedPath != TargetTruePath)
             Dll_Free(ReparsedPath);

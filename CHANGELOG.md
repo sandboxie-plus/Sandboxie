@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "BlockInterferenceControl=y" option to prevent sandboxed processes from forcing windows on top and moving the mounse pointer (thanks Yeyixiao)
   - Note: this option may cause issues in games hence do not enable it for gaming boxes.
 - added support for hardlinks [#3826](https://github.com/sandboxie-plus/Sandboxie/issues/3826)
+- added mechanism to terminate stuck sandboxed processes from the driver
 
 ### Changed
 - improved Avast template [#3777](https://github.com/sandboxie-plus/Sandboxie/pull/3777)

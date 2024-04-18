@@ -214,6 +214,7 @@ _FX BOOLEAN Process_Init(void)
     Api_SetFunction(API_QUERY_PROCESS_PATH,   Process_Api_QueryProcessPath);
     Api_SetFunction(API_QUERY_PATH_LIST,      Process_Api_QueryPathList);
     Api_SetFunction(API_ENUM_PROCESSES,       Process_Api_Enum);
+    Api_SetFunction(API_KILL_PROCESS,         Process_Api_Kill);
 
     return TRUE;
 }

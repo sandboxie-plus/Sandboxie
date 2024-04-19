@@ -8253,7 +8253,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1359"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation>当沙盒外程序访问沙盒根目录时，发出 1318/1317 警告。</translation>
+        <translation>当沙盒外程序访问沙盒根目录或沙盒化进程对象时，发出 1318/1317 警告。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1496"/>

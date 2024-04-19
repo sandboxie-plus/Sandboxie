@@ -82,6 +82,14 @@ static void Gui_GetClipboardData_EnhMF(void *buf, ULONG sz, ULONG fmt);
 
 static BOOL Gui_EmptyClipboard();
 
+static int Gui_ShowCursor(BOOL bShow);
+
+static HWND Gui_SetActiveWindow(HWND hWnd);
+
+static BOOL  Gui_BringWindowToTop(HWND hWnd);
+
+static BOOL Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt);
+
 static LONG Gui_ChangeDisplaySettingsExA(
     void *lpszDeviceName, void *lpDevMode, HWND hwnd,
     DWORD dwflags, void *lParam);
@@ -190,6 +198,10 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 		SBIEDLL_HOOK_GUI(ClipCursor);
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
+		SBIEDLL_HOOK_GUI(ShowCursor);
+		SBIEDLL_HOOK_GUI(BringWindowToTop);
+		SBIEDLL_HOOK_GUI(SwitchToThisWindow);
+		SBIEDLL_HOOK_GUI(SetActiveWindow);
 		
         if (Gui_UseBlockCapture) {
             SBIEDLL_HOOK_GUI(GetWindowDC);
@@ -1630,3 +1642,13 @@ _FX EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags)
 	return 0;
 	//return __sys_SetThreadExecutionState(esFlags);
 }
+
+_FX int Gui_ShowCursor(BOOL bShow) {
+	return __sys_ShowCursor(bShow);
+}
+
+_FX HWND Gui_SetActiveWindow(HWND hWnd);
+
+_FX BOOL  Gui_BringWindowToTop(HWND hWnd);
+
+_FX BOOL Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt);

@@ -213,6 +213,7 @@ P_AttachThreadInput         __sys_AttachThreadInput         = NULL;
 
 P_GetOpenFileNameW          __sys_GetOpenFileNameW          = NULL;
 
+P_ShowCursor				__sys_ShowCursor				= NULL;
 
 //---------------------------------------------------------------------------
 // Functions
@@ -506,6 +507,10 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT_AW(GetWindowLong);
     GUI_IMPORT_AW(SetWindowLong);
     GUI_IMPORT_AW(GetClassLong);
+	GUI_IMPORT___(SetActiveWindow);
+	GUI_IMPORT___(BringWindowToTop);
+	GUI_IMPORT___(SwitchToThisWindow);
+	GUI_IMPORT___(ShowCursor);
 
 #ifdef _WIN64
 
@@ -1370,7 +1375,9 @@ _FX HWND Gui_CreateWindowExW(
         else
             hWndParent = NULL;
     }
-
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE))
+		if (dwExStyle & WS_EX_TOPMOST)
+			dwExStyle = dwExStyle & ~WS_EX_TOPMOST;
     //
     // create window
     //

@@ -92,6 +92,14 @@ typedef BOOL (*P_ClipCursor)(const RECT *lpRect);
 
 typedef BOOL (*P_GetClipCursor)(RECT *lpRect);
 
+typedef int(*P_ShowCursor)(BOOL bShow);
+
+typedef BOOL(*P_BringWindowToTop)(HWND hWnd);
+
+typedef void (*P_SwitchToThisWindow)(HWND hWnd, BOOL fAlt);
+
+typedef HWND(*P_SetActiveWindow)(HWND hWnd);
+
 typedef BOOL (*P_GetCursorPos)(LPPOINT lpPoint);
 
 typedef BOOL (*P_SetCursorPos)(int x, int y);
@@ -622,6 +630,11 @@ GUI_SYS_VAR_2(DdeInitialize)
 
 GUI_SYS_VAR(BlockInput)
 GUI_SYS_VAR(SendInput)
+
+GUI_SYS_VAR(SetActiveWindow);
+GUI_SYS_VAR(BringWindowToTop);
+GUI_SYS_VAR(ShowCursor);
+GUI_SYS_VAR(SwitchToThisWindow);
 
 GUI_SYS_VAR(OpenClipboard)
 GUI_SYS_VAR(CloseClipboard)

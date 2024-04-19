@@ -139,6 +139,10 @@ BOOL ProcessServer::KillProcess(ULONG ProcessId)
             LastError = GetLastError();
         CloseHandle(hProcess);
     }
+
+    if (!ok)
+        ok = NT_SUCCESS(SbieApi_Call(API_KILL_PROCESS, 1, ProcessId));
+
     //WCHAR txt[512]; wsprintf(txt, L"Killing Process Id %d --> %d/%d\n", ProcessId, ok, LastError); OutputDebugString(txt);
     return ok;
 }

@@ -522,6 +522,8 @@ NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms);
 
 NTSTATUS Process_Api_Enum(PROCESS *proc, ULONG64 *parms);
 
+NTSTATUS Process_Api_Kill(PROCESS *proc, ULONG64 *parms);
+
 
 //---------------------------------------------------------------------------
 // Variables

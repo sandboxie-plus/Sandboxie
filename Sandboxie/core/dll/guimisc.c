@@ -171,6 +171,8 @@ static ULONG Gui_OpenClipboard_seq  = -1;
 
 static HANDLE Gui_DummyInputDesktopHandle = NULL;
 
+static BOOLEAN Gui_BlockInterferenceControl = FALSE;
+
 
 //---------------------------------------------------------------------------
 // Gui_InitMisc
@@ -181,6 +183,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 {
     if (! Gui_OpenAllWinClasses) {
 
+        Gui_BlockInterferenceControl = SbieApi_QueryConfBool(NULL, L"BlockInterferenceControl", FALSE);
         
         SBIEDLL_HOOK_GUI(SetParent);
         if (Gui_UseProxyService) {
@@ -364,11 +367,11 @@ _FX HWND Gui_SetParent(HWND hWndChild, HWND hWndNewParent)
 
 _FX BOOL Gui_ClipCursor(const RECT *lpRect)
 {
-	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE) && lpRect)
-	{
+	if (Gui_BlockInterferenceControl && lpRect) {
 		SetLastError(ERROR_ACCESS_DENIED);
 		return FALSE;
 	}
+	
 	if (!Gui_UseProxyService)
 		return __sys_ClipCursor(lpRect);
 	
@@ -528,11 +531,12 @@ _FX BOOL Gui_GetIconInfo(HICON hIcon, PICONINFO piconinfo)
 
 _FX BOOL Gui_SetCursorPos(int x, int y)
 {
-	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE)) {
+	if (Gui_BlockInterferenceControl)
 		return FALSE;
-	}
+	
 	if (!Gui_UseProxyService)
 		return __sys_SetCursorPos(x, y);
+		
     GUI_SET_CURSOR_POS_REQ req;
     GUI_SET_CURSOR_POS_RPL *rpl;
     ULONG error;
@@ -566,12 +570,13 @@ _FX BOOL Gui_SetForegroundWindow(HWND hWnd)
 {
     GUI_SET_FOREGROUND_WINDOW_REQ req;
     void *rpl;
-	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE))
-	{
+
+	if (Gui_BlockInterferenceControl)	{
 		SetLastError(ERROR_ACCESS_DENIED);
 		return FALSE;
 	}
-    if (__sys_IsWindow(hWnd) || (! hWnd)|| !Gui_UseProxyService) {
+	
+    if (!Gui_UseProxyService || __sys_IsWindow(hWnd) || (! hWnd)) {
         // window is in the same sandbox (or is NULL), no need for GUI Proxy
         return __sys_SetForegroundWindow(hWnd);
     }

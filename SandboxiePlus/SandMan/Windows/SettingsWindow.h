@@ -130,6 +130,7 @@ private slots:
 
 
 	void CertChanged();
+	void KeyChanged();
 	void UpdateCert();
 	void OnGetCert();
 	void OnCertData(const QByteArray& Certificate, const QVariantMap& Params);

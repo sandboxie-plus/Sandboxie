@@ -805,7 +805,7 @@
              <item row="11" column="1" colspan="2">
               <widget class="QCheckBox" name="chkUserOperation">
                <property name="text">
-                <string>Prevent interference with user control operations whatever</string>
+                <string>Prevent interference with user control operations (move mouse, bring in front, etc...)</string>
                </property>
               </widget>
              </item>

@@ -426,10 +426,10 @@ void COptionsWindow::SaveGeneral()
 	if (ui.chkOpenCredentials->isEnabled())
 		WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
 	WriteAdvancedCheck(ui.chkCloseClipBoard, "OpenClipboard", "n", "");
-	//WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "n");
-	WriteAdvancedCheck(ui.chkProtectPower, "BlockInterferePower", "y", "n");
-	WriteAdvancedCheck(ui.chkForceProtection, "ForceProtectionOnMount", "y", "n");
-	WriteAdvancedCheck(ui.chkUserOperation, "BlockInterferenceControl", "y", "n");
+	//WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "");
+	WriteAdvancedCheck(ui.chkProtectPower, "BlockInterferePower", "y", "");
+	WriteAdvancedCheck(ui.chkForceProtection, "ForceProtectionOnMount", "y", "");
+	WriteAdvancedCheck(ui.chkUserOperation, "BlockInterferenceControl", "y", "");
 	WriteAdvancedCheck(ui.chkVmReadNotify, "NotifyProcessAccessDenied", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
 	//WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");

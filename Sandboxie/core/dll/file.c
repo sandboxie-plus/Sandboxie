@@ -263,7 +263,7 @@ static NTSTATUS File_NtDeleteFile(OBJECT_ATTRIBUTES *ObjectAttributes);
 static NTSTATUS File_NtDeleteFileImpl(OBJECT_ATTRIBUTES *ObjectAttributes);
 
 static NTSTATUS File_RenameFile(
-    HANDLE FileHandle, FILE_RENAME_INFORMATION *info);
+    HANDLE FileHandle, void *info, BOOLEAN LinkOp);
 
 static BOOLEAN File_RecordRecover(HANDLE FileHandle, const WCHAR *TruePath);
 
@@ -6041,7 +6041,7 @@ _FX NTSTATUS File_NtSetInformationFile(
     } else if ( FileInformationClass == FileRenameInformation ||
                 FileInformationClass == FileRenameInformationEx ) {
 
-        status = File_RenameFile(FileHandle, FileInformation);
+        status = File_RenameFile(FileHandle, FileInformation, FALSE);
 
     //
     // pipe state request on a proxy pipe
@@ -6058,6 +6058,41 @@ _FX NTSTATUS File_NtSetInformationFile(
         status = File_SetProxyPipe(
             FileHandle, IoStatusBlock,
             FileInformation, Length, FileInformationClass);
+    //
+    // link request
+    //
+
+    } else if ( FileInformationClass == FileLinkInformation ||
+                FileInformationClass == FileLinkInformationEx || 
+                FileInformationClass == FileHardLinkInformation ||
+                FileInformationClass == FileHardLinkFullIdInformation) {
+
+        if (FileInformationClass == FileLinkInformation || 
+            FileInformationClass == FileLinkInformationEx) {
+
+            status = File_RenameFile(FileHandle, FileInformation, TRUE);
+
+        }
+        else // todo
+        {
+            FillIoStatusBlock = FALSE;
+
+            status = __sys_NtSetInformationFile(
+                FileHandle, IoStatusBlock,
+                FileInformation, Length, FileInformationClass);
+        }
+
+        if (!NT_SUCCESS(status)) {
+            //
+            // we don't support hard links in the sandbox, but return
+            // STATUS_INVALID_DEVICE_REQUEST and hopefully the caller will
+            // invoke CopyFile instead.  dfsvc.exe (ClickOnce) does that.
+            //
+
+            status = STATUS_INVALID_DEVICE_REQUEST;
+
+            FillIoStatusBlock = TRUE;
+        }
 
     //
     // any other request
@@ -6070,20 +6105,6 @@ _FX NTSTATUS File_NtSetInformationFile(
         status = __sys_NtSetInformationFile(
             FileHandle, IoStatusBlock,
             FileInformation, Length, FileInformationClass);
-
-        if ((FileInformationClass == FileLinkInformation ||
-            FileInformationClass == FileHardLinkFullIdInformation)
-                && (! NT_SUCCESS(status))) {
-            //
-            // we don't support hard links in the sandbox, but return
-            // STATUS_INVALID_DEVICE_REQUEST and hopefully the caller will
-            // invoke CopyFile instead.  dfsvc.exe (ClickOnce) does that.
-            //
-
-            status = STATUS_INVALID_DEVICE_REQUEST;
-
-            FillIoStatusBlock = TRUE;
-        }
     }
 
     if (FillIoStatusBlock) {
@@ -6644,7 +6665,7 @@ _FX LONG File_RenameOpenFile(
 
 
 _FX NTSTATUS File_RenameFile(
-    HANDLE FileHandle, FILE_RENAME_INFORMATION *info)
+    HANDLE FileHandle, void *info, BOOLEAN LinkOp)
 {
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
@@ -6663,11 +6684,12 @@ _FX NTSTATUS File_RenameFile(
     WCHAR *ReparsedPath;
     WCHAR save_char;
     ULONG info2_len;
-    FILE_RENAME_INFORMATION *info2;
+    void *info2;
     FILE_NETWORK_OPEN_INFORMATION open_info;
     ULONG SourceFlags;
     ULONG TargetFlags;
     ULONG len;
+    BOOLEAN ReplaceIfExists;
 
     SourceHandle = NULL;
     TargetHandle = NULL;
@@ -6783,12 +6805,32 @@ _FX NTSTATUS File_RenameFile(
     // overwrite the shared name buffers
     //
 
-    objname.Length = (USHORT)info->FileNameLength;
-    objname.MaximumLength = objname.Length;
-    objname.Buffer = info->FileName;
+    if (LinkOp) {
 
-    status = File_GetName(
-        info->RootDirectory, &objname, &TruePath, &CopyPath, &TargetFlags);
+        FILE_LINK_INFORMATION *infoL = info;
+
+        objname.Length = (USHORT)infoL->FileNameLength;
+        objname.MaximumLength = objname.Length;
+        objname.Buffer = infoL->FileName;
+
+        status = File_GetName(
+            infoL->RootDirectory, &objname, &TruePath, &CopyPath, &TargetFlags);
+
+        ReplaceIfExists = infoL->ReplaceIfExists;
+
+    } else {
+
+        FILE_RENAME_INFORMATION *infoR = info;
+
+        objname.Length = (USHORT)infoR->FileNameLength;
+        objname.MaximumLength = objname.Length;
+        objname.Buffer = infoR->FileName;
+
+        status = File_GetName(
+            infoR->RootDirectory, &objname, &TruePath, &CopyPath, &TargetFlags);
+
+        ReplaceIfExists = infoR->ReplaceIfExists;
+    }
 
     if (! NT_SUCCESS(status))
         __leave;
@@ -6825,34 +6867,35 @@ _FX NTSTATUS File_RenameFile(
 
     ++TargetFileName;
 
-    //
-    // if the full path name for the target is an open path, we want
-    // to be able to rename outside the sandbox.  however, the parent
-    // directory in that full path may not be an open path itself.
-    // invoke the driver to do such a rename on our behalf
-    //
+    if(!LinkOp) {
 
-    TargetFileName[-1] = L'\0';
+        //
+        // if the full path name for the target is an open path, we want
+        // to be able to rename outside the sandbox.  however, the parent
+        // directory in that full path may not be an open path itself.
+        // invoke the driver to do such a rename on our behalf
+        //
 
-    ReparsedPath = File_FixPermLinksForMatchPath(TargetTruePath);
-    if (! ReparsedPath)
-        ReparsedPath = TargetTruePath;
+        TargetFileName[-1] = L'\0';
 
-    //if (!Dll_CompartmentMode) // NoDriverAssist
-        status = SbieApi_RenameFile(SourceHandle, ReparsedPath, TargetFileName, info->ReplaceIfExists);
-    //else
-    //    status = File_RenameOpenFile(SourceHandle, ReparsedPath, TargetFileName, info->ReplaceIfExists);
+        ReparsedPath = File_FixPermLinksForMatchPath(TargetTruePath);
+        if (! ReparsedPath)
+            ReparsedPath = TargetTruePath;
 
-    if (ReparsedPath != TargetTruePath)
-        Dll_Free(ReparsedPath);
+        status = SbieApi_RenameFile(SourceHandle, ReparsedPath, TargetFileName, ReplaceIfExists);
 
-    TargetFileName[-1] = L'\\';
+        if (ReparsedPath != TargetTruePath)
+            Dll_Free(ReparsedPath);
 
-    if (status != STATUS_BAD_INITIAL_PC) {
+        TargetFileName[-1] = L'\\';
 
-        if (NT_SUCCESS(status))
-            goto after_rename;
-        __leave;
+        if (status != STATUS_BAD_INITIAL_PC) {
+
+            if (NT_SUCCESS(status))
+                goto after_rename;
+            __leave;
+        }
+
     }
 
     //
@@ -6926,14 +6969,37 @@ _FX NTSTATUS File_RenameFile(
     // allocate a new information buffer
     //
 
-    info2_len = sizeof(FILE_RENAME_INFORMATION)
-              + wcslen(TargetFileName) * sizeof(WCHAR);
-    info2 = Dll_AllocTemp(info2_len);
+    if (LinkOp) {
 
-    info2->ReplaceIfExists = info->ReplaceIfExists;
-    info2->RootDirectory = TargetHandle;
-    info2->FileNameLength = wcslen(TargetFileName) * sizeof(WCHAR);
-    memcpy(info2->FileName, TargetFileName, info2->FileNameLength);
+        FILE_LINK_INFORMATION *infoL = info;
+        FILE_LINK_INFORMATION *info2L;
+
+        info2_len = sizeof(FILE_LINK_INFORMATION)
+                  + wcslen(TargetFileName) * sizeof(WCHAR);
+        info2 = Dll_AllocTemp(info2_len);
+
+        info2L = info2;
+        info2L->ReplaceIfExists = infoL->ReplaceIfExists;
+        info2L->RootDirectory = TargetHandle;
+        info2L->FileNameLength = wcslen(TargetFileName) * sizeof(WCHAR);
+        memcpy(info2L->FileName, TargetFileName, info2L->FileNameLength);
+
+    } else {
+
+        FILE_RENAME_INFORMATION *infoR = info;
+        FILE_RENAME_INFORMATION *info2R;
+
+        info2_len = sizeof(FILE_RENAME_INFORMATION)
+                  + wcslen(TargetFileName) * sizeof(WCHAR);
+        info2 = Dll_AllocTemp(info2_len);
+
+        info2R = info2;
+        info2R->ReplaceIfExists = infoR->ReplaceIfExists;
+        info2R->RootDirectory = TargetHandle;
+        info2R->FileNameLength = wcslen(TargetFileName) * sizeof(WCHAR);
+        memcpy(info2R->FileName, TargetFileName, info2R->FileNameLength);
+
+    }
 
     //
     // if the source and target paths are the same (in a case
@@ -6955,7 +7021,7 @@ _FX NTSTATUS File_RenameFile(
 
     RtlInitUnicodeString(&objname, TargetCopyPath);
 
-    if (! info2->ReplaceIfExists) {
+    if (! ReplaceIfExists) {
 
         //
         // if caller did not explicitly ask to replace, but the
@@ -6969,7 +7035,9 @@ _FX NTSTATUS File_RenameFile(
 
             if (IS_DELETE_MARK(&open_info.CreationTime)) { // !File_Delete_v2 &&
 
-                info2->ReplaceIfExists = TRUE;
+				ReplaceIfExists = TRUE;
+                if (LinkOp) ((FILE_LINK_INFORMATION*)info2)->ReplaceIfExists = TRUE;
+                else        ((FILE_RENAME_INFORMATION*)info2)->ReplaceIfExists = TRUE;
 
             } else {
                 status = STATUS_OBJECT_NAME_COLLISION;
@@ -7022,7 +7090,7 @@ _FX NTSTATUS File_RenameFile(
         }
     }
 
-    if (info2->ReplaceIfExists) {
+    if (ReplaceIfExists) {
 
         __sys_NtDeleteFile(&objattrs);
     }
@@ -7035,7 +7103,7 @@ issue_rename:
 
     status = __sys_NtSetInformationFile(
         SourceHandle, &IoStatusBlock,
-        info2, info2_len, FileRenameInformation);
+        info2, info2_len, LinkOp ? FileLinkInformation : FileRenameInformation);
 
     if (status == STATUS_SHARING_VIOLATION && SourceHandle != FileHandle) {
 
@@ -7050,7 +7118,7 @@ issue_rename:
 
         status = __sys_NtSetInformationFile(
             SourceHandle, &IoStatusBlock,
-            info2, info2_len, FileRenameInformation);
+            info2, info2_len, LinkOp ? FileLinkInformation : FileRenameInformation);
     }
 
     if (! NT_SUCCESS(status)) {

@@ -5868,27 +5868,27 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">Supportercertifikat krävs</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1582"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Kör &amp;osandlådad</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1861"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1865"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Detta ser inte ut som ett certifikat. Vänligen för in hela certifikatet, inte bara en del av det.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1881"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1885"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Detta certifikat är tyvärr inte giltigt för nuvarande bygge, du behöver skaffa ett nytt certifikat eller nedgradera till ett tidigare bygge.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1887"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Även fast detta certifikat har utgått, för nuvarande installerad version förblir Plus-egenskaperna aktiverade. Däremot, kommer du inte längre ha tillgång till Sandboxie-Live tjänsterna, inklusive kompatibilitetsuppdateringar och felsökningsdatabasen på nätet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1885"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1889"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Detta certifikat har tyvärr utgått, du behöver skaffa ett nytt certifikat.</translation>
     </message>
@@ -5926,37 +5926,37 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">Hämtar certifikat...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1381"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
         <source>Contributor</source>
         <translation>Bidragsgivare</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1383"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
         <source>Eternal</source>
         <translation>Evig</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
         <source>Business</source>
         <translation>Företag</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
         <source>Personal</source>
         <translation>Personlig</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1393"/>
         <source>Great Patreon</source>
         <translation>Stor patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1395"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1393"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <source>Family</source>
         <translation>Familj</translation>
     </message>
@@ -5965,12 +5965,12 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">Abonnemang</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1401"/>
         <source>Evaluation</source>
         <translation>Utvärdering</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1403"/>
         <source>Type %1</source>
         <translation>Typ %1</translation>
     </message>
@@ -5984,157 +5984,157 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1306"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1307"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1313"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1318"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1333"/>
         <source>Retrieving certificate...</source>
         <translation>Hämtar certifikat...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1343"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1343"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1395"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
         <source>Home</source>
         <translation>Hem</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1427"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1431"/>
         <source>Advanced</source>
         <translation>Avancerad</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1429"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1433"/>
         <source>Max Level</source>
         <translation>Maxnivå</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1431"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1435"/>
         <source>Level %1</source>
         <translation>Nivå %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
         <source>Supporter certificate required for access</source>
         <translation>Supportercertifikat krävs för tillgång</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1473"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Supporter certificate required for automation</source>
         <translation>Supportercertifikat krävs för automatisering</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1888"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1892"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Tack för att du stöder utvecklingen av Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1945"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1949"/>
         <source>Update Available</source>
         <translation>Uppdatering tillgänglig</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1947"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1951"/>
         <source>Installed</source>
         <translation>Installlerad</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1952"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1956"/>
         <source>by %1</source>
         <translation>av %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1960"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1964"/>
         <source>(info website)</source>
         <translation>(infowebbsida)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1987"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1991"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Detta tillägg är obligatoriskt och kan inte tas bort.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1996"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2000"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2146"/>
         <source>Select Directory</source>
         <translation>Välj katalog</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2025"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2029"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Kontrollera nu&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2102"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2106"/>
         <source>Please enter the new configuration password.</source>
         <translation>Vänligen för in det nya konfigurationslösenordet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2106"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2110"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Vänligen återinför det nya konfigurationslösenordet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2111"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2115"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Lösenorden stämde inte, vänligen försök igen.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2123"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2127"/>
         <source>Process</source>
         <translation>Process</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2123"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2127"/>
         <source>Folder</source>
         <translation>Mapp</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2133"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2137"/>
         <source>Please enter a program file name</source>
         <translation>Vänligen för in ett programfilsnamn</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2201"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2205"/>
         <source>Please enter the template identifier</source>
         <translation>Vänligen för in mallidentifieraren</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2209"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2213"/>
         <source>Error: %1</source>
         <translation>Fel: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2234"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2238"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Vill du verkligen radera de(n) valda lokala mall(arna)(en)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2441"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2445"/>
         <source>%1 (Current)</source>
         <translation>%1 (Nuvarande)</translation>
     </message>

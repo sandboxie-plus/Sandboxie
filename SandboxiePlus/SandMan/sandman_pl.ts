@@ -5707,56 +5707,56 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1306"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1307"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1313"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1318"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1333"/>
         <source>Retrieving certificate...</source>
         <translation>Pobieranie certyfikatu...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1343"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1343"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1395"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
         <source>Home</source>
         <translation>Strona główna</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
         <source>Supporter certificate required for access</source>
         <translation>Do uzyskania dostępu wymagany jest certyfikat sponsora</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1473"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Supporter certificate required for automation</source>
         <translation>Certyfikat sponora wymagany do automatyzacji</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1987"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1991"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Ten dodatek jest obowiązkowy i nie można go usunąć.</translation>
     </message>
@@ -5880,77 +5880,77 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Ten certyfikat sponsora &lt;font color=&apos;red&apos;&gt;wygaśnie za %1 dni&lt;/font&gt;, prosimy o &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;uzyskanie zaktualizowanego certyfikatu&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1381"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
         <source>Contributor</source>
         <translation>Współtwórca</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1383"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
         <source>Eternal</source>
         <translation>Wieczny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
         <source>Business</source>
         <translation>Biznes</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
         <source>Personal</source>
         <translation>Osobisty</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1393"/>
         <source>Great Patreon</source>
         <translation>Wspaniały Patron</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1395"/>
         <source>Patreon</source>
         <translation>Patron</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1393"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <source>Family</source>
         <translation>Rodzina</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1401"/>
         <source>Evaluation</source>
         <translation>Próbny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1403"/>
         <source>Type %1</source>
         <translation>Typ %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1427"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1431"/>
         <source>Advanced</source>
         <translation>Zaawansowany</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1429"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1433"/>
         <source>Max Level</source>
         <translation>Poziom maks.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1431"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1435"/>
         <source>Level %1</source>
         <translation>Poziom %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1881"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1885"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Ten certyfikat niestety nie jest ważny dla bieżącej kompilacji, musisz uzyskać nowy certyfikat lub przejść na starszą wersję.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1887"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Chociaż ten certyfikat wygasł, dla obecnie zainstalowanej wersji oraz funkcje pozostają włączone. Jednak nie będziesz już mieć dostępu do usług Sandboxie-Live, w tym aktualizacji zgodności i bazy danych rozwiązywania problemów online.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1885"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1889"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Ten certyfikat niestety wygasł, musisz uzyskać nowy certyfikat.</translation>
     </message>
@@ -5973,12 +5973,12 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Wymagany certyfikat sponsora</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1582"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Ur&amp;uchom bez piaskownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1861"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1865"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>To nie wygląda jak certyfikat. Proszę wpisać cały certyfikat, a nie tylko jego fragment.</translation>
     </message>
@@ -5991,7 +5991,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Ten certyfikat jest niestety nieaktualny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1888"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1892"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Dziękujemy za wsparcie rozwoju Sandboxie-Plus.</translation>
     </message>
@@ -6000,22 +6000,22 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Ten certyfikat pomocy technicznej jest nieważny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1945"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1949"/>
         <source>Update Available</source>
         <translation>Dostępna aktualizacja</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1947"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1951"/>
         <source>Installed</source>
         <translation>Zainstalowane</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1952"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1956"/>
         <source>by %1</source>
         <translation>przez %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1960"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1964"/>
         <source>(info website)</source>
         <translation>(strona informacyjna)</translation>
     </message>
@@ -6024,63 +6024,63 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Ten dodatek jest obowiązkowy i nie można go usunąć.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1996"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2000"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2146"/>
         <source>Select Directory</source>
         <translation>Wybierz katalog</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2025"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2029"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Sprawdź teraz&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2102"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2106"/>
         <source>Please enter the new configuration password.</source>
         <translation>Proszę wpisać nowe hasło konfiguracyjne.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2106"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2110"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Wprowadź ponownie nowe hasło konfiguracyjne.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2111"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2115"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Hasła nie zgadzają się, spróbuj ponownie.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2123"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2127"/>
         <source>Process</source>
         <translation>Proces</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2123"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2127"/>
         <source>Folder</source>
         <translation>Folder</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2133"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2137"/>
         <source>Please enter a program file name</source>
         <translation>Proszę wpisać nazwę pliku programu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2201"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2205"/>
         <source>Please enter the template identifier</source>
         <translation>Proszę wpisać identyfikator szablonu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2209"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2213"/>
         <source>Error: %1</source>
         <translation>Błąd: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2234"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2238"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Czy naprawdę chcesz usunąć wybrany lokalny szablon(-y)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2441"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2445"/>
         <source>%1 (Current)</source>
         <translation>%1 (aktualne)</translation>
     </message>

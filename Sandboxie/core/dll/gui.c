@@ -1948,7 +1948,7 @@ _FX BOOL Gui_MoveWindow(
 		P_SystemParametersInfoA SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA"); if (!SystemParametersInfoA) goto then;
 		P_GetSystemMetrics GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics"); if (!GetSystemMetrics) goto then;
 		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
-		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+		//int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
 		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom, x1 = GetSystemMetrics(SM_CXSCREEN) - rt.right, y2 = GetSystemMetrics(SM_CYSCREEN) - rt.top, x2 = GetSystemMetrics(SM_CXSCREEN) - rt.left;
 		if (y + h > y1)
 			h = y1 - y - 2;

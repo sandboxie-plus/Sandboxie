@@ -1973,8 +1973,8 @@ _FX BOOL Gui_SetWindowPos(
 		P_GetSystemMetrics GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics"); if (!GetSystemMetrics) goto then;
 		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);   
 		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
-		if (y > y1)
-			y = y1;
+		if (y+h > y1)
+			h = y1-y;
 	}
 	then:
     if (Gui_UseProxyService && !Gui_IsSameBox(hWnd, NULL, NULL)) {

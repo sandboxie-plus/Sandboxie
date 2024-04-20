@@ -264,9 +264,9 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkLessConfidential->setChecked(m_BoxTemplates.contains("LessConfidentialBox"));
 	ui.chkNotifyProtect->setChecked(m_pBox->GetBool("NotifyBoxProtected", false));
 
-	ui.chkProtectWindow->setChecked(m_pBox->GetBool("IsProtectScreen"));
+	ui.chkProtectWindow->setChecked(m_pBox->GetBool("CoverBoxedWindows"));
 	QString str = m_pBox->GetText("OpenWinClass", "");
-	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture") && QString::compare(str, "*") != 0);
+	ui.chkBlockCapture->setChecked(m_pBox->GetBool("BlockScreenCapture") && QString::compare(str, "*") != 0);
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
 
 	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
@@ -476,8 +476,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkConfidential, "ConfidentialBox", "y", "");
 	WriteAdvancedCheck(ui.chkNotifyProtect, "NotifyBoxProtected", "y", "");
 
-	WriteAdvancedCheck(ui.chkProtectWindow, "IsProtectScreen", "y", "");
-	WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "");
+	WriteAdvancedCheck(ui.chkProtectWindow, "CoverBoxedWindows", "y", "");
+	WriteAdvancedCheck(ui.chkBlockCapture, "BlockScreenCapture", "y", "");
 	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "");
 
 	QStringList Users;

@@ -372,9 +372,9 @@ _FX BOOLEAN Gui_Init(HMODULE module)
 
     const UCHAR *ProcName;
 
-    Gui_UseProtectScreen = SbieApi_QueryConfBool(NULL, L"IsProtectScreen", FALSE);
+    Gui_UseProtectScreen = SbieApi_QueryConfBool(NULL, L"CoverBoxedWindows", FALSE);
 
-    Gui_UseBlockCapture = SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE);
+    Gui_UseBlockCapture = SbieApi_QueryConfBool(NULL, L"BlockScreenCapture", FALSE);
     if (Gui_UseBlockCapture)
         Gdi_InitDCCache();
 

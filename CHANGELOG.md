@@ -18,6 +18,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved Avast template [#3777](https://github.com/sandboxie-plus/Sandboxie/pull/3777)
+- renamed a bunch of experimental options and marked them as experimental in the UI
+  - "IsBlockCapture=y" -> "BlockScreenCapture=y"
+  - "IsProtectScreen=>" -> "CoverBoxedWindows=y"
 
 ### Fixed
 - fixed When I change the BlockDNS and BlockPorts options, the Apply button is not activated [#3807](https://github.com/sandboxie-plus/Sandboxie/issues/3807)
@@ -25,6 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Settings dialog now showing the right ram disk letter
 - fixed issues with updater broke with new qt due to missing SSL support [3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
 - fixed Enabling "DropAdminRights/FakeAdminRights" adds "BlockInterferePower and ForceProtectionOnMount" to the INI [#3825](https://github.com/sandboxie-plus/Sandboxie/issues/3825)
+- fixed KeePass "Out of Memory" crash due to "BlockScreenCapture=y" [#3768](https://github.com/sandboxie-plus/Sandboxie/issues/3768)
 
 
 

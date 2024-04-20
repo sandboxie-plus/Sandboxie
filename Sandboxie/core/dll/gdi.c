@@ -312,7 +312,7 @@ _FX BOOL Gdi_DeleteDC(HDC hdc)
 //	HDC hdcSrc, int x1, int y1, DWORD rop
 //) {
 //	int ret = __sys_BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop);
-//	/*if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+//	/*if (Gui_UseBlockCapture) {
 //
 //		typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
 //		P_GetDeviceCaps GetDeviceCaps = Ldr_GetProcAddrNew(DllName_gdi32, "GetDeviceCaps", "GetDeviceCaps"); if (!GetDeviceCaps) return ret;
@@ -337,7 +337,7 @@ _FX BOOL Gdi_DeleteDC(HDC hdc)
 //)
 //{
 //	int ret = __sys_StretchBlt(hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
-//	/*if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+//	/*if (Gui_UseBlockCapture) {
 //
 //		typedef int (*P_GetDeviceCaps)(_In_opt_ HDC hdc, _In_ int index);
 //		P_GetDeviceCaps GetDeviceCaps = Ldr_GetProcAddrNew(DllName_gdi32, "GetDeviceCaps", "GetDeviceCaps"); if (!GetDeviceCaps) return ret;
@@ -922,7 +922,7 @@ _FX BOOLEAN Gdi_Full_Init_impl(HMODULE module, BOOLEAN full)
 
 	InitializeCriticalSection(&Gdi_CritSec);
 
-    Gui_UseBlockCapture = SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE);
+    Gui_UseBlockCapture = SbieApi_QueryConfBool(NULL, L"BlockScreenCapture", FALSE);
     if (Gui_UseBlockCapture)
         Gdi_InitDCCache();
 
@@ -1112,7 +1112,6 @@ static CRITICAL_SECTION Gui_DCCache_CritSec;
 
 typedef struct _DUMMY_DC{
 
-    BOOLEAN bDelete;
     HBITMAP hBmp;
 
 } DUMMY_DC;
@@ -1157,13 +1156,6 @@ _FX HDC Gdi_GetDummyDC(HDC dc, HWND hWnd)
     if (!dummy)
         dummy = map_insert(&Gui_DCCache, ret, NULL, sizeof(DUMMY_DC));
     
-    //
-    // Note: GetDC GetDCEx GetWindowDC must use ReleaseDC, while CreateDC must use DeleteDC
-    // We set bDelete = TRUE to make Gdi_OnFreeDC delete the DC and return NULL
-    // then Gui_ReleaseDC will not call __sys_ReleaseDC
-    //
-
-    dummy->bDelete = !!hWnd;
     dummy->hBmp = bmp;
 
     LeaveCriticalSection(&Gui_DCCache_CritSec);
@@ -1190,10 +1182,8 @@ _FX HDC Gdi_OnFreeDC(HDC dc)
 
         DeleteObject(dummy->hBmp);
 
-        if (dummy->bDelete) {
-            __sys_DeleteDC(dc);
-            ret = NULL;
-        }
+        __sys_DeleteDC(dc);
+        ret = NULL; // we return NULL to notify the caller that there is nothing left to do
 
         map_remove(&Gui_DCCache, dc);
     }

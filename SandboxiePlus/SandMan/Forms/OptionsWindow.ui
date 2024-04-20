@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -696,7 +696,7 @@
              <item row="10" column="1" colspan="2">
               <widget class="QCheckBox" name="chkProtectPower">
                <property name="text">
-                <string>Prevent sandboxed processes from interfering with power operations</string>
+                <string>Prevent sandboxed processes from interfering with power operations (Experimental)</string>
                </property>
               </widget>
              </item>
@@ -820,7 +820,7 @@
              <item row="12" column="1" colspan="2">
               <widget class="QCheckBox" name="chkUserOperation">
                <property name="statusTip">
-                <string>Prevent move mouse, bring in front, and simmilar operations.</string>
+                <string>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</string>
                </property>
                <property name="text">
                 <string>Prevent interference with the user interface (Experimental, see tooltop)</string>
@@ -833,7 +833,7 @@
                 <string>This feature does not block all means of optaining a screen capture only some common once, also it may cause UI glitches</string>
                </property>
                <property name="text">
-                <string>Prevent sandboxed processes from capturing window images (Experimental unstable, see tooltip)</string>
+                <string>Prevent sandboxed processes from capturing window images (Experimental, see tooltip)</string>
                </property>
               </widget>
              </item>

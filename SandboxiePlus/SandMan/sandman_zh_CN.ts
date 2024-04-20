@@ -6819,7 +6819,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="468"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation type="unfinished">最后一个沙盒内的进程终止后自动删除内容</translation>
+        <translation>当最后一个沙盒内的进程终止后自动删除内容更改</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="509"/>
@@ -7103,7 +7103,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="808"/>
         <source>Prevent interference with user control operations (move mouse, bring in front, etc...)</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止干预用户操作（移动鼠标，使窗口Z序靠前等）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1748"/>

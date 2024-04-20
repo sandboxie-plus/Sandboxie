@@ -1666,7 +1666,7 @@ _FX BOOL  Gui_BringWindowToTop(HWND hWnd) {
 	return __sys_BringWindowToTop(hWnd);
 }
 
-_FX BOOL Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt) {
+_FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt) {
 	if (Gui_BlockInterferenceControl)
 		return;
 	__sys_SwitchToThisWindow(hWnd, fAlt);

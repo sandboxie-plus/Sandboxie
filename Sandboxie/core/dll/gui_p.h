@@ -57,7 +57,7 @@
 #define WM_DDE_LAST         (WM_DDE_FIRST+8)
 
 #define GET_WIN_API(name, lib) \
-    P_##name name = Ldr_GetProcAddrNew(lib, #name, #name); \
+    P_##name name = Ldr_GetProcAddrNew(lib, L#name, #name); \
     if(!name) return NULL;
 
 //---------------------------------------------------------------------------

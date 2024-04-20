@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>785</width>
-    <height>539</height>
+    <height>557</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -823,17 +823,17 @@
                 <string>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</string>
                </property>
                <property name="text">
-                <string>Prevent interference with the user interface (Experimental, see tooltop)</string>
+                <string>Prevent interference with the user interface (Experimental)</string>
                </property>
               </widget>
              </item>
              <item row="13" column="1" colspan="2">
               <widget class="QCheckBox" name="chkBlockCapture">
                <property name="statusTip">
-                <string>This feature does not block all means of optaining a screen capture only some common once, also it may cause UI glitches</string>
+                <string>This feature does not block all means of optaining a screen capture only some common once.</string>
                </property>
                <property name="text">
-                <string>Prevent sandboxed processes from capturing window images (Experimental, see tooltip)</string>
+                <string>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</string>
                </property>
               </widget>
              </item>

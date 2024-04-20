@@ -217,6 +217,7 @@ private slots:
 	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAddTemplates();
 	void OnTemplateWizard();
+	void OnOpenTemplate();
 	void OnDelTemplates();
 	void OnFolderChanged();
 	void OnScreenReaders();

@@ -120,6 +120,7 @@ private slots:
 	void OnFilterTemplates()		{ LoadTemplates(); }
 	void OnAddTemplates();
 	void OnTemplateWizard();
+	void OnOpenTemplate();
 	void OnDelTemplates();
 
 	void SetIniEdit(bool bEnable);

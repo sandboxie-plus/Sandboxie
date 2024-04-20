@@ -477,6 +477,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		pTmplBtnMenu->addAction(tr("Add %1 Template").arg(CTemplateWizard::GetTemplateLabel((CTemplateWizard::ETemplateType)i)), this, SLOT(OnTemplateWizard()))->setData(i);
 	ui.btnAddTemplate->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddTemplate->setMenu(pTmplBtnMenu);
+	connect(ui.btnOpenTemplate, SIGNAL(clicked(bool)), this, SLOT(OnOpenTemplate()));
 	connect(ui.btnDelTemplate, SIGNAL(clicked(bool)), this, SLOT(OnDelTemplates()));
 	//
 
@@ -2237,6 +2238,13 @@ void CSettingsWindow::OnTemplateWizard()
 	if (CTemplateWizard::CreateNewTemplate(NULL, Type, this)) {
 		LoadTemplates();
 	}
+}
+
+void CSettingsWindow::OnOpenTemplate()
+{
+	QTreeWidgetItem* pItem = ui.treeTemplates->currentItem();
+	if (pItem)
+		OnTemplateDoubleClicked(pItem, 0);
 }
 
 void CSettingsWindow::OnDelTemplates()

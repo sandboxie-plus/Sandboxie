@@ -502,6 +502,8 @@ extern BOOLEAN Gui_OpenAllWinClasses;   // not running in a restricted job
 extern BOOLEAN Gui_UseProtectScreen;
 extern BOOLEAN Gui_UseBlockCapture;
 
+extern BOOLEAN Gui_BlockInterferenceControl;
+
 extern BOOLEAN Gui_UseProxyService;
 
 extern BOOLEAN Gui_DisableTitle;

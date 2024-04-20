@@ -506,6 +506,10 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT_AW(GetWindowLong);
     GUI_IMPORT_AW(SetWindowLong);
     GUI_IMPORT_AW(GetClassLong);
+	GUI_IMPORT___(SetActiveWindow);
+	GUI_IMPORT___(BringWindowToTop);
+	GUI_IMPORT___(SwitchToThisWindow);
+	GUI_IMPORT___(ShowCursor);
 
 #ifdef _WIN64
 
@@ -1370,7 +1374,9 @@ _FX HWND Gui_CreateWindowExW(
         else
             hWndParent = NULL;
     }
-
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE))
+		if (dwExStyle & WS_EX_TOPMOST)
+			dwExStyle = dwExStyle & ~WS_EX_TOPMOST;
     //
     // create window
     //
@@ -1473,6 +1479,10 @@ _FX HWND Gui_CreateWindowExA(
         clsnm = lpClassName;
     else
         clsnm = Gui_CreateClassNameA(lpClassName);
+
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE))
+		if (dwExStyle & WS_EX_TOPMOST)
+			dwExStyle = dwExStyle & ~WS_EX_TOPMOST;
 
     if (hWndParent && (hWndParent != HWND_MESSAGE)
                             && (! __sys_IsWindow(hWndParent))) {
@@ -1928,6 +1938,21 @@ _FX BOOL Gui_MoveWindow(
         SetLastError(ERROR_INVALID_WINDOW_HANDLE);
         return FALSE;
     }
+	if (SbieApi_QueryConfBool(NULL, L"BlockInterferenceControl", FALSE)) {
+		RECT rt;
+		typedef (*P_SystemParametersInfoA)(UINT  uiAction,
+			UINT  uiParam,
+			PVOID pvParam,
+			UINT  fWinIni);
+		typedef (*P_GetSystemMetrics)(int nIndex);
+		P_SystemParametersInfoA SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA"); if (!SystemParametersInfoA) goto then;
+		P_GetSystemMetrics GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics"); if (!GetSystemMetrics) goto then;
+		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
+		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+		if (y + h > y1)
+			h = y1 - y-2;
+	}
+	then:
     return __sys_MoveWindow(hWnd, x, y, w, h, bRepaint);
 }
 
@@ -1950,7 +1975,23 @@ _FX BOOL Gui_SetWindowPos(
     //
     // use SbieSvc GUI Proxy if hWnd is accessible but outside the sandbox
     //
-
+	if (SbieApi_QueryConfBool(NULL, L"BlockInterferenceControl", FALSE)) {
+		if (hWndInsertAfter == HWND_TOPMOST || hWndInsertAfter == HWND_TOP)
+			hWndInsertAfter = HWND_DESKTOP;
+		RECT rt;
+		typedef (*P_SystemParametersInfoA)(UINT  uiAction,
+			UINT  uiParam,
+			PVOID pvParam,
+			UINT  fWinIni);
+		typedef (*P_GetSystemMetrics)(int nIndex);
+		P_SystemParametersInfoA SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA"); if (!SystemParametersInfoA) goto then;
+		P_GetSystemMetrics GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics"); if (!GetSystemMetrics) goto then;
+		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);   
+		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+		if (y+h > y1)
+			h = y1-y - 2;
+	}
+	then:
     if (Gui_UseProxyService && !Gui_IsSameBox(hWnd, NULL, NULL)) {
 
         GUI_SET_WINDOW_POS_REQ req;

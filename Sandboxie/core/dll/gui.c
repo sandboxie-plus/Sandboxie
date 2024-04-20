@@ -417,6 +417,12 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(GetClipCursor);
     GUI_IMPORT___(GetCursorPos);
     GUI_IMPORT___(SetCursorPos);
+	GUI_IMPORT___(Sleep);
+	GUI_IMPORT___(SleepEx);
+	GUI_IMPORT___(GetTickCount);
+	GUI_IMPORT___(GetTickCount64);
+	GUI_IMPORT___(QueryUnbiasedInterruptTime);
+	GUI_IMPORT___(QueryPerformanceCounter);
 
     GUI_IMPORT___(MsgWaitForMultipleObjects);
     GUI_IMPORT_AW(PeekMessage);

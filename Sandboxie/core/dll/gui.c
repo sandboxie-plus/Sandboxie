@@ -1959,9 +1959,15 @@ _FX BOOL Gui_MoveWindow(
 
             RECT rt;
             SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
-            int y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
-            if (y + h > y1)
-                h = y1 - y - 2;
+			int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom, x1 = GetSystemMetrics(SM_CXSCREEN) - rt.right, y2 = GetSystemMetrics(SM_CYSCREEN) - rt.top, x2 = GetSystemMetrics(SM_CXSCREEN) - rt.left;
+			if (y + h > y1)
+				h = y1 - y - 2;
+			if (y < y2)
+				y = y2 + 2;
+			if (x + w > x1)
+				w = x1 - x;
+			if (x < x2)
+				x = x2 + 2;
         }
     }
 
@@ -2005,9 +2011,15 @@ _FX BOOL Gui_SetWindowPos(
 
             RECT rt;
             SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
-            int y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
-            if (y + h > y1)
-                h = y1 - y - 2;
+			int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom, x1 = GetSystemMetrics(SM_CXSCREEN) - rt.right, y2 = GetSystemMetrics(SM_CYSCREEN) - rt.top, x2 = GetSystemMetrics(SM_CXSCREEN) - rt.left;
+			if (y + h > y1)
+				h = y1 - y - 2;
+			if (y < y2)
+				y = y2 + 2;
+			if (x + w > x1)
+				w = x1 - x;
+			if (x < x2)
+				x = x2 + 2;
         }
     }
 	

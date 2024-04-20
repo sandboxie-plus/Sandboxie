@@ -1950,7 +1950,7 @@ _FX BOOL Gui_MoveWindow(
 		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
 		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
 		if (y + h > y1)
-			h = y1 - y - GetSystemMetrics(4);
+			h = y1 - y-2;
 	}
 	then:
     return __sys_MoveWindow(hWnd, x, y, w, h, bRepaint);
@@ -1989,7 +1989,7 @@ _FX BOOL Gui_SetWindowPos(
 		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);   
 		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
 		if (y+h > y1)
-			h = y1-y - GetSystemMetrics(4);
+			h = y1-y - 2;
 	}
 	then:
     if (Gui_UseProxyService && !Gui_IsSameBox(hWnd, NULL, NULL)) {

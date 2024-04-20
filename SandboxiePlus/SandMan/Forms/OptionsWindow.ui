@@ -686,17 +686,17 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkBlockSpooler">
-               <property name="text">
-                <string>Block access to the printer spooler</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="2">
               <widget class="QCheckBox" name="chkOpenSpooler">
                <property name="text">
                 <string>Remove spooler restriction, printers can be installed outside the sandbox</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkProtectPower">
+               <property name="text">
+                <string>Prevent sandboxed processes from interfering with power operations</string>
                </property>
               </widget>
              </item>
@@ -713,27 +713,64 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="lblOther">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
+             <item row="15" column="2">
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
                </property>
-               <property name="toolTip">
-                <string>Protect the system from sandboxed processes</string>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>556</width>
+                 <height>20</height>
+                </size>
                </property>
+              </spacer>
+             </item>
+             <item row="9" column="2">
+              <widget class="QCheckBox" name="chkVmReadNotify">
                <property name="text">
-                <string>Other restrictions</string>
+                <string>Issue message 2111 when a process access is denied</string>
                </property>
               </widget>
+             </item>
+             <item row="7" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkCloseClipBoard">
+               <property name="text">
+                <string>Block read access to the clipboard</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkVmRead">
+               <property name="text">
+                <string>Allow to read memory of unsandboxed processes (not recommended)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="1">
+              <spacer name="verticalSpacer_12">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>43</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item row="5" column="1" colspan="2">
               <widget class="QCheckBox" name="chkOpenProtectedStorage">
                <property name="text">
                 <string>Open System Protected Storage</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2">
+              <widget class="QCheckBox" name="chkOpenCredentials">
+               <property name="text">
+                <string>Open Windows Credentials Store (user mode)</string>
                </property>
               </widget>
              </item>
@@ -756,84 +793,49 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="2">
-              <widget class="QCheckBox" name="chkOpenCredentials">
+             <item row="1" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkBlockSpooler">
                <property name="text">
-                <string>Open Windows Credentials Store (user mode)</string>
+                <string>Block access to the printer spooler</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkCloseClipBoard">
+             <item row="4" column="0">
+              <widget class="QLabel" name="lblOther">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="toolTip">
+                <string>Protect the system from sandboxed processes</string>
+               </property>
                <property name="text">
-                <string>Block read access to the clipboard</string>
+                <string>Other restrictions</string>
                </property>
               </widget>
              </item>
-             <item row="8" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkVmRead">
-               <property name="text">
-                <string>Allow to read memory of unsandboxed processes (not recommended)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="2">
-              <widget class="QCheckBox" name="chkVmReadNotify">
-               <property name="text">
-                <string>Issue message 2111 when a process access is denied</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1" colspan="2">
-              <layout class="QVBoxLayout" name="verticalLayout_3">
-               <item>
-                <widget class="QCheckBox" name="chkProtectPower">
-                 <property name="text">
-                  <string>Prevent sandboxed processes from interfering with power operations</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="chkBlockCapture">
-                 <property name="text">
-                  <string>Prevent sandboxed processes from using public methods to capture window images</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="11" column="1" colspan="2">
+             <item row="12" column="1" colspan="2">
               <widget class="QCheckBox" name="chkUserOperation">
+               <property name="statusTip">
+                <string>Prevent move mouse, bring in front, and simmilar operations.</string>
+               </property>
                <property name="text">
-                <string>Prevent interference with user control operations (move mouse, bring in front, etc...)</string>
+                <string>Prevent interference with the unser interface (Experimental, see tooltop)</string>
                </property>
               </widget>
              </item>
-             <item row="12" column="1">
-              <spacer name="verticalSpacer_12">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+             <item row="13" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkBlockCapture">
+               <property name="statusTip">
+                <string>This feature does not block all means of optaining a screen capture only some common once, also it may cause UI glitches</string>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>43</height>
-                </size>
+               <property name="text">
+                <string>Prevent sandboxed processes from capturing window images (Experimental unstable, see tooltip)</string>
                </property>
-              </spacer>
-             </item>
-             <item row="13" column="2">
-              <spacer name="horizontalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>556</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -4668,8 +4670,8 @@ instead of &quot;*&quot;.</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
+                  <width>75</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="dbgLayout">

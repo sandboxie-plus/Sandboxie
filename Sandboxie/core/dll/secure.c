@@ -1003,8 +1003,9 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
     ULONG TokenInformationLength,
     ULONG *ReturnLength)
 {
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
     NTSTATUS status = 0;
-    THREAD_DATA *TlsData = NULL;
     HANDLE hTokenReal = NULL;
     BOOLEAN FakeAdmin = FALSE;
 
@@ -1019,7 +1020,7 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
     // we also ensure that the token belongs to the current process
     //
 
-    if (Secure_FakeAdmin && (SbieApi_QueryProcessInfoEx(0, 'ippt', (LONG_PTR)(hTokenReal ? hTokenReal : TokenHandle))))
+    if ((Secure_FakeAdmin || TlsData->proc_create_process_fake_admin) && (SbieApi_QueryProcessInfoEx(0, 'ippt', (LONG_PTR)(hTokenReal ? hTokenReal : TokenHandle))))
     {
         FakeAdmin = TRUE;
     }
@@ -1038,8 +1039,6 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
     // otherwise, this check is related to Protected Mode, so pretend
     // we are running as Administrator
     //
-
-    TlsData = Dll_GetTlsData(NULL);
 
     if (Secure_Is_IE_NtQueryInformationToken && !TlsData->proc_create_process)
     {
@@ -1150,10 +1149,12 @@ NTSTATUS Ldr_NtAccessCheckByType(PSECURITY_DESCRIPTOR SecurityDescriptor, PSID P
 
 _FX NTSTATUS Ldr_NtAccessCheck(PSECURITY_DESCRIPTOR SecurityDescriptor, HANDLE ClientToken, ACCESS_MASK DesiredAccess, PGENERIC_MAPPING GenericMapping, PPRIVILEGE_SET RequiredPrivilegesBuffer, PULONG BufferLength, PACCESS_MASK GrantedAccess, PNTSTATUS AccessStatus)
 {
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
     NTSTATUS status = 0;
     HANDLE hTokenReal = NULL;
 
-    if (Secure_FakeAdmin && SecurityDescriptor) {
+    if ((Secure_FakeAdmin || TlsData->proc_create_process_fake_admin) && SecurityDescriptor) {
         BOOLEAN Fake = FALSE;
 
         PSID Group, Owner;
@@ -1352,7 +1353,7 @@ _FX NTSTATUS Secure_RtlQueryElevationFlags(ULONG *Flags)
 
     BOOLEAN fake = FALSE;
 
-    if (Secure_FakeAdmin) 
+    if (Secure_FakeAdmin || TlsData->proc_create_process_fake_admin) 
     {
         fake = TRUE;
     } 
@@ -1446,7 +1447,9 @@ NTSTATUS Secure_RtlCheckTokenMembershipEx(
     DWORD flags,
     PUCHAR isMember)
 {
-    if (Secure_FakeAdmin && RtlEqualSid(sidToCheck, AdministratorsSid)) {
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    if ((Secure_FakeAdmin || TlsData->proc_create_process_fake_admin) && RtlEqualSid(sidToCheck, AdministratorsSid)) {
         if (isMember) *isMember = TRUE;
         return STATUS_SUCCESS;
     }

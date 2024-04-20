@@ -34,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Enabling "DropAdminRights/FakeAdminRights" adds "BlockInterferePower and ForceProtectionOnMount" to the INI [#3825](https://github.com/sandboxie-plus/Sandboxie/issues/3825)
 - fixed KeePass "Out of Memory" crash due to "BlockScreenCapture=y" [#3768](https://github.com/sandboxie-plus/Sandboxie/issues/3768)
 - fixed Sandboxie 1.13.4 with IsBlockCapture=y brakes on Windows 7 [#3769](https://github.com/sandboxie-plus/Sandboxie/issues/3769)
+- fixed explorer.exe issue "FakeAdminRights=y" [#3638](https://github.com/sandboxie-plus/Sandboxie/issues/3638)
 
 
 

@@ -200,6 +200,7 @@ typedef struct _THREAD_DATA {
     BOOLEAN         proc_create_process_capture_image;
     BOOLEAN         proc_create_process_force_elevate;
     BOOLEAN         proc_create_process_as_invoker;
+    BOOLEAN         proc_create_process_fake_admin;
     BOOLEAN         proc_image_is_copy;
     WCHAR          *proc_image_path;
     WCHAR          *proc_command_line;
@@ -309,6 +310,8 @@ extern ULONG Dll_Windows;
 
 extern PSECURITY_DESCRIPTOR Secure_NormalSD;
 extern PSECURITY_DESCRIPTOR Secure_EveryoneSD;
+
+extern BOOLEAN Secure_FakeAdmin;
 
 extern BOOLEAN Ldr_BoxedImage;
 

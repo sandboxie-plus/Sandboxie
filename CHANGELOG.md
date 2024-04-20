@@ -35,6 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed KeePass "Out of Memory" crash due to "BlockScreenCapture=y" [#3768](https://github.com/sandboxie-plus/Sandboxie/issues/3768)
 - fixed Sandboxie 1.13.4 with IsBlockCapture=y brakes on Windows 7 [#3769](https://github.com/sandboxie-plus/Sandboxie/issues/3769)
 - fixed explorer.exe issue "FakeAdminRights=y" [#3638](https://github.com/sandboxie-plus/Sandboxie/issues/3638)
+- fixed Make it possible to disable forced folder warning [#3569](https://github.com/sandboxie-plus/Sandboxie/issues/3569)
 
 
 

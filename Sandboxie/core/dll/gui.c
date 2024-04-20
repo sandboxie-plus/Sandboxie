@@ -213,7 +213,6 @@ P_AttachThreadInput         __sys_AttachThreadInput         = NULL;
 
 P_GetOpenFileNameW          __sys_GetOpenFileNameW          = NULL;
 
-P_ShowCursor				__sys_ShowCursor				= NULL;
 
 //---------------------------------------------------------------------------
 // Functions

@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Make the trigger list editable [#3742](https://github.com/sandboxie-plus/Sandboxie/issues/3742)
 - added Optionally extend the screenshot protection to the UI [#3739](https://github.com/sandboxie-plus/Sandboxie/issues/3739)
 - added a button to edit local/custom templates [#3738](https://github.com/sandboxie-plus/Sandboxie/issues/3738)
+- asses Permanently Re-sizable or Larger "Run Sandboxed" Window [#3697](https://github.com/sandboxie-plus/Sandboxie/issues/3697)
 
 ### Changed
 - improved Avast template [#3777](https://github.com/sandboxie-plus/Sandboxie/pull/3777)

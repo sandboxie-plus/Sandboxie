@@ -1480,6 +1480,10 @@ _FX HWND Gui_CreateWindowExA(
     else
         clsnm = Gui_CreateClassNameA(lpClassName);
 
+	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE))
+		if (dwExStyle & WS_EX_TOPMOST)
+			dwExStyle = dwExStyle & ~WS_EX_TOPMOST;
+
     if (hWndParent && (hWndParent != HWND_MESSAGE)
                             && (! __sys_IsWindow(hWndParent))) {
         if (dwStyle & WS_CHILD)
@@ -1960,6 +1964,13 @@ _FX BOOL Gui_SetWindowPos(
 		if (hWndInsertAfter == HWND_TOPMOST || hWndInsertAfter == HWND_TOP)
 			hWndInsertAfter = HWND_DESKTOP;
 		RECT rt;
+		typedef (*P_SystemParametersInfoA)(UINT  uiAction,
+			UINT  uiParam,
+			PVOID pvParam,
+			UINT  fWinIni);
+		typedef (*P_GetSystemMetrics)(int nIndex);
+		GET_WIN_API(SystemParametersInfoA, "user32.dll");
+		GET_WIN_API(GetSystemMetrics, "user32.dll");
 		SystemParametersInfo(SPI_GETWORKAREA, 0, &rt, 0);   
 		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
 		if (y > y1)

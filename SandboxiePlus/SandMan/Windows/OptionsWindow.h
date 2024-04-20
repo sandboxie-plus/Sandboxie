@@ -473,7 +473,7 @@ protected:
 	void SaveAdvanced();
 	void UpdateBoxIsolation();
 	void ShowTriggersTmpl(bool bUpdate = false);
-	void AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template = QString());
+	void AddTriggerItem(const QString& Value, ETriggerAction Type, bool disabled = false, const QString& Template = QString());
 	void ShowHiddenProcTmpl(bool bUpdate = false);
 	void ShowHostProcTmpl(bool bUpdate = false);
 	void AddHiddenProcEntry(const QString& Name, const QString& Template = QString());

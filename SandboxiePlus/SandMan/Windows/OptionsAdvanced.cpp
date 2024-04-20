@@ -83,7 +83,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
-	connect(ui.treeTriggers, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnTriggerChanged(QTreeWidgetItem *, int)));
+	connect(ui.treeTriggers, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnTriggerChanged()));
 	connect(ui.btnAddAutoRun, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoRun()));
 	connect(ui.btnAddAutoSvc, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoSvc()));
 	connect(ui.btnAddAutoExec, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoExec()));
@@ -238,6 +238,19 @@ void COptionsWindow::LoadAdvanced()
 	foreach(const QString & Value, m_pBox->GetTextList("OnBoxTerminate", m_Template))
 		AddTriggerItem(Value, eTerminateCmd);
 
+	foreach(const QString & Value, m_pBox->GetTextList("StartProgramDisabled", m_Template))
+		AddTriggerItem(Value, eOnStartCmd, true);
+	foreach(const QString & Value, m_pBox->GetTextList("StartServiceDisabled", m_Template))
+		AddTriggerItem(Value, eOnStartSvc, true);
+	foreach(const QString & Value, m_pBox->GetTextList("AutoExecDisabled", m_Template))
+		AddTriggerItem(Value, eAutoExec, true);
+	foreach(const QString & Value, m_pBox->GetTextList("OnFileRecoveryDisabled", m_Template))
+		AddTriggerItem(Value, eRecoveryCheck, true);
+	foreach(const QString & Value, m_pBox->GetTextList("OnBoxDeleteDisabled", m_Template))
+		AddTriggerItem(Value, eDeleteCmd, true);
+	foreach(const QString & Value, m_pBox->GetTextList("OnBoxTerminateDisabled", m_Template))
+		AddTriggerItem(Value, eTerminateCmd, true);
+
 	ShowTriggersTmpl();
 	//
 
@@ -304,17 +317,17 @@ void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
 		foreach(const QString& Template, m_pBox->GetTemplates())
 		{
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("StartProgram", Template))
-				AddTriggerItem(Value, eOnStartCmd, Template);
+				AddTriggerItem(Value, eOnStartCmd, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("StartService", Template))
-				AddTriggerItem(Value, eOnStartSvc, Template);
+				AddTriggerItem(Value, eOnStartSvc, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("AutoExec", Template))
-				AddTriggerItem(Value, eAutoExec, Template);
+				AddTriggerItem(Value, eAutoExec, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnFileRecovery", Template))
-				AddTriggerItem(Value, eRecoveryCheck, Template);
+				AddTriggerItem(Value, eRecoveryCheck, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnBoxDelete", Template))
-				AddTriggerItem(Value, eDeleteCmd, Template);
+				AddTriggerItem(Value, eDeleteCmd, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnBoxTerminate", Template))
-				AddTriggerItem(Value, eTerminateCmd, Template);
+				AddTriggerItem(Value, eTerminateCmd, false, Template);
 		}
 	}
 	else if (bUpdate)
@@ -428,24 +441,55 @@ void COptionsWindow::SaveAdvanced()
 	QStringList DeleteCommand;
 	QStringList AutoExec;
 	QStringList TerminateCommand;
+
+	QStringList StartProgramDisabled;
+	QStringList StartServiceDisabled;
+	QStringList RecoveryCheckDisabled;
+	QStringList DeleteCommandDisabled;
+	QStringList AutoExecDisabled;
+	QStringList TerminateCommandDisabled;
+
 	for (int i = 0; i < ui.treeTriggers->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = ui.treeTriggers->topLevelItem(i);
-		switch (pItem->data(0, Qt::UserRole).toInt())
+		if (pItem->checkState(0) == Qt::Checked) 
 		{
-		case eOnStartCmd:	StartProgram.append(pItem->text(2)); break;
-		case eOnStartSvc:	StartService.append(pItem->text(2)); break;
-		case eAutoExec:		AutoExec.append(pItem->text(2)); break;
-		case eRecoveryCheck:		RecoveryCheck.append(pItem->text(2)); break;
-		case eDeleteCmd:	DeleteCommand.append(pItem->text(2)); break;
-		case eTerminateCmd:		TerminateCommand.append(pItem->text(2)); break;
+			switch (pItem->data(0, Qt::UserRole).toInt())
+			{
+			case eOnStartCmd:		StartProgram.append(pItem->text(2)); break;
+			case eOnStartSvc:		StartService.append(pItem->text(2)); break;
+			case eAutoExec:			AutoExec.append(pItem->text(2)); break;
+			case eRecoveryCheck:	RecoveryCheck.append(pItem->text(2)); break;
+			case eDeleteCmd:		DeleteCommand.append(pItem->text(2)); break;
+			case eTerminateCmd:		TerminateCommand.append(pItem->text(2)); break;
+			}
+		}
+		else
+		{
+			switch (pItem->data(0, Qt::UserRole).toInt())
+			{
+			case eOnStartCmd:		StartProgramDisabled.append(pItem->text(2)); break;
+			case eOnStartSvc:		StartServiceDisabled.append(pItem->text(2)); break;
+			case eAutoExec:			AutoExecDisabled.append(pItem->text(2)); break;
+			case eRecoveryCheck:	RecoveryCheckDisabled.append(pItem->text(2)); break;
+			case eDeleteCmd:		DeleteCommandDisabled.append(pItem->text(2)); break;
+			case eTerminateCmd:		TerminateCommandDisabled.append(pItem->text(2)); break;
+			}
 		}
 	}
+
 	WriteTextList("StartProgram", StartProgram);
 	WriteTextList("StartService", StartService);
 	WriteTextList("AutoExec", AutoExec);
 	WriteTextList("OnFileRecovery", RecoveryCheck);
 	WriteTextList("OnBoxDelete", DeleteCommand);
 	WriteTextList("OnBoxTerminate", TerminateCommand);
+
+	WriteTextList("StartProgramDisabled", StartProgramDisabled);
+	WriteTextList("StartServiceDisabled", StartServiceDisabled);
+	WriteTextList("AutoExecDisabled", AutoExecDisabled);
+	WriteTextList("OnFileRecoveryDisabled", RecoveryCheckDisabled);
+	WriteTextList("OnBoxDeleteDisabled", DeleteCommandDisabled);
+	WriteTextList("OnBoxTerminateDisabled", TerminateCommandDisabled);
 	//
 
 
@@ -874,7 +918,7 @@ void COptionsWindow::CloseOptionEdit(QTreeWidgetItem* pItem, bool bSave)
 //
 
 // triggers
-void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template)
+void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? Type : -1);
@@ -906,6 +950,10 @@ void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, c
 	}
 	pItem->setText(2, Value);
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+
+	if (Template.isEmpty())
+		pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+
 	ui.treeTriggers->addTopLevelItem(pItem);
 }
 

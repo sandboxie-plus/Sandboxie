@@ -1374,9 +1374,13 @@ _FX HWND Gui_CreateWindowExW(
         else
             hWndParent = NULL;
     }
-	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE))
+	
+	if (Gui_BlockInterferenceControl){
+	
 		if (dwExStyle & WS_EX_TOPMOST)
 			dwExStyle = dwExStyle & ~WS_EX_TOPMOST;
+	}
+			
     //
     // create window
     //
@@ -1480,9 +1484,11 @@ _FX HWND Gui_CreateWindowExA(
     else
         clsnm = Gui_CreateClassNameA(lpClassName);
 
-	if (SbieApi_QueryConfBool(NULL, "BlockInterferenceControl", FALSE))
+	if (Gui_BlockInterferenceControl){
+	
 		if (dwExStyle & WS_EX_TOPMOST)
 			dwExStyle = dwExStyle & ~WS_EX_TOPMOST;
+	}
 
     if (hWndParent && (hWndParent != HWND_MESSAGE)
                             && (! __sys_IsWindow(hWndParent))) {
@@ -1938,21 +1944,27 @@ _FX BOOL Gui_MoveWindow(
         SetLastError(ERROR_INVALID_WINDOW_HANDLE);
         return FALSE;
     }
-	if (SbieApi_QueryConfBool(NULL, L"BlockInterferenceControl", FALSE)) {
-		RECT rt;
-		typedef (*P_SystemParametersInfoA)(UINT  uiAction,
-			UINT  uiParam,
-			PVOID pvParam,
-			UINT  fWinIni);
-		typedef (*P_GetSystemMetrics)(int nIndex);
-		P_SystemParametersInfoA SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA"); if (!SystemParametersInfoA) goto then;
-		P_GetSystemMetrics GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics"); if (!GetSystemMetrics) goto then;
-		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
-		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
-		if (y + h > y1)
-			h = y1 - y-2;
-	}
-	then:
+	
+    if (Gui_BlockInterferenceControl) {
+
+        typedef BOOL (*P_SystemParametersInfoA)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni);
+        static P_SystemParametersInfoA SystemParametersInfoA = NULL;
+        if (!SystemParametersInfoA) SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA");
+
+        typedef int (*P_GetSystemMetrics)(int nIndex);
+        static P_GetSystemMetrics GetSystemMetrics = NULL;
+        if (!GetSystemMetrics) GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics");
+
+        if (SystemParametersInfoA && GetSystemMetrics) {
+
+            RECT rt;
+            SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
+            int y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+            if (y + h > y1)
+                h = y1 - y - 2;
+        }
+    }
+
     return __sys_MoveWindow(hWnd, x, y, w, h, bRepaint);
 }
 
@@ -1975,23 +1987,30 @@ _FX BOOL Gui_SetWindowPos(
     //
     // use SbieSvc GUI Proxy if hWnd is accessible but outside the sandbox
     //
-	if (SbieApi_QueryConfBool(NULL, L"BlockInterferenceControl", FALSE)) {
-		if (hWndInsertAfter == HWND_TOPMOST || hWndInsertAfter == HWND_TOP)
-			hWndInsertAfter = HWND_DESKTOP;
-		RECT rt;
-		typedef (*P_SystemParametersInfoA)(UINT  uiAction,
-			UINT  uiParam,
-			PVOID pvParam,
-			UINT  fWinIni);
-		typedef (*P_GetSystemMetrics)(int nIndex);
-		P_SystemParametersInfoA SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA"); if (!SystemParametersInfoA) goto then;
-		P_GetSystemMetrics GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics"); if (!GetSystemMetrics) goto then;
-		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);   
-		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
-		if (y+h > y1)
-			h = y1-y - 2;
-	}
-	then:
+	
+    if (Gui_BlockInterferenceControl) {
+
+        if (hWndInsertAfter == HWND_TOPMOST || hWndInsertAfter == HWND_TOP)
+            hWndInsertAfter = HWND_DESKTOP;
+
+        typedef BOOL (*P_SystemParametersInfoA)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni);
+        static P_SystemParametersInfoA SystemParametersInfoA = NULL;
+        if (!SystemParametersInfoA) SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA");
+
+        typedef int (*P_GetSystemMetrics)(int nIndex);
+        static P_GetSystemMetrics GetSystemMetrics = NULL;
+        if (!GetSystemMetrics) GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics");
+
+        if (SystemParametersInfoA && GetSystemMetrics) {
+
+            RECT rt;
+            SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
+            int y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+            if (y + h > y1)
+                h = y1 - y - 2;
+        }
+    }
+	
     if (Gui_UseProxyService && !Gui_IsSameBox(hWnd, NULL, NULL)) {
 
         GUI_SET_WINDOW_POS_REQ req;

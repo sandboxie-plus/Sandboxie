@@ -171,7 +171,7 @@ static ULONG Gui_OpenClipboard_seq  = -1;
 
 static HANDLE Gui_DummyInputDesktopHandle = NULL;
 
-static BOOLEAN Gui_BlockInterferenceControl = FALSE;
+       BOOLEAN Gui_BlockInterferenceControl = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -201,10 +201,10 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 		SBIEDLL_HOOK_GUI(ClipCursor);
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
-		SBIEDLL_HOOK_GUI(ShowCursor);
-		SBIEDLL_HOOK_GUI(BringWindowToTop);
-		SBIEDLL_HOOK_GUI(SwitchToThisWindow);
-		SBIEDLL_HOOK_GUI(SetActiveWindow);
+        SBIEDLL_HOOK_GUI(ShowCursor);
+        SBIEDLL_HOOK_GUI(BringWindowToTop);
+        SBIEDLL_HOOK_GUI(SwitchToThisWindow);
+        SBIEDLL_HOOK_GUI(SetActiveWindow);
 		
         if (Gui_UseBlockCapture) {
             SBIEDLL_HOOK_GUI(GetWindowDC);
@@ -1648,25 +1648,53 @@ _FX EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags)
 	//return __sys_SetThreadExecutionState(esFlags);
 }
 
-_FX int Gui_ShowCursor(BOOL bShow) {
+
+//---------------------------------------------------------------------------
+// Gui_ShowCursor
+//---------------------------------------------------------------------------
+
+
+_FX int Gui_ShowCursor(BOOL bShow) 
+{
 	if (Gui_BlockInterferenceControl && !bShow)
 		return 0;
 	return __sys_ShowCursor(bShow);
 }
 
-_FX HWND Gui_SetActiveWindow(HWND hWnd) {
+
+//---------------------------------------------------------------------------
+// Gui_SetActiveWindow
+//---------------------------------------------------------------------------
+
+
+_FX HWND Gui_SetActiveWindow(HWND hWnd) 
+{
 	if (Gui_BlockInterferenceControl)
 		return NULL;
 	return __sys_SetActiveWindow(hWnd);
 }
 
-_FX BOOL  Gui_BringWindowToTop(HWND hWnd) {
+
+//---------------------------------------------------------------------------
+// Gui_BringWindowToTop
+//---------------------------------------------------------------------------
+
+
+_FX BOOL  Gui_BringWindowToTop(HWND hWnd) 
+{
 	if (Gui_BlockInterferenceControl)
 		return FALSE;
 	return __sys_BringWindowToTop(hWnd);
 }
 
-_FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt) {
+
+//---------------------------------------------------------------------------
+// Gui_SwitchToThisWindow
+//---------------------------------------------------------------------------
+
+
+_FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt) 
+{
 	if (Gui_BlockInterferenceControl)
 		return;
 	__sys_SwitchToThisWindow(hWnd, fAlt);

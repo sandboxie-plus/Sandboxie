@@ -1971,7 +1971,7 @@ _FX BOOL Gui_SetWindowPos(
 		typedef (*P_GetSystemMetrics)(int nIndex);
 		GET_WIN_API(SystemParametersInfoA, "user32.dll");
 		GET_WIN_API(GetSystemMetrics, "user32.dll");
-		SystemParametersInfo(SPI_GETWORKAREA, 0, &rt, 0);   
+		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);   
 		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
 		if (y > y1)
 			y = y1;

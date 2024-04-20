@@ -1949,8 +1949,15 @@ _FX BOOL Gui_MoveWindow(
 		P_GetSystemMetrics GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics"); if (!GetSystemMetrics) goto then;
 		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
 		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom, x1 = GetSystemMetrics(SM_CXSCREEN) - rt.right, y2 = GetSystemMetrics(SM_CYSCREEN) - rt.top, x2 = GetSystemMetrics(SM_CXSCREEN) - rt.left;
 		if (y + h > y1)
-			h = y1 - y-2;
+			h = y1 - y - 2;
+		if (y < y2)
+			y = y2 + 2;
+		if (x + w > x1)
+			w = x1 - x;
+		if (x < x2)
+			x = x2 + 2;
 	}
 	then:
     return __sys_MoveWindow(hWnd, x, y, w, h, bRepaint);
@@ -1987,9 +1994,15 @@ _FX BOOL Gui_SetWindowPos(
 		P_SystemParametersInfoA SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA"); if (!SystemParametersInfoA) goto then;
 		P_GetSystemMetrics GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics"); if (!GetSystemMetrics) goto then;
 		SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);   
-		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom,x1= GetSystemMetrics(SM_CXSCREEN)-rt.right, y2 = GetSystemMetrics(SM_CYSCREEN) - rt.top, x2 = GetSystemMetrics(SM_CXSCREEN) - rt.left;
 		if (y+h > y1)
 			h = y1-y - 2;
+		if (y < y2)
+			y = y2 + 2;
+		if (x + w > x1)
+			w = x1 - x;
+		if (x < x2)
+			x = x2+2;
 	}
 	then:
     if (Gui_UseProxyService && !Gui_IsSameBox(hWnd, NULL, NULL)) {

@@ -88,7 +88,7 @@ static HWND Gui_SetActiveWindow(HWND hWnd);
 
 static BOOL  Gui_BringWindowToTop(HWND hWnd);
 
-static BOOL Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt);
+static void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt);
 
 static LONG Gui_ChangeDisplaySettingsExA(
     void *lpszDeviceName, void *lpDevMode, HWND hwnd,

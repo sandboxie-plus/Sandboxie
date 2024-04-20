@@ -823,7 +823,7 @@
                 <string>Prevent move mouse, bring in front, and simmilar operations.</string>
                </property>
                <property name="text">
-                <string>Prevent interference with the unser interface (Experimental, see tooltop)</string>
+                <string>Prevent interference with the user interface (Experimental, see tooltop)</string>
                </property>
               </widget>
              </item>

@@ -1952,6 +1952,7 @@ _FX BOOL Gui_MoveWindow(
 		if (y + h > y1)
 			h = y1 - y - GetSystemMetrics(4);
 	}
+	then:
     return __sys_MoveWindow(hWnd, x, y, w, h, bRepaint);
 }
 

@@ -1957,7 +1957,15 @@ _FX BOOL Gui_SetWindowPos(
     //
     // use SbieSvc GUI Proxy if hWnd is accessible but outside the sandbox
     //
-
+	if (SbieApi_QueryConfBool(NULL, L"BlockInterferenceControl", FALSE)) {
+		if (hWndInsertAfter == HWND_TOPMOST || hWndInsertAfter == HWND_TOP)
+			hWndInsertAfter = HWND_DESKTOP;
+		RECT rt;
+		SystemParametersInfo(SPI_GETWORKAREA, 0, &rt, 0);   
+		int   y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+		if (y > y1)
+			y = y1;
+	}
     if (Gui_UseProxyService && !Gui_IsSameBox(hWnd, NULL, NULL)) {
 
         GUI_SET_WINDOW_POS_REQ req;

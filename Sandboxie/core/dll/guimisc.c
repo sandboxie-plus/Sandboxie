@@ -1649,11 +1649,25 @@ _FX EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags)
 }
 
 _FX int Gui_ShowCursor(BOOL bShow) {
+	if (Gui_BlockInterferenceControl && !bShow)
+		return 0;
 	return __sys_ShowCursor(bShow);
 }
 
-_FX HWND Gui_SetActiveWindow(HWND hWnd);
+_FX HWND Gui_SetActiveWindow(HWND hWnd) {
+	if (Gui_BlockInterferenceControl)
+		return NULL;
+	return __sys_SetActiveWindow(hWnd);
+}
 
-_FX BOOL  Gui_BringWindowToTop(HWND hWnd);
+_FX BOOL  Gui_BringWindowToTop(HWND hWnd) {
+	if (Gui_BlockInterferenceControl)
+		return FALSE;
+	return __sys_BringWindowToTop(hWnd);
+}
 
-_FX BOOL Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt);
+_FX BOOL Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt) {
+	if (Gui_BlockInterferenceControl)
+		return;
+	__sys_SwitchToThisWindow(hWnd, fAlt);
+}

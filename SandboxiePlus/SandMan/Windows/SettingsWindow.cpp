@@ -362,6 +362,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkHide, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
 
 	connect(ui.txtEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnOptChanged()));
 	m_bRebuildUI = false;
@@ -680,7 +682,7 @@ void CSettingsWindow::showTab(const QString& Name, bool bExclusive)
 		}
 	}
 
-	SafeShow(this);
+	CSandMan::SafeShow(this);
 }
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
@@ -905,6 +907,8 @@ void CSettingsWindow::LoadSettings()
 
 	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
 	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
+	ui.chkHide->setChecked(theConf->GetBool("Options/CoverWindows", false));
+
 
 	ui.txtEditor->setText(theConf->GetString("Options/Editor", "notepad.exe"));
 
@@ -1552,6 +1556,8 @@ void CSettingsWindow::SaveSettings()
 	else if (Scaling > 500)
 		Scaling = 500;
 	theConf->SetValue("Options/FontScaling", Scaling);
+	
+	theConf->SetValue("Options/CoverWindows", ui.chkHide->isChecked());
 
 	theConf->SetValue("Options/Editor", ui.txtEditor->text());
 

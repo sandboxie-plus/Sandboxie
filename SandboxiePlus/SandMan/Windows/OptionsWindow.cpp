@@ -1080,7 +1080,7 @@ void COptionsWindow::showTab(const QString& Name)
 	else
 		m_pStack->setCurrentWidget(pWidget);
 
-	SafeShow(this);
+	CSandMan::SafeShow(this);
 }
 
 void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Suffix, bool bList)

@@ -88,6 +88,7 @@ public:
 	QString				FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, QString ProcessName, QString* pLink = NULL);
 	QString				MakeSbieMsgLink(quint32 MsgCode, const QStringList& MsgData, QString ProcessName);
 
+	static void			SafeShow(QWidget* pWidget);
 	int					SafeExec(QDialog* pDialog);
 
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());

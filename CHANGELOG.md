@@ -15,7 +15,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Note: this option may cause issues in games hence do not enable it for gaming boxes.
 - added support for hardlinks [#3826](https://github.com/sandboxie-plus/Sandboxie/issues/3826)
 - added mechanism to terminate stuck sandboxed processes from the driver
-- added Sandman: Make the trigger list editable [#3742](https://github.com/sandboxie-plus/Sandboxie/issues/3742)
+- added Make the trigger list editable [#3742](https://github.com/sandboxie-plus/Sandboxie/issues/3742)
+- added Optionally extend the screenshot protection to the UI [#3739](https://github.com/sandboxie-plus/Sandboxie/issues/3739)
 
 ### Changed
 - improved Avast template [#3777](https://github.com/sandboxie-plus/Sandboxie/pull/3777)

@@ -16,7 +16,6 @@ HEADERS += ./stdafx.h \
     ./Views/FileView.h \
     ./Views/TraceView.h \
     ./Views/StackView.h \
-    ./Dialogs/MultiErrorDialog.h \
     ./Helpers/FindTool.h \
     ./Helpers/FullScreen.h \
     ./Helpers/WinAdmin.h \
@@ -65,7 +64,6 @@ SOURCES += ./main.cpp \
     ./Views/FileView.cpp \
     ./Views/TraceView.cpp \
     ./Views/StackView.cpp \
-    ./Dialogs/MultiErrorDialog.cpp \
     ./Helpers/FindTool.cpp \
     ./Helpers/FullScreen.cpp \
     ./Helpers/WinAdmin.cpp \

@@ -311,7 +311,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 
         SBIEDLL_HOOK(Gui_, SetThreadExecutionState);
     }
-	if (SbieApi_QueryConfBool(NULL, "UseChangeSpeed", FALSE))
+	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE))
 	{
 		module = Dll_Kernel32;
 		SBIEDLL_HOOK(Gui_, GetTickCount);
@@ -1731,33 +1731,33 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 }
 
 _FX DWORD Gui_GetTickCount() {
-	return __sys_GetTickCount() * SbieApi_QueryConfNumber(NULL, "AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, "LowTickSpeed", 1);
+	return __sys_GetTickCount() * SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL,L"LowTickSpeed", 1);
 }
 
 _FX ULONGLONG Gui_GetTickCount64() {
-	return __sys_GetTickCount64() * SbieApi_QueryConfNumber(NULL, "AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, "LowTickSpeed", 1);
+	return __sys_GetTickCount64() * SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
 }
 
 _FX BOOL Gui_QueryUnbiasedInterruptTime(
 	PULONGLONG UnbiasedTime
 ) {
 	BOOL rtn = __sys_QueryUnbiasedInterruptTime(UnbiasedTime);
-	*UnbiasedTime *= SbieApi_QueryConfNumber(NULL, "AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, "LowTickSpeed", 1);
+	*UnbiasedTime *= SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
 	return rtn;
 }
 
 _FX void Gui_Sleep(DWORD dwMiSecond) {
-	__sys_Sleep(dwMiSecond * SbieApi_QueryConfNumber(NULL, "AddSleepSpeed", 1) / SbieApi_QueryConfNumber(NULL, "LowSleepSpeed", 1));
+	__sys_Sleep(dwMiSecond * SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1));
 }
 
 _FX DWORD Gui_SleepEx(DWORD dwMiSecond, BOOL bAlert) {
-	return __sys_SleepEx(dwMiSecond * SbieApi_QueryConfNumber(NULL, "AddSleepSpeed", 1) / SbieApi_QueryConfNumber(NULL, "LowSleepSpeed", 1),bAlert);
+	return __sys_SleepEx(dwMiSecond * SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1),bAlert);
 }
 
 _FX BOOL Gui_QueryPerformanceCounter(
 	LARGE_INTEGER* lpPerformanceCount
 ) {
 	BOOL rtn = __sys_QueryPerformanceCounter(lpPerformanceCount);
-	lpPerformanceCount->QuadPart = lpPerformanceCount->QuadPart*SbieApi_QueryConfNumber(NULL, "AddTickSpeed", 1)/ SbieApi_QueryConfNumber(NULL, "LowTickSpeed", 1);
+	lpPerformanceCount->QuadPart = lpPerformanceCount->QuadPart*SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1)/ SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
 	return rtn;
 }

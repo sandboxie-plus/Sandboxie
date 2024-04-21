@@ -924,6 +924,24 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
         return FALSE;
     }
 
+    if (SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE)) {
+
+        static BOOLEAN Connected = FALSE;
+        if (Connected)
+            return TRUE;
+
+        ULONG req = GUI_GET_WINDOW_STATION;
+        GUI_GET_WINDOW_STATION_RPL *rpl = Gui_CallProxyEx(
+                    &req, sizeof(ULONG), sizeof(*rpl), FALSE);
+
+        if (rpl) {
+            Dll_Free(rpl);
+            Connected = TRUE;
+        }
+
+        return TRUE;
+    }
+
     //
     // the first win32k service call (i.e. service number >= 0x1000)
     // triggers "thread GUI conversion".  the kernel system service

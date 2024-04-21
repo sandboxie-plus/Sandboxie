@@ -5,10 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-
-## [1.13.6 / 5.68.6] - 2024-04-
+## [1.13.6 / 5.68.6] - 2024-04-21
 
 ### Added
 - added "BlockInterferenceControl=y" option to prevent sandboxed processes from forcing windows on top and moving the mounse pointer (thanks Yeyixiao)

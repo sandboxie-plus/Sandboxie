@@ -830,7 +830,7 @@
              <item row="13" column="1" colspan="2">
               <widget class="QCheckBox" name="chkBlockCapture">
                <property name="statusTip">
-                <string>This feature does not block all means of optaining a screen capture only some common once.</string>
+                <string>This feature does not block all means of obtaining a screen capture only some common ones.</string>
                </property>
                <property name="text">
                 <string>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</string>

@@ -3151,7 +3151,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</oldsource>
-        <translation type="unfinished">Votre version de Windows %1 excède les capacités de prise en charge actuelles de votre version de Sandboxie, entrainant la désactivation de l&apos;isolation de sécurité basée sur les jetons. Par conséquent, toutes les applications s&apos;exécuteront en mode conteneur d&apos;applications sans isolation sécurisée.
+        <translation>Votre version de Windows %1 excède les capacités de prise en charge actuelles de votre version de Sandboxie, entrainant la désactivation de l&apos;isolation de sécurité basée sur les jetons. Par conséquent, toutes les applications s&apos;exécuteront en mode conteneur d&apos;applications sans isolation sécurisée.<byte value="xd"/>
 Veuillez vérifier s&apos;il y a une mise à jour pour Sandboxie.</translation>
     </message>
     <message>
@@ -6076,7 +6076,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1305"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ceci ne ressemble pas à un numéro de série de Sandboxie-Plus.&lt;br /&gt;Si vous avez essayé de saisir la clé de mise à jour ou la signature d&apos;un certificat, c&apos;est incorrect : à la place, veuillez saisir le certificat en entier dans la zone de texte ci-dessus.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1312"/>
@@ -7193,7 +7193,7 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
         <location filename="Forms/OptionsWindow.ui" line="468"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation type="unfinished">Supprimer automatiquement le contenu lorsque le dernier processus du bac prend fin</translation>
+        <translation>Supprimer automatiquement les modifications du contenu lorsque le dernier processus du bac prend fin</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="509"/>
@@ -8531,27 +8531,27 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="699"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher les processus dans le bac à sable d&apos;interférer avec des opérations d&apos;alimentation (Expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher les mouvements à la souris, la mise au premier plan, et les opérations similaires (activer ceci est susceptible de causer des problèmes avec les jeux).</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>
         <source>Prevent interference with the user interface (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher les interférences avec l&apos;interface utilisateur (Expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
         <source>This feature does not block all means of optaining a screen capture only some common once.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette fonction ne bloque pas tous les moyens d&apos;obtenir une capture d&apos;écran, seulement les plus communs.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="836"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher les processus dans un bac à sable de capturer des images de la fenêtre (Expérimental, peut provoquer des bogues d&apos;interface utilisateur)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3199"/>
@@ -8936,7 +8936,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4846"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le modèle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5014"/>
@@ -9609,7 +9609,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer les fenêtres de SandMan lors des captures d&apos;écran (redémarrage de l&apos;interface utilisateur nécessaire)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1511"/>
@@ -10053,7 +10053,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le modèle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2650"/>

@@ -8277,7 +8277,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
-        <source>This feature does not block all means of obtaining a screen capture only some common ones.</source>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <translation>此功能仅能阻止常见的一些，而不是所有的屏幕捕获方法。</translation>
     </message>
     <message>

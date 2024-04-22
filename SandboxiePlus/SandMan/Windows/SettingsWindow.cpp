@@ -875,7 +875,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
 	if (theAPI->IsConnected()) {
 		if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
-			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
+			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "").left(11) != "SandMan.exe")
 				ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
 			else
 				ui.chkSvcStart->setChecked(true);

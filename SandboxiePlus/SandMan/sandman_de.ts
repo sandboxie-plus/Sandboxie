@@ -7845,8 +7845,8 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</source>
-        <translation>Verhindere Mausbewegungen, in den Vordergrund holen und ähnliche Vorgänge, die zu Problemen bei Spielen führen können.</translation>
+        <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
+        <translation>Verhindere Bewegen des Mauszeigers, in den Vordergrund holen und ähnliche Vorgänge (dies führt wahrscheinlich zu Problemen mit Spielen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>
@@ -7855,7 +7855,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
-        <source>This feature does not block all means of optaining a screen capture only some common once.</source>
+        <source>This feature does not block all means of obtaining a screen capture only some common ones.</source>
         <translation>Diese Funktion blockiert nicht alle Möglichkeiten einen Screenshot zu erstellen, sondern nur einige der gängigen.</translation>
     </message>
     <message>

@@ -7846,7 +7846,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
-        <translation>Verhindere Bewegen des Mauszeigers, in den Vordergrund holen und 채hnliche Vorg채nge (dies f체hrt wahrscheinlich zu Problemen mit Spielen)</translation>
+        <translation>Verhindert Bewegen des Mauszeigers, in den Vordergrund holen und 채hnliche Vorg채nge. Dies verursacht wahrscheinlich Probleme bei Spielen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>

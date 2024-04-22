@@ -7689,7 +7689,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
-        <source>This feature does not block all means of optaining a screen capture only some common once.</source>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <translation>此功能不會阻止所有能夠取得螢幕擷取內容的方法，僅阻止某些常見行為一次。</translation>
     </message>
     <message>

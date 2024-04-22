@@ -77,7 +77,7 @@
                <item>
                 <widget class="QCheckBox" name="chkSuspend">
                  <property name="text">
-                  <string>Hotkey for suspending all process</string>
+                  <string>Hotkey for suspending all process:</string>
                  </property>
                 </widget>
                </item>

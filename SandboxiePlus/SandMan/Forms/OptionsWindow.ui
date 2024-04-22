@@ -829,7 +829,7 @@
              </item>
              <item row="13" column="1" colspan="2">
               <widget class="QCheckBox" name="chkBlockCapture">
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>This feature does not block all means of obtaining a screen capture only some common ones.</string>
                </property>
                <property name="text">

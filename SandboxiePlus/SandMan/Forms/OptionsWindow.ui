@@ -820,7 +820,7 @@
              <item row="12" column="1" colspan="2">
               <widget class="QCheckBox" name="chkUserOperation">
                <property name="statusTip">
-                <string>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</string>
+                <string>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</string>
                </property>
                <property name="text">
                 <string>Prevent interference with the user interface (Experimental)</string>

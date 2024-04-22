@@ -32,9 +32,6 @@
     <Filter Include="Views">
       <UniqueIdentifier>{34eca1e5-cd50-4876-9f54-9eec4c393150}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dialogs">
-      <UniqueIdentifier>{6accf3ae-da17-4c0f-ba83-214e3874b029}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{20d5954b-be86-4a34-948d-00954dcfd07b}</UniqueIdentifier>
     </Filter>
@@ -71,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="Views\SbieView.cpp">
       <Filter>Views</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialogs\MultiErrorDialog.cpp">
-      <Filter>Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="SbiePlusAPI.cpp">
       <Filter>SandMan</Filter>
@@ -285,9 +279,6 @@
     </QtMoc>
     <QtMoc Include="Views\SbieView.h">
       <Filter>Views</Filter>
-    </QtMoc>
-    <QtMoc Include="Dialogs\MultiErrorDialog.h">
-      <Filter>Dialogs</Filter>
     </QtMoc>
     <QtMoc Include="SbiePlusAPI.h">
       <Filter>SandMan</Filter>

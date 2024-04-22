@@ -8809,7 +8809,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process:</source>
+        <source>Hotkey for suspending all processes:</source>
         <translation>Hotkey zum Unterbrechen aller Prozesse:</translation>
     </message>
     <message>

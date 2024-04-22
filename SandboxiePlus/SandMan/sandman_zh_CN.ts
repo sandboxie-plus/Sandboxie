@@ -5516,7 +5516,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1305"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>这看起来不像是 Sandboxie Plus 的序列号&lt;br/&gt;如果您试图从证书中输入 UpdateKey 或 Signature ，无需这样做，请直接将整个证书输入到上面的文本区域。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1312"/>
@@ -8263,27 +8263,27 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="699"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>防止沙盒进程干扰电源操作（实验性）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</source>
-        <translation type="unfinished"></translation>
+        <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
+        <translation>防止移动鼠标、窗口前置和类似操作，这可能会导致游戏出现问题。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>
         <source>Prevent interference with the user interface (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>防止干扰用户界面（实验性）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
-        <source>This feature does not block all means of optaining a screen capture only some common once.</source>
-        <translation type="unfinished"></translation>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
+        <translation>此功能仅能阻止常见的一些，而不是所有的屏幕捕获方法。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="836"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止沙盒进程捕获窗口图像（实验性，可能会导致UI故障）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1537"/>
@@ -8438,7 +8438,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4846"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>打开模板</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5014"/>
@@ -8886,7 +8886,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>打开模板</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2650"/>
@@ -9417,7 +9417,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>从屏幕捕获中隐藏 SandMan 窗口（需要重新启动UI）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1434"/>

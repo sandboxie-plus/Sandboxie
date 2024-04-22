@@ -7855,13 +7855,13 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
-        <source>This feature does not block all means of obtaining a screen capture only some common ones.</source>
-        <translation>Diese Funktion blockiert nicht alle Möglichkeiten einen Screenshot zu erstellen, sondern nur einige der gängigen.</translation>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
+        <translation>Diese Funktion blockiert nicht alle Mittel einen Screenshot zu erstellen, nur einige übliche.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="836"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation>Hindere sandgeboxte Prozesse daran, Screenshots zu erstellen (experimentell, kann zu Störungen der Benutzeroberfläche führen)</translation>
+        <translation>Hindere sandgeboxte Prozesse daran, Screenshots zu erstellen (experimentell, kann Störungen der Benutzeroberfläche verursachen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1368"/>
@@ -8809,8 +8809,8 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process</source>
-        <translation>Hotkey zum Unterbrechen aller Prozesse</translation>
+        <source>Hotkey for suspending all process:</source>
+        <translation>Hotkey zum Unterbrechen aller Prozesse:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
@@ -8845,7 +8845,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation>Verstecke SandMan-Fenster vor der Erstellung von Screenshots (Neustart der Benutzeroberfläche erforderlich)</translation>
+        <translation>Verberge SandMan-Fenster vor der Erstellung von Screenshots (Neustart der Benutzeroberfläche erforderlich)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1434"/>

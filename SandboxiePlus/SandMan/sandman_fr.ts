@@ -8535,8 +8535,9 @@ au lieu de « * ».</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</source>
-        <translation>Empêcher les mouvements à la souris, la mise au premier plan, et les opérations similaires (activer ceci est susceptible de causer des problèmes avec les jeux).</translation>
+        <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
+        <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
+        <translation type="unfinished">Empêcher les mouvements à la souris, la mise au premier plan, et les opérations similaires (activer ceci est susceptible de causer des problèmes avec les jeux).</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>
@@ -8545,8 +8546,9 @@ au lieu de « * ».</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
-        <source>This feature does not block all means of optaining a screen capture only some common once.</source>
-        <translation>Cette fonction ne bloque pas tous les moyens d&apos;obtenir une capture d&apos;écran, seulement les plus communs.</translation>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
+        <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
+        <translation type="unfinished">Cette fonction ne bloque pas tous les moyens d&apos;obtenir une capture d&apos;écran, seulement les plus communs.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="836"/>
@@ -9433,8 +9435,9 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process</source>
-        <translation>Raccourci pour suspendre tous les processus :</translation>
+        <source>Hotkey for suspending all processes:</source>
+        <oldsource>Hotkey for suspending all process</oldsource>
+        <translation type="unfinished">Raccourci pour suspendre tous les processus :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>

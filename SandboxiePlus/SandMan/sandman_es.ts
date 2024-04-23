@@ -8337,7 +8337,8 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</source>
+        <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
+        <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8347,7 +8348,8 @@ Para especificar un proceso, utiliza &apos;$:program.exe&apos; como ruta.</trans
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
-        <source>This feature does not block all means of optaining a screen capture only some common once.</source>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
+        <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9080,8 +9082,9 @@ Por favor note que estos valores son especificos para usuario y guardados global
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process</source>
-        <translation>Atajo para suspender todos los procesos</translation>
+        <source>Hotkey for suspending all processes:</source>
+        <oldsource>Hotkey for suspending all process</oldsource>
+        <translation type="unfinished">Atajo para suspender todos los procesos</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>

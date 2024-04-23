@@ -9381,8 +9381,9 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process</source>
-        <translation>暂停沙盒内所有进程的热键：</translation>
+        <source>Hotkey for suspending all processes:</source>
+        <oldsource>Hotkey for suspending all process</oldsource>
+        <translation type="unfinished">暂停沙盒内所有进程的热键：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>

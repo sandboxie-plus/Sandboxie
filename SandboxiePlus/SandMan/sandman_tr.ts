@@ -8750,8 +8750,9 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process:</source>
-        <translation>Tüm işlemleri askıya almak için kısayol tuşu:</translation>
+        <source>Hotkey for suspending all processes:</source>
+        <oldsource>Hotkey for suspending all process:</oldsource>
+        <translation type="unfinished">Tüm işlemleri askıya almak için kısayol tuşu:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>

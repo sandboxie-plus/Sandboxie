@@ -8778,8 +8778,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process</source>
-        <translation>用於暫停全部執行緒的快速鍵</translation>
+        <source>Hotkey for suspending all processes:</source>
+        <oldsource>Hotkey for suspending all process</oldsource>
+        <translation type="unfinished">用於暫停全部執行緒的快速鍵</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>

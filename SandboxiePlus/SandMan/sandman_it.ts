@@ -7724,7 +7724,8 @@ Per specificare un processo, utilizza &apos;$:program.exe&apos; come percorso.</
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
-        <source>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</source>
+        <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
+        <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7734,7 +7735,8 @@ Per specificare un processo, utilizza &apos;$:program.exe&apos; come percorso.</
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
-        <source>This feature does not block all means of optaining a screen capture only some common once.</source>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
+        <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8855,7 +8857,8 @@ area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process</source>
+        <source>Hotkey for suspending all processes:</source>
+        <oldsource>Hotkey for suspending all process</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

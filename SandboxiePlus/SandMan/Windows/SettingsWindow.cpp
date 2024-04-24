@@ -1567,7 +1567,7 @@ void CSettingsWindow::SaveSettings()
 	if (theAPI->IsConnected()) {
 		if (ui.chkSvcStart->checkState() == Qt::Checked) {
 			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", true);
-			theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
+			theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe -autorun");
 		}
 		else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
 			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);

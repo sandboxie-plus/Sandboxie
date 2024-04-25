@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation>Lås lådan när alla processer stoppar</translation>
+        <translation>Lås lådan när alla processer stoppar.</translation>
     </message>
 </context>
 <context>
@@ -272,7 +272,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="772"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Delad mall</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
@@ -285,32 +285,35 @@
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denna inställning lägger till en lokal mall eller dess inställningar till sandlådekonfigurationen så att inställningarna i den mallen delas mellan sandlådor.
+Hursom, om alternativet Använd en mall är valt som delningsläge, kanske vissa inställningar inte återspeglas i användragränssnittet.
+För att ändra mallens inställningar, lokalisera helt enkelt &apos;%1&apos; -mallen i Appmallslistan under Sandlådealternativ, dubbelklicka sedan på den för redigering.
+För att inaktivera denna mall för en sandlåda, avbocka den helt enkelt i mall listan.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Detta alternativ adderar inga inställningar till lådkonfigurationen och tar inte bort de förvalda lådinställningarna baserade på borttagningsinställningarna inom mallen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Detta alternativ adderar den delade mallen till lådkonfigurationen som en lokal mall och kanske också tar bort de förvalda lådinställningarna baserade på borttagningsinställningarna inom mallen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Detta alternativ adderar inställningarna från den delade mallen till lådkonfigurationen och kanske också tar bort de förvalda lådinställningarna baserat på borttagningsinställningarna inom mallen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="783"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Detta alternativ adderar inte några inställningar till lådkonfigurationen, men kanske tar bort de förvalda lådinställningarna baserat på borttagningsinställningarna inom mallen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
         <source>Remove defaults if set</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort förvalda om angivet</translation>
     </message>
     <message>
         <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.
@@ -330,7 +333,7 @@ För att inaktivera denna mall för en sandlåda, avbocka den helt enkelt i mall
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="787"/>
         <source>Use as a template</source>
-        <translation>Använd som en mall.</translation>
+        <translation>Använd som en mall</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="789"/>
@@ -1389,7 +1392,7 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="115"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Delad mall</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="276"/>
@@ -4117,9 +4120,9 @@ Nej väljer: %2</translation>
         <location filename="SandMan.cpp" line="2489"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
-        <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
+        <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</oldsource>
-        <translation type="unfinished">Ditt Windows-bygge %1 överstiger de nuvarande supportförmågorna av din Sandboxie-version, vilket resulterar i inaktivering av token-based säkerhetsisolering. Följdaktligen, alla applikationer kommer att operera i applikationsutrymmesläge utan säker isolering.
+        <translation>Ditt Windows-bygge %1 överstiger de nuvarande supportförmågorna av din Sandboxie-version, vilket resulterar i inaktivering av token-based säkerhetsisolering. Följdaktligen, alla applikationer kommer att operera i applikationsutrymmesläge utan säker isolering.
 Vänligen kontrollera om det finns en uppdatering för Sandboxie.</translation>
     </message>
     <message>
@@ -5979,25 +5982,25 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1305"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Detta ser inte ut som ett Sandboxie-Plus serienummer.&lt;br /&gt;Om du har försökt föra in Uppdateringsnyckeln eller Signaturen från ett certifikat som inte är korrekt, vänligen för in hela certifikatet in i textområdet ovan istället.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1312"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Du försöker att använda en uppgraderingsnyckel för egenskaper utan att ha fört in ett förexisterande supportercertifikat. Vänligen notera att denna typ av nyckel (&lt;b&gt;som det tydligt är uppgivet i fet text på webbsidan&lt;/b) kräver att du har ett förexisterande giltigt supportercertifikat; det är oanvändbart utan ett.&lt;br /&gt;Om du vill använda de avancerade egenskaperna, behöver du skaffa både ett standardcertifikat och uppgraderingsnyckeln för egenskaper för att låsa upp avancerad funktionalitet.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1318"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Du försöker att använda en Förnyelsenyckel utan att ha fört in ett förexisterande supportercertifikat. Vänligen notera att denna typ av nyckel (&lt;b&gt;som är tydligt uppgivet i fet text på hemsidan&lt;/b) kräver att du har ett förexisterande giltigt supportercertifikat; det är oanvändbart utan ett.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1323"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Om du inte har läst produktbeskrivningen och har erhållit denna nyckel av misstag; vänligen kontakta oss via e-post (tillgänglig på vår webbsida) för att lösa denna fråga.&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1338"/>
@@ -6008,12 +6011,12 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Fel vid hämtande av certifikat:%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Unknown Error (probably a network issue)</source>
-        <translation type="unfinished"></translation>
+        <translation>Okänt fel (troligen ett nätverksfel)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1404"/>
@@ -7061,7 +7064,7 @@ Om du redan är en Great Supporter on Patreon, kan Sandboxie söka på nätet f�
         <location filename="Forms/OptionsWindow.ui" line="468"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation type="unfinished">Autoradera innehåll när sista sandlådade process avslutas</translation>
+        <translation>Autoradera innehållsändringar när sista sandlådade process avslutas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="360"/>
@@ -7323,29 +7326,29 @@ Om du redan är en Great Supporter on Patreon, kan Sandboxie söka på nätet f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="699"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Förhindra sandlådade processer från att störa med kraftfulla operationer (Experimentell)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Förhindra musflytt, för in framför och liknande operationer, detta orsakar troligen problem med spel.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>
         <source>Prevent interference with the user interface (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Förhindra störande av användargränssnittet (Experimentellt)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Denna egenskap blockerar inte alla medel för att anskaffa en skärmbild, bara de vanligaste.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="836"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Förhindra sandlådade processer från att skapa fönsteravbilder (Experimentell, kan orsaka användargränssnittsfel)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="874"/>
@@ -8720,22 +8723,22 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3353"/>
         <source>Other Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Andra alternativ</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3378"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>Portblockering</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3422"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockera vanliga SAMBA-portar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3442"/>
         <source>Block DNS, UDP port 53</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockera DNS, UDP-port 53</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3466"/>
@@ -8821,7 +8824,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4846"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Öppna mall</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5014"/>
@@ -9404,7 +9407,7 @@ istället för &quot;*&quot;.</translation>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">Snabbkommando för att upphäva alla processer</translation>
+        <translation>Snabbkommando för att upphäva alla processer:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
@@ -9697,7 +9700,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dölj Sandman-fönster från skärmbildstagande (UI-omstart behövs)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1511"/>
@@ -9915,7 +9918,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Öppna mall</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2650"/>

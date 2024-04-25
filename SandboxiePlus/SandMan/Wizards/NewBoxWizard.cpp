@@ -102,8 +102,8 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         const QString REMOVE_DEFAULT_ALL = "#RemoveDefaultAll";
         const QString REMOVE_DEFAULT_RECOVERS = "#RemoveDefaultRecovers";
         const QString REMOVE_DEFAULT_TEMPLATES = "#RemoveDefaultTemplates";
-        const QString ENABLED_PREFIX = "Enabled=";
-        const QString CFGLVL_PREFIX = "ConfigLevel=";
+        const QString ENABLED_PREFIX = "Enabled";
+        const QString CFGLVL_PREFIX = "ConfigLevel";
         const QString TMPL_PREFIX = "Tmpl.";
         const QString BOX_DISABLED_SUFFIX = "Disabled";
         const QStringList SPECIAL_SETTINGS = { "BorderColor", "BoxIcon", "BoxNameTitle", "ConfigLevel", "CopyLimitKb" };
@@ -148,7 +148,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                     if (bParts.size() == 2) {
                         QString bKey = bParts[0].trimmed();
                         QString bValue = bParts[1].trimmed();
-                        if (!bLine.startsWith(ENABLED_PREFIX) && !bLine.startsWith(CFGLVL_PREFIX)) { // Do not remove Enabled and ConfigLevel
+                        if (bKey.compare(ENABLED_PREFIX, Qt::CaseInsensitive) != 0 && bKey.compare(CFGLVL_PREFIX) != 0) { // Do not remove Enabled and ConfigLevel
                             pBox->DelValue(bKey, bValue);
                         }
                     }
@@ -172,7 +172,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 QString tKey = tParts[0].trimmed();
                 QString tValue = tParts[1].trimmed();
 
-                if (tKey.startsWith(ENABLED_PREFIX) || tKey.startsWith(TMPL_PREFIX) || tKey.startsWith("#") || tKey.endsWith(BOX_DISABLED_SUFFIX)) {
+                if (tKey.compare(ENABLED_PREFIX, Qt::CaseInsensitive) == 0 || tKey.startsWith(TMPL_PREFIX) || tKey.startsWith("#") || tKey.endsWith(BOX_DISABLED_SUFFIX)) {
                     continue; // Skip lines that start or end with one of these
                 }
 

@@ -47,7 +47,7 @@ public:
 	CScriptManager*		GetScripts() { return m_SbieScripts; }
 	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
-	static QString		GetVersion();
+	static QString		GetVersion(bool bWithUpdates = false);
 	static void			ShowMessageBox(QWidget* Widget, QMessageBox::Icon Icon, const QString& Message);
 
 	bool				IsImDiskReady() const { return m_ImDiskReady; }

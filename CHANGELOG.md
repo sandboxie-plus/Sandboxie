@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.13.7 / 5.68.7] - 2024-04-
 
 ### Added
-- Added DropAdmin and improved related checkboxes #3851  https://github.com/sandboxie-plus/Sandboxie/pull/3851 (thanks offhub)
+- added DropAdmin and improved related checkboxes #3851  https://github.com/sandboxie-plus/Sandboxie/pull/3851 (thanks offhub)
+- added file version info doe SbieDll.dll and SbieSvc.exe to the Plus About dialog
 
 ### Fixed
  - fixed issue with start agent option [#3844](https://github.com/sandboxie-plus/Sandboxie/pull/3844) (thanks offhub)

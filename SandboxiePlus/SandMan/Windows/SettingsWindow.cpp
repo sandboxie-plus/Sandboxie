@@ -2449,14 +2449,9 @@ void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& P
 	if (Data.isEmpty() || Data["error"].toBool())
 		return;
 
-	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV);
-	int iUpdate = COnlineUpdater::GetCurrentUpdate();
-	if(iUpdate) 
-		Version += QChar('a' + (iUpdate - 1));
-
 	m_UpdateData = Data;
 	QVariantMap Releases = m_UpdateData["releases"].toMap();
-	ui.lblCurrent->setText(tr("%1 (Current)").arg(Version));
+	ui.lblCurrent->setText(tr("%1 (Current)").arg(theGUI->GetVersion(true)));
 	ui.lblStable->setText(CSettingsWindow__MkVersion("stable", Releases));
 	ui.lblPreview->setText(CSettingsWindow__MkVersion("preview", Releases));
 	if(ui.radInsider->isEnabled())

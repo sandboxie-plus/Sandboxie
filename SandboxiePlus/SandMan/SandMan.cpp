@@ -4322,7 +4322,7 @@ void CSandMan::OnAbout()
 			"<br />"
 			"Features: %3<br />"
 			"<br />"
-			"Installation Location: %1<br />"
+			"Installation: %1<br />"
 			"SbieDrv.sys: %4<br /> SbieSvc.exe: %5<br /> SbieDll.dll: %6<br />"
 			"<br />"
 			"Icons from <a href=\"https://icons8.com\">icons8.com</a>"

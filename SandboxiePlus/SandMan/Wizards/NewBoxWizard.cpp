@@ -252,23 +252,27 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 //pBox->InsertText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
             }
             pBox->SetBool("BlockNetworkFiles", !field("shareAccess").toBool());
-		    
-            if (field("fakeAdmin").toBool()) {
+
+            bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened);
+            bool bDropAdmin = field("dropAdmin").toBool();
+            if (field("dropAdmin").toBool() && !bHardened)
                 pBox->SetBool("DropAdminRights", true);
+
+            if (field("fakeAdmin").toBool())
                 pBox->SetBool("FakeAdminRights", true);
-            }
-            if(field("msiServer").toBool())
+
+            if(field("msiServer").toBool() && !bDropAdmin && !bHardened)
                 pBox->SetBool("MsiInstallerExemptions", true);
-		    
+
             if(field("boxToken").toBool())
                 pBox->SetBool("SandboxieLogon", true);
-		    
+
             if(field("imagesProtection").toBool())
                 pBox->SetBool("ProtectHostImages", true);
-		    
+
             if (!Password.isEmpty())
                 pBox->ImBoxCreate(ImageSize / 1024, Password);
-		    
+
             if (field("boxVersion").toInt() == 1) {
                 if (theConf->GetBool("Options/WarnDeleteV2", true)) {
                     bool State = false;
@@ -741,6 +745,12 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     pAdminLabel->setFont(fnt);
     layout->addWidget(pAdminLabel, row++, 0);
 
+    m_pDropAdmin = new QCheckBox(tr("Drop rights from Administrators and Power Users groups"));
+    m_pDropAdmin->setChecked(theConf->GetBool("BoxDefaults/DropAdmin", false));
+    layout->addWidget(m_pDropAdmin, row++, 1, 1, 3);
+    connect(m_pDropAdmin, &QCheckBox::stateChanged, this, &CAdvancedPage::OnDropAdminChanged);
+    registerField("dropAdmin", m_pDropAdmin);
+
     QCheckBox* pFakeAdmin = new QCheckBox(tr("Make applications think they are running elevated"));
     pFakeAdmin->setChecked(theConf->GetBool("BoxDefaults/FakeAdmin", false));
     layout->addWidget(pFakeAdmin, row++, 1, 1, 3);
@@ -748,7 +758,8 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
 
     m_pMSIServer = new QCheckBox(tr("Allow MSIServer to run with a sandboxed system token"));
     m_pMSIServer->setToolTip(tr("This option is not recommended for Hardened boxes"));
-    m_pMSIServer->setChecked(theConf->GetBool("BoxDefaults/MsiExemptions", false));
+    if (!theConf->GetBool("BoxDefaults/DropAdmin", false))
+        m_pMSIServer->setChecked(theConf->GetBool("BoxDefaults/MsiExemptions", false));
     layout->addWidget(m_pMSIServer, row++, 1, 1, 3);
     registerField("msiServer", m_pMSIServer);
 
@@ -817,8 +828,11 @@ void CAdvancedPage::initializePage()
     int BoxType = wizard()->field("boxType").toInt();
 
     bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened);
-    m_pMSIServer->setEnabled(!bHardened);
+    bool bDropAdmin = field("dropAdmin").toBool();
+    m_pMSIServer->setEnabled(!bHardened && !bDropAdmin);
     m_pShareAccess->setEnabled(!bHardened);
+    m_pDropAdmin->setEnabled(!bHardened);
+    m_pDropAdmin->setChecked(bDropAdmin || bHardened);
 
     bool bAppBox = (BoxType == CSandBoxPlus::eAppBoxPlus || BoxType == CSandBoxPlus::eAppBox);
     m_pBoxToken->setEnabled(!bAppBox);
@@ -827,6 +841,18 @@ void CAdvancedPage::initializePage()
 bool CAdvancedPage::validatePage()
 {
     return true;
+}
+
+void CAdvancedPage::OnDropAdminChanged(int state) {
+    // If m_pDropAdmin is checked, disable m_pMSIServer
+    if (state == Qt::Checked) {
+        m_pMSIServer->setEnabled(false);
+        m_pMSIServer->setChecked(false);
+    }
+    else {
+        // If m_pDropAdmin is unchecked, enable m_pMSIServer
+        m_pMSIServer->setEnabled(true);
+    }
 }
 
 
@@ -921,6 +947,7 @@ bool CSummaryPage::validatePage()
         theConf->SetValue("BoxDefaults/BlockNetwork", field("blockNetwork").toInt());
         theConf->SetValue("BoxDefaults/ShareAccess", field("shareAccess").toBool());
 
+        theConf->SetValue("BoxDefaults/DropAdmin", field("dropAdmin").toBool());
         theConf->SetValue("BoxDefaults/FakeAdmin", field("fakeAdmin").toBool());
         theConf->SetValue("BoxDefaults/MsiExemptions", field("msiServer").toBool());
 

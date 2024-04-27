@@ -100,6 +100,29 @@ typedef void (*P_SwitchToThisWindow)(HWND hWnd, BOOL fAlt);
 
 typedef HWND(*P_SetActiveWindow)(HWND hWnd);
 
+typedef DWORD(*P_GetTickCount)();
+
+typedef ULONGLONG (*P_GetTickCount64)();
+
+typedef BOOL(*P_QueryUnbiasedInterruptTime)(
+	PULONGLONG UnbiasedTime
+	);
+
+typedef void(*P_Sleep)(DWORD dwMiSecond);
+
+typedef DWORD(*P_SleepEx)(DWORD dwMiSecond, BOOL bAlert);
+
+typedef BOOL (*P_QueryPerformanceCounter)(
+	LARGE_INTEGER* lpPerformanceCount
+);
+
+typedef UINT_PTR (*P_SetTimer)(
+	 HWND      hWnd,
+	           UINT_PTR  nIDEvent,
+	          UINT      uElapse,
+	 TIMERPROC lpTimerFunc
+);
+
 typedef BOOL (*P_GetCursorPos)(LPPOINT lpPoint);
 
 typedef BOOL (*P_SetCursorPos)(int x, int y);
@@ -618,6 +641,14 @@ GUI_SYS_VAR_2(PostMessage)
 GUI_SYS_VAR_2(PostThreadMessage)
 GUI_SYS_VAR_2(DispatchMessage)
 
+GUI_SYS_VAR(Sleep)
+GUI_SYS_VAR(SleepEx)
+GUI_SYS_VAR(GetTickCount)
+GUI_SYS_VAR(QueryUnbiasedInterruptTime)
+GUI_SYS_VAR(GetTickCount64)
+GUI_SYS_VAR(QueryPerformanceCounter)
+GUI_SYS_VAR(SetTimer)
+
 GUI_SYS_VAR(MapWindowPoints)
 GUI_SYS_VAR(ClientToScreen)
 GUI_SYS_VAR(ScreenToClient)
@@ -909,6 +940,7 @@ BOOLEAN Ole_DoDragDrop(HWND hWnd, WPARAM wParam, LPARAM lParam);
 
 BOOLEAN Gui_InitMisc(HMODULE module);
 
+static void SetDesktop();
 
 //---------------------------------------------------------------------------
 

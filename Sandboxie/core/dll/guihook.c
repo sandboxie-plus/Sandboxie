@@ -176,7 +176,7 @@ _FX HHOOK Gui_SetWindowsHookExA(
     int idHook, HOOKPROC lpfn, HINSTANCE hMod, DWORD dwThreadId)
 {
     HHOOK hhook;
-
+	SetDesktop();
     if (    idHook == WH_JOURNALRECORD || idHook == WH_JOURNALPLAYBACK ||
             idHook == WH_KEYBOARD_LL   || idHook == WH_MOUSE_LL        ||
             //Gui_IsThreadInThisProcess(dwThreadId)
@@ -241,7 +241,7 @@ _FX HHOOK Gui_SetWindowsHookExW(
     //
 
     HHOOK hhook;
-
+	SetDesktop();
     if (    idHook == WH_JOURNALRECORD || idHook == WH_JOURNALPLAYBACK ||
             idHook == WH_KEYBOARD_LL   || idHook == WH_MOUSE_LL        ||
             //Gui_IsThreadInThisProcess(dwThreadId)

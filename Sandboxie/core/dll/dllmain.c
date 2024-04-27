@@ -196,8 +196,16 @@ _FX BOOL WINAPI DllMain(
 
         Dll_InitGeneric(hInstance);
         SbieDll_HookInit();
+		if (SbieApi_QueryConfBool(NULL, "UseSandboxDesktop", FALSE)) {
+			wchar_t* boxName = { L'\0' },*Temp=L"Desktop_";
+			SbieApi_QueryBoxPath(&boxName, NULL, NULL, NULL, NULL, NULL, NULL);
+			lstrcat(Temp, boxName);
+			HDESK hDesk = OpenDesktopA(Temp, 0, FALSE, GENERIC_ALL);
+			if(hDesk)
+				SetThreadDesktop(hDesk);
+		}
 
-    } else if (dwReason == DLL_PROCESS_DETACH) {
+   } else if (dwReason == DLL_PROCESS_DETACH) {
 
         if (Dll_InitComplete && Dll_BoxName) {
 

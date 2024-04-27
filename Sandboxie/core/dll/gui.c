@@ -246,6 +246,7 @@ static HWND Gui_CreateWindowExA(
     HINSTANCE hInstance,
     LPVOID lpParam);
 
+
 static HWND Gui_CreateWindowExW(
     DWORD dwExStyle,
     void *lpClassName,
@@ -416,7 +417,18 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(ClipCursor);
     GUI_IMPORT___(GetClipCursor);
     GUI_IMPORT___(GetCursorPos);
-    GUI_IMPORT___(SetCursorPos);
+	GUI_IMPORT___(SetCursorPos);
+
+	GUI_IMPORT___(SetTimer);
+	HMODULE temp = module;
+	module = Dll_Kernel32;
+	GUI_IMPORT___(Sleep);
+	GUI_IMPORT___(SleepEx);
+	GUI_IMPORT___(GetTickCount);
+	GUI_IMPORT___(GetTickCount64);
+	GUI_IMPORT___(QueryUnbiasedInterruptTime);
+	GUI_IMPORT___(QueryPerformanceCounter);
+	module = temp;
 
     GUI_IMPORT___(MsgWaitForMultipleObjects);
     GUI_IMPORT_AW(PeekMessage);
@@ -1344,6 +1356,8 @@ _FX HWND Gui_CreateWindowExW(
     HINSTANCE hInstance,
     LPVOID lpParam)
 {
+	SetDesktop();
+
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
     void *new_WindowName;
     WCHAR *clsnm;
@@ -1479,6 +1493,8 @@ _FX HWND Gui_CreateWindowExA(
     HINSTANCE hInstance,
     LPVOID lpParam)
 {
+	SetDesktop();
+
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
     void *new_WindowName;
     UCHAR *clsnm;
@@ -2848,4 +2864,14 @@ _FX BOOLEAN ComDlg32_Init(HMODULE module)
     //}
 
     return TRUE;
+}
+void SetDesktop() {
+	if (SbieApi_QueryConfBool(NULL, "UseSandboxDesktop", FALSE)) {
+		wchar_t* boxName = { L'\0' }, * Temp = L"Desktop_";
+		SbieApi_QueryBoxPath(&boxName, NULL, NULL, NULL, NULL, NULL, NULL);
+		lstrcat(Temp, boxName);
+		HDESK hDesk = OpenDesktopA(Temp, 0, FALSE, GENERIC_ALL);
+		if (hDesk)
+			SetThreadDesktop(hDesk);
+	}
 }

@@ -962,7 +962,7 @@ _FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, BOOLEAN OpenRe
             handle, (OpenReparsePoint ? FILE_GENERIC_READ : FILE_READ_ATTRIBUTES) | SYNCHRONIZE, &objattrs,
             &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
             FILE_OPEN, 
-            FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | (OpenReparsePoint ? FILE_OPEN_REPARSE_POINT : 0),
+            /*FILE_DIRECTORY_FILE |*/ FILE_SYNCHRONOUS_IO_NONALERT | (OpenReparsePoint ? FILE_OPEN_REPARSE_POINT : 0),
             NULL, 0);
 
         Dll_PopTlsNameBuffer(TlsData);
@@ -983,7 +983,7 @@ _FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, BOOLEAN OpenRe
             handle, (OpenReparsePoint ? FILE_GENERIC_READ : FILE_READ_ATTRIBUTES)  | SYNCHRONIZE, &objattrs,
             &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
             FILE_OPEN, 
-            FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | (OpenReparsePoint ? FILE_OPEN_REPARSE_POINT : 0),
+            /*FILE_DIRECTORY_FILE |*/ FILE_SYNCHRONOUS_IO_NONALERT | (OpenReparsePoint ? FILE_OPEN_REPARSE_POINT : 0),
             NULL, 0);
     }
 

@@ -940,7 +940,6 @@ BOOLEAN Ole_DoDragDrop(HWND hWnd, WPARAM wParam, LPARAM lParam);
 
 BOOLEAN Gui_InitMisc(HMODULE module);
 
-static void SetDesktop();
 
 //---------------------------------------------------------------------------
 

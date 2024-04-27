@@ -1436,8 +1436,9 @@ finish:
 
 
 //---------------------------------------------------------------------------
-// GetWindowStationSlave
+// SetSecurity
 //---------------------------------------------------------------------------
+
 
 BOOL SetSecurity(HANDLE handle, PSID pSid, ULONG Access)
 {
@@ -1510,14 +1511,24 @@ Cleanup:
 	return TRUE;
 }
 
+
+//---------------------------------------------------------------------------
+// GetWindowStationSlave
+//---------------------------------------------------------------------------
+
+
 ULONG GuiServer::GetWindowStationSlave(SlaveArgs *args)
 {
     ULONG errlvl;
     ULONG status;
     WCHAR boxname[BOXNAME_COUNT];
     ULONG session_id;
+    HWINSTA local_winsta = NULL;
+    HDESK   local_desktop = NULL;
+    BOOLEAN close_desktop = FALSE;
+    HANDLE hProcess = NULL;
 
-    HANDLE hProcess = OpenProcess(   PROCESS_QUERY_INFORMATION | TOKEN_QUERY
+    hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | TOKEN_QUERY
                                    | PROCESS_DUP_HANDLE, FALSE, args->pid);
     if (! hProcess) {
         status = GetLastError();
@@ -1554,8 +1565,25 @@ ULONG GuiServer::GetWindowStationSlave(SlaveArgs *args)
         //
         //
 
-        HWINSTA local_winsta  = GetProcessWindowStation();
-        HDESK   local_desktop = GetThreadDesktop(GetCurrentThreadId());
+        local_winsta  = GetProcessWindowStation();
+
+        WCHAR deskname[128] = { 0 };
+        /*SbieApi_QueryConfAsIs(boxname, L"SandboxDesktopName", 0, deskname, sizeof(deskname));
+        if(*value)
+            local_desktop = OpenDesktop(value, 0, FALSE, GENERIC_ALL);
+        else*/
+        if (SbieApi_QueryConfBool(boxname, L"UseSandboxDesktop", FALSE)) {
+
+            wsprintf(deskname, L"%s_%s_Session_%d_Desktop", //_%08X",
+                SANDBOXIE, boxname, m_SessionId); //GetTickCount());
+
+            local_desktop = OpenDesktop(deskname, 0, FALSE, GENERIC_ALL);
+            if (!local_desktop)
+                local_desktop = CreateDesktop(deskname, NULL, NULL, 0, GENERIC_ALL, NULL);
+
+            close_desktop = TRUE;
+        } else
+            local_desktop = GetThreadDesktop(GetCurrentThreadId());
 
         if ((! local_winsta) || (! local_desktop)) {
             status = -1;
@@ -1653,6 +1681,9 @@ finish:
 
     if (hProcess)
         CloseHandle(hProcess);
+
+    if (close_desktop && local_desktop)
+        CloseDesktop(local_desktop);
 
     if (errlvl) {
         ReportError2336(-1, errlvl, status);

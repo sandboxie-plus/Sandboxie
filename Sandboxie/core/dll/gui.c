@@ -417,6 +417,8 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(GetClipCursor);
     GUI_IMPORT___(GetCursorPos);
 	GUI_IMPORT___(SetCursorPos);
+
+	GUI_IMPORT___(SetTimer);
 	HMODULE temp = module;
 	module = Dll_Kernel32;
 	GUI_IMPORT___(Sleep);

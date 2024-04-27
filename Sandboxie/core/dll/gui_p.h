@@ -116,6 +116,13 @@ typedef BOOL (*P_QueryPerformanceCounter)(
 	LARGE_INTEGER* lpPerformanceCount
 );
 
+typedef UINT_PTR (*P_SetTimer)(
+	 HWND      hWnd,
+	           UINT_PTR  nIDEvent,
+	          UINT      uElapse,
+	 TIMERPROC lpTimerFunc
+);
+
 typedef BOOL (*P_GetCursorPos)(LPPOINT lpPoint);
 
 typedef BOOL (*P_SetCursorPos)(int x, int y);
@@ -640,6 +647,7 @@ GUI_SYS_VAR(GetTickCount)
 GUI_SYS_VAR(QueryUnbiasedInterruptTime)
 GUI_SYS_VAR(GetTickCount64)
 GUI_SYS_VAR(QueryPerformanceCounter)
+GUI_SYS_VAR(SetTimer)
 
 GUI_SYS_VAR(MapWindowPoints)
 GUI_SYS_VAR(ClientToScreen)

@@ -136,7 +136,12 @@ static DWORD Gui_SleepEx(DWORD dwMiSecond, BOOL bAlert);
 static BOOL Gui_QueryPerformanceCounter(
 	LARGE_INTEGER* lpPerformanceCount
 	);
-
+static UINT_PTR Gui_SetTimer(
+	 HWND      hWnd,
+	           UINT_PTR  nIDEvent,
+	           UINT      uElapse,
+	 TIMERPROC lpTimerFunc
+);
 
 //---------------------------------------------------------------------------
 
@@ -302,7 +307,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 	__sys_GetThreadDpiAwarenessContext = (P_GetThreadDpiAwarenessContext)
 		Ldr_GetProcAddrNew(DllName_user32, L"GetThreadDpiAwarenessContext","GetThreadDpiAwarenessContext");
 
-
+	HMODULE current = module;
     if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE)) {
 
         SBIEDLL_HOOK_GUI(ShutdownBlockReasonCreate);
@@ -313,6 +318,8 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
     }
 	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE))
 	{
+		module = current;
+		SBIEDLL_HOOK(Gui_, SetTimer);
 		module = Dll_Kernel32;
 		SBIEDLL_HOOK(Gui_, GetTickCount);
 		P_GetTickCount64 GetTickCount64 = Ldr_GetProcAddrNew(Dll_Kernel32, "GetTickCount64", "GetTickCount64");
@@ -324,6 +331,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 		SBIEDLL_HOOK(Gui_, QueryPerformanceCounter);
 		SBIEDLL_HOOK(Gui_, Sleep);
 		SBIEDLL_HOOK(Gui_, SleepEx);
+		
 	}
 	
     return TRUE;
@@ -1760,4 +1768,14 @@ _FX BOOL Gui_QueryPerformanceCounter(
 	BOOL rtn = __sys_QueryPerformanceCounter(lpPerformanceCount);
 	lpPerformanceCount->QuadPart = lpPerformanceCount->QuadPart*SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1)/ SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
 	return rtn;
+}
+
+_FX UINT_PTR Gui_SetTimer(
+	HWND      hWnd,
+	UINT_PTR  nIDEvent,
+	UINT      uElapse,
+	TIMERPROC lpTimerFunc
+)
+{
+	return __sys_SetTimer(hWnd, nIDEvent, uElapse * SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1), lpTimerFunc);
 }

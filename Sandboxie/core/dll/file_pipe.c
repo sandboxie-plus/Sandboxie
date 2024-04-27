@@ -1156,8 +1156,8 @@ _FX NTSTATUS File_NtFsControlFile(
 
         if (IoControlCode == FSCTL_SET_REPARSE_POINT) {
 
-            BOOLEAN BoxReparsTarget = SbieApi_QueryConfBool(NULL, L"BoxReparsTarget", FALSE);
-            if(BoxReparsTarget) {
+            BOOLEAN BoxReparseTarget = SbieApi_QueryConfBool(NULL, L"BoxReparseTarget", FALSE);
+            if(BoxReparseTarget) {
 
                 status = File_SetReparsePoint(
                                     FileHandle, InputBuffer, InputBufferLength);

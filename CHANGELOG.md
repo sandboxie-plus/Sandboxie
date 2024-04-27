@@ -8,13 +8,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.13.7 / 5.68.7] - 2024-04-
 
 ### Added
-- added DropAdmin and improved related checkboxes #3851  https://github.com/sandboxie-plus/Sandboxie/pull/3851 (thanks offhub)
-- added file version info doe SbieDll.dll and SbieSvc.exe to the Plus About dialog
+- added file version information for SbieDll.dll and SbieSvc.exe in the Sandboxie Plus About dialog
 
 ### Changed
-- changed when creating reparse points (symlinks/junctions) the target path remains teh TruePath [#3852](https://github.com/sandboxie-plus/Sandboxie/issues/3852)
-  - the old behavioure can be restored with "BoxReparsTarget=y"
-  - this change should work fine with the resent improvements in handling reparse points
+- when creating reparse points (symlinks/junctions), the target path remains the TruePath [#3852](https://github.com/sandboxie-plus/Sandboxie/issues/3852)
+  - the old behaviour can be restored with "BoxReparseTarget=y"
+  - this change should work fine with the recent improvements in handling reparse points
+- improved checkboxes about DropAdminRights in SandMan [#3851](https://github.com/sandboxie-plus/Sandboxie/pull/3851) (thanks offhub)
 
 ### Fixed
  - fixed issue with start agent option [#3844](https://github.com/sandboxie-plus/Sandboxie/pull/3844) (thanks offhub)
@@ -26,7 +26,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added "BlockInterferenceControl=y" option to prevent sandboxed processes from forcing windows on top and moving the mounse pointer (thanks Yeyixiao)
-  - Note: this option may cause issues in games hence do not enable it for gaming boxes.
+  - Note: this option may cause issues in games hence do not enable it for gaming boxes
 - added support for hard links [#3826](https://github.com/sandboxie-plus/Sandboxie/issues/3826)
 - added mechanism to terminate stuck sandboxed processes from the driver
 - added Make the trigger list editable [#3742](https://github.com/sandboxie-plus/Sandboxie/issues/3742)
@@ -45,7 +45,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed When I change the BlockDNS and BlockPorts options, the Apply button is not activated [#3807](https://github.com/sandboxie-plus/Sandboxie/issues/3807)
 - fixed troubleshooting wizard broke with new Qt [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
 - fixed Settings dialog now showing the right ram disk letter
-- fixed issues with updater broke with new Qt due to missing SSL support [3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
+- fixed issues with updater broke with new Qt due to missing SSL support [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
 - fixed Enabling "DropAdminRights/FakeAdminRights" adds "BlockInterferePower and ForceProtectionOnMount" to the INI [#3825](https://github.com/sandboxie-plus/Sandboxie/issues/3825)
 - fixed KeePass "Out of Memory" crash due to "BlockScreenCapture=y" [#3768](https://github.com/sandboxie-plus/Sandboxie/issues/3768)
 - fixed Sandboxie 1.13.4 with IsBlockCapture=y not working on Windows 7 [#3769](https://github.com/sandboxie-plus/Sandboxie/issues/3769)

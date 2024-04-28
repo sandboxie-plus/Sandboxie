@@ -3356,7 +3356,7 @@ _FX NTSTATUS File_SetReparsePoint(
         WCHAR* NewSubstituteNameBuffer = NULL;
         WCHAR* OldPrintNameBuffer = PrintNameBuffer; // we don't need to change the display name
         
-        if (Data->ReparseTag) {
+        if (Data->ReparseTag == IO_REPARSE_TAG_SYMLINK) {
 
             NewSubstituteNameBuffer = File_TranslateNtToDosPath2(CopyPath);
             memmove(NewSubstituteNameBuffer + 4, NewSubstituteNameBuffer, (wcslen(NewSubstituteNameBuffer) + 1) * sizeof(wchar_t)); // File_TranslateNtToDosPath2 alocates 16 extry chars for such cases
@@ -3398,7 +3398,7 @@ _FX NTSTATUS File_SetReparsePoint(
         memcpy(SubstituteNameBuffer, NewSubstituteNameBuffer, SubstituteNameLength + sizeof(WCHAR));
         memcpy(PrintNameBuffer, OldPrintNameBuffer, PrintNameLength + sizeof(WCHAR));
 
-        if (Data->ReparseTag)
+        if (Data->ReparseTag == IO_REPARSE_TAG_SYMLINK)
             Dll_Free(NewSubstituteNameBuffer);
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {

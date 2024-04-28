@@ -329,8 +329,7 @@ _FX FILE_GUID *File_GetLinkForGuid(const WCHAR* guid_str)
 
 _FX WCHAR* File_TranslateGuidToNtPath2(const WCHAR* GuidPath, ULONG GuidPathLen)
 {
-    ULONG len;
-    WCHAR* NtPath;
+    WCHAR* NtPath = NULL;
 
     if (GuidPath && GuidPathLen >= 48 && _wcsnicmp(GuidPath, L"\\??\\Volume{", 11) == 0) {
 

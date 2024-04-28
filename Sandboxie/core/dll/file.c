@@ -265,6 +265,9 @@ static NTSTATUS File_NtDeleteFile(OBJECT_ATTRIBUTES *ObjectAttributes);
 
 static NTSTATUS File_NtDeleteFileImpl(OBJECT_ATTRIBUTES *ObjectAttributes);
 
+static WCHAR *File_ConcatPath2(
+    const WCHAR *Path1, ULONG Path1Len, const WCHAR *Path2, ULONG Path2Len);
+
 static WCHAR* File_CanonizePath(
     const wchar_t* absolute_path, ULONG abs_path_len, const wchar_t* relative_path, ULONG rel_path_len);
 

@@ -1671,11 +1671,11 @@ _FX WCHAR *File_AllocAndInitEnvironment_2(
 
 _FX WCHAR *File_ConcatPath2(const WCHAR *Path1, ULONG Path1Len, const WCHAR *Path2, ULONG Path2Len)
 {
-    ULONG len_dos = Path1Len + Path2Len;
-    WCHAR* Path = Dll_Alloc((len_dos + 1) * sizeof(WCHAR));
+    ULONG Length = Path1Len + Path2Len;
+    WCHAR* Path = Dll_Alloc((Length + 1) * sizeof(WCHAR));
     wmemcpy(Path, Path1, Path1Len);
     wmemcpy(Path + Path1Len, Path2, Path2Len);
-    Path[len_dos] = L'\0';
+    Path[Length] = L'\0';
     return Path;
 }
 

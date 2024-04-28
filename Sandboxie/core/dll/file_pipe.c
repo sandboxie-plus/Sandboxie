@@ -1152,17 +1152,11 @@ _FX NTSTATUS File_NtFsControlFile(
     handle = File_GetProxyPipe(FileHandle, NULL);
     if (! handle) {
 
-		status = STATUS_BAD_INITIAL_PC;
-
         if (IoControlCode == FSCTL_SET_REPARSE_POINT) {
 
-            BOOLEAN BoxReparseTarget = SbieApi_QueryConfBool(NULL, L"BoxReparseTarget", FALSE);
-            if(BoxReparseTarget) {
-
-                status = File_SetReparsePoint(
-                                    FileHandle, InputBuffer, InputBufferLength);
-                SetLastError(LastError);
-            }
+            status = File_SetReparsePoint(
+                                FileHandle, InputBuffer, InputBufferLength);
+            SetLastError(LastError);
 
         } else if (IoControlCode == FSCTL_PIPE_WAIT) {
 
@@ -1178,7 +1172,8 @@ _FX NTSTATUS File_NtFsControlFile(
             else
                 status = STATUS_ACCESS_DENIED;
 
-        }
+        } else
+            status = STATUS_BAD_INITIAL_PC;
 
         if (status == STATUS_BAD_INITIAL_PC) {
 

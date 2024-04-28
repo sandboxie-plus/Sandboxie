@@ -11,12 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added file version information for SbieDll.dll and SbieSvc.exe in the Sandboxie Plus About dialog
 
 ### Changed
-- when creating reparse points (symlinks/junctions), the target path remains the TruePath [#3852](https://github.com/sandboxie-plus/Sandboxie/issues/3852)
-  - the old behaviour can be restored with "BoxReparseTarget=y"
-  - this change should work fine with the recent improvements in handling reparse points
 - improved checkboxes about DropAdminRights in SandMan [#3851](https://github.com/sandboxie-plus/Sandboxie/pull/3851) (thanks offhub)
 
 ### Fixed
+- Issue with symbolic linking of files [#3852](https://github.com/sandboxie-plus/Sandboxie/issues/3852)
 - fixed issue with start agent option [#3844](https://github.com/sandboxie-plus/Sandboxie/pull/3844) (thanks offhub)
 - fixed issue with Delete V2 introduced in 1.13.5
 

@@ -3170,7 +3170,8 @@ _FX NTSTATUS File_NtQueryVolumeInformationFile(
 _FX NTSTATUS File_SetReparsePoint(
     HANDLE FileHandle, PREPARSE_DATA_BUFFER Data, ULONG DataLen)
 {
-    THREAD_DATA *TlsData;
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
     NTSTATUS status;
     UNICODE_STRING objname;
     OBJECT_ATTRIBUTES objattrs;
@@ -3180,12 +3181,14 @@ _FX NTSTATUS File_SetReparsePoint(
     PREPARSE_DATA_BUFFER NewData = NULL;
     ULONG NewDataLen;
     IO_STATUS_BLOCK MyIoStatusBlock;
+    BOOLEAN MigrateTarget = FALSE;
+
+    if (! Data)
+        return STATUS_BAD_INITIAL_PC;
 
     //
     // get paths to source and target directories
     //
-
-    TlsData = Dll_GetTlsData(NULL);
 
     Dll_PushTlsNameBuffer(TlsData);
 
@@ -3194,10 +3197,6 @@ _FX NTSTATUS File_SetReparsePoint(
         WCHAR* SubstituteNameBuffer;
         USHORT PrintNameLength;
         WCHAR* PrintNameBuffer;
-        //BOOLEAN RelativePath = FALSE;
-
-        if (! Data)
-            return STATUS_BAD_INITIAL_PC;
 
         if (Data->ReparseTag == IO_REPARSE_TAG_SYMLINK)
         {
@@ -3205,8 +3204,16 @@ _FX NTSTATUS File_SetReparsePoint(
             SubstituteNameBuffer = &Data->SymbolicLinkReparseBuffer.PathBuffer[Data->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
             PrintNameLength = Data->SymbolicLinkReparseBuffer.PrintNameLength;
             PrintNameBuffer = &Data->SymbolicLinkReparseBuffer.PathBuffer[Data->SymbolicLinkReparseBuffer.PrintNameOffset/sizeof(WCHAR)];
-            if (Data->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE)
-                return STATUS_BAD_INITIAL_PC; //RelativePath = TRUE; // let it be done normally
+            if (Data->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE) {
+
+                //
+                // We can allow for a relative path in the box but must ensure the hatget gets migrated
+                //
+
+                MigrateTarget = TRUE;
+                status = STATUS_BAD_INITIAL_PC;
+                __leave;
+            }
 
             NewDataLen = (UFIELD_OFFSET(REPARSE_DATA_BUFFER, SymbolicLinkReparseBuffer.PathBuffer) - UFIELD_OFFSET(REPARSE_DATA_BUFFER, GenericReparseBuffer));
         }
@@ -3219,14 +3226,17 @@ _FX NTSTATUS File_SetReparsePoint(
 
             NewDataLen = (UFIELD_OFFSET(REPARSE_DATA_BUFFER, MountPointReparseBuffer.PathBuffer) - UFIELD_OFFSET(REPARSE_DATA_BUFFER, GenericReparseBuffer));
         }
-        else 
-            return STATUS_BAD_INITIAL_PC;
+        else {
+            status = STATUS_BAD_INITIAL_PC;
+            __leave;
+        }
 
         //
         // get copy path of reparse source
         //
 
         RtlInitUnicodeString(&objname, L"");
+
         InitializeObjectAttributes(
             &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
@@ -3320,17 +3330,14 @@ _FX NTSTATUS File_SetReparsePoint(
 
     if (NT_SUCCESS(status)) {
 
-        File_CreateBoxedPath(TruePath);
-
         status = __sys_NtFsControlFile(
             FileHandle, NULL, NULL, NULL,
             &MyIoStatusBlock, FSCTL_SET_REPARSE_POINT,
             NewData, NewDataLen,
             NULL, 0);
-    }
 
-    if (NewData)
-        Dll_Free(NewData);
+        MigrateTarget = NT_SUCCESS(status);
+    }
 
     /*
     //
@@ -3377,6 +3384,23 @@ _FX NTSTATUS File_SetReparsePoint(
         Dll_Free(SourcePath);
     if (TargetPath)
         Dll_Free(TargetPath);*/
+
+    if (MigrateTarget) {
+
+        //
+        // We must migrate the file or directory into the sandbox as the path reparsing by NtCreateFile
+        // is done by the kernel and we do not "manually" reparse the path before invoking it,
+        // hence there must be the expected file at the path we are linking to.
+        //
+
+        HANDLE SourceHandle;
+        status = File_OpenForRenameFile(&SourceHandle, TruePath);
+        if (NT_SUCCESS(status))
+            NtClose(SourceHandle);
+    }
+
+    if (NewData)
+        Dll_Free(NewData);
 
     Dll_PopTlsNameBuffer(TlsData);
 

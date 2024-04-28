@@ -771,7 +771,6 @@ _FX BOOLEAN File_LoadPathTree_internal(LIST* Root, const WCHAR* name, WCHAR* (*T
 _FX WCHAR *File_TranslateDosToNtPathForDatFile(const WCHAR *DosPath)
 {
     WCHAR *NtPath = NULL;
-    ULONG len_dos;
 
     if (DosPath && DosPath[0] && DosPath[1]) {
 
@@ -782,10 +781,7 @@ _FX WCHAR *File_TranslateDosToNtPathForDatFile(const WCHAR *DosPath)
             //
 
             DosPath += 2;
-            len_dos = wcslen(DosPath) + 1;
-            NtPath = Dll_Alloc((File_MupLen + len_dos) * sizeof(WCHAR));
-            wmemcpy(NtPath, File_Mup, File_MupLen);
-            wmemcpy(NtPath + File_MupLen, DosPath, len_dos);
+            NtPath = File_ConcatPath2(File_Mup, File_MupLen, DosPath, wcslen(DosPath));
 
         } else if (DosPath[0] != L'\\') {
 
@@ -815,10 +811,7 @@ _FX WCHAR *File_TranslateDosToNtPathForDatFile(const WCHAR *DosPath)
                     }
 
                     DosPath += path_pos;
-                    len_dos = wcslen(DosPath) + 1;
-                    NtPath = Dll_Alloc((drive->len + len_dos) * sizeof(WCHAR));
-                    wmemcpy(NtPath, drive->path, drive->len);
-                    wmemcpy(NtPath + drive->len, DosPath, len_dos);
+                    NtPath = File_ConcatPath2(drive->path, drive->len, DosPath, wcslen(DosPath));
 
                     LeaveCriticalSection(File_DrivesAndLinks_CritSec);
                 }

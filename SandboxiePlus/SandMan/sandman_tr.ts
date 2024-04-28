@@ -179,7 +179,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">Yöneticiler ve Yetkili Kullanıcılar grupları haklarını bırak</translation>
+        <translation>Yöneticiler ve Yetkili Kullanıcılar grupları haklarını bırak</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
@@ -3499,22 +3499,22 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SandMan.cpp" line="4303"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Sandboxie-Plus Hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4311"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin bu kopyası şu kişiler için sertifikalandırılmıştır: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4313"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus, kişisel ve ticari olmayan kullanım için ücretsizdir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4317"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus, Sandboxie&apos;nin açık kaynaklı bir devamıdır.&lt;br /&gt;Daha fazla bilgi için &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; adresini ziyaret ediniz.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Özellikler: %3&lt;br /&gt;&lt;br /&gt;Kurulum: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Simgeler için &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3429"/>
@@ -3714,18 +3714,6 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="2977"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>Seçilen özellik seti yalnızca proje destekçileri tarafından kullanılabilir. Bu özellik setinin destekçi sertifikası olmadan etkinleştirildiği bir alanda başlatılan işlemler 5 dakika sonra sonlandırılacaktır.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Proje destekçisi olmak&lt;/a&gt; için bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; edinin</translation>
-    </message>
-    <message>
-        <source>This copy of Sandboxie+ is certified for: %1</source>
-        <translation type="vanished">Sandboxie+&apos;nın bu kopyası şu kişiler için sertifikalandırılmıştır: %1</translation>
-    </message>
-    <message>
-        <source>Sandboxie+ is free for personal and non-commercial use.</source>
-        <translation type="vanished">Sandboxie+, kişisel ve ticari olmayan kullanım için ücretsizdir.</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="vanished">Sandboxie-Plus, Sandboxie&apos;nin açık kaynaklı bir devamıdır.&lt;br /&gt;Daha fazla bilgi için &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; adresini ziyaret edin.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Sürücü versiyonu: %1&lt;br /&gt;Özellikler: %2&lt;br /&gt;&lt;br /&gt;Simgeler için &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="466"/>
@@ -4073,10 +4061,6 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <location filename="SandMan.cpp" line="4250"/>
         <source>All columns</source>
         <translation>Tüm Sütunlar</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="vanished">&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2024, DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3108"/>
@@ -5654,7 +5638,7 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="55"/>
         <source>Revert to empty box</source>
-        <translation>Boş alan haline geri dön</translation>
+        <translation>Boş alan haline geri döndür</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="102"/>
@@ -8772,8 +8756,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
-        <oldsource>Hotkey for suspending all process:</oldsource>
-        <translation type="unfinished">Tüm işlemleri askıya almak için kısayol tuşu:</translation>
+        <translation>Tüm işlemleri askıya almak için kısayol tuşu:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>

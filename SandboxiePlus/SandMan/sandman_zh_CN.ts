@@ -213,12 +213,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="730"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation>通过阻止访问网络设备禁用网络权限</translation>
+        <translation>拒绝访问网络设备以阻止联网</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation>通过 Windows 筛选平台 (WFP) 禁用网络权限</translation>
+        <translation>通过 Windows 筛选平台 (WFP) 阻止联网</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
@@ -241,7 +241,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>撤销管理员和 Power Users 用户组的权限</translation>
+        <translation>撤销 “管理员” 和 “高级用户（Windows Vista 以前）” 用户组的权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
@@ -251,7 +251,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="759"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation>允许 MSIServer 在沙盒内使用系统令牌运行</translation>
+        <translation>允许 Windows Installer （MSIServer） 在沙盒内使用系统令牌运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="766"/>

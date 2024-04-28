@@ -341,7 +341,7 @@ _FX WCHAR* File_TranslateGuidToNtPath2(const WCHAR* GuidPath, ULONG GuidPathLen)
         FILE_GUID* guid = File_GetLinkForGuid(&GuidPath[10]);
         if (guid) {
 
-            File_ConcatPath2(guid->path + 48, guid->len - 48, GuidPath, GuidPathLen);
+            File_ConcatPath2(guid->path, guid->len, GuidPath + 48, GuidPathLen - 48);
 
             LeaveCriticalSection(File_DrivesAndLinks_CritSec);
         }

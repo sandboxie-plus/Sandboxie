@@ -118,6 +118,9 @@ SBIEDLL_EXPORT NTSTATUS File_GetName(
     HANDLE RootDirectory, UNICODE_STRING *ObjectName,
     WCHAR **OutTruePath, WCHAR **OutCopyPath, ULONG *OutFlags);
 
+static WCHAR *File_TranslateDosToNtPath2(
+    const WCHAR *DosPath, ULONG DosPathLen);
+
 static WCHAR *File_GetName_TranslateSymlinks(
     THREAD_DATA *TlsData, const WCHAR *objname_buf, ULONG objname_len,
     BOOLEAN *translated);
@@ -261,6 +264,9 @@ NTSTATUS File_SetDisposition(
 static NTSTATUS File_NtDeleteFile(OBJECT_ATTRIBUTES *ObjectAttributes);
 
 static NTSTATUS File_NtDeleteFileImpl(OBJECT_ATTRIBUTES *ObjectAttributes);
+
+static WCHAR* File_CanonizePath(
+    const wchar_t* absolute_path, ULONG abs_path_len, const wchar_t* relative_path, ULONG rel_path_len);
 
 static NTSTATUS File_OpenForRenameFile(
     HANDLE* pSourceHandle, const WCHAR *TruePath);

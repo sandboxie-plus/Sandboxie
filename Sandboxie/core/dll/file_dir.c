@@ -3353,9 +3353,19 @@ _FX NTSTATUS File_SetReparsePoint(
         //TargetPath = Dll_Alloc((wcslen(CopyPath) + 4) * sizeof(WCHAR));
         //wcscpy(TargetPath, CopyPath);
 
+        WCHAR* NewSubstituteNameBuffer = NULL;
         WCHAR* OldPrintNameBuffer = PrintNameBuffer; // we don't need to change the display name
+        
+        if (Data->ReparseTag) {
 
-        SubstituteNameLength = wcslen(CopyPath) * sizeof(WCHAR);
+            NewSubstituteNameBuffer = File_TranslateNtToDosPath2(CopyPath);
+            memmove(NewSubstituteNameBuffer + 4, NewSubstituteNameBuffer, (wcslen(NewSubstituteNameBuffer) + 1) * sizeof(wchar_t)); // File_TranslateNtToDosPath2 alocates 16 extry chars for such cases
+            wcsncpy(NewSubstituteNameBuffer, L"\\??\\", 4);
+
+        } else
+            NewSubstituteNameBuffer = CopyPath;
+
+        SubstituteNameLength = wcslen(NewSubstituteNameBuffer) * sizeof(WCHAR);
 
         NewDataLen += SubstituteNameLength + sizeof(WCHAR) + PrintNameLength + sizeof(WCHAR) + 8;
         NewData = Dll_Alloc(NewDataLen);
@@ -3385,8 +3395,11 @@ _FX NTSTATUS File_SetReparsePoint(
             PrintNameBuffer = &NewData->MountPointReparseBuffer.PathBuffer[NewData->MountPointReparseBuffer.PrintNameOffset/sizeof(WCHAR)]; 
         }
 
-        memcpy(SubstituteNameBuffer, CopyPath, SubstituteNameLength + sizeof(WCHAR));
+        memcpy(SubstituteNameBuffer, NewSubstituteNameBuffer, SubstituteNameLength + sizeof(WCHAR));
         memcpy(PrintNameBuffer, OldPrintNameBuffer, PrintNameLength + sizeof(WCHAR));
+
+        if (Data->ReparseTag)
+            Dll_Free(NewSubstituteNameBuffer);
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();

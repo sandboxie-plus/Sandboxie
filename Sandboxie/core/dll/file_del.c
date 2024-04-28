@@ -558,7 +558,7 @@ _FX WCHAR* File_TranslateNtToDosPath2(const WCHAR *NtPath)
     WCHAR *DosPath = NULL;
     ULONG len_nt;
 
-    len_nt = wcslen(NtPath) + 11;
+    len_nt = wcslen(NtPath) + 16;
     DosPath = Dll_Alloc(len_nt * sizeof(WCHAR));
     wcscpy(DosPath, NtPath);
 

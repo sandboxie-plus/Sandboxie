@@ -3163,6 +3163,59 @@ _FX NTSTATUS File_NtQueryVolumeInformationFile(
 
 
 //---------------------------------------------------------------------------
+// File_CanonizePath
+//---------------------------------------------------------------------------
+
+
+WCHAR* File_CanonizePath(const wchar_t* absolute_path, ULONG abs_path_len, const wchar_t* relative_path, ULONG rel_path_len) 
+{
+    ULONG i, j;
+    
+    while(absolute_path[abs_path_len-1] == L'\\')
+	    abs_path_len--;
+
+	WCHAR* result = Dll_Alloc((abs_path_len + rel_path_len + 1) * sizeof(wchar_t));
+    if (!result) return NULL;
+    wcsncpy(result, absolute_path, abs_path_len);
+    result[abs_path_len] = 0;
+
+	for (i = 0; i < rel_path_len; ) {
+
+		if (relative_path[i] == L'.' && relative_path[i + 1] == L'.' && (relative_path[i + 2] == L'\\' || relative_path[i + 2] == L'\0')) {
+
+			for (j = abs_path_len - 1; j >= 0 && result[j] != L'\\'; --j)
+				result[j] = L'\0';
+			if (j >= 0)
+				result[j] = L'\0';
+
+			abs_path_len = j;
+
+			i += 3;
+
+		} else if (relative_path[i] == L'.') {
+
+			i += 2;
+
+		} else {
+
+            for (j = i; j < rel_path_len && relative_path[j] != L'\\' && relative_path[j] != L'\0'; ++j)
+                ;
+
+            result[abs_path_len] = L'\\';
+            wcsncpy(result + abs_path_len + 1, &relative_path[i], j - i);
+            result[abs_path_len + j - i + 1] = L'\0';
+
+            abs_path_len += j - i + 1;
+
+            i = j + 1;
+		}
+	}
+
+    return result;
+}
+
+
+//---------------------------------------------------------------------------
 // File_SetReparsePoint
 //---------------------------------------------------------------------------
 
@@ -3177,6 +3230,7 @@ _FX NTSTATUS File_SetReparsePoint(
     OBJECT_ATTRIBUTES objattrs;
     WCHAR *TruePath, *CopyPath;
     //WCHAR *SourcePath = NULL, *TargetPath = NULL;
+    WCHAR* AbsolutePath = NULL;
     ULONG FileFlags, mp_flags;
     PREPARSE_DATA_BUFFER NewData = NULL;
     ULONG NewDataLen;
@@ -3197,39 +3251,6 @@ _FX NTSTATUS File_SetReparsePoint(
         WCHAR* SubstituteNameBuffer;
         USHORT PrintNameLength;
         WCHAR* PrintNameBuffer;
-
-        if (Data->ReparseTag == IO_REPARSE_TAG_SYMLINK)
-        {
-            SubstituteNameLength = Data->SymbolicLinkReparseBuffer.SubstituteNameLength;
-            SubstituteNameBuffer = &Data->SymbolicLinkReparseBuffer.PathBuffer[Data->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
-            PrintNameLength = Data->SymbolicLinkReparseBuffer.PrintNameLength;
-            PrintNameBuffer = &Data->SymbolicLinkReparseBuffer.PathBuffer[Data->SymbolicLinkReparseBuffer.PrintNameOffset/sizeof(WCHAR)];
-            if (Data->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE) {
-
-                //
-                // We can allow for a relative path in the box but must ensure the hatget gets migrated
-                //
-
-                MigrateTarget = TRUE;
-                status = STATUS_BAD_INITIAL_PC;
-                __leave;
-            }
-
-            NewDataLen = (UFIELD_OFFSET(REPARSE_DATA_BUFFER, SymbolicLinkReparseBuffer.PathBuffer) - UFIELD_OFFSET(REPARSE_DATA_BUFFER, GenericReparseBuffer));
-        }
-        else if (Data->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
-        {
-            SubstituteNameLength = Data->MountPointReparseBuffer.SubstituteNameLength;
-            SubstituteNameBuffer = &Data->MountPointReparseBuffer.PathBuffer[Data->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
-            PrintNameLength = Data->MountPointReparseBuffer.PrintNameLength;
-            PrintNameBuffer = &Data->MountPointReparseBuffer.PathBuffer[Data->MountPointReparseBuffer.PrintNameOffset/sizeof(WCHAR)]; 
-
-            NewDataLen = (UFIELD_OFFSET(REPARSE_DATA_BUFFER, MountPointReparseBuffer.PathBuffer) - UFIELD_OFFSET(REPARSE_DATA_BUFFER, GenericReparseBuffer));
-        }
-        else {
-            status = STATUS_BAD_INITIAL_PC;
-            __leave;
-        }
 
         //
         // get copy path of reparse source
@@ -3261,6 +3282,38 @@ _FX NTSTATUS File_SetReparsePoint(
             __leave;
         }
 
+        //
+        // get the absolute reparse target path
+        //
+
+        if (Data->ReparseTag == IO_REPARSE_TAG_SYMLINK)
+        {
+            SubstituteNameLength = Data->SymbolicLinkReparseBuffer.SubstituteNameLength;
+            SubstituteNameBuffer = &Data->SymbolicLinkReparseBuffer.PathBuffer[Data->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+            PrintNameLength = Data->SymbolicLinkReparseBuffer.PrintNameLength;
+            PrintNameBuffer = &Data->SymbolicLinkReparseBuffer.PathBuffer[Data->SymbolicLinkReparseBuffer.PrintNameOffset/sizeof(WCHAR)];
+            if (Data->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE) {
+
+                WCHAR* LinkName = wcsrchr(TruePath, L'\\');
+                AbsolutePath = File_CanonizePath(TruePath, (ULONG)(LinkName - TruePath), SubstituteNameBuffer, SubstituteNameLength / sizeof(wchar_t));
+            }
+
+            NewDataLen = (UFIELD_OFFSET(REPARSE_DATA_BUFFER, SymbolicLinkReparseBuffer.PathBuffer) - UFIELD_OFFSET(REPARSE_DATA_BUFFER, GenericReparseBuffer));
+        }
+        else if (Data->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
+        {
+            SubstituteNameLength = Data->MountPointReparseBuffer.SubstituteNameLength;
+            SubstituteNameBuffer = &Data->MountPointReparseBuffer.PathBuffer[Data->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+            PrintNameLength = Data->MountPointReparseBuffer.PrintNameLength;
+            PrintNameBuffer = &Data->MountPointReparseBuffer.PathBuffer[Data->MountPointReparseBuffer.PrintNameOffset/sizeof(WCHAR)]; 
+
+            NewDataLen = (UFIELD_OFFSET(REPARSE_DATA_BUFFER, MountPointReparseBuffer.PathBuffer) - UFIELD_OFFSET(REPARSE_DATA_BUFFER, GenericReparseBuffer));
+        }
+        else {
+            status = STATUS_BAD_INITIAL_PC;
+            __leave;
+        }
+
 		//if (File_Snapshot != NULL){
         // WCHAR* TmplName = File_FindSnapshotPath(CopyPath);
         // if (TmplName) CopyPath = TmplName;
@@ -3273,13 +3326,29 @@ _FX NTSTATUS File_SetReparsePoint(
         // get copy path of reparse target
         //
 
-        objname.Length = SubstituteNameLength;
+        if (AbsolutePath) {
+            objname.Length = wcslen(AbsolutePath) * sizeof(wchar_t);
+            objname.Buffer = AbsolutePath;
+        } else {
+            objname.Length = SubstituteNameLength;
+            objname.Buffer = SubstituteNameBuffer;
+        }
         objname.MaximumLength = objname.Length;
-        objname.Buffer = SubstituteNameBuffer;
 
         status = File_GetName(NULL, &objname, &TruePath, &CopyPath, NULL);
         if (! NT_SUCCESS(status))
             __leave;
+
+        if (AbsolutePath) {
+
+            //
+            // We can allow for a relative path in the box but must ensure the hatget gets migrated
+            //
+                
+            MigrateTarget = TRUE;
+            status = STATUS_BAD_INITIAL_PC;
+            __leave;
+        }
 
         //TargetPath = Dll_Alloc((wcslen(CopyPath) + 4) * sizeof(WCHAR));
         //wcscpy(TargetPath, CopyPath);
@@ -3394,10 +3463,12 @@ _FX NTSTATUS File_SetReparsePoint(
         //
 
         HANDLE SourceHandle;
-        status = File_OpenForRenameFile(&SourceHandle, TruePath);
-        if (NT_SUCCESS(status))
+        if (NT_SUCCESS(File_OpenForRenameFile(&SourceHandle, TruePath)))
             NtClose(SourceHandle);
     }
+
+    if (AbsolutePath)
+        Dll_Free(AbsolutePath);
 
     if (NewData)
         Dll_Free(NewData);

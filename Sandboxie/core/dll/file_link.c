@@ -1076,7 +1076,7 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
                     if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) == 0)
                         input_str = File_TranslateGuidToNtPath2(SubstituteNameBuffer, SubstituteNameLength / sizeof(WCHAR));
                     else if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
-                        input_str = File_TranslateDosToNtPath2(SubstituteNameBuffer + 4, SubstituteNameLength / sizeof(WCHAR));
+                        input_str = File_TranslateDosToNtPath2(SubstituteNameBuffer + 4, (SubstituteNameLength / sizeof(WCHAR)) - 4);
                 }
 
                 if (input_str) {

@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.7 / 5.68.7] - 2024-04-
+## [1.13.7 / 5.68.7] - 2024-05-01
 
 ### Added
 - added file version information for SbieDll.dll and SbieSvc.exe in the Sandboxie Plus About dialog

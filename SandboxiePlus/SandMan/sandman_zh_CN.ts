@@ -633,7 +633,7 @@ While the level of isolation is reduced compared to other box types, it offers i
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
         <translation>该类型的沙盒使用加密的磁盘映像作为文件根目录，为安全性与隐私性提供了额外的保障。
-当虚拟磁盘被挂载时，只有沙盒内的程序可以访问，而其他进程将会被阻止访问。这确保了在该沙盒中对隐私和数据的最高级别的保护。</translation>
+当虚拟磁盘被挂载时，只有沙盒内的程序可以访问，而其他进程将会被阻止访问。这确保了该沙盒类型对隐私和数据的最高级别的保护。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="439"/>

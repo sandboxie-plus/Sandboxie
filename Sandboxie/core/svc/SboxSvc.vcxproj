@@ -401,6 +401,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64EC'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="BoxManager.cpp" />
     <ClCompile Include="comserver.cpp" />
     <ClCompile Include="comserver2.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
@@ -574,6 +575,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64EC'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="BoxManager.h" />
     <ClInclude Include="comserver.h" />
     <ClInclude Include="comwire.h" />
     <ClInclude Include="DriverAssist.h" />

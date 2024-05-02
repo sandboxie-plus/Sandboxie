@@ -819,8 +819,8 @@
              </item>
              <item row="12" column="1" colspan="2">
               <widget class="QCheckBox" name="chkUserOperation">
-               <property name="statusTip">
-                <string>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</string>
+               <property name="toolTip">
+                <string>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</string>
                </property>
                <property name="text">
                 <string>Prevent interference with the user interface (Experimental)</string>
@@ -829,8 +829,8 @@
              </item>
              <item row="13" column="1" colspan="2">
               <widget class="QCheckBox" name="chkBlockCapture">
-               <property name="statusTip">
-                <string>This feature does not block all means of optaining a screen capture only some common once.</string>
+               <property name="toolTip">
+                <string>This feature does not block all means of obtaining a screen capture, only some common ones.</string>
                </property>
                <property name="text">
                 <string>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</string>

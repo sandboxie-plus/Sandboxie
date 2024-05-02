@@ -323,33 +323,43 @@ _FX FILE_GUID *File_GetLinkForGuid(const WCHAR* guid_str)
 
 
 //---------------------------------------------------------------------------
+// File_TranslateGuidToNtPath2
+//---------------------------------------------------------------------------
+
+
+_FX WCHAR* File_TranslateGuidToNtPath2(const WCHAR* GuidPath, ULONG GuidPathLen)
+{
+    WCHAR* NtPath = NULL;
+
+    if (GuidPath && GuidPathLen >= 48 && _wcsnicmp(GuidPath, L"\\??\\Volume{", 11) == 0) {
+
+        //
+        // guid path
+        //
+
+        FILE_GUID* guid = File_GetLinkForGuid(&GuidPath[10]);
+        if (guid) {
+
+            File_ConcatPath2(guid->path, guid->len, GuidPath + 48, GuidPathLen - 48);
+
+            LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+        }
+    }
+    
+    return NtPath;
+}
+
+
+//---------------------------------------------------------------------------
 // File_TranslateGuidToNtPath
 //---------------------------------------------------------------------------
 
-_FX WCHAR* File_TranslateGuidToNtPath(const WCHAR* input_str)
+
+_FX WCHAR* File_TranslateGuidToNtPath(const WCHAR* GuidPath)
 {
-    ULONG len;
-    WCHAR* NtPath;
-
-    if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) != 0)
-        return NULL;
-
-    FILE_GUID* guid = File_GetLinkForGuid(&input_str[10]);
-    if (guid) {
-
-        input_str += 48;
-        len = wcslen(input_str) + 1;
-        NtPath = Dll_Alloc((guid->len + len) * sizeof(WCHAR));
-        wmemcpy(NtPath, guid->path, guid->len);
-        wmemcpy(NtPath + guid->len, input_str, len);
-
-        LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-
-        return NtPath;
-    }
-    
-    return NULL;
+    return File_TranslateGuidToNtPath2(GuidPath, GuidPath ? wcslen(GuidPath) : 0);
 }
+
 
 //---------------------------------------------------------------------------
 // File_AddLink
@@ -1036,47 +1046,49 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
         if (NT_SUCCESS(status)) {
 
             WCHAR* SubstituteNameBuffer = NULL;
-            //WCHAR* PrintNameBuffer = NULL;
+            ULONG SubstituteNameLength = 0;
             BOOL RelativePath = FALSE;
 
-            if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_SYMLINK)
-            {
+            if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_SYMLINK) {
+
                 SubstituteNameBuffer = &reparseDataBuffer->SymbolicLinkReparseBuffer.PathBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
                 if (reparseDataBuffer->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE)
                     RelativePath = TRUE;
-                SubstituteNameBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
-            }
-            else if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
-            {
+                SubstituteNameLength = reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameLength;
+
+            } else if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT) {
+
                 SubstituteNameBuffer = &reparseDataBuffer->MountPointReparseBuffer.PathBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
-                SubstituteNameBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
+                SubstituteNameLength = reparseDataBuffer->MountPointReparseBuffer.SubstituteNameLength;
             }
 
-            if (SubstituteNameBuffer)
-            {
-                if (RelativePath)
-                {
-                        // todo RelativePath - for now we fall back to the old method
-                }
-                else
-                {
-                    WCHAR* input_str = SubstituteNameBuffer;
+            if (SubstituteNameBuffer) {
+
+                WCHAR* input_str = NULL;
+                if (RelativePath) {
+
+                    WCHAR* LinkName = wcsrchr(path, L'\\');
+                    input_str = File_CanonizePath(path, (ULONG)(LinkName - path), SubstituteNameBuffer, SubstituteNameLength / sizeof(WCHAR));
+
+                } else {
+
+                    input_str = SubstituteNameBuffer;
                     if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) == 0)
-                        input_str = File_TranslateGuidToNtPath(SubstituteNameBuffer);
+                        input_str = File_TranslateGuidToNtPath2(SubstituteNameBuffer, SubstituteNameLength / sizeof(WCHAR));
                     else if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
-                        input_str = File_TranslateDosToNtPath(SubstituteNameBuffer + 4);
+                        input_str = File_TranslateDosToNtPath2(SubstituteNameBuffer + 4, (SubstituteNameLength / sizeof(WCHAR)) - 4);
+                }
 
-                    if (input_str) {
+                if (input_str) {
 
-                        ULONG input_len = wcslen(input_str);
-                        while (input_len > 0 && input_str[input_len - 1] == L'\\')
-                            input_len -= 1; // remove trailing backslash
+                    ULONG input_len = wcslen(input_str);
+                    while (input_len > 0 && input_str[input_len - 1] == L'\\')
+                        input_len -= 1; // remove trailing backslash
 
-                        newpath = File_TranslateTempLinks_2(input_str, input_len);
+                    newpath = File_TranslateTempLinks_2(input_str, input_len);
 
-                        if (input_str != SubstituteNameBuffer)
-                            Dll_Free(input_str);
-                    }
+                    if (input_str != SubstituteNameBuffer)
+                        Dll_Free(input_str);
                 }
             }
         }

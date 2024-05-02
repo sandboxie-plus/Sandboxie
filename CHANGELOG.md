@@ -5,20 +5,34 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.13.7 / 5.68.7] - 2024-05-01
+
+### Added
+- added file version information for SbieDll.dll and SbieSvc.exe in the Sandboxie Plus About dialog
+
+### Changed
+- improved checkboxes about DropAdminRights in SandMan [#3851](https://github.com/sandboxie-plus/Sandboxie/pull/3851) (thanks offhub)
+
+### Fixed
+- Issue with symbolic linking of files [#3852](https://github.com/sandboxie-plus/Sandboxie/issues/3852)
+- fixed issue with start agent option [#3844](https://github.com/sandboxie-plus/Sandboxie/pull/3844) (thanks offhub)
+- fixed issue with Delete V2 introduced in 1.13.5
 
 
 
-## [1.13.6 / 5.68.6] - 2024-04-
+
+## [1.13.6 / 5.68.6] - 2024-04-21
 
 ### Added
 - added "BlockInterferenceControl=y" option to prevent sandboxed processes from forcing windows on top and moving the mounse pointer (thanks Yeyixiao)
-  - Note: this option may cause issues in games hence do not enable it for gaming boxes.
-- added support for hardlinks [#3826](https://github.com/sandboxie-plus/Sandboxie/issues/3826)
+  - Note: this option may cause issues in games hence do not enable it for gaming boxes
+- added support for hard links [#3826](https://github.com/sandboxie-plus/Sandboxie/issues/3826)
 - added mechanism to terminate stuck sandboxed processes from the driver
 - added Make the trigger list editable [#3742](https://github.com/sandboxie-plus/Sandboxie/issues/3742)
 - added Optionally extend the screenshot protection to the UI [#3739](https://github.com/sandboxie-plus/Sandboxie/issues/3739)
 - added a button to edit local/custom templates [#3738](https://github.com/sandboxie-plus/Sandboxie/issues/3738)
-- asses Permanently Re-sizable or Larger "Run Sandboxed" Window [#3697](https://github.com/sandboxie-plus/Sandboxie/issues/3697)
+- added Permanently Re-sizable or Larger "Run Sandboxed" Window [#3697](https://github.com/sandboxie-plus/Sandboxie/issues/3697)
+- added Notepad++ template [#3836](https://github.com/sandboxie-plus/Sandboxie/pull/3836)
 
 ### Changed
 - improved Avast template [#3777](https://github.com/sandboxie-plus/Sandboxie/pull/3777)
@@ -28,12 +42,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed When I change the BlockDNS and BlockPorts options, the Apply button is not activated [#3807](https://github.com/sandboxie-plus/Sandboxie/issues/3807)
-- fixed troubleshooting wizard broke with new qt [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
+- fixed troubleshooting wizard broke with new Qt [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
 - fixed Settings dialog now showing the right ram disk letter
-- fixed issues with updater broke with new qt due to missing SSL support [3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
+- fixed issues with updater broke with new Qt due to missing SSL support [#3810](https://github.com/sandboxie-plus/Sandboxie/discussions/3810)
 - fixed Enabling "DropAdminRights/FakeAdminRights" adds "BlockInterferePower and ForceProtectionOnMount" to the INI [#3825](https://github.com/sandboxie-plus/Sandboxie/issues/3825)
 - fixed KeePass "Out of Memory" crash due to "BlockScreenCapture=y" [#3768](https://github.com/sandboxie-plus/Sandboxie/issues/3768)
-- fixed Sandboxie 1.13.4 with IsBlockCapture=y brakes on Windows 7 [#3769](https://github.com/sandboxie-plus/Sandboxie/issues/3769)
+- fixed Sandboxie 1.13.4 with IsBlockCapture=y not working on Windows 7 [#3769](https://github.com/sandboxie-plus/Sandboxie/issues/3769)
 - fixed explorer.exe issue "FakeAdminRights=y" [#3638](https://github.com/sandboxie-plus/Sandboxie/issues/3638)
 - fixed Make it possible to disable forced folder warning [#3569](https://github.com/sandboxie-plus/Sandboxie/issues/3569)
 

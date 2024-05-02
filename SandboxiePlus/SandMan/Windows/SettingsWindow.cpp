@@ -875,7 +875,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
 	if (theAPI->IsConnected()) {
 		if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
-			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
+			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "").left(11) != "SandMan.exe")
 				ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
 			else
 				ui.chkSvcStart->setChecked(true);
@@ -1567,7 +1567,7 @@ void CSettingsWindow::SaveSettings()
 	if (theAPI->IsConnected()) {
 		if (ui.chkSvcStart->checkState() == Qt::Checked) {
 			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", true);
-			theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
+			theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe -autorun");
 		}
 		else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
 			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
@@ -2449,14 +2449,9 @@ void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& P
 	if (Data.isEmpty() || Data["error"].toBool())
 		return;
 
-	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV);
-	int iUpdate = COnlineUpdater::GetCurrentUpdate();
-	if(iUpdate) 
-		Version += QChar('a' + (iUpdate - 1));
-
 	m_UpdateData = Data;
 	QVariantMap Releases = m_UpdateData["releases"].toMap();
-	ui.lblCurrent->setText(tr("%1 (Current)").arg(Version));
+	ui.lblCurrent->setText(tr("%1 (Current)").arg(theGUI->GetVersion(true)));
 	ui.lblStable->setText(CSettingsWindow__MkVersion("stable", Releases));
 	ui.lblPreview->setText(CSettingsWindow__MkVersion("preview", Releases));
 	if(ui.radInsider->isEnabled())

@@ -185,7 +185,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">Retirer les droits des groupes Administrateurs et Utilisateurs Avancés</translation>
+        <translation>Abandonner les droits des groupes Administrateurs et Utilisateurs Avancés</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
@@ -3759,22 +3759,22 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="4303"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;À propos de Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4311"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette copie de Sandboxie-Plus est attestée pour : %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4313"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus est gratuit pour une utilisation personnelle et non commerciale.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4317"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus est la poursuite en code source ouvert de Sandboxie.&lt;br /&gt;Visitez &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; pour plus d&apos;informations.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Fonctions : %3&lt;br /&gt;&lt;br /&gt;Installation : %1&lt;br /&gt;SbieDrv.sys : %4&lt;br /&gt; SbieSvc.exe : %5&lt;br /&gt; SbieDll.dll : %6&lt;br /&gt;&lt;br /&gt;Icônes provenant de &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Your Windows build exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
@@ -7173,7 +7173,7 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1123"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>Retirer les droits des groupes Administrateurs et Utilisateurs Avancés</translation>
+        <translation>Abandonner les droits des groupes Administrateurs et Utilisateurs Avancés</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="227"/>
@@ -7514,7 +7514,7 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1147"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation>Remarque : Les exemptions de l&apos;installeur MicroSoft (MSI) ne devraient pas être nécessaires, mais si vous rencontrez des problèmes lors de l&apos;installation d&apos;un paquetage MSI auquel vous faites confiance, cette option peut aider l&apos;installation à se terminer avec succès. Vous pouvez également essayer de désactiver la suppression des droits d&apos;administrateur.</translation>
+        <translation>Remarque : Les exemptions de l&apos;installeur MicroSoft (MSI) ne devraient pas être nécessaires, mais si vous rencontrez des problèmes lors de l&apos;installation d&apos;un paquetage MSI auquel vous faites confiance, cette option peut aider l&apos;installation à se terminer avec succès. Vous pouvez également essayer de désactiver l&apos;abandon des droits d&apos;administrateur.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="244"/>
@@ -8157,7 +8157,7 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser « Toujours direct » pour
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1623"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
-        <translation>Retirer les privilèges critiques des processus tournant avec un jeton SYSTÈME</translation>
+        <translation>Abandonner les privilèges critiques des processus tournant avec un jeton SYSTÈME</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1616"/>
@@ -8558,7 +8558,7 @@ au lieu de « * ».</translation>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished">Empêcher les mouvements à la souris, la mise au premier plan, et les opérations similaires (activer ceci est susceptible de causer des problèmes avec les jeux).</translation>
+        <translation>Empêcher les mouvements à la souris, la mise au premier plan, et les opérations similaires (activer ceci est susceptible de causer des problèmes avec les jeux).</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>
@@ -8569,7 +8569,7 @@ au lieu de « * ».</translation>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished">Cette fonction ne bloque pas tous les moyens d&apos;obtenir une capture d&apos;écran, seulement les plus communs.</translation>
+        <translation>Cette fonction ne bloque pas tous les moyens d&apos;obtenir une capture d&apos;écran, seulement les plus communs.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="836"/>
@@ -8673,7 +8673,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5050"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation>Pour compenser la perte de protection, veuillez consulter la page d&apos;abandon des droits dans le groupe de paramètres Restrictions.</translation>
+        <translation>Pour compenser la perte de protection, veuillez consulter la page d&apos;Abandon des droits dans le groupe de paramètres Restrictions.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4974"/>
@@ -9458,7 +9458,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">Raccourci pour suspendre tous les processus :</translation>
+        <translation>Raccourci pour suspendre tous les processus :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>

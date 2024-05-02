@@ -1741,34 +1741,57 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 }
 
 _FX DWORD Gui_GetTickCount() {
-	return __sys_GetTickCount() * SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL,L"LowTickSpeed", 1);
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+	if (low != 0)
+		return __sys_GetTickCount() * add / low;
+	else
+		return __sys_GetTickCount() * add;
 }
 
 _FX ULONGLONG Gui_GetTickCount64() {
-	return __sys_GetTickCount64() * SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+	if (low != 0)
+		return __sys_GetTickCount64() * add / low;
+	else
+		return __sys_GetTickCount64() * add;
 }
 
 _FX BOOL Gui_QueryUnbiasedInterruptTime(
 	PULONGLONG UnbiasedTime
 ) {
 	BOOL rtn = __sys_QueryUnbiasedInterruptTime(UnbiasedTime);
-	*UnbiasedTime *= SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+	if (low != 0)
+		*UnbiasedTime *= add / low;
+	else
+		*UnbiasedTime *= add;
+	
 	return rtn;
 }
 
 _FX void Gui_Sleep(DWORD dwMiSecond) {
-	__sys_Sleep(dwMiSecond * SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1));
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1);
+	if (add != 0 && low != 0)
+		return __sys_Sleep(dwMiSecond * add / low);
+	else
+		return 0;
 }
 
 _FX DWORD Gui_SleepEx(DWORD dwMiSecond, BOOL bAlert) {
-	return __sys_SleepEx(dwMiSecond * SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1),bAlert);
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1);
+	if (add != 0 && low != 0)
+		return __sys_SleepEx(dwMiSecond * add / low, bAlert);
+	else
+		return 0;
 }
 
 _FX BOOL Gui_QueryPerformanceCounter(
 	LARGE_INTEGER* lpPerformanceCount
 ) {
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1),low= SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
 	BOOL rtn = __sys_QueryPerformanceCounter(lpPerformanceCount);
-	lpPerformanceCount->QuadPart = lpPerformanceCount->QuadPart*SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1)/ SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+	if(add!=0&&low!=0)
+	lpPerformanceCount->QuadPart = lpPerformanceCount->QuadPart*add /low ;
 	return rtn;
 }
 
@@ -1779,5 +1802,9 @@ _FX UINT_PTR Gui_SetTimer(
 	TIMERPROC lpTimerFunc
 )
 {
-	return __sys_SetTimer(hWnd, nIDEvent, uElapse * SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1), lpTimerFunc);
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1);
+	if (add != 0 && low != 0)
+		return __sys_SetTimer(hWnd, nIDEvent, uElapse * add / low, lpTimerFunc);
+	else
+		return 0;
 }

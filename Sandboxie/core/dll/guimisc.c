@@ -1772,9 +1772,7 @@ _FX BOOL Gui_QueryUnbiasedInterruptTime(
 _FX void Gui_Sleep(DWORD dwMiSecond) {
 	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1);
 	if (add != 0 && low != 0)
-		return __sys_Sleep(dwMiSecond * add / low);
-	else
-		return 0;
+		__sys_Sleep(dwMiSecond * add / low);
 }
 
 _FX DWORD Gui_SleepEx(DWORD dwMiSecond, BOOL bAlert) {

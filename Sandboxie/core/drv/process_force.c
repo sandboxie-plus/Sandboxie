@@ -1387,7 +1387,7 @@ _FX BOX *Process_CheckForceProcess(
 
             return box->box;
         }
-		if (Process_IsWindowsExplorerParent(Parent) && wcscmp(Conf_Get(NULL, L"ForceExplorerChild", 0), box->box->name)) {
+		if (Process_IsWindowsExplorerParent(Parent) && wcscmp(Conf_Get(NULL, L"ForceExplorerChild", 0), box->box->name)==0) {
 			return box->box;
 		}
         box = List_Next(box);

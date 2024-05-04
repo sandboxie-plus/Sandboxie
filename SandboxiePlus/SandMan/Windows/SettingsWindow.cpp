@@ -949,7 +949,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkMinimize->setChecked(theConf->GetBool("Options/MinimizeToTray", false));
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
-	ui.chkForceExplorerChild->setChecked(strcmp(theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").toStdString().c_str(), theAPI->GetGlobalSettings()->GetText("DefalutBox").toStdString().c_str())==0);
+	ui.chkForceExplorerChild->setChecked(strcmp(theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").toStdString().c_str(), theAPI->GetGlobalSettings()->GetText("DefaultBox").toStdString().c_str())==0);
 	OnLoadAddon();
 
 	bool bImDiskReady = theGUI->IsImDiskReady();

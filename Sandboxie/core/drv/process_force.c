@@ -114,7 +114,7 @@ static BOX *Process_CheckForceFolder(
     LIST *boxes, const WCHAR *path, BOOLEAN alert, ULONG *IsAlert);
 
 static BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert);
+    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert,HANDLE parent);
 
 static void Process_CheckAlertFolder(
 	LIST *boxes, const WCHAR *path, ULONG *IsAlert);
@@ -248,7 +248,7 @@ _FX BOX *Process_GetForcedStartBox(
 
             if ((! box) && (! alert)) {
                 box = Process_CheckForceProcess(
-                    &boxes, ImageName, force_alert, &alert);
+                    &boxes, ImageName, force_alert, &alert,ParentId);
             }
 
             if ((! box) && CurDir && !is_start_exe && (! alert)) {
@@ -1368,7 +1368,7 @@ _FX BOOLEAN Process_CheckForceProcessList(
 
 
 _FX BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert)
+    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert,HANDLE Parent)
 {
     FORCE_BOX *box;
 
@@ -1387,10 +1387,12 @@ _FX BOX *Process_CheckForceProcess(
 
             return box->box;
         }
-
+		if (Process_IsWindowsExplorerParent(Parent) && wcscmp(Conf_Get(NULL, L"ForceExplorerChild", 0), box->box->name)) {
+			return box->box;
+		}
         box = List_Next(box);
     }
-
+	
     return NULL;
 }
 

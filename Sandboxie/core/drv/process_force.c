@@ -759,7 +759,7 @@ _FX BOOLEAN Process_IsDcomLaunchParent(HANDLE ParentId)
 // Process_IsWindowsExplorerParent
 //
 // Note: Once an unused function, it is now used to support the ability to
-// ¡°Automatically sandbox child processes created by File Explorer.¡±.
+// "Automatically sandbox child processes created by File Explorer".
 //---------------------------------------------------------------------------
 
 

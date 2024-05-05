@@ -103,6 +103,8 @@ static BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId);
 static BOOLEAN Process_IsImmersiveProcess(
     PEPROCESS ProcessObject, HANDLE ParentId, ULONG SessionId);
 
+static BOOLEAN Process_IsAnyProcessParent(HANDLE ParentId, WCHAR* Name);
+
 void Process_CreateForceData(
     LIST *boxes, const WCHAR *SidString, ULONG SessionId);
 
@@ -762,28 +764,32 @@ _FX BOOLEAN Process_IsDcomLaunchParent(HANDLE ParentId)
 // ¡°Automatically sandbox child processes created by File Explorer.¡±.
 //---------------------------------------------------------------------------
 
+_FX BOOLEAN Process_IsAnyProcessParent(HANDLE ParentId,WCHAR* Name)
+{
+	BOOLEAN retval = FALSE;
 
+	void* nbuf;
+	ULONG nlen;
+	WCHAR* nptr;
+
+	Process_GetProcessName(
+		Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &nptr);
+	if (nbuf) {
+
+		if (_wcsicmp(nptr, Name) == 0) {
+
+			retval = TRUE;
+		}
+
+		Mem_Free(nbuf, nlen);
+	}
+
+	return retval;
+}
 _FX BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId)
 {
-    BOOLEAN retval = FALSE;
-
-    void *nbuf;
-    ULONG nlen;
-    WCHAR *nptr;
-
-    Process_GetProcessName(
-                    Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &nptr);
-    if (nbuf) {
-
-        if (_wcsicmp(nptr, L"explorer.exe") == 0) {
-
-            retval = TRUE;
-        }
-
-        Mem_Free(nbuf, nlen);
-    }
-
-    return retval;
+   
+    return Process_IsAnyProcessParent(ParentId,L"explorer.exe");
 }
 
 
@@ -1388,7 +1394,8 @@ _FX BOX *Process_CheckForceProcess(
             return box->box;
         }
 		if (Process_IsWindowsExplorerParent(Parent) && wcscmp(Conf_Get(NULL, L"ForceExplorerChild", 0), box->box->name)==0) {
-			return box->box;
+			if(wcsicmp(name,"Sandman.exe")!=0)
+				return box->box;
 		}
         box = List_Next(box);
     }

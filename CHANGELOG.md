@@ -85,7 +85,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - see the sandbox option "Prevent sandboxed processes from using public methods to capture window images" in SandMan UI
 - added "LingerExemptWnds=n" to make the lingering process monitor mechanism no longer exempt lingering processes with windows from termination
 - added option 'SharedTemplate' to Box Wizard [#3737](https://github.com/sandboxie-plus/Sandboxie/pull/3737) (thanks offhub)
-- added an option to force the protection of an encrypted sandbox to be enabled. [#3736](https://github.com/sandboxie-plus/Sandboxie/pull/3736) (thanks Yeyixiao)
+- added an option to force the protection of an encrypted sandbox to be enabled [#3736](https://github.com/sandboxie-plus/Sandboxie/pull/3736) (thanks Yeyixiao)
 - added a menu and button/icon to suspend all processes [#3741] (https://github.com/sandboxie-plus/Sandboxie/issues/3741)
 
 ### Changed
@@ -403,7 +403,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed the new option layout to be the default for non-vintage views (can be changed back in the settings) [94c3f5e](https://github.com/sandboxie-plus/Sandboxie/commit/94c3f5e35bf9e7c993557f2c9d4e6e5129e9d1df)
 
 ### Fixed
-- fixed issue when re-creating a RAMbox junction [2542351](https://github.com/sandboxie-plus/Sandboxie/commit/254235136fa8b74ad147f03b646d4015208c14be)
+- fixed issue when re-creating a RAM sandbox junction [2542351](https://github.com/sandboxie-plus/Sandboxie/commit/254235136fa8b74ad147f03b646d4015208c14be)
 - fixed Sandboxie logo scaling in the setup wizards [#3227](https://github.com/sandboxie-plus/Sandboxie/issues/3227)
 - fixed text cut-off in box creation wizard [#3226](https://github.com/sandboxie-plus/Sandboxie/issues/3226)
 - fixed Windows 7 compatibility issue with ImBox.exe [1f0b2b7](https://github.com/sandboxie-plus/Sandboxie/commit/1f0b2b71ba47436252fd55eece2c3624085b46dc)
@@ -493,7 +493,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed UGlobalHotkey library not being compatible with Qt6
 
 ### Removed
-- removed hardcoded support for LogAPI.dll
+- removed hardcoded support for LogAPI library
   - use the Add-On Manager and DLL injection settings
 
 
@@ -2776,7 +2776,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved RPC debugging
 - improved IPC handling around RpcMgmtSetComTimeout; "RpcMgmtSetComTimeout=n" is now the default behaviour
   - required exceptions have been hard-coded for specific calling DLLs
-- the LogAPI.dll is now using Sbie's tracing facility to log events instead of its own pipe server
+- the LogAPI library is now using Sandboxie's tracing facility to log events instead of its own pipe server
 
 ### Fixed
 - FIXED SECURITY ISSUE ID-11: elevated sandboxed processes could access volumes/disks for reading (thanks hg421)
@@ -3325,7 +3325,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added sandboxed window border display to SandMan.exe
 - added notification for Sbie log messages
 - added Sandbox Presets submenu to quickly change some settings
-  - Enable/Disable API logging; LogAPI.dlls are now distributed with SbiePlus
+  - Enable/Disable API logging; LogAPI DLLs are now distributed with Sandboxie Plus
   - Drop admin rights
   - Block/Allow internet access
   - Block/Allow access to files on the network
@@ -3413,7 +3413,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - created a new Qt-based UI named SandMan (Sandboxie Manager)
 - Resource Monitor now shows the PID
-- added basic API call log using updated BSA LogAPI.dll
+- added basic API call log using updated BSA LogAPI library
 
 ### Changed
 - reworked Resource Monitor to work with multiple event consumers

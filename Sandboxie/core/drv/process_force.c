@@ -103,7 +103,7 @@ static BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId);
 static BOOLEAN Process_IsImmersiveProcess(
     PEPROCESS ProcessObject, HANDLE ParentId, ULONG SessionId);
 
-static BOOLEAN Process_IsAnyProcessParent(HANDLE ParentId, WCHAR* Name);
+static BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name);
 
 void Process_CreateForceData(
     LIST *boxes, const WCHAR *SidString, ULONG SessionId);
@@ -116,7 +116,7 @@ static BOX *Process_CheckForceFolder(
     LIST *boxes, const WCHAR *path, BOOLEAN alert, ULONG *IsAlert);
 
 static BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert,HANDLE parent);
+    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert, HANDLE parent);
 
 static void Process_CheckAlertFolder(
 	LIST *boxes, const WCHAR *path, ULONG *IsAlert);
@@ -250,7 +250,7 @@ _FX BOX *Process_GetForcedStartBox(
 
             if ((! box) && (! alert)) {
                 box = Process_CheckForceProcess(
-                    &boxes, ImageName, force_alert, &alert,ParentId);
+                    &boxes, ImageName, force_alert, &alert, ParentId);
             }
 
             if ((! box) && CurDir && !is_start_exe && (! alert)) {
@@ -758,13 +758,12 @@ _FX BOOLEAN Process_IsDcomLaunchParent(HANDLE ParentId)
 
 
 //---------------------------------------------------------------------------
-// Process_IsWindowsExplorerParent
+// Process_IsProcessParent
 //
-// Note: Once an unused function, it is now used to support the ability to
-// "Automatically sandbox child processes created by File Explorer".
 //---------------------------------------------------------------------------
 
-_FX BOOLEAN Process_IsAnyProcessParent(HANDLE ParentId,WCHAR* Name)
+
+_FX BOOLEAN Process_IsProcessParent(HANDLE ParentId,WCHAR* Name)
 {
 	BOOLEAN retval = FALSE;
 
@@ -786,10 +785,17 @@ _FX BOOLEAN Process_IsAnyProcessParent(HANDLE ParentId,WCHAR* Name)
 
 	return retval;
 }
+
+
+//---------------------------------------------------------------------------
+// Process_IsWindowsExplorerParent
+//---------------------------------------------------------------------------
+
+
 _FX BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId)
 {
    
-    return Process_IsAnyProcessParent(ParentId,L"explorer.exe");
+    return Process_IsProcessParent(ParentId,L"explorer.exe");
 }
 
 
@@ -1374,7 +1380,7 @@ _FX BOOLEAN Process_CheckForceProcessList(
 
 
 _FX BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert,HANDLE Parent)
+    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert, HANDLE Parent)
 {
     FORCE_BOX *box;
 
@@ -1393,13 +1399,13 @@ _FX BOX *Process_CheckForceProcess(
 
             return box->box;
         }
-		if (Process_IsWindowsExplorerParent(Parent) && wcscmp(Conf_Get(NULL, L"ForceExplorerChild", 0), box->box->name)==0) {
-			if(_wcsicmp(name,L"Sandman.exe")!=0)
-				return box->box;
-		}
+		//if (Process_IsWindowsExplorerParent(Parent) && wcscmp(Conf_Get(NULL, L"ForceExplorerChild", 0), box->box->name)==0) {
+		//	if(_wcsicmp(name,L"Sandman.exe")!=0)
+		//		return box->box;
+		//}
         box = List_Next(box);
     }
-	
+
     return NULL;
 }
 

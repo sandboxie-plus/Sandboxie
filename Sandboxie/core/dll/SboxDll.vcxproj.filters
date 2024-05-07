@@ -256,6 +256,7 @@
     <ClCompile Include="..\..\common\hook_util.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="kernel.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />

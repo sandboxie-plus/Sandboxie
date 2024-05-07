@@ -1092,10 +1092,13 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
                     //
 
                     if (ok) {
+
                         JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobELInfo = {0};
                         jobELInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_BREAKAWAY_OK
                                                                    | JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK;
-						ULONG TotalMemoryLimit = SbieApi_QueryConfNumber(boxname, L"TotalMemoryLimit", 0), ProcessNumberLimit = SbieApi_QueryConfNumber(boxname, L"ProcessNumberLimit", 0), ProcessMemoryLimit = SbieApi_QueryConfNumber(boxname, L"ProcessMemoryLimit", 0);
+                        ULONG TotalMemoryLimit = SbieApi_QueryConfNumber(boxname, L"TotalMemoryLimit", 0);
+                        ULONG ProcessNumberLimit = SbieApi_QueryConfNumber(boxname, L"ProcessNumberLimit", 0);
+                        ULONG ProcessMemoryLimit = SbieApi_QueryConfNumber(boxname, L"ProcessMemoryLimit", 0);
 						if (TotalMemoryLimit != 0) {
 							jobELInfo.JobMemoryLimit = TotalMemoryLimit;
 							jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_JOB_MEMORY;

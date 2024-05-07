@@ -622,6 +622,7 @@
     <ClCompile Include="iphlp.c" />
     <ClCompile Include="ipstore_enum.cpp" />
     <ClCompile Include="ipstore_impl.cpp" />
+    <ClCompile Include="kernel.c" />
     <ClCompile Include="key.c" />
     <ClCompile Include="key_del.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>

@@ -4205,7 +4205,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2305"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation>在沙盒内的终端执行</translation>
+        <translation>在沙盒内所有进程终止时执行</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2356"/>
@@ -8383,7 +8383,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4135"/>
         <source>On Box Terminate</source>
-        <translation>在沙盒的终端内</translation>
+        <translation>在沙盒所有进程终止时</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4202"/>

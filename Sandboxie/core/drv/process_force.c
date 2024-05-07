@@ -763,7 +763,7 @@ _FX BOOLEAN Process_IsDcomLaunchParent(HANDLE ParentId)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Process_IsProcessParent(HANDLE ParentId,WCHAR* Name)
+_FX BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name)
 {
 	BOOLEAN retval = FALSE;
 
@@ -1380,7 +1380,7 @@ _FX BOOLEAN Process_CheckForceProcessList(
 
 
 _FX BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert, HANDLE Parent)
+    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert, HANDLE ParentId)
 {
     FORCE_BOX *box;
 
@@ -1399,7 +1399,7 @@ _FX BOX *Process_CheckForceProcess(
 
             return box->box;
         }
-		//if (Process_IsWindowsExplorerParent(Parent) && wcscmp(Conf_Get(NULL, L"ForceExplorerChild", 0), box->box->name)==0) {
+		//if (Process_IsWindowsExplorerParent(ParentId) && Conf_Get_Boolean(box->box->name, L"ForceExplorerChild", FALSE)) {
 		//	if(_wcsicmp(name,L"Sandman.exe")!=0)
 		//		return box->box;
 		//}

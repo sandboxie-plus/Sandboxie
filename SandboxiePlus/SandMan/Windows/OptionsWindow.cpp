@@ -1151,17 +1151,23 @@ void COptionsWindow::UpdateCurrentTab()
 	{
 		ui.chkVmRead->setChecked(IsAccessEntrySet(eIPC, "", eReadOnly, "$:*"));
 	}
-	else if (m_pCurrentTab ==ui.tabPrivileges || m_pCurrentTab == ui.tabSecurity)
+	else if (m_pCurrentTab == ui.tabPrivileges || m_pCurrentTab == ui.tabSecurity)
 	{
 		if (IsAccessEntrySet(eWnd, "", eOpen, "*"))
 		{
-			ui.chkAddToJob->setEnabled(false);
-			ui.chkAddToJob->setChecked(false);
+			if (!ui.chkNoSecurityIsolation->isChecked())
+			{
+				ui.chkAddToJob->setEnabled(false);
+				ui.chkAddToJob->setChecked(false);
+			}
 		}
 		else
 		{
-			ui.chkAddToJob->setEnabled(true);
-			ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
+			if (!ui.chkNoSecurityIsolation->isChecked())
+			{
+				ui.chkAddToJob->setEnabled(true);
+				ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
+			}
 		}
 	}
 	else if (m_pCurrentTab == ui.tabStart || m_pCurrentTab == ui.tabForce)

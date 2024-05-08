@@ -131,7 +131,6 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkUseSbieDeskHack->setChecked(m_pBox->GetBool("UseSbieDeskHack", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
 
-	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 	ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 	ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
 	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
@@ -204,8 +203,6 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", false));
 	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
 	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
-
-	ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 
 	LoadOptionList();
 
@@ -415,8 +412,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", "y", "");
 	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", "", "n");
 
-
-	WriteGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
+	bool bGlobalSbieLogon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieLogon", false);
+	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");
 
 	SaveOptionList();
 
@@ -556,7 +553,7 @@ void COptionsWindow::UpdateBoxIsolation()
 {
 	ui.chkNoSecurityFiltering->setEnabled(ui.chkNoSecurityIsolation->isChecked());
 
-	ui.chkAddToJob->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkAddToJob->setEnabled(!IsAccessEntrySet(eWnd, "", eOpen, "*") && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkNestedJobs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
@@ -582,9 +579,19 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkCloseForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkNoOpenForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
+	ui.chkSbieLogon->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
 	if (ui.chkNoSecurityIsolation->isChecked()) {
 		ui.chkCloseForBox->setChecked(false);
 		ui.chkNoOpenForBox->setChecked(false);
+		if (!IsAccessEntrySet(eWnd, "", eOpen, "*"))
+			ui.chkAddToJob->setChecked(false);
+		ui.chkSbieLogon->setChecked(false);
+	}
+	else {
+		if (!IsAccessEntrySet(eWnd, "", eOpen, "*"))
+			ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
+		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 	}
 }
 

@@ -241,7 +241,9 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>撤销 “管理员” 和 “高级用户（Windows Vista 以前）” 用户组的权限</translation>
+        <translation>撤销 “管理员（Administrators）” 和 “高级用户（Power Users）” 用户组的权限
+	注：在 Windows Vista 以前（不包括），高级用户/Power Users 用户组 具有部分的管理员权限，被设计为运行一些旧版程序。
+但在 Windows Vista 及之后，高级用户/Power Users 用户组仅存在于 Windows 专业版，并且它只拥有 Users 用户组的权限，所以提权后其可操作的权限没有变化，只是仅仅被系统标记为提升权限。而且当这样的进程创建其他进程时不会出现提升权限的 UAC 提示。因此原来需要管理员权限的程序也可以在此用户组中受限运行。）</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
@@ -251,7 +253,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="759"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation>允许 Windows Installer （MSIServer） 在沙盒内使用系统令牌运行</translation>
+        <translation>允许 Windows Installer （MSIServer） 使用沙盒化的系统令牌运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
@@ -1550,7 +1552,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation>您的 Sandboxie-Plus 赞助者凭据已过期。但您的凭据在当前版本中将保持激活。但当您进行更新后，赞助者独占功能将被禁用。
+        <translation>您的 Sandboxie-Plus 赞助者凭据已过期。然而您的凭据在当前版本中将保持激活。但当您进行更新后，赞助者独占功能将被禁用。
 
 您确定要进行更新吗？</translation>
     </message>
@@ -1561,7 +1563,7 @@ Do you still want to update?</source>
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
         <translation>当前没有可用的更新, Sandboxie Plus 已是最新版本。
 
-注意: 更新检查通常落后于 GitHub 发布的版本，以确保只提供经过测试的更新</translation>
+注意: 更新检查实用程序通常接收落后于在 GitHub 发布的版本，以确保只提供经过测试的更新</translation>
     </message>
     <message>
         <source>Checking for certificate...</source>

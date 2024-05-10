@@ -79,6 +79,16 @@ typedef struct _FORCE_PROCESS_2 {
 } FORCE_PROCESS_2;
 
 
+typedef struct _FORCE_PROCESS_3 {
+
+#ifndef USE_PROCESS_MAP
+    LIST_ELEM list_elem;
+#endif
+    HANDLE pid;
+    WCHAR boxname[BOXNAME_COUNT];
+
+} FORCE_PROCESS_3;
+
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -272,6 +282,23 @@ _FX BOX *Process_GetForcedStartBox(
 
             if ((alert == 1) && (! dfp_already_added))
                 Process_DfpInsert(PROCESS_TERMINATED, ProcessId);
+        }
+
+        if (!box) {
+
+            WCHAR boxname[BOXNAME_COUNT];
+
+            if (Process_FcpCheck(ParentId, boxname)) {
+
+                ULONG boxname_len = (wcslen(boxname) + 1) * sizeof(WCHAR);
+                for (FORCE_BOX* cur_box = List_Head(&boxes); cur_box; cur_box = List_Next(cur_box)) {
+                    if (cur_box->box->name_len == boxname_len
+                        && _wcsicmp(cur_box->box->name, boxname) == 0) {
+                        box = cur_box->box;
+                        break;
+                    }
+                }
+            }
         }
 
 		if (alert != 1)
@@ -794,7 +821,6 @@ _FX BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name)
 
 _FX BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId)
 {
-   
     return Process_IsProcessParent(ParentId,L"explorer.exe");
 }
 
@@ -1399,10 +1425,12 @@ _FX BOX *Process_CheckForceProcess(
 
             return box->box;
         }
-		//if (Process_IsWindowsExplorerParent(ParentId) && Conf_Get_Boolean(box->box->name, L"ForceExplorerChild", FALSE)) {
+
+		//if (Process_IsWindowsExplorerParent(ParentId) && Conf_Get_Boolean(box->box->name, L"ForceExplorerChild", 0, FALSE)) {
 		//	if(_wcsicmp(name,L"Sandman.exe")!=0)
 		//		return box->box;
 		//}
+
         box = List_Next(box);
     }
 
@@ -1743,6 +1771,115 @@ _FX BOOLEAN Process_DfpCheck(HANDLE ProcessId, BOOLEAN *silent)
                 proc->silent = TRUE;
             else
                 *silent = proc->silent;
+
+            found = TRUE;
+#ifndef USE_PROCESS_MAP
+            break;
+        }
+
+        proc = List_Next(proc);
+#endif
+    }
+
+    ExReleaseResourceLite(Process_ListLock);
+    KeLowerIrql(irql);
+
+    return found;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_FcpInsert
+//---------------------------------------------------------------------------
+
+
+_FX VOID Process_FcpInsert(HANDLE ProcessId, const WCHAR* boxname)
+{
+    FORCE_PROCESS_3 *proc;
+    KIRQL irql;
+
+    //
+    // called by Session_Api_ForceChildren, process list not locked
+    //
+
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
+
+    Process_FcpDelete(ProcessId);
+
+    proc = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS_3));
+    proc->pid = ProcessId;
+    wmemcpy(proc->boxname, boxname, BOXNAME_COUNT);
+
+#ifdef USE_PROCESS_MAP
+    map_insert(&Process_MapFcp, ProcessId, proc, 0);
+#else
+    List_Insert_After(&Process_ListFcp, NULL, proc);
+#endif
+
+    ExReleaseResourceLite(Process_ListLock);
+    KeLowerIrql(irql);
+
+
+}
+
+
+//---------------------------------------------------------------------------
+// Process_FcpDelete
+//---------------------------------------------------------------------------
+
+
+_FX void Process_FcpDelete(HANDLE ProcessId)
+{
+    FORCE_PROCESS_3 *proc;
+
+#ifdef USE_PROCESS_MAP
+    if(map_take(&Process_MapFcp, ProcessId, &proc, 0))
+        Mem_Free(proc, sizeof(FORCE_PROCESS_3));
+#else
+    proc = List_Head(&Process_ListFcp);
+    while (proc) {
+
+        if (proc->pid == ProcessId) {
+
+            List_Remove(&Process_ListFcp, proc);
+
+            Mem_Free(proc, sizeof(FORCE_PROCESS_3));
+
+            return;
+        }
+
+        proc = List_Next(proc);
+    }
+#endif
+}
+
+
+//---------------------------------------------------------------------------
+// Process_FcpCheck
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_FcpCheck(HANDLE ProcessId, WCHAR* boxname)
+{
+    FORCE_PROCESS_3 *proc;
+    KIRQL irql;
+    BOOLEAN found = FALSE;
+
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
+
+#ifdef USE_PROCESS_MAP
+    proc = map_get(&Process_MapFcp, ProcessId);
+    if (proc) {
+#else
+    proc = List_Head(&Process_ListFcp);
+    while (proc) {
+
+        if (proc->pid == ProcessId) {
+#endif
+            if(boxname)
+                wmemcpy(boxname, proc->boxname, BOXNAME_COUNT);
 
             found = TRUE;
 #ifndef USE_PROCESS_MAP

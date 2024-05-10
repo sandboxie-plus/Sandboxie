@@ -101,9 +101,11 @@ static NTSTATUS Process_CreateUserProcess(
 #ifdef USE_PROCESS_MAP
 HASH_MAP Process_Map;
 HASH_MAP Process_MapDfp;
+HASH_MAP Process_MapFcp;
 #else
 LIST Process_List;
 LIST Process_ListDfp;
+LIST Process_ListFcp;
 #endif
 PERESOURCE Process_ListLock = NULL;
 
@@ -136,9 +138,13 @@ _FX BOOLEAN Process_Init(void)
 
     map_init(&Process_MapDfp, Driver_Pool);
 	map_resize(&Process_MapDfp, 128); // prepare some buckets for better performance
+
+    map_init(&Process_MapFcp, Driver_Pool);
+	map_resize(&Process_MapFcp, 128); // prepare some buckets for better performance
 #else
     List_Init(&Process_List);
     List_Init(&Process_ListDfp);
+    List_Init(&Process_ListFcp);
 #endif
 
     if (! Mem_GetLockResource(&Process_ListLock, TRUE))
@@ -1536,6 +1542,8 @@ _FX void Process_Delete(HANDLE ProcessId)
 #endif
 
     Process_DfpDelete(ProcessId);
+
+    Process_FcpDelete(ProcessId);
 
     ExReleaseResourceLite(Process_ListLock);
     KeLowerIrql(irql);

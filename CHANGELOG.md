@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add option to limit the memory of sandboxed process and the number of process in single sandbox through job object. (thanks Yeyixiao)
 - Add ability to modified sandboxed process logic speed (reduced fixed latency, modified single-player speed, etc.) (thanks Yeyixiao)
+- Added /fcp /force_children commandline option to start.exe it allows to start a program unsandboxed but have all its children sandboxed
 
 
 

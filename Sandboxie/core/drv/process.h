@@ -447,6 +447,11 @@ void Process_DfpDelete(HANDLE ProcessId);
 
 BOOLEAN Process_DfpCheck(HANDLE ProcessId, BOOLEAN *silent);
 
+// Force Child Processes
+
+VOID Process_FcpInsert(HANDLE ProcessId, const WCHAR* boxname);
+void Process_FcpDelete(HANDLE ProcessId);
+BOOLEAN Process_FcpCheck(HANDLE ProcessId, WCHAR* boxname);
 
 // Enumerate or count processes in a sandbox
 
@@ -533,9 +538,11 @@ NTSTATUS Process_Api_Kill(PROCESS *proc, ULONG64 *parms);
 #ifdef USE_PROCESS_MAP
 extern HASH_MAP Process_Map;
 extern HASH_MAP Process_MapDfp;
+extern HASH_MAP Process_MapFcp;
 #else
 extern LIST Process_List;
 extern LIST Process_ListDfp;
+extern LIST Process_ListFcp;
 #endif
 extern PERESOURCE Process_ListLock;
 

@@ -13,6 +13,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add ability to modified sandboxed process logic speed (reduced fixed latency, modified single-player speed, etc.) (thanks Yeyixiao)
 - Added /fcp /force_children commandline option to start.exe it allows to start a program unsandboxed but have all its children sandboxed
 
+- added ability to fore sandboxed processes to use a pre defined socks 5 proxy
+- added ability to intercept DNS queries such that thay can be log and/or redirected
+- added support for SOCKS5 proxy authentication based on RFC1928 (thanks Deezzir)
+- added Test Dialog UI for SOCKS5 proxy (thanks Deezzir)
+
 
 
 ## [1.13.7 / 5.68.7] - 2024-05-01

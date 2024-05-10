@@ -227,7 +227,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsInternet->setCurrentIndex(0);
 	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("EthSocket2"));
 	ui.tabsInternet->setTabIcon(1, CSandMan::GetIcon("Wall"));
-	ui.tabsInternet->setTabIcon(2, CSandMan::GetIcon("Network3"));
+	ui.tabsInternet->setTabIcon(2, CSandMan::GetIcon("DNS"));
+	ui.tabsInternet->setTabIcon(3, CSandMan::GetIcon("Proxy"));
+	ui.tabsInternet->setTabIcon(4, CSandMan::GetIcon("Network3"));
 
 	ui.tabsAccess->setCurrentIndex(0);
 	ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Folder"));
@@ -699,6 +701,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		CloseNetFwEdit(false);
 		CloseAccessEdit(false);
 		CloseOptionEdit(false);
+        CloseNetProxyEdit(false);
 		return true; // cancel event
 	}
 
@@ -710,6 +713,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		CloseNetFwEdit(true);
 		CloseAccessEdit(true);
 		CloseOptionEdit(true);
+        CloseNetProxyEdit(true);
 		return true; // cancel event
 	}
 	
@@ -726,6 +730,11 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 	if (source == ui.treeNetFw->viewport() && event->type() == QEvent::MouseButtonPress)
 	{
 		CloseNetFwEdit();
+	}
+
+    if (source == ui.treeProxy->viewport() && event->type() == QEvent::MouseButtonPress)
+	{
+		CloseNetProxyEdit();
 	}
 
 	if (//source == ui.treeAccess->viewport() 
@@ -822,6 +831,8 @@ void COptionsWindow::LoadConfig()
 
 	LoadINetAccess();
 	LoadNetFwRules();
+	LoadDnsFilter();
+	LoadNetProxy();
 
 	LoadAccessList();
 
@@ -955,6 +966,10 @@ void COptionsWindow::SaveConfig()
 			SaveINetAccess();
 		if (m_NetFwRulesChanged)
 			SaveNetFwRules();
+		if (m_DnsFilterChanged)
+			SaveDnsFilter();
+		if (m_NetProxyChanged)
+			SaveNetProxy();
 
 		if (m_AccessChanged) {
 			SaveAccessList();
@@ -997,6 +1012,7 @@ bool COptionsWindow::apply()
 	CloseNetFwEdit();
 	CloseAccessEdit();
 	CloseOptionEdit();
+    CloseNetProxyEdit();
 
 	if (!ui.btnEditIni->isEnabled())
 		SaveIniSection();
@@ -1044,6 +1060,8 @@ void COptionsWindow::reject()
 	// ||  m_RestrictionChanged
 	 || m_INetBlockChanged
 	 || m_NetFwRulesChanged
+	 || m_DnsFilterChanged
+	 || m_NetProxyChanged
 	 || m_AccessChanged
 	 || m_TemplatesChanged
 	 || m_FoldersChanged

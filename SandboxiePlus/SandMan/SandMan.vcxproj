@@ -440,8 +440,10 @@
     <ClCompile Include="Wizards\NewBoxWizard.cpp" />
     <ClCompile Include="Wizards\SetupWizard.cpp" />
     <ClCompile Include="Wizards\TemplateWizard.cpp" />
+    <ClCompile Include="Windows\TestProxyDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\TestProxyDialog.h" />
     <QtMoc Include="Windows\CompressDialog.h" />
     <QtMoc Include="Wizards\BoxAssistant.h" />
     <QtMoc Include="Windows\BoxImageWindow.h" />
@@ -508,6 +510,7 @@
     <QtUic Include="Forms\SelectBoxWindow.ui" />
     <QtUic Include="Forms\SettingsWindow.ui" />
     <QtUic Include="Forms\SnapshotsWindow.ui" />
+    <QtUic Include="Forms\TestProxyDialog.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\finder.cur" />

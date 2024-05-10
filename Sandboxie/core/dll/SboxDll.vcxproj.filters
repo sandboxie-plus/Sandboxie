@@ -256,6 +256,12 @@
     <ClCompile Include="..\..\common\hook_util.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="proxy.c">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="dns_filter.c">
+      <Filter>net</Filter>
+    </ClCompile>
     <ClCompile Include="kernel.c" />
   </ItemGroup>
   <ItemGroup>
@@ -312,9 +318,6 @@
     <ClInclude Include="..\..\common\list.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\my_wsa.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\common\str_util.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -355,6 +358,18 @@
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\arm64_asm.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\defines.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="wsa_defs.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\my_wsa.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\my_xeb.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>

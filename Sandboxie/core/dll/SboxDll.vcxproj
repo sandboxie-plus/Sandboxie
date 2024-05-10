@@ -674,6 +674,7 @@
     <ClCompile Include="ole.cpp" />
     <ClCompile Include="pdh.c" />
     <ClCompile Include="proc.c" />
+    <ClCompile Include="proxy.c" />
     <ClCompile Include="pst.cpp" />
     <ClCompile Include="rpcrt.c" />
     <ClCompile Include="sbieapi.c" />
@@ -788,14 +789,16 @@
   <ItemGroup>
     <ClInclude Include="..\..\apps\com\common.h" />
     <ClInclude Include="..\..\common\arm64_asm.h" />
+    <ClInclude Include="..\..\common\defines.h" />
     <ClInclude Include="..\..\common\Detours\detours.h" />
     <ClInclude Include="..\..\common\Detours\detver.h" />
     <ClInclude Include="..\..\common\dllimport.h" />
     <ClInclude Include="..\..\common\map.h" />
     <ClInclude Include="..\..\common\my_version.h" />
+    <ClInclude Include="..\..\common\my_wsa.h" />
+    <ClInclude Include="..\..\common\my_xeb.h" />
     <ClInclude Include="..\..\common\ntproto.h" />
     <ClInclude Include="..\..\common\str_util.h" />
-    <ClInclude Include="..\..\common\my_wsa.h" />
     <ClInclude Include="..\..\common\list.h" />
     <ClInclude Include="..\..\common\netfw.h" />
     <ClInclude Include="..\..\common\pattern.h" />
@@ -806,6 +809,9 @@
     <ClInclude Include="advapi.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="dll.h" />
+    <ClCompile Include="dns_filter.c">
+      <FileType>CppCode</FileType>
+    </ClCompile>
     <ClInclude Include="dump.h" />
     <ClInclude Include="guidlg.h" />
     <ClInclude Include="gui_p.h" />
@@ -820,6 +826,7 @@
     <ClInclude Include="sbiedll.h" />
     <ClInclude Include="taskbar.h" />
     <ClInclude Include="trace.h" />
+    <ClInclude Include="wsa_defs.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="lowlevel.rc" />

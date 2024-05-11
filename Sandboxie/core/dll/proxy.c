@@ -64,7 +64,9 @@
 extern P_recv       __sys_recv;
 extern P_send       __sys_send;
 extern P_inet_ntop  __sys_inet_ntop;
+#ifdef PROXY_RESOLVE_HOST_NAMES
 extern HASH_MAP     DNS_LookupMap;
+#endif
 
 //---------------------------------------------------------------------------
 // socks5_handshake
@@ -251,6 +253,7 @@ _FX char socks5_request(SOCKET s, const SOCKADDR* addr)
     char* ptr = req + 3;
     if (addr->sa_family == AF_INET) {
         const SOCKADDR_IN* v4 = (const SOCKADDR_IN*)addr;
+#ifdef PROXY_RESOLVE_HOST_NAMES
         char* domain = (char*)map_get(&DNS_LookupMap, (void*)v4->sin_addr.s_addr);
         if (domain) {
             *ptr++ = SOCKS_DOMAINNAME;
@@ -259,8 +262,10 @@ _FX char socks5_request(SOCKET s, const SOCKADDR* addr)
             ptr += strlen(domain);
             *((USHORT*)ptr) = v4->sin_port;
             ptr += sizeof(USHORT);
-        }
-        else {
+        } 
+        else 
+#endif
+        {
             *ptr++ = SOCKS_IPV4;
             *((ULONG*)ptr) = v4->sin_addr.s_addr;
             ptr += sizeof(ULONG);
@@ -270,6 +275,7 @@ _FX char socks5_request(SOCKET s, const SOCKADDR* addr)
     }
     else if (addr->sa_family == AF_INET6) {
         const SOCKADDR_IN6_LH* v6 = (const SOCKADDR_IN6_LH*)addr;
+#ifdef PROXY_RESOLVE_HOST_NAMES
         char* domain = (char*)map_get(&DNS_LookupMap, (void*)&v6->sin6_addr.s6_addr);
         if (domain) {
             *ptr++ = SOCKS_DOMAINNAME;
@@ -279,7 +285,9 @@ _FX char socks5_request(SOCKET s, const SOCKADDR* addr)
             *((USHORT*)ptr) = v6->sin6_port;
             ptr += sizeof(USHORT);
         }
-        else {
+        else 
+#endif
+        {
             *ptr++ = SOCKS_IPV6;
             memcpy(ptr, &v6->sin6_addr, sizeof(v6->sin6_addr));
             ptr += sizeof(v6->sin6_addr);

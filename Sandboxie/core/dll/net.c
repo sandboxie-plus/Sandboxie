@@ -291,7 +291,9 @@ static BOOLEAN          WSA_TraceFlag         = FALSE;
 
 static BOOLEAN          WSA_ProxyEnabled      = FALSE;
 static NETPROXY_RULE*   WSA_Proxy             = NULL;
+#ifdef PROXY_RESOLVE_HOST_NAMES
        HASH_MAP         DNS_LookupMap;
+#endif
 
 typedef struct _WSA_SOCK {
     ULONG NonBlocking;
@@ -1357,7 +1359,10 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     /*P_recvfrom          recvfrom;
     P_WSARecvFrom       WSARecvFrom;*/
     P_closesocket       closesocket;
+
+#ifdef PROXY_RESOLVE_HOST_NAMES
     P_GetAddrInfoW      GetAddrInfoW;
+#endif
 
     //
     // initialize the network firewall rule list and hook the relevant functions
@@ -1500,7 +1505,10 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     __sys_shutdown = (P_shutdown)GetProcAddress(module, "shutdown");
 
     __sys_inet_ntop = (P_inet_ntop)GetProcAddress(module, "inet_ntop");
+
+#ifdef PROXY_RESOLVE_HOST_NAMES
     if(WSA_ProxyEnabled && SbieApi_QueryConfBool(NULL, L"NetworkProxyResolveHostnames", FALSE)) {
+	
         map_init(&DNS_LookupMap, Dll_Pool);
 
         GetAddrInfoW = (P_GetAddrInfoW)GetProcAddress(module, "GetAddrInfoW");
@@ -1508,6 +1516,7 @@ _FX BOOLEAN WSA_Init(HMODULE module)
             SBIEDLL_HOOK(WSA_,GetAddrInfoW);
         }
     }
+#endif
 
     closesocket = (P_closesocket)GetProcAddress(module, "closesocket");
     if (closesocket) {
@@ -1766,7 +1775,7 @@ _FX HRESULT Net_Common_ImageNamePut(
 // WSA_GetAddrInfoW
 //---------------------------------------------------------------------------
 
-
+#ifdef PROXY_RESOLVE_HOST_NAMES
 _FX int WSA_GetAddrInfoW(
     PCWSTR pNodeName,
     PCWSTR pServiceName,
@@ -1796,3 +1805,4 @@ _FX int WSA_GetAddrInfoW(
     }
     return ret; 
 }
+#endif

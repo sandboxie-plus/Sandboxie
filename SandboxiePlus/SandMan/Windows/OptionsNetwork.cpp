@@ -59,6 +59,8 @@ void COptionsWindow::CreateNetwork()
 
 	connect(ui.chkBlockDns, SIGNAL(clicked(bool)), this, SLOT(OnBlockDns()));
 	connect(ui.chkBlockSamba, SIGNAL(clicked(bool)), this, SLOT(OnBlockSamba()));
+
+	ui.chkProxyResolveHostnames->setVisible(false);
 }
 
 void COptionsWindow::OnBlockDns()
@@ -942,7 +944,7 @@ void COptionsWindow::OnNetProxyItemDoubleClicked(QTreeWidgetItem* pItem, int Col
 
 void COptionsWindow::LoadNetProxy()
 {
-	ui.chkProxyResolveHostnames->setChecked(m_pBox->GetBool("NetworkProxyResolveHostnames", false));
+	//ui.chkProxyResolveHostnames->setChecked(m_pBox->GetBool("NetworkProxyResolveHostnames", false));
 
 	ui.treeProxy->clear();
 	foreach(const QString & Value, m_pBox->GetTextList("NetworkUseProxy", m_Template))
@@ -1003,7 +1005,7 @@ void COptionsWindow::ParseAndAddNetProxy(const QString& Value, bool disabled, co
 
 void COptionsWindow::SaveNetProxy()
 {
-	WriteAdvancedCheck(ui.chkProxyResolveHostnames, "NetworkProxyResolveHostnames", "y", "");
+	//WriteAdvancedCheck(ui.chkProxyResolveHostnames, "NetworkProxyResolveHostnames", "y", "");
 
 	QStringList NetworkUseProxy;
 	QStringList NetworkUseProxyDisabled;

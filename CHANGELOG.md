@@ -18,6 +18,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added support for SOCKS5 proxy authentication based on RFC1928 (thanks Deezzir)
 - added Test Dialog UI for SOCKS5 proxy (thanks Deezzir)
 
+### Changed
+- validated compatybility with windows build 26212 and updated dyn data
+
 
 
 ## [1.13.7 / 5.68.7] - 2024-05-01

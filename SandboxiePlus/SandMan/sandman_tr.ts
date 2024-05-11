@@ -1366,18 +1366,18 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Her zaman göster</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="611"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="807"/>
+        <location filename="Windows/OptionsAccess.cpp" line="618"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="817"/>
         <location filename="Windows/OptionsGeneral.cpp" line="660"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="549"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="566"/>
         <source>Template values can not be edited.</source>
         <translation>Şablon değerleri düzenlenemez.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="461"/>
-        <location filename="Windows/OptionsWindow.cpp" line="475"/>
+        <location filename="Windows/OptionsWindow.cpp" line="463"/>
+        <location filename="Windows/OptionsWindow.cpp" line="477"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translation>Dosya için Göz At</translation>
@@ -1389,7 +1389,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Lütfen bir menü başlığı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="365"/>
+        <location filename="Windows/OptionsAccess.cpp" line="372"/>
         <location filename="Windows/OptionsForce.cpp" line="242"/>
         <location filename="Windows/OptionsForce.cpp" line="253"/>
         <location filename="Windows/OptionsRecovery.cpp" line="128"/>
@@ -1403,7 +1403,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Lütfen yeni grup için bir isim girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="679"/>
+        <location filename="Windows/OptionsAccess.cpp" line="686"/>
         <source>Template values can not be removed.</source>
         <translation>Şablon değerleri kaldırılamaz.</translation>
     </message>
@@ -1441,15 +1441,15 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Sandboxie Plus - &apos;%1&apos; Ayarlar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1091"/>
         <location filename="Windows/OptionsWindow.cpp" line="1109"/>
-        <location filename="Windows/OptionsAccess.cpp" line="404"/>
-        <location filename="Windows/OptionsAccess.cpp" line="636"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1127"/>
+        <location filename="Windows/OptionsAccess.cpp" line="411"/>
+        <location filename="Windows/OptionsAccess.cpp" line="643"/>
         <location filename="Windows/OptionsGeneral.cpp" line="598"/>
         <location filename="Windows/OptionsGeneral.cpp" line="693"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="209"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="482"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="574"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="226"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="499"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="591"/>
         <source>Group: %1</source>
         <translation>Grup: %1</translation>
     </message>
@@ -1465,7 +1465,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Yalnızca [#] göstergesini görüntüle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1254"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1264"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -1485,7 +1485,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Lütfen hariç tutulacak bir dosya uzantısı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="353"/>
+        <location filename="Windows/OptionsAccess.cpp" line="360"/>
         <source>Select File</source>
         <translation>Dosya Seç</translation>
     </message>
@@ -1500,7 +1500,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Lütfen önce grubu seçin.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="353"/>
+        <location filename="Windows/OptionsAccess.cpp" line="360"/>
         <source>All Files (*.*)</source>
         <translation>Tüm Dosyalar (*.*)</translation>
     </message>
@@ -1545,16 +1545,18 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Pencere başlığını değiştirme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1093"/>
-        <location filename="Windows/OptionsAccess.cpp" line="399"/>
-        <location filename="Windows/OptionsAccess.cpp" line="632"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="756"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="831"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1111"/>
+        <location filename="Windows/OptionsAccess.cpp" line="406"/>
+        <location filename="Windows/OptionsAccess.cpp" line="639"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="766"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="841"/>
         <location filename="Windows/OptionsGeneral.cpp" line="593"/>
         <location filename="Windows/OptionsGeneral.cpp" line="689"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="477"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="570"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="683"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="494"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="587"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="700"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="905"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1109"/>
         <source>All Programs</source>
         <translation>Tüm Programlar</translation>
     </message>
@@ -1564,17 +1566,17 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Klasör için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1102"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1120"/>
         <source>Enter program:</source>
         <translation>Program girin:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="537"/>
+        <location filename="Windows/OptionsAccess.cpp" line="544"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>COM nesneleri GUID&apos;lerine göre belirtilmelidir, bunun gibi: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="543"/>
+        <location filename="Windows/OptionsAccess.cpp" line="550"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>RT arayüzleri isimleriyle belirtilmelidir.</translation>
     </message>
@@ -1584,174 +1586,174 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Program için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="973"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="983"/>
         <source>Please enter a service identifier</source>
         <translation>Lütfen bir hizmet tanımlayıcısı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="290"/>
+        <location filename="Windows/OptionsWindow.cpp" line="292"/>
         <source>File Options</source>
         <translation>Dosya Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="329"/>
+        <location filename="Windows/OptionsWindow.cpp" line="331"/>
         <source>Grouping</source>
         <translation>Gruplama</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="543"/>
+        <location filename="Windows/OptionsWindow.cpp" line="545"/>
         <source>Add %1 Template</source>
         <translation>%1 Şablonu Ekle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="646"/>
+        <location filename="Windows/OptionsWindow.cpp" line="648"/>
         <source>Search for options</source>
         <translation>Seçeneklerde ara</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="784"/>
+        <location filename="Windows/OptionsWindow.cpp" line="793"/>
         <source>Box: %1</source>
         <translation>Alan: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="785"/>
+        <location filename="Windows/OptionsWindow.cpp" line="794"/>
         <source>Template: %1</source>
         <translation>Şablon: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="786"/>
+        <location filename="Windows/OptionsWindow.cpp" line="795"/>
         <source>Global: %1</source>
         <translation>Genel: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="787"/>
+        <location filename="Windows/OptionsWindow.cpp" line="796"/>
         <source>Default: %1</source>
         <translation>Varsayılan: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="992"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1007"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Bu korumalı alan silindi, bu nedenle yapılandırma kaydedilemiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1053"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1071"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Bazı değişiklikler henüz kaydedilmedi, bu seçenekler penceresini gerçekten kapatmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="311"/>
+        <location filename="Windows/OptionsAccess.cpp" line="318"/>
         <source>No Rename</source>
         <translation>Yeniden Adlandırma Yok</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="312"/>
+        <location filename="Windows/OptionsAccess.cpp" line="319"/>
         <source>Closed</source>
         <translation>Kapalı</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="313"/>
+        <location filename="Windows/OptionsAccess.cpp" line="320"/>
         <source>Closed RT</source>
         <translation>Kapalı RT</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="314"/>
+        <location filename="Windows/OptionsAccess.cpp" line="321"/>
         <source>Read Only</source>
         <translation>Salt Okunur</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="316"/>
+        <location filename="Windows/OptionsAccess.cpp" line="323"/>
         <source>Ignore UIPI</source>
         <translation>UIPI Yok Say</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="318"/>
-        <location filename="Windows/OptionsAccess.cpp" line="335"/>
-        <location filename="Windows/OptionsAccess.cpp" line="348"/>
+        <location filename="Windows/OptionsAccess.cpp" line="325"/>
+        <location filename="Windows/OptionsAccess.cpp" line="342"/>
+        <location filename="Windows/OptionsAccess.cpp" line="355"/>
         <source>Unknown</source>
         <translation>Bilinmeyen</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="325"/>
+        <location filename="Windows/OptionsAccess.cpp" line="332"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
         <translation>Normal Sandboxie davranışı - okumaya izin verir ve ayrıca yazma üzerine kopyalar.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="326"/>
+        <location filename="Windows/OptionsAccess.cpp" line="333"/>
         <source>Allow write-access outside the sandbox.</source>
         <translation>Korumalı alanın dışına yazma erişimine izin verir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="327"/>
+        <location filename="Windows/OptionsAccess.cpp" line="334"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
         <translation>Korumalı alanın içine yüklenen uygulamalar için de korumalı alanın dışına yazma erişimine izin verir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="328"/>
+        <location filename="Windows/OptionsAccess.cpp" line="335"/>
         <source>Don&apos;t rename window classes.</source>
         <translation>Pencere sınıfları yeniden adlandırmaz.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="329"/>
+        <location filename="Windows/OptionsAccess.cpp" line="336"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
         <translation>Ana sistem konumuna erişimi reddeder ve korumalı alan kopyalarının oluşturulmasını önler.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="330"/>
+        <location filename="Windows/OptionsAccess.cpp" line="337"/>
         <source>Block access to WinRT class.</source>
         <translation>WinRT sınıfına erişimi engeller.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="331"/>
+        <location filename="Windows/OptionsAccess.cpp" line="338"/>
         <source>Allow read-only access only.</source>
         <translation>Yalnızca salt okunur erişime izin verir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="332"/>
+        <location filename="Windows/OptionsAccess.cpp" line="339"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
         <translation>Ana sistem dosyalarını, klasörlerini veya kayıt defteri anahtarlarını korumalı alan işlemlerinden gizler.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="333"/>
+        <location filename="Windows/OptionsAccess.cpp" line="340"/>
         <source>Ignore UIPI restrictions for processes.</source>
         <translation>İşlemler için UIPI kısıtlamalarını yok sayar.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="342"/>
+        <location filename="Windows/OptionsAccess.cpp" line="349"/>
         <source>File/Folder</source>
         <translation>Dosya/Klasör</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="343"/>
+        <location filename="Windows/OptionsAccess.cpp" line="350"/>
         <source>Registry</source>
         <translation>Kayıt</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="344"/>
+        <location filename="Windows/OptionsAccess.cpp" line="351"/>
         <source>IPC Path</source>
         <translation>IPC Yolu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="345"/>
+        <location filename="Windows/OptionsAccess.cpp" line="352"/>
         <source>Wnd Class</source>
         <translation>Wnd Sınıfı</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="346"/>
+        <location filename="Windows/OptionsAccess.cpp" line="353"/>
         <source>COM Object</source>
         <translation>COM Objesi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="557"/>
+        <location filename="Windows/OptionsAccess.cpp" line="564"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
         <translation>Tüm IPC erişimini açmak COM erişimini de açar, COM&apos;u yine de korumalı alanla sınırlandırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="558"/>
+        <location filename="Windows/OptionsAccess.cpp" line="565"/>
         <source>Don&apos;t ask in future</source>
         <translation>Gelecekte sorma</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="567"/>
+        <location filename="Windows/OptionsAccess.cpp" line="574"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
         <translation>&apos;OpenWinClass=program.exe,#&apos; desteklenmiyor, bunun yerine &apos;NoRenameWinClass=program.exe,*&apos; kullanın</translation>
     </message>
@@ -1843,83 +1845,98 @@ Seçilen konum bu dosyayı içermiyor.
 Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="37"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="604"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="54"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="621"/>
         <source>Any</source>
         <translation>Herhangi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="38"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="605"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="55"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="622"/>
         <source>TCP</source>
         <translation>TCP</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="39"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="606"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="56"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="623"/>
         <source>UDP</source>
         <translation>UDP</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="40"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="607"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="57"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="624"/>
         <source>ICMP</source>
         <translation>ICMP</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="65"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="82"/>
         <source>Allow access</source>
         <translation>Erişime izin ver</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="66"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="83"/>
         <source>Block using Windows Filtering Platform</source>
         <translation>Windows Filtreleme Platformunu kullanarak engelle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="67"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="84"/>
         <source>Block by denying access to Network devices</source>
         <translation>Ağ cihazlarına erişimi reddederek engelle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1149"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="187"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="590"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="793"/>
+        <source>Please enter a domain to be filtered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsNetwork.cpp" line="849"/>
+        <source>Please enter IP and Port.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsNetwork.cpp" line="1016"/>
+        <source> entry: IP or Port cannot be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1159"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="204"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="607"/>
         <source>Allow</source>
         <translation>İzin ver</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="188"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="205"/>
         <source>Block (WFP)</source>
         <translation>Engelle (WFP)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="189"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="206"/>
         <source>Block (NDev)</source>
         <translation>Engelle (NDev)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="294"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="311"/>
         <source>A non empty program name is required.</source>
         <translation>Boş olmayan bir program adı gereklidir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="591"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="608"/>
         <source>Block</source>
         <translation>Engelle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="308"/>
+        <location filename="Windows/OptionsAccess.cpp" line="315"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="309"/>
+        <location filename="Windows/OptionsAccess.cpp" line="316"/>
         <source>Open</source>
         <translation>Açık</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="310"/>
+        <location filename="Windows/OptionsAccess.cpp" line="317"/>
         <source>Open for All</source>
         <translation>Hepsine Açık</translation>
     </message>
@@ -2072,7 +2089,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
         <translation>Görüntü Başlığı Geri Yüklendi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="315"/>
+        <location filename="Windows/OptionsAccess.cpp" line="322"/>
         <source>Box Only (Write Only)</source>
         <translation>Yalnızca Alan (Salt Yazma)</translation>
     </message>
@@ -2132,71 +2149,71 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
         <translation>Korumalı alan ipc kökü</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="777"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="787"/>
         <source>Add special option:</source>
         <translation>Özel seçenek ekle:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="928"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="932"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="938"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="942"/>
         <source>On Start</source>
         <translation>Başlangıçta</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="929"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="937"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="941"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="945"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="949"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="939"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="947"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="951"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="955"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="959"/>
         <source>Run Command</source>
         <translation>Komutu Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="933"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="943"/>
         <source>Start Service</source>
         <translation>Hizmeti Başlat</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="936"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="946"/>
         <source>On Init</source>
         <translation>İlk Kullanımda</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="940"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="950"/>
         <source>On File Recovery</source>
         <translation>Doysa Kurtarmada</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="944"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="954"/>
         <source>On Delete Content</source>
         <translation>İçerik Silmede</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="948"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="958"/>
         <source>On Terminate</source>
         <translation>Sonlandığında</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1055"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1065"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
         <translation>Bu korumalı alana erişime izin vermek için lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1067"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1077"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
         <translation>Bu korumalı alana erişimi reddetmek için lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1149"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1159"/>
         <source>Deny</source>
         <translation>Reddet</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="962"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="984"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="995"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1006"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1017"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="972"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="994"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1005"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1016"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1027"/>
         <source>Please enter the command line to be executed</source>
         <translation>Lütfen çalıştırılacak komut satırını girin</translation>
     </message>
@@ -6039,6 +6056,194 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     </message>
 </context>
 <context>
+    <name>CTestProxyDialog</name>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="25"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="62"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="360"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="367"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="373"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="379"/>
+        <source>Sandboxie-Plus - Test Proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="37"/>
+        <source>N/A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="42"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="308"/>
+        <source>Testing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="62"/>
+        <source>This test cannot be disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="80"/>
+        <source>[%1] Starting Test 1: Connection to the Proxy Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="81"/>
+        <source>[%1] IP Address: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="97"/>
+        <source>[%1] Connection established.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="98"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="246"/>
+        <source>[%1] Test passed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="103"/>
+        <source>[%1] Connection to proxy server failed: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="104"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="158"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="252"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="259"/>
+        <source>[%1] Test failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="114"/>
+        <source>[%1] Starting Test 2: Connection through the Proxy Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="141"/>
+        <source>[%1] Authentication was successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="142"/>
+        <source>[%1] Connection to %2 established through the proxy server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="146"/>
+        <source>[%1] Loading a web page to test the proxy server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="152"/>
+        <source>[%1] %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="157"/>
+        <source>[%1] Connection through proxy server failed: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="191"/>
+        <source>[%1] Web page loaded successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="196"/>
+        <source>Timeout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="197"/>
+        <source>[%1] Failed to load web page: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="214"/>
+        <source>[%1] Starting Test 3: Proxy Server latency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="245"/>
+        <source>[%1] Latency through proxy server: %2ms.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="251"/>
+        <source>[%1] Failed to get proxy server latency: Request timeout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="258"/>
+        <source>[%1] Failed to get proxy server latency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="287"/>
+        <source>[%1] Test Finished.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="300"/>
+        <location filename="Windows/TestProxyDialog.cpp" line="337"/>
+        <source>Stopped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="309"/>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="312"/>
+        <source>[%1] Testing started...
+	Proxy Server
+	Address:		%2
+	Protocol:		%3
+	Authentication:	%4%5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="332"/>
+        <source>Retry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="341"/>
+        <source>Test Passed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="347"/>
+        <source>Test Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="360"/>
+        <source>Invalid Timeout value. Please enter a value between 1 and 60.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="367"/>
+        <source>Invalid Port value. Please enter a value between 1 and 65535.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="373"/>
+        <source>Invalid Host value. Please enter a valid host name excluding &apos;http[s]://&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/TestProxyDialog.cpp" line="379"/>
+        <source>Invalid Ping Count value. Please enter a value between 1 and 10.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CTraceModel</name>
     <message>
         <location filename="Models/TraceModel.cpp" line="196"/>
@@ -6301,11 +6506,11 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="2171"/>
         <location filename="Forms/OptionsWindow.ui" line="2317"/>
         <location filename="Forms/OptionsWindow.ui" line="3169"/>
-        <location filename="Forms/OptionsWindow.ui" line="3490"/>
-        <location filename="Forms/OptionsWindow.ui" line="3606"/>
-        <location filename="Forms/OptionsWindow.ui" line="3807"/>
-        <location filename="Forms/OptionsWindow.ui" line="4800"/>
-        <location filename="Forms/OptionsWindow.ui" line="4938"/>
+        <location filename="Forms/OptionsWindow.ui" line="3723"/>
+        <location filename="Forms/OptionsWindow.ui" line="3839"/>
+        <location filename="Forms/OptionsWindow.ui" line="4040"/>
+        <location filename="Forms/OptionsWindow.ui" line="5040"/>
+        <location filename="Forms/OptionsWindow.ui" line="5178"/>
         <source>Name</source>
         <translation>Ad</translation>
     </message>
@@ -6317,7 +6522,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Yol</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5109"/>
+        <location filename="Forms/OptionsWindow.ui" line="5349"/>
         <source>Save</source>
         <translation>Kaydet</translation>
     </message>
@@ -6353,17 +6558,17 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Başlıktaki korumalı alan göstergesi:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4648"/>
+        <location filename="Forms/OptionsWindow.ui" line="4888"/>
         <source>Debug</source>
         <translation>Hata Ayıklama</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4378"/>
+        <location filename="Forms/OptionsWindow.ui" line="4611"/>
         <source>Users</source>
         <translation>Kullanıcılar</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3385"/>
+        <location filename="Forms/OptionsWindow.ui" line="3606"/>
         <source>Block network files and folders, unless specifically opened.</source>
         <translation>Özel olarak açılmadıkça ağ dosyalarını ve klasörlerini engelle.</translation>
     </message>
@@ -6378,7 +6583,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Korumalı alandaki programlar tarafından oluşturulan pencere sınıfı adları değiştirilmesin</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4523"/>
+        <location filename="Forms/OptionsWindow.ui" line="4756"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>Hata Ayıklama Çıktısını İzleme Günlüğüne Kaydet</translation>
     </message>
@@ -6388,7 +6593,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Wnd Sınıfı Ekle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4604"/>
+        <location filename="Forms/OptionsWindow.ui" line="4844"/>
         <source>Access Tracing</source>
         <translation>Erişim İzleme</translation>
     </message>
@@ -6413,7 +6618,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Tüm programların bu alanda başlamasına izin ver.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3582"/>
+        <location filename="Forms/OptionsWindow.ui" line="3815"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Dosyalar oluşturulur oluşturulmaz kurtarabilmek için Anında Kurtarma istemini etkinleştir.</translation>
     </message>
@@ -6428,27 +6633,27 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Erişim</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4714"/>
+        <location filename="Forms/OptionsWindow.ui" line="4954"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>Bu seçenekler uyumluluk sorunlarındaki hataları ayıklamaya yönelik tasarlanmıştır, lütfen bu ayarları üretim amaçlı kullanmayın. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4739"/>
+        <location filename="Forms/OptionsWindow.ui" line="4979"/>
         <source>Templates</source>
         <translation>Şablonlar</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4830"/>
+        <location filename="Forms/OptionsWindow.ui" line="5070"/>
         <source>Text Filter</source>
         <translation>Metin Filtresi</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5086"/>
+        <location filename="Forms/OptionsWindow.ui" line="5326"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4396"/>
+        <location filename="Forms/OptionsWindow.ui" line="4629"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>Kaynak Erişimi İzleyicisini yalnızca yöneticilerle kısıtla</translation>
     </message>
@@ -6459,12 +6664,12 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="1551"/>
         <location filename="Forms/OptionsWindow.ui" line="1575"/>
         <location filename="Forms/OptionsWindow.ui" line="1599"/>
-        <location filename="Forms/OptionsWindow.ui" line="3790"/>
+        <location filename="Forms/OptionsWindow.ui" line="4023"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>Korumalı alan bütünlüğünün kendisini koruyun</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3535"/>
+        <location filename="Forms/OptionsWindow.ui" line="3768"/>
         <source>Add Folder</source>
         <translation>Klasör Ekle</translation>
     </message>
@@ -6474,7 +6679,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Kullanıcıya ablukadan muafiyete izin verip vermeyeceğini sor.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4516"/>
+        <location filename="Forms/OptionsWindow.ui" line="4749"/>
         <source>IPC Trace</source>
         <translation>IPC İzleme</translation>
     </message>
@@ -6494,13 +6699,15 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="2864"/>
         <location filename="Forms/OptionsWindow.ui" line="3138"/>
         <location filename="Forms/OptionsWindow.ui" line="3280"/>
-        <location filename="Forms/OptionsWindow.ui" line="3528"/>
-        <location filename="Forms/OptionsWindow.ui" line="3614"/>
-        <location filename="Forms/OptionsWindow.ui" line="3943"/>
-        <location filename="Forms/OptionsWindow.ui" line="4032"/>
-        <location filename="Forms/OptionsWindow.ui" line="4363"/>
-        <location filename="Forms/OptionsWindow.ui" line="4426"/>
-        <location filename="Forms/OptionsWindow.ui" line="4781"/>
+        <location filename="Forms/OptionsWindow.ui" line="3399"/>
+        <location filename="Forms/OptionsWindow.ui" line="3574"/>
+        <location filename="Forms/OptionsWindow.ui" line="3761"/>
+        <location filename="Forms/OptionsWindow.ui" line="3847"/>
+        <location filename="Forms/OptionsWindow.ui" line="4176"/>
+        <location filename="Forms/OptionsWindow.ui" line="4265"/>
+        <location filename="Forms/OptionsWindow.ui" line="4596"/>
+        <location filename="Forms/OptionsWindow.ui" line="4659"/>
+        <location filename="Forms/OptionsWindow.ui" line="5021"/>
         <source>Remove</source>
         <translation>Kaldır</translation>
     </message>
@@ -6515,8 +6722,8 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Bir programın internet erişimi reddedildiğinde 1307 mesajını yayınla</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3659"/>
-        <location filename="Forms/OptionsWindow.ui" line="3688"/>
+        <location filename="Forms/OptionsWindow.ui" line="3892"/>
+        <location filename="Forms/OptionsWindow.ui" line="3921"/>
         <source>Compatibility</source>
         <translation>Uyumluluk</translation>
     </message>
@@ -6531,7 +6738,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Alan Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4309"/>
+        <location filename="Forms/OptionsWindow.ui" line="4542"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>Korumalı alandaki işlemlerin diğer alanlarda çalışan işlemleri görmesine izin verilmesin</translation>
     </message>
@@ -6551,7 +6758,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Seçili programların bu alanda başlamasını önle.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3904"/>
+        <location filename="Forms/OptionsWindow.ui" line="4137"/>
         <source>Miscellaneous</source>
         <translation>Çeşitli</translation>
     </message>
@@ -6561,7 +6768,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Dosya çok büyükse 2102 mesajını yayınla</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3456"/>
+        <location filename="Forms/OptionsWindow.ui" line="3689"/>
         <source>File Recovery</source>
         <translation>Dosya Kurtarma</translation>
     </message>
@@ -6571,12 +6778,12 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Alan Silme Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4454"/>
+        <location filename="Forms/OptionsWindow.ui" line="4687"/>
         <source>Pipe Trace</source>
         <translation>Boru İzleme</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4509"/>
+        <location filename="Forms/OptionsWindow.ui" line="4742"/>
         <source>File Trace</source>
         <translation>Dosya İzleme</translation>
     </message>
@@ -6588,12 +6795,14 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="2806"/>
         <location filename="Forms/OptionsWindow.ui" line="2880"/>
         <location filename="Forms/OptionsWindow.ui" line="3298"/>
-        <location filename="Forms/OptionsWindow.ui" line="3966"/>
+        <location filename="Forms/OptionsWindow.ui" line="3410"/>
+        <location filename="Forms/OptionsWindow.ui" line="3466"/>
+        <location filename="Forms/OptionsWindow.ui" line="4199"/>
         <source>Program</source>
         <translation>Program</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4302"/>
+        <location filename="Forms/OptionsWindow.ui" line="4535"/>
         <source>Add Process</source>
         <translation>İşlem Ekle</translation>
     </message>
@@ -6607,7 +6816,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Program Ekle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4759"/>
+        <location filename="Forms/OptionsWindow.ui" line="4999"/>
         <source>Filter Categories</source>
         <translation>Kategorileri Filtrele</translation>
     </message>
@@ -6626,8 +6835,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="813"/>
         <location filename="Forms/OptionsWindow.ui" line="1035"/>
         <location filename="Forms/OptionsWindow.ui" line="1080"/>
-        <location filename="Forms/OptionsWindow.ui" line="3375"/>
-        <location filename="Forms/OptionsWindow.ui" line="3399"/>
+        <location filename="Forms/OptionsWindow.ui" line="3665"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>Sistemi korumalı alandaki işlemlerden koru</translation>
     </message>
@@ -6637,7 +6845,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>SandboxiePlus Ayarları</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4795"/>
+        <location filename="Forms/OptionsWindow.ui" line="5035"/>
         <source>Category</source>
         <translation>Kategori</translation>
     </message>
@@ -6652,17 +6860,17 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Kayıt Anahtarı Ekle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4284"/>
+        <location filename="Forms/OptionsWindow.ui" line="4517"/>
         <source>Hide Processes</source>
         <translation>İşlemleri Gizle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3498"/>
+        <location filename="Forms/OptionsWindow.ui" line="3731"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>Hızlı Kurtarma işlevi çağrıldığında, aşağıdaki klasörler korumalı alan içeriği için denetlenecektir. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4570"/>
+        <location filename="Forms/OptionsWindow.ui" line="4810"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -6686,7 +6894,7 @@ günlüğe kaydetme özelleştirilebilir.
         <translation>px Genişliği</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4403"/>
+        <location filename="Forms/OptionsWindow.ui" line="4636"/>
         <source>Add User</source>
         <translation>Kullanıcı Ekle</translation>
     </message>
@@ -6701,12 +6909,12 @@ günlüğe kaydetme özelleştirilebilir.
         <translation>Program Zorla</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4704"/>
+        <location filename="Forms/OptionsWindow.ui" line="4944"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>UYARI, bu seçenekler temel güvenlik garantilerini devre dışı bırakabilir ve korumalı alan güvenliğini bozabilir!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5073"/>
+        <location filename="Forms/OptionsWindow.ui" line="5313"/>
         <source>Edit ini</source>
         <translation>Ini Düzenle</translation>
     </message>
@@ -6725,31 +6933,31 @@ günlüğe kaydetme özelleştirilebilir.
         <location filename="Forms/OptionsWindow.ui" line="2758"/>
         <location filename="Forms/OptionsWindow.ui" line="2898"/>
         <location filename="Forms/OptionsWindow.ui" line="3326"/>
-        <location filename="Forms/OptionsWindow.ui" line="3521"/>
-        <location filename="Forms/OptionsWindow.ui" line="3628"/>
-        <location filename="Forms/OptionsWindow.ui" line="3979"/>
+        <location filename="Forms/OptionsWindow.ui" line="3754"/>
+        <location filename="Forms/OptionsWindow.ui" line="3861"/>
         <location filename="Forms/OptionsWindow.ui" line="4212"/>
-        <location filename="Forms/OptionsWindow.ui" line="4339"/>
+        <location filename="Forms/OptionsWindow.ui" line="4445"/>
+        <location filename="Forms/OptionsWindow.ui" line="4572"/>
         <source>Show Templates</source>
         <translation>Şablonları Göster</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3621"/>
+        <location filename="Forms/OptionsWindow.ui" line="3854"/>
         <source>Ignore Folder</source>
         <translation>Klasörü Yok Say</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4563"/>
+        <location filename="Forms/OptionsWindow.ui" line="4803"/>
         <source>GUI Trace</source>
         <translation>GKA İzleme</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4502"/>
+        <location filename="Forms/OptionsWindow.ui" line="4735"/>
         <source>Key Trace</source>
         <translation>Tuş İzleme</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4446"/>
+        <location filename="Forms/OptionsWindow.ui" line="4679"/>
         <source>Tracing</source>
         <translation>İzleme</translation>
     </message>
@@ -6764,7 +6972,7 @@ günlüğe kaydetme özelleştirilebilir.
         <translation>Korumalı alan işlemlerini iş nesnelerine ekle (Önerilir)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3565"/>
+        <location filename="Forms/OptionsWindow.ui" line="3798"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>Klasörleri ve dosya türlerini (veya dosya uzantılarını) Anında Kurtarma&apos;nın dışında bırakabilirsiniz.</translation>
     </message>
@@ -6774,12 +6982,12 @@ günlüğe kaydetme özelleştirilebilir.
         <translation>Çalıştır Menüsü</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4729"/>
+        <location filename="Forms/OptionsWindow.ui" line="4969"/>
         <source>App Templates</source>
         <translation>Uygulama Şablonları</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3575"/>
+        <location filename="Forms/OptionsWindow.ui" line="3808"/>
         <source>Ignore Extension</source>
         <translation>Uzantıyı Yok Say</translation>
     </message>
@@ -6789,7 +6997,7 @@ günlüğe kaydetme özelleştirilebilir.
         <translation>Bu korumalı alanı silinmeye veya boşaltılmaya karşı koru</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4433"/>
+        <location filename="Forms/OptionsWindow.ui" line="4666"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -6803,7 +7011,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <translation>* Not: Bu korumalı alana yüklenen programlar hiçbir şekilde başlatılamaz.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4853"/>
+        <location filename="Forms/OptionsWindow.ui" line="5093"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Bu liste, korumalı alan uyumluluğunu geliştiren çok sayıda şablonlar içerir</translation>
     </message>
@@ -6823,12 +7031,12 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <translation>Kaynak Erişimi</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3887"/>
+        <location filename="Forms/OptionsWindow.ui" line="4120"/>
         <source>Advanced Options</source>
         <translation>Gelişmiş Seçenekler</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4329"/>
+        <location filename="Forms/OptionsWindow.ui" line="4562"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>Korumalı alanda çalışan işlemlerden ana sistem işlemlerini gizler.</translation>
     </message>
@@ -6859,17 +7067,17 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <translation>Başlatma Kısıtlamaları</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3702"/>
+        <location filename="Forms/OptionsWindow.ui" line="3935"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>Özel sahte Manifest dosyalarının kullanımını zorla (Eski davranış)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5067"/>
+        <location filename="Forms/OptionsWindow.ui" line="5307"/>
         <source>Edit ini Section</source>
         <translation>Ini Düzenleme Bölümü</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4624"/>
+        <location filename="Forms/OptionsWindow.ui" line="4864"/>
         <source>COM Class Trace</source>
         <translation>COM Sınıf İzleme</translation>
     </message>
@@ -6909,7 +7117,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <translation>Uygulamaların yetkilendirilmiş çalıştıklarını düşünmelerini sağla (Yükleyicileri güvenli bir şekilde çalıştırmanıza izin verir)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3402"/>
+        <location filename="Forms/OptionsWindow.ui" line="3668"/>
         <source>Network restrictions</source>
         <translation>Ağ Kısıtlamaları</translation>
     </message>
@@ -7089,11 +7297,13 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="942"/>
+        <location filename="Forms/OptionsWindow.ui" line="3516"/>
         <source>Move Up</source>
         <translation>Yukarı Taşı</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="961"/>
+        <location filename="Forms/OptionsWindow.ui" line="3527"/>
         <source>Move Down</source>
         <translation>Aşağı Taşı</translation>
     </message>
@@ -7164,42 +7374,42 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <translation>Hangi işlemlerin pencereler ve benzeri masaüstü nesnelerine erişebileceğini yapılandırın.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3749"/>
+        <location filename="Forms/OptionsWindow.ui" line="3982"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation>Genel kısayol tuşuna art arda 3 kez basıldığında bu istisna göz ardı edilecektir.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3752"/>
+        <location filename="Forms/OptionsWindow.ui" line="3985"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation>&quot;Tüm İşlemleri Sonlandır&quot; çalıştırıldığında bu korumalı alanı sonlandırılma dışında tut.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3793"/>
+        <location filename="Forms/OptionsWindow.ui" line="4026"/>
         <source>Image Protection</source>
         <translation>Görüntü Koruması</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3831"/>
+        <location filename="Forms/OptionsWindow.ui" line="4064"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>Bir program korumalı alandan bir DLL dosyası yüklemeye çalıştığında 1305 mesajını yayınla</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3824"/>
+        <location filename="Forms/OptionsWindow.ui" line="4057"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <translation>Sistemde yüklü korumalı alanda çalışan programların alan içinden DLL yüklemesini önle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3762"/>
+        <location filename="Forms/OptionsWindow.ui" line="3995"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation>DLL&apos;ler &amp;&amp; Uzantılar</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3812"/>
+        <location filename="Forms/OptionsWindow.ui" line="4045"/>
         <source>Description</source>
         <translation>Açıklama</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3820"/>
+        <location filename="Forms/OptionsWindow.ui" line="4053"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <translation>Sandboxie&apos;nin kaynak erişim kuralları, genellikle korumalı alan içinde bulunan program ikili dosyalarına göre ayrım yapar. OpenFilePath ve OpenKeyPath yalnızca ana sistemde yerel olarak bulunan uygulama ikili dosyaları için çalışır. 
@@ -7207,7 +7417,7 @@ Bu kısıtlama olmaksızın bir kural tanımlamak için OpenPipePath veya OpenCo
 Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Sistem Görüntü Koruması kullanılarak, bir korumalı alanda çalışan uygulamaların (ana sistemde yüklü) korumalı alanda bulunan kütüphaneleri yüklemesi engellenerek bu durum önlenebilir.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3844"/>
+        <location filename="Forms/OptionsWindow.ui" line="4077"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <translation>Sandboxie&apos;nin işlevselliği, korumalı alanda herhangi bir işlem başlatıldığında SbieDll.dll tarafından ona yüklenebilen, isteğe bağlı DLL&apos;ler kullanılarak genişletilebilir. Genel ayarlardaki Eklenti Yöneticisinde bazı yararlı uzantılar sunulmaktadır. Bunlar kurulduktan sonra geçerli korumalı alan için buradan etkinleştirilebilirler.</translation>
     </message>
@@ -7409,77 +7619,142 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <translation>Ağ Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3353"/>
+        <location filename="Forms/OptionsWindow.ui" line="3352"/>
+        <source>DNS Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3369"/>
+        <source>Add Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3389"/>
+        <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3415"/>
+        <source>Domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3431"/>
+        <source>Internet Proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3448"/>
+        <source>Add Proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3455"/>
+        <source>Test Proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3481"/>
+        <source>Auth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3486"/>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3491"/>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3499"/>
+        <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3541"/>
+        <source>Encrypt Passwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3581"/>
+        <source>Resolve hostnames via proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="3591"/>
         <source>Other Options</source>
         <translation>Diğer Seçenekler</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3378"/>
+        <location filename="Forms/OptionsWindow.ui" line="3639"/>
         <source>Port Blocking</source>
         <translation>Bağlantı Noktası Engelleme</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3422"/>
+        <location filename="Forms/OptionsWindow.ui" line="3599"/>
         <source>Block common SAMBA ports</source>
         <translation>Yaygın SAMBA bağlantı noktalarını engelle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3442"/>
+        <location filename="Forms/OptionsWindow.ui" line="3613"/>
         <source>Block DNS, UDP port 53</source>
         <translation>DNS, UDP bağlantı noktası 53&apos;ü engelle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3466"/>
+        <location filename="Forms/OptionsWindow.ui" line="3699"/>
         <source>Quick Recovery</source>
         <translation>Hızlı Kurtarma</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3545"/>
+        <location filename="Forms/OptionsWindow.ui" line="3778"/>
         <source>Immediate Recovery</source>
         <translation>Anında Kurtarma</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3642"/>
+        <location filename="Forms/OptionsWindow.ui" line="3875"/>
         <source>Various Options</source>
         <translation>Çeşitli Seçenekler</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3667"/>
+        <location filename="Forms/OptionsWindow.ui" line="3900"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>ElevateCreateProcess geçici çözümünü uygula (Eski davranış)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3709"/>
+        <location filename="Forms/OptionsWindow.ui" line="3942"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>Masaüstü nesnesi geçici çözümünü tüm işlemler için kullan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4135"/>
+        <location filename="Forms/OptionsWindow.ui" line="4368"/>
         <source>On Box Terminate</source>
         <translation>Alan Sonlandığında</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4202"/>
+        <location filename="Forms/OptionsWindow.ui" line="4435"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>Bu komut, alan içeriği silinmeden önce çalıştırılacaktır</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4042"/>
+        <location filename="Forms/OptionsWindow.ui" line="4275"/>
         <source>On File Recovery</source>
         <translation>Dosya Kurtarmada</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4167"/>
+        <location filename="Forms/OptionsWindow.ui" line="4400"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <translation>Bu komut, bir dosya kurtarılmadan önce çalıştırılacak ve dosya yolu ilk bağımsız değişken olarak aktarılacaktır. Bu komut 0&apos;dan başka bir değer döndürürse, kurtarma işlemi engellenecektir</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4170"/>
+        <location filename="Forms/OptionsWindow.ui" line="4403"/>
         <source>Run File Checker</source>
         <translation>Dosya Denetleyicisini Gir</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4100"/>
+        <location filename="Forms/OptionsWindow.ui" line="4333"/>
         <source>On Delete Content</source>
         <translation>İçerik Silmede</translation>
     </message>
@@ -7490,37 +7765,37 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1439"/>
-        <location filename="Forms/OptionsWindow.ui" line="4350"/>
+        <location filename="Forms/OptionsWindow.ui" line="4583"/>
         <source>Process</source>
         <translation>İşlem</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3936"/>
+        <location filename="Forms/OptionsWindow.ui" line="4169"/>
         <source>Add Option</source>
         <translation>Seçenek Ekle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3950"/>
+        <location filename="Forms/OptionsWindow.ui" line="4183"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <translation>Burada, uyumluluğu artırmak veya korumalı alan davranışını özelleştirmek için işlem başına gelişmiş seçenekleri yapılandırabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3961"/>
+        <location filename="Forms/OptionsWindow.ui" line="4194"/>
         <source>Option</source>
         <translation>Seçenek</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4132"/>
+        <location filename="Forms/OptionsWindow.ui" line="4365"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation>Bu komutlar korumalı alandaki tüm işlemler sonlandıktan sonra ALAN DIŞINDAN çalıştırılır.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4461"/>
+        <location filename="Forms/OptionsWindow.ui" line="4694"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>API çağrısı İzleme (tüm SBIE kancalarını izler)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4468"/>
+        <location filename="Forms/OptionsWindow.ui" line="4701"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>Tüm SetError Mesajlarını İzleme Günlüğüne Kaydet (Çok fazla çıktı oluşturur)</translation>
     </message>
@@ -7535,32 +7810,37 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <translation>Panoya okuma erişimini engelle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3674"/>
+        <location filename="Forms/OptionsWindow.ui" line="3907"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>Tüm işlemler için korumalı alan pencere istasyonunu taklit et</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4631"/>
+        <location filename="Forms/OptionsWindow.ui" line="4796"/>
+        <source>DNS Request Logging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="4871"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>Syscall İzleme (Çok fazla çıktı oluşturur)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4820"/>
+        <location filename="Forms/OptionsWindow.ui" line="5060"/>
         <source>Add Template</source>
         <translation>Şablon Ekle</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4846"/>
+        <location filename="Forms/OptionsWindow.ui" line="5086"/>
         <source>Open Template</source>
         <translation>Şablonu Aç</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4892"/>
+        <location filename="Forms/OptionsWindow.ui" line="5132"/>
         <source>Template Folders</source>
         <translation>Şablon Klasörleri</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4912"/>
+        <location filename="Forms/OptionsWindow.ui" line="5152"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -7569,28 +7849,28 @@ Please note that this values are currently user specific and saved globally for 
 Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için global olarak kaydedildiğini unutmayın.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3971"/>
-        <location filename="Forms/OptionsWindow.ui" line="4943"/>
+        <location filename="Forms/OptionsWindow.ui" line="4204"/>
+        <location filename="Forms/OptionsWindow.ui" line="5183"/>
         <source>Value</source>
         <translation>Değer</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4954"/>
+        <location filename="Forms/OptionsWindow.ui" line="5194"/>
         <source>Accessibility</source>
         <translation>Erişilebilirlik</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5050"/>
+        <location filename="Forms/OptionsWindow.ui" line="5290"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>Kaybedilen korumayı telafi etmek için lütfen Güvenlik Seçenekleri &gt; Güvenlik Sıkılaştırması altındaki Yetkilendirme Kısıtlamaları bölümü Hak Bırakma ayarlarına bakın.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4974"/>
+        <location filename="Forms/OptionsWindow.ui" line="5214"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Ekran Okuyucuları: JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5014"/>
+        <location filename="Forms/OptionsWindow.ui" line="5254"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>Aşağıdaki ayarlar, Sandboxie&apos;nin erişilebilirlik yazılımıyla birlikte kullanılmasını sağlar. Lütfen bu ayarlar etkin olduğunda Sandboxie korumasının bir kısmının ister istemez kaybedildiğini unutmayın.</translation>
     </message>
@@ -7605,12 +7885,12 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <translation>Windows Güvenlik Hesap Yöneticisine açık erişim</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4590"/>
+        <location filename="Forms/OptionsWindow.ui" line="4830"/>
         <source>Disable Resource Access Monitor</source>
         <translation>Kaynak Erişim İzleyicisini Devre Dışı Bırak</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4482"/>
+        <location filename="Forms/OptionsWindow.ui" line="4715"/>
         <source>Resource Access Monitor</source>
         <translation>Kaynak Erişim İzleyicisi</translation>
     </message>
@@ -7703,17 +7983,20 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <location filename="Forms/OptionsWindow.ui" line="617"/>
         <location filename="Forms/OptionsWindow.ui" line="1444"/>
         <location filename="Forms/OptionsWindow.ui" line="3303"/>
-        <location filename="Forms/OptionsWindow.ui" line="4119"/>
+        <location filename="Forms/OptionsWindow.ui" line="4352"/>
         <source>Action</source>
         <translation>Eylem</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3308"/>
+        <location filename="Forms/OptionsWindow.ui" line="3476"/>
         <source>Port</source>
         <translation>Bağlantı Noktası</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3313"/>
+        <location filename="Forms/OptionsWindow.ui" line="3420"/>
+        <location filename="Forms/OptionsWindow.ui" line="3471"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
@@ -7723,7 +8006,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <translation>Protokol</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3340"/>
+        <location filename="Forms/OptionsWindow.ui" line="3339"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>DİKKAT: Windows Filtreleme Platformu sürücü ile etkinleştirilmemiştir, bu nedenle bu kurallar yalnızca kullanıcı modunda uygulanacaktır ve zorlanmaz! Bu, kötü amaçlı uygulamaların bunları atlayabileceği anlamına gelir.</translation>
     </message>
@@ -7739,7 +8022,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3199"/>
-        <location filename="Forms/OptionsWindow.ui" line="4556"/>
+        <location filename="Forms/OptionsWindow.ui" line="4789"/>
         <source>Network Firewall</source>
         <translation>Ağ Güvenlik Duvarı</translation>
     </message>
@@ -7769,7 +8052,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <translation>Windows Kimlik Bilgileri Deposunu aç (Kullanıcı modu)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3361"/>
+        <location filename="Forms/OptionsWindow.ui" line="3675"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
         <translation>Ağ ve güvenlik duvarı parametrelerinde değişikliği engelle (Kullanıcı modu)</translation>
     </message>
@@ -7867,61 +8150,61 @@ The process match level has a higher priority than the specificity and describes
 İşlem eşleştirme düzeyi, özgüllükten daha yüksek bir önceliğe sahiptir ve bir kuralın belirli bir işleme nasıl uygulanacağını tanımlar. İşlem adına veya grubuna göre uygulanan kurallar en güçlü eşleştirme düzeyine sahiptir. Ardından olumsuzlama ile eşleştirme gelir, yani belirtilen işlem dışındaki tüm işlemlere uygulanan kurallara aittir; en düşük eşleştirme düzeyleri ise genel eşleştirmelere, yani herhangi bir işleme uygulanan kurallara aittir.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3695"/>
+        <location filename="Forms/OptionsWindow.ui" line="3928"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>Varsayılan olarak RpcMgmtSetComTimeout kullanımını devre dışı bırak (Uyumluluk sorunlarını çözebilir)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4002"/>
+        <location filename="Forms/OptionsWindow.ui" line="4235"/>
         <source>Triggers</source>
         <translation>Tetikleyiciler</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4114"/>
+        <location filename="Forms/OptionsWindow.ui" line="4347"/>
         <source>Event</source>
         <translation>Olay</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4064"/>
-        <location filename="Forms/OptionsWindow.ui" line="4205"/>
-        <location filename="Forms/OptionsWindow.ui" line="4250"/>
-        <location filename="Forms/OptionsWindow.ui" line="4269"/>
+        <location filename="Forms/OptionsWindow.ui" line="4297"/>
+        <location filename="Forms/OptionsWindow.ui" line="4438"/>
+        <location filename="Forms/OptionsWindow.ui" line="4483"/>
+        <location filename="Forms/OptionsWindow.ui" line="4502"/>
         <source>Run Command</source>
         <translation>Komut Gir</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4231"/>
+        <location filename="Forms/OptionsWindow.ui" line="4464"/>
         <source>Start Service</source>
         <translation>Hizmeti Gir</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4177"/>
+        <location filename="Forms/OptionsWindow.ui" line="4410"/>
         <source>These events are executed each time a box is started</source>
         <translation>Bu olaylar, bir alan her başlatıldığında yürütülür</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4180"/>
+        <location filename="Forms/OptionsWindow.ui" line="4413"/>
         <source>On Box Start</source>
         <translation>Alan Başlangıcında</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4039"/>
-        <location filename="Forms/OptionsWindow.ui" line="4097"/>
+        <location filename="Forms/OptionsWindow.ui" line="4272"/>
+        <location filename="Forms/OptionsWindow.ui" line="4330"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>Bu komutlar alan içeriği silinmeden hemen önce ALAN DIŞINDAN çalıştırılır</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4071"/>
+        <location filename="Forms/OptionsWindow.ui" line="4304"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>Bu komutlar yalnızca bir alan ilk kullanıma hazırlandığında yürütülür. Tekrar çalışması için alan içeriğinin silinmesi gerekir.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4074"/>
+        <location filename="Forms/OptionsWindow.ui" line="4307"/>
         <source>On Box Init</source>
         <translation>Alan İlk Kullanımında</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4145"/>
+        <location filename="Forms/OptionsWindow.ui" line="4378"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>Burada, çeşitli alan olaylarında otomatik olarak yürütülecek eylemleri belirleyebilirsiniz.</translation>
     </message>
@@ -7936,7 +8219,7 @@ The process match level has a higher priority than the specificity and describes
         <translation>Bir işlem erişimi reddedildiğinde 2111 mesajını yayınla</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3742"/>
+        <location filename="Forms/OptionsWindow.ui" line="3975"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <translation>İç içe iş nesnelerinin kullanımına izin ver (Windows 8 ve sonraki sürümlerde çalışır)</translation>
     </message>
@@ -9062,6 +9345,136 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>
         <source>Default snapshot</source>
         <translation>Varsayılan anlık görüntü</translation>
+    </message>
+</context>
+<context>
+    <name>TestProxyDialog</name>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="20"/>
+        <source>Test Proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="69"/>
+        <source>Test Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="82"/>
+        <source>Testing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="117"/>
+        <source>Proxy Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="127"/>
+        <source>Address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="134"/>
+        <source>127.0.0.1:80</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="144"/>
+        <source>Protocol:</source>
+        <translation type="unfinished">Protokol:</translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="151"/>
+        <source>SOCKS 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="158"/>
+        <source>Authentication:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="165"/>
+        <source>NO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="172"/>
+        <source>Login:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="179"/>
+        <source>username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="242"/>
+        <source>Timeout (secs):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="249"/>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="274"/>
+        <source>Test 1: Connection to the Proxy Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="280"/>
+        <location filename="Forms/TestProxyDialog.ui" line="302"/>
+        <location filename="Forms/TestProxyDialog.ui" line="388"/>
+        <source>Enable this test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="293"/>
+        <source>Test 2: Connection through the Proxy Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="330"/>
+        <source>Target host:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="340"/>
+        <source>www.google.com</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="350"/>
+        <source>Port:</source>
+        <translation type="unfinished">Bağlantı Noktası:</translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="360"/>
+        <source>80</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="369"/>
+        <source>Load a default web page from the host. (There must be a web server running on the host)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="382"/>
+        <source>Test 3: Proxy Server latency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="416"/>
+        <source>Ping count:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/TestProxyDialog.ui" line="457"/>
+        <source>Increase ping count to improve the accuracy of the average latency calculation. More pings help to ensure that the average is representative of typical network conditions.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

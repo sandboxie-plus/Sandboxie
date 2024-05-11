@@ -2168,7 +2168,7 @@ SB_RESULT(QByteArray) CSbieAPI::RC4Crypt(const QByteArray& Data)
 		return SB_ERR(ERROR_SERVER_DISABLED);
 	if (rpl->h.status != 0)
 		return SB_ERR(rpl->h.status);
-	return CSbieResult(QByteArray((char*)rpl->value, rpl->value_len));
+	return CSbieResult<QByteArray>(QByteArray((char*)rpl->value, rpl->value_len));
 }
 
 bool CSbieAPI::GetDriverInfo(quint32 InfoClass, void* pBuffer, size_t Size)

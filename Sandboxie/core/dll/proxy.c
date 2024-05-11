@@ -78,7 +78,7 @@ _FX BOOLEAN socks5_handshake(SOCKET s, BOOLEAN auth, WCHAR login[SOCKS_AUTH_MAX_
     if (auth) 
         req[3] = SOCKS_USERNAME_PASSWORD;
 
-    if (__sys_send(s, req, 3 + auth, 0) != sizeof(req))
+    if (__sys_send(s, req, (3 + auth), 0) != (3 + auth))
         goto on_error;
 
     char res[2];

@@ -2,5 +2,7 @@
 * Missing Messages in Text-SimpChinese-2052.txt
 *==========
 
-There are no missing messages.
+2360;pop;err;01
+SBIE2360 Failed to inject SOCKS5 proxy:  %2
+.
 

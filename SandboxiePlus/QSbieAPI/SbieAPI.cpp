@@ -2150,6 +2150,27 @@ void CSbieAPI::ClearPassword()
 	m->Password.clear();
 }
 
+SB_RESULT(QByteArray) CSbieAPI::RC4Crypt(const QByteArray& Data)
+{
+	ULONG req_len = sizeof(SBIE_INI_RC4_CRYPT_REQ) + Data.size();
+	SScoped<SBIE_INI_RC4_CRYPT_REQ> req(malloc(req_len));
+
+	req->h.length = req_len;
+	req->h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
+	req->value_len = Data.size();
+	memcpy(req->value, Data.constData(), req->value_len);
+	
+	SScoped<SBIE_INI_RC4_CRYPT_RPL> rpl;
+	SB_STATUS Status = CallServer(&req->h, &rpl);
+	if (!Status)
+		return Status;
+	if (!rpl) 
+		return SB_ERR(ERROR_SERVER_DISABLED);
+	if (rpl->h.status != 0)
+		return SB_ERR(rpl->h.status);
+	return CSbieResult(QByteArray((char*)rpl->value, rpl->value_len));
+}
+
 bool CSbieAPI::GetDriverInfo(quint32 InfoClass, void* pBuffer, size_t Size)
 {
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];

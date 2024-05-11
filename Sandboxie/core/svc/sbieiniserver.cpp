@@ -33,6 +33,9 @@
 #include "common/my_version.h"
 #define CRC_HEADER_ONLY
 #include "common/crc.c"
+#define RC4_HEADER_ONLY
+#include "common/rc4.c"
+#include "core/drv/api_defs.h"
 
 #ifdef NEW_INI_MODE
 extern "C" {
@@ -145,6 +148,11 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
     if (msg->msgid == MSGID_SBIE_INI_RUN_SBIE_CTRL) {
 
         return RunSbieCtrl(msg, idProcess, NT_SUCCESS(status));
+    }
+
+    if (msg->msgid == MSGID_SBIE_INI_RC4_CRYPT) {
+
+        return RC4Crypt(msg, idProcess, NT_SUCCESS(status));
     }
 
     if (NT_SUCCESS(status))     // if sandboxed
@@ -2391,4 +2399,37 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
         CloseHandle(hToken);
 
     return SHORT_REPLY(status);
+}
+
+
+//---------------------------------------------------------------------------
+// RC4Crypt
+//---------------------------------------------------------------------------
+
+
+MSG_HEADER *SbieIniServer::RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed)
+{
+    SBIE_INI_RC4_CRYPT_REQ *req = (SBIE_INI_RC4_CRYPT_REQ *)msg;
+    if (req->h.length < sizeof(SBIE_INI_RC4_CRYPT_REQ))
+        return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    ULONG rpl_len = sizeof(SBIE_INI_RC4_CRYPT_RPL) + req->value_len;
+    SBIE_INI_RC4_CRYPT_RPL *rpl = (SBIE_INI_RC4_CRYPT_RPL *)LONG_REPLY(rpl_len);
+    if (!rpl) 
+        return SHORT_REPLY(STATUS_INSUFFICIENT_RESOURCES);
+
+    rpl->value_len = req->value_len;
+    memcpy(rpl->value, req->value, req->value_len);
+
+    ULONG64 RandID = 0;
+    SbieApi_Call(API_GET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
+    if (RandID == 0) {
+		srand(GetTickCount());
+        RandID = ULONG64(rand() & 0xFFFF) | (ULONG64(rand() & 0xFFFF) << 16) | (ULONG64(rand() & 0xFFFF) << 32) | (ULONG64(rand() & 0xFFFF) << 48);
+        SbieApi_Call(API_SET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
+    }
+
+    rc4_crypt((BYTE*)&RandID, sizeof(RandID), 0x1000, rpl->value, rpl->value_len);
+
+    return (MSG_HEADER*)rpl;
 }

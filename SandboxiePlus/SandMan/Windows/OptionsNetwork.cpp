@@ -986,6 +986,12 @@ void COptionsWindow::ParseAndAddNetProxy(const QString& Value, bool disabled, co
 	pItem->setData(4, Qt::UserRole, Login);
 
 	QString Pass = Tags.value("password");
+	if(Pass.isEmpty()) {
+		Pass = Tags.value("encryptedpw");
+		auto res = theAPI->RC4Crypt(QByteArray::fromBase64(Pass.toLatin1()));
+		if (!res.IsError())
+			Pass = QString::fromWCharArray((wchar_t*)res.GetValue().data(), res.GetValue().length() / sizeof(wchar_t));
+	}		
 	if (Pass.length() > 255) Pass = Pass.left(255);
 	pItem->setText(5, Pass);
 	pItem->setData(5, Qt::UserRole, Pass);
@@ -1024,7 +1030,13 @@ void COptionsWindow::SaveNetProxy()
 		Tags.append("Port=" + Port);
 		if (!Auth.isEmpty()) Tags.append("Auth=" + Auth);
 		if (!Login.isEmpty()) Tags.append("Login=" + Login);
-		if (!Pass.isEmpty()) Tags.append("Password=" + Pass);
+		if (!Pass.isEmpty()) {
+			auto res = theAPI->RC4Crypt(QByteArray((char*)Pass.toStdWString().c_str(), Pass.length() * sizeof(wchar_t)));
+			if(res.IsError())
+				Tags.append("Password=" + Pass);
+			else
+				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::OmitTrailingEquals));
+		}
 		QString Entry = Tags.join(";").prepend(Program + ",");
 
 		if (pItem->checkState(0) == Qt::Checked)

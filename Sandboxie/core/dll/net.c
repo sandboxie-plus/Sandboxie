@@ -31,6 +31,8 @@
 #include "common/map.h"
 #include "common/str_util.h"
 #include "wsa_defs.h"
+#include "core/svc/sbieiniwire.h"
+#include "common/base64.c"
 
 
 //---------------------------------------------------------------------------
@@ -1245,12 +1247,39 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
 
     WCHAR* pass_value;
     ULONG pass_len;
-    if (SbieDll_FindTagValuePtr(found_value, L"Password", &pass_value, &pass_len, L'=', L';')) {
+    BOOLEAN ok = SbieDll_FindTagValuePtr(found_value, L"Password", &pass_value, &pass_len, L'=', L';');
+    if (ok) {
         if (pass_len > 255)
             return FALSE;
         wmemcpy(proxy->pass, pass_value, pass_len);
         proxy->pass[pass_len] = L'\0';
     }
+    else {
+        ok = SbieDll_FindTagValuePtr(found_value, L"EncryptedPW", &pass_value, &pass_len, L'=', L';');
+        if (ok) {
+
+            SBIE_INI_RC4_CRYPT_REQ req;
+            SBIE_INI_RC4_CRYPT_RPL *rpl;
+
+            req.h.length = sizeof(SBIE_INI_RC4_CRYPT_REQ) + 255;
+            req.h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
+            req.value_len = b64_decoded_size(pass_value);
+            b64_decode(pass_value, req.value, req.value_len);
+
+            rpl = (SBIE_INI_RC4_CRYPT_RPL *)SbieDll_CallServer(&req.h);
+            if (rpl){
+
+                pass_len = rpl->value_len / sizeof(wchar_t);
+                if (pass_len > 255)
+                    return FALSE;
+                wmemcpy(proxy->pass, rpl->value, pass_len);
+                proxy->pass[pass_len] = L'\0';
+
+                Dll_Free(rpl);
+            }
+        }
+    }
+
 
     return TRUE;
 }

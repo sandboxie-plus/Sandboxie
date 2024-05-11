@@ -733,6 +733,10 @@ SBIE2332 无法访问文件 SbiePst.dat
 SBIE2335 进程 %2 初始化失败
 .
 
+2360;pop;err;01
+SBIE2360 注入 SOCKS5 代理失败:  %2
+.
+
 2336;pop;err;01
 SBIE2336 GUI 服务器出错:  %2
 .

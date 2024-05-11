@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>7</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -3090,7 +3090,7 @@ The process match level has a higher priority than the specificity and describes
          <item row="1" column="0">
           <widget class="QTabWidget" name="tabsInternet">
            <property name="currentIndex">
-            <number>2</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabINet">
             <attribute name="title">
@@ -3331,6 +3331,7 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblNoWfp">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3442,6 +3443,42 @@ The process match level has a higher priority than the specificity and describes
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_15">
+               <item row="4" column="1">
+                <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <property name="spacing">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <item>
+                    <widget class="QPushButton" name="btnMoveProxyUp">
+                     <property name="text">
+                      <string>Move Up</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <item>
+                    <widget class="QPushButton" name="btnMoveProxyDown">
+                     <property name="text">
+                      <string>Move Down</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item row="7" column="1">
+                <widget class="QPushButton" name="btnDelProxy">
+                 <property name="text">
+                  <string>Remove</string>
+                 </property>
+                </widget>
+               </item>
                <item row="1" column="1">
                 <widget class="QPushButton" name="btnAddProxy">
                  <property name="text">
@@ -3449,14 +3486,37 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QPushButton" name="btnTestProxy">
+               <item row="5" column="1">
+                <spacer name="verticalSpacer_41">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_18">
                  <property name="text">
-                  <string>Test Proxy</string>
+                  <string>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0" rowspan="8">
+               <item row="6" column="1">
+                <widget class="QCheckBox" name="chkProxyResolveHostnames">
+                 <property name="text">
+                  <string>Resolve hostnames via proxy</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" rowspan="7">
                 <widget class="QTreeWidget" name="treeProxy">
                  <property name="sortingEnabled">
                   <bool>false</bool>
@@ -3493,68 +3553,6 @@ The process match level has a higher priority than the specificity and describes
                  </column>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_18">
-                 <property name="text">
-                  <string>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <layout class="QVBoxLayout" name="verticalLayout_3">
-                 <property name="spacing">
-                  <number>2</number>
-                 </property>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_4">
-                   <item>
-                    <widget class="QPushButton" name="btnMoveProxyUp">
-                     <property name="text">
-                      <string>Move Up</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_5">
-                   <item>
-                    <widget class="QPushButton" name="btnMoveProxyDown">
-                     <property name="text">
-                      <string>Move Down</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </item>
-               <item row="7" column="1">
-                <widget class="QCheckBox" name="chkEncryptProxyPass">
-                 <property name="enabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="text">
-                  <string>Encrypt Passwords</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
-                <spacer name="verticalSpacer_41">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
                <item row="3" column="1">
                 <spacer name="verticalSpacer_33">
                  <property name="orientation">
@@ -3568,17 +3566,10 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-               <item row="8" column="1">
-                <widget class="QPushButton" name="btnDelProxy">
+               <item row="2" column="1">
+                <widget class="QPushButton" name="btnTestProxy">
                  <property name="text">
-                  <string>Remove</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1">
-                <widget class="QCheckBox" name="chkProxyResolveHostnames">
-                 <property name="text">
-                  <string>Resolve hostnames via proxy</string>
+                  <string>Test Proxy</string>
                  </property>
                 </widget>
                </item>
@@ -3631,6 +3622,7 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblPorts">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3657,6 +3649,7 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblNetwork">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>

@@ -2305,6 +2305,19 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 			AddAsyncOp(pProgress, true, tr("Executing OnBoxTerminate: %1").arg(Value2));
 		}
 	}
+
+	QStringList *bDel=new QStringList(),list= pBox->GetTextList("Template", FALSE);
+	foreach(const QString& Value2, list) {
+		if (tr("Template_Temp_").compare(Value2.left(14)) == 0)
+		{
+			bDel->append(Value2);
+		}
+	}
+	foreach(const QString& Value3, *bDel) {
+		list.removeAt(list.indexOf(Value3));
+	}
+	pBox->UpdateTextList("Template", list,FALSE);
+
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))

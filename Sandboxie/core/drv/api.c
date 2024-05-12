@@ -1301,11 +1301,6 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
 {
     NTSTATUS status = STATUS_SUCCESS;
     API_QUERY_DRIVER_INFO_ARGS *args = (API_QUERY_DRIVER_INFO_ARGS *)parms;
-	
-    if (proc) {
-        status = STATUS_NOT_IMPLEMENTED;
-        goto finish;
-    }
 
     __try {
 
@@ -1385,7 +1380,6 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
         status = GetExceptionCode();
     }
 
-finish:
     return status;
 }
 

@@ -10,13 +10,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Add option to limit the memory of sandboxed process and the number of process in single sandbox through job object. (thanks Yeyixiao)
+  -Use "TotalMemoryLimit"(Number,limit whole sandbox) and "ProcessMemoryLimit"(Number,limit single process) to set.
 - Add ability to modified sandboxed process logic speed (reduced fixed latency, modified single-player speed, etc.) (thanks Yeyixiao)
+  -Use "UseChangeSpeed=y" to open this feature,use "AddTickSpeed"/"AddSleepSpeed"/"AddTimerSpeed"/"LowTickSpeed"/"LowSleepSpeed"/"LowTimerSpeed"(Number) to set.
+  -When set "AddSleepSpeed=0",all Sleep funcation call will be skip.
 - Added /fcp /force_children commandline option to start.exe it allows to start a program unsandboxed but have all its children sandboxed
 
 - added ability to fore sandboxed processes to use a pre defined socks 5 proxy
 - added ability to intercept DNS queries such that thay can be log and/or redirected
 - added support for SOCKS5 proxy authentication based on RFC1928 (thanks Deezzir)
 - added Test Dialog UI for SOCKS5 proxy (thanks Deezzir)
+- added ability to automatically removes template references that begin with “Template_Temp_” in the sandbox.
 
 ### Changed
 - validated compatybility with windows build 26212 and updated dyn data

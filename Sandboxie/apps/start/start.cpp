@@ -1925,7 +1925,6 @@ int __stdcall WinMainCRTStartup(
     return die(rc);
 }
 #include <psapi.h>
-#include <winternl.h>
 #include <Shlwapi.h>
 DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD ErrCodeForBuffer) {
 

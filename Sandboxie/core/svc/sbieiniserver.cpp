@@ -2409,6 +2409,18 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
 
 MSG_HEADER *SbieIniServer::RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed)
 {
+    //
+    // The purpose of this function is to provide a simple machien bound obfuscation
+    // for example to store passwords which are required in plain text.
+    // To this end we use a Random 64 bit key which is generated once and stored in the registry
+    // as well as the rc4 algorythm for the encryption, applying the same transformation twice 
+    // yealds the original plaintext, hence only one function is sufficient.
+    // 
+    // Please note that neider the mechanism nor the use rc4 algorythm can be considdered 
+    // cryptographically secure by any means.
+    // This mechanism is only good for simple obfuscation of non critical data.
+    //
+
     SBIE_INI_RC4_CRYPT_REQ *req = (SBIE_INI_RC4_CRYPT_REQ *)msg;
     if (req->h.length < sizeof(SBIE_INI_RC4_CRYPT_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);

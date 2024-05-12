@@ -161,6 +161,7 @@ _FX BOX *Process_GetForcedStartBox(
     ULONG alert;
     BOOLEAN check_force;
     BOOLEAN is_start_exe;
+    BOOLEAN image_sbie;
     BOOLEAN force_alert;
     BOOLEAN dfp_already_added;
     BOOLEAN same_image_name;
@@ -248,7 +249,7 @@ _FX BOX *Process_GetForcedStartBox(
         // when the process is start.exe we ignore the CurDir and DocArg
         //
 
-        Process_IsSbieImage(ImagePath, NULL, &is_start_exe);
+        Process_IsSbieImage(ImagePath, &image_sbie, &is_start_exe);
 
         if ((! box) && CurDir && !is_start_exe)
             box = Process_CheckBoxPath(&boxes, CurDir);
@@ -284,7 +285,15 @@ _FX BOX *Process_GetForcedStartBox(
                 Process_DfpInsert(PROCESS_TERMINATED, ProcessId);
         }
 
-        if (!box) {
+        //
+        // Check if the parent process has its children forced to be sandboxes
+        // exempt sandboxie components from this as start.exe can be used to 
+        // open selected processes in other boxes or set Dfp when desired.
+        // 
+        // we also must Excempt conhost.exe for console applications
+        //
+
+        if (!box && !image_sbie && _wcsicmp(ImageName, L"conhost.exe") != 0) {
 
             WCHAR boxname[BOXNAME_COUNT];
 

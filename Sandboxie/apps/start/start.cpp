@@ -60,6 +60,7 @@ extern WCHAR *DoStartMenu(void);
 extern BOOL WriteStartMenuResult(const WCHAR *MapName, const WCHAR *Command);
 extern void DeleteSandbox(
     const WCHAR *BoxName, BOOL bLogoff, BOOL bSilent, int phase);
+DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD ErrCodeForBuffer);
 
 
 extern "C" {
@@ -1892,6 +1893,20 @@ int __stdcall WinMainCRTStartup(
 
     run_program:
 
+		if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
+			WCHAR tips;
+			wprintf("Do you want to start a new program into the sandbox %s?\nYou received this message because you setted AlertBeforeStart=y.", BoxName);
+			if (MessageBox(NULL, tips, BoxName + L" Start", MB_YESNO) == IDNO)
+				die(10000);
+			else {
+				DWORD error;
+				WCHAR buf[255] = L"";
+				GetParentPIDAndName(GetCurrentProcessId(), buf, &error);
+				if (wcsstr(buf, L"sandman.exe") == NULL && wcsstr(buf, L"sbiectrl.exe") == NULL && wcsstr(buf, L"start.exe") == NULL)
+					if (MessageBox(NULL, L"This startup request does not appear to be invoked by the SANDBOXIE component. Are you sure you want to run it? If this is your action, you can ignore it and choose yes.", "Warn", MB_YESNO) == IDNO)
+						die(10000);
+			}
+		}
         start = ::GetTickCount();
 
         rc = Program_Start();
@@ -1909,7 +1924,61 @@ int __stdcall WinMainCRTStartup(
 
     return die(rc);
 }
+#include <psapi.h>
+#include <winternl.h>
+#include <Shlwapi.h>
+DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD ErrCodeForBuffer) {
 
+	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, ProcessID);
+	if (!ProcessID) {
+		return 0;
+	}
+
+
+	HMODULE hNtdll = GetModuleHandle(_T("ntdll.dll"));
+	if (!hNtdll) {
+
+		CloseHandle(hProcess);
+		return 0;
+	}
+
+	NQIP _NtQueryInformationProcess = (NQIP)GetProcAddress(hNtdll, "NtQueryInformationProcess");
+	if (!_NtQueryInformationProcess) {
+		CloseHandle(hProcess);
+		return 0;
+	}
+
+	PROCESS_BASIC_INFORMATION pbi;
+	NTSTATUS status = _NtQueryInformationProcess(
+		hProcess,
+		ProcessBasicInformation,
+		(LPVOID)&pbi, sizeof(PROCESS_BASIC_INFORMATION),
+		NULL);
+
+	DWORD dwParentID = 0;
+	if (NT_SUCCESS(status)) {
+		
+		dwParentID = (LONG_PTR)pbi.Reserved3;
+
+		if (NULL != lpszBuffer_Parent_Name) {
+			HANDLE hParentProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, dwParentID);
+			if (hParentProcess) {
+
+				DWORD bufs;
+
+				BOOL ret = QueryFullProcessImageName(hParentProcess, 0, lpszBuffer_Parent_Name, &bufs);
+				
+
+
+			}
+			if (hParentProcess)
+				CloseHandle(hParentProcess);
+		}
+	}
+
+	CloseHandle(hProcess);
+	return dwParentID;
+}
 
 int __stdcall WinMain(
     HINSTANCE hInstance,

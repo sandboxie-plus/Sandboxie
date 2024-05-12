@@ -192,15 +192,15 @@ _FX BOOLEAN WSA_InitNetDnsFilter(HMODULE module)
         WSA_FilterEnabled = TRUE;
 
         map_init(&WSA_LookupMap, Dll_Pool);
-    }
 
-    SCertInfo CertInfo = { 0 };
-    if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo))) || !CERT_IS_ADVANCED(CertInfo)) {
+        SCertInfo CertInfo = { 0 };
+        if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo))) || !CERT_IS_ADVANCED(CertInfo)) {
 
-        const WCHAR* strings[] = { L"NetworkDnsFilter" , NULL };
-        SbieApi_LogMsgExt(-1, 6009, strings);
+            const WCHAR* strings[] = { L"NetworkDnsFilter" , NULL };
+            SbieApi_LogMsgExt(-1, 6009, strings);
 
-        WSA_FilterEnabled = FALSE;
+            WSA_FilterEnabled = FALSE;
+        }
     }
 
     //

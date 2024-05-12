@@ -6254,7 +6254,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="367"/>
         <source>Invalid Port value. Please enter a value between 1 and 65535.</source>
-        <translation>Ungültiger Portwert. Bitte geben Sie eine Wert zwischen 1 und 65535 ein.</translation>
+        <translation>Ungültiger Portwert. Bitte geben Sie einen Wert zwischen 1 und 65535 ein.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="373"/>
@@ -7204,7 +7204,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3416"/>
         <source>Domain</source>
-        <translation>Dommäne</translation>
+        <translation>Domäne</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3432"/>
@@ -7239,7 +7239,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3505"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
-        <translation>Sandgeboxte Programme können dazu gezwungen werden eine vorgegebenen SOCKS5-Proxy zu verwenden.</translation>
+        <translation>Sandgeboxte Programme können dazu gezwungen werden einen vorgegebenen SOCKS5-Proxy zu verwenden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3515"/>
@@ -9477,7 +9477,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="369"/>
         <source>Load a default web page from the host. (There must be a web server running on the host)</source>
-        <translation type="unfinished">Lade eine übliche internetseite vom Host. (Auf dem Host muss ein Internetserver laufen)</translation>
+        <translation>Lade eine übliche Internetseite vom Host. (Auf dem Host muss ein Internetserver laufen)</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
@@ -9492,7 +9492,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>
         <source>Increase ping count to improve the accuracy of the average latency calculation. More pings help to ensure that the average is representative of typical network conditions.</source>
-        <translation>Erhöhen Sie den Pingzähler um die Genauigkeit der durchschnittlichen Berechnung zu verbessern. Mehr Pinganfragen helfen sicher zu stellen, dass der Durchschnitt repräsentativ für typische Netzwerkbedingungen ist.</translation>
+        <translation>Erhöhen Sie den Pingzähler um die Genauigkeit der Berechnung der durchschnittlichen Latenz zu verbessern. Mehr Pinganfragen helfen sicher zu stellen, dass der Durchschnitt repräsentativ für typische Netzwerkbedingungen ist.</translation>
     </message>
 </context>
 </TS>

@@ -1926,6 +1926,15 @@ int __stdcall WinMainCRTStartup(
 }
 #include <psapi.h>
 #include <Shlwapi.h>
+typedef
+__kernel_entry NTSTATUS
+(NTAPI* NQIP)(
+	IN HANDLE ProcessHandle,
+	IN PROCESSINFOCLASS ProcessInformationClass,
+	OUT PVOID ProcessInformation,
+	IN ULONG ProcessInformationLength,
+	OUT PULONG ReturnLength OPTIONAL
+	);
 DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD ErrCodeForBuffer) {
 
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, ProcessID);
@@ -1934,7 +1943,7 @@ DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD
 	}
 
 
-	HMODULE hNtdll = GetModuleHandle(_T("ntdll.dll"));
+	HMODULE hNtdll = GetModuleHandle(L"ntdll.dll");
 	if (!hNtdll) {
 
 		CloseHandle(hProcess);

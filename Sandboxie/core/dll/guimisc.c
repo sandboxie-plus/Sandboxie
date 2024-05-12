@@ -293,8 +293,9 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 	
 	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE)) 	{
 		P_SetTimer SetTimer = Ldr_GetProcAddrNew(DllName_user32, "SetTimer", "SetTimer");
-		if (SetTimer)
-			SBIEDLL_HOOK(Gui_, SetTimer);
+        if (SetTimer) {
+            SBIEDLL_HOOK(Gui_, SetTimer);
+        }
 	}
 	
     return TRUE;

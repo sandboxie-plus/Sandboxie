@@ -97,11 +97,13 @@ _FX BOOLEAN Kernel_Init()
 
 		SBIEDLL_HOOK(Kernel_, GetTickCount);
 		P_GetTickCount64 GetTickCount64 = Ldr_GetProcAddrNew(Dll_Kernel32, L"GetTickCount64", "GetTickCount64");
-		if (GetTickCount64)
+		if (GetTickCount64) {
 			SBIEDLL_HOOK(Kernel_, GetTickCount64);
+		}
 		P_QueryUnbiasedInterruptTime QueryUnbiasedInterruptTime = Ldr_GetProcAddrNew(Dll_Kernel32, L"QueryUnbiasedInterruptTime", "QueryUnbiasedInterruptTime");
-		if (QueryUnbiasedInterruptTime)
+		if (QueryUnbiasedInterruptTime) {
 			SBIEDLL_HOOK(Kernel_, QueryUnbiasedInterruptTime);
+		}
 		SBIEDLL_HOOK(Kernel_, QueryPerformanceCounter);
 		//SBIEDLL_HOOK(Kernel_, Sleep);
 		SBIEDLL_HOOK(Kernel_, SleepEx);	

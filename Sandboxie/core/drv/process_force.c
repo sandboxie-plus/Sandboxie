@@ -290,7 +290,7 @@ _FX BOX *Process_GetForcedStartBox(
         // exempt sandboxie components from this as start.exe can be used to 
         // open selected processes in other boxes or set Dfp when desired.
         // 
-        // we also must Excempt conhost.exe for console applications
+        // we also must excempt conhost.exe for console applications
         //
 
         if (!box && !image_sbie && _wcsicmp(ImageName, L"conhost.exe") != 0) {

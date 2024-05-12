@@ -238,6 +238,7 @@ private slots:
 
 	void OnTab() { OnTab(ui.tabs->currentWidget()); }
 	void OnAccessTab()  { OnTab(ui.tabsAccess->currentWidget()); }
+	void OnInternetTab()  { OnTab(ui.tabsInternet->currentWidget()); }
 
 	void OnGeneralChanged();
 	void OnPSTChanged();

@@ -33,6 +33,8 @@
 #include "wsa_defs.h"
 #include "core/svc/sbieiniwire.h"
 #include "common/base64.c"
+#include "core/drv/api_defs.h"
+#include "core/drv/verify.h"
 
 
 //---------------------------------------------------------------------------
@@ -1321,6 +1323,15 @@ _FX BOOLEAN WSA_InitNetProxy()
     if (!ok) {
         Dll_Free(WSA_Proxy);
         WSA_Proxy = NULL;
+        return FALSE;
+    }
+
+    SCertInfo CertInfo = { 0 };
+    if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo))) || !CERT_IS_ADVANCED(CertInfo)) {
+
+        const WCHAR* strings[] = { L"NetworkUseProxy" , NULL };
+        SbieApi_LogMsgExt(-1, 6009, strings);
+
         return FALSE;
     }
 

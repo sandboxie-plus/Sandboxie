@@ -60,6 +60,13 @@ void COptionsWindow::CreateNetwork()
 	connect(ui.chkBlockDns, SIGNAL(clicked(bool)), this, SLOT(OnBlockDns()));
 	connect(ui.chkBlockSamba, SIGNAL(clicked(bool)), this, SLOT(OnBlockSamba()));
 
+	connect(ui.tabsInternet, SIGNAL(currentChanged(int)), this, SLOT(OnInternetTab()));
+
+	if (!CERT_IS_ADVANCED(g_CertInfo)) {
+		ui.tabDNS->setEnabled(false);
+		ui.tabNetProxy->setEnabled(false);
+	}
+
 	ui.chkProxyResolveHostnames->setVisible(false);
 }
 

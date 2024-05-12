@@ -2968,13 +2968,21 @@ void CSandMan::SaveMessageLog(QIODevice* pFile)
 bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 {
 	QString Message;
-	if (iType == 1)
+	if (iType == 1 || iType == 2)
 	{
-		if (CERT_IS_LEVEL(g_CertInfo, eCertAdvanced))
-			return true;
+		if (iType == 1) {
+			if (CERT_IS_LEVEL(g_CertInfo, eCertAdvanced))
+				return true;
+		}
+		else {
+			if (CERT_IS_ADVANCED(g_CertInfo))
+				return true;
+		}
 
 		Message = tr("The selected feature requires an <b>advanced</b> supporter certificate.");
-		if(g_CertInfo.active)
+		if (iType == 2 && CERT_IS_TYPE(g_CertInfo, eCertPatreon))
+			Message.append(tr("<br />you need to be on the Great Patreon level or higher to unlock this feature."));
+		else if (g_CertInfo.active)
 			Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert\">Upgrade your Certificate</a> to unlock advanced features."));
 		else
 			Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));

@@ -2306,10 +2306,11 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 		}
 	}
 
+	QString tempValPrefix = "Temp_";
 	QStringList to_delete;
 	QStringList list = pBox->GetTextList("Template", FALSE);
 	foreach(const QString& Value, list) {
-		if (tr("Template_Temp_").compare(Value.left(14)) == 0)
+		if (tempValPrefix.compare(Value.left(5)) == 0)
 			to_delete.append(Value);
 	}
 	if (!to_delete.isEmpty()) {

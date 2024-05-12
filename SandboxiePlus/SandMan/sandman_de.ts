@@ -2187,17 +2187,17 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="795"/>
         <source>Please enter a domain to be filtered</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie eine Domäne zum Filtern ein</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="851"/>
         <source>Please enter IP and Port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie IP und Port ein.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1024"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation type="unfinished"></translation>
+        <translation> Eintrag: IP oder Port dürfen nicht leer sein</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1159"/>
@@ -6085,49 +6085,49 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
         <location filename="Windows/TestProxyDialog.cpp" line="373"/>
         <location filename="Windows/TestProxyDialog.cpp" line="379"/>
         <source>Sandboxie-Plus - Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Proxytest</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="37"/>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>N/A</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="42"/>
         <location filename="Windows/TestProxyDialog.cpp" line="308"/>
         <source>Testing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Teste...</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="62"/>
         <source>This test cannot be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Test kann nicht deaktiviert werden.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="80"/>
         <source>[%1] Starting Test 1: Connection to the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Starte Test 1: Verbindung zum Proxyserver</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="81"/>
         <source>[%1] IP Address: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] IP Adresse: %2</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="97"/>
         <source>[%1] Connection established.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Verbindung hergestellt.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="98"/>
         <location filename="Windows/TestProxyDialog.cpp" line="246"/>
         <source>[%1] Test passed.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Test bestanden.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="103"/>
         <source>[%1] Connection to proxy server failed: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Verbindung zum Proxyserver fehlgeschlagen: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="104"/>
@@ -6135,88 +6135,88 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
         <location filename="Windows/TestProxyDialog.cpp" line="252"/>
         <location filename="Windows/TestProxyDialog.cpp" line="259"/>
         <source>[%1] Test failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Test fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="114"/>
         <source>[%1] Starting Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Starte Test 2: Verbindung durch den Proxyserver</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="141"/>
         <source>[%1] Authentication was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Authentifizierung war erfolgreich.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="142"/>
         <source>[%1] Connection to %2 established through the proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Verbindung zu %2 durch den Proxyserver hergestellt.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="146"/>
         <source>[%1] Loading a web page to test the proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Lade eine Internetseite zum Testen des Proxyservers.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="152"/>
         <source>[%1] %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="157"/>
         <source>[%1] Connection through proxy server failed: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Verbindung durch den Proxyserver fehlgeschlagen: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="191"/>
         <source>[%1] Web page loaded successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Internetseite erfolgreich geladen.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="196"/>
         <source>Timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitüberschreitung</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="197"/>
         <source>[%1] Failed to load web page: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Fehler beim Laden der Internetseite: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="214"/>
         <source>[%1] Starting Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Starte Test 3: Proxyserverlatenz</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="245"/>
         <source>[%1] Latency through proxy server: %2ms.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Latenz durch den Proxyserver: %2ms.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="251"/>
         <source>[%1] Failed to get proxy server latency: Request timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Fehler beim Ermitteln der Proxyserverlatenz: Zeitüberschreitung der Anfrage.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="258"/>
         <source>[%1] Failed to get proxy server latency.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Fehler beim Ermitteln der Proxyserverlatenz.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="287"/>
         <source>[%1] Test Finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Test abgeschlossen.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="300"/>
         <location filename="Windows/TestProxyDialog.cpp" line="337"/>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestoppt</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="309"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stopp</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="312"/>
@@ -6225,42 +6225,46 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
 	Address:		%2
 	Protocol:		%3
 	Authentication:	%4%5</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Tests gestartet...
+	Proxyserver
+	Adresse:		%2
+	Protokoll:		%3
+	Authentifizierung:	%4%5</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="332"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Erneut versuchen</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="341"/>
         <source>Test Passed</source>
-        <translation type="unfinished"></translation>
+        <translation>Test bestanden</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="347"/>
         <source>Test Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Test fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="360"/>
         <source>Invalid Timeout value. Please enter a value between 1 and 60.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Zeitüberschreitungswert. Bitte geben Sie einen Wert zwischen 1 und 60 ein.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="367"/>
         <source>Invalid Port value. Please enter a value between 1 and 65535.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Portwert. Bitte geben Sie eine Wert zwischen 1 und 65535 ein.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="373"/>
         <source>Invalid Host value. Please enter a valid host name excluding &apos;http[s]://&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Hostwert. Bitte geben Sie einen gültigen Hostnamen ein, ohne &apos;http[s]://&apos;.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="379"/>
         <source>Invalid Ping Count value. Please enter a value between 1 and 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Pingzählerwert. Bitte geben Sie einen Wert zwischen 1 und 10 ein.</translation>
     </message>
 </context>
 <context>
@@ -7185,62 +7189,62 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3353"/>
         <source>DNS Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS-Filter</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3370"/>
         <source>Add Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter hinzufügen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3390"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit dem DNS-Filter können individuelle Domänen, je Prozess blockiert werden. Lassen Sie die IP-Spalte leer zum Blockieren oder geben Sie eine IP ein zum Umleiten.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3416"/>
         <source>Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>Dommäne</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3432"/>
         <source>Internet Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Internetproxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3485"/>
         <source>Add Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge Proxy hinzu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3572"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy testen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3541"/>
         <source>Auth</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentifizierung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3546"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Login</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3551"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3505"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandgeboxte Programme können dazu gezwungen werden eine vorgegebenen SOCKS5-Proxy zu verwenden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3515"/>
         <source>Resolve hostnames via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Hostnamen durch den Proxy auflösen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4361"/>
@@ -7275,7 +7279,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4789"/>
         <source>DNS Request Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS-Anfragenprotokollierung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4857"/>
@@ -9366,129 +9370,129 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="20"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy Test</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="69"/>
         <source>Test Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Test Einstellungen...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="82"/>
         <source>Testing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Teste...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="117"/>
         <source>Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxyserver</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="127"/>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="134"/>
         <source>127.0.0.1:80</source>
-        <translation type="unfinished"></translation>
+        <translation>127.0.0.1:80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="144"/>
         <source>Protocol:</source>
-        <translation type="unfinished">Protokoll:</translation>
+        <translation>Protokoll:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="151"/>
         <source>SOCKS 5</source>
-        <translation type="unfinished"></translation>
+        <translation>SOCKS 5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="158"/>
         <source>Authentication:</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentifizierung:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="165"/>
         <source>NO</source>
-        <translation type="unfinished"></translation>
+        <translation>NEIN</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="172"/>
         <source>Login:</source>
-        <translation type="unfinished"></translation>
+        <translation>Login:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="179"/>
         <source>username</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutzername</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="242"/>
         <source>Timeout (secs):</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitüberschreitung (Sek.):</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="249"/>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="274"/>
         <source>Test 1: Connection to the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 1: Verbindung zum Proxyserver</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="280"/>
         <location filename="Forms/TestProxyDialog.ui" line="302"/>
         <location filename="Forms/TestProxyDialog.ui" line="388"/>
         <source>Enable this test</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere diesen Test</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="293"/>
         <source>Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 2: Verbindung durch den Proxyserver</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="330"/>
         <source>Target host:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zielhost</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="340"/>
         <source>www.google.com</source>
-        <translation type="unfinished"></translation>
+        <translation>www.google.com</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="350"/>
         <source>Port:</source>
-        <translation type="unfinished">Port:</translation>
+        <translation>Port:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="360"/>
         <source>80</source>
-        <translation type="unfinished"></translation>
+        <translation>80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="369"/>
         <source>Load a default web page from the host. (There must be a web server running on the host)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lade eine übliche internetseite vom Host. (Auf dem Host muss ein Internetserver laufen)</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 3: Proxyserverlatenz</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>
         <source>Ping count:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pingzähler:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>
         <source>Increase ping count to improve the accuracy of the average latency calculation. More pings help to ensure that the average is representative of typical network conditions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erhöhen Sie den Pingzähler um die Genauigkeit der durchschnittlichen Berechnung zu verbessern. Mehr Pinganfragen helfen sicher zu stellen, dass der Durchschnitt repräsentativ für typische Netzwerkbedingungen ist.</translation>
     </message>
 </context>
 </TS>

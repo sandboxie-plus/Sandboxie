@@ -2306,15 +2306,15 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 		}
 	}
 
-	QStringList *bDel=new QStringList(),list= pBox->GetTextList("Template", FALSE);
-	foreach(const QString& Value, list) {
-		if (tr("Template_Temp_").compare(Value.left(14)) == 0)
+	QStringList bDel=new QStringList(),list= pBox->GetTextList("Template", FALSE);
+	foreach(const QString& Value2, list) {
+		if (tr("Template_Temp_").compare(Value2.left(14)) == 0)
 		{
-			bDel->append(Value);
+			bDel.append(Value2);
 		}
 	}
-	foreach(const QString& Value, bDel) {
-		list.removeAt(list.indexOf(Value));
+	foreach(const QString& Value3, bDel) {
+		list.removeAt(list.indexOf(Value3));
 	}
 	pBox->UpdateTextList("Template", list,FALSE);
 

@@ -1335,11 +1335,15 @@ _FX BOOL Proc_CreateProcessInternalW(
 		    lpProcessAttributes = NULL;
         }
 
+        TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", FALSE));
+
         ok = __sys_CreateProcessInternalW(
             hToken, lpApplicationName, lpCommandLine,
             lpProcessAttributes, lpThreadAttributes, bInheritHandles,
             dwCreationFlags, lpEnvironment, lpCurrentDirectory,
             lpStartupInfo, lpProcessInformation, hNewToken);
+
+        TlsData->proc_create_process_fake_admin = FALSE;
 
         err = GetLastError();
 
@@ -1410,6 +1414,7 @@ _FX BOOL Proc_CreateProcessInternalW(
         }
     }
 
+    TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", FALSE));
 
     ok = __sys_CreateProcessInternalW(
         NULL, lpApplicationName, lpCommandLine,
@@ -1419,6 +1424,7 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     err = GetLastError();
 
+    TlsData->proc_create_process_fake_admin = FALSE;
 
     //
     // restore the original owner pointers in the security descriptors

@@ -1,22 +1,21 @@
 #include "stdafx.h"
-#include "../../MiscHelpers/Common/Settings.h"
+#include "Settings.h"
 #include "MultiErrorDialog.h"
-#include "..\SandMan.h"
 
 
-CMultiErrorDialog::CMultiErrorDialog(const QString& Message, const QStringList& Errors, QWidget* parent)
+CMultiErrorDialog::CMultiErrorDialog(const QString& Title, const QString& Message, const QStringList& Errors, QWidget* parent)
 	: QDialog(parent)
 {
-	this->setWindowTitle(tr("Sandboxie-Plus - Error"));
+	this->setWindowTitle(Title);
 	m_pMainLayout = new QGridLayout(this);
 
 	int Row = 0;
 	m_pMainLayout->addWidget(new QLabel(Message), Row++, 0, 1, 4);
 
 	m_pErrors = new CPanelWidgetEx();
-	m_pErrors->GetTree()->setItemDelegate(new CTreeItemDelegate());
+	//m_pErrors->GetTree()->setItemDelegate(new CTreeItemDelegate());
 	
-	m_pErrors->GetTree()->setHeaderLabels(tr("Message").split("|"));
+	//m_pErrors->GetTree()->setHeaderLabels(tr("Message").split("|"));
 
 	m_pErrors->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	m_pErrors->GetView()->setSortingEnabled(false);
@@ -31,7 +30,7 @@ CMultiErrorDialog::CMultiErrorDialog(const QString& Message, const QStringList& 
 	connect(m_pButtonBox,SIGNAL(accepted()),this,SLOT(accept()));
 	connect(m_pButtonBox,SIGNAL(rejected()),this,SLOT(reject()));
 
-	restoreGeometry(theConf->GetBlob("ErrorWindow/Window_Geometry"));
+	//restoreGeometry(theConf->GetBlob("ErrorWindow/Window_Geometry"));
 	
 
 	foreach(const QString& Error, Errors)
@@ -47,5 +46,5 @@ CMultiErrorDialog::CMultiErrorDialog(const QString& Message, const QStringList& 
  
 CMultiErrorDialog::~CMultiErrorDialog()
 {
-	theConf->SetBlob("ErrorWindow/Window_Geometry", saveGeometry());
+	//theConf->SetBlob("ErrorWindow/Window_Geometry", saveGeometry());
 }

@@ -322,14 +322,14 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, L
         if (!NT_SUCCESS(status))
             break;
         ++index;
-
-        if (dos) 
-            SbieDll_TranslateNtToDosPath(conf_buf);
         
         ULONG level;
         WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
         if (value)
         {
+            if (dos && *value != L'*')
+                SbieDll_TranslateNtToDosPath(value);
+
             pat = Pattern_Create(Dll_Pool, value, TRUE, level);
 
             List_Insert_After(list, NULL, pat);

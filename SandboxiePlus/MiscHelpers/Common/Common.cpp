@@ -617,16 +617,16 @@ bool InitConsole(bool bCreateIfNeeded)
 // avoid flashing a bright white window when in dark mode
 //
 
-void SafeShow(QWidget* pWidget) {
-	static bool Lock = false;
-	pWidget->setProperty("windowOpacity", 0.0);
-	if (Lock == false) {
-		Lock = true;
-		pWidget->show();
-		QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers);
-		Lock = false;
-	} else
-		pWidget->show();
-	pWidget->setProperty("windowOpacity", 1.0);
-}
+//void SafeShow(QWidget* pWidget) {
+//	static bool Lock = false;
+//	pWidget->setProperty("windowOpacity", 0.0);
+//	if (Lock == false) {
+//		Lock = true;
+//		pWidget->show();
+//		QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers);
+//		Lock = false;
+//	} else
+//		pWidget->show();
+//	pWidget->setProperty("windowOpacity", 1.0);
+//}
 

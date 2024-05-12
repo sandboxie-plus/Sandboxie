@@ -118,6 +118,9 @@ SBIEDLL_EXPORT NTSTATUS File_GetName(
     HANDLE RootDirectory, UNICODE_STRING *ObjectName,
     WCHAR **OutTruePath, WCHAR **OutCopyPath, ULONG *OutFlags);
 
+static WCHAR *File_TranslateDosToNtPath2(
+    const WCHAR *DosPath, ULONG DosPathLen);
+
 static WCHAR *File_GetName_TranslateSymlinks(
     THREAD_DATA *TlsData, const WCHAR *objname_buf, ULONG objname_len,
     BOOLEAN *translated);
@@ -261,6 +264,15 @@ NTSTATUS File_SetDisposition(
 static NTSTATUS File_NtDeleteFile(OBJECT_ATTRIBUTES *ObjectAttributes);
 
 static NTSTATUS File_NtDeleteFileImpl(OBJECT_ATTRIBUTES *ObjectAttributes);
+
+static WCHAR *File_ConcatPath2(
+    const WCHAR *Path1, ULONG Path1Len, const WCHAR *Path2, ULONG Path2Len);
+
+static WCHAR* File_CanonizePath(
+    const wchar_t* absolute_path, ULONG abs_path_len, const wchar_t* relative_path, ULONG rel_path_len);
+
+static NTSTATUS File_OpenForRenameFile(
+    HANDLE* pSourceHandle, const WCHAR *TruePath);
 
 static NTSTATUS File_RenameFile(
     HANDLE FileHandle, void *info, BOOLEAN LinkOp);
@@ -6660,6 +6672,63 @@ _FX LONG File_RenameOpenFile(
 
 
 //---------------------------------------------------------------------------
+// File_OpenForRenameFile
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_OpenForRenameFile(
+    HANDLE* pSourceHandle, const WCHAR *TruePath)
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    IO_STATUS_BLOCK IoStatusBlock;
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
+
+    //
+    // open the file for write access.  this should cause the file
+    // to be migrated into the sandbox, including its parent directories
+    //
+
+    RtlInitUnicodeString(&objname, TruePath);
+
+    ++TlsData->file_dont_strip_write_access;
+
+    status = NtCreateFile(
+        pSourceHandle, FILE_GENERIC_WRITE | DELETE, &objattrs,
+        &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+        FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
+
+    if (status == STATUS_SHARING_VIOLATION ||
+        status == STATUS_ACCESS_DENIED) {
+
+        //
+        // Windows Mail opens *.eml files with a combination of
+        // FILE_SHARE_READ | FILE_SHARE_DELETE, but not FILE_SHARE_WRITE,
+        // which means we can't open them with FILE_GENERIC_WRITE
+        // during rename processing here
+        //
+        // also, for read-only files, we get an error when we open them
+        // for FILE_GENERIC_WRITE, but just DELETE should also work
+        //
+
+        status = NtCreateFile(
+            pSourceHandle, SYNCHRONIZE | DELETE, &objattrs,
+            &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+            FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
+    }
+
+    --TlsData->file_dont_strip_write_access;
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // File_RenameFile
 //---------------------------------------------------------------------------
 
@@ -6718,51 +6787,22 @@ _FX NTSTATUS File_RenameFile(
         __leave;
 
     //
-    // open the file for write access.  this should cause the file
-    // to be migrated into the sandbox, including its parent directories
+    // migrate into the sandbox, including its parent directories
     //
 
-    RtlInitUnicodeString(&objname, TruePath);
+    status = File_OpenForRenameFile(&SourceHandle, TruePath);
 
-    ++TlsData->file_dont_strip_write_access;
+    //
+    // if we still get STATUS_SHARING_VIOLATION, give up on trying
+    // to make sure the file is migrated into the sandbox, and hope
+    // that the input FileHandle is suitable for a rename operation
+    //
 
-    status = NtCreateFile(
-        &SourceHandle, FILE_GENERIC_WRITE | DELETE, &objattrs,
-        &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
-        FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
+    if (status == STATUS_SHARING_VIOLATION) {
 
-    if (status == STATUS_SHARING_VIOLATION ||
-        status == STATUS_ACCESS_DENIED) {
-
-        //
-        // Windows Mail opens *.eml files with a combination of
-        // FILE_SHARE_READ | FILE_SHARE_DELETE, but not FILE_SHARE_WRITE,
-        // which means we can't open them with FILE_GENERIC_WRITE
-        // during rename processing here
-        //
-        // also, for read-only files, we get an error when we open them
-        // for FILE_GENERIC_WRITE, but just DELETE should also work
-        //
-
-        status = NtCreateFile(
-            &SourceHandle, SYNCHRONIZE | DELETE, &objattrs,
-            &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
-            FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
-
-        //
-        // if we still get STATUS_SHARING_VIOLATION, give up on trying
-        // to make sure the file is migrated into the sandbox, and hope
-        // that the input FileHandle is suitable for a rename operation
-        //
-
-        if (status == STATUS_SHARING_VIOLATION) {
-
-            SourceHandle = FileHandle;
-            status = STATUS_SUCCESS;
-        }
+        SourceHandle = FileHandle;
+        status = STATUS_SUCCESS;
     }
-
-    --TlsData->file_dont_strip_write_access;
 
     if (! NT_SUCCESS(status))
         __leave;

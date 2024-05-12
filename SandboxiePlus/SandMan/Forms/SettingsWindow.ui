@@ -77,7 +77,7 @@
                <item>
                 <widget class="QCheckBox" name="chkSuspend">
                  <property name="text">
-                  <string>Hotkey for suspending all process</string>
+                  <string>Hotkey for suspending all processes:</string>
                  </property>
                 </widget>
                </item>
@@ -1088,20 +1088,64 @@
             <layout class="QGridLayout" name="gridLayout_32">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_31">
-               <item row="1" column="2">
-                <widget class="QComboBox" name="cmbDPI"/>
-               </item>
-               <item row="2" column="1">
-                <widget class="QLabel" name="label_24">
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_23">
                  <property name="text">
-                  <string>Font Scaling</string>
+                  <string>High DPI Scaling</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="3">
+               <item row="2" column="3">
+                <widget class="QLabel" name="label_13">
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="QLabel" name="label_26">
+                 <property name="text">
+                  <string>External Ini Editor</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>Ini Editor Font</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QComboBox" name="cmbFontScale">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="4">
+                <spacer name="horizontalSpacer_20">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="5" column="3">
                 <layout class="QHBoxLayout" name="horizontalLayout_4">
                  <item>
                   <widget class="QPushButton" name="btnSelectIniFont">
@@ -1138,8 +1182,11 @@
                  </item>
                 </layout>
                </item>
-               <item row="6" column="2">
-                <spacer name="horizontalSpacer_18">
+               <item row="1" column="2">
+                <widget class="QComboBox" name="cmbDPI"/>
+               </item>
+               <item row="7" column="0">
+                <spacer name="horizontalSpacer_17">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -1155,7 +1202,6 @@
                 <widget class="QLabel" name="lblDisplay">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1165,18 +1211,8 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="label_23">
-                 <property name="text">
-                  <string>High DPI Scaling</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="4">
-                <spacer name="horizontalSpacer_20">
+               <item row="7" column="2">
+                <spacer name="horizontalSpacer_18">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -1188,28 +1224,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="lblIni">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Ini Options</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3">
-                <widget class="QLabel" name="label_13">
-                 <property name="text">
-                  <string>%</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="3">
+               <item row="7" column="3">
                 <spacer name="horizontalSpacer_19">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1222,17 +1237,24 @@
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="1">
-                <widget class="QLabel" name="label_6">
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_24">
                  <property name="text">
-                  <string>Ini Editor Font</string>
+                  <string>Font Scaling</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1">
+               <item row="5" column="2">
+                <widget class="QLabel" name="lblIniEditFont">
+                 <property name="text">
+                  <string>#</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
                 <spacer name="verticalSpacer_10">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1245,19 +1267,8 @@
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="2">
-                <widget class="QLabel" name="lblIniEditFont">
-                 <property name="text">
-                  <string>#</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QComboBox" name="cmbFontScale">
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                </widget>
+               <item row="6" column="2" colspan="2">
+                <widget class="QLineEdit" name="txtEditor"/>
                </item>
                <item row="1" column="3">
                 <widget class="QLabel" name="label">
@@ -1266,29 +1277,23 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="0">
-                <spacer name="horizontalSpacer_17">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+               <item row="4" column="0">
+                <widget class="QLabel" name="lblIni">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="5" column="2" colspan="2">
-                <widget class="QLineEdit" name="txtEditor"/>
-               </item>
-               <item row="5" column="1">
-                <widget class="QLabel" name="label_26">
                  <property name="text">
-                  <string>External Ini Editor</string>
+                  <string>Ini Options</string>
                  </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </widget>
+               </item>
+               <item row="3" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkHide">
+                 <property name="text">
+                  <string>Hide SandMan windows from screen capture (UI restart required)</string>
                  </property>
                 </widget>
                </item>
@@ -2523,22 +2528,36 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_25">
-               <item row="4" column="2">
-                <widget class="QToolButton" name="btnDelTemplate">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="txtTemplates"/>
+               </item>
+               <item row="3" column="2">
+                <spacer name="verticalSpacer_20">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
                  </property>
-                 <property name="minimumSize">
+                 <property name="sizeHint" stdset="0">
                   <size>
-                   <width>0</width>
-                   <height>23</height>
+                   <width>20</width>
+                   <height>40</height>
                   </size>
                  </property>
+                </spacer>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_18">
                  <property name="text">
-                  <string>Remove</string>
+                  <string>Text Filter</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="2">
+                <widget class="QLabel" name="label_10">
+                 <property name="text">
+                  <string>This list contains user created custom templates for sandbox options</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -2561,30 +2580,20 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  </property>
                 </widget>
                </item>
-               <item row="3" column="2">
-                <spacer name="verticalSpacer_20">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+               <item row="4" column="2">
+                <widget class="QToolButton" name="btnOpenTemplate">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_18">
                  <property name="text">
-                  <string>Text Filter</string>
+                  <string>Open Template</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="txtTemplates"/>
-               </item>
-               <item row="2" column="0" rowspan="3" colspan="2">
+               <item row="2" column="0" rowspan="5" colspan="2">
                 <widget class="QTreeWidget" name="treeTemplates">
                  <property name="selectionMode">
                   <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -2596,15 +2605,37 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  </column>
                 </widget>
                </item>
-               <item row="0" column="0" colspan="2">
-                <widget class="QLabel" name="label_10">
-                 <property name="text">
-                  <string>This list contains user created custom templates for sandbox options</string>
+               <item row="6" column="2">
+                <widget class="QToolButton" name="btnDelTemplate">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
                  </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Remove</string>
                  </property>
                 </widget>
+               </item>
+               <item row="5" column="2">
+                <spacer name="verticalSpacer_17">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>

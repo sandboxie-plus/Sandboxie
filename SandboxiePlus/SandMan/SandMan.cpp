@@ -6,7 +6,7 @@
 #include "Views/SbieView.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include <QWinEventNotifier>
-#include "./Dialogs/MultiErrorDialog.h"
+#include "../MiscHelpers/Common/MultiErrorDialog.h"
 #include "../QSbieAPI/SbieUtils.h"
 #include "../QSbieAPI/Sandboxie/BoxBorder.h"
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
@@ -119,7 +119,7 @@ CSandMan::CSandMan(QWidget *parent)
 	: QMainWindow(parent)
 {
 #if defined(Q_OS_WIN)
-	MainWndHandle = (HWND)QWidget::winId();
+	MainWndHandle = (HWND)winId();
 
 	QApplication::instance()->installNativeEventFilter(new CNativeEventFilter);
 #endif
@@ -1594,6 +1594,23 @@ bool CSandMan::IsSilentMode()
 	if (!theConf->GetBool("Options/CheckSilentMode", true))
 		return false;
 	return IsFullScreenMode();
+}
+
+void CSandMan::SafeShow(QWidget* pWidget) 
+{
+	if(theConf->GetBool("Options/CoverWindows", false))
+		ProtectWindow((HWND)pWidget->winId());
+
+	static bool Lock = false;
+	pWidget->setProperty("windowOpacity", 0.0);
+	if (Lock == false) {
+		Lock = true;
+		pWidget->show();
+		QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers);
+		Lock = false;
+	} else
+		pWidget->show();
+	pWidget->setProperty("windowOpacity", 1.0);
 }
 
 QWidget* g_GUIParent = NULL;
@@ -4005,8 +4022,8 @@ void CSandMan::CheckResults(QList<SB_STATUS> Results, QWidget* pParent, bool bAs
 	else if (Errors.count() == 1)
 		QMessageBox::warning(pParent ? pParent : this, tr("Sandboxie-Plus - Error"), Errors.first());
 	else if (Errors.count() > 1) {
-		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors, pParent ? pParent : this);
-		Dialog.exec();
+		CMultiErrorDialog Dialog("Sandboxie-Plus", tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors, pParent ? pParent : this);
+		theGUI->SafeExec(&Dialog);
 	}
 }
 
@@ -4097,16 +4114,18 @@ bool CSandMan::IsWFPEnabled() const
 	return (g_FeatureFlags & CSbieAPI::eSbieFeatureWFP) != 0;
 }
 
-QString CSandMan::GetVersion()
+QString CSandMan::GetVersion(bool bWithUpdates)
 {
-	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) //.rightJustified(2, '0')
-//#if VERSION_REV > 0 || VERSION_MJR == 0
-		+ "." + QString::number(VERSION_REV)
-//#endif
+	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV);
+	if (bWithUpdates) {
+		int iUpdate = COnlineUpdater::GetCurrentUpdate();
+		if (iUpdate)
+			Version += QChar('a' + (iUpdate - 1));
+	}
 #if VERSION_UPD > 0
-		+ QChar('a' + VERSION_UPD - 1)
+	else
+		Version += QChar('a' + VERSION_UPD - 1);
 #endif
-		;
 	return Version;
 }
 
@@ -4289,30 +4308,39 @@ void CSandMan::OnAbout()
 {
 	if (sender() == m_pAbout)
 	{
+		if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0){
+			CSupportDialog::CheckSupport();
+			return;
+		}
+
 		QString AboutCaption = tr(
 			"<h3>About Sandboxie-Plus</h3>"
 			"<p>Version %1</p>"
-			"<p>Copyright (c) 2020-2024 by DavidXanatos</p>"
-		).arg(theGUI->GetVersion());
+			"<p>" MY_COPYRIGHT_STRING "</p>"
+		).arg(theGUI->GetVersion(true));
 
 		QString CertInfo;
-		if (!g_Certificate.isEmpty()) {
-			CertInfo = tr("This copy of Sandboxie+ is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("NAME"));
-		} else {
-			CertInfo = tr("Sandboxie+ is free for personal and non-commercial use.");
-		}
+		if (!g_Certificate.isEmpty())
+			CertInfo = tr("This copy of Sandboxie-Plus is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("NAME"));
+		else
+			CertInfo = tr("Sandboxie-Plus is free for personal and non-commercial use.");
+
+		QString SbiePath = theAPI->GetSbiePath();
 
 		QString AboutText = tr(
 			"Sandboxie-Plus is an open source continuation of Sandboxie.<br />"
 			"Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.<br />"
 			"<br />"
-			"%3<br />"
+			"%2<br />"
 			"<br />"
-			"Driver version: %1<br />"
-			"Features: %2<br />"
+			"Features: %3<br />"
+			"<br />"
+			"Installation: %1<br />"
+			"SbieDrv.sys: %4<br /> SbieSvc.exe: %5<br /> SbieDll.dll: %6<br />"
 			"<br />"
 			"Icons from <a href=\"https://icons8.com\">icons8.com</a>"
-		).arg(theAPI->GetVersion()).arg(theAPI->GetFeatureStr()).arg(CertInfo);
+		).arg(SbiePath).arg(CertInfo).arg(theAPI->GetFeatureStr())
+		.arg(GetProductVersion(SbiePath + "\\SbieDrv.sys")).arg(GetProductVersion(SbiePath + "\\SbieSvc.exe")).arg(GetProductVersion(SbiePath + "\\SbieDll.dll"));
 
 		QMessageBox *msgBox = new QMessageBox(this);
 		msgBox->setAttribute(Qt::WA_DeleteOnClose);

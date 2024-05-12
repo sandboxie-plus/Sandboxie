@@ -549,11 +549,11 @@ _FX VOID File_SavePathTree_internal(LIST* Root, const WCHAR* name, WCHAR* (*Tran
 
 
 //---------------------------------------------------------------------------
-// File_TranslateNtToDosPath2
+// File_TranslateNtToDosPathForDatFile
 //---------------------------------------------------------------------------
 
 
-_FX WCHAR* File_TranslateNtToDosPath2(const WCHAR *NtPath)
+_FX WCHAR* File_TranslateNtToDosPathForDatFile(const WCHAR *NtPath)
 {
     WCHAR *DosPath = NULL;
     ULONG len_nt;
@@ -635,7 +635,7 @@ _FX BOOLEAN File_SavePathTree()
 {
     EnterCriticalSection(File_PathRoot_CritSec);
 
-    File_SavePathTree_internal(&File_PathRoot, FILE_PATH_FILE_NAME, File_TranslateNtToDosPath2);
+    File_SavePathTree_internal(&File_PathRoot, FILE_PATH_FILE_NAME, File_TranslateNtToDosPathForDatFile);
 
     File_GetAttributes_internal(FILE_PATH_FILE_NAME, &File_PathsFileSize, &File_PathsFileDate, NULL);
 
@@ -764,14 +764,13 @@ _FX BOOLEAN File_LoadPathTree_internal(LIST* Root, const WCHAR* name, WCHAR* (*T
 
 
 //---------------------------------------------------------------------------
-// File_TranslateDosToNtPath2
+// File_TranslateDosToNtPathForDatFile
 //---------------------------------------------------------------------------
 
 
-_FX WCHAR *File_TranslateDosToNtPath2(const WCHAR *DosPath)
+_FX WCHAR *File_TranslateDosToNtPathForDatFile(const WCHAR *DosPath)
 {
     WCHAR *NtPath = NULL;
-    ULONG len_dos;
 
     if (DosPath && DosPath[0] && DosPath[1]) {
 
@@ -782,10 +781,7 @@ _FX WCHAR *File_TranslateDosToNtPath2(const WCHAR *DosPath)
             //
 
             DosPath += 2;
-            len_dos = wcslen(DosPath) + 1;
-            NtPath = Dll_Alloc((File_MupLen + len_dos) * sizeof(WCHAR));
-            wmemcpy(NtPath, File_Mup, File_MupLen);
-            wmemcpy(NtPath + File_MupLen, DosPath, len_dos);
+            NtPath = File_ConcatPath2(File_Mup, File_MupLen, DosPath, wcslen(DosPath));
 
         } else if (DosPath[0] != L'\\') {
 
@@ -815,10 +811,7 @@ _FX WCHAR *File_TranslateDosToNtPath2(const WCHAR *DosPath)
                     }
 
                     DosPath += path_pos;
-                    len_dos = wcslen(DosPath) + 1;
-                    NtPath = Dll_Alloc((drive->len + len_dos) * sizeof(WCHAR));
-                    wmemcpy(NtPath, drive->path, drive->len);
-                    wmemcpy(NtPath + drive->len, DosPath, len_dos);
+                    NtPath = File_ConcatPath2(drive->path, drive->len, DosPath, wcslen(DosPath));
 
                     LeaveCriticalSection(File_DrivesAndLinks_CritSec);
                 }
@@ -841,7 +834,7 @@ _FX BOOLEAN File_LoadPathTree()
 
     EnterCriticalSection(File_PathRoot_CritSec);
 
-    File_LoadPathTree_internal(&File_PathRoot, FILE_PATH_FILE_NAME, File_TranslateDosToNtPath2);
+    File_LoadPathTree_internal(&File_PathRoot, FILE_PATH_FILE_NAME, File_TranslateDosToNtPathForDatFile);
 
     LeaveCriticalSection(File_PathRoot_CritSec);
 
@@ -1038,7 +1031,7 @@ _FX NTSTATUS File_MarkDeleted_v2(const WCHAR* TruePath)
             HANDLE hPathsFile;
             if (File_OpenDataFile(FILE_PATH_FILE_NAME, &hPathsFile, TRUE))
             {
-                File_AppendPathEntry_internal(hPathsFile, Path, FILE_DELETED_FLAG, NULL, File_TranslateNtToDosPath2);
+                File_AppendPathEntry_internal(hPathsFile, Path, FILE_DELETED_FLAG, NULL, File_TranslateNtToDosPathForDatFile);
 
                 NtClose(hPathsFile);
 

@@ -1,13 +1,12 @@
 #pragma once
-#include "../../MiscHelpers/Common/PanelView.h"
-#include "../../QSbieAPI/SbieStatus.h"
+#include "PanelView.h"
 
-class CMultiErrorDialog : public QDialog
+class MISCHELPERS_EXPORT CMultiErrorDialog : public QDialog
 {
 	Q_OBJECT
 
 public:
-	CMultiErrorDialog(const QString& Message, const QStringList& Errors, QWidget* parent = 0);
+	CMultiErrorDialog(const QString& Title, const QString& Message, const QStringList& Errors, QWidget* parent = 0);
 	virtual ~CMultiErrorDialog();
 
 private:

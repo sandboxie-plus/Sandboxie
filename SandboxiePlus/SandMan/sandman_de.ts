@@ -3334,7 +3334,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2984"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Sie müssen auf der Stufe Great Patreon oder höher sein, um diese Funktion freizuschalten.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2996"/>

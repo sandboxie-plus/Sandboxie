@@ -241,7 +241,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">관리자 및 Power Users 그룹에서 권한 삭제</translation>
+        <translation>관리자 및 Power Users 그룹에서 권한 삭제</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
@@ -2261,17 +2261,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="802"/>
         <source>Please enter a domain to be filtered</source>
-        <translation type="unfinished"></translation>
+        <translation>필터링할 도메인을 입력하세요</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="858"/>
         <source>Please enter IP and Port.</source>
-        <translation type="unfinished"></translation>
+        <translation>IP와 포트를 입력하세요.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1031"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation type="unfinished"></translation>
+        <translation> 엔트리: IP 또는 포트는 비워 둘 수 없습니다</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1159"/>
@@ -3562,7 +3562,7 @@ Sandboxie에 대한 업데이트가 있는지 확인 부탁드립니다.</transl
     <message>
         <location filename="SandMan.cpp" line="2984"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;이 기능을 잠금 해제하려면 Great Patreon 레벨 이상이어야 합니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2996"/>
@@ -4482,22 +4482,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4325"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Sandboxie-Plus 정보&lt;/h3&gt;&lt;p&gt;버전 %1 한국어 번역: 비너스걸💋&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4333"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이 Sandboxie-Plus 사본은 다음에 대해 인증되었습니다. %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4335"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus는 개인용 및 비상업용으로 무료입니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4339"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus는 Sandboxie의 오픈 소스 연속입니다.&lt;br /&gt;더 많은 정보를 보려면 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 를 방문하세요.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;기능: %3&lt;br /&gt;&lt;br /&gt;설치: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
@@ -5702,7 +5702,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1307"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>이것은 Sandboxie-Plus 일련 번호처럼 보이지 않습니다.&lt;br /&gt;인증서의 UpdateKey 또는 서명을 입력하려고 시도했지만 올바르지 않은 경우, 위의 텍스트 영역에 전체 인증서를 대신 입력하세요.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1314"/>
@@ -6580,49 +6580,49 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/TestProxyDialog.cpp" line="373"/>
         <location filename="Windows/TestProxyDialog.cpp" line="379"/>
         <source>Sandboxie-Plus - Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 프록시 테스트</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="37"/>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>해당없음</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="42"/>
         <location filename="Windows/TestProxyDialog.cpp" line="308"/>
         <source>Testing...</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 중...</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="62"/>
         <source>This test cannot be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 테스트는 비활성화할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="80"/>
         <source>[%1] Starting Test 1: Connection to the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 테스트 1 시작: 프록시 서버에 대한 연결</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="81"/>
         <source>[%1] IP Address: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] IP 주소: %2</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="97"/>
         <source>[%1] Connection established.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 연결이 설정되었습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="98"/>
         <location filename="Windows/TestProxyDialog.cpp" line="246"/>
         <source>[%1] Test passed.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 테스트가 통과되었습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="103"/>
         <source>[%1] Connection to proxy server failed: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 프록시 서버에 연결하지 못했습니다: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="104"/>
@@ -6630,88 +6630,88 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/TestProxyDialog.cpp" line="252"/>
         <location filename="Windows/TestProxyDialog.cpp" line="259"/>
         <source>[%1] Test failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 테스트에 실패했습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="114"/>
         <source>[%1] Starting Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 테스트 2 시작: 프록시 서버를 통한 연결</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="141"/>
         <source>[%1] Authentication was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 인증에 성공했습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="142"/>
         <source>[%1] Connection to %2 established through the proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 프록시 서버를 통해 %2에 연결이 설정되었습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="146"/>
         <source>[%1] Loading a web page to test the proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 프록시 서버를 테스트하기 위해 웹 페이지를 로드하는 중입니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="152"/>
         <source>[%1] %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="157"/>
         <source>[%1] Connection through proxy server failed: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 프록시 서버를 통한 연결에 실패했습니다: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="191"/>
         <source>[%1] Web page loaded successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 웹 페이지가 성공적으로 로드되었습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="196"/>
         <source>Timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>시간 초과</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="197"/>
         <source>[%1] Failed to load web page: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 웹 페이지를 로드하지 못했습니다: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="214"/>
         <source>[%1] Starting Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 테스트 3 시작: 프록시 서버 지연 시간</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="245"/>
         <source>[%1] Latency through proxy server: %2ms.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 프록시 서버를 통한 지연 시간: %2ms.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="251"/>
         <source>[%1] Failed to get proxy server latency: Request timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 프록시 서버 대기 시간을 가져오지 못했습니다: 요청 시간 초과입니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="258"/>
         <source>[%1] Failed to get proxy server latency.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 프록시 서버 지연 시간을 가져오지 못했습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="287"/>
         <source>[%1] Test Finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 테스트가 완료되었습니다.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="300"/>
         <location filename="Windows/TestProxyDialog.cpp" line="337"/>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>중지됨</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="309"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>중지</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="312"/>
@@ -6720,42 +6720,46 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 	Address:		%2
 	Protocol:		%3
 	Authentication:	%4%5</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 테스트 시작...
+	프록시 서버
+	주소:		%2
+	프로토콜:		%3
+	인증:	%4%5</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="332"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>재시도</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="341"/>
         <source>Test Passed</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 통과</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="347"/>
         <source>Test Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 실패</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="360"/>
         <source>Invalid Timeout value. Please enter a value between 1 and 60.</source>
-        <translation type="unfinished"></translation>
+        <translation>시간 초과 값이 잘못되었습니다. 1에서 60 사이의 값을 입력하세요.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="367"/>
         <source>Invalid Port value. Please enter a value between 1 and 65535.</source>
-        <translation type="unfinished"></translation>
+        <translation>포트 값이 잘못되었습니다. 1에서 65535 사이의 값을 입력하세요.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="373"/>
         <source>Invalid Host value. Please enter a valid host name excluding &apos;http[s]://&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 호스트 값입니다. &apos;http[s]://&apos;를 제외한 올바른 호스트 이름을 입력하세요.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="379"/>
         <source>Invalid Ping Count value. Please enter a value between 1 and 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 핑 카운트 값입니다. 1에서 10 사이의 값을 입력하세요.</translation>
     </message>
 </context>
 <context>
@@ -7242,7 +7246,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="468"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation type="unfinished">마지막 샌드박스 프로세스가 종료될 때 내용 자동 삭제</translation>
+        <translation>마지막 샌드박스 처리가 종료될 때 내용 변경 자동 삭제</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="509"/>
@@ -7640,29 +7644,29 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="699"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스가 적용된 프로세스가 전원 운영을 방해하지 않도록 방지 (실험적)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="823"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>마우스를 움직이거나 앞으로 가져오는 등의 조작을 방지하면 게임에서 문제가 발생할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>
         <source>Prevent interference with the user interface (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자 인터페이스 간섭 방지(실험적)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="833"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>이 기능은 화면 캡처를 얻는 모든 수단을 차단하는 것이 아니라 일부 일반적인 수단만 차단합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="836"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 프로세스가 창 이미지를 캡처하지 못하도록 방지 (실험적, UI 결함을 유발할 수 있음)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2831"/>
@@ -8847,62 +8851,62 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3353"/>
         <source>DNS Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS 필터</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3370"/>
         <source>Add Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>필터 추가</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3390"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS 필터를 사용하면 개별 도메인을 프로세스 단위로 차단할 수 있습니다. 차단하려면 IP 열을 비워 두거나 리디렉션할 IP를 입력하세요.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3416"/>
         <source>Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>도메인</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3432"/>
         <source>Internet Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>인터넷 프록시</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3485"/>
         <source>Add Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>프록시 추가</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3572"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>프록시 테스트</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3541"/>
         <source>Auth</source>
-        <translation type="unfinished"></translation>
+        <translation>인증</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3546"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>로그인</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3551"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>암호</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3505"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스가 적용된 프로그램은 사전 설정된 SOCKS5 프록시를 사용하도록 강제할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3515"/>
         <source>Resolve hostnames via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>프록시를 통해 호스트 이름 확인</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4789"/>
@@ -8923,7 +8927,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5079"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>템플릿 열기</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5247"/>
@@ -9370,7 +9374,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">모든 프로세스를 일시 중지하는 단축키</translation>
+        <translation>모든 프로세스를 일시 중지하는 단축키:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="632"/>
@@ -9505,7 +9509,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>화면 캡처에서 SandMan 창 숨기기 (UI 재시작 필요)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1511"/>
@@ -10008,7 +10012,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2592"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>템플릿 열기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2650"/>
@@ -10190,129 +10194,129 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="20"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>프록시 테스트</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="69"/>
         <source>Test Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 설정...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="82"/>
         <source>Testing...</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 중...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="117"/>
         <source>Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>프록시 서버</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="127"/>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>주소:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="134"/>
         <source>127.0.0.1:80</source>
-        <translation type="unfinished"></translation>
+        <translation>127.0.0.1:80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="144"/>
         <source>Protocol:</source>
-        <translation type="unfinished">프로토콜:</translation>
+        <translation>프로토콜:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="151"/>
         <source>SOCKS 5</source>
-        <translation type="unfinished"></translation>
+        <translation>SOCKS 5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="158"/>
         <source>Authentication:</source>
-        <translation type="unfinished"></translation>
+        <translation>인증:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="165"/>
         <source>NO</source>
-        <translation type="unfinished"></translation>
+        <translation>없음</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="172"/>
         <source>Login:</source>
-        <translation type="unfinished"></translation>
+        <translation>로그인:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="179"/>
         <source>username</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자 이름</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="242"/>
         <source>Timeout (secs):</source>
-        <translation type="unfinished"></translation>
+        <translation>시간 초과 (초):</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="249"/>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="274"/>
         <source>Test 1: Connection to the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 1: 프록시 서버에 연결</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="280"/>
         <location filename="Forms/TestProxyDialog.ui" line="302"/>
         <location filename="Forms/TestProxyDialog.ui" line="388"/>
         <source>Enable this test</source>
-        <translation type="unfinished"></translation>
+        <translation>이 테스트 사용</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="293"/>
         <source>Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 2: 프록시 서버를 통한 연결</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="330"/>
         <source>Target host:</source>
-        <translation type="unfinished"></translation>
+        <translation>대상 호스트:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="340"/>
         <source>www.google.com</source>
-        <translation type="unfinished"></translation>
+        <translation>www.google.com</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="350"/>
         <source>Port:</source>
-        <translation type="unfinished">포트:</translation>
+        <translation>포트:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="360"/>
         <source>80</source>
-        <translation type="unfinished"></translation>
+        <translation>80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="369"/>
         <source>Load a default web page from the host. (There must be a web server running on the host)</source>
-        <translation type="unfinished"></translation>
+        <translation>호스트에서 기본 웹 페이지를 로드합니다. (호스트에서 웹 서버가 실행 중이어야 합니다.)</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>테스트 3: 프록시 서버 지연 시간</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>
         <source>Ping count:</source>
-        <translation type="unfinished"></translation>
+        <translation>핑 횟수:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>
         <source>Increase ping count to improve the accuracy of the average latency calculation. More pings help to ensure that the average is representative of typical network conditions.</source>
-        <translation type="unfinished"></translation>
+        <translation>핑 수를 늘리면 평균 지연 시간 계산의 정확도가 향상됩니다. 핑 수가 많을수록 평균이 일반적인 네트워크 상태를 대표할 수 있도록 하는 데 도움이 됩니다.</translation>
     </message>
 </context>
 </TS>

@@ -2,7 +2,5 @@
 * Missing Messages in Text-Korean-1042.txt
 *==========
 
-2360;pop;err;01
-SBIE2360 Failed to inject SOCKS5 proxy:  %2
-.
+There are no missing messages.
 

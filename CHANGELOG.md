@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added ability to automatically removes template references that begin with “Template_Temp_” in the sandbox.
 
 ### Changed
-- validated compatybility with windows build 26212 and updated dyn data
+- validated compatybility with windows build 26217 and updated dyn data
 
 ### Fixed
 - fixed an issue with an early batch of Large Supporter certificates

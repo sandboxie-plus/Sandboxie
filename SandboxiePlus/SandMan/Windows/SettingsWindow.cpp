@@ -1436,6 +1436,8 @@ QString CSettingsWindow::GetCertLevel()
 	QString CertLevel;
 	if (g_CertInfo.level == eCertAdvanced)
 		CertLevel = tr("Advanced");
+	else if (g_CertInfo.level == eCertAdvanced1)
+		CertLevel = tr("Advanced (L)");
 	else if (g_CertInfo.level == eCertMaxLevel)
 		CertLevel = tr("Max Level");
 	else if (g_CertInfo.level != eCertStandard && g_CertInfo.level != eCertStandard2)

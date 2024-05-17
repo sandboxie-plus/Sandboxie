@@ -92,6 +92,7 @@ public:
 
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
 	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
+	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), bool isFCP,QProcess* pProcess = NULL);
 	SB_STATUS			ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount = false);
 
 	void				EditIni(const QString& IniPath, bool bPlus = false);

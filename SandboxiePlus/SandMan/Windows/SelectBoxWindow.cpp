@@ -186,6 +186,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	connect(ui.radBoxed, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
 	connect(ui.radBoxedNew, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
 	connect(ui.radUnBoxed, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
+	connect(ui.radFCPRuned, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
 
 	connect(ui.buttonBox, SIGNAL(accepted()), SLOT(OnRun()));
 	connect(ui.buttonBox, SIGNAL(rejected()), SLOT(reject()));
@@ -213,13 +214,13 @@ void CSelectBoxWindow::closeEvent(QCloseEvent *e)
 
 void CSelectBoxWindow::OnBoxType()
 {
-	m_pBoxPicker->setEnabled(ui.radBoxed->isChecked());
+	m_pBoxPicker->setEnabled(ui.radBoxed->isChecked()||ui.radFCPRuned->isChecked());
 }
 
 void CSelectBoxWindow::OnRun()
 {
 	QString BoxName;
-
+	bool isFCP = false;
 	if (ui.radUnBoxed->isChecked())
 	{
 		if (QMessageBox("Sandboxie-Plus", tr("Are you sure you want to run the program outside the sandbox?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
@@ -233,6 +234,15 @@ void CSelectBoxWindow::OnRun()
 			return;
 		}
 	}
+	else if (ui.radFCPRuned->isChecked())
+	{
+		isFCP = true;
+		BoxName = m_pBoxPicker->GetBoxName();
+		if (BoxName.isEmpty()) {
+			QMessageBox("Sandboxie-Plus", tr("Please select a sandbox."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
+			return;
+		}
+	}
 	else 
 	{
 		BoxName = m_pBoxPicker->GetBoxName();
@@ -243,7 +253,7 @@ void CSelectBoxWindow::OnRun()
 	}
 
 	foreach(const QString & Command, m_Commands)
-		theGUI->RunStart(BoxName, Command, ui.chkAdmin->isChecked(), m_WrkDir);
+		theGUI->RunStart(BoxName, Command, ui.chkAdmin->isChecked(), m_WrkDir,isFCP,0);
 
 	setResult(1);
 	close();

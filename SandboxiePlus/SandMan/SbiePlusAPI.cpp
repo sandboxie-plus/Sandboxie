@@ -94,6 +94,11 @@ void CSbiePlusAPI::StopMonitor()
 
 SB_RESULT(quint32) CSbiePlusAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
+	
+	return RunStart(BoxName,Command,Elevated,WorkingDir,false,pProcess);
+}
+SB_RESULT(quint32) CSbiePlusAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, bool isFCP,QProcess* pProcess)
+{
 	if (!pProcess)
 		pProcess = new QProcess(this);
 	SB_RESULT(quint32) Status = CSbieAPI::RunStart(BoxName, Command, Elevated, WorkingDir, pProcess);

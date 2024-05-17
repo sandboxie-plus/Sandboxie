@@ -4238,7 +4238,8 @@ Click OK to close these programs and continue.  Click Cancel to abort the instal
 
 8107;txt;01
 Do you want to start a new program into the sandbox %s?
-You received this message because you setted AlertBeforeStart=y.
+You received this message because you set AlertBeforeStart=y.
+
 .
 
 8108;txt;01

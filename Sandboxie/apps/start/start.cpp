@@ -1895,15 +1895,17 @@ int __stdcall WinMainCRTStartup(
 
 		if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
 			WCHAR tips;
-			wprintf(L"Do you want to start a new program into the sandbox %s?\nYou received this message because you setted AlertBeforeStart=y.", BoxName);
+			wprintf(SbieDll_FormatMessage0(8107), BoxName);
 			if (MessageBox(NULL, tips, BoxName  L" Start", MB_YESNO) == IDNO)
 				die(10000);
 			else {
 				DWORD error;
 				WCHAR buf[255] = L"";
 				GetParentPIDAndName(GetCurrentProcessId(), buf, &error);
-				if (wcsstr(buf, L"sandman.exe") == NULL && wcsstr(buf, L"sbiectrl.exe") == NULL && wcsstr(buf, L"start.exe") == NULL)
-					if (MessageBox(NULL, L"This startup request does not appear to be invoked by the SANDBOXIE component. Are you sure you want to run it? If this is your action, you can ignore it and choose yes.", L"Warn", MB_YESNO) == IDNO)
+				WCHAR dir[1020] = L"";
+				SbieApi_GetHomePath(NULL, 0, dir, 1020);
+				if (wcsstr(buf, dir) == NULL)
+					if (MessageBox(NULL, SbieDll_FormatMessage0(8108), L"Warn", MB_YESNO) == IDNO)
 						die(10000);
 			}
 		}

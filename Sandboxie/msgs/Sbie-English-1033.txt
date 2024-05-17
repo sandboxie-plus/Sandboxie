@@ -4235,3 +4235,12 @@ This is the third and last retry.
 The following programs must be closed before the installation can continue.
 Click OK to close these programs and continue.  Click Cancel to abort the installation.
 .
+
+8107;txt;01
+Do you want to start a new program into the sandbox %s?
+You received this message because you setted AlertBeforeStart=y.
+.
+
+8108;txt;01
+This startup request does not appear to be invoked by the SANDBOXIE component. Are you sure you want to run it? If this is your action, you can ignore it and choose yes.
+.

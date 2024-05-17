@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.14.0 / 5.69.0] - 2024-05-??
+## [1.14.0 / 5.69.0] - 2024-05-17
 
 ### Added
 - Add option to limit the memory of sandboxed process and the number of process in single sandbox through job object. (thanks Yeyixiao)

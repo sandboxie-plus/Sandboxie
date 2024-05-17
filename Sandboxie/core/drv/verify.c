@@ -851,6 +851,9 @@ _FX NTSTATUS KphValidateCertificate()
                 Verify_CertInfo.type = eCertEternal;
                 Verify_CertInfo.level = eCertMaxLevel;
             }
+            else if (_wcsicmp(level, L"LARGE") == 0 && cert_date.QuadPart < KphGetDate(1, 04, 2022)) { 
+                Verify_CertInfo.level = eCertStandard2;
+            }
             else if (_wcsicmp(level, L"LARGE") == 0) { // 2 years - personal
                 if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
                     Verify_CertInfo.level = eCertStandard2;

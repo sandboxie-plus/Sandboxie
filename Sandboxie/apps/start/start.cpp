@@ -1895,7 +1895,7 @@ int __stdcall WinMainCRTStartup(
 
 		if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
 			WCHAR tips;
-			wprintf(SbieDll_FormatMessage0(8107), BoxName);
+			wprintf(SbieDll_FormatMessage0(3198), BoxName);
 			if (MessageBox(NULL, tips, BoxName  L" Start", MB_YESNO) == IDNO)
 				die(10000);
 			else {
@@ -1905,7 +1905,7 @@ int __stdcall WinMainCRTStartup(
 				WCHAR dir[1020] = L"";
 				SbieApi_GetHomePath(NULL, 0, dir, 1020);
 				if (wcsstr(buf, dir) == NULL)
-					if (MessageBox(NULL, SbieDll_FormatMessage0(8108), L"Warn", MB_YESNO) == IDNO)
+					if (MessageBox(NULL, SbieDll_FormatMessage0(3199), L"Warn", MB_YESNO) == IDNO)
 						die(10000);
 			}
 		}

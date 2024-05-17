@@ -27,8 +27,6 @@ CBoxPicker::CBoxPicker(QString DefaultBox, QWidget* parent)
 	pLayout->setContentsMargins(0, 0, 0, 0);
 	pLayout->addWidget(new CFinder(this, this, 0));
 	pLayout->insertWidget(0, m_pTreeBoxes);
-	
-	this->setMaximumWidth(300);
 
 	if(DefaultBox.isEmpty() && theAPI->IsConnected())
 		DefaultBox = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
@@ -198,12 +196,12 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 
 	m_pBoxPicker->setFocus();
 
-	//restoreGeometry(theConf->GetBlob("SelectBoxWindow/Window_Geometry"));
+	restoreGeometry(theConf->GetBlob("SelectBoxWindow/Window_Geometry"));
 }
 
 CSelectBoxWindow::~CSelectBoxWindow()
 {
-	//theConf->SetBlob("SelectBoxWindow/Window_Geometry", saveGeometry());
+	theConf->SetBlob("SelectBoxWindow/Window_Geometry", saveGeometry());
 }
 
 void CSelectBoxWindow::closeEvent(QCloseEvent *e)

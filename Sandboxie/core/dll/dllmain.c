@@ -497,6 +497,9 @@ _FX void Dll_InitInjected(void)
         ok = Proc_Init();
 
     if (ok)
+        ok = Kernel_Init();
+
+    if (ok)
         ok = Gui_InitConsole1();
 
     if (ok) // Note: Ldr_Init may cause rpcss to be started early

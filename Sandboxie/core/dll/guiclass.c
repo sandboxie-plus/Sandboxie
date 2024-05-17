@@ -193,7 +193,7 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
         }
     }
 
-    Gui_UseProtectScreen = SbieApi_QueryConfBool(NULL, L"IsProtectScreen", FALSE);
+    Gui_UseProtectScreen = SbieApi_QueryConfBool(NULL, L"CoverBoxedWindows", FALSE);
 
     //
     // hook functions

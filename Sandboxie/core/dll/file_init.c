@@ -1665,14 +1665,29 @@ _FX WCHAR *File_AllocAndInitEnvironment_2(
 
 
 //---------------------------------------------------------------------------
-// File_TranslateDosToNtPath
+// File_ConcatPath2
 //---------------------------------------------------------------------------
 
 
-_FX WCHAR *File_TranslateDosToNtPath(const WCHAR *DosPath)
+_FX WCHAR *File_ConcatPath2(const WCHAR *Path1, ULONG Path1Len, const WCHAR *Path2, ULONG Path2Len)
+{
+    ULONG Length = Path1Len + Path2Len;
+    WCHAR* Path = Dll_Alloc((Length + 1) * sizeof(WCHAR));
+    wmemcpy(Path, Path1, Path1Len);
+    wmemcpy(Path + Path1Len, Path2, Path2Len);
+    Path[Length] = L'\0';
+    return Path;
+}
+
+
+//---------------------------------------------------------------------------
+// File_TranslateDosToNtPath2
+//---------------------------------------------------------------------------
+
+
+_FX WCHAR *File_TranslateDosToNtPath2(const WCHAR *DosPath, ULONG DosPathLen)
 {
     WCHAR *NtPath = NULL;
-    ULONG len_dos;
 
     if (DosPath && DosPath[0] && DosPath[1]) {
 
@@ -1682,11 +1697,7 @@ _FX WCHAR *File_TranslateDosToNtPath(const WCHAR *DosPath)
             // network path
             //
 
-            DosPath += 2;
-            len_dos = wcslen(DosPath) + 1;
-            NtPath = Dll_Alloc((File_MupLen + len_dos) * sizeof(WCHAR));
-            wmemcpy(NtPath, File_Mup, File_MupLen);
-            wmemcpy(NtPath + File_MupLen, DosPath, len_dos);
+            NtPath = File_ConcatPath2(File_Mup, File_MupLen, DosPath + 2, DosPathLen - 2);
 
         } else if (DosPath[1] == L':' &&
                         (DosPath[2] == L'\\' || DosPath[2] == L'\0')) {
@@ -1698,11 +1709,7 @@ _FX WCHAR *File_TranslateDosToNtPath(const WCHAR *DosPath)
             FILE_DRIVE *drive = File_GetDriveForLetter(DosPath[0]);
             if (drive) {
 
-                DosPath += 2;
-                len_dos = wcslen(DosPath) + 1;
-                NtPath = Dll_Alloc((drive->len + len_dos) * sizeof(WCHAR));
-                wmemcpy(NtPath, drive->path, drive->len);
-                wmemcpy(NtPath + drive->len, DosPath, len_dos);
+                NtPath = File_ConcatPath2(drive->path, drive->len, DosPath + 2, DosPathLen - 2);
 
                 LeaveCriticalSection(File_DrivesAndLinks_CritSec);
             }
@@ -1710,6 +1717,17 @@ _FX WCHAR *File_TranslateDosToNtPath(const WCHAR *DosPath)
     }
 
     return NtPath;
+}
+
+
+//---------------------------------------------------------------------------
+// File_TranslateDosToNtPath
+//---------------------------------------------------------------------------
+
+
+_FX WCHAR *File_TranslateDosToNtPath(const WCHAR *DosPath)
+{
+    return File_TranslateDosToNtPath2(DosPath, DosPath ? wcslen(DosPath) : 0);
 }
 
 

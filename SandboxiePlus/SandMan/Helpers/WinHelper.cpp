@@ -118,3 +118,55 @@ bool PickWindowsIcon(QWidget* pParent, QString& Path, quint32& Index)
 	Path = QString::fromWCharArray(iconPath);
 	return !!Ret;
 }
+
+void ProtectWindow(void* hWnd)
+{
+    typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
+    static LPSETWINDOWDISPLAYAFFINITY pSetWindowDisplayAffinity = NULL;
+    if (!pSetWindowDisplayAffinity)
+        pSetWindowDisplayAffinity = (LPSETWINDOWDISPLAYAFFINITY)GetProcAddress(LoadLibraryA("user32.dll"), "SetWindowDisplayAffinity");
+    if (pSetWindowDisplayAffinity)
+        pSetWindowDisplayAffinity((HWND)hWnd, 0x00000011);
+}
+
+QString GetProductVersion(const QString &filePath) 
+{
+    QFileInfo check_file(filePath);
+
+    // check if file exists and if yes: Is it really a file and no directory?
+    if (check_file.exists() && check_file.isFile()) {
+        DWORD  verHandle = 0;
+        UINT   size      = 0;
+        LPBYTE lpBuffer  = NULL;
+        DWORD  verSize   = GetFileVersionInfoSize(filePath.toStdWString().c_str(), &verHandle);
+
+        if (verSize != NULL) {
+            LPSTR verData = new char[verSize];
+
+            if (GetFileVersionInfo(filePath.toStdWString().c_str(), verHandle, verSize, verData)) {
+                if (VerQueryValue(verData, L"\\", (VOID FAR* FAR*)&lpBuffer, &size)) {
+                    if (size) {
+                        VS_FIXEDFILEINFO *verInfo = (VS_FIXEDFILEINFO *)lpBuffer;
+                        if (verInfo->dwSignature == 0xfeef04bd) {
+                            // Doesn't matter if you are on 32 bit or 64 bit,
+                            // DWORD is always 32 bits, so first two revision numbers
+                            // come from dwFileVersionMS, last two come from dwFileVersionLS
+                            QString Version = QString("%1.%2.%3")
+                                .arg((verInfo->dwFileVersionMS >> 16) & 0xffff)
+                                .arg((verInfo->dwFileVersionMS >>  0) & 0xffff)
+                                .arg((verInfo->dwFileVersionLS >> 16) & 0xffff)
+                                //.arg((verInfo->dwFileVersionLS >>  0) & 0xffff)
+                                ;
+                            DWORD Update = (verInfo->dwFileVersionLS >> 0) & 0xffff;
+                            if (Update)
+                                Version += QString("%1").arg(QChar((char)('a' + (Update - 1))));
+                            return Version;
+                        }
+                    }
+                }
+            }
+            delete[] verData;
+        }
+    }
+    return QString();
+}

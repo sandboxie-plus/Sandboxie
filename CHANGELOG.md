@@ -25,6 +25,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - validated compatybility with windows build 26212 and updated dyn data
 
+### Fixed
+- fixed an issue with an early batch of Large Supporter certificates
+
 
 
 ## [1.13.7 / 5.68.7] - 2024-05-01

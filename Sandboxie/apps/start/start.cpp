@@ -1968,7 +1968,7 @@ DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD
 	DWORD dwParentID = 0;
 	if (NT_SUCCESS(status)) {
 		
-		dwParentID = (LONG_PTR)pbi.InheritedFromUniqueProcessId;
+		dwParentID = (ULONG_PTR)pbi.InheritedFromUniqueProcessId;
 
 		if (NULL != lpszBuffer_Parent_Name) {
 			HANDLE hParentProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, dwParentID);

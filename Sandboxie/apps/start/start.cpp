@@ -1974,7 +1974,7 @@ DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD
 			HANDLE hParentProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, dwParentID);
 			if (hParentProcess) {
 
-				DWORD bufs;
+				//DWORD bufs;
 				
 				BOOL ret = GetProcessImageFileNameW(hParentProcess, lpszBuffer_Parent_Name, 255);
 				

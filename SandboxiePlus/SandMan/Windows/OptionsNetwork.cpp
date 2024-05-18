@@ -822,16 +822,15 @@ COptionsWindow::EAuthMode COptionsWindow::GetAuthMode(const QString& Value)
 {
 	if (Value.compare("Yes", Qt::CaseInsensitive) == 0)
 		return eAuthEnabled;
-	//if (Value.compare("No", Qt::CaseInsensitive) == 0)
-		return eAuthDisabled;
+	return eAuthDisabled;
 }
 
 QString COptionsWindow::GetAuthModeStr(COptionsWindow::EAuthMode Mode)
 {
 	switch (Mode)
 	{
-	case eAuthEnabled:		return "Yes";
-	case eAuthDisabled:		return "No";
+	case eAuthEnabled:		return tr("Yes");
+	case eAuthDisabled:		return tr("No");
 	}
 	return "";
 }
@@ -1023,7 +1022,7 @@ void COptionsWindow::SaveNetProxy()
 		QString Program = pItem->data(0, Qt::UserRole).toString();
 		QString IP = pItem->data(1, Qt::UserRole).toString();
 		QString Port = pItem->data(2, Qt::UserRole).toString();
-		QString Auth = pItem->text(3);
+		int iAuth = pItem->data(3, Qt::UserRole).toInt();
 		QString Login = pItem->data(4, Qt::UserRole).toString();
 		QString Pass = pItem->data(5, Qt::UserRole).toString();
 
@@ -1037,7 +1036,10 @@ void COptionsWindow::SaveNetProxy()
 		if (Program.isEmpty()) Program = "*";
 		Tags.append("Address=" + IP);
 		Tags.append("Port=" + Port);
-		if (!Auth.isEmpty()) Tags.append("Auth=" + Auth);
+		switch (iAuth) {
+			case eAuthEnabled:		Tags.append("Auth=Yes"); break;
+			case eAuthDisabled:		Tags.append("Auth=No"); break;
+		}
 		if (!Login.isEmpty()) Tags.append("Login=" + Login);
 		if (!Pass.isEmpty()) {
 			auto res = theAPI->RC4Crypt(QByteArray((char*)Pass.toStdWString().c_str(), Pass.length() * sizeof(wchar_t)));

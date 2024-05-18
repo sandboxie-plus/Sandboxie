@@ -771,11 +771,11 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     registerField("imagesProtection", pImageProtection);
 
 	QCheckBox* pWindowCover = new QCheckBox(tr("Prevents the sandboxed window from being captured."));
-	pImageProtection->setToolTip(tr("This feature can cause a decline in the user experience because it also prevents normal screenshots."));
-	pImageProtection->setChecked(theConf->GetBool("BoxDefaults/CoverBoxedWindows", false));
-	pImageProtection->setEnabled(g_CertInfo.active);
-	layout->addWidget(pImageProtection, row++, 1, 1, 3);
-	registerField("coverBoxedWindows", pImageProtection);
+	pWindowCover->setToolTip(tr("This feature can cause a decline in the user experience because it also prevents normal screenshots."));
+	pWindowCover->setChecked(theConf->GetBool("BoxDefaults/CoverBoxedWindows", false));
+	pWindowCover->setEnabled(g_CertInfo.active);
+	layout->addWidget(pWindowCover, row++, 1, 1, 3);
+	registerField("coverBoxedWindows", pWindowCover);
 
 	QString SharedTemplateName = tr("Shared Template");
 	QLabel* pSharedTemplateLbl = new QLabel(tr("Shared template mode"), this);

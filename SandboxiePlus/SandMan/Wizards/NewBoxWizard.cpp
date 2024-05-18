@@ -270,6 +270,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             if(field("imagesProtection").toBool())
                 pBox->SetBool("ProtectHostImages", true);
 
+			      if (field("coverBoxedWindows").toBool())
+				        pBox->SetBool("CoverBoxedWindows", true);
+
             if (!Password.isEmpty())
                 pBox->ImBoxCreate(ImageSize / 1024, Password);
 
@@ -780,6 +783,12 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     layout->addWidget(pImageProtection, row++, 1, 1, 3);
     registerField("imagesProtection", pImageProtection);
 
+	QCheckBox* pWindowCover = new QCheckBox(tr("Prevents the sandboxed window from being captured."));
+	pWindowCover->setToolTip(tr("This feature can cause a decline in the user experience because it also prevents normal screenshots."));
+	pWindowCover->setChecked(theConf->GetBool("BoxDefaults/CoverBoxedWindows", false));
+	layout->addWidget(pWindowCover, row++, 1, 1, 3);
+	registerField("coverBoxedWindows", pWindowCover);
+
 	QString SharedTemplateName = tr("Shared Template");
 	QLabel* pSharedTemplateLbl = new QLabel(tr("Shared template mode"), this);
     pSharedTemplateLbl->setToolTip(tr("This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes."
@@ -953,6 +962,7 @@ bool CSummaryPage::validatePage()
 
         theConf->SetValue("BoxDefaults/BoxToken", field("boxToken").toBool());
         theConf->SetValue("BoxDefaults/ImagesProtection", field("imagesProtection").toBool());
+		theConf->SetValue("BoxDefaults/CoverBoxedWindows", field("coverBoxedWindows").toBool());
         theConf->SetValue("BoxDefaults/SharedTemplate", field("sharedTemplate").toInt());
     }
 

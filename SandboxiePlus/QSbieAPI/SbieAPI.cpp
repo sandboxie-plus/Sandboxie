@@ -1031,9 +1031,9 @@ QString CSbieAPI::GetUserSection(QString* pUserName, bool* pIsAdmin) const
 
 SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
-	return RunStart(BoxName, Command, Elevated, WorkingDir, false, pProcess);
+	return RunStartWithFCP(BoxName, Command,false, Elevated, WorkingDir, pProcess);
 }
-SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir,bool isFCP, QProcess* pProcess)
+SB_RESULT(quint32) CSbieAPI::RunStartWithFCP(const QString& BoxName, const QString& Command, bool isFCP,bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);

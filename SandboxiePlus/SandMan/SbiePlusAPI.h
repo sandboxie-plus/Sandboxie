@@ -32,7 +32,7 @@ public:
 	virtual void			StopMonitor();
 
 	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
-	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), bool isFCP,QProcess* pProcess = NULL);
+	virtual SB_RESULT(quint32) RunStartWithFCP(const QString& BoxName, const QString& Command, bool isFCP,bool Elevated = false, const QString& WorkingDir = QString(),QProcess* pProcess = NULL);
 	virtual bool			IsStarting(qint64 pid) const { return m_PendingStarts.contains(pid); }
 
 private slots:

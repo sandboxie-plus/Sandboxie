@@ -1714,9 +1714,9 @@ bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const 
 
 SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
-	return RunStart(BoxName, Command, Elevated, WorkingDir, false, pProcess);
+	return RunStartWithFCP(BoxName, Command, false, Elevated, WorkingDir,  pProcess);
 }
-SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir,bool isFCP, QProcess* pProcess)
+SB_RESULT(quint32) CSandMan::RunStartWithFCP(const QString& BoxName, const QString& Command, bool isFCP, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
 	auto pBoxEx = theAPI->GetBoxByName(BoxName).objectCast<CSandBoxPlus>();
 	if (pBoxEx && pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty()) {
@@ -1726,7 +1726,7 @@ SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Com
 			return Status;
 	}
 
-	return theAPI->RunStart(BoxName, Command, Elevated, WorkingDir,isFCP, pProcess);
+	return theAPI->RunStartWithFCP(BoxName, Command, isFCP, Elevated, WorkingDir, pProcess);
 }
 SB_STATUS CSandMan::ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount)
 {

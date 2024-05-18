@@ -160,7 +160,7 @@ int	CRecoveryWindow::exec()
 {
 	//QDialog::setWindowModality(Qt::WindowModal);
 	ui.btnDeleteAll->setVisible(true);
-	SafeShow(this);
+	CSandMan::SafeShow(this);
 	return QDialog::exec();
 }
 

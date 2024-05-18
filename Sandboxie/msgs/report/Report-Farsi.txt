@@ -174,6 +174,10 @@ SBIE2302 Process image configuration conflict: %2
 SBIE2325 Debug:  %2
 .
 
+2360;pop;err;01
+SBIE2360 Failed to inject SOCKS5 proxy:  %2
+.
+
 2338;pop;err;01
 SBIE2338 Encountered unsupported architecture in process:  %2
 .

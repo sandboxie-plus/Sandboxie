@@ -266,11 +266,13 @@ _FX NTSTATUS Key_MarkDeletedEx_v2(const WCHAR* TruePath, const WCHAR* ValueName)
 
                 NtClose(hPathsFile);
 
+                Key_PathsVersion++;
+
                 File_GetAttributes_internal(KEY_PATH_FILE_NAME, &Key_PathsFileSize, &Key_PathsFileDate, NULL);
             }
         }
         else
-        Key_SavePathTree();
+            Key_SavePathTree();
     }
 
     File_ReleaseMutex(hMutex);

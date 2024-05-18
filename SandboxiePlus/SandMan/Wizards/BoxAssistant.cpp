@@ -698,6 +698,7 @@ void CRunPage::OnStateChanged(int state, const QString& Text)
                     QString Name = name;
                     //if(!Name.isEmpty()) pForm->addRow(new QLabel(Name));
                     CBoxPicker* pPicker = new CBoxPicker(value.toString());
+                    pPicker->setMaximumWidth(300);
                     pWidget = pPicker;
                     pForm->addRow(Name, pPicker);
                 } 

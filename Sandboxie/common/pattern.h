@@ -71,7 +71,13 @@ const WCHAR *Pattern_Source(PATTERN *pat);
 ULONG Pattern_Level(PATTERN *pat);
 
 //
-// Pattern_Wildcards:  returns count of wildcards in the pattern, not counting the trailing * when present
+// Pattern_Aux:  returns the associated auxyliary data.
+//
+
+PVOID* Pattern_Aux(PATTERN *pat);
+
+//
+// Pattern_Wildcards:  returns count of wildcards in the pattern, not counting the tailing * when rpresent
 //
 
 USHORT Pattern_Wildcards(PATTERN *pat);
@@ -99,7 +105,7 @@ int Pattern_MatchX(PATTERN *pat, const WCHAR *string, int string_len);
 #define MATCH_FLAG_AUX      0x02
 
 int Pattern_MatchPathList(
-    WCHAR* path_lwr, ULONG path_len, LIST* list, ULONG* plevel, ULONG* pflags, USHORT* pwildc, const WCHAR** patsrc);
+    WCHAR* path_lwr, ULONG path_len, LIST* list, ULONG* plevel, ULONG* pflags, USHORT* pwildc, PATTERN **found);
 BOOLEAN Pattern_MatchPathListEx(
     WCHAR* path_lwr, ULONG path_len, LIST* list, ULONG* plevel, int* pmatch_len, ULONG* pflags, USHORT* pwildc, const WCHAR** patsrc);
 

@@ -842,8 +842,13 @@ _FX NTSTATUS KphValidateCertificate()
         }
         else if (!level || _wcsicmp(level, L"STANDARD") == 0) // not used, default does not have explicit level
             Verify_CertInfo.level = eCertStandard;
-        else if (_wcsicmp(level, L"ADVANCED") == 0) 
-            Verify_CertInfo.level = eCertAdvanced;
+        else if (_wcsicmp(level, L"ADVANCED") == 0)
+        {
+            if(Verify_CertInfo.type == eCertPatreon || Verify_CertInfo.type == eCertEntryPatreon)
+                Verify_CertInfo.level = eCertAdvanced1;
+            else
+                Verify_CertInfo.level = eCertAdvanced;
+        }
         // scheme 1.1 >>>
         else if (CERT_IS_TYPE(Verify_CertInfo, eCertPersonal) || CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
         {
@@ -851,6 +856,11 @@ _FX NTSTATUS KphValidateCertificate()
                 Verify_CertInfo.type = eCertEternal;
                 Verify_CertInfo.level = eCertMaxLevel;
             }
+            else if (_wcsicmp(level, L"LARGE") == 0 && cert_date.QuadPart < KphGetDate(1, 04, 2022)) { 
+                Verify_CertInfo.level = eCertAdvanced1;
+                expiration_date.QuadPart = -2;
+            }
+            // todo: 01.09.2025: remove code for expired case LARGE
             else if (_wcsicmp(level, L"LARGE") == 0) { // 2 years - personal
                 if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
                     Verify_CertInfo.level = eCertStandard2;
@@ -858,15 +868,11 @@ _FX NTSTATUS KphValidateCertificate()
                     Verify_CertInfo.level = eCertAdvanced;
                 expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 2); // 2 years
             }
+            // todo: 01.09.2024: remove code for expired case MEDIUM
             else if (_wcsicmp(level, L"MEDIUM") == 0) { // 1 year - personal
                 Verify_CertInfo.level = eCertStandard2;
             }
-            else if (_wcsicmp(level, L"ENTRY") == 0) { // PATREON-ENTRY new patreons get only 3 montgs for start
-                Verify_CertInfo.level = eCertStandard2;
-                if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
-                    Verify_CertInfo.type = eCertEntryPatreon;
-                expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 3, 0);
-            }
+            // todo: 01.09.2024: remove code for expired case SMALL
             else if (_wcsicmp(level, L"SMALL") == 0) { // 1 year - subscription
                 Verify_CertInfo.level = eCertStandard2;
                 Verify_CertInfo.type = eCertHome;
@@ -886,7 +892,9 @@ _FX NTSTATUS KphValidateCertificate()
         // check if this is a subscription type certificate
         BOOLEAN isSubscription = CERT_IS_SUBSCRIPTION(Verify_CertInfo);
 
-        if (expiration_date.QuadPart != -1) 
+        if (expiration_date.QuadPart == -2)
+            Verify_CertInfo.expired = 1; // but not outdated
+        else if (expiration_date.QuadPart != -1) 
         {
             // check if this certificate is expired
             if (expiration_date.QuadPart < LocalTime.QuadPart)

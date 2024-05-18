@@ -84,6 +84,9 @@
     <ClCompile Include="MountManagerHelpers.cpp">
       <Filter>MountManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\rc4.c">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="misc.h" />

@@ -63,6 +63,9 @@
     <ClCompile Include="Common\ListItemModel.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+	 <ClCompile Include="Common\MultiErrorDialog.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
     <ClCompile Include="Common\MultiLineInputDialog.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -217,6 +220,9 @@
       <Filter>Common</Filter>
     </QtMoc>
     <QtMoc Include="Common\ListItemModel.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+	<QtMoc Include="Common\MultiErrorDialog.h">
       <Filter>Common</Filter>
     </QtMoc>
     <QtMoc Include="Common\MultiLineInputDialog.h">

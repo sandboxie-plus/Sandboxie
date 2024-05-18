@@ -1334,7 +1334,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			connect(pSnapshotsWindow, &CSnapshotsWindow::Closed, [this, pBox]() {
 				SnapshotWindows.remove(pBox.data());
 			});
-			SafeShow(pSnapshotsWindow);
+			CSandMan::SafeShow(pSnapshotsWindow);
 		}
 		else {
 			pSnapshotsWindow->setWindowState((pSnapshotsWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
@@ -1725,7 +1725,7 @@ void CSbieView::ShowOptions(const CSandBoxPtr& pBox)
 		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pOptionsWnd = NULL;
 		});
-		SafeShow(pBoxEx->m_pOptionsWnd);
+		CSandMan::SafeShow(pBoxEx->m_pOptionsWnd);
 	}
 	else {
 		pBoxEx->m_pOptionsWnd->setWindowState((pBoxEx->m_pOptionsWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
@@ -1749,7 +1749,7 @@ void CSbieView::ShowBrowse(const CSandBoxPtr& pBox)
 		connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
 			FileBrowserWindows.remove(pBox.data());
 		});
-		SafeShow(pFileBrowserWindow);
+		CSandMan::SafeShow(pFileBrowserWindow);
 	}
 	else {
 		pFileBrowserWindow->setWindowState((pFileBrowserWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);

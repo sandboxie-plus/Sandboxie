@@ -1664,6 +1664,23 @@ ULONG RestartInSandbox(void)
     // instance of Start.exe that we run through SbieDll_RunSandboxed
     // does not inherit our foreground rights automatically
 
+	if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
+		WCHAR* tips = L"";
+		wprintf(SbieDll_FormatMessage0(3198), BoxName);
+		if (MessageBoxW(NULL, tips, L"Sandboxie Start", MB_YESNO) == IDNO)
+			die(10000);
+		else {
+			DWORD error;
+			WCHAR buf[255] = L"";
+			GetParentPIDAndName(GetCurrentProcessId(), buf, &error);
+			WCHAR dir[1020] = L"";
+			SbieApi_GetHomePath(NULL, 0, dir, 1020);
+			if (wcsstr(buf, dir) == NULL)
+				if (MessageBoxW(NULL, SbieDll_FormatMessage0(3199), L"Warn", MB_YESNO) == IDNO)
+					die(10000);
+		}
+	}
+
     AllowSetForegroundWindow(ASFW_ANY);
 
     //
@@ -1893,7 +1910,7 @@ int __stdcall WinMainCRTStartup(
 
     run_program:
 
-		if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
+		/*if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
 			WCHAR* tips=L"";
 			wprintf(SbieDll_FormatMessage0(3198), BoxName);
 			if (MessageBoxW(NULL, tips, L"Sandboxie Start", MB_YESNO) == IDNO)
@@ -1908,7 +1925,7 @@ int __stdcall WinMainCRTStartup(
 					if (MessageBoxW(NULL, SbieDll_FormatMessage0(3199), L"Warn", MB_YESNO) == IDNO)
 						die(10000);
 			}
-		}
+		}*/
         start = ::GetTickCount();
 
         rc = Program_Start();

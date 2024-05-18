@@ -773,7 +773,6 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
 	QCheckBox* pWindowCover = new QCheckBox(tr("Prevents the sandboxed window from being captured."));
 	pWindowCover->setToolTip(tr("This feature can cause a decline in the user experience because it also prevents normal screenshots."));
 	pWindowCover->setChecked(theConf->GetBool("BoxDefaults/CoverBoxedWindows", false));
-	pWindowCover->setEnabled(g_CertInfo.active);
 	layout->addWidget(pWindowCover, row++, 1, 1, 3);
 	registerField("coverBoxedWindows", pWindowCover);
 

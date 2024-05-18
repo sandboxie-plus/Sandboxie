@@ -1216,7 +1216,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	else if (Action == m_pMenuRunCmd)
 		Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "cmd.exe"));
 	else if (Action == m_pMenuRunCmdAdmin)
-		Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "cmd.exe", true));
+		Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "cmd.exe", CSbieAPI::eStartElevated));
 #ifdef _WIN64
 	else if (Action == m_pMenuRunCmd32)
 		Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "C:\\WINDOWS\\SysWOW64\\cmd.exe"));
@@ -1576,10 +1576,10 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		QString Command = Action->data().toString();
 		QString WorkingDir = Action->property("WorkingDir").toString();
 		if (Command.isEmpty())
-			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "start_menu", false, WorkingDir));
+			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "start_menu", CSbieAPI::eStartDefault, WorkingDir));
 		else {
 			auto pBoxEx = SandBoxes.first().objectCast<CSandBoxPlus>();
-			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), pBoxEx->GetFullCommand(Command), false, pBoxEx->GetFullCommand(WorkingDir)));
+			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), pBoxEx->GetFullCommand(Command), CSbieAPI::eStartDefault, pBoxEx->GetFullCommand(WorkingDir)));
 		}
 	}
 

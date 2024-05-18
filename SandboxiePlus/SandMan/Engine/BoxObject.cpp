@@ -8,7 +8,7 @@
 
 quint32 CBoxObject::StartTask(const QString& Command, const QVariantMap& Options) 
 {
-    SB_RESULT(quint32) result = theGUI->RunStart(getName(), Command, Options["elevalted"].toBool(), Options["directory"].toString());
+    SB_RESULT(quint32) result = theGUI->RunStart(getName(), Command, Options["elevalted"].toBool() ? CSbieAPI::eStartElevated : CSbieAPI::eStartDefault, Options["directory"].toString());
     return result.IsError() ? -1 : result.GetValue();
 }
 

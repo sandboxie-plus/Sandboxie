@@ -44,6 +44,8 @@ public:
 	CSelectBoxWindow(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString(), QWidget *parent = Q_NULLPTR);
 	~CSelectBoxWindow();
 
+	void ShowFCP();
+
 private slots:
 	void OnBoxType();
 	void OnRun();

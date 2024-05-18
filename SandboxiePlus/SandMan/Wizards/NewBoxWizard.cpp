@@ -270,8 +270,8 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             if(field("imagesProtection").toBool())
                 pBox->SetBool("ProtectHostImages", true);
 
-			      if (field("coverBoxedWindows").toBool())
-				        pBox->SetBool("CoverBoxedWindows", true);
+            if (field("coverBoxedWindows").toBool())
+                pBox->SetBool("CoverBoxedWindows", true);
 
             if (!Password.isEmpty())
                 pBox->ImBoxCreate(ImageSize / 1024, Password);

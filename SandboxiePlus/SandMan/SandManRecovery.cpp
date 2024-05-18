@@ -357,6 +357,6 @@ void CSandMan::OnRecoveryLog()
 {
 	if (!m_pRecoveryLogWnd->isVisible()) {
 		m_pRecoveryLogWnd->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
-		SafeShow(m_pRecoveryLogWnd);
+		CSandMan::SafeShow(m_pRecoveryLogWnd);
 	}
 }

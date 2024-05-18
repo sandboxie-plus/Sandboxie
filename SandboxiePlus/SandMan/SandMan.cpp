@@ -1671,9 +1671,9 @@ void CSandMan::OnMessage(const QString& MsgData)
 			BoxName = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 
 		if (!BoxName.isEmpty())
-			RunStart(BoxName == "*DFP*" ? "" : BoxName, CmdLine, false, WrkDir);
+			RunStart(BoxName == "*DFP*" ? "" : BoxName, CmdLine, CSbieAPI::eStartDefault, WrkDir);
 		else
-			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir);
+			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir, true);
 	}
 	else if (Message.left(3) == "Op:")
 	{
@@ -1702,21 +1702,18 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const QString& WrkDir)
+bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const QString& WrkDir, bool bShowFCP)
 {
 	if (BoxName.isEmpty())
 		BoxName = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir, g_GUIParent);
+	if (bShowFCP) pSelectBoxWindow->ShowFCP();
 	connect(this, SIGNAL(Closed()), pSelectBoxWindow, SLOT(close()));
 	//pSelectBoxWindow->show();
 	return SafeExec(pSelectBoxWindow) == 1;
 }
 
-SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
-{
-	return RunStartWithFCP(BoxName, Command, false, Elevated, WorkingDir,  pProcess);
-}
-SB_RESULT(quint32) CSandMan::RunStartWithFCP(const QString& BoxName, const QString& Command, bool isFCP, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
+SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Command, CSbieAPI::EStartFlags Flags, const QString& WorkingDir, QProcess* pProcess)
 {
 	auto pBoxEx = theAPI->GetBoxByName(BoxName).objectCast<CSandBoxPlus>();
 	if (pBoxEx && pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty()) {
@@ -1726,8 +1723,9 @@ SB_RESULT(quint32) CSandMan::RunStartWithFCP(const QString& BoxName, const QStri
 			return Status;
 	}
 
-	return theAPI->RunStartWithFCP(BoxName, Command, isFCP, Elevated, WorkingDir, pProcess);
+	return theAPI->RunStart(BoxName, Command, Flags, WorkingDir, pProcess);
 }
+
 SB_STATUS CSandMan::ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();

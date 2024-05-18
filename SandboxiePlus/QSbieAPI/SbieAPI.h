@@ -153,8 +153,14 @@ public:
 
 	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
 
-	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
-	virtual SB_RESULT(quint32) RunStartWithFCP(const QString& BoxName, const QString& Command, bool isFCP,bool Elevated = false, const QString& WorkingDir = QString(),QProcess* pProcess = NULL);
+	enum EStartFlags
+	{
+		eStartDefault = 0,
+		eStartElevated = 1,
+		eStartFCP = 2
+	};
+
+	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, EStartFlags Flags = eStartDefault, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 	virtual QString			GetStartPath() const;
 
 	virtual quint32			GetSessionID() const;

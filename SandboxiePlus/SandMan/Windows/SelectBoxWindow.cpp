@@ -251,7 +251,7 @@ void CSelectBoxWindow::OnRun()
 	}
 
 	foreach(const QString & Command, m_Commands)
-		theGUI->RunStart(BoxName, Command, ui.chkAdmin->isChecked(), m_WrkDir,isFCP,0);
+		theGUI->RunStartWithFCP(BoxName, Command, isFCP, ui.chkAdmin->isChecked(), m_WrkDir,0);
 
 	setResult(1);
 	close();

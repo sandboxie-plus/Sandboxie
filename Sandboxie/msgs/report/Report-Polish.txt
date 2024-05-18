@@ -18,6 +18,10 @@ SBIE1207 Your Windows build (%2) is not yet supported by Sandboxie, which means 
 SBIE1222 Error with security token:  %2
 .
 
+2360;pop;err;01
+SBIE2360 Failed to inject SOCKS5 proxy:  %2
+.
+
 *==========
 * Extraneous Messages in Text-Polish-1045.txt
 *==========

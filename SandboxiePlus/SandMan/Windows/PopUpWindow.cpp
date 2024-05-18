@@ -104,7 +104,7 @@ void CPopUpWindow::Show()
 		this->move(scrRect.width() - 600 - 20, scrRect.height() - 200 - 50);
 	}
 
-	SafeShow(this);
+	CSandMan::SafeShow(this);
 }
 
 void CPopUpWindow::Poke()

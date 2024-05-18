@@ -47,7 +47,7 @@ public:
 	CScriptManager*		GetScripts() { return m_SbieScripts; }
 	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
-	static QString		GetVersion();
+	static QString		GetVersion(bool bWithUpdates = false);
 	static void			ShowMessageBox(QWidget* Widget, QMessageBox::Icon Icon, const QString& Message);
 
 	bool				IsImDiskReady() const { return m_ImDiskReady; }
@@ -88,6 +88,7 @@ public:
 	QString				FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, QString ProcessName, QString* pLink = NULL);
 	QString				MakeSbieMsgLink(quint32 MsgCode, const QStringList& MsgData, QString ProcessName);
 
+	static void			SafeShow(QWidget* pWidget);
 	int					SafeExec(QDialog* pDialog);
 
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());

@@ -72,9 +72,6 @@
     <ClCompile Include="Views\SbieView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
-    <ClCompile Include="Dialogs\MultiErrorDialog.cpp">
-      <Filter>Dialogs</Filter>
-    </ClCompile>
     <ClCompile Include="SbiePlusAPI.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
@@ -189,6 +186,9 @@
     <ClCompile Include="Wizards\NewBoxWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\StorageInfo.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
     <ClCompile Include="Wizards\TemplateWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
@@ -231,8 +231,8 @@
     <ClCompile Include="Windows\CompressDialog.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Helpers\StorageInfo.cpp">
-      <Filter>Helpers</Filter>
+    <ClCompile Include="Windows\TestProxyDialog.cpp">
+        <Filter>Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,14 +266,14 @@
     <ClInclude Include="Helpers\WinHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Helpers\StorageInfo.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\V4ScriptDebuggerApi.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="CustomStyles.h">
       <Filter>SandMan</Filter>
-    </ClInclude>
-    <ClInclude Include="Helpers\StorageInfo.h">
-      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,9 +285,6 @@
     </QtMoc>
     <QtMoc Include="Views\SbieView.h">
       <Filter>Views</Filter>
-    </QtMoc>
-    <QtMoc Include="Dialogs\MultiErrorDialog.h">
-      <Filter>Dialogs</Filter>
     </QtMoc>
     <QtMoc Include="SbiePlusAPI.h">
       <Filter>SandMan</Filter>
@@ -385,6 +382,9 @@
     <QtMoc Include="Windows\CompressDialog.h">
       <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\TestProxyDialog.h">
+        <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -426,6 +426,9 @@
     </QtUic>
     <QtUic Include="Forms\CompressDialog.ui">
       <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\TestProxyDialog.ui">
+        <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>

@@ -105,6 +105,8 @@ protected:
 
     MSG_HEADER *RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
+    MSG_HEADER *RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
+
 
 protected:
 

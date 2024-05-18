@@ -108,6 +108,8 @@ public:
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
 	virtual void			ClearPassword();
 
+	virtual SB_RESULT(QByteArray) RC4Crypt(const QByteArray& Data);
+
 	virtual bool			GetDriverInfo(quint32 InfoClass, void* pBuffer, size_t Size);
 
 	enum EFeatureFlags

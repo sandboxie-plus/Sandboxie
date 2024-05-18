@@ -116,11 +116,13 @@ public:
     int nextId() const override;
     void initializePage() override;
     bool validatePage() override;
+    void OnDropAdminChanged(int state);
 
 private:
     QCheckBox* m_pShareAccess;
     QCheckBox* m_pMSIServer;
     QCheckBox* m_pBoxToken;
+    QCheckBox* m_pDropAdmin;
 };
 
 

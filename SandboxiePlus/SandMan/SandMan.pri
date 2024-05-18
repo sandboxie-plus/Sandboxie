@@ -16,7 +16,6 @@ HEADERS += ./stdafx.h \
     ./Views/FileView.h \
     ./Views/TraceView.h \
     ./Views/StackView.h \
-    ./Dialogs/MultiErrorDialog.h \
     ./Helpers/FindTool.h \
     ./Helpers/FullScreen.h \
     ./Helpers/WinAdmin.h \
@@ -30,7 +29,8 @@ HEADERS += ./stdafx.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
     ./Windows/SelectBoxWindow.h \
-    ./Windows/SupportDialog.h\
+    ./Windows/SupportDialog.h \
+    ./Windows/TestProxyDialog.h \
     ./OnlineUpdater.h \
     ./Wizards/NewBoxWizard.h \
     ./Wizards/TemplateWizard.h \
@@ -65,7 +65,6 @@ SOURCES += ./main.cpp \
     ./Views/FileView.cpp \
     ./Views/TraceView.cpp \
     ./Views/StackView.cpp \
-    ./Dialogs/MultiErrorDialog.cpp \
     ./Helpers/FindTool.cpp \
     ./Helpers/FullScreen.cpp \
     ./Helpers/WinAdmin.cpp \
@@ -80,7 +79,8 @@ SOURCES += ./main.cpp \
     ./Windows/SettingsWindow.cpp \
     ./Windows/SnapshotsWindow.cpp \
     ./Windows/SelectBoxWindow.cpp \
-    ./Windows/SupportDialog.cpp\
+    ./Windows/SupportDialog.cpp \
+    ./Windows/TestProxyDialog.cpp \
     ./OnlineUpdater.cpp \
     ./Wizards/NewBoxWizard.cpp \
     ./Wizards/TemplateWizard.cpp \
@@ -104,7 +104,8 @@ FORMS += ./Forms/SelectBoxWindow.ui \
     ./Forms/SettingsWindow.ui \
     ./Forms/SnapshotsWindow.ui \
     ./Forms/BoxImageWindow.ui \
-    ./Forms/CompressDialog.ui
+    ./Forms/CompressDialog.ui \
+    ./Forms/TestProxyDialog.ui
 
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \

@@ -115,7 +115,7 @@ MISCHELPERS_EXPORT void SetPaleteTexture(QPalette& palette, QPalette::ColorRole 
 MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
 #endif
 
-MISCHELPERS_EXPORT void SafeShow(QWidget* pWidget);
+//MISCHELPERS_EXPORT void SafeShow(QWidget* pWidget);
 
 template <typename T>
 QSet<T> ListToSet(const QList<T>& qList) { return QSet<T>(qList.begin(), qList.end()); }

@@ -160,7 +160,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -182,7 +182,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -207,7 +207,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -228,7 +228,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -249,7 +249,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -273,7 +273,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;comctl32.lib;bcrypt.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -287,7 +287,6 @@
     </ClCompile>
     <ClCompile Include="BoxJob.cpp" />
     <ClCompile Include="BoxMonitor.cpp" />
-    <ClCompile Include="Dialogs\MultiErrorDialog.cpp" />
     <ClCompile Include="Engine\BoxEngine.cpp" />
     <ClCompile Include="Engine\BoxObject.cpp" />
     <ClCompile Include="Engine\IniObject.cpp" />
@@ -441,8 +440,10 @@
     <ClCompile Include="Wizards\NewBoxWizard.cpp" />
     <ClCompile Include="Wizards\SetupWizard.cpp" />
     <ClCompile Include="Wizards\TemplateWizard.cpp" />
+    <ClCompile Include="Windows\TestProxyDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\TestProxyDialog.h" />
     <QtMoc Include="Windows\CompressDialog.h" />
     <QtMoc Include="Wizards\BoxAssistant.h" />
     <QtMoc Include="Windows\BoxImageWindow.h" />
@@ -464,7 +465,6 @@
     <QtMoc Include="SandMan.h" />
     <QtMoc Include="Models\SbieModel.h" />
     <QtMoc Include="Models\TraceModel.h" />
-    <QtMoc Include="Dialogs\MultiErrorDialog.h" />
     <QtMoc Include="BoxJob.h" />
     <ClInclude Include="..\version.h" />
     <QtMoc Include="BoxMonitor.h" />
@@ -510,6 +510,7 @@
     <QtUic Include="Forms\SelectBoxWindow.ui" />
     <QtUic Include="Forms\SettingsWindow.ui" />
     <QtUic Include="Forms\SnapshotsWindow.ui" />
+    <QtUic Include="Forms\TestProxyDialog.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\finder.cur" />

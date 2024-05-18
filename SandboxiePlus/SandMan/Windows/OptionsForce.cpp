@@ -294,7 +294,7 @@ bool COptionsWindow::CheckForcedItem(const QString& Value, int type)
 	}
 	else
 	{
-		if (Value.left(3).compare(winPath.left(3), Qt::CaseInsensitive) == 0)
+		if (Value.compare(winPath.left(3), Qt::CaseInsensitive) == 0)
 			bDangerous = true; // SystemDrive (C:\)
 		else if (Value.compare(winPath, Qt::CaseInsensitive) == 0)
 			bDangerous = true; // SystemRoot (C:\Windows)

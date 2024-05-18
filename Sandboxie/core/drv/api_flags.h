@@ -59,6 +59,7 @@
 #define MONITOR_SCM						0x0000000E // Service Control Manager
 #define MONITOR_APICALL					0x0000000F
 #define MONITOR_RPC						0x00000010
+#define MONITOR_DNS						0x00000011
 #define MONITOR_TYPE_MASK				0x000000FF
 
 #define MONITOR_RESERVED				0x0000FF00

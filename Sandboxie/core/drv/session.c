@@ -104,6 +104,8 @@ static NTSTATUS Session_Api_Leader(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms);
 
+static NTSTATUS Session_Api_ForceChildren(PROCESS *proc, ULONG64 *parms);
+
 static NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms);
 
 //static NTSTATUS Session_Api_MonitorPut(PROCESS *proc, ULONG64 *parms);
@@ -141,6 +143,7 @@ _FX BOOLEAN Session_Init(void)
 
     Api_SetFunction(API_SESSION_LEADER,         Session_Api_Leader);
     Api_SetFunction(API_DISABLE_FORCE_PROCESS,  Session_Api_DisableForce);
+    Api_SetFunction(API_FORCE_CHILDREN,         Session_Api_ForceChildren);
     Api_SetFunction(API_MONITOR_CONTROL,        Session_Api_MonitorControl);
     //Api_SetFunction(API_MONITOR_PUT,            Session_Api_MonitorPut);
     Api_SetFunction(API_MONITOR_PUT2,           Session_Api_MonitorPut2);
@@ -493,6 +496,38 @@ _FX BOOLEAN Session_IsForceDisabled(ULONG SessionId)
     // compare and return
 
     return (diff <= seconds);
+}
+
+
+//---------------------------------------------------------------------------
+// Session_Api_ForceChildren
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Session_Api_ForceChildren(PROCESS *proc, ULONG64 *parms)
+{
+    HANDLE process_id;
+    WCHAR *user_boxname;
+    WCHAR boxname[BOXNAME_COUNT];
+
+    if (proc)
+        return STATUS_NOT_IMPLEMENTED;
+
+    process_id = (HANDLE)parms[1];
+
+    memzero(boxname, sizeof(boxname));
+    user_boxname = (WCHAR *)parms[2];
+    if (user_boxname) {
+        ProbeForRead(user_boxname, sizeof(WCHAR) * (BOXNAME_COUNT - 2), sizeof(UCHAR));
+        if (user_boxname[0])
+            wcsncpy(boxname, user_boxname, (BOXNAME_COUNT - 2));
+    }
+    if(!process_id || process_id == (HANDLE)-1 || !boxname[0])
+        return STATUS_INVALID_PARAMETER;
+
+    Process_FcpInsert(process_id, boxname);
+
+    return STATUS_SUCCESS;
 }
 
 

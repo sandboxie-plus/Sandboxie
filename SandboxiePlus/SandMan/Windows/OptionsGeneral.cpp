@@ -96,9 +96,8 @@ void COptionsWindow::CreateGeneral()
 	}
 	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard2))
 		COptionsWindow__AddCertIcon(ui.chkConfidential, true);
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced1))
 		COptionsWindow__AddCertIcon(ui.chkEncrypt, true);
-	}
 
 
 	m_HoldBoxType = false;
@@ -286,7 +285,7 @@ void COptionsWindow::LoadGeneral()
 	ui.chkOpenProtectedStorage->setChecked(m_BoxTemplates.contains("OpenProtectedStorage"));
 	ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
 	ui.chkCloseClipBoard->setChecked(!m_pBox->GetBool("OpenClipboard", true));
-	//ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture", false));
+	//ui.chkBlockCapture->setChecked(m_pBox->GetBool("BlockScreenCapture", false));
 	ui.chkProtectPower->setChecked(m_pBox->GetBool("BlockInterferePower", false));
 	ui.chkVmReadNotify->setChecked(m_pBox->GetBool("NotifyProcessAccessDenied", false));
 	//ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
@@ -426,7 +425,7 @@ void COptionsWindow::SaveGeneral()
 	if (ui.chkOpenCredentials->isEnabled())
 		WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
 	WriteAdvancedCheck(ui.chkCloseClipBoard, "OpenClipboard", "n", "");
-	//WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "");
+	//WriteAdvancedCheck(ui.chkBlockCapture, "BlockScreenCapture", "y", "");
 	WriteAdvancedCheck(ui.chkProtectPower, "BlockInterferePower", "y", "");
 	WriteAdvancedCheck(ui.chkForceProtection, "ForceProtectionOnMount", "y", "");
 	WriteAdvancedCheck(ui.chkUserOperation, "BlockInterferenceControl", "y", "");

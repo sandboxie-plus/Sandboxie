@@ -1937,6 +1937,12 @@ __kernel_entry NTSTATUS
 	IN ULONG ProcessInformationLength,
 	OUT PULONG ReturnLength OPTIONAL
 	);
+typedef BOOL (*QFPIN)(
+	      HANDLE hProcess,
+	      DWORD  dwFlags,
+	     LPTSTR  lpExeName,
+	 PDWORD lpdwSize
+);
 DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD ErrCodeForBuffer) {
 
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, ProcessID);
@@ -1957,7 +1963,18 @@ DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD
 		CloseHandle(hProcess);
 		return 0;
 	}
+	HMODULE hKer32 = GetModuleHandle(L"kernel32.dll");
+	if (!hKer32) {
 
+		CloseHandle(hProcess);
+		return 0;
+	}
+
+	QFPIN _QueryFullProcessImageNameW = (QFPIN)GetProcAddress(hKer32, "QueryFullProcessImageNameW");
+	if (!_QueryFullProcessImageNameW) {
+		CloseHandle(hProcess);
+		return 0;
+	}
 	PROCESS_BASIC_INFORMATION pbi;
 	NTSTATUS status = _NtQueryInformationProcess(
 		hProcess,
@@ -1974,9 +1991,9 @@ DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD
 			HANDLE hParentProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, dwParentID);
 			if (hParentProcess) {
 
-				//DWORD bufs;
+				DWORD bufs;
 				
-				BOOL ret = GetProcessImageFileNameW(hParentProcess, lpszBuffer_Parent_Name, 255);
+				BOOL ret = _QueryFullProcessImageNameW(hParentProcess, 0,lpszBuffer_Parent_Name,&bufs);
 				
 
 

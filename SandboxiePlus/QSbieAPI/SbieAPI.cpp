@@ -1031,14 +1031,20 @@ QString CSbieAPI::GetUserSection(QString* pUserName, bool* pIsAdmin) const
 
 SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
+	return RunStartWithFCP(BoxName, Command,false, Elevated, WorkingDir, pProcess);
+}
+SB_RESULT(quint32) CSbieAPI::RunStartWithFCP(const QString& BoxName, const QString& Command, bool isFCP,bool Elevated, const QString& WorkingDir, QProcess* pProcess)
+{
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);
 
 	QString StartArgs;
-	if(Elevated)
+	if (Elevated)
 		StartArgs += "/elevated ";
 	if (!BoxName.isEmpty())
 		StartArgs += "/box:" + BoxName + " ";
+	if (isFCP)
+		StartArgs += "/fcp ";
 	else
 		StartArgs += "/disable_force ";
 
@@ -1055,7 +1061,7 @@ SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Com
 		pProcess->setNativeArguments(StartArgs);
 		pProcess->start();
 		pid = pProcess->processId();
-	} 
+	}
 	else {
 		QProcess process;
 		//process.setWorkingDirectory(QString::fromWCharArray(sysPath));
@@ -1069,42 +1075,41 @@ SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Com
 	/*
 	QString CommandLine = "\"" + GetStartPath() + "\" " + StartArgs;
 
-    STARTUPINFO si;
-    PROCESS_INFORMATION pi;
-    ZeroMemory( &si, sizeof(si) );
-    si.cb = sizeof(si);
-    ZeroMemory( &pi, sizeof(pi) );
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
+	ZeroMemory( &si, sizeof(si) );
+	si.cb = sizeof(si);
+	ZeroMemory( &pi, sizeof(pi) );
 
-    // Start the child process. 
-    if( !CreateProcessW( NULL,   // No module name (use command line)
-        (wchar_t*)CommandLine.toStdWString().c_str(),        // Command line
-        NULL,           // Process handle not inheritable
-        NULL,           // Thread handle not inheritable
-        FALSE,          // Set handle inheritance to FALSE
-        0,              // No creation flags
-        NULL,           // Use parent's environment block
-        NULL,           // Use parent's starting directory 
-        &si,            // Pointer to STARTUPINFO structure
-        &pi )           // Pointer to PROCESS_INFORMATION structure
-    ) 
-    {
-        printf( "CreateProcess failed (%d).\n", GetLastError() );
+	// Start the child process.
+	if( !CreateProcessW( NULL,   // No module name (use command line)
+		(wchar_t*)CommandLine.toStdWString().c_str(),        // Command line
+		NULL,           // Process handle not inheritable
+		NULL,           // Thread handle not inheritable
+		FALSE,          // Set handle inheritance to FALSE
+		0,              // No creation flags
+		NULL,           // Use parent's environment block
+		NULL,           // Use parent's starting directory
+		&si,            // Pointer to STARTUPINFO structure
+		&pi )           // Pointer to PROCESS_INFORMATION structure
+	)
+	{
+		printf( "CreateProcess failed (%d).\n", GetLastError() );
 		return SB_ERR();
-    }
+	}
 
-    // Wait until child process exits.
-    //WaitForSingleObject( pi.hProcess, INFINITE );
+	// Wait until child process exits.
+	//WaitForSingleObject( pi.hProcess, INFINITE );
 
-    // Close process and thread handles. 
-    CloseHandle( pi.hProcess );
-    CloseHandle( pi.hThread );
+	// Close process and thread handles.
+	CloseHandle( pi.hProcess );
+	CloseHandle( pi.hThread );
 	*/
 
-	if(pid == 0)
+	if (pid == 0)
 		return SB_ERR();
 	return CSbieResult<quint32>((quint32)pid);
 }
-
 QString CSbieAPI::GetStartPath() const
 {
 	return m_SbiePath + "\\" + QString::fromWCharArray(SBIESTART_EXE);

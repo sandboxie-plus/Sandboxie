@@ -61,6 +61,7 @@ extern WCHAR *DoStartMenu(void);
 extern BOOL WriteStartMenuResult(const WCHAR *MapName, const WCHAR *Command);
 extern void DeleteSandbox(
     const WCHAR *BoxName, BOOL bLogoff, BOOL bSilent, int phase);
+DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD ErrCodeForBuffer);
 
 
 extern "C" {
@@ -1917,6 +1918,22 @@ int __stdcall WinMainCRTStartup(
 
     run_program:
 
+		if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
+			WCHAR* tips=L"";
+			wprintf(SbieDll_FormatMessage0(3198), BoxName);
+			if (MessageBoxW(NULL, tips, L"Sandboxie Start", MB_YESNO) == IDNO)
+				die(10000);
+			else {
+				DWORD error;
+				WCHAR buf[255] = L"";
+				GetParentPIDAndName(GetCurrentProcessId(), buf, &error);
+				WCHAR dir[1020] = L"";
+				SbieApi_GetHomePath(NULL, 0, dir, 1020);
+				if (wcsstr(buf, dir) == NULL)
+					if (MessageBoxW(NULL, SbieDll_FormatMessage0(3199), L"Warn", MB_YESNO) == IDNO)
+						die(10000);
+			}
+		}
         start = ::GetTickCount();
 
         rc = Program_Start();
@@ -1934,7 +1951,86 @@ int __stdcall WinMainCRTStartup(
 
     return die(rc);
 }
+#include <psapi.h>
+#include <Shlwapi.h>
+typedef
+__kernel_entry NTSTATUS
+(NTAPI* NQIP)(
+	IN HANDLE ProcessHandle,
+	IN PROCESSINFOCLASS ProcessInformationClass,
+	OUT PVOID ProcessInformation,
+	IN ULONG ProcessInformationLength,
+	OUT PULONG ReturnLength OPTIONAL
+	);
+typedef BOOL (*QFPIN)(
+	      HANDLE hProcess,
+	      DWORD  dwFlags,
+	     LPTSTR  lpExeName,
+	 PDWORD lpdwSize
+);
+DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name, PDWORD ErrCodeForBuffer) {
 
+	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, ProcessID);
+	if (!ProcessID) {
+		return 0;
+	}
+
+
+	HMODULE hNtdll = GetModuleHandle(L"ntdll.dll");
+	if (!hNtdll) {
+
+		CloseHandle(hProcess);
+		return 0;
+	}
+
+	NQIP _NtQueryInformationProcess = (NQIP)GetProcAddress(hNtdll, "NtQueryInformationProcess");
+	if (!_NtQueryInformationProcess) {
+		CloseHandle(hProcess);
+		return 0;
+	}
+	HMODULE hKer32 = GetModuleHandle(L"kernel32.dll");
+	if (!hKer32) {
+
+		CloseHandle(hProcess);
+		return 0;
+	}
+
+	QFPIN _QueryFullProcessImageNameW = (QFPIN)GetProcAddress(hKer32, "QueryFullProcessImageNameW");
+	if (!_QueryFullProcessImageNameW) {
+		CloseHandle(hProcess);
+		return 0;
+	}
+	PROCESS_BASIC_INFORMATION pbi;
+	NTSTATUS status = _NtQueryInformationProcess(
+		hProcess,
+		ProcessBasicInformation,
+		(LPVOID)&pbi, sizeof(PROCESS_BASIC_INFORMATION),
+		NULL);
+
+	DWORD dwParentID = 0;
+	if (NT_SUCCESS(status)) {
+		
+		dwParentID = (DWORD)pbi.InheritedFromUniqueProcessId;
+
+		if (NULL != lpszBuffer_Parent_Name) {
+			HANDLE hParentProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, dwParentID);
+			if (hParentProcess) {
+
+				DWORD bufs;
+				
+				BOOL ret = _QueryFullProcessImageNameW(hParentProcess, 0,lpszBuffer_Parent_Name,&bufs);
+				
+
+
+			}
+			if (hParentProcess)
+				CloseHandle(hParentProcess);
+		}
+	}
+
+	CloseHandle(hProcess);
+	return dwParentID;
+}
 
 int __stdcall WinMain(
     HINSTANCE hInstance,

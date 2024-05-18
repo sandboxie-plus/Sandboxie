@@ -1894,7 +1894,7 @@ int __stdcall WinMainCRTStartup(
     run_program:
 
 		if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
-			WCHAR* tips;
+			WCHAR* tips=L"";
 			wprintf(SbieDll_FormatMessage0(3198), BoxName);
 			if (MessageBoxW(NULL, tips, L"Sandboxie Start", MB_YESNO) == IDNO)
 				die(10000);

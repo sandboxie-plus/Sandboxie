@@ -277,12 +277,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="786"/>
         <source>Prevents the sandboxed window from being captured.</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止沙盒化窗口被捕获图像。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="787"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation type="unfinished"></translation>
+        <translation>这个功能可能造成用户体验下降，因为它也阻止正常的屏幕截图。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="792"/>
@@ -2425,12 +2425,12 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="832"/>
         <source>Yes</source>
-        <translation type="unfinished">是</translation>
+        <translation>是</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="833"/>
         <source>No</source>
-        <translation type="unfinished">否</translation>
+        <translation>否</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="857"/>
@@ -4300,7 +4300,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2979"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;你需要在Patreon赞助上成为Great或更高级别以便解锁这个功能。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2991"/>
@@ -5804,7 +5804,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1440"/>
         <source>Advanced (L)</source>
-        <translation type="unfinished"></translation>
+        <translation>高级 (L)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1442"/>
@@ -6510,7 +6510,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="37"/>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>N/A</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="42"/>
@@ -6580,7 +6580,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="152"/>
         <source>[%1] %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] %2</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="157"/>
@@ -8920,12 +8920,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force child processes to be sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>强制子进程沙盒化</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>强制子进程</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="56"/>

@@ -5,12 +5,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.14.? / 5.??.?] - 2024-05-??
+### Added
+- Add UI for CoverWindows in NewBoxWizard.
+- Add UI option to start unsandboxed process but force child processes in SelectBoxWindow.
+- Add option "AlertBeforeStart".When it is set,a prompt pops up before launching a new program into the sandbox using "Start.exe" and checks if the program that started "Start.exe" is a Sandboxie component itself,if it is not, a warning pops up.
+
+
 
 ## [1.14.0 / 5.69.0] - 2024-05-17
 
 ### Added
 - Add option to limit the memory of sandboxed process and the number of process in single sandbox through job object. (thanks Yeyixiao)
-  - Use "TotalMemoryLimit"(Number,limit whole sandbox) and "ProcessMemoryLimit"(Number,limit single process) to set.
+  - Use "TotalMemoryLimit"(Number,limit whole sandbox) and "ProcessMemoryLimit"(Number,limit single process) to set memory limit.
+  - Use "ProcessNumberLimit"(Number) to set process number limit.
 - Add ability to modified sandboxed process logic speed (reduced fixed latency, modified single-player speed, etc.) (thanks Yeyixiao)
   - Use "UseChangeSpeed=y" to open this feature,use "AddTickSpeed"/"AddSleepSpeed"/"AddTimerSpeed"/"LowTickSpeed"/"LowSleepSpeed"/"LowTimerSpeed"(Number) to set.
   - When set "AddSleepSpeed=0",all Sleep funcation call will be skip.

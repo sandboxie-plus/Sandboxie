@@ -42,7 +42,7 @@
    <item row="5" column="1">
     <widget class="QCheckBox" name="chkFCP">
      <property name="toolTip">
-      <string>Force child processes to be sandboxed</string>
+      <string>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</string>
      </property>
      <property name="text">
       <string>Force Children</string>

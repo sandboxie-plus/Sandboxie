@@ -493,8 +493,10 @@ check:
 			else if (Session_GetLeadSession(PsGetCurrentProcessId()) != 0)
 				status = STATUS_SUCCESS;
 			if (Box_IsBoxedPath(proc->box, file, &Name->Name))
-				if (Conf_Get_Boolean(proc->box->name, L"BlockDeleteSandboxFile",0,FALSE))
+				if (Conf_Get_Boolean(proc->box->name, L"BlockDeleteSandboxFile", 0, FALSE)) {
 					status = STATUS_ACCESS_DENIED;
+					goto finish;
+				}
 		}
 
 	}

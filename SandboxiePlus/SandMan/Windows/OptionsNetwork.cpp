@@ -1108,7 +1108,7 @@ void COptionsWindow::CloseNetProxyEdit(QTreeWidgetItem* pItem, bool bSave)
 		pItem->setData(2, Qt::UserRole, pPort->text());
 
 		pItem->setText(3, pAuth->currentText());
-		pItem->setData(3, Qt::UserRole, (int)GetAuthMode(pAuth->currentText()));
+		pItem->setData(3, Qt::UserRole, pAuth->currentData());
 
 		pItem->setText(4, pLogin->text());
 		pItem->setData(4, Qt::UserRole, pLogin->text());

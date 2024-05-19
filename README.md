@@ -44,6 +44,7 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * An Add-on manager to extend or add functionality via additional components
   * Protections of sandboxes against the host, including the prevention of taking screenshots
   * A trigger system to perform actions, when a sandbox goes through different stages, like initialization, box start, termination or file recovery
+  * Make a process not sandboxed, but its child processes sandboxed
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 

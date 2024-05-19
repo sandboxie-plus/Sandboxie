@@ -482,6 +482,22 @@ check:
         goto finish;
     }
 
+	if (Iopb->MajorFunction == IRP_MJ_CREATE && FlagOn(Data->Iopb->Parameters.Create.Options, FILE_DELETE_ON_CLOSE)) {
+		OBJECT_NAME_INFORMATION* Name;
+		ULONG NameLength;
+
+		status = Obj_GetParseName(proc->pool, Data->Iopb->TargetFileObject->DeviceObject, &Data->Iopb->TargetFileObject->FileName, &Name, &NameLength);
+		if (NT_SUCCESS(status)) {
+			if (PsGetCurrentProcessId() == Api_ServiceProcessId)
+				status = STATUS_SUCCESS;
+			else if (Session_GetLeadSession(PsGetCurrentProcessId()) != 0)
+				status = STATUS_SUCCESS;
+			if (Box_IsBoxedPath(proc->box, file, &Name->Name))
+				if (Conf_Get_Boolean(proc->box->name, L"BlockDeleteSandboxFile",0,FALSE))
+					status = STATUS_ACCESS_DENIED;
+		}
+
+	}
     //
     // check if there are any protected root folders and restrict the access to them
     //

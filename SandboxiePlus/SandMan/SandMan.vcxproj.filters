@@ -32,6 +32,9 @@
     <Filter Include="Views">
       <UniqueIdentifier>{34eca1e5-cd50-4876-9f54-9eec4c393150}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{6accf3ae-da17-4c0f-ba83-214e3874b029}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{20d5954b-be86-4a34-948d-00954dcfd07b}</UniqueIdentifier>
     </Filter>
@@ -183,6 +186,9 @@
     <ClCompile Include="Wizards\NewBoxWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\StorageInfo.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
     <ClCompile Include="Wizards\TemplateWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
@@ -225,8 +231,8 @@
     <ClCompile Include="Windows\CompressDialog.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Helpers\StorageInfo.cpp">
-      <Filter>Helpers</Filter>
+    <ClCompile Include="Windows\TestProxyDialog.cpp">
+        <Filter>Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,14 +266,14 @@
     <ClInclude Include="Helpers\WinHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Helpers\StorageInfo.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\V4ScriptDebuggerApi.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="CustomStyles.h">
       <Filter>SandMan</Filter>
-    </ClInclude>
-    <ClInclude Include="Helpers\StorageInfo.h">
-      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +382,9 @@
     <QtMoc Include="Windows\CompressDialog.h">
       <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\TestProxyDialog.h">
+        <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -417,6 +426,9 @@
     </QtUic>
     <QtUic Include="Forms\CompressDialog.ui">
       <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\TestProxyDialog.ui">
+        <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>

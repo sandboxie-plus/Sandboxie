@@ -429,6 +429,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
 	GUI_IMPORT___(QueryPerformanceCounter);
 	module = temp;
 
+	GUI_IMPORT___(SetTimer);
     GUI_IMPORT___(MsgWaitForMultipleObjects);
     GUI_IMPORT_AW(PeekMessage);
     GUI_IMPORT___(MessageBoxW);

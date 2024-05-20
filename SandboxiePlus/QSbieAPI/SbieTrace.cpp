@@ -113,7 +113,7 @@ QList<quint32> CTraceEntry::AllTypes()
 		<< MONITOR_KEY << MONITOR_FILE << MONITOR_PIPE 
 		<< MONITOR_IPC << MONITOR_RPC << MONITOR_COMCLASS << MONITOR_RTCLASS
 		<< MONITOR_WINCLASS << MONITOR_DRIVE  << MONITOR_IGNORE << MONITOR_IMAGE 
-		<< MONITOR_NETFW << MONITOR_SCM << MONITOR_OTHER;
+		<< MONITOR_NETFW << MONITOR_DNS << MONITOR_SCM << MONITOR_OTHER;
 }
 
 QString CTraceEntry::GetTypeStr(quint32 Type)
@@ -134,6 +134,7 @@ QString CTraceEntry::GetTypeStr(quint32 Type)
 	case MONITOR_FILE:			return "File"; break;
 	case MONITOR_KEY:			return "Key"; break;
 	case MONITOR_NETFW:			return "Socket"; break;
+	case MONITOR_DNS:			return "Dns"; break;
 	case MONITOR_SCM:			return "SCM"; break; // Service Control Manager
 	case MONITOR_OTHER:			return "Debug"; break;
 	default:					return QString();

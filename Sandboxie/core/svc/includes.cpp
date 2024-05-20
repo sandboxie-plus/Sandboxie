@@ -39,6 +39,8 @@ extern "C" {
 #define CRC_WITH_ADLER32
 #include "common/crc.c"
 
+#include "common/rc4.c"
+
 #define PATTERN XPATTERN
 #include "common/pattern.c"
 

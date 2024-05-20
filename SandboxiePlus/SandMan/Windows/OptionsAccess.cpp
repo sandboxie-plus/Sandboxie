@@ -238,10 +238,10 @@ void COptionsWindow::LoadAccessListTmpl(EAccessType Type, bool bChecked, bool bU
 	}
 }
 
-void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, bool disabled, const QString& Template)
+QPair<COptionsWindow::EAccessType, COptionsWindow::EAccessMode> COptionsWindow::SplitAccessType(EAccessEntry EntryType)
 {
-	EAccessType	Type;
-	EAccessMode	Mode;
+	EAccessType	Type = eMaxAccessType;
+	EAccessMode	Mode = eMaxAccessMode;
 	switch (EntryType)
 	{
 	case eNormalFilePath:	Type = eFile;	Mode = eNormal;	break;
@@ -269,11 +269,18 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	case eOpenCOM:			Type = eCOM;	Mode = eOpen;	break;
 	case eClosedCOM:		Type = eCOM;	Mode = eClosed;	break;
 	case eClosedCOM_RT:		Type = eCOM;	Mode = eClosedRT; break;
-
-	default:				return;
 	}
 
-	ParseAndAddAccessEntry(Type, Mode, Value, disabled, Template);
+	return qMakePair(Type, Mode);
+}
+
+void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, bool disabled, const QString& Template)
+{
+	QPair<EAccessType, EAccessMode> Type = SplitAccessType(EntryType);
+	if (Type.first == eMaxAccessType || Type.first == eMaxAccessMode)
+		return;
+
+	ParseAndAddAccessEntry(Type.first, Type.second, Value, disabled, Template);
 }
 
 void COptionsWindow::ParseAndAddAccessEntry(EAccessType Type, EAccessMode Mode, const QString& Value, bool disabled, const QString& Template)

@@ -27,4 +27,12 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* RuleStr);
 
 void NetFw_FreeRule(NETFW_RULE* rule);
 
+
+int _wntoi(const WCHAR* str, ULONG max);
+int _inet_pton(int af, const wchar_t* src, void* dst);
+int _inet_aton(const wchar_t* from, struct in_addr* in);
+int _inet_xton(const WCHAR* src, ULONG max, IP_ADDRESS* dst, USHORT* type);
+BOOLEAN is_localhost(const struct sockaddr* name);
+BOOLEAN is_inet(const struct sockaddr* name);
+
 #endif

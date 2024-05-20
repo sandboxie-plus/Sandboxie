@@ -190,6 +190,10 @@ SBIE2325 Debug:  %2
 SBIE2335 Initialization failed for process %2
 .
 
+2360;pop;err;01
+SBIE2360 Failed to inject SOCKS5 proxy:  %2
+.
+
 2336;pop;err;01
 SBIE2336 Error in GUI server:  %2
 .
@@ -216,6 +220,15 @@ Type the name of a program or path to open the following file in the current san
 
 3114;txt;01
 Programs
+.
+
+3198;txt;01
+Do you want to start a new program in the %2 sandbox?
+You received this message because you set AlertBeforeStart=y.
+.
+
+3199;txt;01
+This startup request does not appear to be invoked by the SANDBOXIE component. Are you sure you want to run it? If this is your action, you can ignore it and choose yes.
 .
 
 3315;txt;01

@@ -28,6 +28,9 @@
 #include "core/svc/SbieIniWire.h"
 #include "common/my_version.h"
 #include "msgs/msgs.h"
+#include "core/drv/api_defs.h"
+#include <psapi.h>
+#include <Shlwapi.h>
 
 
 //---------------------------------------------------------------------------
@@ -88,6 +91,7 @@ BOOL execute_auto_run = FALSE;
 BOOL execute_open_with = FALSE;
 BOOL run_elevated_2 = FALSE;
 BOOL disable_force_on_this_program = FALSE;
+BOOL force_children_on_this_program = FALSE;
 BOOL auto_select_default_box = FALSE;
 WCHAR *StartMenuSectionName = NULL;
 BOOL run_silent = FALSE;
@@ -717,6 +721,17 @@ BOOL Parse_Command_Line(void)
             disable_force_on_this_program = TRUE;
 
         //
+        // Command line switch /force_children or /fcp
+        //
+
+        } else if (_wcsnicmp(cmd, L"force_children", 14) == 0 ||
+                   _wcsnicmp(cmd, L"fcp",             3) == 0) {
+
+            cmd = Eat_String(cmd);
+
+            force_children_on_this_program = TRUE;
+
+        //
         // Command line switch /hide_window
         //
 
@@ -1193,7 +1208,7 @@ int Program_Start(void)
         shExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
         shExecInfo.fMask = SEE_MASK_FLAG_NO_UI | SEE_MASK_DOENVSUBST
                          | SEE_MASK_FLAG_DDEWAIT | SEE_MASK_NOZONECHECKS;
-        if (wait_for_process || keep_alive)
+        if (wait_for_process || keep_alive || force_children_on_this_program)
             shExecInfo.fMask |= SEE_MASK_NOCLOSEPROCESS;
         shExecInfo.hwnd = NULL;
         shExecInfo.lpVerb = NULL;
@@ -1337,6 +1352,8 @@ int Program_Start(void)
 
         if (ok && (wait_for_process || keep_alive))
             hNewProcess = shExecInfo.hProcess;
+        else if(ok && force_children_on_this_program)
+            pi.dwProcessId = GetProcessId(shExecInfo.hProcess);
 
         if (! ok) {
 
@@ -1364,9 +1381,16 @@ int Program_Start(void)
     // we know for sure that SandboxieRpcSs has opened it
     //
 
-    if (ok && (! disable_force_on_this_program)) {
+    if (ok) {
 
-        SbieDll_StartCOM(FALSE);
+        if (force_children_on_this_program) {
+
+            SbieApi_Call(API_FORCE_CHILDREN, 2, pi.dwProcessId, BoxName);
+
+        } else if (!disable_force_on_this_program) {
+
+            SbieDll_StartCOM(FALSE);
+        }
     }
 
     //
@@ -1395,7 +1419,9 @@ int Program_Start(void)
             }
         }
 
-    } else if (GetModuleHandle(L"protect.dll")) {
+    } 
+    // $Workaround$ - 3rd party fix
+    else if (GetModuleHandle(L"protect.dll")) {
 
         //
         // hack for FortKnox firewall -- keep Start.exe around for a few
@@ -1637,6 +1663,44 @@ void StartAllAutoRunEntries()
 
 
 //---------------------------------------------------------------------------
+// GetParentPIDAndName
+//---------------------------------------------------------------------------
+
+extern "C" WINBASEAPI BOOL WINAPI QueryFullProcessImageNameW(HANDLE hProcess, DWORD dwFlags, LPWSTR lpExeName, PDWORD lpdwSize);
+
+DWORD GetParentPIDAndName(DWORD ProcessID, LPTSTR lpszBuffer_Parent_Name) 
+{
+	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, ProcessID);
+	if (!ProcessID) 
+		return 0;
+
+	PROCESS_BASIC_INFORMATION pbi;
+	NTSTATUS status = NtQueryInformationProcess(hProcess, ProcessBasicInformation, (LPVOID)&pbi, sizeof(pbi), NULL);
+
+	DWORD dwParentID = 0;
+	if (NT_SUCCESS(status)) {
+		
+		dwParentID = (DWORD)pbi.InheritedFromUniqueProcessId;
+
+		if (NULL != lpszBuffer_Parent_Name) {
+
+			HANDLE hParentProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, dwParentID);
+            if (hParentProcess) {
+
+                DWORD dwSize;
+                BOOL ret = QueryFullProcessImageNameW(hParentProcess, 0, lpszBuffer_Parent_Name, &dwSize);
+
+                CloseHandle(hParentProcess);
+            }
+		}
+	}
+
+	CloseHandle(hProcess);
+	return dwParentID;
+}
+
+
+//---------------------------------------------------------------------------
 // RestartInSandbox
 //---------------------------------------------------------------------------
 
@@ -1695,6 +1759,25 @@ ULONG RestartInSandbox(void)
     wcscpy(ptr, ChildCmdLine);
 
     SbieApi_GetHomePath(NULL, 0, dir, 1020);
+
+    //
+    //
+    //
+
+	if (SbieApi_QueryConfBool(BoxName, L"AlertBeforeStart", FALSE)) {
+
+        WCHAR parent_image[1020] = L"";
+		GetParentPIDAndName(GetCurrentProcessId(), parent_image);
+
+		WCHAR* text = SbieDll_FormatMessage1(MSG_3198, BoxName);
+		if (MessageBoxW(NULL, text, Sandboxie_Start_Title, MB_YESNO) == IDNO)
+			return EXIT_FAILURE;
+
+        if (_wcsnicmp(parent_image, dir, wcslen(dir)) != 0) {
+            if (MessageBoxW(NULL, SbieDll_FormatMessage0(3199), Sandboxie_Start_Title, MB_YESNO) == IDNO)
+                return EXIT_FAILURE;
+        }
+	}
 
     //
     //
@@ -1833,8 +1916,9 @@ int __stdcall WinMainCRTStartup(
 
                 ULONG NewState = DISABLE_JUST_THIS_PROCESS;
                 SbieApi_DisableForceProcess(&NewState, NULL);
-                return die(Program_Start());
             }
+            if (disable_force_on_this_program || force_children_on_this_program)
+                return die(Program_Start());
         }
 
         return die(RestartInSandbox());

@@ -404,19 +404,6 @@ void SbieDll_ReleaseFilePathLock();
 
 BOOLEAN SbieDll_HasReadableSubPath(WCHAR path_code, const WCHAR* TruePath);
 
-#define PATH_OPEN_FLAG      0x10
-#define PATH_CLOSED_FLAG    0x20
-#define PATH_WRITE_FLAG     0x40
-
-#define PATH_IS_OPEN(f)     (((f) & PATH_OPEN_FLAG) != 0)
-#define PATH_NOT_OPEN(f)    (((f) & PATH_OPEN_FLAG) == 0)
-
-#define PATH_IS_CLOSED(f)   (((f) & PATH_CLOSED_FLAG) != 0)
-#define PATH_NOT_CLOSED(f)  (((f) & PATH_CLOSED_FLAG) == 0)
-
-#define PATH_IS_WRITE(f)    (((f) & PATH_WRITE_FLAG) != 0)
-#define PATH_NOT_WRITE(f)   (((f) & PATH_WRITE_FLAG) == 0)
-
 
 //---------------------------------------------------------------------------
 // Functions (dllmain)
@@ -733,6 +720,8 @@ BOOLEAN SH32_Init(HMODULE);
 BOOLEAN SH32_Init_ZipFldr(HMODULE);
 
 BOOLEAN SH32_Init_UxTheme(HMODULE);
+
+BOOLEAN Kernel_Init();
 
 BOOLEAN Gui_Init(HMODULE);
 

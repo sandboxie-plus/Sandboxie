@@ -144,10 +144,10 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             }
             if (removeDefaultAll) {
                 for (const QString& bLine : boxSettingsLines) {
-                    QStringList bParts = bLine.split("=", Qt::SkipEmptyParts);
-                    if (bParts.size() == 2) {
-                        QString bKey = bParts[0].trimmed();
-                        QString bValue = bParts[1].trimmed();
+                    int bParts = bLine.indexOf("=", Qt::SkipEmptyParts);
+                    if (bParts != -1) {
+                        QString bKey = bLine.mid(0, bParts).trimmed();
+                        QString bValue = bLine.mid(bParts + 1).trimmed();
                         if (bKey.compare(ENABLED_PREFIX, Qt::CaseInsensitive) != 0 && bKey.compare(CFGLVL_PREFIX) != 0) { // Do not remove Enabled and ConfigLevel
                             pBox->DelValue(bKey, bValue);
                         }
@@ -165,12 +165,12 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         }
         else if (sharedTemplateMode == 2) { // Append to config
             for (const QString& tLine : templateSettings.split("\n", Qt::SkipEmptyParts)) {
-                QStringList tParts = tLine.split("=", Qt::SkipEmptyParts);
-                if (tParts.size() != 2) {
-                    continue; // Skip lines that don't have exactly one '=' character
+                int tParts = tLine.indexOf("=", Qt::SkipEmptyParts);
+                if (tParts == -1) {
+                    continue; // Skip lines that don't have at least one '=' character.
                 }
-                QString tKey = tParts[0].trimmed();
-                QString tValue = tParts[1].trimmed();
+                QString tKey = tLine.mid(0, tParts).trimmed();
+                QString tValue = tLine.mid(tParts + 1).trimmed();
 
                 if (tKey.compare(ENABLED_PREFIX, Qt::CaseInsensitive) == 0 || tKey.startsWith(TMPL_PREFIX) || tKey.startsWith("#") || tKey.endsWith(BOX_DISABLED_SUFFIX)) {
                     continue; // Skip lines that start or end with one of these
@@ -269,6 +269,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
             if(field("imagesProtection").toBool())
                 pBox->SetBool("ProtectHostImages", true);
+
+            if (field("coverBoxedWindows").toBool())
+                pBox->SetBool("CoverBoxedWindows", true);
 
             if (!Password.isEmpty())
                 pBox->ImBoxCreate(ImageSize / 1024, Password);
@@ -780,6 +783,12 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     layout->addWidget(pImageProtection, row++, 1, 1, 3);
     registerField("imagesProtection", pImageProtection);
 
+	QCheckBox* pWindowCover = new QCheckBox(tr("Prevents the sandboxed window from being captured."));
+	pWindowCover->setToolTip(tr("This feature can cause a decline in the user experience because it also prevents normal screenshots."));
+	pWindowCover->setChecked(theConf->GetBool("BoxDefaults/CoverBoxedWindows", false));
+	layout->addWidget(pWindowCover, row++, 1, 1, 3);
+	registerField("coverBoxedWindows", pWindowCover);
+
 	QString SharedTemplateName = tr("Shared Template");
 	QLabel* pSharedTemplateLbl = new QLabel(tr("Shared template mode"), this);
     pSharedTemplateLbl->setToolTip(tr("This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes."
@@ -953,6 +962,7 @@ bool CSummaryPage::validatePage()
 
         theConf->SetValue("BoxDefaults/BoxToken", field("boxToken").toBool());
         theConf->SetValue("BoxDefaults/ImagesProtection", field("imagesProtection").toBool());
+		theConf->SetValue("BoxDefaults/CoverBoxedWindows", field("coverBoxedWindows").toBool());
         theConf->SetValue("BoxDefaults/SharedTemplate", field("sharedTemplate").toInt());
     }
 

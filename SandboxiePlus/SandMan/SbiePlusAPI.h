@@ -31,8 +31,7 @@ public:
 
 	virtual void			StopMonitor();
 
-	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
-
+	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, EStartFlags Flags = eStartDefault, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 	virtual bool			IsStarting(qint64 pid) const { return m_PendingStarts.contains(pid); }
 
 private slots:

@@ -91,8 +91,8 @@ public:
 	static void			SafeShow(QWidget* pWidget);
 	int					SafeExec(QDialog* pDialog);
 
-	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
-	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
+	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString(), bool bShowFCP = false);
+	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, CSbieAPI::EStartFlags Flags = CSbieAPI::eStartDefault, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 	SB_STATUS			ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount = false);
 
 	void				EditIni(const QString& IniPath, bool bPlus = false);

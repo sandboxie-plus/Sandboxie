@@ -100,26 +100,10 @@ typedef void (*P_SwitchToThisWindow)(HWND hWnd, BOOL fAlt);
 
 typedef HWND(*P_SetActiveWindow)(HWND hWnd);
 
-typedef DWORD(*P_GetTickCount)();
-
-typedef ULONGLONG (*P_GetTickCount64)();
-
-typedef BOOL(*P_QueryUnbiasedInterruptTime)(
-	PULONGLONG UnbiasedTime
-	);
-
-typedef void(*P_Sleep)(DWORD dwMiSecond);
-
-typedef DWORD(*P_SleepEx)(DWORD dwMiSecond, BOOL bAlert);
-
-typedef BOOL (*P_QueryPerformanceCounter)(
-	LARGE_INTEGER* lpPerformanceCount
-);
-
 typedef UINT_PTR (*P_SetTimer)(
-	 HWND      hWnd,
-	           UINT_PTR  nIDEvent,
-	          UINT      uElapse,
+	 HWND hWnd,
+   UINT_PTR nIDEvent,
+   UINT uElapse,
 	 TIMERPROC lpTimerFunc
 );
 
@@ -476,8 +460,6 @@ typedef HBITMAP(*P_CreateCompatibleBitmap)(_In_ HDC hdc, _In_ int cx, _In_ int c
 
 typedef BOOL (*P_ShutdownBlockReasonCreate)(HWND hWnd, LPCWSTR pwszReason);
 
-typedef EXECUTION_STATE (*P_SetThreadExecutionState)(EXECUTION_STATE esFlags);
-
 typedef BOOL (*P_SetThreadDesktop)(HDESK hDesktop);
 
 typedef BOOL (*P_SwitchDesktop)(HDESK hDesktop);
@@ -635,18 +617,11 @@ GUI_SYS_VAR_2(SendMessage)
 GUI_SYS_VAR_2(SendMessageTimeout)
 //GUI_SYS_VAR_2(SendMessageCallback)
 GUI_SYS_VAR(ShutdownBlockReasonCreate)
-GUI_SYS_VAR(SetThreadExecutionState)
 GUI_SYS_VAR_2(SendNotifyMessage)
 GUI_SYS_VAR_2(PostMessage)
 GUI_SYS_VAR_2(PostThreadMessage)
 GUI_SYS_VAR_2(DispatchMessage)
-
-GUI_SYS_VAR(Sleep)
-GUI_SYS_VAR(SleepEx)
-GUI_SYS_VAR(GetTickCount)
-GUI_SYS_VAR(QueryUnbiasedInterruptTime)
-GUI_SYS_VAR(GetTickCount64)
-GUI_SYS_VAR(QueryPerformanceCounter)
+  
 GUI_SYS_VAR(SetTimer)
 
 GUI_SYS_VAR(MapWindowPoints)

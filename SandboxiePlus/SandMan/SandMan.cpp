@@ -1671,9 +1671,9 @@ void CSandMan::OnMessage(const QString& MsgData)
 			BoxName = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 
 		if (!BoxName.isEmpty())
-			RunStart(BoxName == "*DFP*" ? "" : BoxName, CmdLine, false, WrkDir);
+			RunStart(BoxName == "*DFP*" ? "" : BoxName, CmdLine, CSbieAPI::eStartDefault, WrkDir);
 		else
-			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir);
+			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir, true);
 	}
 	else if (Message.left(3) == "Op:")
 	{
@@ -1702,27 +1702,28 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const QString& WrkDir)
+bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const QString& WrkDir, bool bShowFCP)
 {
 	if (BoxName.isEmpty())
 		BoxName = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir, g_GUIParent);
+	if (bShowFCP) pSelectBoxWindow->ShowFCP();
 	connect(this, SIGNAL(Closed()), pSelectBoxWindow, SLOT(close()));
 	//pSelectBoxWindow->show();
 	return SafeExec(pSelectBoxWindow) == 1;
 }
 
-SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
+SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Command, CSbieAPI::EStartFlags Flags, const QString& WorkingDir, QProcess* pProcess)
 {
 	auto pBoxEx = theAPI->GetBoxByName(BoxName).objectCast<CSandBoxPlus>();
-	if (pBoxEx && pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty()){
+	if (pBoxEx && pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty()) {
 
 		SB_STATUS Status = ImBoxMount(pBoxEx, true);
 		if (Status.IsError())
 			return Status;
 	}
 
-	return theAPI->RunStart(BoxName, Command, Elevated, WorkingDir, pProcess);
+	return theAPI->RunStart(BoxName, Command, Flags, WorkingDir, pProcess);
 }
 
 SB_STATUS CSandMan::ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount)
@@ -2305,6 +2306,20 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 			AddAsyncOp(pProgress, true, tr("Executing OnBoxTerminate: %1").arg(Value2));
 		}
 	}
+
+	QString tempValPrefix = "Temp_";
+	QStringList to_delete;
+	QStringList list = pBox->GetTextList("Template", FALSE);
+	foreach(const QString& Value, list) {
+		if (tempValPrefix.compare(Value.left(5)) == 0)
+			to_delete.append(Value);
+	}
+	if (!to_delete.isEmpty()) {
+		foreach(const QString & Value, to_delete)
+			list.removeAt(list.indexOf(Value));
+		pBox->UpdateTextList("Template", list, FALSE);
+	}
+
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))
@@ -2954,13 +2969,15 @@ void CSandMan::SaveMessageLog(QIODevice* pFile)
 bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 {
 	QString Message;
-	if (iType == 1)
+	if (iType == 1 || iType == 2)
 	{
-		if (CERT_IS_LEVEL(g_CertInfo, eCertAdvanced))
+		if (CERT_IS_LEVEL(g_CertInfo, iType == 1 ? eCertAdvanced1 : eCertAdvanced))
 			return true;
 
 		Message = tr("The selected feature requires an <b>advanced</b> supporter certificate.");
-		if(g_CertInfo.active)
+		if (iType == 2 && CERT_IS_TYPE(g_CertInfo, eCertPatreon))
+			Message.append(tr("<br />you need to be on the Great Patreon level or higher to unlock this feature."));
+		else if (g_CertInfo.active)
 			Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert\">Upgrade your Certificate</a> to unlock advanced features."));
 		else
 			Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));

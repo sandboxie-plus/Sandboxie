@@ -79,6 +79,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNetFwTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkDnsTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkHookTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -131,7 +132,6 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkUseSbieDeskHack->setChecked(m_pBox->GetBool("UseSbieDeskHack", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
 
-	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 	ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 	ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
 	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
@@ -205,8 +205,6 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
 	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
 
-	ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
-
 	LoadOptionList();
 
 	bool bGlobalNoMon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("DisableResourceMonitor", false);
@@ -219,6 +217,7 @@ void COptionsWindow::LoadAdvanced()
 	ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
 	ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
 	ReadAdvancedCheck("NetFwTrace", ui.chkNetFwTrace, "*");
+	ui.chkDnsTrace->setChecked(m_pBox->GetBool("DnsTrace", false));
 	ui.chkHookTrace->setChecked(m_pBox->GetBool("ApiTrace", false));
 	ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 	ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
@@ -415,8 +414,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", "y", "");
 	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", "", "n");
 
-
-	WriteGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
+	bool bGlobalSbieLogon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieLogon", false);
+	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");
 
 	SaveOptionList();
 
@@ -430,6 +429,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
 	WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
 	WriteAdvancedCheck(ui.chkNetFwTrace, "NetFwTrace", "*");
+	WriteAdvancedCheck(ui.chkDnsTrace, "DnsTrace", "y");
 	WriteAdvancedCheck(ui.chkHookTrace, "ApiTrace", "y");
 	WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 	WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
@@ -556,7 +556,7 @@ void COptionsWindow::UpdateBoxIsolation()
 {
 	ui.chkNoSecurityFiltering->setEnabled(ui.chkNoSecurityIsolation->isChecked());
 
-	ui.chkAddToJob->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkAddToJob->setEnabled(!IsAccessEntrySet(eWnd, "", eOpen, "*") && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkNestedJobs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
@@ -582,9 +582,19 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkCloseForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkNoOpenForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
+	ui.chkSbieLogon->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
 	if (ui.chkNoSecurityIsolation->isChecked()) {
 		ui.chkCloseForBox->setChecked(false);
 		ui.chkNoOpenForBox->setChecked(false);
+		if (!IsAccessEntrySet(eWnd, "", eOpen, "*"))
+			ui.chkAddToJob->setChecked(false);
+		ui.chkSbieLogon->setChecked(false);
+	}
+	else {
+		if (!IsAccessEntrySet(eWnd, "", eOpen, "*"))
+			ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
+		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 	}
 }
 

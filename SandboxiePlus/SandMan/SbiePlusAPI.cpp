@@ -92,11 +92,11 @@ void CSbiePlusAPI::StopMonitor()
 	m_BoxMonitor->Stop();
 }
 
-SB_RESULT(quint32) CSbiePlusAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
+SB_RESULT(quint32) CSbiePlusAPI::RunStart(const QString& BoxName, const QString& Command, EStartFlags Flags, const QString& WorkingDir,QProcess* pProcess)
 {
 	if (!pProcess)
 		pProcess = new QProcess(this);
-	SB_RESULT(quint32) Status = CSbieAPI::RunStart(BoxName, Command, Elevated, WorkingDir, pProcess);
+	SB_RESULT(quint32) Status = CSbieAPI::RunStart(BoxName, Command, Flags, WorkingDir, pProcess);
 	if (pProcess->parent() == this) {
 		if (!Status.IsError()) {
 			connect(pProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(OnStartFinished()));

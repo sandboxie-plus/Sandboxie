@@ -420,6 +420,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	if (CurrentVersion.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
 		ui.chkWin32k->setEnabled(false);
+	//connect(ui.chkForceExplorerChild, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	//connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	m_FeaturesChanged = false;
 	connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
@@ -953,6 +954,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkMinimize->setChecked(theConf->GetBool("Options/MinimizeToTray", false));
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
+	//ui.chkForceExplorerChild->setChecked(strcmp(theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").toStdString().c_str(), theAPI->GetGlobalSettings()->GetText("DefaultBox").toStdString().c_str())==0);
 	OnLoadAddon();
 
 	bool bImDiskReady = theGUI->IsImDiskReady();
@@ -1434,6 +1436,8 @@ QString CSettingsWindow::GetCertLevel()
 	QString CertLevel;
 	if (g_CertInfo.level == eCertAdvanced)
 		CertLevel = tr("Advanced");
+	else if (g_CertInfo.level == eCertAdvanced1)
+		CertLevel = tr("Advanced (L)");
 	else if (g_CertInfo.level == eCertMaxLevel)
 		CertLevel = tr("Max Level");
 	else if (g_CertInfo.level != eCertStandard && g_CertInfo.level != eCertStandard2)
@@ -1640,7 +1644,10 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
-
+	//if (ui.chkForceExplorerChild->isChecked())
+	//	theAPI->GetGlobalSettings()->SetText("ForceExplorerChild", theAPI->GetGlobalSettings()->GetText("DefaultBox"));
+	//else if (theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").compare(theAPI->GetGlobalSettings()->GetText("DefaultBox")) == 0)
+	//	theAPI->GetGlobalSettings()->DelValue("ForceExplorerChild");
 	if (theAPI->IsConnected())
 	{
 		try

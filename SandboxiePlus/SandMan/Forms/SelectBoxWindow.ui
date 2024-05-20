@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>290</width>
-    <height>430</height>
+    <width>278</width>
+    <height>475</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -31,77 +31,83 @@
   <property name="windowTitle">
    <string>SandboxiePlus select box</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="5" column="0">
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QRadioButton" name="radBoxed">
-       <property name="text">
-        <string>Run Sandboxed</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QTreeWidget" name="treeBoxes">
-       <column>
-        <property name="text">
-         <string>Sandbox</string>
-        </property>
-       </column>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QRadioButton" name="radUnBoxed">
-       <property name="text">
-        <string>Run Outside the Sandbox</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QCheckBox" name="chkAdmin">
-       <property name="text">
-        <string>Run As UAC Administrator</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Select the sandbox in which to start the program, installer or document.</string>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QRadioButton" name="radBoxedNew">
-       <property name="text">
-        <string>Run in a new Sandbox</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="5" column="0">
+    <widget class="QRadioButton" name="radUnBoxed">
+     <property name="text">
+      <string>Run Outside the Sandbox</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="chkFCP">
+     <property name="toolTip">
+      <string>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</string>
+     </property>
+     <property name="text">
+      <string>Force Children</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QTreeWidget" name="treeBoxes">
+     <column>
+      <property name="text">
+       <string>Sandbox</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QRadioButton" name="radBoxedNew">
+     <property name="text">
+      <string>Run in a new Sandbox</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="2">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="2">
+    <widget class="QCheckBox" name="chkAdmin">
+     <property name="text">
+      <string>Run As UAC Administrator</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0" colspan="2">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QRadioButton" name="radBoxed">
+     <property name="text">
+      <string>Run Sandboxed</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Select the sandbox in which to start the program, installer or document.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

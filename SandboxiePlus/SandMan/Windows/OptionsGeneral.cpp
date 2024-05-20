@@ -96,9 +96,8 @@ void COptionsWindow::CreateGeneral()
 	}
 	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard2))
 		COptionsWindow__AddCertIcon(ui.chkConfidential, true);
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced1))
 		COptionsWindow__AddCertIcon(ui.chkEncrypt, true);
-	}
 
 
 	m_HoldBoxType = false;

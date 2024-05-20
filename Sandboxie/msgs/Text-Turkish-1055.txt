@@ -676,6 +676,10 @@ SBIE2332 SbiePst.dat dosyasına erişilemiyor
 SBIE2335 %2 işlemi için başlatma başarısız oldu
 .
 
+2360;pop;err;01
+SBIE2360 SOCKS5 ara sunucusu eklenemedi: %2
+.
+
 2336;pop;err;01
 SBIE2336 GUI sunucusunda hata:  %2
 .

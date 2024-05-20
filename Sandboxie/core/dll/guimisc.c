@@ -119,29 +119,7 @@ static int Gui_ReleaseDC(HWND hWnd, HDC hDc);
 
 static BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason);
 
-static EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags);
-
-static DWORD Gui_GetTickCount();
-
-static ULONGLONG Gui_GetTickCount64();
-
-static BOOL Gui_QueryUnbiasedInterruptTime(
-	PULONGLONG UnbiasedTime
-	);
-
-static void Gui_Sleep(DWORD dwMiSecond);
-
-static DWORD Gui_SleepEx(DWORD dwMiSecond, BOOL bAlert);
-
-static BOOL Gui_QueryPerformanceCounter(
-	LARGE_INTEGER* lpPerformanceCount
-	);
-static UINT_PTR Gui_SetTimer(
-	 HWND      hWnd,
-	           UINT_PTR  nIDEvent,
-	           UINT      uElapse,
-	 TIMERPROC lpTimerFunc
-);
+static UINT_PTR Gui_SetTimer(HWND hWnd, UINT_PTR nIDEvent, UINT uElapse, TIMERPROC lpTimerFunc);
 
 //---------------------------------------------------------------------------
 
@@ -311,27 +289,13 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
     if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE)) {
 
         SBIEDLL_HOOK_GUI(ShutdownBlockReasonCreate);
-
-        module = Dll_Kernel32;
-
-        SBIEDLL_HOOK(Gui_, SetThreadExecutionState);
     }
-	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE))
-	{
-		module = current;
-		SBIEDLL_HOOK(Gui_, SetTimer);
-		module = Dll_Kernel32;
-		SBIEDLL_HOOK(Gui_, GetTickCount);
-		P_GetTickCount64 GetTickCount64 = Ldr_GetProcAddrNew(Dll_Kernel32, "GetTickCount64", "GetTickCount64");
-		if (GetTickCount64)
-			SBIEDLL_HOOK(Gui_, GetTickCount64);
-		P_QueryUnbiasedInterruptTime QueryUnbiasedInterruptTime = Ldr_GetProcAddrNew(Dll_Kernel32, "QueryUnbiasedInterruptTime", "QueryUnbiasedInterruptTime");
-		if (QueryUnbiasedInterruptTime)
-			SBIEDLL_HOOK(Gui_, QueryUnbiasedInterruptTime);
-		SBIEDLL_HOOK(Gui_, QueryPerformanceCounter);
-		SBIEDLL_HOOK(Gui_, Sleep);
-		SBIEDLL_HOOK(Gui_, SleepEx);
-		
+	
+	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE)) 	{
+		P_SetTimer SetTimer = Ldr_GetProcAddrNew(DllName_user32, "SetTimer", "SetTimer");
+        if (SetTimer) {
+            SBIEDLL_HOOK(Gui_, SetTimer);
+        }
 	}
 	
     return TRUE;
@@ -1675,15 +1639,17 @@ _FX BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason)
 
 
 //---------------------------------------------------------------------------
-// Gui_SetThreadExecutionState
+// Gui_SetTimer
 //---------------------------------------------------------------------------
 
 
-_FX EXECUTION_STATE Gui_SetThreadExecutionState(EXECUTION_STATE esFlags) 
+_FX UINT_PTR Gui_SetTimer(HWND hWnd, UINT_PTR nIDEvent, UINT uElapse, TIMERPROC lpTimerFunc)
 {
-	SetLastError(ERROR_ACCESS_DENIED);
-	return 0;
-	//return __sys_SetThreadExecutionState(esFlags);
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1);
+	if (add != 0 && low != 0)
+		return __sys_SetTimer(hWnd, nIDEvent, uElapse * add / low, lpTimerFunc);
+	else
+		return 0;
 }
 
 

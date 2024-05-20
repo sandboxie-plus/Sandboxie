@@ -135,6 +135,20 @@ private slots:
 	void OnTestNetFwRule();
 	void OnClearNetFwTest();
 
+	void OnAddDnsFilter();
+	void OnDelDnsFilter();
+	void OnDnsFilterChanged(QTreeWidgetItem * pItem, int Column) { m_DnsFilterChanged = true; OnOptChanged(); }
+
+	void OnNetProxyItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
+	void OnNetProxySelectionChanged() { CloseNetProxyEdit(); OnOptChanged(); }
+	void OnAddNetProxy();
+	void OnDelNetProxy();
+	void OnTestNetProxy();
+	void OnProxyResolveHostnames();
+	void OnNetProxyMoveUp();
+	void OnNetProxyMoveDown();
+	void OnNetProxyChanged(QTreeWidgetItem * pItem, int Column) { m_NetProxyChanged = true; OnOptChanged(); }
+
 	void OnBlockDns();
 	void OnBlockSamba();
 	//
@@ -224,6 +238,7 @@ private slots:
 
 	void OnTab() { OnTab(ui.tabs->currentWidget()); }
 	void OnAccessTab()  { OnTab(ui.tabsAccess->currentWidget()); }
+	void OnInternetTab()  { OnTab(ui.tabsInternet->currentWidget()); }
 
 	void OnGeneralChanged();
 	void OnPSTChanged();
@@ -343,12 +358,19 @@ public:
 		eTerminateCmd
 	};
 
+    enum EAuthMode {
+		eAuthDisabled,
+		eAuthEnabled ,
+	};
+
 	static QString AccessTypeToName(EAccessEntry Type);
 	static QPair<EAccessType, EAccessMode> SplitAccessType(EAccessEntry Type);
 
 	static QString	GetAccessTypeStr(EAccessType Type);
 	static QString	GetAccessModeStr(EAccessMode Mode);
 	static QString	GetAccessModeTip(EAccessMode Mode);
+
+    static QString GetAuthModeStr(EAuthMode Mode);
 
 protected:
 	void SetBoxColor(const QColor& color);
@@ -436,6 +458,19 @@ protected:
 	void LoadNetFwRules();
 	void SaveNetFwRules();
 	void LoadNetFwRulesTmpl(bool bUpdate = false);
+
+	void LoadDnsFilter();
+	void AddDnsFilter(const QString& Value, bool disabled = false, const QString& Template = QString());
+	void AddDnsFilter(const QString& Prog, const QString& Domain, const QStringList& IPs = QStringList(), bool disabled = false, const QString& Template = QString());
+	void SaveDnsFilter();
+
+	void ParseAndAddNetProxy(const QString& Value, bool disabled = false, const QString& Template = QString());
+	void CloseNetProxyEdit(bool bSave = true);
+	void CloseNetProxyEdit(QTreeWidgetItem* pItem, bool bSave = true);
+	EAuthMode GetAuthMode(const QString& Value);
+	void LoadNetProxy();
+	void SaveNetProxy();
+	void WriteNetProxy(const QString& Setting, const QStringList& List);
 	//
 	
 	// access
@@ -528,6 +563,8 @@ protected:
 	//bool m_RestrictionChanged;
 	bool m_INetBlockChanged;
 	bool m_NetFwRulesChanged;
+	bool m_DnsFilterChanged;
+	bool m_NetProxyChanged;
 	bool m_AccessChanged;
 	bool m_TemplatesChanged;
 	bool m_FoldersChanged;

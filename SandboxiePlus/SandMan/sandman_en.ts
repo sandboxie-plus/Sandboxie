@@ -8385,6 +8385,11 @@ Please note that this values are currently user specific and saved globally for 
         <translation></translation>
     </message>
     <message>
+        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
+        <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
         <source>Select the sandbox in which to start the program, installer or document.</source>
         <translation></translation>
@@ -8392,11 +8397,6 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="64"/>
         <source>Run in a new Sandbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
-        <source>Force child processes to be sandboxed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

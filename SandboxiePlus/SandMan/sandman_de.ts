@@ -8385,6 +8385,11 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <translation>SandboxiePlus Box auswählen</translation>
     </message>
     <message>
+        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
+        <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
         <source>Select the sandbox in which to start the program, installer or document.</source>
         <translation>Wählen Sie die Sandbox in welcher das Programm, der Installer oder das Dokument gestartet/geöffnet werden soll.</translation>
@@ -8393,11 +8398,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SelectBoxWindow.ui" line="64"/>
         <source>Run in a new Sandbox</source>
         <translation>In einer neuen Sandbox ausführen</translation>
-    </message>
-    <message>
-        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
-        <source>Force child processes to be sandboxed</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>

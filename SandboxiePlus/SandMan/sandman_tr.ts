@@ -8366,11 +8366,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>SandboxiePlus alan seç</translation>
     </message>
     <message>
-        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
-        <source>Force child processes to be sandboxed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
         <translation type="unfinished"></translation>
@@ -8384,6 +8379,11 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SelectBoxWindow.ui" line="81"/>
         <source>Run As UAC Administrator</source>
         <translation>UAC Yöneticisi Olarak Çalıştır</translation>
+    </message>
+    <message>
+        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
+        <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="95"/>

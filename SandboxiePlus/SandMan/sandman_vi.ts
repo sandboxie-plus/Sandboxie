@@ -8726,6 +8726,11 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
         <translation>SandboxiePlus chọn Sandbox</translation>
     </message>
     <message>
+        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
+        <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
         <source>Select the sandbox in which to start the program, installer or document.</source>
         <translation>Chọn Sandbox để khởi động chương trình, trình cài đặt hoặc tài liệu.</translation>
@@ -8733,11 +8738,6 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="64"/>
         <source>Run in a new Sandbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
-        <source>Force child processes to be sandboxed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

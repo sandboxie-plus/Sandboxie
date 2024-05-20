@@ -8908,6 +8908,11 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>SandboxiePlus 选择沙盒</translation>
     </message>
     <message>
+        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
+        <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
         <source>Select the sandbox in which to start the program, installer or document.</source>
         <translation>选择要用于运行程序、安装程序或打开文件的沙盒</translation>
@@ -8918,9 +8923,8 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>在新沙盒中运行</translation>
     </message>
     <message>
-        <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force child processes to be sandboxed</source>
-        <translation>强制子进程沙盒化</translation>
+        <translation type="vanished">强制子进程沙盒化</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>

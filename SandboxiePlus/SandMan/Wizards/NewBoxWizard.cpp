@@ -98,37 +98,29 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
 		
         // SharedTemplate
-        const QString TEMPLATE_PREFIX = "Template_Local_";
-        const QString DISABLE_WIZARD_SETTINGS = "#DisableWizardSettings";
-        const QString REMOVE_DEFAULT_ALL = "#RemoveDefaultAll";
-        const QString REMOVE_DEFAULT_RECOVERS = "#RemoveDefaultRecovers";
-        const QString REMOVE_DEFAULT_TEMPLATES = "#RemoveDefaultTemplates";
-        const QString ENABLED_PREFIX = "Enabled";
-        const QString CFGLVL_PREFIX = "ConfigLevel";
-        const QString TMPL_PREFIX = "Tmpl.";
-        const QString BOX_DISABLED_SUFFIX = "Disabled";
+        QElapsedTimer timer;
+        timer.start();
+        const QString templateName = "SharedTemplate";
+        const QString templateFullName = "Template_Local_" + templateName;
+        const QString templateSettings = theAPI->SbieIniGetEx(templateFullName, "");
+        const QStringList templateSettingsLines = templateSettings.split(QRegularExpression(QStringLiteral("[\r\n]")), Qt::SkipEmptyParts);
+        const QString templateComment = tr("Add your settings after this line.");
+        const QString templateTitle = tr("Shared Template");
+        const QString boxSettings = theAPI->SbieIniGetEx(BoxName, "");
+        const QStringList boxSettingsLines = boxSettings.split(QRegularExpression(QStringLiteral("[\r\n]")), Qt::SkipEmptyParts);
         const QStringList SPECIAL_SETTINGS = { "BorderColor", "BoxIcon", "BoxNameTitle", "ConfigLevel", "CopyLimitKb" };
 
-        QString templateName = "SharedTemplate";
-        QString templateFullName = TEMPLATE_PREFIX + templateName;
-        QString templateSettings = theAPI->SbieIniGetEx(templateFullName, "");
-        QString templateComment = tr("Add your settings after this line.");
-        QString templateTitle = tr("Shared Template");
-
-        bool disableWizardSettings = templateSettings.contains(DISABLE_WIZARD_SETTINGS + "=y");
-        bool removeDefaultAll = templateSettings.contains(REMOVE_DEFAULT_ALL + "=y");
-        bool removeDefaultRecovers = templateSettings.contains(REMOVE_DEFAULT_RECOVERS + "=y");
-        bool removeDefaultTemplates = templateSettings.contains(REMOVE_DEFAULT_TEMPLATES + "=y");
+        bool disableWizardSettings = templateSettings.contains(QRegularExpression(QStringLiteral("[\r\n]#DisableWizardSettings=y[\r\n]")));
+        bool removeDefaultAll = templateSettings.contains(QRegularExpression(QStringLiteral("[\r\n]#RemoveDefaultAll=y[\r\n]")));
+        bool removeDefaultRecovers = templateSettings.contains(QRegularExpression(QStringLiteral("[\r\n]#RemoveDefaultRecovers=y[\r\n]")));
+        bool removeDefaultTemplates = templateSettings.contains(QRegularExpression(QStringLiteral("[\r\n]#RemoveDefaultTemplates=y[\r\n]")));
 
         // Create base template
         if (templateSettings.isEmpty()) {
-            QString templateBase = QStringLiteral("Tmpl.Title=%1\nTmpl.Class=Local\n%3=n\n%4=n\n%5=n\n%6=n\nTmpl.Comment=%2")
-                .arg(templateTitle, templateComment, DISABLE_WIZARD_SETTINGS, REMOVE_DEFAULT_ALL, REMOVE_DEFAULT_RECOVERS, REMOVE_DEFAULT_TEMPLATES);
+            const QString templateBase = QStringLiteral("Tmpl.Title=%1\nTmpl.Class=Local\n%3=n\n%4=n\n%5=n\n%6=n\nTmpl.Comment=%2")
+                .arg(templateTitle, templateComment, "#DisableWizardSettings", "#RemoveDefaultAll", "#RemoveDefaultRecovers", "#RemoveDefaultTemplates");
             theAPI->SbieIniSet(templateFullName, "", templateBase);
         }
-
-        QString boxSettings = theAPI->SbieIniGetEx(BoxName, "");
-        QStringList boxSettingsLines = boxSettings.split("\n", Qt::SkipEmptyParts);
 
         int sharedTemplateMode = field("sharedTemplate").toInt();
         switch (sharedTemplateMode)
@@ -147,9 +139,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 for (const QString& bLine : boxSettingsLines) {
                     int bParts = bLine.indexOf("=", Qt::SkipEmptyParts);
                     if (bParts != -1) {
-                        QString bKey = bLine.mid(0, bParts).trimmed();
-                        QString bValue = bLine.mid(bParts + 1).trimmed();
-                        if (bKey.compare(ENABLED_PREFIX, Qt::CaseInsensitive) != 0 && bKey.compare(CFGLVL_PREFIX) != 0) { // Do not remove Enabled and ConfigLevel
+                        const QString bKey = bLine.mid(0, bParts).trimmed();
+                        const QString bValue = bLine.mid(bParts + 1).trimmed();
+                        if (bKey.compare("Enabled", Qt::CaseInsensitive) != 0 && bKey.compare("ConfigLevel") != 0) { // Do not remove Enabled and ConfigLevel
                             pBox->DelValue(bKey, bValue);
                         }
                     }
@@ -160,20 +152,19 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             // Default case
             break;
         }
-        if (sharedTemplateMode == 1) { // Insert template
-            QString insertValue = templateFullName.replace("Template_", "");
+        if (sharedTemplateMode == 1) { // Insert as template
+            const QString insertValue = templateFullName.mid(9); // Template_
             pBox->InsertText("Template", insertValue);
         }
-        else if (sharedTemplateMode == 2) { // Append to config
-            for (const QString& tLine : templateSettings.split("\n", Qt::SkipEmptyParts)) {
+        else if (sharedTemplateMode == 2) { // Append template settings to configuration
+            for (const QString& tLine : templateSettingsLines) {
                 int tParts = tLine.indexOf("=", Qt::SkipEmptyParts);
                 if (tParts == -1) {
                     continue; // Skip lines that don't have at least one '=' character.
                 }
-                QString tKey = tLine.mid(0, tParts).trimmed();
-                QString tValue = tLine.mid(tParts + 1).trimmed();
-
-                if (tKey.compare(ENABLED_PREFIX, Qt::CaseInsensitive) == 0 || tKey.startsWith(TMPL_PREFIX) || tKey.startsWith("#") || tKey.endsWith(BOX_DISABLED_SUFFIX)) {
+                const QString tKey = tLine.mid(0, tParts).trimmed();
+                const QString tValue = tLine.mid(tParts + 1).trimmed();
+                if (tKey.compare("Enabled", Qt::CaseInsensitive) == 0 || tKey.startsWith("Tmpl.") || tKey.startsWith("#") || tKey.endsWith("Disabled")) {
                     continue; // Skip lines that start or end with one of these
                 }
 
@@ -185,6 +176,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 }
             }
         }
+        qDebug().noquote().nospace() << templateName << " (Mode = " << sharedTemplateMode << ") operation took " << timer.elapsed() << " ms";
         //
         if (!disableWizardSettings || sharedTemplateMode == 0) {
 		    switch (BoxType)

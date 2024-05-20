@@ -184,7 +184,8 @@ _FX BOX *Process_GetForcedStartBox(
     if (! ProcessObject)
         return NULL;
 
-    if (    (_wcsicmp(pSidString, Driver_S_1_5_18) == 0 || //	System
+    if ((! Conf_Get_Boolean(NULL, L"AllowForceSystem", 0, FALSE)) &&
+            (_wcsicmp(pSidString, Driver_S_1_5_18) == 0 || //	System
              _wcsicmp(pSidString, Driver_S_1_5_19) == 0 || //	Local Service
              _wcsicmp(pSidString, Driver_S_1_5_20) == 0)   //	Network Service
                 && (! Process_IsDcomLaunchParent(ParentId)) ){
@@ -274,7 +275,8 @@ _FX BOX *Process_GetForcedStartBox(
                         &boxes, DocArg, force_alert, &alert);
             }
 
-            if (box && Process_IsImmersiveProcess(
+            if (box && (! Conf_Get_Boolean(NULL, L"AllowForceImmersive", 0, FALSE)) &&
+                        Process_IsImmersiveProcess(
                                         ProcessObject, ParentId, SessionId)) {
                 box = NULL;
                 alert = 1;

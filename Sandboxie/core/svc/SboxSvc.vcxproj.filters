@@ -78,6 +78,7 @@
     <ClCompile Include="DriverAssistSid.cpp">
       <Filter>DriverAssist</Filter>
     </ClCompile>
+    <ClCompile Include="BoxManager.cpp" />
     <ClCompile Include="MountManager.cpp">
       <Filter>MountManager</Filter>
     </ClCompile>
@@ -153,6 +154,7 @@
     <ClInclude Include="..\..\common\ini.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="BoxManager.h" />
     <ClInclude Include="MountManagerWire.h">
       <Filter>MountManager</Filter>
     </ClInclude>

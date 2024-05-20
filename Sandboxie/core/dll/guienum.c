@@ -234,6 +234,9 @@ _FX BOOLEAN Gui_InitEnum(HMODULE module)
     // hook desktop APIs
     //
 
+    if (SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE))
+        return TRUE;
+
     SBIEDLL_HOOK_GUI(EnumDesktopsW);
     SBIEDLL_HOOK_GUI(EnumDesktopsA);
     SBIEDLL_HOOK_GUI(OpenDesktopW);

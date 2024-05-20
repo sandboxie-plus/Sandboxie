@@ -285,7 +285,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 	__sys_GetThreadDpiAwarenessContext = (P_GetThreadDpiAwarenessContext)
 		Ldr_GetProcAddrNew(DllName_user32, L"GetThreadDpiAwarenessContext","GetThreadDpiAwarenessContext");
 
-
+	HMODULE current = module;
     if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE)) {
 
         SBIEDLL_HOOK_GUI(ShutdownBlockReasonCreate);
@@ -1702,4 +1702,46 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 	if (Gui_BlockInterferenceControl)
 		return;
 	__sys_SwitchToThisWindow(hWnd, fAlt);
+}
+
+_FX DWORD Gui_GetTickCount() {
+	return __sys_GetTickCount() * SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL,L"LowTickSpeed", 1);
+}
+
+_FX ULONGLONG Gui_GetTickCount64() {
+	return __sys_GetTickCount64() * SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+}
+
+_FX BOOL Gui_QueryUnbiasedInterruptTime(
+	PULONGLONG UnbiasedTime
+) {
+	BOOL rtn = __sys_QueryUnbiasedInterruptTime(UnbiasedTime);
+	*UnbiasedTime *= SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+	return rtn;
+}
+
+_FX void Gui_Sleep(DWORD dwMiSecond) {
+	__sys_Sleep(dwMiSecond * SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1));
+}
+
+_FX DWORD Gui_SleepEx(DWORD dwMiSecond, BOOL bAlert) {
+	return __sys_SleepEx(dwMiSecond * SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1),bAlert);
+}
+
+_FX BOOL Gui_QueryPerformanceCounter(
+	LARGE_INTEGER* lpPerformanceCount
+) {
+	BOOL rtn = __sys_QueryPerformanceCounter(lpPerformanceCount);
+	lpPerformanceCount->QuadPart = lpPerformanceCount->QuadPart*SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1)/ SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
+	return rtn;
+}
+
+_FX UINT_PTR Gui_SetTimer(
+	HWND      hWnd,
+	UINT_PTR  nIDEvent,
+	UINT      uElapse,
+	TIMERPROC lpTimerFunc
+)
+{
+	return __sys_SetTimer(hWnd, nIDEvent, uElapse * SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1) / SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1), lpTimerFunc);
 }

@@ -416,7 +416,18 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(ClipCursor);
     GUI_IMPORT___(GetClipCursor);
     GUI_IMPORT___(GetCursorPos);
-    GUI_IMPORT___(SetCursorPos);
+	GUI_IMPORT___(SetCursorPos);
+
+	GUI_IMPORT___(SetTimer);
+	HMODULE temp = module;
+	module = Dll_Kernel32;
+	GUI_IMPORT___(Sleep);
+	GUI_IMPORT___(SleepEx);
+	GUI_IMPORT___(GetTickCount);
+	GUI_IMPORT___(GetTickCount64);
+	GUI_IMPORT___(QueryUnbiasedInterruptTime);
+	GUI_IMPORT___(QueryPerformanceCounter);
+	module = temp;
 
 	GUI_IMPORT___(SetTimer);
     GUI_IMPORT___(MsgWaitForMultipleObjects);
@@ -923,6 +934,24 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
     if (DisallowWin32kSystemCallsIsOn())
     {
         return FALSE;
+    }
+
+    if (SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE)) {
+
+        static BOOLEAN Connected = FALSE;
+        if (Connected)
+            return TRUE;
+
+        ULONG req = GUI_GET_WINDOW_STATION;
+        GUI_GET_WINDOW_STATION_RPL *rpl = Gui_CallProxyEx(
+                    &req, sizeof(ULONG), sizeof(*rpl), FALSE);
+
+        if (rpl) {
+            Dll_Free(rpl);
+            Connected = TRUE;
+        }
+
+        return TRUE;
     }
 
     //

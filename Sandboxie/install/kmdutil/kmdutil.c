@@ -46,7 +46,8 @@ typedef enum _COMMAND {
     CMD_SCANDLL,
     CMD_SCANDLL_SILENT,
     CMD_MESSAGE,
-    CMD_FIXDACLS
+    CMD_FIXDACLS,
+    CMD_SWITCHDESK
 } COMMAND;
 
 typedef enum _OPTIONS {
@@ -230,6 +231,10 @@ BOOL Parse_Command_Line(
     } else if (_wcsicmp(args[1], L"fixdacls") == 0) {
         *Command = CMD_FIXDACLS;
         num_args_needed = 0;
+
+    } else if (_wcsicmp(args[1], L"switchdesk") == 0) {
+        *Command = CMD_SWITCHDESK;
+        num_args_needed = 1;
 
     } else {
         *Command = CMD_ERROR;
@@ -742,6 +747,26 @@ BOOL Kmd_Show_Message(
 }
 
 //---------------------------------------------------------------------------
+// Kmd_Show_Message
+//---------------------------------------------------------------------------
+
+BOOL Kmd_SwitchDesk(
+    const wchar_t *name)
+{
+    HDESK hDesktop = OpenDesktop(name, 0, FALSE, GENERIC_ALL);
+    if (hDesktop == NULL) {
+        //DWORD err = GetLastError();
+        return FALSE;
+    }
+
+    BOOL ok = SwitchDesktop(hDesktop);
+
+    CloseDesktop(hDesktop);
+
+    return ok;
+}
+
+//---------------------------------------------------------------------------
 // WinMain
 //---------------------------------------------------------------------------
 
@@ -775,6 +800,11 @@ int __stdcall WinMain(
 
     if (Command == CMD_FIXDACLS) {
         ok = Kmd_FixDacls();
+        goto finish;
+    }
+
+    if (Command == CMD_SWITCHDESK) {
+        ok = Kmd_SwitchDesk(Driver_Name);
         goto finish;
     }
 

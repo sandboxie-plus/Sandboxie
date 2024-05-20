@@ -1198,41 +1198,22 @@
             <layout class="QGridLayout" name="gridLayout_39">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_38">
-               <item row="11" column="1">
-                <spacer name="verticalSpacer_25">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="0" colspan="3">
-                <widget class="QLabel" name="label_42">
+               <item row="3" column="2">
+                <widget class="QLabel" name="label_60">
                  <property name="text">
-                  <string>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</string>
+                  <string>Security Isolation through the usage of a heavily restricted process token is Sandboxie's primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="11" column="2">
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+               <item row="11" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkOpenSamEndpoint">
+                 <property name="text">
+                  <string>Open access to Windows Security Account Manager</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
                <item row="2" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkNoSecurityIsolation">
@@ -1241,10 +1222,43 @@
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkOpenSamEndpoint">
+               <item row="10" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkOpenDevCMApi">
                  <property name="text">
-                  <string>Open access to Windows Security Account Manager</string>
+                  <string>Allow sandboxed programs to manage Hardware/Devices</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkOpenLsaEndpoint">
+                 <property name="text">
+                  <string>Open access to Windows Local Security Authority</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="lblDesktop">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the sandbox integrity itself</string>
+                 </property>
+                 <property name="text">
+                  <string>Desktop Isolation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="3">
+                <widget class="QLabel" name="label_42">
+                 <property name="text">
+                  <string>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -1265,28 +1279,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="2">
-                <widget class="QLabel" name="label_60">
-                 <property name="text">
-                  <string>Security Isolation through the usage of a heavily restricted process token is Sandboxie's primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkOpenLsaEndpoint">
-                 <property name="text">
-                  <string>Open access to Windows Local Security Authority</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0" colspan="3">
                 <widget class="QLabel" name="lblIsolation">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1299,11 +1295,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="0">
+               <item row="8" column="0">
                 <widget class="QLabel" name="lblAccess">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1316,20 +1311,46 @@
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkOpenDevCMApi">
-                 <property name="text">
-                  <string>Allow sandboxed programs to manage Hardware/Devices</string>
+               <item row="13" column="2">
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                </widget>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
-               <item row="7" column="1" colspan="2">
+               <item row="13" column="1">
+                <spacer name="verticalSpacer_25">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="9" column="1" colspan="2">
                 <widget class="QLabel" name="label_62">
                  <property name="text">
                   <string>The below options can be used safely when you don't grant admin rights.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkSbieDesktop">
+                 <property name="text">
+                  <string>Run Processes on an own Sandboxed Desktop</string>
                  </property>
                 </widget>
                </item>

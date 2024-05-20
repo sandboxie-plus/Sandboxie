@@ -139,7 +139,7 @@ SBIE2338 Encountered unsupported architecture in process:  %2
 .
 
 3198;txt;01
-Do you want to start a new program into the sandbox %s?
+Do you want to start a new program in the %2 sandbox?
 You received this message because you set AlertBeforeStart=y.
 .
 

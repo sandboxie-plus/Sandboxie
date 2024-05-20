@@ -1359,6 +1359,9 @@ bool GuiServer::GetWindowStationAndDesktopName(WCHAR *out_name)
         }
     }
 
+    if(label_sd != NULL)
+        LocalFree(label_sd);
+
     ReportError2336(-1, errlvl, GetLastError());
     return false;
 }

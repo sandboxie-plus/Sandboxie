@@ -13,6 +13,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.14.1 / 5.69.1] - 2024-05-??
+
+### Changed
+- split the advanced new box wizard page in two
+
+### Fixed
+- fixed issue with proxy authentication setting
+- fixed memory leak in sbiesvc
+
+
+
 ## [1.14.0 / 5.69.0] - 2024-05-17
 
 ### Added

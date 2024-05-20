@@ -18,6 +18,7 @@ CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
 {
     setPage(Page_Type, new CBoxTypePage(bAlowTemp));
     setPage(Page_Files, new CFilesPage);
+    setPage(Page_Isolation, new CIsolationPage);
     setPage(Page_Advanced, new CAdvancedPage);
     setPage(Page_Summary, new CSummaryPage);
     
@@ -672,7 +673,7 @@ CFilesPage::CFilesPage(QWidget *parent)
 
 int CFilesPage::nextId() const
 {
-    return CNewBoxWizard::Page_Advanced;
+    return CNewBoxWizard::Page_Isolation;
 }
     
 void CFilesPage::initializePage()
@@ -709,14 +710,14 @@ bool CFilesPage::validatePage()
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// CAdvancedPage
+// CIsolationPage
 // 
 
-CAdvancedPage::CAdvancedPage(QWidget *parent)
+CIsolationPage::CIsolationPage(QWidget *parent)
     : QWizardPage(parent)
 {
-    setTitle(tr("Advanced Sandbox options"));
-    setSubTitle(tr("On this page advanced sandbox options can be configured."));
+    setTitle(tr("Sandbox Isolation options"));
+    setSubTitle(tr("On this page sandbox isolation options can be configured."));
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;
@@ -751,7 +752,7 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     m_pDropAdmin = new QCheckBox(tr("Drop rights from Administrators and Power Users groups"));
     m_pDropAdmin->setChecked(theConf->GetBool("BoxDefaults/DropAdmin", false));
     layout->addWidget(m_pDropAdmin, row++, 1, 1, 3);
-    connect(m_pDropAdmin, &QCheckBox::stateChanged, this, &CAdvancedPage::OnDropAdminChanged);
+    connect(m_pDropAdmin, &QCheckBox::stateChanged, this, &CIsolationPage::OnDropAdminChanged);
     registerField("dropAdmin", m_pDropAdmin);
 
     QCheckBox* pFakeAdmin = new QCheckBox(tr("Make applications think they are running elevated"));
@@ -766,7 +767,68 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     layout->addWidget(m_pMSIServer, row++, 1, 1, 3);
     registerField("msiServer", m_pMSIServer);
 
+    setLayout(layout);
+
+	int size = 16.0;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+	size *= (QApplication::desktop()->logicalDpiX() / 96.0); // todo Qt6
+#endif
+    AddIconToLabel(pNetLabel, CSandMan::GetIcon("Network").pixmap(size,size));
+    AddIconToLabel(pAdminLabel, CSandMan::GetIcon("Shield9").pixmap(size,size));
+}
+
+int CIsolationPage::nextId() const
+{
+    return CNewBoxWizard::Page_Advanced;
+}
+    
+void CIsolationPage::initializePage()
+{
+    int BoxType = wizard()->field("boxType").toInt();
+
+    bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened);
+    bool bDropAdmin = field("dropAdmin").toBool();
+    m_pMSIServer->setEnabled(!bHardened && !bDropAdmin);
+    m_pShareAccess->setEnabled(!bHardened);
+    m_pDropAdmin->setEnabled(!bHardened);
+    m_pDropAdmin->setChecked(bDropAdmin || bHardened);
+}
+
+bool CIsolationPage::validatePage()
+{
+    return true;
+}
+
+void CIsolationPage::OnDropAdminChanged(int state) {
+    // If m_pDropAdmin is checked, disable m_pMSIServer
+    if (state == Qt::Checked) {
+        m_pMSIServer->setEnabled(false);
+        m_pMSIServer->setChecked(false);
+    }
+    else {
+        // If m_pDropAdmin is unchecked, enable m_pMSIServer
+        m_pMSIServer->setEnabled(true);
+    }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CAdvancedPage
+// 
+
+CAdvancedPage::CAdvancedPage(QWidget *parent)
+    : QWizardPage(parent)
+{
+    setTitle(tr("Advanced Sandbox options"));
+    setSubTitle(tr("On this page advanced sandbox options can be configured."));
+
+    int row = 0;
+    QGridLayout *layout = new QGridLayout;
+
     QLabel* pBoxLabel = new QLabel(tr("Box Options"), this);
+    QFont fnt = pBoxLabel->font();
+	fnt.setBold(true);
+	//fnt.setWeight(QFont::DemiBold);
     pBoxLabel->setFont(fnt);
     layout->addWidget(pBoxLabel, row++, 0);
 
@@ -822,8 +884,6 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	size *= (QApplication::desktop()->logicalDpiX() / 96.0); // todo Qt6
 #endif
-    AddIconToLabel(pNetLabel, CSandMan::GetIcon("Network").pixmap(size,size));
-    AddIconToLabel(pAdminLabel, CSandMan::GetIcon("Shield9").pixmap(size,size));
     AddIconToLabel(pBoxLabel, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 }
 
@@ -836,13 +896,6 @@ void CAdvancedPage::initializePage()
 {
     int BoxType = wizard()->field("boxType").toInt();
 
-    bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened);
-    bool bDropAdmin = field("dropAdmin").toBool();
-    m_pMSIServer->setEnabled(!bHardened && !bDropAdmin);
-    m_pShareAccess->setEnabled(!bHardened);
-    m_pDropAdmin->setEnabled(!bHardened);
-    m_pDropAdmin->setChecked(bDropAdmin || bHardened);
-
     bool bAppBox = (BoxType == CSandBoxPlus::eAppBoxPlus || BoxType == CSandBoxPlus::eAppBox);
     m_pBoxToken->setEnabled(!bAppBox);
 }
@@ -850,18 +903,6 @@ void CAdvancedPage::initializePage()
 bool CAdvancedPage::validatePage()
 {
     return true;
-}
-
-void CAdvancedPage::OnDropAdminChanged(int state) {
-    // If m_pDropAdmin is checked, disable m_pMSIServer
-    if (state == Qt::Checked) {
-        m_pMSIServer->setEnabled(false);
-        m_pMSIServer->setChecked(false);
-    }
-    else {
-        // If m_pDropAdmin is unchecked, enable m_pMSIServer
-        m_pMSIServer->setEnabled(true);
-    }
 }
 
 

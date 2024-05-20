@@ -18,7 +18,7 @@ public:
 
 bool CTrayBoxesItemDelegate::m_Hold = false;
 
-void CSandMan::CreateTrayIcon()
+void CSandMan::CreateTrayIcon(bool bAutoRun)
 {
 	m_pTrayIcon = new QSystemTrayIcon(GetTrayIcon(), this);
 	m_pTrayIcon->setToolTip(GetTrayText());
@@ -29,8 +29,6 @@ void CSandMan::CreateTrayIcon()
 	m_iDeletingContent = 0;
 
 	CreateTrayMenu();
-
-	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
 	if(g_PendingMessage.isEmpty()){
 	m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
@@ -124,6 +122,11 @@ void CSandMan::CreateTrayMenu()
 
 	//m_pTrayMenu->addAction(pBoxWidget);
 	//m_pTrayMenu->addSeparator();
+
+	if (m_pDefaultDesktop->isEnabled()) {
+		m_pTrayMenu->addAction(m_pDefaultDesktop);
+		m_pTrayMenu->addSeparator();
+	}
 
 	m_pTrayMenu->addAction(m_pExit);
 }

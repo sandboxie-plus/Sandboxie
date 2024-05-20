@@ -197,6 +197,8 @@ void CSbieView::CreateMenu()
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenuBox->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
 	m_pMenuBox->addSeparator();
+	m_pMenuSwitchDesk = m_pMenuBox->addAction(CSandMan::GetIcon("Monitor"), tr("Switch to Isoalted Desktop"), this, SLOT(OnSandBoxAction()));
+	m_pMenuBox->addSeparator();
 	m_pMenuContent = m_pMenuBox->addMenu(CSandMan::GetIcon("Compatibility"), tr("Box Content"));
 		m_pMenuBrowse = m_pMenuContent->addAction(CSandMan::GetIcon("Folder"), tr("Browse Files"), this, SLOT(OnSandBoxAction()));
 		m_pMenuContent->addSeparator();
@@ -327,6 +329,7 @@ void CSbieView::CreateOldMenu()
 
 	m_pMenuBox->addSeparator();
 	m_pMenuEmptyBox = m_pMenuBox->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate Programs"), this, SLOT(OnSandBoxAction()));
+	m_pMenuSwitchDesk = m_pMenuBox->addAction(CSandMan::GetIcon("Monitor"), tr("Switch to Isoalted Desktop"), this, SLOT(OnSandBoxAction()));
 	m_pMenuMount = m_pMenuBox->addAction(CSandMan::GetIcon("LockOpen"), tr("Mount Box Image"), this, SLOT(OnSandBoxAction()));
 	m_pMenuUnmount = m_pMenuBox->addAction(CSandMan::GetIcon("LockClosed"), tr("Unmount Box Image"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRecover = m_pMenuBox->addAction(CSandMan::GetIcon("Recover"), tr("Quick Recover"), this, SLOT(OnSandBoxAction()));
@@ -416,6 +419,8 @@ void CSbieView::CreateTrayMenu()
 	m_pMenuTray->addMenu(m_pMenuRun);
 	m_pMenuTray->addAction(m_pMenuEmptyBox);
 	m_pMenuTray->addSeparator();
+	m_pMenuTray->addAction(m_pMenuSwitchDesk);
+	m_pMenuTray->addSeparator();
 	m_pMenuTray->addAction(m_pMenuBrowse);
 	m_pMenuTray->addAction(m_pMenuExplore);
 	m_pMenuTray->addAction(m_pMenuRegEdit);
@@ -477,7 +482,16 @@ QString CSbieView__SerializeGroup(QMap<QString, QStringList>& m_Groups, const QS
 
 void CSbieView::Refresh()
 {
-	QList<QVariant> Added = m_pSbieModel->Sync(theAPI->GetAllBoxes(), m_Groups, theGUI->IsShowHidden());
+	QMap<QString, CSandBoxPtr> Boxes;
+	if (!theGUI->GetBoxDesktop().isEmpty() 
+#ifdef _DEBUG
+		&& !theGUI->ShowAllSessions()
+#endif
+	   )
+		Boxes.insert(theGUI->GetBoxDesktop().toLower(), theAPI->GetBoxByName(theGUI->GetBoxDesktop()));
+	else
+		Boxes = theAPI->GetAllBoxes();
+	QList<QVariant> Added = m_pSbieModel->Sync(Boxes, m_Groups, theGUI->IsShowHidden());
 
 	if (m_pSbieModel->IsTree())
 	{
@@ -628,6 +642,7 @@ bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBox
 	m_pMenuCleanUp->setEnabled(iSandBoxeCount > 0);
 	if (m_pMenuContent) m_pMenuContent->setEnabled(iSandBoxeCount > 0);
 	m_pMenuEmptyBox->setEnabled(iSandBoxeCount > 0);
+	m_pMenuSwitchDesk->setEnabled(iSandBoxeCount == 1 && !pBoxEx->GetDesktop().isEmpty());
 
 	m_pMenuBrowse->setEnabled(iSandBoxeCount == 1);
 	m_pMenuExplore->setEnabled(iSandBoxeCount == 1);
@@ -1551,6 +1566,10 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 			Results.append(pBox->TerminateAll());
 	}
+	else if (Action == m_pMenuSwitchDesk)
+	{
+		Results.append(SandBoxes.first()->SwitchToDesktop());
+	}
 	else if (Action == m_pMenuMkLink)
 	{
  		if (theConf->GetInt("Options/InfoMkLink", -1) == -1)
@@ -1759,6 +1778,12 @@ void CSbieView::ShowBrowse(const CSandBoxPtr& pBox)
 
 void CSbieView::OnDoubleClicked(const QModelIndex& index)
 {
+	if (!index.isValid()) {
+		if (!theGUI->GetBoxDesktop().isEmpty() && theConf->GetBool("Options/QuickDesktopSwitch", true))
+			theAPI->SwitchToDesktop("Default");
+		return;
+	}
+
 	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
 	CSandBoxPtr pBox = m_pSbieModel->GetSandBox(ModelIndex);
 	if (pBox.isNull())
@@ -1771,6 +1796,11 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 
 	if (index.column() == CSbieModel::ePath) {
 		OnSandBoxAction(m_pMenuExplore, QList<CSandBoxPtr>() << pBox);
+		return;
+	}
+
+	if (!pBox->GetDesktop().isEmpty() && theConf->GetBool("Options/QuickDesktopSwitch", true) && theGUI->GetBoxDesktop().compare(pBox->GetName(), Qt::CaseInsensitive) != 0) {
+		pBox->SwitchToDesktop();
 		return;
 	}
 
@@ -2207,7 +2237,7 @@ void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes)
 
 void CSbieView::SaveBoxGrouping()
 {
-	if (!theAPI->IsConnected())
+	if (!theAPI->IsConnected() || !theGUI->GetBoxDesktop().isEmpty())
 		return;
 
 	theAPI->GetUserSettings()->SetRefreshOnChange(false);

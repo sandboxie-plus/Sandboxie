@@ -824,3 +824,10 @@ SB_STATUS CSandBox::ImBoxUnmount()
 {
 	return m_pAPI->ImBoxUnmount(this);
 }
+
+SB_STATUS CSandBox::SwitchToDesktop()
+{
+	if (m_Desktop.isEmpty())
+		return SB_OK; // nothign to do
+	return m_pAPI->SwitchToDesktop(m_Desktop);
+}

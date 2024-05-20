@@ -39,7 +39,7 @@ class CSandMan : public QMainWindow
 	Q_OBJECT
 
 public:
-	CSandMan(QWidget *parent = Q_NULLPTR);
+	CSandMan(const QString& BoxDesktop, bool bAutoRun, QWidget *parent = Q_NULLPTR);
 	virtual ~CSandMan();
 
 	CSbieTemplatesEx*	GetCompat() { return m_SbieTemplates; }
@@ -79,6 +79,7 @@ public:
 	bool				IsShowHidden() { return m_pShowHidden && m_pShowHidden->isChecked(); }
 	bool				KeepTerminated();
 	bool				ShowAllSessions() { return m_pShowAllSessions && m_pShowAllSessions->isChecked(); }
+	const QString&		GetBoxDesktop() const { return m_BoxDesktop; }
 	bool				IsSilentMode();
 	bool				IsDisableRecovery() {return IsSilentMode() || m_pDisableRecovery && m_pDisableRecovery->isChecked();}
 	bool				IsDisableMessages() {return IsSilentMode() || m_pDisableMessages && m_pDisableMessages->isChecked();}
@@ -119,6 +120,8 @@ public:
 
 	void				SaveMessageLog(QIODevice* pFile);
 
+	static void			Restart(bool AsAdmin = false);
+
 signals:
 	void				DrivesChanged();
 
@@ -154,6 +157,7 @@ protected:
 	bool				m_bConnectPending;
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
+	QString				m_BoxDesktop;
 	CSbieTemplatesEx*	m_SbieTemplates;
 
 	CScriptManager*		m_SbieScripts;
@@ -226,6 +230,7 @@ public slots:
 	void				OnCancelAsync();
 
 	void				OnBoxAdded(const CSandBoxPtr& pBox);
+	void				OnBoxOpened(const CSandBoxPtr& pBox);
 	void				OnBoxClosed(const CSandBoxPtr& pBox);
 	void				OnBoxCleaned(CSandBoxPlus* pBoxEx);
 
@@ -262,6 +267,7 @@ private slots:
 	void				OnDisableForce2();
 	void				OnDisablePopUp();
 	void				OnMaintenance();
+	void				OnDefaultDesktop();
 
 	void				OnViewMode(QAction* action);
 	void				OnAlwaysTop();
@@ -311,7 +317,7 @@ private:
 	void				CreateToolBar(bool bRebuild);
 	void				CreateLabel();
 	void				CreateView(int iViewMode);
-	void				CreateTrayIcon();
+	void				CreateTrayIcon(bool bAutoRun);
 	void				CreateTrayMenu();
 	void				CreateBoxMenu(QMenu* pMenu, int iOffset = 0, int iSysTrayFilter = 0);
 
@@ -371,7 +377,6 @@ private:
 	QHBoxLayout*		m_pMenuLayout;
 
 	QMenu*				m_pMenuFile;
-	QAction*			m_pRestart;
 	QAction*			m_pRunBoxed;
 	QAction*			m_pNewBox;
 	QAction*			m_pNewGroup;
@@ -401,6 +406,8 @@ private:
 	QAction*			m_pImDiskCpl;
 	QAction*			m_pUninstallAll;
 	QAction*			m_pSetupWizard;
+	QAction*			m_pDefaultDesktop;
+	QAction*			m_pRestart;
 	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;

@@ -487,13 +487,16 @@ ULONG SbieIniServer::CheckRequest(MSG_HEADER *msg)
 
 bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken)
 {
+    return SetUserSettingsSectionName(hToken, m_username, m_sectionname);
+}
+
+bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken, WCHAR* m_username, WCHAR* m_sectionname)
+{
     union {
         TOKEN_USER user;
         UCHAR space[128];
         WCHAR value[4];
     } info;
-
-    m_admin = FALSE;
 
     //
     // if the UserSettings_Portable section exists, use that
@@ -521,7 +524,7 @@ bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken)
     if (! ok)
         return false;
 
-    ULONG username_len = sizeof(m_username) / sizeof(WCHAR) - 4;
+    ULONG username_len = 256 - 4; // ULONG username_len = sizeof(m_username) / sizeof(WCHAR) - 4;
     WCHAR domain[256];
     ULONG domain_len = sizeof(domain) / sizeof(WCHAR) - 4;
     SID_NAME_USE use;
@@ -533,7 +536,7 @@ bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken)
     if (! ok || ! m_username[0])
         return false;
 
-    m_username[sizeof(m_username) / sizeof(WCHAR) - 4] = L'\0';
+    m_username[username_len] = L'\0'; //m_username[sizeof(m_username) / sizeof(WCHAR) - 4] = L'\0';
     _wcslwr(m_username);
 
     //
@@ -2245,7 +2248,6 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
     NTSTATUS status = STATUS_UNSUCCESSFUL;
     HANDLE hToken = NULL;
     BOOL ok = TRUE;
-    WCHAR ctrlCmd[128] = { 0 };
 
     //
     // get token from caller session or caller process.  note that on
@@ -2309,14 +2311,42 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
         }
     }
 
+    if (ok)
+    {
+        if(isSandboxed || msg->length <= sizeof(MSG_HEADER))
+            status = RunSbieCtrl(hToken, NULL);
+        else
+            status = RunSbieCtrl(hToken, NULL, (WCHAR*)((UCHAR*)msg + sizeof(MSG_HEADER)), (msg->length - sizeof(MSG_HEADER)) / sizeof(WCHAR));
+    }
+
+    //
+    // finish
+    //
+
+    if (hToken)
+        CloseHandle(hToken);
+
+    return SHORT_REPLY(status);
+}
+
+NTSTATUS SbieIniServer::RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const WCHAR* CtrlCmd, size_t CtrlCmdLen)
+{
+    NTSTATUS status = STATUS_UNSUCCESSFUL;
+    BOOL ok = TRUE;
+
+    WCHAR ctrlCmd[128] = { 0 };
+
     //
     // get the agent binary name
     //
 
-    if (isSandboxed) {
+    if (!CtrlCmd) {
+
+        WCHAR m_username[256];
+        WCHAR m_sectionname[128];
 
         const WCHAR* _Setting2 = SBIECTRL_ L"AutoStartAgent";
-        bool ok2 = SetUserSettingsSectionName(hToken);
+        bool ok2 = SetUserSettingsSectionName(hToken, m_username, m_sectionname);
         if (ok2) {
             SbieApi_QueryConfAsIs(
                 m_sectionname, _Setting2, 0, ctrlCmd, sizeof(ctrlCmd) - 2);
@@ -2327,11 +2357,10 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
                 m_sectionname, _Setting2, 0, ctrlCmd, sizeof(ctrlCmd) - 2);
         }
 
-    } else if (msg->length > sizeof(MSG_HEADER)) {
+    } else if (CtrlCmdLen > 0) {
 
-        ULONG len = (ULONG)(msg->length - sizeof(MSG_HEADER));
-        memcpy(ctrlCmd, (UCHAR*)msg + sizeof(MSG_HEADER), len);
-        ctrlCmd[len / sizeof(WCHAR)] = L'\0';
+        memcpy(ctrlCmd, CtrlCmd, CtrlCmdLen * sizeof(WCHAR));
+        ctrlCmd[CtrlCmdLen] = L'\0';
     }
 
     //
@@ -2370,6 +2399,10 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
             memzero(&si, sizeof(STARTUPINFO));
             si.cb = sizeof(STARTUPINFO);
             si.dwFlags = STARTF_FORCEOFFFEEDBACK;
+            if (DeskName) {
+                si.dwFlags |= STARTF_USESHOWWINDOW;
+                si.lpDesktop = (wchar_t*)DeskName;
+            }
 
             ok = CreateProcessAsUser(
                     hToken, NULL, CmdLine, NULL, NULL, FALSE,
@@ -2391,14 +2424,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
         }
     }
 
-    //
-    // finish
-    //
-
-    if (hToken)
-        CloseHandle(hToken);
-
-    return SHORT_REPLY(status);
+    return status;
 }
 
 

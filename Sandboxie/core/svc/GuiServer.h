@@ -74,6 +74,10 @@ protected:
 
     bool QueueCallbackSlave2(void);
 
+    HDESK CreateBoxedDesktop(ULONG session_id, const wchar_t* deskname);
+
+    HDESK SwitchToCallerDesktop(ULONG pid, HDESK* prev_desk);
+
     HANDLE GetJobObjectForAssign(const WCHAR *boxname);
 
     HANDLE GetJobObjectForGrant(ULONG pid);

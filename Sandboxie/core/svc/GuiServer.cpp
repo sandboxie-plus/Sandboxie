@@ -34,6 +34,9 @@
 #include <aclapi.h>
 #include <dde.h>
 #include "misc.h"
+#include <wtsapi32.h>
+#include <userenv.h>
+#include "sbieiniserver.h"
 
 #define PATTERN XPATTERN
 extern "C" {
@@ -906,9 +909,17 @@ bool GuiServer::QueueCallbackSlave2(void)
                 args.rpl_len = rpl_len;
                 args.rpl_buf = rpl_buf;
 
+                HDESK prev_desk;
+                HDESK local_desktop = SwitchToCallerDesktop(args.pid, &prev_desk);
+
                 status = (this->*SlaveFuncPtr)(&args);
                 if (status == 0)
                     rpl_len = args.rpl_len;
+
+                if (local_desktop) {
+                    SetThreadDesktop(prev_desk);
+                    CloseDesktop(local_desktop);
+                }
             }
         }
     }
@@ -1583,19 +1594,12 @@ ULONG GuiServer::GetWindowStationSlave(SlaveArgs *args)
         local_winsta  = GetProcessWindowStation();
 
         WCHAR deskname[128] = { 0 };
-        /*SbieApi_QueryConfAsIs(boxname, L"SandboxDesktopName", 0, deskname, sizeof(deskname));
-        if(*value)
-            local_desktop = OpenDesktop(value, 0, FALSE, GENERIC_ALL);
-        else*/
         if (SbieApi_QueryConfBool(boxname, L"UseSandboxDesktop", FALSE)) {
 
             wsprintf(deskname, L"%s_%s_Session_%d_Desktop", //_%08X",
                 SANDBOXIE, boxname, m_SessionId); //GetTickCount());
 
-            local_desktop = OpenDesktop(deskname, 0, FALSE, GENERIC_ALL);
-            if (!local_desktop)
-                local_desktop = CreateDesktop(deskname, NULL, NULL, 0, GENERIC_ALL, NULL);
-
+            local_desktop = CreateBoxedDesktop(session_id, deskname);
             close_desktop = TRUE;
         } else
             local_desktop = GetThreadDesktop(GetCurrentThreadId());
@@ -1707,6 +1711,166 @@ finish:
 
     args->rpl_len = sizeof(GUI_GET_WINDOW_STATION_RPL);
     return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// CreateBoxedDesktop
+//---------------------------------------------------------------------------
+
+struct SDeskStartParam
+{
+    ULONG session_id;
+    const wchar_t* desk_name;
+    HDESK local_desktop;
+};
+
+ULONG GuiServer__StartupWorker(void* _Param)
+{
+    SDeskStartParam* pParam = (SDeskStartParam*)_Param;
+
+    ULONG status = 0;
+    const ULONG TOKEN_RIGHTS = TOKEN_QUERY          | TOKEN_DUPLICATE
+                             | TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID
+                             | TOKEN_ADJUST_GROUPS  | TOKEN_ASSIGN_PRIMARY;
+    HANDLE hOldToken = NULL;
+    HANDLE hNewToken = NULL;
+    //void *env = NULL;
+    //WCHAR cmdline[MAX_PATH];
+    BOOL ok = TRUE;
+
+    //
+    // set thread desktop and check if explorer is already running
+    //
+
+    SetThreadDesktop(pParam->local_desktop);
+
+    if (FindWindowW(L"Shell_TrayWnd", 0))
+        return 0;
+
+    //
+    // get the user token
+    //
+
+    if (ok) {
+        ok = WTSQueryUserToken(pParam->session_id, &hOldToken);
+        if (! ok)
+            status = 0x72000000 | GetLastError();
+    }
+
+    if (ok) {
+        ok = DuplicateTokenEx(
+                hOldToken, TOKEN_RIGHTS, NULL, SecurityAnonymous,
+                TokenPrimary, &hNewToken);
+        if (! ok)
+            status = 0x73000000 | GetLastError();
+    }
+
+    //
+    // create the new shell process
+    //
+
+    //ok = CreateEnvironmentBlock(&env, hNewToken, FALSE);
+    //if (! ok)
+    //    status = 0x75000000 | GetLastError();
+
+    if (ok) {
+
+        //GetSystemWindowsDirectoryW(cmdline, MAX_PATH);
+        //wcscat_s(cmdline, MAX_PATH, L"\\Explorer.exe");
+
+        //STARTUPINFO si;
+        //PROCESS_INFORMATION pi;
+
+        //memzero(&si, sizeof(STARTUPINFO));
+        //si.cb = sizeof(STARTUPINFO);
+        //si.dwFlags = STARTF_USESHOWWINDOW;
+        //si.lpDesktop = (wchar_t*)pParam->desk_name;
+
+        //ok = CreateProcessAsUser(
+        //        hNewToken, NULL, cmdline, NULL, NULL, FALSE,
+        //        CREATE_UNICODE_ENVIRONMENT, env, NULL, &si, &pi);
+
+        //if (! ok)
+        //    status = 0x76000000 | GetLastError();
+        //else {
+
+        //    CloseHandle(pi.hThread);
+        //    CloseHandle(pi.hProcess);
+        //}
+
+        SbieIniServer::RunSbieCtrl(hOldToken, pParam->desk_name);
+
+        for (int i = 0; i++ < 10 && !FindWindowW(L"Shell_TrayWnd", 0); Sleep(1000)); // wait 10 seconds
+    }
+
+    if (hNewToken)
+        CloseHandle(hNewToken);
+    if (hOldToken)
+        CloseHandle(hOldToken);
+    //if (env)
+    //    DestroyEnvironmentBlock(env);
+
+    return 0;
+}
+
+
+HDESK GuiServer::CreateBoxedDesktop(ULONG session_id, const wchar_t* desk_name)
+{
+    HDESK local_desktop = OpenDesktop(desk_name, 0, FALSE, GENERIC_ALL);
+    if (!local_desktop)
+        local_desktop = CreateDesktop(desk_name, NULL, NULL, 0, GENERIC_ALL, NULL);
+    if (local_desktop) {
+
+        SDeskStartParam* pParam = (SDeskStartParam*)HeapAlloc(GetProcessHeap(), 0, sizeof(SDeskStartParam));
+        pParam->session_id = session_id;
+        pParam->desk_name = desk_name;
+        pParam->local_desktop = local_desktop;
+
+        HANDLE hThread = CreateThread(NULL, 0, GuiServer__StartupWorker, (void *)pParam, 0, NULL);
+        WaitForSingleObject(hThread, 20 * 1000);
+        CloseHandle(hThread);
+
+        HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, pParam);
+    }
+    return local_desktop;
+}
+
+
+//---------------------------------------------------------------------------
+// SwitchToCallerDesktop
+//---------------------------------------------------------------------------
+
+
+HDESK GuiServer::SwitchToCallerDesktop(ULONG pid, HDESK* prev_desk)
+{
+    ULONG status;
+    WCHAR boxname[BOXNAME_COUNT];
+    ULONG session_id;
+    WCHAR deskname[128] = { 0 };
+    HDESK local_desktop = NULL;
+    
+    status = SbieApi_QueryProcess((HANDLE)(ULONG_PTR)pid, boxname, NULL, NULL, &session_id);
+    if (!NT_SUCCESS(status))
+        return NULL;
+
+    if (SbieApi_QueryConfBool(boxname, L"UseSandboxDesktop", FALSE)) {
+
+        wsprintf(deskname, L"%s_%s_Session_%d_Desktop", //_%08X",
+            SANDBOXIE, boxname, m_SessionId); //GetTickCount());    
+    }
+    else
+        return NULL;
+
+    if (prev_desk) *prev_desk = GetThreadDesktop(GetCurrentThreadId());
+    local_desktop = OpenDesktop(deskname, 0, FALSE, GENERIC_ALL);
+    if (local_desktop) {
+
+        if (!SetThreadDesktop(local_desktop))
+            SbieApi_LogEx(session_id, 2340, L"[%d]", GetLastError());
+    }
+
+    return local_desktop;
 }
 
 

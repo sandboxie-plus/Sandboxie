@@ -84,6 +84,10 @@ public:
 	virtual SB_STATUS				ImBoxMount(const QString& Password = QString(), bool bProtect = false, bool bAutoUnmount = false);
 	virtual SB_STATUS				ImBoxUnmount();
 
+	// Desktop Manager
+	virtual QString					GetDesktop() const { return m_Desktop; }
+	virtual SB_STATUS				SwitchToDesktop();
+
 	class CSbieAPI*					Api() { return m_pAPI; }
 
 protected:
@@ -101,6 +105,8 @@ protected:
 	QString							m_RegPath;
 	QString							m_IpcPath;
 	QString							m_Mount;
+
+	QString							m_Desktop;
 	
 	bool							m_IsEnabled;
 	

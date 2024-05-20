@@ -32,6 +32,8 @@ int main(int argc, char *argv[])
 	// use a shared setting location when used in a business environment for easier administration
 	theConf = new CSettings(ConfDir, "Sandboxie-Plus");
 
+	QString AppID = "SandMan";
+
 #ifndef _DEBUG
 	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
 #endif
@@ -60,8 +62,37 @@ int main(int argc, char *argv[])
 	QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 #endif
 
-	QtSingleApplication app(argc, argv);
-	app.setQuitOnLastWindowClosed(false);
+	QString BoxDesktop;
+	QString CurDesk = CSbieAPI::GetCurrentDesktopName();
+	QStringList CurDeskNames = CurDesk.split("_");
+	if (CurDeskNames.length() >= 3 && CurDeskNames[0] == "Sandboxie" && CurDeskNames[2] == "Session")
+		BoxDesktop = CurDeskNames[1];
+	
+	if (!BoxDesktop.isEmpty()) 
+	{
+		for (int i = 1; i < argc; i++)
+		{
+			if (stricmp(argv[i], "-autorun") != 0)
+				continue;
+		
+			WCHAR cmdline[MAX_PATH];
+			GetSystemWindowsDirectoryW(cmdline, MAX_PATH);
+			wcscat_s(cmdline, MAX_PATH, L"\\Explorer.exe");
+			QStringList StartArgs;
+			StartArgs << "/Box:" + BoxDesktop;
+			StartArgs << "/fcp";
+			StartArgs << QString::fromWCharArray(cmdline);
+			QProcess::startDetached(AppDir + "\\start.exe", StartArgs);
+
+			CSandMan::Restart();
+			return 0;
+		}
+
+		AppID.append("_" + BoxDesktop);
+	}
+
+	QtSingleApplication* pApp = new QtSingleApplication(AppID, argc, argv);
+	pApp->setQuitOnLastWindowClosed(false);
 
 	//InitConsole(false);
 
@@ -165,30 +196,34 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
+	bool bAutoRun = pApp->arguments().contains("-autorun");
+
 	if (!g_PendingMessage.isEmpty()) {
-		if(app.sendMessage(g_PendingMessage))
+		if(pApp->sendMessage(g_PendingMessage))
 			return 0;
-		app.disableSingleApp(); // we start to do one job and exit, don't interfere with starting a regular instance
+		pApp->disableSingleApp(); // we start to do one job and exit, don't interfere with starting a regular instance
 	}
 	else {
-		if (app.arguments().contains("-autorun") && app.isRunning())
+		if (bAutoRun && pApp->isRunning())
 			return 0;
-		if (app.sendMessage("ShowWnd"))
+		if (pApp->sendMessage("ShowWnd"))
 			return 0;
 	}
 
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
 
-	CSandMan* pWnd = new CSandMan();
+	CSandMan* pWnd = new CSandMan(BoxDesktop, bAutoRun);
 
-	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)), Qt::QueuedConnection);
+	QObject::connect(pApp, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)), Qt::QueuedConnection);
 
-	int ret =  app.exec();
+	int ret =  pApp->exec();
 
 	delete pWnd;
 
 	delete theConf;
 	theConf = NULL;
+
+	delete pApp;
 
 	return ret;
 }

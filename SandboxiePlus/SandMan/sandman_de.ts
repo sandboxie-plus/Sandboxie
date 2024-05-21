@@ -141,46 +141,6 @@
         <translation>Auf dieser Seite können erweiterte Sandboxoptionen konfiguriert werden.</translation>
     </message>
     <message>
-        <source>Network Access</source>
-        <translation type="vanished">Netzwerkzugriff</translation>
-    </message>
-    <message>
-        <source>Allow network/internet access</source>
-        <translation type="vanished">Erlaube Netzwerk-/ Internetzugriff</translation>
-    </message>
-    <message>
-        <source>Block network/internet by denying access to Network devices</source>
-        <translation type="vanished">Blockiere Netzwerk-/ Internetzugriff durch Ablehnung des Zugriffs auf Netzwerkgeräte</translation>
-    </message>
-    <message>
-        <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="vanished">Blockiere Netzwerk-/ Internetzugriff durch die Verwendung der Windows Filtering Platform</translation>
-    </message>
-    <message>
-        <source>Allow access to network files and folders</source>
-        <translation type="vanished">Erlaube Zugriff auf Netzwerkdateien und Netzwerkordner</translation>
-    </message>
-    <message>
-        <source>This option is not recommended for Hardened boxes</source>
-        <translation type="vanished">Diese Option ist nicht für gehärtete Boxen empfohlen</translation>
-    </message>
-    <message>
-        <source>Admin Options</source>
-        <translation type="vanished">Adminoptionen</translation>
-    </message>
-    <message>
-        <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="vanished">Die Rechte der Administratoren und Hauptbenutzergruppe einschränken</translation>
-    </message>
-    <message>
-        <source>Make applications think they are running elevated</source>
-        <translation type="vanished">Lasse Programme denken, sie würden mit erhöhten Rechten laufen</translation>
-    </message>
-    <message>
-        <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="vanished">Erlaube MSIServer mit einem sandgeboxten Systemtoken zu starten</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="828"/>
         <source>Box Options</source>
         <translation>Boxoptionen</translation>
@@ -203,12 +163,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="848"/>
         <source>Prevents the sandboxed window from being captured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhindert, dass von dem sandgeboxten Fenster ein Screenshot erstellt wird.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Funktion kann zu einer Verschlechterung der Benutzererfahrung führen, da sie auch normale Screenshots verhindert.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="854"/>
@@ -1133,63 +1093,63 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="719"/>
         <source>Sandbox Isolation options</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxisolationsoptionen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="720"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf dieser Seite können die Optionen für die Sandboxisolation konfiguriert werden.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="725"/>
         <source>Network Access</source>
-        <translation type="unfinished">Netzwerkzugriff</translation>
+        <translation>Netzwerkzugriff</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="733"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished">Erlaube Netzwerk-/ Internetzugriff</translation>
+        <translation>Erlaube Netzwerk-/Internetzugriff</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="734"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished">Blockiere Netzwerk-/ Internetzugriff durch Ablehnung des Zugriffs auf Netzwerkgeräte</translation>
+        <translation>Blockiere Netzwerk-/Internetzugriff durch Ablehnung des Zugriffs auf Netzwerkgeräte</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="736"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished">Blockiere Netzwerk-/ Internetzugriff durch die Verwendung der Windows Filtering Platform</translation>
+        <translation>Blockiere Netzwerk-/Internetzugriff durch die Verwendung der Windows Filtering Platform</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <source>Allow access to network files and folders</source>
-        <translation type="unfinished">Erlaube Zugriff auf Netzwerkdateien und Netzwerkordner</translation>
+        <translation>Erlaube Zugriff auf Netzwerkdateien und Netzwerkordner</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="742"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="764"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <translation type="unfinished">Diese Option ist nicht für gehärtete Boxen empfohlen</translation>
+        <translation>Diese Option ist nicht für gehärtete Boxen empfohlen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Admin Options</source>
-        <translation type="unfinished">Adminoptionen</translation>
+        <translation>Adminoptionen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">Die Rechte der Administratoren und Hauptbenutzergruppe einschränken</translation>
+        <translation>Die Rechte der Administratoren und Hauptbenutzergruppe einschränken</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="758"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished">Lasse Programme denken, sie würden mit erhöhten Rechten laufen</translation>
+        <translation>Lasse Programme denken, sie würden mit erhöhten Rechten laufen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished">Erlaube MSIServer mit einem sandgeboxten Systemtoken zu starten</translation>
+        <translation>Erlaube MSI-Server mit einem sandgeboxten Systemtoken zu starten</translation>
     </message>
 </context>
 <context>
@@ -2255,12 +2215,12 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="832"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="833"/>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="857"/>
@@ -5385,7 +5345,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1440"/>
         <source>Advanced (L)</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweitert (L)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1442"/>
@@ -8440,7 +8400,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwinge, dass direkte untergeordnete Prozesse sandgeboxt werden. Allerdings sind indirekte untergeordnete Prozesse, die über die DCOM- und IPC-Schnittstelle geöffnet werden, hierbei nicht eingeschlossen.</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
@@ -8455,7 +8415,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwungene untergeordnete Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="56"/>

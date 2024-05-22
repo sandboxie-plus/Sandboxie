@@ -122,6 +122,8 @@ private:
     // SbieLogin
     //
 
+    void InitSIDs();
+
     bool GetSandboxieSID(const WCHAR* boxname, UCHAR* SandboxieLogonSid, DWORD dwSidSize);
 
     void CleanUpSIDs();

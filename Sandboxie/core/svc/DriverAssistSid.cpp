@@ -93,7 +93,7 @@ NTSTATUS RemoveSidName(const WCHAR* domain, const WCHAR* user)
 
 #define SBIE_RID 100 // must be between 80 and 111 inclusive
 
-UCHAR SandboxieSid[12] = { // S-1-5-100-
+UCHAR SandboxieSid[12] = { // S-1-5-100
     1,                                      // Revision
     1,                                      // SubAuthorityCount
     0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority

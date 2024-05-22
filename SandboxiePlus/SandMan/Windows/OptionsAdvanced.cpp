@@ -106,6 +106,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnConfidentialChanged()));
 	connect(ui.chkLessConfidential, SIGNAL(clicked(bool)), this, SLOT(OnLessConfidentialChanged()));
 	connect(ui.chkProtectWindow, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkAdminOnly, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkBlockCapture, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNotifyProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -280,7 +281,9 @@ void COptionsWindow::LoadAdvanced()
 	QString str = m_pBox->GetText("OpenWinClass", "");
 	ui.chkBlockCapture->setChecked(m_pBox->GetBool("BlockScreenCapture") && QString::compare(str, "*") != 0);
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
-
+	
+	ui.chkAdminOnly->setChecked(m_pBox->GetBool("EditAdminOnly", false));
+	
 	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
 	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
 	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
@@ -523,6 +526,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkProtectWindow, "CoverBoxedWindows", "y", "");
 	WriteAdvancedCheck(ui.chkBlockCapture, "BlockScreenCapture", "y", "");
 	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "");
+	
+	WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
 
 	QStringList Users;
 	for (int i = 0; i < ui.lstUsers->count(); i++)

@@ -371,7 +371,7 @@ MSG_HEADER *SbieIniServer::GetUser(MSG_HEADER *msg)
     bool ok2 = SetUserSettingsSectionName(hToken);
 
     BOOLEAN admin = FALSE;
-    if (ok2 && TokenIsAdmin(hToken))
+    if (ok2 && TokenIsAdmin(hToken, true))
         admin = TRUE;
 
     CloseHandle(hToken);
@@ -469,7 +469,7 @@ ULONG SbieIniServer::CheckRequest(MSG_HEADER *msg)
 
     } else {
 
-        ULONG status = IsCallerAuthorized(hToken, req->password);
+        ULONG status = IsCallerAuthorized(hToken, req->password, req->section);
         if (status != 0)
             return status;
     }
@@ -718,7 +718,7 @@ finish:
 //---------------------------------------------------------------------------
 
 
-ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password)
+ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, const WCHAR *Section)
 {
     WCHAR buf[42], buf2[42];
 
@@ -726,9 +726,9 @@ ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password)
     // check for Administrator-only access
     //
 
-    if (SbieApi_QueryConfBool(NULL, L"EditAdminOnly", FALSE)) {
+    if (SbieApi_QueryConfBool(Section, L"EditAdminOnly", FALSE)) {
 
-        if (! TokenIsAdmin(hToken)) {
+        if (! TokenIsAdmin(hToken, true)) {
             CloseHandle(hToken);
             return STATUS_LOGON_NOT_GRANTED;
         }

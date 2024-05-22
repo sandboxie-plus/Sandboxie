@@ -207,7 +207,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Folder"));
 	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Move"));
 	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
-	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Run"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Fence"));
+	ui.tabsGeneral->setTabIcon(5, CSandMan::GetIcon("Run"));
 
 	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));

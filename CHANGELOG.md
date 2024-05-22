@@ -15,6 +15,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.14.1 / 5.69.1] - 2024-05-??
 
+### Added
+- Add "Sandboxie\All Sandboxes" SID into token with SandboxieLogon [#3191](https://github.com/sandboxie-plus/Sandboxie/issues/3191)
+  - To use this feature SandboxieAllGroup=y must be enabled
+  - Note: that this fundamentaly changes the mechanism Sbie uses for token creation, the new mechanism can be enabled separately with "UseCreateToken=y"
+- Added "EditAdminOnly=y" can now be configured per box
+
 ### Changed
 - split the advanced new box wizard page in two
 

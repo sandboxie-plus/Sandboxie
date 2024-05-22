@@ -810,12 +810,21 @@ Sandboxie Startmenü - %2  %0
 Desktop
 .
 
+3113;txt;01
+(Ordner öffnen)
+.
+
 3114;txt;01
 Programme
 .
 
-3113;txt;01
-(Ordner öffnen)
+3198;txt;01
+Möchten Sie ein neues Programm in der Sandbox %2 starten?
+Sie haben diese Meldung erhalten, weil Sie AlertBeforeStart=y gesetzt haben.
+.
+
+3199;txt;01
+Diese Startanforderung scheint nicht von der SANDBOXIE-Komponente aufgerufen zu werden. Sind Sie sicher, dass Sie sie ausführen wollen? Wenn dies Ihre Aktion ist, können Sie es ignorieren und Ja wählen.
 .
 
 3202;txt;01

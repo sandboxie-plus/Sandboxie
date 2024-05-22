@@ -1381,10 +1381,7 @@ _FX BOOLEAN WSA_Init(HMODULE module)
 
     List_Init(&WSA_FwList);
 
-    ULONG Drv_Features = 0;
-    if (NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 3, 0, (ULONG_PTR)&Drv_Features, sizeof(Drv_Features))))
-        WSA_WFPisEnabled = (Drv_Features & SBIE_FEATURE_FLAG_WFP) != 0;
-
+    WSA_WFPisEnabled = (Dll_DriverFlags & SBIE_FEATURE_FLAG_WFP) != 0;
     if(WSA_WFPisEnabled)
         WSA_WFPisBlocking = !Config_GetSettingsForImageName_bool(L"AllowNetworkAccess", TRUE);
     else // load rules only when the driver is not doing the filtering

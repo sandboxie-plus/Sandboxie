@@ -1349,6 +1349,27 @@ _FX LONG SbieApi_QuerySymbolicLink(
 
 
 //---------------------------------------------------------------------------
+// SbieApi_QueryDrvInfo
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_QueryDrvInfo(ULONG info_class, VOID* info_data, ULONG info_size)
+{
+    NTSTATUS status;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+
+    memset(parms, 0, sizeof(parms));
+    parms[0] = API_QUERY_DRIVER_INFO;
+    parms[1] = info_class;
+    parms[2] = (ULONG64)(ULONG_PTR)info_data;
+    parms[3] = info_size;
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // SbieApi_ReloadConf
 //---------------------------------------------------------------------------
 

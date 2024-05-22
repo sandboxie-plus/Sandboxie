@@ -48,6 +48,8 @@ SbieApi_QueryProcessEx=_SbieApi_QueryProcessEx@24
 SbieApi_QueryProcessInfo=_SbieApi_QueryProcessInfo@8
 SbieApi_QueryProcessPath=_SbieApi_QueryProcessPath@28
 
+SbieApi_QueryDrvInfo=_SbieApi_QueryDrvInfo@12
+
 SbieApi_ReloadConf=_SbieApi_ReloadConf@8
 
 SbieApi_SessionLeader=_SbieApi_SessionLeader@8

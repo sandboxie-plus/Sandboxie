@@ -89,6 +89,7 @@ ULONG Dll_SidStringLen = 0;
 ULONG Dll_ProcessId = 0;
 ULONG Dll_SessionId = 0;
 
+ULONG Dll_DriverFlags = 0;
 ULONG64 Dll_ProcessFlags = 0;
 
 #ifndef _WIN64
@@ -311,6 +312,12 @@ _FX void Dll_InitInjected(void)
 
     Dll_HomeNtPathLen = wcslen(Dll_HomeNtPath);
     //Dll_HomeDosPathLen = wcslen(Dll_HomeDosPath);
+
+    //
+    // get features flags
+    //
+
+    SbieApi_QueryDrvInfo(0, &Dll_DriverFlags, sizeof(Dll_DriverFlags));
 
     //
     // get process type and flags

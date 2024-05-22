@@ -267,12 +267,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="848"/>
         <source>Prevents the sandboxed window from being captured.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 창이 캡처되지 않도록 합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 기능은 일반 스크린샷도 방지하기 때문에 사용자 환경의 저하를 유발할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="854"/>
@@ -1253,63 +1253,63 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="719"/>
         <source>Sandbox Isolation options</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 격리 옵션</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="720"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 페이지에서 샌드박스 분리 옵션을 구성할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="725"/>
         <source>Network Access</source>
-        <translation type="unfinished">네트워크 액세스</translation>
+        <translation>네트워크 액세스</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="733"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished">네트워크/인터넷 액세스 허용</translation>
+        <translation>네트워크/인터넷 액세스 허용</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="734"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished">네트워크 장치에 대한 액세스를 거부하여 네트워크/인터넷 차단</translation>
+        <translation>네트워크 장치에 대한 액세스를 거부하여 네트워크/인터넷 차단</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="736"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished">Windows 필터링 플랫폼을 사용하여 네트워크/인터넷 차단</translation>
+        <translation>Windows 필터링 플랫폼을 사용하여 네트워크/인터넷 차단</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <source>Allow access to network files and folders</source>
-        <translation type="unfinished">네트워크 파일 및 폴더에 대한 액세스 허용</translation>
+        <translation>네트워크 파일 및 폴더에 대한 액세스 허용</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="742"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="764"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <translation type="unfinished">강화 박스에는 이 옵션을 사용하지 않는 것이 좋습니다</translation>
+        <translation>강화 박스에는 이 옵션을 사용하지 않는 것이 좋습니다</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Admin Options</source>
-        <translation type="unfinished">관리자 옵션</translation>
+        <translation>관리자 옵션</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">관리자 및 Power Users 그룹에서 권한 삭제</translation>
+        <translation>관리자 및 Power Users 그룹에서 권한 삭제</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="758"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished">응용 프로그램이 권한 상승으로 실행되고 있다고 생각하게 합니다</translation>
+        <translation>응용 프로그램이 권한 상승으로 실행되고 있다고 생각하게 합니다</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished">MSI 서버가 샌드박스 시스템 토큰으로 실행되도록 허용</translation>
+        <translation>MSI 서버가 샌드박스 시스템 토큰으로 실행되도록 허용</translation>
     </message>
 </context>
 <context>
@@ -2329,12 +2329,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="832"/>
         <source>Yes</source>
-        <translation type="unfinished">예</translation>
+        <translation>예</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="833"/>
         <source>No</source>
-        <translation type="unfinished">아니오</translation>
+        <translation>아니오</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="857"/>
@@ -5881,7 +5881,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1440"/>
         <source>Advanced (L)</source>
-        <translation type="unfinished"></translation>
+        <translation>고급 (L)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1442"/>
@@ -9148,7 +9148,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>직접 자식을 샌드박스에 강제로 넣지만 DCOM 및 IPC 인터페이스를 통해 열리는 간접 자식 프로세스는 포함하지 않습니다.</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
@@ -9163,7 +9163,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>강제 아동</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="56"/>

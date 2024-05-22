@@ -122,6 +122,7 @@ private:
     QCheckBox* m_pShareAccess;
     QCheckBox* m_pMSIServer;
     QCheckBox* m_pDropAdmin;
+    QCheckBox* m_pBoxToken;
 };
 
 
@@ -141,7 +142,6 @@ public:
     bool validatePage() override;
 
 private:
-    QCheckBox* m_pBoxToken;
 };
 
 

@@ -759,6 +759,16 @@ CIsolationPage::CIsolationPage(QWidget *parent)
     layout->addWidget(m_pMSIServer, row++, 1, 1, 3);
     registerField("msiServer", m_pMSIServer);
 
+    QLabel* pBoxLabel = new QLabel(tr("Box Options"), this);
+    pBoxLabel->setFont(fnt);
+    layout->addWidget(pBoxLabel, row++, 0);
+
+    m_pBoxToken = new QCheckBox(tr("Use a Sandboxie login instead of an anonymous token"));
+    m_pBoxToken->setToolTip(tr("Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens."));
+    m_pBoxToken->setChecked(theConf->GetBool("BoxDefaults/BoxToken", false));
+    layout->addWidget(m_pBoxToken, row++, 1, 1, 3);
+    registerField("boxToken", m_pBoxToken);
+
     setLayout(layout);
 
 	int size = 16.0;
@@ -767,6 +777,7 @@ CIsolationPage::CIsolationPage(QWidget *parent)
 #endif
     AddIconToLabel(pNetLabel, CSandMan::GetIcon("Network").pixmap(size,size));
     AddIconToLabel(pAdminLabel, CSandMan::GetIcon("Shield9").pixmap(size,size));
+    AddIconToLabel(pBoxLabel, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 }
 
 int CIsolationPage::nextId() const
@@ -784,6 +795,9 @@ void CIsolationPage::initializePage()
     m_pShareAccess->setEnabled(!bHardened);
     m_pDropAdmin->setEnabled(!bHardened);
     m_pDropAdmin->setChecked(bDropAdmin || bHardened);
+
+    bool bAppBox = (BoxType == CSandBoxPlus::eAppBoxPlus || BoxType == CSandBoxPlus::eAppBox);
+    m_pBoxToken->setEnabled(!bAppBox);
 }
 
 bool CIsolationPage::validatePage()
@@ -817,20 +831,14 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     int row = 0;
     QGridLayout *layout = new QGridLayout;
 
-    QLabel* pBoxLabel = new QLabel(tr("Box Options"), this);
+    QLabel* pBoxLabel = new QLabel(tr("Advanced Options"), this);
     QFont fnt = pBoxLabel->font();
 	fnt.setBold(true);
 	//fnt.setWeight(QFont::DemiBold);
     pBoxLabel->setFont(fnt);
     layout->addWidget(pBoxLabel, row++, 0);
 
-    m_pBoxToken = new QCheckBox(tr("Use a Sandboxie login instead of an anonymous token"));
-    m_pBoxToken->setToolTip(tr("Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens."));
-    m_pBoxToken->setChecked(theConf->GetBool("BoxDefaults/BoxToken", false));
-    layout->addWidget(m_pBoxToken, row++, 1, 1, 3);
-    registerField("boxToken", m_pBoxToken);
-
-    QCheckBox* pImageProtection = new QCheckBox(tr("Prevent sandboxed programs installed on the host from loading DLLs from the sandbox"));
+    QCheckBox* pImageProtection = new QCheckBox(tr("Prevent sandboxed programs on the host from loading sandboxed DLLs"));
     pImageProtection->setToolTip(tr("This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them."));
     pImageProtection->setChecked(theConf->GetBool("BoxDefaults/ImagesProtection", false));
     pImageProtection->setEnabled(g_CertInfo.active);
@@ -876,7 +884,7 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	size *= (QApplication::desktop()->logicalDpiX() / 96.0); // todo Qt6
 #endif
-    AddIconToLabel(pBoxLabel, CSandMan::GetIcon("Sandbox").pixmap(size,size));
+    AddIconToLabel(pBoxLabel, CSandMan::GetIcon("Advanced").pixmap(size,size));
 }
 
 int CAdvancedPage::nextId() const
@@ -886,10 +894,6 @@ int CAdvancedPage::nextId() const
     
 void CAdvancedPage::initializePage()
 {
-    int BoxType = wizard()->field("boxType").toInt();
-
-    bool bAppBox = (BoxType == CSandBoxPlus::eAppBoxPlus || BoxType == CSandBoxPlus::eAppBox);
-    m_pBoxToken->setEnabled(!bAppBox);
 }
 
 bool CAdvancedPage::validatePage()

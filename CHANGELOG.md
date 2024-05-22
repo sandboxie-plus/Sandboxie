@@ -23,10 +23,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - split the advanced new box wizard page in two
+- reorganized box options a bit
 
 ### Fixed
 - fixed issue with proxy authentication setting
 - fixed memory leak in sbiesvc
+- fixed issue with inconsistent WFP option application [#3900](https://github.com/sandboxie-plus/Sandboxie/issues/3900)
+
 
 
 

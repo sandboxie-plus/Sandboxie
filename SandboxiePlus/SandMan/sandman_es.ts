@@ -185,12 +185,6 @@
         <translation type="vanished">Permitir a MSIServer ejecutarse con un token de sistema aislado</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="828"/>
-        <source>Advanced Sandbox options</source>
-        <oldsource>Box Options</oldsource>
-        <translation type="unfinished">Opciones de Sandbox</translation>
-    </message>
-    <message>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="vanished">Usar un acceso de Sandboxie en vez de un token anónimo</translation>
     </message>

@@ -187,12 +187,6 @@
         <translation type="vanished">Autoriser MSIServer à s&apos;exécuter dans le bac à sable avec un jeton système</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="828"/>
-        <source>Advanced Sandbox options</source>
-        <oldsource>Box Options</oldsource>
-        <translation type="unfinished">Options du bac</translation>
-    </message>
-    <message>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="vanished">Utiliser un identifiant de Sandboxie au lieu d&apos;un jeton anonyme</translation>
     </message>

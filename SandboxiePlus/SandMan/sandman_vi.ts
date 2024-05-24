@@ -149,12 +149,6 @@
         <translation type="obsolete">Bỏ quyền khỏi nhóm Quản trị viên và Người dùng quyền lực</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="828"/>
-        <source>Advanced Sandbox options</source>
-        <oldsource>Box Options</oldsource>
-        <translation type="unfinished">Tùy chọn Sandbox</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="841"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>

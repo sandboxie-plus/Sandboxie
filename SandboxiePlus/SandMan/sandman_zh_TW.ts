@@ -243,12 +243,6 @@
         <translation type="vanished">允許 MSIServer 使用沙箱化系統權杖執行</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="828"/>
-        <source>Advanced Sandbox options</source>
-        <oldsource>Box Options</oldsource>
-        <translation type="unfinished">沙箱選項</translation>
-    </message>
-    <message>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="vanished">使用 Sandboxie 登入程序替代匿名權杖</translation>
     </message>

@@ -181,12 +181,6 @@
         <translation type="vanished">Разрешить запуск MSIServer с изолированным системным токеном</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="828"/>
-        <source>Advanced Sandbox options</source>
-        <oldsource>Box Options</oldsource>
-        <translation type="unfinished">Опции песочницы</translation>
-    </message>
-    <message>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="vanished">Использовать логин Sandboxie вместо анонимного токена</translation>
     </message>

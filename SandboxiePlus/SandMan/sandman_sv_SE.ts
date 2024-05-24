@@ -243,12 +243,6 @@
         <translation type="vanished">Tillåt MSIServer att köra med ett sandlådat systemtecken</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="828"/>
-        <source>Advanced Sandbox options</source>
-        <oldsource>Box Options</oldsource>
-        <translation type="unfinished">Lådalternativ</translation>
-    </message>
-    <message>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="vanished">Använd en Sandboxie-inloggning istället för ett anonymt tecken</translation>
     </message>

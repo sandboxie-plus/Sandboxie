@@ -2114,15 +2114,28 @@ _FX NTSTATUS SbieCreateToken(PHANDLE TokenHandle, ACCESS_MASK DesiredAccess, POB
             ZwCreateToken_num);
 #else
     if (ZwCreateTokenEx) { // Win 8+
+#ifdef _WIN64
+        return Sbie_CallFunction_asm(ZwCreateTokenEx, (UINT_PTR)TokenHandle, (UINT_PTR)DesiredAccess, (UINT_PTR)ObjectAttributes,
+            (UINT_PTR)Type, (UINT_PTR)AuthenticationId, (UINT_PTR)ExpirationTime, (UINT_PTR)User, (UINT_PTR)Groups, (UINT_PTR)Privileges,
+            (UINT_PTR)UserAttributes, (UINT_PTR)DeviceAttributes, (UINT_PTR)DeviceGroups, (UINT_PTR)MandatoryPolicy,
+            (UINT_PTR)Owner, (UINT_PTR)PrimaryGroup, (UINT_PTR)DefaultDacl, (UINT_PTR)Source, 0, 0);
+#else
         return ZwCreateTokenEx(TokenHandle, DesiredAccess, ObjectAttributes,
             Type, AuthenticationId, ExpirationTime, User, Groups, Privileges,
             UserAttributes, DeviceAttributes, DeviceGroups, MandatoryPolicy,
             Owner, PrimaryGroup, DefaultDacl, Source);
+#endif
     }
     if (ZwCreateToken) {
-        NTSTATUS status =  ZwCreateToken(TokenHandle, DesiredAccess, ObjectAttributes,
+#ifdef _WIN64
+        NTSTATUS status = Sbie_CallFunction_asm(ZwCreateToken, (UINT_PTR)TokenHandle, (UINT_PTR)DesiredAccess, (UINT_PTR)ObjectAttributes,
+            (UINT_PTR)Type, (UINT_PTR)AuthenticationId, (UINT_PTR)ExpirationTime, (UINT_PTR)User, (UINT_PTR)Groups, (UINT_PTR)Privileges,
+            (UINT_PTR)Owner, (UINT_PTR)PrimaryGroup, (UINT_PTR)DefaultDacl, (UINT_PTR)Source, 0, 0, 0, 0, 0, 0);
+#else
+        NTSTATUS status = ZwCreateToken(TokenHandle, DesiredAccess, ObjectAttributes,
             Type, AuthenticationId, ExpirationTime, User, Groups, Privileges,
             Owner, PrimaryGroup, DefaultDacl, Source);
+#endif
 #endif
         if (NT_SUCCESS(status)) {
             if(MandatoryPolicy)

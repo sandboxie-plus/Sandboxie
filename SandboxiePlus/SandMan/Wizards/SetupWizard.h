@@ -111,10 +111,12 @@ class CShellPage : public QWizardPage
     Q_OBJECT
 
 public:
-	void OnEditOnlyAdmin();
 	CShellPage(QWidget *parent = nullptr);
 
     int nextId() const override;
+
+private slots:
+    void OnEditOnlyAdmin();
 
 private:
     QCheckBox *m_pAutoStart;

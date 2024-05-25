@@ -1029,14 +1029,17 @@ QString CSbieAPI::GetUserSection(QString* pUserName, bool* pIsAdmin) const
 	return UserSection;
 }
 
-SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
+SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Command, EStartFlags Flags, const QString& WorkingDir, QProcess* pProcess)
 {
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);
 
 	QString StartArgs;
-	if(Elevated)
+	if (Flags & eStartElevated)
 		StartArgs += "/elevated ";
+	if (Flags & eStartFCP)
+		StartArgs += "/fcp ";
+
 	if (!BoxName.isEmpty())
 		StartArgs += "/box:" + BoxName + " ";
 	else
@@ -1055,7 +1058,7 @@ SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Com
 		pProcess->setNativeArguments(StartArgs);
 		pProcess->start();
 		pid = pProcess->processId();
-	} 
+	}
 	else {
 		QProcess process;
 		//process.setWorkingDirectory(QString::fromWCharArray(sysPath));
@@ -2148,6 +2151,27 @@ SB_STATUS CSbieAPI::LockConfig(const QString& NewPassword)
 void CSbieAPI::ClearPassword()
 {
 	m->Password.clear();
+}
+
+SB_RESULT(QByteArray) CSbieAPI::RC4Crypt(const QByteArray& Data)
+{
+	ULONG req_len = sizeof(SBIE_INI_RC4_CRYPT_REQ) + Data.size();
+	SScoped<SBIE_INI_RC4_CRYPT_REQ> req(malloc(req_len));
+
+	req->h.length = req_len;
+	req->h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
+	req->value_len = Data.size();
+	memcpy(req->value, Data.constData(), req->value_len);
+	
+	SScoped<SBIE_INI_RC4_CRYPT_RPL> rpl;
+	SB_STATUS Status = CallServer(&req->h, &rpl);
+	if (!Status)
+		return Status;
+	if (!rpl) 
+		return SB_ERR(ERROR_SERVER_DISABLED);
+	if (rpl->h.status != 0)
+		return SB_ERR(rpl->h.status);
+	return CSbieResult<QByteArray>(QByteArray((char*)rpl->value, rpl->value_len));
 }
 
 bool CSbieAPI::GetDriverInfo(quint32 InfoClass, void* pBuffer, size_t Size)

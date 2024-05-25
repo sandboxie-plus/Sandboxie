@@ -175,6 +175,29 @@ typedef struct tagSBIE_INI_PASSWORD_REQ SBIE_INI_PASSWORD_REQ;
 
 
 //---------------------------------------------------------------------------
+// rc4 Crypt
+//---------------------------------------------------------------------------
+
+
+struct tagSBIE_INI_RC4_CRYPT_REQ
+{
+    MSG_HEADER h;
+    ULONG value_len;
+    UCHAR value[1];
+};
+
+struct tagSBIE_INI_RC4_CRYPT_RPL
+{
+    MSG_HEADER h;
+    ULONG value_len;
+    UCHAR value[1];
+};
+
+typedef struct tagSBIE_INI_RC4_CRYPT_REQ SBIE_INI_RC4_CRYPT_REQ;
+typedef struct tagSBIE_INI_RC4_CRYPT_RPL SBIE_INI_RC4_CRYPT_RPL;
+
+
+//---------------------------------------------------------------------------
 
 
 #endif /* _MY_SBIEINIWIRE_H */

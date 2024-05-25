@@ -86,9 +86,6 @@ bool CSetupWizard::ShowWizard(int iOldLevel)
         if (wizard.field("useBrowserIcon").toBool())
             CSettingsWindow::AddBrowserIcon();
 
-		if (wizard.field("editAdminOnly").toBool())
-			theConf->SetValue("Options/EditAdminOnly", 1);
-
         //if (wizard.field("useWFP").toBool()) {
         //    theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", true);
         //    theAPI->ReloadConfig(true);
@@ -133,6 +130,12 @@ bool CSetupWizard::ShowWizard(int iOldLevel)
 
     //if (wizard.field("isUpdate").toBool())
     //    theConf->SetValue("Options/CheckForUpdates", 1);
+
+    if (iOldLevel < SETUP_LVL_1) 
+    {
+        if (wizard.field("editAdminOnly").toBool())
+            theAPI->GetGlobalSettings()->SetText("EditAdminOnly", "y");
+    }
 
     theConf->SetValue("Options/WizardLevel", SETUP_LVL_CURRENT);
 

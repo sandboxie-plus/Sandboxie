@@ -47,7 +47,7 @@ public:
 	CScriptManager*		GetScripts() { return m_SbieScripts; }
 	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
-	static QString		GetVersion();
+	static QString		GetVersion(bool bWithUpdates = false);
 	static void			ShowMessageBox(QWidget* Widget, QMessageBox::Icon Icon, const QString& Message);
 
 	bool				IsImDiskReady() const { return m_ImDiskReady; }
@@ -88,10 +88,11 @@ public:
 	QString				FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, QString ProcessName, QString* pLink = NULL);
 	QString				MakeSbieMsgLink(quint32 MsgCode, const QStringList& MsgData, QString ProcessName);
 
+	static void			SafeShow(QWidget* pWidget);
 	int					SafeExec(QDialog* pDialog);
 
-	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
-	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
+	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString(), bool bShowFCP = false);
+	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, CSbieAPI::EStartFlags Flags = CSbieAPI::eStartDefault, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 	SB_STATUS			ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount = false);
 
 	void				EditIni(const QString& IniPath, bool bPlus = false);

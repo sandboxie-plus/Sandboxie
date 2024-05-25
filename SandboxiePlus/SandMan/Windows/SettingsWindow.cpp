@@ -362,6 +362,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkHide, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
 
 	connect(ui.txtEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnOptChanged()));
 	m_bRebuildUI = false;
@@ -418,10 +420,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	if (CurrentVersion.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
 		ui.chkWin32k->setEnabled(false);
+	//connect(ui.chkForceExplorerChild, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	//connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	m_FeaturesChanged = false;
 	connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkSbieLogon, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkSbieAll, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	m_GeneralChanged = false;
 
 	connect(ui.chkWatchConfig, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged())); // not sbie ini
@@ -475,6 +479,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		pTmplBtnMenu->addAction(tr("Add %1 Template").arg(CTemplateWizard::GetTemplateLabel((CTemplateWizard::ETemplateType)i)), this, SLOT(OnTemplateWizard()))->setData(i);
 	ui.btnAddTemplate->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddTemplate->setMenu(pTmplBtnMenu);
+	connect(ui.btnOpenTemplate, SIGNAL(clicked(bool)), this, SLOT(OnOpenTemplate()));
 	connect(ui.btnDelTemplate, SIGNAL(clicked(bool)), this, SLOT(OnDelTemplates()));
 	//
 
@@ -680,7 +685,7 @@ void CSettingsWindow::showTab(const QString& Name, bool bExclusive)
 		}
 	}
 
-	SafeShow(this);
+	CSandMan::SafeShow(this);
 }
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
@@ -872,7 +877,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
 	if (theAPI->IsConnected()) {
 		if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
-			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
+			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "").left(11) != "SandMan.exe")
 				ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
 			else
 				ui.chkSvcStart->setChecked(true);
@@ -905,6 +910,8 @@ void CSettingsWindow::LoadSettings()
 
 	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
 	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
+	ui.chkHide->setChecked(theConf->GetBool("Options/CoverWindows", false));
+
 
 	ui.txtEditor->setText(theConf->GetString("Options/Editor", "notepad.exe"));
 
@@ -948,6 +955,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkMinimize->setChecked(theConf->GetBool("Options/MinimizeToTray", false));
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
+	//ui.chkForceExplorerChild->setChecked(strcmp(theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").toStdString().c_str(), theAPI->GetGlobalSettings()->GetText("DefaultBox").toStdString().c_str())==0);
 	OnLoadAddon();
 
 	bool bImDiskReady = theGUI->IsImDiskReady();
@@ -1000,6 +1008,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", true));
 		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", true));
 		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
+		ui.chkSbieAll->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieAllGroup", false));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkAdminOnly->setEnabled(IsAdminUser());
@@ -1051,6 +1060,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkObjCb->setEnabled(false);
 		ui.chkWin32k->setEnabled(false);
 		ui.chkSbieLogon->setEnabled(false);
+		ui.chkSbieAll->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkRamDisk->setEnabled(false);
@@ -1429,6 +1439,8 @@ QString CSettingsWindow::GetCertLevel()
 	QString CertLevel;
 	if (g_CertInfo.level == eCertAdvanced)
 		CertLevel = tr("Advanced");
+	else if (g_CertInfo.level == eCertAdvanced1)
+		CertLevel = tr("Advanced (L)");
 	else if (g_CertInfo.level == eCertMaxLevel)
 		CertLevel = tr("Max Level");
 	else if (g_CertInfo.level != eCertStandard && g_CertInfo.level != eCertStandard2)
@@ -1552,6 +1564,8 @@ void CSettingsWindow::SaveSettings()
 	else if (Scaling > 500)
 		Scaling = 500;
 	theConf->SetValue("Options/FontScaling", Scaling);
+	
+	theConf->SetValue("Options/CoverWindows", ui.chkHide->isChecked());
 
 	theConf->SetValue("Options/Editor", ui.txtEditor->text());
 
@@ -1560,7 +1574,7 @@ void CSettingsWindow::SaveSettings()
 	if (theAPI->IsConnected()) {
 		if (ui.chkSvcStart->checkState() == Qt::Checked) {
 			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", true);
-			theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
+			theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe -autorun");
 		}
 		else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
 			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
@@ -1633,7 +1647,10 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
-
+	//if (ui.chkForceExplorerChild->isChecked())
+	//	theAPI->GetGlobalSettings()->SetText("ForceExplorerChild", theAPI->GetGlobalSettings()->GetText("DefaultBox"));
+	//else if (theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").compare(theAPI->GetGlobalSettings()->GetText("DefaultBox")) == 0)
+	//	theAPI->GetGlobalSettings()->DelValue("ForceExplorerChild");
 	if (theAPI->IsConnected())
 	{
 		try
@@ -1685,6 +1702,7 @@ void CSettingsWindow::SaveSettings()
 				WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");
 				WriteAdvancedCheck(ui.chkWin32k, "EnableWin32kHooks", "", "n");
 				WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
+				WriteAdvancedCheck(ui.chkSbieAll, "SandboxieAllGroup", "y", "");
 
 				if (m_FeaturesChanged) {
 					m_FeaturesChanged = false;
@@ -2233,6 +2251,13 @@ void CSettingsWindow::OnTemplateWizard()
 	}
 }
 
+void CSettingsWindow::OnOpenTemplate()
+{
+	QTreeWidgetItem* pItem = ui.treeTemplates->currentItem();
+	if (pItem)
+		OnTemplateDoubleClicked(pItem, 0);
+}
+
 void CSettingsWindow::OnDelTemplates()
 {
 	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected local template(s)?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
@@ -2435,14 +2460,9 @@ void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& P
 	if (Data.isEmpty() || Data["error"].toBool())
 		return;
 
-	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV);
-	int iUpdate = COnlineUpdater::GetCurrentUpdate();
-	if(iUpdate) 
-		Version += QChar('a' + (iUpdate - 1));
-
 	m_UpdateData = Data;
 	QVariantMap Releases = m_UpdateData["releases"].toMap();
-	ui.lblCurrent->setText(tr("%1 (Current)").arg(Version));
+	ui.lblCurrent->setText(tr("%1 (Current)").arg(theGUI->GetVersion(true)));
 	ui.lblStable->setText(CSettingsWindow__MkVersion("stable", Releases));
 	ui.lblPreview->setText(CSettingsWindow__MkVersion("preview", Releases));
 	if(ui.radInsider->isEnabled())

@@ -332,6 +332,14 @@ LONG SbieApi_QuerySymbolicLink(
 
 //---------------------------------------------------------------------------
 
+SBIEAPI_EXPORT
+LONG SbieApi_QueryDrvInfo(
+    ULONG info_class,
+    VOID* info_data,
+    ULONG info_size);
+
+//---------------------------------------------------------------------------
+
 
 SBIEAPI_EXPORT
 LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags);

@@ -79,11 +79,12 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNetFwTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkDnsTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkHookTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
-	connect(ui.treeTriggers, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnTriggerChanged(QTreeWidgetItem *, int)));
+	connect(ui.treeTriggers, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnTriggerChanged()));
 	connect(ui.btnAddAutoRun, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoRun()));
 	connect(ui.btnAddAutoSvc, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoSvc()));
 	connect(ui.btnAddAutoExec, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoExec()));
@@ -105,6 +106,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnConfidentialChanged()));
 	connect(ui.chkLessConfidential, SIGNAL(clicked(bool)), this, SLOT(OnLessConfidentialChanged()));
 	connect(ui.chkProtectWindow, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkAdminOnly, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkBlockCapture, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNotifyProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -131,7 +133,6 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkUseSbieDeskHack->setChecked(m_pBox->GetBool("UseSbieDeskHack", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
 
-	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 	ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 	ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
 	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
@@ -205,8 +206,6 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
 	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
 
-	ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
-
 	LoadOptionList();
 
 	bool bGlobalNoMon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("DisableResourceMonitor", false);
@@ -219,6 +218,7 @@ void COptionsWindow::LoadAdvanced()
 	ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
 	ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
 	ReadAdvancedCheck("NetFwTrace", ui.chkNetFwTrace, "*");
+	ui.chkDnsTrace->setChecked(m_pBox->GetBool("DnsTrace", false));
 	ui.chkHookTrace->setChecked(m_pBox->GetBool("ApiTrace", false));
 	ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 	ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
@@ -237,6 +237,19 @@ void COptionsWindow::LoadAdvanced()
 		AddTriggerItem(Value, eDeleteCmd);
 	foreach(const QString & Value, m_pBox->GetTextList("OnBoxTerminate", m_Template))
 		AddTriggerItem(Value, eTerminateCmd);
+
+	foreach(const QString & Value, m_pBox->GetTextList("StartProgramDisabled", m_Template))
+		AddTriggerItem(Value, eOnStartCmd, true);
+	foreach(const QString & Value, m_pBox->GetTextList("StartServiceDisabled", m_Template))
+		AddTriggerItem(Value, eOnStartSvc, true);
+	foreach(const QString & Value, m_pBox->GetTextList("AutoExecDisabled", m_Template))
+		AddTriggerItem(Value, eAutoExec, true);
+	foreach(const QString & Value, m_pBox->GetTextList("OnFileRecoveryDisabled", m_Template))
+		AddTriggerItem(Value, eRecoveryCheck, true);
+	foreach(const QString & Value, m_pBox->GetTextList("OnBoxDeleteDisabled", m_Template))
+		AddTriggerItem(Value, eDeleteCmd, true);
+	foreach(const QString & Value, m_pBox->GetTextList("OnBoxTerminateDisabled", m_Template))
+		AddTriggerItem(Value, eTerminateCmd, true);
 
 	ShowTriggersTmpl();
 	//
@@ -264,11 +277,13 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkLessConfidential->setChecked(m_BoxTemplates.contains("LessConfidentialBox"));
 	ui.chkNotifyProtect->setChecked(m_pBox->GetBool("NotifyBoxProtected", false));
 
-	ui.chkProtectWindow->setChecked(m_pBox->GetBool("IsProtectScreen"));
+	ui.chkProtectWindow->setChecked(m_pBox->GetBool("CoverBoxedWindows"));
 	QString str = m_pBox->GetText("OpenWinClass", "");
-	ui.chkBlockCapture->setChecked(m_pBox->GetBool("IsBlockCapture") && QString::compare(str, "*") != 0);
+	ui.chkBlockCapture->setChecked(m_pBox->GetBool("BlockScreenCapture") && QString::compare(str, "*") != 0);
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
-
+	
+	ui.chkAdminOnly->setChecked(m_pBox->GetBool("EditAdminOnly", false));
+	
 	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
 	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
 	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
@@ -304,17 +319,17 @@ void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
 		foreach(const QString& Template, m_pBox->GetTemplates())
 		{
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("StartProgram", Template))
-				AddTriggerItem(Value, eOnStartCmd, Template);
+				AddTriggerItem(Value, eOnStartCmd, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("StartService", Template))
-				AddTriggerItem(Value, eOnStartSvc, Template);
+				AddTriggerItem(Value, eOnStartSvc, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("AutoExec", Template))
-				AddTriggerItem(Value, eAutoExec, Template);
+				AddTriggerItem(Value, eAutoExec, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnFileRecovery", Template))
-				AddTriggerItem(Value, eRecoveryCheck, Template);
+				AddTriggerItem(Value, eRecoveryCheck, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnBoxDelete", Template))
-				AddTriggerItem(Value, eDeleteCmd, Template);
+				AddTriggerItem(Value, eDeleteCmd, false, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnBoxTerminate", Template))
-				AddTriggerItem(Value, eTerminateCmd, Template);
+				AddTriggerItem(Value, eTerminateCmd, false, Template);
 		}
 	}
 	else if (bUpdate)
@@ -402,8 +417,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", "y", "");
 	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", "", "n");
 
-
-	WriteGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
+	bool bGlobalSbieLogon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieLogon", false);
+	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");
 
 	SaveOptionList();
 
@@ -417,6 +432,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
 	WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
 	WriteAdvancedCheck(ui.chkNetFwTrace, "NetFwTrace", "*");
+	WriteAdvancedCheck(ui.chkDnsTrace, "DnsTrace", "y");
 	WriteAdvancedCheck(ui.chkHookTrace, "ApiTrace", "y");
 	WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 	WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
@@ -428,24 +444,55 @@ void COptionsWindow::SaveAdvanced()
 	QStringList DeleteCommand;
 	QStringList AutoExec;
 	QStringList TerminateCommand;
+
+	QStringList StartProgramDisabled;
+	QStringList StartServiceDisabled;
+	QStringList RecoveryCheckDisabled;
+	QStringList DeleteCommandDisabled;
+	QStringList AutoExecDisabled;
+	QStringList TerminateCommandDisabled;
+
 	for (int i = 0; i < ui.treeTriggers->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = ui.treeTriggers->topLevelItem(i);
-		switch (pItem->data(0, Qt::UserRole).toInt())
+		if (pItem->checkState(0) == Qt::Checked) 
 		{
-		case eOnStartCmd:	StartProgram.append(pItem->text(2)); break;
-		case eOnStartSvc:	StartService.append(pItem->text(2)); break;
-		case eAutoExec:		AutoExec.append(pItem->text(2)); break;
-		case eRecoveryCheck:		RecoveryCheck.append(pItem->text(2)); break;
-		case eDeleteCmd:	DeleteCommand.append(pItem->text(2)); break;
-		case eTerminateCmd:		TerminateCommand.append(pItem->text(2)); break;
+			switch (pItem->data(0, Qt::UserRole).toInt())
+			{
+			case eOnStartCmd:		StartProgram.append(pItem->text(2)); break;
+			case eOnStartSvc:		StartService.append(pItem->text(2)); break;
+			case eAutoExec:			AutoExec.append(pItem->text(2)); break;
+			case eRecoveryCheck:	RecoveryCheck.append(pItem->text(2)); break;
+			case eDeleteCmd:		DeleteCommand.append(pItem->text(2)); break;
+			case eTerminateCmd:		TerminateCommand.append(pItem->text(2)); break;
+			}
+		}
+		else
+		{
+			switch (pItem->data(0, Qt::UserRole).toInt())
+			{
+			case eOnStartCmd:		StartProgramDisabled.append(pItem->text(2)); break;
+			case eOnStartSvc:		StartServiceDisabled.append(pItem->text(2)); break;
+			case eAutoExec:			AutoExecDisabled.append(pItem->text(2)); break;
+			case eRecoveryCheck:	RecoveryCheckDisabled.append(pItem->text(2)); break;
+			case eDeleteCmd:		DeleteCommandDisabled.append(pItem->text(2)); break;
+			case eTerminateCmd:		TerminateCommandDisabled.append(pItem->text(2)); break;
+			}
 		}
 	}
+
 	WriteTextList("StartProgram", StartProgram);
 	WriteTextList("StartService", StartService);
 	WriteTextList("AutoExec", AutoExec);
 	WriteTextList("OnFileRecovery", RecoveryCheck);
 	WriteTextList("OnBoxDelete", DeleteCommand);
 	WriteTextList("OnBoxTerminate", TerminateCommand);
+
+	WriteTextList("StartProgramDisabled", StartProgramDisabled);
+	WriteTextList("StartServiceDisabled", StartServiceDisabled);
+	WriteTextList("AutoExecDisabled", AutoExecDisabled);
+	WriteTextList("OnFileRecoveryDisabled", RecoveryCheckDisabled);
+	WriteTextList("OnBoxDeleteDisabled", DeleteCommandDisabled);
+	WriteTextList("OnBoxTerminateDisabled", TerminateCommandDisabled);
 	//
 
 
@@ -476,9 +523,11 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkConfidential, "ConfidentialBox", "y", "");
 	WriteAdvancedCheck(ui.chkNotifyProtect, "NotifyBoxProtected", "y", "");
 
-	WriteAdvancedCheck(ui.chkProtectWindow, "IsProtectScreen", "y", "");
-	WriteAdvancedCheck(ui.chkBlockCapture, "IsBlockCapture", "y", "");
+	WriteAdvancedCheck(ui.chkProtectWindow, "CoverBoxedWindows", "y", "");
+	WriteAdvancedCheck(ui.chkBlockCapture, "BlockScreenCapture", "y", "");
 	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "");
+	
+	WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
 
 	QStringList Users;
 	for (int i = 0; i < ui.lstUsers->count(); i++)
@@ -512,7 +561,7 @@ void COptionsWindow::UpdateBoxIsolation()
 {
 	ui.chkNoSecurityFiltering->setEnabled(ui.chkNoSecurityIsolation->isChecked());
 
-	ui.chkAddToJob->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkAddToJob->setEnabled(!IsAccessEntrySet(eWnd, "", eOpen, "*") && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkNestedJobs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
@@ -538,9 +587,19 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkCloseForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkNoOpenForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
+	ui.chkSbieLogon->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
 	if (ui.chkNoSecurityIsolation->isChecked()) {
 		ui.chkCloseForBox->setChecked(false);
 		ui.chkNoOpenForBox->setChecked(false);
+		if (!IsAccessEntrySet(eWnd, "", eOpen, "*"))
+			ui.chkAddToJob->setChecked(false);
+		ui.chkSbieLogon->setChecked(false);
+	}
+	else {
+		if (!IsAccessEntrySet(eWnd, "", eOpen, "*"))
+			ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
+		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 	}
 }
 
@@ -874,7 +933,7 @@ void COptionsWindow::CloseOptionEdit(QTreeWidgetItem* pItem, bool bSave)
 //
 
 // triggers
-void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template)
+void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? Type : -1);
@@ -906,6 +965,10 @@ void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, c
 	}
 	pItem->setText(2, Value);
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+
+	if (Template.isEmpty())
+		pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+
 	ui.treeTriggers->addTopLevelItem(pItem);
 }
 

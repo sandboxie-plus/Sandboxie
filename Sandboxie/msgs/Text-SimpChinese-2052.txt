@@ -733,6 +733,10 @@ SBIE2332 无法访问文件 SbiePst.dat
 SBIE2335 进程 %2 初始化失败
 .
 
+2360;pop;err;01
+SBIE2360 注入 SOCKS5 代理失败:  %2
+.
+
 2336;pop;err;01
 SBIE2336 GUI 服务器出错:  %2
 .
@@ -896,6 +900,15 @@ Sandboxie 启动
 # should match the localized folder name for Programs in the Start Menu folder
 3114;txt;01
 程序
+.
+
+3198;txt;01
+您想在 %2 沙盒中启动新程序吗？
+您收到此消息是因为您设置了 AlertBeforeStart=y。
+.
+
+3199;txt;01
+该启动请求似乎未被 SANDBOXIE 组件调用。你确定要运行它吗？如果这是您的操作，您可以忽略它并选择“是”。
 .
 
 3202;txt;01

@@ -58,6 +58,9 @@ struct _PATTERN {
     // a value denoting the match level for the process
     ULONG level;
 
+    // optional auxyliary data to be associated with this pattern
+    PVOID aux;
+
     // array of pointers to constant parts.  the actual number of
     // elements is indicate by info.num_cons, and the strings are
     // allocated as part of this PATTERN object
@@ -305,6 +308,17 @@ _FX const WCHAR *Pattern_Source(PATTERN *pat)
 _FX ULONG Pattern_Level(PATTERN *pat)
 {
     return pat->level;
+}
+
+
+//---------------------------------------------------------------------------
+// Pattern_Aux
+//---------------------------------------------------------------------------
+
+
+_FX PVOID* Pattern_Aux(PATTERN *pat)
+{
+    return &pat->aux;
 }
 
 
@@ -655,7 +669,7 @@ _FX const WCHAR *Pattern_wcsnstr_ex(
 
 
 _FX int Pattern_MatchPathList(
-    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, ULONG* pflags, USHORT* pwildc, const WCHAR** patsrc)
+    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, ULONG* pflags, USHORT* pwildc, PATTERN **found)
 {
     PATTERN *pat;
     int match_len = 0;
@@ -682,7 +696,7 @@ _FX int Pattern_MatchPathList(
             level = cur_level;
             flags = cur_exact ? MATCH_FLAG_EXACT : 0;
             wildc = cur_wildc;
-            if (patsrc) *patsrc = Pattern_Source(pat);
+            if (found) *found = pat;
             
             // we need to test all entries to find the best match, so we don't break here
             // unless we found an exact match, than there can't be a batter one
@@ -705,7 +719,7 @@ _FX int Pattern_MatchPathList(
                 level = cur_level;
                 flags = MATCH_FLAG_AUX | (cur_exact ? MATCH_FLAG_EXACT : 0);
                 wildc = cur_wildc;
-                if (patsrc) *patsrc = Pattern_Source(pat);
+                if (found) *found = pat;
             }
         }
 
@@ -727,7 +741,7 @@ _FX int Pattern_MatchPathList(
 
 _FX BOOLEAN Pattern_MatchPathListEx(WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, int* pmatch_len, ULONG* pflags, USHORT* pwildc, const WCHAR** patsrc)
 {
-	const WCHAR* cur_patsrc;
+    PATTERN* found;
     ULONG cur_level;
     ULONG cur_flags;
     USHORT cur_wildc;
@@ -737,7 +751,7 @@ _FX BOOLEAN Pattern_MatchPathListEx(WCHAR *path_lwr, ULONG path_len, LIST *list,
         cur_level = *plevel;
         cur_flags = *pflags;
         cur_wildc = *pwildc;
-        cur_len = Pattern_MatchPathList(path_lwr, path_len, list, &cur_level, &cur_flags, &cur_wildc, &cur_patsrc);
+        cur_len = Pattern_MatchPathList(path_lwr, path_len, list, &cur_level, &cur_flags, &cur_wildc, &found);
         if (cur_level <= *plevel && (
             ((*pflags & MATCH_FLAG_EXACT) == 0 && (cur_flags & MATCH_FLAG_EXACT) != 0) || // an exact match overrules any non exact match
             ((*pflags & MATCH_FLAG_AUX) != 0 && (cur_flags & MATCH_FLAG_AUX) == 0) || // a rule with a primary match overrules auxiliary matches
@@ -748,7 +762,7 @@ _FX BOOLEAN Pattern_MatchPathListEx(WCHAR *path_lwr, ULONG path_len, LIST *list,
             *pflags = cur_flags;
             *pwildc = cur_wildc;
             *pmatch_len = cur_len;
-            if (patsrc) *patsrc = cur_patsrc;
+            if (patsrc) *patsrc = Pattern_Source(found);
 
             return TRUE;
         }

@@ -18,6 +18,19 @@ SBIE1207 Your Windows build (%2) is not yet supported by Sandboxie, which means 
 SBIE1222 Error with security token:  %2
 .
 
+2360;pop;err;01
+SBIE2360 Failed to inject SOCKS5 proxy:  %2
+.
+
+3198;txt;01
+Do you want to start a new program in the %2 sandbox?
+You received this message because you set AlertBeforeStart=y.
+.
+
+3199;txt;01
+This startup request does not appear to be invoked by the SANDBOXIE component. Are you sure you want to run it? If this is your action, you can ignore it and choose yes.
+.
+
 *==========
 * Extraneous Messages in Text-Polish-1045.txt
 *==========

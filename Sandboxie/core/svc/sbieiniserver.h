@@ -95,7 +95,7 @@ protected:
     bool GetIniPath(WCHAR **IniPath,
                     BOOLEAN *IsHomePath = NULL, BOOLEAN* IsUTF8 = NULL);
 
-    ULONG IsCallerAuthorized(HANDLE hToken, const WCHAR *Password);
+    ULONG IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, const WCHAR *Section = NULL);
 
     void LockConf(WCHAR *IniPath);
 
@@ -104,6 +104,8 @@ protected:
     bool HashPassword(const WCHAR *Password, WCHAR *Hash41);
 
     MSG_HEADER *RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
+
+    MSG_HEADER *RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
 
 protected:

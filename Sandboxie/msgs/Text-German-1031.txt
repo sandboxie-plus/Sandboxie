@@ -702,6 +702,10 @@ SBIE2337 Konnte Programm nicht starten:  %2
 SBIE2338 Nicht unterstützte Architektur in Prozess %2 vorgefunden
 .
 
+2360;pop;err;01
+SBIE2360 Fehler beim Injizieren des SOCKS5-Proxy:  %2
+.
+
 #----------------------------------------------------------------------------
 # SbieSvc
 #----------------------------------------------------------------------------
@@ -806,12 +810,21 @@ Sandboxie Startmenü - %2  %0
 Desktop
 .
 
+3113;txt;01
+(Ordner öffnen)
+.
+
 3114;txt;01
 Programme
 .
 
-3113;txt;01
-(Ordner öffnen)
+3198;txt;01
+Möchten Sie ein neues Programm in der Sandbox %2 starten?
+Sie haben diese Meldung erhalten, weil Sie AlertBeforeStart=y gesetzt haben.
+.
+
+3199;txt;01
+Diese Startanforderung scheint nicht von der SANDBOXIE-Komponente aufgerufen zu werden. Sind Sie sicher, dass Sie sie ausführen wollen? Wenn dies Ihre Aktion ist, können Sie es ignorieren und Ja wählen.
 .
 
 3202;txt;01

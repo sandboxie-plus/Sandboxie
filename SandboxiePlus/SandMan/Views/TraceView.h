@@ -105,14 +105,12 @@ protected:
 	};
 
 	QMap<quint32, SProgInfo>m_PidMap;
+	bool					m_FullRefresh;
 	quint64					m_LastID;
 	int						m_LastCount;
 	bool					m_bUpdatePending;
 	QVector<CTraceEntryPtr> m_TraceList;
 	QMap<QString, CMonitorEntryPtr> m_MonitorMap;
-
-protected:
-	bool				m_FullRefresh;
 
 	quint32				m_FilterPid;
 	quint32				m_FilterTid;

@@ -2,6 +2,7 @@
 #include "OptionsWindow.h"
 #include "SandMan.h"
 #include "SettingsWindow.h"
+#include "TestProxyDialog.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "../MiscHelpers/Common/Common.h"
 #include "../MiscHelpers/Common/ComboInputDialog.h"
@@ -28,6 +29,22 @@ void COptionsWindow::CreateNetwork()
 	connect(ui.treeNetFw, SIGNAL(itemSelectionChanged()), this, SLOT(OnNetFwSelectionChanged()));
 	connect(ui.treeNetFw, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnNetFwChanged(QTreeWidgetItem *, int)));
 
+	connect(ui.btnAddDns, SIGNAL(clicked(bool)), this, SLOT(OnAddDnsFilter()));
+	connect(ui.btnDelDns, SIGNAL(clicked(bool)), this, SLOT(OnDelDnsFilter()));
+	ui.treeDns->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeDns, -1, this));
+	connect(ui.treeDns, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnDnsFilterChanged(QTreeWidgetItem *, int)));
+
+	connect(ui.btnAddProxy, SIGNAL(clicked(bool)), this, SLOT(OnAddNetProxy()));
+	connect(ui.btnDelProxy, SIGNAL(clicked(bool)), this, SLOT(OnDelNetProxy()));
+	connect(ui.btnTestProxy, SIGNAL(clicked(bool)), this, SLOT(OnTestNetProxy()));
+	connect(ui.btnMoveProxyUp, SIGNAL(clicked(bool)), this, SLOT(OnNetProxyMoveUp()));
+	connect(ui.btnMoveProxyDown, SIGNAL(clicked(bool)), this, SLOT(OnNetProxyMoveDown()));
+	connect(ui.chkProxyResolveHostnames, SIGNAL(clicked(bool)), this, SLOT(OnProxyResolveHostnames()));
+	connect(ui.treeProxy, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnNetProxyItemDoubleClicked(QTreeWidgetItem*, int)));
+	connect(ui.treeProxy, SIGNAL(itemSelectionChanged()), this, SLOT(OnNetProxySelectionChanged()));
+	ui.treeProxy->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeProxy, -1, this));
+	connect(ui.treeProxy, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnNetProxyChanged(QTreeWidgetItem *, int)));
+
 	connect(ui.chkShowNetFwTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowNetFwTmpl()));
 
 	connect(ui.txtProgFwTest, SIGNAL(textChanged(const QString&)), this, SLOT(OnTestNetFwRule()));
@@ -42,6 +59,15 @@ void COptionsWindow::CreateNetwork()
 
 	connect(ui.chkBlockDns, SIGNAL(clicked(bool)), this, SLOT(OnBlockDns()));
 	connect(ui.chkBlockSamba, SIGNAL(clicked(bool)), this, SLOT(OnBlockSamba()));
+
+	connect(ui.tabsInternet, SIGNAL(currentChanged(int)), this, SLOT(OnInternetTab()));
+
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
+		ui.tabDNS->setEnabled(false);
+		ui.tabNetProxy->setEnabled(false);
+	}
+
+	ui.chkProxyResolveHostnames->setVisible(false);
 }
 
 void COptionsWindow::OnBlockDns()
@@ -703,6 +729,432 @@ void COptionsWindow::OnDelNetFwRule()
 	m_NetFwRulesChanged = true;
 	OnOptChanged();
 }
+
+// dns
+void COptionsWindow::LoadDnsFilter()
+{
+	ui.treeDns->clear();
+	foreach(const QString & Value, m_pBox->GetTextList("NetworkDnsFilter", m_Template))
+		AddDnsFilter(Value);
+	foreach(const QString& Value, m_pBox->GetTextList("NetworkDnsFilterDisabled", m_Template)) 
+		AddDnsFilter(Value, true);
+	
+	m_DnsFilterChanged = false;
+}
+
+void COptionsWindow::AddDnsFilter(const QString& Value, bool disabled, const QString& Template)
+{
+	StrPair ProgDns = Split2(Value, ",");
+	if (ProgDns.second.isEmpty()) {
+		ProgDns.second = ProgDns.first;
+		ProgDns.first = "";
+	}
+	StrPair DomainIP = Split2(ProgDns.second, ":");
+	AddDnsFilter(ProgDns.first, DomainIP.first, SplitStr(DomainIP.second, ";"), disabled, Template);
+}
+
+void COptionsWindow::AddDnsFilter(const QString& Prog, const QString& Domain, const QStringList& IPs, bool disabled, const QString& Template)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+	pItem->setData(1, Qt::UserRole, Template.isEmpty() ? 0 : -1);
+	SetProgramItem(Prog, pItem, 0, (Template.isEmpty() ? "" : " (" + Template + ")"));
+	if(Template.isEmpty())
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	pItem->setText(1, Domain);
+	pItem->setText(2, IPs.join(";"));
+	ui.treeDns->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::SaveDnsFilter()
+{
+	QStringList NetworkDnsFilter;
+	QStringList NetworkDnsFilterDisabled;
+	for (int i = 0; i < ui.treeDns->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeDns->topLevelItem(i);
+		int Type = pItem->data(1, Qt::UserRole).toInt();
+		if (Type == -1)
+			continue; // entry from template
+
+		QString Prog = pItem->data(0, Qt::UserRole).toString();
+		QString Domain = pItem->text(1);
+		QString IPs = pItem->text(2);
+		QString Entry = Domain;
+		if (!IPs.isEmpty())
+			Entry.append(":" + IPs);
+		if (!Prog.isEmpty())
+			Entry.prepend(Prog + ",");
+
+		if (pItem->checkState(0) == Qt::Checked)
+			NetworkDnsFilter.append(Entry);
+		else
+			NetworkDnsFilterDisabled.append(Entry);
+	}
+	WriteTextList("NetworkDnsFilter", NetworkDnsFilter);
+	WriteTextList("NetworkDnsFilterDisabled", NetworkDnsFilterDisabled);
+
+	m_DnsFilterChanged = false;
+}
+
+void COptionsWindow::OnAddDnsFilter()
+{
+	QString Domain = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a domain to be filtered"));
+	if (Domain.isEmpty())
+		return;
+	AddDnsFilter("", Domain);
+
+	m_DnsFilterChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnDelDnsFilter()
+{
+	DeleteAccessEntry(ui.treeDns->currentItem(), 1);
+
+	m_DnsFilterChanged = true;
+	OnOptChanged();
+}
+//
+
+// proxy
+COptionsWindow::EAuthMode COptionsWindow::GetAuthMode(const QString& Value)
+{
+	if (Value.compare("Yes", Qt::CaseInsensitive) == 0)
+		return eAuthEnabled;
+	return eAuthDisabled;
+}
+
+QString COptionsWindow::GetAuthModeStr(COptionsWindow::EAuthMode Mode)
+{
+	switch (Mode)
+	{
+	case eAuthEnabled:		return tr("Yes");
+	case eAuthDisabled:		return tr("No");
+	}
+	return "";
+}
+
+void COptionsWindow::OnProxyResolveHostnames() 
+{
+	m_NetProxyChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnTestNetProxy()
+{
+	QTreeWidgetItem* pItem = ui.treeProxy->currentItem();
+	if (!pItem)
+		return;
+
+	QString IP = pItem->data(1, Qt::UserRole).toString();
+	QString Port = pItem->data(2, Qt::UserRole).toString();
+	EAuthMode AuthMode = (EAuthMode)pItem->data(3, Qt::UserRole).toInt();
+	QString Login = pItem->data(4, Qt::UserRole).toString();
+	QString Pass = pItem->data(5, Qt::UserRole).toString();
+
+	if (IP.isEmpty() || Port.isEmpty()) {
+		QMessageBox::warning(this, "SandboxiePlus", tr("Please enter IP and Port."));
+		return;
+	}
+
+	CTestProxyDialog* dialog = new CTestProxyDialog(IP, Port, AuthMode, Login, Pass, this);
+	dialog->show();
+}
+
+void COptionsWindow::OnNetProxyMoveUp()
+{
+	QTreeWidgetItem* pItem = ui.treeProxy->currentItem();
+	if (!pItem)
+		return;
+
+	int Index = ui.treeProxy->indexOfTopLevelItem(pItem);
+	if (Index == 0)
+		return;
+
+	ui.treeProxy->takeTopLevelItem(Index);
+	ui.treeProxy->insertTopLevelItem(Index - 1, pItem);
+	ui.treeProxy->setCurrentItem(pItem);
+
+	m_NetProxyChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnNetProxyMoveDown()
+{
+	QTreeWidgetItem* pItem = ui.treeProxy->currentItem();
+	if (!pItem)
+		return;
+
+	int Index = ui.treeProxy->indexOfTopLevelItem(pItem);
+	if (Index == ui.treeProxy->topLevelItemCount() - 1)
+		return;
+
+	ui.treeProxy->takeTopLevelItem(Index);
+	ui.treeProxy->insertTopLevelItem(Index + 1, pItem);
+	ui.treeProxy->setCurrentItem(pItem);
+
+	m_NetProxyChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnNetProxyItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
+{
+	QString Program = pItem->data(0, Qt::UserRole).toString();
+
+	QWidget* pProgram = new QWidget();
+	pProgram->setAutoFillBackground(true);
+	QHBoxLayout* pLayout = new QHBoxLayout();
+	pLayout->setContentsMargins(0, 0, 0, 0);
+	pLayout->setSpacing(0);
+	pProgram->setLayout(pLayout);
+
+	QComboBox* pCombo = new QComboBox(pProgram);
+	pCombo->addItem(tr("All Programs"), "");
+
+	foreach(const QString & Name, m_Programs)
+		pCombo->addItem(Name, Name);
+
+	pCombo->setEditable(true);
+	int Index = pCombo->findData(Program);
+	pCombo->setCurrentIndex(Index);
+	if (Index == -1)
+		pCombo->setCurrentText(Program);
+	pLayout->addWidget(pCombo);
+	ui.treeProxy->setItemWidget(pItem, 0, pProgram);
+
+	QLineEdit* pIP = new QLineEdit();
+	pIP->setText(pItem->data(1, Qt::UserRole).toString());
+	ui.treeProxy->setItemWidget(pItem, 1, pIP);
+
+	QLineEdit* pPort = new QLineEdit();
+	pPort->setText(pItem->data(2, Qt::UserRole).toString());
+	ui.treeProxy->setItemWidget(pItem, 2, pPort);
+
+	QComboBox* pAuth = new QComboBox();
+	pAuth->addItem(GetAuthModeStr(eAuthEnabled), (int)eAuthEnabled);
+	pAuth->addItem(GetAuthModeStr(eAuthDisabled), (int)eAuthDisabled);
+	pAuth->setCurrentIndex(pAuth->findData(pItem->data(3, Qt::UserRole)));
+	ui.treeProxy->setItemWidget(pItem, 3, pAuth);
+
+	QLineEdit* pLogin = new QLineEdit();
+	pLogin->setMaxLength(255);
+	pLogin->setText(pItem->data(4, Qt::UserRole).toString());
+	ui.treeProxy->setItemWidget(pItem, 4, pLogin);
+
+	QLineEdit* pPass = new QLineEdit();
+	pPass->setMaxLength(255);
+	pPass->setText(pItem->data(5, Qt::UserRole).toString());
+	ui.treeProxy->setItemWidget(pItem, 5, pPass);
+}
+
+void COptionsWindow::LoadNetProxy()
+{
+	//ui.chkProxyResolveHostnames->setChecked(m_pBox->GetBool("NetworkProxyResolveHostnames", false));
+
+	ui.treeProxy->clear();
+	foreach(const QString & Value, m_pBox->GetTextList("NetworkUseProxy", m_Template))
+		ParseAndAddNetProxy(Value);
+	foreach(const QString & Value, m_pBox->GetTextList("NetworkUseProxyDisabled", m_Template))
+		ParseAndAddNetProxy(Value, true);
+
+	m_NetProxyChanged = false;
+}
+
+void COptionsWindow::ParseAndAddNetProxy(const QString& Value, bool disabled, const QString& Template)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+
+	// NetworkUseProxy=explorer.exe,Address=192.168.0.1;Port=5000;Auth=Yes;Login=login;Password=pass
+
+	StrPair ProgProxy = Split2(Value, ",");
+	QString Proxy = ProgProxy.second.isEmpty() ? ProgProxy.first : ProgProxy.second;
+	QString Program = ProgProxy.second.isEmpty() ? "*" : ProgProxy.first;
+
+	TArguments Tags = GetArguments(Proxy, L';', L'=', NULL, true);
+
+	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+	SetProgramItem(Program, pItem, 0, (Template.isEmpty() ? "" : " (" + Template + ")"));
+
+	QString IP = Tags.value("address");
+	pItem->setText(1, IP);
+	pItem->setData(1, Qt::UserRole, IP);
+
+	QString Port = Tags.value("port");
+	pItem->setText(2, Port);
+	pItem->setData(2, Qt::UserRole, Port);
+
+	QString Auth = Tags.value("auth");
+	pItem->setText(3, Auth);
+	pItem->setData(3, Qt::UserRole, (int)GetAuthMode(Auth));
+
+	QString Login = Tags.value("login");
+	if (Login.length() > 255) Login = Login.left(255);
+	pItem->setText(4, Login);
+	pItem->setData(4, Qt::UserRole, Login);
+
+	QString Pass = Tags.value("password");
+	if(Pass.isEmpty()) {
+		Pass = Tags.value("encryptedpw");
+		auto res = theAPI->RC4Crypt(QByteArray::fromBase64(Pass.toLatin1()));
+		if (!res.IsError())
+			Pass = QString::fromWCharArray((wchar_t*)res.GetValue().data(), res.GetValue().length() / sizeof(wchar_t));
+	}		
+	if (Pass.length() > 255) Pass = Pass.left(255);
+	pItem->setText(5, Pass);
+	pItem->setData(5, Qt::UserRole, Pass);
+
+	if(Template.isEmpty())
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	ui.treeProxy->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::SaveNetProxy()
+{
+	//WriteAdvancedCheck(ui.chkProxyResolveHostnames, "NetworkProxyResolveHostnames", "y", "");
+
+	QStringList NetworkUseProxy;
+	QStringList NetworkUseProxyDisabled;
+	for (int i = 0; i < ui.treeProxy->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeProxy->topLevelItem(i);
+
+		QString Program = pItem->data(0, Qt::UserRole).toString();
+		QString IP = pItem->data(1, Qt::UserRole).toString();
+		QString Port = pItem->data(2, Qt::UserRole).toString();
+		int iAuth = pItem->data(3, Qt::UserRole).toInt();
+		QString Login = pItem->data(4, Qt::UserRole).toString();
+		QString Pass = pItem->data(5, Qt::UserRole).toString();
+
+		if (IP.isEmpty() || Port.isEmpty()) {
+			QMessageBox::warning(this, "SandboxiePlus", QString::number(i + 1) + tr(" entry: IP or Port cannot be empty"));
+			continue;
+		}
+		 
+		QStringList Tags;
+
+		if (Program.isEmpty()) Program = "*";
+		Tags.append("Address=" + IP);
+		Tags.append("Port=" + Port);
+		switch (iAuth) {
+			case eAuthEnabled:		Tags.append("Auth=Yes"); break;
+			case eAuthDisabled:		Tags.append("Auth=No"); break;
+		}
+		if (!Login.isEmpty()) Tags.append("Login=" + Login);
+		if (!Pass.isEmpty()) {
+			auto res = theAPI->RC4Crypt(QByteArray((char*)Pass.toStdWString().c_str(), Pass.length() * sizeof(wchar_t)));
+			if(res.IsError())
+				Tags.append("Password=" + Pass);
+			else
+				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::OmitTrailingEquals));
+		}
+		QString Entry = Tags.join(";").prepend(Program + ",");
+
+		if (pItem->checkState(0) == Qt::Checked)
+			NetworkUseProxy.append(Entry);
+		else
+			NetworkUseProxyDisabled.append(Entry);
+	}
+	WriteNetProxy("NetworkUseProxy", NetworkUseProxy);
+	WriteNetProxy("NetworkUseProxyDisabled", NetworkUseProxyDisabled);
+
+	m_NetProxyChanged = false;
+}
+
+void COptionsWindow::WriteNetProxy(const QString& Setting, const QStringList& List)
+{
+	m_pBox->DelValue(Setting);
+	foreach(const QString& Value, List)
+		m_pBox->AppendText(Setting, Value);
+}
+
+void COptionsWindow::CloseNetProxyEdit(bool bSave)
+{
+	for (int i = 0; i < ui.treeProxy->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeProxy->topLevelItem(i);
+		CloseNetProxyEdit(pItem, bSave);
+	}
+}
+
+void COptionsWindow::CloseNetProxyEdit(QTreeWidgetItem* pItem, bool bSave)
+{
+	QWidget* pProgram = ui.treeProxy->itemWidget(pItem, 0);
+	if (!pProgram)
+		return;
+
+	if (bSave)
+	{
+		QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
+		QComboBox* pCombo = (QComboBox*)pLayout->itemAt(0)->widget();
+		QLineEdit* pIP = (QLineEdit*)ui.treeProxy->itemWidget(pItem, 1);
+		QLineEdit* pPort = (QLineEdit*)ui.treeProxy->itemWidget(pItem, 2);
+		QComboBox* pAuth = (QComboBox*)ui.treeProxy->itemWidget(pItem, 3);
+		QLineEdit* pLogin = (QLineEdit*)ui.treeProxy->itemWidget(pItem, 4);
+		QLineEdit* pPass = (QLineEdit*)ui.treeProxy->itemWidget(pItem, 5);
+
+		QString Program = pCombo->currentText();
+		int Index = pCombo->findText(Program);
+		if (Index != -1)
+			Program = pCombo->itemData(Index, Qt::UserRole).toString();
+
+		pItem->setText(0, pCombo->currentText());
+		pItem->setData(0, Qt::UserRole, Program);
+
+		pItem->setText(1, pIP->text());
+		pItem->setData(1, Qt::UserRole, pIP->text());
+
+		pItem->setText(2, pPort->text());
+		pItem->setData(2, Qt::UserRole, pPort->text());
+
+		pItem->setText(3, pAuth->currentText());
+		pItem->setData(3, Qt::UserRole, pAuth->currentData());
+
+		pItem->setText(4, pLogin->text());
+		pItem->setData(4, Qt::UserRole, pLogin->text());
+
+		pItem->setText(5, pPass->text());
+		pItem->setData(5, Qt::UserRole, pPass->text());
+
+		m_NetProxyChanged = true;
+		OnOptChanged();
+	}
+
+	for (int i = 0; i < 6; i++)
+		ui.treeProxy->setItemWidget(pItem, i, NULL);
+}
+
+void COptionsWindow::OnAddNetProxy()
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+
+	pItem->setData(0, Qt::UserRole, "");
+	pItem->setText(0, tr("All Programs"));
+
+	pItem->setData(1, Qt::UserRole, "192.0.2.0");
+	pItem->setText(1, "192.0.2.0");
+
+	pItem->setData(2, Qt::UserRole, "24");
+	pItem->setText(2, "24");
+
+	pItem->setData(3, Qt::UserRole, (int)eAuthDisabled);
+	pItem->setText(3, GetAuthModeStr(eAuthDisabled));
+
+	pItem->setCheckState(0, Qt::Checked);
+	ui.treeProxy->addTopLevelItem(pItem);
+
+	m_NetProxyChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnDelNetProxy()
+{
+	DeleteAccessEntry(ui.treeProxy->currentItem(), 1);
+
+	m_NetProxyChanged = true;
+	OnOptChanged();
+}
+//
 
 void COptionsWindow__SetRowColor(QTreeWidgetItem* pItem, bool bMatch, bool bConflict = false, bool bBlock = false, bool bActive = false)
 {

@@ -207,7 +207,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Folder"));
 	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Move"));
 	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
-	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Run"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Fence"));
+	ui.tabsGeneral->setTabIcon(5, CSandMan::GetIcon("Run"));
 
 	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
@@ -227,7 +228,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsInternet->setCurrentIndex(0);
 	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("EthSocket2"));
 	ui.tabsInternet->setTabIcon(1, CSandMan::GetIcon("Wall"));
-	ui.tabsInternet->setTabIcon(2, CSandMan::GetIcon("Network3"));
+	ui.tabsInternet->setTabIcon(2, CSandMan::GetIcon("DNS"));
+	ui.tabsInternet->setTabIcon(3, CSandMan::GetIcon("Proxy"));
+	ui.tabsInternet->setTabIcon(4, CSandMan::GetIcon("Network3"));
 
 	ui.tabsAccess->setCurrentIndex(0);
 	ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Folder"));
@@ -543,6 +546,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		pTmplBtnMenu->addAction(tr("Add %1 Template").arg(CTemplateWizard::GetTemplateLabel((CTemplateWizard::ETemplateType)i)), this, SLOT(OnTemplateWizard()))->setData(i);
 	ui.btnAddTemplate->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddTemplate->setMenu(pTmplBtnMenu);
+	connect(ui.btnOpenTemplate, SIGNAL(clicked(bool)), this, SLOT(OnOpenTemplate()));
 	connect(ui.btnDelTemplate, SIGNAL(clicked(bool)), this, SLOT(OnDelTemplates()));
 	connect(ui.chkScreenReaders, SIGNAL(clicked(bool)), this, SLOT(OnScreenReaders()));
 	//
@@ -698,6 +702,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		CloseNetFwEdit(false);
 		CloseAccessEdit(false);
 		CloseOptionEdit(false);
+        CloseNetProxyEdit(false);
 		return true; // cancel event
 	}
 
@@ -709,6 +714,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		CloseNetFwEdit(true);
 		CloseAccessEdit(true);
 		CloseOptionEdit(true);
+        CloseNetProxyEdit(true);
 		return true; // cancel event
 	}
 	
@@ -725,6 +731,11 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 	if (source == ui.treeNetFw->viewport() && event->type() == QEvent::MouseButtonPress)
 	{
 		CloseNetFwEdit();
+	}
+
+    if (source == ui.treeProxy->viewport() && event->type() == QEvent::MouseButtonPress)
+	{
+		CloseNetProxyEdit();
 	}
 
 	if (//source == ui.treeAccess->viewport() 
@@ -821,6 +832,8 @@ void COptionsWindow::LoadConfig()
 
 	LoadINetAccess();
 	LoadNetFwRules();
+	LoadDnsFilter();
+	LoadNetProxy();
 
 	LoadAccessList();
 
@@ -954,6 +967,10 @@ void COptionsWindow::SaveConfig()
 			SaveINetAccess();
 		if (m_NetFwRulesChanged)
 			SaveNetFwRules();
+		if (m_DnsFilterChanged)
+			SaveDnsFilter();
+		if (m_NetProxyChanged)
+			SaveNetProxy();
 
 		if (m_AccessChanged) {
 			SaveAccessList();
@@ -996,6 +1013,7 @@ bool COptionsWindow::apply()
 	CloseNetFwEdit();
 	CloseAccessEdit();
 	CloseOptionEdit();
+    CloseNetProxyEdit();
 
 	if (!ui.btnEditIni->isEnabled())
 		SaveIniSection();
@@ -1043,6 +1061,8 @@ void COptionsWindow::reject()
 	// ||  m_RestrictionChanged
 	 || m_INetBlockChanged
 	 || m_NetFwRulesChanged
+	 || m_DnsFilterChanged
+	 || m_NetProxyChanged
 	 || m_AccessChanged
 	 || m_TemplatesChanged
 	 || m_FoldersChanged
@@ -1080,7 +1100,7 @@ void COptionsWindow::showTab(const QString& Name)
 	else
 		m_pStack->setCurrentWidget(pWidget);
 
-	SafeShow(this);
+	CSandMan::SafeShow(this);
 }
 
 void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Suffix, bool bList)
@@ -1150,17 +1170,23 @@ void COptionsWindow::UpdateCurrentTab()
 	{
 		ui.chkVmRead->setChecked(IsAccessEntrySet(eIPC, "", eReadOnly, "$:*"));
 	}
-	else if (m_pCurrentTab ==ui.tabPrivileges || m_pCurrentTab == ui.tabSecurity)
+	else if (m_pCurrentTab == ui.tabPrivileges || m_pCurrentTab == ui.tabSecurity)
 	{
 		if (IsAccessEntrySet(eWnd, "", eOpen, "*"))
 		{
-			ui.chkAddToJob->setEnabled(false);
-			ui.chkAddToJob->setChecked(false);
+			if (!ui.chkNoSecurityIsolation->isChecked())
+			{
+				ui.chkAddToJob->setEnabled(false);
+				ui.chkAddToJob->setChecked(false);
+			}
 		}
 		else
 		{
-			ui.chkAddToJob->setEnabled(true);
-			ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
+			if (!ui.chkNoSecurityIsolation->isChecked())
+			{
+				ui.chkAddToJob->setEnabled(true);
+				ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
+			}
 		}
 	}
 	else if (m_pCurrentTab == ui.tabStart || m_pCurrentTab == ui.tabForce)
@@ -1180,6 +1206,11 @@ void COptionsWindow::UpdateCurrentTab()
 	else if (m_pCurrentTab == ui.tabInternet || m_pCurrentTab == ui.tabINet || m_pCurrentTab == ui.tabNetConfig)
 	{
 		LoadBlockINet();
+	}
+	else if (m_pCurrentTab == ui.tabDNS || m_pCurrentTab == ui.tabNetProxy)
+	{
+		if (!m_pCurrentTab->isEnabled())
+			theGUI->CheckCertificate(this, 2);
 	}
 	else if (m_pCurrentTab == ui.tabCOM) {
 		CheckOpenCOM();

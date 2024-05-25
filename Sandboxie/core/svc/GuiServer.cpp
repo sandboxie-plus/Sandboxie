@@ -1092,11 +1092,26 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
                     //
 
                     if (ok) {
+
                         JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobELInfo = {0};
                         jobELInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_BREAKAWAY_OK
                                                                    | JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK;
-                    
-                        ok = SetInformationJobObject(hJobObject, JobObjectExtendedLimitInformation, &jobELInfo, sizeof(jobELInfo));
+                        ULONG TotalMemoryLimit = SbieApi_QueryConfNumber(boxname, L"TotalMemoryLimit", 0);
+                        ULONG ProcessNumberLimit = SbieApi_QueryConfNumber(boxname, L"ProcessNumberLimit", 0);
+                        ULONG ProcessMemoryLimit = SbieApi_QueryConfNumber(boxname, L"ProcessMemoryLimit", 0);
+						if (TotalMemoryLimit != 0) {
+							jobELInfo.JobMemoryLimit = TotalMemoryLimit;
+							jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_JOB_MEMORY;
+						}
+						if (ProcessNumberLimit != 0) {
+							jobELInfo.BasicLimitInformation.ActiveProcessLimit = ProcessNumberLimit;
+							jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_ACTIVE_PROCESS;
+						}
+						if (ProcessMemoryLimit != 0) {
+							jobELInfo.ProcessMemoryLimit = ProcessMemoryLimit;
+							jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_PROCESS_MEMORY;
+						}
+						ok = SetInformationJobObject(hJobObject, JobObjectExtendedLimitInformation, &jobELInfo, sizeof(jobELInfo));
                     }
                 }
                 if (! ok) {
@@ -1343,6 +1358,9 @@ bool GuiServer::GetWindowStationAndDesktopName(WCHAR *out_name)
             }
         }
     }
+
+    if(label_sd != NULL)
+        LocalFree(label_sd);
 
     ReportError2336(-1, errlvl, GetLastError());
     return false;

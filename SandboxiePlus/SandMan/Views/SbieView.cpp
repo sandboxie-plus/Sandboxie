@@ -1216,7 +1216,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	else if (Action == m_pMenuRunCmd)
 		Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "cmd.exe"));
 	else if (Action == m_pMenuRunCmdAdmin)
-		Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "cmd.exe", true));
+		Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "cmd.exe", CSbieAPI::eStartElevated));
 #ifdef _WIN64
 	else if (Action == m_pMenuRunCmd32)
 		Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "C:\\WINDOWS\\SysWOW64\\cmd.exe"));
@@ -1334,7 +1334,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			connect(pSnapshotsWindow, &CSnapshotsWindow::Closed, [this, pBox]() {
 				SnapshotWindows.remove(pBox.data());
 			});
-			SafeShow(pSnapshotsWindow);
+			CSandMan::SafeShow(pSnapshotsWindow);
 		}
 		else {
 			pSnapshotsWindow->setWindowState((pSnapshotsWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
@@ -1576,10 +1576,10 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		QString Command = Action->data().toString();
 		QString WorkingDir = Action->property("WorkingDir").toString();
 		if (Command.isEmpty())
-			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "start_menu", false, WorkingDir));
+			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "start_menu", CSbieAPI::eStartDefault, WorkingDir));
 		else {
 			auto pBoxEx = SandBoxes.first().objectCast<CSandBoxPlus>();
-			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), pBoxEx->GetFullCommand(Command), false, pBoxEx->GetFullCommand(WorkingDir)));
+			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), pBoxEx->GetFullCommand(Command), CSbieAPI::eStartDefault, pBoxEx->GetFullCommand(WorkingDir)));
 		}
 	}
 
@@ -1725,7 +1725,7 @@ void CSbieView::ShowOptions(const CSandBoxPtr& pBox)
 		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pOptionsWnd = NULL;
 		});
-		SafeShow(pBoxEx->m_pOptionsWnd);
+		CSandMan::SafeShow(pBoxEx->m_pOptionsWnd);
 	}
 	else {
 		pBoxEx->m_pOptionsWnd->setWindowState((pBoxEx->m_pOptionsWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
@@ -1749,7 +1749,7 @@ void CSbieView::ShowBrowse(const CSandBoxPtr& pBox)
 		connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
 			FileBrowserWindows.remove(pBox.data());
 		});
-		SafeShow(pFileBrowserWindow);
+		CSandMan::SafeShow(pFileBrowserWindow);
 	}
 	else {
 		pFileBrowserWindow->setWindowState((pFileBrowserWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);

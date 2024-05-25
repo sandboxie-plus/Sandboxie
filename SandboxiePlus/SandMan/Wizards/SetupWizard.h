@@ -119,6 +119,7 @@ private:
     QCheckBox *m_pAutoStart;
     QCheckBox *m_pContecxtMenu;
     QCheckBox *m_pBrowserIcon;
+	QCheckBox* m_pEditOnlyAdmin;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

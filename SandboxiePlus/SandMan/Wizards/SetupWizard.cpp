@@ -86,6 +86,9 @@ bool CSetupWizard::ShowWizard(int iOldLevel)
         if (wizard.field("useBrowserIcon").toBool())
             CSettingsWindow::AddBrowserIcon();
 
+		if (wizard.field("editAdminOnly").toBool())
+			theConf->SetValue("Options/EditAdminOnly", 1);
+
         //if (wizard.field("useWFP").toBool()) {
         //    theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", true);
         //    theAPI->ReloadConfig(true);
@@ -517,6 +520,11 @@ CShellPage::CShellPage(QWidget *parent)
     m_pBrowserIcon->setChecked(true);
     layout->addWidget(m_pBrowserIcon);
     registerField("useBrowserIcon", m_pBrowserIcon);
+
+	m_pEditOnlyAdmin = new QCheckBox(tr("Only applications with administrator token can change ini setting."));
+	m_pEditOnlyAdmin->setChecked(false);
+	layout->addWidget(m_pEditOnlyAdmin);
+	registerField("editAdminOnly", m_pEditOnlyAdmin);
 
     setLayout(layout);
 }

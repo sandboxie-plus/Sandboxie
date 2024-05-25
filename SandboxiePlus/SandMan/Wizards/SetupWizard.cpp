@@ -497,7 +497,10 @@ int CUIPage::nextId() const
 //////////////////////////////////////////////////////////////////////////////////////////
 // CShellPage
 // 
-
+void CShellPage::OnEditOnlyAdmin() {
+	if (this->m_pEditOnlyAdmin->isChecked())
+		QMessageBox::warning(this, tr("Warning"), tr("When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click \"Sandbox (s)\" in the system menu, and then click \"Restart as Admin\" in the pop - up context menu to gain control of the configuration."),QMessageBox::Yes,QMessageBox::YesAll);
+}
 CShellPage::CShellPage(QWidget *parent)
     : QWizardPage(parent)
 {
@@ -523,6 +526,7 @@ CShellPage::CShellPage(QWidget *parent)
 
 	m_pEditOnlyAdmin = new QCheckBox(tr("Only applications with administrator token can change ini setting."));
 	m_pEditOnlyAdmin->setChecked(false);
+	connect(m_pEditOnlyAdmin,SIGNAL(clicked(bool)), this, SLOT(OnEditOnlyAdmin()));
 	layout->addWidget(m_pEditOnlyAdmin);
 	registerField("editAdminOnly", m_pEditOnlyAdmin);
 

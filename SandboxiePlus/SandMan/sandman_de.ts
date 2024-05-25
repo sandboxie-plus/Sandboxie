@@ -143,7 +143,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="841"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
-        <translation>Hindere sandgeboxte Programme des Hostsystems, daran, DLLs aus der Sandbox zu laden</translation>
+        <translation>Hindere sandgeboxte Programme des Hostsystems daran DLLs aus der Sandbox zu laden</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="842"/>

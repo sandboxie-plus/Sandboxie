@@ -1149,12 +1149,12 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
+        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Tokens</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="767"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>Die Verwendung eines eigenen Sandboxie Tokens erlaubt die bessere Isolation individueller Sandboxen zu einander und es zeigt in der Nutzerspalte des Taskmanagers den Namen der Box an zu der ein Prozess gehört. Einige Drittanbietersicherheitslösungen könnten jedoch Probleme mit den eigenen Token haben.</translation>
+        <translation>Die Verwendung eines eigenen Sandboxie Tokens erlaubt die bessere Isolation individueller Sandboxen zu einander und es zeigt in der Nutzerspalte des Taskmanagers den Namen der Box an zu der ein Prozess gehört. Einige Drittanbietersicherheitslösungen könnten jedoch Probleme mit den eigenen Tokens haben.</translation>
     </message>
 </context>
 <context>
@@ -5894,7 +5894,7 @@ Prozesse in dieser Box werden nicht auf das Internet oder das lokale Netzwerk zu
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <translation>
-Diese Box wird den MSIServer (*.msi Installationsservice) mit einem Systemtoken starten. Dies verbessert die Kompatibilität, reduziert aber die Sicherheitsisolation.</translation>
+Diese Box wird den MSI-Server (*.msi Installationsservice) mit einem Systemtoken starten. Dies verbessert die Kompatibilität, reduziert aber die Sicherheitsisolation.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="973"/>
@@ -6863,7 +6863,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1179"/>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
-        <translation>Erlaube MSIServer mit einem sandgeboxten Systemtoken zu starten und andere Ausnahmen zu gewähren, wenn benötigt</translation>
+        <translation>Erlaube MSI-Server mit einem sandgeboxten Systemtoken zu starten und andere Ausnahmen zu gewähren, wenn benötigt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1236"/>
@@ -7521,7 +7521,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1585"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>Die Verwendung eines eigenen Sandboxie Tokens erlaubt die bessere Isolation individueller Sandboxen zu einander und es zeigt in der Nutzerspalte des Taskmanagers den Namen der Box an zu der ein Prozess gehört. Einige Drittanbietersoftwarelösungen könnten jedoch Probleme mit den eigenen Token haben.</translation>
+        <translation>Die Verwendung eines eigenen Sandboxie Tokens erlaubt die bessere Isolation individueller Sandboxen zu einander und es zeigt in der Nutzerspalte des Taskmanagers den Namen der Box an zu der ein Prozess gehört. Einige Drittanbietersicherheitslösungen könnten jedoch Probleme mit den eigenen Tokens haben.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1852"/>
@@ -7581,7 +7581,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1562"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
-        <translation>Nur Administatoren können Änderungen an dieser Sandbox vornehmen</translation>
+        <translation>Nur Administratoren können Änderungen an dieser Sandbox vornehmen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2013"/>
@@ -7591,7 +7591,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2043"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
-        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SICHERHEITSHINWEIS&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; und/oder &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in Kombination mit Open[File/Pipe]Path-Anweisungen kann die Sicherheit beeinträchtigen. Bitte lesen Sie die Sicherheitshinweise für jede Option in der Dokumentation, bevor Sie diese verwenden.</translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SICHERHEITSHINWEIS&lt;/font&gt;:&lt;/b&gt; Die Verwendung von &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; und/oder &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in Kombination mit Open[File/Pipe]Path-Anweisungen kann die Sicherheit beeinträchtigen. Bitte lesen Sie die Sicherheitshinweise für jede Option in der Dokumentation, bevor Sie diese verwenden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2116"/>
@@ -7876,7 +7876,7 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1370"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
-        <translation>Sicherheitsisolation durch die Verwendung von stark eingeschränkten Prozess-Token ist Sandboxie&apos;s hauptsächliches Mittel um Sandboxrestriktionen zu erzwingen; Falls dies deaktiviert ist wird die Box im Applikationsunterteilungs-Modus betrieben, bietet somit nicht länger verlässliche Sicherheit, sondern nur einfache Applikationsunterteilung.</translation>
+        <translation>Sicherheitsisolation durch die Verwendung eines stark eingeschränkten Prozesstokens ist Sandboxies hauptsächliches Mittel um Sandboxrestriktionen zu erzwingen. Falls dies deaktiviert ist, wird die Box im Applikationsunterteilungsmodus betrieben und bietet somit nicht länger verlässliche Sicherheit, sondern nur einfache Applikationsunterteilung.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1350"/>
@@ -8141,7 +8141,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1626"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
+        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Tokens</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2879"/>
@@ -9332,7 +9332,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2109"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
+        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Tokens</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2175"/>

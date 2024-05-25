@@ -5616,79 +5616,79 @@ Error: %1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="604"/>
+        <location filename="Windows/SettingsWindow.cpp" line="605"/>
         <source>Search for settings</source>
         <translation>搜索设置</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="834"/>
         <location filename="Windows/SettingsWindow.cpp" line="835"/>
-        <location filename="Windows/SettingsWindow.cpp" line="845"/>
+        <location filename="Windows/SettingsWindow.cpp" line="836"/>
+        <location filename="Windows/SettingsWindow.cpp" line="846"/>
         <source>Run &amp;Sandboxed</source>
         <translation>在沙盒中运行(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1147"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1149"/>
         <source>kilobytes (%1)</source>
         <translation>Kb (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1229"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1231"/>
         <source>Volume not attached</source>
         <translation>未挂载卷</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1250"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1252"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此赞助者凭据已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新凭据&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1308"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1310"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>这看起来不像是 Sandboxie Plus 的序列号&lt;br/&gt;如果您试图从证书中输入 UpdateKey 或 Signature ，无需这样做，请直接将整个证书输入到上面的文本区域。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1315"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>您尝试在未输入预先存在的赞助者凭据的情况下使用功能升级密钥。请注意，这种类型的密钥（&lt;b&gt;正如网站上以粗体明确说明的那样&lt;/b）要求您拥有预先存在的有效赞助者凭据； &lt;br /&gt;如果您想使用高级功能，您需要同时获得标准凭据和功能升级密钥来解锁高级功能。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1323"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>您试图在未输入预先存在的赞助者凭据的情况下使用续订密钥。请注意，这种类型的密钥（&lt;b&gt;正如网站上以粗体明确说明的那样&lt;/b）要求您拥有预先存在的有效赞助者凭据；没有它是没有用的。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1326"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1328"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;如果您没有阅读产品说明而错误地获取了此密钥，请通过电子邮件（在我们的网站上提供）联系我们来解决此问题。&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1343"/>
         <source>Retrieving certificate...</source>
         <translation>正在检索凭据...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1353"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>检索凭据时出错：%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1353"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>未知错误（可能是网络问题）</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1407"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="866"/>
+        <location filename="Windows/SettingsWindow.cpp" line="867"/>
         <source>Sandboxed Web Browser</source>
         <translation>浏览器(沙盒)</translation>
     </message>
@@ -5741,48 +5741,48 @@ Error: %1</source>
         <translation>浏览程序</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="478"/>
+        <location filename="Windows/SettingsWindow.cpp" line="479"/>
         <source>Add %1 Template</source>
         <translation>添加 %1 模板</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="551"/>
+        <location filename="Windows/SettingsWindow.cpp" line="552"/>
         <source>Select font</source>
         <translation>选择字体</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="553"/>
+        <location filename="Windows/SettingsWindow.cpp" line="554"/>
         <source>Reset font</source>
         <translation>重置字体</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="613"/>
+        <location filename="Windows/SettingsWindow.cpp" line="614"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 磅</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="715"/>
+        <location filename="Windows/SettingsWindow.cpp" line="716"/>
         <source>Please enter message</source>
         <translation>请输入信息</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="747"/>
+        <location filename="Windows/SettingsWindow.cpp" line="748"/>
         <source>Select Program</source>
         <translation>选择程序</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="747"/>
+        <location filename="Windows/SettingsWindow.cpp" line="748"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可执行文件 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="751"/>
-        <location filename="Windows/SettingsWindow.cpp" line="767"/>
+        <location filename="Windows/SettingsWindow.cpp" line="752"/>
+        <location filename="Windows/SettingsWindow.cpp" line="768"/>
         <source>Please enter a menu title</source>
         <translation>请输入一个菜单标题</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="763"/>
+        <location filename="Windows/SettingsWindow.cpp" line="764"/>
         <source>Please enter a command</source>
         <translation>请输入一则命令</translation>
     </message>
@@ -5791,17 +5791,17 @@ Error: %1</source>
         <translation type="vanished">此赞助者凭据已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新凭据&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1253"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1255"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus 附加的高级功能将在 %1 天后被禁用&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1255"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1257"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;对于当前安装的版本，Plus功能仍处于启用状态。&lt;/font&gt;但是，您将无法再访问Sandboxie Live服务，包括兼容性更新和在线疑难解答数据库。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1265"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此赞助者凭据将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;更新凭据&lt;/a&gt;。</translation>
     </message>
@@ -5810,37 +5810,37 @@ Error: %1</source>
         <translation type="vanished">正在检索凭据…</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1393"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1395"/>
         <source>Contributor</source>
         <translation>贡献值</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1395"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <source>Eternal</source>
         <translation>终身</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
         <source>Business</source>
         <translation>商业</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1401"/>
         <source>Personal</source>
         <translation>个人</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1401"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1403"/>
         <source>Great Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1403"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1405"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1405"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1407"/>
         <source>Family</source>
         <translation>家庭</translation>
     </message>
@@ -5849,12 +5849,12 @@ Error: %1</source>
         <translation type="vanished">订阅</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1409"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
         <source>Evaluation</source>
         <translation>评估</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1413"/>
         <source>Type %1</source>
         <translation>类型 %1</translation>
     </message>
@@ -5863,47 +5863,47 @@ Error: %1</source>
         <translation type="vanished">标准</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1441"/>
         <source>Advanced</source>
         <translation>高级</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1441"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1443"/>
         <source>Advanced (L)</source>
         <translation>高级 (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1443"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Max Level</source>
         <translation>最高等级</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1447"/>
         <source>Level %1</source>
         <translation>等级 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1470"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1472"/>
         <source>Supporter certificate required for access</source>
         <translation>需要赞助者凭据进行访问</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1489"/>
         <source>Supporter certificate required for automation</source>
         <translation>需要赞助者凭据进行自动化动作</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1901"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1903"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>很遗憾，此凭据对当前版本无效，您需要获取新凭据或降级到早期版本。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1903"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1905"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>尽管此凭据已过期，但对于当前安装的版本，附加功能仍处于启用状态。但是，您将无法再访问Sandboxie Live服务，包括兼容性更新和在线疑难解答数据库。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1905"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1907"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>很遗憾，此凭据已过期，请获取新凭据。</translation>
     </message>
@@ -5912,7 +5912,7 @@ Error: %1</source>
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;在此版本中，Plus 附加的高级功能仍是可用的&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1257"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1259"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 附加的高级功能已不再可用</translation>
     </message>
@@ -5926,12 +5926,12 @@ Error: %1</source>
         <translation type="vanished">需要赞助者凭据</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1594"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1596"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>在沙盒外运行(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1881"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>这看起来不像是一份凭据。请输入完整的凭据，而不仅仅是其中的一部分</translation>
     </message>
@@ -5944,7 +5944,7 @@ Error: %1</source>
         <translation type="vanished">非常抱歉，此凭据已过时</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1908"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1910"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>感谢您对 Sandboxie-Plus 开发工作的支持</translation>
     </message>
@@ -5953,88 +5953,88 @@ Error: %1</source>
         <translation type="vanished">此赞助者凭据无效</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1965"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1967"/>
         <source>Update Available</source>
         <translation>更新可用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1967"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1969"/>
         <source>Installed</source>
         <translation>已安装</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1972"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1974"/>
         <source>by %1</source>
         <translation>来自 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1980"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1982"/>
         <source>(info website)</source>
         <translation>（更多信息网址）</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2007"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2009"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>此加载项是必需的，无法删除。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2016"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2162"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2018"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2164"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2045"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2047"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;立即检查&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2122"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2124"/>
         <source>Please enter the new configuration password.</source>
         <translation>请输入新的配置保护密码</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2126"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2128"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>请再次输入新的配置保护密码</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2133"/>
         <source>Passwords did not match, please retry.</source>
         <translation>输入的密码不一致，请重新输入</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2143"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2145"/>
         <source>Process</source>
         <translation>进程</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2143"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2145"/>
         <source>Folder</source>
         <translation>文件夹</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2153"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2155"/>
         <source>Please enter a program file name</source>
         <translation>请输入一个程序文件名</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2221"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2223"/>
         <source>Please enter the template identifier</source>
         <translation>请输入模板标识符</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2229"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2231"/>
         <source>Error: %1</source>
         <translation>错误：%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2261"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2263"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>你真的想删除选定的本地模板吗？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2463"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2465"/>
         <source>%1 (Current)</source>
         <translation>%1 (当前)</translation>
     </message>
@@ -7689,13 +7689,15 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="740"/>
-        <source>This feature does not block all means of optaining a screen capture only some common once.</source>
-        <translation type="unfinished"></translation>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
+        <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
+        <translation type="unfinished">此功能仅能阻止常见的一些，而不是所有的屏幕捕获方法。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="837"/>
-        <source>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</source>
-        <translation type="unfinished"></translation>
+        <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
+        <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
+        <translation type="unfinished">防止移动鼠标、窗口前置和类似操作，这可能会导致游戏出现问题。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="848"/>
@@ -8625,8 +8627,9 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>防止沙盒进程干扰电源操作（实验性）</translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="837"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
-        <translation type="vanished">防止移动鼠标、窗口前置和类似操作，这可能会导致游戏出现问题。</translation>
+        <translation>防止移动鼠标、窗口前置和类似操作，这可能会导致游戏出现问题。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="840"/>
@@ -8634,8 +8637,9 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>防止干扰用户界面（实验性）</translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="740"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
-        <translation type="vanished">此功能仅能阻止常见的一些，而不是所有的屏幕捕获方法。</translation>
+        <translation>此功能仅能阻止常见的一些，而不是所有的屏幕捕获方法。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="743"/>
@@ -9812,8 +9816,8 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process</source>
-        <oldsource>Hotkey for suspending all processes:</oldsource>
+        <source>Hotkey for suspending all processes:</source>
+        <oldsource>Hotkey for suspending all process</oldsource>
         <translation type="unfinished">暂停沙盒内所有进程的热键：</translation>
     </message>
     <message>

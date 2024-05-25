@@ -111,7 +111,8 @@ class CShellPage : public QWizardPage
     Q_OBJECT
 
 public:
-    CShellPage(QWidget *parent = nullptr);
+	void OnEditOnlyAdmin();
+	CShellPage(QWidget *parent = nullptr);
 
     int nextId() const override;
 

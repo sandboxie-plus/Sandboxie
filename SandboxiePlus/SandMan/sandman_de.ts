@@ -141,14 +141,9 @@
         <translation>Auf dieser Seite können erweiterte Sandboxoptionen konfiguriert werden.</translation>
     </message>
     <message>
-        <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="vanished">Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="841"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
-        <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation type="unfinished">Hindere sandgeboxte Programme, die auf dem Hostsystem installiert sind, daran, DLLs aus der Sandbox zu laden</translation>
+        <translation>Hindere sandgeboxte Programme, auf dem Hostsystem, daran, DLLs aus der Sandbox zu laden</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="842"/>
@@ -219,7 +214,7 @@ Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das H�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="834"/>
         <source>Advanced Options</source>
-        <translation type="unfinished">Erweiterte Optionen</translation>
+        <translation>Erweiterte Optionen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="869"/>
@@ -230,10 +225,6 @@ Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das H�
         <location filename="Wizards/NewBoxWizard.cpp" line="871"/>
         <source>Append to the configuration</source>
         <translation>An die Konfiguration anhängen</translation>
-    </message>
-    <message>
-        <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="vanished">Die Verwendung eines eigenen Sandboxie Tokens erlaubt die bessere Isolation individueller Sandboxen zu einander und es zeigt in der Nutzerspalte des Taskmanagers den Namen der Box an zu der ein Prozess gehört. Einige Drittanbietersoftwarelösungen könnten jedoch Probleme mit den eigenen Token haben.</translation>
     </message>
 </context>
 <context>
@@ -1153,17 +1144,17 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
         <source>Box Options</source>
-        <translation type="unfinished">Boxoptionen</translation>
+        <translation>Boxoptionen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
+        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="767"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished">Die Verwendung eines eigenen Sandboxie Tokens erlaubt die bessere Isolation individueller Sandboxen zu einander und es zeigt in der Nutzerspalte des Taskmanagers den Namen der Box an zu der ein Prozess gehört. Einige Drittanbietersoftwarelösungen könnten jedoch Probleme mit den eigenen Token haben.</translation>
+        <translation>Die Verwendung eines eigenen Sandboxie Tokens erlaubt die bessere Isolation individueller Sandboxen zu einander und es zeigt in der Nutzerspalte des Taskmanagers den Namen der Box an zu der ein Prozess gehört. Einige Drittanbietersicherheitslösungen könnten jedoch Probleme mit den eigenen Token haben.</translation>
     </message>
 </context>
 <context>
@@ -7575,24 +7566,22 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="740"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
-        <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished">Diese Funktion blockiert nicht alle Mittel einen Screenshot zu erstellen, nur einige übliche.</translation>
+        <translation>Diese Funktion blockiert nicht alle Mittel einen Screenshot zu erstellen, nur einige übliche.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="837"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
-        <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished">Verhindert Bewegen des Mauszeigers, in den Vordergrund holen und ähnliche Vorgänge. Dies verursacht wahrscheinlich Probleme bei Spielen.</translation>
+        <translation>Verhindert Bewegen des Mauszeigers, in den Vordergrund holen und ähnliche Vorgänge. Dies verursacht wahrscheinlich Probleme bei Spielen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="848"/>
         <source>Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Isolation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1562"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur Administatoren können Änderungen an dieser Sandbox vornehmen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2013"/>
@@ -7602,7 +7591,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2043"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SICHERHEITSHINWEIS&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; und/oder &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in Kombination mit Open[File/Pipe]Path-Anweisungen kann die Sicherheit beeinträchtigen. Bitte lesen Sie die Sicherheitshinweise für jede Option in der Dokumentation, bevor Sie diese verwenden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2116"/>
@@ -8153,10 +8142,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/OptionsWindow.ui" line="1626"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</source>
-        <translation type="vanished">&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SICHERHEITSWARNUNG&lt;/font&gt;:&lt;/b&gt; Die Verwendung von &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; und/oder &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in Kombination mit Open[File/Pipe]Path-Regeln kann die Sicherheit kompromittieren, genau so wie die Verwendung von &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; durch das Erlauben aller * oder unsicherer (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) Dateiendungen. Bitte sehen Sie sich den Sicherheitsabschnitt für jede Option in der Dokumentation an, bevor Sie diese verwenden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2879"/>
@@ -9190,8 +9175,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
-        <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">Hotkey zum Unterbrechen aller Prozesse:</translation>
+        <translation>Hotkey zum Unterbrechen aller Prozesse:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="234"/>
@@ -9206,17 +9190,17 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="614"/>
         <source>Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandgeboxter Desktop</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="651"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="unfinished"></translation>
+        <translation>Wechsle zum sandgeboxten Desktop beim Starten eines Prozesses</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="658"/>
         <source>Switch to sandboxed desktop with double click</source>
-        <translation type="unfinished"></translation>
+        <translation>Wechsle zum sandgeboxten Desktop durch Doppelklick</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="668"/>
@@ -9353,7 +9337,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2175"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge die Gruppe &quot;Sandboxie\All Sandboxes&quot; zum sandgeboxten Token hinzu (experimentell)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2185"/>

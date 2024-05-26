@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with proxy authentication setting
 - fixed memory leak in sbiesvc
 - fixed issue with inconsistent WFP option application [#3900](https://github.com/sandboxie-plus/Sandboxie/issues/3900)
+- fixed resource leak in buffer hashing function
 
 
 

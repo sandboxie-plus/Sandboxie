@@ -314,9 +314,12 @@ NTSTATUS KphVerifyBuffer(
     }
 
 CleanupExit:
+
     if (hash)
         ExFreePoolWithTag(hash, 'vhpK');
  
+    MyFreeHash(&hashObj);
+
     return status;
 }
 

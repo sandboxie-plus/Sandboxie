@@ -2345,7 +2345,7 @@
         <attribute name="title">
          <string>Start Restrictions</string>
         </attribute>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>9</x>
@@ -2354,7 +2354,7 @@
            <height>493</height>
           </rect>
          </property>
-         <layout class="QGridLayout" name="gridLayout_85">
+         <layout class="QGridLayout" name="gridLayout_19">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayout_23">
             <property name="verticalSpacing">

@@ -6102,7 +6102,7 @@ Error: %1</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Warning</source>
-        <translation警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>

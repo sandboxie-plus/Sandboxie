@@ -80,6 +80,13 @@ static void *Token_DuplicateToken(void *TokenObject, PROCESS *proc);
 
 static void *Token_CreateToken(void *TokenObject, PROCESS *proc);
 
+
+//---------------------------------------------------------------------------
+
+
+NTSTATUS Thread_GetKernelHandleForUserHandle(
+    HANDLE *OutKernelHandle, HANDLE InUserHandle);
+
 //---------------------------------------------------------------------------
 
 
@@ -2155,6 +2162,7 @@ _FX NTSTATUS SbieCreateToken(PHANDLE TokenHandle, ACCESS_MASK DesiredAccess, POB
 _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
 {
     HANDLE TokenHandle = NULL;
+    HANDLE KernelTokenHandle = NULL;
     NTSTATUS status = STATUS_UNSUCCESSFUL;
 
     PTOKEN_STATISTICS		LocalStatistics = NULL;
@@ -2329,6 +2337,9 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
         LocalSource
     );
 
+    if (NT_SUCCESS(status))
+        status = Thread_GetKernelHandleForUserHandle(&KernelTokenHandle, TokenHandle);
+
     //
     // Retry with new DACLs on error
     //
@@ -2378,7 +2389,10 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
             LocalSource
         );
 
-        if (!NT_SUCCESS(status))
+        if (NT_SUCCESS(status))
+            status = Thread_GetKernelHandleForUserHandle(&KernelTokenHandle, TokenHandle);
+        
+        if (!NT_SUCCESS(status)) 
         {
             Log_Status_Ex_Process(MSG_1222, 0xA3, status, NULL, proc->box->session_id, proc->pid);
             goto finish;
@@ -2386,7 +2400,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
 
         Token_SetHandleDacl(NtCurrentProcess(), NewDacl);
         Token_SetHandleDacl(NtCurrentThread(), NewDacl);
-        Token_SetHandleDacl(TokenHandle, NewDacl);
+        Token_SetHandleDacl(KernelTokenHandle, NewDacl);
     }
     else if (!NT_SUCCESS(status))
     {
@@ -2395,7 +2409,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
     }
 
     ULONG virtualizationAllowed = 1;
-    status = ZwSetInformationToken(TokenHandle, TokenVirtualizationAllowed, &virtualizationAllowed, sizeof(ULONG));
+    status = ZwSetInformationToken(KernelTokenHandle, TokenVirtualizationAllowed, &virtualizationAllowed, sizeof(ULONG));
 
     if (Conf_Get_Boolean(proc->box->name, L"CopyTokenAttributes", 0, FALSE))
     {
@@ -2430,6 +2444,8 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
     }
 
 finish:
+    if (KernelTokenHandle)  ZwClose(KernelTokenHandle);
+
     if (LocalStatistics)    ExFreePool((PVOID)LocalStatistics);
     if (LocalUser)          ExFreePool((PVOID)LocalUser);
     if (LocalGroups)        ExFreePool((PVOID)LocalGroups);

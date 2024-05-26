@@ -162,8 +162,29 @@ _FX ULONG Hook_Find_ZwRoutine(ULONG ServiceNum, void **out_routine)
 
     // on 64-bit Windows, ZwXxx functions seem to be ordered arbitrarily
 
-    UCHAR *first_routine = (UCHAR *)ZwWaitForSingleObject;
-    UCHAR *last_routine  = (UCHAR *)ZwUnloadKey + 0x140;
+    UCHAR *first_routine = NULL;
+    UCHAR *last_routine  = NULL;
+
+    //
+    // Driver verifier messes with the Zw imports, and this breaks the Hook_Find_ZwRoutine routine
+    // to fix this we lookup the offsets of the real functions in the export table of ntoskrnl.exe
+    // and then use these correct offsets
+    //
+
+    UCHAR* kernel_base = (UCHAR*)Syscall_GetKernelBase();
+    if (kernel_base) {
+
+        ULONG_PTR offset1 = (ULONG_PTR)Dll_GetProc(Exe_NTOSKRNL, "ZwWaitForSingleObject", TRUE);
+        if (offset1) first_routine = kernel_base + offset1;
+
+        ULONG_PTR offset2 = (ULONG_PTR)Dll_GetProc(Exe_NTOSKRNL, "ZwUnloadKey", TRUE);
+        if (offset2) last_routine = kernel_base + offset2;
+    }
+
+    if(!first_routine) first_routine = (UCHAR *)ZwWaitForSingleObject;
+    if(!last_routine) last_routine   = (UCHAR *)ZwUnloadKey;
+
+    last_routine += 0x140;
 
     // scan the ZwXxx functions in NTOSKRNL, to find the one that invokes
     // the system service with the index we found

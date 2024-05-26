@@ -12,14 +12,14 @@ void COptionsWindow::LoadStart()
 {
 	ui.chkStartBlockMsg->setEnabled(!ui.radStartAll->isChecked());
 	ui.chkStartBlockMsg->setChecked(m_pBox->GetBool("NotifyStartRunAccessDenied", true));
-	
+	ui.chkAlertBeforeStart->setChecked(m_pBox->GetBool("AlertBeforeStart", false));
 	m_StartChanged = false;
 }
 
 void COptionsWindow::SaveStart()
 {
 	WriteAdvancedCheck(ui.chkStartBlockMsg, "NotifyStartRunAccessDenied", "", "n");
-
+	WriteAdvancedCheck(ui.chkAlertBeforeStart, "AlertBeforeStart", "y", "");
 	m_StartChanged = false;
 }
 

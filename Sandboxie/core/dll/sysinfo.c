@@ -259,7 +259,8 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 	WCHAR* hiddenProcessesPtr = NULL;
 	ULONG hiddenProcessesLen = 100 * 110; // we can hide up to 100 processes, should be enough
 	WCHAR hiddenProcess[110];
-	ULONG tempSession = 0,tempSid=0;
+	ULONG tempSession = 0;
+	WCHAR* tempSid = L"";
 
 	for (ULONG index = 0; ; ++index) {
 		NTSTATUS status = SbieApi_QueryConfAsIs(NULL, L"HideHostProcess", index, hiddenProcess, 108 * sizeof(WCHAR));
@@ -295,7 +296,7 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
             break;
 
 		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, &tempSid, &tempSession);
-		DWORD currentSession = WTSGetActiveConsoleSessionId();
+		DWORD currentSession = tempSession;
 		HANDLE token1;
 		Terminal_WTSQueryUserToken(currentSession, &token1);
 		SID_AND_ATTRIBUTES attrs;
@@ -303,9 +304,18 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 		ZeroMemory(&attrs, sizeof(attrs));
 		NtQueryInformationToken(token1, TokenUser, &attrs, sizeof(attrs), &uRtn);
 		BOOL hideProcess = FALSE;
-		if (attrs.Sid == tempSid) {
-			if (SbieApi_QueryConfBool(NULL,L"HideInteractionProcess", FALSE))
-				hideProcess = TRUE;
+		UNICODE_STRING uni;
+		WCHAR* buf = L"";
+		uni.Length = 0;
+		uni.MaximumLength = 512;
+		uni.Buffer = buf;
+		if(NT_SUCCESS(RtlConvertSidToUnicodeString(&uni,attrs.Sid,FALSE))){
+			if (_wcsicmp(buf,tempSid)==0) {
+				if (SbieApi_QueryConfBool(NULL, L"HideInteractionProcess", FALSE)) {
+					hideProcess = TRUE;
+				}
+			}
+			RtlFreeUnicodeString(&uni);
 		}
 		else
 		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {

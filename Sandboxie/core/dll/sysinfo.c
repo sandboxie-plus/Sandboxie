@@ -206,6 +206,17 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 
         SysInfo_DiscardProcesses(Buffer);
     }
+	if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, "HideFirmWareInfo", FALSE)) {
+		HKEY hKey;
+		PVOID lpData;
+		DWORD dwLen = 0;
+		if (RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\SandboxieHide\\", 0, KEY_READ, hKey))
+			RegQueryValueExW(hKey, "FalseFirewareValue", 0, REG_SZ, lpData, &dwLen);
+		if (dwLen != 0) {
+			Buffer = lpData;
+			*ReturnLength = dwLen;
+		}
+	}
 
     return status;
 }
@@ -214,7 +225,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 //---------------------------------------------------------------------------
 // SysInfo_DiscardProcesses
 //---------------------------------------------------------------------------
-
+BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE* pToken);
 
 _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 {
@@ -228,6 +239,7 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 	WCHAR* hiddenProcessesPtr = NULL;
 	ULONG hiddenProcessesLen = 100 * 110; // we can hide up to 100 processes, should be enough
 	WCHAR hiddenProcess[110];
+	ULONG tempSession = 0,tempSid=0;
 
 	for (ULONG index = 0; ; ++index) {
 		NTSTATUS status = SbieApi_QueryConfAsIs(NULL, L"HideHostProcess", index, hiddenProcess, 108 * sizeof(WCHAR));
@@ -262,9 +274,20 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         if (next == curr)
             break;
 
-		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, NULL, NULL);
-
+		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, &tempSid, &tempSession);
+		DWORD currentSession = WTSGetActiveConsoleSessionId();
+		HANDLE token1;
+		Terminal_WTSQueryUserToken(currentSession, &token1);
+		SID_AND_ATTRIBUTES attrs;
+		ULONG uRtn = 0;
+		ZeroMemory(&attrs, sizeof(attrs));
+		NtQueryInformationToken(token1, TokenUser, &attrs, sizeof(attrs), &uRtn);
 		BOOL hideProcess = FALSE;
+		if (attrs.Sid == tempSid) {
+			if (SbieApi_QueryConfBool(NULL,L"HideInteractionProcess", FALSE))
+				hideProcess = TRUE;
+		}
+		else
 		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
 			hideProcess = TRUE;
 		}
@@ -279,6 +302,10 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 						break;
 					}
 				}
+			}else
+			if (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0) {
+				if (SbieApi_QueryConfBool(NULL, L"HideSbieProcess", FALSE))
+					hideProcess = TRUE;
 			}
 		}
 

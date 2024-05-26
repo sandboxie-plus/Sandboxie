@@ -229,9 +229,9 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 			);
 		ROK RegOpenKeyExW=Ldr_GetProcAddrOld(L"Advapi32.dll",L"RegOpenKeyExW");
 		RQVEW RegQueryValueExW = Ldr_GetProcAddrOld(L"Advapi32.dll", L"RegQueryValueExW");
-
-		if (RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\SandboxieHide\\", 0, KEY_READ, hKey))
-			RegQueryValueExW(hKey, "FalseFirewareValue", 0, REG_SZ, lpData, &dwLen);
+		DWORD type;
+		if (RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\SandboxieHide\\", 0, KEY_READ, &hKey))
+			RegQueryValueExW(hKey, "FalseFirewareValue", 0, &type, lpData, &dwLen);
 		if (dwLen != 0) {
 			Buffer = lpData;
 			*ReturnLength = dwLen;

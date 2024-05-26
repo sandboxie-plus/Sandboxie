@@ -1275,7 +1275,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
     HANDLE SourceHandle;
     HANDLE TargetProcessHandle;
     HANDLE *TargetHandle;
-    HANDLE DuplicatedHandle;
+    HANDLE TargetHandleValue;
     ULONG DesiredAccess;
     ULONG HandleAttributes;
     ULONG Options;
@@ -1394,6 +1394,39 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
         status = Ipc_CheckObjectName(SourceHandle, UserMode);
 
+        if (NT_SUCCESS(status)) {
+
+            HANDLE SourceProcessKernelHandle = ZwCurrentProcess();
+            HANDLE TargetProcessKernelHandle;
+            
+            if (!IS_ARG_CURRENT_PROCESS(TargetProcessHandle))
+                status = Thread_GetKernelHandleForUserHandle(&TargetProcessKernelHandle, TargetProcessHandle);
+            else
+                TargetProcessKernelHandle = ZwCurrentProcess();
+            if (NT_SUCCESS(status)) {
+
+                HANDLE SourceKernelHandle;
+                status = Thread_GetKernelHandleForUserHandle(&SourceKernelHandle, SourceHandle);
+                if (NT_SUCCESS(status)) {
+
+                    status = ZwDuplicateObject(
+                        SourceProcessKernelHandle, SourceKernelHandle,
+                        TargetProcessKernelHandle, &TargetHandleValue,
+                        DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
+
+                    if (Options & DUPLICATE_CLOSE_SOURCE)
+                        NtClose(SourceHandle);
+
+                    *TargetHandle = TargetHandleValue;
+
+                    ZwClose(SourceKernelHandle);
+                }
+
+                if (!IS_ARG_CURRENT_PROCESS(TargetProcessKernelHandle))
+                    ZwClose(TargetProcessKernelHandle);
+            }
+        }
+
     //
     // if the source handle is in another process, we have to duplicate
     // it before we can examine it, so duplicate first without the
@@ -1402,73 +1435,48 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     } else if (IS_ARG_CURRENT_PROCESS(TargetProcessHandle)) {
 
-        //
-        // we duplicate the handle into kernel space such that that user 
-        // won't be able to grab it while we are evaluaiting it
-        //
-
         HANDLE SourceProcessKernelHandle;
+        HANDLE TargetProcessKernelHandle = ZwCurrentProcess();
+
         status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
         if (NT_SUCCESS(status)) {
-
-            HANDLE TargetProcessKernelHandle = ZwCurrentProcess(); // TargetProcessHandle == NtCurrentProcess();
             
-            //
-            // driver verifier wants us to provide a kernel handle as process handles
-            // but the source handle must be a user handle and the ZwDuplicateObject
-            // function creates another user handle hence NtClose
-            //
-
-            status = ZwDuplicateObject(
-                SourceProcessKernelHandle, SourceHandle,
-                TargetProcessKernelHandle, &DuplicatedHandle,
-                DesiredAccess, HandleAttributes,
-                Options & ~DUPLICATE_CLOSE_SOURCE);
-
-            if (NT_SUCCESS(status)) {
-
-                status = Ipc_CheckObjectName(DuplicatedHandle, UserMode);
-
-                NtClose(DuplicatedHandle);
-            }
-
-            ZwClose(SourceProcessKernelHandle);
-        }
-
-    } else
-        status = STATUS_INVALID_HANDLE;
-
-    //
-    // if all checks were passed duplicate the handle
-    //
-
-    if (NT_SUCCESS(status)) {
-
-        HANDLE SourceProcessKernelHandle = (HANDLE)-1;
-        HANDLE TargetProcessKernelHandle = (HANDLE)-1;
-
-        if (!IS_ARG_CURRENT_PROCESS(SourceProcessHandle)) 
-            status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
-        if (NT_SUCCESS(status)) {
-
-            if (!IS_ARG_CURRENT_PROCESS(TargetProcessHandle))
-                status = Thread_GetKernelHandleForUserHandle(&TargetProcessKernelHandle, TargetProcessHandle);
+            HANDLE SourceKernelHandle;
+            status = Thread_GetKernelHandleForUserHandle(&SourceKernelHandle, SourceHandle);
             if (NT_SUCCESS(status)) {
 
                 status = ZwDuplicateObject(
                     SourceProcessKernelHandle, SourceHandle,
-                    TargetProcessKernelHandle, &DuplicatedHandle,
-                    DesiredAccess, HandleAttributes, Options);
+                    TargetProcessKernelHandle, &TargetHandleValue,
+                    DesiredAccess, HandleAttributes,
+                    Options & ~DUPLICATE_CLOSE_SOURCE);
 
-                *TargetHandle = DuplicatedHandle;
+                if (Options & DUPLICATE_CLOSE_SOURCE)
+                    NtClose(SourceHandle);
+
+                if (NT_SUCCESS(status)) {
+
+                    status = Ipc_CheckObjectName(TargetHandleValue, UserMode);
+
+                    if (! NT_SUCCESS(status))
+                        NtClose(TargetHandleValue);
+                }
+
+                if (NT_SUCCESS(status))
+                    *TargetHandle = TargetHandleValue;
+
+                ZwClose(SourceKernelHandle);
             }
+
+            ZwClose(SourceProcessKernelHandle);
         }
 
-        if (SourceProcessKernelHandle && !IS_ARG_CURRENT_PROCESS(SourceProcessKernelHandle))
-            ZwClose(SourceProcessKernelHandle);
-        if (TargetProcessKernelHandle && !IS_ARG_CURRENT_PROCESS(TargetProcessKernelHandle))
-            ZwClose(TargetProcessKernelHandle);
-    }
+    //
+    // we do not support the case where neider of the handles belong to the current process
+    //
+
+    } else
+        status = STATUS_INVALID_HANDLE;
 
     //
     // end exception block and close OtherProcessHandle

@@ -295,7 +295,7 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         if (next == curr)
             break;
 
-		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, &tempSid, &tempSession);
+		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
 		DWORD currentSession = tempSession;
 		HANDLE token1;
 		Terminal_WTSQueryUserToken(currentSession, &token1);

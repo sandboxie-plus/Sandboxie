@@ -207,8 +207,8 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
         SysInfo_DiscardProcesses(Buffer);
     }
 	if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, "HideFirmWareInfo", FALSE)) {
-		HKEY hKey;
-		PVOID lpData;
+		HKEY hKey=NULL;
+		PVOID lpData=NULL;
 		DWORD dwLen = 0;
 		if (RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\SandboxieHide\\", 0, KEY_READ, hKey))
 			RegQueryValueExW(hKey, "FalseFirewareValue", 0, REG_SZ, lpData, &dwLen);

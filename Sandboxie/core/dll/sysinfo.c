@@ -210,6 +210,26 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 		HKEY hKey=NULL;
 		PVOID lpData=NULL;
 		DWORD dwLen = 0;
+		typedef LSTATUS
+		(*ROK)(
+			_In_ HKEY hKey,
+			_In_opt_ LPCWSTR lpSubKey,
+			_In_opt_ DWORD ulOptions,
+			_In_ REGSAM samDesired,
+			_Out_ PHKEY phkResult
+			);
+		typedef LSTATUS
+			(*RQVEW)(
+				 HKEY hKey,
+				 LPCWSTR lpValueName,
+				 LPDWORD lpReserved,
+				 LPDWORD lpType,
+				 LPBYTE lpData,
+				LPDWORD lpcbData
+			);
+		ROK RegOpenKeyExW=Ldr_GetProcAddrOld(L"Advapi32.dll",L"RegOpenKeyExW");
+		RQVEW RegQueryValueExW = Ldr_GetProcAddrOld(L"Advapi32.dll", L"RegQueryValueExW");
+
 		if (RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\SandboxieHide\\", 0, KEY_READ, hKey))
 			RegQueryValueExW(hKey, "FalseFirewareValue", 0, REG_SZ, lpData, &dwLen);
 		if (dwLen != 0) {

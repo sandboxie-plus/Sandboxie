@@ -816,50 +816,50 @@ Veuillez naviguer vers la répertoire correct des profils d&apos;utilisateurs.</
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="239"/>
+        <location filename="Wizards/SetupWizard.cpp" line="245"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>Installez votre certificat d&apos;adhérent &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="240"/>
+        <location filename="Wizards/SetupWizard.cpp" line="246"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>Si vous avez un certificat d&apos;adhérent, veuillez le saisir dans le champ ci-dessous.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="262"/>
+        <location filename="Wizards/SetupWizard.cpp" line="268"/>
         <source>Retrieve certificate using Serial Number:</source>
         <translation>Récupération du certificat en utilisant le numéro de série :</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="268"/>
+        <location filename="Wizards/SetupWizard.cpp" line="274"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>Commencer l&apos;évaluation sans certificat pour un laps de temps limité.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="296"/>
+        <location filename="Wizards/SetupWizard.cpp" line="302"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>Pour utiliser &lt;b&gt;Sandboxie-Plus&lt;/b&gt; dans un établissement commercial, un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt; approprié pour une utilisation commerciale est requis. Si vous n&apos;avez pas encore le ou les certificats requis, vous pouvez les obtenir depuis la &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;boutique web xanasoft.com&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="310"/>
+        <location filename="Wizards/SetupWizard.cpp" line="316"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; fournit des fonctions supplémentaires et des types de bacs exclusifs aux &lt;u&gt;adhérents du projet&lt;/u&gt;. Les bacs tels que ceux à Confidentialité Améliorée &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protègent les données de l&apos;utilisateur contre les accès illicites&lt;/font&gt;&lt;/b&gt; par les programmes en bac à sable. Si vous n&apos;êtes pas encore un adhérent, alors veuillez songer à &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;soutenir le projet&lt;/a&gt; pour assurer le développement futur de Sandboxie et recevoir un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="347"/>
+        <location filename="Wizards/SetupWizard.cpp" line="353"/>
         <source>Failed to retrieve the certificate.</source>
         <oldsource>Failed to retrive the certificate.</oldsource>
         <translation>Échec de récupération du certificat.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="348"/>
+        <location filename="Wizards/SetupWizard.cpp" line="354"/>
         <source>
 Error: %1</source>
         <translation>
 Erreur : %1</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="368"/>
+        <location filename="Wizards/SetupWizard.cpp" line="374"/>
         <source>Retrieving certificate...</source>
         <oldsource>Retreiving certificate...</oldsource>
         <translation>Récupération du certificat...</translation>
@@ -1078,12 +1078,12 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="715"/>
+        <location filename="Wizards/SetupWizard.cpp" line="737"/>
         <source>Complete your configuration</source>
         <translation>Finalisation de votre configuration</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="725"/>
+        <location filename="Wizards/SetupWizard.cpp" line="747"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>C&apos;est presque fini. Appuyez sur « Terminer » pour appliquer toutes les options choisies et mettre fin à l&apos;assistant.</translation>
     </message>
@@ -1178,32 +1178,32 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="158"/>
+        <location filename="Wizards/SetupWizard.cpp" line="164"/>
         <source>Introduction</source>
         <translation>Introduction</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="165"/>
+        <location filename="Wizards/SetupWizard.cpp" line="171"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>Bienvenue dans l&apos;assistant de configuration, qui vous aidera à configurer votre copie de &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. Vous pouvez démarrer cet assistant à tout moment depuis le menu « Fichier -&gt; Maintenance » si vous ne voulez pas le faire maintenant.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="174"/>
+        <location filename="Wizards/SetupWizard.cpp" line="180"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>Choisissez comment vous voulez utiliser Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="177"/>
+        <location filename="Wizards/SetupWizard.cpp" line="183"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>À titre &amp;personnel, pour une utilisation non commerciale privée</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="182"/>
+        <location filename="Wizards/SetupWizard.cpp" line="188"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>À titre &amp;commercial, pour une utilisation mercantile ou d&apos;entreprise</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="187"/>
+        <location filename="Wizards/SetupWizard.cpp" line="193"/>
         <source>Note: this option is persistent</source>
         <translation>Remarque : cette option est persistante</translation>
     </message>
@@ -2954,122 +2954,122 @@ Erreur : </translation>
 <context>
     <name>CSBUpdate</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="574"/>
+        <location filename="Wizards/SetupWizard.cpp" line="596"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
         <translation>Configurer la mise à jour de &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="575"/>
+        <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
         <translation>Comme avec n&apos;importe quel produit de sécurité, il est important de garder votre installation de Sandboxie-Plus à jour.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="583"/>
+        <location filename="Wizards/SetupWizard.cpp" line="605"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
         <translation>Vérifier régulièrement les mises à jour de Sandboxie-Plus et des composants optionnels</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="584"/>
+        <location filename="Wizards/SetupWizard.cpp" line="606"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
         <translation>Laisse Sandboxie vérifier régulièrement la présence de mises à jour.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="594"/>
+        <location filename="Wizards/SetupWizard.cpp" line="616"/>
         <source>Check for new Sandboxie-Plus versions:</source>
         <translation>Vérification de nouvelles versions de Sandboxie-Plus :</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="595"/>
+        <location filename="Wizards/SetupWizard.cpp" line="617"/>
         <source>Check for new Sandboxie-Plus builds.</source>
         <translation>Vérifie s&apos;il y a de nouvelles versions de Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="601"/>
+        <location filename="Wizards/SetupWizard.cpp" line="623"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
         <translation>Choisir dans quel canal de mises à jour rechercher les nouvelles versions de Sandboxie-Plus :</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="610"/>
+        <location filename="Wizards/SetupWizard.cpp" line="632"/>
         <source>In the Stable Channel</source>
         <translation>Dans le canal Stable</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="611"/>
+        <location filename="Wizards/SetupWizard.cpp" line="633"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>Le canal Stable contient les dernières versions stables de GitHub.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="615"/>
+        <location filename="Wizards/SetupWizard.cpp" line="637"/>
         <source>In the Preview Channel - with newest experimental changes</source>
         <translation>Dans le canal des Aperçus — avec les derniers changements expérimentaux</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="616"/>
+        <location filename="Wizards/SetupWizard.cpp" line="638"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Le canal des Aperçus contient les dernières pré-versions GitHub.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="620"/>
+        <location filename="Wizards/SetupWizard.cpp" line="642"/>
         <source>In the Insider Channel - exclusive features</source>
         <translation>Dans le canal des Initiés — avec des fonctions exclusives</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="621"/>
+        <location filename="Wizards/SetupWizard.cpp" line="643"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Le canal des Initiés offre un accès anticipé aux nouvelles fonctions et corrections de bogues qui finalement seront fournies au public, de même que toutes les améliorations pertinentes du canal Stable.
 Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non testés, potentiellement dangereux ou expérimentaux qui peuvent ne pas être prêts pour une utilisation à grande échelle.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="626"/>
+        <location filename="Wizards/SetupWizard.cpp" line="648"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>En savoir plus concernant le &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;canal des Initiés&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="635"/>
+        <location filename="Wizards/SetupWizard.cpp" line="657"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
         <translation>Conserver les modèles de compatibilité à jour et appliquer les patchs de dernière minute</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="636"/>
+        <location filename="Wizards/SetupWizard.cpp" line="658"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
         <translation>Vérifie la présence de modèles de compatibilité et des patchs de dernière minute.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="640"/>
+        <location filename="Wizards/SetupWizard.cpp" line="662"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
         <translation>Obtenir les derniers scripts pour l&apos;assistant de dépannage</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="641"/>
+        <location filename="Wizards/SetupWizard.cpp" line="663"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
         <translation>Vérifie la disponibilité de nouveaux scripts pour l&apos;assistant de dépannage.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="645"/>
+        <location filename="Wizards/SetupWizard.cpp" line="667"/>
         <source>Keep the list of optional Add-on components up to date</source>
         <translation>Garder la liste des composants de modules optionnels à jour</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="646"/>
+        <location filename="Wizards/SetupWizard.cpp" line="668"/>
         <source>Check for latest available add-ons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
         <translation>Vérifie s&apos;il y a de nouveaux modules disponibles.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="655"/>
+        <location filename="Wizards/SetupWizard.cpp" line="677"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
         <translation>Sandboxie-Plus applique des restrictions d&apos;applications strictes, ce qui peut entrainer des problèmes de compatibilité. Assurez-vous que Sandboxie-Plus est à jour, ainsi que les modèles de compatibilité et de dépannage, afin d&apos;assurer un fonctionnement fluide malgré les mises à jour Windows et les changements des applications.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="661"/>
+        <location filename="Wizards/SetupWizard.cpp" line="683"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>L&apos;accès aux derniers modèles de compatibilité et à la base de données de dépannage en ligne nécessitent un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt; valide.</translation>
     </message>
@@ -6403,29 +6403,44 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="501"/>
+        <location filename="Wizards/SetupWizard.cpp" line="507"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>Configuration de l&apos;intégration de &lt;b&gt;Sandboxie-Plus&lt;/b&gt; à l&apos;interface système</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="502"/>
+        <location filename="Wizards/SetupWizard.cpp" line="508"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>Configure la façon dont Sandboxie-Plus devrait s&apos;intégrer à votre système.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="506"/>
+        <location filename="Wizards/SetupWizard.cpp" line="512"/>
         <source>Start UI with Windows</source>
         <translation>Démarrer l&apos;interface utilisateur avec Windows</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="511"/>
+        <location filename="Wizards/SetupWizard.cpp" line="517"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Ajouter « Exécuter dans un bac à sable » au menu contextuel de l&apos;explorateur</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="516"/>
+        <location filename="Wizards/SetupWizard.cpp" line="522"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>Ajouter un raccourci sur le bureau pour démarrer le navigateur web dans un bac à sable</translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="527"/>
+        <source>Only applications with administrator token can change ini setting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="539"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="539"/>
+        <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7268,37 +7283,37 @@ Si vous êtes déjà « Great Supporter » sur Patreon, Sandboxie peut vérifier
 <context>
     <name>CUIPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="386"/>
+        <location filename="Wizards/SetupWizard.cpp" line="392"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
         <translation>Configuration de l&apos;interface utilisateur de &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="387"/>
+        <location filename="Wizards/SetupWizard.cpp" line="393"/>
         <source>Select the user interface style you prefer.</source>
         <translation>Choisissez le style d&apos;interface que vous préférez.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="391"/>
+        <location filename="Wizards/SetupWizard.cpp" line="397"/>
         <source>&amp;Advanced UI for experts</source>
         <translation>Interface utilisateur &amp;avancée pour les experts</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="396"/>
+        <location filename="Wizards/SetupWizard.cpp" line="402"/>
         <source>&amp;Simple UI for beginners</source>
         <translation>Interface utilisateur &amp;simple pour les débutants</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="401"/>
+        <location filename="Wizards/SetupWizard.cpp" line="407"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
         <translation>Interface utilisateur SbieCtrl.exe &amp;rétro</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="426"/>
+        <location filename="Wizards/SetupWizard.cpp" line="432"/>
         <source>Use Bright Mode</source>
         <translation>Utiliser le mode clair</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="430"/>
+        <location filename="Wizards/SetupWizard.cpp" line="436"/>
         <source>Use Dark Mode</source>
         <translation>Utiliser le mode sombre</translation>
     </message>
@@ -9208,18 +9223,6 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <location filename="Forms/OptionsWindow.ui" line="3638"/>
         <source>Block common SAMBA ports</source>
         <translation>Bloquer les ports SAMBA habituels</translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="740"/>
-        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
-        <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished">Cette fonction ne bloque pas tous les moyens d&apos;obtenir une capture d&apos;écran, seulement les plus communs.</translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="837"/>
-        <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
-        <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished">Empêcher les mouvements à la souris, la mise au premier plan, et les opérations similaires (activer ceci est susceptible de causer des problèmes avec les jeux).</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1562"/>

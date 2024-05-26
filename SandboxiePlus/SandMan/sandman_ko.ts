@@ -868,50 +868,50 @@ Please browse to the correct user profile directory.</source>
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="239"/>
+        <location filename="Wizards/SetupWizard.cpp" line="245"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 지원 인증서를 설치합니다</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="240"/>
+        <location filename="Wizards/SetupWizard.cpp" line="246"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>후원자 인증서가 있으면 아래 필드에 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="262"/>
+        <location filename="Wizards/SetupWizard.cpp" line="268"/>
         <source>Retrieve certificate using Serial Number:</source>
         <translation>일련 번호를 사용하여 인증서 검색:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="268"/>
+        <location filename="Wizards/SetupWizard.cpp" line="274"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>제한된 기간 동안 인증서 없이 평가를 시작합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="296"/>
+        <location filename="Wizards/SetupWizard.cpp" line="302"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt;를 비즈니스용으로 사용하려면 비즈니스 사용에 적합한 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;후원 인증서&lt;/a&gt;가 필요합니다. 필요한 인증서가 아직 없는 경우 &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com 웹 상점에서 인증서를 받을 수 있습니다&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="310"/>
+        <location filename="Wizards/SetupWizard.cpp" line="316"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt;는 &lt;u&gt;프로젝트 후원자&lt;/u&gt;에게만 추가 기능과 박스 유형을 제공합니다. 개인 정보 강화 박스와 같은 박스는 샌드박스 프로그램의 &lt;b&gt;&lt;font color=&apos;red&apos;&gt;불법 액세스으로부터 사용자 데이터를 보호&lt;/font&gt;&lt;/b&gt;합니다. 아직 후원자가 되지 않았다면 샌드박스의 추가 개발 및 후원자 인증서 발급을 위한 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 지원을 고려해주시기 바랍니다.&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="347"/>
+        <location filename="Wizards/SetupWizard.cpp" line="353"/>
         <source>Failed to retrieve the certificate.</source>
         <oldsource>Failed to retrive the certificate.</oldsource>
         <translation>인증서를 검색하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="348"/>
+        <location filename="Wizards/SetupWizard.cpp" line="354"/>
         <source>
 Error: %1</source>
         <translation>
 오류: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="368"/>
+        <location filename="Wizards/SetupWizard.cpp" line="374"/>
         <source>Retrieving certificate...</source>
         <oldsource>Retreiving certificate...</oldsource>
         <translation>인증서 검색 중...</translation>
@@ -1118,12 +1118,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="715"/>
+        <location filename="Wizards/SetupWizard.cpp" line="737"/>
         <source>Complete your configuration</source>
         <translation>구성을 완료합니다</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="725"/>
+        <location filename="Wizards/SetupWizard.cpp" line="747"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>거의 완료되었습니다. 선택한 옵션을 모두 적용하고 마법사를 끝내려면 마침을 클릭하십시오.</translation>
     </message>
@@ -1216,32 +1216,32 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="158"/>
+        <location filename="Wizards/SetupWizard.cpp" line="164"/>
         <source>Introduction</source>
         <translation>소개</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="165"/>
+        <location filename="Wizards/SetupWizard.cpp" line="171"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>설정 마법사에 오신 것을 환영합니다. 이 마법사는 &lt;b&gt;Sandboxie-Plus&lt;/b&gt;의 사본을 구성할 수 있도록 도와줍니다. 지금 완료하지 않으려면 샌드박스-&gt;유지관리 메뉴에서 언제든지 이 마법사를 시작할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="174"/>
+        <location filename="Wizards/SetupWizard.cpp" line="180"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>Sandboxie-Plus 사용 방법 선택</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="177"/>
+        <location filename="Wizards/SetupWizard.cpp" line="183"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>개인적, 사적인 비상업적으로 사용(&amp;P)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="182"/>
+        <location filename="Wizards/SetupWizard.cpp" line="188"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>상업적, 사업 또는 기업용으로 사용(&amp;C)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="187"/>
+        <location filename="Wizards/SetupWizard.cpp" line="193"/>
         <source>Note: this option is persistent</source>
         <translation>참고: 이 옵션은 영구적입니다</translation>
     </message>
@@ -2933,122 +2933,122 @@ Error: </source>
 <context>
     <name>CSBUpdate</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="574"/>
+        <location filename="Wizards/SetupWizard.cpp" line="596"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 업데이트 프로그램 구성</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="575"/>
+        <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
         <translation>다른 보안 제품과 마찬가지로 Sandboxie-Plus를 최신 상태로 유지하는 것이 중요합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="583"/>
+        <location filename="Wizards/SetupWizard.cpp" line="605"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
         <translation>Sandboxie-Plus 및 선택적 구성 요소에 대한 모든 업데이트를 정기적으로 확인합니다</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="584"/>
+        <location filename="Wizards/SetupWizard.cpp" line="606"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
         <translation>sandboxie가 정기적으로 최신 업데이트를 확인하도록 합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="594"/>
+        <location filename="Wizards/SetupWizard.cpp" line="616"/>
         <source>Check for new Sandboxie-Plus versions:</source>
         <translation>새 Sandboxie-Plus 버전 확인:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="595"/>
+        <location filename="Wizards/SetupWizard.cpp" line="617"/>
         <source>Check for new Sandboxie-Plus builds.</source>
         <translation>새 Sandboxie-Plus 빌드를 확인합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="601"/>
+        <location filename="Wizards/SetupWizard.cpp" line="623"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
         <translation>새 Sandboxie-Plus 빌드를 찾을 업데이트 채널 선택:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="610"/>
+        <location filename="Wizards/SetupWizard.cpp" line="632"/>
         <source>In the Stable Channel</source>
         <translation>안정된 채널</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="611"/>
+        <location filename="Wizards/SetupWizard.cpp" line="633"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>안정적인 채널에는 최신 안정적인 GitHub 릴리스가 포함되어 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="615"/>
+        <location filename="Wizards/SetupWizard.cpp" line="637"/>
         <source>In the Preview Channel - with newest experimental changes</source>
         <translation>미리보기 채널 - 최신 실험 변경 사항 포함</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="616"/>
+        <location filename="Wizards/SetupWizard.cpp" line="638"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>미리보기 채널에는 최신 GitHub 사전 릴리스가 포함되어 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="620"/>
+        <location filename="Wizards/SetupWizard.cpp" line="642"/>
         <source>In the Insider Channel - exclusive features</source>
         <translation>내부자 채널 - 독점 기능</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="621"/>
+        <location filename="Wizards/SetupWizard.cpp" line="643"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>내부자 채널은 최종적으로 대중에게 공개될 새로운 기능과 버그 수정에 대한 조기 액세스와 안정적인 채널의 모든 관련 개선 사항을 제공합니다.
 미리 보기 채널과 달리 테스트되지 않았거나 손상되었거나 광범위하게 사용할 준비가 되지 않았을 수 있는 실험 변경 사항은 포함되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="626"/>
+        <location filename="Wizards/SetupWizard.cpp" line="648"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;내부자 채널&lt;/a&gt;에 대해 자세히 알아보기</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="635"/>
+        <location filename="Wizards/SetupWizard.cpp" line="657"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
         <translation>호환성 템플릿을 최신 상태로 유지하고 핫픽스 적용</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="636"/>
+        <location filename="Wizards/SetupWizard.cpp" line="658"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
         <translation>최신 호환성 템플릿 및 핫픽스를 확인합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="640"/>
+        <location filename="Wizards/SetupWizard.cpp" line="662"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
         <translation>문제 해결 마법사에 대한 최신 스크립트 가져오기</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="641"/>
+        <location filename="Wizards/SetupWizard.cpp" line="663"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
         <translation>문제 해결 마법사의 최신 문제 해결 스크립트를 확인합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="645"/>
+        <location filename="Wizards/SetupWizard.cpp" line="667"/>
         <source>Keep the list of optional Add-on components up to date</source>
         <translation>선택적 추가 기능 구성 요소 목록을 최신 상태로 유지</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="646"/>
+        <location filename="Wizards/SetupWizard.cpp" line="668"/>
         <source>Check for latest available add-ons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
         <translation>사용 가능한 최신 추가 기능을 확인합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="655"/>
+        <location filename="Wizards/SetupWizard.cpp" line="677"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
         <translation>Sandboxie-Plus는 엄격한 응용 프로그램을 적용하므로 호환성 문제가 발생할 수 있습니다. 호환성 템플릿 및 문제 해결을 포함하여 Sandboxie-Plus로 계속 업데이트하여 윈도우즈 업데이트 및 애플리케이션 변경 중에도 원활한 운영을 보장합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="661"/>
+        <location filename="Wizards/SetupWizard.cpp" line="683"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>최신 호환성 템플릿 및 온라인 문제 해결 데이터베이스에 액세스하려면 유효한 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;가 필요합니다.</translation>
     </message>
@@ -5724,103 +5724,103 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="478"/>
+        <location filename="Windows/SettingsWindow.cpp" line="479"/>
         <source>Add %1 Template</source>
         <translation>%1 템플릿 추가</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="551"/>
+        <location filename="Windows/SettingsWindow.cpp" line="552"/>
         <source>Select font</source>
         <translation>글꼴 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="553"/>
+        <location filename="Windows/SettingsWindow.cpp" line="554"/>
         <source>Reset font</source>
         <translation>글꼴 재설정</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="604"/>
+        <location filename="Windows/SettingsWindow.cpp" line="605"/>
         <source>Search for settings</source>
         <translation>설정 검색</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="613"/>
+        <location filename="Windows/SettingsWindow.cpp" line="614"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="715"/>
+        <location filename="Windows/SettingsWindow.cpp" line="716"/>
         <source>Please enter message</source>
         <translation>메시지를 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="834"/>
         <location filename="Windows/SettingsWindow.cpp" line="835"/>
-        <location filename="Windows/SettingsWindow.cpp" line="845"/>
+        <location filename="Windows/SettingsWindow.cpp" line="836"/>
+        <location filename="Windows/SettingsWindow.cpp" line="846"/>
         <source>Run &amp;Sandboxed</source>
         <translation>샌드박스에서 실행(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1147"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1149"/>
         <source>kilobytes (%1)</source>
         <translation>킬로바이트 (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1229"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1231"/>
         <source>Volume not attached</source>
         <translation>볼륨이 연결되지 않음</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1250"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1252"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>이 후원자 인증서가 만료되었습니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;업데이트된 인증서&lt;/a&gt;를 받으십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1255"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1257"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;현재 빌드 Plus 기능은 활성화된 상태로 유지&lt;/font&gt;되지만 호환성 업데이트 및 문제 해결 데이터베이스를 포함한 샌드박스 라이브 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1265"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>이 후원자 인증서는 &lt;font color=&apos;red&apos;&gt;%1일 후에 만료&lt;/font&gt;됩니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;업데이트된 인증서&lt;/a&gt;를 받으십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1308"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1310"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>이것은 Sandboxie-Plus 일련 번호처럼 보이지 않습니다.&lt;br /&gt;인증서의 UpdateKey 또는 서명을 입력하려고 시도했지만 올바르지 않은 경우, 위의 텍스트 영역에 전체 인증서를 대신 입력하세요.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1315"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>기존 후원자 인증서를 입력하지 않고 기능 업그레이드 키를 사용하려고 합니다. (&lt;b&gt;웹 사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 후원자 인증서가 있어야 하며, 인증서가 없으면 쓸모가 없습니다.&lt;br /&gt;고급 기능을 사용하려면 표준 인증서와 기능 업그레이드 키를 모두 받아야 합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1323"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>기존 후원자 인증서를 입력하지 않고 갱신 키를 사용하려고 합니다. (&lt;b&gt;웹사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 지원자 인증서가 있어야 하며, 해당 인증서가 없으면 쓸모가 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1326"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1328"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;제품 설명을 읽지 않고 실수로 이 키를 얻으신 경우 이메일 (홈페이지 제공)로 연락하여 이 문제를 해결해 주시기 바랍니다.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1341"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1343"/>
         <source>Retrieving certificate...</source>
         <translation>인증서 검색 중...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1353"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>인증서를 검색하는 중 오류 발생: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1351"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1353"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>알 수 없는 오류 (아마도 네트워크 문제)</translation>
     </message>
@@ -5829,42 +5829,42 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">인증서를 가져오는 중...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1393"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1395"/>
         <source>Contributor</source>
         <translation>기여자</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1395"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <source>Eternal</source>
         <translation>영구</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
         <source>Business</source>
         <translation>비지니스</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1401"/>
         <source>Personal</source>
         <translation>개인</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1401"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1403"/>
         <source>Great Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1403"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1405"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1405"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1407"/>
         <source>Family</source>
         <translation>패밀리</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1407"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Home</source>
         <translation>홈</translation>
     </message>
@@ -5873,12 +5873,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">기부</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1409"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
         <source>Evaluation</source>
         <translation>평가</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1413"/>
         <source>Type %1</source>
         <translation>유형 %1</translation>
     </message>
@@ -5887,53 +5887,53 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">표준</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1441"/>
         <source>Advanced</source>
         <translation>고급</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1441"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1443"/>
         <source>Advanced (L)</source>
         <translation>고급 (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1443"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Max Level</source>
         <translation>최대 수준</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1447"/>
         <source>Level %1</source>
         <translation>수준 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1470"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1472"/>
         <source>Supporter certificate required for access</source>
         <translation>접근에 필요한 후원자 인증서</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1489"/>
         <source>Supporter certificate required for automation</source>
         <translation>자동화에 필요한 후원자 인증서</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1901"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1903"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>이 인증서는 현재 빌드에 유효하지 않습니다. 새 인증서를 가져오거나 이전 빌드로 다운그레이드해야 합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1903"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1905"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>이 인증서는 만료되었지만 현재 설치된 버전 및 기능에 대해서는 사용 가능한 상태로 유지됩니다. 그러나 호환성 업데이트 및 온라인 문제 해결 데이터베이스를 포함한  Sandboxie-Live 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1905"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1907"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>이 인증서는 만료되었습니다. 새 인증서를 받아야 합니다.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="866"/>
+        <location filename="Windows/SettingsWindow.cpp" line="867"/>
         <source>Sandboxed Web Browser</source>
         <translation>샌드박스 웹 브라우저</translation>
     </message>
@@ -5961,23 +5961,23 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>프로그램 찾아보기</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="747"/>
+        <location filename="Windows/SettingsWindow.cpp" line="748"/>
         <source>Select Program</source>
         <translation>프로그램 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="747"/>
+        <location filename="Windows/SettingsWindow.cpp" line="748"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>실행 파일 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="751"/>
-        <location filename="Windows/SettingsWindow.cpp" line="767"/>
+        <location filename="Windows/SettingsWindow.cpp" line="752"/>
+        <location filename="Windows/SettingsWindow.cpp" line="768"/>
         <source>Please enter a menu title</source>
         <translation>메뉴 제목을 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="763"/>
+        <location filename="Windows/SettingsWindow.cpp" line="764"/>
         <source>Please enter a command</source>
         <translation>명령을 입력하십시오</translation>
     </message>
@@ -5986,7 +5986,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">이 후원자 인증서가 만료되었습니다, &lt;a href=&quot;sbie://update/cert&quot;&gt;에서 업데이트된 인증서를 받으십시오&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1253"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1255"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;%1일 후에 추가 기능이 비활성화됩니다.&lt;/font&gt;</translation>
     </message>
@@ -5995,7 +5995,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;이 빌드 Plus 기능은 계속 사용 가능합니다.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1257"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1259"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 기능이 더 이상 사용되지 않습니다.</translation>
     </message>
@@ -6013,12 +6013,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">후원자 인증서 필요</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1594"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1596"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>샌드박스 없이 실행(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1881"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1883"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>인증서로 보이지 않습니다. 인증서 일부가 아닌 전체 인증서를 입력하십시오.</translation>
     </message>
@@ -6031,7 +6031,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">안타깝게도 이 인증서는 오래되었습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1908"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1910"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus 개발을 지원해 주셔서 감사합니다.</translation>
     </message>
@@ -6040,88 +6040,88 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">이 후원 인증서는 유효하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1965"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1967"/>
         <source>Update Available</source>
         <translation>사용 가능한 업데이트</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1967"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1969"/>
         <source>Installed</source>
         <translation>설치됨</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1972"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1974"/>
         <source>by %1</source>
         <translation>%1까지</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1980"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1982"/>
         <source>(info website)</source>
         <translation>(정보 웹사이트)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2007"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2009"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>이 추가 기능은 필수 사항 제거할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2016"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2162"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2018"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2164"/>
         <source>Select Directory</source>
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2045"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2047"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;지금 확인&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2122"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2124"/>
         <source>Please enter the new configuration password.</source>
         <translation>새 구성 암호를 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2126"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2128"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>새 구성 암호를 다시 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2133"/>
         <source>Passwords did not match, please retry.</source>
         <translation>암호가 일치하지 않습니다. 다시 시도하십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2143"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2145"/>
         <source>Process</source>
         <translation>프로세스</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2143"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2145"/>
         <source>Folder</source>
         <translation>폴더</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2153"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2155"/>
         <source>Please enter a program file name</source>
         <translation>프로그램 파일 이름을 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2221"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2223"/>
         <source>Please enter the template identifier</source>
         <translation>템플릿 식별자를 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2229"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2231"/>
         <source>Error: %1</source>
         <translation>오류: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2261"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2263"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>선택한 로컬 템플릿을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2463"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2465"/>
         <source>%1 (Current)</source>
         <translation>%1 (현재)</translation>
     </message>
@@ -6169,29 +6169,44 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="501"/>
+        <location filename="Wizards/SetupWizard.cpp" line="507"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 셸 통합 구성</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="502"/>
+        <location filename="Wizards/SetupWizard.cpp" line="508"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>Sandboxie-Plus를 시스템과 통합하는 방법을 구성합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="506"/>
+        <location filename="Wizards/SetupWizard.cpp" line="512"/>
         <source>Start UI with Windows</source>
         <translation>Windows와 함께 UI 시작</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="511"/>
+        <location filename="Wizards/SetupWizard.cpp" line="517"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>탐색기의 상황에 맞는 메뉴에 &apos;샌드박스에서 실행&apos; 추가</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="516"/>
+        <location filename="Wizards/SetupWizard.cpp" line="522"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>Sandboxie에서 웹 브라우저를 시작하기 위한 바탕 화면 바로 가기 추가</translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="527"/>
+        <source>Only applications with administrator token can change ini setting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="539"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="539"/>
+        <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7036,37 +7051,37 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CUIPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="386"/>
+        <location filename="Wizards/SetupWizard.cpp" line="392"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI 구성</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="387"/>
+        <location filename="Wizards/SetupWizard.cpp" line="393"/>
         <source>Select the user interface style you prefer.</source>
         <translation>원하는 사용자 인터페이스 스타일을 선택합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="391"/>
+        <location filename="Wizards/SetupWizard.cpp" line="397"/>
         <source>&amp;Advanced UI for experts</source>
         <translation>전문가를 위한 고급 UI(&amp;A)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="396"/>
+        <location filename="Wizards/SetupWizard.cpp" line="402"/>
         <source>&amp;Simple UI for beginners</source>
         <translation>초보자를 위한 간단한 UI(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="401"/>
+        <location filename="Wizards/SetupWizard.cpp" line="407"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
         <translation>빈티지 SbieCtrl.exe UI(&amp;V)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="426"/>
+        <location filename="Wizards/SetupWizard.cpp" line="432"/>
         <source>Use Bright Mode</source>
         <translation>밝은 모드 사용</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="430"/>
+        <location filename="Wizards/SetupWizard.cpp" line="436"/>
         <source>Use Dark Mode</source>
         <translation>어두운 모드 사용</translation>
     </message>
@@ -7738,9 +7753,10 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>샌드박스가 적용된 프로세스가 전원 운영을 방해하지 않도록 방지 (실험적)</translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="837"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="vanished">마우스를 움직이거나 앞으로 가져오는 등의 조작을 방지하면 게임에서 문제가 발생할 수 있습니다.</translation>
+        <translation>마우스를 움직이거나 앞으로 가져오는 등의 조작을 방지하면 게임에서 문제가 발생할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="840"/>
@@ -7748,9 +7764,10 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>사용자 인터페이스 간섭 방지(실험적)</translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="740"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="vanished">이 기능은 화면 캡처를 얻는 모든 수단을 차단하는 것이 아니라 일부 일반적인 수단만 차단합니다.</translation>
+        <translation>이 기능은 화면 캡처를 얻는 모든 수단을 차단하는 것이 아니라 일부 일반적인 수단만 차단합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="743"/>
@@ -8994,13 +9011,15 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="740"/>
-        <source>This feature does not block all means of optaining a screen capture only some common once.</source>
-        <translation>이 기능은 일반적인 화면 캡처를 한 번만 선택할 수 있는 모든 수단을 차단하는 것은 아닙니다.</translation>
+        <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
+        <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
+        <translation type="unfinished">이 기능은 일반적인 화면 캡처를 한 번만 선택할 수 있는 모든 수단을 차단하는 것은 아닙니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="837"/>
-        <source>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</source>
-        <translation>마우스 이동 방지, 전면 반입 및 이와 유사한 작업으로 인해 게임에 문제가 발생할 가능성이 높습니다.</translation>
+        <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
+        <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
+        <translation type="unfinished">마우스 이동 방지, 전면 반입 및 이와 유사한 작업으로 인해 게임에 문제가 발생할 가능성이 높습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1562"/>
@@ -9491,9 +9510,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
-        <source>Hotkey for suspending all process</source>
-        <oldsource>Hotkey for suspending all processes:</oldsource>
-        <translation>모든 프로세스를 일시 중지하는 단축키</translation>
+        <source>Hotkey for suspending all processes:</source>
+        <oldsource>Hotkey for suspending all process</oldsource>
+        <translation type="unfinished">모든 프로세스를 일시 중지하는 단축키</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="512"/>

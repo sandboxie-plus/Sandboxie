@@ -242,4 +242,4 @@ body:
         [DefaultBox]
         .....
 
-      render: shell
+      render: ini

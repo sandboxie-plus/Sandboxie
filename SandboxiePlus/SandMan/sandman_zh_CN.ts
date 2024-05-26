@@ -7712,7 +7712,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="837"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translatio>防止移动鼠标、窗口前置和类似操作，这可能会导致游戏出现问题。</translation>
+        <translation>防止移动鼠标、窗口前置和类似操作，这可能会导致游戏出现问题。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="848"/>

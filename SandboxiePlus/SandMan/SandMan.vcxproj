@@ -114,7 +114,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>Qt5.15.13_msvc2019_64</QtInstall>
+    <QtInstall>msvc2019_64</QtInstall>
     <QtModules>core;network;gui;widgets;qml;winextras;concurrent;widgets-private;qml-private</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="QtSettings">

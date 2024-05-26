@@ -500,10 +500,7 @@ int CUIPage::nextId() const
 //////////////////////////////////////////////////////////////////////////////////////////
 // CShellPage
 // 
-void CShellPage::OnEditOnlyAdmin() {
-	if (this->m_pEditOnlyAdmin->isChecked())
-		QMessageBox::warning(this, tr("Warning"), tr("When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click \"Sandbox (s)\" in the system menu, and then click \"Restart as Admin\" in the pop - up context menu to gain control of the configuration."),QMessageBox::Yes,QMessageBox::YesAll);
-}
+
 CShellPage::CShellPage(QWidget *parent)
     : QWizardPage(parent)
 {
@@ -534,6 +531,16 @@ CShellPage::CShellPage(QWidget *parent)
 	registerField("editAdminOnly", m_pEditOnlyAdmin);
 
     setLayout(layout);
+}
+
+void CShellPage::OnEditOnlyAdmin() 
+{
+    if (m_pEditOnlyAdmin->isChecked()) {
+        if (QMessageBox::warning(this, tr("Warning"), tr("When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. "
+          "You need to open the Sandbox Manager main window, click \"Sandbox (s)\" in the system menu, and then click \"Restart as Admin\" in the pop - up context menu to gain control of the configuration."),
+          QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Cancel)
+            m_pEditOnlyAdmin->setChecked(false);
+    }
 }
 
 int CShellPage::nextId() const

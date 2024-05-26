@@ -78,12 +78,6 @@ static NTSTATUS Ipc_Api_QuerySymbolicLink(PROCESS *proc, ULONG64 *parms);
 
 //---------------------------------------------------------------------------
 
-
-NTSTATUS Thread_GetKernelHandleForUserHandle(
-    HANDLE *OutKernelHandle, HANDLE InUserHandle);
-
-//---------------------------------------------------------------------------
-
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, Ipc_Init)
 #pragma alloc_text (INIT, Ipc_Init_Type)

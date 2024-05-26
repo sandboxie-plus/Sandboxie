@@ -249,13 +249,13 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="834"/>
         <source>Advanced Options</source>
-        <translation type="unfinished">高级选项</translation>
+        <translation>高级选项</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="841"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation type="unfinished">阻止安装在宿主上的沙盒程序从沙盒内部加载动态链接库(.dll)文件</translation>
+        <translation>阻止宿主上的沙盒化程序加载沙盒化动态链接库(.dll)文件</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="842"/>
@@ -1272,78 +1272,78 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="711"/>
         <source>Sandbox Isolation options</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒隔离选项</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="712"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>在这个页面上沙盒隔离选项可以被配置。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="717"/>
         <source>Network Access</source>
-        <translation type="unfinished">网络权限</translation>
+        <translation>网络权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="725"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished">允许网络访问</translation>
+        <translation>允许网络访问</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="726"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished">通过阻止访问网络设备禁用网络权限</translation>
+        <translation>通过阻止访问网络设备禁用网络权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="728"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished">通过 Windows 筛选平台 (WFP) 禁用网络权限</translation>
+        <translation>通过 Windows 筛选平台 (WFP) 禁用网络权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="733"/>
         <source>Allow access to network files and folders</source>
-        <translation type="unfinished">允许访问网络文件与文件夹</translation>
+        <translation>允许访问网络文件与文件夹</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="734"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="756"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <translation type="unfinished">不推荐加固型沙盒启用该选项</translation>
+        <translation>不推荐安全加固型沙盒启用该选项</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="740"/>
         <source>Admin Options</source>
-        <translation type="unfinished">管理员选项</translation>
+        <translation>管理员选项</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="744"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">撤销管理员和 Power Users 用户组的权限</translation>
+        <translation>撤销管理员和 Power Users 用户组的权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="750"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished">让应用认为自身在管理员权限下运行</translation>
+        <translation>让应用认为自身在管理员权限下运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished">允许 MSIServer 在沙盒内使用系统令牌运行</translation>
+        <translation>允许 MSIServer 在沙盒内使用系统令牌运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
         <source>Box Options</source>
-        <translation type="unfinished">沙盒选项</translation>
+        <translation>沙盒选项</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">使用 Sandboxie 限权用户替代匿名令牌</translation>
+        <translation>使用 Sandboxie 限权用户替代匿名令牌</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="767"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用一个自定义Sandboxie令牌来允许更好地互相隔离特定沙盒，并且它在任务管理器某一进程所属的用户列中显示沙盒名称。但一些第三方安全方案可能与自定义令牌产生问题。</translation>
     </message>
 </context>
 <context>
@@ -6097,17 +6097,17 @@ Error: %1</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with administrator token can change ini setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>仅带有管理员令牌的程序可以修改ini设置</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation警告</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>当这个选项被设置，以普通用户权限启动的沙盒管理器将不能够去更改配置，这可能造成陷入循环。你需要打开沙盒管理器主窗口，在系统菜单中点击&quot;沙盒(s)&quot;并点击上下文菜单中的&quot;以管理员特权重启&quot;以重新获取配置控制权。</translation>
     </message>
 </context>
 <context>
@@ -7674,7 +7674,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3948"/>
         <source>Emulate sandboxed window station for all processes</source>
-        <translation>为所有进程模拟沙盒化的窗口状况</translation>
+        <translation>为所有进程模拟沙盒化窗口工作站</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="873"/>
@@ -7706,23 +7706,23 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="740"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished">此功能仅能阻止常见的一些，而不是所有的屏幕捕获方法。</translation>
+        <translation>此功能仅能阻止常见的一些，而不是所有的屏幕捕获方法。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="837"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished">防止移动鼠标、窗口前置和类似操作，这可能会导致游戏出现问题。</translation>
+        <translatio>防止移动鼠标、窗口前置和类似操作，这可能会导致游戏出现问题。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="848"/>
         <source>Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>隔离</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1562"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>仅管理员账户可以对这个沙盒做出更改</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4406"/>
@@ -9007,7 +9007,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>强制直接子进程沙盒化，但不包含通过DCOM或IPC接口启动的非直接子进程。</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
@@ -9823,7 +9823,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">暂停沙盒内所有进程的热键：</translation>
+        <translation>暂停沙盒内所有进程的热键：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="234"/>
@@ -9838,17 +9838,17 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="614"/>
         <source>Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒化桌面</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="651"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="unfinished"></translation>
+        <translation>当启动一个新进程时切换到沙盒化桌面。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="658"/>
         <source>Switch to sandboxed desktop with double click</source>
-        <translation type="unfinished"></translation>
+        <translation>双击切换到沙盒化桌面</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="668"/>
@@ -9985,7 +9985,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2175"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>添加 &quot; Sandboxie\All Sandboxes &quot; 组到沙盒化令牌（实验性）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2185"/>

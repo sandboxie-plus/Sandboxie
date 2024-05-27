@@ -1676,7 +1676,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Mappa kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1112"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1113"/>
         <location filename="Windows/OptionsAccess.cpp" line="406"/>
         <location filename="Windows/OptionsAccess.cpp" line="639"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="771"/>
@@ -1692,8 +1692,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Minden program</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1110"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1128"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1111"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1129"/>
         <location filename="Windows/OptionsAccess.cpp" line="411"/>
         <location filename="Windows/OptionsAccess.cpp" line="643"/>
         <location filename="Windows/OptionsGeneral.cpp" line="597"/>
@@ -2359,47 +2359,47 @@ Please select a folder which contains this file.</source>
         <translation>Csoportosítás</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="546"/>
+        <location filename="Windows/OptionsWindow.cpp" line="547"/>
         <source>Add %1 Template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="649"/>
+        <location filename="Windows/OptionsWindow.cpp" line="650"/>
         <source>Search for options</source>
         <translation>Opciók keresése</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="794"/>
+        <location filename="Windows/OptionsWindow.cpp" line="795"/>
         <source>Box: %1</source>
         <translation>Homokozó: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="795"/>
+        <location filename="Windows/OptionsWindow.cpp" line="796"/>
         <source>Template: %1</source>
         <translation>Sablon: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="796"/>
+        <location filename="Windows/OptionsWindow.cpp" line="797"/>
         <source>Global: %1</source>
         <translation>Globál: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="797"/>
+        <location filename="Windows/OptionsWindow.cpp" line="798"/>
         <source>Default: %1</source>
         <translation>Alapértelmezett: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1008"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1009"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Ezt a homokozót törölték, ezért a konfigurációt nem lehet menteni.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1072"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1073"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Néhány változtatás még nincs elmentetve. Valóban bezárja ezt az opcióablakot?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1121"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1122"/>
         <source>Enter program:</source>
         <translation>Program megadása:</translation>
     </message>
@@ -6938,7 +6938,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="710"/>
         <location filename="Forms/OptionsWindow.ui" line="1124"/>
         <location filename="Forms/OptionsWindow.ui" line="1169"/>
-        <location filename="Forms/OptionsWindow.ui" line="3706"/>
+        <location filename="Forms/OptionsWindow.ui" line="3722"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>A rendszer védelme a homokozóban futó folyamatoktól</translation>
     </message>
@@ -7075,12 +7075,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Nyomtatási korlátozások</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3709"/>
+        <location filename="Forms/OptionsWindow.ui" line="3725"/>
         <source>Network restrictions</source>
         <translation>Hálózati korlátozások</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3645"/>
+        <location filename="Forms/OptionsWindow.ui" line="3661"/>
         <source>Block network files and folders, unless specifically opened.</source>
         <translation>Hálózati fájlok és mappák blokkolása, hacsak nincs külön megnyitva.</translation>
     </message>
@@ -7101,13 +7101,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="2084"/>
         <location filename="Forms/OptionsWindow.ui" line="2147"/>
         <location filename="Forms/OptionsWindow.ui" line="2219"/>
-        <location filename="Forms/OptionsWindow.ui" line="2365"/>
-        <location filename="Forms/OptionsWindow.ui" line="3217"/>
-        <location filename="Forms/OptionsWindow.ui" line="3764"/>
-        <location filename="Forms/OptionsWindow.ui" line="3880"/>
-        <location filename="Forms/OptionsWindow.ui" line="4081"/>
-        <location filename="Forms/OptionsWindow.ui" line="5081"/>
-        <location filename="Forms/OptionsWindow.ui" line="5219"/>
+        <location filename="Forms/OptionsWindow.ui" line="2403"/>
+        <location filename="Forms/OptionsWindow.ui" line="3233"/>
+        <location filename="Forms/OptionsWindow.ui" line="3780"/>
+        <location filename="Forms/OptionsWindow.ui" line="3896"/>
+        <location filename="Forms/OptionsWindow.ui" line="4097"/>
+        <location filename="Forms/OptionsWindow.ui" line="5097"/>
+        <location filename="Forms/OptionsWindow.ui" line="5235"/>
         <source>Name</source>
         <translation>Név</translation>
     </message>
@@ -7129,34 +7129,34 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="2092"/>
         <location filename="Forms/OptionsWindow.ui" line="2172"/>
         <location filename="Forms/OptionsWindow.ui" line="2247"/>
-        <location filename="Forms/OptionsWindow.ui" line="2393"/>
-        <location filename="Forms/OptionsWindow.ui" line="2485"/>
-        <location filename="Forms/OptionsWindow.ui" line="2619"/>
-        <location filename="Forms/OptionsWindow.ui" line="2718"/>
-        <location filename="Forms/OptionsWindow.ui" line="2799"/>
-        <location filename="Forms/OptionsWindow.ui" line="2912"/>
-        <location filename="Forms/OptionsWindow.ui" line="3186"/>
-        <location filename="Forms/OptionsWindow.ui" line="3328"/>
-        <location filename="Forms/OptionsWindow.ui" line="3448"/>
-        <location filename="Forms/OptionsWindow.ui" line="3521"/>
-        <location filename="Forms/OptionsWindow.ui" line="3802"/>
-        <location filename="Forms/OptionsWindow.ui" line="3888"/>
-        <location filename="Forms/OptionsWindow.ui" line="4217"/>
-        <location filename="Forms/OptionsWindow.ui" line="4306"/>
-        <location filename="Forms/OptionsWindow.ui" line="4637"/>
-        <location filename="Forms/OptionsWindow.ui" line="4700"/>
-        <location filename="Forms/OptionsWindow.ui" line="5062"/>
+        <location filename="Forms/OptionsWindow.ui" line="2438"/>
+        <location filename="Forms/OptionsWindow.ui" line="2501"/>
+        <location filename="Forms/OptionsWindow.ui" line="2635"/>
+        <location filename="Forms/OptionsWindow.ui" line="2734"/>
+        <location filename="Forms/OptionsWindow.ui" line="2815"/>
+        <location filename="Forms/OptionsWindow.ui" line="2928"/>
+        <location filename="Forms/OptionsWindow.ui" line="3202"/>
+        <location filename="Forms/OptionsWindow.ui" line="3344"/>
+        <location filename="Forms/OptionsWindow.ui" line="3464"/>
+        <location filename="Forms/OptionsWindow.ui" line="3537"/>
+        <location filename="Forms/OptionsWindow.ui" line="3818"/>
+        <location filename="Forms/OptionsWindow.ui" line="3904"/>
+        <location filename="Forms/OptionsWindow.ui" line="4233"/>
+        <location filename="Forms/OptionsWindow.ui" line="4322"/>
+        <location filename="Forms/OptionsWindow.ui" line="4653"/>
+        <location filename="Forms/OptionsWindow.ui" line="4716"/>
+        <location filename="Forms/OptionsWindow.ui" line="5078"/>
         <source>Remove</source>
         <translation>Eltávolítás</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1925"/>
         <location filename="Forms/OptionsWindow.ui" line="2079"/>
-        <location filename="Forms/OptionsWindow.ui" line="2496"/>
-        <location filename="Forms/OptionsWindow.ui" line="2596"/>
-        <location filename="Forms/OptionsWindow.ui" line="2729"/>
-        <location filename="Forms/OptionsWindow.ui" line="2849"/>
-        <location filename="Forms/OptionsWindow.ui" line="2923"/>
+        <location filename="Forms/OptionsWindow.ui" line="2512"/>
+        <location filename="Forms/OptionsWindow.ui" line="2612"/>
+        <location filename="Forms/OptionsWindow.ui" line="2745"/>
+        <location filename="Forms/OptionsWindow.ui" line="2865"/>
+        <location filename="Forms/OptionsWindow.ui" line="2939"/>
         <source>Type</source>
         <translation>Típus</translation>
     </message>
@@ -7174,8 +7174,8 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="1791"/>
         <location filename="Forms/OptionsWindow.ui" line="2136"/>
         <location filename="Forms/OptionsWindow.ui" line="2240"/>
-        <location filename="Forms/OptionsWindow.ui" line="2386"/>
-        <location filename="Forms/OptionsWindow.ui" line="3172"/>
+        <location filename="Forms/OptionsWindow.ui" line="2411"/>
+        <location filename="Forms/OptionsWindow.ui" line="3188"/>
         <source>Add Program</source>
         <translation>Program hozzáadása</translation>
     </message>
@@ -7185,9 +7185,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Mappa kényszerítése</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2511"/>
-        <location filename="Forms/OptionsWindow.ui" line="2611"/>
-        <location filename="Forms/OptionsWindow.ui" line="2744"/>
+        <location filename="Forms/OptionsWindow.ui" line="2527"/>
+        <location filename="Forms/OptionsWindow.ui" line="2627"/>
+        <location filename="Forms/OptionsWindow.ui" line="2760"/>
         <source>Path</source>
         <translation>Útvonal</translation>
     </message>
@@ -7204,18 +7204,18 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="2036"/>
         <location filename="Forms/OptionsWindow.ui" line="2155"/>
         <location filename="Forms/OptionsWindow.ui" line="2254"/>
-        <location filename="Forms/OptionsWindow.ui" line="2438"/>
-        <location filename="Forms/OptionsWindow.ui" line="2478"/>
-        <location filename="Forms/OptionsWindow.ui" line="2585"/>
-        <location filename="Forms/OptionsWindow.ui" line="2711"/>
-        <location filename="Forms/OptionsWindow.ui" line="2806"/>
-        <location filename="Forms/OptionsWindow.ui" line="2946"/>
-        <location filename="Forms/OptionsWindow.ui" line="3374"/>
-        <location filename="Forms/OptionsWindow.ui" line="3795"/>
-        <location filename="Forms/OptionsWindow.ui" line="3902"/>
-        <location filename="Forms/OptionsWindow.ui" line="4253"/>
-        <location filename="Forms/OptionsWindow.ui" line="4486"/>
-        <location filename="Forms/OptionsWindow.ui" line="4613"/>
+        <location filename="Forms/OptionsWindow.ui" line="2431"/>
+        <location filename="Forms/OptionsWindow.ui" line="2494"/>
+        <location filename="Forms/OptionsWindow.ui" line="2601"/>
+        <location filename="Forms/OptionsWindow.ui" line="2727"/>
+        <location filename="Forms/OptionsWindow.ui" line="2822"/>
+        <location filename="Forms/OptionsWindow.ui" line="2962"/>
+        <location filename="Forms/OptionsWindow.ui" line="3390"/>
+        <location filename="Forms/OptionsWindow.ui" line="3811"/>
+        <location filename="Forms/OptionsWindow.ui" line="3918"/>
+        <location filename="Forms/OptionsWindow.ui" line="4269"/>
+        <location filename="Forms/OptionsWindow.ui" line="4502"/>
+        <location filename="Forms/OptionsWindow.ui" line="4629"/>
         <source>Show Templates</source>
         <translation>Sablonok megjelenítése</translation>
     </message>
@@ -7290,7 +7290,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Nyissa meg a Windows hitelesítő adatok áruházát (felhasználói mód)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3716"/>
+        <location filename="Forms/OptionsWindow.ui" line="3732"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
         <translation>A hálózati és tűzfalparaméterek módosításának megakadályozása (felhasználói mód)</translation>
     </message>
@@ -7357,62 +7357,62 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Korlátozások elindítása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2354"/>
+        <location filename="Forms/OptionsWindow.ui" line="2445"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>1308-as üzenet kiadása, ha a program nem indul el</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2405"/>
+        <location filename="Forms/OptionsWindow.ui" line="2383"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
         <translation>Csak a kiválasztott programok indításának engedélyezése ebben a homokozóban. *</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2412"/>
+        <location filename="Forms/OptionsWindow.ui" line="2390"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
         <translation>A kiválasztott programok indításának megakadályozása ebben a homokozóban.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2419"/>
+        <location filename="Forms/OptionsWindow.ui" line="2376"/>
         <source>Allow all programs to start in this sandbox.</source>
         <translation>Minden program elindulásának engedélyezése ebben a homokozóban.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2426"/>
+        <location filename="Forms/OptionsWindow.ui" line="2366"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
         <translation>* Megjegyzés: az ebbe a homokozóba telepített programok egyáltalán nem indulnak el.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2879"/>
+        <location filename="Forms/OptionsWindow.ui" line="2895"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3145"/>
+        <location filename="Forms/OptionsWindow.ui" line="3161"/>
         <source>Process Restrictions</source>
         <translation>Folyamatkorlátozások</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3165"/>
+        <location filename="Forms/OptionsWindow.ui" line="3181"/>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>1307-es üzenet kiadása, amikor egy programtól megtagadják az internet hozzáférést</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3179"/>
+        <location filename="Forms/OptionsWindow.ui" line="3195"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
         <translation>A felhasználó megkérdezése, hogy engedélyez-e felmentést a blokkolás alól.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3193"/>
+        <location filename="Forms/OptionsWindow.ui" line="3209"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>Megjegyzés: az ebbe a homokozóba telepített programok egyáltalán nem fognak tudni hozzáférni az internethez.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2506"/>
-        <location filename="Forms/OptionsWindow.ui" line="2606"/>
-        <location filename="Forms/OptionsWindow.ui" line="2739"/>
-        <location filename="Forms/OptionsWindow.ui" line="2859"/>
-        <location filename="Forms/OptionsWindow.ui" line="2933"/>
-        <location filename="Forms/OptionsWindow.ui" line="3222"/>
+        <location filename="Forms/OptionsWindow.ui" line="2522"/>
+        <location filename="Forms/OptionsWindow.ui" line="2622"/>
+        <location filename="Forms/OptionsWindow.ui" line="2755"/>
+        <location filename="Forms/OptionsWindow.ui" line="2875"/>
+        <location filename="Forms/OptionsWindow.ui" line="2949"/>
+        <location filename="Forms/OptionsWindow.ui" line="3238"/>
         <source>Access</source>
         <translation>Hozzáférés</translation>
     </message>
@@ -7513,13 +7513,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1031"/>
-        <location filename="Forms/OptionsWindow.ui" line="3592"/>
+        <location filename="Forms/OptionsWindow.ui" line="3608"/>
         <source>Move Up</source>
         <translation type="unfinished">Mozgatás felfelé</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1050"/>
-        <location filename="Forms/OptionsWindow.ui" line="3603"/>
+        <location filename="Forms/OptionsWindow.ui" line="3619"/>
         <source>Move Down</source>
         <translation type="unfinished">Mozgatás lefelé</translation>
     </message>
@@ -7565,129 +7565,129 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3401"/>
+        <location filename="Forms/OptionsWindow.ui" line="3417"/>
         <source>DNS Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3418"/>
+        <location filename="Forms/OptionsWindow.ui" line="3434"/>
         <source>Add Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3438"/>
+        <location filename="Forms/OptionsWindow.ui" line="3454"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3464"/>
+        <location filename="Forms/OptionsWindow.ui" line="3480"/>
         <source>Domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3480"/>
+        <location filename="Forms/OptionsWindow.ui" line="3496"/>
         <source>Internet Proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3541"/>
+        <location filename="Forms/OptionsWindow.ui" line="3557"/>
         <source>Add Proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3514"/>
+        <location filename="Forms/OptionsWindow.ui" line="3530"/>
         <source>Test Proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3567"/>
+        <location filename="Forms/OptionsWindow.ui" line="3583"/>
         <source>Auth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3572"/>
+        <location filename="Forms/OptionsWindow.ui" line="3588"/>
         <source>Login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3577"/>
+        <location filename="Forms/OptionsWindow.ui" line="3593"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3497"/>
+        <location filename="Forms/OptionsWindow.ui" line="3513"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3507"/>
+        <location filename="Forms/OptionsWindow.ui" line="3523"/>
         <source>Resolve hostnames via proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3630"/>
+        <location filename="Forms/OptionsWindow.ui" line="3646"/>
         <source>Other Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3679"/>
+        <location filename="Forms/OptionsWindow.ui" line="3695"/>
         <source>Port Blocking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3638"/>
+        <location filename="Forms/OptionsWindow.ui" line="3654"/>
         <source>Block common SAMBA ports</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3652"/>
+        <location filename="Forms/OptionsWindow.ui" line="3668"/>
         <source>Block DNS, UDP port 53</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4023"/>
+        <location filename="Forms/OptionsWindow.ui" line="4039"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4026"/>
+        <location filename="Forms/OptionsWindow.ui" line="4042"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4067"/>
+        <location filename="Forms/OptionsWindow.ui" line="4083"/>
         <source>Image Protection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4105"/>
+        <location filename="Forms/OptionsWindow.ui" line="4121"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4098"/>
+        <location filename="Forms/OptionsWindow.ui" line="4114"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4036"/>
+        <location filename="Forms/OptionsWindow.ui" line="4052"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4086"/>
+        <location filename="Forms/OptionsWindow.ui" line="4102"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4094"/>
+        <location filename="Forms/OptionsWindow.ui" line="4110"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4118"/>
+        <location filename="Forms/OptionsWindow.ui" line="4134"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
         <translation type="unfinished"></translation>
@@ -7799,48 +7799,58 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation>Ha a vezető folyamatok meg vannak határozva, az összes többi elhúzódó folyamatként kezelendő.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2458"/>
+        <location filename="Forms/OptionsWindow.ui" line="2452"/>
+        <source>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2455"/>
+        <source>A pop-up warning before launching a process into the sandbox from an external source.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2474"/>
         <source>Files</source>
         <translation>Fájlok</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2551"/>
+        <location filename="Forms/OptionsWindow.ui" line="2567"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>Beállíthatja, hogy mely folyamatok férhetnek hozzá a fájlokhoz, mappákhoz és csövekhez.
 A &apos;Megnyitás&apos; hozzáférés csak a sandboxon kívül található programbinárisokra vonatkozik. Ehelyett használhatja a &apos;Megnyitás mindenkinek&apos; lehetőséget, hogy minden programra vonatkozzon, vagy módosítsa ezt a viselkedést a Házirendek lapon.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2565"/>
+        <location filename="Forms/OptionsWindow.ui" line="2581"/>
         <source>Registry</source>
         <translation>Registry</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2658"/>
+        <location filename="Forms/OptionsWindow.ui" line="2674"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>Beállíthatja, hogy mely folyamatok férhetnek hozzá a rendszerleíró adatbázishoz.
 A &apos;Megnyitás&apos; hozzáférés csak a sandboxon kívül található programbinárisokra vonatkozik Ehelyett használhatja a &apos;Megnyitás mindenkinek&apos; lehetőséget, hogy minden programra vonatkozzon, vagy módosítsa ezt a viselkedést a Házirendek lapon.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2672"/>
+        <location filename="Forms/OptionsWindow.ui" line="2688"/>
         <source>IPC</source>
         <translation>IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2765"/>
+        <location filename="Forms/OptionsWindow.ui" line="2781"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>Beállíthatja, hogy mely folyamatok férhetnek hozzá az NT IPC objektumokhoz, például az ALPC portokhoz és más folyamatok memóriájához és környezetéhez.
 A folyamat megadásához használja a &apos;$:program.exe-t&apos; útvonalként.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2779"/>
+        <location filename="Forms/OptionsWindow.ui" line="2795"/>
         <source>Wnd</source>
         <translation>Wnd</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2864"/>
+        <location filename="Forms/OptionsWindow.ui" line="2880"/>
         <source>Wnd Class</source>
         <translation>Wnd osztály</translation>
     </message>
@@ -7850,132 +7860,132 @@ A folyamat megadásához használja a &apos;$:program.exe-t&apos; útvonalként.
         <translation type="obsolete">Beállíthatja, hogy mely folyamatok férhetnek hozzá az asztali objektumokhoz, például a Windowshoz és hasonlókhoz.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2892"/>
+        <location filename="Forms/OptionsWindow.ui" line="2908"/>
         <source>COM</source>
         <translation>COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2938"/>
+        <location filename="Forms/OptionsWindow.ui" line="2954"/>
         <source>Class Id</source>
         <translation>Osztályazonosító</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2985"/>
+        <location filename="Forms/OptionsWindow.ui" line="3001"/>
         <source>Configure which processes can access COM objects.</source>
         <translation>Beállíthatja, hogy mely folyamatok férhetnek hozzá a COM-objektumokhoz.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2997"/>
+        <location filename="Forms/OptionsWindow.ui" line="3013"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
         <translation>Ne használjon virtualizált COM-ot, nyílt hozzáférés a gazdagép COM-infrastruktúrájához (nem ajánlott)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3005"/>
+        <location filename="Forms/OptionsWindow.ui" line="3021"/>
         <source>Access Policies</source>
         <translation>Hozzáférési szabályzatok</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3135"/>
+        <location filename="Forms/OptionsWindow.ui" line="3151"/>
         <source>Network Options</source>
         <translation>Hálózati beállítások</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3232"/>
+        <location filename="Forms/OptionsWindow.ui" line="3248"/>
         <source>Set network/internet access for unlisted processes:</source>
         <translation>Hálózati ill. internet hozzáférés beállítása a nem jegyzett folyamatokhoz:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3279"/>
+        <location filename="Forms/OptionsWindow.ui" line="3295"/>
         <source>Test Rules, Program:</source>
         <translation>Szabályok, program tesztelése:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3289"/>
+        <location filename="Forms/OptionsWindow.ui" line="3305"/>
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3299"/>
+        <location filename="Forms/OptionsWindow.ui" line="3315"/>
         <source>IP:</source>
         <translation>IP:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3309"/>
+        <location filename="Forms/OptionsWindow.ui" line="3325"/>
         <source>Protocol:</source>
         <translation>Protokoll:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3319"/>
+        <location filename="Forms/OptionsWindow.ui" line="3335"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3335"/>
+        <location filename="Forms/OptionsWindow.ui" line="3351"/>
         <source>Add Rule</source>
         <translation>Szabály hozzáadása</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="626"/>
-        <location filename="Forms/OptionsWindow.ui" line="2501"/>
-        <location filename="Forms/OptionsWindow.ui" line="2601"/>
-        <location filename="Forms/OptionsWindow.ui" line="2734"/>
-        <location filename="Forms/OptionsWindow.ui" line="2854"/>
-        <location filename="Forms/OptionsWindow.ui" line="2928"/>
-        <location filename="Forms/OptionsWindow.ui" line="3346"/>
-        <location filename="Forms/OptionsWindow.ui" line="3459"/>
-        <location filename="Forms/OptionsWindow.ui" line="3552"/>
-        <location filename="Forms/OptionsWindow.ui" line="4240"/>
+        <location filename="Forms/OptionsWindow.ui" line="2517"/>
+        <location filename="Forms/OptionsWindow.ui" line="2617"/>
+        <location filename="Forms/OptionsWindow.ui" line="2750"/>
+        <location filename="Forms/OptionsWindow.ui" line="2870"/>
+        <location filename="Forms/OptionsWindow.ui" line="2944"/>
+        <location filename="Forms/OptionsWindow.ui" line="3362"/>
+        <location filename="Forms/OptionsWindow.ui" line="3475"/>
+        <location filename="Forms/OptionsWindow.ui" line="3568"/>
+        <location filename="Forms/OptionsWindow.ui" line="4256"/>
         <source>Program</source>
         <translation>Program</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="621"/>
         <location filename="Forms/OptionsWindow.ui" line="1525"/>
-        <location filename="Forms/OptionsWindow.ui" line="3351"/>
-        <location filename="Forms/OptionsWindow.ui" line="4393"/>
+        <location filename="Forms/OptionsWindow.ui" line="3367"/>
+        <location filename="Forms/OptionsWindow.ui" line="4409"/>
         <source>Action</source>
         <translation>Művelet</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3356"/>
-        <location filename="Forms/OptionsWindow.ui" line="3562"/>
+        <location filename="Forms/OptionsWindow.ui" line="3372"/>
+        <location filename="Forms/OptionsWindow.ui" line="3578"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3361"/>
-        <location filename="Forms/OptionsWindow.ui" line="3469"/>
-        <location filename="Forms/OptionsWindow.ui" line="3557"/>
+        <location filename="Forms/OptionsWindow.ui" line="3377"/>
+        <location filename="Forms/OptionsWindow.ui" line="3485"/>
+        <location filename="Forms/OptionsWindow.ui" line="3573"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3366"/>
+        <location filename="Forms/OptionsWindow.ui" line="3382"/>
         <source>Protocol</source>
         <translation>Protokoll</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3388"/>
+        <location filename="Forms/OptionsWindow.ui" line="3404"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>FIGYELEM: A Windows szűrőplatform nincs engedélyezve az illesztőprogrammal, ezért ezeket a szabályokat csak felhasználói módban kell alkalmazni, és nem lehet érvényesíteni !!! Ez azt jelenti, hogy a rosszindulatú alkalmazások megkerülhetik őket.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2448"/>
+        <location filename="Forms/OptionsWindow.ui" line="2464"/>
         <source>Resource Access</source>
         <translation>Erőforrás hozzáférés</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2531"/>
+        <location filename="Forms/OptionsWindow.ui" line="2547"/>
         <source>Add File/Folder</source>
         <translation>Fájl, mappa hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2825"/>
+        <location filename="Forms/OptionsWindow.ui" line="2841"/>
         <source>Add Wnd Class</source>
         <translation>Ablak osztály hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2704"/>
+        <location filename="Forms/OptionsWindow.ui" line="2720"/>
         <source>Add IPC Path</source>
         <translation>IPC útvonal hozzáadása</translation>
     </message>
@@ -8018,77 +8028,77 @@ A folyamat megadásához használja a &apos;$:program.exe-t&apos; útvonalként.
         <translation>Sandboxie token</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2638"/>
+        <location filename="Forms/OptionsWindow.ui" line="2654"/>
         <source>Add Reg Key</source>
         <translation>Reg-kulcs hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2965"/>
+        <location filename="Forms/OptionsWindow.ui" line="2981"/>
         <source>Add COM Object</source>
         <translation>COM objektum hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3039"/>
+        <location filename="Forms/OptionsWindow.ui" line="3055"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
         <translation>Alkalmazza a Bezárás...=!&lt;program&gt;,... szabályokat a homokozóban található összes bináris fájlra is.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3730"/>
+        <location filename="Forms/OptionsWindow.ui" line="3746"/>
         <source>File Recovery</source>
         <translation>Fájl helyreállítás</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3740"/>
+        <location filename="Forms/OptionsWindow.ui" line="3756"/>
         <source>Quick Recovery</source>
         <translation>Gyors helyreállítás</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3809"/>
+        <location filename="Forms/OptionsWindow.ui" line="3825"/>
         <source>Add Folder</source>
         <translation>Mappa hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3819"/>
+        <location filename="Forms/OptionsWindow.ui" line="3835"/>
         <source>Immediate Recovery</source>
         <translation>Azonnali helyreállítás</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3849"/>
+        <location filename="Forms/OptionsWindow.ui" line="3865"/>
         <source>Ignore Extension</source>
         <translation>Kiterjesztés kihagyása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3895"/>
+        <location filename="Forms/OptionsWindow.ui" line="3911"/>
         <source>Ignore Folder</source>
         <translation>Mappa kihagyása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3856"/>
+        <location filename="Forms/OptionsWindow.ui" line="3872"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Azonnali helyreállítási kérés engedélyezése, hogy a fájlokat a létrehozásuk után azonnal helyreállíthassa.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3839"/>
+        <location filename="Forms/OptionsWindow.ui" line="3855"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>Az &quot;Azonnali helyreállításból&quot; kizárhat mappákat és fájltípusokat (vagy fájlkiterjesztéseket).</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3772"/>
+        <location filename="Forms/OptionsWindow.ui" line="3788"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>A &quot;Gyors helyreállítás&quot; funkció meghívása után a következő mappákat ellenőrzik a homokozós tartalom szempontjából. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4161"/>
+        <location filename="Forms/OptionsWindow.ui" line="4177"/>
         <source>Advanced Options</source>
         <translation>Fejlett beállítások</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4178"/>
+        <location filename="Forms/OptionsWindow.ui" line="4194"/>
         <source>Miscellaneous</source>
         <translation>Egyebek</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2872"/>
+        <location filename="Forms/OptionsWindow.ui" line="2888"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
         <translation>Ne változtassa meg a homokozós programok által létrehozott ablakosztályok nevét</translation>
     </message>
@@ -8104,7 +8114,7 @@ A folyamat megadásához használja a &apos;$:program.exe-t&apos; útvonalként.
         <location filename="Forms/OptionsWindow.ui" line="1616"/>
         <location filename="Forms/OptionsWindow.ui" line="1640"/>
         <location filename="Forms/OptionsWindow.ui" line="1739"/>
-        <location filename="Forms/OptionsWindow.ui" line="4064"/>
+        <location filename="Forms/OptionsWindow.ui" line="4080"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>A homokozó integritásának védelme</translation>
     </message>
@@ -8125,44 +8135,44 @@ A folyamat megadásához használja a &apos;$:program.exe-t&apos; útvonalként.
         <translation>Védje meg az izolált SYSTEM folyamatokat a nem privilegizált folyamatoktól</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3976"/>
+        <location filename="Forms/OptionsWindow.ui" line="3992"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>Egyéni dummy manifest fájlok használatának kikényszerítése (örökölt viselkedés)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3087"/>
+        <location filename="Forms/OptionsWindow.ui" line="3103"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>A szabályspecifikusság annak mértéke, hogy egy adott szabály mennyire illeszkedik egy adott elérési úthoz. Egyszerűen fogalmazva, a specifikáció a karakterek hossza az elérési út elejétől az utolsó egyező nem helyettesítő karakterláncig bezárólag. Egy szabály, amely csak az olyan fájltípusoknak felel meg, mint a &quot;*.tmp&quot; a legmagasabb specifitású lenne, mivel mindig a teljes fájl elérési úttal egyezne.
 A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leírja, hogy egy szabály hogyan vonatkozik egy adott folyamatra. A folyamatnév vagy csoport alapján érvényesülő szabályoknak van a legerősebb egyezési szintje, ezt követi a tagadással történő egyezés (vagyis az adott folyamaton kívül minden folyamatra érvényes szabályok), míg a legalacsonyabb egyezési szinteken globális egyezések, azaz bármely folyamatra érvényes szabályok.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3046"/>
+        <location filename="Forms/OptionsWindow.ui" line="3062"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
         <translation>A szabályokat sajátosságuk és folyamategyezési szintjük alapján rangsorolja</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3098"/>
+        <location filename="Forms/OptionsWindow.ui" line="3114"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
         <translation>Adatvédelmi mód, blokkolja a fájlokhoz és a rendszerleíró adatbázishoz való hozzáférést az összes helyhez, kivéve az általános rendszerhelyeket</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3080"/>
+        <location filename="Forms/OptionsWindow.ui" line="3096"/>
         <source>Access Mode</source>
         <translation>Hozzáférési mód</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3118"/>
+        <location filename="Forms/OptionsWindow.ui" line="3134"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
         <translation>Ha az adatvédelmi mód engedélyezve van, a sandbox folyamatok a C:\Windows\*, C:\Program Files\*, és a HKLM registry egyes részeinek csak olvasására lesznek képesek , minden más helynek kifejezett hozzáférésre van szüksége ahhoz, hogy olvasható és/vagy írható legyen. Ebben a módban a Szabályspecifikusság mindig engedélyezve van.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3032"/>
+        <location filename="Forms/OptionsWindow.ui" line="3048"/>
         <source>Rule Policies</source>
         <translation>Írányelv szabály</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3053"/>
+        <location filename="Forms/OptionsWindow.ui" line="3069"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
         <translation>A fájl és kulcs megnyitása direktívákat csak a homokozón kívül található binárisokra alkalmazza.</translation>
     </message>
@@ -8177,8 +8187,8 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
         <translation>Csak a privilegizált folyamatok számára engedélyezze a szolgáltatásvezérlő menedzser (Service Control Manager) elérését</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3933"/>
-        <location filename="Forms/OptionsWindow.ui" line="3962"/>
+        <location filename="Forms/OptionsWindow.ui" line="3949"/>
+        <location filename="Forms/OptionsWindow.ui" line="3978"/>
         <source>Compatibility</source>
         <translation>Kompatibilitás</translation>
     </message>
@@ -8188,7 +8198,7 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
         <translation>Sandbox-folyamatok hozzáadása munkaobjektumokhoz (ajánlott)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3948"/>
+        <location filename="Forms/OptionsWindow.ui" line="3964"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>A homokozós ablakállomás emulálása minden folyamathoz</translation>
     </message>
@@ -8222,7 +8232,7 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
         <translation>A nem homokozós folyamatok memóriájának olvasásának engedélyezése (nem ajánlott)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3969"/>
+        <location filename="Forms/OptionsWindow.ui" line="3985"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>Alapértelmezés szerint tiltsa le az &quot;RpcMgmtSetComTimeout&quot; használatát (ez megoldhatja a kompatibilitási problémákat)</translation>
     </message>
@@ -8247,81 +8257,81 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
         <translation>Az alábbi lehetőségek biztonságosan használhatók, ha nem ad rendszergazdai jogokat.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4276"/>
+        <location filename="Forms/OptionsWindow.ui" line="4292"/>
         <source>Triggers</source>
         <translation>Indítók</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4388"/>
+        <location filename="Forms/OptionsWindow.ui" line="4404"/>
         <source>Event</source>
         <translation>Esemény</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4338"/>
-        <location filename="Forms/OptionsWindow.ui" line="4479"/>
-        <location filename="Forms/OptionsWindow.ui" line="4524"/>
-        <location filename="Forms/OptionsWindow.ui" line="4543"/>
+        <location filename="Forms/OptionsWindow.ui" line="4354"/>
+        <location filename="Forms/OptionsWindow.ui" line="4495"/>
+        <location filename="Forms/OptionsWindow.ui" line="4540"/>
+        <location filename="Forms/OptionsWindow.ui" line="4559"/>
         <source>Run Command</source>
         <translation>Parancs futtatása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4505"/>
+        <location filename="Forms/OptionsWindow.ui" line="4521"/>
         <source>Start Service</source>
         <translation>Szolgáltatás indítása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4451"/>
+        <location filename="Forms/OptionsWindow.ui" line="4467"/>
         <source>These events are executed each time a box is started</source>
         <translation>Ezek az események minden alkalommal végrehajtódnak, amikor egy homokozó elindul</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4454"/>
+        <location filename="Forms/OptionsWindow.ui" line="4470"/>
         <source>On Box Start</source>
         <translation>Homokozó indításakor</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4313"/>
-        <location filename="Forms/OptionsWindow.ui" line="4371"/>
+        <location filename="Forms/OptionsWindow.ui" line="4329"/>
+        <location filename="Forms/OptionsWindow.ui" line="4387"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>Ezek a parancsok NEM IZOLÁLTAN futnak le közvetlenül a homokozó tartalmának törlése előtt</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4016"/>
+        <location filename="Forms/OptionsWindow.ui" line="4032"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <translation>Beágyazott munkaobjektumok használatának engedélyezése (Windows 8 és újabb rendszeren működik)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4345"/>
+        <location filename="Forms/OptionsWindow.ui" line="4361"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>Ezek a parancsok csak akkor hajtódnak végre, ha egy homokozó inicializálva van. Az újrafuttatáshoz a homokozó tartalmát törölni kell.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4348"/>
+        <location filename="Forms/OptionsWindow.ui" line="4364"/>
         <source>On Box Init</source>
         <translation>Homokozó inicializálásakor</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4406"/>
+        <location filename="Forms/OptionsWindow.ui" line="4422"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4419"/>
+        <location filename="Forms/OptionsWindow.ui" line="4435"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>Itt adhatja meg a különféle homokozó eseményeken automatikusan végrehajtandó műveleteket.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4558"/>
+        <location filename="Forms/OptionsWindow.ui" line="4574"/>
         <source>Hide Processes</source>
         <translation>Folyamatok elrejtése</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4576"/>
+        <location filename="Forms/OptionsWindow.ui" line="4592"/>
         <source>Add Process</source>
         <translation>Folyamat hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4603"/>
+        <location filename="Forms/OptionsWindow.ui" line="4619"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>Gazdafolyamatok elrejtése a homokozóban futó folyamatok elől.</translation>
     </message>
@@ -8331,48 +8341,48 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
         <translation>Korlátozások</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3916"/>
+        <location filename="Forms/OptionsWindow.ui" line="3932"/>
         <source>Various Options</source>
         <translation>Különféle lehetőségek</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3941"/>
+        <location filename="Forms/OptionsWindow.ui" line="3957"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>Az &quot;ElevateCreateProcess&quot; megoldás alkalmazása (örökölt viselkedés)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3983"/>
+        <location filename="Forms/OptionsWindow.ui" line="3999"/>
         <source>Use desktop object workaround for all processes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4476"/>
+        <location filename="Forms/OptionsWindow.ui" line="4492"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>Ez a parancs a homokozó tartalmának törlése előtt fut le</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4316"/>
+        <location filename="Forms/OptionsWindow.ui" line="4332"/>
         <source>On File Recovery</source>
         <translation>Fájl helyreállításkor</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4441"/>
+        <location filename="Forms/OptionsWindow.ui" line="4457"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>Ez a parancs a fájl helyreállítása előtt fut le, és a fájl elérési útja lesz átadva első argumentumként. Ha ez a parancs a 0-tól eltérő értéket ad vissza, a helyreállítás blokkolva lesz</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4444"/>
+        <location filename="Forms/OptionsWindow.ui" line="4460"/>
         <source>Run File Checker</source>
         <translation>Fájlellenőrző futtatása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4374"/>
+        <location filename="Forms/OptionsWindow.ui" line="4390"/>
         <source>On Delete Content</source>
         <translation>Tartalom törlésekor</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4583"/>
+        <location filename="Forms/OptionsWindow.ui" line="4599"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>Ne engedje, hogy a homokozós folyamatok más homokozóban futó folyamatokat lássák</translation>
     </message>
@@ -8383,7 +8393,7 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1520"/>
-        <location filename="Forms/OptionsWindow.ui" line="4624"/>
+        <location filename="Forms/OptionsWindow.ui" line="4640"/>
         <source>Process</source>
         <translation>Folyamat</translation>
     </message>
@@ -8392,45 +8402,45 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
         <translation type="vanished">A folyamatokhoz való olvasási hozzáférés letiltása ebben a sandboxban</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4652"/>
+        <location filename="Forms/OptionsWindow.ui" line="4668"/>
         <source>Users</source>
         <translation>Felhasználó</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4670"/>
+        <location filename="Forms/OptionsWindow.ui" line="4686"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>Az erőforrás-hozzáférés figyelőjét csak a rendszergazdákra korlátozhatja</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4677"/>
+        <location filename="Forms/OptionsWindow.ui" line="4693"/>
         <source>Add User</source>
         <translation>Felhasználó hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4707"/>
+        <location filename="Forms/OptionsWindow.ui" line="4723"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
         <translation>Adjon hozzá felhasználói fiókokat és felhasználói csoportokat az alábbi listához, hogy a homokozó használatát csak azokra a fiókokra korlátozza.  Ha a lista üres, akkor a homokozót minden felhasználói fiók használhatja.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4210"/>
+        <location filename="Forms/OptionsWindow.ui" line="4226"/>
         <source>Add Option</source>
         <translation>Opció hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4224"/>
+        <location filename="Forms/OptionsWindow.ui" line="4240"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation>Itt konfigurálhat speciális folyamatonkénti beállításokat a kompatibilitás javítása és/vagy a homokozó viselkedésének testreszabása érdekében.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4235"/>
+        <location filename="Forms/OptionsWindow.ui" line="4251"/>
         <source>Option</source>
         <translation>Opció</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4720"/>
+        <location filename="Forms/OptionsWindow.ui" line="4736"/>
         <source>Tracing</source>
         <translation>Nyomkövetés</translation>
     </message>
@@ -8439,22 +8449,22 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation type="vanished">API-hívás nyomkövetése (a LogAPI-t telepíteni kell az Sbie-könyvtárba)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4728"/>
+        <location filename="Forms/OptionsWindow.ui" line="4744"/>
         <source>Pipe Trace</source>
         <translation>Pipe nyomkövetés</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4742"/>
+        <location filename="Forms/OptionsWindow.ui" line="4758"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>Minden SetError rögzítése a nyomkövetési naplóban (sok kimeneti adatot generál)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4797"/>
+        <location filename="Forms/OptionsWindow.ui" line="4813"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>Napló hibakeresési kimenete a nyomkövetési naplóba</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4851"/>
+        <location filename="Forms/OptionsWindow.ui" line="4867"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -8477,113 +8487,113 @@ A naplózást az ini használatával testreszabhatja, ha megadja:
         <translation type="vanished">Ntdll rendszerhívások nyomon követése (sok kimenetet hoz létre)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4783"/>
+        <location filename="Forms/OptionsWindow.ui" line="4799"/>
         <source>File Trace</source>
         <translation>Fájl nyomkövetés</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4871"/>
+        <location filename="Forms/OptionsWindow.ui" line="4887"/>
         <source>Disable Resource Access Monitor</source>
         <translation>Erőforrás-hozzáférés figyelő letiltása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4790"/>
+        <location filename="Forms/OptionsWindow.ui" line="4806"/>
         <source>IPC Trace</source>
         <translation>IPC nyomok</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4844"/>
+        <location filename="Forms/OptionsWindow.ui" line="4860"/>
         <source>GUI Trace</source>
         <translation>GUI nyomkövetés</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4756"/>
+        <location filename="Forms/OptionsWindow.ui" line="4772"/>
         <source>Resource Access Monitor</source>
         <translation>Erőforrás-hozzáférés figyelő</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4885"/>
+        <location filename="Forms/OptionsWindow.ui" line="4901"/>
         <source>Access Tracing</source>
         <translation>Hozzáférés nyomon követése</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4905"/>
+        <location filename="Forms/OptionsWindow.ui" line="4921"/>
         <source>COM Class Trace</source>
         <translation>COM Class nyom</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4776"/>
+        <location filename="Forms/OptionsWindow.ui" line="4792"/>
         <source>Key Trace</source>
         <translation>Kulcskövetés</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5331"/>
+        <location filename="Forms/OptionsWindow.ui" line="5347"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>Az elveszett védelem kompenzálásához tekintse meg a &apos;Drop Rights&apos; beállítási oldalát a &apos;Korlátozások beállításai&apos; csoportban.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3247"/>
-        <location filename="Forms/OptionsWindow.ui" line="4830"/>
+        <location filename="Forms/OptionsWindow.ui" line="3263"/>
+        <location filename="Forms/OptionsWindow.ui" line="4846"/>
         <source>Network Firewall</source>
         <translation>Hálózati tűzfal</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4735"/>
+        <location filename="Forms/OptionsWindow.ui" line="4751"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4929"/>
+        <location filename="Forms/OptionsWindow.ui" line="4945"/>
         <source>Debug</source>
         <translation>Hibakeresés</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4985"/>
+        <location filename="Forms/OptionsWindow.ui" line="5001"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>FIGYELEM, ezek az opciók letilthatják az alapvető biztonsági garanciákat és megszakíthatják a homokozó biztonságát!!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4995"/>
+        <location filename="Forms/OptionsWindow.ui" line="5011"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>Ezeket az opciókat a kompatibilitási problémák hibakeresésére tervezték. Kérjük, csak tesztelési célra használja. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5010"/>
+        <location filename="Forms/OptionsWindow.ui" line="5026"/>
         <source>App Templates</source>
         <translation>Program sablonok</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5040"/>
+        <location filename="Forms/OptionsWindow.ui" line="5056"/>
         <source>Filter Categories</source>
         <translation>Szűrő kategóriák</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5111"/>
+        <location filename="Forms/OptionsWindow.ui" line="5127"/>
         <source>Text Filter</source>
         <translation>Szöveg szűrő</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5101"/>
+        <location filename="Forms/OptionsWindow.ui" line="5117"/>
         <source>Add Template</source>
         <translation>Sablon hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5134"/>
+        <location filename="Forms/OptionsWindow.ui" line="5150"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Ez a lista nagy mennyiségű homokozó kompatibilitást javító sablont tartalmaz</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5076"/>
+        <location filename="Forms/OptionsWindow.ui" line="5092"/>
         <source>Category</source>
         <translation>Kategória</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5173"/>
+        <location filename="Forms/OptionsWindow.ui" line="5189"/>
         <source>Template Folders</source>
         <translation>Sablon mappák</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5193"/>
+        <location filename="Forms/OptionsWindow.ui" line="5209"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -8592,68 +8602,68 @@ Please note that this values are currently user specific and saved globally for 
 Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak és globálisan vannak mentve az összes homokozóhoz.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4245"/>
-        <location filename="Forms/OptionsWindow.ui" line="5224"/>
+        <location filename="Forms/OptionsWindow.ui" line="4261"/>
+        <location filename="Forms/OptionsWindow.ui" line="5240"/>
         <source>Value</source>
         <translation>Érték</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4409"/>
+        <location filename="Forms/OptionsWindow.ui" line="4425"/>
         <source>On Box Terminate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4837"/>
+        <location filename="Forms/OptionsWindow.ui" line="4853"/>
         <source>DNS Request Logging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4912"/>
+        <location filename="Forms/OptionsWindow.ui" line="4928"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5020"/>
+        <location filename="Forms/OptionsWindow.ui" line="5036"/>
         <source>Templates</source>
         <translation>Sablonok</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5127"/>
+        <location filename="Forms/OptionsWindow.ui" line="5143"/>
         <source>Open Template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5235"/>
+        <location filename="Forms/OptionsWindow.ui" line="5251"/>
         <source>Accessibility</source>
         <translation>Hozzáférhetőség</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5255"/>
+        <location filename="Forms/OptionsWindow.ui" line="5271"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Képernyőolvasók: JAWS, NVDA, Window-Eyes, System Acces</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5295"/>
+        <location filename="Forms/OptionsWindow.ui" line="5311"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>A következő beállítások lehetővé teszik a Sandboxie használatát akadálymentes szoftverrel kombinálva. Felhívjuk figyelmét, hogy a Sandboxie bizonyos mértékű védelme szükségszerűen elvész, amikor ezek a beállítások érvénybe lépnek.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5348"/>
+        <location filename="Forms/OptionsWindow.ui" line="5364"/>
         <source>Edit ini Section</source>
         <translation>Konfiguráció szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5354"/>
+        <location filename="Forms/OptionsWindow.ui" line="5370"/>
         <source>Edit ini</source>
         <translation>INI szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5367"/>
+        <location filename="Forms/OptionsWindow.ui" line="5383"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5390"/>
+        <location filename="Forms/OptionsWindow.ui" line="5406"/>
         <source>Save</source>
         <translation>Mentés</translation>
     </message>
@@ -8824,43 +8834,43 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Általános beállítások</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="227"/>
+        <location filename="Forms/SettingsWindow.ui" line="229"/>
         <source>Show file recovery window when emptying sandboxes</source>
         <oldsource>Show first recovery window when emptying sandboxes</oldsource>
         <translation>Fájl helyreállítása ablak megjelenítése homokozók ürítésekor</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="188"/>
+        <location filename="Forms/SettingsWindow.ui" line="190"/>
         <source>Open urls from this ui sandboxed</source>
         <translation>URL-ek megnyitása erről a homokozó-kezelőfelületről</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="711"/>
+        <location filename="Forms/SettingsWindow.ui" line="692"/>
         <source>Systray options</source>
         <translation>Rendszertálca beállítások</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="198"/>
+        <location filename="Forms/SettingsWindow.ui" line="200"/>
         <source>UI Language:</source>
         <translation>UI nyelvek:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="442"/>
+        <location filename="Forms/SettingsWindow.ui" line="446"/>
         <source>Shell Integration</source>
         <translation>Shell integráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="558"/>
+        <location filename="Forms/SettingsWindow.ui" line="638"/>
         <source>Run Sandboxed - Actions</source>
         <translation>Futtatás homokozóban - műveletek</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="479"/>
+        <location filename="Forms/SettingsWindow.ui" line="624"/>
         <source>Start Sandbox Manager</source>
         <translation>Homokozó kezelő indítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="525"/>
+        <location filename="Forms/SettingsWindow.ui" line="527"/>
         <source>Start UI when a sandboxed process is started</source>
         <translation>Felhasználói felület elindítása, amikor egy homokozós folyamat elindul</translation>
     </message>
@@ -8869,17 +8879,17 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation type="vanished">Értesítések megjelenítése a vonatkozó naplóüzenetekről</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="578"/>
+        <location filename="Forms/SettingsWindow.ui" line="544"/>
         <source>Start UI with Windows</source>
         <translation>Felhasználói felület elindítása a Windows rendszerrel</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="601"/>
+        <location filename="Forms/SettingsWindow.ui" line="490"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Az &quot;Izolált módú futtatás&quot; parancs hozzáadása a helyi menühöz</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="250"/>
+        <location filename="Forms/SettingsWindow.ui" line="252"/>
         <source>Run box operations asynchronously whenever possible (like content deletion)</source>
         <translation>A homokozó műveletek aszinkron futtatása, amikor csak lehetséges (például a tartalom törlése)</translation>
     </message>
@@ -8889,275 +8899,275 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Gyorsbillentyű minden homokozós folyamat befejezéséhez:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="375"/>
+        <location filename="Forms/SettingsWindow.ui" line="379"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="388"/>
+        <location filename="Forms/SettingsWindow.ui" line="392"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="676"/>
+        <location filename="Forms/SettingsWindow.ui" line="656"/>
         <source>Show boxes in tray list:</source>
         <translation>Homokozók megjelenítése a tálcalistában:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="532"/>
+        <location filename="Forms/SettingsWindow.ui" line="504"/>
         <source>Always use DefaultBox</source>
         <translation>Mindig a DefaultBox-ot használja</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="644"/>
+        <location filename="Forms/SettingsWindow.ui" line="497"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
         <translation>&quot;Futtatás homokozón kívül&quot; hozzáadása a helyi menühöz</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="760"/>
+        <location filename="Forms/SettingsWindow.ui" line="741"/>
         <source>Show a tray notification when automatic box operations are started</source>
         <translation>Tálcaértesítés megjelenítése, amikor az automatikus homokozó műveletek elindulnak</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1034"/>
+        <location filename="Forms/SettingsWindow.ui" line="1016"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
         <translation>* a részlegesen bejelölt jelölőnégyzet a viselkedést a nézetmódban határozza meg.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1957"/>
+        <location filename="Forms/SettingsWindow.ui" line="1945"/>
         <source>Advanced Config</source>
         <translation>Speciális konfiguráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2069"/>
+        <location filename="Forms/SettingsWindow.ui" line="2058"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>Kernel módú objektumszűrés engedélyezése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2033"/>
+        <location filename="Forms/SettingsWindow.ui" line="2022"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;fájlrendszer-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2204"/>
+        <location filename="Forms/SettingsWindow.ui" line="2194"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>Jelszó törlése, ha a főablak rejtve van</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2126"/>
+        <location filename="Forms/SettingsWindow.ui" line="2116"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2020"/>
+        <location filename="Forms/SettingsWindow.ui" line="2009"/>
         <source>Sandbox default</source>
         <translation>Alapértelmezett homokozó</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2245"/>
+        <location filename="Forms/SettingsWindow.ui" line="2236"/>
         <source>Config protection</source>
         <translation>Konfiguráció védelem</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2161"/>
+        <location filename="Forms/SettingsWindow.ui" line="2151"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="154"/>
+        <location filename="Forms/SettingsWindow.ui" line="155"/>
         <source>SandMan Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="258"/>
+        <location filename="Forms/SettingsWindow.ui" line="260"/>
         <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="290"/>
+        <location filename="Forms/SettingsWindow.ui" line="292"/>
         <source>Add Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="408"/>
+        <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>Show file migration progress when copying large files into a sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="298"/>
+        <location filename="Forms/SettingsWindow.ui" line="300"/>
         <source>Message ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="303"/>
+        <location filename="Forms/SettingsWindow.ui" line="305"/>
         <source>Message Text (optional)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="317"/>
+        <location filename="Forms/SettingsWindow.ui" line="320"/>
         <source>SBIE Messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="336"/>
+        <location filename="Forms/SettingsWindow.ui" line="339"/>
         <source>Delete Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="349"/>
+        <location filename="Forms/SettingsWindow.ui" line="353"/>
         <source>Notification Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="452"/>
+        <location filename="Forms/SettingsWindow.ui" line="456"/>
         <source>Windows Shell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="870"/>
+        <location filename="Forms/SettingsWindow.ui" line="851"/>
         <source>Move Up</source>
         <translation type="unfinished">Mozgatás felfelé</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="889"/>
+        <location filename="Forms/SettingsWindow.ui" line="870"/>
         <source>Move Down</source>
         <translation type="unfinished">Mozgatás lefelé</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="997"/>
+        <location filename="Forms/SettingsWindow.ui" line="979"/>
         <source>Show overlay icons for boxes and processes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1094"/>
+        <location filename="Forms/SettingsWindow.ui" line="1076"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="983"/>
-        <location filename="Forms/SettingsWindow.ui" line="1104"/>
+        <location filename="Forms/SettingsWindow.ui" line="965"/>
+        <location filename="Forms/SettingsWindow.ui" line="1086"/>
         <source>Interface Options</source>
         <oldsource>Display Options</oldsource>
         <translation type="unfinished">Interfész beállításai</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1139"/>
+        <location filename="Forms/SettingsWindow.ui" line="1121"/>
         <source>Ini Editor Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1228"/>
+        <location filename="Forms/SettingsWindow.ui" line="1211"/>
         <source>Graphic Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1171"/>
+        <location filename="Forms/SettingsWindow.ui" line="1153"/>
         <source>Select font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1181"/>
+        <location filename="Forms/SettingsWindow.ui" line="1163"/>
         <source>Reset font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1307"/>
+        <location filename="Forms/SettingsWindow.ui" line="1291"/>
         <source>Ini Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1271"/>
+        <location filename="Forms/SettingsWindow.ui" line="1254"/>
         <source>#</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1129"/>
+        <location filename="Forms/SettingsWindow.ui" line="1111"/>
         <source>External Ini Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1328"/>
+        <location filename="Forms/SettingsWindow.ui" line="1312"/>
         <source>Add-Ons Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1338"/>
+        <location filename="Forms/SettingsWindow.ui" line="1322"/>
         <source>Optional Add-Ons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1346"/>
+        <location filename="Forms/SettingsWindow.ui" line="1330"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1382"/>
+        <location filename="Forms/SettingsWindow.ui" line="1366"/>
         <source>Status</source>
         <translation type="unfinished">Állapot</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1387"/>
+        <location filename="Forms/SettingsWindow.ui" line="1371"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1392"/>
+        <location filename="Forms/SettingsWindow.ui" line="1376"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1400"/>
+        <location filename="Forms/SettingsWindow.ui" line="1384"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1410"/>
+        <location filename="Forms/SettingsWindow.ui" line="1394"/>
         <source>Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1420"/>
+        <location filename="Forms/SettingsWindow.ui" line="1404"/>
         <source>Add-On Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1428"/>
+        <location filename="Forms/SettingsWindow.ui" line="1412"/>
         <source>Enable Ram Disk creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1435"/>
+        <location filename="Forms/SettingsWindow.ui" line="1419"/>
         <source>kilobytes</source>
         <translation type="unfinished">KB</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1452"/>
+        <location filename="Forms/SettingsWindow.ui" line="1436"/>
         <source>Assign drive letter to Ram Disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1488"/>
+        <location filename="Forms/SettingsWindow.ui" line="1473"/>
         <source>Disk Image Support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1505"/>
+        <location filename="Forms/SettingsWindow.ui" line="1490"/>
         <source>RAM Limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1472"/>
+        <location filename="Forms/SettingsWindow.ui" line="1456"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="163"/>
+        <location filename="Forms/SettingsWindow.ui" line="164"/>
         <source>Hotkey for bringing sandman to the top:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="210"/>
+        <location filename="Forms/SettingsWindow.ui" line="212"/>
         <source>Hotkey for suspending process/folder forcing:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9168,213 +9178,198 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="234"/>
+        <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="512"/>
+        <location filename="Forms/SettingsWindow.ui" line="514"/>
         <source>Integrate with Host Desktop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="614"/>
-        <source>Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="651"/>
-        <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="658"/>
-        <source>Switch to sandboxed desktop with double click</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="668"/>
+        <location filename="Forms/SettingsWindow.ui" line="648"/>
         <source>System Tray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="767"/>
+        <location filename="Forms/SettingsWindow.ui" line="748"/>
         <source>On main window close:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="774"/>
+        <location filename="Forms/SettingsWindow.ui" line="755"/>
         <source>Open/Close from/to tray with a single click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="781"/>
+        <location filename="Forms/SettingsWindow.ui" line="762"/>
         <source>Minimize to tray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1314"/>
+        <location filename="Forms/SettingsWindow.ui" line="1298"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1528"/>
+        <location filename="Forms/SettingsWindow.ui" line="1513"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1531"/>
+        <location filename="Forms/SettingsWindow.ui" line="1516"/>
         <source>* takes effect on disk creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1555"/>
+        <location filename="Forms/SettingsWindow.ui" line="1540"/>
         <source>Sandboxie Support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1572"/>
+        <location filename="Forms/SettingsWindow.ui" line="1558"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1614"/>
+        <location filename="Forms/SettingsWindow.ui" line="1600"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1624"/>
+        <location filename="Forms/SettingsWindow.ui" line="1610"/>
         <source>Get</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1631"/>
+        <location filename="Forms/SettingsWindow.ui" line="1617"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1647"/>
+        <location filename="Forms/SettingsWindow.ui" line="1633"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1672"/>
+        <location filename="Forms/SettingsWindow.ui" line="1658"/>
         <source>SBIE_-_____-_____-_____-_____</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1718"/>
+        <location filename="Forms/SettingsWindow.ui" line="1705"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1778"/>
+        <location filename="Forms/SettingsWindow.ui" line="1766"/>
         <source>Update Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1853"/>
+        <location filename="Forms/SettingsWindow.ui" line="1841"/>
         <source>New full installers from the selected release channel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1856"/>
+        <location filename="Forms/SettingsWindow.ui" line="1844"/>
         <source>Full Upgrades</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1929"/>
+        <location filename="Forms/SettingsWindow.ui" line="1917"/>
         <source>Update Check Interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2001"/>
+        <location filename="Forms/SettingsWindow.ui" line="1989"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>Homokozó &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;Registry-gyökér&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2082"/>
+        <location filename="Forms/SettingsWindow.ui" line="2072"/>
         <source>Sandboxing features</source>
         <translation>Homokozó funkciók</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2175"/>
+        <location filename="Forms/SettingsWindow.ui" line="2165"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2185"/>
+        <location filename="Forms/SettingsWindow.ui" line="2175"/>
         <source>Sandboxie.ini Presets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2225"/>
+        <location filename="Forms/SettingsWindow.ui" line="2215"/>
         <source>Change Password</source>
         <translation>Jelszó módosítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2252"/>
+        <location filename="Forms/SettingsWindow.ui" line="2243"/>
         <source>Password must be entered in order to make changes</source>
         <translation>Jelszómódosításhoz meg kell adni a jelszót</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2232"/>
+        <location filename="Forms/SettingsWindow.ui" line="2222"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>Csak a rendszergazda felhasználói fiókok végezhetnek módosításokat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2218"/>
+        <location filename="Forms/SettingsWindow.ui" line="2208"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Sandboxie.ini fájl változásainak figyelése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2377"/>
+        <location filename="Forms/SettingsWindow.ui" line="2368"/>
         <source>USB Drive Sandboxing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2393"/>
+        <location filename="Forms/SettingsWindow.ui" line="2384"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2398"/>
+        <location filename="Forms/SettingsWindow.ui" line="2389"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2406"/>
+        <location filename="Forms/SettingsWindow.ui" line="2397"/>
         <source>Sandbox for USB drives:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2419"/>
+        <location filename="Forms/SettingsWindow.ui" line="2410"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2446"/>
+        <location filename="Forms/SettingsWindow.ui" line="2437"/>
         <source>App Templates</source>
         <translation type="unfinished">Program sablonok</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2456"/>
+        <location filename="Forms/SettingsWindow.ui" line="2447"/>
         <source>App Compatibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2211"/>
+        <location filename="Forms/SettingsWindow.ui" line="2201"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>Csak a rendszergazda felhasználói fiókok használhatják a &quot;Kényszerített programok szüneteltetése&quot; parancsot</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2119"/>
+        <location filename="Forms/SettingsWindow.ui" line="2109"/>
         <source>Portable root folder</source>
         <translation>Hordozható gyökés mappa</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="415"/>
+        <location filename="Forms/SettingsWindow.ui" line="419"/>
         <source>Show recoverable files as notifications</source>
         <translation>A helyreállítható fájlok megjelenítése értesítésként</translation>
     </message>
@@ -9384,17 +9379,17 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Általános beállítások</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="689"/>
+        <location filename="Forms/SettingsWindow.ui" line="669"/>
         <source>Show Icon in Systray:</source>
         <translation>Ikon megjelenítése a rendszertálcán:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2168"/>
+        <location filename="Forms/SettingsWindow.ui" line="2158"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Windows szűrő platform használata a hálózati elérés korlátozásához</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2102"/>
+        <location filename="Forms/SettingsWindow.ui" line="2092"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>Kapcsolja be a kiválasztott Win32k rendszerhívásokat a GPU-gyorsítás engedélyezéséhez (kísérleti)</translation>
     </message>
@@ -9405,78 +9400,78 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Számolja és jelenítse meg az egyes sandboxok által elfoglalt lemezterületet</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="744"/>
+        <location filename="Forms/SettingsWindow.ui" line="725"/>
         <source>Use Compact Box List</source>
         <translation>Kompakt homokozólista használata</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="943"/>
+        <location filename="Forms/SettingsWindow.ui" line="924"/>
         <source>Interface Config</source>
         <translation>Interfész konfigurációja</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="990"/>
+        <location filename="Forms/SettingsWindow.ui" line="972"/>
         <source>Make Box Icons match the Border Color</source>
         <translation>A homokozóikonok megegyeznek a szegély színével</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="961"/>
+        <location filename="Forms/SettingsWindow.ui" line="942"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
         <translation>Oldalfa használata a homokozó beállításaiban a beágyazott lapok helyett *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1014"/>
+        <location filename="Forms/SettingsWindow.ui" line="996"/>
         <source>Use large icons in box list *</source>
         <translation>Nagy ikonok használata a homokozólistában *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1112"/>
+        <location filename="Forms/SettingsWindow.ui" line="1094"/>
         <source>High DPI Scaling</source>
         <translation>Magas DPI-skálázás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1024"/>
+        <location filename="Forms/SettingsWindow.ui" line="1006"/>
         <source>Don&apos;t show icons in menus *</source>
         <translation>Ne jelenjenek meg ikonok * menükben</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1061"/>
+        <location filename="Forms/SettingsWindow.ui" line="1043"/>
         <source>Use Dark Theme</source>
         <translation>Sötét téma használata</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1261"/>
+        <location filename="Forms/SettingsWindow.ui" line="1244"/>
         <source>Font Scaling</source>
         <translation>Betűméretezés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1294"/>
+        <location filename="Forms/SettingsWindow.ui" line="1277"/>
         <source>(Restart required)</source>
         <translation>(újraindítás szükséges)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="241"/>
+        <location filename="Forms/SettingsWindow.ui" line="243"/>
         <source>Show the Recovery Window as Always on Top</source>
         <translation>A helyreállítási ablak megjelenítése mindig felül</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1071"/>
+        <location filename="Forms/SettingsWindow.ui" line="1053"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation>&quot;Pizza&quot; háttér megjelenítése a homokozólistában*</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1122"/>
+        <location filename="Forms/SettingsWindow.ui" line="1104"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1044"/>
+        <location filename="Forms/SettingsWindow.ui" line="1026"/>
         <source>Alternate row background in lists</source>
         <translation>Alternatív sorháttér a listákban</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1004"/>
+        <location filename="Forms/SettingsWindow.ui" line="986"/>
         <source>Use Fusion Theme</source>
         <translation>Fusion téma használata</translation>
     </message>
@@ -9485,180 +9480,180 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation type="vanished">Anonim token helyett Sandboxie bejelentkezés használata (kísérleti)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="813"/>
-        <location filename="Forms/SettingsWindow.ui" line="1377"/>
-        <location filename="Forms/SettingsWindow.ui" line="2309"/>
-        <location filename="Forms/SettingsWindow.ui" line="2484"/>
-        <location filename="Forms/SettingsWindow.ui" line="2621"/>
+        <location filename="Forms/SettingsWindow.ui" line="794"/>
+        <location filename="Forms/SettingsWindow.ui" line="1361"/>
+        <location filename="Forms/SettingsWindow.ui" line="2300"/>
+        <location filename="Forms/SettingsWindow.ui" line="2475"/>
+        <location filename="Forms/SettingsWindow.ui" line="2612"/>
         <source>Name</source>
         <translation>Név</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2314"/>
+        <location filename="Forms/SettingsWindow.ui" line="2305"/>
         <source>Path</source>
         <translation>Útvonal</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2336"/>
+        <location filename="Forms/SettingsWindow.ui" line="2327"/>
         <source>Remove Program</source>
         <translation>Program eltávolítása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2322"/>
+        <location filename="Forms/SettingsWindow.ui" line="2313"/>
         <source>Add Program</source>
         <translation>Program hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2357"/>
+        <location filename="Forms/SettingsWindow.ui" line="2348"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>Amikor a következő programok bármelyike elindul bármely homokozón kívül, a Sandboxie kiadja az SBIE1301 üzenetet.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2367"/>
+        <location filename="Forms/SettingsWindow.ui" line="2358"/>
         <source>Add Folder</source>
         <translation>Mappa hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2350"/>
+        <location filename="Forms/SettingsWindow.ui" line="2341"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>Akadályozza meg, hogy a felsorolt programok elinduljanak ezen a rendszeren</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2329"/>
+        <location filename="Forms/SettingsWindow.ui" line="2320"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>1308-as üzenet kiadása, ha a program nem indul el</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="181"/>
+        <location filename="Forms/SettingsWindow.ui" line="183"/>
         <source>Recovery Options</source>
         <translation>Helyreállítási opciók</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="545"/>
+        <location filename="Forms/SettingsWindow.ui" line="571"/>
         <source>Start Menu Integration</source>
         <translation>Start menü integrációja</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="637"/>
+        <location filename="Forms/SettingsWindow.ui" line="534"/>
         <source>Scan shell folders and offer links in run menu</source>
         <translation>Shellmappák vizsgálata és hivatkozások felajánlása a futtatás menüben</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="486"/>
+        <location filename="Forms/SettingsWindow.ui" line="477"/>
         <source>Integrate with Host Start Menu</source>
         <translation>Integrálása a gazdagép Start menüjével</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1051"/>
+        <location filename="Forms/SettingsWindow.ui" line="1033"/>
         <source>Use new config dialog layout *</source>
         <translation>Új konfigurációs párbeszédpanel-elrendezés használata *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1734"/>
+        <location filename="Forms/SettingsWindow.ui" line="1721"/>
         <source>Sandboxie Updater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1765"/>
+        <location filename="Forms/SettingsWindow.ui" line="1752"/>
         <source>Keep add-on list up to date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1819"/>
+        <location filename="Forms/SettingsWindow.ui" line="1807"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1823"/>
+        <location filename="Forms/SettingsWindow.ui" line="1811"/>
         <source>Search in the Insider channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1863"/>
+        <location filename="Forms/SettingsWindow.ui" line="1851"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1873"/>
+        <location filename="Forms/SettingsWindow.ui" line="1861"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1893"/>
+        <location filename="Forms/SettingsWindow.ui" line="1881"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2109"/>
+        <location filename="Forms/SettingsWindow.ui" line="2099"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2277"/>
+        <location filename="Forms/SettingsWindow.ui" line="2268"/>
         <source>Program Control</source>
         <translation type="unfinished">Programvezérlés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2287"/>
+        <location filename="Forms/SettingsWindow.ui" line="2278"/>
         <source>Program Alerts</source>
         <translation>Programfigyelmeztetések</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2343"/>
+        <location filename="Forms/SettingsWindow.ui" line="2334"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>1301-es üzenetet küld, ha a kényszerített folyamatok le vannak tiltva</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1967"/>
+        <location filename="Forms/SettingsWindow.ui" line="1955"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie konfiguráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="398"/>
+        <location filename="Forms/SettingsWindow.ui" line="402"/>
         <source>This option also enables asynchronous operation when needed and suspends updates.</source>
         <translation>Ez a beállítás szükség esetén lehetővé teszi az aszinkron működést, és felfüggeszti a frissítéseket.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="401"/>
+        <location filename="Forms/SettingsWindow.ui" line="405"/>
         <source>Suppress pop-up notifications when in game / presentation mode</source>
         <translation>Az előugró értesítések letiltása játék/prezentáció módban</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="953"/>
+        <location filename="Forms/SettingsWindow.ui" line="934"/>
         <source>User Interface</source>
         <translation>Felhasználói felület</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="791"/>
+        <location filename="Forms/SettingsWindow.ui" line="772"/>
         <source>Run Menu</source>
         <translation>Futtatás menü</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="838"/>
+        <location filename="Forms/SettingsWindow.ui" line="819"/>
         <source>Add program</source>
         <translation>Program hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="896"/>
+        <location filename="Forms/SettingsWindow.ui" line="877"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
         <translation>Egyéni bejegyzéseket konfigurálhat az összes homokozó futtatás menüjéhez.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="918"/>
-        <location filename="Forms/SettingsWindow.ui" line="1356"/>
-        <location filename="Forms/SettingsWindow.ui" line="2641"/>
+        <location filename="Forms/SettingsWindow.ui" line="899"/>
+        <location filename="Forms/SettingsWindow.ui" line="1340"/>
+        <location filename="Forms/SettingsWindow.ui" line="2632"/>
         <source>Remove</source>
         <translation>Eltávolítás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="818"/>
+        <location filename="Forms/SettingsWindow.ui" line="799"/>
         <source>Command Line</source>
         <translation>Parancssor</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1545"/>
+        <location filename="Forms/SettingsWindow.ui" line="1530"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>Támogatás és frissítések</translation>
     </message>
@@ -9667,7 +9662,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Homokozó konfiguráció</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2059"/>
+        <location filename="Forms/SettingsWindow.ui" line="2048"/>
         <source>Default sandbox:</source>
         <translation>Alapértelmezett homokozó:</translation>
     </message>
@@ -9676,72 +9671,72 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Kompatibilitás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2476"/>
+        <location filename="Forms/SettingsWindow.ui" line="2467"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>A jövőben ne ellenőrizze a szoftverek kompatibilitását</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2492"/>
+        <location filename="Forms/SettingsWindow.ui" line="2483"/>
         <source>Enable</source>
         <translation>Engedélyezés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2512"/>
+        <location filename="Forms/SettingsWindow.ui" line="2503"/>
         <source>Disable</source>
         <translation>Tiltás</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2519"/>
+        <location filename="Forms/SettingsWindow.ui" line="2510"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>A Sandboxie a következő szoftveralkalmazásokat észlelte a rendszerben. A konfigurációs beállítások alkalmazásához kattintson az OK gombra, ami javítja az ezen alkalmazásokkal való kompatibilitást. Ezek a konfigurációs beállítások érvényesek lesznek minden meglévő homokozóban és minden új homokozóban.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2532"/>
+        <location filename="Forms/SettingsWindow.ui" line="2523"/>
         <source>Local Templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2597"/>
+        <location filename="Forms/SettingsWindow.ui" line="2588"/>
         <source>Add Template</source>
         <translation type="unfinished">Sablon hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2568"/>
+        <location filename="Forms/SettingsWindow.ui" line="2559"/>
         <source>Text Filter</source>
         <translation type="unfinished">Szöveg szűrő</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2575"/>
+        <location filename="Forms/SettingsWindow.ui" line="2566"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2610"/>
+        <location filename="Forms/SettingsWindow.ui" line="2601"/>
         <source>Open Template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2668"/>
+        <location filename="Forms/SettingsWindow.ui" line="2659"/>
         <source>Edit ini Section</source>
         <translation>Ini konfiguráció szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2677"/>
+        <location filename="Forms/SettingsWindow.ui" line="2668"/>
         <source>Save</source>
         <translation>Mentés</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2684"/>
+        <location filename="Forms/SettingsWindow.ui" line="2675"/>
         <source>Edit ini</source>
         <translation>Ini szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2710"/>
+        <location filename="Forms/SettingsWindow.ui" line="2701"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1802"/>
+        <location filename="Forms/SettingsWindow.ui" line="1790"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
         <translation type="unfinished">Verziófrissítések</translation>
@@ -9751,7 +9746,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Új teljes verziók a kiválasztott kiadási csatornáról.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1799"/>
+        <location filename="Forms/SettingsWindow.ui" line="1787"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Gyorsjavítás a telepített verzióhoz, a templates.ini és a fordítások frissítései.</translation>
     </message>
@@ -9760,7 +9755,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Ez a tanúsítvány lejárt. Kérjük, &lt;a href=&quot;sbie://update/cert&quot;&gt;szerezzen egy frissített tanúsítványt&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1809"/>
+        <location filename="Forms/SettingsWindow.ui" line="1797"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Az előnézeti csatorna a legújabb GitHub-előzetes kiadásokat tartalmazza.</translation>
     </message>
@@ -9769,12 +9764,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Új verziók</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1900"/>
+        <location filename="Forms/SettingsWindow.ui" line="1888"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>A stabil csatorna tartalmazza a legújabb stabil GitHub-kiadásokat.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1903"/>
+        <location filename="Forms/SettingsWindow.ui" line="1891"/>
         <source>Search in the Stable channel</source>
         <translation>Keresés a stabil csatornán</translation>
     </message>
@@ -9783,7 +9778,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">A Sandboxie naprakészen tartása a Windows gördülő kiadásaival és a minden webböngészőkkel való kompatibilitás véget nem érő törekvés. Kérjük, fontolja meg adományozással a munka támogatását.&lt;br /&gt;A fejlesztést támogathatja &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, hitelkártyával is működik.&lt;br /&gt;Vagy folyamatos támogatást is nyújthat &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1812"/>
+        <location filename="Forms/SettingsWindow.ui" line="1800"/>
         <source>Search in the Preview channel</source>
         <translation>Keresés az előnézeti csatornában</translation>
     </message>
@@ -9792,12 +9787,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">A Sandboxie-Plus projekt támogatói &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;támogatói tanúsítványt&lt;/a&gt; kaphatnak. Ez olyan, mint egy licenckulcs, de a nyílt forráskódú szoftvereket használó fantasztikus emberek számára. :-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1692"/>
+        <location filename="Forms/SettingsWindow.ui" line="1678"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>A jövőben ne értesítsen a tanúsítvány lejártáról</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1588"/>
+        <location filename="Forms/SettingsWindow.ui" line="1574"/>
         <source>Enter the support certificate here</source>
         <translation>Itt adja meg a támogatói tanúsítványt</translation>
     </message>

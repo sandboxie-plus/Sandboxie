@@ -5693,7 +5693,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
-        <translation>Wenn diese Option gesetzt ist, ist es dem Sandboxverwalter mit normalen Nutzerrechten unmöglich die Konfiguration zu ändern, was dazu führen kann, dass Sie sich selbst sperren. Sie müssen das Hauptfenster des Sandboxverwalters öffnen und im Menü &quot;Sandbox (s)&quot; &quot;Als Admin neu starten&quot; auswählen, um die Kontrolle über die Konfiguration zu erhalten.</translation>
+        <translation>Wenn diese Option gesetzt ist, ist es dem Sandboxmanager mit normalen Nutzerrechten unmöglich die Konfiguration zu ändern, was dazu führen kann, dass Sie sich selbst sperren. Sie müssen das Hauptfenster des Sandboxverwalters öffnen und im Menü &quot;Sandbox (s)&quot; &quot;Als Admin neu starten&quot; auswählen, um die Kontrolle über die Konfiguration zu erhalten.</translation>
     </message>
 </context>
 <context>

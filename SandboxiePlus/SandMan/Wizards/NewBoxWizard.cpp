@@ -115,8 +115,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         bool removeDefaultRecovers = templateSettings.contains(QRegularExpression(QStringLiteral("[\r\n]#RemoveDefaultRecovers=y[\r\n]")));
         bool removeDefaultTemplates = templateSettings.contains(QRegularExpression(QStringLiteral("[\r\n]#RemoveDefaultTemplates=y[\r\n]")));
 
-        // Create base template
         int sharedTemplateMode = field("sharedTemplate").toInt();
+
+        // Create base template
         if (templateSettings.isEmpty() && sharedTemplateMode != 0) {
             const QString templateBase = QStringLiteral("Tmpl.Title=%1\nTmpl.Class=Local\n%3=n\n%4=n\n%5=n\n%6=n\nTmpl.Comment=%2")
                 .arg(templateTitle, templateComment, "#DisableWizardSettings", "#RemoveDefaultAll", "#RemoveDefaultRecovers", "#RemoveDefaultTemplates");

@@ -7727,7 +7727,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
         <source>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</source>
-        <translation>这可用于防止恶意程序入侵主机（将预先设计好的恶意程序启动到解锁的加密沙盒中）。</translation>
+        <translation>这可用于防止宿主机的恶意程序突破沙盒隔离（将预先设计好的恶意程序启动到解锁的加密沙盒中）。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>

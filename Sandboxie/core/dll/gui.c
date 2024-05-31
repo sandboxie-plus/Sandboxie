@@ -1950,11 +1950,11 @@ _FX BOOL Gui_MoveWindow(
 
         typedef BOOL (*P_SystemParametersInfoA)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni);
         static P_SystemParametersInfoA SystemParametersInfoA = NULL;
-        if (!SystemParametersInfoA) SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA");
+        if (!SystemParametersInfoA) SystemParametersInfoA = Ldr_GetProcAddrNew(L"user32.dll", L"SystemParametersInfoA", "SystemParametersInfoA");
 
         typedef int (*P_GetSystemMetrics)(int nIndex);
         static P_GetSystemMetrics GetSystemMetrics = NULL;
-        if (!GetSystemMetrics) GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics");
+        if (!GetSystemMetrics) GetSystemMetrics = Ldr_GetProcAddrNew(L"user32.dll", L"GetSystemMetrics", "GetSystemMetrics");
 
         if (SystemParametersInfoA && GetSystemMetrics) {
 
@@ -2005,11 +2005,11 @@ _FX BOOL Gui_SetWindowPos(
 
         typedef BOOL (*P_SystemParametersInfoA)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni);
         static P_SystemParametersInfoA SystemParametersInfoA = NULL;
-        if (!SystemParametersInfoA) SystemParametersInfoA = Ldr_GetProcAddrNew("user32.dll", "SystemParametersInfoA", "SystemParametersInfoA");
+        if (!SystemParametersInfoA) SystemParametersInfoA = Ldr_GetProcAddrNew(L"user32.dll", L"SystemParametersInfoA", "SystemParametersInfoA");
 
         typedef int (*P_GetSystemMetrics)(int nIndex);
         static P_GetSystemMetrics GetSystemMetrics = NULL;
-        if (!GetSystemMetrics) GetSystemMetrics = Ldr_GetProcAddrNew("user32.dll", "GetSystemMetrics", "GetSystemMetrics");
+        if (!GetSystemMetrics) GetSystemMetrics = Ldr_GetProcAddrNew(L"user32.dll", L"GetSystemMetrics", "GetSystemMetrics");
 
         if (SystemParametersInfoA && GetSystemMetrics) {
 

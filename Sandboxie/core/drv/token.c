@@ -2194,7 +2194,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
     SECURITY_QUALITY_OF_SERVICE SecurityQos;
 
     //
-    // Gether informations from the original token
+    // Gather information from the original token
     //
 
     if (   !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenStatistics, &LocalStatistics))

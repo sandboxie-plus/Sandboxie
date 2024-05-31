@@ -6196,17 +6196,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with administrator token can change ini setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>관리자 토큰이 있는 응용 프로그램만 설정을 변경할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>경고</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션을 설정하면 일반 사용자 권한이 있는 샌드박스 관리자는 구성을 수정할 수 없어 잠금이 발생할 수 있습니다. 샌드박스 관리자 기본 창을 열고 시스템 메뉴에서 &quot;샌드박스&quot;를 클릭한 다음 팝업 상황에 맞는 메뉴에서 &quot;관리자로 다시 시작&quot;을 클릭하여 구성을 제어해야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -8531,12 +8531,12 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
         <source>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>이를 사용하여 미리 설계된 악성 프로그램을 잠금 해제된 암호화된 샌드박스로 시작하여 호스트 악성 프로그램이 침입하는 것을 방지할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
         <source>A pop-up warning before launching a process into the sandbox from an external source.</source>
-        <translation type="unfinished"></translation>
+        <translation>외부 소스에서 샌드박스로 프로세스를 시작하기 전 팝업 경고입니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2474"/>
@@ -9510,7 +9510,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">모든 프로세스를 일시 중지하는 단축키</translation>
+        <translation>모든 프로세스를 일시 중단하기 위한 단축키:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="514"/>

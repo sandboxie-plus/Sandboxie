@@ -5683,17 +5683,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with administrator token can change ini setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur Applikationen mit Administratortoken können INI-Einstellungen ändern.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn diese Option gesetzt ist, ist es dem Sandboxmanager mit normalen Nutzerrechten unmöglich die Konfiguration zu ändern, was dazu führen kann, dass Sie sich selbst sperren. Sie müssen das Hauptfenster von SandMan öffnen und im Menü &quot;Sandbox (s)&quot; &quot;Als Admin neu starten&quot; auswählen, um die Kontrolle über die Konfiguration zu erhalten.</translation>
     </message>
 </context>
 <context>
@@ -7646,12 +7646,12 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
         <source>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies kann dazu verwendet werden ein bösartiges Programm daran zu hindern auszubrechen, in dem es ein vorgefertigtes bösartiges Programm in einer entsperrten verschlüsselten Sandbox ausführt.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
         <source>A pop-up warning before launching a process into the sandbox from an external source.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Popup-Warnung vor der Ausführung eines Prozesses, in der Sandbox, von einer externen Quelle.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2474"/>

@@ -78,6 +78,12 @@ static NTSTATUS Ipc_Api_QuerySymbolicLink(PROCESS *proc, ULONG64 *parms);
 
 //---------------------------------------------------------------------------
 
+
+NTSTATUS Thread_GetKernelHandleForUserHandle(
+    HANDLE *OutKernelHandle, HANDLE InUserHandle);
+
+//---------------------------------------------------------------------------
+
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, Ipc_Init)
 #pragma alloc_text (INIT, Ipc_Init_Type)
@@ -1421,10 +1427,65 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status)) {
 
-        status = NtDuplicateObject(
-            SourceProcessHandle, SourceHandle,
-            TargetProcessHandle, TargetHandle,
-            DesiredAccess, HandleAttributes, Options);
+        PROCESS* proc1 = NULL;
+        if (!IS_ARG_CURRENT_PROCESS(SourceProcessHandle))
+            proc1 = Process_Find_ByHandle(SourceProcessHandle, NULL);
+        else
+            proc1 = proc;
+            
+        PROCESS* proc2 = NULL;
+        if (!IS_ARG_CURRENT_PROCESS(TargetProcessHandle))
+            proc2 = Process_Find_ByHandle(TargetProcessHandle, NULL);
+        else
+            proc2 = proc;
+            
+        if (proc1 != proc2 && (proc1 == NULL || proc2 == NULL || !Process_IsSameBox(proc1, proc2, 0))) {
+
+            status = NtDuplicateObject(
+                SourceProcessHandle, SourceHandle,
+                TargetProcessHandle, TargetHandle,
+                DesiredAccess, HandleAttributes, Options);
+
+        } else {
+
+            HANDLE SourceProcessKernelHandle;
+            if (!IS_ARG_CURRENT_PROCESS(SourceProcessHandle))
+                status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
+            else
+                SourceProcessKernelHandle = ZwCurrentProcess();
+            if (NT_SUCCESS(status)) {
+                HANDLE TargetProcessKernelHandle;
+                if (!IS_ARG_CURRENT_PROCESS(TargetProcessHandle))
+                    status = Thread_GetKernelHandleForUserHandle(&TargetProcessKernelHandle, TargetProcessHandle);
+                else
+                    TargetProcessKernelHandle = ZwCurrentProcess();
+                if (NT_SUCCESS(status)) {
+
+                    HANDLE SourceKernelHandle;
+                    status = Thread_GetKernelHandleForUserHandle(&SourceKernelHandle, SourceHandle);
+                    if (NT_SUCCESS(status)) {
+
+                        status = ZwDuplicateObject(
+                            SourceProcessKernelHandle, SourceKernelHandle,
+                            TargetProcessKernelHandle, &DuplicatedHandle,
+                            DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
+
+                        if (Options & DUPLICATE_CLOSE_SOURCE)
+                            NtClose(SourceHandle);
+
+                        *TargetHandle = DuplicatedHandle;
+
+                        ZwClose(SourceKernelHandle);
+                    }
+
+                    if (!IS_ARG_CURRENT_PROCESS(TargetProcessKernelHandle))
+                        ZwClose(TargetProcessKernelHandle);
+                }
+
+                if (!IS_ARG_CURRENT_PROCESS(SourceProcessKernelHandle))
+                    ZwClose(SourceProcessKernelHandle);
+            }
+        }
     }
 
     //

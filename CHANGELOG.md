@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add UI option to start unsandboxed process but force child processes in SelectBoxWindow.
 - Add option "AlertBeforeStart".When it is set,a prompt pops up before launching a new program into the sandbox using "Start.exe" and checks if the program that started "Start.exe" is a Sandboxie component itself,if it is not, a warning pops up.
 - Add option for EditAdminOnly in SetupWizard.
-- Add option "HideInteractionProcess" to hide the interactive user's processes from the sandboxed process list.
+- Add option "HideNonSystemProcess" to hide processes other than some system services from processes lists for sandboxed processes.
 - Add option "HideSbieProcess" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
 - When "HideFirmWareInfo" is set,the programs which try getting fireware info will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirewareValue
 

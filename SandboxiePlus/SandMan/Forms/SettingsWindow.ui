@@ -48,7 +48,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>5</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -146,6 +146,7 @@
               <widget class="QLabel" name="lblGeneral">
                <property name="font">
                 <font>
+                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>
@@ -173,6 +174,7 @@
               <widget class="QLabel" name="lblRecovery">
                <property name="font">
                 <font>
+                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>
@@ -309,6 +311,7 @@
                 <widget class="QLabel" name="lblMessages">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -341,6 +344,7 @@
                 <widget class="QLabel" name="lblNotify">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -454,31 +458,18 @@
             <layout class="QGridLayout" name="gridLayout_30">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_13">
-               <item row="14" column="1">
-                <spacer name="verticalSpacer_6">
+               <item row="11" column="3" colspan="2">
+                <spacer name="horizontalSpacer_2">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>20</width>
+                   <width>40</width>
                    <height>0</height>
                   </size>
                  </property>
                 </spacer>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="lblStartUp">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Start Sandbox Manager</string>
-                 </property>
-                </widget>
                </item>
                <item row="9" column="0" colspan="2">
                 <widget class="QLabel" name="label_22">
@@ -493,18 +484,29 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QLabel" name="label_37">
-                 <property name="maximumSize">
-                  <size>
-                   <width>20</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
+               <item row="4" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkShellMenu">
                  <property name="text">
-                  <string/>
+                  <string>Add 'Run Sandboxed' to the explorer context menu</string>
                  </property>
                 </widget>
+               </item>
+               <item row="6" column="2" colspan="3">
+                <widget class="QCheckBox" name="chkShellMenu2">
+                 <property name="text">
+                  <string>Add 'Run Un-Sandboxed' to the context menu</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="2" colspan="3">
+                <widget class="QCheckBox" name="chkAlwaysDefault">
+                 <property name="text">
+                  <string>Always use DefaultBox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="2">
+                <widget class="QComboBox" name="cmbIntegrateDesk"/>
                </item>
                <item row="10" column="0" colspan="2">
                 <widget class="QLabel" name="label_29">
@@ -526,51 +528,15 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="2" colspan="3">
-                <widget class="QCheckBox" name="chkAlwaysDefault">
+               <item row="8" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkScanMenu">
                  <property name="text">
-                  <string>Always use DefaultBox</string>
+                  <string>Scan shell folders and offer links in run menu</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="0">
-                <widget class="QLabel" name="lblStartMenu">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Start Menu Integration</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="lblRunBoxed">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Run Sandboxed - Actions</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="14" column="3" colspan="2">
-                <spacer name="horizontalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                </spacer>
+               <item row="9" column="2">
+                <widget class="QComboBox" name="cmbIntegrateMenu"/>
                </item>
                <item row="1" column="1" colspan="3">
                 <widget class="QCheckBox" name="chkAutoStart">
@@ -592,26 +558,17 @@
                  </property>
                 </spacer>
                </item>
-               <item row="9" column="2">
-                <widget class="QComboBox" name="cmbIntegrateMenu"/>
-               </item>
-               <item row="4" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkShellMenu">
-                 <property name="text">
-                  <string>Add 'Run Sandboxed' to the explorer context menu</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="11" column="0">
-                <widget class="QLabel" name="lblDesktop">
+               <item row="7" column="0">
+                <widget class="QLabel" name="lblStartMenu">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Sandboxed Desktop</string>
+                  <string>Start Menu Integration</string>
                  </property>
                 </widget>
                </item>
@@ -628,34 +585,57 @@
                  </property>
                 </spacer>
                </item>
-               <item row="10" column="2">
-                <widget class="QComboBox" name="cmbIntegrateDesk"/>
+               <item row="11" column="1">
+                <spacer name="verticalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
-               <item row="8" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkScanMenu">
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_37">
+                 <property name="maximumSize">
+                  <size>
+                   <width>20</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>Scan shell folders and offer links in run menu</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="2" colspan="3">
-                <widget class="QCheckBox" name="chkShellMenu2">
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblStartUp">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
                  <property name="text">
-                  <string>Add 'Run Un-Sandboxed' to the context menu</string>
+                  <string>Start Sandbox Manager</string>
                  </property>
                 </widget>
                </item>
-               <item row="12" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkDeskAutoSwitch">
-                 <property name="text">
-                  <string>Switch to sandboxed desktop when starting a process</string>
+               <item row="3" column="0">
+                <widget class="QLabel" name="lblRunBoxed">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
                  </property>
-                </widget>
-               </item>
-               <item row="13" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkDeskQuickSwitch">
                  <property name="text">
-                  <string>Switch to sandboxed desktop with double click</string>
+                  <string>Run Sandboxed - Actions</string>
                  </property>
                 </widget>
                </item>
@@ -703,6 +683,7 @@
                 <widget class="QLabel" name="lblSysTray">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -975,6 +956,7 @@
                  </property>
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1220,6 +1202,7 @@
                 <widget class="QLabel" name="lblDisplay">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1299,6 +1282,7 @@
                 <widget class="QLabel" name="lblIni">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1480,6 +1464,7 @@
                 <widget class="QLabel" name="lblDiskImage">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1564,6 +1549,7 @@
                 <widget class="QLabel" name="lblCertExp">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1710,6 +1696,7 @@
                 <widget class="QLabel" name="lblCertGuide">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1770,6 +1757,7 @@
                 <widget class="QLabel" name="lblUpdates">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2012,6 +2000,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QLabel" name="lblBoxRoot">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2074,6 +2063,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QLabel" name="lblBoxFeatures">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2237,6 +2227,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
               <widget class="QLabel" name="lblProtection">
                <property name="font">
                 <font>
+                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>

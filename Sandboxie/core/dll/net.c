@@ -1414,9 +1414,9 @@ _FX BOOLEAN WSA_Init(HMODULE module)
 
         //
         // Note: for our proxy implementation we need to have the sockets in blocking mode
-        // unfortinately windows does not provide a way to query the blockign flag
+        // unfortunately windows does not provide a way to query the blocking flag
         // not even when asking the driver directly :(
-        // Hence we need to monitor the below calls and maintain and cache the blockign state
+        // Hence we need to monitor the below calls and maintain and cache the blocking state
         //
 
 	    //int InputBuffer[] = { 2,0,0,0 };

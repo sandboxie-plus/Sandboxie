@@ -246,7 +246,47 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 // SysInfo_DiscardProcesses
 //---------------------------------------------------------------------------
 BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE* pToken);
+_FX BOOL Sysinfo_IsTokenAnySid(HANDLE hToken,WCHAR* compare)
+{
+	NTSTATUS status;
+	BOOLEAN return_value = FALSE;
 
+	ULONG64 user_space[88];
+	PTOKEN_USER user = (PTOKEN_USER)user_space;
+	ULONG len;
+
+	len = sizeof(user_space);
+	status = NtQueryInformationToken(
+		hToken, TokenUser, user, len, &len);
+
+	if (status == STATUS_BUFFER_TOO_SMALL) {
+
+		user = Dll_AllocTemp(len);
+		status = NtQueryInformationToken(
+			hToken, TokenUser, user, len, &len);
+	}
+
+	if (NT_SUCCESS(status)) {
+
+		UNICODE_STRING SidString;
+
+		status = RtlConvertSidToUnicodeString(
+			&SidString, user->User.Sid, TRUE);
+
+		if (NT_SUCCESS(status)) {
+
+			if (_wcsicmp(SidString.Buffer, /*L"S-1-5-18" */compare ) == 0)
+				return_value = TRUE;
+
+			RtlFreeUnicodeString(&SidString);
+		}
+	}
+
+	if (user != (PTOKEN_USER)user_space)
+		Dll_Free(user);
+
+	return return_value;
+}
 _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 {
     SYSTEM_PROCESS_INFORMATION *curr = buf;
@@ -294,38 +334,23 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         next = (SYSTEM_PROCESS_INFORMATION *) (((UCHAR *)curr) + curr->NextEntryOffset);
         if (next == curr)
             break;
-
 		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
 		DWORD currentSession = tempSession;
 		HANDLE token1;
 		Terminal_WTSQueryUserToken(currentSession, &token1);
-		SID_AND_ATTRIBUTES attrs;
-		ULONG uRtn = 0;
-		ZeroMemory(&attrs, sizeof(attrs));
-		NtQueryInformationToken(token1, TokenUser, &attrs, sizeof(attrs), &uRtn);
 		BOOL hideProcess = FALSE;
-		UNICODE_STRING uni;
-		WCHAR* buf = L"";
-		uni.Length = 0;
-		uni.MaximumLength = 512;
-		uni.Buffer = buf;
-		if(NT_SUCCESS(RtlConvertSidToUnicodeString(&uni,attrs.Sid,FALSE))){
-			if (_wcsicmp(buf,tempSid)==0) {
-				if (SbieApi_QueryConfBool(NULL, L"HideInteractionProcess", FALSE)) {
+		if(!Sysinfo_IsTokenAnySid(token1, L"S-1-5-18")&& !Sysinfo_IsTokenAnySid(token1, L"S-1-5-80")&& !Sysinfo_IsTokenAnySid(token1, L"S-1-5-20")&& !Sysinfo_IsTokenAnySid(token1, L"S-1-5-6")&& SbieApi_QueryConfBool(NULL, L"HideNonSystemProcess", FALSE)) {
 					hideProcess = TRUE;
-				}
-			}
-			RtlFreeUnicodeString(&uni);
 		}
 		else
 		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
 			hideProcess = TRUE;
 		}
-		else if(hiddenProcesses && next->ImageName.Buffer) {
+		else if(next->ImageName.Buffer) {
             WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
 			if (imagename)  imagename += 1; // skip L'\\'
 			else			imagename = next->ImageName.Buffer;
-			if (!*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
+			if (hiddenProcesses && !*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
 				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
 					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {
 						hideProcess = TRUE;

@@ -99,6 +99,9 @@ BOOLEAN Syscall_Set3(const UCHAR *name, P_Syscall_Handler3_Support_Procmon_Stack
 
 NTSTATUS Syscall_Invoke(SYSCALL_ENTRY *entry, ULONG_PTR *stack);
 
+#ifdef _WIN64
+ULONG_PTR Syscall_GetKernelBase(void);
+#endif
 
 //---------------------------------------------------------------------------
 

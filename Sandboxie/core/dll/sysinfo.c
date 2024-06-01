@@ -335,11 +335,8 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         if (next == curr)
             break;
 		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
-		DWORD currentSession = tempSession;
-		HANDLE token1;
-		Terminal_WTSQueryUserToken(currentSession, &token1);
 		BOOL hideProcess = FALSE;
-		if(!Sysinfo_IsTokenAnySid(token1, L"S-1-5-18")&& !Sysinfo_IsTokenAnySid(token1, L"S-1-5-80")&& !Sysinfo_IsTokenAnySid(token1, L"S-1-5-20")&& !Sysinfo_IsTokenAnySid(token1, L"S-1-5-6")&& SbieApi_QueryConfBool(NULL, L"HideNonSystemProcess", FALSE)) {
+		if(_wcsicmp(tempSid, L"S-1-5-18") != 0 && _wcsicmp(tempSid, L"S-1-5-80") != 0 && _wcsicmp(tempSid, L"S-1-5-20") != 0 && !_wcsicmp(tempSid, L"S-1-5-6") == 0 && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcess", FALSE)) {
 					hideProcess = TRUE;
 		}
 		else
@@ -357,10 +354,12 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 						break;
 					}
 				}
-			}else
-			if (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0) {
-				if (SbieApi_QueryConfBool(NULL, L"HideSbieProcess", FALSE))
-					hideProcess = TRUE;
+			}
+			if (!hideProcess) {
+				if (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0) {
+					if (SbieApi_QueryConfBool(NULL, L"HideSbieProcess", FALSE))
+						hideProcess = TRUE;
+				}
 			}
 		}
 

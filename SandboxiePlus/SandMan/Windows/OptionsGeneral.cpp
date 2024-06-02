@@ -281,6 +281,10 @@ void COptionsWindow::LoadGeneral()
 	ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
 	ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
 
+	ui.lineSingleMemory->setText(m_pBox->GetText("ProcessMemoryLimit", ""));
+	ui.lineTotalMemory->setText(m_pBox->GetText("TotalMemoryLimit", ""));
+	ui.lineTotalNumber->setText(m_pBox->GetText("TotalNumberLimit", ""));
+
 	//ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 	ui.chkOpenProtectedStorage->setChecked(m_BoxTemplates.contains("OpenProtectedStorage"));
 	ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
@@ -419,6 +423,13 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkBlockSpooler, "ClosePrintSpooler", "y", "");
 	WriteAdvancedCheck(ui.chkOpenSpooler, "OpenPrintSpooler", "y", "");
 	WriteAdvancedCheck(ui.chkPrintToFile, "AllowSpoolerPrintToFile", "y", "");
+
+	if (!ui.lineSingleMemory->text().isEmpty())
+		WriteText("ProcessMemoryLimit", ui.lineSingleMemory->text());
+	if (!ui.lineTotalMemory->text().isEmpty())
+		WriteText("TotalMemoryLimit", ui.lineTotalMemory->text());
+	if (!ui.lineTotalNumber->text().isEmpty())
+		WriteText("ProcessNumberLimit", ui.lineTotalNumber->text());
 
 	//WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
 	SetTemplate("OpenProtectedStorage", ui.chkOpenProtectedStorage->isChecked());
@@ -797,7 +808,11 @@ void COptionsWindow::OnGeneralChanged()
 
 	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
-	
+
+	ui.lineSingleMemory->setEnabled(ui.chkAddToJob->isChecked());
+	ui.lineTotalMemory->setEnabled(ui.chkAddToJob->isChecked());
+	ui.lineTotalNumber->setEnabled(ui.chkAddToJob->isChecked());
+
 	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
 

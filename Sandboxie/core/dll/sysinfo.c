@@ -206,7 +206,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 
         SysInfo_DiscardProcesses(Buffer);
     }
-	if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, "HideFirmWareInfo", FALSE)) {
+	if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
 		HKEY hKey=NULL;
 		PVOID lpData=NULL;
 		DWORD dwLen = 0;
@@ -231,7 +231,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 		RQVEW RegQueryValueExW = Ldr_GetProcAddrOld(L"Advapi32.dll", L"RegQueryValueExW");
 		DWORD type;
 		if (RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\SandboxieHide\\", 0, KEY_READ, &hKey))
-			RegQueryValueExW(hKey, "FalseFirewareValue", 0, &type, lpData, &dwLen);
+			RegQueryValueExW(hKey, L"FalseFirmwareValue", 0, &type, lpData, &dwLen);
 		if (dwLen != 0) {
 			Buffer = lpData;
 			*ReturnLength = dwLen;
@@ -336,7 +336,7 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
             break;
 		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
 		BOOL hideProcess = FALSE;
-		if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0 /* && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0 */ && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcess", FALSE)) {
+		if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0 /* && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0 */ && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE)) {
 					hideProcess = TRUE;
 		}
 		else
@@ -357,7 +357,7 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 			}
 			if (!hideProcess) {
 				if (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0) {
-					if (SbieApi_QueryConfBool(NULL, L"HideSbieProcess", FALSE))
+					if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE))
 						hideProcess = TRUE;
 				}
 			}

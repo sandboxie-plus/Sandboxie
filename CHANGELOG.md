@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add option "AlertBeforeStart".When it is set,a prompt pops up before launching a new program into the sandbox using "Start.exe" and checks if the program that started "Start.exe" is a Sandboxie component itself,if it is not, a warning pops up.
 - Add option for EditAdminOnly in SetupWizard.
 - Add option "HideNonSystemProcesses" to hide processes other than some system services from processes lists for sandboxed processes.
-- Add option "HideSbieProcess" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
+- Add option "HideSbieProcesses" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
 - When "HideFirmWareInfo" is set,the programs which try getting fireware info will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirewareValue
 - Add template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI.
 

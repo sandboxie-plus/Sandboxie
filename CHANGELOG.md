@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - split the advanced new box wizard page in two
 - reorganized box options a bit
+- Extend "Temp Template" to make it could delete local template section.
 
 ### Fixed
 - fixed issue with proxy authentication setting

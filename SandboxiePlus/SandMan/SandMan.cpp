@@ -2308,15 +2308,21 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 	}
 
 	QString tempValPrefix = "Temp_";
+	QString tempValLocalPrefix = "Local_Temp_";
 	QStringList to_delete;
 	QStringList list = pBox->GetTextList("Template", FALSE);
 	foreach(const QString& Value, list) {
 		if (tempValPrefix.compare(Value.left(5)) == 0)
 			to_delete.append(Value);
+		else if (tempValLocalPrefix.compare(Value.left(11)) == 0)
+			to_delete.append(Value);
 	}
 	if (!to_delete.isEmpty()) {
-		foreach(const QString & Value, to_delete)
+		foreach(const QString& Value, to_delete) {
+			if (tempValLocalPrefix.compare(Value.left(11)) == 0)
+				theAPI->SbieIniSet("Template_" + tempValLocalPrefix, "*", "", CSbieAPI::eIniUpdate);
 			list.removeAt(list.indexOf(Value));
+		}
 		pBox->UpdateTextList("Template", list, FALSE);
 	}
 

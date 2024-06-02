@@ -269,7 +269,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止沙盒化窗口被捕获图像。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="850"/>
@@ -6102,7 +6102,7 @@ Error: %1</source>
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with admin rights can change configuration</source>
         <oldsource>Only applications with administrator token can change ini setting.</oldsource>
-        <translation type="unfinished">仅带有管理员令牌的程序可以修改ini设置</translation>
+        <translation>仅带有管理员令牌的程序可以修改设置</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
@@ -6112,7 +6112,7 @@ Error: %1</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>启用此选项后，没有管理员权限的用户界面将无法更改 Sandboxie.ini 配置。请注意，以普通用户权限使用 Sandboxie 管理器可能会导致锁定。要更改配置，必须以管理员身份重启沙盒管理器，方法是点击主窗口 “沙盒 ”菜单中的 “以管理员身份重启”。</translation>
     </message>
     <message>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>

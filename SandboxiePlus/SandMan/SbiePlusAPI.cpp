@@ -813,6 +813,21 @@ CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 	if (m_iUnsecureDebugging != 0)
 		return eInsecure;
 
+	BOOL isMAX = GetBool("HideNonSystemProcess") &&
+		GetBool("HideOtherBoxes") &&
+		GetBool("ClosePrintSpooler") &&
+		!GetBool("OpenClipboard") &&
+		GetBool("BlockInterferePower") &&
+		GetBool("BlockInterferenceControl") &&
+		GetBool("BlockScreenCapture") &&
+		GetBool("UseSandboxDesktop") &&
+		GetBool("ConfidentialBox") &&
+		GetBool("CoverBoxedWindows") &&
+		GetBool("AlertBeforeStart") &&
+		GetBool("ForceProtectionOnMount") &&
+		GetBool("ProtectHostImages");
+	if (isMAX && m_bSecurityEnhanced && m_bPrivacyEnhanced)
+		return eIsoationMax;
 	if (m_bSecurityEnhanced && m_bPrivacyEnhanced)
 		return eHardenedPlus;
 	if (m_bSecurityEnhanced)

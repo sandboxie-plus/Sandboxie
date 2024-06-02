@@ -206,7 +206,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 
         SysInfo_DiscardProcesses(Buffer);
     }
-	if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, "HideFirmWareInfo", FALSE)) {
+	if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
 		HKEY hKey=NULL;
 		PVOID lpData=NULL;
 		DWORD dwLen = 0;

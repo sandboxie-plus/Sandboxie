@@ -357,7 +357,7 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 			}
 			if (!hideProcess) {
 				if (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0) {
-					if (SbieApi_QueryConfBool(NULL, L"HideSbieProcess", FALSE))
+					if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE))
 						hideProcess = TRUE;
 				}
 			}

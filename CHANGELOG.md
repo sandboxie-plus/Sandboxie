@@ -18,6 +18,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add option "HideSbieProcesses" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
 - When "HideFirmwareInfo" is set,the programs which try getting fireware info will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
 - Add template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI.
+- Add template "BlockLocalConnect" to prevent sandboxed processes from sending network packs to loaclhost to breakout sandbox.
+- Add new box type "Maximize Isolation Sandbox".
 
 ### Changed
 - split the advanced new box wizard page in two

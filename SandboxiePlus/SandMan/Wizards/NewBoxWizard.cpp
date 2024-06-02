@@ -182,6 +182,25 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         if (!disableWizardSettings || sharedTemplateMode == 0) {
 		    switch (BoxType)
 		    {
+				case CSandBoxPlus::eIsoationMax:
+					pBox->SetBool("HideNonSystemProcess", true);
+					pBox->InsertText("Template", "BlockAccessWMI");
+					pBox->InsertText("Template", "BlockDNS");
+					pBox->SetBool("HideOtherBoxes", true);
+					pBox->SetBool("ClosePrintSpooler", true);
+					pBox->SetBool("OpenClipboard", false);
+					pBox->SetBool("BlockInterferePower", true);
+					pBox->SetBool("BlockInterferenceControl", true);
+					pBox->SetBool("BlockScreenCapture", true);
+					pBox->InsertText("Template","BlockLocalConnect");
+					pBox->SetBool("UseSandboxDesktop", true);
+					pBox->SetBool("ConfidentialBox", true);
+					pBox->SetBool("CoverBoxedWindows", true);
+					pBox->SetBool("AlertBeforeStart", true);
+					pBox->SetBool("ForceProtectionOnMount", true);
+					pBox->SetNum64("ProcessMemoryLimit", 80000000);
+					pBox->SetNum("ProcessNumberLimit", 20);
+					pBox->SetBool("ProtectHostImages", true);
 		    	case CSandBoxPlus::eHardenedPlus:
                     pBox->SetBool("UsePrivacyMode", true);
 		    	case CSandBoxPlus::eHardened:
@@ -247,7 +266,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             }
             pBox->SetBool("BlockNetworkFiles", !field("shareAccess").toBool());
 
-            bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened);
+            bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened || BoxType== CSandBoxPlus::eIsoationMax);
             bool bDropAdmin = field("dropAdmin").toBool();
             if (field("dropAdmin").toBool() && !bHardened)
                 pBox->SetBool("DropAdminRights", true);
@@ -385,7 +404,10 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
         //return qMakePair(pW, pIcon);
         return pC;
     };
-
+	AddBoxType(tr("Maximum Isolation Sandbox with security enhancements and data protection"), (int)CSandBoxPlus::eIsoationMax,
+		tr("We try to provide maximum isolation for the sandbox, which covers all the features of the Security Hardened box and the Data Protection box,\n"
+		"In addition, there are other configurations that facilitate isolation,\n"
+			"such as processes and image access control, and so on."));
     AddBoxType(tr("<a href=\"sbie://docs/security-mode\">Security Hardened</a> Sandbox with <a href=\"sbie://docs/privacy-mode\">Data Protection</a>"), (int)CSandBoxPlus::eHardenedPlus, 
         tr("This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. \n"
             "It strictly limits access to user data, allowing processes within this box to only access C:\\Windows and C:\\Program Files directories. \n"
@@ -790,7 +812,7 @@ void CIsolationPage::initializePage()
 {
     int BoxType = wizard()->field("boxType").toInt();
 
-    bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened);
+    bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened || BoxType==CSandBoxPlus::eIsoationMax);
     bool bDropAdmin = field("dropAdmin").toBool();
     m_pMSIServer->setEnabled(!bHardened && !bDropAdmin);
     m_pShareAccess->setEnabled(!bHardened);

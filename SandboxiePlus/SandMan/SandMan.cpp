@@ -247,6 +247,7 @@ CSandMan::CSandMan(QWidget *parent)
 	SetupHotKeys();
 
 	m_BoxColors[CSandBoxPlus::eHardenedPlus] = qRgb(238,35,4);
+	m_BoxColors[CSandBoxPlus::eIsoationMax] = qRgb(72,61,139);
 	m_BoxColors[CSandBoxPlus::eHardened] = qRgb(247,125,2);
 	m_BoxColors[CSandBoxPlus::eDefaultPlus] = qRgb(1,133,248);
 	m_BoxColors[CSandBoxPlus::eDefault] = qRgb(246,246,2);
@@ -1550,6 +1551,9 @@ QString CSandMan::GetBoxDescription(int boxType)
 	QString Info;
 
 	switch (boxType) {
+	case CSandBoxPlus::eIsoationMax:
+		Info = tr("This box provides all the most common isolation options we can offer, and aims to maximize the isolation inside and outside the sandbox. The default options for this box type may change later.");
+		break;
 	case CSandBoxPlus::eHardenedPlus:
 	case CSandBoxPlus::eHardened:
 		Info = tr("This box provides <a href=\"sbie://docs/security-mode\">enhanced security isolation</a>, it is suitable to test untrusted software.");
@@ -1567,7 +1571,7 @@ QString CSandMan::GetBoxDescription(int boxType)
 		break;
 	}
 
-	if(boxType == CSandBoxPlus::eHardenedPlus || boxType == CSandBoxPlus::eDefaultPlus || boxType == CSandBoxPlus::eAppBoxPlus)
+	if(boxType == CSandBoxPlus::eHardenedPlus || boxType == CSandBoxPlus::eDefaultPlus || boxType == CSandBoxPlus::eAppBoxPlus || boxType==CSandBoxPlus::eIsoationMax)
 		Info.append(tr("<br /><br />This box <a href=\"sbie://docs/privacy-mode\">prevents access to all user data</a> locations, except explicitly granted in the Resource Access options."));
 
 	return Info;

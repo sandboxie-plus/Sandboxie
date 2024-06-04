@@ -33,7 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Add option to limit the memory of sandboxed process and the number of process in single sandbox through job object. (thanks Yeyixiao)
-  - Use "TotalMemoryLimit"(Number,limit whole sandbox，KB) and "ProcessMemoryLimit"(Number,limit single process,KB) to set memory limit.
+  - Use "TotalMemoryLimit"(Number,limit whole sandbox，Byte) and "ProcessMemoryLimit"(Number,limit single process,Byte) to set memory limit.
   - Use "ProcessNumberLimit"(Number) to set process number limit.
 - Add ability to modified sandboxed process logic speed (reduced fixed latency, modified single-player speed, etc.) (thanks Yeyixiao)
   - Use "UseChangeSpeed=y" to open this feature,use "AddTickSpeed"/"AddSleepSpeed"/"AddTimerSpeed"/"LowTickSpeed"/"LowSleepSpeed"/"LowTimerSpeed"(Number) to set.

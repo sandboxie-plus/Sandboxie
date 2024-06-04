@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with inconsistent WFP option application [#3900](https://github.com/sandboxie-plus/Sandboxie/issues/3900)
 - fixed resource leak in buffer hashing function
 - fixed DLL name corruption when BlockInterferenceControl is enabled [#3945](https://github.com/sandboxie-plus/Sandboxie/issues/3945)
+- fixed issue with driver verifier
 
 
 

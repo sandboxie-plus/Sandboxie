@@ -2508,10 +2508,10 @@
           <item row="6" column="0">
            <widget class="QCheckBox" name="chkAlertBeforeStart">
             <property name="toolTip">
-             <string>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</string>
+             <string>This setting can be used to prevent programs from running in the sandbox without the user's knowledge or consent.</string>
             </property>
             <property name="text">
-             <string>A pop-up warning before launching a process into the sandbox from an external source.</string>
+             <string>Display a pop-up warning before starting a process in the sandbox from an external source</string>
             </property>
            </widget>
           </item>

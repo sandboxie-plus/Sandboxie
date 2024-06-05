@@ -9098,12 +9098,14 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
-        <source>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</source>
+        <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
+        <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
-        <source>A pop-up warning before launching a process into the sandbox from an external source.</source>
+        <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
+        <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -8539,13 +8539,15 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
-        <source>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</source>
-        <translation>이를 사용하여 미리 설계된 악성 프로그램을 잠금 해제된 암호화된 샌드박스로 시작하여 호스트 악성 프로그램이 침입하는 것을 방지할 수 있습니다.</translation>
+        <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
+        <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
+        <translation type="unfinished">이를 사용하여 미리 설계된 악성 프로그램을 잠금 해제된 암호화된 샌드박스로 시작하여 호스트 악성 프로그램이 침입하는 것을 방지할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
-        <source>A pop-up warning before launching a process into the sandbox from an external source.</source>
-        <translation>외부 소스에서 샌드박스로 프로세스를 시작하기 전 팝업 경고입니다.</translation>
+        <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
+        <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
+        <translation type="unfinished">외부 소스에서 샌드박스로 프로세스를 시작하기 전 팝업 경고입니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2474"/>

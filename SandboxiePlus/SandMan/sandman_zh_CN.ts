@@ -7737,13 +7737,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation type="unfinished">这可用于防止宿主机的恶意程序突破沙盒隔离（将预先设计好的恶意程序启动到解锁的加密沙盒中）。</translation>
+        <translation>该设置可用于防止程序在未经用户知情或同意的情况下在沙箱中运行。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
-        <translation type="unfinished">从外部源向沙盒启动进程前弹出警告。</translation>
+        <translation>在从外部源启动沙盒中的进程之前显示弹出警告</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4422"/>

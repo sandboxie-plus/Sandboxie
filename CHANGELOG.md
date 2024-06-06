@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.1 / 5.69.1] - 2024-05-??
+## [1.14.1 / 5.69.1] - 2024-06-06
 
 ### Added
 - Add "Sandboxie\All Sandboxes" SID into token with SandboxieLogon [#3191](https://github.com/sandboxie-plus/Sandboxie/issues/3191)

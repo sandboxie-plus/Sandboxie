@@ -7651,7 +7651,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
-        <translation>Zeige eine Popup-Warnung vor der Ausführung eines Prozesses, in der Sandbox, von einer externen Quelle.</translation>
+        <translation>Zeige eine Popup-Warnung vor der Ausführung eines Prozesses, in der Sandbox, von einer externen Quelle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2474"/>

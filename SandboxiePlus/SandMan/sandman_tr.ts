@@ -143,7 +143,6 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="842"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
-        <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
         <translation>Sistemde yüklü korumalı alanda çalışan işlemlerin alan içinden DLL yüklemesini önle</translation>
     </message>
     <message>
@@ -5666,7 +5665,6 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with admin rights can change configuration</source>
-        <oldsource>Only applications with administrator token can change ini setting.</oldsource>
         <translation>Yalnızca yönetici haklarına sahip uygulamalar yapılandırmayı değiştirebilsin</translation>
     </message>
     <message>
@@ -6639,7 +6637,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3661"/>
         <source>Block network files and folders, unless specifically opened.</source>
-        <translation>Özel olarak açılmadıkça ağ dosyalarını ve klasörlerini engelle.</translation>
+        <translation>Özel olarak açılmadıkça ağ dosyalarını ve klasörlerini engelle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1011"/>
@@ -9133,7 +9131,6 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
-        <oldsource>Hotkey for suspending all process</oldsource>
         <translation>Tüm işlemleri askıya almak için kısayol tuşu:</translation>
     </message>
     <message>

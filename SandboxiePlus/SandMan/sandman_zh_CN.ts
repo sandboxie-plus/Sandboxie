@@ -242,8 +242,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation>撤销 “管理员（Administrators）” 和 “高级用户（Power Users）” 用户组的权限
-	注：在 Windows Vista 以前（不包括），高级用户/Power Users 用户组 具有部分的管理员权限，被设计为运行一些旧版程序。
-但在 Windows Vista 及之后，高级用户/Power Users 用户组仅存在于 Windows 专业版，并且它只拥有 Users 用户组的权限，所以提权后其可操作的权限没有变化，只是仅仅被系统标记为提升权限。而且当这样的进程创建其他进程时不会出现提升权限的 UAC 提示。因此原来需要管理员权限的程序也可以在此用户组中受限运行。）</translation>
+	</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="754"/>

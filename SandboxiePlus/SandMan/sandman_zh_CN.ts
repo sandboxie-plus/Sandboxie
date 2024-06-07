@@ -7737,7 +7737,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation>该设置可用于防止程序在未经用户知情或同意的情况下在沙箱中运行。</translation>
+        <translation>该设置可用于防止程序在未经用户知情或同意的情况下在已解锁的加密沙盒中运行。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>

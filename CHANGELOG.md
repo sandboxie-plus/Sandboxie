@@ -3,14 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.1 / 5.69.1] - 2024-05-??
+## [1.14.1 / 5.69.1] - 2024-06-06
 
 ### Added
 - Add "Sandboxie\All Sandboxes" SID into token with SandboxieLogon [#3191](https://github.com/sandboxie-plus/Sandboxie/issues/3191)
   - To use this feature SandboxieAllGroup=y must be enabled
   - Note: that this fundamentaly changes the mechanism Sbie uses for token creation, the new mechanism can be enabled separately with "UseCreateToken=y"
 - Added "EditAdminOnly=y" can now be configured per box
-- Add UI for CoverWindows in NewBoxWizard.
+- Add UI for CoverBoxedWindows in NewBoxWizard.
 - Add UI option to start unsandboxed process but force child processes in SelectBoxWindow.
 - Add option "AlertBeforeStart".When it is set,a prompt pops up before launching a new program into the sandbox using "Start.exe" and checks if the program that started "Start.exe" is a Sandboxie component itself,if it is not, a warning pops up.
 - Add option for EditAdminOnly in SetupWizard.

@@ -151,10 +151,6 @@
         <translation>Diese Funktion könnte die Kompatibilität einschränken, da sie Prozesse, die sich in der Sandbox befinden, daran hindert solche des Hosts zu schreiben und diese sogar zu starten.</translation>
     </message>
     <message>
-        <source>Prevents the sandboxed window from being captured.</source>
-        <translation type="vanished">Verhindert, dass von dem sandgeboxten Fenster ein Screenshot erstellt wird.</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="850"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
         <translation>Diese Funktion kann zu einer Verschlechterung der Benutzererfahrung führen, da sie auch normale Screenshots verhindert.</translation>
@@ -218,7 +214,7 @@ Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das H�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhindere, dass von sandgeboxten Fenstern Screenshots erstellt werden</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="870"/>
@@ -5687,8 +5683,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with admin rights can change configuration</source>
-        <oldsource>Only applications with administrator token can change ini setting.</oldsource>
-        <translation type="unfinished">Nur Applikationen mit Administratortoken können INI-Einstellungen ändern.</translation>
+        <translation>Nur Programme mit Adminrechten können die Konfiguration ändern</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
@@ -5698,11 +5693,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
-        <translation type="vanished">Wenn diese Option gesetzt ist, ist es dem Sandboxmanager mit normalen Nutzerrechten unmöglich die Konfiguration zu ändern, was dazu führen kann, dass Sie sich selbst sperren. Sie müssen das Hauptfenster von SandMan öffnen und im Menü &quot;Sandbox (s)&quot; &quot;Als Admin neu starten&quot; auswählen, um die Kontrolle über die Konfiguration zu erhalten.</translation>
+        <translation>Das Aktivieren dieser Option verhindert Änderungen an der Sandboxie.ini-Konfiguration über die Benutzeroberfläche ohne Adminrechte. Seien Sie vorsichtig, denn die Verwendung des Sandboxie-Managers mit normalen Benutzerrechten kann zu einem Aussperren führen. Um Änderungen an der Konfiguration vorzunehmen, müssen Sie den Sandboxie-Manager als Admin neu starten, indem Sie im Hauptfenster im Menü &apos;Sandbox&apos; auf &apos;Als Admin neu starten&apos; klicken.</translation>
     </message>
 </context>
 <context>
@@ -7654,13 +7645,15 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
-        <source>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</source>
-        <translation>Dies kann dazu verwendet werden ein bösartiges Programm daran zu hindern auszubrechen, in dem es ein vorgefertigtes bösartiges Programm in einer entsperrten verschlüsselten Sandbox ausführt.</translation>
+        <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
+        <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
+        <translation type="unfinished">Dies kann dazu verwendet werden ein bösartiges Programm daran zu hindern auszubrechen, in dem es ein vorgefertigtes bösartiges Programm in einer entsperrten verschlüsselten Sandbox ausführt.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
-        <source>A pop-up warning before launching a process into the sandbox from an external source.</source>
-        <translation>Eine Popup-Warnung vor der Ausführung eines Prozesses, in der Sandbox, von einer externen Quelle.</translation>
+        <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
+        <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
+        <translation type="unfinished">Eine Popup-Warnung vor der Ausführung eines Prozesses, in der Sandbox, von einer externen Quelle.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2474"/>

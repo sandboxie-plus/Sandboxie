@@ -183,7 +183,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 		    switch (BoxType)
 		    {
 				case CSandBoxPlus::eIsoationMax:
-					pBox->SetBool("HideNonSystemProcess", true);
+					pBox->SetBool("HideNonSystemProcesses", true);
 					pBox->InsertText("Template", "BlockAccessWMI");
 					pBox->InsertText("Template", "BlockDNS");
 					pBox->SetBool("HideOtherBoxes", true);

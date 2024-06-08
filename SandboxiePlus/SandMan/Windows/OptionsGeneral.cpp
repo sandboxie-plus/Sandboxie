@@ -1069,7 +1069,7 @@ void COptionsWindow::UpdateBoxType()
 	bool bSecurityMode = ui.chkSecurityMode->isChecked();
 	bool bAppBox = ui.chkNoSecurityIsolation->isChecked();
 	bool bIsoationMax = m_pBox->GetBool("HideNonSystemProcess")
-		&& m_pBox->GetBool("HideNonSystemProcess")
+		&& m_pBox->GetBool("HideNonSystemProcesses")
 		&& m_pBox->GetBool("HideOtherBoxes")
 		&& m_pBox->GetBool("ClosePrintSpooler")
 		&& m_pBox->GetBool("BlockInterferePower")

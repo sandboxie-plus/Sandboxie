@@ -813,7 +813,7 @@ CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 	if (m_iUnsecureDebugging != 0)
 		return eInsecure;
 
-	BOOL isMAX = GetBool("HideNonSystemProcess") &&
+	BOOL isMAX = GetBool("HideNonSystemProcesses") &&
 		GetBool("HideOtherBoxes") &&
 		GetBool("ClosePrintSpooler") &&
 		!GetBool("OpenClipboard") &&

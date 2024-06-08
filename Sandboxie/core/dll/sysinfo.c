@@ -207,8 +207,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
         SysInfo_DiscardProcesses(Buffer);
     }
 
-	/*
- //Disabled it now
+
  if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
 		HKEY hKey=NULL;
 		PVOID lpData=NULL;
@@ -240,7 +239,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 			*ReturnLength = dwLen;
 		}
 	}
-*/
+
     return status;
 }
 

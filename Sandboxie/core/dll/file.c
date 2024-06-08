@@ -3520,8 +3520,8 @@ ReparseLoop:
   //Disabled it now to test.
   if(SbieApi_QueryConfBool(NULL,L"CopyFileOnOpen",FALSE))
 			status = File_MigrateFile(
-				TruePath, CopyPath, IsWritePath, TRUE);*/
-		else
+				TruePath, CopyPath, IsWritePath, TRUE);
+		else*/
         if (FileType & TYPE_REPARSE_POINT) {
 
             status = File_MigrateJunction(

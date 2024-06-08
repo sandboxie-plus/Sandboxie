@@ -15,6 +15,7 @@ void COptionsWindow::CreateAccess()
 	// Resource Access
 	connect(ui.chkPrivacy, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
 	connect(ui.chkUseSpecificity, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
+	connect(ui.chkBlockWMI, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
 	connect(ui.chkCloseForBox, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
 	connect(ui.chkNoOpenForBox, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
 	//
@@ -156,6 +157,7 @@ void COptionsWindow::LoadAccessList()
 {
 	ui.chkPrivacy->setChecked(m_pBox->GetBool("UsePrivacyMode", false));
 	ui.chkUseSpecificity->setChecked(m_pBox->GetBool("UseRuleSpecificity", false));
+	ui.chkBlockWMI->setChecked(m_BoxTemplates.contains("BlockAccessWMI"));
 	ui.chkCloseForBox->setChecked(m_pBox->GetBool("AlwaysCloseForBoxed", true));
 	ui.chkNoOpenForBox->setChecked(m_pBox->GetBool("DontOpenForBoxed", true));
 
@@ -694,6 +696,7 @@ void COptionsWindow::SaveAccessList()
 {
 	WriteAdvancedCheck(ui.chkPrivacy, "UsePrivacyMode", "y", "");
 	WriteAdvancedCheck(ui.chkUseSpecificity, "UseRuleSpecificity", "y", "");
+	SetTemplate("BlockAccessWMI", ui.chkBlockWMI->isChecked());
 	WriteAdvancedCheck(ui.chkCloseForBox, "AlwaysCloseForBoxed", "", "n");
 	WriteAdvancedCheck(ui.chkNoOpenForBox, "DontOpenForBoxed", "", "n");
 

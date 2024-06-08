@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>835</width>
-    <height>588</height>
+    <height>575</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>6</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -3086,125 +3086,125 @@ To specify a process use '$:program.exe' as path.</string>
             <attribute name="title">
              <string>Access Policies</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout_51">
-             <property name="leftMargin">
-              <number>9</number>
-             </property>
-             <property name="topMargin">
-              <number>9</number>
-             </property>
-             <property name="rightMargin">
-              <number>9</number>
-             </property>
-             <property name="bottomMargin">
-              <number>9</number>
-             </property>
+            <layout class="QGridLayout" name="gridLayout_36">
              <item row="0" column="0">
-              <layout class="QGridLayout" name="gridLayout_50">
-               <item row="3" column="1">
-                <widget class="QLabel" name="lblPolicy">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Rule Policies</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="2" colspan="2">
-                <widget class="QCheckBox" name="chkCloseForBox">
-                 <property name="text">
-                  <string>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="2" colspan="2">
-                <widget class="QCheckBox" name="chkUseSpecificity">
-                 <property name="text">
-                  <string>Prioritize rules based on their Specificity and Process Match Level</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="2" colspan="2">
-                <widget class="QCheckBox" name="chkNoOpenForBox">
-                 <property name="text">
-                  <string>Apply File and Key Open directives only to binaries located outside the sandbox.</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="3">
-                <spacer name="horizontalSpacer_9">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="lblMode">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Access Mode</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="3">
-                <widget class="QLabel" name="label_54">
-                 <property name="text">
-                  <string>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
+              <widget class="QLabel" name="lblMode">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Access Mode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkPrivacy">
+               <property name="text">
+                <string>Privacy Mode, block file and registry access to all locations except the generic system ones</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLabel" name="label_55">
+               <property name="text">
+                <string>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkBlockWMI">
+               <property name="text">
+                <string>Prevent sandboxed processes from accessing system deatils through WMI</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QLabel" name="label_59">
+               <property name="text">
+                <string>Some programs read system deatils through WMI(A Windows built-in database) 
+instead of normal ways.For example,&quot;tasklist.exe&quot; could get full processes list 
+even if &quot;HideOtherBoxes&quot; is opened through accessing WMI.Enable this option to stop these heavior.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="lblPolicy">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Rule Policies</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkUseSpecificity">
+               <property name="text">
+                <string>Prioritize rules based on their Specificity and Process Match Level</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="2">
+              <widget class="QLabel" name="label_54">
+               <property name="text">
+                <string>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2" colspan="2">
-                <widget class="QCheckBox" name="chkPrivacy">
-                 <property name="text">
-                  <string>Privacy Mode, block file and registry access to all locations except the generic system ones</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="2">
-                <spacer name="verticalSpacer_24">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="3">
-                <widget class="QLabel" name="label_55">
-                 <property name="text">
-                  <string>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkCloseForBox">
+               <property name="text">
+                <string>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkNoOpenForBox">
+               <property name="text">
+                <string>Apply File and Key Open directives only to binaries located outside the sandbox.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <spacer name="verticalSpacer_24">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>81</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="10" column="2">
+              <spacer name="horizontalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>638</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -4253,7 +4253,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
             </font>
            </property>
            <property name="currentIndex">
-            <number>4</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tabMisc">
             <attribute name="title">
@@ -4640,25 +4640,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <string>Hide Processes</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_29">
-             <property name="leftMargin">
-              <number>3</number>
-             </property>
-             <property name="topMargin">
-              <number>6</number>
-             </property>
-             <property name="rightMargin">
-              <number>3</number>
-             </property>
-             <property name="bottomMargin">
-              <number>3</number>
-             </property>
-             <item row="2" column="1">
-              <widget class="QPushButton" name="btnAddProcess">
-               <property name="text">
-                <string>Add Process</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkHideOtherBoxes">
                <property name="text">
@@ -4666,7 +4647,31 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkHideHostProcesses">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="btnAddProcess">
+               <property name="text">
+                <string>Add Process</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Hide host processes from processes running in the sandbox.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
               <spacer name="verticalSpacer_16">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -4679,24 +4684,21 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </property>
               </spacer>
              </item>
-             <item row="1" column="0" colspan="2">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>Hide host processes from processes running in the sandbox.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
+             <item row="6" column="1">
               <widget class="QCheckBox" name="chkShowHiddenProcTmpl">
                <property name="text">
                 <string>Show Templates</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0" rowspan="5">
+             <item row="7" column="1">
+              <widget class="QPushButton" name="btnDelProcess">
+               <property name="text">
+                <string>Remove</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0" rowspan="3">
               <widget class="QTreeWidget" name="treeHideProc">
                <property name="sortingEnabled">
                 <bool>true</bool>
@@ -4711,13 +4713,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                  <string/>
                 </property>
                </column>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QPushButton" name="btnDelProcess">
-               <property name="text">
-                <string>Remove</string>
-               </property>
               </widget>
              </item>
             </layout>

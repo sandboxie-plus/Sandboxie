@@ -1068,18 +1068,18 @@ void COptionsWindow::UpdateBoxType()
 	bool bPrivacyMode = ui.chkPrivacy->isChecked();
 	bool bSecurityMode = ui.chkSecurityMode->isChecked();
 	bool bAppBox = ui.chkNoSecurityIsolation->isChecked();
-	bool bIsoationMax = m_pBox->GetBool("HideNonSystemProcess")
-		&& m_pBox->GetBool("HideNonSystemProcesses")
-		&& m_pBox->GetBool("HideOtherBoxes")
-		&& m_pBox->GetBool("ClosePrintSpooler")
-		&& m_pBox->GetBool("BlockInterferePower")
-		&& !m_pBox->GetBool("OpenClipboard")
-		&& m_pBox->GetBool("BlockInterferenceControl")
-		&& m_pBox->GetBool("BlockScreenCapture")
-		&& m_pBox->GetBool("ConfidentialBox")
-		&& m_pBox->GetBool("CoverBoxedWindows")
-		&& m_pBox->GetBool("AlertBeforeStart")
-		&& m_pBox->GetBool("ForceProtectionOnMount")
+	bool bIsoationMax = ui.chkHideHostProcesses->isChecked()
+		&& ui.chkBlockWMI->isChecked()
+		&& ui.chkHideOtherBoxes->isChecked()
+		&& ui.chkBlockSpooler->isChecked()
+		&& ui.chkProtectPower->isChecked()
+		&& ui.chkCloseClipBoard->isChecked()
+		&& ui.chkUserOperation->isChecked()
+		&& ui.chkBlockCapture->isChecked()
+		&& ui.chkConfidential->isChecked()
+		&& ui.chkProtectWindow->isChecked()
+		&& ui.chkAlertBeforeStart->isChecked()
+		&& ui.chkForceProtection->isChecked()
 		&& bSecurityMode && bPrivacyMode && !bAppBox;
 
 	int BoxType;
@@ -1130,7 +1130,7 @@ void COptionsWindow::OnBoxTypChanged()
 					pBox->SetNum64("ProcessMemoryLimit", 80000000);
 					pBox->SetNum("ProcessNumberLimit", 20);
 					pBox->SetBool("ProtectHostImages", true);*/
-		SetTemplate("BlockAccessWMI", true);
+		ui.chkBlockWMI->setChecked(true);
 		ui.chkBlockDns->setChecked(true);
 		ui.chkHideOtherBoxes->setChecked(true);
 		ui.chkCloseClipBoard->setChecked(true);

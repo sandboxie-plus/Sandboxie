@@ -336,32 +336,31 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         next = (SYSTEM_PROCESS_INFORMATION *) (((UCHAR *)curr) + curr->NextEntryOffset);
         if (next == curr)
             break;
-		
-		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
+		WCHAR* imageFileName = NULL;
+		SbieApi_QueryProcess(next->UniqueProcessId, boxname,imageFileName, tempSid, &tempSession);
 		BOOL hideProcess = FALSE;
-		if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0  && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0  && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE)) {
+		if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0  && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0  && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE) && !*boxname) {
 					hideProcess = TRUE;
 		}
 		else
 		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
 			hideProcess = TRUE;
 		}
-		else if(next->ImageName.Buffer) {
+		else
+		if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE)&&*imageFileName&&(wcsstr(imageFileName, L"Sandboxie") != NULL ||wcsstr(imageFileName, L"Sbie") != NULL)) {
+				
+			hideProcess = TRUE;
+		}
+		else if(hiddenProcesses && next->ImageName.Buffer) {
             WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
 			if (imagename)  imagename += 1; // skip L'\\'
 			else			imagename = next->ImageName.Buffer;
-			if (hiddenProcesses && !*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
+			if ( !*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
 				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
 					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {
 						hideProcess = TRUE;
 						break;
 					}
-				}
-			}
-			if (!hideProcess) {
-				if (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0) {
-					if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE))
-						hideProcess = TRUE;
 				}
 			}
 		}

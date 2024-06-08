@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.2 / 5.69.2] - 2024-??-??
 
 ### Added
-- Add option "HideNonSystemProcesses" to hide processes other than some system services from processes lists for sandboxed processes.
+- Add option "HideNonSystemProcesses" to hide processes not in a sandbox from processes lists for sandboxed processes.
 - Add option "HideSbieProcesses" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
 - When "HideFirmwareInfo" is set,the programs which try getting fireware info will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
 - Add template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI.

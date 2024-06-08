@@ -337,11 +337,12 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         if (next == curr)
             break;
 		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
+		//SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
 		BOOL hideProcess = FALSE;
-		if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0 /* && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0 */ && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE)) {
-					hideProcess = TRUE;
-		}
-		else
+		//if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0 /* && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0 */ && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE)) {
+		//			hideProcess = TRUE;
+		//}
+		//else
 		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
 			hideProcess = TRUE;
 		}
@@ -357,12 +358,12 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 					}
 				}
 			}
-			if (!hideProcess) {
-				if (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0) {
-					if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE))
-						hideProcess = TRUE;
-				}
-			}
+			//if (!hideProcess) {
+			//	if (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0) {
+			//		if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE))
+			//			hideProcess = TRUE;
+			//	}
+			//}
 		}
 
         if (!hideProcess)

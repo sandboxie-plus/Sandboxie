@@ -263,13 +263,9 @@
         <translation>该功能可能对兼容性造成影响，因为它阻止了沙盒内的进程向主机进程写入数据，以及启动它们。</translation>
     </message>
     <message>
-        <source>Prevents the sandboxed window from being captured.</source>
-        <translation type="vanished">阻止沙盒化窗口被捕获图像。</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation>阻止沙盒化窗口被捕获图像。</translation>
+        <translation>阻止捕获沙盒中程序的窗口图像。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="850"/>
@@ -462,7 +458,8 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation>正在创建新的沙盒磁盘映像。请输入强密码，并设置映像大小。</translation>
+        <translation>正在创建新的沙盒磁盘映像。
+	请输入强密码，并设置映像大小。</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
@@ -510,7 +507,7 @@ This length permits approximately 384 bits of entropy with a passphrase composed
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
         <translation>密码的最大长度限制为 128 个字符。
 如果密码由实际的英文单词组成，这个长度允许大约 384 位的熵，
-如果使用 Leet(L337) 密语，则增加到 512 位熵，如果完全由随机的可打印 ASCII 字符组成，则超过 768 位熵。</translation>
+如果使用 Leet(L337) 密语，则增加到 512 位熵，如果完全由随机的可打印 ASCII 字符组成，则允许超过 768 位熵。</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="164"/>
@@ -634,12 +631,12 @@ While the level of isolation is reduced compared to other box types, it offers i
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
         <translation>该类型的沙盒使用加密的磁盘映像作为文件根目录，为安全性与隐私性提供了额外的保障。
-当虚拟磁盘被挂载时，只有沙盒内的程序可以访问，而其他进程将会被阻止访问。这确保了在该沙盒环境中最高级别的隐私和数据保护。</translation>
+当虚拟磁盘映像被挂载时，只有沙盒内的程序可以访问它，而其他进程将会被阻止访问。这确保了在该沙盒环境中最高级别的隐私和数据保护。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>带数据保护的加固型沙盒</translation>
+        <translation>带有数据保护的加固型沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="437"/>
@@ -649,7 +646,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="438"/>
         <source>Sandbox with Data Protection</source>
-        <translation>带数据保护的沙盒</translation>
+        <translation>带有数据保护的沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="439"/>
@@ -659,7 +656,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="441"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>带数据保护的应用隔间</translation>
+        <translation>带有数据保护的应用隔间</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
@@ -812,7 +809,7 @@ Please browse to the correct user profile directory.</source>
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</oldsource>
         <translation>没有发现合适的目录
-注意：你需要在不使用沙盒的情况下运行一次浏览器，以便使它们被正确创建
+注意：你需要在不使用沙盒的情况下先运行一次浏览器，以便使它们被正确创建
 请浏览并选择正确的用户资料配置文件目录</translation>
     </message>
     <message>
@@ -1322,7 +1319,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="745"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>撤销管理员和 Power Users 用户组的权限</translation>
+        <translation>撤销管理员和 Power Users （Windows Vista 以前 及之后的 专业版 Windows 系统） 用户组的权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="751"/>
@@ -1332,7 +1329,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="756"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation>允许 MSIServer 在沙盒内使用系统令牌运行</translation>
+        <translation>允许 MSIServer 使用沙盒化的系统令牌运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
@@ -1444,7 +1441,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="76"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation>该沙盒的文件将会存储在加密的容器文件中，注意：容器头文件的任何损坏都可能导致容器内文件不可读取。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份、不宽容&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担风险则选择 [确认], 否则 [取消].</translation>
+        <translation>该沙盒的文件将会存储在加密的容器文件中，注意：容器头的任何损坏都可能导致容器内文件不可读取（这等同于损坏硬盘的引导分区）。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份、不宽容&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担风险则选择 [确认], 否则 [取消].</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="107"/>

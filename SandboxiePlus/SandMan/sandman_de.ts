@@ -7646,14 +7646,12 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
-        <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation type="unfinished">Dies kann dazu verwendet werden ein bösartiges Programm daran zu hindern auszubrechen, in dem es ein vorgefertigtes bösartiges Programm in einer entsperrten verschlüsselten Sandbox ausführt.</translation>
+        <translation>Diese Einstellung kann dazu verwendet werden Programme daran zu hindern, ohne das Wissen und die Zustimmung des Nutzers, in der Sandbox ausgeführt zu werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
-        <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
-        <translation type="unfinished">Eine Popup-Warnung vor der Ausführung eines Prozesses, in der Sandbox, von einer externen Quelle.</translation>
+        <translation>Zeige eine Popup-Warnung vor der Ausführung eines Prozesses, in der Sandbox, von einer externen Quelle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2474"/>

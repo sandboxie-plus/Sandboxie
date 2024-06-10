@@ -326,7 +326,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 창 캡처 방지</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="870"/>
@@ -3163,7 +3163,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="4258"/>
         <source>Reset Columns</source>
-        <translation>열 초기화</translation>
+        <translation>열 재설정</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4259"/>
@@ -4572,12 +4572,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4320"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
-        <translation>&lt;h3&gt;Sandboxie-Plus 정보&lt;/h3&gt;&lt;p&gt;버전 %1 한국어 번역: 비너스걸💋&lt;/p&gt;&lt;p&gt;</translation>
+        <translation>&lt;h3&gt;Sandboxie-Plus 정보 - 한국어 번역: 비너스걸💋&lt;/h3&gt;&lt;p&gt;버전 %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4328"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
-        <translation>이 Sandboxie-Plus 사본은 다음에 대해 인증되었습니다. %1</translation>
+        <translation>이 Sandboxie-Plus 사본의 인증 대상: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4330"/>
@@ -4587,7 +4587,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4334"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation>Sandboxie-Plus는 Sandboxie의 오픈 소스 연속입니다.&lt;br /&gt;더 많은 정보를 보려면 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 를 방문하세요.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;기능: %3&lt;br /&gt;&lt;br /&gt;설치: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
+        <translation>Sandboxie-Plus는 Sandboxie의 오픈 소스 후속 버전입니다.&lt;br /&gt;더 많은 정보를 보려면 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 를 방문하세요.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;기능: %3&lt;br /&gt;&lt;br /&gt;설치: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;아이콘 출처 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
@@ -6201,7 +6201,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with admin rights can change configuration</source>
         <oldsource>Only applications with administrator token can change ini setting.</oldsource>
-        <translation type="unfinished">관리자 토큰이 있는 응용 프로그램만 설정을 변경할 수 있습니다.</translation>
+        <translation>관리자 토큰이 있는 응용 프로그램만 설정을 변경할 수 있습니다</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
@@ -6211,7 +6211,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션을 활성화하면 관리자 권한이 없는 사용자 인터페이스에서 Sandboxie.ini 구성을 변경할 수 없습니다. 정상적인 사용자 권한이 있는 샌드박스 관리자를 사용하면 잠금이 발생할 수 있으므로 주의하십시오. 구성을 변경하려면 기본 창의 &apos;샌드박스&apos; 메뉴에서 &apos;관리자로 다시 시작&apos;을 클릭하여 샌드박스 관리자를 관리자로 다시 시작해야 합니다.</translation>
     </message>
     <message>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
@@ -8541,13 +8541,13 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation type="unfinished">이를 사용하여 미리 설계된 악성 프로그램을 잠금 해제된 암호화된 샌드박스로 시작하여 호스트 악성 프로그램이 침입하는 것을 방지할 수 있습니다.</translation>
+        <translation>이 설정은 사용자가 모르거나 동의하지 않은 상태에서 샌드박스에서 프로그램이 실행되는 것을 방지하는 데 사용될 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
-        <translation type="unfinished">외부 소스에서 샌드박스로 프로세스를 시작하기 전 팝업 경고입니다.</translation>
+        <translation>외부 소스에서 샌드박스에서 프로세스를 시작하기 전에 팝업 경고 표시</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2474"/>

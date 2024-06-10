@@ -191,13 +191,13 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="835"/>
         <source>Advanced Options</source>
-        <translation type="unfinished">Opciones Avanzadas</translation>
+        <translation>Opciones Avanzadas</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="842"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation type="unfinished">Impedir que los programas de aislamiento instalados en el ordenador carguen DLLs de la sandbox</translation>
+        <translation>Impedir que los programas aislados del ordenador carguen DLLs aislados</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="843"/>
@@ -208,12 +208,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation type="unfinished"></translation>
+        <translation>Impedir que las ventanas aisladas sean capturadas</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="850"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta característica puede empeorar la experiencia de usuario porque también evita las capturas de pantalla normales.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="855"/>
@@ -1190,78 +1190,78 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="712"/>
         <source>Sandbox Isolation options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de Aislamiento de Sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="713"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>En esta página se pueden configurar las opciones de aislamiento de sandbox.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="718"/>
         <source>Network Access</source>
-        <translation type="unfinished">Acceso a la red</translation>
+        <translation>Acceso a la red</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="726"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished">Permitir acceso a la red/Internet</translation>
+        <translation>Permitir acceso a la red/Internet</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="727"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished">Bloquear acceso a la red/Internet denegando acceso a los dispositivos de red</translation>
+        <translation>Bloquear acceso a la red/Internet denegando acceso a los dispositivos de red</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="729"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished">Bloquear acceso a la red/Internet usando la Plataforma de filtrado de Windows</translation>
+        <translation>Bloquear acceso a la red/Internet usando la Plataforma de Filtrado de Windows</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="734"/>
         <source>Allow access to network files and folders</source>
-        <translation type="unfinished">Permitir acceso a archivos y carpetas en la red</translation>
+        <translation>Permitir acceso a archivos y carpetas en la red</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="735"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="757"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <translation type="unfinished">Esta opción no es recomendada para cajas endurecidas</translation>
+        <translation>Esta opción no es recomendada para cajas endurecidas</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <source>Admin Options</source>
-        <translation type="unfinished">Opciones de administrador</translation>
+        <translation>Opciones de administrador</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="745"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">Rebajar permisos de grupos Administradores y Usuarios Avanzados</translation>
+        <translation>Rebajar permisos de grupos Administradores y Usuarios Avanzados</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="751"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished">Hacer creer a las aplicaciones que se ejecutan con privilegios elevados</translation>
+        <translation>Hacer creer a las aplicaciones que se ejecutan con privilegios elevados</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="756"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished">Permitir a MSIServer ejecutarse con un token de sistema aislado</translation>
+        <translation>Permitir a MSIServer ejecutarse con un token de sistema aislado</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
         <source>Box Options</source>
-        <translation type="unfinished">Opciones de Sandbox</translation>
+        <translation>Opciones de Sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="767"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar un inicio de sesión de Sandboxie en vez de un token anónimo</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="768"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar un token personalizado de Sandboxie para aislar mejor las sandboxes individuales entre sí, y muestra en la columna de usuario de los administradores de tareas el nombre de la caja a la que pertenece el proceso. Algunas soluciones de seguridad de terceros pueden, sin embargo, tener problemas con tokens personalizados.</translation>
     </message>
 </context>
 <context>
@@ -2475,12 +2475,12 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="832"/>
         <source>Yes</source>
-        <translation type="unfinished">Sí</translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="833"/>
         <source>No</source>
-        <translation type="unfinished">No</translation>
+        <translation>No</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="857"/>
@@ -3492,13 +3492,13 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="498"/>
         <source>About the Qt Framework</source>
-        <translation>Sobre Qt Framework</translation>
+        <translation>Acerca del Qt Framework</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="499"/>
         <location filename="SandMan.cpp" line="4351"/>
         <source>About Sandboxie-Plus</source>
-        <translation>Sobre Sandboxie-Plus</translation>
+        <translation>Acerca de Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="509"/>
@@ -3744,7 +3744,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="2979"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;necesitas estar en el nivel Great Patreon o superior para desbloquear esta característica.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2991"/>
@@ -4049,22 +4049,22 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="3125"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation>El certificado de patrocinador no es valido para esta version, por favor obtenga una actualización de certificado</translation>
+        <translation>El certificado de patrocinador no es válido para esta versión, por favor obtenga una certificado actualizado</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3128"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <translation>El certificado de patrocinador ha expirado%1, por favor obtenga una actualización de certificado</translation>
+        <translation>El certificado de patrocinador ha expirado%1, por favor obtenga una certificado actualizado</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3129"/>
         <source>, but it remains valid for the current build</source>
-        <translation>, pero permanece valido para la actual version</translation>
+        <translation>, pero permanece válido para la versión actual</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3131"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation>El certificado de patrocinador expirará en %1 días, por favor obtenga una actualización de certificado</translation>
+        <translation>El certificado de patrocinador expirará en %1 días, por favor obtenga una certificado actualizado</translation>
     </message>
     <message>
         <source>Checking for certificate...</source>
@@ -4094,7 +4094,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="2370"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation>Sandboxie-Plus Version: %1 (%2)</translation>
+        <translation>Sandboxie-Plus Versión: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2371"/>
@@ -4164,7 +4164,7 @@ Por favor, verifique si hay una actualización para Sandboxie.</translation>
     <message>
         <location filename="SandMan.cpp" line="3450"/>
         <source>Maintenance operation failed (%1)</source>
-        <translation>Operación de mantenimiento falló (%1)</translation>
+        <translation>Operación de mantenimiento fallida (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3455"/>
@@ -6068,7 +6068,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1443"/>
         <source>Advanced (L)</source>
-        <translation type="unfinished"></translation>
+        <translation>Avanzado (L)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1445"/>
@@ -6302,17 +6302,17 @@ NO seleccionará: %2</translation>
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with admin rights can change configuration</source>
         <oldsource>Only applications with administrator token can change ini setting.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Solo aplicaciones con permisos de administrador pueden cambiar configuración</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Advertencia</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar esta opción evita que se realicen cambios en la configuración de Sandboxie.ini desde la interfaz de usuario sin permisos de administrador. Tenga cuidado, ya que usar Sandboxie Manager con permisos de usuario normal puede resultar en un bloqueo. Para hacer cambios en la configuración, debe reiniciar Sandboxie Manager como administrador haciendo clic en &apos;Reiniciar como Administrador&apos; en el menú &apos;Sandbox&apos; en la ventana principal.</translation>
     </message>
 </context>
 <context>
@@ -8433,23 +8433,23 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
         <location filename="Forms/OptionsWindow.ui" line="740"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished">Esta característica no bloquea todos los medios de obtener una captura de pantalla, únicamente los comunes.</translation>
+        <translation>Esta característica no bloquea todos los medios de obtener una captura de pantalla, únicamente los comunes.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="837"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished">Impedir operaciones como movimiento de ratón o mover al frente, al poder causar problemas con los juegos.</translation>
+        <translation>Evita mover el ratón, traer al frente y operaciones similares, esto probablemente causará problemas con los juegos.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1562"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo cuentas de Administrador pueden hacer cambios a esta sandbox</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2043"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;AVISO DE SEGURIDAD&lt;/font&gt;:&lt;/b&gt; Usar &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; y/o &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; en combinación con las directivas Open[File/Pipe]Path puede comprometer la seguridad. Por favor, revise la sección de seguridad para cada opción en la documentación antes de su uso.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2116"/>
@@ -8490,13 +8490,13 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
         <location filename="Forms/OptionsWindow.ui" line="2452"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Este ajuste puede ser usado para evitar que se ejecuten programas en la sandbox sin el consentimiento del usuario o su conocimiento.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2455"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar una advertencia emergente antes de iniciar un proceso en la sandbox proveniente de una fuente externa</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2474"/>
@@ -9367,7 +9367,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar que los hijos directos estén aislados, pero no incluye a los procesos hijo indirectos que se abran a través de la interfaz DCOM e IPC.</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
@@ -9382,7 +9382,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar Hijos</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="56"/>
@@ -9527,7 +9527,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">Atajo para suspender todos los procesos:</translation>
+        <translation>Atajo para suspender todos los procesos:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
@@ -9769,7 +9769,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2165"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir grupo &quot;Sandboxie\All Sandboxes&quot; al token aislado (experimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2601"/>

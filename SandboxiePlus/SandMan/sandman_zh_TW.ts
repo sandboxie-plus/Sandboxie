@@ -245,7 +245,12 @@
     <message>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="vanished">使用 Sandboxie 登入程序替代匿名權杖</translation>
-    </message>
+	</message>
+	<message>
+		<location filename="Wizards/NewBoxWizard.cpp" line="835"/>
+		<source>Advanced Options</source>
+		<translation>高級選項</translation>
+	</message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="842"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
@@ -256,13 +261,21 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="843"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
-        <translation>此功能可能降低相容性，因為這將阻止沙箱中的處理程序寫入到主機對應目標，甚至於阻止處理程序本身的啟動。</translation>
+        <translation>該功能可能對相容性造成影響，因為它阻止了沙箱內的進程向主機進程寫入數據，以及啟動它們。</translation>
+    </message>
+    <message>
+        <source>Prevents the sandboxed window from being captured.</source>
+        <translation type="vanished">阻止沙箱化窗口被捕獲圖像。</translation>
+    </message>
+    <message>
+        <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
+        <source>Prevent sandboxed windows from being captured</source>
+        <translation>阻止沙箱化窗口被捕獲圖像。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="850"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation type="unfinished"></translation>
+        <translation>這個功能可能造成用戶體驗下降，因為它也阻止正常的螢幕截圖。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="855"/>
@@ -334,6 +347,22 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <location filename="Wizards/NewBoxWizard.cpp" line="872"/>
         <source>Append to the configuration</source>
         <translation>追加至組態設定</translation>
+    </message>
+    <message>
+        <source>Use a shared local template</source>
+        <translation type="vanished">使用共享的本機範本</translation>
+    </message>
+    <message>
+        <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
+    To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
+    To disable this template for a sandbox, simply uncheck it in the template list.</source>
+        <translation type="vanished">此設置將本機範本添加到沙箱組態中，以便該範本中的設置在沙箱之間共享。 但是，添加到範本的某些設置可能不會反映在用戶界面中。
+    要更改範本的設置，只需在沙箱選項下的應用程式範本列表中找到並編輯“SharedTemplate”範本即可。
+    要為沙箱禁用此範本，只需在範本列表中取消選中它即可。</translation>
+    </message>
+    <message>
+        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
+        <translation type="vanished">使用 Sandboxie 限權用戶，而不是匿名令牌 (實驗性)</translation>
     </message>
     <message>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
@@ -2434,12 +2463,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="229"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation>是否刪除選取的本地範本？</translation>
+        <translation>是否刪除選取的本機範本？</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="235"/>
         <source>Only local templates can be removed!</source>
-        <translation>僅可刪除本地範本！</translation>
+        <translation>僅可刪除本機範本！</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="290"/>
@@ -4164,7 +4193,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2979"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;你需要在Patreon贊助上成為Great或更高級別以便解鎖這個功能。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2991"/>
@@ -4464,22 +4493,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4320"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;關於 Sandboxie+&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4328"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>本 Sandboxie+ 副本已授權為: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4330"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie+ 可免費用於個人和其他非商業用途。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4334"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie+ 是 Sandboxie 的開源延續。&lt;br /&gt;前往 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 了解更多資訊。&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;特性: %3&lt;br /&gt;&lt;br /&gt;已安裝: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;圖示來自於 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
@@ -5738,7 +5767,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1443"/>
         <source>Advanced (L)</source>
-        <translation type="unfinished"></translation>
+        <translation>高級 (L)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1445"/>
@@ -5983,7 +6012,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2263"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation>要刪除所選取的本地範本嗎？</translation>
+        <translation>要刪除所選取的本機範本嗎？</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2465"/>
@@ -6050,17 +6079,21 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with admin rights can change configuration</source>
         <oldsource>Only applications with administrator token can change ini setting.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>僅帶有管理員令牌的程序可以修改ini設置</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用這個選項會阻止從無管理員權限的用戶界面對Sandboxie.ini的配置更改。小心點，因為使用帶有普通用戶權限的沙箱管理器將可能陷入鎖定。為了對配置進行修改，你必須通過點擊主窗口中 &apos; 沙箱 &apos; 菜單下的 &apos; 以管理員特權重啟 &apos; 菜單項來作為管理員重啟沙箱管理器。</translation>
+    </message>
+    <message>
+        <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
+        <translation type="vanished">當這個選項被設置，以普通用戶權限啟動的沙箱管理器將不能夠去更改配置，這可能造成陷入循環。你需要打開沙箱管理器主窗口，在系統菜單中點擊&quot;沙箱(s)&quot;並點擊上下文菜單中的&quot;以管理員特權重啟&quot;以重新獲取配置控制權。</translation>
     </message>
 </context>
 <context>
@@ -6539,49 +6572,49 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/TestProxyDialog.cpp" line="373"/>
         <location filename="Windows/TestProxyDialog.cpp" line="379"/>
         <source>Sandboxie-Plus - Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 測試代理</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="37"/>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>N/A</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="42"/>
         <location filename="Windows/TestProxyDialog.cpp" line="308"/>
         <source>Testing...</source>
-        <translation type="unfinished"></translation>
+        <translation>測試中...</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="62"/>
         <source>This test cannot be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>這個測試不能被禁用。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="80"/>
         <source>[%1] Starting Test 1: Connection to the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 啟動測試 1: 連接到代理伺服器</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="81"/>
         <source>[%1] IP Address: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] IP位址: %2</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="97"/>
         <source>[%1] Connection established.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 連接已建立。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="98"/>
         <location filename="Windows/TestProxyDialog.cpp" line="246"/>
         <source>[%1] Test passed.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 測試通過。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="103"/>
         <source>[%1] Connection to proxy server failed: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 連接到代理伺服器失敗: %2。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="104"/>
@@ -6589,88 +6622,88 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/TestProxyDialog.cpp" line="252"/>
         <location filename="Windows/TestProxyDialog.cpp" line="259"/>
         <source>[%1] Test failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 測試失敗。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="114"/>
         <source>[%1] Starting Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 啟動測試2: 通過代理伺服器連接</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="141"/>
         <source>[%1] Authentication was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 認證成功。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="142"/>
         <source>[%1] Connection to %2 established through the proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 通過代理伺服器連接到 %2 並已確立信道。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="146"/>
         <source>[%1] Loading a web page to test the proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 載入一個網路頁面以測試代理伺服器。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="152"/>
         <source>[%1] %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] %2</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="157"/>
         <source>[%1] Connection through proxy server failed: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 通過代理伺服器連接失敗: %2</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="191"/>
         <source>[%1] Web page loaded successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 網路頁面載入成功。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="196"/>
         <source>Timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>超時</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="197"/>
         <source>[%1] Failed to load web page: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 載入網路頁面失敗: %2。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="214"/>
         <source>[%1] Starting Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 啟動測試 3: 代理伺服器延遲</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="245"/>
         <source>[%1] Latency through proxy server: %2ms.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 通過代理伺服器的延遲: %2毫秒。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="251"/>
         <source>[%1] Failed to get proxy server latency: Request timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 獲取代理伺服器延遲失敗: 請求超時。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="258"/>
         <source>[%1] Failed to get proxy server latency.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 獲取代理伺服器延遲失敗。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="287"/>
         <source>[%1] Test Finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] 測試結束。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="300"/>
         <location filename="Windows/TestProxyDialog.cpp" line="337"/>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>停止的</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="309"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>停止</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="312"/>
@@ -6679,42 +6712,46 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 	Address:		%2
 	Protocol:		%3
 	Authentication:	%4%5</source>
-        <translation type="unfinished"></translation>
+    <translation>[%1] 測試開始...
+	代理伺服器
+	地址:                   %2
+	協議:                   %3
+	認證:          %4%5</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="332"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>重試</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="341"/>
         <source>Test Passed</source>
-        <translation type="unfinished"></translation>
+        <translation>測試通過</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="347"/>
         <source>Test Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>測試失敗</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="360"/>
         <source>Invalid Timeout value. Please enter a value between 1 and 60.</source>
-        <translation type="unfinished"></translation>
+        <translation>無效的超時等待值。請輸入一個1到60範圍內的數值。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="367"/>
         <source>Invalid Port value. Please enter a value between 1 and 65535.</source>
-        <translation type="unfinished"></translation>
+        <translation>無效的連接埠值。請輸入一個1到65535範圍內的數值。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="373"/>
         <source>Invalid Host value. Please enter a valid host name excluding &apos;http[s]://&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>無效的主機值。請輸入一個不包含 &apos;http[s]://&apos; 的有效主機名。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="379"/>
         <source>Invalid Ping Count value. Please enter a value between 1 and 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>無效的Ping次數值。請輸入一個在1到10之間的數值。</translation>
     </message>
 </context>
 <context>
@@ -8353,7 +8390,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="866"/>
         <source>Open access to Windows Local Security Authority</source>
-        <translation>開放 Windows 本地安全性認證 (LSA) 的存取權限</translation>
+        <translation>開放 Windows 本機安全性認證 (LSA) 的存取權限</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="720"/>
@@ -9850,7 +9887,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2523"/>
         <source>Local Templates</source>
-        <translation>本地範本</translation>
+        <translation>本機範本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2588"/>
@@ -10012,129 +10049,129 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="20"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>測試代理</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="69"/>
         <source>Test Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>測試設置中...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="82"/>
         <source>Testing...</source>
-        <translation type="unfinished"></translation>
+        <translation>測試中...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="117"/>
         <source>Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>代理伺服器</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="127"/>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>地址:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="134"/>
         <source>127.0.0.1:80</source>
-        <translation type="unfinished"></translation>
+        <translation>127.0.0.1:80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="144"/>
         <source>Protocol:</source>
-        <translation type="unfinished">協定:</translation>
+        <translation>協定:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="151"/>
         <source>SOCKS 5</source>
-        <translation type="unfinished"></translation>
+        <translation>SOCKS 5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="158"/>
         <source>Authentication:</source>
-        <translation type="unfinished"></translation>
+        <translation>認證:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="165"/>
         <source>NO</source>
-        <translation type="unfinished"></translation>
+        <translation>NO</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="172"/>
         <source>Login:</source>
-        <translation type="unfinished"></translation>
+        <translation>登陸:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="179"/>
         <source>username</source>
-        <translation type="unfinished"></translation>
+        <translation>使用者名稱</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="242"/>
         <source>Timeout (secs):</source>
-        <translation type="unfinished"></translation>
+        <translation>超時值 (以秒為單位):</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="249"/>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="274"/>
         <source>Test 1: Connection to the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>測試 1:連接到代理伺服器</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="280"/>
         <location filename="Forms/TestProxyDialog.ui" line="302"/>
         <location filename="Forms/TestProxyDialog.ui" line="388"/>
         <source>Enable this test</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用這個測試</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="293"/>
         <source>Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>測試2: 通過代理伺服器連接</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="330"/>
         <source>Target host:</source>
-        <translation type="unfinished"></translation>
+        <translation>目標主機:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="340"/>
         <source>www.google.com</source>
-        <translation type="unfinished"></translation>
+        <translation>www.google.com</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="350"/>
         <source>Port:</source>
-        <translation type="unfinished">連接埠:</translation>
+        <translation>連接埠:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="360"/>
         <source>80</source>
-        <translation type="unfinished"></translation>
+        <translation>80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="369"/>
         <source>Load a default web page from the host. (There must be a web server running on the host)</source>
-        <translation type="unfinished"></translation>
+        <translation>從主機載入一個默認網路頁面。（必須有一個Web伺服器運行在主機上）</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>測試 3 :代理伺服器延遲</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>
         <source>Ping count:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ping 數:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>
         <source>Increase ping count to improve the accuracy of the average latency calculation. More pings help to ensure that the average is representative of typical network conditions.</source>
-        <translation type="unfinished"></translation>
+        <translation>增加 ping 計數以提高平均延遲計算的準確性。更多 ping 有助於確保平均值代表典型的網路條件。</translation>
     </message>
 </context>
 </TS>

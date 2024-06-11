@@ -40,7 +40,7 @@ public:
 	bool						Extract(QMap<int, QIODevice*> *FileList, bool bDelete = true);
 	bool						Close();
 
-	bool						Update(QMap<int, QIODevice*> *FileList, bool bDelete = true, const SCompressParams* Params = NULL);
+	bool						Update(QMap<int, QIODevice*> *FileList, bool bDelete = true, const SCompressParams* Params = NULL, QMap<int, quint32> *AttribList = NULL);
 
 	int							AddFile(QString Path);
 	int							FileCount()								{return m_Files.count();}

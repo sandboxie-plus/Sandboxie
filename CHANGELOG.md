@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed security issue with the newly introduced experimental "UseCreateToken=y" machanism
 - fixed issue with "UseCreateToken=y" when using a MSFT online account
+- fixed Export sandbox not containing hidden files [#3980](https://github.com/sandboxie-plus/Sandboxie/issues/3980) (thanks L4cache)
 
 
 

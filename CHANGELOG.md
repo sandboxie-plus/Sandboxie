@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+
+## [1.14.2 / 5.69.2] - 2024-06-??
+
+### Fixed
+- fixed security issue with the newly introduced experimental "UseCreateToken=y" machanism
+
+
+
 ## [1.14.1 / 5.69.1] - 2024-06-06
 
 ### Added

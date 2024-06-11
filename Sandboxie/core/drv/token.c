@@ -2259,15 +2259,18 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
                     continue;
                 }
 
-                if (KeepLogonSession && (LocalGroups->Groups[i].Attributes & SE_GROUP_LOGON_ID))
-                    continue;
+				if ((LocalGroups->Groups[i].Attributes & SE_GROUP_LOGON_ID)) {
+					if(!KeepLogonSession)
+						LocalGroups->Groups[i].Attributes = SE_GROUP_LOGON_ID | SE_GROUP_USE_FOR_DENY_ONLY;
+					continue;
+				}
 
                 if (RtlEqualSid(LocalGroups->Groups[i].Sid, LocalUser->User.Sid)) {
                     if (KeepUserGroup)
                         continue;
                 }
 
-                LocalGroups->Groups[i].Attributes = 0;
+                LocalGroups->Groups[i].Attributes = SE_GROUP_USE_FOR_DENY_ONLY;
             }
         }
 

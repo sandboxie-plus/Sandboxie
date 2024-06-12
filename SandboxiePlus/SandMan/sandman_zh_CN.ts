@@ -809,7 +809,7 @@ Please browse to the correct user profile directory.</source>
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</oldsource>
         <translation>没有发现合适的目录
-注意：你需要在不使用沙盒的情况下先运行一次浏览器，以便使它们被正确创建
+注意：您需要在不使用沙盒的情况下先运行一次浏览器，以便使它们被正确创建。
 请浏览并选择正确的用户资料配置文件目录</translation>
     </message>
     <message>
@@ -2043,7 +2043,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1009"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation>该沙盒已被删除，因此配置无法保存</translation>
+        <translation>该沙盒已被删除，因此无法保存配置</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1073"/>
@@ -3018,7 +3018,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="677"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
-        <translation>Sandboxie Plus 应用了严格的应用程序限制，这可能会导致兼容性问题。使 Sandboxie Plus （及其兼容性模板和故障排除向导）保持在最新版本，有利于在 Windows 更新和应用程序变动时保证这些应用程序限制稳定运行。</translation>
+        <translation>Sandboxie-Plus 应用了严格的应用程序限制，这可能会导致兼容性问题。使 Sandboxie-Plus （及其兼容性模板和故障排除向导）保持在最新版本，有利于在 Windows 更新和应用程序变动时保证这些应用程序限制稳定运行。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="683"/>
@@ -3682,7 +3682,7 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1563"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
-        <translation>此类沙盒不执行隔离，它的目的是将一个应用程序虚拟化</translation>
+        <translation>此类沙盒不执行隔离，它用于将一个应用程序虚拟化</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1571"/>
@@ -3826,7 +3826,7 @@ Please check if there is an update for sandboxie.</oldsource>
     <message>
         <location filename="SandMan.cpp" line="2520"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation>您的Windows版本 %1 超过了 Sandboxie 版本的当前已知支持范围，Sandboxie 将尝试使用上一个已知的配置，这可能会导致系统不稳定。</translation>
+        <translation>您的 Windows 版本 %1 超过了 Sandboxie 版本的当前已知支持范围，Sandboxie 将尝试使用上一个已知的配置，这可能会导致系统不稳定。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2531"/>

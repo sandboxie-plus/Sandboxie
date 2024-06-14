@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with "UseCreateToken=y" when using a MSFT online account
 - fixed Export sandbox not containing hidden files [#3980](https://github.com/sandboxie-plus/Sandboxie/issues/3980) (thanks L4cache)
 
+### Added
+- added checkbox for PromptForInternetAccess option to the New Box Wizard
+ 
 
 
 

@@ -118,11 +118,15 @@ public:
     bool validatePage() override;
     void OnDropAdminChanged(int state);
 
+private slots:
+    void OnBlockNetworkChanged(int index);
+
 private:
     QCheckBox* m_pShareAccess;
     QCheckBox* m_pMSIServer;
     QCheckBox* m_pDropAdmin;
     QCheckBox* m_pBoxToken;
+    QCheckBox* m_pPromptAccess;
 };
 
 

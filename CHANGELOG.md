@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.14.2 / 5.69.2] - 2024-06-??
 
+### Added
+- added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
+  - usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
+  - note: use /passwd without the password to have SbieIni prompot for the password on the console, this hides the password from view and from bing captured with the command line
+
 ### Fixed
 - fixed security issue with the newly introduced experimental "UseCreateToken=y" machanism
 - fixed issue with "UseCreateToken=y" when using a MSFT online account

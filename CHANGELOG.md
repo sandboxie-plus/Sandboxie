@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI.
 - Add template "BlockLocalConnect" to prevent sandboxed processes from sending network packs to loaclhost to breakout sandbox.
 - Add new option "AllowCoverTaskbar" for [#3975](https://github.com/sandboxie-plus/Sandboxie/issues/3975)
+- added RPC Port message filter mechanism to block unsafe RDP calls via the driver [#3930](https://github.com/sandboxie-plus/Sandboxie/issues/3930)
+  - Usage: "RpcPortFilter=Port,ID,Label" label is optional
 
 ### Changed
 - Extend "Temp Template" to make it could delete local template section.
@@ -42,7 +44,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option "AlertBeforeStart"
   - when it is set, a prompt pops up before launching a new program into the sandbox using "Start.exe" and checks if the program that started "Start.exe" is a Sandboxie component itself, if it is not, a warning pops up
 - added option for EditAdminOnly in SetupWizard
-
 
 ### Changed
 - splited the advanced new box wizard page in two

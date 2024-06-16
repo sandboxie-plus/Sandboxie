@@ -132,6 +132,9 @@ NTSTATUS Ipc_CheckPortRequest_PowerManagement(
 NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
+NTSTATUS Ipc_CheckPortRequest_Dynamic(
+    PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
+
 
 static NTSTATUS Ipc_Api_GetRpcPortName_2(
     PEPROCESS ProcessObject, WCHAR* pDstPortName);
@@ -248,6 +251,8 @@ _FX NTSTATUS Ipc_CheckPortRequest(
         status = Ipc_CheckPortRequest_PowerManagement(proc, Name, msg);
     if (status == STATUS_BAD_INITIAL_PC)
         status = Ipc_CheckPortRequest_SpoolerPort(proc, Name, msg);
+    if (status == STATUS_BAD_INITIAL_PC)
+        status = Ipc_CheckPortRequest_Dynamic(proc, Name, msg);
     if (status == STATUS_BAD_INITIAL_PC)
         status = STATUS_SUCCESS;
 
@@ -650,7 +655,7 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
 
         if (port == NULL) 
         {
-            port = Mem_AllocEx(Driver_Pool, sizeof(IPC_DYNAMIC_PORT), TRUE);
+            port = Mem_AllocEx(Driver_Pool, sizeof(IPC_DYNAMIC_PORT) + sizeof(UCHAR) * pArgs->filter_num.val, TRUE);
             if (!port)
                 Log_Msg0(MSG_1104);
             else
@@ -661,7 +666,20 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
                 if (_wcsicmp(port->wstrPortId, L"spooler") == 0)
                     Ipc_Dynamic_Ports.pSpoolerPort = port;
 
-                List_Insert_After(&Ipc_Dynamic_Ports.Ports, NULL, port);
+                port->FilterCount = pArgs->filter_num.val;
+                if (port->FilterCount > 0)
+                {
+                    try {
+                        ProbeForRead(pArgs->filter_ids.val, sizeof(UCHAR) * port->FilterCount, sizeof(UCHAR));
+                        memcpy(port->FilterIDs, pArgs->filter_ids.val, sizeof(UCHAR) * port->FilterCount);
+                    }
+                    __except (EXCEPTION_EXECUTE_HANDLER) {
+                        status = GetExceptionCode();
+                    }
+                }
+
+                if (NT_SUCCESS(status))
+                    List_Insert_After(&Ipc_Dynamic_Ports.Ports, NULL, port);
             }
         }
 
@@ -688,6 +706,84 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
             status = STATUS_NOT_FOUND;
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_CheckPortRequest_Dynamic
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_CheckPortRequest_Dynamic(
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg)
+{
+    NTSTATUS status = STATUS_BAD_INITIAL_PC;
+
+    if (Ipc_Dynamic_Ports.pPortLock)
+    {
+        KeEnterCriticalRegion();
+        ExAcquireResourceSharedLite(Ipc_Dynamic_Ports.pPortLock, TRUE);
+
+        //
+        // find the port
+        //
+
+        IPC_DYNAMIC_PORT* port = List_Head(&Ipc_Dynamic_Ports.Ports);
+        while (port) 
+        {    
+            if (_wcsicmp(Name->Name.Buffer, port->wstrPortName) == 0)
+            {
+                //
+                // examine message
+                //
+
+                status = STATUS_SUCCESS;
+
+                if (port->FilterCount > 0)
+                {
+                    __try {
+
+                        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
+
+                        if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+
+                            ULONG  len = msg->u1.s1.DataLength;
+                            UCHAR* ptr = (UCHAR*)((UCHAR*)msg + sizeof(PORT_MESSAGE));
+
+                            ProbeForRead(ptr, len, sizeof(WCHAR));
+
+                            UCHAR uMsg = ptr[20];
+
+                            //
+                            // apply filter
+                            //
+
+                            for (ULONG i = 0; i < port->FilterCount; i++) {
+                                if (port->FilterIDs[i] == uMsg) {
+                                    status = STATUS_ACCESS_DENIED;
+                                    break;
+                                }
+                            }
+
+                            //DbgPrint("%S message ID: %d (%d)\n", port->wstrPortId, uMsg, NT_SUCCESS(status));
+                        }
+                    }
+                    __except (EXCEPTION_EXECUTE_HANDLER) {
+                        status = GetExceptionCode();
+                    }
+                }
+
+                break;
+            }
+
+            port = List_Next(port);
+        }
+
+        ExReleaseResourceLite(Ipc_Dynamic_Ports.pPortLock);
+        KeLeaveCriticalRegion();
     }
 
     return status;

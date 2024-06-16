@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>835</width>
-    <height>575</height>
+    <height>475</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>6</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -55,7 +55,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsGeneral">
            <property name="currentIndex">
-            <number>3</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tabOptions">
             <attribute name="title">
@@ -1095,7 +1095,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsSecurity">
            <property name="currentIndex">
-            <number>1</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabHarden">
             <attribute name="title">
@@ -3028,6 +3028,50 @@ To specify a process use '$:program.exe' as path.</string>
              <string>Access Policies</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_36">
+             <item row="7" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkNoOpenForBox">
+               <property name="text">
+                <string>Apply File and Key Open directives only to binaries located outside the sandbox.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkCloseForBox">
+               <property name="text">
+                <string>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLabel" name="label_55">
+               <property name="text">
+                <string>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkUseSpecificity">
+               <property name="text">
+                <string>Prioritize rules based on their Specificity and Process Match Level</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <spacer name="verticalSpacer_24">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>81</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="lblMode">
                <property name="font">
@@ -3042,6 +3086,19 @@ To specify a process use '$:program.exe' as path.</string>
                </property>
               </widget>
              </item>
+             <item row="8" column="2">
+              <spacer name="horizontalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>638</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
              <item row="1" column="1" colspan="2">
               <widget class="QCheckBox" name="chkPrivacy">
                <property name="text">
@@ -3049,33 +3106,7 @@ To specify a process use '$:program.exe' as path.</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
-              <widget class="QLabel" name="label_55">
-               <property name="text">
-                <string>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkBlockWMI">
-               <property name="text">
-                <string>Prevent sandboxed processes from accessing system deatils through WMI</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="2">
-              <widget class="QLabel" name="label_59">
-               <property name="text">
-                <string>Some programs read system deatils through WMI(A Windows built-in database) 
-instead of normal ways.For example,&quot;tasklist.exe&quot; could get full processes list 
-even if &quot;HideOtherBoxes&quot; is opened through accessing WMI.Enable this option to stop these heavior.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="lblPolicy">
                <property name="font">
                 <font>
@@ -3089,14 +3120,7 @@ even if &quot;HideOtherBoxes&quot; is opened through accessing WMI.Enable this o
                </property>
               </widget>
              </item>
-             <item row="6" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkUseSpecificity">
-               <property name="text">
-                <string>Prioritize rules based on their Specificity and Process Match Level</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="2">
+             <item row="5" column="2">
               <widget class="QLabel" name="label_54">
                <property name="text">
                 <string>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
@@ -3106,46 +3130,6 @@ The process match level has a higher priority than the specificity and describes
                 <bool>true</bool>
                </property>
               </widget>
-             </item>
-             <item row="8" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkCloseForBox">
-               <property name="text">
-                <string>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkNoOpenForBox">
-               <property name="text">
-                <string>Apply File and Key Open directives only to binaries located outside the sandbox.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1">
-              <spacer name="verticalSpacer_24">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>81</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="10" column="2">
-              <spacer name="horizontalSpacer_9">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>638</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
              </item>
             </layout>
            </widget>
@@ -4078,6 +4062,7 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblLimit">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -4667,6 +4652,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
            <widget class="QWidget" name="tabHideProc">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -5080,8 +5066,8 @@ instead of &quot;*&quot;.</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>75</width>
-                  <height>16</height>
+                  <width>98</width>
+                  <height>28</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="dbgLayout">

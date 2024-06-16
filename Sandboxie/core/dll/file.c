@@ -3516,7 +3516,11 @@ ReparseLoop:
         // open, for a CopyPath that does not exist, must also include
         // write access, or else it would have been handled earlier already)
         //
-
+		
+		if(SbieApi_QueryConfBool(NULL,L"CopyFileOnOpen",FALSE))
+			status = File_MigrateFile(
+				TruePath, CopyPath, IsWritePath, TRUE);
+		
         if (FileType & TYPE_REPARSE_POINT) {
 
             status = File_MigrateJunction(

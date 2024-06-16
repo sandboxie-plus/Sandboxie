@@ -61,6 +61,7 @@ void COptionsWindow::CreateGeneral()
 
 
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eIsoationMax), tr("Maximize Isolation Sandbox"), (int)CSandBoxPlus::eIsoationMax);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardened), tr("Security Hardened Sandbox"), (int)CSandBoxPlus::eHardened);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefaultPlus), tr("Sandbox with Data Protection"), (int)CSandBoxPlus::eDefaultPlus);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefault), tr("Standard Isolation Sandbox (Default)"), (int)CSandBoxPlus::eDefault);
@@ -191,6 +192,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkEncrypt, SIGNAL(clicked(bool)), this, SLOT(OnDiskChanged()));
 	connect(ui.chkForceProtection, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkUserOperation, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkCoverBar, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
 
 	bool bImDiskReady = theGUI->IsImDiskReady();
@@ -281,6 +283,13 @@ void COptionsWindow::LoadGeneral()
 	ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
 	ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
 
+	ui.lineSingleMemory->setText(m_pBox->GetText("ProcessMemoryLimit", ""));
+	ui.lineSingleMemory->setEnabled(true);
+	ui.lineTotalMemory->setText(m_pBox->GetText("TotalMemoryLimit", ""));
+	ui.lineTotalMemory->setEnabled(true);
+	ui.lineTotalNumber->setText(m_pBox->GetText("TotalNumberLimit", ""));
+	ui.lineTotalNumber->setEnabled(true);
+
 	//ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 	ui.chkOpenProtectedStorage->setChecked(m_BoxTemplates.contains("OpenProtectedStorage"));
 	ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
@@ -333,6 +342,7 @@ void COptionsWindow::LoadGeneral()
 	ui.chkEncrypt->setChecked(m_pBox->GetBool("UseFileImage", false));
 	ui.chkForceProtection->setChecked(m_pBox->GetBool("ForceProtectionOnMount", false));
 	ui.chkUserOperation->setChecked(m_pBox->GetBool("BlockInterferenceControl", false));
+	ui.chkCoverBar->setChecked(m_pBox->GetBool("AllowCoverTaskbar", false));
 	if (ui.chkRamBox->isEnabled()) {
 		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
 		ui.chkForceProtection->setEnabled(!ui.chkRamBox->isChecked());
@@ -420,6 +430,13 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkOpenSpooler, "OpenPrintSpooler", "y", "");
 	WriteAdvancedCheck(ui.chkPrintToFile, "AllowSpoolerPrintToFile", "y", "");
 
+	if (!ui.lineSingleMemory->text().isEmpty())
+		WriteText("ProcessMemoryLimit", ui.lineSingleMemory->text());
+	if (!ui.lineTotalMemory->text().isEmpty())
+		WriteText("TotalMemoryLimit", ui.lineTotalMemory->text());
+	if (!ui.lineTotalNumber->text().isEmpty())
+		WriteText("ProcessNumberLimit", ui.lineTotalNumber->text());
+
 	//WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
 	SetTemplate("OpenProtectedStorage", ui.chkOpenProtectedStorage->isChecked());
 	if (ui.chkOpenCredentials->isEnabled())
@@ -429,6 +446,7 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkProtectPower, "BlockInterferePower", "y", "");
 	WriteAdvancedCheck(ui.chkForceProtection, "ForceProtectionOnMount", "y", "");
 	WriteAdvancedCheck(ui.chkUserOperation, "BlockInterferenceControl", "y", "");
+	WriteAdvancedCheck(ui.chkCoverBar, "AllowCoverTaskbar", "y", "");
 	WriteAdvancedCheck(ui.chkVmReadNotify, "NotifyProcessAccessDenied", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
 	//WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
@@ -797,7 +815,13 @@ void COptionsWindow::OnGeneralChanged()
 
 	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
-	
+
+	ui.lineSingleMemory->setEnabled(ui.chkAddToJob->isChecked());
+	ui.lineTotalMemory->setEnabled(ui.chkAddToJob->isChecked());
+	ui.lineTotalNumber->setEnabled(ui.chkAddToJob->isChecked());
+
+	ui.chkCoverBar->setEnabled(ui.chkUserOperation->isChecked());
+
 	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
 
@@ -1044,8 +1068,24 @@ void COptionsWindow::UpdateBoxType()
 	bool bPrivacyMode = ui.chkPrivacy->isChecked();
 	bool bSecurityMode = ui.chkSecurityMode->isChecked();
 	bool bAppBox = ui.chkNoSecurityIsolation->isChecked();
+	bool bIsoationMax = ui.chkHideHostProcesses->isChecked()
+		&& ui.chkBlockWMI->isChecked()
+		&& ui.chkHideOtherBoxes->isChecked()
+		&& ui.chkBlockSpooler->isChecked()
+		&& ui.chkProtectPower->isChecked()
+		&& ui.chkCloseClipBoard->isChecked()
+		&& ui.chkUserOperation->isChecked()
+		&& ui.chkBlockCapture->isChecked()
+		&& ui.chkConfidential->isChecked()
+		&& ui.chkProtectWindow->isChecked()
+		&& ui.chkAlertBeforeStart->isChecked()
+		&& ui.chkForceProtection->isChecked()
+		&& bSecurityMode && bPrivacyMode && !bAppBox;
 
 	int BoxType;
+	if (bIsoationMax)
+		BoxType = (int)CSandBoxPlus::eIsoationMax;
+	else
 	if (bAppBox) 
 		BoxType = bPrivacyMode ? (int)CSandBoxPlus::eAppBoxPlus : (int)CSandBoxPlus::eAppBox;
 	else if (bSecurityMode) 
@@ -1071,13 +1111,51 @@ void COptionsWindow::OnBoxTypChanged()
 	int BoxType = ui.cmbBoxType->currentData().toInt();
 
 	switch (BoxType) {
+	case CSandBoxPlus::eIsoationMax:
+		/*pBox->SetBool("HideNonSystemProcess", true);
+					pBox->InsertText("Template", "BlockAccessWMI");
+					pBox->InsertText("Template", "BlockDNS");
+					pBox->SetBool("HideOtherBoxes", true);
+					pBox->SetBool("ClosePrintSpooler", true);
+					pBox->SetBool("OpenClipboard", false);
+					pBox->SetBool("BlockInterferePower", true);
+					pBox->SetBool("BlockInterferenceControl", true);
+					pBox->SetBool("BlockScreenCapture", true);
+					pBox->AppendText("NetworkAccess","*,Block;Port=*;Address=127.*.*.*;Protocol=Any");
+					pBox->SetBool("UseSandboxDesktop", true);
+					pBox->SetBool("ConfidentialBox", true);
+					pBox->SetBool("CoverBoxedWindows", true);
+					pBox->SetBool("AlertBeforeStart", true);
+					pBox->SetBool("ForceProtectionOnMount", true);
+					pBox->SetNum64("ProcessMemoryLimit", 80000000);
+					pBox->SetNum("ProcessNumberLimit", 20);
+					pBox->SetBool("ProtectHostImages", true);*/
+		ui.chkBlockWMI->setChecked(true);
+		ui.chkBlockDns->setChecked(true);
+		ui.chkHideOtherBoxes->setChecked(true);
+		ui.chkCloseClipBoard->setChecked(true);
+		ui.chkBlockSpooler->setChecked(true);
+		ui.chkBlockCapture->setChecked(true);
+		ui.chkAddToJob->setChecked(true);
+		ui.chkAlertBeforeStart->setChecked(true);
+		ui.chkConfidential->setChecked(true);
+		ui.chkProtectPower->setChecked(true);
+		ui.chkUserOperation->setChecked(true);
+		ui.chkProtectWindow->setChecked(true);
+		ui.chkProtectSCM->setChecked(true);
+		ui.chkProtectSystem->setChecked(true);
+		ui.chkRestrictServices->setChecked(true);
+		ui.chkSbieLogon->setChecked(true);
+		ui.chkDropPrivileges->setChecked(true);
+		ui.chkHideOtherBoxes->setChecked(true);
+		ui.chkHostProtect->setChecked(true);
 	case CSandBoxPlus::eHardenedPlus:
 	case CSandBoxPlus::eHardened:
 		ui.chkNoSecurityIsolation->setChecked(false);
 		ui.chkNoSecurityFiltering->setChecked(false);
 		ui.chkSecurityMode->setChecked(true);
 		//ui.chkRestrictServices->setChecked(true);
-		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
+		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus||BoxType==CSandBoxPlus::eIsoationMax);
 		//SetTemplate("NoUACProxy", false);
 		SetTemplate("RpcPortBindingsExt", false);
 		break;

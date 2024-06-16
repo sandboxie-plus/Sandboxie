@@ -207,6 +207,39 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
         SysInfo_DiscardProcesses(Buffer);
     }
 
+
+ if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
+		HKEY hKey=NULL;
+		PVOID lpData=NULL;
+		DWORD dwLen = 0;
+		typedef LSTATUS
+		(*ROK)(
+			_In_ HKEY hKey,
+			_In_opt_ LPCWSTR lpSubKey,
+			_In_opt_ DWORD ulOptions,
+			_In_ REGSAM samDesired,
+			_Out_ PHKEY phkResult
+			);
+		typedef LSTATUS
+			(*RQVEW)(
+				 HKEY hKey,
+				 LPCWSTR lpValueName,
+				 LPDWORD lpReserved,
+				 LPDWORD lpType,
+				 LPBYTE lpData,
+				LPDWORD lpcbData
+			);
+		ROK RegOpenKeyExW=Ldr_GetProcAddrOld(L"Advapi32.dll",L"RegOpenKeyExW");
+		RQVEW RegQueryValueExW = Ldr_GetProcAddrOld(L"Advapi32.dll", L"RegQueryValueExW");
+		DWORD type;
+		if (RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\SandboxieHide\\", 0, KEY_READ, &hKey))
+			RegQueryValueExW(hKey, L"FalseFirmwareValue", 0, &type, lpData, &dwLen);
+		if (dwLen != 0) {
+			Buffer = lpData;
+			*ReturnLength = dwLen;
+		}
+	}
+
     return status;
 }
 
@@ -214,8 +247,48 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 //---------------------------------------------------------------------------
 // SysInfo_DiscardProcesses
 //---------------------------------------------------------------------------
+BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE* pToken);
+_FX BOOL Sysinfo_IsTokenAnySid(HANDLE hToken,WCHAR* compare)
+{
+	NTSTATUS status;
+	BOOLEAN return_value = FALSE;
 
+	ULONG64 user_space[88];
+	PTOKEN_USER user = (PTOKEN_USER)user_space;
+	ULONG len;
 
+	len = sizeof(user_space);
+	status = NtQueryInformationToken(
+		hToken, TokenUser, user, len, &len);
+
+	if (status == STATUS_BUFFER_TOO_SMALL) {
+
+		user = Dll_AllocTemp(len);
+		status = NtQueryInformationToken(
+			hToken, TokenUser, user, len, &len);
+	}
+
+	if (NT_SUCCESS(status)) {
+
+		UNICODE_STRING SidString;
+
+		status = RtlConvertSidToUnicodeString(
+			&SidString, user->User.Sid, TRUE);
+
+		if (NT_SUCCESS(status)) {
+
+			if (_wcsicmp(SidString.Buffer, /*L"S-1-5-18" */compare ) == 0)
+				return_value = TRUE;
+
+			RtlFreeUnicodeString(&SidString);
+		}
+	}
+
+	if (user != (PTOKEN_USER)user_space)
+		Dll_Free(user);
+
+	return return_value;
+}
 _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 {
     SYSTEM_PROCESS_INFORMATION *curr = buf;
@@ -228,6 +301,8 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 	WCHAR* hiddenProcessesPtr = NULL;
 	ULONG hiddenProcessesLen = 100 * 110; // we can hide up to 100 processes, should be enough
 	WCHAR hiddenProcess[110];
+	ULONG tempSession = 0;
+	WCHAR tempSid[96] = {0};
 
 	for (ULONG index = 0; ; ++index) {
 		NTSTATUS status = SbieApi_QueryConfAsIs(NULL, L"HideHostProcess", index, hiddenProcess, 108 * sizeof(WCHAR));
@@ -261,18 +336,26 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         next = (SYSTEM_PROCESS_INFORMATION *) (((UCHAR *)curr) + curr->NextEntryOffset);
         if (next == curr)
             break;
-
-		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, NULL, NULL);
-
+		WCHAR* imageFileName = NULL;
+		SbieApi_QueryProcess(next->UniqueProcessId, boxname,imageFileName, tempSid, &tempSession);
 		BOOL hideProcess = FALSE;
+		if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0  && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0  && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE) && !*boxname) {
+					hideProcess = TRUE;
+		}
+		else
 		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
+			hideProcess = TRUE;
+		}
+		else
+		if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE)&&*imageFileName&&(wcsstr(imageFileName, L"Sandboxie") != NULL ||wcsstr(imageFileName, L"Sbie") != NULL)) {
+				
 			hideProcess = TRUE;
 		}
 		else if(hiddenProcesses && next->ImageName.Buffer) {
             WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
 			if (imagename)  imagename += 1; // skip L'\\'
 			else			imagename = next->ImageName.Buffer;
-			if (!*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
+			if ( !*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
 				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
 					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {
 						hideProcess = TRUE;

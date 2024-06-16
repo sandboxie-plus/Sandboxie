@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.14.2 / 5.69.2] - 2024-??-??
+
+### Added
+- Add option "HideNonSystemProcesses" to hide processes not in a sandbox from processes lists for sandboxed processes.
+- Add option "HideSbieProcesses" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
+- When "HideFirmwareInfo" is set,the programs which try getting fireware info will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
+- Add template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI.
+- Add template "BlockLocalConnect" to prevent sandboxed processes from sending network packs to loaclhost to breakout sandbox.
+- Add new box type "Maximize Isolation Sandbox".
+- Add new option "AllowCoverTaskbar" for #3975.
+
+### Changed
+- Extend "Temp Template" to make it could delete local template section.
 
 
 
@@ -35,6 +48,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option "AlertBeforeStart"
   - when it is set, a prompt pops up before launching a new program into the sandbox using "Start.exe" and checks if the program that started "Start.exe" is a Sandboxie component itself, if it is not, a warning pops up
 - added option for EditAdminOnly in SetupWizard
+
 
 ### Changed
 - splited the advanced new box wizard page in two

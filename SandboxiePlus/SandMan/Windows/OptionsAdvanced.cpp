@@ -95,6 +95,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkShowTriggersTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowTriggersTmpl()));
 
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHideNonSystemProcesses, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.btnAddProcess, SIGNAL(clicked(bool)), this, SLOT(OnAddProcess()));
 	connect(ui.btnDelProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelProcess()));
 	connect(ui.chkShowHiddenProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHiddenProcTmpl()));
@@ -255,6 +256,7 @@ void COptionsWindow::LoadAdvanced()
 	//
 
 	ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", true));
+	ui.chkHideNonSystemProcesses->setChecked(m_pBox->GetBool("HideNonSystemProcesses", false));
 	
 	ui.treeHideProc->clear();
 	foreach(const QString& Value, m_pBox->GetTextList("HideHostProcess", m_Template))
@@ -497,6 +499,7 @@ void COptionsWindow::SaveAdvanced()
 
 
 	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes", "", "n");
+	WriteAdvancedCheck(ui.chkHideNonSystemProcesses, "HideNonSystemProcesses", "y", "");
 
 	QStringList HideProcesses;
 	for (int i = 0; i < ui.treeHideProc->topLevelItemCount(); i++)

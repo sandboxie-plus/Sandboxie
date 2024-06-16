@@ -11,15 +11,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
   - usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
   - note: use /passwd without the password to have SbieIni prompot for the password on the console, this hides the password from view and from bing captured with the command line
+- added checkbox for PromptForInternetAccess option to the New Box Wizard
 
 ### Fixed
 - fixed security issue with the newly introduced experimental "UseCreateToken=y" machanism
 - fixed issue with "UseCreateToken=y" when using a MSFT online account
 - fixed Export sandbox not containing hidden files [#3980](https://github.com/sandboxie-plus/Sandboxie/issues/3980) (thanks L4cache)
-
-### Added
-- added checkbox for PromptForInternetAccess option to the New Box Wizard
- 
+- fixed Chrome stopped printing [#3926](https://github.com/sandboxie-plus/Sandboxie/issues/3926)
+  - Sandboxie will add CustomChromiumFlags=--disable-features=PrintCompositorLPAC to chrome based browsers command line
+  - Note: Less Privileged App Container (LPAC) don't work with sandboxie currently
 
 
 

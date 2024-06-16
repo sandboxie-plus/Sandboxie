@@ -4631,7 +4631,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
            <widget class="QWidget" name="tabHideProc">
             <property name="font">
              <font>
-              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -4651,23 +4650,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
               <widget class="QCheckBox" name="chkHideHostProcesses">
                <property name="text">
                 <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QPushButton" name="btnAddProcess">
-               <property name="text">
-                <string>Add Process</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0" colspan="2">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>Hide host processes from processes running in the sandbox.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -4698,7 +4680,24 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </property>
               </widget>
              </item>
-             <item row="5" column="0" rowspan="3">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Hide host processes from processes running in the sandbox.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QPushButton" name="btnAddProcess">
+               <property name="text">
+                <string>Add Process</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" rowspan="4">
               <widget class="QTreeWidget" name="treeHideProc">
                <property name="sortingEnabled">
                 <bool>true</bool>

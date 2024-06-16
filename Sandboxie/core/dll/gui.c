@@ -1356,7 +1356,7 @@ _FX HWND Gui_CreateWindowExW(
     // replace parent
     //
 
-	if (Gui_BlockInterferenceControl && !SbieApi_QueryConfBool(NULL, L"AllowCoverTaskbar", FALSE)) {
+	if (Gui_DontAllowCoverTaskbar) {
 
 		typedef BOOL(*P_SystemParametersInfoA)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni);
 		static P_SystemParametersInfoA SystemParametersInfoA = NULL;
@@ -1975,7 +1975,7 @@ _FX BOOL Gui_MoveWindow(
         return FALSE;
     }
 	
-    if (Gui_BlockInterferenceControl && !SbieApi_QueryConfBool(NULL, L"AllowCoverTaskbar", FALSE)) {
+    if (Gui_DontAllowCoverTaskbar) {
 
         typedef BOOL (*P_SystemParametersInfoA)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni);
         static P_SystemParametersInfoA SystemParametersInfoA = NULL;
@@ -2027,7 +2027,7 @@ _FX BOOL Gui_SetWindowPos(
     // use SbieSvc GUI Proxy if hWnd is accessible but outside the sandbox
     //
 	
-    if (Gui_BlockInterferenceControl&&!SbieApi_QueryConfBool(NULL,L"AllowCoverTaskbar",FALSE)) {
+    if (Gui_DontAllowCoverTaskbar) {
 
         if (hWndInsertAfter == HWND_TOPMOST || hWndInsertAfter == HWND_TOP)
             hWndInsertAfter = HWND_DESKTOP;

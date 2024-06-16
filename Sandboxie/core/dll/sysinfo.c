@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -306,13 +306,16 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
     WCHAR boxname[BOXNAME_COUNT];
 
 	BOOL hideOther = SbieApi_QueryConfBool(NULL, L"HideOtherBoxes", TRUE);
+    BOOL hideNonSys = SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE);
+    BOOL hideSbie = SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE);
 
 	WCHAR* hiddenProcesses = NULL;
 	WCHAR* hiddenProcessesPtr = NULL;
 	ULONG hiddenProcessesLen = 100 * 110; // we can hide up to 100 processes, should be enough
 	WCHAR hiddenProcess[110];
-	ULONG tempSession = 0;
+
 	WCHAR tempSid[96] = {0};
+    ULONG tempSession = 0;
 
 	for (ULONG index = 0; ; ++index) {
 		NTSTATUS status = SbieApi_QueryConfAsIs(NULL, L"HideHostProcess", index, hiddenProcess, 108 * sizeof(WCHAR));
@@ -346,22 +349,31 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         next = (SYSTEM_PROCESS_INFORMATION *) (((UCHAR *)curr) + curr->NextEntryOffset);
         if (next == curr)
             break;
-			
-		WCHAR* imageFileName = NULL;
-		SbieApi_QueryProcess(next->UniqueProcessId, boxname, imageFileName, tempSid, &tempSession);
-		BOOL hideProcess = FALSE;
-		if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0  && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0  && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE) && !*boxname) {
-			hideProcess = TRUE;
-		} else if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
-			hideProcess = TRUE;
-		}
-		else if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE)&&*imageFileName&&(wcsstr(imageFileName, L"Sandboxie") != NULL ||wcsstr(imageFileName, L"Sbie") != NULL)) {	
-			hideProcess = TRUE;
-		}
-		else if(hiddenProcesses && next->ImageName.Buffer) {
-            WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
+		
+        WCHAR* imagename = NULL;
+        if (next->ImageName.Buffer) {
+            imagename = wcschr(next->ImageName.Buffer, L'\\');
 			if (imagename)  imagename += 1; // skip L'\\'
 			else			imagename = next->ImageName.Buffer;
+        }
+
+		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
+		BOOL hideProcess = FALSE;
+        if (hideNonSys && !*boxname
+          && _wcsnicmp(tempSid, L"S-1-5-18", 8) != 0
+          && _wcsnicmp(tempSid, L"S-1-5-80", 8) != 0
+          && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0
+          && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0) {
+            hideProcess = TRUE;
+        }
+        else if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
+            hideProcess = TRUE;
+        }
+        else if (hideSbie && imagename && (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0)) {
+            hideProcess = TRUE;
+        }
+		else if(hiddenProcesses && imagename) {
+
 			if (!*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
 				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
 					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {

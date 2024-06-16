@@ -116,14 +116,14 @@ QStringList	ListDir(const QString& srcDirPath, const QStringList& NameFilter, bo
 	if (!srcDir.exists())
 		return FileList;
 
-	QStringList Files = !NameFilter.isEmpty() ? srcDir.entryList(NameFilter, QDir::Files | QDir::System) : srcDir.entryList(QDir::Files | QDir::System);
+	QStringList Files = !NameFilter.isEmpty() ? srcDir.entryList(NameFilter, QDir::Files | QDir::Hidden | QDir::System) : srcDir.entryList(QDir::Files | QDir::Hidden | QDir::System);
 	foreach (const QString& FileName, Files)
 		FileList.append(FileName);
 
 	if(!bAndSubDirs)
 		return FileList;
 
-	QStringList Dirs = srcDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+	QStringList Dirs = srcDir.entryList(QDir::Dirs | QDir::Hidden | QDir::NoDotAndDotDot);
 	foreach (const QString& DirName, Dirs)
 	{
 		//if (DirName.compare(".") == 0 || DirName.compare("..") == 0)

@@ -21,7 +21,7 @@ CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
     setPage(Page_Isolation, new CIsolationPage);
     setPage(Page_Advanced, new CAdvancedPage);
     setPage(Page_Summary, new CSummaryPage);
-    
+
     m_bAdvanced = theConf->GetBool("Options/AdvancedBoxWizard", false);
 
     setWizardStyle(ModernStyle);
@@ -96,7 +96,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 	if (!Status.IsError())
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-		
+
         // SharedTemplate
         QElapsedTimer timer;
         timer.start();
@@ -206,12 +206,12 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 		    	case CSandBoxPlus::eHardened:
 		    		pBox->SetBool("UseSecurityMode", true);
 		    		break;
-		    
+
 		    	case CSandBoxPlus::eDefaultPlus:
                     pBox->SetBool("UsePrivacyMode", true);
 		    	case CSandBoxPlus::eDefault:
 		    		break;
-		    
+
 		    	case CSandBoxPlus::eAppBoxPlus:
                     pBox->SetBool("UsePrivacyMode", true);
 		    	case CSandBoxPlus::eAppBox:
@@ -220,22 +220,22 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 		    		pBox->InsertText("Template", "RpcPortBindingsExt");
 		    		break;
 		    }
-		    
+
             if (BlackBox) {
                 pBox->SetBool("UseFileImage", true);
                 pBox->SetBool("ConfidentialBox", true);
             }
-		    
+
 		    QRgb rgb = theGUI->GetBoxColor(BoxType);
 		    pBox->SetText("BorderColor", QString("#%1%2%3").arg(qBlue(rgb), 2, 16, QChar('0')).arg(qGreen(rgb), 2, 16, QChar('0')).arg(qRed(rgb), 2, 16, QChar('0')) + ",ttl");
-		    
-		    
+
+
             QString Location = field("boxLocation").toString();
             if (!Location.isEmpty()) {
                 pBox->SetText("FileRootPath", Location);
                 theAPI->UpdateBoxPaths(pBox.data());
             }
-		    
+
             if (field("boxVersion").toInt() == 1) {
                 pBox->SetBool("UseFileDeleteV2", true);
 		    	pBox->SetBool("UseRegDeleteV2", true);
@@ -244,7 +244,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 pBox->SetBool("SeparateUserFolders", false);
             if(field("useVolumeSN").toBool())
                 pBox->SetBool("UseVolumeSerialNumbers", true);
-            
+
             if (field("autoRemove").toBool()) {
                 pBox->SetBool("AutoDelete", true);
                 pBox->SetBool("AutoRemove", true);
@@ -253,7 +253,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 pBox->SetBool("AutoDelete", true);
             if(field("autoRecover").toBool())
                 pBox->SetBool("AutoRecover", true);
-		    
+
             if (field("blockNetwork").toInt() == 1) { // device based
                 //pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
                 pBox->InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
@@ -266,7 +266,16 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             }
             pBox->SetBool("BlockNetworkFiles", !field("shareAccess").toBool());
 
+
+            
+
+            bool bAllowNetwork = field("blockNetwork").toInt() == 0;
+            if (field("promptAccess").toBool() && !bAllowNetwork)
+                pBox->SetBool("PromptForInternetAccess", true);
+
             bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened || BoxType== CSandBoxPlus::eIsoationMax);
+            bool bAppBox = (BoxType == CSandBoxPlus::eAppBoxPlus || BoxType == CSandBoxPlus::eAppBox);
+
             bool bDropAdmin = field("dropAdmin").toBool();
             if (field("dropAdmin").toBool() && !bHardened)
                 pBox->SetBool("DropAdminRights", true);
@@ -277,7 +286,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             if(field("msiServer").toBool() && !bDropAdmin && !bHardened)
                 pBox->SetBool("MsiInstallerExemptions", true);
 
-            if(field("boxToken").toBool())
+            if(field("boxToken").toBool() && !bAppBox)
                 pBox->SetBool("SandboxieLogon", true);
 
             if(field("imagesProtection").toBool())
@@ -297,7 +306,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                             " please switch to the Virtualization Scheme to Version 1 and report the issue,"
                             " the option to change this preset can be found in the Box Options in the Box Structure group.")
                         , tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
-		    
+
                     if (State)
                         theConf->SetValue("Options/WarnDeleteV2", false);
                 }
@@ -426,7 +435,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     AddBoxType(tr("<a href=\"sbie://docs/compartment-mode\">Application Compartment</a> Box"), (int)CSandBoxPlus::eAppBox, 
         tr("This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. \n"
             "While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment."));
-    
+
     QWidget* pGap = new QWidget();
     pGap->setMinimumHeight(4);
     layout->addWidget(pGap, row++, 1, 1, 2);
@@ -619,7 +628,7 @@ CFilesPage::CFilesPage(QWidget *parent)
     layout->addWidget(pFileLabel, row++, 0);
     layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 2, 1, 1);
 
-    
+
     // Location
     QLineEdit* pDummy = new QLineEdit();
     pDummy->setVisible(false);
@@ -690,7 +699,7 @@ int CFilesPage::nextId() const
 {
     return CNewBoxWizard::Page_Isolation;
 }
-    
+
 void CFilesPage::initializePage()
 {
     m_pBoxLocation->clear();
@@ -751,6 +760,7 @@ CIsolationPage::CIsolationPage(QWidget *parent)
         pNetAccess->addItem(tr("Block network/internet using Windows Filtering Platform"));
     pNetAccess->setCurrentIndex(theConf->GetInt("BoxDefaults/BlockNetwork", 0));
     layout->addWidget(pNetAccess, row++, 1, 1, 3);
+    connect(pNetAccess, SIGNAL(currentIndexChanged(int)), this, SLOT(OnBlockNetworkChanged(int)));
     registerField("blockNetwork", pNetAccess);
 
     m_pShareAccess = new QCheckBox(tr("Allow access to network files and folders"));
@@ -758,6 +768,11 @@ CIsolationPage::CIsolationPage(QWidget *parent)
     m_pShareAccess->setChecked(theConf->GetBool("BoxDefaults/ShareAccess", false));
     layout->addWidget(m_pShareAccess, row++, 1, 1, 3);
     registerField("shareAccess", m_pShareAccess);
+
+    m_pPromptAccess = new QCheckBox(tr("Prompt user whether to allow an exemption from the blockade"));
+    m_pPromptAccess->setChecked(theConf->GetBool("BoxDefaults/PromptAccess", false));
+    layout->addWidget(m_pPromptAccess, row++, 1, 1, 3);
+    registerField("promptAccess", m_pPromptAccess);
 
 
     QLabel* pAdminLabel = new QLabel(tr("Admin Options"), this);
@@ -807,7 +822,7 @@ int CIsolationPage::nextId() const
 {
     return CNewBoxWizard::Page_Advanced;
 }
-    
+
 void CIsolationPage::initializePage()
 {
     int BoxType = wizard()->field("boxType").toInt();
@@ -820,7 +835,14 @@ void CIsolationPage::initializePage()
     m_pDropAdmin->setChecked(bDropAdmin || bHardened);
 
     bool bAppBox = (BoxType == CSandBoxPlus::eAppBoxPlus || BoxType == CSandBoxPlus::eAppBox);
+    bool bBoxToken = field("boxToken").toBool();
     m_pBoxToken->setEnabled(!bAppBox);
+    m_pBoxToken->setChecked(!bAppBox && bBoxToken);
+
+    bool bAllowNetwork = field("blockNetwork").toInt() == 0;
+    bool bPromptAccess = field("promptAccess").toBool();
+    m_pPromptAccess->setEnabled(!bAllowNetwork);
+    m_pPromptAccess->setChecked(!bAllowNetwork && bPromptAccess);
 }
 
 bool CIsolationPage::validatePage()
@@ -837,6 +859,20 @@ void CIsolationPage::OnDropAdminChanged(int state) {
     else {
         // If m_pDropAdmin is unchecked, enable m_pMSIServer
         m_pMSIServer->setEnabled(true);
+        m_pMSIServer->setChecked(theConf->GetBool("BoxDefaults/MsiExemptions", false));
+    }
+}
+
+void CIsolationPage::OnBlockNetworkChanged(int index) {
+    if (index == 0) {
+        // If network access is allowed, disable m_pPromptAccess
+        m_pPromptAccess->setEnabled(false);
+        m_pPromptAccess->setChecked(false);
+    }
+    else {
+        // If network access is blocked, enable m_pPromptAccess
+        m_pPromptAccess->setEnabled(true);
+        m_pPromptAccess->setChecked(theConf->GetBool("BoxDefaults/PromptAccess", false));
     }
 }
 
@@ -914,7 +950,7 @@ int CAdvancedPage::nextId() const
 {
     return CNewBoxWizard::Page_Summary;
 }
-    
+
 void CAdvancedPage::initializePage()
 {
 }
@@ -966,7 +1002,7 @@ CSummaryPage::CSummaryPage(QWidget *parent)
     m_pSetInstant = new QCheckBox(tr("Skip this summary page when advanced options are not set"));
     m_pSetInstant->setChecked(theConf->GetBool("Options/InstantBoxWizard", false));
     layout->addWidget(m_pSetInstant, row++, 1, 1, 2);
-    
+
     setLayout(layout);
 }
 
@@ -1015,6 +1051,7 @@ bool CSummaryPage::validatePage()
 
         theConf->SetValue("BoxDefaults/BlockNetwork", field("blockNetwork").toInt());
         theConf->SetValue("BoxDefaults/ShareAccess", field("shareAccess").toBool());
+        theConf->SetValue("BoxDefaults/PromptAccess", field("promptAccess").toBool());
 
         theConf->SetValue("BoxDefaults/DropAdmin", field("dropAdmin").toBool());
         theConf->SetValue("BoxDefaults/FakeAdmin", field("fakeAdmin").toBool());
@@ -1022,7 +1059,7 @@ bool CSummaryPage::validatePage()
 
         theConf->SetValue("BoxDefaults/BoxToken", field("boxToken").toBool());
         theConf->SetValue("BoxDefaults/ImagesProtection", field("imagesProtection").toBool());
-		theConf->SetValue("BoxDefaults/CoverBoxedWindows", field("coverBoxedWindows").toBool());
+        theConf->SetValue("BoxDefaults/CoverBoxedWindows", field("coverBoxedWindows").toBool());
         theConf->SetValue("BoxDefaults/SharedTemplate", field("sharedTemplate").toInt());
     }
 

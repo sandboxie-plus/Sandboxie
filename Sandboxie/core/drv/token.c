@@ -2259,15 +2259,18 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
                     continue;
                 }
 
-                if (KeepLogonSession && (LocalGroups->Groups[i].Attributes & SE_GROUP_LOGON_ID))
-                    continue;
+				if ((LocalGroups->Groups[i].Attributes & SE_GROUP_LOGON_ID)) {
+					if(!KeepLogonSession)
+						LocalGroups->Groups[i].Attributes = SE_GROUP_LOGON_ID | SE_GROUP_USE_FOR_DENY_ONLY;
+					continue;
+				}
 
                 if (RtlEqualSid(LocalGroups->Groups[i].Sid, LocalUser->User.Sid)) {
                     if (KeepUserGroup)
                         continue;
                 }
 
-                LocalGroups->Groups[i].Attributes = 0;
+                LocalGroups->Groups[i].Attributes = SE_GROUP_USE_FOR_DENY_ONLY;
             }
         }
 
@@ -2315,6 +2318,13 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
 		memcpy(LocalUser->User.Sid, proc->SandboxieLogonSid, RtlLengthSid(proc->SandboxieLogonSid));
 	}
     
+    //UNICODE_STRING unicodeString;
+    //status = RtlConvertSidToUnicodeString(&unicodeString, LocalUser->User.Sid, TRUE);
+    //if (NT_SUCCESS(status)) {
+    //    DbgPrint("SID: %wZ\n", &unicodeString);
+    //    RtlFreeUnicodeString(&unicodeString);
+    //}
+
     status = SbieCreateToken(
         &TokenHandle,
         TOKEN_ALL_ACCESS,
@@ -2336,6 +2346,39 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
         LocalDefaultDacl,
         LocalSource
     );
+
+    //
+    // For online accounts we must change the primary group
+    //
+
+    if (proc->SandboxieLogonSid && status == STATUS_INVALID_PRIMARY_GROUP)
+    {
+        ExFreePool((PVOID)LocalPrimaryGroup);
+        LocalPrimaryGroup = (PTOKEN_PRIMARY_GROUP)ExAllocatePoolWithTag(PagedPool, sizeof(PTOKEN_PRIMARY_GROUP), tzuk);
+        LocalPrimaryGroup->PrimaryGroup = LocalUser->User.Sid;
+
+        status = SbieCreateToken(
+            &TokenHandle,
+            TOKEN_ALL_ACCESS,
+            &ObjectAttributes,
+            TokenType,
+            &AuthenticationId,
+            &ExpirationTime,
+            LocalUser,
+            LocalGroups,
+            LocalPrivileges,
+
+            0, //UserAttributes,
+            0, //DeviceAttributes,
+            0, //DeviceGroups,
+            MandatoryPolicy,
+
+            LocalOwner,
+            LocalPrimaryGroup,
+            NewDefaultDacl,
+            LocalSource
+        );
+    }
 
     if (NT_SUCCESS(status))
         status = Thread_GetKernelHandleForUserHandle(&KernelTokenHandle, TokenHandle);
@@ -2402,7 +2445,8 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
         Token_SetHandleDacl(NtCurrentThread(), NewDacl);
         Token_SetHandleDacl(KernelTokenHandle, NewDacl);
     }
-    else if (!NT_SUCCESS(status))
+    
+    if (!NT_SUCCESS(status))
     {
         Log_Status_Ex_Process(MSG_1222, 0xA4, status, NULL, proc->box->session_id, proc->pid);
         goto finish;

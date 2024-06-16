@@ -717,65 +717,6 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="lblLimit">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="toolTip">
-                <string>Protect the system from sandboxed processes</string>
-               </property>
-               <property name="text">
-                <string>Limit restrictions</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1" colspan="2">
-              <widget class="QLabel" name="label_53">
-               <property name="text">
-                <string>Single Process Memory Limit:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="3">
-              <widget class="QLineEdit" name="lineSingleMemory">
-               <property name="placeholderText">
-                <string>Leave it blank to disable the setting(Unit:KB)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1" colspan="2">
-              <widget class="QLabel" name="label_56">
-               <property name="text">
-                <string>Total Processes Memory Limit:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="3">
-              <widget class="QLineEdit" name="lineTotalMemory">
-               <property name="placeholderText">
-                <string>Leave it blank to disable the setting(Unit:KB)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1" colspan="2">
-              <widget class="QLabel" name="label_86">
-               <property name="text">
-                <string>Total Processes Number Limit:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="3">
-              <widget class="QLineEdit" name="lineTotalNumber">
-               <property name="placeholderText">
-                <string>Leave it blank to disable the setting</string>
-               </property>
-              </widget>
-             </item>
              <item row="8" column="0">
               <widget class="QLabel" name="lblOther">
                <property name="font">
@@ -4113,6 +4054,101 @@ The process match level has a higher priority than the specificity and describes
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="lblLimit_2">
+            <attribute name="title">
+             <string>Process Limits</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_51">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_50">
+               <item row="4" column="0">
+                <spacer name="verticalSpacer_44">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblLimit">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the system from sandboxed processes</string>
+                 </property>
+                 <property name="text">
+                  <string>Limit restrictions</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QLineEdit" name="lineTotalMemory">
+                 <property name="placeholderText">
+                  <string>Leave it blank to disable the setting(Unit:KB)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2">
+                <widget class="QLineEdit" name="lineTotalNumber">
+                 <property name="placeholderText">
+                  <string>Leave it blank to disable the setting</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLineEdit" name="lineSingleMemory">
+                 <property name="placeholderText">
+                  <string>Leave it blank to disable the setting(Unit:KB)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_86">
+                 <property name="text">
+                  <string>Total Processes Number Limit:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_56">
+                 <property name="text">
+                  <string>Total Processes Memory Limit:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_53">
+                 <property name="text">
+                  <string>Single Process Memory Limit:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="2">
+                <spacer name="horizontalSpacer_22">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
            <widget class="QWidget" name="tabDlls">
             <attribute name="title">
              <string>Dlls &amp;&amp; Extensions</string>
@@ -4639,61 +4675,10 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <string>Hide Processes</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_29">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkHideOtherBoxes">
-               <property name="text">
-                <string>Don't allow sandboxed processes to see processes running in other boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkHideHostProcesses">
-               <property name="text">
-                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <spacer name="verticalSpacer_16">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
              <item row="6" column="1">
               <widget class="QCheckBox" name="chkShowHiddenProcTmpl">
                <property name="text">
                 <string>Show Templates</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <widget class="QPushButton" name="btnDelProcess">
-               <property name="text">
-                <string>Remove</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>Hide host processes from processes running in the sandbox.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QPushButton" name="btnAddProcess">
-               <property name="text">
-                <string>Add Process</string>
                </property>
               </widget>
              </item>
@@ -4712,6 +4697,74 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                  <string/>
                 </property>
                </column>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Hide host processes from processes running in the sandbox.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkHideHostProcesses">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="chkBlockWMI">
+               <property name="text">
+                <string>Prevent sandboxed processes from accessing system deatils through WMI</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <spacer name="verticalSpacer_16">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="7" column="1">
+              <widget class="QPushButton" name="btnDelProcess">
+               <property name="text">
+                <string>Remove</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QPushButton" name="btnAddProcess">
+               <property name="text">
+                <string>Add Process</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkHideOtherBoxes">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running in other boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_59">
+               <property name="text">
+                <string>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
             </layout>

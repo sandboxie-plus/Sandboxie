@@ -247,7 +247,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	ui.tabsOther->setCurrentIndex(0);
 	ui.tabsOther->setTabIcon(0, CSandMan::GetIcon("Presets"));
-	ui.tabsOther->setTabIcon(1, CSandMan::GetIcon("Dll"));
+	ui.tabsOther->setTabIcon(1, CSandMan::GetIcon("BFance"));
+	ui.tabsOther->setTabIcon(2, CSandMan::GetIcon("Dll"));
 
 	ui.tabsAdvanced->setCurrentIndex(0);
 	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Presets"));
@@ -384,6 +385,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblPolicy, CSandMan::GetIcon("Policy").pixmap(size,size));
 
 	AddIconToLabel(ui.lblCompatibility, CSandMan::GetIcon("Compatibility").pixmap(size,size));
+	AddIconToLabel(ui.lblLimit, CSandMan::GetIcon("EFence").pixmap(size,size));
 	//AddIconToLabel(ui.lblComRpc, CSandMan::GetIcon("Objects").pixmap(size,size));
 
 	AddIconToLabel(ui.lblPrivilege, CSandMan::GetIcon("Token").pixmap(size,size));

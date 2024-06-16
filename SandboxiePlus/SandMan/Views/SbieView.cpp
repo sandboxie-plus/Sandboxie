@@ -1761,13 +1761,6 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 {
 	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
 	CSandBoxPtr pBox = m_pSbieModel->GetSandBox(ModelIndex);
-	if (pBox.isNull())
-		return;
-
-	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0) {
-		ShowOptions(pBox);
-		return;
-	}
 
 	if (index.column() == CSbieModel::ePath) {
 		OnSandBoxAction(m_pMenuExplore, QList<CSandBoxPtr>() << pBox);
@@ -1776,6 +1769,20 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 
 	//if (index.column() != CSbieModel::eName)
 	//	return;
+
+	OnDoubleClicked(pBox);
+}
+
+void CSbieView::OnDoubleClicked(const CSandBoxPtr &pBox)
+{
+	if (pBox.isNull())
+		return;
+
+	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0) {
+		ShowOptions(pBox);
+		return;
+	}
+
 
 	if (!pBox->IsEnabled())
 	{

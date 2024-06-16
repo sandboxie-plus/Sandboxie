@@ -3200,7 +3200,7 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 
 void CSandMan::OnBoxDblClick(QTreeWidgetItem* pItem)
 {
-	m_pBoxView->ShowOptions(pItem->data(0, Qt::UserRole).toString());
+	m_pBoxView->OnDoubleClicked(theAPI->GetBoxByName(pItem->data(0, Qt::UserRole).toString()));
 }
 
 void CSandMan::OnSandBoxAction()

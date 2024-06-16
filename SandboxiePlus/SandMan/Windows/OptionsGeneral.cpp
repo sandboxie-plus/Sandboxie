@@ -61,7 +61,6 @@ void COptionsWindow::CreateGeneral()
 
 
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
-	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eIsoationMax), tr("Maximize Isolation Sandbox"), (int)CSandBoxPlus::eIsoationMax);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardened), tr("Security Hardened Sandbox"), (int)CSandBoxPlus::eHardened);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefaultPlus), tr("Sandbox with Data Protection"), (int)CSandBoxPlus::eDefaultPlus);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefault), tr("Standard Isolation Sandbox (Default)"), (int)CSandBoxPlus::eDefault);
@@ -1068,24 +1067,8 @@ void COptionsWindow::UpdateBoxType()
 	bool bPrivacyMode = ui.chkPrivacy->isChecked();
 	bool bSecurityMode = ui.chkSecurityMode->isChecked();
 	bool bAppBox = ui.chkNoSecurityIsolation->isChecked();
-	bool bIsoationMax = ui.chkHideHostProcesses->isChecked()
-		&& ui.chkBlockWMI->isChecked()
-		&& ui.chkHideOtherBoxes->isChecked()
-		&& ui.chkBlockSpooler->isChecked()
-		&& ui.chkProtectPower->isChecked()
-		&& ui.chkCloseClipBoard->isChecked()
-		&& ui.chkUserOperation->isChecked()
-		&& ui.chkBlockCapture->isChecked()
-		&& ui.chkConfidential->isChecked()
-		&& ui.chkProtectWindow->isChecked()
-		&& ui.chkAlertBeforeStart->isChecked()
-		&& ui.chkForceProtection->isChecked()
-		&& bSecurityMode && bPrivacyMode && !bAppBox;
 
 	int BoxType;
-	if (bIsoationMax)
-		BoxType = (int)CSandBoxPlus::eIsoationMax;
-	else
 	if (bAppBox) 
 		BoxType = bPrivacyMode ? (int)CSandBoxPlus::eAppBoxPlus : (int)CSandBoxPlus::eAppBox;
 	else if (bSecurityMode) 
@@ -1111,51 +1094,13 @@ void COptionsWindow::OnBoxTypChanged()
 	int BoxType = ui.cmbBoxType->currentData().toInt();
 
 	switch (BoxType) {
-	case CSandBoxPlus::eIsoationMax:
-		/*pBox->SetBool("HideNonSystemProcess", true);
-					pBox->InsertText("Template", "BlockAccessWMI");
-					pBox->InsertText("Template", "BlockDNS");
-					pBox->SetBool("HideOtherBoxes", true);
-					pBox->SetBool("ClosePrintSpooler", true);
-					pBox->SetBool("OpenClipboard", false);
-					pBox->SetBool("BlockInterferePower", true);
-					pBox->SetBool("BlockInterferenceControl", true);
-					pBox->SetBool("BlockScreenCapture", true);
-					pBox->AppendText("NetworkAccess","*,Block;Port=*;Address=127.*.*.*;Protocol=Any");
-					pBox->SetBool("UseSandboxDesktop", true);
-					pBox->SetBool("ConfidentialBox", true);
-					pBox->SetBool("CoverBoxedWindows", true);
-					pBox->SetBool("AlertBeforeStart", true);
-					pBox->SetBool("ForceProtectionOnMount", true);
-					pBox->SetNum64("ProcessMemoryLimit", 80000000);
-					pBox->SetNum("ProcessNumberLimit", 20);
-					pBox->SetBool("ProtectHostImages", true);*/
-		ui.chkBlockWMI->setChecked(true);
-		ui.chkBlockDns->setChecked(true);
-		ui.chkHideOtherBoxes->setChecked(true);
-		ui.chkCloseClipBoard->setChecked(true);
-		ui.chkBlockSpooler->setChecked(true);
-		ui.chkBlockCapture->setChecked(true);
-		ui.chkAddToJob->setChecked(true);
-		ui.chkAlertBeforeStart->setChecked(true);
-		ui.chkConfidential->setChecked(true);
-		ui.chkProtectPower->setChecked(true);
-		ui.chkUserOperation->setChecked(true);
-		ui.chkProtectWindow->setChecked(true);
-		ui.chkProtectSCM->setChecked(true);
-		ui.chkProtectSystem->setChecked(true);
-		ui.chkRestrictServices->setChecked(true);
-		ui.chkSbieLogon->setChecked(true);
-		ui.chkDropPrivileges->setChecked(true);
-		ui.chkHideOtherBoxes->setChecked(true);
-		ui.chkHostProtect->setChecked(true);
 	case CSandBoxPlus::eHardenedPlus:
 	case CSandBoxPlus::eHardened:
 		ui.chkNoSecurityIsolation->setChecked(false);
 		ui.chkNoSecurityFiltering->setChecked(false);
 		ui.chkSecurityMode->setChecked(true);
 		//ui.chkRestrictServices->setChecked(true);
-		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus||BoxType==CSandBoxPlus::eIsoationMax);
+		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
 		//SetTemplate("NoUACProxy", false);
 		SetTemplate("RpcPortBindingsExt", false);
 		break;

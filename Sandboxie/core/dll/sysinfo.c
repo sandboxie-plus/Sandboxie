@@ -208,7 +208,8 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
     }
 
 
- if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
+	if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
+	
 		HKEY hKey=NULL;
 		PVOID lpData=NULL;
 		DWORD dwLen = 0;
@@ -245,9 +246,11 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 
 
 //---------------------------------------------------------------------------
-// SysInfo_DiscardProcesses
+// Sysinfo_IsTokenAnySid
 //---------------------------------------------------------------------------
+
 BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE* pToken);
+
 _FX BOOL Sysinfo_IsTokenAnySid(HANDLE hToken,WCHAR* compare)
 {
 	NTSTATUS status;
@@ -289,6 +292,13 @@ _FX BOOL Sysinfo_IsTokenAnySid(HANDLE hToken,WCHAR* compare)
 
 	return return_value;
 }
+
+
+//---------------------------------------------------------------------------
+// SysInfo_DiscardProcesses
+//---------------------------------------------------------------------------
+
+
 _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 {
     SYSTEM_PROCESS_INFORMATION *curr = buf;
@@ -336,26 +346,23 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         next = (SYSTEM_PROCESS_INFORMATION *) (((UCHAR *)curr) + curr->NextEntryOffset);
         if (next == curr)
             break;
+			
 		WCHAR* imageFileName = NULL;
-		SbieApi_QueryProcess(next->UniqueProcessId, boxname,imageFileName, tempSid, &tempSession);
+		SbieApi_QueryProcess(next->UniqueProcessId, boxname, imageFileName, tempSid, &tempSession);
 		BOOL hideProcess = FALSE;
 		if(_wcsnicmp(tempSid, L"S-1-5-18",8) != 0 && _wcsnicmp(tempSid, L"S-1-5-80",8) != 0  && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0 && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0  && SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE) && !*boxname) {
-					hideProcess = TRUE;
-		}
-		else
-		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
+			hideProcess = TRUE;
+		} else if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
 			hideProcess = TRUE;
 		}
-		else
-		if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE)&&*imageFileName&&(wcsstr(imageFileName, L"Sandboxie") != NULL ||wcsstr(imageFileName, L"Sbie") != NULL)) {
-				
+		else if (SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE)&&*imageFileName&&(wcsstr(imageFileName, L"Sandboxie") != NULL ||wcsstr(imageFileName, L"Sbie") != NULL)) {	
 			hideProcess = TRUE;
 		}
 		else if(hiddenProcesses && next->ImageName.Buffer) {
             WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
 			if (imagename)  imagename += 1; // skip L'\\'
 			else			imagename = next->ImageName.Buffer;
-			if ( !*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
+			if (!*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
 				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
 					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {
 						hideProcess = TRUE;

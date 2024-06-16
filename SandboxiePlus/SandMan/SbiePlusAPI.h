@@ -146,7 +146,6 @@ public:
 	{
 		eHardenedPlus,
 		eHardened,
-		eIsoationMax,
 		eDefaultPlus,
 		eDefault,
 		eAppBoxPlus,

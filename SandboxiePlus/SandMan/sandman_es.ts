@@ -1231,7 +1231,7 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation>Preguntar al usuario si desea permitir una exención de la restricción</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
@@ -8001,7 +8001,7 @@ Para acceso a archivos Ud. puede usar &apos;Directo Todo&apos; en vez de hacerlo
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4742"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
-        <translation>No permitir procesos en la sandbox ver procesos ejecutandose en otras sandboxes</translation>
+        <translation>No permitir que los procesos aislados vean procesos ejecutándose en otras cajas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4767"/>
@@ -8450,7 +8450,7 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="811"/>
         <source>Allow sandboxed windows to cover taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir que las ventanas aisladas cubran la barra de tareas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1569"/>
@@ -9194,38 +9194,38 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4043"/>
         <source>Process Limits</source>
-        <translation type="unfinished"></translation>
+        <translation>Límites de proceso</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4074"/>
         <source>Limit restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Restricción de límites</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4081"/>
         <location filename="Forms/OptionsWindow.ui" line="4095"/>
         <source>Leave it blank to disable the setting(Unit:KB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dejar en blanco para deshabilitar (Unidad: KB)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4088"/>
         <source>Leave it blank to disable the setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Dejar en blanco para deshabilitar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4102"/>
         <source>Total Processes Number Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Límite de Número Total de Procesos:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4109"/>
         <source>Total Processes Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Límite de Memoria Total de Procesos:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4116"/>
         <source>Single Process Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Límite de Memoria de Proceso Individual:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4313"/>
@@ -9246,17 +9246,17 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4701"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>No permitir que los procesos aislados vean procesos ejecutándose fuera de las cajas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4708"/>
         <source>Prevent sandboxed processes from accessing system deatils through WMI</source>
-        <translation type="unfinished"></translation>
+        <translation>Evitar que los procesos aislados accedan a los detalles del sistema mediante WMI</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4749"/>
         <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Algunos programas leen detalles del sistema mediante WMI (una base de datos integrada de Windows) en vez de métodos normales. Por ejemplo, &quot;tasklist.exe&quot; podría obtener la lista completa de procesos incluso si &quot;HideOtherBoxes&quot; está abierto accediento por WMI. Habilita esta opción para detener estos comportamientos.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4952"/>

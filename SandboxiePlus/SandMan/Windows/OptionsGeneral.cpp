@@ -283,11 +283,8 @@ void COptionsWindow::LoadGeneral()
 	ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
 
 	ui.lineSingleMemory->setText(m_pBox->GetText("ProcessMemoryLimit", ""));
-	ui.lineSingleMemory->setEnabled(true);
 	ui.lineTotalMemory->setText(m_pBox->GetText("TotalMemoryLimit", ""));
-	ui.lineTotalMemory->setEnabled(true);
 	ui.lineTotalNumber->setText(m_pBox->GetText("TotalNumberLimit", ""));
-	ui.lineTotalNumber->setEnabled(true);
 
 	//ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 	ui.chkOpenProtectedStorage->setChecked(m_BoxTemplates.contains("OpenProtectedStorage"));
@@ -429,12 +426,12 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkOpenSpooler, "OpenPrintSpooler", "y", "");
 	WriteAdvancedCheck(ui.chkPrintToFile, "AllowSpoolerPrintToFile", "y", "");
 
-	if (!ui.lineSingleMemory->text().isEmpty())
-		WriteText("ProcessMemoryLimit", ui.lineSingleMemory->text());
-	if (!ui.lineTotalMemory->text().isEmpty())
-		WriteText("TotalMemoryLimit", ui.lineTotalMemory->text());
-	if (!ui.lineTotalNumber->text().isEmpty())
-		WriteText("ProcessNumberLimit", ui.lineTotalNumber->text());
+	if (!ui.lineSingleMemory->text().isEmpty()) WriteText("ProcessMemoryLimit", ui.lineSingleMemory->text());
+	else m_pBox->DelValue("ProcessMemoryLimit");
+	if (!ui.lineTotalMemory->text().isEmpty()) WriteText("TotalMemoryLimit", ui.lineTotalMemory->text());
+	else m_pBox->DelValue("TotalMemoryLimit");
+	if (!ui.lineTotalNumber->text().isEmpty()) WriteText("ProcessNumberLimit", ui.lineTotalNumber->text());
+	else m_pBox->DelValue("ProcessNumberLimit");
 
 	//WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
 	SetTemplate("OpenProtectedStorage", ui.chkOpenProtectedStorage->isChecked());
@@ -815,10 +812,6 @@ void COptionsWindow::OnGeneralChanged()
 	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
 
-	ui.lineSingleMemory->setEnabled(ui.chkAddToJob->isChecked());
-	ui.lineTotalMemory->setEnabled(ui.chkAddToJob->isChecked());
-	ui.lineTotalNumber->setEnabled(ui.chkAddToJob->isChecked());
-
 	ui.chkCoverBar->setEnabled(ui.chkUserOperation->isChecked());
 
 	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
@@ -866,7 +859,7 @@ void COptionsWindow::OnSecurityMode()
 	m_GeneralChanged = true;
 	OnOptChanged();
 
-	OnAccessChanged(); // for rule specificity
+	OnAccessChangedEx(); // for rule specificity
 }
 
 void COptionsWindow::OnUseIcon(bool bUse)
@@ -1142,8 +1135,7 @@ void COptionsWindow::OnVmRead()
 		SetAccessEntry(eIPC, "", eReadOnly, "$:*");
 	else
 		DelAccessEntry(eIPC, "", eReadOnly, "$:*");
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnDiskChanged()

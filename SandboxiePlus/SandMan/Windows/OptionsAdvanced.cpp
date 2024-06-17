@@ -129,7 +129,9 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkPreferExternalManifest->setChecked(m_pBox->GetBool("PreferExternalManifest", false));
 	ui.chkElevateCreateProcessFix->setChecked(m_pBox->GetBool("ApplyElevateCreateProcessFix", false));
 
+	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 	ui.chkNestedJobs->setChecked(m_pBox->GetBool("AllowBoxedJobs", false));
+
 	ui.chkUseSbieDeskHack->setChecked(m_pBox->GetBool("UseSbieDeskHack", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
 
@@ -302,6 +304,8 @@ void COptionsWindow::LoadAdvanced()
 	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
 
 	m_AdvancedChanged = false;
+
+	UpdateJobOptions();
 }
 
 void COptionsWindow::OnPSTChanged()
@@ -553,16 +557,16 @@ void COptionsWindow::OnIsolationChanged()
 		ui.chkNoOpenForBox->setChecked(m_pBox->GetBool("DontOpenForBoxed", true));
 	}
 
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::UpdateBoxIsolation()
 {
 	ui.chkNoSecurityFiltering->setEnabled(ui.chkNoSecurityIsolation->isChecked());
 
-	ui.chkAddToJob->setEnabled(!IsAccessEntrySet(eWnd, "", eOpen, "*") && !ui.chkNoSecurityIsolation->isChecked());
-	ui.chkNestedJobs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	//ui.chkNotUntrusted->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
+	UpdateJobOptions();
 
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenSamEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
@@ -592,13 +596,9 @@ void COptionsWindow::UpdateBoxIsolation()
 	if (ui.chkNoSecurityIsolation->isChecked()) {
 		ui.chkCloseForBox->setChecked(false);
 		ui.chkNoOpenForBox->setChecked(false);
-		if (!IsAccessEntrySet(eWnd, "", eOpen, "*"))
-			ui.chkAddToJob->setChecked(false);
 		ui.chkSbieLogon->setChecked(false);
 	}
 	else {
-		if (!IsAccessEntrySet(eWnd, "", eOpen, "*"))
-			ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 	}
 }
@@ -606,8 +606,7 @@ void COptionsWindow::UpdateBoxIsolation()
 void COptionsWindow::OnSysSvcChanged()
 {
 	ui.chkElevateRpcss->setDisabled(ui.chkNoSecurityIsolation->isChecked() && (!ui.chkRestrictServices->isChecked() || ui.chkMsiExemptions->isChecked()));
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnConfidentialChanged()
@@ -623,8 +622,23 @@ void COptionsWindow::OnLessConfidentialChanged()
 
 void COptionsWindow::OnAdvancedChanged()
 {
+	UpdateJobOptions();
+
 	m_AdvancedChanged = true;
 	OnOptChanged();
+}
+
+void COptionsWindow::UpdateJobOptions()
+{
+	bool IsAllWndOpen = ui.chkNoSecurityIsolation->isChecked() || IsAccessEntrySet(eWnd, "", eOpen, "*");
+	ui.chkAddToJob->setEnabled(!IsAllWndOpen);
+
+	bool bUseJobObject = !IsAllWndOpen && ui.chkAddToJob->isChecked();
+	ui.chkNestedJobs->setEnabled(bUseJobObject);
+
+	ui.lineSingleMemory->setEnabled(bUseJobObject);
+	ui.lineTotalMemory->setEnabled(bUseJobObject);
+	ui.lineTotalNumber->setEnabled(bUseJobObject);
 }
 
 void COptionsWindow::CheckOpenCOM()
@@ -808,8 +822,7 @@ void COptionsWindow::OnAddOption()
 void COptionsWindow::OnDelOption()
 {
 	DeleteAccessEntry(ui.treeOptions->currentItem());
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnOptionItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
@@ -880,8 +893,7 @@ void COptionsWindow::OnOptionChanged(QTreeWidgetItem* pItem, int Column)
 	if (Column != 0)
 		return;
 
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 	
 void COptionsWindow::CloseOptionEdit(bool bSave)
@@ -923,8 +935,7 @@ void COptionsWindow::CloseOptionEdit(QTreeWidgetItem* pItem, bool bSave)
 		pItem->setText(2, pValue->currentText());
 		pItem->setData(2, Qt::UserRole, pValue->currentText());
 
-		m_AdvancedChanged = true;
-		OnOptChanged();
+		OnAdvancedChanged();
 	}
 
 	ui.treeOptions->setItemWidget(pItem, 1, NULL);
@@ -979,8 +990,7 @@ void COptionsWindow::OnAddAutoRun()
 		return;
 
 	AddTriggerItem(Value, eOnStartCmd);
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnAddAutoSvc()
@@ -990,8 +1000,7 @@ void COptionsWindow::OnAddAutoSvc()
 		return;
 
 	AddTriggerItem(Value, eOnStartSvc);
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnAddAutoExec()
@@ -1001,8 +1010,7 @@ void COptionsWindow::OnAddAutoExec()
 		return;
 
 	AddTriggerItem(Value, eAutoExec);
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnAddDeleteCmd()
@@ -1012,8 +1020,7 @@ void COptionsWindow::OnAddDeleteCmd()
 		return;
 
 	AddTriggerItem(Value, eDeleteCmd);
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnAddTerminateCmd()
@@ -1023,8 +1030,7 @@ void COptionsWindow::OnAddTerminateCmd()
 		return;
 
 	AddTriggerItem(Value, eTerminateCmd);
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnAddRecoveryCheck()
@@ -1034,15 +1040,13 @@ void COptionsWindow::OnAddRecoveryCheck()
 		return;
 
 	AddTriggerItem(Value, eRecoveryCheck);
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnDelAuto()
 {
 	DeleteAccessEntry(ui.treeTriggers->currentItem());
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 //
 
@@ -1054,15 +1058,13 @@ void COptionsWindow::OnAddProcess()
 
 	AddHiddenProcEntry(Process);
 
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnDelProcess()
 {
 	DeleteAccessEntry(ui.treeHideProc->currentItem());
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnHostProcessAllow()
@@ -1073,8 +1075,7 @@ void COptionsWindow::OnHostProcessAllow()
 
 	AddHostProcEntry(Process, false);
 
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnHostProcessDeny()
@@ -1085,15 +1086,13 @@ void COptionsWindow::OnHostProcessDeny()
 
 	AddHostProcEntry(Process, true);
 
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnDelHostProcess()
 {
 	DeleteAccessEntry(ui.treeHostProc->currentItem());
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::ShowHiddenProcTmpl(bool bUpdate)
@@ -1234,8 +1233,7 @@ void COptionsWindow::OnAddUser()
 
 	ui.lstUsers->addItems(Users);
 
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnDelUser()
@@ -1243,8 +1241,7 @@ void COptionsWindow::OnDelUser()
 	foreach(QListWidgetItem* pItem, ui.lstUsers->selectedItems())
 		delete pItem;
 
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::CreateDebug()

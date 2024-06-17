@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add new option "AllowCoverTaskbar" for [#3975](https://github.com/sandboxie-plus/Sandboxie/issues/3975)
 - added RPC Port message filter mechanism to block unsafe RDP calls via the driver [#3930](https://github.com/sandboxie-plus/Sandboxie/issues/3930)
   - Usage: "RpcPortFilter=Port,ID,Label" label is optional
+- added "Job Object" Options page to colelct all job object related options
 
 ### Changed
 - Extend "Temp Template" to make it could delete local template section.
@@ -33,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Bug - Can't open a sandbox's properties window via double-click in System Tray context window [#3861](https://github.com/sandboxie-plus/Sandboxie/issues/3861)
 - fixed Delay in launching forced programs after version 1.12.9 [#3868](https://github.com/sandboxie-plus/Sandboxie/issues/3868)
   - this issue was introdiced in 1.13.0 and may have broadly affected other usecases and cause variosue problems
+
 
 
 

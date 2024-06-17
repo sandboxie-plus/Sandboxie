@@ -1572,49 +1572,31 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="tabPrivileges">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-              <kerning>true</kerning>
-             </font>
-            </property>
+           <widget class="QWidget" name="tabJob">
             <attribute name="title">
-             <string>Advanced Security</string>
+             <string>Job Object</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout_26">
-             <item row="0" column="1">
-              <layout class="QGridLayout" name="gridLayout_2">
-               <item row="10" column="2" colspan="2">
-                <widget class="QLabel" name="label_74">
+            <layout class="QGridLayout" name="gridLayout_51">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_50">
+               <item row="6" column="1" colspan="2">
+                <widget class="QLabel" name="label_86">
                  <property name="text">
-                  <string>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
+                  <string>Total Processes Number Limit:</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkRestrictServices">
+               <item row="1" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkAddToJob">
                  <property name="text">
-                  <string>Do not start sandboxed services using a system token (recommended)</string>
+                  <string>Add sandboxed processes to job objects (recommended)</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkProtectSCM">
-                 <property name="text">
-                  <string>Allow only privileged processes to access the Service Control Manager</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="0">
-                <widget class="QLabel" name="lblFence">
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblJob">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1627,31 +1609,134 @@
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkSbieLogon">
+               <item row="5" column="1" colspan="2">
+                <widget class="QLabel" name="label_56">
                  <property name="text">
-                  <string>Use a Sandboxie login instead of an anonymous token</string>
+                  <string>Total Processes Memory Limit:</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="lblPrivilege">
+               <item row="4" column="1" colspan="2">
+                <widget class="QLabel" name="label_53">
+                 <property name="text">
+                  <string>Single Process Memory Limit:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="3">
+                <widget class="QLineEdit" name="lineSingleMemory">
+                 <property name="placeholderText">
+                  <string>Leave it blank to disable the setting(Unit:KB)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="3">
+                <widget class="QLineEdit" name="lineTotalMemory">
+                 <property name="placeholderText">
+                  <string>Leave it blank to disable the setting(Unit:KB)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="3">
+                <widget class="QLineEdit" name="lineTotalNumber">
+                 <property name="placeholderText">
+                  <string>Leave it blank to disable the setting</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2" colspan="3">
+                <widget class="QCheckBox" name="chkNestedJobs">
+                 <property name="text">
+                  <string>Allow use of nested job objects (works on Windows 8 and later)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="4">
+                <spacer name="horizontalSpacer_23">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="7" column="0">
+                <spacer name="verticalSpacer_45">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_63">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>16</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="2">
+                <widget class="QLabel" name="lblLimit">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="toolTip">
-                  <string>Protect the sandbox integrity itself</string>
+                  <string>Protect the system from sandboxed processes</string>
                  </property>
                  <property name="text">
-                  <string>Privilege isolation</string>
+                  <string>Limit restrictions</string>
                  </property>
                 </widget>
                </item>
-               <item row="11" column="2">
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabPrivileges">
+            <property name="font">
+             <font>
+              <bold>false</bold>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <attribute name="title">
+             <string>Advanced Security</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_26">
+             <item row="0" column="1">
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="5" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkDropPrivileges">
+                 <property name="text">
+                  <string>Drop critical privileges from processes running with a SYSTEM token</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="2">
                 <spacer name="horizontalSpacer_13">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1664,10 +1749,20 @@
                  </property>
                 </spacer>
                </item>
-               <item row="7" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkAddToJob">
+               <item row="1" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkProtectSCM">
                  <property name="text">
-                  <string>Add sandboxed processes to job objects (recommended)</string>
+                  <string>Allow only privileged processes to access the Service Control Manager</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="2" colspan="2">
+                <widget class="QLabel" name="label_74">
+                 <property name="text">
+                  <string>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -1675,7 +1770,6 @@
                 <widget class="QLabel" name="label_65">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1685,7 +1779,37 @@
                  </property>
                 </widget>
                </item>
-               <item row="11" column="1">
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblPrivilege">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the sandbox integrity itself</string>
+                 </property>
+                 <property name="text">
+                  <string>Privilege isolation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkRestrictServices">
+                 <property name="text">
+                  <string>Do not start sandboxed services using a system token (recommended)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkSbieLogon">
+                 <property name="text">
+                  <string>Use a Sandboxie login instead of an anonymous token</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="1">
                 <spacer name="verticalSpacer">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1716,7 +1840,6 @@
                 <widget class="QLabel" name="label_64">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1726,18 +1849,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkDropPrivileges">
-                 <property name="text">
-                  <string>Drop critical privileges from processes running with a SYSTEM token</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="0" colspan="2">
+               <item row="6" column="0" colspan="2">
                 <widget class="QLabel" name="lblToken">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3927,7 +4042,6 @@ The process match level has a higher priority than the specificity and describes
           <widget class="QTabWidget" name="tabsOther">
            <property name="font">
             <font>
-             <weight>50</weight>
              <bold>false</bold>
              <kerning>true</kerning>
             </font>
@@ -3949,49 +4063,31 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="chkNoPanic">
+                 <property name="toolTip">
+                  <string>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</string>
+                 </property>
+                 <property name="text">
+                  <string>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</string>
+                 </property>
+                </widget>
+               </item>
                <item row="6" column="1">
-                <widget class="QCheckBox" name="chkUseSbieWndStation">
-                 <property name="text">
-                  <string>Emulate sandboxed window station for all processes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="lblCompatibility">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Compatibility</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1">
                 <widget class="QCheckBox" name="chkComTimeout">
                  <property name="text">
                   <string>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="chkPreferExternalManifest">
-                 <property name="text">
-                  <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
+               <item row="4" column="1">
                 <widget class="QCheckBox" name="chkUseSbieDeskHack">
                  <property name="text">
                   <string>Use desktop object workaround for all processes</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="0">
+               <item row="7" column="0">
                 <spacer name="verticalSpacer_28">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -4004,121 +4100,35 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-               <item row="8" column="1">
-                <spacer name="horizontalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="4" column="1">
-                <widget class="QCheckBox" name="chkNestedJobs">
-                 <property name="text">
-                  <string>Allow use of nested job objects (works on Windows 8 and later)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QCheckBox" name="chkNoPanic">
-                 <property name="toolTip">
-                  <string>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</string>
-                 </property>
-                 <property name="text">
-                  <string>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="lblLimit_2">
-            <attribute name="title">
-             <string>Process Limits</string>
-            </attribute>
-            <layout class="QGridLayout" name="gridLayout_51">
-             <item row="0" column="0">
-              <layout class="QGridLayout" name="gridLayout_50">
-               <item row="4" column="0">
-                <spacer name="verticalSpacer_44">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="lblLimit">
+               <item row="1" column="0">
+                <widget class="QLabel" name="lblCompatibility">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
                  </property>
-                 <property name="toolTip">
-                  <string>Protect the system from sandboxed processes</string>
-                 </property>
                  <property name="text">
-                  <string>Limit restrictions</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QLineEdit" name="lineTotalMemory">
-                 <property name="placeholderText">
-                  <string>Leave it blank to disable the setting(Unit:KB)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QLineEdit" name="lineTotalNumber">
-                 <property name="placeholderText">
-                  <string>Leave it blank to disable the setting</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QLineEdit" name="lineSingleMemory">
-                 <property name="placeholderText">
-                  <string>Leave it blank to disable the setting(Unit:KB)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QLabel" name="label_86">
-                 <property name="text">
-                  <string>Total Processes Number Limit:</string>
+                  <string>Compatibility</string>
                  </property>
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QLabel" name="label_56">
+                <widget class="QCheckBox" name="chkPreferExternalManifest">
                  <property name="text">
-                  <string>Total Processes Memory Limit:</string>
+                  <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="label_53">
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="chkUseSbieWndStation">
                  <property name="text">
-                  <string>Single Process Memory Limit:</string>
+                  <string>Emulate sandboxed window station for all processes</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1" colspan="2">
-                <spacer name="horizontalSpacer_22">
+               <item row="7" column="1">
+                <spacer name="horizontalSpacer_12">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>

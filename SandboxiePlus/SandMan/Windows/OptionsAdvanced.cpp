@@ -696,6 +696,8 @@ void COptionsWindow::LoadOptionList()
 			QStringList Values = Value.split(",");
 			if (Values.count() >= 2) 
 				AddOptionEntry(Name, Values[0], Values[1]);
+			else if(m_AdvOptions[Name].ProcSpec == eList)
+				AddOptionEntry(Name, Values[0], "");
 			else if(m_AdvOptions[Name].ProcSpec != eOnlySpec) // eOnlySpec shows only process specific entries, no global once
 				AddOptionEntry(Name, "", Values[0]);
 		}
@@ -761,10 +763,10 @@ void COptionsWindow::SaveOptionList()
 			continue; // entry from template
 		QString Program = pItem->data(1, Qt::UserRole).toString();
 		QString Value = pItem->data(2, Qt::UserRole).toString();
-		if (!Program.isEmpty())
-			Value.prepend(Program + ",");
-
-		OptionMap[Name].append(Value);
+		QStringList Options;
+		if (!Program.isEmpty()) Options.append(Program);
+		if (!Value.isEmpty()) Options.append(Value);
+		OptionMap[Name].append(Options.join(","));
 	}
 
 	foreach(const QString & Key, m_AdvOptions.keys()) {

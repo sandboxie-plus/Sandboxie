@@ -593,6 +593,7 @@ protected:
 		eNoSpec,
 		eSpec,
 		eOnlySpec,
+		eList
 	};
 
 	struct SAdvOption

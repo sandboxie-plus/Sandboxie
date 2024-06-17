@@ -4706,7 +4706,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QCheckBox" name="chkHideHostProcesses">
+              <widget class="QCheckBox" name="chkHideNonSystemProcesses">
                <property name="text">
                 <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
                </property>

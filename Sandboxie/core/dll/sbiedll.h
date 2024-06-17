@@ -246,6 +246,16 @@ SBIEDLL_EXPORT  PSECURITY_DESCRIPTOR SbieDll_GetPublicSD();
 
 SBIEDLL_EXPORT  const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments);
 
+SBIEDLL_EXPORT  ULONG_PTR Scm_HookSetServiceStatus(VOID* hook);
+SBIEDLL_EXPORT  ULONG_PTR Scm_HookStartServiceCtrlDispatcherW(VOID* hook);
+SBIEDLL_EXPORT  ULONG_PTR Scm_HookOpenServiceW(VOID* hook);
+SBIEDLL_EXPORT  ULONG_PTR Scm_HookCloseServiceHandle(VOID* hook);
+SBIEDLL_EXPORT  ULONG_PTR Scm_HookQueryServiceStatusEx(VOID* hook);
+SBIEDLL_EXPORT  ULONG_PTR Scm_HookQueryServiceStatus(VOID* hook);
+SBIEDLL_EXPORT  ULONG_PTR Scm_HookStartServiceW(VOID* hook);
+SBIEDLL_EXPORT  ULONG_PTR Scm_HookControlService(VOID* hook);
+
+
 #ifdef USE_MATCH_PATH_EX
 //SBIEDLL_EXPORT ULONG SbieDll_MatchPathImpl(BOOLEAN use_rule_specificity, BOOLEAN use_privacy_mode, const WCHAR* path, void* normal_list, void* open_list, void* closed_list, void* write_list, void* read_list);
 SBIEDLL_EXPORT ULONG SbieDll_MatchPathImpl(BOOLEAN use_rule_specificity, const WCHAR* path, void* normal_list, void* open_list, void* closed_list, void* write_list, void* read_list);

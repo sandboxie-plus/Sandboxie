@@ -64,18 +64,18 @@ static BOOLEAN IsWindows81 = FALSE;
         hook_success = FALSE;                                       \
     }
 
-#define HOOK_WIN32_SCM(func) {                                      \
-    const char *FuncName = #func;                                   \
-    void *SourceFunc = (void *)func;                                \
-    if (SecHost)                                                    \
-        SourceFunc = GetProcAddress(SecHost, FuncName);             \
-    if (! SourceFunc)                                               \
-        SourceFunc = (void *)func;                                  \
-    __sys_##func =                                                  \
-        (ULONG_PTR)SbieDll_Hook(FuncName, SourceFunc, my_##func, SourceFunc);   \
-    if (! __sys_##func)                                             \
-        hook_success = FALSE;                                       \
-    }
+//#define HOOK_WIN32_SCM(func) {                                      \
+//    const char *FuncName = #func;                                   \
+//    void *SourceFunc = (void *)func;                                \
+//    if (SecHost)                                                    \
+//        SourceFunc = GetProcAddress(SecHost, FuncName);             \
+//    if (! SourceFunc)                                               \
+//        SourceFunc = (void *)func;                                  \
+//    __sys_##func =                                                  \
+//        (ULONG_PTR)SbieDll_Hook(FuncName, SourceFunc, my_##func, SourceFunc);   \
+//    if (! __sys_##func)                                             \
+//        hook_success = FALSE;                                       \
+//    }
 
 typedef BOOL(*P_SetServiceStatus)(SERVICE_STATUS_HANDLE hServiceStatus, LPSERVICE_STATUS lpServiceStatus);
 
@@ -718,14 +718,24 @@ ULONG my_PowerSettingRegisterNotification(
 BOOL Hook_Service_Control_Manager(void)
 {
     BOOL hook_success = TRUE;
-    HOOK_WIN32_SCM(SetServiceStatus);
-    HOOK_WIN32_SCM(StartServiceCtrlDispatcherW);
-    HOOK_WIN32_SCM(OpenServiceW);
-    HOOK_WIN32_SCM(CloseServiceHandle);
-    HOOK_WIN32_SCM(QueryServiceStatusEx);
-    HOOK_WIN32_SCM(QueryServiceStatus);
-    HOOK_WIN32_SCM(StartServiceW);
-    HOOK_WIN32_SCM(ControlService);
+
+	__sys_SetServiceStatus = Scm_HookSetServiceStatus(my_SetServiceStatus);
+	__sys_StartServiceCtrlDispatcherW = Scm_HookStartServiceCtrlDispatcherW(my_StartServiceCtrlDispatcherW);
+	__sys_OpenServiceW = Scm_HookOpenServiceW(my_OpenServiceW);
+	__sys_CloseServiceHandle = Scm_HookCloseServiceHandle(my_CloseServiceHandle);
+	__sys_QueryServiceStatusEx = Scm_HookQueryServiceStatusEx(my_QueryServiceStatusEx);
+	__sys_QueryServiceStatus = Scm_HookQueryServiceStatus(my_QueryServiceStatus);
+	__sys_StartServiceW = Scm_HookStartServiceW(my_StartServiceW);
+	__sys_ControlService = Scm_HookControlService(my_ControlService);
+
+    //HOOK_WIN32_SCM(SetServiceStatus);
+    //HOOK_WIN32_SCM(StartServiceCtrlDispatcherW);
+    //HOOK_WIN32_SCM(OpenServiceW);
+    //HOOK_WIN32_SCM(CloseServiceHandle);
+    //HOOK_WIN32_SCM(QueryServiceStatusEx);
+    //HOOK_WIN32_SCM(QueryServiceStatus);
+    //HOOK_WIN32_SCM(StartServiceW);
+    //HOOK_WIN32_SCM(ControlService);
 
 #if 0
     HOOK_WIN32(RtlSetLastWin32Error);

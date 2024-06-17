@@ -31,6 +31,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Note: Less Privileged App Container (LPAC) don't work with sandboxie currently
 - fixed Problem accessing a relative symlink with a target that starts with a dot [#3981](https://github.com/sandboxie-plus/Sandboxie/issues/3981)
 - fixed Bug - Can't open a sandbox's properties window via double-click in System Tray context window [#3861](https://github.com/sandboxie-plus/Sandboxie/issues/3861)
+- fixed Delay in launching forced programs after version 1.12.9 [#3868](https://github.com/sandboxie-plus/Sandboxie/issues/3868)
+  - this issue was introdiced in 1.13.0 and may have broadly affected other usecases and cause variosue problems
 
 
 

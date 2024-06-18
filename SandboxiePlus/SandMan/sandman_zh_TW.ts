@@ -1671,139 +1671,139 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>瀏覽資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="321"/>
+        <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Closed</source>
         <translation>已關閉</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="322"/>
+        <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Closed RT</source>
         <translation>封閉 RT</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="323"/>
+        <location filename="Windows/OptionsAccess.cpp" line="328"/>
         <source>Read Only</source>
         <translation>唯讀</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="317"/>
+        <location filename="Windows/OptionsAccess.cpp" line="322"/>
         <source>Normal</source>
         <translation>標準</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="318"/>
+        <location filename="Windows/OptionsAccess.cpp" line="323"/>
         <source>Open</source>
         <translation>開放</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="319"/>
+        <location filename="Windows/OptionsAccess.cpp" line="324"/>
         <source>Open for All</source>
         <translation>完全開放</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="320"/>
+        <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>No Rename</source>
         <translation>沒有重新命名</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="324"/>
+        <location filename="Windows/OptionsAccess.cpp" line="329"/>
         <source>Box Only (Write Only)</source>
         <translation>僅沙箱內 (唯寫)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="325"/>
+        <location filename="Windows/OptionsAccess.cpp" line="330"/>
         <source>Ignore UIPI</source>
         <translation>忽略 UIPI</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="327"/>
-        <location filename="Windows/OptionsAccess.cpp" line="344"/>
-        <location filename="Windows/OptionsAccess.cpp" line="357"/>
+        <location filename="Windows/OptionsAccess.cpp" line="332"/>
+        <location filename="Windows/OptionsAccess.cpp" line="349"/>
+        <location filename="Windows/OptionsAccess.cpp" line="362"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="334"/>
+        <location filename="Windows/OptionsAccess.cpp" line="339"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
         <translation>常規 Sandboxie 行為 - 允許讀取及寫入時複製。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="335"/>
+        <location filename="Windows/OptionsAccess.cpp" line="340"/>
         <source>Allow write-access outside the sandbox.</source>
         <translation>允許沙箱外的寫入。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="336"/>
+        <location filename="Windows/OptionsAccess.cpp" line="341"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
         <translation>允許沙箱外的寫入 (同時適用於安裝在沙箱內的應用程式)。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="337"/>
+        <location filename="Windows/OptionsAccess.cpp" line="342"/>
         <source>Don&apos;t rename window classes.</source>
         <translation>不重新命名視窗類別。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="338"/>
+        <location filename="Windows/OptionsAccess.cpp" line="343"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
         <translation>拒絕對主機位置的存取，防止在沙箱內建立相應的複本。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="339"/>
+        <location filename="Windows/OptionsAccess.cpp" line="344"/>
         <source>Block access to WinRT class.</source>
         <translation>阻止對 WinRT 類別的存取。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="340"/>
+        <location filename="Windows/OptionsAccess.cpp" line="345"/>
         <source>Allow read-only access only.</source>
         <translation>只允許唯讀存取。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="341"/>
+        <location filename="Windows/OptionsAccess.cpp" line="346"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
         <translation>對沙箱內的處理程序隱藏主機檔案、資料夾或登錄機碼。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="342"/>
+        <location filename="Windows/OptionsAccess.cpp" line="347"/>
         <source>Ignore UIPI restrictions for processes.</source>
         <translation>忽略對處理程序的 UIPI 限制。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="351"/>
+        <location filename="Windows/OptionsAccess.cpp" line="356"/>
         <source>File/Folder</source>
         <translation>檔案和資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="352"/>
+        <location filename="Windows/OptionsAccess.cpp" line="357"/>
         <source>Registry</source>
         <translation>登錄</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="353"/>
+        <location filename="Windows/OptionsAccess.cpp" line="358"/>
         <source>IPC Path</source>
         <translation>IPC 路徑</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="354"/>
+        <location filename="Windows/OptionsAccess.cpp" line="359"/>
         <source>Wnd Class</source>
         <translation>Wnd 元件</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="355"/>
+        <location filename="Windows/OptionsAccess.cpp" line="360"/>
         <source>COM Object</source>
         <translation>COM 物件</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="362"/>
+        <location filename="Windows/OptionsAccess.cpp" line="367"/>
         <source>Select File</source>
         <translation>選擇檔案</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="362"/>
+        <location filename="Windows/OptionsAccess.cpp" line="367"/>
         <source>All Files (*.*)</source>
         <translation>所有檔案 (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="374"/>
+        <location filename="Windows/OptionsAccess.cpp" line="378"/>
         <location filename="Windows/OptionsForce.cpp" line="242"/>
         <location filename="Windows/OptionsForce.cpp" line="253"/>
         <location filename="Windows/OptionsRecovery.cpp" line="128"/>
@@ -1813,12 +1813,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1115"/>
-        <location filename="Windows/OptionsAccess.cpp" line="408"/>
-        <location filename="Windows/OptionsAccess.cpp" line="641"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="771"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="846"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="609"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="705"/>
+        <location filename="Windows/OptionsAccess.cpp" line="411"/>
+        <location filename="Windows/OptionsAccess.cpp" line="643"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="790"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="864"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="606"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="702"/>
         <location filename="Windows/OptionsNetwork.cpp" line="503"/>
         <location filename="Windows/OptionsNetwork.cpp" line="596"/>
         <location filename="Windows/OptionsNetwork.cpp" line="709"/>
@@ -1830,10 +1830,10 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1113"/>
         <location filename="Windows/OptionsWindow.cpp" line="1131"/>
-        <location filename="Windows/OptionsAccess.cpp" line="413"/>
-        <location filename="Windows/OptionsAccess.cpp" line="645"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="614"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="709"/>
+        <location filename="Windows/OptionsAccess.cpp" line="416"/>
+        <location filename="Windows/OptionsAccess.cpp" line="647"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="611"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="706"/>
         <location filename="Windows/OptionsNetwork.cpp" line="235"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
         <location filename="Windows/OptionsNetwork.cpp" line="600"/>
@@ -1841,34 +1841,34 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>群組: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="546"/>
+        <location filename="Windows/OptionsAccess.cpp" line="549"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>COM 物件必須被它們的 GUID 所指定，例如: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="552"/>
+        <location filename="Windows/OptionsAccess.cpp" line="555"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>RT 介面必須用其名稱來指定。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="566"/>
+        <location filename="Windows/OptionsAccess.cpp" line="569"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
         <translation>開放 IPC 存取權限的同時也將開放 COM 的存取權限，您是否想繼續在沙箱內限制 COM 介面的存取權限？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="567"/>
+        <location filename="Windows/OptionsAccess.cpp" line="570"/>
         <source>Don&apos;t ask in future</source>
         <translation>此後不再詢問</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="576"/>
+        <location filename="Windows/OptionsAccess.cpp" line="579"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
         <translation>不支援 &apos;OpenWinClass=program.exe,#&apos;，請改為使用 &apos;NoRenameWinClass=program.exe,*&apos;</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="620"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="822"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="676"/>
+        <location filename="Windows/OptionsAccess.cpp" line="622"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="840"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="673"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="575"/>
@@ -1876,7 +1876,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>範本值無法編輯。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="688"/>
+        <location filename="Windows/OptionsAccess.cpp" line="689"/>
         <source>Template values can not be removed.</source>
         <translation>範本值無法刪除。</translation>
     </message>
@@ -1939,66 +1939,66 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>沙箱 IPC 根目錄</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="792"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="811"/>
         <source>Add special option:</source>
         <translation>加入特殊選項:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="943"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="947"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="959"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="963"/>
         <source>On Start</source>
         <translation>啟動階段</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="944"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="952"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="956"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="960"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="964"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="968"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="972"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="976"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="980"/>
         <source>Run Command</source>
         <translation>執行命令</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="948"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="964"/>
         <source>Start Service</source>
         <translation>啟動服務</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="951"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="967"/>
         <source>On Init</source>
         <translation>初始化階段</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="955"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="971"/>
         <source>On File Recovery</source>
         <translation>檔案復原階段</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="959"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="975"/>
         <source>On Delete Content</source>
         <translation>內容刪除階段</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="963"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="979"/>
         <source>On Terminate</source>
         <translation>終止階段</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="977"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="999"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1010"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1021"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1032"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="993"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1013"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1023"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1033"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1043"/>
         <source>Please enter the command line to be executed</source>
         <translation>請輸入將要執行的命令列</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1070"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1077"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
         <translation>請輸入程式檔案名稱以允許存取此沙箱</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1082"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1088"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
         <translation>請輸入程式檔案名稱以拒絕存取此沙箱</translation>
     </message>
@@ -2007,12 +2007,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">請輸入一個程式檔案名稱</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1164"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1168"/>
         <source>Deny</source>
         <translation>拒絕 (停用)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1269"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1271"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -2146,136 +2146,136 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>瀏覽程式</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="303"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="300"/>
         <source>Open Box Options</source>
         <translation>開啟沙箱選項</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="304"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="301"/>
         <source>Browse Content</source>
         <translation>瀏覽內容</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="305"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="302"/>
         <source>Start File Recovery</source>
         <translation>開始復原檔案</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="306"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="303"/>
         <source>Show Run Dialog</source>
         <translation>顯示執行對話方塊</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="334"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="331"/>
         <source>Indeterminate</source>
         <translation>不確定</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="354"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="351"/>
         <source>Backup Image Header</source>
         <translation>備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="355"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="352"/>
         <source>Restore Image Header</source>
         <translation>復原映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="359"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="356"/>
         <source>Change Password</source>
         <translation>變更密碼</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="581"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="681"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="578"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="678"/>
         <source>Always copy</source>
         <translation>永遠複製</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="582"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="682"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="579"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="679"/>
         <source>Don&apos;t copy</source>
         <translation>不要複製</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="683"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="580"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="680"/>
         <source>Copy empty</source>
         <translation>複製空內容</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="809"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="806"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="921"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="914"/>
         <source>Select color</source>
         <translation>選擇顏色</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="996"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="989"/>
         <source>Select Program</source>
         <translation>選擇程式</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1181"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1173"/>
         <source>The image file does not exist</source>
         <translation>映像檔案不存在</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1174"/>
         <source>The password is wrong</source>
         <translation>密碼錯誤</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1183"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1175"/>
         <source>Unexpected error: %1</source>
         <translation>預期外錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1212"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1204"/>
         <source>Image Password Changed</source>
         <translation>映像密碼已變更</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1221"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1213"/>
         <source>Backup Image Header for %1</source>
         <translation>為 %1 備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1229"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1221"/>
         <source>Image Header Backuped</source>
         <translation>已備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1236"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1228"/>
         <source>Restore Image Header for %1</source>
         <translation>為 %1 復原映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1244"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1236"/>
         <source>Image Header Restored</source>
         <translation>已復原映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="988"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1003"/>
         <source>Please enter a service identifier</source>
         <translation>請輸入服務識別字元</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="996"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="989"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可執行檔案 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1000"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="1021"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="993"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1014"/>
         <source>Please enter a menu title</source>
         <translation>請輸入一個選單標題</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1017"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1010"/>
         <source>Please enter a command</source>
         <translation>請輸入一則命令</translation>
     </message>
@@ -2354,7 +2354,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1164"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1168"/>
         <location filename="Windows/OptionsNetwork.cpp" line="213"/>
         <location filename="Windows/OptionsNetwork.cpp" line="616"/>
         <source>Allow</source>
@@ -7111,8 +7111,8 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="730"/>
         <location filename="Forms/OptionsWindow.ui" line="1131"/>
         <location filename="Forms/OptionsWindow.ui" line="1176"/>
-        <location filename="Forms/OptionsWindow.ui" line="3713"/>
-        <location filename="Forms/OptionsWindow.ui" line="4071"/>
+        <location filename="Forms/OptionsWindow.ui" line="1708"/>
+        <location filename="Forms/OptionsWindow.ui" line="3828"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>保護系統免受來自沙箱化處理程序的存取</translation>
     </message>
@@ -7249,12 +7249,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>列印限制</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3716"/>
+        <location filename="Forms/OptionsWindow.ui" line="3831"/>
         <source>Network restrictions</source>
         <translation>區域網路限制</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3652"/>
+        <location filename="Forms/OptionsWindow.ui" line="3767"/>
         <source>Block network files and folders, unless specifically opened.</source>
         <translation>阻止區域網路檔案和資料夾的存取，除非額外開啟。</translation>
     </message>
@@ -7270,18 +7270,18 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1013"/>
-        <location filename="Forms/OptionsWindow.ui" line="1819"/>
-        <location filename="Forms/OptionsWindow.ui" line="1937"/>
-        <location filename="Forms/OptionsWindow.ui" line="2091"/>
-        <location filename="Forms/OptionsWindow.ui" line="2154"/>
-        <location filename="Forms/OptionsWindow.ui" line="2226"/>
-        <location filename="Forms/OptionsWindow.ui" line="2410"/>
-        <location filename="Forms/OptionsWindow.ui" line="3224"/>
-        <location filename="Forms/OptionsWindow.ui" line="3771"/>
-        <location filename="Forms/OptionsWindow.ui" line="3887"/>
-        <location filename="Forms/OptionsWindow.ui" line="4184"/>
-        <location filename="Forms/OptionsWindow.ui" line="5196"/>
-        <location filename="Forms/OptionsWindow.ui" line="5334"/>
+        <location filename="Forms/OptionsWindow.ui" line="1934"/>
+        <location filename="Forms/OptionsWindow.ui" line="2052"/>
+        <location filename="Forms/OptionsWindow.ui" line="2206"/>
+        <location filename="Forms/OptionsWindow.ui" line="2269"/>
+        <location filename="Forms/OptionsWindow.ui" line="2341"/>
+        <location filename="Forms/OptionsWindow.ui" line="2525"/>
+        <location filename="Forms/OptionsWindow.ui" line="3339"/>
+        <location filename="Forms/OptionsWindow.ui" line="3886"/>
+        <location filename="Forms/OptionsWindow.ui" line="4002"/>
+        <location filename="Forms/OptionsWindow.ui" line="4194"/>
+        <location filename="Forms/OptionsWindow.ui" line="5206"/>
+        <location filename="Forms/OptionsWindow.ui" line="5344"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
@@ -7298,98 +7298,98 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="970"/>
         <location filename="Forms/OptionsWindow.ui" line="1452"/>
-        <location filename="Forms/OptionsWindow.ui" line="1827"/>
-        <location filename="Forms/OptionsWindow.ui" line="1964"/>
-        <location filename="Forms/OptionsWindow.ui" line="2099"/>
-        <location filename="Forms/OptionsWindow.ui" line="2179"/>
-        <location filename="Forms/OptionsWindow.ui" line="2254"/>
-        <location filename="Forms/OptionsWindow.ui" line="2445"/>
-        <location filename="Forms/OptionsWindow.ui" line="2508"/>
-        <location filename="Forms/OptionsWindow.ui" line="2642"/>
-        <location filename="Forms/OptionsWindow.ui" line="2741"/>
-        <location filename="Forms/OptionsWindow.ui" line="2822"/>
-        <location filename="Forms/OptionsWindow.ui" line="2935"/>
-        <location filename="Forms/OptionsWindow.ui" line="3193"/>
-        <location filename="Forms/OptionsWindow.ui" line="3335"/>
-        <location filename="Forms/OptionsWindow.ui" line="3455"/>
-        <location filename="Forms/OptionsWindow.ui" line="3528"/>
-        <location filename="Forms/OptionsWindow.ui" line="3809"/>
-        <location filename="Forms/OptionsWindow.ui" line="3895"/>
-        <location filename="Forms/OptionsWindow.ui" line="4320"/>
-        <location filename="Forms/OptionsWindow.ui" line="4409"/>
-        <location filename="Forms/OptionsWindow.ui" line="4728"/>
-        <location filename="Forms/OptionsWindow.ui" line="4815"/>
-        <location filename="Forms/OptionsWindow.ui" line="5177"/>
+        <location filename="Forms/OptionsWindow.ui" line="1942"/>
+        <location filename="Forms/OptionsWindow.ui" line="2079"/>
+        <location filename="Forms/OptionsWindow.ui" line="2214"/>
+        <location filename="Forms/OptionsWindow.ui" line="2294"/>
+        <location filename="Forms/OptionsWindow.ui" line="2369"/>
+        <location filename="Forms/OptionsWindow.ui" line="2560"/>
+        <location filename="Forms/OptionsWindow.ui" line="2623"/>
+        <location filename="Forms/OptionsWindow.ui" line="2757"/>
+        <location filename="Forms/OptionsWindow.ui" line="2856"/>
+        <location filename="Forms/OptionsWindow.ui" line="2937"/>
+        <location filename="Forms/OptionsWindow.ui" line="3050"/>
+        <location filename="Forms/OptionsWindow.ui" line="3308"/>
+        <location filename="Forms/OptionsWindow.ui" line="3450"/>
+        <location filename="Forms/OptionsWindow.ui" line="3570"/>
+        <location filename="Forms/OptionsWindow.ui" line="3643"/>
+        <location filename="Forms/OptionsWindow.ui" line="3924"/>
+        <location filename="Forms/OptionsWindow.ui" line="4010"/>
+        <location filename="Forms/OptionsWindow.ui" line="4330"/>
+        <location filename="Forms/OptionsWindow.ui" line="4419"/>
+        <location filename="Forms/OptionsWindow.ui" line="4738"/>
+        <location filename="Forms/OptionsWindow.ui" line="4825"/>
+        <location filename="Forms/OptionsWindow.ui" line="5187"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1932"/>
-        <location filename="Forms/OptionsWindow.ui" line="2086"/>
-        <location filename="Forms/OptionsWindow.ui" line="2519"/>
-        <location filename="Forms/OptionsWindow.ui" line="2619"/>
-        <location filename="Forms/OptionsWindow.ui" line="2752"/>
-        <location filename="Forms/OptionsWindow.ui" line="2872"/>
-        <location filename="Forms/OptionsWindow.ui" line="2946"/>
+        <location filename="Forms/OptionsWindow.ui" line="2047"/>
+        <location filename="Forms/OptionsWindow.ui" line="2201"/>
+        <location filename="Forms/OptionsWindow.ui" line="2634"/>
+        <location filename="Forms/OptionsWindow.ui" line="2734"/>
+        <location filename="Forms/OptionsWindow.ui" line="2867"/>
+        <location filename="Forms/OptionsWindow.ui" line="2987"/>
+        <location filename="Forms/OptionsWindow.ui" line="3061"/>
         <source>Type</source>
         <translation>類型</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1763"/>
+        <location filename="Forms/OptionsWindow.ui" line="1878"/>
         <source>Program Groups</source>
         <translation>程式群組</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1791"/>
+        <location filename="Forms/OptionsWindow.ui" line="1906"/>
         <source>Add Group</source>
         <translation>加入群組</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1798"/>
-        <location filename="Forms/OptionsWindow.ui" line="2143"/>
-        <location filename="Forms/OptionsWindow.ui" line="2247"/>
-        <location filename="Forms/OptionsWindow.ui" line="2418"/>
-        <location filename="Forms/OptionsWindow.ui" line="3179"/>
+        <location filename="Forms/OptionsWindow.ui" line="1913"/>
+        <location filename="Forms/OptionsWindow.ui" line="2258"/>
+        <location filename="Forms/OptionsWindow.ui" line="2362"/>
+        <location filename="Forms/OptionsWindow.ui" line="2533"/>
+        <location filename="Forms/OptionsWindow.ui" line="3294"/>
         <source>Add Program</source>
         <translation>加入程式</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1914"/>
+        <location filename="Forms/OptionsWindow.ui" line="2029"/>
         <source>Force Folder</source>
         <translation>強制執行資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2534"/>
-        <location filename="Forms/OptionsWindow.ui" line="2634"/>
-        <location filename="Forms/OptionsWindow.ui" line="2767"/>
+        <location filename="Forms/OptionsWindow.ui" line="2649"/>
+        <location filename="Forms/OptionsWindow.ui" line="2749"/>
+        <location filename="Forms/OptionsWindow.ui" line="2882"/>
         <source>Path</source>
         <translation>路徑</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1957"/>
+        <location filename="Forms/OptionsWindow.ui" line="2072"/>
         <source>Force Program</source>
         <translation>強制執行程式</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
-        <location filename="Forms/OptionsWindow.ui" line="1771"/>
-        <location filename="Forms/OptionsWindow.ui" line="1921"/>
-        <location filename="Forms/OptionsWindow.ui" line="2043"/>
-        <location filename="Forms/OptionsWindow.ui" line="2162"/>
-        <location filename="Forms/OptionsWindow.ui" line="2261"/>
-        <location filename="Forms/OptionsWindow.ui" line="2438"/>
-        <location filename="Forms/OptionsWindow.ui" line="2501"/>
-        <location filename="Forms/OptionsWindow.ui" line="2608"/>
-        <location filename="Forms/OptionsWindow.ui" line="2734"/>
-        <location filename="Forms/OptionsWindow.ui" line="2829"/>
-        <location filename="Forms/OptionsWindow.ui" line="2969"/>
-        <location filename="Forms/OptionsWindow.ui" line="3381"/>
-        <location filename="Forms/OptionsWindow.ui" line="3802"/>
-        <location filename="Forms/OptionsWindow.ui" line="3909"/>
-        <location filename="Forms/OptionsWindow.ui" line="4356"/>
-        <location filename="Forms/OptionsWindow.ui" line="4589"/>
-        <location filename="Forms/OptionsWindow.ui" line="4667"/>
+        <location filename="Forms/OptionsWindow.ui" line="1886"/>
+        <location filename="Forms/OptionsWindow.ui" line="2036"/>
+        <location filename="Forms/OptionsWindow.ui" line="2158"/>
+        <location filename="Forms/OptionsWindow.ui" line="2277"/>
+        <location filename="Forms/OptionsWindow.ui" line="2376"/>
+        <location filename="Forms/OptionsWindow.ui" line="2553"/>
+        <location filename="Forms/OptionsWindow.ui" line="2616"/>
+        <location filename="Forms/OptionsWindow.ui" line="2723"/>
+        <location filename="Forms/OptionsWindow.ui" line="2849"/>
+        <location filename="Forms/OptionsWindow.ui" line="2944"/>
+        <location filename="Forms/OptionsWindow.ui" line="3084"/>
+        <location filename="Forms/OptionsWindow.ui" line="3496"/>
+        <location filename="Forms/OptionsWindow.ui" line="3917"/>
+        <location filename="Forms/OptionsWindow.ui" line="4024"/>
+        <location filename="Forms/OptionsWindow.ui" line="4366"/>
+        <location filename="Forms/OptionsWindow.ui" line="4599"/>
+        <location filename="Forms/OptionsWindow.ui" line="4677"/>
         <source>Show Templates</source>
         <translation>顯示範本</translation>
     </message>
@@ -7464,7 +7464,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>開放 Windows 憑證儲存存取權限 (使用者模式)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3723"/>
+        <location filename="Forms/OptionsWindow.ui" line="3838"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
         <translation>防止對區域網路及防火牆參數的變更 (使用者模式)</translation>
     </message>
@@ -7526,17 +7526,17 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>允許實用 Windows 執行緒存取受保護的執行緒</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1633"/>
+        <location filename="Forms/OptionsWindow.ui" line="1808"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>使用 Sandboxie 登入程序替代匿名權杖</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1805"/>
+        <location filename="Forms/OptionsWindow.ui" line="1920"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
         <translation>您可將程式分組並且給它們一個群組名稱。程式群組可以代替程式名稱被用於某些設定。在沙箱中定義的程式群組將覆蓋範本中定義的程式群組。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1879"/>
+        <location filename="Forms/OptionsWindow.ui" line="1994"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>此處輸入的程式，或指定位置啟動的程式，將自動加入此沙箱，除非它們被確定已在其他沙箱啟動。</translation>
     </message>
@@ -7545,88 +7545,88 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">&lt;b&gt;&lt;font color=&apos;red&apos;&gt;安全性建議&lt;/font&gt;: &lt;/b&gt;使用 &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; 和/或 &lt;a href=&quot; sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; 與 Open[File/Pipe]Path 指令結合使用可能會損害安全性，使用 &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt; /a &gt; 將允許任何 * 或不安全的 (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) 副檔名。使用前請查看文件中每個選項的 安全性 部分。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2113"/>
-        <location filename="Forms/OptionsWindow.ui" line="2296"/>
+        <location filename="Forms/OptionsWindow.ui" line="2228"/>
+        <location filename="Forms/OptionsWindow.ui" line="2411"/>
         <source>Stop Behaviour</source>
         <translation>停止行為</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2281"/>
+        <location filename="Forms/OptionsWindow.ui" line="2396"/>
         <source>Stop Options</source>
         <translation>停止選項</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2303"/>
+        <location filename="Forms/OptionsWindow.ui" line="2418"/>
         <source>Use Linger Leniency</source>
         <translation>使用延遲寬容性</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2313"/>
+        <location filename="Forms/OptionsWindow.ui" line="2428"/>
         <source>Don&apos;t stop lingering processes with windows</source>
         <translation>不停止 Windows 的延遲執行緒</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2353"/>
+        <location filename="Forms/OptionsWindow.ui" line="2468"/>
         <source>Start Restrictions</source>
         <translation>啟動限制</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2452"/>
+        <location filename="Forms/OptionsWindow.ui" line="2567"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>當程式啟動失敗時提示錯誤代碼 1308</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2390"/>
+        <location filename="Forms/OptionsWindow.ui" line="2505"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
         <translation>僅允許被選取的程式在此沙箱中啟動。 *</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2397"/>
+        <location filename="Forms/OptionsWindow.ui" line="2512"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
         <translation>防止所選程式在此沙箱中啟動。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2383"/>
+        <location filename="Forms/OptionsWindow.ui" line="2498"/>
         <source>Allow all programs to start in this sandbox.</source>
         <translation>允許所有程式在此沙箱中啟動。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2373"/>
+        <location filename="Forms/OptionsWindow.ui" line="2488"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
         <translation>* 注意: 安裝至此沙箱內的程式將完全無法啟動。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2902"/>
+        <location filename="Forms/OptionsWindow.ui" line="3017"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
         <translation>設定哪些處理程序可以存取 Windows 等桌面物件。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3152"/>
+        <location filename="Forms/OptionsWindow.ui" line="3267"/>
         <source>Process Restrictions</source>
         <translation>處理程序限制</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3172"/>
+        <location filename="Forms/OptionsWindow.ui" line="3287"/>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>當程式被拒絕存取網路時提示錯誤代碼 1307</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3186"/>
+        <location filename="Forms/OptionsWindow.ui" line="3301"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
         <translation>詢問使用者是否允許封鎖豁免。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3200"/>
+        <location filename="Forms/OptionsWindow.ui" line="3315"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>注意: 安裝在此沙箱中的程式將完全無法存取網路。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2529"/>
-        <location filename="Forms/OptionsWindow.ui" line="2629"/>
-        <location filename="Forms/OptionsWindow.ui" line="2762"/>
-        <location filename="Forms/OptionsWindow.ui" line="2882"/>
-        <location filename="Forms/OptionsWindow.ui" line="2956"/>
-        <location filename="Forms/OptionsWindow.ui" line="3229"/>
+        <location filename="Forms/OptionsWindow.ui" line="2644"/>
+        <location filename="Forms/OptionsWindow.ui" line="2744"/>
+        <location filename="Forms/OptionsWindow.ui" line="2877"/>
+        <location filename="Forms/OptionsWindow.ui" line="2997"/>
+        <location filename="Forms/OptionsWindow.ui" line="3071"/>
+        <location filename="Forms/OptionsWindow.ui" line="3344"/>
         <source>Access</source>
         <translation>存取</translation>
     </message>
@@ -7700,13 +7700,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1038"/>
-        <location filename="Forms/OptionsWindow.ui" line="3599"/>
+        <location filename="Forms/OptionsWindow.ui" line="3714"/>
         <source>Move Up</source>
         <translation>向上移</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1057"/>
-        <location filename="Forms/OptionsWindow.ui" line="3610"/>
+        <location filename="Forms/OptionsWindow.ui" line="3725"/>
         <source>Move Down</source>
         <translation>向下移</translation>
     </message>
@@ -7726,46 +7726,46 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>存取隔離</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4170"/>
+        <location filename="Forms/OptionsWindow.ui" line="4180"/>
         <source>Image Protection</source>
         <translation>映像保護</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4208"/>
+        <location filename="Forms/OptionsWindow.ui" line="4218"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>當一個程式試圖載入一個沙箱內部的應用程式擴充 (DLL) 檔案時，提示錯誤代碼 1305</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4201"/>
+        <location filename="Forms/OptionsWindow.ui" line="4211"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
         <translation>防止主機上安裝的沙箱化程式從沙箱載入應用程式擴充 (DLL) 檔案</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4139"/>
+        <location filename="Forms/OptionsWindow.ui" line="4149"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation>Dll &amp;&amp; 擴充功能</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4189"/>
+        <location filename="Forms/OptionsWindow.ui" line="4199"/>
         <source>Description</source>
         <translation>說明</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4197"/>
+        <location filename="Forms/OptionsWindow.ui" line="4207"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <translation>Sandboxie 的資源存取規則通常對位於沙箱內的二進位程式具有歧視性。OpenFilePath 和 OpenKeyPath 只對主機上的原生程式 (安裝在主機上的) 有效。為了定義沒有此類限制的規則，則必須使用 OpenPipePath 和 OpenConfPath。同樣的，透過否定來定義所有的 Closed(File|Key|Ipc)Path 指令例如：&apos;ClosedFilePath=! iexplore.exe,C:Users*&apos; 將限制沙箱內的程式存取相應資源。這兩種限制原則都可以透過「存取原則」頁面來停用。
 這樣做是為了防止沙箱內的流氓處理程序建立自己的重新命名複本並存取受保護的資源。另一個漏洞載體是將一個動態連結程式庫注入到一個被授權處理程序中，以取得對被授權處理程序所允許存取的一切資源的存取權。使用主機映像保護，可以透過阻止在沙箱內執行的應用程式 (安裝在主機上的) 載入來自沙箱的動態連結程式庫來防止此類現象。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4221"/>
+        <location filename="Forms/OptionsWindow.ui" line="4231"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
         <translation>Sandboxie 的功能可以透過使用可選 DLL 加以增強，這些 DLL 可在啟動時透過 SbieDll.dll 檔案載入到每個沙箱執行緒中，全域設定中的附加元件管理員提供了一些實用擴充套件，安裝後可以在此處對目前沙箱啟用。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1584"/>
+        <location filename="Forms/OptionsWindow.ui" line="1727"/>
         <source>Advanced Security</source>
         <oldsource>Adcanced Security</oldsource>
         <translation>進階安全性</translation>
@@ -7775,52 +7775,52 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation type="vanished">使用 Sandboxie 限權使用者，而不是匿名權杖 (實驗性)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1626"/>
+        <location filename="Forms/OptionsWindow.ui" line="1608"/>
         <source>Other isolation</source>
         <translation>其他隔離</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1650"/>
+        <location filename="Forms/OptionsWindow.ui" line="1794"/>
         <source>Privilege isolation</source>
         <translation>權限隔離</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1592"/>
+        <location filename="Forms/OptionsWindow.ui" line="1762"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>使用自訂 Sandboxie 權杖可以更好地將各個沙箱相互隔離，同時可以實現在工作管理員的使用者欄位中顯示處理程序所屬的沙箱。但是，某些第三方安全性解決方案可能會與自訂權杖產生相容性問題。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1837"/>
+        <location filename="Forms/OptionsWindow.ui" line="1952"/>
         <source>Program Control</source>
         <translation>應用程式控制</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1859"/>
+        <location filename="Forms/OptionsWindow.ui" line="1974"/>
         <source>Force Programs</source>
         <translation>強制沙箱程式</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1971"/>
+        <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Disable forced Process and Folder for this sandbox</source>
         <translation>停用此沙箱的「強制處理程序/資料夾」規則</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1981"/>
+        <location filename="Forms/OptionsWindow.ui" line="2096"/>
         <source>Breakout Programs</source>
         <translation>分離程式</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2013"/>
+        <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>Breakout Program</source>
         <translation>分離程式</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2075"/>
+        <location filename="Forms/OptionsWindow.ui" line="2190"/>
         <source>Breakout Folder</source>
         <translation>分離資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2020"/>
+        <location filename="Forms/OptionsWindow.ui" line="2135"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
         <translation>在此處設定的程式，在啟動時將被允許脫離這個沙箱，您可以把它們擷取到另一個沙箱中。例如，讓網頁瀏覽器總是在一個專門的沙箱內開啟。</translation>
@@ -7853,85 +7853,90 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2050"/>
+        <location filename="Forms/OptionsWindow.ui" line="1577"/>
+        <source>Job Object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2165"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2123"/>
+        <location filename="Forms/OptionsWindow.ui" line="2238"/>
         <source>Lingering Programs</source>
         <translation>駐留程式</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2169"/>
+        <location filename="Forms/OptionsWindow.ui" line="2284"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
         <translation>其他所有程式得到終止後，仍在執行的駐留程式將自動終止。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2202"/>
+        <location filename="Forms/OptionsWindow.ui" line="2317"/>
         <source>Leader Programs</source>
         <translation>引導程式</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2268"/>
+        <location filename="Forms/OptionsWindow.ui" line="2383"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
         <translation>如果定義了引導處理程序，其他處理程序將被視作駐留處理程序。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2459"/>
+        <location filename="Forms/OptionsWindow.ui" line="2574"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2462"/>
+        <location filename="Forms/OptionsWindow.ui" line="2577"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2481"/>
+        <location filename="Forms/OptionsWindow.ui" line="2596"/>
         <source>Files</source>
         <translation>檔案</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2574"/>
+        <location filename="Forms/OptionsWindow.ui" line="2689"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>設定哪些處理程序可以存取檔案、資料夾和管道。
 「開放」存取權限只適用於原先已位於沙箱之外的程式二進位檔，您可以使用「完全開放」來對所有程式開放所有權限，或者在「原則」頁籤中改變這一行為。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2588"/>
+        <location filename="Forms/OptionsWindow.ui" line="2703"/>
         <source>Registry</source>
         <translation>登錄</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2681"/>
+        <location filename="Forms/OptionsWindow.ui" line="2796"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>設定哪些處理程序可以存取檔案、資料夾和管道。
 「開放」存取權限只適用於原先已位於沙箱之外的程式二進位檔，您可以使用「完全開放」來對所有程式開放所有權限，或者在「原則」頁籤中改變這一行為。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2695"/>
+        <location filename="Forms/OptionsWindow.ui" line="2810"/>
         <source>IPC</source>
         <translation>IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2788"/>
+        <location filename="Forms/OptionsWindow.ui" line="2903"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>設定哪些處理程序可以存取 NT IPC 物件，如 ALPC 連接埠及其他處理程序的記憶體和相關執行狀態環境。
 如需指定一個處理程序，使用「$:program.exe」作為路徑值。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2802"/>
+        <location filename="Forms/OptionsWindow.ui" line="2917"/>
         <source>Wnd</source>
         <translation>視窗</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2887"/>
+        <location filename="Forms/OptionsWindow.ui" line="3002"/>
         <source>Wnd Class</source>
         <translation>Wnd 元件</translation>
     </message>
@@ -7940,132 +7945,132 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation type="vanished">設定哪些處理程序可以存取桌面物件，如 Windows 或其它類似物件。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2915"/>
+        <location filename="Forms/OptionsWindow.ui" line="3030"/>
         <source>COM</source>
         <translation>COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2961"/>
+        <location filename="Forms/OptionsWindow.ui" line="3076"/>
         <source>Class Id</source>
         <translation>類別識別碼</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3008"/>
+        <location filename="Forms/OptionsWindow.ui" line="3123"/>
         <source>Configure which processes can access COM objects.</source>
         <translation>設定哪些處理程序可以存取 COM 物件。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3020"/>
+        <location filename="Forms/OptionsWindow.ui" line="3135"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
         <translation>不使用虛擬化 COM，而是開放主機 COM 基礎結構的存取 (不推薦)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3028"/>
+        <location filename="Forms/OptionsWindow.ui" line="3143"/>
         <source>Access Policies</source>
         <translation>存取原則</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3142"/>
+        <location filename="Forms/OptionsWindow.ui" line="3257"/>
         <source>Network Options</source>
         <translation>區域網路選項</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3239"/>
+        <location filename="Forms/OptionsWindow.ui" line="3354"/>
         <source>Set network/internet access for unlisted processes:</source>
         <translation>為未列出的處理程序設定區域網路/網際網路存取權限:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3286"/>
+        <location filename="Forms/OptionsWindow.ui" line="3401"/>
         <source>Test Rules, Program:</source>
         <translation>測試規則、程式:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3296"/>
+        <location filename="Forms/OptionsWindow.ui" line="3411"/>
         <source>Port:</source>
         <translation>連接埠:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3306"/>
+        <location filename="Forms/OptionsWindow.ui" line="3421"/>
         <source>IP:</source>
         <translation>IP:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3316"/>
+        <location filename="Forms/OptionsWindow.ui" line="3431"/>
         <source>Protocol:</source>
         <translation>協定:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3326"/>
+        <location filename="Forms/OptionsWindow.ui" line="3441"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3342"/>
+        <location filename="Forms/OptionsWindow.ui" line="3457"/>
         <source>Add Rule</source>
         <translation>加入規則</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="626"/>
-        <location filename="Forms/OptionsWindow.ui" line="2524"/>
-        <location filename="Forms/OptionsWindow.ui" line="2624"/>
-        <location filename="Forms/OptionsWindow.ui" line="2757"/>
-        <location filename="Forms/OptionsWindow.ui" line="2877"/>
-        <location filename="Forms/OptionsWindow.ui" line="2951"/>
-        <location filename="Forms/OptionsWindow.ui" line="3353"/>
-        <location filename="Forms/OptionsWindow.ui" line="3466"/>
-        <location filename="Forms/OptionsWindow.ui" line="3559"/>
-        <location filename="Forms/OptionsWindow.ui" line="4343"/>
+        <location filename="Forms/OptionsWindow.ui" line="2639"/>
+        <location filename="Forms/OptionsWindow.ui" line="2739"/>
+        <location filename="Forms/OptionsWindow.ui" line="2872"/>
+        <location filename="Forms/OptionsWindow.ui" line="2992"/>
+        <location filename="Forms/OptionsWindow.ui" line="3066"/>
+        <location filename="Forms/OptionsWindow.ui" line="3468"/>
+        <location filename="Forms/OptionsWindow.ui" line="3581"/>
+        <location filename="Forms/OptionsWindow.ui" line="3674"/>
+        <location filename="Forms/OptionsWindow.ui" line="4353"/>
         <source>Program</source>
         <translation>程式</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="621"/>
         <location filename="Forms/OptionsWindow.ui" line="1532"/>
-        <location filename="Forms/OptionsWindow.ui" line="3358"/>
-        <location filename="Forms/OptionsWindow.ui" line="4496"/>
+        <location filename="Forms/OptionsWindow.ui" line="3473"/>
+        <location filename="Forms/OptionsWindow.ui" line="4506"/>
         <source>Action</source>
         <translation>動作</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3363"/>
-        <location filename="Forms/OptionsWindow.ui" line="3569"/>
+        <location filename="Forms/OptionsWindow.ui" line="3478"/>
+        <location filename="Forms/OptionsWindow.ui" line="3684"/>
         <source>Port</source>
         <translation>連接埠</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3368"/>
-        <location filename="Forms/OptionsWindow.ui" line="3476"/>
-        <location filename="Forms/OptionsWindow.ui" line="3564"/>
+        <location filename="Forms/OptionsWindow.ui" line="3483"/>
+        <location filename="Forms/OptionsWindow.ui" line="3591"/>
+        <location filename="Forms/OptionsWindow.ui" line="3679"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3373"/>
+        <location filename="Forms/OptionsWindow.ui" line="3488"/>
         <source>Protocol</source>
         <translation>協定</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3395"/>
+        <location filename="Forms/OptionsWindow.ui" line="3510"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>警告: 未在驅動程式中啟動 Windows 篩選平台，因此以下規則只能在使用者模式下生效，無法被強制執行！！！惡意程式可能會繞過這些規則的限制。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2471"/>
+        <location filename="Forms/OptionsWindow.ui" line="2586"/>
         <source>Resource Access</source>
         <translation>資源存取</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2554"/>
+        <location filename="Forms/OptionsWindow.ui" line="2669"/>
         <source>Add File/Folder</source>
         <translation>加入檔案/資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2848"/>
+        <location filename="Forms/OptionsWindow.ui" line="2963"/>
         <source>Add Wnd Class</source>
         <translation>加入視窗類別</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2727"/>
+        <location filename="Forms/OptionsWindow.ui" line="2842"/>
         <source>Add IPC Path</source>
         <translation>加入 IPC 路徑</translation>
     </message>
@@ -8110,167 +8115,167 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>防止沙箱化執行緒擷取視窗影像 (試驗性，可能造成 UI 故障)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1749"/>
+        <location filename="Forms/OptionsWindow.ui" line="1864"/>
         <source>Sandboxie token</source>
         <translation>Sandboxie 權杖</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2661"/>
+        <location filename="Forms/OptionsWindow.ui" line="2776"/>
         <source>Add Reg Key</source>
         <translation>加入登錄機碼</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2988"/>
+        <location filename="Forms/OptionsWindow.ui" line="3103"/>
         <source>Add COM Object</source>
         <translation>加入 COM 物件</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3041"/>
+        <location filename="Forms/OptionsWindow.ui" line="3156"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
         <translation>將 Close...=!&lt;program&gt;,... 規則，套用到位於沙箱內的所有相關二進位檔。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3408"/>
+        <location filename="Forms/OptionsWindow.ui" line="3523"/>
         <source>DNS Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3425"/>
+        <location filename="Forms/OptionsWindow.ui" line="3540"/>
         <source>Add Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3445"/>
+        <location filename="Forms/OptionsWindow.ui" line="3560"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3471"/>
+        <location filename="Forms/OptionsWindow.ui" line="3586"/>
         <source>Domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3487"/>
+        <location filename="Forms/OptionsWindow.ui" line="3602"/>
         <source>Internet Proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3548"/>
+        <location filename="Forms/OptionsWindow.ui" line="3663"/>
         <source>Add Proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3521"/>
+        <location filename="Forms/OptionsWindow.ui" line="3636"/>
         <source>Test Proxy</source>
         <translation type="unfinished">測試代理</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3574"/>
+        <location filename="Forms/OptionsWindow.ui" line="3689"/>
         <source>Auth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3579"/>
+        <location filename="Forms/OptionsWindow.ui" line="3694"/>
         <source>Login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3584"/>
+        <location filename="Forms/OptionsWindow.ui" line="3699"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3504"/>
+        <location filename="Forms/OptionsWindow.ui" line="3619"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3514"/>
+        <location filename="Forms/OptionsWindow.ui" line="3629"/>
         <source>Resolve hostnames via proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3637"/>
+        <location filename="Forms/OptionsWindow.ui" line="3752"/>
         <source>Other Options</source>
         <translation>其他選項</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3686"/>
+        <location filename="Forms/OptionsWindow.ui" line="3801"/>
         <source>Port Blocking</source>
         <translation>封鎖連接埠</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3645"/>
+        <location filename="Forms/OptionsWindow.ui" line="3760"/>
         <source>Block common SAMBA ports</source>
         <translation>封鎖常見 SAMBA 連接埠</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3659"/>
+        <location filename="Forms/OptionsWindow.ui" line="3774"/>
         <source>Block DNS, UDP port 53</source>
         <translation>封鎖 DNS UDP 連接埠 53</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3737"/>
+        <location filename="Forms/OptionsWindow.ui" line="3852"/>
         <source>File Recovery</source>
         <translation>檔案復原</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3747"/>
+        <location filename="Forms/OptionsWindow.ui" line="3862"/>
         <source>Quick Recovery</source>
         <translation>快速復原</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3816"/>
+        <location filename="Forms/OptionsWindow.ui" line="3931"/>
         <source>Add Folder</source>
         <translation>加入資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3826"/>
+        <location filename="Forms/OptionsWindow.ui" line="3941"/>
         <source>Immediate Recovery</source>
         <translation>即時復原</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3856"/>
+        <location filename="Forms/OptionsWindow.ui" line="3971"/>
         <source>Ignore Extension</source>
         <translation>忽略副檔名</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3902"/>
+        <location filename="Forms/OptionsWindow.ui" line="4017"/>
         <source>Ignore Folder</source>
         <translation>忽略資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3863"/>
+        <location filename="Forms/OptionsWindow.ui" line="3978"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>啟用快速復原提示，以便快速復原建立的檔案。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3846"/>
+        <location filename="Forms/OptionsWindow.ui" line="3961"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>您可以從快速復原中排除特定目錄和檔案類型 (副檔名)。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3779"/>
+        <location filename="Forms/OptionsWindow.ui" line="3894"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>當快速復原功能被執行時，下列資料夾將為沙箱化內容被檢查。 </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4264"/>
+        <location filename="Forms/OptionsWindow.ui" line="4274"/>
         <source>Advanced Options</source>
         <translation>進階選項</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4281"/>
+        <location filename="Forms/OptionsWindow.ui" line="4291"/>
         <source>Miscellaneous</source>
         <translation>雜項</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2895"/>
+        <location filename="Forms/OptionsWindow.ui" line="3010"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
         <translation>不要改變由沙箱化程式建立的視窗類別名稱</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1602"/>
+        <location filename="Forms/OptionsWindow.ui" line="1801"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
         <translation>不啟動使用系統權杖的沙箱化服務 (建議)</translation>
     </message>
@@ -8278,94 +8283,94 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="901"/>
         <location filename="Forms/OptionsWindow.ui" line="1354"/>
         <location filename="Forms/OptionsWindow.ui" line="1506"/>
-        <location filename="Forms/OptionsWindow.ui" line="1623"/>
-        <location filename="Forms/OptionsWindow.ui" line="1647"/>
-        <location filename="Forms/OptionsWindow.ui" line="1746"/>
-        <location filename="Forms/OptionsWindow.ui" line="4167"/>
+        <location filename="Forms/OptionsWindow.ui" line="1605"/>
+        <location filename="Forms/OptionsWindow.ui" line="1791"/>
+        <location filename="Forms/OptionsWindow.ui" line="1861"/>
+        <location filename="Forms/OptionsWindow.ui" line="4177"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>保護沙箱本身的完整性</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1732"/>
+        <location filename="Forms/OptionsWindow.ui" line="1735"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
         <translation>廢棄以系統權杖執行中的程式的關鍵特權</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1684"/>
-        <location filename="Forms/OptionsWindow.ui" line="1725"/>
+        <location filename="Forms/OptionsWindow.ui" line="1778"/>
+        <location filename="Forms/OptionsWindow.ui" line="1848"/>
         <source>(Security Critical)</source>
         <translation>(安全性關鍵)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1711"/>
+        <location filename="Forms/OptionsWindow.ui" line="1835"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
         <translation>保護沙箱中的系統處理程序免受非特權處理程序的影響</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3983"/>
+        <location filename="Forms/OptionsWindow.ui" line="4119"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>強制使用自訂虛擬 Manifest 檔案 (遺留行為)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3126"/>
+        <location filename="Forms/OptionsWindow.ui" line="3241"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>規則的明確性是衡量一個給定規則對特定路徑的相符程度，簡單地說，明確性是指從路徑的開始到最後一個相符的非萬用字元子串之間的字元長度。一個只相符「*.tmp」這樣的檔案類型規則將具有最高的明確性，因為它總是符合整個檔案路徑。
 處理程序相符級別的優先順序高於明確性，它描述了一條規則如何適用於一個給定的處理程序。按處理程序名稱或組應用的規則具有最高的相符級別，其次是否定式相符 (例如: 適用於相符除給定處理程序以外的所有處理程序的規則)，而最低的相符級別是全域符合，即適用於任何處理程序的規則。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3058"/>
+        <location filename="Forms/OptionsWindow.ui" line="3173"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
         <translation>基於規則的明確性和處理程序相符級別，對規則進行優先順序排序</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3105"/>
+        <location filename="Forms/OptionsWindow.ui" line="3220"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
         <translation>隱私模式，阻止對通用系統目錄之外的所有檔案位置和登錄的存取</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3085"/>
+        <location filename="Forms/OptionsWindow.ui" line="3200"/>
         <source>Access Mode</source>
         <translation>存取權限模式</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3048"/>
+        <location filename="Forms/OptionsWindow.ui" line="3163"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
         <translation>當啟用隱私模式時，沙箱化處理程序將只能讀取 C:\Windows\*、C:\Program Files\* 和登錄 HKLM 的部分內容，除此之外的所有其它位置都需要明確的存取授權才能被讀取或寫入。在此模式下，明確性規則將總是被啟用。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3119"/>
+        <location filename="Forms/OptionsWindow.ui" line="3234"/>
         <source>Rule Policies</source>
         <translation>規則原則</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3034"/>
+        <location filename="Forms/OptionsWindow.ui" line="3149"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
         <translation>套用檔案和金鑰開放指令權限 (僅對位於沙箱之外的二進位檔)。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1704"/>
+        <location filename="Forms/OptionsWindow.ui" line="1828"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
         <translation>以系統處理程序啟動沙箱化服務 RpcSs (不推薦)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1609"/>
+        <location filename="Forms/OptionsWindow.ui" line="1755"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
         <translation>僅允許已有特權的處理程序存取服務控制管理員</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3940"/>
-        <location filename="Forms/OptionsWindow.ui" line="3969"/>
+        <location filename="Forms/OptionsWindow.ui" line="4054"/>
+        <location filename="Forms/OptionsWindow.ui" line="4112"/>
         <source>Compatibility</source>
         <translation>相容性</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1670"/>
+        <location filename="Forms/OptionsWindow.ui" line="1592"/>
         <source>Add sandboxed processes to job objects (recommended)</source>
         <translation>加入沙箱化處理程序至作業物件 (推薦)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3955"/>
+        <location filename="Forms/OptionsWindow.ui" line="4126"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>為所有處理程序模擬沙箱化視窗站台</translation>
     </message>
@@ -8399,7 +8404,7 @@ The process match level has a higher priority than the specificity and describes
         <translation>允許讀取非沙箱處理程序的記憶體 (不推薦)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3976"/>
+        <location filename="Forms/OptionsWindow.ui" line="4079"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>預設情況下停用 RpcMgmtSetComTimeout (這可能會解決相容性問題)</translation>
     </message>
@@ -8424,56 +8429,56 @@ The process match level has a higher priority than the specificity and describes
         <translation>以下選項可以在您未授予管理員許可時安全的使用。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4379"/>
+        <location filename="Forms/OptionsWindow.ui" line="4389"/>
         <source>Triggers</source>
         <translation>觸發器</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4491"/>
+        <location filename="Forms/OptionsWindow.ui" line="4501"/>
         <source>Event</source>
         <translation>事件</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4441"/>
-        <location filename="Forms/OptionsWindow.ui" line="4582"/>
-        <location filename="Forms/OptionsWindow.ui" line="4627"/>
-        <location filename="Forms/OptionsWindow.ui" line="4646"/>
+        <location filename="Forms/OptionsWindow.ui" line="4451"/>
+        <location filename="Forms/OptionsWindow.ui" line="4592"/>
+        <location filename="Forms/OptionsWindow.ui" line="4637"/>
+        <location filename="Forms/OptionsWindow.ui" line="4656"/>
         <source>Run Command</source>
         <translation>執行命令</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4608"/>
+        <location filename="Forms/OptionsWindow.ui" line="4618"/>
         <source>Start Service</source>
         <translation>啟動服務</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4554"/>
+        <location filename="Forms/OptionsWindow.ui" line="4564"/>
         <source>These events are executed each time a box is started</source>
         <translation>這些事件當沙箱每次啟動時都會被執行</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4557"/>
+        <location filename="Forms/OptionsWindow.ui" line="4567"/>
         <source>On Box Start</source>
         <translation>沙箱啟動階段</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4416"/>
-        <location filename="Forms/OptionsWindow.ui" line="4474"/>
+        <location filename="Forms/OptionsWindow.ui" line="4426"/>
+        <location filename="Forms/OptionsWindow.ui" line="4484"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>這些命令將在刪除沙箱的內容之前，以非沙箱化的方式被執行</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4023"/>
+        <location filename="Forms/OptionsWindow.ui" line="1650"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <translation>允許使用嵌套作業物件 (job object) (適用於 Windows 8 及更高版本)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4448"/>
+        <location filename="Forms/OptionsWindow.ui" line="4458"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>這些命令只在沙箱被初始化時執行。要使它們再次執行，必須刪除沙箱內容。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4451"/>
+        <location filename="Forms/OptionsWindow.ui" line="4461"/>
         <source>On Box Init</source>
         <translation>沙箱初始化階段</translation>
     </message>
@@ -8482,27 +8487,27 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">此命令在沙箱中所有執行緒完成後執行。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4512"/>
+        <location filename="Forms/OptionsWindow.ui" line="4522"/>
         <source>On Box Terminate</source>
         <translation>沙箱終止階段</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4522"/>
+        <location filename="Forms/OptionsWindow.ui" line="4532"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>在這裡，您可以設定各種沙箱事件中自動執行特定的動作。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4661"/>
+        <location filename="Forms/OptionsWindow.ui" line="4671"/>
         <source>Hide Processes</source>
         <translation>隱藏處理程序</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4735"/>
+        <location filename="Forms/OptionsWindow.ui" line="4745"/>
         <source>Add Process</source>
         <translation>加入處理程序</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4691"/>
+        <location filename="Forms/OptionsWindow.ui" line="4701"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>面向沙箱內執行的處理程序隱藏的主機處理程序。</translation>
     </message>
@@ -8517,63 +8522,63 @@ The process match level has a higher priority than the specificity and describes
         <translation>限制</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3923"/>
+        <location filename="Forms/OptionsWindow.ui" line="4038"/>
         <source>Various Options</source>
         <translation>差異性選項</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3948"/>
+        <location filename="Forms/OptionsWindow.ui" line="4062"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>套用 ElevateCreateProcess 因應措施 (遺留行為)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3990"/>
+        <location filename="Forms/OptionsWindow.ui" line="4086"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>對所有處理程序使用桌面物件因應措施</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4030"/>
+        <location filename="Forms/OptionsWindow.ui" line="4069"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation>當全域性快速鍵在短時間連續按下 3 次時，此異常將被忽略。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4033"/>
+        <location filename="Forms/OptionsWindow.ui" line="4072"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation>當呼叫「終止所有執行緒」時，排除此沙箱。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4509"/>
+        <location filename="Forms/OptionsWindow.ui" line="4519"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation>這些指令將在沙箱內全部執行緒完成後以「未沙箱化」狀態執行。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4579"/>
+        <location filename="Forms/OptionsWindow.ui" line="4589"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>該命令將在刪除沙箱內容之前執行</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4419"/>
+        <location filename="Forms/OptionsWindow.ui" line="4429"/>
         <source>On File Recovery</source>
         <translation>檔案復原階段</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4544"/>
+        <location filename="Forms/OptionsWindow.ui" line="4554"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>該命令將在檔案復原前執行，檔案路徑將作為第一個參數被傳遞，如果該命令的返回值不是 0，則復原將被阻止</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4547"/>
+        <location filename="Forms/OptionsWindow.ui" line="4557"/>
         <source>Run File Checker</source>
         <translation>執行檔案檢查程式</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4477"/>
+        <location filename="Forms/OptionsWindow.ui" line="4487"/>
         <source>On Delete Content</source>
         <translation>內容刪除階段</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4742"/>
+        <location filename="Forms/OptionsWindow.ui" line="4752"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>不允許沙箱內的處理程序檢視其他沙箱內執行的處理程序</translation>
     </message>
@@ -8584,7 +8589,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1527"/>
-        <location filename="Forms/OptionsWindow.ui" line="4678"/>
+        <location filename="Forms/OptionsWindow.ui" line="4688"/>
         <source>Process</source>
         <translation>處理程序</translation>
     </message>
@@ -8593,22 +8598,22 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">阻止對位於該沙箱中的處理程序的讀取</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4767"/>
+        <location filename="Forms/OptionsWindow.ui" line="4777"/>
         <source>Users</source>
         <translation>使用者</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4785"/>
+        <location filename="Forms/OptionsWindow.ui" line="4795"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>僅允許管理員存取資源存取監控</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4792"/>
+        <location filename="Forms/OptionsWindow.ui" line="4802"/>
         <source>Add User</source>
         <translation>加入使用者</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4822"/>
+        <location filename="Forms/OptionsWindow.ui" line="4832"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -8617,23 +8622,23 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 注意: 沙箱的強制沙箱程式及資料夾設定不適用於不能使用沙箱的帳戶。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4313"/>
+        <location filename="Forms/OptionsWindow.ui" line="4323"/>
         <source>Add Option</source>
         <translation>加入選項</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4327"/>
+        <location filename="Forms/OptionsWindow.ui" line="4337"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation>在此處可以設定各個處理程序的進階選項，以提高相容性或自訂沙箱的某些行為。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4338"/>
+        <location filename="Forms/OptionsWindow.ui" line="4348"/>
         <source>Option</source>
         <translation>選項</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4835"/>
+        <location filename="Forms/OptionsWindow.ui" line="4845"/>
         <source>Tracing</source>
         <translation>追蹤</translation>
     </message>
@@ -8642,22 +8647,22 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation type="vanished">API 呼叫追蹤 (需要在沙箱資料夾中安裝 LogAPI)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4843"/>
+        <location filename="Forms/OptionsWindow.ui" line="4853"/>
         <source>Pipe Trace</source>
         <translation>Pipe 追蹤</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4857"/>
+        <location filename="Forms/OptionsWindow.ui" line="4867"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>記錄所有 SetError 至追蹤日誌 (產生大量輸出)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4912"/>
+        <location filename="Forms/OptionsWindow.ui" line="4922"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>紀錄偵錯輸出至追蹤日誌</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4966"/>
+        <location filename="Forms/OptionsWindow.ui" line="4976"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -8680,113 +8685,113 @@ instead of &quot;*&quot;.</source>
         <translation type="vanished">Ntdll 系統呼叫追蹤 (將產生大量輸出)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4898"/>
+        <location filename="Forms/OptionsWindow.ui" line="4908"/>
         <source>File Trace</source>
         <translation>檔案追蹤</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4986"/>
+        <location filename="Forms/OptionsWindow.ui" line="4996"/>
         <source>Disable Resource Access Monitor</source>
         <translation>停用資源存取監控</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4905"/>
+        <location filename="Forms/OptionsWindow.ui" line="4915"/>
         <source>IPC Trace</source>
         <translation>IPC 追蹤</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4959"/>
+        <location filename="Forms/OptionsWindow.ui" line="4969"/>
         <source>GUI Trace</source>
         <translation>GUI 追蹤</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4871"/>
+        <location filename="Forms/OptionsWindow.ui" line="4881"/>
         <source>Resource Access Monitor</source>
         <translation>資源存取監控</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5000"/>
+        <location filename="Forms/OptionsWindow.ui" line="5010"/>
         <source>Access Tracing</source>
         <translation>存取追蹤</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5020"/>
+        <location filename="Forms/OptionsWindow.ui" line="5030"/>
         <source>COM Class Trace</source>
         <translation>COM 類別追蹤</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4891"/>
+        <location filename="Forms/OptionsWindow.ui" line="4901"/>
         <source>Key Trace</source>
         <translation>機碼追蹤</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5446"/>
+        <location filename="Forms/OptionsWindow.ui" line="5456"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>為了彌補失去的保護，請參考「限制」設定組中的「廢棄許可」部分。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3254"/>
-        <location filename="Forms/OptionsWindow.ui" line="4945"/>
+        <location filename="Forms/OptionsWindow.ui" line="3369"/>
+        <location filename="Forms/OptionsWindow.ui" line="4955"/>
         <source>Network Firewall</source>
         <translation>區域網路防火牆</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4850"/>
+        <location filename="Forms/OptionsWindow.ui" line="4860"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>API 呼叫追蹤 (追蹤全部 SBIE 勾點)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5044"/>
+        <location filename="Forms/OptionsWindow.ui" line="5054"/>
         <source>Debug</source>
         <translation>偵錯</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5100"/>
+        <location filename="Forms/OptionsWindow.ui" line="5110"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>警告，這些選項可使核心安全性保障失效並且破壞沙箱安全性！</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5110"/>
+        <location filename="Forms/OptionsWindow.ui" line="5120"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>這些選項是為偵錯相容性問題設計的，請勿用於生產力用途。 </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5125"/>
+        <location filename="Forms/OptionsWindow.ui" line="5135"/>
         <source>App Templates</source>
         <translation>軟體範本</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5155"/>
+        <location filename="Forms/OptionsWindow.ui" line="5165"/>
         <source>Filter Categories</source>
         <translation>篩選類別</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5226"/>
+        <location filename="Forms/OptionsWindow.ui" line="5236"/>
         <source>Text Filter</source>
         <translation>篩選文字</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5216"/>
+        <location filename="Forms/OptionsWindow.ui" line="5226"/>
         <source>Add Template</source>
         <translation>加入範本</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5249"/>
+        <location filename="Forms/OptionsWindow.ui" line="5259"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>此清單含有大量的相容性增強範本</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5191"/>
+        <location filename="Forms/OptionsWindow.ui" line="5201"/>
         <source>Category</source>
         <translation>類別</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5288"/>
+        <location filename="Forms/OptionsWindow.ui" line="5298"/>
         <source>Template Folders</source>
         <translation>範本資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5308"/>
+        <location filename="Forms/OptionsWindow.ui" line="5318"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -8795,114 +8800,109 @@ Please note that this values are currently user specific and saved globally for 
 請注意，這些值為目前使用者針對所有沙箱儲存。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4348"/>
-        <location filename="Forms/OptionsWindow.ui" line="5339"/>
+        <location filename="Forms/OptionsWindow.ui" line="4358"/>
+        <location filename="Forms/OptionsWindow.ui" line="5349"/>
         <source>Value</source>
         <translation>值</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4043"/>
-        <source>Process Limits</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="4074"/>
+        <location filename="Forms/OptionsWindow.ui" line="1711"/>
         <source>Limit restrictions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4081"/>
-        <location filename="Forms/OptionsWindow.ui" line="4095"/>
+        <location filename="Forms/OptionsWindow.ui" line="1629"/>
+        <location filename="Forms/OptionsWindow.ui" line="1636"/>
         <source>Leave it blank to disable the setting(Unit:KB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4088"/>
+        <location filename="Forms/OptionsWindow.ui" line="1643"/>
         <source>Leave it blank to disable the setting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4102"/>
+        <location filename="Forms/OptionsWindow.ui" line="1585"/>
         <source>Total Processes Number Limit:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4109"/>
+        <location filename="Forms/OptionsWindow.ui" line="1615"/>
         <source>Total Processes Memory Limit:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4116"/>
+        <location filename="Forms/OptionsWindow.ui" line="1622"/>
         <source>Single Process Memory Limit:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4701"/>
+        <location filename="Forms/OptionsWindow.ui" line="4711"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4708"/>
+        <location filename="Forms/OptionsWindow.ui" line="4718"/>
         <source>Prevent sandboxed processes from accessing system deatils through WMI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4749"/>
+        <location filename="Forms/OptionsWindow.ui" line="4759"/>
         <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4952"/>
+        <location filename="Forms/OptionsWindow.ui" line="4962"/>
         <source>DNS Request Logging</source>
         <translation>DNS 請求日誌紀錄</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5027"/>
+        <location filename="Forms/OptionsWindow.ui" line="5037"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>Syscall 追蹤 (建立大量輸出)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5135"/>
+        <location filename="Forms/OptionsWindow.ui" line="5145"/>
         <source>Templates</source>
         <translation>範本</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5242"/>
+        <location filename="Forms/OptionsWindow.ui" line="5252"/>
         <source>Open Template</source>
         <translation>開啟範本</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5350"/>
+        <location filename="Forms/OptionsWindow.ui" line="5360"/>
         <source>Accessibility</source>
         <translation>協助工具</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5370"/>
+        <location filename="Forms/OptionsWindow.ui" line="5380"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>螢幕閱讀器: JAWS、NVDA、Window-Eyes、系統協助工具</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5410"/>
+        <location filename="Forms/OptionsWindow.ui" line="5420"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>以下設定允許 Sandboxie 與協助工具軟體結合。請注意當這些設定生效時，必然會失去部分 Sandboxie 保護措施。</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5463"/>
+        <location filename="Forms/OptionsWindow.ui" line="5473"/>
         <source>Edit ini Section</source>
         <translation>編輯 ini 區段</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5469"/>
+        <location filename="Forms/OptionsWindow.ui" line="5479"/>
         <source>Edit ini</source>
         <translation>編輯 ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5482"/>
+        <location filename="Forms/OptionsWindow.ui" line="5492"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5505"/>
+        <location filename="Forms/OptionsWindow.ui" line="5515"/>
         <source>Save</source>
         <translation>儲存</translation>
     </message>

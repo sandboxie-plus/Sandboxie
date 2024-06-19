@@ -9,6 +9,7 @@
 
 "Yes": "Ja",
 "No": "Nej",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nVänligen notera att denna krävda förinställning fungerar endast med ett giltigt supportercertifikat!",
 
 "App compatibility checker": "Kontrollerare av appkompatibilitet",
 "This script check which app compatibility templates needs to be enabled": "Detta skript kontrollerar vilken appkompatibilitetsmall som behöver aktiveras",
@@ -30,50 +31,90 @@
 "Install legacy shell extensions": "Installera legacy skalförlängningar",
 "Select which shell options should be reinstalled": "Välj vilka skalalternativ som ska bli ominstallerade",
 
+"Low FPS in sandboxed games": "Low FPS in sandboxed games",
+"This procedure will optimize the box settings for gaming": "This procedure will optimize the box settings for gaming",
+"Select which box to optimize.": "Select which box to optimize.",
+"To apply recommended settings press NEXT. \n": "To apply recommended settings press NEXT. \n",
+"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.",
+"FPS optimization not successful": "FPS optimization not successful",
+
 "Failed to install application into a sandbox": "Lyckades inte installera applikationen i en sandlåda",
+"It helps troubleshoot issues related to installing applications in the sandbox": "It helps troubleshoot issues related to installing applications in the sandbox",
 "Enter Installer Path": "För in installeringssökvägen",
 "Select a sandbox to install into": "Välj en sandlåda att installera i",
-"Denna låda har DropAdminRight aktiverat, förhindrandes verkställande av installerare. Vill du inaktivera denna restriktion, vilket kommer reducera säkerhetsnivån.": "Denna låda har DropAdminRight aktiverat, förhindrandes verkställande av installerare. Vill du inaktivera denna restriktion, vilket kommer reducera säkerhetsnivån.",
+"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "Denna låda har DropAdminRight aktiverat, förhindrandes verkställande av installerare. Vill du inaktivera denna restriktion, vilket kommer reducera säkerhetsnivån.",
 "Disable DropAdminRights": "Inaktivera DropAdminRights",
 "Enable FakeAdminRights": "Aktivera FakeAdminRights",
 "running installer, pid: %1 press NEXT once it finishes to continue": "kör installerare, pid: %1 %1 tryck på NÄSTA när den avslutar för att fortsätta",
 "Was the issue resolved?": "Vart problemet löst?",
+"no mitigation worked": "no mitigation worked",
 
 "Webcam or Sound does not work when sandboxed": "Webbkamera eller ljud fungerar inte vid sandlådning",
-"För att aktivera webbkamerastöd på Windows 11, måste isoleringsnivån bli reducerad. \nOm du vill fortsätta, vänligen tryck på NÄSTA och välj en sandlåda att modifiera. \n": "För att aktivera webbkamerastöd på Windows 11, måste isoleringsnivån bli reducerad. \nOm du vill fortsätta, vänligen tryck på NÄSTA och välj en sandlåda att modifiera. \n",
-"\nPlease note that this required preset works only with a valid supporter certificate!": "\nVänligen notera att denna krävda förinställning fungerar endast med ett giltigt supportercertifikat!",
+"It helps troubleshoot webcam and audio issues in the sandbox": "It helps troubleshoot webcam and audio issues in the sandbox",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "För att aktivera webbkamerastöd på Windows 11, måste isoleringsnivån bli reducerad. \nOm du vill fortsätta, vänligen tryck på NÄSTA och välj en sandlåda att modifiera. \n",
 "Select which box to turn into a reduced isolation app compartment box.": "Välj vilken låda att ändra till en reducerad utrymmeslåda för appisolering.",
-"Lindringen har applicerats, vänligen prova webbkameran i %1 och indikera om problemet har lösts.": "Lindringen har applicerats, vänligen prova webbkameran i %1 och indikera om problemet har lösts.",
+"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Lindringen har applicerats, vänligen prova webbkameran i %1 och indikera om problemet har lösts.",
+"Webcam mitigation not successful": "Webcam mitigation not successful",
 
 "Select affected sandbox": "Välj berörd sandlåda",
 "Enter Process Name": "För in processnamn",
 
-"Internettillgångsrestriktioner är aktiverade för sandlådan i vilken programmet körs. Programmet är förbjudet från att tillgå internet.": "Internettillgångsrestriktioner är aktiverade för sandlådan i vilken programmet körs. Programmet är förbjudet från att tillgå internet.",
+"SBIE1307: Program cannot access the Internet due to restrictions": "SBIE1307: Program cannot access the Internet due to restrictions",
+"Program cannot access the Internet due to restrictions": "Program cannot access the Internet due to restrictions",
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Internettillgångsrestriktioner är aktiverade för sandlådan i vilken programmet körs. Programmet är förbjudet från att tillgå internet.",
 
-"Start-/Körrestriktioner är aktiverade för sandlådan som programmet körs i. Programmet är förbjudet från att starta eller köra.": "Start-/Körrestriktioner är aktiverade för sandlådan som programmet körs i. Programmet är förbjudet från att starta eller köra.",
+"SBIE1308: Program cannot start due to restrictions": "SBIE1308: Program cannot start due to restrictions",
+"Program cannot start due to restrictions": "Program cannot start due to restrictions",
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "Start-/Körrestriktioner är aktiverade för sandlådan som programmet körs i. Programmet är förbjudet från att starta eller köra.",
 
-"Misslyckanden att ladda SbieDll.dll när påträffad av Chrome, eller annat program som använder appcontainers. Det är ofta orsakat av ogiltiga DACL-entreèr för Sandboxie:s hemkatalog. Denna lindringsåtgärd kommer lösa dem. För det skälet kommer den att be om adminprivilegier vilket behöver bli tillåtet för kmdutil.exe.": "Misslyckanden att ladda SbieDll.dll när påträffad av Chrome, eller annat program som använder appcontainers. Det är ofta orsakat av ogiltiga DACL-entreèr för Sandboxie:s hemkatalog. Denna lindringsåtgärd kommer lösa dem. För det skälet kommer den att be om adminprivilegier vilket behöver bli tillåtet för kmdutil.exe.",
-"DACL-erna har justerats, vänligen försök köra applikationen igen och indikera om problemet har lösts.": "DACL-erna har justerats, vänligen försök köra applikationen igen och indikera om problemet har lösts.",
-"DACL-lösningarna löste inte problemet": "DACL-lösningarna löste inte problemet",
+"SBIE2102: File is too large to copy into sandbox": "SBIE2102: File is too large to copy into sandbox",
+"File is too large to copy into sandbox": "File is too large to copy into sandbox",
 
-"Meddelandet indikerar att Sandboxie inte kunde starta ett av hjälpprogrammen SandboxieRpcSs eller SandboxieDcomLaunch. Namnet noterat i meddelandet kan vara rpcss eller dcomlaunch.\n\nDu kan överlämna en problemrapport på nästa sida för att hjälpa oss analysera frågan.": "Meddelandet indikerar att Sandboxie inte kunde starta ett av hjälpprogrammen SandboxieRpcSs eller SandboxieDcomLaunch. Namnet noterat i meddelandet kan vara rpcss eller dcomlaunch.\n\nDu kan överlämna en problemrapport på nästa sida för att hjälpa oss analysera frågan.",
+"SBIE2113: File is too large to copy into sandbox, creating empty file": "SBIE2113: File is too large to copy into sandbox, creating empty file",
+"File is too large to copy into sandbox, creating empty file": "File is too large to copy into sandbox, creating empty file",
 
-"Sandboxie kunde inte starta ett av sina egna program. Kontrollera tillgångstillstånd till Sandboxie installationsmapp och/eller ominstallera Sandboxie.\n\nMöjliga orsaker:\n1. Sandboxie var konfigurerat att blockera tillgång till mappen innehållandes dess programfiler.\n2: Ett 3:dje parts säkerhetsprogram var konfigurerat att blockera verkställandet av programmet nämnt i meddelandet.\n\nDu kan överlämna en problemrapport på nästa sida för att hjälpa oss att analysera frågan.": "Sandboxie kunde inte starta ett av sina egna program. Kontrollera tillgångstillstånd till Sandboxie installationsmapp och/eller ominstallera Sandboxie.\n\nMöjliga orsaker:\n1. Sandboxie var konfigurerat att blockera tillgång till mappen innehållandes dess programfiler.\n2: Ett 3:dje parts säkerhetsprogram var konfigurerat att blockera verkställandet av programmet nämnt i meddelandet.\n\nDu kan överlämna en problemrapport på nästa sida för att hjälpa oss att analysera frågan.",
+"SBIE2114: File is too large to copy into sandbox, denying access": "SBIE2114: File is too large to copy into sandbox, denying access",
+"File is too large to copy into sandbox, denying access": "File is too large to copy into sandbox, denying access",
 
+"SBIE2115: File is too large to copy into sandbox, opening in read only": "SBIE2115: File is too large to copy into sandbox, opening in read only",
+"File is too large to copy into sandbox, opening in read only": "File is too large to copy into sandbox, opening in read only",
+
+"SBIE2181: Failed to load SbieDll.dll": "SBIE2181: Failed to load SbieDll.dll",
+"Fix the DACLs of Sandboxie's home folder": "Fix the DACLs of Sandboxie's home folder",
+"Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Misslyckanden att ladda SbieDll.dll när påträffad av Chrome, eller annat program som använder appcontainers. Det är ofta orsakat av ogiltiga DACL-entreèr för Sandboxie:s hemkatalog. Denna lindringsåtgärd kommer lösa dem. För det skälet kommer den att be om adminprivilegier vilket behöver bli tillåtet för kmdutil.exe.",
+"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACL-erna har justerats, vänligen försök köra applikationen igen och indikera om problemet har lösts.",
+"DACLs fix did not resolve the issue": "DACL-lösningarna löste inte problemet",
+
+"SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Cannot start a specific sandboxed service",
+"Sandboxie failed to start a service in the sandbox": "Sandboxie failed to start a service in the sandbox",
+"The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Meddelandet indikerar att Sandboxie inte kunde starta ett av hjälpprogrammen SandboxieRpcSs eller SandboxieDcomLaunch. Namnet noterat i meddelandet kan vara rpcss eller dcomlaunch.\n\nDu kan överlämna en problemrapport på nästa sida för att hjälpa oss analysera frågan.",
+
+"SBIE2313: Could not execute specific process": "SBIE2313: Could not execute specific process",
+"Sandboxie failed to start a process in the sandbox": "Sandboxie failed to start a process in the sandbox",
+"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie kunde inte starta ett av sina egna program. Kontrollera tillgångstillstånd till Sandboxie installationsmapp och/eller ominstallera Sandboxie.\n\nMöjliga orsaker:\n1. Sandboxie var konfigurerat att blockera tillgång till mappen innehållandes dess programfiler.\n2: Ett 3:dje parts säkerhetsprogram var konfigurerat att blockera verkställandet av programmet nämnt i meddelandet.\n\nDu kan överlämna en problemrapport på nästa sida för att hjälpa oss att analysera frågan.",
+
+"open config": "open config",
+"opens box config on a given page": "opens box config on a given page",
 "Do you want to open the box option dialog to change this preset?": "Vill du öppna lådalternativdialogen för att ändra denna förinställning?",
 "No, it is fine as it is": "Nej, det är bra som det är",
 "No, but I want to report a bug": "Nej, men jag vill rapportera en bugg",
 
+"SBIE 2113/2114/2115 and 2102": "SBIE 2113/2114/2115 and 2102",
+"handle migration error messages": "handle migration error messages",
 "The message %1 is caused by the file migration limit being reached.": "Meddelandet %1 orsakas av att filflyttningsgränsen har nåtts.",
 
-"Det verkar som att du använder ett icke-adminkonto på ett system med aktiverade föräldrakontroller, detta är känt som inkompatibelt med Sandboxie.\nDu har följande alternativ för att lösa problemet.": "Det verkar som att du använder ett icke-adminkonto på ett system med aktiverade föräldrakontroller, detta är känt som inkompatibelt med Sanboxie.\nDu har följande alternativ för att lösa problemet.",
+"fix parental controls breaking sandboxie": "fix parental controls breaking sandboxie",
+"stops AppId driver and AppIdSvc service and disables the offending policy file": "stops AppId driver and AppIdSvc service and disables the offending policy file",
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "Det verkar som att du använder ett icke-adminkonto på ett system med aktiverade föräldrakontroller, detta är känt som inkompatibelt med Sanboxie.\nDu har följande alternativ för att lösa problemet.",
 
+"SBIEMSG, I'm getting a cryptic SBIExxxx message": "SBIEMSG, I'm getting a cryptic SBIExxxx message",
+"Handle all sbie messages...": "Handle all sbie messages...",
 "Sbie Message Code": "Sbie meddelandekod",
 "Name affected process": "Namnge berörd process",
 "Please enter the SBIEMSG ID you have encountered.": "Vänligen för in det SBIEMSG-ID du har påträffat.",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "Det finns inget automatiserat problemlösande tillgängligt för SBIE%1 ännu.<br />",
 "The full message text is: %1<br />": "Fullständig meddelandetext är: %1<br />",
-"Besök vår <a href=\"%1\">nätdokumentation</a> och lär mer om detta och andra sbie-meddelanden.": "Besök vår <a href=\"%1\">nätdokumentation</a> och lär mer om detta och andra Sbie-meddelanden.",
+"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Besök vår <a href=\"%1\">nätdokumentation</a> och lär mer om detta och andra Sbie-meddelanden.",
 "Would you like to collect some logs to help us resolve the issue.": "Vill du samla in några loggar för att hjälpa oss lösa problemet.",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Vänligen kör nu din applikation igen för att utlösa Sbie-meddelandet.<br /><br />",
 "Press NEXT when you are done collecting logs.": "Tryck på NÄSTA när du är färdig med logginsamlandet."

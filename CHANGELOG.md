@@ -3,19 +3,20 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.2 / 5.69.2] - 2024-06-??
+## [1.14.2 / 5.69.2] - 2024-06-19
 
 ### Added
 - added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
   - usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
   - note: use /passwd without the password to have SbieIni prompot for the password on the console, this hides the password from view and from bing captured with the command line
-- added checkbox for PromptForInternetAccess option to the New Box Wizard
-- Add option "HideNonSystemProcesses" to hide processes not in a sandbox from processes lists for sandboxed processes.
-- Add option "HideSbieProcesses" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
-- When "HideFirmwareInfo" is set,the programs which try getting fireware info will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
-- Add template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI.
-- Add template "BlockLocalConnect" to prevent sandboxed processes from sending network packs to loaclhost to breakout sandbox.
-- Add new option "AllowCoverTaskbar" for [#3975](https://github.com/sandboxie-plus/Sandboxie/issues/3975)
+- added checkbox for "PromptForInternetAccess" option to the New Box Wizard
+- added option "HideNonSystemProcesses" to hide processes not in a sandbox from processes lists for sandboxed processes.
+- added option "HideSbieProcesses" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
+- added option "HideFirmwareInfo"
+  - when it is set, the programs that try getting fireware information will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
+- added template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI.
+- added template "BlockLocalConnect" to prevent sandboxed processes from sending network packs to localhost to breakout sandbox.
+- added new option "AllowCoverTaskbar" for [#3975](https://github.com/sandboxie-plus/Sandboxie/issues/3975)
 - added RPC Port message filter mechanism to block unsafe RDP calls via the driver [#3930](https://github.com/sandboxie-plus/Sandboxie/issues/3930)
   - Usage: "RpcPortFilter=Port,ID,Label" label is optional
 - added "Job Object" Options page to colelct all job object related options
@@ -24,7 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Extend "Temp Template" to make it could delete local template section.
 
 ### Fixed
-- fixed security issue with the newly introduced experimental "UseCreateToken=y" machanism
+- fixed security issue with the newly introduced experimental "UseCreateToken=y" mechanism
 - fixed issue with "UseCreateToken=y" when using a MSFT online account
 - fixed Export sandbox not containing hidden files [#3980](https://github.com/sandboxie-plus/Sandboxie/issues/3980) (thanks L4cache)
 - fixed Chrome stopped printing [#3926](https://github.com/sandboxie-plus/Sandboxie/issues/3926)
@@ -35,7 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Delay in launching forced programs after version 1.12.9 [#3868](https://github.com/sandboxie-plus/Sandboxie/issues/3868)
   - this issue was introdiced in 1.13.0 and may have broadly affected other usecases and cause variosue problems
 - fixed issue with Misc Options list
-- improved compatybility with steam running sandboxed
+- improved compatibility with steam running sandboxed
 
 
 
@@ -54,7 +55,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option for EditAdminOnly in SetupWizard
 
 ### Changed
-- splited the advanced new box wizard page in two
+- split the advanced new box wizard page in two
 - reorganized box options a bit
 
 ### Fixed

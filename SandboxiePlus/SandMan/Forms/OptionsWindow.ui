@@ -808,7 +808,7 @@
              <item row="16" column="2" colspan="2">
               <widget class="QCheckBox" name="chkCoverBar">
                <property name="text">
-                <string>Allow sandboxed windows to cover taskbar</string>
+                <string>Allow sandboxed windows to cover the taskbar</string>
                </property>
               </widget>
              </item>

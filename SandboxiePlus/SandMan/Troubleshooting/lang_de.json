@@ -9,6 +9,7 @@
 
 "Yes": "Ja",
 "No": "Nein",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nBitte beachten Sie, dass diese erforderliche Voreinstellung nur mit einem gültigen Unterstützerzertifikat funktioniert!",
 
 "App compatibility checker": "App-Kompatibilitätsprüfer",
 "This script check which app compatibility templates needs to be enabled": "Dieses Skript überprüft, welche App-Kompatibilitätsvorlagen aktiviert werden müssen",
@@ -30,7 +31,15 @@
 "Install legacy shell extensions": "Legacy-Menüerweiterungen installieren",
 "Select which shell options should be reinstalled": "Wählen Sie aus, welche Menüoptionen neu installiert werden sollen",
 
+"Low FPS in sandboxed games": "Low FPS in sandboxed games",
+"This procedure will optimize the box settings for gaming": "This procedure will optimize the box settings for gaming",
+"Select which box to optimize.": "Select which box to optimize.",
+"To apply recommended settings press NEXT. \n": "To apply recommended settings press NEXT. \n",
+"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.",
+"FPS optimization not successful": "FPS optimization not successful",
+
 "Failed to install application into a sandbox": "Fehler beim Installieren der Anwendung in einer Sandbox",
+"It helps troubleshoot issues related to installing applications in the sandbox": "It helps troubleshoot issues related to installing applications in the sandbox",
 "Enter Installer Path": "Installerpfad eingeben",
 "Select a sandbox to install into": "Wählen Sie eine Sandbox zur Installation aus",
 "This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "In dieser Box ist Adminrechte abgeben aktiviert, was die Ausführung von Installern verhindert. Möchten Sie diese Einschränkung deaktivieren, was das Sicherheitsniveau senken wird?",
@@ -38,36 +47,68 @@
 "Enable FakeAdminRights": "Adminrechte abgeben aktivieren",
 "running installer, pid: %1 press NEXT once it finishes to continue": "Installer wird ausgeführt, PID: %1 drücken Sie auf WEITER, sobald dieser fertig ist, um fortzufahren",
 "Was the issue resolved?": "Wurde das Problem behoben?",
+"no mitigation worked": "no mitigation worked",
 
 "Webcam or Sound does not work when sandboxed": "Webcam oder Ton funktioniert nicht in einer Sandbox",
+"It helps troubleshoot webcam and audio issues in the sandbox": "It helps troubleshoot webcam and audio issues in the sandbox",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Um die Webcam-Unterstützung unter Windows 11 zu aktivieren, muss das Isolationsniveau reduziert werden. \nWenn Sie fortfahren möchten, drücken Sie bitte auf WEITER und wählen eine Sandbox zur Modifikation aus. \n",
-"\nPlease note that this required preset works only with a valid supporter certificate!": "\nBitte beachten Sie, dass diese erforderliche Voreinstellung nur mit einem gültigen Unterstützerzertifikat funktioniert!",
 "Select which box to turn into a reduced isolation app compartment box.": "Wählen Sie, welche Box in eine Applikationsunterteilungsbox mit reduzierter Isolation umgewandelt werden soll.",
 "The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Die Umwandlung wurde durchgeführt, bitte testen Sie die Webcam in %1 und geben Sie an, ob das Problem behoben wurde.",
+"Webcam mitigation not successful": "Webcam mitigation not successful",
 
 "Select affected sandbox": "Betroffene Sandbox auswählen",
 "Enter Process Name": "Prozessname eingeben",
 
+"SBIE1307: Program cannot access the Internet due to restrictions": "SBIE1307: Program cannot access the Internet due to restrictions",
+"Program cannot access the Internet due to restrictions": "Program cannot access the Internet due to restrictions",
 "Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Für die Sandbox, in der das Programm ausgeführt wird, gelten Internetzugriffsbeschränkungen. Dem Programm ist der Zugriff auf das Internet untersagt.",
 
+"SBIE1308: Program cannot start due to restrictions": "SBIE1308: Program cannot start due to restrictions",
+"Program cannot start due to restrictions": "Program cannot start due to restrictions",
 "Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "Für die Sandbox, in der das Programm ausgeführt wird, gelten Start-/Ausführungsbeschränkungen. Das Programm darf nicht gestartet oder ausgeführt werden.",
 
+"SBIE2102: File is too large to copy into sandbox": "SBIE2102: File is too large to copy into sandbox",
+"File is too large to copy into sandbox": "File is too large to copy into sandbox",
+
+"SBIE2113: File is too large to copy into sandbox, creating empty file": "SBIE2113: File is too large to copy into sandbox, creating empty file",
+"File is too large to copy into sandbox, creating empty file": "File is too large to copy into sandbox, creating empty file",
+
+"SBIE2114: File is too large to copy into sandbox, denying access": "SBIE2114: File is too large to copy into sandbox, denying access",
+"File is too large to copy into sandbox, denying access": "File is too large to copy into sandbox, denying access",
+
+"SBIE2115: File is too large to copy into sandbox, opening in read only": "SBIE2115: File is too large to copy into sandbox, opening in read only",
+"File is too large to copy into sandbox, opening in read only": "File is too large to copy into sandbox, opening in read only",
+
+"SBIE2181: Failed to load SbieDll.dll": "SBIE2181: Failed to load SbieDll.dll",
+"Fix the DACLs of Sandboxie's home folder": "Fix the DACLs of Sandboxie's home folder",
 "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Wenn Chrome oder eine andere Software, die App-Container verwendet, die Datei SbieDll.dll nicht laden kann, wird dies häufig durch ungültige DACL-Einträge für das Sandboxie-Verzeichnis verursacht. Diese Maßnahme wird die DACL-Einträge beheben. Aus diesem Grund wird sie Adminrechte anfordern, die für kmdutil.exe gewährt werden müssen.",
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "Die DACLs wurden angepasst. Bitte versuchen Sie, Ihre Anwendung erneut auszuführen und geben Sie an, ob das Problem behoben wurde.",
 "DACLs fix did not resolve the issue": "Korrektur der DACLs hat das Problem nicht behoben",
 
+"SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Cannot start a specific sandboxed service",
+"Sandboxie failed to start a service in the sandbox": "Sandboxie failed to start a service in the sandbox",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Die Nachricht zeigt an, dass Sandboxie nicht in der Lage war, eines der Hilfsprogramme SandboxieRpcSs oder SandboxieDcomLaunch zu starten. Der in der Nachricht angegebene Name kann rpcss oder dcomlaunch sein.\n\nAuf der nächsten Seite können Sie einen Problembericht einreichen, um uns bei der Analyse des Problems zu helfen.",
 
+"SBIE2313: Could not execute specific process": "SBIE2313: Could not execute specific process",
+"Sandboxie failed to start a process in the sandbox": "Sandboxie failed to start a process in the sandbox",
 "Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie war nicht in der Lage, eines seiner eigenen Programme auszuführen. Überprüfen Sie die Zugriffsrechte auf den Sandboxie-Installationsordner und/oder installieren Sie Sandboxie neu.\n\nMögliche Ursachen:\n1. Sandboxie wurde so konfiguriert, dass der Zugriff auf den Ordner mit seinen Programmdateien blockiert wird.\n2. Eine Sicherheitssoftware eines Drittanbieters (HIPS) wurde so konfiguriert, dass sie die Ausführung des in der Nachricht genannten Programms blockiert.\n\nAuf der nächsten Seite können Sie einen Problembericht einreichen, um uns bei der Analyse des Problems zu helfen.",
 
+"open config": "open config",
+"opens box config on a given page": "opens box config on a given page",
 "Do you want to open the box option dialog to change this preset?": "Möchten Sie das Dialogfeld mit den Boxoptionen öffnen, um diese Voreinstellung zu ändern?",
 "No, it is fine as it is": "Nein, es ist gut so, wie es ist",
 "No, but I want to report a bug": "Nein, aber ich möchte einen Fehler melden",
 
+"SBIE 2113/2114/2115 and 2102": "SBIE 2113/2114/2115 and 2102",
+"handle migration error messages": "handle migration error messages",
 "The message %1 is caused by the file migration limit being reached.": "Die Nachricht %1 wird dadurch verursacht, dass das Limit für die Dateimigration erreicht wurde.",
 
+"fix parental controls breaking sandboxie": "fix parental controls breaking sandboxie",
+"stops AppId driver and AppIdSvc service and disables the offending policy file": "stops AppId driver and AppIdSvc service and disables the offending policy file",
 "It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "Es scheint, dass Sie ein nicht-administratives Benutzerkonto auf einem System mit aktivierter Kindersicherung verwenden, das bekanntermaßen nicht mit Sandboxie kompatibel ist.\nSie haben folgende Möglichkeiten, das Problem zu lösen.",
 
+"SBIEMSG, I'm getting a cryptic SBIExxxx message": "SBIEMSG, I'm getting a cryptic SBIExxxx message",
+"Handle all sbie messages...": "Handle all sbie messages...",
 "Sbie Message Code": "SBIE Nachrichten-Code",
 "Name affected process": "Name des betroffenen Prozesses",
 "Please enter the SBIEMSG ID you have encountered.": "Bitte geben Sie die SBIE Nachrichten-ID ein, auf die Sie gestoßen sind.",

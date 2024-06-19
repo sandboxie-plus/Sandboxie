@@ -1,8 +1,8 @@
 /*
 *	group: sandboxing
 *	class: sandboxing
-* name: Low FPS in sandboxed Games
-* description: This procedure will obtimize the box settings for gaming
+* name: Low FPS in sandboxed games
+* description: This procedure will optimize the box settings for gaming
 *
 */
 
@@ -38,7 +38,7 @@ box.start();
       wizard.setResult(true);
   }
   if (ret['no'] == true) {
-      wizard.setResult(false, 'Webcam mitigation not successfull');
+      wizard.setResult(false, tr('FPS optimization not successful'));
       // todo roll back changes
   }
 }

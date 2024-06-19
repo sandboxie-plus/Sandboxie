@@ -42,7 +42,7 @@ box.start();
       wizard.setResult(true);
   }
   if (ret['no'] == true) {
-      wizard.setResult(false, 'Webcam mitigation not successfull');
+      wizard.setResult(false, tr('Webcam mitigation not successful'));
       // todo roll back changes
   }
 }

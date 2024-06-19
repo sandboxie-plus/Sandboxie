@@ -36,7 +36,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Russian|Yes - Sep 21, 2023|Yes - Jun 6, 2024|
 |SimpChinese|Yes - May 20, 2024|Yes - Jun 7, 2024|
 |Slovak|Yes|No|
-|Spanish|Yes|Yes - Jun 7, 2024|
+|Spanish|Yes|Yes - Jun 17, 2024|
 |Swedish|Yes - Aug 10, 2022|Yes - Apr 25, 2024|
 |TradChinese|Yes - Sep 21, 2022|Yes - Apr 22, 2024|
 |Turkish|Yes - Jun 9, 2024|Yes - Jun 9, 2024|

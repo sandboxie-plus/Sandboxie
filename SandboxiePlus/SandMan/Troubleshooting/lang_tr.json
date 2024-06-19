@@ -9,6 +9,7 @@
 
 "Yes": "Evet",
 "No": "Hayır",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nLütfen bu gerekli ön ayarın yalnızca geçerli bir destekçi sertifikasıyla çalıştığını unutmayın!",
 
 "App compatibility checker": "Uygulama uyumluluk denetleyicisi",
 "This script check which app compatibility templates needs to be enabled": "Bu komut dosyası hangi uygulama uyumluluk şablonlarının etkinleştirilmesi gerektiğini denetler",
@@ -26,11 +27,19 @@
 "Explorer Context Menu extension does not work": "Gezgin Bağlam Menüsü uzantısı çalışmıyor",
 "This procedure will re install the shell integration": "Bu prosedür kabuk entegrasyonunu yeniden kuracaktır",
 "Add Run Sandboxed": "Korumalı Alanda Çalıştırı ekle",
-"Add Run Unsandboxed": "Korumalı Alan Dışında Çalıştırmayı ekle",
+"Add Run Unsandboxed": "Korumalı Alan Dışında Çalıştırı ekle",
 "Install legacy shell extensions": "Eski kabuk uzantılarını yükle",
 "Select which shell options should be reinstalled": "Hangi kabuk seçeneklerinin yeniden yüklenmesi gerektiğini seçin",
 
+"Low FPS in sandboxed games": "Korumalı alan oyunlarında düşük FPS",
+"This procedure will optimize the box settings for gaming": "Bu prosedür oyunlar için alan ayarlarını en iyi duruma getirecektir",
+"Select which box to optimize.": "En iyi duruma getirilecek alanı seçin.",
+"To apply recommended settings press NEXT. \n": "Önerilen ayarları uygulamak için SONRAKİ'ne tıklayın. \n",
+"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "Seçenekler uygulandı, lütfen oyununuzu %1'de deneyin ve sorunun çözülüp çözülmediğini belirtin.",
+"FPS optimization not successful": "FPS optimizasyonu başarılı değil",
+
 "Failed to install application into a sandbox": "Uygulama korumalı alana yüklenemedi",
+"It helps troubleshoot issues related to installing applications in the sandbox": "Korumalı alana uygulama yüklemeyle ilgili sorunların giderilmesinde yardımcı olur",
 "Enter Installer Path": "Yükleyici Yolunu Girin",
 "Select a sandbox to install into": "Yüklenecek korumalı alanı seçin",
 "This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "Bu kutuda DropAdminRights etkinleştirildi, bu da yükleyicilerin yürütülmesini engelliyor. Bu kısıtlamayı devre dışı bırakmak istiyor musunuz, bu güvenlik düzeyini düşürecektir.",
@@ -38,36 +47,68 @@
 "Enable FakeAdminRights": "FakeAdminRights'ı etkinleştir",
 "running installer, pid: %1 press NEXT once it finishes to continue": "yükleyici çalışıyor, pid: %1 devam etmek için bittiğinde SONRAKİ'ne tıklayın",
 "Was the issue resolved?": "Sorun çözüldü mü?",
+"no mitigation worked": "hiçbir hafifletme işe yaramadı",
 
 "Webcam or Sound does not work when sandboxed": "Web kamerası veya Ses korumalı alanda çalışmıyor",
-"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Windows 11'de web kamerası desteğini etkinleştirmek için yalıtım düzeyinin düşürülmesi gerekir. \nDevam etmek istiyorsanız lütfen İLERİ'ye tıklayın ve değiştirilecek korumalı alanı seçin. \n",
-"\nPlease note that this required preset works only with a valid supporter certificate!": "\nLütfen bu gerekli ön ayarın yalnızca geçerli bir destekçi sertifikasıyla çalıştığını unutmayın!",
+"It helps troubleshoot webcam and audio issues in the sandbox": "Korumalı alandaki web kamerası ve ses sorunlarının giderilmesinde yardımcı olur",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Windows 11'de web kamerası desteğini etkinleştirmek için yalıtım düzeyinin düşürülmesi gerekir. \nDevam etmek istiyorsanız lütfen SONRAKİ'ne tıklayın ve değiştirilecek korumalı alanı seçin. \n",
 "Select which box to turn into a reduced isolation app compartment box.": "Hangi alanın, yalıtımı azaltılmış uygulama bölmesine dönüştürüleceğini seçin.",
 "The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Yalıtım azaltma uygulandı, lütfen %1 alanında web kamerasını deneyin ve sorunun çözülüp çözülmediğini belirtin.",
+"Webcam mitigation not successful": "Webcam çözümü başarılı değil",
 
 "Select affected sandbox": "Etkilenen korumalı alanı seçin",
 "Enter Process Name": "İşlem Adını Girin",
 
+"SBIE1307: Program cannot access the Internet due to restrictions": "SBIE1307: Program kısıtlamalardan dolayı internete erişemiyor",
+"Program cannot access the Internet due to restrictions": "Ağ kısıtlamalardan dolayı korumalı alandaki bir programın internete erişemediğini bildirir",
 "Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Programın çalıştığı korumalı alan için İnternet Erişimi kısıtlamaları geçerlidir. Programın internete erişimi engellenmiş.",
 
+"SBIE1308: Program cannot start due to restrictions": "SBIE1308: Program kısıtlamalardan dolayı başlatılamıyor",
+"Program cannot start due to restrictions": "Başlatma kısıtlamalardan dolayı korumalı alandaki bir programın başlatılamadığını bildirir",
 "Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "Programın çalıştığı korumalı alan için Başlat/Çalıştır kısıtlamaları geçerlidir. Programın başlatılması veya çalıştırılması engellenmiş.",
 
+"SBIE2102: File is too large to copy into sandbox": "SBIE2102: Dosya korumalı alana kopyalanamayacak kadar büyük",
+"File is too large to copy into sandbox": "Dosyanın korumalı alana kopyalanamayacak kadar büyük olduğunu bildirir",
+
+"SBIE2113: File is too large to copy into sandbox, creating empty file": "SBIE2113: Dosya korumalı alana kopyalanamayacak kadar büyük, boş dosya oluşturuldu",
+"File is too large to copy into sandbox, creating empty file": "Dosyanın korumalı alana kopyalanamayacak kadar büyük olduğundan dolayı korumalı alanda boş bir dosya oluşturulduğunu bildirir",
+
+"SBIE2114: File is too large to copy into sandbox, denying access": "SBIE2114: Dosya korumalı alana kopyalanamayacak kadar büyük, erişim engellendi",
+"File is too large to copy into sandbox, denying access": "Dosyanın korumalı alana kopyalanamayacak kadar büyük olduğundan dolayı dosyaya erişimin engellendiğini bildirir",
+
+"SBIE2115: File is too large to copy into sandbox, opening in read only": "SBIE2115: Dosya korumalı alana kopyalanamayacak kadar büyük, salt okunur olarak açıldı",
+"File is too large to copy into sandbox, opening in read only": "Dosyanın korumalı alana kopyalanamayacak kadar büyük olduğundan dolayı erişime salt okunur olarak izin verildiğini bildirir",
+
+"SBIE2181: Failed to load SbieDll.dll": "SBIE2181: SbieDll.dll yüklenemedi",
+"Fix the DACLs of Sandboxie's home folder": "Sandboxie'nin ana klasörünün DACL girişlerini düzeltir",
 "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chrome veya uygulama konteyneri kullanan başka bir yazılımla karşılaşıldığında SbieDll.dll dosyasının yüklenememesi, genellikle Sandboxie ana dizini için geçersiz DACL girişlerinden kaynaklanır. Bu hafifletici önlem bunları düzeltecektir, bu nedenle gereken yönetici ayrıcalıkları kmdutil.exe için istenecektir.",
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACL'ler ayarlandı. Lütfen uygulamanızı tekrar çalıştırmayı deneyin ve sorunun çözülüp çözülmediğini belirtin.",
 "DACLs fix did not resolve the issue": "DACL düzeltmesi sorunu çözmedi",
 
+"SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Korumalı alan hizmeti başlatılamıyor",
+"Sandboxie failed to start a service in the sandbox": "Sandboxie'nin korumalı alanda bir hizmeti başlatamadığını bildirir",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Mesaj, Sandboxie'nin SandboxieRpcSs veya SandboxieDcomLaunch yardımcı programlarından birini başlatamadığını belirtir. Mesajda belirtilen ad rpcss veya dcomlaunch olabilir.\n\nSorunu analiz etmemize yardımcı olması için sonraki sayfadan bir sorun raporu gönderebilirsiniz.",
 
+"SBIE2313: Could not execute specific process": "SBIE2313: Korumalı alan işlemi yürütülemedi",
+"Sandboxie failed to start a process in the sandbox": "Sandboxienin korumalı alanda bir işlem yürütemediğini bildirir",
 "Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie kendi programlarından birini çalıştıramadı. Sandboxie kurulum klasörüne erişim izinlerini kontrol edin ve/veya Sandboxie'yi yeniden yükleyin.\n\nOlası Nedenler:\n1. Sandboxie, program dosyalarını içeren klasöre erişimi engelleyecek şekilde yapılandırılmıştır.\n2. Mesajda bahsedilen programın yürütülmesini engellemek için bir üçüncü taraf (HIPS) güvenlik yazılımı yapılandırıldı.\n\nSorunu analiz etmemize yardımcı olması için sonraki sayfadan bir sorun raporu gönderebilirsiniz.",
 
+"open config": "yapılandırmayı aç",
+"opens box config on a given page": "Alan yapılandırmasındaki belli bir sayfayı açar",
 "Do you want to open the box option dialog to change this preset?": "Bu ön ayarı değiştirmek için Alan Seçenekleri penceresini açmak istiyor musunuz?",
 "No, it is fine as it is": "Hayır, bu haliyle gayet iyi",
 "No, but I want to report a bug": "Hayır ama bir hata bildirmek istiyorum",
 
+"SBIE 2113/2114/2115 and 2102": "2113/2114/2115 ve 2102",
+"handle migration error messages": "dosya taşıma hata mesajlarını işler",
 "The message %1 is caused by the file migration limit being reached.": "%1 mesajı, dosya taşıma sınırına ulaşılmasından kaynaklanıyor.",
 
+"fix parental controls breaking sandboxie": "sandboxie'yi bozan ebeveyn denetimlerini düzeltin",
+"stops AppId driver and AppIdSvc service and disables the offending policy file": "AppId sürücüsünü ve AppIdSvc hizmetini durdurur ve sorun çıkaran politika dosyasını devre dışı bırakır",
 "It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "Ebeveyn denetimlerinin etkin olduğu bir sistemde yönetici olmayan bir kullanıcı hesabı kullandığınız anlaşılıyor; bunun Sandboxie ile uyumlu olmadığı biliniyor.\nSorunu çözmek için aşağıdaki seçeneklere sahipsiniz.",
 
+"SBIEMSG, I'm getting a cryptic SBIExxxx message": "SBIEMSG, gizemli bir SBIExxxx mesajı alıyorum",
+"Handle all sbie messages...": "Tüm sbie mesajlarını yönet...",
 "Sbie Message Code": "Sbie Mesaj Kodu",
 "Name affected process": "Etkilenen işlemi belirtin",
 "Please enter the SBIEMSG ID you have encountered.": "Lütfen karşılaştığınız SBIEMSG numarasını girin.",

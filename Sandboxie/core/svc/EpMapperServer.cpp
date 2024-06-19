@@ -226,7 +226,7 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
         // So, since here we only open non critical ports, we will use PID 0 to open them globally
         // instead of only for the one process. Todo: make it per sandbox instead
         //
-        // Note: Filter is only support for globaly open ports, i.e. when process_id == 0
+        // Note: Filter is only support for globally open ports, i.e. when process_id == 0
         // Todo: Add per process ALPC message filter
         //
 

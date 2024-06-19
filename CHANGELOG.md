@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.2 / 5.69.2] - 2024-06-??
+## [1.14.2 / 5.69.2] - 2024-06-19
 
 ### Added
 - added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)

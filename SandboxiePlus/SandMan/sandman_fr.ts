@@ -194,7 +194,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="874"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation type="unfinished">Empêcher les programmes d&apos;un bac installé sur l&apos;hôte de charger des DLL depuis le bac</translation>
+        <translation>Empêcher les programmes d&apos;un bac installé sur l&apos;hôte de charger des DLL depuis le bac</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="875"/>
@@ -205,7 +205,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="882"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette fonction peut provoquer un déclin de l&apos;expérience utilisateur, car elle empêche également les captures d&apos;écran normales.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="887"/>
@@ -261,12 +261,12 @@ Pour désactiver ce modèle pour un bac à sable, décochez-le simplement de la 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="867"/>
         <source>Advanced Options</source>
-        <translation type="unfinished">Options avancées</translation>
+        <translation>Options avancées</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher les fenêtres des bacs d&apos;être capturées</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
@@ -455,12 +455,12 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="325"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation>Un bac à sable isole votre système hôte des processus lancés dans le bac ; il les empêche de faire des changements permanents à d&apos;autres programmes ou données de votre ordinateur. </translation>
+        <translation>Un bac à sable isole votre système hôte des processus lancés dans le bac ; il les empêche de faire des modifications permanentes à d&apos;autres programmes ou données de votre ordinateur. </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>Un bac à sable isole le système hôte des processus lancés dans le bac. Cela les empêche de faire des changements permanents aux autres programmes ou aux données de votre ordinateur. Le niveau d&apos;isolation affecte la sécurité mais aussi la compatibilité avec les applications, c&apos;est pourquoi il y a différents niveaux d&apos;isolation en fonction du type de bac choisi. Sandboxie peut aussi empêcher l&apos;accès à vos données personnelles aux processus tournant sous sa supervision.</translation>
+        <translation>Un bac à sable isole le système hôte des processus lancés dans le bac. Cela les empêche de faire des modifications permanentes aux autres programmes ou aux données de votre ordinateur. Le niveau d&apos;isolation affecte la sécurité mais aussi la compatibilité avec les applications, c&apos;est pourquoi il y a différents niveaux d&apos;isolation en fonction du type de bac choisi. Sandboxie peut aussi empêcher l&apos;accès à vos données personnelles aux processus tournant sous sa supervision.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="339"/>
@@ -1217,83 +1217,83 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="717"/>
         <source>Sandbox Isolation options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options d&apos;isolation du bac à sable</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="718"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sur cette page, les options d&apos;isolation de bac à sable peuvent être configurées.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
         <source>Network Access</source>
-        <translation type="unfinished">Accès réseau</translation>
+        <translation>Accès réseau</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="731"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished">Autoriser l&apos;accès au réseau/à Internet</translation>
+        <translation>Autoriser l&apos;accès au réseau/à Internet</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished">Bloquer le réseau/Internet en refusant l&apos;accès aux périphériques réseau</translation>
+        <translation>Bloquer le réseau/Internet en refusant l&apos;accès aux périphériques réseau</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="734"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished">Bloquer le réseau/Internet en utilisant la plateforme de filtrage Windows</translation>
+        <translation>Bloquer le réseau/Internet en utilisant la plateforme de filtrage Windows</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="740"/>
         <source>Allow access to network files and folders</source>
-        <translation type="unfinished">Autoriser l&apos;accès aux fichiers et dossiers réseau</translation>
+        <translation>Autoriser l&apos;accès aux fichiers et dossiers du réseau</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="768"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <translation type="unfinished">Cette option n&apos;est pas recommandée pour les bacs renforcés</translation>
+        <translation>Cette option n&apos;est pas recommandée pour les bacs renforcés</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation>Demande à l&apos;utilisateur s&apos;il faut accorder une exemption au blocage</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
         <source>Admin Options</source>
-        <translation type="unfinished">Options d&apos;admin</translation>
+        <translation>Options d&apos;administrateur</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="756"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">Abandonner les droits des groupes Administrateurs et Utilisateurs Avancés</translation>
+        <translation>Abandonner les droits des groupes Administrateurs et Utilisateurs Avancés</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished">Faire croire aux applications qu&apos;elles ont des privilèges élevés</translation>
+        <translation>Faire croire aux applications qu&apos;elles ont des privilèges élevés</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="767"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished">Autoriser MSIServer à s&apos;exécuter dans le bac à sable avec un jeton système</translation>
+        <translation>Autoriser MSIServer à s&apos;exécuter dans le bac à sable avec un jeton système</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
         <source>Box Options</source>
-        <translation type="unfinished">Options du bac</translation>
+        <translation>Options du bac</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="778"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Utiliser un identifiant de Sandboxie au lieu d&apos;un jeton anonyme</translation>
+        <translation>Utiliser un identifiant de Sandboxie au lieu d&apos;un jeton anonyme</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="779"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;utilisation d&apos;un jeton de Sandboxie personnalisé permet de mieux isoler les bacs à sable individuels entre eux, et d&apos;afficher dans la colonne Utilisateurs des gestionnaires des tâches le nom du bac dans lequel un processus s&apos;exécute. Certaines solutions de sécurité tierces peuvent cependant avoir des problèmes avec les jetons personnalisés.</translation>
     </message>
 </context>
 <context>
@@ -2366,17 +2366,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="832"/>
         <source>Yes</source>
-        <translation type="unfinished">Oui</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="833"/>
         <source>No</source>
-        <translation type="unfinished">Non</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="857"/>
         <source>Please enter IP and Port.</source>
-        <translation>Veuillez saisir une IP et un port</translation>
+        <translation>Veuillez saisir une IP et un port.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1030"/>
@@ -2582,7 +2582,7 @@ Veuillez choisir un dossier contenant ce fichier.</translation>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1075"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation>Certains changements n&apos;ont pas encore été enregistrés, voulez-vous vraiment fermer cette fenêtre d&apos;options ?</translation>
+        <translation>Certaines modifications n&apos;ont pas encore été enregistrées ; voulez-vous vraiment fermer cette fenêtre d&apos;options ?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1124"/>
@@ -3010,7 +3010,7 @@ Erreur : </translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="637"/>
         <source>In the Preview Channel - with newest experimental changes</source>
-        <translation>Dans le canal des Aperçus — avec les derniers changements expérimentaux</translation>
+        <translation>Dans le canal des Aperçus — avec les dernières modifications expérimentales</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="638"/>
@@ -3027,7 +3027,7 @@ Erreur : </translation>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Le canal des Initiés offre un accès anticipé aux nouvelles fonctions et corrections de bogues qui finalement seront fournies au public, de même que toutes les améliorations pertinentes du canal Stable.
-Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non testés, potentiellement dangereux ou expérimentaux qui peuvent ne pas être prêts pour une utilisation à grande échelle.</translation>
+Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications non testées, potentiellement dangereuses ou expérimentales qui peuvent ne pas être prêtes pour une utilisation à grande échelle.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="648"/>
@@ -3071,7 +3071,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="677"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
-        <translation>Sandboxie-Plus applique des restrictions d&apos;applications strictes, ce qui peut entrainer des problèmes de compatibilité. Assurez-vous que Sandboxie-Plus est à jour, ainsi que les modèles de compatibilité et de dépannage, afin d&apos;assurer un fonctionnement fluide malgré les mises à jour Windows et les changements des applications.</translation>
+        <translation>Sandboxie-Plus applique des restrictions d&apos;applications strictes, ce qui peut entrainer des problèmes de compatibilité. Assurez-vous que Sandboxie-Plus est à jour, ainsi que les modèles de compatibilité et de dépannage, afin d&apos;assurer un fonctionnement fluide malgré les mises à jour Windows et les modifications des applications.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="683"/>
@@ -4482,12 +4482,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3772"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation>Les changements seront appliqués automatiquement à chaque fois que le fichier sera enregistré.</translation>
+        <translation>Les modifications seront appliquées automatiquement à chaque fois que le fichier sera enregistré.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3773"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
-        <translation>Les changements seront appliqués automatiquement dès que l&apos;éditeur sera fermé.</translation>
+        <translation>Les modifications seront appliquées automatiquement dès que l&apos;éditeur sera fermé.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3836"/>
@@ -6166,7 +6166,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1443"/>
         <source>Advanced (L)</source>
-        <translation type="unfinished"></translation>
+        <translation>Avancé (G)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1445"/>
@@ -6436,17 +6436,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Only applications with admin rights can change configuration</source>
         <oldsource>Only applications with administrator token can change ini setting.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Seules les applications avec des droits d&apos;administrateur peuvent modifier la configuration</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer cette option empêche les modifications du fichier Sandboxie.ini depuis l&apos;interface sans droits d&apos;administrateur. Faites attention, car utiliser le gestionnaire de Sandboxie avec des droits d&apos;utilisateur normal peut provoquer un blocage. Afin de modifier la configuration, vous devez redémarrer le gestionnaire de Sandboxie en tant qu&apos;administrateur en utilisant « Redémarrer en tant qu&apos;administrateur » dans le menu « Fichier » de la fenêtre principale.</translation>
     </message>
 </context>
 <context>
@@ -7401,7 +7401,7 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     </message>
     <message>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="vanished">Un bac à sable isole le système hôte des processus lancés dans le bac. Cela les empêche de faire des changements permanents aux autres programmes ou aux données de votre ordinateur. Le niveau d&apos;isolation affecte la sécurité mais aussi la compatibilité avec les applications, c&apos;est pourquoi il y a différents niveaux d&apos;isolation en fonction du type de bac choisi. Sandboxie peut aussi empêcher l&apos;accès à vos données personnelles aux processus tournant sous sa supervision.</translation>
+        <translation type="vanished">Un bac à sable isole le système hôte des processus lancés dans le bac. Cela les empêche de faire des modifications permanentes aux autres programmes ou aux données de votre ordinateur. Le niveau d&apos;isolation affecte la sécurité mais aussi la compatibilité avec les applications, c&apos;est pourquoi il y a différents niveaux d&apos;isolation en fonction du type de bac choisi. Sandboxie peut aussi empêcher l&apos;accès à vos données personnelles aux processus tournant sous sa supervision.</translation>
     </message>
     <message>
         <source>Box info</source>
@@ -7642,7 +7642,7 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     <message>
         <location filename="Forms/OptionsWindow.ui" line="740"/>
         <source>Open System Protected Storage</source>
-        <translation>Autoriser le stockage protégé du système</translation>
+        <translation>Ouvrir l&apos;accès au stockage protégé du système</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="696"/>
@@ -7876,12 +7876,12 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     <message>
         <location filename="Forms/OptionsWindow.ui" line="766"/>
         <source>Open Windows Credentials Store (user mode)</source>
-        <translation>Ouvrir le magasin d&apos;identifiants Windows (mode utilisateur)</translation>
+        <translation>Ouvrir l&apos;accès au magasin d&apos;identifiants Windows (mode utilisateur)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3838"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
-        <translation>Empêcher les changements aux paramètres réseaux et règles du pare-feu (mode utilisateur)</translation>
+        <translation>Empêcher les modifications des paramètres réseaux et règles du pare-feu (mode utilisateur)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="780"/>
@@ -8243,13 +8243,13 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
         <location filename="Forms/OptionsWindow.ui" line="2574"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ce paramètre peut être utilisé pour empêcher les programmes de s&apos;exécuter dans le bac à sable sans la connaissance ou le consentement de l&apos;utilisateur.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2577"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Afficher une fenêtre surgissante d&apos;avertissement avant de démarrer un processus dans le bac à sable depuis une source externe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2596"/>
@@ -8905,7 +8905,7 @@ au lieu de « * ».</translation>
         <location filename="Forms/OptionsWindow.ui" line="801"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation>Empêcher les mouvements à la souris, la mise au premier plan, et les opérations similaires (activer ceci est susceptible de causer des problèmes avec les jeux).</translation>
+        <translation>Empêche les mouvements à la souris, la mise au premier plan, et les opérations similaires (activer ceci est susceptible de causer des problèmes avec les jeux).</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="804"/>
@@ -8914,9 +8914,8 @@ au lieu de « * ».</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="811"/>
-        <source>Allow sandboxed windows to cover the taskbar</source>
-        <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
-        <translation type="unfinished"></translation>
+        <source>Allow sandboxed windows to cover taskbar</source>
+        <translation>Autoriser les fenêtres dans un bac à sable à couvrir la barre des tâches</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="818"/>
@@ -8932,7 +8931,7 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1577"/>
         <source>Job Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Objet de travail</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3369"/>
@@ -8943,7 +8942,7 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3523"/>
         <source>DNS Filter</source>
-        <translation>Filtre DNS</translation>
+        <translation>Filtres DNS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3540"/>
@@ -8953,7 +8952,7 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3560"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
-        <translation>Avec le filtre DNS, des domaines individuels peuvent être bloqués, processus par processus. Laissez la colonne IP vide pour bloquer, ou saisissez une IP pour rediriger.</translation>
+        <translation>Avec les filtres DNS, des domaines individuels peuvent être bloqués, processus par processus. Laissez la colonne IP vide pour bloquer, ou saisissez une IP pour rediriger.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3586"/>
@@ -9003,33 +9002,33 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1711"/>
         <source>Limit restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Limites des restrictions</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1629"/>
         <location filename="Forms/OptionsWindow.ui" line="1636"/>
         <source>Leave it blank to disable the setting(Unit:KB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Laisser vide pour désactiver le paramètre (Unité : Ko)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1643"/>
         <source>Leave it blank to disable the setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Laisser vide pour désactiver le paramètre</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1585"/>
         <source>Total Processes Number Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite du nombre de processus au total :</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1615"/>
         <source>Total Processes Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite de mémoire de tous les processus :</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1622"/>
         <source>Single Process Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite de mémoire d&apos;un processus unique :</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4519"/>
@@ -9039,19 +9038,17 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4711"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas autoriser les processus dans un bac à sable à voir les processus qui s&apos;exécutent en dehors de tout bac</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4718"/>
-        <source>Prevent sandboxed processes from accessing system details through WMI</source>
-        <oldsource>Prevent sandboxed processes from accessing system deatils through WMI</oldsource>
-        <translation type="unfinished"></translation>
+        <source>Prevent sandboxed processes from accessing system deatils through WMI</source>
+        <translation>Empêcher les processus dans un bac à sable d&apos;accéder aux détails du système en se servant de WMI</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4759"/>
-        <source>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, &apos;tasklist.exe&apos; can access a complete list of processes even if &apos;HideOtherBoxes&apos; is enabled. Enable this option to prevent such behavior.</source>
-        <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
-        <translation type="unfinished"></translation>
+        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
+        <translation>Certains programmes lisent les détails du système en se servant de WMI (une base de données incluse avec Windows) au lieu d&apos;utiliser des méthodes normales. Par exemple, en accédant à WMI, « tasklist.exe » pourrait obtenir la liste complète des processus même si « Masquer les propres processus de Sandboxie de la liste des tâches » est activé. Activez cette option pour empêcher ce comportement.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4860"/>
@@ -9305,12 +9302,12 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1569"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Seuls les comptes d&apos;utilisateur administrateur peuvent apporter des modifications à ce bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2165"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;AVERTISSEMENT DE SÉCURITÉ&lt;/font&gt;:&lt;/b&gt; L&apos;utilisation de  &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; et/ou &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; en combinaison avec des directives Open[File/Pipe]Path peut compromettre la sécurité. Veuillez consulter la section de sécurité de chaque option dans la documentation avant utilisation.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3774"/>
@@ -9588,7 +9585,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Force les processus enfants directs dans les bacs à sable, mais n&apos;inclut pas les processus enfants indirects qui sont ouverts à travers l&apos;interface DCOM et IPC.</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
@@ -9603,7 +9600,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer les processus enfants</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="56"/>
@@ -9945,12 +9942,12 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">Raccourci pour suspendre tous les processus :</translation>
+        <translation>Raccourci pour suspendre tous les processus :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="514"/>
         <source>Integrate with Host Desktop</source>
-        <translation>Intégrer avec le bureau Hôte</translation>
+        <translation>Intégration avec le bureau de l&apos;hôte :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="648"/>
@@ -10025,7 +10022,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1394"/>
         <source>Install</source>
-        <translation>Installation</translation>
+        <translation>Installer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1404"/>
@@ -10157,7 +10154,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Le canal des Initiés offre un accès anticipé aux nouvelles fonctions et corrections de bogues qui finalement seront fournies au public, de même que toutes les améliorations pertinentes du canal Stable.
-Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non testés, potentiellement dangereux ou expérimentaux qui peuvent ne pas être prêts pour une utilisation à grande échelle.</translation>
+Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications non testées, potentiellement dangereuses ou expérimentales qui peuvent ne pas être prêtes pour une utilisation à grande échelle.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1811"/>
@@ -10172,7 +10169,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1844"/>
         <source>Full Upgrades</source>
-        <translation>Mises à jour complètes</translation>
+        <translation>Mises à jour complètes :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1851"/>
@@ -10192,7 +10189,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1917"/>
         <source>Update Check Interval</source>
-        <translation>Intervalle de vérification de mise à jour</translation>
+        <translation>Intervalle de vérification de mise à jour :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2099"/>
@@ -10202,7 +10199,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2165"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter le groupe « Sandboxie\Tous les bacs à sable » au jeton dans un bac à sable (expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2175"/>
@@ -10305,7 +10302,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2208"/>
         <source>Watch Sandboxie.ini for changes</source>
-        <translation>Surveiller les changements dans Sandboxie.ini</translation>
+        <translation>Surveiller les modifications apportées à Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2201"/>
@@ -10599,7 +10596,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
         <location filename="Forms/SettingsWindow.ui" line="1790"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
-        <translation>Mises à jour incrémentielles</translation>
+        <translation>Mises à jour incrémentielles :</translation>
     </message>
     <message>
         <source>New full versions from the selected release channel.</source>

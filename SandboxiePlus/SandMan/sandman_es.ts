@@ -8449,8 +8449,9 @@ Esto se hace para evitar que procesos maliciosos dentro de la sandbox creen una 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="811"/>
-        <source>Allow sandboxed windows to cover taskbar</source>
-        <translation>Permitir que las ventanas aisladas cubran la barra de tareas</translation>
+        <source>Allow sandboxed windows to cover the taskbar</source>
+        <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
+        <translation type="unfinished">Permitir que las ventanas aisladas cubran la barra de tareas</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1569"/>
@@ -9254,13 +9255,15 @@ Por favor note que estos valores son especificos para usuario y guardados global
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4718"/>
-        <source>Prevent sandboxed processes from accessing system deatils through WMI</source>
-        <translation>Evitar que los procesos aislados accedan a los detalles del sistema mediante WMI</translation>
+        <source>Prevent sandboxed processes from accessing system details through WMI</source>
+        <oldsource>Prevent sandboxed processes from accessing system deatils through WMI</oldsource>
+        <translation type="unfinished">Evitar que los procesos aislados accedan a los detalles del sistema mediante WMI</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4759"/>
-        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
-        <translation>Algunos programas leen detalles del sistema mediante WMI (una base de datos integrada de Windows) en vez de métodos normales. Por ejemplo, &quot;tasklist.exe&quot; podría obtener la lista completa de procesos incluso si &quot;HideOtherBoxes&quot; está abierto accediento por WMI. Habilita esta opción para detener estos comportamientos.</translation>
+        <source>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, &apos;tasklist.exe&apos; can access a complete list of processes even if &apos;HideOtherBoxes&apos; is enabled. Enable this option to prevent such behavior.</source>
+        <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
+        <translation type="unfinished">Algunos programas leen detalles del sistema mediante WMI (una base de datos integrada de Windows) en vez de métodos normales. Por ejemplo, &quot;tasklist.exe&quot; podría obtener la lista completa de procesos incluso si &quot;HideOtherBoxes&quot; está abierto accediento por WMI. Habilita esta opción para detener estos comportamientos.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4962"/>

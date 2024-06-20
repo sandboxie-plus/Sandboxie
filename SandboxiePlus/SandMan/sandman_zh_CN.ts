@@ -7731,8 +7731,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="811"/>
-        <source>Allow sandboxed windows to cover taskbar</source>
-        <translation>允许沙盒内窗口遮盖任务栏</translation>
+        <source>Allow sandboxed windows to cover the taskbar</source>
+        <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
+        <translation type="unfinished">允许沙盒内窗口遮盖任务栏</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="855"/>
@@ -7804,13 +7805,15 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4718"/>
-        <source>Prevent sandboxed processes from accessing system deatils through WMI</source>
-        <translation>防止沙盒内的进程通过 WMI 访问系统信息</translation>
+        <source>Prevent sandboxed processes from accessing system details through WMI</source>
+        <oldsource>Prevent sandboxed processes from accessing system deatils through WMI</oldsource>
+        <translation type="unfinished">防止沙盒内的进程通过 WMI 访问系统信息</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4759"/>
-        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
-        <translation>一些程序通过 WMI(一个Windows内置数据库) 读取系统信息，而不是通过正常方式。例如，尽管已经打开 &quot;隐藏其它沙盒&quot; ，&quot;tasklist.exe&quot; 仍然可以通过访问 WMI 获取全部进程列表。开启此选项来阻止这些行为。</translation>
+        <source>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, &apos;tasklist.exe&apos; can access a complete list of processes even if &apos;HideOtherBoxes&apos; is enabled. Enable this option to prevent such behavior.</source>
+        <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
+        <translation type="unfinished">一些程序通过 WMI(一个Windows内置数据库) 读取系统信息，而不是通过正常方式。例如，尽管已经打开 &quot;隐藏其它沙盒&quot; ，&quot;tasklist.exe&quot; 仍然可以通过访问 WMI 获取全部进程列表。开启此选项来阻止这些行为。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4777"/>

@@ -70,14 +70,14 @@ env:
   qt_version: 5.15.14
   qt6_version: 6.3.1
   openssl_version: 3.3.1
-  ghSsl_user: offhub # DavidXanatos
-  ghSsl_repo: openssl
-  ghQt6Win7_user: DavidXanatos
-  ghQt6Win7_repo: qtbase
-  ghQtBuilds_user: offhub # xanasoft
-  ghQtBuilds_repo: qt-sbie-builds # qt-builds
-  ghQtBuilds_hash_x86: 1E22E6D81AF478FD52AE5F0F465523CE042325127556B57E6731802D03C04622 # 79755f2bf95d0ca305096fc33582cd557345a79aa63f9821002fdddefdc0fd94
-  ghQtBuilds_hash_x64: 5764FE462D99ADA5871E9D87DCBEA36D40733978C9F9E91E2F9F4D921412DC3B # f9029e02badd6a79d9bb092f9fb0772214dbcf8cd0122422514291d755860c37
+  ghSsl_user: xanasoft
+  ghSsl_repo: openssl-builds
+  #ghQt6Win7_user: DavidXanatos
+  #ghQt6Win7_repo: qtbase
+  ghQtBuilds_user: xanasoft
+  ghQtBuilds_repo: qt-builds
+  ghQtBuilds_hash_x86: bf4124046cc50ccbbeb3f786c041e884fd4205cd6e616070a75c850105cbf1db
+  ghQtBuilds_hash_x64: 30290d82a02bfaa24c1bf37bcb9c074aba18a673a7176628fccdf71197cee898
 
 jobs:
   Build_x64:

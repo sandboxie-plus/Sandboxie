@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.14.x / 5.69.x] - 2024-xx-xx
+
+### Changed
+- changed Qt 5 version to Qt 5.15.14 with OpenSSL 3.3.1 [#3994](https://github.com/sandboxie-plus/Sandboxie/pull/3994) (thanks offhub)
+
+
 
 ## [1.14.2 / 5.69.2] - 2024-06-19
 
@@ -40,7 +46,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.14.1 / 5.69.1] - 2024-06-06
 
 ### Added
@@ -65,7 +70,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed resource leak in buffer hashing function
 - fixed DLL name corruption when BlockInterferenceControl is enabled [#3945](https://github.com/sandboxie-plus/Sandboxie/issues/3945)
 - fixed issue with driver verifier
-
 
 
 
@@ -152,7 +156,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - on systems in test signing mode, Sandboxie will try outdated offsets by default
-- changed Qt5 version to Qt5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)
+- changed Qt 5 version to Qt 5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)
 - moved network restrictions from general restrictions tab to an own tab on the network page
 - improved certificate retrieval UI messages
 - improved MPC-BE template [#3798](https://github.com/sandboxie-plus/Sandboxie/pull/3798)

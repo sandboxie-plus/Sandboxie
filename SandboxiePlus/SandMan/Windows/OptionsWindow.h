@@ -159,24 +159,24 @@ private slots:
 	void OnAccessSelectionChanged() { CloseAccessEdit(); OnOptChanged();}
 	void OnAccessChanged(QTreeWidgetItem* pItem, int Column);
 
-	void OnAddFile()				{ AddAccessEntry(eFile, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
+	void OnAddFile()				{ AddAccessEntry(eFile, eOpen, "", ""); OnAccessChanged(); }
 	void OnBrowseFile();
 	void OnBrowseFolder();
-	void OnDelFile()				{ DeleteAccessEntry(ui.treeFiles->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnDelFile()				{ DeleteAccessEntry(ui.treeFiles->currentItem()); OnAccessChanged(); }
 	void OnShowFilesTmpl()			{ LoadAccessListTmpl(eFile, ui.chkShowFilesTmpl->isChecked(), true); }
-	void OnAddKey()					{ AddAccessEntry(eKey, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
-	void OnDelKey()					{ DeleteAccessEntry(ui.treeKeys->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnAddKey()					{ AddAccessEntry(eKey, eOpen, "", ""); OnAccessChanged(); }
+	void OnDelKey()					{ DeleteAccessEntry(ui.treeKeys->currentItem()); OnAccessChanged(); }
 	void OnShowKeysTmpl()			{ LoadAccessListTmpl(eKey, ui.chkShowKeysTmpl->isChecked(), true); }
-	void OnAddIPC()					{ AddAccessEntry(eIPC, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
-	void OnDelIPC()					{ DeleteAccessEntry(ui.treeIPC->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnAddIPC()					{ AddAccessEntry(eIPC, eOpen, "", ""); OnAccessChanged(); }
+	void OnDelIPC()					{ DeleteAccessEntry(ui.treeIPC->currentItem()); OnAccessChanged(); }
 	void OnShowIPCTmpl()			{ LoadAccessListTmpl(eIPC, ui.chkShowIPCTmpl->isChecked(), true); }
-	void OnAddWnd()					{ AddAccessEntry(eWnd, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
-	void OnDelWnd()					{ DeleteAccessEntry(ui.treeWnd->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnAddWnd()					{ AddAccessEntry(eWnd, eOpen, "", ""); OnAccessChanged(); }
+	void OnDelWnd()					{ DeleteAccessEntry(ui.treeWnd->currentItem()); OnAccessChanged(); }
 	void OnShowWndTmpl()			{ LoadAccessListTmpl(eWnd, ui.chkShowWndTmpl->isChecked(), true); }
-	void OnAddCOM()					{ AddAccessEntry(eCOM, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
-	void OnDelCOM()					{ DeleteAccessEntry(ui.treeCOM->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnAddCOM()					{ AddAccessEntry(eCOM, eOpen, "", ""); OnAccessChanged(); }
+	void OnDelCOM()					{ DeleteAccessEntry(ui.treeCOM->currentItem()); OnAccessChanged(); }
 	void OnShowCOMTmpl()			{ LoadAccessListTmpl(eCOM, ui.chkShowCOMTmpl->isChecked(), true); }
-	//void OnDelAccess()			{ DeleteAccessEntry(ui.treeAccess->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	//void OnDelAccess()			{ DeleteAccessEntry(ui.treeAccess->currentItem()); OnAccessChanged(); }
 	//void OnShowAccessTmpl()			{ LoadAccessListTmpl(true); }
 	//
 
@@ -249,6 +249,7 @@ private slots:
 	void OnINetBlockChanged()		{ m_INetBlockChanged = true; OnOptChanged(); }
 	void OnRecoveryChanged()		{ m_RecoveryChanged = true; OnOptChanged(); }
 	void OnAccessChanged();
+	void OnAccessChangedEx();
 	void OnSysSvcChanged();
 	void OnAdvancedChanged();
 	void OnOpenCOM();
@@ -493,6 +494,8 @@ protected:
 
 	void UpdateAccessPolicy();
 
+	void UpdateJobOptions();
+
 	QTreeWidget* GetAccessTree(EAccessType Type);
 	//
 
@@ -590,6 +593,7 @@ protected:
 		eNoSpec,
 		eSpec,
 		eOnlySpec,
+		eList
 	};
 
 	struct SAdvOption

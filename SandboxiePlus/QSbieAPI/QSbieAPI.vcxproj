@@ -84,7 +84,7 @@
     <QtModules>concurrent;core</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <QtInstall>Qt5.15.13_msvc2019_64</QtInstall>
+    <QtInstall>Qt5.15.14_msvc2019_64</QtInstall>
     <QtModules>concurrent;core</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="QtSettings">

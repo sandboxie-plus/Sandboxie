@@ -207,14 +207,15 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Folder"));
 	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Move"));
 	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
-	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Fence"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("EFence"));
 	ui.tabsGeneral->setTabIcon(5, CSandMan::GetIcon("Run"));
 
 	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
 	ui.tabsSecurity->setTabIcon(1, CSandMan::GetIcon("Fence"));
 	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Shield15"));
-	ui.tabsSecurity->setTabIcon(3, CSandMan::GetIcon("Shield12"));
+	ui.tabsSecurity->setTabIcon(3, CSandMan::GetIcon("Job"));
+	ui.tabsSecurity->setTabIcon(4, CSandMan::GetIcon("Shield12"));
 
 	ui.tabsForce->setCurrentIndex(0);
 	ui.tabsForce->setTabIcon(0, CSandMan::GetIcon("Force"));
@@ -369,6 +370,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblMigration, CSandMan::GetIcon("Move").pixmap(size,size));
 	AddIconToLabel(ui.lblDelete, CSandMan::GetIcon("Erase").pixmap(size,size));
 	AddIconToLabel(ui.lblRawDisk, CSandMan::GetIcon("Disk").pixmap(size,size));
+	AddIconToLabel(ui.lblJob, CSandMan::GetIcon("Job3").pixmap(size,size));
+	AddIconToLabel(ui.lblLimit, CSandMan::GetIcon("Job2").pixmap(size,size));
 	AddIconToLabel(ui.lblSecurity, CSandMan::GetIcon("Shield5").pixmap(size,size));
 	AddIconToLabel(ui.lblElevation, CSandMan::GetIcon("Shield9").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxProtection, CSandMan::GetIcon("BoxConfig").pixmap(size,size));
@@ -387,7 +390,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	//AddIconToLabel(ui.lblComRpc, CSandMan::GetIcon("Objects").pixmap(size,size));
 
 	AddIconToLabel(ui.lblPrivilege, CSandMan::GetIcon("Token").pixmap(size,size));
-	AddIconToLabel(ui.lblFence, CSandMan::GetIcon("BFance").pixmap(size,size));
 	AddIconToLabel(ui.lblToken, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblIsolation, CSandMan::GetIcon("Fence").pixmap(size,size));
 	AddIconToLabel(ui.lblAccess, CSandMan::GetIcon("NoAccess").pixmap(size,size));
@@ -1170,25 +1172,6 @@ void COptionsWindow::UpdateCurrentTab()
 	if (m_pCurrentTab == ui.tabRestrictions || m_pCurrentTab == ui.tabOptions || m_pCurrentTab == ui.tabGeneral) 
 	{
 		ui.chkVmRead->setChecked(IsAccessEntrySet(eIPC, "", eReadOnly, "$:*"));
-	}
-	else if (m_pCurrentTab == ui.tabPrivileges || m_pCurrentTab == ui.tabSecurity)
-	{
-		if (IsAccessEntrySet(eWnd, "", eOpen, "*"))
-		{
-			if (!ui.chkNoSecurityIsolation->isChecked())
-			{
-				ui.chkAddToJob->setEnabled(false);
-				ui.chkAddToJob->setChecked(false);
-			}
-		}
-		else
-		{
-			if (!ui.chkNoSecurityIsolation->isChecked())
-			{
-				ui.chkAddToJob->setEnabled(true);
-				ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
-			}
-		}
 	}
 	else if (m_pCurrentTab == ui.tabStart || m_pCurrentTab == ui.tabForce)
 	{

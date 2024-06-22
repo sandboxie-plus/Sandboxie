@@ -27,6 +27,8 @@
 #include "core/dll/sbiedll.h"
 #include "common/defines.h"
 #include "core/drv/api_defs.h"
+#include <vector>
+#include "common/str_util.h"
 
 //---------------------------------------------------------------------------
 // Constructor
@@ -84,6 +86,8 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
     WCHAR pwszServiceName [81];
     *pwszServiceName = 0;
 
+    WCHAR buf[MAX_PATH];
+
     if (_wcsicmp(req->wszPortId, SPOOLER_PORT_ID) == 0) {
         if (SbieApi_QueryConfBool(boxname, L"ClosePrintSpooler", FALSE)) 
             return SHORT_REPLY(E_ACCESSDENIED);
@@ -116,7 +120,6 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
         return SHORT_REPLY(E_INVALIDARG);*/
     else
     {
-        WCHAR buf[MAX_PATH];
         if (SbieDll_GetStringForStringList(req->wszPortId, boxname, L"RpcPortBindingIfId", buf, sizeof(buf)))
         {
             unsigned short uuid[37];
@@ -223,14 +226,33 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
         // So, since here we only open non critical ports, we will use PID 0 to open them globally
         // instead of only for the one process. Todo: make it per sandbox instead
         //
+        // Note: Filter is only support for globally open ports, i.e. when process_id == 0
+        // Todo: Add per process ALPC message filter
+        //
+
+        std::vector<UCHAR> FilterIDs;
+
+        for (int i = 0; SbieDll_GetStringsForStringList(req->wszPortId, boxname, L"RpcPortFilter", i, buf, sizeof(buf)); i++)
+        {
+            WCHAR* test_value = NULL;
+            ULONG test_len = 0;
+            if (SbieDll_GetTagValue(buf, NULL, (const WCHAR**)&test_value, &test_len, L',')) {
+                test_value[test_len] = L'\0';
+                FilterIDs.push_back((UCHAR)_wtoi(test_value));
+            }
+        }
 
         // Param 1 is dynamic port name (e.g. "LRPC-f760d5b40689a98168"), WCHAR[DYNAMIC_PORT_NAME_CHARS]
         // Param 2 is the process PID for which to open the port, can be 0 when port is special
         // Param 3 is the port type/identifier
-        rpl->h.status = SbieApi_Call(API_OPEN_DYNAMIC_PORT, 3,
+        // Param 4 Filter ID count, array count
+        // Param 5 Filter ID buffer, UCHAR Array
+        rpl->h.status = SbieApi_Call(API_OPEN_DYNAMIC_PORT, 5,
             (ULONG_PTR)rpl->wszPortName,
             (ULONG_PTR)0, 
-            (ULONG_PTR)req->wszPortId);
+            (ULONG_PTR)req->wszPortId,
+            (ULONG_PTR)FilterIDs.size(), // count
+            (ULONG_PTR)FilterIDs.data());
     }
 
     return (MSG_HEADER *)rpl;

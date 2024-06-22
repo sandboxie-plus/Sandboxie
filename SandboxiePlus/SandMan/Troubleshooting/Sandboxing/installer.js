@@ -2,7 +2,7 @@
 *	group: sandboxing
 *	class: sandboxing
 * name: Failed to install application into a sandbox
-* description: Description Text...
+* description: It helps troubleshoot issues related to installing applications in the sandbox
 *
 */
 
@@ -52,4 +52,4 @@ let ret3 = wizard.showForm(form3, tr('Was the issue resolved?'));
 if (ret3['yes'] == true)
     wizard.setResult(true);
 else
-    wizard.setResult(false, 'no mitigation worked');
+    wizard.setResult(false, tr('no mitigation worked'));

@@ -195,6 +195,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	CArchive Archive(ExportPath);
 
 	QMap<int, QIODevice*> Files;
+	QMap<int, quint32> Attributes;
 
 	//QTemporaryFile* pConfigFile = new QTemporaryFile;
 	//pConfigFile->open();
@@ -224,6 +225,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 		{
 			QString FileName = (RootName.first.isEmpty() ?  RootPath + "\\" : RootName.first) + RootName.second;
 			Files.insert(ArcIndex, new QFileX(FileName, pProgress, &Archive));
+			Attributes.insert(ArcIndex, GetFileAttributes(QString(FileName).replace("/", "\\").toStdWString().c_str()));
 		}
 		//else
 			// this file is already present in the archive, this should not happen !!!
@@ -237,7 +239,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	Params.bSolid = vParams["solid"].toBool();
 
 	SB_STATUS Status = SB_OK;
-	if (!Archive.Update(&Files, true, &Params))
+	if (!Archive.Update(&Files, true, &Params, &Attributes))
 		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	
 	//if(!Status.IsError() && !pProgress->IsCanceled())

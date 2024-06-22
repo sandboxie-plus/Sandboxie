@@ -87,6 +87,9 @@
     <ClCompile Include="..\..\common\rc4.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\str_util.c">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="misc.h" />

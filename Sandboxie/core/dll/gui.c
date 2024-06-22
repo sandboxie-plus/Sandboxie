@@ -1356,6 +1356,35 @@ _FX HWND Gui_CreateWindowExW(
     // replace parent
     //
 
+	if (Gui_DontAllowCoverTaskbar) {
+
+		typedef BOOL(*P_SystemParametersInfoA)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni);
+		static P_SystemParametersInfoA SystemParametersInfoA = NULL;
+		if (!SystemParametersInfoA) SystemParametersInfoA = Ldr_GetProcAddrNew(L"user32.dll", L"SystemParametersInfoA", "SystemParametersInfoA");
+
+		typedef int (*P_GetSystemMetrics)(int nIndex);
+		static P_GetSystemMetrics GetSystemMetrics = NULL;
+		if (!GetSystemMetrics) GetSystemMetrics = Ldr_GetProcAddrNew(L"user32.dll", L"GetSystemMetrics", "GetSystemMetrics");
+
+		if (SystemParametersInfoA && GetSystemMetrics) {
+
+			RECT rt;
+			SystemParametersInfoA(SPI_GETWORKAREA, 0, &rt, 0);
+			int y1 = GetSystemMetrics(SM_CYSCREEN) - rt.bottom;
+			int x1 = GetSystemMetrics(SM_CXSCREEN) - rt.right;
+			int y2 = GetSystemMetrics(SM_CYSCREEN) - rt.top;
+			int x2 = GetSystemMetrics(SM_CXSCREEN) - rt.left;
+			if (y + nHeight > y1)
+				nHeight = y1 - y - 2;
+			if (y < y2)
+				y = y2 + 2;
+			if (x + nWidth > x1)
+				nWidth = x1 - x;
+			if (x < x2)
+				x = x2 + 2;
+		}
+	}
+
     if ((! Gui_DisableTitle) &&
             lpWindowName && (dwStyle & WS_CAPTION) == WS_CAPTION &&
             ((! hWndParent) || (dwStyle & WS_CHILD) == 0))
@@ -1946,7 +1975,7 @@ _FX BOOL Gui_MoveWindow(
         return FALSE;
     }
 	
-    if (Gui_BlockInterferenceControl) {
+    if (Gui_DontAllowCoverTaskbar) {
 
         typedef BOOL (*P_SystemParametersInfoA)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni);
         static P_SystemParametersInfoA SystemParametersInfoA = NULL;
@@ -1998,7 +2027,7 @@ _FX BOOL Gui_SetWindowPos(
     // use SbieSvc GUI Proxy if hWnd is accessible but outside the sandbox
     //
 	
-    if (Gui_BlockInterferenceControl) {
+    if (Gui_DontAllowCoverTaskbar) {
 
         if (hWndInsertAfter == HWND_TOPMOST || hWndInsertAfter == HWND_TOP)
             hWndInsertAfter = HWND_DESKTOP;

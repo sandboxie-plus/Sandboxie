@@ -24,11 +24,15 @@
 //#include "common/win32_ntddk.h"
 #include "dll.h"
 
+#define CONF_LINE_LEN               2000    // keep in sync with drv/conf.c
 
 //---------------------------------------------------------------------------
 // Functions Prototypes
 //---------------------------------------------------------------------------
 
+typedef LPWSTR (*P_GetCommandLineW)(VOID);
+
+typedef LPSTR (*P_GetCommandLineA)(VOID);
 
 typedef EXECUTION_STATE (*P_SetThreadExecutionState)(EXECUTION_STATE esFlags);
 
@@ -50,6 +54,12 @@ typedef BOOL (*P_QueryPerformanceCounter)(LARGE_INTEGER* lpPerformanceCount);
 //---------------------------------------------------------------------------
 
 
+P_GetCommandLineW				__sys_GetCommandLineW				= NULL;
+P_GetCommandLineA				__sys_GetCommandLineA				= NULL;
+
+UNICODE_STRING	Kernel_CommandLineW = { 0 };
+ANSI_STRING		Kernel_CommandLineA = { 0 };
+
 P_SetThreadExecutionState		__sys_SetThreadExecutionState		= NULL;
 //P_Sleep						__sys_Sleep							= NULL;
 P_SleepEx						__sys_SleepEx						= NULL;
@@ -63,6 +73,9 @@ P_QueryPerformanceCounter		__sys_QueryPerformanceCounter		= NULL;
 // Functions
 //---------------------------------------------------------------------------
 
+static LPWSTR Kernel_GetCommandLineW(VOID);
+
+static LPSTR Kernel_GetCommandLineA(VOID);
 
 static EXECUTION_STATE Kernel_SetThreadExecutionState(EXECUTION_STATE esFlags);
 
@@ -88,6 +101,36 @@ _FX BOOLEAN Kernel_Init()
 {
 	HMODULE module = Dll_Kernel32;
 
+	if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) {
+
+		RTL_USER_PROCESS_PARAMETERS* ProcessParms = Proc_GetRtlUserProcessParameters();
+
+		if (!wcsstr(ProcessParms->CommandLine.Buffer, L" --type=")) { // don't add flags to child processes
+
+			NTSTATUS status;
+			WCHAR CustomChromiumFlags[CONF_LINE_LEN];
+			status = SbieApi_QueryConfAsIs(NULL, L"CustomChromiumFlags", 0, CustomChromiumFlags, ARRAYSIZE(CustomChromiumFlags));
+			if (NT_SUCCESS(status)) {
+
+				Kernel_CommandLineW.MaximumLength = ProcessParms->CommandLine.MaximumLength + (CONF_LINE_LEN + 8) * sizeof(WCHAR);
+				Kernel_CommandLineW.Buffer = LocalAlloc(LMEM_FIXED,Kernel_CommandLineW.MaximumLength);
+				wcscpy(Kernel_CommandLineW.Buffer, ProcessParms->CommandLine.Buffer);
+				if(Kernel_CommandLineW.Buffer[ProcessParms->CommandLine.Length/sizeof(WCHAR) - 1] != L' ')
+					wcscat(Kernel_CommandLineW.Buffer, L" ");
+				wcscat(Kernel_CommandLineW.Buffer, CustomChromiumFlags);
+				Kernel_CommandLineW.Length = wcslen(Kernel_CommandLineW.Buffer) * sizeof(WCHAR);
+
+				RtlUnicodeStringToAnsiString(&Kernel_CommandLineA, &Kernel_CommandLineW, TRUE);
+
+				void* GetCommandLineW = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetCommandLineW");
+				SBIEDLL_HOOK(Kernel_, GetCommandLineW);
+
+				void* GetCommandLineA = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetCommandLineA");
+				SBIEDLL_HOOK(Kernel_, GetCommandLineA);
+			}
+		}
+	}
+
 	if (SbieApi_QueryConfBool(NULL, L"BlockInterferePower", FALSE)) {
 
         SBIEDLL_HOOK(Kernel_, SetThreadExecutionState);
@@ -111,6 +154,30 @@ _FX BOOLEAN Kernel_Init()
 	
 
 	return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Kernel_GetCommandLineW
+//---------------------------------------------------------------------------
+
+
+_FX LPWSTR Kernel_GetCommandLineW(VOID)
+{
+	return Kernel_CommandLineW.Buffer;
+	//return __sys_GetCommandLineW();
+}
+
+
+//---------------------------------------------------------------------------
+// Kernel_GetCommandLineA
+//---------------------------------------------------------------------------
+
+
+_FX LPSTR Kernel_GetCommandLineA(VOID)
+{
+	return Kernel_CommandLineA.Buffer;
+	//return __sys_GetCommandLineA();
 }
 
 

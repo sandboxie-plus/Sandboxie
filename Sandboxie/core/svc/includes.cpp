@@ -46,6 +46,8 @@ extern "C" {
 
 #include "common/stream.c"
 
+#include "common/str_util.c"
+
 #include "common/verify.c"
 
 #ifdef __cplusplus

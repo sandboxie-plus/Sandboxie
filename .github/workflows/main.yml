@@ -66,6 +66,19 @@ on:
       - '**/AUTHORS'
       - '**/COPYING'
 
+env:
+  qt_version: 5.15.14
+  qt6_version: 6.3.1
+  openssl_version: 3.3.1
+  ghSsl_user: xanasoft
+  ghSsl_repo: openssl-builds
+  #ghQt6Win7_user: DavidXanatos
+  #ghQt6Win7_repo: qtbase
+  ghQtBuilds_user: xanasoft
+  ghQtBuilds_repo: qt-builds
+  ghQtBuilds_hash_x86: bf4124046cc50ccbbeb3f786c041e884fd4205cd6e616070a75c850105cbf1db
+  ghQtBuilds_hash_x64: 30290d82a02bfaa24c1bf37bcb9c074aba18a673a7176628fccdf71197cee898
+
 jobs:
   Build_x64:
     runs-on: windows-2019
@@ -73,7 +86,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.5
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -93,7 +106,7 @@ jobs:
     #
 
 #      - name: Install Qt6 x64
-#        uses: jurplel/install-qt-action@v3
+#        uses: jurplel/install-qt-action@v4.0.0
 #        with:
 #      #    version: '6.2.4'
 #          version: '6.3.1'
@@ -104,7 +117,7 @@ jobs:
 #          cache: true
 
       - name: Install Qt5 x64
-        run: SandboxiePlus\install_qt.cmd x64
+        run: SandboxiePlus\install_qt.cmd x64 ${{ env.qt_version }} ${{ env.qt6_version }} ${{ env.ghQtBuilds_user }} ${{ env.ghQtBuilds_repo }} ${{ env.ghQtBuilds_hash_x86 }} ${{ env.ghQtBuilds_hash_x64 }}
 
       - name: Installing Jom
       #  if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -115,7 +128,7 @@ jobs:
     #
 
       - name: Build Sandboxie-Plus x64
-        run: SandboxiePlus\qmake_plus.cmd x64
+        run: SandboxiePlus\qmake_plus.cmd x64 ${{ env.qt_version }} ${{ env.qt6_version }}
 
       - name: Build SbieShell x64
         run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
@@ -132,26 +145,26 @@ jobs:
     #
 
 #      - name: Add Windows 7 compatible Qt6 DLLs
-#        run: Installer\fix_qt6_win7.cmd
+#        run: Installer\fix_qt6_win7.cmd ${{ env.qt6_version }} ${{ env.ghQt6Win7_user }} ${{ env.ghQt6Win7_repo }}
 
       - name: Add missing languages for Qt5 (issue 1528)
-        run: Installer\fix_qt5_languages.cmd x64
+        run: Installer\fix_qt5_languages.cmd x64 ${{ env.qt_version }} ${{ env.qt6_version }}
 
       - name: Get openssl binaries
-        run: Installer\get_openssl.cmd
+        run: Installer\get_openssl.cmd ${{ env.openssl_version }} ${{ env.ghSsl_user }} ${{ env.ghSsl_repo }}
 
       - name: Get 7z binaries
         run: Installer\get_7zip.cmd
 
       - name: Merging Build
-        run: Installer\copy_build.cmd x64
+        run: Installer\copy_build.cmd x64 ${{ env.qt_version }} ${{ env.qt6_version }} ${{ env.openssl_version }}
 
       - name: Collect installer assets
         run: Installer\get_assets.cmd
 
       - name: Upload installer assets
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: Assets
           path: |
@@ -159,8 +172,8 @@ jobs:
           retention-days: 60
 
       - name: Upload Sandboxie x64
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: Sandboxie_x64
           path: |
@@ -174,7 +187,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.5
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -197,10 +210,10 @@ jobs:
     #
 
       - name: Install Qt6 x64
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4.0.0
         with:
       #    version: '6.2.4'
-          version: '6.3.1'
+          version: '${{ env.qt6_version }}'
       #    dir: ..
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_64'
@@ -208,10 +221,10 @@ jobs:
           cache: true
 
       - name: Install Qt6 ARM64
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4.0.0
         with:
       #    version: '6.2.4'
-          version: '6.3.1'
+          version: '${{ env.qt6_version }}'
       #    dir: ..
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_arm64'
@@ -227,7 +240,7 @@ jobs:
     #
 
       - name: Build Sandboxie-Plus ARM64
-        run: SandboxiePlus\qmake_plus.cmd ARM64
+        run: SandboxiePlus\qmake_plus.cmd ARM64 ${{ env.qt_version }} ${{ env.qt6_version }}
 
       - name: Build SbieShell ARM64
         run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=ARM64
@@ -244,17 +257,17 @@ jobs:
     #
 
       - name: Get openssl binaries
-        run: Installer\get_openssl.cmd
+        run: Installer\get_openssl.cmd ${{ env.openssl_version }} ${{ env.ghSsl_user }} ${{ env.ghSsl_repo }}
 
       - name: Get 7z binaries
         run: Installer\get_7zip.cmd
 
       - name: Merging Build
-        run: Installer\copy_build.cmd ARM64
+        run: Installer\copy_build.cmd ARM64 ${{ env.qt_version }} ${{ env.qt6_version }} ${{ env.openssl_version }}
 
       - name: Upload Sandboxie ARM64
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: Sandboxie_ARM64
           path: |
@@ -268,7 +281,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.5
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -285,7 +298,7 @@ jobs:
     #
 
       - name: Install Qt5 x86
-        run: SandboxiePlus\install_qt.cmd Win32
+        run: SandboxiePlus\install_qt.cmd Win32 ${{ env.qt_version }} ${{ env.qt6_version }} ${{ env.ghQtBuilds_user }} ${{ env.ghQtBuilds_repo }} ${{ env.ghQtBuilds_hash_x86 }} ${{ env.ghQtBuilds_hash_x64 }}
 
       - name: Installing Jom
       #  if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -296,7 +309,7 @@ jobs:
     #
 
       - name: Build Sandboxie-Plus x86
-        run: SandboxiePlus\qmake_plus.cmd Win32
+        run: SandboxiePlus\qmake_plus.cmd Win32 ${{ env.qt_version }} ${{ env.qt6_version }}
 
     #
     # Compile Sandboxie Tools
@@ -310,20 +323,20 @@ jobs:
     #
 
       - name: Add missing languages for Qt5 (issue 1528)
-        run: Installer\fix_qt5_languages.cmd Win32
+        run: Installer\fix_qt5_languages.cmd Win32 ${{ env.qt_version }} ${{ env.qt6_version }}
 
       - name: Get openssl binaries
-        run: Installer\get_openssl.cmd
+        run: Installer\get_openssl.cmd ${{ env.openssl_version }} ${{ env.ghSsl_user }} ${{ env.ghSsl_repo }}
 
       - name: Get 7z binaries
         run: Installer\get_7zip.cmd
 
       - name: Merging Build
-        run: Installer\copy_build.cmd x86
+        run: Installer\copy_build.cmd x86 ${{ env.qt_version }} ${{ env.qt6_version }} ${{ env.openssl_version }}
 
       - name: Upload Sandboxie x86
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: Sandboxie_x86
           path: |

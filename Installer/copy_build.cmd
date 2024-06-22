@@ -1,22 +1,29 @@
 REM @ECHO OFF
 
+echo %*
+IF "%~4" == "" ( set "openssl_version=3.3.1" ) ELSE ( set "openssl_version=%~4" )
+IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
+IF "%~2" == "" ( set "qt_version=5.15.14" ) ELSE ( set "qt_version=%~2" )
+
+IF "%openssl_version:~0,3%" == "1.1" ( set "sslMajorVersion=1_1" ) ELSE ( set "sslMajorVersion=3" )
+
 IF %1 == x86 (
   set archPath=Win32
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
-  set qtPath=%~dp0..\..\Qt\5.15.13\msvc2019
+  set qtPath=%~dp0..\..\Qt\%qt_version%\msvc2019
   set instPath=%~dp0\SbiePlus_x86
 )
 IF %1 == x64 (
   set archPath=x64
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-REM  set qtPath=%~dp0..\..\Qt\6.3.1\msvc2019_64
-  set qtPath=%~dp0..\..\Qt\5.15.13\msvc2019_64
+REM  set qtPath=%~dp0..\..\Qt\%qt6_version%\msvc2019_64
+  set qtPath=%~dp0..\..\Qt\%qt_version%\msvc2019_64
   set instPath=%~dp0\SbiePlus_x64
 )
 IF %1 == ARM64 (
   set archPath=ARM64
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
-  set qtPath=%~dp0..\..\Qt\6.3.1\msvc2019_arm64
+  set qtPath=%~dp0..\..\Qt\%qt6_version%\msvc2019_arm64
   set instPath=%~dp0\SbiePlus_a64
 )
 set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC142.CRT
@@ -72,12 +79,12 @@ copy %qtPath%\plugins\tls\qopensslbackend.dll %instPath%\tls\
 
 ECHO Copying OpenSSL libraries
 IF %archPath% == Win32 (
-  copy /y %~dp0OpenSSL\Win_x86\bin\libssl-1_1.dll %instPath%\
-  copy /y %~dp0OpenSSL\Win_x86\bin\libcrypto-1_1.dll %instPath%\
+  copy /y %~dp0OpenSSL\Win_x86\bin\libssl-%sslMajorVersion%.dll %instPath%\
+  copy /y %~dp0OpenSSL\Win_x86\bin\libcrypto-%sslMajorVersion%.dll %instPath%\
 )
 IF NOT %archPath% == Win32 (
-  copy /y %~dp0OpenSSL\Win_%archPath%\bin\libssl-1_1-%archPath%.dll %instPath%\
-  copy /y %~dp0OpenSSL\Win_%archPath%\bin\libcrypto-1_1-%archPath%.dll %instPath%\
+  copy /y %~dp0OpenSSL\Win_%archPath%\bin\libssl-%sslMajorVersion%-%archPath%.dll %instPath%\
+  copy /y %~dp0OpenSSL\Win_%archPath%\bin\libcrypto-%sslMajorVersion%-%archPath%.dll %instPath%\
 )
 
 

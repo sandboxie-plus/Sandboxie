@@ -172,6 +172,8 @@ static HANDLE Gui_DummyInputDesktopHandle = NULL;
 
        BOOLEAN Gui_BlockInterferenceControl = FALSE;
 
+       BOOLEAN Gui_DontAllowCoverTaskbar = FALSE;
+
 
 //---------------------------------------------------------------------------
 // Gui_InitMisc
@@ -183,6 +185,8 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
     if (! Gui_OpenAllWinClasses) {
 
         Gui_BlockInterferenceControl = SbieApi_QueryConfBool(NULL, L"BlockInterferenceControl", FALSE);
+        if(Gui_BlockInterferenceControl)
+            Gui_DontAllowCoverTaskbar = !SbieApi_QueryConfBool(NULL, L"AllowCoverTaskbar", FALSE);
         
         SBIEDLL_HOOK_GUI(SetParent);
         if (Gui_UseProxyService) {

@@ -65,7 +65,7 @@ const WCHAR* SbieDll_GetTagValue(const WCHAR* str, const WCHAR* strEnd, const WC
     // check if tag contains a string in quotations
     if ((alt = (*str == L'\"')) || (*str == L'\''))
     {
-        WCHAR* end = wcschr(str + 1, alt ? L'\"' : L'\'');
+        const WCHAR* end = wcschr(str + 1, alt ? L'\"' : L'\'');
         if (!end)
             return NULL; // error invalid string
         *value = str + 1;
@@ -160,7 +160,7 @@ BOOLEAN SbieDll_FindTagValuePtr(const WCHAR* string, const WCHAR* tag_name, cons
     TagFindProcParam tagFindProcParam = 
     {
         tag_name,
-        wcslen(tag_name),
+        (ULONG)wcslen(tag_name),
         NULL,
         0
     };
@@ -175,7 +175,7 @@ BOOLEAN SbieDll_FindTagValuePtr(const WCHAR* string, const WCHAR* tag_name, cons
 
 BOOLEAN SbieDll_FindTagValue(const WCHAR* string, const WCHAR* tag_name, WCHAR* value, ULONG value_size, WCHAR eq, WCHAR sep)
 {
-    WCHAR* value_ptr;
+    const WCHAR* value_ptr;
     ULONG value_len;
     if (!SbieDll_FindTagValuePtr(string, tag_name, &value_ptr, &value_len, eq, sep))
         return FALSE;

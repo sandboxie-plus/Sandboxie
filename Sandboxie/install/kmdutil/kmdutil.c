@@ -527,10 +527,10 @@ BOOL Kmd_Register_MiniFilter(
         return FALSE;
 
     retcode = RegSetValueEx(
-        driver_key, L"DependsOnService", 0, REG_MULTI_SZ,
+        driver_key, L"DependOnService", 0, REG_MULTI_SZ,
         (BYTE *)L"FltMgr\0\0", 8 * sizeof(WCHAR));
     if (retcode != 0) {
-        Display_Error(L"RegSetValueEx (DependsOnService)", retcode);
+        Display_Error(L"RegSetValueEx (DependOnService)", retcode);
         return FALSE;
     }
 

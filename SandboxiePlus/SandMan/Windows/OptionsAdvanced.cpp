@@ -609,7 +609,7 @@ void COptionsWindow::UpdateBoxIsolation()
 		ui.chkCloseForBox->setChecked(false);
 		ui.chkNoOpenForBox->setChecked(false);
 		ui.chkSbieLogon->setChecked(false);
-		ui.chkCreateToken->setChecked(false)
+		ui.chkCreateToken->setChecked(false);
 	}
 	else {
 		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);

@@ -13,6 +13,9 @@ indent_size = 4
 [my_version.h]
 charset = utf-8-bom
 
+[SandboxiePlus/SandMan/Troubleshooting/lang_*.json]
+charset = utf-8-bom
+
 [*.{c,h,cpp}]
 indent_style = tab
 indent_size = unset

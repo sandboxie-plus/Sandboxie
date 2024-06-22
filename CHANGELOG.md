@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added RPC Port message filter mechanism to block unsafe RDP calls via the driver [#3930](https://github.com/sandboxie-plus/Sandboxie/issues/3930)
   - Usage: "RpcPortFilter=Port,ID,Label" label is optional
 - added "Job Object" Options page to colelct all job object related options
+- added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow.
 
 ### Changed
 - Extend "Temp Template" to make it could delete local template section.

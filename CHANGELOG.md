@@ -14,21 +14,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
   - usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
-  - note: use /passwd without the password to have SbieIni prompot for the password on the console, this hides the password from view and from bing captured with the command line
+  - Note: use /passwd without the password to have SbieIni prompot for the password on the console, this hides the password from view and from bing captured with the command line
 - added checkbox for "PromptForInternetAccess" option to the New Box Wizard
-- added option "HideNonSystemProcesses" to hide processes not in a sandbox from processes lists for sandboxed processes.
-- added option "HideSbieProcesses" to hide Sandboxie Work Process(SbieSvc,SandboxieRpcSs,etc.).
+- added option "HideNonSystemProcesses" to hide processes not in a sandbox from processes lists for sandboxed processes
+- added option "HideSbieProcesses" to hide Sandboxie Work Process (SbieSvc, SandboxieRpcSs, etc.)
 - added option "HideFirmwareInfo"
   - when it is set, the programs that try getting fireware information will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
-- added template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI.
-- added template "BlockLocalConnect" to prevent sandboxed processes from sending network packs to localhost to breakout sandbox.
+- added template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI
+- added template "BlockLocalConnect" to prevent sandboxed processes from sending network packs to localhost to breakout sandbox
 - added new option "AllowCoverTaskbar" for [#3975](https://github.com/sandboxie-plus/Sandboxie/issues/3975)
 - added RPC Port message filter mechanism to block unsafe RDP calls via the driver [#3930](https://github.com/sandboxie-plus/Sandboxie/issues/3930)
-  - Usage: "RpcPortFilter=Port,ID,Label" label is optional
-- added "Job Object" Options page to colelct all job object related options
+  - usage: "RpcPortFilter=Port,ID,Label" label is optional
+- added "Job Object" options page to colelct all job object related options
 
 ### Changed
-- Extend "Temp Template" to make it could delete local template section.
+- Extend "Temp Template" to make it could delete local template section
 
 ### Fixed
 - fixed security issue with the newly introduced experimental "UseCreateToken=y" mechanism
@@ -38,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Sandboxie will add CustomChromiumFlags=--disable-features=PrintCompositorLPAC to chrome based browsers command line
   - Note: Less Privileged App Container (LPAC) don't work with sandboxie currently
 - fixed Problem accessing a relative symlink with a target that starts with a dot [#3981](https://github.com/sandboxie-plus/Sandboxie/issues/3981)
-- fixed Bug - Can't open a sandbox's properties window via double-click in System Tray context window [#3861](https://github.com/sandboxie-plus/Sandboxie/issues/3861)
+- fixed Can't open a sandbox's properties window via double-click in System Tray context window [#3861](https://github.com/sandboxie-plus/Sandboxie/issues/3861)
 - fixed Delay in launching forced programs after version 1.12.9 [#3868](https://github.com/sandboxie-plus/Sandboxie/issues/3868)
   - this issue was introdiced in 1.13.0 and may have broadly affected other usecases and cause variosue problems
 - fixed issue with Misc Options list

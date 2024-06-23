@@ -398,7 +398,7 @@ _FX BOOL Kernel_QueryPerformanceCounter(LARGE_INTEGER* lpPerformanceCount)
 }
 
 _FX LANGID GetUserDefaultUILanguage() {
-	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+	return (LANGID)SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
 }
 typedef int (*LCIDToLocaleName)(
 	            LCID   Locale,
@@ -469,10 +469,11 @@ char* itoa(int num, char* str, int radix)
 	return str;
 
 }
+#include<cstdlib>
 const wchar_t* GetWC(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
-	wchar_t* wc = new wchar_t[cSize];
+	wchar_t* wc = malloc(sizeof(wchar_t£©* cSize));
 	mbstowcs(wc, c, cSize);
 
 	return wc;

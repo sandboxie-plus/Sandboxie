@@ -470,7 +470,7 @@ char* itoa2(int num, char* str, int radix)
 
 }
 
-const wchar_t* GetWC(const char* c)
+wchar_t* GetWC(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
 	
@@ -484,7 +484,7 @@ _FX int Kernel_GetUserDefaultGeoName(
 ) {
 	char* buf = (char*)GlobalAlloc(GMEM_FIXED | GMEM_ZEROINIT, sizeof(char) * geoNameCount);
 	itoa2(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840),buf,10);
-	const wchar_t* tmp = GetWC(buf);
+	wchar_t* tmp = GetWC(buf);
 	int length = sizeof(GetWC(buf));
 	lstrcpy(geoName, tmp);
 	GlobalFree(buf);

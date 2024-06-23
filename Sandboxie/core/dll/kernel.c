@@ -498,7 +498,7 @@ _FX int Kernel_GetSystemDefaultLocaleName(
 ) {
 	LCIDToLocaleName ltln = Ldr_GetProcAddrNew(Dll_Kernel32, L"LCIDToLocaleName", "LCIDToLocaleName");
 	if (ltln) {
-		return ltln(SbieApi_QueryConfBool(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
+		return ltln(SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
 	}
 	else {
 		if (cchLocaleName >= 4)
@@ -514,7 +514,7 @@ _FX LCID Kernel_GetSystemDefaultLCID() {
 }
 
 _FX LANGID Kernel_GetSystemDefaultLangID() {
-	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+	return (LANGID)SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
 }
 
 /*_FX int Kernel_GetLocaleInfoEx(

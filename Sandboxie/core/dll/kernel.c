@@ -475,19 +475,19 @@ const wchar_t* GetWC(const char* c)
 	const size_t cSize = strlen(c) + 1;
 	
 	wchar_t* wc=(wchar_t*)GlobalAlloc(GMEM_FIXED | GMEM_ZEROINIT, sizeof(wchar_t) * cSize);
-	mbstowcs(wc, c, cSize);
-	
+	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, c, cSize, wc, cSize);
 	return wc;
 }
 _FX int Kernel_GetUserDefaultGeoName(
 	LPWSTR geoName,
 	int    geoNameCount
 ) {
-	char* buf = malloc(sizeof(char) * geoNameCount);
+	char* buf = (char*)GlobalAlloc(GMEM_FIXED | GMEM_ZEROINIT, sizeof(char) * geoNameCount);
 	itoa2(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840),buf,10);
 	wchar_t* tmp = GetWC(buf);
 	int length = sizeof(GetWC(buf));
 	lstrcpy(geoName, tmp);
+	GlobalFree(buf);
 	GlobalFree(tmp);
 	return length;
 }

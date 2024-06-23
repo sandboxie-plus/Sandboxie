@@ -484,7 +484,7 @@ _FX int Kernel_GetUserDefaultGeoName(
 ) {
 	char* buf = (char*)GlobalAlloc(GMEM_FIXED | GMEM_ZEROINIT, sizeof(char) * geoNameCount);
 	itoa2(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840),buf,10);
-	wchar_t* tmp = GetWC(buf);
+	const wchar_t* tmp = GetWC(buf);
 	int length = sizeof(GetWC(buf));
 	lstrcpy(geoName, tmp);
 	GlobalFree(buf);

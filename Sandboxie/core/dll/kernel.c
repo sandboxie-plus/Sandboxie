@@ -48,7 +48,53 @@ typedef DWORD(*P_SleepEx)(DWORD dwMiSecond, BOOL bAlert);
 
 typedef BOOL (*P_QueryPerformanceCounter)(LARGE_INTEGER* lpPerformanceCount);
 
+typedef LANGID (*P_GetUserDefaultUILanguage)();
 
+typedef int (*P_GetUserDefaultLocaleName)(
+	 LPWSTR lpLocaleName,
+	  int    cchLocaleName
+);
+
+typedef LCID (*P_GetUserDefaultLCID)();
+
+typedef LANGID (*P_GetUserDefaultLangID)();
+
+typedef int (*P_GetUserDefaultGeoName)(
+	LPWSTR geoName,
+	  int    geoNameCount
+);
+
+typedef LANGID (*P_GetSystemDefaultUILanguage)();
+
+typedef int (*P_GetSystemDefaultLocaleName)(
+	 LPWSTR lpLocaleName,
+	  int    cchLocaleName
+);
+
+typedef LCID (*P_GetSystemDefaultLCID)();
+
+typedef LANGID (*P_GetSystemDefaultLangID)();
+
+typedef int (*P_GetLocaleInfoEx)(
+	  LPCWSTR lpLocaleName,
+	            LCTYPE  LCType,
+	 LPWSTR  lpLCData,
+	     int     cchData
+);
+
+typedef int (*P_GetLocaleInfoA)(
+	            LCID   Locale,
+	            LCTYPE LCType,
+	 LPSTR  lpLCData,
+	            int    cchData
+);
+
+typedef int (*P_GetLocaleInfoW)(
+	            LCID   Locale,
+	            LCTYPE LCType,
+	 LPWSTR lpLCData,
+	            int    cchData
+);
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -68,6 +114,18 @@ P_GetTickCount64				__sys_GetTickCount64				= NULL;
 P_QueryUnbiasedInterruptTime	__sys_QueryUnbiasedInterruptTime	= NULL;
 P_QueryPerformanceCounter		__sys_QueryPerformanceCounter		= NULL;
 
+P_GetUserDefaultUILanguage __sys_GetUserDefaultUILanguage = NULL;
+P_GetUserDefaultLocaleName __sys_GetUserDefaultLocaleName = NULL;
+P_GetUserDefaultLCID __sys_GetUserDefaultLCID = NULL;
+P_GetUserDefaultLangID __sys_GetUserDefaultLangID = NULL;
+P_GetUserDefaultGeoName __sys_GetUserDefaultGeoName = NULL;
+P_GetSystemDefaultUILanguage __sys_GetSystemDefaultUILanguage = NULL;
+P_GetSystemDefaultLocaleName __sys_GetSystemDefaultLocaleName = NULL;
+P_GetSystemDefaultLCID __sys_GetSystemDefaultLCID = NULL;
+P_GetSystemDefaultLangID __sys_GetSystemDefaultLangID = NULL;
+P_GetLocaleInfoEx __sys_GetLocaleInfoEx = NULL;
+P_GetLocaleInfoA __sys_GetLocaleInfoA = NULL;
+P_GetLocaleInfoW __sys_GetLocaleInfoW = NULL;
 
 //---------------------------------------------------------------------------
 // Functions
@@ -91,6 +149,53 @@ static DWORD Kernel_SleepEx(DWORD dwMiSecond, BOOL bAlert);
 
 static BOOL Kernel_QueryPerformanceCounter(LARGE_INTEGER* lpPerformanceCount);
 
+static LANGID(*P_GetUserDefaultUILanguage)();
+
+static int Kernel_GetUserDefaultLocaleName(
+	LPWSTR lpLocaleName,
+	int    cchLocaleName
+	);
+
+static LCID Kernel_GetUserDefaultLCID();
+
+static LANGID Kernel_GetUserDefaultLangID();
+
+static int Kernel_GetUserDefaultGeoName(
+	LPWSTR geoName,
+	int    geoNameCount
+	);
+
+static LANGID Kernel_GetSystemDefaultUILanguage();
+
+static int Kernel_GetSystemDefaultLocaleName(
+	LPWSTR lpLocaleName,
+	int    cchLocaleName
+	);
+
+static LCID Kernel_GetSystemDefaultLCID();
+
+static LANGID Kernel_GetSystemDefaultLangID();
+
+static int Kernel_GetLocaleInfoEx(
+	LPCWSTR lpLocaleName,
+	LCTYPE  LCType,
+	LPWSTR  lpLCData,
+	int     cchData
+	);
+
+static int Kernel_GetLocaleInfoA(
+	LCID   Locale,
+	LCTYPE LCType,
+	LPSTR  lpLCData,
+	int    cchData
+	);
+
+static int Kernel_GetLocaleInfoW(
+	LCID   Locale,
+	LCTYPE LCType,
+	LPWSTR lpLCData,
+	int    cchData
+	);
 
 //---------------------------------------------------------------------------
 // Kernel_Init
@@ -151,7 +256,27 @@ _FX BOOLEAN Kernel_Init()
 		//SBIEDLL_HOOK(Kernel_, Sleep);
 		SBIEDLL_HOOK(Kernel_, SleepEx);	
 	}
-	
+	if (SbieApi_QueryConfBool(NULL, L"UseSpoofLocale", FALSE))
+	{
+		SBIEDLL_HOOK(Kernel_, GetUserDefaultUILanguage);
+		P_GetUserDefaultLocaleName GetUserDefaultLocaleName = Ldr_GetProcAddrNew(Dll_Kernel32, L"GetUserDefaultLocaleName", "GetUserDefaultLocaleName");
+		if (GetUserDefaultLocaleName)
+			SBIEDLL_HOOK(Kernel_, GetUserDefaultLocaleName);
+		SBIEDLL_HOOK(Kernel_, GetUserDefaultLCID);
+		SBIEDLL_HOOK(Kernel_, GetUserDefaultLangID);
+		SBIEDLL_HOOK(Kernel_, GetUserDefaultGeoName);
+		SBIEDLL_HOOK(Kernel_, GetSystemDefaultUILanguage);
+		P_GetSystemDefaultLocaleName GetSystemDefaultLocaleName = Ldr_GetProcAddrNew(Dll_Kernel32, L"GetSystemDefaultLocaleName", "GetSystemDefaultLocaleName");
+		if (GetSystemDefaultLocaleName)
+			SBIEDLL_HOOK(Kernel_, GetSystemDefaultLocaleName);
+		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLCID);
+		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLangID);
+		/*SBIEDLL_HOOK(Kernel_, GetLocaleInfoA);
+		SBIEDLL_HOOK(Kernel_, GetLocaleInfoW);
+		P_GetLocaleInfoEx GetLocaleInfoEx = Ldr_GetProcAddrNew(Dll_Kernel32, L"GetLocaleInfoEx", "GetLocaleInfoEx");
+		if (GetLocaleInfoEx)
+			SBIEDLL_HOOK(Kernel_, GetLocaleInfoEx);*/
+	}
 
 	return TRUE;
 }
@@ -271,3 +396,141 @@ _FX BOOL Kernel_QueryPerformanceCounter(LARGE_INTEGER* lpPerformanceCount)
 		lpPerformanceCount->QuadPart = lpPerformanceCount->QuadPart * add / low;
 	return rtn;
 }
+
+_FX LANGID GetUserDefaultUILanguage() {
+	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+}
+typedef int (*LCIDToLocaleName)(
+	            LCID   Locale,
+				LPWSTR lpName,
+	            int    cchName,
+	            DWORD  dwFlags
+);
+_FX int Kernel_GetUserDefaultLocaleName(
+	LPWSTR lpLocaleName,
+	int    cchLocaleName
+) {
+	LCIDToLocaleName ltln = Ldr_GetProcAddrNew(Dll_Kernel32, L"LCIDToLocaleName", "LCIDToLocaleName");
+	if (ltln) {
+		return ltln(SbieApi_QueryConfBool(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
+	}
+	else {
+		if (cchLocaleName >= 4)
+			lstrcpy(lpLocaleName, L"en_US");
+		else
+			return 0;
+	}
+	return 4;
+}
+
+_FX LCID Kernel_GetUserDefaultLCID() {
+	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+}
+
+_FX LANGID Kernel_GetUserDefaultLangID() {
+	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+}
+char* itoa(int num, char* str, int radix)
+{
+	char index[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	unsigned unum;
+	int i = 0, j, k;
+
+	
+	if (radix == 10 && num < 0)
+	{
+		unum = (unsigned)-num;
+		str[i++] = '-';
+	}
+	else unum = (unsigned)num;
+
+	
+	do
+	{
+		str[i++] = index[unum % (unsigned)radix];
+		unum /= radix;
+
+	} while (unum);
+
+	str[i] = '\0';
+
+	
+	if (str[0] == '-') k = 1;
+	else k = 0;
+
+	char temp;
+	for (j = k; j <= (i - 1) / 2; j++)
+	{
+		temp = str[j];
+		str[j] = str[i - 1 + k - j];
+		str[i - 1 + k - j] = temp;
+	}
+
+	return str;
+
+}
+const wchar_t* GetWC(const char* c)
+{
+	const size_t cSize = strlen(c) + 1;
+	wchar_t* wc = new wchar_t[cSize];
+	mbstowcs(wc, c, cSize);
+
+	return wc;
+}
+_FX int Kernel_GetUserDefaultGeoName(
+	LPWSTR geoName,
+	int    geoNameCount
+) {
+	lstrcpy(geoName, GetWC(itoa(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840)));
+}
+
+_FX LANGID Kernel_GetSystemDefaultUILanguage() {
+	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+}
+
+_FX int Kernel_GetSystemDefaultLocaleName(
+	LPWSTR lpLocaleName,
+	int    cchLocaleName
+) {
+	LCIDToLocaleName ltln = Ldr_GetProcAddrNew(Dll_Kernel32, L"LCIDToLocaleName", "LCIDToLocaleName");
+	if (ltln) {
+		return ltln(SbieApi_QueryConfBool(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
+	}
+	else {
+		if (cchLocaleName >= 4)
+			lstrcpy(lpLocaleName, L"en_US");
+		else
+			return 0;
+	}
+	return 4;
+}
+
+_FX LCID Kernel_GetSystemDefaultLCID() {
+	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+}
+
+_FX LANGID Kernel_GetSystemDefaultLangID() {
+	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+}
+
+/*_FX int Kernel_GetLocaleInfoEx(
+	LPCWSTR lpLocaleName,
+	LCTYPE  LCType,
+	LPWSTR  lpLCData,
+	int     cchData
+);
+
+_FX int Kernel_GetLocaleInfoA(
+	LCID   Locale,
+	LCTYPE LCType,
+	LPSTR  lpLCData,
+	int    cchData
+);
+
+_FX int Kernel_GetLocaleInfoW(
+	LCID   Locale,
+	LCTYPE LCType,
+	LPWSTR lpLCData,
+	int    cchData
+);
+*/

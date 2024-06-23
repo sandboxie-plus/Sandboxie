@@ -397,7 +397,7 @@ _FX BOOL Kernel_QueryPerformanceCounter(LARGE_INTEGER* lpPerformanceCount)
 	return rtn;
 }
 
-_FX LANGID GetUserDefaultUILanguage() {
+_FX LANGID Kernel_GetUserDefaultUILanguage() {
 	return (LANGID)SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
 }
 typedef int (*LCIDToLocaleName)(
@@ -412,7 +412,7 @@ _FX int Kernel_GetUserDefaultLocaleName(
 ) {
 	LCIDToLocaleName ltln = Ldr_GetProcAddrNew(Dll_Kernel32, L"LCIDToLocaleName", "LCIDToLocaleName");
 	if (ltln) {
-		return ltln(SbieApi_QueryConfBool(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
+		return ltln(SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
 	}
 	else {
 		if (cchLocaleName >= 4)
@@ -430,7 +430,7 @@ _FX LCID Kernel_GetUserDefaultLCID() {
 _FX LANGID Kernel_GetUserDefaultLangID() {
 	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
 }
-char* itoa(int num, char* str, int radix)
+char* itoa2(int num, char* str, int radix)
 {
 	char index[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	unsigned unum;
@@ -469,7 +469,7 @@ char* itoa(int num, char* str, int radix)
 	return str;
 
 }
-#include<cstdlib>
+#include<stdlib.h>
 const wchar_t* GetWC(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
@@ -482,7 +482,7 @@ _FX int Kernel_GetUserDefaultGeoName(
 	LPWSTR geoName,
 	int    geoNameCount
 ) {
-	lstrcpy(geoName, GetWC(itoa(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840)));
+	lstrcpy(geoName, GetWC(itoa2(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840)));
 }
 
 _FX LANGID Kernel_GetSystemDefaultUILanguage() {

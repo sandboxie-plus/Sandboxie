@@ -428,7 +428,7 @@ _FX LCID Kernel_GetUserDefaultLCID() {
 }
 
 _FX LANGID Kernel_GetUserDefaultLangID() {
-	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+	return (LANGID)SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
 }
 char* itoa2(int num, char* str, int radix)
 {
@@ -473,7 +473,7 @@ char* itoa2(int num, char* str, int radix)
 const wchar_t* GetWC(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
-	wchar_t* wc = (wchar_t*)malloc(sizeof(wchar_t£©* cSize));
+	wchar_t* wc=(wchar_t*)malloc(sizeof(wchar_t)*cSize);
 	mbstowcs(wc, c, cSize);
 
 	return wc;
@@ -482,11 +482,14 @@ _FX int Kernel_GetUserDefaultGeoName(
 	LPWSTR geoName,
 	int    geoNameCount
 ) {
-	lstrcpy(geoName, GetWC(itoa2(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840)));
+	char* buf = malloc(sizeof(char) * geoNameCount);
+	itoa2(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840),buf,10);
+	lstrcpy(geoName, GetWC(buf));
+	return sizeof(GetWC(buf));
 }
 
 _FX LANGID Kernel_GetSystemDefaultUILanguage() {
-	return SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
+	return (LANGID)SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033);
 }
 
 _FX int Kernel_GetSystemDefaultLocaleName(

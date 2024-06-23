@@ -469,13 +469,14 @@ char* itoa2(int num, char* str, int radix)
 	return str;
 
 }
-#include<stdlib.h>
+
 const wchar_t* GetWC(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
-	wchar_t* wc=(wchar_t*)malloc(sizeof(wchar_t)*cSize);
+	
+	wchar_t* wc=(wchar_t*)GlobalAlloc(GMEM_FIXED | GMEM_ZEROINIT, sizeof(wchar_t) * cSize));
 	mbstowcs(wc, c, cSize);
-
+	
 	return wc;
 }
 _FX int Kernel_GetUserDefaultGeoName(
@@ -484,8 +485,11 @@ _FX int Kernel_GetUserDefaultGeoName(
 ) {
 	char* buf = malloc(sizeof(char) * geoNameCount);
 	itoa2(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840),buf,10);
-	lstrcpy(geoName, GetWC(buf));
-	return sizeof(GetWC(buf));
+	wchar_t* tmp = GetWC(buf);
+	int length = sizeof(GetWC(buf));
+	lstrcpy(geoName, tmp);
+	GlobalFree(tmp);
+	return length;
 }
 
 _FX LANGID Kernel_GetSystemDefaultUILanguage() {

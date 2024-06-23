@@ -473,7 +473,7 @@ char* itoa(int num, char* str, int radix)
 const wchar_t* GetWC(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
-	wchar_t* wc = malloc(sizeof(wchar_t£©* cSize));
+	wchar_t* wc = (wchar_t*)malloc(sizeof(wchar_t£©* cSize));
 	mbstowcs(wc, c, cSize);
 
 	return wc;

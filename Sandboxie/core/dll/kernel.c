@@ -149,7 +149,7 @@ static DWORD Kernel_SleepEx(DWORD dwMiSecond, BOOL bAlert);
 
 static BOOL Kernel_QueryPerformanceCounter(LARGE_INTEGER* lpPerformanceCount);
 
-static LANGID(*P_GetUserDefaultUILanguage)();
+static LANGID Kernel_GetUserDefaultUILanguage();
 
 static int Kernel_GetUserDefaultLocaleName(
 	LPWSTR lpLocaleName,

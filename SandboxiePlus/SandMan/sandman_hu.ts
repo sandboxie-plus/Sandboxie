@@ -5323,8 +5323,9 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Ez a homokozó le van tiltva. Bekapcsolja?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
+        <translation type="unfinished">Ez a homokozó le van tiltva. Bekapcsolja?</translation>
     </message>
 </context>
 <context>

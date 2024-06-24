@@ -5700,8 +5700,9 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Denna sandlåda är inaktiverad, vill du aktivera den?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
+        <translation type="unfinished">Denna sandlåda är inaktiverad, vill du aktivera den?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="174"/>

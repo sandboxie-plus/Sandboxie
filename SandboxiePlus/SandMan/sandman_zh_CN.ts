@@ -5482,8 +5482,9 @@ Error: %1</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>此沙盒已禁用，确定启用吗？</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
+        <translation type="unfinished">此沙盒已禁用，确定启用吗？</translation>
     </message>
 </context>
 <context>

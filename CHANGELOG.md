@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Applications cannot be launched as admin in a sandbox with "UseCreateToken/SandboxieAllGroup" enabled when using an MSFT account [#4022](https://github.com/sandboxie-plus/Sandboxie/issues/4022)
+- fixed Firefox issue with Sbie 1.14.1 and 1.14.2 [#4012](https://github.com/sandboxie-plus/Sandboxie/issues/4012)
+  - rolled back the driver verifier fix added in 1.14.1
+
 
 
 

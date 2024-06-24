@@ -100,7 +100,7 @@
     <QtModules>core;gui;widgets</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="QtSettings">
-    <QtInstall>Qt5.15.13_msvc2019_64</QtInstall>
+    <QtInstall>Qt5.15.14_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">

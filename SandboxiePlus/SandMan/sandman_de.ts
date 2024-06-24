@@ -4967,8 +4967,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
         <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
-        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
-        <translation type="unfinished">Diese Sandbox ist deaktiviert. Möchten Sie diese aktivieren?</translation>
+        <translation>Diese Sandbox ist deaktiviert oder auf andere Gruppen/Benutzer beschränkt. Möchten Sie die Sandbox bearbeiten?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="549"/>

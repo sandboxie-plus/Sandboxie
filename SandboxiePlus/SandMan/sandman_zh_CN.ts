@@ -263,7 +263,6 @@
         <translation>该功能可能对兼容性造成影响，因为它阻止了沙盒内的进程向主机进程写入数据，以及启动它们。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="849"/>
         <source>Prevents the sandboxed window from being captured.</source>
         <translation type="vanished">阻止沙盒化窗口被捕获图像。</translation>
     </message>

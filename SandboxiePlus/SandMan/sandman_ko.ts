@@ -5552,8 +5552,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>이 샌드박스를 사용할 수 없습니다. 사용하시겠습니까?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <translation>이 샌드박스는 비활성화되었거나 그룹/사용자로 제한되어 있습니다. 편집하시겠습니까?</translation>
     </message>
 </context>
 <context>

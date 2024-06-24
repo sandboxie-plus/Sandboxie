@@ -3125,7 +3125,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1549"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -5694,8 +5694,8 @@ NO seleccionará: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Esta sandbox esta deshabilitada, ¿desea habilitarla?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <translation>Este sandbox está deshabilitado o restringido a un grupo/usuario, ¿quieres editarlo?</translation>
     </message>
 </context>
 <context>

@@ -5655,8 +5655,8 @@ Não vou escolher: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Essa caixa está desativada, deseja ativá-la?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <translation>Esta caixa de areia está desactivada ou restringida a um grupo/utilizador, pretende editá-la?</translation>
     </message>
 </context>
 <context>

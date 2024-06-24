@@ -5098,8 +5098,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Эта песочница отключена, вы хотите ее включить?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <translation>Эта песочница отключена или доступна только группе/пользователю. Хотите отредактировать ее?</translation>
     </message>
 </context>
 <context>

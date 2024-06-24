@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - changed Qt 5 version to Qt 5.15.14 with OpenSSL 3.3.1 [#3994](https://github.com/sandboxie-plus/Sandboxie/pull/3994) (thanks offhub)
 
+### Fixed
+- fixed Applications cannot be launched as admin in a sandbox with "UseCreateToken/SandboxieAllGroup" enabled when using an MSFT account [#4022](https://github.com/sandboxie-plus/Sandboxie/issues/4022)
+
 
 
 ## [1.14.2 / 5.69.2] - 2024-06-19

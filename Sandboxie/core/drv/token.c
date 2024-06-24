@@ -2333,13 +2333,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
 		memcpy(LocalUser->User.Sid, proc->SandboxieLogonSid, RtlLengthSid(proc->SandboxieLogonSid));
 	}
     
-    //UNICODE_STRING unicodeString;
-    //status = RtlConvertSidToUnicodeString(&unicodeString, LocalUser->User.Sid, TRUE);
-    //if (NT_SUCCESS(status)) {
-    //    DbgPrint("SID: %wZ\n", &unicodeString);
-    //    RtlFreeUnicodeString(&unicodeString);
-    //}
-
+retry:
     status = SbieCreateToken(
         &TokenHandle,
         TOKEN_ALL_ACCESS,
@@ -2350,7 +2344,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
         LocalUser,
         LocalGroups,
         LocalPrivileges,
-        
+
         0, //UserAttributes,
         0, //DeviceAttributes,
         0, //DeviceGroups,
@@ -2362,58 +2356,28 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
         LocalSource
     );
 
-    //
-    // For online accounts we must change the primary group
-    //
-
-    if (proc->SandboxieLogonSid && status == STATUS_INVALID_PRIMARY_GROUP)
+    if (proc->SandboxieLogonSid && status == STATUS_INVALID_PRIMARY_GROUP && LocalPrimaryGroup->PrimaryGroup != LocalUser->User.Sid)
     {
+        //
+        // For online accounts we must change the primary group
+        //
+
         ExFreePool((PVOID)LocalPrimaryGroup);
         LocalPrimaryGroup = (PTOKEN_PRIMARY_GROUP)ExAllocatePoolWithTag(PagedPool, sizeof(PTOKEN_PRIMARY_GROUP), tzuk);
         LocalPrimaryGroup->PrimaryGroup = LocalUser->User.Sid;
 
-        status = SbieCreateToken(
-            &TokenHandle,
-            TOKEN_ALL_ACCESS,
-            &ObjectAttributes,
-            TokenType,
-            &AuthenticationId,
-            &ExpirationTime,
-            LocalUser,
-            LocalGroups,
-            LocalPrivileges,
-
-            0, //UserAttributes,
-            0, //DeviceAttributes,
-            0, //DeviceGroups,
-            MandatoryPolicy,
-
-            LocalOwner,
-            LocalPrimaryGroup,
-            NewDefaultDacl,
-            LocalSource
-        );
+        goto retry;
     }
-
-    if (NT_SUCCESS(status))
-        status = Thread_GetKernelHandleForUserHandle(&KernelTokenHandle, TokenHandle);
-
-    //
-    // Retry with new DACLs on error
-    //
-
-    if (proc->SandboxieLogonSid && status == STATUS_INVALID_OWNER)
+    else if (proc->SandboxieLogonSid && status == STATUS_INVALID_OWNER && !NewDacl)
     {
+        //
+        // Retry with new DACLs on error
+        //
+
         DefaultDacl_Length = LocalDefaultDacl->DefaultDacl->AclSize;
-        
+
         // Construct a new ACL 
         NewDefaultDacl = (PTOKEN_DEFAULT_DACL)ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_DEFAULT_DACL) + 8 + DefaultDacl_Length + 128, tzuk);
-        if (NULL == NewDefaultDacl)
-        {
-            Log_Status_Ex_Process(MSG_1222, 0xA2, status, NULL, proc->box->session_id, proc->pid);
-            goto finish;
-        }
-
         memcpy(NewDefaultDacl, LocalDefaultDacl, DefaultDacl_Length);
 
         NewDefaultDacl->DefaultDacl = NewDacl = (PACL)((ULONG_PTR)NewDefaultDacl + sizeof(TOKEN_DEFAULT_DACL));
@@ -2425,50 +2389,37 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
 
         RtlAddAccessAllowedAce(NewDacl, ACL_REVISION2, GENERIC_ALL, LocalOwner->Owner);
 
-        status = SbieCreateToken(
-            &TokenHandle,
-            TOKEN_ALL_ACCESS,
-            &ObjectAttributes,
-            TokenType,
-            &AuthenticationId,
-            &ExpirationTime,
-            LocalUser,
-            LocalGroups,
-            LocalPrivileges,
+        goto retry;
+    }
 
-            0, //UserAttributes,
-            0, //DeviceAttributes,
-            0, //DeviceGroups,
-            MandatoryPolicy,
 
-            LocalOwner,
-            LocalPrimaryGroup,
-            NewDefaultDacl,
-            LocalSource
-        );
+    if (!NT_SUCCESS(status))
+    {
+        Log_Status_Ex_Process(MSG_1222, 0xA3, status, NULL, proc->box->session_id, proc->pid);
+        goto finish;
+    }
 
-        if (NT_SUCCESS(status))
-            status = Thread_GetKernelHandleForUserHandle(&KernelTokenHandle, TokenHandle);
-        
-        if (!NT_SUCCESS(status)) 
-        {
-            Log_Status_Ex_Process(MSG_1222, 0xA3, status, NULL, proc->box->session_id, proc->pid);
-            goto finish;
-        }
+    if (NT_SUCCESS(status))
+        status = Thread_GetKernelHandleForUserHandle(&KernelTokenHandle, TokenHandle);
 
+    if (NT_SUCCESS(status) && NewDacl)
+    {
         Token_SetHandleDacl(NtCurrentProcess(), NewDacl);
         Token_SetHandleDacl(NtCurrentThread(), NewDacl);
         Token_SetHandleDacl(KernelTokenHandle, NewDacl);
     }
-    
+
+    if (NT_SUCCESS(status)) 
+    {
+        ULONG virtualizationAllowed = 1;
+        status = ZwSetInformationToken(KernelTokenHandle, TokenVirtualizationAllowed, &virtualizationAllowed, sizeof(ULONG));
+    }
+
     if (!NT_SUCCESS(status))
     {
         Log_Status_Ex_Process(MSG_1222, 0xA4, status, NULL, proc->box->session_id, proc->pid);
         goto finish;
     }
-
-    ULONG virtualizationAllowed = 1;
-    status = ZwSetInformationToken(KernelTokenHandle, TokenVirtualizationAllowed, &virtualizationAllowed, sizeof(ULONG));
 
     if (Conf_Get_Boolean(proc->box->name, L"CopyTokenAttributes", 0, FALSE))
     {
@@ -2504,6 +2455,33 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
 
 finish:
     if (KernelTokenHandle)  ZwClose(KernelTokenHandle);
+
+    //UNICODE_STRING unicodeString;
+
+    //DbgPrint("Create Token: 0x%08x\n", status);
+    //if (NT_SUCCESS(RtlConvertSidToUnicodeString(&unicodeString, LocalUser->User.Sid, TRUE))) {
+    //    DbgPrint("LocalUser: %wZ (0x%x)\n", &unicodeString, LocalUser->User.Attributes);
+    //    RtlFreeUnicodeString(&unicodeString);
+    //}
+
+    //for (ULONG i = 0; i < LocalGroups->GroupCount; i++) {
+    //    if (NT_SUCCESS(RtlConvertSidToUnicodeString(&unicodeString, LocalGroups->Groups[i].Sid, TRUE))) {
+    //        DbgPrint("LocalGroups[%d]: %wZ (0x%x)\n", i, &unicodeString, LocalGroups->Groups[i].Attributes);
+    //        RtlFreeUnicodeString(&unicodeString);
+    //    }
+    //}
+
+    //if (NT_SUCCESS(RtlConvertSidToUnicodeString(&unicodeString, LocalOwner->Owner, TRUE))) {
+    //    DbgPrint("LocalOwner: %wZ\n", &unicodeString);
+    //    RtlFreeUnicodeString(&unicodeString);
+    //}
+
+    //if (NT_SUCCESS(RtlConvertSidToUnicodeString(&unicodeString, LocalPrimaryGroup->PrimaryGroup, TRUE))) {
+    //    DbgPrint("LocalPrimaryGroup: %wZ\n", &unicodeString);
+    //    RtlFreeUnicodeString(&unicodeString);
+    //}
+    //DbgPrint("+++\n");
+
 
     if (LocalStatistics)    ExFreePool((PVOID)LocalStatistics);
     if (LocalUser)          ExFreePool((PVOID)LocalUser);

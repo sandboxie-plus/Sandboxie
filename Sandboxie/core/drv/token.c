@@ -2193,6 +2193,12 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
     OBJECT_ATTRIBUTES       ObjectAttributes;
     SECURITY_QUALITY_OF_SERVICE SecurityQos;
 
+    TOKEN_PRIVILEGES		AllowedPrivilege;
+    AllowedPrivilege.PrivilegeCount = 1;
+    AllowedPrivilege.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED | SE_PRIVILEGE_ENABLED_BY_DEFAULT;
+    AllowedPrivilege.Privileges[0].Luid.HighPart = 0;
+    AllowedPrivilege.Privileges[0].Luid.LowPart = SE_CHANGE_NOTIFY_PRIVILEGE;
+
     //
     // Gather information from the original token
     //
@@ -2290,6 +2296,15 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
             RtlCopyMemory(&LocalGroups->Groups[1], OldLocalGroups->Groups, OldLocalGroups->GroupCount * sizeof(SID_AND_ATTRIBUTES));
             LocalGroups->GroupCount = NewGroupCount;
         }
+
+        /*for (ULONG i = 0; i < LocalPrivileges->PrivilegeCount; ++i) {
+            LUID_AND_ATTRIBUTES *entry_i = &LocalPrivileges->Privileges[i];
+
+            DbgPrint("Priv: %d-%d (0x%x)\n", entry_i->Luid.HighPart, entry_i->Luid.LowPart, entry_i->Attributes);
+        }*/
+
+        if (LocalPrivileges) ExFreePool((PVOID)LocalPrivileges);
+        LocalPrivileges = &AllowedPrivilege;
     }
 
     //
@@ -2494,7 +2509,7 @@ finish:
     if (LocalUser)          ExFreePool((PVOID)LocalUser);
     if (LocalGroups)        ExFreePool((PVOID)LocalGroups);
     if (OldLocalGroups)     ExFreePool((PVOID)OldLocalGroups);
-    if (LocalPrivileges)    ExFreePool((PVOID)LocalPrivileges);
+    if (LocalPrivileges && LocalPrivileges != &AllowedPrivilege) ExFreePool((PVOID)LocalPrivileges);
 
     //if (UserAttributes)     ExFreePool((PVOID)UserAttributes);
     //if (DeviceAttributes)   ExFreePool((PVOID)DeviceAttributes);

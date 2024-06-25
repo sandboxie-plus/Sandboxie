@@ -100,7 +100,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 
 - DavidBerdik - Maintainer of [Sandboxie Website Archive](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io)
 - Jackenmen - Maintainer of Chocolatey packages for Sandboxie ([support](https://github.com/Jackenmen/choco-auto/issues?q=is%3Aissue+Sandboxie))
-- vedantmgoyal2009 - Maintainer of Winget Releaser for Sandboxie ([support](https://github.com/vedantmgoyal2009/winget-releaser/issues?q=is%3Aissue+Sandboxie))
+- vedantmgoyal9 - Maintainer of Winget Releaser for Sandboxie ([support](https://github.com/vedantmgoyal9/winget-releaser/issues?q=is%3Aissue+Sandboxie))
 - blap - Maintainer of [SandboxToys2](https://github.com/blap/SandboxToys2) addon
 - diversenok - Security analysis & PoCs / Security fixes
 - TechLord - Team-IRA / Reversing

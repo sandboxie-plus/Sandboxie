@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Firefox issue with Sbie 1.14.1 and 1.14.2 [#4012](https://github.com/sandboxie-plus/Sandboxie/issues/4012)
   - rolled back the driver verifier fix added in 1.14.1
 - fixed CustomChromiumFlags and --single-argument issue [#4033](https://github.com/sandboxie-plus/Sandboxie/issues/4033)
+- fixed Sandboxie programs do not terminate after closing programs that run as admin with UseCreateToken/SandboxieAllGroup enabled [#4030](https://github.com/sandboxie-plus/Sandboxie/issues/4030)
+
 
 
 

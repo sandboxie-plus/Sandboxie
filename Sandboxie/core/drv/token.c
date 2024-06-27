@@ -2181,9 +2181,9 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
     PTOKEN_DEFAULT_DACL		LocalDefaultDacl = NULL;
     PTOKEN_SOURCE			LocalSource = NULL;
 
-    PTOKEN_DEFAULT_DACL		NewDefaultDacl = NULL;
-    ULONG                   DefaultDacl_Length = 0;
-    PACL                    NewDacl = NULL;
+    //PTOKEN_DEFAULT_DACL		NewDefaultDacl = NULL;
+    //ULONG                   DefaultDacl_Length = 0;
+    //PACL                    NewDacl = NULL;
 
 
     TOKEN_TYPE              TokenType = TokenPrimary;
@@ -2368,26 +2368,27 @@ retry:
 
         goto retry;
     }
-    else if (proc->SandboxieLogonSid && status == STATUS_INVALID_OWNER && !NewDacl)
+    else if (proc->SandboxieLogonSid && status == STATUS_INVALID_OWNER && LocalOwner->Owner != LocalUser->User.Sid)
     {
         //
         // Retry with new DACLs on error
         //
 
-        DefaultDacl_Length = LocalDefaultDacl->DefaultDacl->AclSize;
-
-        // Construct a new ACL 
-        NewDefaultDacl = (PTOKEN_DEFAULT_DACL)ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_DEFAULT_DACL) + 8 + DefaultDacl_Length + 128, tzuk);
-        memcpy(NewDefaultDacl, LocalDefaultDacl, DefaultDacl_Length);
-
-        NewDefaultDacl->DefaultDacl = NewDacl = (PACL)((ULONG_PTR)NewDefaultDacl + sizeof(TOKEN_DEFAULT_DACL));
-        NewDefaultDacl->DefaultDacl->AclSize += 128;
-
         ExFreePool((PVOID)LocalOwner);
         LocalOwner = (PTOKEN_OWNER)ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_OWNER), tzuk);
         LocalOwner->Owner = LocalUser->User.Sid;
 
-        RtlAddAccessAllowedAce(NewDacl, ACL_REVISION2, GENERIC_ALL, LocalOwner->Owner);
+
+        //DefaultDacl_Length = LocalDefaultDacl->DefaultDacl->AclSize;
+
+        //// Construct a new ACL 
+        //NewDefaultDacl = (PTOKEN_DEFAULT_DACL)ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_DEFAULT_DACL) + 8 + DefaultDacl_Length + 128, tzuk);
+        //memcpy(NewDefaultDacl, LocalDefaultDacl, DefaultDacl_Length);
+
+        //NewDefaultDacl->DefaultDacl = NewDacl = (PACL)((ULONG_PTR)NewDefaultDacl + sizeof(TOKEN_DEFAULT_DACL));
+        //NewDefaultDacl->DefaultDacl->AclSize += 128;
+
+        //RtlAddAccessAllowedAce(NewDacl, ACL_REVISION2, GENERIC_ALL, LocalOwner->Owner);
 
         goto retry;
     }
@@ -2402,12 +2403,12 @@ retry:
     if (NT_SUCCESS(status))
         status = Thread_GetKernelHandleForUserHandle(&KernelTokenHandle, TokenHandle);
 
-    if (NT_SUCCESS(status) && NewDacl)
-    {
-        Token_SetHandleDacl(NtCurrentProcess(), NewDacl);
-        Token_SetHandleDacl(NtCurrentThread(), NewDacl);
-        Token_SetHandleDacl(KernelTokenHandle, NewDacl);
-    }
+    //if (NT_SUCCESS(status) && NewDacl)
+    //{
+    //    Token_SetHandleDacl(NtCurrentProcess(), NewDacl);
+    //    Token_SetHandleDacl(NtCurrentThread(), NewDacl);
+    //    Token_SetHandleDacl(KernelTokenHandle, NewDacl);
+    //}
 
     if (NT_SUCCESS(status)) 
     {
@@ -2499,7 +2500,7 @@ finish:
     if (LocalDefaultDacl)   ExFreePool((PVOID)LocalDefaultDacl);
     if (LocalSource)        ExFreePool((PVOID)LocalSource);
 
-    if (NewDefaultDacl)     ExFreePool((PVOID)NewDefaultDacl);
+    //if (NewDefaultDacl)     ExFreePool((PVOID)NewDefaultDacl);
 
     //
     // get the actual token object from the handle

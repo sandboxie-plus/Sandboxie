@@ -5458,7 +5458,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="1789"/>
         <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
         <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
-        <translation>此沙箱已停用或被限制到特定群組/使用者，是否啟用？</translation>
+        <translation>此沙箱已停用或被限制到特定群組/使用者，是否編輯？</translation>
     </message>
 </context>
 <context>

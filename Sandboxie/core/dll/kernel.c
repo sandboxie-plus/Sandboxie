@@ -258,19 +258,19 @@ _FX BOOLEAN Kernel_Init()
 	}
 	if (SbieApi_QueryConfBool(NULL, L"UseSpoofLocale", FALSE))
 	{
-		/*SBIEDLL_HOOK(Kernel_, GetUserDefaultUILanguage);
-		P_GetUserDefaultLocaleName GetUserDefaultLocaleName = Ldr_GetProcAddrNew(Dll_Kernel32, L"GetUserDefaultLocaleName", "GetUserDefaultLocaleName");
-		if (GetUserDefaultLocaleName)
-			SBIEDLL_HOOK(Kernel_, GetUserDefaultLocaleName);*/
+		SBIEDLL_HOOK(Kernel_, GetUserDefaultUILanguage);
+		//P_GetUserDefaultLocaleName GetUserDefaultLocaleName = Ldr_GetProcAddrNew(Dll_Kernel32, L"GetUserDefaultLocaleName", "GetUserDefaultLocaleName");
+		//if (GetUserDefaultLocaleName)
+		//	SBIEDLL_HOOK(Kernel_, GetUserDefaultLocaleName);
 		SBIEDLL_HOOK(Kernel_, GetUserDefaultLCID);
 		SBIEDLL_HOOK(Kernel_, GetUserDefaultLangID);
-		/*SBIEDLL_HOOK(Kernel_, GetUserDefaultGeoName);
+		//SBIEDLL_HOOK(Kernel_, GetUserDefaultGeoName);
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultUILanguage);
-		P_GetSystemDefaultLocaleName GetSystemDefaultLocaleName = Ldr_GetProcAddrNew(Dll_Kernel32, L"GetSystemDefaultLocaleName", "GetSystemDefaultLocaleName");
-		if (GetSystemDefaultLocaleName)
-			SBIEDLL_HOOK(Kernel_, GetSystemDefaultLocaleName);
+		//P_GetSystemDefaultLocaleName GetSystemDefaultLocaleName = Ldr_GetProcAddrNew(Dll_Kernel32, L"GetSystemDefaultLocaleName", "GetSystemDefaultLocaleName");
+		//if (GetSystemDefaultLocaleName)
+		//	SBIEDLL_HOOK(Kernel_, GetSystemDefaultLocaleName);
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLCID);
-		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLangID);*/
+		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLangID);
 		
 
 		/*SBIEDLL_HOOK(Kernel_, GetLocaleInfoA);

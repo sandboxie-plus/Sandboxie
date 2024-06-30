@@ -112,12 +112,27 @@ _FX BOOLEAN Kernel_Init()
 			status = SbieApi_QueryConfAsIs(NULL, L"CustomChromiumFlags", 0, CustomChromiumFlags, ARRAYSIZE(CustomChromiumFlags));
 			if (NT_SUCCESS(status)) {
 
+				const WCHAR* lpCommandLine = ProcessParms->CommandLine.Buffer;
+				const WCHAR* lpArguments = SbieDll_FindArgumentEnd(lpCommandLine);
+				if (lpArguments == NULL)
+					lpArguments = wcsrchr(lpCommandLine, L'\0');
+
 				Kernel_CommandLineW.MaximumLength = ProcessParms->CommandLine.MaximumLength + (CONF_LINE_LEN + 8) * sizeof(WCHAR);
 				Kernel_CommandLineW.Buffer = LocalAlloc(LMEM_FIXED,Kernel_CommandLineW.MaximumLength);
-				wcscpy(Kernel_CommandLineW.Buffer, ProcessParms->CommandLine.Buffer);
-				if(Kernel_CommandLineW.Buffer[ProcessParms->CommandLine.Length/sizeof(WCHAR) - 1] != L' ')
+
+				// copy argument 0
+				wmemcpy(Kernel_CommandLineW.Buffer, lpCommandLine, lpArguments - lpCommandLine);
+				Kernel_CommandLineW.Buffer[lpArguments - lpCommandLine] = 0;
+				
+				// add custom arguments
+				if(Kernel_CommandLineW.Buffer[lpArguments - lpCommandLine - 1] != L' ')
 					wcscat(Kernel_CommandLineW.Buffer, L" ");
 				wcscat(Kernel_CommandLineW.Buffer, CustomChromiumFlags);
+
+				// add remaining arguments
+				wcscat(Kernel_CommandLineW.Buffer, lpArguments);
+
+
 				Kernel_CommandLineW.Length = wcslen(Kernel_CommandLineW.Buffer) * sizeof(WCHAR);
 
 				RtlUnicodeStringToAnsiString(&Kernel_CommandLineA, &Kernel_CommandLineW, TRUE);

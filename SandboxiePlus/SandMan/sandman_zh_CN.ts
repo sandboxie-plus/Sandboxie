@@ -269,7 +269,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation>阻止沙盒化窗口被捕获图像。</translation>
+        <translation>阻止捕获沙盒中程序的窗口图像。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="882"/>
@@ -462,7 +462,8 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation>正在创建新的沙盒磁盘映像。请输入强密码，并设置映像大小。</translation>
+        <translation>正在创建新的沙盒磁盘映像。
+	请输入强密码，并设置映像大小。</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
@@ -510,7 +511,7 @@ This length permits approximately 384 bits of entropy with a passphrase composed
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
         <translation>密码的最大长度限制为 128 个字符。
 如果密码由实际的英文单词组成，这个长度允许大约 384 位的熵，
-如果使用 Leet(L337) 密语，则增加到 512 位熵，如果完全由随机的可打印 ASCII 字符组成，则超过 768 位熵。</translation>
+如果使用 Leet(L337) 密语，则增加到 512 位熵，如果完全由随机的可打印 ASCII 字符组成，则允许超过 768 位熵。</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="164"/>
@@ -634,12 +635,12 @@ While the level of isolation is reduced compared to other box types, it offers i
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
         <translation>该类型的沙盒使用加密的磁盘映像作为文件根目录，为安全性与隐私性提供了额外的保障。
-当虚拟磁盘被挂载时，只有沙盒内的程序可以访问，而其他进程将会被阻止访问。这确保了在该沙盒环境中最高级别的隐私和数据保护。</translation>
+当虚拟磁盘映像被挂载时，只有沙盒内的程序可以访问它，而其他进程将会被阻止访问。这确保了在该沙盒环境中最高级别的隐私和数据保护。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="441"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>带数据保护的加固型沙盒</translation>
+        <translation>带有数据保护的加固型沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
@@ -649,7 +650,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="443"/>
         <source>Sandbox with Data Protection</source>
-        <translation>带数据保护的沙盒</translation>
+        <translation>带有数据保护的沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="444"/>
@@ -659,7 +660,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>带数据保护的应用隔间</translation>
+        <translation>带有数据保护的应用隔间</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
@@ -812,7 +813,7 @@ Please browse to the correct user profile directory.</source>
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</oldsource>
         <translation>没有发现合适的目录
-注意：你需要在不使用沙盒的情况下运行一次浏览器，以便使它们被正确创建
+注意：您需要在不使用沙盒的情况下先运行一次浏览器，以便使它们被正确创建。
 请浏览并选择正确的用户资料配置文件目录</translation>
     </message>
     <message>
@@ -1317,7 +1318,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation>提示用户是否允许豁免封锁</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
@@ -1327,7 +1328,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="756"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>撤销管理员和 Power Users 用户组的权限</translation>
+        <translation>撤销管理员和 Power Users （Windows Vista 以前 及之后的 专业版 Windows 系统） 用户组的权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
@@ -1337,7 +1338,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="767"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation>允许 MSIServer 在沙盒内使用系统令牌运行</translation>
+        <translation>允许 MSIServer 使用沙盒化的系统令牌运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
@@ -1449,7 +1450,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="76"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation>该沙盒的文件将会存储在加密的容器文件中，注意：容器头文件的任何损坏都可能导致容器内文件不可读取。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份、不宽容&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担风险则选择 [确认], 否则 [取消].</translation>
+        <translation>该沙盒的文件将会存储在加密的容器文件中，注意：容器头的任何损坏都可能导致容器内文件不可读取（这等同于损坏硬盘的引导分区）。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份、不宽容&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担风险则选择 [确认], 否则 [取消].</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="107"/>
@@ -2051,7 +2052,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1011"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation>该沙盒已被删除，因此配置无法保存</translation>
+        <translation>该沙盒已被删除，因此无法保存配置</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1075"/>
@@ -3026,7 +3027,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="677"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
-        <translation>Sandboxie Plus 应用了严格的应用程序限制，这可能会导致兼容性问题。使 Sandboxie Plus （及其兼容性模板和故障排除向导）保持在最新版本，有利于在 Windows 更新和应用程序变动时保证这些应用程序限制稳定运行。</translation>
+        <translation>Sandboxie-Plus 应用了严格的应用程序限制，这可能会导致兼容性问题。使 Sandboxie-Plus （及其兼容性模板和故障排除向导）保持在最新版本，有利于在 Windows 更新和应用程序变动时保证这些应用程序限制稳定运行。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="683"/>
@@ -3690,7 +3691,7 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1563"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
-        <translation>此类沙盒不执行隔离，它的目的是将一个应用程序虚拟化</translation>
+        <translation>此类沙盒不执行隔离，它用于将一个应用程序虚拟化</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1571"/>
@@ -3834,7 +3835,7 @@ Please check if there is an update for sandboxie.</oldsource>
     <message>
         <location filename="SandMan.cpp" line="2526"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation>您的Windows版本 %1 超过了 Sandboxie 版本的当前已知支持范围，Sandboxie 将尝试使用上一个已知的配置，这可能会导致系统不稳定。</translation>
+        <translation>您的 Windows 版本 %1 超过了 Sandboxie 版本的当前已知支持范围，Sandboxie 将尝试使用上一个已知的配置，这可能会导致系统不稳定。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2537"/>
@@ -5481,8 +5482,8 @@ Error: %1</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>此沙盒已禁用，确定启用吗？</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <translation>此沙盒已禁用或仅限于特定组/用户，确定要编辑它吗？</translation>
     </message>
 </context>
 <context>
@@ -7733,7 +7734,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="811"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
         <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
-        <translation type="unfinished">允许沙盒内窗口遮盖任务栏</translation>
+        <translation>允许沙盒内窗口遮盖任务栏</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="855"/>
@@ -7807,13 +7808,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="4718"/>
         <source>Prevent sandboxed processes from accessing system details through WMI</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI</oldsource>
-        <translation type="unfinished">防止沙盒内的进程通过 WMI 访问系统信息</translation>
+        <translation>防止沙盒内的进程通过 WMI 访问系统信息</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4759"/>
         <source>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, &apos;tasklist.exe&apos; can access a complete list of processes even if &apos;HideOtherBoxes&apos; is enabled. Enable this option to prevent such behavior.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
-        <translation type="unfinished">一些程序通过 WMI(一个Windows内置数据库) 读取系统信息，而不是通过正常方式。例如，尽管已经打开 &quot;隐藏其它沙盒&quot; ，&quot;tasklist.exe&quot; 仍然可以通过访问 WMI 获取全部进程列表。开启此选项来阻止这些行为。</translation>
+        <translation>一些程序通过 WMI(一个Windows内置数据库) 读取系统信息，而不是通过正常方式。例如，尽管已经打开 &quot;隐藏其它沙盒&quot; ，&quot;tasklist.exe&quot; 仍然可以通过访问 WMI 获取全部进程列表。开启此选项来阻止这些行为。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4777"/>

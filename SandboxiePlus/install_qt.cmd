@@ -1,6 +1,6 @@
 echo %*
-IF "%~7" == "" ( set "ghQtBuilds_hash_x64=f9029e02badd6a79d9bb092f9fb0772214dbcf8cd0122422514291d755860c37" ) ELSE ( set "ghQtBuilds_hash_x64=%~7" )
-IF "%~6" == "" ( set "ghQtBuilds_hash_x86=79755f2bf95d0ca305096fc33582cd557345a79aa63f9821002fdddefdc0fd94" ) ELSE ( set "ghQtBuilds_hash_x86=%~6" )
+IF "%~7" == "" ( set "ghQtBuilds_hash_x64=30290d82a02bfaa24c1bf37bcb9c074aba18a673a7176628fccdf71197cee898" ) ELSE ( set "ghQtBuilds_hash_x64=%~7" )
+IF "%~6" == "" ( set "ghQtBuilds_hash_x86=bf4124046cc50ccbbeb3f786c041e884fd4205cd6e616070a75c850105cbf1db" ) ELSE ( set "ghQtBuilds_hash_x86=%~6" )
 IF "%~5" == "" ( set "ghQtBuilds_repo=qt-builds" ) ELSE ( set "ghQtBuilds_repo=%~5" )
 IF "%~4" == "" ( set "ghQtBuilds_user=xanasoft" ) ELSE ( set "ghQtBuilds_user=%~4" )
 IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )

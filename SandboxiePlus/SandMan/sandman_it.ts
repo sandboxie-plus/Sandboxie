@@ -5379,8 +5379,9 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Quest&apos;area virtuale è disattivata, vuoi attivarla?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
+        <translation type="unfinished">Quest&apos;area virtuale è disattivata, vuoi attivarla?</translation>
     </message>
 </context>
 <context>

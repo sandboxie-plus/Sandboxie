@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation>當全部執行緒停止後鎖定沙箱。</translation>
+        <translation>當全部處理程序停止後鎖定沙箱。</translation>
     </message>
 </context>
 <context>
@@ -256,7 +256,7 @@
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
         <translatorcomment>&quot;應用程式擴充&quot; is the actual translation showed in Windows for TradChinese</translatorcomment>
-        <translation type="unfinished">防止主機上安裝的沙箱化程式從沙箱載入應用程式擴充 (DLL) 檔案</translation>
+        <translation>防止主機上被沙箱化的程式載入被沙箱化的應用程式擴充 (DLL) 檔案</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="875"/>
@@ -1271,83 +1271,83 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="717"/>
         <source>Sandbox Isolation options</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱隔離選項</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="718"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>在此頁面可以調整沙箱隔離選項的組態。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
         <source>Network Access</source>
-        <translation type="unfinished">區域網路存取</translation>
+        <translation>區域網路存取</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="731"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished">允許區域網路/網際網路存取</translation>
+        <translation>允許區域網路/網際網路存取</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished">透過拒絕存取區域網路裝置來阻止區域網路/網際網路</translation>
+        <translation>透過拒絕存取區域網路裝置，以阻止區域網路/網際網路存取</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="734"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished">使用 Windows 篩選平台阻止區域網路/網際網路</translation>
+        <translation>使用 Windows 篩選平台阻止區域網路/網際網路存取</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="740"/>
         <source>Allow access to network files and folders</source>
-        <translation type="unfinished">允許存取區域網路檔案和資料夾</translation>
+        <translation>允許存取區域網路檔案和資料夾</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="768"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <translation type="unfinished">不建議將此選項用於加固型沙箱</translation>
+        <translation>不推薦將此選項用於加固型沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation>提示使用者是否允許豁免封鎖</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
         <source>Admin Options</source>
-        <translation type="unfinished">管理員選項</translation>
+        <translation>管理員選項</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="756"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">廢棄來自管理員和 Power Users 使用者組的許可</translation>
+        <translation>廢棄來自管理員和 Power Users (高權限使用者) 群組的許可</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished">使應用程式認為其已在權限提升狀態下執行</translation>
+        <translation>使應用程式認為其已在權限提升狀態下運作</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="767"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished">允許 MSIServer 使用沙箱化系統權杖執行</translation>
+        <translation>允許 MSIServer 使用沙箱化系統權杖運作</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
         <source>Box Options</source>
-        <translation type="unfinished">沙箱選項</translation>
+        <translation>沙箱選項</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="778"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">使用 Sandboxie 登入程序替代匿名權杖</translation>
+        <translation>使用 Sandboxie 登入程序替代匿名權杖</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="779"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished">使用自訂 Sandboxie 權杖可以更好地將各個沙箱相互隔離，同時可以實現在工作管理員的使用者欄位中顯示處理程序所屬的沙箱。但是，某些第三方安全性解決方案可能會與自訂權杖產生相容性問題。</translation>
+        <translation>使用自訂 Sandboxie 權杖可以更好地將各個沙箱相互隔離，同時可以實現在工作管理員的使用者欄位中顯示處理程序所屬的沙箱。但是，某些第三方安全性解決方案可能會與自訂權杖產生相容性問題。</translation>
     </message>
 </context>
 <context>
@@ -2331,27 +2331,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="802"/>
         <source>Please enter a domain to be filtered</source>
-        <translation type="unfinished"></translation>
+        <translation>請輸入將要被過濾的域名</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="832"/>
         <source>Yes</source>
-        <translation type="unfinished">是</translation>
+        <translation>是</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="833"/>
         <source>No</source>
-        <translation type="unfinished">否</translation>
+        <translation>否</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="857"/>
         <source>Please enter IP and Port.</source>
-        <translation type="unfinished"></translation>
+        <translation>請輸入 IP 位址和連接埠。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1030"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation type="unfinished"></translation>
+        <translation> 輸入: IP 位址或連接埠不能為空</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1168"/>
@@ -4130,7 +4130,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Suspend All Processes</source>
-        <translation>暫停全部執行緒</translation>
+        <translation>暫停全部處理程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="515"/>
@@ -5456,8 +5456,9 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>此沙箱已停用，是否啟用？</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
+        <translation>此沙箱已停用或被限制到特定群組/使用者，是否編輯？</translation>
     </message>
 </context>
 <context>
@@ -7512,18 +7513,18 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <source>Prevent sandboxed processes from interfering with power operations</source>
         <oldsource>Prevents processes in the sandbox from interfering with power operation</oldsource>
-        <translation type="obsolete">防止沙箱中的執行緒幹擾電源作業</translation>
+        <translation type="obsolete">防止沙箱中的處理程序幹擾電源作業</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1545"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation>防止執行緒從沙箱化視窗擷取視窗之影像</translation>
+        <translation>防止處理程序從沙箱化視窗擷取視窗之影像</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1516"/>
         <source>Allow useful Windows processes access to protected processes</source>
-        <translation>允許實用 Windows 執行緒存取受保護的執行緒</translation>
+        <translation>允許實用 Windows 處理程序存取受保護的處理程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1808"/>
@@ -7563,7 +7564,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2428"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation>不停止 Windows 的延遲執行緒</translation>
+        <translation>不停止 Windows 的延遲處理程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2468"/>
@@ -7762,7 +7763,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="4231"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
-        <translation>Sandboxie 的功能可以透過使用可選 DLL 加以增強，這些 DLL 可在啟動時透過 SbieDll.dll 檔案載入到每個沙箱執行緒中，全域設定中的附加元件管理員提供了一些實用擴充套件，安裝後可以在此處對目前沙箱啟用。</translation>
+        <translation>Sandboxie 的功能可以透過使用可選 DLL 加以增強，這些 DLL 可在啟動時透過 SbieDll.dll 檔案載入到每個沙箱處理程序中，全域設定中的附加元件管理員提供了一些實用擴充套件，安裝後可以在此處對目前沙箱啟用。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1727"/>
@@ -7829,39 +7830,39 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="818"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished">此功能不會阻止所有能夠取得螢幕擷取內容的方法，僅阻止某些常見行為一次。</translation>
+        <translation>此功能不會阻止所有能夠取得螢幕擷取內容的方法，僅阻止某些常見行為。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="801"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished">防止移動滑鼠、移動視窗至前景、以及類似的作業，這可能對遊戲造成問題。</translation>
+        <translation>防止移動滑鼠、移動視窗至前景、以及類似的作業，這可能對遊戲造成問題。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="811"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
         <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>允許沙箱化視窗覆蓋工作列</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="855"/>
         <source>Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>隔離</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1569"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>僅管理員使用者帳戶可以對此沙箱進行變更</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1577"/>
         <source>Job Object</source>
-        <translation type="unfinished"></translation>
+        <translation>工作物件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2165"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;安全性建議&lt;/font&gt;:&lt;/b&gt; 使用 &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; 和/或 &lt;a href=&quot; sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; 與 Open[File/Pipe]Path 指令結合使用可能會損害安全性。使用前請檢查說明文件中每個選項的安全性章節。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2238"/>
@@ -7887,13 +7888,13 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="2574"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>此設定可用於防止程式在使用者不知情或未經使用者同意的情況下在沙箱中運作。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2577"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>在從外部來源的沙箱中開始執行處理程序前，顯示一則跳出式警告</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2596"/>
@@ -8103,17 +8104,17 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="794"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation>防止沙箱化執行緒干預電源作業 (試驗性)</translation>
+        <translation>防止沙箱化處理程序干預電源作業 (實驗性)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="804"/>
         <source>Prevent interference with the user interface (Experimental)</source>
-        <translation>防止干預使用者介面 (試驗性)</translation>
+        <translation>防止干預使用者介面 (實驗性)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="821"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation>防止沙箱化執行緒擷取視窗影像 (試驗性，可能造成 UI 故障)</translation>
+        <translation>防止沙箱化處理程序擷取視窗影像 (實驗性，可能造成 UI 故障)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1864"/>
@@ -8138,62 +8139,62 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3523"/>
         <source>DNS Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS 過濾器</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3540"/>
         <source>Add Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>新增過濾器</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3560"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 DNS 過濾器，可以按處理程序阻止各個網域。將 IP 位址列留空以將其阻止，或輸入 IP 位址以進行重新導向。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3586"/>
         <source>Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>域名</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3602"/>
         <source>Internet Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>網際網路 Proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3663"/>
         <source>Add Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>新增 Proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3636"/>
         <source>Test Proxy</source>
-        <translation type="unfinished">測試代理</translation>
+        <translation>測試 Proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3689"/>
         <source>Auth</source>
-        <translation type="unfinished"></translation>
+        <translation>憑據</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3694"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>登入</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3699"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>密碼</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3619"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
+        <translation>可以強制沙箱化程式使用預定義的 SOCKS5 Proxy。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3629"/>
         <source>Resolve hostnames via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>透過 Proxy 解析主機名稱</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3752"/>
@@ -8485,7 +8486,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>This command runs after all processes in the sandbox have finished.</source>
-        <translation type="vanished">此命令在沙箱中所有執行緒完成後執行。</translation>
+        <translation type="vanished">此命令在沙箱中所有處理程序完成後執行。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4522"/>
@@ -8545,12 +8546,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4072"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
-        <translation>當呼叫「終止所有執行緒」時，排除此沙箱。</translation>
+        <translation>當呼叫「終止所有處理程序」時，排除此沙箱。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4519"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation>這些指令將在沙箱內全部執行緒完成後以「未沙箱化」狀態執行。</translation>
+        <translation>這些指令將在沙箱內全部處理程序完成後以「未沙箱化」狀態執行。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4589"/>
@@ -8809,50 +8810,50 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1711"/>
         <source>Limit restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>上限限制</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1629"/>
         <location filename="Forms/OptionsWindow.ui" line="1636"/>
         <source>Leave it blank to disable the setting(Unit:KB)</source>
-        <translation type="unfinished"></translation>
+        <translation>留空以停用設定 (單位: KB)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1643"/>
         <source>Leave it blank to disable the setting</source>
-        <translation type="unfinished"></translation>
+        <translation>留空以停用設定</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1585"/>
         <source>Total Processes Number Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>總計處理程序數量限制:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1615"/>
         <source>Total Processes Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>總計處理程序記憶體限制:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1622"/>
         <source>Single Process Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>單一處理程序記憶體限制:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4711"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>不允許沙箱化處理程序發現在任何沙箱外執行的處理程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4718"/>
         <source>Prevent sandboxed processes from accessing system details through WMI</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>阻止沙箱化處理程序透過 WMI 存取系統詳細資訊</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4759"/>
         <source>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, &apos;tasklist.exe&apos; can access a complete list of processes even if &apos;HideOtherBoxes&apos; is enabled. Enable this option to prevent such behavior.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>某些程式透過 WMI (Windows 管理規範)，一個內建的 Windows 資料庫，檢索作業系統詳細資訊，而不是使用通常方法。例如，即使啟用了「HideOtherBoxes」(隱藏其他沙箱)，「tasklist.exe」也可以存取完整的處理程序清單。啟用此選項可以防止此類行為。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4962"/>
@@ -9025,7 +9026,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>強制直接的子處理程序被沙箱化，但不包括非直接的由 DCOM 和 IPC 介面開啟的子處理程序。</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
@@ -9040,7 +9041,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>強制子處理程序</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="56"/>
@@ -9311,13 +9312,13 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="212"/>
         <source>Hotkey for suspending process/folder forcing:</source>
-        <translation>用於暫停 強制執行緒/資料夾 的快速鍵:</translation>
+        <translation>用於暫停 強制處理程序/資料夾 的快速鍵:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished">用於暫停全部執行緒的快速鍵</translation>
+        <translation>用於暫停全部處理程序的快速鍵:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
@@ -9892,7 +9893,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2165"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>將「Sandboxie\All Sandboxes (全部沙箱)」群組新增至沙箱化權杖 (實驗性)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2368"/>

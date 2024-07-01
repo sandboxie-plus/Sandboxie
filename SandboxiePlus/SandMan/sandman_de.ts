@@ -1124,7 +1124,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation>Den Nutzer fragen, ob er eine Ausnahme von dieser Blockade erlauben will</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
@@ -4966,8 +4966,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Diese Sandbox ist deaktiviert. Möchten Sie diese aktivieren?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <translation>Diese Sandbox ist deaktiviert oder auf andere Gruppen/Benutzer beschränkt. Möchten Sie die Sandbox bearbeiten?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="549"/>
@@ -7318,33 +7318,33 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1711"/>
         <source>Limit restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit-Beschränkungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1629"/>
         <location filename="Forms/OptionsWindow.ui" line="1636"/>
         <source>Leave it blank to disable the setting(Unit:KB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Leer lassen, um die Einstellung zu deaktivieren (Einheit: KB)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1643"/>
         <source>Leave it blank to disable the setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Leer lassen, um die Einstellung zu deaktivieren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1585"/>
         <source>Total Processes Number Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit Gesamtzahl an Prozessen:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1615"/>
         <source>Total Processes Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicherlimit aller Prozesse zusammen:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1622"/>
         <source>Single Process Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicherlimit einzelner Prozess:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4522"/>
@@ -7354,19 +7354,17 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4711"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht erlauben, dass sandgeboxte Prozesse die Prozesse außerhalb der Boxen sehen können</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4718"/>
         <source>Prevent sandboxed processes from accessing system details through WMI</source>
-        <oldsource>Prevent sandboxed processes from accessing system deatils through WMI</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Hindere sandgeboxte Prozesse daran, über WMI auf Systemdetails zuzugreifen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4759"/>
         <source>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, &apos;tasklist.exe&apos; can access a complete list of processes even if &apos;HideOtherBoxes&apos; is enabled. Enable this option to prevent such behavior.</source>
-        <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Einige Programme rufen Systemdetails über WMI (Windows Management Instrumentation), eine integrierte Windows-Datenbank, ab, anstatt herkömmliche Methoden zu verwenden. Zum Beispiel kann &apos;tasklist.exe&apos; auf eine komplette Liste von Prozessen zugreifen, auch wenn &apos;HideOtherBoxes&apos; aktiviert ist. Aktivieren Sie diese Option, um ein solches Verhalten zu verhindern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4860"/>
@@ -7645,8 +7643,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="811"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
-        <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube sandgeboxten Fenstern die Taskleiste zu verdecken</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="855"/>
@@ -7661,7 +7658,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1577"/>
         <source>Job Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Job-Objekt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2135"/>
@@ -7848,7 +7845,7 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1650"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
-        <translation>Erlaube Verwendung von verschachtelten Jobobjekten (funktioniert ab Windows 8 und neuer)</translation>
+        <translation>Erlaube Verwendung von verschachtelten Job-Objekten (funktioniert ab Windows 8 und neuer)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="887"/>

@@ -5402,8 +5402,9 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Ця пісочниця вимкнена, ви хочете її увімкнути?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
+        <translation type="unfinished">Ця пісочниця вимкнена, ви хочете її увімкнути?</translation>
     </message>
 </context>
 <context>

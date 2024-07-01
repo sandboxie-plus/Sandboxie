@@ -1402,30 +1402,34 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     } else if (IS_ARG_CURRENT_PROCESS(TargetProcessHandle)) {
 
+        //
+        // we duplicate the handle into kernel space such that that user 
+        // won't be able to grab it while we are evaluaiting it
+        //
+
         HANDLE SourceProcessKernelHandle;
         status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
         if (NT_SUCCESS(status)) {
 
             HANDLE TargetProcessKernelHandle = ZwCurrentProcess(); // TargetProcessHandle == NtCurrentProcess();
             
-            HANDLE SourceKernelHandle;
-            status = Thread_GetKernelHandleForUserHandle(&SourceKernelHandle, SourceHandle);
+            //
+            // driver verifier wants us to provide a kernel handle as process handles
+            // but the source handle must be a user handle and the ZwDuplicateObject
+            // function creates another user handle hence NtClose
+            //
+
+            status = ZwDuplicateObject(
+                SourceProcessKernelHandle, SourceHandle,
+                TargetProcessKernelHandle, &DuplicatedHandle,
+                DesiredAccess, HandleAttributes,
+                Options & ~DUPLICATE_CLOSE_SOURCE);
+
             if (NT_SUCCESS(status)) {
 
-                status = ZwDuplicateObject(
-                    SourceProcessKernelHandle, SourceHandle,
-                    TargetProcessKernelHandle, &DuplicatedHandle,
-                    DesiredAccess, HandleAttributes,
-                    Options & ~DUPLICATE_CLOSE_SOURCE);
+                status = Ipc_CheckObjectName(DuplicatedHandle, UserMode);
 
-                if (NT_SUCCESS(status)) {
-
-                    status = Ipc_CheckObjectName(DuplicatedHandle, UserMode);
-
-                    NtClose(DuplicatedHandle);
-                }
-
-                ZwClose(SourceKernelHandle);
+                NtClose(DuplicatedHandle);
             }
 
             ZwClose(SourceProcessKernelHandle);
@@ -1440,40 +1444,30 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status)) {
 
-        HANDLE SourceProcessKernelHandle = ZwCurrentProcess();
+        HANDLE SourceProcessKernelHandle = (HANDLE)-1;
+        HANDLE TargetProcessKernelHandle = (HANDLE)-1;
+
         if (!IS_ARG_CURRENT_PROCESS(SourceProcessHandle)) 
             status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
         if (NT_SUCCESS(status)) {
 
-            HANDLE TargetProcessKernelHandle = ZwCurrentProcess();
             if (!IS_ARG_CURRENT_PROCESS(TargetProcessHandle))
                 status = Thread_GetKernelHandleForUserHandle(&TargetProcessKernelHandle, TargetProcessHandle);
             if (NT_SUCCESS(status)) {
 
-                HANDLE SourceKernelHandle;
-                status = Thread_GetKernelHandleForUserHandle(&SourceKernelHandle, SourceHandle);
-                if (NT_SUCCESS(status)) {
+                status = ZwDuplicateObject(
+                    SourceProcessKernelHandle, SourceHandle,
+                    TargetProcessKernelHandle, &DuplicatedHandle,
+                    DesiredAccess, HandleAttributes, Options);
 
-                    status = ZwDuplicateObject(
-                        SourceProcessKernelHandle, SourceKernelHandle,
-                        TargetProcessKernelHandle, &DuplicatedHandle,
-                        DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
-
-                    if (Options & DUPLICATE_CLOSE_SOURCE)
-                        NtClose(SourceHandle);
-
-                    *TargetHandle = DuplicatedHandle;
-
-                    ZwClose(SourceKernelHandle);
-                }
-
-                if (!IS_ARG_CURRENT_PROCESS(TargetProcessKernelHandle))
-                    ZwClose(TargetProcessKernelHandle);
+                *TargetHandle = DuplicatedHandle;
             }
-
-            if (!IS_ARG_CURRENT_PROCESS(SourceProcessKernelHandle))
-                ZwClose(SourceProcessKernelHandle);
         }
+
+        if (SourceProcessKernelHandle && !IS_ARG_CURRENT_PROCESS(SourceProcessKernelHandle))
+            ZwClose(SourceProcessKernelHandle);
+        if (TargetProcessKernelHandle && !IS_ARG_CURRENT_PROCESS(TargetProcessKernelHandle))
+            ZwClose(TargetProcessKernelHandle);
     }
 
     //

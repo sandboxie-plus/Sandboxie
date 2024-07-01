@@ -5653,8 +5653,9 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Ta piaskownica jest wyłączona, czy chcesz ją teraz włączyć?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
+        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
+        <translation type="unfinished">Ta piaskownica jest wyłączona, czy chcesz ją teraz włączyć?</translation>
     </message>
 </context>
 <context>

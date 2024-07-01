@@ -1645,10 +1645,10 @@ void CSandMan::OnMessage(const QString& MsgData)
 		{
 			if (theAPI->GetBoxByName(respone) != NULL) {
 				if (Message.right(1)=="\\"||!Message.contains(".", Qt::CaseInsensitive)) {
-					theAPI->GetBoxByName(respone)->AppendText("ForceFolder", Message.mid(4));
+					theAPI->GetBoxByName(respone)->AppendText("ForceFolder", Message.mid(4).replace("\"",""));
 				}
 				else {
-					theAPI->GetBoxByName(respone)->AppendText("ForceProcess", Message.mid(4));
+					theAPI->GetBoxByName(respone)->AppendText("ForceProcess", Message.mid(4).replace("\"", "").mid(Message.lastIndexOf("/")));
 
 				}
 			}

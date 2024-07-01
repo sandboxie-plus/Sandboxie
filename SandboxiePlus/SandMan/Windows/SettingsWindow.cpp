@@ -331,7 +331,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkShellMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkAlwaysDefault, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu2, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
-	
+	connect(ui.chkShellMenu3, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
 	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateDesk, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
@@ -891,6 +892,7 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkShellMenu->setCheckState(IsContextMenu());
 	ui.chkShellMenu2->setChecked(CSbieUtils::HasContextMenu2());
+	ui.chkShellMenu3->setChecked(CSbieUtils::HasContextMenu3());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
 
 	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
@@ -1598,7 +1600,15 @@ void CSettingsWindow::SaveSettings()
 		} else
 			CSbieUtils::RemoveContextMenu2();
 	}
-
+	if (ui.chkShellMenu3->isChecked() != CSbieUtils::HasContextMenu3()) {
+		if (ui.chkShellMenu3->isChecked()) {
+			CSbieUtils::AddContextMenu3(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
+				tr("Make Folder/File &Forced"),
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+		}
+		else
+			CSbieUtils::RemoveContextMenu3();
+	}
 	theConf->SetValue("Options/RunInDefaultBox", ui.chkAlwaysDefault->isChecked());
 
 	theConf->SetValue("Options/CheckSilentMode", ui.chkSilentMode->isChecked());

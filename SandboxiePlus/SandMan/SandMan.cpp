@@ -1636,6 +1636,25 @@ void CSandMan::OnMessage(const QString& MsgData)
 		setWindowState(Qt::WindowActive);
 		SetForegroundWindow(MainWndHandle);
 	}
+	else if (Message.left(4) == "Add:")
+	{
+
+
+		QString respone = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
+		if(!respone.isEmpty())
+		{
+			if (theAPI->GetBoxByName(respone) != NULL) {
+				if (Message.right(1)=="\\"||!Message.contains(".", Qt::CaseInsensitive)) {
+					theAPI->GetBoxByName(respone)->AppendText("ForceFolder", Message.mid(4));
+				}
+				else {
+					theAPI->GetBoxByName(respone)->AppendText("ForceProcess", Message.mid(4));
+
+				}
+			}
+		}
+
+	}
 	else if (Message.left(4) == "Run:")
 	{
 		QString BoxName;

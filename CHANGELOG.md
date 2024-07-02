@@ -22,33 +22,33 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
   - usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
-  - Note: use /passwd without the password to have SbieIni prompot for the password on the console, this hides the password from view and from bing captured with the command line
+  - Note: use /passwd without the password to have SbieIni prompt for the password on the console, this hides the password from view and from being captured with the command line
 - added checkbox for "PromptForInternetAccess" option to the New Box Wizard
 - added option "HideNonSystemProcesses" to hide processes not in a sandbox from processes lists for sandboxed processes
 - added option "HideSbieProcesses" to hide Sandboxie Work Process (SbieSvc, SandboxieRpcSs, etc.)
 - added option "HideFirmwareInfo"
-  - when it is set, the programs that try getting fireware information will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
+  - when it is set, the programs that try getting firmware information will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
 - added template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI
-- added template "BlockLocalConnect" to prevent sandboxed processes from sending network packs to localhost to breakout sandbox
+- added template "BlockLocalConnect" to prevent sandboxed processes from sending network packets to localhost to breakout sandbox
 - added new option "AllowCoverTaskbar" for [#3975](https://github.com/sandboxie-plus/Sandboxie/issues/3975)
 - added RPC Port message filter mechanism to block unsafe RDP calls via the driver [#3930](https://github.com/sandboxie-plus/Sandboxie/issues/3930)
   - usage: "RpcPortFilter=Port,ID,Label" label is optional
-- added "Job Object" options page to colelct all job object related options
+- added "Job Object" options page to collect all job object related options
 
 ### Changed
-- Extend "Temp Template" to make it could delete local template section
+- extend "Temp Template" to make it could delete local template section
 
 ### Fixed
 - fixed security issue with the newly introduced experimental "UseCreateToken=y" mechanism
 - fixed issue with "UseCreateToken=y" when using a MSFT online account
 - fixed Export sandbox not containing hidden files [#3980](https://github.com/sandboxie-plus/Sandboxie/issues/3980) (thanks L4cache)
 - fixed Chrome stopped printing [#3926](https://github.com/sandboxie-plus/Sandboxie/issues/3926)
-  - Sandboxie will add CustomChromiumFlags=--disable-features=PrintCompositorLPAC to chrome based browsers command line
-  - Note: Less Privileged App Container (LPAC) don't work with sandboxie currently
+  - Sandboxie will add CustomChromiumFlags=--disable-features=PrintCompositorLPAC to Chrome-based browsers command line
+  - Note: Less Privileged App Container (LPAC) don't work with Sandboxie currently
 - fixed Problem accessing a relative symlink with a target that starts with a dot [#3981](https://github.com/sandboxie-plus/Sandboxie/issues/3981)
 - fixed Can't open a sandbox's properties window via double-click in System Tray context window [#3861](https://github.com/sandboxie-plus/Sandboxie/issues/3861)
 - fixed Delay in launching forced programs after version 1.12.9 [#3868](https://github.com/sandboxie-plus/Sandboxie/issues/3868)
-  - this issue was introdiced in 1.13.0 and may have broadly affected other usecases and cause variosue problems
+  - this issue was introduced in 1.13.0 and may have broadly affected other use cases and cause various problems
 - fixed issue with Misc Options list
 - improved compatibility with steam running sandboxed
 
@@ -59,7 +59,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added "Sandboxie\All Sandboxes" SID into token with SandboxieLogon [#3191](https://github.com/sandboxie-plus/Sandboxie/issues/3191)
   - to use this feature "SandboxieAllGroup=y" must be enabled
-  - Note: this fundamentaly changes the mechanism Sbie uses for token creation, the new mechanism can be enabled separately with "UseCreateToken=y"
+  - Note: this fundamentally changes the mechanism Sbie uses for token creation, the new mechanism can be enabled separately with "UseCreateToken=y"
 - added "EditAdminOnly=y" can now be configured per box
 - added UI for CoverBoxedWindows in NewBoxWizard
 - added UI option to start unsandboxed process but force child processes in SelectBoxWindow
@@ -84,21 +84,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.0 / 5.69.0] - 2024-05-17
 
 ### Added
-- added option to limit the memory of sandboxed process and the number of process in single sandbox through job object (thanks Yeyixiao)
+- added option to limit the memory of sandboxed processes and the number of processes in single sandbox through job object (thanks Yeyixiao)
   - use "TotalMemoryLimit" (Number, limit whole sandbox, Byte) and "ProcessMemoryLimit" (Number, limit single process, Byte) to set memory limit
   - use "ProcessNumberLimit" (Number) to set process number limit
 - added ability to modified sandboxed process logic speed (reduced fixed latency, modified single-player speed, etc.) (thanks Yeyixiao)
   - use "UseChangeSpeed=y" to open this feature, use "AddTickSpeed" / "AddSleepSpeed" / "AddTimerSpeed" / "LowTickSpeed" / "LowSleepSpeed" / "LowTimerSpeed" (Number) to set
   - when set to "AddSleepSpeed=0", all sleep function calls will be skipped
-- added /fcp /force_children commandline option to start.exe it allows to start a program unsandboxed but have all its children sandboxed
-- added ability to fore sandboxed processes to use a pre defined socks 5 proxy
+- added /fcp /force_children command line option to start.exe it allows to start a program unsandboxed but have all its children sandboxed
+- added ability to force sandboxed processes to use a pre-defined SOCKS5 proxy
 - added ability to intercept DNS queries so that they can be logged and/or redirected
 - added support for SOCKS5 proxy authentication based on RFC1928 (thanks Deezzir)
 - added Test Dialog UI for SOCKS5 proxy (thanks Deezzir)
-- added ability to automatically removes template references that begin with “Template_Temp_” in the sandbox
+- added ability to automatically removes template references that begin with "Template_Temp_" in the sandbox
 
 ### Changed
-- validated compatibility with windows build 26217 and updated dyn data
+- validated compatibility with Windows build 26217 and updated DynData
 
 ### Fixed
 - fixed an issue with an early batch of Large Supporter certificates

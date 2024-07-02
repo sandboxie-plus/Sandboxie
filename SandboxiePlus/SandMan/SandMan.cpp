@@ -2999,6 +2999,9 @@ void CSandMan::SaveMessageLog(QIODevice* pFile)
 bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 {
 	QString Message;
+	g_CertInfo.active = true;
+	g_CertInfo.level = eCertContributor;
+	return true;
 	if (iType == 1 || iType == 2)
 	{
 		if (CERT_IS_LEVEL(g_CertInfo, iType == 1 ? eCertAdvanced1 : eCertAdvanced))
@@ -3085,7 +3088,8 @@ void InitCertSlot();
 void CSandMan::UpdateCertState()
 {
 	theAPI->GetDriverInfo(-1, &g_CertInfo.State, sizeof(g_CertInfo.State));
-
+	g_CertInfo.active = true;
+	g_CertInfo.level = eCertContributor;
 #ifdef _DEBUG
 	qDebug() << "g_CertInfo" << g_CertInfo.State;
 	qDebug() << "g_CertInfo.active" << g_CertInfo.active;

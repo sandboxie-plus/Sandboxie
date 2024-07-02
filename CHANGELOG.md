@@ -37,6 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow.
 - added a optional context menu option to make folder/file forced quickly.
   - You can also use "Sandman.exe /add_force program_path" to do it.
+- added option "Improve3DGameRate" to enchance 3D games' FPS.
 
 
 ### Changed

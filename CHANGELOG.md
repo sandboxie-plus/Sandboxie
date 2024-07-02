@@ -35,6 +35,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Usage: "RpcPortFilter=Port,ID,Label" label is optional
 - added "Job Object" Options page to colelct all job object related options
 - added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow.
+- added a optional context menu option to make folder/file forced quickly.
+  - You can also use "Sandman.exe /add_force program_path" to do it.
 
 
 ### Changed

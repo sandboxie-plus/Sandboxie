@@ -331,7 +331,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkShellMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkAlwaysDefault, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu2, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
-	
+	connect(ui.chkShellMenu3, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
 	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateDesk, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
@@ -426,6 +427,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkSbieLogon, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkSbieAll, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkImproveGame, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	m_GeneralChanged = false;
 
 	connect(ui.chkWatchConfig, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged())); // not sbie ini
@@ -891,6 +893,7 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkShellMenu->setCheckState(IsContextMenu());
 	ui.chkShellMenu2->setChecked(CSbieUtils::HasContextMenu2());
+	ui.chkShellMenu3->setChecked(CSbieUtils::HasContextMenu3());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
 
 	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
@@ -1009,6 +1012,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", true));
 		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
 		ui.chkSbieAll->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieAllGroup", false));
+		ui.chkImproveGame->setChecked(theAPI->GetGlobalSettings()->GetBool("Improve3DGameRate", false));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkAdminOnly->setEnabled(IsAdminUser());
@@ -1061,6 +1065,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkWin32k->setEnabled(false);
 		ui.chkSbieLogon->setEnabled(false);
 		ui.chkSbieAll->setEnabled(false);
+		ui.chkImproveGame->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkRamDisk->setEnabled(false);
@@ -1598,7 +1603,15 @@ void CSettingsWindow::SaveSettings()
 		} else
 			CSbieUtils::RemoveContextMenu2();
 	}
-
+	if (ui.chkShellMenu3->isChecked() != CSbieUtils::HasContextMenu3()) {
+		if (ui.chkShellMenu3->isChecked()) {
+			CSbieUtils::AddContextMenu3(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
+				tr("Make Folder/File &Forced"),
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+		}
+		else
+			CSbieUtils::RemoveContextMenu3();
+	}
 	theConf->SetValue("Options/RunInDefaultBox", ui.chkAlwaysDefault->isChecked());
 
 	theConf->SetValue("Options/CheckSilentMode", ui.chkSilentMode->isChecked());
@@ -1703,6 +1716,7 @@ void CSettingsWindow::SaveSettings()
 				WriteAdvancedCheck(ui.chkWin32k, "EnableWin32kHooks", "", "n");
 				WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
 				WriteAdvancedCheck(ui.chkSbieAll, "SandboxieAllGroup", "y", "");
+				WriteAdvancedCheck(ui.chkImproveGame, "Improve3DGameRate", "y", "");
 
 				if (m_FeaturesChanged) {
 					m_FeaturesChanged = false;

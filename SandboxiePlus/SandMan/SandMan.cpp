@@ -3000,7 +3000,8 @@ bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 {
 	QString Message;
 	g_CertInfo.active = true;
-	g_CertInfo.level = eCertContributor;
+	g_CertInfo.type = eCertContributor;
+	g_CertInfo.level = eCertMaxLevel;
 	return true;
 	if (iType == 1 || iType == 2)
 	{
@@ -3089,7 +3090,8 @@ void CSandMan::UpdateCertState()
 {
 	theAPI->GetDriverInfo(-1, &g_CertInfo.State, sizeof(g_CertInfo.State));
 	g_CertInfo.active = true;
-	g_CertInfo.level = eCertContributor;
+	g_CertInfo.level = eCertMaxLevel;
+	g_CertInfo.type = eCertContributor;
 #ifdef _DEBUG
 	qDebug() << "g_CertInfo" << g_CertInfo.State;
 	qDebug() << "g_CertInfo.active" << g_CertInfo.active;

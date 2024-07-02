@@ -1648,7 +1648,7 @@ void CSandMan::OnMessage(const QString& MsgData)
 					theAPI->GetBoxByName(respone)->AppendText("ForceFolder", Message.mid(4).replace("\"",""));
 				}
 				else {
-					theAPI->GetBoxByName(respone)->AppendText("ForceProcess", Message.mid(4).replace("\"", "").mid(Message.lastIndexOf("/")));
+					theAPI->GetBoxByName(respone)->AppendText("ForceProcess", Message.mid(4).replace("\"", "").mid(Message.lastIndexOf("\\")));
 
 				}
 			}

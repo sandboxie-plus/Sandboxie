@@ -490,8 +490,8 @@ void CSbieUtils::RemoveContextMenu2()
 bool CSbieUtils::HasContextMenu3()
 {
 	const wchar_t* key = L"Software\\Classes\\*\\shell\\addforce\\command";
-	const wchar_t* key2 = L"Software\\Classes\\*\\folder\\addforce\\command";
-	HKEY hkey;
+	//const wchar_t* key2 = L"Software\\Classes\\*\\Folder\\addforce\\command";
+	HKEY hkey,hKey2;
 	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
 	if (rc != 0)
 		return false;
@@ -499,11 +499,11 @@ bool CSbieUtils::HasContextMenu3()
 	RegCloseKey(hkey);
 
 
-	rc = RegOpenKeyEx(HKEY_CURRENT_USER, key2, 0, KEY_READ, &hkey);
+	/*rc = RegOpenKeyEx(HKEY_CURRENT_USER, key2, 0, KEY_READ, &hkey2);
 	if (rc != 0)
 		return false;
 
-	RegCloseKey(hkey);
+	RegCloseKey(hkey2);*/
 
 	return true;
 }

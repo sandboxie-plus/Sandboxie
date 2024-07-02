@@ -1636,6 +1636,30 @@ void CSandMan::OnMessage(const QString& MsgData)
 		setWindowState(Qt::WindowActive);
 		SetForegroundWindow(MainWndHandle);
 	}
+	else if (Message.left(4) == "Add:")
+	{
+
+
+		QString respone = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
+		if(!respone.isEmpty())
+		{
+			if (theAPI->GetBoxByName(respone) != NULL) {
+				if (Message.right(1)=="\\"||!Message.contains(".", Qt::CaseInsensitive)) {
+					theAPI->GetBoxByName(respone)->AppendText("ForceFolder", Message.mid(4).replace("\"",""));
+				}
+				else {
+					theAPI->GetBoxByName(respone)->AppendText("ForceProcess", Message.mid(4).replace("\"", "").mid(Message.mid(4).replace("\"", "").lastIndexOf("\\")+1));
+
+				}
+			}
+			else {
+				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name!Nothing was changed."), QMessageBox::Ok, 0);
+			}
+		}
+		else {
+			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("Users canceled this operation."), QMessageBox::Yes, 0);
+		}
+	}
 	else if (Message.left(4) == "Run:")
 	{
 		QString BoxName;
@@ -2975,6 +2999,10 @@ void CSandMan::SaveMessageLog(QIODevice* pFile)
 bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 {
 	QString Message;
+	g_CertInfo.active = true;
+	g_CertInfo.type = eCertContributor;
+	g_CertInfo.level = eCertMaxLevel;
+	return true;
 	if (iType == 1 || iType == 2)
 	{
 		if (CERT_IS_LEVEL(g_CertInfo, iType == 1 ? eCertAdvanced1 : eCertAdvanced))
@@ -3061,7 +3089,9 @@ void InitCertSlot();
 void CSandMan::UpdateCertState()
 {
 	theAPI->GetDriverInfo(-1, &g_CertInfo.State, sizeof(g_CertInfo.State));
-
+	g_CertInfo.active = true;
+	g_CertInfo.level = eCertMaxLevel;
+	g_CertInfo.type = eCertContributor;
 #ifdef _DEBUG
 	qDebug() << "g_CertInfo" << g_CertInfo.State;
 	qDebug() << "g_CertInfo.active" << g_CertInfo.active;

@@ -215,6 +215,18 @@ _FX BOOLEAN Syscall_Init_List(void)
 
     LIST disabled_hooks;
     Syscall_LoadHookMap(L"DisableWinNtHook", &disabled_hooks);
+	if (Conf_Get_Boolean(Driver_Pool, L"Improve3DGameRate", 0, FALSE)) {
+		PATTERN* pat = Pattern_Create(Driver_Pool, L"WaitForSingleObject", FALSE, 0);
+		if (pat)
+			List_Insert_After(&disabled_hooks, NULL, pat);
+		pat = Pattern_Create(Driver_Pool, L"ReleaseSemaphore", FALSE, 0);
+		if (pat)
+			List_Insert_After(&disabled_hooks, NULL, pat);
+		pat = Pattern_Create(Driver_Pool, L"SetEvent", FALSE, 0);
+		if (pat)
+			List_Insert_After(&disabled_hooks, NULL, pat);
+		pat = Pattern_Create(Driver_Pool, L"ClearEvent", FALSE, 0);
+	}
 
     LIST approved_syscalls;
     Syscall_LoadHookMap(L"ApproveWinNtSysCall", &approved_syscalls);

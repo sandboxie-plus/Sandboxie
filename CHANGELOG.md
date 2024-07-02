@@ -43,7 +43,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with "UseCreateToken=y" when using a MSFT online account
 - fixed Export sandbox not containing hidden files [#3980](https://github.com/sandboxie-plus/Sandboxie/issues/3980) (thanks L4cache)
 - fixed Chrome stopped printing [#3926](https://github.com/sandboxie-plus/Sandboxie/issues/3926)
-  - Sandboxie will add CustomChromiumFlags=--disable-features=PrintCompositorLPAC to Chrome-based browsers command line
+  - Sandboxie will add CustomChromiumFlags=--disable-features=PrintCompositorLPAC to Chromium-based browsers command line
   - Note: Less Privileged App Container (LPAC) don't work with Sandboxie currently
 - fixed Problem accessing a relative symlink with a target that starts with a dot [#3981](https://github.com/sandboxie-plus/Sandboxie/issues/3981)
 - fixed Can't open a sandbox's properties window via double-click in System Tray context window [#3861](https://github.com/sandboxie-plus/Sandboxie/issues/3861)

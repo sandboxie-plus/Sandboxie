@@ -52,7 +52,7 @@ Name: "RefreshBuild"; Description: "{cm:RefreshBuild}"; MinVersion: 0.0,5.0; Che
 [Files]
 ; Both portable and install.
 Source: ".\Release\{#MyAppSrc}\*"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: recursesubdirs ignoreversion; Excludes: "*.pdb"
-; include the driver pdb
+; Include the .pdb files.
 Source: ".\Release\{#MyAppSrc}\SbieDrv.pdb"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: ignoreversion
 Source: ".\Release\{#MyAppSrc}\SbieDll.pdb"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: ignoreversion
 
@@ -79,11 +79,15 @@ Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; Strin
 
 
 [InstallDelete]
-; Remove deprecated files at install time.
+; Delete obsolete files as the first step of installation.
 Type: filesandordirs; Name: "{app}\translations"
 Type: files; Name: "{app}\SbieDrv.sys.w10"
 Type: files; Name: "{app}\SbieDrv.sys.rc4"
 Type: files; Name: "{app}\SbieIni.exe.sig"
+Type: files; Name: "{app}\libcrypto-1_1-x64.dll"
+Type: files; Name: "{app}\libssl-1_1-x64.dll"
+; Delete existing .pdb files before installing new ones.
+Type: files; Name: "{app}\*.pdb"
 
 
 [Registry]
@@ -463,7 +467,7 @@ begin
   end;
 
   begin
-  
+
     // Return the path to use for the value of IniPath.
     if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Services\SbieDrv', 'IniPath', IniPath) then
     begin
@@ -667,7 +671,7 @@ begin
     exit;
   end;
 
-  // remove shell integration.
+  // Remove shell integration.
   ShellUninstall();
 
 end;

@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [1.14.4 / 5.69.4] - 2024-07-??
+
+
+### Fixed
+- fixed  The Start Restrictions tab's layout is broken [#4045](https://github.com/sandboxie-plus/Sandboxie/issues/4045)
+
+
+
+
 ## [1.14.3 / 5.69.3] - 2024-07-01
 
 ### Changed

@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.14.4 / 5.69.4] - 2024-07-??
 
+### Changed
+- improved removal of leftovers [#4050](https://github.com/sandboxie-plus/Sandboxie/pull/4050)
 
 ### Fixed
 - fixed  The Start Restrictions tab's layout is broken [#4045](https://github.com/sandboxie-plus/Sandboxie/issues/4045)

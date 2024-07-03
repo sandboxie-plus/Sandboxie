@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
+    <width>674</width>
     <height>475</height>
    </rect>
   </property>
@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>5</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -1597,6 +1597,7 @@
                 <widget class="QLabel" name="lblJob">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1700,6 +1701,7 @@
                 <widget class="QLabel" name="lblLimit">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1719,6 +1721,7 @@
            <widget class="QWidget" name="tabPrivileges">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -1770,6 +1773,7 @@
                 <widget class="QLabel" name="label_65">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1783,6 +1787,7 @@
                 <widget class="QLabel" name="lblPrivilege">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1840,6 +1845,7 @@
                 <widget class="QLabel" name="label_64">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1853,6 +1859,7 @@
                 <widget class="QLabel" name="lblToken">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2467,119 +2474,113 @@
         <attribute name="title">
          <string>Start Restrictions</string>
         </attribute>
-        <widget class="QWidget" name="layoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>9</x>
-           <y>9</y>
-           <width>751</width>
-           <height>493</height>
-          </rect>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_19">
-          <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout_23">
-            <property name="verticalSpacing">
-             <number>0</number>
-            </property>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>* Note: Programs installed to this sandbox won't be able to start at all.</string>
-              </property>
-              <property name="wordWrap">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QRadioButton" name="radStartAll">
-              <property name="text">
-               <string>Allow all programs to start in this sandbox.</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QRadioButton" name="radStartSelected">
-              <property name="text">
-               <string>Allow only selected programs to start in this sandbox. *</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QRadioButton" name="radStartExcept">
-              <property name="text">
-               <string>Prevent selected programs from starting in this sandbox.</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="0" rowspan="2">
-           <widget class="QTreeWidget" name="treeStart">
-            <property name="sortingEnabled">
-             <bool>true</bool>
-            </property>
-            <column>
-             <property name="text">
-              <string>Name</string>
+        <layout class="QGridLayout" name="gridLayout_85">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_19">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_23">
+             <property name="verticalSpacing">
+              <number>0</number>
              </property>
-            </column>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="btnAddStartProg">
-            <property name="text">
-             <string>Add Program</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <spacer name="verticalSpacer_8">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>299</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="1">
-           <widget class="QCheckBox" name="chkShowStartTmpl">
-            <property name="text">
-             <string>Show Templates</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QPushButton" name="btnDelStartProg">
-            <property name="text">
-             <string>Remove</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QCheckBox" name="chkStartBlockMsg">
-            <property name="text">
-             <string>Issue message 1308 when a program fails to start</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QCheckBox" name="chkAlertBeforeStart">
-            <property name="toolTip">
-             <string>This setting can be used to prevent programs from running in the sandbox without the user's knowledge or consent.</string>
-            </property>
-            <property name="text">
-             <string>Display a pop-up warning before starting a process in the sandbox from an external source</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>* Note: Programs installed to this sandbox won't be able to start at all.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radStartAll">
+               <property name="text">
+                <string>Allow all programs to start in this sandbox.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QRadioButton" name="radStartSelected">
+               <property name="text">
+                <string>Allow only selected programs to start in this sandbox. *</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radStartExcept">
+               <property name="text">
+                <string>Prevent selected programs from starting in this sandbox.</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="btnAddStartProg">
+             <property name="text">
+              <string>Add Program</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <spacer name="verticalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>299</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="3" column="1">
+            <widget class="QCheckBox" name="chkShowStartTmpl">
+             <property name="text">
+              <string>Show Templates</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="btnDelStartProg">
+             <property name="text">
+              <string>Remove</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QCheckBox" name="chkStartBlockMsg">
+             <property name="text">
+              <string>Issue message 1308 when a program fails to start</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QCheckBox" name="chkAlertBeforeStart">
+             <property name="toolTip">
+              <string>This setting can be used to prevent programs from running in the sandbox without the user's knowledge or consent.</string>
+             </property>
+             <property name="text">
+              <string>Display a pop-up warning before starting a process in the sandbox from an external source</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" rowspan="4">
+            <widget class="QTreeWidget" name="treeStart">
+             <property name="sortingEnabled">
+              <bool>true</bool>
+             </property>
+             <column>
+              <property name="text">
+               <string>Name</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </widget>
        <widget class="QWidget" name="tabAccess">
         <attribute name="title">
@@ -4042,6 +4043,7 @@ The process match level has a higher priority than the specificity and describes
           <widget class="QTabWidget" name="tabsOther">
            <property name="font">
             <font>
+             <weight>50</weight>
              <bold>false</bold>
              <kerning>true</kerning>
             </font>
@@ -4104,6 +4106,7 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblCompatibility">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>

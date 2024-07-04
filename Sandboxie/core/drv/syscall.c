@@ -226,6 +226,8 @@ _FX BOOLEAN Syscall_Init_List(void)
 		if (pat)
 			List_Insert_After(&disabled_hooks, NULL, pat);
 		pat = Pattern_Create(Driver_Pool, L"ClearEvent", FALSE, 0);
+		if (pat)
+			List_Insert_After(&disabled_hooks, NULL, pat);
 	}
 
     LIST approved_syscalls;

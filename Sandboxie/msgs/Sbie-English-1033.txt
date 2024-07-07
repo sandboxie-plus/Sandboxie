@@ -1118,6 +1118,7 @@ Something wrong happened.The program will start with normal privallige.
 
 3260;txt;01
 Something wrong happened.The program won't start in built-in administrator account.
+.
 
 #----------------------------------------------------------------------------
 # Sandboxie Control Common

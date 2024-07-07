@@ -32,7 +32,7 @@
 #include <psapi.h>
 #include <Shlwapi.h>
 #include<wincred.h>
-
+#pragma comment(lib,"credui.lib")
 
 //---------------------------------------------------------------------------
 // Defines
@@ -1260,34 +1260,34 @@ int Program_Start(void)
 						info->pszCaptionText = SbieDll_FormatMessage0(3257);
 						info->pszMessageText = SbieDll_FormatMessage0(3258);
 						
-						P_CredUIPromptForCredentialsW rupfc = (P_CredUIPromptForCredentialsW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIPromptForCredentialsW");
-						P_CredUIParseUserNameW cupun=(P_CredUIParseUserNameW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIParseUserNameW");
-						if (rupfc&&cupun)
-						{
+						//P_CredUIPromptForCredentialsW rupfc = (P_CredUIPromptForCredentialsW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIPromptForCredentialsW");
+						//P_CredUIParseUserNameW cupun=(P_CredUIParseUserNameW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIParseUserNameW");
+						//if (rupfc&&cupun)
+						//{
 							BOOL bSave = false;
 							LPWSTR username = (WCHAR*)malloc(100), password = (WCHAR*)malloc(100), appName = const_cast<WCHAR*>(L"Start.exe");
 							memset(username, 0, 100);
 							memset(password, 0, 100);
-							if (rupfc(info, appName, NULL, 0, username, 100, password, 100, &bSave, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_INCORRECT_PASSWORD | CREDUI_FLAGS_PASSWORD_ONLY_OK) == NO_ERROR) {
+							if (CredUIPromptForCredentialsW(info, appName, NULL, 0, username, 100, password, 100, &bSave, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_INCORRECT_PASSWORD | CREDUI_FLAGS_PASSWORD_ONLY_OK) == NO_ERROR) {
 								LPWSTR user = (WCHAR*)malloc(100), domain = (WCHAR*)malloc(100);
 								memset(user, 0, 100);
 								memset(domain, 0, 100);
-								cupun(username, user, 100, domain, 100);
+								CredUIParseUserName(username, user, 100, domain, 100);
 								HANDLE tempToken = NULL;
 								if (LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
 									MessageBox(NULL, SbieDll_FormatMessage0(3259), L"Sandboxie Start", MB_OK);
 									goto skipElevate;
 								}
-
+								CredUIConfirmCredentialsW(appName, FALSE);
 								CloseHandle(tempToken);
 								free(user);
 								free(domain);
 							}
-						}
-						else {
-							MessageBox(NULL, SbieDll_FormatMessage0(3259), L"Sandboxie Start", MB_OK);
-							goto skipElevate;
-						}
+						//}
+						///else {
+						//	MessageBox(NULL, SbieDll_FormatMessage0(3259), L"Sandboxie Start", MB_OK);
+						//	goto skipElevate;
+						//}
 					}
                     shExecInfo.lpVerb = L"runas";
                 }
@@ -1301,34 +1301,34 @@ int Program_Start(void)
 					info->pszCaptionText = SbieDll_FormatMessage0(3257);
 					info->pszMessageText = SbieDll_FormatMessage0(3258);
 
-					P_CredUIPromptForCredentialsW rupfc = (P_CredUIPromptForCredentialsW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIPromptForCredentialsW");
-					P_CredUIParseUserNameW cupun = (P_CredUIParseUserNameW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIParseUserNameW");
-					if (rupfc && cupun)
-					{
+					//P_CredUIPromptForCredentialsW rupfc = (P_CredUIPromptForCredentialsW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIPromptForCredentialsW");
+					//P_CredUIParseUserNameW cupun = (P_CredUIParseUserNameW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIParseUserNameW");
+					//if (rupfc && cupun)
+					//{
 						BOOL bSave = false;
 						LPWSTR username = (WCHAR*)malloc(100), password = (WCHAR*)malloc(100), appName = const_cast<WCHAR*>(L"Start.exe");
 						memset(username, 0, 100);
 						memset(password, 0, 100);
-						if (rupfc(info, appName, NULL, 0, username, 100, password, 100, &bSave, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_INCORRECT_PASSWORD | CREDUI_FLAGS_PASSWORD_ONLY_OK) == NO_ERROR) {
+						if (CredUIPromptForCredentialsW(info, appName, NULL, 0, username, 100, password, 100, &bSave, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_INCORRECT_PASSWORD | CREDUI_FLAGS_PASSWORD_ONLY_OK) == NO_ERROR) {
 							LPWSTR user = (WCHAR*)malloc(100), domain = (WCHAR*)malloc(100);
 							memset(user, 0, 100);
 							memset(domain, 0, 100);
-							cupun(username, user, 100, domain, 100);
+							CredUIParseUserNameW(username, user, 100, domain, 100);
 							HANDLE tempToken = NULL;
 							if (LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
 								MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
 								return EXIT_FAILURE;
 							}
-
+							CredUIConfirmCredentialsW(appName, FALSE);
 							CloseHandle(tempToken);
 							free(user);
 							free(domain);
 						}
-					}
-					else {
-						MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
-						return EXIT_FAILURE;
-					}
+					//}
+					//else {
+					//	MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
+					//	return EXIT_FAILURE;
+					//}
 				}
 			}
         }

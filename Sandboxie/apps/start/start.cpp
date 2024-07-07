@@ -1310,6 +1310,7 @@ int Program_Start(void)
 						memset(username, 0, 100);
 						memset(password, 0, 100);
 						if (CredUIPromptForCredentialsW(info, appName, NULL, 0, username, 100, password, 100, &bSave, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_INCORRECT_PASSWORD | CREDUI_FLAGS_PASSWORD_ONLY_OK) == NO_ERROR) {
+							//CredUIPromptForCredentialsW(info, appName, NULL, 0, username, 100, password, 100, &saved, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST| CREDUI_FLAGS_INCORRECT_PASSWORD| CREDUI_FLAGS_PASSWORD_ONLY_OK)
 							LPWSTR user = (WCHAR*)malloc(100), domain = (WCHAR*)malloc(100);
 							memset(user, 0, 100);
 							memset(domain, 0, 100);
@@ -1317,6 +1318,7 @@ int Program_Start(void)
 							HANDLE tempToken = NULL;
 							if (LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
 								MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
+								SbieApi_Log(3999, L"%d", GetLastError);
 								return EXIT_FAILURE;
 							}
 							CredUIConfirmCredentialsW(appName, FALSE);

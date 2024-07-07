@@ -1113,6 +1113,7 @@ int Program_Start(void)
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
     HANDLE hNewProcess = NULL;
+	BOOL isAdminActual = IsUserAnAdmin();
 
     memzero(&si, sizeof(STARTUPINFO));
     si.cb = sizeof(STARTUPINFO);
@@ -1195,7 +1196,25 @@ int Program_Start(void)
     //
     // start program
     //
-
+	typedef DWORD(*P_CredUIPromptForCredentialsW)(
+		PCREDUI_INFOW pUiInfo,
+		PCWSTR        pszTargetName,
+		PCtxtHandle   pContext,
+		DWORD         dwAuthError,
+		PWSTR         pszUserName,
+		ULONG         ulUserNameBufferSize,
+		PWSTR         pszPassword,
+		ULONG         ulPasswordBufferSize,
+		BOOL* save,
+		DWORD         dwFlags
+		);
+	typedef DWORD(*P_CredUIParseUserNameW)(
+		PCWSTR UserName,
+		WCHAR* user,
+		ULONG  userBufferSize,
+		WCHAR* domain,
+		ULONG  domainBufferSize
+		);
     do {
 
         //
@@ -1240,25 +1259,7 @@ int Program_Start(void)
 						info->hwndParent = NULL;
 						info->pszCaptionText = SbieDll_FormatMessage0(3257);
 						info->pszMessageText = SbieDll_FormatMessage0(3258);
-						typedef DWORD (*P_CredUIPromptForCredentialsW)(
-							 PCREDUI_INFOW pUiInfo,
-							           PCWSTR        pszTargetName,
-							           PCtxtHandle   pContext,
-							 DWORD         dwAuthError,
-							      PWSTR         pszUserName,
-							           ULONG         ulUserNameBufferSize,
-							      PWSTR         pszPassword,
-							           ULONG         ulPasswordBufferSize,
-							      BOOL* save,
-							           DWORD         dwFlags
-						);
-						typedef DWORD (*P_CredUIParseUserNameW)(
-							  PCWSTR UserName,
-							 WCHAR* user,
-							  ULONG  userBufferSize,
-							 WCHAR* domain,
-							  ULONG  domainBufferSize
-						);
+						
 						P_CredUIPromptForCredentialsW rupfc = (P_CredUIPromptForCredentialsW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIPromptForCredentialsW");
 						P_CredUIParseUserNameW cupun=(P_CredUIParseUserNameW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIParseUserNameW");
 						if (rupfc&&cupun)
@@ -1290,7 +1291,46 @@ int Program_Start(void)
 					}
                     shExecInfo.lpVerb = L"runas";
                 }
-            }
+			}
+			else {
+				if (SbieApi_QueryConfBool(NULL, L"ElevateWithPwOnly", FALSE)) {
+					PCREDUI_INFOW info = new CREDUI_INFOW();
+					info->cbSize = sizeof(CREDUI_INFO);
+					info->hbmBanner = NULL;
+					info->hwndParent = NULL;
+					info->pszCaptionText = SbieDll_FormatMessage0(3257);
+					info->pszMessageText = SbieDll_FormatMessage0(3258);
+
+					P_CredUIPromptForCredentialsW rupfc = (P_CredUIPromptForCredentialsW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIPromptForCredentialsW");
+					P_CredUIParseUserNameW cupun = (P_CredUIParseUserNameW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIParseUserNameW");
+					if (rupfc && cupun)
+					{
+						BOOL bSave = false;
+						LPWSTR username = (WCHAR*)malloc(100), password = (WCHAR*)malloc(100), appName = const_cast<WCHAR*>(L"Start.exe");
+						memset(username, 0, 100);
+						memset(password, 0, 100);
+						if (rupfc(info, appName, NULL, 0, username, 100, password, 100, &bSave, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_INCORRECT_PASSWORD | CREDUI_FLAGS_PASSWORD_ONLY_OK) == NO_ERROR) {
+							LPWSTR user = (WCHAR*)malloc(100), domain = (WCHAR*)malloc(100);
+							memset(user, 0, 100);
+							memset(domain, 0, 100);
+							cupun(username, user, 100, domain, 100);
+							HANDLE tempToken = NULL;
+							if (LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
+								MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
+								return EXIT_FAILURE;
+							}
+
+							CloseHandle(tempToken);
+							free(user);
+							free(domain);
+						}
+					}
+					else {
+						MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
+						return EXIT_FAILURE;
+					}
+				}
+			}
         }
 skipElevate:
         //

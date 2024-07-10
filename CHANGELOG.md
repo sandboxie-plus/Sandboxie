@@ -9,7 +9,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved removal of leftovers [#4050](https://github.com/sandboxie-plus/Sandboxie/pull/4050)
 
 ### Fixed
-- fixed  The Start Restrictions tab's layout is broken [#4045](https://github.com/sandboxie-plus/Sandboxie/issues/4045)
+- fixed The Start Restrictions tab's layout is broken [#4045](https://github.com/sandboxie-plus/Sandboxie/issues/4045)
+- fixed Administrators cannot change the sandbox configuration [#4057](https://github.com/sandboxie-plus/Sandboxie/issues/4057) [#4068](https://github.com/sandboxie-plus/Sandboxie/issues/4068)
+
+### Added
+- added hwid display
+
 
 
 

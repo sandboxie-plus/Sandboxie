@@ -30,6 +30,8 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+	connect(ui.chkForceRestart, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
 	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -39,7 +41,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkOpenLsaEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkSbieLogon, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-
+	connect(ui.chkCreateToken, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	m_AdvOptions.insert("UseWin32kHooks",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.")});
 	m_AdvOptions.insert("EnableMiniDump",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable crash dump creation in the sandbox folder")});
@@ -141,6 +143,8 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
 	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
+
+	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
 
 	CheckOpenCOM();
 	ui.chkComTimeout->setChecked(!m_pBox->GetBool("RpcMgmtSetComTimeout", true));
@@ -373,6 +377,8 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 
+	WriteAdvancedCheck(ui.chkForceRestart, "ForceRestartAll", "y", "");
+
 	WriteAdvancedCheck(ui.chkNoSecurityIsolation, "NoSecurityIsolation", "y", "");
 	WriteAdvancedCheck(ui.chkNoSecurityFiltering, "NoSecurityFiltering", "y", "");
 
@@ -425,6 +431,9 @@ void COptionsWindow::SaveAdvanced()
 
 	bool bGlobalSbieLogon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieLogon", false);
 	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");
+
+	bool bGlobalSandboxGroup = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieAllGroup", false);
+	WriteAdvancedCheck(ui.chkCreateToken, "UseCreateToken", bGlobalSandboxGroup ? "" : "y", "");
 
 	SaveOptionList();
 
@@ -595,14 +604,16 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkNoOpenForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkSbieLogon->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
-
+	ui.chkCreateToken->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	if (ui.chkNoSecurityIsolation->isChecked()) {
 		ui.chkCloseForBox->setChecked(false);
 		ui.chkNoOpenForBox->setChecked(false);
 		ui.chkSbieLogon->setChecked(false);
+		ui.chkCreateToken->setChecked(false);
 	}
 	else {
 		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
+		ReadGlobalCheck(ui.chkCreateToken, "UseCreateToken", false);
 	}
 }
 

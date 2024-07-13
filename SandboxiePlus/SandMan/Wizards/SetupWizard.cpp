@@ -135,6 +135,8 @@ bool CSetupWizard::ShowWizard(int iOldLevel)
     {
         if (wizard.field("editAdminOnly").toBool())
             theAPI->GetGlobalSettings()->SetText("EditAdminOnly", "y");
+		if (wizard.field("improveGame").toBool())
+			theAPI->GetGlobalSettings()->SetText("Improve3DGameRate", "y");
     }
 
     theConf->SetValue("Options/WizardLevel", SETUP_LVL_CURRENT);
@@ -529,6 +531,11 @@ CShellPage::CShellPage(QWidget *parent)
 	connect(m_pEditOnlyAdmin,SIGNAL(clicked(bool)), this, SLOT(OnEditOnlyAdmin()));
 	layout->addWidget(m_pEditOnlyAdmin);
 	registerField("editAdminOnly", m_pEditOnlyAdmin);
+
+	m_pImproveGame = new QCheckBox(tr("Enhance the 3D gaming experience by releasing some system calls."));
+	m_pImproveGame->setChecked(false);
+	layout->addWidget(m_pImproveGame);
+	registerField("improveGame", m_pImproveGame);
 
     setLayout(layout);
 }

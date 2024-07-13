@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow
 - added an optional context menu option to make folder/file forced quickly
   - You can also use "Sandman.exe /add_force program_path" to do it
+- added option "Improve3DGameRate" to enhance 3D games' FPS
+
+
 
 ## [1.14.4 / 5.69.4] - 2024-07-13
 
@@ -33,7 +36,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - rolled back the driver verifier fix added in 1.14.1
 - fixed CustomChromiumFlags and --single-argument issue [#4033](https://github.com/sandboxie-plus/Sandboxie/issues/4033)
 - fixed Sandboxie programs do not terminate after closing programs that run as admin with UseCreateToken/SandboxieAllGroup enabled [#4030](https://github.com/sandboxie-plus/Sandboxie/issues/4030)
-
 
 
 

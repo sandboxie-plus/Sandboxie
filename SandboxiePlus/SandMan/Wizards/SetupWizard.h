@@ -123,7 +123,6 @@ private:
     QCheckBox *m_pContecxtMenu;
     QCheckBox *m_pBrowserIcon;
 	QCheckBox* m_pEditOnlyAdmin;
-	QCheckBox* m_pImproveGame;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

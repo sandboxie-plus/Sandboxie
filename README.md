@@ -46,9 +46,9 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * A trigger system to perform actions, when a sandbox goes through different stages, like initialization, box start, termination or file recovery
   * Make a process not sandboxed, but its child processes sandboxed
   * Sandboxing as a unit of control to force programs to automatically use the SOCKS5 proxy
-		* DNS resolution control with sandboxing as control granularity
-		* Limit the number of processes in the sandbox and the total amount of memory space they can occupy, and You can limit the total number of sandboxed processes per box
-		* A completely different token creation mechanism from Sandboxie's pre-open-source version makes sandboxes more independent in the system
+  * DNS resolution control with sandboxing as control granularity
+  * Limit the number of processes in the sandbox and the total amount of memory space they can occupy, and You can limit the total number of sandboxed processes per box
+  * A completely different token creation mechanism from Sandboxie's pre-open-source version makes sandboxes more independent in the system
   * Encrypted Sandbox - an AES-based reliable data storage solution.
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.

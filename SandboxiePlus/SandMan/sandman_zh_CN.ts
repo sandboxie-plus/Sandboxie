@@ -4313,28 +4313,28 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="1643"/>
         <source>Which box you want to add in?</source>
-        <translation type="unfinished"></translation>
+        <translation>您想添加到哪个沙盒？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1643"/>
         <source>Type the box name which you are going to set:</source>
-        <translation type="unfinished"></translation>
+        <translation>输入您希望设置的沙盒名称：</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1656"/>
         <location filename="SandMan.cpp" line="1660"/>
         <source>Sandboxie-Plus Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 警告</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1656"/>
         <source>You typed a wrong box name!Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>您输入了错误的沙盒名！未更改任何设置。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1660"/>
         <source>Users canceled this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户取消了本次操作。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1991"/>
@@ -5931,7 +5931,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1606"/>
         <source>Make Folder/File &amp;Forced</source>
-        <translation type="unfinished"></translation>
+        <translation>强制创建目录/文件</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1913"/>
@@ -7828,12 +7828,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1775"/>
         <source>Create a new sandboxed token instead of setting down default token</source>
-        <translation type="unfinished"></translation>
+        <translation>创建新的沙盒令牌，而不是设置默认令牌</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4102"/>
         <source>Restart force process before they begin to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>在开始执行之前重新启动强制进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4536"/>
@@ -9413,7 +9413,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="564"/>
         <source>Add ‘Make Folder/File Forced&apos; to the context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>在上下文菜单添加“强制创建目录/文件”</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1124"/>

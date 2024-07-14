@@ -9007,7 +9007,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="564"/>
         <source>Add ‘Make Folder/File Forced&apos; to the context menu</source>
-        <translation>Füge 'Erzwinge &amp;Ordner/Datei' dem Kontextmenü hinzu</translation>
+        <translation>Füge &apos;Erzwinge &amp;Ordner/Datei&apos; dem Kontextmenü hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="775"/>

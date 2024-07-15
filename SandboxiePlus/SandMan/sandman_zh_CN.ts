@@ -7828,7 +7828,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1775"/>
         <source>Create a new sandboxed token instead of setting down default token</source>
-        <translation>创建新的沙盒令牌，而不是设置默认令牌</translation>
+        <translation>创建新的沙盒令牌，而不是对默认令牌降权</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4102"/>

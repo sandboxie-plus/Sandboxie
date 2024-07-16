@@ -5931,7 +5931,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1606"/>
         <source>Make Folder/File &amp;Forced</source>
-        <translation>强制创建目录/文件</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1913"/>
@@ -9413,7 +9413,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="564"/>
         <source>Add ‘Make Folder/File Forced&apos; to the context menu</source>
-        <translation>在上下文菜单添加“强制创建目录/文件”</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1124"/>

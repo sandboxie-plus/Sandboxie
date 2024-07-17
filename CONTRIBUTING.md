@@ -1,4 +1,7 @@
 # Contributing to the Sandboxie project
+---
+### Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history) and [#2926](https://github.com/sandboxie-plus/Sandboxie/issues/2926)).
+---
 
 - [Monetary contributions](#monetary-contributions)
 - [Non-monetary contributions](#non-monetary-contributions)

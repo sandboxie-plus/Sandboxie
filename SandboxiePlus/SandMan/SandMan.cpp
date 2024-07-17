@@ -1640,15 +1640,15 @@ void CSandMan::OnMessage(const QString& MsgData)
 	{
 
 
-		QString respone = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
-		if(!respone.isEmpty())
+		QString response = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
+		if(!response.isEmpty())
 		{
-			if (theAPI->GetBoxByName(respone) != NULL) {
+			if (theAPI->GetBoxByName(response) != NULL) {
 				if (Message.right(1)=="\\"||!Message.contains(".", Qt::CaseInsensitive)) {
-					theAPI->GetBoxByName(respone)->AppendText("ForceFolder", Message.mid(4).replace("\"",""));
+					theAPI->GetBoxByName(response)->AppendText("ForceFolder", Message.mid(4).replace("\"",""));
 				}
 				else {
-					theAPI->GetBoxByName(respone)->AppendText("ForceProcess", Message.mid(4).replace("\"", "").mid(Message.mid(4).replace("\"", "").lastIndexOf("\\")+1));
+					theAPI->GetBoxByName(response)->AppendText("ForceProcess", Message.mid(4).replace("\"", "").mid(Message.mid(4).replace("\"", "").lastIndexOf("\\")+1));
 
 				}
 			}

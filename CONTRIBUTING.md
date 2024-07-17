@@ -17,7 +17,7 @@ Patreon certificates are valid for as long as the subscription is active and unl
 4. Donate with cryptocurrencies <br>
 In order to arrange custom payments with cryptocurrencies, please get in touch by [email](https://xanasoft.com/contact/).
 
-In case of issues with your refund request, please get in touch by [email](https://xanasoft.com/contact/) with the full name and order ID.
+**In case of licensing issues, please get in touch by [email](https://xanasoft.com/contact/) with the full name and order ID.**
 
 ## Non-monetary contributions
 

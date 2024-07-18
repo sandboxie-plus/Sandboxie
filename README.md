@@ -83,6 +83,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 2013 - 2017         | Invincea Inc.    |
 | 2017 - 2020         | Sophos Group plc |
 | [Open-source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
+| --- | --- |
 | 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633))    |
 
 

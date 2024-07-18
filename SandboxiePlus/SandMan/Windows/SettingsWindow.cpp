@@ -1025,7 +1025,7 @@ void CSettingsWindow::LoadSettings()
 
 		ui.chkStartBlock->setChecked(theAPI->GetGlobalSettings()->GetBool("StartRunAlertDenied", false));
 		ui.chkStartBlockMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("AlertStartRunAccessDenied", true));
-		ui.chkNotForcedMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyForceProcessDisabled", false));
+		ui.chkNotMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyForceProcessDisabled", false));
 
 		ui.treeWarnProgs->clear();
 
@@ -1603,7 +1603,7 @@ void CSettingsWindow::SaveSettings()
 	if (ui.chkShellMenu3->isChecked() != CSbieUtils::HasContextMenu3()) {
 		if (ui.chkShellMenu3->isChecked()) {
 			CSbieUtils::AddContextMenu3(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
-				tr("Make Folder/File &Forced"),
+				tr("Add File/Folder to Sandbox &Force Process Configuration"),
 				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
 		}
 		else

@@ -48,7 +48,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>5</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -477,7 +477,7 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1" colspan="3">
+             <item row="2" column="1" colspan="2">
               <widget class="QCheckBox" name="chkSvcStart">
                <property name="text">
                 <string>Start UI when a sandboxed process is started</string>
@@ -544,14 +544,14 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="2" colspan="2">
+             <item row="5" column="2">
               <widget class="QCheckBox" name="chkAlwaysDefault">
                <property name="text">
                 <string>Always use DefaultBox</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="2" colspan="2">
+             <item row="6" column="2">
               <widget class="QCheckBox" name="chkShellMenu2">
                <property name="text">
                 <string>Add 'Run Un-Sandboxed' to the context menu</string>
@@ -565,7 +565,14 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
+             <item row="8" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkShellMenu4">
+               <property name="text">
+                <string>Add 'Open Path to Certain Sandbox' to context menu</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
               <widget class="QLabel" name="lblStartMenu">
                <property name="font">
                 <font>
@@ -579,14 +586,14 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="1" colspan="3">
+             <item row="10" column="1" colspan="2">
               <widget class="QCheckBox" name="chkScanMenu">
                <property name="text">
                 <string>Scan shell folders and offer links in run menu</string>
                </property>
               </widget>
              </item>
-             <item row="10" column="0" colspan="2">
+             <item row="11" column="0" colspan="2">
               <widget class="QLabel" name="label_22">
                <property name="text">
                 <string>Integrate with Host Start Menu</string>
@@ -599,10 +606,10 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="2">
+             <item row="11" column="2">
               <widget class="QComboBox" name="cmbIntegrateMenu"/>
              </item>
-             <item row="11" column="0" colspan="2">
+             <item row="12" column="0">
               <widget class="QLabel" name="label_29">
                <property name="text">
                 <string>Integrate with Host Desktop</string>
@@ -615,10 +622,10 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="2">
+             <item row="12" column="2">
               <widget class="QComboBox" name="cmbIntegrateDesk"/>
              </item>
-             <item row="12" column="1">
+             <item row="13" column="1">
               <spacer name="verticalSpacer_6">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -631,7 +638,7 @@
                </property>
               </spacer>
              </item>
-             <item row="12" column="3">
+             <item row="13" column="3">
               <spacer name="horizontalSpacer_2">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>

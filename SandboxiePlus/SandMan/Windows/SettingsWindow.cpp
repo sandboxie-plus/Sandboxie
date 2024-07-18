@@ -332,6 +332,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkAlwaysDefault, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu2, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu3, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkShellMenu4, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
 
 	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
@@ -893,6 +895,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkShellMenu->setCheckState(IsContextMenu());
 	ui.chkShellMenu2->setChecked(CSbieUtils::HasContextMenu2());
 	ui.chkShellMenu3->setChecked(CSbieUtils::HasContextMenu3());
+	ui.chkShellMenu4->setChecked(CSbieUtils::HasContextMenu4());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
 
 	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
@@ -1608,6 +1611,15 @@ void CSettingsWindow::SaveSettings()
 		}
 		else
 			CSbieUtils::RemoveContextMenu3();
+	}
+	if (ui.chkShellMenu4->isChecked() != CSbieUtils::HasContextMenu4()) {
+		if (ui.chkShellMenu4->isChecked()) {
+			CSbieUtils::AddContextMenu4(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
+				tr("&Open Path to Certain Sandbox"),
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+		}
+		else
+			CSbieUtils::RemoveContextMenu4();
 	}
 	theConf->SetValue("Options/RunInDefaultBox", ui.chkAlwaysDefault->isChecked());
 

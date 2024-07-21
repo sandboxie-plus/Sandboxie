@@ -1606,7 +1606,7 @@ void CSettingsWindow::SaveSettings()
 	if (ui.chkShellMenu3->isChecked() != CSbieUtils::HasContextMenu3()) {
 		if (ui.chkShellMenu3->isChecked()) {
 			CSbieUtils::AddContextMenu3(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
-				tr("Make Folder/File &Forced"),
+				tr("Add File/Folder to Sandbox &Force Process Configuration"),
 				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
 		}
 		else

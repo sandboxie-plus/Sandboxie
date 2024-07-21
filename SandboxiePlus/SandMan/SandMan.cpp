@@ -1643,10 +1643,10 @@ void CSandMan::OnMessage(const QString& MsgData)
 		{
 			if (theAPI->GetBoxByName(response) != NULL) {
 				if (Message.right(1)=="\\"||!Message.contains(".", Qt::CaseInsensitive)) {
-					theAPI->GetBoxByName(response)->AppendText("ForceFolder", Message.mid(4).replace("\"",""));
+					theAPI->GetBoxByName(response)->AppendText("ForceFolder", Message.mid(9).replace("\"",""));
 				}
 				else {
-					theAPI->GetBoxByName(response)->AppendText("ForceProcess", Message.mid(4).replace("\"", "").mid(Message.mid(4).replace("\"", "").lastIndexOf("\\")+1));
+					theAPI->GetBoxByName(response)->AppendText("ForceProcess", Message.mid(9).replace("\"", "").mid(Message.mid(4).replace("\"", "").lastIndexOf("\\")+1));
 
 				}
 			}
@@ -1664,7 +1664,7 @@ void CSandMan::OnMessage(const QString& MsgData)
 		if (!response.isEmpty())
 		{
 			if (theAPI->GetBoxByName(response) != NULL) {
-					theAPI->GetBoxByName(response)->AppendText("OpenFilePath", Message.mid(4).replace("\"", ""));
+					theAPI->GetBoxByName(response)->AppendText("OpenFilePath", Message.mid(8).replace("\"", ""));
 			}
 			else {
 				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name!Nothing was changed."), QMessageBox::Ok, 0);

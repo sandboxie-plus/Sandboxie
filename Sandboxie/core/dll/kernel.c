@@ -218,11 +218,11 @@ _FX BOOLEAN Kernel_Init()
 	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE)) {
 
 		SBIEDLL_HOOK(Kernel_, GetTickCount);
-		P_GetTickCount64 GetTickCount64 = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetTickCount64");
+		void* GetTickCount64 = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetTickCount64");
 		if (GetTickCount64) {
-			SBIEDLL_HOOK(Kernel_, GetTickCount64);
+			SBIEDLL_HOOK(Kernel_, GetTickCount64) 
 		}
-		P_QueryUnbiasedInterruptTime QueryUnbiasedInterruptTime = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "QueryUnbiasedInterruptTime");
+		void* QueryUnbiasedInterruptTime = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "QueryUnbiasedInterruptTime");
 		if (QueryUnbiasedInterruptTime) {
 			SBIEDLL_HOOK(Kernel_, QueryUnbiasedInterruptTime);
 		}
@@ -234,7 +234,7 @@ _FX BOOLEAN Kernel_Init()
 	if (SbieApi_QueryConfBool(NULL, L"UseSpoofLocale", FALSE))
 	{
 		SBIEDLL_HOOK(Kernel_, GetUserDefaultUILanguage);
-		P_GetUserDefaultLocaleName GetUserDefaultLocaleName = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetUserDefaultLocaleName");
+		void* GetUserDefaultLocaleName = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetUserDefaultLocaleName");
 		if (GetUserDefaultLocaleName) {
 			SBIEDLL_HOOK(Kernel_, GetUserDefaultLocaleName);
 		}
@@ -242,7 +242,7 @@ _FX BOOLEAN Kernel_Init()
 		SBIEDLL_HOOK(Kernel_, GetUserDefaultLangID);
 		SBIEDLL_HOOK(Kernel_, GetUserDefaultGeoName);
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultUILanguage);
-		P_GetSystemDefaultLocaleName GetSystemDefaultLocaleName = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetSystemDefaultLocaleName");
+		void* GetSystemDefaultLocaleName = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetSystemDefaultLocaleName");
 		if (GetSystemDefaultLocaleName) {
 			SBIEDLL_HOOK(Kernel_, GetSystemDefaultLocaleName);
 		}
@@ -395,7 +395,7 @@ _FX LANGID Kernel_GetUserDefaultUILanguage()
 
 _FX int Kernel_GetUserDefaultLocaleName(LPWSTR lpLocaleName, int cchLocaleName) 
 {
-	LCIDToLocaleName ltln = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "LCIDToLocaleName");
+	LCIDToLocaleName ltln = (LCIDToLocaleName)GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "LCIDToLocaleName");
 	if (ltln) {
 		return ltln(SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
 	}

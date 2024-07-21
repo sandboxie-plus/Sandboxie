@@ -10,6 +10,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - You can also use "Sandman.exe /add_force program_path" to do it
 
 
+## [1.14.5 / 5.69.5] - 2024-07-?
+
+### Added
+
+### Fixed
+- fixed Getting two advanced supporter certificate popups everytime I open Sandbox Settings on any sandbox [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)
+- fixed issue with HwID bound serial keys failing when no HwID could be obtained
+
+### Changed
+- the certificate format can now take an explicit validity days specification, needed for gapless certificat renewal.
+
+
 
 ## [1.14.4 / 5.69.4] - 2024-07-13
 
@@ -22,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added hwid display
+
 
 
 ## [1.14.3 / 5.69.3] - 2024-07-01

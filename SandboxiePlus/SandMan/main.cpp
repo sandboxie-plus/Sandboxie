@@ -176,9 +176,7 @@ int main(int argc, char *argv[])
 		if (!cmdLine0) return -1;
 		LPWSTR cmdLine = cmdLine0 + 10;
 		g_PendingMessage = "AddForce:" + QString::fromWCharArray(cmdLine + 1);
-
 	}
-
 	if (AOPos != -1) {
 		LPWSTR cmdLine0 = wcsstr(GetCommandLineW(), L"/add_open");
 		if (!cmdLine0) return -1;

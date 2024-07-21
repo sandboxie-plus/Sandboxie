@@ -1638,8 +1638,6 @@ void CSandMan::OnMessage(const QString& MsgData)
 	}
 	else if (Message.left(9) == "AddForce:")
 	{
-
-
 		QString response = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
 		if(!response.isEmpty())
 		{
@@ -1662,8 +1660,6 @@ void CSandMan::OnMessage(const QString& MsgData)
 	}
 	else if (Message.left(8) == "AddOpen:")
 	{
-
-
 		QString response = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
 		if (!response.isEmpty())
 		{

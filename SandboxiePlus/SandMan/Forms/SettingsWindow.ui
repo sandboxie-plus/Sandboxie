@@ -558,20 +558,6 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="1" colspan="3">
-              <widget class="QCheckBox" name="chkShellMenu3">
-               <property name="text">
-                <string>Add ‘Make Folder/File Forced' to the context menu</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1" colspan="3">
-              <widget class="QCheckBox" name="chkShellMenu4">
-               <property name="text">
-                <string>Add 'Open Path to Certain Sandbox' to context menu</string>
-               </property>
-              </widget>
-             </item>
              <item row="9" column="0">
               <widget class="QLabel" name="lblStartMenu">
                <property name="font">
@@ -650,6 +636,20 @@
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="7" column="2" colspan="2">
+              <widget class="QCheckBox" name="chkShellMenu3">
+               <property name="text">
+                <string>Add ‘Set Force in Sandbox' to the context menu</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="2" colspan="2">
+              <widget class="QCheckBox" name="chkShellMenu4">
+               <property name="text">
+                <string>Add 'Set Open Path in Sandbox' to context menu</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>

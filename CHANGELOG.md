@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow
 - added an optional context menu option to make folder/file forced quickly
-  - You can also use "Sandman.exe /add_force program_path" to do it
+  - Note: You can also use "Sandman.exe /add_force program_path" to do it
 
 
 ## [1.14.5 / 5.69.5] - 2024-07-?
@@ -18,8 +18,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to always run the sandman UI as admin [#4090](https://github.com/sandboxie-plus/Sandboxie/issues/4090)
 
 ### Fixed
-- fixed Getting two advanced supporter certificate popups everytime I open Sandbox Settings on any sandbox [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)
-- fixed issue with HwID bound serial keys failing when no HwID could be obtained
+- fixed two supporter certificate popping up every time a Sandboxes' settings are opened [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)
+- fixed issue with HwID-bound serial keys failing when no HwID could be obtained
 - fixed issue with "UseChangeSpeed=y"
 - fixed broken "HideFirmwareInfo=y" implementation.
   - changed reg path to key "HKCU\\System\\SbieCustom", value: "SMBiosTable"
@@ -27,7 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed schannel error SEC_E_SECPKG_NOT_FOUND in encrypted sandboxes [#4081](https://github.com/sandboxie-plus/Sandboxie/issues/4081)
 
 ### Changed
-- the certificate format can now take an explicit validity days specification, needed for gapless certificat renewal.
+- the certificate format can now take an explicit validity days specification, needed for gapless certificate renewal
 
 
 
@@ -37,8 +37,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved removal of leftovers [#4050](https://github.com/sandboxie-plus/Sandboxie/pull/4050)
 
 ### Fixed
-- fixed The Start Restrictions tab's layout is broken [#4045](https://github.com/sandboxie-plus/Sandboxie/issues/4045)
-- fixed Administrators cannot change the sandbox configuration [#4057](https://github.com/sandboxie-plus/Sandboxie/issues/4057) [#4068](https://github.com/sandboxie-plus/Sandboxie/issues/4068)
+- fixed the Start Restrictions tab layout breaking [#4045](https://github.com/sandboxie-plus/Sandboxie/issues/4045)
+- fixed administrators unable to change the sandbox configuration [#4057](https://github.com/sandboxie-plus/Sandboxie/issues/4057) [#4068](https://github.com/sandboxie-plus/Sandboxie/issues/4068)
 
 
 
@@ -49,11 +49,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed Qt 5 version to Qt 5.15.14 with OpenSSL 3.3.1 [#3994](https://github.com/sandboxie-plus/Sandboxie/pull/3994) (thanks offhub)
 
 ### Fixed
-- fixed Applications cannot be launched as admin in a sandbox with "UseCreateToken/SandboxieAllGroup" enabled when using an MSFT account [#4022](https://github.com/sandboxie-plus/Sandboxie/issues/4022)
+- fixed applications unable to launch as admin in a sandbox with "UseCreateToken/SandboxieAllGroup" when using an MSFT account [#4022](https://github.com/sandboxie-plus/Sandboxie/issues/4022)
 - fixed Firefox issue with Sbie 1.14.1 and 1.14.2 [#4012](https://github.com/sandboxie-plus/Sandboxie/issues/4012)
   - rolled back the driver verifier fix added in 1.14.1
 - fixed CustomChromiumFlags and --single-argument issue [#4033](https://github.com/sandboxie-plus/Sandboxie/issues/4033)
-- fixed Sandboxie programs do not terminate after closing programs that run as admin with UseCreateToken/SandboxieAllGroup enabled [#4030](https://github.com/sandboxie-plus/Sandboxie/issues/4030)
+- fixed Sandboxie programs not terminating after closing programs that run as admin with UseCreateToken/SandboxieAllGroup enabled [#4030](https://github.com/sandboxie-plus/Sandboxie/issues/4030)
 
 
 
@@ -61,11 +61,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
-  - usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
-  - Note: use /passwd without the password to have SbieIni prompt for the password on the console, this hides the password from view and from being captured with the command line
+  - Usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
+  - Note: use /passwd without the password to have SbieIni prompt for the password on the console, this hides the password from view and prevents capture with the command line
 - added checkbox for "PromptForInternetAccess" option to the New Box Wizard
 - added option "HideNonSystemProcesses" to hide processes not in a sandbox from processes lists for sandboxed processes
-- added option "HideSbieProcesses" to hide Sandboxie Work Process (SbieSvc, SandboxieRpcSs, etc.)
+- added option "HideSbieProcesses" to hide Sandboxie Work Process (SbieSvc, SandboxieRpcSs etc.)
 - added option "HideFirmwareInfo"
   - when it is set, the programs that try getting firmware information will get false data from HKEY_CURRENT_USER\\SOFTWARE\\SandboxieHide\\FalseFirmwareValue
 - added template "BlockAccessWMI" to prevent sandboxed processes from accessing system information through WMI
@@ -73,25 +73,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added new option "AllowCoverTaskbar" for [#3975](https://github.com/sandboxie-plus/Sandboxie/issues/3975)
 - added RPC Port message filter mechanism to block unsafe RDP calls via the driver [#3930](https://github.com/sandboxie-plus/Sandboxie/issues/3930)
   - Usage: "RpcPortFilter=Port,ID,Label" label is optional
-- added "Job Object" Options page to colelct all job object related options
+- added "Job Object" Options page to collect all job object-related options
 
 
 ### Changed
-- extend "Temp Template" to make it could delete local template section
+- extended "Temp Template" to make it could delete local template section
 
 ### Fixed
 - fixed security issue with the newly introduced experimental "UseCreateToken=y" mechanism
-- fixed issue with "UseCreateToken=y" when using a MSFT online account
-- fixed Export sandbox not containing hidden files [#3980](https://github.com/sandboxie-plus/Sandboxie/issues/3980) (thanks L4cache)
-- fixed Chrome stopped printing [#3926](https://github.com/sandboxie-plus/Sandboxie/issues/3926)
+- fixed issue with "UseCreateToken=y" when using an MSFT online account
+- fixed export sandbox function not including hidden files [#3980](https://github.com/sandboxie-plus/Sandboxie/issues/3980) (thanks L4cache)
+- fixed Chrome printer stoppage [#3926](https://github.com/sandboxie-plus/Sandboxie/issues/3926)
   - Sandboxie will add CustomChromiumFlags=--disable-features=PrintCompositorLPAC to Chromium-based browsers command line
-  - Note: Less Privileged App Container (LPAC) don't work with Sandboxie currently
-- fixed Problem accessing a relative symlink with a target that starts with a dot [#3981](https://github.com/sandboxie-plus/Sandboxie/issues/3981)
-- fixed Can't open a sandbox's properties window via double-click in System Tray context window [#3861](https://github.com/sandboxie-plus/Sandboxie/issues/3861)
-- fixed Delay in launching forced programs after version 1.12.9 [#3868](https://github.com/sandboxie-plus/Sandboxie/issues/3868)
-  - this issue was introduced in 1.13.0 and may have broadly affected other use cases and cause various problems
+  - Note: Less Privileged App Container (LPAC) aren't working with Sandboxie presently
+- fixed accessing relative symlinks which refer to a target that starts with a dot [#3981](https://github.com/sandboxie-plus/Sandboxie/issues/3981)
+- fixed opening a sandbox's properties window via double-click in the systray context window [#3861](https://github.com/sandboxie-plus/Sandboxie/issues/3861)
+- fixed delay in launching forced programs after version 1.12.9 [#3868](https://github.com/sandboxie-plus/Sandboxie/issues/3868)
+  - this issue was introduced in 1.13.0 and may have affected other use cases causing various issues
 - fixed issue with Misc Options list
-- improved compatibility with steam running sandboxed
+- improved compatibility with Steam running sandboxed
 
 
 
@@ -109,12 +109,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option for EditAdminOnly in SetupWizard
 
 ### Changed
-- split the advanced new box wizard page in two
-- reorganized box options a bit
+- split the advanced new box wizard to stretch over two pages
+- reorganized box options
 
 ### Fixed
 - fixed issue with proxy authentication setting
-- fixed memory leak in sbiesvc
+- fixed memory leak in SbieSvc
 - fixed issue with inconsistent WFP option application [#3900](https://github.com/sandboxie-plus/Sandboxie/issues/3900)
 - fixed resource leak in buffer hashing function
 - fixed DLL name corruption when BlockInterferenceControl is enabled [#3945](https://github.com/sandboxie-plus/Sandboxie/issues/3945)
@@ -128,15 +128,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to limit the memory of sandboxed processes and the number of processes in single sandbox through job object (thanks Yeyixiao)
   - use "TotalMemoryLimit" (Number, limit whole sandbox, Byte) and "ProcessMemoryLimit" (Number, limit single process, Byte) to set memory limit
   - use "ProcessNumberLimit" (Number) to set process number limit
-- added ability to modified sandboxed process logic speed (reduced fixed latency, modified single-player speed, etc.) (thanks Yeyixiao)
+- added ability to modify sandboxed process logic speed (reduced fixed latency, modified single-player speed etc.) (thanks Yeyixiao)
   - use "UseChangeSpeed=y" to open this feature, use "AddTickSpeed" / "AddSleepSpeed" / "AddTimerSpeed" / "LowTickSpeed" / "LowSleepSpeed" / "LowTimerSpeed" (Number) to set
   - when set to "AddSleepSpeed=0", all sleep function calls will be skipped
-- added /fcp /force_children command line option to start.exe it allows to start a program unsandboxed but have all its children sandboxed
+- added /fcp /force_children command line option to Start.exe; it allows to start a program unsandboxed but have all its children sandboxed
 - added ability to force sandboxed processes to use a pre-defined SOCKS5 proxy
 - added ability to intercept DNS queries so that they can be logged and/or redirected
 - added support for SOCKS5 proxy authentication based on RFC1928 (thanks Deezzir)
-- added Test Dialog UI for SOCKS5 proxy (thanks Deezzir)
-- added ability to automatically removes template references that begin with "Template_Temp_" in the sandbox
+- added test dialog UI for SOCKS5 proxy (thanks Deezzir)
+- added ability to automatically remove template references that begin with "Template_Temp_"
 
 ### Changed
 - validated compatibility with Windows build 26217 and updated DynData
@@ -149,7 +149,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.13.7 / 5.68.7] - 2024-05-01
 
 ### Added
-- added file version information for SbieDll.dll and SbieSvc.exe in the Sandboxie Plus About dialog
+- added file version information for SbieDll.dll and SbieSvc.exe in the Sandboxie Plus about dialog
 
 ### Changed
 - improved checkboxes about DropAdminRights in SandMan [#3851](https://github.com/sandboxie-plus/Sandboxie/pull/3851) (thanks offhub)
@@ -190,14 +190,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed KeePass "Out of Memory" crash due to "BlockScreenCapture=y" [#3768](https://github.com/sandboxie-plus/Sandboxie/issues/3768)
 - fixed Sandboxie 1.13.4 with IsBlockCapture=y not working on Windows 7 [#3769](https://github.com/sandboxie-plus/Sandboxie/issues/3769)
 - fixed explorer.exe issue "FakeAdminRights=y" [#3638](https://github.com/sandboxie-plus/Sandboxie/issues/3638)
-- fixed Make it possible to disable forced folder warning [#3569](https://github.com/sandboxie-plus/Sandboxie/issues/3569)
+- fixed forced folder warning notification [#3569](https://github.com/sandboxie-plus/Sandboxie/issues/3569)
 
 
 
 ## [1.13.5 / 5.68.5] - 2024-04-10
 
 ### Added
-- added Setting all processes per box to a certain core [#3276](https://github.com/sandboxie-plus/Sandboxie/issues/3276)
+- added ability to set all processes to a certain core per box [#3276](https://github.com/sandboxie-plus/Sandboxie/issues/3276)
   - set "CpuAffinityMask=0x00000001" in Sandboxie.ini, where 0x00000001 is a bit mask indicating which cores are to be used
   - only supports cores 0-31, for 32+ will be always disabled when this option is used
 - added checkbox for Samba and DNS port blocking
@@ -206,12 +206,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - on systems in test signing mode, Sandboxie will try outdated offsets by default
 - changed Qt 5 version to Qt 5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)
-- moved network restrictions from general restrictions tab to an own tab on the network page
+- moved network restrictions from general restrictions to its own tab on the network page
 - improved certificate retrieval UI messages
 - improved MPC-BE template [#3798](https://github.com/sandboxie-plus/Sandboxie/pull/3798)
 
 ### Fixed
- - fixed Virtualization scheme Version 2 causing extremely slow file deleting speed [#3650](https://github.com/sandboxie-plus/Sandboxie/issues/3650)
+ - fixed Virtualization scheme Version 2 causing extremely slow file deletion speeds [#3650](https://github.com/sandboxie-plus/Sandboxie/issues/3650)
 
 ### Removed
 - removed obsolete recommendations in Templates.ini [#3802](https://github.com/sandboxie-plus/Sandboxie/pull/3802)
@@ -230,7 +230,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added a menu and button/icon to suspend all processes [#3741] (https://github.com/sandboxie-plus/Sandboxie/issues/3741)
 
 ### Changed
-- option "LingerLeniency=n" now also disabled the 5 second grace period for freshly started lingerers [#1892](https://github.com/sandboxie-plus/Sandboxie/issues/1892)
+- option "LingerLeniency=n" now also disables the 5 second grace period for freshly started lingerers [#1892](https://github.com/sandboxie-plus/Sandboxie/issues/1892)
 
 ### Fixed
 - fixed issue with symlinks related to start menu folders
@@ -244,7 +244,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issues with "IsProtectScreen=y" [3656](https://github.com/sandboxie-plus/Sandboxie/pull/3656#discussion_r1518549704)
-- fixed issue with hotkeys and changed default suspend all hotkey to Shift+Alt+Pause
+- fixed issue with hotkeys and changed the default 'suspend all' hotkey to Shift+Alt+Pause
 - fixed issue with suspended state not being updated when the global hotkey was used
 - fixed issue with new ** pattern failing in some cases
 
@@ -255,10 +255,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added menu entry to restart SandMan as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thanks Yeyixiao)
 - added option to block taking screen capture/screenshot of sandboxed processes (thanks Yeyixiao)
-  - it can be enabled with "IsProtectScreen=y"
+  - can be enabled with "IsProtectScreen=y"
   - see the sandbox option "Prevent processes from capturing window images from sandboxed windows" in SandMan UI
 - added option to prevent sandboxed processes from interfering with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thanks Yeyixiao)
-  - it can be enabled with "BlockInterferePower=y"
+  - can be enabled with "BlockInterferePower=y"
   - see the sandbox option "Prevent sandboxed processes from interfering with power operations" in SandMan UI
 - added new pattern mechanism using a `**` as a placeholder to indicate an arbitrary path element not containing a `\` [1ff2867](https://github.com/sandboxie-plus/Sandboxie/commit/1ff28679b0557a642d29f1651a90a8f7fec77171)
 
@@ -267,7 +267,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed privacy mode, NormalFilePath and symbolic link issue [#3660](https://github.com/sandboxie-plus/Sandboxie/issues/3660)
-- fixed access to Recycle Bin in an Application Compartment sandbox with data protection [#3665](https://github.com/sandboxie-plus/Sandboxie/issues/3665)
+- fixed access to recycle bin in an Application Compartment sandbox with data protection [#3665](https://github.com/sandboxie-plus/Sandboxie/issues/3665)
 
 
 
@@ -1225,7 +1225,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - used to update Templates.ini and translations after installation [#1105](https://github.com/sandboxie-plus/Sandboxie/issues/1105)
 
 ### Changed
-- restructured the box context menu a bit
+- restructured the box context menu
 - SandMan translations are now compressed and located in translations.7z
 
 ### Fixed
@@ -1419,9 +1419,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added domain\user notation when the LogFile registry setting is applied as workaround for [#2207](https://github.com/sandboxie-plus/Sandboxie/issues/2207)
-  - usage: in "HKLM\SYSTEM\CurrentControlSet\Services\SbieSvc" add REG_SZ "LogFile" with "3;[path]\Sandboxie.log"
+  - Usage: in "HKLM\SYSTEM\CurrentControlSet\Services\SbieSvc" add REG_SZ "LogFile" with "3;[path]\Sandboxie.log"
 - added option to block host processes from accessing sandboxed ones [#2132](https://github.com/sandboxie-plus/Sandboxie/issues/2132)
-  - usage: DenyHostAccess=Program.exe,y
+  - Usage: DenyHostAccess=Program.exe,y
   - Note: by default, this protection only applies for write access, that is, unsandboxed processes will still be able to obtain read-only access
   - to prevent host processes from obtaining read access, ConfidentialBox=y must also be set, which requires a supporter certificate
 - added compatibility template for ReHIPS

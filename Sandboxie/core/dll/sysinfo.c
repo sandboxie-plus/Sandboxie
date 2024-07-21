@@ -221,27 +221,35 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
             typedef LSTATUS(*ROK)(HKEY hKey, LPCWSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult);
             typedef LSTATUS(*RQVEW)(HKEY hKey, LPCWSTR lpValueName, LPDWORD lpReserved, LPDWORD lpType, LPBYTE lpData, LPDWORD lpcbData);
             typedef LSTATUS(*RCK)(HKEY hKey);
-            ROK RegOpenKeyExW = (ROK)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegOpenKeyExW");
-            RQVEW RegQueryValueExW = (RQVEW)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegQueryValueExW");
-            RCK RegCloseKey = (RCK)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegCloseKey");
+            ROK RegOpenKeyExW = (ROK)GetProcAddress(LoadLibraryW(DllName_advapi32), "RegOpenKeyExW");
+            RQVEW RegQueryValueExW = (RQVEW)GetProcAddress(LoadLibraryW(DllName_advapi32), "RegQueryValueExW");
+            RCK RegCloseKey = (RCK)GetProcAddress(LoadLibraryW(DllName_advapi32), "RegCloseKey");
 
             HKEY hKey = NULL;
-            PVOID lpData = NULL;
-            DWORD dwLen = 0;
+            DWORD dwLen = 0x10000;
+            PVOID lpData = Dll_AllocTemp(dwLen);
             DWORD type;
+            if (!lpData)
+                return STATUS_UNSUCCESSFUL;
 
             // if not set we return no information, 0 length
-            if (RegOpenKeyExW && RegOpenKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom\\", 0, KEY_READ, &hKey)) {
+            if (RegOpenKeyExW && RegOpenKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, KEY_READ, &hKey) == 0) {
+
                 RegQueryValueExW(hKey, L"SMBiosTable", 0, &type, lpData, &dwLen);
+
                 RegCloseKey(hKey);
             }
 
             *ReturnLength = dwLen;
             if (dwLen > 0) {
-                if (dwLen > BufferLength)
+                if (dwLen + sizeof(PSYSTEM_FIRMWARE_TABLE_INFORMATION) > BufferLength)
                     return STATUS_BUFFER_TOO_SMALL;
-                memcpy(Buffer, lpData, dwLen);
+                
+                firmwareTableInfo->TableBufferLength = dwLen;
+                memcpy(firmwareTableInfo->TableBuffer, lpData, dwLen);
             }
+
+            Dll_Free(lpData);
 
             return STATUS_SUCCESS;
         }

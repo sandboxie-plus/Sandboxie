@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added hwid display
+- added Language Spoof [#4024](https://github.com/sandboxie-plus/Sandboxie/pull/4024) (thanks Yeyixiao)
 
 ### Fixed
 - fixed Getting two advanced supporter certificate popups everytime I open Sandbox Settings on any sandbox [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)

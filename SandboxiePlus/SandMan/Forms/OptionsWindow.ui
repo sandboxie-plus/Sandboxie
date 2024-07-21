@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -1981,7 +1981,7 @@
          <item row="0" column="1">
           <widget class="QTabWidget" name="tabsForce">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabForceProgs">
             <attribute name="title">
@@ -2012,60 +2012,18 @@
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1">
-                <spacer name="verticalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="3" column="1">
-                <widget class="QToolButton" name="btnForceDir">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>23</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Force Folder</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
+               <item row="6" column="1">
                 <widget class="QCheckBox" name="chkShowForceTmpl">
                  <property name="text">
                   <string>Show Templates</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0" rowspan="5">
-                <widget class="QTreeWidget" name="treeForced">
-                 <property name="sortingEnabled">
-                  <bool>true</bool>
+               <item row="7" column="1">
+                <widget class="QPushButton" name="btnDelForce">
+                 <property name="text">
+                  <string>Remove</string>
                  </property>
-                 <column>
-                  <property name="text">
-                   <string>Type</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text">
-                   <string>Name</string>
-                  </property>
-                 </column>
                 </widget>
                </item>
                <item row="2" column="1">
@@ -2087,17 +2045,78 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1">
-                <widget class="QPushButton" name="btnDelForce">
-                 <property name="text">
-                  <string>Remove</string>
+               <item row="2" column="0" rowspan="6">
+                <widget class="QTreeWidget" name="treeForced">
+                 <property name="sortingEnabled">
+                  <bool>true</bool>
                  </property>
+                 <column>
+                  <property name="text">
+                   <string>Type</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Name</string>
+                  </property>
+                 </column>
                 </widget>
                </item>
-               <item row="7" column="0">
+               <item row="8" column="0">
                 <widget class="QCheckBox" name="chkDisableForced">
                  <property name="text">
                   <string>Disable forced Process and Folder for this sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <spacer name="verticalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="1">
+                <widget class="QToolButton" name="btnForceDir">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Force Folder</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QToolButton" name="btnForceChild">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Force Children</string>
                  </property>
                 </widget>
                </item>
@@ -2124,55 +2143,6 @@
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_55">
-               <item row="2" column="1">
-                <widget class="QToolButton" name="btnBreakoutProg">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>23</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Breakout Program</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_69">
-                 <property name="text">
-                  <string>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <spacer name="verticalSpacer_26">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="5" column="1">
-                <widget class="QCheckBox" name="chkShowBreakoutTmpl">
-                 <property name="text">
-                  <string>Show Templates</string>
-                 </property>
-                </widget>
-               </item>
                <item row="7" column="0">
                 <widget class="QLabel" name="lblBreakOut">
                  <property name="text">
@@ -2183,25 +2153,6 @@
                  </property>
                  <property name="openExternalLinks">
                   <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QToolButton" name="btnBreakoutDir">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>23</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Breakout Folder</string>
                  </property>
                 </widget>
                </item>
@@ -2222,10 +2173,78 @@
                  </column>
                 </widget>
                </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_69">
+                 <property name="text">
+                  <string>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
                <item row="6" column="1">
                 <widget class="QPushButton" name="btnDelBreakout">
                  <property name="text">
                   <string>Remove</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <spacer name="verticalSpacer_26">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QToolButton" name="btnBreakoutProg">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Breakout Program</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="chkShowBreakoutTmpl">
+                 <property name="text">
+                  <string>Show Templates</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QToolButton" name="btnBreakoutDir">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Breakout Folder</string>
                  </property>
                 </widget>
                </item>
@@ -4684,6 +4703,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
            <widget class="QWidget" name="tabHideProc">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -4763,6 +4783,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
               <widget class="QLabel" name="lblProcessHiding">
                <property name="font">
                 <font>
+                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>
@@ -4797,6 +4818,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
               <widget class="QLabel" name="lblPrivacyProtection">
                <property name="font">
                 <font>
+                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>

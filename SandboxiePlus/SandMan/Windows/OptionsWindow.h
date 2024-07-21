@@ -29,7 +29,8 @@ public:
 		eProcess,
 		ePath,
 		eText,
-		eTemplate
+		eTemplate,
+		eParent
 	};
 
 signals:
@@ -84,7 +85,9 @@ private slots:
 	void OnGroupsChanged(QTreeWidgetItem* pItem, int Index) { m_GroupsChanged = true;  OnOptChanged(); }
 
 	void OnForceProg();
-	void OnForceBrowse();
+	void OnForceBrowseProg();
+	void OnForceChild();
+	void OnForceBrowseChild();
 	void OnForceDir();
 	void OnDelForce();
 	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }

@@ -187,6 +187,22 @@ _FX BOOLEAN SysInfo_Init(void)
 // SysInfo_NtQuerySystemInformation
 //---------------------------------------------------------------------------
 
+typedef struct _SYSTEM_FIRMWARE_TABLE_INFORMATION {
+    ULONG ProviderSignature;
+    ULONG Action;
+    ULONG TableID;
+    ULONG TableBufferLength;
+    UCHAR TableBuffer[ANYSIZE_ARRAY];
+} SYSTEM_FIRMWARE_TABLE_INFORMATION, *PSYSTEM_FIRMWARE_TABLE_INFORMATION;
+
+#define FIRMWARE_TABLE_PROVIDER_ACPI  'ACPI'
+#define FIRMWARE_TABLE_PROVIDER_SMBIOS 'RSMB'
+#define FIRMWARE_TABLE_PROVIDER_FIRM   'FIRM'
+
+typedef enum _SYSTEM_FIRMWARE_TABLE_ACTION {
+    SystemFirmwareTable_Enumerate,
+    SystemFirmwareTable_Get
+} SYSTEM_FIRMWARE_TABLE_ACTION;
 
 _FX NTSTATUS SysInfo_NtQuerySystemInformation(
     SYSTEM_INFORMATION_CLASS SystemInformationClass,
@@ -195,6 +211,41 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
     ULONG *ReturnLength)
 {
     NTSTATUS status;
+
+    if ((SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
+
+        PSYSTEM_FIRMWARE_TABLE_INFORMATION firmwareTableInfo = (PSYSTEM_FIRMWARE_TABLE_INFORMATION)Buffer;
+
+        if (firmwareTableInfo->ProviderSignature == FIRMWARE_TABLE_PROVIDER_SMBIOS && firmwareTableInfo->Action == SystemFirmwareTable_Get)
+        {
+            typedef LSTATUS(*ROK)(HKEY hKey, LPCWSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult);
+            typedef LSTATUS(*RQVEW)(HKEY hKey, LPCWSTR lpValueName, LPDWORD lpReserved, LPDWORD lpType, LPBYTE lpData, LPDWORD lpcbData);
+            typedef LSTATUS(*RCK)(HKEY hKey);
+            ROK RegOpenKeyExW = (ROK)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegOpenKeyExW");
+            RQVEW RegQueryValueExW = (RQVEW)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegQueryValueExW");
+            RCK RegCloseKey = (RCK)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegCloseKey");
+
+            HKEY hKey = NULL;
+            PVOID lpData = NULL;
+            DWORD dwLen = 0;
+            DWORD type;
+
+            // if not set we return no information, 0 length
+            if (RegOpenKeyExW && RegOpenKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom\\", 0, KEY_READ, &hKey)) {
+                RegQueryValueExW(hKey, L"SMBiosTable", 0, &type, lpData, &dwLen);
+                RegCloseKey(hKey);
+            }
+
+            *ReturnLength = dwLen;
+            if (dwLen > 0) {
+                if (dwLen > BufferLength)
+                    return STATUS_BUFFER_TOO_SMALL;
+                memcpy(Buffer, lpData, dwLen);
+            }
+
+            return STATUS_SUCCESS;
+        }
+    }
 
     status = __sys_NtQuerySystemInformation(
         SystemInformationClass, Buffer, BufferLength, ReturnLength);
@@ -206,40 +257,6 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 
         SysInfo_DiscardProcesses(Buffer);
     }
-
-
-	if (NT_SUCCESS(status) && (SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
-	
-		HKEY hKey=NULL;
-		PVOID lpData=NULL;
-		DWORD dwLen = 0;
-		typedef LSTATUS
-		(*ROK)(
-			_In_ HKEY hKey,
-			_In_opt_ LPCWSTR lpSubKey,
-			_In_opt_ DWORD ulOptions,
-			_In_ REGSAM samDesired,
-			_Out_ PHKEY phkResult
-			);
-		typedef LSTATUS
-			(*RQVEW)(
-				 HKEY hKey,
-				 LPCWSTR lpValueName,
-				 LPDWORD lpReserved,
-				 LPDWORD lpType,
-				 LPBYTE lpData,
-				LPDWORD lpcbData
-			);
-		ROK RegOpenKeyExW=Ldr_GetProcAddrOld(L"Advapi32.dll",L"RegOpenKeyExW");
-		RQVEW RegQueryValueExW = Ldr_GetProcAddrOld(L"Advapi32.dll", L"RegQueryValueExW");
-		DWORD type;
-		if (RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\SandboxieHide\\", 0, KEY_READ, &hKey))
-			RegQueryValueExW(hKey, L"FalseFirmwareValue", 0, &type, lpData, &dwLen);
-		if (dwLen != 0) {
-			Buffer = lpData;
-			*ReturnLength = dwLen;
-		}
-	}
 
     return status;
 }

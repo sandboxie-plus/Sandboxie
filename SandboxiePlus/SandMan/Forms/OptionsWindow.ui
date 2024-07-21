@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>9</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -1732,14 +1732,45 @@
             <layout class="QGridLayout" name="gridLayout_26">
              <item row="0" column="1">
               <layout class="QGridLayout" name="gridLayout_2">
-               <item row="5" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkDropPrivileges">
+               <item row="6" column="0" colspan="2">
+                <widget class="QLabel" name="lblToken">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the sandbox integrity itself</string>
+                 </property>
                  <property name="text">
-                  <string>Drop critical privileges from processes running with a SYSTEM token</string>
+                  <string>Sandboxie token</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="2">
+               <item row="4" column="4">
+                <widget class="QLabel" name="label_65">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>(Security Critical)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkElevateRpcss">
+                 <property name="text">
+                  <string>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="2">
                 <spacer name="horizontalSpacer_13">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1752,13 +1783,6 @@
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkProtectSCM">
-                 <property name="text">
-                  <string>Allow only privileged processes to access the Service Control Manager</string>
-                 </property>
-                </widget>
-               </item>
                <item row="8" column="2" colspan="2">
                 <widget class="QLabel" name="label_74">
                  <property name="text">
@@ -1769,15 +1793,35 @@
                  </property>
                 </widget>
                </item>
-             <item row="9" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkCreateToken">
-               <property name="text">
-                <string>Create a new sandboxed token instead of setting down default token</string>
-               </property>
-              </widget>
-             </item>
-               <item row="4" column="4">
-                <widget class="QLabel" name="label_65">
+               <item row="2" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkRestrictServices">
+                 <property name="text">
+                  <string>Do not start sandboxed services using a system token (recommended)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkSbieLogon">
+                 <property name="text">
+                  <string>Use a Sandboxie login instead of an anonymous token</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="1">
+                <spacer name="verticalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="5" column="4">
+                <widget class="QLabel" name="label_64">
                  <property name="font">
                   <font>
                    <weight>75</weight>
@@ -1787,6 +1831,20 @@
                  </property>
                  <property name="text">
                   <string>(Security Critical)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkProtectSCM">
+                 <property name="text">
+                  <string>Allow only privileged processes to access the Service Control Manager</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkDropPrivileges">
+                 <property name="text">
+                  <string>Drop critical privileges from processes running with a SYSTEM token</string>
                  </property>
                 </widget>
                </item>
@@ -1807,40 +1865,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkRestrictServices">
-                 <property name="text">
-                  <string>Do not start sandboxed services using a system token (recommended)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkSbieLogon">
-                 <property name="text">
-                  <string>Use a Sandboxie login instead of an anonymous token</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="1">
-                <spacer name="verticalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="3" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkElevateRpcss">
-                 <property name="text">
-                  <string>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</string>
-                 </property>
-                </widget>
-               </item>
                <item row="4" column="1" colspan="3">
                 <widget class="QCheckBox" name="chkProtectSystem">
                  <property name="text">
@@ -1848,34 +1872,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="4">
-                <widget class="QLabel" name="label_64">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
+               <item row="9" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkCreateToken">
                  <property name="text">
-                  <string>(Security Critical)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="0" colspan="2">
-                <widget class="QLabel" name="lblToken">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="toolTip">
-                  <string>Protect the sandbox integrity itself</string>
-                 </property>
-                 <property name="text">
-                  <string>Sandboxie token</string>
+                  <string>Create a new sandboxed token instead of stripping down the original token</string>
                  </property>
                 </widget>
                </item>
@@ -4096,13 +4096,13 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
-                <item row="7" column="1">
-              <widget class="QCheckBox" name="chkForceRestart">
-               <property name="text">
-                <string>Restart force process before they begin to execute</string>
-               </property>
-              </widget>
-             </item>
+               <item row="7" column="1">
+                <widget class="QCheckBox" name="chkForceRestart">
+                 <property name="text">
+                  <string>Restart force process before they begin to execute</string>
+                 </property>
+                </widget>
+               </item>
                <item row="8" column="0">
                 <spacer name="verticalSpacer_28">
                  <property name="orientation">
@@ -4679,23 +4679,132 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
            <widget class="QWidget" name="tabHideProc">
             <property name="font">
              <font>
-              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
             </property>
             <attribute name="title">
-             <string>Hide Processes</string>
+             <string>Privacy</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_29">
-             <item row="6" column="1">
+             <item row="2" column="2">
+              <widget class="QComboBox" name="cmbLangID"/>
+             </item>
+             <item row="10" column="4">
               <widget class="QCheckBox" name="chkShowHiddenProcTmpl">
                <property name="text">
                 <string>Show Templates</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="0" rowspan="4">
+             <item row="1" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkHideFirmware">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Hide Firmware Informations</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="4">
+              <widget class="QPushButton" name="btnAddProcess">
+               <property name="text">
+                <string>Add Process</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="lblProcessHiding">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Process Hiding</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="label_72">
+               <property name="text">
+                <string>Use a custom Locale/LangID</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="4">
+              <spacer name="verticalSpacer_16">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="5" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkHideHostProcesses">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <spacer name="horizontalSpacer_24">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="11" column="4">
+              <widget class="QPushButton" name="btnDelProcess">
+               <property name="text">
+                <string>Remove</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0" colspan="4">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Hide host processes from processes running in the sandbox.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkHideOtherBoxes">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running in other boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="lblPrivacyProtection">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Data Protection</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0" rowspan="4" colspan="4">
               <widget class="QTreeWidget" name="treeHideProc">
                <property name="sortingEnabled">
                 <bool>true</bool>
@@ -4712,71 +4821,13 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </column>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>Hide host processes from processes running in the sandbox.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkHideNonSystemProcesses">
-               <property name="text">
-                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
+             <item row="12" column="0" colspan="5">
               <widget class="QCheckBox" name="chkBlockWMI">
+               <property name="toolTip">
+                <string>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</string>
+               </property>
                <property name="text">
-                <string>Prevent sandboxed processes from accessing system details through WMI</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <spacer name="verticalSpacer_16">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="7" column="1">
-              <widget class="QPushButton" name="btnDelProcess">
-               <property name="text">
-                <string>Remove</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QPushButton" name="btnAddProcess">
-               <property name="text">
-                <string>Add Process</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkHideOtherBoxes">
-               <property name="text">
-                <string>Don't allow sandboxed processes to see processes running in other boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_59">
-               <property name="text">
-                <string>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, 'tasklist.exe' can access a complete list of processes even if 'HideOtherBoxes' is enabled. Enable this option to prevent such behavior.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
+                <string>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</string>
                </property>
               </widget>
              </item>

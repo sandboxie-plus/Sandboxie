@@ -631,5 +631,7 @@ private:
 		bool Changed;
 	};
 	QMap<QCheckBox*, SDbgOpt> m_DebugOptions;
+
+	void InitLangID();
 };
 

@@ -13,13 +13,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.5 / 5.69.5] - 2024-07-?
 
 ### Added
-- added HwID display
-- added Language Spoof "UseSpoofLocale=y" and "FalseLCID=1033" [#4024](https://github.com/sandboxie-plus/Sandboxie/pull/4024) (thanks Yeyixiao)
+- added hwid display
+- added Language Spoof "CustomLCID=1033" [#4024](https://github.com/sandboxie-plus/Sandboxie/pull/4024) (thanks Yeyixiao)
+- added option to always run the sandman UI as admin [#4090](https://github.com/sandboxie-plus/Sandboxie/issues/4090)
 
 ### Fixed
 - fixed two supporter certificate popping up every time a Sandboxes' settings are opened [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)
 - fixed issue with HwID-bound serial keys failing when no HwID could be obtained
 - fixed issue with "UseChangeSpeed=y"
+- fixed broken "HideFirmwareInfo=y" implementation.
+  - changed reg path to key "HKCU\\System\\SbieCustom", value: "SMBiosTable"
+  - added UI options
+- fixed schannel error SEC_E_SECPKG_NOT_FOUND in encrypted sandboxes [#4081](https://github.com/sandboxie-plus/Sandboxie/issues/4081)
 
 ### Changed
 - the certificate format can now take an explicit validity days specification, needed for gapless certificate renewal

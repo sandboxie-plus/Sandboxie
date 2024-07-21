@@ -433,6 +433,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.chkWatchConfig, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged())); // not sbie ini
 
+	connect(ui.chkSkipUAC, SIGNAL(stateChanged(int)), this, SLOT(OnSkipUAC()));
+	ui.chkSkipUAC->setEnabled(IsElevated());
+	m_SkipUACChanged = false;
+
 	connect(ui.chkAdminOnly, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
 	connect(ui.chkPassRequired, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
 	connect(ui.btnSetPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
@@ -953,6 +957,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkMonitorSize->setChecked(theConf->GetBool("Options/WatchBoxSize", false));
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
+	ui.chkSkipUAC->setChecked(SkipUacRun(true));
 
 	ui.chkScanMenu->setChecked(theConf->GetBool("Options/ScanStartMenu", true));
 	ui.cmbIntegrateMenu->setCurrentIndex(theConf->GetInt("Options/IntegrateStartMenu", 0));
@@ -1657,6 +1662,8 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
 
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
+	if (m_SkipUACChanged)
+		SkipUacEnable(ui.chkSkipUAC->isChecked());
 
 	theConf->SetValue("Options/ScanStartMenu", ui.chkScanMenu->isChecked());
 	int OldIntegrateStartMenu = theConf->GetInt("Options/IntegrateStartMenu", 0);

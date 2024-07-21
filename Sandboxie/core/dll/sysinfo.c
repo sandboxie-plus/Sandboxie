@@ -216,34 +216,59 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 
         PSYSTEM_FIRMWARE_TABLE_INFORMATION firmwareTableInfo = (PSYSTEM_FIRMWARE_TABLE_INFORMATION)Buffer;
 
-        if (firmwareTableInfo->ProviderSignature == FIRMWARE_TABLE_PROVIDER_SMBIOS && firmwareTableInfo->Action == SystemFirmwareTable_Get)
-        {
-            typedef LSTATUS(*ROK)(HKEY hKey, LPCWSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult);
-            typedef LSTATUS(*RQVEW)(HKEY hKey, LPCWSTR lpValueName, LPDWORD lpReserved, LPDWORD lpType, LPBYTE lpData, LPDWORD lpcbData);
-            typedef LSTATUS(*RCK)(HKEY hKey);
-            ROK RegOpenKeyExW = (ROK)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegOpenKeyExW");
-            RQVEW RegQueryValueExW = (RQVEW)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegQueryValueExW");
-            RCK RegCloseKey = (RCK)GetProcAddress(GetModuleHandle(DllName_advapi32), "RegCloseKey");
+        if (firmwareTableInfo->ProviderSignature == FIRMWARE_TABLE_PROVIDER_SMBIOS && firmwareTableInfo->Action == SystemFirmwareTable_Get) {
+
+            typedef LSTATUS(*RegOpenKeyExW_t)(HKEY hKey, LPCWSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult);
+            typedef LSTATUS(*RegQueryValueExW_t)(HKEY hKey, LPCWSTR lpValueName, LPDWORD lpReserved, LPDWORD lpType, LPBYTE lpData, LPDWORD lpcbData);
+            typedef LSTATUS(*RegCloseKey_t)(HKEY hKey);
+
+            HMODULE advapi32 = LoadLibraryW(DllName_advapi32);
+            if (!advapi32) return STATUS_UNSUCCESSFUL;
+
+            RegOpenKeyExW_t RegOpenKeyExW = (RegOpenKeyExW_t)GetProcAddress(advapi32, "RegOpenKeyExW");
+            RegQueryValueExW_t RegQueryValueExW = (RegQueryValueExW_t)GetProcAddress(advapi32, "RegQueryValueExW");
+            RegCloseKey_t RegCloseKey = (RegCloseKey_t)GetProcAddress(advapi32, "RegCloseKey");
+
+            if (!RegOpenKeyExW || !RegQueryValueExW || !RegCloseKey) {
+                FreeLibrary(advapi32);
+                return STATUS_UNSUCCESSFUL;
+            }
 
             HKEY hKey = NULL;
-            PVOID lpData = NULL;
-            DWORD dwLen = 0;
-            DWORD type;
+            DWORD dwLen = 0x10000;
+            PVOID lpData = Dll_AllocTemp(dwLen);
+            if (!lpData) {
+                FreeLibrary(advapi32);
+                return STATUS_UNSUCCESSFUL;
+            }
 
+            DWORD type = 0;
             // if not set we return no information, 0 length
-            if (RegOpenKeyExW && RegOpenKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom\\", 0, KEY_READ, &hKey)) {
-                RegQueryValueExW(hKey, L"SMBiosTable", 0, &type, lpData, &dwLen);
+            if (RegOpenKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
+                if (RegQueryValueExW(hKey, L"SMBiosTable", NULL, &type, (LPBYTE)lpData, &dwLen) != ERROR_SUCCESS) {
+                    dwLen = 0;
+                }
                 RegCloseKey(hKey);
             }
 
             *ReturnLength = dwLen;
             if (dwLen > 0) {
-                if (dwLen > BufferLength)
-                    return STATUS_BUFFER_TOO_SMALL;
-                memcpy(Buffer, lpData, dwLen);
+                if (dwLen + sizeof(SYSTEM_FIRMWARE_TABLE_INFORMATION) > BufferLength) {
+                    status = STATUS_BUFFER_TOO_SMALL;
+                    goto cleanup;
+                }
+
+                firmwareTableInfo->TableBufferLength = dwLen;
+                memcpy(firmwareTableInfo->TableBuffer, lpData, dwLen);
             }
 
-            return STATUS_SUCCESS;
+            status = STATUS_SUCCESS;
+
+        cleanup:
+            Dll_Free(lpData);
+            FreeLibrary(advapi32);
+
+            return status;
         }
     }
 

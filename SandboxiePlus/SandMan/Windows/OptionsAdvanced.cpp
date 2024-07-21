@@ -100,6 +100,7 @@ void COptionsWindow::CreateAdvanced()
 
 	connect(ui.chkHideFirmware, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.cmbLangID, SIGNAL(currentIndexChanged(int)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.btnDumpFW, SIGNAL(clicked(bool)), this, SLOT(OnDumpFW()));
 
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkHideNonSystemProcesses, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -266,7 +267,7 @@ void COptionsWindow::LoadAdvanced()
 	ShowTriggersTmpl();
 	//
 
-	ui.chkHideFirmware->setChecked(m_pBox->GetBool("HideFirmwareInfo", true));
+	ui.chkHideFirmware->setChecked(m_pBox->GetBool("HideFirmwareInfo", false));
 
 	ui.cmbLangID->setCurrentIndex(ui.cmbLangID->findData(m_pBox->GetNum("CustomLCID", 0)));
 
@@ -1339,6 +1340,67 @@ void COptionsWindow::SaveDebug()
 		WriteAdvancedCheck(pCheck, DbgOption.Name, DbgOption.Value);
 		DbgOption.Changed = false;
 	}
+}
+
+#define WIN32_NO_STATUS
+typedef long NTSTATUS;
+
+#include "..\..\Sandboxie\common\win32_ntddk.h"
+
+typedef struct _SYSTEM_FIRMWARE_TABLE_INFORMATION {
+    ULONG ProviderSignature;
+    ULONG Action;
+    ULONG TableID;
+    ULONG TableBufferLength;
+    UCHAR TableBuffer[ANYSIZE_ARRAY];
+} SYSTEM_FIRMWARE_TABLE_INFORMATION, *PSYSTEM_FIRMWARE_TABLE_INFORMATION;
+
+#define FIRMWARE_TABLE_PROVIDER_ACPI  'ACPI'
+#define FIRMWARE_TABLE_PROVIDER_SMBIOS 'RSMB'
+
+typedef enum _SYSTEM_FIRMWARE_TABLE_ACTION {
+    SystemFirmwareTable_Enumerate,
+    SystemFirmwareTable_Get
+} SYSTEM_FIRMWARE_TABLE_ACTION;
+
+void COptionsWindow::OnDumpFW()
+{
+    ULONG returnLength = 0;
+    NTSTATUS status;
+    SYSTEM_FIRMWARE_TABLE_INFORMATION* firmwareTableInfo;
+    ULONG firmwareTableSize = sizeof(SYSTEM_FIRMWARE_TABLE_INFORMATION) + 0x10000; // Initial size
+
+retry:
+    firmwareTableInfo = (SYSTEM_FIRMWARE_TABLE_INFORMATION*)malloc(firmwareTableSize);
+    firmwareTableInfo->ProviderSignature = FIRMWARE_TABLE_PROVIDER_SMBIOS;
+    firmwareTableInfo->Action = SystemFirmwareTable_Get;
+    firmwareTableInfo->TableID = 0;
+    firmwareTableInfo->TableBufferLength = firmwareTableSize - sizeof(SYSTEM_FIRMWARE_TABLE_INFORMATION);
+
+    status = NtQuerySystemInformation(SystemFirmwareTableInformation, firmwareTableInfo, firmwareTableSize, &returnLength);
+
+    if (status == 0xC0000023L/*STATUS_BUFFER_TOO_SMALL*/)  {
+		free(firmwareTableInfo);
+		firmwareTableSize += 0x10000;
+		goto retry;
+    }
+
+    if (!NT_SUCCESS(status))
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, tr("Failed to retrieve firmware table information."));
+    else if(firmwareTableInfo->TableBufferLength)
+	{
+		HKEY hKey;
+		DWORD disposition;
+		if(RegCreateKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, 0, 0, KEY_WRITE, NULL, &hKey, &disposition) == ERROR_SUCCESS) 
+		{
+			if(RegSetValueExW(hKey, L"SMBiosTable", 0, REG_BINARY, firmwareTableInfo->TableBuffer, firmwareTableInfo->TableBufferLength) == ERROR_SUCCESS)
+				CSandMan::ShowMessageBox(this, QMessageBox::Information, tr("Firmware table saved successfully to host registry: HKEY_CURRENT_USER\\System\\SbieCustom<br />you can copy it to the sandboxed registry to have a different value for each box."));
+
+            RegCloseKey(hKey);
+        }
+    }
+
+    free(firmwareTableInfo);
 }
 
 void COptionsWindow::InitLangID()

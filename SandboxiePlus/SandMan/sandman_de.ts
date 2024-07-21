@@ -3315,28 +3315,28 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="1643"/>
         <source>Which box you want to add in?</source>
-        <translation type="unfinished"></translation>
+        <translation>In welche Box möchten Sie dies einfügen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1643"/>
         <source>Type the box name which you are going to set:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie den Boxnamen ein, welchen Sie ändern möchten:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1656"/>
         <location filename="SandMan.cpp" line="1660"/>
         <source>Sandboxie-Plus Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus Warnung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1656"/>
         <source>You typed a wrong box name!Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben einen falschen Boxnamen eingegeben! Es wurde nichts geändert.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1660"/>
         <source>Users canceled this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorgang durch Benutzer abgebrochen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1716"/>
@@ -5406,7 +5406,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1606"/>
         <source>Make Folder/File &amp;Forced</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwinge &amp;Ordner/Datei</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1913"/>
@@ -7380,7 +7380,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4102"/>
         <source>Restart force process before they begin to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte erzwungene Prozesse neu, bevor sie ausgeführt werden</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4539"/>
@@ -7699,7 +7699,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1775"/>
         <source>Create a new sandboxed token instead of setting down default token</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzeuge einen neuen sandgeboxten Token, anstelle des Standardtokens</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2149"/>
@@ -9007,7 +9007,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="564"/>
         <source>Add ‘Make Folder/File Forced&apos; to the context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge &apos;Erzwinge &amp;Ordner/Datei&apos; dem Kontextmenü hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="775"/>
@@ -9309,18 +9309,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="608"/>
         <source>Integrate with Host Desktop</source>
         <translation>Mit dem Host-Desktop integrieren</translation>
-    </message>
-    <message>
-        <source>Sandboxed Desktop</source>
-        <translation type="vanished">Sandgeboxter Desktop</translation>
-    </message>
-    <message>
-        <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="vanished">Wechsle zum sandgeboxten Desktop beim Starten eines Prozesses</translation>
-    </message>
-    <message>
-        <source>Switch to sandboxed desktop with double click</source>
-        <translation type="vanished">Wechsle zum sandgeboxten Desktop durch Doppelklick</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="651"/>

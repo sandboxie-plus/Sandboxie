@@ -20,8 +20,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Getting two advanced supporter certificate popups everytime I open Sandbox Settings on any sandbox [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)
 - fixed issue with HwID bound serial keys failing when no HwID could be obtained
 - fixed issue with "UseChangeSpeed=y"
-- fixed with option "HideFirmwareInfo=y"
+- fixed broken "HideFirmwareInfo=y" implementation.
   - changed reg path to key "HKCU\\System\\SbieCustom", value: "SMBiosTable"
+  - added UI options
 
 ### Changed
 - the certificate format can now take an explicit validity days specification, needed for gapless certificat renewal.

@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed broken "HideFirmwareInfo=y" implementation.
   - changed reg path to key "HKCU\\System\\SbieCustom", value: "SMBiosTable"
   - added UI options
+- fixed schannel error SEC_E_SECPKG_NOT_FOUND in encrypted sandboxes [#4081](https://github.com/sandboxie-plus/Sandboxie/issues/4081)
 
 ### Changed
 - the certificate format can now take an explicit validity days specification, needed for gapless certificat renewal.

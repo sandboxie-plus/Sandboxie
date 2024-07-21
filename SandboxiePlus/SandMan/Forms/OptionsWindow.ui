@@ -3707,6 +3707,11 @@ The process match level has a higher priority than the specificity and describes
                    <string>Password</string>
                   </property>
                  </column>
+                 <column>
+                  <property name="text">
+                   <string>Bypass IPs</string>
+                  </property>
+                 </column>
                 </widget>
                </item>
                <item row="4" column="1">

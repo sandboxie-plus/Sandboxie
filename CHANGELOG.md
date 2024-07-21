@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added hwid display
 - added Language Spoof "CustomLCID=1033" [#4024](https://github.com/sandboxie-plus/Sandboxie/pull/4024) (thanks Yeyixiao)
 - added option to always run the sandman UI as admin [#4090](https://github.com/sandboxie-plus/Sandboxie/issues/4090)
+- added Proxy exclusion [#4036](https://github.com/sandboxie-plus/Sandboxie/issues/4036)
 
 ### Fixed
 - fixed two supporter certificate popping up every time a Sandboxes' settings are opened [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)

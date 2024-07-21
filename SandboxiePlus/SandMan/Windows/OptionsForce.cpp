@@ -250,7 +250,7 @@ void COptionsWindow::OnBreakoutProg()
 	OnForcedChanged();
 }
 
-void COptionsWindow::OnForceBrowse()
+void COptionsWindow::OnForceBrowseProg()
 {
 	QString Value = QFileDialog::getOpenFileName(this, tr("Select Executable File"), "", tr("Executable Files (*.exe)"));
 	if (Value.isEmpty())

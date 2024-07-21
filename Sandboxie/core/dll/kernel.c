@@ -396,16 +396,14 @@ _FX LANGID Kernel_GetUserDefaultUILanguage()
 _FX int Kernel_GetUserDefaultLocaleName(LPWSTR lpLocaleName, int cchLocaleName) 
 {
 	LCIDToLocaleName ltln = (LCIDToLocaleName)GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "LCIDToLocaleName");
-	if (ltln) {
+	if (ltln)
 		return ltln(SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
+	
+	if (cchLocaleName >= 6) {
+		wcscpy(lpLocaleName, L"en_US");
+		return 6;
 	}
-	else {
-		if (cchLocaleName >= 4)
-			lstrcpy(lpLocaleName, L"en_US");
-		else
-			return 0;
-	}
-	return 4;
+	return 0;
 }
 
 
@@ -432,81 +430,27 @@ _FX LANGID Kernel_GetUserDefaultLangID()
 
 
 //---------------------------------------------------------------------------
-// 
-//---------------------------------------------------------------------------
-
-
-char* itoa2(int num, char* str, int radix)
-{
-	char index[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	unsigned unum;
-	int i = 0, j, k;
-
-	
-	if (radix == 10 && num < 0)
-	{
-		unum = (unsigned)-num;
-		str[i++] = '-';
-	}
-	else unum = (unsigned)num;
-
-	
-	do
-	{
-		str[i++] = index[unum % (unsigned)radix];
-		unum /= radix;
-
-	} while (unum);
-
-	str[i] = '\0';
-
-	
-	if (str[0] == '-') k = 1;
-	else k = 0;
-
-	char temp;
-	for (j = k; j <= (i - 1) / 2; j++)
-	{
-		temp = str[j];
-		str[j] = str[i - 1 + k - j];
-		str[i - 1 + k - j] = temp;
-	}
-
-	return str;
-
-}
-
-
-//---------------------------------------------------------------------------
-// 
-//---------------------------------------------------------------------------
-
-
-wchar_t* GetWC(const char* c)
-{
-	const size_t cSize = strlen(c) + 1;
-	
-	wchar_t* wc=(wchar_t*)GlobalAlloc(GMEM_FIXED | GMEM_ZEROINIT, sizeof(wchar_t) * cSize);
-	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, c, cSize, wc, cSize);
-	return wc;
-}
-
-
-//---------------------------------------------------------------------------
 // Kernel_GetUserDefaultGeoName
 //---------------------------------------------------------------------------
 
 
 _FX int Kernel_GetUserDefaultGeoName(LPWSTR geoName, int geoNameCount) 
 {
-	char* buf = (char*)GlobalAlloc(GMEM_FIXED | GMEM_ZEROINIT, sizeof(char) * geoNameCount);
-	itoa2(SbieApi_QueryConfNumber(NULL, L"FalseAreaNumber", 840),buf,10);
-	wchar_t* tmp = GetWC(buf);
-	int length = sizeof(GetWC(buf));
-	lstrcpy(geoName, tmp);
-	GlobalFree(buf);
-	GlobalFree(tmp);
-	return length;
+	LCIDToLocaleName ltln = (LCIDToLocaleName)GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "LCIDToLocaleName");
+	if (ltln) {
+		WCHAR LocaleName[7];
+		int cchLocaleName = ltln(SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033), LocaleName, ARRAYSIZE(LocaleName), 0);
+		if (cchLocaleName > 0 && geoNameCount >= cchLocaleName - 3) {
+			wcscpy(geoName, LocaleName + 3);
+			return cchLocaleName - 3;
+		}
+	}
+	
+	if (geoNameCount >= 3) {
+		wcscpy(geoName, L"US");
+		return 3;
+	}
+	return 0;	
 }
 
 
@@ -528,17 +472,15 @@ _FX LANGID Kernel_GetSystemDefaultUILanguage()
 
 _FX int Kernel_GetSystemDefaultLocaleName(LPWSTR lpLocaleName, int cchLocaleName) 
 {
-	LCIDToLocaleName ltln = Ldr_GetProcAddrNew(Dll_Kernel32, L"LCIDToLocaleName", "LCIDToLocaleName");
-	if (ltln) {
+	LCIDToLocaleName ltln = (LCIDToLocaleName)GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "LCIDToLocaleName");
+	if (ltln)
 		return ltln(SbieApi_QueryConfNumber(NULL, L"FalseLCID", 1033), lpLocaleName, cchLocaleName, 0);
+	
+	if (cchLocaleName >= 6) {
+		wcscpy(lpLocaleName, L"en_US");
+		return 6;
 	}
-	else {
-		if (cchLocaleName >= 4)
-			lstrcpy(lpLocaleName, L"en_US");
-		else
-			return 0;
-	}
-	return 4;
+	return 0;
 }
 
 

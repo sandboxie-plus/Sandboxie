@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - changed reg path to key "HKCU\\System\\SbieCustom", value: "SMBiosTable"
   - added UI options
 - fixed schannel error SEC_E_SECPKG_NOT_FOUND in encrypted sandboxes [#4081](https://github.com/sandboxie-plus/Sandboxie/issues/4081)
+- fixed The name of the sandbox is too long, causing an error in sbie2327 [#4064](https://github.com/sandboxie-plus/Sandboxie/issues/4064)
 
 ### Changed
 - the certificate format can now take an explicit validity days specification, needed for gapless certificate renewal

@@ -10,3 +10,6 @@ bool IsAdminUser(bool OnlyFull = false);
 
 bool IsAutorunEnabled();
 bool AutorunEnable(bool is_enable);
+
+bool SkipUacRun(bool test_only = false);
+bool SkipUacEnable(bool is_enable);

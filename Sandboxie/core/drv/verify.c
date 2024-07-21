@@ -679,7 +679,7 @@ _FX NTSTATUS KphValidateCertificate()
             // DD.MM.YYYY
             if (KphParseDate(value, &cert_date)) {
                 // DD.MM.YYYY +Days
-                WCHAR ptr = wcschr(value, L'+');
+                WCHAR* ptr = wcschr(value, L'+');
                 if (ptr)
                     days = _wtol(ptr);
             }

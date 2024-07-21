@@ -511,13 +511,19 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		QString Text = ui.lblSerial->text();
 		ui.lblSerial->setText(QString("<a href=\"_\">%1</a>").arg(Text));
 		ui.txtSerial->setVisible(false);
+		ui.lblHwId->setVisible(false);
 		ui.btnGetCert->setVisible(false);
 		connect(ui.lblSerial, &QLabel::linkActivated, this, [=]() {
 			ui.lblSerial->setText(Text);
 			ui.txtSerial->setVisible(true);
+			ui.lblHwId->setVisible(true);
 			ui.btnGetCert->setVisible(true);
 		});
 	}
+
+	wchar_t uuid_str[40];
+	if(theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str)))
+		ui.lblHwId->setText(tr("HwId: %1").arg(QString::fromWCharArray(uuid_str)));
 
 	connect(ui.btnGetCert, SIGNAL(clicked(bool)), this, SLOT(OnGetCert()));
 

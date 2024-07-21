@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.5 / 5.69.5] - 2024-07-?
 
 ### Added
+- added hwid display
 
 ### Fixed
 - fixed Getting two advanced supporter certificate popups everytime I open Sandbox Settings on any sandbox [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)
@@ -32,8 +33,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed The Start Restrictions tab's layout is broken [#4045](https://github.com/sandboxie-plus/Sandboxie/issues/4045)
 - fixed Administrators cannot change the sandbox configuration [#4057](https://github.com/sandboxie-plus/Sandboxie/issues/4057) [#4068](https://github.com/sandboxie-plus/Sandboxie/issues/4068)
 
-### Added
-- added hwid display
 
 
 

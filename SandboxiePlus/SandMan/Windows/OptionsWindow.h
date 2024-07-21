@@ -211,6 +211,8 @@ private slots:
 	void OnAddTerminateCmd();
 	void OnDelAuto();
 
+	void OnDumpFW();
+
 	void OnAddProcess();
 	void OnDelProcess();
 	void OnShowHiddenProcTmpl()		{ ShowHiddenProcTmpl(true); }

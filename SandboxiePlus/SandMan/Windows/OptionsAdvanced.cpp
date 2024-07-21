@@ -1391,9 +1391,9 @@ retry:
 	{
 		HKEY hKey;
 		DWORD disposition;
-		if(RegCreateKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, 0, 0, KEY_WRITE, NULL, &hKey, &disposition) == 0) 
+		if(RegCreateKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, 0, 0, KEY_WRITE, NULL, &hKey, &disposition) == ERROR_SUCCESS) 
 		{
-			if(RegSetValueExW(hKey, L"SMBiosTable", 0, REG_BINARY, firmwareTableInfo->TableBuffer, firmwareTableInfo->TableBufferLength) == 0)
+			if(RegSetValueExW(hKey, L"SMBiosTable", 0, REG_BINARY, firmwareTableInfo->TableBuffer, firmwareTableInfo->TableBufferLength) == ERROR_SUCCESS)
 				CSandMan::ShowMessageBox(this, QMessageBox::Information, tr("Firmware table saved successfully to host registry: HKEY_CURRENT_USER\\System\\SbieCustom<br />you can copy it to the sandboxed registry to have a different value for each box."));
 
             RegCloseKey(hKey);

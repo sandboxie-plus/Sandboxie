@@ -369,6 +369,12 @@ ULONG SbieApi_QueryConfNumber(
     ULONG def);
 
 SBIEAPI_EXPORT
+ULONG64 SbieApi_QueryConfNumber64(
+    const WCHAR *section_name,      // WCHAR [66]
+    const WCHAR *setting_name,      // WCHAR [66]
+    ULONG64 def);
+
+SBIEAPI_EXPORT
 LONG SbieApi_EnumBoxes(
     LONG index,                     // initialize to -1
     WCHAR *box_name);               // WCHAR [34]

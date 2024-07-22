@@ -113,6 +113,7 @@ jobs:
           echo 'bfore->before' >> dictionary.txt
           echo 'lettet->letter' >> dictionary.txt
           echo 'readly->readily' >> dictionary.txt
+          echo 'wes->we' >> dictionary.txt
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt

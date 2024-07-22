@@ -1639,19 +1639,28 @@ void CSandMan::OnMessage(const QString& MsgData)
 	else if (Message.left(9) == "AddForce:")
 	{
 		QString response = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
-		if(!response.isEmpty())
+		if (!response.isEmpty())
 		{
 			if (theAPI->GetBoxByName(response) != NULL) {
-				if (Message.right(1)=="\\"||!Message.contains(".", Qt::CaseInsensitive)) {
-					theAPI->GetBoxByName(response)->AppendText("ForceFolder", Message.mid(9).replace("\"",""));
+				QString dirOrFile = Message.mid(9).replace("\"", "").trimmed();
+				QFileInfo fileInfo(dirOrFile);
+				if (Message.right(1) == "\\" || !Message.contains(".", Qt::CaseInsensitive)) {
+					theAPI->GetBoxByName(response)->AppendText("ForceFolder", dirOrFile);
 				}
 				else {
-					theAPI->GetBoxByName(response)->AppendText("ForceProcess", Message.mid(9).replace("\"", "").mid(Message.mid(9).replace("\"", "").lastIndexOf("\\")+1));
-
+					if (fileInfo.exists() && fileInfo.isDir()) {
+						theAPI->GetBoxByName(response)->AppendText("ForceFolder", dirOrFile);
+					}
+					else if (fileInfo.exists() && fileInfo.isExecutable()) {
+						theAPI->GetBoxByName(response)->AppendText("ForceProcess", dirOrFile.mid(dirOrFile.lastIndexOf("\\") + 1));
+					}
+					else {
+						QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("The value is not an existing directory or executable."), QMessageBox::Ok, 0);
+					}
 				}
 			}
 			else {
-				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name!Nothing was changed."), QMessageBox::Ok, 0);
+				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name! Nothing was changed."), QMessageBox::Ok, 0);
 			}
 		}
 		else {

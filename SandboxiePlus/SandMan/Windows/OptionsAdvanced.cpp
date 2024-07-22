@@ -17,6 +17,11 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkElevateCreateProcessFix, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNoWindowRename, SIGNAL(clicked(bool)), this, SLOT(OnNoWindowRename()));
 	connect(ui.chkNestedJobs, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
+	connect(ui.txtSingleMemory, SIGNAL(textChanged(const QString&)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.txtTotalMemory, SIGNAL(textChanged(const QString&)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.txtTotalNumber, SIGNAL(textChanged(const QString&)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkUseSbieDeskHack, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkUseSbieWndStation, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -140,6 +145,18 @@ void COptionsWindow::LoadAdvanced()
 
 	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 	ui.chkNestedJobs->setChecked(m_pBox->GetBool("AllowBoxedJobs", false));
+
+	qint64 iSingleMemory = m_pBox->GetNum64("ProcessMemoryLimit", 0);
+	if (iSingleMemory > 0x0LL && iSingleMemory <= 0x7FFFFFFFFFFFFFFFLL)
+		ui.txtSingleMemory->setText(QString::number(iSingleMemory));
+
+	qint64 iTotalMemory = m_pBox->GetNum64("TotalMemoryLimit", 0);
+	if (iTotalMemory > 0x0LL && iTotalMemory <= 0x7FFFFFFFFFFFFFFFLL)
+		ui.txtTotalMemory->setText(QString::number(iTotalMemory));
+
+	qint64 iTotalNumber = m_pBox->GetNum64("ProcessNumberLimit", 0);
+	if (iTotalNumber > 0x0LL && iTotalNumber <= 0xFFFFFFFFLL)
+		ui.txtTotalNumber->setText(QString::number(iTotalNumber));
 
 	ui.chkUseSbieDeskHack->setChecked(m_pBox->GetBool("UseSbieDeskHack", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
@@ -380,6 +397,25 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 	WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
 	WriteAdvancedCheck(ui.chkNestedJobs, "AllowBoxedJobs", "y", "");
+
+	qint64 iSingleMemory = !ui.txtSingleMemory->text().isEmpty() ? ui.txtSingleMemory->text().toLongLong() : -1;
+	if (iSingleMemory > 0x0LL && iSingleMemory <= 0x7FFFFFFFFFFFFFFFLL)
+		WriteText("ProcessMemoryLimit", QString::number(iSingleMemory));
+	else
+		m_pBox->DelValue("ProcessMemoryLimit");
+
+	qint64 iTotalMemory = !ui.txtTotalMemory->text().isEmpty() ? ui.txtTotalMemory->text().toLongLong() : -1;
+	if (iTotalMemory > 0x0LL && iTotalMemory <= 0x7FFFFFFFFFFFFFFFLL)
+		WriteText("TotalMemoryLimit", QString::number(iTotalMemory));
+	else
+		m_pBox->DelValue("TotalMemoryLimit");
+
+	qint64 iTotalNumber = !ui.txtTotalNumber->text().isEmpty() ? ui.txtTotalNumber->text().toLongLong() : -1;
+	if (iTotalNumber > 0x0LL && iTotalNumber <= 0xFFFFFFFFLL)
+		WriteText("ProcessNumberLimit", QString::number(iTotalNumber));
+	else
+		m_pBox->DelValue("ProcessNumberLimit");
+
 	WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
 	WriteAdvancedCheck(ui.chkElevateRpcss, "RunRpcssAsSystem", "y", "");
 	WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
@@ -668,9 +704,32 @@ void COptionsWindow::UpdateJobOptions()
 	bool bUseJobObject = !IsAllWndOpen && ui.chkAddToJob->isChecked();
 	ui.chkNestedJobs->setEnabled(bUseJobObject);
 
-	ui.lineSingleMemory->setEnabled(bUseJobObject);
-	ui.lineTotalMemory->setEnabled(bUseJobObject);
-	ui.lineTotalNumber->setEnabled(bUseJobObject);
+	qint64 iSingleMemory = ui.txtSingleMemory->text().toLongLong();
+	if (iSingleMemory == 0x0LL || iSingleMemory > 0x7FFFFFFFFFFFFFFFLL) {
+		ui.lblSingleMemory->setText(tr("bytes (unlimited)"));
+	}
+	else {
+		ui.lblSingleMemory->setText(tr("bytes (%1)").arg(FormatSize(iSingleMemory)));
+	}
+	ui.txtSingleMemory->setEnabled(bUseJobObject);
+
+	qint64 iTotalMemory = ui.txtTotalMemory->text().toLongLong();
+	if (iTotalMemory == 0x0LL || iTotalMemory > 0x7FFFFFFFFFFFFFFFLL) {
+		ui.lblTotalMemory->setText(tr("bytes (unlimited)"));
+	}
+	else {
+		ui.lblTotalMemory->setText(tr("bytes (%1)").arg(FormatSize(iTotalMemory)));
+	}
+	ui.txtTotalMemory->setEnabled(bUseJobObject);
+
+	qint64 iTotalNumber = ui.txtTotalNumber->text().toLongLong();
+	if (iTotalNumber == 0X0LL || iTotalNumber > 0xFFFFFFFFLL) {
+		ui.lblTotalNumber->setText(tr("unlimited"));
+	}
+	else {
+		ui.lblTotalNumber->setText("");
+	}
+	ui.txtTotalNumber->setEnabled(bUseJobObject);
 }
 
 void COptionsWindow::CheckOpenCOM()

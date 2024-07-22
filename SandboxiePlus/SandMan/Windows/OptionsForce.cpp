@@ -180,6 +180,7 @@ void COptionsWindow::SaveForced()
 		else {
 			switch (Type) {
 			case eProcess:	ForceProcessDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eParent:	ForceChildrenDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
 			case ePath:		ForceFolderDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
 			}
 		}

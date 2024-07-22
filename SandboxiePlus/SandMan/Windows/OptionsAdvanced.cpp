@@ -705,7 +705,7 @@ void COptionsWindow::UpdateJobOptions()
 	ui.chkNestedJobs->setEnabled(bUseJobObject);
 
 	qint64 iSingleMemory = ui.txtSingleMemory->text().toLongLong();
-	if (iSingleMemory == 0x0LL || iSingleMemory > 0x7FFFFFFFFFFFFFFFLL) {
+	if (!(iSingleMemory > 0x0LL && iSingleMemory <= 0x7FFFFFFFFFFFFFFFLL)) {
 		ui.lblSingleMemory->setText(tr("bytes (unlimited)"));
 	}
 	else {
@@ -714,7 +714,7 @@ void COptionsWindow::UpdateJobOptions()
 	ui.txtSingleMemory->setEnabled(bUseJobObject);
 
 	qint64 iTotalMemory = ui.txtTotalMemory->text().toLongLong();
-	if (iTotalMemory == 0x0LL || iTotalMemory > 0x7FFFFFFFFFFFFFFFLL) {
+	if (!(iTotalMemory > 0x0LL && iTotalMemory <= 0x7FFFFFFFFFFFFFFFLL)) {
 		ui.lblTotalMemory->setText(tr("bytes (unlimited)"));
 	}
 	else {
@@ -723,7 +723,7 @@ void COptionsWindow::UpdateJobOptions()
 	ui.txtTotalMemory->setEnabled(bUseJobObject);
 
 	qint64 iTotalNumber = ui.txtTotalNumber->text().toLongLong();
-	if (iTotalNumber == 0X0LL || iTotalNumber > 0xFFFFFFFFLL) {
+	if (!(iTotalNumber > 0x0LL && iTotalNumber <= 0xFFFFFFFFLL)) {
 		ui.lblTotalNumber->setText(tr("unlimited"));
 	}
 	else {

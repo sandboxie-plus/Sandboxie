@@ -520,7 +520,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteTextList("OnBoxTerminateDisabled", TerminateCommandDisabled);
 	//
 
-	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideFirmwareInfo", "y", "");
+	WriteAdvancedCheck(ui.chkHideFirmware, "HideFirmwareInfo", "y", "");
 
 	int CustomLCID = ui.cmbLangID->currentData().toInt();
 	if (CustomLCID) m_pBox->SetNum("CustomLCID", CustomLCID);

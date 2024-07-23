@@ -728,7 +728,7 @@ ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, co
 
     if (SbieApi_QueryConfBool(Section, L"EditAdminOnly", FALSE)) {
 
-        if (! TokenIsAdmin(hToken, true)) {
+        if (! TokenIsAdmin(hToken)) {
             CloseHandle(hToken);
             return STATUS_LOGON_NOT_GRANTED;
         }

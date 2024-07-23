@@ -12,7 +12,7 @@ Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT
 
 Sandboxie allows you to create virtually unlimited sandboxes and run them alone or simultaneously to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
 
-**Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history)).**
+**Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history) and [#2926](https://github.com/sandboxie-plus/Sandboxie/issues/2926)).**
 
 ## ⏬ Download
 
@@ -45,6 +45,11 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Protections of sandboxes against the host, including the prevention of taking screenshots
   * A trigger system to perform actions, when a sandbox goes through different stages, like initialization, box start, termination or file recovery
   * Make a process not sandboxed, but its child processes sandboxed
+  * Sandboxing as a unit of control to force programs to automatically use the SOCKS5 proxy
+  * DNS resolution control with sandboxing as control granularity
+  * Limit the number of processes in the sandbox and the total amount of memory space they can occupy, and You can limit the total number of sandboxed processes per box
+  * A completely different token creation mechanism from Sandboxie's pre-open-source version makes sandboxes more independent in the system
+  * Encrypted Sandbox - an AES-based reliable data storage solution.
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
@@ -77,6 +82,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 2013 - 2017         | Invincea Inc.    |
 | 2017 - 2020         | Sophos Group plc |
 | [Open-source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
+| --- | --- |
 | 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633))    |
 
 

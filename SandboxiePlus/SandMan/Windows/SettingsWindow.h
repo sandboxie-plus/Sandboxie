@@ -88,6 +88,8 @@ private slots:
 
 	void OnOptChanged();
 
+	void OnSkipUAC() { m_SkipUACChanged = true; OnOptChanged(); }
+
 	void OnChangeGUI() { m_bRebuildUI = true; OnOptChanged(); }
 	void OnFeaturesChanged() { m_FeaturesChanged = true; OnGeneralChanged(); }
 	void OnGeneralChanged() { m_GeneralChanged = true; OnOptChanged(); }
@@ -176,6 +178,7 @@ protected:
 	bool    m_VolumeChanged;
 	bool	m_CompatChanged;
 	bool	m_RunChanged;
+	bool	m_SkipUACChanged;
 	bool	m_ProtectionChanged;
 	bool	m_GeneralChanged;
 	bool	m_FeaturesChanged;

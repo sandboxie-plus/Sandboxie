@@ -463,9 +463,15 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	// Force
 	connect(ui.btnForceProg, SIGNAL(clicked(bool)), this, SLOT(OnForceProg()));
 	QMenu* pFileBtnMenu = new QMenu(ui.btnForceProg);
-	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnForceBrowse()));
+	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnForceBrowseProg()));
 	ui.btnForceProg->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnForceProg->setMenu(pFileBtnMenu);
+
+	connect(ui.btnForceChild, SIGNAL(clicked(bool)), this, SLOT(OnForceChild()));
+	pFileBtnMenu = new QMenu(ui.btnForceChild);
+	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnForceBrowseChild()));
+	ui.btnForceChild->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnForceChild->setMenu(pFileBtnMenu);
 	connect(ui.btnForceDir, SIGNAL(clicked(bool)), this, SLOT(OnForceDir()));
 	connect(ui.btnDelForce, SIGNAL(clicked(bool)), this, SLOT(OnDelForce()));
 	connect(ui.chkShowForceTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowForceTmpl()));
@@ -631,8 +637,11 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if (iOptionTree == 2)
 		iOptionTree = iViewMode == 2 ? 1 : 0;
 
-	if (iOptionTree) 
+	if (iOptionTree) {
+		m_HoldChange = true;
 		OnSetTree();
+		m_HoldChange = false;
+	}
 	else {
 		//this->setMinimumHeight(490);
 		this->setMinimumHeight(390);
@@ -1193,7 +1202,7 @@ void COptionsWindow::UpdateCurrentTab()
 	}
 	else if (m_pCurrentTab == ui.tabDNS || m_pCurrentTab == ui.tabNetProxy)
 	{
-		if (!m_pCurrentTab->isEnabled())
+		if (!m_HoldChange && !m_pCurrentTab->isEnabled())
 			theGUI->CheckCertificate(this, 2);
 	}
 	else if (m_pCurrentTab == ui.tabCOM) {

@@ -282,10 +282,6 @@ void COptionsWindow::LoadGeneral()
 	ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
 	ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
 
-	ui.lineSingleMemory->setText(m_pBox->GetText("ProcessMemoryLimit", ""));
-	ui.lineTotalMemory->setText(m_pBox->GetText("TotalMemoryLimit", ""));
-	ui.lineTotalNumber->setText(m_pBox->GetText("TotalNumberLimit", ""));
-
 	//ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 	ui.chkOpenProtectedStorage->setChecked(m_BoxTemplates.contains("OpenProtectedStorage"));
 	ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
@@ -425,13 +421,6 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkBlockSpooler, "ClosePrintSpooler", "y", "");
 	WriteAdvancedCheck(ui.chkOpenSpooler, "OpenPrintSpooler", "y", "");
 	WriteAdvancedCheck(ui.chkPrintToFile, "AllowSpoolerPrintToFile", "y", "");
-
-	if (!ui.lineSingleMemory->text().isEmpty()) WriteText("ProcessMemoryLimit", ui.lineSingleMemory->text());
-	else m_pBox->DelValue("ProcessMemoryLimit");
-	if (!ui.lineTotalMemory->text().isEmpty()) WriteText("TotalMemoryLimit", ui.lineTotalMemory->text());
-	else m_pBox->DelValue("TotalMemoryLimit");
-	if (!ui.lineTotalNumber->text().isEmpty()) WriteText("ProcessNumberLimit", ui.lineTotalNumber->text());
-	else m_pBox->DelValue("ProcessNumberLimit");
 
 	//WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
 	SetTemplate("OpenProtectedStorage", ui.chkOpenProtectedStorage->isChecked());

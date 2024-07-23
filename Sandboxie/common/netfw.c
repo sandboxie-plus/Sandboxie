@@ -21,7 +21,7 @@ struct _NETFW_RULE
 	int protocol;
 };
 
-static int NetFw_PortCmp(const void * l, const void * r)
+int NetFw_PortCmp(const void * l, const void * r)
 {
 	if (*((USHORT*)l) > *((USHORT*)r))
 		return 1;
@@ -30,7 +30,7 @@ static int NetFw_PortCmp(const void * l, const void * r)
 	return 0;
 }
 
-static int NetFw_IpCmp(const void * l, const void * r)
+int NetFw_IpCmp(const void * l, const void * r)
 {
 	IP_ADDRESS* L = (IP_ADDRESS*)l;
 	IP_ADDRESS* R = (IP_ADDRESS*)r;

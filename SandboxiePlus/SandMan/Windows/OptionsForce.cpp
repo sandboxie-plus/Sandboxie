@@ -19,6 +19,12 @@ void COptionsWindow::LoadForced()
 	foreach(const QString& Value, m_pBox->GetTextList("ForceProcessDisabled", m_Template))
 		AddForcedEntry(Value, (int)eProcess, true);
 
+	foreach(const QString& Value, m_pBox->GetTextList("ForceChildren", m_Template))
+		AddForcedEntry(Value, (int)eParent);
+
+	foreach(const QString& Value, m_pBox->GetTextList("ForceChildrenDisabled", m_Template))
+		AddForcedEntry(Value, (int)eParent, true);
+
 	foreach(const QString& Value, m_pBox->GetTextList("ForceFolder", m_Template))
 		AddForcedEntry(Value, (int)ePath);
 
@@ -41,6 +47,11 @@ void COptionsWindow::LoadForced()
 	foreach(const QString& Value, m_pBox->GetTextList("BreakoutFolderDisabled", m_Template))
 		AddBreakoutEntry(Value, (int)ePath, true);
 
+	foreach(const QString& Value, m_pBox->GetTextList("BreakoutDocument", m_Template))
+		AddBreakoutEntry(Value, (int)eText);
+
+	foreach(const QString& Value, m_pBox->GetTextList("BreakoutDocumentDisabled", m_Template))
+		AddBreakoutEntry(Value, (int)eText, true);
 
 	LoadForcedTmpl();
 	LoadBreakoutTmpl();
@@ -56,6 +67,9 @@ void COptionsWindow::LoadForcedTmpl(bool bUpdate)
 		{
 			foreach(const QString& Value, m_pBox->GetTextListTmpl("ForceProcess", Template))
 				AddForcedEntry(Value, (int)eProcess, false, Template);
+
+			foreach(const QString& Value, m_pBox->GetTextListTmpl("ForceChildren", Template))
+				AddForcedEntry(Value, (int)eParent, false, Template);
 
 			foreach(const QString& Value, m_pBox->GetTextListTmpl("ForceFolder", Template))
 				AddForcedEntry(Value, (int)ePath, false, Template);
@@ -108,9 +122,16 @@ void COptionsWindow::AddForcedEntry(const QString& Name, int type, bool disabled
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
-	pItem->setText(0, (type == (int)eProcess ? tr("Process") : tr("Folder")) + (Template.isEmpty() ? "" : (" (" + Template + ")")));
+	QString Type;
+	switch (type)
+	{
+	case eProcess: Type = tr("Process"); break;
+	case ePath: Type = tr("Folder"); break;
+	case eParent: Type = tr("Children"); break;
+	}
+	pItem->setText(0, Type + (Template.isEmpty() ? "" : (" (" + Template + ")")));
 	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? type : (int)eTemplate);
-	SetProgramItem(Name, pItem, (int)eProcess);
+	SetProgramItem(Name, pItem, 1);
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeForced->addTopLevelItem(pItem);
 }
@@ -119,9 +140,16 @@ void COptionsWindow::AddBreakoutEntry(const QString& Name, int type, bool disabl
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
-	pItem->setText(0, (type == (int)eProcess ? tr("Process") : tr("Folder")) + (Template.isEmpty() ? "" : (" (" + Template + ")")));
+	QString Type;
+	switch (type)
+	{
+	case eProcess: Type = tr("Process"); break;
+	case ePath: Type = tr("Folder"); break;
+	}
+	pItem->setText(0, Type + (Template.isEmpty() ? "" : (" (" + Template + ")")));
+
 	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? type : (int)eTemplate);
-	SetProgramItem(Name, pItem, (int)eProcess);
+	SetProgramItem(Name, pItem, 1, QString(), type == eProcess);
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeBreakout->addTopLevelItem(pItem);
 }
@@ -130,6 +158,8 @@ void COptionsWindow::SaveForced()
 {
 	QStringList ForceProcess;
 	QStringList ForceProcessDisabled;
+	QStringList ForceChildren;
+	QStringList ForceChildrenDisabled;
 	QStringList ForceFolder;
 	QStringList ForceFolderDisabled;
 
@@ -143,19 +173,23 @@ void COptionsWindow::SaveForced()
 		if (pItem->checkState(0) == Qt::Checked) {
 			switch (Type) {
 			case eProcess:	ForceProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case ePath: ForceFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eParent:	ForceChildren.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case ePath:		ForceFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
 			}
 		}
 		else {
 			switch (Type) {
 			case eProcess:	ForceProcessDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
-			case ePath: ForceFolderDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eParent:	ForceChildrenDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case ePath:		ForceFolderDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
 			}
 		}
 	}
 
 	WriteTextList("ForceProcess", ForceProcess);
 	WriteTextList("ForceProcessDisabled", ForceProcessDisabled);
+	WriteTextList("ForceChildren", ForceChildren);
+	WriteTextList("ForceChildrenDisabled", ForceChildrenDisabled);
 	WriteTextList("ForceFolder", ForceFolder);
 	WriteTextList("ForceFolderDisabled", ForceFolderDisabled);
 
@@ -217,7 +251,7 @@ void COptionsWindow::OnBreakoutProg()
 	OnForcedChanged();
 }
 
-void COptionsWindow::OnForceBrowse()
+void COptionsWindow::OnForceBrowseProg()
 {
 	QString Value = QFileDialog::getOpenFileName(this, tr("Select Executable File"), "", tr("Executable Files (*.exe)"));
 	if (Value.isEmpty())
@@ -234,6 +268,28 @@ void COptionsWindow::OnBreakoutBrowse()
 	if (Value.isEmpty())
 		return;
 	AddBreakoutEntry(Split2(Value, "/", true).second, (int)eProcess);
+	OnForcedChanged();
+}
+
+void COptionsWindow::OnForceChild()
+{
+	QString Value = SelectProgram();
+	if (Value.isEmpty())
+		return;
+	if (!CheckForcedItem(Value, (int)eParent))
+		return;
+	AddForcedEntry(Value, (int)eParent);
+	OnForcedChanged();
+}
+
+void COptionsWindow::OnForceBrowseChild()
+{
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Executable File"), "", tr("Executable Files (*.exe)"));
+	if (Value.isEmpty())
+		return;
+	if (!CheckForcedItem(Value, (int)eParent))
+		return;
+	AddForcedEntry(Split2(Value, "/", true).second, (int)eParent);
 	OnForcedChanged();
 }
 
@@ -281,7 +337,7 @@ bool COptionsWindow::CheckForcedItem(const QString& Value, int type)
 
 	QString winPath = QString::fromUtf8(qgetenv("SystemRoot"));
 
-	if (type == eProcess)
+	if (type == eProcess || type == eParent)
 	{
 		if (Value.compare("explorer.exe", Qt::CaseInsensitive) == 0 || Value.compare(winPath + "\\explorer.exe", Qt::CaseInsensitive) == 0)
 			bDangerous = true;
@@ -292,7 +348,7 @@ bool COptionsWindow::CheckForcedItem(const QString& Value, int type)
 		else if (Value.contains("sandman.exe", Qt::CaseInsensitive))
 			bDangerous = true;
 	}
-	else
+	else if (type == ePath)
 	{
 		if (Value.compare(winPath.left(3), Qt::CaseInsensitive) == 0)
 			bDangerous = true; // SystemDrive (C:\)

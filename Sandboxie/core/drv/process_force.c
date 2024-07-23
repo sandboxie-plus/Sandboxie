@@ -43,6 +43,7 @@ typedef struct _FORCE_BOX {
     BOX *box;
     LIST ForceFolder;
     LIST ForceProcess;
+    LIST ForceChildren;
 	LIST AlertFolder;
     LIST AlertProcess;
     LIST HostInjectProcess;
@@ -108,12 +109,12 @@ static void Process_GetDocArg(
 
 static BOOLEAN Process_IsDcomLaunchParent(HANDLE ParentId);
 
-static BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId);
+//static BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId);
 
 static BOOLEAN Process_IsImmersiveProcess(
     PEPROCESS ProcessObject, HANDLE ParentId, ULONG SessionId);
 
-static BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name);
+//static BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name);
 
 void Process_CreateForceData(
     LIST *boxes, const WCHAR *SidString, ULONG SessionId);
@@ -126,7 +127,7 @@ static BOX *Process_CheckForceFolder(
     LIST *boxes, const WCHAR *path, BOOLEAN alert, ULONG *IsAlert);
 
 static BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert, HANDLE parent);
+    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert, const WCHAR *ParentName);
 
 static void Process_CheckAlertFolder(
 	LIST *boxes, const WCHAR *path, ULONG *IsAlert);
@@ -165,6 +166,11 @@ _FX BOX *Process_GetForcedStartBox(
     BOOLEAN force_alert;
     BOOLEAN dfp_already_added;
     BOOLEAN same_image_name;
+
+
+	void* nbuf;
+	ULONG nlen;
+	WCHAR* ParentName;
 
     check_force = TRUE;
 
@@ -215,6 +221,9 @@ _FX BOX *Process_GetForcedStartBox(
         return NULL;
     }
 
+    Process_GetProcessName(
+		Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &ParentName);
+
     //
     // initialize some more state before checking process
     //
@@ -261,7 +270,7 @@ _FX BOX *Process_GetForcedStartBox(
 
             if ((! box) && (! alert)) {
                 box = Process_CheckForceProcess(
-                    &boxes, ImageName, force_alert, &alert, ParentId);
+                    &boxes, ImageName, force_alert, &alert, ParentName);
             }
 
             if ((! box) && CurDir && !is_start_exe && (! alert)) {
@@ -367,6 +376,9 @@ _FX BOX *Process_GetForcedStartBox(
     //
 
     Process_DeleteForceData(&boxes);
+
+    if (nbuf)
+		Mem_Free(nbuf, nlen);
 
     if (DocArg)
         Mem_Free(DocArg, DocArg_len);
@@ -795,32 +807,31 @@ _FX BOOLEAN Process_IsDcomLaunchParent(HANDLE ParentId)
 
 //---------------------------------------------------------------------------
 // Process_IsProcessParent
-//
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name)
-{
-	BOOLEAN retval = FALSE;
-
-	void* nbuf;
-	ULONG nlen;
-	WCHAR* nptr;
-
-	Process_GetProcessName(
-		Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &nptr);
-	if (nbuf) {
-
-		if (_wcsicmp(nptr, Name) == 0) {
-
-			retval = TRUE;
-		}
-
-		Mem_Free(nbuf, nlen);
-	}
-
-	return retval;
-}
+//_FX BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name)
+//{
+//	BOOLEAN retval = FALSE;
+//
+//	void* nbuf;
+//	ULONG nlen;
+//	WCHAR* nptr;
+//
+//	Process_GetProcessName(
+//		Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &nptr);
+//	if (nbuf) {
+//
+//		if (_wcsicmp(nptr, Name) == 0) {
+//
+//			retval = TRUE;
+//		}
+//
+//		Mem_Free(nbuf, nlen);
+//	}
+//
+//	return retval;
+//}
 
 
 //---------------------------------------------------------------------------
@@ -828,10 +839,10 @@ _FX BOOLEAN Process_IsProcessParent(HANDLE ParentId, WCHAR* Name)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId)
-{
-    return Process_IsProcessParent(ParentId,L"explorer.exe");
-}
+//_FX BOOLEAN Process_IsWindowsExplorerParent(HANDLE ParentId)
+//{
+//    return Process_IsProcessParent(ParentId,L"explorer.exe");
+//}
 
 
 //---------------------------------------------------------------------------
@@ -1112,6 +1123,7 @@ _FX void Process_CreateForceData(
 
         List_Init(&box->ForceFolder);
         List_Init(&box->ForceProcess);
+        List_Init(&box->ForceChildren);
 		List_Init(&box->AlertFolder);
         List_Init(&box->AlertProcess);
         List_Init(&box->HostInjectProcess);
@@ -1129,6 +1141,12 @@ _FX void Process_CreateForceData(
         //
 
         Process_AddForceProcesses(&box->ForceProcess, L"ForceProcess", section);
+
+        //
+        // scan list of ForceChildren settings for the box
+        //
+
+        Process_AddForceProcesses(&box->ForceChildren, L"ForceChildren", section);
 
 		//
         // scan list of AlertFolder settings for the box
@@ -1220,6 +1238,7 @@ _FX void Process_DeleteForceData(LIST *boxes)
 
         Process_DeleteForceDataFolders(&box->ForceFolder);
         Process_DeleteForceDataProcesses(&box->ForceProcess);
+        Process_DeleteForceDataProcesses(&box->ForceChildren);
         Process_DeleteForceDataFolders(&box->AlertFolder);
         Process_DeleteForceDataProcesses(&box->AlertProcess);
         Process_DeleteForceDataProcesses(&box->HostInjectProcess);
@@ -1415,7 +1434,7 @@ _FX BOOLEAN Process_CheckForceProcessList(
 
 
 _FX BOX *Process_CheckForceProcess(
-    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert, HANDLE ParentId)
+    LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert, const WCHAR *ParentName)
 {
     FORCE_BOX *box;
 
@@ -1435,10 +1454,19 @@ _FX BOX *Process_CheckForceProcess(
             return box->box;
         }
 
-		//if (Process_IsWindowsExplorerParent(ParentId) && Conf_Get_Boolean(box->box->name, L"ForceExplorerChild", 0, FALSE)) {
-		//	if(_wcsicmp(name,L"Sandman.exe")!=0)
-		//		return box->box;
-		//}
+        if (ParentName && Process_CheckForceProcessList(box->box, &box->ForceChildren, ParentName) && _wcsicmp(name, L"Sandman.exe") != 0) { // except for sandman exe
+            if (alert) {
+                *IsAlert = 1;
+                return NULL;
+            }
+
+            return box->box;
+        }
+
+        //if (Process_IsWindowsExplorerParent(ParentId) && Conf_Get_Boolean(box->box->name, L"ForceExplorerChild", 0, FALSE)) {
+        //    if (_wcsicmp(name, L"Sandman.exe") != 0)
+        //        return box->box;
+        //}
 
         box = List_Next(box);
     }

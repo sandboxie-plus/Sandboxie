@@ -331,7 +331,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkShellMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkAlwaysDefault, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu2, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
-	
+	connect(ui.chkShellMenu3, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkShellMenu4, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
+
 	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateDesk, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
@@ -430,6 +433,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.chkWatchConfig, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged())); // not sbie ini
 
+	connect(ui.chkSkipUAC, SIGNAL(stateChanged(int)), this, SLOT(OnSkipUAC()));
+	ui.chkSkipUAC->setEnabled(IsElevated());
+	m_SkipUACChanged = false;
+
 	connect(ui.chkAdminOnly, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
 	connect(ui.chkPassRequired, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
 	connect(ui.btnSetPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
@@ -508,13 +515,19 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		QString Text = ui.lblSerial->text();
 		ui.lblSerial->setText(QString("<a href=\"_\">%1</a>").arg(Text));
 		ui.txtSerial->setVisible(false);
+		ui.lblHwId->setVisible(false);
 		ui.btnGetCert->setVisible(false);
 		connect(ui.lblSerial, &QLabel::linkActivated, this, [=]() {
 			ui.lblSerial->setText(Text);
 			ui.txtSerial->setVisible(true);
+			ui.lblHwId->setVisible(true);
 			ui.btnGetCert->setVisible(true);
 		});
 	}
+
+	wchar_t uuid_str[40];
+	if(theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str)))
+		ui.lblHwId->setText(tr("HwId: %1").arg(QString::fromWCharArray(uuid_str)));
 
 	connect(ui.btnGetCert, SIGNAL(clicked(bool)), this, SLOT(OnGetCert()));
 
@@ -891,6 +904,8 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkShellMenu->setCheckState(IsContextMenu());
 	ui.chkShellMenu2->setChecked(CSbieUtils::HasContextMenu2());
+	ui.chkShellMenu3->setChecked(CSbieUtils::HasContextMenu3());
+	ui.chkShellMenu4->setChecked(CSbieUtils::HasContextMenu4());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
 
 	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
@@ -942,6 +957,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkMonitorSize->setChecked(theConf->GetBool("Options/WatchBoxSize", false));
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
+	ui.chkSkipUAC->setChecked(SkipUacRun(true));
 
 	ui.chkScanMenu->setChecked(theConf->GetBool("Options/ScanStartMenu", true));
 	ui.cmbIntegrateMenu->setCurrentIndex(theConf->GetInt("Options/IntegrateStartMenu", 0));
@@ -1598,7 +1614,24 @@ void CSettingsWindow::SaveSettings()
 		} else
 			CSbieUtils::RemoveContextMenu2();
 	}
-
+	if (ui.chkShellMenu3->isChecked() != CSbieUtils::HasContextMenu3()) {
+		if (ui.chkShellMenu3->isChecked()) {
+			CSbieUtils::AddContextMenu3(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
+				tr("Set Force in Sandbox"),
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+		}
+		else
+			CSbieUtils::RemoveContextMenu3();
+	}
+	if (ui.chkShellMenu4->isChecked() != CSbieUtils::HasContextMenu4()) {
+		if (ui.chkShellMenu4->isChecked()) {
+			CSbieUtils::AddContextMenu4(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
+				tr("Set Open Path in Sandbox"),
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+		}
+		else
+			CSbieUtils::RemoveContextMenu4();
+	}
 	theConf->SetValue("Options/RunInDefaultBox", ui.chkAlwaysDefault->isChecked());
 
 	theConf->SetValue("Options/CheckSilentMode", ui.chkSilentMode->isChecked());
@@ -1629,6 +1662,8 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
 
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
+	if (m_SkipUACChanged)
+		SkipUacEnable(ui.chkSkipUAC->isChecked());
 
 	theConf->SetValue("Options/ScanStartMenu", ui.chkScanMenu->isChecked());
 	int OldIntegrateStartMenu = theConf->GetInt("Options/IntegrateStartMenu", 0);

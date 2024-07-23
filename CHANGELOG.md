@@ -2,13 +2,6 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1x.x / 5.xx.x] - 2024-07-0x
-
-### Added
-- added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow
-- added an optional context menu option to make folder/file forced quickly
-  - Note: You can also use "Sandman.exe /add_force program_path" to do it
-
 
 ## [1.14.5 / 5.69.5] - 2024-07-?
 
@@ -18,6 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to always run the sandman UI as admin [#4090](https://github.com/sandboxie-plus/Sandboxie/issues/4090)
 - added Proxy exclusion [#4036](https://github.com/sandboxie-plus/Sandboxie/issues/4036)
 - added "ForceChildren=Program.exe" [#4070](https://github.com/sandboxie-plus/Sandboxie/issues/4070)
+- added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow
+- added an optional context menu option to make folder/file forced quickly
+  - Note: You can also use "Sandman.exe /add_force program_path" to do it
 
 ### Fixed
 - fixed two supporter certificate popping up every time a Sandboxes' settings are opened [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)

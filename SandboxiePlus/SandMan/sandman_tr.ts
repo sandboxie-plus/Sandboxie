@@ -1455,7 +1455,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsForce.cpp" line="130"/>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt İşlem</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="256"/>
@@ -2203,18 +2203,18 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
         <location filename="Windows/OptionsAdvanced.cpp" line="709"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="718"/>
         <source>bytes (unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>bayt (sınırsız)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="712"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="721"/>
         <source>bytes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>bayt (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="727"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>sınırsız</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="899"/>
@@ -2279,12 +2279,12 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1448"/>
         <source>Failed to retrieve firmware table information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ürün yazılımı tablosu bilgileri alınamadı.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1456"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ürün yazılımı tablosu ana bilgisayar kayıt defterine başarıyla kaydedildi: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;her alan için farklı bir değere sahip olacak şekilde bu anahtarı korumalı alan kayıt defterine kopyalayabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1081"/>
@@ -3300,13 +3300,13 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="1641"/>
         <location filename="SandMan.cpp" line="1672"/>
         <source>Which box you want to add in?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangi alana eklemek istiyorsunuz?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1641"/>
         <location filename="SandMan.cpp" line="1672"/>
         <source>Type the box name which you are going to set:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarın ekleneceği alan adını yazın:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1658"/>
@@ -3315,28 +3315,24 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="1679"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>Sandboxie-Plus Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="1679"/>
-        <source>You typed a wrong box name!Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus Uyarısı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1667"/>
         <location filename="SandMan.cpp" line="1683"/>
-        <source>Users canceled this operation.</source>
-        <translation type="unfinished"></translation>
+        <source>User canceled this operation.</source>
+        <translation>Kullanıcı bu işlemi iptal etti.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1658"/>
         <source>The value is not an existing directory or executable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Değer mevcut bir dizin veya yürütülebilir dosya değil.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1663"/>
+        <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yanlış alan adı yazdınız! Hiçbir şey eklenmedi.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2014"/>
@@ -4802,8 +4798,7 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
         <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
-        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
-        <translation type="unfinished">Bu alan devre dışı, etkinleştirmek istiyor musunuz?</translation>
+        <translation>Bu alan devre dışı veya bir grup/kullanıcı ile sınırlandırılmış, etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>
@@ -5550,7 +5545,7 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="530"/>
         <source>HwId: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="565"/>
@@ -5641,12 +5636,12 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1620"/>
         <source>Set Force in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alanda Zorlamaya Ayarla</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1629"/>
         <source>Set Open Path in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alanda Açık Erişime Ayarla</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2002"/>
@@ -7026,10 +7021,6 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Kayıt Anahtarı Ekle</translation>
     </message>
     <message>
-        <source>Hide Processes</source>
-        <translation type="vanished">İşlemleri Gizle</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="3974"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>Hızlı Kurtarma işlevi çağrıldığında, aşağıdaki klasörler korumalı alan içeriği için denetlenecektir. </translation>
@@ -7458,7 +7449,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="821"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation>Korumalı alan işlemlerinin pencere görüntüsü yakalamasını önle (Deneysel, kullanıcı arayüzü hatalarına neden olabilir)</translation>
+        <translation>Korumalı alan işlemlerinin pencere görüntüsü yakalamasını önle (Deneysel, arayüz hatalarına neden olabilir)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1038"/>
@@ -7536,7 +7527,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3779"/>
         <source>Bypass IPs</source>
-        <translation type="unfinished"></translation>
+        <translation>IP&apos;leri Atla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4150"/>
@@ -7717,18 +7708,18 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
         <location filename="Forms/OptionsWindow.ui" line="1666"/>
         <location filename="Forms/OptionsWindow.ui" line="1740"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>sınırsız</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1724"/>
         <location filename="Forms/OptionsWindow.ui" line="1754"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>bayt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2197"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
-        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;GÜVENLİK TAVSİYESİ&lt;/font&gt;:&lt;/b&gt; &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; ve/veya &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt;&apos;in Open[File/Pipe]Path yönergeleriyle birlikte kullanılması sistem güvenliği tehlikeye atabilir. Lütfen bunları kullanmadan önce her seçeneğin belgesindeki güvenlik bölümünü inceleyin.</translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;GÜVENLİK TAVSİYESİ&lt;/font&gt;:&lt;/b&gt; &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; ve/veya &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt;&apos;in Open[File/Pipe]Path yönergeleriyle birlikte kullanımı sistem güvenliğini tehlikeye atabilir. Lütfen bunları kullanmadan önce her seçeneğin belgesindeki güvenlik bölümünü inceleyin.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2499"/>
@@ -7942,10 +7933,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <translation>Kısıtlama Sınırları</translation>
     </message>
     <message>
-        <source>Leave it blank to disable the setting(Unit:KB)</source>
-        <translation type="vanished">Ayarı devre dışı bırakmak için boş bırakın (Birim:KB)</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1621"/>
         <location filename="Forms/OptionsWindow.ui" line="1663"/>
         <location filename="Forms/OptionsWindow.ui" line="1737"/>
@@ -8031,47 +8018,47 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4760"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Gizlilik</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4769"/>
         <source>Hide Firmware Informations</source>
-        <translation type="unfinished"></translation>
+        <translation>Ürün Yazılımı Bilgilerini Gizle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4799"/>
-        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
-        <translation type="unfinished"></translation>
+        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</source>
+        <translation>Bazı programlar, geleneksel yöntemleri kullanmak yerine, yerleşik bir Windows veritabanı olan WMI (Windows Yönetim Araçları) aracılığıyla sistem ayrıntılarını alır. Örneğin, &amp;apos;tasklist.exe&amp;apos;, &amp;apos;HideOtherBoxes&amp;apos; etkin olsa bile işlemlerin tam listesine erişebilir. Bu tür davranışları önlemek için bu seçeneği etkinleştirin.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4802"/>
         <source>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alandaki işlemlerin WMI aracılığıyla sistem ayrıntılarına erişmesini önle (daha fazla bilgi için ipucuna bakın)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4840"/>
         <source>Process Hiding</source>
-        <translation type="unfinished"></translation>
+        <translation>İşlem Gizleme</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4854"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>Özel bir Yerel/Dil Kimliği Kullan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4875"/>
         <source>Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Veri Koruması</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4912"/>
         <source>Dump the current Firmare Tables to HKCU\System\SbieCustom</source>
-        <translation type="unfinished"></translation>
+        <translation>Mevcut Ürün Yazılımı Tablolarını HKCU\System\SbieCustom anahtarına döker</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4915"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>ÜY Tablolarını Dök</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5013"/>
@@ -8096,7 +8083,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4174"/>
         <source>Restart force process before they begin to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Yürütülmeye başlamadan önce zorunlu işlemleri yeniden başlat</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4215"/>
@@ -8107,15 +8094,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <location filename="Forms/OptionsWindow.ui" line="4809"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation>Korumalı alandaki işlemlerin alan dışında çalışan işlemleri görmesine izin verilmesin</translation>
-    </message>
-    <message>
-        <source>Prevent sandboxed processes from accessing system details through WMI</source>
-        <translation type="vanished">Korumalı alandaki işlemlerin WMI aracılığıyla sistem ayrıntılarına erişmesini önle</translation>
-    </message>
-    <message>
-        <source>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, &apos;tasklist.exe&apos; can access a complete list of processes even if &apos;HideOtherBoxes&apos; is enabled. Enable this option to prevent such behavior.</source>
-        <oldsource>Some programs read system details through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
-        <translation type="obsolete">Bazı programlar, geleneksel yöntemleri kullanmak yerine, yerleşik bir Windows veritabanı olan WMI (Windows Yönetim Araçları) aracılığıyla sistem ayrıntılarını alır. Örneğin, &apos;tasklist.exe&apos;, &apos;HideOtherBoxes&apos; etkin olsa bile işlemlerin tam listesine erişebilir. Bu tür davranışları önlemek için bu seçeneği etkinleştirin.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5115"/>
@@ -8240,7 +8218,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>Asıl belirteci soymak yerine yeni bir korumalı alan belirteci oluştur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1982"/>
@@ -8250,7 +8228,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2167"/>
         <source>Force Children</source>
-        <translation type="unfinished">Altları Zorla</translation>
+        <translation>Altları Zorla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3342"/>
@@ -9437,12 +9415,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="643"/>
         <source>Add ‘Set Force in Sandbox&apos; to the context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlam menüsüne ‘Korumalı Alanda Zorlamaya Ayarla&apos; seçeneği ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="650"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlam menüsüne ‘Korumalı Alanda Açık Erişime Ayarla&apos; seçeneği ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1583"/>
@@ -9457,7 +9435,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1732"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1742"/>
@@ -9529,7 +9507,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2283"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan&apos;i her zaman Yönetici olarak çalıştır</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2305"/>

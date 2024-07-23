@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.14.6 / 5.69.6] - 2024-07-??
+
+### Fixed
+- fixed issue with windows 7 caused by the new CustomLCID option
+
+
+
 ## [1.14.5 / 5.69.5] - 2024-07-23
 
 ### Added

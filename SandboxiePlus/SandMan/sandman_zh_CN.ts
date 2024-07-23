@@ -1820,12 +1820,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1448"/>
         <source>Failed to retrieve firmware table information.</source>
-        <translation type="unfinished"></translation>
+        <translation>检索固件表信息失败。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1456"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>固件表已成功保存到主机注册表：HKEY_CURRENT_USER\System\SbieCustom&lt;br/&gt;您可以将其复制到沙盒注册表，为每个沙盒设置不同的值。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -2166,7 +2166,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="130"/>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>子进程</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="256"/>
@@ -5695,7 +5695,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="530"/>
         <source>HwId: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>固件ID: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="618"/>
@@ -6025,7 +6025,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1918"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
-        <translation>这看起来不像是一份凭据。请输入完整的凭据，而不仅仅是其中的一部分</translation>
+        <translation>这看起来不像是一份凭据。请输入完整的凭据，而不仅仅是其中的一部分。</translation>
     </message>
     <message>
         <source>This certificate is unfortunately expired.</source>
@@ -7555,7 +7555,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2167"/>
         <source>Force Children</source>
-        <translation type="unfinished">强制子进程</translation>
+        <translation>强制子进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2197"/>
@@ -8137,7 +8137,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>创建新的沙盒令牌，而不是剥离原始令牌</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2014"/>
@@ -8598,7 +8598,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3779"/>
         <source>Bypass IPs</source>
-        <translation type="unfinished"></translation>
+        <translation>绕过IP</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5207"/>
@@ -9052,47 +9052,47 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4760"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>隐私</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4769"/>
         <source>Hide Firmware Informations</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏固件信息</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4799"/>
         <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>一些程序通过WMI（Windows内置数据库）而不是常规方式读取系统细节信息。例如，即使通过访问WMI打开“HideOtherBoxs”，“tasklist.exe”也可以获得完整的进程列表。启用此选项可阻止这些行为。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4802"/>
         <source>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</source>
-        <translation type="unfinished"></translation>
+        <translation>防止沙盒进程通过WMI访问系统细节信息（有关更多信息，请参阅工具提示）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4840"/>
         <source>Process Hiding</source>
-        <translation type="unfinished"></translation>
+        <translation>进程隐藏</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4854"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>使用自定义区域设置/语言ID</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4875"/>
         <source>Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>数据保护</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4912"/>
         <source>Dump the current Firmare Tables to HKCU\System\SbieCustom</source>
-        <translation type="unfinished"></translation>
+        <translation>将当前固件表转储到HKCU\System\SbieCustom</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4915"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>转储固件表</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5115"/>
@@ -10178,7 +10178,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1732"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
-        <translation type="unfinished"></translation>
+        <translation>固件ID： 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1742"/>
@@ -10255,7 +10255,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2283"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>始终以管理员身份运行SandMan UI</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2295"/>

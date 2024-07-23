@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.5 / 5.69.5] - 2024-07-?
+## [1.14.5 / 5.69.5] - 2024-07-23
 
 ### Added
 - added hwid display

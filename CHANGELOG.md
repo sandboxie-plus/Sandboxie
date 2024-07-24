@@ -6,35 +6,35 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.6 / 5.69.6] - 2024-07-??
 
 ### Fixed
-- fixed issue with windows 7 caused by the new CustomLCID option
+- fixed issue with Windows 7 caused by the new CustomLCID option
 
 
 
 ## [1.14.5 / 5.69.5] - 2024-07-23
 
 ### Added
-- added hwid display
+- added HwID display
 - added Language Spoof "CustomLCID=1033" [#4024](https://github.com/sandboxie-plus/Sandboxie/pull/4024) (thanks Yeyixiao)
 - added option to always run the sandman UI as admin [#4090](https://github.com/sandboxie-plus/Sandboxie/issues/4090)
 - added Proxy exclusion [#4036](https://github.com/sandboxie-plus/Sandboxie/issues/4036)
 - added "ForceChildren=Program.exe" [#4070](https://github.com/sandboxie-plus/Sandboxie/issues/4070)
 - added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow
 - added an optional context menu option to make folder/file forced quickly
-  - Note: You can also use "Sandman.exe /add_force program_path" to do it
+  - Note: you can also use "Sandman.exe /add_force program_path" to do it
+
+### Changed
+- the certificate format can now take an explicit validity days specification, needed for gapless certificate renewal
 
 ### Fixed
 - fixed two supporter certificate popping up every time a Sandboxes' settings are opened [#4074](https://github.com/sandboxie-plus/Sandboxie/issues/4074)
 - fixed issue with HwID-bound serial keys failing when no HwID could be obtained
 - fixed issue with "UseChangeSpeed=y"
-- fixed broken "HideFirmwareInfo=y" implementation.
+- fixed broken "HideFirmwareInfo=y" implementation
   - changed reg path to key "HKCU\\System\\SbieCustom", value: "SMBiosTable"
   - added UI options
 - fixed schannel error SEC_E_SECPKG_NOT_FOUND in encrypted sandboxes [#4081](https://github.com/sandboxie-plus/Sandboxie/issues/4081)
 - fixed The name of the sandbox is too long, causing an error in sbie2327 [#4064](https://github.com/sandboxie-plus/Sandboxie/issues/4064)
 - fixed Job objects cannot be assigned memory limits greater than 4 GB [#4096](https://github.com/sandboxie-plus/Sandboxie/issues/4096)
-
-### Changed
-- the certificate format can now take an explicit validity days specification, needed for gapless certificate renewal
 
 
 
@@ -46,7 +46,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed the Start Restrictions tab layout breaking [#4045](https://github.com/sandboxie-plus/Sandboxie/issues/4045)
 - fixed administrators unable to change the sandbox configuration [#4057](https://github.com/sandboxie-plus/Sandboxie/issues/4057) [#4068](https://github.com/sandboxie-plus/Sandboxie/issues/4068)
-
 
 
 
@@ -81,7 +80,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added RPC Port message filter mechanism to block unsafe RDP calls via the driver [#3930](https://github.com/sandboxie-plus/Sandboxie/issues/3930)
   - Usage: "RpcPortFilter=Port,ID,Label" label is optional
 - added "Job Object" Options page to collect all job object-related options
-
 
 ### Changed
 - extended "Temp Template" to make it could delete local template section
@@ -165,7 +163,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed symbolic linking of files [#3852](https://github.com/sandboxie-plus/Sandboxie/issues/3852)
 - fixed issue with start agent option [#3844](https://github.com/sandboxie-plus/Sandboxie/pull/3844) (thanks offhub)
 - fixed issue with Delete V2 introduced in 1.13.5
-
 
 
 
@@ -492,7 +489,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.11.4 / 5.66.4] - 2023-10-06
 
-
 ### Changed
 - improved behaviour with Lock All Encrypted Boxes option [#3350](https://github.com/sandboxie-plus/Sandboxie/issues/3350)
 - fixed typo: 'NoRestartOnPAC' option becomes 'NoRestartOnPCA' [0e175ee](https://github.com/sandboxie-plus/Sandboxie/commit/0e175eedfde50198a3fa7bdef3a91fdbad5f5226)
@@ -541,6 +537,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed subscription certificate recognition issue
 - fixed logo cut-off in the About window [#3249](https://github.com/sandboxie-plus/Sandboxie/issues/3249)
 - fixed issue with file recovery when using a RAM drive [d82b62e](https://github.com/sandboxie-plus/Sandboxie/commit/d82b62ee78d865e21005b9b81dfa9dac9f524b90)
+
+
 
 ## [1.11.1 / 5.66.1] - 2023-08-31
 
@@ -1064,7 +1062,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.7.0 / 5.62.0] - 2023-01-27
 
-
 ### Added
 - added OnFileRecovery trigger allowing to check files before recovering them [#2202](https://github.com/sandboxie-plus/Sandboxie/issues/2202)
 - added more presets to sandbox options
@@ -1098,7 +1095,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [1.6.6 / 5.61.6] - 2023-01-16
-
 
 ### Changed
 - reworked trace log retrieval for vastly improved performance

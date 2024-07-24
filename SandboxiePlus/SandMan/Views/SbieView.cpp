@@ -1786,10 +1786,8 @@ void CSbieView::OnDoubleClicked(const CSandBoxPtr &pBox)
 
 	if (!pBox->IsEnabled())
 	{
-		if (QMessageBox("Sandboxie-Plus", tr("This sandbox is disabled or restricted to a group/user, do you want to edit it?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
-			return;
-		pBox->SetText("Enabled", "y");
-		return;
+		if (QMessageBox("Sandboxie-Plus", tr("This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+			pBox->SetText("Enabled", "y");// Fix #3999
 	}
 	
 	QString Action = pBox->GetText("DblClickAction");

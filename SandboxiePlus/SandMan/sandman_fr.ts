@@ -480,7 +480,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="394"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation>Bac &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;à sécurité renforcée&lt;/a&gt; avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
+        <translation>À &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;sécurité renforcée&lt;/a&gt; avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="395"/>
@@ -494,7 +494,7 @@ Le profil complet de l&apos;utilisateur demeure masqué, assurant ainsi une séc
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="398"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
-        <translation>Bac &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;à sécurité renforcée&lt;/a&gt;</translation>
+        <translation>À &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;sécurité renforcée&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="399"/>
@@ -504,7 +504,7 @@ Le profil complet de l&apos;utilisateur demeure masqué, assurant ainsi une séc
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="400"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation>Bac avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
+        <translation>Avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="401"/>
@@ -516,7 +516,7 @@ seuls les répertoires « C:\Windows » et « C:\Program Files » sont accessibl
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
         <source>Standard Sandbox</source>
-        <translation>Bac standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>
@@ -528,7 +528,7 @@ Les applications peuvent être lancées dans ce bac, en s&apos;assurant qu&apos;
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="406"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation>Bac &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;conteneur d&apos;applications&lt;/a&gt; avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Conteneur d&apos;applications&lt;/a&gt; avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
@@ -541,7 +541,7 @@ Bien que le niveau d&apos;isolation soit réduit par rapport à d&apos;autres ty
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="409"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
-        <translation>Bac &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;conteneur d&apos;applications&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Conteneur d&apos;applications&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="418"/>
@@ -564,22 +564,22 @@ Cela offre le niveau ultime de confidentialité et de protection des données au
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="441"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>Bac renforcé avec protection des données</translation>
+        <translation>Renforcé avec protection des données</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
         <source>Security Hardened Sandbox</source>
-        <translation>Bac à sécurité renforcée</translation>
+        <translation>À sécurité renforcée</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="443"/>
         <source>Sandbox with Data Protection</source>
-        <translation>Bac avec protection des données</translation>
+        <translation>Avec protection des données</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="444"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation>Bac à isolation standard (par défaut)</translation>
+        <translation>À isolation standard (par défaut)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
@@ -589,12 +589,12 @@ Cela offre le niveau ultime de confidentialité et de protection des données au
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
         <source>Application Compartment Box</source>
-        <translation>Bac conteneur d&apos;applications</translation>
+        <translation>Conteneur d&apos;applications</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="448"/>
         <source>Confidential Encrypted Box</source>
-        <translation>Bac chiffré et confidentiel</translation>
+        <translation>Chiffré et confidentiel</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="573"/>
@@ -1952,18 +1952,18 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsAdvanced.cpp" line="709"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="718"/>
         <source>bytes (unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>octets (illimité)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="712"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="721"/>
         <source>bytes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>octets (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="727"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>illimité</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="899"/>
@@ -2023,12 +2023,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1448"/>
         <source>Failed to retrieve firmware table information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de récupération des informations de la table du microgiciel.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1456"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Table du microgiciel enregistrée avec succès dans le registre de l&apos;hôte : « HKEY_CURRENT_USER\System\SbieCustom »&lt;br /&gt;Vous pouvez la copier dans le registre d&apos;un bac afin d&apos;avoir des valeurs différentes pour chaque bac.</translation>
     </message>
     <message>
         <source>On Delete</source>
@@ -2072,7 +2072,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="130"/>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Enfants</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="256"/>
@@ -2137,22 +2137,22 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>Bac renforcé avec protection des données</translation>
+        <translation>Renforcé avec protection des données</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Security Hardened Sandbox</source>
-        <translation>Bac à sécurité renforcée</translation>
+        <translation>À sécurité renforcée</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Sandbox with Data Protection</source>
-        <translation>Bac avec protection des données</translation>
+        <translation>Avec protection des données</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation>Bac à isolation standard (par défaut)</translation>
+        <translation>À isolation standard (par défaut)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
@@ -3897,13 +3897,13 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <location filename="SandMan.cpp" line="1641"/>
         <location filename="SandMan.cpp" line="1672"/>
         <source>Which box you want to add in?</source>
-        <translation type="unfinished"></translation>
+        <translation>Quel bac voulez-vous ajouter ?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1641"/>
         <location filename="SandMan.cpp" line="1672"/>
         <source>Type the box name which you are going to set:</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisir le nom de bac que vous allez définir :</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1658"/>
@@ -3912,28 +3912,28 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <location filename="SandMan.cpp" line="1679"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>Sandboxie-Plus Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertissement de Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1658"/>
         <source>The value is not an existing directory or executable.</source>
-        <translation type="unfinished"></translation>
+        <translation>La valeur n&apos;est ni un répertoire existant ni un exécutable.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1663"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez saisi un mauvais nom de bac ! Rien n&apos;a été modifié.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name!Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez saisi un mauvais nom de bac ! Rien n&apos;a été modifié.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1667"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>Users canceled this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;utilisateur a annulé cette opération.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2014"/>
@@ -5013,7 +5013,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="SbieProcess.cpp" line="67"/>
         <source>Windows Explorer</source>
-        <translation>Explorateur Windows</translation>
+        <translation>Explorateur de fichiers</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="68"/>
@@ -5247,7 +5247,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="185"/>
         <source>Windows Explorer</source>
-        <translation>Explorateur de Windows</translation>
+        <translation>Explorateur de fichiers</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="186"/>
@@ -5482,7 +5482,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="315"/>
         <source>Run Windows Explorer</source>
-        <translation>Exécuter l&apos;explorateur Windows</translation>
+        <translation>Exécuter l&apos;explorateur de fichiers</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="329"/>
@@ -6123,7 +6123,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="530"/>
         <source>HwId: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId : %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="565"/>
@@ -6274,12 +6274,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1620"/>
         <source>Set Force in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours forcer dans un bac à sable</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1629"/>
         <source>Set Open Path in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours ouvrir ce chemin dans un bac à sable</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1938"/>
@@ -8428,7 +8428,7 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3332"/>
         <source>Network Options</source>
-        <translation>Options de réseau</translation>
+        <translation>Réseau</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="621"/>
@@ -8870,7 +8870,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4174"/>
         <source>Restart force process before they begin to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Redémarrer les processus forcés avant qu&apos;ils commencent à s&apos;exécuter</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4905"/>
@@ -9036,23 +9036,23 @@ au lieu de « * ».</translation>
         <location filename="Forms/OptionsWindow.ui" line="1666"/>
         <location filename="Forms/OptionsWindow.ui" line="1740"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>illimité</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1724"/>
         <location filename="Forms/OptionsWindow.ui" line="1754"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>octets</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nouveau jeton dans un bac à sable au lieu de démonter le jeton d&apos;origine</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2167"/>
         <source>Force Children</source>
-        <translation type="unfinished">Forcer les processus enfants</translation>
+        <translation>Forcer les processus enfants</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3444"/>
@@ -9123,7 +9123,7 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1608"/>
         <source>Limit restrictions</source>
-        <translation>Limiter les restrictions</translation>
+        <translation>Limites</translation>
     </message>
     <message>
         <source>Leave it blank to disable the setting(Unit:KB)</source>
@@ -9433,7 +9433,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3779"/>
         <source>Bypass IPs</source>
-        <translation type="unfinished"></translation>
+        <translation>Contourner les IP</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3854"/>
@@ -9453,7 +9453,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4118"/>
         <source>Various Options</source>
-        <translation>Options diverses</translation>
+        <translation>Divers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4143"/>
@@ -9543,47 +9543,47 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4760"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Confidentialité</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4769"/>
         <source>Hide Firmware Informations</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer les informations du microgiciel</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4799"/>
         <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Certains programmes lisent les détails du système en se servant de WMI (une base de données incluse avec Windows) au lieu d&apos;utiliser des méthodes normales. Par exemple, « tasklist.exe » peut ainsi obtenir la liste complète des processus même si « Masquer les propres processus de Sandboxie de la liste des tâches » est activé. Utilisez cette option pour empêcher ce comportement.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4802"/>
         <source>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher les processus d&apos;un bac d&apos;accéder aux détails du système en se servant de WMI (voir la bulle d&apos;aide pour plus d&apos;information)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4840"/>
         <source>Process Hiding</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquage des processus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4854"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser une langue/LangID personnalisée</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4875"/>
         <source>Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Protection des données</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4912"/>
         <source>Dump the current Firmare Tables to HKCU\System\SbieCustom</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier la table du microgiciel actuel dans « HKCU\System\SbieCustom »</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4915"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier la table du microgiciel</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5115"/>
@@ -9776,7 +9776,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="56"/>
         <source>Sandbox</source>
-        <translation>Bacs à sable</translation>
+        <translation>Bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="81"/>
@@ -10288,12 +10288,12 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="643"/>
         <source>Add ‘Set Force in Sandbox&apos; to the context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter « Toujours forcer dans un bac à sable » au menu contextuel</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="650"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter « Toujours ouvrir ce chemin dans un bac à sable » au menu contextuel</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1308"/>
@@ -10318,7 +10318,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1732"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId : 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1742"/>
@@ -10400,7 +10400,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2283"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours exécuter l&apos;interface de SandMan en tant qu&apos;administrateur</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2395"/>

@@ -1458,18 +1458,18 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/OptionsAdvanced.cpp" line="709"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="718"/>
         <source>bytes (unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bytes (unbegrenzt)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="712"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="721"/>
         <source>bytes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bytes (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="727"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>unbegrenzt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="899"/>
@@ -1548,12 +1548,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1448"/>
         <source>Failed to retrieve firmware table information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Abruf von Firmwaretabelleninformationen fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1456"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Firmwaretabelle erfolgreich in der Registry des Hostsystems gespeichert: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;Sie können sie in die Registry der Sandboxen kopieren, um für jede Box einen anderen Wert zu haben.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -1964,7 +1964,7 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="130"/>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Untergeordnete Prozesse</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="256"/>
@@ -3382,12 +3382,12 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="1658"/>
         <source>The value is not an existing directory or executable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Wert ist kein vorhandenes Verzeichnis oder eine ausführbare Datei.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1663"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben einen falschen Boxnamen eingegeben! Es wurde nichts geändert.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1739"/>
@@ -5312,7 +5312,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="530"/>
         <source>HwId: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="729"/>
@@ -5458,10 +5458,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1505"/>
         <source>Supporter certificate required for automation</source>
         <translation>Unterstützerzertifikat notwendig zur Automatisierung</translation>
-    </message>
-    <message>
-        <source>Make Folder/File &amp;Forced</source>
-        <translation type="vanished">Erzwinge &amp;Ordner/Datei</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1938"/>
@@ -5627,12 +5623,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1620"/>
         <source>Set Force in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze Erzwinge in Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1629"/>
         <source>Set Open Path in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze Öffne Pfad in Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1945"/>
@@ -7264,10 +7260,6 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
         <translation>Öffne Zugriff auf Windows Security Account Manager</translation>
     </message>
     <message>
-        <source>Hide Processes</source>
-        <translation type="vanished">Verstecke Prozesse</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="4847"/>
         <source>Add Process</source>
         <translation>Prozess hinzufügen</translation>
@@ -7416,10 +7408,6 @@ an Stelle von &quot;*&quot;.</translation>
         <translation>Limit-Beschränkungen</translation>
     </message>
     <message>
-        <source>Leave it blank to disable the setting(Unit:KB)</source>
-        <translation type="vanished">Leer lassen, um die Einstellung zu deaktivieren (Einheit: KB)</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1621"/>
         <location filename="Forms/OptionsWindow.ui" line="1663"/>
         <location filename="Forms/OptionsWindow.ui" line="1737"/>
@@ -7455,14 +7443,6 @@ an Stelle von &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="4809"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation>Nicht erlauben, dass sandgeboxte Prozesse die Prozesse außerhalb der Boxen sehen können</translation>
-    </message>
-    <message>
-        <source>Prevent sandboxed processes from accessing system details through WMI</source>
-        <translation type="vanished">Hindere sandgeboxte Prozesse daran, über WMI auf Systemdetails zuzugreifen</translation>
-    </message>
-    <message>
-        <source>Some programs retrieve system details via WMI (Windows Management Instrumentation), a built-in Windows database, rather than using conventional methods. For instance, &apos;tasklist.exe&apos; can access a complete list of processes even if &apos;HideOtherBoxes&apos; is enabled. Enable this option to prevent such behavior.</source>
-        <translation type="vanished">Einige Programme rufen Systemdetails über WMI (Windows Management Instrumentation), eine integrierte Windows-Datenbank, ab, anstatt herkömmliche Methoden zu verwenden. Zum Beispiel kann &apos;tasklist.exe&apos; auf eine komplette Liste von Prozessen zugreifen, auch wenn &apos;HideOtherBoxes&apos; aktiviert ist. Aktivieren Sie diese Option, um ein solches Verhalten zu verhindern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5013"/>
@@ -7759,10 +7739,6 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
         <translation>Job-Objekt</translation>
     </message>
     <message>
-        <source>Create a new sandboxed token instead of setting down default token</source>
-        <translation type="vanished">Erzeuge einen neuen sandgeboxten Token, anstelle des Standardtokens</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2227"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <translation>Programme die hier eingegeben werden, wird erlaubt aus dieser Box auszubrechen, wenn diese starten, sodass Sie diese in einer anderen Box einfangen können. Zum Beispiel um Ihren Browser immer in einer dafür gewidmeten Box zu öffnen.</translation>
@@ -7777,23 +7753,23 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
         <location filename="Forms/OptionsWindow.ui" line="1666"/>
         <location filename="Forms/OptionsWindow.ui" line="1740"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>unbegrenzt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1724"/>
         <location filename="Forms/OptionsWindow.ui" line="1754"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bytes</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzeuge einen neuen sandgeboxten Token, anstatt das ursprüngliche Token zu entfernen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2167"/>
         <source>Force Children</source>
-        <translation type="unfinished">Erzwungene untergeordnete Prozesse</translation>
+        <translation>Erzwungene untergeordnete Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2319"/>
@@ -8449,7 +8425,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3779"/>
         <source>Bypass IPs</source>
-        <translation type="unfinished"></translation>
+        <translation>Umgehe IPs</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3854"/>
@@ -8479,47 +8455,47 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4760"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Privatsphäre</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4769"/>
         <source>Hide Firmware Informations</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstecke Firmwareinformationen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4799"/>
-        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
-        <translation type="unfinished"></translation>
+        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</source>
+        <translation>Einige Programme lesen Systemdetails über WMI (eine in Windows eingebaute Datenbank) aus, anstatt auf normalen Wegen. Zum Beispiel könnte &quot;tasklist.exe&quot; eine vollständige Prozessliste erhalten, selbst wenn &quot;HideOtherBoxes&quot; durch Zugriff auf WMI geöffnet wird. Aktivieren Sie diese Option, um dieses Verhalten zu beenden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4802"/>
         <source>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hindere sandgeboxte Prozesse daran, über WMI auf Systemdetails zuzugreifen (siehe Tooltip für mehr Infos)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4840"/>
         <source>Process Hiding</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozesse verstecken</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4854"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende eine eigene Locale/LangID</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4875"/>
         <source>Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenschutz</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4912"/>
         <source>Dump the current Firmare Tables to HKCU\System\SbieCustom</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere die aktuellen Firmwaretabellen in HKCU\System\SbieCustom</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4915"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere FW-Tabellen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5190"/>
@@ -9139,10 +9115,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <translation>Windows-Shell</translation>
     </message>
     <message>
-        <source>Add ‘Make Folder/File Forced&apos; to the context menu</source>
-        <translation type="vanished">Füge &apos;Erzwinge &amp;Ordner/Datei&apos; dem Kontextmenü hinzu</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="782"/>
         <source>Run Menu</source>
         <translation>Startmenü</translation>
@@ -9506,12 +9478,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="643"/>
         <source>Add ‘Set Force in Sandbox&apos; to the context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge &apos;Setze Erzwinge in Sandbox&apos; zum Kontextmenü hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="650"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge &apos;Setze Öffne Pfad in Sandbox&apos; zum Kontextmenü hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1583"/>
@@ -9526,7 +9498,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1732"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1742"/>
@@ -9603,7 +9575,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2283"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan Benutzeroberfläche immer als Admin ausführen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2295"/>

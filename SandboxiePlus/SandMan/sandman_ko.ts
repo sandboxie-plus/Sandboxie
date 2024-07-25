@@ -4234,12 +4234,10 @@ No will choose: %2</source>
         <translation>Sandboxie-Plus 경고</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name!Nothing was changed.</source>
-        <translation>박스 이름을 잘못 입력했습니다! 아무것도 변경되지 않았습니다.</translation>
+        <translation type="vanished">박스 이름을 잘못 입력했습니다! 아무것도 변경되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1667"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>Users canceled this operation.</source>
         <translation>사용자가 이 작업을 취소했습니다.</translation>
@@ -4251,7 +4249,13 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1663"/>
+        <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1667"/>
+        <source>User canceled this operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5629,9 +5633,9 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
-        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
-        <translation>이 샌드박스는 사용할 수 없거나 그룹/사용자로 제한되어 있습니다. 편집하시겠습니까?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</source>
+        <oldsource>This sandbox is disabled or restricted to a group/user, do you want to edit it?</oldsource>
+        <translation type="unfinished">이 샌드박스는 사용할 수 없거나 그룹/사용자로 제한되어 있습니다. 편집하시겠습니까?</translation>
     </message>
 </context>
 <context>
@@ -9031,8 +9035,9 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4799"/>
-        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
-        <translation>일부 프로그램은 일반적인 방법 대신 WMI (Windows 기본 제공 데이터베이스)를 통해 시스템 세부 정보를 읽습니다. 예를 들어, WMI에 액세스하여 &quot;HideOtherBoxes&quot;를 열어도 &quot;tasklist.exe&quot;는 전체 프로세스 목록을 가져올 수 있습니다. 이 옵션을 사용하여 더 무거운 것을 중지할 수 있습니다.</translation>
+        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</source>
+        <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
+        <translation type="unfinished">일부 프로그램은 일반적인 방법 대신 WMI (Windows 기본 제공 데이터베이스)를 통해 시스템 세부 정보를 읽습니다. 예를 들어, WMI에 액세스하여 &quot;HideOtherBoxes&quot;를 열어도 &quot;tasklist.exe&quot;는 전체 프로세스 목록을 가져올 수 있습니다. 이 옵션을 사용하여 더 무거운 것을 중지할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4802"/>

@@ -3852,16 +3852,15 @@ Erro: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1663"/>
+        <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name!Nothing was changed.</source>
-        <translation type="unfinished">Você digitou um nome de caixa errado! Nada foi alterado.</translation>
+        <translation type="obsolete">Você digitou um nome de caixa errado! Nada foi alterado.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1667"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>Users canceled this operation.</source>
         <translation type="unfinished">Os usuários cancelaram essa operação.</translation>
@@ -4303,6 +4302,11 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1566"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1667"/>
+        <source>User canceled this operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5759,8 +5763,8 @@ Não vou escolher: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
-        <oldsource>This sandbox is disabled, do you want to enable it?</oldsource>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</source>
+        <oldsource>This sandbox is disabled or restricted to a group/user, do you want to edit it?</oldsource>
         <translation type="unfinished">Essa caixa está desativada, deseja ativá-la?</translation>
     </message>
 </context>
@@ -9094,7 +9098,8 @@ ao invés de &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4799"/>
-        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</source>
+        <source>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</source>
+        <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these heavior.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

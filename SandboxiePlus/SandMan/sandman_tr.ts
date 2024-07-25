@@ -3319,7 +3319,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="SandMan.cpp" line="1667"/>
-        <location filename="SandMan.cpp" line="1683"/>
         <source>User canceled this operation.</source>
         <translation>Kullanıcı bu işlemi iptal etti.</translation>
     </message>
@@ -3333,6 +3332,11 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
         <translation>Yanlış alan adı yazdınız! Hiçbir şey eklenmedi.</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1683"/>
+        <source>Users canceled this operation.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2014"/>
@@ -4797,8 +4801,9 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
-        <translation>Bu alan devre dışı veya bir grup/kullanıcı ile sınırlandırılmış, etkinleştirmek istiyor musunuz?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</source>
+        <oldsource>This sandbox is disabled or restricted to a group/user, do you want to edit it?</oldsource>
+        <translation type="unfinished">Bu alan devre dışı veya bir grup/kullanıcı ile sınırlandırılmış, etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>

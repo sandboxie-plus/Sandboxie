@@ -3369,12 +3369,10 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <translation>Sandboxie-Plus Warnung</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name!Nothing was changed.</source>
-        <translation>Sie haben einen falschen Boxnamen eingegeben! Es wurde nichts geändert.</translation>
+        <translation type="vanished">Sie haben einen falschen Boxnamen eingegeben! Es wurde nichts geändert.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1667"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>Users canceled this operation.</source>
         <translation>Vorgang durch Benutzer abgebrochen.</translation>
@@ -3386,8 +3384,14 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     </message>
     <message>
         <location filename="SandMan.cpp" line="1663"/>
+        <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
         <translation>Sie haben einen falschen Boxnamen eingegeben! Es wurde nichts geändert.</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1667"/>
+        <source>User canceled this operation.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1739"/>
@@ -5043,8 +5047,9 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1789"/>
-        <source>This sandbox is disabled or restricted to a group/user, do you want to edit it?</source>
-        <translation>Diese Sandbox ist deaktiviert oder auf andere Gruppen/Benutzer beschränkt. Möchten Sie die Sandbox bearbeiten?</translation>
+        <source>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</source>
+        <oldsource>This sandbox is disabled or restricted to a group/user, do you want to edit it?</oldsource>
+        <translation type="unfinished">Diese Sandbox ist deaktiviert oder auf andere Gruppen/Benutzer beschränkt. Möchten Sie die Sandbox bearbeiten?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="549"/>

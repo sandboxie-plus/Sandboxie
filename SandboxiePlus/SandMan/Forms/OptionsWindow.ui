@@ -4796,10 +4796,10 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="12" column="0" colspan="5">
               <widget class="QCheckBox" name="chkBlockWMI">
                <property name="toolTip">
-                <string>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop this behaviour.</string>
+                <string>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</string>
                </property>
                <property name="text">
-                <string>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more Info)</string>
+                <string>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</string>
                </property>
               </widget>
              </item>

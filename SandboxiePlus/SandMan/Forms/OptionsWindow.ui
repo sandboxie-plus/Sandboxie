@@ -429,7 +429,7 @@
                <item row="6" column="2" colspan="4">
                 <widget class="QLabel" name="lblCrypto">
                  <property name="text">
-                  <string>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor's&lt;/a&gt; AES-XTS implementation.</string>
+                  <string>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box's root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor's&lt;/a&gt; AES-XTS implementation.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -1374,7 +1374,7 @@
                <item row="3" column="2">
                 <widget class="QLabel" name="label_60">
                  <property name="text">
-                  <string>Security Isolation through the usage of a heavily restricted process token is Sandboxie's primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</string>
+                  <string>Security Isolation through the usage of a heavily restricted process token is Sandboxie's primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it's no longer providing reliable security, just simple application compartmentalization.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -4293,7 +4293,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="4" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkHostProtect">
                  <property name="toolTip">
-                  <string>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
+                  <string>Sandboxie's resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. 'ClosedFilePath=! iexplore.exe,C:Users*' will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the &quot;Access policies&quot; page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</string>
                  </property>
                  <property name="text">
@@ -4766,7 +4766,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                 <string/>
                </property>
                <property name="text">
-                <string>Hide Firmware Informations</string>
+                <string>Hide Firmware Information</string>
                </property>
               </widget>
              </item>
@@ -4796,10 +4796,10 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="12" column="0" colspan="5">
               <widget class="QCheckBox" name="chkBlockWMI">
                <property name="toolTip">
-                <string>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</string>
+                <string>Some programs read system details through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</string>
                </property>
                <property name="text">
-                <string>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</string>
+                <string>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more Info)</string>
                </property>
               </widget>
              </item>
@@ -4909,7 +4909,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="1" column="4">
               <widget class="QToolButton" name="btnDumpFW">
                <property name="toolTip">
-                <string>Dump the current Firmare Tables to HKCU\System\SbieCustom</string>
+                <string>Dump the current Firmware Tables to HKCU\System\SbieCustom</string>
                </property>
                <property name="text">
                 <string>Dump FW Tables</string>

@@ -479,7 +479,19 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");
 
 	bool bGlobalSandboxGroup = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieAllGroup", false);
-	WriteAdvancedCheck(ui.chkCreateToken, "UseCreateToken", bGlobalSandboxGroup ? "" : "y", "");
+	bool bGlobalCreateToken = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("UseCreateToken", false);
+	if (ui.chkCreateToken->checkState() == Qt::Checked) {
+		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "" : "y");
+		m_pBox->DelValue("UseCreateToken");
+	}
+	else if (ui.chkCreateToken->checkState() == Qt::PartiallyChecked) {
+		m_pBox->SetText("SandboxieAllGroup", "n");
+		m_pBox->SetText("UseCreateToken", "y");
+	}
+	else {
+		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "" : "y", bGlobalSandboxGroup ? "n" : "");
+		WriteAdvancedCheck(ui.chkCreateToken, "UseCreateToken", bGlobalCreateToken ? "" : "y", bGlobalCreateToken ? "n" : "");
+	}
 
 	SaveOptionList();
 
@@ -664,10 +676,13 @@ void COptionsWindow::UpdateBoxIsolation()
 	}
 	else {
 		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
-		ReadGlobalCheck(ui.chkCreateToken, "UseCreateToken", false);
-		bool bGlobalSandboxGroup = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieAllGroup", false);
-		if (bGlobalSandboxGroup) 
-			ui.chkCreateToken->setEnabled(false);
+
+		if (m_pBox->GetBool("SandboxieAllGroup", false, true))
+			ui.chkCreateToken->setCheckState(Qt::Checked);
+		else if (m_pBox->GetBool("UseCreateToken", false, true))
+			ui.chkCreateToken->setCheckState(Qt::PartiallyChecked);
+		else
+			ui.chkCreateToken->setCheckState(Qt::Unchecked);
 	}
 }
 

@@ -1095,7 +1095,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsSecurity">
            <property name="currentIndex">
-            <number>3</number>
+            <number>4</number>
            </property>
            <widget class="QWidget" name="tabHarden">
             <attribute name="title">
@@ -1922,8 +1922,15 @@
                </item>
                <item row="9" column="1" colspan="4">
                 <widget class="QCheckBox" name="chkCreateToken">
+                 <property name="toolTip">
+                  <string>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
+Partially checked: No groups will be added to the newly created sandboxed token.</string>
+                 </property>
                  <property name="text">
                   <string>Create a new sandboxed token instead of stripping down the original token</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>

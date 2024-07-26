@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.6 / 5.69.6] - 2024-07-??
 
 ### Fixed
-- fixed issue with Windows 7 caused by the new CustomLCID option
+- fixed issue with Windows 7 caused by the new CustomLCID option [#4117](https://github.com/sandboxie-plus/Sandboxie/issues/4117)
 
 
 

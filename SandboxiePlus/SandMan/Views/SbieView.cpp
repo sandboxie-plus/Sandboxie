@@ -1411,21 +1411,39 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuRename)
 	{
-		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue);
-		if (Value.isEmpty() || Value == OldValue)
+		auto pBox = SandBoxes.first();
+		QString OldValue = pBox->GetName().replace("_", " ");
+		QString Alias = pBox->GetText("BoxAlias");
+		bool bAlias = false;
+		if (bAlias = !Alias.isEmpty())
+			OldValue = Alias;
+		bool bOk = false;
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", bAlias ? tr("Please enter a new alias for the Sandbox.") : tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue, &bOk);
+		if (!bOk || Value == OldValue)
 			return;
-		if (!TestNameAndWarn(Value))
+		if (!Value.isEmpty() && !TestNameAndWarn(Value))
 			return;
 
-		SB_STATUS Status = SandBoxes.first()->RenameBox(Value.replace(" ", "_"));
-		if (!Status.IsError())
+		bool bError = false;
+		if (bAlias || (bError = CSbieAPI::ValidateName(QString(Value).replace(" ", "_")).IsError()))
 		{
-			RenameItem(OldValue.replace(" ", "_"), Value.replace(" ", "_"));
-			if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(OldValue.replace(" ", "_"), Qt::CaseInsensitive) == 0)
-				theAPI->GetGlobalSettings()->SetText("DefaultBox", Value.replace(" ", "_"));
+			if (!bAlias && QMessageBox::question(this, "Sandboxie-Plus", tr("The entered name is not valid, do you want to set it as an alias instead?"), QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
+				return;
+			if (Value.isEmpty()) pBox->DelValue("BoxAlias");
+			else pBox->SetText("BoxAlias", Value);
+			pBox->UpdateDetails();
 		}
-		Results.append(Status);
+		else
+		{
+			SB_STATUS Status = pBox->RenameBox(Value.replace(" ", "_"));
+			if (!Status.IsError())
+			{
+				RenameItem(OldValue.replace(" ", "_"), Value.replace(" ", "_"));
+				if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(OldValue.replace(" ", "_"), Qt::CaseInsensitive) == 0)
+					theAPI->GetGlobalSettings()->SetText("DefaultBox", Value.replace(" ", "_"));
+			}
+			Results.append(Status);
+		}
 
 		SaveBoxGrouping();
 	}
@@ -1720,7 +1738,7 @@ void CSbieView::ShowOptions(const CSandBoxPtr& pBox)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pOptionsWnd == NULL) {
-		pBoxEx->m_pOptionsWnd = new COptionsWindow(pBox, pBox->GetName());
+		pBoxEx->m_pOptionsWnd = new COptionsWindow(pBox, pBoxEx->GetDisplayName());
 		connect(theGUI, SIGNAL(Closed()), pBoxEx->m_pOptionsWnd, SLOT(close()));
 		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pOptionsWnd = NULL;

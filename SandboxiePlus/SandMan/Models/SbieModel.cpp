@@ -330,7 +330,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				case eName:				Value = pBoxEx->GetDisplayName(); break;
 				//case eName:				Value = pBox->GetName(); break;
 				case eStatus:			Value = pBox.objectCast<CSandBoxPlus>()->GetStatusStr(); break;
-				case eTitle:			Value = pBox->GetDesktop(); break;
+				case eTitle:			break;
 				case eInfo:				Value = pBox.objectCast<CSandBoxPlus>()->IsEmptyCached() ? -2 : (bWatchSize ? pBox.objectCast<CSandBoxPlus>()->GetSize() : 0); break;
 				case ePath:				Value = pBox->GetFileRoot(); break;
 			}

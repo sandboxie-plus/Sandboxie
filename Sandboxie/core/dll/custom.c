@@ -1678,7 +1678,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				hKey, &uni, 0, REG_SZ, &buf, sizeof(buf));
 
 			NtClose(hKey);
-			free(tmp);
+			Dll_Free(tmp);
 		}
 
 		return TRUE;

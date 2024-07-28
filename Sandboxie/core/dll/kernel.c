@@ -255,7 +255,10 @@ _FX BOOLEAN Kernel_Init()
 		}
 		SBIEDLL_HOOK(Kernel_, GetUserDefaultLCID);
 		SBIEDLL_HOOK(Kernel_, GetUserDefaultLangID);
-		SBIEDLL_HOOK(Kernel_, GetUserDefaultGeoName);
+		void* GetUserDefaultGeoName = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetUserDefaultGeoName");
+		if (GetUserDefaultGeoName) {
+			SBIEDLL_HOOK(Kernel_, GetUserDefaultGeoName);
+		}
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultUILanguage);
 		void* GetSystemDefaultLocaleName = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetSystemDefaultLocaleName");
 		if (GetSystemDefaultLocaleName) {

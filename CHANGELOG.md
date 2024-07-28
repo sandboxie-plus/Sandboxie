@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow
 - added an optional context menu option to make folder/file forced quickly
   - Note: You can also use "Sandman.exe /add_force program_path" to do it
-
+- added a feature which could modify Windows Product Id in the registry to a rand value
 
 ## [1.14.5 / 5.69.5] - 2024-07-?
 

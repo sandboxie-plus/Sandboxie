@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with Windows 7 caused by the new CustomLCID option [#4117](https://github.com/sandboxie-plus/Sandboxie/issues/4117)
+- fixed Settings Window issue with non advanced certificates introduced in 1.14.0
 
 ### Added
 - added alias for a sandbox [#4112](https://github.com/sandboxie-plus/Sandboxie/issues/4112)

@@ -640,7 +640,7 @@
              <item row="7" column="2" colspan="2">
               <widget class="QCheckBox" name="chkShellMenu3">
                <property name="text">
-                <string>Add ‘Set Force in Sandbox' to the context menu</string>
+                <string>Add 'Set Force in Sandbox' to the context menu</string>
                </property>
               </widget>
              </item>

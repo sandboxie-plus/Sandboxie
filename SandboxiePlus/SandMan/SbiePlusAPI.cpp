@@ -410,6 +410,15 @@ void CSandBoxPlus::UpdateDetails()
 
 	QStringList BorderCfg = GetText("BorderColor").split(",");
 	m_BoxColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)).rgb();
+
+	m_BoxAlias = GetText("BoxAlias");
+}
+
+QString CSandBoxPlus::GetDisplayName() const
+{
+	if (!m_BoxAlias.isEmpty())
+		return m_BoxAlias;
+	return GetName().replace("_", " ");
 }
 
 bool CSandBoxPlus::IsBoxexPath(const QString& Path)

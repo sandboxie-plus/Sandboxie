@@ -71,13 +71,21 @@ _FX BOOLEAN Gui_InitTitle(HMODULE module)
     SbieDll_GetSettingsForName(NULL, Dll_ImageName, L"BoxNameTitle", buf, sizeof(buf), NULL);
     if (*buf == L'y' || *buf == L'Y') { // indicator + box name
 
+        const WCHAR* BoxName = Dll_BoxName;
+
+        NTSTATUS status;
+		WCHAR BoxAlias[MAX_PATH];
+		status = SbieApi_QueryConfAsIs(NULL, L"BoxAlias", 0, BoxAlias, ARRAYSIZE(BoxAlias));
+        if (NT_SUCCESS(status) && *BoxAlias)
+            BoxName = BoxAlias;
+
         UNICODE_STRING uni;
 
-        Gui_BoxNameTitleLen = wcslen(Dll_BoxName) + 3;
+        Gui_BoxNameTitleLen = wcslen(BoxName) + 3;
         Gui_BoxNameTitleW =
             Dll_Alloc((Gui_BoxNameTitleLen + 3) * sizeof(WCHAR));
         Gui_BoxNameTitleW[0] = Gui_TitleSuffixW[1];         // L'['
-        wcscpy(&Gui_BoxNameTitleW[1], Dll_BoxName);
+        wcscpy(&Gui_BoxNameTitleW[1], BoxName);
         wcscat(Gui_BoxNameTitleW, &Gui_TitleSuffixW[3]);    // L"]"
         wcscat(Gui_BoxNameTitleW, L" ");
 

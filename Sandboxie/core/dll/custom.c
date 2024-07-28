@@ -1644,8 +1644,8 @@ _FX BOOLEAN  Custom_ProductID(void) {
 		if (NT_SUCCESS(status)) {
 
 			UNICODE_STRING buf;
-			WCHAR* tmp = L"";
-			
+			WCHAR* tmp = Dll_Alloc(24);
+			memset(tmp, 0, 24);
 
 			RtlInitUnicodeString(&uni, L"ProductId");
 
@@ -1678,6 +1678,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				hKey, &uni, 0, REG_SZ, &buf, sizeof(buf));
 
 			NtClose(hKey);
+			free(tmp);
 		}
 
 		return TRUE;

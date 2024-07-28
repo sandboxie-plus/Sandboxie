@@ -49,6 +49,7 @@ static HANDLE   OpenExplorerKey(
                     HANDLE ParentKey, const WCHAR *SubkeyName, ULONG *error);
 static void     DeleteShellAssocKeys(ULONG Wow64);
 static void     AutoExec(void);
+static BOOLEAN  Custom_ProductID(void);
 
 
 //---------------------------------------------------------------------------
@@ -91,6 +92,7 @@ _FX BOOLEAN CustomizeSandbox(void)
         DisableEdgeBoost();
         Custom_EnableBrowseNewProcess();
         DeleteShellAssocKeys(0);
+		Custom_ProductID();
         Custom_DisableBHOs();
         if (Dll_OsBuild >= 8400) // only on win 8 and later
             Custom_OpenWith();
@@ -1534,7 +1536,154 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
     NtClose(hOfficeKey);
     return TRUE;
 }
+/*static wchar_t GetCharFromInt(int a) {
+	switch (a) {
+	case 0:
+		return L'0';
+		break;
+	case 1:
+		return L'1';
+		break;
+	case 2:
+		return L'2';
+		break;
+	case 3:
+		return L'3';
+		break;
+	case 4:
+		return L'4';
+		break;
+	case 5:
+		return L'5';
+		break;
+	case 6:
+		return L'6';
+		break;
+	case 7:
+		return L'7';
+		break;
+	case 8:
+		return L'8';
+		break;
+	case 9:
+		return L'9';
+		break;
+	}
+	return 0;
+}
+static int GetIntLen(DWORD n) {
+	int count = 0;
+	while (n != 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return count;
+}*/
+static unsigned long seed = 1;
+int my_rand(void)
+{
+	seed = seed * 214013L
+		+ 2531011L) >> 16;
+	return((unsigned)seed & 0x7fff);
+}
+/*char* my_itoa(int num, char* str, int radix)
+{
+	char index[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	unsigned unum;
+	int i = 0, j, k;
 
+	
+	if (radix == 10 && num < 0)
+	{
+		unum = (unsigned)-num;
+		str[i++] = '-';
+	}
+	else unum = (unsigned)num;
+
+	
+	do
+	{
+		str[i++] = index[unum % (unsigned)radix];
+		unum /= radix;
+
+	} while (unum);
+
+	str[i] = '\0';
+
+	
+	if (str[0] == '-') k = 1;
+	else k = 0;
+
+	char temp;
+	for (j = k; j <= (i - 1) / 2; j++)
+	{
+		temp = str[j];
+		str[j] = str[i - 1 + k - j];
+		str[i - 1 + k - j] = temp;
+	}
+
+	return str;
+
+}*/
+_FX BOOLEAN  Custom_ProductID(void) {
+	if (SbieApi_QueryConfBool(NULL, L"RandomProductId", FALSE) {
+		NTSTATUS status;
+		UNICODE_STRING uni;
+		OBJECT_ATTRIBUTES objattrs;
+		HANDLE hKey;
+
+			InitializeObjectAttributes(
+				&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+		RtlInitUnicodeString(&uni,
+			L"\\registry\\Machine\\Software\\"
+			L"\\Microsoft\\Windows NT\\CurrentVersion");
+
+		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
+		if (NT_SUCCESS(status)) {
+
+			UNICODE_STRING buf;
+			WCHAR* tmp = L"";
+			
+
+			RtlInitUnicodeString(&uni, L"ProductId");
+
+			seed = GetTickCount();
+			DWORD chain1 = my_rand() % 100000 + 99999,
+				chain2 = my_rand() % 100000 + 99999,
+				chain3 = my_rand() % 100000 + 99999,
+				chain4 = my_rand() % 100000 + 99999
+				;
+			Sbie_snwprintf(tmp, 23, L"%d-%d-%d-%d", chain1, chain2, chain3, chain4);
+			RtlInitUnicodeString(&buf, tmp);
+			/*if (GetIntLen(dwTick) == 1) {
+				//DWORD last = dwTick - (dwTick / 10) * 10;
+				DWORD last = dwTick;
+				WCHAR chr = GetCharFromInt((int)last);
+				Sleep(0);
+				DWORD dwTick2 = GetTickCount(),last2=0;
+				if (GetIntLen(dwTick) == 1)
+					last2 = dwTick2;
+				else
+					last2 = dwTick2 - (dwTick2 / 10) * 10;
+				WCHAR chr2= GetCharFromInt((int)last2);
+				wcscpy_s(tmp, 1, chr2);
+				wcscat_s(tmp, 1, chr2);
+				for(int i=0;i<=2;i++)
+					wcscat_s(tmp, 1, chr);
+			}*/
+
+			status = NtSetValueKey(
+				hKey, &uni, 0, REG_SZ, &buf, sizeof(buf));
+
+			NtClose(hKey);
+		}
+
+		return TRUE;
+	}
+	return TRUE;
+}
 #ifndef _M_ARM64
 
 //---------------------------------------------------------------------------

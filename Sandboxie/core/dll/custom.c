@@ -1583,7 +1583,7 @@ static int GetIntLen(DWORD n) {
 static unsigned long seed = 1;
 int my_rand(void)
 {
-	seed = seed * 214013L
+	seed = (seed * 214013L
 		+ 2531011L) >> 16;
 	return((unsigned)seed & 0x7fff);
 }
@@ -1627,7 +1627,7 @@ int my_rand(void)
 
 }*/
 _FX BOOLEAN  Custom_ProductID(void) {
-	if (SbieApi_QueryConfBool(NULL, L"RandomProductId", FALSE) {
+	if (SbieApi_QueryConfBool(NULL, L"RandomProductId", FALSE)) {
 		NTSTATUS status;
 		UNICODE_STRING uni;
 		OBJECT_ATTRIBUTES objattrs;

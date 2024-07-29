@@ -523,6 +523,43 @@ void CSbieUtils::RemoveContextMenu3()
 	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\folder\\shell\\addforce");
 }
 
+
+bool CSbieUtils::HasContextMenu4()
+{
+	const wchar_t* key = L"Software\\Classes\\*\\shell\\addopen\\command";
+	//const wchar_t* key2 = L"Software\\Classes\\*\\Folder\\addforce\\command";
+	HKEY hkey, hKey2;
+	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
+	if (rc != 0)
+		return false;
+
+	RegCloseKey(hkey);
+
+
+	/*rc = RegOpenKeyEx(HKEY_CURRENT_USER, key2, 0, KEY_READ, &hkey2);
+	if (rc != 0)
+		return false;
+
+	RegCloseKey(hkey2);*/
+
+	return true;
+}
+
+void CSbieUtils::AddContextMenu4(const QString& StartPath, const QString& RunStr, const QString& IconPath)
+{
+	std::wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
+	std::wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\"";
+
+	CreateShellEntry(L"*", L"addopen", RunStr.toStdWString(), icon_path, start_path + L" /add_open \"%1\" %*");
+	CreateShellEntry(L"Folder", L"addopen", RunStr.toStdWString(), icon_path, start_path + L" /add_open \"%1\" %*");
+}
+
+void CSbieUtils::RemoveContextMenu4()
+{
+	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\*\\shell\\addopen");
+	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\folder\\shell\\addopen");
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Shortcuts
 

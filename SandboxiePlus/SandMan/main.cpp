@@ -112,14 +112,20 @@ int main(int argc, char *argv[])
 	}
 	int DfpPos = Args.indexOf("/disable_force", Qt::CaseInsensitive);
 	int AfpPos = Args.indexOf("/add_force", Qt::CaseInsensitive);
+	int AOPos = Args.indexOf("/add_open", Qt::CaseInsensitive);
 
 	//Add_Force has the highest priority.
 	if (AfpPos != -1) {
 		DfpPos = -1;
 		BoxPos = -1;
-	}else
+	}
+	else if (AOPos != -1)
+	{
+		DfpPos = -1;
+		BoxPos = -1;
+	}
 		// the first argument wins
-	if (BoxPos != -1 && DfpPos != -1) {
+	else if (BoxPos != -1 && DfpPos != -1) {
 		if (BoxPos < DfpPos) DfpPos = -1;
 		else				 BoxPos = -1;
 	}
@@ -169,8 +175,13 @@ int main(int argc, char *argv[])
 		LPWSTR cmdLine0 = wcsstr(GetCommandLineW(), L"/add_force");
 		if (!cmdLine0) return -1;
 		LPWSTR cmdLine = cmdLine0 + 10;
-		g_PendingMessage = "Add:" + QString::fromWCharArray(cmdLine + 1);
-
+		g_PendingMessage = "AddForce:" + QString::fromWCharArray(cmdLine + 1);
+	}
+	if (AOPos != -1) {
+		LPWSTR cmdLine0 = wcsstr(GetCommandLineW(), L"/add_open");
+		if (!cmdLine0) return -1;
+		LPWSTR cmdLine = cmdLine0 + 9;
+		g_PendingMessage = "AddOpen:" + QString::fromWCharArray(cmdLine + 1);
 	}
 	
 	if (IsBoxed) {

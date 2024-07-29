@@ -443,7 +443,7 @@ extern POOL *Driver_Pool;
 
 NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum);
 
-_FX VOID KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
+_FX BOOLEAN KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
 {
     TIME_FIELDS timeFiled = { 0 };
     const WCHAR* ptr = date_str;
@@ -464,8 +464,11 @@ _FX VOID KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
             timeFiled.Year = (CSHORT)_wtoi(ptr);
 
             RtlTimeFieldsToTime(&timeFiled, date);
+
+            return TRUE;
         }
     }
+    return FALSE;
 }
 
 // Example of __DATE__ string: "Jul 27 2012"
@@ -553,6 +556,7 @@ _FX NTSTATUS KphValidateCertificate()
     LONG amount = 1;
     WCHAR* key = NULL;
     LARGE_INTEGER cert_date = { 0 };
+    LONG days = 0;
 
     Verify_CertInfo.State = 0; // clear
 
@@ -673,7 +677,15 @@ _FX NTSTATUS KphValidateCertificate()
 
         if (_wcsicmp(L"DATE", name) == 0 && cert_date.QuadPart == 0) {
             // DD.MM.YYYY
-            KphParseDate(value, &cert_date);
+            if (KphParseDate(value, &cert_date)) {
+                // DD.MM.YYYY +Days
+                WCHAR* ptr = wcschr(value, L'+');
+                if (ptr)
+                    days = _wtol(ptr);
+            }
+        }
+        else if (_wcsicmp(L"DAYS", name) == 0) {
+            days = _wtol(value);
         }
         else if (_wcsicmp(L"TYPE", name) == 0 && type == NULL) {
             // TYPE-LEVEL
@@ -801,6 +813,7 @@ _FX NTSTATUS KphValidateCertificate()
         LARGE_INTEGER expiration_date = { 0 };
           Verify_CertInfo.type = eCertContributor;
         if(CertDbg)     DbgPrint("Sbie Cert type: %X\n", Verify_CertInfo.type);
+
         Verify_CertInfo.level = eCertMaxLevel;
         if(CertDbg)     DbgPrint("Sbie Cert level: %X\n", Verify_CertInfo.level);
            expiration_date.QuadPart = -1; // at the end of time (never)
@@ -973,7 +986,11 @@ void InitFwUuid()
         for (; i < 16; i++)
             ptr = hexbyte(uuid[i], ptr);
         *ptr++ = 0;
-
-        //DbgPrint("sbie FW-UUID: %S\n", g_uuid_str);
     }
+
+    else // fallback to null guid on error
+        wcscpy(g_uuid_str, L"00000000-0000-0000-0000-000000000000");
+    
+    DbgPrint("sbie FW-UUID: %S\n", g_uuid_str);
 }
+

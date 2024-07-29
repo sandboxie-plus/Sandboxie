@@ -35,6 +35,7 @@
 #include "common/base64.c"
 #include "core/drv/api_defs.h"
 #include "core/drv/verify.h"
+#include "common/rbtree.h"
 
 
 //---------------------------------------------------------------------------
@@ -280,6 +281,8 @@ struct NETPROXY_RULE {
     BOOLEAN auth;
     WCHAR   login[255];
     WCHAR   pass[255];
+
+    rbtree_t ip_map;
 };
 
 extern POOL*            Dll_Pool;
@@ -292,7 +295,8 @@ static BOOLEAN          WSA_WFPisBlocking     = FALSE;
 static BOOLEAN          WSA_TraceFlag         = FALSE;
 
 static BOOLEAN          WSA_ProxyEnabled      = FALSE;
-static NETPROXY_RULE*   WSA_Proxy             = NULL;
+static NETPROXY_RULE*   WSA_Proxy4            = NULL;
+static NETPROXY_RULE*   WSA_Proxy6            = NULL;
 #ifdef PROXY_RESOLVE_HOST_NAMES
        HASH_MAP         DNS_LookupMap;
 #endif
@@ -752,12 +756,25 @@ _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 // WSA_GetProxy
 //---------------------------------------------------------------------------
 
+#define NETFW_MATCH_NONE	0
 
-_FX BOOLEAN WSA_GetProxy(const SOCKADDR* name, void** proxy, int* proxylen)
+ULONG NetFw_MatchAddress(rbtree_t* ip_map, IP_ADDRESS* ip);
+
+_FX BOOLEAN WSA_GetProxyImpl(NETPROXY_RULE* WSA_Proxy, const short *addr, int addrlen, void** proxy, int* proxylen)
 {
     if (!WSA_Proxy)
         return FALSE;
 
+    // check if there are any IP's specified for which wes should bypass the proxy
+    if (WSA_Proxy->ip_map.count > 0) {
+        IP_ADDRESS ip;
+        if (WSA_GetIP(addr, addrlen, &ip)) {
+            if (NetFw_MatchAddress(&WSA_Proxy->ip_map, &ip) != NETFW_MATCH_NONE)
+                return FALSE;
+        }
+    }
+
+    const SOCKADDR* name = (SOCKADDR*)addr;
     if (name->sa_family == AF_INET && WSA_Proxy->af == name->sa_family) {
         *proxy = &WSA_Proxy->WSA_ProxyAddr;
         *proxylen = sizeof(SOCKADDR_IN);
@@ -769,6 +786,19 @@ _FX BOOLEAN WSA_GetProxy(const SOCKADDR* name, void** proxy, int* proxylen)
     else
         return FALSE;
     return TRUE;
+}
+
+_FX BOOLEAN WSA_GetProxy(const short *addr, int addrlen, void** proxy, int* proxylen, NETPROXY_RULE** pWSA_Proxy)
+{
+    if (WSA_GetProxyImpl(WSA_Proxy4, addr, addrlen, proxy, proxylen)) {
+        *pWSA_Proxy = WSA_Proxy4;
+        return TRUE;
+    }
+    if (WSA_GetProxyImpl(WSA_Proxy6, addr, addrlen, proxy, proxylen)) {
+        *pWSA_Proxy = WSA_Proxy6;
+        return TRUE;
+    }
+    return FALSE;
 }
 
 
@@ -853,7 +883,9 @@ _FX int WSA_connect(
 
     void* proxy;
     int proxylen;
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, &proxy, &proxylen)) {
+    NETPROXY_RULE* WSA_Proxy;
+
+    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
 
         WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
         if (pSock) WSA_begin_connect(pSock, s);
@@ -902,7 +934,9 @@ _FX int WSA_WSAConnect(
 
     void* proxy;
     int proxylen;
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, &proxy, &proxylen)) {
+    NETPROXY_RULE* WSA_Proxy;
+
+    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
 
         WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
         if (pSock) WSA_begin_connect(pSock, s);
@@ -951,7 +985,9 @@ _FX int WSA_ConnectEx(
 
     void* proxy;
     int proxylen;
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, &proxy, &proxylen)) {
+    NETPROXY_RULE* WSA_Proxy;
+
+    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
 
         WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
         if (pSock) WSA_begin_connect(pSock, s);
@@ -1188,31 +1224,36 @@ _FX void WSA_InitNetFwRules()
     }
 }
 
+
 //---------------------------------------------------------------------------
 // WSA_ParseNetProxy
 //---------------------------------------------------------------------------
+
+void NetFw_RuleAddIpRange(rbtree_t* tree, IP_ADDRESS* IpBegin, IP_ADDRESS* IpEnd, POOL* pool);
+
+const WCHAR* wcsnchr(const WCHAR* str, size_t max, WCHAR ch);
 
 BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
 {
     // NetworkUseProxy=explorer.exe,Address=198.98.55.77;Port=40000;Auth=No;Login=l2sxbnjqR5JJAAoCnA;Password=12OxyLTW9nma5HbNjC
     // NetworkUseProxy=*,Address=abcd:0123:ffff:1d5c;Port=24;Auth=No
 
-    WCHAR* ip_value;
-    ULONG ip_len;
-    if (SbieDll_FindTagValuePtr(found_value, L"Address", &ip_value, &ip_len, L'=', L';')) {
-        ip_value[ip_len] = L'\0';
-        if (_inet_aton(ip_value, &proxy->WSA_ProxyAddr.sin_addr) == 1) {
+    WCHAR* addr_value;
+    ULONG addr_len;
+    if (SbieDll_FindTagValuePtr(found_value, L"Address", &addr_value, &addr_len, L'=', L';')) {
+        addr_value[addr_len] = L'\0';
+        if (_inet_aton(addr_value, &proxy->WSA_ProxyAddr.sin_addr) == 1) {
             proxy->WSA_ProxyAddr.sin_family = AF_INET;
             proxy->af = AF_INET;
         }
-        else if (_inet_pton(AF_INET6, ip_value, &proxy->WSA_ProxyAddr6.sin6_addr) == 1)
+        else if (_inet_pton(AF_INET6, addr_value, &proxy->WSA_ProxyAddr6.sin6_addr) == 1)
         {
             proxy->WSA_ProxyAddr6.sin6_family = AF_INET6;
             proxy->af = AF_INET6;
         } 
         else
             return FALSE;
-        ip_value[ip_len] = L';';
+        addr_value[addr_len] = L';';
     } 
     else
         return FALSE;
@@ -1233,6 +1274,37 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
     else
         return FALSE;
 
+    const WCHAR* ip_value;
+    ULONG ip_len;
+    if (SbieDll_FindTagValuePtr(found_value, L"Bypass", &ip_value, &ip_len, L'=', L';')) {
+
+        for (const WCHAR* ip_end = ip_value + ip_len; ip_value < ip_end;) {
+            const WCHAR* ip_str1;
+            ULONG ip_len1;
+            ip_value = SbieDll_GetTagValue(ip_value, ip_end, &ip_str1, &ip_len1, L',');
+
+            const WCHAR* ip_str2 = wcsnchr(ip_str1, ip_len1, L'-');
+            if (ip_str2) {
+                ip_len1 = (ULONG)(ip_str2 - ip_str1);
+                ip_str2++; // skip dash
+                ULONG ip_len2 = (ULONG)(ip_value - ip_str2);
+
+                IP_ADDRESS ip1;
+                _inet_xton(ip_str1, ip_len1, &ip1, NULL);
+                IP_ADDRESS ip2;
+                _inet_xton(ip_str2, ip_len2, &ip2, NULL);
+
+                NetFw_RuleAddIpRange(&proxy->ip_map, &ip1, &ip2, Dll_Pool);
+            }
+            else
+            {
+                IP_ADDRESS ip;
+                _inet_xton(ip_str1, ip_len1, &ip, NULL);
+                NetFw_RuleAddIpRange(&proxy->ip_map, &ip, &ip, Dll_Pool);
+            }
+        }
+    }
+
     WCHAR* auth_value;
     ULONG auth_len;
     if (SbieDll_FindTagValuePtr(found_value, L"Auth", &auth_value, &auth_len, L'=', L';'))
@@ -1246,7 +1318,6 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
         if (login_len > 255)
             return FALSE;
         wmemcpy(proxy->login, login_value, login_len);
-        proxy->login[login_len] = L'\0';
     }
 
     WCHAR* pass_value;
@@ -1265,10 +1336,14 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
             SBIE_INI_RC4_CRYPT_REQ req;
             SBIE_INI_RC4_CRYPT_RPL *rpl;
 
+            pass_value[pass_len] = L'\0';
+
             req.h.length = sizeof(SBIE_INI_RC4_CRYPT_REQ) + 255;
             req.h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
             req.value_len = b64_decoded_size(pass_value);
             b64_decode(pass_value, req.value, req.value_len);
+
+            pass_value[pass_len] = L'\0';
 
             rpl = (SBIE_INI_RC4_CRYPT_RPL *)SbieDll_CallServer(&req.h);
             if (rpl){
@@ -1296,14 +1371,12 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
 #define NETPROXY_MATCH_GLOBAL   2
 #define NETPROXY_MATCH_EXACT    0
 
+int NetFw_IpCmp(const void* l, const void* r);
+
 _FX BOOLEAN WSA_InitNetProxy()
 {
-    WCHAR proxy_buf[1024];
-    WSA_Proxy = Dll_Alloc(sizeof(NETPROXY_RULE));
-    memset(WSA_Proxy, 0, sizeof(NETPROXY_RULE));
-
-    BOOLEAN ok = FALSE;
-
+    WCHAR proxy_buf[2048];
+    
     for (ULONG index = 0; ; ++index) {
         NTSTATUS status = SbieApi_QueryConf(
             NULL, L"NetworkUseProxy", index, proxy_buf, sizeof(proxy_buf) - 16 * sizeof(WCHAR));
@@ -1315,16 +1388,31 @@ _FX BOOLEAN WSA_InitNetProxy()
         if (!value || (level != NETPROXY_MATCH_EXACT && level != NETPROXY_MATCH_GLOBAL))
             continue;
 
-        ok = WSA_ParseNetProxy(WSA_Proxy, value);
-        if (ok)
-            break;
+        NETPROXY_RULE* WSA_Proxy = Dll_Alloc(sizeof(NETPROXY_RULE));
+        memset(WSA_Proxy, 0, sizeof(NETPROXY_RULE));
+        rbtree_init(&WSA_Proxy->ip_map, NetFw_IpCmp);
+
+        if (WSA_ParseNetProxy(WSA_Proxy, value)) {
+            if (WSA_Proxy->af == AF_INET) {
+                if (WSA_Proxy4 == NULL) {
+                    WSA_Proxy4 = WSA_Proxy;
+                    WSA_Proxy = NULL;
+                }
+            }
+            else if (WSA_Proxy->af == AF_INET6) {
+                if (WSA_Proxy6 == NULL) {
+                    WSA_Proxy6 = WSA_Proxy;
+                    WSA_Proxy = NULL;
+                }
+            }
+        }
+
+        if(WSA_Proxy)
+            Dll_Free(WSA_Proxy);
     }
 
-    if (!ok) {
-        Dll_Free(WSA_Proxy);
-        WSA_Proxy = NULL;
+    if (!WSA_Proxy4 && !WSA_Proxy6)
         return FALSE;
-    }
 
     SCertInfo CertInfo = { 0 };
     if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo))) || !CERT_IS_LEVEL(CertInfo, eCertAdvanced)) {

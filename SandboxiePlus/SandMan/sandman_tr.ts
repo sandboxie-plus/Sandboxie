@@ -4798,8 +4798,7 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Views/SbieView.cpp" line="1807"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
-        <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
-        <translation type="unfinished">Bu alan devre dışı veya bir grup/kullanıcı ile sınırlandırılmış, etkinleştirmek istiyor musunuz?</translation>
+        <translation>Bu korumalı alan şu anda devre dışı veya belirli gruplarla veya kullanıcılarla sınırlı. Herkesin erişimine izin vermek ister misiniz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>
@@ -5095,12 +5094,12 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Views/SbieView.cpp" line="1421"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lütfen korumalı alan için yeni bir takma ad girin.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1430"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
-        <translation type="unfinished"></translation>
+        <translation>Girilen ad geçerli değil, bunu bir takma ad olarak ayarlamak ister misiniz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1562"/>
@@ -7361,8 +7360,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box&apos;s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
-        <oldsource>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</oldsource>
-        <translation type="unfinished">&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Alan Şifreleme&lt;/a&gt; etkinleştirildiğinde, kayıt defteri kovanı da dahil olmak üzere alanın kök klasörü, &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;un&lt;/a&gt; AES-XTS uygulaması kullanılarak şifrelenmiş bir disk görüntüsünde depolanır.</translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Alan Şifreleme&lt;/a&gt; etkinleştirildiğinde, kayıt defteri kovanı da dahil olmak üzere alanın kök klasörü, &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;un&lt;/a&gt; AES-XTS uygulaması kullanılarak şifrelenmiş bir disk görüntüsünde depolanır.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="348"/>
@@ -7580,10 +7578,8 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <location filename="Forms/OptionsWindow.ui" line="4303"/>
         <source>Sandboxie&apos;s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos; will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the &quot;Access policies&quot; page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
-        <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
-This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</oldsource>
-        <translation type="unfinished">Sandboxie&apos;nin kaynak erişim kuralları, genellikle korumalı alan içinde bulunan program ikili dosyalarına göre ayrım yapar. OpenFilePath ve OpenKeyPath yalnızca ana sistemde yerel olarak bulunan uygulama ikili dosyaları için çalışır. 
-Bu kısıtlama olmaksızın bir kural tanımlamak için OpenPipePath veya OpenConfPath kullanılmalıdır. Aynı şekilde, olumsuzlama ile tanımlanan tüm Closed(File|Key|Ipc)Path yönergeleri, örn. &apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;, korumalı alan içinde bulunan ikili dosyalar için her zaman kapalı olacaktır. Her iki kısıtlama ilkesi de &quot;Erişim İlkeleri&quot; sayfasından devre dışı bırakılabilir.
+        <translation>Sandboxie&apos;nin kaynak erişim kuralları, genellikle korumalı alan içinde bulunan program ikili dosyalarına göre ayrım yapar. OpenFilePath ve OpenKeyPath yalnızca ana sistemde yerel olarak bulunan uygulama ikili dosyaları için çalışır. 
+Bu kısıtlama olmaksızın bir kural tanımlamak için OpenPipePath veya OpenConfPath kullanılmalıdır. Aynı şekilde, olumsuzlama ile tanımlanan tüm Closed(File|Key|Ipc)Path yönergeleri, örn. &apos;ClosedFilePath=!iexplore.exe,C:\Users\*&apos;, korumalı alan içinde bulunan ikili dosyalar için her zaman kapalı olacaktır. Her iki kısıtlama ilkesi de &quot;Erişim İlkeleri&quot; sayfasından devre dışı bırakılabilir.
 Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Sistem Görüntü Koruması kullanılarak, bir korumalı alanda çalışan uygulamaların (ana sistemde yüklü) korumalı alanda bulunan kütüphaneleri yüklemesi engellenerek bu durum önlenebilir.</translation>
     </message>
     <message>
@@ -7734,7 +7730,8 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
-        <translation type="unfinished"></translation>
+        <translation>İşaretli: Yeni oluşturulan korumalı alan belirtecine yerel bir grup da eklenir, bu da tüm korumalı aların aynı anda adreslenmesine olanak tanır. Denetim ilkeleri için kullanılabilir.
+Kısmen işaretli: Yeni oluşturulan korumalı alan belirtecine hiçbir grup eklenmez.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2204"/>
@@ -8043,20 +8040,17 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4776"/>
         <source>Hide Firmware Information</source>
-        <oldsource>Hide Firmware Informations</oldsource>
-        <translation type="unfinished">Ürün Yazılımı Bilgilerini Gizle</translation>
+        <translation>Ürün Yazılımı Bilgisini Gizle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4806"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
-        <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
-        <translation type="unfinished">Bazı programlar, geleneksel yöntemleri kullanmak yerine, yerleşik bir Windows veritabanı olan WMI (Windows Yönetim Araçları) aracılığıyla sistem ayrıntılarını alır. Örneğin, &amp;apos;tasklist.exe&amp;apos;, &amp;apos;HideOtherBoxes&amp;apos; etkin olsa bile işlemlerin tam listesine erişebilir. Bu tür davranışları önlemek için bu seçeneği etkinleştirin.</translation>
+        <translation>Bazı programlar, geleneksel yöntemleri kullanmak yerine, yerleşik bir Windows veritabanı olan WMI (Windows Yönetim Araçları) aracılığıyla sistem ayrıntılarına erişebilir. Örneğin, &quot;tasklist.exe&quot;, &quot;HideOtherBoxes&quot; etkin olsa bile işlemlerin tam listesine erişebilir. Bu tür davranışları önlemek için bu seçeneği etkinleştirin.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4809"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
-        <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
-        <translation type="unfinished">Korumalı alandaki işlemlerin WMI aracılığıyla sistem ayrıntılarına erişmesini önle (daha fazla bilgi için ipucuna bakın)</translation>
+        <translation>Korumalı alandaki işlemlerin WMI aracılığıyla sistem ayrıntılarına erişmesini önle (daha fazla bilgi için ipucuna bakın)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4847"/>
@@ -8076,8 +8070,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4919"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
-        <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
-        <translation type="unfinished">Mevcut Ürün Yazılımı Tablolarını HKCU\System\SbieCustom anahtarına döker</translation>
+        <translation>Mevcut Ürün Yazılımı Tablolarını HKCU\System\SbieCustom anahtarına döker</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4922"/>
@@ -8430,8 +8423,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1377"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
-        <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
-        <translation type="unfinished">Güvenlik Yalıtımı, Sandboxie&apos;nin çok kısıtlı işlem belirteci kullanımı yoluyla korumalı alan kısıtlamalarını uygulamasının birincil yoludur. Bu devre dışı bırakılırsa, alan, uygulama bölmesi modunda çalıştırılır, yani artık sağlıklı bir güvenlik sağlayamaz ve yalnızca basit uygulama bölümlemesi sağlar.</translation>
+        <translation>Güvenlik Yalıtımı, Sandboxie&apos;nin çok kısıtlı işlem belirteci kullanımı yoluyla korumalı alan kısıtlamalarını uygulamasının birincil yoludur. Bu devre dışı bırakılırsa, alan, uygulama bölmesi modunda çalıştırılır, yani artık sağlıklı bir güvenlik sağlayamaz ve yalnızca basit uygulama bölümlemesi sağlar.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
@@ -9440,13 +9432,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="643"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
-        <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation type="unfinished">Bağlam menüsüne ‘Korumalı Alanda Zorlamaya Ayarla&apos; seçeneği ekle</translation>
+        <translation>Bağlam menüsüne &apos;Korumalı Alanda Zorlamaya Ayarla&apos; seçeneği ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="650"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation>Bağlam menüsüne ‘Korumalı Alanda Açık Erişime Ayarla&apos; seçeneği ekle</translation>
+        <translation>Bağlam menüsüne &apos;Korumalı Alanda Açık Erişime Ayarla&apos; seçeneği ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1583"/>

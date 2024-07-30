@@ -1643,7 +1643,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
 		if (NT_SUCCESS(status)) {
 
-			//UNICODE_STRING buf;
+			UNICODE_STRING buf;
 			WCHAR* tmp = Dll_Alloc(24);
 			memset(tmp, 0, 24);
 
@@ -1655,8 +1655,8 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				chain3 = my_rand() % 100000 + 99999,
 				chain4 = my_rand() % 100000 + 99999
 				;
-			Sbie_snwprintf(tmp, 23, L"%d-%d-%d-%d", chain1, chain2, chain3, chain4);
-			//RtlInitUnicodeString(&buf, tmp);
+			Sbie_snwprintf(tmp, 23, L"%i-%i-%i-%i", chain1, chain2, chain3, chain4);
+			RtlInitUnicodeString(&buf, tmp);
 			/*if (GetIntLen(dwTick) == 1) {
 				//DWORD last = dwTick - (dwTick / 10) * 10;
 				DWORD last = dwTick;
@@ -1675,7 +1675,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 			}*/
 
 			status = NtSetValueKey(
-				hKey, &uni, 0, REG_SZ, &tmp, sizeof(tmp));
+				hKey, &uni, 0, REG_SZ, &buf, sizeof(buf));
 
 			NtClose(hKey);
 			Dll_Free(tmp);

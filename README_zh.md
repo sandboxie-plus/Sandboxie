@@ -136,7 +136,7 @@ Binary Ninja 是一个多平台交互式反汇编器、反编译器和二进制�
 - lwcorp - 文档补充
 - wilders-soccerfan - 文档补充
 - LumitoLuma - Qt5 补丁和构建脚本
-- LAGSNES - 文档补充
+- SNESNya - 文档补充
 
 ## 🌏 翻译人员
 

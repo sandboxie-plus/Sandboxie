@@ -5,14 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.14.6 / 5.69.6] - 2024-07-??
 
-### Fixed
-- fixed issue with Windows 7 caused by the new CustomLCID option [#4117](https://github.com/sandboxie-plus/Sandboxie/issues/4117)
-- fixed Settings Window issue with non advanced certificates introduced in 1.14.0
-- fixed issue with API_PROCESS_EXEMPTION_CONTROL
-
 ### Added
 - added alias for a sandbox [#4112](https://github.com/sandboxie-plus/Sandboxie/issues/4112)
 
+### Fixed
+- fixed issue with Windows 7 caused by the new CustomLCID option [#4117](https://github.com/sandboxie-plus/Sandboxie/issues/4117)
+- fixed Settings Window issue with non-advanced certificates introduced in 1.14.0
+- fixed issue with API_PROCESS_EXEMPTION_CONTROL
 
 
 
@@ -21,12 +20,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added HwID display
 - added Language Spoof "CustomLCID=1033" [#4024](https://github.com/sandboxie-plus/Sandboxie/pull/4024) (thanks Yeyixiao)
-- added option to always run the sandman UI as admin [#4090](https://github.com/sandboxie-plus/Sandboxie/issues/4090)
+- added option to always run the SandMan UI as admin [#4090](https://github.com/sandboxie-plus/Sandboxie/issues/4090)
 - added Proxy exclusion [#4036](https://github.com/sandboxie-plus/Sandboxie/issues/4036)
 - added "ForceChildren=Program.exe" [#4070](https://github.com/sandboxie-plus/Sandboxie/issues/4070)
 - added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow
 - added an optional context menu option to make folder/file forced quickly
-  - Note: you can also use "Sandman.exe /add_force program_path" to do it
+  - Note: you can also use "SandMan.exe /add_force program_path" to do it
 
 ### Changed
 - the certificate format can now take an explicit validity days specification, needed for gapless certificate renewal

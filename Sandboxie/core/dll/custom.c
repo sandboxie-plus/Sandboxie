@@ -1650,7 +1650,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 			RtlInitUnicodeString(&uni, L"ProductId");
 
 			seed = GetTickCount();
-			DWORD chain1 = my_rand() % 100000 + 99999,
+			int chain1 = my_rand() % 100000 + 99999,
 				chain2 = my_rand() % 100000 + 99999,
 				chain3 = my_rand() % 100000 + 99999,
 				chain4 = my_rand() % 100000 + 99999

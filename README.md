@@ -138,6 +138,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - lwcorp - Documentation additions
 - wilders-soccerfan - Documentation additions
 - LumitoLuma - Qt5 patch and build script
+- LAGSNES - Documentation additions
 
 ## 🌏 Translators
 

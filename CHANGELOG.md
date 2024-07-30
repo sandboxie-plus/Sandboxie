@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.6 / 5.69.6] - 2024-07-??
+## [1.14.6 / 5.69.6] - 2024-07-30
 
 ### Added
 - added alias for a sandbox [#4112](https://github.com/sandboxie-plus/Sandboxie/issues/4112)

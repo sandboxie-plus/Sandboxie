@@ -1655,7 +1655,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				chain3 = my_rand() % 100000 + 99999,
 				chain4 = my_rand() % 100000 + 99999
 				;
-			Sbie_snwprintf(tmp, 23, L"%i-%i-%i-%i", chain1, chain2, chain3, chain4);
+			Sbie_snwprintf(tmp, 23, L"%i%-%i%-%i%-%i", chain1, chain2, chain3, chain4);
 			//RtlInitUnicodeString(&buf, tmp);
 			/*if (GetIntLen(dwTick) == 1) {
 				//DWORD last = dwTick - (dwTick / 10) * 10;

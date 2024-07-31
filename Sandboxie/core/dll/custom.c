@@ -1644,7 +1644,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 		if (NT_SUCCESS(status)) {
 
 			//UNICODE_STRING buf;
-			WCHAR tmp[24] = { 0 };
+			WCHAR tmp[34] = { 0 };
 
 			RtlInitUnicodeString(&uni, L"ProductId");
 
@@ -1654,7 +1654,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				chain3 = my_rand() % 100000 + 99999,
 				chain4 = my_rand() % 100000 + 99999
 				;
-			Sbie_snwprintf(tmp, 24, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
+			Sbie_snwprintf(tmp, 34, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
 			//RtlInitUnicodeString(&buf, tmp);
 			/*if (GetIntLen(dwTick) == 1) {
 				//DWORD last = dwTick - (dwTick / 10) * 10;

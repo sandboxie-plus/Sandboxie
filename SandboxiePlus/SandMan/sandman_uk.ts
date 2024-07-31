@@ -27,7 +27,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="100"/>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати пароль</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="49"/>
@@ -37,12 +37,12 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="66"/>
         <source>New Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Новий пароль</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="83"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторіть пароль</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="107"/>
@@ -3913,17 +3913,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="SandMan.cpp" line="1016"/>
         <location filename="SandMan.cpp" line="1017"/>
         <source>Edit Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="630"/>
         <source>Edit Templates.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати Templates.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="632"/>
         <source>Edit Sandboxie-Plus.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати Sandboxie-Plus.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="636"/>
@@ -7616,7 +7616,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="411"/>
         <source>Set Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити пароль</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="293"/>
@@ -7680,7 +7680,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1292"/>
         <source>Security Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізоляція безпеки</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1330"/>
@@ -7690,7 +7690,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Disable Security Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути ізоляцію безпеки</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="904"/>
@@ -7982,7 +7982,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2678"/>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файли</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2771"/>
@@ -8045,7 +8045,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3225"/>
         <source>Access Policies</source>
-        <translation type="unfinished"></translation>
+        <translation>Політики доступу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3238"/>
@@ -8055,7 +8055,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3339"/>
         <source>Network Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри мережі</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3436"/>
@@ -8826,7 +8826,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="673"/>
         <source>Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4125"/>

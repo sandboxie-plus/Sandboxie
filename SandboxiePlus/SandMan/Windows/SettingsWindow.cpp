@@ -1152,7 +1152,7 @@ void CSettingsWindow::OnRamDiskChange()
 {
 	if (sender() == ui.chkRamDisk) {
 		if (ui.chkRamDisk->isChecked())
-			theGUI->CheckCertificate(this, 2);
+			theGUI->CheckCertificate(this);
 	}
 
 	if (ui.chkRamDisk->isChecked() && ui.txtRamLimit->text().isEmpty())
@@ -1175,7 +1175,7 @@ void CSettingsWindow::OnVolumeChanged()
 { 
 	if (sender() == ui.chkSandboxUsb) {
 		if (ui.chkSandboxUsb->isChecked())
-			theGUI->CheckCertificate(this, 2);
+			theGUI->CheckCertificate(this);
 	}
 
 	ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);

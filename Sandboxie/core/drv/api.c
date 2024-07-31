@@ -1236,10 +1236,12 @@ _FX void Api_CopyStringToUser(
 _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 {
     NTSTATUS status = STATUS_SUCCESS;
-    //KIRQL irql;
+    KIRQL irql;
 	API_PROCESS_EXEMPTION_CONTROL_ARGS *pArgs = (API_PROCESS_EXEMPTION_CONTROL_ARGS *)parms;
 	ULONG *in_flag;
+    ULONG in_value = 0;
 	ULONG *out_flag;
+    ULONG out_value = 0;
 
 	if (proc) // is caller sandboxed?
 		return STATUS_NOT_IMPLEMENTED;
@@ -1259,34 +1261,38 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 		ProbeForWrite(out_flag, sizeof(ULONG), sizeof(ULONG));
 	}
 
-	if(!in_flag && !out_flag)
+    if (in_flag)
+        in_value = *in_flag;
+	else if(!out_flag)
 		return STATUS_INVALID_PARAMETER;
 
-    //proc = Process_Find(pArgs->process_id.val, &irql);
-    proc = Process_Find(pArgs->process_id.val, NULL);
+    proc = Process_Find(pArgs->process_id.val, &irql);
     if (proc && (proc != PROCESS_TERMINATED))
     {
         if (pArgs->action_id.val == 'splr')
         {
             if (in_flag)
-                proc->ipc_allowSpoolerPrintToFile = *in_flag != 0;
+                proc->ipc_allowSpoolerPrintToFile = in_value != 0;
             if (out_flag)
-                *out_flag = proc->ipc_allowSpoolerPrintToFile;
+                out_value = proc->ipc_allowSpoolerPrintToFile;
         }
         else if (pArgs->action_id.val == 'inet')
         {
             if (in_flag)
-                proc->AllowInternetAccess = *in_flag != 0;
+                proc->AllowInternetAccess = in_value != 0;
             if (out_flag)
-                *out_flag = proc->AllowInternetAccess;
+                out_value = proc->AllowInternetAccess;
         }
         else
             status = STATUS_INVALID_INFO_CLASS;
     }
     else
         status = STATUS_NOT_FOUND;
-    //ExReleaseResourceLite(Process_ListLock);
-    //KeLowerIrql(irql);
+    ExReleaseResourceLite(Process_ListLock);
+    KeLowerIrql(irql);
+
+    if (out_flag)
+        *out_flag = out_value;
 
 	return status;
 }

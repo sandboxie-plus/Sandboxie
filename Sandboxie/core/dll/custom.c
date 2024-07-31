@@ -1644,8 +1644,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 		if (NT_SUCCESS(status)) {
 
 			//UNICODE_STRING buf;
-			WCHAR* tmp = Dll_Alloc(24);
-			memset(tmp, 0, 24);
+			WCHAR tmp[24] = { 0 };
 
 			RtlInitUnicodeString(&uni, L"ProductId");
 
@@ -1655,7 +1654,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				chain3 = my_rand() % 100000 + 99999,
 				chain4 = my_rand() % 100000 + 99999
 				;
-			Sbie_snwprintf(tmp, 23, L"%i%-%i%-%i%-%i", chain1, chain2, chain3, chain4);
+			Sbie_snwprintf(tmp, 24, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
 			//RtlInitUnicodeString(&buf, tmp);
 			/*if (GetIntLen(dwTick) == 1) {
 				//DWORD last = dwTick - (dwTick / 10) * 10;
@@ -1673,12 +1672,11 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				for(int i=0;i<=2;i++)
 					wcscat_s(tmp, 1, chr);
 			}*/
-
+			
 			status = NtSetValueKey(
-				hKey, &uni, 0, REG_SZ, tmp, sizeof(tmp));
+				hKey, &uni, 0, REG_SZ, tmp, lstrlen(tmp)+1);
 
 			NtClose(hKey);
-			Dll_Free(tmp);
 		}
 
 		return TRUE;

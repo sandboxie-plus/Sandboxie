@@ -1934,6 +1934,13 @@ Partially checked: No groups will be added to the newly created sandboxed token.
                  </property>
                 </widget>
                </item>
+                <item row="10" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkCreateToken">
+               <property name="text">
+                <string>Create a new sandboxed token instead of setting down default token</string>
+               </property>
+              </widget>
+             </item>
               </layout>
              </item>
             </layout>
@@ -4236,6 +4243,13 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
+                <item row="8" column="1">
+              <widget class="QCheckBox" name="chkForceRestart">
+               <property name="text">
+                <string>Restart force process before they begin to execute</string>
+               </property>
+              </widget>
+             </item>
               </layout>
              </item>
             </layout>
@@ -5236,8 +5250,8 @@ instead of &quot;*&quot;.</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
+                  <width>75</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="dbgLayout">

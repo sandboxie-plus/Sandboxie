@@ -1664,7 +1664,7 @@ void CSandMan::OnMessage(const QString& MsgData)
 			}
 		}
 		else {
-			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("Users canceled this operation."), QMessageBox::Yes, 0);
+			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("User canceled this operation."), QMessageBox::Yes, 0);
 		}
 	}
 	else if (Message.left(8) == "AddOpen:")
@@ -1676,11 +1676,11 @@ void CSandMan::OnMessage(const QString& MsgData)
 					theAPI->GetBoxByName(response)->AppendText("OpenFilePath", Message.mid(8).replace("\"", ""));
 			}
 			else {
-				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name!Nothing was changed."), QMessageBox::Ok, 0);
+				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name! Nothing was changed."), QMessageBox::Ok, 0);
 			}
 		}
 		else {
-			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("Users canceled this operation."), QMessageBox::Yes, 0);
+			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("User canceled this operation."), QMessageBox::Yes, 0);
 		}
 	}
 	else if (Message.left(4) == "Run:")

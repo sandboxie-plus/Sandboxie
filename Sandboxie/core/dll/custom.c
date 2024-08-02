@@ -24,7 +24,7 @@
 #include "dll.h"
 #include "common/my_version.h"
 #include <stdio.h>
-
+#include <objbase.h>
 
 //---------------------------------------------------------------------------
 // Functions
@@ -1626,8 +1626,19 @@ int my_rand(void)
 	return str;
 
 }*/
+wchar_t* GuidToString(const GUID guid)
+{
+	wchar_t buf[64] = { 0 };
+	Sbie_snwprintf(buf, sizeof(buf),
+		L"{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}",
+		guid.Data1, guid.Data2, guid.Data3,
+		guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3],
+		guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
+	return buf;
+}
+
 _FX BOOLEAN  Custom_ProductID(void) {
-	if (SbieApi_QueryConfBool(NULL, L"RandomProductId", FALSE)) {
+	if (SbieApi_QueryConfBool(NULL, L"RandomRegUID", FALSE)) {
 		NTSTATUS status;
 		UNICODE_STRING uni;
 		OBJECT_ATTRIBUTES objattrs;
@@ -1644,17 +1655,6 @@ _FX BOOLEAN  Custom_ProductID(void) {
 		if (NT_SUCCESS(status)) {
 
 			//UNICODE_STRING buf;
-			WCHAR tmp[34] = { 0 };
-
-			RtlInitUnicodeString(&uni, L"ProductId");
-
-			seed = GetTickCount();
-			int chain1 = my_rand() % 10000 + 9999,
-				chain2 = my_rand() % 10000 + 9999,
-				chain3 = my_rand() % 10000 + 9999,
-				chain4 = my_rand() % 10000 + 9999
-				;
-			Sbie_snwprintf(tmp, 34, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
 			//RtlInitUnicodeString(&buf, tmp);
 			/*if (GetIntLen(dwTick) == 1) {
 				//DWORD last = dwTick - (dwTick / 10) * 10;
@@ -1672,13 +1672,58 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				for(int i=0;i<=2;i++)
 					wcscat_s(tmp, 1, chr);
 			}*/
+			WCHAR tmp[34] = { 0 };
+
+			RtlInitUnicodeString(&uni, L"ProductId");
+
+			seed = GetTickCount();
+			int chain1 = my_rand() % 10000 + 9999,
+				chain2 = my_rand() % 10000 + 9999,
+				chain3 = my_rand() % 10000 + 9999,
+				chain4 = my_rand() % 10000 + 9999
+				;
+			Sbie_snwprintf(tmp, 34, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
+			
 			
 			status = NtSetValueKey(
 				hKey, &uni, 0, REG_SZ, tmp, sizeof(tmp)+1);
-
 			NtClose(hKey);
 		}
+		RtlInitUnicodeString(&uni,
+			L"\\registry\\Machine\\Software\\"
+			L"\\Microsoft\\Cryptography");
 
+		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
+		if (NT_SUCCESS(status)) {
+			GUID guid;
+			HRESULT h = CoCreateGuid(&guid);
+			WCHAR buf[64] = { 0 };
+			if (h == S_OK) {
+				lstrcpy(buf, GuidToString(guid));
+				RtlInitUnicodeString(&uni, L"MachineGuid");
+				status = NtSetValueKey(
+					hKey, &uni, 0, REG_SZ, buf, sizeof(buf) + 1);
+			}
+			NtClose(hKey);
+		}
+		RtlInitUnicodeString(&uni,
+			L"\\registry\\Machine\\Software\\"
+			L"\\Microsoft\\SQMClient");
+
+		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
+		if (NT_SUCCESS(status)) {
+			GUID guid;
+			HRESULT h = CoCreateGuid(&guid);
+			WCHAR buf[64] = L"{";
+			if (h == S_OK) {
+				lstrcat(buf, GuidToString(guid));
+				lstrcat(buf, L"}");
+				RtlInitUnicodeString(&uni, L"MachineId");
+				status = NtSetValueKey(
+					hKey, &uni, 0, REG_SZ, buf, sizeof(buf) + 1);
+			}
+			NtClose(hKey);
+		}
 		return TRUE;
 	}
 	return TRUE;

@@ -1628,7 +1628,7 @@ int my_rand(void)
 }*/
 wchar_t* GuidToString(const GUID guid)
 {
-	wchar_t buf[64] = { 0 };
+	wchar_t* buf = Dll_Alloc(64);
 	Sbie_snwprintf(buf, sizeof(buf),
 		L"{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}",
 		guid.Data1, guid.Data2, guid.Data3,
@@ -1699,7 +1699,9 @@ _FX BOOLEAN  Custom_ProductID(void) {
 			HRESULT h = CoCreateGuid(&guid);
 			WCHAR buf[64] = { 0 };
 			if (h == S_OK) {
-				lstrcpy(buf, GuidToString(guid));
+				WCHAR* pChar = GuidToString(guid);
+				lstrcpy(buf, pChar);
+				Dll_Free(pChar);
 				RtlInitUnicodeString(&uni, L"MachineGuid");
 				status = NtSetValueKey(
 					hKey, &uni, 0, REG_SZ, buf, sizeof(buf) + 1);
@@ -1716,7 +1718,9 @@ _FX BOOLEAN  Custom_ProductID(void) {
 			HRESULT h = CoCreateGuid(&guid);
 			WCHAR buf[64] = L"{";
 			if (h == S_OK) {
-				lstrcat(buf, GuidToString(guid));
+				WCHAR* pChar = GuidToString(guid);
+				lstrcat(buf, pChar);
+				Dll_Free(pChar);
 				lstrcat(buf, L"}");
 				RtlInitUnicodeString(&uni, L"MachineId");
 				status = NtSetValueKey(

@@ -517,12 +517,12 @@ _FX LANGID Kernel_GetSystemDefaultLangID()
 }
 
 
-static unsigned long seed = 1;
-int my_rand(void)
+static unsigned long Kernel_seed = 1;
+int Kernel_rand(void)
 {
-	seed = (seed * 214013L
+	Kernel_seed = (Kernel_seed * 214013L
 		+ 2531011L) >> 16;
-	return((unsigned)seed & 0x7fff);
+	return((unsigned)Kernel_seed & 0x7fff);
 }
 //----------------------------------------------------------------------------
 //Kernel_GetVolumeInformationByHandleW
@@ -542,8 +542,8 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(
 	if (lpVolumeSerialNumber == NULL)
 		return rtn;
 	else {
-		seed = __sys_GetTickCount();
-		*lpVolumeSerialNumber = my_rand()%0x10000;
+		Kernel_seed = __sys_GetTickCount();
+		*lpVolumeSerialNumber = Kernel_rand()%0x10000;
 		return rtn;
 	}
 }

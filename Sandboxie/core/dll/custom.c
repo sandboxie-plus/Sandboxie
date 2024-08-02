@@ -1692,11 +1692,14 @@ _FX BOOLEAN  Custom_ProductID(void) {
 		RtlInitUnicodeString(&uni,
 			L"\\registry\\Machine\\Software\\"
 			L"\\Microsoft\\Cryptography");
-
+		typedef HRESULT (*P_CoCreateGuid)(
+			GUID * pguid
+		);
+		P_CoCreateGuid CoCreateGuid2=GetProcAddress(LoadLibrary(L"ole32.dll"), L"CoCreateGuid");
 		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
-		if (NT_SUCCESS(status)) {
+		if (NT_SUCCESS(status)&&CoCreateGuid2) {
 			GUID guid;
-			HRESULT h = CoCreateGuid(&guid);
+			HRESULT h = CoCreateGuid2(&guid);
 			WCHAR buf[64] = { 0 };
 			if (h == S_OK) {
 				WCHAR* pChar = GuidToString(guid);
@@ -1706,16 +1709,17 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				status = NtSetValueKey(
 					hKey, &uni, 0, REG_SZ, buf, sizeof(buf) + 1);
 			}
-			NtClose(hKey);
+			
 		}
+		NtClose(hKey);
 		RtlInitUnicodeString(&uni,
 			L"\\registry\\Machine\\Software\\"
 			L"\\Microsoft\\SQMClient");
 
 		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
-		if (NT_SUCCESS(status)) {
+		if (NT_SUCCESS(status)&&CoCreateGuid2) {
 			GUID guid;
-			HRESULT h = CoCreateGuid(&guid);
+			HRESULT h = CoCreateGuid2(&guid);
 			WCHAR buf[64] = L"{";
 			if (h == S_OK) {
 				WCHAR* pChar = GuidToString(guid);
@@ -1726,8 +1730,9 @@ _FX BOOLEAN  Custom_ProductID(void) {
 				status = NtSetValueKey(
 					hKey, &uni, 0, REG_SZ, buf, sizeof(buf) + 1);
 			}
-			NtClose(hKey);
+			
 		}
+		NtClose(hKey);
 		return TRUE;
 	}
 	return TRUE;

@@ -1695,7 +1695,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 		typedef HRESULT (*P_CoCreateGuid)(
 			GUID * pguid
 		);
-		P_CoCreateGuid CoCreateGuid2=GetProcAddress(LoadLibrary(L"ole32.dll"), L"CoCreateGuid");
+		P_CoCreateGuid CoCreateGuid2=(P_CoCreateGuid)GetProcAddress(LoadLibrary(L"ole32.dll"), L"CoCreateGuid");
 		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
 		if (NT_SUCCESS(status)&&CoCreateGuid2) {
 			GUID guid;

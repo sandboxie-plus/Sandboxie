@@ -1649,10 +1649,10 @@ _FX BOOLEAN  Custom_ProductID(void) {
 			RtlInitUnicodeString(&uni, L"ProductId");
 
 			seed = GetTickCount();
-			int chain1 = my_rand() % 100000 + 99999,
-				chain2 = my_rand() % 100000 + 99999,
-				chain3 = my_rand() % 100000 + 99999,
-				chain4 = my_rand() % 100000 + 99999
+			int chain1 = my_rand() % 10000 + 9999,
+				chain2 = my_rand() % 10000 + 9999,
+				chain3 = my_rand() % 10000 + 9999,
+				chain4 = my_rand() % 10000 + 9999
 				;
 			Sbie_snwprintf(tmp, 34, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
 			//RtlInitUnicodeString(&buf, tmp);

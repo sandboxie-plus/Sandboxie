@@ -1629,6 +1629,7 @@ int my_rand(void)
 wchar_t* GuidToString(const GUID guid)
 {
 	wchar_t* buf = Dll_Alloc(64);
+	memset(buf, 0, 64);
 	Sbie_snwprintf(buf, sizeof(buf),
 		L"%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
 		guid.Data1, guid.Data2, guid.Data3,

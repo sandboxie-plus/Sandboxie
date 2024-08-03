@@ -1692,10 +1692,10 @@ _FX BOOLEAN  Custom_ProductID(void) {
 		RtlInitUnicodeString(&uni,
 			L"\\registry\\Machine\\Software\\"
 			L"\\Microsoft\\Cryptography");
-		typedef HRESULT (*P_CoCreateGuid)(
-			GUID * pguid
-		);
-		P_CoCreateGuid CoCreateGuid2=(P_CoCreateGuid)GetProcAddress(LoadLibrary(L"ole32.dll"), L"CoCreateGuid");
+		typedef HRESULT(*P_CoCreateGuid)(
+			GUID* pguid
+			);
+			P_CoCreateGuid CoCreateGuid2 = (P_CoCreateGuid)Ldr_GetProcAddrNew(DllName_ole32, L"CoCreateGuid", L"CoCreateGuid");
 		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
 		if (NT_SUCCESS(status)&&CoCreateGuid2) {
 			GUID guid;

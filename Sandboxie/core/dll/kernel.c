@@ -69,6 +69,17 @@ typedef LCID (*P_GetSystemDefaultLCID)();
 
 typedef LANGID (*P_GetSystemDefaultLangID)();
 
+typedef BOOL (*P_GetVolumeInformationByHandleW)(
+	            HANDLE  hFile,
+	 LPWSTR  lpVolumeNameBuffer,
+	            DWORD   nVolumeNameSize,
+	 LPDWORD lpVolumeSerialNumber,
+	 LPDWORD lpMaximumComponentLength,
+	 LPDWORD lpFileSystemFlags,
+	 LPWSTR  lpFileSystemNameBuffer,
+	            DWORD   nFileSystemNameSize
+);
+
 //typedef int (*P_GetLocaleInfoEx)(LPCWSTR lpLocaleName, LCTYPE LCType, LPWSTR lpLCData, int cchData);
 
 //typedef int (*P_GetLocaleInfoA)(LCID Locale, LCTYPE LCType, LPSTR lpLCData, int cchData);
@@ -98,12 +109,13 @@ P_QueryPerformanceCounter		__sys_QueryPerformanceCounter		= NULL;
 P_GetUserDefaultUILanguage 		__sys_GetUserDefaultUILanguage 		= NULL;
 P_GetUserDefaultLocaleName 		__sys_GetUserDefaultLocaleName 		= NULL;
 P_GetUserDefaultLCID 			__sys_GetUserDefaultLCID 			= NULL;
-P_GetUserDefaultLangID 			__sys_GetUserDefaultLangID 			= NULL;
+P_GetUserDefaultLangID 			__sys_GetUserDefaultLangID 		    = NULL;
 P_GetUserDefaultGeoName 		__sys_GetUserDefaultGeoName 		= NULL;
 P_GetSystemDefaultUILanguage 	__sys_GetSystemDefaultUILanguage 	= NULL;
 P_GetSystemDefaultLocaleName 	__sys_GetSystemDefaultLocaleName 	= NULL;
-P_GetSystemDefaultLCID 			__sys_GetSystemDefaultLCID 			= NULL;
+P_GetSystemDefaultLCID 			__sys_GetSystemDefaultLCID 		    = NULL;
 P_GetSystemDefaultLangID 		__sys_GetSystemDefaultLangID 		= NULL;
+P_GetVolumeInformationByHandleW __sys_GetVolumeInformationByHandleW = NULL;
 
 LCID			Kernel_CustomLCID = 0;
 
@@ -148,7 +160,16 @@ static LCID Kernel_GetSystemDefaultLCID();
 
 static LANGID Kernel_GetSystemDefaultLangID();
 
-
+static BOOL Kernel_GetVolumeInformationByHandleW(
+	HANDLE  hFile,
+	LPWSTR  lpVolumeNameBuffer,
+	DWORD   nVolumeNameSize,
+	LPDWORD lpVolumeSerialNumber,
+	LPDWORD lpMaximumComponentLength,
+	LPDWORD lpFileSystemFlags,
+	LPWSTR  lpFileSystemNameBuffer,
+	DWORD   nFileSystemNameSize
+	);
 //---------------------------------------------------------------------------
 // Kernel_Init
 //---------------------------------------------------------------------------
@@ -246,7 +267,13 @@ _FX BOOLEAN Kernel_Init()
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLCID);
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLangID);
 	}
-
+	if (SbieApi_QueryConfBool(NULL, L"HideDiskSerialNumber", FALSE))
+	{
+		void* GetVolumeInformationByHandleW = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetVolumeInformationByHandleW");
+		if (GetVolumeInformationByHandleW) {
+			SBIEDLL_HOOK(Kernel_, GetVolumeInformationByHandleW);
+		}
+	}
 	return TRUE;
 }
 
@@ -487,4 +514,36 @@ _FX LCID Kernel_GetSystemDefaultLCID()
 _FX LANGID Kernel_GetSystemDefaultLangID() 
 {
 	return (LANGID)Kernel_CustomLCID;
+}
+
+
+static unsigned long Kernel_seed = 1;
+int Kernel_rand(void)
+{
+	Kernel_seed = (Kernel_seed * 214013L
+		+ 2531011L) >> 16;
+	return((unsigned)Kernel_seed & 0x7fff);
+}
+//----------------------------------------------------------------------------
+//Kernel_GetVolumeInformationByHandleW
+//----------------------------------------------------------------------------
+_FX BOOL Kernel_GetVolumeInformationByHandleW(
+	HANDLE  hFile,
+	LPWSTR  lpVolumeNameBuffer,
+	DWORD   nVolumeNameSize,
+	LPDWORD lpVolumeSerialNumber,
+	LPDWORD lpMaximumComponentLength,
+	LPDWORD lpFileSystemFlags,
+	LPWSTR  lpFileSystemNameBuffer,
+	DWORD   nFileSystemNameSize
+) {
+	DWORD ourSerialNumber = 0;
+	BOOL rtn = __sys_GetVolumeInformationByHandleW(hFile, lpVolumeNameBuffer, nVolumeNameSize, &ourSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
+	if (lpVolumeSerialNumber == NULL)
+		return rtn;
+	else {
+		Kernel_seed = __sys_GetTickCount();
+		*lpVolumeSerialNumber = Kernel_rand()%0x10000;
+		return rtn;
+	}
 }

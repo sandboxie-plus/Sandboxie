@@ -1722,8 +1722,8 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 //---------------------------------------------------------------------------
 static HWND Gui_PreviousActiveWindow;
 static HWND Gui_GetActiveWindow() {
-	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
-		return (Gui_PreviousActiveWindow == NULL ? __sys_GetActiveWindow() : Gui_PreviousActiveWindow);
+	//if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+	//	return (Gui_PreviousActiveWindow == NULL ? __sys_GetActiveWindow() : Gui_PreviousActiveWindow);
 	return __sys_GetActiveWindow();
 }
 

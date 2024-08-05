@@ -521,10 +521,7 @@ extern WCHAR* Gui_BoxNameTitleW;
 extern ATOM Gui_DropTargetProp_Atom;
 extern ATOM Gui_WindowProcOldW_Atom;
 extern ATOM Gui_WindowProcOldA_Atom;
-#ifndef PreviousActiveWindow
-#define PreviousActiveWindow
-extern HWND Gui_PreviousActiveWindow = NULL;
-#endif // !PreviousActiveWindow
+
 
 //---------------------------------------------------------------------------
 // Undo Unicode defines from windows.h

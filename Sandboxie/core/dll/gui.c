@@ -1641,7 +1641,7 @@ _FX VOID Gui_ProtectScreen(HWND hWnd)
 // Gui_WindowProcW
 //---------------------------------------------------------------------------
 
-
+static HWND Gui_PreviousActiveWindow = NULL;
 _FX LRESULT Gui_WindowProcW(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {

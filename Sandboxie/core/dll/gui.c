@@ -1670,7 +1670,7 @@ _FX LRESULT Gui_WindowProcW(
 
 	if (uMsg == WM_KILLFOCUS) {
 		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
-			return NULL;
+			return FALSE;
 	}
 	if (uMsg == WM_ACTIVATE) {
 		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))

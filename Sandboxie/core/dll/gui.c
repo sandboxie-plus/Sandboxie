@@ -1668,6 +1668,19 @@ _FX LRESULT Gui_WindowProcW(
 			return TRUE;
 	}
 
+	if (uMsg == WM_KILLFOCUS) {
+		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+			return NULL;
+	}
+	if (uMsg == WM_ACTIVATE) {
+		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+			if (wParam == WA_INACTIVE)
+				return 0;
+			else {
+				Gui_PervousActivedWindow == (HWND)hWnd;
+			}
+	}
+
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
     if (DLL_IMAGE_OFFICE_EXCEL == Dll_ImageType) {
 

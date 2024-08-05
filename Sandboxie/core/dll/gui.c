@@ -1677,7 +1677,7 @@ _FX LRESULT Gui_WindowProcW(
 			if (wParam == WA_INACTIVE)
 				return 0;
 			else {
-				Gui_PervousActivedWindow = (HWND)hWnd;
+				Gui_PreviousActiveWindow = (HWND)hWnd;
 			}
 	}
 

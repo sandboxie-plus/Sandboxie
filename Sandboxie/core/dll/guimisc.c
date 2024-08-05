@@ -1722,12 +1722,12 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 //---------------------------------------------------------------------------
 static HWND Gui_GetActiveWindow() {
 	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
-		return (Gui_PervousActivedWindow == NULL ? __sys_GetActiveWindow() : Gui_PervousActivedWindow);
+		return (Gui_PreviousActiveWindow == NULL ? __sys_GetActiveWindow() : Gui_PreviousActiveWindow);
 	return __sys_GetActiveWindow();
 }
 
 static HWND Gui_GetForegroundWindow() {
 	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
-		return (Gui_PervousActivedWindow == NULL ? __sys_GetActiveWindow() : Gui_PervousActivedWindow);
+		return (Gui_PreviousActiveWindow == NULL ? __sys_GetActiveWindow() : Gui_PreviousActiveWindow);
 	return __sys_GetActiveWindow();
 }

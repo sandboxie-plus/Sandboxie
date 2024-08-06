@@ -1123,7 +1123,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation>Предложить пользователю разрешить исключение из блокировки</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
@@ -1680,18 +1680,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="730"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="739"/>
         <source>bytes (unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>байты (неограниченно)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="733"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="742"/>
         <source>bytes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>байт (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="748"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>неограниченно</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="920"/>
@@ -1770,12 +1770,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1469"/>
         <source>Failed to retrieve firmware table information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось получить информацию о таблице прошивки.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1477"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица прошивки успешно сохранена в реестре хоста: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;вы можете скопировать его в реестр «песочницы», чтобы иметь разные значения для каждого ящика.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="128"/>
@@ -1792,7 +1792,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="130"/>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Дочерние</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="256"/>
@@ -3817,13 +3817,13 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1641"/>
         <location filename="SandMan.cpp" line="1672"/>
         <source>Which box you want to add in?</source>
-        <translation type="unfinished"></translation>
+        <translation>Какую песочницу вы хотите добавить?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1641"/>
         <location filename="SandMan.cpp" line="1672"/>
         <source>Type the box name which you are going to set:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите имя контейнера, который вы собираетесь установить:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1658"/>
@@ -3832,24 +3832,24 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1679"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>Sandboxie-Plus Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1658"/>
         <source>The value is not an existing directory or executable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение не является существующим каталогом или исполняемым файлом.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1663"/>
         <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы ввели неправильное название песочницы! Ничего не было изменено.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1667"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>User canceled this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь отменил эту операцию.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1872"/>
@@ -5108,12 +5108,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1421"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите новый псевдоним для песочницы.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1430"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
-        <translation type="unfinished"></translation>
+        <translation>Введенное имя недопустимо, хотите ли вы задать его в качестве псевдонима?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1468"/>
@@ -5183,7 +5183,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="1807"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
-        <translation type="unfinished">Эта песочница отключена, вы хотите ее включить?</translation>
+        <translation>Эта песочница отключена или ограничена для определенных групп или пользователей, вы хотите ее включить?</translation>
     </message>
 </context>
 <context>
@@ -5290,7 +5290,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="243"/>
         <source>Close to Tray</source>
-        <translation>Закрыть в системный лоток</translation>
+        <translation>Закрыть в системный трей</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="244"/>
@@ -5350,7 +5350,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="530"/>
         <source>HwId: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="618"/>
@@ -5612,12 +5612,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1620"/>
         <source>Set Force in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить принудительно в песочнице</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1629"/>
         <source>Set Open Path in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить путь открытия в песочнице</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1918"/>
@@ -7069,7 +7069,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box&apos;s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <oldsource>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</oldsource>
-        <translation type="unfinished">Когда &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;шифрование песочницы&lt;/a&gt; включено, ее корневая папка, включая куст реестра, сохраняется в зашифрованном образе диска с использованием &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; реализация AES-XTS.</translation>
+        <translation>Когда &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;шифрование песочницы&lt;/a&gt; включено, ее корневая папка, включая куст реестра, сохраняется в зашифрованном образе диска с использованием &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; реализация AES-XTS.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="445"/>
@@ -7143,12 +7143,12 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1930"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новый токен в песочнице вместо того, чтобы уничтожать исходный токен</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2174"/>
         <source>Force Children</source>
-        <translation type="unfinished">Принудительные дочерние</translation>
+        <translation>Принудительные дочерние</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3605"/>
@@ -7324,8 +7324,8 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</oldsource>
-        <translation type="unfinished">Правила доступа к ресурсам Sandboxie часто дискриминируют двоичные файлы программ, расположенные внутри песочницы. OpenFilePath и OpenKeyPath работают только для двоичных файлов приложений, изначально расположенных на хосте. Чтобы определить правило без этого ограничения, необходимо использовать OpenPipePath или OpenConfPath. Аналогично, все директивы Closed(File|Key|Ipc)Path, которые определены отрицанием, например. ‘ClosedFilePath=! iexplore.exe,C:Users*’ всегда будет закрыт для двоичных файлов, находящихся внутри песочницы. Обе политики ограничения можно отключить на странице &quot;Политики доступа&quot;.
-Это делается для того, чтобы мошеннические процессы внутри песочницы не создавали переименованные копии самих себя и не получали доступ к защищенным ресурсам. Другой вектор эксплойта — внедрение библиотеки в авторизованный процесс, чтобы получить доступ ко всему, к чему ему разрешен доступ. С помощью Host Image Protection это можно предотвратить, заблокировав приложения (установленные на хосте), работающие внутри песочницы, от загрузки библиотек из самой песочницы.</translation>
+        <translation>Правила доступа к ресурсам Sandboxie часто дискриминируют двоичные файлы программ, расположенные внутри песочницы. OpenFilePath и OpenKeyPath работают только для двоичных файлов приложений, расположенных на хосте. Чтобы определить правило без этого ограничения, необходимо использовать OpenPipePath или OpenConfPath. Аналогично, все директивы Closed(File|Key|Ipc)Path, которые определяются отрицанием, например, &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos;, всегда будут закрыты для двоичных файлов, расположенных внутри песочницы. Обе политики ограничений можно отключить на странице &quot;Политики доступа&quot;.
+Это делается для того, чтобы неавторизованные процессы внутри песочницы не смогли создать переименованную копию себя и получить доступ к защищенным ресурсам. Другой вектор использования - внедрение библиотеки в авторизованный процесс для получения доступа ко всему, к чему ему разрешен доступ. С помощью Host Image Protection это можно предотвратить, заблокировав приложения (установленные на хосте), работающие внутри песочницы, от загрузки библиотек из самой песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1778"/>
@@ -7522,7 +7522,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="811"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
         <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить окнам в песочнице перекрывать панель задач</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="855"/>
@@ -7537,26 +7537,27 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1577"/>
         <source>Job Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Рабочий объект</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1624"/>
         <location filename="Forms/OptionsWindow.ui" line="1666"/>
         <location filename="Forms/OptionsWindow.ui" line="1740"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>неограниченно</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1724"/>
         <location filename="Forms/OptionsWindow.ui" line="1754"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>байт</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмечено: Локальная группа также будет добавлена к вновь созданному токену песочницы, что позволяет обращаться ко всем песочницам одновременно. Будет полезно для аудита политик.
+Частично отмечено: Никакие группы не будут добавлены к вновь созданному токену песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2204"/>
@@ -7962,7 +7963,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1377"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
-        <translation type="unfinished">Изоляция безопасности за счет использования сильно ограниченного токена процесса - это основное средство Sandboxie для принудительного применения ограничений песочницы, когда она отключена, песочница работает в режиме контейнера для приложения, то есть она больше не обеспечивает надежную безопасность, а только простое разделение приложений.</translation>
+        <translation>Изоляция безопасности за счет использования сильно ограниченного токена процесса - это основное средство Sandboxie для принудительного применения ограничений песочницы, когда она отключена, песочница работает в режиме контейнера для приложения, то есть она больше не обеспечивает надежную безопасность, а только простое разделение приложений.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="887"/>
@@ -8061,34 +8062,34 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1608"/>
         <source>Limit restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничения по лимитам</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1621"/>
         <location filename="Forms/OptionsWindow.ui" line="1663"/>
         <location filename="Forms/OptionsWindow.ui" line="1737"/>
         <source>Leave it blank to disable the setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Оставьте поле пустым, чтобы отключить настройку</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1650"/>
         <source>Total Processes Number Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Лимит общего количества процессов:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1747"/>
         <source>Total Processes Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Лимит памяти всех процессов:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1704"/>
         <source>Single Process Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Лимит памяти одного процесса:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4181"/>
         <source>Restart force process before they begin to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительно перезапустить процесс до того, как он начнет выполняться</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4618"/>
@@ -8098,17 +8099,17 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4830"/>
         <source>Hide Disk Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть серийный номер накопителя</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4837"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Обфусцировать известные уникальные идентификаторы в реестре</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4865"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Не позволять изолированным процессам видеть процессы, запущенные за пределами песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4957"/>
@@ -8162,7 +8163,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="89"/>
         <source>Always show this sandbox in the systray list (Pinned)</source>
-        <translation>Всегда показывать эту песочницу в системном лотке (закреплено)</translation>
+        <translation>Всегда показывать эту песочницу в системном трее (закреплено)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1179"/>
@@ -8452,7 +8453,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3786"/>
         <source>Bypass IPs</source>
-        <translation type="unfinished"></translation>
+        <translation>Исключенные IP-адреса</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4650"/>
@@ -8467,51 +8468,51 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4767"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфиденциальность</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4790"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть информацию о встроенном ПО</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4916"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Некоторые программы читают системные данные через WMI (встроенную базу данных Windows), а не обычными способами. Например, «tasklist.exe» может получить полный список процессов через доступ к WMI, даже если используется опция «HideOtherBoxes». Включите эту опцию, чтобы остановить такое поведение.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4919"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Запретить процессам в песочнице получать доступ к системным данным через WMI (см. всплывающую подсказку для дополнительной информации)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4851"/>
         <source>Process Hiding</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрытие процессов</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4807"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать пользовательский Язык/LangID</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4780"/>
         <source>Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Защита данных</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4797"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Дамп текущей таблицы прошивки в HKCU\System\SbieCustom</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4800"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>Дамп FW таблиц</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5142"/>
@@ -8737,7 +8738,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="702"/>
         <source>Systray options</source>
-        <translation>Опции системного лотка</translation>
+        <translation>Опции системного трея</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="200"/>
@@ -9048,12 +9049,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="679"/>
         <source>Show Icon in Systray:</source>
-        <translation>Показать значок в системном лотке:</translation>
+        <translation>Показать песочницы в списке трея:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="666"/>
         <source>Show boxes in tray list:</source>
-        <translation>Показать песочницы в списке лотка:</translation>
+        <translation>Показать песочницы в списке трея:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="65"/>
@@ -9374,7 +9375,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="658"/>
         <source>System Tray</source>
-        <translation>Системный лоток</translation>
+        <translation>Системный трей</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="758"/>
@@ -9384,12 +9385,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="765"/>
         <source>Open/Close from/to tray with a single click</source>
-        <translation>Открыть/закрыть из/в лоток одним щелчком мыши</translation>
+        <translation>Открыть/закрыть из/в трей одним щелчком мыши</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="772"/>
         <source>Minimize to tray</source>
-        <translation>Скрыть в системный лоток</translation>
+        <translation>Скрыть в системный трей</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1308"/>
@@ -9435,12 +9436,12 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="643"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Добавить &apos;Установить силу в песочнице&apos; в контекстное меню</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="650"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить &apos;Установить путь открытия в песочнице&apos; в контекстное меню</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1583"/>
@@ -9455,7 +9456,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1732"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1742"/>
@@ -9532,7 +9533,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2283"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда запускать SandMan UI от имени администратора</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2395"/>

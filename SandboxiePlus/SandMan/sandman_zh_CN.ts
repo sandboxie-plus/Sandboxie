@@ -5503,7 +5503,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1430"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
-        <translation>输入的名称无效，是否要将其设置为沙盒别名？></translation>
+        <translation>输入的名称无效，是否要将其设置为沙盒别名？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1468"/>

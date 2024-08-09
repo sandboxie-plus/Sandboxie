@@ -467,6 +467,8 @@ typedef BOOL (*P_SwitchDesktop)(HDESK hDesktop);
 typedef BOOL (*P_UserHandleGrantAccess)(
     HANDLE hUserHandle, HANDLE hJob, BOOL bGrant);
 
+typedef HWND (*P_GetActiveWindow)();
+
 //---------------------------------------------------------------------------
 
 typedef HMONITOR (*P_MonitorFromWindow)(HWND hWnd, DWORD dwFlags);
@@ -633,6 +635,8 @@ GUI_SYS_VAR(GetWindowRect)
 
 GUI_SYS_VAR(GetForegroundWindow)
 GUI_SYS_VAR(SetForegroundWindow)
+
+GUI_SYS_VAR(GetActiveWindow)
 
 GUI_SYS_VAR(MonitorFromWindow)
 GUI_SYS_VAR_2(DdeInitialize)

@@ -81,7 +81,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 2004 - 2013         | Ronen Tzur       |
 | 2013 - 2017         | Invincea Inc.    |
 | 2017 - 2020         | Sophos Group plc |
-| 8 April 2020 - [open-source code](https://community.sophos.com/sandboxie/f/forum/119641/important-sandboxie-open-source-code-is-available-for-download) | Sophos Group plc |
+| 8 April 2020 - [open-source code](https://community.sophos.com/sandboxie/f/forum/119641/important-sandboxie-open-source-code-is-available-for-download) | Sophos Ltd. |
 | 9 April 2020 onwards - project fork | David Xanatos |
 
 See the current [roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633).

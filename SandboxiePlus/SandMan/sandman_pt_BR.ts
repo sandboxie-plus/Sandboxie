@@ -1997,7 +1997,7 @@ Nota: A verificação de atualização geralmente está por trás da versão mai
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1471"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabela de firmware salva com sucesso no registro do host: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;você pode copiá-la para o registro da caixa de areia para ter um valor diferente para cada caixa.</translation>
     </message>
     <message>
         <source>Please enter a program file name</source>
@@ -8268,7 +8268,7 @@ Isso é feito para evitar que processos invasores dentro do sandbox criem uma c�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>O Sandboxie-Plus é capaz de criar caixas de areia confidenciais que fornecem proteção robusta contra vigilância não autorizada ou adulteração por processos do host. Ao utilizar uma imagem de caixa de areia criptografada, esse recurso oferece o mais alto nível de confidencialidade operacional, garantindo a segurança e integridade dos processos na caixa de areia.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1552"/>
@@ -8310,12 +8310,13 @@ Isso é feito para evitar que processos invasores dentro do sandbox criem uma c�
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcado: Um grupo local também será adicionado ao token de caixa de areia recém-criado, permitindo que todas as caixas de areia sejam tratadas de uma vez. Isso seria útil para políticas de auditoria.
+        Parcialmente marcado: Nenhum grupo será adicionado ao token de caixa de areia recém-criado.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1930"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar um novo token de caixa de areia em vez de simplificar o token original</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2174"/>
@@ -9114,20 +9115,17 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4776"/>
         <source>Hide Firmware Information</source>
-        <oldsource>Hide Firmware Informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar Informações do Firmware</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4806"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
-        <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Alguns programas leem os detalhes do sistema através do WMI (um banco de dados embutido no Windows) em vez de pelos métodos normais. Por exemplo, &quot;tasklist.exe&quot; pode obter a lista completa de processos acessando o WMI, mesmo se &quot;HideOtherBoxes&quot; estiver ativado. Habilite esta opção para impedir esse comportamento.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4809"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
-        <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Impedir que processos na caixa de areia acessem detalhes do sistema através do WMI (consulte o tooltip para mais informações)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4847"/>
@@ -9137,7 +9135,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4861"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar Locale/LangID personalizado</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4882"/>
@@ -9153,7 +9151,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4922"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>Despejar Tabelas de FW</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5020"/>

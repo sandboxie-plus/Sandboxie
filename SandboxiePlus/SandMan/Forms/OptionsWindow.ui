@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>674</width>
-    <height>475</height>
+    <width>787</width>
+    <height>575</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>10</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -4767,108 +4767,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <string>Privacy</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_29">
-             <item row="1" column="1" colspan="3">
-              <widget class="QCheckBox" name="chkHideFirmware">
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="text">
-                <string>Hide Firmware Information</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0" colspan="4">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>Hide host processes from processes running in the sandbox.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="3">
-              <spacer name="horizontalSpacer_24">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="12" column="0" colspan="5">
-              <widget class="QCheckBox" name="chkBlockWMI">
-               <property name="toolTip">
-                <string>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</string>
-               </property>
-               <property name="text">
-                <string>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1" colspan="3">
-              <widget class="QCheckBox" name="chkHideNonSystemProcesses">
-               <property name="text">
-                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0" rowspan="4" colspan="4">
-              <widget class="QTreeWidget" name="treeHideProc">
-               <property name="sortingEnabled">
-                <bool>true</bool>
-               </property>
-               <column>
-                <property name="text">
-                 <string>Process</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string/>
-                </property>
-               </column>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="lblProcessHiding">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="text">
-                <string>Process Hiding</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="4">
-              <widget class="QPushButton" name="btnAddProcess">
-               <property name="text">
-                <string>Add Process</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLabel" name="label_72">
-               <property name="text">
-                <string>Use a custom Locale/LangID</string>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="4">
-              <widget class="QPushButton" name="btnDelProcess">
-               <property name="text">
-                <string>Remove</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="lblPrivacyProtection">
                <property name="font">
@@ -4883,17 +4781,109 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </property>
               </widget>
              </item>
+             <item row="1" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkHideFirmware">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Hide Firmware Information</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QToolButton" name="btnDumpFW">
+               <property name="toolTip">
+                <string>Dump the current Firmware Tables to HKCU\System\SbieCustom</string>
+               </property>
+               <property name="text">
+                <string>Dump FW Tables</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="label_72">
+               <property name="text">
+                <string>Use a custom Locale/LangID</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="2">
               <widget class="QComboBox" name="cmbLangID"/>
              </item>
-             <item row="10" column="4">
-              <widget class="QCheckBox" name="chkShowHiddenProcTmpl">
+             <item row="2" column="3">
+              <spacer name="horizontalSpacer_24">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="chkHideSerial">
                <property name="text">
-                <string>Show Templates</string>
+                <string>Hide Disk Serial Number</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="chkHideUID">
+               <property name="text">
+                <string>Obfuscate known unique identifiers in the registry</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="lblProcessHiding">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Process Hiding</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkHideOtherBoxes">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running in other boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkHideNonSystemProcesses">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0" colspan="4">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Hide host processes from processes running in the sandbox.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
              <item row="9" column="4">
+              <widget class="QPushButton" name="btnAddProcess">
+               <property name="text">
+                <string>Add Process</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="4">
               <spacer name="verticalSpacer_16">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -4906,21 +4896,51 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </property>
               </spacer>
              </item>
-             <item row="4" column="1" colspan="3">
-              <widget class="QCheckBox" name="chkHideOtherBoxes">
+             <item row="11" column="4">
+              <widget class="QCheckBox" name="chkShowHiddenProcTmpl">
                <property name="text">
-                <string>Don't allow sandboxed processes to see processes running in other boxes</string>
+                <string>Show Templates</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="4">
-              <widget class="QToolButton" name="btnDumpFW">
+             <item row="12" column="4">
+              <widget class="QPushButton" name="btnDelProcess">
+               <property name="text">
+                <string>Remove</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0" colspan="4">
+              <widget class="QCheckBox" name="chkBlockWMI">
                <property name="toolTip">
-                <string>Dump the current Firmware Tables to HKCU\System\SbieCustom</string>
+                <string>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</string>
                </property>
                <property name="text">
-                <string>Dump FW Tables</string>
+                <string>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</string>
                </property>
+              </widget>
+             </item>
+             <item row="9" column="0" rowspan="4" colspan="4">
+              <widget class="QTreeWidget" name="treeHideProc">
+               <property name="minimumSize">
+                <size>
+                 <width>258</width>
+                 <height>200</height>
+                </size>
+               </property>
+               <property name="sortingEnabled">
+                <bool>true</bool>
+               </property>
+               <column>
+                <property name="text">
+                 <string>Process</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string/>
+                </property>
+               </column>
               </widget>
              </item>
             </layout>
@@ -5236,8 +5256,8 @@ instead of &quot;*&quot;.</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
+                  <width>75</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="dbgLayout">

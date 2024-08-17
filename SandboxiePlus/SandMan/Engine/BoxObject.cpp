@@ -99,6 +99,11 @@ bool CBoxObject::MakeShortcut(const QString& Target, const QVariantMap& Options)
     return CSbieView::CreateShortcutEx(Target, getName(), Name, Options["iconPath"].toString(), Options["iconIndex"].toInt(), Options["workDir"].toString());
 }
 
+void CSBoxObject::Start(const QString& Command, bool bElevale)
+{
+    m_pIni.objectCast<CSandBox>()->RunStart(Command.isEmpty() ? "run_dialog" : Command, bElevale);
+}
+
 void CSBoxObject::ApplyChanges(bool bApply)
 {
     CWizardEngine* pEngine = qobject_cast<CWizardEngine*>(parent());

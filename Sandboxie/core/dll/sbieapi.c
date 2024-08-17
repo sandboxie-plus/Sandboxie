@@ -1349,6 +1349,27 @@ _FX LONG SbieApi_QuerySymbolicLink(
 
 
 //---------------------------------------------------------------------------
+// SbieApi_QueryDrvInfo
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_QueryDrvInfo(ULONG info_class, VOID* info_data, ULONG info_size)
+{
+    NTSTATUS status;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+
+    memset(parms, 0, sizeof(parms));
+    parms[0] = API_QUERY_DRIVER_INFO;
+    parms[1] = info_class;
+    parms[2] = (ULONG64)(ULONG_PTR)info_data;
+    parms[3] = info_size;
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // SbieApi_ReloadConf
 //---------------------------------------------------------------------------
 
@@ -1456,7 +1477,7 @@ _FX BOOLEAN SbieApi_QueryConfBool(
 
 
 //---------------------------------------------------------------------------
-// SbieApi_QueryConfBool
+// SbieApi_QueryConfNumber
 //---------------------------------------------------------------------------
 
 
@@ -1472,6 +1493,36 @@ _FX ULONG SbieApi_QueryConfNumber(
         || *value == L'\0') // empty string
         return def;
     ULONG num = _wtoi(value);
+    if (num == 0) {
+        WCHAR* ptr = value;
+        //if(*ptr == L'-')
+        //    ptr++;
+        while (*ptr == L'0')
+            ptr++;
+        if(*ptr == L'\0')
+            return def;
+    }
+    return num;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieApi_QueryConfNumber64
+//---------------------------------------------------------------------------
+
+
+_FX ULONG64 SbieApi_QueryConfNumber64(
+    const WCHAR *section_name,      // WCHAR [66]
+    const WCHAR *setting_name,      // WCHAR [66]
+    ULONG64 def)
+{
+    WCHAR value[64];
+    *value = L'\0';
+    if (!NT_SUCCESS(SbieApi_QueryConfAsIs(
+                    section_name, setting_name, 0, value, sizeof(value)))
+        || *value == L'\0') // empty string
+        return def;
+    ULONG64 num = _wtoi64(value);
     if (num == 0) {
         WCHAR* ptr = value;
         //if(*ptr == L'-')

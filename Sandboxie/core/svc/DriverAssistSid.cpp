@@ -93,12 +93,41 @@ NTSTATUS RemoveSidName(const WCHAR* domain, const WCHAR* user)
 
 #define SBIE_RID 100 // must be between 80 and 111 inclusive
 
-UCHAR SandboxieSid[12] = { // S-1-5-100-
+UCHAR SandboxieSid[12] = { // S-1-5-100
     1,                                      // Revision
     1,                                      // SubAuthorityCount
     0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
-    SBIE_RID,0,0,0                          // SubAuthority
+    SBIE_RID,0,0,0                          // SubAuthority[0]
 };
+
+UCHAR SandboxieAllSid[16] = { // S-1-5-100-0
+    1,                                      // Revision
+    2,                                      // SubAuthorityCount
+    0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+    SBIE_RID,0,0,0,                         // SubAuthority[0]
+    0,0,0,0                                 // SubAuthority[1]
+};
+
+
+//---------------------------------------------------------------------------
+// InitSIDs
+//---------------------------------------------------------------------------
+
+
+void DriverAssist::InitSIDs()
+{
+    //
+    // add Sandboxie domain "Sandboxie"
+    //
+
+    AddSidName(SandboxieSid, SANDBOXIE, NULL);
+
+    //
+    // add Sandboxie box user "Sandboxie\\All Sandboxes"
+    //
+
+    AddSidName(SandboxieAllSid, SANDBOXIE, L"All Sandboxes");
+}
 
 
 //---------------------------------------------------------------------------
@@ -108,35 +137,28 @@ UCHAR SandboxieSid[12] = { // S-1-5-100-
 
 bool DriverAssist::GetSandboxieSID(const WCHAR* boxname, UCHAR* pSID, DWORD dwSidSize)
 {
-    if (!SbieApi_QueryConfBool(boxname, L"SandboxieLogon", FALSE))
+    if (boxname && !SbieApi_QueryConfBool(boxname, L"SandboxieLogon", FALSE))
         return false;
 
 	WCHAR szUserName[256], szDomainName[256];
 	DWORD dwDomainSize = ARRAYSIZE(szDomainName);
     SID_NAME_USE snu = SidTypeInvalid;
 
-    wcscpy(szUserName, SANDBOXIE L"\\");
-    wcscat(szUserName, boxname);
+    wcscpy(szUserName, SANDBOXIE);
+    if (boxname) {
+        wcscat(szUserName, L"\\");
+        wcscat(szUserName, boxname);
+    }
 
     if (LookupAccountName(NULL, szUserName, pSID, &dwSidSize, szDomainName, &dwDomainSize, &snu))
         return true;
 
     //
-    // add Sandboxie domain "Sandboxie"
-    //
-
-    static bool SbieAdded = false;
-    if (!SbieAdded) {
-        AddSidName(SandboxieSid, SANDBOXIE, NULL);
-        SbieAdded = true;
-    }
-
-    //
-    // add Sandboxie box user "Sandboxie\\DefaultBox"
+    // add Sandboxie box user "Sandboxie\\[BoxName]"
     //
 
     UNICODE_STRING Name;
-    RtlInitUnicodeString(&Name, boxname);
+    RtlInitUnicodeString(&Name, boxname ? boxname : SANDBOXIE);
     RtlCreateVirtualAccountSid(&Name, SBIE_RID, pSID, &dwSidSize);
 
     return NT_SUCCESS(AddSidName(pSID, SANDBOXIE, boxname));

@@ -191,6 +191,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkEncrypt, SIGNAL(clicked(bool)), this, SLOT(OnDiskChanged()));
 	connect(ui.chkForceProtection, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkUserOperation, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkCoverBar, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
 
 	bool bImDiskReady = theGUI->IsImDiskReady();
@@ -333,6 +334,7 @@ void COptionsWindow::LoadGeneral()
 	ui.chkEncrypt->setChecked(m_pBox->GetBool("UseFileImage", false));
 	ui.chkForceProtection->setChecked(m_pBox->GetBool("ForceProtectionOnMount", false));
 	ui.chkUserOperation->setChecked(m_pBox->GetBool("BlockInterferenceControl", false));
+	ui.chkCoverBar->setChecked(m_pBox->GetBool("AllowCoverTaskbar", false));
 	if (ui.chkRamBox->isEnabled()) {
 		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
 		ui.chkForceProtection->setEnabled(!ui.chkRamBox->isChecked());
@@ -429,6 +431,7 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkProtectPower, "BlockInterferePower", "y", "");
 	WriteAdvancedCheck(ui.chkForceProtection, "ForceProtectionOnMount", "y", "");
 	WriteAdvancedCheck(ui.chkUserOperation, "BlockInterferenceControl", "y", "");
+	WriteAdvancedCheck(ui.chkCoverBar, "AllowCoverTaskbar", "y", "");
 	WriteAdvancedCheck(ui.chkVmReadNotify, "NotifyProcessAccessDenied", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
 	//WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
@@ -797,7 +800,9 @@ void COptionsWindow::OnGeneralChanged()
 
 	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
-	
+
+	ui.chkCoverBar->setEnabled(ui.chkUserOperation->isChecked());
+
 	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
 
@@ -843,7 +848,7 @@ void COptionsWindow::OnSecurityMode()
 	m_GeneralChanged = true;
 	OnOptChanged();
 
-	OnAccessChanged(); // for rule specificity
+	OnAccessChangedEx(); // for rule specificity
 }
 
 void COptionsWindow::OnUseIcon(bool bUse)
@@ -1119,8 +1124,7 @@ void COptionsWindow::OnVmRead()
 		SetAccessEntry(eIPC, "", eReadOnly, "$:*");
 	else
 		DelAccessEntry(eIPC, "", eReadOnly, "$:*");
-	m_AdvancedChanged = true;
-	OnOptChanged();
+	OnAdvancedChanged();
 }
 
 void COptionsWindow::OnDiskChanged()

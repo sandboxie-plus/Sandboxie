@@ -68,8 +68,6 @@ _FX NTSTATUS Ipc_CheckPortRequest_Sam(
 
             ULONG  len = msg->u1.s1.DataLength;
             UCHAR* ptr = (UCHAR*)((UCHAR*)msg + sizeof(PORT_MESSAGE));
-            int i = 0;
-            int rc = -2;
 
             ProbeForRead(ptr, len, sizeof(WCHAR));
 

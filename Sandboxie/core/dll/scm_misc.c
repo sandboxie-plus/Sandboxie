@@ -49,14 +49,14 @@ _FX BOOLEAN Scm_DllHack(HMODULE module, const WCHAR *svcname)
     if (state != SERVICE_STOPPED)
         return TRUE;
 
-    hService = Scm_OpenServiceW(
+    hService = Scm_OpenServiceWImpl(
                     HANDLE_SERVICE_MANAGER, svcname, SERVICE_START);
     if (hService) {
 
-        if (Scm_StartServiceW(hService, 0, NULL))
+        if (Scm_StartServiceWImpl(hService, 0, NULL))
             Sleep(500);
 
-        Scm_CloseServiceHandle(hService);
+        Scm_CloseServiceHandleImpl(hService);
     }
 
     return TRUE;
@@ -107,16 +107,16 @@ _FX int Scm_Start_Sppsvc()
     int rc = 0;
 
     if (handle1) {
-        SC_HANDLE handle2 = Scm_OpenServiceW(handle1, L"sppsvc", SERVICE_START);
+        SC_HANDLE handle2 = Scm_OpenServiceWImpl(handle1, L"sppsvc", SERVICE_START);
         if (handle2) {
             SERVICE_STATUS lpServiceStatus;
             int count = 0;
             lpServiceStatus.dwCurrentState = 0;
-            Scm_StartServiceW(handle2, 0, NULL);
+            Scm_StartServiceWImpl(handle2, 0, NULL);
 
             while (lpServiceStatus.dwCurrentState != SERVICE_RUNNING && count++ < 10) {
                 Sleep(50);
-                Scm_QueryServiceStatus(handle2, &lpServiceStatus);
+                Scm_QueryServiceStatusImpl(handle2, &lpServiceStatus);
                 if (lpServiceStatus.dwCurrentState == 4) {
                     rc = 1;
                 }
@@ -125,8 +125,8 @@ _FX int Scm_Start_Sppsvc()
     }
 
     if (handle1)
-        Scm_CloseServiceHandle(handle1);
+        Scm_CloseServiceHandleImpl(handle1);
     if (handle2)
-        Scm_CloseServiceHandle(handle2);
+        Scm_CloseServiceHandleImpl(handle2);
     return rc;
 }

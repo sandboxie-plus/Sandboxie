@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -187,6 +187,22 @@ _FX BOOLEAN SysInfo_Init(void)
 // SysInfo_NtQuerySystemInformation
 //---------------------------------------------------------------------------
 
+typedef struct _SYSTEM_FIRMWARE_TABLE_INFORMATION {
+    ULONG ProviderSignature;
+    ULONG Action;
+    ULONG TableID;
+    ULONG TableBufferLength;
+    UCHAR TableBuffer[ANYSIZE_ARRAY];
+} SYSTEM_FIRMWARE_TABLE_INFORMATION, *PSYSTEM_FIRMWARE_TABLE_INFORMATION;
+
+#define FIRMWARE_TABLE_PROVIDER_ACPI  'ACPI'
+#define FIRMWARE_TABLE_PROVIDER_SMBIOS 'RSMB'
+#define FIRMWARE_TABLE_PROVIDER_FIRM   'FIRM'
+
+typedef enum _SYSTEM_FIRMWARE_TABLE_ACTION {
+    SystemFirmwareTable_Enumerate,
+    SystemFirmwareTable_Get
+} SYSTEM_FIRMWARE_TABLE_ACTION;
 
 _FX NTSTATUS SysInfo_NtQuerySystemInformation(
     SYSTEM_INFORMATION_CLASS SystemInformationClass,
@@ -195,6 +211,66 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
     ULONG *ReturnLength)
 {
     NTSTATUS status;
+
+    if ((SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
+
+        PSYSTEM_FIRMWARE_TABLE_INFORMATION firmwareTableInfo = (PSYSTEM_FIRMWARE_TABLE_INFORMATION)Buffer;
+
+        if (firmwareTableInfo->ProviderSignature == FIRMWARE_TABLE_PROVIDER_SMBIOS && firmwareTableInfo->Action == SystemFirmwareTable_Get) {
+
+            typedef LSTATUS(*RegOpenKeyExW_t)(HKEY hKey, LPCWSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult);
+            typedef LSTATUS(*RegQueryValueExW_t)(HKEY hKey, LPCWSTR lpValueName, LPDWORD lpReserved, LPDWORD lpType, LPBYTE lpData, LPDWORD lpcbData);
+            typedef LSTATUS(*RegCloseKey_t)(HKEY hKey);
+
+            HMODULE advapi32 = LoadLibraryW(DllName_advapi32);
+            if (!advapi32) return STATUS_UNSUCCESSFUL;
+
+            RegOpenKeyExW_t RegOpenKeyExW = (RegOpenKeyExW_t)GetProcAddress(advapi32, "RegOpenKeyExW");
+            RegQueryValueExW_t RegQueryValueExW = (RegQueryValueExW_t)GetProcAddress(advapi32, "RegQueryValueExW");
+            RegCloseKey_t RegCloseKey = (RegCloseKey_t)GetProcAddress(advapi32, "RegCloseKey");
+
+            if (!RegOpenKeyExW || !RegQueryValueExW || !RegCloseKey) {
+                FreeLibrary(advapi32);
+                return STATUS_UNSUCCESSFUL;
+            }
+
+            HKEY hKey = NULL;
+            DWORD dwLen = 0x10000;
+            PVOID lpData = Dll_AllocTemp(dwLen);
+            if (!lpData) {
+                FreeLibrary(advapi32);
+                return STATUS_UNSUCCESSFUL;
+            }
+
+            DWORD type = 0;
+            // if not set we return no information, 0 length
+            if (RegOpenKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
+                if (RegQueryValueExW(hKey, L"SMBiosTable", NULL, &type, (LPBYTE)lpData, &dwLen) != ERROR_SUCCESS) {
+                    dwLen = 0;
+                }
+                RegCloseKey(hKey);
+            }
+
+            *ReturnLength = dwLen;
+            if (dwLen > 0) {
+                if (dwLen + sizeof(SYSTEM_FIRMWARE_TABLE_INFORMATION) > BufferLength) {
+                    status = STATUS_BUFFER_TOO_SMALL;
+                    goto cleanup;
+                }
+
+                firmwareTableInfo->TableBufferLength = dwLen;
+                memcpy(firmwareTableInfo->TableBuffer, lpData, dwLen);
+            }
+
+            status = STATUS_SUCCESS;
+
+        cleanup:
+            Dll_Free(lpData);
+            FreeLibrary(advapi32);
+
+            return status;
+        }
+    }
 
     status = __sys_NtQuerySystemInformation(
         SystemInformationClass, Buffer, BufferLength, ReturnLength);
@@ -212,6 +288,55 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 
 
 //---------------------------------------------------------------------------
+// Sysinfo_IsTokenAnySid
+//---------------------------------------------------------------------------
+
+BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE* pToken);
+
+_FX BOOL Sysinfo_IsTokenAnySid(HANDLE hToken,WCHAR* compare)
+{
+	NTSTATUS status;
+	BOOLEAN return_value = FALSE;
+
+	ULONG64 user_space[88];
+	PTOKEN_USER user = (PTOKEN_USER)user_space;
+	ULONG len;
+
+	len = sizeof(user_space);
+	status = NtQueryInformationToken(
+		hToken, TokenUser, user, len, &len);
+
+	if (status == STATUS_BUFFER_TOO_SMALL) {
+
+		user = Dll_AllocTemp(len);
+		status = NtQueryInformationToken(
+			hToken, TokenUser, user, len, &len);
+	}
+
+	if (NT_SUCCESS(status)) {
+
+		UNICODE_STRING SidString;
+
+		status = RtlConvertSidToUnicodeString(
+			&SidString, user->User.Sid, TRUE);
+
+		if (NT_SUCCESS(status)) {
+
+			if (_wcsicmp(SidString.Buffer, /*L"S-1-5-18" */compare ) == 0)
+				return_value = TRUE;
+
+			RtlFreeUnicodeString(&SidString);
+		}
+	}
+
+	if (user != (PTOKEN_USER)user_space)
+		Dll_Free(user);
+
+	return return_value;
+}
+
+
+//---------------------------------------------------------------------------
 // SysInfo_DiscardProcesses
 //---------------------------------------------------------------------------
 
@@ -223,11 +348,16 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
     WCHAR boxname[BOXNAME_COUNT];
 
 	BOOL hideOther = SbieApi_QueryConfBool(NULL, L"HideOtherBoxes", TRUE);
+    BOOL hideNonSys = SbieApi_QueryConfBool(NULL, L"HideNonSystemProcesses", FALSE);
+    BOOL hideSbie = SbieApi_QueryConfBool(NULL, L"HideSbieProcesses", FALSE);
 
 	WCHAR* hiddenProcesses = NULL;
 	WCHAR* hiddenProcessesPtr = NULL;
 	ULONG hiddenProcessesLen = 100 * 110; // we can hide up to 100 processes, should be enough
 	WCHAR hiddenProcess[110];
+
+	WCHAR tempSid[96] = {0};
+    ULONG tempSession = 0;
 
 	for (ULONG index = 0; ; ++index) {
 		NTSTATUS status = SbieApi_QueryConfAsIs(NULL, L"HideHostProcess", index, hiddenProcess, 108 * sizeof(WCHAR));
@@ -261,17 +391,31 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
         next = (SYSTEM_PROCESS_INFORMATION *) (((UCHAR *)curr) + curr->NextEntryOffset);
         if (next == curr)
             break;
-
-		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, NULL, NULL);
-
-		BOOL hideProcess = FALSE;
-		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
-			hideProcess = TRUE;
-		}
-		else if(hiddenProcesses && next->ImageName.Buffer) {
-            WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
+		
+        WCHAR* imagename = NULL;
+        if (next->ImageName.Buffer) {
+            imagename = wcschr(next->ImageName.Buffer, L'\\');
 			if (imagename)  imagename += 1; // skip L'\\'
 			else			imagename = next->ImageName.Buffer;
+        }
+
+		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, tempSid, &tempSession);
+		BOOL hideProcess = FALSE;
+        if (hideNonSys && !*boxname
+          && _wcsnicmp(tempSid, L"S-1-5-18", 8) != 0
+          && _wcsnicmp(tempSid, L"S-1-5-80", 8) != 0
+          && _wcsnicmp(tempSid, L"S-1-5-20", 8) != 0
+          && _wcsnicmp(tempSid, L"S-1-5-6", 7) != 0) {
+            hideProcess = TRUE;
+        }
+        else if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
+            hideProcess = TRUE;
+        }
+        else if (hideSbie && imagename && (_wcsnicmp(imagename, L"Sandboxie", 9) == 0 || _wcsnicmp(imagename, L"Sbie", 4) == 0)) {
+            hideProcess = TRUE;
+        }
+		else if(hiddenProcesses && imagename) {
+
 			if (!*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
 				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
 					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {

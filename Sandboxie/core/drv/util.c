@@ -566,12 +566,12 @@ retry:
 
 
 //---------------------------------------------------------------------------
-// Util_IsCsrssProcess
+// Util_IsSystemProcess
 //---------------------------------------------------------------------------
 
 NTKERNELAPI PCHAR NTAPI PsGetProcessImageFileName(_In_ PEPROCESS Process);
 
-_FX BOOLEAN Util_IsCsrssProcess(HANDLE pid)
+_FX BOOLEAN Util_IsSystemProcess(HANDLE pid, const char* name)
 {
     PEPROCESS ProcessObject;
     NTSTATUS status;
@@ -586,7 +586,7 @@ _FX BOOLEAN Util_IsCsrssProcess(HANDLE pid)
 
         ImageFileName = PsGetProcessImageFileName(ProcessObject);
 
-        ret = (_stricmp(ImageFileName, "csrss.exe") == 0);
+        ret = (_stricmp(ImageFileName, name) == 0);
 
         ObDereferenceObject(ProcessObject);
     }

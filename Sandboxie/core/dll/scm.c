@@ -67,10 +67,17 @@ static SC_HANDLE Scm_OpenServiceA(
     const UCHAR *lpServiceName,
     DWORD dwDesiredAccess);
 
+static SC_HANDLE Scm_OpenServiceWImpl(
+    SC_HANDLE hSCManager,
+    const WCHAR *lpServiceName,
+    DWORD dwDesiredAccess);
+
 static SC_HANDLE Scm_OpenServiceW(
     SC_HANDLE hSCManager,
     const WCHAR *lpServiceName,
     DWORD dwDesiredAccess);
+
+static BOOL Scm_CloseServiceHandleImpl(SC_HANDLE hSCObject);
 
 static BOOL Scm_CloseServiceHandle(SC_HANDLE hSCObject);
 
@@ -104,10 +111,10 @@ static BOOLEAN Scm_DllHack(HMODULE module, const WCHAR *svcname);
 
 
 typedef SC_HANDLE (*P_OpenSCManager)(
-    void *lpMachineName, void *lpDatabaseName, DWORD dwDesiredAccess);
+    void *lpMachineName, const void *lpDatabaseName, DWORD dwDesiredAccess);
 
 typedef SC_HANDLE (*P_OpenService)(
-    SC_HANDLE hSCManager, void *lpServiceName, DWORD dwDesiredAccess);
+    SC_HANDLE hSCManager, const void *lpServiceName, DWORD dwDesiredAccess);
 
 typedef BOOL (*P_CloseServiceHandle)(
     SC_HANDLE hSCObject);
@@ -246,13 +253,17 @@ static P_OpenSCManager          __sys_OpenSCManagerW            = NULL;
 static P_OpenSCManager          __sys_OpenSCManagerA            = NULL;
 
 static P_OpenService            __sys_OpenServiceW              = NULL;
+static P_OpenService            __my_OpenServiceW               = NULL;
 static P_OpenService            __sys_OpenServiceA              = NULL;
 
 static P_CloseServiceHandle     __sys_CloseServiceHandle        = NULL;
+static P_CloseServiceHandle     __my_CloseServiceHandle			= NULL;
 
 static P_QueryServiceStatus     __sys_QueryServiceStatus        = NULL;
+static P_QueryServiceStatus     __my_QueryServiceStatus         = NULL;
 
 static P_QueryServiceStatusEx   __sys_QueryServiceStatusEx      = NULL;
+static P_QueryServiceStatusEx   __my_QueryServiceStatusEx       = NULL;
 
 static P_QueryServiceConfig     __sys_QueryServiceConfigW       = NULL;
 static P_QueryServiceConfig     __sys_QueryServiceConfigA       = NULL;
@@ -310,10 +321,13 @@ static P_ChangeServiceConfig2   __sys_ChangeServiceConfig2A     = NULL;
 static P_DeleteService          __sys_DeleteService             = NULL;
 
 static P_StartService           __sys_StartServiceW             = NULL;
+static P_StartService           __my_StartServiceW              = NULL;
 static P_StartService           __sys_StartServiceA             = NULL;
 
 static P_StartServiceCtrlDispatcher
                               __sys_StartServiceCtrlDispatcherW = NULL;
+static P_StartServiceCtrlDispatcher
+							  __my_StartServiceCtrlDispatcherW	= NULL;
 static P_StartServiceCtrlDispatcher
                               __sys_StartServiceCtrlDispatcherA = NULL;
 
@@ -328,8 +342,10 @@ static P_RegisterServiceCtrlHandlerEx
                             __sys_RegisterServiceCtrlHandlerExA = NULL;
 
 static P_SetServiceStatus       __sys_SetServiceStatus          = NULL;
+static P_SetServiceStatus       __my_SetServiceStatus           = NULL;
 
 static P_ControlService         __sys_ControlService            = NULL;
+static P_ControlService         __my_ControlService             = NULL;
 
 static P_ControlServiceEx       __sys_ControlServiceExW         = NULL;
 static P_ControlServiceEx       __sys_ControlServiceExA         = NULL;
@@ -805,11 +821,11 @@ _FX SC_HANDLE Scm_OpenSCManagerA(
 
 
 //---------------------------------------------------------------------------
-// Scm_OpenServiceW
+// Scm_OpenServiceWImpl
 //---------------------------------------------------------------------------
 
 
-_FX SC_HANDLE Scm_OpenServiceW(
+_FX SC_HANDLE Scm_OpenServiceWImpl(
     SC_HANDLE hSCManager,
     const WCHAR *lpServiceName,
     DWORD dwDesiredAccess)
@@ -874,6 +890,34 @@ _FX SC_HANDLE Scm_OpenServiceW(
 
 
 //---------------------------------------------------------------------------
+// Scm_HookOpenServiceW
+//---------------------------------------------------------------------------
+
+
+_FX ULONG_PTR Scm_HookOpenServiceW(VOID* hook)
+{
+	__my_OpenServiceW = hook;
+	return (ULONG_PTR)Scm_OpenServiceWImpl;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_OpenServiceW
+//---------------------------------------------------------------------------
+
+
+_FX SC_HANDLE Scm_OpenServiceW(
+    SC_HANDLE hSCManager,
+    const WCHAR *lpServiceName,
+    DWORD dwDesiredAccess)
+{
+	if (__my_OpenServiceW)
+		return __my_OpenServiceW(hSCManager, lpServiceName, dwDesiredAccess);
+	return Scm_OpenServiceWImpl(hSCManager, lpServiceName, dwDesiredAccess);
+}
+
+
+//---------------------------------------------------------------------------
 // Scm_OpenServiceA
 //---------------------------------------------------------------------------
 
@@ -894,7 +938,7 @@ _FX SC_HANDLE Scm_OpenServiceA(
         RtlAnsiStringToUnicodeString(&uni, &ansi, TRUE);
     }
 
-    h = Scm_OpenServiceW(hSCManager, uni.Buffer, dwDesiredAccess);
+    h = Scm_OpenServiceWImpl(hSCManager, uni.Buffer, dwDesiredAccess);
     err = GetLastError();
 
     if (uni.Buffer)
@@ -906,11 +950,11 @@ _FX SC_HANDLE Scm_OpenServiceA(
 
 
 //---------------------------------------------------------------------------
-// Scm_CloseServiceHandle
+// Scm_CloseServiceHandleImpl
 //---------------------------------------------------------------------------
 
 
-_FX BOOL Scm_CloseServiceHandle(SC_HANDLE hSCObject)
+_FX BOOL Scm_CloseServiceHandleImpl(SC_HANDLE hSCObject)
 {
     BOOL ok = FALSE;
 
@@ -927,6 +971,31 @@ _FX BOOL Scm_CloseServiceHandle(SC_HANDLE hSCObject)
     else
         SetLastError(ERROR_INVALID_HANDLE);
     return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_HookCloseServiceHandle
+//---------------------------------------------------------------------------
+
+
+_FX ULONG_PTR Scm_HookCloseServiceHandle(VOID* hook)
+{
+	__my_CloseServiceHandle = hook;
+	return (ULONG_PTR)Scm_CloseServiceHandleImpl;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_CloseServiceHandle
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Scm_CloseServiceHandle(SC_HANDLE hSCObject)
+{
+	if (__my_CloseServiceHandle)
+		return __my_CloseServiceHandle(hSCObject);
+	return Scm_CloseServiceHandleImpl(hSCObject);
 }
 
 

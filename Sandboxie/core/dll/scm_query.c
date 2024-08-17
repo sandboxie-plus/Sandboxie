@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -811,11 +812,11 @@ _FX void *Scm_QueryServiceByHandle(
 
 
 //---------------------------------------------------------------------------
-// Scm_QueryServiceStatusEx
+// Scm_QueryServiceStatusExImpl
 //---------------------------------------------------------------------------
 
 
-_FX BOOL Scm_QueryServiceStatusEx(
+_FX BOOL Scm_QueryServiceStatusExImpl(
     SC_HANDLE hService, SC_STATUS_TYPE InfoLevel,
     LPBYTE lpBuffer, DWORD cbBufSize, LPDWORD pcbBytesNeeded)
 {
@@ -844,20 +845,73 @@ _FX BOOL Scm_QueryServiceStatusEx(
 
 
 //---------------------------------------------------------------------------
+// Scm_HookQueryServiceStatusEx
+//---------------------------------------------------------------------------
+
+
+_FX ULONG_PTR Scm_HookQueryServiceStatusEx(VOID* hook)
+{
+	__my_QueryServiceStatusEx = hook;
+	return (ULONG_PTR)Scm_QueryServiceStatusExImpl;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_QueryServiceStatusEx
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Scm_QueryServiceStatusEx(
+	SC_HANDLE hService, SC_STATUS_TYPE InfoLevel,
+	LPBYTE lpBuffer, DWORD cbBufSize, LPDWORD pcbBytesNeeded)
+{
+	if (__my_QueryServiceStatusEx)
+		return __my_QueryServiceStatusEx(hService, InfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded);
+	return Scm_QueryServiceStatusExImpl(hService, InfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded);
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_QueryServiceStatusImpl
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Scm_QueryServiceStatusImpl(
+    SC_HANDLE hService, SERVICE_STATUS *lpServiceStatus)
+{
+    SERVICE_STATUS_PROCESS status;
+    ULONG len = sizeof(SERVICE_STATUS_PROCESS);
+    BOOL ok = Scm_QueryServiceStatusExImpl(
+        hService, SC_STATUS_PROCESS_INFO, (BYTE *)&status, len, &len);
+    if (ok)
+        memcpy(lpServiceStatus, &status, sizeof(SERVICE_STATUS));
+    return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_HookQueryServiceStatus
+//---------------------------------------------------------------------------
+
+
+_FX ULONG_PTR Scm_HookQueryServiceStatus(VOID* hook)
+{
+	__my_QueryServiceStatus = hook;
+	return (ULONG_PTR)Scm_QueryServiceStatusImpl;
+}
+
+
+//---------------------------------------------------------------------------
 // Scm_QueryServiceStatus
 //---------------------------------------------------------------------------
 
 
 _FX BOOL Scm_QueryServiceStatus(
-    SC_HANDLE hService, SERVICE_STATUS *lpServiceStatus)
+	SC_HANDLE hService, SERVICE_STATUS *lpServiceStatus)
 {
-    SERVICE_STATUS_PROCESS status;
-    ULONG len = sizeof(SERVICE_STATUS_PROCESS);
-    BOOL ok = Scm_QueryServiceStatusEx(
-        hService, SC_STATUS_PROCESS_INFO, (BYTE *)&status, len, &len);
-    if (ok)
-        memcpy(lpServiceStatus, &status, sizeof(SERVICE_STATUS));
-    return ok;
+	if (__my_QueryServiceStatus)
+		return __my_QueryServiceStatus(hService, lpServiceStatus);
+	return Scm_QueryServiceStatusImpl(hService, lpServiceStatus);
 }
 
 
@@ -1229,19 +1283,19 @@ _FX BOOL Scm_EnumServicesStatusX(
     while (*names) {
 
         if (hService)
-            Scm_CloseServiceHandle(hService);
+            Scm_CloseServiceHandleImpl(hService);
 
         ServiceName = names;
         ServiceNameLen = wcslen(ServiceName) + 1;
         names += ServiceNameLen;
         ++idx;
 
-        hService = Scm_OpenServiceW(
+        hService = Scm_OpenServiceWImpl(
                         hSCManager, ServiceName, SERVICE_QUERY_STATUS);
         if (! hService)
             continue;
 
-        if (! Scm_QueryServiceStatusEx(
+        if (! Scm_QueryServiceStatusExImpl(
                 hService, SC_STATUS_PROCESS_INFO,
                 (BYTE *)&ss, sizeof(SERVICE_STATUS_PROCESS), &svclen))
             continue;
@@ -1339,7 +1393,7 @@ _FX BOOL Scm_EnumServicesStatusX(
     }
 
     if (hService)
-        Scm_CloseServiceHandle(hService);
+        Scm_CloseServiceHandleImpl(hService);
 
     Dll_Free(cfg);
 

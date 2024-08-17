@@ -207,13 +207,15 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Folder"));
 	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Move"));
 	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
-	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Run"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("EFence"));
+	ui.tabsGeneral->setTabIcon(5, CSandMan::GetIcon("Run"));
 
 	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
 	ui.tabsSecurity->setTabIcon(1, CSandMan::GetIcon("Fence"));
 	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Shield15"));
-	ui.tabsSecurity->setTabIcon(3, CSandMan::GetIcon("Shield12"));
+	ui.tabsSecurity->setTabIcon(3, CSandMan::GetIcon("Job"));
+	ui.tabsSecurity->setTabIcon(4, CSandMan::GetIcon("Shield12"));
 
 	ui.tabsForce->setCurrentIndex(0);
 	ui.tabsForce->setTabIcon(0, CSandMan::GetIcon("Force"));
@@ -368,6 +370,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblMigration, CSandMan::GetIcon("Move").pixmap(size,size));
 	AddIconToLabel(ui.lblDelete, CSandMan::GetIcon("Erase").pixmap(size,size));
 	AddIconToLabel(ui.lblRawDisk, CSandMan::GetIcon("Disk").pixmap(size,size));
+	AddIconToLabel(ui.lblJob, CSandMan::GetIcon("Job3").pixmap(size,size));
+	AddIconToLabel(ui.lblLimit, CSandMan::GetIcon("Job2").pixmap(size,size));
 	AddIconToLabel(ui.lblSecurity, CSandMan::GetIcon("Shield5").pixmap(size,size));
 	AddIconToLabel(ui.lblElevation, CSandMan::GetIcon("Shield9").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxProtection, CSandMan::GetIcon("BoxConfig").pixmap(size,size));
@@ -386,7 +390,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	//AddIconToLabel(ui.lblComRpc, CSandMan::GetIcon("Objects").pixmap(size,size));
 
 	AddIconToLabel(ui.lblPrivilege, CSandMan::GetIcon("Token").pixmap(size,size));
-	AddIconToLabel(ui.lblFence, CSandMan::GetIcon("BFance").pixmap(size,size));
 	AddIconToLabel(ui.lblToken, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblIsolation, CSandMan::GetIcon("Fence").pixmap(size,size));
 	AddIconToLabel(ui.lblDesktop, CSandMan::GetIcon("Monitor").pixmap(size,size));
@@ -461,9 +464,15 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	// Force
 	connect(ui.btnForceProg, SIGNAL(clicked(bool)), this, SLOT(OnForceProg()));
 	QMenu* pFileBtnMenu = new QMenu(ui.btnForceProg);
-	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnForceBrowse()));
+	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnForceBrowseProg()));
 	ui.btnForceProg->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnForceProg->setMenu(pFileBtnMenu);
+
+	connect(ui.btnForceChild, SIGNAL(clicked(bool)), this, SLOT(OnForceChild()));
+	pFileBtnMenu = new QMenu(ui.btnForceChild);
+	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnForceBrowseChild()));
+	ui.btnForceChild->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnForceChild->setMenu(pFileBtnMenu);
 	connect(ui.btnForceDir, SIGNAL(clicked(bool)), this, SLOT(OnForceDir()));
 	connect(ui.btnDelForce, SIGNAL(clicked(bool)), this, SLOT(OnDelForce()));
 	connect(ui.chkShowForceTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowForceTmpl()));
@@ -515,6 +524,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkStartBlockMsg, SIGNAL(clicked(bool)), this, SLOT(OnStartChanged()));
 	ui.treeStart->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeStart, -1, this));
 	connect(ui.treeStart, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnStartChanged(QTreeWidgetItem *, int)));
+	connect(ui.chkAlertBeforeStart, SIGNAL(clicked(bool)), this, SLOT(OnStartChanged()));
 	//
 
 	CreateNetwork();
@@ -628,8 +638,11 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if (iOptionTree == 2)
 		iOptionTree = iViewMode == 2 ? 1 : 0;
 
-	if (iOptionTree) 
+	if (iOptionTree) {
+		m_HoldChange = true;
 		OnSetTree();
+		m_HoldChange = false;
+	}
 	else {
 		//this->setMinimumHeight(490);
 		this->setMinimumHeight(390);
@@ -1170,25 +1183,6 @@ void COptionsWindow::UpdateCurrentTab()
 	{
 		ui.chkVmRead->setChecked(IsAccessEntrySet(eIPC, "", eReadOnly, "$:*"));
 	}
-	else if (m_pCurrentTab == ui.tabPrivileges || m_pCurrentTab == ui.tabSecurity)
-	{
-		if (IsAccessEntrySet(eWnd, "", eOpen, "*"))
-		{
-			if (!ui.chkNoSecurityIsolation->isChecked())
-			{
-				ui.chkAddToJob->setEnabled(false);
-				ui.chkAddToJob->setChecked(false);
-			}
-		}
-		else
-		{
-			if (!ui.chkNoSecurityIsolation->isChecked())
-			{
-				ui.chkAddToJob->setEnabled(true);
-				ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
-			}
-		}
-	}
 	else if (m_pCurrentTab == ui.tabStart || m_pCurrentTab == ui.tabForce)
 	{
 		if (IsAccessEntrySet(eIPC, "!<StartRunAccess>", eClosed, "*"))
@@ -1209,7 +1203,7 @@ void COptionsWindow::UpdateCurrentTab()
 	}
 	else if (m_pCurrentTab == ui.tabDNS || m_pCurrentTab == ui.tabNetProxy)
 	{
-		if (!m_pCurrentTab->isEnabled())
+		if (!m_HoldChange && !m_pCurrentTab->isEnabled())
 			theGUI->CheckCertificate(this, 2);
 	}
 	else if (m_pCurrentTab == ui.tabCOM) {

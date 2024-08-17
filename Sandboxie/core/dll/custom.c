@@ -1340,7 +1340,7 @@ _FX void Custom_ComServer(void)
 // NsiRpc_Init
 //---------------------------------------------------------------------------
 
-#include <objbase.h>
+//#include <objbase.h>
 
 typedef RPC_STATUS (*P_NsiRpcRegisterChangeNotification)(
     LPVOID  p1, LPVOID  p2, LPVOID  p3, LPVOID  p4, LPVOID  p5, LPVOID  p6, LPVOID  p7);

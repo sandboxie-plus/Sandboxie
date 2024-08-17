@@ -115,7 +115,7 @@ CSandMan* theGUI = NULL;
 extern QString g_PendingMessage;
 
 
-CSandMan::CSandMan(QWidget *parent)
+CSandMan::CSandMan(const QString& BoxDesktop, bool bAutoRun, QWidget *parent)
 	: QMainWindow(parent)
 {
 #if defined(Q_OS_WIN)
@@ -125,6 +125,8 @@ CSandMan::CSandMan(QWidget *parent)
 #endif
 
 	CArchive::Init();
+
+	m_BoxDesktop = BoxDesktop;
 
 	theGUI = this;
 
@@ -181,6 +183,7 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(StatusChanged()), this, SLOT(OnStatusChanged()));
 
 	connect(theAPI, SIGNAL(BoxAdded(const CSandBoxPtr&)), this, SLOT(OnBoxAdded(const CSandBoxPtr&)));
+	connect(theAPI, SIGNAL(BoxOpened(const CSandBoxPtr&)), this, SLOT(OnBoxOpened(const CSandBoxPtr&)));
 	connect(theAPI, SIGNAL(BoxClosed(const CSandBoxPtr&)), this, SLOT(OnBoxClosed(const CSandBoxPtr&)));
 	connect(theAPI, SIGNAL(BoxCleaned(CSandBoxPlus*)), this, SLOT(OnBoxCleaned(CSandBoxPlus*)));
 
@@ -256,7 +259,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_BoxColors[CSandBoxPlus::eOpen] = qRgb(255,255,255);
 	m_BoxColors[CSandBoxPlus::ePrivate] = qRgb(56,56,56);
 
-	CreateTrayIcon();
+	CreateTrayIcon(bAutoRun);
 
 	LoadState();
 
@@ -284,7 +287,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_uTimerID = startTimer(1000);
 
-	bool bAutoRun = QApplication::arguments().contains("-autorun");
 	if (!bAutoRun && g_PendingMessage.isEmpty())
 		SafeShow(this);
 
@@ -537,6 +539,8 @@ void CSandMan::CreateMenus(bool bAdvanced)
 			//m_pUpdateCore = NULL;
 	}
 
+		m_pDefaultDesktop = m_pMenuFile->addAction(CSandMan::GetIcon("Monitor"), tr("Return to Default Desktop"), this, SLOT(OnDefaultDesktop()));
+		if (m_BoxDesktop.isEmpty()) m_pDefaultDesktop->setEnabled(false);
 		m_pMenuFile->addSeparator();
 		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Shield9"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
@@ -694,6 +698,8 @@ void CSandMan::CreateOldMenus()
 				m_pSetupWizard = NULL;
 				//m_pUpdateCore = NULL;
 		}
+		m_pDefaultDesktop = m_pMenuFile->addAction(CSandMan::GetIcon("Monitor"), tr("Return to Default Desktop"), this, SLOT(OnDefaultDesktop()));
+		if (m_BoxDesktop.isEmpty()) m_pDefaultDesktop->setEnabled(false);
 		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Shield9"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
@@ -865,6 +871,8 @@ QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
 			ToolBarAction{ "Troubleshooting", m_pBoxAssistant },
 			ToolBarAction{ "CheckForUpdates", m_pUpdate },
 			ToolBarAction{ "About", m_pAbout },
+			ToolBarAction{ "", nullptr },        // separator
+			ToolBarAction{ "pApp", m_pDefaultDesktop },
 			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "RestartAsAdmin", m_pRestart },
 			ToolBarAction{ "Exit", m_pExit },
@@ -1300,23 +1308,34 @@ void CSandMan::CheckForUpdates(bool bManual)
 	m_pUpdater->CheckForUpdates(bManual);
 }
 
-#include "SandManTray.cpp"
+void CSandMan::OnDefaultDesktop()
+{
+	theAPI->SwitchToDesktop("Default");
+}
 
 void CSandMan::OnRestartAsAdmin() 
 {
 	theAPI->Disconnect();
+	Restart(true);
+	OnExit();
+}
+
+void CSandMan::Restart(bool AsAdmin)
+{
 	WCHAR buf[255] = { 0 };
 	GetModuleFileNameW(NULL, buf, 255);
 	SHELLEXECUTEINFO se;
 	memset(&se, 0, sizeof(SHELLEXECUTEINFO));
 	se.cbSize = sizeof(SHELLEXECUTEINFO);
-	se.lpVerb = L"runas";
+	if(AsAdmin)
+		se.lpVerb = L"runas";
 	se.lpFile = buf;
-	se.nShow = SW_HIDE;
+	se.nShow = SW_SHOWNORMAL;
 	se.fMask = 0;
 	ShellExecuteEx(&se);
-	OnExit();
 }
+
+#include "SandManTray.cpp"
 
 void CSandMan::OnExit()
 {
@@ -1353,7 +1372,17 @@ void CSandMan::closeEvent(QCloseEvent *e)
 
 	emit Closed();
 
-	if (IsFullyPortable() && theAPI->IsConnected())
+	if (!m_BoxDesktop.isEmpty())
+	{
+		auto pBoxEx = theAPI->GetBoxByName(m_BoxDesktop).objectCast<CSandBoxPlus>();
+		if (pBoxEx) pBoxEx->TerminateAll();
+		theAPI->SwitchToDesktop("Default");
+		if (!KillProcessByWnd("Shell_TrayWnd")) {
+			e->ignore();
+			return;
+		}
+	}
+	else if (IsFullyPortable() && theAPI->IsConnected())
 	{
 		int PortableStop = theConf->GetInt("Options/PortableStop", -1);
 		if (PortableStop == -1)
@@ -1763,14 +1792,24 @@ bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const 
 SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Command, CSbieAPI::EStartFlags Flags, const QString& WorkingDir, QProcess* pProcess)
 {
 	auto pBoxEx = theAPI->GetBoxByName(BoxName).objectCast<CSandBoxPlus>();
-	if (pBoxEx && pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty()) {
-
+	if (pBoxEx && pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty()) 
+	{
 		SB_STATUS Status = ImBoxMount(pBoxEx, true);
 		if (Status.IsError())
 			return Status;
 	}
 
-	return theAPI->RunStart(BoxName, Command, Flags, WorkingDir, pProcess);
+	auto Res = theAPI->RunStart(BoxName, Command, Flags, WorkingDir, pProcess);
+
+	if (!Res.IsError() && pBoxEx->GetBool("UseSandboxDesktop", false) && theConf->GetBool("Options/AutoDesktopSwitch", true)) 
+	{	
+		QTimer::singleShot(1000, this, [pBoxEx]() { 
+			theAPI->EnumBoxDesktops();
+			pBoxEx->SwitchToDesktop();
+		});
+	}
+
+	return Res;
 }
 
 SB_STATUS CSandMan::ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount)
@@ -2168,6 +2207,7 @@ finish:
 void CSandMan::UpdateProcesses()
 {
 	theAPI->UpdateProcesses(KeepTerminated() ? -1 : 1500, ShowAllSessions()); // keep for 1.5 sec
+	theAPI->EnumBoxDesktops();
 }
 
 void CSandMan::OnBoxAdded(const CSandBoxPtr& pBox)
@@ -2344,8 +2384,19 @@ void CSandMan::OnStartMenuChanged()
 	}
 }
 
+void CSandMan::OnBoxOpened(const CSandBoxPtr& pBox)
+{
+}
+
 void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 {
+	if (!m_BoxDesktop.isEmpty())
+	{
+		if (!theAPI->IsCurrentDesktopActive())
+			OnExit();
+		return;
+	}
+
 	foreach(const QString & Value, pBox->GetTextList("OnBoxTerminate", true, false, true)) {
 		QString Value2 = pBox->Expand(Value);
 		CSbieProgressPtr pProgress = CSbieUtils::RunCommand(Value2, true);

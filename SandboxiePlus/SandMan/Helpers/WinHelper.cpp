@@ -170,3 +170,26 @@ QString GetProductVersion(const QString &filePath)
     }
     return QString();
 }
+
+bool KillProcessById(DWORD processId) 
+{
+    bool ok = false;
+    HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, processId);
+    if (hProcess && hProcess != INVALID_HANDLE_VALUE) {
+        if (TerminateProcess(hProcess, 0))
+            ok = true;
+        CloseHandle(hProcess);
+    }
+    return ok;
+}
+
+bool KillProcessByWnd(const QString& WndName)
+{
+    HWND hwnd = FindWindowW(WndName.toStdWString().c_str(), 0);
+    if (hwnd) {
+        DWORD processId;
+        if (GetWindowThreadProcessId(hwnd, &processId))
+            return KillProcessById(processId);
+    }
+    return false;
+}

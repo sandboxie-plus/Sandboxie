@@ -1312,15 +1312,18 @@
                    <height>5</height>
                   </size>
                  </property>
-                </spacer>
+                </widget>
                </item>
                <item row="5" column="2">
                 <widget class="QLabel" name="label_61">
                  <property name="text">
                   <string>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</string>
                  </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
+                 <property name="toolTip">
+                  <string>Protect the sandbox integrity itself</string>
+                 </property>
+                 <property name="text">
+                  <string>Desktop Isolation</string>
                  </property>
                 </widget>
                </item>
@@ -1345,7 +1348,6 @@
                 <widget class="QLabel" name="lblIsolation">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1378,6 +1380,13 @@
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkSbieDesktop">
+                 <property name="text">
+                  <string>Run Processes on an own Sandboxed Desktop</string>
                  </property>
                 </widget>
                </item>

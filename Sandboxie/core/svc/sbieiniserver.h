@@ -62,6 +62,8 @@ protected:
 
     bool SetUserSettingsSectionName(HANDLE hToken);
 
+    static bool SetUserSettingsSectionName(HANDLE hToken, WCHAR* m_username, WCHAR* m_sectionname);
+
     bool UserCanEdit(HANDLE hToken);
 
 #ifdef NEW_INI_MODE
@@ -107,6 +109,9 @@ protected:
 
     MSG_HEADER *RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
+public:
+
+    static NTSTATUS RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const WCHAR* CtrlCmd = NULL, size_t CtrlCmdLen = 0);
 
 protected:
 
@@ -122,7 +127,6 @@ protected:
     WCHAR m_line[1500];
     //BOOLEAN m_insertbom;
 #endif
-    BOOLEAN m_admin;
     HANDLE m_hLockFile;
     ULONG m_session_id;
 

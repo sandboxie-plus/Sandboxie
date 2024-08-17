@@ -140,6 +140,13 @@ public:
 	virtual SB_RESULT(QVariantMap) ImBoxQuery(const QString& Root = QString());
 	//virtual SB_STATUS		ImBoxUpdate(  // todo
 
+	// Desktop Manager
+	typedef QMultiMap<QString, QString> TDesktopMap;
+	virtual SB_RESULT(TDesktopMap) EnumBoxDesktops();
+	virtual SB_STATUS		SwitchToDesktop(const QString& Desktop);
+	static QString			GetCurrentDesktopName();
+	static bool				IsCurrentDesktopActive();
+
 	// Monitor
 	virtual SB_STATUS		EnableMonitor(bool Enable);
 	virtual bool			IsMonitoring();

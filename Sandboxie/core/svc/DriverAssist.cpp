@@ -35,6 +35,7 @@
 #include "core/dll/sbiedll.h"
 #include "core/drv/api_defs.h"
 #include "sbieiniserver.h"
+#include "BoxManager.h"
 #include "MountManager.h"
 
 //---------------------------------------------------------------------------
@@ -616,6 +617,12 @@ void DriverAssist::HiveMounted(void *_msg)
     }
 
     //
+    // notify the manager that this boxed has started
+    //
+
+    //BoxManager::GetInstance()->BoxOpened(reg_root_path, msg->session_id);
+
+    //
     // lock box root if present
     //
 
@@ -756,6 +763,12 @@ void DriverAssist::UnmountHive(void *_msg)
         }
 
         if (rc == 0) {
+
+            //
+            // notify the manager that this boxed is finished
+            //
+            
+            //BoxManager::GetInstance()->BoxClosed(root_path, msg->session_id);
 
             //
             // unmount box container if present

@@ -2626,6 +2626,84 @@ SB_RESULT(QVariantMap) CSbieAPI::ImBoxQuery(const QString& Root)
 	return CSbieResult<QVariantMap>(Info);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Desktop Manager
+//
+
+BOOL CALLBACK CSbieAPI__EnumDesktopsProc(LPWSTR lpszDesktop, LPARAM lParam) 
+{
+	CSbieAPI::TDesktopMap* pDesktops = (CSbieAPI::TDesktopMap*)lParam;
+	QString Name = QString::fromWCharArray(lpszDesktop); // Sandboxie_[BoxName]_Session_[Num]_Desktop
+	QStringList Names = Name.split("_");
+	if (Names.count() > 3 && Names[0] == "Sandboxie" && Names[2] == "Session")
+		pDesktops->insert(Names[1].toLower(), Name);
+    return TRUE;
+}
+
+SB_RESULT(CSbieAPI::TDesktopMap) CSbieAPI::EnumBoxDesktops()
+{
+	TDesktopMap Desktops;
+
+	HWINSTA hWinSta = GetProcessWindowStation();
+    if (hWinSta == NULL)
+        return SB_ERR(STATUS_UNSUCCESSFUL);
+
+    // Enumerate all desktops associated with the current window station
+    if (!EnumDesktopsW(hWinSta, CSbieAPI__EnumDesktopsProc, (LPARAM)&Desktops))
+        return SB_ERR(STATUS_UNSUCCESSFUL);
+
+	foreach(const CSandBoxPtr & pBox, m_SandBoxes)
+		pBox->m_Desktop = Desktops.value(pBox->m_Name.toLower());
+
+	return CSbieResult<TDesktopMap>(Desktops);
+}
+
+SB_STATUS CSbieAPI::SwitchToDesktop(const QString& Desktop)
+{
+	BOOL ok = FALSE;
+
+	HDESK hDesktop = OpenDesktop(Desktop.toStdWString().c_str(), 0, FALSE, DESKTOP_SWITCHDESKTOP);
+	if (hDesktop != NULL) 
+	{
+		ok = SwitchDesktop(hDesktop);
+
+		CloseDesktop(hDesktop);
+	}
+
+	if(!ok)
+		return SB_ERR(STATUS_UNSUCCESSFUL);
+	return SB_OK;
+}
+
+QString CSbieAPI__GetDesktopName(HDESK hDesktop)
+{
+    wchar_t desktopName[MAX_PATH];
+	DWORD neededLength = sizeof(desktopName);
+    if (!GetUserObjectInformationW(hDesktop, UOI_NAME, desktopName, neededLength, &neededLength))
+        return QString();
+
+	return QString::fromWCharArray(desktopName);
+}
+
+QString CSbieAPI::GetCurrentDesktopName()
+{
+    HDESK hDesktop = GetThreadDesktop(GetCurrentThreadId());
+    if (hDesktop == NULL)
+		return QString();
+	return CSbieAPI__GetDesktopName(hDesktop);
+}
+
+bool CSbieAPI::IsCurrentDesktopActive()
+{
+	QString CurrentDesktop = CSbieAPI::GetCurrentDesktopName();
+	QString ActiveDesktop;
+	HDESK hInputDesktop = OpenInputDesktop(0, FALSE, DESKTOP_READOBJECTS | DESKTOP_SWITCHDESKTOP);
+	if (hInputDesktop) {
+		ActiveDesktop = CSbieAPI__GetDesktopName(hInputDesktop);
+		CloseDesktop(hInputDesktop);
+	}
+	return CurrentDesktop.compare(ActiveDesktop, Qt::CaseInsensitive) == 0;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Monitor

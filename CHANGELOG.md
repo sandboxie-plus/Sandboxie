@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.14.7 / 5.69.7] - 2024-0x-xx
+
+### Added
+- added "RandomRegUID"(bool) which could modify Windows Product Id in the registry to a rand value-
+- added "HideDiskSerialNumber"(bool) return random value when applications tries to get disk serial number
+
+
 
 ## [1.14.6 / 5.69.6] - 2024-07-30
 

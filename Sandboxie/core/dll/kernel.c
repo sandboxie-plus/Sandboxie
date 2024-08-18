@@ -69,16 +69,7 @@ typedef LCID (*P_GetSystemDefaultLCID)();
 
 typedef LANGID (*P_GetSystemDefaultLangID)();
 
-typedef BOOL (*P_GetVolumeInformationByHandleW)(
-	            HANDLE  hFile,
-	 LPWSTR  lpVolumeNameBuffer,
-	            DWORD   nVolumeNameSize,
-	 LPDWORD lpVolumeSerialNumber,
-	 LPDWORD lpMaximumComponentLength,
-	 LPDWORD lpFileSystemFlags,
-	 LPWSTR  lpFileSystemNameBuffer,
-	            DWORD   nFileSystemNameSize
-);
+typedef BOOL (*P_GetVolumeInformationByHandleW)(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
 
 //typedef int (*P_GetLocaleInfoEx)(LPCWSTR lpLocaleName, LCTYPE LCType, LPWSTR lpLCData, int cchData);
 
@@ -160,16 +151,8 @@ static LCID Kernel_GetSystemDefaultLCID();
 
 static LANGID Kernel_GetSystemDefaultLangID();
 
-static BOOL Kernel_GetVolumeInformationByHandleW(
-	HANDLE  hFile,
-	LPWSTR  lpVolumeNameBuffer,
-	DWORD   nVolumeNameSize,
-	LPDWORD lpVolumeSerialNumber,
-	LPDWORD lpMaximumComponentLength,
-	LPDWORD lpFileSystemFlags,
-	LPWSTR  lpFileSystemNameBuffer,
-	DWORD   nFileSystemNameSize
-	);
+static BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber, LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
+	
 //---------------------------------------------------------------------------
 // Kernel_Init
 //---------------------------------------------------------------------------
@@ -267,8 +250,9 @@ _FX BOOLEAN Kernel_Init()
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLCID);
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLangID);
 	}
-	if (SbieApi_QueryConfBool(NULL, L"HideDiskSerialNumber", FALSE))
-	{
+
+	if (SbieApi_QueryConfBool(NULL, L"HideDiskSerialNumber", FALSE)) {
+
 		void* GetVolumeInformationByHandleW = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetVolumeInformationByHandleW");
 		if (GetVolumeInformationByHandleW) {
 			SBIEDLL_HOOK(Kernel_, GetVolumeInformationByHandleW);
@@ -517,33 +501,28 @@ _FX LANGID Kernel_GetSystemDefaultLangID()
 }
 
 
+//----------------------------------------------------------------------------
+//Kernel_GetVolumeInformationByHandleW
+//----------------------------------------------------------------------------
+
 static unsigned long Kernel_seed = 1;
+
 int Kernel_rand(void)
 {
 	Kernel_seed = (Kernel_seed * 214013L
 		+ 2531011L) >> 16;
 	return((unsigned)Kernel_seed & 0x7fff);
 }
-//----------------------------------------------------------------------------
-//Kernel_GetVolumeInformationByHandleW
-//----------------------------------------------------------------------------
-_FX BOOL Kernel_GetVolumeInformationByHandleW(
-	HANDLE  hFile,
-	LPWSTR  lpVolumeNameBuffer,
-	DWORD   nVolumeNameSize,
-	LPDWORD lpVolumeSerialNumber,
-	LPDWORD lpMaximumComponentLength,
-	LPDWORD lpFileSystemFlags,
-	LPWSTR  lpFileSystemNameBuffer,
-	DWORD   nFileSystemNameSize
-) {
+
+_FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize) 
+{
+	// todo remember returned values and dont return a new rand each time
+
 	DWORD ourSerialNumber = 0;
 	BOOL rtn = __sys_GetVolumeInformationByHandleW(hFile, lpVolumeNameBuffer, nVolumeNameSize, &ourSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
-	if (lpVolumeSerialNumber == NULL)
-		return rtn;
-	else {
+	if (lpVolumeSerialNumber != NULL) {
 		Kernel_seed = __sys_GetTickCount();
-		*lpVolumeSerialNumber = Kernel_rand()%0x10000;
-		return rtn;
+		*lpVolumeSerialNumber = Kernel_rand() % 0x10000;
 	}
+	return rtn;
 }

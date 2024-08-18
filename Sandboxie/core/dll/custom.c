@@ -1536,6 +1536,12 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
     NtClose(hOfficeKey);
     return TRUE;
 }
+
+
+//---------------------------------------------------------------------------
+// Custom_ProductID
+//---------------------------------------------------------------------------
+
 /*static wchar_t GetCharFromInt(int a) {
 	switch (a) {
 	case 0:
@@ -1571,6 +1577,7 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
 	}
 	return 0;
 }
+
 static int GetIntLen(DWORD n) {
 	int count = 0;
 	while (n != 0)
@@ -1580,13 +1587,16 @@ static int GetIntLen(DWORD n) {
 	}
 	return count;
 }*/
+
 static unsigned long seed = 1;
+
 int my_rand(void)
 {
 	seed = (seed * 214013L
 		+ 2531011L) >> 16;
 	return((unsigned)seed & 0x7fff);
 }
+
 /*char* my_itoa(int num, char* str, int radix)
 {
 	char index[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -1626,6 +1636,7 @@ int my_rand(void)
 	return str;
 
 }*/
+
 wchar_t* GuidToString(const GUID guid)
 {
 	static wchar_t buf[64] = {0};
@@ -1637,7 +1648,8 @@ wchar_t* GuidToString(const GUID guid)
 	return buf;
 }
 
-_FX BOOLEAN  Custom_ProductID(void) {
+_FX BOOLEAN  Custom_ProductID(void) 
+{
 	if (SbieApi_QueryConfBool(NULL, L"RandomRegUID", FALSE)) {
 		NTSTATUS status;
 		UNICODE_STRING uni;
@@ -1735,6 +1747,7 @@ _FX BOOLEAN  Custom_ProductID(void) {
 	}
 	return TRUE;
 }
+
 #ifndef _M_ARM64
 
 //---------------------------------------------------------------------------

@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "HideDiskSerialNumber"(bool) return random value when applications tries to get disk serial number
 
 
+
 ## [1.14.6 / 5.69.6] - 2024-07-30
 
 ### Added
@@ -18,7 +19,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Windows 7 caused by the new CustomLCID option [#4117](https://github.com/sandboxie-plus/Sandboxie/issues/4117)
 - fixed Settings Window issue with non-advanced certificates introduced in 1.14.0
 - fixed issue with API_PROCESS_EXEMPTION_CONTROL
-
 
 
 

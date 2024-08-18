@@ -1348,7 +1348,7 @@ void ComServer::RunSlave(const WCHAR *cmdline)
     // locate IPC objects set up by the parent process SbieSvc
     //
 
-    if (wcslen(cmdline) > 100)
+    if (wcslen(cmdline) > 128)
         return;
 
     if (wcsstr(cmdline, SANDBOXIE L"_ComProxy_ComServer:")) {
@@ -1365,7 +1365,7 @@ void ComServer::RunSlave(const WCHAR *cmdline)
         return;
     }
 
-    WCHAR objname[192];
+    WCHAR objname[256];
     wcscpy(objname, _Global);
     wcscat(objname, cmdline);
     WCHAR *colon = wcsrchr(objname, L':');

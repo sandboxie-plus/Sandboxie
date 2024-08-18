@@ -58,7 +58,7 @@ struct _PATTERN {
     // a value denoting the match level for the process
     ULONG level;
 
-    // optional auxyliary data to be associated with this pattern
+    // optional auxiliary data to be associated with this pattern
     PVOID aux;
 
     // array of pointers to constant parts.  the actual number of

@@ -954,6 +954,10 @@ NoTrendMicro:
 
 Upgrade:
 
+    ; Delete obsolete files
+    Delete "$INSTDIR\${SBIEDRV_SYS}.rc4"
+    Delete "$INSTDIR\${SBIEDRV_SYS}.w10"
+    Delete "$INSTDIR\${SBIEINI_EXE}.sig"
     Call DeleteProductKey
     Call DeleteSystemKeys
     Call DeleteShortCuts
@@ -1141,7 +1145,7 @@ WriteOk:
 SkipCopyInstaller:
 
     ;
-    ; Delete old files
+    ; Delete obsolete files
     ;
 
     Delete "$DESKTOP\${PRODUCT_NAME} Quick Launch.lnk"
@@ -1180,8 +1184,9 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${SBIEMSG_DLL}"
 
     Delete "$INSTDIR\${SBIEDRV_SYS}"
-    Delete "$INSTDIR\${SBIEDRV_SYS}.rc4" ; leftover
-    Delete "$INSTDIR\${SBIEDRV_SYS}.w10" ; leftover
+    ; Delete obsolete files
+    Delete "$INSTDIR\${SBIEDRV_SYS}.rc4"
+    Delete "$INSTDIR\${SBIEDRV_SYS}.w10"
 
     Delete "$INSTDIR\KmdUtil.exe"
     Delete "$INSTDIR\UpdUtil.exe"
@@ -1210,7 +1215,8 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\Manifest2.txt"
 
     Delete "$INSTDIR\${SBIEINI_EXE}"
-    Delete "$INSTDIR\${SBIEINI_EXE}.sig" ; leftover
+    ; Delete obsolete file
+    Delete "$INSTDIR\${SBIEINI_EXE}.sig"
 
     Delete "$INSTDIR\whatsnew.html"
 

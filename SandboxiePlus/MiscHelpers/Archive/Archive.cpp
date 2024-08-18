@@ -216,7 +216,7 @@ bool CArchive::Close()
 	return false;
 }
 
-bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, const SCompressParams* Params)
+bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, const SCompressParams* Params, QMap<int, quint32> *AttribList)
 {
 	if(!theArc.IsOperational())
 	{
@@ -281,7 +281,7 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, const SComp
 	{
 		Files.insert(ArcIndex, new CArchiveIO(FileList->value(ArcIndex), QIODevice::NotOpen, bDelete));
 		FileProperty(ArcIndex, "Size", FileList->value(ArcIndex)->size());
-		FileProperty(ArcIndex, "Attrib", 32);
+		FileProperty(ArcIndex, "Attrib", AttribList ? AttribList->value(ArcIndex, 32) : 32); // FILE_ATTRIBUTE_ARCHIVE
 	}
 
 	//TRACE(L"%S Archive %S Opened for update", QS2CS(theArc.GetArchiveName(Info.FormatIndex)), QS2CS(m_ArchivePath));

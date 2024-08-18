@@ -34,6 +34,9 @@ typedef struct _IPC_DYNAMIC_PORT {
 
     WCHAR       wstrPortId[DYNAMIC_PORT_ID_CHARS];
     WCHAR       wstrPortName[DYNAMIC_PORT_NAME_CHARS];
+
+    ULONG       FilterCount;
+    UCHAR       FilterIDs[0];
 } IPC_DYNAMIC_PORT;
 
 typedef struct _IPC_DYNAMIC_PORTS {

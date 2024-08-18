@@ -41,6 +41,8 @@ public:
 
 public slots:
 
+    void            Start(const QString& Command, bool bElevale);
+
     void            ApplyChanges(bool bApply);
 
 protected:
@@ -127,6 +129,10 @@ class JSBoxObject : public JBoxObject
 public:
     JSBoxObject(CBoxObject* pObject, CBoxEngine* pEngine)
         : JBoxObject(pObject, pEngine) {}
+
+    Q_INVOKABLE void start(const QString& Command = QString(), bool bElevale = false) {
+        QMetaObject::invokeMethod(m_pObject, "Start", Qt::BlockingQueuedConnection, Q_ARG(QString, Command), Q_ARG(bool, bElevale));
+    }
 
     Q_INVOKABLE void applyChanges(bool bApply = true) {
         QMetaObject::invokeMethod(m_pObject, "ApplyChanges", Qt::BlockingQueuedConnection, Q_ARG(bool, bApply));

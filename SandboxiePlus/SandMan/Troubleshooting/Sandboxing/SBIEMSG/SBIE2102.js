@@ -1,7 +1,7 @@
 /*
 *	group: other
 *	class: sandboxing
-* name: SBIE2102 File is too large to copy into sandbox
+* name: SBIE2102: File is too large to copy into sandbox
 * description: File is too large to copy into sandbox
 *
 */

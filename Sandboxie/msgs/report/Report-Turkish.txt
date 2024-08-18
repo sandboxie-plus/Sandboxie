@@ -2,12 +2,5 @@
 * Missing Messages in Text-Turkish-1055.txt
 *==========
 
-3198;txt;01
-Do you want to start a new program in the %2 sandbox?
-You received this message because you set AlertBeforeStart=y.
-.
-
-3199;txt;01
-This startup request does not appear to be invoked by the SANDBOXIE component. Are you sure you want to run it? If this is your action, you can ignore it and choose yes.
-.
+There are no missing messages.
 

@@ -555,6 +555,30 @@ _FX PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql)
 
 
 //---------------------------------------------------------------------------
+// Process_Find_ByHandle
+//---------------------------------------------------------------------------
+
+
+_FX PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql)
+{
+    NTSTATUS Status;
+    PEPROCESS ProcessObject = NULL;
+    PROCESS* Process = NULL;
+    
+    Status = ObReferenceObjectByHandle(Handle, PROCESS_QUERY_INFORMATION, *PsProcessType, UserMode, (PVOID*)&ProcessObject, NULL);
+    if (NT_SUCCESS(Status)) {
+
+        Process = Process_Find(PsGetProcessId(ProcessObject), out_irql);
+
+        // Dereference the process object
+        ObDereferenceObject(ProcessObject);
+    }
+
+    return Process;
+}
+
+
+//---------------------------------------------------------------------------
 // Process_CreateTerminated
 //---------------------------------------------------------------------------
 

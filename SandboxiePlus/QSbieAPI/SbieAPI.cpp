@@ -1312,7 +1312,7 @@ QString CSbieAPI::SbieIniGet2(const QString& Section, const QString& Setting, qu
 
 SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 {
-	if (BoxName.length() > (BOXNAME_COUNT - 2))
+	if (BoxName.length() > (BOXNAME_COUNT - 2) || BoxName.isEmpty())
 		return SB_ERR(SB_NameLenLimit);
 
 	/* invalid file name characters on windows

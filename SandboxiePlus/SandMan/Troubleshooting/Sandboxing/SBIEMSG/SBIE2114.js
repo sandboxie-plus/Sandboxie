@@ -1,7 +1,7 @@
 /*
 *	group: other
 *	class: sandboxing
-* name: SBIE2114 File is too large to copy into sandbox, denying access
+* name: SBIE2114: File is too large to copy into sandbox, denying access
 * description: File is too large to copy into sandbox, denying access
 *
 */

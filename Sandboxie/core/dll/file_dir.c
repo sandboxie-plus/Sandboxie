@@ -3172,44 +3172,48 @@ WCHAR* File_CanonizePath(const wchar_t* absolute_path, ULONG abs_path_len, const
     ULONG i, j;
     
     while(absolute_path[abs_path_len-1] == L'\\')
-	    abs_path_len--;
+        abs_path_len--;
 
-	WCHAR* result = Dll_Alloc((abs_path_len + rel_path_len + 1) * sizeof(wchar_t));
+    WCHAR* result = (WCHAR*)Dll_Alloc((abs_path_len + rel_path_len + 1) * sizeof(wchar_t));
     if (!result) return NULL;
     wcsncpy(result, absolute_path, abs_path_len);
     result[abs_path_len] = 0;
 
-	for (i = 0; i < rel_path_len; ) {
+    for (i = 0; i < rel_path_len; ) {
 
-		if (relative_path[i] == L'.' && relative_path[i + 1] == L'.' && (relative_path[i + 2] == L'\\' || relative_path[i + 2] == L'\0')) {
+        if (relative_path[i] == L'.' && relative_path[i + 1] == L'.' && (relative_path[i + 2] == L'\\' || relative_path[i + 2] == L'\0')) {
 
-			for (j = abs_path_len - 1; j >= 0 && result[j] != L'\\'; --j)
-				result[j] = L'\0';
-			if (j >= 0)
-				result[j] = L'\0';
+            for (j = abs_path_len - 1; j >= 0 && result[j] != L'\\'; --j)
+                result[j] = L'\0';
+            if (j >= 0)
+                result[j] = L'\0';
 
-			abs_path_len = j;
+            abs_path_len = j;
 
-			i += 3;
+            i += 3;
 
-		} else if (relative_path[i] == L'.') {
+        } else if (relative_path[i] == L'.' && (relative_path[i + 1] == L'\\' || relative_path[i + 1] == L'\0')) {
 
-			i += 2;
+            i += 2;
 
-		} else {
+        } else {
 
             for (j = i; j < rel_path_len && relative_path[j] != L'\\' && relative_path[j] != L'\0'; ++j)
                 ;
 
-            result[abs_path_len] = L'\\';
-            wcsncpy(result + abs_path_len + 1, &relative_path[i], j - i);
-            result[abs_path_len + j - i + 1] = L'\0';
+            if (abs_path_len > 0 && result[abs_path_len - 1] != L'\\') {
+                result[abs_path_len] = L'\\';
+                abs_path_len++;
+            }
+            
+            wcsncpy(result + abs_path_len, &relative_path[i], j - i);
+            result[abs_path_len + j - i] = L'\0';
 
-            abs_path_len += j - i + 1;
+            abs_path_len += j - i;
 
-            i = j + 1;
-		}
-	}
+            i = j + (relative_path[j] == L'\\' ? 1 : 0);
+        }
+    }
 
     return result;
 }

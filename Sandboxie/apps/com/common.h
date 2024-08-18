@@ -64,15 +64,21 @@ static BOOLEAN IsWindows81 = FALSE;
         hook_success = FALSE;                                       \
     }
 
+//#define HOOK_WIN32_SCM(func) {                                      \
+//    const char *FuncName = #func;                                   \
+//    void *SourceFunc = (void *)func;                                \
+//    if (SecHost)                                                    \
+//        SourceFunc = GetProcAddress(SecHost, FuncName);             \
+//    if (! SourceFunc)                                               \
+//        SourceFunc = (void *)func;                                  \
+//    __sys_##func =                                                  \
+//        (ULONG_PTR)SbieDll_Hook(FuncName, SourceFunc, my_##func, SourceFunc);   \
+//    if (! __sys_##func)                                             \
+//        hook_success = FALSE;                                       \
+//    }
+
 #define HOOK_WIN32_SCM(func) {                                      \
-    const char *FuncName = #func;                                   \
-    void *SourceFunc = (void *)func;                                \
-    if (SecHost)                                                    \
-        SourceFunc = GetProcAddress(SecHost, FuncName);             \
-    if (! SourceFunc)                                               \
-        SourceFunc = (void *)func;                                  \
-    __sys_##func =                                                  \
-        (ULONG_PTR)SbieDll_Hook(FuncName, SourceFunc, my_##func, SourceFunc);   \
+    __sys_##func = Scm_Hook##func(my_##func);                       \
     if (! __sys_##func)                                             \
         hook_success = FALSE;                                       \
     }

@@ -194,7 +194,7 @@ int __stdcall WinMain(
     if (!myData) {
         return FALSE;
     }
-    HOOK_WIN32(SetServiceStatus);
+	__sys_SetServiceStatus = Scm_HookSetServiceStatus(my_SetServiceStatus);
     myData->tid = 0;
     myData->initFlag = 0;
 

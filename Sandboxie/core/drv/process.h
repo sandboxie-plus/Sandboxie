@@ -239,6 +239,7 @@ PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql);
 
 PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql);
 
+PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql);
 
 // Start supervising a new process
 

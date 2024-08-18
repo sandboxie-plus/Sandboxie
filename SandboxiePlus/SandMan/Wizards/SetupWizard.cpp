@@ -131,6 +131,12 @@ bool CSetupWizard::ShowWizard(int iOldLevel)
     //if (wizard.field("isUpdate").toBool())
     //    theConf->SetValue("Options/CheckForUpdates", 1);
 
+    if (iOldLevel < SETUP_LVL_1) 
+    {
+        if (wizard.field("editAdminOnly").toBool())
+            theAPI->GetGlobalSettings()->SetText("EditAdminOnly", "y");
+    }
+
     theConf->SetValue("Options/WizardLevel", SETUP_LVL_CURRENT);
 
     theGUI->UpdateSettings(true);
@@ -518,7 +524,23 @@ CShellPage::CShellPage(QWidget *parent)
     layout->addWidget(m_pBrowserIcon);
     registerField("useBrowserIcon", m_pBrowserIcon);
 
+	m_pEditOnlyAdmin = new QCheckBox(tr("Only applications with admin rights can change configuration"));
+	m_pEditOnlyAdmin->setChecked(false);
+	connect(m_pEditOnlyAdmin,SIGNAL(clicked(bool)), this, SLOT(OnEditOnlyAdmin()));
+	layout->addWidget(m_pEditOnlyAdmin);
+	registerField("editAdminOnly", m_pEditOnlyAdmin);
+
     setLayout(layout);
+}
+
+void CShellPage::OnEditOnlyAdmin() 
+{
+    if (m_pEditOnlyAdmin->isChecked()) {
+        if (QMessageBox::warning(this, tr("Warning"), tr("Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. "
+          "To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking 'Restart as Admin' in the 'Sandbox' menu in the main window."),
+          QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Cancel)
+            m_pEditOnlyAdmin->setChecked(false);
+    }
 }
 
 int CShellPage::nextId() const

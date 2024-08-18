@@ -1653,14 +1653,15 @@ _FX BOOL Proc_AlternateCreateProcess(
     void *lpCurrentDirectory, LPPROCESS_INFORMATION lpProcessInformation,
     BOOL *ReturnValue)
 {
-    //if (SbieApi_QueryConfBool(NULL, L"BlockSoftwareUpdaters", TRUE))
-    if (Proc_IsSoftwareUpdateW(lpApplicationName ? lpApplicationName : lpCommandLine)) {
+    if (SbieApi_QueryConfBool(NULL, L"BlockSoftwareUpdaters", TRUE)) {
+        if (Proc_IsSoftwareUpdateW(lpApplicationName ? lpApplicationName : lpCommandLine)) {
 
-        SetLastError(ERROR_ACCESS_DENIED);
-        *ReturnValue = FALSE;
+            SetLastError(ERROR_ACCESS_DENIED);
+            *ReturnValue = FALSE;
 
-        SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of an updater");
-        return TRUE;        // exit CreateProcessInternal
+            SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of an updater");
+            return TRUE;        // exit CreateProcessInternal
+        }
     }
 
 #ifndef _WIN64

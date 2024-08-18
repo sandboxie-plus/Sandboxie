@@ -9,6 +9,7 @@
 
 "Yes": "はい",
 "No": "いいえ",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nこの必須プリセットは、有効なサポーター証明書が必要なことに注意してください！",
 
 "App compatibility checker": "アプリケーション互換性チェッカー",
 "This script check which app compatibility templates needs to be enabled": "このスクリプトは、どのアプリ互換性テンプレートを有効にする必要があるかをチェックします",
@@ -30,7 +31,15 @@
 "Install legacy shell extensions": "従来のシェル拡張をインストール",
 "Select which shell options should be reinstalled": "再インストールするシェルオプションを選択してください",
 
+"Low FPS in sandboxed games": "Low FPS in sandboxed games",
+"This procedure will optimize the box settings for gaming": "This procedure will optimize the box settings for gaming",
+"Select which box to optimize.": "Select which box to optimize.",
+"To apply recommended settings press NEXT. \n": "To apply recommended settings press NEXT. \n",
+"The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.": "The options has been applied please tryout your game in %1 and indicate if the issue has been resolved.",
+"FPS optimization not successful": "FPS optimization not successful",
+
 "Failed to install application into a sandbox": "アプリケーションをサンドボックス内にインストールできない",
+"It helps troubleshoot issues related to installing applications in the sandbox": "It helps troubleshoot issues related to installing applications in the sandbox",
 "Enter Installer Path": "インストーラのパスを入力",
 "Select a sandbox to install into": "インストールするサンドボックスを選択",
 "This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "このボックスでは DropAdminRights が有効なため、インストーラーの実行が妨げられています。この制限を無効にしますか？無効にすると、セキュリティ レベルが低下します。",
@@ -38,36 +47,68 @@
 "Enable FakeAdminRights": "FakeAdminRights オプションを有効にする",
 "running installer, pid: %1 press NEXT once it finishes to continue": "インストーラを実行中 (pid: %1)。 終了したら「次へ」を押下して続行してください。",
 "Was the issue resolved?": "問題は解決しましたか？",
+"no mitigation worked": "no mitigation worked",
 
 "Webcam or Sound does not work when sandboxed": "サンドボックス化するとウェブカメラまたはサウンドが動作しない",
+"It helps troubleshoot webcam and audio issues in the sandbox": "It helps troubleshoot webcam and audio issues in the sandbox",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Windows 11 で、ウェブカメラを有効にするためには、隔離レベルを下げる必要があります。続行するには、「次へ」を押下して変更するサンドボックスを選択してください。\n",
-"\nPlease note that this required preset works only with a valid supporter certificate!": "\nこの必須プリセットは、有効なサポーター証明書が必要なことに注意してください！",
 "Select which box to turn into a reduced isolation app compartment box.": "どのボックスを隔離レベルを低減したアプリコンパートメントボックスに変更するか選択してください。",
 "The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "緩和策が適用されました。%1 のウェブカメラを試して問題が解決したかどうかを示してください。",
+"Webcam mitigation not successful": "Webcam mitigation not successful",
 
 "Select affected sandbox": "影響を受けるサンドボックスを選択",
 "Enter Process Name": "プロセス名を入力",
 
+"SBIE1307: Program cannot access the Internet due to restrictions": "SBIE1307: Program cannot access the Internet due to restrictions",
+"Program cannot access the Internet due to restrictions": "Program cannot access the Internet due to restrictions",
 "Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "インターネットアクセス制限は、プログラムが実行されているサンドボックスに対して有効です。プログラムはインターネットへのアクセスを禁止されています。",
 
+"SBIE1308: Program cannot start due to restrictions": "SBIE1308: Program cannot start due to restrictions",
+"Program cannot start due to restrictions": "Program cannot start due to restrictions",
 "Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "開始／実行 制限は、プログラムが実行されているサンドボックスに対して有効です。プログラムの開始または実行は禁止されています。",
 
+"SBIE2102: File is too large to copy into sandbox": "SBIE2102: File is too large to copy into sandbox",
+"File is too large to copy into sandbox": "File is too large to copy into sandbox",
+
+"SBIE2113: File is too large to copy into sandbox, creating empty file": "SBIE2113: File is too large to copy into sandbox, creating empty file",
+"File is too large to copy into sandbox, creating empty file": "File is too large to copy into sandbox, creating empty file",
+
+"SBIE2114: File is too large to copy into sandbox, denying access": "SBIE2114: File is too large to copy into sandbox, denying access",
+"File is too large to copy into sandbox, denying access": "File is too large to copy into sandbox, denying access",
+
+"SBIE2115: File is too large to copy into sandbox, opening in read only": "SBIE2115: File is too large to copy into sandbox, opening in read only",
+"File is too large to copy into sandbox, opening in read only": "File is too large to copy into sandbox, opening in read only",
+
+"SBIE2181: Failed to load SbieDll.dll": "SBIE2181: Failed to load SbieDll.dll",
+"Fix the DACLs of Sandboxie's home folder": "Fix the DACLs of Sandboxie's home folder",
 "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chrome または他のアプリコンテナを採用するソフトウェアで、SbieDll.dll のロードに失敗します。多くの場合、Sandboxie ホームディレクトリの無効な DACL エントリが原因です。この軽減策により問題は修正されます。kmdutil.exe に対して管理者権限の付与を求めるプロンプトが表示されます。",
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACLs が調整されました。アプリケーションを再度実行して、問題が解決したかどうかを示してください。",
 "DACLs fix did not resolve the issue": "DACLs の修正は、問題を解決しませんでした。",
 
+"SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Cannot start a specific sandboxed service",
+"Sandboxie failed to start a service in the sandbox": "Sandboxie failed to start a service in the sandbox",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "このメッセージは、Sandboxie が、ヘルパープログラム SandboxieRpcSs または SandboxieDcomLaunch を開始できなかったことを示しています。メッセージに記載されている名前は、rpcss または dcomlaunch。\n\n次のページで問題レポートを提出することができ、問題の分析に役立ちます。",
 
+"SBIE2313: Could not execute specific process": "SBIE2313: Could not execute specific process",
+"Sandboxie failed to start a process in the sandbox": "Sandboxie failed to start a process in the sandbox",
 "Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie は内部のプログラムの１つを実行できませんでした。Sandboxie インストールフォルダへのアクセス権をチェックするか、Sandboxie を再インストールしてください。\n\n考えられる原因：\n1. Sandboxie プログラムファイルを含むフォルダへのアクセスがブロックされている。\n2. サードパーティ (HIPS) セキュリティソフトウェアが、メッセージに記載されているプログラムの実行をブロックするよう構成されている。\n\n次のページで問題レポートを提出することができ、私たちが問題を分析するのに役立ちます。",
 
+"open config": "open config",
+"opens box config on a given page": "opens box config on a given page",
 "Do you want to open the box option dialog to change this preset?": "ボックスオプションダイアログを開いて、このプリセットを変更しますか？",
 "No, it is fine as it is": "いいえ、そのままにします。",
 "No, but I want to report a bug": "いいえ、しかしバグを報告します。",
 
+"SBIE 2113/2114/2115 and 2102": "SBIE 2113/2114/2115 and 2102",
+"handle migration error messages": "handle migration error messages",
 "The message %1 is caused by the file migration limit being reached.": "メッセージ %1 は、ファイル移行の制限に達したことが原因で発生します。",
 
+"fix parental controls breaking sandboxie": "fix parental controls breaking sandboxie",
+"stops AppId driver and AppIdSvc service and disables the offending policy file": "stops AppId driver and AppIdSvc service and disables the offending policy file",
 "It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "保護者によるコントロールが有効になっているシステムで、管理者以外のユーザーアカウントを利用しているようです。これは、Sandboxie と互換性が無いことが知られています。\nこの問題を解決するためには、以下のオプションがあります。",
 
+"SBIEMSG, I'm getting a cryptic SBIExxxx message": "SBIEMSG, I'm getting a cryptic SBIExxxx message",
+"Handle all sbie messages...": "Handle all sbie messages...",
 "Sbie Message Code": "Sbie メッセージコード",
 "Name affected process": "影響を受けるプロセスの名前",
 "Please enter the SBIEMSG ID you have encountered.": "遭遇した SBIEMSG ID を入力してください。",

@@ -804,6 +804,15 @@ Masaüstü
 Programlar
 .
 
+3198;txt;01
+%2 korumalı alanında yeni bir program başlatmak istiyor musunuz?
+Bu mesajı AlertBeforeStart=y ayarından dolayı aldınız.
+.
+
+3199;txt;01
+Bu başlatma isteği bir SANDBOXIE bileşeni tarafından gerçekleştirilmiş gibi görünmüyor. Başlatmak istediğinizden emin misiniz? Eğer bu eylemi siz gerçekleştirdiyseniz bu uyarıyı görmezden gelip Evet'e tıklayabilirsiniz.
+.
+
 3202;txt;01
 Geçersiz komut satırı parametresi:  %2
 .

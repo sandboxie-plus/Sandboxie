@@ -182,6 +182,10 @@
         <file>Actions/TaskBar.png</file>
         <file>Actions/Desktop.png</file>
         <file>Actions/Pause.png</file>
+        <file>Actions/Job.png</file>
+        <file>Actions/Job2.png</file>
+        <file>Actions/Job4.png</file>
+        <file>Actions/Job3.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Busy">Boxes/BusyOverlay.png</file>

@@ -51,6 +51,8 @@ public:
 
 	//virtual void				UpdateRunMenu();
 
+	void						OnDoubleClicked(const CSandBoxPtr &pBox);
+
 	virtual QString				AddNewBox(bool bAlowTemp = false);
 	virtual QString				ImportSandbox();
 	virtual QString				AddNewGroup();

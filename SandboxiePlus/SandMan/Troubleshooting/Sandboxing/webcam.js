@@ -10,7 +10,7 @@
 let message = tr('To enable webcam support on Windows 11, the isolation level must be reduced. \n'+
 'If you want to proceed, please press NEXT and select a sandbox to modify. \n');
 
-if(!sbie.isCertValid())
+if(!sbie.testFeature('AppC'))
   message += tr('\nPlease note that this required preset works only with a valid supporter certificate!');
 
 wizard.showStatus(message, true);
@@ -28,6 +28,7 @@ box.setIniValue('NoSecurityIsolation', 'y');
 box.appendIniValue('Template', 'OpenCOM');
 box.setIniValue('DropAdminRights', 'y');
 box.applyChanges();
+box.start();
 
 {
   sbie.setupTrace();
@@ -41,7 +42,7 @@ box.applyChanges();
       wizard.setResult(true);
   }
   if (ret['no'] == true) {
-      wizard.setResult(false, 'Webcam mitigation not successfull');
+      wizard.setResult(false, tr('Webcam mitigation not successful'));
       // todo roll back changes
   }
 }

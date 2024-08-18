@@ -121,7 +121,7 @@ NTSTATUS MyValidateCertificate(void);
 
 HANDLE Util_GetProcessPidByName(const WCHAR* name);
 
-BOOLEAN Util_IsCsrssProcess(HANDLE pid);
+BOOLEAN Util_IsSystemProcess(HANDLE pid, const char* name);
 
 BOOLEAN Util_IsProtectedProcess(HANDLE pid);
 

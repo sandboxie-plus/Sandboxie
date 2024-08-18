@@ -332,6 +332,14 @@ LONG SbieApi_QuerySymbolicLink(
 
 //---------------------------------------------------------------------------
 
+SBIEAPI_EXPORT
+LONG SbieApi_QueryDrvInfo(
+    ULONG info_class,
+    VOID* info_data,
+    ULONG info_size);
+
+//---------------------------------------------------------------------------
+
 
 SBIEAPI_EXPORT
 LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags);
@@ -359,6 +367,12 @@ ULONG SbieApi_QueryConfNumber(
     const WCHAR *section_name,      // WCHAR [66]
     const WCHAR *setting_name,      // WCHAR [66]
     ULONG def);
+
+SBIEAPI_EXPORT
+ULONG64 SbieApi_QueryConfNumber64(
+    const WCHAR *section_name,      // WCHAR [66]
+    const WCHAR *setting_name,      // WCHAR [66]
+    ULONG64 def);
 
 SBIEAPI_EXPORT
 LONG SbieApi_EnumBoxes(

@@ -8,7 +8,7 @@ Sandboxie Plus builds under Visual Studio 2019, as it offers the widest compatib
 1) We will be installing Visual Studio Community Edition which is sufficient for our purposes, during the installation we need to take care of selecting a Windows SDK version which matches the WDK version we will be installing in the next step.
 	- If you have VS 2019 already installed, you can open the installer and check which SDK you have and add if necessary one matching the WDK.
 2) Next, we will install WDK 20xxx which is required to build the driver, the WDK installer installs the required VS plugin at the end.
-3) So far so good, at this point we already have all we need to build Sandboxie Classic. To build the SandMan UI of Sandboxie Plus, though, we also need the Qt Framework, we can use either 5.15.13 or 6.3.x, but since Qt 6.x does not support Windows 7 without custom patches to base components, we will stick with Qt 5.15.13 for this tutorial.
+3) So far so good, at this point we already have all we need to build Sandboxie Classic. To build the SandMan UI of Sandboxie Plus, though, we also need the Qt Framework, we can use either 5.15.14 or 6.3.x, but since Qt 6.x does not support Windows 7 without custom patches to base components, we will stick with Qt 5.15.14 for this tutorial.
 	- Note: however, if you want to build SandMan UI for ARM64, you will need to use Qt 6.3.x or later.
 4) We use Qt's online installer and select all required components. I like to also install the source and debug information, but this is just for convenience when debugging and not needed for the build process.
 5) Last but not least, we have to install the VS extension for Qt and configure it to point to our Qt installation.

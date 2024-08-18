@@ -508,6 +508,7 @@ extern BOOLEAN Gui_UseProtectScreen;
 extern BOOLEAN Gui_UseBlockCapture;
 
 extern BOOLEAN Gui_BlockInterferenceControl;
+extern BOOLEAN Gui_DontAllowCoverTaskbar;
 
 extern BOOLEAN Gui_UseProxyService;
 

@@ -282,6 +282,7 @@ extern ULONG Dll_SidStringLen;
 extern ULONG Dll_ProcessId;
 extern ULONG Dll_SessionId;
 
+extern ULONG Dll_DriverFlags;
 extern ULONG64 Dll_ProcessFlags;
 
 #ifndef _WIN64

@@ -1665,6 +1665,53 @@ void CSandMan::OnMessage(const QString& MsgData)
 		setWindowState(Qt::WindowActive);
 		SetForegroundWindow(MainWndHandle);
 	}
+	else if (Message.left(9) == "AddForce:")
+	{
+		QString response = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
+		if (!response.isEmpty())
+		{
+			if (theAPI->GetBoxByName(response) != NULL) {
+				QString dirOrFile = Message.mid(9).replace("\"", "").trimmed();
+				QFileInfo fileInfo(dirOrFile);
+				if (Message.right(1) == "\\" || !Message.contains(".", Qt::CaseInsensitive)) {
+					theAPI->GetBoxByName(response)->AppendText("ForceFolder", dirOrFile);
+				}
+				else {
+					if (fileInfo.exists() && fileInfo.isDir()) {
+						theAPI->GetBoxByName(response)->AppendText("ForceFolder", dirOrFile);
+					}
+					else if (fileInfo.exists() && fileInfo.isExecutable()) {
+						theAPI->GetBoxByName(response)->AppendText("ForceProcess", dirOrFile.mid(dirOrFile.lastIndexOf("\\") + 1));
+					}
+					else {
+						QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("The value is not an existing directory or executable."), QMessageBox::Ok, 0);
+					}
+				}
+			}
+			else {
+				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name! Nothing was changed."), QMessageBox::Ok, 0);
+			}
+		}
+		else {
+			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("User canceled this operation."), QMessageBox::Yes, 0);
+		}
+	}
+	else if (Message.left(8) == "AddOpen:")
+	{
+		QString response = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
+		if (!response.isEmpty())
+		{
+			if (theAPI->GetBoxByName(response) != NULL) {
+					theAPI->GetBoxByName(response)->AppendText("OpenFilePath", Message.mid(8).replace("\"", ""));
+			}
+			else {
+				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name! Nothing was changed."), QMessageBox::Ok, 0);
+			}
+		}
+		else {
+			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("User canceled this operation."), QMessageBox::Yes, 0);
+		}
+	}
 	else if (Message.left(4) == "Run:")
 	{
 		QString BoxName;
@@ -2359,15 +2406,21 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 	}
 
 	QString tempValPrefix = "Temp_";
+	QString tempValLocalPrefix = "Local_Temp_";
 	QStringList to_delete;
 	QStringList list = pBox->GetTextList("Template", FALSE);
 	foreach(const QString& Value, list) {
 		if (tempValPrefix.compare(Value.left(5)) == 0)
 			to_delete.append(Value);
+		else if (tempValLocalPrefix.compare(Value.left(11)) == 0)
+			to_delete.append(Value);
 	}
 	if (!to_delete.isEmpty()) {
-		foreach(const QString & Value, to_delete)
+		foreach(const QString& Value, to_delete) {
+			if (tempValLocalPrefix.compare(Value.left(11)) == 0)
+				theAPI->SbieIniSet("Template_" + tempValLocalPrefix, "*", "", CSbieAPI::eIniUpdate);
 			list.removeAt(list.indexOf(Value));
+		}
 		pBox->UpdateTextList("Template", list, FALSE);
 	}
 
@@ -3245,7 +3298,7 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 
 void CSandMan::OnBoxDblClick(QTreeWidgetItem* pItem)
 {
-	m_pBoxView->ShowOptions(pItem->data(0, Qt::UserRole).toString());
+	m_pBoxView->OnDoubleClicked(theAPI->GetBoxByName(pItem->data(0, Qt::UserRole).toString()));
 }
 
 void CSandMan::OnSandBoxAction()

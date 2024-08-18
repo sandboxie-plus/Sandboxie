@@ -186,7 +186,7 @@ static void Terminal_WinStationFreeMemory(void *pMemory);
 
 static BOOLEAN Terminal_DontHook(void);
 
-static BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE *pToken);
+BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE *pToken);
 
 static WCHAR *Terminal_GetWindowStationName(void);
 

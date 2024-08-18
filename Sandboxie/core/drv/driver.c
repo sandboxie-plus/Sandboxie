@@ -64,6 +64,10 @@ static BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath);
 
 static BOOLEAN Driver_FindMissingServices(void);
 
+#ifdef _M_ARM64
+static BOOLEAN Driver_FindKiServiceInternal(void);
+#endif
+
 static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 
 
@@ -75,6 +79,9 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 #pragma alloc_text (INIT, Driver_CheckOsVersion)
 #pragma alloc_text (INIT, Driver_FindHomePath)
 #pragma alloc_text (INIT, Driver_FindMissingServices)
+#ifdef _M_ARM64
+#pragma alloc_text (INIT, Driver_FindKiServiceInternal)
+#endif
 #endif // ALLOC_PRAGMA
 
 
@@ -608,7 +615,22 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 #ifdef _M_ARM64
 _FX BOOLEAN Driver_FindKiServiceInternal()
 {
-    UCHAR *addr = (UCHAR *)ZwWaitForSingleObject; // pick some random Zw function
+    UCHAR *addr = NULL; // pick some random Zw function
+
+    //
+    // Driver verifier messes with the Zw imports, and this breaks the Hook_Find_ZwRoutine routine
+    // to fix this we lookup the offsets of the real functions in the export table of ntoskrnl.exe
+    // and then use these correct offsets in Hook_Find_ZwRoutine
+    //
+
+    UCHAR* kernel_base = (UCHAR*)Syscall_GetKernelBase();
+    if (kernel_base) {
+
+        ULONG_PTR offset = (ULONG_PTR)Dll_GetProc(Exe_NTOSKRNL, "ZwWaitForSingleObject", TRUE);
+        if (offset) addr = kernel_base + offset;
+    }
+
+    if(!addr) addr = (UCHAR *)ZwWaitForSingleObject;
 
     // a ZwXxx system service redirector looks like this in Windows 11 ARM64
     // B0 01 80 D2 7F 1E 00 14 00 00 00 00 00 00 00 00
@@ -746,6 +768,8 @@ _FX BOOLEAN Driver_FindMissingServices(void)
         ZwCreateTokenEx = (P_NtCreateTokenEx)Driver_FindMissingService("ZwCreateTokenEx", 17);
         //DbgPrint("ZwCreateTokenEx: %p\r\n", ZwCreateTokenEx);
     }
+    if (!ZwCreateToken)
+        Log_Msg1(MSG_1108, L"ZwCreateTokenEx");
 
 #endif
 

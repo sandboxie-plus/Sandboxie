@@ -115,7 +115,7 @@ _FX int Trace_Init(void)
     //
 
     WCHAR wsTraceOptions[4];
-    if (SbieApi_QueryConf(NULL, L"CallTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0') {
+    if (SbieApi_QueryConf(NULL, L"CallTraceEx", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0') {
         if (!NT_SUCCESS(InstallInstrumentationCallback()))
             SbieApi_Log(2205, L"ProcessInstrumentationCallback");
     }

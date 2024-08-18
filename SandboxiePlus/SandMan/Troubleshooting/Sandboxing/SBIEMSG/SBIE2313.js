@@ -1,7 +1,7 @@
 /*
 * group: other
 * class: sandboxing
-* name: SBIE2313 Could not execute specific process
+* name: SBIE2313: Could not execute specific process
 * description: Sandboxie failed to start a process in the sandbox
 *
 */

@@ -240,7 +240,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
     // scan each NtXxx export in WIN32U
     //
 
-    dll = Dll_Load(L"WIN32U");
+    dll = Dll_Load(Dll_WIN32U);
     if (!dll) 
         goto finish;
 

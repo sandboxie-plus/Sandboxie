@@ -1639,103 +1639,103 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Percorso IPC dell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="724"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="733"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="730"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="739"/>
         <source>bytes (unlimited)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="727"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="736"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="733"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="742"/>
         <source>bytes (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="742"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="748"/>
         <source>unlimited</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="914"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="920"/>
         <source>Add special option:</source>
         <translation>Aggiungi opzione speciale:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1062"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1066"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1068"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1072"/>
         <source>On Start</source>
         <translation>All&apos;avvio</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1063"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1071"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1075"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1079"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1083"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1069"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1077"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1081"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1085"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1089"/>
         <source>Run Command</source>
         <translation>Avvia comando</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1067"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1073"/>
         <source>Start Service</source>
         <translation>Avvia servizio</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1070"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1076"/>
         <source>On Init</source>
         <translation>All&apos;inizializzazione</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1074"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1080"/>
         <source>On File Recovery</source>
         <translation>Al recupero dei file</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1078"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1084"/>
         <source>On Delete Content</source>
         <translation>Alla rimozione del contenuto</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1082"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1088"/>
         <source>On Terminate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1096"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1116"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1126"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1136"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1146"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1102"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1122"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1132"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1142"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1152"/>
         <source>Please enter the command line to be executed</source>
         <translation>Immettere la riga di comando da eseguire</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1180"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1186"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1191"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1197"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1271"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1277"/>
         <source>Deny</source>
         <translation>Nega</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1374"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1380"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1463"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1469"/>
         <source>Failed to retrieve firmware table information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1471"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1477"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2015,7 +2015,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Seleziona programma</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1106"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1112"/>
         <source>Please enter a service identifier</source>
         <translation>Inserire un identificativo di servizio</translation>
     </message>
@@ -2245,8 +2245,8 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <location filename="Windows/OptionsWindow.cpp" line="1124"/>
         <location filename="Windows/OptionsAccess.cpp" line="411"/>
         <location filename="Windows/OptionsAccess.cpp" line="643"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="893"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="967"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="899"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="973"/>
         <location filename="Windows/OptionsGeneral.cpp" line="595"/>
         <location filename="Windows/OptionsGeneral.cpp" line="691"/>
         <location filename="Windows/OptionsNetwork.cpp" line="503"/>
@@ -2284,7 +2284,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="622"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="943"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="949"/>
         <location filename="Windows/OptionsGeneral.cpp" line="662"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
@@ -2462,7 +2462,7 @@ Please select a folder which contains this file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1271"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1277"/>
         <location filename="Windows/OptionsNetwork.cpp" line="213"/>
         <location filename="Windows/OptionsNetwork.cpp" line="616"/>
         <source>Allow</source>
@@ -7285,8 +7285,8 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
         <location filename="Forms/OptionsWindow.ui" line="3973"/>
         <location filename="Forms/OptionsWindow.ui" line="4089"/>
         <location filename="Forms/OptionsWindow.ui" line="4290"/>
-        <location filename="Forms/OptionsWindow.ui" line="5366"/>
-        <location filename="Forms/OptionsWindow.ui" line="5504"/>
+        <location filename="Forms/OptionsWindow.ui" line="5386"/>
+        <location filename="Forms/OptionsWindow.ui" line="5524"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
@@ -7322,9 +7322,9 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
         <location filename="Forms/OptionsWindow.ui" line="4097"/>
         <location filename="Forms/OptionsWindow.ui" line="4426"/>
         <location filename="Forms/OptionsWindow.ui" line="4515"/>
-        <location filename="Forms/OptionsWindow.ui" line="4868"/>
-        <location filename="Forms/OptionsWindow.ui" line="4985"/>
-        <location filename="Forms/OptionsWindow.ui" line="5347"/>
+        <location filename="Forms/OptionsWindow.ui" line="4909"/>
+        <location filename="Forms/OptionsWindow.ui" line="5005"/>
+        <location filename="Forms/OptionsWindow.ui" line="5367"/>
         <source>Remove</source>
         <translation>Rimuovi</translation>
     </message>
@@ -7394,7 +7394,7 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
         <location filename="Forms/OptionsWindow.ui" line="4111"/>
         <location filename="Forms/OptionsWindow.ui" line="4462"/>
         <location filename="Forms/OptionsWindow.ui" line="4695"/>
-        <location filename="Forms/OptionsWindow.ui" line="4892"/>
+        <location filename="Forms/OptionsWindow.ui" line="4902"/>
         <source>Show Templates</source>
         <translation>Mostra modelli</translation>
     </message>
@@ -8473,17 +8473,17 @@ Il livello di corrispondenza del processo ha una priorità più alta della speci
         <translation type="vanished">Nascondi processi</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4854"/>
+        <location filename="Forms/OptionsWindow.ui" line="4882"/>
         <source>Add Process</source>
         <translation>Aggiungi processo</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4783"/>
+        <location filename="Forms/OptionsWindow.ui" line="4872"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>Nascondi i processi di host dai processi in esecuzione nell&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4912"/>
+        <location filename="Forms/OptionsWindow.ui" line="4858"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>Non consentire ai processi dell&apos;area virtuale di vedere i processi avviati in altre aree virtuali</translation>
     </message>
@@ -8525,27 +8525,27 @@ Il livello di corrispondenza del processo ha una priorità più alta della speci
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4816"/>
+        <location filename="Forms/OptionsWindow.ui" line="4865"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4937"/>
+        <location filename="Forms/OptionsWindow.ui" line="4957"/>
         <source>Users</source>
         <translation>Utenti</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4955"/>
+        <location filename="Forms/OptionsWindow.ui" line="4975"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>Limita il log di accesso risorse ai soli amministratori</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4962"/>
+        <location filename="Forms/OptionsWindow.ui" line="4982"/>
         <source>Add User</source>
         <translation>Aggiungi utente</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4992"/>
+        <location filename="Forms/OptionsWindow.ui" line="5012"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -8554,32 +8554,32 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virtuale non si applicano agli account utente non abilitati all&apos;utilizzo dell&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5005"/>
+        <location filename="Forms/OptionsWindow.ui" line="5025"/>
         <source>Tracing</source>
         <translation>Tracing</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5020"/>
+        <location filename="Forms/OptionsWindow.ui" line="5040"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5190"/>
+        <location filename="Forms/OptionsWindow.ui" line="5210"/>
         <source>COM Class Trace</source>
         <translation>Traccia classe COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5075"/>
+        <location filename="Forms/OptionsWindow.ui" line="5095"/>
         <source>IPC Trace</source>
         <translation>Traccia IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5061"/>
+        <location filename="Forms/OptionsWindow.ui" line="5081"/>
         <source>Key Trace</source>
         <translation>Traccia chiavi di registro</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5129"/>
+        <location filename="Forms/OptionsWindow.ui" line="5149"/>
         <source>GUI Trace</source>
         <translation>Traccia GUI</translation>
     </message>
@@ -8588,28 +8588,28 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
         <translation type="vanished">Traccia chiamata API (richiede l&apos;installazione di LogAPI nella cartella di Sandboxie Plus)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5027"/>
+        <location filename="Forms/OptionsWindow.ui" line="5047"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Registra tutti i SetError nel log di accesso (genera molto output)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5068"/>
+        <location filename="Forms/OptionsWindow.ui" line="5088"/>
         <source>File Trace</source>
         <translation>Traccia file</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5013"/>
+        <location filename="Forms/OptionsWindow.ui" line="5033"/>
         <source>Pipe Trace</source>
         <translation>Traccia pipe</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5170"/>
+        <location filename="Forms/OptionsWindow.ui" line="5190"/>
         <source>Access Tracing</source>
         <translation>Log di accesso</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5082"/>
+        <location filename="Forms/OptionsWindow.ui" line="5102"/>
         <source>Log Debug Output to the Trace Log</source>
         <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Registra output di debug nel log di accesso</translation>
@@ -8706,7 +8706,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
         <translation>È possibile specificare una lista di azioni che verranno eseguite automaticamente in base agli eventi dell&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5136"/>
+        <location filename="Forms/OptionsWindow.ui" line="5156"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -8728,18 +8728,18 @@ Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli ev
         <translation type="vanished">Traccia chiamata di sistema Ntdll (genera molto output)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5156"/>
+        <location filename="Forms/OptionsWindow.ui" line="5176"/>
         <source>Disable Resource Access Monitor</source>
         <translation>Disattiva monitor di accesso risorse per quest&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5041"/>
+        <location filename="Forms/OptionsWindow.ui" line="5061"/>
         <source>Resource Access Monitor</source>
         <translation>Monitor accesso risorse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3451"/>
-        <location filename="Forms/OptionsWindow.ui" line="5115"/>
+        <location filename="Forms/OptionsWindow.ui" line="5135"/>
         <source>Network Firewall</source>
         <translation>Firewall di rete</translation>
     </message>
@@ -8749,57 +8749,57 @@ Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli ev
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5214"/>
+        <location filename="Forms/OptionsWindow.ui" line="5234"/>
         <source>Debug</source>
         <translation>Debug</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5270"/>
+        <location filename="Forms/OptionsWindow.ui" line="5290"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>ATTENZIONE! Queste opzioni possono disattivare le misure di sicurezza e compromettere la sicurezza dell&apos;area virtuale!!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5280"/>
+        <location filename="Forms/OptionsWindow.ui" line="5300"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>Queste opzioni sono destinate al debug dei problemi di compatibilità, si prega di utilizzarle solo per scopi di test. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5295"/>
+        <location filename="Forms/OptionsWindow.ui" line="5315"/>
         <source>App Templates</source>
         <translation>Modelli applicazioni</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5325"/>
+        <location filename="Forms/OptionsWindow.ui" line="5345"/>
         <source>Filter Categories</source>
         <translation>Filtra categorie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5396"/>
+        <location filename="Forms/OptionsWindow.ui" line="5416"/>
         <source>Text Filter</source>
         <translation>Cerca</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5386"/>
+        <location filename="Forms/OptionsWindow.ui" line="5406"/>
         <source>Add Template</source>
         <translation>Aggiungi modello</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5361"/>
+        <location filename="Forms/OptionsWindow.ui" line="5381"/>
         <source>Category</source>
         <translation>Categoria</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5419"/>
+        <location filename="Forms/OptionsWindow.ui" line="5439"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Questo elenco contiene un gran numero di modelli di compatibilità software</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5458"/>
+        <location filename="Forms/OptionsWindow.ui" line="5478"/>
         <source>Template Folders</source>
         <translation>Percorsi modelli</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5478"/>
+        <location filename="Forms/OptionsWindow.ui" line="5498"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -8809,22 +8809,22 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4454"/>
-        <location filename="Forms/OptionsWindow.ui" line="5509"/>
+        <location filename="Forms/OptionsWindow.ui" line="5529"/>
         <source>Value</source>
         <translation>Valore</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5520"/>
+        <location filename="Forms/OptionsWindow.ui" line="5540"/>
         <source>Accessibility</source>
         <translation>Accessibilità</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5616"/>
+        <location filename="Forms/OptionsWindow.ui" line="5636"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>Per compensare alla disabilitazione delle misure di protezione, consultare la pagina Limitazione dei diritti, nel gruppo Restrizioni.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5540"/>
+        <location filename="Forms/OptionsWindow.ui" line="5560"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Screen reader: JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
@@ -8875,7 +8875,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1527"/>
-        <location filename="Forms/OptionsWindow.ui" line="4827"/>
+        <location filename="Forms/OptionsWindow.ui" line="4936"/>
         <source>Process</source>
         <translation>Processo</translation>
     </message>
@@ -8909,93 +8909,103 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4776"/>
+        <location filename="Forms/OptionsWindow.ui" line="4790"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4806"/>
+        <location filename="Forms/OptionsWindow.ui" line="4916"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4809"/>
+        <location filename="Forms/OptionsWindow.ui" line="4919"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4847"/>
+        <location filename="Forms/OptionsWindow.ui" line="4851"/>
         <source>Process Hiding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4861"/>
+        <location filename="Forms/OptionsWindow.ui" line="4807"/>
         <source>Use a custom Locale/LangID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4882"/>
+        <location filename="Forms/OptionsWindow.ui" line="4780"/>
         <source>Data Protection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4919"/>
+        <location filename="Forms/OptionsWindow.ui" line="4797"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4922"/>
+        <location filename="Forms/OptionsWindow.ui" line="4800"/>
         <source>Dump FW Tables</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5122"/>
+        <location filename="Forms/OptionsWindow.ui" line="4830"/>
+        <source>Hide Disk Serial Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="4837"/>
+        <source>Obfuscate known unique identifiers in the registry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="5142"/>
         <source>DNS Request Logging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5197"/>
+        <location filename="Forms/OptionsWindow.ui" line="5217"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5305"/>
+        <location filename="Forms/OptionsWindow.ui" line="5325"/>
         <source>Templates</source>
         <translation>Modelli</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5412"/>
+        <location filename="Forms/OptionsWindow.ui" line="5432"/>
         <source>Open Template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5580"/>
+        <location filename="Forms/OptionsWindow.ui" line="5600"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>Le seguenti impostazioni consentono di usare Sandboxie in combinazione con i programmi per l&apos;accesso facilitato. Tuttavia, alcune misure di protezione di Sandboxie vengono disabilitate quando queste impostazioni sono attive.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5633"/>
+        <location filename="Forms/OptionsWindow.ui" line="5653"/>
         <source>Edit ini Section</source>
         <translatorcomment>Qui ho forzato di proposito un ritorno a capo</translatorcomment>
         <translation>Modifica configurazione
 area virtuale</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5639"/>
+        <location filename="Forms/OptionsWindow.ui" line="5659"/>
         <source>Edit ini</source>
         <translation>Modifica Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5652"/>
+        <location filename="Forms/OptionsWindow.ui" line="5672"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5675"/>
+        <location filename="Forms/OptionsWindow.ui" line="5695"/>
         <source>Save</source>
         <translation>Salva</translation>
     </message>

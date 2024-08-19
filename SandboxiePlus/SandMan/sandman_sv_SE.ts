@@ -1939,8 +1939,8 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
         <location filename="Windows/OptionsWindow.cpp" line="1124"/>
         <location filename="Windows/OptionsAccess.cpp" line="411"/>
         <location filename="Windows/OptionsAccess.cpp" line="643"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="893"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="967"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="899"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="973"/>
         <location filename="Windows/OptionsGeneral.cpp" line="595"/>
         <location filename="Windows/OptionsGeneral.cpp" line="691"/>
         <location filename="Windows/OptionsNetwork.cpp" line="503"/>
@@ -1978,7 +1978,7 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="622"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="943"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="949"/>
         <location filename="Windows/OptionsGeneral.cpp" line="662"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
@@ -2049,84 +2049,84 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
         <translation>Sandlåda IPC-root</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="724"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="733"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="730"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="739"/>
         <source>bytes (unlimited)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="727"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="736"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="733"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="742"/>
         <source>bytes (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="742"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="748"/>
         <source>unlimited</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="914"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="920"/>
         <source>Add special option:</source>
         <translation>Addera speciellt alternativ:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1062"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1066"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1068"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1072"/>
         <source>On Start</source>
         <translation>Vid start</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1063"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1071"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1075"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1079"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1083"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1069"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1077"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1081"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1085"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1089"/>
         <source>Run Command</source>
         <translation>Kör kommandot</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1067"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1073"/>
         <source>Start Service</source>
         <translation>Starta tjänst</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1070"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1076"/>
         <source>On Init</source>
         <translation>Vid start</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1074"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1080"/>
         <source>On File Recovery</source>
         <translation>Vid filåterställande</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1078"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1084"/>
         <source>On Delete Content</source>
         <translation>Vid radering av innehåll</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1082"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1088"/>
         <source>On Terminate</source>
         <translation>Vid terminering</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1180"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1186"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
         <translation>Vänligen för in ett programfilsnamn för att tillåta tillgång till denna sandlåda</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1191"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1197"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
         <translation>Vänligen för in ett programfilsnamn för att neka tillgång till denna sandlåda</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1463"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1469"/>
         <source>Failed to retrieve firmware table information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1471"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1477"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2135,16 +2135,16 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
         <translation type="vanished">Vid raderande</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1096"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1116"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1126"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1136"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1146"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1102"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1122"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1132"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1142"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1152"/>
         <source>Please enter the command line to be executed</source>
         <translation>Vänligen för in  kommandoraden som ska verkställas</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1106"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1112"/>
         <source>Please enter a service identifier</source>
         <translation>Vänligen för in en tjänstidentifierare</translation>
     </message>
@@ -2153,12 +2153,12 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
         <translation type="vanished">Vänligen ange ett programfilsnamn</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1271"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1277"/>
         <source>Deny</source>
         <translation>Neka</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1374"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1380"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -2502,7 +2502,7 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
         <translation> entrè: IP eller port kan inte vara tomt</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1271"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1277"/>
         <location filename="Windows/OptionsNetwork.cpp" line="213"/>
         <location filename="Windows/OptionsNetwork.cpp" line="616"/>
         <source>Allow</source>
@@ -7750,8 +7750,8 @@ Om du redan är en Great Supporter on Patreon, kan Sandboxie söka på nätet f�
         <location filename="Forms/OptionsWindow.ui" line="3973"/>
         <location filename="Forms/OptionsWindow.ui" line="4089"/>
         <location filename="Forms/OptionsWindow.ui" line="4290"/>
-        <location filename="Forms/OptionsWindow.ui" line="5366"/>
-        <location filename="Forms/OptionsWindow.ui" line="5504"/>
+        <location filename="Forms/OptionsWindow.ui" line="5386"/>
+        <location filename="Forms/OptionsWindow.ui" line="5524"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
@@ -7825,9 +7825,9 @@ Om du redan är en Great Supporter on Patreon, kan Sandboxie söka på nätet f�
         <location filename="Forms/OptionsWindow.ui" line="4097"/>
         <location filename="Forms/OptionsWindow.ui" line="4426"/>
         <location filename="Forms/OptionsWindow.ui" line="4515"/>
-        <location filename="Forms/OptionsWindow.ui" line="4868"/>
-        <location filename="Forms/OptionsWindow.ui" line="4985"/>
-        <location filename="Forms/OptionsWindow.ui" line="5347"/>
+        <location filename="Forms/OptionsWindow.ui" line="4909"/>
+        <location filename="Forms/OptionsWindow.ui" line="5005"/>
+        <location filename="Forms/OptionsWindow.ui" line="5367"/>
         <source>Remove</source>
         <translation>Ta bort</translation>
     </message>
@@ -7965,7 +7965,7 @@ Om du redan är en Great Supporter on Patreon, kan Sandboxie söka på nätet f�
         <location filename="Forms/OptionsWindow.ui" line="4111"/>
         <location filename="Forms/OptionsWindow.ui" line="4462"/>
         <location filename="Forms/OptionsWindow.ui" line="4695"/>
-        <location filename="Forms/OptionsWindow.ui" line="4892"/>
+        <location filename="Forms/OptionsWindow.ui" line="4902"/>
         <source>Show Templates</source>
         <translation>Visa mallar</translation>
     </message>
@@ -8948,12 +8948,12 @@ Processmatchningsnivån har en högre prioritet än säregenheten och beskriver 
         <translation type="vanished">Dölj processer</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4854"/>
+        <location filename="Forms/OptionsWindow.ui" line="4882"/>
         <source>Add Process</source>
         <translation>Addera process</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4783"/>
+        <location filename="Forms/OptionsWindow.ui" line="4872"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>Dölj värdprocesser från processer körandes i sandlådan.</translation>
     </message>
@@ -8969,66 +8969,66 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4776"/>
+        <location filename="Forms/OptionsWindow.ui" line="4790"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4806"/>
+        <location filename="Forms/OptionsWindow.ui" line="4916"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4809"/>
+        <location filename="Forms/OptionsWindow.ui" line="4919"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4847"/>
+        <location filename="Forms/OptionsWindow.ui" line="4851"/>
         <source>Process Hiding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4861"/>
+        <location filename="Forms/OptionsWindow.ui" line="4807"/>
         <source>Use a custom Locale/LangID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4882"/>
+        <location filename="Forms/OptionsWindow.ui" line="4780"/>
         <source>Data Protection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4912"/>
+        <location filename="Forms/OptionsWindow.ui" line="4858"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>Tillåt inte sandlådade processer att se processer som körs i andra lådor</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4919"/>
+        <location filename="Forms/OptionsWindow.ui" line="4797"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4922"/>
+        <location filename="Forms/OptionsWindow.ui" line="4800"/>
         <source>Dump FW Tables</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4937"/>
+        <location filename="Forms/OptionsWindow.ui" line="4957"/>
         <source>Users</source>
         <translation>Användare</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4955"/>
+        <location filename="Forms/OptionsWindow.ui" line="4975"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>Begränsa resurstillgångsövervakning till administratörer endast</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4962"/>
+        <location filename="Forms/OptionsWindow.ui" line="4982"/>
         <source>Add User</source>
         <translation>Addera användare</translation>
     </message>
@@ -9037,7 +9037,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <translation type="vanished">Ta bort användare</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4992"/>
+        <location filename="Forms/OptionsWindow.ui" line="5012"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -9046,7 +9046,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 Notera: Inställningarna Tvingade program och Tvinga mappar, för en sandlåda, gäller inte för användarkonton som inte kan använda sandlådan.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5005"/>
+        <location filename="Forms/OptionsWindow.ui" line="5025"/>
         <source>Tracing</source>
         <translation>Spårning</translation>
     </message>
@@ -9056,22 +9056,22 @@ Notera: Inställningarna Tvingade program och Tvinga mappar, för en sandlåda, 
         <translation type="vanished">API call spårning (kräver att LogAPI är installerat i sbie:s katalog)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5013"/>
+        <location filename="Forms/OptionsWindow.ui" line="5033"/>
         <source>Pipe Trace</source>
         <translation>Pipe Trace</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5020"/>
+        <location filename="Forms/OptionsWindow.ui" line="5040"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>API-anropspår (spårar alla SBIE hooks)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5027"/>
+        <location filename="Forms/OptionsWindow.ui" line="5047"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>Logga alla SetError&apos;s till spårloggen (skapar en massa utflöde)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5082"/>
+        <location filename="Forms/OptionsWindow.ui" line="5102"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>Logga Debug Output till spårloggen</translation>
     </message>
@@ -9102,48 +9102,48 @@ istället för &quot;*&quot;.</translation>
         <translation type="vanished">Ntdll syscall-spår (skapar en massa utflöde)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5068"/>
+        <location filename="Forms/OptionsWindow.ui" line="5088"/>
         <source>File Trace</source>
         <translation>Filspår</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5156"/>
+        <location filename="Forms/OptionsWindow.ui" line="5176"/>
         <source>Disable Resource Access Monitor</source>
         <translation>Inaktivera resurstillgångsövervakning</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5075"/>
+        <location filename="Forms/OptionsWindow.ui" line="5095"/>
         <source>IPC Trace</source>
         <translation>IPC-spår</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5129"/>
+        <location filename="Forms/OptionsWindow.ui" line="5149"/>
         <source>GUI Trace</source>
         <translation>GUI-spår</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5041"/>
+        <location filename="Forms/OptionsWindow.ui" line="5061"/>
         <source>Resource Access Monitor</source>
         <translation>Resurstillgångsövervakare</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5170"/>
+        <location filename="Forms/OptionsWindow.ui" line="5190"/>
         <source>Access Tracing</source>
         <translation>Tillgångsspårning</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5190"/>
+        <location filename="Forms/OptionsWindow.ui" line="5210"/>
         <source>COM Class Trace</source>
         <translation>COM-class spår</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5061"/>
+        <location filename="Forms/OptionsWindow.ui" line="5081"/>
         <source>Key Trace</source>
         <translation>Nyckelspår</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3451"/>
-        <location filename="Forms/OptionsWindow.ui" line="5115"/>
+        <location filename="Forms/OptionsWindow.ui" line="5135"/>
         <source>Network Firewall</source>
         <translation>Nätverksbrandvägg</translation>
     </message>
@@ -9153,37 +9153,47 @@ istället för &quot;*&quot;.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4816"/>
+        <location filename="Forms/OptionsWindow.ui" line="4830"/>
+        <source>Hide Disk Serial Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="4837"/>
+        <source>Obfuscate known unique identifiers in the registry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="4865"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5122"/>
+        <location filename="Forms/OptionsWindow.ui" line="5142"/>
         <source>DNS Request Logging</source>
         <translation>Loggning av DNS-förfrågan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5197"/>
+        <location filename="Forms/OptionsWindow.ui" line="5217"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>Syscall spår (skapar en logg av utdata)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5214"/>
+        <location filename="Forms/OptionsWindow.ui" line="5234"/>
         <source>Debug</source>
         <translation>Felsök</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5270"/>
+        <location filename="Forms/OptionsWindow.ui" line="5290"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>VARNING, dessa alternativ kan inaktivera kärnsäkerhetsgarantier och bryta sandlådesäkerhet!!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5280"/>
+        <location filename="Forms/OptionsWindow.ui" line="5300"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>Dessa alternativ är avsedda för felsökning av kompatibilitetsproblem, vänligen använd dem inte vid produktionsanvändning. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5295"/>
+        <location filename="Forms/OptionsWindow.ui" line="5315"/>
         <source>App Templates</source>
         <translation>Appmallar</translation>
     </message>
@@ -9192,22 +9202,22 @@ istället för &quot;*&quot;.</translation>
         <translation type="vanished">Kompatibilitetsmallar</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5325"/>
+        <location filename="Forms/OptionsWindow.ui" line="5345"/>
         <source>Filter Categories</source>
         <translation>Filterkategorier</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5396"/>
+        <location filename="Forms/OptionsWindow.ui" line="5416"/>
         <source>Text Filter</source>
         <translation>Textfilter</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5386"/>
+        <location filename="Forms/OptionsWindow.ui" line="5406"/>
         <source>Add Template</source>
         <translation>Addera mall</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5419"/>
+        <location filename="Forms/OptionsWindow.ui" line="5439"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Denna lista innehåller en stor mängd av kompatibilitetsutökande sandlådemallar</translation>
     </message>
@@ -9216,17 +9226,17 @@ istället för &quot;*&quot;.</translation>
         <translation type="vanished">Ta bort mall</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5361"/>
+        <location filename="Forms/OptionsWindow.ui" line="5381"/>
         <source>Category</source>
         <translation>Kategori</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5458"/>
+        <location filename="Forms/OptionsWindow.ui" line="5478"/>
         <source>Template Folders</source>
         <translation>Mallmappar</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5478"/>
+        <location filename="Forms/OptionsWindow.ui" line="5498"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -9236,12 +9246,12 @@ Vänligen notera att detta värde är för tillfället användarspecifikt och sp
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4454"/>
-        <location filename="Forms/OptionsWindow.ui" line="5509"/>
+        <location filename="Forms/OptionsWindow.ui" line="5529"/>
         <source>Value</source>
         <translation>Värde</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5136"/>
+        <location filename="Forms/OptionsWindow.ui" line="5156"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -9278,17 +9288,17 @@ istället för &quot;*&quot;.</translation>
         <translation>Tillåt användning av kapslade jobbobjekt (fungerar på Windows 8 och senare)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5520"/>
+        <location filename="Forms/OptionsWindow.ui" line="5540"/>
         <source>Accessibility</source>
         <translation>Tillgänglighet</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5616"/>
+        <location filename="Forms/OptionsWindow.ui" line="5636"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>För att kompensera för det förlorade skyddet, vänligen konsultera inställningen Skippa rättigheter i Säkerhetsalternativ &gt; Säkerhetshärdning &gt; Förhöjningsbegränsningar.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5540"/>
+        <location filename="Forms/OptionsWindow.ui" line="5560"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Skärmläsare: JAWS, NVDA, Window-Eyes, Systemtillgång</translation>
     </message>
@@ -9480,7 +9490,7 @@ istället för &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1527"/>
-        <location filename="Forms/OptionsWindow.ui" line="4827"/>
+        <location filename="Forms/OptionsWindow.ui" line="4936"/>
         <source>Process</source>
         <translation>Process</translation>
     </message>
@@ -9489,37 +9499,37 @@ istället för &quot;*&quot;.</translation>
         <translation type="vanished">Blockera även lästillgång till processer i denna sandlåda</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5305"/>
+        <location filename="Forms/OptionsWindow.ui" line="5325"/>
         <source>Templates</source>
         <translation>Mallar</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5412"/>
+        <location filename="Forms/OptionsWindow.ui" line="5432"/>
         <source>Open Template</source>
         <translation>Öppna mall</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5580"/>
+        <location filename="Forms/OptionsWindow.ui" line="5600"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>Följande inställningar aktiverar användandet av Sandboxie i kombination med tillgänglighetsprogram. Vänligen notera att ett visst mått av Sandboxies skydd av nödvändighet förloras när dessa inställningar aktiveras.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5633"/>
+        <location filename="Forms/OptionsWindow.ui" line="5653"/>
         <source>Edit ini Section</source>
         <translation>Redigera ini-sektionen</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5639"/>
+        <location filename="Forms/OptionsWindow.ui" line="5659"/>
         <source>Edit ini</source>
         <translation>Redigera ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5652"/>
+        <location filename="Forms/OptionsWindow.ui" line="5672"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5675"/>
+        <location filename="Forms/OptionsWindow.ui" line="5695"/>
         <source>Save</source>
         <translation>Spara</translation>
     </message>

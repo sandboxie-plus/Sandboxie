@@ -12,7 +12,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add option "AlertBeforeStart".When it is set,a prompt pops up before launching a new program into the sandbox using "Start.exe" and checks if the program that started "Start.exe" is a Sandboxie component itself,if it is not, a warning pops up.
 
 
-
 ## [1.14.0 / 5.69.0] - 2024-05-17
 
 ### Added

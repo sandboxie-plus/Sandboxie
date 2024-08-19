@@ -7448,12 +7448,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4830"/>
         <source>Hide Disk Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge die Seriennummer der Disk</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4837"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschleiere bekannte eindeutige Identifikationsnummern in der Registry</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4865"/>

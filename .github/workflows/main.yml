@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
   push:
-    branches: [ master ]
+    branches: [master, experimental]
     paths-ignore:
       # Case-sensitive paths to ignore on push events
       - '.editorconfig'
@@ -35,7 +35,7 @@ on:
       - '**/AUTHORS'
       - '**/COPYING'
   pull_request:
-    branches: [ master ]
+    branches: [master, experimental]
     paths-ignore:
       # Case-sensitive paths to ignore on pull events
       - '.editorconfig'
@@ -150,7 +150,7 @@ jobs:
         run: Installer\get_assets.cmd
 
       - name: Upload installer assets
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        if: github.repository_owner == 'sandboxie-plus'
         uses: actions/upload-artifact@v4
         with:
           name: Assets
@@ -159,7 +159,7 @@ jobs:
           retention-days: 60
 
       - name: Upload Sandboxie x64
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        if: github.repository_owner == 'sandboxie-plus'
         uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_x64
@@ -253,7 +253,7 @@ jobs:
         run: Installer\copy_build.cmd ARM64
 
       - name: Upload Sandboxie ARM64
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        if: github.repository_owner == 'sandboxie-plus'
         uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_ARM64
@@ -322,7 +322,7 @@ jobs:
         run: Installer\copy_build.cmd x86
 
       - name: Upload Sandboxie x86
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        if: github.repository_owner == 'sandboxie-plus'
         uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_x86

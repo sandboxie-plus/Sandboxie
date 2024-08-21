@@ -1071,6 +1071,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
                 // privilege, so access to the window station object
                 // would have to validate each object directory in the
                 // path, and this would fail with our process token.
+		//
                 //
                 // to work around this, we issue a special request to
                 // SbieDrv through NtSetInformationThread which causes

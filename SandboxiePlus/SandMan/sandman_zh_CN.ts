@@ -4300,7 +4300,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2979"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
-        <translation>&lt;br /&gt;你需要在Patreon赞助上成为Great或更高级别以便解锁这个功能。</translation>
+        <translation>&lt;br /&gt;你需要在Patreon赞助上成为Great或更高级别的赞助者以便解锁这个功能。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2991"/>

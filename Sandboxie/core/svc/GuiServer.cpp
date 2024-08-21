@@ -4134,6 +4134,27 @@ bool GuiServer::AllowSendPostMessage(
             }
         }
 
+		HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, pid)
+			,hProcess2= OpenProcess(PROCESS_ALL_ACCESS, false, pidWindow);
+		WCHAR boxname[34] = { L"\0" }, boxname2[34] = { L"\0" };
+		if (hProcess != INVALID_HANDLE_VALUE && SbieApi_QueryProcess(hProcess, boxname, NULL, NULL, NULL)&& SbieApi_QueryProcess(hProcess2, boxname2, NULL, NULL, NULL)) {
+			CloseHandle(hProcess);
+			CloseHandle(hProcess2);
+			if (boxname != NULL) {
+				if (SbieApi_QueryConfBool(boxname, L"CheckSendPostMessage", false)) {
+
+					if (boxname2 == NULL)
+						return false;
+					if (_wcsicmp(boxname, boxname) != 0)
+						return false;
+				}
+			}
+		}
+		else {
+			CloseHandle(hProcess);
+			CloseHandle(hProcess2);
+		}
+
         if (isWindowInExplorer) {
 
             bool blocked = true;

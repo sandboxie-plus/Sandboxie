@@ -156,7 +156,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - VenusGirl - Korean
 - 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=30))
 - JNylson - Portuguese and Brazilian Portuguese
-- lufog - Russian
+- lufog, marat2509 - Russian
 - LumitoLuma, sebadamus - Spanish
 - 1FF, Thatagata - Swedish (provided by email or pull request)
 - xorcan, fmbxnary, offhub - Turkish

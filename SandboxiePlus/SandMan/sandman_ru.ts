@@ -9415,7 +9415,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1540"/>
         <source>Support &amp;&amp; Updates</source>
-        <translation>Поддержка и бновления</translation>
+        <translation>Поддержка и обновления</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1609"/>

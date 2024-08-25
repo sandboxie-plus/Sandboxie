@@ -293,6 +293,17 @@ private slots:
 	}
 
 protected:
+	void mouseDoubleClickEvent(QMouseEvent* event) override
+	{
+        QModelIndex index = indexAt(event->pos());
+        if (!index.isValid()) {
+			emit doubleClicked(index);
+			return;
+        }
+
+		QTreeView::mouseDoubleClickEvent(event);
+	}
+
 	QMenu*				m_pMenu;
 	QMap<QAction*, int>	m_Columns;
 	QSet<int>			m_FixedColumns;

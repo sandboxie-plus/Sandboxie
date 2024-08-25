@@ -767,6 +767,10 @@ SBIE2337 Failed to start program:  %2
 SBIE2338 Encountered unsupported architecture in process:  %2
 .
 
+2340;pop;err;01
+SBIE2340 Desktop worker failed to switch to caller Desktop:  %2
+.
+
 # 2398;txt;01
 # SBIE2398 Service suffers exception ... at address ...
 # .
@@ -921,7 +925,7 @@ Programs
 .
 
 3198;txt;01
-Do you want to start a new program in the %2 sandbox?
+Do you want to start a new program into the sandbox %2?
 You received this message because you set AlertBeforeStart=y.
 .
 

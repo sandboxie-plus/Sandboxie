@@ -22,6 +22,7 @@
 #include "stdafx.h"
 
 #include <Sddl.h>
+#include "BoxManager.h"
 #include "MountManager.h"
 #include "DriverAssist.h"
 #include "PipeServer.h"

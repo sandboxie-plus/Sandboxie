@@ -102,8 +102,8 @@ typedef HWND(*P_SetActiveWindow)(HWND hWnd);
 
 typedef UINT_PTR (*P_SetTimer)(
 	 HWND hWnd,
-     UINT_PTR nIDEvent,
-     UINT uElapse,
+   UINT_PTR nIDEvent,
+   UINT uElapse,
 	 TIMERPROC lpTimerFunc
 );
 
@@ -622,7 +622,7 @@ GUI_SYS_VAR_2(SendNotifyMessage)
 GUI_SYS_VAR_2(PostMessage)
 GUI_SYS_VAR_2(PostThreadMessage)
 GUI_SYS_VAR_2(DispatchMessage)
-
+  
 GUI_SYS_VAR(SetTimer)
 
 GUI_SYS_VAR(MapWindowPoints)

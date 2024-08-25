@@ -35,6 +35,60 @@
 
 
 //---------------------------------------------------------------------------
+// Structures and Types
+//---------------------------------------------------------------------------
+
+/*struct _TOKEN// Size=0x2a0
+{
+    struct _TOKEN_SOURCE TokenSource;// Offset=0x0 Size=0x10
+    struct _LUID TokenId;// Offset=0x10 Size=0x8
+    struct _LUID AuthenticationId;// Offset=0x18 Size=0x8
+    struct _LUID ParentTokenId;// Offset=0x20 Size=0x8
+    union _LARGE_INTEGER ExpirationTime;// Offset=0x28 Size=0x8
+    struct _ERESOURCE *TokenLock;// Offset=0x30 Size=0x4
+    struct _LUID ModifiedId;// Offset=0x34 Size=0x8
+    struct _SEP_TOKEN_PRIVILEGES Privileges;// Offset=0x40 Size=0x18
+    struct _SEP_AUDIT_POLICY AuditPolicy;// Offset=0x58 Size=0x1f
+    unsigned long SessionId;// Offset=0x78 Size=0x4
+    unsigned long UserAndGroupCount;// Offset=0x7c Size=0x4
+    unsigned long RestrictedSidCount;// Offset=0x80 Size=0x4
+    unsigned long VariableLength;// Offset=0x84 Size=0x4
+    unsigned long DynamicCharged;// Offset=0x88 Size=0x4
+    unsigned long DynamicAvailable;// Offset=0x8c Size=0x4
+    unsigned long DefaultOwnerIndex;// Offset=0x90 Size=0x4
+    struct _SID_AND_ATTRIBUTES *UserAndGroups;// Offset=0x94 Size=0x4
+    struct _SID_AND_ATTRIBUTES *RestrictedSids;// Offset=0x98 Size=0x4
+    void *PrimaryGroup;// Offset=0x9c Size=0x4
+    unsigned long *DynamicPart;// Offset=0xa0 Size=0x4
+    struct _ACL *DefaultDacl;// Offset=0xa4 Size=0x4
+    enum _TOKEN_TYPE TokenType;// Offset=0xa8 Size=0x4
+    enum _SECURITY_IMPERSONATION_LEVEL ImpersonationLevel;// Offset=0xac Size=0x4
+    unsigned long TokenFlags;// Offset=0xb0 Size=0x4
+    unsigned int TokenInUse;// Offset=0xb4 Size=0x1
+    unsigned long IntegrityLevelIndex;// Offset=0xb8 Size=0x4
+    unsigned long MandatoryPolicy;// Offset=0xbc Size=0x4
+    struct _SEP_LOGON_SESSION_REFERENCES *LogonSession;// Offset=0xc0 Size=0x4
+    struct _LUID OriginatingLogonSession;// Offset=0xc4 Size=0x8
+    struct _SID_AND_ATTRIBUTES_HASH SidHash;// Offset=0xcc Size=0x88
+    struct _SID_AND_ATTRIBUTES_HASH RestrictedSidHash;// Offset=0x154 Size=0x88
+    struct _AUTHZBASEP_SECURITY_ATTRIBUTES_INFORMATION *pSecurityAttributes;// Offset=0x1dc Size=0x4
+    void *Package;// Offset=0x1e0 Size=0x4
+    struct _SID_AND_ATTRIBUTES *Capabilities;// Offset=0x1e4 Size=0x4
+    unsigned long CapabilityCount;// Offset=0x1e8 Size=0x4
+    struct _SID_AND_ATTRIBUTES_HASH CapabilitiesHash;// Offset=0x1ec Size=0x88
+    struct _SEP_LOWBOX_NUMBER_ENTRY *LowboxNumberEntry;// Offset=0x274 Size=0x4
+    struct _SEP_LOWBOX_HANDLES_ENTRY *LowboxHandlesEntry;// Offset=0x278 Size=0x4
+    struct _AUTHZBASEP_CLAIM_ATTRIBUTES_COLLECTION *pClaimAttributes;// Offset=0x27c Size=0x4
+    void *TrustLevelSid;// Offset=0x280 Size=0x4
+    struct _TOKEN *TrustLinkedToken;// Offset=0x284 Size=0x4
+    void *IntegrityLevelSidValue;// Offset=0x288 Size=0x4
+    struct _SEP_SID_VALUES_BLOCK *TokenSidValues;// Offset=0x28c Size=0x4
+    struct _SEP_LUID_TO_INDEX_MAP_ENTRY *IndexEntry;// Offset=0x290 Size=0x4
+    struct _SEP_TOKEN_DIAG_TRACK_ENTRY *DiagnosticInfo;// Offset=0x294 Size=0x4
+    unsigned long VariablePart;// Offset=0x298 Size=0x4
+};*/
+
+//---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
 
@@ -86,6 +140,7 @@ static void *Token_CreateToken(void *TokenObject, PROCESS *proc);
 
 NTSTATUS Thread_GetKernelHandleForUserHandle(
     HANDLE *OutKernelHandle, HANDLE InUserHandle);
+
 
 //---------------------------------------------------------------------------
 
@@ -904,7 +959,6 @@ _FX void *Token_Restrict(
 
         return Token_CreateToken(TokenObject, proc);
 	}
-
     else {
             
         //
@@ -1392,6 +1446,8 @@ _FX void *Token_RestrictHelper3(
 		
         BOOLEAN KeepUserGroup = Conf_Get_Boolean(proc->box->name, L"KeepUserGroup", 0, FALSE);
         BOOLEAN KeepLogonSession = Conf_Get_Boolean(proc->box->name, L"KeepLogonSession", 0, FALSE);
+        BOOLEAN OpenWndStation = Conf_Get_Boolean(proc->box->name, L"OpenWndStation", 0, FALSE);
+
 
         n = 0;
 
@@ -1400,7 +1456,10 @@ _FX void *Token_RestrictHelper3(
             if (Groups->Groups[i].Attributes & SE_GROUP_INTEGRITY)
                 continue;
 
+
             if (KeepLogonSession && (Groups->Groups[i].Attributes & SE_GROUP_LOGON_ID))
+                continue;
+            if (OpenWndStation && (Groups->Groups[i].Attributes & SE_GROUP_LOGON_ID))
                 continue;
 
             if (RtlEqualSid(Groups->Groups[i].Sid, UserSid)) {
@@ -2159,6 +2218,7 @@ _FX NTSTATUS SbieCreateToken(PHANDLE TokenHandle, ACCESS_MASK DesiredAccess, POB
 //---------------------------------------------------------------------------
 
 
+
 _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
 {
     HANDLE TokenHandle = NULL;
@@ -2181,6 +2241,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
     PTOKEN_DEFAULT_DACL		LocalDefaultDacl = NULL;
     PTOKEN_SOURCE			LocalSource = NULL;
 
+
     //PTOKEN_DEFAULT_DACL		NewDefaultDacl = NULL;
     //ULONG                   DefaultDacl_Length = 0;
     //PACL                    NewDacl = NULL;
@@ -2200,6 +2261,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
     AllowedPrivilege.Privileges[0].Luid.LowPart = SE_CHANGE_NOTIFY_PRIVILEGE;
 
     //
+
     // Gather information from the original token
     //
 
@@ -2252,6 +2314,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
             BOOLEAN NoUntrustedToken = Conf_Get_Boolean(proc->box->name, L"NoUntrustedToken", 0, FALSE);
             BOOLEAN KeepUserGroup = Conf_Get_Boolean(proc->box->name, L"KeepUserGroup", 0, FALSE);
             BOOLEAN KeepLogonSession = Conf_Get_Boolean(proc->box->name, L"KeepLogonSession", 0, FALSE);
+            BOOLEAN OpenWndStation = Conf_Get_Boolean(proc->box->name, L"OpenWndStation", 0, FALSE);
 
             for (ULONG i = 0; i < LocalGroups->GroupCount; i++) {
 
@@ -2266,16 +2329,14 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
                 }
 
 				if ((LocalGroups->Groups[i].Attributes & SE_GROUP_LOGON_ID)) {
-					if(!KeepLogonSession)
+					if(!KeepLogonSession&&!OpenWndStation)
 						LocalGroups->Groups[i].Attributes = SE_GROUP_LOGON_ID | SE_GROUP_USE_FOR_DENY_ONLY;
-					continue;
+          continue;
 				}
-
                 if (RtlEqualSid(LocalGroups->Groups[i].Sid, LocalUser->User.Sid)) {
                     if (KeepUserGroup)
                         continue;
                 }
-
                 LocalGroups->Groups[i].Attributes = SE_GROUP_USE_FOR_DENY_ONLY;
             }
         }
@@ -2321,18 +2382,17 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
         //
         // free old user and create a new one with the new SID
         //
-
         ULONG Attributes = LocalUser->User.Attributes;
 
         ExFreePool((PVOID)LocalUser);
         LocalUser = ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_USER) + RtlLengthSid(proc->SandboxieLogonSid), tzuk);
-
         LocalUser->User.Attributes = Attributes;
         LocalUser->User.Sid = ((UCHAR*)LocalUser) + sizeof(TOKEN_USER);
 
 		memcpy(LocalUser->User.Sid, proc->SandboxieLogonSid, RtlLengthSid(proc->SandboxieLogonSid));
 	}
     
+
 retry:
     status = SbieCreateToken(
         &TokenHandle,
@@ -2378,7 +2438,6 @@ retry:
         LocalOwner = (PTOKEN_OWNER)ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_OWNER), tzuk);
         LocalOwner->Owner = LocalUser->User.Sid;
 
-
         //DefaultDacl_Length = LocalDefaultDacl->DefaultDacl->AclSize;
 
         //// Construct a new ACL 
@@ -2402,6 +2461,7 @@ retry:
 
     if (NT_SUCCESS(status))
         status = Thread_GetKernelHandleForUserHandle(&KernelTokenHandle, TokenHandle);
+
 
     //if (NT_SUCCESS(status) && NewDacl)
     //{
@@ -2431,7 +2491,6 @@ retry:
         if (NT_SUCCESS(status)) 
         {
             void* ptr = ExAllocatePoolWithTag(PagedPool, PAGE_SIZE, tzuk);
-
             ULONG len = 0;
             status = ZwQueryInformationToken(OldTokenHandle, TokenSecurityAttributes, ptr, PAGE_SIZE, &len);
             if (NT_SUCCESS(status)) {
@@ -2500,7 +2559,9 @@ finish:
     if (LocalDefaultDacl)   ExFreePool((PVOID)LocalDefaultDacl);
     if (LocalSource)        ExFreePool((PVOID)LocalSource);
 
+
     //if (NewDefaultDacl)     ExFreePool((PVOID)NewDefaultDacl);
+
 
     //
     // get the actual token object from the handle
@@ -2516,4 +2577,3 @@ finish:
     }
     return NewTokenObject;
 }
-

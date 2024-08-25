@@ -244,8 +244,9 @@ _FX BOOLEAN AdvApi_Init(HMODULE module)
     // only hook SetSecurityInfo if this is Chrome.  Outlook 2013 uses delayed loading and will cause infinite callbacks
     // Starting with Win 10, we only want to hook ntmarta!SetSecurityInfo. Do NOT hook advapi!SetSecurityInfo. Delay loading for advapi will cause infinite recursion.
     // Note: the infinite recursion issue has been resolved int 5.43
-    if (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE) 
-		|| (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)) {
+    if ((Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE) 
+        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER))
+        && !SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE)) {
         SetSecurityInfo = __sys_SetSecurityInfo;
         GetSecurityInfo = __sys_GetSecurityInfo;
         SBIEDLL_HOOK(AdvApi_, SetSecurityInfo);
@@ -706,8 +707,9 @@ _FX BOOLEAN Ntmarta_Init(HMODULE module)
 #define GETPROC2(x,s) __sys_Ntmarta_##x##s = (P_##x) Ldr_GetProcAddrNew(DllName_ntmarta, L#x L#s,#x #s);
 
     GETPROC2(GetSecurityInfo, );
-    if (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE)
-		|| (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)) {
+    if ((Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE) 
+        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)) 
+        && !SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE)) {
 
         GetSecurityInfo = __sys_Ntmarta_GetSecurityInfo;
         if (GetSecurityInfo)

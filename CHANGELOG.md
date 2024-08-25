@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added "RandomRegUID"(bool) which could modify Windows Product Id in the registry to a rand value
 - added "HideDiskSerialNumber"(bool) return random value when applications tries to get disk serial number
+- added option to get free 10 days evaluation certificates from the support settings page.
+  - The evaluation certificates are node lcoked to the HwID and for each HwID up to 3 certs can be requested.
 
 
 

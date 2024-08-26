@@ -315,7 +315,7 @@ void NetFw_AddRule(LIST* list, NETFW_RULE* new_rule)
 
 		//
 		// it seems we might be able to merge these rules
-		// now we check the convoluted case when rules havs ip's and port's set
+		// now we check the convoluted case when rules have IPs and ports set.
 		//
 
 		if ((rule->port_map.count != 0) && (rule->ip_map.count != 0)){

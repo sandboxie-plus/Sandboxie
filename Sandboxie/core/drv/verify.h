@@ -21,19 +21,27 @@ typedef union _SCertInfo {
     unsigned long long State;
     struct {
         unsigned long
-            active    : 1,      // certificate is active
-            expired   : 1,      // certificate is expired but may be active
-            outdated  : 1,      // certificate is expired, not anymore valid for the current build
-            unused_1  : 2,      // DEPRECATED
+            active      : 1,    // certificate is active
+            expired     : 1,    // certificate is expired but may be active
+            outdated    : 1,    // certificate is expired, not anymore valid for the current build
+            unused_1    : 2,    // DEPRECATED
             grace_period: 1,    // the certificate is expired and or outdated but we keep it valid for 1 extra month to allof wor a seamless renewal
-            reservd_2 : 2,
+            reservd_2   : 2,
 
-            type      : 5,
-            level     : 3,
+            type        : 5,
+            level       : 3,
 
-            reservd_3 : 8,
+            reservd_3   : 8,
 
-            reservd_4 : 8;
+            reservd_4   : 4,    // More features
+            opt_desk    : 1,    // Isolated Sandboxie Desktops:             "UseSandboxDesktop"
+            opt_net     : 1,    // Advanced Network features:               "NetworkDnsFilter", "NetworkUseProxy".
+            opt_enc     : 1,    // Box Encryption and Box Protection:       "ConfidentialBox", "UseFileImage", "EnableEFS".
+            opt_sec     : 1;    // Variouse security enchanced box types:   "UseSecurityMode", "SysCallLockDown", "RestrictDevices", "UseRuleSpecificity", "UsePrivacyMode", "ProtectHostImages",
+                                // as well as reduced isoaltion box type:   "NoSecurityIsolation".
+                                
+                                // Other features, available with any cert: "UseRamDisk", "ForceUsbDrives",
+                                // as well as Automatic Updates, etc....
 
         unsigned long expirers_in_sec;
     };

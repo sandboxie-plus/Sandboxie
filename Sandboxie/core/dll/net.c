@@ -765,7 +765,7 @@ _FX BOOLEAN WSA_GetProxyImpl(NETPROXY_RULE* WSA_Proxy, const short *addr, int ad
     if (!WSA_Proxy)
         return FALSE;
 
-    // check if there are any IP's specified for which wes should bypass the proxy
+    // check if there are any IPs specified for which we should bypass the proxy
     if (WSA_Proxy->ip_map.count > 0) {
         IP_ADDRESS ip;
         if (WSA_GetIP(addr, addrlen, &ip)) {

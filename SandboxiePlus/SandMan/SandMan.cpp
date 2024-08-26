@@ -1315,7 +1315,8 @@ void CSandMan::OnRestartAsAdmin()
 	se.nShow = SW_HIDE;
 	se.fMask = 0;
 	ShellExecuteEx(&se);
-	OnExit();
+	m_bExit = true;
+	close();
 }
 
 void CSandMan::OnExit()

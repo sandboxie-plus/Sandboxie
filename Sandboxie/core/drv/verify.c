@@ -553,6 +553,7 @@ _FX NTSTATUS KphValidateCertificate()
 
     WCHAR* type = NULL;
     WCHAR* level = NULL;
+    WCHAR* options = NULL;
     LONG amount = 1;
     WCHAR* key = NULL;
     LARGE_INTEGER cert_date = { 0 };
@@ -699,6 +700,9 @@ _FX NTSTATUS KphValidateCertificate()
         else if (_wcsicmp(L"LEVEL", name) == 0 && level == NULL) {
             level = Mem_AllocString(Driver_Pool, value);
         }
+        else if (_wcsicmp(L"OPTIONS", name) == 0 && options == NULL) {
+            options = Mem_AllocString(Driver_Pool, value);
+        }
         else if (_wcsicmp(L"UPDATEKEY", name) == 0 && key == NULL) {
             key = Mem_AllocString(Driver_Pool, value);
         }
@@ -819,6 +823,7 @@ _FX NTSTATUS KphValidateCertificate()
            expiration_date.QuadPart = -1; // at the end of time (never)
           Verify_CertInfo.expired = 0; // but not outdated
           Verify_CertInfo.outdated = 0;
+
 CleanupExit:
     if(CertDbg)     DbgPrint("Sbie Cert status: %08x\n", status);
 
@@ -829,6 +834,7 @@ CleanupExit:
 
     if (type)       Mem_FreeString(type);
     if (level)      Mem_FreeString(level);
+    if (options)    Mem_FreeString(options);
     if (key)        Mem_FreeString(key);
 
                     MyFreeHash(&hashObj);

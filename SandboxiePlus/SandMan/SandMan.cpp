@@ -1321,9 +1321,9 @@ void CSandMan::OnRestartAsAdmin()
 void CSandMan::OnExit()
 {
 	m_bExit = true;
-	if (theConf->GetBool("TerminateWhenExit", false)) {
+	if (theConf->GetBool("Options/TerminateWhenExit", false)) {
 		if (theAPI->IsConnected()) {
-			theAPI->TerminateAll(!theConf->GetBool("ExceptWhenAutoTerminate", false));
+			theAPI->TerminateAll(!theConf->GetBool("Options/ExceptWhenAutoTerminate", false));
 		}
 	}
 	close();

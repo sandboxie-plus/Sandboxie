@@ -298,6 +298,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.uiLang, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 
 	connect(ui.chkSandboxUrls, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkAutoTerminate, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkMonitorSize, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkPanic, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.keyPanic, SIGNAL(keySequenceChanged(const QKeySequence &)), this, SLOT(OnOptChanged()));
@@ -935,6 +936,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkNoMessages->setChecked(!theConf->GetBool("Options/ShowNotifications", true));
 
 	ui.chkSandboxUrls->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OpenUrlsSandboxed", 2)));
+	ui.chkAutoTerminate->setChecked(theConf->GetBool("Options/TerminateWhenExit"));
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
 	ui.chkCheckDelete->setChecked(theConf->GetBool("Options/CleanUpOnStart", false));
@@ -1639,6 +1641,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/ShowNotifications", !ui.chkNoMessages->isChecked());
 
 	theConf->SetValue("Options/OpenUrlsSandboxed", CSettingsWindow__Chk2Int(ui.chkSandboxUrls->checkState()));
+	theConf->SetValue("Options/TerminateWhenExit", ui.chkAutoTerminate->isChecked());
 
 	theConf->SetValue("Options/ShowRecovery", ui.chkShowRecovery->isChecked());
 	theConf->SetValue("Options/InstantRecovery", !ui.chkNotifyRecovery->isChecked());

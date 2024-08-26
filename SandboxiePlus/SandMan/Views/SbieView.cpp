@@ -1086,6 +1086,11 @@ QString CSbieView::ImportSandbox()
 	if (!Status.IsError()) {
 		pBox = theAPI->GetBoxByName(Name);
 		if (pBox) {
+			QString rootname = "";
+			if (QMessageBox::question(this, tr("Importing Sandbox"), tr("Do you want to select custom root folder?"), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
+				rootname=QFileDialog::getExistingDirectory(this);
+				pBox->SetText("FileRootPath", rootname);
+			}
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
 			if (!Password.isEmpty()) {
@@ -1095,7 +1100,7 @@ QString CSbieView::ImportSandbox()
 			}
 
 			if (!Status.IsError())
-				Status = pBoxEx->ImportBox(Path, Password);
+				Status = pBoxEx->ImportBox(Path,rootname,Password);
 		}
 	}
 	if (Status.GetStatus() == OP_ASYNC) {

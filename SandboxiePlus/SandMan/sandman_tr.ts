@@ -732,17 +732,17 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="280"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation>Sınırlı bir süre için sertifika olmadan değerlendirmeye başlayın.</translation>
+        <translation>Sınırlı bir süre için sertifika olmadan denemeye başlayın.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="289"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Ücretsiz deneme sertifikanızı alın&lt;/font&gt;&lt;/a&gt; ve tüm premium özelliklerin %1 gün boyunca keyfini çıkarın.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi bir Donanım Kimliği için %2 defaya kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -3475,7 +3475,7 @@ Hata: %1</translation>
     <message>
         <location filename="SandMan.cpp" line="3173"/>
         <source>The evaluation period has expired!!!</source>
-        <translation>Değerlendirme süresi dolmuştur!</translation>
+        <translation>Deneme süresi dolmuştur!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3273"/>
@@ -5277,17 +5277,17 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1262"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1/%2 deneme sertifikası kullandınız. Daha fazla ücretsiz sertifika oluşturulamaz.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Ücretsiz deneme sertifikası alın&lt;/a&gt; ve tüm premium özelliklerin %1 gün boyunca keyfini çıkarın.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1265"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi bir Donanım Kimliği için %2 defaya kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1278"/>
@@ -5312,22 +5312,22 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1327"/>
         <source>Expires in: %1 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>Son kullanma tarihi: %1 Gün</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires: %1 Days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>Süresi doldu: %1 Gün önce</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1340"/>
         <source>Options: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçenekler: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Güvenlik/Gizlilik Geliştirildi &amp; Uygulama Bölmeleri (SBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
@@ -5335,7 +5335,7 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkin</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
@@ -5343,22 +5343,22 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Devre dışı</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1346"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Şifreli Korumalı Alanlar (EBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <source>Network Interception (NetI): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ağ Yakalama (NetI): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Masaüstü (Masa): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1363"/>
@@ -5383,13 +5383,14 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - DENEME Sertifikası Al</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lütfen %2&apos;ye verilecek ve geçerli donanıma kilitlenecek ücretsiz %1 günlük deneme sertifikası almak için e-posta adresinizi girin.
+Her benzersiz donanım kimliği için %3&apos;e kadar deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1435"/>
@@ -5494,7 +5495,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2018"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
-        <translation type="unfinished"></translation>
+        <translation>Deneme sertifikası başarıyla uygulandı. Ücretsiz denemenizin tadını çıkarın!</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2157"/>
@@ -6156,7 +6157,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="181"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
-        <translation>&lt;u&gt;Sandboxie&apos;nin değerlendirme döneminin ötesinde ticari kullanımı&lt;/u&gt;, geçerli bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destekçi sertifikası gerektirir&lt;/a&gt;.</translation>
+        <translation>&lt;u&gt;Sandboxie&apos;nin deneme döneminin ötesinde ticari kullanımı&lt;/u&gt;, geçerli bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destekçi sertifikası gerektirir&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="188"/>
@@ -8203,12 +8204,12 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4830"/>
         <source>Hide Disk Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Disk Seri Numarasını Gizle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4837"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Kayıt defterindeki bilinen benzersiz tanımlayıcıları karıştır</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4865"/>
@@ -9560,7 +9561,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1745"/>
         <source>Cert Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika Bilgisi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1758"/>

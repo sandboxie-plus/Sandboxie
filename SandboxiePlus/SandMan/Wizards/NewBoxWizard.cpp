@@ -512,7 +512,7 @@ void CBoxTypePage::OnBoxTypChanged()
 #endif
 
     if(BoxType != CSandBoxPlus::eDefault || BlackBox)
-		theGUI->CheckCertificate(this, BlackBox);
+		theGUI->CheckCertificate(this, BlackBox ? 1 : 0);
 
     emit completeChanged();
 }

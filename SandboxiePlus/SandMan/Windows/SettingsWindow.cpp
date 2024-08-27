@@ -1326,9 +1326,9 @@ void CSettingsWindow::UpdateCert()
 		QStringList Info;
 		
 		if(g_CertInfo.expirers_in_sec > 0)
-			Info.append(tr("Expires in: %1 Days").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+			Info.append(tr("Expires in: %1 days").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 		else if(g_CertInfo.expirers_in_sec < 0)
-			Info.append(tr("Expired: %1 Days ago").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+			Info.append(tr("Expired: %1 days ago").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 		
 		QStringList Options;
 		if (g_CertInfo.opt_sec) Options.append("SBox");

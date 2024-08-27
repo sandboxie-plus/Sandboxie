@@ -1264,7 +1264,7 @@ void CSettingsWindow::UpdateCert()
 		ui.lblCert->setText(tr("<b>You have used %1/%2 evaluation certificates. No more free certificates can be generated.</b>").arg(EvalCount).arg(EVAL_MAX));
 	else
 		ui.lblCert->setText(tr("<b><a href=\"_\">Get a free evaluation certificate</a> and enjoy all premium features for %1 days.</b>").arg(EVAL_DAYS));
-	ui.lblCert->setToolTip(tr("You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID").arg(EVAL_DAYS).arg(EVAL_MAX));
+	ui.lblCert->setToolTip(tr("You can request a free %1-day evaluation certificate up to %2 times for any one hardware ID.").arg(EVAL_DAYS).arg(EVAL_MAX));
 
 	//ui.lblCertLevel->setVisible(!g_Certificate.isEmpty());
 	if (!g_Certificate.isEmpty()) 
@@ -1328,7 +1328,7 @@ void CSettingsWindow::UpdateCert()
 		if(g_CertInfo.expirers_in_sec > 0)
 			Info.append(tr("Expires in: %1 Days").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 		else if(g_CertInfo.expirers_in_sec < 0)
-			Info.append(tr("Expires: %1 Days ago").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+			Info.append(tr("Expired: %1 Days ago").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 		
 		QStringList Options;
 		if (g_CertInfo.opt_sec) Options.append("SBox");

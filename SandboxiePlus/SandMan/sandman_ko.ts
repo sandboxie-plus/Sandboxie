@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
         <source>Lock the box when all processes stop.</source>
-        <translation>모든 프로세스가 중지되면 상자를 잠급니다.</translation>
+        <translation>모든 프로세스가 중지되면 박스를 잠급니다.</translation>
     </message>
 </context>
 <context>
@@ -900,7 +900,7 @@ Please browse to the correct user profile directory.</source>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
-        <translation type="unfinished">하나의 하드웨어 ID에 대해 %1일 무료 평가 인증서를 %2회까지 요청할 수 있습니다</translation>
+        <translation>하드웨어 ID당 %2회까지 무료 %1일 평가 인증서를 요청할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -1342,7 +1342,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="779"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>사용자 지정 Sandboxie 토큰을 사용하면 개별 샌드박스를 서로 더 잘 격리할 수 있으며 작업 관리자의 사용자 열에 프로세스가 속한 상자의 이름이 표시됩니다. 그러나 일부 타사 보안 솔루션은 사용자 지정 토큰에 문제가 있을 수 있습니다.</translation>
+        <translation>사용자 지정 Sandboxie 토큰을 사용하면 개별 샌드박스를 서로 더 잘 격리할 수 있으며 작업 관리자의 사용자 열에 프로세스가 속한 박스의 이름이 표시됩니다. 그러나 일부 타사 보안 솔루션은 사용자 지정 토큰에 문제가 있을 수 있습니다.</translation>
     </message>
 </context>
 <context>
@@ -1483,7 +1483,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation>Sandboxie-Plus 후원자 인증서가 만료되었지만 사용 중인 현재 빌드의 경우 최신 빌드 전용 지원자 기능으로 업데이트하면 사용할 수 없게 됩니다.
+        <translation>Sandboxie-Plus 후원자 인증서가 만료되었지만 사용 중인 현재 빌드의 경우 최신 빌드 전용 후원자 기능으로 업데이트하면 사용할 수 없게 됩니다.
 
 업데이트를 계속하시겠습니까?</translation>
     </message>
@@ -3698,7 +3698,7 @@ Sandboxie에 대한 업데이트가 있는지 확인 부탁드립니다.</transl
     <message>
         <location filename="SandMan.cpp" line="3036"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation>선택한 기능에는 &lt;b&gt;고급&lt;/b&gt; 지원자 인증서가 필요합니다.</translation>
+        <translation>선택한 기능에는 &lt;b&gt;고급&lt;/b&gt; 후원자 인증서가 필요합니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3038"/>
@@ -4349,7 +4349,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2950"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation>%1 박스는 &lt;b&gt;고급&lt;/b&gt; 지원자 인증서가 필요한 기능을 사용하도록 구성되어 있습니다.</translation>
+        <translation>%1 박스는 &lt;b&gt;고급&lt;/b&gt; 후원자 인증서가 필요한 기능을 사용하도록 구성되어 있습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2952"/>
@@ -5474,12 +5474,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Importing Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 가져오기</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Do you want to select custom root folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자 지정 루트 폴더를 선택하시겠습니까?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5910,7 +5910,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <translation type="unfinished">하나의 하드웨어 ID에 대해 %1일 무료 평가 인증서를 %2회까지 요청할 수 있습니다</translation>
+        <translation>하드웨어 ID당 %2회까지 무료 %1일 평가 인증서를 요청할 수 있습니다.</translation>
     </message>
     <message>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
@@ -5939,12 +5939,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
-        <translation type="unfinished">만료: %1일 전</translation>
+        <translation>만료: %1일 전</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1331"/>
         <source>Expired: %1 days ago</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1342"/>
@@ -5985,7 +5985,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation>Sandboxie 데스크톱:% 1</translation>
+        <translation>Sandboxie 데스크톱 (데스크): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1365"/>
@@ -6002,7 +6002,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1378"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
-        <translation>기존 후원자 인증서를 입력하지 않고 갱신 키를 사용하려고 합니다. (&lt;b&gt;웹사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 지원자 인증서가 있어야 하며, 해당 인증서가 없으면 쓸모가 없습니다.</translation>
+        <translation>기존 후원자 인증서를 입력하지 않고 갱신 키를 사용하려고 합니다. (&lt;b&gt;웹사이트에 굵은 글씨로 명시되어 있는&lt;/b) 이 유형의 키는 기존 후원자 인증서가 있어야 하며, 해당 인증서가 없으면 쓸모가 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1383"/>
@@ -10225,7 +10225,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="178"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandman이 종료될 때 모든 박스 처리 종료</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="650"/>

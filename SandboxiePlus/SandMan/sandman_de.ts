@@ -747,8 +747,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
-        <translation type="unfinished">Sie können ein kostenloses %1-Tage-Evaluationszertifikat bis zu %2-mal für eine einzelne Hardware-ID anfordern</translation>
+        <translation>Sie können ein kostenloses %1-Tage-Evaluationszertifikat bis zu %2-mal pro Hardware-ID anfordern.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -4955,12 +4954,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Importing Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox importieren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Do you want to select custom root folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie einen eigenen Quellordner auswählen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5374,10 +5373,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Erhalten Sie ein kostenloses Evaluationszertifikat&lt;/a&gt; und nutzen Sie alle Premium-Funktionen für %1 Tage.&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="vanished">Sie können ein kostenloses %1-Tage-Evaluationszertifikat bis zu %2-mal für eine einzelne Hardware-ID anfordern.</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1280"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Dieses Unterstützerzertifikat ist abgelaufen, bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
@@ -5388,14 +5383,9 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Dieses Unterstützerzertifikat wird &lt;font color=&apos;red&apos;&gt;in %1 Tagen ablaufen&lt;/font&gt;, bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <source>Expires in: %1 Days</source>
-        <translation type="vanished">Läuft ab in: %1 Tagen</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires in: %1 days</source>
-        <oldsource>Expires: %1 Days ago</oldsource>
-        <translation type="unfinished">Abgelaufen: vor %1 Tagen</translation>
+        <translation>Läuft ab in: %1 Tagen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1342"/>
@@ -5711,7 +5701,7 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <translation type="unfinished">Sie können ein kostenloses %1-Tage-Evaluationszertifikat bis zu %2-mal für eine einzelne Hardware-ID anfordern</translation>
+        <translation>Sie können ein kostenloses %1-Tage-Evaluationszertifikat bis zu %2-mal pro Hardware-ID anfordern.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1285"/>
@@ -5721,7 +5711,7 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1331"/>
         <source>Expired: %1 days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>Abgelaufen: vor %1 Tagen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1398"/>
@@ -9545,7 +9535,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="211"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation>Prüfe den &apos;automatisches Löschen&apos; Status der Sandboxen beim Starten von Sandman</translation>
+        <translation>Prüfe den &apos;automatisches Löschen&apos; Status der Sandboxen beim Starten von SandMan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="608"/>
@@ -9640,7 +9630,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="178"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation type="unfinished"></translation>
+        <translation>Beende alle Prozesse in Sandboxen, wenn SandMan beendet wird</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1754"/>

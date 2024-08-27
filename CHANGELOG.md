@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to get free 10 days evaluation certificates from the support settings page.
   - The evaluation certificates are node lcoked to the HwID and for each HwID up to 3 certs can be requested.
 - added "TerminateWhenExit"(bool,in Sandboxie-Plus.ini) to terminate all processes when Sandman exits for [#4171](https://github.com/sandboxie-plus/Sandboxie/issues/4171)
+- added a question box to ask for Sandbox Import Location for [#4169](https://github.com/sandboxie-plus/Sandboxie/issues/4169)
 
 
 ## [1.14.6 / 5.69.6] - 2024-07-30

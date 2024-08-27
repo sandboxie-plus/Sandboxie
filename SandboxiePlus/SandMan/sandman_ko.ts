@@ -894,12 +894,12 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="289"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;무료 평가 인증서를 받고&lt;/font&gt;&lt;/a&gt; %1 일 동안 모든 프리미엄 기능을 누리세요.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>하나의 하드웨어 ID에 대해 %1일 무료 평가 인증서를 %2회까지 요청할 수 있습니다</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -5889,17 +5889,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1262"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1/%2개의 평가 인증서를 사용했습니다. 더 이상 사용 가능한 인증서를 생성할 수 없습니다.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;무료 평가 인증서를 받고&lt;/a&gt; %1일 동안 모든 프리미엄 기능을 누리세요.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1265"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>하나의 하드웨어 ID에 대해 %1일 무료 평가 인증서를 %2회까지 요청할 수 있습니다</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1278"/>
@@ -5919,22 +5919,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1327"/>
         <source>Expires in: %1 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>만료 날짜: %1일</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires: %1 Days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>만료: %1일 전</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1340"/>
         <source>Options: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>옵션: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>보안/개인 정보 보호 강화 및 앱 박스 (SBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
@@ -5942,7 +5942,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>사용함</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
@@ -5950,22 +5950,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Disabled</source>
-        <translation type="unfinished">사용 안 함</translation>
+        <translation>사용 안 함</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1346"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>암호화된 샌드박스 (EBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <source>Network Interception (NetI): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>네트워크 차단 (NetI): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 데스크톱:% 1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1363"/>
@@ -5999,13 +5999,14 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 평가판 인증서 가져오기</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2로 발급되어 현재 하드웨어에 고정되는 무료 %1일 평가 인증서를 받으려면 이메일 주소를 입력하세요.
+고유 하드웨어 ID별로 최대 %3개의 평가 인증서를 요청할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1435"/>
@@ -6021,7 +6022,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2018"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
-        <translation type="unfinished"></translation>
+        <translation>평가 인증서가 성공적으로 신청되었습니다. 무료 평가판을 즐기세요!</translation>
     </message>
     <message>
         <source>Retreiving certificate...</source>
@@ -10225,7 +10226,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1745"/>
         <source>Cert Info</source>
-        <translation type="unfinished"></translation>
+        <translation>인증 정보</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1758"/>

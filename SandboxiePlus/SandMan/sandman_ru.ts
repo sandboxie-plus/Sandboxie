@@ -736,17 +736,17 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="280"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation>Начать оценку без сертификата, в течение ограниченного периода времени.</translation>
+        <translation>Начать ознакомление без сертификата, в течение ограниченного периода времени.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="289"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Получите бесплатный ознакомительный сертификат&lt;/font&gt;&lt;/a&gt; и пользуйтесь всеми премиум-функциями в течение %1 дн.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете запросить бесплатный %1-дневный ознакомительный сертификат не более %2 раз для одного Hardware ID</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -5387,17 +5387,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1262"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Вы использовали %1/%2 ознакомительных сертификатов. Больше бесплатные сертификаты генерироваться не будут.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Получите бесплатный ознакомительный сертификат&lt;/a&gt; и пользуйтесь всеми премиум-функциями в течение %1 дня.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1265"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете запросить бесплатный %1-дневный ознакомительный сертификат не более %2 раз для одного Hardware ID</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1278"/>
@@ -5417,22 +5417,22 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1327"/>
         <source>Expires in: %1 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>Истекает через: %1 дн</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires: %1 Days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>Истек: %1 дн. назад</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1340"/>
         <source>Options: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочницы для приложений с улучшенной безопасностью и конф-тью (SBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
@@ -5440,7 +5440,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
@@ -5448,22 +5448,22 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Disabled</source>
-        <translation type="unfinished">Отключено</translation>
+        <translation>Отключено</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1346"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Зашифрованные песочницы (EBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <source>Network Interception (NetI): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Перехват сети (NetI): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1363"/>
@@ -5488,13 +5488,14 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Получить ОЗНАКОМИТЕЛЬНЫЙ сертификат</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите адрес электронной почты, чтобы получить бесплатный ознакомительный сертификат на %1 дней, который будет выдан на %2 и привязан к текущему оборудованию.
+Вы можете запросить до %3 ознакомительных сертификатов для каждого уникального Hardware ID.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1435"/>
@@ -5715,7 +5716,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2018"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ознакомительный сертификат успешно применен. Наслаждайтесь бесплатной пробной версией!</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2020"/>
@@ -8202,7 +8203,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4865"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
-        <translation>Не позволять изолированным процессам видеть процессы, запущенные за пределами песочницы.</translation>
+        <translation>Не позволять изолированным процессам видеть процессы, запущенные за пределами песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4957"/>
@@ -9554,7 +9555,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1745"/>
         <source>Cert Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о сертификате</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1758"/>

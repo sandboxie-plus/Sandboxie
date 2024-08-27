@@ -1740,18 +1740,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="730"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="739"/>
         <source>bytes (unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>字节(无限制)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="733"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="742"/>
         <source>bytes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>字节 (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="748"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>无限制</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="920"/>
@@ -4387,19 +4387,19 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="1658"/>
         <source>The value is not an existing directory or executable.</source>
-        <translation type="unfinished"></translation>
+        <translation>该目录不存在或不可执行</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1663"/>
         <location filename="SandMan.cpp" line="1679"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>你输出了错误的沙盘名称！没有做出任何更改</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1667"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>User canceled this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户取消操作</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2014"/>
@@ -5508,7 +5508,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1421"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>请输入沙盒的新别名。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1430"/>
@@ -5585,7 +5585,7 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="1807"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
-        <translation type="unfinished">此沙盒已禁用或仅限于特定组/用户，确定要编辑它吗？</translation>
+        <translation>此沙盒已禁用或仅限于特定组/用户，确定要编辑它吗？</translation>
     </message>
 </context>
 <context>
@@ -5767,7 +5767,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1265"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>对于任何一个硬件ID，您最多可以请求%2次免费的%1天评估证书</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1278"/>
@@ -5777,12 +5777,12 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1327"/>
         <source>Expires in: %1 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>过期时间：%1天</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires: %1 Days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>过期时间：%1天前</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1340"/>

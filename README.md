@@ -154,7 +154,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - isaak654, DerivativeOfLog7 - Italian
 - takahiro-itou - Japanese
 - VenusGirl - Korean
-- 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=30))
+- 7zip - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog, marat2509 - Russian
 - LumitoLuma, sebadamus - Spanish

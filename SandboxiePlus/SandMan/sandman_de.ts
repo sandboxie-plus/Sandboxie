@@ -737,17 +737,17 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="280"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation>Starte Testphase ohne ein Zertifikat für eine begrenzte Zeit.</translation>
+        <translation>Starte Evaluation ohne ein Zertifikat für eine begrenzte Zeit.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="289"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Erhalten Sie ein kostenloses Evaluationszertifikat&lt;/font&gt;&lt;/a&gt; und nutzen Sie alle Premium-Funktionen für %1 Tage.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie können ein kostenloses %1-Tage-Evaluationszertifikat bis zu %2-mal für eine einzelne Hardware-ID anfordern</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -4047,7 +4047,7 @@ Bitte überprüfen Sie, ob es ein Update für Sandboxie gibt.</translation>
     <message>
         <location filename="SandMan.cpp" line="3173"/>
         <source>The evaluation period has expired!!!</source>
-        <translation>Die Evaluierungsphase ist abgelaufen!!!</translation>
+        <translation>Die Evaluationsphase ist abgelaufen!!!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4037"/>
@@ -5355,17 +5355,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1262"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sie haben %1/%2 Evaluationszertifikate verwendet. Es können keine weiteren kostenlosen Zertifikate erstellt werden.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Erhalten Sie ein kostenloses Evaluationszertifikat&lt;/a&gt; und nutzen Sie alle Premium-Funktionen für %1 Tage.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1265"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie können ein kostenloses %1-Tage-Evaluationszertifikat bis zu %2-mal für eine einzelne Hardware-ID anfordern.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1278"/>
@@ -5380,22 +5380,22 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1327"/>
         <source>Expires in: %1 Days</source>
-        <translation type="unfinished"></translation>
+        <translation>Läuft ab in: %1 Tagen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires: %1 Days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>Abgelaufen: vor %1 Tagen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1340"/>
         <source>Options: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheit/Privatsphäre verbesserte &amp; App-Boxen (SBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
@@ -5403,7 +5403,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviert</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
@@ -5411,22 +5411,22 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Disabled</source>
-        <translation type="unfinished">Deaktiviert</translation>
+        <translation>Deaktiviert</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1346"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschlüsselte Sandboxen (EBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <source>Network Interception (NetI): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerküberwachung (NetI): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Desktop (Desk): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1363"/>
@@ -5451,13 +5451,14 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - EVALUATIONSzertifikat erhalten</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie Ihre E-Mail-Adresse ein, um ein kostenloses %1-Tage-Evaluationszertifikat zu erhalten, welches auf %2 ausgestellt und an die aktuelle Hardware gebunden wird.
+Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID anfordern.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1435"/>
@@ -5727,7 +5728,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2018"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Evaluationszertifikat wurde erfolgreich angewendet. Viel Spaß beim kostenlosen Ausprobieren!</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2020"/>
@@ -9619,7 +9620,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1745"/>
         <source>Cert Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Zert. Infos</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1758"/>

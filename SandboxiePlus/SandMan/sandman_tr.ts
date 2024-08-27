@@ -742,8 +742,7 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
-        <translation type="unfinished">Herhangi bir Donanım Kimliği için %2 defaya kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz</translation>
+        <translation>Donanım Kimliği başına %2 kereye kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -5078,12 +5077,12 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Importing Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alan İçe Aktarılıyor</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Do you want to select custom root folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Özel bir kök klasör seçmek ister misiniz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5296,10 +5295,6 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Ücretsiz deneme sertifikası alın&lt;/a&gt; ve tüm premium özelliklerin %1 gün boyunca keyfini çıkarın.&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="vanished">Herhangi bir Donanım Kimliği için %2 defaya kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1280"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikasının süresi dolmuş, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;güncellenmiş bir sertifika edinin&lt;/a&gt;.</translation>
@@ -5320,19 +5315,14 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde&lt;/font&gt; sona erecek, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot; &gt;güncellenmiş bir sertifika edinin&lt;/a&gt;.</translation>
     </message>
     <message>
-        <source>Expires in: %1 Days</source>
-        <translation type="vanished">Son kullanma tarihi: %1 Gün</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires in: %1 days</source>
-        <oldsource>Expires: %1 Days ago</oldsource>
-        <translation type="unfinished">Süresi doldu: %1 Gün önce</translation>
+        <translation>Kalan kullanım süresi: %1 gün</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1331"/>
         <source>Expired: %1 days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>Süresi doldu: %1 gün önce</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1342"/>
@@ -5404,8 +5394,8 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <location filename="Windows/SettingsWindow.cpp" line="1411"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
-        <translation>Lütfen %2&apos;ye verilecek ve geçerli donanıma kilitlenecek ücretsiz %1 günlük deneme sertifikası almak için e-posta adresinizi girin.
-Her benzersiz donanım kimliği için %3&apos;e kadar deneme sertifikası talep edebilirsiniz.</translation>
+        <translation>Lütfen %2 için verilecek ve geçerli donanıma kilitlenecek ücretsiz %1 günlük deneme sertifikası almak için e-posta adresinizi girin.
+Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1437"/>
@@ -5734,7 +5724,7 @@ Her benzersiz donanım kimliği için %3&apos;e kadar deneme sertifikası talep 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <translation type="unfinished">Herhangi bir Donanım Kimliği için %2 defaya kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz</translation>
+        <translation>Donanım Kimliği başına %2 kereye kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1285"/>
@@ -9581,7 +9571,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="178"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation type="unfinished"></translation>
+        <translation>Arayüzden çıkarken tüm alanlardaki işlemleri de sonlandır</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1754"/>

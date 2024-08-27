@@ -48,7 +48,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -65,65 +65,49 @@
              <string>General Options</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_8">
+             <item row="0" column="0">
+              <widget class="QLabel" name="lblGeneral">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>SandMan Options</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_19">
+               <property name="text">
+                <string>UI Language:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="uiLang"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="chkSandboxUrls">
+               <property name="text">
+                <string>Open urls from this ui sandboxed</string>
+               </property>
+               <property name="tristate">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="1" colspan="2">
               <widget class="QCheckBox" name="chkMonitorSize">
                <property name="text">
                 <string>Count and display the disk space occupied by each sandbox</string>
                </property>
               </widget>
-             </item>
-             <item row="7" column="1" colspan="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <item>
-                <widget class="QCheckBox" name="chkSuspend">
-                 <property name="text">
-                  <string>Hotkey for suspending all processes:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QKeySequenceEdit" name="keySuspend"/>
-               </item>
-              </layout>
-             </item>
-             <item row="13" column="1">
-              <spacer name="verticalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>84</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="13" column="2">
-              <spacer name="horizontalSpacer_8">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>195</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="12" column="3" rowspan="2">
-              <spacer name="horizontalSpacer_14">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
              </item>
              <item row="4" column="1" colspan="2">
               <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -139,23 +123,6 @@
                </item>
               </layout>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="uiLang"/>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="lblGeneral">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="text">
-                <string>SandMan Options</string>
-               </property>
-              </widget>
-             </item>
              <item row="5" column="1" colspan="2">
               <layout class="QHBoxLayout" name="horizontalLayout_5">
                <item>
@@ -170,40 +137,6 @@
                </item>
               </layout>
              </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="lblRecovery">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="text">
-                <string>Recovery Options</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="chkSandboxUrls">
-               <property name="text">
-                <string>Open urls from this ui sandboxed</string>
-               </property>
-               <property name="tristate">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_19">
-               <property name="text">
-                <string>UI Language:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
              <item row="6" column="1" colspan="2">
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
@@ -217,6 +150,48 @@
                 <widget class="QKeySequenceEdit" name="keyPauseForce"/>
                </item>
               </layout>
+             </item>
+             <item row="7" column="1" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QCheckBox" name="chkSuspend">
+                 <property name="text">
+                  <string>Hotkey for suspending all processes:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QKeySequenceEdit" name="keySuspend"/>
+               </item>
+              </layout>
+             </item>
+             <item row="8" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkAsyncBoxOps">
+               <property name="text">
+                <string>Run box operations asynchronously whenever possible (like content deletion)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QCheckBox" name="chkAutoTerminate">
+               <property name="text">
+                <string>Terminate all boxed processes when Sandman exits</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="lblRecovery">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Recovery Options</string>
+               </property>
+              </widget>
              </item>
              <item row="11" column="1">
               <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -246,12 +221,44 @@
                </item>
               </layout>
              </item>
-             <item row="8" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkAsyncBoxOps">
-               <property name="text">
-                <string>Run box operations asynchronously whenever possible (like content deletion)</string>
+             <item row="12" column="1">
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>84</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="12" column="2">
+              <spacer name="horizontalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>195</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="12" column="3">
+              <spacer name="horizontalSpacer_14">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1601,6 +1608,7 @@
                 <widget class="QLabel" name="lblCertExp">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1711,6 +1719,7 @@
                 <widget class="QLabel" name="lblCertGuide">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2263,6 +2272,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
               <widget class="QLabel" name="lblProtection">
                <property name="font">
                 <font>
+                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>

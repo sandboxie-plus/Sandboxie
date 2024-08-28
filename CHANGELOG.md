@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - The evaluation certificates are node lcoked to the HwID and for each HwID up to 3 certs can be requested.
 - added "TerminateWhenExit"(bool,in Sandboxie-Plus.ini) to terminate all processes when Sandman exits for [#4171](https://github.com/sandboxie-plus/Sandboxie/issues/4171)
 - added a question box to ask for Sandbox Import Location for [#4169](https://github.com/sandboxie-plus/Sandboxie/issues/4169)
+- added UI option to configure DropConHostIntegrity
+- added "HideNetworkAdapterMAC"(bool) return random value when applications tries to get network adapter mac address
 
 ### Fixed
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)

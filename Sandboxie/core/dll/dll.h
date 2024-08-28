@@ -792,6 +792,8 @@ BOOLEAN Pdh_Init(HMODULE hmodule);
 
 BOOLEAN NsiRpc_Init(HMODULE);
 
+BOOLEAN Nsi_Init(HMODULE);
+
 BOOLEAN Ntmarta_Init(HMODULE);
 
 BOOLEAN Acscmonitor_Init(HMODULE);
@@ -800,6 +802,7 @@ BOOLEAN DigitalGuardian_Init(HMODULE);
 
 BOOLEAN ComDlg32_Init(HMODULE);
 
+DWORD Dll_rand(void);
 
 //---------------------------------------------------------------------------
 // Functions (Config)

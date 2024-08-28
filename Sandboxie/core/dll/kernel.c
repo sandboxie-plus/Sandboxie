@@ -517,14 +517,6 @@ _FX LANGID Kernel_GetSystemDefaultLangID()
 //Kernel_GetVolumeInformationByHandleW
 //----------------------------------------------------------------------------
 
-int Kernel_rand(void)
-{
-	static unsigned long Kernel_seed = 1;
-	if(Kernel_seed == 1) 
-		Kernel_seed = GetTickCount();
-	Kernel_seed = Kernel_seed * 1664525L + 1013904223L;
-	return Kernel_seed;
-}
 
 _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize) 
 {
@@ -534,14 +526,16 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 
         EnterCriticalSection(&Kernel_DiskSN_CritSec);
 
-		DWORD* lpCachedSerialNumber = map_get(&Kernel_DiskSN, &ourSerialNumber);
+		void* key = (void*)ourSerialNumber;
+
+		DWORD* lpCachedSerialNumber = map_get(&Kernel_DiskSN, key);
 		if (lpCachedSerialNumber)
 			*lpVolumeSerialNumber = *lpCachedSerialNumber;
 		else
 		{
-			*lpVolumeSerialNumber = Kernel_rand();
+			*lpVolumeSerialNumber = Dll_rand();
 
-			map_insert(&Kernel_DiskSN, &ourSerialNumber, lpVolumeSerialNumber, sizeof(DWORD));
+			map_insert(&Kernel_DiskSN, key, lpVolumeSerialNumber, sizeof(DWORD));
 		}
 
 		LeaveCriticalSection(&Kernel_DiskSN_CritSec);

@@ -10323,7 +10323,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/SettingsWindow.ui" line="650"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>添加&apos;强制在沙盘中打开&apos; 到上下文菜单</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="657"/>

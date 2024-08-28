@@ -31,6 +31,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkElevateRpcss, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDropPrivileges, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkDropConHostIntegrity, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -168,6 +169,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
 	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
+	ui.chkDropConHostIntegrity->setChecked(m_pBox->GetBool("DropConHostIntegrity", false));
 
 	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
 
@@ -424,6 +426,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkElevateRpcss, "RunRpcssAsSystem", "y", "");
 	WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
+	WriteAdvancedCheck(ui.chkDropConHostIntegrity, "DropConHostIntegrity", "y", "");
 
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 

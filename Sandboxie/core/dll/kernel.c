@@ -603,7 +603,8 @@ _FX void Kernel_GetSystemTime(LPSYSTEMTIME lpSystemTime) {
 }
 
 _FX void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
-	LPSYSTEMTIME lpSystemTime;
+	LPSYSTEMTIME lpSystemTime=(LPSYSTEMTIME)malloc(sizeof(LPSYSTEMTIME));
+	memset(lpSystemTimeAsFileTime, 0, sizeof(lpSystemTimeAsFileTime));
 	__sys_GetSystemTimeAsFileTime(lpSystemTimeAsFileTime);
 	if (FileTimeToSystemTime(lpSystemTimeAsFileTime, lpSystemTime)) {
 		if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
@@ -624,5 +625,6 @@ _FX void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
 			lpSystemTime->wSecond -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 		}
 		SystemTimeToFileTime(lpSystemTime, lpSystemTimeAsFileTime);
+		free(lpSystemTime);
 	}
 }

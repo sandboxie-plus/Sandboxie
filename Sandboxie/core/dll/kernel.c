@@ -74,6 +74,11 @@ typedef LANGID (*P_GetSystemDefaultLangID)();
 
 typedef BOOL (*P_GetVolumeInformationByHandleW)(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
 
+typedef void (*P_GetLocalTime)(LPSYSTEMTIME lpSystemTime);
+
+typedef void (*P_GetSystemTime)(LPSYSTEMTIME lpSystemTime);
+
+typedef void (*P_GetSystemTimeAsFileTime)(LPFILETIME lpSystemTimeAsFileTime);
 //typedef int (*P_GetLocaleInfoEx)(LPCWSTR lpLocaleName, LCTYPE LCType, LPWSTR lpLCData, int cchData);
 
 //typedef int (*P_GetLocaleInfoA)(LCID Locale, LCTYPE LCType, LPSTR lpLCData, int cchData);
@@ -110,6 +115,9 @@ P_GetSystemDefaultLocaleName 	__sys_GetSystemDefaultLocaleName 	= NULL;
 P_GetSystemDefaultLCID 			__sys_GetSystemDefaultLCID 			= NULL;
 P_GetSystemDefaultLangID 		__sys_GetSystemDefaultLangID 		= NULL;
 P_GetVolumeInformationByHandleW __sys_GetVolumeInformationByHandleW = NULL;
+P_GetSystemTime                 __sys_GetSystemTime                 = NULL;
+P_GetSystemTimeAsFileTime       __sys_GetSystemTimeAsFileTime       = NULL;
+P_GetLocalTime                  __sys_GetLocalTime                  = NULL;
 
 LCID			Kernel_CustomLCID = 0;
 
@@ -161,7 +169,12 @@ static LCID Kernel_GetSystemDefaultLCID();
 static LANGID Kernel_GetSystemDefaultLangID();
 
 static BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber, LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
-	
+
+static void Kernel_GetLocalTime(LPSYSTEMTIME lpSystemTime);
+
+static void Kernel_GetSystemTime(LPSYSTEMTIME lpSystemTime);
+
+static void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime);
 //---------------------------------------------------------------------------
 // Kernel_Init
 //---------------------------------------------------------------------------
@@ -269,6 +282,11 @@ _FX BOOLEAN Kernel_Init()
 		if (GetVolumeInformationByHandleW) {
 			SBIEDLL_HOOK(Kernel_, GetVolumeInformationByHandleW);
 		}
+	}
+	if (SbieApi_QueryConfBool(NULL, L"TimeOffset", FALSE)) {
+		SBIEDLL_HOOK(Kernel_, GetSystemTime);
+		SBIEDLL_HOOK(Kernel_, GetSystemTimeAsFileTime);
+		SBIEDLL_HOOK(Kernel_, GetLocalTime);
 	}
 	return TRUE;
 }
@@ -541,4 +559,70 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 		LeaveCriticalSection(&Kernel_DiskSN_CritSec);
 	}
 	return rtn;
+}
+_FX void Kernel_GetLocalTime(LPSYSTEMTIME lpSystemTime) {
+	__sys_GetLocalTime(lpSystemTime);
+	if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
+		lpSystemTime->wYear += SbieApi_QueryConfNumber(NULL,"TimeOffsetYear",0);
+		lpSystemTime->wDay += SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+		lpSystemTime->wHour += SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+		lpSystemTime->wMonth += SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+		lpSystemTime->wMinute += SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+		lpSystemTime->wSecond += SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+
+	}
+	else {
+		lpSystemTime->wYear -= SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+		lpSystemTime->wDay -= SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+		lpSystemTime->wHour -= SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+		lpSystemTime->wMonth -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+		lpSystemTime->wMinute -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+		lpSystemTime->wSecond -= SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+	}
+}
+
+_FX void Kernel_GetSystemTime(LPSYSTEMTIME lpSystemTime) {
+	__sys_GetSystemTime(lpSystemTime);
+	if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
+		lpSystemTime->wYear += SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+		lpSystemTime->wDay += SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+		lpSystemTime->wHour += SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+		lpSystemTime->wMonth += SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+		lpSystemTime->wMinute += SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+		lpSystemTime->wSecond += SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+
+	}
+	else {
+		lpSystemTime->wYear -= SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+		lpSystemTime->wDay -= SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+		lpSystemTime->wHour -= SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+		lpSystemTime->wMonth -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+		lpSystemTime->wMinute -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+		lpSystemTime->wSecond -= SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+	}
+}
+
+_FX void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
+	LPSYSTEMTIME lpSystemTime;
+	__sys_GetSystemTimeAsFileTime(lpSystemTimeAsFileTime);
+	if (FileTimeToSystemTime(lpSystemTimeAsFileTime, lpSystemTime)) {
+		if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
+			lpSystemTime->wYear += SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+			lpSystemTime->wDay += SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+			lpSystemTime->wHour += SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+			lpSystemTime->wMonth += SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+			lpSystemTime->wMinute += SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+			lpSystemTime->wSecond += SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+
+		}
+		else {
+			lpSystemTime->wYear -= SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+			lpSystemTime->wDay -= SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+			lpSystemTime->wHour -= SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+			lpSystemTime->wMonth -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+			lpSystemTime->wMinute -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+			lpSystemTime->wSecond -= SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+		}
+		SystemTimeToFileTime(lpSystemTime, lpSystemTimeAsFileTime);
+	}
 }

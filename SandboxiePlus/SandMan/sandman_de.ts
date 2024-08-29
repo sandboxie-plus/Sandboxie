@@ -386,7 +386,7 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>Eine Sandbox isoliert Ihr Hostsystem von Prozessen, die in dieser Box laufen, sie hindert diese daran permanente Änderungen an anderen Programmen oder Daten auf Ihrem Computer zu machen. Der Level an Isolation beeinflusst Ihre Sicherheit, ebenso wie die Kompatibilität mit Programmen, somit wird es verschiedene Stufen der Isolation geben, abhängig vom ausgewählten Boxtyp. Sandboxie kann auch Ihre persönlichen Daten vor Zugriff durch Prozesse, die unter dessen Aufsicht laufen, schützen.</translation>
+        <translation>Eine Sandbox isoliert Ihr Hostsystem von Prozessen, die in dieser Box laufen, sie hindert diese daran permanente Änderungen an anderen Programmen oder Daten auf Ihrem Computer zu machen. Der Level an Isolation beeinflusst Ihre Sicherheit, ebenso wie die Kompatibilität mit Programmen, somit wird es verschiedene Level der Isolation geben, abhängig vom ausgewählten Boxtyp. Sandboxie kann auch Ihre persönlichen Daten vor Zugriff durch Prozesse, die unter dessen Aufsicht laufen, schützen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="339"/>
@@ -7567,7 +7567,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4939"/>
         <source>Hide Network Adapter MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge die MAC-Adresse des Netzwerkadapters</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5054"/>
@@ -7901,7 +7901,7 @@ Teilweise angehakt: Dem neu erstellten sandgeboxten Token werden keine lokalen G
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwerfe den Prozessintegritätslevel von ConHost.exe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2181"/>
@@ -8351,7 +8351,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box&apos;s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
-        <translation>Wenn &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Boxverschlüsselung&lt;/a&gt; eingeschaltet ist, wird der Boxquellenordner, inklusive des Registryhives, auf einem verschlüsselten Diskabbild, durch die Verwendung von &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptors&lt;/a&gt; AES-XTS Implementierung, gespeichert.</translation>
+        <translation>Wenn &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Boxverschlüsselung&lt;/a&gt; eingeschaltet ist, wird der Boxquellordner, inklusive des Registryhives, auf einem verschlüsselten Diskabbild, durch die Verwendung von &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptors&lt;/a&gt; AES-XTS Implementierung, gespeichert.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="348"/>

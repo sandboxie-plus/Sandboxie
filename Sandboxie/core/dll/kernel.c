@@ -79,6 +79,8 @@ typedef void (*P_GetLocalTime)(LPSYSTEMTIME lpSystemTime);
 typedef void (*P_GetSystemTime)(LPSYSTEMTIME lpSystemTime);
 
 typedef void (*P_GetSystemTimeAsFileTime)(LPFILETIME lpSystemTimeAsFileTime);
+
+typedef void (*P_GetSystemTimePreciseAsFileTime)(LPFILETIME lpSystemTimeAsFileTime);
 //typedef int (*P_GetLocaleInfoEx)(LPCWSTR lpLocaleName, LCTYPE LCType, LPWSTR lpLCData, int cchData);
 
 //typedef int (*P_GetLocaleInfoA)(LCID Locale, LCTYPE LCType, LPSTR lpLCData, int cchData);
@@ -118,6 +120,8 @@ P_GetVolumeInformationByHandleW __sys_GetVolumeInformationByHandleW = NULL;
 P_GetSystemTime                 __sys_GetSystemTime                 = NULL;
 P_GetSystemTimeAsFileTime       __sys_GetSystemTimeAsFileTime       = NULL;
 P_GetLocalTime                  __sys_GetLocalTime                  = NULL;
+
+P_GetSystemTimePreciseAsFileTime __sys_GetSystemTimePreciseAsFileTime = NULL;
 
 LCID			Kernel_CustomLCID = 0;
 
@@ -175,6 +179,8 @@ static void Kernel_GetLocalTime(LPSYSTEMTIME lpSystemTime);
 static void Kernel_GetSystemTime(LPSYSTEMTIME lpSystemTime);
 
 static void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime);
+
+static void Kernel_GetSystemTimePreciseAsFileTime(LPFILETIME lpSystemTimeAsFileTime);
 //---------------------------------------------------------------------------
 // Kernel_Init
 //---------------------------------------------------------------------------
@@ -286,6 +292,10 @@ _FX BOOLEAN Kernel_Init()
 	if (SbieApi_QueryConfBool(NULL, L"TimeOffset", FALSE)) {
 		SBIEDLL_HOOK(Kernel_, GetSystemTime);
 		SBIEDLL_HOOK(Kernel_, GetSystemTimeAsFileTime);
+		void* GetSystemTimePreciseAsFileTime = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetSystemTimePreciseAsFileTime");
+		if (GetSystemTimePreciseAsFileTime) {
+			SBIEDLL_HOOK(Kernel_, GetSystemTimePreciseAsFileTime);
+		}
 		SBIEDLL_HOOK(Kernel_, GetLocalTime);
 	}
 	return TRUE;
@@ -606,6 +616,32 @@ _FX void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
 	LPSYSTEMTIME lpSystemTime=(LPSYSTEMTIME)malloc(sizeof(LPSYSTEMTIME));
 	memset(lpSystemTimeAsFileTime, 0, sizeof(lpSystemTimeAsFileTime));
 	__sys_GetSystemTimeAsFileTime(lpSystemTimeAsFileTime);
+	if (FileTimeToSystemTime(lpSystemTimeAsFileTime, lpSystemTime)) {
+		if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
+			lpSystemTime->wYear += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+			lpSystemTime->wDay += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+			lpSystemTime->wHour += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+			lpSystemTime->wMonth += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+			lpSystemTime->wMinute += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+			lpSystemTime->wSecond += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+
+		}
+		else {
+			lpSystemTime->wYear -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+			lpSystemTime->wDay -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+			lpSystemTime->wHour -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+			lpSystemTime->wMonth -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+			lpSystemTime->wMinute -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+			lpSystemTime->wSecond -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+		}
+		SystemTimeToFileTime(lpSystemTime, lpSystemTimeAsFileTime);
+		free(lpSystemTime);
+	}
+}
+_FX void Kernel_GetSystemTimePreciseAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
+	LPSYSTEMTIME lpSystemTime = (LPSYSTEMTIME)malloc(sizeof(LPSYSTEMTIME));
+	memset(lpSystemTimeAsFileTime, 0, sizeof(lpSystemTimeAsFileTime));
+	__sys_GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime);
 	if (FileTimeToSystemTime(lpSystemTimeAsFileTime, lpSystemTime)) {
 		if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
 			lpSystemTime->wYear += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);

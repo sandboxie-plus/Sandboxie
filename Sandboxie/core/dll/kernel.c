@@ -613,7 +613,7 @@ _FX void Kernel_GetSystemTime(LPSYSTEMTIME lpSystemTime) {
 }
 
 _FX void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
-	LPSYSTEMTIME lpSystemTime=(LPSYSTEMTIME)malloc(sizeof(LPSYSTEMTIME));
+	LPSYSTEMTIME lpSystemTime=(LPSYSTEMTIME)Dll_Alloc(sizeof(LPSYSTEMTIME));
 	memset(lpSystemTimeAsFileTime, 0, sizeof(lpSystemTimeAsFileTime));
 	__sys_GetSystemTimeAsFileTime(lpSystemTimeAsFileTime);
 	if (FileTimeToSystemTime(lpSystemTimeAsFileTime, lpSystemTime)) {
@@ -635,11 +635,11 @@ _FX void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
 			lpSystemTime->wSecond -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 		}
 		SystemTimeToFileTime(lpSystemTime, lpSystemTimeAsFileTime);
-		free(lpSystemTime);
+		Dll_Free(lpSystemTime);
 	}
 }
 _FX void Kernel_GetSystemTimePreciseAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
-	LPSYSTEMTIME lpSystemTime = (LPSYSTEMTIME)malloc(sizeof(LPSYSTEMTIME));
+	LPSYSTEMTIME lpSystemTime = (LPSYSTEMTIME)Dll_Alloc(sizeof(LPSYSTEMTIME));
 	memset(lpSystemTimeAsFileTime, 0, sizeof(lpSystemTimeAsFileTime));
 	__sys_GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime);
 	if (FileTimeToSystemTime(lpSystemTimeAsFileTime, lpSystemTime)) {
@@ -661,6 +661,6 @@ _FX void Kernel_GetSystemTimePreciseAsFileTime(LPFILETIME lpSystemTimeAsFileTime
 			lpSystemTime->wSecond -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 		}
 		SystemTimeToFileTime(lpSystemTime, lpSystemTimeAsFileTime);
-		free(lpSystemTime);
+		Dll_Free(lpSystemTime);
 	}
 }

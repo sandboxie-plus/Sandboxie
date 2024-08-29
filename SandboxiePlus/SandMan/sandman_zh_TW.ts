@@ -908,13 +908,13 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="289"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;獲取一個免費試用證書&lt;/font&gt;&lt;/a&gt;體驗高級功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>對於每一個硬件ID，您最多可以請求%2次免費的%1天評估證書。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -1954,18 +1954,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="736"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="745"/>
         <source>bytes (unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>字節(無限製)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="739"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="748"/>
         <source>bytes (%1)</source>
-        <translation type="unfinished"></translation>
+         <translation>字節 (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="754"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+         <translation>無限製</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="926"/>
@@ -2034,12 +2034,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1475"/>
         <source>Failed to retrieve firmware table information.</source>
-        <translation type="unfinished"></translation>
+        <translation>檢索固件表信息失敗。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1483"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>固件表已成功保存到主機註冊表：HKEY_CURRENT_USER\System\SbieCustom&lt;br/&gt;您可以將其復製到沙盒註冊表，為每個沙盒設置不同的值。</translation>
     </message>
     <message>
         <source>Please enter a program file name</source>
@@ -2070,7 +2070,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="130"/>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>子進程</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="256"/>
@@ -4199,13 +4199,13 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1647"/>
         <location filename="SandMan.cpp" line="1678"/>
         <source>Which box you want to add in?</source>
-        <translation type="unfinished"></translation>
+        <translation>您想添加到哪個沙盒？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1647"/>
         <location filename="SandMan.cpp" line="1678"/>
         <source>Type the box name which you are going to set:</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入您希望設置的沙盒名稱：</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1664"/>
@@ -4214,24 +4214,24 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1685"/>
         <location filename="SandMan.cpp" line="1689"/>
         <source>Sandboxie-Plus Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 警告</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1664"/>
         <source>The value is not an existing directory or executable.</source>
-        <translation type="unfinished"></translation>
+        <translation>該目錄不存在或不可執行</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1669"/>
         <location filename="SandMan.cpp" line="1685"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">您輸入了錯誤的沙盒名！未更改任何設置。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1673"/>
         <location filename="SandMan.cpp" line="1689"/>
         <source>User canceled this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">用戶取消本次操作。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2020"/>
@@ -5375,12 +5375,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Importing Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>正在導入沙盒</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Do you want to select custom root folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否要選擇一個自定義的根目錄？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5484,12 +5484,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1427"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>請輸入沙盒的新別名。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1436"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入的名稱無效，是否要將其設置為沙盒別名？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1474"/>
@@ -5562,7 +5562,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="1813"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
-        <translation type="unfinished">此沙箱已停用或被限制到特定群組/使用者，是否編輯？</translation>
+        <translation>此沙箱已停用或被限制到特定群組/使用者，是否編輯？</translation>
     </message>
 </context>
 <context>
@@ -5732,7 +5732,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="531"/>
         <source>HwId: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>固件ID: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="621"/>
@@ -5759,17 +5759,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;您已經使用了%1/%2個試用證書。無法生成更多免費證書了。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1266"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;獲取一個免費試用證書&lt;/a&gt;體驗高級功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">對於任何一個硬件ID，您最多可以請求%2次免費的%1天試用證書</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1280"/>
@@ -5790,22 +5790,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>過期時間：%1天後</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1331"/>
         <source>Expired: %1 days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>已過期：%1天前</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1342"/>
         <source>Options: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>選項：%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>隱私/安全增強&amp; 應用沙盒(SBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
@@ -5813,7 +5813,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1349"/>
         <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
@@ -5821,22 +5821,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="1349"/>
         <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>加密沙盒 (EBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1349"/>
         <source>Network Interception (NetI): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>網絡監聽(NetI): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盤桌面(Desk): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1365"/>
@@ -5870,13 +5870,14 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1411"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 申請試用證書</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1411"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation>請輸入您的電子郵件地址以接收免費的%1天試用證書，該證書將頒發給%2並鎖定到當前硬件。
+您最多可以為每個唯一的硬件ID請求%3個試用證書。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1437"/>
@@ -5892,7 +5893,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2021"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
-        <translation type="unfinished"></translation>
+        <translation>試用證書已成功申請。 請開始免費試用！</translation>
     </message>
     <message>
         <source>Retreiving certificate...</source>
@@ -6103,12 +6104,12 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1694"/>
         <source>Set Force in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>設置強製在沙盒中運行</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1703"/>
         <source>Set Open Path in Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙盤中打開目錄</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1993"/>
@@ -7646,7 +7647,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="432"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box&apos;s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <oldsource>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</oldsource>
-        <translation type="unfinished">啟用 &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;沙箱加密&lt;/a&gt; 後，沙箱的根目錄 (包括其登錄組態) 將使用 &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor 的&lt;/a&gt; AES-XTS 實作方案。</translation>
+        <translation>啟用 &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;沙箱加密&lt;/a&gt; 後，沙箱的根目錄 (包括其登錄組態) 將使用 &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor 的&lt;/a&gt; AES-XTS 實作方案。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="445"/>
@@ -7962,7 +7963,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</oldsource>
-        <translation type="unfinished">Sandboxie 的資源存取規則通常對位於沙箱內的二進位程式具有歧視性。OpenFilePath 和 OpenKeyPath 只對主機上的原生程式 (安裝在主機上的) 有效。為了定義沒有此類限制的規則，則必須使用 OpenPipePath 和 OpenConfPath。同樣的，透過否定來定義所有的 Closed(File|Key|Ipc)Path 指令例如：&apos;ClosedFilePath=! iexplore.exe,C:Users*&apos; 將限制沙箱內的程式存取相應資源。這兩種限制原則都可以透過「存取原則」頁面來停用。
+        <translation>Sandboxie 的資源存取規則通常對位於沙箱內的二進位程式具有歧視性。OpenFilePath 和 OpenKeyPath 只對主機上的原生程式 (安裝在主機上的) 有效。為了定義沒有此類限制的規則，則必須使用 OpenPipePath 和 OpenConfPath。同樣的，透過否定來定義所有的 Closed(File|Key|Ipc)Path 指令例如：&apos;ClosedFilePath=! iexplore.exe,C:Users*&apos; 將限制沙箱內的程式存取相應資源。這兩種限制原則都可以透過「存取原則」頁面來停用。
 這樣做是為了防止沙箱內的流氓處理程序建立自己的重新命名複本並存取受保護的資源。另一個漏洞載體是將一個動態連結程式庫注入到一個被授權處理程序中，以取得對被授權處理程序所允許存取的一切資源的存取權。使用主機映像保護，可以透過阻止在沙箱內執行的應用程式 (安裝在主機上的) 載入來自沙箱的動態連結程式庫來防止此類現象。</translation>
     </message>
     <message>
@@ -8070,19 +8071,20 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="1666"/>
         <location filename="Forms/OptionsWindow.ui" line="1740"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>無限製</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1724"/>
         <location filename="Forms/OptionsWindow.ui" line="1754"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>字節</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
-        <translation type="unfinished"></translation>
+        <translation>選中：一個本地組也將被添加到新創建的沙盒令牌中，這允許一次尋址所有沙盒。這將有助於審計政策。
+部分選中：不會將任何組添加到新創建的沙盒令牌中。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
@@ -8354,12 +8356,12 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1930"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>創建新的沙盒令牌，而不是剝離原始令牌</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2181"/>
         <source>Force Children</source>
-        <translation type="unfinished">強制子處理程序</translation>
+        <translation>強制子處理程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2865"/>
@@ -8454,7 +8456,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3793"/>
         <source>Bypass IPs</source>
-        <translation type="unfinished"></translation>
+        <translation>繞過IP</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3868"/>
@@ -8625,7 +8627,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1377"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
-        <translation type="unfinished">透過嚴格限制處理程序權杖的使用來進行安全性隔離是 Sandboxie 執行沙箱化限制的主要手段，當它被停用時，沙箱將在應用程式區間模式下執行，此時將不再提供可靠的安全性限制，只是簡單進行應用程式隔離。</translation>
+        <translation>透過嚴格限制處理程序權杖的使用來進行安全性隔離是 Sandboxie 執行沙箱化限制的主要手段，當它被停用時，沙箱將在應用程式區間模式下執行，此時將不再提供可靠的安全性限制，只是簡單進行應用程式隔離。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="887"/>
@@ -8985,61 +8987,61 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4774"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>隱私</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4956"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>隱藏固件信息</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4922"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>一些程序通過WMI（Windows內置數據庫）而不是常規方式讀取系統細節信息。例如，即使通過訪問WMI打開「HideOtherBoxs」，「tasklist.exe」也可以獲得完整的進程列表。啟用此選項可阻止這些行為。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4925"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>防止沙盒進程通過WMI訪問系統細節信息（有關更多信息，請參閱工具提示）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4889"/>
         <source>Process Hiding</source>
-        <translation type="unfinished"></translation>
+        <translation>進程隱藏</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4780"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>使用自定義區域設置/語言ID</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4875"/>
         <source>Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>數據保護</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4844"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>將當前固件表轉儲到HKCU\System\SbieCustom</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4847"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>轉儲固件表</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4946"/>
         <source>Hide Disk Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>隱藏硬盤序列號</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4932"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation type="unfinished"></translation>
+        <translation>混淆註冊表中已知的唯一標識符</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4939"/>
@@ -9150,7 +9152,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4188"/>
         <source>Restart force process before they begin to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>在開始執行之前重新啟動強製進程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4861"/>

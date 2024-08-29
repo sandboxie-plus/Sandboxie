@@ -8290,7 +8290,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation type="unfinished"></translation>
+        <translation>降低Conhost.exe的进程完整级</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2028"/>
@@ -9266,7 +9266,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4939"/>
         <source>Hide Network Adapter MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏网卡MAC地址</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5156"/>

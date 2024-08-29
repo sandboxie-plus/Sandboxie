@@ -9005,7 +9005,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4851"/>
         <source>Process Hiding</source>
-        <translation">進程隱藏</translation>
+        <translation>進程隱藏</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4807"/>

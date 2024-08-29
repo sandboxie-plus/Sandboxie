@@ -563,42 +563,42 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 _FX void Kernel_GetLocalTime(LPSYSTEMTIME lpSystemTime) {
 	__sys_GetLocalTime(lpSystemTime);
 	if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
-		lpSystemTime->wYear += SbieApi_QueryConfNumber(NULL,"TimeOffsetYear",0);
-		lpSystemTime->wDay += SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
-		lpSystemTime->wHour += SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
-		lpSystemTime->wMonth += SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
-		lpSystemTime->wMinute += SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
-		lpSystemTime->wSecond += SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+		lpSystemTime->wYear += (WORD)SbieApi_QueryConfNumber(NULL,"TimeOffsetYear",0);
+		lpSystemTime->wDay += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+		lpSystemTime->wHour += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+		lpSystemTime->wMonth += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+		lpSystemTime->wMinute += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+		lpSystemTime->wSecond += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 
 	}
 	else {
-		lpSystemTime->wYear -= SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
-		lpSystemTime->wDay -= SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
-		lpSystemTime->wHour -= SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
-		lpSystemTime->wMonth -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
-		lpSystemTime->wMinute -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
-		lpSystemTime->wSecond -= SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+		lpSystemTime->wYear -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+		lpSystemTime->wDay -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+		lpSystemTime->wHour -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+		lpSystemTime->wMonth -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+		lpSystemTime->wMinute -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+		lpSystemTime->wSecond -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 	}
 }
 
 _FX void Kernel_GetSystemTime(LPSYSTEMTIME lpSystemTime) {
 	__sys_GetSystemTime(lpSystemTime);
 	if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
-		lpSystemTime->wYear += SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
-		lpSystemTime->wDay += SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
-		lpSystemTime->wHour += SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
-		lpSystemTime->wMonth += SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
-		lpSystemTime->wMinute += SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
-		lpSystemTime->wSecond += SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+		lpSystemTime->wYear += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+		lpSystemTime->wDay += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+		lpSystemTime->wHour += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+		lpSystemTime->wMonth += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+		lpSystemTime->wMinute += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+		lpSystemTime->wSecond += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 
 	}
 	else {
-		lpSystemTime->wYear -= SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
-		lpSystemTime->wDay -= SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
-		lpSystemTime->wHour -= SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
-		lpSystemTime->wMonth -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
-		lpSystemTime->wMinute -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
-		lpSystemTime->wSecond -= SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+		lpSystemTime->wYear -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+		lpSystemTime->wDay -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+		lpSystemTime->wHour -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+		lpSystemTime->wMonth -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+		lpSystemTime->wMinute -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+		lpSystemTime->wSecond -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 	}
 }
 
@@ -607,21 +607,21 @@ _FX void Kernel_GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime) {
 	__sys_GetSystemTimeAsFileTime(lpSystemTimeAsFileTime);
 	if (FileTimeToSystemTime(lpSystemTimeAsFileTime, lpSystemTime)) {
 		if (SbieApi_QueryConfBool(NULL, L"TimeOffsetPlus", TRUE)) {
-			lpSystemTime->wYear += SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
-			lpSystemTime->wDay += SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
-			lpSystemTime->wHour += SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
-			lpSystemTime->wMonth += SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
-			lpSystemTime->wMinute += SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
-			lpSystemTime->wSecond += SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+			lpSystemTime->wYear += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+			lpSystemTime->wDay += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+			lpSystemTime->wHour += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+			lpSystemTime->wMonth += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+			lpSystemTime->wMinute += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+			lpSystemTime->wSecond += (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 
 		}
 		else {
-			lpSystemTime->wYear -= SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
-			lpSystemTime->wDay -= SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
-			lpSystemTime->wHour -= SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
-			lpSystemTime->wMonth -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
-			lpSystemTime->wMinute -= SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
-			lpSystemTime->wSecond -= SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
+			lpSystemTime->wYear -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetYear", 0);
+			lpSystemTime->wDay -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetDay", 0);
+			lpSystemTime->wHour -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetHour", 0);
+			lpSystemTime->wMonth -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMonth", 0);
+			lpSystemTime->wMinute -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetMinute", 0);
+			lpSystemTime->wSecond -= (WORD)SbieApi_QueryConfNumber(NULL, "TimeOffsetSecond", 0);
 		}
 		SystemTimeToFileTime(lpSystemTime, lpSystemTimeAsFileTime);
 	}

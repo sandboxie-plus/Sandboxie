@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)
+- fixed encrypted proxy password was inproeprly formated [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)
 
 
 

@@ -1055,7 +1055,7 @@ void COptionsWindow::SaveNetProxy()
 			if(res.IsError())
 				Tags.append("Password=" + Pass);
 			else
-				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::OmitTrailingEquals));
+				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::KeepTrailingEquals));
 		}
 		Tags.append("Bypass=" + Bypass);
 

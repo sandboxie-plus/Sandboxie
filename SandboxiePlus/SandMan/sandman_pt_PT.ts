@@ -27,7 +27,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="100"/>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Palavra-passe</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="49"/>
@@ -37,12 +37,12 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="66"/>
         <source>New Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova Palavra-passe</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="83"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir Palavra-passe</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="107"/>
@@ -52,7 +52,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="140"/>
         <source>Encryption Cipher</source>
-        <translation type="unfinished"></translation>
+        <translation>Encriptação Cipher</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="163"/>
@@ -878,32 +878,32 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="25"/>
         <source>Store</source>
-        <translation type="unfinished"></translation>
+        <translation>Armazenar</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="26"/>
         <source>Fastest</source>
-        <translation type="unfinished"></translation>
+        <translation>Mais rápido</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="27"/>
         <source>Fast</source>
-        <translation type="unfinished"></translation>
+        <translation>Rápido</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="28"/>
         <source>Normal</source>
-        <translation type="unfinished">Normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="29"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>Máximo</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Ultra</source>
-        <translation type="unfinished"></translation>
+        <translation>Ultra</translation>
     </message>
 </context>
 <context>
@@ -1131,7 +1131,7 @@ Você pode utilizar %USER% para salvar a caixa de proteção de cada utilizador 
     <message>
         <location filename="OnlineUpdater.cpp" line="201"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao descarregar o ficheiro de: %1</translation>
     </message>
 </context>
 <context>
@@ -1139,17 +1139,17 @@ Você pode utilizar %USER% para salvar a caixa de proteção de cada utilizador 
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="331"/>
         <source>Select issue from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione o problema do grupo</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="340"/>
         <source>Please specify the exact issue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Especifique o problema exato:</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="393"/>
         <source>Another issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Outro problema</translation>
     </message>
 </context>
 <context>
@@ -1190,12 +1190,12 @@ Você pode utilizar %USER% para salvar a caixa de proteção de cada utilizador 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="717"/>
         <source>Sandbox Isolation options</source>
-        <translation type="unfinished"></translation>
+        <translation>Definições de isolamento do sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="718"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nesta página as definições de isolamento do sandbox podem ser definidas.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
@@ -1231,12 +1231,12 @@ Você pode utilizar %USER% para salvar a caixa de proteção de cada utilizador 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Solicitar ao utilizador se deseja permitir uma isenção de bloqueio</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
         <source>Admin Options</source>
-        <translation type="unfinished">Opções de Administrador</translation>
+        <translation type="unfinished">Definições de Administrador</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="756"/>
@@ -1256,7 +1256,7 @@ Você pode utilizar %USER% para salvar a caixa de proteção de cada utilizador 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
         <source>Box Options</source>
-        <translation type="unfinished">Opções da Caixa</translation>
+        <translation type="unfinished">Definições da Caixa</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="778"/>
@@ -1274,17 +1274,17 @@ Você pode utilizar %USER% para salvar a caixa de proteção de cada utilizador 
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="454"/>
         <source>Select issue from full list</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar problema na lista completa</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="468"/>
         <source>Search filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro de busca</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="524"/>
         <source>None of the above</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nenhuma das acima</translation>
     </message>
 </context>
 <context>
@@ -1384,12 +1384,12 @@ Você pode utilizar %USER% para salvar a caixa de proteção de cada utilizador 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="107"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Adicione suas definições depois desta linha.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="108"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelo Compartilhado</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="282"/>
@@ -9094,7 +9094,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3612"/>
         <source>DNS Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro DNS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3629"/>
@@ -9109,12 +9109,12 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3675"/>
         <source>Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>Domínio</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3691"/>
         <source>Internet Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proxy de Internet</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3752"/>
@@ -9124,7 +9124,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3725"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Testar Proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3778"/>
@@ -9139,7 +9139,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3788"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavra-passe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3708"/>
@@ -9347,12 +9347,12 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3846"/>
         <source>Other Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Outras Definições</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3895"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloqueio de Porta</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3854"/>
@@ -9389,7 +9389,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3868"/>
         <source>Block DNS, UDP port 53</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bloquear DNS, porta UDP 53</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3956"/>
@@ -9543,7 +9543,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5156"/>
         <source>DNS Request Logging</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Registro de Solicitação DNS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5231"/>
@@ -9558,7 +9558,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5446"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Modelo</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5614"/>
@@ -9724,7 +9724,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="64"/>
         <source>Run in a new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodar em uma nova Caixa</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
@@ -9941,12 +9941,12 @@ Por favor, note que este valores são atualmente para o utilizador específico e
         <location filename="Forms/SettingsWindow.ui" line="1093"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar os próprios processos do Sandboxie da lista de tarefas</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1138"/>
         <source>Ini Editor Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonte do Editor Ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1261"/>
@@ -9956,12 +9956,12 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1170"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar fonte</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1180"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>Redefinir fonte</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1294"/>
@@ -9976,7 +9976,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1308"/>
         <source>Ini Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Definições Ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1128"/>
@@ -10103,7 +10103,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SettingsWindow.ui" line="665"/>
         <source>System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Bandeja do Sistema</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="772"/>
@@ -10113,7 +10113,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SettingsWindow.ui" line="779"/>
         <source>Minimize to tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimizar para bandeja</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1315"/>
@@ -10128,12 +10128,12 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1533"/>
         <source>* takes effect on disk creation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">* entra em vigor na criação do disco</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1557"/>
         <source>Sandboxie Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Suporte do Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1617"/>
@@ -10143,7 +10143,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1646"/>
         <source>Get</source>
-        <translation type="unfinished"></translation>
+        <translation>Obter</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1568"/>
@@ -10168,7 +10168,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1767"/>
         <source>Sandboxie Updater</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Actualizador do Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1798"/>
@@ -10178,7 +10178,7 @@ Por favor, note que este valores são atualmente para o utilizador específico e
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1812"/>
         <source>Update Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Definições de Actualização</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1853"/>
@@ -10199,7 +10199,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1890"/>
         <source>Full Upgrades</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizações Completas</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1897"/>
@@ -10219,7 +10219,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1963"/>
         <source>Update Check Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalo de Verificação de Actualização</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1991"/>
@@ -10565,7 +10565,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2211"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Adicionar o grupo &quot;Sandboxie\Todas as Caixas&quot; ao token do sandbox (experimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2221"/>
@@ -10600,7 +10600,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2442"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informação</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2450"/>
@@ -10726,7 +10726,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2612"/>
         <source>Text Filter</source>
-        <translation type="unfinished">Filtro de Texto</translation>
+        <translation>Filtro de Texto</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2619"/>
@@ -10736,7 +10736,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2654"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Modelo</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2712"/>
@@ -10915,17 +10915,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="20"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proxy de Teste</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="69"/>
         <source>Test Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Definições de Teste...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="82"/>
         <source>Testing...</source>
-        <translation type="unfinished"></translation>
+        <translation>A Testar...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="117"/>
@@ -10935,7 +10935,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="127"/>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Endereço:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="134"/>
@@ -10945,7 +10945,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="144"/>
         <source>Protocol:</source>
-        <translation type="unfinished">Protocolo:</translation>
+        <translation>Protocolo:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="151"/>
@@ -10955,7 +10955,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="158"/>
         <source>Authentication:</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticação:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="165"/>
@@ -10970,7 +10970,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="179"/>
         <source>username</source>
-        <translation type="unfinished"></translation>
+        <translation>utilizador</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="242"/>
@@ -11012,7 +11012,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="350"/>
         <source>Port:</source>
-        <translation type="unfinished">Porta:</translation>
+        <translation>Porta:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="360"/>
@@ -11022,17 +11022,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="369"/>
         <source>Load a default web page from the host. (There must be a web server running on the host)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Carregue uma página da web predefinida do host. (Deve haver um servidor web em execução no host)</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Teste 3: Latência do servidor proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>
         <source>Ping count:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contador de ping:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>

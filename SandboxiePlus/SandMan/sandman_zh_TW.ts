@@ -1960,12 +1960,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="739"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="748"/>
         <source>bytes (%1)</source>
-         <translation>字節 (%1)</translation>
+        <translation>字節 (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="754"/>
         <source>unlimited</source>
-         <translation>無限製</translation>
+        <translation>無限製</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="926"/>
@@ -4225,13 +4225,13 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1669"/>
         <location filename="SandMan.cpp" line="1685"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation type="vanished">您輸入了錯誤的沙盒名！未更改任何設置。</translation>
+        <translation>您輸入了錯誤的沙盒名！未更改任何設置。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1673"/>
         <location filename="SandMan.cpp" line="1689"/>
         <source>User canceled this operation.</source>
-        <translation type="vanished">用戶取消本次操作。</translation>
+        <translation>用戶取消本次操作。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2020"/>
@@ -5769,7 +5769,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <translation type="vanished">對於任何一個硬件ID，您最多可以請求%2次免費的%1天試用證書</translation>
+        <translation>對於任何一個硬件ID，您最多可以請求%2次免費的%1天試用證書</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1280"/>

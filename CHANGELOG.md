@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added a question box to ask for Sandbox Import Location for [#4169](https://github.com/sandboxie-plus/Sandboxie/issues/4169)
 - added UI option to configure DropConHostIntegrity
 - added "HideNetworkAdapterMAC"(bool) return random value when applications tries to get network adapter mac address
+- added shared template selection to the Shared Template feature in the advanced options of the New Box Wizard [#4199](https://github.com/sandboxie-plus/Sandboxie/issues/4199)
+  - The number of available shared templates has been increased to 10
+  - To update the names displayed in the list, simply adjust the "Tmpl.Title" setting within each template
 
 ### Fixed
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)

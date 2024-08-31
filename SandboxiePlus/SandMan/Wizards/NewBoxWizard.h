@@ -145,7 +145,12 @@ public:
     void initializePage() override;
     bool validatePage() override;
 
+private slots:
+	void OnSharedTemplateIndexChanged(int index);
+
 private:
+	QComboBox* m_pSharedTemplate;
+	QComboBox* m_pSharedTemplateIndex;
 };
 
 

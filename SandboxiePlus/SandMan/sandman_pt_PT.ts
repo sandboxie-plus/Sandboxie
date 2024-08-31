@@ -210,7 +210,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="887"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Modelo Compartilhado</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
@@ -305,7 +305,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="318"/>
         <source>Another issue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Outro problema</translation>
     </message>
 </context>
 <context>
@@ -6117,12 +6117,12 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="568"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seleccionar fonte</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="570"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Redefinir fonte</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="630"/>
@@ -6979,7 +6979,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/TestProxyDialog.cpp" line="42"/>
         <location filename="Windows/TestProxyDialog.cpp" line="308"/>
         <source>Testing...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A Testar...</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="62"/>

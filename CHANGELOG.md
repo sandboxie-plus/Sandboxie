@@ -14,6 +14,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added UI option to configure DropConHostIntegrity
 - added "HideNetworkAdapterMAC"(bool) return random value when applications tries to get network adapter mac address
 
+### Changed
+- allowed users to import/export boxes with .zip files.
+
 ### Fixed
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)
 - fixed encrypted proxy password was inproeprly formated [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)

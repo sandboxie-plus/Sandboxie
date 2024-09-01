@@ -1037,7 +1037,7 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 
 QString CSbieView::ImportSandbox()
 {
-	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
+	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z);;Zip Archive (*.zip)"));
 	if (Path.isEmpty())
 		return "";
 
@@ -1405,7 +1405,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			Password = pwWnd.GetPassword();
 		}
 
-		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z)"));	
+		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z);;Zip Archive (*.zip)");
 		if (Path.isEmpty())
 			return;
 

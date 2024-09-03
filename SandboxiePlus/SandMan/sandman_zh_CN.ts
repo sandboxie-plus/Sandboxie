@@ -325,12 +325,12 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
         <source>Shared template selection</source>
-        <translation type="unfinished"></translation>
+        <translation>共享模板选择</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="941"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>此选项指定在共享模板模式下使用的模板。 (%1)</translation>
     </message>
     <message>
         <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.

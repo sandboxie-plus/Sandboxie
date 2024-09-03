@@ -204,12 +204,12 @@ Um diese Vorlage f√ºr eine Sandbox zu deaktivieren, entfernen Sie einfach das H√
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
         <source>Shared template selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Gemeinsame Vorlage Auswahl</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="941"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option gibt die Vorlage an, die im &apos;Gemeinsame Vorlage Modus&apos; verwendet werden soll. (%1)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="906"/>

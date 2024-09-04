@@ -882,23 +882,6 @@ _FX NTSTATUS KphValidateCertificate()
                 Verify_CertInfo.level = eCertAdvanced1;
                 expiration_date.QuadPart = -2;
             }
-            // todo: 01.09.2025: remove code for expired case LARGE
-            else if (_wcsicmp(level, L"LARGE") == 0) { // 2 years - personal
-                if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
-                    Verify_CertInfo.level = eCertStandard2;
-                else
-                    Verify_CertInfo.level = eCertAdvanced;
-                expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 2); // 2 years
-            }
-            // todo: 01.09.2024: remove code for expired case MEDIUM
-            else if (_wcsicmp(level, L"MEDIUM") == 0) { // 1 year - personal
-                Verify_CertInfo.level = eCertStandard2;
-            }
-            // todo: 01.09.2024: remove code for expired case SMALL
-            else if (_wcsicmp(level, L"SMALL") == 0) { // 1 year - subscription
-                Verify_CertInfo.level = eCertStandard2;
-                Verify_CertInfo.type = eCertHome;
-            }
             else
                 Verify_CertInfo.level = eCertStandard;
         }

@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.14.7 / 5.69.7] - 2024-0x-xx
+## [1.14.7 / 5.69.7] - 2024-09-05
 
 ### Added
 - added "RandomRegUID"(bool) which could modify Windows Product Id in the registry to a rand value

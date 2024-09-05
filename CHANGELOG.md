@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)
-- fixed encrypted proxy password was inproeprly formated [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)
+- fixed encrypted proxy password was improperly formatted [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)
 - fixed NtQueryDirectoryObject (should not return "STATUS_MORE_ENTRIES") as this is a EASY Sandbox Detection [#4201](https://github.com/sandboxie-plus/Sandboxie/issues/4201)
 
 

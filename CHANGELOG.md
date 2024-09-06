@@ -5,22 +5,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.7 / 5.69.7] - 2024-09-05
 
 ### Added
-- added "RandomRegUID"(bool) which could modify Windows Product Id in the registry to a rand value
-- added "HideDiskSerialNumber"(bool) return random value when applications tries to get disk serial number
-- added option to get free 10 days evaluation certificates from the support settings page.
-  - The evaluation certificates are node lcoked to the HwID and for each HwID up to 3 certs can be requested.
-- added "TerminateWhenExit"(bool,in Sandboxie-Plus.ini) to terminate all processes when Sandman exits for [#4171](https://github.com/sandboxie-plus/Sandboxie/issues/4171)
+- added "RandomRegUID" (bool) which could modify Windows Product ID in the registry to a random value
+- added "HideDiskSerialNumber" (bool) return random value when applications try to get disk serial number
+- added option to get free 10 days evaluation certificates from the support settings page
+  - the evaluation certificates are node locked to the HwID and for each HwID up to 3 certs can be requested
+- added "TerminateWhenExit" (bool, in Sandboxie-Plus.ini) to terminate all processes when SandMan exits for [#4171](https://github.com/sandboxie-plus/Sandboxie/issues/4171)
 - added a question box to ask for Sandbox Import Location for [#4169](https://github.com/sandboxie-plus/Sandboxie/issues/4169)
 - added UI option to configure DropConHostIntegrity
-- added "HideNetworkAdapterMAC"(bool) return random value when applications tries to get network adapter mac address
+- added "HideNetworkAdapterMAC" (bool) return random value when applications try to get network adapter MAC address
 - added shared template selection to the Shared Template feature in the advanced options of the New Box Wizard [#4199](https://github.com/sandboxie-plus/Sandboxie/issues/4199)
-  - The number of available shared templates has been increased to 10
-  - To update the names displayed in the list, simply adjust the "Tmpl.Title" setting within each template
+  - the number of available shared templates has been increased to 10
+  - to update the names displayed in the list, simply adjust the "Tmpl.Title" setting within each template
 
 ### Fixed
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)
 - fixed encrypted proxy password was improperly formatted [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)
-- fixed NtQueryDirectoryObject (should not return "STATUS_MORE_ENTRIES") as this is a EASY Sandbox Detection [#4201](https://github.com/sandboxie-plus/Sandboxie/issues/4201)
+- fixed NtQueryDirectoryObject (should not return "STATUS_MORE_ENTRIES") as this is an easy sandbox detection [#4201](https://github.com/sandboxie-plus/Sandboxie/issues/4201)
 
 
 ## [1.14.6 / 5.69.6] - 2024-07-30

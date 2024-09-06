@@ -268,11 +268,12 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, const SComp
 			//(UInt32)8,							// set number of CPU threads
 			true									// file name encryption (7z only)
 		};
-
-		if(setProperties->SetProperties(names, values, kNumProps) != S_OK)
-		{
-			TRACE(L"ISetProperties failed");
-			Q_ASSERT(0);
+		if (m_ArchivePath.right(3).toLower().compare(".zip", Qt::CaseInsensitive) != 0) {
+			if (setProperties->SetProperties(names, values, kNumProps) != S_OK)
+			{
+				TRACE(L"ISetProperties failed");
+				Q_ASSERT(0);
+			}
 		}
 	}
 

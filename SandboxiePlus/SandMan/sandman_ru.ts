@@ -1269,138 +1269,138 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="363"/>
+        <location filename="OnlineUpdater.cpp" line="377"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>Вы хотите проверить, есть ли новая версия Sandboxie-Plus?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="364"/>
+        <location filename="OnlineUpdater.cpp" line="378"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Больше не показывать это сообщение.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="419"/>
+        <location filename="OnlineUpdater.cpp" line="433"/>
         <source>Checking for updates...</source>
         <translation>Проверка обновлений...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="426"/>
+        <location filename="OnlineUpdater.cpp" line="440"/>
         <source>server not reachable</source>
         <translation>сервер недоступен</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="427"/>
-        <location filename="OnlineUpdater.cpp" line="429"/>
+        <location filename="OnlineUpdater.cpp" line="441"/>
+        <location filename="OnlineUpdater.cpp" line="443"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>Не удалось проверить обновления, ошибка: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="596"/>
+        <location filename="OnlineUpdater.cpp" line="610"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Вы хотите загрузить установщик?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="600"/>
+        <location filename="OnlineUpdater.cpp" line="614"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Вы хотите загрузить обновления?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="604"/>
+        <location filename="OnlineUpdater.cpp" line="618"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу загрузки&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="613"/>
+        <location filename="OnlineUpdater.cpp" line="627"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>Больше не показывать это обновление.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="736"/>
+        <location filename="OnlineUpdater.cpp" line="750"/>
         <source>Downloading updates...</source>
         <translation>Загрузка обновлений...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="762"/>
+        <location filename="OnlineUpdater.cpp" line="776"/>
         <source>invalid parameter</source>
         <translation>неверный параметр</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="763"/>
+        <location filename="OnlineUpdater.cpp" line="777"/>
         <source>failed to download updated information</source>
         <translation>не удалось загрузить обновленную информацию</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="764"/>
+        <location filename="OnlineUpdater.cpp" line="778"/>
         <source>failed to load updated json file</source>
         <translation>не удалось загрузить обновленный json файл</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="765"/>
+        <location filename="OnlineUpdater.cpp" line="779"/>
         <source>failed to download a particular file</source>
         <translation>не удалось загрузить определенный файл</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="766"/>
+        <location filename="OnlineUpdater.cpp" line="780"/>
         <source>failed to scan existing installation</source>
         <translation>не удалось просканировать существующую установку</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="767"/>
+        <location filename="OnlineUpdater.cpp" line="781"/>
         <source>updated signature is invalid !!!</source>
         <translation>обновленная подпись недействительна !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="768"/>
+        <location filename="OnlineUpdater.cpp" line="782"/>
         <source>downloaded file is corrupted</source>
         <translation>загруженный файл поврежден</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="769"/>
+        <location filename="OnlineUpdater.cpp" line="783"/>
         <source>internal error</source>
         <translation>внутренняя ошибка</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="770"/>
+        <location filename="OnlineUpdater.cpp" line="784"/>
         <source>unknown error</source>
         <translation>неизвестная ошибка</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="794"/>
+        <location filename="OnlineUpdater.cpp" line="808"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>Не удалось загрузить обновления с сервера, ошибка %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="816"/>
+        <location filename="OnlineUpdater.cpp" line="830"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Обновления для Sandboxie-Plus были загружены.&lt;/p&gt;&lt;p&gt;Применить эти обновления? Если какие-либо программы работают в песочнице, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="918"/>
+        <location filename="OnlineUpdater.cpp" line="932"/>
         <source>Downloading installer...</source>
         <translation>Загрузка установщика...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="961"/>
+        <location filename="OnlineUpdater.cpp" line="975"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Новый установщик Sandboxie-Plus загружен в следующую папку:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Вы хотите начать установку? Если какие-либо программы работают в песочнице, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1029"/>
+        <location filename="OnlineUpdater.cpp" line="1043"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Вы хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу с информацией&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1037"/>
+        <location filename="OnlineUpdater.cpp" line="1051"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Не показывать это объявление в будущем.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="582"/>
+        <location filename="OnlineUpdater.cpp" line="596"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Доступна новая версия Sandboxie-Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Новая версия:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="337"/>
+        <location filename="OnlineUpdater.cpp" line="351"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -1409,7 +1409,7 @@ Do you still want to update?</source>
 Вы все еще хотите обновить?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="455"/>
+        <location filename="OnlineUpdater.cpp" line="469"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>

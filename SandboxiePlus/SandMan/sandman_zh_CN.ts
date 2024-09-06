@@ -1508,38 +1508,38 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="363"/>
+        <location filename="OnlineUpdater.cpp" line="377"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>您是否想检查 Sandboxie-Plus 的更新版本？</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="364"/>
+        <location filename="OnlineUpdater.cpp" line="378"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再显示此消息</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="419"/>
+        <location filename="OnlineUpdater.cpp" line="433"/>
         <source>Checking for updates...</source>
         <translation>正在检查更新...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="426"/>
+        <location filename="OnlineUpdater.cpp" line="440"/>
         <source>server not reachable</source>
         <translation>无法连接到服务器</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="427"/>
-        <location filename="OnlineUpdater.cpp" line="429"/>
+        <location filename="OnlineUpdater.cpp" line="441"/>
+        <location filename="OnlineUpdater.cpp" line="443"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>检查更新失败，错误：%1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="596"/>
+        <location filename="OnlineUpdater.cpp" line="610"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否下载此安装程序？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="600"/>
+        <location filename="OnlineUpdater.cpp" line="614"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否下载此更新包？&lt;/p&gt;</translation>
     </message>
@@ -1548,75 +1548,75 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">&lt;p&gt;是否跳转到&lt;a href=&quot;%1&quot;&gt;更新页面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="604"/>
+        <location filename="OnlineUpdater.cpp" line="618"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否前往&lt;a href=&quot;%1&quot;&gt;下载页面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="613"/>
+        <location filename="OnlineUpdater.cpp" line="627"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>不再显示此次更新</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="736"/>
+        <location filename="OnlineUpdater.cpp" line="750"/>
         <source>Downloading updates...</source>
         <translation>正在下载更新...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="762"/>
+        <location filename="OnlineUpdater.cpp" line="776"/>
         <source>invalid parameter</source>
         <translation>无效参数</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="763"/>
+        <location filename="OnlineUpdater.cpp" line="777"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>无法获取更新信息</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="764"/>
+        <location filename="OnlineUpdater.cpp" line="778"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>加载更新 Json 文件失败</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="765"/>
+        <location filename="OnlineUpdater.cpp" line="779"/>
         <source>failed to download a particular file</source>
         <translation>未能下载特定文件</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="766"/>
+        <location filename="OnlineUpdater.cpp" line="780"/>
         <source>failed to scan existing installation</source>
         <translation>未能扫描现有的安装</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="767"/>
+        <location filename="OnlineUpdater.cpp" line="781"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>更新包签名无效 !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="768"/>
+        <location filename="OnlineUpdater.cpp" line="782"/>
         <source>downloaded file is corrupted</source>
         <translation>下载的文件已损坏</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="769"/>
+        <location filename="OnlineUpdater.cpp" line="783"/>
         <source>internal error</source>
         <translation>内部错误</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="770"/>
+        <location filename="OnlineUpdater.cpp" line="784"/>
         <source>unknown error</source>
         <translation>未知错误</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="794"/>
+        <location filename="OnlineUpdater.cpp" line="808"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>从服务器下载更新失败，错误 %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="816"/>
+        <location filename="OnlineUpdater.cpp" line="830"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus 的更新已下载。&lt;/p&gt;&lt;p&gt;是否要安装更新？本操作需要终止所有沙盒中运行的程序。&lt;/p&gt;</translation>
     </message>
@@ -1625,7 +1625,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">未能从以下位置下载文件: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="918"/>
+        <location filename="OnlineUpdater.cpp" line="932"/>
         <source>Downloading installer...</source>
         <translation>正在下载安装程序...</translation>
     </message>
@@ -1634,27 +1634,27 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">从 %1 下载安装程序失败</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="961"/>
+        <location filename="OnlineUpdater.cpp" line="975"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;一个新的 Sandboxie-Plus 安装程序已被下载到以下位置：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否安装？本操作需要终止所有沙盒中运行的程序。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1029"/>
+        <location filename="OnlineUpdater.cpp" line="1043"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;您是否要前往&lt; &quot;%1&quot;&gt;信息页&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1037"/>
+        <location filename="OnlineUpdater.cpp" line="1051"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>不再显示此公告</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="582"/>
+        <location filename="OnlineUpdater.cpp" line="596"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus 存在可用的新版本，&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;新版本: &lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="337"/>
+        <location filename="OnlineUpdater.cpp" line="351"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -1663,7 +1663,7 @@ Do you still want to update?</source>
 您确定要进行更新吗？</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="455"/>
+        <location filename="OnlineUpdater.cpp" line="469"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>

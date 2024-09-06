@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.14.7 / 5.69.7] - 2024-0x-xx
+## [1.14.7 / 5.69.7] - 2024-09-05
 
 ### Added
 - added "RandomRegUID"(bool) which could modify Windows Product Id in the registry to a rand value
@@ -13,14 +13,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added a question box to ask for Sandbox Import Location for [#4169](https://github.com/sandboxie-plus/Sandboxie/issues/4169)
 - added UI option to configure DropConHostIntegrity
 - added "HideNetworkAdapterMAC"(bool) return random value when applications tries to get network adapter mac address
+- added shared template selection to the Shared Template feature in the advanced options of the New Box Wizard [#4199](https://github.com/sandboxie-plus/Sandboxie/issues/4199)
+  - The number of available shared templates has been increased to 10
+  - To update the names displayed in the list, simply adjust the "Tmpl.Title" setting within each template
 
 ### Changed
 - allowed users to import/export boxes with .zip files.
 
 ### Fixed
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)
-- fixed encrypted proxy password was inproeprly formated [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)
-
+- fixed encrypted proxy password was improperly formatted [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)
+- fixed NtQueryDirectoryObject (should not return "STATUS_MORE_ENTRIES") as this is a EASY Sandbox Detection [#4201](https://github.com/sandboxie-plus/Sandboxie/issues/4201)
 
 
 ## [1.14.6 / 5.69.6] - 2024-07-30

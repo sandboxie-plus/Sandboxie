@@ -4321,7 +4321,7 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 
         ULONG len = sizeof(OBJECT_DIRECTORY_INFORMATION) + (cur->Name.MaximumLength + cur->TypeName.MaximumLength) * sizeof(WCHAR);
 
-        if (TotalLength + len > Length)
+        if (Buffer && TotalLength + len > Length)
             break; // not enough space for this entry
 
         CountToGo++;
@@ -4329,6 +4329,15 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 
         if (ReturnSingleEntry)
             break;
+    }
+
+    //
+    // probe case
+    //
+
+    if (!Buffer) {
+        if (ReturnLength) *ReturnLength = TotalLength;
+        return STATUS_BUFFER_TOO_SMALL;
     }
 
     //

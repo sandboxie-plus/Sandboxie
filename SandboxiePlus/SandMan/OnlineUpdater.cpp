@@ -210,22 +210,36 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 	QString UpdateKey = Params["key"].toString();
 
 	QUrlQuery Query;
+
+	bool bHwId = false;
 	if (!Serial.isEmpty()) {
 		Query.addQueryItem("SN", Serial);
-		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N') {
-			wchar_t uuid_str[40];
-			theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
-			Query.addQueryItem("HwId", QString::fromWCharArray(uuid_str));
-		}
+		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N')
+			bHwId = true;
 	}
+
 	if(!UpdateKey.isEmpty())
 		Query.addQueryItem("UpdateKey", UpdateKey);
+
+	if (Serial.isEmpty() && Params.contains("eMail")) { // Request eval Key
+		Query.addQueryItem("eMail", Params["eMail"].toString());
+		bHwId = true;
+	}
+
+	if (Params.contains("Name"))
+		Query.addQueryItem("Name", Params["Name"].toString());
+
+	if (bHwId) {
+		wchar_t uuid_str[40];
+		theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
+		Query.addQueryItem("HwId", QString::fromWCharArray(uuid_str));
+	}
 
 #ifdef _DEBUG
 	QString Test = Query.toString();
 #endif
 
-	QUrl Url("https://sandboxie-plus.com/get_cert.php");
+	QUrl Url("https://sandboxie-plus.com/get_cert.php?");
 	Url.setQuery(Query);
 
 	CUpdatesJob* pJob = new CGetCertJob(Params, this);

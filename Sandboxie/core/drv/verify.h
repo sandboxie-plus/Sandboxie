@@ -43,7 +43,7 @@ typedef union _SCertInfo {
                                 // Other features, available with any cert: "UseRamDisk", "ForceUsbDrives",
                                 // as well as Automatic Updates, etc....
 
-        unsigned long expirers_in_sec;
+        long expirers_in_sec;
     };
 } SCertInfo;
 

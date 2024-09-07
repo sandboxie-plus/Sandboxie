@@ -29,9 +29,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - the number of available shared templates has been increased to 10
   - to update the names displayed in the list, simply adjust the "Tmpl.Title" setting within each template
 
-### Changed
-- allowed users to import/export boxes with .zip files.
-
 ### Fixed
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)
 - fixed encrypted proxy password was improperly formatted [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)

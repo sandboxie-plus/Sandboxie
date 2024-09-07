@@ -255,25 +255,25 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, const SComp
 		*/
 		const wchar_t *names[] =
 		{
-			L"s",
 			L"x",
 			//L"mt",
+			L"s",
 			L"he"
 		};
 		const int kNumProps = sizeof(names) / sizeof(names[0]);
 		NWindows::NCOM::CPropVariant values[kNumProps] =
 		{
-			(Params ? Params->bSolid : false),		// solid mode OFF
 			(UInt32)(Params ? Params->iLevel : 5),	// compression level = 9 - ultra
 			//(UInt32)8,							// set number of CPU threads
-			true									// file name encryption (7z only)
+			// 7z only
+			(Params ? Params->bSolid : false),		// solid mode OFF
+			(Params ? Params->b7z : false)		    // file name encryption
 		};
-		if (m_ArchivePath.right(3).toLower().compare(".zip", Qt::CaseInsensitive) != 0) {
-			if (setProperties->SetProperties(names, values, kNumProps) != S_OK)
-			{
-				TRACE(L"ISetProperties failed");
-				Q_ASSERT(0);
-			}
+
+		if(setProperties->SetProperties(names, values, Params->b7z ? kNumProps : (kNumProps - 2)) != S_OK)
+		{
+			TRACE(L"ISetProperties failed");
+			Q_ASSERT(0);
 		}
 	}
 

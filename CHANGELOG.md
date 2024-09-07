@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [1.14.8 / 5.69.8] - 2024-09-??
+
+### Changed
+- allowed users to import/export boxes with .zip files.
+
+### Fixed
+- fixed a cert issue
+
+
+
 ## [1.14.7 / 5.69.7] - 2024-09-05
 
 ### Added
@@ -21,6 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed and improved HideDiskSerialNumber option causes applications to crash [#4185](https://github.com/sandboxie-plus/Sandboxie/issues/4185)
 - fixed encrypted proxy password was improperly formatted [#4197](https://github.com/sandboxie-plus/Sandboxie/issues/4197)
 - fixed NtQueryDirectoryObject (should not return "STATUS_MORE_ENTRIES") as this is an easy sandbox detection [#4201](https://github.com/sandboxie-plus/Sandboxie/issues/4201)
+
 
 
 ## [1.14.6 / 5.69.6] - 2024-07-30

@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.7 / 5.69.7] - 2024-09-05
 
 ### Added
+
 - added "RandomRegUID" (bool) which could modify Windows Product ID in the registry to a random value
 - added "HideDiskSerialNumber" (bool) return random value when applications try to get disk serial number
 - added option to get free 10 days evaluation certificates from the support settings page

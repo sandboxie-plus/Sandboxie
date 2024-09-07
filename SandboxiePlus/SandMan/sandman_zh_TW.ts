@@ -9010,7 +9010,7 @@ instead of &quot;*&quot;.</source>
         <location filename="Forms/OptionsWindow.ui" line="4922"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
-        <translation>某些程式透過 WMI (一個內建的 Windows 資料庫) 檢索作業系統詳細資訊，而不是使用通常方法。例如，即使啟用了「HideOtherBoxes」(隱藏其他沙箱)，「tasklist.exe」也可以存取完整的處理程序清單。啟用此選項可以防止此類行為。</translation>
+        <translation>某些程式透過 WMI (一個內建的 Windows 資料庫) 存取作業系統詳細資訊，而不是使用通常方法。例如，即使啟用了「HideOtherBoxes」(隱藏其他沙箱)，「tasklist.exe」也可以透過 WMI 存取完整的處理程序清單。啟用此選項可以防止這種行為。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4925"/>
@@ -10204,7 +10204,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1887"/>
         <source>New full installers from the selected release channel.</source>
-        <translation>來自所選發行管道的全新完整安裝程式。</translation>
+        <translation>來自所選發行通道的全新完整安裝程式。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1890"/>

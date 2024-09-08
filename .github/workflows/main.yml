@@ -67,17 +67,17 @@ on:
       - '**/COPYING'
 
 env:
-  qt_version: 5.15.14
+  qt_version: 5.15.15
   qt6_version: 6.3.1
-  openssl_version: 3.3.1
-  ghSsl_user: xanasoft
-  ghSsl_repo: openssl-builds
+  openssl_version: 3.3.2
+  ghSsl_user: offhub #xanasoft
+  ghSsl_repo: openssl #openssl-builds
   #ghQt6Win7_user: DavidXanatos
   #ghQt6Win7_repo: qtbase
-  ghQtBuilds_user: xanasoft
-  ghQtBuilds_repo: qt-builds
-  ghQtBuilds_hash_x86: bf4124046cc50ccbbeb3f786c041e884fd4205cd6e616070a75c850105cbf1db
-  ghQtBuilds_hash_x64: 30290d82a02bfaa24c1bf37bcb9c074aba18a673a7176628fccdf71197cee898
+  ghQtBuilds_user: offhub #xanasoft
+  ghQtBuilds_repo: qt-sbie-builds #qt-builds
+  ghQtBuilds_hash_x86: 13928d0ff1bc461ef1d054aa19f1427b172277c6659d0ccf1999e6ffa850126e
+  ghQtBuilds_hash_x64: ebe1f2351b7313b8b0678aadf81c9edacf04af84572b72a576972ee2fb8d5aea
 
 jobs:
   Build_x64:
@@ -86,7 +86,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v4.1.7
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -187,7 +187,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v4.1.7
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -281,7 +281,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v4.1.7
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2

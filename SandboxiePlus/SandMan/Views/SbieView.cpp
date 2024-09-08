@@ -1397,7 +1397,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		if(QMessageBox::question(this, tr("Sandboxie-Plus"), 
 		tr("Do you want to make the box cleaned after machine reboot?"), 
 		QMessageBox::Yes, QMessageBox::No)==QMessageBox::Yes){
-			if(MoveFileExW(fileRoot.toStdString().c_str(),NULL,4)==0){
+			if(MoveFileExA(fileRoot.toStdString().c_str(),NULL,4)==0){
 				QMessageBox::warning(this, tr("Sandboxie-Plus"),
 				tr("The operation failed,please make sure that Sandman has admin privliage.")
 				, QMessageBox::Yes, 0);

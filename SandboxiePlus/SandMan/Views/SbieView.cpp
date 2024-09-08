@@ -243,6 +243,7 @@ void CSbieView::CreateMenu()
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Box"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport->setEnabled(CArchive::IsInit());
+		m_pRebootClean = m_pMenuTools->addAction(CSandMan::GetIcon("Maintenance"),tr("Clean after reboot"),this,SLOT(OnSandBoxAction()));
 
 	m_pMenuRename = m_pMenuBox->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuMoveTo = m_pMenuBox->addMenu(CSandMan::GetIcon("Group"), tr("Move Sandbox"));
@@ -344,6 +345,8 @@ void CSbieView::CreateOldMenu()
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox Config"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Sandbox"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport->setEnabled(CArchive::IsInit());
+		m_pRebootClean = m_pMenuTools->addAction(CSandMan::GetIcon("Maintenance"),tr("Clean after reboot"),this,SLOT(OnSandBoxAction()));
+
 
 		m_pMenuTools->addSeparator();
 		m_pMenuRefresh = m_pMenuTools->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh Info"), this, SLOT(OnSandBoxAction()));
@@ -1385,6 +1388,21 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		}
 
 		Results.append(Status);
+	}
+	else if (Action == m_pRebootClean)
+    {
+		CSandBoxPtr pBox=SandBoxes.first();
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+		QString fileRoot=pBoxEx->GetFileRoot();
+		if(QMessageBox::question(this, tr("Sandboxie-Plus"), 
+		tr("Do you want to make the box cleaned after machine reboot?"), 
+		QMessageBox::Yes, QMessageBox::No)==QMessageBox::Yes){
+			if(MoveFileExW(fileRoot.toStdString().c_str(),NULL,4)==0){
+				QMessageBox::warning(this, tr("Sandboxie-Plus"),
+				tr("The operation failed,please make sure that Sandman has admin privliage.")
+				, QMessageBox::Yes, 0);
+			}
+		}
 	}
 	else if (Action == m_pMenuExport)
 	{

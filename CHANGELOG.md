@@ -5,8 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.14.8 / 5.69.8] - 2024-09-??
 
+### Added
+- added a menu action to clean boxes after the machine reboot
+
 ### Changed
-- allowed users to import/export boxes with .zip files.
+- allowed users to import/export boxes with .zip files
 
 ### Fixed
 - fixed a cert issue

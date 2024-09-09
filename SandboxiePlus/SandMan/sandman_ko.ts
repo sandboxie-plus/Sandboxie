@@ -5468,6 +5468,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>그룹은 자신의 상위 그룹이 될 수 없습니다.</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
+        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="1057"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>압축파일을 열지 못했습니다. 암호가 잘못되었습니까?</translation>
@@ -5581,10 +5587,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>재개</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation>7-zip 압축파일 (*.7z)</translation>
+        <translation type="vanished">7-zip 압축파일 (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -7392,8 +7396,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
-        <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>샌드박스를 7z 압축파닐로 내보내고 압축률을 선택하고 추가 압축 설정을 사용자 정의합니다.</translation>
+        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <oldsource>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="unfinished">샌드박스를 7z 압축파닐로 내보내고 압축률을 선택하고 추가 압축 설정을 사용자 정의합니다.</translation>
     </message>
 </context>
 <context>

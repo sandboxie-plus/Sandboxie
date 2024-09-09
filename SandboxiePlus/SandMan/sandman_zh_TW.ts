@@ -5369,6 +5369,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>群組不能作為其本身的上級群組。</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
+        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="1057"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>開啟封存檔失敗，密碼是否存在錯誤？</translation>
@@ -5477,10 +5483,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>恢復</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation>7-zip 封存檔案 (*.7z)</translation>
+        <translation type="vanished">7-zip 封存檔案 (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -7243,8 +7247,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
-        <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>將沙箱匯出至 7z 封存檔，選擇壓縮率並自訂其他壓縮設定。</translation>
+        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <oldsource>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="unfinished">將沙箱匯出至 7z 封存檔，選擇壓縮率並自訂其他壓縮設定。</translation>
     </message>
 </context>
 <context>

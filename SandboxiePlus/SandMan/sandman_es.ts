@@ -5499,6 +5499,12 @@ NO seleccionará: %2</translation>
         <translation>[Ninguno]</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
+        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="1057"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>Error al abrir archivador, ¿contraseña incorrecta?</translation>
@@ -5715,10 +5721,8 @@ NO seleccionará: %2</translation>
         <translation>Elegir nombre de archivo</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation>Archivador 7-zip (*.7z)</translation>
+        <translation type="vanished">Archivador 7-zip (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -7436,8 +7440,9 @@ Si ya eres un Gran Patrocinador en Patreon, Sandboxie puede comprobar online por
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
-        <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>Exportar Sandbox a un archivador 7z, Elija su Razón de Compresión y Personalice Opciones avanzadas de Compresión.</translation>
+        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <oldsource>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="unfinished">Exportar Sandbox a un archivador 7z, Elija su Razón de Compresión y Personalice Opciones avanzadas de Compresión.</translation>
     </message>
 </context>
 <context>

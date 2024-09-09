@@ -4948,6 +4948,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Eine Gruppe kann nicht seine eigene Quelle sein.</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
+        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="1057"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>Fehler beim Öffnen des Archivs, falsches Passwort?</translation>
@@ -5182,10 +5188,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Dateinamen auswählen</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation>7-zip Archiv (*.7z)</translation>
+        <translation type="vanished">7-zip Archiv (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -6796,8 +6800,9 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
-        <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>Exportieren Sie die Sandbox in ein 7z-Archiv, wählen Sie Ihre Komprimierungsrate und passen Sie zusätzliche Komprimierungseinstellungen an.</translation>
+        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <oldsource>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="unfinished">Exportieren Sie die Sandbox in ein 7z-Archiv, wählen Sie Ihre Komprimierungsrate und passen Sie zusätzliche Komprimierungseinstellungen an.</translation>
     </message>
 </context>
 <context>

@@ -5407,7 +5407,7 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="1040"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip 压缩包 (*.7z);;Zip 压缩包 (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1057"/>
@@ -7297,8 +7297,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
         <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <oldsource>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
-        <translation type="unfinished">将沙盒导出到7z压缩包，选择压缩率并自定义其他压缩设置。</translation>
+        <translation>将沙盒导出到7z或zip压缩包，选择压缩率并自定义其他压缩设置。</translation>
     </message>
 </context>
 <context>

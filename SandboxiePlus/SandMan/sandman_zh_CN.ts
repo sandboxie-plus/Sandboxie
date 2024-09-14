@@ -1686,7 +1686,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <name>COptionsWindow</name>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="186"/>
-        <source>Sandboxie-Plus - &apos;%1&apos; Options</source>
+        <source>Sandboxie Plus - &apos;%1&apos; Options</source>
         <translation>Sandboxie-Plus - &apos;%1&apos; 选项</translation>
     </message>
     <message>

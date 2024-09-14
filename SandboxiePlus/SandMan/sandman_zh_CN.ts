@@ -1890,7 +1890,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>带有数据保护功能加固型沙盒</translation>
+        <translation>带有数据保护功能的加固型沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>

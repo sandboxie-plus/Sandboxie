@@ -503,7 +503,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="137"/>
         <source>Passwords don&apos;t match!!!</source>
-        <translation>输入的密码不正确！</translation>
+        <translation>输入的密码不正确！！！</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="141"/>
@@ -551,7 +551,9 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>沙盒将主机系统与在沙盒内运行的进程隔离开来，防止它们对计算机中的其它程序和数据进行永久性的更改。隔离级别会影响您的安全性以及与应用程序的兼容性，因此根据所选的沙盒类型会有不同的隔离级别。此外沙盒还可以保护你的个人数据不被受限制下运行的进程的访问</translation>
+        <translation>沙盒可以将主机系统与在沙盒内运行的进程隔离开来，防止它们对计算机中的其它程序和数据进行永久性的更改。
+	隔离级别会影响您的安全性以及与应用程序的兼容性，因此根据所选的沙盒类型会有不同的隔离级别。
+	此外，Sandboxie 还可以保护你的个人数据不被受限制下运行的进程的访问</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
@@ -575,7 +577,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
         <translation>该沙盒类型通过显著减少主机暴露于沙盒进程的攻击面来提供最高级别的保护，并且它严格限制进程对用户数据的访问。
-该沙盒中的进程仅被允许访问 %SystemRoot% （一般为C:\Windows） 和 %ProgramW6432%（一般为C:\Program Files）目录。因此所有用户数据及文件将对沙盒进程保持隐藏状态，确保了最大程度的安全性。</translation>
+该沙盒中的进程仅被允许访问 %SystemRoot% （一般为 C:\Windows） 和 %ProgramW6432%（一般为 C:\Program Files）目录。因此，所有用户数据及文件将对沙盒进程保持隐藏状态，确保了它们最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>

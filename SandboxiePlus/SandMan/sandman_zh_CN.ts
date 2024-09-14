@@ -575,8 +575,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
         <translation>该沙盒类型通过显著减少主机暴露于沙盒进程的攻击面来提供最高级别的保护，并且它严格限制进程对用户数据的访问。
-	该沙盒中的进程仅被允许访问 %SystemRoot% （一般为C:\Windows） 和 %ProgramW6432%（一般为C:\Program Files）目录。
-所有用户数据及文件将对沙盒进程保持隐藏状态，确保最大程度的安全性。</translation>
+该沙盒中的进程仅被允许访问 %SystemRoot% （一般为C:\Windows） 和 %ProgramW6432%（一般为C:\Program Files）目录。因此所有用户数据及文件将对沙盒进程保持隐藏状态，确保了最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>

@@ -511,7 +511,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
         <translation>警告：短密码非常容易被暴力破解！
-        推荐使用长度至少为 20 字符以上的密码。或者，您确认使用短密码吗？</translation>
+        推荐使用长度至少为 20 字符以上的密码。或者，您仍要使用短密码吗？</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="147"/>

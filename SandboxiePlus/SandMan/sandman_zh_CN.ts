@@ -1890,7 +1890,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>带数据保护的加固型沙盒</translation>
+        <translation>带有数据保护功能加固型沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
@@ -1900,7 +1900,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Sandbox with Data Protection</source>
-        <translation>带数据保护的沙盒</translation>
+        <translation>带有数据保护功能的沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
@@ -1910,7 +1910,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>带数据保护的应用隔间</translation>
+        <translation>带有数据保护功能的应用隔间</translation>
     </message>
     <message>
         <source>Application Compartment (NO Isolation)</source>
@@ -2825,7 +2825,7 @@ The file was written by: %3</source>
         <location filename="Windows/PopUpWindow.cpp" line="474"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>迁移一个大文件 %1 到沙盒 %2，剩余 %3
+        <translation>正在迁移大文件 %1 到沙盒 %2，剩余 %3
 完整路径：%4</translation>
     </message>
 </context>

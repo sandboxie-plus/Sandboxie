@@ -339,6 +339,8 @@ void COptionsWindow::LoadGeneral()
 		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
 		ui.chkForceProtection->setEnabled(!ui.chkRamBox->isChecked());
 	}
+	ui.chkForceProtection->setEnabled(ui.chkEncrypt->isEnabled() && ui.chkEncrypt->isChecked());
+
 	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
 	if (pBoxEx && QFile::exists(pBoxEx->GetBoxImagePath())) 
 	{
@@ -1147,6 +1149,8 @@ void COptionsWindow::OnDiskChanged()
 		ui.chkForceProtection->setEnabled(ui.chkEncrypt->isChecked());
 	}
 	
+	ui.chkForceProtection->setEnabled(ui.chkEncrypt->isEnabled() && ui.chkEncrypt->isChecked());
+
 	OnGeneralChanged();
 }
 

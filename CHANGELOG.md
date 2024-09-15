@@ -9,6 +9,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed Exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
 
+### Added
+- Added a couple alternative default sandbox paths to the box wizard:
+  - \??\%SystemDrive%\Sandbox\%USER%\%SANDBOX%
+  - \??\%SystemDrive%\Sandbox\%SANDBOX%
+  - \??\%SystemDrive%\Users\%USER%\Sandbox\%SANDBOX%
+
 
 
 

@@ -335,10 +335,8 @@ void COptionsWindow::LoadGeneral()
 	ui.chkForceProtection->setChecked(m_pBox->GetBool("ForceProtectionOnMount", false));
 	ui.chkUserOperation->setChecked(m_pBox->GetBool("BlockInterferenceControl", false));
 	ui.chkCoverBar->setChecked(m_pBox->GetBool("AllowCoverTaskbar", false));
-	if (ui.chkRamBox->isEnabled()) {
+	if (ui.chkRamBox->isEnabled())
 		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
-		ui.chkForceProtection->setEnabled(!ui.chkRamBox->isChecked());
-	}
 	ui.chkForceProtection->setEnabled(ui.chkEncrypt->isEnabled() && ui.chkEncrypt->isChecked());
 
 	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());

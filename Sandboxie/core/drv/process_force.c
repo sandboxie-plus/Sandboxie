@@ -168,9 +168,9 @@ _FX BOX *Process_GetForcedStartBox(
     BOOLEAN same_image_name;
 
 
-	void* nbuf;
-	ULONG nlen;
-	WCHAR* ParentName;
+	void* nbuf = NULL;
+	ULONG nlen = 0;
+	WCHAR* ParentName = NULL;
 
     check_force = TRUE;
 

@@ -690,32 +690,6 @@ void* Driver_FindMissingService(const char* ProcName, int prmcnt)
 
 _FX BOOLEAN Driver_FindMissingServices(void)
 {
-#ifdef OLD_DDK
-    UNICODE_STRING uni;
-	RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
-
-    //
-    // Windows 7 kernel exports ZwSetInformationToken
-    // on earlier versions of Windows, we search for it
-    //
-//#ifndef _WIN64
-    if (Driver_OsVersion < DRIVER_WINDOWS_7) {
-
-        ZwSetInformationToken = (P_NtSetInformationToken) Driver_FindMissingService("ZwSetInformationToken", 4);
-
-    } else 
-//#endif
-	{
-		ZwSetInformationToken = (P_NtSetInformationToken) MmGetSystemRoutineAddress(&uni);
-    }
-
-    if (!ZwSetInformationToken) {
-		Log_Msg1(MSG_1108, uni.Buffer);
-		return FALSE;
-	}
-#endif
-
-
     //
     // Retrieve some unexported kernel functions which may be useful
     //
@@ -771,6 +745,31 @@ _FX BOOLEAN Driver_FindMissingServices(void)
     if (!ZwCreateToken)
         Log_Msg1(MSG_1108, L"ZwCreateTokenEx");
 
+#endif
+
+#ifdef OLD_DDK
+    UNICODE_STRING uni;
+	RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
+
+    //
+    // Windows 7 kernel exports ZwSetInformationToken
+    // on earlier versions of Windows, we search for it
+    //
+//#ifndef _WIN64
+    if (Driver_OsVersion < DRIVER_WINDOWS_7) {
+
+        ZwSetInformationToken = (P_NtSetInformationToken) Driver_FindMissingService("ZwSetInformationToken", 4);
+
+    } else 
+//#endif
+	{
+		ZwSetInformationToken = (P_NtSetInformationToken) MmGetSystemRoutineAddress(&uni);
+    }
+
+    if (!ZwSetInformationToken) {
+		Log_Msg1(MSG_1108, uni.Buffer);
+		return FALSE;
+	}
 #endif
 
     return TRUE;

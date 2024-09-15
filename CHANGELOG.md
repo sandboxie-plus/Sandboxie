@@ -6,14 +6,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.14.9 / 5.69.9] - 2024-09-??
 
-### Fixed
-- fixed Exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
-
 ### Added
 - Added a couple alternative default sandbox paths to the box wizard:
   - \??\%SystemDrive%\Sandbox\%USER%\%SANDBOX%
   - \??\%SystemDrive%\Sandbox\%SANDBOX%
   - \??\%SystemDrive%\Users\%USER%\Sandbox\%SANDBOX%
+- Added Box Import Dialog
+
+### Changed
+- box root in settings is now a combo box
+
+### Fixed
+- fixed Exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
 
 
 

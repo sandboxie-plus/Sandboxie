@@ -2060,7 +2060,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QComboBox" name="cmbDefault"/>
                </item>
                <item row="4" column="2" colspan="5">
-                <widget class="QLineEdit" name="ipcRoot"/>
+                <widget class="QComboBox" name="ipcRoot"/>
                </item>
                <item row="2" column="0" colspan="2">
                 <widget class="QLabel" name="label_15">
@@ -2147,7 +2147,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 </widget>
                </item>
                <item row="2" column="2" colspan="5">
-                <widget class="QLineEdit" name="fileRoot"/>
+                <widget class="QComboBox" name="fileRoot"/>
                </item>
                <item row="1" column="5" colspan="2">
                 <widget class="QCheckBox" name="chkAutoRoot">
@@ -2183,7 +2183,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 </spacer>
                </item>
                <item row="3" column="2" colspan="5">
-                <widget class="QLineEdit" name="regRoot"/>
+                <widget class="QComboBox" name="regRoot"/>
                </item>
                <item row="2" column="7">
                 <widget class="QPushButton" name="btnBrowse">

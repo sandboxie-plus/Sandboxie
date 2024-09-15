@@ -3,13 +3,22 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [1.14.9 / 5.69.9] - 2024-09-??
+
+### Fixed
+- fixed Exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
+
+
+
+
 ## [1.14.8 / 5.69.8] - 2024-09-09
 
 ### Changed
-- allow users to import/export boxes with .zip files
+- allow users to import/export boxes with .zip files [#4200](https://github.com/sandboxie-plus/Sandboxie/pull/4200)
 
 ### Fixed
-- fixed a supporter certificate issue
+- fixed a supporter certificate issue introduced with 1.14.7
 
 
 

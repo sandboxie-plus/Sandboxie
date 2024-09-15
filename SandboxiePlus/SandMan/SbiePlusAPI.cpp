@@ -239,7 +239,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
     SCompressParams Params;
 	Params.iLevel = vParams["level"].toInt();
 	Params.bSolid = vParams["solid"].toBool();
-	Params.b7z = Info.FormatIndex == 1;
+	Params.b7z = Info.ArchiveExt != "zip";
 
 	SB_STATUS Status = SB_OK;
 	if (!Archive.Update(&Files, true, &Params, &Attributes))

@@ -43,6 +43,7 @@ public:
 	virtual void					UpdateDetails();
 
 	virtual void					SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath);
+	virtual void					SetFileRoot(const QString& FilePath);
 	virtual QString					GetFileRoot() const { return m_FilePath; }
 	virtual QString					GetRegRoot() const { return m_RegPath; }
 	virtual QString					GetIpcRoot() const { return m_IpcPath; }

@@ -332,15 +332,13 @@ void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	pProgress->Finish(Status);
 }
 
-SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName, const QString& RootFolder, const QString& Password)
+SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName, const QString& Password)
 {
 	if (!CArchive::IsInit())
 		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QString filepath = RootFolder.isEmpty()?m_FilePath:RootFolder;
-	
-	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, filepath, m_Name, Password);
+	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, m_FilePath, m_Name, Password);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 

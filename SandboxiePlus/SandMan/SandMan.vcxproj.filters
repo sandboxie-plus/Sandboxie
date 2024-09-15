@@ -234,6 +234,9 @@
     <ClCompile Include="Windows\TestProxyDialog.cpp">
         <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\ExtractDialog.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -385,6 +388,9 @@
     <QtMoc Include="Windows\TestProxyDialog.h">
         <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\ExtractDialog.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -428,7 +434,10 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\TestProxyDialog.ui">
-        <Filter>Form Files</Filter>
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\ExtractDialog.ui">
+      <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>

@@ -256,12 +256,12 @@ Pour désactiver ce modèle pour un bac, décochez-le simplement de la liste des
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
         <source>Shared template selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Choix de modèle partagé</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="941"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option définit le modèle qui sera utilisé dans le mode « Modèle partagé ». (%1)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="906"/>
@@ -848,13 +848,13 @@ Veuillez naviguer vers le dossier de profil d&apos;utilisateur adéquat.</transl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="289"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Obtenez un certificat d&apos;évaluation gratuit&lt;/font&gt;&lt;/a&gt; et bénéficiez de toutes les fonctions bonus pendant %1 jours.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="290"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez demander un certificat d&apos;évaluation gratuit valide %1 jours jusquà %2 fois par ID matérielle.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
@@ -1466,7 +1466,7 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="351"/>
+        <location filename="OnlineUpdater.cpp" line="337"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -1478,38 +1478,38 @@ Do you still want to update?</oldsource>
 Voulez-vous quand même mettre  à jour ?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="377"/>
+        <location filename="OnlineUpdater.cpp" line="363"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>Voulez-vous vérifier s&apos;il existe une nouvelle version de Sandboxie-Plus ?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="378"/>
+        <location filename="OnlineUpdater.cpp" line="364"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Ne plus afficher ce message</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="433"/>
+        <location filename="OnlineUpdater.cpp" line="419"/>
         <source>Checking for updates...</source>
         <translation>Vérification des mises à jour...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="440"/>
+        <location filename="OnlineUpdater.cpp" line="426"/>
         <source>server not reachable</source>
         <translation>serveur inaccessible</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="441"/>
-        <location filename="OnlineUpdater.cpp" line="443"/>
+        <location filename="OnlineUpdater.cpp" line="427"/>
+        <location filename="OnlineUpdater.cpp" line="429"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>Échec de la vérification des mises à jour, erreur : %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="610"/>
+        <location filename="OnlineUpdater.cpp" line="596"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Voulez-vous télécharger l&apos;installeur ?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="614"/>
+        <location filename="OnlineUpdater.cpp" line="600"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Voulez-vous télécharger les mises à jour ?&lt;/p&gt;</translation>
     </message>
@@ -1518,70 +1518,70 @@ Voulez-vous quand même mettre  à jour ?</translation>
         <translation type="vanished">&lt;p&gt;Voulez-vous aller sur la &lt;a href=&quot;%1&quot;&gt;page de mise à jour&lt;/a&gt; ?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="627"/>
+        <location filename="OnlineUpdater.cpp" line="613"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>Ne plus afficher cette mise à jour.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="750"/>
+        <location filename="OnlineUpdater.cpp" line="736"/>
         <source>Downloading updates...</source>
         <translation>Téléchargement des mises à jour...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="776"/>
+        <location filename="OnlineUpdater.cpp" line="762"/>
         <source>invalid parameter</source>
         <translation>paramètre invalide</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="777"/>
+        <location filename="OnlineUpdater.cpp" line="763"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>échec du téléchargement des informations de mise à jour</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="778"/>
+        <location filename="OnlineUpdater.cpp" line="764"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>échec du chargement de la mise à jour du fichier json</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="779"/>
+        <location filename="OnlineUpdater.cpp" line="765"/>
         <source>failed to download a particular file</source>
         <translation>échec de téléchargement d&apos;un fichier en particulier</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="780"/>
+        <location filename="OnlineUpdater.cpp" line="766"/>
         <source>failed to scan existing installation</source>
         <translation>échec de l&apos;analyse de l&apos;installation existante</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="781"/>
+        <location filename="OnlineUpdater.cpp" line="767"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>la signature mise à jour est invalide !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="782"/>
+        <location filename="OnlineUpdater.cpp" line="768"/>
         <source>downloaded file is corrupted</source>
         <translation>le fichier téléchargé est corrompu</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="783"/>
+        <location filename="OnlineUpdater.cpp" line="769"/>
         <source>internal error</source>
         <translation>erreur interne</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="784"/>
+        <location filename="OnlineUpdater.cpp" line="770"/>
         <source>unknown error</source>
         <translation>erreur inconnue</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="808"/>
+        <location filename="OnlineUpdater.cpp" line="794"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>Échec du téléchargement des mises à jour depuis le serveur ; erreur %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="830"/>
+        <location filename="OnlineUpdater.cpp" line="816"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Des mises à jour pour Sandboxie-Plus ont été téléchargées.&lt;/p&gt;&lt;p&gt;Voules-vous appliquer ces mises à jour ? Si des programmes sont lancés dans des bacs à sable, ils seront arrêtés.&lt;/p&gt;</translation>
     </message>
@@ -1590,7 +1590,7 @@ Voulez-vous quand même mettre  à jour ?</translation>
         <translation type="vanished">Échec du téléchargement du fichier depuis : %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="932"/>
+        <location filename="OnlineUpdater.cpp" line="918"/>
         <source>Downloading installer...</source>
         <translation>Téléchargement de l&apos;installeur...</translation>
     </message>
@@ -1599,17 +1599,17 @@ Voulez-vous quand même mettre  à jour ?</translation>
         <translation type="vanished">Échec du téléchargement de l&apos;installeur depuis : %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="975"/>
+        <location filename="OnlineUpdater.cpp" line="961"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Un nouvel installeur pour Sandboxie-Plus a été téléchargé à l&apos;endroit suivant :&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Voulez-vous commencer l&apos;installation ? Si des programmes sont lancés dans des bacs à sable, ils seront arrêtés.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1043"/>
+        <location filename="OnlineUpdater.cpp" line="1029"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Voulez-vous aller à la &lt;a href=&quot;%1&quot;&gt;page d&apos;information&lt;/a&gt; ?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1051"/>
+        <location filename="OnlineUpdater.cpp" line="1037"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Ne plus afficher cette annonce</translation>
     </message>
@@ -1618,7 +1618,7 @@ Voulez-vous quand même mettre  à jour ?</translation>
         <translation type="vanished">&lt;p&gt;Une nouvelle version de Sandboxie-Plus est disponible.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Nouvelle version :&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="596"/>
+        <location filename="OnlineUpdater.cpp" line="582"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Une nouvelle version de Sandboxie-Plus est disponible.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Nouvelle version :&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
@@ -1627,7 +1627,7 @@ Voulez-vous quand même mettre  à jour ?</translation>
         <translation type="vanished">&lt;p&gt;Voulez-vous télécharger la dernière version ?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="618"/>
+        <location filename="OnlineUpdater.cpp" line="604"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Voulez-vous aller à la &lt;a href=&quot;%1&quot; page de téléchargement&lt;/a&gt; ?&lt;/p&gt;</translation>
     </message>
@@ -1636,7 +1636,7 @@ Voulez-vous quand même mettre  à jour ?</translation>
         <translation type="vanished">Ne plus afficher ce message</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="469"/>
+        <location filename="OnlineUpdater.cpp" line="455"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -5598,12 +5598,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Importing Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Importation du bac</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Do you want to select custom root folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous choisir un dossier racine personnalisé ?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -6225,17 +6225,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1264"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vous avez utilisé %1/%2 certificats d&apos;évaluation. Plus aucun certificat gratuit ne peut être créé.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1266"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Obtenez un certificat d&apos;évaluation gratuit&lt;/a&gt; et bénéficiez de toutes les fonctions bonus pendant %1 jours.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez demander un certificat d&apos;évaluation gratuit valide %1 jours jusqu&apos;à %2 fois par ID matérielle.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1280"/>
@@ -6255,7 +6255,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2021"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le certificat d&apos;évaluation a été appliqué avec succès. Appréciez votre essai gratuit !</translation>
     </message>
     <message>
         <source>Retreiving certificate...</source>
@@ -6375,22 +6375,22 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="1329"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Expire dans : %1 jour(s)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1331"/>
         <source>Expired: %1 days ago</source>
-        <translation type="unfinished"></translation>
+        <translation>A expiré : il y a %1 jour(s)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1342"/>
         <source>Options: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Options : %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bacs à la sécurité/confidentialité renforcée &amp; bacs d&apos;applications (SBox) : %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
@@ -6398,7 +6398,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="1349"/>
         <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Activé</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1347"/>
@@ -6406,22 +6406,22 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="1349"/>
         <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Disabled</source>
-        <translation type="unfinished">Désactivé</translation>
+        <translation>Désactivé</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1348"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bacs chiffrés (EBox) : %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1349"/>
         <source>Network Interception (NetI): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Interception réseau (NetI) : %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Sandboxie Desktop (Desk): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bureau Sandboxie (Desk) : %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1365"/>
@@ -6455,13 +6455,14 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1411"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Obtenir un certificat d&apos;ÉVALUATION</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1411"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez saisir votre adresse électronique pour recevoir un certificat d&apos;évaluation gratuit valide %1 jours, qui sera délivré à %2 et verrouillé sur le matériel actuel.
+Vous pouvez demander jusqu&apos;à %3 certificats d&apos;évaluation pour chaque ID matérielle unique.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1437"/>
@@ -9191,7 +9192,7 @@ Partiellement coché : Aucun groupe ne sera ajouté au jeton nouvellement créé
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Abaisser le niveau d&apos;intégrité du processus ConHost.exe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2181"/>
@@ -9738,17 +9739,17 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4946"/>
         <source>Hide Disk Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer le numéro de série du lecteur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4932"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Dissimuler les identifiants uniques connus dans le registre</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4939"/>
         <source>Hide Network Adapter MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer l&apos;adresse MAC de l&apos;adaptateur réseau</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5156"/>
@@ -10489,12 +10490,12 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="178"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter tous les processus dans les bacs lors de la fermeture de Sandman</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1754"/>
         <source>Cert Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Infos de certificat</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1767"/>

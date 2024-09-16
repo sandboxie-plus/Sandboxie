@@ -296,7 +296,6 @@ CSandMan::CSandMan(QWidget *parent)
 	}
 
 	connect(CSymbolProvider::Instance(), SIGNAL(StatusChanged(const QString&)), this, SLOT(OnSymbolStatus(const QString&)));
-
 	//qApp->setWindowIcon(GetIcon("IconEmptyDC", false));
 }
 
@@ -2528,14 +2527,20 @@ void CSandMan::OnStatusChanged()
 			}
 
 			UpdateForceUSB();
-
-			if (theConf->GetBool("Options/CleanUpOnStart", false)) {
+            theAPI->UpdateProcesses(0, ShowAllSessions());
+            bool bAutoRun = QApplication::arguments().contains("-autorun");
+            if(bAutoRun) {
+                foreach(
+                const CSandBoxPtr &pBox, AllBoxes) {
+                    if (pBox->GetBool("CleanAfterReboot"))
+                        DeleteBoxContent(pBox, eAuto, true);
+                }
+            }
+            if (theConf->GetBool("Options/CleanUpOnStart", false)) {
 
 				//
 				// clean up Auto Delete boxes after reboot
 				//
-
-				theAPI->UpdateProcesses(0, ShowAllSessions());
 
 				foreach(const CSandBoxPtr & pBox, AllBoxes) {
 					if (pBox->GetActiveProcessCount() == 0)

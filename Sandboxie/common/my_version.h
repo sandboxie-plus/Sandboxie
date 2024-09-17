@@ -36,7 +36,7 @@
   #define MY_VERSION_BINARY VERSION_MJR,VERSION_MIN,VERSION_REV
   #define MY_VERSION_STRING STR(VERSION_MJR.VERSION_MIN.VERSION_REV)
 #endif
-#define MY_ABI_VERSION  0x56800
+#define MY_ABI_VERSION  0x56900
 
 // These #defines are used by either Resource Compiler or NSIS installer
 #define SBIE_INSTALLER_PATH		"..\\Bin\\"

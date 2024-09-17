@@ -1410,6 +1410,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
                 pBox->SetBool("CleanAfterReboot",true);
             }
 	}
+    }
 	else if (Action == m_pMenuExport)
 	{
 		CSandBoxPtr pBox = SandBoxes.first();

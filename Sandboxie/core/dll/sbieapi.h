@@ -190,7 +190,7 @@ LONG SbieApi_EnumProcessEx(
 
 SBIEAPI_EXPORT
 LONG SbieApi_SessionLeader(
-    HANDLE TokenHandle,
+    ULONG session_id,
     HANDLE *ProcessId);
 
 SBIEAPI_EXPORT

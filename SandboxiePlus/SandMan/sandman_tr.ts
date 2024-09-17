@@ -131,42 +131,42 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="867"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="875"/>
         <source>Advanced Sandbox options</source>
         <translation>Gelişmiş Korumalı Alan Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="868"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="876"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>Bu sayfada gelişmiş korumalı alan seçenekleri yapılandırılabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="880"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <translation>Sistemde yüklü korumalı alanda çalışan işlemlerin alan içinden DLL yüklemesini önle</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="889"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <translation>Bu özellik, korumalı alan konumundan çalışan işlemlerin ana sistem konumundan çalışan işlemlere veri yazmasını ve hatta onları başlatmasını da engellediği için uyumluluğu azaltabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="896"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
         <translation>Bu özellik, normal ekran görüntüsü işlevselliğini de engelleyerek kullanıcı deneyimini potansiyel olarak olumsuz etkileyebilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="893"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="901"/>
         <source>Shared Template</source>
         <translation>Paylaşımlı Şablon</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="894"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
         <source>Shared template mode</source>
         <translation>Paylaşımlı şablon modu</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="895"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="903"/>
         <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
@@ -174,62 +174,62 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <translation>Bu ayar, korumalı alan yapılandırmasına yerel bir şablon veya bunun ayarlarını ekler, böylece bu şablondaki ayarlar korumalı alanlar arasında paylaşılır. Ancak paylaşım modu olarak &apos;Şablon olarak kullan&apos; seçeneği seçildiğinde bazı ayarların durumu kullanıcı arayüzüne yansımayabilir. Şablonun ayarlarını değiştirmek için, Korumalı Alan Seçenekleri altındaki Uygulama Şablonları listesinde &apos;%1&apos; şablonunu bulmanız ve ardından düzenlemek için üzerine çift tıklamanız yeterlidir. Bu şablonu bir korumalı alan için devre dışı bırakmak istiyorsanız şablon listesindeki işaretini kaldırmanız yeterlidir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="901"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="909"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
         <translation>Bu seçenek, korumalı alan yapılandırmasına herhangi bir ayar eklemez ve şablon içindeki kaldırma ayarlarına bağlı olarak varsayılan korumalı alan ayarlarını kaldırmaz.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
         <translation>Bu seçenek, paylaşımlı şablonu korumalı alan yapılandırmasına bir yerel şablon olarak ekler ve şablon içindeki kaldırma ayarlarına bağlı olarak varsayılan korumalı alan ayarlarını kaldırabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="903"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="911"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
         <translation>Bu seçenek, paylaşımlı şablondaki ayarları korumalı alan yapılandırmasına ekler ve ayrıca şablon içindeki kaldırma ayarlarına bağlı olarak varsayılan korumalı alan ayarlarını kaldırabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
         <translation>Bu seçenek, korumalı alan yapılandırmasına herhangi bir ayar eklemez ancak şablon içindeki kaldırma ayarlarına bağlı olarak varsayılan korumalı alan ayarlarını kaldırabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="920"/>
         <source>Remove defaults if set</source>
         <translation>Ayarlıysa varsayılanları kaldır</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="927"/>
         <source>Shared template selection</source>
         <translation>Paylaşımlı şablon seçimi</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="941"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="949"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
         <translation>Bu seçenek, paylaşımlı şablon modunda kullanılacak şablonu belirtir. (%1)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="906"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="914"/>
         <source>Disabled</source>
         <translation>Devre dışı</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="873"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
         <source>Advanced Options</source>
         <translation>Gelişmiş Seçenekler</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="887"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="895"/>
         <source>Prevent sandboxed windows from being captured</source>
         <translation>Korumalı alandaki pencerelerin yakalanmasını önle</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="908"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="916"/>
         <source>Use as a template</source>
         <translation>Şablon olarak kullan</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="918"/>
         <source>Append to the configuration</source>
         <translation>Yapılandırmaya ekle</translation>
     </message>
@@ -815,34 +815,62 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
         <translation>Sandboxie-Plus - Korumalı Alanı Dışa Aktarma</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="25"/>
+        <location filename="Windows/CompressDialog.cpp" line="27"/>
+        <source>7-Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/CompressDialog.cpp" line="28"/>
+        <source>Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Store</source>
         <translation>Sıkıştırmasız</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="26"/>
+        <location filename="Windows/CompressDialog.cpp" line="31"/>
         <source>Fastest</source>
         <translation>En hızlı</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="27"/>
+        <location filename="Windows/CompressDialog.cpp" line="32"/>
         <source>Fast</source>
         <translation>Hızlı</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="28"/>
+        <location filename="Windows/CompressDialog.cpp" line="33"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="29"/>
+        <location filename="Windows/CompressDialog.cpp" line="34"/>
         <source>Maximum</source>
         <translation>Yüksek</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="30"/>
+        <location filename="Windows/CompressDialog.cpp" line="35"/>
         <source>Ultra</source>
         <translation>Çok yüksek</translation>
+    </message>
+</context>
+<context>
+    <name>CExtractDialog</name>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="23"/>
+        <source>Sandboxie-Plus - Sandbox Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="39"/>
+        <source>Select Directory</source>
+        <translation type="unfinished">Dizin Seç</translation>
+    </message>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="59"/>
+        <source>This name is already in use, please select an alternative box name</source>
+        <translation type="unfinished">Bu ad zaten kullanılıyor, lütfen alan için alternatif bir ad seçin</translation>
     </message>
 </context>
 <context>
@@ -951,17 +979,17 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <translation>Kurtarma konumlarındaki dosyalar için Anında Kurtarmayı etkinleştir</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="697"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="705"/>
         <source>The selected box location is not a valid path.</source>
         <translation>Seçilen alan konumu geçerli bir yol değildir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="702"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <translation>Seçilen alan konumu zaten mevcut ve boş değil, yeni veya boş bir klasör seçmeniz önerilir. Mevcut klasörü kullanmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="707"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <translation>Seçilen alan konumu şu anda kullanılabilir bir sürücüde bulunmuyor.</translation>
     </message>
@@ -1096,83 +1124,83 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
 <context>
     <name>CIsolationPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="731"/>
         <source>Sandbox Isolation options</source>
         <translation>Korumalı Alan Yalıtımı Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="724"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>On this page sandbox isolation options can be configured.</source>
         <translation>Bu sayfada korumalı alan yalıtım seçenekleri yapılandırılabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="729"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Network Access</source>
         <translation>Ağ Erişimi</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="745"/>
         <source>Allow network/internet access</source>
         <translation>Ağ/internet erişimine izin ver</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="738"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>Ağ cihazlarına erişimi reddederek ağı/interneti engelleyin</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="740"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>Windows Filtreleme Platformunu kullanarak ağı/interneti engelle</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
         <source>Allow access to network files and folders</source>
         <translation>Ağ dosyalarına ve klasörlerine erişime izin ver</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="747"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option is not recommended for Hardened boxes</source>
         <translation>Güçlendirilmiş alanlar için bu seçenek önerilmez</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="760"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
         <translation>Ağ engellemesinden muafiyete izin verilip verilmeyeceğini sor</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="758"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
         <source>Admin Options</source>
         <translation>Yönetici Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="770"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation>Yöneticiler ve Yetkili Kullanıcılar grupları haklarını bırak</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="768"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="776"/>
         <source>Make applications think they are running elevated</source>
         <translation>Uygulamaların yetkilendirilmiş çalıştıklarını düşünmelerini sağla</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>MSIServer&apos;ın korumalı alan sistem belirteci ile çalışmasına izin ver</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="788"/>
         <source>Box Options</source>
         <translation>Alan Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="784"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="792"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Anonim kullanıcı yerine Sandboxie oturum açma belirteci kullan</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="793"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğunu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
     </message>
@@ -2121,42 +2149,42 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
         <translation>Yürütülebilir dosyalar (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1162"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1164"/>
         <source>The image file does not exist</source>
         <translation>Görüntü dosyası mevcut değil</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1163"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1165"/>
         <source>The password is wrong</source>
         <translation>Parola hatalı</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1164"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1166"/>
         <source>Unexpected error: %1</source>
         <translation>Beklenmeyen hata: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1193"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1195"/>
         <source>Image Password Changed</source>
         <translation>Görüntü Parolası Değiştirildi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1202"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1204"/>
         <source>Backup Image Header for %1</source>
         <translation>%1 için Görüntü Başlığını Yedekle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1210"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1212"/>
         <source>Image Header Backuped</source>
         <translation>Görüntü Başlığı Yedeklendi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1217"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1219"/>
         <source>Restore Image Header for %1</source>
         <translation>%1 için Görüntü Başlığını Geri Yükle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1225"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
         <source>Image Header Restored</source>
         <translation>Görüntü Başlığı Geri Yüklendi</translation>
     </message>
@@ -2817,67 +2845,67 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="806"/>
+        <location filename="SbiePlusAPI.cpp" line="804"/>
         <source>No Admin</source>
         <translation>Yönetici Yok</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="801"/>
+        <location filename="SbiePlusAPI.cpp" line="799"/>
         <source>No INet</source>
         <translation>INet Yok</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="799"/>
+        <location filename="SbiePlusAPI.cpp" line="797"/>
         <source>No INet (with Exceptions)</source>
         <translation>INet Yok (İstisnalarla)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="809"/>
+        <location filename="SbiePlusAPI.cpp" line="807"/>
         <source>Auto Delete</source>
         <translation>Oto Silme</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="812"/>
+        <location filename="SbiePlusAPI.cpp" line="810"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="804"/>
+        <location filename="SbiePlusAPI.cpp" line="802"/>
         <source>Net Share</source>
         <translation>Net Paylaşımı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="792"/>
+        <location filename="SbiePlusAPI.cpp" line="790"/>
         <source>Enhanced Isolation</source>
         <translation>Geliştirilmiş Yalıtım</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="790"/>
+        <location filename="SbiePlusAPI.cpp" line="788"/>
         <source>Reduced Isolation</source>
         <translation>Azaltılmış Yalıtım</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="773"/>
+        <location filename="SbiePlusAPI.cpp" line="771"/>
         <source>Disabled</source>
         <translation>Devre Dışı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="784"/>
+        <location filename="SbiePlusAPI.cpp" line="782"/>
         <source>OPEN Root Access</source>
         <translation>AÇIK Kök Erişimi</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="786"/>
+        <location filename="SbiePlusAPI.cpp" line="784"/>
         <source>Application Compartment</source>
         <translation>Uygulama Bölmesi</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="788"/>
+        <location filename="SbiePlusAPI.cpp" line="786"/>
         <source>NOT SECURE</source>
         <translation>GÜVENLİ DEĞİL</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="795"/>
+        <location filename="SbiePlusAPI.cpp" line="793"/>
         <source>Privacy Enhanced</source>
         <translation>Gelişmiş Gizlilik</translation>
     </message>
@@ -4549,37 +4577,37 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1206"/>
+        <location filename="SbiePlusAPI.cpp" line="1204"/>
         <source>Failed to initialize COM</source>
         <translation>COM başlatılamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1212"/>
+        <location filename="SbiePlusAPI.cpp" line="1210"/>
         <source>Failed to create update session</source>
         <translation>Güncelleme oturumu oluşturulamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1218"/>
+        <location filename="SbiePlusAPI.cpp" line="1216"/>
         <source>Failed to create update searcher</source>
         <translation>Güncelleme arayıcısı oluşturulamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1224"/>
+        <location filename="SbiePlusAPI.cpp" line="1222"/>
         <source>Failed to set search options</source>
         <translation>Arama seçenekleri ayarlanamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1232"/>
+        <location filename="SbiePlusAPI.cpp" line="1230"/>
         <source>Failed to enumerate installed Windows updates</source>
         <translation>Yüklü Windows güncellemeleri listelenemedi</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1238"/>
+        <location filename="SbiePlusAPI.cpp" line="1236"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Arama sonucundan güncelleme listesi alınamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1245"/>
+        <location filename="SbiePlusAPI.cpp" line="1243"/>
         <source>Failed to get update count</source>
         <translation>Güncelleme sayısı alınamadı</translation>
     </message>
@@ -4587,8 +4615,8 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
-        <location filename="Views/SbieView.cpp" line="299"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
+        <location filename="Views/SbieView.cpp" line="300"/>
         <source>Run</source>
         <translation>Çalıştır</translation>
     </message>
@@ -4599,51 +4627,51 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>%1 korumalı alanına kısayol oluştur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="555"/>
+        <location filename="Views/SbieView.cpp" line="556"/>
         <source>Options:
     </source>
         <translation>Seçenekler:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="222"/>
+        <location filename="Views/SbieView.cpp" line="223"/>
         <source>Drop Admin Rights</source>
         <translation>Yönetici Haklarını Bırak</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="410"/>
+        <location filename="Views/SbieView.cpp" line="411"/>
         <source>Remove Group</source>
         <translation>Grubu Kaldır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="214"/>
+        <location filename="Views/SbieView.cpp" line="215"/>
         <source>Sandbox Options</source>
         <translation>Korumalı Alan Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="219"/>
+        <location filename="Views/SbieView.cpp" line="220"/>
         <source>Sandbox Presets</source>
         <translation>Korumalı Alan Ön Ayarları</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="259"/>
-        <location filename="Views/SbieView.cpp" line="365"/>
+        <location filename="Views/SbieView.cpp" line="260"/>
+        <location filename="Views/SbieView.cpp" line="366"/>
         <source>Remove Sandbox</source>
         <translation>Korumalı Alanı Kaldır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="247"/>
-        <location filename="Views/SbieView.cpp" line="353"/>
+        <location filename="Views/SbieView.cpp" line="248"/>
+        <location filename="Views/SbieView.cpp" line="354"/>
         <source>Rename Sandbox</source>
         <translation>Korumalı Alanı Yeniden Adlandır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="171"/>
+        <location filename="Views/SbieView.cpp" line="172"/>
         <source>Run from Start Menu</source>
         <translation>Başlat Menüsünden Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="268"/>
         <source>Preset</source>
         <translation>Ön Ayar</translation>
     </message>
@@ -4653,7 +4681,7 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Lütfen yeni bir grup adı girin</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="781"/>
+        <location filename="Views/SbieView.cpp" line="782"/>
         <source>[None]</source>
         <translation>[Yok]</translation>
     </message>
@@ -4663,128 +4691,128 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Lütfen Korumalı Alan için yeni bir ad girin.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="212"/>
-        <location filename="Views/SbieView.cpp" line="333"/>
+        <location filename="Views/SbieView.cpp" line="213"/>
+        <location filename="Views/SbieView.cpp" line="334"/>
         <source>Delete Content</source>
         <translation>İçeriği Sil</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="171"/>
         <source>Run Program</source>
         <translation>Program Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="551"/>
+        <location filename="Views/SbieView.cpp" line="552"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC kökü: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="270"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Block and Terminate</source>
         <translation>Engelle ve Sonlandır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="550"/>
+        <location filename="Views/SbieView.cpp" line="551"/>
         <source>    Registry root: %1
 </source>
         <translation>    Kayıt kökü: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="549"/>
+        <location filename="Views/SbieView.cpp" line="550"/>
         <source>    File root: %1
 </source>
         <translation>    Dosya kökü: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="264"/>
-        <location filename="Views/SbieView.cpp" line="387"/>
+        <location filename="Views/SbieView.cpp" line="265"/>
+        <location filename="Views/SbieView.cpp" line="388"/>
         <source>Terminate</source>
         <translation>Sonlandır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="280"/>
+        <location filename="Views/SbieView.cpp" line="281"/>
         <source>Set Leader Process</source>
         <translation>Lider İşlem Olarak Ayarla</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="198"/>
+        <location filename="Views/SbieView.cpp" line="199"/>
         <source>Terminate All Programs</source>
         <translation>Tüm Programları Sonlandır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="890"/>
+        <location filename="Views/SbieView.cpp" line="891"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Seçili grup(lar)ı gerçekten kaldırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="304"/>
+        <location filename="Views/SbieView.cpp" line="305"/>
         <source>Run Web Browser</source>
         <translation>Web Tarayıcısını Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="233"/>
+        <location filename="Views/SbieView.cpp" line="234"/>
         <source>Allow Network Shares</source>
         <translation>Ağ Paylaşımlarına İzin Ver</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="208"/>
-        <location filename="Views/SbieView.cpp" line="341"/>
+        <location filename="Views/SbieView.cpp" line="209"/>
+        <location filename="Views/SbieView.cpp" line="342"/>
         <source>Snapshots Manager</source>
         <translation>Anlık Görüntü Yöneticisi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="231"/>
+        <location filename="Views/SbieView.cpp" line="232"/>
         <source>Block Internet Access</source>
         <translation>İnternet Erişimini Engelle</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="278"/>
+        <location filename="Views/SbieView.cpp" line="279"/>
         <source>Set Linger Process</source>
         <translation>Oyalayıcı İşlem Olarak Ayarla</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="154"/>
-        <location filename="Views/SbieView.cpp" line="288"/>
+        <location filename="Views/SbieView.cpp" line="155"/>
+        <location filename="Views/SbieView.cpp" line="289"/>
         <source>Create New Box</source>
         <translation>Yeni Alan Oluştur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="103"/>
-        <location filename="Views/SbieView.cpp" line="268"/>
+        <location filename="Views/SbieView.cpp" line="104"/>
+        <location filename="Views/SbieView.cpp" line="269"/>
         <source>Pin to Run Menu</source>
         <translation>Çalıştır Menüsüne Sabitle</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="212"/>
         <source>Recover Files</source>
         <translation>Dosyaları Kurtar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="206"/>
-        <location filename="Views/SbieView.cpp" line="334"/>
+        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="335"/>
         <source>Explore Content</source>
         <translation>İçeriği Keşfet</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="105"/>
-        <location filename="Views/SbieView.cpp" line="204"/>
-        <location filename="Views/SbieView.cpp" line="266"/>
-        <location filename="Views/SbieView.cpp" line="350"/>
-        <location filename="Views/SbieView.cpp" line="389"/>
+        <location filename="Views/SbieView.cpp" line="106"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="351"/>
+        <location filename="Views/SbieView.cpp" line="390"/>
         <source>Create Shortcut</source>
         <translation>Kısayol Oluştur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="274"/>
+        <location filename="Views/SbieView.cpp" line="275"/>
         <source>Allow internet access</source>
         <translation>İnternet Erişimine İzin Ver</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="276"/>
+        <location filename="Views/SbieView.cpp" line="277"/>
         <source>Force into this sandbox</source>
         <translation>Bu Korumalı Alana Zorla</translation>
     </message>
@@ -4829,271 +4857,273 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Bu Korumalı Alan boş.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="975"/>
+        <location filename="Views/SbieView.cpp" line="976"/>
         <source>A group can not be its own parent.</source>
         <translation>Bir grup kendi ebeveyni olamaz.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="221"/>
+        <location filename="Views/SbieView.cpp" line="222"/>
         <source>Ask for UAC Elevation</source>
         <translation>UAC Yetkilendirmesi İste</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="223"/>
+        <location filename="Views/SbieView.cpp" line="224"/>
         <source>Emulate Admin Rights</source>
         <translation>Yönetici Haklarını Taklit Et</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
         <source>Default Web Browser</source>
         <translation>Varsayılan Web Tarayıcısı</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="183"/>
+        <location filename="Views/SbieView.cpp" line="184"/>
         <source>Default eMail Client</source>
         <translation>Varsayılan e-Posta İstemcisi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="185"/>
+        <location filename="Views/SbieView.cpp" line="186"/>
         <source>Windows Explorer</source>
         <translation>Windows Gezgini</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="186"/>
+        <location filename="Views/SbieView.cpp" line="187"/>
         <source>Registry Editor</source>
         <translation>Kayıt Defteri Düzenleyicisi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="187"/>
+        <location filename="Views/SbieView.cpp" line="188"/>
         <source>Programs and Features</source>
         <translation>Programlar ve Özellikler</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="155"/>
-        <location filename="Views/SbieView.cpp" line="289"/>
+        <location filename="Views/SbieView.cpp" line="156"/>
+        <location filename="Views/SbieView.cpp" line="290"/>
         <source>Create Box Group</source>
         <translation>Alan Grubu Oluştur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="408"/>
+        <location filename="Views/SbieView.cpp" line="409"/>
         <source>Rename Group</source>
         <translation>Grubu Yeniden Adlandır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Command Prompt</source>
         <translation>Komut İstemi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="191"/>
+        <location filename="Views/SbieView.cpp" line="192"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Komut İstemi (Yönetici olarak)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="195"/>
+        <location filename="Views/SbieView.cpp" line="196"/>
         <source>Command Prompt (32-bit)</source>
         <translation>Komut İstemi (32-bit)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="180"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Execute Autorun Entries</source>
         <translation>Otomatik Çalıştırma Girişlerini Yürüt</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="201"/>
+        <location filename="Views/SbieView.cpp" line="202"/>
         <source>Browse Files</source>
         <translation>Dosyalara Gözat</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="248"/>
-        <location filename="Views/SbieView.cpp" line="354"/>
+        <location filename="Views/SbieView.cpp" line="249"/>
+        <location filename="Views/SbieView.cpp" line="355"/>
         <source>Move Sandbox</source>
         <translation>Korumalı Alanı Taşı</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="340"/>
+        <location filename="Views/SbieView.cpp" line="341"/>
         <source>Browse Content</source>
         <translation>İçeriğe Göz At</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="201"/>
         <source>Box Content</source>
         <translation>Alan İçeriği</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="208"/>
         <source>Open Registry</source>
         <translation>Kayıt Defterini Aç</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="203"/>
-        <location filename="Views/SbieView.cpp" line="349"/>
+        <location filename="Views/SbieView.cpp" line="204"/>
+        <location filename="Views/SbieView.cpp" line="350"/>
         <source>Refresh Info</source>
         <translation>Bilgileri Yenile</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="156"/>
-        <location filename="Views/SbieView.cpp" line="290"/>
+        <location filename="Views/SbieView.cpp" line="157"/>
+        <location filename="Views/SbieView.cpp" line="291"/>
         <source>Import Box</source>
         <translation>Alanı İçe Aktar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="174"/>
-        <location filename="Views/SbieView.cpp" line="310"/>
+        <location filename="Views/SbieView.cpp" line="175"/>
+        <location filename="Views/SbieView.cpp" line="311"/>
         <source>(Host) Start Menu</source>
         <translation>(Ana Sistem) Başlat Menüsü</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="209"/>
-        <location filename="Views/SbieView.cpp" line="330"/>
+        <location filename="Views/SbieView.cpp" line="210"/>
+        <location filename="Views/SbieView.cpp" line="331"/>
         <source>Mount Box Image</source>
         <translation>Alan Görüntüsünü Bağla</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="210"/>
-        <location filename="Views/SbieView.cpp" line="331"/>
+        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="332"/>
         <source>Unmount Box Image</source>
         <translation>Alan Görüntüsünü Çıkar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="237"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
         <source>Immediate Recovery</source>
         <translation>Anında Kurtarma</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="239"/>
+        <location filename="Views/SbieView.cpp" line="240"/>
         <source>Disable Force Rules</source>
         <translation>Zorlama Kurallarını Kapat</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="242"/>
-        <location filename="Views/SbieView.cpp" line="339"/>
+        <location filename="Views/SbieView.cpp" line="243"/>
+        <location filename="Views/SbieView.cpp" line="340"/>
         <source>Sandbox Tools</source>
         <translation>Korumalı Alan Araçları</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="243"/>
+        <location filename="Views/SbieView.cpp" line="244"/>
         <source>Duplicate Box Config</source>
         <translation>Alan Yapılandırmasını Çoğalt</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="244"/>
+        <location filename="Views/SbieView.cpp" line="245"/>
         <source>Export Box</source>
         <translation>Alanı Dışa Aktar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="249"/>
-        <location filename="Views/SbieView.cpp" line="355"/>
+        <location filename="Views/SbieView.cpp" line="250"/>
+        <location filename="Views/SbieView.cpp" line="356"/>
         <source>Move Up</source>
         <translation>Yukarı Taşı</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="254"/>
-        <location filename="Views/SbieView.cpp" line="360"/>
+        <location filename="Views/SbieView.cpp" line="255"/>
+        <location filename="Views/SbieView.cpp" line="361"/>
         <source>Move Down</source>
         <translation>Aşağı Taşı</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="282"/>
+        <location filename="Views/SbieView.cpp" line="283"/>
         <source>Suspend</source>
         <translation>Askıya Al</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="283"/>
+        <location filename="Views/SbieView.cpp" line="284"/>
         <source>Resume</source>
         <translation>Sürdür</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="305"/>
+        <location filename="Views/SbieView.cpp" line="306"/>
         <source>Run eMail Reader</source>
         <translation>E-posta Okuyucuyu Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="306"/>
+        <location filename="Views/SbieView.cpp" line="307"/>
         <source>Run Any Program</source>
         <translation>Herhangi Bir Program Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="307"/>
+        <location filename="Views/SbieView.cpp" line="308"/>
         <source>Run From Start Menu</source>
         <translation>Başlat Menüsünden Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="315"/>
+        <location filename="Views/SbieView.cpp" line="316"/>
         <source>Run Windows Explorer</source>
         <translation>Windows Gezginini Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="329"/>
+        <location filename="Views/SbieView.cpp" line="330"/>
         <source>Terminate Programs</source>
         <translation>Programları Sonlandır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="332"/>
+        <location filename="Views/SbieView.cpp" line="333"/>
         <source>Quick Recover</source>
         <translation>Hızlı Kurtarma</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="337"/>
+        <location filename="Views/SbieView.cpp" line="338"/>
         <source>Sandbox Settings</source>
         <translation>Korumalı Alan Ayarları</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="344"/>
+        <location filename="Views/SbieView.cpp" line="345"/>
         <source>Duplicate Sandbox Config</source>
         <translation>Korumalı Alan Yapılandırmasını Çoğalt</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="345"/>
+        <location filename="Views/SbieView.cpp" line="346"/>
         <source>Export Sandbox</source>
         <translation>Korumalı Alanı Dışa Aktar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="409"/>
+        <location filename="Views/SbieView.cpp" line="410"/>
         <source>Move Group</source>
         <translation>Grubu Taşı</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="553"/>
+        <location filename="Views/SbieView.cpp" line="554"/>
         <source>    Disk root: %1
 </source>
         <translation>    Disk kökü: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="880"/>
+        <location filename="Views/SbieView.cpp" line="881"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Lütfen Grup için yeni bir ad girin.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="927"/>
+        <location filename="Views/SbieView.cpp" line="928"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Girişleri hareket ettir (negatif değerler yukarı, pozitif değerler aşağı hareket eder):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1057"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
+        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation>7-Zip Arşivi (*.7z);;Zip Arşivi (*.zip)</translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1058"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>Arşiv açılamadı, yanlış parola mı?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1066"/>
+        <location filename="Views/SbieView.cpp" line="1067"/>
         <source>Failed to open archive (%1)!</source>
         <translation>Arşiv açılamadı (%1)!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1080"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation>Bu ad zaten kullanılıyor, lütfen alan için alternatif bir ad seçin</translation>
+        <translation type="vanished">Bu ad zaten kullanılıyor, lütfen alan için alternatif bir ad seçin</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Importing Sandbox</source>
-        <translation>Korumalı Alan İçe Aktarılıyor</translation>
+        <translation type="vanished">Korumalı Alan İçe Aktarılıyor</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Do you want to select custom root folder?</source>
-        <translation>Özel bir kök klasör seçmek ister misiniz?</translation>
+        <translation type="vanished">Özel bir kök klasör seçmek ister misiniz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5106,16 +5136,15 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Korumalı Alan adı ve Alan Grubu adı &apos;,()&apos; sembolünü kullanamaz.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>Select file name</source>
         <translation>Dosya adı seçin</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
-        <source>7-zip Archive (*.7z)</source>
-        <translation>7-zip Arşivi (*.7z)</translation>
+        <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -5164,13 +5193,13 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>%1 Kopya</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="161"/>
-        <location filename="Views/SbieView.cpp" line="295"/>
+        <location filename="Views/SbieView.cpp" line="162"/>
+        <location filename="Views/SbieView.cpp" line="296"/>
         <source>Stop Operations</source>
         <translation>İşlemleri Durdur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="181"/>
+        <location filename="Views/SbieView.cpp" line="182"/>
         <source>Standard Applications</source>
         <translation>Standart Uygulamalar</translation>
     </message>
@@ -5250,28 +5279,28 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2245"/>
         <source>Please enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2277"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2285"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2276"/>
         <source>Please enter a program file name</source>
         <translation>Lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2266"/>
         <source>Folder</source>
         <translation>Klasör</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2266"/>
         <source>Process</source>
         <translation>İşlem</translation>
     </message>
@@ -5281,250 +5310,250 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Sandboxie Plus - Genel Ayarlar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="621"/>
+        <location filename="Windows/SettingsWindow.cpp" line="629"/>
         <source>Search for settings</source>
         <translation>Ayarlarda ara</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1169"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1177"/>
         <source>kilobytes (%1)</source>
         <translation>kilobayt (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1259"/>
         <source>Volume not attached</source>
         <translation>Birim eklenmedi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1264"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1272"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1/%2 deneme sertifikası kullandınız. Daha fazla ücretsiz sertifika oluşturulamaz.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1266"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1274"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Ücretsiz deneme sertifikası alın&lt;/a&gt; ve tüm premium özelliklerin %1 gün boyunca keyfini çıkarın.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikasının süresi dolmuş, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;güncellenmiş bir sertifika edinin&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1283"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus özellikleri %1 gün içinde devre dışı bırakılacak.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1287"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1295"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus özellikleri artık etkin değil.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1293"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde&lt;/font&gt; sona erecek, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot; &gt;güncellenmiş bir sertifika edinin&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
         <source>Expires in: %1 days</source>
         <translation>Kalan kullanım süresi: %1 gün</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
         <source>Expired: %1 days ago</source>
         <translation>Süresi doldu: %1 gün önce</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Options: %1</source>
         <translation>Seçenekler: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
-        <translation>Güvenlik/Gizlilik Geliştirildi &amp; Uygulama Bölmeleri (SBox): %1</translation>
+        <translation>Gelişmiş Güvenlik/Gizlilik &amp; Uygulama Bölmeleri (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Enabled</source>
         <translation>Etkin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Disabled</source>
         <translation>Devre dışı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Şifreli Korumalı Alanlar (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Ağ Yakalama (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie Masaüstü (Masa): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1365"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1373"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Bu, Sandboxie-Plus Seri Numarasına benzemiyor.&lt;br /&gt;Bir sertifikanın yalnızca UPDATEKEY veya SIGNATURE değerini girmeyi denediyseniz, bu doğru değildir Lütfen bunun yerine yukarıdaki metin alanına sertifikanın tamamını giriniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1380"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <translation>Özellik yükseltme anahtarını mevcut bir destekçi sertifikası girmeden önce kullanmaya çalışıyorsunuz. Lütfen bu tür anahtarların (&lt;b&gt;web sitesinde kalın harflerle açıkça belirtildiği gibi&lt;/b&gt;) mevcut geçerli bir destekçi sertifikasına sahip olmanızı gerektirdiğini, sertifika olmadan hiçbir işe yaramadığını unutmayın.&lt;br /&gt;Gelişmiş özellikleri kullanmak için, hem standart bir sertifika hem de gelişmiş özelliklerin kilidini açacak bir özellik yükseltme anahtarı edinmeniz gerekir.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1378"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <translation>Yenileme anahtarını mevcut bir destekçi sertifikası girmeden önce kullanmaya çalışıyorsunuz. Lütfen bu tür anahtarların (&lt;b&gt;web sitesinde kalın harflerle açıkça belirtildiği gibi&lt;/b&gt;) mevcut geçerli bir destekçi sertifikasına sahip olmanızı gerektirdiğini, sertifika olmadan hiçbir işe yaramadığını unutmayın.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1383"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Ürün açıklamasını okumadan yanlışlıkla bu anahtarı aldıysanız, sorunu çözmek için lütfen e-posta (web sitemizde belirtilen) yoluyla bizimle iletişime geçin.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1419"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - DENEME Sertifikası Al</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1419"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Lütfen %2 için verilecek ve geçerli donanıma kilitlenecek ücretsiz %1 günlük deneme sertifikası almak için e-posta adresinizi girin.
 Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Error retrieving certificate: %1</source>
         <translation>Sertifika alınırken hata oluştu: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Bilinmeyen Hata (muhtemelen bir ağ sorunu)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1493"/>
         <source>Contributor</source>
         <translation>Katılımcı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
         <source>Eternal</source>
         <translation>Sürekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1489"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
         <source>Business</source>
         <translation>İş</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1491"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
         <source>Personal</source>
         <translation>Kişisel</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1493"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
         <source>Great Patreon</source>
         <translation>Büyük Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1503"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1505"/>
         <source>Family</source>
         <translation>Aile</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1509"/>
         <source>Evaluation</source>
         <translation>Deneme</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1503"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1511"/>
         <source>Type %1</source>
         <translation>Tür %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Advanced</source>
         <translation>Gelişmiş</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1533"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Advanced (L)</source>
         <translation>Gelişmiş (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Max Level</source>
         <translation>En Üst Seviye</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>Level %1</source>
         <translation>Seviye %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1562"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
         <source>Supporter certificate required for access</source>
         <translation>Erişim için destekçi sertifikası gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1579"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
         <source>Supporter certificate required for automation</source>
         <translation>Otomasyon için destekçi sertifikası gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2013"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2021"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Bu sertifika ne yazık ki mevcut derleme için geçerli değil, yeni bir sertifika almanız veya önceki bir derlemeye geçmeniz gerekiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2015"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2023"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Bu sertifikanın süresi dolmuş olsa da, şu anda yüklü olan sürüm için Plus özellikleri etkin durumda kalır. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2017"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2025"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Bu sertifikanın süresi ne yazık ki dolmuş, yeni bir sertifika almanız gerekiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2021"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2029"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Deneme sertifikası başarıyla uygulandı. Ücretsiz denemenizin tadını çıkarın!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2160"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2168"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Şimdi Denetle&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2241"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2249"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını tekrar girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2246"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2254"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Parolalar eşleşmedi, lütfen tekrar deneyin.</translation>
     </message>
@@ -5534,7 +5563,7 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>Otomatik Algıla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2023"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2031"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus&apos;ın gelişimini desteklediğiniz için teşekkür ederiz.</translation>
     </message>
@@ -5652,65 +5681,65 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="379"/>
+        <location filename="Windows/SettingsWindow.cpp" line="387"/>
         <source>Browse for Program</source>
         <translation>Program için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="495"/>
         <source>Add %1 Template</source>
         <translation>%1 Şablonu Ekle</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="539"/>
         <source>HwId: %1</source>
         <translation>HwId: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="576"/>
         <source>Select font</source>
         <translation>Yazı tipini seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="570"/>
+        <location filename="Windows/SettingsWindow.cpp" line="578"/>
         <source>Reset font</source>
         <translation>Yazı tipini sıfırla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="630"/>
+        <location filename="Windows/SettingsWindow.cpp" line="638"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="732"/>
+        <location filename="Windows/SettingsWindow.cpp" line="740"/>
         <source>Please enter message</source>
         <translation>Lütfen mesaj giriniz</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="772"/>
         <source>Select Program</source>
         <translation>Program Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="772"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Yürütülebilir dosyalar (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="768"/>
-        <location filename="Windows/SettingsWindow.cpp" line="784"/>
+        <location filename="Windows/SettingsWindow.cpp" line="776"/>
+        <location filename="Windows/SettingsWindow.cpp" line="792"/>
         <source>Please enter a menu title</source>
         <translation>Lütfen bir menü başlığı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="780"/>
+        <location filename="Windows/SettingsWindow.cpp" line="788"/>
         <source>Please enter a command</source>
         <translation>Lütfen bir komut girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="851"/>
-        <location filename="Windows/SettingsWindow.cpp" line="852"/>
-        <location filename="Windows/SettingsWindow.cpp" line="862"/>
+        <location filename="Windows/SettingsWindow.cpp" line="859"/>
+        <location filename="Windows/SettingsWindow.cpp" line="860"/>
+        <location filename="Windows/SettingsWindow.cpp" line="870"/>
         <source>Run &amp;Sandboxed</source>
         <translation>&amp;Korumalı Alanda Çalıştır</translation>
     </message>
@@ -5733,94 +5762,94 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>İndir &amp; Yükle</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1275"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Donanım Kimliği başına %2 kereye kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1285"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1293"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Şu anda yüklü olan sürüm için Plus özellikleri etkin durumdadır&lt;/font&gt;. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1431"/>
         <source>Retrieving certificate...</source>
         <translation>Sertifika alınıyor...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1507"/>
         <source>Home</source>
         <translation>Ev</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1694"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Korumalı Alanın Dışında Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1702"/>
         <source>Set Force in Sandbox</source>
         <translation>Korumalı Alanda Zorlamaya Ayarla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1703"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1711"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Korumalı Alanda Açık Erişime Ayarla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2080"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2088"/>
         <source>Update Available</source>
         <translation>Güncelleme Mevcut</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2082"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2090"/>
         <source>Installed</source>
         <translation>Kurulu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2087"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
         <source>by %1</source>
         <translation>%1 tarafından</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2103"/>
         <source>(info website)</source>
         <translation>(bilgi sitesi)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2122"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2130"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Bu Eklenti zorunludur ve kaldırılamaz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2344"/>
         <source>Please enter the template identifier</source>
         <translation>Lütfen şablon tanımlayıcısını girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2352"/>
         <source>Error: %1</source>
         <translation>Hata: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2376"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2384"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Seçili yerel şablonları gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2586"/>
         <source>%1 (Current)</source>
         <translation>%1 (Kullanılan)</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="891"/>
         <source>Sandboxed Web Browser</source>
         <translation>Korumalı Web Tarayıcısı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1993"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2001"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Bu bir sertifikaya benzemiyor. Lütfen sertifikanın sadece bir kısmını değil tamamını girin.</translation>
     </message>
@@ -6056,76 +6085,76 @@ Günlük eklemeden göndermeyi deneyin.</translation>
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1005"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1013"/>
         <source>Create the new Sandbox</source>
         <translation>Yeni Korumalı Alanı Oluştur</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1016"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1024"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>Neredeyse tamamlandı, yeni bir korumalı alan oluşturmak ve sihirbazı tamamlamak için Bitiş&apos;e tıklayın.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1025"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1033"/>
         <source>Save options as new defaults</source>
         <translation>Seçenekleri yeni varsayılanlar olarak kaydet</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1036"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1044"/>
         <source>Skip this summary page when advanced options are not set</source>
         <translation>Gelişmiş seçenekler ayarlanmadığında bu özet sayfasını atla</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1055"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1063"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 Bu Korumalı Alan şuraya kaydedilecek: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1058"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1066"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <translation>
 Bu alandaki son işlem sona erdikten sonra alanın içeriği ATILACAKTIR ve alan kaldırılacaktır.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1060"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 Bu alan kapandığında kendi içeriğini ATACAKTIR, yalnızca geçici veriler için uygundur.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1062"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1070"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 Bu alandaki işlemler internete veya yerel ağa erişemez, böylece erişilen tüm verilerin gizli kalmasını sağlar.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1064"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1072"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <translation>
 Bu alan, MSIServer&apos;ı (*.msi yükleyici hizmeti) bir sistem belirteci ile çalıştıracaktır, bu uyumluluğu artırır ancak güvenlik yalıtımını azaltır.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1066"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1074"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 Bu alandaki işlemler, aslında yönetici ayrıcalıklarına sahip olmadan, yönetici ayrıcalıklarıyla çalıştırıldıklarını düşünecektir. Böylece yükleyiciler güvenliği güçlendirilmiş bir alanda bile kullanılabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1076"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <translation>
 Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem belirteci ile çalışacaktır.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1115"/>
         <source>Failed to create new box: %1</source>
         <translation>Yeni alan oluşturulamadı: %1</translation>
     </message>
@@ -6750,34 +6779,66 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Dosyaları Sıkıştırma</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="38"/>
+        <location filename="Forms/CompressDialog.ui" line="58"/>
         <source>Compression</source>
         <translation>Sıkıştırma Düzeyi</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="45"/>
+        <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
         <translation>Seçildiğinde, Tamam&apos;ı tıkladıktan sonra bir parola girmeniz istenecektir</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="48"/>
+        <location filename="Forms/CompressDialog.ui" line="41"/>
         <source>Encrypt archive content</source>
         <translation>Arşiv içeriğini şifrele</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="55"/>
+        <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
         <translation>Katı arşivleme, birden fazla dosyayı tek bir sürekli veri bloğu olarak sıkıştırarak sıkıştırma oranını artırır. Çok sayıda küçük dosya için uygundur; arşivi daha yoğun hale getirir ancak tek tek dosyaların çıkarılması için gereken süreyi arttırabilir.</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="58"/>
+        <location filename="Forms/CompressDialog.ui" line="51"/>
         <source>Create Solide Archive</source>
         <translation>Katı Arşiv Oluştur</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="65"/>
-        <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>Korumalı alanı 7-Zip arşivine aktarmadan önce sıkıştırma düzeyini seçebilir ve ek sıkıştırma ayarlarını özelleştirebilirsiniz.</translation>
+        <location filename="Forms/CompressDialog.ui" line="75"/>
+        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <translation type="vanished">Korumalı alanı 7-Zip veya Zip arşivine aktarmadan önce sıkıştırma düzeyini seçebilir ve ek sıkıştırma ayarlarını özelleştirebilirsiniz.</translation>
+    </message>
+</context>
+<context>
+    <name>ExtractDialog</name>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="14"/>
+        <source>Extract Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="25"/>
+        <source>Export Sandbox from an archive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="35"/>
+        <source>Import Sandbox Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="42"/>
+        <source>Box Root Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="62"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>

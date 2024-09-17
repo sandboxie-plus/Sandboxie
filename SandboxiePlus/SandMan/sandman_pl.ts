@@ -140,12 +140,12 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="867"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="875"/>
         <source>Advanced Sandbox options</source>
         <translation>Zaawansowane opcje piaskownicy</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="868"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="876"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>Na tej stronie można skonfigurować zaawansowane opcje piaskownicy.</translation>
     </message>
@@ -196,34 +196,34 @@
         <translation type="vanished">Użyj loginu Sandboxie zamiast anonimowego tokena</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="880"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
         <translation type="unfinished">Zapobieganie ładowaniu dll&apos;ów z piaskownicy przez programy zainstalowane na hoście</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="889"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
         <translation>Ta funkcja może zmniejszyć kompatybilność, ponieważ zapobiega również zapisywaniu procesów zlokalizowanych w boksie do procesów zlokalizowanych na hoście, a nawet ich uruchamianiu.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="896"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="893"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="901"/>
         <source>Shared Template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="894"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
         <source>Shared template mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="895"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="903"/>
         <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
@@ -231,62 +231,62 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="901"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="909"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="903"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="911"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="920"/>
         <source>Remove defaults if set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="927"/>
         <source>Shared template selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="941"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="949"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="906"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="914"/>
         <source>Disabled</source>
         <translation type="unfinished">Wyłączone</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="873"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
         <source>Advanced Options</source>
         <translation type="unfinished">Opcje zaawansowane</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="887"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="895"/>
         <source>Prevent sandboxed windows from being captured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="908"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="916"/>
         <source>Use as a template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="918"/>
         <source>Append to the configuration</source>
         <translation type="unfinished"></translation>
     </message>
@@ -904,34 +904,62 @@ Możesz kliknąć Zakończ, aby zamknąć tego kreatora.</translation>
         <translation>Sandboxie-Plus - Sandbox Eksport</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="25"/>
+        <location filename="Windows/CompressDialog.cpp" line="27"/>
+        <source>7-Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/CompressDialog.cpp" line="28"/>
+        <source>Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Store</source>
         <translation>Skład</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="26"/>
+        <location filename="Windows/CompressDialog.cpp" line="31"/>
         <source>Fastest</source>
         <translation>Najszybszy</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="27"/>
+        <location filename="Windows/CompressDialog.cpp" line="32"/>
         <source>Fast</source>
         <translation>Szybki</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="28"/>
+        <location filename="Windows/CompressDialog.cpp" line="33"/>
         <source>Normal</source>
         <translation>Normalna</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="29"/>
+        <location filename="Windows/CompressDialog.cpp" line="34"/>
         <source>Maximum</source>
         <translation>Maksimum</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="30"/>
+        <location filename="Windows/CompressDialog.cpp" line="35"/>
         <source>Ultra</source>
         <translation>Ultra</translation>
+    </message>
+</context>
+<context>
+    <name>CExtractDialog</name>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="23"/>
+        <source>Sandboxie-Plus - Sandbox Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="39"/>
+        <source>Select Directory</source>
+        <translation type="unfinished">Wybierz katalog</translation>
+    </message>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="59"/>
+        <source>This name is already in use, please select an alternative box name</source>
+        <translation type="unfinished">Ta nazwa jest już używana, proszę wybrać alternatywną nazwę boksu</translation>
     </message>
 </context>
 <context>
@@ -1064,19 +1092,19 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
         <translation>Włącz natychmiastowe odzyskiwanie plików z lokalizacji odzyskiwania</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="697"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="705"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation>Wybrana lokalizacja skrzynki nie jest prawidłową ścieżką.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="702"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation>Wybrana lokalizacja skrzynki istnieje i nie jest pusta, zaleca się wybrać nowy lub pusty folder. Czy na pewno chcesz użyć istniejącego folderu?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="707"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>Wybrana lokalizacja skrzynki nie została umieszczona na aktualnie dostępnym dysku.</translation>
@@ -1222,83 +1250,83 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
 <context>
     <name>CIsolationPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="731"/>
         <source>Sandbox Isolation options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="724"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>On this page sandbox isolation options can be configured.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="729"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Network Access</source>
         <translation type="unfinished">Dostęp do sieci</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="745"/>
         <source>Allow network/internet access</source>
         <translation type="unfinished">Zezwalaj na dostęp do sieci/internetu</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="738"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation type="unfinished">Zablokuj sieć/internet, odmawiając dostępu urządzeniom sieciowym</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="740"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation type="unfinished">Zablokuj sieć/internet przy użyciu platformy filtrującej Windows</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
         <source>Allow access to network files and folders</source>
         <translation type="unfinished">Zezwól na dostęp do plików i folderów sieciowych</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="747"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option is not recommended for Hardened boxes</source>
         <translation type="unfinished">Ta opcja nie jest zalecana dla wzmocnionych boksów</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="760"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="758"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
         <source>Admin Options</source>
         <translation type="unfinished">Opcje administratora</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="770"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation type="unfinished">Porzuć prawa z grup Administratorzy i Użytkownicy Zaawansowani</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="768"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="776"/>
         <source>Make applications think they are running elevated</source>
         <translation type="unfinished">Spraw, by aplikacje reagowały jakby były uruchomione z podwyższonym poziomem uprawnień</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation type="unfinished">Zezwól na uruchamianie MSIServer z tokenem systemowym w trybie piaskownicy</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="788"/>
         <source>Box Options</source>
         <translation type="unfinished">Opcje piaskownicy</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="784"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="792"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="unfinished">Użyj loginu Sandboxie zamiast anonimowego tokena</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="793"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation type="unfinished">Użycie niestandardowego tokena sandboxie pozwala na lepsze odizolowanie poszczególnych sandboxów od siebie, a także pokazuje w kolumnie użytkownika w menedżerach zadań nazwę sandboxa, do którego należy dany proces. Niektóre rozwiązania bezpieczeństwa firm trzecich mogą jednak mieć problemy z niestandardowymi tokenami.</translation>
     </message>
@@ -1967,42 +1995,42 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Kopiuj puste</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1162"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1164"/>
         <source>The image file does not exist</source>
         <translation>Plik obrazu nie istnieje</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1163"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1165"/>
         <source>The password is wrong</source>
         <translation>Hasło jest nieprawidłowe</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1164"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1166"/>
         <source>Unexpected error: %1</source>
         <translation>Nieoczekiwany błąd: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1193"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1195"/>
         <source>Image Password Changed</source>
         <translation>Zmieniono hasło obrazu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1202"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1204"/>
         <source>Backup Image Header for %1</source>
         <translation>Nagłówek obrazu kopii zapasowej dla %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1210"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1212"/>
         <source>Image Header Backuped</source>
         <translation>Zarchiwizowany nagłówek obrazu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1217"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1219"/>
         <source>Restore Image Header for %1</source>
         <translation>Przywróć nagłówek obrazu dla %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1225"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
         <source>Image Header Restored</source>
         <translation>Przywrócony nagłówek obrazu</translation>
     </message>
@@ -3120,7 +3148,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="773"/>
+        <location filename="SbiePlusAPI.cpp" line="771"/>
         <source>Disabled</source>
         <translation>Wyłączone</translation>
     </message>
@@ -3129,32 +3157,32 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <translation type="vanished">Puste</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="784"/>
+        <location filename="SbiePlusAPI.cpp" line="782"/>
         <source>OPEN Root Access</source>
         <translation>OTWÓRZ dostęp do roota</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="786"/>
+        <location filename="SbiePlusAPI.cpp" line="784"/>
         <source>Application Compartment</source>
         <translation>Komora aplikacji</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="788"/>
+        <location filename="SbiePlusAPI.cpp" line="786"/>
         <source>NOT SECURE</source>
         <translation>NIE ZABEZPIECZONE</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="790"/>
+        <location filename="SbiePlusAPI.cpp" line="788"/>
         <source>Reduced Isolation</source>
         <translation>Ograniczona izolacja</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="792"/>
+        <location filename="SbiePlusAPI.cpp" line="790"/>
         <source>Enhanced Isolation</source>
         <translation>Wzmocniona izolacja</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="795"/>
+        <location filename="SbiePlusAPI.cpp" line="793"/>
         <source>Privacy Enhanced</source>
         <translation>Ulepszona prywatność</translation>
     </message>
@@ -3163,32 +3191,32 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <translation type="vanished">Log API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="799"/>
+        <location filename="SbiePlusAPI.cpp" line="797"/>
         <source>No INet (with Exceptions)</source>
         <translation>Brak INet (z wyjątkami)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="801"/>
+        <location filename="SbiePlusAPI.cpp" line="799"/>
         <source>No INet</source>
         <translation>Bez INetu</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="804"/>
+        <location filename="SbiePlusAPI.cpp" line="802"/>
         <source>Net Share</source>
         <translation>Bez dysków sieciowych</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="806"/>
+        <location filename="SbiePlusAPI.cpp" line="804"/>
         <source>No Admin</source>
         <translation>Bez praw administracyjnych</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="809"/>
+        <location filename="SbiePlusAPI.cpp" line="807"/>
         <source>Auto Delete</source>
         <translation>Auto-usuwanie</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="812"/>
+        <location filename="SbiePlusAPI.cpp" line="810"/>
         <source>Normal</source>
         <translation>Normalna</translation>
     </message>
@@ -5076,38 +5104,38 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1206"/>
+        <location filename="SbiePlusAPI.cpp" line="1204"/>
         <source>Failed to initialize COM</source>
         <translation>Nie udało się zainicjować COM</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1212"/>
+        <location filename="SbiePlusAPI.cpp" line="1210"/>
         <source>Failed to create update session</source>
         <translation>Nie udało się utworzyć sesji aktualizacji</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1218"/>
+        <location filename="SbiePlusAPI.cpp" line="1216"/>
         <source>Failed to create update searcher</source>
         <translation>Nie udało się utworzyć wyszukiwarki aktualizacji</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1224"/>
+        <location filename="SbiePlusAPI.cpp" line="1222"/>
         <source>Failed to set search options</source>
         <translation>Nie udało się ustawić opcji wyszukiwania</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1232"/>
+        <location filename="SbiePlusAPI.cpp" line="1230"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
         <translation>Nie udało się wyszukać aktualizacji</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1238"/>
+        <location filename="SbiePlusAPI.cpp" line="1236"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Nie udało się pobrać listy aktualizacji z wyniku wyszukiwania</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1245"/>
+        <location filename="SbiePlusAPI.cpp" line="1243"/>
         <source>Failed to get update count</source>
         <translation>Nie udało się pobrać liczby aktualizacji</translation>
     </message>
@@ -5115,137 +5143,137 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="154"/>
-        <location filename="Views/SbieView.cpp" line="288"/>
+        <location filename="Views/SbieView.cpp" line="155"/>
+        <location filename="Views/SbieView.cpp" line="289"/>
         <source>Create New Box</source>
         <translation>Utwórz nowy boks</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="410"/>
+        <location filename="Views/SbieView.cpp" line="411"/>
         <source>Remove Group</source>
         <translation>Usuń grupę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
-        <location filename="Views/SbieView.cpp" line="299"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
+        <location filename="Views/SbieView.cpp" line="300"/>
         <source>Run</source>
         <translation>Uruchom</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="171"/>
         <source>Run Program</source>
         <translation>Uruchom program</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="171"/>
+        <location filename="Views/SbieView.cpp" line="172"/>
         <source>Run from Start Menu</source>
         <translation>Uruchom program z menu startowego</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="181"/>
+        <location filename="Views/SbieView.cpp" line="182"/>
         <source>Standard Applications</source>
         <translation>Aplikacje standardowe</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="198"/>
+        <location filename="Views/SbieView.cpp" line="199"/>
         <source>Terminate All Programs</source>
         <translation>Zakończ wszystkie programy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="105"/>
-        <location filename="Views/SbieView.cpp" line="204"/>
-        <location filename="Views/SbieView.cpp" line="266"/>
-        <location filename="Views/SbieView.cpp" line="350"/>
-        <location filename="Views/SbieView.cpp" line="389"/>
+        <location filename="Views/SbieView.cpp" line="106"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="351"/>
+        <location filename="Views/SbieView.cpp" line="390"/>
         <source>Create Shortcut</source>
         <translation>Utwórz skrót</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="206"/>
-        <location filename="Views/SbieView.cpp" line="334"/>
+        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="335"/>
         <source>Explore Content</source>
         <translation>Eksploruj zawartość</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="208"/>
-        <location filename="Views/SbieView.cpp" line="341"/>
+        <location filename="Views/SbieView.cpp" line="209"/>
+        <location filename="Views/SbieView.cpp" line="342"/>
         <source>Snapshots Manager</source>
         <translation>Menedżer migawek</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="212"/>
         <source>Recover Files</source>
         <translation>Przywróć pliki</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="212"/>
-        <location filename="Views/SbieView.cpp" line="333"/>
+        <location filename="Views/SbieView.cpp" line="213"/>
+        <location filename="Views/SbieView.cpp" line="334"/>
         <source>Delete Content</source>
         <translation>Skasuj zawartość</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="219"/>
+        <location filename="Views/SbieView.cpp" line="220"/>
         <source>Sandbox Presets</source>
         <translation>Ustawienia wstępne piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="231"/>
+        <location filename="Views/SbieView.cpp" line="232"/>
         <source>Block Internet Access</source>
         <translation>Zablokuj dostęp do Internetu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="233"/>
+        <location filename="Views/SbieView.cpp" line="234"/>
         <source>Allow Network Shares</source>
         <translation>Zezwól dostęp do dysków sieciowych</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="222"/>
+        <location filename="Views/SbieView.cpp" line="223"/>
         <source>Drop Admin Rights</source>
         <translation>Porzuć uprawnienia administratora</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
         <source>Default Web Browser</source>
         <translation>Domyślna przeglądarka WWW</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="183"/>
+        <location filename="Views/SbieView.cpp" line="184"/>
         <source>Default eMail Client</source>
         <translation>Domyślny klient eMail</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="185"/>
+        <location filename="Views/SbieView.cpp" line="186"/>
         <source>Windows Explorer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="186"/>
+        <location filename="Views/SbieView.cpp" line="187"/>
         <source>Registry Editor</source>
         <translation>Edytor rejestru</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="187"/>
+        <location filename="Views/SbieView.cpp" line="188"/>
         <source>Programs and Features</source>
         <translation>Programy i funkcje</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="221"/>
+        <location filename="Views/SbieView.cpp" line="222"/>
         <source>Ask for UAC Elevation</source>
         <translation>Pytaj o podniesienie poziomu kontroli konta użytkownika</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="223"/>
+        <location filename="Views/SbieView.cpp" line="224"/>
         <source>Emulate Admin Rights</source>
         <translation>Emuluj prawa administratora</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="214"/>
+        <location filename="Views/SbieView.cpp" line="215"/>
         <source>Sandbox Options</source>
         <translation>Ustawienia piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="174"/>
-        <location filename="Views/SbieView.cpp" line="310"/>
+        <location filename="Views/SbieView.cpp" line="175"/>
+        <location filename="Views/SbieView.cpp" line="311"/>
         <source>(Host) Start Menu</source>
         <translation>(Host) Menu Start</translation>
     </message>
@@ -5254,117 +5282,117 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Więcej narzędzi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="201"/>
+        <location filename="Views/SbieView.cpp" line="202"/>
         <source>Browse Files</source>
         <translation>Przeglądaj pliki</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="203"/>
-        <location filename="Views/SbieView.cpp" line="349"/>
+        <location filename="Views/SbieView.cpp" line="204"/>
+        <location filename="Views/SbieView.cpp" line="350"/>
         <source>Refresh Info</source>
         <translation>Odśwież Info</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="209"/>
-        <location filename="Views/SbieView.cpp" line="330"/>
+        <location filename="Views/SbieView.cpp" line="210"/>
+        <location filename="Views/SbieView.cpp" line="331"/>
         <source>Mount Box Image</source>
         <translation>Zamontuj obraz boksu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="210"/>
-        <location filename="Views/SbieView.cpp" line="331"/>
+        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="332"/>
         <source>Unmount Box Image</source>
         <translation>Odmontuj obraz boksu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="237"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
         <source>Immediate Recovery</source>
         <translation>Natychmiastowe Przywracanie</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="239"/>
+        <location filename="Views/SbieView.cpp" line="240"/>
         <source>Disable Force Rules</source>
         <translation>Wyłącz wymuszone reguły</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="242"/>
-        <location filename="Views/SbieView.cpp" line="339"/>
+        <location filename="Views/SbieView.cpp" line="243"/>
+        <location filename="Views/SbieView.cpp" line="340"/>
         <source>Sandbox Tools</source>
         <translation>Narzędzia piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="243"/>
+        <location filename="Views/SbieView.cpp" line="244"/>
         <source>Duplicate Box Config</source>
         <translation>Powiel konfigurację skrzynki</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="244"/>
+        <location filename="Views/SbieView.cpp" line="245"/>
         <source>Export Box</source>
         <translation>Export Boksu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="247"/>
-        <location filename="Views/SbieView.cpp" line="353"/>
+        <location filename="Views/SbieView.cpp" line="248"/>
+        <location filename="Views/SbieView.cpp" line="354"/>
         <source>Rename Sandbox</source>
         <translation>Zmień nazwę piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="248"/>
-        <location filename="Views/SbieView.cpp" line="354"/>
+        <location filename="Views/SbieView.cpp" line="249"/>
+        <location filename="Views/SbieView.cpp" line="355"/>
         <source>Move Sandbox</source>
         <translation>Przenieś piaskownicę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="259"/>
-        <location filename="Views/SbieView.cpp" line="365"/>
+        <location filename="Views/SbieView.cpp" line="260"/>
+        <location filename="Views/SbieView.cpp" line="366"/>
         <source>Remove Sandbox</source>
         <translation>Usuń piaskownicę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="264"/>
-        <location filename="Views/SbieView.cpp" line="387"/>
+        <location filename="Views/SbieView.cpp" line="265"/>
+        <location filename="Views/SbieView.cpp" line="388"/>
         <source>Terminate</source>
         <translation>Zakończyć</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="268"/>
         <source>Preset</source>
         <translation>Ustawienia wstępne</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="103"/>
-        <location filename="Views/SbieView.cpp" line="268"/>
+        <location filename="Views/SbieView.cpp" line="104"/>
+        <location filename="Views/SbieView.cpp" line="269"/>
         <source>Pin to Run Menu</source>
         <translation>Przypnij do Menu &apos;Wykonaj&apos;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="156"/>
-        <location filename="Views/SbieView.cpp" line="290"/>
+        <location filename="Views/SbieView.cpp" line="157"/>
+        <location filename="Views/SbieView.cpp" line="291"/>
         <source>Import Box</source>
         <translation>Import Boksu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="270"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Block and Terminate</source>
         <translation>Zakończ i zablokuj</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="274"/>
+        <location filename="Views/SbieView.cpp" line="275"/>
         <source>Allow internet access</source>
         <translation>Zezwól na dostęp do Internetu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="276"/>
+        <location filename="Views/SbieView.cpp" line="277"/>
         <source>Force into this sandbox</source>
         <translation>Wymuś wykonanie w tej piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="278"/>
+        <location filename="Views/SbieView.cpp" line="279"/>
         <source>Set Linger Process</source>
         <translation>Ustaw zawieszony program</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="280"/>
+        <location filename="Views/SbieView.cpp" line="281"/>
         <source>Set Leader Process</source>
         <translation>Ustaw proces wiodący</translation>
     </message>
@@ -5373,124 +5401,123 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Uruchom w piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="304"/>
+        <location filename="Views/SbieView.cpp" line="305"/>
         <source>Run Web Browser</source>
         <translation>Uruchom przeglądarkę WWW</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="305"/>
+        <location filename="Views/SbieView.cpp" line="306"/>
         <source>Run eMail Reader</source>
         <translation>Uruchom czytnik eMail</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="306"/>
+        <location filename="Views/SbieView.cpp" line="307"/>
         <source>Run Any Program</source>
         <translation>Uruchom dowolny program</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="307"/>
+        <location filename="Views/SbieView.cpp" line="308"/>
         <source>Run From Start Menu</source>
         <translation>Uruchom z menu Start</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="315"/>
+        <location filename="Views/SbieView.cpp" line="316"/>
         <source>Run Windows Explorer</source>
         <translation>Uruchom Eksploratora Windows</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="329"/>
+        <location filename="Views/SbieView.cpp" line="330"/>
         <source>Terminate Programs</source>
         <translation>Zakończ programy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="332"/>
+        <location filename="Views/SbieView.cpp" line="333"/>
         <source>Quick Recover</source>
         <translation>Szybkie odzyskiwanie</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="337"/>
+        <location filename="Views/SbieView.cpp" line="338"/>
         <source>Sandbox Settings</source>
         <translation>Ustawienia piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="344"/>
+        <location filename="Views/SbieView.cpp" line="345"/>
         <source>Duplicate Sandbox Config</source>
         <translation>Powiel konfigurację piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="345"/>
+        <location filename="Views/SbieView.cpp" line="346"/>
         <source>Export Sandbox</source>
         <translation>Eksport Piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="409"/>
+        <location filename="Views/SbieView.cpp" line="410"/>
         <source>Move Group</source>
         <translation>Przenieś grupę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="549"/>
+        <location filename="Views/SbieView.cpp" line="550"/>
         <source>    File root: %1
 </source>
         <translation>    File root: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="550"/>
+        <location filename="Views/SbieView.cpp" line="551"/>
         <source>    Registry root: %1
 </source>
         <translation>    Registry root: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="551"/>
+        <location filename="Views/SbieView.cpp" line="552"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC root: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="553"/>
+        <location filename="Views/SbieView.cpp" line="554"/>
         <source>    Disk root: %1
 </source>
         <translation>    Dysk główny: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="555"/>
+        <location filename="Views/SbieView.cpp" line="556"/>
         <source>Options:
     </source>
         <translation>Opcje:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="781"/>
+        <location filename="Views/SbieView.cpp" line="782"/>
         <source>[None]</source>
         <translation>[żadne]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1057"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
+        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1058"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>Nie udało się otworzyć archiwum, błędne hasło?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1066"/>
+        <location filename="Views/SbieView.cpp" line="1067"/>
         <source>Failed to open archive (%1)!</source>
         <translation>Nie udało się otworzyć archiwum (%1)!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1080"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
+        <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation>Ta nazwa jest już używana, proszę wybrać alternatywną nazwę boksu</translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="1090"/>
-        <source>Importing Sandbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="1090"/>
-        <source>Do you want to select custom root folder?</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ta nazwa jest już używana, proszę wybrać alternatywną nazwę boksu</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5503,29 +5530,29 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Proszę wpisać nazwę nowej grupy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="890"/>
+        <location filename="Views/SbieView.cpp" line="891"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Czy naprawdę chcesz skasować wybrane grupy?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="155"/>
-        <location filename="Views/SbieView.cpp" line="289"/>
+        <location filename="Views/SbieView.cpp" line="156"/>
+        <location filename="Views/SbieView.cpp" line="290"/>
         <source>Create Box Group</source>
         <translation>Utwórz grupę boksów</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="408"/>
+        <location filename="Views/SbieView.cpp" line="409"/>
         <source>Rename Group</source>
         <translation>Zmień nazwę grupy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="161"/>
-        <location filename="Views/SbieView.cpp" line="295"/>
+        <location filename="Views/SbieView.cpp" line="162"/>
+        <location filename="Views/SbieView.cpp" line="296"/>
         <source>Stop Operations</source>
         <translation>Zatrzymaj operacje</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Command Prompt</source>
         <translation>Wiersz polecenia</translation>
     </message>
@@ -5535,33 +5562,33 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Narzędzia w piaskownicach</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="191"/>
+        <location filename="Views/SbieView.cpp" line="192"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Wiersz polecenia (jako Admin)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="195"/>
+        <location filename="Views/SbieView.cpp" line="196"/>
         <source>Command Prompt (32-bit)</source>
         <translation>Wiersz polecenia (32-bit)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="180"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Execute Autorun Entries</source>
         <translatorcomment>nieznany kontekst</translatorcomment>
         <translation>Wykonaj wpisy z autorun</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="340"/>
+        <location filename="Views/SbieView.cpp" line="341"/>
         <source>Browse Content</source>
         <translation>Przeglądaj zawartość</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="201"/>
         <source>Box Content</source>
         <translation>Przegląd piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="208"/>
         <source>Open Registry</source>
         <translation>Otwórz rejestr</translation>
     </message>
@@ -5574,19 +5601,19 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Przenieś boks/grupę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="249"/>
-        <location filename="Views/SbieView.cpp" line="355"/>
+        <location filename="Views/SbieView.cpp" line="250"/>
+        <location filename="Views/SbieView.cpp" line="356"/>
         <source>Move Up</source>
         <translation>Przesuń w górę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="254"/>
-        <location filename="Views/SbieView.cpp" line="360"/>
+        <location filename="Views/SbieView.cpp" line="255"/>
+        <location filename="Views/SbieView.cpp" line="361"/>
         <source>Move Down</source>
         <translation>Przesuń w dół</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="880"/>
+        <location filename="Views/SbieView.cpp" line="881"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Proszę wpisać nową nazwę grupy.</translation>
     </message>
@@ -5595,13 +5622,13 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Ta nazwa grupy jest już używana.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="927"/>
+        <location filename="Views/SbieView.cpp" line="928"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translatorcomment>nieznany kontekst</translatorcomment>
         <translation>Przenieś wpisy o (wartości ujemne w górę, wartości dodatnie w dół):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="975"/>
+        <location filename="Views/SbieView.cpp" line="976"/>
         <source>A group can not be its own parent.</source>
         <translation>Grupa nie może być swoim własnym rodzicem.</translation>
     </message>
@@ -5655,26 +5682,24 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>%1 kopia</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>Select file name</source>
         <translation>Wybierz nazwę pliku</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="282"/>
+        <location filename="Views/SbieView.cpp" line="283"/>
         <source>Suspend</source>
         <translation>Zawieszenie</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="283"/>
+        <location filename="Views/SbieView.cpp" line="284"/>
         <source>Resume</source>
         <translation>Wznowienie</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation>Archiwum 7-zip (*.7z)</translation>
+        <translation type="vanished">Archiwum 7-zip (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -5923,188 +5948,188 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="539"/>
         <source>HwId: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="621"/>
+        <location filename="Windows/SettingsWindow.cpp" line="629"/>
         <source>Search for settings</source>
         <translation>Szukaj ustawień</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="851"/>
-        <location filename="Windows/SettingsWindow.cpp" line="852"/>
-        <location filename="Windows/SettingsWindow.cpp" line="862"/>
+        <location filename="Windows/SettingsWindow.cpp" line="859"/>
+        <location filename="Windows/SettingsWindow.cpp" line="860"/>
+        <location filename="Windows/SettingsWindow.cpp" line="870"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Uruchom w pia&amp;skownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1169"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1177"/>
         <source>kilobytes (%1)</source>
         <translation>kilobajty (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1259"/>
         <source>Volume not attached</source>
         <translation>Niepodłączony wolumin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1264"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1272"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1266"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1274"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1275"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Ten certyfikat wsparcia wygasł. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;pobierz zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
         <source>Expired: %1 days ago</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Options: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Disabled</source>
         <translation type="unfinished">Wyłączone</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
         <source>Network Interception (NetI): %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1365"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1373"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1380"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1378"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1383"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1431"/>
         <source>Retrieving certificate...</source>
         <translation>Pobieranie certyfikatu...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1419"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1419"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1507"/>
         <source>Home</source>
         <translation>Strona główna</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1533"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Advanced (L)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1562"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
         <source>Supporter certificate required for access</source>
         <translation>Do uzyskania dostępu wymagany jest certyfikat sponsora</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1579"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
         <source>Supporter certificate required for automation</source>
         <translation>Certyfikat sponora wymagany do automatyzacji</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2021"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2029"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2122"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2130"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Ten dodatek jest obowiązkowy i nie można go usunąć.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="891"/>
         <source>Sandboxed Web Browser</source>
         <translation>Przeglądarka WWW w trybie piaskownicy</translation>
     </message>
@@ -6152,53 +6177,53 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>Pobierz i zainstaluj</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="379"/>
+        <location filename="Windows/SettingsWindow.cpp" line="387"/>
         <source>Browse for Program</source>
         <translation>Przeglądaj w poszukiwaniu programu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="495"/>
         <source>Add %1 Template</source>
         <translation>Dodaj %1 szablon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="576"/>
         <source>Select font</source>
         <translation>Wybierz czcionkę</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="570"/>
+        <location filename="Windows/SettingsWindow.cpp" line="578"/>
         <source>Reset font</source>
         <translation>Zresetuj czcionkę</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="630"/>
+        <location filename="Windows/SettingsWindow.cpp" line="638"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="732"/>
+        <location filename="Windows/SettingsWindow.cpp" line="740"/>
         <source>Please enter message</source>
         <translation>Proszę wpisać wiadomość</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="772"/>
         <source>Select Program</source>
         <translation>Wybierz program</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="772"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Programy (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="768"/>
-        <location filename="Windows/SettingsWindow.cpp" line="784"/>
+        <location filename="Windows/SettingsWindow.cpp" line="776"/>
+        <location filename="Windows/SettingsWindow.cpp" line="792"/>
         <source>Please enter a menu title</source>
         <translation>Proszę wpisać tytuł menu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="780"/>
+        <location filename="Windows/SettingsWindow.cpp" line="788"/>
         <source>Please enter a command</source>
         <translation>Proszę wpisać polecenie</translation>
     </message>
@@ -6207,102 +6232,102 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">Wygasł ten certyfikat wsparcia, proszę &lt;a href=&quot;sbie://update/cert&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1283"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Funkcje dodatkowe zostaną wyłączone za %1 dni.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1285"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1293"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;W obecnej kompilacji funkcje Plus pozostają włączone&lt;/font&gt;, ale nie masz już dostępu do usług Sandboxie-Live, w tym aktualizacji zgodności i bazy danych rozwiązywania problemów.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1293"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Ten certyfikat sponsora &lt;font color=&apos;red&apos;&gt;wygaśnie za %1 dni&lt;/font&gt;, prosimy o &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;uzyskanie zaktualizowanego certyfikatu&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1493"/>
         <source>Contributor</source>
         <translation>Współtwórca</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
         <source>Eternal</source>
         <translation>Wieczny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1489"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
         <source>Business</source>
         <translation>Biznes</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1491"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
         <source>Personal</source>
         <translation>Osobisty</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1493"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
         <source>Great Patreon</source>
         <translation>Wspaniały Patron</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1503"/>
         <source>Patreon</source>
         <translation>Patron</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1505"/>
         <source>Family</source>
         <translation>Rodzina</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1509"/>
         <source>Evaluation</source>
         <translation>Próbny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1503"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1511"/>
         <source>Type %1</source>
         <translation>Typ %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Advanced</source>
         <translation>Zaawansowany</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Max Level</source>
         <translation>Poziom maks.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>Level %1</source>
         <translation>Poziom %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1702"/>
         <source>Set Force in Sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1703"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1711"/>
         <source>Set Open Path in Sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2013"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2021"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Ten certyfikat niestety nie jest ważny dla bieżącej kompilacji, musisz uzyskać nowy certyfikat lub przejść na starszą wersję.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2015"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2023"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Chociaż ten certyfikat wygasł, dla obecnie zainstalowanej wersji oraz funkcje pozostają włączone. Jednak nie będziesz już mieć dostępu do usług Sandboxie-Live, w tym aktualizacji zgodności i bazy danych rozwiązywania problemów online.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2017"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2025"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Ten certyfikat niestety wygasł, musisz uzyskać nowy certyfikat.</translation>
     </message>
@@ -6311,7 +6336,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;W tej wersji funkcje Plus pozostają włączone.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1287"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1295"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Funkcje Plus nie są już włączone.</translation>
     </message>
@@ -6325,12 +6350,12 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">Wymagany certyfikat sponsora</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1694"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Ur&amp;uchom bez piaskownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1993"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2001"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>To nie wygląda jak certyfikat. Proszę wpisać cały certyfikat, a nie tylko jego fragment.</translation>
     </message>
@@ -6343,7 +6368,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">Ten certyfikat jest niestety nieaktualny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2023"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2031"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Dziękujemy za wsparcie rozwoju Sandboxie-Plus.</translation>
     </message>
@@ -6352,22 +6377,22 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">Ten certyfikat pomocy technicznej jest nieważny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2080"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2088"/>
         <source>Update Available</source>
         <translation>Dostępna aktualizacja</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2082"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2090"/>
         <source>Installed</source>
         <translation>Zainstalowane</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2087"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
         <source>by %1</source>
         <translation>przez %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2103"/>
         <source>(info website)</source>
         <translation>(strona informacyjna)</translation>
     </message>
@@ -6376,63 +6401,63 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">Ten dodatek jest obowiązkowy i nie można go usunąć.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2277"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2285"/>
         <source>Select Directory</source>
         <translation>Wybierz katalog</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2160"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2168"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Sprawdź teraz&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2245"/>
         <source>Please enter the new configuration password.</source>
         <translation>Proszę wpisać nowe hasło konfiguracyjne.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2241"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2249"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Wprowadź ponownie nowe hasło konfiguracyjne.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2246"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2254"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Hasła nie zgadzają się, spróbuj ponownie.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2266"/>
         <source>Process</source>
         <translation>Proces</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2266"/>
         <source>Folder</source>
         <translation>Folder</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2276"/>
         <source>Please enter a program file name</source>
         <translation>Proszę wpisać nazwę pliku programu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2344"/>
         <source>Please enter the template identifier</source>
         <translation>Proszę wpisać identyfikator szablonu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2352"/>
         <source>Error: %1</source>
         <translation>Błąd: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2376"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2384"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Czy naprawdę chcesz usunąć wybrany lokalny szablon(-y)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2586"/>
         <source>%1 (Current)</source>
         <translation>%1 (aktualne)</translation>
     </message>
@@ -6686,17 +6711,17 @@ Spróbuj przesłać bez załączonego dziennika.</translation>
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1005"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1013"/>
         <source>Create the new Sandbox</source>
         <translation>Utwórz nową piaskownicę</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1016"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1024"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>Prawie ukończone, kliknij Zakończ, aby utworzyć nową piaskownicę i zakończyć działanie kreatora.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1025"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1033"/>
         <source>Save options as new defaults</source>
         <translation>Zapisz opcje jako nowe ustawienia domyślne</translation>
     </message>
@@ -6705,19 +6730,19 @@ Spróbuj przesłać bez załączonego dziennika.</translation>
         <translation type="vanished">Nie pokazuj strony podsumowania w przyszłości (chyba że ustawiono opcje zaawansowane)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1036"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1044"/>
         <source>Skip this summary page when advanced options are not set</source>
         <translation>Pomiń tę stronę podsumowania, gdy opcje zaawansowane nie są ustawione.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1055"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1063"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 Ta piaskownica zostanie zapisana w: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1058"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1066"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
@@ -6726,21 +6751,21 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 Zawartość tego boksu zostanie USUNIĘTA, a po jego zamknięciu, boks zostanie usunięty.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1060"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 Ten boks po zamknięciu wyrzuci swoją zawartość, nadaje się tylko dla danych tymczasowych.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1062"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1070"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 Procesy w tym boksie nie będą miały dostępu do Internetu ani sieci lokalnej, co zapewnia poufność wszystkich udostępnianych danych.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1064"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1072"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
@@ -6749,14 +6774,14 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
 Ten boks uruchomi MSIServer (usługę instalatora *.msi) z tokenem systemowym, poprawia to kompatybilność, ale zmniejsza izolację bezpieczeństwa.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1066"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1074"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 Procesy w tym boksie reagowały tak jakby były uruchamiane z uprawnieniami administracyjnymi, choć w rzeczywistości ich nie mają, stąd instalatory mogą być używane nawet w zabezpieczonych boksach.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1076"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
@@ -6765,7 +6790,7 @@ Processes in this box will be running with a custom process token indicating the
 Procesy w tym polu będą uruchamiane z niestandardowym tokenem procesu wskazującym piaskownicę, do której należą.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1115"/>
         <source>Failed to create new box: %1</source>
         <translation>Nie udało się utworzyć nowego boksu: %1</translation>
     </message>
@@ -7418,34 +7443,67 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
         <translation>Kompresja plików</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="38"/>
+        <location filename="Forms/CompressDialog.ui" line="58"/>
         <source>Compression</source>
         <translation>Kompresja</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="45"/>
+        <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
         <translation>Po wybraniu tej opcji zostanie wyświetlony monit o hasło po kliknięciu przycisku OK</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="48"/>
+        <location filename="Forms/CompressDialog.ui" line="41"/>
         <source>Encrypt archive content</source>
         <translation>Szyfrowanie zawartości archiwum</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="55"/>
+        <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
         <translation>Solidna archiwizacja poprawia współczynniki kompresji poprzez traktowanie wielu plików jako jednego ciągłego bloku danych. Idealna dla dużej liczby małych plików, sprawia, że archiwum jest bardziej kompaktowe, ale może wydłużyć czas potrzebny na wyodrębnienie poszczególnych plików.</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="58"/>
+        <location filename="Forms/CompressDialog.ui" line="51"/>
         <source>Create Solide Archive</source>
         <translation>Utwórz solidne archiwum</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="65"/>
-        <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>Eksportuj Sandbox do archiwum 7z, wybierz stopień kompresji i dostosuj dodatkowe ustawienia kompresji.</translation>
+        <location filename="Forms/CompressDialog.ui" line="75"/>
+        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <oldsource>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="obsolete">Eksportuj Sandbox do archiwum 7z, wybierz stopień kompresji i dostosuj dodatkowe ustawienia kompresji.</translation>
+    </message>
+</context>
+<context>
+    <name>ExtractDialog</name>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="14"/>
+        <source>Extract Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="25"/>
+        <source>Export Sandbox from an archive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="35"/>
+        <source>Import Sandbox Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="42"/>
+        <source>Box Root Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="62"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>

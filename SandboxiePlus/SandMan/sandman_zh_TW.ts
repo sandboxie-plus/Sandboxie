@@ -191,12 +191,12 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="867"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="875"/>
         <source>Advanced Sandbox options</source>
         <translation>進階沙箱選項</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="868"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="876"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>在此頁面上，可以設定進階沙箱選項。</translation>
     </message>
@@ -247,19 +247,19 @@
         <translation type="vanished">使用 Sandboxie 登入程序替代匿名權杖</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="873"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
         <source>Advanced Options</source>
         <translation>進階選項</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="880"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
         <translatorcomment>&quot;應用程式擴充&quot; is the actual translation showed in Windows for TradChinese</translatorcomment>
         <translation>防止主機上被沙箱化的程式載入被沙箱化的應用程式擴充 (DLL) 檔案</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="889"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <translation>該功能可能對相容性造成影響，因為它阻止了沙箱所屬處理程序向主機所屬處理程序寫入資料，或是將其啟動。</translation>
     </message>
@@ -268,27 +268,27 @@
         <translation type="vanished">阻止沙箱化視窗被擷取圖像。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="887"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="895"/>
         <source>Prevent sandboxed windows from being captured</source>
         <translation>阻止沙箱化視窗被擷取圖像</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="896"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
         <translation>此功能可能造成使用者體驗下降，因其也會阻止正常的螢幕截圖。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="893"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="901"/>
         <source>Shared Template</source>
         <translation>共用範本</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="894"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
         <source>Shared template mode</source>
         <translation>共用範本模式</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="895"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="903"/>
         <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
@@ -299,52 +299,52 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
 若要為沙箱停用此範本，只需在範本清單中將其取消選中即可。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="901"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="909"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
         <translation>此選項不會向沙箱組態中新增任何設定，也不會根據範本內的刪除設定移除預設沙箱之設定。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
         <translation>此選項將共用範本作為本機範本新增至沙箱組態中，並且還可以根據範本內的刪除設定移除預設沙箱之設定。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="903"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="911"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
         <translation>此選項將共用範本中的設定新增至沙箱組態中，也可根據範本內的刪除設定移除預設沙箱之設定。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
         <translation>此選項不會向沙箱組態新增任何設定，但可能會根據範本內的刪除設定移除預設沙箱之設定。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="920"/>
         <source>Remove defaults if set</source>
         <translation>如果設定此項將刪除預設值</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="927"/>
         <source>Shared template selection</source>
         <translation>共用範本選項</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="941"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="949"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
         <translation>此選項指定了將用於 共用範本模式 的範本。 (%1)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="906"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="914"/>
         <source>Disabled</source>
         <translation>已停用</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="908"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="916"/>
         <source>Use as a template</source>
         <translation>用作範本</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="918"/>
         <source>Append to the configuration</source>
         <translation>追加至組態設定</translation>
     </message>
@@ -997,34 +997,62 @@ You can click Finish to close this wizard.</source>
         <translation>Sandboxie-Plus - 匯出沙箱</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="25"/>
+        <location filename="Windows/CompressDialog.cpp" line="27"/>
+        <source>7-Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/CompressDialog.cpp" line="28"/>
+        <source>Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Store</source>
         <translation>僅儲存</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="26"/>
+        <location filename="Windows/CompressDialog.cpp" line="31"/>
         <source>Fastest</source>
         <translation>最快</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="27"/>
+        <location filename="Windows/CompressDialog.cpp" line="32"/>
         <source>Fast</source>
         <translation>快速</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="28"/>
+        <location filename="Windows/CompressDialog.cpp" line="33"/>
         <source>Normal</source>
         <translation>標準</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="29"/>
+        <location filename="Windows/CompressDialog.cpp" line="34"/>
         <source>Maximum</source>
         <translation>最大化</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="30"/>
+        <location filename="Windows/CompressDialog.cpp" line="35"/>
         <source>Ultra</source>
         <translation>極限</translation>
+    </message>
+</context>
+<context>
+    <name>CExtractDialog</name>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="23"/>
+        <source>Sandboxie-Plus - Sandbox Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="39"/>
+        <source>Select Directory</source>
+        <translation type="unfinished">選擇目錄</translation>
+    </message>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="59"/>
+        <source>This name is already in use, please select an alternative box name</source>
+        <translation type="unfinished">名稱已被使用，請選擇其他沙箱名稱</translation>
     </message>
 </context>
 <context>
@@ -1136,19 +1164,19 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>啟用檔案立即復原 (從設定的復原位置)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="697"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="705"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation>選取的沙箱儲存位置是無效路徑。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="702"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation>選取的沙箱儲存位置已存在且不是空白目錄，推薦選擇新資料夾或是空白資料夾。確定要使用已存在的資料夾嗎？</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="707"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>選取的沙箱儲存位置不在目前可用的磁碟上。</translation>
@@ -1290,83 +1318,83 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIsolationPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="731"/>
         <source>Sandbox Isolation options</source>
         <translation>沙箱隔離選項</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="724"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>On this page sandbox isolation options can be configured.</source>
         <translation>在此頁面可以調整沙箱隔離選項的組態。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="729"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Network Access</source>
         <translation>區域網路存取</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="745"/>
         <source>Allow network/internet access</source>
         <translation>允許區域網路/網際網路存取</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="738"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>透過拒絕存取區域網路裝置，以阻止區域網路/網際網路存取</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="740"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>使用 Windows 篩選平台阻止區域網路/網際網路存取</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
         <source>Allow access to network files and folders</source>
         <translation>允許存取區域網路檔案和資料夾</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="747"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option is not recommended for Hardened boxes</source>
         <translation>不推薦將此選項用於加固型沙箱</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="760"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
         <translation>提示使用者是否允許豁免封鎖</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="758"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
         <source>Admin Options</source>
         <translation>管理員選項</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="770"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation>廢棄來自管理員和 Power Users (高權限使用者) 群組的許可</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="768"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="776"/>
         <source>Make applications think they are running elevated</source>
         <translation>使應用程式認為其已在權限提升狀態下運作</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>允許 MSIServer 使用沙箱化系統權杖運作</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="788"/>
         <source>Box Options</source>
         <translation>沙箱選項</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="784"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="792"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>使用 Sandboxie 登入程序替代匿名權杖</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="793"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>使用自訂 Sandboxie 權杖可以更好地將各個沙箱相互隔離，同時可以實現在工作管理員的使用者欄位中顯示處理程序所屬的沙箱。但是，某些第三方安全性解決方案可能會與自訂權杖產生相容性問題。</translation>
     </message>
@@ -2276,42 +2304,42 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>選擇程式</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1162"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1164"/>
         <source>The image file does not exist</source>
         <translation>映像檔案不存在</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1163"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1165"/>
         <source>The password is wrong</source>
         <translation>密碼錯誤</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1164"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1166"/>
         <source>Unexpected error: %1</source>
         <translation>預期外錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1193"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1195"/>
         <source>Image Password Changed</source>
         <translation>映像密碼已變更</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1202"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1204"/>
         <source>Backup Image Header for %1</source>
         <translation>為 %1 備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1210"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1212"/>
         <source>Image Header Backuped</source>
         <translation>已備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1217"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1219"/>
         <source>Restore Image Header for %1</source>
         <translation>為 %1 復原映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1225"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
         <source>Image Header Restored</source>
         <translation>已復原映像標頭</translation>
     </message>
@@ -3114,37 +3142,37 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="773"/>
+        <location filename="SbiePlusAPI.cpp" line="771"/>
         <source>Disabled</source>
         <translation>停用</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="784"/>
+        <location filename="SbiePlusAPI.cpp" line="782"/>
         <source>OPEN Root Access</source>
         <translation>開放 Root 存取權限</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="786"/>
+        <location filename="SbiePlusAPI.cpp" line="784"/>
         <source>Application Compartment</source>
         <translation>應用程式區間</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="788"/>
+        <location filename="SbiePlusAPI.cpp" line="786"/>
         <source>NOT SECURE</source>
         <translation>不安全</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="790"/>
+        <location filename="SbiePlusAPI.cpp" line="788"/>
         <source>Reduced Isolation</source>
         <translation>弱化隔離</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="792"/>
+        <location filename="SbiePlusAPI.cpp" line="790"/>
         <source>Enhanced Isolation</source>
         <translation>增強隔離</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="795"/>
+        <location filename="SbiePlusAPI.cpp" line="793"/>
         <source>Privacy Enhanced</source>
         <translation>隱私增強</translation>
     </message>
@@ -3153,32 +3181,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">API 日誌</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="799"/>
+        <location filename="SbiePlusAPI.cpp" line="797"/>
         <source>No INet (with Exceptions)</source>
         <translation>無網際網路 (允許例外)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="801"/>
+        <location filename="SbiePlusAPI.cpp" line="799"/>
         <source>No INet</source>
         <translation>無網際網路</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="804"/>
+        <location filename="SbiePlusAPI.cpp" line="802"/>
         <source>Net Share</source>
         <translation>區域網路共享</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="806"/>
+        <location filename="SbiePlusAPI.cpp" line="804"/>
         <source>No Admin</source>
         <translation>無管理員</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="809"/>
+        <location filename="SbiePlusAPI.cpp" line="807"/>
         <source>Auto Delete</source>
         <translation>自動刪除</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="812"/>
+        <location filename="SbiePlusAPI.cpp" line="810"/>
         <source>Normal</source>
         <translation>標準</translation>
     </message>
@@ -4904,38 +4932,38 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1206"/>
+        <location filename="SbiePlusAPI.cpp" line="1204"/>
         <source>Failed to initialize COM</source>
         <translation>初始化 COM 物件失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1212"/>
+        <location filename="SbiePlusAPI.cpp" line="1210"/>
         <source>Failed to create update session</source>
         <translation>建立更新工作階段失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1218"/>
+        <location filename="SbiePlusAPI.cpp" line="1216"/>
         <source>Failed to create update searcher</source>
         <translation>建立更新搜尋程式失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1224"/>
+        <location filename="SbiePlusAPI.cpp" line="1222"/>
         <source>Failed to set search options</source>
         <translation>設定搜尋選項失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1232"/>
+        <location filename="SbiePlusAPI.cpp" line="1230"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
         <translation>無法列舉已安裝的 Windows 更新</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1238"/>
+        <location filename="SbiePlusAPI.cpp" line="1236"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>從搜尋結果取得更新清單失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1245"/>
+        <location filename="SbiePlusAPI.cpp" line="1243"/>
         <source>Failed to get update count</source>
         <translation>取得更新計數失敗</translation>
     </message>
@@ -4943,240 +4971,240 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="154"/>
-        <location filename="Views/SbieView.cpp" line="288"/>
+        <location filename="Views/SbieView.cpp" line="155"/>
+        <location filename="Views/SbieView.cpp" line="289"/>
         <source>Create New Box</source>
         <translation>建立新沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="410"/>
+        <location filename="Views/SbieView.cpp" line="411"/>
         <source>Remove Group</source>
         <translation>刪除群組</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
-        <location filename="Views/SbieView.cpp" line="299"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
+        <location filename="Views/SbieView.cpp" line="300"/>
         <source>Run</source>
         <translation>執行</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="171"/>
         <source>Run Program</source>
         <translation>執行程式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="171"/>
+        <location filename="Views/SbieView.cpp" line="172"/>
         <source>Run from Start Menu</source>
         <translation>從開始選單執行</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
         <source>Default Web Browser</source>
         <translation>預設網頁瀏覽器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="183"/>
+        <location filename="Views/SbieView.cpp" line="184"/>
         <source>Default eMail Client</source>
         <translation>預設電子郵件用戶端</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="185"/>
+        <location filename="Views/SbieView.cpp" line="186"/>
         <source>Windows Explorer</source>
         <translation>Windows 檔案總管</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="186"/>
+        <location filename="Views/SbieView.cpp" line="187"/>
         <source>Registry Editor</source>
         <translation>登錄編輯程式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="187"/>
+        <location filename="Views/SbieView.cpp" line="188"/>
         <source>Programs and Features</source>
         <translation>程式和功能</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="198"/>
+        <location filename="Views/SbieView.cpp" line="199"/>
         <source>Terminate All Programs</source>
         <translation>終止所有程式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="105"/>
-        <location filename="Views/SbieView.cpp" line="204"/>
-        <location filename="Views/SbieView.cpp" line="266"/>
-        <location filename="Views/SbieView.cpp" line="350"/>
-        <location filename="Views/SbieView.cpp" line="389"/>
+        <location filename="Views/SbieView.cpp" line="106"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="351"/>
+        <location filename="Views/SbieView.cpp" line="390"/>
         <source>Create Shortcut</source>
         <translation>建立捷徑</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="206"/>
-        <location filename="Views/SbieView.cpp" line="334"/>
+        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="335"/>
         <source>Explore Content</source>
         <translation>瀏覽內容</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="208"/>
-        <location filename="Views/SbieView.cpp" line="341"/>
+        <location filename="Views/SbieView.cpp" line="209"/>
+        <location filename="Views/SbieView.cpp" line="342"/>
         <source>Snapshots Manager</source>
         <translation>快照管理</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="212"/>
         <source>Recover Files</source>
         <translation>復原檔案</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="212"/>
-        <location filename="Views/SbieView.cpp" line="333"/>
+        <location filename="Views/SbieView.cpp" line="213"/>
+        <location filename="Views/SbieView.cpp" line="334"/>
         <source>Delete Content</source>
         <translation>刪除內容</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="219"/>
+        <location filename="Views/SbieView.cpp" line="220"/>
         <source>Sandbox Presets</source>
         <translation>沙箱預設</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="221"/>
+        <location filename="Views/SbieView.cpp" line="222"/>
         <source>Ask for UAC Elevation</source>
         <translation>詢問 UAC 權限提升</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="222"/>
+        <location filename="Views/SbieView.cpp" line="223"/>
         <source>Drop Admin Rights</source>
         <translation>廢棄管理員許可</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="223"/>
+        <location filename="Views/SbieView.cpp" line="224"/>
         <source>Emulate Admin Rights</source>
         <translation>模擬管理員許可</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="231"/>
+        <location filename="Views/SbieView.cpp" line="232"/>
         <source>Block Internet Access</source>
         <translation>阻止網際網路存取</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="233"/>
+        <location filename="Views/SbieView.cpp" line="234"/>
         <source>Allow Network Shares</source>
         <translation>允許區域網路共用</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="214"/>
+        <location filename="Views/SbieView.cpp" line="215"/>
         <source>Sandbox Options</source>
         <translation>沙箱選項</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="181"/>
+        <location filename="Views/SbieView.cpp" line="182"/>
         <source>Standard Applications</source>
         <translation>標準應用程式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="201"/>
+        <location filename="Views/SbieView.cpp" line="202"/>
         <source>Browse Files</source>
         <translation>瀏覽檔案</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="242"/>
-        <location filename="Views/SbieView.cpp" line="339"/>
+        <location filename="Views/SbieView.cpp" line="243"/>
+        <location filename="Views/SbieView.cpp" line="340"/>
         <source>Sandbox Tools</source>
         <translation>沙箱工具</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="243"/>
+        <location filename="Views/SbieView.cpp" line="244"/>
         <source>Duplicate Box Config</source>
         <translation>複製沙箱組態</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="247"/>
-        <location filename="Views/SbieView.cpp" line="353"/>
+        <location filename="Views/SbieView.cpp" line="248"/>
+        <location filename="Views/SbieView.cpp" line="354"/>
         <source>Rename Sandbox</source>
         <translation>重新命名沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="248"/>
-        <location filename="Views/SbieView.cpp" line="354"/>
+        <location filename="Views/SbieView.cpp" line="249"/>
+        <location filename="Views/SbieView.cpp" line="355"/>
         <source>Move Sandbox</source>
         <translation>移動沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="259"/>
-        <location filename="Views/SbieView.cpp" line="365"/>
+        <location filename="Views/SbieView.cpp" line="260"/>
+        <location filename="Views/SbieView.cpp" line="366"/>
         <source>Remove Sandbox</source>
         <translation>刪除沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="264"/>
-        <location filename="Views/SbieView.cpp" line="387"/>
+        <location filename="Views/SbieView.cpp" line="265"/>
+        <location filename="Views/SbieView.cpp" line="388"/>
         <source>Terminate</source>
         <translation>終止</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="268"/>
         <source>Preset</source>
         <translation>預設</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="103"/>
-        <location filename="Views/SbieView.cpp" line="268"/>
+        <location filename="Views/SbieView.cpp" line="104"/>
+        <location filename="Views/SbieView.cpp" line="269"/>
         <source>Pin to Run Menu</source>
         <translation>固定到執行選單</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="270"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Block and Terminate</source>
         <translation>阻止並終止</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="274"/>
+        <location filename="Views/SbieView.cpp" line="275"/>
         <source>Allow internet access</source>
         <translation>允許網際網路存取</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="276"/>
+        <location filename="Views/SbieView.cpp" line="277"/>
         <source>Force into this sandbox</source>
         <translation>強制加入此沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="278"/>
+        <location filename="Views/SbieView.cpp" line="279"/>
         <source>Set Linger Process</source>
         <translation>設定駐留處理程序</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="280"/>
+        <location filename="Views/SbieView.cpp" line="281"/>
         <source>Set Leader Process</source>
         <translation>設定引導處理程序</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="549"/>
+        <location filename="Views/SbieView.cpp" line="550"/>
         <source>    File root: %1
 </source>
         <translation>    檔案根目錄: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="550"/>
+        <location filename="Views/SbieView.cpp" line="551"/>
         <source>    Registry root: %1
 </source>
         <translation>    登錄根目錄: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="551"/>
+        <location filename="Views/SbieView.cpp" line="552"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC 根目錄: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="555"/>
+        <location filename="Views/SbieView.cpp" line="556"/>
         <source>Options:
     </source>
         <translation>選項:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="781"/>
+        <location filename="Views/SbieView.cpp" line="782"/>
         <source>[None]</source>
         <translation>[無]</translation>
     </message>
@@ -5186,104 +5214,104 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>請輸入新的群組名稱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="890"/>
+        <location filename="Views/SbieView.cpp" line="891"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>是否刪除所選群組？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="155"/>
-        <location filename="Views/SbieView.cpp" line="289"/>
+        <location filename="Views/SbieView.cpp" line="156"/>
+        <location filename="Views/SbieView.cpp" line="290"/>
         <source>Create Box Group</source>
         <translation>建立沙箱群組</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="408"/>
+        <location filename="Views/SbieView.cpp" line="409"/>
         <source>Rename Group</source>
         <translation>重新命名群組</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="161"/>
-        <location filename="Views/SbieView.cpp" line="295"/>
+        <location filename="Views/SbieView.cpp" line="162"/>
+        <location filename="Views/SbieView.cpp" line="296"/>
         <source>Stop Operations</source>
         <translation>停止作業</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Command Prompt</source>
         <translation>命令提示字元</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="191"/>
+        <location filename="Views/SbieView.cpp" line="192"/>
         <source>Command Prompt (as Admin)</source>
         <translation>命令提示字元 (管理員)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="195"/>
+        <location filename="Views/SbieView.cpp" line="196"/>
         <source>Command Prompt (32-bit)</source>
         <translation>命令提示字元 (32 位元)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="180"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Execute Autorun Entries</source>
         <translation>執行「自動執行」條目</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="340"/>
+        <location filename="Views/SbieView.cpp" line="341"/>
         <source>Browse Content</source>
         <translation>瀏覽內容</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="201"/>
         <source>Box Content</source>
         <translation>沙箱內容</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="208"/>
         <source>Open Registry</source>
         <translation>開啟登錄</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="203"/>
-        <location filename="Views/SbieView.cpp" line="349"/>
+        <location filename="Views/SbieView.cpp" line="204"/>
+        <location filename="Views/SbieView.cpp" line="350"/>
         <source>Refresh Info</source>
         <translation>重新整理資訊</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="156"/>
-        <location filename="Views/SbieView.cpp" line="290"/>
+        <location filename="Views/SbieView.cpp" line="157"/>
+        <location filename="Views/SbieView.cpp" line="291"/>
         <source>Import Box</source>
         <translation>匯入沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="174"/>
-        <location filename="Views/SbieView.cpp" line="310"/>
+        <location filename="Views/SbieView.cpp" line="175"/>
+        <location filename="Views/SbieView.cpp" line="311"/>
         <source>(Host) Start Menu</source>
         <translation>(主機) 開始選單</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="237"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
         <source>Immediate Recovery</source>
         <translation>即時復原</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="239"/>
+        <location filename="Views/SbieView.cpp" line="240"/>
         <source>Disable Force Rules</source>
         <translation>停用強制規則</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="244"/>
+        <location filename="Views/SbieView.cpp" line="245"/>
         <source>Export Box</source>
         <translation>匯出沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="249"/>
-        <location filename="Views/SbieView.cpp" line="355"/>
+        <location filename="Views/SbieView.cpp" line="250"/>
+        <location filename="Views/SbieView.cpp" line="356"/>
         <source>Move Up</source>
         <translation>向上移</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="254"/>
-        <location filename="Views/SbieView.cpp" line="360"/>
+        <location filename="Views/SbieView.cpp" line="255"/>
+        <location filename="Views/SbieView.cpp" line="361"/>
         <source>Move Down</source>
         <translation>向下移</translation>
     </message>
@@ -5292,106 +5320,113 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">在沙箱中執行</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="304"/>
+        <location filename="Views/SbieView.cpp" line="305"/>
         <source>Run Web Browser</source>
         <translation>執行網頁瀏覽器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="305"/>
+        <location filename="Views/SbieView.cpp" line="306"/>
         <source>Run eMail Reader</source>
         <translation>執行電子郵件閱讀器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="306"/>
+        <location filename="Views/SbieView.cpp" line="307"/>
         <source>Run Any Program</source>
         <translation>執行任意程式 (Run)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="307"/>
+        <location filename="Views/SbieView.cpp" line="308"/>
         <source>Run From Start Menu</source>
         <translation>從開始選單執行</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="315"/>
+        <location filename="Views/SbieView.cpp" line="316"/>
         <source>Run Windows Explorer</source>
         <translation>執行 Windows 檔案總管</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="329"/>
+        <location filename="Views/SbieView.cpp" line="330"/>
         <source>Terminate Programs</source>
         <translation>終止程式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="332"/>
+        <location filename="Views/SbieView.cpp" line="333"/>
         <source>Quick Recover</source>
         <translation>快速復原</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="337"/>
+        <location filename="Views/SbieView.cpp" line="338"/>
         <source>Sandbox Settings</source>
         <translation>沙箱設定</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="344"/>
+        <location filename="Views/SbieView.cpp" line="345"/>
         <source>Duplicate Sandbox Config</source>
         <translation>複製沙箱組態</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="345"/>
+        <location filename="Views/SbieView.cpp" line="346"/>
         <source>Export Sandbox</source>
         <translation>匯出沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="409"/>
+        <location filename="Views/SbieView.cpp" line="410"/>
         <source>Move Group</source>
         <translation>移動群組</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="553"/>
+        <location filename="Views/SbieView.cpp" line="554"/>
         <source>    Disk root: %1
 </source>
         <translation>    磁碟根目錄: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="880"/>
+        <location filename="Views/SbieView.cpp" line="881"/>
         <source>Please enter a new name for the Group.</source>
         <translation>請為群組輸入新名稱。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="927"/>
+        <location filename="Views/SbieView.cpp" line="928"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>移動條目 (負值向上移動，正值向下移動):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="975"/>
+        <location filename="Views/SbieView.cpp" line="976"/>
         <source>A group can not be its own parent.</source>
         <translation>群組不能作為其本身的上級群組。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1057"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
+        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1058"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>開啟封存檔失敗，密碼是否存在錯誤？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1066"/>
+        <location filename="Views/SbieView.cpp" line="1067"/>
         <source>Failed to open archive (%1)!</source>
         <translation>開啟封存檔失敗 (%1)！</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1080"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
+        <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation>名稱已被使用，請選擇其他沙箱名稱</translation>
+        <translation type="vanished">名稱已被使用，請選擇其他沙箱名稱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Importing Sandbox</source>
-        <translation>正在匯入沙箱</translation>
+        <translation type="vanished">正在匯入沙箱</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1090"/>
         <source>Do you want to select custom root folder?</source>
-        <translation>是否選擇自訂根目錄？</translation>
+        <translation type="vanished">是否選擇自訂根目錄？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5449,38 +5484,36 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>%1 Copy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>Select file name</source>
         <translation>選擇檔名</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="209"/>
-        <location filename="Views/SbieView.cpp" line="330"/>
+        <location filename="Views/SbieView.cpp" line="210"/>
+        <location filename="Views/SbieView.cpp" line="331"/>
         <source>Mount Box Image</source>
         <translation>裝載沙箱映像</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="210"/>
-        <location filename="Views/SbieView.cpp" line="331"/>
+        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="332"/>
         <source>Unmount Box Image</source>
         <translation>卸載沙箱映像</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="282"/>
+        <location filename="Views/SbieView.cpp" line="283"/>
         <source>Suspend</source>
         <translation>暫停</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="283"/>
+        <location filename="Views/SbieView.cpp" line="284"/>
         <source>Resume</source>
         <translation>恢復</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation>7-zip 封存檔案 (*.7z)</translation>
+        <translation type="vanished">7-zip 封存檔案 (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -5741,168 +5774,168 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="539"/>
         <source>HwId: %1</source>
         <translation>硬體ID: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="621"/>
+        <location filename="Windows/SettingsWindow.cpp" line="629"/>
         <source>Search for settings</source>
         <translation>搜尋設定</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="851"/>
-        <location filename="Windows/SettingsWindow.cpp" line="852"/>
-        <location filename="Windows/SettingsWindow.cpp" line="862"/>
+        <location filename="Windows/SettingsWindow.cpp" line="859"/>
+        <location filename="Windows/SettingsWindow.cpp" line="860"/>
+        <location filename="Windows/SettingsWindow.cpp" line="870"/>
         <source>Run &amp;Sandboxed</source>
         <translation>在沙箱中執行(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1169"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1177"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1259"/>
         <source>Volume not attached</source>
         <translation>未附加磁碟區</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1264"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1272"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;您已經使用了%1/%2個評估憑證。無法生成更多免費憑證了。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1266"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1274"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;取得一個免費評估憑證&lt;/a&gt;並享受所有獨有功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1275"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>對於每個硬體ID，您最多可以請求%2次免費的%1天評估憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此贊助者憑證已逾期，請&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;取得更新的憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1285"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1293"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;對於目前版本，Plus 功能仍然啟用&lt;/font&gt;，但您無法再存取 Sandboxie-Live 服務，包括相容性更新和疑難排解資料庫。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1293"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此贊助者憑證將&lt;font color=&apos;red&apos;&gt;在 %1 天後逾期&lt;/font&gt;，請&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert &quot; &gt;取得更新的憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>逾期於: %1天後</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
         <source>Expired: %1 days ago</source>
         <translation>已逾期: %1天前</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Options: %1</source>
         <translation>可用選項: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>隱私/安全性增強 &amp; 應用程式沙箱 (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Enabled</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Disabled</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>加密沙箱 (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
         <source>Network Interception (NetI): %1</source>
         <translation>網路監聽 (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie 桌面 (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1365"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1373"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>這看起來不像 Sandboxie-Plus 序號。&lt;br /&gt;如果您嘗試的是輸入憑證的更新金鑰或簽章，這不是正確的操作，請在上方文字區域中輸入完整憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1380"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>您正嘗試在未輸入作為前置條件的贊助者憑證的情況下使用功能升級金鑰。請注意，這種類型的金鑰 (&lt;b&gt;正如網站上以粗體明確說明的那樣&lt;/b&gt;) 要求您預先擁有一個有效的贊助者憑證；&lt;br /&gt;如果您想使用進階功能，您需要同時取得標準憑證和功能升級金鑰來解鎖進階功能。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1378"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>您正嘗試在未輸入作為前置條件的贊助者憑證的情況下使用續期金鑰。請注意，這種類型的金鑰 (&lt;b&gt;正如網站上以粗體明確說明的那樣&lt;/b&gt;) 要求您預先擁有一個有效的贊助者憑證；沒有前者的情況下此金鑰完全無效。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1383"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;如果您沒有閱讀產品說明並錯誤地取得了此金鑰，請透過電子郵件 (在我們的網站上提供) 聯絡我們以解決此問題。&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1431"/>
         <source>Retrieving certificate...</source>
         <translation>取得憑證中...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1419"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - 取得評估憑證</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1419"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>請輸入您的電郵地址以接收免費的%1天評估憑證，此憑證將頒發給 %2 並鎖定至目前硬體。
 您最多可以為每個唯一硬體ID請求%3個評估憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>取得憑證錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>未知錯誤 (可能是網際網路問題)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2021"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2029"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>評估憑證套用成功。 請享受你的免費試用！</translation>
     </message>
@@ -5911,103 +5944,103 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">取得憑證中...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1493"/>
         <source>Contributor</source>
         <translation>貢獻者</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
         <source>Eternal</source>
         <translation>永久</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1489"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
         <source>Business</source>
         <translation>商業</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1491"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
         <source>Personal</source>
         <translation>個人</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1493"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
         <source>Great Patreon</source>
         <translation>大型 Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1503"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1505"/>
         <source>Family</source>
         <translation>家庭</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1507"/>
         <source>Home</source>
         <translation>家用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1509"/>
         <source>Evaluation</source>
         <translation>評估</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1503"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1511"/>
         <source>Type %1</source>
         <translation>類型 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Advanced</source>
         <translation>進階</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1533"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Advanced (L)</source>
         <translation>進階 (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Max Level</source>
         <translation>最高等級</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>Level %1</source>
         <translation>等級 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1562"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
         <source>Supporter certificate required for access</source>
         <translation>需要贊助者憑證以存取</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1579"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
         <source>Supporter certificate required for automation</source>
         <translation>需要贊助者憑證以自動作業</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2013"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2021"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>不幸的是，此憑證對於目前版本無效，您需要取得新憑證或降級到早期版本。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2015"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2023"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>儘管此憑證已逾期，但對於目前安裝的版本 Plus 功能仍保持啟用狀態。但是，您將無法再存取 Sandboxie-Live 服務，包括相容性更新和線上疑難排解資料庫。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2017"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2025"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>不幸的是，此憑證已逾期，您需要取得新憑證。</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="891"/>
         <source>Sandboxed Web Browser</source>
         <translation>沙箱化網頁瀏覽器</translation>
     </message>
@@ -6030,53 +6063,53 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>下載並安裝</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="379"/>
+        <location filename="Windows/SettingsWindow.cpp" line="387"/>
         <source>Browse for Program</source>
         <translation>瀏覽程式</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="495"/>
         <source>Add %1 Template</source>
         <translation>加入 %1 範本</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="576"/>
         <source>Select font</source>
         <translation>選取字型</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="570"/>
+        <location filename="Windows/SettingsWindow.cpp" line="578"/>
         <source>Reset font</source>
         <translation>重設字型</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="630"/>
+        <location filename="Windows/SettingsWindow.cpp" line="638"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="732"/>
+        <location filename="Windows/SettingsWindow.cpp" line="740"/>
         <source>Please enter message</source>
         <translation>請輸入訊息</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="772"/>
         <source>Select Program</source>
         <translation>選擇程式</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="772"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可執行檔案 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="768"/>
-        <location filename="Windows/SettingsWindow.cpp" line="784"/>
+        <location filename="Windows/SettingsWindow.cpp" line="776"/>
+        <location filename="Windows/SettingsWindow.cpp" line="792"/>
         <source>Please enter a menu title</source>
         <translation>請輸入一個選單標題</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="780"/>
+        <location filename="Windows/SettingsWindow.cpp" line="788"/>
         <source>Please enter a command</source>
         <translation>請輸入一則命令</translation>
     </message>
@@ -6085,7 +6118,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1283"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus 功能將在 %1 天後被停用。&lt;/font&gt;</translation>
     </message>
@@ -6094,7 +6127,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;在此版本中，Plus 附加的進階功能仍是可用的。&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1287"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1295"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 功能已不再啟用。</translation>
     </message>
@@ -6108,22 +6141,22 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">需要贊助者憑證</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1694"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>在沙箱外執行(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1702"/>
         <source>Set Force in Sandbox</source>
         <translation>設定強制沙箱化</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1703"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1711"/>
         <source>Set Open Path in Sandbox</source>
         <translation>設定在沙箱中開啟位址</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1993"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2001"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>這看起來不像是一份憑證。請輸入完整的憑證，而不僅僅是其中的一部分。</translation>
     </message>
@@ -6136,7 +6169,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">很不幸此憑證已廢止。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2023"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2031"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>感謝您對 Sandboxie-Plus 開發工作的支持。</translation>
     </message>
@@ -6145,88 +6178,88 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">此贊助者憑證無效。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2080"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2088"/>
         <source>Update Available</source>
         <translation>更新可用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2082"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2090"/>
         <source>Installed</source>
         <translation>已安裝</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2087"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
         <source>by %1</source>
         <translation>by %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2103"/>
         <source>(info website)</source>
         <translation>(資訊網站)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2122"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2130"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>此附加元件具有強制性且不可被移除。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2277"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2285"/>
         <source>Select Directory</source>
         <translation>選擇目錄</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2160"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2168"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;立即檢查&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2245"/>
         <source>Please enter the new configuration password.</source>
         <translation>請輸入新組態密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2241"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2249"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>請再次輸入新組態密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2246"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2254"/>
         <source>Passwords did not match, please retry.</source>
         <translation>密碼不匹配，請重新輸入。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2266"/>
         <source>Process</source>
         <translation>處理程序</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2266"/>
         <source>Folder</source>
         <translation>資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2276"/>
         <source>Please enter a program file name</source>
         <translation>請輸入一個程式檔案名稱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2344"/>
         <source>Please enter the template identifier</source>
         <translation>請輸入範本識別碼</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2352"/>
         <source>Error: %1</source>
         <translation>錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2376"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2384"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>要刪除所選取的本機範本嗎？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2586"/>
         <source>%1 (Current)</source>
         <translation>%1 (目前)</translation>
     </message>
@@ -6477,35 +6510,35 @@ Try submitting without the log attached.</source>
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1005"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1013"/>
         <source>Create the new Sandbox</source>
         <translation>建立新沙箱</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1016"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1024"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>即將就緒，按下「完成」按鈕以建立新沙箱並結束精靈。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1025"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1033"/>
         <source>Save options as new defaults</source>
         <translation>儲存選項為新的預設設定</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1036"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1044"/>
         <source>Skip this summary page when advanced options are not set</source>
         <oldsource>Don&apos;t show the summary page in future (unless advanced options were set)</oldsource>
         <translation>以後不再顯示總結頁面 (除非啟用進階選項)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1055"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1063"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 該沙箱將儲存至: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1058"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1066"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
@@ -6514,21 +6547,21 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 該沙箱中的內容將在所有程式結束後被刪除，同時沙箱本身將被移除。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1060"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 該沙箱中的內容將在所有程式結束後被刪除，僅適合暫存的臨時資料。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1062"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1070"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 該沙箱中所有處理程序無法存取網際網路和區域網路，以確保所有可存取的資料不被洩露。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1064"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1072"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
@@ -6537,14 +6570,14 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
 該沙箱允許 MSIServer (*.msi 安裝程式服務) 在沙箱內使用系統權杖執行，這將改善相容性但會影響安全性隔離效果。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1066"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1074"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 該沙箱中所有處理程序將認為它們執行在系統管理員模式下，即使實際上並沒有該權限，這有助於在安全性防護加固型沙箱中執行安裝程式。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1076"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
@@ -6553,7 +6586,7 @@ Processes in this box will be running with a custom process token indicating the
 在此沙箱內的處理程序將以自訂處理程序權杖執行，以表明其沙箱歸屬。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1115"/>
         <source>Failed to create new box: %1</source>
         <translation>無法建立新沙箱: %1</translation>
     </message>
@@ -7217,34 +7250,67 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>壓縮檔案</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="38"/>
+        <location filename="Forms/CompressDialog.ui" line="58"/>
         <source>Compression</source>
         <translation>壓縮</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="45"/>
+        <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
         <translation>選取此項後，按下「OK」時系統將提示您輸入密碼</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="48"/>
+        <location filename="Forms/CompressDialog.ui" line="41"/>
         <source>Encrypt archive content</source>
         <translation>加密封存內容</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="55"/>
+        <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
         <translation>固實封存透過將多個檔案視為單一連續資料區塊來提升壓縮率。它非常適合大量小檔案；這使封存更加緊湊，但可能會增加提取單個檔案所需的時間。</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="58"/>
+        <location filename="Forms/CompressDialog.ui" line="51"/>
         <source>Create Solide Archive</source>
         <translation>建立固實封存檔</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="65"/>
-        <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>將沙箱匯出至 7z 封存檔，選擇壓縮率並自訂其他壓縮設定。</translation>
+        <location filename="Forms/CompressDialog.ui" line="75"/>
+        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <oldsource>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="obsolete">將沙箱匯出至 7z 封存檔，選擇壓縮率並自訂其他壓縮設定。</translation>
+    </message>
+</context>
+<context>
+    <name>ExtractDialog</name>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="14"/>
+        <source>Extract Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="25"/>
+        <source>Export Sandbox from an archive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="35"/>
+        <source>Import Sandbox Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="42"/>
+        <source>Box Root Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="62"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>

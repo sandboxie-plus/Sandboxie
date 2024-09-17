@@ -362,19 +362,22 @@ _FX NTSTATUS Session_Api_Leader(PROCESS *proc, ULONG64 *parms)
         // get leader
         //
 
-        HANDLE TokenHandle = args->token_handle.val;
+        ULONG session_id = args->session_id.val;
 
-        ULONG SessionId;
-        ULONG len = sizeof(ULONG);
+        if (session_id == -1) {
 
-        status = ZwQueryInformationToken(
-                        TokenHandle, TokenSessionId, &SessionId, len, &len);
+            HANDLE TokenHandle = args->token_handle.val;
+
+            ULONG len = sizeof(session_id);
+            status = ZwQueryInformationToken(
+                TokenHandle, TokenSessionId, &session_id, len, &len);
+        }
 
         if (NT_SUCCESS(status)) {
 
             __try {
 
-                session = Session_Get(FALSE, SessionId, &irql);
+                session = Session_Get(FALSE, session_id, &irql);
                 if (session)
                     ProcessIdToReturn = (ULONG64)session->leader_pid;
 

@@ -3,16 +3,34 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.8 / 5.69.8] - 2024-09-??
+
+## [1.14.9 / 5.69.9] - 2024-09-??
+
+### Added
+- added alternative default sandbox paths to the box wizard:
+  - \\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%
+  - \\??\\%SystemDrive%\\Sandbox\\%SANDBOX%
+  - \\??\\%SystemDrive%\\Users\\%USER%\Sandbox\\%SANDBOX%
+- added Sandbox Import dialog
+
+### Changed
+- sandbox root selection in global settings is now a combo box
+
+### Fixed
+- fixed Exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
+
+
+
+## [1.14.8 / 5.69.8] - 2024-09-09
 
 ### Added
 - added a menu action to clean boxes after the machine reboot
 
 ### Changed
-- allowed users to import/export boxes with .zip files
+- allow users to import/export boxes with .zip files [#4200](https://github.com/sandboxie-plus/Sandboxie/pull/4200)
 
 ### Fixed
-- fixed a cert issue
+- fixed a supporter certificate issue introduced with 1.14.7
 
 
 
@@ -22,7 +40,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "RandomRegUID" (bool) which could modify Windows Product ID in the registry to a random value
 - added "HideDiskSerialNumber" (bool) return random value when applications try to get disk serial number
 - added option to get free 10 days evaluation certificates from the support settings page
-  - the evaluation certificates are node locked to the HwID and for each HwID up to 3 certs can be requested
+  - the evaluation certificates are node locked to the HwID and for each HwID up to 3 certificates can be requested
 - added "TerminateWhenExit" (bool, in Sandboxie-Plus.ini) to terminate all processes when SandMan exits for [#4171](https://github.com/sandboxie-plus/Sandboxie/issues/4171)
 - added a question box to ask for Sandbox Import Location for [#4169](https://github.com/sandboxie-plus/Sandboxie/issues/4169)
 - added UI option to configure DropConHostIntegrity
@@ -170,12 +188,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.0 / 5.69.0] - 2024-05-17
 
 ### Added
-- added option to limit the memory of sandboxed processes and the number of processes in single sandbox through job object (thanks Yeyixiao)
-  - use "TotalMemoryLimit" (Number, limit whole sandbox, Byte) and "ProcessMemoryLimit" (Number, limit single process, Byte) to set memory limit
-  - use "ProcessNumberLimit" (Number) to set process number limit
-- added ability to modify sandboxed process logic speed (reduced fixed latency, modified single-player speed etc.) (thanks Yeyixiao)
-  - use "UseChangeSpeed=y" to open this feature, use "AddTickSpeed" / "AddSleepSpeed" / "AddTimerSpeed" / "LowTickSpeed" / "LowSleepSpeed" / "LowTimerSpeed" (Number) to set
-  - when set to "AddSleepSpeed=0", all sleep function calls will be skipped
+- added option to limit the memory of sandboxed processes and the number of processes in a single sandbox through job object (thanks Yeyixiao)
+  - use "TotalMemoryLimit" (number, in bytes) to set the overall memory limit for the sandbox, and "ProcessMemoryLimit" (number, in bytes) to limit memory for individual processes
+  - use "ProcessNumberLimit" (number) to set process number limit
+- added ability to adjust the logic speed of sandboxed processes, including reduced fixed latency and modified single-player speed (thanks Yeyixiao)
+  - Note: you can set "UseChangeSpeed=y" to configure the following options: "AddTickSpeed", "AddSleepSpeed", "AddTimerSpeed", "LowTickSpeed", "LowSleepSpeed" and "LowTimerSpeed" (integer values only)
+  - Note: these options use multiples instead of adding or subtracting; the "Add" series is configured by multiplication, while the "Low" series by division
+  - Note: when set to "AddSleepSpeed=0", all sleep function calls will be skipped. For example, you can bypass fixed delay code in hidden malware, reducing analysis time without affecting essential operations, which is useful for virus analysts
 - added /fcp /force_children command line option to Start.exe; it allows to start a program unsandboxed but have all its children sandboxed
 - added ability to force sandboxed processes to use a pre-defined SOCKS5 proxy
 - added ability to intercept DNS queries so that they can be logged and/or redirected

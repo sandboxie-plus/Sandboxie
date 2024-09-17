@@ -685,6 +685,14 @@ void CFilesPage::initializePage()
     m_pBoxLocation->clear();
     QString Location = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
     m_pBoxLocation->addItem(Location/*.replace("%SANDBOX%", field("boxName").toString())*/);
+    QStringList StdLocations = QStringList() 
+        << "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%" 
+        << "\\??\\%SystemDrive%\\Sandbox\\%SANDBOX%" 
+        << "\\??\\%SystemDrive%\\Users\\%USER%\\Sandbox\\%SANDBOX%";
+    foreach(auto StdLocation, StdLocations) {
+        if (StdLocation != Location)
+            m_pBoxLocation->addItem(StdLocation);
+    }
 }
 
 bool CFilesPage::validatePage()

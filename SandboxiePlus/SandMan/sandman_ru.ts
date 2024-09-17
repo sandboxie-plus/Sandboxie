@@ -131,42 +131,42 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="867"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="875"/>
         <source>Advanced Sandbox options</source>
         <translation>Расширенные опции песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="868"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="876"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>На этой странице можно настроить дополнительные опции песочницы.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="880"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <translation>Запретить программам в песочнице на хосте, загружать DLL из песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="889"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <translation>Эта функция может снизить совместимость, поскольку она также не позволяет процессам, расположенным в песочнице, записывать данные в процессы, расположенные на хосте, и даже запускать их.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="888"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="896"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
         <translation>Эта функция может привести к ухудшению пользовательского опыта, поскольку она также не позволяет делать обычные снимки экрана.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="893"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="901"/>
         <source>Shared Template</source>
         <translation>Общий шаблон</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="894"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
         <source>Shared template mode</source>
         <translation>Режим общего шаблона</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="895"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="903"/>
         <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
@@ -177,62 +177,62 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
 Чтобы отключить этот шаблон для песочницы, просто снимите флажок с него в списке шаблонов.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="901"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="909"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
         <translation>Эта опция не добавляет никаких настроек в конфигурацию песочницы и не удаляет настройки песочницы по умолчанию на основе настроек удаления в шаблоне.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="902"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
         <translation>Эта опция добавляет общий шаблон в конфигурацию песочницы в качестве локального шаблона, а также может удалить настройки песочницы по умолчанию на основе настроек удаления в шаблоне.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="903"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="911"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
         <translation>Эта опция добавляет настройки из общего шаблона в конфигурацию ящика, а также может удалить настройки ящика по умолчанию на основе настроек удаления в шаблоне.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
         <translation>Эта опция не добавляет никаких настроек в конфигурацию песочницы, но может удалить настройки песочницы по умолчанию на основе настроек удаления в шаблоне.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="920"/>
         <source>Remove defaults if set</source>
         <translation>Удалить настройки по умолчанию, если они установлены</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="927"/>
         <source>Shared template selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="941"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="949"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="906"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="914"/>
         <source>Disabled</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="873"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="881"/>
         <source>Advanced Options</source>
         <translation>Расширенные опции</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="887"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="895"/>
         <source>Prevent sandboxed windows from being captured</source>
         <translation>Предотвращение захвата окон из песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="908"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="916"/>
         <source>Use as a template</source>
         <translation>Использовать как шаблон</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="918"/>
         <source>Append to the configuration</source>
         <translation>Добавить в конфигурацию</translation>
     </message>
@@ -820,34 +820,62 @@ You can click Finish to close this wizard.</source>
         <translation>Sandboxie-Plus - Экспорт песочницы</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="25"/>
+        <location filename="Windows/CompressDialog.cpp" line="27"/>
+        <source>7-Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/CompressDialog.cpp" line="28"/>
+        <source>Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Store</source>
         <translation>Хранилище</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="26"/>
+        <location filename="Windows/CompressDialog.cpp" line="31"/>
         <source>Fastest</source>
         <translation>Самый быстрый</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="27"/>
+        <location filename="Windows/CompressDialog.cpp" line="32"/>
         <source>Fast</source>
         <translation>Быстрый</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="28"/>
+        <location filename="Windows/CompressDialog.cpp" line="33"/>
         <source>Normal</source>
         <translation>Нормальный</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="29"/>
+        <location filename="Windows/CompressDialog.cpp" line="34"/>
         <source>Maximum</source>
         <translation>Максимум</translation>
     </message>
     <message>
-        <location filename="Windows/CompressDialog.cpp" line="30"/>
+        <location filename="Windows/CompressDialog.cpp" line="35"/>
         <source>Ultra</source>
         <translation>Ультра</translation>
+    </message>
+</context>
+<context>
+    <name>CExtractDialog</name>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="23"/>
+        <source>Sandboxie-Plus - Sandbox Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="39"/>
+        <source>Select Directory</source>
+        <translation type="unfinished">Выбрать каталог</translation>
+    </message>
+    <message>
+        <location filename="Windows/ExtractDialog.cpp" line="59"/>
+        <source>This name is already in use, please select an alternative box name</source>
+        <translation type="unfinished">Это имя уже используется, выберите другое имя песочницы</translation>
     </message>
 </context>
 <context>
@@ -956,17 +984,17 @@ You can use %USER% to save each users sandbox to an own folder.</source>
         <translation>Включить немедленное восстановление файлов из мест восстановления</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="697"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="705"/>
         <source>The selected box location is not a valid path.</source>
         <translation>Выбранное расположение песочницы не является допустимым путем.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="702"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <translation>Выбранное местоположение песочницы существует и не является пустым, рекомендуется выбрать новую или пустую папку. Вы уверены, что хотите использовать существующую папку?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="707"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <translation>Выбранное расположение песочницы не размещено на доступном в данный момент диске.</translation>
     </message>
@@ -1101,83 +1129,83 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CIsolationPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="731"/>
         <source>Sandbox Isolation options</source>
         <translation>Опции изоляции песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="724"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>On this page sandbox isolation options can be configured.</source>
         <translation>На этой странице можно настроить опции изоляции песочницы.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="729"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Network Access</source>
         <translation>Доступ к сети</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="745"/>
         <source>Allow network/internet access</source>
         <translation>Разрешить доступ к сети/интернету</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="738"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>Блокировать доступ к сети/интернету, запрещая доступ к сетевым устройствам</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="740"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>Блокировать доступ к сети/интернету с помощью Windows Filtering Platform</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
         <source>Allow access to network files and folders</source>
         <translation>Разрешить доступ к сетевым файлам и папкам</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="747"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>This option is not recommended for Hardened boxes</source>
         <translation>Эта опция не рекомендуется для песочниц с усиленной изоляцией</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="760"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
         <translation>Предложить пользователю разрешить исключение из блокировки</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="758"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
         <source>Admin Options</source>
         <translation>Опции администратора</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="762"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="770"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation>Снятие прав с групп Администраторы и Power Users</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="768"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="776"/>
         <source>Make applications think they are running elevated</source>
         <translation>Заставить приложения думать, что они работают с повышенными правами</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="781"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>Разрешить запуск MSIServer с изолированным системным токеном</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="788"/>
         <source>Box Options</source>
         <translation>Опции песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="784"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="792"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Использовать логин Sandboxie вместо анонимного токена</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="793"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>Использование пользовательского токена Sandboxie позволяет лучше изолировать отдельные песочницы друг от друга, а также показывает в колонке пользователя диспетчера задач имя песочницы, к которой принадлежит процесс. Однако у некоторых сторонних решений безопасности могут быть проблемы с пользовательскими токенами.</translation>
     </message>
@@ -1999,42 +2027,42 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Выбрать программу</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1162"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1164"/>
         <source>The image file does not exist</source>
         <translation>Файл образа не существует</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1163"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1165"/>
         <source>The password is wrong</source>
         <translation>Пароль неправильный</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1164"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1166"/>
         <source>Unexpected error: %1</source>
         <translation>Непредвиденная ошибка: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1193"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1195"/>
         <source>Image Password Changed</source>
         <translation>Пароль образа изменен</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1202"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1204"/>
         <source>Backup Image Header for %1</source>
         <translation>Резервное копирование заголовка образа для %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1210"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1212"/>
         <source>Image Header Backuped</source>
         <translation>Резервная копия заголовка образа создана</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1217"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1219"/>
         <source>Restore Image Header for %1</source>
         <translation>Восстановление заголовка образа для %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1225"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
         <source>Image Header Restored</source>
         <translation>Заголовок образа восстановлен</translation>
     </message>
@@ -2823,67 +2851,67 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="773"/>
+        <location filename="SbiePlusAPI.cpp" line="771"/>
         <source>Disabled</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="784"/>
+        <location filename="SbiePlusAPI.cpp" line="782"/>
         <source>OPEN Root Access</source>
         <translation>ОТКРЫТЬ Root-доступ</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="786"/>
+        <location filename="SbiePlusAPI.cpp" line="784"/>
         <source>Application Compartment</source>
         <translation>Контейнер для приложений</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="788"/>
+        <location filename="SbiePlusAPI.cpp" line="786"/>
         <source>NOT SECURE</source>
         <translation>НЕ БЕЗОПАСНЫЙ</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="790"/>
+        <location filename="SbiePlusAPI.cpp" line="788"/>
         <source>Reduced Isolation</source>
         <translation>Сниженная изоляция</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="792"/>
+        <location filename="SbiePlusAPI.cpp" line="790"/>
         <source>Enhanced Isolation</source>
         <translation>Повышенная изоляция</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="795"/>
+        <location filename="SbiePlusAPI.cpp" line="793"/>
         <source>Privacy Enhanced</source>
         <translation>Повышенная конфиденциальность</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="799"/>
+        <location filename="SbiePlusAPI.cpp" line="797"/>
         <source>No INet (with Exceptions)</source>
         <translation>Нет INet (с исключениями)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="801"/>
+        <location filename="SbiePlusAPI.cpp" line="799"/>
         <source>No INet</source>
         <translation>Без интернета</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="804"/>
+        <location filename="SbiePlusAPI.cpp" line="802"/>
         <source>Net Share</source>
         <translation>Общая сеть</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="806"/>
+        <location filename="SbiePlusAPI.cpp" line="804"/>
         <source>No Admin</source>
         <translation>Без прав администратора</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="809"/>
+        <location filename="SbiePlusAPI.cpp" line="807"/>
         <source>Auto Delete</source>
         <translation>Автоудаление</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="812"/>
+        <location filename="SbiePlusAPI.cpp" line="810"/>
         <source>Normal</source>
         <translation>Нормальный</translation>
     </message>
@@ -4555,37 +4583,37 @@ This file is part of Sandboxie and all change done to it will be reverted next t
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1206"/>
+        <location filename="SbiePlusAPI.cpp" line="1204"/>
         <source>Failed to initialize COM</source>
         <translation>Не удалось инициализировать COM</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1212"/>
+        <location filename="SbiePlusAPI.cpp" line="1210"/>
         <source>Failed to create update session</source>
         <translation>Не удалось создать сеанс обновления</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1218"/>
+        <location filename="SbiePlusAPI.cpp" line="1216"/>
         <source>Failed to create update searcher</source>
         <translation>Не удалось создать средство поиска обновлений</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1224"/>
+        <location filename="SbiePlusAPI.cpp" line="1222"/>
         <source>Failed to set search options</source>
         <translation>Не удалось задать опции поиска</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1232"/>
+        <location filename="SbiePlusAPI.cpp" line="1230"/>
         <source>Failed to enumerate installed Windows updates</source>
         <translation>Не удалось перечислить установленные обновления Windows</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1238"/>
+        <location filename="SbiePlusAPI.cpp" line="1236"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Не удалось получить список обновлений из результатов поиска</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1245"/>
+        <location filename="SbiePlusAPI.cpp" line="1243"/>
         <source>Failed to get update count</source>
         <translation>Не удалось получить количество обновлений</translation>
     </message>
@@ -4593,240 +4621,240 @@ This file is part of Sandboxie and all change done to it will be reverted next t
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="154"/>
-        <location filename="Views/SbieView.cpp" line="288"/>
+        <location filename="Views/SbieView.cpp" line="155"/>
+        <location filename="Views/SbieView.cpp" line="289"/>
         <source>Create New Box</source>
         <translation>Создать новую песочницу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="410"/>
+        <location filename="Views/SbieView.cpp" line="411"/>
         <source>Remove Group</source>
         <translation>Удалить группу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
-        <location filename="Views/SbieView.cpp" line="299"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
+        <location filename="Views/SbieView.cpp" line="300"/>
         <source>Run</source>
         <translation>Запустить</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="171"/>
         <source>Run Program</source>
         <translation>Запустить программу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="171"/>
+        <location filename="Views/SbieView.cpp" line="172"/>
         <source>Run from Start Menu</source>
         <translation>Запустить из меню &apos;Пуск&apos;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
         <source>Default Web Browser</source>
         <translation>Веб-браузер по умолчанию</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="183"/>
+        <location filename="Views/SbieView.cpp" line="184"/>
         <source>Default eMail Client</source>
         <translation>Почтовый клиент по умолчанию</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="185"/>
+        <location filename="Views/SbieView.cpp" line="186"/>
         <source>Windows Explorer</source>
         <translation>Проводник</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="186"/>
+        <location filename="Views/SbieView.cpp" line="187"/>
         <source>Registry Editor</source>
         <translation>Редактор реестра</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="187"/>
+        <location filename="Views/SbieView.cpp" line="188"/>
         <source>Programs and Features</source>
         <translation>Программы и компоненты</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="198"/>
+        <location filename="Views/SbieView.cpp" line="199"/>
         <source>Terminate All Programs</source>
         <translation>Завершить все программы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="105"/>
-        <location filename="Views/SbieView.cpp" line="204"/>
-        <location filename="Views/SbieView.cpp" line="266"/>
-        <location filename="Views/SbieView.cpp" line="350"/>
-        <location filename="Views/SbieView.cpp" line="389"/>
+        <location filename="Views/SbieView.cpp" line="106"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="351"/>
+        <location filename="Views/SbieView.cpp" line="390"/>
         <source>Create Shortcut</source>
         <translation>Создать ярлык</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="206"/>
-        <location filename="Views/SbieView.cpp" line="334"/>
+        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="335"/>
         <source>Explore Content</source>
         <translation>Открыть в проводнике</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="208"/>
-        <location filename="Views/SbieView.cpp" line="341"/>
+        <location filename="Views/SbieView.cpp" line="209"/>
+        <location filename="Views/SbieView.cpp" line="342"/>
         <source>Snapshots Manager</source>
         <translation>Менеджер снимков</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="212"/>
         <source>Recover Files</source>
         <translation>Восстановить файлы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="212"/>
-        <location filename="Views/SbieView.cpp" line="333"/>
+        <location filename="Views/SbieView.cpp" line="213"/>
+        <location filename="Views/SbieView.cpp" line="334"/>
         <source>Delete Content</source>
         <translation>Удалить содержимое</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="219"/>
+        <location filename="Views/SbieView.cpp" line="220"/>
         <source>Sandbox Presets</source>
         <translation>Предустановки песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="221"/>
+        <location filename="Views/SbieView.cpp" line="222"/>
         <source>Ask for UAC Elevation</source>
         <translation>Запросить повышение уровня UAC</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="222"/>
+        <location filename="Views/SbieView.cpp" line="223"/>
         <source>Drop Admin Rights</source>
         <translation>Отбросить права администратора</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="223"/>
+        <location filename="Views/SbieView.cpp" line="224"/>
         <source>Emulate Admin Rights</source>
         <translation>Эмуляция прав администратора</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="231"/>
+        <location filename="Views/SbieView.cpp" line="232"/>
         <source>Block Internet Access</source>
         <translation>Блокировать доступ в Интернет</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="233"/>
+        <location filename="Views/SbieView.cpp" line="234"/>
         <source>Allow Network Shares</source>
         <translation>Разрешить сетевые ресурсы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="214"/>
+        <location filename="Views/SbieView.cpp" line="215"/>
         <source>Sandbox Options</source>
         <translation>Опции песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="181"/>
+        <location filename="Views/SbieView.cpp" line="182"/>
         <source>Standard Applications</source>
         <translation>Стандартные приложения</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="201"/>
+        <location filename="Views/SbieView.cpp" line="202"/>
         <source>Browse Files</source>
         <translation>Просмотр файлов</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="242"/>
-        <location filename="Views/SbieView.cpp" line="339"/>
+        <location filename="Views/SbieView.cpp" line="243"/>
+        <location filename="Views/SbieView.cpp" line="340"/>
         <source>Sandbox Tools</source>
         <translation>Инструменты песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="243"/>
+        <location filename="Views/SbieView.cpp" line="244"/>
         <source>Duplicate Box Config</source>
         <translation>Дублировать конфигурацию песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="247"/>
-        <location filename="Views/SbieView.cpp" line="353"/>
+        <location filename="Views/SbieView.cpp" line="248"/>
+        <location filename="Views/SbieView.cpp" line="354"/>
         <source>Rename Sandbox</source>
         <translation>Переименовать песочницу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="248"/>
-        <location filename="Views/SbieView.cpp" line="354"/>
+        <location filename="Views/SbieView.cpp" line="249"/>
+        <location filename="Views/SbieView.cpp" line="355"/>
         <source>Move Sandbox</source>
         <translation>Переместить песочницу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="259"/>
-        <location filename="Views/SbieView.cpp" line="365"/>
+        <location filename="Views/SbieView.cpp" line="260"/>
+        <location filename="Views/SbieView.cpp" line="366"/>
         <source>Remove Sandbox</source>
         <translation>Удалить песочницу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="264"/>
-        <location filename="Views/SbieView.cpp" line="387"/>
+        <location filename="Views/SbieView.cpp" line="265"/>
+        <location filename="Views/SbieView.cpp" line="388"/>
         <source>Terminate</source>
         <translation>Завершить</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="268"/>
         <source>Preset</source>
         <translation>Предустановка</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="103"/>
-        <location filename="Views/SbieView.cpp" line="268"/>
+        <location filename="Views/SbieView.cpp" line="104"/>
+        <location filename="Views/SbieView.cpp" line="269"/>
         <source>Pin to Run Menu</source>
         <translation>Закрепить в меню &apos;Запустить&apos;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="270"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Block and Terminate</source>
         <translation>Заблокировать и завершить</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="274"/>
+        <location filename="Views/SbieView.cpp" line="275"/>
         <source>Allow internet access</source>
         <translation>Разрешить доступ в Интернет</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="276"/>
+        <location filename="Views/SbieView.cpp" line="277"/>
         <source>Force into this sandbox</source>
         <translation>Принудительно в этой песочнице</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="278"/>
+        <location filename="Views/SbieView.cpp" line="279"/>
         <source>Set Linger Process</source>
         <translation>Установить вторичный процесс</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="280"/>
+        <location filename="Views/SbieView.cpp" line="281"/>
         <source>Set Leader Process</source>
         <translation>Установить первичный процесс</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="549"/>
+        <location filename="Views/SbieView.cpp" line="550"/>
         <source>    File root: %1
 </source>
         <translation>    Корень файла: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="550"/>
+        <location filename="Views/SbieView.cpp" line="551"/>
         <source>    Registry root: %1
 </source>
         <translation>    Корень реестра: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="551"/>
+        <location filename="Views/SbieView.cpp" line="552"/>
         <source>    IPC root: %1
 </source>
         <translation>    Корень IPC: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="555"/>
+        <location filename="Views/SbieView.cpp" line="556"/>
         <source>Options:
     </source>
         <translation>Опции:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="781"/>
+        <location filename="Views/SbieView.cpp" line="782"/>
         <source>[None]</source>
         <translation>[Нет]</translation>
     </message>
@@ -4836,230 +4864,229 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Пожалуйста, введите новое имя группы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="890"/>
+        <location filename="Views/SbieView.cpp" line="891"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Вы действительно хотите удалить выбранные группы?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="155"/>
-        <location filename="Views/SbieView.cpp" line="289"/>
+        <location filename="Views/SbieView.cpp" line="156"/>
+        <location filename="Views/SbieView.cpp" line="290"/>
         <source>Create Box Group</source>
         <translation>Создать группу песочниц</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="408"/>
+        <location filename="Views/SbieView.cpp" line="409"/>
         <source>Rename Group</source>
         <translation>Переименовать группу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="161"/>
-        <location filename="Views/SbieView.cpp" line="295"/>
+        <location filename="Views/SbieView.cpp" line="162"/>
+        <location filename="Views/SbieView.cpp" line="296"/>
         <source>Stop Operations</source>
         <translation>Остановить операции</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Command Prompt</source>
         <translation>Командная строка</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="191"/>
+        <location filename="Views/SbieView.cpp" line="192"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Командная строка (от администратора)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="195"/>
+        <location filename="Views/SbieView.cpp" line="196"/>
         <source>Command Prompt (32-bit)</source>
         <translation>Командная строка (32-бит)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="180"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Execute Autorun Entries</source>
         <translation>Выполнить записи автозапуска</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="340"/>
+        <location filename="Views/SbieView.cpp" line="341"/>
         <source>Browse Content</source>
         <translation>Просмотр содержимого</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="201"/>
         <source>Box Content</source>
         <translation>Содержимое песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="208"/>
         <source>Open Registry</source>
         <translation>Открыть в редакторе реестра</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="203"/>
-        <location filename="Views/SbieView.cpp" line="349"/>
+        <location filename="Views/SbieView.cpp" line="204"/>
+        <location filename="Views/SbieView.cpp" line="350"/>
         <source>Refresh Info</source>
         <translation>Обновить информацию</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="156"/>
-        <location filename="Views/SbieView.cpp" line="290"/>
+        <location filename="Views/SbieView.cpp" line="157"/>
+        <location filename="Views/SbieView.cpp" line="291"/>
         <source>Import Box</source>
         <translation>Импорт песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="174"/>
-        <location filename="Views/SbieView.cpp" line="310"/>
+        <location filename="Views/SbieView.cpp" line="175"/>
+        <location filename="Views/SbieView.cpp" line="311"/>
         <source>(Host) Start Menu</source>
         <translation>(Хост) Меню &quot;Пуск&quot;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="209"/>
-        <location filename="Views/SbieView.cpp" line="330"/>
+        <location filename="Views/SbieView.cpp" line="210"/>
+        <location filename="Views/SbieView.cpp" line="331"/>
         <source>Mount Box Image</source>
         <translation>Подключить образ диска</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="210"/>
-        <location filename="Views/SbieView.cpp" line="331"/>
+        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="332"/>
         <source>Unmount Box Image</source>
         <translation>Отключить образ песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="237"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
         <source>Immediate Recovery</source>
         <translation>Немедленное восстановление</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="239"/>
+        <location filename="Views/SbieView.cpp" line="240"/>
         <source>Disable Force Rules</source>
         <translation>Отключить принудительные правила</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="244"/>
+        <location filename="Views/SbieView.cpp" line="245"/>
         <source>Export Box</source>
         <translation>Экспорт контейнера</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="249"/>
-        <location filename="Views/SbieView.cpp" line="355"/>
+        <location filename="Views/SbieView.cpp" line="250"/>
+        <location filename="Views/SbieView.cpp" line="356"/>
         <source>Move Up</source>
         <translation>Сдвинуть вверх</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="254"/>
-        <location filename="Views/SbieView.cpp" line="360"/>
+        <location filename="Views/SbieView.cpp" line="255"/>
+        <location filename="Views/SbieView.cpp" line="361"/>
         <source>Move Down</source>
         <translation>Сдвинуть вниз</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="282"/>
+        <location filename="Views/SbieView.cpp" line="283"/>
         <source>Suspend</source>
         <translation>Приостановить</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="283"/>
+        <location filename="Views/SbieView.cpp" line="284"/>
         <source>Resume</source>
         <translation>Возобновить</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="304"/>
+        <location filename="Views/SbieView.cpp" line="305"/>
         <source>Run Web Browser</source>
         <translation>Запустить веб-браузер</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="305"/>
+        <location filename="Views/SbieView.cpp" line="306"/>
         <source>Run eMail Reader</source>
         <translation>Запустить почтовый клиент</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="306"/>
+        <location filename="Views/SbieView.cpp" line="307"/>
         <source>Run Any Program</source>
         <translation>Запустить любую программу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="307"/>
+        <location filename="Views/SbieView.cpp" line="308"/>
         <source>Run From Start Menu</source>
         <translation>Запустить из меню &quot;Пуск&quot;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="315"/>
+        <location filename="Views/SbieView.cpp" line="316"/>
         <source>Run Windows Explorer</source>
         <translation>Запустить проводник Windows</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="329"/>
+        <location filename="Views/SbieView.cpp" line="330"/>
         <source>Terminate Programs</source>
         <translation>Завершить программы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="332"/>
+        <location filename="Views/SbieView.cpp" line="333"/>
         <source>Quick Recover</source>
         <translation>Быстрое восстановление</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="337"/>
+        <location filename="Views/SbieView.cpp" line="338"/>
         <source>Sandbox Settings</source>
         <translation>Настройки песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="344"/>
+        <location filename="Views/SbieView.cpp" line="345"/>
         <source>Duplicate Sandbox Config</source>
         <translation>Дублировать конфигурацию песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="345"/>
+        <location filename="Views/SbieView.cpp" line="346"/>
         <source>Export Sandbox</source>
         <translation>Экспорт песочницы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="409"/>
+        <location filename="Views/SbieView.cpp" line="410"/>
         <source>Move Group</source>
         <translation>Переместить группу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="553"/>
+        <location filename="Views/SbieView.cpp" line="554"/>
         <source>    Disk root: %1
 </source>
         <translation>    Корень диска: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="880"/>
+        <location filename="Views/SbieView.cpp" line="881"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Пожалуйста, введите новое имя для группы.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="927"/>
+        <location filename="Views/SbieView.cpp" line="928"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Сдвинуть записи на (отрицательные значения сдвигают вверх, положительные значения сдвигают вниз):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="975"/>
+        <location filename="Views/SbieView.cpp" line="976"/>
         <source>A group can not be its own parent.</source>
         <translation>Группа не может быть собственным родителем.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1057"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
+        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1058"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>Не удалось открыть архив, неверный пароль?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1066"/>
+        <location filename="Views/SbieView.cpp" line="1067"/>
         <source>Failed to open archive (%1)!</source>
         <translation>Не удалось открыть архив (%1)!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1080"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
+        <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation>Это имя уже используется, выберите другое имя песочницы</translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="1090"/>
-        <source>Importing Sandbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="1090"/>
-        <source>Do you want to select custom root folder?</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Это имя уже используется, выберите другое имя песочницы</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5116,16 +5143,14 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>%1 Копия</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>Select file name</source>
         <translation>Выберите имя файла</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation>7-zip архив (*.7z)</translation>
+        <translation type="vanished">7-zip архив (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -5380,39 +5405,39 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="539"/>
         <source>HwId: %1</source>
         <translation>HwId: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="621"/>
+        <location filename="Windows/SettingsWindow.cpp" line="629"/>
         <source>Search for settings</source>
         <translation>Поиск настроек</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="851"/>
-        <location filename="Windows/SettingsWindow.cpp" line="852"/>
-        <location filename="Windows/SettingsWindow.cpp" line="862"/>
+        <location filename="Windows/SettingsWindow.cpp" line="859"/>
+        <location filename="Windows/SettingsWindow.cpp" line="860"/>
+        <location filename="Windows/SettingsWindow.cpp" line="870"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Запуск в песочнице (&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1169"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1177"/>
         <source>kilobytes (%1)</source>
         <translation>килобайт (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1259"/>
         <source>Volume not attached</source>
         <translation>Том не прикреплён</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1264"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1272"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Вы использовали %1/%2 ознакомительных сертификатов. Больше бесплатные сертификаты генерироваться не будут.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1266"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1274"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Получите бесплатный ознакомительный сертификат&lt;/a&gt; и пользуйтесь всеми премиум-функциями в течение %1 дня.&lt;/b&gt;</translation>
     </message>
@@ -5421,17 +5446,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">Вы можете запросить бесплатный %1-дневный ознакомительный сертификат не более %2 раз для одного Hardware ID</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1280"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника истек. Пожалуйста, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1285"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1293"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;В текущей сборке функции Plus остаются включенными&lt;/font&gt;, но у вас больше нет доступа к службам Sandboxie-Live, включая обновления совместимости и базу данных для устранения неполадок.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1293"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника &lt;font color=&apos;red&apos;&gt;истечет через %1&#xa0;дн.&lt;/font&gt;. Пожалуйста, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
@@ -5440,187 +5465,187 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">Истекает через: %1 дн</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation type="unfinished">Истек: %1 дн. назад</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
         <source>Options: %1</source>
         <translation>Опции: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Песочницы для приложений с улучшенной безопасностью и конф-тью (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1347"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1355"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Disabled</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1356"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Зашифрованные песочницы (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1349"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1357"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Перехват сети (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1350"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1358"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1365"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1373"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Это не похоже на серийный номер Sandboxie-Plus.&lt;br /&gt;Если вы пытались ввести ключ обновления или подпись из сертификата, что не является правильным, пожалуйста, введите весь сертификат в текстовую область выше.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1372"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1380"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <translation>Вы пытаетесь использовать ключ обновления функции без ввода ранее существовавшего сертификата поддержки. Обратите внимание, что для этого типа ключа (&lt;b&gt;как это четко указано жирным шрифтом на веб-сайте&lt;/b) требуется наличие уже существующего действующего сертификата поддержки; без него ключ бесполезен.&lt;br /&gt;Если вы хотите использовать расширенные функции, вам необходимо получить как стандартный сертификат, так и ключ обновления функции, чтобы разблокировать расширенные функции.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1378"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <translation>Вы пытаетесь использовать ключ продления без ввода ранее существовавшего сертификата поддержки. Обратите внимание, что для этого типа ключа (&lt;b&gt;как это четко указано жирным шрифтом на веб-сайте&lt;/b) требуется наличие уже существующего действующего сертификата поддержки; без него ключ бесполезен.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1383"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Если вы не прочитали описание продукта и получили этот ключ по ошибке, пожалуйста, свяжитесь с нами по электронной почте (указанной на нашем сайте), чтобы решить эту проблему.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1419"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - Получить ОЗНАКОМИТЕЛЬНЫЙ сертификат</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1411"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1419"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Введите адрес электронной почты, чтобы получить бесплатный ознакомительный сертификат на %1 дней, который будет выдан на %2 и привязан к текущему оборудованию.
 Вы можете запросить до %3 ознакомительных сертификатов для каждого уникального Hardware ID.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Error retrieving certificate: %1</source>
         <translation>Ошибка при получении сертификата: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1437"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1445"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Неизвестная ошибка (вероятно, проблема с сетью)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1493"/>
         <source>Contributor</source>
         <translation>Участник</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
         <source>Eternal</source>
         <translation>Вечный</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1489"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
         <source>Business</source>
         <translation>Бизнес</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1491"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
         <source>Personal</source>
         <translation>Персональный</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1493"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
         <source>Great Patreon</source>
         <translation>Большой Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1503"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1505"/>
         <source>Family</source>
         <translation>Семья</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1509"/>
         <source>Evaluation</source>
         <translation>Оценка</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1503"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1511"/>
         <source>Type %1</source>
         <translation>Тип %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Advanced</source>
         <translation>Расширенный</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1533"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Advanced (L)</source>
         <translation>Расширенный (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Max Level</source>
         <translation>Максимальный уровень</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>Level %1</source>
         <translation>Уровень %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1562"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
         <source>Supporter certificate required for access</source>
         <translation>Для доступа требуется сертификат сторонника</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1579"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
         <source>Supporter certificate required for automation</source>
         <translation>Для автоматизации требуется сертификат сторонника</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2013"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2021"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>К сожалению, этот сертификат недействителен для текущей сборки, вам необходимо получить новый сертификат или перейти на более раннюю сборку.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2015"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2023"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Хотя срок действия этого сертификата истек, для текущей установленной версии плюс функции остаются включенными. Однако у вас больше не будет доступа к службам Sandboxie-Live, включая обновления совместимости и онлайн-базу данных для устранения неполадок.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2017"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2025"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Срок действия этого сертификата, к сожалению, истек, вам необходимо получить новый сертификат.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="883"/>
+        <location filename="Windows/SettingsWindow.cpp" line="891"/>
         <source>Sandboxed Web Browser</source>
         <translation>Веб-браузер в песочнице</translation>
     </message>
@@ -5643,200 +5668,200 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>Загрузить и установить</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="379"/>
+        <location filename="Windows/SettingsWindow.cpp" line="387"/>
         <source>Browse for Program</source>
         <translation>Выбрать программу</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="495"/>
         <source>Add %1 Template</source>
         <translation>Добавить шаблон %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="576"/>
         <source>Select font</source>
         <translation>Выбор шрифта</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="570"/>
+        <location filename="Windows/SettingsWindow.cpp" line="578"/>
         <source>Reset font</source>
         <translation>Сброс шрифта</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="630"/>
+        <location filename="Windows/SettingsWindow.cpp" line="638"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="732"/>
+        <location filename="Windows/SettingsWindow.cpp" line="740"/>
         <source>Please enter message</source>
         <translation>Пожалуйста, введите сообщение</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="772"/>
         <source>Select Program</source>
         <translation>Выбрать программу</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="764"/>
+        <location filename="Windows/SettingsWindow.cpp" line="772"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Исполняемые файлы (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="768"/>
-        <location filename="Windows/SettingsWindow.cpp" line="784"/>
+        <location filename="Windows/SettingsWindow.cpp" line="776"/>
+        <location filename="Windows/SettingsWindow.cpp" line="792"/>
         <source>Please enter a menu title</source>
         <translation>Введите название меню</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="780"/>
+        <location filename="Windows/SettingsWindow.cpp" line="788"/>
         <source>Please enter a command</source>
         <translation>Введите команду</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1275"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation type="unfinished">Вы можете запросить бесплатный %1-дневный ознакомительный сертификат не более %2 раз для одного Hardware ID</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1283"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Дополнительные функции будут отключены через %1 дн.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1287"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1295"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Дополнительные функции больше не включены.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1339"/>
         <source>Expired: %1 days ago</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1431"/>
         <source>Retrieving certificate...</source>
         <translation>Получение сертификата...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1507"/>
         <source>Home</source>
         <translation>Домашняя</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1694"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Запуск вне песочницы (&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1702"/>
         <source>Set Force in Sandbox</source>
         <translation>Установить принудительно в песочнице</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1703"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1711"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Установить путь открытия в песочнице</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1993"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2001"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Это не похоже на сертификат. Пожалуйста, введите весь сертификат, а не только его часть.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2021"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2029"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Ознакомительный сертификат успешно применен. Наслаждайтесь бесплатной пробной версией!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2023"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2031"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Спасибо за поддержку разработки Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2080"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2088"/>
         <source>Update Available</source>
         <translation>Доступно обновление</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2082"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2090"/>
         <source>Installed</source>
         <translation>Установлен</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2087"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
         <source>by %1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2095"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2103"/>
         <source>(info website)</source>
         <translation>(информационный сайт)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2122"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2130"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Это дополнение является обязательным и не может быть удалено.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2277"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2285"/>
         <source>Select Directory</source>
         <translation>Выбрать каталог</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2160"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2168"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Проверить сейчас&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2245"/>
         <source>Please enter the new configuration password.</source>
         <translation>Пожалуйста, введите новый пароль конфигурации.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2241"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2249"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Пожалуйста, повторно введите новый пароль конфигурации.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2246"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2254"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Пароли не совпадают, повторите попытку.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2266"/>
         <source>Process</source>
         <translation>Процесс</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2266"/>
         <source>Folder</source>
         <translation>Папка</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2276"/>
         <source>Please enter a program file name</source>
         <translation>Пожалуйста, введите имя файла программы</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2344"/>
         <source>Please enter the template identifier</source>
         <translation>Пожалуйста, введите идентификатор шаблона</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2352"/>
         <source>Error: %1</source>
         <translation>Ошибка: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2376"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2384"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Вы действительно хотите удалить выбранные локальные шаблоны?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2586"/>
         <source>%1 (Current)</source>
         <translation>%1 (Текущая)</translation>
     </message>
@@ -6073,76 +6098,76 @@ Try submitting without the log attached.</source>
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1005"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1013"/>
         <source>Create the new Sandbox</source>
         <translation>Создать новую песочницу</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1016"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1024"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>Почти завершено, нажмите &quot;Готово&quot;, чтобы создать новую песочницу и завершить работу мастера.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1025"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1033"/>
         <source>Save options as new defaults</source>
         <translation>Сохранить опции как новые значения по умолчанию</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1036"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1044"/>
         <source>Skip this summary page when advanced options are not set</source>
         <translation>Пропустить эту страницу сводки, если расширенные опции не установлены</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1055"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1063"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 Эта песочница будет сохранена в: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1058"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1066"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <translation>
 Содержимое этой песочницы будет ПОТЕРЯНО, когда она будет закрыта, и песочница будет удалена.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1060"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 Эта песочница ТЕРЯЕТ свое содержимое, при закрытии, она подходит только для временных данных.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1062"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1070"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 Процессы в этой песочнице не смогут получить доступ к Интернету или локальной сети, это гарантирует, что все данные, к которым осуществляется доступ, останутся конфиденциальными.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1064"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1072"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <translation>
 В этой песочнице будет запускаться MSIServer (служба установщика *.msi) с системным токеном, это улучшает совместимость, но снижает изоляцию безопасности.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1066"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1074"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 Процессы в этой песочнице будут думать, что они запущены с правами администратора, но на самом деле не имеют их, поэтому установщики можно использовать даже в защищенной песочнице.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1076"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <translation>
 Процессы в этой песочнице будут запускаться с пользовательским токеном процесса, указывающим на песочницу, к которой они принадлежат.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1107"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1115"/>
         <source>Failed to create new box: %1</source>
         <translation>Не удалось создать новую песочницу: %1</translation>
     </message>
@@ -6767,34 +6792,67 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <translation>Сжатие файлов</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="38"/>
+        <location filename="Forms/CompressDialog.ui" line="58"/>
         <source>Compression</source>
         <translation>Сжатие</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="45"/>
+        <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
         <translation>При активации, вам будет предложено ввести пароль после нажатия кнопки ОК</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="48"/>
+        <location filename="Forms/CompressDialog.ui" line="41"/>
         <source>Encrypt archive content</source>
         <translation>Зашифровать содержимое архива</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="55"/>
+        <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
         <translation>Непрерывное архивирование повышает степень сжатия, представляя несколько файлов как один непрерывный блок данных. Идеально подходит для большого количества небольших файлов, делает архив более компактным, но может увеличить время, необходимое для извлечения отдельных файлов.</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="58"/>
+        <location filename="Forms/CompressDialog.ui" line="51"/>
         <source>Create Solide Archive</source>
         <translation>Создать непрерывный архив</translation>
     </message>
     <message>
-        <location filename="Forms/CompressDialog.ui" line="65"/>
-        <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>Экспорт песочницы в архив 7z, выберите степень сжатия и настройте дополнительные параметры сжатия.</translation>
+        <location filename="Forms/CompressDialog.ui" line="75"/>
+        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <oldsource>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="obsolete">Экспорт песочницы в архив 7z, выберите степень сжатия и настройте дополнительные параметры сжатия.</translation>
+    </message>
+</context>
+<context>
+    <name>ExtractDialog</name>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="14"/>
+        <source>Extract Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="25"/>
+        <source>Export Sandbox from an archive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="35"/>
+        <source>Import Sandbox Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="42"/>
+        <source>Box Root Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="62"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>

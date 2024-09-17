@@ -75,7 +75,7 @@ public:
 	virtual QString			GetDisplayName() const;
 
 	SB_PROGRESS				ExportBox(const QString& FileName, const QString& Password = "", int Level = 5, bool Solid = false);
-	SB_PROGRESS				ImportBox(const QString& FileName, const QString& RootFolder,const QString& Password);
+	SB_PROGRESS				ImportBox(const QString& FileName, const QString& Password);
 
 	virtual void			UpdateDetails();
 

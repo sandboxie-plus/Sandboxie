@@ -1816,7 +1816,7 @@ _FX LONG SbieApi_GetUnmountHive(
 //---------------------------------------------------------------------------
 
 
-_FX LONG SbieApi_SessionLeader(HANDLE TokenHandle, HANDLE *ProcessId)
+_FX LONG SbieApi_SessionLeader(ULONG session_id, HANDLE *ProcessId)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 ResultValue;
@@ -1826,9 +1826,11 @@ _FX LONG SbieApi_SessionLeader(HANDLE TokenHandle, HANDLE *ProcessId)
     memset(parms, 0, sizeof(parms));
     args->func_code               = API_SESSION_LEADER;
     if (ProcessId) {
-        args->token_handle.val64  = (ULONG64)(ULONG_PTR)TokenHandle;
+        args->session_id.val64    = (ULONG64)(ULONG_PTR)session_id;
+        args->token_handle.val64  = 0;
         args->process_id.val64    = (ULONG64)(ULONG_PTR)&ResultValue;
     } else {
+        args->session_id.val64    = 0;
         args->token_handle.val64  = 0;
         args->process_id.val64    = 0;
     }

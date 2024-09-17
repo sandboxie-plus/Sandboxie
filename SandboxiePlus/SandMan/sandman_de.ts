@@ -822,12 +822,12 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="27"/>
         <source>7-Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="28"/>
         <source>Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Zip</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="30"/>
@@ -865,17 +865,17 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="23"/>
         <source>Sandboxie-Plus - Sandbox Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Sandbox Import</translation>
     </message>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="39"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Ordner auswählen</translation>
+        <translation>Ordner auswählen</translation>
     </message>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="59"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation type="unfinished">Dieser Name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
+        <translation>Dieser Name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
     </message>
 </context>
 <context>
@@ -4978,7 +4978,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
         <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation>7-zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
+        <translation>7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1058"/>
@@ -4989,18 +4989,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="1067"/>
         <source>Failed to open archive (%1)!</source>
         <translation>Fehler beim Öffnen des Archivs (%1)!</translation>
-    </message>
-    <message>
-        <source>This name is already in use, please select an alternative box name</source>
-        <translation type="vanished">Dieser Name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
-    </message>
-    <message>
-        <source>Importing Sandbox</source>
-        <translation type="vanished">Sandbox importieren</translation>
-    </message>
-    <message>
-        <source>Do you want to select custom root folder?</source>
-        <translation type="vanished">Möchten Sie einen eigenen Quellordner auswählen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1108"/>
@@ -5059,7 +5047,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1427"/>
@@ -6816,7 +6804,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
-        <translation>Solide Archivierung verbessert die Kompressionsverhältnisse, indem sie mehrere Dateien als einen einzigen zusammenhängenden Datenblock behandelt. Ideal für eine große Anzahl von kleinen Dateien. Sie macht das Archiv kompakter, kann aber den Zeitaufwand für das Extrahieren einzelner Dateien erhöhen.</translation>
+        <translation>Solide Archivierung verbessert die Kompressionsverhältnisse, indem sie mehrere Dateien als einen einzigen zusammenhängenden Datenblock behandelt. Ideal für eine große Anzahl von kleinen Dateien. Sie macht das Archiv kompakter, kann aber den Zeitaufwand für das Entpacken einzelner Dateien erhöhen.</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="51"/>
@@ -6826,11 +6814,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
         <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation type="vanished">Exportieren Sie die Sandbox in ein 7z- oder Zip-Archiv, wählen Sie Ihre Komprimierungsrate und passen Sie zusätzliche Komprimierungseinstellungen an.</translation>
+        <translation>Exportieren Sie die Sandbox in ein Archiv, wählen Sie Ihre Komprimierungsrate und passen Sie zusätzliche Komprimierungseinstellungen an.</translation>
     </message>
 </context>
 <context>
@@ -6838,27 +6822,27 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/ExtractDialog.ui" line="14"/>
         <source>Extract Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien entpacken</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
         <source>Export Sandbox from an archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportiere Sandbox aus einem Archiv</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>
         <source>Import Sandbox Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name für importierte Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="42"/>
         <source>Box Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxquellordner</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="62"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>

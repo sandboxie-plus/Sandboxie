@@ -1005,12 +1005,12 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="27"/>
         <source>7-Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="28"/>
         <source>Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Zip</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="30"/>
@@ -1048,17 +1048,17 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="23"/>
         <source>Sandboxie-Plus - Sandbox Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 导入沙盒</translation>
     </message>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="39"/>
         <source>Select Directory</source>
-        <translation type="unfinished">选择目录</translation>
+        <translation>选择目录</translation>
     </message>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="59"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation type="unfinished">名称已占用，请选择其他沙盒名</translation>
+        <translation>名称已占用，请选择其他沙盒名</translation>
     </message>
 </context>
 <context>
@@ -5449,7 +5449,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip 压缩包 (*.7z);;Zip 压缩包 (*.zip)</translation>
     </message>
     <message>
         <source>This name is already in use, please select an alternative box name</source>
@@ -5685,7 +5685,7 @@ Error: %1</source>
         <location filename="Windows/SettingsWindow.cpp" line="110"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie-Plus - Global Settings</oldsource>
-        <translation type="unfinished">Sandboxie-Plus - 全局设置</translation>
+        <translation>Sandboxie-Plus - 全局设置</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="207"/>
@@ -7326,7 +7326,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
         <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>将沙盒导出到压缩包，选择压缩率并自定义其他压缩设置。</translation>
     </message>
     <message>
         <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
@@ -7338,27 +7338,27 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/ExtractDialog.ui" line="14"/>
         <source>Extract Files</source>
-        <translation type="unfinished"></translation>
+        <translation>提取文件</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
         <source>Export Sandbox from an archive</source>
-        <translation type="unfinished"></translation>
+        <translation>导出沙盒到压缩文件</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>
         <source>Import Sandbox Name</source>
-        <translation type="unfinished"></translation>
+        <translation>导入沙盒名称</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="42"/>
         <source>Box Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒根目录</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="62"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>

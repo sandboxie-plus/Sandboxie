@@ -985,12 +985,12 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="27"/>
         <source>7-Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="28"/>
         <source>Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Zip</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="30"/>
@@ -1028,17 +1028,17 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="23"/>
         <source>Sandboxie-Plus - Sandbox Import</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="39"/>
         <source>Select Directory</source>
-        <translation type="unfinished">디렉터리 선택</translation>
+        <translation>디렉터리 선택</translation>
     </message>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="59"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation type="unfinished">이 이름은 이미 사용 중입니다. 다른 박스 이름을 선택하세요</translation>
+        <translation>이 이름은 이미 사용 중입니다. 다른 박스 이름을 선택하세요</translation>
     </message>
 </context>
 <context>
@@ -5513,7 +5513,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip 압축파일 (*.7z);;Zip 압축파일 (*.zip)</translation>
     </message>
     <message>
         <source>This name is already in use, please select an alternative box name</source>
@@ -7426,7 +7426,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
         <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스를 압출파일로 내보내고, 압축률을 선택하고, 추가 압축 설정을 사용자 지정합니다.</translation>
     </message>
     <message>
         <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
@@ -7439,27 +7439,27 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/ExtractDialog.ui" line="14"/>
         <source>Extract Files</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 추출</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
         <source>Export Sandbox from an archive</source>
-        <translation type="unfinished"></translation>
+        <translation>압축파일에서 샌드박스 내보내기</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>
         <source>Import Sandbox Name</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 이름 가져오기</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="42"/>
         <source>Box Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 루트 폴더</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="62"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>

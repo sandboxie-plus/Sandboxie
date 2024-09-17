@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - \\??\\%SystemDrive%\\Sandbox\\%SANDBOX%
   - \\??\\%SystemDrive%\\Users\\%USER%\Sandbox\\%SANDBOX%
 - added Sandbox Import dialog
+- added a menu action to clean boxes after the machine reboot
 
 ### Changed
 - sandbox root selection in global settings is now a combo box
@@ -22,9 +23,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [1.14.8 / 5.69.8] - 2024-09-09
-
-### Added
-- added a menu action to clean boxes after the machine reboot
 
 ### Changed
 - allow users to import/export boxes with .zip files [#4200](https://github.com/sandboxie-plus/Sandboxie/pull/4200)

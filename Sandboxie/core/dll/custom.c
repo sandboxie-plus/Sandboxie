@@ -1630,8 +1630,16 @@ ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigne
                     memcpy(pEntry->Address, lpMac, 8);
 		        else
 		        {
-			        *(DWORD*)&pEntry->Address[0] = Dll_rand();
-                    *(DWORD*)&pEntry->Address[4] = Dll_rand();
+					DWORD mac = SbieApi_QueryConfNumber(NULL, L"MacAddressValue1", 0);
+					DWORD mac2 = SbieApi_QueryConfNumber(NULL,L"MacAddressValue2",0);
+					if (mac != 0 && mac2 != 0) {
+						*(DWORD*)&pEntry->Address[0] = mac;
+						*(DWORD*)&pEntry->Address[4] = mac2;
+					}
+					else {
+						*(DWORD*)&pEntry->Address[0] = Dll_rand();
+						*(DWORD*)&pEntry->Address[4] = Dll_rand();
+					}
 			        map_insert(&Custom_NicMac, (void*)key, pEntry->Address, 8);
 		        }
 

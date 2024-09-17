@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - \\??\\%SystemDrive%\\Sandbox\\%SANDBOX%
   - \\??\\%SystemDrive%\\Users\\%USER%\Sandbox\\%SANDBOX%
 - added Sandbox Import dialog
+- added "MacAddressValue1"(Number) and "MacAddressValue2"(Number) to set MAC address for each box(You must set both two options at the same time).
 
 ### Changed
 - sandbox root selection in global settings is now a combo box

@@ -533,7 +533,11 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 			*lpVolumeSerialNumber = *lpCachedSerialNumber;
 		else
 		{
-			*lpVolumeSerialNumber = Dll_rand();
+			DWORD conf = SbieApi_QueryConfNumber(NULL, L"DiskSerialNumberValue", 0);
+			if (conf == 0)
+				*lpVolumeSerialNumber = Dll_rand();
+			else
+				*lpVolumeSerialNumber = conf;
 
 			map_insert(&Kernel_DiskSN, key, lpVolumeSerialNumber, sizeof(DWORD));
 		}

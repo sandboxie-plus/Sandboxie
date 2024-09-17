@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - \\??\\%SystemDrive%\\Sandbox\\%SANDBOX%
   - \\??\\%SystemDrive%\\Users\\%USER%\Sandbox\\%SANDBOX%
 - added Sandbox Import dialog
+- added "DiskSerialNumberValue"(Number) to set Disk Serial Number for indivdal box.
 
 ### Changed
 - sandbox root selection in global settings is now a combo box

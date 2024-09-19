@@ -5609,11 +5609,6 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>[Aucun]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1041"/>
-        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="1058"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>Échec d&apos;ouverture de l&apos;archive ; mot de passe erroné ?</translation>
@@ -5624,6 +5619,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Échec d&apos;ouverture de l&apos;archive (%1) !</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation type="unfinished"></translation>
@@ -7635,7 +7631,8 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
-        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
+        <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7653,7 +7650,8 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
-        <source>Export Sandbox from an archive</source>
+        <source>Import Sandbox from an archive</source>
+        <oldsource>Export Sandbox from an archive</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

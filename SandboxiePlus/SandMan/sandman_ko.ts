@@ -5496,9 +5496,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>그룹은 자신의 상위 그룹이 될 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1041"/>
         <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation>7-zip 압축파일 (*.7z);;Zip 압축파일 (*.zip)</translation>
+        <translation type="vanished">7-zip 압축파일 (*.7z);;Zip 압축파일 (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1058"/>
@@ -5511,6 +5510,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>압축파일 (%1)를 열지 못했습니다!</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-Zip 압축파일 (*.7z);;Zip 압축파일 (*.zip)</translation>
@@ -7425,8 +7425,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
-        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>샌드박스를 압출파일로 내보내고, 압축률을 선택하고, 추가 압축 설정을 사용자 지정합니다.</translation>
+        <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
+        <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="unfinished">샌드박스를 압출파일로 내보내고, 압축률을 선택하고, 추가 압축 설정을 사용자 지정합니다.</translation>
     </message>
     <message>
         <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
@@ -7443,8 +7444,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
-        <source>Export Sandbox from an archive</source>
-        <translation>압축파일에서 샌드박스 내보내기</translation>
+        <source>Import Sandbox from an archive</source>
+        <oldsource>Export Sandbox from an archive</oldsource>
+        <translation type="unfinished">압축파일에서 샌드박스 내보내기</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>

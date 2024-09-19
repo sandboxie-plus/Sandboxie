@@ -5099,9 +5099,8 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Girişleri hareket ettir (negatif değerler yukarı, pozitif değerler aşağı hareket eder):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1041"/>
         <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation>7-Zip Arşivi (*.7z);;Zip Arşivi (*.zip)</translation>
+        <translation type="vanished">7-Zip Arşivi (*.7z);;Zip Arşivi (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1058"/>
@@ -5142,6 +5141,7 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Dosya adı seçin</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation type="unfinished"></translation>
@@ -6805,7 +6805,8 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
-        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
+        <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6822,7 +6823,8 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
-        <source>Export Sandbox from an archive</source>
+        <source>Import Sandbox from an archive</source>
+        <oldsource>Export Sandbox from an archive</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

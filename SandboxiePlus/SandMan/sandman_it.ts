@@ -5355,11 +5355,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <translation>Un gruppo non può essere il proprio genitore.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1041"/>
-        <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="1058"/>
         <source>Failed to open archive, wrong password?</source>
         <translation type="unfinished"></translation>
@@ -5429,6 +5424,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <translation type="vanished">Archivio 7-zip (*.7z)</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation type="unfinished"></translation>
@@ -7193,7 +7189,8 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
-        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
+        <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7206,7 +7203,8 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
-        <source>Export Sandbox from an archive</source>
+        <source>Import Sandbox from an archive</source>
+        <oldsource>Export Sandbox from an archive</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

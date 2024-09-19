@@ -4976,9 +4976,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Eine Gruppe kann nicht seine eigene Quelle sein.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1041"/>
         <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation>7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
+        <translation type="vanished">7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1058"/>
@@ -5045,6 +5044,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>%1 Kopie</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1041"/>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
@@ -6813,8 +6813,9 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
-        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation>Exportieren Sie die Sandbox in ein Archiv, wählen Sie Ihre Komprimierungsrate und passen Sie zusätzliche Komprimierungseinstellungen an.</translation>
+        <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
+        <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
+        <translation type="unfinished">Exportieren Sie die Sandbox in ein Archiv, wählen Sie Ihre Komprimierungsrate und passen Sie zusätzliche Komprimierungseinstellungen an.</translation>
     </message>
 </context>
 <context>
@@ -6826,8 +6827,9 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
-        <source>Export Sandbox from an archive</source>
-        <translation>Exportiere Sandbox aus einem Archiv</translation>
+        <source>Import Sandbox from an archive</source>
+        <oldsource>Export Sandbox from an archive</oldsource>
+        <translation type="unfinished">Exportiere Sandbox aus einem Archiv</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>

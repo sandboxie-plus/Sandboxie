@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.14.9 / 5.69.9] - 2024-09-??
+## [1.14.9 / 5.69.9] - 2024-09-19
 
 ### Added
 - added alternative default sandbox paths to the box wizard:

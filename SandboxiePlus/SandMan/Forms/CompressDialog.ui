@@ -72,7 +72,7 @@
      <item row="0" column="0" colspan="3">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</string>
+        <string>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>

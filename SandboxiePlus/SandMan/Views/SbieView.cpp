@@ -1402,7 +1402,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
                 QMessageBox::Yes, QMessageBox::No)==QMessageBox::Yes){
                 if(MoveFileExA(fileRoot.toStdString().c_str(),NULL,4)==0){
                     QMessageBox::warning(this, tr("Sandboxie-Plus"),
-                    tr("The operation failed,please make sure that Sandman has admin privliage.")
+                    tr("The operation failed. Please make sure that SandMan has administrative privileges.")
                     , QMessageBox::Yes, 0);
                 }
             }

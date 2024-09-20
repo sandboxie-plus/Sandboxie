@@ -1395,7 +1395,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 		QString fileRoot=pBoxEx->GetFileRoot();
 		if(QMessageBox::question(this, tr("Sandboxie-Plus"), 
-		tr("Do you want to make the box cleaned after machine reboot?"), 
+		tr("Do you want the box to be cleaned after the machine reboots?"), 
 		QMessageBox::Yes, QMessageBox::No)==QMessageBox::Yes){
             if(QMessageBox::question(this, tr("Sandboxie-Plus"),
             tr("Do you want to use the Windows deleting function (MoveFileEx), or delete the box when SandMan.exe starts?"),

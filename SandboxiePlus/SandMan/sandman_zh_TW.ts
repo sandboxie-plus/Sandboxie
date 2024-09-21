@@ -6430,7 +6430,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
 Before sending you can review the logs in the main window.</oldsource>
-        <translation>以部分核取狀態選中以僅發送訊息日誌，而無追蹤日誌。
+        <translation>以部分選中狀態核取以僅發送訊息日誌，而無追蹤日誌。
 在發送前您可以在主視窗中檢查日誌。</translation>
     </message>
     <message>
@@ -9549,7 +9549,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1033"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation>* 部分核取的項目核取方塊之行為取決於其檢視模式。</translation>
+        <translation>* 部分選中的核取方塊之行為取決於其檢視模式。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1991"/>

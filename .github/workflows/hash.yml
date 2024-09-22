@@ -1,0 +1,146 @@
+name: Hash Released Files
+
+on:
+  release:
+    types:
+      - published  # Trigger the workflow when a release, pre-release, or draft of a release was published
+      - edited     # Trigger the workflow when The details of a release, pre-release, or draft release were edited
+
+concurrency:
+  group: hash-${{ github.event.release.tag_name }}  # Use the release tag name for concurrency
+  cancel-in-progress: true  # Cancel any in-progress runs for the same group
+
+jobs:
+  calculate-hashes:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    if: github.repository == 'sandboxie-plus/Sandboxie'  # Only run this job if the event is from the specified repository
+    permissions:
+      contents: write  # Allow writing to the repository's contents
+
+    env:
+      HASH_FILE: "sha256-checksums.txt"  # Name of the file for storing SHA256 hashes
+
+    steps:
+      - name: Download release assets
+        run: |
+          mkdir -p assets  # Create a directory for downloaded assets
+          TAG=${{ github.event.release.tag_name }}  # Get the release tag name
+          
+          # Fetch asset data from GitHub API
+          ASSET_DATA=$(curl -sSL \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/$TAG")
+          
+          ASSET_URLS=($(echo "$ASSET_DATA" | jq -r '.assets[].browser_download_url'))  # Extract asset URLs
+          ASSET_NAMES=($(echo "$ASSET_DATA" | jq -r '.assets[].name'))  # Extract asset names
+
+          # Download each asset
+          for i in "${!ASSET_URLS[@]}"; do
+            url="${ASSET_URLS[i]}"  # Current asset URL
+            name="${ASSET_NAMES[i]}"  # Current asset name
+            echo "Downloading: $url"
+            if ! curl --fail -L -o "assets/$name" "$url"; then
+              echo "Failed to download: $url"
+              exit 1  # Exit on failure
+            fi
+          done
+
+      - name: Check for downloaded assets
+        id: check_assets
+        run: |
+          # Check if any assets were downloaded (excluding the hash file)
+          if [ "$(ls -A assets | grep -v ${{ env.HASH_FILE }})" ]; then
+            echo "Assets downloaded."
+            echo "assets_downloaded=true" >> $GITHUB_ENV
+          else
+            echo "No assets downloaded."
+            echo "assets_downloaded=false" >> $GITHUB_ENV
+          fi
+
+      - name: Calculate file hashes
+        if: env.assets_downloaded == 'true'  # Only run if assets were downloaded
+        run: |
+          cd assets  # Change to the assets directory
+          ls -la  # List files for debugging
+          > "../${{ env.HASH_FILE }}"  # Clear or create the hash file
+
+          # Loop through each file and calculate its SHA256 hash
+          for file in *; do
+            if [[ "$file" == "${{ env.HASH_FILE }}" ]]; then  # Skip the hash file itself
+              echo "Skipping: $file"
+              continue
+            fi
+            echo "Calculating hash for: $file"
+            hash_value=$(sha256sum "$file" | awk '{ print $1 }')  # Calculate the hash
+            echo "$hash_value  $file" >> "../${{ env.HASH_FILE }}"  # Append hash to the hash file
+          done
+          # Change back to the previous directory to reference the new hash file
+          cd ..
+          cat "${{ env.HASH_FILE }}"  # Display the contents of the new hash file
+
+      - name: Check and upload hashes to release
+        if: env.assets_downloaded == 'true'  # Only run if assets were downloaded
+        run: |
+          # Get the Release ID using the GitHub API
+          RELEASE_ID=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.event.release.tag_name }}" | \
+            jq -r '.id')
+
+          echo "Release ID: $RELEASE_ID"
+
+          # Check if an existing hash file asset is present
+          EXISTING_HASH_FILE="assets/${{ env.HASH_FILE }}"
+          if [ -f "$EXISTING_HASH_FILE" ]; then
+            echo "Found existing hash file. Comparing..."
+            # Print the contents of both files for debugging
+            echo "New hash file contents:"
+            cat "${{ env.HASH_FILE }}"
+
+            echo "Existing hash file contents:"
+            cat "$EXISTING_HASH_FILE"
+
+            # Compare the new hash file with the existing one
+            if cmp -s "${{ env.HASH_FILE }}" "$EXISTING_HASH_FILE"; then
+              echo "Hashes are the same. Skipping upload."
+              exit 0  # Exit if hashes are the same
+            else
+              echo "Hashes are different."
+              # Show differences for debugging
+              diff "${{ env.HASH_FILE }}" "$EXISTING_HASH_FILE" || true
+
+              # Proceed to delete the existing asset if necessary
+              EXISTING_ASSET_ID=$(curl -sL \
+                -H "Accept: application/vnd.github+json" \
+                -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                "https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets" | \
+                jq -r --arg FILE_NAME "${{ env.HASH_FILE }}" '.[] | select(.name == $FILE_NAME) | .id')
+
+              if [ -n "$EXISTING_ASSET_ID" ]; then
+                echo "Deleting existing asset..."
+                curl -sL \
+                  -X DELETE \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                  -H "X-GitHub-Api-Version: 2022-11-28" \
+                  "https://api.github.com/repos/${{ github.repository }}/releases/assets/$EXISTING_ASSET_ID" || { echo "Failed to delete asset"; exit 1; }
+              fi
+            fi
+          else
+            echo "No existing hash file found."
+          fi
+
+          # Upload the new hash file to the release
+          echo "Uploading new hash file..."
+          curl -sL \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "Content-Type: application/octet-stream" \
+            "https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=${{ env.HASH_FILE }}" \
+            --data-binary @"${{ github.workspace }}/${{ env.HASH_FILE }}" || { echo "Failed to upload hash file"; exit 1; }

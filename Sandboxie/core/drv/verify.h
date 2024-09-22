@@ -37,8 +37,8 @@ typedef union _SCertInfo {
             opt_desk    : 1,    // Isolated Sandboxie Desktops:             "UseSandboxDesktop"
             opt_net     : 1,    // Advanced Network features:               "NetworkDnsFilter", "NetworkUseProxy".
             opt_enc     : 1,    // Box Encryption and Box Protection:       "ConfidentialBox", "UseFileImage", "EnableEFS".
-            opt_sec     : 1;    // Variouse security enchanced box types:   "UseSecurityMode", "SysCallLockDown", "RestrictDevices", "UseRuleSpecificity", "UsePrivacyMode", "ProtectHostImages",
-                                // as well as reduced isoaltion box type:   "NoSecurityIsolation".
+            opt_sec     : 1;    // Various security enhanced box types:   "UseSecurityMode", "SysCallLockDown", "RestrictDevices", "UseRuleSpecificity", "UsePrivacyMode", "ProtectHostImages",
+                                // as well as reduced isolation box type:   "NoSecurityIsolation".
                                 
                                 // Other features, available with any cert: "UseRamDisk", "ForceUsbDrives",
                                 // as well as Automatic Updates, etc....

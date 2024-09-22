@@ -7326,8 +7326,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
         <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
-        <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
-        <translation type="unfinished">将沙盒导出到压缩包，选择压缩率并自定义其他压缩设置。</translation>
+        <translation>将沙盒导出到压缩包，选择压缩率并自定义其他压缩设置。</translation>
     </message>
     <message>
         <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
@@ -7344,8 +7343,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/ExtractDialog.ui" line="25"/>
         <source>Import Sandbox from an archive</source>
-        <oldsource>Export Sandbox from an archive</oldsource>
-        <translation type="unfinished">导出沙盒到压缩文件</translation>
+        <translation>从压缩文件导入沙盒</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>

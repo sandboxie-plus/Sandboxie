@@ -7427,7 +7427,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/CompressDialog.ui" line="75"/>
         <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
         <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
-        <translation type="unfinished">샌드박스를 압출파일로 내보내고, 압축률을 선택하고, 추가 압축 설정을 사용자 지정합니다.</translation>
+        <translation>샌드박스를 압축파일로 내보내고, 압축률을 선택하고, 추가 압축 설정을 사용자 지정합니다.</translation>
     </message>
     <message>
         <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
@@ -7446,7 +7446,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/ExtractDialog.ui" line="25"/>
         <source>Import Sandbox from an archive</source>
         <oldsource>Export Sandbox from an archive</oldsource>
-        <translation type="unfinished">압축파일에서 샌드박스 내보내기</translation>
+        <translation>압축파일에서 샌드박스 가져오기</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>

@@ -1099,7 +1099,7 @@ QString CSbieView::ImportSandbox()
 			if (!Status.IsError())
 				Status = pBoxEx->ImportBox(Path, Password);
 
-			// always overwirte restored FileRootPath
+			// always overwrite restored FileRootPath
 			pBox->SetText("FileRootPath", BoxRoot);
 		}
 	}

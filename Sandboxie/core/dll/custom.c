@@ -1621,7 +1621,7 @@ ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigne
 
                 UINT_PTR key; // simple keys are sizeof(void*)
                 key = *(UINT_PTR*)&pEntry->Address[0];
-#ifndef _WIN64 // on 32 bit platforms xor booth hafs to generate a 32 bit key
+#ifndef _WIN64 // on 32-bit platforms, xor both halves to generate a 32-bit key
                 key ^= *(UINT_PTR*)&pEntry->Address[4];
 #endif
 

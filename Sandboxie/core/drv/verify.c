@@ -676,7 +676,11 @@ _FX NTSTATUS KphValidateCertificate()
         // Note: when parsing we may change the value of value, by adding \0's, hence we do all that after the hashing
         //
 
-        if (_wcsicmp(L"DATE", name) == 0 && cert_date.QuadPart == 0) {
+        if (_wcsicmp(L"DATE", name) == 0) {
+            if (cert_date.QuadPart != 0) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             // DD.MM.YYYY
             if (KphParseDate(value, &cert_date)) {
                 // DD.MM.YYYY +Days
@@ -686,24 +690,44 @@ _FX NTSTATUS KphValidateCertificate()
             }
         }
         else if (_wcsicmp(L"DAYS", name) == 0) {
+            if (days != 0) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             days = _wtol(value);
         }
-        else if (_wcsicmp(L"TYPE", name) == 0 && type == NULL) {
+        else if (_wcsicmp(L"TYPE", name) == 0) {
             // TYPE-LEVEL
+            if (type != NULL) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             WCHAR* ptr = wcschr(value, L'-');
             if (ptr != NULL) {
                 *ptr++ = L'\0';
-                if(level == NULL) level = Mem_AllocString(Driver_Pool, ptr);
+                level = Mem_AllocString(Driver_Pool, ptr);
             }
             type = Mem_AllocString(Driver_Pool, value);
         }
-        else if (_wcsicmp(L"LEVEL", name) == 0 && level == NULL) {
+        else if (_wcsicmp(L"LEVEL", name)) {
+            if (level != NULL) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             level = Mem_AllocString(Driver_Pool, value);
         }
-        else if (_wcsicmp(L"OPTIONS", name) == 0 && options == NULL) {
+        else if (_wcsicmp(L"OPTIONS", name) == 0) {
+            if (options != NULL) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             options = Mem_AllocString(Driver_Pool, value);
         }
-        else if (_wcsicmp(L"UPDATEKEY", name) == 0 && key == NULL) {
+        else if (_wcsicmp(L"UPDATEKEY", name) == 0) {
+            if (key != NULL) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             key = Mem_AllocString(Driver_Pool, value);
         }
         else if (_wcsicmp(L"AMOUNT", name) == 0) {
@@ -727,6 +751,9 @@ _FX NTSTATUS KphValidateCertificate()
         status = Conf_Read_Line(stream, line, &line_num);
     }
     
+
+    if(!NT_SUCCESS(status))
+        goto CleanupExit;
 
     if(!NT_SUCCESS(status = MyFinishHash(&hashObj, &hash, &hashSize)))
         goto CleanupExit;

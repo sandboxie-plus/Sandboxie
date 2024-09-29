@@ -697,15 +697,14 @@ struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_REQ
     UINT uiCommand;
     BOOLEAN unicode;
     BOOLEAN hasData;
+    BOOLEAN hasSize;
     UINT cbSize;
 };
 
 struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_RPL
 {
-    ULONG status;
     ULONG error;
     ULONG retval;
-    BOOLEAN hasData;
     UINT cbSize;
 };
 

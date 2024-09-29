@@ -1350,16 +1350,11 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     req->hasData = !!pData;
     req->hasSize = !!pcbSize;
 
-    if (pcbSize) {
-        // *pcbSize is allowed to be uninitialized if pData == nullptr.
-        // It would be UB to access it as a UINT, so it's important that
-        // we simply copy the bytes without interpretation.
-        memcpy(&req->cbSize, pcbSize, sizeof(*pcbSize));
-    }
-
-    if (lenData) {
+    if (lenData)
         memcpy(reqData, pData, lenData);
-    }
+
+    if (pcbSize)
+        req->cbSize = *pcbSize;
 
     rpl = Gui_CallProxy(req, reqSize, sizeof(*rpl));
 
@@ -1371,9 +1366,8 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     ULONG error = rpl->error;
     ULONG retval = rpl->retval;
 
-    if (pcbSize) {
-        memcpy(pcbSize, &rpl->cbSize, sizeof(rpl->cbSize));
-    }
+    if (pcbSize)
+        *pcbSize = rpl->cbSize;
 
     if (lenData) {
         LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);

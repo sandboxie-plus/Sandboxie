@@ -3545,21 +3545,22 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
     SetLastError(ERROR_SUCCESS);
     if (req->unicode) {
         rpl->retval = GetRawInputDeviceInfoW((HANDLE)req->hDevice, req->uiCommand, reqData, pcbSize);
-    } else {
+    }
+    else {
         rpl->retval = GetRawInputDeviceInfoA((HANDLE)req->hDevice, req->uiCommand, reqData, pcbSize);
     }
     rpl->error = GetLastError();
 
-    if (pcbSize) {
-        // It's possible that (*pcbSize) could still be uninitialized.
-        // It would be UB to access it as a UINT.
-        memcpy(&rpl->cbSize, pcbSize, sizeof(*pcbSize));
-    }
+    if (pcbSize) 
+		rpl->cbSize = *pcbSize;
 
     if (lenData) {
+		rpl->hasData = TRUE;
         LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
         memcpy(rplData, reqData, lenData);
     }
+    else
+        rpl->hasData = FALSE;
 
     args->rpl_len = args->req_len;
 

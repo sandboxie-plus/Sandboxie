@@ -703,8 +703,10 @@ struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_REQ
 
 struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_RPL
 {
+    ULONG status;
     ULONG error;
     ULONG retval;
+    BOOLEAN hasData;
     UINT cbSize;
 };
 

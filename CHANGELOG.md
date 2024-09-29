@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with sandbox path entry combo boxes
+- fixed Proxy for GetRawInputDeviceInfoW() causes a buffer overflow [#4267](https://github.com/sandboxie-plus/Sandboxie/issues/4267) (thanks marti4d)
 
 
 

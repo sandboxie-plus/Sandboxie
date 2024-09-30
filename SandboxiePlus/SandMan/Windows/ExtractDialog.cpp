@@ -41,6 +41,8 @@ CExtractDialog::CExtractDialog(const QString& Name, QWidget *parent)
 		    ui.cmbRoot->setCurrentText(FilePath.replace("/", "\\"));
     });
 
+	ui.chkNoCrypt->setVisible(false);
+
 	connect(ui.buttonBox, SIGNAL(accepted()), SLOT(OnAccept()));
 	connect(ui.buttonBox, SIGNAL(rejected()), SLOT(reject()));
 

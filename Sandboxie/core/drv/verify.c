@@ -676,6 +676,8 @@ _FX NTSTATUS KphValidateCertificate()
         // Note: when parsing we may change the value of value, by adding \0's, hence we do all that after the hashing
         //
 
+        if(CertDbg) DbgPrint("Cert Value: %S: %S\n", name, value);
+
         if (_wcsicmp(L"DATE", name) == 0) {
             if (cert_date.QuadPart != 0) {
                 status = STATUS_BAD_FUNCTION_TABLE;
@@ -709,7 +711,7 @@ _FX NTSTATUS KphValidateCertificate()
             }
             type = Mem_AllocString(Driver_Pool, value);
         }
-        else if (_wcsicmp(L"LEVEL", name)) {
+        else if (_wcsicmp(L"LEVEL", name) == 0) {
             if (level != NULL) {
                 status = STATUS_BAD_FUNCTION_TABLE;
                 goto CleanupExit;
@@ -750,10 +752,6 @@ _FX NTSTATUS KphValidateCertificate()
     next:
         status = Conf_Read_Line(stream, line, &line_num);
     }
-    
-
-    if(!NT_SUCCESS(status))
-        goto CleanupExit;
 
     if(!NT_SUCCESS(status = MyFinishHash(&hashObj, &hash, &hashSize)))
         goto CleanupExit;

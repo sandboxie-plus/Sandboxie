@@ -887,7 +887,7 @@ _FX NTSTATUS KphValidateCertificate()
         }
         else if (!level || _wcsicmp(level, L"STANDARD") == 0) // not used, default does not have explicit level
             Verify_CertInfo.level = eCertStandard;
-        else if (_wcsicmp(level, L"ADVANCED") == 0)
+        else if (_wcsicmp(level, L"ADVANCED") == 0 || _wcsicmp(level, L"UPGRADE-ADVANCED") == 0)
         {
             if(Verify_CertInfo.type == eCertGreatPatreon)
                 Verify_CertInfo.level = eCertMaxLevel;

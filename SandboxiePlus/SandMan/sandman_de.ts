@@ -6843,7 +6843,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/ExtractDialog.ui" line="76"/>
         <source>Import without encryption</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohne Verschlüsselung importieren</translation>
     </message>
 </context>
 <context>

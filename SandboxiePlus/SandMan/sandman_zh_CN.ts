@@ -7363,7 +7363,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/ExtractDialog.ui" line="76"/>
         <source>Import without encryption</source>
-        <translation type="unfinished"></translation>
+        <translation>使用不加密方案导入</translation>
     </message>
 </context>
 <context>

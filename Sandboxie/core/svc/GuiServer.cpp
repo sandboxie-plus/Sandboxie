@@ -4670,3 +4670,50 @@ ULONG GuiServer::KillJob(SlaveArgs* args)
       
     return STATUS_SUCCESS;
 }
+
+
+//---------------------------------------------------------------------------
+// StartAsync
+//---------------------------------------------------------------------------
+
+struct SStartupParam
+{
+    ULONG session_id;
+    HANDLE hEvent;
+};
+
+ULONG GuiServer__StartupWorker(void* _Param)
+{
+    SStartupParam* pParam = (SStartupParam*)_Param;
+
+    //
+    // thart the proxy process
+    //
+
+    GuiServer::GetInstance()->StartSlave(pParam->session_id);
+
+    //
+    // notify the requesting party that the server is now up and running
+    //
+
+    SetEvent(pParam->hEvent);
+
+    HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, pParam);
+    return 0;
+}
+
+ULONG GuiServer::StartAsync(ULONG session_id, HANDLE hEvent)
+{
+    SStartupParam* pParam = (SStartupParam*)HeapAlloc(GetProcessHeap(), 0, sizeof(SStartupParam));
+    pParam->session_id = session_id;
+    pParam->hEvent = hEvent;
+
+    HANDLE hThread = CreateThread(NULL, 0, GuiServer__StartupWorker, (void *)pParam, 0, NULL);
+    if (!hThread) {
+        HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, pParam);
+        return STATUS_UNSUCCESSFUL;
+    }
+    CloseHandle(hThread);
+    return STATUS_SUCCESS;
+}
+

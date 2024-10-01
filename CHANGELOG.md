@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added Ability to import encrypted archive files directly [#4255](https://github.com/sandboxie-plus/Sandboxie/issues/4255)
 
+### Changed
+- when the sbiesvc.exe worker crashes it now can automatically be restarted.
+
 ### Fixed
 - fixed issue with sandbox path entry combo boxes
 - fixed Proxy for GetRawInputDeviceInfoW() causes a buffer overflow [#4267](https://github.com/sandboxie-plus/Sandboxie/issues/4267) (thanks marti4d)

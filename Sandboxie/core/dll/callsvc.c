@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -572,11 +572,11 @@ _FX ULONG SbieDll_QueuePutRpl(const WCHAR *QueueName,
 
 
 //---------------------------------------------------------------------------
-// SbieDll_QueuePutReq
+// SbieDll_QueuePutReqImpl
 //---------------------------------------------------------------------------
 
 
-_FX ULONG SbieDll_QueuePutReq(const WCHAR *QueueName,
+_FX ULONG SbieDll_QueuePutReqImpl(const WCHAR *QueueName,
                               void *DataPtr,
                               ULONG DataLen,
                               ULONG *out_RequestId,
@@ -623,12 +623,80 @@ _FX ULONG SbieDll_QueuePutReq(const WCHAR *QueueName,
 
     if (! NT_SUCCESS(status)) {
 
+        if(req->event_handle)
+            CloseHandle((HANDLE)req->event_handle);
+
         if (out_RequestId)
             *out_RequestId = 0;
         if (out_EventHandle)
             *out_EventHandle = NULL;
     }
 
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_StartProxy
+//---------------------------------------------------------------------------
+
+
+_FX ULONG SbieDll_StartProxy(const WCHAR *QueueName)
+{
+    NTSTATUS status;
+    QUEUE_CREATE_REQ req;
+    QUEUE_CREATE_RPL *rpl;
+
+    req.h.length = sizeof(QUEUE_CREATE_REQ);
+    req.h.msgid  = MSGID_QUEUE_STARTUP;
+    wcscpy(req.queue_name, QueueName);
+    req.event_handle =
+        (ULONG64)(ULONG_PTR)CreateEvent(NULL, FALSE, FALSE, NULL);
+
+    if (! req.event_handle)
+        status = STATUS_UNSUCCESSFUL;
+    else {
+
+        rpl = (QUEUE_CREATE_RPL *)SbieDll_CallServer(&req.h);
+        if (! rpl)
+            status = STATUS_SERVER_DISABLED;
+        else {
+            status = rpl->h.status;
+            Dll_Free(rpl);
+        }
+
+        if (NT_SUCCESS(status)) {
+
+            if (WaitForSingleObject((HANDLE)(ULONG_PTR)req.event_handle, 10 * 1000) != 0)
+                status = STATUS_TIMEOUT;
+        }
+
+        CloseHandle((HANDLE)(ULONG_PTR)req.event_handle);
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_QueuePutReq
+//---------------------------------------------------------------------------
+
+
+_FX ULONG SbieDll_QueuePutReq(const WCHAR *QueueName,
+                              void *DataPtr,
+                              ULONG DataLen,
+                              ULONG *out_RequestId,
+                              HANDLE *out_EventHandle)
+{
+    NTSTATUS status = SbieDll_QueuePutReqImpl(QueueName, DataPtr, DataLen, out_RequestId, out_EventHandle);
+    if (status == STATUS_OBJECT_NAME_NOT_FOUND) {
+
+        if (NT_SUCCESS(SbieDll_StartProxy(QueueName))) {
+
+            status = SbieDll_QueuePutReqImpl(QueueName, DataPtr, DataLen, out_RequestId, out_EventHandle);
+        }
+    }
     return status;
 }
 

@@ -1348,13 +1348,16 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     req->uiCommand = uiCommand;
     req->unicode = bUnicode;
     req->hasData = !!pData;
-    req->hasSize = !!pcbSize;
 
     if (lenData)
         memcpy(reqData, pData, lenData);
 
+    // GetRawInputDeviceInfoA accesses pcbSize without testing it for being not NULL 
+    // hence if the caller passes NULL we use a dummy value so that we dont crash the helper service
     if (pcbSize)
         req->cbSize = *pcbSize;
+    else
+        req->cbSize = 0;
 
     rpl = Gui_CallProxy(req, reqSize, sizeof(*rpl));
 

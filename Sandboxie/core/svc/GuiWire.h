@@ -697,7 +697,6 @@ struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_REQ
     UINT uiCommand;
     BOOLEAN unicode;
     BOOLEAN hasData;
-    BOOLEAN hasSize;
     UINT cbSize;
 };
 

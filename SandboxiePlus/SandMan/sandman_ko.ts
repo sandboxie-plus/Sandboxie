@@ -7466,7 +7466,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/ExtractDialog.ui" line="76"/>
         <source>Import without encryption</source>
-        <translation type="unfinished"></translation>
+        <translation>암호화 없이 가져오기</translation>
     </message>
 </context>
 <context>

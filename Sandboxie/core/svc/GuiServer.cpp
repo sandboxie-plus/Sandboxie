@@ -3532,11 +3532,10 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
         return STATUS_INFO_LENGTH_MISMATCH;
 
     LPVOID reqData = req->hasData ? (BYTE*)req + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) : NULL;
-    PUINT pcbSize = req->hasSize ? &req->cbSize : NULL;
 
     ULONG lenData = 0;
-    if (reqData && pcbSize) {
-        lenData = *pcbSize;
+    if (reqData && req->cbSize > 0) {
+        lenData = req->cbSize;
         if (req->uiCommand == RIDI_DEVICENAME && req->unicode) {
             lenData *= sizeof(WCHAR);
         }
@@ -3544,15 +3543,14 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
 
     SetLastError(ERROR_SUCCESS);
     if (req->unicode) {
-        rpl->retval = GetRawInputDeviceInfoW((HANDLE)req->hDevice, req->uiCommand, reqData, pcbSize);
+        rpl->retval = GetRawInputDeviceInfoW((HANDLE)req->hDevice, req->uiCommand, reqData, &req->cbSize);
     }
     else {
-        rpl->retval = GetRawInputDeviceInfoA((HANDLE)req->hDevice, req->uiCommand, reqData, pcbSize);
+        rpl->retval = GetRawInputDeviceInfoA((HANDLE)req->hDevice, req->uiCommand, reqData, &req->cbSize);
     }
     rpl->error = GetLastError();
 
-    if (pcbSize) 
-		rpl->cbSize = *pcbSize;
+    rpl->cbSize = req->cbSize;
 
     if (lenData) {
 		rpl->hasData = TRUE;
@@ -4672,3 +4670,50 @@ ULONG GuiServer::KillJob(SlaveArgs* args)
       
     return STATUS_SUCCESS;
 }
+
+
+//---------------------------------------------------------------------------
+// StartAsync
+//---------------------------------------------------------------------------
+
+struct SStartupParam
+{
+    ULONG session_id;
+    HANDLE hEvent;
+};
+
+ULONG GuiServer__StartupWorker(void* _Param)
+{
+    SStartupParam* pParam = (SStartupParam*)_Param;
+
+    //
+    // thart the proxy process
+    //
+
+    GuiServer::GetInstance()->StartSlave(pParam->session_id);
+
+    //
+    // notify the requesting party that the server is now up and running
+    //
+
+    SetEvent(pParam->hEvent);
+
+    HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, pParam);
+    return 0;
+}
+
+ULONG GuiServer::StartAsync(ULONG session_id, HANDLE hEvent)
+{
+    SStartupParam* pParam = (SStartupParam*)HeapAlloc(GetProcessHeap(), 0, sizeof(SStartupParam));
+    pParam->session_id = session_id;
+    pParam->hEvent = hEvent;
+
+    HANDLE hThread = CreateThread(NULL, 0, GuiServer__StartupWorker, (void *)pParam, 0, NULL);
+    if (!hThread) {
+        HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, pParam);
+        return STATUS_UNSUCCESSFUL;
+    }
+    CloseHandle(hThread);
+    return STATUS_SUCCESS;
+}
+

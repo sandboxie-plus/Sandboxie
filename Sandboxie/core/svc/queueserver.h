@@ -51,6 +51,8 @@ protected:
 
     MSG_HEADER *GetRplHandler(MSG_HEADER *msg, HANDLE idProcess);
 
+    MSG_HEADER *StartupHandler(MSG_HEADER *msg, HANDLE idProcess);
+
     void NotifyHandler(HANDLE idProcess);
 
     LONG OpenProcess(HANDLE idProcess, HANDLE *out_hProcess,

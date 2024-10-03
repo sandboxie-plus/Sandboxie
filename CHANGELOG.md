@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.10 / 5.69.10] - 2024-09-
+## [1.14.10 / 5.69.10] - 2024-10-03
 
 ### Added
 - added Ability to import encrypted archive files directly [#4255](https://github.com/sandboxie-plus/Sandboxie/issues/4255)

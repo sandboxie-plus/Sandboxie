@@ -517,10 +517,24 @@ _FX LANGID Kernel_GetSystemDefaultLangID()
 //Kernel_GetVolumeInformationByHandleW
 //----------------------------------------------------------------------------
 
-
+wchar_t itoa0(int num) {
+	switch (num) {
+	case 0:return L'0';
+	case 1:return L'1';
+	case 2:return L'2';
+	case 3:return L'4';
+	case 5:return L'5';
+	case 6:return L'6';
+	case 7:return L'7';
+	case 8:return L'8';
+	case 9:return L'9';
+	default:return L'0';
+	}
+}
 _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize) 
 {
 	DWORD ourSerialNumber = 0;
+	static long num = 0;
 	BOOL rtn = __sys_GetVolumeInformationByHandleW(hFile, lpVolumeNameBuffer, nVolumeNameSize, &ourSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
 	if (lpVolumeSerialNumber != NULL) {
 
@@ -533,12 +547,14 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 			*lpVolumeSerialNumber = *lpCachedSerialNumber;
 		else
 		{
-			DWORD conf = SbieApi_QueryConfNumber(NULL, L"DiskSerialNumberValue", 0);
+			wchar_t KeyName[30] = { 0 };
+			Sbie_snwprintf(KeyName, 30, L"%s%s", L"DiskSerialNumberValue", itoa0(num));
+			DWORD conf = SbieApi_QueryConfNumber(NULL, KeyName, 0);
 			if (conf == 0)
 				*lpVolumeSerialNumber = Dll_rand();
 			else
 				*lpVolumeSerialNumber = conf;
-
+			num++;
 			map_insert(&Kernel_DiskSN, key, lpVolumeSerialNumber, sizeof(DWORD));
 		}
 

@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1x.xx / 5.xx.xx] - 2024-xx-xx
 
 ### Added
-- added "DiskSerialNumberValue"(Number) to set Disk Serial Number for indivdal box.
+- added "DiskSerialNumberValueX"(Fill number 0-9 to 'X') to set Disk Serial Number for indivdal box.
 
 
 

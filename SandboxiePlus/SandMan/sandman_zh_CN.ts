@@ -9,53 +9,53 @@
         <translation>表格</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="133"/>
+        <location filename="Forms/BoxImageWindow.ui" line="87"/>
         <source>kilobytes</source>
         <translation>Kb</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="153"/>
+        <location filename="Forms/BoxImageWindow.ui" line="145"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
         <translation>阻止沙盒外的进程访问沙盒文件夹根目录</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="32"/>
-        <location filename="Forms/BoxImageWindow.ui" line="39"/>
+        <location filename="Forms/BoxImageWindow.ui" line="94"/>
+        <location filename="Forms/BoxImageWindow.ui" line="125"/>
         <source>TextLabel</source>
         <translation>文本标签</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="100"/>
+        <location filename="Forms/BoxImageWindow.ui" line="172"/>
         <source>Show Password</source>
         <translation>显示密码</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="49"/>
+        <location filename="Forms/BoxImageWindow.ui" line="135"/>
         <source>Enter Password</source>
         <translation>输入密码</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="66"/>
+        <location filename="Forms/BoxImageWindow.ui" line="64"/>
         <source>New Password</source>
         <translation>新密码</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="83"/>
+        <location filename="Forms/BoxImageWindow.ui" line="34"/>
         <source>Repeat Password</source>
         <translation>重置密码</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="107"/>
+        <location filename="Forms/BoxImageWindow.ui" line="162"/>
         <source>Disk Image Size</source>
         <translation>磁盘映像大小</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="140"/>
+        <location filename="Forms/BoxImageWindow.ui" line="54"/>
         <source>Encryption Cipher</source>
         <translation>加密密钥</translation>
     </message>
     <message>
-        <location filename="Forms/BoxImageWindow.ui" line="163"/>
+        <location filename="Forms/BoxImageWindow.ui" line="74"/>
         <source>Lock the box when all processes stop.</source>
         <translation>当所有进程停止时锁定沙盒。</translation>
     </message>
@@ -1056,7 +1056,7 @@ You can click Finish to close this wizard.</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Windows/ExtractDialog.cpp" line="59"/>
+        <location filename="Windows/ExtractDialog.cpp" line="61"/>
         <source>This name is already in use, please select an alternative box name</source>
         <translation>名称已占用，请选择其他沙盒名</translation>
     </message>
@@ -5244,7 +5244,7 @@ Error: %1</source>
         <translation>[无]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1122"/>
+        <location filename="Views/SbieView.cpp" line="1124"/>
         <source>Please enter a new group name</source>
         <translation>请输入新的组名</translation>
     </message>
@@ -5432,9 +5432,8 @@ Error: %1</source>
         <translation>组不能是自己的父级</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1041"/>
         <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation>7-zip 压缩包 (*.7z);;Zip 压缩包 (*.zip)</translation>
+        <translation type="vanished">7-zip 压缩包 (*.7z);;Zip 压缩包 (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1058"/>
@@ -5447,7 +5446,8 @@ Error: %1</source>
         <translation>无法打开备份 (%1)！</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1041"/>
+        <location filename="Views/SbieView.cpp" line="1410"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-zip 压缩包 (*.7z);;Zip 压缩包 (*.zip)</translation>
     </message>
@@ -5464,63 +5464,63 @@ Error: %1</source>
         <translation type="vanished">是否要选择一个自定义的根目录？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1108"/>
+        <location filename="Views/SbieView.cpp" line="1110"/>
         <source>Importing: %1</source>
         <translation>正在导入：%1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1148"/>
+        <location filename="Views/SbieView.cpp" line="1150"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
         <translation>⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 等符号</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1153"/>
+        <location filename="Views/SbieView.cpp" line="1155"/>
         <source>This name is already used for a Box Group.</source>
         <translation>名称已被用于现有的其它沙盒组</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1158"/>
+        <location filename="Views/SbieView.cpp" line="1160"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>名称已被用于现有的其它沙盒</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1208"/>
-        <location filename="Views/SbieView.cpp" line="1278"/>
-        <location filename="Views/SbieView.cpp" line="1585"/>
+        <location filename="Views/SbieView.cpp" line="1210"/>
+        <location filename="Views/SbieView.cpp" line="1280"/>
+        <location filename="Views/SbieView.cpp" line="1587"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再显示此消息</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1269"/>
-        <location filename="Views/SbieView.cpp" line="1289"/>
-        <location filename="Views/SbieView.cpp" line="1763"/>
+        <location filename="Views/SbieView.cpp" line="1271"/>
+        <location filename="Views/SbieView.cpp" line="1291"/>
+        <location filename="Views/SbieView.cpp" line="1765"/>
         <source>This Sandbox is empty.</source>
         <translation>此沙盒是空的</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1296"/>
+        <location filename="Views/SbieView.cpp" line="1298"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>警告：打开的注册表编辑器未沙盒化，请审慎且仅对预先选定的沙盒节点进行修改</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1297"/>
+        <location filename="Views/SbieView.cpp" line="1299"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>不再显示此警告</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1353"/>
+        <location filename="Views/SbieView.cpp" line="1355"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>请为此复制的沙盒输入一个新名称</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1353"/>
+        <location filename="Views/SbieView.cpp" line="1355"/>
         <source>%1 Copy</source>
         <translatorcomment>沙盒名称只能包含字母、数字和下划线，不应对此处的文本进行翻译！</translatorcomment>
         <translation>%1 Copy</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1410"/>
         <source>Select file name</source>
         <translation>选择文件名</translation>
     </message>
@@ -5551,93 +5551,93 @@ Error: %1</source>
         <translation type="vanished">7-zip 备份 (*.7z)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1414"/>
+        <location filename="Views/SbieView.cpp" line="1416"/>
         <source>Exporting: %1</source>
         <translation>正在导出：%1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1427"/>
+        <location filename="Views/SbieView.cpp" line="1429"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>请为该沙盒输入新名称</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1427"/>
+        <location filename="Views/SbieView.cpp" line="1429"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation>请输入沙盒的新别名。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1436"/>
+        <location filename="Views/SbieView.cpp" line="1438"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation>输入的名称无效，是否要将其设置为沙盒别名？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1474"/>
+        <location filename="Views/SbieView.cpp" line="1476"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>确定要删除选中的沙盒？&lt;br /&gt;&lt;br /&gt;警告：沙盒内的内容也将被删除！</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1525"/>
+        <location filename="Views/SbieView.cpp" line="1527"/>
         <source>This Sandbox is already empty.</source>
         <translation>此沙盒已清空</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1537"/>
-        <location filename="Views/SbieView.cpp" line="1542"/>
+        <location filename="Views/SbieView.cpp" line="1539"/>
+        <location filename="Views/SbieView.cpp" line="1544"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>确定要删除选中沙盒的内容吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1538"/>
-        <location filename="Views/SbieView.cpp" line="1551"/>
+        <location filename="Views/SbieView.cpp" line="1540"/>
+        <location filename="Views/SbieView.cpp" line="1553"/>
         <source>Also delete all Snapshots</source>
         <translation>同时删除所有快照</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1550"/>
+        <location filename="Views/SbieView.cpp" line="1552"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>你真的想删除所有选定的沙盒的内容吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1567"/>
+        <location filename="Views/SbieView.cpp" line="1569"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>确定要终止所选沙盒中的所有进程吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1568"/>
-        <location filename="Views/SbieView.cpp" line="1664"/>
+        <location filename="Views/SbieView.cpp" line="1570"/>
+        <location filename="Views/SbieView.cpp" line="1666"/>
         <source>Terminate without asking</source>
         <translation>终止且不再询问</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1583"/>
+        <location filename="Views/SbieView.cpp" line="1585"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>现在将显示 Sandboxie 开始菜单。从菜单中选择一个应用程序，Sandboxie 将在真实桌面上创建一个新的快捷方式图标，你可以用它来调用所选受 Sandboxie 监督的应用程序。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1638"/>
-        <location filename="Views/SbieView.cpp" line="1692"/>
+        <location filename="Views/SbieView.cpp" line="1640"/>
+        <location filename="Views/SbieView.cpp" line="1694"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>为沙盒 %1 创建快捷方式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1663"/>
+        <location filename="Views/SbieView.cpp" line="1665"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>确定要终止 %1？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1663"/>
+        <location filename="Views/SbieView.cpp" line="1665"/>
         <source>the selected processes</source>
         <translation>选中的进程</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1722"/>
+        <location filename="Views/SbieView.cpp" line="1724"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>此沙盒无互联网限制，确定启用吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1813"/>
+        <location filename="Views/SbieView.cpp" line="1815"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation>此沙盒已禁用或仅限于特定组/用户，确定要编辑它吗？</translation>
@@ -7325,7 +7325,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="75"/>
-        <source>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
+        <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
         <translation>将沙盒导出到压缩包，选择压缩率并自定义其他压缩设置。</translation>
     </message>
     <message>
@@ -7341,24 +7341,29 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>提取文件</translation>
     </message>
     <message>
-        <location filename="Forms/ExtractDialog.ui" line="25"/>
-        <source>Export Sandbox from an archive</source>
-        <translation>导出沙盒到压缩文件</translation>
+        <location filename="Forms/ExtractDialog.ui" line="53"/>
+        <source>Import Sandbox from an archive</source>
+        <translation>从压缩文件导入沙盒</translation>
     </message>
     <message>
-        <location filename="Forms/ExtractDialog.ui" line="35"/>
+        <location filename="Forms/ExtractDialog.ui" line="46"/>
         <source>Import Sandbox Name</source>
         <translation>导入沙盒名称</translation>
     </message>
     <message>
-        <location filename="Forms/ExtractDialog.ui" line="42"/>
+        <location filename="Forms/ExtractDialog.ui" line="22"/>
         <source>Box Root Folder</source>
         <translation>沙盒根目录</translation>
     </message>
     <message>
-        <location filename="Forms/ExtractDialog.ui" line="62"/>
+        <location filename="Forms/ExtractDialog.ui" line="32"/>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <location filename="Forms/ExtractDialog.ui" line="76"/>
+        <source>Import without encryption</source>
+        <translation>不加密导入</translation>
     </message>
 </context>
 <context>
@@ -9409,7 +9414,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1620"/>
+        <location filename="Views/SbieView.cpp" line="1622"/>
         <source>Drive %1</source>
         <translation>磁盘 %1</translation>
     </message>
@@ -9591,12 +9596,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>当沙盒自动化作业事件开始执行时，弹出托盘通知</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2104"/>
+        <location filename="Forms/SettingsWindow.ui" line="2108"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>激活内核模式的对象过滤器</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2138"/>
+        <location filename="Forms/SettingsWindow.ui" line="2142"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>Hook 选定的 Win32k 系统调用钩子以启用 GPU 加速 (实验性)</translation>
     </message>
@@ -9724,22 +9729,22 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>让 Sandboxie 跟上 Windows 的滚动发布并与所有网络浏览器兼容是一项永无止境的努力。您可以通过以下方式进行支持：&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接为项目贡献&lt;/a&gt;，通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;购买赞助者证书&lt;/a&gt;，通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在Patreon上订阅&lt;/a&gt;，或通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal捐赠&lt;/a&gt;。&lt;br/&gt;您的支持对Sandboxie的发展和维护起着至关重要的作用。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2576"/>
+        <location filename="Forms/SettingsWindow.ui" line="2588"/>
         <source>Local Templates</source>
         <translation>本地模板</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2641"/>
+        <location filename="Forms/SettingsWindow.ui" line="2653"/>
         <source>Add Template</source>
         <translation>添加模板</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2612"/>
+        <location filename="Forms/SettingsWindow.ui" line="2624"/>
         <source>Text Filter</source>
         <translation>筛选文本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2619"/>
+        <location filename="Forms/SettingsWindow.ui" line="2631"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>该列表包含用户为沙盒选项创建的自定义模板</translation>
     </message>
@@ -9761,7 +9766,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="916"/>
         <location filename="Forms/SettingsWindow.ui" line="1357"/>
-        <location filename="Forms/SettingsWindow.ui" line="2685"/>
+        <location filename="Forms/SettingsWindow.ui" line="2697"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
@@ -9807,42 +9812,42 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>捐赠支持</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2094"/>
+        <location filename="Forms/SettingsWindow.ui" line="2098"/>
         <source>Default sandbox:</source>
         <translation>默认沙盒：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2331"/>
+        <location filename="Forms/SettingsWindow.ui" line="2343"/>
         <source>Program Alerts</source>
         <translation>程序警报</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2387"/>
+        <location filename="Forms/SettingsWindow.ui" line="2399"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>当必沙进程被禁止时，提示问题代码 1301</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2654"/>
+        <location filename="Forms/SettingsWindow.ui" line="2666"/>
         <source>Open Template</source>
         <translation>打开模板</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2712"/>
+        <location filename="Forms/SettingsWindow.ui" line="2724"/>
         <source>Edit ini Section</source>
         <translation>配置文本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2721"/>
+        <location filename="Forms/SettingsWindow.ui" line="2733"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2728"/>
+        <location filename="Forms/SettingsWindow.ui" line="2740"/>
         <source>Edit ini</source>
         <translation>编辑配置</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2754"/>
+        <location filename="Forms/SettingsWindow.ui" line="2766"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -9941,12 +9946,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>在清空沙盒时显示恢复窗口</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2281"/>
+        <location filename="Forms/SettingsWindow.ui" line="2293"/>
         <source>Config protection</source>
         <translation>保护配置</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2162"/>
+        <location filename="Forms/SettingsWindow.ui" line="2170"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>沙盒 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC&#x3000;根目录&lt;/a&gt;: </translation>
     </message>
@@ -9956,18 +9961,18 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>沙盒 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;注册表根目录&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2288"/>
+        <location filename="Forms/SettingsWindow.ui" line="2300"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>主窗口隐藏时清除密码</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2227"/>
+        <location filename="Forms/SettingsWindow.ui" line="2239"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>仅管理员用户可「停用必沙程序规则」</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2068"/>
+        <location filename="Forms/SettingsWindow.ui" line="2072"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>沙盒 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;文件系统根目录&lt;/a&gt;: </translation>
     </message>
@@ -10022,12 +10027,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>高级选项</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2204"/>
+        <location filename="Forms/SettingsWindow.ui" line="2216"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>使用 Windows 筛选平台 (WFP) 限制网络访问</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2118"/>
+        <location filename="Forms/SettingsWindow.ui" line="2122"/>
         <source>Sandboxing features</source>
         <translation>沙盒功能</translation>
     </message>
@@ -10038,17 +10043,17 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>保护配置</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2254"/>
+        <location filename="Forms/SettingsWindow.ui" line="2266"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>仅管理员用户可更改</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2295"/>
+        <location filename="Forms/SettingsWindow.ui" line="2307"/>
         <source>Password must be entered in order to make changes</source>
         <translation>更改必须输入密码</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2302"/>
+        <location filename="Forms/SettingsWindow.ui" line="2314"/>
         <source>Change Password</source>
         <translation>更改密码</translation>
     </message>
@@ -10062,12 +10067,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation type="vanished">支持设置</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2155"/>
+        <location filename="Forms/SettingsWindow.ui" line="2163"/>
         <source>Portable root folder</source>
         <translation>便携化根目录</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2197"/>
+        <location filename="Forms/SettingsWindow.ui" line="2209"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -10077,7 +10082,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>沙盒预设</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2247"/>
+        <location filename="Forms/SettingsWindow.ui" line="2259"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>监控 Sandboxie.ini 变更</translation>
     </message>
@@ -10175,9 +10180,9 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="811"/>
         <location filename="Forms/SettingsWindow.ui" line="1378"/>
-        <location filename="Forms/SettingsWindow.ui" line="2353"/>
-        <location filename="Forms/SettingsWindow.ui" line="2528"/>
-        <location filename="Forms/SettingsWindow.ui" line="2665"/>
+        <location filename="Forms/SettingsWindow.ui" line="2365"/>
+        <location filename="Forms/SettingsWindow.ui" line="2540"/>
+        <location filename="Forms/SettingsWindow.ui" line="2677"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
@@ -10192,32 +10197,32 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>在“游戏/演示”模式下，禁止弹出通知</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2358"/>
+        <location filename="Forms/SettingsWindow.ui" line="2370"/>
         <source>Path</source>
         <translation>路径</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2380"/>
+        <location filename="Forms/SettingsWindow.ui" line="2392"/>
         <source>Remove Program</source>
         <translation>删除程序</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2366"/>
+        <location filename="Forms/SettingsWindow.ui" line="2378"/>
         <source>Add Program</source>
         <translation>添加程序</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2401"/>
+        <location filename="Forms/SettingsWindow.ui" line="2413"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>下列程序在沙盒之外启动时，Sandboxie 将提示 SBIE1301 警告</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2411"/>
+        <location filename="Forms/SettingsWindow.ui" line="2423"/>
         <source>Add Folder</source>
         <translation>添加文件夹</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2394"/>
+        <location filename="Forms/SettingsWindow.ui" line="2406"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>阻止下列程序在此系统中启动</translation>
     </message>
@@ -10499,87 +10504,87 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>检查更新间隔</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2145"/>
+        <location filename="Forms/SettingsWindow.ui" line="2149"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>使用 Sandboxie 限权用户替代匿名令牌</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2211"/>
+        <location filename="Forms/SettingsWindow.ui" line="2223"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
         <translation>添加 &quot; Sandboxie\All Sandboxes &quot; 组到沙盒化令牌（实验性）</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2221"/>
+        <location filename="Forms/SettingsWindow.ui" line="2233"/>
         <source>Sandboxie.ini Presets</source>
         <translation>Sandboxie.ini 预设选项</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2309"/>
+        <location filename="Forms/SettingsWindow.ui" line="2321"/>
         <source>Always run SandMan UI as Admin</source>
         <translation>始终以管理员身份运行SandMan UI</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2321"/>
+        <location filename="Forms/SettingsWindow.ui" line="2333"/>
         <source>Program Control</source>
         <translation>程序控制</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2373"/>
+        <location filename="Forms/SettingsWindow.ui" line="2385"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>程序启动失败时，提示问题代码 1308</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2421"/>
+        <location filename="Forms/SettingsWindow.ui" line="2433"/>
         <source>USB Drive Sandboxing</source>
         <translation>USB驱动器沙盒</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2437"/>
+        <location filename="Forms/SettingsWindow.ui" line="2449"/>
         <source>Volume</source>
         <translation>卷</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2442"/>
+        <location filename="Forms/SettingsWindow.ui" line="2454"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2450"/>
+        <location filename="Forms/SettingsWindow.ui" line="2462"/>
         <source>Sandbox for USB drives:</source>
         <translation>USB驱动器沙盒：</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2463"/>
+        <location filename="Forms/SettingsWindow.ui" line="2475"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation>自动为所有连接的USB设备使用沙盒</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2490"/>
+        <location filename="Forms/SettingsWindow.ui" line="2502"/>
         <source>App Templates</source>
         <translation>应用模板</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2500"/>
+        <location filename="Forms/SettingsWindow.ui" line="2512"/>
         <source>App Compatibility</source>
         <translation>软件兼容性</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2520"/>
+        <location filename="Forms/SettingsWindow.ui" line="2532"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>之后不再检查软件兼容性</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2536"/>
+        <location filename="Forms/SettingsWindow.ui" line="2548"/>
         <source>Enable</source>
         <translation>启用</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2556"/>
+        <location filename="Forms/SettingsWindow.ui" line="2568"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2563"/>
+        <location filename="Forms/SettingsWindow.ui" line="2575"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>沙盒已检测到系统中安装了以下软件，点击“确定”应用配置，将改进与这些软件的兼容性，这些配置将作用于所有沙盒，包括现存和未来新增的沙盒</translation>
     </message>

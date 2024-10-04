@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.1x.xx / 5.xx.xx] - 2024-xx-xx
+
+### Added
+- added "MacAddressValueMajorX"(fill 'X' with number 0-9) and "MacAddressValueMinorX"(fill 'X' with number 0-9) to set MAC address for each box(You must set both two options at the same time).
+  - For example:
+    - MacAddressValueMajor0=Number
+    - MacAddressValueMinor0=Number
+    - MacAddressValueMajor1=Number
+    - MacAddressValueMinor1=Number
+
 ## [1.14.10 / 5.69.10] - 2024-10-03
 
 ### Added
@@ -26,7 +36,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - \\??\\%SystemDrive%\\Sandbox\\%SANDBOX%
   - \\??\\%SystemDrive%\\Users\\%USER%\Sandbox\\%SANDBOX%
 - added Sandbox Import dialog
-- added "MacAddressValue1"(Number) and "MacAddressValue2"(Number) to set MAC address for each box(You must set both two options at the same time).
 
 ### Changed
 - sandbox root selection in global settings is now a combo box

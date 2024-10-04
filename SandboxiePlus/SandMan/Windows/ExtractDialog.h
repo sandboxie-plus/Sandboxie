@@ -14,6 +14,8 @@ public:
 
 	QString GetName() const { return ui.txtName->text(); }
 	QString GetRoot() const;
+	void ShowNoCrypt() const { ui.chkNoCrypt->setVisible(true); }
+	bool IsNoCrypt() const { return ui.chkNoCrypt->isChecked(); }
 
 private slots:
 	void OnAccept();

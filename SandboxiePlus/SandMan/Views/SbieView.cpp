@@ -1038,7 +1038,7 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 
 QString CSbieView::ImportSandbox()
 {
-	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z);;Zip Archive (*.zip)"));
+	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
 	if (Path.isEmpty())
 		return "";
 
@@ -1074,6 +1074,8 @@ QString CSbieView::ImportSandbox()
 	QString Name = NameEx.first;
 	
 	CExtractDialog optWnd(Name, this);
+	if(!Password.isEmpty())
+		optWnd.ShowNoCrypt();
 	if (!theGUI->SafeExec(&optWnd) == 1)
 		return "";
 	Name = optWnd.GetName();
@@ -1090,7 +1092,7 @@ QString CSbieView::ImportSandbox()
 			if (!BoxRoot.isEmpty())
 				pBox->SetFileRoot(BoxRoot);
 
-			if (!Password.isEmpty()) {
+			if (!Password.isEmpty() && !optWnd.IsNoCrypt()) {
 				Status = pBoxEx->ImBoxCreate(ImageSize / 1024, Password);
 				if (!Status.IsError())
 					Status = pBoxEx->ImBoxMount(Password, true, true);
@@ -1099,7 +1101,7 @@ QString CSbieView::ImportSandbox()
 			if (!Status.IsError())
 				Status = pBoxEx->ImportBox(Path, Password);
 
-			// always overwirte restored FileRootPath
+			// always overwrite restored FileRootPath
 			pBox->SetText("FileRootPath", BoxRoot);
 		}
 	}

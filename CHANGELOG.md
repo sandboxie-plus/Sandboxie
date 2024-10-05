@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.1x.xx / 5.xx.x] - 2024-xx-xx
+
+### Added
+- added the ability to hide certificates in editbox in Global Setting
+
+
 ## [1.14.9 / 5.69.9] - 2024-09-19
 
 ### Added

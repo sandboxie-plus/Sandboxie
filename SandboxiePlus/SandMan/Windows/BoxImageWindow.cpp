@@ -99,6 +99,9 @@ CBoxImageWindow::CBoxImageWindow(EAction Action, QWidget *parent)
 	}
 
 	//restoreGeometry(theConf->GetBlob("BoxImageWindow/Window_Geometry"));
+	
+	// Adjust the size of the dialog
+	this->adjustSize();
 }
 
 void CBoxImageWindow::SetForce(bool force)

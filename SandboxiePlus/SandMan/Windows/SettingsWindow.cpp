@@ -507,6 +507,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
+	connect(ui.chkShowCert,SIGNAL(clicked(bool)),this,SLOT(OnCertHide()));
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
 	connect(ui.txtSerial, SIGNAL(textChanged(const QString&)), this, SLOT(KeyChanged()));
 	ui.btnGetCert->setEnabled(false);
@@ -1277,7 +1278,12 @@ void CSettingsWindow::UpdateCert()
 	//ui.lblCertLevel->setVisible(!g_Certificate.isEmpty());
 	if (!g_Certificate.isEmpty()) 
 	{
-		ui.txtCertificate->setPlainText(g_Certificate);
+		if (ui.chkShowCert->isChecked()) {
+			ui.txtCertificate->setPlainText(g_Certificate);
+		}
+		else {
+			ui.txtCertificate->setPlainText(QString(tr("The certificate is hidden, click the right checkbox to show")));
+		}
 		//ui.lblSupport->setVisible(false);
 
 		QPalette palette = QApplication::palette();
@@ -1446,8 +1452,15 @@ void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMa
 		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
 		return;
 	}
-	ui.txtCertificate->setPlainText(Certificate);
-	ApplyCert();
+	if (ui.chkShowCert->isChecked()) {
+		ui.txtCertificate->setPlainText(Certificate);
+		ApplyCert();
+	}
+	else {
+		ui.txtCertificate->setPlainText(Certificate);
+		ApplyCert();
+		ui.txtCertificate->setPlainText(QString(tr("The certificate is hidden,click the right checkbox to show it")));
+	}
 }
 
 void CSettingsWindow::ApplyCert()
@@ -2632,6 +2645,17 @@ void CSettingsWindow::CertChanged()
 	m_CertChanged = true; 
 	QPalette palette = QApplication::palette();
 	ui.txtCertificate->setPalette(palette);
+	OnOptChanged();
+}
+
+void CSettingsWindow::OnCertHide()
+{
+	if (ui.chkShowCert->isChecked()) {
+        		ui.txtCertificate->setPlainText(g_Certificate);
+	}
+	else {
+        		ui.txtCertificate->setPlainText(QString(tr("The certificate is hidden. Click the right checkbox to show it.")));
+	}
 	OnOptChanged();
 }
 

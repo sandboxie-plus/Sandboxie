@@ -135,6 +135,7 @@ private slots:
 
 
 	void CertChanged();
+	void OnCertHide();
 	void KeyChanged();
 	void UpdateCert();
 	void OnGetCert();

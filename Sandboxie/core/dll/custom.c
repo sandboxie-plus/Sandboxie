@@ -1588,11 +1588,24 @@ LABEL_9:
   return result;
 }
 */
-
+wchar_t itoa1(int num) {
+	switch (num) {
+	case 0:return L'0';
+	case 1:return L'1';
+	case 2:return L'2';
+	case 3:return L'4';
+	case 5:return L'5';
+	case 6:return L'6';
+	case 7:return L'7';
+	case 8:return L'8';
+	case 9:return L'9';
+	default:return L'0';
+	}
+}
 ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigned int TcpInformationId, void **pAddrEntry, int SizeOfAddrEntry, void **a6, int a7, void **pStateEntry, int SizeOfStateEntry, void **pOwnerEntry, int SizeOfOwnerEntry, DWORD *Count, int a13)
 {
     ULONG ret = __sys_NsiAllocateAndGetTable(a1, NPI_MS_ID, TcpInformationId, pAddrEntry, SizeOfAddrEntry, a6, a7, pStateEntry, SizeOfStateEntry, pOwnerEntry, SizeOfOwnerEntry, Count, a13);
-
+	static long num = 0;
     if (memcmp(NPI_MS_ID, NPI_MS_NDIS_MODULEID, 24) == 0 && pStateEntry)
     {
         typedef struct _STATE_ENTRY {
@@ -1630,8 +1643,20 @@ ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigne
                     memcpy(pEntry->Address, lpMac, 8);
 		        else
 		        {
-			        *(DWORD*)&pEntry->Address[0] = Dll_rand();
-                    *(DWORD*)&pEntry->Address[4] = Dll_rand();
+					wchar_t KeyName1[30] = {0}, KeyName2[30] = {0};
+					Sbie_snwprintf(KeyName1, 30, L"%s%s", L"MacAddressValueMajor", itoa1(num));
+					Sbie_snwprintf(KeyName2, 30, L"%s%s", L"MacAddressValueMinor", itoa1(num));
+					DWORD mac = SbieApi_QueryConfNumber(NULL, KeyName2, 0);
+					DWORD mac2 = SbieApi_QueryConfNumber(NULL,KeyName2,0);
+					if (mac != 0 && mac2 != 0) {
+						*(DWORD*)&pEntry->Address[0] = mac;
+						*(DWORD*)&pEntry->Address[4] = mac2;
+					}
+					else {
+						*(DWORD*)&pEntry->Address[0] = Dll_rand();
+						*(DWORD*)&pEntry->Address[4] = Dll_rand();
+					}
+					num++;
 			        map_insert(&Custom_NicMac, (void*)key, pEntry->Address, 8);
 		        }
 

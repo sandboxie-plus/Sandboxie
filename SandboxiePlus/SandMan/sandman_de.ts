@@ -339,17 +339,17 @@ Um diese Vorlage für eine Sandbox zu deaktivieren, entfernen Sie einfach das H�
         <translation>Entschlüsselungspasswörter für den Archivimport eingeben:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="126"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>kilobytes (%1)</source>
         <translation>Kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="140"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>Passwörter stimmen nicht überein!!!</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="141"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="144"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -358,7 +358,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Es ist empfohlen ein Passwort von 20 oder mehr Zeichen zu wählen. Sind Sie sicher, dass Sie ein kurzes Passwort verwenden möchten?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="150"/>
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
@@ -368,7 +368,7 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
 	</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="164"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="167"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>Das Boxdiskabbild muss mindestens 256 MB groß sein, empfohlen werden 2 GB.</translation>
     </message>

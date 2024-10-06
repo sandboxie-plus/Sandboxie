@@ -480,17 +480,17 @@ För att inaktivera denna mall för en sandlåda, avbocka den helt enkelt i mall
         <translation>För in krypteringslösenorden för arkivimport:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="126"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>kilobytes (%1)</source>
         <translation>kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="140"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>Lösenorden matchar inte!</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="141"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="144"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -499,7 +499,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Det rekommenderas att välja ett lösenord bestående av 20 tecken eller mer. Säkert att du vill använda ett kort lösenord?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="150"/>
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
@@ -508,7 +508,7 @@ Denna längd tillåter ungefär 384-bitar av entropi med en lösenfras komponera
 utökas till 512-bitar med tillämpandet av Leet (L337) talmodifikationer, och övergår 768-bitar vid komponering av fullständigt slumpmässiga tryckbara ASCII tecken.</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="164"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="167"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>Låddiskavbilden måste vara minst 256MB i storlek, 2GB är rekommenderat.</translation>
     </message>

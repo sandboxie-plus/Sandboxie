@@ -496,17 +496,17 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <translation>输入磁盘映像加密密码以导入映像备份：</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="126"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>kilobytes (%1)</source>
         <translation>Kb (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="140"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>输入的密码不正确！！！</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="141"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="144"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -514,7 +514,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
         推荐使用长度至少为 20 字符以上的密码。或者，您仍要使用短密码吗？</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="150"/>
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
@@ -523,7 +523,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
 如果使用 Leet(L337) 密语，则增加到 512 位熵，如果完全由随机的可打印 ASCII 字符组成，则允许超过 768 位熵。</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="164"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="167"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>磁盘映像大小至少为 256MB，推荐设置为 2GB。</translation>
     </message>

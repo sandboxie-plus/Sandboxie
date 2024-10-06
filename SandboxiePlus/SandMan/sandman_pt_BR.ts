@@ -399,17 +399,17 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <translation type="unfinished">Digite as senhas de criptografia para importar o arquivo:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="126"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>kilobytes (%1)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="140"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>As senhas não coincidem!!!</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="141"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="144"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -418,7 +418,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Recomenda-se escolher uma senha com 20 ou mais caracteres. Tem certeza de que deseja usar uma senha curta?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="150"/>
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
@@ -427,7 +427,7 @@ Esse comprimento permite aproximadamente 384 bits de entropia com uma senha comp
 aumenta para 512 bits com a aplicação de modificações de fala de Leet (L337) e excede 768 bits quando composto de caracteres ASCII imprimíveis totalmente aleatórios.</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="164"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="167"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation type="unfinished">A Imagem de Disco da Caixa deve ter pelo menos 256MB de tamanho, 2GB são recomendados.</translation>
     </message>

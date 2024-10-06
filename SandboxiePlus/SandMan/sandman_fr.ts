@@ -414,17 +414,17 @@ Pour désactiver ce modèle pour un bac à sable, décochez-le simplement dans l
         <translation>Saisir le mot de passe de chiffrement pour importer l&apos;archive :</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="126"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>kilobytes (%1)</source>
         <translation>kilo-octets (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="140"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>Les mots de passe ne correspondent pas !!!</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="141"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="144"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -433,7 +433,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Il est recommandé de choisir un mot de passe comportant 20 caractères ou plus. Êtes-vous sûr de vouloir utiliser un mot de passe court ?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="150"/>
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
@@ -442,7 +442,7 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
 512 bits lors de l&apos;utilisation de « leet speak » (L337), et plus de 768 bits lorsqu&apos;elle est composée de caractères ASCII imprimables complètement aléatoires.</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="164"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="167"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>L&apos;image de disque du bac doit avoir une taille d&apos;au moins 256 Mio ; 2 Gio sont recommandés.</translation>
     </message>

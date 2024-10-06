@@ -23,6 +23,8 @@
 //#include <windows.h>
 //#include "common/win32_ntddk.h"
 #include "dll.h"
+#include "obj.h"
+#include <wchar.h>
 
 #include "common/pool.h"
 #include "common/map.h"
@@ -531,10 +533,54 @@ wchar_t itoa0(int num) {
 	default:return L'0';
 	}
 }
+int IsValidHexString(const wchar_t* hexString)
+{
+	int length = lstrlen(hexString);
+	if (length != 9 || hexString[4] != L'-')
+	{
+		return 0;
+	}
+	for (int i = 0; i < length; i++)
+	{
+		if (i != 4 && !iswxdigit(hexString[i]))
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+unsigned long HexStringToULONG(const wchar_t* hexString) {
+	int length = lstrlen(hexString);
+	for (int i = 0; i < length; ++i) {
+		if (hexString[i] == L'-') {
+			length--;
+		}
+	}
+
+	wchar_t* cleanedHexString = (wchar_t*)malloc(length + 1);
+	if (!cleanedHexString) {
+		return 0;
+	}
+
+	int j = 0;
+	for (int i = 0; i < strlen(hexString); ++i) {
+		if (hexString[i] != L'-') {
+			cleanedHexString[j++] = hexString[i];
+		}
+	}
+	cleanedHexString[j] = L'\0';
+	unsigned long ulongValue = wcstoul(cleanedHexString, NULL, 16);
+
+	free(cleanedHexString);
+
+	return ulongValue;
+}
+
 _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize) 
 {
 	DWORD ourSerialNumber = 0;
 	static long num = 0;
+
 	BOOL rtn = __sys_GetVolumeInformationByHandleW(hFile, lpVolumeNameBuffer, nVolumeNameSize, &ourSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
 	if (lpVolumeSerialNumber != NULL) {
 
@@ -547,13 +593,22 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 			*lpVolumeSerialNumber = *lpCachedSerialNumber;
 		else
 		{
-			wchar_t KeyName[30] = { 0 };
-			Sbie_snwprintf(KeyName, 30, L"%s%s", L"DiskSerialNumberValue", itoa0(num));
-			DWORD conf = SbieApi_QueryConfNumber(NULL, KeyName, 0);
-			if (conf == 0)
+			wchar_t Value[30] = { 0 };
+			//Sbie_snwprintf(KeyName, 30, L"%s%s", L"DiskSerialNumberValue", itoa0(num));
+			//DWORD conf = SbieApi_QueryConfNumber(NULL, KeyName, 0);
+			wchar_t handleName[MAX_PATH] = { 0 };
+			Obj_GetObjectName(hFile, handleName, MAX_PATH);
+			SbieDll_GetSettingsForName(NULL, L"DiskSerialNumber", handleName, Value, 30, L"0000-0000");
+			if (!IsValidHexString(Value))
 				*lpVolumeSerialNumber = Dll_rand();
-			else
-				*lpVolumeSerialNumber = conf;
+			else {
+				//*lpVolumeSerialNumber = conf;
+				DWORD conf=HexStringToULONG(Value);
+				if(conf==0)
+					*lpVolumeSerialNumber = Dll_rand();
+				else
+					*lpVolumeSerialNumber = conf;
+			}
 			num++;
 			map_insert(&Kernel_DiskSN, key, lpVolumeSerialNumber, sizeof(DWORD));
 		}

@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.1x.xx / 5.xx.xx] - 2024-xx-xx
+
+### Added
+- added "DiskSerialNumberValueX"(Fill number 0-9 to 'X') to set Disk Serial Number for indivdal box.
+
+
+
 ## [1.14.10 / 5.69.10] - 2024-10-03
 
 ### Added

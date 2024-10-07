@@ -595,10 +595,14 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 			wchar_t Value[30] = { 0 };
 			//Sbie_snwprintf(KeyName, 30, L"%s%s", L"DiskSerialNumberValue", itoa0(num));
 			//DWORD conf = SbieApi_QueryConfNumber(NULL, KeyName, 0);
-			wchar_t handleName[MAX_PATH] = { 0 };
+			wchar_t handleName[MAX_PATH] = { 0 }, handleName2[23 + 1] = { 0 };
 			DWORD dWroteNum = 0;
 			Obj_GetObjectName(hFile, handleName, &dWroteNum);
-			SbieDll_GetSettingsForName(NULL, L"DiskSerialNumber", handleName, Value, 30, L"0000-0000");
+			if (dWroteNum > MAX_PATH)
+				ExitProcess(0);
+			strncpy_s(handleName2,24, handleName, 23);
+			
+			SbieDll_GetSettingsForName(NULL, L"DiskSerialNumber", handleName2, Value, 30, L"0000-0000");
 			if (!IsValidHexString(Value))
 				*lpVolumeSerialNumber = Dll_rand();
 			else {

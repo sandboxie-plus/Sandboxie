@@ -556,14 +556,13 @@ unsigned long HexStringToULONG(const wchar_t* hexString) {
 			length--;
 		}
 	}
-
-	wchar_t* cleanedHexString = (wchar_t*)malloc(length + 1);
+	wchar_t* cleanedHexString = (wchar_t*)Dll_Alloc(length + 1);
 	if (!cleanedHexString) {
 		return 0;
 	}
 
 	int j = 0;
-	for (int i = 0; i < strlen(hexString); ++i) {
+	for (int i = 0; i < lstrlen(hexString); ++i) {
 		if (hexString[i] != L'-') {
 			cleanedHexString[j++] = hexString[i];
 		}
@@ -571,7 +570,7 @@ unsigned long HexStringToULONG(const wchar_t* hexString) {
 	cleanedHexString[j] = L'\0';
 	unsigned long ulongValue = wcstoul(cleanedHexString, NULL, 16);
 
-	free(cleanedHexString);
+	Dll_Free(cleanedHexString);
 
 	return ulongValue;
 }

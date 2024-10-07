@@ -601,7 +601,7 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 			if (dWroteNum > MAX_PATH)
 				ExitProcess(0);
 			strncpy_s(handleName2,24, handleName, 23);
-			
+			MessageBox(NULL,handleName2,handleName2,MB_OK);
 			SbieDll_GetSettingsForName(NULL, L"DiskSerialNumber", handleName2, Value, 30, L"0000-0000");
 			if (!IsValidHexString(Value))
 				*lpVolumeSerialNumber = Dll_rand();

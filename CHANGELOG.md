@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed ImDiskApp uninstall key is always written to the registry [#4282](https://github.com/sandboxie-plus/Sandboxie/issues/4282)
 
+### Changed
+- improved SandboxieCrypto startup
 
 
 

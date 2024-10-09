@@ -989,7 +989,7 @@ _FX ULONG Scm_StartBoxedService2(const WCHAR *name, SERVICE_QUERY_RPL *qrpl)
         _wcsicmp(name, _wuauserv) == 0       ||
         _wcsicmp(name, Scm_CryptSvc) == 0) {
 
-        PROCESS_INFORMATION pi;
+        //PROCESS_INFORMATION pi;
         STARTUPINFO si;
 
         const WCHAR *ProcessName;

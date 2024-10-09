@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.14.11 / 5.69.11] - 2024-10-
+
+### Fixed
+- fixed ImDiskApp uninstall key is always written to the registry [#4282](https://github.com/sandboxie-plus/Sandboxie/issues/4282)
+
+
+
+
 ## [1.14.10 / 5.69.10] - 2024-10-03
 
 ### Added

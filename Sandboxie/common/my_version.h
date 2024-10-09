@@ -26,7 +26,7 @@
 
 #define VERSION_MJR		5
 #define VERSION_MIN 	69
-#define VERSION_REV 	10
+#define VERSION_REV 	11
 #define VERSION_UPD 	0
 
 #if VERSION_UPD > 0

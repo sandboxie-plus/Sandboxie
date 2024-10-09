@@ -424,6 +424,14 @@ bool CSbieTemplates::CheckRegistryKey(const QString& Value)
 {
 	std::wstring keypath = Value.toStdWString();
 
+	if (keypath.find(L"HKEY_LOCAL_MACHINE") == 0)		keypath.replace(0, wcslen(L"HKEY_LOCAL_MACHINE"), L"\\REGISTRY\\MACHINE");
+	else if (keypath.find(L"HKEY_CLASSES_ROOT") == 0)	keypath.replace(0, wcslen(L"HKEY_CLASSES_ROOT"), L"\\REGISTRY\\MACHINE\\SOFTWARE\\Classes");
+	//else if (keypath.find(L"HKEY_CURRENT_USER") == 0)	keypath.replace(0, wcslen(L"HKEY_CURRENT_USER"), L"\\REGISTRY\\USER" + SID);
+	else if (keypath.find(L"HKEY_USERS") == 0)			keypath.replace(0, wcslen(L"HKEY_USERS"), L"\\REGISTRY\\USER");
+	//else if (keypath.find(L"HKEY_CURRENT_CONFIG") == 0) keypath.replace(0, wcslen(L"HKEY_CURRENT_CONFIG"), L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Hardware Profiles\\Current");
+	else 
+		return false;
+
 	OBJECT_ATTRIBUTES objattrs;
 	UNICODE_STRING objname;
 	RtlInitUnicodeString(&objname, keypath.c_str());

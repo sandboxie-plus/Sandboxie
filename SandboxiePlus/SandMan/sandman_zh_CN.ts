@@ -63,55 +63,55 @@
 <context>
     <name>CAddonManager</name>
     <message>
-        <location filename="AddonManager.cpp" line="160"/>
+        <location filename="AddonManager.cpp" line="155"/>
         <source>Do you want to download and install %1?</source>
         <translation>是否下载并安装 %1 ？</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="166"/>
+        <location filename="AddonManager.cpp" line="161"/>
         <source>Installing: %1</source>
         <translation>正在安装：%1</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="190"/>
+        <location filename="AddonManager.cpp" line="185"/>
         <source>Add-on not found, please try updating the add-on list in the global settings!</source>
         <translation>未找到加载项，请尝试在全局设置中更新加载项列表！</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="234"/>
+        <location filename="AddonManager.cpp" line="229"/>
         <source>Add-on Not Found</source>
         <translation>未找到加载项</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="235"/>
+        <location filename="AddonManager.cpp" line="230"/>
         <source>Add-on is not available for this platform</source>
         <oldsource>Addon is not available for this paltform</oldsource>
         <translation>加载项在当前平台不适用</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="236"/>
+        <location filename="AddonManager.cpp" line="231"/>
         <source>Missing installation instructions</source>
         <oldsource>Missing instalation instructions</oldsource>
         <translation>缺失安装指引</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="237"/>
+        <location filename="AddonManager.cpp" line="232"/>
         <source>Executing add-on setup failed</source>
         <translation>加载项安装失败</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="238"/>
+        <location filename="AddonManager.cpp" line="233"/>
         <source>Failed to delete a file during add-on removal</source>
         <translation>移除加载项时删除文件失败</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="252"/>
+        <location filename="AddonManager.cpp" line="247"/>
         <source>Updater failed to perform add-on operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
         <translation>加载项更新失败</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="254"/>
+        <location filename="AddonManager.cpp" line="249"/>
         <source>Updater failed to perform add-on operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
         <translation>加载项更新失败，错误： %1</translation>
@@ -160,17 +160,17 @@
         <translation type="vanished">加载项安装失败！</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="174"/>
+        <location filename="AddonManager.cpp" line="169"/>
         <source>Do you want to remove %1?</source>
         <translation>是否要删除%1？</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="180"/>
+        <location filename="AddonManager.cpp" line="175"/>
         <source>Removing: %1</source>
         <translation>正在删除：%1</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="214"/>
+        <location filename="AddonManager.cpp" line="209"/>
         <source>Add-on not found!</source>
         <translation>未找到加载项！</translation>
     </message>

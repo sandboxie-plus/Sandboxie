@@ -63,55 +63,55 @@
 <context>
     <name>CAddonManager</name>
     <message>
-        <location filename="AddonManager.cpp" line="160"/>
+        <location filename="AddonManager.cpp" line="155"/>
         <source>Do you want to download and install %1?</source>
         <translation>Vill du nedladda och installera %1?</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="166"/>
+        <location filename="AddonManager.cpp" line="161"/>
         <source>Installing: %1</source>
         <translation>Installerar: %1</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="190"/>
+        <location filename="AddonManager.cpp" line="185"/>
         <source>Add-on not found, please try updating the add-on list in the global settings!</source>
         <translation>Tillägget hittades inte, vänligen försök uppdatera tilläggslistan i Globala inställningar!</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="234"/>
+        <location filename="AddonManager.cpp" line="229"/>
         <source>Add-on Not Found</source>
         <translation>Tillägget hittades inte</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="235"/>
+        <location filename="AddonManager.cpp" line="230"/>
         <source>Add-on is not available for this platform</source>
         <oldsource>Addon is not available for this paltform</oldsource>
         <translation>Tillägg är inte tillgängligt för denna plattform</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="236"/>
+        <location filename="AddonManager.cpp" line="231"/>
         <source>Missing installation instructions</source>
         <oldsource>Missing installation instructions</oldsource>
         <translation>Saknade installationsinstruktioner</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="237"/>
+        <location filename="AddonManager.cpp" line="232"/>
         <source>Executing add-on setup failed</source>
         <translation>Verkställande av tilläggsinstallation misslyckades</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="238"/>
+        <location filename="AddonManager.cpp" line="233"/>
         <source>Failed to delete a file during add-on removal</source>
         <translation>Lyckades inte radera en fil vid tilläggsborttagande</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="252"/>
+        <location filename="AddonManager.cpp" line="247"/>
         <source>Updater failed to perform add-on operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
         <translation>Uppdateraren lyckades inte utföra operationen för tillägget</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="254"/>
+        <location filename="AddonManager.cpp" line="249"/>
         <source>Updater failed to perform add-on operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
         <translation>Uppdateraren lyckades inte utföra operationen för tillägget, fel: %1</translation>
@@ -160,17 +160,17 @@
         <translation type="vanished">Tilläggsinstallering misslyckades!</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="174"/>
+        <location filename="AddonManager.cpp" line="169"/>
         <source>Do you want to remove %1?</source>
         <translation>Vill du ta bort %1?</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="180"/>
+        <location filename="AddonManager.cpp" line="175"/>
         <source>Removing: %1</source>
         <translation>Tar bort: %1</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="214"/>
+        <location filename="AddonManager.cpp" line="209"/>
         <source>Add-on not found!</source>
         <translation>Tillägget hittades inte!</translation>
     </message>

@@ -63,67 +63,67 @@
 <context>
     <name>CAddonManager</name>
     <message>
-        <location filename="AddonManager.cpp" line="160"/>
+        <location filename="AddonManager.cpp" line="155"/>
         <source>Do you want to download and install %1?</source>
         <translation>Вы хотите загрузить и установить %1?</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="166"/>
+        <location filename="AddonManager.cpp" line="161"/>
         <source>Installing: %1</source>
         <translation>Установка: %1</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="190"/>
+        <location filename="AddonManager.cpp" line="185"/>
         <source>Add-on not found, please try updating the add-on list in the global settings!</source>
         <translation>Дополнение не найдено, попробуйте обновить список дополнений в глобальных настройках!</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="234"/>
+        <location filename="AddonManager.cpp" line="229"/>
         <source>Add-on Not Found</source>
         <translation>Дополнение не найдено</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="235"/>
+        <location filename="AddonManager.cpp" line="230"/>
         <source>Add-on is not available for this platform</source>
         <translation>Дополнение недоступно для этой платформы</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="236"/>
+        <location filename="AddonManager.cpp" line="231"/>
         <source>Missing installation instructions</source>
         <translation>Отсутствует инструкция по установке</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="237"/>
+        <location filename="AddonManager.cpp" line="232"/>
         <source>Executing add-on setup failed</source>
         <translation>Не удалось выполнить настройку дополнения</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="238"/>
+        <location filename="AddonManager.cpp" line="233"/>
         <source>Failed to delete a file during add-on removal</source>
         <translation>Не удалось удалить файл при удалении дополнения</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="252"/>
+        <location filename="AddonManager.cpp" line="247"/>
         <source>Updater failed to perform add-on operation</source>
         <translation>Программе обновления не удалось выполнить операцию допонения</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="254"/>
+        <location filename="AddonManager.cpp" line="249"/>
         <source>Updater failed to perform add-on operation, error: %1</source>
         <translation>Программе обновления не удалось выполнить операцию допонения, ошибка: %1</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="174"/>
+        <location filename="AddonManager.cpp" line="169"/>
         <source>Do you want to remove %1?</source>
         <translation>Вы хотите удалить %1?</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="180"/>
+        <location filename="AddonManager.cpp" line="175"/>
         <source>Removing: %1</source>
         <translation>Удаление: %1</translation>
     </message>
     <message>
-        <location filename="AddonManager.cpp" line="214"/>
+        <location filename="AddonManager.cpp" line="209"/>
         <source>Add-on not found!</source>
         <translation>Дополнение не найдено!</translation>
     </message>

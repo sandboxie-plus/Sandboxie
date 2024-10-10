@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - \\??\\%SystemDrive%\\Sandbox\\%SANDBOX%
   - \\??\\%SystemDrive%\\Users\\%USER%\Sandbox\\%SANDBOX%
 - added Sandbox Import dialog
+- added a menu action to clean boxes after the machine reboot
 
 ### Changed
 - sandbox root selection in global settings is now a combo box

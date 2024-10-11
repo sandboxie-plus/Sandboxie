@@ -201,6 +201,7 @@ private:
 	QMenu*					m_pMenuTools;
 	QAction*				m_pMenuDuplicate;
 	QAction*				m_pMenuExport;
+	QAction*                m_pRebootClean;
 	QAction*				m_pMenuMoveUp;
 	//QAction*				m_pMenuMoveBy;
 	QAction*				m_pMenuMoveDown;

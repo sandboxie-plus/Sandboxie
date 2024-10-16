@@ -98,6 +98,9 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="buddy">
+                  <cstring>cmbBoxIndicator</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="2" column="0" colspan="3">
@@ -107,6 +110,9 @@
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbBoxBorder</cstring>
                  </property>
                 </widget>
                </item>
@@ -219,6 +225,9 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="buddy">
+                  <cstring>cmbBoxType</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="2" column="7">
@@ -228,6 +237,9 @@
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>spinBorderWidth</cstring>
                  </property>
                 </widget>
                </item>
@@ -267,6 +279,9 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="buddy">
+                  <cstring>cmbDblClick</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="5" column="3" colspan="4">
@@ -291,6 +306,9 @@
                 <widget class="QLabel" name="lblScheme">
                  <property name="text">
                   <string>Virtualization scheme</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbVersion</cstring>
                  </property>
                 </widget>
                </item>
@@ -1649,6 +1667,9 @@
                  <property name="text">
                   <string>Total Processes Number Limit:</string>
                  </property>
+                 <property name="buddy">
+                  <cstring>txtTotalNumber</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="6" column="3">
@@ -1703,6 +1724,9 @@
                  <property name="text">
                   <string>Single Process Memory Limit:</string>
                  </property>
+                 <property name="buddy">
+                  <cstring>txtSingleMemory</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="7" column="5">
@@ -1745,6 +1769,9 @@
                 <widget class="QLabel" name="label_56">
                  <property name="text">
                   <string>Total Processes Memory Limit:</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>txtTotalMemory</cstring>
                  </property>
                 </widget>
                </item>
@@ -3442,6 +3469,9 @@ The process match level has a higher priority than the specificity and describes
                    <property name="text">
                     <string>Set network/internet access for unlisted processes:</string>
                    </property>
+                   <property name="buddy">
+                    <cstring>cmbBlockINet</cstring>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -3489,6 +3519,9 @@ The process match level has a higher priority than the specificity and describes
                    <property name="text">
                     <string>Test Rules, Program:</string>
                    </property>
+                   <property name="buddy">
+                    <cstring>txtProgFwTest</cstring>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -3498,6 +3531,9 @@ The process match level has a higher priority than the specificity and describes
                   <widget class="QLabel" name="label_49">
                    <property name="text">
                     <string>Port:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>txtPortFwTest</cstring>
                    </property>
                   </widget>
                  </item>
@@ -3509,6 +3545,9 @@ The process match level has a higher priority than the specificity and describes
                    <property name="text">
                     <string>IP:</string>
                    </property>
+                   <property name="buddy">
+                    <cstring>txtIPFwTest</cstring>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -3518,6 +3557,9 @@ The process match level has a higher priority than the specificity and describes
                   <widget class="QLabel" name="label_51">
                    <property name="text">
                     <string>Protocol:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>cmbProtFwTest</cstring>
                    </property>
                   </widget>
                  </item>
@@ -5361,6 +5403,9 @@ instead of &quot;*&quot;.</string>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="buddy">
+                  <cstring>cmbCategories</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="6" column="4">
@@ -5428,6 +5473,9 @@ instead of &quot;*&quot;.</string>
                 <widget class="QLabel" name="label_15">
                  <property name="text">
                   <string>Text Filter</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>txtTemplates</cstring>
                  </property>
                 </widget>
                </item>
@@ -5743,60 +5791,258 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>cmbBoxBorder</tabstop>
   <tabstop>btnBorderColor</tabstop>
   <tabstop>spinBorderWidth</tabstop>
-  <tabstop>treeRun</tabstop>
-  <tabstop>btnAddCmd</tabstop>
-  <tabstop>btnDelCmd</tabstop>
+  <tabstop>chkShowForRun</tabstop>
+  <tabstop>chkPinToTray</tabstop>
+  <tabstop>cmbDblClick</tabstop>
+  <tabstop>cmbBoxType</tabstop>
+  <tabstop>cmbVersion</tabstop>
+  <tabstop>chkSeparateUserFolders</tabstop>
+  <tabstop>chkUseVolumeSerialNumbers</tabstop>
+  <tabstop>chkRamBox</tabstop>
+  <tabstop>chkEncrypt</tabstop>
+  <tabstop>btnPassword</tabstop>
+  <tabstop>chkForceProtection</tabstop>
   <tabstop>chkAutoEmpty</tabstop>
   <tabstop>chkProtectBox</tabstop>
-  <tabstop>treeTriggers</tabstop>
-  <tabstop>btnDelAuto</tabstop>
+  <tabstop>chkRawDiskRead</tabstop>
+  <tabstop>chkRawDiskNotify</tabstop>
+  <tabstop>chkCopyLimit</tabstop>
+  <tabstop>txtCopyLimit</tabstop>
+  <tabstop>chkCopyPrompt</tabstop>
+  <tabstop>chkNoCopyWarn</tabstop>
+  <tabstop>chkDenyWrite</tabstop>
+  <tabstop>treeCopy</tabstop>
+  <tabstop>btnAddCopy</tabstop>
+  <tabstop>chkShowCopyTmpl</tabstop>
+  <tabstop>btnDelCopy</tabstop>
+  <tabstop>chkNoCopyMsg</tabstop>
+  <tabstop>chkBlockSpooler</tabstop>
+  <tabstop>chkOpenSpooler</tabstop>
+  <tabstop>chkPrintToFile</tabstop>
+  <tabstop>chkOpenProtectedStorage</tabstop>
+  <tabstop>chkOpenCredentials</tabstop>
+  <tabstop>chkCloseClipBoard</tabstop>
+  <tabstop>chkVmRead</tabstop>
+  <tabstop>chkVmReadNotify</tabstop>
+  <tabstop>chkProtectPower</tabstop>
+  <tabstop>chkUserOperation</tabstop>
+  <tabstop>chkCoverBar</tabstop>
+  <tabstop>chkBlockCapture</tabstop>
+  <tabstop>chkOpenDevCMApi</tabstop>
+  <tabstop>chkOpenSamEndpoint</tabstop>
+  <tabstop>chkOpenLsaEndpoint</tabstop>
+  <tabstop>treeRun</tabstop>
+  <tabstop>btnAddCmd</tabstop>
+  <tabstop>btnCmdUp</tabstop>
+  <tabstop>btnCmdDown</tabstop>
+  <tabstop>btnDelCmd</tabstop>
+  <tabstop>tabsSecurity</tabstop>
+  <tabstop>chkSecurityMode</tabstop>
+  <tabstop>chkLockDown</tabstop>
+  <tabstop>chkRestrictDevices</tabstop>
+  <tabstop>chkDropRights</tabstop>
+  <tabstop>chkFakeElevation</tabstop>
+  <tabstop>chkMsiExemptions</tabstop>
+  <tabstop>chkNoSecurityIsolation</tabstop>
+  <tabstop>chkNoSecurityFiltering</tabstop>
+  <tabstop>chkConfidential</tabstop>
+  <tabstop>chkLessConfidential</tabstop>
+  <tabstop>chkProtectWindow</tabstop>
+  <tabstop>chkAdminOnly</tabstop>
+  <tabstop>treeHostProc</tabstop>
+  <tabstop>btnHostProcessAllow</tabstop>
+  <tabstop>btnHostProcessDeny</tabstop>
+  <tabstop>chkShowHostProcTmpl</tabstop>
+  <tabstop>btnDelHostProcess</tabstop>
+  <tabstop>chkNotifyProtect</tabstop>
+  <tabstop>chkAddToJob</tabstop>
+  <tabstop>chkNestedJobs</tabstop>
+  <tabstop>txtSingleMemory</tabstop>
+  <tabstop>txtTotalMemory</tabstop>
+  <tabstop>txtTotalNumber</tabstop>
+  <tabstop>chkProtectSCM</tabstop>
+  <tabstop>chkRestrictServices</tabstop>
+  <tabstop>chkElevateRpcss</tabstop>
+  <tabstop>chkProtectSystem</tabstop>
+  <tabstop>chkDropPrivileges</tabstop>
+  <tabstop>chkDropConHostIntegrity</tabstop>
+  <tabstop>chkSbieLogon</tabstop>
+  <tabstop>chkCreateToken</tabstop>
   <tabstop>treeGroups</tabstop>
   <tabstop>btnAddGroup</tabstop>
   <tabstop>btnAddProg</tabstop>
+  <tabstop>chkShowGroupTmpl</tabstop>
   <tabstop>btnDelProg</tabstop>
+  <tabstop>tabsForce</tabstop>
+  <tabstop>treeForced</tabstop>
+  <tabstop>btnForceProg</tabstop>
+  <tabstop>btnForceChild</tabstop>
+  <tabstop>btnForceDir</tabstop>
+  <tabstop>chkShowForceTmpl</tabstop>
+  <tabstop>btnDelForce</tabstop>
+  <tabstop>chkDisableForced</tabstop>
+  <tabstop>treeBreakout</tabstop>
+  <tabstop>btnBreakoutProg</tabstop>
+  <tabstop>btnBreakoutDir</tabstop>
+  <tabstop>chkShowBreakoutTmpl</tabstop>
+  <tabstop>btnDelBreakout</tabstop>
+  <tabstop>tabsStop</tabstop>
   <tabstop>treeStop</tabstop>
   <tabstop>btnAddLingering</tabstop>
   <tabstop>chkShowStopTmpl</tabstop>
   <tabstop>btnDelStopProg</tabstop>
+  <tabstop>treeLeader</tabstop>
+  <tabstop>btnAddLeader</tabstop>
+  <tabstop>chkShowLeaderTmpl</tabstop>
+  <tabstop>btnDelLeader</tabstop>
+  <tabstop>chkNoStopWnd</tabstop>
+  <tabstop>chkLingerLeniency</tabstop>
   <tabstop>radStartAll</tabstop>
   <tabstop>radStartExcept</tabstop>
   <tabstop>radStartSelected</tabstop>
   <tabstop>treeStart</tabstop>
   <tabstop>btnAddStartProg</tabstop>
+  <tabstop>chkShowStartTmpl</tabstop>
   <tabstop>btnDelStartProg</tabstop>
   <tabstop>chkStartBlockMsg</tabstop>
+  <tabstop>chkAlertBeforeStart</tabstop>
+  <tabstop>tabsAccess</tabstop>
+  <tabstop>treeFiles</tabstop>
+  <tabstop>btnAddFile</tabstop>
+  <tabstop>chkShowFilesTmpl</tabstop>
+  <tabstop>btnDelFile</tabstop>
+  <tabstop>treeKeys</tabstop>
+  <tabstop>btnAddKey</tabstop>
+  <tabstop>chkShowKeysTmpl</tabstop>
+  <tabstop>btnDelKey</tabstop>
+  <tabstop>treeIPC</tabstop>
+  <tabstop>btnAddIPC</tabstop>
+  <tabstop>chkShowIPCTmpl</tabstop>
+  <tabstop>btnDelIPC</tabstop>
+  <tabstop>treeWnd</tabstop>
+  <tabstop>btnAddWnd</tabstop>
+  <tabstop>chkShowWndTmpl</tabstop>
+  <tabstop>btnDelWnd</tabstop>
+  <tabstop>chkNoWindowRename</tabstop>
+  <tabstop>treeCOM</tabstop>
+  <tabstop>btnAddCOM</tabstop>
+  <tabstop>chkShowCOMTmpl</tabstop>
+  <tabstop>btnDelCOM</tabstop>
+  <tabstop>chkOpenCOM</tabstop>
+  <tabstop>chkPrivacy</tabstop>
+  <tabstop>chkUseSpecificity</tabstop>
+  <tabstop>chkCloseForBox</tabstop>
+  <tabstop>chkNoOpenForBox</tabstop>
+  <tabstop>tabsInternet</tabstop>
+  <tabstop>cmbBlockINet</tabstop>
   <tabstop>chkINetBlockPrompt</tabstop>
   <tabstop>treeINet</tabstop>
   <tabstop>btnAddINetProg</tabstop>
   <tabstop>btnDelINetProg</tabstop>
   <tabstop>chkINetBlockMsg</tabstop>
+  <tabstop>treeNetFw</tabstop>
+  <tabstop>btnAddFwRule</tabstop>
+  <tabstop>chkShowNetFwTmpl</tabstop>
+  <tabstop>btnDelFwRule</tabstop>
+  <tabstop>txtProgFwTest</tabstop>
+  <tabstop>txtPortFwTest</tabstop>
+  <tabstop>txtIPFwTest</tabstop>
+  <tabstop>cmbProtFwTest</tabstop>
+  <tabstop>btnClearFwTest</tabstop>
+  <tabstop>treeDns</tabstop>
+  <tabstop>btnAddDns</tabstop>
+  <tabstop>btnDelDns</tabstop>
+  <tabstop>treeProxy</tabstop>
+  <tabstop>btnAddProxy</tabstop>
+  <tabstop>btnTestProxy</tabstop>
+  <tabstop>btnMoveProxyUp</tabstop>
+  <tabstop>btnMoveProxyDown</tabstop>
+  <tabstop>chkProxyResolveHostnames</tabstop>
+  <tabstop>btnDelProxy</tabstop>
+  <tabstop>chkBlockSamba</tabstop>
+  <tabstop>chkBlockDns</tabstop>
+  <tabstop>chkBlockNetShare</tabstop>
+  <tabstop>chkBlockNetParam</tabstop>
+  <tabstop>tabsRecovery</tabstop>
   <tabstop>treeRecovery</tabstop>
   <tabstop>btnAddRecovery</tabstop>
   <tabstop>chkShowRecoveryTmpl</tabstop>
   <tabstop>btnDelRecovery</tabstop>
+  <tabstop>chkAutoRecovery</tabstop>
+  <tabstop>treeRecIgnore</tabstop>
+  <tabstop>btnAddRecIgnore</tabstop>
+  <tabstop>btnAddRecIgnoreExt</tabstop>
+  <tabstop>chkShowRecIgnoreTmpl</tabstop>
+  <tabstop>btnDelRecIgnore</tabstop>
+  <tabstop>tabsOther</tabstop>
+  <tabstop>chkNoPanic</tabstop>
+  <tabstop>chkPreferExternalManifest</tabstop>
+  <tabstop>chkElevateCreateProcessFix</tabstop>
+  <tabstop>chkUseSbieDeskHack</tabstop>
+  <tabstop>chkUseSbieWndStation</tabstop>
+  <tabstop>chkComTimeout</tabstop>
+  <tabstop>chkForceRestart</tabstop>
+  <tabstop>treeInjectDll</tabstop>
+  <tabstop>chkHostProtect</tabstop>
+  <tabstop>chkHostProtectMsg</tabstop>
   <tabstop>tabsAdvanced</tabstop>
+  <tabstop>treeOptions</tabstop>
+  <tabstop>btnAddOption</tabstop>
+  <tabstop>chkShowOptionsTmpl</tabstop>
+  <tabstop>btnDelOption</tabstop>
+  <tabstop>treeTriggers</tabstop>
+  <tabstop>btnAddAutoExec</tabstop>
+  <tabstop>btnAddAutoRun</tabstop>
+  <tabstop>btnAddAutoSvc</tabstop>
+  <tabstop>btnAddTerminateCmd</tabstop>
+  <tabstop>btnAddRecoveryCmd</tabstop>
+  <tabstop>btnAddDeleteCmd</tabstop>
+  <tabstop>chkShowTriggersTmpl</tabstop>
+  <tabstop>btnDelAuto</tabstop>
+  <tabstop>chkHideFirmware</tabstop>
+  <tabstop>btnDumpFW</tabstop>
+  <tabstop>cmbLangID</tabstop>
+  <tabstop>chkHideSerial</tabstop>
+  <tabstop>chkHideMac</tabstop>
+  <tabstop>chkHideUID</tabstop>
   <tabstop>chkHideOtherBoxes</tabstop>
+  <tabstop>chkHideNonSystemProcesses</tabstop>
+  <tabstop>treeHideProc</tabstop>
   <tabstop>btnAddProcess</tabstop>
+  <tabstop>chkShowHiddenProcTmpl</tabstop>
   <tabstop>btnDelProcess</tabstop>
+  <tabstop>chkBlockWMI</tabstop>
   <tabstop>lstUsers</tabstop>
   <tabstop>btnAddUser</tabstop>
   <tabstop>btnDelUser</tabstop>
   <tabstop>chkMonitorAdminOnly</tabstop>
+  <tabstop>chkDisableMonitor</tabstop>
+  <tabstop>chkCallTrace</tabstop>
   <tabstop>chkFileTrace</tabstop>
   <tabstop>chkPipeTrace</tabstop>
   <tabstop>chkKeyTrace</tabstop>
   <tabstop>chkIpcTrace</tabstop>
   <tabstop>chkGuiTrace</tabstop>
   <tabstop>chkComTrace</tabstop>
+  <tabstop>chkNetFwTrace</tabstop>
+  <tabstop>chkDnsTrace</tabstop>
+  <tabstop>chkHookTrace</tabstop>
   <tabstop>chkDbgTrace</tabstop>
+  <tabstop>chkErrTrace</tabstop>
   <tabstop>scrollArea</tabstop>
-  <tabstop>treeTemplates</tabstop>
+  <tabstop>tabsTemplates</tabstop>
   <tabstop>cmbCategories</tabstop>
   <tabstop>txtTemplates</tabstop>
+  <tabstop>treeTemplates</tabstop>
+  <tabstop>btnAddTemplate</tabstop>
+  <tabstop>btnOpenTemplate</tabstop>
+  <tabstop>btnDelTemplate</tabstop>
+  <tabstop>treeFolders</tabstop>
+  <tabstop>chkScreenReaders</tabstop>
   <tabstop>btnEditIni</tabstop>
-  <tabstop>txtIniSection</tabstop>
   <tabstop>btnSaveIni</tabstop>
   <tabstop>btnCancelEdit</tabstop>
+  <tabstop>txtIniSection</tabstop>
  </tabstops>
  <resources/>
  <connections/>

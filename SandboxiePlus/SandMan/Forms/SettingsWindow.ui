@@ -87,6 +87,9 @@
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
+               <property name="buddy">
+                <cstring>uiLang</cstring>
+               </property>
               </widget>
              </item>
              <item row="1" column="1">
@@ -597,6 +600,9 @@
                <property name="openExternalLinks">
                 <bool>true</bool>
                </property>
+               <property name="buddy">
+                <cstring>cmbIntegrateMenu</cstring>
+               </property>
               </widget>
              </item>
              <item row="11" column="2">
@@ -612,6 +618,9 @@
                </property>
                <property name="openExternalLinks">
                 <bool>true</bool>
+               </property>
+               <property name="buddy">
+                <cstring>cmbIntegrateDesk</cstring>
                </property>
               </widget>
              </item>
@@ -678,6 +687,9 @@
                  <property name="openExternalLinks">
                   <bool>true</bool>
                  </property>
+                 <property name="buddy">
+                  <cstring>cmbTrayBoxes</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="1" column="0">
@@ -690,6 +702,9 @@
                  </property>
                  <property name="openExternalLinks">
                   <bool>true</bool>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbSysTray</cstring>
                  </property>
                 </widget>
                </item>
@@ -763,6 +778,9 @@
                 <widget class="QLabel" name="label_28">
                  <property name="text">
                   <string>On main window close:</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbOnClose</cstring>
                  </property>
                 </widget>
                </item>
@@ -1113,6 +1131,9 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="buddy">
+                  <cstring>cmbDPI</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="2" column="3">
@@ -1129,6 +1150,9 @@
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>txtEditor</cstring>
                  </property>
                 </widget>
                </item>
@@ -1262,6 +1286,9 @@
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbFontScale</cstring>
                  </property>
                 </widget>
                </item>
@@ -1508,6 +1535,9 @@
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>txtRamLimit</cstring>
                  </property>
                 </widget>
                </item>
@@ -1835,6 +1865,9 @@
                  <property name="text">
                   <string>Incremental Updates</string>
                  </property>
+                 <property name="buddy">
+                  <cstring>cmbUpdate</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="5" column="2" colspan="2">
@@ -1888,6 +1921,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  </property>
                  <property name="text">
                   <string>Full Upgrades</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbRelease</cstring>
                  </property>
                 </widget>
                </item>
@@ -1961,6 +1997,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QLabel" name="label_5">
                  <property name="text">
                   <string>Update Check Interval</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbInterval</cstring>
                  </property>
                 </widget>
                </item>
@@ -2040,6 +2079,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  <property name="openExternalLinks">
                   <bool>true</bool>
                  </property>
+                 <property name="buddy">
+                  <cstring>regRoot</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="0" column="0">
@@ -2077,6 +2119,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  <property name="openExternalLinks">
                   <bool>true</bool>
                  </property>
+                 <property name="buddy">
+                  <cstring>fileRoot</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="5" column="2">
@@ -2099,6 +2144,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbDefault</cstring>
                  </property>
                 </widget>
                </item>
@@ -2174,6 +2222,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  </property>
                  <property name="openExternalLinks">
                   <bool>true</bool>
+                 </property>
+                 <property name="buddy">
+                  <cstring>ipcRoot</cstring>
                  </property>
                 </widget>
                </item>
@@ -2467,6 +2518,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="buddy">
+                  <cstring>cmbUsbSandbox</cstring>
+                 </property>
                 </widget>
                </item>
                <item row="0" column="0" colspan="2">
@@ -2622,6 +2676,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QLabel" name="label_18">
                  <property name="text">
                   <string>Text Filter</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>txtTemplates</cstring>
                  </property>
                 </widget>
                </item>
@@ -2795,20 +2852,137 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
  </widget>
  <tabstops>
   <tabstop>tabs</tabstop>
+  <tabstop>tabsGeneral</tabstop>
+  <tabstop>uiLang</tabstop>
   <tabstop>chkSandboxUrls</tabstop>
+  <tabstop>chkMonitorSize</tabstop>
+  <tabstop>chkPanic</tabstop>
+  <tabstop>keyPanic</tabstop>
+  <tabstop>chkTop</tabstop>
+  <tabstop>keyTop</tabstop>
+  <tabstop>chkPauseForce</tabstop>
+  <tabstop>keyPauseForce</tabstop>
+  <tabstop>chkSuspend</tabstop>
+  <tabstop>keySuspend</tabstop>
+  <tabstop>chkAsyncBoxOps</tabstop>
+  <tabstop>chkAutoTerminate</tabstop>
+  <tabstop>chkShowRecovery</tabstop>
+  <tabstop>chkCheckDelete</tabstop>
+  <tabstop>chkRecoveryTop</tabstop>
+  <tabstop>chkSilentMode</tabstop>
+  <tabstop>chkCopyProgress</tabstop>
+  <tabstop>chkNotifyRecovery</tabstop>
+  <tabstop>chkNoMessages</tabstop>
+  <tabstop>treeMessages</tabstop>
+  <tabstop>btnAddMessage</tabstop>
+  <tabstop>btnDelMessage</tabstop>
+  <tabstop>tabsShell</tabstop>
+  <tabstop>chkAutoStart</tabstop>
+  <tabstop>chkSvcStart</tabstop>
+  <tabstop>chkShellMenu</tabstop>
+  <tabstop>chkAlwaysDefault</tabstop>
+  <tabstop>chkShellMenu2</tabstop>
+  <tabstop>chkShellMenu3</tabstop>
+  <tabstop>chkShellMenu4</tabstop>
+  <tabstop>chkScanMenu</tabstop>
+  <tabstop>cmbIntegrateMenu</tabstop>
+  <tabstop>cmbIntegrateDesk</tabstop>
+  <tabstop>cmbSysTray</tabstop>
+  <tabstop>cmbTrayBoxes</tabstop>
+  <tabstop>chkCompactTray</tabstop>
+  <tabstop>chkBoxOpsNotify</tabstop>
+  <tabstop>cmbOnClose</tabstop>
+  <tabstop>chkMinimize</tabstop>
+  <tabstop>chkSingleShow</tabstop>
+  <tabstop>treeRun</tabstop>
+  <tabstop>btnAddCmd</tabstop>
+  <tabstop>btnCmdUp</tabstop>
+  <tabstop>btnCmdDown</tabstop>
+  <tabstop>btnDelCmd</tabstop>
+  <tabstop>tabsGUI</tabstop>
+  <tabstop>chkDarkTheme</tabstop>
+  <tabstop>chkFusionTheme</tabstop>
+  <tabstop>chkAltRows</tabstop>
+  <tabstop>chkBackground</tabstop>
+  <tabstop>chkLargeIcons</tabstop>
+  <tabstop>chkNoIcons</tabstop>
+  <tabstop>chkOptTree</tabstop>
+  <tabstop>chkNewLayout</tabstop>
+  <tabstop>chkColorIcons</tabstop>
+  <tabstop>chkOverlayIcons</tabstop>
+  <tabstop>chkHideCore</tabstop>
+  <tabstop>cmbDPI</tabstop>
+  <tabstop>cmbFontScale</tabstop>
+  <tabstop>chkHide</tabstop>
+  <tabstop>btnSelectIniFont</tabstop>
+  <tabstop>btnResetIniFont</tabstop>
+  <tabstop>txtEditor</tabstop>
+  <tabstop>tabsAddons</tabstop>
+  <tabstop>treeAddons</tabstop>
+  <tabstop>btnInstallAddon</tabstop>
+  <tabstop>btnRemoveAddon</tabstop>
+  <tabstop>chkRamDisk</tabstop>
+  <tabstop>txtRamLimit</tabstop>
+  <tabstop>chkRamLetter</tabstop>
+  <tabstop>cmbRamLetter</tabstop>
+  <tabstop>tabsSupport</tabstop>
+  <tabstop>txtCertificate</tabstop>
+  <tabstop>txtSerial</tabstop>
+  <tabstop>btnGetCert</tabstop>
+  <tabstop>chkNoCheck</tabstop>
+  <tabstop>chkAutoUpdate</tabstop>
+  <tabstop>cmbInterval</tabstop>
+  <tabstop>radStable</tabstop>
+  <tabstop>radPreview</tabstop>
+  <tabstop>radInsider</tabstop>
+  <tabstop>cmbUpdate</tabstop>
+  <tabstop>cmbRelease</tabstop>
+  <tabstop>chkUpdateIssues</tabstop>
+  <tabstop>chkUpdateAddons</tabstop>
+  <tabstop>tabsAdvanced</tabstop>
+  <tabstop>cmbDefault</tabstop>
+  <tabstop>chkAutoRoot</tabstop>
   <tabstop>fileRoot</tabstop>
   <tabstop>btnBrowse</tabstop>
   <tabstop>regRoot</tabstop>
   <tabstop>ipcRoot</tabstop>
+  <tabstop>chkWFP</tabstop>
+  <tabstop>chkObjCb</tabstop>
+  <tabstop>chkWin32k</tabstop>
+  <tabstop>chkSbieLogon</tabstop>
+  <tabstop>chkSbieAll</tabstop>
+  <tabstop>chkWatchConfig</tabstop>
+  <tabstop>chkSkipUAC</tabstop>
+  <tabstop>chkAdminOnly</tabstop>
+  <tabstop>chkPassRequired</tabstop>
+  <tabstop>btnSetPassword</tabstop>
+  <tabstop>chkAdminOnlyFP</tabstop>
+  <tabstop>chkClearPass</tabstop>
+  <tabstop>tabsControl</tabstop>
   <tabstop>chkStartBlock</tabstop>
   <tabstop>treeWarnProgs</tabstop>
   <tabstop>btnAddWarnProg</tabstop>
   <tabstop>btnAddWarnFolder</tabstop>
   <tabstop>btnDelWarnProg</tabstop>
+  <tabstop>chkStartBlockMsg</tabstop>
+  <tabstop>chkNotForcedMsg</tabstop>
+  <tabstop>chkSandboxUsb</tabstop>
+  <tabstop>cmbUsbSandbox</tabstop>
+  <tabstop>treeVolumes</tabstop>
+  <tabstop>tabsTemplates</tabstop>
   <tabstop>treeCompat</tabstop>
   <tabstop>btnAddCompat</tabstop>
   <tabstop>btnDelCompat</tabstop>
   <tabstop>chkNoCompat</tabstop>
+  <tabstop>txtTemplates</tabstop>
+  <tabstop>treeTemplates</tabstop>
+  <tabstop>btnAddTemplate</tabstop>
+  <tabstop>btnOpenTemplate</tabstop>
+  <tabstop>btnDelTemplate</tabstop>
+  <tabstop>btnEditIni</tabstop>
+  <tabstop>btnSaveIni</tabstop>
+  <tabstop>btnCancelEdit</tabstop>
+  <tabstop>txtIniSection</tabstop>
  </tabstops>
  <resources>
   <include location="../Resources/SandMan.qrc"/>

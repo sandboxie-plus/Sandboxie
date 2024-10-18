@@ -453,37 +453,37 @@ _FX NTSTATUS File_CreateBoxedPath(const WCHAR *PathToCreate)
 //---------------------------------------------------------------------------
 
 
-_FX BOOL File_GetVolumeInformationW(
-    const WCHAR *lpRootPathName,
-    WCHAR *lpVolumeNameBuffer, ULONG nVolumeNameSize,
-    ULONG *lpVolumeSerialNumber, ULONG *lpMaximumComponentLength,
-    ULONG *lpFileSystemFlags,
-    WCHAR *lpFileSystemNameBuffer, ULONG nFileSystemNameSize)
-{
-    //
-    // the flash plugin process of Google Chrome issues a special form
-    // of GetVolumeInformationW with all-NULL parameters.  this fails
-    // with an access denied error.  to work around this, we install
-    // this hook, and automatically return TRUE in this special case.
-    //
-
-    // $Workaround$ - 3rd party fix
-    if (Dll_ChromeSandbox &&
-        lpVolumeNameBuffer == NULL && nVolumeNameSize == 0 &&
-        lpVolumeSerialNumber == NULL && lpMaximumComponentLength == NULL &&
-        lpFileSystemFlags == NULL &&
-        lpFileSystemNameBuffer == NULL && nFileSystemNameSize == 0) {
-
-        SetLastError(ERROR_SUCCESS);
-        return TRUE;
-
-    }
-
-    return __sys_GetVolumeInformationW(
-        lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize,
-        lpVolumeSerialNumber, lpMaximumComponentLength,
-        lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
-}
+//_FX BOOL File_GetVolumeInformationW(
+//    const WCHAR *lpRootPathName,
+//    WCHAR *lpVolumeNameBuffer, ULONG nVolumeNameSize,
+//    ULONG *lpVolumeSerialNumber, ULONG *lpMaximumComponentLength,
+//    ULONG *lpFileSystemFlags,
+//    WCHAR *lpFileSystemNameBuffer, ULONG nFileSystemNameSize)
+//{
+//    //
+//    // the flash plugin process of Google Chrome issues a special form
+//    // of GetVolumeInformationW with all-NULL parameters.  this fails
+//    // with an access denied error.  to work around this, we install
+//    // this hook, and automatically return TRUE in this special case.
+//    //
+//
+//    // $Workaround$ - 3rd party fix
+//    if (Dll_ChromeSandbox &&
+//        lpVolumeNameBuffer == NULL && nVolumeNameSize == 0 &&
+//        lpVolumeSerialNumber == NULL && lpMaximumComponentLength == NULL &&
+//        lpFileSystemFlags == NULL &&
+//        lpFileSystemNameBuffer == NULL && nFileSystemNameSize == 0) {
+//
+//        SetLastError(ERROR_SUCCESS);
+//        return TRUE;
+//
+//    }
+//
+//    return __sys_GetVolumeInformationW(
+//        lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize,
+//        lpVolumeSerialNumber, lpMaximumComponentLength,
+//        lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
+//}
 
 
 //---------------------------------------------------------------------------

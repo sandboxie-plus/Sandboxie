@@ -908,7 +908,7 @@ _FX BOOL Proc_CreateProcessInternalW(
         // architecture which conflicts with our restricted process model
         //
 
-        if (Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
+        if (//Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
             Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
             Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
             hToken = NULL;

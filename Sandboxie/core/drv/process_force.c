@@ -221,8 +221,15 @@ _FX BOX *Process_GetForcedStartBox(
         return NULL;
     }
 
-    Process_GetProcessName(
-		Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &ParentName);
+    //
+    // initialize ParentName but only if the parrent is not a system process
+    // 
+
+    if (!MyIsProcessRunningAsSystemAccount(ParentId)) {
+
+        Process_GetProcessName(
+            Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &ParentName);
+    }
 
     //
     // initialize some more state before checking process

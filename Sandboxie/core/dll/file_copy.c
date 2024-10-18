@@ -354,6 +354,12 @@ _FX NTSTATUS File_MigrateFile(
         if (status == STATUS_BUFFER_TOO_SMALL) {
             pSecurityDescriptor = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(lengthNeeded);
             status = NtQuerySecurityObject(TrueHandle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, pSecurityDescriptor, lengthNeeded, &lengthNeeded);
+            if (NT_SUCCESS(status)) 
+                File_AddCurrentUserToSD(&pSecurityDescriptor);
+            else {
+                Dll_Free(pSecurityDescriptor);
+                pSecurityDescriptor = NULL;
+            }
         }
 
         if (!NT_SUCCESS(status)) {
@@ -558,6 +564,12 @@ _FX NTSTATUS File_MigrateJunction(
         if (status == STATUS_BUFFER_TOO_SMALL) {
             pSecurityDescriptor = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(lengthNeeded);
             status = NtQuerySecurityObject(TrueHandle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, pSecurityDescriptor, lengthNeeded, &lengthNeeded);
+            if (NT_SUCCESS(status)) 
+                File_AddCurrentUserToSD(&pSecurityDescriptor);
+            else {
+                Dll_Free(pSecurityDescriptor);
+                pSecurityDescriptor = NULL;
+            }
         }
 
         if (!NT_SUCCESS(status)) {

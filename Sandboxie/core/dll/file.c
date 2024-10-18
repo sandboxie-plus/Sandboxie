@@ -151,6 +151,8 @@ static ULONG File_MatchPath(const WCHAR *path, ULONG *FileFlags);
 
 static ULONG File_MatchPath2(const WCHAR *path, ULONG *FileFlags, BOOLEAN bCheckObjectExists, BOOLEAN bMonitorLog);
 
+static NTSTATUS File_AddCurrentUserToSD(PSECURITY_DESCRIPTOR *pSD);
+
 static NTSTATUS File_NtOpenFile(
     HANDLE *FileHandle,
     ACCESS_MASK DesiredAccess,
@@ -2536,6 +2538,162 @@ _FX NTSTATUS File_NtCreateFile(
 
 
 //---------------------------------------------------------------------------
+// File_DuplicateSecurityDescriptor
+//---------------------------------------------------------------------------
+
+
+PSECURITY_DESCRIPTOR File_DuplicateSecurityDescriptor(PSECURITY_DESCRIPTOR pOriginalSD)
+{
+    if (pOriginalSD == NULL || !RtlValidSecurityDescriptor(pOriginalSD))
+        return NULL;
+
+    SECURITY_DESCRIPTOR_CONTROL control;
+    ULONG revision;
+    if (!NT_SUCCESS(RtlGetControlSecurityDescriptor(pOriginalSD, &control, &revision)))
+        return NULL;
+
+    BOOL isSelfRelative = (control & SE_SELF_RELATIVE) != 0;
+
+    if (!isSelfRelative) 
+    {
+        ULONG sdSize = 0;
+        NTSTATUS status = RtlMakeSelfRelativeSD(pOriginalSD, NULL, &sdSize);
+        if (status != STATUS_BUFFER_TOO_SMALL)
+            return NULL;
+
+        PSECURITY_DESCRIPTOR pSelfRelativeSD = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(sdSize);
+        if (pSelfRelativeSD == NULL)
+            return NULL;
+
+        status = RtlMakeSelfRelativeSD(pOriginalSD, pSelfRelativeSD, &sdSize);
+        if (!NT_SUCCESS(status)) {
+            LocalFree(pSelfRelativeSD);
+            return NULL;
+        }
+
+        return pSelfRelativeSD; 
+    }
+    else
+    {
+        ULONG sdSize = RtlLengthSecurityDescriptor(pOriginalSD);
+
+        PSECURITY_DESCRIPTOR pNewSD = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(sdSize);
+        if (pNewSD == NULL)
+            return NULL;
+
+        memcpy(pNewSD, pOriginalSD, sdSize);
+
+        return pNewSD;
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// File_AddCurrentUserToSD
+//---------------------------------------------------------------------------
+
+
+NTSTATUS File_AddCurrentUserToSD(PSECURITY_DESCRIPTOR *pSD)
+{
+    PACL pOldDACL = NULL;
+    PACL pNewDACL = NULL;
+    PSECURITY_DESCRIPTOR pAbsoluteSD = NULL;
+    ULONG daclLength = 0;
+    NTSTATUS status;
+    BOOLEAN daclPresent = FALSE, daclDefaulted = FALSE;
+    ULONG aceCount = 0;
+    ULONG absoluteSDSize = 0, daclSize = 0, saclSize = 0, ownerSize = 0, groupSize = 0;
+    PSID ownerSid = NULL, groupSid = NULL;
+    PACL sacl = NULL;
+
+    if (!Dll_SidString)
+        return STATUS_UNSUCCESSFUL;
+    PSID pSid = Dll_SidStringToSid(Dll_SidString);
+    if (!pSid)
+        return STATUS_UNSUCCESSFUL;
+
+    status = RtlSelfRelativeToAbsoluteSD(*pSD, NULL, &absoluteSDSize, NULL, &daclSize, NULL, &saclSize, NULL, &ownerSize, NULL, &groupSize);
+    if (status != STATUS_BUFFER_TOO_SMALL)
+        return status;
+
+    pAbsoluteSD = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(absoluteSDSize);
+    pOldDACL = (PACL)Dll_AllocTemp(daclSize);
+    sacl = (PACL)Dll_AllocTemp(saclSize);
+    ownerSid = (PSID)Dll_AllocTemp(ownerSize);
+    groupSid = (PSID)Dll_AllocTemp(groupSize);
+
+    if (!pAbsoluteSD || !pOldDACL || !sacl || !ownerSid || !groupSid) {
+        status = STATUS_NO_MEMORY;
+        goto cleanup;
+    }
+
+    status = RtlSelfRelativeToAbsoluteSD(*pSD, pAbsoluteSD, &absoluteSDSize, pOldDACL, &daclSize, sacl, &saclSize, ownerSid, &ownerSize, groupSid, &groupSize);
+    if (!NT_SUCCESS(status))
+        goto cleanup;
+
+    status = RtlGetDaclSecurityDescriptor(pAbsoluteSD, &daclPresent, &pOldDACL, &daclDefaulted);
+    if (!NT_SUCCESS(status) || !daclPresent || !pOldDACL)
+        goto cleanup;
+
+    daclLength = pOldDACL->AclSize + sizeof(ACCESS_ALLOWED_ACE) + RtlLengthSid(pSid) - sizeof(DWORD);
+
+    pNewDACL = (PACL)Dll_AllocTemp(daclLength);
+    if (!pNewDACL) {
+        status = STATUS_NO_MEMORY;
+        goto cleanup;
+    }
+
+    status = RtlCreateAcl(pNewDACL, daclLength, pOldDACL->AclRevision);
+    if (!NT_SUCCESS(status))
+        goto cleanup;
+
+    for (aceCount = 0; aceCount < pOldDACL->AceCount; aceCount++) {
+        PVOID pAce;
+        if (NT_SUCCESS(RtlGetAce(pOldDACL, aceCount, &pAce))) {
+            status = RtlAddAce(pNewDACL, pOldDACL->AclRevision, -1, pAce, ((PACE_HEADER)pAce)->AceSize);
+            if (!NT_SUCCESS(status))
+                goto cleanup;
+        }
+    }
+
+    status = RtlAddAccessAllowedAceEx(pNewDACL, pNewDACL->AclRevision, CONTAINER_INHERIT_ACE | OBJECT_INHERIT_ACE | INHERITED_ACE, GENERIC_ALL, pSid );
+    if (!NT_SUCCESS(status))
+        goto cleanup;
+
+    status = RtlSetDaclSecurityDescriptor(pAbsoluteSD, TRUE, pNewDACL, FALSE);
+    if (!NT_SUCCESS(status))
+        goto cleanup;
+
+    ULONG selfRelativeSDSize = 0;
+    status = RtlMakeSelfRelativeSD(pAbsoluteSD, NULL, &selfRelativeSDSize);
+    if (status != STATUS_BUFFER_TOO_SMALL)
+        goto cleanup;
+
+    Dll_Free(*pSD);
+    *pSD = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(selfRelativeSDSize);
+    if (!*pSD) {
+        status = STATUS_NO_MEMORY;
+        goto cleanup;
+    }
+
+    status = RtlMakeSelfRelativeSD(pAbsoluteSD, *pSD, &selfRelativeSDSize);
+    if (!NT_SUCCESS(status))
+        goto cleanup;
+
+cleanup:
+    if (pAbsoluteSD) Dll_Free(pAbsoluteSD);
+    if (pNewDACL) Dll_Free(pNewDACL);
+    if (ownerSid) Dll_Free(ownerSid);
+    if (groupSid) Dll_Free(groupSid);
+    if (sacl) Dll_Free(sacl);
+
+    Dll_Free(pSid);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // File_NtCreateFileImpl
 //---------------------------------------------------------------------------
 
@@ -2610,6 +2768,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
     BOOLEAN TrueOpened;
     //char *pPtr = NULL;
     BOOLEAN SkipOriginalTry;
+    PSECURITY_DESCRIPTOR pSecurityDescriptor = NULL;
 
     //if (wcsstr(Dll_ImageName, L"chrome.exe") != 0) {
     //  *pPtr = 34;
@@ -2691,8 +2850,13 @@ _FX NTSTATUS File_NtCreateFileImpl(
     IoStatusBlock->Status = 0;
 
     if (Secure_CopyACLs) {
+
+        pSecurityDescriptor = File_DuplicateSecurityDescriptor(ObjectAttributes->SecurityDescriptor);
+        if (pSecurityDescriptor)
+            File_AddCurrentUserToSD(&pSecurityDescriptor);
+
         InitializeObjectAttributes(&objattrs,
-            &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, ObjectAttributes->SecurityDescriptor);
+            &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, pSecurityDescriptor);
     }
     else {
         InitializeObjectAttributes(&objattrs,
@@ -2744,6 +2908,9 @@ _FX NTSTATUS File_NtCreateFileImpl(
                 Dll_PopTlsNameBuffer(TlsData);
 
                 TlsData->file_NtCreateFile_lock = FALSE;
+
+                if(pSecurityDescriptor)
+                    Dll_Free(pSecurityDescriptor);
 
                 return __sys_NtCreateFile(
                     FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
@@ -3925,6 +4092,9 @@ ReparseLoop:
         SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
     }
 
+    if(pSecurityDescriptor)
+        Dll_Free(pSecurityDescriptor);
+
     SetLastError(LastError);
     return status;
 }
@@ -4503,6 +4673,11 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
 
     RtlInitUnicodeString(&objname, CopyPath);
 
+    InitializeObjectAttributes(
+        &objattrs2, &objname2, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
+
+    RtlInitUnicodeString(&objname2, TruePath);
+
     TruePath_len = wcslen(TruePath);
     CopyPath_len = objname.Length / sizeof(WCHAR);
 
@@ -4536,6 +4711,46 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
         sep2 = TruePath + TruePath_len - (CopyPath_len - (sep - CopyPath));
         savechar2 = *sep2;
         *sep2 = L'\0';
+
+        if (Secure_CopyACLs) {
+            
+            if (pSecurityDescriptor) {
+                Dll_Free(pSecurityDescriptor);
+                pSecurityDescriptor = NULL;
+            }
+
+            savelength = objname2.Length;
+            savemaximumlength = objname2.MaximumLength;
+            objname2.Length = (sep2 - TruePath) * sizeof(WCHAR);
+            objname2.MaximumLength = objname2.Length + sizeof(WCHAR);
+
+            status = __sys_NtCreateFile(
+                &handle, FILE_READ_ATTRIBUTES, &objattrs2,
+                &IoStatusBlock, NULL,
+                FILE_ATTRIBUTE_NORMAL, FILE_SHARE_VALID_FLAGS,
+                FILE_OPEN, FILE_DIRECTORY_FILE, NULL, 0);
+
+            if (NT_SUCCESS(status)) {
+
+                ULONG lengthNeeded = 0;
+                status = NtQuerySecurityObject(handle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, NULL, 0, &lengthNeeded);
+                if (status == STATUS_BUFFER_TOO_SMALL) {
+                    pSecurityDescriptor = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(lengthNeeded);
+                    status = NtQuerySecurityObject(handle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, pSecurityDescriptor, lengthNeeded, &lengthNeeded);
+                    if (NT_SUCCESS(status)) 
+                        File_AddCurrentUserToSD(&pSecurityDescriptor);
+                    else {
+                        Dll_Free(pSecurityDescriptor);
+                        pSecurityDescriptor = NULL;
+                    }
+                }
+
+                NtClose(handle);
+            }
+
+            InitializeObjectAttributes(
+                &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, pSecurityDescriptor ? pSecurityDescriptor : Secure_NormalSD);
+        }
 
         savelength = objname.Length;
         savemaximumlength = objname.MaximumLength;
@@ -4610,11 +4825,6 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
     // in the hierarchy.
     //
 
-    InitializeObjectAttributes(
-        &objattrs2, &objname2, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
-
-    RtlInitUnicodeString(&objname2, TruePath);
-
     while (1) {
 
         ++sep;
@@ -4658,6 +4868,12 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
                 if (status == STATUS_BUFFER_TOO_SMALL) {
                     pSecurityDescriptor = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(lengthNeeded);
                     status = NtQuerySecurityObject(handle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, pSecurityDescriptor, lengthNeeded, &lengthNeeded);
+                    if (NT_SUCCESS(status)) 
+                        File_AddCurrentUserToSD(&pSecurityDescriptor);
+                    else {
+                        Dll_Free(pSecurityDescriptor);
+                        pSecurityDescriptor = NULL;
+                    }
                 }
 
                 NtClose(handle);

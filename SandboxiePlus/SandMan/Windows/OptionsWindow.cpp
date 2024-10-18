@@ -447,6 +447,10 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblIsolation, CSandMan::GetIcon("Fence").pixmap(size,size));
 	AddIconToLabel(ui.lblAccess, CSandMan::GetIcon("NoAccess").pixmap(size,size));
 	AddIconToLabel(ui.lblProtection, CSandMan::GetIcon("EFence").pixmap(size,size));
+
+	AddIconToLabel(ui.lblPrivacyProtection, CSandMan::GetIcon("Anon").pixmap(size,size));
+	AddIconToLabel(ui.lblProcessHiding, CSandMan::GetIcon("Cmd").pixmap(size,size));
+
 	AddIconToLabel(ui.lblMonitor, CSandMan::GetIcon("Monitor").pixmap(size,size));
 	AddIconToLabel(ui.lblTracing, CSandMan::GetIcon("SetLogging").pixmap(size,size));
 
@@ -525,6 +529,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnForceBrowseChild()));
 	ui.btnForceChild->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnForceChild->setMenu(pFileBtnMenu);
+
 	connect(ui.btnForceDir, SIGNAL(clicked(bool)), this, SLOT(OnForceDir()));
 	connect(ui.btnDelForce, SIGNAL(clicked(bool)), this, SLOT(OnDelForce()));
 	connect(ui.chkShowForceTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowForceTmpl()));
@@ -540,6 +545,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.btnBreakoutProg->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnBreakoutProg->setMenu(pFileBtnMenu2);
 	connect(ui.btnBreakoutDir, SIGNAL(clicked(bool)), this, SLOT(OnBreakoutDir()));
+	connect(ui.btnBreakoutDoc, SIGNAL(clicked(bool)), this, SLOT(OnBreakoutDoc()));
 	connect(ui.btnDelBreakout, SIGNAL(clicked(bool)), this, SLOT(OnDelBreakout()));
 	connect(ui.chkShowBreakoutTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowBreakoutTmpl()));
 	//ui.treeBreakout->setEditTriggers(QAbstractItemView::DoubleClicked);
@@ -696,8 +702,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		m_HoldChange = false;
 	}
 	else {
-		//this->setMinimumHeight(490);
-		this->setMinimumHeight(390);
+		//this->setMinimumHeight(390);
 
 		QWidget* pSearch = AddConfigSearch(ui.tabs);
 		ui.horizontalLayout->insertWidget(0, pSearch);

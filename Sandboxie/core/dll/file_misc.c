@@ -522,6 +522,7 @@ BOOL File_WriteProcessMemory(
     // this function is only hooked when Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX
     //
 
+    // $Workaround$ - 3rd party fix
     if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
         lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
     //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))

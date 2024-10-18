@@ -425,9 +425,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.cmbDefault, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkAutoRoot, SIGNAL(stateChanged(int)), this, SLOT(OnRootChanged())); // not sbie ini
 	connect(ui.fileRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkLockBox, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.regRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.ipcRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
-
+	
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	if (CurrentVersion.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
@@ -590,7 +591,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
 	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
+	if (!g_CertInfo.active) {
 		//COptionsWindow__AddCertIcon(ui.chkUpdateTemplates);
 		COptionsWindow__AddCertIcon(ui.chkUpdateIssues);
 		COptionsWindow__AddCertIcon(ui.chkRamDisk);
@@ -1017,6 +1018,7 @@ void CSettingsWindow::LoadSettings()
 		QString IpcRootPath_Default  = "\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%";
 
 		ui.fileRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("FileRootPath", FileRootPath_Default));
+		ui.chkLockBox->setChecked(theAPI->GetGlobalSettings()->GetBool("LockBoxToUser", false)); 
 		//ui.chkSeparateUserFolders->setChecked(theAPI->GetGlobalSettings()->GetBool("SeparateUserFolders", true));
 		ui.regRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("KeyRootPath", KeyRootPath_Default));
 		ui.ipcRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("IpcRootPath", IpcRootPath_Default));
@@ -1084,6 +1086,7 @@ void CSettingsWindow::LoadSettings()
 		ui.fileRoot->setEnabled(false);
 		//ui.chkSeparateUserFolders->setEnabled(false);
 		ui.chkAutoRoot->setEnabled(false);
+		ui.chkLockBox->setEnabled(false);
 		ui.chkWFP->setEnabled(false);
 		ui.chkObjCb->setEnabled(false);
 		ui.chkWin32k->setEnabled(false);
@@ -1164,7 +1167,7 @@ void CSettingsWindow::OnRamDiskChange()
 {
 	if (sender() == ui.chkRamDisk) {
 		if (ui.chkRamDisk->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, -1);
 	}
 
 	if (ui.chkRamDisk->isChecked() && ui.txtRamLimit->text().isEmpty())
@@ -1187,7 +1190,7 @@ void CSettingsWindow::OnVolumeChanged()
 { 
 	if (sender() == ui.chkSandboxUsb) {
 		if (ui.chkSandboxUsb->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, -1);
 	}
 
 	ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
@@ -1765,10 +1768,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
-	//if (ui.chkForceExplorerChild->isChecked())
-	//	theAPI->GetGlobalSettings()->SetText("ForceExplorerChild", theAPI->GetGlobalSettings()->GetText("DefaultBox"));
-	//else if (theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").compare(theAPI->GetGlobalSettings()->GetText("DefaultBox")) == 0)
-	//	theAPI->GetGlobalSettings()->DelValue("ForceExplorerChild");
+
 	if (theAPI->IsConnected())
 	{
 		try
@@ -1809,6 +1809,7 @@ void CSettingsWindow::SaveSettings()
 				WriteText("DefaultBox", ui.cmbDefault->currentData().toString());
 
 				WriteText("FileRootPath", ui.fileRoot->currentText()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+				WriteAdvancedCheck(ui.chkLockBox, "LockBoxToUser", "y", "");
 				//WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
 				WriteText("KeyRootPath", ui.regRoot->currentText()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
 				WriteText("IpcRootPath", ui.ipcRoot->currentText()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");

@@ -312,6 +312,8 @@ extern ULONG Dll_Windows;
 extern PSECURITY_DESCRIPTOR Secure_NormalSD;
 extern PSECURITY_DESCRIPTOR Secure_EveryoneSD;
 
+extern BOOLEAN Secure_CopyACLs;
+
 extern BOOLEAN Secure_FakeAdmin;
 
 extern BOOLEAN Ldr_BoxedImage;

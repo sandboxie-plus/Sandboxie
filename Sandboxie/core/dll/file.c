@@ -28,6 +28,7 @@
 #include <dbt.h>
 #include "core/svc/FileWire.h"
 #include "core/svc/InteractiveWire.h"
+#include "core/svc/UserWire.h"
 #include "debug.h"
 
 //---------------------------------------------------------------------------
@@ -59,6 +60,7 @@
 #define TYPE_READ_ONLY      FILE_RESERVE_OPFILTER
 #define TYPE_SYSTEM         FILE_OPEN_FOR_FREE_SPACE_QUERY
 #define TYPE_REPARSE_POINT  FILE_OPEN_REPARSE_POINT
+#define TYPE_EFS            FILE_ATTRIBUTE_ENCRYPTED
 
 
 #define OBJECT_ATTRIBUTES_ATTRIBUTES                            \
@@ -171,6 +173,45 @@ static NTSTATUS File_NtCreateFile(
     ULONG EaLength);
 
 static NTSTATUS File_NtCreateFileImpl(
+    HANDLE *FileHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    IO_STATUS_BLOCK *IoStatusBlock,
+    LARGE_INTEGER *AllocationSize,
+    ULONG FileAttributes,
+    ULONG ShareAccess,
+    ULONG CreateDisposition,
+    ULONG CreateOptions,
+    void *EaBuffer,
+    ULONG EaLength);
+
+static NTSTATUS File_NtCreateTrueFile(
+    HANDLE *FileHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    IO_STATUS_BLOCK *IoStatusBlock,
+    LARGE_INTEGER *AllocationSize,
+    ULONG FileAttributes,
+    ULONG ShareAccess,
+    ULONG CreateDisposition,
+    ULONG CreateOptions,
+    void *EaBuffer,
+    ULONG EaLength);
+
+static NTSTATUS File_NtCreateCopyFile(
+    PHANDLE FileHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PIO_STATUS_BLOCK IoStatusBlock,
+    PLARGE_INTEGER AllocationSize,
+    ULONG FileAttributes,
+    ULONG ShareAccess,
+    ULONG CreateDisposition,
+    ULONG CreateOptions,
+    PVOID EaBuffer,
+    ULONG EaLength);
+
+static NTSTATUS File_NtCreateFileProxy(
     HANDLE *FileHandle,
     ACCESS_MASK DesiredAccess,
     OBJECT_ATTRIBUTES *ObjectAttributes,
@@ -2649,10 +2690,16 @@ _FX NTSTATUS File_NtCreateFileImpl(
     IoStatusBlock->Information = FILE_DOES_NOT_EXIST;
     IoStatusBlock->Status = 0;
 
-    InitializeObjectAttributes(&objattrs,
-        &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, Secure_NormalSD);
-    /*objattrs.SecurityQualityOfService =
-        ObjectAttributes->SecurityQualityOfService;*/
+    if (Secure_CopyACLs) {
+        InitializeObjectAttributes(&objattrs,
+            &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, ObjectAttributes->SecurityDescriptor);
+    }
+    else {
+        InitializeObjectAttributes(&objattrs,
+            &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, Secure_NormalSD);
+        /*objattrs.SecurityQualityOfService =
+            ObjectAttributes->SecurityQualityOfService;*/
+    }
 
     //
     // remove creation options that can't be honored because the
@@ -2840,7 +2887,8 @@ ReparseLoop:
             ObjectAttributes->SecurityQualityOfService;
         */
 
-        status = __sys_NtCreateFile(
+        //status = __sys_NtCreateFile(
+        status = File_NtCreateTrueFile(
             FileHandle, DesiredAccess, &objattrs,
             IoStatusBlock, AllocationSize, FileAttributes,
             ShareAccess, CreateDisposition, CreateOptions,
@@ -2868,7 +2916,8 @@ ReparseLoop:
             if (ReparsedPath) {
                 RtlInitUnicodeString(&objname, ReparsedPath);
 
-                status = __sys_NtCreateFile(
+                //status = __sys_NtCreateFile(
+                status = File_NtCreateTrueFile(
                     FileHandle, DesiredAccess, &objattrs,
                     IoStatusBlock, AllocationSize, FileAttributes,
                     ShareAccess, CreateDisposition, CreateOptions,
@@ -2883,7 +2932,8 @@ ReparseLoop:
             // if we can't get maximum access, try read-only access
             //
 
-            status = __sys_NtCreateFile(
+            //status = __sys_NtCreateFile(
+            status = File_NtCreateTrueFile(
                 FileHandle, FILE_GENERIC_READ, &objattrs,
                 IoStatusBlock, AllocationSize, FileAttributes,
                 ShareAccess, CreateDisposition, CreateOptions,
@@ -2917,6 +2967,7 @@ ReparseLoop:
     // use the Everyone security descriptor
     //
 
+    // $Workaround$ - 3rd party fix
     if (Dll_ImageType == DLL_IMAGE_OFFICE_OUTLOOK &&
             wcsstr(TruePath, L"\\OICE_")) {
 
@@ -3154,6 +3205,11 @@ ReparseLoop:
             }
         }
 
+        if (!Dll_CompartmentMode)
+        if ((FileType & TYPE_EFS) != 0) {
+            SbieApi_Log(2225, TruePath);
+        }
+
 		//
 		// If the "true" file is in an snapshot it can be a deleted one, 
 		// check for this and act acrodingly.
@@ -3292,7 +3348,8 @@ ReparseLoop:
                 if (CreateDisposition == FILE_OPEN_IF)
                     CreateDisposition = FILE_OPEN;
 
-                status = __sys_NtCreateFile(
+                //status = __sys_NtCreateFile(
+                status = File_NtCreateTrueFile(
                     FileHandle, DesiredAccess, &objattrs,
                     IoStatusBlock, AllocationSize, FileAttributes,
                     ShareAccess, CreateDisposition, CreateOptions,
@@ -3317,7 +3374,8 @@ ReparseLoop:
                     //
         
                     RtlInitUnicodeString(&objname, CopyPath);
-                    status = __sys_NtCreateFile(
+                    //status = __sys_NtCreateFile(
+                    status = File_NtCreateCopyFile(
                         FileHandle, DesiredAccess, &objattrs,
                         IoStatusBlock, AllocationSize, FileAttributes,
                         ShareAccess, FILE_OPEN_IF, FILE_DIRECTORY_FILE,
@@ -3452,7 +3510,8 @@ ReparseLoop:
 
             RtlInitUnicodeString(&objname, TruePath);
 
-            status = __sys_NtCreateFile(
+            //status = __sys_NtCreateFile(
+            status = File_NtCreateTrueFile(
                 FileHandle, FILE_GENERIC_READ, &objattrs,
                 IoStatusBlock, AllocationSize, FileAttributes,
                 ShareAccess, CreateDisposition, CreateOptions,
@@ -3591,7 +3650,8 @@ ReparseLoop:
                 DesiredAccess &= ~FILE_DENIED_ACCESS;
                 CreateOptions &= ~FILE_DELETE_ON_CLOSE;
 
-                status = __sys_NtCreateFile(
+                //status = __sys_NtCreateFile(
+                status = File_NtCreateTrueFile(
                     FileHandle, DesiredAccess, &objattrs, IoStatusBlock,
                     AllocationSize, FileAttributes, ShareAccess,
                     CreateDisposition, CreateOptions, EaBuffer, EaLength);
@@ -3675,7 +3735,8 @@ ReparseLoop:
         DesiredAccess |= DELETE;
     }
 
-    status = __sys_NtCreateFile(
+    //status = __sys_NtCreateFile(
+    status = File_NtCreateCopyFile(
         FileHandle, DesiredAccess | FILE_READ_ATTRIBUTES,
         &objattrs, IoStatusBlock, AllocationSize, FileAttributes,
         ShareAccess, CreateDisposition, CreateOptions, EaBuffer, EaLength);
@@ -3685,7 +3746,8 @@ ReparseLoop:
         CreateOptions &= ~FILE_DELETE_ON_CLOSE;
         DesiredAccess &= ~DELETE;
 
-        status = __sys_NtCreateFile(
+        //status = __sys_NtCreateFile(
+        status = File_NtCreateCopyFile(
             FileHandle, DesiredAccess | FILE_READ_ATTRIBUTES,
             &objattrs, IoStatusBlock, AllocationSize, FileAttributes,
             ShareAccess, CreateDisposition, CreateOptions,
@@ -3778,7 +3840,8 @@ ReparseLoop:
                         // file handle was closed in File_AdjustShortName
                         //
 
-                        status = __sys_NtCreateFile(
+                        //status = __sys_NtCreateFile(
+                        status = File_NtCreateCopyFile(
                             FileHandle, DesiredAccess | FILE_READ_ATTRIBUTES,
                             &objattrs, IoStatusBlock,
                             AllocationSize, FileAttributes,
@@ -3863,6 +3926,188 @@ ReparseLoop:
     }
 
     SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// File_NtCreateTrueFile
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_NtCreateTrueFile(
+    HANDLE *FileHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    IO_STATUS_BLOCK *IoStatusBlock,
+    LARGE_INTEGER *AllocationSize,
+    ULONG FileAttributes,
+    ULONG ShareAccess,
+    ULONG CreateDisposition,
+    ULONG CreateOptions,
+    void *EaBuffer,
+    ULONG EaLength)
+{
+    NTSTATUS status = __sys_NtCreateFile(
+        FileHandle, DesiredAccess, ObjectAttributes,
+        IoStatusBlock, AllocationSize, FileAttributes,
+        ShareAccess, CreateDisposition, CreateOptions,
+        EaBuffer, EaLength);
+
+    if (!Dll_CompartmentMode)
+    if (status == STATUS_ACCESS_DENIED
+      && SbieApi_QueryConfBool(NULL, L"EnableEFS", FALSE)) {
+
+        WCHAR* TruePath = ObjectAttributes->ObjectName->Buffer;
+
+        //
+        // check if we are handling a EFS file or folder
+        //
+
+        ULONG FileType;
+        status = File_GetFileType(ObjectAttributes, FALSE, &FileType, NULL);
+
+        if (status == STATUS_OBJECT_NAME_NOT_FOUND && CreateDisposition != 0) {
+
+            //
+            // check status of parent directory
+            //
+
+            WCHAR* ptr1 = wcsrchr(TruePath, L'\\');
+            *ptr1 = L'\0';
+            RtlInitUnicodeString(ObjectAttributes->ObjectName, TruePath);
+
+            status = File_GetFileType(ObjectAttributes, FALSE, &FileType, NULL);
+
+            *ptr1 = L'\\';
+            RtlInitUnicodeString(ObjectAttributes->ObjectName, TruePath);
+        }
+
+        if (NT_SUCCESS(status) && (FileType & TYPE_EFS) != 0) {
+
+            //
+            // invoke NtCreateFile Proxy
+            //
+
+            status = File_NtCreateFileProxy(
+                FileHandle, DesiredAccess, ObjectAttributes,
+                IoStatusBlock, AllocationSize, FileAttributes,
+                ShareAccess, CreateDisposition, CreateOptions,
+                EaBuffer, EaLength);
+
+            if(!NT_SUCCESS(status))
+                SbieApi_Log(2225, TruePath);
+        }
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// File_NtCreateCopyFile
+//---------------------------------------------------------------------------
+
+
+static NTSTATUS File_NtCreateCopyFile(
+    PHANDLE FileHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PIO_STATUS_BLOCK IoStatusBlock,
+    PLARGE_INTEGER AllocationSize,
+    ULONG FileAttributes,
+    ULONG ShareAccess,
+    ULONG CreateDisposition,
+    ULONG CreateOptions,
+    PVOID EaBuffer,
+    ULONG EaLength)
+{
+    NTSTATUS status = __sys_NtCreateFile(
+        FileHandle, DesiredAccess, ObjectAttributes,
+        IoStatusBlock, AllocationSize, FileAttributes,
+        ShareAccess, CreateDisposition, CreateOptions,
+        EaBuffer, EaLength);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// File_NtCreateFileProxy
+//---------------------------------------------------------------------------
+
+
+NTSTATUS File_NtCreateFileProxy(
+    HANDLE *FileHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    IO_STATUS_BLOCK *IoStatusBlock,
+    LARGE_INTEGER *AllocationSize,
+    ULONG FileAttributes,
+    ULONG ShareAccess,
+    ULONG CreateDisposition,
+    ULONG CreateOptions,
+    void *EaBuffer,
+    ULONG EaLength)
+{
+    NTSTATUS status;
+    static WCHAR* _QueueName = NULL;
+
+    if (!_QueueName) {
+        _QueueName = Dll_Alloc(32 * sizeof(WCHAR));
+        Sbie_snwprintf(_QueueName, 32, L"*USERPROXY_%08X", Dll_SessionId);
+    }
+
+    if (ObjectAttributes->RootDirectory != NULL || ObjectAttributes->ObjectName == NULL) {
+
+        SbieApi_Log(2205, L"NtCreateFile (EFS)");
+        return STATUS_ACCESS_DENIED;
+    }
+
+    ULONG path_len = ObjectAttributes->ObjectName->Length + sizeof(WCHAR);
+    ULONG req_len = sizeof(USER_OPEN_FILE_REQ) + path_len + EaLength;
+    ULONG path_pos = sizeof(USER_OPEN_FILE_REQ);
+    ULONG ea_pos = path_pos + path_len;
+
+    USER_OPEN_FILE_REQ *req = (USER_OPEN_FILE_REQ *)Dll_AllocTemp(req_len);
+
+    WCHAR* path_buff = ((UCHAR*)req) + path_pos;
+    memcpy(path_buff, ObjectAttributes->ObjectName->Buffer, path_len);
+
+    if (EaBuffer && EaLength > 0) {
+        void* ea_buff = ((UCHAR*)req) + ea_pos;
+        memcpy(ea_buff, EaBuffer, EaLength);
+    }
+
+    req->msgid = USER_OPEN_FILE;
+
+    req->DesiredAccess = DesiredAccess;
+    req->FileNameOffset = path_pos;
+    //req->FileNameSize = path_len;
+    req->AllocationSize = AllocationSize ? AllocationSize->QuadPart : 0;
+    req->FileAttributes = FileAttributes;
+    req->ShareAccess = ShareAccess;
+    req->CreateDisposition = CreateDisposition;
+    req->CreateOptions = CreateOptions;
+    req->EaBufferOffset = EaBuffer ? ea_pos : 0;
+    req->EaLength = EaLength;
+
+    USER_OPEN_FILE_RPL *rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, sizeof(*rpl), 100);
+    if (!rpl) {
+        status = STATUS_INTERNAL_ERROR;
+        goto finish;
+    }
+
+    if (NT_SUCCESS(rpl->status)) {
+        status = rpl->error;
+        *FileHandle = (HANDLE)rpl->FileHandle;
+        IoStatusBlock->Status = rpl->Status;
+        IoStatusBlock->Information = (ULONG_PTR)rpl->Information;
+    }
+
+    Dll_Free(rpl);
+finish:
+    Dll_Free(req);
     return status;
 }
 
@@ -4132,6 +4377,9 @@ _FX NTSTATUS File_GetFileType(
     if (info.FileAttributes & FILE_ATTRIBUTE_SYSTEM)
         type |= TYPE_SYSTEM;
 
+    if (info.FileAttributes & FILE_ATTRIBUTE_ENCRYPTED)
+        type |= TYPE_EFS;
+
     if (!File_Delete_v2) {
         if (IS_DELETE_MARK(&info.CreationTime))
             type |= TYPE_DELETED;
@@ -4239,6 +4487,9 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
     IO_STATUS_BLOCK IoStatusBlock;
     FILE_BASIC_INFORMATION basic_info;
     BOOLEAN IsDeleted = FALSE;
+    OBJECT_ATTRIBUTES objattrs2;
+    UNICODE_STRING objname2;
+    PSECURITY_DESCRIPTOR pSecurityDescriptor = NULL;
 
     //
     // first we traverse backward along the path, removing the last
@@ -4359,6 +4610,11 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
     // in the hierarchy.
     //
 
+    InitializeObjectAttributes(
+        &objattrs2, &objname2, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
+
+    RtlInitUnicodeString(&objname2, TruePath);
+
     while (1) {
 
         ++sep;
@@ -4373,6 +4629,45 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
 
         savechar = *sep;
         *sep = L'\0';
+
+        if (Secure_CopyACLs) {
+            
+            if (pSecurityDescriptor) {
+                Dll_Free(pSecurityDescriptor);
+                pSecurityDescriptor = NULL;
+            }
+
+            savechar2 = *sep2;
+            *sep2 = L'\0';
+
+            savelength = objname2.Length;
+            savemaximumlength = objname2.MaximumLength;
+            objname2.Length = (sep2 - TruePath) * sizeof(WCHAR);
+            objname2.MaximumLength = objname2.Length + sizeof(WCHAR);
+
+            status = __sys_NtCreateFile(
+                &handle, FILE_READ_ATTRIBUTES, &objattrs2,
+                &IoStatusBlock, NULL,
+                FILE_ATTRIBUTE_NORMAL, FILE_SHARE_VALID_FLAGS,
+                FILE_OPEN, FILE_DIRECTORY_FILE, NULL, 0);
+
+            if (NT_SUCCESS(status)) {
+
+                ULONG lengthNeeded = 0;
+                status = NtQuerySecurityObject(handle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, NULL, 0, &lengthNeeded);
+                if (status == STATUS_BUFFER_TOO_SMALL) {
+                    pSecurityDescriptor = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(lengthNeeded);
+                    status = NtQuerySecurityObject(handle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, pSecurityDescriptor, lengthNeeded, &lengthNeeded);
+                }
+
+                NtClose(handle);
+            }
+
+            InitializeObjectAttributes(
+                &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, pSecurityDescriptor ? pSecurityDescriptor : Secure_NormalSD);
+
+            *sep2 = savechar2;
+        }
 
         savelength = objname.Length;
         savemaximumlength = objname.MaximumLength;
@@ -4405,6 +4700,9 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
         if (! NT_SUCCESS(status))
             break;
     }
+    
+    if(pSecurityDescriptor)
+        Dll_Free(pSecurityDescriptor);
 
     return status;
 }

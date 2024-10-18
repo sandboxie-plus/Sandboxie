@@ -3,7 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.14.11 / 5.69.11] - 2024-10-
+## [1.15.0 / 5.70.0] - 2024-10-
+
+### Added
+- added new user proxy mechanism to enable user specific operations
+- added Support for EFS using the user proxy [#1980](https://github.com/sandboxie-plus/Sandboxie/issues/1980)
+  - to enable add 'EnableEFS=y' to the sandbox config
+- added break out document functionality [#2741](https://github.com/sandboxie-plus/Sandboxie/issues/2741)
+  - use a syntax like this 'BreakoutDocument=C:\path\*.txt' to specify path and extension
+  - Security Warning: do not use paths terminated with a wild card like 'BreakoutDocument=C:\path\*' as thay will allow for executeion ot maliciouse scripts outside teh sandbox!!!
+- added mechanism to set set box folder ACLs to allow only the creating user access 'LockBoxToUser=y'
+- added option to keep original ACLs on sandboxed files 'UseOriginalACLs=y'
+  - Warning: this can make the box content undeletable from sandman, and manual deletion will be required
 
 ### Fixed
 - fixed ImDiskApp uninstall key is always written to the registry [#4282](https://github.com/sandboxie-plus/Sandboxie/issues/4282)

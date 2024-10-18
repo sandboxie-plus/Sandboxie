@@ -33,6 +33,9 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkDropPrivileges, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDropConHostIntegrity, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+	//Do not force untrusted integrity level on the sanboxed token (reduces desktop isolation)
+	//connect(ui.chkNotUntrusted, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -171,6 +174,9 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
 	ui.chkDropConHostIntegrity->setChecked(m_pBox->GetBool("DropConHostIntegrity", false));
+
+
+	//ui.chkNotUntrusted->setChecked(m_pBox->GetBool("NoUntrustedToken", false));
 
 	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
 
@@ -326,12 +332,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
 	
 	ui.chkAdminOnly->setChecked(m_pBox->GetBool("EditAdminOnly", false));
-	
-	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
-	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
-	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
-	*/
-	
+
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
 	if (Users.count() > 1)
@@ -429,6 +430,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
 	WriteAdvancedCheck(ui.chkDropConHostIntegrity, "DropConHostIntegrity", "y", "");
+
+	//WriteAdvancedCheck(ui.chkNotUntrusted, "NoUntrustedToken", "y", "");
 
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 
@@ -616,8 +619,7 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkProtectWindow, "CoverBoxedWindows", "y", "");
 	WriteAdvancedCheck(ui.chkBlockCapture, "BlockScreenCapture", "y", "");
-	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "");
-	
+
 	WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
 
 	QStringList Users;
@@ -634,7 +636,7 @@ void COptionsWindow::OnIsolationChanged()
 	if (sender() == ui.chkNoSecurityIsolation) {
 		// we can ignore chkNoSecurityFiltering as it requires chkNoSecurityIsolation
 		if (ui.chkNoSecurityIsolation->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, 0);
 	}
 
 	UpdateBoxIsolation();
@@ -662,6 +664,7 @@ void COptionsWindow::UpdateBoxIsolation()
 
 	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode
 	ui.chkRawDiskNotify->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkAllowEfs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkBlockNetShare->setEnabled(!ui.chkNoSecurityFiltering->isChecked());
 

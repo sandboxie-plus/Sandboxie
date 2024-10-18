@@ -32,6 +32,7 @@
 #include "common/my_shlwapi.h"
 #include "msgs/msgs.h"
 #include "gui_p.h"
+#include "core/svc/UserWire.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -48,6 +49,9 @@ static BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo);
 
 static BOOL SH32_Shell_NotifyIconW(
     DWORD dwMessage, PNOTIFYICONDATAW lpData);
+
+//static HRESULT SH32_SHGetFolderPathW(
+//    HWND hwnd, int csidl, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
 
 static WCHAR *SbieDll_AssocQueryCommandInternal(
     const WCHAR *subj, const WCHAR *verb);
@@ -86,6 +90,9 @@ typedef BOOL (*P_ShellExecuteEx)(
 typedef BOOL (*P_Shell_NotifyIconW)(
     DWORD dwMessage, PNOTIFYICONDATAW lpData);
 
+//typedef HRESULT (*P_SHGetFolderPathW)(
+//    HWND hwnd, int csidl, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
+
 typedef ULONG (*P_SHChangeNotifyRegister)(
     HWND hwnd, int fSources, LONG fEvents, UINT wMsg,
     int cEntries, SHChangeNotifyEntry *pfsne);
@@ -111,6 +118,8 @@ typedef HRESULT (*P_SHGetFolderLocation)(
 static P_ShellExecuteEx         __sys_ShellExecuteExW               = NULL;
 
 static P_Shell_NotifyIconW      __sys_Shell_NotifyIconW             = NULL;
+
+//static P_SHGetFolderPathW       __sys_SHGetFolderPathW              = NULL;
 
 static P_SHChangeNotifyRegister __sys_SHChangeNotifyRegister        = NULL;
 
@@ -309,6 +318,49 @@ _FX BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo)
     BOOL b;
     ULONG err;
     BOOLEAN is_explore_verb;
+
+    //
+    // check if the request is to open a file located in a break out folder
+    //
+
+    if (lpExecInfo->lpFile) {
+        if (SbieDll_CheckPatternInList(lpExecInfo->lpFile, (ULONG)wcslen(lpExecInfo->lpFile), NULL, L"BreakoutDocument")) {
+
+            NTSTATUS status;
+            static WCHAR* _QueueName = NULL;
+
+            if (!_QueueName) {
+                _QueueName = Dll_Alloc(32 * sizeof(WCHAR));
+                Sbie_snwprintf(_QueueName, 32, L"*USERPROXY_%08X", Dll_SessionId);
+            }
+
+            ULONG path_len = (wcslen(lpExecInfo->lpFile) + 1) * sizeof(WCHAR);
+            ULONG req_len = sizeof(USER_SHELL_EXEC_REQ) + path_len;
+            ULONG path_pos = sizeof(USER_SHELL_EXEC_REQ);
+
+            USER_SHELL_EXEC_REQ *req = (USER_SHELL_EXEC_REQ *)Dll_AllocTemp(req_len);
+
+            WCHAR* path_buff = ((UCHAR*)req) + path_pos;
+            memcpy(path_buff, lpExecInfo->lpFile, path_len);
+
+            req->msgid = USER_SHELL_EXEC;
+
+            req->FileNameOffset = path_pos;
+
+            ULONG *rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, sizeof(*rpl), 100);
+            if (!rpl)
+                status = STATUS_INTERNAL_ERROR;
+            else {
+                status = rpl[0];
+
+                Dll_Free(rpl);
+            }
+
+            Dll_Free(req);
+
+            return NT_SUCCESS(status);
+        }
+    }
 
     //
     // check if the request is to open a directory
@@ -546,6 +598,18 @@ _FX BOOL SH32_Shell_NotifyIconW(
 
     return ret;
 }
+
+
+//---------------------------------------------------------------------------
+// SH32_SHGetFolderPathW
+//---------------------------------------------------------------------------
+
+
+//_FX HRESULT SH32_SHGetFolderPathW(
+//    HWND hwnd, int csidl, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath)
+//{
+//    return __sys_SHGetFolderPathW(hwnd, csidl, hToken, dwFlags, pszPath);
+//}
 
 
 //---------------------------------------------------------------------------
@@ -938,6 +1002,7 @@ _FX BOOLEAN SH32_Init(HMODULE module)
 {
     P_ShellExecuteEx ShellExecuteExW;
     P_Shell_NotifyIconW Shell_NotifyIconW;
+    //P_SHGetFolderPathW SHGetFolderPathW;
     P_SHChangeNotifyRegister SHChangeNotifyRegister;
     void *SHGetItemFromObject;
     P_SHOpenFolderAndSelectItems SHOpenFolderAndSelectItems;
@@ -969,6 +1034,11 @@ _FX BOOLEAN SH32_Init(HMODULE module)
     SBIEDLL_HOOK(SH32_,ShellExecuteExW);
 
     SBIEDLL_HOOK(SH32_,Shell_NotifyIconW);
+
+    //SHGetFolderPathW = (P_SHGetFolderPathW)
+    //    GetProcAddress(module, "SHGetFolderPathW");
+    //
+    //SBIEDLL_HOOK(SH32_,SHGetFolderPathW);
 
     if (SHChangeNotifyRegister && SHGetItemFromObject) {
 

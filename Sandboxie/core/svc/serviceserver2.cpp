@@ -31,6 +31,7 @@
 #include "core/dll/sbiedll.h"
 #include <aclapi.h>
 #include "ProcessServer.h"
+#include <wtsapi32.h>
 
 #define MISC_H_WITHOUT_WIN32_NTDDK_H
 #include "misc.h"
@@ -353,7 +354,11 @@ ULONG ServiceServer::RunHandler2(
             // use our system token
             ok = OpenProcessToken(GetCurrentProcess(), TOKEN_RIGHTS, &hOldToken);
         }
-        // OriginalToken BEGIN
+        else {
+            // use the users default token
+            ok = WTSQueryUserToken(idSession, &hOldToken);
+        }
+        /*// OriginalToken BEGIN
         else if (CompartmentMode || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
             HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (ULONG)(ULONG_PTR)idProcess);
             if (!hProcess)
@@ -369,7 +374,7 @@ ULONG ServiceServer::RunHandler2(
         else {
             // use the callers original token
             hOldToken = (HANDLE)SbieApi_QueryProcessInfo(idProcess, 'ptok');
-        }
+        }*/
     }
 
     if (ok) {

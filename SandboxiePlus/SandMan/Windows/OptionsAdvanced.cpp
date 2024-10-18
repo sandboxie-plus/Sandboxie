@@ -48,6 +48,7 @@ void COptionsWindow::CreateAdvanced()
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenSamEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenLsaEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkOpenWpadEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkSbieLogon, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkCreateToken, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -190,6 +191,7 @@ void COptionsWindow::LoadAdvanced()
 	//ui.chkOpenLsaSSPI->setChecked(!m_pBox->GetBool("BlockPassword", true)); // OpenLsaSSPI
 	ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
+	ui.chkOpenWpadEndpoint->setChecked(m_pBox->GetBool("OpenWPADEndpoint", false));
 
 	ui.treeInjectDll->clear();
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
@@ -444,6 +446,7 @@ void COptionsWindow::SaveAdvanced()
 	//WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "n", ""); // OpenLsaSSPI
 	WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "y", "");
 	WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
+	WriteAdvancedCheck(ui.chkOpenWpadEndpoint, "OpenWPADEndpoint", "y", "");
 
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
 	QStringList InjectDll64 = m_pBox->GetTextList("InjectDll64", false);
@@ -660,6 +663,7 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenSamEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenLsaEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkOpenWpadEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 
 	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode

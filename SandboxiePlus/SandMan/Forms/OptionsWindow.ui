@@ -906,31 +906,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="chkOpenDevCMApi">
-                 <property name="text">
-                  <string>Allow sandboxed programs to manage Hardware/Devices</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="lblAccess">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="toolTip">
-                  <string>Protect the sandbox integrity itself</string>
-                 </property>
-                 <property name="text">
-                  <string>Access Isolation</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
+               <item row="6" column="1">
                 <spacer name="horizontalSpacer_21">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -943,7 +919,23 @@
                  </property>
                 </spacer>
                </item>
-               <item row="5" column="0">
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblAccess">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the sandbox integrity itself</string>
+                 </property>
+                 <property name="text">
+                  <string>Access Isolation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
                 <spacer name="verticalSpacer_43">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -955,6 +947,20 @@
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="chkOpenDevCMApi">
+                 <property name="text">
+                  <string>Allow sandboxed programs to manage Hardware/Devices</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="chkOpenWpadEndpoint">
+                 <property name="text">
+                  <string>Open access to Proxy Configurations</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -5832,6 +5838,7 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>chkProtectBox</tabstop>
   <tabstop>chkRawDiskRead</tabstop>
   <tabstop>chkRawDiskNotify</tabstop>
+  <tabstop>chkAllowEfs</tabstop>
   <tabstop>chkCopyLimit</tabstop>
   <tabstop>txtCopyLimit</tabstop>
   <tabstop>chkCopyPrompt</tabstop>
@@ -5844,6 +5851,7 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>chkNoCopyMsg</tabstop>
   <tabstop>chkBlockSpooler</tabstop>
   <tabstop>chkOpenSpooler</tabstop>
+  <tabstop>chkOpenWpadEndpoint</tabstop>
   <tabstop>chkPrintToFile</tabstop>
   <tabstop>chkOpenProtectedStorage</tabstop>
   <tabstop>chkOpenCredentials</tabstop>

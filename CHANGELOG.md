@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added mechanism to set set box folder ACLs to allow only the creating user access 'LockBoxToUser=y'
 - added option to keep original ACLs on sandboxed files 'UseOriginalACLs=y'
   - Warning: this can make the box content undeletable from sandman, and manual deletion will be required
+- added option 'OpenWPADEndpoint=y' [#4292](https://github.com/sandboxie-plus/Sandboxie/issues/4292)
 
 ### Fixed
 - fixed ImDiskApp uninstall key is always written to the registry [#4282](https://github.com/sandboxie-plus/Sandboxie/issues/4282)

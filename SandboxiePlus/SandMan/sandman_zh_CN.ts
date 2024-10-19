@@ -2221,7 +2221,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="151"/>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>文档</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="265"/>
@@ -2240,22 +2240,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="327"/>
         <source>Select Document Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>选择文档目录</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="331"/>
         <source>Please enter Document File Extension.</source>
-        <translation type="unfinished"></translation>
+        <translation>请输入文档文件扩展名。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
         <source>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</source>
-        <translation type="unfinished"></translation>
+        <translation>出于安全原因，不允许创建通配符BreakoutDocument预设。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
-        <translation type="unfinished"></translation>
+        <translation>出于安全原因，不应分离指定的扩展名%1。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="408"/>
@@ -2965,7 +2965,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="246"/>
         <source>No Files selected!</source>
-        <translation type="unfinished"></translation>
+        <translation>未选择文件！</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="250"/>
@@ -8370,22 +8370,22 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="508"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="unfinished"></translation>
+        <translation>允许沙盒进程打开受EFS保护的文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="961"/>
         <source>Open access to Proxy Configurations</source>
-        <translation type="unfinished"></translation>
+        <translation>打开对代理配置的访问权限</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1281"/>
         <source>File ACLs</source>
-        <translation type="unfinished"></translation>
+        <translation>文件ACLs(访问控制列表)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1331"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</source>
-        <translation type="unfinished"></translation>
+        <translation>对沙盒内的文件和文件夹使用原始访问控制条目（对于MSIServer启用例外）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1673"/>
@@ -8467,7 +8467,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2373"/>
         <source>Breakout Document</source>
-        <translation type="unfinished"></translation>
+        <translation>分离文档</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2410"/>
@@ -10572,12 +10572,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2266"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>此功能通过限制访问来保护沙盒，防止其他用户访问该文件夹。请确保根文件夹路径包含%USER%宏，以便每个用户都能获得一个专用的沙盒文件夹。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2269"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>限制创建该沙盒的用户对沙盒根文件夹的访问权限</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2292"/>

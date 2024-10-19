@@ -323,7 +323,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="45"/>
         <source>Enter Box Image passwords:</source>
-        <translation>Alan Görüntüsü parolalarını girin:</translation>
+        <translation>Alan Görüntüsü parolasını girin:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="49"/>
@@ -1509,7 +1509,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsForce.cpp" line="151"/>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Belge</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="265"/>
@@ -1528,23 +1528,23 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsForce.cpp" line="327"/>
         <source>Select Document Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Belge Dizini Seçin</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="331"/>
         <source>Please enter Document File Extension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lütfen Belge için Dosya Uzantısını girin.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
         <source>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Güvenlik nedeniyle tamamen joker karakterli BreakoutDocument ön ayarlarının oluşturulmasına izin verilmez.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
-        <translation type="unfinished"></translation>
+        <translation>Güvenlik nedeniyle belirtilen %1 uzantısı korumalı alan dışına çıkmamalıdır.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="408"/>
@@ -2685,7 +2685,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="246"/>
         <source>No Files selected!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiçbir Dosya Seçilmedi!</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="250"/>
@@ -5423,7 +5423,7 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1376"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
-        <translation>Bu, Sandboxie-Plus Seri Numarasına benzemiyor.&lt;br /&gt;Bir sertifikanın yalnızca UPDATEKEY veya SIGNATURE değerini girmeyi denediyseniz, bu doğru değildir Lütfen bunun yerine yukarıdaki metin alanına sertifikanın tamamını giriniz.</translation>
+        <translation>Bu numara Sandboxie-Plus Seri Numarasına benzemiyor.&lt;br /&gt;Bir sertifikanın yalnızca UPDATEKEY veya SIGNATURE değerini girmeyi denediyseniz, bu doğru değildir Lütfen bunun yerine yukarıdaki metin alanına sertifikanın tamamını giriniz.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1383"/>
@@ -7583,7 +7583,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="508"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan işlemlerinin EFS tarafından korunan dosyaları açmasına izin ver</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="566"/>
@@ -7662,7 +7662,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="961"/>
         <source>Open access to Proxy Configurations</source>
-        <translation type="unfinished"></translation>
+        <translation>Ara Sunucu Yapılandırmalarına erişimi aç</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1069"/>
@@ -7679,13 +7679,13 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1281"/>
         <source>File ACLs</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya ACL&apos;leri</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1331"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
         <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Alan dosyaları ve klasörleri için asıl Erişim Kontrol Girişlerini kullan (MSIServer etkinleştirme muafiyetleri için)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1341"/>
@@ -7953,10 +7953,6 @@ Kısmen işaretli: Yeni oluşturulan korumalı alan belirtecine hiçbir grup ekl
         <translation>ConHost.exe İşlem Bütünlüğü Düzeyini Bırak</translation>
     </message>
     <message>
-        <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
-        <translation type="vanished">&lt;b&gt;&lt;font color=&apos;red&apos;&gt;GÜVENLİK TAVSİYESİ&lt;/font&gt;:&lt;/b&gt; &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; ve/veya &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt;&apos;in Open[File/Pipe]Path yönergeleriyle birlikte kullanımı sistem güvenliğini tehlikeye atabilir. Lütfen bunları kullanmadan önce her seçeneğin belgesindeki güvenlik bölümünü inceleyin.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2590"/>
         <source>Use Linger Leniency</source>
         <translation>Oyalanma yumuşatmayı kullan</translation>
@@ -7986,7 +7982,7 @@ Kısmen işaretli: Yeni oluşturulan korumalı alan belirtecine hiçbir grup ekl
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>Hangi işlemlerin Dosyalara, Klasörlere ve Borulara erişebileceğini yapılandırın. 
-&apos;Açık&apos; erişimi yalnızca korumalı alanın dışında bulunan program dosyaları için geçerlidir, bunun yerine tüm programlara uygulanmasını sağlamak için &apos;Hepsine Açık&apos; kullanabilir veya bu davranışı İlkeler sekmesinden değiştirebilirsiniz.</translation>
+&apos;Açık&apos; erişimi yalnızca korumalı alanın dışında bulunan program dosyaları için geçerlidir, bunun tüm programlara uygulanmasını sağlamak için &apos;Hepsine Açık&apos; erişimi kullanabilir veya bu davranışı İlkeler sekmesinden değiştirebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2869"/>
@@ -8040,7 +8036,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3301"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
-        <translation>Sanallaştırılmış COM kullanılmasın, ana sistem COM altyapısına açık erişim sağlar (Önerilmez)</translation>
+        <translation>Sanallaştırılmış COM kullanılmasın, ana sistem COM altyapısına açık erişime izin ver (Önerilmez)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3309"/>
@@ -8238,7 +8234,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4532"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
-        <translation>Burada, uyumluluğu artırmak veya korumalı alan davranışını özelleştirmek için işlem başına gelişmiş seçenekleri yapılandırabilirsiniz.</translation>
+        <translation>Uyumluluğu artırmak veya korumalı alan davranışını özelleştirmek için işlem başına gelişmiş seçenekleri buradan yapılandırabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4543"/>
@@ -8318,7 +8314,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4280"/>
         <source>Restart force process before they begin to execute</source>
-        <translation>Yürütülmeye başlamadan önce zorunlu işlemleri yeniden başlat</translation>
+        <translation>Zorunlu işlemleri yürütülmeden önce yeniden başlat</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4321"/>
@@ -8413,7 +8409,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="905"/>
         <source>Open access to Windows Security Account Manager</source>
-        <translation>Windows Güvenlik Hesap Yöneticisine açık erişim</translation>
+        <translation>Windows Güvenlik Hesap Yöneticisine erişimi aç</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5282"/>
@@ -8483,12 +8479,12 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2373"/>
         <source>Breakout Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Çıkabilen Belge</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2380"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;GÜVENLİK TAVSİYESİ&lt;/font&gt;:&lt;/b&gt; &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; ve/veya &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt;&apos;in Open[File/Pipe]Path yönergeleriyle birlikte kullanımı sistem güvenliğini tehlikeye atabilir. Herhangi bir * veya güvenli olmayan (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;vb…) uzantıya izin veren &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; kullanımı da buna örnektir. Lütfen bunları kullanmadan önce her seçeneğin belgesindeki güvenlik bölümünü inceleyin.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3433"/>
@@ -8564,12 +8560,12 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="954"/>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
-        <translation>Korumalı alan programlarının Donanım/Aygıtları yönetmesine izin ver</translation>
+        <translation>Korumalı alan programlarının Donanımları/Aygıtları yönetmesine izin ver</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="898"/>
         <source>Open access to Windows Local Security Authority</source>
-        <translation>Windows Yerel Güvenlik Yetkilisine açık erişim</translation>
+        <translation>Windows Yerel Güvenlik Yetkilisine erişimi aç</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3538"/>
@@ -8703,7 +8699,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4266"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation>Varsayılan olarak RpcMgmtSetComTimeout kullanımını devre dışı bırak (Uyumluluk sorunlarını çözebilir)</translation>
+        <translation>RpcMgmtSetComTimeout kullanımını varsayılan olarak devre dışı bırak (Uyumluluk sorunlarını çözebilir)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4584"/>
@@ -8757,7 +8753,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4727"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
-        <translation>Burada, çeşitli alan olaylarında otomatik olarak yürütülecek eylemleri belirleyebilirsiniz.</translation>
+        <translation>Çeşitli alan olaylarında otomatik olarak yürütülecek eylemleri buradan belirleyebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="805"/>
@@ -9777,12 +9773,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2266"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu özellik korumalı alan klasörüne erişimi kısıtlayarak diğer kullanıcıların bu klasöre erişimini önleyerek korumalı alanı korur. Her kullanıcının özel bir korumalı alan klasörü kullanması için kök klasör yolunun %USER% makrosunu içerdiğinden emin olun.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2269"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan kök klasörüne erişimi, o alanı oluşturan kullanıcıyla sınırla</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2379"/>

@@ -1328,7 +1328,7 @@
                <item row="12" column="1" colspan="5">
                 <widget class="QCheckBox" name="chkACLs">
                  <property name="text">
-                  <string>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</string>
+                  <string>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</string>
                  </property>
                 </widget>
                </item>

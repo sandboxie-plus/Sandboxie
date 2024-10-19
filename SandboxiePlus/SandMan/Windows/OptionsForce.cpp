@@ -338,7 +338,7 @@ void COptionsWindow::OnBreakoutDoc()
 		Ext.prepend("*.");
 
 	if (Ext.right(1) == "*") {
-		QMessageBox::warning(this, "Sansboxie-Plus", tr("For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets."));
+		QMessageBox::warning(this, "Sandboxie-Plus", tr("For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets."));
 		return;
 	}
 	QStringList BannedExt = QString(// from: https://learn.microsoft.com/en-us/troubleshoot/developer/browsers/security-privacy/information-about-the-unsafe-file-list

@@ -222,7 +222,7 @@ _FX BOX *Process_GetForcedStartBox(
     }
 
     //
-    // initialize ParentName but only if the parrent is not a system process
+    // initialize ParentName but only if the parent is not a system process
     // 
 
     if (!MyIsProcessRunningAsSystemAccount(ParentId)) {

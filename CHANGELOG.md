@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - to enable add 'EnableEFS=y' to the sandbox config
 - added break out document functionality [#2741](https://github.com/sandboxie-plus/Sandboxie/issues/2741)
   - use a syntax like this 'BreakoutDocument=C:\path\*.txt' to specify path and extension
-  - Security Warning: do not use paths terminated with a wild card like 'BreakoutDocument=C:\path\*' as thay will allow for executeion ot maliciouse scripts outside teh sandbox!!!
+  - Security Warning: Do not use paths terminated with a wildcard like 'BreakoutDocument=C:\path\*' as they will allow for execution of malicious scripts outside the sandbox!
 - added mechanism to set set box folder ACLs to allow only the creating user access 'LockBoxToUser=y'
 - added option to keep original ACLs on sandboxed files 'UseOriginalACLs=y'
 - added option 'OpenWPADEndpoint=y' [#4292](https://github.com/sandboxie-plus/Sandboxie/issues/4292)

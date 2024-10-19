@@ -207,7 +207,7 @@ ULONG UserServer::StartWorker(ULONG session_id)
     //
     // create an event object for the new User Worker process
     // the user process needs to be able to set this event
-    // so set the apropriate security descriptor
+    // so set the appropriate security descriptor
     //
 
     SECURITY_DESCRIPTOR sd;
@@ -286,8 +286,8 @@ ULONG UserServer::StartWorker(ULONG session_id)
             }
 
             //
-            // since the worker is runnign as user it can't open this service process, even for SYNCHRONIZE only
-            // hence we duplicate teh required token and use APC to pass it to our new worker.
+            // since the worker is running as user it can't open this service process, even for SYNCHRONIZE only
+            // hence we duplicate the required token and use APC to pass it to our new worker.
             //
 
             HANDLE hThis;

@@ -2046,7 +2046,8 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
-        <source>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</source>
+        <source>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</source>
+        <oldsource>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7664,7 +7665,8 @@ an Stelle von &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1331"/>
-        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</source>
+        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
+        <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -1537,7 +1537,8 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
-        <source>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</source>
+        <source>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</source>
+        <oldsource>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7682,7 +7683,8 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1331"/>
-        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</source>
+        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
+        <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

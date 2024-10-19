@@ -2249,8 +2249,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
-        <source>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</source>
-        <translation>出于安全原因，不允许创建通配符BreakoutDocument预设。</translation>
+        <source>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</source>
+        <oldsource>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</oldsource>
+        <translation type="unfinished">出于安全原因，不允许创建通配符BreakoutDocument预设。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>
@@ -8384,8 +8385,9 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1331"/>
-        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</source>
-        <translation>对沙盒内的文件和文件夹使用原始访问控制条目（对于MSIServer启用例外）</translation>
+        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
+        <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
+        <translation type="unfinished">对沙盒内的文件和文件夹使用原始访问控制条目（对于MSIServer启用例外）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1673"/>

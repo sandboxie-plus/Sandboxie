@@ -2161,7 +2161,8 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
-        <source>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</source>
+        <source>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</source>
+        <oldsource>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8467,7 +8468,8 @@ Per specificare un processo, utilizza &apos;$:program.exe&apos; come percorso.</
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1331"/>
-        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</source>
+        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
+        <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

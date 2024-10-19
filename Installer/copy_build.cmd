@@ -27,9 +27,14 @@ IF %1 == ARM64 (
   set instPath=%~dp0\SbiePlus_a64
 )
 
-set
+set redistPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Redist\MSVC\%VCToolsVersion%\%1\Microsoft.VC142.CRT
 
-set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC142.CRT
+dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\"
+
+dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Redist\MSVC\"
+
+dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Redist\MSVC\%VCToolsVersion%\%1\Microsoft.VC142.CRT"
+
 @echo on
 
 set srcPath=%~dp0..\SandboxiePlus\Bin\%archPath%\Release

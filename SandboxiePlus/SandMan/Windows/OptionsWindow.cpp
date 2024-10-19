@@ -8,55 +8,7 @@
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Helpers/WinAdmin.h"
 #include "../Wizards/TemplateWizard.h"
-
-
-static bool IsAncestorOf(QObject* container, QObject* obj)
-{
-	while (obj)
-	{
-		if (obj == container)
-			return true;
-		obj = obj->parent();
-	}
-	return false;
-}
-
-static QWidgetList GetTabOrder(QObject* container)
-{
-	QWidgetList list;
-	QWidget* pWidget = container->findChild<QWidget*>();
-
-	if (!pWidget)
-		return list;
-	list.append(pWidget);
-
-	for (QWidget* pPrev = pWidget->previousInFocusChain();
-		pPrev && IsAncestorOf(container, pPrev);
-		pPrev = pPrev->previousInFocusChain())
-	{
-		list.prepend(pPrev);
-	}
-
-	for (QWidget* pNext = pWidget->nextInFocusChain();
-		pNext && IsAncestorOf(container, pNext);
-		pNext = pNext->nextInFocusChain())
-	{
-		list.append(pNext);
-	}
-
-	return list;
-}
-
-static void RestoreTabOrder(const QWidgetList& list)
-{
-	QWidget* pPrev = nullptr;
-	for (QWidget* pWidget : list)
-	{
-		if (pPrev)
-			QWidget::setTabOrder(pPrev, pWidget);
-		pPrev = pWidget;
-	}
-}
+#include "Helpers/TabOrder.h"
 
 
 class NoEditDelegate : public QStyledItemDelegate {
@@ -324,14 +276,12 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	pDummy->setVisible(false);
 
 	// merge recovery tabs
-	QWidgetList tabOrder = GetTabOrder(ui.tabsRecovery);
 	QWidget* pWidget3 = new QWidget();
 	pWidget3->setLayout(ui.gridLayout_10);
 	ui.gridLayout_24->addWidget(pWidget3, 1, 0);
 	QWidget* pWidget4 = new QWidget();
 	pWidget4->setLayout(ui.gridLayout_56);
 	ui.gridLayout_24->addWidget(pWidget4, 2, 0);
-	RestoreTabOrder(tabOrder);
 	delete ui.tabsRecovery;
 	ui.gridLayout_24->setContentsMargins(0, 0, 0, 0);
 
@@ -357,7 +307,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if (iOptionLayout == 1)
 	{
 		// merge stop tabs
-		tabOrder = GetTabOrder(ui.tabsStop);
 		QWidget* pWidget1 = new QWidget();
 		pWidget1->setLayout(ui.gridLayout_57);
 		ui.gridLayout_17->addWidget(pWidget1, 1, 0);
@@ -371,7 +320,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		ui.lblStopOpt->setVisible(false);
 		ui.lblStopOpt->setProperty("hidden", true);
 		ui.gridLayout_17->addWidget(pWidget3, 3, 0);
-		RestoreTabOrder(tabOrder);
 		delete ui.tabsStop;
 		ui.gridLayout_17->setContentsMargins(0, 0, 0, 0);
 
@@ -718,6 +666,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		this->addAction(pSetTree);
 	}
 	m_pSearch->setPlaceholderText(tr("Search for options"));
+	
+	SetTabOrder(this);
 }
 
 void COptionsWindow::ApplyIniEditFont()

@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.15.0 / 5.70.0] - 2024-10-
+## [1.15.0 / 5.70.0] - 2024-10-19
 
 ### Added
 - added new user proxy mechanism to enable user specific operations

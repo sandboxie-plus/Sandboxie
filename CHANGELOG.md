@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [1.15.1 / 5.70.1] - 2024-10-
+
+### Fixed
+- fixed Sandboxie crypto fails to start in red boxes
+
+
+
+
 ## [1.15.0 / 5.70.0] - 2024-10-19
 
 ### Added

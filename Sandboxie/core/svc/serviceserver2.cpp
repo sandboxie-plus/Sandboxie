@@ -83,6 +83,13 @@ bool ServiceServer::CanCallerDoElevation(
 
             if (DropRights && SbieDll_CheckStringInList(ServiceName, boxname, L"StartService"))
                 DropRights = false;
+
+            //
+            // always allow to start cryptsvc if needed
+            //
+
+            if (DropRights && _wcsicmp(ServiceName, L"CryptSvc") == 0)
+                DropRights = false;
         }
     }
                     

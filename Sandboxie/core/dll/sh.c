@@ -304,6 +304,54 @@ _FX WCHAR *SH32_AdjustPath(WCHAR *src, WCHAR **pArgs)
 
 
 //---------------------------------------------------------------------------
+// SH32_BreakoutDocument
+//---------------------------------------------------------------------------
+
+
+_FX BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len)
+{
+    if (SbieDll_CheckPatternInList(path, len, NULL, L"BreakoutDocument")) {
+
+        NTSTATUS status;
+        static WCHAR* _QueueName = NULL;
+
+        if (!_QueueName) {
+            _QueueName = Dll_Alloc(32 * sizeof(WCHAR));
+            Sbie_snwprintf(_QueueName, 32, L"*USERPROXY_%08X", Dll_SessionId);
+        }
+
+        ULONG path_len = (len + 1) * sizeof(WCHAR);
+        ULONG req_len = sizeof(USER_SHELL_EXEC_REQ) + path_len;
+        ULONG path_pos = sizeof(USER_SHELL_EXEC_REQ);
+
+        USER_SHELL_EXEC_REQ* req = (USER_SHELL_EXEC_REQ*)Dll_AllocTemp(req_len);
+
+        WCHAR* path_buff = ((UCHAR*)req) + path_pos;
+        memcpy(path_buff, path, path_len);
+
+        req->msgid = USER_SHELL_EXEC;
+
+        req->FileNameOffset = path_pos;
+
+        ULONG* rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, sizeof(*rpl), 100);
+        if (!rpl)
+            status = STATUS_INTERNAL_ERROR;
+        else {
+            status = rpl[0];
+
+            Dll_Free(rpl);
+        }
+
+        Dll_Free(req);
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // SH32_ShellExecuteExW
 //---------------------------------------------------------------------------
 
@@ -324,42 +372,9 @@ _FX BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo)
     //
 
     if (lpExecInfo->lpFile) {
-        if (SbieDll_CheckPatternInList(lpExecInfo->lpFile, (ULONG)wcslen(lpExecInfo->lpFile), NULL, L"BreakoutDocument")) {
 
-            NTSTATUS status;
-            static WCHAR* _QueueName = NULL;
-
-            if (!_QueueName) {
-                _QueueName = Dll_Alloc(32 * sizeof(WCHAR));
-                Sbie_snwprintf(_QueueName, 32, L"*USERPROXY_%08X", Dll_SessionId);
-            }
-
-            ULONG path_len = (wcslen(lpExecInfo->lpFile) + 1) * sizeof(WCHAR);
-            ULONG req_len = sizeof(USER_SHELL_EXEC_REQ) + path_len;
-            ULONG path_pos = sizeof(USER_SHELL_EXEC_REQ);
-
-            USER_SHELL_EXEC_REQ *req = (USER_SHELL_EXEC_REQ *)Dll_AllocTemp(req_len);
-
-            WCHAR* path_buff = ((UCHAR*)req) + path_pos;
-            memcpy(path_buff, lpExecInfo->lpFile, path_len);
-
-            req->msgid = USER_SHELL_EXEC;
-
-            req->FileNameOffset = path_pos;
-
-            ULONG *rpl = SbieDll_CallProxySvr(_QueueName, req, req_len, sizeof(*rpl), 100);
-            if (!rpl)
-                status = STATUS_INTERNAL_ERROR;
-            else {
-                status = rpl[0];
-
-                Dll_Free(rpl);
-            }
-
-            Dll_Free(req);
-
-            return NT_SUCCESS(status);
-        }
+        if (SH32_BreakoutDocument(lpExecInfo->lpFile, wcslen(lpExecInfo->lpFile)))
+            return TRUE;
     }
 
     //

@@ -1318,15 +1318,18 @@ _FX BOOL Proc_CreateProcessInternalW(
         const WCHAR* temp = lpCommandLine;
         if (*temp == L'"') temp = wcschr(temp + 1, L'"');
         else temp = wcschr(temp, L' ');
-        if (temp) while (*++temp == L' ');
+        if (temp) 
+        {
+            while (*++temp == L' ');
 
-        const WCHAR* arg1 = temp;
-        const WCHAR* arg1_end = NULL;
-        if (*arg1 == L'"') temp = wcschr(arg1 + 1, L'"');
-        if (!arg1_end) arg1_end = wcschr(arg1, L'\0');
-        
-        if (arg1 && arg1 != arg1_end && SH32_BreakoutDocument(arg1, (ULONG)(arg1_end - arg1)))
-            return TRUE;
+            const WCHAR* arg1 = temp;
+            const WCHAR* arg1_end = NULL;
+            if (*arg1 == L'"') temp = wcschr(arg1 + 1, L'"');
+            if (!arg1_end) arg1_end = wcschr(arg1, L'\0');
+
+            if (arg1 && arg1 != arg1_end && SH32_BreakoutDocument(arg1, (ULONG)(arg1_end - arg1)))
+                return TRUE;
+        }
     }
 
 #endif

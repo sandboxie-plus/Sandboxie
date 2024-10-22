@@ -2142,9 +2142,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
-        <source>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</source>
-        <oldsource>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</oldsource>
-        <translation>由於安全原因，不允許建立完全通用字元的分離文件預設。</translation>
+        <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
+        <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
+        <translation type="unfinished">由於安全原因，不允許建立完全通用字元的分離文件預設。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>

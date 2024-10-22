@@ -2046,8 +2046,9 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
-        <source>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</source>
-        <translation>Aus Sicherheitsgründen ist es nicht erlaubt, Breakout Dokument Vorgaben, die gänzlich aus einer Wildcard bestehen, zu erstellen.</translation>
+        <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
+        <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
+        <translation type="unfinished">Aus Sicherheitsgründen ist es nicht erlaubt, Breakout Dokument Vorgaben, die gänzlich aus einer Wildcard bestehen, zu erstellen.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>

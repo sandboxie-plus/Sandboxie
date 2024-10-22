@@ -1537,9 +1537,9 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
-        <source>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</source>
-        <oldsource>For security reasons it it not permitted to create entierly wildcard BreakoutDocument presets.</oldsource>
-        <translation>Güvenlik nedeniyle tamamen joker karakterli BreakoutDocument ön ayarlarının oluşturulmasına izin verilmez.</translation>
+        <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
+        <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
+        <translation type="unfinished">Güvenlik nedeniyle tamamen joker karakterli BreakoutDocument ön ayarlarının oluşturulmasına izin verilmez.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>

@@ -6,7 +6,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="26"/>
         <source>Form</source>
-        <translation>表格</translation>
+        <translation>表单</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="96"/>
@@ -42,7 +42,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="34"/>
         <source>Repeat Password</source>
-        <translation>重置密码</translation>
+        <translation>重复密码</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="174"/>
@@ -52,7 +52,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="57"/>
         <source>Encryption Cipher</source>
-        <translation>加密密钥</translation>
+        <translation>加密算法</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="83"/>

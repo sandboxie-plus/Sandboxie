@@ -1310,7 +1310,7 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     //
     // Explorer does not use ShellExecuteExW, so for explorer we set BreakoutDocumentProcess=explorer.exe,y 
-    // in the Tempaltes.ini and check whenever explorer wants to start a process
+    // in the Templates.ini and check whenever explorer wants to start a process
     //
 
     if (lpCommandLine && Config_GetSettingsForImageName_bool(L"BreakoutDocumentProcess", FALSE))

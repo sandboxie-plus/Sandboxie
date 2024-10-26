@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Sandboxie crypto fails to start in red boxes
 - fixed issue with breakout process when using explorer.exe
 
+### Changed
+- validated compatibility with Windows build 27729 and updated DynData
+
 
 
 ## [1.15.0 / 5.70.0] - 2024-10-19

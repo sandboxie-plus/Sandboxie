@@ -7,7 +7,7 @@ REM echo qt6_version: %3
 
 echo %*
 IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
-IF "%~2" == "" ( set "qt_version=5.15.14" ) ELSE ( set "qt_version=%~2" )
+IF "%~2" == "" ( set "qt_version=5.15.15" ) ELSE ( set "qt_version=%~2" )
 
 IF %1 == Win32 (
   set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2019

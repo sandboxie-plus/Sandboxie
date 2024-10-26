@@ -76,7 +76,7 @@ std::vector<T> SplitStrx(const T& String, const T& Separator, bool bKeepEmpty = 
 		typename T::size_type Sep = bMulti ? String.find_first_of(Separator,Pos) : String.find(Separator,Pos);
 		if(Sep != T::npos)
 		{
-			if(bKeepEmpty || Sep-Pos > 0)
+			if(bKeepEmpty || Sep > Pos)
 				StringList.push_back(String.substr(Pos,Sep-Pos));
 			Pos = Sep+1;
 		}

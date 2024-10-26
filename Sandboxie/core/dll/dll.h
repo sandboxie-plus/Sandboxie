@@ -110,7 +110,7 @@ enum {
     DLL_IMAGE_ACROBAT_READER,
     DLL_IMAGE_OFFICE_OUTLOOK,
     DLL_IMAGE_OFFICE_EXCEL,
-    DLL_IMAGE_FLASH_PLAYER_SANDBOX,
+    DLL_IMAGE_FLASH_PLAYER_SANDBOX, // obsolete
     DLL_IMAGE_PLUGIN_CONTAINER,
     DLL_IMAGE_OTHER_WEB_BROWSER,
     DLL_IMAGE_OTHER_MAIL_CLIENT,
@@ -311,6 +311,8 @@ extern ULONG Dll_Windows;
 
 extern PSECURITY_DESCRIPTOR Secure_NormalSD;
 extern PSECURITY_DESCRIPTOR Secure_EveryoneSD;
+
+extern BOOLEAN Secure_CopyACLs;
 
 extern BOOLEAN Secure_FakeAdmin;
 
@@ -601,6 +603,8 @@ ULONG_PTR ProtectCall4(
     void *CallAddress,
     ULONG_PTR Arg1, ULONG_PTR Arg2, ULONG_PTR Arg3, ULONG_PTR Arg4);
 
+BOOL SH32_BreakoutDocument(const WCHAR* path, ULONG len);
+
 BOOL SH32_DoRunAs(
     const WCHAR *CmdLine, const WCHAR *WorkDir,
     PROCESS_INFORMATION *pi, BOOL *cancelled);
@@ -792,6 +796,10 @@ BOOLEAN Pdh_Init(HMODULE hmodule);
 
 BOOLEAN NsiRpc_Init(HMODULE);
 
+//BOOLEAN Wininet_Init(HMODULE);
+
+BOOLEAN Nsi_Init(HMODULE);
+
 BOOLEAN Ntmarta_Init(HMODULE);
 
 BOOLEAN Acscmonitor_Init(HMODULE);
@@ -800,6 +808,7 @@ BOOLEAN DigitalGuardian_Init(HMODULE);
 
 BOOLEAN ComDlg32_Init(HMODULE);
 
+DWORD Dll_rand(void);
 
 //---------------------------------------------------------------------------
 // Functions (Config)

@@ -23,6 +23,7 @@ HEADERS += ./stdafx.h \
     ./Helpers/StorageInfo.h \
     ./Helpers/ReadDirectoryChanges.h \
     ./Helpers/ReadDirectoryChangesPrivate.h \
+    ./Helpers/TabOrder.h \
     ./Windows/RecoveryWindow.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
@@ -38,6 +39,7 @@ HEADERS += ./stdafx.h \
     ./Wizards/BoxAssistant.h \
     ./Windows/BoxImageWindow.h \
     ./Windows/CompressDialog.h \
+    ./Windows/ExtractDialog.h \
     ./Engine/BoxEngine.h \
     ./Engine/ScriptManager.h \
     ./Engine/BoxObject.h \
@@ -73,6 +75,7 @@ SOURCES += ./main.cpp \
     ./Helpers/ReadDirectoryChanges.cpp \
     ./Helpers/ReadDirectoryChangesPrivate.cpp \
     ./Helpers/WindowFromPointEx.cpp \
+    ./Helpers/TabOrder.cpp \
     ./Windows/OptionsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
@@ -88,6 +91,7 @@ SOURCES += ./main.cpp \
     ./Wizards/BoxAssistant.cpp \
     ./Windows/BoxImageWindow.cpp \
     ./Windows/CompressDialog.cpp \
+    ./Windows/ExtractDialog.cpp \
     ./Engine/BoxEngine.cpp \
     ./Engine/ScriptManager.cpp \
     ./Engine/BoxObject.cpp \
@@ -105,6 +109,7 @@ FORMS += ./Forms/SelectBoxWindow.ui \
     ./Forms/SnapshotsWindow.ui \
     ./Forms/BoxImageWindow.ui \
     ./Forms/CompressDialog.ui \
+    ./Forms/ExtractDialog.ui \
     ./Forms/TestProxyDialog.ui
 
 TRANSLATIONS += sandman_de.ts \

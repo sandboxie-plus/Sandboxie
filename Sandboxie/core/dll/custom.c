@@ -24,7 +24,10 @@
 #include "dll.h"
 #include "common/my_version.h"
 #include <stdio.h>
+#include <objbase.h>
 
+#include "common/pool.h"
+#include "common/map.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -49,6 +52,7 @@ static HANDLE   OpenExplorerKey(
                     HANDLE ParentKey, const WCHAR *SubkeyName, ULONG *error);
 static void     DeleteShellAssocKeys(ULONG Wow64);
 static void     AutoExec(void);
+static BOOLEAN  Custom_ProductID(void);
 
 
 //---------------------------------------------------------------------------
@@ -91,6 +95,7 @@ _FX BOOLEAN CustomizeSandbox(void)
         DisableEdgeBoost();
         Custom_EnableBrowseNewProcess();
         DeleteShellAssocKeys(0);
+		Custom_ProductID();
         Custom_DisableBHOs();
         if (Dll_OsBuild >= 8400) // only on win 8 and later
             Custom_OpenWith();
@@ -1338,7 +1343,7 @@ _FX void Custom_ComServer(void)
 // NsiRpc_Init
 //---------------------------------------------------------------------------
 
-#include <objbase.h>
+//#include <objbase.h>
 
 typedef RPC_STATUS (*P_NsiRpcRegisterChangeNotification)(
     LPVOID  p1, LPVOID  p2, LPVOID  p3, LPVOID  p4, LPVOID  p5, LPVOID  p6, LPVOID  p7);
@@ -1385,6 +1390,259 @@ _FX RPC_STATUS NsiRpc_NsiRpcRegisterChangeNotification(LPVOID  p1, LPVOID  p2, L
 }
 
 
+//---------------------------------------------------------------------------
+// Nsi_Init
+//---------------------------------------------------------------------------
+
+/*typedef struct _NPI_MODULEID {
+  USHORT            Length;
+  NPI_MODULEID_TYPE Type;
+  union {
+    GUID Guid;
+    LUID IfLuid;
+  };
+} NPI_MODULEID, *PNPI_MODULEID;*/
+
+typedef ULONG (*P_NsiAllocateAndGetTable)(int a1, struct NPI_MODULEID* a2, unsigned int a3, void *a4, int a5, void *a6, int a7, void *a8, int a9, void *a10, int a11, DWORD *a12, int a13);  
+
+P_NsiAllocateAndGetTable __sys_NsiAllocateAndGetTable = NULL;
+
+static ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* a2, unsigned int a3, void *a4, int a5, void *a6, int a7, void *a8, int a9, void *a10, int a11, DWORD *a12, int a13);
+
+
+extern POOL* Dll_Pool;
+
+static HASH_MAP Custom_NicMac;
+static CRITICAL_SECTION Custom_NicMac_CritSec;
+
+_FX BOOLEAN Nsi_Init(HMODULE module)
+{
+    if (SbieApi_QueryConfBool(NULL, L"HideNetworkAdapterMAC", FALSE)) {
+
+        InitializeCriticalSection(&Custom_NicMac_CritSec);
+		map_init(&Custom_NicMac, Dll_Pool);
+
+        P_NsiAllocateAndGetTable NsiAllocateAndGetTable = (P_NsiAllocateAndGetTable)
+            Ldr_GetProcAddrNew(L"nsi.dll", L"NsiAllocateAndGetTable", "NsiAllocateAndGetTable");
+        SBIEDLL_HOOK(Nsi_, NsiAllocateAndGetTable);
+    }
+    return TRUE;
+}
+
+BYTE NPI_MS_NDIS_MODULEID[] = { 0x18, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x11, 0x4A, 0x00, 0xEB, 0x1A, 0x9B, 0xD4, 0x11, 0x91, 0x23, 0x00, 0x50, 0x04, 0x77, 0x59, 0xBC };
+
+/*
+
+typedef struct _IP_ADAPTER_INFO {
+    struct _IP_ADAPTER_INFO* Next;
+    DWORD ComboIndex;
+    char AdapterName[MAX_ADAPTER_NAME_LENGTH + 4];
+    char Description[MAX_ADAPTER_DESCRIPTION_LENGTH + 4];
+    UINT AddressLength;
+    BYTE Address[MAX_ADAPTER_ADDRESS_LENGTH];
+    DWORD Index;
+    UINT Type;
+    UINT DhcpEnabled;
+    PIP_ADDR_STRING CurrentIpAddress;
+    IP_ADDR_STRING IpAddressList;
+    IP_ADDR_STRING GatewayList;
+    IP_ADDR_STRING DhcpServer;
+    BOOL HaveWins;
+    IP_ADDR_STRING PrimaryWinsServer;
+    IP_ADDR_STRING SecondaryWinsServer;
+    time_t LeaseObtained;
+    time_t LeaseExpires;
+} IP_ADAPTER_INFO, *PIP_ADAPTER_INFO;
+
+
+__int64 __fastcall AllocateAndGetAdaptersInfo(PIP_ADAPTER_INFO a1)
+{
+  __int64 result; // rax
+  NET_IF_COMPARTMENT_ID CurrentThreadCompartmentId; // eax
+  unsigned int v4; // ecx
+  __int64 v5; // rdx
+  _QWORD *v6; // r13
+  unsigned int i; // r14d
+  __int64 v8; // r15
+  __int64 v9; // rdi
+  unsigned int v10; // edi
+  void *v11; // rax
+  __int64 v12; // rbx
+  int v13; // ecx
+  __int64 v14; // rax
+  unsigned int v15; // eax
+  int v16; // eax
+  __int64 pAddrEntry[10]; // [rsp+70h] [rbp+7h] BYREF
+  unsigned int Count; // [rsp+D0h] [rbp+67h] BYREF
+  unsigned int v19; // [rsp+D8h] [rbp+6Fh]
+  __int64 pOwnerEntry; // [rsp+E0h] [rbp+77h] BYREF
+  __int64 pStateEntry; // [rsp+E8h] [rbp+7Fh] BYREF
+
+  *a1 = 0i64; // Initialize the entire IP_ADAPTER_INFO structure to zero
+  result = NsiAllocateAndGetTable(
+             1i64,
+             &NPI_MS_NDIS_MODULEID,
+             1i64,
+             pAddrEntry,
+             8,
+             0i64,
+             0,
+             &pStateEntry,
+             656,
+             &pOwnerEntry,
+             568,
+             &Count,
+             0);
+  if ( !(_DWORD)result )
+  {
+    CurrentThreadCompartmentId = GetCurrentThreadCompartmentId();
+    v4 = Count;
+    v5 = CurrentThreadCompartmentId;
+    v19 = CurrentThreadCompartmentId;
+    v6 = a1;
+    for ( i = 0; i < v4; ++i )
+    {
+      v8 = 656i64 * i;
+      if ( *(_DWORD *)(v8 + pStateEntry) == (_DWORD)v5 )
+      {
+        v9 = 568i64 * i;
+        if ( (unsigned __int8)IsIpv4Interface(pAddrEntry[0] + 8i64 * i, *(unsigned __int16 *)(v9 + pOwnerEntry + 520)) )
+        {
+          v11 = (void *)MALLOC(0x2E0ui64); // Allocate memory for a new IP_ADAPTER_INFO structure
+          v12 = (__int64)v11;
+          if ( !v11 )
+          {
+            v10 = 8;
+            goto LABEL_9;
+          }
+          memset_0(v11, 0, 0x2E0ui64); // Clear the newly allocated structure
+          *(_QWORD *)(v12 + 720) = *(_QWORD *)(pAddrEntry[0] + 8i64 * i); // Set internal field (not directly related to IP_ADAPTER_INFO)
+
+          // Setting the AdapterName field
+          *(_OWORD *)(v12 + 704) = *(_OWORD *)(v9 + pOwnerEntry + 536);
+
+          // Setting the Index field
+          v13 = *(_DWORD *)(v8 + pStateEntry + 536);
+          *(_DWORD *)(v12 + 728) = v13;
+
+          // Setting the Type field
+          if ( v13 == 5 && (*(_DWORD *)(v8 + pStateEntry + 540) & 0xB) == 8 )
+          {
+            v16 = *(_DWORD *)(v12 + 728);
+            if ( (*(_DWORD *)(v9 + pOwnerEntry + 556) & 0x100) != 0 )
+              v16 = 1;
+            *(_DWORD *)(v12 + 728) = v16;
+          }
+
+          // Setting the ComboIndex field
+          *(_DWORD *)(v12 + 8) = *(_DWORD *)(v9 + pOwnerEntry);
+
+          // Setting the AdapterName field using ConvertGuidToStringA
+          ConvertGuidToStringA(v9 + pOwnerEntry + 536, v12 + 12, 260i64);
+
+          // Setting the Description field
+          v14 = *(unsigned __int16 *)(v9 + pOwnerEntry + 4) >> 1;
+          if ( (unsigned int)v14 > 0x100 )
+            v14 = 256i64;
+          *(_WORD *)(v9 + pOwnerEntry + 2 * v14 + 6) = 0;
+          StringCchPrintfA((STRSAFE_LPSTR)(v12 + 272), 0x84ui64, "%S", v9 + pOwnerEntry + 6);
+
+          // Setting the AddressLength field
+          v15 = 8;                              // Assignment of AddressLength start
+          if ( *(_WORD *)(v8 + pStateEntry + 548) < 8u )
+            v15 = *(unsigned __int16 *)(v8 + pStateEntry + 548);
+          *(_DWORD *)(v12 + 404) = v15;          // AddressLength
+
+          // Setting the Address field
+          memcpy_0((void *)(v12 + 408), (const void *)(v8 + pStateEntry + 550), v15); // Address
+          
+          // Setting the Index field
+          *(_DWORD *)(v12 + 416) = *(_DWORD *)(v9 + pOwnerEntry);
+
+          // Setting the Type field
+          *(_DWORD *)(v12 + 420) = *(unsigned __int16 *)(v9 + pOwnerEntry + 520);
+
+          *v6 = v12; // Link the current adapter info structure to the previous one
+          v6 = (_QWORD *)v12;
+
+          v10 = AddDhcpInfo(v12); // Call to set DHCP-related fields (DhcpEnabled, DhcpServer, LeaseObtained, LeaseExpires)
+          if ( v10 )
+            goto LABEL_9;
+          v10 = AddNetbtInfo(v12); // Call to set WINS-related fields (HaveWins, PrimaryWinsServer, SecondaryWinsServer)
+          if ( v10 )
+            goto LABEL_9;
+        }
+        v4 = Count;
+        v5 = v19;
+      }
+    }
+
+    // Setting additional fields like IP address list and Gateway list
+    v10 = AddUnicastAddressInfo(*a1, v5); // Call to set CurrentIpAddress and IpAddressList
+    if ( !v10 )
+      v10 = AddGatewayInfo(*a1); // Call to set GatewayList
+LABEL_9:
+    NsiFreeTable(pAddrEntry[0], 0i64, pStateEntry, pOwnerEntry); // Free allocated resources
+    return v10;
+  }
+  return result;
+}
+*/
+
+ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigned int TcpInformationId, void **pAddrEntry, int SizeOfAddrEntry, void **a6, int a7, void **pStateEntry, int SizeOfStateEntry, void **pOwnerEntry, int SizeOfOwnerEntry, DWORD *Count, int a13)
+{
+    ULONG ret = __sys_NsiAllocateAndGetTable(a1, NPI_MS_ID, TcpInformationId, pAddrEntry, SizeOfAddrEntry, a6, a7, pStateEntry, SizeOfStateEntry, pOwnerEntry, SizeOfOwnerEntry, Count, a13);
+
+    if (memcmp(NPI_MS_ID, NPI_MS_NDIS_MODULEID, 24) == 0 && pStateEntry)
+    {
+        typedef struct _STATE_ENTRY {
+            DWORD ThreadCompartmentId;     // 0
+            BYTE Unknown1[18];
+            WCHAR AdapterName[256];        // 22
+            DWORD Index;                   // 536
+            DWORD Type;                    // 540
+            BYTE Unknown2[4];
+            WORD AddressLength;            // 548
+            BYTE Address[8];               // 550
+            BYTE Unknown3[98];
+        } STATE_ENTRY, * PSTATE_ENTRY;     // 656
+
+        //const int x = sizeof(STATE_ENTRY); 
+        //const x1 = FIELD_OFFSET(STATE_ENTRY, Address);
+
+        for (DWORD i = 0; i < *Count; i++) {
+
+            PSTATE_ENTRY pEntry = (PSTATE_ENTRY)((BYTE*)*pStateEntry + i * sizeof(STATE_ENTRY));
+
+            if (pEntry->AddressLength) {
+
+
+                EnterCriticalSection(&Custom_NicMac_CritSec);
+
+                UINT_PTR key; // simple keys are sizeof(void*)
+                key = *(UINT_PTR*)&pEntry->Address[0];
+#ifndef _WIN64 // on 32-bit platforms, xor both halves to generate a 32-bit key
+                key ^= *(UINT_PTR*)&pEntry->Address[4];
+#endif
+
+		        void* lpMac = map_get(&Custom_NicMac, (void*)key);
+                if (lpMac)
+                    memcpy(pEntry->Address, lpMac, 8);
+		        else
+		        {
+			        *(DWORD*)&pEntry->Address[0] = Dll_rand();
+                    *(DWORD*)&pEntry->Address[4] = Dll_rand();
+			        map_insert(&Custom_NicMac, (void*)key, pEntry->Address, 8);
+		        }
+
+		        LeaveCriticalSection(&Custom_NicMac_CritSec);
+
+            }
+        }
+    }
+
+    return ret;
+}
 
 
 
@@ -1533,6 +1791,217 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
 
     NtClose(hOfficeKey);
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Custom_ProductID
+//---------------------------------------------------------------------------
+
+/*static wchar_t GetCharFromInt(int a) {
+	switch (a) {
+	case 0:
+		return L'0';
+		break;
+	case 1:
+		return L'1';
+		break;
+	case 2:
+		return L'2';
+		break;
+	case 3:
+		return L'3';
+		break;
+	case 4:
+		return L'4';
+		break;
+	case 5:
+		return L'5';
+		break;
+	case 6:
+		return L'6';
+		break;
+	case 7:
+		return L'7';
+		break;
+	case 8:
+		return L'8';
+		break;
+	case 9:
+		return L'9';
+		break;
+	}
+	return 0;
+}
+
+static int GetIntLen(DWORD n) {
+	int count = 0;
+	while (n != 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return count;
+}*/
+
+static unsigned long seed = 1;
+
+int my_rand(void)
+{
+	seed = (seed * 214013L
+		+ 2531011L) >> 16;
+	return((unsigned)seed & 0x7fff);
+}
+
+/*char* my_itoa(int num, char* str, int radix)
+{
+	char index[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	unsigned unum;
+	int i = 0, j, k;
+
+	
+	if (radix == 10 && num < 0)
+	{
+		unum = (unsigned)-num;
+		str[i++] = '-';
+	}
+	else unum = (unsigned)num;
+
+	
+	do
+	{
+		str[i++] = index[unum % (unsigned)radix];
+		unum /= radix;
+
+	} while (unum);
+
+	str[i] = '\0';
+
+	
+	if (str[0] == '-') k = 1;
+	else k = 0;
+
+	char temp;
+	for (j = k; j <= (i - 1) / 2; j++)
+	{
+		temp = str[j];
+		str[j] = str[i - 1 + k - j];
+		str[i - 1 + k - j] = temp;
+	}
+
+	return str;
+
+}*/
+
+wchar_t* GuidToString(const GUID guid)
+{
+	static wchar_t buf[64] = {0};
+	Sbie_snwprintf(buf, sizeof(buf),
+		L"%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
+		guid.Data1, guid.Data2, guid.Data3,
+		guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3],
+		guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
+	return buf;
+}
+
+_FX BOOLEAN  Custom_ProductID(void) 
+{
+	if (SbieApi_QueryConfBool(NULL, L"RandomRegUID", FALSE)) {
+		NTSTATUS status;
+		UNICODE_STRING uni;
+		OBJECT_ATTRIBUTES objattrs;
+		HANDLE hKey;
+
+			InitializeObjectAttributes(
+				&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+		RtlInitUnicodeString(&uni,
+			L"\\registry\\Machine\\Software\\"
+			L"\\Microsoft\\Windows NT\\CurrentVersion");
+
+		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
+		if (NT_SUCCESS(status)) {
+
+			//UNICODE_STRING buf;
+			//RtlInitUnicodeString(&buf, tmp);
+			/*if (GetIntLen(dwTick) == 1) {
+				//DWORD last = dwTick - (dwTick / 10) * 10;
+				DWORD last = dwTick;
+				WCHAR chr = GetCharFromInt((int)last);
+				Sleep(0);
+				DWORD dwTick2 = GetTickCount(),last2=0;
+				if (GetIntLen(dwTick) == 1)
+					last2 = dwTick2;
+				else
+					last2 = dwTick2 - (dwTick2 / 10) * 10;
+				WCHAR chr2= GetCharFromInt((int)last2);
+				wcscpy_s(tmp, 1, chr2);
+				wcscat_s(tmp, 1, chr2);
+				for(int i=0;i<=2;i++)
+					wcscat_s(tmp, 1, chr);
+			}*/
+			WCHAR tmp[34] = { 0 };
+
+			RtlInitUnicodeString(&uni, L"ProductId");
+
+			seed = GetTickCount();
+			int chain1 = my_rand() % 10000 + 9999,
+				chain2 = my_rand() % 10000 + 9999,
+				chain3 = my_rand() % 10000 + 9999,
+				chain4 = my_rand() % 10000 + 9999
+				;
+			Sbie_snwprintf(tmp, 34, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
+			
+			
+			status = NtSetValueKey(
+				hKey, &uni, 0, REG_SZ, tmp, sizeof(tmp)+1);
+			NtClose(hKey);
+		}
+		RtlInitUnicodeString(&uni,
+			L"\\registry\\Machine\\Software\\"
+			L"\\Microsoft\\Cryptography");
+		typedef HRESULT(*P_CoCreateGuid)(
+			GUID* pguid
+			);
+			P_CoCreateGuid CoCreateGuid2 = (P_CoCreateGuid)Ldr_GetProcAddrNew(DllName_ole32, L"CoCreateGuid", "CoCreateGuid");
+		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
+		if (NT_SUCCESS(status)&&CoCreateGuid2) {
+			GUID guid;
+			HRESULT h = CoCreateGuid2(&guid);
+			WCHAR buf[64] = { 0 };
+			if (h == S_OK) {
+				WCHAR* pChar = GuidToString(guid);
+				lstrcpy(buf, pChar);
+				RtlInitUnicodeString(&uni, L"MachineGuid");
+				status = NtSetValueKey(
+					hKey, &uni, 0, REG_SZ, buf, sizeof(buf) + 1);
+			}
+			
+		}
+		NtClose(hKey);
+		RtlInitUnicodeString(&uni,
+			L"\\registry\\Machine\\Software\\"
+			L"\\Microsoft\\SQMClient");
+
+		status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
+		if (NT_SUCCESS(status)&&CoCreateGuid2) {
+			GUID guid;
+			HRESULT h = CoCreateGuid2(&guid);
+			WCHAR buf[64] = L"{";
+			if (h == S_OK) {
+				WCHAR* pChar = GuidToString(guid);
+				lstrcat(buf, pChar);
+				lstrcat(buf, L"}");
+				RtlInitUnicodeString(&uni, L"MachineId");
+				status = NtSetValueKey(
+					hKey, &uni, 0, REG_SZ, buf, sizeof(buf) + 1);
+			}
+			
+		}
+		NtClose(hKey);
+		return TRUE;
+	}
+	return TRUE;
 }
 
 #ifndef _M_ARM64

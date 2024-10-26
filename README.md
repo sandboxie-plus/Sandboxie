@@ -2,7 +2,7 @@
 
 [![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
 
-[![Join our Discord Server](https://img.shields.io/badge/Join-Our%20Discord%20Server%20for%20bugs,%20feedback%20and%20more!-blue?style=for-the-badge&logo=discord)](https://discord.gg/S4tFu6Enne)
+[![Roadmap](https://img.shields.io/badge/Roadmap-Link%20-blue?style=for-the-badge)](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633) [![Join our Discord Server](https://img.shields.io/badge/Join-Our%20Discord%20Server%20for%20bugs,%20feedback%20and%20more!-blue?style=for-the-badge&logo=discord)](https://discord.gg/S4tFu6Enne)
 
 |  System requirements  |      Release notes     |     Contribution guidelines   |      Security policy      |      Code of Conduct      |
 |         :---:         |          :---:         |          :---:                |          :---:            |          :---:            |
@@ -49,7 +49,8 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * DNS resolution control with sandboxing as control granularity
   * Limit the number of processes in the sandbox and the total amount of memory space they can occupy, and You can limit the total number of sandboxed processes per box
   * A completely different token creation mechanism from Sandboxie's pre-open-source version makes sandboxes more independent in the system
-  * Encrypted Sandbox - an AES-based reliable data storage solution.
+  * Encrypted Sandbox - an AES-based reliable data storage solution
+  * Prevent sandboxed programs from generating unnecessary unique identifier in the normal way
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
@@ -81,10 +82,10 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 2004 - 2013         | Ronen Tzur       |
 | 2013 - 2017         | Invincea Inc.    |
 | 2017 - 2020         | Sophos Group plc |
-| [Open-source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
-| --- | --- |
-| 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633))    |
+| 8 April 2020 - [open-source code](https://community.sophos.com/sandboxie/f/forum/119641/important-sandboxie-open-source-code-is-available-for-download) | Sophos Ltd. |
+| 9 April 2020 onwards - project fork | David Xanatos |
 
+See the current [roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633).
 
 ## 📌 Project support / sponsorship
 
@@ -113,7 +114,9 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - hg421 - Security analysis & PoCs / Code reviews
 - hx1997 - Security analysis & PoC
 - mpheath - Author of Plus installer / Code fixes / Collaborator
-- offhub - Documentation additions / Code fixes / Collaborator
+- offhub - Documentation additions / Code fixes / Qt5 patch and build script / Collaborator
+- LumitoLuma - Qt5 patch and build script
+- QZLin - Author of [sandboxie-docs](https://sandboxie-plus.github.io/sandboxie-docs/) theme
 - isaak654 - Templates / Documentation / Code fixes / Collaborator
 - typpos - UI additions / Documentation / Code fixes
 - Yeyixiao - Feature additions
@@ -123,6 +126,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - lmou523 - Code fixes
 - sredna - Code fixes for Classic installer
 - weihongx9315 - Code fix
+- marti4d - Code fix
 - jorgectf - CodeQL workflow
 - stephtr - CI / Certification
 - yfdyh000 - Localization support for Plus installer
@@ -130,6 +134,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
 - daveout - UI / Icons
+- kokofixcomputers - Support member of the [Discord](https://discord.gg/S4tFu6Enne) channel
 - NewKidOnTheBlock - Changelog fixes
 - Naeemh1 - Documentation additions
 - APMichael - Templates additions
@@ -137,7 +142,8 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - Luro223 - Documentation additions
 - lwcorp - Documentation additions
 - wilders-soccerfan - Documentation additions
-- LumitoLuma - Qt5 patch and build script
+- LepordCat - Documentation additions
+- stdedos - Documentation additions
 
 ## 🌏 Translators
 
@@ -150,9 +156,9 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - isaak654, DerivativeOfLog7 - Italian
 - takahiro-itou - Japanese
 - VenusGirl - Korean
-- 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=30))
+- 7zip - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
 - JNylson - Portuguese and Brazilian Portuguese
-- lufog - Russian
+- lufog, marat2509 - Russian
 - LumitoLuma, sebadamus - Spanish
 - 1FF, Thatagata - Swedish (provided by email or pull request)
 - xorcan, fmbxnary, offhub - Turkish

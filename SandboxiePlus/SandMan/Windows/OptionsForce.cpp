@@ -101,6 +101,9 @@ void COptionsWindow::LoadBreakoutTmpl(bool bUpdate)
 
 			foreach(const QString& Value, m_pBox->GetTextListTmpl("BreakoutFolder", Template))
 				AddBreakoutEntry(Value, (int)ePath, false, Template);
+
+			foreach(const QString& Value, m_pBox->GetTextListTmpl("BreakoutDocument", Template))
+				AddBreakoutEntry(Value, (int)eText, false, Template);
 		}
 	}
 	else if (bUpdate)
@@ -145,6 +148,7 @@ void COptionsWindow::AddBreakoutEntry(const QString& Name, int type, bool disabl
 	{
 	case eProcess: Type = tr("Process"); break;
 	case ePath: Type = tr("Folder"); break;
+	case eText: Type = tr("Document"); break;
 	}
 	pItem->setText(0, Type + (Template.isEmpty() ? "" : (" (" + Template + ")")));
 
@@ -200,6 +204,8 @@ void COptionsWindow::SaveForced()
 	QStringList BreakoutProcessDisabled;
 	QStringList BreakoutFolder;
 	QStringList BreakoutFolderDisabled;
+	QStringList BreakoutDocument;
+	QStringList BreakoutDocumentDisabled;
 
 	for (int i = 0; i < ui.treeBreakout->topLevelItemCount(); i++)
 	{
@@ -212,12 +218,14 @@ void COptionsWindow::SaveForced()
 			switch (Type) {
 			case eProcess:	BreakoutProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
 			case ePath: BreakoutFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eText: BreakoutDocument.append(pItem->data(1, Qt::UserRole).toString()); break;
 			}
 		}
 		else {
 			switch (Type) {
 			case eProcess:	BreakoutProcessDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
 			case ePath: BreakoutFolderDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case eText: BreakoutDocumentDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
 			}
 		}
 	}
@@ -226,7 +234,8 @@ void COptionsWindow::SaveForced()
 	WriteTextList("BreakoutProcessDisabled", BreakoutProcessDisabled);
 	WriteTextList("BreakoutFolder", BreakoutFolder);
 	WriteTextList("BreakoutFolderDisabled", BreakoutFolderDisabled);
-
+	WriteTextList("BreakoutDocument", BreakoutDocument);
+	WriteTextList("BreakoutDocumentDisabled", BreakoutDocumentDisabled);
 
 	m_ForcedChanged = false;
 }
@@ -310,6 +319,44 @@ void COptionsWindow::OnBreakoutDir()
 	if (Value.isEmpty())
 		return;
 	AddBreakoutEntry(Value, (int)ePath);
+	OnForcedChanged();
+}
+
+void COptionsWindow::OnBreakoutDoc()
+{
+	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Document Directory")).replace("/", "\\");
+	if (Value.isEmpty())
+		return;
+
+	QString Ext = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter Document File Extension."));
+	if (Ext.isEmpty())
+		return;
+	
+	if (Ext.left(1) == ".")
+		Ext.prepend("*");
+	else if (Ext.left(1) != "*")
+		Ext.prepend("*.");
+
+	if (Ext.right(1) == "*") {
+		QMessageBox::warning(this, "Sandboxie-Plus", tr("For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets."));
+		return;
+	}
+	QStringList BannedExt = QString(// from: https://learn.microsoft.com/en-us/troubleshoot/developer/browsers/security-privacy/information-about-the-unsafe-file-list
+		"*.ade;*.adp;*.app;*.asp;*.bas;*.bat;*.cer;*.chm;*.cmd;*.cnt;*.com;*.cpl;*.crt;*.csh;*.der;*.exe;*.fxp;*.gadget;*.grp;*.hlp;*.hpj;*.hta;"
+		"*.img;*.inf;*.ins;*.iso;*.isp;*.its;*.js;*.jse;*.ksh;*.lnk;*.mad;*.maf;*.mag;*.mam;*.maq;*.mar;*.mas;*.mat;*.mau;*.mav;*.maw;*.mcf;*.mda;"
+		"*.mdb;*.mde;*.mdt;*.mdw;*.mdz;*.msc;*.msh;*.msh1;*.msh1xml;*.msh2;*.msh2xml;*.mshxml;*.msi;*.msp;*.mst;*.msu;*.ops;*.pcd;*.pif;*.pl;*.plg;"
+		"*.prf;*.prg;*.printerexport;*.ps1;*.ps1xml;*.ps2;*.ps2xml;*.psc1;*.psc2;*.psd1;*.psm1;*.pst;*.reg;*.scf;*.scr;*.sct;*.shb;*.shs;*.theme;"
+		"*.tmp;*.url;*.vb;*.vbe;*.vbp;*.vbs;*.vhd;*.vhdx;*.vsmacros;*.vsw;*.webpnp;*.ws;*.wsc;*.wsf;*.wsh;*.xnk").split(";");
+	if (BannedExt.contains(Ext.toLower())) {
+		QMessageBox::warning(this, "Sansboxie-Plus", tr("For security reasons the specified extension %1 should not be broken out.").arg(Ext));
+		// bypass security by holding down Ctr+Alt
+		if ((QGuiApplication::queryKeyboardModifiers() & (Qt::AltModifier | Qt::ControlModifier)) != (Qt::AltModifier | Qt::ControlModifier))
+			return;
+	}
+
+	Value += "\\" + Ext;
+
+	AddBreakoutEntry(Value, (int)eText);
 	OnForcedChanged();
 }
 

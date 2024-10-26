@@ -218,6 +218,7 @@ static DLL Ldr_Dlls[] = {
     { L"uxtheme.dll",           SH32_Init_UxTheme,              0}, // explorer.exe, SetWindowThemeAttribute
     { L"hnetcfg.dll",           HNet_Init,                      0}, // firewall workaround
     { L"winnsi.dll",            NsiRpc_Init,                    0}, // WININET workaround
+    { L"nsi.dll",               Nsi_Init,                       0},
     { L"advpack.dll",           Proc_Init_AdvPack,              0}, // fix for IE
     { L"dwrite.dll",            Scm_DWriteDll,                  0}, // hack for IE 9, make sure FontCache is running
     { L"ComDlg32.dll",          ComDlg32_Init,                  0}, // fix for opera.exe

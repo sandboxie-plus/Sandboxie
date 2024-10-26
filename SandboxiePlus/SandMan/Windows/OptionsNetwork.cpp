@@ -62,7 +62,7 @@ void COptionsWindow::CreateNetwork()
 
 	connect(ui.tabsInternet, SIGNAL(currentChanged(int)), this, SLOT(OnInternetTab()));
 
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
+	if (!g_CertInfo.opt_net) {
 		ui.tabDNS->setEnabled(false);
 		ui.tabNetProxy->setEnabled(false);
 	}
@@ -1055,7 +1055,7 @@ void COptionsWindow::SaveNetProxy()
 			if(res.IsError())
 				Tags.append("Password=" + Pass);
 			else
-				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::OmitTrailingEquals));
+				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::KeepTrailingEquals));
 		}
 		Tags.append("Bypass=" + Bypass);
 

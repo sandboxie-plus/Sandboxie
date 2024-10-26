@@ -16,9 +16,6 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="1">
-      <widget class="QComboBox" name="cmbCompression"/>
-     </item>
      <item row="3" column="0">
       <spacer name="verticalSpacer">
        <property name="orientation">
@@ -32,14 +29,10 @@
        </property>
       </spacer>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Compression</string>
-       </property>
-      </widget>
+     <item row="1" column="2">
+      <widget class="QComboBox" name="cmbCompression"/>
      </item>
-     <item row="4" column="1">
+     <item row="4" column="2">
       <widget class="QCheckBox" name="chkEncrypt">
        <property name="toolTip">
         <string>When selected you will be prompted for a password after clicking OK</string>
@@ -49,7 +42,7 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="2" column="2">
       <widget class="QCheckBox" name="chkSolid">
        <property name="toolTip">
         <string>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</string>
@@ -59,10 +52,27 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0" colspan="2">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Compression</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="cmbFormat">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="3">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</string>
+        <string>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -80,6 +90,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>cmbFormat</tabstop>
+  <tabstop>cmbCompression</tabstop>
+  <tabstop>chkSolid</tabstop>
+  <tabstop>chkEncrypt</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

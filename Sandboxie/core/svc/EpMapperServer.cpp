@@ -28,6 +28,7 @@
 #include "common/defines.h"
 #include "core/drv/api_defs.h"
 #include <vector>
+#include <string>
 #include "common/str_util.h"
 
 //---------------------------------------------------------------------------
@@ -232,13 +233,28 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
 
         std::vector<UCHAR> FilterIDs;
 
-        for (int i = 0; SbieDll_GetStringsForStringList(req->wszPortId, boxname, L"RpcPortFilter", i, buf, sizeof(buf)); i++)
+        //
+        // Note: Open[Name]Endpoint Settings allow to disable the message id filter for any given endpoint,
+        // available options: OpenWPADEndpoint, OpenLsaEndpoint*, OpenSamEndpoint*
+        //  * implemented in driver
+        //
+
+        if(!SbieApi_QueryConfBool(boxname, (std::wstring(L"Open") + req->wszPortId + L"Endpoint").c_str(), FALSE)) 
         {
-            WCHAR* test_value = NULL;
-            ULONG test_len = 0;
-            if (SbieDll_GetTagValue(buf, NULL, (const WCHAR**)&test_value, &test_len, L',')) {
-                test_value[test_len] = L'\0';
-                FilterIDs.push_back((UCHAR)_wtoi(test_value));
+            //
+            // For security reasons the setting RpcPortFilter=[Name],[message_id],[function_name] 
+            // allows to filter individual message_id's by the driver,
+            // function_name is only provided for reference and not currently used.
+            //
+
+            for (int i = 0; SbieDll_GetStringsForStringList(req->wszPortId, boxname, L"RpcPortFilter", i, buf, sizeof(buf)); i++)
+            {
+                WCHAR* test_value = NULL;
+                ULONG test_len = 0;
+                if (SbieDll_GetTagValue(buf, NULL, (const WCHAR**)&test_value, &test_len, L',')) {
+                    test_value[test_len] = L'\0';
+                    FilterIDs.push_back((UCHAR)_wtoi(test_value));
+                }
             }
         }
 

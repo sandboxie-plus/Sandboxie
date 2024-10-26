@@ -44,6 +44,8 @@ void* SbieDll_Hook_arm(const char* SourceFuncName, void* SourceFunc, void* Detou
 
 BOOLEAN Gui_UseProxyService = TRUE;
 
+HWINSTA Gui_Dummy_WinSta = NULL;
+
 
 //---------------------------------------------------------------------------
 // Function Pointers in USER32.DLL
@@ -389,7 +391,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     // disable the use of the gui proxy
     //
 
-    Gui_UseProxyService = !Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
+    Gui_UseProxyService = !(Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE));
     // NoSbieDesk END
 
 	GUI_IMPORT___(PrintWindow);
@@ -970,148 +972,160 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
             errlvl = 2;
         else {
 
-            //
-            // locate windowstation and desktop functions in user32 dll
-            //
-
-            P_SetProcessWindowStation _SetProcessWindowStation =
-                (P_SetProcessWindowStation)
-                    GetProcAddress(User32, "SetProcessWindowStation");
-
-            if (! __sys_SetThreadDesktop) {
-                // in the special case when USER32 is loaded before GDI32, as
-                // discussed in Gdi_InitZero, SetThreadDesktop is still zero
-                __sys_SetThreadDesktop = (P_SetThreadDesktop)
-                    GetProcAddress(User32, "SetThreadDesktop");
-            }
-
-            if ((! _SetProcessWindowStation) || (! __sys_SetThreadDesktop))
-                errlvl = 3;
+            if (SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE))
+                _ProcessDesktop = (HDESK)-1;
             else {
 
                 //
-                // set DesktopName in ProcessParms to point to our dummy
-                // window station so the initial default connection can
-                // be made to a workstation that is accessible
+                // locate windowstation and desktop functions in user32 dll
                 //
 
-                UNICODE_STRING SaveDesktopName;
-#ifndef _WIN64
-                UNICODE_STRING64 SaveDesktopName64;
-                UNICODE_STRING64 *DesktopName64;
-#endif ! _WIN64
+                P_SetProcessWindowStation _SetProcessWindowStation =
+                    (P_SetProcessWindowStation)
+                    GetProcAddress(User32, "SetProcessWindowStation");
 
-                memcpy(&SaveDesktopName, &ProcessParms->DesktopName,
-                       sizeof(UNICODE_STRING));
+                P_GetProcessWindowStation _GetProcessWindowStation =
+                    (P_GetProcessWindowStation)
+                    GetProcAddress(User32, "GetProcessWindowStation");
 
-                RtlInitUnicodeString(
-                    &ProcessParms->DesktopName, rpl->name);
+                if (!__sys_SetThreadDesktop) {
+                    // in the special case when USER32 is loaded before GDI32, as
+                    // discussed in Gdi_InitZero, SetThreadDesktop is still zero
+                    __sys_SetThreadDesktop = (P_SetThreadDesktop)
+                        GetProcAddress(User32, "SetThreadDesktop");
+                }
 
-#ifndef _WIN64
-                //
-                // in a 32-bit process on 64-bit Windows, we actually need
-                // to change the DesktopName member in the 64-bit
-                // RTL_USER_PROCESS_PARAMETERS structure and not the
-                // 32-bit version of the structure.
-                //
-                // note that the 64-bit PEB will be in the lower 32-bits in
-                // a 32-bit process, so it is accessible, but its address is
-                // not available to us.   but the SbieSvc GUI Proxy process
-                // is 64-bit so it can send us the address of the 64-bit PEB
-                // in the reply datagram
-                //
-
-                if (Dll_IsWow64) {
+                if ((!_SetProcessWindowStation) || (!__sys_SetThreadDesktop))
+                    errlvl = 3;
+                else {
 
                     //
-                    // 64-bit PEB offset 0x20 -> RTL_USER_PROCESS_PARAMETERS
-                    // RTL_USER_PROCESS_PARAMETERS offset 0xC0 is DesktopName
+                    // set DesktopName in ProcessParms to point to our dummy
+                    // window station so the initial default connection can
+                    // be made to a workstation that is accessible
                     //
 
-                    ULONG ProcessParms64 = *(ULONG *)(rpl->peb64 + 0x20);
-                    DesktopName64 =
-                            (UNICODE_STRING64 *)(ProcessParms64 + 0xC0);
-
-                    memcpy(&SaveDesktopName64,
-                           DesktopName64, sizeof(UNICODE_STRING64));
-
-                    DesktopName64->Length = ProcessParms->DesktopName.Length;
-                    DesktopName64->MaximumLength =
-                                     ProcessParms->DesktopName.MaximumLength;
-                    DesktopName64->Buffer =
-                                     (ULONG)ProcessParms->DesktopName.Buffer;
-                }
+                    UNICODE_STRING SaveDesktopName;
+#ifndef _WIN64
+                    UNICODE_STRING64 SaveDesktopName64;
+                    UNICODE_STRING64* DesktopName64;
 #endif ! _WIN64
 
-                //
-                // note also that the default \Windows object directory
-                // (where the WindowStations object directory is located)
-                // grants access to Everyone, but this is not true for
-                // the per-session object directories \Sessions\N.
-                //
-                // our process token does not include the change notify
-                // privilege, so access to the window station object
-                // would have to validate each object directory in the
-                // path, and this would fail with our process token.
-                //
-                // to work around this, we issue a special request to
-                // SbieDrv through NtSetInformationThread which causes
-                // it to return with an impersonation token that includes
-                // the change notify privilege but is otherwise restricted
-                //
-                // see also:  file core/drv/thread_token.c function
-                // Thread_SetInformationThread_ChangeNotifyToken
-                //
+                    memcpy(&SaveDesktopName, &ProcessParms->DesktopName,
+                        sizeof(UNICODE_STRING));
 
-                rc = (ULONG_PTR)NtCurrentThread();
+                    RtlInitUnicodeString(
+                        &ProcessParms->DesktopName, rpl->name);
 
-				// OriginalToken BEGIN
-				if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
-					rc = 0;
-				else
-				// OriginalToken END
-                if (__sys_NtSetInformationThread)
-                {
-                    rc = __sys_NtSetInformationThread(NtCurrentThread(),
-                        ThreadImpersonationToken, &rc, sizeof(rc));
-                }
-                else
-                {
-                    rc = NtSetInformationThread(NtCurrentThread(),
+#ifndef _WIN64
+                    //
+                    // in a 32-bit process on 64-bit Windows, we actually need
+                    // to change the DesktopName member in the 64-bit
+                    // RTL_USER_PROCESS_PARAMETERS structure and not the
+                    // 32-bit version of the structure.
+                    //
+                    // note that the 64-bit PEB will be in the lower 32-bits in
+                    // a 32-bit process, so it is accessible, but its address is
+                    // not available to us.   but the SbieSvc GUI Proxy process
+                    // is 64-bit so it can send us the address of the 64-bit PEB
+                    // in the reply datagram
+                    //
+
+                    if (Dll_IsWow64) {
+
+                        //
+                        // 64-bit PEB offset 0x20 -> RTL_USER_PROCESS_PARAMETERS
+                        // RTL_USER_PROCESS_PARAMETERS offset 0xC0 is DesktopName
+                        //
+
+                        ULONG ProcessParms64 = *(ULONG*)(rpl->peb64 + 0x20);
+                        DesktopName64 =
+                            (UNICODE_STRING64*)(ProcessParms64 + 0xC0);
+
+                        memcpy(&SaveDesktopName64,
+                            DesktopName64, sizeof(UNICODE_STRING64));
+
+                        DesktopName64->Length = ProcessParms->DesktopName.Length;
+                        DesktopName64->MaximumLength =
+                            ProcessParms->DesktopName.MaximumLength;
+                        DesktopName64->Buffer =
+                            (ULONG)ProcessParms->DesktopName.Buffer;
+                    }
+#endif ! _WIN64
+
+                    //
+                    // note also that the default \Windows object directory
+                    // (where the WindowStations object directory is located)
+                    // grants access to Everyone, but this is not true for
+                    // the per-session object directories \Sessions\N.
+                    //
+                    // our process token does not include the change notify
+                    // privilege, so access to the window station object
+                    // would have to validate each object directory in the
+                    // path, and this would fail with our process token.
+                    //
+                    // to work around this, we issue a special request to
+                    // SbieDrv through NtSetInformationThread which causes
+                    // it to return with an impersonation token that includes
+                    // the change notify privilege but is otherwise restricted
+                    //
+                    // see also:  file core/drv/thread_token.c function
+                    // Thread_SetInformationThread_ChangeNotifyToken
+                    //
+
+                    rc = (ULONG_PTR)NtCurrentThread();
+
+                    // OriginalToken BEGIN
+                    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+                        rc = 0;
+                    else
+                        // OriginalToken END
+                        if (__sys_NtSetInformationThread)
+                        {
+                            rc = __sys_NtSetInformationThread(NtCurrentThread(),
                                 ThreadImpersonationToken, &rc, sizeof(rc));
-                }
+                        }
+                        else
+                        {
+                            rc = NtSetInformationThread(NtCurrentThread(),
+                                ThreadImpersonationToken, &rc, sizeof(rc));
+                        }
 
-                if (rc != 0)
-                    errlvl = 4;
+                    Gui_Dummy_WinSta = _GetProcessWindowStation();
 
-                //
-                // invoking SetProcessWindowStation will first connect
-                // to the default (dummy) window station as part of
-                // initial thread by PsConvertToGuiThread, then when
-                // control finally arrives in SetProcessWindowStation,
-                // the connection to the real window station is made
-                //
+                    if (rc != 0)
+                        errlvl = 4;
 
-                else if (! _SetProcessWindowStation(
-                                                (HWINSTA)rpl->hwinsta)) {
-                    errlvl = 5;
-                    rc = GetLastError();
+                    //
+                    // invoking SetProcessWindowStation will first connect
+                    // to the default (dummy) window station as part of
+                    // initial thread by PsConvertToGuiThread, then when
+                    // control finally arrives in SetProcessWindowStation,
+                    // the connection to the real window station is made
+                    //
 
-                } else
-                    _ProcessDesktop = (HDESK)rpl->hdesk;
+                    else if (!_SetProcessWindowStation(
+                        (HWINSTA)rpl->hwinsta)) {
+                        errlvl = 5;
+                        rc = GetLastError();
 
-                //
-                // restore the original contents of the DesktopName field
-                //
+                    }
+                    else
+                        _ProcessDesktop = (HDESK)rpl->hdesk;
 
-                memcpy(&ProcessParms->DesktopName, &SaveDesktopName,
-                       sizeof(UNICODE_STRING));
+                    //
+                    // restore the original contents of the DesktopName field
+                    //
+
+                    memcpy(&ProcessParms->DesktopName, &SaveDesktopName,
+                        sizeof(UNICODE_STRING));
 #ifndef _WIN64
-                if (Dll_IsWow64) {
-                    memcpy(DesktopName64, &SaveDesktopName64,
-                           sizeof(UNICODE_STRING64));
-                }
+                    if (Dll_IsWow64) {
+                        memcpy(DesktopName64, &SaveDesktopName64,
+                            sizeof(UNICODE_STRING64));
+                    }
 #endif ! _WIN64
+                }
             }
 
             Dll_Free(rpl);
@@ -1128,7 +1142,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 
 ConnectThread:
 
-    if (errlvl == 0) {
+    if (errlvl == 0 && _ProcessDesktop != (HDESK)-1) {
 
         if (! __sys_SetThreadDesktop(_ProcessDesktop)) {
             errlvl = 6;

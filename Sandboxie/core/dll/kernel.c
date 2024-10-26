@@ -24,6 +24,9 @@
 //#include "common/win32_ntddk.h"
 #include "dll.h"
 
+#include "common/pool.h"
+#include "common/map.h"
+
 #define CONF_LINE_LEN               2000    // keep in sync with drv/conf.c
 
 //---------------------------------------------------------------------------
@@ -69,6 +72,8 @@ typedef LCID (*P_GetSystemDefaultLCID)();
 
 typedef LANGID (*P_GetSystemDefaultLangID)();
 
+typedef BOOL (*P_GetVolumeInformationByHandleW)(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
+
 //typedef int (*P_GetLocaleInfoEx)(LPCWSTR lpLocaleName, LCTYPE LCType, LPWSTR lpLCData, int cchData);
 
 //typedef int (*P_GetLocaleInfoA)(LCID Locale, LCTYPE LCType, LPSTR lpLCData, int cchData);
@@ -104,8 +109,15 @@ P_GetSystemDefaultUILanguage 	__sys_GetSystemDefaultUILanguage 	= NULL;
 P_GetSystemDefaultLocaleName 	__sys_GetSystemDefaultLocaleName 	= NULL;
 P_GetSystemDefaultLCID 			__sys_GetSystemDefaultLCID 			= NULL;
 P_GetSystemDefaultLangID 		__sys_GetSystemDefaultLangID 		= NULL;
+P_GetVolumeInformationByHandleW __sys_GetVolumeInformationByHandleW = NULL;
 
 LCID			Kernel_CustomLCID = 0;
+
+extern POOL* Dll_Pool;
+
+static HASH_MAP Kernel_DiskSN;
+static CRITICAL_SECTION Kernel_DiskSN_CritSec;
+
 
 //---------------------------------------------------------------------------
 // Functions
@@ -148,7 +160,8 @@ static LCID Kernel_GetSystemDefaultLCID();
 
 static LANGID Kernel_GetSystemDefaultLangID();
 
-
+static BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber, LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
+	
 //---------------------------------------------------------------------------
 // Kernel_Init
 //---------------------------------------------------------------------------
@@ -247,6 +260,16 @@ _FX BOOLEAN Kernel_Init()
 		SBIEDLL_HOOK(Kernel_, GetSystemDefaultLangID);
 	}
 
+	if (SbieApi_QueryConfBool(NULL, L"HideDiskSerialNumber", FALSE)) {
+
+		InitializeCriticalSection(&Kernel_DiskSN_CritSec);
+		map_init(&Kernel_DiskSN, Dll_Pool);
+
+		void* GetVolumeInformationByHandleW = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetVolumeInformationByHandleW");
+		if (GetVolumeInformationByHandleW) {
+			SBIEDLL_HOOK(Kernel_, GetVolumeInformationByHandleW);
+		}
+	}
 	return TRUE;
 }
 
@@ -487,4 +510,35 @@ _FX LCID Kernel_GetSystemDefaultLCID()
 _FX LANGID Kernel_GetSystemDefaultLangID() 
 {
 	return (LANGID)Kernel_CustomLCID;
+}
+
+
+//----------------------------------------------------------------------------
+//Kernel_GetVolumeInformationByHandleW
+//----------------------------------------------------------------------------
+
+
+_FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize) 
+{
+	DWORD ourSerialNumber = 0;
+	BOOL rtn = __sys_GetVolumeInformationByHandleW(hFile, lpVolumeNameBuffer, nVolumeNameSize, &ourSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
+	if (lpVolumeSerialNumber != NULL) {
+
+        EnterCriticalSection(&Kernel_DiskSN_CritSec);
+
+		void* key = (void*)ourSerialNumber;
+
+		DWORD* lpCachedSerialNumber = map_get(&Kernel_DiskSN, key);
+		if (lpCachedSerialNumber)
+			*lpVolumeSerialNumber = *lpCachedSerialNumber;
+		else
+		{
+			*lpVolumeSerialNumber = Dll_rand();
+
+			map_insert(&Kernel_DiskSN, key, lpVolumeSerialNumber, sizeof(DWORD));
+		}
+
+		LeaveCriticalSection(&Kernel_DiskSN_CritSec);
+	}
+	return rtn;
 }

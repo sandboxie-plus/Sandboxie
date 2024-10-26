@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
   push:
-    branches: [ master ]
+    branches: [master, experimental]
     paths-ignore:
       # Case-sensitive paths to ignore on push events
       - '.editorconfig'
@@ -16,6 +16,7 @@ on:
       - '.github/ISSUE_TEMPLATE/**'
       - '.github/workflows/codeql.yml'
       - '.github/workflows/codespell.yml'
+      - '.github/workflows/hash.yml'
       - '.github/workflows/lupdate.yml'
       - '.github/workflows/stale.yml'
       - '.github/workflows/test.yml'
@@ -35,7 +36,7 @@ on:
       - '**/AUTHORS'
       - '**/COPYING'
   pull_request:
-    branches: [ master ]
+    branches: [master, experimental]
     paths-ignore:
       # Case-sensitive paths to ignore on pull events
       - '.editorconfig'
@@ -47,6 +48,7 @@ on:
       - '.github/ISSUE_TEMPLATE/**'
       - '.github/workflows/codeql.yml'
       - '.github/workflows/codespell.yml'
+      - '.github/workflows/hash.yml'
       - '.github/workflows/lupdate.yml'
       - '.github/workflows/stale.yml'
       - '.github/workflows/test.yml'
@@ -67,17 +69,17 @@ on:
       - '**/COPYING'
 
 env:
-  qt_version: 5.15.14
+  qt_version: 5.15.15
   qt6_version: 6.3.1
-  openssl_version: 3.3.1
+  openssl_version: 3.3.2
   ghSsl_user: xanasoft
   ghSsl_repo: openssl-builds
   #ghQt6Win7_user: DavidXanatos
   #ghQt6Win7_repo: qtbase
   ghQtBuilds_user: xanasoft
   ghQtBuilds_repo: qt-builds
-  ghQtBuilds_hash_x86: bf4124046cc50ccbbeb3f786c041e884fd4205cd6e616070a75c850105cbf1db
-  ghQtBuilds_hash_x64: 30290d82a02bfaa24c1bf37bcb9c074aba18a673a7176628fccdf71197cee898
+  ghQtBuilds_hash_x86: 0dc0048be815eeaa76bcdd2d02e7028d21cc75fd7f4fb65445d3adf37b4a75bb
+  ghQtBuilds_hash_x64: bae6773292ad187aad946854766344c4bd24245359404636b3a1b13d9ae6a97e
 
 jobs:
   Build_x64:
@@ -86,7 +88,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v4.1.7
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -164,7 +166,7 @@ jobs:
 
       - name: Upload installer assets
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4.3.4
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: Assets
           path: |
@@ -173,7 +175,7 @@ jobs:
 
       - name: Upload Sandboxie x64
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4.3.4
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: Sandboxie_x64
           path: |
@@ -187,7 +189,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v4.1.7
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -267,7 +269,7 @@ jobs:
 
       - name: Upload Sandboxie ARM64
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4.3.4
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: Sandboxie_ARM64
           path: |
@@ -281,7 +283,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v4.1.7
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -336,7 +338,7 @@ jobs:
 
       - name: Upload Sandboxie x86
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4.3.4
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: Sandboxie_x86
           path: |

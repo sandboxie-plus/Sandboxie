@@ -31,6 +31,10 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkElevateRpcss, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDropPrivileges, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkDropConHostIntegrity, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
+	//Do not force untrusted integrity level on the sanboxed token (reduces desktop isolation)
+	//connect(ui.chkNotUntrusted, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -44,6 +48,7 @@ void COptionsWindow::CreateAdvanced()
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenSamEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenLsaEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkOpenWpadEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkSbieLogon, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkCreateToken, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -104,6 +109,9 @@ void COptionsWindow::CreateAdvanced()
 	InitLangID();
 
 	connect(ui.chkHideFirmware, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHideUID, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHideSerial, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHideMac, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.cmbLangID, SIGNAL(currentIndexChanged(int)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.btnDumpFW, SIGNAL(clicked(bool)), this, SLOT(OnDumpFW()));
 
@@ -166,6 +174,10 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
 	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
+	ui.chkDropConHostIntegrity->setChecked(m_pBox->GetBool("DropConHostIntegrity", false));
+
+
+	//ui.chkNotUntrusted->setChecked(m_pBox->GetBool("NoUntrustedToken", false));
 
 	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
 
@@ -179,6 +191,7 @@ void COptionsWindow::LoadAdvanced()
 	//ui.chkOpenLsaSSPI->setChecked(!m_pBox->GetBool("BlockPassword", true)); // OpenLsaSSPI
 	ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
+	ui.chkOpenWpadEndpoint->setChecked(m_pBox->GetBool("OpenWPADEndpoint", false));
 
 	ui.treeInjectDll->clear();
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
@@ -285,6 +298,9 @@ void COptionsWindow::LoadAdvanced()
 	//
 
 	ui.chkHideFirmware->setChecked(m_pBox->GetBool("HideFirmwareInfo", false));
+	ui.chkHideUID->setChecked(m_pBox->GetBool("RandomRegUID",false));
+	ui.chkHideSerial->setChecked(m_pBox->GetBool("HideDiskSerialNumber", false));
+	ui.chkHideMac->setChecked(m_pBox->GetBool("HideNetworkAdapterMAC", false));
 
 	ui.cmbLangID->setCurrentIndex(ui.cmbLangID->findData(m_pBox->GetNum("CustomLCID", 0)));
 
@@ -318,12 +334,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
 	
 	ui.chkAdminOnly->setChecked(m_pBox->GetBool("EditAdminOnly", false));
-	
-	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
-	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
-	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
-	*/
-	
+
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
 	if (Users.count() > 1)
@@ -420,6 +431,9 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkElevateRpcss, "RunRpcssAsSystem", "y", "");
 	WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
+	WriteAdvancedCheck(ui.chkDropConHostIntegrity, "DropConHostIntegrity", "y", "");
+
+	//WriteAdvancedCheck(ui.chkNotUntrusted, "NoUntrustedToken", "y", "");
 
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 
@@ -432,6 +446,7 @@ void COptionsWindow::SaveAdvanced()
 	//WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "n", ""); // OpenLsaSSPI
 	WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "y", "");
 	WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
+	WriteAdvancedCheck(ui.chkOpenWpadEndpoint, "OpenWPADEndpoint", "y", "");
 
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
 	QStringList InjectDll64 = m_pBox->GetTextList("InjectDll64", false);
@@ -569,6 +584,9 @@ void COptionsWindow::SaveAdvanced()
 	//
 
 	WriteAdvancedCheck(ui.chkHideFirmware, "HideFirmwareInfo", "y", "");
+	WriteAdvancedCheck(ui.chkHideUID, "RandomRegUID", "y", "");
+	WriteAdvancedCheck(ui.chkHideSerial, "HideDiskSerialNumber", "y", "");
+	WriteAdvancedCheck(ui.chkHideMac, "HideNetworkAdapterMAC", "y", "");
 
 	int CustomLCID = ui.cmbLangID->currentData().toInt();
 	if (CustomLCID) m_pBox->SetNum("CustomLCID", CustomLCID);
@@ -604,8 +622,7 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkProtectWindow, "CoverBoxedWindows", "y", "");
 	WriteAdvancedCheck(ui.chkBlockCapture, "BlockScreenCapture", "y", "");
-	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "");
-	
+
 	WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
 
 	QStringList Users;
@@ -622,7 +639,7 @@ void COptionsWindow::OnIsolationChanged()
 	if (sender() == ui.chkNoSecurityIsolation) {
 		// we can ignore chkNoSecurityFiltering as it requires chkNoSecurityIsolation
 		if (ui.chkNoSecurityIsolation->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, 0);
 	}
 
 	UpdateBoxIsolation();
@@ -646,10 +663,12 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenSamEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenLsaEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkOpenWpadEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 
 	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode
 	ui.chkRawDiskNotify->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkAllowEfs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkBlockNetShare->setEnabled(!ui.chkNoSecurityFiltering->isChecked());
 

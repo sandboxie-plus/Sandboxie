@@ -789,7 +789,7 @@ _FX PROCESS *Process_Create(
     // check certificate
     //
 
-    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard) && !proc->image_sbie) {
+    if (!Verify_CertInfo.opt_sec && !proc->image_sbie) {
 
         const WCHAR* exclusive_setting = NULL;
         if (proc->use_security_mode)
@@ -820,7 +820,7 @@ _FX PROCESS *Process_Create(
         }
     }
 
-    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard2) && !proc->image_sbie) {
+    if (!Verify_CertInfo.opt_enc && !proc->image_sbie) {
         
         const WCHAR* exclusive_setting = NULL;
         if (proc->confidential_box)
@@ -1270,7 +1270,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         BOX* breakout_box = NULL;
 
         if (box && Process_IsBreakoutProcess(box, ImagePath)) {
-            if(!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard))
+            if(!Verify_CertInfo.active)
                 Log_Msg_Process(MSG_6004, box->name, L"BreakoutProcess", box->session_id, CallerId);
             else {
                 UNICODE_STRING image_uni;

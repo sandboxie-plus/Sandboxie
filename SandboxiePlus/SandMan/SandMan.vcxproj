@@ -299,6 +299,7 @@
     <ClCompile Include="Helpers\ReadDirectoryChanges.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChangesPrivate.cpp" />
     <ClCompile Include="Helpers\StorageInfo.cpp" />
+    <ClCompile Include="Helpers\TabOrder.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
     <ClCompile Include="Helpers\WinHelper.cpp" />
@@ -485,6 +486,7 @@
     <ClInclude Include="Helpers\ReadDirectoryChanges.h" />
     <ClInclude Include="Helpers\ReadDirectoryChangesPrivate.h" />
     <ClInclude Include="Helpers\StorageInfo.h" />
+    <ClInclude Include="Helpers\TabOrder.h" />
     <ClInclude Include="Helpers\ThreadSafeQueue.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
     <QtMoc Include="Models\MonitorModel.h" />

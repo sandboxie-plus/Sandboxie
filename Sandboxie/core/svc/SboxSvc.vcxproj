@@ -541,6 +541,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="terminalserver.cpp" />
+    <ClCompile Include="UserServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\ini.h" />
@@ -628,6 +629,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="terminalserver.h" />
     <ClInclude Include="terminalwire.h" />
+    <ClInclude Include="UserServer.h" />
+    <ClInclude Include="UserWire.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

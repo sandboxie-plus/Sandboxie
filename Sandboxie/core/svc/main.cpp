@@ -26,6 +26,7 @@
 #include "DriverAssist.h"
 #include "PipeServer.h"
 #include "GuiServer.h"
+#include "UserServer.h"
 #include "ProcessServer.h"
 #include "sbieiniserver.h"
 #include "serviceserver.h"
@@ -125,6 +126,12 @@ int WinMain(
         WCHAR *cmdline5 = wcsstr(cmdline, SANDBOXIE L"_GuiProxy");
         if (cmdline5) {
             GuiServer::RunSlave(cmdline5);
+            return NO_ERROR;
+        }
+
+        WCHAR *cmdline6 = wcsstr(cmdline, SANDBOXIE L"_UserProxy");
+        if (cmdline6) {
+            UserServer::RunWorker(cmdline6);
             return NO_ERROR;
         }
 

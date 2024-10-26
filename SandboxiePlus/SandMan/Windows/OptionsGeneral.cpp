@@ -87,17 +87,18 @@ void COptionsWindow::CreateGeneral()
 		}
 	}
 
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
-		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
-			ui.chkPrivacy, ui.chkUseSpecificity,
-			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkHostProtect, ui.chkRamBox, NULL };
+	if (!g_CertInfo.opt_sec) {
+		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices, ui.chkPrivacy, ui.chkUseSpecificity, ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkHostProtect, NULL };
 		for (QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
 			COptionsWindow__AddCertIcon(*ExWidget);
 	}
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard2))
+	if (!g_CertInfo.active)
+		COptionsWindow__AddCertIcon(ui.chkRamBox, true);
+	if (!g_CertInfo.opt_enc) {
 		COptionsWindow__AddCertIcon(ui.chkConfidential, true);
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced1))
 		COptionsWindow__AddCertIcon(ui.chkEncrypt, true);
+		COptionsWindow__AddCertIcon(ui.chkAllowEfs, true);
+	}
 
 
 	m_HoldBoxType = false;
@@ -157,6 +158,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkDropRights, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkFakeElevation, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkMsiExemptions, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkACLs, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	
 	connect(ui.chkBlockSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkOpenSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -228,6 +230,8 @@ void COptionsWindow::CreateGeneral()
 
 	connect(ui.chkRawDiskRead, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkRawDiskNotify, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	
+	connect(ui.chkAllowEfs, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.btnAddCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddCommand()));
 	QMenu* pRunBtnMenu = new QMenu(ui.btnAddCmd);
@@ -277,6 +281,7 @@ void COptionsWindow::LoadGeneral()
 	ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
 	ui.chkFakeElevation->setChecked(m_pBox->GetBool("FakeAdminRights", false));
 	ui.chkMsiExemptions->setChecked(m_pBox->GetBool("MsiInstallerExemptions", false));
+	ui.chkACLs->setChecked(m_pBox->GetBool("UseOriginalACLs", false));
 
 	ui.chkBlockSpooler->setChecked(m_pBox->GetBool("ClosePrintSpooler", false));
 	ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
@@ -374,6 +379,8 @@ void COptionsWindow::LoadGeneral()
 	ui.chkRawDiskRead->setChecked(m_pBox->GetBool("AllowRawDiskRead", false));
 	ui.chkRawDiskNotify->setChecked(m_pBox->GetBool("NotifyDirectDiskAccess", false));
 
+	ui.chkAllowEfs->setChecked(m_pBox->GetBool("EnableEFS", false));
+
 	OnGeneralChanged();
 
 	m_GeneralChanged = false;
@@ -417,6 +424,7 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkDropRights, "DropAdminRights", "y", "");
 	WriteAdvancedCheck(ui.chkFakeElevation, "FakeAdminRights", "y", "");
 	WriteAdvancedCheck(ui.chkMsiExemptions, "MsiInstallerExemptions", "y", "");
+	WriteAdvancedCheck(ui.chkACLs, "UseOriginalACLs", "y", "");
 
 	WriteAdvancedCheck(ui.chkBlockSpooler, "ClosePrintSpooler", "y", "");
 	WriteAdvancedCheck(ui.chkOpenSpooler, "OpenPrintSpooler", "y", "");
@@ -503,6 +511,8 @@ void COptionsWindow::SaveGeneral()
 
 	WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");
 	WriteAdvancedCheck(ui.chkRawDiskNotify, "NotifyDirectDiskAccess", "y", "");
+
+	WriteAdvancedCheck(ui.chkAllowEfs, "EnableEFS", "y", "");
 
 	m_GeneralChanged = false;
 }
@@ -834,7 +844,7 @@ void COptionsWindow::UpdateBoxSecurity()
 void COptionsWindow::OnSecurityMode()
 {
 	if (ui.chkSecurityMode->isChecked() || (ui.chkLockDown->isEnabled() && ui.chkLockDown->isChecked()) || (ui.chkRestrictDevices->isEnabled() && ui.chkRestrictDevices->isChecked()))
-		theGUI->CheckCertificate(this);
+		theGUI->CheckCertificate(this, 0);
 
 	UpdateBoxSecurity();
 

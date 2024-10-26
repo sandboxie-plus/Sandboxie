@@ -90,6 +90,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>cmbFormat</tabstop>
+  <tabstop>cmbCompression</tabstop>
+  <tabstop>chkSolid</tabstop>
+  <tabstop>chkEncrypt</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

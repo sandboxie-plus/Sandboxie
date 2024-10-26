@@ -95,6 +95,8 @@ public:
 	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, CSbieAPI::EStartFlags Flags = CSbieAPI::eStartDefault, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 	SB_STATUS			ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount = false);
 
+	void				OpenSettings(const QString& Tab = QString());
+
 	void				EditIni(const QString& IniPath, bool bPlus = false);
 
 	void				UpdateDrives();

@@ -4,7 +4,7 @@ on:
   release:
     types:
       - published  # Trigger the workflow when a release, pre-release, or draft of a release was published
-      - edited     # Trigger the workflow when The details of a release, pre-release, or draft release were edited
+      - edited     # Trigger the workflow when the details of a release, pre-release, or draft release were edited
 
 concurrency:
   group: hash-${{ github.event.release.tag_name }}  # Use the release tag name for concurrency

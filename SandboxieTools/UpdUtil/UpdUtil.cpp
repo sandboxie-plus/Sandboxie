@@ -822,7 +822,7 @@ std::shared_ptr<SAddon> ReadAddon(const JSONObject& addon, const std::wstring& c
 
 	pAddon->InstallPath = GetSpecificEntryValue(addon, L"installPath", core_arch, agent_arch, framework);
 	pAddon->Installer = GetSpecificEntryValue(addon, L"installer", core_arch, agent_arch, framework);
-	pAddon->UninstallKey = GetSpecificEntryValue(addon, L"uninstallPey", core_arch, agent_arch, framework);
+	pAddon->UninstallKey = GetSpecificEntryValue(addon, L"uninstallKey", core_arch, agent_arch, framework);
 
 	for (auto I = addon.begin(); I != addon.end(); ++I) {
 		if (I->first.find(L'-') != std::wstring::npos)

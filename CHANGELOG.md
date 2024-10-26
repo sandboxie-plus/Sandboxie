@@ -4,10 +4,55 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.1x.xx / 5.xx.x] - 2024-xx-xx
+## [1.15.1 / 5.70.1] - 2024-10-
 
 ### Added
 - added the ability to hide certificates in editbox in Global Setting
+
+### Fixed
+- fixed Sandboxie crypto fails to start in red boxes
+- fixed issue with breakout process when using explorer.exe
+
+### Changed
+- validated compatibility with Windows build 27729 and updated DynData
+
+
+
+## [1.15.0 / 5.70.0] - 2024-10-19
+
+### Added
+- added new user proxy mechanism to enable user specific operations
+- added support for EFS using the user proxy [#1980](https://github.com/sandboxie-plus/Sandboxie/issues/1980)
+  - to enable add 'EnableEFS=y' to the sandbox config
+- added breakout document functionality [#2741](https://github.com/sandboxie-plus/Sandboxie/issues/2741)
+  - use a syntax like this 'BreakoutDocument=C:\path\*.txt' to specify path and extension
+  - Security Warning: do not use paths terminated with a wildcard like 'BreakoutDocument=C:\path\*' as they will allow for execution of malicious scripts outside the sandbox!
+- added mechanism to set box folder ACLs to allow only the creating user access 'LockBoxToUser=y'
+- added option to keep original ACLs on sandboxed files 'UseOriginalACLs=y'
+- added option 'OpenWPADEndpoint=y' [#4292](https://github.com/sandboxie-plus/Sandboxie/issues/4292)
+
+### Changed
+- improved SandboxieCrypto startup
+- improved Sandboxed RPCSS startup
+- set tab orders and buddies of UI controls [#4300](https://github.com/sandboxie-plus/Sandboxie/pull/4300) (thanks gexgd0419)
+
+### Fixed
+- fixed ImDiskApp uninstall key is always written to the registry [#4282](https://github.com/sandboxie-plus/Sandboxie/issues/4282)
+
+
+
+## [1.14.10 / 5.69.10] - 2024-10-03
+
+### Added
+- added ability to import encrypted archive files directly [#4255](https://github.com/sandboxie-plus/Sandboxie/issues/4255)
+
+### Changed
+- when the SbieSvc.exe worker crashes it now can automatically be restarted
+
+### Fixed
+- fixed issue with sandbox path entry combo boxes
+- fixed proxy for GetRawInputDeviceInfoW() causes a buffer overflow [#4267](https://github.com/sandboxie-plus/Sandboxie/issues/4267) (thanks marti4d)
+- 
 
 
 ## [1.14.9 / 5.69.9] - 2024-09-19
@@ -23,7 +68,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - sandbox root selection in global settings is now a combo box
 
 ### Fixed
-- fixed Exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
+- fixed exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
 
 
 

@@ -4335,13 +4335,6 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-                <item row="8" column="1">
-              <widget class="QCheckBox" name="chkForceRestart">
-               <property name="text">
-                <string>Restart force process before they begin to execute</string>
-               </property>
-              </widget>
-             </item>
               </layout>
              </item>
             </layout>
@@ -5369,8 +5362,8 @@ instead of &quot;*&quot;.</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>75</width>
-                  <height>16</height>
+                  <width>98</width>
+                  <height>28</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="dbgLayout">

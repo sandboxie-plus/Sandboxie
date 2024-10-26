@@ -1274,7 +1274,7 @@ int Program_Start(void)
 								memset(domain, 0, 100);
 								CredUIParseUserName(username, user, 100, domain, 100);
 								HANDLE tempToken = NULL;
-								if (LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
+								if (!LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
 									MessageBox(NULL, SbieDll_FormatMessage0(3259), L"Sandboxie Start", MB_OK);
 									goto skipElevate;
 								}
@@ -1282,6 +1282,7 @@ int Program_Start(void)
 								CloseHandle(tempToken);
 								free(user);
 								free(domain);
+								
 							}
 						//}
 						///else {
@@ -1316,7 +1317,7 @@ int Program_Start(void)
 							memset(domain, 0, 100);
 							CredUIParseUserNameW(username, user, 100, domain, 100);
 							HANDLE tempToken = NULL;
-							if (LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
+							if (!LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
 								MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
 								SbieApi_Log(3999, L"%d", GetLastError);
 								return EXIT_FAILURE;

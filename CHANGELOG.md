@@ -143,8 +143,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.14.4 / 5.69.4] - 2024-07-13
 
-### Added
-- added UI options for "ForceRestartAll" and "UseCreateToken" in OptionWindow.
 
 ### Changed
 - improved removal of leftovers [#4050](https://github.com/sandboxie-plus/Sandboxie/pull/4050)

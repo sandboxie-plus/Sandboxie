@@ -62,7 +62,7 @@ void COptionsWindow::CreateNetwork()
 
 	connect(ui.tabsInternet, SIGNAL(currentChanged(int)), this, SLOT(OnInternetTab()));
 
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
+	if (!g_CertInfo.opt_net) {
 		ui.tabDNS->setEnabled(false);
 		ui.tabNetProxy->setEnabled(false);
 	}
@@ -946,6 +946,10 @@ void COptionsWindow::OnNetProxyItemDoubleClicked(QTreeWidgetItem* pItem, int Col
 	pPass->setMaxLength(255);
 	pPass->setText(pItem->data(5, Qt::UserRole).toString());
 	ui.treeProxy->setItemWidget(pItem, 5, pPass);
+
+	QLineEdit* pBypass = new QLineEdit();
+	pBypass->setText(pItem->data(6, Qt::UserRole).toString());
+	ui.treeProxy->setItemWidget(pItem, 6, pBypass);
 }
 
 void COptionsWindow::LoadNetProxy()
@@ -1004,6 +1008,10 @@ void COptionsWindow::ParseAndAddNetProxy(const QString& Value, bool disabled, co
 	pItem->setText(5, Pass);
 	pItem->setData(5, Qt::UserRole, Pass);
 
+	QString Bypass = Tags.value("bypass");
+	pItem->setText(6, Bypass);
+	pItem->setData(6, Qt::UserRole, Bypass);
+
 	if(Template.isEmpty())
 		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeProxy->addTopLevelItem(pItem);
@@ -1025,6 +1033,7 @@ void COptionsWindow::SaveNetProxy()
 		int iAuth = pItem->data(3, Qt::UserRole).toInt();
 		QString Login = pItem->data(4, Qt::UserRole).toString();
 		QString Pass = pItem->data(5, Qt::UserRole).toString();
+		QString Bypass = pItem->data(6, Qt::UserRole).toString();
 
 		if (IP.isEmpty() || Port.isEmpty()) {
 			QMessageBox::warning(this, "SandboxiePlus", QString::number(i + 1) + tr(" entry: IP or Port cannot be empty"));
@@ -1046,8 +1055,10 @@ void COptionsWindow::SaveNetProxy()
 			if(res.IsError())
 				Tags.append("Password=" + Pass);
 			else
-				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::OmitTrailingEquals));
+				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::KeepTrailingEquals));
 		}
+		Tags.append("Bypass=" + Bypass);
+
 		QString Entry = Tags.join(";").prepend(Program + ",");
 
 		if (pItem->checkState(0) == Qt::Checked)
@@ -1092,6 +1103,7 @@ void COptionsWindow::CloseNetProxyEdit(QTreeWidgetItem* pItem, bool bSave)
 		QComboBox* pAuth = (QComboBox*)ui.treeProxy->itemWidget(pItem, 3);
 		QLineEdit* pLogin = (QLineEdit*)ui.treeProxy->itemWidget(pItem, 4);
 		QLineEdit* pPass = (QLineEdit*)ui.treeProxy->itemWidget(pItem, 5);
+		QLineEdit* pBypass = (QLineEdit*)ui.treeProxy->itemWidget(pItem, 6);
 
 		QString Program = pCombo->currentText();
 		int Index = pCombo->findText(Program);
@@ -1116,11 +1128,14 @@ void COptionsWindow::CloseNetProxyEdit(QTreeWidgetItem* pItem, bool bSave)
 		pItem->setText(5, pPass->text());
 		pItem->setData(5, Qt::UserRole, pPass->text());
 
+		pItem->setText(6, pBypass->text());
+		pItem->setData(6, Qt::UserRole, pBypass->text());
+
 		m_NetProxyChanged = true;
 		OnOptChanged();
 	}
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i <= 6; i++)
 		ui.treeProxy->setItemWidget(pItem, i, NULL);
 }
 

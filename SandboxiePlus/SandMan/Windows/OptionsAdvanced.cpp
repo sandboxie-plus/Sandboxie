@@ -17,6 +17,11 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkElevateCreateProcessFix, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNoWindowRename, SIGNAL(clicked(bool)), this, SLOT(OnNoWindowRename()));
 	connect(ui.chkNestedJobs, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
+	connect(ui.txtSingleMemory, SIGNAL(textChanged(const QString&)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.txtTotalMemory, SIGNAL(textChanged(const QString&)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.txtTotalNumber, SIGNAL(textChanged(const QString&)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkUseSbieDeskHack, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkUseSbieWndStation, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -26,6 +31,10 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkElevateRpcss, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDropPrivileges, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkDropConHostIntegrity, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
+	//Do not force untrusted integrity level on the sanboxed token (reduces desktop isolation)
+	//connect(ui.chkNotUntrusted, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -39,6 +48,7 @@ void COptionsWindow::CreateAdvanced()
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenSamEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenLsaEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkOpenWpadEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkSbieLogon, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkCreateToken, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -53,7 +63,7 @@ void COptionsWindow::CreateAdvanced()
 	m_AdvOptions.insert("UseSbieDeskHack",				SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("")});
 	m_AdvOptions.insert("UseSbieWndStation",			SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("")});
 	m_AdvOptions.insert("FakeAdminRights",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Make specified processes think they have admin permissions.")});
-	m_AdvOptions.insert("WaitForDebugger",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Force specified processes to wait for a debugger to attach.")});
+	m_AdvOptions.insert("WaitForDebugger",				SAdvOption{eList, QStringList(), tr("Force specified processes to wait for a debugger to attach.")});
 	m_AdvOptions.insert("BoxNameTitle",					SAdvOption{eOnlySpec, QStringList() << "y" << "n" << "-", tr("")});
 	m_AdvOptions.insert("FileRootPath",					SAdvOption{eNoSpec, QStringList(), tr("Sandbox file system root")});
 	m_AdvOptions.insert("KeyRootPath",					SAdvOption{eNoSpec, QStringList(), tr("Sandbox registry root")});
@@ -96,6 +106,15 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.btnDelAuto, SIGNAL(clicked(bool)), this, SLOT(OnDelAuto()));
 	connect(ui.chkShowTriggersTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowTriggersTmpl()));
 
+	InitLangID();
+
+	connect(ui.chkHideFirmware, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHideUID, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHideSerial, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHideMac, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.cmbLangID, SIGNAL(currentIndexChanged(int)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.btnDumpFW, SIGNAL(clicked(bool)), this, SLOT(OnDumpFW()));
+
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkHideNonSystemProcesses, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.btnAddProcess, SIGNAL(clicked(bool)), this, SLOT(OnAddProcess()));
@@ -135,6 +154,18 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 	ui.chkNestedJobs->setChecked(m_pBox->GetBool("AllowBoxedJobs", false));
 
+	qint64 iSingleMemory = m_pBox->GetNum64("ProcessMemoryLimit", 0);
+	if (iSingleMemory > 0x0LL && iSingleMemory <= 0x7FFFFFFFFFFFFFFFLL)
+		ui.txtSingleMemory->setText(QString::number(iSingleMemory));
+
+	qint64 iTotalMemory = m_pBox->GetNum64("TotalMemoryLimit", 0);
+	if (iTotalMemory > 0x0LL && iTotalMemory <= 0x7FFFFFFFFFFFFFFFLL)
+		ui.txtTotalMemory->setText(QString::number(iTotalMemory));
+
+	qint64 iTotalNumber = m_pBox->GetNum64("ProcessNumberLimit", 0);
+	if (iTotalNumber > 0x0LL && iTotalNumber <= 0xFFFFFFFFLL)
+		ui.txtTotalNumber->setText(QString::number(iTotalNumber));
+
 	ui.chkUseSbieDeskHack->setChecked(m_pBox->GetBool("UseSbieDeskHack", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
 
@@ -143,6 +174,10 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
 	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
+	ui.chkDropConHostIntegrity->setChecked(m_pBox->GetBool("DropConHostIntegrity", false));
+
+
+	//ui.chkNotUntrusted->setChecked(m_pBox->GetBool("NoUntrustedToken", false));
 
 	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
 
@@ -156,6 +191,7 @@ void COptionsWindow::LoadAdvanced()
 	//ui.chkOpenLsaSSPI->setChecked(!m_pBox->GetBool("BlockPassword", true)); // OpenLsaSSPI
 	ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
+	ui.chkOpenWpadEndpoint->setChecked(m_pBox->GetBool("OpenWPADEndpoint", false));
 
 	ui.treeInjectDll->clear();
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
@@ -261,6 +297,13 @@ void COptionsWindow::LoadAdvanced()
 	ShowTriggersTmpl();
 	//
 
+	ui.chkHideFirmware->setChecked(m_pBox->GetBool("HideFirmwareInfo", false));
+	ui.chkHideUID->setChecked(m_pBox->GetBool("RandomRegUID",false));
+	ui.chkHideSerial->setChecked(m_pBox->GetBool("HideDiskSerialNumber", false));
+	ui.chkHideMac->setChecked(m_pBox->GetBool("HideNetworkAdapterMAC", false));
+
+	ui.cmbLangID->setCurrentIndex(ui.cmbLangID->findData(m_pBox->GetNum("CustomLCID", 0)));
+
 	ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", true));
 	ui.chkHideNonSystemProcesses->setChecked(m_pBox->GetBool("HideNonSystemProcesses", false));
 	
@@ -291,12 +334,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
 	
 	ui.chkAdminOnly->setChecked(m_pBox->GetBool("EditAdminOnly", false));
-	
-	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
-	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
-	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
-	*/
-	
+
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
 	if (Users.count() > 1)
@@ -370,10 +408,32 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 	WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
 	WriteAdvancedCheck(ui.chkNestedJobs, "AllowBoxedJobs", "y", "");
+
+	qint64 iSingleMemory = !ui.txtSingleMemory->text().isEmpty() ? ui.txtSingleMemory->text().toLongLong() : -1;
+	if (iSingleMemory > 0x0LL && iSingleMemory <= 0x7FFFFFFFFFFFFFFFLL)
+		WriteText("ProcessMemoryLimit", QString::number(iSingleMemory));
+	else
+		m_pBox->DelValue("ProcessMemoryLimit");
+
+	qint64 iTotalMemory = !ui.txtTotalMemory->text().isEmpty() ? ui.txtTotalMemory->text().toLongLong() : -1;
+	if (iTotalMemory > 0x0LL && iTotalMemory <= 0x7FFFFFFFFFFFFFFFLL)
+		WriteText("TotalMemoryLimit", QString::number(iTotalMemory));
+	else
+		m_pBox->DelValue("TotalMemoryLimit");
+
+	qint64 iTotalNumber = !ui.txtTotalNumber->text().isEmpty() ? ui.txtTotalNumber->text().toLongLong() : -1;
+	if (iTotalNumber > 0x0LL && iTotalNumber <= 0xFFFFFFFFLL)
+		WriteText("ProcessNumberLimit", QString::number(iTotalNumber));
+	else
+		m_pBox->DelValue("ProcessNumberLimit");
+
 	WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
 	WriteAdvancedCheck(ui.chkElevateRpcss, "RunRpcssAsSystem", "y", "");
 	WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
+	WriteAdvancedCheck(ui.chkDropConHostIntegrity, "DropConHostIntegrity", "y", "");
+
+	//WriteAdvancedCheck(ui.chkNotUntrusted, "NoUntrustedToken", "y", "");
 
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 
@@ -386,6 +446,7 @@ void COptionsWindow::SaveAdvanced()
 	//WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "n", ""); // OpenLsaSSPI
 	WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "y", "");
 	WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
+	WriteAdvancedCheck(ui.chkOpenWpadEndpoint, "OpenWPADEndpoint", "y", "");
 
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
 	QStringList InjectDll64 = m_pBox->GetTextList("InjectDll64", false);
@@ -433,7 +494,19 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");
 
 	bool bGlobalSandboxGroup = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieAllGroup", false);
-	WriteAdvancedCheck(ui.chkCreateToken, "UseCreateToken", bGlobalSandboxGroup ? "" : "y", "");
+	bool bGlobalCreateToken = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("UseCreateToken", false);
+	if (ui.chkCreateToken->checkState() == Qt::Checked) {
+		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "" : "y");
+		m_pBox->DelValue("UseCreateToken");
+	}
+	else if (ui.chkCreateToken->checkState() == Qt::PartiallyChecked) {
+		m_pBox->SetText("SandboxieAllGroup", "n");
+		m_pBox->SetText("UseCreateToken", "y");
+	}
+	else {
+		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "" : "y", bGlobalSandboxGroup ? "n" : "");
+		WriteAdvancedCheck(ui.chkCreateToken, "UseCreateToken", bGlobalCreateToken ? "" : "y", bGlobalCreateToken ? "n" : "");
+	}
 
 	SaveOptionList();
 
@@ -510,6 +583,14 @@ void COptionsWindow::SaveAdvanced()
 	WriteTextList("OnBoxTerminateDisabled", TerminateCommandDisabled);
 	//
 
+	WriteAdvancedCheck(ui.chkHideFirmware, "HideFirmwareInfo", "y", "");
+	WriteAdvancedCheck(ui.chkHideUID, "RandomRegUID", "y", "");
+	WriteAdvancedCheck(ui.chkHideSerial, "HideDiskSerialNumber", "y", "");
+	WriteAdvancedCheck(ui.chkHideMac, "HideNetworkAdapterMAC", "y", "");
+
+	int CustomLCID = ui.cmbLangID->currentData().toInt();
+	if (CustomLCID) m_pBox->SetNum("CustomLCID", CustomLCID);
+	else m_pBox->DelValue("CustomLCID");
 
 	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes", "", "n");
 	WriteAdvancedCheck(ui.chkHideNonSystemProcesses, "HideNonSystemProcesses", "y", "");
@@ -541,8 +622,7 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkProtectWindow, "CoverBoxedWindows", "y", "");
 	WriteAdvancedCheck(ui.chkBlockCapture, "BlockScreenCapture", "y", "");
-	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "");
-	
+
 	WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
 
 	QStringList Users;
@@ -559,7 +639,7 @@ void COptionsWindow::OnIsolationChanged()
 	if (sender() == ui.chkNoSecurityIsolation) {
 		// we can ignore chkNoSecurityFiltering as it requires chkNoSecurityIsolation
 		if (ui.chkNoSecurityIsolation->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, 0);
 	}
 
 	UpdateBoxIsolation();
@@ -583,10 +663,12 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenSamEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenLsaEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkOpenWpadEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 
 	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode
 	ui.chkRawDiskNotify->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkAllowEfs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkBlockNetShare->setEnabled(!ui.chkNoSecurityFiltering->isChecked());
 
@@ -613,7 +695,13 @@ void COptionsWindow::UpdateBoxIsolation()
 	}
 	else {
 		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
-		ReadGlobalCheck(ui.chkCreateToken, "UseCreateToken", false);
+
+		if (m_pBox->GetBool("SandboxieAllGroup", false, true))
+			ui.chkCreateToken->setCheckState(Qt::Checked);
+		else if (m_pBox->GetBool("UseCreateToken", false, true))
+			ui.chkCreateToken->setCheckState(Qt::PartiallyChecked);
+		else
+			ui.chkCreateToken->setCheckState(Qt::Unchecked);
 	}
 }
 
@@ -650,9 +738,32 @@ void COptionsWindow::UpdateJobOptions()
 	bool bUseJobObject = !IsAllWndOpen && ui.chkAddToJob->isChecked();
 	ui.chkNestedJobs->setEnabled(bUseJobObject);
 
-	ui.lineSingleMemory->setEnabled(bUseJobObject);
-	ui.lineTotalMemory->setEnabled(bUseJobObject);
-	ui.lineTotalNumber->setEnabled(bUseJobObject);
+	qint64 iSingleMemory = ui.txtSingleMemory->text().toLongLong();
+	if (!(iSingleMemory > 0x0LL && iSingleMemory <= 0x7FFFFFFFFFFFFFFFLL)) {
+		ui.lblSingleMemory->setText(tr("bytes (unlimited)"));
+	}
+	else {
+		ui.lblSingleMemory->setText(tr("bytes (%1)").arg(FormatSize(iSingleMemory)));
+	}
+	ui.txtSingleMemory->setEnabled(bUseJobObject);
+
+	qint64 iTotalMemory = ui.txtTotalMemory->text().toLongLong();
+	if (!(iTotalMemory > 0x0LL && iTotalMemory <= 0x7FFFFFFFFFFFFFFFLL)) {
+		ui.lblTotalMemory->setText(tr("bytes (unlimited)"));
+	}
+	else {
+		ui.lblTotalMemory->setText(tr("bytes (%1)").arg(FormatSize(iTotalMemory)));
+	}
+	ui.txtTotalMemory->setEnabled(bUseJobObject);
+
+	qint64 iTotalNumber = ui.txtTotalNumber->text().toLongLong();
+	if (!(iTotalNumber > 0x0LL && iTotalNumber <= 0xFFFFFFFFLL)) {
+		ui.lblTotalNumber->setText(tr("unlimited"));
+	}
+	else {
+		ui.lblTotalNumber->setText("");
+	}
+	ui.txtTotalNumber->setEnabled(bUseJobObject);
 }
 
 void COptionsWindow::CheckOpenCOM()
@@ -1322,4 +1433,265 @@ void COptionsWindow::SaveDebug()
 		WriteAdvancedCheck(pCheck, DbgOption.Name, DbgOption.Value);
 		DbgOption.Changed = false;
 	}
+}
+
+#define WIN32_NO_STATUS
+typedef long NTSTATUS;
+
+#include "..\..\Sandboxie\common\win32_ntddk.h"
+
+typedef struct _SYSTEM_FIRMWARE_TABLE_INFORMATION {
+    ULONG ProviderSignature;
+    ULONG Action;
+    ULONG TableID;
+    ULONG TableBufferLength;
+    UCHAR TableBuffer[ANYSIZE_ARRAY];
+} SYSTEM_FIRMWARE_TABLE_INFORMATION, *PSYSTEM_FIRMWARE_TABLE_INFORMATION;
+
+#define FIRMWARE_TABLE_PROVIDER_ACPI  'ACPI'
+#define FIRMWARE_TABLE_PROVIDER_SMBIOS 'RSMB'
+
+typedef enum _SYSTEM_FIRMWARE_TABLE_ACTION {
+    SystemFirmwareTable_Enumerate,
+    SystemFirmwareTable_Get
+} SYSTEM_FIRMWARE_TABLE_ACTION;
+
+void COptionsWindow::OnDumpFW()
+{
+    ULONG returnLength = 0;
+    NTSTATUS status;
+    SYSTEM_FIRMWARE_TABLE_INFORMATION* firmwareTableInfo;
+    ULONG firmwareTableSize = sizeof(SYSTEM_FIRMWARE_TABLE_INFORMATION) + 0x10000; // Initial size
+
+retry:
+    firmwareTableInfo = (SYSTEM_FIRMWARE_TABLE_INFORMATION*)malloc(firmwareTableSize);
+    firmwareTableInfo->ProviderSignature = FIRMWARE_TABLE_PROVIDER_SMBIOS;
+    firmwareTableInfo->Action = SystemFirmwareTable_Get;
+    firmwareTableInfo->TableID = 0;
+    firmwareTableInfo->TableBufferLength = firmwareTableSize - sizeof(SYSTEM_FIRMWARE_TABLE_INFORMATION);
+
+    status = NtQuerySystemInformation(SystemFirmwareTableInformation, firmwareTableInfo, firmwareTableSize, &returnLength);
+
+    if (status == 0xC0000023L/*STATUS_BUFFER_TOO_SMALL*/)  {
+		free(firmwareTableInfo);
+		firmwareTableSize += 0x10000;
+		goto retry;
+    }
+
+    if (!NT_SUCCESS(status))
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, tr("Failed to retrieve firmware table information."));
+    else if(firmwareTableInfo->TableBufferLength)
+	{
+		HKEY hKey;
+		DWORD disposition;
+		if(RegCreateKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, 0, 0, KEY_WRITE, NULL, &hKey, &disposition) == ERROR_SUCCESS) 
+		{
+			if(RegSetValueExW(hKey, L"SMBiosTable", 0, REG_BINARY, firmwareTableInfo->TableBuffer, firmwareTableInfo->TableBufferLength) == ERROR_SUCCESS)
+				CSandMan::ShowMessageBox(this, QMessageBox::Information, tr("Firmware table saved successfully to host registry: HKEY_CURRENT_USER\\System\\SbieCustom<br />you can copy it to the sandboxed registry to have a different value for each box."));
+
+            RegCloseKey(hKey);
+        }
+    }
+
+    free(firmwareTableInfo);
+}
+
+void COptionsWindow::InitLangID()
+{
+	// Note: list by ChatGPT
+	ui.cmbLangID->addItem("Use System Default", 0);
+	ui.cmbLangID->addItem("Afrikaans (af-ZA)", 1078);
+	ui.cmbLangID->addItem("Albanian (sq-AL)", 1052);
+	ui.cmbLangID->addItem("Amharic (am-ET)", 1118);
+	ui.cmbLangID->addItem("Arabic (Algeria) (ar-DZ)", 5121);
+	ui.cmbLangID->addItem("Arabic (Bahrain) (ar-BH)", 15361);
+	ui.cmbLangID->addItem("Arabic (Egypt) (ar-EG)", 3073);
+	ui.cmbLangID->addItem("Arabic (Iraq) (ar-IQ)", 2049);
+	ui.cmbLangID->addItem("Arabic (Jordan) (ar-JO)", 11265);
+	ui.cmbLangID->addItem("Arabic (Kuwait) (ar-KW)", 13313);
+	ui.cmbLangID->addItem("Arabic (Lebanon) (ar-LB)", 12289);
+	ui.cmbLangID->addItem("Arabic (Libya) (ar-LY)", 4097);
+	ui.cmbLangID->addItem("Arabic (Morocco) (ar-MA)", 6145);
+	ui.cmbLangID->addItem("Arabic (Oman) (ar-OM)", 8193);
+	ui.cmbLangID->addItem("Arabic (Qatar) (ar-QA)", 16385);
+	ui.cmbLangID->addItem("Arabic (Saudi Arabia) (ar-SA)", 1025);
+	ui.cmbLangID->addItem("Arabic (Syria) (ar-SY)", 10241);
+	ui.cmbLangID->addItem("Arabic (Tunisia) (ar-TN)", 7169);
+	ui.cmbLangID->addItem("Arabic (U.A.E.) (ar-AE)", 14337);
+	ui.cmbLangID->addItem("Arabic (Yemen) (ar-YE)", 9217);
+	ui.cmbLangID->addItem("Armenian (hy-AM)", 1067);
+	ui.cmbLangID->addItem("Assamese (as-IN)", 1101);
+	ui.cmbLangID->addItem("Azerbaijani (Cyrillic) (az-Cyrl-AZ)", 2092);
+	ui.cmbLangID->addItem("Azerbaijani (Latin) (az-Latn-AZ)", 1068);
+	ui.cmbLangID->addItem("Basque (eu-ES)", 1069);
+	ui.cmbLangID->addItem("Belarusian (be-BY)", 1059);
+	ui.cmbLangID->addItem("Bengali (Bangladesh) (bn-BD)", 2117);
+	ui.cmbLangID->addItem("Bengali (India) (bn-IN)", 1093);
+	ui.cmbLangID->addItem("Bosnian (Cyrillic, Bosnia and Herzegovina) (bs-Cyrl-BA)", 8218);
+	ui.cmbLangID->addItem("Bosnian (Latin, Bosnia and Herzegovina) (bs-Latn-BA)", 5146);
+	ui.cmbLangID->addItem("Bulgarian (bg-BG)", 1026);
+	ui.cmbLangID->addItem("Catalan (ca-ES)", 1027);
+	ui.cmbLangID->addItem("Chinese (Simplified) (zh-CN)", 2052);
+	ui.cmbLangID->addItem("Chinese (Traditional) (zh-TW)", 1028);
+	ui.cmbLangID->addItem("Chinese (Hong Kong SAR) (zh-HK)", 3076);
+	ui.cmbLangID->addItem("Chinese (Macau SAR) (zh-MO)", 5124);
+	ui.cmbLangID->addItem("Chinese (Singapore) (zh-SG)", 4100);
+	ui.cmbLangID->addItem("Croatian (hr-HR)", 1050);
+	ui.cmbLangID->addItem("Croatian (Latin, Bosnia and Herzegovina) (hr-BA)", 4122);
+	ui.cmbLangID->addItem("Czech (cs-CZ)", 1029);
+	ui.cmbLangID->addItem("Danish (da-DK)", 1030);
+	ui.cmbLangID->addItem("Dari (prs-AF)", 1164);
+	ui.cmbLangID->addItem("Dutch (Belgium) (nl-BE)", 2067);
+	ui.cmbLangID->addItem("Dutch (Netherlands) (nl-NL)", 1043);
+	ui.cmbLangID->addItem("English (Australia) (en-AU)", 3081);
+	ui.cmbLangID->addItem("English (Belize) (en-BZ)", 10249);
+	ui.cmbLangID->addItem("English (Canada) (en-CA)", 4105);
+	ui.cmbLangID->addItem("English (Caribbean) (en-029)", 9225);
+	ui.cmbLangID->addItem("English (Hong Kong SAR) (en-HK)", 15369);
+	ui.cmbLangID->addItem("English (India) (en-IN)", 16393);
+	ui.cmbLangID->addItem("English (Indonesia) (en-ID)", 14345);
+	ui.cmbLangID->addItem("English (Ireland) (en-IE)", 6153);
+	ui.cmbLangID->addItem("English (Jamaica) (en-JM)", 8201);
+	ui.cmbLangID->addItem("English (Malaysia) (en-MY)", 17417);
+	ui.cmbLangID->addItem("English (New Zealand) (en-NZ)", 5129);
+	ui.cmbLangID->addItem("English (Philippines) (en-PH)", 13321);
+	ui.cmbLangID->addItem("English (Singapore) (en-SG)", 18441);
+	ui.cmbLangID->addItem("English (South Africa) (en-ZA)", 7177);
+	ui.cmbLangID->addItem("English (Trinidad and Tobago) (en-TT)", 11273);
+	ui.cmbLangID->addItem("English (United Kingdom) (en-GB)", 2057);
+	ui.cmbLangID->addItem("English (United States) (en-US)", 1033);
+	ui.cmbLangID->addItem("English (Zimbabwe) (en-ZW)", 12297);
+	ui.cmbLangID->addItem("Estonian (et-EE)", 1061);
+	ui.cmbLangID->addItem("Faroese (fo-FO)", 1080);
+	ui.cmbLangID->addItem("Filipino (fil-PH)", 1124);
+	ui.cmbLangID->addItem("Finnish (fi-FI)", 1035);
+	ui.cmbLangID->addItem("French (Belgium) (fr-BE)", 2060);
+	ui.cmbLangID->addItem("French (Canada) (fr-CA)", 3084);
+	ui.cmbLangID->addItem("French (France) (fr-FR)", 1036);
+	ui.cmbLangID->addItem("French (Luxembourg) (fr-LU)", 5132);
+	ui.cmbLangID->addItem("French (Monaco) (fr-MC)", 6156);
+	ui.cmbLangID->addItem("French (Switzerland) (fr-CH)", 4108);
+	ui.cmbLangID->addItem("Galician (gl-ES)", 1110);
+	ui.cmbLangID->addItem("Georgian (ka-GE)", 1079);
+	ui.cmbLangID->addItem("German (Austria) (de-AT)", 3079);
+	ui.cmbLangID->addItem("German (Germany) (de-DE)", 1031);
+	ui.cmbLangID->addItem("German (Liechtenstein) (de-LI)", 5127);
+	ui.cmbLangID->addItem("German (Luxembourg) (de-LU)", 4103);
+	ui.cmbLangID->addItem("German (Switzerland) (de-CH)", 2055);
+	ui.cmbLangID->addItem("Greek (el-GR)", 1032);
+	ui.cmbLangID->addItem("Gujarati (gu-IN)", 1095);
+	ui.cmbLangID->addItem("Hebrew (he-IL)", 1037);
+	ui.cmbLangID->addItem("Hindi (hi-IN)", 1081);
+	ui.cmbLangID->addItem("Hungarian (hu-HU)", 1038);
+	ui.cmbLangID->addItem("Icelandic (is-IS)", 1039);
+	ui.cmbLangID->addItem("Igbo (ig-NG)", 1136);
+	ui.cmbLangID->addItem("Indonesian (id-ID)", 1057);
+	ui.cmbLangID->addItem("Irish (ga-IE)", 2108);
+	ui.cmbLangID->addItem("Italian (Italy) (it-IT)", 1040);
+	ui.cmbLangID->addItem("Italian (Switzerland) (it-CH)", 2064);
+	ui.cmbLangID->addItem("Japanese (ja-JP)", 1041);
+	ui.cmbLangID->addItem("Kannada (kn-IN)", 1099);
+	ui.cmbLangID->addItem("Kazakh (kk-KZ)", 1087);
+	ui.cmbLangID->addItem("Khmer (km-KH)", 1107);
+	ui.cmbLangID->addItem("K'iche' (quc-Latn-GT)", 1152);
+	ui.cmbLangID->addItem("Kinyarwanda (rw-RW)", 1159);
+	ui.cmbLangID->addItem("Konkani (kok-IN)", 1111);
+	ui.cmbLangID->addItem("Korean (ko-KR)", 1042);
+	ui.cmbLangID->addItem("Kyrgyz (ky-KG)", 1088);
+	ui.cmbLangID->addItem("Lao (lo-LA)", 1108);
+	ui.cmbLangID->addItem("Latvian (lv-LV)", 1062);
+	ui.cmbLangID->addItem("Lithuanian (lt-LT)", 1063);
+	ui.cmbLangID->addItem("Luxembourgish (lb-LU)", 1134);
+	ui.cmbLangID->addItem("Macedonian (mk-MK)", 1071);
+	ui.cmbLangID->addItem("Malay (Brunei Darussalam) (ms-BN)", 2110);
+	ui.cmbLangID->addItem("Malay (Malaysia) (ms-MY)", 1086);
+	ui.cmbLangID->addItem("Malayalam (ml-IN)", 1100);
+	ui.cmbLangID->addItem("Maltese (mt-MT)", 1082);
+	ui.cmbLangID->addItem("Maori (mi-NZ)", 1153);
+	ui.cmbLangID->addItem("Mapudungun (arn-CL)", 1146);
+	ui.cmbLangID->addItem("Marathi (mr-IN)", 1102);
+	ui.cmbLangID->addItem("Mongolian (Cyrillic) (mn-MN)", 1104);
+	ui.cmbLangID->addItem("Mongolian (Traditional Mongolian) (mn-Mong-CN)", 2128);
+	ui.cmbLangID->addItem("Nepali (ne-NP)", 1121);
+	ui.cmbLangID->addItem("Norwegian (Bokmal) (nb-NO)", 1044);
+	ui.cmbLangID->addItem("Norwegian (Nynorsk) (nn-NO)", 2068);
+	ui.cmbLangID->addItem("Occitan (oc-FR)", 1154);
+	ui.cmbLangID->addItem("Odia (or-IN)", 1096);
+	ui.cmbLangID->addItem("Pashto (ps-AF)", 1123);
+	ui.cmbLangID->addItem("Persian (fa-IR)", 1065);
+	ui.cmbLangID->addItem("Polish (pl-PL)", 1045);
+	ui.cmbLangID->addItem("Portuguese (Brazil) (pt-BR)", 1046);
+	ui.cmbLangID->addItem("Portuguese (Portugal) (pt-PT)", 2070);
+	ui.cmbLangID->addItem("Punjabi (Gurmukhi) (pa-IN)", 1094);
+	ui.cmbLangID->addItem("Quechua (Bolivia) (quz-BO)", 1131);
+	ui.cmbLangID->addItem("Quechua (Ecuador) (quz-EC)", 2155);
+	ui.cmbLangID->addItem("Quechua (Peru) (quz-PE)", 3179);
+	ui.cmbLangID->addItem("Romanian (ro-RO)", 1048);
+	ui.cmbLangID->addItem("Romansh (rm-CH)", 1047);
+	ui.cmbLangID->addItem("Russian (ru-RU)", 1049);
+	ui.cmbLangID->addItem("Sami (Inari) (smn-FI)", 9275);
+	ui.cmbLangID->addItem("Sami (Lule, Norway) (smj-NO)", 4155);
+	ui.cmbLangID->addItem("Sami (Lule, Sweden) (smj-SE)", 5179);
+	ui.cmbLangID->addItem("Sami (Northern, Finland) (se-FI)", 3131);
+	ui.cmbLangID->addItem("Sami (Northern, Norway) (se-NO)", 1083);
+	ui.cmbLangID->addItem("Sami (Northern, Sweden) (se-SE)", 2107);
+	ui.cmbLangID->addItem("Sami (Skolt) (sms-FI)", 8251);
+	ui.cmbLangID->addItem("Sami (Southern, Norway) (sma-NO)", 6203);
+	ui.cmbLangID->addItem("Sami (Southern, Sweden) (sma-SE)", 7227);
+	ui.cmbLangID->addItem("Sanskrit (sa-IN)", 1103);
+	ui.cmbLangID->addItem("Serbian (Cyrillic, Bosnia and Herzegovina) (sr-Cyrl-BA)", 1026);
+	ui.cmbLangID->addItem("Serbian (Cyrillic, Montenegro) (sr-Cyrl-ME)", 12314);
+	ui.cmbLangID->addItem("Serbian (Cyrillic, Serbia) (sr-Cyrl-RS)", 3098);
+	ui.cmbLangID->addItem("Serbian (Latin, Bosnia and Herzegovina) (sr-Latn-BA)", 2074);
+	ui.cmbLangID->addItem("Serbian (Latin, Montenegro) (sr-Latn-ME)", 13317);
+	ui.cmbLangID->addItem("Serbian (Latin, Serbia) (sr-Latn-RS)", 9242);
+	ui.cmbLangID->addItem("Sesotho sa Leboa (nso-ZA)", 1132);
+	ui.cmbLangID->addItem("Sinhala (si-LK)", 1115);
+	ui.cmbLangID->addItem("Slovak (sk-SK)", 1051);
+	ui.cmbLangID->addItem("Slovenian (sl-SI)", 1060);
+	ui.cmbLangID->addItem("Spanish (Argentina) (es-AR)", 11274);
+	ui.cmbLangID->addItem("Spanish (Bolivia) (es-BO)", 16394);
+	ui.cmbLangID->addItem("Spanish (Chile) (es-CL)", 13322);
+	ui.cmbLangID->addItem("Spanish (Colombia) (es-CO)", 9226);
+	ui.cmbLangID->addItem("Spanish (Costa Rica) (es-CR)", 5130);
+	ui.cmbLangID->addItem("Spanish (Dominican Republic) (es-DO)", 7178);
+	ui.cmbLangID->addItem("Spanish (Ecuador) (es-EC)", 12298);
+	ui.cmbLangID->addItem("Spanish (El Salvador) (es-SV)", 17418);
+	ui.cmbLangID->addItem("Spanish (Guatemala) (es-GT)", 4106);
+	ui.cmbLangID->addItem("Spanish (Honduras) (es-HN)", 18442);
+	ui.cmbLangID->addItem("Spanish (Mexico) (es-MX)", 2058);
+	ui.cmbLangID->addItem("Spanish (Nicaragua) (es-NI)", 19466);
+	ui.cmbLangID->addItem("Spanish (Panama) (es-PA)", 6154);
+	ui.cmbLangID->addItem("Spanish (Paraguay) (es-PY)", 15370);
+	ui.cmbLangID->addItem("Spanish (Peru) (es-PE)", 10250);
+	ui.cmbLangID->addItem("Spanish (Puerto Rico) (es-PR)", 20490);
+	ui.cmbLangID->addItem("Spanish (Spain) (es-ES)", 1034);
+	ui.cmbLangID->addItem("Spanish (United States) (es-US)", 21514);
+	ui.cmbLangID->addItem("Spanish (Uruguay) (es-UY)", 14346);
+	ui.cmbLangID->addItem("Spanish (Venezuela) (es-VE)", 8202);
+	ui.cmbLangID->addItem("Swahili (sw-KE)", 1089);
+	ui.cmbLangID->addItem("Swedish (Finland) (sv-FI)", 2077);
+	ui.cmbLangID->addItem("Swedish (Sweden) (sv-SE)", 1053);
+	ui.cmbLangID->addItem("Syriac (syr-SY)", 1114);
+	ui.cmbLangID->addItem("Tajik (Cyrillic) (tg-Cyrl-TJ)", 1064);
+	ui.cmbLangID->addItem("Tamil (ta-IN)", 1097);
+	ui.cmbLangID->addItem("Tatar (tt-RU)", 1092);
+	ui.cmbLangID->addItem("Telugu (te-IN)", 1098);
+	ui.cmbLangID->addItem("Thai (th-TH)", 1054);
+	ui.cmbLangID->addItem("Tibetan (bo-CN)", 1105);
+	ui.cmbLangID->addItem("Turkish (tr-TR)", 1055);
+	ui.cmbLangID->addItem("Turkmen (tk-TM)", 1090);
+	ui.cmbLangID->addItem("Ukrainian (uk-UA)", 1058);
+	ui.cmbLangID->addItem("Upper Sorbian (hsb-DE)", 1070);
+	ui.cmbLangID->addItem("Urdu (India) (ur-IN)", 2080);
+	ui.cmbLangID->addItem("Urdu (Pakistan) (ur-PK)", 1056);
+	ui.cmbLangID->addItem("Uzbek (Cyrillic) (uz-Cyrl-UZ)", 2115);
+	ui.cmbLangID->addItem("Uzbek (Latin) (uz-Latn-UZ)", 1091);
+	ui.cmbLangID->addItem("Vietnamese (vi-VN)", 1066);
+	ui.cmbLangID->addItem("Welsh (cy-GB)", 1106);
+	ui.cmbLangID->addItem("Wolof (wo-SN)", 1160);
+	ui.cmbLangID->addItem("Xhosa (xh-ZA)", 1076);
+	ui.cmbLangID->addItem("Yi (ii-CN)", 1144);
+	ui.cmbLangID->addItem("Yoruba (yo-NG)", 1130);
+	ui.cmbLangID->addItem("Zulu (zu-ZA)", 1077);
 }

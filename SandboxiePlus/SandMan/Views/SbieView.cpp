@@ -17,6 +17,7 @@
 #include "../MiscHelpers/Archive/Archive.h"
 #include "../Windows/SettingsWindow.h"
 #include "../Windows/CompressDialog.h"
+#include "../Windows/ExtractDialog.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -1037,7 +1038,7 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 
 QString CSbieView::ImportSandbox()
 {
-	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
+	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
 	if (Path.isEmpty())
 		return "";
 
@@ -1071,24 +1072,27 @@ QString CSbieView::ImportSandbox()
 	StrPair PathName = Split2(Path, "/", true);
 	StrPair NameEx = Split2(PathName.second, ".", true);
 	QString Name = NameEx.first;
+	
+	CExtractDialog optWnd(Name, this);
+	if(!Password.isEmpty())
+		optWnd.ShowNoCrypt();
+	if (!theGUI->SafeExec(&optWnd) == 1)
+		return "";
+	Name = optWnd.GetName();
+	QString BoxRoot = optWnd.GetRoot();
 
 	CSandBoxPtr pBox;
-	for (;;) {
-		pBox = theAPI->GetBoxByName(Name);
-		if (pBox.isNull())
-			break;
-		Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("This name is already in use, please select an alternative box name"), QLineEdit::Normal, Name);
-		if (Name.isEmpty())
-			return "";
-	}
-
 	SB_PROGRESS Status = theAPI->CreateBox(Name);
 	if (!Status.IsError()) {
 		pBox = theAPI->GetBoxByName(Name);
 		if (pBox) {
+
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
-			if (!Password.isEmpty()) {
+			if (!BoxRoot.isEmpty())
+				pBox->SetFileRoot(BoxRoot);
+
+			if (!Password.isEmpty() && !optWnd.IsNoCrypt()) {
 				Status = pBoxEx->ImBoxCreate(ImageSize / 1024, Password);
 				if (!Status.IsError())
 					Status = pBoxEx->ImBoxMount(Password, true, true);
@@ -1096,8 +1100,12 @@ QString CSbieView::ImportSandbox()
 
 			if (!Status.IsError())
 				Status = pBoxEx->ImportBox(Path, Password);
+
+			// always overwrite restored FileRootPath
+			pBox->SetText("FileRootPath", BoxRoot);
 		}
 	}
+
 	if (Status.GetStatus() == OP_ASYNC) {
 		Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Path));
 		if (Status.IsError()) {
@@ -1399,7 +1407,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			Password = pwWnd.GetPassword();
 		}
 
-		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z)"));	
+		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + optWnd.GetFormat(), tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
 		if (Path.isEmpty())
 			return;
 
@@ -1411,21 +1419,39 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuRename)
 	{
-		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue);
-		if (Value.isEmpty() || Value == OldValue)
+		auto pBox = SandBoxes.first();
+		QString OldValue = pBox->GetName().replace("_", " ");
+		QString Alias = pBox->GetText("BoxAlias");
+		bool bAlias = false;
+		if (bAlias = !Alias.isEmpty())
+			OldValue = Alias;
+		bool bOk = false;
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", bAlias ? tr("Please enter a new alias for the Sandbox.") : tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue, &bOk);
+		if (!bOk || Value == OldValue)
 			return;
-		if (!TestNameAndWarn(Value))
+		if (!Value.isEmpty() && !TestNameAndWarn(Value))
 			return;
 
-		SB_STATUS Status = SandBoxes.first()->RenameBox(Value.replace(" ", "_"));
-		if (!Status.IsError())
+		bool bError = false;
+		if (bAlias || (bError = CSbieAPI::ValidateName(QString(Value).replace(" ", "_")).IsError()))
 		{
-			RenameItem(OldValue.replace(" ", "_"), Value.replace(" ", "_"));
-			if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(OldValue.replace(" ", "_"), Qt::CaseInsensitive) == 0)
-				theAPI->GetGlobalSettings()->SetText("DefaultBox", Value.replace(" ", "_"));
+			if (!bAlias && QMessageBox::question(this, "Sandboxie-Plus", tr("The entered name is not valid, do you want to set it as an alias instead?"), QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
+				return;
+			if (Value.isEmpty()) pBox->DelValue("BoxAlias");
+			else pBox->SetText("BoxAlias", Value);
+			pBox->UpdateDetails();
 		}
-		Results.append(Status);
+		else
+		{
+			SB_STATUS Status = pBox->RenameBox(Value.replace(" ", "_"));
+			if (!Status.IsError())
+			{
+				RenameItem(OldValue.replace(" ", "_"), Value.replace(" ", "_"));
+				if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(OldValue.replace(" ", "_"), Qt::CaseInsensitive) == 0)
+					theAPI->GetGlobalSettings()->SetText("DefaultBox", Value.replace(" ", "_"));
+			}
+			Results.append(Status);
+		}
 
 		SaveBoxGrouping();
 	}
@@ -1720,7 +1746,7 @@ void CSbieView::ShowOptions(const CSandBoxPtr& pBox)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pOptionsWnd == NULL) {
-		pBoxEx->m_pOptionsWnd = new COptionsWindow(pBox, pBox->GetName());
+		pBoxEx->m_pOptionsWnd = new COptionsWindow(pBox, pBoxEx->GetDisplayName());
 		connect(theGUI, SIGNAL(Closed()), pBoxEx->m_pOptionsWnd, SLOT(close()));
 		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pOptionsWnd = NULL;
@@ -1786,10 +1812,8 @@ void CSbieView::OnDoubleClicked(const CSandBoxPtr &pBox)
 
 	if (!pBox->IsEnabled())
 	{
-		if (QMessageBox("Sandboxie-Plus", tr("This sandbox is disabled or restricted to a group/user, do you want to edit it?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
-			return;
-		pBox->SetText("Enabled", "y");
-		return;
+		if (QMessageBox("Sandboxie-Plus", tr("This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+			pBox->SetText("Enabled", "y");// Fix #3999
 	}
 	
 	QString Action = pBox->GetText("DblClickAction");

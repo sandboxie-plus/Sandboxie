@@ -443,7 +443,7 @@ extern POOL *Driver_Pool;
 
 NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum);
 
-_FX VOID KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
+_FX BOOLEAN KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
 {
     TIME_FIELDS timeFiled = { 0 };
     const WCHAR* ptr = date_str;
@@ -464,8 +464,11 @@ _FX VOID KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
             timeFiled.Year = (CSHORT)_wtoi(ptr);
 
             RtlTimeFieldsToTime(&timeFiled, date);
+
+            return TRUE;
         }
     }
+    return FALSE;
 }
 
 // Example of __DATE__ string: "Jul 27 2012"
@@ -550,9 +553,11 @@ _FX NTSTATUS KphValidateCertificate()
 
     WCHAR* type = NULL;
     WCHAR* level = NULL;
+    WCHAR* options = NULL;
     LONG amount = 1;
     WCHAR* key = NULL;
     LARGE_INTEGER cert_date = { 0 };
+    LONG days = 0;
 
     Verify_CertInfo.State = 0; // clear
 
@@ -671,23 +676,60 @@ _FX NTSTATUS KphValidateCertificate()
         // Note: when parsing we may change the value of value, by adding \0's, hence we do all that after the hashing
         //
 
-        if (_wcsicmp(L"DATE", name) == 0 && cert_date.QuadPart == 0) {
+        if(CertDbg) DbgPrint("Cert Value: %S: %S\n", name, value);
+
+        if (_wcsicmp(L"DATE", name) == 0) {
+            if (cert_date.QuadPart != 0) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             // DD.MM.YYYY
-            KphParseDate(value, &cert_date);
+            if (KphParseDate(value, &cert_date)) {
+                // DD.MM.YYYY +Days
+                WCHAR* ptr = wcschr(value, L'+');
+                if (ptr)
+                    days = _wtol(ptr);
+            }
         }
-        else if (_wcsicmp(L"TYPE", name) == 0 && type == NULL) {
+        else if (_wcsicmp(L"DAYS", name) == 0) {
+            if (days != 0) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
+            days = _wtol(value);
+        }
+        else if (_wcsicmp(L"TYPE", name) == 0) {
             // TYPE-LEVEL
+            if (type != NULL) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             WCHAR* ptr = wcschr(value, L'-');
             if (ptr != NULL) {
                 *ptr++ = L'\0';
-                if(level == NULL) level = Mem_AllocString(Driver_Pool, ptr);
+                level = Mem_AllocString(Driver_Pool, ptr);
             }
             type = Mem_AllocString(Driver_Pool, value);
         }
-        else if (_wcsicmp(L"LEVEL", name) == 0 && level == NULL) {
+        else if (_wcsicmp(L"LEVEL", name) == 0) {
+            if (level != NULL) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             level = Mem_AllocString(Driver_Pool, value);
         }
-        else if (_wcsicmp(L"UPDATEKEY", name) == 0 && key == NULL) {
+        else if (_wcsicmp(L"OPTIONS", name) == 0) {
+            if (options != NULL) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
+            options = Mem_AllocString(Driver_Pool, value);
+        }
+        else if (_wcsicmp(L"UPDATEKEY", name) == 0) {
+            if (key != NULL) {
+                status = STATUS_BAD_FUNCTION_TABLE;
+                goto CleanupExit;
+            }
             key = Mem_AllocString(Driver_Pool, value);
         }
         else if (_wcsicmp(L"AMOUNT", name) == 0) {
@@ -710,7 +752,6 @@ _FX NTSTATUS KphValidateCertificate()
     next:
         status = Conf_Read_Line(stream, line, &line_num);
     }
-    
 
     if(!NT_SUCCESS(status = MyFinishHash(&hashObj, &hash, &hashSize)))
         goto CleanupExit;
@@ -840,14 +881,17 @@ _FX NTSTATUS KphValidateCertificate()
             Verify_CertInfo.level = eCertMaxLevel;
         else if (CERT_IS_TYPE(Verify_CertInfo, eCertEvaluation)) // in evaluation the level field holds the amount of days to allow evaluation for
         {
-            expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(level ? _wtoi(level) : 7), 0, 0); // x days, default 7
-            Verify_CertInfo.level = eCertAdvanced;
+            if(days) expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(days), 0, 0);
+            else expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(level ? _wtoi(level) : 7), 0, 0); // x days, default 7
+            Verify_CertInfo.level = eCertMaxLevel;
         }
         else if (!level || _wcsicmp(level, L"STANDARD") == 0) // not used, default does not have explicit level
             Verify_CertInfo.level = eCertStandard;
         else if (_wcsicmp(level, L"ADVANCED") == 0)
         {
-            if(Verify_CertInfo.type == eCertPatreon || Verify_CertInfo.type == eCertEntryPatreon)
+            if(Verify_CertInfo.type == eCertGreatPatreon)
+                Verify_CertInfo.level = eCertMaxLevel;
+            else if(Verify_CertInfo.type == eCertPatreon || Verify_CertInfo.type == eCertEntryPatreon)
                 Verify_CertInfo.level = eCertAdvanced1;
             else
                 Verify_CertInfo.level = eCertAdvanced;
@@ -859,7 +903,7 @@ _FX NTSTATUS KphValidateCertificate()
                 Verify_CertInfo.type = eCertEternal;
                 Verify_CertInfo.level = eCertMaxLevel;
             }
-            else if (_wcsicmp(level, L"LARGE") == 0 && cert_date.QuadPart < KphGetDate(1, 04, 2022)) { 
+            else if (_wcsicmp(level, L"LARGE") == 0 && cert_date.QuadPart < KphGetDate(1, 04, 2022)) { // initial batch of semi perpetual large certs
                 Verify_CertInfo.level = eCertAdvanced1;
                 expiration_date.QuadPart = -2;
             }
@@ -887,10 +931,57 @@ _FX NTSTATUS KphValidateCertificate()
         
         if(CertDbg)     DbgPrint("Sbie Cert level: %X\n", Verify_CertInfo.level);
 
+        if (options) {
+
+             if(CertDbg)     DbgPrint("Sbie Cert options: %S\n", options);
+
+             for (WCHAR* option = options; ; )
+             {
+                 while (*option == L' ' || *option == L'\t') option++;
+                 WCHAR* end = wcschr(option, L',');
+                 if (!end) end = wcschr(option, L'\0');
+
+                 //if (CertDbg)   DbgPrint("Sbie Cert option: %.*S\n", end - option, option);
+
+                 if (_wcsnicmp(L"SBOX", option, end - option) == 0)
+                     Verify_CertInfo.opt_sec = 1;
+                 else if (_wcsnicmp(L"EBOX", option, end - option) == 0)
+                     Verify_CertInfo.opt_enc = 1;
+                 else if (_wcsnicmp(L"NETI", option, end - option) == 0)
+                     Verify_CertInfo.opt_net = 1;
+                 else if (_wcsnicmp(L"DESK", option, end - option) == 0)
+                     Verify_CertInfo.opt_desk = 1;
+                 else if (CertDbg)   DbgPrint("Sbie Cert UNKNOWN option: %.*S\n", (ULONG)(end - option), option);
+
+                 if (*end == L'\0')
+                     break;
+                 option = end + 1;
+             }
+        }
+        else {
+
+            switch (Verify_CertInfo.level)
+            {
+                case eCertMaxLevel:
+                //case eCertUltimate:
+                    Verify_CertInfo.opt_desk = 1;
+                case eCertAdvanced:
+                    Verify_CertInfo.opt_net = 1;
+                case eCertAdvanced1:
+                    Verify_CertInfo.opt_enc = 1;
+                case eCertStandard2:
+                case eCertStandard:
+                    Verify_CertInfo.opt_sec = 1;
+                //case eCertBasic:
+            }
+        }
+
         if (CERT_IS_TYPE(Verify_CertInfo, eCertEternal))
             expiration_date.QuadPart = -1; // at the end of time (never)
-        else if(!expiration_date.QuadPart) 
-            expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 1); // default 1 year, unless set differently already
+        else if (!expiration_date.QuadPart) {
+            if (days) expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(days), 0, 0);
+            else expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 1); // default 1 year, unless set differently already
+        }
 
         // check if this is a subscription type certificate
         BOOLEAN isSubscription = CERT_IS_SUBSCRIPTION(Verify_CertInfo);
@@ -934,6 +1025,7 @@ CleanupExit:
 
     if (type)       Mem_FreeString(type);
     if (level)      Mem_FreeString(level);
+    if (options)    Mem_FreeString(options);
     if (key)        Mem_FreeString(key);
 
                     MyFreeHash(&hashObj);
@@ -1091,7 +1183,9 @@ void InitFwUuid()
         for (; i < 16; i++)
             ptr = hexbyte(uuid[i], ptr);
         *ptr++ = 0;
-
-        //DbgPrint("sbie FW-UUID: %S\n", g_uuid_str);
     }
+    else // fallback to null guid on error
+        wcscpy(g_uuid_str, L"00000000-0000-0000-0000-000000000000");
+    
+    DbgPrint("sbie FW-UUID: %S\n", g_uuid_str);
 }

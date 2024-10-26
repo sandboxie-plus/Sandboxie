@@ -190,7 +190,7 @@ LONG SbieApi_EnumProcessEx(
 
 SBIEAPI_EXPORT
 LONG SbieApi_SessionLeader(
-    HANDLE TokenHandle,
+    ULONG session_id,
     HANDLE *ProcessId);
 
 SBIEAPI_EXPORT
@@ -367,6 +367,12 @@ ULONG SbieApi_QueryConfNumber(
     const WCHAR *section_name,      // WCHAR [66]
     const WCHAR *setting_name,      // WCHAR [66]
     ULONG def);
+
+SBIEAPI_EXPORT
+ULONG64 SbieApi_QueryConfNumber64(
+    const WCHAR *section_name,      // WCHAR [66]
+    const WCHAR *setting_name,      // WCHAR [66]
+    ULONG64 def);
 
 SBIEAPI_EXPORT
 LONG SbieApi_EnumBoxes(

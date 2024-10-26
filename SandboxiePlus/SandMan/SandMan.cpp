@@ -1315,12 +1315,18 @@ void CSandMan::OnRestartAsAdmin()
 	se.nShow = SW_HIDE;
 	se.fMask = 0;
 	ShellExecuteEx(&se);
-	OnExit();
+	m_bExit = true;
+	close();
 }
 
 void CSandMan::OnExit()
 {
 	m_bExit = true;
+	if (theConf->GetBool("Options/TerminateWhenExit", false)) {
+		if (theAPI->IsConnected()) {
+			theAPI->TerminateAll(!theConf->GetBool("Options/ExceptWhenAutoTerminate", false));
+		}
+	}
 	close();
 }
 
@@ -1636,6 +1642,53 @@ void CSandMan::OnMessage(const QString& MsgData)
 		setWindowState(Qt::WindowActive);
 		SetForegroundWindow(MainWndHandle);
 	}
+	else if (Message.left(9) == "AddForce:")
+	{
+		QString response = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
+		if (!response.isEmpty())
+		{
+			if (theAPI->GetBoxByName(response) != NULL) {
+				QString dirOrFile = Message.mid(9).replace("\"", "").trimmed();
+				QFileInfo fileInfo(dirOrFile);
+				if (Message.right(1) == "\\" || !Message.contains(".", Qt::CaseInsensitive)) {
+					theAPI->GetBoxByName(response)->AppendText("ForceFolder", dirOrFile);
+				}
+				else {
+					if (fileInfo.exists() && fileInfo.isDir()) {
+						theAPI->GetBoxByName(response)->AppendText("ForceFolder", dirOrFile);
+					}
+					else if (fileInfo.exists() && fileInfo.isExecutable()) {
+						theAPI->GetBoxByName(response)->AppendText("ForceProcess", dirOrFile.mid(dirOrFile.lastIndexOf("\\") + 1));
+					}
+					else {
+						QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("The value is not an existing directory or executable."), QMessageBox::Ok, 0);
+					}
+				}
+			}
+			else {
+				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name! Nothing was changed."), QMessageBox::Ok, 0);
+			}
+		}
+		else {
+			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("User canceled this operation."), QMessageBox::Yes, 0);
+		}
+	}
+	else if (Message.left(8) == "AddOpen:")
+	{
+		QString response = QInputDialog::getText(g_GUIParent, tr("Which box you want to add in?"), tr("Type the box name which you are going to set:"));
+		if (!response.isEmpty())
+		{
+			if (theAPI->GetBoxByName(response) != NULL) {
+					theAPI->GetBoxByName(response)->AppendText("OpenFilePath", Message.mid(8).replace("\"", ""));
+			}
+			else {
+				QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("You typed a wrong box name! Nothing was changed."), QMessageBox::Ok, 0);
+			}
+		}
+		else {
+			QMessageBox::warning(g_GUIParent, tr("Sandboxie-Plus Warning"), tr("User canceled this operation."), QMessageBox::Yes, 0);
+		}
+	}
 	else if (Message.left(4) == "Run:")
 	{
 		QString BoxName;
@@ -1716,8 +1769,8 @@ bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const 
 SB_RESULT(quint32) CSandMan::RunStart(const QString& BoxName, const QString& Command, CSbieAPI::EStartFlags Flags, const QString& WorkingDir, QProcess* pProcess)
 {
 	auto pBoxEx = theAPI->GetBoxByName(BoxName).objectCast<CSandBoxPlus>();
-	if (pBoxEx && pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty()) {
-
+	if (pBoxEx && pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty()) 
+	{
 		SB_STATUS Status = ImBoxMount(pBoxEx, true);
 		if (Status.IsError())
 			return Status;
@@ -2532,7 +2585,7 @@ void CSandMan::OnStatusChanged()
 			CheckSupport();
 
 		int WizardLevel = abs(theConf->GetInt("Options/WizardLevel", 0));
-		if (WizardLevel < (theConf->GetInt("Options/CheckForUpdates", 2) != 1 ? SETUP_LVL_2 : SETUP_LVL_1)) {
+		if (WizardLevel < (!g_CertInfo.active ? SETUP_LVL_3 : (theConf->GetInt("Options/CheckForUpdates", 2) != 1 ? SETUP_LVL_2 : SETUP_LVL_1))) {
 			if (!CSetupWizard::ShowWizard(WizardLevel)) { // if user canceled, mark that and do not show again, until there is something new
 				if(QMessageBox::question(NULL, "Sandboxie-Plus", tr("Do you want the setup wizard to be omitted?"), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::Yes)
 					theConf->SetValue("Options/WizardLevel", -SETUP_LVL_CURRENT);
@@ -2594,11 +2647,17 @@ void CSandMan::CheckCompat(QObject* receiver, const char* member)
 void CSandMan::OpenCompat()
 {
 	if (m_SbieTemplates->GetCheckState())
-	{
-		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
-		connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
-		pSettingsWindow->showTab("AppCompat");
-	}
+		OpenSettings("AppCompat");
+}
+
+void CSandMan::OpenSettings(const QString& Tab)
+{
+	CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
+	connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
+	if (!Tab.isEmpty())
+		pSettingsWindow->showTab(Tab);
+	else
+		CSandMan::SafeShow(pSettingsWindow);
 }
 
 void CSandMan::UpdateState()
@@ -2674,9 +2733,7 @@ void CSandMan::CheckSupport()
 	if (!ReminderShown && (g_CertInfo.expired || (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))) && !theConf->GetBool("Options/NoSupportCheck", false))
 	{
 		ReminderShown = true;
-		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
-		connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
-		pSettingsWindow->showTab("Support");
+		OpenSettings("Support");
 	}
 }
 
@@ -2977,7 +3034,7 @@ bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 	QString Message;
 	if (iType == 1 || iType == 2)
 	{
-		if (CERT_IS_LEVEL(g_CertInfo, iType == 1 ? eCertAdvanced1 : eCertAdvanced))
+		if (iType == 1 ? g_CertInfo.opt_enc : g_CertInfo.opt_net)
 			return true;
 
 		Message = tr("The selected feature requires an <b>advanced</b> supporter certificate.");
@@ -2990,7 +3047,7 @@ bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 	}
 	else
 	{
-		if (g_CertInfo.active)
+		if (iType == -1 ? g_CertInfo.active : g_CertInfo.opt_sec)
 			return true;
 
 		if(iType == 2)
@@ -3146,7 +3203,7 @@ void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 Req
 	{
 		QVariantMap Ret;
 		Ret["retval"] = (theAPI->IsStarting(ClientPid) || CSupportDialog::ShowDialog()) ? 1 : 0;
-		theAPI->SendReplyData(RequestId, Ret);
+		theAPI->SendQueueRpl(RequestId, Ret);
 		return;
 	}
 	m_pPopUpWindow->AddUserPrompt(RequestId, Data, ClientPid);

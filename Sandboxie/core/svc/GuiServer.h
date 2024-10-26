@@ -34,6 +34,8 @@ public:
 
     static GuiServer *GetInstance();
 
+    ULONG StartAsync(ULONG session_id, HANDLE hEvent);
+
     bool InitProcess(HANDLE hProcess, ULONG process_id, ULONG session_id,
                      BOOLEAN add_to_job);
 

@@ -528,7 +528,7 @@ SB_STATUS CSbieAPI__CallServer(SSbieAPI* m, MSG_HEADER* req, CSbieAPI::SScopedVo
 			return SB_ERR(SB_ServiceFail, QVariantList() << QString("reply %1").arg(status, 8, 16), status); // 2203
 		}
 	}
-	prpl->Assign(rpl);
+	prpl->Assign(rpl, Buffer - (UCHAR*)rpl);
 
 	return SB_OK;
 }
@@ -559,7 +559,7 @@ SB_STATUS CSbieAPI__QueueCreate(SSbieAPI* m, const WCHAR* QueueName, HANDLE *out
 	return SB_OK;
 }
 
-bool CSbieAPI::GetQueue()
+bool CSbieAPI::GetQueueReq()
 {
 	QUEUE_GETREQ_REQ req;
 	req.h.length = sizeof(QUEUE_GETREQ_REQ);
@@ -606,7 +606,7 @@ bool CSbieAPI::GetQueue()
 	return false;
 }
 
-void CSbieAPI::SendReplyData(quint32 RequestId, const QVariantMap& Result)
+void CSbieAPI::SendQueueRpl(quint32 RequestId, const QVariantMap& Result)
 {
 	QByteArray Data;
 
@@ -678,7 +678,7 @@ void CSbieAPI::run()
 
 		if (EventHandle != NULL && WaitForSingleObject(EventHandle, 0) == 0)
 		{
-			while(GetQueue())
+			while(GetQueueReq())
 				Done++;
 		}
 
@@ -770,8 +770,6 @@ SB_STATUS CSbieAPI::TakeOver()
 
 	memset(parms, 0, sizeof(parms));
 	args->func_code = API_SESSION_LEADER;
-	args->token_handle.val64 = 0; // (ULONG64)(ULONG_PTR)GetCurrentProcessToken();
-	args->process_id.val64   = 0; // (ULONG64)(ULONG_PTR)&ResultValue;
 	
 	NTSTATUS status = m->IoControl(parms);
 	if (!NT_SUCCESS(status))
@@ -1312,7 +1310,7 @@ QString CSbieAPI::SbieIniGet2(const QString& Section, const QString& Setting, qu
 
 SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 {
-	if (BoxName.length() > (BOXNAME_COUNT - 2))
+	if (BoxName.length() > (BOXNAME_COUNT - 2) || BoxName.isEmpty())
 		return SB_ERR(SB_NameLenLimit);
 
 	/* invalid file name characters on windows
@@ -2206,19 +2204,23 @@ QString CSbieAPI::GetFeatureStr()
 
 	QStringList str;
 	if (flags & SBIE_FEATURE_FLAG_WFP)
-		str.append("WFP");
+		str.append("WFP");		// Windows Filtering Platform
 	if (flags & SBIE_FEATURE_FLAG_OB_CALLBACKS)
-		str.append("ObCB");
+		str.append("ObCB");		// Object Callbacks
 	if (flags & SBIE_FEATURE_FLAG_SBIE_LOGIN)
-		str.append("SbL");
+		str.append("SbL");		// Sandboxie Login
 	if (flags & SBIE_FEATURE_FLAG_SECURITY_MODE)
-		str.append("SMod");
+		str.append("SMod");		// Security Mode
 	if (flags & SBIE_FEATURE_FLAG_PRIVACY_MODE)
-		str.append("PMod");
+		str.append("PMod");		// Privacy Mode
 	if (flags & SBIE_FEATURE_FLAG_COMPARTMENTS)
-		str.append("AppC");
+		str.append("AppC");		// Application Compartment
 	if (flags & SBIE_FEATURE_FLAG_WIN32K_HOOK)
-		str.append("W32k");
+		str.append("W32k");		// Win32 Hooks
+	if (flags & SBIE_FEATURE_FLAG_ENCRYPTION)
+		str.append("EBox");		// Encrypted Boxes
+	if (flags & SBIE_FEATURE_FLAG_NET_PROXY)
+		str.append("NetI");		// Network Interception
 
 	return str.join(",");
 }

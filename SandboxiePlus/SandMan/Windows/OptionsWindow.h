@@ -29,7 +29,8 @@ public:
 		eProcess,
 		ePath,
 		eText,
-		eTemplate
+		eTemplate,
+		eParent
 	};
 
 signals:
@@ -84,7 +85,9 @@ private slots:
 	void OnGroupsChanged(QTreeWidgetItem* pItem, int Index) { m_GroupsChanged = true;  OnOptChanged(); }
 
 	void OnForceProg();
-	void OnForceBrowse();
+	void OnForceBrowseProg();
+	void OnForceChild();
+	void OnForceBrowseChild();
 	void OnForceDir();
 	void OnDelForce();
 	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }
@@ -94,6 +97,7 @@ private slots:
 	void OnBreakoutProg();
 	void OnBreakoutBrowse();
 	void OnBreakoutDir();
+	void OnBreakoutDoc();
 	void OnDelBreakout();
 	void OnShowBreakoutTmpl()		{ LoadBreakoutTmpl(true); }
 	void OnBreakoutChanged(QTreeWidgetItem *pItem, int);
@@ -210,6 +214,8 @@ private slots:
 	void OnAddDeleteCmd();
 	void OnAddTerminateCmd();
 	void OnDelAuto();
+
+	void OnDumpFW();
 
 	void OnAddProcess();
 	void OnDelProcess();
@@ -631,5 +637,7 @@ private:
 		bool Changed;
 	};
 	QMap<QCheckBox*, SDbgOpt> m_DebugOptions;
+
+	void InitLangID();
 };
 

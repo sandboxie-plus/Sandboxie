@@ -24,6 +24,8 @@
 #include "queueserver.h"
 #include "queuewire.h"
 #include "core/dll/sbieapi.h"
+#include "userserver.h"
+#include "GuiServer.h"
 
 
 //---------------------------------------------------------------------------
@@ -110,6 +112,10 @@ MSG_HEADER *QueueServer::Handler(void *_this, MSG_HEADER *msg)
     QueueServer *pThis = (QueueServer *)_this;
 
     HANDLE idProcess = (HANDLE)(ULONG_PTR)PipeServer::GetCallerProcessId();
+
+    if (msg->msgid == MSGID_QUEUE_STARTUP) {
+        return pThis->StartupHandler(msg, idProcess);
+    }
 
     if (msg->msgid == MSGID_QUEUE_NOTIFICATION) {
         pThis->NotifyHandler(idProcess);
@@ -951,4 +957,90 @@ void QueueServer::DeleteRequestObj(LIST *RequestsList, void *_RequestObj)
         HeapFree(m_heap, 0, RequestObj->rpl_data_ptr);
     List_Remove(RequestsList, RequestObj);
     HeapFree(m_heap, 0, RequestObj);
+}
+
+
+//---------------------------------------------------------------------------
+// StartupHandler
+//---------------------------------------------------------------------------
+
+
+MSG_HEADER *QueueServer::StartupHandler(MSG_HEADER *msg, HANDLE idProcess)
+{
+    WCHAR *QueueName = NULL;
+    HANDLE hProcess = NULL;
+    HANDLE hEvent = NULL;
+    ULONG status;
+
+    EnterCriticalSection(&m_lock);
+
+    QUEUE_CREATE_REQ *req = (QUEUE_CREATE_REQ *)msg;
+    if (req->h.length < sizeof(QUEUE_CREATE_REQ)) {
+        status = STATUS_INVALID_PARAMETER;
+        goto finish;
+    }
+
+    //
+    //
+    //
+
+    QueueName = MakeQueueName(idProcess, req->queue_name, &status);
+    if (! QueueName)
+        goto finish;
+
+    QUEUE_OBJ *QueueObj = (QUEUE_OBJ *)FindQueueObj(QueueName);
+    if (QueueObj) { // already exists
+        status = STATUS_SUCCESS;
+        goto finish;
+    }
+
+    status = OpenProcess(idProcess, &hProcess,
+                         PROCESS_DUP_HANDLE | PROCESS_QUERY_INFORMATION);
+    if (! NT_SUCCESS(status))
+        goto finish;
+
+    status = DuplicateEvent(hProcess, req->event_handle, &hEvent);
+    if (! NT_SUCCESS(status))
+        goto finish;
+
+    //
+    //
+    //
+
+    ULONG session_id;
+    if (!NT_SUCCESS(SbieApi_QueryProcess(idProcess, NULL, NULL, NULL, &session_id))) {
+        status = STATUS_ACCESS_DENIED;
+        goto finish;
+    }
+
+    if (_wcsnicmp(req->queue_name, L"*USERPROXY", 10) == 0) {
+
+        status = UserServer::GetInstance()->StartAsync(session_id, hEvent);
+    }
+    else if (_wcsnicmp(req->queue_name, L"*GUIPROXY", 9) == 0) {
+
+        status = GuiServer::GetInstance()->StartAsync(session_id, hEvent);
+    }
+    else {
+
+        status = STATUS_INVALID_PARAMETER;
+    }
+
+    if (NT_SUCCESS(status))
+        hEvent = NULL;
+
+finish:
+
+    LeaveCriticalSection(&m_lock);
+
+    if (hEvent)
+        CloseHandle(hEvent);
+
+    if (hProcess)
+        CloseHandle(hProcess);
+
+    if (QueueName)
+        HeapFree(m_heap, 0, QueueName);
+
+    return SHORT_REPLY(status);
 }

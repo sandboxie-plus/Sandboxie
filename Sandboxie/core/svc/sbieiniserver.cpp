@@ -728,7 +728,7 @@ ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, co
 
     if (SbieApi_QueryConfBool(Section, L"EditAdminOnly", FALSE)) {
 
-        if (! TokenIsAdmin(hToken, true)) {
+        if (! TokenIsAdmin(hToken)) {
             CloseHandle(hToken);
             return STATUS_LOGON_NOT_GRANTED;
         }
@@ -2275,7 +2275,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
     if (ok) {
 
         HANDLE SbieCtrlProcessId;
-        SbieApi_SessionLeader(hToken, &SbieCtrlProcessId);
+        SbieApi_SessionLeader(m_session_id, &SbieCtrlProcessId);
         if (SbieCtrlProcessId) {
             status = STATUS_IMAGE_ALREADY_LOADED;
             ok = FALSE;

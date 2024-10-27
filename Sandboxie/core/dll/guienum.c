@@ -234,6 +234,9 @@ _FX BOOLEAN Gui_InitEnum(HMODULE module)
     // hook desktop APIs
     //
 
+    if (SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE))
+        return TRUE;
+
     SBIEDLL_HOOK_GUI(EnumDesktopsW);
     SBIEDLL_HOOK_GUI(EnumDesktopsA);
     SBIEDLL_HOOK_GUI(OpenDesktopW);
@@ -592,9 +595,9 @@ _FX HANDLE Gui_CreateWindowStationW (void *lpwinsta, DWORD dwFlags, ACCESS_MASK 
     if (myHandle)
         return myHandle;
 
-    extern HANDLE Sandboxie_WinSta;
-    if(Sandboxie_WinSta && (Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)))
-        return Sandboxie_WinSta;
+    extern HANDLE Gui_Dummy_WinSta;
+    if(Gui_Dummy_WinSta && (Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)))
+        return Gui_Dummy_WinSta;
 
     SbieApi_Log(2205, L"CreateWindowStation");
     return 0;
@@ -614,9 +617,9 @@ _FX HANDLE Gui_CreateWindowStationA (void *lpwinsta, DWORD dwFlags, ACCESS_MASK 
     if (myHandle)
         return myHandle;
     
-    extern HANDLE Sandboxie_WinSta;
-    if(Sandboxie_WinSta && (Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)))
-        return Sandboxie_WinSta;
+    extern HANDLE Gui_Dummy_WinSta;
+    if(Gui_Dummy_WinSta && (Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)))
+        return Gui_Dummy_WinSta;
 
     SbieApi_Log(2205, L"CreateWindowStation");
     return 0;

@@ -141,6 +141,12 @@ void CSandBox::SetBoxPaths(const QString& FilePath, const QString& RegPath, cons
 	m_IpcPath = IpcPath;
 }
 
+void CSandBox::SetFileRoot(const QString& FilePath)
+{
+	SetText("FileRootPath", FilePath);
+	m_pAPI->UpdateBoxPaths(this);
+}
+
 SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 {
 #ifdef _DEBUG

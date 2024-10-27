@@ -168,9 +168,9 @@ _FX BOX *Process_GetForcedStartBox(
     BOOLEAN same_image_name;
 
 
-	void* nbuf;
-	ULONG nlen;
-	WCHAR* ParentName;
+	void* nbuf = NULL;
+	ULONG nlen = 0;
+	WCHAR* ParentName = NULL;
 
     check_force = TRUE;
 
@@ -221,8 +221,15 @@ _FX BOX *Process_GetForcedStartBox(
         return NULL;
     }
 
-    Process_GetProcessName(
-		Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &ParentName);
+    //
+    // initialize ParentName but only if the parent is not a system process
+    // 
+
+    if (!MyIsProcessRunningAsSystemAccount(ParentId)) {
+
+        Process_GetProcessName(
+            Driver_Pool, (ULONG_PTR)ParentId, &nbuf, &nlen, &ParentName);
+    }
 
     //
     // initialize some more state before checking process

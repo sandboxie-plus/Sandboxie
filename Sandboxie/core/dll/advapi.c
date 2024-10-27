@@ -244,8 +244,9 @@ _FX BOOLEAN AdvApi_Init(HMODULE module)
     // only hook SetSecurityInfo if this is Chrome.  Outlook 2013 uses delayed loading and will cause infinite callbacks
     // Starting with Win 10, we only want to hook ntmarta!SetSecurityInfo. Do NOT hook advapi!SetSecurityInfo. Delay loading for advapi will cause infinite recursion.
     // Note: the infinite recursion issue has been resolved int 5.43
-    if (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE) 
-		|| (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)) {
+    if ((Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE) 
+        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER))
+        && !SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE)) {
         SetSecurityInfo = __sys_SetSecurityInfo;
         GetSecurityInfo = __sys_GetSecurityInfo;
         SBIEDLL_HOOK(AdvApi_, SetSecurityInfo);
@@ -494,28 +495,9 @@ _FX ULONG AdvApi_CreateRestrictedToken(
 
 }
 
-
-HANDLE Sandboxie_WinSta = 0;
-
-BOOL CALLBACK myEnumWindowStationProc(
-    _In_ LPTSTR lpszWindowStation,
-    _In_ LPARAM lParam);
-
-// Get Sandbox Dummy WindowStation Handle
-BOOL CALLBACK myEnumWindowStationProc(
-    _In_ LPTSTR lpszWindowStation,
-    _In_ LPARAM lParam)
-{
-    if ((!lpszWindowStation) || (!__sys_OpenWindowStationW)) {
-        return FALSE;
-    }
-    if (!_wcsnicmp(lpszWindowStation, L"Sandbox", 7)) {
-        Sandboxie_WinSta = __sys_OpenWindowStationW(lpszWindowStation, 1, WINSTA_ALL_ACCESS | STANDARD_RIGHTS_REQUIRED);
-        return FALSE;
-    }
-    return TRUE;
-}
-
+//---------------------------------------------------------------------------
+// AdvApi_GetSecurityInfo
+//---------------------------------------------------------------------------
 
 // Chrome 52+ now needs to be able to create a WindowStation and Desktop for its sandbox
 // GetSecurityInfo will fail when chrome tries to do a DACL read on the default WindowStation.
@@ -536,16 +518,10 @@ _FX DWORD AdvApi_GetSecurityInfo(
     DWORD rc = 0;
     rc = __sys_GetSecurityInfo(handle, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
 
-    if (rc && ObjectType == SE_WINDOW_OBJECT && SecurityInfo == DACL_SECURITY_INFORMATION) {
-        __sys_EnumWindowStationsW = (P_EnumWindowStations)Ldr_GetProcAddrNew(L"User32.dll", L"EnumWindowStationsW", "EnumWindowStationsW");
-        __sys_OpenWindowStationW = (P_OpenWindowStationW)Ldr_GetProcAddrNew(L"User32.dll", L"OpenWindowStationW", "OpenWindowStationW"); // used by myEnumWindowStationProc
-        if (!Sandboxie_WinSta) {
-            if (__sys_EnumWindowStationsW) {
-                rc = __sys_EnumWindowStationsW(myEnumWindowStationProc, 0);
-            }
-        }
-        rc = __sys_GetSecurityInfo(Sandboxie_WinSta, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
-    }
+    extern HWINSTA Gui_Dummy_WinSta;
+    if (rc && ObjectType == SE_WINDOW_OBJECT && SecurityInfo == DACL_SECURITY_INFORMATION && Gui_Dummy_WinSta) 
+        rc = __sys_GetSecurityInfo(Gui_Dummy_WinSta, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
+
     return rc;
 }
 
@@ -681,6 +657,7 @@ _FX ULONG AdvApi_GetEffectiveRightsFromAclW(
 //---------------------------------------------------------------------------
 // Ntmarta_Init
 //---------------------------------------------------------------------------
+
 DWORD Ntmarta_GetSecurityInfo(
     HANDLE handle,
     SE_OBJECT_TYPE ObjectType,
@@ -706,8 +683,9 @@ _FX BOOLEAN Ntmarta_Init(HMODULE module)
 #define GETPROC2(x,s) __sys_Ntmarta_##x##s = (P_##x) Ldr_GetProcAddrNew(DllName_ntmarta, L#x L#s,#x #s);
 
     GETPROC2(GetSecurityInfo, );
-    if (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE)
-		|| (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)) {
+    if ((Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE) 
+        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)) 
+        && !SbieApi_QueryConfBool(NULL, L"OpenWndStation", FALSE)) {
 
         GetSecurityInfo = __sys_Ntmarta_GetSecurityInfo;
         if (GetSecurityInfo)
@@ -746,6 +724,12 @@ _FX BOOLEAN Ntmarta_Init(HMODULE module)
     return TRUE;
 }
 
+
+//---------------------------------------------------------------------------
+// Ntmarta_GetSecurityInfo
+//---------------------------------------------------------------------------
+
+
 _FX DWORD Ntmarta_GetSecurityInfo(
     HANDLE handle,
     SE_OBJECT_TYPE ObjectType,
@@ -759,16 +743,10 @@ _FX DWORD Ntmarta_GetSecurityInfo(
     DWORD rc = 0;
     rc = __sys_Ntmarta_GetSecurityInfo(handle, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
 
-    if (rc && ObjectType == SE_WINDOW_OBJECT && SecurityInfo == DACL_SECURITY_INFORMATION) {
-        __sys_EnumWindowStationsW = (P_EnumWindowStations)Ldr_GetProcAddrNew(L"User32.dll", L"EnumWindowStationsW", "EnumWindowStationsW");
-        __sys_OpenWindowStationW = (P_OpenWindowStationW)Ldr_GetProcAddrNew(L"User32.dll", L"OpenWindowStationW", "OpenWindowStationW"); // used by myEnumWindowStationProc
-        if (!Sandboxie_WinSta) {
-            if (__sys_EnumWindowStationsW) {
-                rc = __sys_EnumWindowStationsW(myEnumWindowStationProc, 0);
-            }
-        }
-        rc = __sys_Ntmarta_GetSecurityInfo(Sandboxie_WinSta, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
-    }
+    extern HWINSTA Gui_Dummy_WinSta;
+    if (rc && ObjectType == SE_WINDOW_OBJECT && SecurityInfo == DACL_SECURITY_INFORMATION && Gui_Dummy_WinSta)
+        rc = __sys_Ntmarta_GetSecurityInfo(Gui_Dummy_WinSta, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
+    
     return rc;
 }
 

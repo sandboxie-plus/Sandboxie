@@ -17,6 +17,7 @@
 #include "../MiscHelpers/Archive/Archive.h"
 #include "../Windows/SettingsWindow.h"
 #include "../Windows/CompressDialog.h"
+#include "../Windows/ExtractDialog.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -1037,7 +1038,7 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 
 QString CSbieView::ImportSandbox()
 {
-	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
+	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
 	if (Path.isEmpty())
 		return "";
 
@@ -1071,39 +1072,40 @@ QString CSbieView::ImportSandbox()
 	StrPair PathName = Split2(Path, "/", true);
 	StrPair NameEx = Split2(PathName.second, ".", true);
 	QString Name = NameEx.first;
+	
+	CExtractDialog optWnd(Name, this);
+	if(!Password.isEmpty())
+		optWnd.ShowNoCrypt();
+	if (!theGUI->SafeExec(&optWnd) == 1)
+		return "";
+	Name = optWnd.GetName();
+	QString BoxRoot = optWnd.GetRoot();
 
 	CSandBoxPtr pBox;
-	for (;;) {
-		pBox = theAPI->GetBoxByName(Name);
-		if (pBox.isNull())
-			break;
-		Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("This name is already in use, please select an alternative box name"), QLineEdit::Normal, Name);
-		if (Name.isEmpty())
-			return "";
-	}
-
 	SB_PROGRESS Status = theAPI->CreateBox(Name);
 	if (!Status.IsError()) {
 		pBox = theAPI->GetBoxByName(Name);
 		if (pBox) {
-			QString rootname = "";
-			if (QMessageBox::question(this, tr("Importing Sandbox"), tr("Do you want to select custom root folder?"), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
-				rootname=QFileDialog::getExistingDirectory(this);
-			}
+
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
-			if (!Password.isEmpty()) {
+			if (!BoxRoot.isEmpty())
+				pBox->SetFileRoot(BoxRoot);
+
+			if (!Password.isEmpty() && !optWnd.IsNoCrypt()) {
 				Status = pBoxEx->ImBoxCreate(ImageSize / 1024, Password);
 				if (!Status.IsError())
 					Status = pBoxEx->ImBoxMount(Password, true, true);
 			}
 
 			if (!Status.IsError())
-				Status = pBoxEx->ImportBox(Path,rootname,Password);
-			if(!rootname.isEmpty())
-				pBox->SetText("FileRootPath", rootname);
+				Status = pBoxEx->ImportBox(Path, Password);
+
+			// always overwrite restored FileRootPath
+			pBox->SetText("FileRootPath", BoxRoot);
 		}
 	}
+
 	if (Status.GetStatus() == OP_ASYNC) {
 		Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Path));
 		if (Status.IsError()) {
@@ -1405,7 +1407,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			Password = pwWnd.GetPassword();
 		}
 
-		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z)"));	
+		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + optWnd.GetFormat(), tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
 		if (Path.isEmpty())
 			return;
 

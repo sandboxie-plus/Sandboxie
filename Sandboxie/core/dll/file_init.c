@@ -285,12 +285,13 @@ _FX BOOLEAN File_Init(void)
     //
     // support for Google Chrome flash plugin process
     //
+    // $Workaround$ - 3rd party fix
+    //void *GetVolumeInformationW =
+    //    GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
+    //        "GetVolumeInformationW");
+    //SBIEDLL_HOOK(File_,GetVolumeInformationW);
 
-    void *GetVolumeInformationW =
-        GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
-            "GetVolumeInformationW");
-    SBIEDLL_HOOK(File_,GetVolumeInformationW);
-
+    // $Workaround$ - 3rd party fix
     void *WriteProcessMemory =
         GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
             "WriteProcessMemory");

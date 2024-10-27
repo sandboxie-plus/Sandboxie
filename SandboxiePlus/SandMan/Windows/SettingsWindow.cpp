@@ -17,6 +17,7 @@
 #include <qfontdialog.h>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "Helpers/TabOrder.h"
 
 
 #include <windows.h>
@@ -283,6 +284,14 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 			ui.cmbRamLetter->addItem(QString("%1:\\").arg(QChar(search)));
 	}
 
+	ui.fileRoot->addItem("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+	ui.fileRoot->addItem("\\??\\%SystemDrive%\\Sandbox\\%SANDBOX%");
+    ui.fileRoot->addItem("\\??\\%SystemDrive%\\Users\\%USER%\\Sandbox\\%SANDBOX%");
+
+	ui.regRoot->addItem("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
+
+	ui.ipcRoot->addItem("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
+
 	CPathEdit* pEditor = new CPathEdit();
 	ui.txtEditor->parentWidget()->layout()->replaceWidget(ui.txtEditor, pEditor);
 	ui.txtEditor->deleteLater();
@@ -416,10 +425,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	// Advanced Config
 	connect(ui.cmbDefault, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkAutoRoot, SIGNAL(stateChanged(int)), this, SLOT(OnRootChanged())); // not sbie ini
-	connect(ui.fileRoot, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
-	connect(ui.regRoot, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
-	connect(ui.ipcRoot, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
-
+	connect(ui.fileRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkLockBox, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.regRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+	connect(ui.ipcRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+	
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	if (CurrentVersion.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
@@ -582,7 +592,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
 	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
+	if (!g_CertInfo.active) {
 		//COptionsWindow__AddCertIcon(ui.chkUpdateTemplates);
 		COptionsWindow__AddCertIcon(ui.chkUpdateIssues);
 		COptionsWindow__AddCertIcon(ui.chkRamDisk);
@@ -619,6 +629,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		this->addAction(pSetTree);
 	}
 	m_pSearch->setPlaceholderText(tr("Search for settings"));
+
+	SetTabOrder(this);
 }
 
 void CSettingsWindow::ApplyIniEditFont()
@@ -1008,10 +1020,11 @@ void CSettingsWindow::LoadSettings()
 		QString KeyRootPath_Default  = "\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%";
 		QString IpcRootPath_Default  = "\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%";
 
-		ui.fileRoot->setText(theAPI->GetGlobalSettings()->GetText("FileRootPath", FileRootPath_Default));
+		ui.fileRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("FileRootPath", FileRootPath_Default));
+		ui.chkLockBox->setChecked(theAPI->GetGlobalSettings()->GetBool("LockBoxToUser", false)); 
 		//ui.chkSeparateUserFolders->setChecked(theAPI->GetGlobalSettings()->GetBool("SeparateUserFolders", true));
-		ui.regRoot->setText(theAPI->GetGlobalSettings()->GetText("KeyRootPath", KeyRootPath_Default));
-		ui.ipcRoot->setText(theAPI->GetGlobalSettings()->GetText("IpcRootPath", IpcRootPath_Default));
+		ui.regRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("KeyRootPath", KeyRootPath_Default));
+		ui.ipcRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("IpcRootPath", IpcRootPath_Default));
 
 		ui.chkRamDisk->setEnabled(bImDiskReady);
 		quint32 uDiskLimit = theAPI->GetGlobalSettings()->GetNum64("RamDiskSizeKb");
@@ -1076,6 +1089,7 @@ void CSettingsWindow::LoadSettings()
 		ui.fileRoot->setEnabled(false);
 		//ui.chkSeparateUserFolders->setEnabled(false);
 		ui.chkAutoRoot->setEnabled(false);
+		ui.chkLockBox->setEnabled(false);
 		ui.chkWFP->setEnabled(false);
 		ui.chkObjCb->setEnabled(false);
 		ui.chkWin32k->setEnabled(false);
@@ -1156,7 +1170,7 @@ void CSettingsWindow::OnRamDiskChange()
 {
 	if (sender() == ui.chkRamDisk) {
 		if (ui.chkRamDisk->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, -1);
 	}
 
 	if (ui.chkRamDisk->isChecked() && ui.txtRamLimit->text().isEmpty())
@@ -1179,7 +1193,7 @@ void CSettingsWindow::OnVolumeChanged()
 { 
 	if (sender() == ui.chkSandboxUsb) {
 		if (ui.chkSandboxUsb->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, -1);
 	}
 
 	ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
@@ -1328,7 +1342,7 @@ void CSettingsWindow::UpdateCert()
 		if(g_CertInfo.expirers_in_sec > 0)
 			Info.append(tr("Expires in: %1 days").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 		else if(g_CertInfo.expirers_in_sec < 0)
-			Info.append(tr("Expired: %1 days ago").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+			Info.append(tr("Expired: %1 days ago").arg(-g_CertInfo.expirers_in_sec / (60*60*24)));
 		
 		QStringList Options;
 		if (g_CertInfo.opt_sec) Options.append("SBox");
@@ -1757,10 +1771,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
-	//if (ui.chkForceExplorerChild->isChecked())
-	//	theAPI->GetGlobalSettings()->SetText("ForceExplorerChild", theAPI->GetGlobalSettings()->GetText("DefaultBox"));
-	//else if (theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").compare(theAPI->GetGlobalSettings()->GetText("DefaultBox")) == 0)
-	//	theAPI->GetGlobalSettings()->DelValue("ForceExplorerChild");
+
 	if (theAPI->IsConnected())
 	{
 		try
@@ -1800,10 +1811,11 @@ void CSettingsWindow::SaveSettings()
 
 				WriteText("DefaultBox", ui.cmbDefault->currentData().toString());
 
-				WriteText("FileRootPath", ui.fileRoot->text()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+				WriteText("FileRootPath", ui.fileRoot->currentText()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+				WriteAdvancedCheck(ui.chkLockBox, "LockBoxToUser", "y", "");
 				//WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
-				WriteText("KeyRootPath", ui.regRoot->text()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
-				WriteText("IpcRootPath", ui.ipcRoot->text()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
+				WriteText("KeyRootPath", ui.regRoot->currentText()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
+				WriteText("IpcRootPath", ui.ipcRoot->currentText()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
 
 				WriteText("RamDiskSizeKb", ui.chkRamDisk->isChecked() ? ui.txtRamLimit->text() : "");
 				WriteText("RamDiskLetter", ui.chkRamLetter->isChecked() ? ui.cmbRamLetter->currentText() : "");
@@ -2132,7 +2144,7 @@ void CSettingsWindow::OnBrowse()
 	if (Value.isEmpty())
 		return;
 
-	ui.fileRoot->setText(Value + "\\%SANDBOX%");
+	ui.fileRoot->setCurrentText(Value + "\\%SANDBOX%");
 }
 
 void CSettingsWindow::OnRootChanged()

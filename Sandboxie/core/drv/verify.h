@@ -37,13 +37,13 @@ typedef union _SCertInfo {
             opt_desk    : 1,    // Isolated Sandboxie Desktops:             "UseSandboxDesktop"
             opt_net     : 1,    // Advanced Network features:               "NetworkDnsFilter", "NetworkUseProxy".
             opt_enc     : 1,    // Box Encryption and Box Protection:       "ConfidentialBox", "UseFileImage", "EnableEFS".
-            opt_sec     : 1;    // Variouse security enchanced box types:   "UseSecurityMode", "SysCallLockDown", "RestrictDevices", "UseRuleSpecificity", "UsePrivacyMode", "ProtectHostImages",
-                                // as well as reduced isoaltion box type:   "NoSecurityIsolation".
+            opt_sec     : 1;    // Various security enhanced box types:   "UseSecurityMode", "SysCallLockDown", "RestrictDevices", "UseRuleSpecificity", "UsePrivacyMode", "ProtectHostImages",
+                                // as well as reduced isolation box type:   "NoSecurityIsolation".
                                 
                                 // Other features, available with any cert: "UseRamDisk", "ForceUsbDrives",
                                 // as well as Automatic Updates, etc....
 
-        unsigned long expirers_in_sec;
+        long expirers_in_sec;
     };
 } SCertInfo;
 
@@ -95,7 +95,7 @@ enum ECertLevel {
 #define CERT_IS_TYPE(cert,t)        ((cert.type & 0b11100) == (unsigned long)(t))
 #define CERT_IS_SUBSCRIPTION(cert)  (CERT_IS_TYPE(cert, eCertBusiness) || CERT_IS_TYPE(cert, eCertHome) || cert.type == eCertEntryPatreon || CERT_IS_TYPE(cert, eCertEvaluation))
 #define CERT_IS_INSIDER(cert)		(CERT_IS_TYPE(cert, eCertEternal) || cert.type == eCertGreatPatreon)
-#define CERT_IS_LEVEL(cert,l)       (cert.active && cert.level >= (unsigned long)(l))
+//#define CERT_IS_LEVEL(cert,l)       (cert.active && cert.level >= (unsigned long)(l))
 
 #ifdef KERNEL_MODE
 extern SCertInfo Verify_CertInfo;

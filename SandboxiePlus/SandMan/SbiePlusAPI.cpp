@@ -44,6 +44,21 @@ CBoxedProcessPtr CSbiePlusAPI::OnProcessBoxed(quint32 ProcessId, const QString& 
 	return pProcess;
 }
 
+std::wstring GetWindowTextTimeout(HWND hWnd, UINT timeout) 
+{
+    int length = 0;
+
+    if (SendMessageTimeoutW(hWnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, timeout, reinterpret_cast<PDWORD_PTR>(&length)) == 0)
+        return L""; 
+    if (length == 0)
+        return L""; 
+
+    std::vector<wchar_t> buffer(length + 1);
+    if (SendMessageTimeoutW(hWnd, WM_GETTEXT, length + 1, reinterpret_cast<LPARAM>(buffer.data()), SMTO_ABORTIFHUNG, timeout, nullptr) == 0)
+        return L""; 
+    return std::wstring(buffer.data()); 
+}
+
 BOOL CALLBACK CSbiePlusAPI__WindowEnum(HWND hwnd, LPARAM lParam)
 {
 	if (GetParent(hwnd) || GetWindow(hwnd, GW_OWNER))
@@ -64,10 +79,9 @@ BOOL CALLBACK CSbiePlusAPI__WindowEnum(HWND hwnd, LPARAM lParam)
 
 	QMultiMap<quint32, QString>& m_WindowMap = *((QMultiMap<quint32, QString>*)(lParam));
 
-	WCHAR title[256];
-	GetWindowTextW(hwnd, title, 256);
+	QString name = QString::fromStdWString(GetWindowTextTimeout(hwnd, 10));
 
-	m_WindowMap.insert(pid, QString::fromWCharArray(title));
+	m_WindowMap.insert(pid, name);
 
 	return TRUE;
 }
@@ -234,9 +248,12 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	if (vParams.contains("password"))
 		Archive.SetPassword(vParams["password"].toString());
 
+	SArcInfo Info = GetArcInfo(ExportPath);
+
     SCompressParams Params;
 	Params.iLevel = vParams["level"].toInt();
 	Params.bSolid = vParams["solid"].toBool();
+	Params.b7z = Info.ArchiveExt != "zip";
 
 	SB_STATUS Status = SB_OK;
 	if (!Archive.Update(&Files, true, &Params, &Attributes))
@@ -329,15 +346,13 @@ void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	pProgress->Finish(Status);
 }
 
-SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName, const QString& RootFolder, const QString& Password)
+SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName, const QString& Password)
 {
 	if (!CArchive::IsInit())
 		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QString filepath = RootFolder.isEmpty()?m_FilePath:RootFolder;
-	
-	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, filepath, m_Name, Password);
+	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, m_FilePath, m_Name, Password);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
@@ -1169,7 +1184,6 @@ QString CSandBoxPlus::GetFullCommand(const QString& Command)
 	//	FullCmd.insert(1, m_FilePath);
 	return FullCmd.replace("%BoxRoot%", m_FilePath, Qt::CaseInsensitive);
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // CSbieTemplatesEx

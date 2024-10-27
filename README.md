@@ -2,7 +2,7 @@
 
 [![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
 
-[![Join our Discord Server](https://img.shields.io/badge/Join-Our%20Discord%20Server%20for%20bugs,%20feedback%20and%20more!-blue?style=for-the-badge&logo=discord)](https://discord.gg/S4tFu6Enne)
+[![Roadmap](https://img.shields.io/badge/Roadmap-Link%20-blue?style=for-the-badge)](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633) [![Join our Discord Server](https://img.shields.io/badge/Join-Our%20Discord%20Server%20for%20bugs,%20feedback%20and%20more!-blue?style=for-the-badge&logo=discord)](https://discord.gg/S4tFu6Enne)
 
 |  System requirements  |      Release notes     |     Contribution guidelines   |      Security policy      |      Code of Conduct      |
 |         :---:         |          :---:         |          :---:                |          :---:            |          :---:            |
@@ -49,7 +49,8 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * DNS resolution control with sandboxing as control granularity
   * Limit the number of processes in the sandbox and the total amount of memory space they can occupy, and You can limit the total number of sandboxed processes per box
   * A completely different token creation mechanism from Sandboxie's pre-open-source version makes sandboxes more independent in the system
-  * Encrypted Sandbox - an AES-based reliable data storage solution.
+  * Encrypted Sandbox - an AES-based reliable data storage solution
+  * Prevent sandboxed programs from generating unnecessary unique identifier in the normal way
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
@@ -57,11 +58,9 @@ Sandboxie Classic has the old no longer developed MFC-based UI, hence it lacks n
 
 ## 📚 Documentation
 
-A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the following labels in this repository:
+A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. It is recommended to also check the following labels to track current issues: [Labels · sandboxie-plus/Sandboxie](https://github.com/sandboxie-plus/Sandboxie/labels).
 
-[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [feature requests](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"Feature+request") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [incompatibilities](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aincompatibility) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [regressions](https://github.com/sandboxie-plus/Sandboxie/issues?q=is%3Aissue+is%3Aopen+label%3Aregression) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22) | [more...](https://github.com/sandboxie-plus/Sandboxie/labels?sort=count-desc)
-
-A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something specific, it is possible to use the following search query: `site:https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/`
+A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something specific, it is possible to use the following search query: `site:https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/`.
 
 
 ## 🚀 Useful tools for Sandboxie
@@ -125,6 +124,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - lmou523 - Code fixes
 - sredna - Code fixes for Classic installer
 - weihongx9315 - Code fix
+- marti4d - Code fix
 - jorgectf - CodeQL workflow
 - stephtr - CI / Certification
 - yfdyh000 - Localization support for Plus installer

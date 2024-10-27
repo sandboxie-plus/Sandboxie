@@ -218,8 +218,6 @@ _FX void File_InitCopyLimit(void)
 {
     static const WCHAR* _CopyLimitKb = L"CopyLimitKb";
     static const WCHAR* _CopyLimitSilent = L"CopyLimitSilent";
-    NTSTATUS status;
-    WCHAR str[32];
 
     //
     // if this is one of SandboxieCrypto, SandboxieWUAU or WUAUCLT,
@@ -247,18 +245,8 @@ _FX void File_InitCopyLimit(void)
     // get configuration settings for CopyLimitKb and CopyLimitSilent
     //
 
-    status = SbieApi_QueryConfAsIs(
-        NULL, _CopyLimitKb, 0, str, sizeof(str) - sizeof(WCHAR));
-    if (NT_SUCCESS(status)) {
-        ULONGLONG num = _wtoi64(str);
-        if (num)
-            File_CopyLimitKb = (num > 0x000000007fffffff) ? -1 : num;
-        else
-            SbieApi_Log(2207, _CopyLimitKb);
-    }
-
-    File_CopyLimitSilent =
-        SbieApi_QueryConfBool(NULL, _CopyLimitSilent, FALSE);
+    File_CopyLimitKb = SbieApi_QueryConfNumber64(NULL, _CopyLimitKb, -1);
+    File_CopyLimitSilent = SbieApi_QueryConfBool(NULL, _CopyLimitSilent, FALSE);
 }
 
 
@@ -280,6 +268,7 @@ _FX NTSTATUS File_MigrateFile(
     ULONGLONG file_size;
     ACCESS_MASK DesiredAccess;
     ULONG CreateOptions;
+    PSECURITY_DESCRIPTOR pSecurityDescriptor = NULL;
 
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
@@ -354,6 +343,34 @@ _FX NTSTATUS File_MigrateFile(
     else
         file_size = 0;
 
+    if (Secure_CopyACLs) {
+
+        //
+        // Query the security descriptor of the source file
+        //
+
+        ULONG lengthNeeded = 0;
+        status = NtQuerySecurityObject(TrueHandle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, NULL, 0, &lengthNeeded);
+        if (status == STATUS_BUFFER_TOO_SMALL) {
+            pSecurityDescriptor = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(lengthNeeded);
+            status = NtQuerySecurityObject(TrueHandle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, pSecurityDescriptor, lengthNeeded, &lengthNeeded);
+            if (NT_SUCCESS(status)) 
+                File_AddCurrentUserToSD(&pSecurityDescriptor);
+            else {
+                Dll_Free(pSecurityDescriptor);
+                pSecurityDescriptor = NULL;
+            }
+        }
+
+        if (!NT_SUCCESS(status)) {
+            NtClose(TrueHandle);
+            return status;
+        }
+
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, pSecurityDescriptor);
+    }
+
     //
     // create the CopyPath file
     //
@@ -377,6 +394,8 @@ _FX NTSTATUS File_MigrateFile(
 
     if (!NT_SUCCESS(status)) {
         NtClose(TrueHandle);
+        if(pSecurityDescriptor)
+            Dll_Free(pSecurityDescriptor);
         return status;
     }
 
@@ -462,6 +481,8 @@ _FX NTSTATUS File_MigrateFile(
     }
 
     NtClose(TrueHandle);
+    if(pSecurityDescriptor)
+        Dll_Free(pSecurityDescriptor);
     NtClose(CopyHandle);
 
     return status;
@@ -483,6 +504,7 @@ _FX NTSTATUS File_MigrateJunction(
     UNICODE_STRING objname;
     IO_STATUS_BLOCK IoStatusBlock;
     FILE_NETWORK_OPEN_INFORMATION open_info;
+    PSECURITY_DESCRIPTOR pSecurityDescriptor = NULL;
 
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
@@ -531,6 +553,34 @@ _FX NTSTATUS File_MigrateJunction(
     if (!NT_SUCCESS(status))
         return status;
 
+    if (Secure_CopyACLs) {
+
+        //
+        // Query the security descriptor of the source file
+        //
+
+        ULONG lengthNeeded = 0;
+        status = NtQuerySecurityObject(TrueHandle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, NULL, 0, &lengthNeeded);
+        if (status == STATUS_BUFFER_TOO_SMALL) {
+            pSecurityDescriptor = (PSECURITY_DESCRIPTOR)Dll_AllocTemp(lengthNeeded);
+            status = NtQuerySecurityObject(TrueHandle, DACL_SECURITY_INFORMATION | SACL_SECURITY_INFORMATION | /*OWNER_SECURITY_INFORMATION |*/ GROUP_SECURITY_INFORMATION, pSecurityDescriptor, lengthNeeded, &lengthNeeded);
+            if (NT_SUCCESS(status)) 
+                File_AddCurrentUserToSD(&pSecurityDescriptor);
+            else {
+                Dll_Free(pSecurityDescriptor);
+                pSecurityDescriptor = NULL;
+            }
+        }
+
+        if (!NT_SUCCESS(status)) {
+            NtClose(TrueHandle);
+            return status;
+        }
+
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, pSecurityDescriptor);
+    }
+
     //
     // Create the destination file with reparse point data
     //
@@ -543,8 +593,11 @@ _FX NTSTATUS File_MigrateJunction(
         FILE_CREATE, FILE_SYNCHRONOUS_IO_NONALERT | FILE_DIRECTORY_FILE | FILE_OPEN_REPARSE_POINT,
         NULL, 0);
 
-    if (!NT_SUCCESS(status))
-        return status;
+    if (!NT_SUCCESS(status)) {
+        NtClose(TrueHandle);
+        if (pSecurityDescriptor)
+            Dll_Free(pSecurityDescriptor);
+    }
 
     //
     // Set the reparse point data to the destination
@@ -571,6 +624,8 @@ _FX NTSTATUS File_MigrateJunction(
     }
 
     NtClose(TrueHandle);
+    if(pSecurityDescriptor)
+        Dll_Free(pSecurityDescriptor);
     NtClose(CopyHandle);
 
     return status;

@@ -908,7 +908,7 @@ _FX BOOL Proc_CreateProcessInternalW(
         // architecture which conflicts with our restricted process model
         //
 
-        if (Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
+        if (//Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
             Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
             Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
             hToken = NULL;
@@ -1307,6 +1307,31 @@ _FX BOOL Proc_CreateProcessInternalW(
             }
         }
     }
+
+    //
+    // Explorer does not use ShellExecuteExW, so for explorer we set BreakoutDocumentProcess=explorer.exe,y 
+    // in the Templates.ini and check whenever explorer wants to start a process
+    //
+
+    if (lpCommandLine && Config_GetSettingsForImageName_bool(L"BreakoutDocumentProcess", FALSE))
+    {
+        const WCHAR* temp = lpCommandLine;
+        if (*temp == L'"') temp = wcschr(temp + 1, L'"');
+        else temp = wcschr(temp, L' ');
+        if (temp) 
+        {
+            while (*++temp == L' ');
+
+            const WCHAR* arg1 = temp;
+            const WCHAR* arg1_end = NULL;
+            if (*arg1 == L'"') temp = wcschr(arg1 + 1, L'"');
+            if (!arg1_end) arg1_end = wcschr(arg1, L'\0');
+
+            if (arg1 && arg1 != arg1_end && SH32_BreakoutDocument(arg1, (ULONG)(arg1_end - arg1)))
+                return TRUE;
+        }
+    }
+
 #endif
 
     //

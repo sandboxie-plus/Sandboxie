@@ -2127,7 +2127,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="151"/>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Document</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="265"/>
@@ -2146,23 +2146,23 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="327"/>
         <source>Select Document Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le répertoire du document</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="331"/>
         <source>Please enter Document File Extension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez saisir l&apos;extension de fichier du document.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
         <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Pour des raisons de sécurité, il n&apos;est pas autorisé de créer des préréglages BreakoutDocument composés uniquement de jokers.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour des raisons de sécurité, l&apos;extension %1 indiquée ne devrait pas être éclatée.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="408"/>
@@ -3010,7 +3010,7 @@ Chemin complet : %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="246"/>
         <source>No Files selected!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun fichier sélectionné !</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="250"/>
@@ -8530,7 +8530,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
         <location filename="Forms/OptionsWindow.ui" line="2380"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</source>
         <oldsource>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</oldsource>
-        <translation type="unfinished">&lt;b&gt;&lt;font color=&apos;red&apos;&gt;AVERTISSEMENT DE SÉCURITÉ&lt;/font&gt; :&lt;/b&gt; L&apos;utilisation de &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; et/ou &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; en combinaison avec des directives Open[File/Pipe]Path peut compromettre la sécurité, de même que l&apos;utilisation de &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; autorisant tout (*) ou autorisant des extensions potentiellement non fiables (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1 ; etc…). Veuillez consulter la section de sécurité de chaque option dans la documentation avant utilisation.</translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;AVERTISSEMENT DE SÉCURITÉ&lt;/font&gt; :&lt;/b&gt; L&apos;utilisation de &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; et/ou &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; en combinaison avec des directives Open[File/Pipe]Path peut compromettre la sécurité, de même que l&apos;utilisation de &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; autorisant tout (*) ou autorisant des extensions non fiables (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1 ; etc…). Veuillez consulter la section de sécurité de chaque option dans la documentation avant utilisation.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2410"/>
@@ -9265,17 +9265,17 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="961"/>
         <source>Open access to Proxy Configurations</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir l&apos;accès aux configurations des mandataires</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1281"/>
         <source>File ACLs</source>
-        <translation type="unfinished"></translation>
+        <translation>Listes de contrôle d&apos;accès des fichiers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1331"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser des entrées de contrôle d&apos;accès originales pour les fichiers et les dossiers en bac à sable (pour les exemptions MSIServer activées)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1626"/>
@@ -9320,7 +9320,7 @@ Partiellement coché : Aucun groupe ne sera ajouté au jeton nouvellement créé
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2373"/>
         <source>Breakout Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Éclater le document</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3538"/>
@@ -10690,12 +10690,12 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2266"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette fonction protège le bac en en restreignant l&apos;accès, empêchant les autres utilisateurs d&apos;accéder au dossier. Assurez-vous que le chemin vers le dossier racine contient la macro %USER% afin que chaque utilisateur obtienne un dossier de bac dédié.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2269"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Restreindre l&apos;accès au dossier racine du bac à l&apos;utilisateur qui a créé ce bac</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2292"/>

@@ -21,6 +21,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - validated compatibility with Windows build 27729 and updated DynData
+- updated Templates.ini to grant access to the Multimedia Class Scheduler Service [#4312](https://github.com/sandboxie-plus/Sandboxie/pull/4312)
+- updated Inno Setup to version 6.3.3 [#4020](https://github.com/sandboxie-plus/Sandboxie/issues/4020)
 
 
 

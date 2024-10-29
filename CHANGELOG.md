@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.15.2 / 5.70.2] - 2024-10-
+
+### Fixed
+- fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)
+
+
+
+
 ## [1.15.1 / 5.70.1] - 2024-10-29
 
 ### Fixed

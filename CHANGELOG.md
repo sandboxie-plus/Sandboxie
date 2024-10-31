@@ -15,14 +15,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.1 / 5.70.1] - 2024-10-29
 
-### Fixed
-- fixed Sandboxie crypto fails to start in red boxes
-- fixed issue with breakout process when using explorer.exe
-
 ### Changed
 - validated compatibility with Windows build 27729 and updated DynData
 - updated Templates.ini to grant access to the Multimedia Class Scheduler Service [#4312](https://github.com/sandboxie-plus/Sandboxie/pull/4312)
 - updated Inno Setup to version 6.3.3 [#4020](https://github.com/sandboxie-plus/Sandboxie/issues/4020)
+
+### Fixed
+- fixed Sandboxie crypto fails to start in red boxes
+- fixed issue with breakout process when using explorer.exe
 
 
 
@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added new user proxy mechanism to enable user specific operations
 - added support for EFS using the user proxy [#1980](https://github.com/sandboxie-plus/Sandboxie/issues/1980)
-  - to enable add 'EnableEFS=y' to the sandbox config
+  - to enable it, add 'EnableEFS=y' to the sandbox configuration (requires an advanced supporter certificate)
 - added breakout document functionality [#2741](https://github.com/sandboxie-plus/Sandboxie/issues/2741)
   - use a syntax like this 'BreakoutDocument=C:\path\*.txt' to specify path and extension
   - Security Warning: do not use paths terminated with a wildcard like 'BreakoutDocument=C:\path\*' as they will allow for execution of malicious scripts outside the sandbox!
@@ -180,7 +180,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.2 / 5.69.2] - 2024-06-19
 
 ### Added
-- added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
+- added SbieIni option to modify password-protected configurations [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
   - Usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
   - Note: use /passwd without the password to have SbieIni prompt for the password on the console, this hides the password from view and prevents capture with the command line
 - added checkbox for "PromptForInternetAccess" option to the New Box Wizard

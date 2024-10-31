@@ -379,6 +379,10 @@ void COptionsWindow::OnBrowseFolder()
 	if (Value.isEmpty())
 		return;
 
+	// Add a trailing backslash if it does not exist
+	if (!Value.endsWith("\\"))
+		Value.append("\\");
+
 	AddAccessEntry(eFile, eOpen, "", Value);
 
 	OnAccessChanged();

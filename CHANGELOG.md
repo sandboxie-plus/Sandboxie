@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - validated compatibility with Windows build 27729 and updated DynData
-- updated Templates.ini to grant access to the Multimedia Class Scheduler Service [#4312](https://github.com/sandboxie-plus/Sandboxie/pull/4312)
+- updated Templates.ini to grant access to the Multimedia Class Scheduler Service [#4312](https://github.com/sandboxie-plus/Sandboxie/pull/4312) (thanks offhub)
 - updated Inno Setup to version 6.3.3 [#4020](https://github.com/sandboxie-plus/Sandboxie/issues/4020)
 
 ### Fixed
@@ -42,6 +42,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - improved SandboxieCrypto startup
 - improved Sandboxed RPCSS startup
+- changed Qt 5 version to Qt 5.15.15 with OpenSSL 3.3.2 [#4223](https://github.com/sandboxie-plus/Sandboxie/pull/4223) (thanks offhub)
 - set tab orders and buddies of UI controls [#4300](https://github.com/sandboxie-plus/Sandboxie/pull/4300) (thanks gexgd0419)
 
 ### Fixed

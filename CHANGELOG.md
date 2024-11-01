@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)
-
+- fixed Files Resource Access - Browse for Folder - allows access to excluded folders [#4007](https://github.com/sandboxie-plus/Sandboxie/issues/4007)
 
 
 

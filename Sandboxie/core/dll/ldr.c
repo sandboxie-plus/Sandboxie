@@ -696,7 +696,7 @@ _FX void Ldr_CallDllCallbacks(void)
             if (!found) {
 
                 __my_Ldr_CallOneDllCallback(pOld->Path + pOld->NameOffset,
-                    pNew->ImageBaseAddress, FALSE);
+                    pOld->ImageBaseAddress, FALSE);
             }
         }
     }

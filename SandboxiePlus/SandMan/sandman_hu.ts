@@ -178,8 +178,8 @@ However, if &apos;use as a template&apos; option is selected as the sharing mode
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
         <translation>Ez a beállítás hozzáad egy helyi sablont vagy annak beállításait a homokozó-konfigurációhoz, így a sablon beállításai megosztásra kerülnek a homokozók között.
-Ha azonban 'Használat sablonként' opció van kiválasztva megosztási módként, előfordulhat, hogy egyes beállítások nem jelennek meg a felhasználói felületen.
-A sablon beállításainak módosításához egyszerűen keresse meg '%1' sablont az 'Alkalmazássablonok' listában a homokozó beállítások alatt, majd kattintson rá duplán a szerkesztéséhez.
+Ha azonban &apos;Használat sablonként&apos; opció van kiválasztva megosztási módként, előfordulhat, hogy egyes beállítások nem jelennek meg a felhasználói felületen.
+A sablon beállításainak módosításához egyszerűen keresse meg &apos;%1&apos; sablont az &apos;Alkalmazássablonok&apos; listában a homokozó beállítások alatt, majd kattintson rá duplán a szerkesztéséhez.
 Ha le szeretné tiltani ezt a sablont egy homokozóban, egyszerűen törölje a jelölést a sablonlistában.</translation>
     </message>
     <message>
@@ -259,7 +259,7 @@ Ha le szeretné tiltani ezt a sablont egy homokozóban, egyszerűen törölje a 
         <location filename="Wizards/BoxAssistant.cpp" line="280"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
-       <translation>Érvényes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítvánnyal&lt;/a&gt; a varázsló még erősebb lenne. Hozzáférhet &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online megoldásadatbázishoz&lt;/a&gt; a legújabb hibaelhárítási utasítások lekéréséhez.</translation>
+        <translation>Érvényes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítvánnyal&lt;/a&gt; a varázsló még erősebb lenne. Hozzáférhet &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online megoldásadatbázishoz&lt;/a&gt; a legújabb hibaelhárítási utasítások lekéréséhez.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="318"/>
@@ -362,7 +362,7 @@ Ha le szeretné tiltani ezt a sablont egy homokozóban, egyszerűen törölje a 
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation>FIGYELEM: A rövid jelszavakat 'brute force' technikákkal könnyű feltörni!
+        <translation>FIGYELEM: A rövid jelszavakat &apos;brute force&apos; technikákkal könnyű feltörni!
 
 Javasoljuk, hogy 20 vagy több karakterből álló jelszót válasszon. Biztos, hogy rövid jelszót használ?</translation>
     </message>
@@ -824,7 +824,7 @@ Hiba: %1</translation>
         <translation>A hibaelhárítás befejeződött</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1083"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1084"/>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
@@ -1017,7 +1017,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
-         <translation>A kiválasztott homokozó helye létezik, és nem üres, ajánlatos új vagy üres mappát választani. Biztos benne, hogy egy meglévő mappát használna?</translation>
+        <translation>A kiválasztott homokozó helye létezik, és nem üres, ajánlatos új vagy üres mappát választani. Biztos benne, hogy egy meglévő mappát használna?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
@@ -1907,7 +1907,7 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
         <location filename="Windows/OptionsForce.cpp" line="341"/>
         <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
-        <translation>Biztonsági okokból nem lehet teljesen helyettesítő karakteres 'BreakoutDocument' előbeállításokat létrehozni.</translation>
+        <translation>Biztonsági okokból nem lehet teljesen helyettesítő karakteres &apos;BreakoutDocument&apos; előbeállításokat létrehozni.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>
@@ -1918,7 +1918,7 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
         <location filename="Windows/OptionsForce.cpp" line="408"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
         <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
-        <translation>A megadott bejegyzés kényszerítése nagy valószínűséggel tönkreteszi a Windows rendszert. Biztosan folytatja?</translation>		
+        <translation>A megadott bejegyzés kényszerítése nagy valószínűséggel tönkreteszi a Windows rendszert. Biztosan folytatja?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -1949,7 +1949,7 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show only when title is in focus</source>
-         <translation>Csak akkor látható, ha a cím fókuszban van</translation>
+        <translation>Csak akkor látható, ha a cím fókuszban van</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
@@ -2123,7 +2123,7 @@ Megjegyzés: a frissítések ellenőrzése gyakran késik a legújabb GitHub-kia
         <location filename="Windows/OptionsGeneral.cpp" line="1237"/>
         <source>Image Header Restored</source>
         <translation>Képfejléc visszaállítva</translation>
-      </message>
+    </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1125"/>
         <source>Please enter a service identifier</source>
@@ -2763,7 +2763,7 @@ Teljes útvonal: %4</translation>
         <location filename="Wizards/BoxAssistant.cpp" line="726"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
-         <translation>Valami belső hiba történt, ez a hibaelhárítási eljárás nem folytatható. Hibajelentés elküldéséhez kattintson a &quot;Tovább&quot; gombra.</translation>
+        <translation>Valami belső hiba történt, ez a hibaelhárítási eljárás nem folytatható. Hibajelentés elküldéséhez kattintson a &quot;Tovább&quot; gombra.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="727"/>
@@ -2786,7 +2786,7 @@ Hiba: </translation>
         <location filename="Wizards/SetupWizard.cpp" line="610"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
-       <translation>Mint minden más biztonsági termék esetében, itt is fontos, hogy a Sandboxie-Plus naprakész legyen.</translation>
+        <translation>Mint minden más biztonsági termék esetében, itt is fontos, hogy a Sandboxie-Plus naprakész legyen.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="618"/>
@@ -2874,7 +2874,7 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
         <location filename="Wizards/SetupWizard.cpp" line="676"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
-         <translation>Ellenőrizze a hibaelhárító varázsló legújabb hibaelhárítási szkriptjeit.</translation>
+        <translation>Ellenőrizze a hibaelhárító varázsló legújabb hibaelhárítási szkriptjeit.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="680"/>
@@ -3236,7 +3236,7 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
         <location filename="SandMan.cpp" line="639"/>
         <location filename="SandMan.cpp" line="760"/>
         <source>Reset all hidden messages</source>
-        <translation>Az összes rejtett üzenet visszaállítása</translation>  
+        <translation>Az összes rejtett üzenet visszaállítása</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="640"/>
@@ -3383,7 +3383,7 @@ Elvégzi a takarítást?</translation>
         <location filename="SandMan.cpp" line="1569"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
-         <translation>Ez a homokozó nem kényszeríti ki az elkülönítést, csak &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;alkalmazás rekeszként&lt;/a&gt; használható szoftvervirtualizációhoz.</translation>
+        <translation>Ez a homokozó nem kényszeríti ki az elkülönítést, csak &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;alkalmazás rekeszként&lt;/a&gt; használható szoftvervirtualizációhoz.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1577"/>
@@ -3391,7 +3391,7 @@ Elvégzi a takarítást?</translation>
         <oldsource>
 
 This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</oldsource>
-       <translation>&lt;br /&gt;&lt;br /&gt;Ez a homokozó &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;megakadályozza az összes felhasználói adathelyhez való hozzáférést&lt;/a&gt;, kivéve, ha az erőforrás-hozzáférési beállításokban kifejezetten engedélyezett.</translation>
+        <translation>&lt;br /&gt;&lt;br /&gt;Ez a homokozó &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;megakadályozza az összes felhasználói adathelyhez való hozzáférést&lt;/a&gt;, kivéve, ha az erőforrás-hozzáférési beállításokban kifejezetten engedélyezett.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1745"/>
@@ -3451,7 +3451,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="2590"/>
         <source>Do you want the setup wizard to be omitted?</source>
-        <translation>>Valóban kihagyja a telepítővarázslót?</translation>
+        <translation>&gt;Valóban kihagyja a telepítővarázslót?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3509"/>
@@ -3469,7 +3469,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <location filename="SandMan.cpp" line="3511"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>A szükséges Sandboxie komponensek elindítása sikertelen</translation>
-   </message>
+    </message>
     <message>
         <location filename="SandMan.cpp" line="172"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
@@ -3596,7 +3596,7 @@ Nem választás: %2</translation>
         <location filename="SandMan.cpp" line="3538"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Karbantartási művelet van folyamatban. Kérjük, várjon...</translation>
-   </message>
+    </message>
     <message>
         <location filename="SandMan.cpp" line="3728"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
@@ -3965,7 +3965,7 @@ Kérjük, ellenőrizze, hogy van-e frissítés a sandboxie-hoz.</translation>
         <location filename="SandMan.cpp" line="659"/>
         <source>Lock All Encrypted Boxes</source>
         <translation>Összes titkosított doboz zárolása</translation>
-   </message>
+    </message>
     <message>
         <location filename="SandMan.cpp" line="541"/>
         <location filename="SandMan.cpp" line="697"/>
@@ -5288,7 +5288,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <location filename="Views/SbieView.cpp" line="1585"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
-       <translation>A Sandboxie Startmenüje most megjelenik. Válasszon ki egy alkalmazást a menüből, és a Sandboxie létrehoz egy új parancsikont a valódi asztalon, amellyel meghívhatja a kiválasztott alkalmazást a Sandboxie felügyelete alatt.</translation>
+        <translation>A Sandboxie Startmenüje most megjelenik. Válasszon ki egy alkalmazást a menüből, és a Sandboxie létrehoz egy új parancsikont a valódi asztalon, amellyel meghívhatja a kiválasztott alkalmazást a Sandboxie felügyelete alatt.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1640"/>
@@ -6172,7 +6172,7 @@ Próbálja meg a beküldést a napló csatolása nélkül.</translation>
         <location filename="Wizards/BoxAssistant.cpp" line="1055"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
-         <translation>Hibajelentése sikeresen elküldve, köszönjük.</translation>
+        <translation>Hibajelentése sikeresen elküldve, köszönjük.</translation>
     </message>
 </context>
 <context>
@@ -6210,7 +6210,7 @@ This Sandbox will be saved to: %1</source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
-<translation>A homokozó tartalmát a rendszer ELVETI, amikor bezárja, és a homokozó eltávolításra kerül.</translation>
+        <translation>A homokozó tartalmát a rendszer ELVETI, amikor bezárja, és a homokozó eltávolításra kerül.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1068"/>
@@ -6230,7 +6230,7 @@ Processes in this box will not be able to access the internet or the local netwo
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
-       <translation>Ez a homokozó az MSIServer (*.msi telepítő szolgáltatás) rendszerjogkivonattal fog futni, ez javítja a kompatibilitást, de csökkenti a biztonsági elszigeteltséget.</translation>
+        <translation>Ez a homokozó az MSIServer (*.msi telepítő szolgáltatás) rendszerjogkivonattal fog futni, ez javítja a kompatibilitást, de csökkenti a biztonsági elszigeteltséget.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1074"/>
@@ -6244,7 +6244,7 @@ Processes in this box will think they are run with administrative privileges, wi
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
-       <translation>Az ebben a homokozóban lévő folyamatok egyéni folyamatjogkivonattal fognak futni, amely jelzi a homokozót, amelyhez tartoznak.</translation>
+        <translation>Az ebben a homokozóban lévő folyamatok egyéni folyamatjogkivonattal fognak futni, amely jelzi a homokozót, amelyhez tartoznak.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1115"/>
@@ -6286,13 +6286,13 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Windows/SupportDialog.cpp" line="170"/>
         <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</oldsource>
-       <translation>&lt;b&gt;Úgy tűnik, hogy %1 Sandboxie-Plus példány van a hálózatán, &lt;font color=&apos;red&apos;&gt;be kell szereznie kiegészítő &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;támotatói tanúsítványokat&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>&lt;b&gt;Úgy tűnik, hogy %1 Sandboxie-Plus példány van a hálózatán, &lt;font color=&apos;red&apos;&gt;be kell szereznie kiegészítő &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;támotatói tanúsítványokat&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="177"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
-       <translation>A telepített támogatói tanúsítvány &lt;b&gt;%1 napja lejárt&lt;/b&gt; és &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt; webpldalon meg kell újítani&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>A telepített támogatói tanúsítvány &lt;b&gt;%1 napja lejárt&lt;/b&gt; és &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt; webpldalon meg kell újítani&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="179"/>
@@ -6303,7 +6303,7 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Windows/SupportDialog.cpp" line="181"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
         <oldsource>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</oldsource>
-      <translation>&lt;u&gt;A kereskedelmi célú Sandboxie próbaidőn túli használatához&lt;/u&gt;, egy érvényes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;támogatói tanúsítvány szükséges&lt;/a&gt;.</translation>
+        <translation>&lt;u&gt;A kereskedelmi célú Sandboxie próbaidőn túli használatához&lt;/u&gt;, egy érvényes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;támogatói tanúsítvány szükséges&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="188"/>
@@ -6314,7 +6314,7 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Windows/SupportDialog.cpp" line="190"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
-       <translation>A telepített támogatói tanúsítvány &lt;b&gt;lejárt&lt;/b&gt; és &lt;u&gt;meg kell újítani&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>A telepített támogatói tanúsítvány &lt;b&gt;lejárt&lt;/b&gt; és &lt;u&gt;meg kell újítani&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="192"/>
@@ -6335,14 +6335,14 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Windows/SupportDialog.cpp" line="200"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
         <oldsource>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</oldsource>
-      <translation>Kérjük, továbbra is &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;támogassa a projektet&lt;/a&gt; &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítványának megújításával&lt;/a&gt; és folytassa a &lt;b&gt;bővített funkciók használatát&lt;/b&gt; az új buildekben.</translation>
+        <translation>Kérjük, továbbra is &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;támogassa a projektet&lt;/a&gt; &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítványának megújításával&lt;/a&gt; és folytassa a &lt;b&gt;bővített funkciók használatát&lt;/b&gt; az új buildekben.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="203"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;. This pause allows you to consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt; or &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;earning one by contributing&lt;/a&gt; to the project. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
         <oldsource>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</oldsource>
-       <translation>A Sandboxie érvényes támogatói tanúsítvány &lt;u&gt;nélkül&lt;/u&gt; időnként &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pár másodpercre szünetel&lt;/font&gt;&lt;/b&gt;. Ez a szünet lehetővé teszi, hogy meggondolja egy támogatói tanúsítvány vásárlását: &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt; &lt;/a&gt; vagy &lt;  href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;szerezzen egyet hozzájárulással&lt;/a&gt; a projekthez. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítvány&lt;/a&gt; nemcsak eltávolítja ezt az emlékeztetőt, hanem &lt;b&gt;exkluzív továbbfejlesztett funkciókat is lehetővé tesz&lt;/b&gt; jobb biztonságot és kompatibilitást biztosítva.</translation>
-   </message>
+        <translation>A Sandboxie érvényes támogatói tanúsítvány &lt;u&gt;nélkül&lt;/u&gt; időnként &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pár másodpercre szünetel&lt;/font&gt;&lt;/b&gt;. Ez a szünet lehetővé teszi, hogy meggondolja egy támogatói tanúsítvány vásárlását: &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt; &lt;/a&gt; vagy &lt;  href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;szerezzen egyet hozzájárulással&lt;/a&gt; a projekthez. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítvány&lt;/a&gt; nemcsak eltávolítja ezt az emlékeztetőt, hanem &lt;b&gt;exkluzív továbbfejlesztett funkciókat is lehetővé tesz&lt;/b&gt; jobb biztonságot és kompatibilitást biztosítva.</translation>
+    </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="233"/>
         <source>Sandboxie-Plus - Support Reminder</source>
@@ -6654,7 +6654,7 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="379"/>
         <source>Invalid Ping Count value. Please enter a value between 1 and 10.</source>
-        <translation>Érvénytelen 'Ping Count' érték. Kérjük, adjon meg egy 1 és 10 közötti értéket.</translation>
+        <translation>Érvénytelen &apos;Ping Count&apos; érték. Kérjük, adjon meg egy 1 és 10 közötti értéket.</translation>
     </message>
 </context>
 <context>
@@ -7021,7 +7021,7 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Forms/OptionsWindow.ui" line="236"/>
         <source>px Width</source>
         <translation>px szélesség</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1288"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
@@ -7123,7 +7123,7 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Forms/OptionsWindow.ui" line="765"/>
         <source>Open System Protected Storage</source>
         <translation>Rendszer által védett tárhely megnyitása</translation>
-     </message>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="721"/>
         <source>Block access to the printer spooler</source>
@@ -7185,7 +7185,7 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Forms/OptionsWindow.ui" line="1020"/>
         <source>Add program</source>
         <translation>Program hozzáadása</translation>
-     </message>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1001"/>
         <location filename="Forms/OptionsWindow.ui" line="1501"/>
@@ -7318,17 +7318,17 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
         <location filename="Forms/OptionsWindow.ui" line="148"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
         <translation>&lt;b&gt;További homokozótípusok&lt;/b&gt; kizárólag a &lt;u&gt;projekt támogatók részére érhetők el&lt;/u&gt;, a továbbfejlesztett adatvédelmi homokozók &lt;b&gt;&lt;font color=&apos;red&apos;&gt;megvédik a felhasználó adatait az illetéktelen hozzáféréstől&lt;/font&gt;&lt;/b&gt; az izolált programokkal.&lt;br /&gt;Ha még nem támogató, kérjük, fontolja meg &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;a projekt támogatását&lt;/a&gt;, hogy kapjon egy &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítványt&lt;/a&gt;.&lt;br /&gt;Tesztelheti a többi homokozótípust, ha új homokozókat hoz létre ezekből a típusokból, azonban ezekben a folyamatok 5 perc elteltével automatikusan leállnak.</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="89"/>
         <source>Always show this sandbox in the systray list (Pinned)</source>
         <translation>Mindig jelenítse meg ezt a homokozót a rendszertálcák listájában (rögzítve)</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="791"/>
         <source>Open Windows Credentials Store (user mode)</source>
         <translation>Nyissa meg a Windows hitelesítő adatok áruházát (felhasználói mód)</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4024"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
@@ -7555,8 +7555,9 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="934"/>
-        <source>Access isolation</source>
-        <translation>Hozzáférés elkülönítés</translation>
+        <source>Access Isolation</source>
+        <oldsource>Access isolation</oldsource>
+        <translation type="unfinished">Hozzáférés elkülönítés</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1439"/>
@@ -7641,7 +7642,7 @@ Ha Ön már nagy támogatója a Patreonnak, a Sandboxie online ellenőrizheti ta
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</oldsource>
-       <translation>A Sandboxie erőforrás-hozzáférési szabályai gyakran megkülönböztetik a homokozóban található programbináris fájlokat. Az OpenFilePath és az OpenKeyPath csak a gazdagépen natívan található alkalmazásbináris fájloknál működik. Egy szabály e korlátozás nélküli meghatározásához OpenPipePath vagy OpenConfPath protokollt kell használni. Hasonlóképpen, minden olyan Closed(File|Key|Ipc)Path direktíva, amely negációval van definiálva, pl. ‘ClosedFilePath=!iexplore.exe,C:Users*’ mindig zárva lesz a homokozóban található binárisok esetében. Mindkét korlátozási házirend letiltható a &quot;Hozzáférési irányelvek&quot; oldalon.
+        <translation>A Sandboxie erőforrás-hozzáférési szabályai gyakran megkülönböztetik a homokozóban található programbináris fájlokat. Az OpenFilePath és az OpenKeyPath csak a gazdagépen natívan található alkalmazásbináris fájloknál működik. Egy szabály e korlátozás nélküli meghatározásához OpenPipePath vagy OpenConfPath protokollt kell használni. Hasonlóképpen, minden olyan Closed(File|Key|Ipc)Path direktíva, amely negációval van definiálva, pl. ‘ClosedFilePath=!iexplore.exe,C:Users*’ mindig zárva lesz a homokozóban található binárisok esetében. Mindkét korlátozási házirend letiltható a &quot;Hozzáférési irányelvek&quot; oldalon.
 Ezzel megakadályozható, hogy a homokozón belüli rosszindulatúr folyamatok átnevezett másolatot hozzanak létre magukról, és hozzáférjenek a védett erőforrásokhoz. Egy másik kihasználási vektor egy könyvtár befecskendezése egy engedélyezett folyamatba, hogy hozzáférjen mindenhez, amelyhez hozzáférhet. A &quot;Host Image Protection&quot; használatával ez megakadályozható, ha blokkolja a homokozóban futó (a gazdagépre telepített) alkalmazásokat, hogy betöltsék a könyvtárakat magából a homokozóból.</translation>
     </message>
     <message>
@@ -7665,7 +7666,7 @@ Ezzel megakadályozható, hogy a homokozón belüli rosszindulatúr folyamatok �
         <location filename="Forms/OptionsWindow.ui" line="1943"/>
         <source>Privilege isolation</source>
         <translation>Privilegizált elszigeteltség</translation>
-  </message>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1903"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
@@ -8184,7 +8185,7 @@ A folyamat megadásához használja a &apos;$:program.exe-t&apos; útvonalként.
         <location filename="Forms/OptionsWindow.ui" line="4127"/>
         <source>Immediate Recovery</source>
         <translation>Azonnali helyreállítás</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4157"/>
         <source>Ignore Extension</source>
@@ -9079,7 +9080,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <location filename="Forms/SettingsWindow.ui" line="574"/>
         <source>Start Sandbox Manager</source>
         <translation>Homokozó kezelő indítása</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="516"/>
         <source>Start UI when a sandboxed process is started</source>
@@ -9099,7 +9100,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <location filename="Forms/SettingsWindow.ui" line="174"/>
         <source>Run box operations asynchronously whenever possible (like content deletion)</source>
         <translation>A homokozó műveletek aszinkron futtatása, amikor csak lehetséges (például a tartalom törlése)</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="120"/>
         <source>Hotkey for terminating all boxed processes:</source>
@@ -9246,7 +9247,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <location filename="Forms/SettingsWindow.ui" line="1121"/>
         <source>Interface Options</source>
         <oldsource>Display Options</oldsource>
-         <translation>Interfész beállításai</translation>
+        <translation>Interfész beállításai</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1162"/>
@@ -9352,7 +9353,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <location filename="Forms/SettingsWindow.ui" line="1500"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
         <translation>&lt;a href=&quot;addon://ImDisk &quot;&gt;ImDisk&lt;/a&gt; illesztőprogram telepítése a &quot;Ram lemez&quot; és &quot;Lemezkép&quot; támogatás engedélyezéséhez.</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1587"/>
         <source>Sandboxie Support</source>
@@ -9442,7 +9443,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <location filename="Forms/SettingsWindow.ui" line="2573"/>
         <source>App Compatibility</source>
         <translation>Program kompabilitás</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2298"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
@@ -9458,7 +9459,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <location filename="Forms/SettingsWindow.ui" line="429"/>
         <source>Show recoverable files as notifications</source>
         <translation>A helyreállítható fájlok megjelenítése értesítésként</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="65"/>
         <source>General Options</source>
@@ -9468,7 +9469,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <location filename="Forms/SettingsWindow.ui" line="698"/>
         <source>Show Icon in Systray:</source>
         <translation>Ikon megjelenítése a rendszertálcán:</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2193"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
@@ -9644,7 +9645,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <location filename="Forms/SettingsWindow.ui" line="2391"/>
         <source>Program Control</source>
         <translation>Programvezérlés</translation>
-   </message>
+    </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2401"/>
         <source>Program Alerts</source>

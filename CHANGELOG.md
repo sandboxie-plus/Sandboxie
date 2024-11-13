@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with DLL unloading
 - fixed Files Resource Access - Browse for Folder - allows access to excluded folders [#4007](https://github.com/sandboxie-plus/Sandboxie/issues/4007)
 
+### Changed
+- validated compatibility with Windows build 27744 and updated DynData
+
 
 
 ## [1.15.1 / 5.70.1] - 2024-10-29

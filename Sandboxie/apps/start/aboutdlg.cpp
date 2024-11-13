@@ -285,7 +285,7 @@ bool DoAboutDialog(bool bReminder)
     if (g_bReminder) {
 
         SCertInfo CertInfo = { 0 };
-        SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo));
+        SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo));
         if (CertInfo.active)
             return true;
 

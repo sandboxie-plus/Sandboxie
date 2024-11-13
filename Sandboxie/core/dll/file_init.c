@@ -741,6 +741,7 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
     WCHAR save_char;
     FILE_GUID* guid;
     ULONG alloc_len;
+    WCHAR text[256];
 
     //
     // cleanup old guid entries
@@ -810,8 +811,7 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
         ULONG VolumeNameLen =
             MountPoint->SymbolicLinkNameLength / sizeof(WCHAR);
 
-        WCHAR text[256];
-        Sbie_snwprintf(text, 256, L"Found mountpoint: %.*s <-> %.*s", VolumeNameLen, VolumeName, DeviceNameLen, DeviceName);
+        Sbie_snwprintf(text, 256, L"Found Mountpoint: %.*s <-> %.*s", VolumeNameLen, VolumeName, DeviceNameLen, DeviceName);
         SbieApi_MonitorPut2(MONITOR_DRIVE | MONITOR_TRACE, text, FALSE);
 
         if (VolumeNameLen != 48 && VolumeNameLen != 49)
@@ -875,6 +875,8 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
 
                 DosPath += DosPathLen + 1;
                 while (*DosPath) {
+                    Sbie_snwprintf(text, 256, L"Mountpoint AddLink: %s <-> %s", DosPath, DeviceName);
+                    SbieApi_MonitorPut2(MONITOR_DRIVE | MONITOR_TRACE, text, FALSE);
                     File_AddLink(TRUE, DosPath, DeviceName);
                     DosPath += wcslen(DosPath) + 1;
                 }
@@ -891,9 +893,13 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
                 //
 
                 WCHAR *FirstDosPath = DosPath;
+                Sbie_snwprintf(text, 256, L"Mountpoint AddLink: %s <-> %s", FirstDosPath, DeviceName);
+                SbieApi_MonitorPut2(MONITOR_DRIVE | MONITOR_TRACE, text, FALSE);
                 File_AddLink(TRUE, FirstDosPath, DeviceName);
                 DosPath += DosPathLen + 1;
                 while (*DosPath) {
+                    Sbie_snwprintf(text, 256, L"Mountpoint AddLink: %s <-> %s", DosPath, DeviceName);
+                    SbieApi_MonitorPut2(MONITOR_DRIVE | MONITOR_TRACE, text, FALSE);
                     File_AddLink(TRUE, DosPath, DeviceName);
                     DosPath += wcslen(DosPath) + 1;
                 }
@@ -916,9 +922,13 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
                 //
 
                 WCHAR *FirstDosPath = DosPath;
+                Sbie_snwprintf(text, 256, L"Mountpoint AddLink: %s <-> %s", DeviceName, FirstDosPath);
+                SbieApi_MonitorPut2(MONITOR_DRIVE | MONITOR_TRACE, text, FALSE);
                 File_AddLink(TRUE, DeviceName, FirstDosPath);
                 DosPath += DosPathLen + 1;
                 while (*DosPath) {
+                    Sbie_snwprintf(text, 256, L"Mountpoint AddLink: %s <-> %s", DosPath, FirstDosPath);
+                    SbieApi_MonitorPut2(MONITOR_DRIVE | MONITOR_TRACE, text, FALSE);
                     File_AddLink(TRUE, DosPath, FirstDosPath);
                     DosPath += wcslen(DosPath) + 1;
                 }

@@ -522,7 +522,16 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
 	);
 
-	if (g_CertInfo.active) {
+	if (g_CertInfo.active) 
+	{
+		QString Text1 = ui.lblCertEntry->text();
+		ui.lblCertEntry->setText(QString("<a href=\"_\">%1</a>").arg(Text1));
+		ui.txtCertificate->setVisible(false);
+		connect(ui.lblCertEntry, &QLabel::linkActivated, this, [=]() {
+			ui.lblCertEntry->setText(Text1);
+			ui.txtCertificate->setVisible(true);
+		});
+
 		QString Text = ui.lblSerial->text();
 		ui.lblSerial->setText(QString("<a href=\"_\">%1</a>").arg(Text));
 		ui.txtSerial->setVisible(false);

@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.2 / 5.70.2] - 2024-10-
 
+### Added
+- added the ability to hide certificates in editbox in Global Setting (idea by Yeyixiao)
+
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)
 - fixed issue with DLL unloading

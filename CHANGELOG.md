@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)
 - fixed issue with DLL unloading
 - fixed Files Resource Access - Browse for Folder - allows access to excluded folders [#4007](https://github.com/sandboxie-plus/Sandboxie/issues/4007)
+- fixed "ForceDisableAdminOnly" is weird [#4233](https://github.com/sandboxie-plus/Sandboxie/issues/4233)
 
 ### Changed
 - validated compatibility with Windows build 27744 and updated DynData

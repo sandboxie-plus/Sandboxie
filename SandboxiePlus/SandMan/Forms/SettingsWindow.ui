@@ -459,27 +459,30 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsShell">
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="tabWindows">
             <attribute name="title">
              <string>Windows Shell</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_13">
-             <item row="6" column="2">
-              <widget class="QCheckBox" name="chkShellMenu2">
+             <item row="4" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkShellMenu">
                <property name="text">
-                <string>Add 'Run Un-Sandboxed' to the context menu</string>
+                <string>Add 'Run Sandboxed' to the explorer context menu</string>
                </property>
               </widget>
              </item>
-             <item row="11" column="2">
-              <widget class="QComboBox" name="cmbIntegrateMenu"/>
-             </item>
-             <item row="5" column="2">
-              <widget class="QCheckBox" name="chkAlwaysDefault">
+             <item row="0" column="0">
+              <widget class="QLabel" name="lblStartUp">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
                <property name="text">
-                <string>Always use DefaultBox</string>
+                <string>Start Sandbox Manager</string>
                </property>
               </widget>
              </item>
@@ -496,48 +499,26 @@
                </property>
               </spacer>
              </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="lblStartMenu">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
+             <item row="16" column="3">
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
                </property>
-               <property name="text">
-                <string>Start Menu Integration</string>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>272</width>
+                 <height>13</height>
+                </size>
                </property>
-              </widget>
+              </spacer>
              </item>
-             <item row="2" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkSvcStart">
-               <property name="text">
-                <string>Start UI when a sandboxed process is started</string>
-               </property>
-              </widget>
+             <item row="11" column="2">
+              <widget class="QComboBox" name="cmbIntegrateMenu"/>
              </item>
-             <item row="12" column="2">
-              <widget class="QComboBox" name="cmbIntegrateDesk"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="lblRunBoxed">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
+             <item row="5" column="2">
+              <widget class="QCheckBox" name="chkAlwaysDefault">
                <property name="text">
-                <string>Run Sandboxed - Actions</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkScanMenu">
-               <property name="text">
-                <string>Scan shell folders and offer links in run menu</string>
+                <string>Always use DefaultBox</string>
                </property>
               </widget>
              </item>
@@ -551,47 +532,6 @@
                </property>
                <property name="text">
                 <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="2" colspan="2">
-              <widget class="QCheckBox" name="chkShellMenu4">
-               <property name="text">
-                <string>Add 'Set Open Path in Sandbox' to context menu</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="lblStartUp">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="text">
-                <string>Start Sandbox Manager</string>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="3">
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>272</width>
-                 <height>13</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="7" column="2" colspan="2">
-              <widget class="QCheckBox" name="chkShellMenu3">
-               <property name="text">
-                <string>Add 'Set Force in Sandbox' to the context menu</string>
                </property>
               </widget>
              </item>
@@ -624,17 +564,43 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="1" colspan="3">
-              <widget class="QCheckBox" name="chkShellMenu">
+             <item row="8" column="2" colspan="2">
+              <widget class="QCheckBox" name="chkShellMenu4">
                <property name="text">
-                <string>Add 'Run Sandboxed' to the explorer context menu</string>
+                <string>Add 'Set Open Path in Sandbox' to context menu</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkAutoStart">
+             <item row="10" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkScanMenu">
                <property name="text">
-                <string>Start UI with Windows</string>
+                <string>Scan shell folders and offer links in run menu</string>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="1">
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>154</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="lblRunBoxed">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Run Sandboxed - Actions</string>
                </property>
               </widget>
              </item>
@@ -654,18 +620,76 @@
                </property>
               </widget>
              </item>
-             <item row="13" column="1">
-              <spacer name="verticalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+             <item row="2" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkSvcStart">
+               <property name="text">
+                <string>Start UI when a sandboxed process is started</string>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>154</height>
-                </size>
+              </widget>
+             </item>
+             <item row="12" column="2">
+              <widget class="QComboBox" name="cmbIntegrateDesk"/>
+             </item>
+             <item row="1" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkAutoStart">
+               <property name="text">
+                <string>Start UI with Windows</string>
                </property>
-              </spacer>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="lblStartMenu">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Start Menu Integration</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2">
+              <widget class="QCheckBox" name="chkShellMenu2">
+               <property name="text">
+                <string>Add 'Run Un-Sandboxed' to the context menu</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="2" colspan="2">
+              <widget class="QCheckBox" name="chkShellMenu3">
+               <property name="text">
+                <string>Add 'Set Force in Sandbox' to the context menu</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
+              <widget class="QLabel" name="lblDesktop">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Sandboxed Desktop</string>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkDeskAutoSwitch">
+               <property name="text">
+                <string>Switch to sandboxed desktop when starting a process</string>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="1" colspan="3">
+              <widget class="QCheckBox" name="chkDeskQuickSwitch">
+               <property name="text">
+                <string>Switch to sandboxed desktop with double click</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>

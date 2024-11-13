@@ -332,7 +332,7 @@ void CFileView::OnFileMenu(const QPoint&)
         {
             auto pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
             if (FoundPin.isEmpty())
-				pBoxPlus->InsertText("RunCommand", Split2(Files.first(), "\\", true).second + "|\"" + pBoxPlus->MakeBoxCommand(Files.first()) + "\"");
+				pBoxPlus->AppendText("RunCommand", Split2(Files.first(), "\\", true).second + "|\"" + pBoxPlus->MakeBoxCommand(Files.first()) + "\"");
             else
 				pBoxPlus->DelValue("RunCommand", FoundPin);
             break;

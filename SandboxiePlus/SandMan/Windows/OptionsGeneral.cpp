@@ -242,6 +242,8 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.btnCmdDown, SIGNAL(clicked(bool)), this, SLOT(OnCommandDown()));
 	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
 	connect(ui.treeRun, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnRunChanged()));
+
+	connect(ui.txtNotes, SIGNAL(textChanged()), this, SLOT(OnGeneralChanged()));
 }
 
 void COptionsWindow::LoadGeneral()
@@ -381,6 +383,8 @@ void COptionsWindow::LoadGeneral()
 
 	ui.chkAllowEfs->setChecked(m_pBox->GetBool("EnableEFS", false));
 
+	ui.txtNotes->setPlainText(m_pBox->GetTextList("Note", false).join("\n"));
+
 	OnGeneralChanged();
 
 	m_GeneralChanged = false;
@@ -452,7 +456,7 @@ void COptionsWindow::SaveGeneral()
 	//WriteTextList("RunCommand", RunCommands);
 	m_pBox->DelValue("RunCommand");
 	foreach(const QString& Value, RunCommands)
-		m_pBox->InsertText("RunCommand", Value);
+		m_pBox->AppendText("RunCommand", Value);
 
 
 	if (ui.cmbVersion->isEnabled()) 
@@ -513,6 +517,10 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkRawDiskNotify, "NotifyDirectDiskAccess", "y", "");
 
 	WriteAdvancedCheck(ui.chkAllowEfs, "EnableEFS", "y", "");
+
+	m_pBox->DelValue("Note");
+	foreach(const QString& Value, ui.txtNotes->toPlainText().split("\n"))
+		m_pBox->AppendText("Note", Value);
 
 	m_GeneralChanged = false;
 }

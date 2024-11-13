@@ -44,6 +44,13 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
 	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+#ifdef INSIDER_BUILD
+	connect(ui.chkSbieDesktop, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+#else
+	ui.chkSbieDesktop->setVisible(false);
+#endif
+	connect(ui.chkOpenWndStation, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkOpenDevCMApi, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenSamEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -186,6 +193,11 @@ void COptionsWindow::LoadAdvanced()
 
 	ui.chkNoSecurityIsolation->setChecked(m_pBox->GetBool("NoSecurityIsolation", false));
 	ui.chkNoSecurityFiltering->setChecked(m_pBox->GetBool("NoSecurityFiltering", false));
+
+#ifdef INSIDER_BUILD
+	ui.chkSbieDesktop->setChecked(m_pBox->GetBool("UseSandboxDesktop", false));
+#endif
+	ui.chkOpenWndStation->setChecked(m_pBox->GetBool("OpenWndStation", false));
 
 	ui.chkOpenDevCMApi->setChecked(m_pBox->GetBool("OpenDevCMApi", false));
 	//ui.chkOpenLsaSSPI->setChecked(!m_pBox->GetBool("BlockPassword", true)); // OpenLsaSSPI
@@ -441,6 +453,11 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkNoSecurityIsolation, "NoSecurityIsolation", "y", "");
 	WriteAdvancedCheck(ui.chkNoSecurityFiltering, "NoSecurityFiltering", "y", "");
+
+#ifdef INSIDER_BUILD
+	WriteAdvancedCheck(ui.chkSbieDesktop, "UseSandboxDesktop", "y", "");
+#endif
+	WriteAdvancedCheck(ui.chkOpenWndStation, "OpenWndStation", "y", "");
 
 	WriteAdvancedCheck(ui.chkOpenDevCMApi, "OpenDevCMApi", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "n", ""); // OpenLsaSSPI

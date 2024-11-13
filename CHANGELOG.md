@@ -10,12 +10,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added the ability to hide certificates in editbox in Global Setting (idea by Yeyixiao)
 - added Opening a program in several sandboxes at once [#4231](https://github.com/sandboxie-plus/Sandboxie/issues/4231)
+- added "Description" field inside the sandbox settings [#4243](https://github.com/sandboxie-plus/Sandboxie/issues/4243)
 
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)
 - fixed issue with DLL unloading
 - fixed Files Resource Access - Browse for Folder - allows access to excluded folders [#4007](https://github.com/sandboxie-plus/Sandboxie/issues/4007)
 - fixed "ForceDisableAdminOnly" is weird [#4233](https://github.com/sandboxie-plus/Sandboxie/issues/4233)
+- fixed deadlock on no op condition when renaming file or folder [#4304](https://github.com/sandboxie-plus/Sandboxie/issues/4304)
 
 ### Changed
 - validated compatibility with Windows build 27744 and updated DynData

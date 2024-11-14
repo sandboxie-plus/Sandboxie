@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added the ability to hide certificates in editbox in Global Setting (idea by Yeyixiao)
 - added Opening a program in several sandboxes at once [#4231](https://github.com/sandboxie-plus/Sandboxie/issues/4231)
 - added "Description" field inside the sandbox settings [#4243](https://github.com/sandboxie-plus/Sandboxie/issues/4243)
+- added "NotifyMsiInstaller=y" enabled by default to display message SBIE2194 when an MSI installer is run in a box without the recomended excemptions [#4330](https://github.com/sandboxie-plus/Sandboxie/issues/4330)
+  - SBIE2194: MSI installer requires 'MsiInstallerExemptions=y' option to be set in the ini to be able to work correctly, however this option weakens the isolation.
 
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)

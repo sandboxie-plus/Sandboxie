@@ -886,10 +886,16 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
         // msi installer requires COM to be sandboxed, else the installation will be done outside the sandbox
         //
 
-        if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && SbieDll_IsOpenCOM()) {
+        if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER) {
 
-            SbieApi_Log(2196, NULL);
-            ExitProcess(0);
+            if (SbieDll_IsOpenCOM()) {
+                SbieApi_Log(2196, NULL);
+                ExitProcess(0);
+            }
+
+            if (!SbieApi_QueryConfBool(NULL, L"MsiInstallerExemptions", FALSE) && SbieApi_QueryConfBool(NULL, L"NotifyMsiInstaller", TRUE)) {
+                SbieApi_Log(2194, L"MsiInstallerExemptions=y");
+            }
         }
     }
     else

@@ -1880,61 +1880,6 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
 // Custom_ProductID
 //---------------------------------------------------------------------------
 
-/*static wchar_t GetCharFromInt(int a) {
-	switch (a) {
-	case 0:
-		return L'0';
-		break;
-	case 1:
-		return L'1';
-		break;
-	case 2:
-		return L'2';
-		break;
-	case 3:
-		return L'3';
-		break;
-	case 4:
-		return L'4';
-		break;
-	case 5:
-		return L'5';
-		break;
-	case 6:
-		return L'6';
-		break;
-	case 7:
-		return L'7';
-		break;
-	case 8:
-		return L'8';
-		break;
-	case 9:
-		return L'9';
-		break;
-	}
-	return 0;
-}
-
-static int GetIntLen(DWORD n) {
-	int count = 0;
-	while (n != 0)
-	{
-		n = n / 10;
-		count++;
-	}
-	return count;
-}*/
-
-static unsigned long seed = 1;
-
-int my_rand(void)
-{
-	seed = (seed * 214013L
-		+ 2531011L) >> 16;
-	return((unsigned)seed & 0x7fff);
-}
-
 /*char* my_itoa(int num, char* str, int radix)
 {
 	char index[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -2026,11 +1971,10 @@ _FX BOOLEAN  Custom_ProductID(void)
 
 			RtlInitUnicodeString(&uni, L"ProductId");
 
-			seed = GetTickCount();
-			int chain1 = my_rand() % 10000 + 9999,
-				chain2 = my_rand() % 10000 + 9999,
-				chain3 = my_rand() % 10000 + 9999,
-				chain4 = my_rand() % 10000 + 9999
+			int chain1 = Dll_rand() % 10000 + 9999,
+				chain2 = Dll_rand() % 10000 + 9999,
+				chain3 = Dll_rand() % 10000 + 9999,
+				chain4 = Dll_rand() % 10000 + 9999
 				;
 			Sbie_snwprintf(tmp, 34, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
 			

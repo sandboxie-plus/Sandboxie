@@ -3,11 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-
-
 ## [1.15.2 / 5.70.2] - 2024-10-
 
 ### Added
+- added "DiskSerialNumberValueX"(Fill number 0-9 to 'X') to set Disk Serial Number for indivdal box.
 - added the ability to hide certificates in editbox in Global Setting (idea by Yeyixiao)
 - added Opening a program in several sandboxes at once [#4231](https://github.com/sandboxie-plus/Sandboxie/issues/4231)
 - added "Description" field inside the sandbox settings [#4243](https://github.com/sandboxie-plus/Sandboxie/issues/4243)

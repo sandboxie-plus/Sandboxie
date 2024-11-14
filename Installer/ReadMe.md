@@ -2,7 +2,7 @@
 
 ### To create Sbie Plus installer environment
 
-1) Install Inno Setup 6.2.2 (installer is located at https://jrsoftware.org/isdl.php#stable)
+1) Install Inno Setup 6.3.3 (installer is located at https://jrsoftware.org/isdl.php)
 
 > Note: this section requires additional steps to be completed, please open a new pull request.
 

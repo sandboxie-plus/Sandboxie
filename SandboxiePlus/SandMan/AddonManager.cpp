@@ -82,9 +82,7 @@ QList<CAddonInfoPtr> CAddonManager::GetAddons()
 			
 			QString Key = pAddon->GetSpecificEntry("uninstallKey").toString();
 			if (!Key.isEmpty()) {
-				QSettings settings(Key, QSettings::NativeFormat);
-				QString Uninstall = settings.value("UninstallString").toString();
-				if (!Uninstall.isEmpty()) {
+				if(CSbieTemplates::CheckRegistryKey(Key)) {
 					Installed = true;
 					m_Installed.append(CAddonPtr(new CAddon(pAddon->Data)));
 				}
@@ -138,11 +136,8 @@ CAddonPtr CAddonManager::GetAddon(const QString& Id, EState State)
 /*bool CAddonManager::CheckAddon(const CAddonPtr& pAddon)
 {
 	QString Key = pAddon->GetSpecificEntry("uninstallKey").toString();
-	if (!Key.isEmpty()) {
-		QSettings settings(Key, QSettings::NativeFormat);
-		QString Uninstall = settings.value("UninstallString").toString();
-		return !Uninstall.isEmpty();
-	}
+	if (!Key.isEmpty())
+		return CSbieTemplates::CheckRegistryKey(Key);
 	
 	/ *QStringList Files = pAddon->GetSpecificEntry("files").toStringList();
 	foreach(const QString & File, Files) {

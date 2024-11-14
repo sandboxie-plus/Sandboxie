@@ -733,9 +733,9 @@ _FX void Dll_SelectImageType(void)
 {
     Dll_ImageType = Dll_GetImageType(Dll_ImageName);
 
-    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED &&
-            _wcsnicmp(Dll_ImageName, L"FlashPlayerPlugin_", 18) == 0)
-        Dll_ImageType = DLL_IMAGE_FLASH_PLAYER_SANDBOX;
+    //if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED &&
+    //        _wcsnicmp(Dll_ImageName, L"FlashPlayerPlugin_", 18) == 0)
+    //    Dll_ImageType = DLL_IMAGE_FLASH_PLAYER_SANDBOX;
 
     if (Dll_ImageType == DLL_IMAGE_DLLHOST) {
 
@@ -773,8 +773,8 @@ _FX void Dll_SelectImageType(void)
 
         if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME ||
             Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX ||
-            Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
-            Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX) {
+            //Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX
+            Dll_ImageType == DLL_IMAGE_ACROBAT_READER) {
 
             Dll_ChromeSandbox = TRUE;
         }

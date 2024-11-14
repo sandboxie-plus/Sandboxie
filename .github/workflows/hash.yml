@@ -19,6 +19,7 @@ jobs:
 
     env:
       HASH_FILE: "sha256-checksums.txt"  # Name of the file for storing SHA256 hashes
+      GITHUB_API_VERSION: "2022-11-28"   # Define the GitHub API version as a variable
 
     steps:
       - name: Download release assets
@@ -29,7 +30,7 @@ jobs:
           # Fetch asset data from GitHub API
           ASSET_DATA=$(curl -sSL \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "X-GitHub-Api-Version: ${{ env.GITHUB_API_VERSION }}" \
             "https://api.github.com/repos/${{ github.repository }}/releases/tags/$TAG")
           
           ASSET_URLS=($(echo "$ASSET_DATA" | jq -r '.assets[].browser_download_url'))  # Extract asset URLs
@@ -86,7 +87,7 @@ jobs:
           RELEASE_ID=$(curl -sL \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "X-GitHub-Api-Version: ${{ env.GITHUB_API_VERSION }}" \
             "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.event.release.tag_name }}" | \
             jq -r '.id')
 
@@ -116,7 +117,7 @@ jobs:
               EXISTING_ASSET_ID=$(curl -sL \
                 -H "Accept: application/vnd.github+json" \
                 -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                -H "X-GitHub-Api-Version: 2022-11-28" \
+                -H "X-GitHub-Api-Version: ${{ env.GITHUB_API_VERSION }}" \
                 "https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets" | \
                 jq -r --arg FILE_NAME "${{ env.HASH_FILE }}" '.[] | select(.name == $FILE_NAME) | .id')
 
@@ -126,7 +127,7 @@ jobs:
                   -X DELETE \
                   -H "Accept: application/vnd.github+json" \
                   -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                  -H "X-GitHub-Api-Version: 2022-11-28" \
+                  -H "X-GitHub-Api-Version: ${{ env.GITHUB_API_VERSION }}" \
                   "https://api.github.com/repos/${{ github.repository }}/releases/assets/$EXISTING_ASSET_ID" || { echo "Failed to delete asset"; exit 1; }
               fi
             fi
@@ -140,7 +141,7 @@ jobs:
             -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "X-GitHub-Api-Version: ${{ env.GITHUB_API_VERSION }}" \
             -H "Content-Type: application/octet-stream" \
             "https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=${{ env.HASH_FILE }}" \
             --data-binary @"${{ github.workspace }}/${{ env.HASH_FILE }}" || { echo "Failed to upload hash file"; exit 1; }

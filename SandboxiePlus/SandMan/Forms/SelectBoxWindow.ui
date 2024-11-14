@@ -111,6 +111,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>radBoxed</tabstop>
+  <tabstop>treeBoxes</tabstop>
+  <tabstop>radBoxedNew</tabstop>
+  <tabstop>radUnBoxed</tabstop>
+  <tabstop>chkFCP</tabstop>
+  <tabstop>chkAdmin</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -1707,7 +1707,7 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 				Entry["Name"] = pProcess->GetProcessName();
 				Entry["WorkingDir"] = pProcess->GetWorkingDir();
 				Entry["Command"] = pBoxPlus->MakeBoxCommand(pProcess->GetFileName());
-				pBoxPlus->InsertText("RunCommand", MakeRunEntry(Entry));
+				pBoxPlus->AppendText("RunCommand", MakeRunEntry(Entry));
 			}
 			else if(!m_pMenuPinToRun->data().toString().isEmpty())
 				pBoxPlus->DelValue("RunCommand", m_pMenuPinToRun->data().toString());
@@ -1982,7 +1982,7 @@ void CSbieView::OnMenuContextAction()
 		QString Link = m_pCtxPinToRun->data().toString();
 		if (!Link.isEmpty()) {
 			if (m_pCtxPinToRun->isChecked())
-				pBoxPlus->InsertText("RunCommand", Link);
+				pBoxPlus->AppendText("RunCommand", Link);
 			else
 				pBoxPlus->DelValue("RunCommand", Link);
 		}

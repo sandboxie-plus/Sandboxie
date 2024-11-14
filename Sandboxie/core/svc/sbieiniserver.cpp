@@ -371,7 +371,7 @@ MSG_HEADER *SbieIniServer::GetUser(MSG_HEADER *msg)
     bool ok2 = SetUserSettingsSectionName(hToken);
 
     BOOLEAN admin = FALSE;
-    if (ok2 && TokenIsAdmin(hToken, true))
+    if (ok2 && TokenIsAdmin(hToken))
         admin = TRUE;
 
     CloseHandle(hToken);

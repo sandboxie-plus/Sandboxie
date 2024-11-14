@@ -997,7 +997,7 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
     std::wstring TargetNtPath;
 
     SCertInfo CertInfo = { 0 };
-    if ((UseFileImage || UseRamDisk) && (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo))) || !CERT_IS_LEVEL(CertInfo, (UseFileImage ? eCertAdvanced1 : eCertStandard)))) {
+    if ((UseFileImage || UseRamDisk) && (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !(UseFileImage ? CertInfo.opt_enc : CertInfo.active))) {
         const WCHAR* strings[] = { boxname, UseFileImage ? L"UseFileImage" : L"UseRamDisk" , NULL };
         SbieApi_LogMsgExt(session_id, UseFileImage ? 6009 : 6008, strings);
         errlvl = 0x66;

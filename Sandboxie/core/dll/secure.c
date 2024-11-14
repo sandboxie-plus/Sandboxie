@@ -231,6 +231,8 @@ BOOLEAN Secure_ShouldFakeRunningAsAdmin = FALSE;
 BOOLEAN Secure_IsInternetExplorerTabProcess = FALSE;
 BOOLEAN Secure_Is_IE_NtQueryInformationToken = FALSE;
 
+BOOLEAN Secure_CopyACLs = FALSE;
+
 BOOLEAN Secure_FakeAdmin = FALSE;
 
 static UCHAR AdministratorsSid[16] = {
@@ -255,7 +257,20 @@ void Secure_InitSecurityDescriptors(void)
 
     PACL MyAcl;
     P_RtlAddMandatoryAce pRtlAddMandatoryAce;
-
+    
+    static UCHAR SystemLogonSid[12] = {
+	    1,                                      // Revision
+	    1,                                      // SubAuthorityCount
+	    0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+	    SECURITY_LOCAL_SYSTEM_RID,0,0,0         // SubAuthority
+    };
+    static UCHAR AdministratorsSid[16] = {
+        1,                                      // Revision
+        2,                                      // SubAuthorityCount
+        0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+        0x20, 0, 0, 0,                          // SubAuthority 1 - SECURITY_BUILTIN_DOMAIN_RID
+        0x20, 2, 0, 0                           // SubAuthority 2 - DOMAIN_ALIAS_RID_ADMINS
+    };
     static UCHAR AuthenticatedUsersSid[12] = {
         1,                                      // Revision
         1,                                      // SubAuthorityCount
@@ -303,8 +318,15 @@ void Secure_InitSecurityDescriptors(void)
     // build Normal Security Descriptor used for files, keys, etc
     //
 
-    MyAllocAndInitACL(MyAcl, 256);
-    MyAddAccessAllowedAce(MyAcl, &AuthenticatedUsersSid);
+    if (SbieApi_QueryConfBool(NULL, L"LockBoxToUser", FALSE)) {
+        MyAllocAndInitACL(MyAcl, 512);
+        MyAddAccessAllowedAce(MyAcl, &SystemLogonSid);
+        MyAddAccessAllowedAce(MyAcl, &AdministratorsSid);
+    }
+    else {
+        MyAllocAndInitACL(MyAcl, 256);
+        MyAddAccessAllowedAce(MyAcl, &AuthenticatedUsersSid);
+    }
 
     if (Dll_SidString) {
         UserSid = Dll_SidStringToSid(Dll_SidString);
@@ -410,6 +432,8 @@ _FX BOOLEAN Secure_Init(void)
     void* RtlEqualSid = (P_RtlEqualSid)GetProcAddress(Dll_Ntdll, "RtlEqualSid");
 
     SBIEDLL_HOOK(Ldr_, RtlEqualSid);
+
+    Secure_CopyACLs = SbieApi_QueryConfBool(NULL, L"UseOriginalACLs", FALSE);
 
     //
     // install hooks to fake administrator privileges
@@ -734,7 +758,7 @@ _FX NTSTATUS Secure_NtDuplicateObject(
             //
 
             __sys_NtDuplicateObject(
-                SourceProcessHandle, SourceHandle, NULL, NULL,
+                SourceProcessHandle, SourceHandle, NULL, 0,
                 DesiredAccess, HandleAttributes, DUPLICATE_CLOSE_SOURCE);
         }
 

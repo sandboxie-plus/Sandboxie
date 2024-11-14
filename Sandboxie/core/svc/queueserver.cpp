@@ -24,6 +24,7 @@
 #include "queueserver.h"
 #include "queuewire.h"
 #include "core/dll/sbieapi.h"
+#include "userserver.h"
 #include "GuiServer.h"
 
 
@@ -1012,7 +1013,11 @@ MSG_HEADER *QueueServer::StartupHandler(MSG_HEADER *msg, HANDLE idProcess)
         goto finish;
     }
 
-    if (_wcsnicmp(req->queue_name, L"*GUIPROXY", 9) == 0) {
+    if (_wcsnicmp(req->queue_name, L"*USERPROXY", 10) == 0) {
+
+        status = UserServer::GetInstance()->StartAsync(session_id, hEvent);
+    }
+    else if (_wcsnicmp(req->queue_name, L"*GUIPROXY", 9) == 0) {
 
         status = GuiServer::GetInstance()->StartAsync(session_id, hEvent);
     }

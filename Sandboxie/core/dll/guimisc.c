@@ -1353,7 +1353,7 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
         memcpy(reqData, pData, lenData);
 
     // GetRawInputDeviceInfoA accesses pcbSize without testing it for being not NULL 
-    // hence if the caller passes NULL we use a dummy value so that we dont crash the helper service
+    // hence if the caller passes NULL we use a dummy value so that we don't crash the helper service
     if (pcbSize)
         req->cbSize = *pcbSize;
     else

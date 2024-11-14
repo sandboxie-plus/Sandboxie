@@ -17,6 +17,7 @@
 #include <qfontdialog.h>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "Helpers/TabOrder.h"
 
 
 #include <windows.h>
@@ -175,6 +176,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	AddIconToLabel(ui.lblStartUp, CSandMan::GetIcon("Start").pixmap(size,size));
 	AddIconToLabel(ui.lblRunBoxed, CSandMan::GetIcon("Run").pixmap(size,size));
 	AddIconToLabel(ui.lblStartMenu, CSandMan::GetIcon("StartMenu").pixmap(size,size));
+	AddIconToLabel(ui.lblDesktop, CSandMan::GetIcon("Monitor").pixmap(size,size));
 	AddIconToLabel(ui.lblSysTray, CSandMan::GetIcon("Maintenance").pixmap(size,size));
 
 	AddIconToLabel(ui.lblInterface, CSandMan::GetIcon("GUI").pixmap(size,size));
@@ -347,6 +349,15 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbIntegrateDesk, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+
+#ifdef INSIDER_BUILD
+	connect(ui.chkDeskAutoSwitch, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkDeskQuickSwitch, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+#else
+	ui.lblDesktop->setVisible(false);
+	ui.chkDeskAutoSwitch->setVisible(false);
+	ui.chkDeskQuickSwitch->setVisible(false);
+#endif
 	
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
@@ -425,14 +436,14 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.cmbDefault, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkAutoRoot, SIGNAL(stateChanged(int)), this, SLOT(OnRootChanged())); // not sbie ini
 	connect(ui.fileRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkLockBox, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.regRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.ipcRoot, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnGeneralChanged()));
-
+	
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	if (CurrentVersion.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
 		ui.chkWin32k->setEnabled(false);
-	//connect(ui.chkForceExplorerChild, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	//connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	m_FeaturesChanged = false;
 	connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
@@ -520,7 +531,16 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
 	);
 
-	if (g_CertInfo.active) {
+	if (g_CertInfo.active) 
+	{
+		QString Text1 = ui.lblCertEntry->text();
+		ui.lblCertEntry->setText(QString("<a href=\"_\">%1</a>").arg(Text1));
+		ui.txtCertificate->setVisible(false);
+		connect(ui.lblCertEntry, &QLabel::linkActivated, this, [=]() {
+			ui.lblCertEntry->setText(Text1);
+			ui.txtCertificate->setVisible(true);
+		});
+
 		QString Text = ui.lblSerial->text();
 		ui.lblSerial->setText(QString("<a href=\"_\">%1</a>").arg(Text));
 		ui.txtSerial->setVisible(false);
@@ -590,7 +610,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
 	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
+	if (!g_CertInfo.active) {
 		//COptionsWindow__AddCertIcon(ui.chkUpdateTemplates);
 		COptionsWindow__AddCertIcon(ui.chkUpdateIssues);
 		COptionsWindow__AddCertIcon(ui.chkRamDisk);
@@ -627,6 +647,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		this->addAction(pSetTree);
 	}
 	m_pSearch->setPlaceholderText(tr("Search for settings"));
+
+	SetTabOrder(this);
 }
 
 void CSettingsWindow::ApplyIniEditFont()
@@ -974,7 +996,12 @@ void CSettingsWindow::LoadSettings()
 	ui.chkScanMenu->setChecked(theConf->GetBool("Options/ScanStartMenu", true));
 	ui.cmbIntegrateMenu->setCurrentIndex(theConf->GetInt("Options/IntegrateStartMenu", 0));
 	ui.cmbIntegrateDesk->setCurrentIndex(theConf->GetInt("Options/IntegrateDesktop", 0));
-	
+
+#ifdef INSIDER_BUILD
+	ui.chkDeskAutoSwitch->setChecked(theConf->GetBool("Options/AutoDesktopSwitch", true));
+	ui.chkDeskQuickSwitch->setChecked(theConf->GetBool("Options/QuickDesktopSwitch", true));
+#endif
+
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
 	ui.chkCompactTray->setChecked(theConf->GetBool("Options/CompactTray", false));
@@ -983,7 +1010,6 @@ void CSettingsWindow::LoadSettings()
 	ui.chkMinimize->setChecked(theConf->GetBool("Options/MinimizeToTray", false));
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
-	//ui.chkForceExplorerChild->setChecked(strcmp(theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").toStdString().c_str(), theAPI->GetGlobalSettings()->GetText("DefaultBox").toStdString().c_str())==0);
 	OnLoadAddon();
 
 	bool bImDiskReady = theGUI->IsImDiskReady();
@@ -1017,6 +1043,7 @@ void CSettingsWindow::LoadSettings()
 		QString IpcRootPath_Default  = "\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%";
 
 		ui.fileRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("FileRootPath", FileRootPath_Default));
+		ui.chkLockBox->setChecked(theAPI->GetGlobalSettings()->GetBool("LockBoxToUser", false)); 
 		//ui.chkSeparateUserFolders->setChecked(theAPI->GetGlobalSettings()->GetBool("SeparateUserFolders", true));
 		ui.regRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("KeyRootPath", KeyRootPath_Default));
 		ui.ipcRoot->setCurrentText(theAPI->GetGlobalSettings()->GetText("IpcRootPath", IpcRootPath_Default));
@@ -1084,6 +1111,7 @@ void CSettingsWindow::LoadSettings()
 		ui.fileRoot->setEnabled(false);
 		//ui.chkSeparateUserFolders->setEnabled(false);
 		ui.chkAutoRoot->setEnabled(false);
+		ui.chkLockBox->setEnabled(false);
 		ui.chkWFP->setEnabled(false);
 		ui.chkObjCb->setEnabled(false);
 		ui.chkWin32k->setEnabled(false);
@@ -1164,7 +1192,7 @@ void CSettingsWindow::OnRamDiskChange()
 {
 	if (sender() == ui.chkRamDisk) {
 		if (ui.chkRamDisk->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, -1);
 	}
 
 	if (ui.chkRamDisk->isChecked() && ui.txtRamLimit->text().isEmpty())
@@ -1187,7 +1215,7 @@ void CSettingsWindow::OnVolumeChanged()
 { 
 	if (sender() == ui.chkSandboxUsb) {
 		if (ui.chkSandboxUsb->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, -1);
 	}
 
 	ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
@@ -1758,6 +1786,11 @@ void CSettingsWindow::SaveSettings()
 		theGUI->SyncStartMenu();
 	}
 
+#ifdef INSIDER_BUILD
+	theConf->SetValue("Options/AutoDesktopSwitch", ui.chkDeskAutoSwitch->isChecked());
+	theConf->SetValue("Options/QuickDesktopSwitch", ui.chkDeskQuickSwitch->isChecked());
+#endif
+
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
 	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
@@ -1765,10 +1798,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
-	//if (ui.chkForceExplorerChild->isChecked())
-	//	theAPI->GetGlobalSettings()->SetText("ForceExplorerChild", theAPI->GetGlobalSettings()->GetText("DefaultBox"));
-	//else if (theAPI->GetGlobalSettings()->GetText("ForceExplorerChild").compare(theAPI->GetGlobalSettings()->GetText("DefaultBox")) == 0)
-	//	theAPI->GetGlobalSettings()->DelValue("ForceExplorerChild");
+
 	if (theAPI->IsConnected())
 	{
 		try
@@ -1799,7 +1829,7 @@ void CSettingsWindow::SaveSettings()
 				//WriteTextList("RunCommand", RunCommands);
 				theAPI->GetGlobalSettings()->DelValue("RunCommand");
 				foreach(const QString & Value, RunCommands)
-					theAPI->GetGlobalSettings()->InsertText("RunCommand", Value);
+					theAPI->GetGlobalSettings()->AppendText("RunCommand", Value);
 			}
 
 			if (m_GeneralChanged)
@@ -1809,6 +1839,7 @@ void CSettingsWindow::SaveSettings()
 				WriteText("DefaultBox", ui.cmbDefault->currentData().toString());
 
 				WriteText("FileRootPath", ui.fileRoot->currentText()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+				WriteAdvancedCheck(ui.chkLockBox, "LockBoxToUser", "y", "");
 				//WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
 				WriteText("KeyRootPath", ui.regRoot->currentText()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
 				WriteText("IpcRootPath", ui.ipcRoot->currentText()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");

@@ -21,6 +21,9 @@
        <property name="text">
         <string>Box Root Folder</string>
        </property>
+       <property name="buddy">
+        <cstring>cmbRoot</cstring>
+       </property>
       </widget>
      </item>
      <item row="1" column="1">
@@ -44,6 +47,9 @@
       <widget class="QLabel" name="label">
        <property name="text">
         <string>Import Sandbox Name</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtName</cstring>
        </property>
       </widget>
      </item>
@@ -88,6 +94,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>txtName</tabstop>
+  <tabstop>cmbRoot</tabstop>
+  <tabstop>btnRoot</tabstop>
+  <tabstop>chkNoCrypt</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

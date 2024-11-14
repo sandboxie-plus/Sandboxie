@@ -237,6 +237,9 @@
     <ClCompile Include="Windows\ExtractDialog.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\TabOrder.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="CustomStyles.h">
       <Filter>SandMan</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\TabOrder.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,7 @@ UsedUserAreasWarning=no
 VersionInfoCopyright=Copyright (C) 2020-2024 by David Xanatos (xanasoft.com)
 VersionInfoVersion={#MyAppVersion}
 SetupIconFile=SandManInstall.ico
+SignTool=sha256
 
 ; Handled in code section as always want DirPage for portable mode.
 DisableDirPage=no

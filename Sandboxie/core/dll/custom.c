@@ -1589,19 +1589,75 @@ LABEL_9:
 }
 */
 
-wchar_t itoa1(int num) {
-	switch (num) {
-	case 0:return L'0';
-	case 1:return L'1';
-	case 2:return L'2';
-	case 3:return L'4';
-	case 5:return L'5';
-	case 6:return L'6';
-	case 7:return L'7';
-	case 8:return L'8';
-	case 9:return L'9';
-	default:return L'0';
-	}
+int hex_digit_value(wchar_t c) {
+    if (c >= (wchar_t)'0' && c <= (wchar_t)'9') {
+        return c - (wchar_t)'0';
+    } else if (c >= (wchar_t)'a' && c <= (wchar_t)'f') {
+        return 10 + (c - (wchar_t)'a');
+    } else if (c >= (wchar_t)'A' && c <= (wchar_t)'F') {
+        return 10 + (c - (wchar_t)'A');
+    } else {
+        return -1; // Invalid hex digit
+    }
+}
+
+BOOL hex_string_to_uint8_array(const wchar_t* str, unsigned char* output_array, size_t* output_length, BOOL swap_bytes)
+{
+    size_t output_index = 0;
+    int digit_high = -1;
+    size_t i = 0;
+    size_t capacity = *output_length;
+
+    // empty string counts as invalid
+    if (!*str)
+        return FALSE;
+
+    while (1) {
+        wchar_t c = str[i++];
+        if (c == 0) {
+            break;
+        }
+        else if (c == (wchar_t)'-') {
+            continue;
+        }
+        else {
+            int value = hex_digit_value(c);
+            if (value == -1) {
+                // Invalid character encountered
+                return FALSE;
+            }
+            if (digit_high == -1) {
+                digit_high = value;
+            }
+            else {
+                int digit_low = value;
+                if (output_index >= capacity) {
+                    // Exceeded capacity of output_array
+                    return FALSE;
+                }
+                output_array[output_index++] = (digit_high << 4) | digit_low;
+                digit_high = -1;
+            }
+        }
+    }
+
+    // Check for incomplete byte (odd number of hex digits)
+    if (digit_high != -1) {
+        return FALSE;
+    }
+
+    // Swap the bytes in output_array to match the expected endianness
+    if (swap_bytes) {
+        size_t j;
+        for (j = 0; j < output_index / 2; j++) {
+            unsigned char temp = output_array[j];
+            output_array[j] = output_array[output_index - 1 - j];
+            output_array[output_index - 1 - j] = temp;
+        }
+    }
+
+    *output_length = output_index;
+    return TRUE;
 }
 
 ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigned int TcpInformationId, void **pAddrEntry, int SizeOfAddrEntry, void **a6, int a7, void **pStateEntry, int SizeOfStateEntry, void **pOwnerEntry, int SizeOfOwnerEntry, DWORD *Count, int a13)
@@ -1645,19 +1701,18 @@ ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigne
                     memcpy(pEntry->Address, lpMac, 8);
 		        else
 		        {
-					wchar_t KeyName1[30] = {0}, KeyName2[30] = {0};
-					Sbie_snwprintf(KeyName1, 30, L"%s%s", L"MacAddressValueMajor", itoa1(num));
-					Sbie_snwprintf(KeyName2, 30, L"%s%s", L"MacAddressValueMinor", itoa1(num));
-					DWORD mac = SbieApi_QueryConfNumber(NULL, KeyName2, 0);
-					DWORD mac2 = SbieApi_QueryConfNumber(NULL,KeyName2,0);
-					if (mac != 0 && mac2 != 0) {
-						*(DWORD*)&pEntry->Address[0] = mac;
-						*(DWORD*)&pEntry->Address[4] = mac2;
-					}
-					else {
-						*(DWORD*)&pEntry->Address[0] = Dll_rand();
+                    WCHAR NicIndex[30] = { 0 };
+                    Sbie_snwprintf(NicIndex, 30, L"%d", num);
+
+                    WCHAR Value[30] = { 0 };
+				    SbieDll_GetSettingsForName(NULL, NicIndex, L"NetworkAdapterMAC", Value, sizeof(Value), L"");
+
+                    size_t AddressLen = 8;
+                    if (!hex_string_to_uint8_array(Value, pEntry->Address, &AddressLen, FALSE)) {
+                        *(DWORD*)&pEntry->Address[0] = Dll_rand();
 						*(DWORD*)&pEntry->Address[4] = Dll_rand();
-					}
+                    }
+
 					num++;
 			        map_insert(&Custom_NicMac, (void*)key, pEntry->Address, 8);
 		        }

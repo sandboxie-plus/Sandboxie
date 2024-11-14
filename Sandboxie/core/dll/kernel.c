@@ -523,65 +523,7 @@ _FX LANGID Kernel_GetSystemDefaultLangID()
 //Kernel_GetVolumeInformationByHandleW
 //----------------------------------------------------------------------------
 
-wchar_t itoa0(int num)
-{
-	switch (num) {
-	case 0:return L'0';
-	case 1:return L'1';
-	case 2:return L'2';
-	case 3:return L'4';
-	case 5:return L'5';
-	case 6:return L'6';
-	case 7:return L'7';
-	case 8:return L'8';
-	case 9:return L'9';
-	default:return L'0';
-	}
-}
-
-int IsValidHexString(const wchar_t* hexString)
-{
-	int length = lstrlen(hexString);
-	if (length != 9 || hexString[4] != L'-')
-	{
-		return 0;
-	}
-	for (int i = 0; i < length; i++)
-	{
-		if (i != 4 && !iswxdigit(hexString[i]))
-		{
-			return 0;
-		}
-	}
-	return 1;
-}
-
-unsigned long HexStringToULONG(const wchar_t* hexString) 
-{
-	int length = lstrlen(hexString);
-	for (int i = 0; i < length; ++i) {
-		if (hexString[i] == L'-') {
-			length--;
-		}
-	}
-	wchar_t* cleanedHexString = (wchar_t*)Dll_Alloc(length + 1);
-	if (!cleanedHexString) {
-		return 0;
-	}
-
-	int j = 0;
-	for (int i = 0; i < lstrlen(hexString); ++i) {
-		if (hexString[i] != L'-') {
-			cleanedHexString[j++] = hexString[i];
-		}
-	}
-	cleanedHexString[j] = L'\0';
-	unsigned long ulongValue = wcstoul(cleanedHexString, NULL, 16);
-
-	Dll_Free(cleanedHexString);
-
-	return ulongValue;
-}
+BOOL hex_string_to_uint8_array(const wchar_t* str, unsigned char* output_array, size_t* output_length, BOOL swap_bytes);
 
 _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize) 
 {
@@ -599,7 +541,6 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 			*lpVolumeSerialNumber = *lpCachedSerialNumber;
 		else
 		{
-			WCHAR Value[30] = { 0 };
 			WCHAR DeviceName[MAX_PATH] = { 0 };
 
 			ULONG LastError;
@@ -625,16 +566,14 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 				*lpVolumeSerialNumber = Dll_rand();
 			else
 			{
-				SbieDll_GetSettingsForName(NULL, DeviceName, L"DiskSerialNumber", Value, sizeof(Value), L"0000-0000");
-				if (!IsValidHexString(Value))
+				WCHAR Value[30] = { 0 };
+				SbieDll_GetSettingsForName(NULL, DeviceName, L"DiskSerialNumber", Value, sizeof(Value), L"");
+				DWORD value_buf = 0;;
+				size_t value_len = sizeof(value_buf);
+				if (hex_string_to_uint8_array(Value, &value_buf, &value_len, TRUE))
+					*lpVolumeSerialNumber = value_buf;
+				else 
 					*lpVolumeSerialNumber = Dll_rand();
-				else {
-					DWORD conf = HexStringToULONG(Value);
-					if (conf == 0)
-						*lpVolumeSerialNumber = Dll_rand();
-					else
-						*lpVolumeSerialNumber = conf;
-				}
 			}
 			
 			map_insert(&Kernel_DiskSN, key, lpVolumeSerialNumber, sizeof(DWORD));

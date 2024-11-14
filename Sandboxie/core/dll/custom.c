@@ -1588,6 +1588,7 @@ LABEL_9:
   return result;
 }
 */
+
 wchar_t itoa1(int num) {
 	switch (num) {
 	case 0:return L'0';
@@ -1602,6 +1603,7 @@ wchar_t itoa1(int num) {
 	default:return L'0';
 	}
 }
+
 ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigned int TcpInformationId, void **pAddrEntry, int SizeOfAddrEntry, void **a6, int a7, void **pStateEntry, int SizeOfStateEntry, void **pOwnerEntry, int SizeOfOwnerEntry, DWORD *Count, int a13)
 {
     ULONG ret = __sys_NsiAllocateAndGetTable(a1, NPI_MS_ID, TcpInformationId, pAddrEntry, SizeOfAddrEntry, a6, a7, pStateEntry, SizeOfStateEntry, pOwnerEntry, SizeOfOwnerEntry, Count, a13);

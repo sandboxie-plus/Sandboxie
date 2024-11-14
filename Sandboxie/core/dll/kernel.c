@@ -163,7 +163,11 @@ static LCID Kernel_GetSystemDefaultLCID();
 static LANGID Kernel_GetSystemDefaultLangID();
 
 static BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber, LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
-	
+
+extern NTSTATUS File_GetName(
+    HANDLE RootDirectory, UNICODE_STRING *ObjectName,
+    WCHAR **OutTruePath, WCHAR **OutCopyPath, ULONG *OutFlags);
+
 //---------------------------------------------------------------------------
 // Kernel_Init
 //---------------------------------------------------------------------------
@@ -519,7 +523,8 @@ _FX LANGID Kernel_GetSystemDefaultLangID()
 //Kernel_GetVolumeInformationByHandleW
 //----------------------------------------------------------------------------
 
-wchar_t itoa0(int num) {
+wchar_t itoa0(int num)
+{
 	switch (num) {
 	case 0:return L'0';
 	case 1:return L'1';
@@ -533,6 +538,7 @@ wchar_t itoa0(int num) {
 	default:return L'0';
 	}
 }
+
 int IsValidHexString(const wchar_t* hexString)
 {
 	int length = lstrlen(hexString);
@@ -549,7 +555,9 @@ int IsValidHexString(const wchar_t* hexString)
 	}
 	return 1;
 }
-unsigned long HexStringToULONG(const wchar_t* hexString) {
+
+unsigned long HexStringToULONG(const wchar_t* hexString) 
+{
 	int length = lstrlen(hexString);
 	for (int i = 0; i < length; ++i) {
 		if (hexString[i] == L'-') {
@@ -578,7 +586,6 @@ unsigned long HexStringToULONG(const wchar_t* hexString) {
 _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber,LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR  lpFileSystemNameBuffer, DWORD nFileSystemNameSize) 
 {
 	DWORD ourSerialNumber = 0;
-	static long num = 0;
 
 	BOOL rtn = __sys_GetVolumeInformationByHandleW(hFile, lpVolumeNameBuffer, nVolumeNameSize, &ourSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
 	if (lpVolumeSerialNumber != NULL) {
@@ -592,28 +599,44 @@ _FX BOOL Kernel_GetVolumeInformationByHandleW(HANDLE hFile, LPWSTR lpVolumeNameB
 			*lpVolumeSerialNumber = *lpCachedSerialNumber;
 		else
 		{
-			wchar_t Value[30] = { 0 };
-			//Sbie_snwprintf(KeyName, 30, L"%s%s", L"DiskSerialNumberValue", itoa0(num));
-			//DWORD conf = SbieApi_QueryConfNumber(NULL, KeyName, 0);
-			wchar_t handleName[MAX_PATH] = { 0 }, handleName2[23 + 1] = { 0 };
-			DWORD dWroteNum = 0;
-			Obj_GetObjectName(hFile, handleName, &dWroteNum);
-			if (dWroteNum > MAX_PATH)
-				ExitProcess(0);
-			strncpy_s(handleName2,24, handleName, 23);
-			//MessageBox(NULL,handleName2,handleName2,MB_OK);
-			SbieDll_GetSettingsForName(NULL, L"DiskSerialNumber", handleName2, Value, 30, L"0000-0000");
-			if (!IsValidHexString(Value))
-				*lpVolumeSerialNumber = Dll_rand();
-			else {
-				//*lpVolumeSerialNumber = conf;
-				DWORD conf=HexStringToULONG(Value);
-				if(conf==0)
-					*lpVolumeSerialNumber = Dll_rand();
-				else
-					*lpVolumeSerialNumber = conf;
+			WCHAR Value[30] = { 0 };
+			WCHAR DeviceName[MAX_PATH] = { 0 };
+
+			ULONG LastError;
+			THREAD_DATA* TlsData;
+
+			TlsData = Dll_GetTlsData(&LastError);
+			Dll_PushTlsNameBuffer(TlsData);
+
+			WCHAR* TruePath, * CopyPath;
+			File_GetName(hFile, NULL, &TruePath, &CopyPath, NULL);
+
+			if (_wcsnicmp(TruePath, L"\\Device\\", 8) == 0)
+			{
+				WCHAR* End = wcschr(TruePath + 8, L'\\');
+				if(!End) End = wcschr(TruePath + 8, L'\0');
+				wcsncpy(DeviceName, TruePath + 8, End - (TruePath + 8));
 			}
-			num++;
+
+			Dll_PopTlsNameBuffer(TlsData);
+			SetLastError(LastError);
+
+			if(*DeviceName == 0)
+				*lpVolumeSerialNumber = Dll_rand();
+			else
+			{
+				SbieDll_GetSettingsForName(NULL, DeviceName, L"DiskSerialNumber", Value, sizeof(Value), L"0000-0000");
+				if (!IsValidHexString(Value))
+					*lpVolumeSerialNumber = Dll_rand();
+				else {
+					DWORD conf = HexStringToULONG(Value);
+					if (conf == 0)
+						*lpVolumeSerialNumber = Dll_rand();
+					else
+						*lpVolumeSerialNumber = conf;
+				}
+			}
+			
 			map_insert(&Kernel_DiskSN, key, lpVolumeSerialNumber, sizeof(DWORD));
 		}
 

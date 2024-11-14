@@ -785,11 +785,6 @@ _FX NTSTATUS File_RenameOperation(
 
     Parms = &Iopb->Parameters;
 
-#ifdef _M_ARM64
-    if (! MmIsAddressValid(Parms->SetFileInformation.InfoBuffer)) // todo: arm64 // fix-me: why does this happen?
-        return STATUS_ACCESS_DENIED;
-#endif
-
     if(LinkOp) {
 
         FILE_LINK_INFORMATION *infoL;

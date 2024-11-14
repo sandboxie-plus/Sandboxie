@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Files Resource Access - Browse for Folder - allows access to excluded folders [#4007](https://github.com/sandboxie-plus/Sandboxie/issues/4007)
 - fixed "ForceDisableAdminOnly" is weird [#4233](https://github.com/sandboxie-plus/Sandboxie/issues/4233)
 - fixed deadlock on no op condition when renaming file or folder [#4304](https://github.com/sandboxie-plus/Sandboxie/issues/4304)
+- fixed Could not move file or folder [#4329](https://github.com/sandboxie-plus/Sandboxie/issues/4329)
 
 ### Changed
 - validated compatibility with Windows build 27744 and updated DynData

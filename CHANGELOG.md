@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.1x.xx / 5.xx.xx] - 2024-xx-xx
+## [1.15.2 / 5.70.2] - 2024-10-
 
 ### Added
 - added "MacAddressValueMajorX"(fill 'X' with number 0-9) and "MacAddressValueMinorX"(fill 'X' with number 0-9) to set MAC address for each box(You must set both two options at the same time).
@@ -12,19 +12,70 @@ This project adheres to [Semantic Versioning](http://semver.org/).
     - MacAddressValueMinor0=Number
     - MacAddressValueMajor1=Number
     - MacAddressValueMinor1=Number
+- added the ability to hide certificates in editbox in Global Setting (idea by Yeyixiao)
+- added Opening a program in several sandboxes at once [#4231](https://github.com/sandboxie-plus/Sandboxie/issues/4231)
+- added "Description" field inside the sandbox settings [#4243](https://github.com/sandboxie-plus/Sandboxie/issues/4243)
+
+### Fixed
+- fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)
+- fixed issue with DLL unloading
+- fixed Files Resource Access - Browse for Folder - allows access to excluded folders [#4007](https://github.com/sandboxie-plus/Sandboxie/issues/4007)
+- fixed "ForceDisableAdminOnly" is weird [#4233](https://github.com/sandboxie-plus/Sandboxie/issues/4233)
+- fixed deadlock on no op condition when renaming file or folder [#4304](https://github.com/sandboxie-plus/Sandboxie/issues/4304)
+
+### Changed
+- validated compatibility with Windows build 27744 and updated DynData
+
+
+
+## [1.15.1 / 5.70.1] - 2024-10-29
+
+### Changed
+- validated compatibility with Windows build 27729 and updated DynData
+- updated Templates.ini to grant access to the Multimedia Class Scheduler Service [#4312](https://github.com/sandboxie-plus/Sandboxie/pull/4312) (thanks offhub)
+- updated Inno Setup to version 6.3.3 [#4020](https://github.com/sandboxie-plus/Sandboxie/issues/4020)
+
+### Fixed
+- fixed Sandboxie crypto fails to start in red boxes
+- fixed issue with breakout process when using explorer.exe
+
+
+
+## [1.15.0 / 5.70.0] - 2024-10-19
+
+### Added
+- added new user proxy mechanism to enable user specific operations
+- added support for EFS using the user proxy [#1980](https://github.com/sandboxie-plus/Sandboxie/issues/1980)
+  - to enable it, add 'EnableEFS=y' to the sandbox configuration (requires an advanced supporter certificate)
+- added breakout document functionality [#2741](https://github.com/sandboxie-plus/Sandboxie/issues/2741)
+  - use a syntax like this 'BreakoutDocument=C:\path\*.txt' to specify path and extension
+  - Security Warning: do not use paths terminated with a wildcard like 'BreakoutDocument=C:\path\*' as they will allow for execution of malicious scripts outside the sandbox!
+- added mechanism to set box folder ACLs to allow only the creating user access 'LockBoxToUser=y'
+- added option to keep original ACLs on sandboxed files 'UseOriginalACLs=y'
+- added option 'OpenWPADEndpoint=y' [#4292](https://github.com/sandboxie-plus/Sandboxie/issues/4292)
+
+### Changed
+- improved SandboxieCrypto startup
+- improved Sandboxed RPCSS startup
+- changed Qt 5 version to Qt 5.15.15 with OpenSSL 3.3.2 [#4223](https://github.com/sandboxie-plus/Sandboxie/pull/4223) (thanks offhub)
+- set tab orders and buddies of UI controls [#4300](https://github.com/sandboxie-plus/Sandboxie/pull/4300) (thanks gexgd0419)
+
+### Fixed
+- fixed ImDiskApp uninstall key is always written to the registry [#4282](https://github.com/sandboxie-plus/Sandboxie/issues/4282)
+
+
 
 ## [1.14.10 / 5.69.10] - 2024-10-03
 
 ### Added
-- added Ability to import encrypted archive files directly [#4255](https://github.com/sandboxie-plus/Sandboxie/issues/4255)
+- added ability to import encrypted archive files directly [#4255](https://github.com/sandboxie-plus/Sandboxie/issues/4255)
 
 ### Changed
-- when the sbiesvc.exe worker crashes it now can automatically be restarted.
+- when the SbieSvc.exe worker crashes it now can automatically be restarted
 
 ### Fixed
 - fixed issue with sandbox path entry combo boxes
-- fixed Proxy for GetRawInputDeviceInfoW() causes a buffer overflow [#4267](https://github.com/sandboxie-plus/Sandboxie/issues/4267) (thanks marti4d)
-
+- fixed proxy for GetRawInputDeviceInfoW() causes a buffer overflow [#4267](https://github.com/sandboxie-plus/Sandboxie/issues/4267) (thanks marti4d)
 
 
 
@@ -41,7 +92,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - sandbox root selection in global settings is now a combo box
 
 ### Fixed
-- fixed Exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
+- fixed exported encrypted archive files cannot be unpacked by Sandboxie [#4229](https://github.com/sandboxie-plus/Sandboxie/issues/4229)
 
 
 
@@ -145,7 +196,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.14.2 / 5.69.2] - 2024-06-19
 
 ### Added
-- added SbieIni option to modify password-protected configs [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
+- added SbieIni option to modify password-protected configurations [#3903](https://github.com/sandboxie-plus/Sandboxie/issues/3903)
   - Usage: set|append|insert|delete [/passwd:********] <section> <setting> <value>
   - Note: use /passwd without the password to have SbieIni prompt for the password on the console, this hides the password from view and prevents capture with the command line
 - added checkbox for "PromptForInternetAccess" option to the New Box Wizard

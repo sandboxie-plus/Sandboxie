@@ -33,6 +33,9 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkDropPrivileges, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDropConHostIntegrity, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+	//Do not force untrusted integrity level on the sanboxed token (reduces desktop isolation)
+	//connect(ui.chkNotUntrusted, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -41,10 +44,18 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
 	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+#ifdef INSIDER_BUILD
+	connect(ui.chkSbieDesktop, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+#else
+	ui.chkSbieDesktop->setVisible(false);
+#endif
+	connect(ui.chkOpenWndStation, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkOpenDevCMApi, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenSamEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenLsaEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkOpenWpadEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkSbieLogon, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkCreateToken, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -172,6 +183,9 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
 	ui.chkDropConHostIntegrity->setChecked(m_pBox->GetBool("DropConHostIntegrity", false));
 
+
+	//ui.chkNotUntrusted->setChecked(m_pBox->GetBool("NoUntrustedToken", false));
+
 	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
 
 	CheckOpenCOM();
@@ -180,10 +194,16 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkNoSecurityIsolation->setChecked(m_pBox->GetBool("NoSecurityIsolation", false));
 	ui.chkNoSecurityFiltering->setChecked(m_pBox->GetBool("NoSecurityFiltering", false));
 
+#ifdef INSIDER_BUILD
+	ui.chkSbieDesktop->setChecked(m_pBox->GetBool("UseSandboxDesktop", false));
+#endif
+	ui.chkOpenWndStation->setChecked(m_pBox->GetBool("OpenWndStation", false));
+
 	ui.chkOpenDevCMApi->setChecked(m_pBox->GetBool("OpenDevCMApi", false));
 	//ui.chkOpenLsaSSPI->setChecked(!m_pBox->GetBool("BlockPassword", true)); // OpenLsaSSPI
 	ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
+	ui.chkOpenWpadEndpoint->setChecked(m_pBox->GetBool("OpenWPADEndpoint", false));
 
 	ui.treeInjectDll->clear();
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
@@ -326,12 +346,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkBlockCapture->setCheckable(QString::compare(str, "*") != 0);
 	
 	ui.chkAdminOnly->setChecked(m_pBox->GetBool("EditAdminOnly", false));
-	
-	/*ui.chkLockWhenClose->setChecked(m_pBox->GetBool("LockWhenClose", false));
-	ui.chkLockWhenClose->setCheckable(m_pBox->GetBool("UseFileImage", false));
-	ui.chkLockWhenClose->setEnabled(m_pBox->GetBool("UseFileImage", false));
-	*/
-	
+
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
 	ui.lstUsers->clear();
 	if (Users.count() > 1)
@@ -430,6 +445,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
 	WriteAdvancedCheck(ui.chkDropConHostIntegrity, "DropConHostIntegrity", "y", "");
 
+	//WriteAdvancedCheck(ui.chkNotUntrusted, "NoUntrustedToken", "y", "");
+
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 
 	WriteAdvancedCheck(ui.chkForceRestart, "ForceRestartAll", "y", "");
@@ -437,10 +454,16 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkNoSecurityIsolation, "NoSecurityIsolation", "y", "");
 	WriteAdvancedCheck(ui.chkNoSecurityFiltering, "NoSecurityFiltering", "y", "");
 
+#ifdef INSIDER_BUILD
+	WriteAdvancedCheck(ui.chkSbieDesktop, "UseSandboxDesktop", "y", "");
+#endif
+	WriteAdvancedCheck(ui.chkOpenWndStation, "OpenWndStation", "y", "");
+
 	WriteAdvancedCheck(ui.chkOpenDevCMApi, "OpenDevCMApi", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "n", ""); // OpenLsaSSPI
 	WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "y", "");
 	WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
+	WriteAdvancedCheck(ui.chkOpenWpadEndpoint, "OpenWPADEndpoint", "y", "");
 
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
 	QStringList InjectDll64 = m_pBox->GetTextList("InjectDll64", false);
@@ -616,8 +639,7 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkProtectWindow, "CoverBoxedWindows", "y", "");
 	WriteAdvancedCheck(ui.chkBlockCapture, "BlockScreenCapture", "y", "");
-	//WriteAdvancedCheck(ui.chkLockWhenClose, "LockWhenClose", "y", "");
-	
+
 	WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
 
 	QStringList Users;
@@ -634,7 +656,7 @@ void COptionsWindow::OnIsolationChanged()
 	if (sender() == ui.chkNoSecurityIsolation) {
 		// we can ignore chkNoSecurityFiltering as it requires chkNoSecurityIsolation
 		if (ui.chkNoSecurityIsolation->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, 0);
 	}
 
 	UpdateBoxIsolation();
@@ -658,10 +680,12 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenSamEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenLsaEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkOpenWpadEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 
 	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode
 	ui.chkRawDiskNotify->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkAllowEfs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkBlockNetShare->setEnabled(!ui.chkNoSecurityFiltering->isChecked());
 

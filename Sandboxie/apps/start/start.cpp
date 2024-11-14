@@ -445,6 +445,8 @@ BOOL Parse_Command_Line(void)
                 ULONG len = ULONG(tmp - cmd) * sizeof(WCHAR);
                 memcpy((WCHAR*)&buffer[req.length], cmd, len);
                 req.length += len;
+                *((WCHAR*)&buffer[req.length]) = 0;
+                req.length += sizeof(WCHAR);
             }
 
             rpl = SbieDll_CallServer(&req);

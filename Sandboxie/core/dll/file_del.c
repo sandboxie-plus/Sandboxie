@@ -1090,6 +1090,11 @@ _FX BOOLEAN File_HasDeleted_v2(const WCHAR* TruePath)
 
 _FX VOID File_SetRelocation_internal(LIST* Root, const WCHAR *OldTruePath, const WCHAR *NewTruePath)
 {
+    // 0. check for no operation - in this case 5. would loop forever
+
+    if (_wcsicmp(OldTruePath, NewTruePath) == 0)
+        return;
+    
     // 1. separate branch from OldTruePath
     
     LIST* Parent = NULL;

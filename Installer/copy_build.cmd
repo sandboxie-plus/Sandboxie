@@ -1,9 +1,9 @@
 REM @ECHO OFF
 
 echo %*
-IF "%~4" == "" ( set "openssl_version=3.3.1" ) ELSE ( set "openssl_version=%~4" )
+IF "%~4" == "" ( set "openssl_version=3.3.2" ) ELSE ( set "openssl_version=%~4" )
 IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
-IF "%~2" == "" ( set "qt_version=5.15.14" ) ELSE ( set "qt_version=%~2" )
+IF "%~2" == "" ( set "qt_version=5.15.15" ) ELSE ( set "qt_version=%~2" )
 
 IF "%openssl_version:~0,3%" == "1.1" ( set "sslMajorVersion=1_1" ) ELSE ( set "sslMajorVersion=3" )
 
@@ -26,7 +26,10 @@ IF %1 == ARM64 (
   set qtPath=%~dp0..\..\Qt\%qt6_version%\msvc2019_arm64
   set instPath=%~dp0\SbiePlus_a64
 )
-set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC142.CRT
+
+REM set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC142.CRT
+set redistPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Redist\MSVC\%VCToolsVersion%\%1\Microsoft.VC142.CRT
+
 @echo on
 
 set srcPath=%~dp0..\SandboxiePlus\Bin\%archPath%\Release

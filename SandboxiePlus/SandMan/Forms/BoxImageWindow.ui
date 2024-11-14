@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>520</width>
     <height>307</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>500</width>
+    <width>520</width>
     <height>0</height>
    </size>
   </property>
@@ -35,6 +35,9 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>txtRepeatPassword</cstring>
        </property>
       </widget>
      </item>
@@ -56,6 +59,9 @@
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
+       <property name="buddy">
+        <cstring>cmbCipher</cstring>
+       </property>
       </widget>
      </item>
      <item row="2" column="0" colspan="2">
@@ -65,6 +71,9 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>txtNewPassword</cstring>
        </property>
       </widget>
      </item>
@@ -137,6 +146,9 @@
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
+       <property name="buddy">
+        <cstring>txtPassword</cstring>
+       </property>
       </widget>
      </item>
      <item row="8" column="2" colspan="3">
@@ -164,6 +176,9 @@
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
+       <property name="buddy">
+        <cstring>txtImageSize</cstring>
+       </property>
       </widget>
      </item>
      <item row="4" column="3">
@@ -177,6 +192,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>txtPassword</tabstop>
+  <tabstop>txtNewPassword</tabstop>
+  <tabstop>txtRepeatPassword</tabstop>
+  <tabstop>chkShow</tabstop>
+  <tabstop>txtImageSize</tabstop>
+  <tabstop>cmbCipher</tabstop>
+  <tabstop>chkProtect</tabstop>
+  <tabstop>chkAutoLock</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

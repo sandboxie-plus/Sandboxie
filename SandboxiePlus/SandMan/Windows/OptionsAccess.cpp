@@ -58,7 +58,7 @@ void COptionsWindow::OnAccessChangedEx()
 {
 	if (sender() == ui.chkPrivacy || sender() == ui.chkUseSpecificity) {
 		if (ui.chkPrivacy->isChecked() || (ui.chkUseSpecificity->isEnabled() && ui.chkUseSpecificity->isChecked()))
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, 0);
 	}
 
 	UpdateAccessPolicy();
@@ -378,6 +378,10 @@ void COptionsWindow::OnBrowseFolder()
 	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
+
+	// Add a trailing backslash if it does not exist
+	if (!Value.endsWith("\\"))
+		Value.append("\\");
 
 	AddAccessEntry(eFile, eOpen, "", Value);
 

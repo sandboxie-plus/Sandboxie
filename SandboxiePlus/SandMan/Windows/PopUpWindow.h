@@ -123,6 +123,7 @@ public:
 		m_pLabel = new QLabel(Message);
 		m_pLabel->setToolTip(Message);
 		m_pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+		connect(m_pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 		m_pMainLayout->addWidget(m_pLabel, 0, 0, 1, 5);
 
 		m_pRemember = new QCheckBox(tr("Remember for this process"));

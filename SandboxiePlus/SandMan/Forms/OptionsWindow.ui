@@ -4992,10 +4992,10 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="9" column="0" colspan="2">
               <widget class="QCheckBox" name="chkHideHostApps">
                <property name="toolTip">
-                <string>This option hides the registry path *Software*MicrosoftWindowsCurrentVersionUninstall*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</string>
+                <string>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</string>
                </property>
                <property name="text">
-                <string>Hide the host software uninstall key (see tool tip)</string>
+                <string>Hide the host software uninstall key (see tooltip)</string>
                </property>
               </widget>
              </item>

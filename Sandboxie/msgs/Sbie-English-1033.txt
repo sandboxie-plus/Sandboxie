@@ -619,7 +619,6 @@ SBIE2244 Failed to mount box image, Password required
 SBIE2246 Failed to mount box image, ImBox error %2
 .
 
-
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -633,7 +632,6 @@ SBIE2301 %2
 2302;pop;err;01
 SBIE2302 Process image configuration conflict: %2
 .
-
 
 2303;pop;err;01
 SBIE2303 Could not hook %2
@@ -4034,7 +4032,6 @@ The certificate is not valid.
 7993;txt;01
 The certificate is valid and has been successfully applied.
 .
-
 
 #----------------------------------------------------------------------------
 # SandboxieInstall

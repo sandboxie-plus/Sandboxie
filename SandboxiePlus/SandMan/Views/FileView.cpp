@@ -103,6 +103,7 @@ void CFileView::OnAboutToBeModified()
 #include <Shlobj.h>
 #include <atlbase.h>
 
+#define MENU_SANDBOX            -1
 #define MENU_RECOVER            1
 #define MENU_RECOVER_TO_ANY     2
 #define MENU_CREATE_SHORTCUT    3
@@ -132,6 +133,57 @@ void addItemToShellContextMenu(HMENU hMenu, const wchar_t *name, int ID, bool bC
     menu_item_info.wID = 0xF000 + ID;
     menu_item_info.dwTypeData = (wchar_t*)name;
     InsertMenuItem(hMenu, 0, TRUE, &menu_item_info);
+}
+
+void RemoveMenuItemByVerb(HMENU hMenu, IContextMenu* pContextMenu, UINT idCmdFirst, UINT idCmdLast, const std::wstring& verbToRemove)
+{
+    int itemCount = GetMenuItemCount(hMenu);
+    for (int i = itemCount - 1; i >= 0; --i)
+    {
+        MENUITEMINFO menuItemInfo = { 0 };
+        menuItemInfo.cbSize = sizeof(MENUITEMINFO);
+        menuItemInfo.fMask = MIIM_ID | MIIM_SUBMENU;
+
+        if (GetMenuItemInfo(hMenu, i, TRUE, &menuItemInfo))
+        {
+            if (menuItemInfo.hSubMenu)
+            {
+                // Recursive call for submenus
+                RemoveMenuItemByVerb(menuItemInfo.hSubMenu, pContextMenu, idCmdFirst, idCmdLast, verbToRemove);
+
+                // Remove the submenu if it's empty
+                if (GetMenuItemCount(menuItemInfo.hSubMenu) == 0)
+                {
+                    DeleteMenu(hMenu, i, MF_BYPOSITION);
+                }
+            }
+            else
+            {
+                UINT cmdID = menuItemInfo.wID;
+                if (cmdID >= idCmdFirst && cmdID < idCmdLast)
+                {
+                    // Retrieve the verb associated with this command ID
+                    wchar_t verbBuffer[256] = { 0 };
+                    HRESULT hr = pContextMenu->GetCommandString(
+                        cmdID - idCmdFirst,   // Adjust for idCmdFirst
+                        GCS_VERBW,
+                        NULL,
+                        (LPSTR)verbBuffer,
+                        sizeof(verbBuffer) / sizeof(wchar_t)
+                    );
+
+                    if (SUCCEEDED(hr))
+                    {
+                        if (_wcsicmp(verbBuffer, verbToRemove.c_str()) == 0)
+                        {
+                            // Remove the menu item
+                            DeleteMenu(hMenu, i, MF_BYPOSITION);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSandBoxPtr& pBox, QString* pPin = NULL)
@@ -182,8 +234,15 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
     HMENU hMenu = CreatePopupMenu();
     if (!hMenu)
         return 0;
-    if (SUCCEEDED(pContextMenu->QueryContextMenu(hMenu, 0, 1, 0x7FFF, CMF_NORMAL)))
+    UINT idCmdFirst = 1;
+    HRESULT hrMenu = pContextMenu->QueryContextMenu(hMenu, 0, idCmdFirst, 0x7FFF, CMF_NORMAL);
+    if (SUCCEEDED(hrMenu))
     {
+        UINT nMenuItems = HRESULT_CODE(hrMenu);
+        UINT idCmdLast = idCmdFirst + nMenuItems;
+
+        RemoveMenuItemByVerb(hMenu, pContextMenu, idCmdFirst, idCmdLast, L"open");
+
         addSeparatorToShellContextMenu(hMenu);
 
         std::wstring Str1 = CFileView::tr("Create Shortcut").toStdWString();
@@ -235,6 +294,17 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
                 DestroyMenu(hMenu);
                 return iCmd & 0x0FFF;
             }
+
+            wchar_t verbBuffer[256] = {0};
+            HRESULT hr = pContextMenu->GetCommandString(iCmd - 1, GCS_VERBW, NULL, (LPSTR)verbBuffer, sizeof(verbBuffer) / sizeof(wchar_t));
+
+            if (SUCCEEDED(hr)) {
+                qDebug() << verbBuffer;
+                if (_wcsicmp(verbBuffer, L"sandbox") == 0) {
+                    DestroyMenu(hMenu);
+                    return MENU_SANDBOX;
+                }
+            }
             
             CMINVOKECOMMANDINFOEX info = { 0 };
             info.cbSize = sizeof(info);
@@ -285,6 +355,14 @@ void CFileView::OnFileMenu(const QPoint&)
     QString RecoveryFolder;
     switch (iCmd)
     {
+        case MENU_SANDBOX:{
+            if (!Files.isEmpty()) {
+                QString WrkDir = QFileInfo(Files.first()).absoluteDir().path().replace("/", "\\");
+                foreach(const QString & Command, Files)
+			        theGUI->RunStart(m_pBox->GetName(), Command, CSbieAPI::eStartDefault, WrkDir);
+            }
+            break;
+        }
         case MENU_RECOVER_TO_ANY:
             RecoveryFolder = QFileDialog::getExistingDirectory(this, CFileView::tr("Select Directory")).replace("/", "\\");
             if (RecoveryFolder.isEmpty())

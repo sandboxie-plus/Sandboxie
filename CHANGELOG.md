@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.15.2 / 5.70.2] - 2024-10-
+## [1.15.2 / 5.70.2] - 2024-11-
 
 ### Added
 - added "NetworkAdapterMAC=0,AA-BB-CC-DD-EE-FF" to set MAC address for each box (thanks Yeyixiao)
@@ -17,16 +17,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Hide Tray Icon [#4075](https://github.com/sandboxie-plus/Sandboxie/issues/4075)
 
 ### Fixed
-- fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)
+- fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643) [#4343](https://github.com/sandboxie-plus/Sandboxie/issues/4343)
 - fixed issue with DLL unloading
 - fixed Files Resource Access - Browse for Folder - allows access to excluded folders [#4007](https://github.com/sandboxie-plus/Sandboxie/issues/4007)
 - fixed "ForceDisableAdminOnly" is weird [#4233](https://github.com/sandboxie-plus/Sandboxie/issues/4233)
 - fixed deadlock on no op condition when renaming file or folder [#4304](https://github.com/sandboxie-plus/Sandboxie/issues/4304)
 - fixed Could not move file or folder [#4329](https://github.com/sandboxie-plus/Sandboxie/issues/4329)
+- "Run Sandboxed" from the quick-previewer should have only one option [#4339](https://github.com/sandboxie-plus/Sandboxie/issues/4339)
 
 ### Changed
 - validated compatibility with Windows build 27749 and updated DynData
 - when running via drag and drop now the apps parent folder is used as working dir [#4073](https://github.com/sandboxie-plus/Sandboxie/issues/4073)
+
 
 
 

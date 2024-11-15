@@ -245,6 +245,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbOnClose->addItem(tr("Close to Tray"), "ToTray");
 	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
+	ui.cmbOnClose->addItem(tr("Hide (Run invisible in Background)"), "Hide");
 
 	ui.cmbDPI->addItem(tr("None"), 0);
 	ui.cmbDPI->addItem(tr("Native"), 1);
@@ -2096,8 +2097,12 @@ void CSettingsWindow::reject()
 void CSettingsWindow::OnOptChanged()
 {
 	QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui.cmbOnClose->model());
+
 	QStandardItem *item = model->item(0);
 	item->setFlags((ui.cmbSysTray->currentIndex() == 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
+
+	item = model->item(3);
+	item->setFlags((ui.cmbSysTray->currentIndex() != 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 
 	if (m_HoldChange)
 		return;

@@ -1335,7 +1335,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 	if (!m_bExit)// && !theAPI->IsConnected())
 	{
 		QString OnClose = theConf->GetString("Options/OnClose", "ToTray");
-		if (m_pTrayIcon->isVisible() && OnClose.compare("ToTray", Qt::CaseInsensitive) == 0)
+		if ((m_pTrayIcon->isVisible() && OnClose.compare("ToTray", Qt::CaseInsensitive) == 0) || (OnClose.compare("Hide", Qt::CaseInsensitive) == 0))
 		{
 			StoreState();
 			hide();

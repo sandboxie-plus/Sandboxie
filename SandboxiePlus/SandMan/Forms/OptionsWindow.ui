@@ -1343,7 +1343,7 @@
                <item row="12" column="1" colspan="5">
                 <widget class="QCheckBox" name="chkACLs">
                  <property name="text">
-                  <string>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</string>
+                  <string>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</string>
                  </property>
                 </widget>
                </item>
@@ -1470,7 +1470,7 @@
                <item row="8" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkOpenWndStation">
                  <property name="text">
-                  <string>Open Window Station (improves compatybility by reducing desktop isolation)</string>
+                  <string>Open Window Station (improves compatibility by reducing desktop isolation)</string>
                  </property>
                 </widget>
                </item>

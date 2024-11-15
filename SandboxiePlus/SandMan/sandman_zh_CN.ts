@@ -9140,7 +9140,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="301"/>
         <source>Box Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒注释</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="844"/>
@@ -9155,22 +9155,22 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1346"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</source>
-        <translation type="unfinished"></translation>
+        <translation>对沙盒内的文件和文件夹使用原始访问控制条目（对于MSIServer启用例外）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1364"/>
         <source>Run Processes on an own Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙盒化的桌面上运行进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
         <source>Desktop Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>桌面隔离</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1473"/>
         <source>Open Window Station (improves compatybility by reducing desktop isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>打开 Window Station（通过减少桌面隔离来提高兼容性）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1993"/>
@@ -9426,7 +9426,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4885"/>
         <source>Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5025"/>
@@ -10541,7 +10541,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1816"/>
         <source>Enter/view Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>输入/查看赞助者证书</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1829"/>

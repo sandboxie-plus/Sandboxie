@@ -71,7 +71,7 @@ SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
 .
 
 2194;pop;inf;01
-SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+SBIE2194 MSI installer requires %2 option to be set in the ini to be able to work correctly, however this option weakens the isolation.
 .
 
 2195;pop;inf;01

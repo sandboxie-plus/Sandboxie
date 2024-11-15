@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed deadlock on no op condition when renaming file or folder [#4304](https://github.com/sandboxie-plus/Sandboxie/issues/4304)
 - fixed Could not move file or folder [#4329](https://github.com/sandboxie-plus/Sandboxie/issues/4329)
 - "Run Sandboxed" from the quick-previewer should have only one option [#4339](https://github.com/sandboxie-plus/Sandboxie/issues/4339)
+- Sandboxie causing Firefox Nightly crashes [#4183](https://github.com/sandboxie-plus/Sandboxie/issues/4183)
 
 ### Changed
 - validated compatibility with Windows build 27749 and updated DynData

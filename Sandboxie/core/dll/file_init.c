@@ -282,20 +282,23 @@ _FX BOOLEAN File_Init(void)
         }
     }
 
-    //
-    // support for Google Chrome flash plugin process
-    //
     // $Workaround$ - 3rd party fix
-    //void *GetVolumeInformationW =
-    //    GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
-    //        "GetVolumeInformationW");
-    //SBIEDLL_HOOK(File_,GetVolumeInformationW);
+    if (!Dll_CompartmentMode) {
 
-    // $Workaround$ - 3rd party fix
-    void *WriteProcessMemory =
-        GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
-            "WriteProcessMemory");
-    SBIEDLL_HOOK(File_, WriteProcessMemory);
+        //
+        // support for Google Chrome flash plugin process
+        //
+        // $Workaround$ - 3rd party fix
+        //void *GetVolumeInformationW =
+        //    GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
+        //        "GetVolumeInformationW");
+        //SBIEDLL_HOOK(File_,GetVolumeInformationW);
+
+        void* WriteProcessMemory =
+            GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
+                "WriteProcessMemory");
+        SBIEDLL_HOOK(File_, WriteProcessMemory);
+    }
 
     return TRUE;
 }

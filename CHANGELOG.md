@@ -25,7 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Could not move file or folder [#4329](https://github.com/sandboxie-plus/Sandboxie/issues/4329)
 
 ### Changed
-- validated compatibility with Windows build 27744 and updated DynData
+- validated compatibility with Windows build 27749 and updated DynData
 - when running via drag and drop now the apps parent folder is used as working dir [#4073](https://github.com/sandboxie-plus/Sandboxie/issues/4073)
 
 

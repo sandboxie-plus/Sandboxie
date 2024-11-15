@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "Description" field inside the sandbox settings [#4243](https://github.com/sandboxie-plus/Sandboxie/issues/4243)
 - added "NotifyMsiInstaller=y" enabled by default to display message SBIE2194 when an MSI installer is run in a box without the recommended exemptions [#4330](https://github.com/sandboxie-plus/Sandboxie/issues/4330)
   - SBIE2194: MSI installer requires 'MsiInstallerExemptions=y' option to be set in the ini to be able to work correctly, however this option weakens the isolation.
+- added option to hide installed programs [#4139](https://github.com/sandboxie-plus/Sandboxie/issues/4139)
 
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643)

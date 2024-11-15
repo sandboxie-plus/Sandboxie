@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>10</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -4885,46 +4885,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <string>Processes</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_86">
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="chkHideNonSystemProcesses">
-               <property name="text">
-                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="2">
-              <spacer name="verticalSpacer_16">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="7" column="2">
-              <widget class="QPushButton" name="btnDelProcess">
-               <property name="text">
-                <string>Remove</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="lblProcessHiding">
-               <property name="font">
-                <font>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="text">
-                <string>Process Hiding</string>
-               </property>
-              </widget>
-             </item>
              <item row="6" column="2">
               <widget class="QCheckBox" name="chkShowHiddenProcTmpl">
                <property name="text">
@@ -4932,27 +4892,13 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </property>
               </widget>
              </item>
-             <item row="4" column="2">
-              <widget class="QPushButton" name="btnAddProcess">
-               <property name="text">
-                <string>Add Process</string>
+             <item row="8" column="0" colspan="2">
+              <widget class="QCheckBox" name="chkBlockWMI">
+               <property name="toolTip">
+                <string>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</string>
                </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkHideOtherBoxes">
                <property name="text">
-                <string>Don't allow sandboxed processes to see processes running in other boxes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0" colspan="2">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>Hide host processes from processes running in the sandbox.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
+                <string>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</string>
                </property>
               </widget>
              </item>
@@ -4979,13 +4925,77 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                </column>
               </widget>
              </item>
-             <item row="8" column="0" colspan="2">
-              <widget class="QCheckBox" name="chkBlockWMI">
-               <property name="toolTip">
-                <string>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</string>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="chkHideNonSystemProcesses">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running outside any boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="lblProcessHiding">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
                </property>
                <property name="text">
-                <string>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</string>
+                <string>Process Hiding</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Hide host processes from processes running in the sandbox.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <spacer name="verticalSpacer_16">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkHideOtherBoxes">
+               <property name="text">
+                <string>Don't allow sandboxed processes to see processes running in other boxes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="2">
+              <widget class="QPushButton" name="btnDelProcess">
+               <property name="text">
+                <string>Remove</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QPushButton" name="btnAddProcess">
+               <property name="text">
+                <string>Add Process</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0" colspan="2">
+              <widget class="QCheckBox" name="chkHideHostApps">
+               <property name="toolTip">
+                <string>This option hides the registry path *Software*MicrosoftWindowsCurrentVersionUninstall*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</string>
+               </property>
+               <property name="text">
+                <string>Hide the host software uninstall key (see tool tip)</string>
                </property>
               </widget>
              </item>

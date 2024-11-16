@@ -81,7 +81,7 @@ public slots:
 	void				OnSetTree();
 	void				OnObjTree();
 	void				OnSetMode();
-	void				OnSetPidFilter();
+	void				OnSetPidFilter(QStandardItem* item);
 	void				OnSetTidFilter();
 	void				OnSetFilter();
 	void				OnShowStack();
@@ -112,7 +112,8 @@ protected:
 	QVector<CTraceEntryPtr> m_TraceList;
 	QMap<QString, CMonitorEntryPtr> m_MonitorMap;
 
-	quint32				m_FilterPid;
+	QSet<quint32>		m_ShowPids;
+	QSet<quint32>		m_HidePids;
 	quint32				m_FilterTid;
 	QList<quint32>		m_FilterTypes;
 	quint32				m_FilterStatus;
@@ -127,7 +128,7 @@ protected:
 	QAction*			m_pMonitorMode;
 	QAction*			m_pTraceTree;
 	QAction*			m_pObjectTree;
-	QComboBox*			m_pTracePid;
+	class CCheckableComboBox*	m_pTracePid;
 	QComboBox*			m_pTraceTid;
 	class QCheckList*	m_pTraceType;
 	QComboBox*			m_pTraceStatus;

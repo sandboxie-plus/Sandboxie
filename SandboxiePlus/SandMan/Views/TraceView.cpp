@@ -6,6 +6,7 @@
 #include "..\Models\TraceModel.h"
 #include "..\..\MiscHelpers\Common\Common.h"
 #include "..\..\MiscHelpers\Common\CheckList.h"
+#include "..\..\MiscHelpers\Common\CheckableComboBox.h"
 #include "SbieView.h"
 #include <QtConcurrent>
 
@@ -232,6 +233,7 @@ CMonitorList::~CMonitorList()
 ////////////////////////////////////////////////////////////////////////////////////////
 // CTraceView
 
+
 CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 {
 	m_FullRefresh = true;
@@ -240,7 +242,6 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	m_LastCount = 0;
 	m_bUpdatePending = false;
 
-	m_FilterPid = 0;
 	m_FilterTid = 0;
 	m_FilterStatus = 0;
 
@@ -266,10 +267,10 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	m_pTraceToolBar->layout()->setSpacing(3);
 
 	m_pTraceToolBar->addWidget(new QLabel(tr("PID:")));
-	m_pTracePid = new QComboBox();
-	m_pTracePid->addItem(tr("[All]"), 0);
-	m_pTracePid->setMinimumWidth(225);
-	connect(m_pTracePid, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSetPidFilter()));
+	m_pTracePid = new CCheckableComboBox();
+	m_pTracePid->m_SelectItems = tr("[All]");
+	m_pTracePid->setMinimumWidth(300);
+	connect(m_pTracePid->model(), SIGNAL(itemChanged(QStandardItem*)), this, SLOT(OnSetPidFilter(QStandardItem*)));
 	m_pTraceToolBar->addWidget(m_pTracePid);
 
 	m_pTraceToolBar->addWidget(new QLabel(tr("TID:")));
@@ -455,7 +456,8 @@ void CTraceView::Refresh()
 		if (m_pCurrentBox != NULL && m_pCurrentBox != pEntry->GetBoxPtr())
 			continue;
 
-		if (m_FilterPid != 0 && m_FilterPid != pEntry->GetProcessId())
+		quint32 pid = pEntry->GetProcessId();
+		if (!((m_ShowPids.isEmpty() || m_ShowPids.contains(pid)) && !m_HidePids.contains(pid)))
 			continue;
 
 		if (m_FilterTid != 0 && m_FilterTid != pEntry->GetThreadId())
@@ -560,7 +562,8 @@ void CTraceView::Refresh()
 void CTraceView::Clear()
 {
 	m_pTracePid->clear();
-	m_pTracePid->addItem(tr("[All]"), 0);
+	m_ShowPids.clear();
+	m_HidePids.clear();
 
 	m_pTraceTid->clear();
 	m_pTraceTid->addItem(tr("[All]"), 0);
@@ -627,16 +630,20 @@ void CTraceView::UpdateFilters()
 {
 	m_bUpdatePending = false;
 
-	quint32 cur_pid = m_pTracePid->currentData().toUInt();
-
 	QMap<quint32, SProgInfo> pids = m_PidMap;
 	foreach(quint32 pid, pids.keys()) {
 		SProgInfo& Info = pids[pid];
 
-		if(m_pTracePid->findData(pid) == -1)
+		if (m_pTracePid->findData(pid) == -1) {
 			m_pTracePid->addItem(tr("%1 (%2)").arg(Info.Name).arg(pid), pid);
+			QStandardItemModel *model = qobject_cast<QStandardItemModel *>(m_pTracePid->model());
+			QStandardItem *item = model->item(m_pTracePid->count()-1);
+			item->setCheckable(true);
+			item->setCheckState(Qt::Unchecked); // Set default state
+			item->setFlags(item->flags() | Qt::ItemIsUserTristate); // Enable tri-state
+		}
 
-		if (cur_pid != 0 && cur_pid != pid)
+		if ((m_ShowPids.isEmpty() || m_ShowPids.contains(pid)) && !m_HidePids.contains(pid))
 			continue;
 
 		foreach(quint32 tid, Info.Threads) {
@@ -651,9 +658,23 @@ void CTraceView::OnFilterChanged()
 	m_FullRefresh = true;
 }
 
-void CTraceView::OnSetPidFilter()
+void CTraceView::OnSetPidFilter(QStandardItem* item)
 {
-	m_FilterPid = m_pTracePid->currentData().toUInt();
+	switch (item->checkState()) {
+	case Qt::Checked:
+		m_ShowPids.insert(item->data(Qt::UserRole).toUInt());
+		m_HidePids.remove(item->data(Qt::UserRole).toUInt());
+		break;
+	case Qt::PartiallyChecked:
+		m_ShowPids.remove(item->data(Qt::UserRole).toUInt());
+		m_HidePids.insert(item->data(Qt::UserRole).toUInt());
+		break;
+	case Qt::Unchecked:
+		m_ShowPids.remove(item->data(Qt::UserRole).toUInt());
+		m_HidePids.remove(item->data(Qt::UserRole).toUInt());
+		break;
+	}
+	
 	m_FilterTid = 0;
 	//m_pSortProxy->m_FilterPid = m_pTracePid->currentData().toUInt();
 	//m_pSortProxy->m_FilterTid = 0;

@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - SBIE2194: MSI installer requires 'MsiInstallerExemptions=y' option to be set in the ini to be able to work correctly, however this option weakens the isolation.
 - added option to hide installed programs [#4139](https://github.com/sandboxie-plus/Sandboxie/issues/4139)
 - added Hide Tray Icon [#4075](https://github.com/sandboxie-plus/Sandboxie/issues/4075)
+- added improved trace logging filtering [#4338](https://github.com/sandboxie-plus/Sandboxie/issues/4338)
 
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643) [#4343](https://github.com/sandboxie-plus/Sandboxie/issues/4343)

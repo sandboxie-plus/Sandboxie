@@ -46,7 +46,8 @@ HEADERS += ./MiscHelpers.h \
     ./Archive/ArchiveThread.h \
     ./Archive/ArchiveUpdater.h \
     ./Archive/CachedArchive.h \
-    ./Archive/SplitFile.h
+    ./Archive/SplitFile.h \
+    ./Archive/CheckableComboBox.h
     
 SOURCES += ./MiscHelpers.cpp \
     ./stdafx.cpp \
@@ -81,5 +82,6 @@ SOURCES += ./MiscHelpers.cpp \
     ./Archive/ArchiveThread.cpp \
     ./Archive/ArchiveUpdater.cpp \
     ./Archive/CachedArchive.cpp \
-    ./Archive/SplitFile.cpp
+    ./Archive/SplitFile.cpp \
+    ./Archive/CheckableComboBox.cpp
     

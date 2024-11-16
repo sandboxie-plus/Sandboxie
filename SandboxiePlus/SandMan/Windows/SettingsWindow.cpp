@@ -903,6 +903,9 @@ void CSettingsWindow::RemoveContextMenu()
 		QProcess Proc;
 		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RemovePackage");
 		Proc.waitForFinished();
+		
+		QSettings MyReg("HKEY_CURRENT_USER\\SOFTWARE\\Xanasoft\\Sandboxie-Plus", QSettings::NativeFormat);
+		MyReg.remove("");  // Removes the entire key and all subkeys
 	}
 
 	CSbieUtils::RemoveContextMenu();

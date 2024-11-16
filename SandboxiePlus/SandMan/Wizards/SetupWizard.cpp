@@ -151,6 +151,8 @@ void CSetupWizard::ShellUninstall()
 
 	CSettingsWindow::RemoveContextMenu();
 	CSbieUtils::RemoveContextMenu2();
+	CSbieUtils::RemoveContextMenu3();
+	CSbieUtils::RemoveContextMenu4();
 
     // todo: delete desktop browser shortcut and start menu integration
 }

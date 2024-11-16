@@ -675,5 +675,6 @@ begin
 
   // Remove shell integration.
   ShellUninstall();
+  RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'Software\Xanasoft\{#MyAppName}');
 
 end;

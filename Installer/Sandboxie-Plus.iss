@@ -137,6 +137,7 @@ Filename: "{app}\Start.exe"; Parameters: "open_agent:sandman.exe"; Description: 
 
 [UninstallDelete]
 Type: dirifempty; Name: "{app}"
+Type: files; Name: "{localappdata}\{#MyAppName}\addons.json"
 Type: dirifempty; Name: "{localappdata}\{#MyAppName}"
 
 

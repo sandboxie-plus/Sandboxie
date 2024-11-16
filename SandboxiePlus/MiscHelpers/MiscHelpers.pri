@@ -13,7 +13,6 @@ HEADERS += ./MiscHelpers.h \
     ./Common/FlowLayout.h \
     ./Common/HistoryGraph.h \
     ./Common/Xml.h \
-    ./Common/CheckableComboBox.h \
     ./Common/CheckableMessageBox.h \
     ./Common/ComboInputDialog.h \
     ./Common/Finder.h \
@@ -37,6 +36,7 @@ HEADERS += ./MiscHelpers.h \
     ./Common/NetworkAccessManager.h \
     ./Common/MT/ThreadLock.h \
     ./Common/MultiErrorDialog.h \
+    ./Common/CheckableComboBox.h \
     ./Archive/Archive.h \
     ./Archive/ArchiveFS.h \
     ./Archive/ArchiveExtractor.h \
@@ -51,7 +51,6 @@ HEADERS += ./MiscHelpers.h \
     
 SOURCES += ./MiscHelpers.cpp \
     ./stdafx.cpp \
-    ./Common/CheckableComboBox.cpp \
     ./Common/CheckableMessageBox.cpp \
     ./Common/ComboInputDialog.cpp \
     ./Common/Common.cpp \
@@ -74,6 +73,7 @@ SOURCES += ./MiscHelpers.cpp \
     ./Common/Xml.cpp \
     ./Common/MT/ThreadLock.cpp \
     ./Common/MultiErrorDialog.cpp \
+    ./Common/CheckableComboBox.cpp \
     ./Archive/Archive.cpp \
     ./Archive/ArchiveFS.cpp \
     ./Archive/ArchiveExtractor.cpp \

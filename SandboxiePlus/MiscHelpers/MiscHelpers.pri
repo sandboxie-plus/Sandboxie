@@ -13,6 +13,7 @@ HEADERS += ./MiscHelpers.h \
     ./Common/FlowLayout.h \
     ./Common/HistoryGraph.h \
     ./Common/Xml.h \
+    ./Common/CheckableComboBox.h \
     ./Common/CheckableMessageBox.h \
     ./Common/ComboInputDialog.h \
     ./Common/Finder.h \
@@ -46,11 +47,11 @@ HEADERS += ./MiscHelpers.h \
     ./Archive/ArchiveThread.h \
     ./Archive/ArchiveUpdater.h \
     ./Archive/CachedArchive.h \
-    ./Archive/SplitFile.h \
-    ./Archive/CheckableComboBox.h
+    ./Archive/SplitFile.h
     
 SOURCES += ./MiscHelpers.cpp \
     ./stdafx.cpp \
+    ./Common/CheckableComboBox.cpp \
     ./Common/CheckableMessageBox.cpp \
     ./Common/ComboInputDialog.cpp \
     ./Common/Common.cpp \
@@ -82,6 +83,5 @@ SOURCES += ./MiscHelpers.cpp \
     ./Archive/ArchiveThread.cpp \
     ./Archive/ArchiveUpdater.cpp \
     ./Archive/CachedArchive.cpp \
-    ./Archive/SplitFile.cpp \
-    ./Archive/CheckableComboBox.cpp
+    ./Archive/SplitFile.cpp
     

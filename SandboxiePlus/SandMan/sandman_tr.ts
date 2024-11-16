@@ -876,7 +876,7 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="400"/>
+        <location filename="Views/FileView.cpp" line="478"/>
         <source>%1 - Files</source>
         <translation>%1 - Dosyalar</translation>
     </message>
@@ -884,37 +884,37 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="189"/>
+        <location filename="Views/FileView.cpp" line="248"/>
         <source>Create Shortcut</source>
         <translation>Kısayol Oluştur</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="212"/>
+        <location filename="Views/FileView.cpp" line="271"/>
         <source>Pin to Box Run Menu</source>
         <translation>Alanın Çalıştır Menüsüne Sabitle</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="219"/>
+        <location filename="Views/FileView.cpp" line="278"/>
         <source>Recover to Any Folder</source>
         <translation>Herhangi Bir Klasöre Kurtar</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="221"/>
+        <location filename="Views/FileView.cpp" line="280"/>
         <source>Recover to Same Folder</source>
         <translation>Aynı Klasöre Kurtar</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="225"/>
+        <location filename="Views/FileView.cpp" line="284"/>
         <source>Run Recovery Checks</source>
         <translation>Kurtarma Denetimlerini Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="289"/>
+        <location filename="Views/FileView.cpp" line="367"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="355"/>
+        <location filename="Views/FileView.cpp" line="433"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>%1 korumalı alanına kısayol oluştur</translation>
     </message>
@@ -8367,13 +8367,15 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4995"/>
-        <source>This option hides the registry path *Software*MicrosoftWindowsCurrentVersionUninstall*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
-        <translation>Bu seçenek, *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\* kayıt defteri yolunu gizler ve ana bilgisayara yüklenen yazılımın korumalı alana yeniden yüklenmesine izin verir. Ancak, yazılıma özgü dosyaları ve klasörleri gizlemez. Yükleyici hala sorunlarla karşılaşırsa, diskteki ilgili dosyaları gizlemek için özel WriteFilePath girdileri tanımlamanız gerekir.</translation>
+        <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
+        <oldsource>This option hides the registry path *Software*MicrosoftWindowsCurrentVersionUninstall*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</oldsource>
+        <translation type="unfinished">Bu seçenek, *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\* kayıt defteri yolunu gizler ve ana bilgisayara yüklenen yazılımın korumalı alana yeniden yüklenmesine izin verir. Ancak, yazılıma özgü dosyaları ve klasörleri gizlemez. Yükleyici hala sorunlarla karşılaşırsa, diskteki ilgili dosyaları gizlemek için özel WriteFilePath girdileri tanımlamanız gerekir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4998"/>
-        <source>Hide the host software uninstall key (see tool tip)</source>
-        <translation>Ana sistemdeki yazılım kaldırma anahtarlarını gizle (ipucuna bakın)</translation>
+        <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
+        <oldsource>Hide the host software uninstall key (see tool tip)</oldsource>
+        <translation type="unfinished">Ana sistemdeki yazılım kaldırma anahtarlarını gizle (ipucuna bakın)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5068"/>

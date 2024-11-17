@@ -2992,7 +2992,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandManTray.cpp" line="45"/>
         <source>Show/Hide</source>
-        <translation>Zeigen/Verstecken</translation>
+        <translation>Anzeigen/Verbergen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="506"/>
@@ -3168,7 +3168,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="552"/>
         <source>Show Hidden Boxes</source>
-        <translation>Zeige versteckte Boxen</translation>
+        <translation>Zeige verborgene Boxen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="554"/>
@@ -3278,7 +3278,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="743"/>
         <source>Reveal Hidden Boxes</source>
-        <translation>Zeige versteckte Boxen</translation>
+        <translation>Zeige verborgene Boxen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="749"/>
@@ -5367,7 +5367,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="248"/>
         <source>Hide (Run invisible in Background)</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbergen (unsichtbar im Hintergrund ausführen)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="250"/>
@@ -7470,7 +7470,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4951"/>
         <source>Hide host processes from processes running in the sandbox.</source>
-        <translation>Verstecke Host-Prozesse vor Prozessen in der Sandbox.</translation>
+        <translation>Verberge Host-Prozesse vor Prozessen in der Sandbox.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4974"/>
@@ -7680,12 +7680,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4995"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option verbirgt den Registrypfad *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, was es ermöglicht, die auf dem Host installierte Software in der Sandbox neu zu installieren. Es werden jedoch keine softwarespezifischen Dateien und Ordner verborgen. Wenn der Installer immer noch auf Probleme stößt, müssen Sie benutzerdefinierte WriteFilePath-Einträge definieren, um die betreffenden Dateien auf der Festplatte zu verbergen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4998"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge den Deinstallationsschlüssel der Software auf dem Host (siehe Tooltip)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5068"/>
@@ -8001,23 +8001,22 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="301"/>
         <source>Box Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Box-Anmerkungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1364"/>
         <source>Run Processes on an own Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe Prozesse auf einem eigenen sandgeboxten Desktop aus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
         <source>Desktop Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktop-Isolation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1473"/>
         <source>Open Window Station (improves compatibility by reducing desktop isolation)</source>
-        <oldsource>Open Window Station (improves compatybility by reducing desktop isolation)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Öffne Window Station (verbessert die Kompatibilität durch Verringerung der Desktop-Isolierung)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1820"/>
@@ -8746,7 +8745,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5021"/>
         <source>Hide Firmware Information</source>
-        <translation>Verstecke Firmwareinformationen</translation>
+        <translation>Verberge Firmwareinformationen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4898"/>
@@ -8761,7 +8760,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4944"/>
         <source>Process Hiding</source>
-        <translation>Prozesse verstecken</translation>
+        <translation>Prozesse verbergen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5088"/>
@@ -8776,7 +8775,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4885"/>
         <source>Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5055"/>
@@ -9445,7 +9444,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1135"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
-        <translation>Verstecke die Sandboxie-eigenen Prozesse in der Aufgabenliste</translation>
+        <translation>Verberge die Sandboxie-eigenen Prozesse in der Aufgabenliste</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1186"/>
@@ -9520,7 +9519,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2389"/>
         <source>Clear password when main window becomes hidden</source>
-        <translation>Leere Passwort, wenn das Hauptfenster versteckt wird</translation>
+        <translation>Leere Passwort, wenn das Hauptfenster verborgen wird</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="636"/>
@@ -9799,17 +9798,17 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="676"/>
         <source>Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandgeboxter Desktop</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="683"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="unfinished"></translation>
+        <translation>Wechsel zum sandgeboxten Desktop beim Starten eines Prozesses</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="690"/>
         <source>Switch to sandboxed desktop with double click</source>
-        <translation type="unfinished"></translation>
+        <translation>Wechsel zum sandgeboxten Desktop mit einem Doppelklick</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1786"/>
@@ -9819,7 +9818,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1816"/>
         <source>Enter/view Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstützerzertifikat eingeben/anzeigen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1829"/>

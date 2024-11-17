@@ -371,7 +371,7 @@ SBIE2193 Die Sandbox nach dem erfolgreichen Aktualisierungsprozess unbedingt lö
 .
 
 2194;pop;inf;01
-SBIE2194 MSI-Installer benötigt die Aktivierung der %2 option in der ini-Datei, was jedoch die Sicherheit schwächen kann.
+SBIE2194 Der MSI-Installer erfordert, um korrekt arbeiten zu können, dass die Option %2 in der ini-Datei gesetzt wird. Diese Option schwächt jedoch die Isolation.
 .
 
 2195;pop;inf;01

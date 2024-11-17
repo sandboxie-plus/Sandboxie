@@ -729,60 +729,60 @@ Please browse to the correct user profile directory.</source>
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="246"/>
+        <location filename="Wizards/SetupWizard.cpp" line="248"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>Укажите ваш сертификат сторонника &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="247"/>
+        <location filename="Wizards/SetupWizard.cpp" line="249"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>Если у вас есть сертификат сторонника, пожалуйста, добавьте его в поле ниже.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="274"/>
+        <location filename="Wizards/SetupWizard.cpp" line="276"/>
         <source>Retrieve certificate using Serial Number:</source>
         <translation>Получить сертификат, используя серийный номер:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="280"/>
+        <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>Начать ознакомление без сертификата, в течение ограниченного периода времени.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="289"/>
+        <location filename="Wizards/SetupWizard.cpp" line="291"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Получите бесплатный ознакомительный сертификат&lt;/font&gt;&lt;/a&gt; и пользуйтесь всеми премиум-функциями в течение %1 дн.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="290"/>
+        <location filename="Wizards/SetupWizard.cpp" line="292"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
         <translation type="unfinished">Вы можете запросить бесплатный %1-дневный ознакомительный сертификат не более %2 раз для одного Hardware ID</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="315"/>
+        <location filename="Wizards/SetupWizard.cpp" line="317"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>Для использования &lt;b&gt;Sandboxie-Plus&lt;/b&gt; в бизнес-среде, необходима бизнес версия &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;сертификата сторонника&lt;/a&gt;. Если у вас еще нет необходимых сертификатов, вы можете получить их в &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;интернет-магазине xanasoft.com&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="329"/>
+        <location filename="Wizards/SetupWizard.cpp" line="331"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; предоставляет дополнительные функции и типы песочниц исключительно &lt;u&gt;сторонникам проекта&lt;/u&gt;. Песочницы с улучшенной конфиденциальностью, &lt;b&gt;&lt;font color=&apos;red&apos;&gt;защищают пользовательские данные от несанкционированного доступа&lt;/font&gt;&lt;/b&gt; изолированных программ. Если вы еще не являетесь сторонником, рассмотрите возможность &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;поддержать проект&lt;/a&gt;, чтобы обеспечить дальнейшее развитие Sandboxie и получить &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="366"/>
+        <location filename="Wizards/SetupWizard.cpp" line="368"/>
         <source>Failed to retrieve the certificate.</source>
         <translation>Не удалось получить сертификат.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="367"/>
+        <location filename="Wizards/SetupWizard.cpp" line="369"/>
         <source>
 Error: %1</source>
         <translation>
 Ошибка: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="387"/>
+        <location filename="Wizards/SetupWizard.cpp" line="389"/>
         <source>Retrieving certificate...</source>
         <translation>Получение сертификата...</translation>
     </message>
@@ -1002,12 +1002,12 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="750"/>
+        <location filename="Wizards/SetupWizard.cpp" line="752"/>
         <source>Complete your configuration</source>
         <translation>Завершите настройку</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="760"/>
+        <location filename="Wizards/SetupWizard.cpp" line="762"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>Почти завершено, нажмите завершить, чтобы применить все выбранные опции и завершить работу мастера.</translation>
     </message>
@@ -1096,32 +1096,32 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="165"/>
+        <location filename="Wizards/SetupWizard.cpp" line="167"/>
         <source>Introduction</source>
         <translation>Введение</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="172"/>
+        <location filename="Wizards/SetupWizard.cpp" line="174"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>Добро пожаловать в мастер настройки. Этот мастер поможет вам настроить вашу копию &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. Вы можете запустить этот мастер в любое время из меню Песочница-&gt;Обслуживание, если не хотите завершать его сейчас.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="181"/>
+        <location filename="Wizards/SetupWizard.cpp" line="183"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>Выберите, как вы хотели бы использовать Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="184"/>
+        <location filename="Wizards/SetupWizard.cpp" line="186"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>Персональный, для частного некоммерческого использования (&amp;P)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="189"/>
+        <location filename="Wizards/SetupWizard.cpp" line="191"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>Коммерческий, для бизнеса или корпоративного использования (&amp;C)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="194"/>
+        <location filename="Wizards/SetupWizard.cpp" line="196"/>
         <source>Note: this option is persistent</source>
         <translation>Примечание: эта опция является постоянной</translation>
     </message>
@@ -2744,114 +2744,114 @@ Error: </source>
 <context>
     <name>CSBUpdate</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="609"/>
+        <location filename="Wizards/SetupWizard.cpp" line="611"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
         <translation>Настройка средства обновления &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="610"/>
+        <location filename="Wizards/SetupWizard.cpp" line="612"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <translation>Как и в случае с любым другим продуктом для обеспечения безопасности, важно поддерживать Sandboxie-Plus в актуальном состоянии.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="618"/>
+        <location filename="Wizards/SetupWizard.cpp" line="620"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <translation>Регулярно проверяйте наличие обновлений для Sandboxie-Plus и дополнительных компонентов</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="619"/>
+        <location filename="Wizards/SetupWizard.cpp" line="621"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <translation>Разрешить Sandboxie регулярно проверять наличие последних обновлений.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="629"/>
+        <location filename="Wizards/SetupWizard.cpp" line="631"/>
         <source>Check for new Sandboxie-Plus versions:</source>
         <translation>Проверка наличия новых версий Sandboxie-Plus:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="630"/>
+        <location filename="Wizards/SetupWizard.cpp" line="632"/>
         <source>Check for new Sandboxie-Plus builds.</source>
         <translation>Проверка наличия новых сборок Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="636"/>
+        <location filename="Wizards/SetupWizard.cpp" line="638"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <translation>Выберите, в каком канале обновлений искать новые сборки Sandboxie-Plus:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="645"/>
+        <location filename="Wizards/SetupWizard.cpp" line="647"/>
         <source>In the Stable Channel</source>
         <translation>В стабильном канале</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="646"/>
+        <location filename="Wizards/SetupWizard.cpp" line="648"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>Стабильный канал содержит последние стабильные выпуски с GitHub.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="650"/>
+        <location filename="Wizards/SetupWizard.cpp" line="652"/>
         <source>In the Preview Channel - with newest experimental changes</source>
         <translation>В превью канале - с новейшими экспериментальными изменениями</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="651"/>
+        <location filename="Wizards/SetupWizard.cpp" line="653"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Превью канал содержит последние предварительные выпуски с GitHub.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="655"/>
+        <location filename="Wizards/SetupWizard.cpp" line="657"/>
         <source>In the Insider Channel - exclusive features</source>
         <translation>В инсайдер канале - эксклюзивные возможности</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="656"/>
+        <location filename="Wizards/SetupWizard.cpp" line="658"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Инсайдер канал предлагает ранний доступ к новым функциям и исправлениям ошибок, которые в конечном итоге будут опубликованы, а также ко всем соответствующим улучшениям из стабильного канала.
 В отличие от канала предварительного просмотра, он не включает непроверенные, потенциально критические или экспериментальные изменения, которые могут быть не готовы для более широкого использования.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="661"/>
+        <location filename="Wizards/SetupWizard.cpp" line="663"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>Подробнее об &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;инсайдер канале&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="670"/>
+        <location filename="Wizards/SetupWizard.cpp" line="672"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <translation>Поддерживать актуальность шаблонов совместимости и применять исправления</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="671"/>
+        <location filename="Wizards/SetupWizard.cpp" line="673"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <translation>Проверка наличия последних шаблонов совместимости и исправлений.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="675"/>
+        <location filename="Wizards/SetupWizard.cpp" line="677"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
         <translation>Получить последние сценарии для мастера устранения неполадок</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="676"/>
+        <location filename="Wizards/SetupWizard.cpp" line="678"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <translation>Проверка наличия последних сценариев устранения неполадок для мастера устранения неполадок.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="680"/>
+        <location filename="Wizards/SetupWizard.cpp" line="682"/>
         <source>Keep the list of optional Add-on components up to date</source>
         <translation>Поддерживать актуальность списка опциональных компонентов дополнений</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="681"/>
+        <location filename="Wizards/SetupWizard.cpp" line="683"/>
         <source>Check for latest available add-ons.</source>
         <translation>Проверка наличия последних доступных дополнений.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="690"/>
+        <location filename="Wizards/SetupWizard.cpp" line="692"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
         <translation>Sandboxie-Plus применяет строгие ограничения приложений, что может привести к проблемам с совместимостью. Будьте в курсе обновлений Sandboxie-Plus, включая шаблоны совместимости и устранение неполадок, чтобы обеспечить бесперебойную работу при обновлениях Windows и изменениях приложений.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="696"/>
+        <location filename="Wizards/SetupWizard.cpp" line="698"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>Для доступа к последним шаблонам совместимости и онлайн-базе данных по устранению неполадок требуется действующий &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;.</translation>
     </message>
@@ -5454,22 +5454,22 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Запуск в песочнице (&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1206"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1209"/>
         <source>kilobytes (%1)</source>
         <translation>килобайт (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
         <source>Volume not attached</source>
         <translation>Том не прикреплён</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1304"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Вы использовали %1/%2 ознакомительных сертификатов. Больше бесплатные сертификаты генерироваться не будут.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1306"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Получите бесплатный ознакомительный сертификат&lt;/a&gt; и пользуйтесь всеми премиум-функциями в течение %1 дня.&lt;/b&gt;</translation>
     </message>
@@ -5478,17 +5478,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">Вы можете запросить бесплатный %1-дневный ознакомительный сертификат не более %2 раз для одного Hardware ID</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1320"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника истек. Пожалуйста, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1322"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1325"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;В текущей сборке функции Plus остаются включенными&lt;/font&gt;, но у вас больше нет доступа к службам Sandboxie-Live, включая обновления совместимости и базу данных для устранения неполадок.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1333"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника &lt;font color=&apos;red&apos;&gt;истечет через %1&#xa0;дн.&lt;/font&gt;. Пожалуйста, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
@@ -5497,187 +5497,187 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">Истекает через: %1 дн</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1366"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1369"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation type="unfinished">Истек: %1 дн. назад</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1379"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1382"/>
         <source>Options: %1</source>
         <translation>Опции: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Песочницы для приложений с улучшенной безопасностью и конф-тью (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Disabled</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Зашифрованные песочницы (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Перехват сети (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1402"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1405"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Это не похоже на серийный номер Sandboxie-Plus.&lt;br /&gt;Если вы пытались ввести ключ обновления или подпись из сертификата, что не является правильным, пожалуйста, введите весь сертификат в текстовую область выше.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1409"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1412"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <translation>Вы пытаетесь использовать ключ обновления функции без ввода ранее существовавшего сертификата поддержки. Обратите внимание, что для этого типа ключа (&lt;b&gt;как это четко указано жирным шрифтом на веб-сайте&lt;/b) требуется наличие уже существующего действующего сертификата поддержки; без него ключ бесполезен.&lt;br /&gt;Если вы хотите использовать расширенные функции, вам необходимо получить как стандартный сертификат, так и ключ обновления функции, чтобы разблокировать расширенные функции.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1415"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1418"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <translation>Вы пытаетесь использовать ключ продления без ввода ранее существовавшего сертификата поддержки. Обратите внимание, что для этого типа ключа (&lt;b&gt;как это четко указано жирным шрифтом на веб-сайте&lt;/b) требуется наличие уже существующего действующего сертификата поддержки; без него ключ бесполезен.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1420"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1423"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Если вы не прочитали описание продукта и получили этот ключ по ошибке, пожалуйста, свяжитесь с нами по электронной почте (указанной на нашем сайте), чтобы решить эту проблему.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1451"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - Получить ОЗНАКОМИТЕЛЬНЫЙ сертификат</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1451"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Введите адрес электронной почты, чтобы получить бесплатный ознакомительный сертификат на %1 дней, который будет выдан на %2 и привязан к текущему оборудованию.
 Вы можете запросить до %3 ознакомительных сертификатов для каждого уникального Hardware ID.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Error retrieving certificate: %1</source>
         <translation>Ошибка при получении сертификата: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Неизвестная ошибка (вероятно, проблема с сетью)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1525"/>
         <source>Contributor</source>
         <translation>Участник</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1524"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1527"/>
         <source>Eternal</source>
         <translation>Вечный</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1526"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1529"/>
         <source>Business</source>
         <translation>Бизнес</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1528"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1531"/>
         <source>Personal</source>
         <translation>Персональный</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1530"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1533"/>
         <source>Great Patreon</source>
         <translation>Большой Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1532"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
         <source>Family</source>
         <translation>Семья</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1538"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Evaluation</source>
         <translation>Оценка</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Type %1</source>
         <translation>Тип %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1571"/>
         <source>Advanced</source>
         <translation>Расширенный</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1573"/>
         <source>Advanced (L)</source>
         <translation>Расширенный (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1572"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1575"/>
         <source>Max Level</source>
         <translation>Максимальный уровень</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1574"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1577"/>
         <source>Level %1</source>
         <translation>Уровень %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1602"/>
         <source>Supporter certificate required for access</source>
         <translation>Для доступа требуется сертификат сторонника</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1619"/>
         <source>Supporter certificate required for automation</source>
         <translation>Для автоматизации требуется сертификат сторонника</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2053"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2056"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>К сожалению, этот сертификат недействителен для текущей сборки, вам необходимо получить новый сертификат или перейти на более раннюю сборку.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2058"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Хотя срок действия этого сертификата истек, для текущей установленной версии плюс функции остаются включенными. Однако у вас больше не будет доступа к службам Sandboxie-Live, включая обновления совместимости и онлайн-базу данных для устранения неполадок.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2057"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2060"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Срок действия этого сертификата, к сожалению, истек, вам необходимо получить новый сертификат.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="914"/>
+        <location filename="Windows/SettingsWindow.cpp" line="917"/>
         <source>Sandboxed Web Browser</source>
         <translation>Веб-браузер в песочнице</translation>
     </message>
@@ -5751,149 +5751,149 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>Введите команду</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1304"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1307"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation type="unfinished">Вы можете запросить бесплатный %1-дневный ознакомительный сертификат не более %2 раз для одного Hardware ID</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1320"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1323"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Дополнительные функции будут отключены через %1 дн.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1324"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1327"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Дополнительные функции больше не включены.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1368"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1371"/>
         <source>Expired: %1 days ago</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1435"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1463"/>
         <source>Retrieving certificate...</source>
         <translation>Получение сертификата...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1536"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Home</source>
         <translation>Домашняя</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1723"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1726"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Запуск вне песочницы (&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1731"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1734"/>
         <source>Set Force in Sandbox</source>
         <translation>Установить принудительно в песочнице</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1740"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1743"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Установить путь открытия в песочнице</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2033"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2036"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Это не похоже на сертификат. Пожалуйста, введите весь сертификат, а не только его часть.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2061"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2064"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Ознакомительный сертификат успешно применен. Наслаждайтесь бесплатной пробной версией!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2066"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Спасибо за поддержку разработки Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2124"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2127"/>
         <source>Update Available</source>
         <translation>Доступно обновление</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2126"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2129"/>
         <source>Installed</source>
         <translation>Установлен</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2134"/>
         <source>by %1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
         <source>(info website)</source>
         <translation>(информационный сайт)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2166"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2169"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Это дополнение является обязательным и не может быть удалено.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2175"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2178"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2324"/>
         <source>Select Directory</source>
         <translation>Выбрать каталог</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2204"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2207"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Проверить сейчас&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2281"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2284"/>
         <source>Please enter the new configuration password.</source>
         <translation>Пожалуйста, введите новый пароль конфигурации.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2285"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2288"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Пожалуйста, повторно введите новый пароль конфигурации.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2290"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2293"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Пароли не совпадают, повторите попытку.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2302"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2305"/>
         <source>Process</source>
         <translation>Процесс</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2302"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2305"/>
         <source>Folder</source>
         <translation>Папка</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2315"/>
         <source>Please enter a program file name</source>
         <translation>Пожалуйста, введите имя файла программы</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2383"/>
         <source>Please enter the template identifier</source>
         <translation>Пожалуйста, введите идентификатор шаблона</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2391"/>
         <source>Error: %1</source>
         <translation>Ошибка: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2420"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2423"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Вы действительно хотите удалить выбранные локальные шаблоны?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2622"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2625"/>
         <source>%1 (Current)</source>
         <translation>%1 (Текущая)</translation>
     </message>
@@ -5929,42 +5929,42 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="520"/>
+        <location filename="Wizards/SetupWizard.cpp" line="522"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>Настройка интеграции оболочки &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="521"/>
+        <location filename="Wizards/SetupWizard.cpp" line="523"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>Настройка интеграции Sandboxie-Plus с вашей системой.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="525"/>
+        <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Start UI with Windows</source>
         <translation>Запуск пользовательского интерфейса с Windows</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="530"/>
+        <location filename="Wizards/SetupWizard.cpp" line="532"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Добавить &apos;Запустить в песочнице&apos; в контекстное меню проводника</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="535"/>
+        <location filename="Wizards/SetupWizard.cpp" line="537"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>Добавить ярлык для запуска веб-браузера в Sandboxie на рабочий стол</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="540"/>
+        <location filename="Wizards/SetupWizard.cpp" line="542"/>
         <source>Only applications with admin rights can change configuration</source>
         <translation>Изменять конфигурацию могут только приложения с правами администратора</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="552"/>
+        <location filename="Wizards/SetupWizard.cpp" line="554"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="552"/>
+        <location filename="Wizards/SetupWizard.cpp" line="554"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
         <translation>Включение этой опции предотвращает изменение конфигурации Sandboxie.ini из пользовательского интерфейса без прав администратора. Будьте осторожны, так как использование Sandboxie Manager с обычными правами пользователя может привести к блокировке. Чтобы внести изменения в конфигурацию, необходимо перезапустить Sandboxie Manager от имени администратора, нажав &quot;Перезапустить от имени администратора&quot; в меню &quot;Песочница&quot; в главном окне.</translation>
     </message>
@@ -6648,124 +6648,123 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 <context>
     <name>CTraceView</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="257"/>
+        <location filename="Views/TraceView.cpp" line="258"/>
         <source>Show as task tree</source>
         <translation>Показать как дерево задач</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="261"/>
+        <location filename="Views/TraceView.cpp" line="262"/>
         <source>Show NT Object Tree</source>
         <translation>Показать дерево объектов NT</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="268"/>
+        <location filename="Views/TraceView.cpp" line="269"/>
         <source>PID:</source>
         <translation>ID процесса:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="270"/>
-        <location filename="Views/TraceView.cpp" line="277"/>
-        <location filename="Views/TraceView.cpp" line="286"/>
+        <location filename="Views/TraceView.cpp" line="271"/>
+        <location filename="Views/TraceView.cpp" line="278"/>
         <location filename="Views/TraceView.cpp" line="287"/>
-        <location filename="Views/TraceView.cpp" line="296"/>
-        <location filename="Views/TraceView.cpp" line="563"/>
-        <location filename="Views/TraceView.cpp" line="566"/>
-        <location filename="Views/TraceView.cpp" line="664"/>
+        <location filename="Views/TraceView.cpp" line="288"/>
+        <location filename="Views/TraceView.cpp" line="297"/>
+        <location filename="Views/TraceView.cpp" line="569"/>
+        <location filename="Views/TraceView.cpp" line="685"/>
         <source>[All]</source>
         <translation>[Все]</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="275"/>
+        <location filename="Views/TraceView.cpp" line="276"/>
         <source>TID:</source>
         <translation>ID потока:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="283"/>
+        <location filename="Views/TraceView.cpp" line="284"/>
         <source>Type:</source>
         <translation>Тип:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="294"/>
+        <location filename="Views/TraceView.cpp" line="295"/>
         <source>Status:</source>
         <translation>Статус:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="297"/>
+        <location filename="Views/TraceView.cpp" line="298"/>
         <source>Open</source>
         <translation>Открытый</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="298"/>
+        <location filename="Views/TraceView.cpp" line="299"/>
         <source>Closed</source>
         <translation>Закрытый</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="299"/>
+        <location filename="Views/TraceView.cpp" line="300"/>
         <source>Trace</source>
         <translation>Трассировка</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="300"/>
+        <location filename="Views/TraceView.cpp" line="301"/>
         <source>Other</source>
         <translation>Другое</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="308"/>
+        <location filename="Views/TraceView.cpp" line="309"/>
         <source>Show All Boxes</source>
         <translation>Показать все песочницы</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="312"/>
+        <location filename="Views/TraceView.cpp" line="313"/>
         <source>Show Stack Trace</source>
         <translation>Показать трассировку стека</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="317"/>
+        <location filename="Views/TraceView.cpp" line="318"/>
         <source>Save to file</source>
         <translation>Сохранить в файл</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="330"/>
+        <location filename="Views/TraceView.cpp" line="331"/>
         <source>Auto Scroll</source>
         <translation>Автопрокрутка</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="336"/>
+        <location filename="Views/TraceView.cpp" line="337"/>
         <source>Cleanup Trace Log</source>
         <translation>Очистить журнал трассировки</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="382"/>
+        <location filename="Views/TraceView.cpp" line="383"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
         <translation>Для использования функции трассировки стека требуются DbgHelp.dll и SymSrv.dll. Вы хотите загрузить и установить их?</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="707"/>
+        <location filename="Views/TraceView.cpp" line="728"/>
         <source>Save trace log to file</source>
         <translation>Сохранить журнал трассировки в файл</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="713"/>
+        <location filename="Views/TraceView.cpp" line="734"/>
         <source>Failed to open log file for writing</source>
         <translation>Не удалось открыть файл журнала для записи</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="733"/>
+        <location filename="Views/TraceView.cpp" line="754"/>
         <source>Saving TraceLog...</source>
         <translation>Сохранение журнала трассировки...</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="637"/>
+        <location filename="Views/TraceView.cpp" line="638"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="253"/>
+        <location filename="Views/TraceView.cpp" line="254"/>
         <source>Monitor mode</source>
         <translation>Режим монитора</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="644"/>
+        <location filename="Views/TraceView.cpp" line="651"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -6773,7 +6772,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="801"/>
+        <location filename="Views/TraceView.cpp" line="822"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Монитор трассировки</translation>
     </message>
@@ -6781,37 +6780,37 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 <context>
     <name>CUIPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="405"/>
+        <location filename="Wizards/SetupWizard.cpp" line="407"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
         <translation>Настройка интерфейса &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="406"/>
+        <location filename="Wizards/SetupWizard.cpp" line="408"/>
         <source>Select the user interface style you prefer.</source>
         <translation>Выберите стиль интерфейса, который вы предпочитаете.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="410"/>
+        <location filename="Wizards/SetupWizard.cpp" line="412"/>
         <source>&amp;Advanced UI for experts</source>
         <translation>Расширенный интерфейс для экспертов (&amp;A)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="415"/>
+        <location filename="Wizards/SetupWizard.cpp" line="417"/>
         <source>&amp;Simple UI for beginners</source>
         <translation>&amp;Простой интерфейс для начинающих (&amp;S)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="420"/>
+        <location filename="Wizards/SetupWizard.cpp" line="422"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
         <translation>Винтажный интерфейс SbieCtrl.exe (&amp;V)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="445"/>
+        <location filename="Wizards/SetupWizard.cpp" line="447"/>
         <source>Use Bright Mode</source>
         <translation>Использовать светлый режим</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="449"/>
+        <location filename="Wizards/SetupWizard.cpp" line="451"/>
         <source>Use Dark Mode</source>
         <translation>Использовать темный режим</translation>
     </message>

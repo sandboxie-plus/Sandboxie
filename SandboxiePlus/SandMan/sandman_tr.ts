@@ -725,59 +725,59 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="246"/>
+        <location filename="Wizards/SetupWizard.cpp" line="248"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; destek sertifikanızı yükleyin</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="247"/>
+        <location filename="Wizards/SetupWizard.cpp" line="249"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>Destekçi sertifikanız varsa lütfen aşağıdaki alana doldurunuz.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="274"/>
+        <location filename="Wizards/SetupWizard.cpp" line="276"/>
         <source>Retrieve certificate using Serial Number:</source>
         <translation>Sertifikayı Seri Numarasını kullanarak alın:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="280"/>
+        <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>Sınırlı bir süre için sertifika olmadan denemeye başlayın.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="289"/>
+        <location filename="Wizards/SetupWizard.cpp" line="291"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Ücretsiz deneme sertifikanızı alın&lt;/font&gt;&lt;/a&gt; ve tüm premium özelliklerin %1 gün boyunca keyfini çıkarın.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="290"/>
+        <location filename="Wizards/SetupWizard.cpp" line="292"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Donanım Kimliği başına %2 kereye kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="315"/>
+        <location filename="Wizards/SetupWizard.cpp" line="317"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt;&apos;ı bir iş ortamında kullanmak için uygun bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destek sertifikası&lt;/a&gt; iş kullanımı için gereklidir. Henüz gerekli sertifika(lara) sahip değilseniz, bunları &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web mağazasından&lt;/a&gt; alabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="329"/>
+        <location filename="Wizards/SetupWizard.cpp" line="331"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt;, yalnızca &lt;u&gt;proje destekçilerine&lt;/u&gt; ek özellikler ve alan türleri sunar. Gizliliği geliştirilmiş alanlarda, &lt;b&gt;&lt;font color=&apos;red&apos;&gt;kullanıcı verileriniz korumalı alanda çalışan programların yetkisiz erişimlerine karşı daha iyi korunur.&lt;/font&gt;&lt;/b&gt; Henüz bir destekçimiz değilseniz, Sandboxie&apos;nin daha iyi geliştirilmesine katkıda bulunmak için bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alarak lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;projeyi desteklemeyi&lt;/a&gt; düşünün.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="366"/>
+        <location filename="Wizards/SetupWizard.cpp" line="368"/>
         <source>Failed to retrieve the certificate.</source>
         <translation>Sertifika alınamadı.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="367"/>
+        <location filename="Wizards/SetupWizard.cpp" line="369"/>
         <source>
 Error: %1</source>
         <translation>
 Hata: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="387"/>
+        <location filename="Wizards/SetupWizard.cpp" line="389"/>
         <source>Retrieving certificate...</source>
         <translation>Sertifika alınıyor...</translation>
     </message>
@@ -997,12 +997,12 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="750"/>
+        <location filename="Wizards/SetupWizard.cpp" line="752"/>
         <source>Complete your configuration</source>
         <translation>Yapılandırmanızı tamamlayın</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="760"/>
+        <location filename="Wizards/SetupWizard.cpp" line="762"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>Neredeyse tamamlandı, tüm seçimleri uygulamak ve sihirbazı tamamlamak için Bitir&apos;e tıklayın.</translation>
     </message>
@@ -1091,32 +1091,32 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="165"/>
+        <location filename="Wizards/SetupWizard.cpp" line="167"/>
         <source>Introduction</source>
         <translation>Giriş</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="172"/>
+        <location filename="Wizards/SetupWizard.cpp" line="174"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>Kurulum Sihirbazına hoş geldiniz. Bu sihirbaz, &lt;b&gt;Sandboxie-Plus&lt;/b&gt; kopyanızı yapılandırmanıza yardımcı olacaktır. Bu sihirbazı, şimdi tamamlamak istemiyorsanız, Korumalı Alan-&gt;Bakım menüsünden istediğiniz zaman başlatabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="181"/>
+        <location filename="Wizards/SetupWizard.cpp" line="183"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>Sandboxie-Plus&apos;ı nasıl kullanmak istediğinizi seçin</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="184"/>
+        <location filename="Wizards/SetupWizard.cpp" line="186"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>&amp;Kişisel olarak, ticari olmayan özel kullanım için</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="189"/>
+        <location filename="Wizards/SetupWizard.cpp" line="191"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>&amp;Ticari olarak, ticari veya kurumsal kullanım için</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="194"/>
+        <location filename="Wizards/SetupWizard.cpp" line="196"/>
         <source>Note: this option is persistent</source>
         <translation>Not: Bu seçenek kalıcıdır</translation>
     </message>
@@ -2737,114 +2737,114 @@ Hata: </translation>
 <context>
     <name>CSBUpdate</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="609"/>
+        <location filename="Wizards/SetupWizard.cpp" line="611"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; güncelleyiciyi yapılandırın</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="610"/>
+        <location filename="Wizards/SetupWizard.cpp" line="612"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <translation>Diğer tüm güvenlik ürünlerinde olduğu gibi, Sandboxie-Plus&apos;ınızı güncel tutmanız önemlidir.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="618"/>
+        <location filename="Wizards/SetupWizard.cpp" line="620"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <translation>Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak denetle</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="619"/>
+        <location filename="Wizards/SetupWizard.cpp" line="621"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <translation>Sandboxie&apos;nin en son güncellemeleri düzenli olarak denetlemesine izin verir.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="629"/>
+        <location filename="Wizards/SetupWizard.cpp" line="631"/>
         <source>Check for new Sandboxie-Plus versions:</source>
         <translation>Yeni Sandboxie-Plus sürümlerini denetle:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="630"/>
+        <location filename="Wizards/SetupWizard.cpp" line="632"/>
         <source>Check for new Sandboxie-Plus builds.</source>
         <translation>Yeni Sandboxie-Plus derlemelerini denetler.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="636"/>
+        <location filename="Wizards/SetupWizard.cpp" line="638"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <translation>Yeni Sandboxie-Plus derlemeleri için arama yapılacak kanalı seçin:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="645"/>
+        <location filename="Wizards/SetupWizard.cpp" line="647"/>
         <source>In the Stable Channel</source>
         <translation>Kararlı Kanalda</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="646"/>
+        <location filename="Wizards/SetupWizard.cpp" line="648"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>Kararlı kanal, en son yayınlanan kararlı GitHub sürümlerini içerir.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="650"/>
+        <location filename="Wizards/SetupWizard.cpp" line="652"/>
         <source>In the Preview Channel - with newest experimental changes</source>
         <translation>Ön İzleme Kanalında - en yeni deneysel değişikliklerle</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="651"/>
+        <location filename="Wizards/SetupWizard.cpp" line="653"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Ön izleme kanalı, en son yayınlanan GitHub ön sürümlerini içerir.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="655"/>
+        <location filename="Wizards/SetupWizard.cpp" line="657"/>
         <source>In the Insider Channel - exclusive features</source>
         <translation>Insider Kanalında - ayrıcalıklı özellikler</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="656"/>
+        <location filename="Wizards/SetupWizard.cpp" line="658"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Insider kanalı, herkese açılacak yeni özelliklere ve hata düzeltmelerine erken erişim sağlar ve ayrıca kararlı kanaldaki ilgili tüm iyileştirmeleri de bulundurur.
 Ön izleme kanalından farklı olarak, genel kullanıma hazır olmayan denenmemiş, potansiyel olarak bozuk veya deneysel değişiklikleri içermez.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="661"/>
+        <location filename="Wizards/SetupWizard.cpp" line="663"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Kanalı&lt;/a&gt; hakkında daha fazla bilgi</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="670"/>
+        <location filename="Wizards/SetupWizard.cpp" line="672"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <translation>Uyumluluk Şablonlarını güncel tut ve düzeltmeleri uygula</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="671"/>
+        <location filename="Wizards/SetupWizard.cpp" line="673"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <translation>En son uyumluluk şablonlarını ve düzeltmelerini denetler.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="675"/>
+        <location filename="Wizards/SetupWizard.cpp" line="677"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
         <translation>Sorun Giderme Sihirbazı için en son Betik Dosyalarını indir</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="676"/>
+        <location filename="Wizards/SetupWizard.cpp" line="678"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <translation>Sorun giderme sihirbazı için en son sorun giderme betik dosyalarını denetler.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="680"/>
+        <location filename="Wizards/SetupWizard.cpp" line="682"/>
         <source>Keep the list of optional Add-on components up to date</source>
         <translation>İsteğe bağlı Eklenti bileşenlerinin listesini güncel tut</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="681"/>
+        <location filename="Wizards/SetupWizard.cpp" line="683"/>
         <source>Check for latest available add-ons.</source>
         <translation>Mevcut en son eklentileri denetler.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="690"/>
+        <location filename="Wizards/SetupWizard.cpp" line="692"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
         <translation>Sandboxie-Plus, uyumluluk sorunlarına yol açabilecek katı uygulama kısıtlamaları uygular. Windows güncellemeleri ve uygulama değişiklikleri sırasında sorunsuz çalışmayı sağlamak için uyumluluk şablonları ve sorun giderme de dahil olmak üzere Sandboxie-Plus ile güncel kalın.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="696"/>
+        <location filename="Wizards/SetupWizard.cpp" line="698"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>En son uyumluluk şablonlarına ve çevrimiçi sorun giderme veritabanına erişim geçerli bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; gerektirir.</translation>
     </message>
@@ -5293,28 +5293,28 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2281"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2284"/>
         <source>Please enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2175"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2178"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2324"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2315"/>
         <source>Please enter a program file name</source>
         <translation>Lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2302"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2305"/>
         <source>Folder</source>
         <translation>Klasör</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2302"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2305"/>
         <source>Process</source>
         <translation>İşlem</translation>
     </message>
@@ -5334,245 +5334,245 @@ Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</trans
         <translation>Ayarlarda ara</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1206"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1209"/>
         <source>kilobytes (%1)</source>
         <translation>kilobayt (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
         <source>Volume not attached</source>
         <translation>Birim eklenmedi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1304"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1/%2 deneme sertifikası kullandınız. Daha fazla ücretsiz sertifika oluşturulamaz.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1306"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Ücretsiz deneme sertifikası alın&lt;/a&gt; ve tüm premium özelliklerin %1 gün boyunca keyfini çıkarın.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1320"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikasının süresi dolmuş, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;güncellenmiş bir sertifika edinin&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1320"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1323"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus özellikleri %1 gün içinde devre dışı bırakılacak.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1324"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1327"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus özellikleri artık etkin değil.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1333"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde&lt;/font&gt; sona erecek, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot; &gt;güncellenmiş bir sertifika edinin&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1366"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1369"/>
         <source>Expires in: %1 days</source>
         <translation>Kalan kullanım süresi: %1 gün</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1368"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1371"/>
         <source>Expired: %1 days ago</source>
         <translation>Süresi doldu: %1 gün önce</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1379"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1382"/>
         <source>Options: %1</source>
         <translation>Seçenekler: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Gelişmiş Güvenlik/Gizlilik &amp; Uygulama Bölmeleri (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Enabled</source>
         <translation>Etkin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Disabled</source>
         <translation>Devre dışı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Şifreli Korumalı Alanlar (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Ağ Yakalama (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie Masaüstü (Masa): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1402"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1405"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Bu numara Sandboxie-Plus Seri Numarasına benzemiyor.&lt;br /&gt;Bir sertifikanın yalnızca UPDATEKEY veya SIGNATURE değerini girmeyi denediyseniz, bu doğru değildir Lütfen bunun yerine yukarıdaki metin alanına sertifikanın tamamını giriniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1409"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1412"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <translation>Özellik yükseltme anahtarını mevcut bir destekçi sertifikası girmeden önce kullanmaya çalışıyorsunuz. Lütfen bu tür anahtarların (&lt;b&gt;web sitesinde kalın harflerle açıkça belirtildiği gibi&lt;/b&gt;) mevcut geçerli bir destekçi sertifikasına sahip olmanızı gerektirdiğini, sertifika olmadan hiçbir işe yaramadığını unutmayın.&lt;br /&gt;Gelişmiş özellikleri kullanmak için, hem standart bir sertifika hem de gelişmiş özelliklerin kilidini açacak bir özellik yükseltme anahtarı edinmeniz gerekir.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1415"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1418"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <translation>Yenileme anahtarını mevcut bir destekçi sertifikası girmeden önce kullanmaya çalışıyorsunuz. Lütfen bu tür anahtarların (&lt;b&gt;web sitesinde kalın harflerle açıkça belirtildiği gibi&lt;/b&gt;) mevcut geçerli bir destekçi sertifikasına sahip olmanızı gerektirdiğini, sertifika olmadan hiçbir işe yaramadığını unutmayın.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1420"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1423"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Ürün açıklamasını okumadan yanlışlıkla bu anahtarı aldıysanız, sorunu çözmek için lütfen e-posta (web sitemizde belirtilen) yoluyla bizimle iletişime geçin.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1451"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - DENEME Sertifikası Al</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1451"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Lütfen %2 için verilecek ve geçerli donanıma kilitlenecek ücretsiz %1 günlük deneme sertifikası almak için e-posta adresinizi girin.
 Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Error retrieving certificate: %1</source>
         <translation>Sertifika alınırken hata oluştu: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Bilinmeyen Hata (muhtemelen bir ağ sorunu)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1525"/>
         <source>Contributor</source>
         <translation>Katılımcı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1524"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1527"/>
         <source>Eternal</source>
         <translation>Sürekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1526"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1529"/>
         <source>Business</source>
         <translation>İş</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1528"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1531"/>
         <source>Personal</source>
         <translation>Kişisel</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1530"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1533"/>
         <source>Great Patreon</source>
         <translation>Büyük Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1532"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
         <source>Family</source>
         <translation>Aile</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1538"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Evaluation</source>
         <translation>Deneme</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Type %1</source>
         <translation>Tür %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1571"/>
         <source>Advanced</source>
         <translation>Gelişmiş</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1573"/>
         <source>Advanced (L)</source>
         <translation>Gelişmiş (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1572"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1575"/>
         <source>Max Level</source>
         <translation>En Üst Seviye</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1574"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1577"/>
         <source>Level %1</source>
         <translation>Seviye %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1602"/>
         <source>Supporter certificate required for access</source>
         <translation>Erişim için destekçi sertifikası gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1619"/>
         <source>Supporter certificate required for automation</source>
         <translation>Otomasyon için destekçi sertifikası gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2053"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2056"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Bu sertifika ne yazık ki mevcut derleme için geçerli değil, yeni bir sertifika almanız veya önceki bir derlemeye geçmeniz gerekiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2058"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Bu sertifikanın süresi dolmuş olsa da, şu anda yüklü olan sürüm için Plus özellikleri etkin durumda kalır. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2057"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2060"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Bu sertifikanın süresi ne yazık ki dolmuş, yeni bir sertifika almanız gerekiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2061"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2064"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Deneme sertifikası başarıyla uygulandı. Ücretsiz denemenizin tadını çıkarın!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2204"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2207"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Şimdi Denetle&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2285"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2288"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını tekrar girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2290"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2293"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Parolalar eşleşmedi, lütfen tekrar deneyin.</translation>
     </message>
@@ -5582,7 +5582,7 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>Otomatik Algıla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2066"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus&apos;ın gelişimini desteklediğiniz için teşekkür ederiz.</translation>
     </message>
@@ -5781,94 +5781,94 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>İndir &amp; Yükle</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1304"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1307"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Donanım Kimliği başına %2 kereye kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1322"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1325"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Şu anda yüklü olan sürüm için Plus özellikleri etkin durumdadır&lt;/font&gt;. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1435"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1463"/>
         <source>Retrieving certificate...</source>
         <translation>Sertifika alınıyor...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1536"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Home</source>
         <translation>Ev</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1723"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1726"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Korumalı Alanın Dışında Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1731"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1734"/>
         <source>Set Force in Sandbox</source>
         <translation>Korumalı Alanda Zorlamaya Ayarla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1740"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1743"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Korumalı Alanda Açık Erişime Ayarla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2124"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2127"/>
         <source>Update Available</source>
         <translation>Güncelleme Mevcut</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2126"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2129"/>
         <source>Installed</source>
         <translation>Kurulu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2134"/>
         <source>by %1</source>
         <translation>%1 tarafından</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
         <source>(info website)</source>
         <translation>(bilgi sitesi)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2166"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2169"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Bu Eklenti zorunludur ve kaldırılamaz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2383"/>
         <source>Please enter the template identifier</source>
         <translation>Lütfen şablon tanımlayıcısını girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2391"/>
         <source>Error: %1</source>
         <translation>Hata: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2420"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2423"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Seçili yerel şablonları gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2622"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2625"/>
         <source>%1 (Current)</source>
         <translation>%1 (Kullanılan)</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="914"/>
+        <location filename="Windows/SettingsWindow.cpp" line="917"/>
         <source>Sandboxed Web Browser</source>
         <translation>Korumalı Web Tarayıcısı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2033"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2036"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Bu bir sertifikaya benzemiyor. Lütfen sertifikanın sadece bir kısmını değil tamamını girin.</translation>
     </message>
@@ -5904,42 +5904,42 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="520"/>
+        <location filename="Wizards/SetupWizard.cpp" line="522"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; kabuk entegrasyonunu yapılandırın</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="521"/>
+        <location filename="Wizards/SetupWizard.cpp" line="523"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>Sandboxie-Plus&apos;ın sisteminizle nasıl entegre olacağını yapılandırın.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="525"/>
+        <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Start UI with Windows</source>
         <translation>Windows başlangıcında kullanıcı arayüzünü başlat</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="530"/>
+        <location filename="Wizards/SetupWizard.cpp" line="532"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Dosya gezgini bağlam menüsüne &apos;Korumalı Alanda Çalıştır&apos; seçeneği ekle</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="535"/>
+        <location filename="Wizards/SetupWizard.cpp" line="537"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>Sandboxie altında Web tarayıcısını başlatmak için masaüstü kısayolu ekle</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="540"/>
+        <location filename="Wizards/SetupWizard.cpp" line="542"/>
         <source>Only applications with admin rights can change configuration</source>
         <translation>Yalnızca yönetici haklarına sahip uygulamalar yapılandırmayı değiştirebilsin</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="552"/>
+        <location filename="Wizards/SetupWizard.cpp" line="554"/>
         <source>Warning</source>
         <translation>Uyarı</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="552"/>
+        <location filename="Wizards/SetupWizard.cpp" line="554"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
         <translation>Bu seçeneğin etkinleştirilmesi, Sandboxie.ini yapılandırmasında yönetici ayrıcalıkları olmadan kullanıcı arayüzünden değişiklik yapılmasını engeller. Sandboxie Yöneticisini normal kullanıcı haklarıyla kullanmak kilitlenmeye neden olabileceğinden dikkatli olun. Yapılandırmada değişiklik yapmak için ana penceredeki &apos;Sandbox&apos; menüsünde &apos;Yönetici Olarak Başlat&apos; seçeneğine tıklayarak Sandboxie Yöneticisini yönetici olarak yeniden başlatmalısınız.</translation>
     </message>
@@ -6622,124 +6622,123 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 <context>
     <name>CTraceView</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="257"/>
+        <location filename="Views/TraceView.cpp" line="258"/>
         <source>Show as task tree</source>
         <translation>Görev ağacı olarak göster</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="268"/>
+        <location filename="Views/TraceView.cpp" line="269"/>
         <source>PID:</source>
         <translation>PID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="270"/>
-        <location filename="Views/TraceView.cpp" line="277"/>
-        <location filename="Views/TraceView.cpp" line="286"/>
+        <location filename="Views/TraceView.cpp" line="271"/>
+        <location filename="Views/TraceView.cpp" line="278"/>
         <location filename="Views/TraceView.cpp" line="287"/>
-        <location filename="Views/TraceView.cpp" line="296"/>
-        <location filename="Views/TraceView.cpp" line="563"/>
-        <location filename="Views/TraceView.cpp" line="566"/>
-        <location filename="Views/TraceView.cpp" line="664"/>
+        <location filename="Views/TraceView.cpp" line="288"/>
+        <location filename="Views/TraceView.cpp" line="297"/>
+        <location filename="Views/TraceView.cpp" line="569"/>
+        <location filename="Views/TraceView.cpp" line="685"/>
         <source>[All]</source>
         <translation>[Tümü]</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="275"/>
+        <location filename="Views/TraceView.cpp" line="276"/>
         <source>TID:</source>
         <translation>TID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="637"/>
+        <location filename="Views/TraceView.cpp" line="638"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="644"/>
+        <location filename="Views/TraceView.cpp" line="651"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="283"/>
+        <location filename="Views/TraceView.cpp" line="284"/>
         <source>Type:</source>
         <translation>Tür:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="261"/>
+        <location filename="Views/TraceView.cpp" line="262"/>
         <source>Show NT Object Tree</source>
         <translation>NT Nesne Ağacını Göster</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="294"/>
+        <location filename="Views/TraceView.cpp" line="295"/>
         <source>Status:</source>
         <translation>Durum:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="297"/>
+        <location filename="Views/TraceView.cpp" line="298"/>
         <source>Open</source>
         <translation>Açık</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="298"/>
+        <location filename="Views/TraceView.cpp" line="299"/>
         <source>Closed</source>
         <translation>Kapalı</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="299"/>
+        <location filename="Views/TraceView.cpp" line="300"/>
         <source>Trace</source>
         <translation>İzleme</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="300"/>
+        <location filename="Views/TraceView.cpp" line="301"/>
         <source>Other</source>
         <translation>Diğer</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="308"/>
+        <location filename="Views/TraceView.cpp" line="309"/>
         <source>Show All Boxes</source>
         <translation>Tüm Alanları Göster</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="312"/>
+        <location filename="Views/TraceView.cpp" line="313"/>
         <source>Show Stack Trace</source>
         <translation>Yığın İzlemeyi Göster</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="317"/>
+        <location filename="Views/TraceView.cpp" line="318"/>
         <source>Save to file</source>
         <translation>Dosyaya kaydet</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="330"/>
+        <location filename="Views/TraceView.cpp" line="331"/>
         <source>Auto Scroll</source>
         <translation>Otomatik Kaydırma</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="336"/>
+        <location filename="Views/TraceView.cpp" line="337"/>
         <source>Cleanup Trace Log</source>
         <translation>İzleme Günlüğünü Temizle</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="382"/>
+        <location filename="Views/TraceView.cpp" line="383"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
         <translation>Yığın izleme özelliğini kullanmak için DbgHelp.dll ve SymSrv.dll gereklidir, bunları indirip yüklemek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="707"/>
+        <location filename="Views/TraceView.cpp" line="728"/>
         <source>Save trace log to file</source>
         <translation>İzleme günlüğünü dosyaya kaydet</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="713"/>
+        <location filename="Views/TraceView.cpp" line="734"/>
         <source>Failed to open log file for writing</source>
         <translation>Günlük dosyası yazmak için açılamadı</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="733"/>
+        <location filename="Views/TraceView.cpp" line="754"/>
         <source>Saving TraceLog...</source>
         <translation>TraceLog kaydediliyor...</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="253"/>
+        <location filename="Views/TraceView.cpp" line="254"/>
         <source>Monitor mode</source>
         <translation>İzleme modu</translation>
     </message>
@@ -6747,7 +6746,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="801"/>
+        <location filename="Views/TraceView.cpp" line="822"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - İzleme Monitörü</translation>
     </message>
@@ -6755,37 +6754,37 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 <context>
     <name>CUIPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="405"/>
+        <location filename="Wizards/SetupWizard.cpp" line="407"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; kullanıcı arayüzünü yapılandırın</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="406"/>
+        <location filename="Wizards/SetupWizard.cpp" line="408"/>
         <source>Select the user interface style you prefer.</source>
         <translation>Tercih ettiğiniz kullanıcı arayüzü stilini seçin.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="410"/>
+        <location filename="Wizards/SetupWizard.cpp" line="412"/>
         <source>&amp;Advanced UI for experts</source>
         <translation>&amp;Deneyimliler için gelişmiş kullanıcı arayüzü</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="415"/>
+        <location filename="Wizards/SetupWizard.cpp" line="417"/>
         <source>&amp;Simple UI for beginners</source>
         <translation>&amp;Yeni başlayanlar için basit kullanıcı arayüzü</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="420"/>
+        <location filename="Wizards/SetupWizard.cpp" line="422"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
         <translation>&amp;Eski SbieCtrl.exe Kullanıcı Arayüzü</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="445"/>
+        <location filename="Wizards/SetupWizard.cpp" line="447"/>
         <source>Use Bright Mode</source>
         <translation>Açık Modu Kullan</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="449"/>
+        <location filename="Wizards/SetupWizard.cpp" line="451"/>
         <source>Use Dark Mode</source>
         <translation>Koyu Modu Kullan</translation>
     </message>

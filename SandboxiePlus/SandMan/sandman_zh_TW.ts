@@ -896,61 +896,61 @@ Please browse to the correct user profile directory.</oldsource>
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="246"/>
+        <location filename="Wizards/SetupWizard.cpp" line="248"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>安裝您的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 贊助者憑證</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="247"/>
+        <location filename="Wizards/SetupWizard.cpp" line="249"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>如果您有贊助者憑證，請填入以下欄位。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="274"/>
+        <location filename="Wizards/SetupWizard.cpp" line="276"/>
         <source>Retrieve certificate using Serial Number:</source>
         <translation>使用序號取得憑證:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="280"/>
+        <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>在沒有贊助者憑證的情況下開始進行有限時間的試用。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="289"/>
+        <location filename="Wizards/SetupWizard.cpp" line="291"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;取得一個免費試用憑證&lt;/font&gt;&lt;/a&gt;以體驗高級功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="290"/>
+        <location filename="Wizards/SetupWizard.cpp" line="292"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
         <translation>對於每一個硬體ID，您最多可以請求%2次免費的%1天評估憑證。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="315"/>
+        <location filename="Wizards/SetupWizard.cpp" line="317"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>要在商業設定環境使用 &lt;b&gt;Sandboxie-Plus&lt;/b&gt;，需要適用於商業用途的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;贊助者憑證&lt;/a&gt;。如果您還沒有所需的憑證，可以透過&lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com 網路商店&lt;/a&gt;取得憑證。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="329"/>
+        <location filename="Wizards/SetupWizard.cpp" line="331"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 僅為&lt;u&gt;專案贊助者&lt;/u&gt;提供額外的功能和沙箱類型。例如隱私增強型沙箱，可對來自沙箱化程式非法存取使用者資料的行為&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供額外的使用者資料保護&lt;/font&gt;&lt;/b&gt;。如果您還不是贊助者，請考慮 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;贊助支援此專案&lt;/a&gt;來確保 Sandboxie 的開發工作，並以此取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="366"/>
+        <location filename="Wizards/SetupWizard.cpp" line="368"/>
         <source>Failed to retrieve the certificate.</source>
         <oldsource>Failed to retrive the certificate.</oldsource>
         <translation>取得憑證失敗。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="367"/>
+        <location filename="Wizards/SetupWizard.cpp" line="369"/>
         <source>
 Error: %1</source>
         <translation>
 錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="387"/>
+        <location filename="Wizards/SetupWizard.cpp" line="389"/>
         <source>Retrieving certificate...</source>
         <oldsource>Retreiving certificate...</oldsource>
         <translation>取得憑證中...</translation>
@@ -1185,12 +1185,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="750"/>
+        <location filename="Wizards/SetupWizard.cpp" line="752"/>
         <source>Complete your configuration</source>
         <translation>完成您的組態</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="760"/>
+        <location filename="Wizards/SetupWizard.cpp" line="762"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>即將就緒，按下「完成」按鈕以套用所有選取的選項，並結束此精靈。</translation>
     </message>
@@ -1285,32 +1285,32 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="165"/>
+        <location filename="Wizards/SetupWizard.cpp" line="167"/>
         <source>Introduction</source>
         <translation>介紹</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="172"/>
+        <location filename="Wizards/SetupWizard.cpp" line="174"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>歡迎來到設定精靈，本精靈將幫助您設定此 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 安裝之組態。如果您不希望現在完成，您可以從「沙箱 -&gt; 維護」選單中隨時重新啟動此精靈。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="181"/>
+        <location filename="Wizards/SetupWizard.cpp" line="183"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>選擇 Sandboxie-Plus 的使用方式</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="184"/>
+        <location filename="Wizards/SetupWizard.cpp" line="186"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>個人，用於私人非商業用途(&amp;P)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="189"/>
+        <location filename="Wizards/SetupWizard.cpp" line="191"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>商業，用於企業或商業用途(&amp;C)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="194"/>
+        <location filename="Wizards/SetupWizard.cpp" line="196"/>
         <source>Note: this option is persistent</source>
         <translation>注意: 此選項無法在後續的設定中重新修改</translation>
     </message>
@@ -3027,122 +3027,122 @@ Error: </source>
 <context>
     <name>CSBUpdate</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="609"/>
+        <location filename="Wizards/SetupWizard.cpp" line="611"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
         <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 更新程式組態</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="610"/>
+        <location filename="Wizards/SetupWizard.cpp" line="612"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
         <translation>如同其它任何安全性產品，保持 Sandboxie-Plus 為最新非常重要。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="618"/>
+        <location filename="Wizards/SetupWizard.cpp" line="620"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
         <translation>經常檢查全部 Sandboxie-Plus 和可選組件的更新</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="619"/>
+        <location filename="Wizards/SetupWizard.cpp" line="621"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
         <translation>讓 Sandboxie 經常檢查最新更新。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="629"/>
+        <location filename="Wizards/SetupWizard.cpp" line="631"/>
         <source>Check for new Sandboxie-Plus versions:</source>
         <translation>檢查新的 Sandboxie-Plus 版本:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="630"/>
+        <location filename="Wizards/SetupWizard.cpp" line="632"/>
         <source>Check for new Sandboxie-Plus builds.</source>
         <translation>檢查新的 Sandboxie-Plus 版本。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="636"/>
+        <location filename="Wizards/SetupWizard.cpp" line="638"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
         <translation>選擇將在哪個更新通道中尋找新的 Sandboxie-Plus 組建:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="645"/>
+        <location filename="Wizards/SetupWizard.cpp" line="647"/>
         <source>In the Stable Channel</source>
         <translation>在穩定通道</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="646"/>
+        <location filename="Wizards/SetupWizard.cpp" line="648"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>穩定通道包含最新的穩定 GitHub 發行版本。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="650"/>
+        <location filename="Wizards/SetupWizard.cpp" line="652"/>
         <source>In the Preview Channel - with newest experimental changes</source>
         <translation>在預覽通道 - 包含最新的實驗性變更</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="651"/>
+        <location filename="Wizards/SetupWizard.cpp" line="653"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>預覽通道包含最新的 GitHub 預先發行版本。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="655"/>
+        <location filename="Wizards/SetupWizard.cpp" line="657"/>
         <source>In the Insider Channel - exclusive features</source>
         <translation>在測試人員通道 - 包含專屬功能</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="656"/>
+        <location filename="Wizards/SetupWizard.cpp" line="658"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>測試人員通道提供對「最終將公開發表的新功能和錯誤修復」的早期存取，同時包含穩定通道的所有相關改進。
 與預覽通道不同，它不包含未經測試、可能會破壞或可能尚未準備好供更廣泛使用的實驗性變更。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="661"/>
+        <location filename="Wizards/SetupWizard.cpp" line="663"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>了解更多關於 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;測試人員通道&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="670"/>
+        <location filename="Wizards/SetupWizard.cpp" line="672"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
         <translation>保持相容性範本為最新並套用緊急修補</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="671"/>
+        <location filename="Wizards/SetupWizard.cpp" line="673"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
         <translation>檢查最新的相容性範本和緊急修補。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="675"/>
+        <location filename="Wizards/SetupWizard.cpp" line="677"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
         <translation>取得疑難排解精靈的最新腳本</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="676"/>
+        <location filename="Wizards/SetupWizard.cpp" line="678"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
         <translation>為疑難排解精靈檢查最新的疑難排解腳本。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="680"/>
+        <location filename="Wizards/SetupWizard.cpp" line="682"/>
         <source>Keep the list of optional Add-on components up to date</source>
         <translation>保持可選附加元件/組件為最新</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="681"/>
+        <location filename="Wizards/SetupWizard.cpp" line="683"/>
         <source>Check for latest available add-ons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
         <translation>檢查最新的可用附加元件。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="690"/>
+        <location filename="Wizards/SetupWizard.cpp" line="692"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
         <translation>Sandboxie-Plus 套用了嚴格的應用程式限制，而這可能造成相容性問題。保持 Sandboxie-Plus 為最新版本 (包含相容性範本和疑難排解)，將保證 Wibdows 更新和應用程式變更時能有順暢的作業。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="696"/>
+        <location filename="Wizards/SetupWizard.cpp" line="698"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>存取最新相容性範本和線上疑難排解資料庫需要有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。</translation>
     </message>
@@ -5823,151 +5823,151 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>在沙箱內執行(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1206"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1209"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
         <source>Volume not attached</source>
         <translation>未附加磁碟區</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1304"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;您已經使用了%1/%2個評估憑證。無法生成更多免費憑證了。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1306"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;取得一個免費評估憑證&lt;/a&gt;並享受所有高級功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1304"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1307"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>對於每個硬體ID，您最多可以請求%2次免費的%1天評估憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1320"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此贊助者憑證已逾期，請&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;取得更新的憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1322"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1325"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;對於目前版本，Plus 功能仍然啟用&lt;/font&gt;，但您無法再存取 Sandboxie-Live 服務，包括相容性更新和疑難排解資料庫。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1333"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此贊助者憑證將&lt;font color=&apos;red&apos;&gt;在 %1 天後逾期&lt;/font&gt;，請&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert &quot; &gt;取得更新的憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1366"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1369"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>逾期於: %1天後</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1368"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1371"/>
         <source>Expired: %1 days ago</source>
         <translation>已逾期: %1天前</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1379"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1382"/>
         <source>Options: %1</source>
         <translation>可用選項: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>隱私/安全性增強 &amp; 應用程式沙箱 (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Enabled</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1384"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
         <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Disabled</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1385"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1388"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>加密沙箱 (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1386"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1389"/>
         <source>Network Interception (NetI): %1</source>
         <translation>網路監聽 (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1387"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxie 桌面 (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1402"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1405"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>這看起來不像是一個 Sandboxie-Plus 序號。&lt;br /&gt;如果您嘗試的是輸入憑證的更新金鑰或簽章，這不是正確的操作，請在上方文字區域中輸入完整憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1409"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1412"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>您正嘗試在未輸入作為前置條件的贊助者憑證的情況下使用功能升級金鑰。請注意，這種類型的金鑰 (&lt;b&gt;正如網站上以粗體明確說明的那樣&lt;/b&gt;) 要求您預先擁有一個有效的贊助者憑證；&lt;br /&gt;如果您想使用進階功能，您需要同時取得標準憑證和功能升級金鑰來解鎖進階功能。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1415"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1418"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>您正嘗試在未輸入作為前置條件的贊助者憑證的情況下使用續期金鑰。請注意，這種類型的金鑰 (&lt;b&gt;正如網站上以粗體明確說明的那樣&lt;/b&gt;) 要求您預先擁有一個有效的贊助者憑證；沒有前者的情況下此金鑰完全無效。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1420"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1423"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;如果您沒有閱讀產品說明並錯誤地取得了此金鑰，請透過電子郵件 (在我們的網站上提供) 聯絡我們以解決此問題。&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1435"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1463"/>
         <source>Retrieving certificate...</source>
         <translation>取得憑證中...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1451"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - 取得評估憑證</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1451"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>請輸入您的電郵地址以接收免費的%1天評估憑證，此憑證將頒發給 %2 並鎖定至目前硬體。
 您最多可以為每個唯一硬體ID請求%3個評估憑證。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>取得憑證錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>未知錯誤 (可能是網際網路問題)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2061"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2064"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>評估憑證套用成功。 請享受你的免費試用！</translation>
     </message>
@@ -5976,103 +5976,103 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">取得憑證中...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1525"/>
         <source>Contributor</source>
         <translation>貢獻者</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1524"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1527"/>
         <source>Eternal</source>
         <translation>永久</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1526"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1529"/>
         <source>Business</source>
         <translation>商業</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1528"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1531"/>
         <source>Personal</source>
         <translation>個人</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1530"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1533"/>
         <source>Great Patreon</source>
         <translation>大型 Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1532"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
         <source>Family</source>
         <translation>家庭</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1536"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Home</source>
         <translation>家用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1538"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Evaluation</source>
         <translation>評估</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Type %1</source>
         <translation>類型 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1571"/>
         <source>Advanced</source>
         <translation>進階</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1573"/>
         <source>Advanced (L)</source>
         <translation>進階 (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1572"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1575"/>
         <source>Max Level</source>
         <translation>最高等級</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1574"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1577"/>
         <source>Level %1</source>
         <translation>等級 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1602"/>
         <source>Supporter certificate required for access</source>
         <translation>需要贊助者憑證以存取</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1619"/>
         <source>Supporter certificate required for automation</source>
         <translation>需要贊助者憑證以自動作業</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2053"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2056"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>不幸的是，此憑證對於目前版本無效，您需要取得新憑證或降級至早期版本。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2058"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>儘管此憑證已逾期，但對於目前安裝的版本 Plus 功能仍保持啟用狀態。但是，您將無法再存取 Sandboxie-Live 服務，包括相容性更新和線上疑難排解資料庫。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2057"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2060"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>不幸的是，此憑證已逾期，您需要取得新憑證。</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="914"/>
+        <location filename="Windows/SettingsWindow.cpp" line="917"/>
         <source>Sandboxed Web Browser</source>
         <translation>沙箱化網頁瀏覽器</translation>
     </message>
@@ -6150,7 +6150,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1320"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1323"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus 功能將在 %1 天後被停用。&lt;/font&gt;</translation>
     </message>
@@ -6159,7 +6159,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;在此版本中，Plus 附加的進階功能仍是可用的。&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1324"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1327"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 功能已不再啟用。</translation>
     </message>
@@ -6173,22 +6173,22 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">需要贊助者憑證</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1723"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1726"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>在沙箱外執行(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1731"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1734"/>
         <source>Set Force in Sandbox</source>
         <translation>設定強制沙箱化</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1740"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1743"/>
         <source>Set Open Path in Sandbox</source>
         <translation>設定在沙箱中開啟路徑</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2033"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2036"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>這看起來不像是一份憑證。請輸入完整的憑證，而不僅僅是其中的一部分。</translation>
     </message>
@@ -6201,7 +6201,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">很不幸此憑證已廢止。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2066"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>感謝您對 Sandboxie-Plus 開發工作的支持。</translation>
     </message>
@@ -6210,88 +6210,88 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">此贊助者憑證無效。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2124"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2127"/>
         <source>Update Available</source>
         <translation>更新可用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2126"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2129"/>
         <source>Installed</source>
         <translation>已安裝</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2131"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2134"/>
         <source>by %1</source>
         <translation>by %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
         <source>(info website)</source>
         <translation>(資訊網站)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2166"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2169"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>此附加元件具有強制性且不可被移除。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2175"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2178"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2324"/>
         <source>Select Directory</source>
         <translation>選擇目錄</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2204"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2207"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;立即檢查&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2281"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2284"/>
         <source>Please enter the new configuration password.</source>
         <translation>請輸入新組態密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2285"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2288"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>請再次輸入新組態密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2290"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2293"/>
         <source>Passwords did not match, please retry.</source>
         <translation>密碼不匹配，請重新輸入。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2302"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2305"/>
         <source>Process</source>
         <translation>處理程序</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2302"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2305"/>
         <source>Folder</source>
         <translation>資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2312"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2315"/>
         <source>Please enter a program file name</source>
         <translation>請輸入一個程式檔案名稱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2383"/>
         <source>Please enter the template identifier</source>
         <translation>請輸入範本識別碼</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2388"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2391"/>
         <source>Error: %1</source>
         <translation>錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2420"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2423"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>要刪除所選取的本機範本嗎？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2622"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2625"/>
         <source>%1 (Current)</source>
         <translation>%1 (目前)</translation>
     </message>
@@ -6327,43 +6327,43 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="520"/>
+        <location filename="Wizards/SetupWizard.cpp" line="522"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 命令整合組態</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="521"/>
+        <location filename="Wizards/SetupWizard.cpp" line="523"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>設定 Sandboxie-Plus 應如何與您的系統整合。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="525"/>
+        <location filename="Wizards/SetupWizard.cpp" line="527"/>
         <source>Start UI with Windows</source>
         <translation>Windows 啟動時開啟使用者介面</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="530"/>
+        <location filename="Wizards/SetupWizard.cpp" line="532"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>在檔案總管上下文選單新增「在沙箱中執行」</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="535"/>
+        <location filename="Wizards/SetupWizard.cpp" line="537"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>加入在 Sandboxie 中開啟網頁瀏覽器的桌面捷徑</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="540"/>
+        <location filename="Wizards/SetupWizard.cpp" line="542"/>
         <source>Only applications with admin rights can change configuration</source>
         <oldsource>Only applications with administrator token can change ini setting.</oldsource>
         <translation>僅有管理員權限的應用程式能夠變更組態設定</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="552"/>
+        <location filename="Wizards/SetupWizard.cpp" line="554"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="552"/>
+        <location filename="Wizards/SetupWizard.cpp" line="554"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
         <translation>啟用此選項會阻止從無管理員權限的使用者介面對 Sandboxie.ini 進行組態變更。請慎重，因為使用普通使用者權限的沙箱管理員將可能進入鎖定狀態。為變更組態，你必須透過點選主視窗中「沙箱」選單內的「以管理員權限重新啟動」，以作為系統管理員重新啟動沙箱管理員。</translation>
     </message>
@@ -7076,109 +7076,108 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CTraceView</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="257"/>
+        <location filename="Views/TraceView.cpp" line="258"/>
         <source>Show as task tree</source>
         <translation>顯示為工作樹狀目錄</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="261"/>
+        <location filename="Views/TraceView.cpp" line="262"/>
         <source>Show NT Object Tree</source>
         <translation>顯示 NT 物件樹狀結構</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="268"/>
+        <location filename="Views/TraceView.cpp" line="269"/>
         <source>PID:</source>
         <translation>處理程序 ID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="270"/>
-        <location filename="Views/TraceView.cpp" line="277"/>
-        <location filename="Views/TraceView.cpp" line="286"/>
+        <location filename="Views/TraceView.cpp" line="271"/>
+        <location filename="Views/TraceView.cpp" line="278"/>
         <location filename="Views/TraceView.cpp" line="287"/>
-        <location filename="Views/TraceView.cpp" line="296"/>
-        <location filename="Views/TraceView.cpp" line="563"/>
-        <location filename="Views/TraceView.cpp" line="566"/>
-        <location filename="Views/TraceView.cpp" line="664"/>
+        <location filename="Views/TraceView.cpp" line="288"/>
+        <location filename="Views/TraceView.cpp" line="297"/>
+        <location filename="Views/TraceView.cpp" line="569"/>
+        <location filename="Views/TraceView.cpp" line="685"/>
         <source>[All]</source>
         <translation>[所有]</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="275"/>
+        <location filename="Views/TraceView.cpp" line="276"/>
         <source>TID:</source>
         <translation>執行緒 ID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="283"/>
+        <location filename="Views/TraceView.cpp" line="284"/>
         <source>Type:</source>
         <translation>類型:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="294"/>
+        <location filename="Views/TraceView.cpp" line="295"/>
         <source>Status:</source>
         <translation>狀態:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="297"/>
+        <location filename="Views/TraceView.cpp" line="298"/>
         <source>Open</source>
         <translation>開放</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="298"/>
+        <location filename="Views/TraceView.cpp" line="299"/>
         <source>Closed</source>
         <translation>封閉</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="299"/>
+        <location filename="Views/TraceView.cpp" line="300"/>
         <source>Trace</source>
         <translation>追蹤</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="300"/>
+        <location filename="Views/TraceView.cpp" line="301"/>
         <source>Other</source>
         <translation>其它</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="308"/>
+        <location filename="Views/TraceView.cpp" line="309"/>
         <source>Show All Boxes</source>
         <translation>顯示所有沙箱</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="312"/>
+        <location filename="Views/TraceView.cpp" line="313"/>
         <source>Show Stack Trace</source>
         <translation>顯示堆疊追蹤</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="317"/>
+        <location filename="Views/TraceView.cpp" line="318"/>
         <source>Save to file</source>
         <translation>儲存至檔案</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="330"/>
+        <location filename="Views/TraceView.cpp" line="331"/>
         <source>Auto Scroll</source>
         <translation>自動捲動</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="336"/>
+        <location filename="Views/TraceView.cpp" line="337"/>
         <source>Cleanup Trace Log</source>
         <translation>清理追蹤日誌</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="382"/>
+        <location filename="Views/TraceView.cpp" line="383"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
         <translation>為使用堆疊追蹤功能，DbgHelp.dll 和 SymSrv.dll 是必需的，是否進行下載和安裝？</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="707"/>
+        <location filename="Views/TraceView.cpp" line="728"/>
         <source>Save trace log to file</source>
         <translation>儲存追蹤日誌至檔案</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="713"/>
+        <location filename="Views/TraceView.cpp" line="734"/>
         <source>Failed to open log file for writing</source>
         <translation>無法開啟日誌檔進行寫入</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="733"/>
+        <location filename="Views/TraceView.cpp" line="754"/>
         <source>Saving TraceLog...</source>
         <translation>正在儲存追蹤日誌...</translation>
     </message>
@@ -7187,17 +7186,17 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">未知</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="637"/>
+        <location filename="Views/TraceView.cpp" line="638"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="253"/>
+        <location filename="Views/TraceView.cpp" line="254"/>
         <source>Monitor mode</source>
         <translation>監視模式</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="644"/>
+        <location filename="Views/TraceView.cpp" line="651"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -7205,7 +7204,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="801"/>
+        <location filename="Views/TraceView.cpp" line="822"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - 追蹤監測</translation>
     </message>
@@ -7213,37 +7212,37 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CUIPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="405"/>
+        <location filename="Wizards/SetupWizard.cpp" line="407"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
         <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 使用者介面組態</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="406"/>
+        <location filename="Wizards/SetupWizard.cpp" line="408"/>
         <source>Select the user interface style you prefer.</source>
         <translation>選擇您喜歡的使用者介面風格。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="410"/>
+        <location filename="Wizards/SetupWizard.cpp" line="412"/>
         <source>&amp;Advanced UI for experts</source>
         <translation>適合專家的進階使用者介面(&amp;A)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="415"/>
+        <location filename="Wizards/SetupWizard.cpp" line="417"/>
         <source>&amp;Simple UI for beginners</source>
         <translation>適合新手的簡易使用者介面(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="420"/>
+        <location filename="Wizards/SetupWizard.cpp" line="422"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
         <translation>SbieCtrl 經典使用者介面(&amp;V)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="445"/>
+        <location filename="Wizards/SetupWizard.cpp" line="447"/>
         <source>Use Bright Mode</source>
         <translation>使用淺色主題</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="449"/>
+        <location filename="Wizards/SetupWizard.cpp" line="451"/>
         <source>Use Dark Mode</source>
         <translation>使用深色主題</translation>
     </message>
@@ -8507,12 +8506,6 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="1296"/>
         <source>File ACLs</source>
         <translation>檔案存取管理清單 (ACL)</translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1346"/>
-        <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
-        <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
-        <translation>對沙箱化檔案和資料夾使用原始存取管理條目 (Access Control Entries) (對 MSIServer 啟用豁免)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1933"/>

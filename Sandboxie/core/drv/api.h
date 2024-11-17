@@ -39,17 +39,6 @@
 //---------------------------------------------------------------------------
 
 
-/*typedef struct _API_WORK_ITEM {
-
-    LIST_ELEM list_elem;
-    ULONG length;           // length includes both header and data
-    ULONG session_id;
-    ULONG type;
-
-    ULONG data[1];
-
-} API_WORK_ITEM;*/
-
 typedef struct _Sbie_SeFilterTokenArg
 {
     PACCESS_TOKEN       ExistingToken;
@@ -105,14 +94,6 @@ void Api_ResetServiceProcess(void);
 //
 
 BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data);
-
-//
-// Publish WORK_ITEM to be consumed by SandboxieService.  Caller must
-// allocate work_item from Driver_Pool, and initialize type, length and data
-//
-
-//BOOLEAN Api_AddWork(API_WORK_ITEM *work_item);
-
 
 //
 // Add message to log buffer

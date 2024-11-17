@@ -26,6 +26,7 @@
 #include "api.h"
 #include "util.h"
 #include "session.h"
+#include "conf.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -36,12 +37,6 @@ static void Log_Event_Msg(
     NTSTATUS error_code,
     const WCHAR *string1,
     const WCHAR *string2);
-
-/*static void Log_Popup_Msg_2(
-    NTSTATUS error_code,
-    const WCHAR *string1, ULONG string1_len,
-    const WCHAR *string2, ULONG string2_len,
-    ULONG session_id);*/
 
 
 //---------------------------------------------------------------------------
@@ -151,9 +146,6 @@ _FX void Log_Popup_MsgEx(
     if ((Driver_OsVersion >= DRIVER_WINDOWS_VISTA) && (session_id == 0))
         session_id = 1;
 
-    //Log_Popup_Msg_2(
-    //  error_code, string1, string1_len, string2, string2_len, session_id, (ULONG)pid);
-
     const WCHAR* strings[3] = { string1, string2, NULL };
     ULONG lengths[3] = { string1_len, string2_len, 0 };
 	Api_AddMessage(error_code, strings, lengths, session_id, (ULONG)pid);
@@ -162,69 +154,15 @@ _FX void Log_Popup_MsgEx(
     // log message to SbieSvc and trigger SbieSvc to wake up and collect it
     //
 
-    //Log_Popup_Msg_2(
-    //    error_code, string1, string1_len, string2, string2_len, -1, (ULONG)pid);
+    ULONG data = 0;
+    
+    if (Conf_Get_Boolean(NULL, L"LogMessageEvents", 0, FALSE))
+        data |= 0x01;
 
-	ULONG data = 0;
     Api_SendServiceMessage(SVC_LOG_MESSAGE, sizeof(ULONG), &data);
 
     // DbgPrint("POPUP %04d %S %S\n", error_code & 0xFFFF, string1, string2);
 }
-
-
-//---------------------------------------------------------------------------
-// Log_Popup_Msg_2
-//---------------------------------------------------------------------------
-
-
-/*_FX void Log_Popup_Msg_2(
-    NTSTATUS error_code,
-    const WCHAR *string1, ULONG string1_len,
-    const WCHAR *string2, ULONG string2_len,
-    ULONG session_id)
-{
-    API_WORK_ITEM *work_item;
-    ULONG length;
-    WCHAR *ptr;
-
-    length = sizeof(API_WORK_ITEM)
-           + sizeof(ULONG)      // msgid
-           + (string1_len + 1) * sizeof(WCHAR)
-           + (string2_len + 1) * sizeof(WCHAR);
-
-    //
-    // prepare work item
-    //
-
-    work_item = Mem_Alloc(Driver_Pool, length);
-    if (work_item) {
-
-        work_item->length = length;
-
-        work_item->session_id = session_id;
-
-        work_item->type = API_LOG_MESSAGE;
-
-        work_item->data[0] = error_code;
-
-        ptr = (WCHAR *)&work_item->data[1];
-
-        if (string1_len) {
-            wmemcpy(ptr, string1, string1_len);
-            ptr += string1_len;
-        }
-        *ptr = L'\0';
-        ++ptr;
-
-        if (string2_len) {
-            wmemcpy(ptr, string2, string2_len);
-            ptr += string2_len;
-        }
-        *ptr = L'\0';
-
-        Api_AddWork(work_item);
-    }
-}*/
 
 
 //---------------------------------------------------------------------------

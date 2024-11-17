@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to hide installed programs [#4139](https://github.com/sandboxie-plus/Sandboxie/issues/4139)
 - added Hide Tray Icon [#4075](https://github.com/sandboxie-plus/Sandboxie/issues/4075)
 - added improved trace logging filtering [#4338](https://github.com/sandboxie-plus/Sandboxie/issues/4338)
+- added EventLog monitoring for SbieMessages [#4113](https://github.com/sandboxie-plus/Sandboxie/issues/4113)
+  - add 'LogMessageEvents=y' to the global settings to log all sbie events to the system event log
 
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643) [#4343](https://github.com/sandboxie-plus/Sandboxie/issues/4343)

@@ -103,7 +103,7 @@ private:
     // log messages to file
     //
 
-    void LogMessage();
+    void LogMessage(void *_msg);
 
     void LogMessage_Single(ULONG code, wchar_t* data, ULONG pid);
     void LogMessage_Multi(ULONG msgid, const WCHAR *path, const WCHAR *text);

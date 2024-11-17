@@ -45,6 +45,8 @@ NTSTATUS LsaLookupAuthenticationPackage(
 
 ULONG DriverAssist::StartDriverAsync(void *arg)
 {
+    DriverAssist* This = (DriverAssist*)arg;
+
     //
     // get windows version
     //
@@ -309,7 +311,7 @@ driver_started:
         // messages that were logged while the driver was starting
         //
 
-        m_instance->LogMessage();
+        m_instance->LogMessage(NULL);
 
         m_instance->m_DriverReady = true;
 

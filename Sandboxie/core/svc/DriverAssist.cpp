@@ -303,7 +303,7 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
     }
     else if (msgid == SVC_LOG_MESSAGE) {
 
-        LogMessage();
+        LogMessage(data_ptr);
 
     }
     else if (msgid == SVC_CONFIG_UPDATED) {

@@ -57,8 +57,6 @@ static BOOLEAN Api_FastIo_DEVICE_CONTROL(
     ULONG IoControlCode, IO_STATUS_BLOCK *IoStatus,
     DEVICE_OBJECT *DeviceObject);
 
-//static void Api_DelWork(API_WORK_ITEM *work_item);
-
 
 //---------------------------------------------------------------------------
 
@@ -68,8 +66,6 @@ static NTSTATUS Api_GetVersion(PROCESS *proc, ULONG64 *parms);
 static NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms);
-
-//static NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_GetHomePath(PROCESS *proc, ULONG64 *parms);
 
@@ -110,8 +106,7 @@ volatile HANDLE Api_ServiceProcessId = NULL;
 
 static PERESOURCE Api_LockResource = NULL;
 
-//static LIST Api_WorkList;
-static BOOLEAN Api_WorkListInitialized = FALSE;
+static BOOLEAN Api_Initialized = FALSE;
 
 static LOG_BUFFER* Api_LogBuffer = NULL;
 
@@ -137,15 +132,13 @@ _FX BOOLEAN Api_Init(void)
 	Api_LogBuffer = log_buffer_init(8 * 8 * 1024);
 
     //
-    // initialize work list
+    // initialize lock
     //
-
-    //List_Init(&Api_WorkList);
 
     if (! Mem_GetLockResource(&Api_LockResource, TRUE))
         return FALSE;
 
-    Api_WorkListInitialized = TRUE;
+    Api_Initialized = TRUE;
 
     //
     // initialize Fast IO dispatch pointers
@@ -193,7 +186,6 @@ _FX BOOLEAN Api_Init(void)
     //
 
     Api_SetFunction(API_GET_VERSION,        Api_GetVersion);
-    //Api_SetFunction(API_GET_WORK,           Api_GetWork);
     Api_SetFunction(API_LOG_MESSAGE,        Api_LogMessage);
 	Api_SetFunction(API_GET_MESSAGE,        Api_GetMessage);
     Api_SetFunction(API_GET_HOME_PATH,      Api_GetHomePath);
@@ -240,24 +232,16 @@ _FX void Api_Unload(void)
         Api_FastIoDispatch = NULL;
     }
 
-    if (Api_WorkListInitialized) {
+    if (Api_Initialized) {
 
 		if (Api_LogBuffer) {
 			log_buffer_free(Api_LogBuffer);
 			Api_LogBuffer = NULL;
 		}
 
-        /*API_WORK_ITEM *work_item;
-		while (1) {
-            work_item = List_Head(&Api_WorkList);
-            if (! work_item)
-                break;
-            Api_DelWork(work_item);
-        }*/
-
         Mem_FreeLockResource(&Api_LockResource);
 
-        Api_WorkListInitialized = FALSE;
+        Api_Initialized = FALSE;
     }
 
     if (Api_ServicePortObject) {
@@ -682,11 +666,11 @@ _FX void Api_AddMessage(
 {
 	KIRQL irql;
 
-	if (!Api_WorkListInitialized) // if (!Api_LogBuffer)
+	if (!Api_Initialized)
 		return;
 
 	//
-	// add work at the end of the work list
+	// add message
 	//
 
 	irql = Api_EnterCriticalSection();
@@ -920,140 +904,6 @@ _FX BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data)
 
     return ok;
 }
-
-
-//---------------------------------------------------------------------------
-// Api_AddWork
-//---------------------------------------------------------------------------
-
-
-/*_FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
-{
-    KIRQL irql;
-
-    if (! Api_WorkListInitialized)
-        return FALSE;
-
-    //
-    // add work at the end of the work list
-    //
-
-    irql = Api_EnterCriticalSection();
-
-    List_Insert_After(&Api_WorkList, NULL, work_item);
-
-    Api_LeaveCriticalSection(irql);
-
-    //
-    // set the work event so SbieSvc wakes up
-    //
-
-    if (work_item->session_id != -1)
-        return TRUE;
-
-    return TRUE;
-}*/
-
-
-//---------------------------------------------------------------------------
-// Api_DelWork
-//---------------------------------------------------------------------------
-
-
-/*_FX void Api_DelWork(API_WORK_ITEM *work_item)
-{
-    // this assumes Api_WorkList is already locked using Api_Lock
-
-    List_Remove(&Api_WorkList, work_item);
-    Mem_Free(work_item, work_item->length);
-}*/
-
-
-//---------------------------------------------------------------------------
-// Api_GetWork
-//---------------------------------------------------------------------------
-
-
-/*_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
-{
-    API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
-    NTSTATUS status;
-    void *buffer_ptr;
-    ULONG buffer_len;
-    ULONG *result_len;
-    ULONG length;
-    API_WORK_ITEM *work_item;
-    KIRQL irql;
-
-    //
-    // caller must not be sandboxed, and caller has to be SbieSvc
-    // if session parameter is -1
-    //
-
-    if (proc)
-        return STATUS_NOT_IMPLEMENTED;
-
-    if (args->session_id.val == -1 &&
-            PsGetCurrentProcessId() != Api_ServiceProcessId)
-        return STATUS_ACCESS_DENIED;
-
-    //
-    // find next work/log item for the session
-    //
-
-    buffer_ptr = args->buffer.val;
-    buffer_len = args->buffer_len.val;
-    result_len = args->result_len_ptr.val;
-
-    irql = Api_EnterCriticalSection();
-
-    work_item = List_Head(&Api_WorkList);
-    while (work_item) {
-        if (work_item->session_id == args->session_id.val)
-            break;
-        work_item = List_Next(work_item);
-    }
-
-    __try {
-
-    if (! work_item) {
-
-        status = STATUS_NO_MORE_ENTRIES;
-
-    } else {
-
-        if (work_item->length <= buffer_len) {
-
-            length = work_item->length
-                   - FIELD_OFFSET(API_WORK_ITEM, type);
-            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
-            memcpy(buffer_ptr, &work_item->type, length);
-
-            status = STATUS_SUCCESS;
-
-        } else {
-
-            length = work_item->length;
-            status = STATUS_BUFFER_TOO_SMALL;
-        }
-
-        if (result_len) {
-            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
-            *result_len = length;
-        }
-
-        if (status == STATUS_SUCCESS)
-            Api_DelWork(work_item);
-    }
-
-    } __except (EXCEPTION_EXECUTE_HANDLER) {
-        status = GetExceptionCode();
-    }
-
-    Api_LeaveCriticalSection(irql);
-
-    return status;
-}*/
 
 
 //---------------------------------------------------------------------------

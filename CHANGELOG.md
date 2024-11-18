@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.15.2 / 5.70.2] - 2024-11-
+## [1.15.2 / 5.70.2] - 2024-11-18
 
 ### Added
 - added "NetworkAdapterMAC=0,AA-BB-CC-DD-EE-FF" to set MAC address for each box (thanks Yeyixiao)

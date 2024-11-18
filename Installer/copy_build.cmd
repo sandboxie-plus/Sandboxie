@@ -1,9 +1,11 @@
+call "%~dp0..\Installer\buildVariables.cmd"
+
 REM @ECHO OFF
 
-echo %*
-IF "%~4" == "" ( set "openssl_version=3.4.0" ) ELSE ( set "openssl_version=%~4" )
-IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
-IF "%~2" == "" ( set "qt_version=5.15.16" ) ELSE ( set "qt_version=%~2" )
+REM echo %*
+REM IF "%~4" == "" ( set "openssl_version=3.4.0" ) ELSE ( set "openssl_version=%~4" )
+REM IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
+REM IF "%~2" == "" ( set "qt_version=5.15.16" ) ELSE ( set "qt_version=%~2" )
 
 IF "%openssl_version:~0,3%" == "1.1" ( set "sslMajorVersion=1_1" ) ELSE ( set "sslMajorVersion=3" )
 
@@ -12,6 +14,7 @@ IF %1 == x86 (
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
   set qtPath=%~dp0..\..\Qt\%qt_version%\msvc2019
   set instPath=%~dp0\SbiePlus_x86
+  set "sslMajorVersion=3"
 )
 IF %1 == x64 (
   set archPath=x64
@@ -19,6 +22,7 @@ IF %1 == x64 (
 REM  set qtPath=%~dp0..\..\Qt\%qt6_version%\msvc2019_64
   set qtPath=%~dp0..\..\Qt\%qt_version%\msvc2019_64
   set instPath=%~dp0\SbiePlus_x64
+  set "sslMajorVersion=3"
 )
 IF %1 == ARM64 (
   set archPath=ARM64

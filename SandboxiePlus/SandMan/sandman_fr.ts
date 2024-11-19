@@ -6187,7 +6187,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="248"/>
         <source>Hide (Run invisible in Background)</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer (lancer de manière invisible en arrière-plan)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="254"/>
@@ -8528,29 +8528,29 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="301"/>
         <source>Box Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notes de bac</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1346"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
         <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
-        <translation type="unfinished">Utiliser des entrées de contrôle d&apos;accès originales pour les fichiers et les dossiers en bac à sable (pour les exemptions MSIServer activées)</translation>
+        <translation>Utiliser les entrées de contrôle d&apos;accès originales pour les fichiers et les dossiers en bac à sable (pour les exemptions MSIServer activées)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1364"/>
         <source>Run Processes on an own Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer les processus dans leur propre bureau en bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
         <source>Desktop Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Isolation de bureau</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1473"/>
         <source>Open Window Station (improves compatibility by reducing desktop isolation)</source>
         <oldsource>Open Window Station (improves compatybility by reducing desktop isolation)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir la station de fenêtre (améliore la compatibilité en réduisant l&apos;isolation du bureau)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1993"/>
@@ -9894,17 +9894,17 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4885"/>
         <source>Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Processus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4995"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option masque le chemin de registre « *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\* », ce qui permet à un logiciel installé sur l&apos;hôte d&apos;être réinstallé dans le bac. Cependant, elle ne masque pas les fichiers ni les dossiers spécifiques au logiciel. Si l&apos;installeur rencontre encore des problèmes, vous devrez définir des entrées WriteFilePath personnalisées pour masquer les fichiers appropriés sur le disque.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4998"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer la clé de désinstallation du logiciel installé sur l&apos;hôte (voir la bulle d&apos;aide)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5035"/>
@@ -10660,17 +10660,17 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="676"/>
         <source>Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Bureau dans un bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="683"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="unfinished"></translation>
+        <translation>Basculer vers le bureau en bac à sable lors du démarrage d&apos;un processus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="690"/>
         <source>Switch to sandboxed desktop with double click</source>
-        <translation type="unfinished"></translation>
+        <translation>Basculer vers le bureau en bac à sable lors d&apos;un double-clic</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1786"/>
@@ -10680,7 +10680,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1816"/>
         <source>Enter/view Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisir/voir le certificat d&apos;adhérent</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1829"/>

@@ -267,7 +267,7 @@ SBIE1412 Yazı: %2
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Messages from user mode -- informational -- 2101 through 2199
+# Kullanıcı modundan gelen mesajlar -- bilgi amaçlı -- 2101 ile 2199 arası
 #----------------------------------------------------------------------------
 
 2101;pop;inf;01

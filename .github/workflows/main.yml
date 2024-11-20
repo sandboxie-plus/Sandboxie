@@ -69,8 +69,9 @@ on:
       - '**/COPYING'
 
 env:
+  forbuildVariables: use Installer\buildVariables.cmd file
   #qt_version: 5.15.16
-  qt6_version: 6.3.1
+  #qt6_version: 6.3.1
   #openssl_version: 3.4.0
   #ghSsl_user: xanasoft
   #ghSsl_repo: openssl-builds
@@ -190,6 +191,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.7
+        
+      - name: Load Variables from buildVariables.cmd
+        shell: cmd
+        run: |
+          @echo on
+          call "${{ github.workspace }}\Installer\buildVariables.cmd"
+          echo qt6_version=%qt6_version% >> %GITHUB_ENV%
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2

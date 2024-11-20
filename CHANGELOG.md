@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.15.3 / 5.70.3] - 2024-11-??
 
 ### Added
+- improved ini section editor, it now supports search Ctrl+F
 
 ### Fixed
 

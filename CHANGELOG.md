@@ -17,17 +17,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added "NetworkAdapterMAC=0,AA-BB-CC-DD-EE-FF" to set MAC address for each box (thanks Yeyixiao)
-- added "DiskSerialNumber=DeviceName,1234-ABCD" to set Disk Serial Number for indivdal box (thanks Yeyixiao)
-- added the ability to hide certificates in editbox in Global Setting (idea by Yeyixiao)
-- added Opening a program in several sandboxes at once [#4231](https://github.com/sandboxie-plus/Sandboxie/issues/4231)
+- added "DiskSerialNumber=DeviceName,1234-ABCD" to set disk serial number for individual box (thanks Yeyixiao)
+- added the ability to hide certificates in the edit box in the global settings (idea by Yeyixiao)
+- added opening a program in several sandboxes at once [#4231](https://github.com/sandboxie-plus/Sandboxie/issues/4231)
 - added "Description" field inside the sandbox settings [#4243](https://github.com/sandboxie-plus/Sandboxie/issues/4243)
 - added "NotifyMsiInstaller=y" enabled by default to display message SBIE2194 when an MSI installer is run in a box without the recommended exemptions [#4330](https://github.com/sandboxie-plus/Sandboxie/issues/4330)
   - SBIE2194: MSI installer requires 'MsiInstallerExemptions=y' option to be set in the ini to be able to work correctly, however this option weakens the isolation.
 - added option to hide installed programs [#4139](https://github.com/sandboxie-plus/Sandboxie/issues/4139)
-- added Hide Tray Icon [#4075](https://github.com/sandboxie-plus/Sandboxie/issues/4075)
+- added hide tray icon [#4075](https://github.com/sandboxie-plus/Sandboxie/issues/4075)
 - added improved trace logging filtering [#4338](https://github.com/sandboxie-plus/Sandboxie/issues/4338)
 - added EventLog monitoring for SbieMessages [#4113](https://github.com/sandboxie-plus/Sandboxie/issues/4113)
-  - add 'LogMessageEvents=y' to the global settings to log all sbie events to the system event log
+  - add 'LogMessageEvents=y' to the global settings to log all Sbie events to the system event log
+
+### Changed
+- validated compatibility with Windows build 27749 and updated DynData
+- when running via drag and drop, now the app's parent folder is used as working directory [#4073](https://github.com/sandboxie-plus/Sandboxie/issues/4073)
 
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643) [#4343](https://github.com/sandboxie-plus/Sandboxie/issues/4343)
@@ -36,13 +40,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed "ForceDisableAdminOnly" is weird [#4233](https://github.com/sandboxie-plus/Sandboxie/issues/4233)
 - fixed deadlock on no op condition when renaming file or folder [#4304](https://github.com/sandboxie-plus/Sandboxie/issues/4304)
 - fixed Could not move file or folder [#4329](https://github.com/sandboxie-plus/Sandboxie/issues/4329)
+- fixed Sandboxie causing Firefox Nightly crashes [#4183](https://github.com/sandboxie-plus/Sandboxie/issues/4183)
 - "Run Sandboxed" from the quick-previewer should have only one option [#4339](https://github.com/sandboxie-plus/Sandboxie/issues/4339)
-- Sandboxie causing Firefox Nightly crashes [#4183](https://github.com/sandboxie-plus/Sandboxie/issues/4183)
-
-### Changed
-- validated compatibility with Windows build 27749 and updated DynData
-- when running via drag and drop now the apps parent folder is used as working dir [#4073](https://github.com/sandboxie-plus/Sandboxie/issues/4073)
-
 
 
 
@@ -74,7 +73,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved SandboxieCrypto startup
-- improved Sandboxed RPCSS startup
+- improved sandboxed RPCSS startup
 - changed Qt 5 version to Qt 5.15.15 with OpenSSL 3.3.2 [#4223](https://github.com/sandboxie-plus/Sandboxie/pull/4223) (thanks offhub)
 - set tab orders and buddies of UI controls [#4300](https://github.com/sandboxie-plus/Sandboxie/pull/4300) (thanks gexgd0419)
 

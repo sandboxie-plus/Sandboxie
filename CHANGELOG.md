@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - improved ini section editor, it now supports search Ctrl+F
+- added SBIE1321 to log all force process events, can be enabled with "NotifyForceProcessEnabled=y", Improves #4113
 
 ### Fixed
 
@@ -73,7 +74,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved SandboxieCrypto startup
-- improved sandboxed RPCSS startup
+- improved Sandboxed RPCSS startup
 - changed Qt 5 version to Qt 5.15.15 with OpenSSL 3.3.2 [#4223](https://github.com/sandboxie-plus/Sandboxie/pull/4223) (thanks offhub)
 - set tab orders and buddies of UI controls [#4300](https://github.com/sandboxie-plus/Sandboxie/pull/4300) (thanks gexgd0419)
 

@@ -2930,7 +2930,7 @@ QString CSandMan::MakeSbieMsgLink(quint32 MsgCode, const QStringList& MsgData, Q
 
 void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
 {
-	if ((MsgCode & 0xFFFF) == 2198 ) // file migration progress
+	if ((MsgCode & 0xFFFF) == 2198) // file migration progress
 	{
 		if (!IsDisableMessages() && theConf->GetBool("Options/ShowMigrationProgress", true))
 			m_pPopUpWindow->ShowProgress(MsgCode, MsgData, ProcessId);
@@ -3008,6 +3008,9 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 		return; // don't pop that one up
 
 	if ((MsgCode & 0xFFFF) == 2111) // process open denided
+		return; // don't pop that one up
+
+	if ((MsgCode & 0xFFFF) == 1321) // process forced
 		return; // don't pop that one up
 
 	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true) && !IsDisableMessages())

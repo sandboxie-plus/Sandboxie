@@ -378,6 +378,11 @@ _FX BOX *Process_GetForcedStartBox(
 		}
     }
 
+    if (box && Conf_Get_Boolean(NULL, L"NotifyForceProcessEnabled", 0, FALSE) && box != (BOX *)-1)
+    {
+        Log_Msg_Process(MSG_1321, ImageName, box->name, SessionId, ProcessId);
+    }
+
     //
     // finish
     //

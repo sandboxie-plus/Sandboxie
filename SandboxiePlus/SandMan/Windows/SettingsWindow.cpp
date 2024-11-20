@@ -474,6 +474,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.chkStartBlockMsg, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
 	connect(ui.chkNotForcedMsg, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
+	connect(ui.chkForcedMsg, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
 	connect(ui.btnAddWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnAddWarnProg()));
 	connect(ui.btnAddWarnFolder, SIGNAL(clicked(bool)), this, SLOT(OnAddWarnFolder()));
 	connect(ui.btnDelWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnDelWarnProg()));
@@ -913,9 +914,6 @@ void CSettingsWindow::RemoveContextMenu()
 		QProcess Proc;
 		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RemovePackage");
 		Proc.waitForFinished();
-		
-		QSettings MyReg("HKEY_CURRENT_USER\\SOFTWARE\\Xanasoft\\Sandboxie-Plus", QSettings::NativeFormat);
-		MyReg.remove("");  // Removes the entire key and all subkeys
 	}
 
 	CSbieUtils::RemoveContextMenu();
@@ -1093,6 +1091,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkStartBlock->setChecked(theAPI->GetGlobalSettings()->GetBool("StartRunAlertDenied", false));
 		ui.chkStartBlockMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("AlertStartRunAccessDenied", true));
 		ui.chkNotForcedMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyForceProcessDisabled", false));
+		ui.chkForcedMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyForceProcessEnabled", false));
 
 		ui.treeWarnProgs->clear();
 
@@ -1903,6 +1902,7 @@ void CSettingsWindow::SaveSettings()
 				WriteAdvancedCheck(ui.chkStartBlock, "StartRunAlertDenied", "y", "");
 				WriteAdvancedCheck(ui.chkStartBlockMsg, "AlertStartRunAccessDenied", "", "n");
 				WriteAdvancedCheck(ui.chkNotForcedMsg, "NotifyForceProcessDisabled", "y", "");
+				WriteAdvancedCheck(ui.chkForcedMsg, "NotifyForceProcessEnabled", "y", "");
 
 				QStringList AlertProcess;
 				QStringList AlertFolder;

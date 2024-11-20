@@ -639,5 +639,7 @@ private:
 	QMap<QCheckBox*, SDbgOpt> m_DebugOptions;
 
 	void InitLangID();
+
+	class CCodeEdit* m_pCodeEdit;
 };
 

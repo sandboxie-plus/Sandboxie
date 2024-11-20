@@ -9,6 +9,8 @@
 #include "Helpers/WinAdmin.h"
 #include "../Wizards/TemplateWizard.h"
 #include "Helpers/TabOrder.h"
+#include "../MiscHelpers/Common/CodeEdit.h"
+#include "Helpers/IniHighlighter.h"
 
 
 class NoEditDelegate : public QStyledItemDelegate {
@@ -575,14 +577,17 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// edit
+	m_pCodeEdit = new CCodeEdit(new CIniHighlighter);
+	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
+	ui.txtIniSection->deleteLater();
+	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
+
 	ApplyIniEditFont();
 
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
-	connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
-
-	//
+	//connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
 
 	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(ok()));
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
@@ -679,7 +684,8 @@ void COptionsWindow::ApplyIniEditFont()
 	QFont font; // defaults to application font
 	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();
 	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
-	ui.txtIniSection->setFont(font);
+	//ui.txtIniSection->setFont(font);
+	m_pCodeEdit->setFont(font);
 }
 
 void COptionsWindow::OnSetTree()
@@ -1300,7 +1306,8 @@ void COptionsWindow::LoadIniSection()
 		Section = m_pBox->GetAPI()->SbieIniGetEx(m_pBox->GetName(), "");
 
 	m_HoldChange = true;
-	ui.txtIniSection->setPlainText(Section);
+	//ui.txtIniSection->setPlainText(Section);
+	m_pCodeEdit->SetCode(Section);
 	m_HoldChange = false;
 }
 
@@ -1341,7 +1348,8 @@ void COptionsWindow::SaveIniSection()
 	m_pBox->SetRefreshOnChange(true);
 	m_pBox->GetAPI()->CommitIniChanges();*/
 
-	m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", ui.txtIniSection->toPlainText());
+	//m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", ui.txtIniSection->toPlainText());
+	m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", m_pCodeEdit->GetCode());
 
 	LoadIniSection();
 }

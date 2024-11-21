@@ -46,7 +46,7 @@ CBoxedProcessPtr CSbiePlusAPI::OnProcessBoxed(quint32 ProcessId, const QString& 
 
 std::wstring GetWindowTextTimeout(HWND hWnd, UINT timeout) 
 {
-    unsigned long long length = 0;
+	DWORD_PTR length = 0;
 
     if (SendMessageTimeoutW(hWnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, timeout, &length) == 0)
         return L""; 

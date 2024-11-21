@@ -447,6 +447,9 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
+    <None Include="sandman_ar.ts">
+      <Filter>Translation Files</Filter>
+    </None>
     <None Include="sandman_de.ts">
       <Filter>Translation Files</Filter>
     </None>

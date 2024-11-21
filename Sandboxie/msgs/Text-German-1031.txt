@@ -226,6 +226,10 @@ SBIE1319 Druckerwarteschlangendruck zu Datei, %2 %3 verhindert
 SBIE1320 Um zu erlauben, dass die Druckerwarteschlange für diesen Prozess außerhalb der Sandbox schreiben darf, doppelklicken Sie bitte auf diese Nachricht
 .
 
+1321;pop;inf;01
+SBIE1321 Programm '%2' wurde in die Sandbox %3 gezwungen
+.
+
 1399;pop;inf;01
 %0
 .

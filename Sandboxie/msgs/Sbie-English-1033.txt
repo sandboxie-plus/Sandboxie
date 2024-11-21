@@ -275,7 +275,7 @@ SBIE1320 To allow print spooler to write outside the sandbox for this process, p
 .
 
 1321;pop;inf;01
-SBIE1321 Program '%2' was foeced into sandbox %3
+SBIE1321 Program '%2' was forced into sandbox %3
 .
 
 1399;pop;inf;01

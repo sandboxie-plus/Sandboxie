@@ -27,7 +27,7 @@ IF %1 == ARM64 (
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
   set qtPath=%~dp0..\..\Qt\%qt6_version%\msvc2019_arm64
   set instPath=%~dp0\SbiePlus_a64
-  rem set "sslMajorVersion=1_1"
+  set "sslMajorVersion=1_1"
 )
 
 REM set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC142.CRT

@@ -7645,7 +7645,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5028"/>
         <source>Hide Disk Serial Number</source>
-        <translation>Verberge die Seriennummer der Disk</translation>
+        <translation>Verberge die Seriennummer der Festplatte</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5035"/>
@@ -7685,7 +7685,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4998"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
-        <translation>Verberge den Deinstallationsschlüssel der Software auf dem Host (siehe Tooltip)</translation>
+        <translation>Verberge den Deinstallationsschlüssel von auf dem Host installierter Software (siehe Tooltip)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5068"/>
@@ -8016,7 +8016,7 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1473"/>
         <source>Open Window Station (improves compatibility by reducing desktop isolation)</source>
-        <translation>Öffne Window Station (verbessert die Kompatibilität durch Verringerung der Desktop-Isolierung)</translation>
+        <translation>Öffne Window Station (verbessert die Kompatibilität durch Verringerung der Desktop-Isolation)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1820"/>
@@ -9920,7 +9920,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2519"/>
         <source>Issue message 1321 when a processes has been forced in to a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebe Nachricht 1321 aus, wenn ein Prozess in eine Sandbox gezwungen wurde</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2529"/>

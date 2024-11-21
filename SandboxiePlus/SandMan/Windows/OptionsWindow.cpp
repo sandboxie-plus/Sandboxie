@@ -415,6 +415,12 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 			pTree->setAlternatingRowColors(true);
 	}
 
+	m_pCodeEdit = new CCodeEdit(new CIniHighlighter);
+	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
+	delete ui.txtIniSection;
+	ui.txtIniSection = NULL;
+	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
+
 	CreateDebug();
 
 	if (m_Template)
@@ -577,11 +583,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// edit
-	m_pCodeEdit = new CCodeEdit(new CIniHighlighter);
-	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
-	ui.txtIniSection->deleteLater();
-	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
-
 	ApplyIniEditFont();
 
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));

@@ -603,7 +603,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	m_pCodeEdit = new CCodeEdit(new CIniHighlighter);
 	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
-	ui.txtIniSection->deleteLater();
+	delete ui.txtIniSection;
+	ui.txtIniSection = NULL;
 	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
 
 	ApplyIniEditFont();

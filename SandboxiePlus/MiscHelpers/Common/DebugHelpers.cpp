@@ -216,7 +216,7 @@ static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
 	  return EXCEPTION_CONTINUE_SEARCH;
 
   wchar_t szMiniDumpFileName[128];
-  wsprintf(szMiniDumpFileName, L"%s %s.dmp", s_szMiniDumpName, QDateTime::currentDateTime().toString("dd.MM.yyyy hh-mm-ss,zzz").replace(QRegularExpression("[:*?<>|\"\\/]"), "_").toStdWString().c_str());
+  wsprintfW(szMiniDumpFileName, L"%s %s.dmp", s_szMiniDumpName, QDateTime::currentDateTime().toString("dd.MM.yyyy hh-mm-ss,zzz").replace(QRegularExpression("[:*?<>|\"\\/]"), "_").toStdWString().c_str());
   
   /*wchar_t szMiniDumpPath[MAX_PATH] = { 0 };
 
@@ -237,7 +237,7 @@ static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
   wcscat(szMiniDumpPath, L"\\");
   wcscat(szMiniDumpPath, szMiniDumpFileName);
 
-  HANDLE hFile = CreateFile(szMiniDumpPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+  HANDLE hFile = CreateFileW(szMiniDumpPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
   if (hFile != INVALID_HANDLE_VALUE)
   {
@@ -255,10 +255,10 @@ static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
 
   wchar_t szMiniDumpMessage[256];
   if (!bSuccess)
-	wsprintf(szMiniDumpMessage, L"%s crashed!\r\nCrashdump creation failed.", s_szMiniDumpName);
+	wsprintfW(szMiniDumpMessage, L"%s crashed!\r\nCrashdump creation failed.", s_szMiniDumpName);
   else
-	wsprintf(szMiniDumpMessage, L"%s crashed!\r\nCrashdump saved to \"%s\".\r\nPlease report the crash and attach the file \"%s\".", s_szMiniDumpName, szMiniDumpPath, szMiniDumpFileName);
-  MessageBox(NULL, szMiniDumpMessage, s_szMiniDumpName, MB_OK | MB_ICONERROR);
+	wsprintfW(szMiniDumpMessage, L"%s crashed!\r\nCrashdump saved to \"%s\".\r\nPlease report the crash and attach the file \"%s\".", s_szMiniDumpName, szMiniDumpPath, szMiniDumpFileName);
+  MessageBoxW(NULL, szMiniDumpMessage, s_szMiniDumpName, MB_OK | MB_ICONERROR);
 
   // or return one of the following:
   // - EXCEPTION_CONTINUE_SEARCH
@@ -279,7 +279,7 @@ void InitMiniDumpWriter(const wchar_t* Name, const wchar_t* Path)
 
   // Initialize the member, so we do not load the dll after the exception has occurred
   // which might be not possible anymore...
-  s_hDbgHelpMod = LoadLibrary(L"dbghelp.dll");
+  s_hDbgHelpMod = LoadLibraryW(L"dbghelp.dll");
   if (s_hDbgHelpMod != NULL)
     s_pMDWD = (tMDWD) GetProcAddress(s_hDbgHelpMod, "MiniDumpWriteDump");
 

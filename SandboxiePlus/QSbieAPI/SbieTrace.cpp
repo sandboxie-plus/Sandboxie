@@ -49,10 +49,10 @@ QString ErrorString(qint32 err)
 	QString Error;
 	HMODULE handle = NULL; //err < 0 ? GetModuleHandle(L"NTDLL.DLL") : NULL;
 	DWORD flags = 0; //err < 0 ? FORMAT_MESSAGE_FROM_HMODULE : 0;
-	LPTSTR s;
+	LPWSTR s;
 	if (::FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | flags, handle, err, 0, (LPTSTR)&s, 0, NULL) > 0)
 	{
-		LPTSTR p = wcschr(s, L'\r');
+		LPWSTR p = wcschr(s, L'\r');
 		if (p != NULL) *p = L'\0';
 		Error = QString::fromWCharArray(s);
 		::LocalFree(s);

@@ -235,7 +235,7 @@ void CSbieTemplates::CollectClasses()
 	EnumWindows([](HWND hwnd, LPARAM lparam) 
 	{ 
 		WCHAR clsnm[256];
-		GetClassName(hwnd, clsnm, 250);
+		GetClassNameW(hwnd, clsnm, 250);
 		clsnm[250] = L'\0';
 
 		if (clsnm[0] && wcsncmp(clsnm, L"Sandbox:", 8) != 0)
@@ -257,14 +257,14 @@ void CSbieTemplates::CollectServices()
 		return;
 
 	ULONG info_len = 10240;
-	ENUM_SERVICE_STATUS* info = (ENUM_SERVICE_STATUS *)malloc(info_len);
+	ENUM_SERVICE_STATUSW* info = (ENUM_SERVICE_STATUSW *)malloc(info_len);
 
 	ULONG ResumeHandle = 0;
 	for(;;)
 	{
 		ULONG len;
 		ULONG num;
-		BOOL ret = EnumServicesStatus(hManager, SERVICE_TYPE_ALL, SERVICE_STATE_ALL, info, info_len, &len, &num, &ResumeHandle);
+		BOOL ret = EnumServicesStatusW(hManager, SERVICE_TYPE_ALL, SERVICE_STATE_ALL, info, info_len, &len, &num, &ResumeHandle);
 		if (!ret && GetLastError() != ERROR_MORE_DATA)
 			break;
 
@@ -298,7 +298,7 @@ void CSbieTemplates::CollectProducts()
 	for(;;)
 	{
 		HKEY hkey;
-		LONG rc = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", 0, DesiredAccess, &hkey);
+		LONG rc = RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", 0, DesiredAccess, &hkey);
 		if (rc != 0)
 			continue;
 		
@@ -306,7 +306,7 @@ void CSbieTemplates::CollectProducts()
 		for(ULONG index = 0; rc != ERROR_NO_MORE_ITEMS; index++)
 		{
 			ULONG name_len = 120;
-			rc = RegEnumKeyEx(hkey, index, name, &name_len, NULL, NULL, NULL, NULL);
+			rc = RegEnumKeyExW(hkey, index, name, &name_len, NULL, NULL, NULL, NULL);
 			if (rc == 0) {
 				_wcslwr(name);
 				m_Products.append(QString::fromWCharArray(name));
@@ -450,7 +450,7 @@ bool CSbieTemplates::CheckRegistryKey(const QString& Value)
 bool CSbieTemplates::CheckFile(const QString& Value)
 {
 	std::wstring path = Value.toStdWString();
-	if (GetFileAttributes(path.c_str()) != INVALID_FILE_ATTRIBUTES)
+	if (GetFileAttributesW(path.c_str()) != INVALID_FILE_ATTRIBUTES)
 		return true;
 	return false;
 }
@@ -507,7 +507,7 @@ void CSbieTemplates::InitExpandPaths(bool WithUser)
 	keyPath += L"Shell Folders";
 
 	HKEY hkey;
-	LONG rc = RegOpenKey(HKEY_CURRENT_USER, keyPath.c_str(), &hkey);
+	LONG rc = RegOpenKeyW(HKEY_CURRENT_USER, keyPath.c_str(), &hkey);
 	for (ULONG index = 0; rc == 0; index++)
 	{
 		WCHAR name[64];
@@ -518,11 +518,11 @@ void CSbieTemplates::InitExpandPaths(bool WithUser)
 
 		name_len = 60;
 		value_len = MAX_PATH + 4;
-		rc = RegEnumValue(hkey, index, name, &name_len, NULL, &type, (BYTE *)value, &value_len);
+		rc = RegEnumValueW(hkey, index, name, &name_len, NULL, &type, (BYTE *)value, &value_len);
 		if (rc == 0 && (type == REG_SZ || type == REG_EXPAND_SZ)) 
 		{
 			WCHAR expand[MAX_PATH + 8];
-			ULONG len = ExpandEnvironmentStrings(value, expand, MAX_PATH + 4);
+			ULONG len = ExpandEnvironmentStringsW(value, expand, MAX_PATH + 4);
 			if (len > 0 && len <= MAX_PATH) 
 			{
 				QString value = QString::fromWCharArray(expand);

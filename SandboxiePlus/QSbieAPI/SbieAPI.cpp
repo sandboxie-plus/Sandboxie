@@ -18,9 +18,6 @@
 #include "stdafx.h"
 #include <QDebug>
 #include <QStandardPaths>
-#ifdef _DEBUG
-#include <QGuiApplication>
-#endif
 #include "SbieAPI.h"
 
 #include <ntstatus.h>
@@ -60,7 +57,7 @@ struct SSbieAPI
 		if (!ProcessIdToSessionId(GetCurrentProcessId(), &sessionId))
 			sessionId = 0;
 
-		wsprintf(QueueName, L"*%s_%08X", INTERACTIVE_QUEUE_NAME, sessionId);
+		wsprintfW(QueueName, L"*%s_%08X", INTERACTIVE_QUEUE_NAME, sessionId);
 
 		lastMessageNum = 0;
 		//lastRecordNum = 0;
@@ -156,7 +153,7 @@ bool CSbieAPI::IsSbieCtrlRunning()
 {
 	static const WCHAR *SbieCtrlMutexName = SANDBOXIE L"_SingleInstanceMutex_Control";
 
-	HANDLE hSbieCtrlMutex = OpenMutex(MUTEX_ALL_ACCESS, FALSE, SbieCtrlMutexName);
+	HANDLE hSbieCtrlMutex = OpenMutexW(MUTEX_ALL_ACCESS, FALSE, SbieCtrlMutexName);
 	if (hSbieCtrlMutex) {
 		CloseHandle(hSbieCtrlMutex);
 		return true;
@@ -168,14 +165,14 @@ bool CSbieAPI::TerminateSbieCtrl()
 {
 	static const WCHAR *WindowClassName = L"SandboxieControlWndClass";
 
-	HWND hwnd = FindWindow(WindowClassName, NULL);
+	HWND hwnd = FindWindowW(WindowClassName, NULL);
 	if (hwnd) {
 		PostMessage(hwnd, WM_QUIT, 0, 0);
 	}
 
 	for (int i = 0; i < 10 && hwnd != NULL; i++) {
 		QThread::msleep(100);
-		hwnd = FindWindow(WindowClassName, NULL);
+		hwnd = FindWindowW(WindowClassName, NULL);
 	}
 
 	return hwnd == NULL;
@@ -202,7 +199,7 @@ QString CSbieAPI__GetRegValue(HANDLE hKey, const WCHAR* pName)
 	if (NT_SUCCESS(NtQueryValueKey(hKey, &uni, KeyValuePartialInformation, value, sizeof(buf) - 16, &len)))
 	{
 		WCHAR expand[MAX_PATH + 8];
-		len = ExpandEnvironmentStrings((WCHAR*)value->Data, expand, MAX_PATH + 4);
+		len = ExpandEnvironmentStringsW((WCHAR*)value->Data, expand, MAX_PATH + 4);
 
 		return QString::fromWCharArray(expand);
 	}
@@ -291,7 +288,7 @@ SB_STATUS CSbieAPI::Connect(bool takeOver, bool withQueue)
 	UpdateDriveLetters();
 
 	m_SbiePath = GetSbieHome();
-	m->SbieMsgDll = LoadLibraryEx((m_SbiePath.toStdWString() + L"\\" SBIEMSG_DLL).c_str(), NULL, LOAD_LIBRARY_AS_DATAFILE);
+	m->SbieMsgDll = LoadLibraryExW((m_SbiePath.toStdWString() + L"\\" SBIEMSG_DLL).c_str(), NULL, LOAD_LIBRARY_AS_DATAFILE);
 
 	m->lastMessageNum = 0;
 	//m->lastRecordNum = 0;
@@ -911,7 +908,7 @@ void CSbieAPI::UpdateDriveLetters()
 	for (wchar_t ltr = L'A'; ltr <= L'Z'; ltr++)
 	{
 		wchar_t drv[] = { ltr, L':', '\0' };
-		uint size = QueryDosDevice(drv, lpTargetPath, MAX_PATH);
+		uint size = QueryDosDeviceW(drv, lpTargetPath, MAX_PATH);
 		if (size > 0)
 		{
 			SDrive Drive;
@@ -1161,7 +1158,7 @@ QString CSbieAPI__FormatNtStatus(long nsCode)
 {
 	static HMODULE hNtDll = NULL;
 	if(!hNtDll)
-		hNtDll = GetModuleHandle(L"ntdll.dll");
+		hNtDll = GetModuleHandleW(L"ntdll.dll");
 	if (hNtDll == NULL)
 		return QString();
 
@@ -1810,7 +1807,7 @@ QByteArray CSbieAPI::MakeEnvironment(bool AddDeviceMap)
 	foreach(const QString& Entry, EnvList)
 		ExtraLength += Entry.length() + 1;
 
-	WCHAR *Environment = GetEnvironmentStrings();
+	WCHAR *Environment = GetEnvironmentStringsW();
 	ULONG EnvLength = 0;
 	for(WCHAR* envPtr = (WCHAR*)Environment; *envPtr;)
 	{
@@ -1860,10 +1857,10 @@ SB_STATUS CSbieAPI::RunSandboxed(const QString& BoxName, const QString& Command,
 	BoxName.toWCharArray(req->boxname); // fix-me: potential overflow
 	req->boxname[BoxName.length()] = L'\0';
 	req->si_flags = STARTF_FORCEOFFFEEDBACK;
-#ifdef _DEBUG
+/*#ifdef _DEBUG
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ShiftModifier) != 0)
 		req->si_flags |= 0x80000000;
-#endif
+#endif*/
 	req->si_show_window = wShowWindow;
 	if (req->si_show_window != SW_SHOWNORMAL)
 		req->si_flags |= STARTF_USESHOWWINDOW;
@@ -2864,8 +2861,8 @@ QString CSbieAPI::GetSbieMsgStr(quint32 code, quint32 Lang)
 {
 	ULONG FormatFlags = FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_ALLOCATE_BUFFER;
 	WCHAR* ret_str = NULL;
-	if (!m->SbieMsgDll || (FormatMessage(FormatFlags, m->SbieMsgDll, code, Lang, (LPWSTR)&ret_str, 4, NULL) == 0
-						&& FormatMessage(FormatFlags, m->SbieMsgDll, code, 1033, (LPWSTR)&ret_str, 4, NULL) == 0))
+	if (!m->SbieMsgDll || (FormatMessageW(FormatFlags, m->SbieMsgDll, code, Lang, (LPWSTR)&ret_str, 4, NULL) == 0
+						&& FormatMessageW(FormatFlags, m->SbieMsgDll, code, 1033, (LPWSTR)&ret_str, 4, NULL) == 0))
 		return QString("SBIE%0: %1; %2").arg(code & 0xFFFF, 4, 10);
 	QString qStr = QString::fromWCharArray(ret_str);
 	LocalFree(ret_str);
@@ -2877,12 +2874,12 @@ void CSbieAPI::LoadEventLog()
 	QByteArray buff;
 	buff.resize(8 * 1024);
 
-    HANDLE hEventLog = OpenEventLog(NULL, L"System");
+    HANDLE hEventLog = OpenEventLogW(NULL, L"System");
 
     while (hEventLog) 
 	{
         ULONG bytesRead, bytesNeeded;
-        if(!ReadEventLog(hEventLog, EVENTLOG_SEQUENTIAL_READ | EVENTLOG_FORWARDS_READ, 0, buff.data(), buff.size(), &bytesRead, &bytesNeeded))
+        if(!ReadEventLogW(hEventLog, EVENTLOG_SEQUENTIAL_READ | EVENTLOG_FORWARDS_READ, 0, buff.data(), buff.size(), &bytesRead, &bytesNeeded))
             break;
 
         EVENTLOGRECORD *rec = (EVENTLOGRECORD *)buff.data();

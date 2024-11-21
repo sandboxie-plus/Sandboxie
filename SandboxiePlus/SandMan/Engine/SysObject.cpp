@@ -227,9 +227,9 @@ HANDLE openRegKey(const QString& Key, bool bWrite = false)
         else if (RootPath.first == "HKEY_CURRENT_CONFIG") hRoot = HKEY_CURRENT_CONFIG;
 
         if (bWrite)
-            RegCreateKeyEx(hRoot, RootPath.second.toStdWString().c_str(), 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, (PHKEY)&handle, NULL);
+            RegCreateKeyExW(hRoot, RootPath.second.toStdWString().c_str(), 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, (PHKEY)&handle, NULL);
         else
-            RegOpenKeyEx(hRoot, RootPath.second.toStdWString().c_str(), REG_OPTION_NON_VOLATILE, KEY_READ, (PHKEY)&handle);
+            RegOpenKeyExW(hRoot, RootPath.second.toStdWString().c_str(), REG_OPTION_NON_VOLATILE, KEY_READ, (PHKEY)&handle);
     }
     else
     {
@@ -262,7 +262,7 @@ QJSValue JSysObject::listRegKey(const QString& Key)
         for (DWORD dwIndex = 0; ; dwIndex++)
         {
             dwSubKeyNameSize = ARRAYSIZE(szSubKeyName);
-            if (RegEnumKeyEx((HKEY)handle, dwIndex, szSubKeyName, &dwSubKeyNameSize, NULL, NULL, NULL, &ftLastWriteTime) != ERROR_SUCCESS)
+            if (RegEnumKeyExW((HKEY)handle, dwIndex, szSubKeyName, &dwSubKeyNameSize, NULL, NULL, NULL, &ftLastWriteTime) != ERROR_SUCCESS)
                 break;
 
             QVariantMap entry;
@@ -283,7 +283,7 @@ QJSValue JSysObject::listRegKey(const QString& Key)
         {
             dwValueNameSize = MAX_VALUE_NAME;
             dwDataSize = MAX_VALUE_DATA;
-            if (RegEnumValue((HKEY)handle, dwIndex, szValueName, &dwValueNameSize, NULL, &dwType, lpData, &dwDataSize) != ERROR_SUCCESS)
+            if (RegEnumValueW((HKEY)handle, dwIndex, szValueName, &dwValueNameSize, NULL, &dwType, lpData, &dwDataSize) != ERROR_SUCCESS)
                 break;
 
             QVariantMap entry;
@@ -377,7 +377,7 @@ QJSValue JSysObject::setRegValue(const QString& Key, const QString& Name, const 
         //case REG_FULL_RESOURCE_DESCRIPTOR: break;
         }
 
-        bRet = RegSetKeyValue((HKEY)handle, L"", Name.toStdWString().c_str(), dwType, lpData, dwDataSize);
+        bRet = RegSetKeyValueW((HKEY)handle, L"", Name.toStdWString().c_str(), dwType, lpData, dwDataSize);
         CloseHandle(handle);
     }
     return bRet;
@@ -395,7 +395,7 @@ QJSValue JSysObject::getRegValue(const QString& Key, const QString& Name)
         BYTE* lpData = Buff.data();
         DWORD dwDataSize = MAX_VALUE_DATA;
 
-        if (RegQueryValueEx((HKEY)handle, Name.toStdWString().c_str(), 0, &dwType, lpData, &dwDataSize)) {
+        if (RegQueryValueExW((HKEY)handle, Name.toStdWString().c_str(), 0, &dwType, lpData, &dwDataSize)) {
             switch (dwType)
             {
             case REG_SZ:                value = QString::fromStdWString((wchar_t*)lpData); break;
@@ -435,7 +435,7 @@ QJSValue JSysObject::removeRegValue(const QString& Key, const QString& Name)
     HANDLE handle = openRegKey(Key, true);
     if (handle && handle != INVALID_HANDLE_VALUE)
     {
-        RegDeleteValue((HKEY)handle, Name.toStdWString().c_str());
+        RegDeleteValueW((HKEY)handle, Name.toStdWString().c_str());
         CloseHandle(handle);
     }
     return QJSValue();
@@ -463,7 +463,7 @@ QJSValue JSysObject::execute(const QString& Path, const QVariant& Arguments, con
 
     if (Options["elevate"].toBool())
     {
-        SHELLEXECUTEINFO shex;
+        SHELLEXECUTEINFOW shex;
         memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
         shex.cbSize = sizeof(SHELLEXECUTEINFO);
         shex.fMask = SEE_MASK_NOCLOSEPROCESS;
@@ -476,7 +476,7 @@ QJSValue JSysObject::execute(const QString& Path, const QVariant& Arguments, con
         shex.nShow = nShow;
         shex.lpVerb = L"runas";
 
-        if (ShellExecuteEx(&shex)) {
+        if (ShellExecuteExW(&shex)) {
             hProcess = shex.hProcess;
         }
     }

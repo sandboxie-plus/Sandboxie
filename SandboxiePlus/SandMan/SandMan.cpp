@@ -450,12 +450,12 @@ void CSandMan::CreateMaintenanceMenu()
 			if (QFile::exists(ImDiskCpl)) {
 				m_pImDiskCpl = m_pMaintenance->addAction(LoadWindowsIcon(ImDiskCpl, 0), tr("Virtual Disks"), this, [ImDiskCpl]() {
 					std::wstring imDiskCpl = ImDiskCpl.toStdWString();
-					SHELLEXECUTEINFO si = { 0 };
+					SHELLEXECUTEINFOW si = { 0 };
 					si.cbSize = sizeof(SHELLEXECUTEINFO);
 					si.lpVerb = L"runas";
 					si.lpFile = imDiskCpl.c_str();
 					si.nShow = SW_SHOW;
-					ShellExecuteEx(&si);
+					ShellExecuteExW(&si);
 				});
 			}
 
@@ -3858,7 +3858,7 @@ void CSandMan::EditIni(const QString& IniPath, bool bPlus)
 	std::wstring Editor = theConf->GetString("Options/Editor", "notepad.exe").toStdWString();
 	std::wstring iniPath = L"\"" + IniPath.toStdWString() + L"\"";
 
-	SHELLEXECUTEINFO si = { 0 };
+	SHELLEXECUTEINFOW si = { 0 };
 	si.cbSize = sizeof(SHELLEXECUTEINFO);
 	si.fMask = SEE_MASK_NOCLOSEPROCESS;
 	si.hwnd = NULL;
@@ -3868,7 +3868,7 @@ void CSandMan::EditIni(const QString& IniPath, bool bPlus)
 	si.lpDirectory = NULL;
 	si.nShow = SW_SHOW;
 	si.hInstApp = NULL;
-	ShellExecuteEx(&si);
+	ShellExecuteExW(&si);
 	//WaitForSingleObject(si.hProcess, INFINITE);
 	//CloseHandle(si.hProcess);
 
@@ -4178,7 +4178,7 @@ void CSandMan::OpenUrl(const QUrl& url)
 	}
 
 	if (iSandboxed) RunSandboxed(QStringList(url.toString()));
-	else ShellExecute(MainWndHandle, NULL, url.toString().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
+	else ShellExecuteW(MainWndHandle, NULL, url.toString().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 
 bool CSandMan::IsWFPEnabled() const
@@ -4267,7 +4267,7 @@ void CSandMan::SetTitleTheme(const HWND& hwnd)
 	if (CurrentVersion < 17763) // Windows 10 1809 -
 		return;
 
-	HMODULE dwmapi = GetModuleHandle(L"dwmapi.dll");
+	HMODULE dwmapi = GetModuleHandleW(L"dwmapi.dll");
 	if (dwmapi)
 	{
 		typedef HRESULT(WINAPI* P_DwmSetWindowAttribute)(HWND, DWORD, LPCVOID, DWORD);
@@ -4499,7 +4499,7 @@ int g_CertAmount = 0;
 void SlotSend(const std::wstring& message)
 {
 	std::wstring strSlotName = L"\\\\*\\mailslot\\" + g_SlotName;
-    HANDLE hSlot = CreateFile(strSlotName.c_str(),
+    HANDLE hSlot = CreateFileW(strSlotName.c_str(),
         GENERIC_WRITE,
         FILE_SHARE_READ,
         (LPSECURITY_ATTRIBUTES) NULL,
@@ -4545,7 +4545,7 @@ int CountSeats()
 DWORD WINAPI MailThreadFunc(LPVOID lpParam)
 {
 	std::wstring strSlotName = L"\\\\.\\mailslot\\" + g_SlotName;
-	HANDLE hSlot = CreateMailslot(strSlotName.c_str(),
+	HANDLE hSlot = CreateMailslotW(strSlotName.c_str(),
         0,                             // no maximum message size
         MAILSLOT_WAIT_FOREVER,         // no time-out for operations
         (LPSECURITY_ATTRIBUTES) NULL); // default security

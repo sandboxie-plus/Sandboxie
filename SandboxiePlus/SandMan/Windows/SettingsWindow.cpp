@@ -2710,7 +2710,7 @@ void WindowsMoveFile(const QString& From, const QString& To)
 	std::wstring to = To.toStdWString();
 	to.append(L"\0", 1);
 
-	SHFILEOPSTRUCT SHFileOp;
+	SHFILEOPSTRUCTW SHFileOp;
     memset(&SHFileOp, 0, sizeof(SHFILEOPSTRUCT));
     SHFileOp.hwnd = NULL;
     SHFileOp.wFunc = To.isEmpty() ? FO_DELETE : FO_MOVE;
@@ -2719,5 +2719,5 @@ void WindowsMoveFile(const QString& From, const QString& To)
     SHFileOp.fFlags = NULL;    
 
     //The Copying Function
-    SHFileOperation(&SHFileOp);
+    SHFileOperationW(&SHFileOp);
 }

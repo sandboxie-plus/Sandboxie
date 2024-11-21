@@ -122,7 +122,7 @@ void addSeparatorToShellContextMenu(HMENU hMenu)
 
 void addItemToShellContextMenu(HMENU hMenu, const wchar_t *name, int ID, bool bChecked = false)
 {
-    MENUITEMINFO menu_item_info;
+    MENUITEMINFOW menu_item_info;
     memset(&menu_item_info, 0, sizeof(MENUITEMINFO));
     menu_item_info.cbSize = sizeof(MENUITEMINFO);
     menu_item_info.fMask = MIIM_ID | MIIM_STRING | MIIM_DATA;
@@ -132,7 +132,7 @@ void addItemToShellContextMenu(HMENU hMenu, const wchar_t *name, int ID, bool bC
     }
     menu_item_info.wID = 0xF000 + ID;
     menu_item_info.dwTypeData = (wchar_t*)name;
-    InsertMenuItem(hMenu, 0, TRUE, &menu_item_info);
+    InsertMenuItemW(hMenu, 0, TRUE, &menu_item_info);
 }
 
 void RemoveMenuItemByVerb(HMENU hMenu, IContextMenu* pContextMenu, UINT idCmdFirst, UINT idCmdLast, const std::wstring& verbToRemove)
@@ -449,7 +449,7 @@ void CFileView::OnFileDblClick(const QModelIndex &)
 
     QString BoxedPath = m_pFileModel->fileInfo(m_pTreeView->currentIndex()).absoluteFilePath();
 
-    ShellExecute(NULL, NULL, BoxedPath.toStdWString().c_str(), NULL, m_pBox->GetFileRoot().toStdWString().c_str(), SW_SHOWNORMAL);
+    ShellExecuteW(NULL, NULL, BoxedPath.toStdWString().c_str(), NULL, m_pBox->GetFileRoot().toStdWString().c_str(), SW_SHOWNORMAL);
 }
 
 

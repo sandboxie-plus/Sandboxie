@@ -1283,7 +1283,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				theConf->SetValue("Options/ExplorerInfo", false);
 		}
 
-		::ShellExecute(NULL, NULL, SandBoxes.first()->GetFileRoot().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
+		::ShellExecuteW(NULL, NULL, SandBoxes.first()->GetFileRoot().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 	}
 	else if (Action == m_pMenuRegEdit)
 	{
@@ -1317,7 +1317,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		if (SandBoxes.first()->GetActiveProcessCount() == 0)
 			params += L" \"" + theAPI->GetStartPath().toStdWString() + L" /box:" + SandBoxes.first()->GetName().toStdWString() + L" mount_hive\"";
 
-		SHELLEXECUTEINFO shex;
+		SHELLEXECUTEINFOW shex;
 		memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
 		shex.cbSize = sizeof(SHELLEXECUTEINFO);
 		shex.fMask = SEE_MASK_FLAG_NO_UI;
@@ -1327,7 +1327,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		shex.nShow = SW_SHOWNORMAL;
 		shex.lpVerb = L"runas";
 
-		ShellExecuteEx(&shex);
+		ShellExecuteExW(&shex);
 	}
 	else if (Action == m_pMenuSnapshots)
 	{

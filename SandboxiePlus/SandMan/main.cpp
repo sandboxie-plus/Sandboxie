@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 		//SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
 		//SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
 		typedef DPI_AWARENESS_CONTEXT(WINAPI* P_SetThreadDpiAwarenessContext)(DPI_AWARENESS_CONTEXT dpiContext);
-		P_SetThreadDpiAwarenessContext pSetThreadDpiAwarenessContext = (P_SetThreadDpiAwarenessContext)GetProcAddress(GetModuleHandle(L"user32.dll"), "SetThreadDpiAwarenessContext");
+		P_SetThreadDpiAwarenessContext pSetThreadDpiAwarenessContext = (P_SetThreadDpiAwarenessContext)GetProcAddress(GetModuleHandleW(L"user32.dll"), "SetThreadDpiAwarenessContext");
 		if(pSetThreadDpiAwarenessContext) // not present on windows 7
 			pSetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
 		else
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
 	//InitConsole(false);
 
-	bool IsBoxed = GetModuleHandle(L"SbieDll.dll") != NULL;
+	bool IsBoxed = GetModuleHandleW(L"SbieDll.dll") != NULL;
 
 	if (!IsBoxed) {
 		SB_STATUS Status = CSbieUtils::DoAssist();
@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
 		if (!cmdLine) return -2;
 
 		if (IsBoxed) {
-			ShellExecute(NULL, L"open", cmdLine + 1, NULL, NULL, SW_SHOWNORMAL);
+			ShellExecuteW(NULL, L"open", cmdLine + 1, NULL, NULL, SW_SHOWNORMAL);
 			return 0;
 		}
 
@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
 		LPWSTR cmdLine = cmdLine0 + 14;
 
 		if (IsBoxed) {
-			ShellExecute(NULL, L"open", cmdLine + 1, NULL, NULL, SW_SHOWNORMAL);
+			ShellExecuteW(NULL, L"open", cmdLine + 1, NULL, NULL, SW_SHOWNORMAL);
 			return 0;
 		}
 

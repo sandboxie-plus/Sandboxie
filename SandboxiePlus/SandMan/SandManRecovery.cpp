@@ -251,10 +251,10 @@ void CSandMan::RecoverFilesAsync(QPair<const CSbieProgressPtr&,QWidget*> pParam,
 		switch (Action)
 		{
 		case 1: // open
-			ShellExecute(NULL, NULL, path.c_str(), NULL, NULL, SW_SHOWNORMAL);
+			ShellExecuteW(NULL, NULL, path.c_str(), NULL, NULL, SW_SHOWNORMAL);
 			break;
 		case 2: // explore
-			ShellExecute(NULL, NULL, L"explorer.exe", (L"/select,\"" + path + L"\"").c_str(), NULL, SW_SHOWNORMAL);
+			ShellExecuteW(NULL, NULL, L"explorer.exe", (L"/select,\"" + path + L"\"").c_str(), NULL, SW_SHOWNORMAL);
 			break;
 		}
 	}
@@ -350,7 +350,7 @@ void CRecoveryLogWnd::closeEvent(QCloseEvent *e)
 
 void CRecoveryLogWnd::OnDblClick(QTreeWidgetItem* pItem)
 {
-	ShellExecute(NULL, NULL, L"explorer.exe", (L"/select,\"" + pItem->text(2).toStdWString() + L"\"").c_str(), NULL, SW_SHOWNORMAL);
+	ShellExecuteW(NULL, NULL, L"explorer.exe", (L"/select,\"" + pItem->text(2).toStdWString() + L"\"").c_str(), NULL, SW_SHOWNORMAL);
 }
 
 void CSandMan::OnRecoveryLog()

@@ -16,13 +16,13 @@ QVariantMap ResolveShortcut(const QString& LinkPath)
     QVariantMap Link;
 
     HRESULT hRes = E_FAIL;
-    IShellLink* psl = NULL;
+    IShellLinkW* psl = NULL;
 
     // buffer that receives the null-terminated string
     // for the drive and path
-    TCHAR szPath[0x1000];
+    WCHAR szPath[0x1000];
     // structure that receives the information about the shortcut
-    WIN32_FIND_DATA wfd;
+    WIN32_FIND_DATAW wfd;
 
     // Get a pointer to the IShellLink interface
     hRes = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (void**)&psl);
@@ -138,13 +138,13 @@ QString GetProductVersion(const QString &filePath)
         DWORD  verHandle = 0;
         UINT   size      = 0;
         LPBYTE lpBuffer  = NULL;
-        DWORD  verSize   = GetFileVersionInfoSize(filePath.toStdWString().c_str(), &verHandle);
+        DWORD  verSize   = GetFileVersionInfoSizeW(filePath.toStdWString().c_str(), &verHandle);
 
         if (verSize != NULL) {
             LPSTR verData = new char[verSize];
 
-            if (GetFileVersionInfo(filePath.toStdWString().c_str(), verHandle, verSize, verData)) {
-                if (VerQueryValue(verData, L"\\", (VOID FAR* FAR*)&lpBuffer, &size)) {
+            if (GetFileVersionInfoW(filePath.toStdWString().c_str(), verHandle, verSize, verData)) {
+                if (VerQueryValueW(verData, L"\\", (VOID FAR* FAR*)&lpBuffer, &size)) {
                     if (size) {
                         VS_FIXEDFILEINFO *verInfo = (VS_FIXEDFILEINFO *)lpBuffer;
                         if (verInfo->dwSignature == 0xfeef04bd) {
@@ -169,4 +169,27 @@ QString GetProductVersion(const QString &filePath)
         }
     }
     return QString();
+}
+
+bool KillProcessById(DWORD processId) 
+{
+    bool ok = false;
+    HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, processId);
+    if (hProcess && hProcess != INVALID_HANDLE_VALUE) {
+        if (TerminateProcess(hProcess, 0))
+            ok = true;
+        CloseHandle(hProcess);
+    }
+    return ok;
+}
+
+bool KillProcessByWnd(const QString& WndName)
+{
+    HWND hwnd = FindWindowW(WndName.toStdWString().c_str(), 0);
+    if (hwnd) {
+        DWORD processId;
+        if (GetWindowThreadProcessId(hwnd, &processId))
+            return KillProcessById(processId);
+    }
+    return false;
 }

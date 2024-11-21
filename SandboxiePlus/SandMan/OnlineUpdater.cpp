@@ -153,9 +153,13 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 
 void CGetUpdatesJob::Finish(QNetworkReply* pReply)
 {
-	QByteArray Reply = pReply->readAll();
+	auto err = pReply->error();
+	if (err != QNetworkReply::NoError)
+		m_pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater Error: %1").arg(err), err));
+	else
+		m_pProgress->Finish(SB_OK);
 
-	m_pProgress->Finish(SB_OK);
+	QByteArray Reply = pReply->readAll();
 
 	QVariantMap Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
 

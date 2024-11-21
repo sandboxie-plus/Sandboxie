@@ -10654,7 +10654,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2519"/>
         <source>Issue message 1321 when a processes has been forced in to a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>当进程被强制沙盒化时，提示问题代码 1321</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2529"/>

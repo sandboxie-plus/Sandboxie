@@ -115,7 +115,9 @@ copy %qtPath%\plugins\tls\qopensslbackend.dll %instPath%\tls\
 IF %archPath% == x64 (
     if "%qt_version:~0,1%" == "6" (
         mkdir %instPath%\tls
+        copy %qtPath%\plugins\tls\qcertonlybackend.dll %instPath%\tls\
         copy %qtPath%\plugins\tls\qopensslbackend.dll %instPath%\tls\
+        copy %qtPath%\plugins\tls\qschannelbackend.dll %instPath%\tls\
     )
 )
 

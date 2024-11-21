@@ -174,11 +174,11 @@ jobs:
             Installer/Assets/*
           retention-days: 60
 
-      - name: Upload Sandboxie x64
+      - name: Upload Sandboxie x64 Qt6
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4.4.3
         with:
-          name: Sandboxie_x64
+          name: Sandboxie_x64_Qt6
           path: |
             Installer/SbiePlus_x64/*
           retention-days: 60

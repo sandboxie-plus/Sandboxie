@@ -35,7 +35,7 @@ public:
     virtual bool isRelativePath() const;
     virtual FileFlags fileFlags(FileFlags type = FileInfoAll) const;
     virtual QString fileName(FileName file = DefaultName) const;
-#if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
 	virtual QDateTime fileTime(FileTime time) const;
 #else
     virtual QDateTime fileTime(QFile::FileTime time) const;

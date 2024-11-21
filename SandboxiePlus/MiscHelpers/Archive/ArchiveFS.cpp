@@ -220,7 +220,7 @@ QString C7zFileEngine::fileName(FileName file) const
 	return _filename;
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
 QDateTime C7zFileEngine::fileTime(FileTime time) const
 #else
 QDateTime C7zFileEngine::fileTime(QFile::FileTime time) const
@@ -228,7 +228,7 @@ QDateTime C7zFileEngine::fileTime(QFile::FileTime time) const
 {
     switch (time)
     {
-#if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
     case QAbstractFileEngine::ModificationTime:
 #else
     case QFile::FileModificationTime:

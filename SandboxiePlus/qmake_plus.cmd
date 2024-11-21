@@ -1,4 +1,4 @@
-call "%~dp0..\Installer\buildVariables.cmd"
+call "%~dp0..\Installer\buildVariables.cmd" %*
 
 REM @echo off
 REM echo Current dir: %cd%
@@ -115,7 +115,12 @@ if NOT EXIST %~dp0\bin\%build_arch%\Release\QSbieAPI.dll goto :error
 mkdir %~dp0\Build_SandMan_%build_arch%
 cd %~dp0\Build_SandMan_%build_arch%
 
-%qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan.qc.pro %qt_params%
+if "%qt_version:~0,1%" == "5" ( 
+    %qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan.qc.pro %qt_params%
+)
+if "%qt_version:~0,1%" == "6" ( 
+    %qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan-Qt6.qc.pro %qt_params%
+)
 %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\SandMan.exe goto :error

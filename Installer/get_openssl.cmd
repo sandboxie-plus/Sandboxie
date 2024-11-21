@@ -1,4 +1,4 @@
-call "%~dp0..\Installer\buildVariables.cmd"
+call "%~dp0..\Installer\buildVariables.cmd" %*
 
 REM echo %*
 REM IF "%~3" == "" ( set "ghSsl_repo=openssl-builds" ) ELSE ( set "ghSsl_repo=%~3" )

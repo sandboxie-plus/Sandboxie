@@ -1,4 +1,4 @@
-call "%~dp0..\Installer\buildVariables.cmd"
+call "%~dp0..\Installer\buildVariables.cmd" %*
 
 REM echo %*
 REM IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )

@@ -1,4 +1,4 @@
-call "%~dp0..\Installer\buildVariables.cmd"
+call "%~dp0..\Installer\buildVariables.cmd" %*
 
 REM echo %*
 REM IF "%~7" == "" ( set "ghQtBuilds_hash_x64=673c288feeabd11ec66f9f454d49cde3945cbd3e3f71283b7a6c4df0893b19f2" ) ELSE ( set "ghQtBuilds_hash_x64=%~7" )

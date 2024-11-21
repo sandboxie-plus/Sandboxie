@@ -1,4 +1,4 @@
-call "%~dp0..\Installer\buildVariables.cmd"
+call "%~dp0..\Installer\buildVariables.cmd" %*
 
 REM echo %*
 REM IF "%~3" == "" ( set "ghQt6Win7_repo=qtbase" ) ELSE ( set "ghQt6Win7_repo=%~3" )

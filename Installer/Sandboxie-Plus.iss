@@ -139,6 +139,8 @@ Filename: "{app}\Start.exe"; Parameters: "open_agent:sandman.exe"; Description: 
 Type: dirifempty; Name: "{app}"
 Type: files; Name: "{localappdata}\{#MyAppName}\addons.json"
 Type: dirifempty; Name: "{localappdata}\{#MyAppName}"
+Type: files; Name: "{localappdata}\Temp\qtsingleapp-sandma-*"
+Type: dirifempty; Name: "{localappdata}\Temp\sandboxie-updater"
 
 
 [Messages]
@@ -641,6 +643,14 @@ begin
   end else begin
     Log('Debug: SbieCtrl /uninstall');
     Exec(ExpandConstant('{app}\sbiectrl.exe'), '/uninstall', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+  end;
+  if RegKeyExists(HKCU, 'Software\Xanasoft\{#MyAppName}') then begin
+    Log('Debug: RegDeleteKeyIncludingSubkeys HKCU\Software\Xanasoft\Sandboxie-Plus');
+    RegDeleteKeyIncludingSubkeys(HKCU, 'Software\Xanasoft\{#MyAppName}');
+  end;
+  if RegKeyExists(HKCU, 'Software\Xanasoft') then begin
+    Log('Debug: RegDeleteKeyIfEmpty HKCU\Software\Xanasoft');
+    RegDeleteKeyIfEmpty(HKCU, 'Software\Xanasoft');
   end;
 end;
 

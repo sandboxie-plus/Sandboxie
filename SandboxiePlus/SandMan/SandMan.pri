@@ -114,7 +114,8 @@ FORMS += ./Forms/SelectBoxWindow.ui \
     ./Forms/ExtractDialog.ui \
     ./Forms/TestProxyDialog.ui
 
-TRANSLATIONS += sandman_de.ts \
+TRANSLATIONS += sandman_ar.ts \
+    sandman_de.ts \
     sandman_en.ts \
     sandman_es.ts \
     sandman_fr.ts \

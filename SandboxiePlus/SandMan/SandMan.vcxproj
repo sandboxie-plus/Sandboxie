@@ -519,6 +519,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\finder.cur" />
+    <None Include="sandman_ar.ts" />
     <None Include="sandman_cs.ts" />
     <None Include="sandman_de.ts" />
     <None Include="sandman_en.ts" />

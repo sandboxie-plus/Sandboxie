@@ -1265,9 +1265,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CGetFileJob</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="201"/>
+        <location filename="OnlineUpdater.cpp" line="213"/>
         <source>Failed to download file from: %1</source>
         <translation>未能从以下位置下载文件: %1</translation>
+    </message>
+</context>
+<context>
+    <name>CGetUpdatesJob</name>
+    <message>
+        <location filename="OnlineUpdater.cpp" line="163"/>
+        <source>%1</source>
+        <translation type="unfinished">%1</translation>
     </message>
 </context>
 <context>
@@ -1536,38 +1544,38 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="377"/>
+        <location filename="OnlineUpdater.cpp" line="389"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>您是否想检查 Sandboxie-Plus 的更新版本？</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="378"/>
+        <location filename="OnlineUpdater.cpp" line="390"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再显示此消息</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="433"/>
+        <location filename="OnlineUpdater.cpp" line="445"/>
         <source>Checking for updates...</source>
         <translation>正在检查更新...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="440"/>
+        <location filename="OnlineUpdater.cpp" line="452"/>
         <source>server not reachable</source>
         <translation>无法连接到服务器</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="441"/>
-        <location filename="OnlineUpdater.cpp" line="443"/>
+        <location filename="OnlineUpdater.cpp" line="453"/>
+        <location filename="OnlineUpdater.cpp" line="455"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>检查更新失败，错误：%1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="610"/>
+        <location filename="OnlineUpdater.cpp" line="622"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否下载此安装程序？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="614"/>
+        <location filename="OnlineUpdater.cpp" line="626"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否下载此更新包？&lt;/p&gt;</translation>
     </message>
@@ -1576,75 +1584,75 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">&lt;p&gt;是否跳转到&lt;a href=&quot;%1&quot;&gt;更新页面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="618"/>
+        <location filename="OnlineUpdater.cpp" line="630"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否前往&lt;a href=&quot;%1&quot;&gt;下载页面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="627"/>
+        <location filename="OnlineUpdater.cpp" line="639"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>不再显示此次更新</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="750"/>
+        <location filename="OnlineUpdater.cpp" line="762"/>
         <source>Downloading updates...</source>
         <translation>正在下载更新...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="776"/>
+        <location filename="OnlineUpdater.cpp" line="788"/>
         <source>invalid parameter</source>
         <translation>无效参数</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="777"/>
+        <location filename="OnlineUpdater.cpp" line="789"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>无法获取更新信息</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="778"/>
+        <location filename="OnlineUpdater.cpp" line="790"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>加载更新 Json 文件失败</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="779"/>
+        <location filename="OnlineUpdater.cpp" line="791"/>
         <source>failed to download a particular file</source>
         <translation>未能下载特定文件</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="780"/>
+        <location filename="OnlineUpdater.cpp" line="792"/>
         <source>failed to scan existing installation</source>
         <translation>未能扫描现有的安装</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="781"/>
+        <location filename="OnlineUpdater.cpp" line="793"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>更新包签名无效 !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="782"/>
+        <location filename="OnlineUpdater.cpp" line="794"/>
         <source>downloaded file is corrupted</source>
         <translation>下载的文件已损坏</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="783"/>
+        <location filename="OnlineUpdater.cpp" line="795"/>
         <source>internal error</source>
         <translation>内部错误</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="784"/>
+        <location filename="OnlineUpdater.cpp" line="796"/>
         <source>unknown error</source>
         <translation>未知错误</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="808"/>
+        <location filename="OnlineUpdater.cpp" line="820"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>从服务器下载更新失败，错误 %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="830"/>
+        <location filename="OnlineUpdater.cpp" line="842"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus 的更新已下载。&lt;/p&gt;&lt;p&gt;是否要安装更新？本操作需要终止所有沙盒中运行的程序。&lt;/p&gt;</translation>
     </message>
@@ -1653,7 +1661,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">未能从以下位置下载文件: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="932"/>
+        <location filename="OnlineUpdater.cpp" line="944"/>
         <source>Downloading installer...</source>
         <translation>正在下载安装程序...</translation>
     </message>
@@ -1662,27 +1670,27 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">从 %1 下载安装程序失败</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="975"/>
+        <location filename="OnlineUpdater.cpp" line="987"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;一个新的 Sandboxie-Plus 安装程序已被下载到以下位置：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否安装？本操作需要终止所有沙盒中运行的程序。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1043"/>
+        <location filename="OnlineUpdater.cpp" line="1055"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;您是否要前往&lt; &quot;%1&quot;&gt;信息页&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1051"/>
+        <location filename="OnlineUpdater.cpp" line="1063"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>不再显示此公告</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="596"/>
+        <location filename="OnlineUpdater.cpp" line="608"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus 存在可用的新版本，&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;新版本: &lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="351"/>
+        <location filename="OnlineUpdater.cpp" line="363"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -1691,7 +1699,7 @@ Do you still want to update?</source>
 您确定要进行更新吗？</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="469"/>
+        <location filename="OnlineUpdater.cpp" line="481"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -2075,9 +2083,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>映像头已恢复</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="478"/>
         <location filename="Windows/OptionsWindow.cpp" line="484"/>
-        <location filename="Windows/OptionsWindow.cpp" line="499"/>
+        <location filename="Windows/OptionsWindow.cpp" line="490"/>
+        <location filename="Windows/OptionsWindow.cpp" line="505"/>
         <location filename="Windows/OptionsAccess.cpp" line="26"/>
         <source>Browse for File</source>
         <translation>浏览文件</translation>
@@ -2098,42 +2106,42 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>分组</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="569"/>
+        <location filename="Windows/OptionsWindow.cpp" line="575"/>
         <source>Add %1 Template</source>
         <translation>添加 %1 模板</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="677"/>
+        <location filename="Windows/OptionsWindow.cpp" line="678"/>
         <source>Search for options</source>
         <translation>搜索选项</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="825"/>
+        <location filename="Windows/OptionsWindow.cpp" line="826"/>
         <source>Box: %1</source>
         <translation>沙盒: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="826"/>
+        <location filename="Windows/OptionsWindow.cpp" line="827"/>
         <source>Template: %1</source>
         <translation>模板: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="827"/>
+        <location filename="Windows/OptionsWindow.cpp" line="828"/>
         <source>Global: %1</source>
         <translation>全局: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="828"/>
+        <location filename="Windows/OptionsWindow.cpp" line="829"/>
         <source>Default: %1</source>
         <translation>默认: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1039"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1040"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>该沙盒已被删除，因此无法保存配置</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1103"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1104"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>部分变更未保存，您确定要关闭这个选项窗口吗？</translation>
     </message>
@@ -2174,8 +2182,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>请输入一则命令</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1141"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1159"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1142"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1160"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="618"/>
@@ -2192,7 +2200,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>请输入新组的名称</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1152"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1153"/>
         <source>Enter program:</source>
         <translation>请输入程序：</translation>
     </message>
@@ -2406,7 +2414,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1143"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1144"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="929"/>
@@ -3177,37 +3185,37 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="785"/>
+        <location filename="SbiePlusAPI.cpp" line="786"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="796"/>
+        <location filename="SbiePlusAPI.cpp" line="797"/>
         <source>OPEN Root Access</source>
         <translation>开放 Root 根权限</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="798"/>
+        <location filename="SbiePlusAPI.cpp" line="799"/>
         <source>Application Compartment</source>
         <translation>应用隔间</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="800"/>
+        <location filename="SbiePlusAPI.cpp" line="801"/>
         <source>NOT SECURE</source>
         <translation>不安全</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="802"/>
+        <location filename="SbiePlusAPI.cpp" line="803"/>
         <source>Reduced Isolation</source>
         <translation>削弱隔离</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="804"/>
+        <location filename="SbiePlusAPI.cpp" line="805"/>
         <source>Enhanced Isolation</source>
         <translation>加强隔离</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="807"/>
+        <location filename="SbiePlusAPI.cpp" line="808"/>
         <source>Privacy Enhanced</source>
         <translation>隐私增强</translation>
     </message>
@@ -3216,32 +3224,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">API 日志</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="811"/>
+        <location filename="SbiePlusAPI.cpp" line="812"/>
         <source>No INet (with Exceptions)</source>
         <translation>无 INet (允许例外)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="813"/>
+        <location filename="SbiePlusAPI.cpp" line="814"/>
         <source>No INet</source>
         <translation>无网络</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="816"/>
+        <location filename="SbiePlusAPI.cpp" line="817"/>
         <source>Net Share</source>
         <translation>网络共享</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="818"/>
+        <location filename="SbiePlusAPI.cpp" line="819"/>
         <source>No Admin</source>
         <translation>无管理员</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="821"/>
+        <location filename="SbiePlusAPI.cpp" line="822"/>
         <source>Auto Delete</source>
         <translation>自动删除</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="824"/>
+        <location filename="SbiePlusAPI.cpp" line="825"/>
         <source>Normal</source>
         <translation>标准</translation>
     </message>
@@ -4998,38 +5006,38 @@ Error: %1</source>
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1217"/>
+        <location filename="SbiePlusAPI.cpp" line="1218"/>
         <source>Failed to initialize COM</source>
         <translation>无法初始化COM</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1223"/>
+        <location filename="SbiePlusAPI.cpp" line="1224"/>
         <source>Failed to create update session</source>
         <translation>无法创建更新会话</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1229"/>
+        <location filename="SbiePlusAPI.cpp" line="1230"/>
         <source>Failed to create update searcher</source>
         <translation>无法创建更新搜索器</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1235"/>
+        <location filename="SbiePlusAPI.cpp" line="1236"/>
         <source>Failed to set search options</source>
         <translation>无法设置搜索选项</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1243"/>
+        <location filename="SbiePlusAPI.cpp" line="1244"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
         <translation>列举已安装的 Windows 更新 失败</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1249"/>
+        <location filename="SbiePlusAPI.cpp" line="1250"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>无法从搜索结果中检索更新列表</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1256"/>
+        <location filename="SbiePlusAPI.cpp" line="1257"/>
         <source>Failed to get update count</source>
         <translation>无法获取更新计数</translation>
     </message>
@@ -5824,39 +5832,39 @@ Error: %1</source>
         <translation>固件ID: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="659"/>
+        <location filename="Windows/SettingsWindow.cpp" line="660"/>
         <source>Search for settings</source>
         <translation>搜索设置</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="893"/>
         <location filename="Windows/SettingsWindow.cpp" line="894"/>
-        <location filename="Windows/SettingsWindow.cpp" line="904"/>
+        <location filename="Windows/SettingsWindow.cpp" line="895"/>
+        <location filename="Windows/SettingsWindow.cpp" line="905"/>
         <source>Run &amp;Sandboxed</source>
         <translation>在沙盒中运行(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1218"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1219"/>
         <source>kilobytes (%1)</source>
         <translation>Kb (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
         <source>Volume not attached</source>
         <translation>未挂载卷</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1313"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1314"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;您已经使用了%1/%2个试用证书。无法生成更多免费证书了。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1315"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1316"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;获取一个免费试用证书&lt;/a&gt;体验高级功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1316"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>对于每一个硬件ID，您最多可以请求%2次免费的%1天评估证书。</translation>
     </message>
@@ -5865,7 +5873,7 @@ Error: %1</source>
         <translation type="vanished">对于任何一个硬件ID，您最多可以请求%2次免费的%1天试用证书</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1330"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此赞助者证书已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新证书&lt;/a&gt;。</translation>
     </message>
@@ -5874,122 +5882,122 @@ Error: %1</source>
         <translation type="vanished">过期时间：%1天</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1378"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1379"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>过期时间：%1天后</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1381"/>
         <source>Expired: %1 days ago</source>
         <translation>已过期：%1天前</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1392"/>
         <source>Options: %1</source>
         <translation>选项：%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1396"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>隐私/安全增强&amp; 应用沙盒(SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1396"/>
         <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <location filename="Windows/SettingsWindow.cpp" line="1398"/>
         <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1400"/>
         <source>Enabled</source>
         <translation>启用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1396"/>
         <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <location filename="Windows/SettingsWindow.cpp" line="1398"/>
         <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1400"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>加密沙盒 (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
         <source>Network Interception (NetI): %1</source>
         <translation>网络监听(NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1400"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>沙盘桌面(Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1414"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1415"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>这看起来不像是 Sandboxie-Plus 的序列号&lt;br/&gt;如果您试图从证书中输入 UpdateKey 或 Signature ，无需这样做，请直接将整个证书输入到上面的文本区域。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1421"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1422"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>您尝试在未输入预先存在的赞助者证书的情况下使用功能升级密钥。请注意，这种类型的密钥（&lt;b&gt;正如网站上以粗体明确说明的那样&lt;/b）要求您拥有预先存在的有效赞助者证书； &lt;br /&gt;如果您想使用高级功能，您需要同时获得标准证书和功能升级密钥来解锁高级功能。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1427"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1428"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>您试图在未输入预先存在的赞助者证书的情况下使用续订密钥。请注意，这种类型的密钥（&lt;b&gt;正如网站上以粗体明确说明的那样&lt;/b）要求您拥有预先存在的有效赞助者证书；没有它是没有用的。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1432"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1433"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;如果您没有阅读产品说明而错误地获取了此密钥，请通过电子邮件（在我们的网站上提供）联系我们来解决此问题。&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1447"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1472"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1473"/>
         <source>Retrieving certificate...</source>
         <translation>正在检索证书...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1461"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - 申请试用证书</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1461"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>请输入您的电子邮件地址以接收免费的%1天试用证书，该证书将颁发给%2并锁定到当前硬件。
 您最多可以为每个唯一的硬件ID请求%3个试用证书。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1486"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>检索证书时出错：%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1486"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>未知错误（可能是网络问题）</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1548"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1549"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2074"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2075"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>试用证书已成功申请。 请开始免费试用！</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="925"/>
+        <location filename="Windows/SettingsWindow.cpp" line="926"/>
         <source>Sandboxed Web Browser</source>
         <translation>浏览器(沙盒)</translation>
     </message>
@@ -6057,33 +6065,33 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>重置字体</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="671"/>
+        <location filename="Windows/SettingsWindow.cpp" line="672"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 磅</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="774"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
         <source>Please enter message</source>
         <translation>请输入信息</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="807"/>
         <source>Select Program</source>
         <translation>选择程序</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="807"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可执行文件 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="810"/>
-        <location filename="Windows/SettingsWindow.cpp" line="826"/>
+        <location filename="Windows/SettingsWindow.cpp" line="811"/>
+        <location filename="Windows/SettingsWindow.cpp" line="827"/>
         <source>Please enter a menu title</source>
         <translation>请输入一个菜单标题</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="822"/>
+        <location filename="Windows/SettingsWindow.cpp" line="823"/>
         <source>Please enter a command</source>
         <translation>请输入一则命令</translation>
     </message>
@@ -6092,17 +6100,17 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">此赞助者证书已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新证书&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1333"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus 附加的高级功能将在 %1 天后被禁用&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1335"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;对于当前安装的版本，Plus功能仍处于启用状态。&lt;/font&gt;但是，您将无法再访问Sandboxie Live服务，包括兼容性更新和在线疑难解答数据库。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1343"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此赞助者证书将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;更新证书&lt;/a&gt;。</translation>
     </message>
@@ -6111,37 +6119,37 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">正在检索证书…</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
         <source>Contributor</source>
         <translation>贡献值</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1536"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
         <source>Eternal</source>
         <translation>终身</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1538"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Business</source>
         <translation>商业</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Personal</source>
         <translation>个人</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1542"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Great Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1544"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1546"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1547"/>
         <source>Family</source>
         <translation>家庭</translation>
     </message>
@@ -6150,12 +6158,12 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">订阅</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1550"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1551"/>
         <source>Evaluation</source>
         <translation>评估</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1553"/>
         <source>Type %1</source>
         <translation>类型 %1</translation>
     </message>
@@ -6164,47 +6172,47 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">标准</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1580"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1581"/>
         <source>Advanced</source>
         <translation>高级</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1582"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1583"/>
         <source>Advanced (L)</source>
         <translation>高级 (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1584"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1585"/>
         <source>Max Level</source>
         <translation>最高等级</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1586"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
         <source>Level %1</source>
         <translation>等级 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1611"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1612"/>
         <source>Supporter certificate required for access</source>
         <translation>需要赞助者证书进行访问</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1628"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1629"/>
         <source>Supporter certificate required for automation</source>
         <translation>需要赞助者证书进行自动化动作</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2066"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2067"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>很遗憾，此证书对当前版本无效，您需要获取新证书或降级到早期版本。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2068"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2069"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>尽管此证书已过期，但对于当前安装的版本，附加功能仍处于启用状态。但是，您将无法再访问Sandboxie Live服务，包括兼容性更新和在线疑难解答数据库。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2070"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2071"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>很遗憾，此证书已过期，请获取新证书。</translation>
     </message>
@@ -6213,7 +6221,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;在此版本中，Plus 附加的高级功能仍是可用的&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 附加的高级功能已不再可用</translation>
     </message>
@@ -6227,22 +6235,22 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">需要赞助者证书</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1735"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1736"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>在沙盒外运行(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1743"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1744"/>
         <source>Set Force in Sandbox</source>
         <translation>设置强制在沙盒中运行</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1752"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1753"/>
         <source>Set Open Path in Sandbox</source>
         <translation>在沙盘中打开目录</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2046"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2047"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>这看起来不像是一份证书。请输入完整的证书，而不仅仅是其中的一部分。</translation>
     </message>
@@ -6255,7 +6263,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">非常抱歉，此证书已过时</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2076"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2077"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>感谢您对 Sandboxie-Plus 开发工作的支持</translation>
     </message>
@@ -6264,88 +6272,88 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">此赞助者证书无效</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2137"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2138"/>
         <source>Update Available</source>
         <translation>更新可用</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2140"/>
         <source>Installed</source>
         <translation>已安装</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2144"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2145"/>
         <source>by %1</source>
         <translation>来自 %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2152"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2153"/>
         <source>(info website)</source>
         <translation>（更多信息网址）</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2179"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2180"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>此加载项是必需的，无法删除。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2188"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2189"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2335"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2217"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2218"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;立即检查&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2294"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2295"/>
         <source>Please enter the new configuration password.</source>
         <translation>请输入新的配置保护密码</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2298"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2299"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>请再次输入新的配置保护密码</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2304"/>
         <source>Passwords did not match, please retry.</source>
         <translation>输入的密码不一致，请重新输入</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2315"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2316"/>
         <source>Process</source>
         <translation>进程</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2315"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2316"/>
         <source>Folder</source>
         <translation>文件夹</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2325"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2326"/>
         <source>Please enter a program file name</source>
         <translation>请输入一个程序文件名</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2393"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2394"/>
         <source>Please enter the template identifier</source>
         <translation>请输入模板标识符</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2401"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2402"/>
         <source>Error: %1</source>
         <translation>错误：%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2433"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2434"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>你真的想删除选定的本地模板吗？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2637"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2638"/>
         <source>%1 (Current)</source>
         <translation>%1 (当前)</translation>
     </message>
@@ -10653,8 +10661,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2519"/>
-        <source>Issue message 1321 when a processes has been forced in to a sandbox</source>
-        <translation>当进程被强制沙盒化时，提示问题代码 1321</translation>
+        <source>Issue message 1321 when a process has been forced into a sandbox</source>
+        <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
+        <translation type="unfinished">当进程被强制沙盒化时，提示问题代码 1321</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2529"/>

@@ -1099,9 +1099,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CGetFileJob</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="201"/>
+        <location filename="OnlineUpdater.cpp" line="213"/>
         <source>Failed to download file from: %1</source>
         <translation>فشل تنزيل الملف من: %1</translation>
+    </message>
+</context>
+<context>
+    <name>CGetUpdatesJob</name>
+    <message>
+        <location filename="OnlineUpdater.cpp" line="163"/>
+        <source>%1</source>
+        <translation type="unfinished">%1</translation>
     </message>
 </context>
 <context>
@@ -1328,141 +1336,141 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="377"/>
+        <location filename="OnlineUpdater.cpp" line="389"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>هل تريد التحقق مما إذا كان هناك إصدار جديد من Sandboxie-Plus؟</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="378"/>
+        <location filename="OnlineUpdater.cpp" line="390"/>
         <source>Don&apos;t show this message again.</source>
         <translation>لا تعرض هذه الرسالة مرة أخرى.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="433"/>
+        <location filename="OnlineUpdater.cpp" line="445"/>
         <source>Checking for updates...</source>
         <translation>جاري التحقق من التحديثات...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="440"/>
+        <location filename="OnlineUpdater.cpp" line="452"/>
         <source>server not reachable</source>
         <translation>لا يمكن الوصول إلى الخادم</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="441"/>
-        <location filename="OnlineUpdater.cpp" line="443"/>
+        <location filename="OnlineUpdater.cpp" line="453"/>
+        <location filename="OnlineUpdater.cpp" line="455"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>فشل التحقق من التحديثات، الخطأ: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="610"/>
+        <location filename="OnlineUpdater.cpp" line="622"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;هل تريد تنزيل برنامج التثبيت؟&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="614"/>
+        <location filename="OnlineUpdater.cpp" line="626"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;هل تريد تنزيل التحديثات؟&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="618"/>
+        <location filename="OnlineUpdater.cpp" line="630"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;هل تريد الانتقال إلى &lt;a href=&quot;%1&quot;&gt;صفحة التنزيل&lt;/a&gt;؟&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="627"/>
+        <location filename="OnlineUpdater.cpp" line="639"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>لا تعرض هذا التحديث بعد الآن.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="750"/>
+        <location filename="OnlineUpdater.cpp" line="762"/>
         <source>Downloading updates...</source>
         <translation>جاري تنزيل التحديثات...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="776"/>
+        <location filename="OnlineUpdater.cpp" line="788"/>
         <source>invalid parameter</source>
         <translation>معلمة غير صالحة</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="777"/>
+        <location filename="OnlineUpdater.cpp" line="789"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>فشل تنزيل المعلومات المحدثة</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="778"/>
+        <location filename="OnlineUpdater.cpp" line="790"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>فشل تحميل ملف json المحدث</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="779"/>
+        <location filename="OnlineUpdater.cpp" line="791"/>
         <source>failed to download a particular file</source>
         <translation>فشل تنزيل ملف معين</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="780"/>
+        <location filename="OnlineUpdater.cpp" line="792"/>
         <source>failed to scan existing installation</source>
         <translation>فشل مسح التثبيت الحالي</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="781"/>
+        <location filename="OnlineUpdater.cpp" line="793"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>التوقيع المحدث غير صالح !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="782"/>
+        <location filename="OnlineUpdater.cpp" line="794"/>
         <source>downloaded file is corrupted</source>
         <translation>الملف الذي تم تنزيله تالف</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="783"/>
+        <location filename="OnlineUpdater.cpp" line="795"/>
         <source>internal error</source>
         <translation>خطأ داخلي</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="784"/>
+        <location filename="OnlineUpdater.cpp" line="796"/>
         <source>unknown error</source>
         <translation>خطأ غير معروف</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="808"/>
+        <location filename="OnlineUpdater.cpp" line="820"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>فشل تنزيل التحديثات من الخادم، الخطأ %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="830"/>
+        <location filename="OnlineUpdater.cpp" line="842"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;تم تنزيل تحديثات Sandboxie-Plus.&lt;/p&gt;&lt;p&gt;هل تريد تطبيق هذه التحديثات؟ إذا كانت هناك أي برامج تعمل في وضع العزل، فسيتم إنهاؤها.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="932"/>
+        <location filename="OnlineUpdater.cpp" line="944"/>
         <source>Downloading installer...</source>
         <translation>تنزيل برنامج التثبيت...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="975"/>
+        <location filename="OnlineUpdater.cpp" line="987"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;تم تنزيل برنامج تثبيت Sandboxie-Plus جديد إلى الموقع التالي:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;هل تريد بدء التثبيت؟ إذا كانت هناك أي برامج تعمل في وضع العزل، فسيتم إنهاؤها.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1043"/>
+        <location filename="OnlineUpdater.cpp" line="1055"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;هل تريد الانتقال إلى &lt;a href=&quot;%1&quot;&gt;صفحة المعلومات&lt;/a&gt;؟&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1051"/>
+        <location filename="OnlineUpdater.cpp" line="1063"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>لا تعرض هذا الإعلان في المستقبل.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="596"/>
+        <location filename="OnlineUpdater.cpp" line="608"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;يتوفر إصدار جديد من Sandboxie-Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;الإصدار الجديد:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="351"/>
+        <location filename="OnlineUpdater.cpp" line="363"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -1471,7 +1479,7 @@ Do you still want to update?</source>
 هل ما زلت تريد التحديث؟</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="469"/>
+        <location filename="OnlineUpdater.cpp" line="481"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -1483,9 +1491,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="478"/>
         <location filename="Windows/OptionsWindow.cpp" line="484"/>
-        <location filename="Windows/OptionsWindow.cpp" line="499"/>
+        <location filename="Windows/OptionsWindow.cpp" line="490"/>
+        <location filename="Windows/OptionsWindow.cpp" line="505"/>
         <location filename="Windows/OptionsAccess.cpp" line="26"/>
         <source>Browse for File</source>
         <translation>تصفح الملف</translation>
@@ -1637,7 +1645,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>تحديد الدليل</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1143"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1144"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="929"/>
@@ -1653,8 +1661,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>جميع البرامج</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1141"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1159"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1142"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1160"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="618"/>
@@ -2369,47 +2377,47 @@ Please select a folder which contains this file.</source>
         <translation>التجميع</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="569"/>
+        <location filename="Windows/OptionsWindow.cpp" line="575"/>
         <source>Add %1 Template</source>
         <translation>إضافة قالب %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="677"/>
+        <location filename="Windows/OptionsWindow.cpp" line="678"/>
         <source>Search for options</source>
         <translation>البحث عن الخيارات</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="825"/>
+        <location filename="Windows/OptionsWindow.cpp" line="826"/>
         <source>Box: %1</source>
         <translation>الصندوق: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="826"/>
+        <location filename="Windows/OptionsWindow.cpp" line="827"/>
         <source>Template: %1</source>
         <translation>القالب: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="827"/>
+        <location filename="Windows/OptionsWindow.cpp" line="828"/>
         <source>Global: %1</source>
         <translation>العام: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="828"/>
+        <location filename="Windows/OptionsWindow.cpp" line="829"/>
         <source>Default: %1</source>
         <translation>الافتراضي: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1039"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1040"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>تم حذف صندوق العزل هذا وبالتالي لا يمكن حفظ التكوين.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1103"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1104"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>لم يتم حفظ بعض التغييرات بعد، هل تريد حقًا إغلاق نافذة الخيارات هذه؟</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1152"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1153"/>
         <source>Enter program:</source>
         <translation>أدخل البرنامج:</translation>
     </message>
@@ -5505,238 +5513,238 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>معرف الجهاز: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="659"/>
+        <location filename="Windows/SettingsWindow.cpp" line="660"/>
         <source>Search for settings</source>
         <translation>البحث عن الإعدادات</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="893"/>
         <location filename="Windows/SettingsWindow.cpp" line="894"/>
-        <location filename="Windows/SettingsWindow.cpp" line="904"/>
+        <location filename="Windows/SettingsWindow.cpp" line="895"/>
+        <location filename="Windows/SettingsWindow.cpp" line="905"/>
         <source>Run &amp;Sandboxed</source>
         <translation>تشغيل &amp;معزول</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1218"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1219"/>
         <source>kilobytes (%1)</source>
         <translation>كيلوبايت (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1300"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1301"/>
         <source>Volume not attached</source>
         <translation>لم يتم إرفاق المجلد</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1313"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1314"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;لقد استخدمت %1/%2 شهادة تقييم. لا يمكن إنشاء المزيد من الشهادات المجانية.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1315"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1316"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;احصل على شهادة تقييم مجانية&lt;/a&gt; واستمتع بجميع الميزات المميزة لمدة %1 يومًا.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1330"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>انتهت صلاحية شهادة الداعم هذه، يرجى &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;الحصول على شهادة محدثة&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1335"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;بالنسبة للإصدار الحالي، تظل ميزات Plus ممكّنة&lt;/font&gt;، ولكن لم يعد بإمكانك الوصول إلى خدمات Sandboxie-Live، بما في ذلك تحديثات التوافق وقاعدة بيانات استكشاف الأخطاء وإصلاحها.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1342"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1343"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>ستنتهي صلاحية شهادة الداعم هذه &lt;font color=&apos;red&apos;&gt;خلال %1 يومًا&lt;/font&gt;، يرجى &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;الحصول على شهادة محدثة&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1378"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1379"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>تنتهي صلاحيته في: %1 يوم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1391"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1392"/>
         <source>Options: %1</source>
         <translation>الخيارات: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1396"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>تحسين الأمان/الخصوصية وصناديق التطبيقات (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1396"/>
         <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <location filename="Windows/SettingsWindow.cpp" line="1398"/>
         <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1400"/>
         <source>Enabled</source>
         <translation>ممكّن</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1396"/>
         <location filename="Windows/SettingsWindow.cpp" line="1397"/>
         <location filename="Windows/SettingsWindow.cpp" line="1398"/>
         <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1400"/>
         <source>Disabled</source>
         <translation>معطل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1397"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>صناديق العزل المشفرة (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
         <source>Network Interception (NetI): %1</source>
         <translation>اعتراض الشبكة (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1399"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1400"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>سطح مكتب Sandboxie (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1414"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1415"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>لا يبدو هذا كرقم تسلسلي لـ Sandboxie-Plus.&lt;br /&gt;إذا حاولت إدخال مفتاح التحديث أو التوقيع من شهادة، فهذا غير صحيح، فيرجى إدخال الشهادة بالكامل في منطقة النص أعلاه بدلاً من ذلك.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1421"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1422"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>إنك تحاول استخدام مفتاح ترقية ميزة دون إدخال شهادة داعمة موجودة مسبقًا. يرجى ملاحظة أن هذا النوع من المفاتيح (&lt;b&gt;كما هو مذكور بوضوح بالخط العريض على الموقع الإلكتروني&lt;/b) يتطلب منك الحصول على شهادة داعمة موجودة مسبقًا؛ لا فائدة منه بدون شهادة.&lt;br /&gt;إذا كنت تريد استخدام الميزات المتقدمة، فأنت بحاجة إلى الحصول على شهادة عادية ومفتاح ترقية الميزة لفتح الوظائف المتقدمة.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1427"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1428"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>إنك تحاول استخدام مفتاح تجديد دون إدخال شهادة داعم موجودة مسبقًا. يرجى ملاحظة أن هذا النوع من المفاتيح (&lt;b&gt;كما هو مذكور بوضوح بالخط العريض على الموقع الإلكتروني&lt;/b) يتطلب منك الحصول على شهادة داعم صالحة موجودة مسبقًا؛ ولا فائدة منه بدونها.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1432"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1433"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;إذا لم تقرأ وصف المنتج وحصلت على هذا المفتاح عن طريق الخطأ، فيرجى الاتصال بنا عبر البريد الإلكتروني (المتوفر على موقعنا الإلكتروني) لحل هذه المشكلة.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1461"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - الحصول على شهادة تقييم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1461"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>يرجى إدخال عنوان بريدك الإلكتروني لتلقي شهادة تقييم مجانية لمدة %1 يوم، والتي سيتم إصدارها إلى %2 وقفلها على الجهاز الحالي.
 يمكنك طلب ما يصل إلى %3 شهادات تقييم لكل معرف أجهزة فريد.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1486"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>خطأ في استرداد الشهادة: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1486"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>خطأ غير معروف (ربما مشكلة في الشبكة)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1535"/>
         <source>Contributor</source>
         <translation>مساهم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1536"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1537"/>
         <source>Eternal</source>
         <translation>أبدي</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1538"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Business</source>
         <translation>أعمال</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
         <source>Personal</source>
         <translation>شخصي</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1542"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Great Patreon</source>
         <translation>مستخدم رائع على Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1544"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1546"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1547"/>
         <source>Family</source>
         <translation>عائلي</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1550"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1551"/>
         <source>Evaluation</source>
         <translation>تقييم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1553"/>
         <source>Type %1</source>
         <translation>النوع %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1580"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1581"/>
         <source>Advanced</source>
         <translation>متقدم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1582"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1583"/>
         <source>Advanced (L)</source>
         <translation>متقدم (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1584"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1585"/>
         <source>Max Level</source>
         <translation>المستوى الأقصى</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1586"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
         <source>Level %1</source>
         <translation>المستوى %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1611"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1612"/>
         <source>Supporter certificate required for access</source>
         <translation>مطلوب شهادة الداعم للوصول</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1628"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1629"/>
         <source>Supporter certificate required for automation</source>
         <translation>مطلوب شهادة الداعم للأتمتة</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2066"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2067"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>هذه الشهادة للأسف غير صالحة للإصدار الحالي، تحتاج إلى الحصول على شهادة جديدة أو الترقية إلى إصدار سابق.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2068"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2069"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>على الرغم من انتهاء صلاحية هذه الشهادة، إلا أن الميزات الإضافية المثبتة حاليًا تظل ممكّنة. ومع ذلك، لن تتمكن بعد الآن من الوصول إلى خدمات Sandboxie-Live، بما في ذلك تحديثات التوافق وقاعدة بيانات استكشاف الأخطاء وإصلاحها عبر الإنترنت.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2070"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2071"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>انتهت صلاحية هذه الشهادة للأسف، تحتاج إلى الحصول على شهادة جديدة.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="925"/>
+        <location filename="Windows/SettingsWindow.cpp" line="926"/>
         <source>Sandboxed Web Browser</source>
         <translation>متصفح ويب معزول</translation>
     </message>
@@ -5779,180 +5787,180 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>إعادة تعيين الخط</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="671"/>
+        <location filename="Windows/SettingsWindow.cpp" line="672"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="774"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
         <source>Please enter message</source>
         <translation>الرجاء إدخال الرسالة</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="807"/>
         <source>Select Program</source>
         <translation>تحديد البرنامج</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="807"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>الملفات القابلة للتنفيذ (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="810"/>
-        <location filename="Windows/SettingsWindow.cpp" line="826"/>
+        <location filename="Windows/SettingsWindow.cpp" line="811"/>
+        <location filename="Windows/SettingsWindow.cpp" line="827"/>
         <source>Please enter a menu title</source>
         <translation>الرجاء إدخال عنوان القائمة</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="822"/>
+        <location filename="Windows/SettingsWindow.cpp" line="823"/>
         <source>Please enter a command</source>
         <translation>الرجاء إدخال أمر</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1316"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1317"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>يمكنك طلب شهادة تقييم مجانية لمدة %1 يوم حتى %2 مرة لكل معرف جهاز.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1332"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1333"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;سيتم تعطيل ميزات Plus في غضون %1 يومًا.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1336"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1337"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;لم تعد ميزات Plus مفعلة.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1380"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1381"/>
         <source>Expired: %1 days ago</source>
         <translation>انتهت صلاحيتها: منذ %1 يومًا</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1447"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1472"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1473"/>
         <source>Retrieving certificate...</source>
         <translation>استرداد الشهادة...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1548"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1549"/>
         <source>Home</source>
         <translation>الصفحة الرئيسية</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1735"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1736"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>تشغيل &amp;دون عزل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1743"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1744"/>
         <source>Set Force in Sandbox</source>
         <translation>تعيين فرض العزل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1752"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1753"/>
         <source>Set Open Path in Sandbox</source>
         <translation>تعيين المسار المفتوح في صندوق العزل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2046"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2047"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>لا يبدو هذا كشهادة. يُرجى إدخال الشهادة بالكامل، وليس جزءًا منها فقط.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2074"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2075"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>تم تطبيق شهادة التقييم بنجاح. استمتع بالتجربة المجانية!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2076"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2077"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>شكرًا لك على دعم تطوير Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2137"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2138"/>
         <source>Update Available</source>
         <translation>التحديث متاح</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2139"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2140"/>
         <source>Installed</source>
         <translation>تم التثبيت</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2144"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2145"/>
         <source>by %1</source>
         <translation>بواسطة %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2152"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2153"/>
         <source>(info website)</source>
         <translation>(موقع معلومات)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2179"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2180"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>هذه الوظيفة الإضافية إلزامية ولا يمكن إزالتها.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2188"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2334"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2189"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2335"/>
         <source>Select Directory</source>
         <translation>حدد الدليل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2217"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2218"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;تحقق الآن&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2294"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2295"/>
         <source>Please enter the new configuration password.</source>
         <translation>الرجاء إدخال كلمة مرور التكوين الجديدة.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2298"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2299"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>الرجاء إعادة إدخال كلمة مرور التكوين الجديدة.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2304"/>
         <source>Passwords did not match, please retry.</source>
         <translation>لم تتطابق كلمات المرور، يرجى إعادة المحاولة.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2315"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2316"/>
         <source>Process</source>
         <translation>العملية</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2315"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2316"/>
         <source>Folder</source>
         <translation>المجلد</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2325"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2326"/>
         <source>Please enter a program file name</source>
         <translation>الرجاء إدخال اسم ملف البرنامج</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2393"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2394"/>
         <source>Please enter the template identifier</source>
         <translation>الرجاء إدخال معرف القالب</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2401"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2402"/>
         <source>Error: %1</source>
         <translation>خطأ: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2433"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2434"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>هل تريد حقًا حذف القالب المحلي المحدد؟</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2637"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2638"/>
         <source>%1 (Current)</source>
         <translation>%1 (الحالي)</translation>
     </message>
@@ -9964,8 +9972,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2519"/>
-        <source>Issue message 1321 when a processes has been forced in to a sandbox</source>
-        <translation>إصدار رسالة 1321 عند فرض عملية في صندوق عزل</translation>
+        <source>Issue message 1321 when a process has been forced into a sandbox</source>
+        <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
+        <translation type="unfinished">إصدار رسالة 1321 عند فرض عملية في صندوق عزل</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2529"/>

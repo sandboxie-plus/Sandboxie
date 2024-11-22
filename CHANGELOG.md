@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added SBIE1321 to log all force process events, can be enabled with "NotifyForceProcessEnabled=y", Improves #4113
 
 ### Fixed
-- fixed issues with SSL on ARM64 platform, breaking updater and cert retrival
+- fixed issues with SSL on ARM64 platform, breaking updater and cert retrieval
 
 
 

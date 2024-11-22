@@ -26,6 +26,10 @@ SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
 SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
 .
 
+1321;pop;inf;01
+SBIE1321 Program '%2' was forced into sandbox %3
+.
+
 2111;pop;inf;01
 SBIE2111 Process is not accessible: %3, call %2
 .

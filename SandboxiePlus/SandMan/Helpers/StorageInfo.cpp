@@ -203,7 +203,7 @@ std::list<SVolumeInfo> ListAllVolumes()
                 info.mountPoints.push_back(mountPoint);
         }
 
-        volumeName[wcslen(volumeName) - 1] = 0; // strip tailing L'\\'
+        volumeName[wcslen(volumeName) - 1] = 0; // strip trailing L'\\'
 
         info.deviceName = QueryLinkTarget(volumeName);
 

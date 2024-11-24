@@ -8488,7 +8488,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation>允許沙箱化處理程序開啟被 EFS (加密檔案系統) 保護的檔案</translation>
+        <translation>允許沙箱化處理程序開啟被 加密檔案系統 (EFS) 保護的檔案</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="834"/>
@@ -8508,7 +8508,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="976"/>
         <source>Open access to Proxy Configurations</source>
-        <translation>開啟對 Proxy 組態設定的存取</translation>
+        <translation>開放對 Proxy 組態設定的存取</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1296"/>

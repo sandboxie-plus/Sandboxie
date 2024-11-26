@@ -365,7 +365,7 @@ void COptionsWindow::LoadGeneral()
 	ui.txtCopyLimit->setText(QString::number(iLimit > 0 ? iLimit : 80 * 1024));
 	ui.chkCopyPrompt->setChecked(m_pBox->GetBool("PromptForFileMigration", true));
 	ui.chkNoCopyWarn->setChecked(!m_pBox->GetBool("CopyLimitSilent", false));
-	ui.chkDenyWrite->setChecked(m_pBox->GetBool("CopyBlockDenyWrite", false));
+	ui.chkDenyWrite->setChecked(!m_pBox->GetBool("CopyBlockDenyWrite", false));
 	ui.chkNoCopyMsg->setChecked(m_pBox->GetBool("NotifyNoCopy", false));
 	
 	LoadCopyRules();
@@ -496,7 +496,7 @@ void COptionsWindow::SaveGeneral()
 
 	WriteAdvancedCheck(ui.chkCopyPrompt, "PromptForFileMigration", "", "n");
 	WriteAdvancedCheck(ui.chkNoCopyWarn, "CopyLimitSilent", "", "y");
-	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "y", "");
+	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "", "y");
 	WriteAdvancedCheck(ui.chkNoCopyMsg, "NotifyNoCopy", "y", "");
 
 	if (ui.chkProtectBox->checkState() == Qt::Checked) {

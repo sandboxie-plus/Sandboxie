@@ -46,6 +46,10 @@ SBIE1319 Blocked spooler print to file, %2 %3
 SBIE1320 To allow print spooler to write outside the sandbox for this process, please double-click on this message line
 .
 
+1321;pop;inf;01
+SBIE1321 Program '%2' was forced into sandbox %3
+.
+
 1399;pop;inf;01
 %0
 .

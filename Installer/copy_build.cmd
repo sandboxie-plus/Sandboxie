@@ -106,6 +106,8 @@ copy %qtPath%\plugins\platforms\qwindows.dll %instPath%\platforms\
 
 mkdir %instPath%\styles
 copy %qtPath%\plugins\styles\qwindowsvistastyle.dll %instPath%\styles\
+rem Qt 6.7+
+copy %qtPath%\plugins\styles\qmodernwindowsstyle.dll %instPath%\styles\
 
 IF %archPath% == ARM64 (
 mkdir %instPath%\tls

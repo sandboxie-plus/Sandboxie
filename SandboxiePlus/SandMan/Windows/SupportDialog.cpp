@@ -99,9 +99,9 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 
 		USHORT ReminderShedule[2 * 11] = {
 		//  days,	itnerval,	
-			730,	1 * 24,
-			365,	5 * 24,
-			182,	10 * 24,
+			730,	     12,
+			365,	 1 * 24,
+			182,	 5 * 24,
 			30,		30 * 24,
 			0
 		};

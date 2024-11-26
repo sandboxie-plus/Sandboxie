@@ -181,7 +181,6 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(StatusChanged()), this, SLOT(OnStatusChanged()));
 
 	connect(theAPI, SIGNAL(BoxAdded(const CSandBoxPtr&)), this, SLOT(OnBoxAdded(const CSandBoxPtr&)));
-	connect(theAPI, SIGNAL(BoxOpened(const CSandBoxPtr&)), this, SLOT(OnBoxOpened(const CSandBoxPtr&)));
 	connect(theAPI, SIGNAL(BoxClosed(const CSandBoxPtr&)), this, SLOT(OnBoxClosed(const CSandBoxPtr&)));
 	connect(theAPI, SIGNAL(BoxCleaned(CSandBoxPlus*)), this, SLOT(OnBoxCleaned(CSandBoxPlus*)));
 
@@ -2353,11 +2352,6 @@ void CSandMan::OnStartMenuChanged()
 	}
 }
 
-void CSandMan::OnBoxOpened(const CSandBoxPtr& pBox)
-{
-	CSupportDialog::CheckSupport(true);
-}
-
 void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 {
 	foreach(const QString & Value, pBox->GetTextList("OnBoxTerminate", true, false, true)) {
@@ -4250,7 +4244,11 @@ void CSandMan::SetUITheme()
 	CFinder::SetDarkMode(bDark);
 
 
-	QFont font = QApplication::font();
+    QFont font = QApplication::font();
+    if (QString customFont = theConf->GetString("UIConfig/UIFont",""); customFont != ""){
+        font.setFamily(customFont);
+        QApplication::setFont(font);
+    }
 	double newFontSize = m_DefaultFontSize * theConf->GetInt("Options/FontScaling", 100) / 100.0;
 	if (newFontSize != font.pointSizeF()) {
 		font.setPointSizeF(newFontSize);

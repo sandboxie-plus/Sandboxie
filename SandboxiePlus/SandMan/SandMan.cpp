@@ -181,6 +181,7 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(StatusChanged()), this, SLOT(OnStatusChanged()));
 
 	connect(theAPI, SIGNAL(BoxAdded(const CSandBoxPtr&)), this, SLOT(OnBoxAdded(const CSandBoxPtr&)));
+	connect(theAPI, SIGNAL(BoxOpened(const CSandBoxPtr&)), this, SLOT(OnBoxOpened(const CSandBoxPtr&)));
 	connect(theAPI, SIGNAL(BoxClosed(const CSandBoxPtr&)), this, SLOT(OnBoxClosed(const CSandBoxPtr&)));
 	connect(theAPI, SIGNAL(BoxCleaned(CSandBoxPlus*)), this, SLOT(OnBoxCleaned(CSandBoxPlus*)));
 
@@ -2350,6 +2351,11 @@ void CSandMan::OnStartMenuChanged()
 		m_StartMenuUpdatePending = true;
 		QTimer::singleShot(1000, this, SLOT(SyncStartMenu()));
 	}
+}
+
+void CSandMan::OnBoxOpened(const CSandBoxPtr& pBox)
+{
+	CSupportDialog::CheckSupport(true);
 }
 
 void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)

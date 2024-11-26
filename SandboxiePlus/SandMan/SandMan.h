@@ -228,6 +228,7 @@ public slots:
 	void				OnCancelAsync();
 
 	void				OnBoxAdded(const CSandBoxPtr& pBox);
+	void				OnBoxOpened(const CSandBoxPtr& pBox);
 	void				OnBoxClosed(const CSandBoxPtr& pBox);
 	void				OnBoxCleaned(CSandBoxPlus* pBoxEx);
 

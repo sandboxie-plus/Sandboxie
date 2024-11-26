@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved ini section editor, it now supports search Ctrl+F
 - added SBIE1321 to log all force process events, can be enabled with "NotifyForceProcessEnabled=y", Improves #4113
 
+### Changed
+- improved support notification
+
 ### Fixed
 - fixed issues with SSL on ARM64 platform, breaking updater and cert retrieval
 

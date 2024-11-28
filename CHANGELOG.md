@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.15.3 / 5.70.3] - 2024-11-??
+## [1.15.3 / 5.70.3] - 2024-11-28
 
 ### Added
 - improved ini section editor, it now supports search Ctrl+F

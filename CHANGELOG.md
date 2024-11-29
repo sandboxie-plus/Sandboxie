@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [1.15.4 / 5.70.4] - 2024-12-??
+
+###
+- Fixed issues with ini section editor in dark mode 
+- Fix deleting sandbox content [#4407](https://github.com/sandboxie-plus/Sandboxie/pull/4407)
+
+
+
+
 ## [1.15.3 / 5.70.3] - 2024-11-28
 
 ### Added

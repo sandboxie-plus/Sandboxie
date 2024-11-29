@@ -601,7 +601,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.btnResetIniFont->setIcon(CSandMan::GetIcon("ResetFont"));
 	ui.btnResetIniFont->setToolTip(tr("Reset font"));
 
-	m_pCodeEdit = new CCodeEdit(new CIniHighlighter);
+	m_pCodeEdit = new CCodeEdit(new CIniHighlighter(theGUI->m_DarkTheme));
 	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
 	delete ui.txtIniSection;
 	ui.txtIniSection = NULL;

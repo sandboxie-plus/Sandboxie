@@ -9,7 +9,7 @@ class CIniHighlighter : public QSyntaxHighlighter
     Q_OBJECT
 
 public:
-    explicit CIniHighlighter(QTextDocument *parent = nullptr);
+    explicit CIniHighlighter(bool bDarkMode, QTextDocument *parent = nullptr);
     ~CIniHighlighter();
 
 protected:

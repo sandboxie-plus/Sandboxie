@@ -1,55 +1,65 @@
 #include "stdafx.h"
 #include "IniHighlighter.h"
 
-CIniHighlighter::CIniHighlighter(QTextDocument *parent)
+CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
+    // Define colors for light and dark mode
+    QColor blue = bDarkMode ? QColor("#87CEFA") : QColor("#0000FF"); // Lighter blue for dark mode
+    QColor green = bDarkMode ? QColor("#90EE90") : QColor("#008000"); // Lighter green for dark mode
+    QColor darkRed = bDarkMode ? QColor("#FF6347") : QColor("#800000"); // Lighter red for dark mode
+    QColor red = bDarkMode ? QColor("#FF4500") : QColor("#FF0000"); // Brighter red for dark mode
+    QColor black = bDarkMode ? QColor("#DCDCDC") : QColor("#000000"); // Light gray for dark mode
+    QColor brown = bDarkMode ? QColor("#F4A460") : QColor("#A52A2A"); // Light brown for dark mode
+    QColor purple = bDarkMode ? QColor("#DA70D6") : QColor("#800080"); // Brighter purple for dark mode
+    QColor gray = bDarkMode ? QColor("#A9A9A9") : QColor("#808080"); // Lighter gray for dark mode
+
     HighlightRule rule;
 
     // Section headers: [Section]
-    sectionFormat.setForeground(QColor("#0000FF")); // Blue
+    sectionFormat.setForeground(blue);
     sectionFormat.setFontWeight(QFont::Bold);
     rule.pattern = QRegularExpression("^\\s*\\[.*\\]\\s*$");
     rule.format = sectionFormat;
     highlightRules.append(rule);
 
     // Comments: ; comment or # comment
-    commentFormat.setForeground(QColor("#008000")); // Green
+    commentFormat.setForeground(green);
     rule.pattern = QRegularExpression("^\\s*[;#].*");
     rule.format = commentFormat;
     highlightRules.append(rule);
 
     // Keys: key=
-    keyFormat.setForeground(QColor("#800000")); // Dark Red
+    keyFormat.setForeground(darkRed);
     rule.pattern = QRegularExpression("^[\\w\\.]+(?=\\s*=)");
     rule.format = keyFormat;
     highlightRules.append(rule);
 
     // Equals sign: =
-    equalsFormat.setForeground(QColor("#FF0000")); // Red
+    equalsFormat.setForeground(red);
     rule.pattern = QRegularExpression("=");
     rule.format = equalsFormat;
     highlightRules.append(rule);
 
     // Values: =value
-    valueFormat.setForeground(QColor("#000000")); // Black
+    valueFormat.setForeground(black);
     rule.pattern = QRegularExpression("(?<=\\=).*");
     rule.format = valueFormat;
     highlightRules.append(rule);
 
     // Initialize formats for value prefix and first comma
-    valuePrefixFormat.setForeground(QColor("#0000FF")); // Blue
-    firstCommaFormat.setForeground(QColor("#FF0000"));  // Red
+    valuePrefixFormat.setForeground(blue);
+    firstCommaFormat.setForeground(red);
 
 #ifdef INI_WITH_JSON
     // Initialize JSON formats
-    jsonKeyFormat.setForeground(QColor("#A52A2A"));       // Brown
-    jsonStringFormat.setForeground(QColor("#000000"));    // Black
-    jsonNumberFormat.setForeground(QColor("#0000FF"));    // Blue
-    jsonBoolNullFormat.setForeground(QColor("#800080"));  // Purple
-    jsonBracesFormat.setForeground(QColor("#808080"));    // Gray
-    jsonColonFormat.setForeground(QColor("#FF0000"));     // Red
-    jsonCommaFormat.setForeground(QColor("#FF0000"));     // Red
+    jsonKeyFormat.setForeground(brown);
+    jsonStringFormat.setForeground(black);
+    jsonNumberFormat.setForeground(blue);
+    jsonBoolNullFormat.setForeground(purple);
+    jsonBracesFormat.setForeground(gray);
+    jsonColonFormat.setForeground(red);
+    jsonCommaFormat.setForeground(red);
 
     // 1. JSON Colon: Match colons not preceded by backslash
     HighlightRule jsonRule;

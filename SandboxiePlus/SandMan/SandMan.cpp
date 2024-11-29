@@ -1308,9 +1308,9 @@ void CSandMan::OnRestartAsAdmin()
 	theAPI->Disconnect();
 	WCHAR buf[255] = { 0 };
 	GetModuleFileNameW(NULL, buf, 255);
-	SHELLEXECUTEINFO se;
-	memset(&se, 0, sizeof(SHELLEXECUTEINFO));
-	se.cbSize = sizeof(SHELLEXECUTEINFO);
+	SHELLEXECUTEINFOW se;
+	memset(&se, 0, sizeof(se));
+	se.cbSize = sizeof(se);
 	se.lpVerb = L"runas";
 	se.lpFile = buf;
 	se.nShow = SW_HIDE;

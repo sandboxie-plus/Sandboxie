@@ -415,7 +415,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 			pTree->setAlternatingRowColors(true);
 	}
 
-	m_pCodeEdit = new CCodeEdit(new CIniHighlighter);
+	m_pCodeEdit = new CCodeEdit(new CIniHighlighter(theGUI->m_DarkTheme));
 	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
 	delete ui.txtIniSection;
 	ui.txtIniSection = NULL;

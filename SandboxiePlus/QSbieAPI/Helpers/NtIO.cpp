@@ -102,7 +102,7 @@ NTSTATUS NtIo_DeleteFolderRecursivelyImpl(POBJECT_ATTRIBUTES objattrs, bool (*cb
 
 NTSTATUS NtIo_DeleteFile(ULONG FileAttributes, OBJECT_ATTRIBUTES* attr, bool (*cb)(const WCHAR* info, void* param), void* param)
 {
-	NTSTATUS status;
+	NTSTATUS status = STATUS_SUCCESS;
 
 	if (FileAttributes & (FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM))
 		NtIo_RemoveProblematicAttributes(attr);

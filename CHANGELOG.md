@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.4 / 5.70.4] - 2024-12-??
 
+### Added
+- added template for Joplin
+
 ### Fixed
 - fixed issues with ini section editor in dark mode
 - fixed deleting sandbox content [#4407](https://github.com/sandboxie-plus/Sandboxie/pull/4407) (thanks bot-1450)
@@ -18,9 +21,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - improved ini section editor, it now supports search Ctrl+F
 - added SBIE1321 to log all force process events, can be enabled with "NotifyForceProcessEnabled=y", improves [#4113](https://github.com/sandboxie-plus/Sandboxie/issues/4113)
+- added custom font configuration for Sandboxie Plus UI [#4397](https://github.com/sandboxie-plus/Sandboxie/pull/4397) (thanks habatake)
 
 ### Changed
 - improved support notification
+- improved deletion of Sandboxie Plus leftovers [#4374](https://github.com/sandboxie-plus/Sandboxie/pull/4374)
 
 ### Fixed
 - fixed issues with SSL on ARM64 platform, breaking updater and certificate retrieval

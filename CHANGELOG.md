@@ -7,8 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.15.4 / 5.70.4] - 2024-12-??
 
 ### Fixed
-- fixed issues with ini section editor in dark mode 
+- fixed issues with ini section editor in dark mode
 - fixed deleting sandbox content [#4407](https://github.com/sandboxie-plus/Sandboxie/pull/4407) (thanks bot-1450)
+- fixed run unsandboxed no longer working from box picker window [#4403](https://github.com/sandboxie-plus/Sandboxie/issues/4403)
 
 
 
@@ -45,6 +46,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - validated compatibility with Windows build 27749 and updated DynData
 - when running via drag and drop, now the app's parent folder is used as working directory [#4073](https://github.com/sandboxie-plus/Sandboxie/issues/4073)
+- changed Qt 5 version to Qt 5.15.16 with OpenSSL 3.4.0 [#4370](https://github.com/sandboxie-plus/Sandboxie/pull/4370) (thanks offhub)
 
 ### Fixed
 - fixed Sign the .tmp file that gets dropped when installing or updating Sandboxie Plus [#2643](https://github.com/sandboxie-plus/Sandboxie/issues/2643) [#4343](https://github.com/sandboxie-plus/Sandboxie/issues/4343)

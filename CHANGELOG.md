@@ -6,10 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.4 / 5.70.4] - 2024-12-??
 
-###
-- Fixed issues with ini section editor in dark mode 
-- Fix deleting sandbox content [#4407](https://github.com/sandboxie-plus/Sandboxie/pull/4407)
-- Fixed run unsandboxed no longer working from box picker window
+### Fixed
+- fixed issues with ini section editor in dark mode
+- fixed deleting sandbox content [#4407](https://github.com/sandboxie-plus/Sandboxie/pull/4407) (thanks bot-1450)
+- fixed run unsandboxed no longer working from box picker window [#4403](https://github.com/sandboxie-plus/Sandboxie/issues/4403)
 
 
 
@@ -17,14 +17,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - improved ini section editor, it now supports search Ctrl+F
-- added SBIE1321 to log all force process events, can be enabled with "NotifyForceProcessEnabled=y", Improves #4113
+- added SBIE1321 to log all force process events, can be enabled with "NotifyForceProcessEnabled=y", improves [#4113](https://github.com/sandboxie-plus/Sandboxie/issues/4113)
 
 ### Changed
 - improved support notification
 
 ### Fixed
-- fixed issues with SSL on ARM64 platform, breaking updater and cert retrieval
-
+- fixed issues with SSL on ARM64 platform, breaking updater and certificate retrieval
 
 
 
@@ -89,14 +88,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved SandboxieCrypto startup
-- improved Sandboxed RPCSS startup
+- improved sandboxed RPCSS startup
 - changed Qt 5 version to Qt 5.15.15 with OpenSSL 3.3.2 [#4223](https://github.com/sandboxie-plus/Sandboxie/pull/4223) (thanks offhub)
 - set tab orders and buddies of UI controls [#4300](https://github.com/sandboxie-plus/Sandboxie/pull/4300) (thanks gexgd0419)
 
 ### Fixed
 - fixed ImDiskApp uninstall key is always written to the registry [#4282](https://github.com/sandboxie-plus/Sandboxie/issues/4282)
 - FIXED SECURITY ISSUE ID-24 by adding new ACLS handling [CVE-2024-49360](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-4chj-3c28-gvmp)
-  - Note: set LockBoxToUser=y on multi user systems
+  - Note: set 'LockBoxToUser=y' on multi user systems
 
 
 

@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ###
 - Fixed issues with ini section editor in dark mode 
 - Fix deleting sandbox content [#4407](https://github.com/sandboxie-plus/Sandboxie/pull/4407)
-
+- Fixed run unsandboxed no longer working from box picker window
 
 
 

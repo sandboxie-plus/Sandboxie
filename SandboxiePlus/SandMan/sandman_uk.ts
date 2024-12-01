@@ -5605,7 +5605,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Ви хочете виконати цю програму ззовні пісочниці?</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>Будь ласка, виберіть пісочницю.</translation>
     </message>

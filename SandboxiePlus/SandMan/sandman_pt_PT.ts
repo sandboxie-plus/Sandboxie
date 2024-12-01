@@ -5870,7 +5870,7 @@ Não vou definir: %2</translation>
         <translation>Tem certeza de que quer rodar o programa fora da caixa de areia?</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>Por favor, seleccione uma caixa de areia.</translation>
     </message>

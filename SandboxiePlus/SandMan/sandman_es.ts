@@ -5905,7 +5905,7 @@ NO seleccionará: %2</translation>
         <translation>¿Está seguro que quiere ejecutar el programa fuera de la sandbox?</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>Por favor seleccione una sandbox.</translation>
     </message>

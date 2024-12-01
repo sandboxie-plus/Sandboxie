@@ -5302,7 +5302,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Sind Sie sich sicher, dass Sie dieses Programm außerhalb der Sandbox starten möchten?</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>Bitte wählen Sie eine Sandbox.</translation>
     </message>

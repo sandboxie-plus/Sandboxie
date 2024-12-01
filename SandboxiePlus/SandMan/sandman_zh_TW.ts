@@ -5675,7 +5675,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>是否在沙箱外執行程式？</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>請選擇一個沙箱。</translation>
     </message>

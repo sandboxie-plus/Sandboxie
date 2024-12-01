@@ -5713,7 +5713,7 @@ Error: %1</source>
         <translation>确定要在沙盒外运行程序吗？</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>请选择一个沙盒</translation>
     </message>

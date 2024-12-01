@@ -6013,7 +6013,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Êtes-vous sûr de vouloir exécuter le programme hors de tout bac à sable ?</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>Veuillez choisir un bac.</translation>
     </message>

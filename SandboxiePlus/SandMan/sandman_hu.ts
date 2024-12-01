@@ -5358,7 +5358,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation>Biztos benne, hogy a homokozón kívül futtatja a programot?</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>Kérjük, válasszon egy homokozót.</translation>
     </message>

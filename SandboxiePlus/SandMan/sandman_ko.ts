@@ -5783,7 +5783,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>샌드박스 외부에서 프로그램을 실행하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="266"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
         <translation>샌드박스를 선택하세요.</translation>
     </message>

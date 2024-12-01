@@ -247,6 +247,8 @@ void CSelectBoxWindow::OnRun()
 	{
 		if (QMessageBox("Sandboxie-Plus", tr("Are you sure you want to run the program outside the sandbox?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
+
+		BoxNames.append("");
 	}
 	if (ui.radBoxedNew->isChecked())
 	{

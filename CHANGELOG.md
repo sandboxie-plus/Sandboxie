@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with ini section editor in dark mode
 - fixed deleting sandbox content [#4407](https://github.com/sandboxie-plus/Sandboxie/pull/4407) (thanks bot-1450)
 - fixed run unsandboxed no longer working from box picker window [#4403](https://github.com/sandboxie-plus/Sandboxie/issues/4403)
+- fixed Firefox tab crashes when running with `ProtectHostImages=y` enabled [#4394](https://github.com/sandboxie-plus/Sandboxie/issues/4394)
+  - Only default installation locations are considered; Firefox-based browsers installed outside of these locations may still crash.
+  - To prevent this, manually add `DontCopy=<CustomInstallPath>` for custom installation paths to your configuration
 
 
 

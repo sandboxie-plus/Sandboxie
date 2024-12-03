@@ -6,58 +6,58 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="26"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="96"/>
         <source>kilobytes</source>
-        <translation type="unfinished">kilobytes</translation>
+        <translation>kilobytes</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="157"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bescherm Box Root van toegang van andere processen</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="103"/>
         <location filename="Forms/BoxImageWindow.ui" line="134"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Tekstlabel</translation>
+        <translation>Tekstlabel</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="187"/>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon wachtwoord</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="144"/>
         <source>Enter Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidig wachtwoord</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="70"/>
         <source>New Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw wachtwoord</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="34"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw wachtwoord (nogmaals)</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="174"/>
         <source>Disk Image Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Grootte op schijf</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="57"/>
         <source>Encryption Cipher</source>
-        <translation type="unfinished"></translation>
+        <translation>Encryptie cypher</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="83"/>
         <source>Lock the box when all processes stop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergrendel de Box als alle processen gestopt zijn</translation>
     </message>
 </context>
 <context>
@@ -2830,12 +2830,12 @@ Volledig pad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="246"/>
         <source>No Files selected!</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen bestanden geselecteerd!</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="250"/>
         <source>Do you really want to delete %1 selected files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Weet je zeker dat je %1 geselecteerde bestanden wilt verwijderen?</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="278"/>
@@ -2845,7 +2845,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="279"/>
         <source>Close and Disable Immediate Recovery for this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit en schakel direct herstel uit voor deze box</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="299"/>
@@ -2855,7 +2855,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="584"/>
         <source>Recovering File(s)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met bestand(en) herstellen...</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="590"/>

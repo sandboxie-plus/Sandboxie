@@ -53,9 +53,23 @@ Name: "RefreshBuild"; Description: "{cm:RefreshBuild}"; MinVersion: 0.0,5.0; Che
 [Files]
 ; Both portable and install.
 Source: ".\Release\{#MyAppSrc}\*"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: recursesubdirs ignoreversion; Excludes: "*.pdb"
-; Include the .pdb files.
+
+; Include the .pdb files for all builds.
 Source: ".\Release\{#MyAppSrc}\SbieDrv.pdb"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: ignoreversion
 Source: ".\Release\{#MyAppSrc}\SbieDll.pdb"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: ignoreversion
+
+; Include 32-bit .pdb file only in x64 and ARM64 builds.
+#if MyAppArch == "x64"
+Source: ".\Release\{#MyAppSrc}\32\SbieDll.pdb"; DestDir: "{app}\32\"; MinVersion: 0.0,5.0; Flags: ignoreversion
+#endif
+#if MyAppArch == "arm64"
+Source: ".\Release\{#MyAppSrc}\32\SbieDll.pdb"; DestDir: "{app}\32\"; MinVersion: 0.0,5.0; Flags: ignoreversion
+#endif
+
+; Include 64-bit .pdb file only in ARM64 builds.
+#if MyAppArch == "arm64"
+Source: ".\Release\{#MyAppSrc}\64\SbieDll.pdb"; DestDir: "{app}\64\"; MinVersion: 0.0,5.0; Flags: ignoreversion
+#endif
 
 ; Only if portable.
 Source: ".\Sandboxie.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable
@@ -163,6 +177,16 @@ begin
   if (ExpandConstant('{param:portable|0}') = '1') or Portable then begin
     Result := True;
   end;
+end;
+
+function Is64BitInstallMode: Boolean;
+begin
+  Result := (ProcessorArchitecture = paX64) or (ProcessorArchitecture = paARM64);
+end;
+
+function IsARM64InstallMode: Boolean;
+begin
+  Result := ProcessorArchitecture = paARM64;
 end;
 
 function IsOpenSandMan(): Boolean;

@@ -224,7 +224,9 @@
     </ClCompile>
     <ClCompile Include="Archive\CachedArchive.cpp" />
     <ClCompile Include="Archive\SplitFile.cpp" />
+    <ClCompile Include="Common\CheckableComboBox.cpp" />
     <ClCompile Include="Common\CheckableMessageBox.cpp" />
+    <ClCompile Include="Common\CodeEdit.cpp" />
     <ClCompile Include="Common\ComboInputDialog.cpp" />
     <ClCompile Include="Common\Common.cpp" />
     <ClCompile Include="Common\DebugHelpers.cpp" />
@@ -269,6 +271,8 @@
     <ClInclude Include="Archive\ArchiveUpdater.h" />
     <ClInclude Include="Archive\CachedArchive.h" />
     <QtMoc Include="Archive\SplitFile.h" />
+    <QtMoc Include="Common\CheckableComboBox.h" />
+    <QtMoc Include="Common\CodeEdit.h" />
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="Common\DebugHelpers.h" />
     <ClInclude Include="Common\ExitDialog.h" />

@@ -483,6 +483,7 @@
     <ClInclude Include="Engine\V4ScriptDebuggerApi.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\FullScreen.h" />
+    <QtMoc Include="Helpers\IniHighlighter.h" />
     <ClInclude Include="Helpers\ReadDirectoryChanges.h" />
     <ClInclude Include="Helpers\ReadDirectoryChangesPrivate.h" />
     <ClInclude Include="Helpers\StorageInfo.h" />

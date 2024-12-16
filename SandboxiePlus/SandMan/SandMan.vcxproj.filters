@@ -240,6 +240,9 @@
     <ClCompile Include="Helpers\TabOrder.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\IniHighlighter.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -396,6 +399,9 @@
     </QtMoc>
     <QtMoc Include="Windows\ExtractDialog.h">
       <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Helpers\IniHighlighter.h">
+      <Filter>Helpers</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

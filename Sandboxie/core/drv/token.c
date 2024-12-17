@@ -2007,7 +2007,7 @@ _FX NTSTATUS Token_Api_Filter(PROCESS* proc, ULONG64* parms)
     ProbeForWrite(pHandle, sizeof(HANDLE), sizeof(HANDLE));
 
     proc = Process_Find(ProcessId, &irql);
-    if (! proc) {
+    if (!proc || proc->terminated) {
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
         return STATUS_INVALID_CID;

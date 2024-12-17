@@ -406,8 +406,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                 if (ulOwnerPid)
                 {
                     proc = Process_Find((HANDLE)ulOwnerPid, NULL);  // is this a sandboxed process?
-                    if (proc && proc != PROCESS_TERMINATED &&
-                        !proc->ipc_allowSpoolerPrintToFile)   // if process specifically allowed to use spooler print to file, we can skip everything below
+                    if (proc && !proc->terminated && !proc->ipc_allowSpoolerPrintToFile)   // if process specifically allowed to use spooler print to file, we can skip everything below
                     {
                         FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
                         BOOLEAN     result = FALSE;

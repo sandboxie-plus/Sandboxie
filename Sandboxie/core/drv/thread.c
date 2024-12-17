@@ -1119,7 +1119,12 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                 KIRQL irql;
                 PROCESS* proc2 = Process_Find(pid, &irql);
 
-                if (proc2 && !proc2->bHostInject) {
+                //
+                // Process_CreateTerminated creates a process object without a box,
+                // in that case we need to ignore it.
+                //
+
+                if (proc2 && !proc2->box && !proc2->bHostInject) {
 
                     ACCESS_MASK WriteAccess;
                     if (EntireProcess)

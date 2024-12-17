@@ -237,9 +237,11 @@ void Process_Unload(BOOLEAN FreeLock);
 
 PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql);
 
+#ifdef XP_SUPPORT
 PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql);
+#endif
 
-PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql);
+//PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql);
 
 // Start supervising a new process
 

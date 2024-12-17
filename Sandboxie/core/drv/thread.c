@@ -1124,7 +1124,7 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                 // in that case we need to ignore it.
                 //
 
-                if (proc2 && !proc2->box && !proc2->bHostInject) {
+                if (proc2 && proc2->box && !proc2->bHostInject) {
 
                     ACCESS_MASK WriteAccess;
                     if (EntireProcess)

@@ -130,13 +130,32 @@ BOOL ProcessServer::KillProcess(ULONG ProcessId)
 {
     ULONG LastError = 0;
     BOOL ok = FALSE;
-    HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, ProcessId);
+    HANDLE hProcess = OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_LIMITED_INFORMATION, FALSE, ProcessId);
     if (! hProcess)
         LastError = GetLastError() * 10000;
     else {
-        ok = TerminateProcess(hProcess, DBG_TERMINATE_PROCESS);
-        if (! ok)
-            LastError = GetLastError();
+
+        //
+        // Bevore terminating any process, check if still its a sandboxed process as PID's get reused,
+        // but not as long as a handle is open, hence chacking after OpenProcess remains valid untill CloseHandle
+        // 
+        // also check if process was marked as critical process
+        //
+
+        if (!SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)ProcessId, 0))
+            ok = TRUE;
+        else {
+
+            NTSTATUS status;
+            ULONG breakOnTermination;
+            status = NtQueryInformationProcess(hProcess, ProcessBreakOnTermination, &breakOnTermination, sizeof(ULONG), NULL);
+            if (NT_SUCCESS(status) && !breakOnTermination) {
+
+                ok = TerminateProcess(hProcess, DBG_TERMINATE_PROCESS);
+                if (!ok)
+                    LastError = GetLastError();
+            }
+        }
         CloseHandle(hProcess);
     }
 
@@ -269,8 +288,8 @@ MSG_HEADER *ProcessServer::KillAllHandler(MSG_HEADER *msg)
 
     if (status != STATUS_INVALID_CID) // if this is true the caller is boxed, should be rpcss
         TerminateJob = FALSE; // if rpcss requests box termination, don't use the job method, fix-me: we get some stuck request in the queue
-    else
-        TerminateJob = !SbieApi_QueryConfBool(TargetBoxName, L"NoAddProcessToJob", FALSE);
+    else if (!SbieApi_QueryConfBool(TargetBoxName, L"NoAddProcessToJob", FALSE) && !SbieApi_QueryConfBool(TargetBoxName, L"NoSecurityIsolation", FALSE))
+        TerminateJob = SbieApi_QueryConfBool(TargetBoxName, L"TerminateJobObject", FALSE);
 
     //
     // match session id and box name

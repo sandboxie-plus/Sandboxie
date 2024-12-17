@@ -1173,12 +1173,28 @@ _FX NTSTATUS Process_Api_Kill(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status)) {
 
-        status = ObOpenObjectByPointer(ProcessObject, OBJ_KERNEL_HANDLE, NULL, PROCESS_TERMINATE, NULL, KernelMode, &handle);
+        status = ObOpenObjectByPointer(ProcessObject, OBJ_KERNEL_HANDLE, NULL, PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION | PROCESS_SET_INFORMATION, NULL, KernelMode, &handle);
         ObDereferenceObject(ProcessObject);
 
         if (NT_SUCCESS(status)) {
 
-            ZwTerminateProcess(handle, DBG_TERMINATE_PROCESS);
+            //
+            // Check and if needed clear critical process flag
+            //
+
+            ULONG breakOnTermination;
+            status = ZwQueryInformationProcess(handle, ProcessBreakOnTermination, &breakOnTermination, sizeof(ULONG), NULL);
+            if (NT_SUCCESS(status) && breakOnTermination) {
+                breakOnTermination = 0;
+                status = ZwSetInformationProcess(handle, ProcessBreakOnTermination, &breakOnTermination, sizeof(ULONG));
+            }
+
+            //
+            // Terminate
+            //
+
+            if (NT_SUCCESS(status))
+                ZwTerminateProcess(handle, DBG_TERMINATE_PROCESS);
             ZwClose(handle);
         }
     }

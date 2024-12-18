@@ -136,8 +136,8 @@ BOOL ProcessServer::KillProcess(ULONG ProcessId)
     else {
 
         //
-        // Bevore terminating any process, check if still its a sandboxed process as PID's get reused,
-        // but not as long as a handle is open, hence chacking after OpenProcess remains valid untill CloseHandle
+        // Before terminating any process, check if still its a sandboxed process as PID's get reused,
+        // but not as long as a handle is open, hence checking after OpenProcess remains valid until CloseHandle
         // 
         // also check if process was marked as critical process
         //

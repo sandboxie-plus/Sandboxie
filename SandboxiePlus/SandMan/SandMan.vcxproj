@@ -296,6 +296,7 @@
     <ClCompile Include="Engine\SysObject.cpp" />
     <ClCompile Include="Helpers\FindTool.cpp" />
     <ClCompile Include="Helpers\FullScreen.cpp" />
+    <ClCompile Include="Helpers\IniHighlighter.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChanges.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChangesPrivate.cpp" />
     <ClCompile Include="Helpers\StorageInfo.cpp" />

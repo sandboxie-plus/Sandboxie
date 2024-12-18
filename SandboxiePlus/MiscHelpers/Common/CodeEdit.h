@@ -12,6 +12,8 @@ public:
 
 	void				SetCode(const QString& Code)	{m_pSourceCode->setPlainText(Code);}
 	QString				GetCode()						{return m_pSourceCode->toPlainText();}
+	void				SetFont(const QFont& Font);
+	const QFont&		GetFont() const;
 
 signals:
 	void				textChanged();

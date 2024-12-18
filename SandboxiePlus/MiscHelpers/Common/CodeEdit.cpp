@@ -57,6 +57,16 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	m_pSourceCode->addAction(m_pUnComment);*/
 }
 
+void CCodeEdit::SetFont(const QFont& Font)
+{
+	m_pSourceCode->setFont(Font);
+}
+
+const QFont& CCodeEdit::GetFont() const
+{
+	return m_pSourceCode->font();
+}
+
 #define ADD_HISTORY(list,entry)	\
 	list.removeAll(entry);		\
 	list.prepend(entry);		\

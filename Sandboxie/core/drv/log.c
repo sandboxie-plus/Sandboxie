@@ -28,6 +28,15 @@
 #include "session.h"
 #include "conf.h"
 
+
+//---------------------------------------------------------------------------
+// Variables
+//---------------------------------------------------------------------------
+
+
+BOOLEAN Log_LogMessageEvents = FALSE;
+
+
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -156,7 +165,7 @@ _FX void Log_Popup_MsgEx(
 
     ULONG data = 0;
     
-    if (Conf_Get_Boolean(NULL, L"LogMessageEvents", 0, FALSE))
+    if (Log_LogMessageEvents)
         data |= 0x01;
 
     Api_SendServiceMessage(SVC_LOG_MESSAGE, sizeof(ULONG), &data);

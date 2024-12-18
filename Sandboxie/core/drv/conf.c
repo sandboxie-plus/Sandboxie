@@ -428,6 +428,12 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
         }
     }
 
+    //
+    // cache some config
+    //
+
+    Log_LogMessageEvents = Conf_Get_Boolean(NULL, L"LogMessageEvents", 0, FALSE);
+
     return status;
 }
 

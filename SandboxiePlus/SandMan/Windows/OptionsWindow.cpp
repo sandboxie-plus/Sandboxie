@@ -684,9 +684,11 @@ void COptionsWindow::ApplyIniEditFont()
 {
 	QFont font; // defaults to application font
 	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();
-	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
-	//ui.txtIniSection->setFont(font);
-	m_pCodeEdit->setFont(font);
+	if (!fontName.isEmpty()) {
+		font.fromString(fontName); // ignore fromString() fail
+		//ui.txtIniSection->setFont(font);
+		m_pCodeEdit->SetFont(font);
+	}
 }
 
 void COptionsWindow::OnSetTree()

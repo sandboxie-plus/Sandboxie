@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed BSOD "SYSTEM_SERVICE_EXCEPTION (3b)" when opening a DLL from AlertFolder using x64dbg [#4421](https://github.com/sandboxie-plus/Sandboxie/issues/4421)
 - fixed BSoD "CRITICAL_PROCESS_DIED" when terminate all sandboxed programs [#1316](https://github.com/sandboxie-plus/Sandboxie/issues/1316)
   - Note: we now terminate boxed processes individually instead of terminating using the job object, unless "TerminateJobObject=y" is set
+- fixed Ini Editor Font Selection Not Working After INI Highlighting Feature Added [#4429](https://github.com/sandboxie-plus/Sandboxie/issues/4429)
 
 
 

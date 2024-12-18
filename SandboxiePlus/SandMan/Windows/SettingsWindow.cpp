@@ -666,9 +666,11 @@ void CSettingsWindow::ApplyIniEditFont()
 {
 	QFont font; // defaults to application font
 	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();	
-	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
-	//ui.txtIniSection->setFont(font);
-	m_pCodeEdit->setFont(font);
+	if (!fontName.isEmpty()) {
+		font.fromString(fontName); // ignore fromString() fail
+	    //ui.txtIniSection->setFont(font);
+		m_pCodeEdit->SetFont(font);
+	}
 	ui.lblIniEditFont->setText(tr("%0, %1 pt").arg(font.family()).arg(font.pointSizeF())); // tr: example: "Calibri, 9.5 pt"
 }
 
@@ -676,7 +678,7 @@ void CSettingsWindow::OnSelectIniEditFont()
 {
 	bool ok;
 	//auto newFont = QFontDialog::getFont(&ok, ui.txtIniSection->font(), this);
-	auto newFont = QFontDialog::getFont(&ok, m_pCodeEdit->font(), this);
+	auto newFont = QFontDialog::getFont(&ok, m_pCodeEdit->GetFont(), this);
 	if (!ok) return;
 	theConf->SetValue("UIConfig/IniFont", newFont.toString());
 	ApplyIniEditFont();

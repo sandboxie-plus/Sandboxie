@@ -1211,7 +1211,7 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="OnlineUpdater.cpp" line="163"/>
         <source>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
 </context>
 <context>
@@ -10786,7 +10786,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
         <location filename="Forms/SettingsWindow.ui" line="2519"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Émettre un message 1321 lorsqu&apos;un processus a été forcé dans un bac</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2529"/>

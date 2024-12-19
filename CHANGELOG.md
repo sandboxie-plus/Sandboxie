@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.15.4 / 5.70.4] - 2024-12-??
+## [1.15.4 / 5.70.4] - 2024-12-19
 
 ### Added
 - added template for Joplin [#4402](https://github.com/sandboxie-plus/Sandboxie/pull/4402) (thanks offhub)

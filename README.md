@@ -145,6 +145,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 
 ## 🌏 Translators
 
+- czoins - Arabic
 - yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt - Simplified Chinese
 - TragicLifeHu, Hulen, xiongsp - Traditional Chinese
 - RockyTDR - Dutch
@@ -162,6 +163,5 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - xorcan, fmbxnary, offhub - Turkish
 - SuperMaxusa, lufog - Ukrainian
 - GunGunGun - Vietnamese
-- czoins - Arabic
 
 All translators are encouraged to look at the [Localization notes and tips](https://git.io/J9G19) before sending a translation.

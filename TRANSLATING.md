@@ -10,7 +10,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 | Language | Classic | Plus | Troubleshooting |
 |-|---------|------|---|
 |Albanian|Yes|No|No|
-|Arabic|Yes|No|No|
+|Arabic|Yes|Yes - Oct 23, 2024|No|
 |Bulgarian|Yes|No|No|
 |Croatian|Yes|No|No|
 |Czech|Yes|No|No|

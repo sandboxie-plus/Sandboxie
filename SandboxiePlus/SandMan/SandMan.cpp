@@ -452,7 +452,7 @@ void CSandMan::CreateMaintenanceMenu()
 				m_pImDiskCpl = m_pMaintenance->addAction(LoadWindowsIcon(ImDiskCpl, 0), tr("Virtual Disks"), this, [ImDiskCpl]() {
 					std::wstring imDiskCpl = ImDiskCpl.toStdWString();
 					SHELLEXECUTEINFOW si = { 0 };
-					si.cbSize = sizeof(SHELLEXECUTEINFO);
+					si.cbSize = sizeof(si);
 					si.lpVerb = L"runas";
 					si.lpFile = imDiskCpl.c_str();
 					si.nShow = SW_SHOW;
@@ -2425,8 +2425,8 @@ void CSandMan::OnStatusChanged()
 #endif
 
 	bool bConnected = theAPI->IsConnected();
-	m_pConnect->setEnabled(!bConnected);
-	m_pDisconnect->setEnabled(bConnected);
+	if (m_pConnect) m_pConnect->setEnabled(!bConnected);
+	if (m_pDisconnect) m_pDisconnect->setEnabled(bConnected);
 
 	if (bConnected)
 	{

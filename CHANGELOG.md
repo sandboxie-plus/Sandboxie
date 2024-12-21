@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.15.5 / 5.70.5] - 2024-12-??
+
+### Fixed
+- fixed crash when pressing run as admin with non advanced view
+
+
+
+
 ## [1.15.4 / 5.70.4] - 2024-12-19
 
 ### Added

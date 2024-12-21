@@ -162,5 +162,6 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - xorcan, fmbxnary, offhub - Turkish
 - SuperMaxusa, lufog - Ukrainian
 - GunGunGun - Vietnamese
+- czoins - Arabic
 
 All translators are encouraged to look at the [Localization notes and tips](https://git.io/J9G19) before sending a translation.

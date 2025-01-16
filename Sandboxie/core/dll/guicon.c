@@ -231,7 +231,8 @@ _FX BOOL Gui_ConnectConsole(ULONG ShowFlag)
 
                 DWORD pids[10]; // 2 should be enough but lets go with 10
 
-                while (1) {
+                int retries = 40; // 40*50ms=2s should be enough for the service to quit
+                while (retries--) {
 
                     Sleep(50);
 

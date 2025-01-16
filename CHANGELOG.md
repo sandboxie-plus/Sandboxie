@@ -10,7 +10,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed crash when pressing run as admin with non advanced view
+- fixed [Bug] WarFault.exe errors for all applications on the latest Win11 ARM [#4422](https://github.com/sandboxie-plus/Sandboxie/issues/4422)
+- fixed Could not run x64 in ARM64 PC. [#4415](https://github.com/sandboxie-plus/Sandboxie/issues/4415)
+- fixed issue with process self termination
 
+### Added
+- Added HookTrace=y to debug api hooking
 
 
 

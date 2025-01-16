@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Could not run x64 in ARM64 PC. [#4415](https://github.com/sandboxie-plus/Sandboxie/issues/4415)
 - fixed issue with process self termination
 - fixed msedge_elf.dll not found on windows 10 Arm64
+- fixed win10 ARM64 cannot be used [#3600](https://github.com/sandboxie-plus/Sandboxie/issues/3600)
 
 ### Added
 - Added HookTrace=y to debug api hooking

@@ -361,9 +361,9 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 
 	QString scan = pTemplate->GetText("Tmpl.Scan", QString(), false, false, true);
 	BOOL scanIpc = (scan.indexOf(L'i') != -1);
-	BOOL scanWin = (scan.indexOf(L'w') != -1);
-	BOOL scanSvc = (scan.indexOf(L's') != -1);
-	if (!(scanIpc || scanWin || scanSvc))
+	BOOL scanWindow = (scan.indexOf(L'w') != -1);
+	BOOL scanSoftware = (scan.indexOf(L's') != -1);
+	if (!(scanIpc || scanWindow || scanSoftware))
 		return false;
 
 	QList<QPair<QString, QString>> settings = pTemplate->GetIniSection(0, true);
@@ -386,7 +386,7 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 			if (CheckObjects(value))
 				return true;
 		}
-		else if (scanWin && ((setting.compare("OpenWinClass", Qt::CaseInsensitive) == 0 || setting.compare("Tmpl.ScanWinClass", Qt::CaseInsensitive) == 0)))
+		else if (scanWindow && ((setting.compare("OpenWinClass", Qt::CaseInsensitive) == 0 || setting.compare("Tmpl.ScanWinClass", Qt::CaseInsensitive) == 0)))
 		{
 			// skip to unspecific entries
 			if(value.left(2).compare("*:") == 0)
@@ -395,22 +395,22 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 			if (CheckClasses(value))
 				return true;
 		}
-		else if (scanSvc && setting.compare("Tmpl.ScanService", Qt::CaseInsensitive) == 0)
+		else if (scanSoftware && setting.compare("Tmpl.ScanService", Qt::CaseInsensitive) == 0)
 		{
 			if (CheckServices(value))
 				return true;
 		}
-		else if (scanSvc && setting.compare("Tmpl.ScanProduct", Qt::CaseInsensitive) == 0)
+		else if (scanSoftware && setting.compare("Tmpl.ScanProduct", Qt::CaseInsensitive) == 0)
 		{
 			if (CheckProducts(value))
 				return true;
 		}
-		else if (scanSvc && setting.compare("Tmpl.ScanKey", Qt::CaseInsensitive) == 0)
+		else if (scanSoftware && setting.compare("Tmpl.ScanKey", Qt::CaseInsensitive) == 0)
 		{
 			if (CheckRegistryKey(value))
 				return true;
 		}
-		else if (scanSvc && setting.compare("Tmpl.ScanFile", Qt::CaseInsensitive) == 0)
+		else if (scanSoftware && setting.compare("Tmpl.ScanFile", Qt::CaseInsensitive) == 0)
 		{
 			if (CheckFile(ExpandPath(value)))
 				return true;

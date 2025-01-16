@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed [Bug] WarFault.exe errors for all applications on the latest Win11 ARM [#4422](https://github.com/sandboxie-plus/Sandboxie/issues/4422)
 - fixed Could not run x64 in ARM64 PC. [#4415](https://github.com/sandboxie-plus/Sandboxie/issues/4415)
 - fixed issue with process self termination
+- fixed msedge_elf.dll not found on windows 10 Arm64
 
 ### Added
 - Added HookTrace=y to debug api hooking

@@ -2498,7 +2498,31 @@ _FX NTSTATUS File_NtOpenFile(
     ULONG ShareAccess,
     ULONG OpenOptions)
 {
-    NTSTATUS status = File_NtCreateFileImpl(
+    NTSTATUS status;
+
+#ifdef _M_ARM64EC
+
+    //
+	// TODO: Fix-Me:
+    // In ARM64EC xtajit64.dll calls NtOpenFile and when this happens __chkstk_arm64ec
+	// crashes causing a stack overflow. To avoid this we call NtOpenFile directly.
+    //
+
+    extern UINT_PTR Dll_xtajit64;
+    ULONG_PTR pRetAddr = (ULONG_PTR)_ReturnAddress();
+
+    if (pRetAddr > Dll_xtajit64 && pRetAddr < Dll_xtajit64 + 0x180000) {
+
+        //SbieApi_Log(2301, L"NtOpenFile bypass on ARM64EC for %S", 
+        // ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer ? ObjectAttributes->ObjectName->Buffer : L"[UNNAMED]");
+
+        status = __sys_NtOpenFile(
+            FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
+            ShareAccess, OpenOptions);
+    } else
+#endif
+
+    status = File_NtCreateFileImpl(
         FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
         NULL, 0, ShareAccess, FILE_OPEN, OpenOptions, NULL, 0);
 
@@ -2923,7 +2947,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
         }
     }
 
-    if (Dll_ApiTrace) {
+    if (Dll_ApiTrace || Dll_FileTrace) {
         WCHAR trace_str[2048];
         ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtCreateFileImpl %s DesiredAccess=0x%08X CreateDisposition=0x%08X CreateOptions=0x%08X", TruePath, DesiredAccess, CreateDisposition, CreateOptions);
         SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
@@ -4086,7 +4110,7 @@ ReparseLoop:
         status = GetExceptionCode();
     }
 
-    if (Dll_ApiTrace) {
+    if (Dll_ApiTrace || Dll_FileTrace) {
         WCHAR trace_str[2048];
         ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtCreateFileImpl status = 0x%08X", status);
         SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
@@ -5590,7 +5614,7 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
         ObjectAttributes->RootDirectory, ObjectAttributes->ObjectName,
         &TruePath, &CopyPath, &FileFlags);
 
-    if (Dll_ApiTrace) {
+    if (Dll_ApiTrace || Dll_FileTrace) {
         WCHAR trace_str[2048];
         ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtQueryFullAttributesFileImpl %s", TruePath);
         SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
@@ -5792,7 +5816,7 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
         status = STATUS_OBJECT_NAME_INVALID;
     }
 
-    if (Dll_ApiTrace) {
+    if (Dll_ApiTrace || Dll_FileTrace) {
         WCHAR trace_str[2048];
         ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtQueryFullAttributesFileImpl status = 0x%08X", status);
         SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
@@ -6118,7 +6142,7 @@ _FX ULONG File_GetFinalPathNameByHandleW(
         err = GetLastError();
     }
 
-    if (Dll_ApiTrace) {
+    if (Dll_ApiTrace || Dll_FileTrace) {
         WCHAR trace_str[2048];
         ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_GetFinalPathNameByHandleW %s", lpszFilePath);
         SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);

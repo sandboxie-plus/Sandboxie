@@ -326,6 +326,7 @@ extern const WCHAR *Scm_CryptSvc;
 
 extern BOOLEAN Dll_SbieTrace;
 extern BOOLEAN Dll_ApiTrace;
+extern BOOLEAN Dll_FileTrace;
 
 
 //---------------------------------------------------------------------------

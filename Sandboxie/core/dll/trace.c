@@ -66,6 +66,7 @@ static P_OutputDebugString          __sys_OutputDebugStringA        = NULL;
 
 BOOLEAN Dll_SbieTrace = FALSE;
 BOOLEAN Dll_ApiTrace = FALSE;
+BOOLEAN Dll_FileTrace = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -78,6 +79,8 @@ _FX int Trace_Init(void)
     Dll_SbieTrace = SbieApi_QueryConfBool(NULL, L"SbieTrace", FALSE);
 
     Dll_ApiTrace = Config_GetSettingsForImageName_bool(L"ApiTrace", FALSE);
+
+    Dll_FileTrace = Config_GetSettingsForImageName_bool(L"FileTrace", FALSE);
 
     if (SbieApi_QueryConfBool(NULL, L"ErrorTrace", FALSE)) {
 

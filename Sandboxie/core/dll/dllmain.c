@@ -97,6 +97,7 @@ BOOLEAN Dll_IsWow64 = FALSE;
 #endif
 #ifdef _M_ARM64EC
 BOOLEAN Dll_IsArm64ec = FALSE;
+void* Dll_xtajit64 = NULL;
 #endif
 #ifndef _WIN64
 BOOLEAN Dll_IsXtAjit = FALSE;
@@ -815,6 +816,7 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
 #endif
 #ifdef _M_ARM64EC
     Dll_IsArm64ec = data->flags.is_arm64ec == 1; // x64 on arm64
+	Dll_xtajit64 = GetModuleHandle(L"xtajit64.dll");
 #endif
 #ifndef _WIN64
     Dll_IsXtAjit = data->flags.is_xtajit == 1; // x86 on arm64

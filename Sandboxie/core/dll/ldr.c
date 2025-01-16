@@ -141,7 +141,7 @@ typedef NTSTATUS(*P_LdrQueryImageFileExecutionOptions)(
 typedef ULONG_PTR(*P_NtApphelpCacheControl)(
     ULONG_PTR Unknown1, ULONG_PTR Unknown2);
 
-typedef NTSTATUS(*P_NtTerminateProcess)(HANDLE ProcessHandle, NTSTATUS ExitStatus);
+//typedef NTSTATUS(*P_NtTerminateProcess)(HANDLE ProcessHandle, NTSTATUS ExitStatus);
 
 typedef NTSTATUS(*P_NtLoadDriver)(UNICODE_STRING *RegistryPath);
 
@@ -155,7 +155,7 @@ typedef void(*P_Ldr_CallOneDllCallback)(const UCHAR *ImageNameA, ULONG_PTR Image
 static P_LdrRegisterDllNotification __sys_LdrRegisterDllNotification = NULL;
 static P_LdrUnregisterDllNotification __sys_LdrUnregisterDllNotification = NULL;
 
-static P_NtTerminateProcess     __sys_NtTerminateProcess = NULL;
+//static P_NtTerminateProcess     __sys_NtTerminateProcess = NULL;
 
 static P_LdrLockLoaderLock      __sys_LdrLockLoaderLock = NULL;
 static P_LdrUnlockLoaderLock    __sys_LdrUnlockLoaderLock = NULL;
@@ -218,6 +218,7 @@ static DLL Ldr_Dlls[] = {
     { L"uxtheme.dll",           SH32_Init_UxTheme,              0}, // explorer.exe, SetWindowThemeAttribute
     { L"hnetcfg.dll",           HNet_Init,                      0}, // firewall workaround
     { L"winnsi.dll",            NsiRpc_Init,                    0}, // WININET workaround
+//    { L"wininet.dll",           Wininet_Init,                   0},
     { L"nsi.dll",               Nsi_Init,                       0},
     { L"advpack.dll",           Proc_Init_AdvPack,              0}, // fix for IE
     { L"dwrite.dll",            Scm_DWriteDll,                  0}, // hack for IE 9, make sure FontCache is running
@@ -259,23 +260,23 @@ static BOOLEAN Ldr_DynamicImageDetection = FALSE;
 #include "ldr_init.c"
 
 
-NTSTATUS Ldr_NtTerminateProcess(HANDLE  ProcessHandle, NTSTATUS ExitStatus)
-{
-    NTSTATUS rc;
-
-    // ProcessHandle is optional. Unregister callback when current process is terminating
-    if (!ProcessHandle
-        || ProcessHandle == NtCurrentProcess()
-        || GetCurrentProcessId() == GetProcessId(ProcessHandle)
-        )
-    {
-        __sys_LdrUnregisterDllNotification(LdrLoaderCookie);
-    }
-
-    rc = __sys_NtTerminateProcess(ProcessHandle, ExitStatus);
-
-    return rc;
-}
+//NTSTATUS Ldr_NtTerminateProcess(HANDLE  ProcessHandle, NTSTATUS ExitStatus)
+//{
+//    NTSTATUS rc;
+//
+//    // ProcessHandle is optional. Unregister callback when current process is terminating
+//    if (!ProcessHandle
+//        || ProcessHandle == NtCurrentProcess()
+//        || GetCurrentProcessId() == GetProcessId(ProcessHandle)
+//        )
+//    {
+//        __sys_LdrUnregisterDllNotification(LdrLoaderCookie);
+//    }
+//
+//    rc = __sys_NtTerminateProcess(ProcessHandle, ExitStatus);
+//
+//    return rc;
+//}
 
 //---------------------------------------------------------------------------
 
@@ -432,7 +433,9 @@ _FX BOOLEAN Ldr_Init()
     if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
         NTSTATUS rc = 0;
 
-        void *NtTerminateProcess = (P_NtTerminateProcess)GetProcAddress(Dll_Ntdll, "NtTerminateProcess");
+        //void *NtTerminateProcess = (P_NtTerminateProcess)GetProcAddress(Dll_Ntdll, "NtTerminateProcess");
+
+        // this functions are available since windows vista
         __sys_LdrRegisterDllNotification = (P_LdrRegisterDllNotification)GetProcAddress(Dll_Ntdll, "LdrRegisterDllNotification");
         __sys_LdrUnregisterDllNotification = (P_LdrUnregisterDllNotification)GetProcAddress(Dll_Ntdll, "LdrUnregisterDllNotification");
 
@@ -448,7 +451,8 @@ _FX BOOLEAN Ldr_Init()
             return FALSE;
         }
 
-        SBIEDLL_HOOK(Ldr_, NtTerminateProcess);
+        // Todo: Fix-Me: this hangs some processes on arm64
+        //SBIEDLL_HOOK(Ldr_, NtTerminateProcess);
         SBIEDLL_HOOK(Ldr_Win10_, LdrLoadDll);
     }
     else { // Windows 8 and before

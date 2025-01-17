@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.5 / 5.70.5] - 2025-01-??
 
+### Added
+- added 'HookTrace=y' to debug API hooking
+
 ### Fixed
 - fixed crash when pressing run as admin with non-advanced view
 - fixed WarFault.exe errors for all applications on the latest Windows 11 ARM64 [#4422](https://github.com/sandboxie-plus/Sandboxie/issues/4422)
@@ -16,9 +19,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed msedge_elf.dll not found on Windows 10 ARM64
 - fixed Windows 10 ARM64 compatibility issue [#3600](https://github.com/sandboxie-plus/Sandboxie/issues/3600)
 - fixed infinite loop when Gui_ConnectConsole waits for SbieSvc.exe to quit [#4462](https://github.com/sandboxie-plus/Sandboxie/pull/4462) (thanks bot-1450)
-
-### Added
-- added HookTrace=y to debug api hooking
 
 
 

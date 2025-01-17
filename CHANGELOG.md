@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed crash when pressing run as admin with non-advanced view
-- fixed WarFault.exe errors for all applications on the latest Windows 11 ARM64 [#4422](https://github.com/sandboxie-plus/Sandboxie/issues/4422)
+- fixed WerFault.exe errors for all applications on the latest Windows 11 ARM64 [#4422](https://github.com/sandboxie-plus/Sandboxie/issues/4422)
 - fixed issue preventing x64 executables from running on ARM64 [#4415](https://github.com/sandboxie-plus/Sandboxie/issues/4415)
 - fixed issue with process self-termination
 - fixed msedge_elf.dll not found on Windows 10 ARM64

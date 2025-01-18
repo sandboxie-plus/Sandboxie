@@ -153,6 +153,7 @@ Filename: "{app}\Start.exe"; Parameters: "open_agent:sandman.exe"; Description: 
 Type: dirifempty; Name: "{app}"
 Type: files; Name: "{localappdata}\{#MyAppName}\addons.json"
 Type: dirifempty; Name: "{localappdata}\{#MyAppName}"
+Type: dirifempty; Name: "{localappdata}\Xanasoft\{#MyAppName}"
 Type: files; Name: "{localappdata}\Temp\qtsingleapp-sandma-*"
 Type: dirifempty; Name: "{localappdata}\Temp\sandboxie-updater"
 

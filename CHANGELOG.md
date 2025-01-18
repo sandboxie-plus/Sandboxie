@@ -12,8 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added 'HookTrace=y' to debug API hooking
 
 ### Changed
-- moved Sandboxie-Plus data folder from C:\Users\[User]\AppData\Local\Sandboxie-Plus to C:\Users\[User]\AppData\Local\Xanasoft\Sandboxie-Plus
-  - note: the folder will be moved automatically, when downgrading to an older version you woul need to move it back manually.
+- moved Sandboxie-Plus data folder from C:\\Users\\[User]\\AppData\\Local\\Sandboxie-Plus to C:\\Users\\[User]\\AppData\\Local\\Xanasoft\\Sandboxie-Plus
+  - Note: the folder will be moved automatically, when downgrading to an older version you would need to move it back manually.
 
 ### Fixed
 - fixed crash when pressing run as admin with non-advanced view

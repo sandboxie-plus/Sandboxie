@@ -29,8 +29,25 @@ int main(int argc, char *argv[])
 	QString ConfDir = AppDir + "\\PlusData";
 	if(!QFile::exists(ConfDir))
 		ConfDir = AppDir;
+	else // todo: Remove import at some later point
+	{
+		QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+		if (dirs.count() > 2) { // Note: last 2 are AppDir and AppDir/data
+			QString OldPath;
+			QString NewPath;
+			if (dirs.count() > 3 && QFile::exists((OldPath = dirs[1] + "/Sandboxie-Plus") + "/Sandboxie-Plus.ini"))
+				NewPath = dirs[1] + "/Xanasoft";
+			else if (QFile::exists((OldPath = dirs[0] + "/Sandboxie-Plus") + "/Sandboxie-Plus.ini"))
+				NewPath = dirs[0] + "/Xanasoft";
+		
+			if (!NewPath.isEmpty() && !QFile::exists(NewPath + "/Sandboxie-Plus" + "/Sandboxie-Plus.ini")){
+				QDir().mkpath(NewPath);
+				QDir().rename(OldPath, NewPath + "/Sandboxie-Plus");
+			}
+		}
+	}
 	// use a shared setting location when used in a business environment for easier administration
-	theConf = new CSettings(ConfDir, "Sandboxie-Plus");
+	theConf = new CSettings(ConfDir, "Xanasoft", "Sandboxie-Plus");
 
 #ifndef _DEBUG
 	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());

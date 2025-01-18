@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added 'HookTrace=y' to debug API hooking
 
+### Changed
+- moved Sandboxie-Plus data folder from C:\Users\[User]\AppData\Local\Sandboxie-Plus to C:\Users\[User]\AppData\Local\Xanasoft\Sandboxie-Plus
+  - note: the folder will be moved automatically, when downgrading to an older version you woul need to move it back manually.
+
 ### Fixed
 - fixed crash when pressing run as admin with non-advanced view
 - fixed WerFault.exe errors for all applications on the latest Windows 11 ARM64 [#4422](https://github.com/sandboxie-plus/Sandboxie/issues/4422)

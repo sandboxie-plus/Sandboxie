@@ -4263,12 +4263,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3549"/>
         <source>Executing maintenance operation, please wait...</source>
-        <translation>正在执行操作维护，请稍候...</translation>
+        <translation>正在执行维护操作，请稍候...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3670"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation>在 Plus 视图，此功能已被整合到主沙盒列表中</translation>
+        <translation>在 Plus 视图中，此功能已被整合到主沙盒列表视图</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3671"/>
@@ -4288,13 +4288,13 @@ No will choose: %2</source>
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
-        <translation>您正准备编辑模板配置文件, 但通常不推荐这么做
-因为该文件是 Sandboxie 的一部分并且所有的更改会在下次更新时被重置</translation>
+        <translation>您正准备编辑模板配置文件(Templates.ini), 但通常不推荐这么做
+因为该文件是 Sandboxie 的一部分并且所有的更改都将会在下次更新时被丢弃</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3840"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation>当文件被保存时，将自动应用更改</translation>
+        <translation>更改将在文件被保存时被自动应用</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3841"/>
@@ -4324,7 +4324,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4038"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
-        <translation>发现不兼容的 Sandboxie %1，其它兼容的版本：%2</translation>
+        <translation>发现不兼容的 Sandboxie %1，兼容的版本：%2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4039"/>
@@ -4525,12 +4525,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2957"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
-        <translation>沙盒 %1 被指定为仅对项目赞助者开放的功能。</translation>
+        <translation>沙盒 %1 被设置为仅对项目赞助者开放的功能。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2962"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation>沙盒 %1 被指定为需要更高级赞助许可证的功能。</translation>
+        <translation>沙盒 %1 被设置为需要更高级赞助许可证的功能。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2964"/>
@@ -4541,7 +4541,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="3051"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation>选择的功能需要更高级赞助许可证。</translation>
+        <translation>选择的功能需要高级赞助许可证。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3053"/>
@@ -4556,7 +4556,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="3103"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation>您尝试使用的证书已被阻止，这意味着它已因故失效。任何使用该证书的企图都构成对使用条款的违反！</translation>
+        <translation>您尝试使用的证书已被封禁，这意味着它已因故失效。任何使用该证书的企图都构成对其使用条款的违反！</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3115"/>
@@ -4566,18 +4566,18 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="3116"/>
         <source>The Certificate is not suitable for this product.</source>
-        <translation>证书不适用于本产品。</translation>
+        <translation>该证书不适用于本产品。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3117"/>
         <source>The Certificate is node locked.</source>
-        <translation>证书已被节点锁定。</translation>
+        <translation>该证书已被节点锁定。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3121"/>
         <source>The support certificate is not valid.
 Error: %1</source>
-        <translation>赞助者证书无效。
+        <translation>该赞助者证书无效。
 错误：%1</translation>
     </message>
     <message>
@@ -4590,7 +4590,7 @@ Error: %1</source>
         <location filename="SandMan.cpp" line="3294"/>
         <location filename="SandMan.cpp" line="3319"/>
         <source>Don&apos;t ask in future</source>
-        <translation>此后不再询问</translation>
+        <translation>不再询问</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3318"/>
@@ -4745,7 +4745,7 @@ Error: %1</source>
     <message>
         <location filename="SbieFindWnd.cpp" line="204"/>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation>Sandboxie-Plus - 窗口探查器</translation>
+        <translation>Sandboxie-Plus - 窗口查找器</translation>
     </message>
     <message>
         <location filename="main.cpp" line="205"/>

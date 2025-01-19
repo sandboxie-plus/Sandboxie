@@ -4369,7 +4369,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Sandboxie-Plus - Поиск окна</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="188"/>
+        <location filename="main.cpp" line="205"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager нельзя запускать в песочнице!</translation>
     </message>

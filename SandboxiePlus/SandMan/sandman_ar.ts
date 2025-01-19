@@ -4433,7 +4433,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Sandboxie-Plus - أداة البحث عن النوافذ</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="188"/>
+        <location filename="main.cpp" line="205"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>لا يمكن تشغيل مدير Sandboxie في صندوق عزل!</translation>
     </message>

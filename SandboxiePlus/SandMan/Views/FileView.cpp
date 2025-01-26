@@ -369,27 +369,30 @@ void CFileView::OnFileMenu(const QPoint&)
                 break;
         case MENU_RECOVER:
         {
-            QStringList AllFiles;
+            QList<StrPair> AllFiles;
             foreach(const QString& File, Files)
             {
                 if (File.right(1) == "\\") {
+                    int pos = File.lastIndexOf("\\", File.length()-2) + 1;
                     foreach(QString SubFile, ListDir(File))
-                        AllFiles.append(File + SubFile.replace("/", "\\"));
+                        AllFiles.append({ File.left(pos), (File + SubFile.replace("/", "\\")).mid(pos) });
                 }
                 else
-                    AllFiles.append(File);
+                {
+                    int pos = File.lastIndexOf("\\") + 1;
+                    AllFiles.append({ File.left(pos), File.mid(pos) });
+                }
             }
 
             QList<QPair<QString, QString>> FileList;
-            foreach(QString BoxedPath, AllFiles) 
+            foreach(const StrPair& Pair, AllFiles) 
             {
                 if (!RecoveryFolder.isEmpty()) {
-                    QString FileName = BoxedPath.mid(BoxedPath.lastIndexOf("\\") + 1);
-                    FileList.append(qMakePair(BoxedPath, RecoveryFolder + "\\" + FileName));
+                    FileList.append(qMakePair(Pair.first + Pair.second, RecoveryFolder + "\\" + Pair.second));
                 }
                 else {
-                    QString RealPath = theAPI->GetRealPath(m_pBox.data(), BoxedPath);
-                    FileList.append(qMakePair(BoxedPath, RealPath));
+                    QString RealPath = theAPI->GetRealPath(m_pBox.data(), Pair.first + Pair.second);
+                    FileList.append(qMakePair(Pair.first + Pair.second, RealPath));
                 }
             }
 

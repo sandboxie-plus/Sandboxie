@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Program icon not displayed when command path in RunCommand setting contains spaces [#4416](https://github.com/sandboxie-plus/Sandboxie/issues/4416)
 - fixed Template scanning is not working properly [#4401](https://github.com/sandboxie-plus/Sandboxie/issues/4401)
 - fixed credentials dialog does not display when connecting to rdp server by mstsc.exe in encrypted box [#4389](https://github.com/sandboxie-plus/Sandboxie/issues/4389)
+- fixed Recovering a folder only moves the files inside that folder [#4453](https://github.com/sandboxie-plus/Sandboxie/issues/4453)
 
 
 

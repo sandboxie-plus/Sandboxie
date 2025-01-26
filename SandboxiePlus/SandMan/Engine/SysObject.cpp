@@ -464,8 +464,8 @@ QJSValue JSysObject::execute(const QString& Path, const QVariant& Arguments, con
     if (Options["elevate"].toBool())
     {
         SHELLEXECUTEINFOW shex;
-        memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
-        shex.cbSize = sizeof(SHELLEXECUTEINFO);
+        memset(&shex, 0, sizeof(shex));
+        shex.cbSize = sizeof(shex);
         shex.fMask = SEE_MASK_NOCLOSEPROCESS;
         if(nShow == SW_HIDE) 
             shex.fMask |= SEE_MASK_FLAG_NO_UI;

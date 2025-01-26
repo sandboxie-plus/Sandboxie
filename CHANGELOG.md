@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Windows 10 ARM64 compatibility issue [#3600](https://github.com/sandboxie-plus/Sandboxie/issues/3600)
 - fixed infinite loop when Gui_ConnectConsole waits for SbieSvc.exe to quit [#4462](https://github.com/sandboxie-plus/Sandboxie/pull/4462) (thanks bot-1450)
 - fixed Program icon not displayed when command path in RunCommand setting contains spaces [#4416](https://github.com/sandboxie-plus/Sandboxie/issues/4416)
+- fixed Template scanning is not working properly [#4401](https://github.com/sandboxie-plus/Sandboxie/issues/4401)
 
 
 

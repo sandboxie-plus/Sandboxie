@@ -1318,8 +1318,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			params += L" \"" + theAPI->GetStartPath().toStdWString() + L" /box:" + SandBoxes.first()->GetName().toStdWString() + L" mount_hive\"";
 
 		SHELLEXECUTEINFOW shex;
-		memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
-		shex.cbSize = sizeof(SHELLEXECUTEINFO);
+		memset(&shex, 0, sizeof(shex));
+		shex.cbSize = sizeof(shex);
 		shex.fMask = SEE_MASK_FLAG_NO_UI;
 		shex.hwnd = NULL;
 		shex.lpFile = path.c_str();

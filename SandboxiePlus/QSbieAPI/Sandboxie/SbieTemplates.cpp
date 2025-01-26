@@ -294,36 +294,40 @@ void CSbieTemplates::CollectProducts()
 
 	m_Products.clear();
 
-	ULONG DesiredAccess = KEY_READ;
-	for(;;)
+	QList<HKEY> Roots = QList<HKEY>() << HKEY_LOCAL_MACHINE << HKEY_CURRENT_USER;
+	for (auto Root : Roots) 
 	{
-		HKEY hkey;
-		LONG rc = RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", 0, DesiredAccess, &hkey);
-		if (rc != 0)
-			continue;
-		
-		WCHAR name[128];
-		for(ULONG index = 0; rc != ERROR_NO_MORE_ITEMS; index++)
+		ULONG DesiredAccess = KEY_READ;
+		for (;;)
 		{
-			ULONG name_len = 120;
-			rc = RegEnumKeyExW(hkey, index, name, &name_len, NULL, NULL, NULL, NULL);
-			if (rc == 0) {
-				_wcslwr(name);
-				m_Products.append(QString::fromWCharArray(name));
-			}
-		}
+			HKEY hkey;
+			LONG rc = RegOpenKeyExW(Root, L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", 0, DesiredAccess, &hkey);
+			if (rc != 0)
+				continue;
 
-		RegCloseKey(hkey);
-		
+			WCHAR name[128];
+			for (ULONG index = 0; rc != ERROR_NO_MORE_ITEMS; index++)
+			{
+				ULONG name_len = 120;
+				rc = RegEnumKeyExW(hkey, index, name, &name_len, NULL, NULL, NULL, NULL);
+				if (rc == 0) {
+					_wcslwr(name);
+					m_Products.append(QString::fromWCharArray(name));
+				}
+			}
+
+			RegCloseKey(hkey);
+
 #ifdef _WIN64
-		if (DesiredAccess & KEY_WOW64_32KEY)
-			break;
-		DesiredAccess |= KEY_WOW64_32KEY;
+			if (DesiredAccess & KEY_WOW64_32KEY)
+				break;
+			DesiredAccess |= KEY_WOW64_32KEY;
 #else // ! _WIN64
-		if (!is64BitOperatingSystem || (DesiredAccess & KEY_WOW64_64KEY))
-			break;
-		DesiredAccess |= KEY_WOW64_64KEY;
+			if (!is64BitOperatingSystem || (DesiredAccess & KEY_WOW64_64KEY))
+				break;
+			DesiredAccess |= KEY_WOW64_64KEY;
 #endif _WIN64
+		}
 	}
 }
 
@@ -422,15 +426,19 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 
 bool CSbieTemplates::CheckRegistryKey(const QString& Value)
 {
-	std::wstring keypath = Value.toStdWString();
+	QString KeyPath = Value;
 
-	if (keypath.find(L"HKEY_LOCAL_MACHINE") == 0)		keypath.replace(0, wcslen(L"HKEY_LOCAL_MACHINE"), L"\\REGISTRY\\MACHINE");
-	else if (keypath.find(L"HKEY_CLASSES_ROOT") == 0)	keypath.replace(0, wcslen(L"HKEY_CLASSES_ROOT"), L"\\REGISTRY\\MACHINE\\SOFTWARE\\Classes");
-	//else if (keypath.find(L"HKEY_CURRENT_USER") == 0)	keypath.replace(0, wcslen(L"HKEY_CURRENT_USER"), L"\\REGISTRY\\USER" + SID);
-	else if (keypath.find(L"HKEY_USERS") == 0)			keypath.replace(0, wcslen(L"HKEY_USERS"), L"\\REGISTRY\\USER");
-	//else if (keypath.find(L"HKEY_CURRENT_CONFIG") == 0) keypath.replace(0, wcslen(L"HKEY_CURRENT_CONFIG"), L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Hardware Profiles\\Current");
-	else 
+	if (KeyPath.startsWith("HKEY_LOCAL_MACHINE", Qt::CaseInsensitive))			KeyPath.replace(0, 18, "\\REGISTRY\\MACHINE");
+	else if (KeyPath.startsWith("HKEY_CLASSES_ROOT", Qt::CaseInsensitive))		KeyPath.replace(0, 17, "\\REGISTRY\\MACHINE\\SOFTWARE\\Classes");
+	else if (KeyPath.startsWith("HKEY_CURRENT_USER", Qt::CaseInsensitive))		KeyPath.replace(0, 17, "\\REGISTRY\\USER\\" + m_pAPI->GetCurrentUserSid());
+	else if (KeyPath.startsWith("HKEY_USERS", Qt::CaseInsensitive))				KeyPath.replace(0, 10, "\\REGISTRY\\USER");
+	//else if (KeyPath.startsWith("HKEY_CURRENT_CONFIG", Qt::CaseInsensitive))	KeyPath.replace(0, 19, "\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Hardware Profiles\\Current");
+	else if(!KeyPath.startsWith("\\REGISTRY\\", Qt::CaseInsensitive))
 		return false;
+
+	qDebug() << Value << KeyPath;
+
+	std::wstring keypath = KeyPath.toStdWString();
 
 	OBJECT_ATTRIBUTES objattrs;
 	UNICODE_STRING objname;

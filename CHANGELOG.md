@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Recovering a folder only moves the files inside that folder [#4453](https://github.com/sandboxie-plus/Sandboxie/issues/4453)
 - fixed Failure to query file properties causes program exceptions [#4457](https://github.com/sandboxie-plus/Sandboxie/issues/4457) (thanks lmou523)
 - fixed Applications may crash when IP is not defined for the domain name in DNS Filtering [#4475](https://github.com/sandboxie-plus/Sandboxie/issues/4475)
+- Some files don't get written to when launching from "Run Program" menu [#4398](https://github.com/sandboxie-plus/Sandboxie/issues/4398)
 
 
 

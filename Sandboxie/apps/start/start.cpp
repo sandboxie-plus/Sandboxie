@@ -84,6 +84,7 @@ WCHAR BoxName[BOXNAME_COUNT];
 WCHAR BoxKey[128+1];
 
 PWSTR ChildCmdLine = NULL;
+PWSTR ChildWrkDir = NULL;
 BOOL run_mail_agent = FALSE;
 BOOL display_run_dialog = FALSE;
 int display_start_menu = 0;
@@ -1146,14 +1147,19 @@ int Program_Start(void)
     // change to target directory
     //
 
-    curdir = (WCHAR *)MyHeapAlloc(1024 * sizeof(WCHAR));
-    if (GetEnvironmentVariable(
-                    L"00000000_" SBIE L"_CURRENT_DIRECTORY", curdir, 1020)) {
+    if (!ChildWrkDir) {
+        curdir = (WCHAR*)MyHeapAlloc(1024 * sizeof(WCHAR));
+        if (GetEnvironmentVariable(
+            L"00000000_" SBIE L"_CURRENT_DIRECTORY", curdir, 1020)) {
 
-        SetCurrentDirectory(curdir);
-        SetEnvironmentVariable(
-                    L"00000000_" SBIE L"_CURRENT_DIRECTORY", NULL);
+            ChildWrkDir = curdir;
+            SetEnvironmentVariable(
+                L"00000000_" SBIE L"_CURRENT_DIRECTORY", NULL);
+        }
     }
+
+    if(ChildWrkDir)
+        SetCurrentDirectory(ChildWrkDir);
 
     //
     // service programs expect to be started by CreateProcess, and may not
@@ -1935,6 +1941,18 @@ int __stdcall WinMainCRTStartup(
         if (display_run_dialog) {
             MyCoInitialize();
             ChildCmdLine = DoRunDialog(GetModuleHandle(NULL));
+            if (ChildCmdLine)
+            {
+                PWSTR pBegin = ChildCmdLine;
+                PWSTR pEnd = Eat_String(ChildCmdLine);
+                if (*ChildCmdLine == L'\"' && pEnd - ChildCmdLine > 2)
+                    pBegin++;
+				while (pBegin < --pEnd && *pEnd != L'\\');
+				
+				ChildWrkDir = (WCHAR *)HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, (pEnd - pBegin + 2) * sizeof(WCHAR));
+				wmemcpy(ChildWrkDir, pBegin, pEnd - pBegin + 1);
+				ChildWrkDir[pEnd - pBegin] = L'\0';
+            }
         } else if (execute_open_with) {
             MyCoInitialize();
             WCHAR* CmdLine = DoRunDialog(GetModuleHandle(NULL));

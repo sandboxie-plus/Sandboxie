@@ -1148,6 +1148,8 @@ void CSandBoxPlus::OnCancelAsync()
 QString CSandBoxPlus::MakeBoxCommand(const QString& FileName)
 {
 	QString BoxFileName = FileName;
+	if (BoxFileName.contains(" "))
+		BoxFileName = "\"" + BoxFileName + "\"";
 	//if (BoxFileName.indexOf(m_FilePath, Qt::CaseInsensitive) == 0) {
 	//	BoxFileName.remove(0, m_FilePath.length());
 	//	if (BoxFileName.at(0) != '\\')

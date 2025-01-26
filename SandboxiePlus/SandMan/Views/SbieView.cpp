@@ -198,6 +198,10 @@ void CSbieView::CreateMenu()
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenuBox->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
 	m_pMenuBox->addSeparator();
+	m_pMenuMount = m_pMenuBox->addAction(CSandMan::GetIcon("LockOpen"), tr("Mount Box Image"), this, SLOT(OnSandBoxAction()));
+	m_pMenuUnmount = m_pMenuBox->addAction(CSandMan::GetIcon("LockClosed"), tr("Unmount Box Image"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRecover = m_pMenuBox->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
+	m_pMenuCleanUp = m_pMenuBox->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuContent = m_pMenuBox->addMenu(CSandMan::GetIcon("Compatibility"), tr("Box Content"));
 		m_pMenuBrowse = m_pMenuContent->addAction(CSandMan::GetIcon("Folder"), tr("Browse Files"), this, SLOT(OnSandBoxAction()));
 		m_pMenuContent->addSeparator();
@@ -207,10 +211,6 @@ void CSbieView::CreateMenu()
 		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
 	m_pMenuSnapshots = m_pMenuBox->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
-	m_pMenuMount = m_pMenuBox->addAction(CSandMan::GetIcon("LockOpen"), tr("Mount Box Image"), this, SLOT(OnSandBoxAction()));
-	m_pMenuUnmount = m_pMenuBox->addAction(CSandMan::GetIcon("LockClosed"), tr("Unmount Box Image"), this, SLOT(OnSandBoxAction()));
-	m_pMenuRecover = m_pMenuBox->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
-	m_pMenuCleanUp = m_pMenuBox->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuBox->addSeparator();
 	m_pMenuOptions = m_pMenuBox->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
 	QFont f = m_pMenuOptions->font();

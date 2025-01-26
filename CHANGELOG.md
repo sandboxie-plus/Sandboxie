@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - moved Sandboxie-Plus data folder from C:\\Users\\[User]\\AppData\\Local\\Sandboxie-Plus to C:\\Users\\[User]\\AppData\\Local\\Xanasoft\\Sandboxie-Plus
   - Note: the folder will be moved automatically, when downgrading to an older version you would need to move it back manually.
+- re ordered some box context menu options a bit [#4444](https://github.com/sandboxie-plus/Sandboxie/issues/4444)
 
 ### Fixed
 - fixed crash when pressing run as admin with non-advanced view

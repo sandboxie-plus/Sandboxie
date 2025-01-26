@@ -1375,8 +1375,7 @@ check_sandbox_prefix:
                 && 0 == _wcsnicmp(
                         name, File_Wow64SysNative, File_Wow64SysNativeLen)
                 && (name[File_Wow64SysNativeLen] == L'\\' ||
-                        name[File_Wow64SysNativeLen] == L'\0')
-                && (! File_GetName_SkipWow64Link(L""))) {
+                        name[File_Wow64SysNativeLen] == L'\0')) {
 
             name = *OutTruePath;
 

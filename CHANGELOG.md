@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.15.6 / 5.70.6] - 2025-01-?
+
+### Fixed
+- Sandboxie-Plus data folder did not always work properly
+
+
+
 ## [1.15.5 / 5.70.5] - 2025-01-27
 
 ### Added

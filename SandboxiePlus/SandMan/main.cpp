@@ -29,7 +29,8 @@ int main(int argc, char *argv[])
 	QString ConfDir = AppDir + "\\PlusData";
 	if(!QFile::exists(ConfDir))
 		ConfDir = AppDir;
-	else // todo: Remove import at some later point
+	
+	// todo: Remove import at some later point
 	{
 		QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
 		if (dirs.count() > 2) { // Note: last 2 are AppDir and AppDir/data

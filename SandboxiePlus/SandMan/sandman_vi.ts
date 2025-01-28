@@ -4572,7 +4572,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Sandboxie-Plus - Window Finder</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="205"/>
+        <location filename="main.cpp" line="206"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager không thể chạy được Sandbox!</translation>
     </message>

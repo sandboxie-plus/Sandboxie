@@ -4748,7 +4748,7 @@ Error: %1</source>
         <translation>Sandboxie-Plus - 窗口查找器</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="205"/>
+        <location filename="main.cpp" line="206"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie 管理器不能在沙盒中运行！</translation>
     </message>

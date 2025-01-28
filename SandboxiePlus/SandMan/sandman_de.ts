@@ -4371,7 +4371,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Die Auswahl für später merken.</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="205"/>
+        <location filename="main.cpp" line="206"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager kann nicht in einer Sandbox gestartet werden!</translation>
     </message>

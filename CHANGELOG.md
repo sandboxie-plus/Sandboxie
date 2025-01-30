@@ -424,7 +424,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - on systems in test signing mode, Sandboxie will try outdated offsets by default
 - updated to Qt 5.15.13 with latest security patches [#3694](https://github.com/sandboxie-plus/Sandboxie/pull/3694) (thanks LumitoLuma)
-- moved network restrictions from general restrictions to its own tab on the network page
+- moved network restrictions from general restrictions to their own tab on the network page
 - improved certificate retrieval UI messages
 - improved MPC-BE template [#3798](https://github.com/sandboxie-plus/Sandboxie/pull/3798) (thanks offhub)
 
@@ -743,7 +743,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added template preset for AdGuard Browser Assistant [#3283](https://github.com/sandboxie-plus/Sandboxie/pull/3283)
 
 ### Changed
-- moved tray options to its own tab
+- moved tray options to their own tab
 - replaced some graphics with better compressed ones (thanks idealths) [1af82bb](https://github.com/sandboxie-plus/Sandboxie/commit/1af82bb39643e7470dd4839bf3cebe8a4acf9d06)
 - changed the /mount_protected command line switch to be checked before the /mount command line switch [#3289](https://github.com/sandboxie-plus/Sandboxie/pull/3289)
 
@@ -1841,7 +1841,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.0 / 5.57.0] - 2022-06-28
 
 ### Added
-- re-engineered "SandboxieLogon=y"; it's on by default, as every sandbox gets its own SID now
+- re-engineered "SandboxieLogon=y"; it's on by default, as each sandbox gets its own SID now
   - Note: this enforces strict isolation of sandboxes from each other
 
 ### Changed

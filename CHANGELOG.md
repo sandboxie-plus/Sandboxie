@@ -5,8 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.6 / 5.70.6] - 2025-01-?
 
+### Added
+- added generic troubleshooting script for SBIE2224: Sandboxed program has crashed
+  - provides a workaround for Viber Messager (Viber.exe)
+
 ### Fixed
 - Sandboxie-Plus data folder did not always work properly
+- fixed a to long held lock in the troubleshooting engine
 
 
 

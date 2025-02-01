@@ -664,6 +664,8 @@ _FX ULONG Dll_GetImageType(const WCHAR *ImageName)
                 ImageType = DLL_IMAGE_OTHER_WEB_BROWSER;
             else if (_wcsicmp(L"mail", buf) == 0)
                 ImageType = DLL_IMAGE_OTHER_MAIL_CLIENT;
+            else if (_wcsicmp(L"plugin", buf) == 0)
+                ImageType = DLL_IMAGE_PLUGIN_CONTAINER;
             else
                 ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
 

@@ -8,10 +8,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added generic troubleshooting script for SBIE2224: Sandboxed program has crashed
   - provides a workaround for Viber Messager (Viber.exe)
+- added debug option "DropChildProcessToken=program.exe,y" to not set a child process token usefull to debug greeen boxes
+- added missing hook to NtQueryInformationByName
+
+
+### Changed
+- Reworked CreateDesktop handling to fix issues with browsers and browser based applications
 
 ### Fixed
 - fixed Sandboxie Plus data folder not always working properly
 - fixed a to long held lock in the troubleshooting engine
+- fixed Adobe Acrobat Reader crashes in Application Compartment box #4363 https://github.com/sandboxie-plus/Sandboxie/issues/4363
+- fixed The Viber software has been updated, but when opened using the sandboxie program, the system program always crashes. [#4298](https://github.com/sandboxie-plus/Sandboxie/issues/4298)
+- fixed Cannot run qutebrowser in Sanboxie Classic [#4419](https://github.com/sandboxie-plus/Sandboxie/issues/4419)
 
 
 

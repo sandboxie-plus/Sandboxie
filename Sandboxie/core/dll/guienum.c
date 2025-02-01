@@ -566,6 +566,7 @@ _FX HDESK Gui_OpenDesktopW(
     void *lpszDesktop, ULONG dwFlags, BOOL fInherit,
     ACCESS_MASK dwDesiredAccess)
 {
+    SbieApi_Log(2205, L"OpenDesktop");
     return CreateEvent(NULL, FALSE, FALSE, NULL);
 }
 
@@ -579,6 +580,7 @@ _FX HDESK Gui_OpenDesktopA(
     void *lpszDesktop, ULONG dwFlags, BOOL fInherit,
     ACCESS_MASK dwDesiredAccess)
 {
+    SbieApi_Log(2205, L"OpenDesktop");
     return CreateEvent(NULL, FALSE, FALSE, NULL);
 }
 
@@ -640,8 +642,23 @@ _FX HDESK Gui_CreateDesktopW(
     if (rc)
         return rc;
 
-    if (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE)
-        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER))
+    HWINSTA current_winsta = NULL;
+
+    HMODULE User32 = GetModuleHandle(DllName_user32);
+    P_SetProcessWindowStation _SetProcessWindowStation = (P_SetProcessWindowStation)GetProcAddress(User32, "SetProcessWindowStation");
+    P_GetProcessWindowStation _GetProcessWindowStation = (P_GetProcessWindowStation)GetProcAddress(User32, "GetProcessWindowStation");
+
+    extern HANDLE Gui_Dummy_WinSta;
+    if (Gui_Dummy_WinSta)
+    {
+        current_winsta = _GetProcessWindowStation();
+        _SetProcessWindowStation(Gui_Dummy_WinSta);
+    }
+
+    rc = __sys_CreateDesktopW(lpszDesktop, lpszDevice, DevMode, dwFlags, dwDesiredAccess, SecurityAttributes);
+
+    if (!rc && (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE)
+        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)))
     {
         //Call the system CreateDesktopW without a security context. 
         //This works in tandem with the Ntmarta_GetSecurityInfo hook (see in advapi.c).
@@ -650,9 +667,15 @@ _FX HDESK Gui_CreateDesktopW(
         //Acrobat Reader.  This is needed to allow this process to create a desktop with
         //the sandboxie restricted token by dropping the security context.  This won't
         //work without the GetSecurityInfo hook.
+
         rc = __sys_CreateDesktopW(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-        return rc;
     }
+
+    if(current_winsta)
+        _SetProcessWindowStation(current_winsta);
+
+    if (rc)
+        return rc;
 
     SbieApi_Log(2205, L"CreateDesktop");
     return CreateEvent(NULL, FALSE, FALSE, NULL);
@@ -674,12 +697,32 @@ _FX HDESK Gui_CreateDesktopA(
     if (rc)
         return rc;
 
-    if (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE)
-        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER))
+    HWINSTA current_winsta = NULL;
+
+    HMODULE User32 = GetModuleHandle(DllName_user32);
+    P_SetProcessWindowStation _SetProcessWindowStation = (P_SetProcessWindowStation)GetProcAddress(User32, "SetProcessWindowStation");
+    P_GetProcessWindowStation _GetProcessWindowStation = (P_GetProcessWindowStation)GetProcAddress(User32, "GetProcessWindowStation");
+
+    extern HANDLE Gui_Dummy_WinSta;
+    if (Gui_Dummy_WinSta)
+    {
+        current_winsta = _GetProcessWindowStation();
+        _SetProcessWindowStation(Gui_Dummy_WinSta);
+    }
+
+    rc = __sys_CreateDesktopA(lpszDesktop, lpszDevice, DevMode, dwFlags, dwDesiredAccess, SecurityAttributes);
+
+    if (!rc && (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE)
+        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)))
     {
         rc = __sys_CreateDesktopA(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-        return rc;
     }
+
+    if(current_winsta)
+        _SetProcessWindowStation(current_winsta);
+
+    if (rc)
+        return rc;
 
     SbieApi_Log(2205, L"CreateDesktop");
     return CreateEvent(NULL, FALSE, FALSE, NULL);

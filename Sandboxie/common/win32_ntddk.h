@@ -826,6 +826,15 @@ NtQueryInformationFile(
     IN FILE_INFORMATION_CLASS       FileInformationClass
 );
 
+/*__declspec(dllimport) NTSTATUS __stdcall
+NtQueryInformationByName(
+    _In_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _Out_ PIO_STATUS_BLOCK IoStatusBlock,
+    _Out_writes_bytes_(Length) PVOID FileInformation,
+    _In_ ULONG Length,
+    _In_ FILE_INFORMATION_CLASS FileInformationClass
+);*/
+
 __declspec(dllimport) NTSTATUS __stdcall
 NtQueryAttributesFile(
     IN POBJECT_ATTRIBUTES           ObjectAttributes,

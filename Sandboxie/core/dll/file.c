@@ -280,6 +280,14 @@ static NTSTATUS File_NtQueryInformationFile(
     ULONG Length,
     FILE_INFORMATION_CLASS FileInformationClass);
 
+static NTSTATUS File_NtQueryInformationByName(
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PIO_STATUS_BLOCK IoStatusBlock,
+    PVOID FileInformation,
+    ULONG Length,
+    FILE_INFORMATION_CLASS FileInformationClass
+);
+
 static ULONG File_GetFinalPathNameByHandleW(
     HANDLE hFile, WCHAR *lpszFilePath, ULONG cchFilePath, ULONG dwFlags);
 
@@ -335,6 +343,7 @@ static P_NtOpenFile                 __sys_NtOpenFile                = NULL;
 static P_NtQueryAttributesFile      __sys_NtQueryAttributesFile     = NULL;
 static P_NtQueryFullAttributesFile  __sys_NtQueryFullAttributesFile = NULL;
 static P_NtQueryInformationFile     __sys_NtQueryInformationFile    = NULL;
+static P_NtQueryInformationByName   __sys_NtQueryInformationByName  = NULL;
        P_GetFinalPathNameByHandle   __sys_GetFinalPathNameByHandleW = NULL;
        P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile      = NULL;
 static P_NtQueryDirectoryFileEx     __sys_NtQueryDirectoryFileEx    = NULL;
@@ -6066,6 +6075,242 @@ _FX NTSTATUS File_NtQueryInformationFile(
 
     Dll_PopTlsNameBuffer(TlsData);
     SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// File_NtQueryInformationByName
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_NtQueryInformationByName(
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PIO_STATUS_BLOCK IoStatusBlock,
+    PVOID FileInformation,
+    ULONG Length,
+    FILE_INFORMATION_CLASS FileInformationClass
+)
+{
+    ULONG LastError;
+    THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
+
+    NTSTATUS status, status2;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR *TruePath;
+    WCHAR *CopyPath;
+    ULONG FileFlags, mp_flags;
+    ULONG TruePathFlags;
+    WCHAR* OriginalPath;
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    __try {
+
+        //
+        // get the file name we're trying to open
+        //
+
+        status = File_GetName(
+            ObjectAttributes->RootDirectory, ObjectAttributes->ObjectName,
+            &TruePath, &CopyPath, &FileFlags);
+
+        if (Dll_ApiTrace || Dll_FileTrace) {
+            WCHAR trace_str[2048];
+            ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtQueryInformationByName %s", TruePath);
+            SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
+        }
+
+        if (! NT_SUCCESS(status)) {
+
+            if (status == STATUS_BAD_INITIAL_PC) {
+
+                //
+                // if we get STATUS_BAD_INITIAL_PC here, this is most likely
+                // an attempt to query the attributes of the root directory,
+                // so we can do it on the true path
+                //
+
+                wcscat(TruePath, L"\\");
+                RtlInitUnicodeString(&objname, TruePath);
+
+                status = __sys_NtQueryInformationByName(
+                    &objattrs, IoStatusBlock, FileInformation,
+                    Length, FileInformationClass);
+            }
+
+            __leave;
+        }
+
+        //
+        // check if this is a closed path
+        //
+
+        mp_flags = File_MatchPath(TruePath, &FileFlags);
+
+        if (PATH_IS_CLOSED(mp_flags)) {
+
+            status = STATUS_ACCESS_DENIED;
+
+            __leave;
+        }
+
+        //
+        // check if this is an open path
+        //
+
+        if (PATH_IS_OPEN(mp_flags)) {
+
+            RtlInitUnicodeString(&objname, TruePath);
+
+            status = __sys_NtQueryInformationByName(
+                &objattrs, IoStatusBlock, FileInformation,
+                Length, FileInformationClass);
+
+            __leave;
+        }
+
+        //
+        // try NtQueryInformationByName on the CopyPath first
+        //
+
+        if (!File_Delete_v2)
+            if (File_CheckDeletedParent(CopyPath)) {
+                status = STATUS_OBJECT_PATH_NOT_FOUND;
+                __leave;
+            }
+
+        RtlInitUnicodeString(&objname, CopyPath);
+
+        status = __sys_NtQueryInformationByName(
+            &objattrs, IoStatusBlock, FileInformation,
+            Length, FileInformationClass);
+
+        if (NT_SUCCESS(status) || (
+            status != STATUS_OBJECT_NAME_NOT_FOUND &&
+            status != STATUS_OBJECT_PATH_NOT_FOUND)) {
+
+            // todo
+            /*if (!File_Delete_v2) {
+
+                if (NT_SUCCESS(status) &&
+                    IS_DELETE_MARK(&FileInformation->CreationTime))
+                    status = STATUS_OBJECT_NAME_NOT_FOUND;
+            }*/
+
+            __leave;
+        }
+
+        //
+        // Check true path relocation
+        //
+
+        OriginalPath = NULL;
+        WCHAR* OldTruePath = File_ResolveTruePath(TruePath, CopyPath, &TruePathFlags);
+        if (OldTruePath) {
+            OriginalPath = TruePath;
+            TruePath = OldTruePath;
+        }
+
+        //
+        // check if this is a write-only path.  if the path is not
+        // the highest level match on the write-only setting, we
+        // pretend the path does not exist; see also NtCreateFile
+        //
+
+        if (PATH_IS_WRITE(mp_flags)) {
+
+            BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
+
+            if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', OriginalPath ? OriginalPath : TruePath)){
+
+                //
+                // When using Rule specificity we need to create some dummy directories 
+                //
+
+                File_CreateBoxedPath(OriginalPath ? OriginalPath : TruePath);
+            }
+            else if (OriginalPath) {
+                ; // try TruePath which points by now to the snapshot location
+            }
+            else {
+
+                int depth = File_CheckDepthForIsWritePath(TruePath);
+                if (depth == 0) {
+
+                    RtlInitUnicodeString(&objname, TruePath);
+
+                    status = __sys_NtQueryInformationByName(
+                        &objattrs, IoStatusBlock, FileInformation,
+                        Length, FileInformationClass);
+                }
+                else if (depth == 1)
+                    status = STATUS_OBJECT_NAME_NOT_FOUND;
+                else {
+                    // if depth > 1 we leave the status from querying
+                    // the copy path, which would be
+                    // - STATUS_OBJECT_NAME_NOT_FOUND if copy parent exists
+                    // - STATUS_OBJECT_PATH_NOT_FOUND if it does not exist
+                    //
+                }
+
+                __leave;
+            }
+        }
+
+        //
+        // if we couldn't find CopyPath, or if it's an open path,
+        // then try on the TruePath
+        //
+
+        RtlInitUnicodeString(&objname, TruePath);
+
+        status2 = __sys_NtQueryInformationByName(
+            &objattrs, IoStatusBlock, FileInformation,
+            Length, FileInformationClass);
+
+        if (TruePathFlags && NT_SUCCESS(status2)) {
+
+            //
+            // if we found only the true file check if its listed as deleted
+            //
+
+            if (FILE_PARENT_DELETED(TruePathFlags)) { // parent deleted
+                status = STATUS_OBJECT_PATH_NOT_FOUND;
+                __leave;
+            } else if (FILE_IS_DELETED(TruePathFlags)) { // path deleted
+                status = STATUS_OBJECT_NAME_NOT_FOUND;
+                __leave;
+            }
+        }
+
+        if (status2 != STATUS_OBJECT_PATH_NOT_FOUND) {
+
+            status = status2;
+        }
+
+        //
+        // finish
+        //
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    if (Dll_ApiTrace || Dll_FileTrace) {
+        WCHAR trace_str[2048];
+        ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtQueryInformationByName status = 0x%08X", status);
+        SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
+    }
+
+    Dll_PopTlsNameBuffer(TlsData);
+    SetLastError(LastError);
+    return status;
+
     return status;
 }
 

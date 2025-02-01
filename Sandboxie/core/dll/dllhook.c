@@ -1303,11 +1303,13 @@ _FX void *SbieDll_Hook(
 
         // store full function name
         int len;
-        if(ModuleName)
+        if (ModuleName) {
             len = Sbie_snprintf(ip.pB, 96, "%S!%s", ModuleName, SourceFuncName);
-        else
+            pTrace->name = ip.pB + wcslen(ModuleName) + 1;
+        } else {
             len = Sbie_snprintf(ip.pB, 96, "%s", SourceFuncName);
-        pTrace->name = ip.pB + wcslen(ModuleName) + 1;
+            pTrace->name = ip.pB + 1;
+        }
         ip.pB += len + 1;
         
         ULONG_PTR tmp = ((ULONG_PTR)ip.pB & 0x03);

@@ -393,7 +393,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <location filename="Wizards/BoxAssistant.cpp" line="280"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
-        <translation>通过一张有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt; 向导程序能变得更加强大。 其将能够访问 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;在线解决方案数据库&lt;/a&gt; 来获取最新的故障排除指导。</translation>
+        <translation>通过一张有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt; 向导程序能变得更加强大。 其将能够访问 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;在线解决方案数据库&lt;/a&gt; 来获取最新的故障排除指导。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="318"/>
@@ -904,49 +904,49 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="248"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
-        <translation>填写你的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 赞助者证书</translation>
+        <translation>填写你的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 赞助者许可证</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="249"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
-        <translation>如果你有赞助者证书，请填入以下字段</translation>
+        <translation>如果你有赞助者许可证，请填入以下字段</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="276"/>
         <source>Retrieve certificate using Serial Number:</source>
-        <translation>使用序列号检索证书：</translation>
+        <translation>使用序列号检索许可证：</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation>在没有赞助者证书的情况下开始进行有限时间的试用</translation>
+        <translation>在没有赞助者许可证的情况下开始进行有限时间的试用</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="291"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;Get a free evaluation certificate&lt;/font&gt;&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;获取一个免费试用证书&lt;/font&gt;&lt;/a&gt;体验高级功能 %1 天。&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;&lt;font color=&apos;red&apos;&gt;获取一个免费试用许可证&lt;/font&gt;&lt;/a&gt;体验高级功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="292"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
-        <translation>对于每一个硬件ID，您最多可以请求%2次免费的%1天评估证书。</translation>
+        <translation>对于每一个硬件ID，您最多可以请求%2次免费的%1天评估许可证。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="317"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
-        <translation>要在商业环境中使用  &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 高级设置，需要适用于商业用途的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者证书&lt;/a&gt;。如果你还没有所需的证书，可以通过&lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com 网络商店&lt;/a&gt;获取证书</translation>
+        <translation>要在商业环境中使用  &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 高级设置，需要适用于商业用途的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者许可证&lt;/a&gt;。如果你还没有所需的许可证，可以通过&lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com 网络商店&lt;/a&gt;获取许可证</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="331"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 为&lt;u&gt;项目赞助者&lt;/u&gt;提供额外的沙盒类型和其它高级功能。例如“隐私增强”类型的沙盒可以对来自沙盒化程序非法访问用户数据的行为&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供额外的用户数据保护&lt;/font&gt;&lt;/b&gt;。如果你还不是赞助者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;来帮助 Sandboxie 的开发工作，并以此获取&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt;。</translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 为&lt;u&gt;项目赞助者&lt;/u&gt;提供额外的沙盒类型和其它高级功能。例如“隐私增强”类型的沙盒可以对来自沙盒化程序非法访问用户数据的行为&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供额外的用户数据保护&lt;/font&gt;&lt;/b&gt;。如果你还不是赞助者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;来帮助 Sandboxie 的开发工作，并以此获取&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="368"/>
         <source>Failed to retrieve the certificate.</source>
         <oldsource>Failed to retrive the certificate.</oldsource>
-        <translation>检索证书失败。</translation>
+        <translation>检索许可证失败。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="369"/>
@@ -959,7 +959,7 @@ Error: %1</source>
         <location filename="Wizards/SetupWizard.cpp" line="389"/>
         <source>Retrieving certificate...</source>
         <oldsource>Retreiving certificate...</oldsource>
-        <translation>正在检索证书...</translation>
+        <translation>正在检索许可证...</translation>
     </message>
 </context>
 <context>
@@ -1058,7 +1058,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="61"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation>名称已占用，请选择其他沙盒名</translation>
+        <translation>此名称已被占用，请选择其他沙盒名称</translation>
     </message>
 </context>
 <context>
@@ -1127,7 +1127,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="603"/>
         <source>Sandboxed Files</source>
-        <translation>沙盒化文件</translation>
+        <translation>沙盒存储路径</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="626"/>
@@ -1185,7 +1185,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
-        <translation>所选的沙盒存储路径所在的驱动器当前不可用</translation>
+        <translation>所选的沙盒存储路径的所在驱动器当前不可用</translation>
     </message>
 </context>
 <context>
@@ -1198,7 +1198,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="762"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
-        <translation>所有设置基本完成了，点击 &quot;完成&quot;，应用所有选定的选项，并结束此向导</translation>
+        <translation>设置完成，请点击 &quot;完成&quot;，应用所有选定的选项，并结束此向导</translation>
     </message>
     <message>
         <source>Keep Sandboxie-Plus up to date.</source>
@@ -1215,7 +1215,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="950"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
-        <translation>差不多设置好了，点击“完成”按钮，创建一个新的网络浏览器模板，并结束向导</translation>
+        <translation>设置完成，请点击“完成”按钮，以创建一个新的网络浏览器模板，并结束此向导</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="968"/>
@@ -1251,14 +1251,14 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="976"/>
         <source>Browser executable path: %1
 </source>
-        <translation>浏览器起始目录：%1
+        <translation>浏览器可执行文件路径：%1
 </translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="986"/>
         <source>Browser profile path: %1
 </source>
-        <translation>浏览器个人资料目录：%1
+        <translation>浏览器个人资料路径：%1
 </translation>
     </message>
 </context>
@@ -1267,7 +1267,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="213"/>
         <source>Failed to download file from: %1</source>
-        <translation>未能从以下位置下载文件: %1</translation>
+        <translation>未能从 %1 下载文件</translation>
     </message>
 </context>
 <context>
@@ -1288,7 +1288,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="340"/>
         <source>Please specify the exact issue:</source>
-        <translation>请说明具体问题：</translation>
+        <translation>请描述您遇到的具体问题：</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="393"/>
@@ -1306,12 +1306,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="174"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
-        <translation>欢迎来到设置向导，本向导将帮助配置你的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 副本设置。如果你不希望现在就完成向导设置，你可以从 “沙盒 -&gt; 维护”菜单中随时重新启动此向导</translation>
+        <translation>欢迎来到设置向导，本向导将帮助配置你的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 副本。如果你不希望现在就完成向导设置，你可以从 “沙盒 -&gt; 维护”菜单中随时重新启动此向导</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="183"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
-        <translation>选择 Sandboxie-Plus 的用途</translation>
+        <translation>请选择您使用 Sandboxie-Plus 的用途</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="186"/>
@@ -1339,12 +1339,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation>在这个页面上沙盒隔离选项可以被配置。</translation>
+        <translation>在这个页面上可以配置沙盒隔离选项。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="737"/>
         <source>Network Access</source>
-        <translation>网络权限</translation>
+        <translation>网络访问权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="745"/>
@@ -1507,7 +1507,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="76"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation>该沙盒的文件将会存储在加密的容器文件中，注意：容器头的任何损坏都可能导致容器内文件不可读取（这等同于损坏硬盘的引导分区）。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份、不宽容&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担风险则选择 [确认], 否则 [取消].</translation>
+        <translation>该沙盒的文件将会存储在加密的容器文件中，请注意：容器头的任何损坏都可能导致容器内文件不可读取（这等同于损坏硬盘的引导分区）。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份不救济&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担一切风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担全部风险则请选择 [确认], 否则请选择 [取消].</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="111"/>
@@ -1546,7 +1546,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="389"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation>您是否想检查 Sandboxie-Plus 的更新版本？</translation>
+        <translation>您是否想检查 Sandboxie-Plus 的版本更新？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="390"/>
@@ -1672,7 +1672,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="987"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;一个新的 Sandboxie-Plus 安装程序已被下载到以下位置：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否安装？本操作需要终止所有沙盒中运行的程序。&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;一个新的 Sandboxie-Plus 安装程序已被下载到以下位置：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否安装？本操作需要终止沙盒中运行的所有程序。&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1055"/>
@@ -1694,7 +1694,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation>您的 Sandboxie-Plus 赞助者证书已过期。您的证书在当前版本中将保持激活。但当您进行更新后，赞助者独占功能将被禁用。
+        <translation>您的 Sandboxie-Plus 赞助者许可证已过期。您的许可证在当前版本中将保持有效。但当您进行更新后，赞助者独占功能将被禁用。
 
 您确定要进行更新吗？</translation>
     </message>
@@ -1709,15 +1709,15 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <source>Checking for certificate...</source>
-        <translation type="vanished">检索证书...</translation>
+        <translation type="vanished">正在检索许可证...</translation>
     </message>
     <message>
         <source>No certificate found on server!</source>
-        <translation type="vanished">未在服务器检索到证书！</translation>
+        <translation type="vanished">未在服务器检索到许可证！</translation>
     </message>
     <message>
         <source>There is no updated certificate available.</source>
-        <translation type="vanished">目前没有可用的证书更新</translation>
+        <translation type="vanished">目前没有可用的许可证更新</translation>
     </message>
 </context>
 <context>
@@ -1756,7 +1756,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="69"/>
         <source>Makes a write open call to a file that won&apos;t be copied fail instead of turning it read-only.</source>
-        <translation>使得一个禁止被复制文件的写入句柄调用失败，而不是将其变成只读</translation>
+        <translation>当对不可复制的文件执行写入模式打开操作时，系统将返回失败而非设置为只读状态。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="72"/>
@@ -1889,7 +1889,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
         <source>This option requires an active supporter certificate</source>
         <oldsource>This option requires a valid supporter certificate</oldsource>
-        <translation>此选项需要一份激活的赞助者证书</translation>
+        <translation>此选项需要一份有效的赞助者许可证</translation>
     </message>
     <message>
         <source>Supporter exclusive option</source>
@@ -1898,7 +1898,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="54"/>
         <source>Don&apos;t alter the window title</source>
-        <translation>不改变窗口标题</translation>
+        <translation>不要改变窗口标题</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="55"/>
@@ -1908,7 +1908,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="56"/>
         <source>Display box name in title</source>
-        <translation>标题内显示沙盒名称</translation>
+        <translation>在标题内显示沙盒名称</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
@@ -1928,7 +1928,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>带有数据保护功能的加固型沙盒</translation>
+        <translation>带数据保护的加固型沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
@@ -1938,7 +1938,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Sandbox with Data Protection</source>
-        <translation>带有数据保护功能的沙盒</translation>
+        <translation>带数据保护功能的沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
@@ -1957,7 +1957,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="23"/>
         <source>This option requires an active &lt;b&gt;advanced&lt;/b&gt; supporter certificate</source>
-        <translation>该选项需要一份激活且更高级的赞助者许可证</translation>
+        <translation>该选项需要一份有效且更高级的赞助者许可证</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
@@ -3156,7 +3156,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="698"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>访问最新的兼容性模板和联机故障排除数据库需要有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt;.</translation>
+        <translation>访问最新的兼容性模板和联机故障排除数据库需要有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -3920,12 +3920,12 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="3199"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation>此赞助者证书对该版本沙盒无效，请获取可用的新证书</translation>
+        <translation>此赞助者许可证对该版本沙盒无效，请获取可用的新许可证</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3202"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <translation>此赞助者证书已过期%1，请获取可用的新证书</translation>
+        <translation>此赞助者许可证已过期%1，请获取可用的新许可证</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3203"/>
@@ -3935,12 +3935,12 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="3205"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation>此赞助者证书将在 %1 天后过期，请获取可用的新证书</translation>
+        <translation>此赞助者许可证将在 %1 天后过期，请获取可用的新许可证</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3068"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>选定的特性只对项目赞助者可用。如果没有赞助者证书，在启用该特性的沙盒里启动的进程，将在 5 分钟后被终止。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;，以获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt;</translation>
+        <translation>选定的特性只对项目赞助者可用。如果没有赞助者许可证，在启用该特性的沙盒里启动的进程，将在 5 分钟后被终止。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;，以获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2571"/>
@@ -4121,7 +4121,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2978"/>
         <location filename="SandMan.cpp" line="3057"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;，以获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt;</translation>
+        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;，以获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;</translation>
     </message>
     <message>
         <source>PID %1: </source>
@@ -4551,33 +4551,33 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="3065"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>您所选择的特性仅适用于项目赞助者。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;, 获取一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt;</translation>
+        <translation>您所选择的特性仅适用于项目赞助者。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;, 获取一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3103"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation>您尝试使用的证书已被封禁，这意味着它已因故失效。任何使用该证书的企图都构成对其使用条款的违反！</translation>
+        <translation>您尝试使用的许可证已被封禁，这意味着它已因故失效。任何使用该许可证的企图都构成对其使用条款的违反！</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3115"/>
         <source>The Certificate Signature is invalid!</source>
-        <translation>证书的签名无效！</translation>
+        <translation>许可证的签名无效！</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3116"/>
         <source>The Certificate is not suitable for this product.</source>
-        <translation>该证书不适用于本产品。</translation>
+        <translation>该许可证不适用于本产品。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3117"/>
         <source>The Certificate is node locked.</source>
-        <translation>该证书已被节点锁定。</translation>
+        <translation>该许可证已被节点锁定。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3121"/>
         <source>The support certificate is not valid.
 Error: %1</source>
-        <translation>该赞助者证书无效。
+        <translation>该赞助者许可证无效。
 错误：%1</translation>
     </message>
     <message>
@@ -5856,26 +5856,26 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1316"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;您已经使用了%1/%2个试用证书。无法生成更多免费证书了。&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;您已经使用了%1/%2个试用许可证。无法生成更多免费许可证了。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1318"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;获取一个免费试用证书&lt;/a&gt;体验高级功能 %1 天。&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;获取一个免费试用许可证&lt;/a&gt;体验高级功能 %1 天。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1319"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <translation>对于每一个硬件ID，您最多可以请求%2次免费的%1天评估证书。</translation>
+        <translation>对于每一个硬件ID，您最多可以请求%2次免费的%1天评估许可证。</translation>
     </message>
     <message>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
-        <translation type="vanished">对于任何一个硬件ID，您最多可以请求%2次免费的%1天试用证书</translation>
+        <translation type="vanished">对于任何一个硬件ID，您最多可以请求%2次免费的%1天试用许可证</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1332"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此赞助者证书已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新证书&lt;/a&gt;。</translation>
+        <translation>此赞助者许可证已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新许可证&lt;/a&gt;。</translation>
     </message>
     <message>
         <source>Expires in: %1 Days</source>
@@ -5936,19 +5936,19 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1417"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
-        <translation>这看起来不像是 Sandboxie-Plus 的序列号&lt;br/&gt;如果您试图从证书中输入 UpdateKey 或 Signature ，无需这样做，请直接将整个证书输入到上面的文本区域。</translation>
+        <translation>这看起来不像是 Sandboxie-Plus 的序列号&lt;br/&gt;如果您试图从许可证中输入 UpdateKey 或 Signature ，无需这样做，请直接将整个许可证输入到上面的文本区域。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1424"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
-        <translation>您尝试在未输入预先存在的赞助者证书的情况下使用功能升级密钥。请注意，这种类型的密钥（&lt;b&gt;正如网站上以粗体明确说明的那样&lt;/b）要求您拥有预先存在的有效赞助者证书； &lt;br /&gt;如果您想使用高级功能，您需要同时获得标准证书和功能升级密钥来解锁高级功能。</translation>
+        <translation>您尝试在未输入预先存在的赞助者许可证的情况下使用功能升级密钥。请注意，这种类型的密钥（&lt;b&gt;正如网站上以粗体明确说明的那样&lt;/b）要求您拥有预先存在的有效赞助者许可证； &lt;br /&gt;如果您想使用高级功能，您需要同时获得标准许可证和功能升级密钥来解锁高级功能。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1430"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
-        <translation>您试图在未输入预先存在的赞助者证书的情况下使用续订密钥。请注意，这种类型的密钥（&lt;b&gt;正如网站上以粗体明确说明的那样&lt;/b）要求您拥有预先存在的有效赞助者证书；没有它是没有用的。</translation>
+        <translation>您试图在未输入预先存在的赞助者许可证的情况下使用续订密钥。请注意，这种类型的密钥（&lt;b&gt;正如网站上以粗体明确说明的那样&lt;/b）要求您拥有预先存在的有效赞助者许可证；没有它是没有用的。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1435"/>
@@ -5960,25 +5960,25 @@ Error: %1</source>
         <location filename="Windows/SettingsWindow.cpp" line="1450"/>
         <location filename="Windows/SettingsWindow.cpp" line="1475"/>
         <source>Retrieving certificate...</source>
-        <translation>正在检索证书...</translation>
+        <translation>正在检索许可证...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1463"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
-        <translation>Sandboxie-Plus - 申请试用证书</translation>
+        <translation>Sandboxie-Plus - 申请试用许可证</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1463"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
-        <translation>请输入您的电子邮件地址以接收免费的%1天试用证书，该证书将颁发给%2并锁定到当前硬件。
-您最多可以为每个唯一的硬件ID请求%3个试用证书。</translation>
+        <translation>请输入您的电子邮件地址以接收免费的%1天试用许可证，该许可证将颁发给%2并锁定到当前硬件。
+您最多可以为每个唯一的硬件ID请求%3个试用许可证。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1489"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
-        <translation>检索证书时出错：%1</translation>
+        <translation>检索许可证时出错：%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1489"/>
@@ -5993,7 +5993,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2077"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
-        <translation>试用证书已成功申请。 请开始免费试用！</translation>
+        <translation>试用许可证已成功申请。 请开始免费试用！</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
@@ -6097,7 +6097,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     </message>
     <message>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">此赞助者证书已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新证书&lt;/a&gt;</translation>
+        <translation type="vanished">此赞助者许可证已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1335"/>
@@ -6112,11 +6112,11 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1345"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此赞助者证书将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;更新证书&lt;/a&gt;。</translation>
+        <translation>此赞助者许可证将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;更新许可证&lt;/a&gt;。</translation>
     </message>
     <message>
         <source>Retreiving certificate...</source>
-        <translation type="vanished">正在检索证书…</translation>
+        <translation type="vanished">正在检索许可证…</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1537"/>
@@ -6194,27 +6194,27 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1614"/>
         <source>Supporter certificate required for access</source>
-        <translation>需要赞助者证书进行访问</translation>
+        <translation>需要赞助者许可证进行访问</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1631"/>
         <source>Supporter certificate required for automation</source>
-        <translation>需要赞助者证书进行自动化动作</translation>
+        <translation>需要赞助者许可证进行自动化动作</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2069"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
-        <translation>很遗憾，此证书对当前版本无效，您需要获取新证书或降级到早期版本。</translation>
+        <translation>很遗憾，此许可证对当前版本无效，您需要获取新许可证或降级到早期版本。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2071"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation>尽管此证书已过期，但对于当前安装的版本，附加功能仍处于启用状态。但是，您将无法再访问Sandboxie Live服务，包括兼容性更新和在线疑难解答数据库。</translation>
+        <translation>尽管此许可证已过期，但对于当前安装的版本，附加功能仍处于启用状态。但是，您将无法再访问Sandboxie Live服务，包括兼容性更新和在线疑难解答数据库。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2073"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
-        <translation>很遗憾，此证书已过期，请获取新证书。</translation>
+        <translation>很遗憾，此许可证已过期，请获取新许可证。</translation>
     </message>
     <message>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
@@ -6227,12 +6227,12 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     </message>
     <message>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">此赞助者证书将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新证书&lt;/a&gt;</translation>
+        <translation type="vanished">此赞助者许可证将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
-        <translation type="vanished">需要赞助者证书</translation>
+        <translation type="vanished">需要赞助者许可证</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1738"/>
@@ -6252,15 +6252,15 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2049"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
-        <translation>这看起来不像是一份证书。请输入完整的证书，而不仅仅是其中的一部分。</translation>
+        <translation>这看起来不像是一份许可证。请输入完整的许可证，而不仅仅是其中的一部分。</translation>
     </message>
     <message>
         <source>This certificate is unfortunately expired.</source>
-        <translation type="vanished">非常抱歉，此证书已过期</translation>
+        <translation type="vanished">非常抱歉，此许可证已过期</translation>
     </message>
     <message>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="vanished">非常抱歉，此证书已过时</translation>
+        <translation type="vanished">非常抱歉，此许可证已过时</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2079"/>
@@ -6269,7 +6269,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     </message>
     <message>
         <source>This support certificate is not valid.</source>
-        <translation type="vanished">此赞助者证书无效</translation>
+        <translation type="vanished">此赞助者许可证无效</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2140"/>
@@ -6693,41 +6693,41 @@ Processes in this box will be running with a custom process token indicating the
 If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
         <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
-        <translation>此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊证书。
-如果你已经在 Patreaon 是 Great Supporter 类型的赞助者，Sandboxie 可以在线检测你的证书更新。</translation>
+        <translation>此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊许可证。
+如果你已经在 Patreaon 是 Great Supporter 类型的赞助者，Sandboxie 可以在线检测你的许可证更新。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
         <location filename="Windows/SupportDialog.cpp" line="347"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.</source>
-        <translation>此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊证书。</translation>
+        <translation>此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊许可证。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
         <source>An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. You must now purchase a valid certificate, as the usage of the free version has been restricted.</source>
-        <translation>你正试图在此系统上使用被阻止的证书。此操作违反了支持证书的使用条款。您现在必须购买有效的证书，否则将受到免费版本的使用限制。</translation>
+        <translation>你正试图在此系统上使用被阻止的许可证。此操作违反了支持许可证的使用条款。您现在必须购买有效的许可证，否则将受到免费版本的使用限制。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="162"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider独占版本构建&lt;/a&gt; 的Sandboxie-Plus。其仅对于等级更高的（如项目贡献者，HUGE supporter证书拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 赞助者&lt;/a&gt; 可用。</translation>
+        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider独占版本构建&lt;/a&gt; 的Sandboxie-Plus。其仅对于等级更高的（如项目贡献者，HUGE supporter许可证拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 赞助者&lt;/a&gt; 可用。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="168"/>
         <source>The installed supporter certificate allows for &lt;b&gt;%1 seats&lt;/b&gt; to be active.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>安装的赞助者证书允许激活&lt;b&gt;%1 个&lt;/b&gt;设备。&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>安装的赞助者许可证允许激活&lt;b&gt;%1 个&lt;/b&gt;设备。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="170"/>
         <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation>&lt;b&gt;似乎您的网络中存在了 %1个 Sandboxie-Plus 实例， &lt;font color=&apos;red&apos;&gt;你需要获得额外的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;赞助者证书&lt;/a&gt;&lt;/font&gt;。&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>&lt;b&gt;似乎您的网络中存在了 %1个 Sandboxie-Plus 实例， &lt;font color=&apos;red&apos;&gt;你需要获得额外的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;赞助者许可证&lt;/a&gt;&lt;/font&gt;。&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="177"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation>已安装的赞助者证书&lt;b&gt;已经过期 %1 天了&lt;/b&gt;，&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;必须续期&lt;/a&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>已安装的赞助者许可证&lt;b&gt;已经过期 %1 天了&lt;/b&gt;，&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;必须续期&lt;/a&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="179"/>
@@ -6738,18 +6738,18 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/SupportDialog.cpp" line="181"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
         <oldsource>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</oldsource>
-        <translation>&lt;u&gt;商业使用 Sandboxie 的评估期已过&lt;/u&gt;，需要一份有效的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者证书&lt;/a&gt;。</translation>
+        <translation>&lt;u&gt;商业使用 Sandboxie 的评估期已过&lt;/u&gt;，需要一份有效的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者许可证&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="188"/>
         <source>The installed supporter certificate is &lt;b&gt;outdated&lt;/b&gt; and it is &lt;u&gt;not valid for&lt;b&gt; this version&lt;/b&gt;&lt;/u&gt; of Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>安装的赞助者证书&lt;b&gt;已过期&lt;/b&gt;，并且&lt;u&gt;不再适用于&lt;b&gt;此版本&lt;/b&gt;&lt;/u&gt;的 Sandboxie-Plus。&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>安装的赞助者许可证&lt;b&gt;已过期&lt;/b&gt;，并且&lt;u&gt;不再适用于&lt;b&gt;此版本&lt;/b&gt;&lt;/u&gt;的 Sandboxie-Plus。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="190"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation>安装的赞助者证书&lt;b&gt;已过期&lt;/b&gt;，&lt;u&gt;应当更新&lt;/u&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>安装的赞助者许可证&lt;b&gt;已过期&lt;/b&gt;，&lt;u&gt;应当更新&lt;/u&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="192"/>
@@ -6759,7 +6759,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="195"/>
         <source>Sandboxie on ARM64 requires a valid supporter certificate for continued use.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>Sandboxie 的 ARM64 支持需要一份有效的赞助者证书。&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>Sandboxie 的 ARM64 支持需要一份有效的赞助者许可证。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="197"/>
@@ -6770,13 +6770,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/SupportDialog.cpp" line="200"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
         <oldsource>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</oldsource>
-        <translation>请考虑继续 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持该项目&lt;/a&gt;，以续签 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt;，从而继续使用新构建版本中的增强功能</translation>
+        <translation>请考虑继续 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持该项目&lt;/a&gt;，以续签 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;，从而继续使用新构建版本中的增强功能</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="203"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;. This pause allows you to consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt; or &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;earning one by contributing&lt;/a&gt; to the project. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
         <oldsource>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</oldsource>
-        <translation>Sandboxie &lt;u&gt;在没有&lt;/u&gt;有效的赞助者证书时有时会&lt;b&gt;&lt;font color=&apos;red&apos;&gt;弹窗提醒&lt;/font&gt;&lt;/b&gt;，让您考虑是否&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;(但不会中断不需要赞助着证书的沙盒内的程序)，&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt;不仅可以消除这种提醒，还可以 &lt;b&gt;提供特殊的增强功能&lt;b&gt;，实现更好的安全性和兼容性</translation>
+        <translation>Sandboxie &lt;u&gt;在没有&lt;/u&gt;有效的赞助者许可证时有时会&lt;b&gt;&lt;font color=&apos;red&apos;&gt;弹窗提醒&lt;/font&gt;&lt;/b&gt;，让您考虑是否&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;(但不会中断不需要赞助着许可证的沙盒内的程序)，&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;不仅可以消除这种提醒，还可以 &lt;b&gt;提供特殊的增强功能&lt;b&gt;，实现更好的安全性和兼容性</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="233"/>
@@ -6801,12 +6801,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="321"/>
         <source>Get Certificate</source>
-        <translation>获取证书</translation>
+        <translation>获取许可证</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="322"/>
         <source>Enter Certificate</source>
-        <translation>输入证书</translation>
+        <translation>输入许可证</translation>
     </message>
 </context>
 <context>
@@ -7780,7 +7780,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="76"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;更多沙盒类型&lt;/b&gt;仅&lt;u&gt;项目赞助者&lt;/u&gt;可用，隐私增强沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;保护用户数据免受沙盒化的程序非法访问&lt;/font&gt;&lt;/b&gt;&lt;br /&gt;如果你还不是赞助者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠此项目&lt;/a&gt;，来获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者证书&lt;/a&gt;&lt;br /&gt;当然你也可以直接新建一个这些类型的沙盒进行测试，不过沙盒中运行的程序将在 5 分钟之后自动终止</translation>
+        <translation>&lt;b&gt;更多沙盒类型&lt;/b&gt;仅&lt;u&gt;项目赞助者&lt;/u&gt;可用，隐私增强沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;保护用户数据免受沙盒化的程序非法访问&lt;/font&gt;&lt;/b&gt;&lt;br /&gt;如果你还不是赞助者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠此项目&lt;/a&gt;，来获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;&lt;br /&gt;当然你也可以直接新建一个这些类型的沙盒进行测试，不过沙盒中运行的程序将在 5 分钟之后自动终止</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="128"/>
@@ -9829,12 +9829,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1642"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation>Sandboxie-Plus 项目的支持者可以收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者证书&lt;/a&gt;。这与许可证密钥类似，但适用于使用开源软件的优秀用户。:-)</translation>
+        <translation>Sandboxie-Plus 项目的支持者可以收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者许可证&lt;/a&gt;。这与许可证密钥类似，但适用于使用开源软件的优秀用户。:-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1677"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
-        <translation>让 Sandboxie 跟上 Windows 的滚动发布并与所有网络浏览器兼容是一项永无止境的努力。您可以通过以下方式进行支持：&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接为项目贡献&lt;/a&gt;，通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;购买赞助者证书&lt;/a&gt;，通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在Patreon上订阅&lt;/a&gt;，或通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal捐赠&lt;/a&gt;。&lt;br/&gt;您的支持对Sandboxie的发展和维护起着至关重要的作用。</translation>
+        <translation>让 Sandboxie 跟上 Windows 的滚动发布并与所有网络浏览器兼容是一项永无止境的努力。您可以通过以下方式进行支持：&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接为项目贡献&lt;/a&gt;，通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;购买赞助者许可证&lt;/a&gt;，通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在Patreon上订阅&lt;/a&gt;，或通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal捐赠&lt;/a&gt;。&lt;br/&gt;您的支持对Sandboxie的发展和维护起着至关重要的作用。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2687"/>
@@ -10017,11 +10017,11 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="vanished">Sandboxie-Plus 项目的赞助者将收到 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者证书&lt;/a&gt;，这类似于许可密钥，是为拥抱开源软件的优秀人士准备的 :-)</translation>
+        <translation type="vanished">Sandboxie-Plus 项目的赞助者将收到 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者许可证&lt;/a&gt;，这类似于许可密钥，是为拥抱开源软件的优秀人士准备的 :-)</translation>
     </message>
     <message>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">此赞助者证书已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新证书&lt;/a&gt;</translation>
+        <translation type="vanished">此赞助者许可证已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Check periodically for updates of Sandboxie-Plus</source>
@@ -10030,7 +10030,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1809"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
-        <translation>不再通知证书过期的情况</translation>
+        <translation>不再通知许可证过期的情况</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="636"/>
@@ -10168,7 +10168,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1628"/>
         <source>Enter the support certificate here</source>
-        <translation>在此输入赞助者证书</translation>
+        <translation>在此输入赞助者许可证</translation>
     </message>
     <message>
         <source>Support Settings</source>
@@ -10509,7 +10509,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1770"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此赞助者证书已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新证书&lt;/a&gt;。</translation>
+        <translation>此赞助者许可证已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新许可证&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1635"/>
@@ -10519,7 +10519,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1709"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
-        <translation>使用序列号检索/升级/续订证书</translation>
+        <translation>使用序列号检索/升级/续订许可证</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="663"/>
@@ -10540,7 +10540,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1658"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;证书使用指南&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;许可证使用指南&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1802"/>
@@ -10555,12 +10555,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1786"/>
         <source>Cert Info</source>
-        <translation>证书信息</translation>
+        <translation>许可证信息</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1816"/>
         <source>Enter/view Supporter Certificate</source>
-        <translation>输入/查看赞助者证书</translation>
+        <translation>输入/查看赞助者许可证</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1829"/>

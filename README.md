@@ -26,7 +26,7 @@ What's different is the availability of features in the user interface.
 Sandboxie Plus has a modern Qt-based UI, which supports all new features that have been added since the project went open source:
 
   * Snapshot Manager - takes a copy of any box in order to be restored when needed
-  * Maintenance mode - allows to uninstall/install/start/stop Sandboxie driver and service when needed
+  * Maintenance menu - allows to uninstall/install/start/stop Sandboxie driver and service when needed
   * Portable mode - you can run the installer and choose to extract all files to a directory
   * Additional UI options to block access to Windows components like printer spooler and clipboard
   * More customization options for Start/Run and Internet access restrictions

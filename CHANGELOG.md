@@ -7,22 +7,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added generic troubleshooting script for SBIE2224: Sandboxed program has crashed
-  - provides a workaround for Viber Messager (Viber.exe)
-- added debug option "DropChildProcessToken=program.exe,y" to not set a child process token usefull to debug greeen boxes
+  - provides a workaround for Viber (Viber.exe)
+- added debug option "DropChildProcessToken=program.exe,y" to not set a child process token useful to debug green boxes
 - added missing hook to NtQueryInformationByName
 
-
 ### Changed
-- Reworked CreateDesktop handling to fix issues with browsers and browser based applications
+- reworked CreateDesktop handling to fix issues with browsers and browser-based applications
 
 ### Fixed
-- fixed Sandboxie Plus data folder not always working properly
-- fixed a to long held lock in the troubleshooting engine
-- fixed Adobe Acrobat Reader crashes in Application Compartment box #4363 https://github.com/sandboxie-plus/Sandboxie/issues/4363
-- fixed The Viber software has been updated, but when opened using the sandboxie program, the system program always crashes. [#4298](https://github.com/sandboxie-plus/Sandboxie/issues/4298)
-- fixed Cannot run qutebrowser in Sanboxie Classic [#4419](https://github.com/sandboxie-plus/Sandboxie/issues/4419)
+- fixed Sandboxie Plus data folder not always working properly after updating to version 1.15.5
+- fixed a too long held lock in the troubleshooting engine
+- fixed Adobe Acrobat Reader crashes in Application Compartment box [#4363](https://github.com/sandboxie-plus/Sandboxie/issues/4363)
+- fixed The Viber software has been updated, but when opened using the sandboxie program, the system program always crashes [#4298](https://github.com/sandboxie-plus/Sandboxie/issues/4298)
+- fixed Cannot run qutebrowser in Sandboxie [#4419](https://github.com/sandboxie-plus/Sandboxie/issues/4419)
 - fixed Unable to launch application in sandbox with ApiTrace enabled in version 1.15.5 [#4488](https://github.com/sandboxie-plus/Sandboxie/issues/4488)
-- fixed BSOD when using OpenWndStation=y on windows 10 with apps which call CreateDesktopW/A
+- fixed BSoD when using OpenWndStation=y on Windows 10 with apps that call CreateDesktopW/A
 
 
 
@@ -51,7 +50,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed failure to query file properties causing program exceptions [#4457](https://github.com/sandboxie-plus/Sandboxie/issues/4457) (thanks lmou523)
 - fixed applications crashing if IP is not defined for the domain name in DNS Filtering [#4475](https://github.com/sandboxie-plus/Sandboxie/issues/4475)
 - fixed files not getting written when launched from "Run Program" menu [#4398](https://github.com/sandboxie-plus/Sandboxie/issues/4398)
-
 
 
 

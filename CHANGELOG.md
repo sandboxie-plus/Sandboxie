@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.15.6 / 5.70.6] - 2025-01-?
+## [1.15.6 / 5.70.6] - 2025-01-3
 
 ### Added
 - added generic troubleshooting script for SBIE2224: Sandboxed program has crashed

@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed The Viber software has been updated, but when opened using the sandboxie program, the system program always crashes. [#4298](https://github.com/sandboxie-plus/Sandboxie/issues/4298)
 - fixed Cannot run qutebrowser in Sanboxie Classic [#4419](https://github.com/sandboxie-plus/Sandboxie/issues/4419)
 - fixed Unable to launch application in sandbox with ApiTrace enabled in version 1.15.5 [#4488](https://github.com/sandboxie-plus/Sandboxie/issues/4488)
+- fixed BSOD when using OpenWndStation=y on windows 10 with apps which call CreateDesktopW/A
 
 
 

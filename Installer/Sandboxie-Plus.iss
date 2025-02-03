@@ -94,13 +94,15 @@ Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; Strin
 
 
 [InstallDelete]
-; Delete obsolete files as the first step of installation.
+; Delete obsolete files and folders as the first step of installation.
 Type: filesandordirs; Name: "{app}\translations"
 Type: files; Name: "{app}\SbieDrv.sys.w10"
 Type: files; Name: "{app}\SbieDrv.sys.rc4"
 Type: files; Name: "{app}\SbieIni.exe.sig"
 Type: files; Name: "{app}\libcrypto-1_1-x64.dll"
 Type: files; Name: "{app}\libssl-1_1-x64.dll"
+; No longer used since 1.15.5
+Type: dirifempty; Name: "{localappdata}\{#MyAppName}"
 ; Delete existing .pdb files before installing new ones.
 Type: files; Name: "{app}\*.pdb"
 

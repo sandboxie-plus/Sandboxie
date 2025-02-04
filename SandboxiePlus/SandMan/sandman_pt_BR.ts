@@ -964,7 +964,7 @@ Você pode clicar em Concluir para fechar esse assistente.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="478"/>
+        <location filename="Views/FileView.cpp" line="481"/>
         <source>%1 - Files</source>
         <translation>%1 - Arquivos</translation>
     </message>
@@ -1022,7 +1022,7 @@ Você pode clicar em Concluir para fechar esse assistente.</translation>
         <translation>Selecionar diretório</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="433"/>
+        <location filename="Views/FileView.cpp" line="436"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Criar atalho para a Caixa %1</translation>
     </message>

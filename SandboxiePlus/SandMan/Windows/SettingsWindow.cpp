@@ -2600,7 +2600,11 @@ QString MakeRunEntry(QTreeWidgetItem* pItem)
 QString MakeRunEntry(const QVariantMap& Entry)
 {
 	if (!Entry["WorkingDir"].toString().isEmpty() || !Entry["Icon"].toString().isEmpty()) {
-		QJsonDocument doc(QJsonValue::fromVariant(Entry).toObject());
+		QString workingDir = Entry["WorkingDir"].toString().replace("\"", ""); // Remove double quotes from WorkingDir
+		QVariantMap cleanedEntry = Entry; // Make a copy of Entry
+		cleanedEntry["WorkingDir"] = workingDir; // Update WorkingDir
+
+		QJsonDocument doc(QJsonValue::fromVariant(cleanedEntry).toObject());
 		QString sEntry = QString::fromUtf8(doc.toJson(QJsonDocument::Compact));
 		return sEntry;
 	} 

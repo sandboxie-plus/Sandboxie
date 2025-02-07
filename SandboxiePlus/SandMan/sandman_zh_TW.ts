@@ -10318,7 +10318,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>This option also enables asynchronous operation when needed and suspends updates.</source>
-        <translation>在暫緩更新或其它需要的情況使用非同步操作。</translation>
+        <translation>此選項同時在需要時啟用非同步操作並懸置更新。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="415"/>

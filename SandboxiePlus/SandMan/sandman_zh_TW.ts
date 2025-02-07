@@ -4022,7 +4022,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="513"/>
         <location filename="SandMan.cpp" line="657"/>
         <source>Run Sandboxed</source>
-        <translation>在沙箱中執行</translation>
+        <translation>在沙箱內執行</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="618"/>
@@ -4439,7 +4439,7 @@ Error: %1</source>
     <message>
         <location filename="SandMan.cpp" line="3671"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
-        <translation>使用「沙箱/群組」上下文選單可以將沙箱和群組移動至其它群組。同時，您可以透過滑鼠拖曳移動項目。此外，您也可以使用 Alt + 方向鍵將項目在群組內上下移動。&lt;br /&gt;您可以透過沙箱選單新增沙箱和群組。</translation>
+        <translation>使用「沙箱/群組」環境選單可以將沙箱和群組移動至其它群組。同時，您可以透過滑鼠拖曳移動項目。此外，您也可以使用 Alt + 方向鍵將項目在群組內上下移動。&lt;br /&gt;您可以透過沙箱選單新增沙箱和群組。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3824"/>
@@ -4665,7 +4665,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4413"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation>Sandboxie-Plus 是 Sandboxie 的一個開源延續。&lt;br /&gt;造訪 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 了解更多資訊。&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;特性: %3&lt;br /&gt;&lt;br /&gt;已安裝: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;圖示來自於 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
+        <translation>Sandboxie-Plus 是 Sandboxie 的一個開源延續。&lt;br /&gt;造訪 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 了解更多資訊。&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;可用特性: %3&lt;br /&gt;&lt;br /&gt;安裝於: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;圖示來自於 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
@@ -4720,7 +4720,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="main.cpp" line="206"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation>Sandboxie 管理員不能沙箱化執行！</translation>
+        <translation>Sandboxie 管理員不能被沙箱化執行！</translation>
     </message>
 </context>
 <context>
@@ -5356,7 +5356,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <source>Run Sandboxed</source>
-        <translation type="vanished">在沙箱中執行</translation>
+        <translation type="vanished">在沙箱內執行</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="305"/>
@@ -5991,7 +5991,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>Eternal</source>
-        <translation>永久</translation>
+        <translation>永恆</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1541"/>
@@ -6352,7 +6352,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="532"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>在檔案總管上下文選單新增「在沙箱中執行」</translation>
+        <translation>在檔案總管環境選單新增「在沙箱內執行」</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="537"/>
@@ -7535,7 +7535,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="698"/>
         <source>Issue message 2102 when a file is too large</source>
-        <translation>當檔案過大時提示錯誤代碼 2102</translation>
+        <translation>當檔案過大時發出錯誤代碼 2102</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
@@ -7822,7 +7822,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1552"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation>當主機處理程序嘗試存取沙箱化處理程序/沙箱根目錄時提示訊息 1318/1317</translation>
+        <translation>當主機處理程序嘗試存取沙箱化處理程序/沙箱根目錄時發出錯誤代碼 1318/1317</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1496"/>
@@ -7864,7 +7864,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="1346"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
         <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
-        <translation>對沙箱化檔案和資料夾使用原始存取管理條目 (Access Control Entries) (對 MSIServer 啟用豁免)</translation>
+        <translation>對沙箱化檔案和資料夾使用原始存取控制條目 (Access Control Entries) (對 MSIServer 啟用豁免)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1364"/>
@@ -7932,7 +7932,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2755"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>當程式啟動失敗時提示錯誤代碼 1308</translation>
+        <translation>當程式啟動失敗時發出錯誤代碼 1308</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2705"/>
@@ -7967,7 +7967,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3486"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>當程式被拒絕存取網路時提示錯誤代碼 1307</translation>
+        <translation>當程式被拒絕存取網路時發出錯誤代碼 1307</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3500"/>
@@ -8021,7 +8021,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="588"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation>當一個檔案沒有被完全遷移時，提示錯誤代碼 2113/2114/2115</translation>
+        <translation>當一個檔案沒有被完全遷移時，發出錯誤代碼 2113/2114/2115</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="612"/>
@@ -8077,7 +8077,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1447"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation>注意: 各種隔離功能會破壞與某些應用程式的相容性&lt;br /&gt;如果使用此沙箱&lt;b&gt;不是為了安全性&lt;/b&gt;，而是為了應用程式的可移植性，可以透過變更這些選項，犧牲部分安全性來復原相容性。</translation>
+        <translation>注意: 各種隔離功能會破壞與某些應用程式的相容性&lt;br /&gt;如果使用此沙箱&lt;b&gt;不是為了安全性&lt;/b&gt;，而是為了應用程式的可攜性，可以透過變更這些選項，犧牲部分安全性來復原相容性。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="949"/>
@@ -8092,7 +8092,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4440"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation>當一個程式試圖載入一個沙箱化動態連結程式庫 (DLL) 檔案時，提示錯誤代碼 1305</translation>
+        <translation>當一個程式試圖載入一個沙箱化動態連結程式庫 (DLL) 檔案時，發出錯誤代碼 1305</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4433"/>
@@ -8242,7 +8242,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2034"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation>廢棄 ConHost.exe 處理程序整合等級</translation>
+        <translation>廢棄 ConHost.exe 處理程序整合層級</translation>
     </message>
     <message>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security. Please review the security section for each option in the documentation before use.</source>
@@ -8483,7 +8483,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="827"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation>處理程序被拒絕存取非沙箱處理程序記憶體時提示錯誤代碼 2111</translation>
+        <translation>處理程序被拒絕存取非沙箱處理程序記憶體時發出錯誤代碼 2111</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
@@ -8513,7 +8513,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1296"/>
         <source>File ACLs</source>
-        <translation>檔案存取管理清單 (ACL)</translation>
+        <translation>檔案存取控制清單 (ACL)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1933"/>
@@ -8731,7 +8731,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4342"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
-        <translation>強制使用自訂虛擬 Manifest 檔案 (遺留行為)</translation>
+        <translation>強制使用自訂虛擬工具性質規定檔 (遺留行為)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3440"/>
@@ -9558,7 +9558,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="95"/>
         <source>Run Sandboxed</source>
-        <translation>在沙箱中執行</translation>
+        <translation>在沙箱內執行</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="38"/>
@@ -9607,7 +9607,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="603"/>
         <source>Run Sandboxed - Actions</source>
-        <translation>在沙箱中執行 - 動作</translation>
+        <translation>在沙箱內執行 - 動作</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="485"/>
@@ -9627,12 +9627,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="472"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>加入「在沙箱中執行」至檔案總管上下文選單</translation>
+        <translation>加入「在沙箱內執行」至檔案總管環境選單</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="174"/>
         <source>Run box operations asynchronously whenever possible (like content deletion)</source>
-        <translation>盡可能以異步方式執行沙箱的各類操作 (如內容刪除)</translation>
+        <translation>盡可能以非同步方式執行沙箱的各類操作 (如內容刪除)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="120"/>
@@ -9652,7 +9652,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="656"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
-        <translation>加入「在沙箱外執行」至上下文選單</translation>
+        <translation>加入「在沙箱外執行」至環境選單</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="797"/>
@@ -9809,7 +9809,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="134"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation>用於置頂 Sandboxie 管理員視窗的快速鍵:</translation>
+        <translation>用於將 Sandboxie 管理員視窗最上層顯示的快速鍵:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="148"/>
@@ -9836,12 +9836,12 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="663"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation>加入「設定強制沙箱化」至上下文選單</translation>
+        <translation>加入「設定強制沙箱化」至環境選單</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="570"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation>加入「設定在沙箱中開啟路徑」至上下文選單</translation>
+        <translation>加入「設定在沙箱中開啟路徑」至環境選單</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="698"/>
@@ -10232,7 +10232,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2460"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>當下列程式在任意沙箱之外啟動時，Sandboxie 將提示錯誤代碼 SBIE1301。</translation>
+        <translation>當下列程式在任意沙箱之外啟動時，Sandboxie 將發出錯誤代碼 SBIE1301。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2484"/>
@@ -10247,7 +10247,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2498"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>當程式啟動失敗時提示錯誤代碼 1308</translation>
+        <translation>當程式啟動失敗時發出錯誤代碼 1308</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="195"/>
@@ -10307,7 +10307,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2477"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation>當強制沙箱處理程序被停用時，提示錯誤代碼 1301</translation>
+        <translation>當強制沙箱處理程序被停用時，發出錯誤代碼 1301</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2071"/>
@@ -10318,7 +10318,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>This option also enables asynchronous operation when needed and suspends updates.</source>
-        <translation>在暫緩更新或其它需要的情況使用異步操作。</translation>
+        <translation>在暫緩更新或其它需要的情況使用非同步操作。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="415"/>
@@ -10457,7 +10457,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2519"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
-        <translation>當程式已被強制執行至一個沙箱時，提示錯誤代碼 1321</translation>
+        <translation>當程式已被強制執行至一個沙箱時，發出錯誤代碼 1321</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2529"/>

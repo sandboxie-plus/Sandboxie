@@ -1005,7 +1005,7 @@ void COptionsWindow::OnBrowsePath()
 	
 	QVariantMap Entry;
 	Entry["Name"] = Name;
-	Entry["Command"] = "\"" + (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value) + "\"";
+	Entry["Command"] = (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value);
 	AddRunItem(ui.treeRun, Entry);
 
 	m_GeneralChanged = true;

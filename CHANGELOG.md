@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.15.7 / 5.70.7] - 2025-02-?
+
+### Added
+
+
+### Changed
+
+
+### Fixed
+- fixed Pinned shortcuts created from 'Run from Start Menu' are not functional [#4502](https://github.com/sandboxie-plus/Sandboxie/issues/4502)
+
+
+
 ## [1.15.6 / 5.70.6] - 2025-02-03
 
 ### Added

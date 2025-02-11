@@ -6353,7 +6353,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>你真的想删除选定的本地模板吗？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2640"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2644"/>
         <source>%1 (Current)</source>
         <translation>%1 (当前)</translation>
     </message>

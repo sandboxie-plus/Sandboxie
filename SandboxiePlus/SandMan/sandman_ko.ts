@@ -6439,7 +6439,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>선택한 로컬 템플릿을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2640"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2644"/>
         <source>%1 (Current)</source>
         <translation>%1 (현재)</translation>
     </message>

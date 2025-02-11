@@ -5960,7 +5960,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>هل تريد حقًا حذف القالب المحلي المحدد؟</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2640"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2644"/>
         <source>%1 (Current)</source>
         <translation>%1 (الحالي)</translation>
     </message>

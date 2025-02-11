@@ -6538,7 +6538,7 @@ Você pode solicitar até %3 certificados de avaliação para cada ID de hardwar
         <translation>Você realmente deseja excluir o(s) modelo(s) local(is) selecionado(s)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2640"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2644"/>
         <source>%1 (Current)</source>
         <translation>%1 (Atual)</translation>
     </message>

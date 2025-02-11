@@ -6524,7 +6524,7 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
         <translation>¿Desea realmente borrar la(s) plantilla(s) local(es) seleccionada(s)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2640"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2644"/>
         <source>%1 (Current)</source>
         <translation>%1 (Actual)</translation>
     </message>

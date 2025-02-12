@@ -1059,8 +1059,8 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 
                 //
                 // On windows 10 then a process running in a job with JobObjectBasicUIRestrictions set 
-                // tryes to call CreateDesktop this will BSOD the system someware in the win32k subsystem.
-                // This behavioure can be easily reproduced outside of sandboxie as well.
+                // tries to call CreateDesktop this will BSOD the system someware in the win32k subsystem.
+                // This behaviour can be easily reproduced outside of sandboxie as well.
                 // 
                 if(SbieApi_QueryConfBool(boxname, L"OpenWndStation", FALSE))
                     ok = TRUE;

@@ -1019,10 +1019,10 @@ _FX NTSTATUS Conf_Merge_Template(
             }
 
             nset = Mem_Alloc(data->pool, sizeof(CONF_SETTING));
-            nset->from_template = TRUE;
-            nset->template_handled = FALSE;
             if (! nset)
                 return STATUS_INSUFFICIENT_RESOURCES;
+            nset->from_template = TRUE;
+            nset->template_handled = FALSE;
             nset->name = Mem_AllocString(data->pool, oset->name);
             if (! nset->name)
                 return STATUS_INSUFFICIENT_RESOURCES;

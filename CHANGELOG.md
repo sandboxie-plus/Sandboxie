@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.15.7 / 5.70.7] - 2025-02-?
+## [1.15.7 / 5.70.7] - 2025-02-??
 
 ### Added
 
@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed obsolete entries in the Sandboxie Plus installer
 - fixed Pinned shortcuts created from 'Run from Start Menu' are not functional [#4502](https://github.com/sandboxie-plus/Sandboxie/issues/4502)
+- potential BSOD issue with driver in low resource conditions
 
 
 

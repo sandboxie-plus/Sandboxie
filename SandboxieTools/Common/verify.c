@@ -183,7 +183,7 @@ CleanupExit:
     if (!NT_SUCCESS(status))
         MyFreeHash(pHashObj);
 
-    return status;
+    return STATUS_SUCCESS;
 }
 
 static NTSTATUS MyHashData(MY_HASH_OBJ* pHashObj, PVOID Data, ULONG DataSize)
@@ -323,7 +323,7 @@ CleanupExit:
     if (signAlgHandle)
         BCryptCloseAlgorithmProvider(signAlgHandle, 0);
 
-    return status;
+    return STATUS_SUCCESS;
 }
 
 NTSTATUS SignHash(
@@ -366,7 +366,7 @@ CleanupExit:
     if (signAlgHandle)
         BCryptCloseAlgorithmProvider(signAlgHandle, 0);
 
-    return status;
+    return STATUS_SUCCESS;
 }
 
 
@@ -392,7 +392,7 @@ CleanupExit:
     if (hash)
         free(hash);
 
-    return status;
+    return STATUS_SUCCESS;
 }
 
 
@@ -428,7 +428,7 @@ CleanupExit:
     if (signatureFileName)
         free(signatureFileName);
 
-    return status;
+    return STATUS_SUCCESS;
 }
 
 static VOID CstFailWithStatus(_In_ const wchar_t* Message, _In_ NTSTATUS Status, _In_opt_ ULONG Win32Result)

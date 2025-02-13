@@ -89,6 +89,12 @@
 "Sandboxie failed to start a service in the sandbox": "Sandboxie'nin korumalı alanda bir hizmeti başlatamadığını bildirir",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Mesaj, Sandboxie'nin SandboxieRpcSs veya SandboxieDcomLaunch yardımcı programlarından birini başlatamadığını belirtir. Mesajda belirtilen ad rpcss veya dcomlaunch olabilir.\n\nSorunu analiz etmemize yardımcı olması için sonraki sayfadan bir sorun raporu gönderebilirsiniz.",
 
+"SBIE2224: Sandboxed program has crashed":"SBIE2224: Korumalı alanda program çöktü",
+"A Sandboxed program has crashed":"Korumalı alanda bir program çöktü",
+"The Process '%1' crashed":"'%1' işlemi çöktü",
+"This program is known to work in a Green (App Compartment) type sandbox.":"Bu programın Uygulama Bölmesi (YEŞİL) türü alanda çalıştığı bilinmektedir.",
+"There is no known workaround for this process. Do you want to report this issue?":"Bu işlem için bilinen bir geçici çözüm bulunmamaktadır. Bu sorunu bildirmek ister misiniz?",
+
 "SBIE2313: Could not execute specific process": "SBIE2313: Korumalı alan işlemi yürütülemedi",
 "Sandboxie failed to start a process in the sandbox": "Sandboxienin korumalı alanda bir işlem yürütemediğini bildirir",
 "Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie kendi programlarından birini çalıştıramadı. Sandboxie kurulum klasörüne erişim izinlerini kontrol edin ve/veya Sandboxie'yi yeniden yükleyin.\n\nOlası Nedenler:\n1. Sandboxie, program dosyalarını içeren klasöre erişimi engelleyecek şekilde yapılandırılmıştır.\n2. Mesajda bahsedilen programın yürütülmesini engellemek için bir üçüncü taraf (HIPS) güvenlik yazılımı yapılandırıldı.\n\nSorunu analiz etmemize yardımcı olması için sonraki sayfadan bir sorun raporu gönderebilirsiniz.",
@@ -117,5 +123,13 @@
 "Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Bu ve diğer sbie mesajları hakkında daha fazla bilgi edinmek için <a href=\"%1\">online-documentation</a> sayfasını ziyaret edin.",
 "Would you like to collect some logs to help us resolve the issue.": "Sorunu çözmemize yardımcı olacak bazı günlükler toplamak ister misiniz?",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Şimdi lütfen Sbie mesajını tetiklemek için uygulamanızı tekrar çalıştırın.<br /><br />",
-"Press NEXT when you are done collecting logs.": "Günlükleri toplamayı tamamladığınızda SONRAKİ'ne tıklayın."
+"Press NEXT when you are done collecting logs.": "Günlükleri toplamayı tamamladığınızda SONRAKİ'ne tıklayın.",
+
+"Unknown application crashed":"Bilinmeyen uygulama çöktü",
+"An Unknown application crashed":"Bilinmeyen bir uygulama çöktü",
+"Do you want to report this issue?":"Bu sorunu bildirmek ister misiniz?",
+
+"Viber crashes on startup":"Viber başlangıçta çöküyor",
+"The Viber messenger crashes on startup":"Viber mesajlaşma uygulaması başlangıçta çöküyor",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber, Standart Yalıtımlı Alan (SARI) türü ile uyumlu çalışmayabilir. Ancak Uygulama Bölmesi (YEŞİL) türü alanda çalıştığı bilinmektedir."
 }

@@ -89,6 +89,12 @@
 "Sandboxie failed to start a service in the sandbox": "A Sandboxie-nak nem sikerült elindítania a szolgáltatást a homokozóban",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Az üzenet azt jelzi, hogy a Sandboxie nem tudta elindítani a SandboxieRpcSs vagy SandboxieDcomLaunch segédprogramok egyikét. Az üzenetben szereplő név lehet rpcss vagy dcomlaunch.\n\nHibajelentést küldhet a következő oldalon, hogy segítsen nekünk a probléma elemzésében.",
 
+"SBIE2224: Sandboxed program has crashed":"SBIE2224: Sandboxed program has crashed",
+"A Sandboxed program has crashed":"A Sandboxed program has crashed",
+"The Process '%1' crashed":"The Process '%1' crashed",
+"This program is known to work in a Green (App Compartment) type sandbox.":"This program is known to work in a Green (App Compartment) type sandbox.",
+"There is no known workaround for this process. Do you want to report this issue?":"There is no known workaround for this process. Do you want to report this issue?",
+
 "SBIE2313: Could not execute specific process": "SBIE2313: adott folyamat nem hajtható végre",
 "Sandboxie failed to start a process in the sandbox": "A Sandboxie-nak nem sikerült elindítania egy folyamatot a homokozóban",
 "Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "A Sandboxie nem tudta végrehajtani egyik saját programját. Ellenőrizze a Sandboxie telepítési mappájához való hozzáférési jogosultságokat és/vagy telepítse újra a Sandboxie-t.\n\nLehetséges okok:\n1. A Sandboxie úgy lett beállítva, hogy blokkolja a hozzáférést a programfájljait tartalmazó mappához.\n2. Egy harmadik féltől származó (HIPS) biztonsági szoftvert úgy konfiguráltak, hogy blokkolja az üzenetben említett program végrehajtását.\n\nA következő oldalon küldhet be egy hibajelentést, hogy segítsen nekünk a probléma elemzésében.",
@@ -117,5 +123,13 @@
 "Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Látogassa meg az <a href=\"%1\">online dokumentációt</a>, ha többet szeretne megtudni erről és más sbie-üzenetekről.",
 "Would you like to collect some logs to help us resolve the issue.": "Összegyűjt néhány naplót a probléma megoldásához.",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Most futtassa újra az alkalmazást a Sbie üzenet elindításához.<br /><br />",
-"Press NEXT when you are done collecting logs.": "Nyomja meg a 'KÖVETKEZŐ' gombot, ha végzett a naplók összegyűjtésével."
+"Press NEXT when you are done collecting logs.": "Nyomja meg a 'KÖVETKEZŐ' gombot, ha végzett a naplók összegyűjtésével.",
+
+"Unknown application crashed":"Unknown application crashed",
+"An Unknown application crashed":"An Unknown application crashed",
+"Do you want to report this issue?":"Do you want to report this issue?",
+
+"Viber crashes on startup":"Viber crashes on startup",
+"The Viber messenger crashes on startup":"The Viber messenger crashes on startup",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox."
 }

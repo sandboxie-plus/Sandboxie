@@ -793,12 +793,12 @@ Hata: %1</translation>
 <context>
     <name>CCompletePage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1074"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1076"/>
         <source>Troubleshooting Completed</source>
         <translation>Sorun Giderme Tamamlandı</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1084"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1086"/>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
@@ -1226,7 +1226,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <translation>Arama filtresi</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="524"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="526"/>
         <source>None of the above</source>
         <translation>Yukarıdakilerin hiçbiri</translation>
     </message>
@@ -2718,22 +2718,22 @@ Tam yol: %4</translation>
 <context>
     <name>CRunPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="590"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>Sorun giderme ...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="613"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="615"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
         <translation>Bu sorunu giderme işlemi başlatılamadı. Bir sorun raporu göndermek için ileri&apos;ye tıklayabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="726"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="728"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <translation>Dahili olarak bir sorun oluştu ve bu sorun giderme işlemi devam edemiyor. Bir sorun raporu göndermek için İleri&apos;ye tıklayabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="727"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="729"/>
         <source>
 
 Error: </source>
@@ -6011,100 +6011,100 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
 <context>
     <name>CSubmitPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="811"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="813"/>
         <source>Submit Issue Report</source>
         <translation>Sorun Raporu Gönder</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="825"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="827"/>
         <source>Detailed issue description</source>
         <translation>Ayrıntılı sorun açıklaması</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="829"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="831"/>
         <source>Attach Sandboxie.ini</source>
         <translation>Sandboxie.ini&apos;yi Ekle</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="830"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="832"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <translation>Sandboxie uyumluluğu yapılandırmaya bağlıdır, bu nedenle Sandboxie.ini&apos;yi eklemek sorunu bulmada çok yardımcı olur.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="833"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="835"/>
         <source>Attach Logs</source>
         <translation>Günlükleri Ekle</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="835"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="837"/>
         <source>Selecting partially checked state sends only the message log, but not the trace log.
 Before sending, you can review the logs in the main window.</source>
         <translation>İzleme günlüğü olmadan yalnızca mesaj günlüğü göndermek için işaret kutusunu kısmen işaretli duruma getirebilirsiniz. Göndermeden önce ana pencereden gönderilecek günlükleri inceleyebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="838"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="840"/>
         <source>Attach Crash Dumps</source>
         <translation>Çökme Dökümlerini Ekle</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="839"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="841"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <translation>Sorun giderme işlemi sırasında bir uygulama çöktü, bir çökme dökümü eklemek hata ayıklamaya yardımcı olabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="843"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="845"/>
         <source>Email address</source>
         <translation>E-posta adresi</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="844"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="846"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
         <translation>Sorununuz için bir çözüm belirlendiğinde bildirim almak için bir e-posta adresi sağlama seçeneğiniz vardır.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="852"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="854"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
         <translation>Şu anda Sandboxie Plus ile yaşadığınız rahatsızlıktan dolayı özür dileriz. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="859"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="861"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
         <translation>Ne yazık ki, otomatik sorun giderme işlemi başarısız oldu. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="865"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="867"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
         <translation>Maalesef, tanımladığınız belirli sorun için otomatik bir sorun giderme işlemi bulunmamaktadır. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="870"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="872"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
         <translation>Sorun raporu göndermek istiyorsanız, lütfen aşağıdaki raporu inceleyin ve &apos;Bitir&apos;e tıklayın.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="969"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="971"/>
         <source>Compressing Logs</source>
         <translation>Günlükler Sıkıştırılıyor</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1003"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1005"/>
         <source>Compressing Dumps</source>
         <translation>Çökme Dosyaları Sıkıştırılıyor</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1040"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1042"/>
         <source>Submitting issue report...</source>
         <translation>Sorun raporu gönderiliyor...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1051"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1053"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
         <translation>Sorun raporu gönderilemedi, hata %1
 Günlük eklemeden göndermeyi deneyin.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1055"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1057"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <translation>Sorun raporunuz başarıyla gönderildi, teşekkür ederiz.</translation>
     </message>

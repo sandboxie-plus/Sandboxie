@@ -883,12 +883,12 @@ Error: %1</translation>
 <context>
     <name>CCompletePage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1074"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1076"/>
         <source>Troubleshooting Completed</source>
         <translation>Solución de problemas completada</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1084"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1086"/>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
@@ -1339,7 +1339,7 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
         <translation>Filtro de búsqueda</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="524"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="526"/>
         <source>None of the above</source>
         <translation>Ninguno de los anteriores</translation>
     </message>
@@ -3020,23 +3020,23 @@ Ruta completa: %4</translation>
 <context>
     <name>CRunPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="590"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>Solucionando problemas...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="613"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="615"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
         <translation>Este procedimiento de resolución de problemas no se pudo iniciar. Puede pulsar en siguiente para enviar un informe de error.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="726"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="728"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
         <translation>Algo falló internamente, este procedimiento de resolución de problemas no puede continuar. Puede pulsar en siguiente para enviar un informe de error.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="727"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="729"/>
         <source>
 
 Error: </source>
@@ -6660,32 +6660,32 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
 <context>
     <name>CSubmitPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="811"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="813"/>
         <source>Submit Issue Report</source>
         <translation>Enviar Informe de Incidencia</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="825"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="827"/>
         <source>Detailed issue description</source>
         <translation>Descripción detallada de la incidencia</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="829"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="831"/>
         <source>Attach Sandboxie.ini</source>
         <translation>Adjuntar Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="830"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="832"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <translation>La compatibilidad de la sandbox aislada depende de la configuración, por lo tanto, adjuntar el archivo Sandboxie.ini ayuda mucho a encontrar el problema.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="833"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="835"/>
         <source>Attach Logs</source>
         <translation>Adjuntar Registros</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="835"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="837"/>
         <source>Selecting partially checked state sends only the message log, but not the trace log.
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
@@ -6694,70 +6694,70 @@ Before sending you can review the logs in the main window.</oldsource>
 Antes de enviar, puedes revisar los registros en la ventana principal.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="838"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="840"/>
         <source>Attach Crash Dumps</source>
         <translation>Adjuntar Volcados de memoria tras un Error</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="839"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="841"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <oldsource>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</oldsource>
         <translation>Una aplicación falló durante el procedimiento de resolución de problemas, adjuntar un archivo de volcado de memoria puede ayudar con la depuración.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="843"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="845"/>
         <source>Email address</source>
         <translation>Dirección de correo</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="844"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="846"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
         <translation>Tiene la opción de proporcionar una dirección de correo para recibir una notificación una vez que una solución para su incidencia se ha identificado.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="852"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="854"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
         <translation>Nos disculpamos por las molestias que está afrontando con Sandboxie-Plus. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="859"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="861"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
         <translation>Desafortunadamente, la resolución de problemas automatizada ha fracasado. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="865"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="867"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
         <translation>Lamentablemente, no hay un procedimiento de solución de problemas automatizado disponible para el problema específico que ha descrito. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="870"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="872"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
         <translation>Si desea enviar un informe de la incidencia, por favor compruebe el informe de debajo y pulse en &apos;Finalizar&apos;.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="969"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="971"/>
         <source>Compressing Logs</source>
         <translation>Comprimiendo Registros</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1003"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1005"/>
         <source>Compressing Dumps</source>
         <translation>Comprimiendo Volcados</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1040"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1042"/>
         <source>Submitting issue report...</source>
         <translation>Enviando informe de error...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1051"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1053"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
         <translation>Falló el envío del informe de error, error %1
 Pruebe a enviarlo sin adjuntar el registro.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1055"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1057"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
         <translation>Su informe de error se ha enviado con éxito, gracias.</translation>

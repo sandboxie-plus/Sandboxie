@@ -953,12 +953,12 @@ Error: %1</source>
 <context>
     <name>CCompletePage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1074"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1076"/>
         <source>Troubleshooting Completed</source>
         <translation>문제 해결 완료</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1084"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1086"/>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
@@ -1404,7 +1404,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>검색 필터</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="524"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="526"/>
         <source>None of the above</source>
         <translation>위의 항목에 해당하지 않음</translation>
     </message>
@@ -3038,23 +3038,23 @@ Full path: %4</source>
 <context>
     <name>CRunPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="590"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>문제 해결...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="613"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="615"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
         <translation>이 문제 해결 절차를 초기화할 수 없습니다. 다음을 클릭하여 이슈 보고서를 제출할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="726"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="728"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
         <translation>내부적으로 일부 오류가 발생했습니다. 이 문제 해결 절차를 계속할 수 없습니다. 다음을 클릭하여 이슈 보고서를 제출할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="727"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="729"/>
         <source>
 
 Error: </source>
@@ -6592,17 +6592,17 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
 <context>
     <name>CSubmitPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="811"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="813"/>
         <source>Submit Issue Report</source>
         <translation>문제 보고서 제출</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="825"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="827"/>
         <source>Detailed issue description</source>
         <translation>상세 문제 설명</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="829"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="831"/>
         <source>Attach Sandboxie.ini</source>
         <translation>Sandboxie.ini 첨부</translation>
     </message>
@@ -6612,17 +6612,17 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation type="vanished">샌드박스 호환성은 구성에 따라 달라지므로 sandboxie.ini를 첨부하면 문제를 찾는 데 많은 도움이 됩니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="830"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="832"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <translation>샌드박스 호환성은 구성에 따라 다르므로 Sandboxie.ini 파일을 첨부하면 문제를 찾는 데 많은 도움이 됩니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="833"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="835"/>
         <source>Attach Logs</source>
         <translation>로그 첨부</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="835"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="837"/>
         <source>Selecting partially checked state sends only the message log, but not the trace log.
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
@@ -6631,70 +6631,70 @@ Before sending you can review the logs in the main window.</oldsource>
 보내기 전에 기본 창에서 로그를 검토할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="838"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="840"/>
         <source>Attach Crash Dumps</source>
         <translation>충돌 덤프 연결</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="839"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="841"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <oldsource>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</oldsource>
         <translation>문제 해결 절차 중에 응용 프로그램이 충돌한 경우 충돌 덤프를 첨부하면 디버깅에 도움이 될 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="843"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="845"/>
         <source>Email address</source>
         <translation>이메일주소</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="844"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="846"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
         <translation>문제에 대한 해결책이 확인되면 알림을 받을 이메일 주소를 제공할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="852"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="854"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
         <translation>현재 Sandboxie-Plus로 인해 불편을 끼쳐드린 점 사과드립니다. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="859"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="861"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
         <translation>안타깝게도 자동화된 문제 해결 절차가 실패했습니다. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="865"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="867"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
         <translation>유감스럽게도 귀하가 설명한 특정 문제에 대해 사용할 수 있는 자동화된 문제 해결 절차가 없습니다. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="870"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="872"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
         <translation>문제 보고서를 제출하려면 아래 보고서를 검토하고 &apos;완료&apos;를 클릭하세요.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="969"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="971"/>
         <source>Compressing Logs</source>
         <translation>로그 압축</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1003"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1005"/>
         <source>Compressing Dumps</source>
         <translation>덤프 압축</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1040"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1042"/>
         <source>Submitting issue report...</source>
         <translation>문제 보고서 제출 중...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1051"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1053"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
         <translation>문제 보고서를 제출하지 못했습니다. 오류 %1
 로그를 첨부하지 않고 제출해 보세요.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1055"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1057"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
         <translation>문제 보고서가 성공적으로 제출되었습니다. 감사합니다.</translation>

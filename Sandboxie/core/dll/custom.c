@@ -1664,7 +1664,7 @@ ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigne
 {
     ULONG ret = __sys_NsiAllocateAndGetTable(a1, NPI_MS_ID, TcpInformationId, pAddrEntry, SizeOfAddrEntry, a6, a7, pStateEntry, SizeOfStateEntry, pOwnerEntry, SizeOfOwnerEntry, Count, a13);
 	static long num = 0;
-    if (memcmp(NPI_MS_ID, NPI_MS_NDIS_MODULEID, 24) == 0 && pStateEntry)
+    if (ret == 0 && memcmp(NPI_MS_ID, NPI_MS_NDIS_MODULEID, 24) == 0 && TcpInformationId == 1 && pStateEntry)
     {
         typedef struct _STATE_ENTRY {
             DWORD ThreadCompartmentId;     // 0

@@ -720,15 +720,10 @@ _FX void Dll_RefreshPathList(void)
     if (SbieApi_Call(API_REFRESH_FILE_PATH_LIST, 0) == STATUS_SUCCESS) {
 
         //
-        // Reset paths and re load lists
+        // Reset paths thay will be re loaded when used
         //
 
         Dll_InitPathList();
-
-        SbieDll_MatchPath(L'f', (const WCHAR *)-1);
-        SbieDll_MatchPath(L'w', (const WCHAR *)-1);
-        SbieDll_MatchPath(L'i', (const WCHAR *)-1);
-        SbieDll_MatchPath(L'k', (const WCHAR *)-1);
 
 //#ifdef USE_MATCH_PATH_EX
 //        LIST normal_paths, open_paths, closed_paths, write_paths, read_paths;

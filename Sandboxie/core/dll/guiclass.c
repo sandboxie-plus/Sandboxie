@@ -1037,7 +1037,7 @@ _FX BOOLEAN Gui_IsOpenClass(const WCHAR *ClassName)
 
         if (! Gui_MatchPath_Initialized) {
 
-            mp_flags = SbieDll_MatchPath(L'w', (const WCHAR *)-1);
+            SbieDll_MatchPath(L'w', (const WCHAR *)-1);
 
             Gui_MatchPath_Initialized = TRUE;
         }

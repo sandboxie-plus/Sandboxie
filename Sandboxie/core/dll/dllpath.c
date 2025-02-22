@@ -37,6 +37,7 @@
 typedef struct _PATH_LIST_ANCHOR {
 
     POOL *pool;
+    POOL *pool2;
 
     BOOLEAN file_paths_initialized;
     BOOLEAN key_paths_initialized;
@@ -82,11 +83,10 @@ typedef struct _PATH_LIST_ANCHOR {
 //---------------------------------------------------------------------------
 
 
+static BOOLEAN Dll_InitPathList2(POOL *pool, 
 #ifdef USE_MATCH_PATH_EX
-static BOOLEAN Dll_InitPathList2(
     ULONG path_code, LIST *normal, LIST *open, LIST *closed, LIST *write, LIST *read);
 #else
-static BOOLEAN Dll_InitPathList2(
     ULONG path_code, LIST *open, LIST *closed, LIST *write);
 #endif
 
@@ -112,22 +112,18 @@ static CRITICAL_SECTION Dll_FilePathListCritSec;
 _FX BOOLEAN Dll_InitPathList(void)
 {
     PATH_LIST_ANCHOR *anchor;
-    POOL *pool;
-    POOL *old_pool;
+    POOL *pool, *pool2;
 
-    if (!Dll_PathListAnchor) { // first init
-    
-        InitializeCriticalSectionAndSpinCount(&Dll_FilePathListCritSec, 1000);
-
-        old_pool = NULL;
-    }
-    else { // re init
-
-        old_pool = Dll_PathListAnchor->pool;
-    }
+    InitializeCriticalSectionAndSpinCount(&Dll_FilePathListCritSec, 1000);
 
     pool = Pool_Create();
     if (! pool) {
+        SbieApi_Log(2305, NULL);
+        return FALSE;
+    }
+
+    pool2 = Pool_Create();
+    if (! pool2) {
         SbieApi_Log(2305, NULL);
         return FALSE;
     }
@@ -137,13 +133,11 @@ _FX BOOLEAN Dll_InitPathList(void)
         SbieApi_Log(2305, NULL);
         return FALSE;
     }
-    memzero(anchor, sizeof(PATH_LIST_ANCHOR));
-
     Dll_PathListAnchor = anchor;
-    anchor->pool = pool;
 
-    if (old_pool) // delete old pool if this was a re init
-        Pool_Delete(old_pool);
+    memzero(anchor, sizeof(PATH_LIST_ANCHOR));
+    anchor->pool = pool;
+    anchor->pool2 = pool2;
 
     return TRUE;
 }
@@ -153,11 +147,10 @@ _FX BOOLEAN Dll_InitPathList(void)
 // Dll_InitPathList2
 //---------------------------------------------------------------------------
 
+_FX BOOLEAN Dll_InitPathList2(POOL *pool,
 #ifdef USE_MATCH_PATH_EX
-_FX BOOLEAN Dll_InitPathList2(
     ULONG path_code, LIST *normal, LIST *open, LIST *closed, LIST *write, LIST *read)
 #else
-_FX BOOLEAN Dll_InitPathList2(
     ULONG path_code, LIST *open, LIST *closed, LIST *write)
 #endif
 {
@@ -166,29 +159,29 @@ _FX BOOLEAN Dll_InitPathList2(
 #ifdef USE_MATCH_PATH_EX
     if (ok && normal) {
         path_code = (path_code & 0xFF00) | 'n';
-        ok = Dll_InitPathList3(Dll_PathListAnchor->pool, path_code, normal);
+        ok = Dll_InitPathList3(pool, path_code, normal);
     }
 #endif
 
     if (ok && open) {
         path_code = (path_code & 0xFF00) | 'o';
-        ok = Dll_InitPathList3(Dll_PathListAnchor->pool, path_code, open);
+        ok = Dll_InitPathList3(pool, path_code, open);
     }
 
     if (ok && closed) {
         path_code = (path_code & 0xFF00) | 'c';
-        ok = Dll_InitPathList3(Dll_PathListAnchor->pool, path_code, closed);
+        ok = Dll_InitPathList3(pool, path_code, closed);
     }
 
     if (ok && write) {
         path_code = (path_code & 0xFF00) | 'w';
-        ok = Dll_InitPathList3(Dll_PathListAnchor->pool, path_code, write);
+        ok = Dll_InitPathList3(pool, path_code, write);
     }
 
 #ifdef USE_MATCH_PATH_EX
     if (ok && read) {
         path_code = (path_code & 0xFF00) | 'r';
-        ok = Dll_InitPathList3(Dll_PathListAnchor->pool, path_code, read);
+        ok = Dll_InitPathList3(pool, path_code, read);
     }
 #endif
 
@@ -373,9 +366,9 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
 
         if (! Dll_PathListAnchor->file_paths_initialized) {
 #ifdef USE_MATCH_PATH_EX
-            Dll_InitPathList2('fx', normal_list, open_list, closed_list, write_list, read_list);
+            Dll_InitPathList2(Dll_PathListAnchor->pool2, 'fx', normal_list, open_list, closed_list, write_list, read_list);
 #else
-            Dll_InitPathList2('fx', open_list, closed_list, write_list);
+            Dll_InitPathList2(Dll_PathListAnchor->pool2, 'fx', open_list, closed_list, write_list);
 #endif
             Dll_PathListAnchor->file_paths_initialized = TRUE;
         }
@@ -397,9 +390,9 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
 
         if (! Dll_PathListAnchor->key_paths_initialized) {
 #ifdef USE_MATCH_PATH_EX
-            Dll_InitPathList2('kx', normal_list, open_list, closed_list, write_list, read_list);
+            Dll_InitPathList2(Dll_PathListAnchor->pool, 'kx', normal_list, open_list, closed_list, write_list, read_list);
 #else
-            Dll_InitPathList2('kx', open_list, closed_list, write_list);
+            Dll_InitPathList2(Dll_PathListAnchor->pool, 'kx', open_list, closed_list, write_list);
 #endif
             Dll_PathListAnchor->key_paths_initialized = TRUE;
         }
@@ -418,9 +411,9 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
 
         if (! Dll_PathListAnchor->ipc_paths_initialized) {
 #ifdef USE_MATCH_PATH_EX
-            Dll_InitPathList2('ix', normal_list, open_list, closed_list, NULL, read_list);
+            Dll_InitPathList2(Dll_PathListAnchor->pool, 'ix', normal_list, open_list, closed_list, NULL, read_list);
 #else
-            Dll_InitPathList2('ix', open_list, closed_list, NULL);
+            Dll_InitPathList2(Dll_PathListAnchor->pool, 'ix', open_list, closed_list, NULL);
 #endif
             Dll_PathListAnchor->ipc_paths_initialized = TRUE;
         }
@@ -439,9 +432,9 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
 
         if (! Dll_PathListAnchor->win_classes_initialized) {
 #ifdef USE_MATCH_PATH_EX
-            Dll_InitPathList2('wx', NULL, open_list, NULL, NULL, NULL);
+            Dll_InitPathList2(Dll_PathListAnchor->pool, 'wx', NULL, open_list, NULL, NULL, NULL);
 #else
-            Dll_InitPathList2('wx', open_list, NULL, NULL);
+            Dll_InitPathList2(Dll_PathListAnchor->pool, 'wx', open_list, NULL, NULL);
 #endif
             Dll_PathListAnchor->win_classes_initialized = TRUE;
         }
@@ -719,53 +712,52 @@ _FX void Dll_RefreshPathList(void)
 
     if (SbieApi_Call(API_REFRESH_FILE_PATH_LIST, 0) == STATUS_SUCCESS) {
 
-        //
-        // Reset paths thay will be re loaded when used
-        //
+#ifdef USE_MATCH_PATH_EX
+        LIST normal_paths, open_paths, closed_paths, write_paths, read_paths;
+#else
+        LIST open_paths, closed_paths, write_paths;
+#endif
 
-        Dll_InitPathList();
+#ifdef USE_MATCH_PATH_EX
+        List_Init(&normal_paths);
+#endif
+        List_Init(&open_paths);
+        List_Init(&closed_paths);
+        List_Init(&write_paths);
+#ifdef USE_MATCH_PATH_EX
+        List_Init(&read_paths);
+#endif
 
-//#ifdef USE_MATCH_PATH_EX
-//        LIST normal_paths, open_paths, closed_paths, write_paths, read_paths;
-//#else
-//        LIST open_paths, closed_paths, write_paths;
-//#endif
-//
-//#ifdef USE_MATCH_PATH_EX
-//        List_Init(&normal_paths);
-//#endif
-//        List_Init(&open_paths);
-//        List_Init(&closed_paths);
-//        List_Init(&write_paths);
-//#ifdef USE_MATCH_PATH_EX
-//        List_Init(&read_paths);
-//#endif
-//
-//#ifdef USE_MATCH_PATH_EX
-//        if (Dll_InitPathList2('fx',
-//                    &normal_paths, &open_paths, &closed_paths, &write_paths, &read_paths)) {
-//#else
-//        if (Dll_InitPathList2('fx',
-//                    &open_paths, &closed_paths, &write_paths)) {
-//#endif
-//
-//#ifdef USE_MATCH_PATH_EX
-//            memcpy(&Dll_PathListAnchor->normal_file_path,   &normal_paths,
-//                   sizeof(LIST));
-//#endif
-//            memcpy(&Dll_PathListAnchor->open_file_path,     &open_paths,
-//                   sizeof(LIST));
-//            memcpy(&Dll_PathListAnchor->closed_file_path,   &closed_paths,
-//                   sizeof(LIST));
-//            memcpy(&Dll_PathListAnchor->write_file_path,    &write_paths,
-//                   sizeof(LIST));
-//#ifdef USE_MATCH_PATH_EX
-//            memcpy(&Dll_PathListAnchor->read_file_path,     &read_paths,
-//                   sizeof(LIST));
-//#endif
-//
-//            Dll_PathListAnchor->file_paths_initialized = TRUE;
-//        }
+        POOL* pool2 = Pool_Create();
+        if (pool2) {
+
+            Pool_Delete(Dll_PathListAnchor->pool2);
+            Dll_PathListAnchor->pool2 = pool2;
+        }
+
+#ifdef USE_MATCH_PATH_EX
+        if (Dll_InitPathList2(Dll_PathListAnchor->pool2, 'fx', &normal_paths, &open_paths, &closed_paths, &write_paths, &read_paths)) {
+#else
+        if (Dll_InitPathList2(Dll_PathListAnchor->pool2, 'fx', &open_paths, &closed_paths, &write_paths)) {
+#endif
+
+#ifdef USE_MATCH_PATH_EX
+            memcpy(&Dll_PathListAnchor->normal_file_path,   &normal_paths,
+                   sizeof(LIST));
+#endif
+            memcpy(&Dll_PathListAnchor->open_file_path,     &open_paths,
+                   sizeof(LIST));
+            memcpy(&Dll_PathListAnchor->closed_file_path,   &closed_paths,
+                   sizeof(LIST));
+            memcpy(&Dll_PathListAnchor->write_file_path,    &write_paths,
+                   sizeof(LIST));
+#ifdef USE_MATCH_PATH_EX
+            memcpy(&Dll_PathListAnchor->read_file_path,     &read_paths,
+                   sizeof(LIST));
+#endif
+
+            Dll_PathListAnchor->file_paths_initialized = TRUE;
+        }
     }
 
     LeaveCriticalSection(&Dll_FilePathListCritSec);

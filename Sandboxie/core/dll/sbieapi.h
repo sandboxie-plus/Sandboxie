@@ -231,6 +231,13 @@ LONG SbieApi_MonitorPut2Ex(
     BOOLEAN bCheckObjectExists,
     BOOLEAN bIsMessage);
 
+SBIEAPI_EXPORT
+LONG SbieApi_MonitorPutEx(
+    ULONG Type,
+    ULONG Pid,
+    ULONG Tid,
+    const WCHAR *Message);          // WCHAR [256]
+
 //SBIEAPI_EXPORT
 //LONG SbieApi_MonitorGet(
 //    ULONG *Type,

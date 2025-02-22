@@ -429,9 +429,6 @@ NTSTATUS Dll_GetCurrentSidString(UNICODE_STRING *SidString);
 // Functions (dllhook)
 //---------------------------------------------------------------------------
 
-NTSTATUS Dll_GetSettingsForImageName(
-    const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
-
 BOOLEAN Dll_SkipHook(const WCHAR *HookName);
 
 void *Dll_JumpStub(void *OldCode, void *NewCode, ULONG_PTR StubArg);

@@ -60,12 +60,6 @@ static BOOLEAN File_NotifyNoCopy = FALSE;
 
 _FX BOOLEAN File_InitFileMigration(void)
 {
-    //File_PathPool = Pool_Create();
-    //if (!File_PathPool) {
-    //    SbieApi_Log(2305, NULL);
-    //    return FALSE;
-    //}
-
     for(ULONG i=0; i < NUM_COPY_MODES; i++)
         List_Init(&File_MigrationOptions[i]);
 

@@ -1580,140 +1580,6 @@ BOOLEAN SbieDll_FuncSkipHook(const char* func)
 
 
 //---------------------------------------------------------------------------
-// Dll_GetSettingsForImageName
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS Dll_GetSettingsForImageName(
-    const WCHAR *setting, WCHAR* value, ULONG value_size, const WCHAR *deftext)
-{
-    POOL *pool;
-    WCHAR *text, *image_lwr, *buf;
-    ULONG text_len, image_len;
-    ULONG index;
-    BOOLEAN match = FALSE;
-
-    //
-    //
-    //
-
-    pool = Pool_Create();
-    if (! pool)
-        goto outofmem;
-
-    //
-    //
-    //
-
-    if (deftext)
-        text_len = wcslen(deftext);
-    else
-        text_len = 0;
-    text = Pool_Alloc(pool, (text_len + 1) * sizeof(WCHAR));
-    if (! text)
-        goto outofmem;
-    wmemcpy(text, deftext, text_len);
-    text[text_len] = L'\0';
-
-    //
-    //
-    //
-
-    image_len = (wcslen(Dll_ImageName) + 1) * sizeof(WCHAR);
-    image_lwr = Pool_Alloc(pool, image_len);
-    if (! image_lwr)
-        goto outofmem;
-    memcpy(image_lwr, Dll_ImageName, image_len);
-    _wcslwr(image_lwr);
-    image_len = wcslen(image_lwr);
-
-    //
-    //
-    //
-
-    buf = Pool_Alloc(pool, 1024 * sizeof(WCHAR));
-    if (! buf)
-        goto outofmem;
-
-    index = 0;
-    while (1) {
-
-        WCHAR *ptr, *buf_ptr;
-        PATTERN *image_pat;
-
-        NTSTATUS status = SbieApi_QueryConfAsIs(
-                    NULL, setting, index, buf, 1020 * sizeof(WCHAR));
-        if (! NT_SUCCESS(status))
-            break;
-        ++index;
-
-        ptr = wcschr(buf, L',');
-        if (!ptr) {
-            ptr = buf;
-            goto skip_match; // if there is no L',' it means any image
-        }
-        *ptr = L'\0';
-
-        if (buf[0] == L'/' && buf[1] == L'/' &&
-                (Dll_ProcessFlags & SBIE_FLAG_IMAGE_FROM_SBIE_DIR)) {
-            // a // prefix in the image name (such as //start.exe) matches
-            // only if the image resides in our installation directory
-            buf_ptr = buf + 2;
-        } else
-            buf_ptr = buf;
-
-        image_pat = Pattern_Create(pool, buf_ptr, TRUE, 0);
-        if (Pattern_Match(image_pat, image_lwr, image_len)) {
-
-            match = TRUE;
-        }
-
-        Pattern_Free(image_pat);
-
-        if (!match)
-            continue;
-
-        if (text_len)
-            *ptr = L',';    // restore comma if text is not empty
-        else
-            ++ptr;          // or skip comma if text is empty
-
-        skip_match:
-        {
-            ULONG ptr_len;
-            WCHAR* new_text;
-            ptr_len = wcslen(ptr);
-            new_text = Pool_Alloc(pool,
-                (text_len + ptr_len + 1) * sizeof(WCHAR));
-            if (!new_text)
-                goto outofmem;
-            wmemcpy(new_text, text, text_len);
-            wmemcpy(new_text + text_len, ptr, ptr_len + 1);
-            text = new_text;
-            text_len = text_len + ptr_len;
-        }
-        break;
-    }
-
-    //
-    // finish
-    //
-
-    wcscpy_s(value, value_size / sizeof(WCHAR), text);
-
-    Pool_Delete(pool);
-
-    return STATUS_SUCCESS;
-
-outofmem:
-
-    SbieApi_Log(2305, NULL);
-    ExitProcess(-1);
-    return STATUS_INSUFFICIENT_RESOURCES;
-}
-
-
-//---------------------------------------------------------------------------
 // Dll_SkipHook
 //---------------------------------------------------------------------------
 
@@ -1732,7 +1598,7 @@ _FX BOOLEAN Dll_SkipHook(const WCHAR *HookName)
 
         HookTextInit = FALSE;
 
-        Dll_GetSettingsForImageName(L"SkipHook", HookText, sizeof(HookText), NULL);
+		SbieDll_GetSettingsForName(NULL, Dll_ImageName, L"SkipHook", HookText, sizeof(HookText), L"");
     } 
     
     //

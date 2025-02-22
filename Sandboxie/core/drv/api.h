@@ -129,6 +129,9 @@ BOOLEAN Api_CopySidStringFromUser(
 void Api_CopyStringToUser(
     UNICODE_STRING64 *uni, WCHAR *str, size_t len);
 
+NTSTATUS Api_CopyStringFromUser(
+    WCHAR** str, size_t* len, UNICODE_STRING64* uni);
+
 NTSTATUS Sbie_SepFilterTokenHandler(
     void*       TokenObject,
     ULONG_PTR   SidCount,

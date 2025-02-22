@@ -1079,6 +1079,28 @@ _FX void Api_CopyStringToUser(
 
 
 //---------------------------------------------------------------------------
+// Api_CopyStringFromUser
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Api_CopyStringFromUser(
+	WCHAR** str, size_t* len, UNICODE_STRING64* uni)
+{
+	if (uni) {
+		ProbeForRead(uni, sizeof(UNICODE_STRING64), sizeof(ULONG_PTR));
+		*len = uni->Length + sizeof(WCHAR);
+        ProbeForRead((WCHAR*)uni->Buffer, *len, sizeof(WCHAR));
+		*str = (WCHAR*)Mem_Alloc(Driver_Pool, *len);
+        if(!*str)
+			return STATUS_INSUFFICIENT_RESOURCES;
+		memcpy(*str, (WCHAR*)uni->Buffer, *len);
+		(*str)[*len / sizeof(WCHAR)] = L'\0';
+	} 
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
 // Api_ProcessExemptionControl
 //---------------------------------------------------------------------------
 

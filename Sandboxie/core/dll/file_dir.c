@@ -1502,9 +1502,13 @@ _FX NTSTATUS File_MergeDummy(
         Pattern_Free(mask);
 
     if (PrevEntry == NULL) {
+        
         // no dummys created
-        status = STATUS_NO_MORE_ENTRIES;
-        goto finish;
+
+        Pool_Delete(qfile->cache_pool);
+        qfile->cache_pool = NULL;
+
+        return STATUS_NO_MORE_ENTRIES;
     }
     *PrevEntry = 0;
 
@@ -1560,8 +1564,6 @@ _FX NTSTATUS File_MergeDummy(
         info_ptr = (FILE_ID_BOTH_DIR_INFORMATION *)
             ((UCHAR *)info_ptr + info_ptr->NextEntryOffset);
     }
-
-finish:
 
     Pool_Free(info_area, INFO_AREA_LEN);
 

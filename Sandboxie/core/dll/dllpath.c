@@ -742,18 +742,13 @@ _FX void Dll_RefreshPathList(void)
 #endif
 
 #ifdef USE_MATCH_PATH_EX
-            memcpy(&Dll_PathListAnchor->normal_file_path,   &normal_paths,
-                   sizeof(LIST));
+            memcpy(&Dll_PathListAnchor->normal_file_path,   &normal_paths, sizeof(LIST));
 #endif
-            memcpy(&Dll_PathListAnchor->open_file_path,     &open_paths,
-                   sizeof(LIST));
-            memcpy(&Dll_PathListAnchor->closed_file_path,   &closed_paths,
-                   sizeof(LIST));
-            memcpy(&Dll_PathListAnchor->write_file_path,    &write_paths,
-                   sizeof(LIST));
+            memcpy(&Dll_PathListAnchor->open_file_path,     &open_paths, sizeof(LIST));
+            memcpy(&Dll_PathListAnchor->closed_file_path,   &closed_paths, sizeof(LIST));
+            memcpy(&Dll_PathListAnchor->write_file_path,    &write_paths, sizeof(LIST));
 #ifdef USE_MATCH_PATH_EX
-            memcpy(&Dll_PathListAnchor->read_file_path,     &read_paths,
-                   sizeof(LIST));
+            memcpy(&Dll_PathListAnchor->read_file_path,     &read_paths, sizeof(LIST));
 #endif
 
             Dll_PathListAnchor->file_paths_initialized = TRUE;

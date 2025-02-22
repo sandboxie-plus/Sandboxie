@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - potential BSOD issue with driver in low resource conditions
 - added fix for a crash in NsiAllocateAndGetTable (thanks tzf-omkey)
 - fixed a memory leak when device change notification is received by a sandboxed process
+- fixed memory leak in NtQueryDirectoryFile hook manifesting in privacy enchanced boxes [#4509](https://github.com/sandboxie-plus/Sandboxie/issues/4509)
 
 
 

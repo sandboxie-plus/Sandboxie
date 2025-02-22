@@ -89,11 +89,11 @@
 "Sandboxie failed to start a service in the sandbox": "Sandboxie konnte einen Dienst in der Sandbox nicht starten",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Die Nachricht zeigt an, dass Sandboxie nicht in der Lage war, eines der Hilfsprogramme SandboxieRpcSs oder SandboxieDcomLaunch zu starten. Der in der Nachricht angegebene Name kann rpcss oder dcomlaunch sein.\n\nAuf der nächsten Seite können Sie einen Problembericht einreichen, um uns bei der Analyse des Problems zu helfen.",
 
-"SBIE2224: Sandboxed program has crashed":"SBIE2224: Sandboxed program has crashed",
-"A Sandboxed program has crashed":"A Sandboxed program has crashed",
-"The Process '%1' crashed":"The Process '%1' crashed",
-"This program is known to work in a Green (App Compartment) type sandbox.":"This program is known to work in a Green (App Compartment) type sandbox.",
-"There is no known workaround for this process. Do you want to report this issue?":"There is no known workaround for this process. Do you want to report this issue?",
+"SBIE2224: Sandboxed program has crashed": "SBIE2224: Sandgeboxtes Programm ist abgestürzt",
+"A Sandboxed program has crashed": "Ein sandgeboxtes Programm ist abgestürzt",
+"The Process '%1' crashed": "Der Prozess '%1' ist abgestürzt",
+"This program is known to work in a Green (App Compartment) type sandbox.": "Es ist bekannt, dass dieses Programm im Sandboxtyp Grün (Applikationsunterteilung) funktioniert.",
+"There is no known workaround for this process. Do you want to report this issue?": "Es gibt keinen bekannten Workaround für diesen Prozess. Möchten Sie dieses Problem melden?",
 
 "SBIE2313: Could not execute specific process": "SBIE2313: Konnte bestimmten Prozess nicht ausführen",
 "Sandboxie failed to start a process in the sandbox": "Sandboxie konnte einen Prozess in der Sandbox nicht starten",
@@ -125,11 +125,11 @@
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Führen Sie nun Ihre Anwendung erneut aus, um die SBIE Nachricht auszulösen.<br /><br />",
 "Press NEXT when you are done collecting logs.": "Drücken Sie auf WEITER, wenn Sie alle Protokolle gesammelt haben.",
 
-"Unknown application crashed":"Unknown application crashed",
-"An Unknown application crashed":"An Unknown application crashed",
-"Do you want to report this issue?":"Do you want to report this issue?",
+"Unknown application crashed": "Unbekannte Anwendung ist abgestürzt",
+"An Unknown application crashed": "Eine unbekannte Anwendung ist abgestürzt",
+"Do you want to report this issue?": "Möchten Sie dieses Problem melden?",
 
-"Viber crashes on startup":"Viber crashes on startup",
-"The Viber messenger crashes on startup":"The Viber messenger crashes on startup",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox."
+"Viber crashes on startup": "Viber stürzt beim Starten ab",
+"The Viber messenger crashes on startup": "Der Messenger Viber stürzt beim Starten ab",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.": "Viber ist nicht mit dem Sandboxtyp Gelb (Standard Isolations-Sandbox) kompatibel. Es ist jedoch bekannt, dass es im Sandboxtyp Grün (Applikationsunterteilung) funktioniert."
 }

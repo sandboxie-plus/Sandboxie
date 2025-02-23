@@ -200,7 +200,7 @@ void CPanelView::FormatAndCopy(QList<QStringList> Rows, bool Header)
 
 		foreach(const QStringList& Row, Rows)
 		{
-			for (int i = 0; i < Min(Row.count(), Columns); i++)
+			for (int i = 0; i < std::min(Row.count(), Columns); i++)
 			{
 				int CellWidth = Row[i].length();
 				if (ColumnWidths[i] < CellWidth)
@@ -217,12 +217,12 @@ void CPanelView::FormatAndCopy(QList<QStringList> Rows, bool Header)
 					bool More = false;
 
 					QString RowText;
-					for (int i = 0; i < Min(Row.count(), Columns); i++) 
+					for (int i = 0; i < std::min(Row.count(), Columns); i++) 
 					{
 						if (Row[i].length() > Pos)
-							RowText.append(Row[i].mid(Pos, m_MaxCellWidth).leftJustified(Min(m_MaxCellWidth, ColumnWidths[i]) + 3));
+							RowText.append(Row[i].mid(Pos, m_MaxCellWidth).leftJustified(std::min(m_MaxCellWidth, ColumnWidths[i]) + 3));
 						else
-							RowText.append(QString(Min(m_MaxCellWidth, ColumnWidths[i]) + 3, ' '));
+							RowText.append(QString(std::min(m_MaxCellWidth, ColumnWidths[i]) + 3, ' '));
 
 						if (Row[i].length() > Pos + m_MaxCellWidth)
 							More = true;
@@ -236,7 +236,7 @@ void CPanelView::FormatAndCopy(QList<QStringList> Rows, bool Header)
 			else
 			{
 				QString RowText;
-				for (int i = 0; i < Min(Row.count(), Columns); i++)
+				for (int i = 0; i < std::min(Row.count(), Columns); i++)
 					RowText.append(Row[i].leftJustified(ColumnWidths[i] + 3));
 				TextRows.append(RowText);
 			}

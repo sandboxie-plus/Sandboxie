@@ -26,7 +26,7 @@ public:
 	CTraceModel*		m_pTraceModel;
 
 public slots:
-	void				SetFilter(const QString& Exp, int iOptions = 0, int Column = -1);
+	void				SetFilter(const QRegularExpression& Exp, int iOptions = 0, int Column = -1);
 
 	void				ItemSelection(const QItemSelection& selected, const QItemSelection& deselected);
 
@@ -50,7 +50,7 @@ protected:
 	//int					m_FilterCol;
 };
 
-class CMonitorList : public CPanelWidget<QTreeViewEx>
+class CMonitorList : public CPanelWidgetTmpl<QTreeViewEx>
 {
 public:
 

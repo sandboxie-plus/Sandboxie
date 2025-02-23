@@ -168,6 +168,10 @@ CSandMan::CSandMan(QWidget *parent)
 
 	LoadLanguage();
 
+	CFinder::m_CaseInsensitiveIcon = GetIcon("CaseSensitive");
+	CFinder::m_RegExpStrIcon = GetIcon("RegExp");
+	CFinder::m_HighlightIcon = GetIcon("Highlight");
+
 	if (!theConf->IsWritable()) {
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.").arg(theConf->GetConfigDir()));
 	}

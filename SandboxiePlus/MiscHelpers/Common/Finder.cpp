@@ -9,6 +9,12 @@ QString CFinder::m_Highlight = "Highlight";
 QString CFinder::m_CloseStr = "Close";
 QString CFinder::m_FindStr = "&Find ...";
 QString CFinder::m_AllColumns = "All columns";
+QString CFinder::m_Placeholder = "Search ...";
+QString CFinder::m_ButtonTip = "Toggle Search Bar";
+
+QIcon CFinder::m_CaseInsensitiveIcon;
+QIcon CFinder::m_RegExpStrIcon;
+QIcon CFinder::m_HighlightIcon;
 
 QWidget* CFinder::AddFinder(QTreeView* pTree, QObject* pFilterTarget, int iOptions, CFinder** ppFinder)
 {
@@ -35,7 +41,10 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	m_pSearchLayout->setSpacing(3);
 	m_pSearchLayout->setAlignment(Qt::AlignLeft);
 
+	m_bAlwaysRaw = true;
+
 	m_pSearch = new QLineEdit();
+	m_pSearch->setPlaceholderText(m_Placeholder);
 	m_pSearch->setMinimumWidth(200);
 	//m_pSearch->setMaximumWidth(400);
 	m_pSearchLayout->addWidget(m_pSearch);
@@ -44,18 +53,30 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 
 	if ((iOptions & eCaseSens) != 0)
 	{
-		m_pCaseSensitive = new QCheckBox(m_CaseInsensitive);
+		if (!m_CaseInsensitiveIcon.isNull()) {
+			m_pCaseSensitive = new QToolButton();
+			((QToolButton*)m_pCaseSensitive)->setIcon(m_CaseInsensitiveIcon);
+			((QToolButton*)m_pCaseSensitive)->setCheckable(true);
+			((QToolButton*)m_pCaseSensitive)->setToolTip(m_CaseInsensitive);
+		} else
+			m_pCaseSensitive = new QCheckBox(m_CaseInsensitive);
 		m_pSearchLayout->addWidget(m_pCaseSensitive);
-		connect(m_pCaseSensitive, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
+		connect(m_pCaseSensitive, SIGNAL(clicked()), this, SLOT(OnUpdate()));
 	}
 	else
 		m_pCaseSensitive = NULL;
 
 	if ((iOptions & eRegExp) != 0)
 	{
-		m_pRegExp = new QCheckBox(m_RegExpStr);
+		if (!m_RegExpStrIcon.isNull()) {
+			m_pRegExp = new QToolButton();
+			((QToolButton*)m_pRegExp)->setIcon(m_RegExpStrIcon);
+			((QToolButton*)m_pRegExp)->setCheckable(true);
+			((QToolButton*)m_pRegExp)->setToolTip(m_RegExpStr);
+		} else
+			m_pRegExp = new QCheckBox(m_RegExpStr);
 		m_pSearchLayout->addWidget(m_pRegExp);
-		connect(m_pRegExp, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
+		connect(m_pRegExp, SIGNAL(clicked()), this, SLOT(OnUpdate()));
 	}
 	else
 		m_pRegExp = NULL;
@@ -74,14 +95,24 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 
 	if ((iOptions & eHighLight) != 0)
 	{
-		m_pHighLight = new QCheckBox(m_Highlight);
+		if (!m_HighlightIcon.isNull()) {
+			m_pHighLight = new QToolButton();
+			((QToolButton*)m_pHighLight)->setIcon(m_HighlightIcon);
+			((QToolButton*)m_pHighLight)->setCheckable(true);
+			((QToolButton*)m_pHighLight)->setToolTip(m_Highlight);
+		} else
+			m_pHighLight = new QCheckBox(m_Highlight);
 		if ((iOptions & eHighLightDefault) == eHighLightDefault)
 			m_pHighLight->setChecked(true);
 		m_pSearchLayout->addWidget(m_pHighLight);
-		connect(m_pHighLight, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
+		connect(m_pHighLight, SIGNAL(clicked()), this, SLOT(OnUpdate()));
 	}
 	else
 		m_pHighLight = NULL;
+
+	QWidget* pSpacer = new QWidget();
+	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	m_pSearchLayout->addWidget(pSpacer);
 
 	QToolButton* pClose = new QToolButton(this);
     pClose->setIcon(QIcon(":/close.png"));
@@ -89,10 +120,6 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
     pClose->setText(m_CloseStr);
     m_pSearchLayout->addWidget(pClose);
 	QObject::connect(pClose, SIGNAL(clicked()), this, SLOT(Close()));
-
-	QWidget* pSpacer = new QWidget();
-	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	m_pSearchLayout->addWidget(pSpacer);
 
 	setLayout(m_pSearchLayout);
 
@@ -112,7 +139,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	}
 
 	if (pFilterTarget) {
-		QObject::connect(this, SIGNAL(SetFilter(const QString&, int, int)), pFilterTarget, SLOT(SetFilter(const QString&, int, int)));
+		QObject::connect(this, SIGNAL(SetFilter(const QRegularExpression&, int, int)), pFilterTarget, SLOT(SetFilter(const QRegularExpression&, int, int)));
 		//QObject::connect(this, SIGNAL(SelectNext()), pFilterTarget, SLOT(SelectNext()));
 	}
 
@@ -122,10 +149,23 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	connect(m_pTimer, SIGNAL(timeout()), SLOT(OnUpdate()));
 
 	this->installEventFilter(this);
+
+	m_pBtnSearch = NULL;
 }
 
 CFinder::~CFinder()
 {
+}
+
+QAbstractButton* CFinder::GetToggleButton()
+{
+	if (!m_pBtnSearch) {
+		m_pBtnSearch = new QToolButton();
+		m_pBtnSearch->setCheckable(true);
+		m_pBtnSearch->setToolTip(m_ButtonTip);
+		connect(m_pBtnSearch, SIGNAL(clicked(bool)), this, SLOT(OnToggle(bool)));
+	}
+	return m_pBtnSearch;
 }
 
 void CFinder::SetTree(QTreeView* pTree) 
@@ -160,13 +200,16 @@ void CFinder::Open()
 	m_pSearch->setFocus(Qt::OtherFocusReason);
 	m_pSearch->selectAll();
 	OnUpdate();
+
+	if(m_pBtnSearch)
+		m_pBtnSearch->setChecked(true);
 }
 
 void CFinder::OnUpdate()
 {
 	m_pTimer->stop();
 	if (!isVisible() || m_pSearch->text().isEmpty())
-		SetFilter(QString(), 0, GetColumn());
+		emit SetFilter(QRegularExpression(), 0, GetColumn());
 	int iOptions = 0;
 	if (GetRegExp())
 		iOptions |= eRegExp;
@@ -176,10 +219,17 @@ void CFinder::OnUpdate()
 		iOptions |= eHighLight;
 	QString Exp = m_pSearch->text();
 
-	QString ExpStr = ((iOptions & CFinder::eRegExp) != 0) ? Exp : (".*" + QRegularExpression::escape(Exp).replace("\\","\\\\") + ".*");
+	QString ExpStr;
+	if(m_bAlwaysRaw || (iOptions & CFinder::eRegExp) != 0)
+		ExpStr = Exp;
+	else {
+		ExpStr = QRegularExpression::escape(Exp);
+		ExpStr = ".*" + ExpStr.replace("\\*",".*").replace("\\?",".") + ".*";
+	}
+
 	m_RegExp = QRegularExpression(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
 
-	SetFilter(Exp, iOptions, GetColumn());
+	emit SetFilter(m_RegExp, iOptions, GetColumn());
 }
 
 void CFinder::OnText()
@@ -197,8 +247,19 @@ void CFinder::OnReturn()
 
 void CFinder::Close()
 {
-	emit SetFilter(QString());
+	emit SetFilter(QRegularExpression());
 	hide();
+
+	if(m_pBtnSearch)
+		m_pBtnSearch->setChecked(false);
+}
+
+void CFinder::OnToggle(bool checked)
+{
+	if (checked)
+		Open();
+	else
+		Close();
 }
 
 ////////////////////////////////////////////////////////////////

@@ -1,11 +1,10 @@
 #pragma once
 #include "TreeViewEx.h"
 
+#include "Common.h"
+
 #include "../mischelpers_global.h"
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-bool MISCHELPERS_EXPORT operator < (const QVariant& l, const QVariant& r);
-#endif
 
 class MISCHELPERS_EXPORT CTreeItemModel : public QAbstractItemModelEx
 {

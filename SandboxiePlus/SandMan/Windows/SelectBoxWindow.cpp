@@ -31,7 +31,7 @@ CBoxPicker::CBoxPicker(QString DefaultBox, QWidget* parent)
 	if(DefaultBox.isEmpty() && theAPI->IsConnected())
 		DefaultBox = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 
-	LoadBoxed("", DefaultBox);
+	LoadBoxed(QRegularExpression(), DefaultBox);
 }
 
 void CBoxPicker::EnableMultiSel(bool bEnable)
@@ -39,12 +39,12 @@ void CBoxPicker::EnableMultiSel(bool bEnable)
 	m_pTreeBoxes->setSelectionMode(bEnable ? QAbstractItemView::ExtendedSelection : QAbstractItemView::SingleSelection);
 }
 
-void CBoxPicker::SetFilter(const QString& Exp, int iOptions, int Column)
+void CBoxPicker::SetFilter(const QRegularExpression& Exp, int iOptions, int Column)
 {
 	LoadBoxed(Exp);
 }
 
-void CBoxPicker::LoadBoxed(const QString& Filter, const QString& SelectBox)
+void CBoxPicker::LoadBoxed(const QRegularExpression& Filter, const QString& SelectBox)
 {
 	m_pTreeBoxes->clear();
 
@@ -68,7 +68,7 @@ void CBoxPicker::LoadBoxed(const QString& Filter, const QString& SelectBox)
 		if (!pBox->IsEnabled() || !pBox->GetBool("ShowForRunIn", true))
 			continue;
 
-		if (!Filter.isEmpty() && !pBox->GetName().contains(Filter, Qt::CaseInsensitive))
+		if (Filter.isValid() && !Filter.match(pBox->GetName()).hasMatch())
 			continue;
 
 		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());

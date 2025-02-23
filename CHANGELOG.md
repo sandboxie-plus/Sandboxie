@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - updated Notepad++ template to work in Sandboxie Classic
+- updated MiscHelpers.dll, improved finder
 
 ### Fixed
 - fixed obsolete entries in the Sandboxie Plus installer

@@ -13,7 +13,7 @@ bool TestWriteRight(const QString& Path)
 	return TestFile.remove();
 }
 
-CSettings::CSettings(const QString& AppDir, const QString& GroupName, const QString& AppName, QMap<QString, SSetting> DefaultValues, QObject* qObject) : QObject(qObject)
+CSettings::CSettings(const QString& AppDir, const QString& AppName, const QString& GroupName, QMap<QString, SSetting> DefaultValues, QObject* qObject) : QObject(qObject)
 {
 	m_ConfigDir = AppDir;
 	if (!(m_bPortable = QFile::exists(m_ConfigDir + "/" + AppName + ".ini")))
@@ -113,7 +113,7 @@ QByteArray CSettings::GetBlob(const QString& key)
 	return value;
 }
 
-const QStringList CSettings::ListKeys(const QString& Root)
+QStringList CSettings::ListKeys(const QString& Root)
 {
 	QMutexLocker Locker(&m_Mutex); 
 	QStringList Keys;

@@ -17,7 +17,7 @@ public:
 
 	void EnableMultiSel(bool bEnable);
 
-	void LoadBoxed(const QString& Filter = QString(), const QString& SelectBox = QString());
+	void LoadBoxed(const QRegularExpression& Filter = QRegularExpression(), const QString& SelectBox = QString());
 
 	QString GetBoxName() const;
 	QStringList GetBoxNames() const;
@@ -29,7 +29,7 @@ signals:
 	void BoxDblClick();
 
 private slots:
-	void SetFilter(const QString& Exp, int iOptions, int Column);
+	void SetFilter(const QRegularExpression& Exp, int iOptions, int Column);
 
 private:
 	QTreeWidget *m_pTreeBoxes;

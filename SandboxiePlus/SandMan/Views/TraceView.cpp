@@ -117,6 +117,7 @@ CTraceTree::CTraceTree(QWidget* parent)
 	//m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLightDefault, &pFinder));
 	m_pSplitter->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLightDefault, &pFinder));
 	pFinder->SetModel(m_pTraceModel);
+	pFinder->SetAlwaysRaw();
 	//QObject::connect(pFinder, SIGNAL(SelectNext()), this, SLOT(SelectNext()));
 
 
@@ -146,14 +147,13 @@ CTraceTree::~CTraceTree()
 	theConf->SetBlob("MainWindow/TraceSplitter", m_pSplitter->saveState());
 }
 
-void CTraceTree::SetFilter(const QString& Exp, int iOptions, int Column) 
+void CTraceTree::SetFilter(const QRegularExpression& Exp, int iOptions, int Column) 
 {
-	bool bReset = m_bHighLight != ((iOptions & CFinder::eHighLight) != 0) || (!m_bHighLight && m_FilterExp != Exp);
+	QString ExpStr = Exp.pattern();
+	bool bReset = m_bHighLight != ((iOptions & CFinder::eHighLight) != 0) || (!m_bHighLight && m_FilterExp != ExpStr);
 
-	//QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
-	//QRegularExpression RegExp(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
 	//m_FilterExp = RegExp;
-	m_FilterExp = Exp;
+	m_FilterExp = ExpStr;
 	m_bHighLight = (iOptions & CFinder::eHighLight) != 0;
 	//m_FilterCol = Col;
 
@@ -183,7 +183,7 @@ void CTraceTree::ItemSelection(const QItemSelection& selected, const QItemSelect
 // CMonitorList
 
 CMonitorList::CMonitorList(QWidget* parent) 
-	: CPanelWidget<QTreeViewEx>(parent) 
+	: CPanelWidgetTmpl<QTreeViewEx>(NULL, parent) 
 {
 	m_pTreeList->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 

@@ -22,7 +22,7 @@ public:
 
 	static QWidget*		AddFinder(QTreeView* pTree, QObject* pFilterTarget, int iOptions = eRegExp | eCaseSens | eHighLight, CFinder** ppFinder = NULL);
 
-	QRegularExpression	GetSearchExp() const		{ return m_RegExp; }
+	const QRegularExpression& GetSearchExp() const	{ return m_RegExp; }
 
 	enum EOptions
 	{

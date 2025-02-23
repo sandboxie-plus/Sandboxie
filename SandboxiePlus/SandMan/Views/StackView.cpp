@@ -50,11 +50,6 @@ void CStackView::Invalidate()
 	}
 }
 
-void CStackView::SetFilter(const QRegularExpression& Exp, int iOptions, int Col) // -1 = any
-{
-	CPanelWidgetEx::ApplyFilter(m_pStackList, &Exp/*, iOptions, Col*/);
-}
-
 void CStackView::ShowStack(const QVector<quint64>& Stack, const CBoxedProcessPtr& pProcess)
 {
 	int i = 0;
@@ -87,8 +82,12 @@ void CStackView::ShowStack(const QVector<quint64>& Stack, const CBoxedProcessPtr
 	for (; i < m_pStackList->topLevelItemCount(); )
 		delete m_pStackList->topLevelItem(i);
 
-	if (!m_pFinder->GetSearchExp().pattern().isEmpty())
-		SetFilter(m_pFinder->GetSearchExp());
+	CPanelWidgetEx::ApplyFilter(m_pStackList, m_pFinder->isVisible() ? &m_pFinder->GetSearchExp() : NULL);
 
 	m_bIsInvalid = false;
+}
+
+void CStackView::SetFilter(const QRegularExpression& Exp, int iOptions, int Col)
+{
+	CPanelWidgetEx::ApplyFilter(m_pStackList, &m_pFinder->GetSearchExp());
 }

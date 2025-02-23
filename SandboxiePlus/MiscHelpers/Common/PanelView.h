@@ -119,8 +119,8 @@ public:
 	static void ApplyFilter(QTreeWidget* pTree, QTreeWidgetItem* pItem, const QRegularExpression* Exp/*, bool bHighLight = false, int Col = -1*/)
 	{
 		for (int j = 0; j < pTree->columnCount(); j++) {
-			pItem->setForeground(j, (m_DarkMode && Exp->isValid() && pItem->text(j).contains(*Exp)) ? Qt::yellow : pTree->palette().color(QPalette::WindowText));
-			pItem->setBackground(j, (!m_DarkMode && Exp->isValid() && pItem->text(j).contains(*Exp)) ? Qt::yellow : pTree->palette().color(QPalette::Base));
+			pItem->setForeground(j, (m_DarkMode && Exp && Exp->isValid() && pItem->text(j).contains(*Exp)) ? Qt::yellow : pTree->palette().color(QPalette::WindowText));
+			pItem->setBackground(j, (!m_DarkMode && Exp && Exp->isValid() && pItem->text(j).contains(*Exp)) ? Qt::yellow : pTree->palette().color(QPalette::Base));
 		}
 
 		for (int i = 0; i < pItem->childCount(); i++)

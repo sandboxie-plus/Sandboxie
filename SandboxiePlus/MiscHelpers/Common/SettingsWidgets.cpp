@@ -80,7 +80,11 @@ void AddColoredComboBoxEntry(QComboBox* pBox, const QString& Text, const QColor&
 	if(Color.isValid())
 		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(QBrush(Color));
 	else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(pBox->palette().background());
+#else
+		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(pBox->palette().window());
+#endif
 }
 
 void ColorComboBox(QComboBox* pBox)

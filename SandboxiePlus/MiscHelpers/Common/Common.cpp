@@ -156,7 +156,7 @@ bool PathStartsWith(const QString& Path, const QString& Start)
 	int Length = Start.length();
 	if (Start[Length - 1] == '\\' || Start[Length - 1] == '/')
 		Length--;
-	if (Path.startsWith(Start.leftRef(Length), Qt::CaseInsensitive))
+	if (Path.startsWith(Start.left(Length), Qt::CaseInsensitive))
 	{
 		if (Path.length() == Length)
 			return true;

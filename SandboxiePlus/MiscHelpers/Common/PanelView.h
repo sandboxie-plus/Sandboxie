@@ -76,16 +76,16 @@ public:
 
 		m_pTreeList = pTree ? pTree : new T();
 		m_pTreeList->setContextMenuPolicy(Qt::CustomContextMenu);
-		connect(m_pTreeList, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnMenu(const QPoint &)));
+		B::connect(m_pTreeList, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnMenu(const QPoint &)));
 		m_pMainLayout->addWidget(m_pTreeList);
 		m_pTreeList->setMinimumHeight(50);
-		AddPanelItemsToMenu();
+		B::AddPanelItemsToMenu();
 
-		m_pLastAction = m_pMenu->actions()[0];
+		m_pLastAction = B::m_pMenu->actions()[0];
 	}
 
-	virtual QMenu*				GetMenu()	{ return m_pMenu; }
-	virtual void				AddAction(QAction* pAction) { m_pMenu->insertAction(m_pLastAction, pAction); }
+	virtual QMenu*				GetMenu()	{ return B::m_pMenu; }
+	virtual void				AddAction(QAction* pAction) { B::m_pMenu->insertAction(m_pLastAction, pAction); }
 
 	virtual T*					GetTree()	{ return m_pTreeList; }
 	virtual QTreeView*			GetView()	{ return m_pTreeList; }

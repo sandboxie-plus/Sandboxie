@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.15.7 / 5.70.7] - 2025-02-??
+## [1.15.7 / 5.70.7] - 2025-02-23
 
 ### Added
 - service can now also log monitor events

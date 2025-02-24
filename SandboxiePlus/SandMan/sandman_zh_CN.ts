@@ -9250,7 +9250,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3832"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
-        <translation>沙盒化进程可以被强制使用一个预设的套接字5代理。</translation>
+        <translation>沙盒化进程可以被强制使用一个预设的 SOCKS5 代理。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3842"/>
@@ -10814,7 +10814,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="151"/>
         <source>SOCKS 5</source>
-        <translation>套接字 5</translation>
+        <translation>SOCKS 5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="158"/>

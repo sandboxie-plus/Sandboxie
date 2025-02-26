@@ -1356,110 +1356,110 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>Nem sikerült ellenőrizni a frissítéseket, hiba: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="622"/>
+        <location filename="OnlineUpdater.cpp" line="645"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Letölti a legújabb telepítőt?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="626"/>
+        <location filename="OnlineUpdater.cpp" line="649"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Letölti a frissítéseket?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="630"/>
+        <location filename="OnlineUpdater.cpp" line="653"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Felkeresi a &lt;a href=&quot;%1&quot;&gt;letöltési oldalt&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="639"/>
+        <location filename="OnlineUpdater.cpp" line="662"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>Ne jelenítse meg többé ezt a frissítést.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="762"/>
+        <location filename="OnlineUpdater.cpp" line="785"/>
         <source>Downloading updates...</source>
         <translation>Frissítések letöltése...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="788"/>
+        <location filename="OnlineUpdater.cpp" line="811"/>
         <source>invalid parameter</source>
         <translation>érvénytelen paraméter</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="789"/>
+        <location filename="OnlineUpdater.cpp" line="812"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>nem sikerült letölteni a frissített információkat</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="790"/>
+        <location filename="OnlineUpdater.cpp" line="813"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>nem sikerült betölteni a frissített json-fájlt</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="791"/>
+        <location filename="OnlineUpdater.cpp" line="814"/>
         <source>failed to download a particular file</source>
         <translation>nem sikerült letölteni egy adott fájlt</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="792"/>
+        <location filename="OnlineUpdater.cpp" line="815"/>
         <source>failed to scan existing installation</source>
         <translation>nem sikerült ellenőrizni a meglévő telepítést</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="793"/>
+        <location filename="OnlineUpdater.cpp" line="816"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>a frissített aláírás érvénytelen !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="794"/>
+        <location filename="OnlineUpdater.cpp" line="817"/>
         <source>downloaded file is corrupted</source>
         <translation>a letöltött fájl sérült</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="795"/>
+        <location filename="OnlineUpdater.cpp" line="818"/>
         <source>internal error</source>
         <translation>belső hiba</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="796"/>
+        <location filename="OnlineUpdater.cpp" line="819"/>
         <source>unknown error</source>
         <translation>ismeretlen hiba</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="820"/>
+        <location filename="OnlineUpdater.cpp" line="843"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>Nem sikerült letölteni a frissítéseket a szerverről, hiba: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="842"/>
+        <location filename="OnlineUpdater.cpp" line="865"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;A Sandboxie-Plus frissítések letöltve.&lt;/p&gt;&lt;p&gt;Alkalmazza ezeket a frissítéseket? Ha bármely program homokozóban fut, akkor leáll.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="944"/>
+        <location filename="OnlineUpdater.cpp" line="967"/>
         <source>Downloading installer...</source>
         <translation>Telepítő letöltése...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="987"/>
+        <location filename="OnlineUpdater.cpp" line="1010"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Új Sandboxie-Plus telepítő lett letöltve a következő helyre:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt; /p&gt;&lt;p&gt;Elkezdi a telepítést? Ha bármely program fut a homokozóban, akkor leáll.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1055"/>
+        <location filename="OnlineUpdater.cpp" line="1078"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Megnyitja &lt;a href=&quot;%1&gt;információs oldalt &lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1063"/>
+        <location filename="OnlineUpdater.cpp" line="1086"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Ne jelenítse meg ezt a közleményt a jövőben.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="608"/>
+        <location filename="OnlineUpdater.cpp" line="631"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Elérhető a Sandboxie-Plus új verziója.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Új verzió:&lt;/b&gt;&lt;/ font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
@@ -1473,7 +1473,7 @@ Do you still want to update?</source>
 Ennek ellenére frissíti?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="481"/>
+        <location filename="OnlineUpdater.cpp" line="504"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>

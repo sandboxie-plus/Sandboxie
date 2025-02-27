@@ -8,6 +8,7 @@
 ;#define MyDrvVersion "5.49.8"
 ;#define MyAppArch "x64"
 ;#define MyAppSrc "SbiePlus64"
+#define CurrentYear GetDateTimeString('yyyy', '', '')
 
 
 [Setup]
@@ -30,7 +31,7 @@ AllowNoIcons=yes
 AlwaysRestart=no
 LicenseFile=license.txt
 UsedUserAreasWarning=no
-VersionInfoCopyright=Copyright (C) 2020-2025 by David Xanatos (xanasoft.com)
+VersionInfoCopyright=Copyright (C) 2020-{#CurrentYear} by David Xanatos (xanasoft.com)
 VersionInfoVersion={#MyAppVersion}
 SetupIconFile=SandManInstall.ico
 SignTool=sha256

@@ -23,14 +23,14 @@
 
 // mess with a dummy installation when debugging
 
-#undef VERSION_MJR
+/*#undef VERSION_MJR
 #define VERSION_MJR		1
 #undef VERSION_MIN
-#define VERSION_MIN 	9
+#define VERSION_MIN 	11
 #undef VERSION_REV
-#define VERSION_REV 	7
+#define VERSION_REV 	4
 #undef VERSION_UPD
-#define VERSION_UPD 	0
+#define VERSION_UPD 	0*/
 
 #define DUMMY_PATH "C:\\Projects\\Sandboxie\\SandboxieTools\\x64\\Debug\\Test"
 #endif
@@ -108,6 +108,9 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 #endif
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
 	Query.addQueryItem("language", QLocale::system().name());
+#ifdef _DEBUG
+	Query.addQueryItem("debug", "1");
+#endif
 
 	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
 	//if (UpdateKey.isEmpty())
@@ -119,9 +122,8 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 
 	quint64 RandID = COnlineUpdater::GetRandID();
 	quint32 Hash = theAPI->GetUserSettings()->GetName().mid(13).toInt(NULL, 16);
-	quint64 HashID = RandID ^ (quint64((Hash & 0xFFFF) ^ ((Hash >> 16) & 0xFFFF)) << 48); // fold the hash in half and xor it with the first 16 bit of RandID
 
-	UpdateKey += QString::number(HashID, 16).rightJustified(16, '0').toUpper();
+	UpdateKey += QString::number(Hash, 16).rightJustified(8, '0').toUpper() + QString::number(RandID, 16).rightJustified(16, '0').toUpper();
 	Query.addQueryItem("update_key", UpdateKey);
 
 	if (Params.contains("channel")) 
@@ -499,6 +501,9 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 	if (bAuto) {
 		int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
 		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addSecs(UpdateInterval).toSecsSinceEpoch());
+#ifdef _DEBUG
+		theGUI->AddLogMessage(tr("Update Check completed, no new updates"));
+#endif
 	}
 	else if (bNothing)  {
 		QMessageBox::information(theGUI, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"

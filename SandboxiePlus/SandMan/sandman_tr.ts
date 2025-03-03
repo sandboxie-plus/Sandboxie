@@ -1328,7 +1328,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="505"/>
         <source>Update Check completed, no new updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncelleme denetimi tamamlandı, yeni güncelleme yok</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="650"/>
@@ -4205,7 +4205,7 @@ Hayır şunları seçer: %2</translation>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <translation>Windows derlemeniz %1, Sandboxie sürümünüzün mevcut destek yeteneklerini aşıyor ve belirteç tabanlı güvenlik yalıtımının devre dışı bırakılmasına neden oluyor. Sonuç olarak, tüm uygulamalar güvenlik yalıtımı olmadan Uygulama Bölmesi Modunda çalışacaktır.
-Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</translation>
+Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2584"/>

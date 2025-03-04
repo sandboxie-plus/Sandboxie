@@ -1563,7 +1563,7 @@ Do you still want to update?</source>
     <message>
         <location filename="OnlineUpdater.cpp" line="505"/>
         <source>Update Check completed, no new updates</source>
-        <translation type="unfinished"></translation>
+        <translation>업데이트 확인 완료, 새 업데이트 없음</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="650"/>

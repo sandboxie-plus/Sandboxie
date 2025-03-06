@@ -130,13 +130,32 @@ BOOL ProcessServer::KillProcess(ULONG ProcessId)
 {
     ULONG LastError = 0;
     BOOL ok = FALSE;
-    HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, ProcessId);
+    HANDLE hProcess = OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_LIMITED_INFORMATION, FALSE, ProcessId);
     if (! hProcess)
         LastError = GetLastError() * 10000;
     else {
-        ok = TerminateProcess(hProcess, DBG_TERMINATE_PROCESS);
-        if (! ok)
-            LastError = GetLastError();
+
+        //
+        // Before terminating any process, check if still its a sandboxed process as PID's get reused,
+        // but not as long as a handle is open, hence checking after OpenProcess remains valid until CloseHandle
+        // 
+        // also check if process was marked as critical process
+        //
+
+        if (!SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)ProcessId, 0))
+            ok = TRUE;
+        else {
+
+            NTSTATUS status;
+            ULONG breakOnTermination;
+            status = NtQueryInformationProcess(hProcess, ProcessBreakOnTermination, &breakOnTermination, sizeof(ULONG), NULL);
+            if (NT_SUCCESS(status) && !breakOnTermination) {
+
+                ok = TerminateProcess(hProcess, DBG_TERMINATE_PROCESS);
+                if (!ok)
+                    LastError = GetLastError();
+            }
+        }
         CloseHandle(hProcess);
     }
 
@@ -269,8 +288,8 @@ MSG_HEADER *ProcessServer::KillAllHandler(MSG_HEADER *msg)
 
     if (status != STATUS_INVALID_CID) // if this is true the caller is boxed, should be rpcss
         TerminateJob = FALSE; // if rpcss requests box termination, don't use the job method, fix-me: we get some stuck request in the queue
-    else
-        TerminateJob = !SbieApi_QueryConfBool(TargetBoxName, L"NoAddProcessToJob", FALSE);
+    else if (!SbieApi_QueryConfBool(TargetBoxName, L"NoAddProcessToJob", FALSE) && !SbieApi_QueryConfBool(TargetBoxName, L"NoSecurityIsolation", FALSE))
+        TerminateJob = SbieApi_QueryConfBool(TargetBoxName, L"TerminateJobObject", FALSE);
 
     //
     // match session id and box name
@@ -855,19 +874,34 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
     if (CallerInSandbox) {
 
-        if ((wcscmp(cmd, L"*RPCSS*") == 0 /* || wcscmp(cmd, L"*DCOM*") == 0 */) 
-          && ProcessServer__RunRpcssAsSystem(boxname, CompartmentMode)) {
+        if ((wcscmp(cmd, L"*RPCSS*") == 0 /* || wcscmp(cmd, L"*DCOM*") == 0 */)) {
             
-            //
-            // use our system token
-            //
+            if (ProcessServer__RunRpcssAsSystem(boxname, CompartmentMode)) {
 
-            ok = OpenProcessToken(
-                        GetCurrentProcess(), TOKEN_RIGHTS, &OldTokenHandle);
+                //
+                // use our system token
+                //
+
+                ok = OpenProcessToken(
+                    GetCurrentProcess(), TOKEN_RIGHTS, &OldTokenHandle);
+
+                ShouldAdjustDacl = true;
+            }
+            else {
+
+                //
+                // use the session token
+                //
+
+                ULONG SessionId = PipeServer::GetCallerSessionId();
+
+                ok = WTSQueryUserToken(SessionId, &OldTokenHandle);
+
+                ShouldAdjustSessionId = false;
+            }
+
             if (! ok)
                 return NULL;
-
-            ShouldAdjustDacl = true;
 
         }
         else

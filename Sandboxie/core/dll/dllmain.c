@@ -97,6 +97,7 @@ BOOLEAN Dll_IsWow64 = FALSE;
 #endif
 #ifdef _M_ARM64EC
 BOOLEAN Dll_IsArm64ec = FALSE;
+void* Dll_xtajit64 = NULL;
 #endif
 #ifndef _WIN64
 BOOLEAN Dll_IsXtAjit = FALSE;
@@ -663,6 +664,8 @@ _FX ULONG Dll_GetImageType(const WCHAR *ImageName)
                 ImageType = DLL_IMAGE_OTHER_WEB_BROWSER;
             else if (_wcsicmp(L"mail", buf) == 0)
                 ImageType = DLL_IMAGE_OTHER_MAIL_CLIENT;
+            else if (_wcsicmp(L"plugin", buf) == 0)
+                ImageType = DLL_IMAGE_PLUGIN_CONTAINER;
             else
                 ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
 
@@ -733,9 +736,9 @@ _FX void Dll_SelectImageType(void)
 {
     Dll_ImageType = Dll_GetImageType(Dll_ImageName);
 
-    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED &&
-            _wcsnicmp(Dll_ImageName, L"FlashPlayerPlugin_", 18) == 0)
-        Dll_ImageType = DLL_IMAGE_FLASH_PLAYER_SANDBOX;
+    //if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED &&
+    //        _wcsnicmp(Dll_ImageName, L"FlashPlayerPlugin_", 18) == 0)
+    //    Dll_ImageType = DLL_IMAGE_FLASH_PLAYER_SANDBOX;
 
     if (Dll_ImageType == DLL_IMAGE_DLLHOST) {
 
@@ -773,8 +776,8 @@ _FX void Dll_SelectImageType(void)
 
         if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME ||
             Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX ||
-            Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
-            Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX) {
+            //Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX
+            Dll_ImageType == DLL_IMAGE_ACROBAT_READER) {
 
             Dll_ChromeSandbox = TRUE;
         }
@@ -815,6 +818,7 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
 #endif
 #ifdef _M_ARM64EC
     Dll_IsArm64ec = data->flags.is_arm64ec == 1; // x64 on arm64
+	Dll_xtajit64 = GetModuleHandle(L"xtajit64.dll");
 #endif
 #ifndef _WIN64
     Dll_IsXtAjit = data->flags.is_xtajit == 1; // x86 on arm64
@@ -886,10 +890,16 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
         // msi installer requires COM to be sandboxed, else the installation will be done outside the sandbox
         //
 
-        if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && SbieDll_IsOpenCOM()) {
+        if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER) {
 
-            SbieApi_Log(2196, NULL);
-            ExitProcess(0);
+            if (SbieDll_IsOpenCOM()) {
+                SbieApi_Log(2196, NULL);
+                ExitProcess(0);
+            }
+
+            if (!SbieApi_QueryConfBool(NULL, L"MsiInstallerExemptions", FALSE) && SbieApi_QueryConfBool(NULL, L"NotifyMsiInstaller", TRUE)) {
+                SbieApi_Log(2194, L"MsiInstallerExemptions=y");
+            }
         }
     }
     else

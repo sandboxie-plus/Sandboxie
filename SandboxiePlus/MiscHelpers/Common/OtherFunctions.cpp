@@ -194,3 +194,19 @@ QString NameOfFile(const QString& FileName)
 		return FileName.mid(Begin, End - Begin);
 	return FileName.mid(Begin);
 }
+
+
+
+QIcon IconAddOverlay(const QIcon& Icon, const QString& Name, int Size)
+{
+	QPixmap overlay = QPixmap(Name).scaled(Size, Size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+	QPixmap base = Icon.pixmap(32, 32).scaled(32, 32, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	QPixmap result(base.width(), base.height());
+	result.fill(Qt::transparent); // force alpha channel
+	QPainter painter(&result);
+	painter.drawPixmap(0, 0, base);
+
+	painter.drawPixmap(32 - Size, 32 - Size, overlay);
+	return QIcon(result);
+}

@@ -290,6 +290,10 @@ void CMessageDialog::OnTimer()
 		if (code == MSG_1399)
 			continue;
 
+		//
+		// ignore process forced notification
+		if (code == MSG_1321)
+			continue;
 
 
         WCHAR *str1 = m_buf;

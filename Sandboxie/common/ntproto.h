@@ -790,6 +790,13 @@ typedef NTSTATUS (*P_NtQueryInformationFile)(
     IN  ULONG Length,
     IN  FILE_INFORMATION_CLASS FileInformationClass);
 
+typedef NTSTATUS (*P_NtQueryInformationByName)(
+    _In_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _Out_ PIO_STATUS_BLOCK IoStatusBlock,
+    _Out_writes_bytes_(Length) PVOID FileInformation,
+    _In_ ULONG Length,
+    _In_ FILE_INFORMATION_CLASS FileInformationClass);
+
 typedef NTSTATUS (*P_NtQueryInformationJobObject)(
     IN  HANDLE JobHandle,
     IN  JOBOBJECTINFOCLASS JobObjectInformationClass,

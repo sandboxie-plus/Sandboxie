@@ -44,6 +44,21 @@ CBoxedProcessPtr CSbiePlusAPI::OnProcessBoxed(quint32 ProcessId, const QString& 
 	return pProcess;
 }
 
+std::wstring GetWindowTextTimeout(HWND hWnd, UINT timeout) 
+{
+	DWORD_PTR length = 0;
+
+    if (SendMessageTimeoutW(hWnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, timeout, &length) == 0)
+        return L""; 
+    if (length == 0)
+        return L""; 
+
+    std::vector<wchar_t> buffer(length + 1);
+    if (SendMessageTimeoutW(hWnd, WM_GETTEXT, length + 1, reinterpret_cast<LPARAM>(buffer.data()), SMTO_ABORTIFHUNG, timeout, &length) == 0)
+        return L""; 
+    return std::wstring(buffer.data(), length); 
+}
+
 BOOL CALLBACK CSbiePlusAPI__WindowEnum(HWND hwnd, LPARAM lParam)
 {
 	if (GetParent(hwnd) || GetWindow(hwnd, GW_OWNER))
@@ -64,10 +79,9 @@ BOOL CALLBACK CSbiePlusAPI__WindowEnum(HWND hwnd, LPARAM lParam)
 
 	QMultiMap<quint32, QString>& m_WindowMap = *((QMultiMap<quint32, QString>*)(lParam));
 
-	WCHAR title[256];
-	GetWindowTextW(hwnd, title, 256);
+	QString name = QString::fromStdWString(GetWindowTextTimeout(hwnd, 10));
 
-	m_WindowMap.insert(pid, QString::fromWCharArray(title));
+	m_WindowMap.insert(pid, name);
 
 	return TRUE;
 }
@@ -225,7 +239,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 		{
 			QString FileName = (RootName.first.isEmpty() ?  RootPath + "\\" : RootName.first) + RootName.second;
 			Files.insert(ArcIndex, new QFileX(FileName, pProgress, &Archive));
-			Attributes.insert(ArcIndex, GetFileAttributes(QString(FileName).replace("/", "\\").toStdWString().c_str()));
+			Attributes.insert(ArcIndex, GetFileAttributesW(QString(FileName).replace("/", "\\").toStdWString().c_str()));
 		}
 		//else
 			// this file is already present in the archive, this should not happen !!!
@@ -234,9 +248,12 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	if (vParams.contains("password"))
 		Archive.SetPassword(vParams["password"].toString());
 
+	SArcInfo Info = GetArcInfo(ExportPath);
+
     SCompressParams Params;
 	Params.iLevel = vParams["level"].toInt();
 	Params.bSolid = vParams["solid"].toBool();
+	Params.b7z = Info.ArchiveExt != "zip";
 
 	SB_STATUS Status = SB_OK;
 	if (!Archive.Update(&Files, true, &Params, &Attributes))
@@ -490,7 +507,7 @@ void CSandBoxPlus::ScanStartMenu()
 	for (int i = 0; i < ARRAYSIZE(csidls); i++)
 	{
 		WCHAR path[2048];
-		if (SHGetFolderPath(NULL, csidls[i], NULL, SHGFP_TYPE_CURRENT, path) != S_OK)
+		if (SHGetFolderPathW(NULL, csidls[i], NULL, SHGFP_TYPE_CURRENT, path) != S_OK)
 			continue;
 
 		foreach (const QString& Snapshot, SnapshotList)
@@ -601,6 +618,7 @@ void CSandBoxPlus::ScanStartMenu()
 
 void CSandBoxPlus::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
 {
+	//bool bPathChanged = (FilePath != m_FileNtPath);
 	bool bPathChanged = (FilePath != m_FilePath);
 
 	if (bPathChanged && !m_FilePath.isEmpty())
@@ -631,7 +649,7 @@ void CSandBoxPlus::UpdateSize(bool bReset)
 
 	if (m_bImageFile) {
 		LARGE_INTEGER liSparseFileCompressedSize;
-		liSparseFileCompressedSize.LowPart = GetCompressedFileSize(GetBoxImagePath().toStdWString().c_str(), (LPDWORD)&liSparseFileCompressedSize.HighPart);
+		liSparseFileCompressedSize.LowPart = GetCompressedFileSizeW(GetBoxImagePath().toStdWString().c_str(), (LPDWORD)&liSparseFileCompressedSize.HighPart);
 		m_TotalSize = liSparseFileCompressedSize.QuadPart;
 	}
 
@@ -838,9 +856,9 @@ void CSandBoxPlus::SetINetBlock(bool bEnable)
 {
 	if (bEnable) {
 		if(theGUI->IsWFPEnabled())
-			InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
+			AppendText("AllowNetworkAccess", "!<InternetAccess>,n");
 		else
-			InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
+			AppendText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
 	}
 	else
 	{
@@ -956,7 +974,7 @@ void CSandBoxPlus::BlockProgram(const QString& ProgName)
 	if (!WhiteList && !BlackList)
 	{
 		BlackList = true;
-		InsertText("ClosedIpcPath", "<StartRunAccess>,*");
+		AppendText("ClosedIpcPath", "<StartRunAccess>,*");
 	}
 
 	EditProgramGroup("<StartRunAccess>", ProgName, !WhiteList);
@@ -1130,6 +1148,8 @@ void CSandBoxPlus::OnCancelAsync()
 QString CSandBoxPlus::MakeBoxCommand(const QString& FileName)
 {
 	QString BoxFileName = FileName;
+	if (!BoxFileName.contains("\""))
+		BoxFileName = "\"" + BoxFileName + "\"";
 	//if (BoxFileName.indexOf(m_FilePath, Qt::CaseInsensitive) == 0) {
 	//	BoxFileName.remove(0, m_FilePath.length());
 	//	if (BoxFileName.at(0) != '\\')
@@ -1167,7 +1187,6 @@ QString CSandBoxPlus::GetFullCommand(const QString& Command)
 	//	FullCmd.insert(1, m_FilePath);
 	return FullCmd.replace("%BoxRoot%", m_FilePath, Qt::CaseInsensitive);
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // CSbieTemplatesEx

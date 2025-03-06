@@ -66,6 +66,7 @@ static P_OutputDebugString          __sys_OutputDebugStringA        = NULL;
 
 BOOLEAN Dll_SbieTrace = FALSE;
 BOOLEAN Dll_ApiTrace = FALSE;
+BOOLEAN Dll_FileTrace = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -78,6 +79,8 @@ _FX int Trace_Init(void)
     Dll_SbieTrace = SbieApi_QueryConfBool(NULL, L"SbieTrace", FALSE);
 
     Dll_ApiTrace = Config_GetSettingsForImageName_bool(L"ApiTrace", FALSE);
+
+    Dll_FileTrace = Config_GetSettingsForImageName_bool(L"FileTrace", FALSE);
 
     if (SbieApi_QueryConfBool(NULL, L"ErrorTrace", FALSE)) {
 
@@ -597,6 +600,7 @@ const wchar_t* Trace_SbieSvcFunc2Str(ULONG func)
         case MSGID_QUEUE_PUTRPL:                return L"MSGID_QUEUE_PUTRPL";
         case MSGID_QUEUE_PUTREQ:                return L"MSGID_QUEUE_PUTREQ";
         case MSGID_QUEUE_GETRPL:                return L"MSGID_QUEUE_GETRPL";
+        case MSGID_QUEUE_STARTUP:               return L"MSGID_QUEUE_STARTUP";
         case MSGID_QUEUE_NOTIFICATION:          return L"MSGID_QUEUE_NOTIFICATION";
 
         case MSGID_EPMAPPER_GET_PORT_NAME:      return L"MSGID_EPMAPPER_GET_PORT_NAME";

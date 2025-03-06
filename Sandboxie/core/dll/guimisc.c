@@ -1330,10 +1330,13 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     GUI_GET_RAW_INPUT_DEVICE_INFO_REQ* req;
     GUI_GET_RAW_INPUT_DEVICE_INFO_RPL* rpl;
 
-    // Note: pcbSize seems to be in tchars not in bytes!
     ULONG lenData = 0;
-    if (pData && pcbSize)
-        lenData = (*pcbSize) * (bUnicode ? sizeof(WCHAR) : 1);
+    if (pData && pcbSize) {
+        lenData = *pcbSize;
+        if (uiCommand == RIDI_DEVICENAME && bUnicode) {
+            lenData *= sizeof(WCHAR);
+        }
+    }
 
     ULONG reqSize = sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) + lenData + 10;
     req = Dll_Alloc(reqSize);
@@ -1344,12 +1347,17 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     req->hDevice = (ULONG64)hDevice;
     req->uiCommand = uiCommand;
     req->unicode = bUnicode;
-    if (lenData) {
+    req->hasData = !!pData;
+
+    if (lenData)
         memcpy(reqData, pData, lenData);
-        req->hasData = TRUE;
-    } else
-        req->hasData = FALSE;
-    req->cbSize = pcbSize ? *pcbSize : -1;
+
+    // GetRawInputDeviceInfoA accesses pcbSize without testing it for being not NULL 
+    // hence if the caller passes NULL we use a dummy value so that we don't crash the helper service
+    if (pcbSize)
+        req->cbSize = *pcbSize;
+    else
+        req->cbSize = 0;
 
     rpl = Gui_CallProxy(req, reqSize, sizeof(*rpl));
 
@@ -1357,21 +1365,21 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
 
     if (!rpl)
         return -1;
-    else {
-        ULONG error = rpl->error;
-        ULONG retval = rpl->retval;
 
-        if (pcbSize)
-            *pcbSize = rpl->cbSize;
-        if (lenData) {
-            LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
-            memcpy(pData, rplData, lenData);
-        }
+    ULONG error = rpl->error;
+    ULONG retval = rpl->retval;
 
-        Dll_Free(rpl);
-        SetLastError(error);
-        return retval;
+    if (pcbSize)
+        *pcbSize = rpl->cbSize;
+
+    if (lenData) {
+        LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+        memcpy(pData, rplData, lenData);
     }
+
+    Dll_Free(rpl);
+    SetLastError(error);
+    return retval;
 }
 
 

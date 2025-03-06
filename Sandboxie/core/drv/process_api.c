@@ -92,7 +92,7 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
         KIRQL irql;
 
         proc2 = Process_Find((HANDLE)(-user_box_parm), &irql);
-        if (proc2)
+        if (proc2 && !proc2->terminated)
             box = Box_Clone(Driver_Pool, proc2->box);
 
         ExReleaseResourceLite(Process_ListLock);
@@ -245,7 +245,7 @@ _FX NTSTATUS Process_Api_Query(PROCESS *proc, ULONG64 *parms)
     if (ProcessId) {
 
         proc = Process_Find(ProcessId, &irql);
-        if (! proc) {
+        if (!proc || proc->terminated) {
             ExReleaseResourceLite(Process_ListLock);
             KeLowerIrql(irql);
             return STATUS_INVALID_CID;
@@ -343,7 +343,7 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
     if (ProcessId) {
 
         proc = Process_Find(ProcessId, &irql);
-        if (! proc) {
+        if (!proc || proc->terminated) {
             ExReleaseResourceLite(Process_ListLock);
             KeLowerIrql(irql);
             return STATUS_INVALID_CID;
@@ -663,7 +663,7 @@ _FX NTSTATUS Process_Api_QueryProcessPath(PROCESS *proc, ULONG64 *parms)
     if (ProcessId) {
 
         proc = Process_Find(ProcessId, &irql);
-        if ((! proc) || proc->terminated) {
+        if (!proc || proc->terminated) {
             ExReleaseResourceLite(Process_ListLock);
             KeLowerIrql(irql);
             return STATUS_INVALID_CID;
@@ -779,7 +779,7 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
 
         proc = Process_Find(args->process_id.val, &irql);
 
-        if (! proc) {
+        if (!proc || proc->terminated) {
 
             ExReleaseResourceLite(Process_ListLock);
             KeLowerIrql(irql);
@@ -1173,12 +1173,28 @@ _FX NTSTATUS Process_Api_Kill(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status)) {
 
-        status = ObOpenObjectByPointer(ProcessObject, OBJ_KERNEL_HANDLE, NULL, PROCESS_TERMINATE, NULL, KernelMode, &handle);
+        status = ObOpenObjectByPointer(ProcessObject, OBJ_KERNEL_HANDLE, NULL, PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION | PROCESS_SET_INFORMATION, NULL, KernelMode, &handle);
         ObDereferenceObject(ProcessObject);
 
         if (NT_SUCCESS(status)) {
 
-            ZwTerminateProcess(handle, DBG_TERMINATE_PROCESS);
+            //
+            // Check and if needed clear critical process flag
+            //
+
+            ULONG breakOnTermination;
+            status = ZwQueryInformationProcess(handle, ProcessBreakOnTermination, &breakOnTermination, sizeof(ULONG), NULL);
+            if (NT_SUCCESS(status) && breakOnTermination) {
+                breakOnTermination = 0;
+                status = ZwSetInformationProcess(handle, ProcessBreakOnTermination, &breakOnTermination, sizeof(ULONG));
+            }
+
+            //
+            // Terminate
+            //
+
+            if (NT_SUCCESS(status))
+                ZwTerminateProcess(handle, DBG_TERMINATE_PROCESS);
             ZwClose(handle);
         }
     }

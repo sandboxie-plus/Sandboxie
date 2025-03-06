@@ -186,6 +186,10 @@
         <file>Actions/Job2.png</file>
         <file>Actions/Job4.png</file>
         <file>Actions/Job3.png</file>
+        <file>Actions/Clipboard.png</file>
+        <file>Actions/CaseSensitive.png</file>
+        <file>Actions/Highlight.png</file>
+        <file>Actions/RegExp.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Busy">Boxes/BusyOverlay.png</file>

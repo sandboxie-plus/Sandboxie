@@ -20,6 +20,7 @@ struct SCompressParams
 {
 	int iLevel = 0;
 	bool bSolid = false;
+	bool b7z = false;
 };
 
 class MISCHELPERS_EXPORT CArchive

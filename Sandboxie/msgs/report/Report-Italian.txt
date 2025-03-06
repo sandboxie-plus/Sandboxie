@@ -14,6 +14,10 @@ SBIE1206 Your Windows build (%2) is not yet supported by sandboxie, error: %3
 SBIE1207 Your Windows build (%2) is not yet supported by Sandboxie, which means applications will run without security isolation!
 .
 
+1321;pop;inf;01
+SBIE1321 Program '%2' was forced into sandbox %3
+.
+
 2230;pop;wrn;01
 SBIE2230 Failed to mount root for %2
 .

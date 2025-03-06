@@ -371,7 +371,7 @@ MSG_HEADER *SbieIniServer::GetUser(MSG_HEADER *msg)
     bool ok2 = SetUserSettingsSectionName(hToken);
 
     BOOLEAN admin = FALSE;
-    if (ok2 && TokenIsAdmin(hToken, true))
+    if (ok2 && TokenIsAdmin(hToken))
         admin = TRUE;
 
     CloseHandle(hToken);
@@ -2275,7 +2275,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
     if (ok) {
 
         HANDLE SbieCtrlProcessId;
-        SbieApi_SessionLeader(hToken, &SbieCtrlProcessId);
+        SbieApi_SessionLeader(m_session_id, &SbieCtrlProcessId);
         if (SbieCtrlProcessId) {
             status = STATUS_IMAGE_ALREADY_LOADED;
             ok = FALSE;

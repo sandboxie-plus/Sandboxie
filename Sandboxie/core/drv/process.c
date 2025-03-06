@@ -539,7 +539,7 @@ _FX PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql)
 // Process_FindSandboxed
 //---------------------------------------------------------------------------
 
-
+#ifdef XP_SUPPORT
 _FX PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql)
 {
     PROCESS* proc = Process_Find(ProcessId, out_irql);
@@ -552,30 +552,30 @@ _FX PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql)
     }
     return proc;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Process_Find_ByHandle
 //---------------------------------------------------------------------------
 
 
-_FX PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql)
-{
-    NTSTATUS Status;
-    PEPROCESS ProcessObject = NULL;
-    PROCESS* Process = NULL;
-    
-    Status = ObReferenceObjectByHandle(Handle, PROCESS_QUERY_INFORMATION, *PsProcessType, UserMode, (PVOID*)&ProcessObject, NULL);
-    if (NT_SUCCESS(Status)) {
-
-        Process = Process_Find(PsGetProcessId(ProcessObject), out_irql);
-
-        // Dereference the process object
-        ObDereferenceObject(ProcessObject);
-    }
-
-    return Process;
-}
+//_FX PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql)
+//{
+//    NTSTATUS Status;
+//    PEPROCESS ProcessObject = NULL;
+//    PROCESS* Process = NULL;
+//    
+//    Status = ObReferenceObjectByHandle(Handle, PROCESS_QUERY_INFORMATION, *PsProcessType, UserMode, (PVOID*)&ProcessObject, NULL);
+//    if (NT_SUCCESS(Status)) {
+//
+//        Process = Process_Find(PsGetProcessId(ProcessObject), out_irql);
+//
+//        // Dereference the process object
+//        ObDereferenceObject(ProcessObject);
+//    }
+//
+//    return Process;
+//}
 
 
 //---------------------------------------------------------------------------
@@ -789,7 +789,7 @@ _FX PROCESS *Process_Create(
     // check certificate
     //
 
-    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard) && !proc->image_sbie) {
+    if (!Verify_CertInfo.opt_sec && !proc->image_sbie) {
 
         const WCHAR* exclusive_setting = NULL;
         if (proc->use_security_mode)
@@ -820,7 +820,7 @@ _FX PROCESS *Process_Create(
         }
     }
 
-    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard2) && !proc->image_sbie) {
+    if (!Verify_CertInfo.opt_enc && !proc->image_sbie) {
         
         const WCHAR* exclusive_setting = NULL;
         if (proc->confidential_box)
@@ -1270,7 +1270,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         BOX* breakout_box = NULL;
 
         if (box && Process_IsBreakoutProcess(box, ImagePath)) {
-            if(!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard))
+            if(!Verify_CertInfo.active)
                 Log_Msg_Process(MSG_6004, box->name, L"BreakoutProcess", box->session_id, CallerId);
             else {
                 UNICODE_STRING image_uni;

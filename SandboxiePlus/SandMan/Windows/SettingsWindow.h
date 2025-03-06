@@ -195,6 +195,8 @@ private:
 	void WriteTextList(const QString& Setting, const QStringList& List);
 
 	Ui::SettingsWindow ui;
+
+	class CCodeEdit* m_pCodeEdit;
 };
 
 QVariantMap GetRunEntry(const QString& sEntry);

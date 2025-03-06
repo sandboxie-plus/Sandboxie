@@ -17,6 +17,7 @@
 #include "../MiscHelpers/Archive/Archive.h"
 #include "../Windows/SettingsWindow.h"
 #include "../Windows/CompressDialog.h"
+#include "../Windows/ExtractDialog.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -197,6 +198,10 @@ void CSbieView::CreateMenu()
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenuBox->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
 	m_pMenuBox->addSeparator();
+	m_pMenuMount = m_pMenuBox->addAction(CSandMan::GetIcon("LockOpen"), tr("Mount Box Image"), this, SLOT(OnSandBoxAction()));
+	m_pMenuUnmount = m_pMenuBox->addAction(CSandMan::GetIcon("LockClosed"), tr("Unmount Box Image"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRecover = m_pMenuBox->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
+	m_pMenuCleanUp = m_pMenuBox->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuContent = m_pMenuBox->addMenu(CSandMan::GetIcon("Compatibility"), tr("Box Content"));
 		m_pMenuBrowse = m_pMenuContent->addAction(CSandMan::GetIcon("Folder"), tr("Browse Files"), this, SLOT(OnSandBoxAction()));
 		m_pMenuContent->addSeparator();
@@ -206,10 +211,6 @@ void CSbieView::CreateMenu()
 		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
 	m_pMenuSnapshots = m_pMenuBox->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
-	m_pMenuMount = m_pMenuBox->addAction(CSandMan::GetIcon("LockOpen"), tr("Mount Box Image"), this, SLOT(OnSandBoxAction()));
-	m_pMenuUnmount = m_pMenuBox->addAction(CSandMan::GetIcon("LockClosed"), tr("Unmount Box Image"), this, SLOT(OnSandBoxAction()));
-	m_pMenuRecover = m_pMenuBox->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
-	m_pMenuCleanUp = m_pMenuBox->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuBox->addSeparator();
 	m_pMenuOptions = m_pMenuBox->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
 	QFont f = m_pMenuOptions->font();
@@ -1037,7 +1038,7 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 
 QString CSbieView::ImportSandbox()
 {
-	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
+	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
 	if (Path.isEmpty())
 		return "";
 
@@ -1071,24 +1072,27 @@ QString CSbieView::ImportSandbox()
 	StrPair PathName = Split2(Path, "/", true);
 	StrPair NameEx = Split2(PathName.second, ".", true);
 	QString Name = NameEx.first;
+	
+	CExtractDialog optWnd(Name, this);
+	if(!Password.isEmpty())
+		optWnd.ShowNoCrypt();
+	if (!theGUI->SafeExec(&optWnd) == 1)
+		return "";
+	Name = optWnd.GetName();
+	QString BoxRoot = optWnd.GetRoot();
 
 	CSandBoxPtr pBox;
-	for (;;) {
-		pBox = theAPI->GetBoxByName(Name);
-		if (pBox.isNull())
-			break;
-		Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("This name is already in use, please select an alternative box name"), QLineEdit::Normal, Name);
-		if (Name.isEmpty())
-			return "";
-	}
-
 	SB_PROGRESS Status = theAPI->CreateBox(Name);
 	if (!Status.IsError()) {
 		pBox = theAPI->GetBoxByName(Name);
 		if (pBox) {
+
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
-			if (!Password.isEmpty()) {
+			if (!BoxRoot.isEmpty())
+				pBox->SetFileRoot(BoxRoot);
+
+			if (!Password.isEmpty() && !optWnd.IsNoCrypt()) {
 				Status = pBoxEx->ImBoxCreate(ImageSize / 1024, Password);
 				if (!Status.IsError())
 					Status = pBoxEx->ImBoxMount(Password, true, true);
@@ -1096,8 +1100,12 @@ QString CSbieView::ImportSandbox()
 
 			if (!Status.IsError())
 				Status = pBoxEx->ImportBox(Path, Password);
+
+			// always overwrite restored FileRootPath
+			pBox->SetText("FileRootPath", BoxRoot);
 		}
 	}
+
 	if (Status.GetStatus() == OP_ASYNC) {
 		Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Path));
 		if (Status.IsError()) {
@@ -1275,7 +1283,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				theConf->SetValue("Options/ExplorerInfo", false);
 		}
 
-		::ShellExecute(NULL, NULL, SandBoxes.first()->GetFileRoot().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
+		::ShellExecuteW(NULL, NULL, SandBoxes.first()->GetFileRoot().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 	}
 	else if (Action == m_pMenuRegEdit)
 	{
@@ -1309,9 +1317,9 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		if (SandBoxes.first()->GetActiveProcessCount() == 0)
 			params += L" \"" + theAPI->GetStartPath().toStdWString() + L" /box:" + SandBoxes.first()->GetName().toStdWString() + L" mount_hive\"";
 
-		SHELLEXECUTEINFO shex;
-		memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
-		shex.cbSize = sizeof(SHELLEXECUTEINFO);
+		SHELLEXECUTEINFOW shex;
+		memset(&shex, 0, sizeof(shex));
+		shex.cbSize = sizeof(shex);
 		shex.fMask = SEE_MASK_FLAG_NO_UI;
 		shex.hwnd = NULL;
 		shex.lpFile = path.c_str();
@@ -1319,7 +1327,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		shex.nShow = SW_SHOWNORMAL;
 		shex.lpVerb = L"runas";
 
-		ShellExecuteEx(&shex);
+		ShellExecuteExW(&shex);
 	}
 	else if (Action == m_pMenuSnapshots)
 	{
@@ -1399,7 +1407,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			Password = pwWnd.GetPassword();
 		}
 
-		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z)"));	
+		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + optWnd.GetFormat(), tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
 		if (Path.isEmpty())
 			return;
 
@@ -1699,7 +1707,7 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 				Entry["Name"] = pProcess->GetProcessName();
 				Entry["WorkingDir"] = pProcess->GetWorkingDir();
 				Entry["Command"] = pBoxPlus->MakeBoxCommand(pProcess->GetFileName());
-				pBoxPlus->InsertText("RunCommand", MakeRunEntry(Entry));
+				pBoxPlus->AppendText("RunCommand", MakeRunEntry(Entry));
 			}
 			else if(!m_pMenuPinToRun->data().toString().isEmpty())
 				pBoxPlus->DelValue("RunCommand", m_pMenuPinToRun->data().toString());
@@ -1974,7 +1982,7 @@ void CSbieView::OnMenuContextAction()
 		QString Link = m_pCtxPinToRun->data().toString();
 		if (!Link.isEmpty()) {
 			if (m_pCtxPinToRun->isChecked())
-				pBoxPlus->InsertText("RunCommand", Link);
+				pBoxPlus->AppendText("RunCommand", Link);
 			else
 				pBoxPlus->DelValue("RunCommand", Link);
 		}

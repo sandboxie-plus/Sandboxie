@@ -44,6 +44,64 @@ void CPathEdit::Browse()
 }
 
 ///////////////////////////////////////////////////
+//
+
+void FixComboBoxEditing(QComboBox* pBox)
+{
+	QObject::connect(pBox->lineEdit(), &QLineEdit::textEdited, [pBox](const QString& text){
+		if (pBox->currentIndex() != -1) {
+			int pos = pBox->lineEdit()->cursorPosition();
+			pBox->setCurrentIndex(-1);
+			pBox->setCurrentText(text);
+			pBox->lineEdit()->setCursorPosition(pos);
+		}
+	});
+}
+
+void SetComboBoxValue(QComboBox* pBox, const QVariant& Value)
+{
+	int Pos = pBox->findData(Value);
+	pBox->setCurrentIndex(Pos);
+	if (Pos == -1)
+		pBox->setCurrentText(Value.toString());
+}
+
+QVariant GetComboBoxValue(QComboBox* pBox)
+{
+	int Pos = pBox->currentIndex();
+	if (Pos != -1)
+		return pBox->currentData();
+	return pBox->currentText();
+}
+
+void AddColoredComboBoxEntry(QComboBox* pBox, const QString& Text, const QColor& Color, const QVariant& Data)
+{
+	pBox->addItem(Text, Data);
+	if(Color.isValid())
+		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(QBrush(Color));
+	else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(pBox->palette().background());
+#else
+		qobject_cast<QStandardItemModel *>(pBox->model())->item(pBox->count() - 1)->setBackground(pBox->palette().window());
+#endif
+}
+
+void ColorComboBox(QComboBox* pBox)
+{
+	auto pLambda = [pBox]() {
+		auto pModel = qobject_cast<QStandardItemModel *>(pBox->model());
+		if (auto pItem = pModel->item(pBox->currentIndex())) {
+			auto pal = pBox->palette();
+			pal.setColor(QPalette::Button, pItem->background().color());
+			pBox->setPalette(pal);
+		}
+	};
+	QObject::connect(pBox, &QComboBox::currentTextChanged, pLambda);
+	pLambda();
+}
+
+///////////////////////////////////////////////////
 // CProxyEdit
 
 CProxyEdit::CProxyEdit(QWidget *parent)

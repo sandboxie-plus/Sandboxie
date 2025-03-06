@@ -190,6 +190,60 @@ typedef CONST OBJECT_ATTRIBUTES *PCOBJECT_ATTRIBUTES;
     (p)->SecurityQualityOfService = NULL;               \
     }
 
+NTSYSAPI BOOLEAN WINAPI RtlValidSecurityDescriptor(
+  PSECURITY_DESCRIPTOR SecurityDescriptor
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlGetControlSecurityDescriptor(
+  PSECURITY_DESCRIPTOR pSecurityDescriptor,
+  PSECURITY_DESCRIPTOR_CONTROL pControl,
+  LPDWORD lpdwRevision
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlMakeSelfRelativeSD(
+  PSECURITY_DESCRIPTOR pAbsoluteSecurityDescriptor,
+  PSECURITY_DESCRIPTOR pSelfRelativeSecurityDescriptor,
+  LPDWORD lpdwBufferLength
+);
+
+NTSYSAPI ULONG WINAPI RtlLengthSecurityDescriptor(
+  PSECURITY_DESCRIPTOR SecurityDescriptor
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlAbsoluteToSelfRelativeSD(
+  PSECURITY_DESCRIPTOR AbsoluteSecurityDescriptor,
+  PSECURITY_DESCRIPTOR SelfRelativeSecurityDescriptor,
+  PULONG               BufferLength
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlSelfRelativeToAbsoluteSD(
+  PSECURITY_DESCRIPTOR SelfRelativeSecurityDescriptor,
+  PSECURITY_DESCRIPTOR AbsoluteSecurityDescriptor,
+  PULONG               AbsoluteSecurityDescriptorSize,
+  PACL                 Dacl,
+  PULONG               DaclSize,
+  PACL                 Sacl,
+  PULONG               SaclSize,
+  PSID                 Owner,
+  PULONG               OwnerSize,
+  PSID                 PrimaryGroup,
+  PULONG               PrimaryGroupSize
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlGetAce(
+  PACL  Acl,
+  ULONG AceIndex,
+  PVOID *Ace
+);
+
+NTSYSAPI NTSTATUS WINAPI RtlAddAce(
+  PACL  Acl,
+  ULONG AceRevision,
+  ULONG StartingAceIndex,
+  PVOID AceList,
+  ULONG AceListLength
+);
+
 //---------------------------------------------------------------------------
 
 #define PAGE_SIZE 4096
@@ -771,6 +825,15 @@ NtQueryInformationFile(
     IN ULONG                        Length,
     IN FILE_INFORMATION_CLASS       FileInformationClass
 );
+
+/*__declspec(dllimport) NTSTATUS __stdcall
+NtQueryInformationByName(
+    _In_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _Out_ PIO_STATUS_BLOCK IoStatusBlock,
+    _Out_writes_bytes_(Length) PVOID FileInformation,
+    _In_ ULONG Length,
+    _In_ FILE_INFORMATION_CLASS FileInformationClass
+);*/
 
 __declspec(dllimport) NTSTATUS __stdcall
 NtQueryAttributesFile(
@@ -2331,6 +2394,7 @@ __declspec(dllimport) NTSTATUS RtlGetGroupSecurityDescriptor(
 );
 
 __declspec(dllimport) BOOLEAN NTAPI RtlEqualSid(PSID Sid1, PSID Sid2);
+__declspec(dllimport) ULONG NTAPI RtlLengthSid(PSID Sid);
 __declspec(dllimport) PVOID NTAPI RtlFreeSid(PSID Sid);
 
 //---------------------------------------------------------------------------

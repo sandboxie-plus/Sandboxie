@@ -1,9 +1,11 @@
+call "%~dp0..\Installer\buildVariables.cmd" %*
+
 REM @ECHO OFF
 
-echo %*
-IF "%~4" == "" ( set "openssl_version=3.3.1" ) ELSE ( set "openssl_version=%~4" )
-IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
-IF "%~2" == "" ( set "qt_version=5.15.14" ) ELSE ( set "qt_version=%~2" )
+REM echo %*
+REM IF "%~4" == "" ( set "openssl_version=3.4.0" ) ELSE ( set "openssl_version=%~4" )
+REM IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
+REM IF "%~2" == "" ( set "qt_version=5.15.16" ) ELSE ( set "qt_version=%~2" )
 
 IF "%openssl_version:~0,3%" == "1.1" ( set "sslMajorVersion=1_1" ) ELSE ( set "sslMajorVersion=3" )
 
@@ -25,8 +27,12 @@ IF %1 == ARM64 (
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
   set qtPath=%~dp0..\..\Qt\%qt6_version%\msvc2019_arm64
   set instPath=%~dp0\SbiePlus_a64
+  set "sslMajorVersion=1_1"
 )
-set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC142.CRT
+
+REM set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC142.CRT
+set redistPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Redist\MSVC\%VCToolsVersion%\%1\Microsoft.VC142.CRT
+
 @echo on
 
 set srcPath=%~dp0..\SandboxiePlus\Bin\%archPath%\Release
@@ -46,22 +52,51 @@ copy "%redistPath%\*" %instPath%\
 
 ECHO Copying Qt libraries
 
-IF NOT %archPath% == ARM64 (
-REM IF %archPath% == Win32 (
-	copy %qtPath%\bin\Qt5Core.dll %instPath%\
-	copy %qtPath%\bin\Qt5Gui.dll %instPath%\
-	copy %qtPath%\bin\Qt5Network.dll %instPath%\
-	copy %qtPath%\bin\Qt5Widgets.dll %instPath%\
-	copy %qtPath%\bin\Qt5WinExtras.dll %instPath%\
-	copy %qtPath%\bin\Qt5Qml.dll %instPath%\
-) ELSE (
-	copy %qtPath%\bin\Qt6Core.dll %instPath%\
-	copy %qtPath%\bin\Qt6Gui.dll %instPath%\
-	copy %qtPath%\bin\Qt6Network.dll %instPath%\
-	copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
-	copy %qtPath%\bin\Qt6Qml.dll %instPath%\
+if "%qt_version:~0,1%" == "5" (
+    echo Copying Qt5 libraries...
+    IF NOT %archPath% == ARM64 (
+        REM If not ARM64 (e.g., x86 or x64)
+        echo Copying Qt5Core.dll
+        copy %qtPath%\bin\Qt5Core.dll %instPath%\
+        echo Copying Qt5Gui.dll
+        copy %qtPath%\bin\Qt5Gui.dll %instPath%\
+        echo Copying Qt5Network.dll
+        copy %qtPath%\bin\Qt5Network.dll %instPath%\
+        echo Copying Qt5Widgets.dll
+        copy %qtPath%\bin\Qt5Widgets.dll %instPath%\
+        echo Copying Qt5WinExtras.dll
+        copy %qtPath%\bin\Qt5WinExtras.dll %instPath%\
+        echo Copying Qt5Qml.dll
+        copy %qtPath%\bin\Qt5Qml.dll %instPath%\
+    ) ELSE (
+        REM If ARM64, using Qt6
+        echo Copying Qt6Core.dll
+        copy %qtPath%\bin\Qt6Core.dll %instPath%\
+        echo Copying Qt6Gui.dll
+        copy %qtPath%\bin\Qt6Gui.dll %instPath%\
+        echo Copying Qt6Network.dll
+        copy %qtPath%\bin\Qt6Network.dll %instPath%\
+        echo Copying Qt6Widgets.dll
+        copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
+        echo Copying Qt6Qml.dll
+        copy %qtPath%\bin\Qt6Qml.dll %instPath%\
+    )
+) else (
+    REM If not Qt5, assuming Qt6
+    echo Copying Qt6 libraries...
+    echo Copying Qt6Core.dll
+    copy %qtPath%\bin\Qt6Core.dll %instPath%\
+    echo Copying Qt6Gui.dll
+    copy %qtPath%\bin\Qt6Gui.dll %instPath%\
+    echo Copying Qt6Network.dll
+    copy %qtPath%\bin\Qt6Network.dll %instPath%\
+    echo Copying Qt6Widgets.dll
+    copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
+    echo Copying Qt6Qml.dll
+    copy %qtPath%\bin\Qt6Qml.dll %instPath%\
 )
 
+echo Done copying libraries.
 
 mkdir %instPath%\platforms
 copy %qtPath%\plugins\platforms\qdirect2d.dll %instPath%\platforms\
@@ -71,10 +106,21 @@ copy %qtPath%\plugins\platforms\qwindows.dll %instPath%\platforms\
 
 mkdir %instPath%\styles
 copy %qtPath%\plugins\styles\qwindowsvistastyle.dll %instPath%\styles\
+rem Qt 6.7+
+copy %qtPath%\plugins\styles\qmodernwindowsstyle.dll %instPath%\styles\
 
 IF %archPath% == ARM64 (
 mkdir %instPath%\tls
+copy %qtPath%\plugins\tls\qcertonlybackend.dll %instPath%\tls\
 copy %qtPath%\plugins\tls\qopensslbackend.dll %instPath%\tls\
+copy %qtPath%\plugins\tls\qschannelbackend.dll %instPath%\tls\
+)
+
+IF %archPath% == x64 (
+    if "%qt_version:~0,1%" == "6" (
+        mkdir %instPath%\tls
+        copy %qtPath%\plugins\tls\qopensslbackend.dll %instPath%\tls\
+    )
 )
 
 ECHO Copying OpenSSL libraries
@@ -160,7 +206,9 @@ copy /y %sbiePath%\SandboxieWUAU.pdb %instPath%\
 IF %archPath% == x64 (
   mkdir %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieSvc.exe %instPath%\32\
+  copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieSvc.pdb %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieDll.dll %instPath%\32\
+  copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieDll.pdb %instPath%\32\
 
   copy /y %~dp0..\SandboxiePlus\x64\Release\SbieShellExt.dll %instPath%\
   copy /y %~dp0..\SandboxiePlus\x64\Release\SbieShellPkg.msix %instPath%\
@@ -168,10 +216,13 @@ IF %archPath% == x64 (
 IF %archPath% == ARM64 (
   mkdir %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieSvc.exe %instPath%\32\
+  copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieSvc.pdb %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieDll.dll %instPath%\32\
+  copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieDll.pdb %instPath%\32\
 
   mkdir %instPath%\64\
   copy /y %~dp0..\Sandboxie\Bin\ARM64EC\SbieRelease\SbieDll.dll %instPath%\64\
+  copy /y %~dp0..\Sandboxie\Bin\ARM64EC\SbieRelease\SbieDll.pdb %instPath%\64\
 
   copy /y %~dp0..\SandboxiePlus\ARM64\Release\SbieShellExt.dll %instPath%\
   copy /y %~dp0..\SandboxiePlus\ARM64\Release\SbieShellPkg.msix %instPath%\

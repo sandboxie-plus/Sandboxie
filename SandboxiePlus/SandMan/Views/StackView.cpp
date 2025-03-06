@@ -50,22 +50,6 @@ void CStackView::Invalidate()
 	}
 }
 
-
-void CStackView::SetFilter(const QRegularExpression& Exp, bool bHighLight, int Col)
-{
-	CPanelWidgetEx::ApplyFilter(m_pStackList, &Exp/*, bHighLight, Col*/);
-}
-
-void CStackView::SetFilter(const QString& Exp, int iOptions, int Col) // -1 = any
-{
-	QScopedPointer<QRegularExpression> pRegExp;
-	if (!Exp.isEmpty()) {
-		QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
-		pRegExp.reset(new QRegularExpression(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption));
-	}
-	CPanelWidgetEx::ApplyFilter(m_pStackList, pRegExp.data()/*, bHighLight, Col*/);
-}
-
 void CStackView::ShowStack(const QVector<quint64>& Stack, const CBoxedProcessPtr& pProcess)
 {
 	int i = 0;
@@ -98,8 +82,12 @@ void CStackView::ShowStack(const QVector<quint64>& Stack, const CBoxedProcessPtr
 	for (; i < m_pStackList->topLevelItemCount(); )
 		delete m_pStackList->topLevelItem(i);
 
-	if (!m_pFinder->GetSearchExp().pattern().isEmpty())
-		SetFilter(m_pFinder->GetSearchExp());
+	CPanelWidgetEx::ApplyFilter(m_pStackList, m_pFinder->isVisible() ? &m_pFinder->GetSearchExp() : NULL);
 
 	m_bIsInvalid = false;
+}
+
+void CStackView::SetFilter(const QRegularExpression& Exp, int iOptions, int Col)
+{
+	CPanelWidgetEx::ApplyFilter(m_pStackList, &m_pFinder->GetSearchExp());
 }

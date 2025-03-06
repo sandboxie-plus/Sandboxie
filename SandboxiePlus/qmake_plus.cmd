@@ -1,3 +1,5 @@
+call "%~dp0..\Installer\buildVariables.cmd" %*
+
 REM @echo off
 REM echo Current dir: %cd%
 REM echo folder: %~dp0
@@ -5,9 +7,9 @@ REM echo arch: %1
 REM echo qt_version: %2
 REM echo qt6_version: %3
 
-echo %*
-IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
-IF "%~2" == "" ( set "qt_version=5.15.14" ) ELSE ( set "qt_version=%~2" )
+REM echo %*
+REM IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
+REM IF "%~2" == "" ( set "qt_version=5.15.16" ) ELSE ( set "qt_version=%~2" )
 
 IF %1 == Win32 (
   set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2019
@@ -113,7 +115,12 @@ if NOT EXIST %~dp0\bin\%build_arch%\Release\QSbieAPI.dll goto :error
 mkdir %~dp0\Build_SandMan_%build_arch%
 cd %~dp0\Build_SandMan_%build_arch%
 
-%qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan.qc.pro %qt_params%
+if "%qt_version:~0,1%" == "5" ( 
+    %qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan.qc.pro %qt_params%
+)
+if "%qt_version:~0,1%" == "6" ( 
+    %qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan-Qt6.qc.pro %qt_params%
+)
 %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\SandMan.exe goto :error

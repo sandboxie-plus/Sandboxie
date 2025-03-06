@@ -62,7 +62,7 @@ void COptionsWindow::CreateNetwork()
 
 	connect(ui.tabsInternet, SIGNAL(currentChanged(int)), this, SLOT(OnInternetTab()));
 
-	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
+	if (!g_CertInfo.opt_net) {
 		ui.tabDNS->setEnabled(false);
 		ui.tabNetProxy->setEnabled(false);
 	}
@@ -100,14 +100,14 @@ void COptionsWindow::SaveINetAccess()
 	int Mode = ui.cmbBlockINet->currentData().toInt();
 	if (Mode == 1) {
 		if (!FindEntryInSettingList("AllowNetworkAccess", "!<InternetAccess>,n"))
-			m_pBox->InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
+			m_pBox->AppendText("AllowNetworkAccess", "!<InternetAccess>,n");
 	}
 	else
 		m_pBox->DelValue("AllowNetworkAccess", "!<InternetAccess>,n");
 
 	if (Mode == 0) {
 		if (m_WFPisBlocking && !FindEntryInSettingList("AllowNetworkAccess", "y"))
-			m_pBox->InsertText("AllowNetworkAccess", "y");
+			m_pBox->AppendText("AllowNetworkAccess", "y");
 	}
 	else
 		m_pBox->DelValue("AllowNetworkAccess", "y");
@@ -115,7 +115,7 @@ void COptionsWindow::SaveINetAccess()
 	QTreeWidgetItem* pBlockedNet = FindGroupByName("<BlockNetAccess>");
 	if (pBlockedNet && pBlockedNet->childCount() > 0) {
 		if (theGUI->IsWFPEnabled() && !FindEntryInSettingList("AllowNetworkAccess", "<BlockNetAccess>,n"))
-			m_pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
+			m_pBox->AppendText("AllowNetworkAccess", "<BlockNetAccess>,n");
 	}
 	else
 		m_pBox->DelValue("AllowNetworkAccess", "<BlockNetAccess>,n");
@@ -1055,7 +1055,7 @@ void COptionsWindow::SaveNetProxy()
 			if(res.IsError())
 				Tags.append("Password=" + Pass);
 			else
-				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::OmitTrailingEquals));
+				Tags.append("EncryptedPW=" + res.GetValue().toBase64(QByteArray::KeepTrailingEquals));
 		}
 		Tags.append("Bypass=" + Bypass);
 

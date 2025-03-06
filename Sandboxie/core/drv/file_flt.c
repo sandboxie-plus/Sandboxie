@@ -406,8 +406,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                 if (ulOwnerPid)
                 {
                     proc = Process_Find((HANDLE)ulOwnerPid, NULL);  // is this a sandboxed process?
-                    if (proc && proc != PROCESS_TERMINATED &&
-                        !proc->ipc_allowSpoolerPrintToFile)   // if process specifically allowed to use spooler print to file, we can skip everything below
+                    if (proc && !proc->terminated && !proc->ipc_allowSpoolerPrintToFile)   // if process specifically allowed to use spooler print to file, we can skip everything below
                     {
                         FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
                         BOOLEAN     result = FALSE;
@@ -496,6 +495,8 @@ check:
 
             //DbgPrint("IRP_MJ_CREATE: %S\n", Name->Name.Buffer);
 
+            BOOLEAN protect_root = FALSE;
+
             KIRQL irql;
             KeRaiseIrql(APC_LEVEL, &irql);
             ExAcquireResourceExclusiveLite(File_ProtectedRootsLock, TRUE);
@@ -510,22 +511,7 @@ check:
 
                     //DbgPrint("IRP_MJ_CREATE: %S\n", root->file_root);
 
-                    //
-                    // csrss.exe needs access to binaries of starting up processes.
-                    //
-
-                    if (Util_IsSystemProcess(PsGetCurrentProcessId(), "csrss.exe"))
-                        break;
-
-                    status = STATUS_ACCESS_DENIED;
-
-                    if (proc && !proc->bHostInject) {
-                        if (proc->box->key_path_len / sizeof(WCHAR) == root->reg_root_len + 1 &&
-                            _wcsnicmp(proc->box->key_path, root->reg_root, root->reg_root_len) == 0) {
-                            status = STATUS_SUCCESS; // its the allowed box
-                        }
-                    }
-
+                    protect_root = TRUE;
                     break;
                 }
 
@@ -535,24 +521,45 @@ check:
             ExReleaseResourceLite(File_ProtectedRootsLock);
             KeLowerIrql(irql);
 
-            if (!NT_SUCCESS(status)) {
+            if (protect_root) {
 
-                if (PsGetCurrentProcessId() == Api_ServiceProcessId)
-                    status = STATUS_SUCCESS; // always allow the service
-                else if(Session_GetLeadSession(PsGetCurrentProcessId()) != 0)
-                    status = STATUS_SUCCESS; // allow the session leader    
+                HANDLE cur_pid = PsGetCurrentProcessId();
+
+                if (Util_IsSystemProcess(cur_pid, "csrss.exe") // csrss.exe needs access to binaries of starting up processes.
+                    || cur_pid == Api_ServiceProcessId // always allow the service
+                    || Session_GetLeadSession(cur_pid) != 0) // allow the session leader
+                    protect_root = FALSE;
                 else
+                {
+                    PROCESS *cur_proc = proc;
+                    if (!cur_proc && ExGetPreviousMode() == KernelMode)
+                        cur_proc = Process_Find(cur_pid, NULL);
 
-                if (Conf_Get_Boolean(NULL, L"NotifyBoxProtected", 0, FALSE)) {
+                    if (cur_proc && !cur_proc->bHostInject) {
+                        if (cur_proc->box->key_path_len / sizeof(WCHAR) == root->reg_root_len + 1 &&
+                            _wcsnicmp(cur_proc->box->key_path, root->reg_root, root->reg_root_len) == 0) {
+                            protect_root = FALSE; // its the allowed box
+                        }
+                    }
+                }
 
-                    void *nbuf = 0;
-                    ULONG nlen = 0;
-                    WCHAR *nptr = 0;
-                    Process_GetProcessName(Driver_Pool, (ULONG_PTR)PsGetCurrentProcessId(), &nbuf, &nlen, &nptr);
+                if (protect_root)
+                {
+                    status = STATUS_ACCESS_DENIED;
 
-                    Log_Msg_Process(MSG_1317, nptr, Name->Name.Buffer, -1, PsGetCurrentProcessId());
+                    Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, Name->Name.Buffer, cur_pid);
 
-                    if (nbuf) Mem_Free(nbuf, nlen);
+                    if (Conf_Get_Boolean(NULL, L"NotifyRootProtected", 0, FALSE)) {
+
+                        void* nbuf = 0;
+                        ULONG nlen = 0;
+                        WCHAR* nptr = 0;
+                        Process_GetProcessName(Driver_Pool, (ULONG_PTR)cur_pid, &nbuf, &nlen, &nptr);
+
+                        Log_Msg_Process(MSG_1317, nptr, Name->Name.Buffer, -1, cur_pid);
+
+                        if (nbuf) Mem_Free(nbuf, nlen);
+                    }
                 }
             }
 
@@ -784,11 +791,6 @@ _FX NTSTATUS File_RenameOperation(
     //
 
     Parms = &Iopb->Parameters;
-
-#ifdef _M_ARM64
-    if (! MmIsAddressValid(Parms->SetFileInformation.InfoBuffer)) // todo: arm64 // fix-me: why does this happen?
-        return STATUS_ACCESS_DENIED;
-#endif
 
     if(LinkOp) {
 

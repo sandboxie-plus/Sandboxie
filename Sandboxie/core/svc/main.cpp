@@ -22,10 +22,12 @@
 #include "stdafx.h"
 
 #include <Sddl.h>
+#include <lmcons.h>
 #include "MountManager.h"
 #include "DriverAssist.h"
 #include "PipeServer.h"
 #include "GuiServer.h"
+#include "UserServer.h"
 #include "ProcessServer.h"
 #include "sbieiniserver.h"
 #include "serviceserver.h"
@@ -125,6 +127,12 @@ int WinMain(
         WCHAR *cmdline5 = wcsstr(cmdline, SANDBOXIE L"_GuiProxy");
         if (cmdline5) {
             GuiServer::RunSlave(cmdline5);
+            return NO_ERROR;
+        }
+
+        WCHAR *cmdline6 = wcsstr(cmdline, SANDBOXIE L"_UserProxy");
+        if (cmdline6) {
+            UserServer::RunWorker(cmdline6);
             return NO_ERROR;
         }
 
@@ -326,6 +334,61 @@ void LogEvent(ULONG msgid, ULONG level, ULONG detail)
         ReportEvent(EventLog, EVENTLOG_ERROR_TYPE, 0, msgid, NULL,
                     num_extra, 0, ptr_extra, NULL);
     }
+}
+
+
+//---------------------------------------------------------------------------
+// LogMessage_Event
+//---------------------------------------------------------------------------
+
+
+void LogMessage_Event(ULONG code, wchar_t* data, ULONG pid)
+{
+    //
+    // get log message
+    //
+
+    WCHAR *str1 = data;
+    ULONG str1_len = wcslen(str1);
+    WCHAR *str2 = str1 + str1_len + 1;
+    ULONG str2_len = wcslen(str2);
+
+    WCHAR *text = SbieDll_FormatMessage2(code, str1, str2);
+    if (! text)
+        return;
+
+    //
+    // add user name
+    //
+    /*
+    WCHAR user[UNLEN + 1];
+    WCHAR domain[DNLEN + 1];
+    bool GetUserNameFromProcess(DWORD pid, WCHAR * user, DWORD userSize, WCHAR * domain, DWORD domainSize);
+    if (GetUserNameFromProcess(pid, user, UNLEN + 1, domain, DNLEN + 1)) {
+
+        WCHAR *text2 = (WCHAR *)LocalAlloc(
+            LMEM_FIXED, (wcslen(text) + UNLEN + DNLEN + 10) * sizeof(WCHAR));
+        if (text2) {
+
+            wsprintf(text2, L"%s (%s\\%s)", text, domain, user);
+
+            LocalFree(text);
+            text = text2;
+        }
+    }*/
+
+    //
+    // add event
+    //
+
+    const WCHAR* ptr_extra[2] = { text, NULL };
+    USHORT num_extra = 1;
+
+    if (EventLog) {
+        ReportEvent(EventLog, EVENTLOG_INFORMATION_TYPE, 0, code, NULL, num_extra, 0, ptr_extra, NULL);
+    }
+
+    LocalFree(text);
 }
 
 

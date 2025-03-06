@@ -137,7 +137,7 @@ bool GetVolumeInfo(wchar_t* w32_name, SVolumeInfo* info)
     PVOLUME_DISK_EXTENTS    ext = (PVOLUME_DISK_EXTENTS)buff;
     DWORD                   dwBytes;
 
-    hVolume = CreateFile(w32_name, SYNCHRONIZE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
+    hVolume = CreateFileW(w32_name, SYNCHRONIZE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
     if (hVolume == INVALID_HANDLE_VALUE)
         return false;
 
@@ -186,7 +186,7 @@ std::list<SVolumeInfo> ListAllVolumes()
 	std::list<SVolumeInfo> volumes;
 
     wchar_t volumeName[MAX_PATH + 1];
-    HANDLE hFindVolume = FindFirstVolume(volumeName, MAX_PATH + 1);
+    HANDLE hFindVolume = FindFirstVolumeW(volumeName, MAX_PATH + 1);
     if (hFindVolume == INVALID_HANDLE_VALUE)
         return volumes;
 
@@ -198,7 +198,7 @@ std::list<SVolumeInfo> ListAllVolumes()
         DWORD dwRetLen = 0;
         wchar_t mountPoints[0x1000];
         //QueryDosDevice(&volumeName[4], driveLetter, MAX_PATH + 1);
-        if (GetVolumePathNamesForVolumeName(volumeName, mountPoints, ARRAYSIZE(mountPoints), &dwRetLen)) {
+        if (GetVolumePathNamesForVolumeNameW(volumeName, mountPoints, ARRAYSIZE(mountPoints), &dwRetLen)) {
             for (wchar_t* mountPoint = mountPoints; *mountPoint; mountPoint += wcslen(mountPoint) + 1)
                 info.mountPoints.push_back(mountPoint);
         }
@@ -212,7 +212,7 @@ std::list<SVolumeInfo> ListAllVolumes()
 
         volumes.push_back(info);
 
-    } while (FindNextVolume(hFindVolume, volumeName, MAX_PATH + 1));
+    } while (FindNextVolumeW(hFindVolume, volumeName, MAX_PATH + 1));
 
     FindVolumeClose(hFindVolume);
 
@@ -228,19 +228,19 @@ std::wstring QueryDiskDeviceInterfaceString(PWSTR DeviceInterface, CONST DEVPROP
     ULONG deviceInstanceIdLength = MAX_DEVICE_ID_LEN;
     WCHAR deviceInstanceId[MAX_DEVICE_ID_LEN + 1] = L"";
 
-    if (CM_Get_Device_Interface_Property(DeviceInterface, &DEVPKEY_Device_InstanceId, &devicePropertyType, (PBYTE)deviceInstanceId, &deviceInstanceIdLength, 0 ) != CR_SUCCESS)
+    if (CM_Get_Device_Interface_PropertyW(DeviceInterface, &DEVPKEY_Device_InstanceId, &devicePropertyType, (PBYTE)deviceInstanceId, &deviceInstanceIdLength, 0 ) != CR_SUCCESS)
         return L"";
 
-    if (CM_Locate_DevNode(&deviceInstanceHandle, deviceInstanceId, CM_LOCATE_DEVNODE_PHANTOM ) != CR_SUCCESS)
+    if (CM_Locate_DevNodeW(&deviceInstanceHandle, deviceInstanceId, CM_LOCATE_DEVNODE_PHANTOM ) != CR_SUCCESS)
         return L"";
 
     bufferSize = 0x40;
     std::wstring deviceDescription;
     deviceDescription.resize(bufferSize);
 
-    if ((result = CM_Get_DevNode_Property(deviceInstanceHandle, PropertyKey, &devicePropertyType, (PBYTE)deviceDescription.c_str(), &bufferSize, 0 )) != CR_SUCCESS) {
+    if ((result = CM_Get_DevNode_PropertyW(deviceInstanceHandle, PropertyKey, &devicePropertyType, (PBYTE)deviceDescription.c_str(), &bufferSize, 0 )) != CR_SUCCESS) {
         deviceDescription.resize(bufferSize);
-        result = CM_Get_DevNode_Property(deviceInstanceHandle, PropertyKey, &devicePropertyType, (PBYTE)deviceDescription.c_str(), &bufferSize, 0 );
+        result = CM_Get_DevNode_PropertyW(deviceInstanceHandle, PropertyKey, &devicePropertyType, (PBYTE)deviceDescription.c_str(), &bufferSize, 0 );
     }
 
     return deviceDescription.c_str(); // truncate
@@ -273,7 +273,7 @@ std::map<std::wstring, SDriveInfo> ListAllDrives()
 
         deviceInterfaceList = (PWSTR)malloc(deviceInterfaceListLength * sizeof(WCHAR));
         memset(deviceInterfaceList, 0, deviceInterfaceListLength * sizeof(WCHAR));
-        if (CM_Get_Device_Interface_List(pdevice->guid, NULL, deviceInterfaceList, deviceInterfaceListLength, CM_GET_DEVICE_INTERFACE_LIST_PRESENT) != CR_SUCCESS) {
+        if (CM_Get_Device_Interface_ListW(pdevice->guid, NULL, deviceInterfaceList, deviceInterfaceListLength, CM_GET_DEVICE_INTERFACE_LIST_PRESENT) != CR_SUCCESS) {
             free(deviceInterfaceList);
             return drives;
         }
@@ -281,7 +281,7 @@ std::map<std::wstring, SDriveInfo> ListAllDrives()
         for (deviceInterface = deviceInterfaceList; *deviceInterface; deviceInterface += wcslen(deviceInterface) + 1)
         {
             
-            HANDLE deviceHandle = CreateFile(deviceInterface, FILE_READ_ATTRIBUTES | SYNCHRONIZE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
+            HANDLE deviceHandle = CreateFileW(deviceInterface, FILE_READ_ATTRIBUTES | SYNCHRONIZE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
             if (deviceHandle != INVALID_HANDLE_VALUE)
             {
                 STORAGE_DEVICE_NUMBER result;

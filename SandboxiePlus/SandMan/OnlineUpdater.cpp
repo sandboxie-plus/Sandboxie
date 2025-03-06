@@ -23,14 +23,14 @@
 
 // mess with a dummy installation when debugging
 
-#undef VERSION_MJR
+/*#undef VERSION_MJR
 #define VERSION_MJR		1
 #undef VERSION_MIN
-#define VERSION_MIN 	9
+#define VERSION_MIN 	11
 #undef VERSION_REV
-#define VERSION_REV 	7
+#define VERSION_REV 	4
 #undef VERSION_UPD
-#define VERSION_UPD 	0
+#define VERSION_UPD 	0*/
 
 #define DUMMY_PATH "C:\\Projects\\Sandboxie\\SandboxieTools\\x64\\Debug\\Test"
 #endif
@@ -108,6 +108,9 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 #endif
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
 	Query.addQueryItem("language", QLocale::system().name());
+#ifdef _DEBUG
+	Query.addQueryItem("debug", "1");
+#endif
 
 	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
 	//if (UpdateKey.isEmpty())
@@ -119,9 +122,8 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 
 	quint64 RandID = COnlineUpdater::GetRandID();
 	quint32 Hash = theAPI->GetUserSettings()->GetName().mid(13).toInt(NULL, 16);
-	quint64 HashID = RandID ^ (quint64((Hash & 0xFFFF) ^ ((Hash >> 16) & 0xFFFF)) << 48); // fold the hash in half and xor it with the first 16 bit of RandID
 
-	UpdateKey += QString::number(HashID, 16).rightJustified(16, '0').toUpper();
+	UpdateKey += QString::number(Hash, 16).rightJustified(8, '0').toUpper() + QString::number(RandID, 16).rightJustified(16, '0').toUpper();
 	Query.addQueryItem("update_key", UpdateKey);
 
 	if (Params.contains("channel")) 
@@ -153,11 +155,23 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 
 void CGetUpdatesJob::Finish(QNetworkReply* pReply)
 {
-	QByteArray Reply = pReply->readAll();
+	QVariantMap Data;
+
+	auto err = pReply->error();
+	if (err != QNetworkReply::NoError) 
+	{
+		//m_pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater Error: %1").arg(err), err));
+		Data["error"] = true;
+		Data["errorMsg"] = tr("%1").arg(err);
+	}
+	else
+	{
+		QByteArray Reply = pReply->readAll();
+
+		Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
+	}
 
 	m_pProgress->Finish(SB_OK);
-
-	QVariantMap Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
 
 	emit UpdateData(Data, m_Params);
 }
@@ -210,22 +224,36 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 	QString UpdateKey = Params["key"].toString();
 
 	QUrlQuery Query;
+
+	bool bHwId = false;
 	if (!Serial.isEmpty()) {
 		Query.addQueryItem("SN", Serial);
-		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N') {
-			wchar_t uuid_str[40];
-			theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
-			Query.addQueryItem("HwId", QString::fromWCharArray(uuid_str));
-		}
+		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N')
+			bHwId = true;
 	}
+
 	if(!UpdateKey.isEmpty())
 		Query.addQueryItem("UpdateKey", UpdateKey);
+
+	if (Serial.isEmpty() && Params.contains("eMail")) { // Request eval Key
+		Query.addQueryItem("eMail", Params["eMail"].toString());
+		bHwId = true;
+	}
+
+	if (Params.contains("Name"))
+		Query.addQueryItem("Name", Params["Name"].toString());
+
+	if (bHwId) {
+		wchar_t uuid_str[40];
+		theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
+		Query.addQueryItem("HwId", QString::fromWCharArray(uuid_str));
+	}
 
 #ifdef _DEBUG
 	QString Test = Query.toString();
 #endif
 
-	QUrl Url("https://sandboxie-plus.com/get_cert.php");
+	QUrl Url("https://sandboxie-plus.com/get_cert.php?");
 	Url.setQuery(Query);
 
 	CUpdatesJob* pJob = new CGetCertJob(Params, this);
@@ -431,6 +459,29 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 		return;
 	}
 
+	if (Data.contains("cbl"))
+	{
+		QVariantMap CertBL = Data["cbl"].toMap();
+		QByteArray BlockList0 = CertBL["list"].toByteArray();
+		QByteArray BlockListSig0 = QByteArray::fromHex(CertBL["sig"].toByteArray());
+
+		std::string BlockList;
+        BlockList.resize(0x10000, 0); // 64 kb should be enough
+        static quint32 BlockListLen = 0;
+		if (BlockListLen == 0) {
+			theAPI->GetSecureParam("CertBlockList", (void*)BlockList.c_str(), BlockList.size(), &BlockListLen, true);
+			//BlockList.resize(BlockListLen);
+		}
+
+        if (BlockListLen < BlockList0.size())
+        {
+            theAPI->SetSecureParam("CertBlockList", BlockList0, BlockList0.size());
+            theAPI->SetSecureParam("CertBlockListSig", BlockListSig0, BlockListSig0.size());
+			BlockListLen = BlockList0.size();
+            //BlockList = BlockList0;
+        }
+	}
+
 	bool bNothing = true;
 	bool bAuto = m_CheckMode != eManual;
 
@@ -450,6 +501,9 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 	if (bAuto) {
 		int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
 		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addSecs(UpdateInterval).toSecsSinceEpoch());
+#ifdef _DEBUG
+		theGUI->AddLogMessage(tr("Update Check completed, no new updates"));
+#endif
 	}
 	else if (bNothing)  {
 		QMessageBox::information(theGUI, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"

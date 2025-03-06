@@ -186,7 +186,7 @@ _FX VOID Handle_ExecuteCloseHandler(HANDLE FileHandle, BOOLEAN* DeleteOnClose)
                 break;
             handler->Close(FileHandle, handler->Param);
             List_Remove(&CloseHandlers, handler);
-            Pool_Free(handler, sizeof(HANDLE_HANDLER));
+            Dll_Free(handler);
         }
     }
 }
@@ -219,7 +219,7 @@ _FX BOOLEAN Handle_RegisterHandler(HANDLE FileHandle, P_HandlerFunc CloseHandler
 
     if (handler == NULL) 
     {
-        HANDLE_HANDLER* newNandler = Pool_Alloc(Dll_Pool, sizeof(HANDLE_HANDLER));
+        HANDLE_HANDLER* newNandler = Dll_Alloc(sizeof(HANDLE_HANDLER));
         memzero(&newNandler->list_elem, sizeof(LIST_ELEM));
 
         newNandler->Close = CloseHandler;

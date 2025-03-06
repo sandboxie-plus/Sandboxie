@@ -151,6 +151,8 @@ void CSetupWizard::ShellUninstall()
 
 	CSettingsWindow::RemoveContextMenu();
 	CSbieUtils::RemoveContextMenu2();
+	CSbieUtils::RemoveContextMenu3();
+	CSbieUtils::RemoveContextMenu4();
 
     // todo: delete desktop browser shortcut and start menu integration
 }
@@ -287,7 +289,7 @@ CCertificatePage::CCertificatePage(int iOldLevel, QWidget *parent)
     registerField("isEvaluate", m_pEvaluate);
 
     QLabel* pGetEvalCert = new QLabel(tr("<b><a href=\"_\"><font color='red'>Get a free evaluation certificate</font></a> and enjoy all premium features for %1 days.</b>").arg(EVAL_DAYS));
-    pGetEvalCert->setToolTip(tr("You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID").arg(EVAL_DAYS).arg(EVAL_MAX));
+    pGetEvalCert->setToolTip(tr("You can request a free %1-day evaluation certificate up to %2 times per hardware ID.").arg(EVAL_DAYS).arg(EVAL_MAX));
     layout->addWidget(pGetEvalCert);
     connect(pGetEvalCert, &QLabel::linkActivated, this, [=]() {
         CSettingsWindow::StartEval(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));

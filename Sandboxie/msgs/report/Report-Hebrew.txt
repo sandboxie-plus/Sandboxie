@@ -38,6 +38,10 @@ SBIE1319 Blocked spooler print to file, %2 %3
 SBIE1320 To allow print spooler to write outside the sandbox for this process, please double-click on this message line
 .
 
+1321;pop;inf;01
+SBIE1321 Program '%2' was forced into sandbox %3
+.
+
 1399;pop;inf;01
 %0
 .
@@ -71,7 +75,7 @@ SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
 .
 
 2194;pop;inf;01
-SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+SBIE2194 MSI installer requires %2 option to be set in the ini to be able to work correctly, however this option weakens the isolation.
 .
 
 2195;pop;inf;01

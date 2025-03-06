@@ -316,10 +316,8 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 	CSbieIni::GetInstance().GetUser(Section, UserName, IsAdmin);
 	DWORD Hash = wcstoul(Section.Mid(13), NULL, 16);
 
-	QWORD HashID = RandID ^ (QWORD((Hash & 0xFFFF) ^ ((Hash >> 16) & 0xFFFF)) << 48); // fold the hash in half and xor it with the first 16 bit of RandID
-
-	wchar_t sHash[17];
-	wsprintf(sHash, L"%08X%08X", DWORD(HashID >> 32), DWORD(HashID));
+	wchar_t sHash[25];
+	wsprintf(sHash, L"%08X%08X%08X", Hash, DWORD(RandID >> 32), DWORD(RandID));
 
 	update_key += sHash;
 

@@ -105,7 +105,7 @@ void CBoxBorder::ThreadFunc()
 	m->ThumbWidth = GetSystemMetrics(SM_CXHTHUMB);
 	m->ThumbHeight = GetSystemMetrics(SM_CYVTHUMB);
 
-	HMODULE dwmapi = LoadLibrary(L"dwmapi.dll");
+	HMODULE dwmapi = LoadLibraryW(L"dwmapi.dll");
 	if (dwmapi) {
 		m->DwmIsCompositionEnabled = (P_DwmIsCompositionEnabled)GetProcAddress(dwmapi, "DwmIsCompositionEnabled");
 		if (m->DwmIsCompositionEnabled) {
@@ -115,7 +115,7 @@ void CBoxBorder::ThreadFunc()
 		}
 	}
 
-	WNDCLASSEX wc;
+	WNDCLASSEXW wc;
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | CS_GLOBALCLASS;
 	wc.lpfnWndProc = ::DefWindowProc;
@@ -128,9 +128,9 @@ void CBoxBorder::ThreadFunc()
 	wc.lpszMenuName = NULL;
 	wc.lpszClassName = Sandboxie_WindowClassName;
 	wc.hIconSm = NULL;
-	if (ATOM lpClassName = RegisterClassEx(&wc))
+	if (ATOM lpClassName = RegisterClassExW(&wc))
 	{
-		m->BorderWnd = CreateWindowEx(WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_NOACTIVATE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST, (LPCWSTR)lpClassName,
+		m->BorderWnd = CreateWindowExW(WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_NOACTIVATE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST, (LPCWSTR)lpClassName,
 			Sandboxie_WindowClassName, WS_POPUP | WS_CLIPSIBLINGS, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, NULL, NULL);
 	}
 	if (!m->BorderWnd)

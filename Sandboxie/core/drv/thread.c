@@ -1104,9 +1104,9 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
     // If the calling process is sandboxed the later common check will do the blocking
     //
 
-    if (!proc || proc->bHostInject) { // caller is not sandboxed
+    if (!proc || (proc == PROCESS_TERMINATED) || proc->bHostInject) { // caller is not sandboxed
 
-        if (Process_Find(pid, NULL)) {  // target is sandboxed - lock free check
+        if (pid != NULL && Process_Find(pid, NULL)) {  // target is sandboxed - lock free check
         
             void* nbuf = 0;
             ULONG nlen = 0;
@@ -1119,7 +1119,12 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                 KIRQL irql;
                 PROCESS* proc2 = Process_Find(pid, &irql);
 
-                if (proc2 && !proc2->bHostInject) {
+                //
+                // Process_CreateTerminated creates a process object without a box,
+                // in that case we need to ignore it.
+                //
+
+                if (proc2 && proc2->box && !proc2->bHostInject) {
 
                     ACCESS_MASK WriteAccess;
                     if (EntireProcess)

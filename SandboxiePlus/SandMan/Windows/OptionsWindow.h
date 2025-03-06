@@ -97,6 +97,7 @@ private slots:
 	void OnBreakoutProg();
 	void OnBreakoutBrowse();
 	void OnBreakoutDir();
+	void OnBreakoutDoc();
 	void OnDelBreakout();
 	void OnShowBreakoutTmpl()		{ LoadBreakoutTmpl(true); }
 	void OnBreakoutChanged(QTreeWidgetItem *pItem, int);
@@ -638,5 +639,7 @@ private:
 	QMap<QCheckBox*, SDbgOpt> m_DebugOptions;
 
 	void InitLangID();
+
+	class CCodeEdit* m_pCodeEdit;
 };
 

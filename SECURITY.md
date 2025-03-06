@@ -6,6 +6,11 @@ Please report any found security vulnerability directly to me at xanatosdavid[at
 
 ## Fixed security issues
 
+### SECURITY ISSUE ID-24
+Files stored inside a sandbox folder were accessible to all users on a system, resulting in security issues in multi-user scenarios; see [CVE-2024-49360](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-4chj-3c28-gvmp)
+
+fixed in: 1.15.0 / 5.70.0
+
 ### SECURITY ISSUE ID-23 (thanks Diversenok)
 A sandboxed process with administrative privileges could enable SeManageVolumePrivilege, this allowed it to read MFT data, in case of files smaller than 1 cluster that allowed to read the file payload
 

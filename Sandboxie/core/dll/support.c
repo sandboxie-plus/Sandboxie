@@ -954,3 +954,18 @@ _FX BOOLEAN SbieDll_IsReservedFileName(const WCHAR *name)
 
     return FALSE;
 }
+
+
+//---------------------------------------------------------------------------
+// Dll_rand
+//---------------------------------------------------------------------------
+
+
+DWORD Dll_rand(void)
+{
+	static unsigned long seed = 1;
+	if(seed == 1) 
+		seed = GetTickCount();
+	seed = seed * 1664525L + 1013904223L;
+	return seed;
+}

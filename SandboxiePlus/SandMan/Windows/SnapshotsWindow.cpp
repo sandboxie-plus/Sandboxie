@@ -35,6 +35,7 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 
 	m_pSnapshotModel = new CSimpleTreeModel(this);
 	m_pSnapshotModel->AddColumn(tr("Snapshot"), "Name");
+	m_pSnapshotModel->AddColumn(tr("Creation Time"), "DateFormatted");
 
 	/*m_pSortProxy = new CSortFilterProxyModel(this);
 	m_pSortProxy->setSortRole(Qt::EditRole);
@@ -104,12 +105,25 @@ void CSnapshotsWindow::UpdateSnapshots(bool AndSelect)
 			BoxSnapshot["Name"] = Snapshot.NameStr;
 		BoxSnapshot["Info"] = Snapshot.InfoStr;
 		BoxSnapshot["Date"] = Snapshot.SnapDate;
+		BoxSnapshot["DateFormatted"] = Snapshot.SnapDate.toString("yyyy-MM-dd hh:mm");
 		if(m_CurSnapshot == Snapshot.ID)
 			BoxSnapshot["IsBold"] = true;
 		m_SnapshotMap.insert(Snapshot.ID, BoxSnapshot);
 	}
 	m_pSnapshotModel->Sync(m_SnapshotMap);
 	ui.treeSnapshots->expandAll();
+
+	if (ui.treeSnapshots->header()) {
+		QTimer::singleShot(0, this, [this]() {
+			int totalWidth = ui.treeSnapshots->width();
+			ui.treeSnapshots->header()->resizeSection(0, totalWidth * 0.7);
+			ui.treeSnapshots->header()->resizeSection(1, totalWidth * 0.3);
+		});
+		ui.treeSnapshots->header()->setSectionResizeMode(0, QHeaderView::Interactive);
+		ui.treeSnapshots->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+		ui.treeSnapshots->header()->setMinimumSectionSize(100);
+		ui.treeSnapshots->header()->setSortIndicatorShown(false);
+	}
 
 	if (AndSelect)
 	{

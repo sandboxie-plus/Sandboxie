@@ -5990,7 +5990,7 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="38"/>
         <source>Creation Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellungszeit</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="56"/>

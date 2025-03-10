@@ -22,10 +22,9 @@ Sandboxie 允许您创建几乎无限的沙盒，并单独或同时运行它们�
 
 [最新版本](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
 
-## ✨ Changelog
+## ✨ 更新日志
 
 <a href='./CHANGELOG.md'>EN</a> | <a href='./CHANGELOG_zh_CN.md'>中文</a>
-
 
 ## 🚀 功能
 

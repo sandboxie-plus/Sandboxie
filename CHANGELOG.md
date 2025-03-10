@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.8 / 5.70.8] - 2025-03-02
 
+### Changed
+- Updated online updater
+
+### Fixed
+- fixed "WriteFilePath" Seems Work Incorrectly [#4553](https://github.com/sandboxie-plus/Sandboxie/issues/4553)
+- fixed Box Notes deletes matching lines when saved. [#4547](https://github.com/sandboxie-plus/Sandboxie/issues/4547)
+
 
 
 

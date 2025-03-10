@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2025 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -1186,10 +1186,10 @@ ULONG SbieIniServer::AddSetting(MSG_HEADER* msg, bool insert)
                 pos = I;
                 if (!insert) pos++;
             }
-            if (_wcsicmp(I->Value.c_str(), req->value) == 0) {
-                // this value is already present, so let's abort right here
-                return STATUS_SUCCESS;
-            }
+            //if (_wcsicmp(I->Value.c_str(), req->value) == 0) {
+            //    // this value is already present, so let's abort right here
+            //    return STATUS_SUCCESS;
+            //}
         }
     }
 

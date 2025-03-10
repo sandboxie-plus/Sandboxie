@@ -31,7 +31,8 @@
 #include "core/drv/api_defs.h"
 #include <psapi.h>
 #include <Shlwapi.h>
-
+#include<wincred.h>
+#pragma comment(lib,"credui.lib")
 
 //---------------------------------------------------------------------------
 // Defines
@@ -1115,6 +1116,7 @@ int Program_Start(void)
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
     HANDLE hNewProcess = NULL;
+	BOOL isAdminActual = IsUserAnAdmin();
 
     memzero(&si, sizeof(STARTUPINFO));
     si.cb = sizeof(STARTUPINFO);
@@ -1202,7 +1204,25 @@ int Program_Start(void)
     //
     // start program
     //
-
+	typedef DWORD(*P_CredUIPromptForCredentialsW)(
+		PCREDUI_INFOW pUiInfo,
+		PCWSTR        pszTargetName,
+		PCtxtHandle   pContext,
+		DWORD         dwAuthError,
+		PWSTR         pszUserName,
+		ULONG         ulUserNameBufferSize,
+		PWSTR         pszPassword,
+		ULONG         ulPasswordBufferSize,
+		BOOL* save,
+		DWORD         dwFlags
+		);
+	typedef DWORD(*P_CredUIParseUserNameW)(
+		PCWSTR UserName,
+		WCHAR* user,
+		ULONG  userBufferSize,
+		WCHAR* domain,
+		ULONG  domainBufferSize
+		);
     do {
 
         //
@@ -1240,12 +1260,90 @@ int Program_Start(void)
 
                 ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(0, 0);
                 if (! (ProcessFlags & SBIE_FLAG_DROP_RIGHTS)) {
-
+					if (SbieApi_QueryConfBool(NULL, L"ElevateWithPwOnly", FALSE)) {
+						PCREDUI_INFOW info = new CREDUI_INFOW();
+						info->cbSize = sizeof(CREDUI_INFO);
+						info->hbmBanner = NULL;
+						info->hwndParent = NULL;
+						info->pszCaptionText = SbieDll_FormatMessage0(3257);
+						info->pszMessageText = SbieDll_FormatMessage0(3258);
+						
+						//P_CredUIPromptForCredentialsW rupfc = (P_CredUIPromptForCredentialsW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIPromptForCredentialsW");
+						//P_CredUIParseUserNameW cupun=(P_CredUIParseUserNameW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIParseUserNameW");
+						//if (rupfc&&cupun)
+						//{
+							BOOL bSave = false;
+							LPWSTR username = (WCHAR*)malloc(100), password = (WCHAR*)malloc(100), appName = const_cast<WCHAR*>(L"Start.exe");
+							memset(username, 0, 100);
+							memset(password, 0, 100);
+							if (CredUIPromptForCredentialsW(info, appName, NULL, 0, username, 100, password, 100, &bSave, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_INCORRECT_PASSWORD | CREDUI_FLAGS_PASSWORD_ONLY_OK) == NO_ERROR) {
+								LPWSTR user = (WCHAR*)malloc(100), domain = (WCHAR*)malloc(100);
+								memset(user, 0, 100);
+								memset(domain, 0, 100);
+								CredUIParseUserName(username, user, 100, domain, 100);
+								HANDLE tempToken = NULL;
+								if (!LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
+									MessageBox(NULL, SbieDll_FormatMessage0(3259), L"Sandboxie Start", MB_OK);
+									goto skipElevate;
+								}
+								CredUIConfirmCredentialsW(appName, FALSE);
+								CloseHandle(tempToken);
+								free(user);
+								free(domain);
+								
+							}
+						//}
+						///else {
+						//	MessageBox(NULL, SbieDll_FormatMessage0(3259), L"Sandboxie Start", MB_OK);
+						//	goto skipElevate;
+						//}
+					}
                     shExecInfo.lpVerb = L"runas";
                 }
-            }
-        }
+			}
+			else {
+				if (SbieApi_QueryConfBool(NULL, L"ElevateWithPwOnly", FALSE)) {
+					PCREDUI_INFOW info = new CREDUI_INFOW();
+					info->cbSize = sizeof(CREDUI_INFO);
+					info->hbmBanner = NULL;
+					info->hwndParent = NULL;
+					info->pszCaptionText = SbieDll_FormatMessage0(3257);
+					info->pszMessageText = SbieDll_FormatMessage0(3258);
 
+					//P_CredUIPromptForCredentialsW rupfc = (P_CredUIPromptForCredentialsW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIPromptForCredentialsW");
+					//P_CredUIParseUserNameW cupun = (P_CredUIParseUserNameW)GetProcAddress(GetModuleHandleW(L"Credui.dll"), "CredUIParseUserNameW");
+					//if (rupfc && cupun)
+					//{
+						BOOL bSave = false;
+						LPWSTR username = (WCHAR*)malloc(100), password = (WCHAR*)malloc(100), appName = const_cast<WCHAR*>(L"Start.exe");
+						memset(username, 0, 100);
+						memset(password, 0, 100);
+						if (CredUIPromptForCredentialsW(info, appName, NULL, 0, username, 100, password, 100, &bSave, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_INCORRECT_PASSWORD | CREDUI_FLAGS_PASSWORD_ONLY_OK) == NO_ERROR) {
+							//CredUIPromptForCredentialsW(info, appName, NULL, 0, username, 100, password, 100, &saved, CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_EXPECT_CONFIRMATION | CREDUI_FLAGS_REQUEST_ADMINISTRATOR | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_DO_NOT_PERSIST| CREDUI_FLAGS_INCORRECT_PASSWORD| CREDUI_FLAGS_PASSWORD_ONLY_OK)
+							LPWSTR user = (WCHAR*)malloc(100), domain = (WCHAR*)malloc(100);
+							memset(user, 0, 100);
+							memset(domain, 0, 100);
+							CredUIParseUserNameW(username, user, 100, domain, 100);
+							HANDLE tempToken = NULL;
+							if (!LogonUser(user, domain, password, LOGON32_LOGON_BATCH, LOGON32_PROVIDER_DEFAULT, &tempToken)) {
+								MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
+								SbieApi_Log(3999, L"%d", GetLastError);
+								return EXIT_FAILURE;
+							}
+							CredUIConfirmCredentialsW(appName, FALSE);
+							CloseHandle(tempToken);
+							free(user);
+							free(domain);
+						}
+					//}
+					//else {
+					//	MessageBox(NULL, SbieDll_FormatMessage0(3260), L"Sandboxie Start", MB_OK);
+					//	return EXIT_FAILURE;
+					//}
+				}
+			}
+        }
+skipElevate:
         //
         // make sure AppHelp.dll is loaded, so third party software like
         // EMET which relies on injection through ShimEng/AppHelp can work.

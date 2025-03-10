@@ -1164,6 +1164,20 @@ bool CSbieView::TestNameAndWarn(const QString& Name)
 	return true;
 }
 
+QString RenderSandboxNameList_(const QList<CSandBoxPtr>& SandBoxes, int max_displayed = 10)
+{
+	QString name_list = "";
+	for (int i = 0; i < SandBoxes.count() && i < max_displayed; i++)
+	{
+		if (i != 0) name_list.append("<br />");
+		name_list.append("• <b>" + SandBoxes[i]->GetName().replace("_", " ") + "</b>");
+	}
+	if (SandBoxes.count() > max_displayed)
+		name_list.append(tr("<br />• ... and %1 more").arg(SandBoxes.count() - max_displayed));
+		
+	return name_list;
+}
+
 void CSbieView::OnSandBoxAction()
 {
 	OnSandBoxAction(qobject_cast<QAction*>(sender()), m_CurSandBoxes);
@@ -1473,7 +1487,9 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuRemove)
 	{
-		if (QMessageBox("Sandboxie-Plus", tr("Do you really want to remove the selected sandbox(es)?<br /><br />Warning: The box content will also be deleted!"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+		QString message = tr("Do you really want to remove the following sandbox(es)?<br /><br />%1<br /><br />Warning: The box content will also be deleted!")
+			.arg(RenderSandboxNameList_(SandBoxes));
+		if (QMessageBox("Sandboxie-Plus", message, QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
 
 		bool bChanged = false;
@@ -1534,24 +1550,32 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				if(!theGUI->OpenRecovery(SandBoxes.first(), DeleteSnapshots))
 					return;
 			}
-			else {
-				if (SandBoxes.first()->HasSnapshots()) {
-					if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to delete the content of the selected sandbox?")
+			else
+			{
+				QString message = tr("Do you want to delete the content of the following sandbox?<br /><br />%1")
+					.arg(RenderSandboxNameList_(SandBoxes));
+				
+				if (SandBoxes.first()->HasSnapshots())
+				{
+					if(CCheckableMessageBox::question(this, "Sandboxie-Plus", message
 					, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
 						return;
 				}
-				else {
-					if(QMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to delete the content of the selected sandbox?")
-					, QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
+				else
+				{
+					if(QMessageBox::question(this, "Sandboxie-Plus", message , QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
 						return;
 				}
 			}
-
-			
 		}
-		else if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you really want to delete the content of all selected sandboxes?")
-			, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+		else
+		{
+			QString message = tr("Do you really want to delete the content of the following sandboxes?<br /><br />%1")
+				.arg(RenderSandboxNameList_(SandBoxes));
+			if(CCheckableMessageBox::question(this, "Sandboxie-Plus", message
+				, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
 				return;
+		}
 
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{

@@ -1164,20 +1164,6 @@ bool CSbieView::TestNameAndWarn(const QString& Name)
 	return true;
 }
 
-QString RenderSandboxNameList_(const QList<CSandBoxPtr>& SandBoxes, int max_displayed = 10)
-{
-	QString name_list = "";
-	for (int i = 0; i < SandBoxes.count() && i < max_displayed; i++)
-	{
-		if (i != 0) name_list.append("<br />");
-		name_list.append("• <b>" + SandBoxes[i]->GetName().replace("_", " ") + "</b>");
-	}
-	if (SandBoxes.count() > max_displayed)
-		name_list.append(tr("<br />• ... and %1 more").arg(SandBoxes.count() - max_displayed));
-		
-	return name_list;
-}
-
 void CSbieView::OnSandBoxAction()
 {
 	OnSandBoxAction(qobject_cast<QAction*>(sender()), m_CurSandBoxes);
@@ -1190,6 +1176,20 @@ void CSbieView::OnSandBoxAction(QAction* pAction)
 
 void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandBoxes)
 {
+	auto RenderSandboxNameList_ = [&,this](const QList<CSandBoxPtr>& SandBoxes, int max_displayed = 10) -> QString
+	{
+		QString name_list = "";
+		for (int i = 0; i < SandBoxes.count() && i < max_displayed; i++)
+		{
+			if (i != 0) name_list.append("<br />");
+			name_list.append("• <b>" + SandBoxes[i]->GetName().replace("_", " ") + "</b>");
+		}
+		if (SandBoxes.count() > max_displayed)
+			name_list.append(tr("<br />• ... and %1 more").arg(SandBoxes.count() - max_displayed));
+			
+		return name_list;
+	};
+
 	QList<SB_STATUS> Results;
 
 	if (SandBoxes.isEmpty())

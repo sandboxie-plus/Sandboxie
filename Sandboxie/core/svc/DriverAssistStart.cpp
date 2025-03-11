@@ -264,8 +264,10 @@ driver_started:
         std::string BlockList;
         BlockList.resize(0x10000, 0); // 64 kb should be enough
         ULONG BlockListLen = 0;
-        SbieApi_Call(API_GET_SECURE_PARAM, 5, L"CertBlockList", (ULONG_PTR)BlockList.c_str(), BlockList.size(), (ULONG_PTR)&BlockListLen, 1);
+        ULONG status = SbieApi_Call(API_GET_SECURE_PARAM, 5, L"CertBlockList", (ULONG_PTR)BlockList.c_str(), BlockList.size(), (ULONG_PTR)&BlockListLen, 1);
         //BlockList.resize(BlockListLen);
+        if (status != 0) // error
+            BlockListLen = 0;
 
         if (BlockListLen < sizeof(BlockList0) - 1)
         {

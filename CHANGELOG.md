@@ -1255,7 +1255,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Note: Template_Edge_Fix is no longer required
 - replaced a few icons
 - moved the "Support" global settings page above the "Advanced Config" page and renamed it to "Support & Updates"
-- when dragging and dropping a file on the SandMan UI to run it, the currently selected box will be pre-selected in the box picker dialog
+- when dragging and dropping a file on the SandMan UI to run it, the currently selected box will be preselected in the box picker dialog
 - improved access rule handling [#2633](https://github.com/sandboxie-plus/Sandboxie/discussions/2633)
 - SbieCtrl now uses the new update format when checking for updates
 - added prioritization of primary matches over auxiliary matches to rule specificity

@@ -5051,7 +5051,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1188"/>
         <source>&lt;br /&gt;• ... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;• ... und %1 weitere</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1224"/>
@@ -5090,12 +5090,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1555"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie den Inhalt der folgenden Sandbox löschen?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1573"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich den Inhalt der folgenden Sandboxen löschen?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
@@ -5116,16 +5116,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1490"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich die folgende(n) Sandbox(en) entfernen?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warnung: Der Boxinhalt wird ebenfalls gelöscht!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1543"/>
         <source>This Sandbox is already empty.</source>
         <translation>Diese Sandbox ist bereits leer.</translation>
-    </message>
-    <message>
-        <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation type="vanished">Möchten Sie den Inhalt der ausgewählten Sandbox löschen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1593"/>
@@ -5272,18 +5268,10 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Bitte einen Namen für die neue Sandbox eingeben.</translation>
     </message>
     <message>
-        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="vanished">Möchten Sie wirklich die ausgewählte(n) Sandbox(en) entfernen?&lt;br /&gt;&lt;br /&gt;Warnung: Der Boxinhalt wird ebenfalls gelöscht!</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="1561"/>
         <location filename="Views/SbieView.cpp" line="1576"/>
         <source>Also delete all Snapshots</source>
         <translation>Auch alle Schnappschüsse löschen</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="vanished">Möchten Sie wirklich den Inhalt von allen ausgewählten Sandboxen löschen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1664"/>

@@ -3,6 +3,16 @@
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
 
+## [1.15.8 / 5.70.8] - 2025-03-02
+
+### 更改
+- 更新了在线更新程序
+
+### 修复
+- 修复了 "WriteFilePath" 似乎工作不正确的问题 [#4553](https://github.com/sandboxie-plus/Sandboxie/issues/4553)
+- 修复了沙盒备注，在保存时会删除空行的问题 [#4547](https://github.com/sandboxie-plus/Sandboxie/issues/4547)
+
+
 ## [1.15.7 / 5.70.7] - 2025-02-23
 
 ### 新增

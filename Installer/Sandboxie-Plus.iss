@@ -576,7 +576,7 @@ end;
 function IsInstallImDisk(): Boolean;
 begin
 
-  if WizardIsTaskSelected('InstallImDisk') then begin
+  if WizardIsTaskSelected('InstallImDisk') and (not WizardSilent) then begin
     Result := True;
   end;
 end;

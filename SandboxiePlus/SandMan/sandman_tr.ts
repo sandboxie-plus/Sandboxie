@@ -4862,17 +4862,17 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Views/SbieView.cpp" line="1190"/>
         <source>&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1192"/>
         <source>... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation>... ve %1 daha fazlası</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1317"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>UYARI: Açılan kayıt defteri düzenleyicisi korumalı alanda değildir, lütfen dikkatli olun ve yalnızca önceden seçilmiş korumalı alan konumlarında değişiklik yapın.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1753"/>
@@ -4890,10 +4890,6 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <location filename="Views/SbieView.cpp" line="1548"/>
         <source>This Sandbox is already empty.</source>
         <translation>Bu Korumalı Alan zaten boş.</translation>
-    </message>
-    <message>
-        <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation type="vanished">Seçili korumalı alanın içeriğini silmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1598"/>
@@ -5204,17 +5200,17 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Views/SbieView.cpp" line="1495"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aşağıdaki korumalı alan(lar)ı gerçekten kaldırmak istiyor musunuz?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Uyarı: Alanların içeriği de silinecek!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1560"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aşağıdaki korumalı alanın içeriğini silmek istiyor musunuz?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1578"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aşağıdaki korumalı alanların içeriğini gerçekten silmek istiyor musunuz?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1599"/>
@@ -5259,27 +5255,15 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation>Standart Uygulamalar</translation>
     </message>
     <message>
-        <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation type="vanished">UYARI: Açılan kayıt defteri düzenleyicisi korumalı alanda değildir, lütfen dikkatli olun ve yalnızca önceden seçilmiş korumalı alan konumlarında değişiklik yapın.</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="1318"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Bu uyarıyı gelecekte gösterme</translation>
-    </message>
-    <message>
-        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="vanished">Seçilen korumalı alan(lar)ı gerçekten kaldırmak istiyor musunuz?&lt;br /&gt;&lt;br /&gt;Uyarı: Alan içeriği de silinecektir!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1566"/>
         <location filename="Views/SbieView.cpp" line="1581"/>
         <source>Also delete all Snapshots</source>
         <translation>Tüm Anlık Görüntüleri de sil</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="vanished">Seçilen tüm korumalı alanların içeriğini gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1155"/>
@@ -6002,7 +5986,7 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="38"/>
         <source>Creation Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Oluşturulma Zamanı</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="209"/>

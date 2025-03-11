@@ -1881,8 +1881,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="929"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="1003"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="613"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="709"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="624"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="720"/>
         <location filename="Windows/OptionsNetwork.cpp" line="503"/>
         <location filename="Windows/OptionsNetwork.cpp" line="596"/>
         <location filename="Windows/OptionsNetwork.cpp" line="709"/>
@@ -1896,8 +1896,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsWindow.cpp" line="1162"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="618"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="713"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="629"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="724"/>
         <location filename="Windows/OptionsNetwork.cpp" line="235"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
         <location filename="Windows/OptionsNetwork.cpp" line="600"/>
@@ -1932,7 +1932,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="979"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="680"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="691"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="575"/>
@@ -2310,75 +2310,75 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>變更密碼</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="585"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="685"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="596"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="696"/>
         <source>Always copy</source>
         <translation>永遠複製</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="686"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="597"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="697"/>
         <source>Don&apos;t copy</source>
         <translation>不要複製</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="687"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="598"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="698"/>
         <source>Copy empty</source>
         <translation>複製空內容</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="813"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="824"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="921"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="932"/>
         <source>Select color</source>
         <translation>選擇顏色</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="996"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1007"/>
         <source>Select Program</source>
         <translation>選擇程式</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1193"/>
         <source>The image file does not exist</source>
         <translation>映像檔案不存在</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1183"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1194"/>
         <source>The password is wrong</source>
         <translation>密碼錯誤</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1184"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1195"/>
         <source>Unexpected error: %1</source>
         <translation>預期外錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1213"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1224"/>
         <source>Image Password Changed</source>
         <translation>映像密碼已變更</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1222"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1233"/>
         <source>Backup Image Header for %1</source>
         <translation>為 %1 備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1230"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1241"/>
         <source>Image Header Backuped</source>
         <translation>已備份映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1237"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1248"/>
         <source>Restore Image Header for %1</source>
         <translation>為 %1 復原映像標頭</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1245"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1256"/>
         <source>Image Header Restored</source>
         <translation>已復原映像標頭</translation>
     </message>
@@ -2388,18 +2388,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>請輸入服務識別字元</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="996"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1007"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可執行檔案 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1000"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="1021"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1011"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1032"/>
         <source>Please enter a menu title</source>
         <translation>請輸入一個選單標題</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1017"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1028"/>
         <source>Please enter a command</source>
         <translation>請輸入一則命令</translation>
     </message>
@@ -5451,8 +5451,23 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>開啟封存檔失敗 (%1)！</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="1490"/>
+        <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1555"/>
+        <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1573"/>
+        <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1410"/>
+        <location filename="Views/SbieView.cpp" line="1424"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-Zip 封存檔 (*.7z);;Zip 封存檔 (*.zip)</translation>
     </message>
@@ -5489,43 +5504,48 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>名稱已被用於現有的其它沙箱。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1210"/>
-        <location filename="Views/SbieView.cpp" line="1280"/>
-        <location filename="Views/SbieView.cpp" line="1587"/>
+        <location filename="Views/SbieView.cpp" line="1188"/>
+        <source>&lt;br /&gt;• ... and %1 more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1224"/>
+        <location filename="Views/SbieView.cpp" line="1294"/>
+        <location filename="Views/SbieView.cpp" line="1611"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再顯示此訊息。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1271"/>
-        <location filename="Views/SbieView.cpp" line="1291"/>
-        <location filename="Views/SbieView.cpp" line="1765"/>
+        <location filename="Views/SbieView.cpp" line="1285"/>
+        <location filename="Views/SbieView.cpp" line="1305"/>
+        <location filename="Views/SbieView.cpp" line="1789"/>
         <source>This Sandbox is empty.</source>
         <translation>此沙箱為空。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1298"/>
+        <location filename="Views/SbieView.cpp" line="1312"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>警告: 開啟的登錄編輯程式未被沙箱化，請審慎且僅對預先選取的沙箱位置進行修改。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1299"/>
+        <location filename="Views/SbieView.cpp" line="1313"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>之後不再顯示此警告</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1355"/>
+        <location filename="Views/SbieView.cpp" line="1369"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>請為複製的沙箱輸入一個新名稱。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1355"/>
+        <location filename="Views/SbieView.cpp" line="1369"/>
         <source>%1 Copy</source>
         <translatorcomment>沙箱名稱只能包含字母、數字和下劃線，不應對此處的文字進行翻譯！</translatorcomment>
         <translation>%1 Copy</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1410"/>
+        <location filename="Views/SbieView.cpp" line="1424"/>
         <source>Select file name</source>
         <translation>選擇檔名</translation>
     </message>
@@ -5556,94 +5576,90 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">7-zip 封存檔案 (*.7z)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1416"/>
+        <location filename="Views/SbieView.cpp" line="1430"/>
         <source>Exporting: %1</source>
         <translation>正在匯出: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1429"/>
+        <location filename="Views/SbieView.cpp" line="1443"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>請為沙箱輸入新名稱。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1429"/>
+        <location filename="Views/SbieView.cpp" line="1443"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation>請輸入沙箱的新別名。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1438"/>
+        <location filename="Views/SbieView.cpp" line="1452"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation>輸入的名稱無效，是否要將其設定為沙箱別名？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1476"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation>是否刪除全部已選取的沙箱？&lt;br /&gt;&lt;br /&gt;警告: 沙箱內容也將一併刪除！</translation>
+        <translation type="vanished">是否刪除全部已選取的沙箱？&lt;br /&gt;&lt;br /&gt;警告: 沙箱內容也將一併刪除！</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1527"/>
+        <location filename="Views/SbieView.cpp" line="1543"/>
         <source>This Sandbox is already empty.</source>
         <translation>此沙箱為空。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1539"/>
-        <location filename="Views/SbieView.cpp" line="1544"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation>是否刪除所選沙箱的內容？</translation>
+        <translation type="vanished">是否刪除所選沙箱的內容？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1540"/>
-        <location filename="Views/SbieView.cpp" line="1553"/>
+        <location filename="Views/SbieView.cpp" line="1561"/>
+        <location filename="Views/SbieView.cpp" line="1576"/>
         <source>Also delete all Snapshots</source>
         <translation>同時刪除所有快照</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1552"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation>是否刪除全部已選沙箱的內容？</translation>
+        <translation type="vanished">是否刪除全部已選沙箱的內容？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1569"/>
+        <location filename="Views/SbieView.cpp" line="1593"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>是否終止選定沙箱中的所有處理程序？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1570"/>
-        <location filename="Views/SbieView.cpp" line="1666"/>
+        <location filename="Views/SbieView.cpp" line="1594"/>
+        <location filename="Views/SbieView.cpp" line="1690"/>
         <source>Terminate without asking</source>
         <translation>終止且不再詢問</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1585"/>
+        <location filename="Views/SbieView.cpp" line="1609"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>現在將顯示 Sandboxie 開始選單。從選單中選擇一個應用程式，Sandboxie 將在真實桌面上建立一個新的捷徑圖示，您可以用它來呼叫所選受 Sandboxie 監督的應用程式。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1640"/>
-        <location filename="Views/SbieView.cpp" line="1694"/>
+        <location filename="Views/SbieView.cpp" line="1664"/>
+        <location filename="Views/SbieView.cpp" line="1718"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>為沙箱 %1 建立捷徑</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1665"/>
+        <location filename="Views/SbieView.cpp" line="1689"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>是否終止 %1？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1665"/>
+        <location filename="Views/SbieView.cpp" line="1689"/>
         <source>the selected processes</source>
         <translation>選取的處理程序</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1724"/>
+        <location filename="Views/SbieView.cpp" line="1748"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>此沙箱無網際網路限制，確定要啟用嗎？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1815"/>
+        <location filename="Views/SbieView.cpp" line="1839"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation>此沙箱已停用或被限制至特定群組/使用者，是否允許所有人存取？</translation>
@@ -9442,7 +9458,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1622"/>
+        <location filename="Views/SbieView.cpp" line="1646"/>
         <source>Drive %1</source>
         <translation>磁碟機 %1</translation>
     </message>

@@ -1963,60 +1963,60 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <translation>Cambiar contraseña</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="585"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="685"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="596"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="696"/>
         <source>Always copy</source>
         <translation>Siempre copiar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="686"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="597"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="697"/>
         <source>Don&apos;t copy</source>
         <translation>No copiar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="687"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="598"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="698"/>
         <source>Copy empty</source>
         <translation>Copia vacía</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1193"/>
         <source>The image file does not exist</source>
         <translation>El archivo de imagen no existe</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1183"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1194"/>
         <source>The password is wrong</source>
         <translation>La contraseña es incorrecta</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1184"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1195"/>
         <source>Unexpected error: %1</source>
         <translation>Error inesperado: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1213"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1224"/>
         <source>Image Password Changed</source>
         <translation>Contraseña de Imagen Cambiada</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1222"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1233"/>
         <source>Backup Image Header for %1</source>
         <translation>Respaldo de Cabecera de Imagen para %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1230"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1241"/>
         <source>Image Header Backuped</source>
         <translation>Cabecera de Imagen Respaldada</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1237"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1248"/>
         <source>Restore Image Header for %1</source>
         <translation>Restaurar Cabecera de Imagen para %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1245"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1256"/>
         <source>Image Header Restored</source>
         <translation>Cabecera de Imagen Restaurada</translation>
     </message>
@@ -2084,12 +2084,12 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <translation>Algunos cambios aún no se han guardado, ¿desea realmente cerrar esta ventana de opciones?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="813"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="824"/>
         <source>kilobytes (%1)</source>
         <translation>kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="921"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="932"/>
         <source>Select color</source>
         <translation>Seleccionar color</translation>
     </message>
@@ -2098,7 +2098,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <translation type="vanished">Por favor entre una ruta de programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="996"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1007"/>
         <source>Select Program</source>
         <translation>Seleccionar Programa</translation>
     </message>
@@ -2116,18 +2116,18 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <translation type="vanished">Programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="996"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1007"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Ejecutables (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1000"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="1021"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1011"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1032"/>
         <source>Please enter a menu title</source>
         <translation>Por favor introduzca un título de menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1017"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1028"/>
         <source>Please enter a command</source>
         <translation>Por favor ingrese un comando</translation>
     </message>
@@ -2136,8 +2136,8 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <location filename="Windows/OptionsWindow.cpp" line="1162"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="618"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="713"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="629"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="724"/>
         <location filename="Windows/OptionsNetwork.cpp" line="235"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
         <location filename="Windows/OptionsNetwork.cpp" line="600"/>
@@ -2389,8 +2389,8 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="929"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="1003"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="613"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="709"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="624"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="720"/>
         <location filename="Windows/OptionsNetwork.cpp" line="503"/>
         <location filename="Windows/OptionsNetwork.cpp" line="596"/>
         <location filename="Windows/OptionsNetwork.cpp" line="709"/>
@@ -2427,7 +2427,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="979"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="680"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="691"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="575"/>
@@ -5596,22 +5596,37 @@ NO seleccionará: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1410"/>
+        <location filename="Views/SbieView.cpp" line="1424"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>Archivo 7-Zip (*.7z);;Archivo Zip (*.zip)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1429"/>
+        <location filename="Views/SbieView.cpp" line="1443"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation>Por favor introducza un nuevo alias para la Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1438"/>
+        <location filename="Views/SbieView.cpp" line="1452"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation>El nombre introducido no es válido, ¿desea establecerlo en cambio como alias?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1665"/>
+        <location filename="Views/SbieView.cpp" line="1490"/>
+        <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1555"/>
+        <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1573"/>
+        <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1689"/>
         <source>Do you want to terminate %1?</source>
         <translation>¿Desea terminar %1?</translation>
     </message>
@@ -5742,42 +5757,47 @@ NO seleccionará: %2</translation>
         <translation>Este nombre ya está en uso para una Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1210"/>
-        <location filename="Views/SbieView.cpp" line="1280"/>
-        <location filename="Views/SbieView.cpp" line="1587"/>
+        <location filename="Views/SbieView.cpp" line="1188"/>
+        <source>&lt;br /&gt;• ... and %1 more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1224"/>
+        <location filename="Views/SbieView.cpp" line="1294"/>
+        <location filename="Views/SbieView.cpp" line="1611"/>
         <source>Don&apos;t show this message again.</source>
         <translation>No mostrar este mensaje de nuevo.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1271"/>
-        <location filename="Views/SbieView.cpp" line="1291"/>
-        <location filename="Views/SbieView.cpp" line="1765"/>
+        <location filename="Views/SbieView.cpp" line="1285"/>
+        <location filename="Views/SbieView.cpp" line="1305"/>
+        <location filename="Views/SbieView.cpp" line="1789"/>
         <source>This Sandbox is empty.</source>
         <translation>Esta Sandbox está vacía.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1298"/>
+        <location filename="Views/SbieView.cpp" line="1312"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>ADVERTENCIA: El editor del registro abierto no está aislado, por favor tenga cuidado y solo realice cambios en las ubicaciones de la sandbox preseleccionadas.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1299"/>
+        <location filename="Views/SbieView.cpp" line="1313"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>No mostrar esta advertencia en el futuro</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1355"/>
+        <location filename="Views/SbieView.cpp" line="1369"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Por favor ingrese un nuevo nombre para la Sandbox duplicada.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1355"/>
+        <location filename="Views/SbieView.cpp" line="1369"/>
         <source>%1 Copy</source>
         <translation>%1 Copiar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1410"/>
+        <location filename="Views/SbieView.cpp" line="1424"/>
         <source>Select file name</source>
         <translation>Elegir nombre de archivo</translation>
     </message>
@@ -5786,71 +5806,67 @@ NO seleccionará: %2</translation>
         <translation type="vanished">Archivador 7-zip (*.7z)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1416"/>
+        <location filename="Views/SbieView.cpp" line="1430"/>
         <source>Exporting: %1</source>
         <translation>Exportando: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1429"/>
+        <location filename="Views/SbieView.cpp" line="1443"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Por favor ingrese un nuevo nombre para la Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1476"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation>¿Desea realmente eliminar la(s) sandbox(es) seleccionada(s)?&lt;br /&gt;&lt;br /&gt;Advertencia: ¡el contenido de la caja tambien sera eliminado!</translation>
+        <translation type="vanished">¿Desea realmente eliminar la(s) sandbox(es) seleccionada(s)?&lt;br /&gt;&lt;br /&gt;Advertencia: ¡el contenido de la caja tambien sera eliminado!</translation>
     </message>
     <message>
         <source>Deleting %1 content</source>
         <translation type="vanished">Borrando %1 contenido</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1527"/>
+        <location filename="Views/SbieView.cpp" line="1543"/>
         <source>This Sandbox is already empty.</source>
         <translation>Esta Sandbox ya está vacía.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1539"/>
-        <location filename="Views/SbieView.cpp" line="1544"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation>¿Desea realmente eliminar el contenido de la sandbox seleccionada?</translation>
+        <translation type="vanished">¿Desea realmente eliminar el contenido de la sandbox seleccionada?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1540"/>
-        <location filename="Views/SbieView.cpp" line="1553"/>
+        <location filename="Views/SbieView.cpp" line="1561"/>
+        <location filename="Views/SbieView.cpp" line="1576"/>
         <source>Also delete all Snapshots</source>
         <translation>Borrar también todas las Instantáneas</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1552"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation>¿Desea borrar el contenido de todas las sandboxes seleccionadas?</translation>
+        <translation type="vanished">¿Desea borrar el contenido de todas las sandboxes seleccionadas?</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
         <translation type="vanished">Desea realmente eliminar el contenido de multiples sandboxes?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1569"/>
+        <location filename="Views/SbieView.cpp" line="1593"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>¿Desea realmente finalizar todos los procesos en la/las sandbox(es) seleccionada(s)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1570"/>
-        <location filename="Views/SbieView.cpp" line="1666"/>
+        <location filename="Views/SbieView.cpp" line="1594"/>
+        <location filename="Views/SbieView.cpp" line="1690"/>
         <source>Terminate without asking</source>
         <translation>Finalizar sin preguntar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1585"/>
+        <location filename="Views/SbieView.cpp" line="1609"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>El menú de inicio de Sandboxie se mostrará ahora. Seleccione una aplicación del menú y Sandboxie creará un nuevo icono de acceso directo en su escritorio real, el cual podrá utilizar para iniciar la aplicación seleccionada bajo la supervisión de Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1640"/>
-        <location filename="Views/SbieView.cpp" line="1694"/>
+        <location filename="Views/SbieView.cpp" line="1664"/>
+        <location filename="Views/SbieView.cpp" line="1718"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Crear un Atajo a la sandbox %1</translation>
     </message>
@@ -5859,7 +5875,7 @@ NO seleccionará: %2</translation>
         <translation type="vanished">Usted quiere %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1665"/>
+        <location filename="Views/SbieView.cpp" line="1689"/>
         <source>the selected processes</source>
         <translation>los procesos seleccionados</translation>
     </message>
@@ -5868,12 +5884,12 @@ NO seleccionará: %2</translation>
         <translation type="vanished">Desea %1 el(los) proceso(s) seleccionado(s)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1724"/>
+        <location filename="Views/SbieView.cpp" line="1748"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Esta caja no tiene restricciones de Internet establecidas, ¿desea activarlas?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1815"/>
+        <location filename="Views/SbieView.cpp" line="1839"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation>Esta sandbox esta actualmente deshabilitada o restringida a grupos o usuarios específicos, ¿Desea habilitar acceso para todos?</translation>
@@ -9836,7 +9852,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1622"/>
+        <location filename="Views/SbieView.cpp" line="1646"/>
         <source>Drive %1</source>
         <translation>Unidad %1</translation>
     </message>

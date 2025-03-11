@@ -1572,7 +1572,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="505"/>
         <source>Update Check completed, no new updates</source>
-        <translation type="unfinished"></translation>
+        <translation>检查完成，暂无新的版本更新</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="650"/>
@@ -5478,17 +5478,17 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1490"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>您确定要删除以下沙箱吗?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;警告：沙箱中的内容也将被删除！</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1555"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation >您确定要删除以下沙箱中的内容吗？&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1573"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation >您确定真的要删除以下沙箱中的内容吗？&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
@@ -5545,7 +5545,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1188"/>
         <source>&lt;br /&gt;• ... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;br /&gt;• ...以及%1个更多项</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1224"/>
@@ -6470,7 +6470,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="38"/>
         <source>Creation Time</source>
-        <translation type="unfinished"></translation>
+        <translation>创建时间</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="56"/>

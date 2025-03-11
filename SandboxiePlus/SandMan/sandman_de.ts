@@ -5049,113 +5049,126 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Dieser Name wird bereits für eine Sandbox verwendet.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1188"/>
         <source>&lt;br /&gt;• ... and %1 more</source>
-        <translation>&lt;br /&gt;• ... und %1 weitere</translation>
+        <translation type="vanished">&lt;br /&gt;• ... und %1 weitere</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1224"/>
-        <location filename="Views/SbieView.cpp" line="1294"/>
-        <location filename="Views/SbieView.cpp" line="1611"/>
+        <location filename="Views/SbieView.cpp" line="1229"/>
+        <location filename="Views/SbieView.cpp" line="1299"/>
+        <location filename="Views/SbieView.cpp" line="1616"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Diese Nachricht nicht mehr anzeigen.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1285"/>
-        <location filename="Views/SbieView.cpp" line="1305"/>
-        <location filename="Views/SbieView.cpp" line="1789"/>
+        <location filename="Views/SbieView.cpp" line="1290"/>
+        <location filename="Views/SbieView.cpp" line="1310"/>
+        <location filename="Views/SbieView.cpp" line="1794"/>
         <source>This Sandbox is empty.</source>
         <translation>Diese Sandbox ist leer.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1312"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation>WARNUNG: Der geöffnete Registrierungseditor befindet sich nicht in einer Sandbox, bitte seien Sie vorsichtig und nehmen nur Änderungen an den vorausgewählten Sandboxorten vor.</translation>
+        <translation type="vanished">WARNUNG: Der geöffnete Registrierungseditor befindet sich nicht in einer Sandbox, bitte seien Sie vorsichtig und nehmen nur Änderungen an den vorausgewählten Sandboxorten vor.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1313"/>
+        <location filename="Views/SbieView.cpp" line="1318"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Diese Warnung zukünftig nicht zeigen</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1369"/>
+        <location filename="Views/SbieView.cpp" line="1374"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Bitte neuen Namen für duplizierte Sandbox eingeben.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1369"/>
+        <location filename="Views/SbieView.cpp" line="1374"/>
         <source>%1 Copy</source>
         <translation>%1 Kopie</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1555"/>
+        <location filename="Views/SbieView.cpp" line="1560"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>Möchten Sie den Inhalt der folgenden Sandbox löschen?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1573"/>
+        <location filename="Views/SbieView.cpp" line="1578"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>Möchten Sie wirklich den Inhalt der folgenden Sandboxen löschen?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1424"/>
+        <location filename="Views/SbieView.cpp" line="1429"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1443"/>
+        <location filename="Views/SbieView.cpp" line="1190"/>
+        <source>&lt;br /&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1192"/>
+        <source>... and %1 more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1317"/>
+        <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1448"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation>Bitte geben Sie einen neuen Alias für die Sandbox ein.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1452"/>
+        <location filename="Views/SbieView.cpp" line="1457"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation>Der eingegebene Name ist nicht gültig. Möchten Sie ihn stattdessen als Alias festlegen?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1490"/>
+        <location filename="Views/SbieView.cpp" line="1495"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Möchten Sie wirklich die folgende(n) Sandbox(en) entfernen?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warnung: Der Boxinhalt wird ebenfalls gelöscht!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1543"/>
+        <location filename="Views/SbieView.cpp" line="1548"/>
         <source>This Sandbox is already empty.</source>
         <translation>Diese Sandbox ist bereits leer.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1593"/>
+        <location filename="Views/SbieView.cpp" line="1598"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Möchten Sie alle Prozesse in der/den ausgewählten Sandbox(en) beenden?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1594"/>
-        <location filename="Views/SbieView.cpp" line="1690"/>
+        <location filename="Views/SbieView.cpp" line="1599"/>
+        <location filename="Views/SbieView.cpp" line="1695"/>
         <source>Terminate without asking</source>
         <translation>Beenden ohne Rückfrage</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1609"/>
+        <location filename="Views/SbieView.cpp" line="1614"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation>Das Sandboxie Startmenü wird nun angezeigt. Wählen Sie eine Applikation aus diesem Menü und Sandboxie wird eine neue Verknüpfung auf Ihrem tatsächlichen Desktop erstellen, welche Sie dazu verwenden können um die ausgewählte Applikation unter der Kontrolle von Sandboxie aufzurufen.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1689"/>
+        <location filename="Views/SbieView.cpp" line="1694"/>
         <source>Do you want to terminate %1?</source>
         <translation>Möchten Sie %1 beenden?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1689"/>
+        <location filename="Views/SbieView.cpp" line="1694"/>
         <source>the selected processes</source>
         <translation>die ausgewählten Prozesse</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1748"/>
+        <location filename="Views/SbieView.cpp" line="1753"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Diese Sandbox hat keine Internetbeschränkungen, möchten Sie diese aktivieren?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1839"/>
+        <location filename="Views/SbieView.cpp" line="1844"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <translation>Diese Sandbox ist derzeit deaktiviert oder auf bestimmte Gruppen oder Benutzer beschränkt. Möchten Sie den Zugriff für alle erlauben?</translation>
     </message>
@@ -5253,29 +5266,29 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1424"/>
+        <location filename="Views/SbieView.cpp" line="1429"/>
         <source>Select file name</source>
         <translation>Dateinamen auswählen</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1430"/>
+        <location filename="Views/SbieView.cpp" line="1435"/>
         <source>Exporting: %1</source>
         <translation>Exportiere: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1443"/>
+        <location filename="Views/SbieView.cpp" line="1448"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Bitte einen Namen für die neue Sandbox eingeben.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1561"/>
-        <location filename="Views/SbieView.cpp" line="1576"/>
+        <location filename="Views/SbieView.cpp" line="1566"/>
+        <location filename="Views/SbieView.cpp" line="1581"/>
         <source>Also delete all Snapshots</source>
         <translation>Auch alle Schnappschüsse löschen</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1664"/>
-        <location filename="Views/SbieView.cpp" line="1718"/>
+        <location filename="Views/SbieView.cpp" line="1669"/>
+        <location filename="Views/SbieView.cpp" line="1723"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Verknüpfung zu Sandbox %1 erstellen</translation>
     </message>
@@ -8869,7 +8882,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1646"/>
+        <location filename="Views/SbieView.cpp" line="1651"/>
         <source>Drive %1</source>
         <translation>Laufwerk %1</translation>
     </message>

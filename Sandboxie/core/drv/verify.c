@@ -767,7 +767,7 @@ _FX NTSTATUS KphValidateCertificate()
 
         ULONG key_len = wcslen(key);
 
-        ULONG blocklist_len = 0x4000;
+        ULONG blocklist_len = 0x10000;
         CHAR* blocklist = Mem_Alloc(Driver_Pool, blocklist_len);
         ULONG blocklist_size = 0;
 

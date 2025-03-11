@@ -1314,7 +1314,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
  		if (theConf->GetInt("Options/WarnOpenRegistry", -1) == -1)
 		{
 			bool State = false;
-			if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.")
+			if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.")
 			  , tr("Don't show this warning in future"), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Ok)
 				return;
 

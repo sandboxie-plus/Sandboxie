@@ -5681,23 +5681,38 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Lyckades inte öppna arkiv (%1)!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1490"/>
+        <location filename="Views/SbieView.cpp" line="1190"/>
+        <source>&lt;br /&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1192"/>
+        <source>... and %1 more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1317"/>
+        <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1495"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1555"/>
+        <location filename="Views/SbieView.cpp" line="1560"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1573"/>
+        <location filename="Views/SbieView.cpp" line="1578"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1424"/>
+        <location filename="Views/SbieView.cpp" line="1429"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-Zip arkiv (*.7z);;Zip arkiv(*.zip)</translation>
     </message>
@@ -5731,47 +5746,41 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Detta namn används redan för en sandlåda.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1188"/>
-        <source>&lt;br /&gt;• ... and %1 more</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="1224"/>
-        <location filename="Views/SbieView.cpp" line="1294"/>
-        <location filename="Views/SbieView.cpp" line="1611"/>
+        <location filename="Views/SbieView.cpp" line="1229"/>
+        <location filename="Views/SbieView.cpp" line="1299"/>
+        <location filename="Views/SbieView.cpp" line="1616"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Visa inte detta meddelande igen.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1285"/>
-        <location filename="Views/SbieView.cpp" line="1305"/>
-        <location filename="Views/SbieView.cpp" line="1789"/>
+        <location filename="Views/SbieView.cpp" line="1290"/>
+        <location filename="Views/SbieView.cpp" line="1310"/>
+        <location filename="Views/SbieView.cpp" line="1794"/>
         <source>This Sandbox is empty.</source>
         <translation>Denna sandlåda är tom.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1312"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation>VARNING: Den öppnade registerredigeraren är inte sandlådad, vänligen var försiktig och gör endast ändringar till de förvalda sandlådeplatserna.</translation>
+        <translation type="vanished">VARNING: Den öppnade registerredigeraren är inte sandlådad, vänligen var försiktig och gör endast ändringar till de förvalda sandlådeplatserna.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1313"/>
+        <location filename="Views/SbieView.cpp" line="1318"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Visa inte denna varning i framtiden</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1369"/>
+        <location filename="Views/SbieView.cpp" line="1374"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Vänligen för in ett nytt namn för den kopierade sandlådan.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1369"/>
+        <location filename="Views/SbieView.cpp" line="1374"/>
         <source>%1 Copy</source>
         <translation>%1 Kopiera</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1424"/>
+        <location filename="Views/SbieView.cpp" line="1429"/>
         <source>Select file name</source>
         <translation>Välj filnamn</translation>
     </message>
@@ -5813,22 +5822,22 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">7-zip arkiv (*.7z)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1430"/>
+        <location filename="Views/SbieView.cpp" line="1435"/>
         <source>Exporting: %1</source>
         <translation>Exporterar: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1443"/>
+        <location filename="Views/SbieView.cpp" line="1448"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Vänligen för in ett nytt namn för sandlådan.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1443"/>
+        <location filename="Views/SbieView.cpp" line="1448"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation>Vänligen för in ett nytt alias för sandlådan.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1452"/>
+        <location filename="Views/SbieView.cpp" line="1457"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation>Det införda namnet är inte giltigt, vill du ange det som ett alias istället?</translation>
     </message>
@@ -5837,7 +5846,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">Vill du verkligen ta bort de(n) valda sandlåd(orna)(an)?&lt;br /&gt;&lt;br /&gt;Varning: Lådinnehållet kommer också raderas!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1543"/>
+        <location filename="Views/SbieView.cpp" line="1548"/>
         <source>This Sandbox is already empty.</source>
         <translation>Denna sandlåda är redan tom.</translation>
     </message>
@@ -5846,8 +5855,8 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">Vill du radera innehållet hos den valda sandlådan?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1561"/>
-        <location filename="Views/SbieView.cpp" line="1576"/>
+        <location filename="Views/SbieView.cpp" line="1566"/>
+        <location filename="Views/SbieView.cpp" line="1581"/>
         <source>Also delete all Snapshots</source>
         <translation>Radera också alla ögonblicksbilder</translation>
     </message>
@@ -5856,46 +5865,46 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">Vill du verkligen radera innehållet hos alla valda sandlådor?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1593"/>
+        <location filename="Views/SbieView.cpp" line="1598"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Vill du avsluta alla processer i de(n) valda sandlåd(orna)(an)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1594"/>
-        <location filename="Views/SbieView.cpp" line="1690"/>
+        <location filename="Views/SbieView.cpp" line="1599"/>
+        <location filename="Views/SbieView.cpp" line="1695"/>
         <source>Terminate without asking</source>
         <translation>Avsluta utan att fråga</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1609"/>
+        <location filename="Views/SbieView.cpp" line="1614"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Sandboxies startmeny kommer nu visas. Välj en applikation från menyn och Sandboxie kommer att skapa en ny genvägsikon på ditt verkliga skrivbord, med vilken du kan starta vald applikation under Sandboxies övervakning.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1664"/>
-        <location filename="Views/SbieView.cpp" line="1718"/>
+        <location filename="Views/SbieView.cpp" line="1669"/>
+        <location filename="Views/SbieView.cpp" line="1723"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Skapa genväg till sandlåda %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1689"/>
+        <location filename="Views/SbieView.cpp" line="1694"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>Vill du avsluta %1?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1689"/>
+        <location filename="Views/SbieView.cpp" line="1694"/>
         <source>the selected processes</source>
         <translation>de valda processerna</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1748"/>
+        <location filename="Views/SbieView.cpp" line="1753"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Denna låda har inte internetbegränsningar på plats, vill du aktivera dem?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1839"/>
+        <location filename="Views/SbieView.cpp" line="1844"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation>Denna sandlåda är för närvarande inaktiverad eller begränsad till specifika grupper eller användare. Vill du tillåta tillgång för alla?</translation>
@@ -9877,7 +9886,7 @@ istället för &quot;*&quot;.</translation>
         <translation type="vanished">Enhet: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1646"/>
+        <location filename="Views/SbieView.cpp" line="1651"/>
         <source>Drive %1</source>
         <translation>Enhet %1</translation>
     </message>

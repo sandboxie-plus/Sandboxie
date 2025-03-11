@@ -5328,62 +5328,56 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Tên này đã được sử dụng cho một Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1188"/>
-        <source>&lt;br /&gt;• ... and %1 more</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="1224"/>
-        <location filename="Views/SbieView.cpp" line="1294"/>
-        <location filename="Views/SbieView.cpp" line="1611"/>
+        <location filename="Views/SbieView.cpp" line="1229"/>
+        <location filename="Views/SbieView.cpp" line="1299"/>
+        <location filename="Views/SbieView.cpp" line="1616"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Không hiển thị lại thông báo này.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1285"/>
-        <location filename="Views/SbieView.cpp" line="1305"/>
-        <location filename="Views/SbieView.cpp" line="1789"/>
+        <location filename="Views/SbieView.cpp" line="1290"/>
+        <location filename="Views/SbieView.cpp" line="1310"/>
+        <location filename="Views/SbieView.cpp" line="1794"/>
         <source>This Sandbox is empty.</source>
         <translation>Sandbox này trống.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1312"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation>CẢNH BÁO: Trình chỉnh sửa sổ đăng ký đã mở không có Sandbox, hãy cẩn thận và chỉ thực hiện các thay đổi đối với các vị trí Sandbox đã chọn trước.</translation>
+        <translation type="vanished">CẢNH BÁO: Trình chỉnh sửa sổ đăng ký đã mở không có Sandbox, hãy cẩn thận và chỉ thực hiện các thay đổi đối với các vị trí Sandbox đã chọn trước.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1313"/>
+        <location filename="Views/SbieView.cpp" line="1318"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Không hiển thị cảnh báo này trong tương lai</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1369"/>
+        <location filename="Views/SbieView.cpp" line="1374"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Vui lòng nhập tên mới cho tên  trùng lặp.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1369"/>
+        <location filename="Views/SbieView.cpp" line="1374"/>
         <source>%1 Copy</source>
         <translation>%1 Sao chép</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1490"/>
+        <location filename="Views/SbieView.cpp" line="1495"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1555"/>
+        <location filename="Views/SbieView.cpp" line="1560"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1573"/>
+        <location filename="Views/SbieView.cpp" line="1578"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1424"/>
+        <location filename="Views/SbieView.cpp" line="1429"/>
         <source>Select file name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5411,27 +5405,42 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1041"/>
-        <location filename="Views/SbieView.cpp" line="1424"/>
+        <location filename="Views/SbieView.cpp" line="1429"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1430"/>
+        <location filename="Views/SbieView.cpp" line="1190"/>
+        <source>&lt;br /&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1192"/>
+        <source>... and %1 more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1317"/>
+        <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="1435"/>
         <source>Exporting: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1443"/>
+        <location filename="Views/SbieView.cpp" line="1448"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Vui lòng nhập tên mới cho Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1443"/>
+        <location filename="Views/SbieView.cpp" line="1448"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1452"/>
+        <location filename="Views/SbieView.cpp" line="1457"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5441,7 +5450,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">Bạn có thực sự muốn xóa những Sandbox đã chọn không?&lt;br /&gt;&lt;br /&gt;Cảnh báo: Nội dung Sandbox cũng sẽ bị xóa! </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1543"/>
+        <location filename="Views/SbieView.cpp" line="1548"/>
         <source>This Sandbox is already empty.</source>
         <translation>Sandbox này đã trống rỗng.</translation>
     </message>
@@ -5450,8 +5459,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">Bạn có muốn xóa nội dung của Sandbox đã chọn không?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1561"/>
-        <location filename="Views/SbieView.cpp" line="1576"/>
+        <location filename="Views/SbieView.cpp" line="1566"/>
+        <location filename="Views/SbieView.cpp" line="1581"/>
         <source>Also delete all Snapshots</source>
         <translation>Đồng thời xóa tất cả bản ghi nhanh</translation>
     </message>
@@ -5460,46 +5469,46 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">Bạn có thực sự muốn xóa nội dung của tất cả các Sandbox đã chọn không?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1593"/>
+        <location filename="Views/SbieView.cpp" line="1598"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Bạn có muốn chấm dứt tất cả các quy trình trong những Sandbox đã chọn không?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1594"/>
-        <location filename="Views/SbieView.cpp" line="1690"/>
+        <location filename="Views/SbieView.cpp" line="1599"/>
+        <location filename="Views/SbieView.cpp" line="1695"/>
         <source>Terminate without asking</source>
         <translation>Chấm dứt mà không cần hỏi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1609"/>
+        <location filename="Views/SbieView.cpp" line="1614"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Start Menu của Sandboxie bây giờ sẽ được hiển thị. Chọn một ứng dụng từ menu và Sandboxie sẽ tạo một biểu tượng lối tắt mới trên màn hình thực của bạn, bạn có thể sử dụng biểu tượng này để gọi ứng dụng đã chọn dưới sự giám sát của Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1664"/>
-        <location filename="Views/SbieView.cpp" line="1718"/>
+        <location filename="Views/SbieView.cpp" line="1669"/>
+        <location filename="Views/SbieView.cpp" line="1723"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Tạo lối tắt đến sandbox %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1689"/>
+        <location filename="Views/SbieView.cpp" line="1694"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation type="unfinished">Bạn có muốn tới %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1689"/>
+        <location filename="Views/SbieView.cpp" line="1694"/>
         <source>the selected processes</source>
         <translation>các quy trình đã chọn</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1748"/>
+        <location filename="Views/SbieView.cpp" line="1753"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Sandbox không có giới hạn Internet, bạn có muốn bật chúng không?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1839"/>
+        <location filename="Views/SbieView.cpp" line="1844"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation type="unfinished">Sandbox này bị vô hiệu hóa, bạn có muốn bật nó không?</translation>
@@ -9251,7 +9260,7 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1646"/>
+        <location filename="Views/SbieView.cpp" line="1651"/>
         <source>Drive %1</source>
         <translation>Ổ đĩa %1</translation>
     </message>

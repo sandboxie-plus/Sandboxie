@@ -49,6 +49,10 @@ Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0;
 ;Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable
 ;Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable
 Name: "RefreshBuild"; Description: "{cm:RefreshBuild}"; MinVersion: 0.0,5.0; Check: not IsPortable
+; todo make ARM64 ImDisk Package
+#if MyAppArch == "x64"
+Name: "InstallImDisk"; Description: "{cm:InstallImDisk}"; MinVersion: 0.0,5.0; Flags: unchecked; Check: IsWin64
+#endif
 
 
 [Files]
@@ -76,6 +80,11 @@ Source: ".\Release\{#MyAppSrc}\64\SbieDll.pdb"; DestDir: "{app}\64\"; MinVersion
 Source: ".\Sandboxie.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable
 Source: ".\Sandboxie-Plus.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable
 
+; ImDiskTK
+#if MyAppArch == "x64"
+Source: ".\imdisk_files.cab"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\imdisk_install.bat"; DestDir: "{app}"; Flags: ignoreversion
+#endif
 
 [Icons]
 Name: "{group}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; MinVersion: 0.0,5.0
@@ -143,6 +152,11 @@ Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"
 
 ; Update metadata (templates and translations)
 Filename: "{app}\UpdUtil.exe"; Parameters: {code:GetParams}; StatusMsg: "UpdUtill checking for updates..."; Check: IsRefresh
+
+; Install ImDisk 3.0 driver
+#if MyAppArch == "x64"
+Filename: "{app}\imdisk_install.bat"; StatusMsg: "Installing ImDisk 3.0 Driver..."; Check: IsInstallImDisk
+#endif
 
 ; Start the Sbie service.
 Filename: "{app}\KmdUtil.exe"; Parameters: "start SbieSvc"; StatusMsg: "KmdUtil start SbieSvc"; Check: not IsPortable
@@ -555,6 +569,14 @@ function IsRefresh(): Boolean;
 begin
 
   if WizardIsTaskSelected('RefreshBuild') then begin
+    Result := True;
+  end;
+end;
+
+function IsInstallImDisk(): Boolean;
+begin
+
+  if WizardIsTaskSelected('InstallImDisk') then begin
     Result := True;
   end;
 end;

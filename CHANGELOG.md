@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Improve sandbox deletion confirmation prompt (thanks PenXLa) [#4561](https://github.com/sandboxie-plus/Sandboxie/pull/4561)
 - Updated online updater
+- Added ImDisk 3.0 driver to Plus Installer (x64 only)
 
 ### Fixed
 - fixed "WriteFilePath" Seems Work Incorrectly [#4553](https://github.com/sandboxie-plus/Sandboxie/issues/4553)

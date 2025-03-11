@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.15.8 / 5.70.8] - 2025-03-02
 
 ### Changed
+- Improve sandbox deletion confirmation prompt (thanks PenXLa) [#4561](https://github.com/sandboxie-plus/Sandboxie/pull/4561)
 - Updated online updater
 
 ### Fixed

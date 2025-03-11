@@ -4632,7 +4632,7 @@ _FX NTSTATUS Key_NtRenameKey(
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    status = __sys_NtOpenKey(&handle, KEY_READ, &objattrs);
+    status = SbieApi_OpenKey(&handle, TruePath2);
 
     if (NT_SUCCESS(status)) {
 

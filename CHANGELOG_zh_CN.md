@@ -10,7 +10,7 @@
 
 ### 修复
 - 修复了 "WriteFilePath" 似乎工作不正确的问题 [#4553](https://github.com/sandboxie-plus/Sandboxie/issues/4553)
-- 修复了沙盒备注在保存时删除匹配行的问题 [#4547](https://github.com/sandboxie-plus/Sandboxie/issues/4547)
+- 修复了沙盒备注，在保存时会删除空行的问题 [#4547](https://github.com/sandboxie-plus/Sandboxie/issues/4547)
 
 
 ## [1.15.7 / 5.70.7] - 2025-02-23

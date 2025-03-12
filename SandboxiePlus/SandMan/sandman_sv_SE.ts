@@ -1597,17 +1597,17 @@ Vill du fortfarande uppdatera?</translation>
         <translation>Lyckades inte söka uppdateringar, fel: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="505"/>
+        <location filename="OnlineUpdater.cpp" line="507"/>
         <source>Update Check completed, no new updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="650"/>
+        <location filename="OnlineUpdater.cpp" line="652"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vill du nerladda installeraren?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="654"/>
+        <location filename="OnlineUpdater.cpp" line="656"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vill du nerladda uppdateringarna?&lt;/p&gt;</translation>
     </message>
@@ -1616,70 +1616,70 @@ Vill du fortfarande uppdatera?</translation>
         <translation type="vanished">&lt;p&gt;Vill du gå till&lt;a href=&quot;%1&quot;&gt;uppdateringssidan&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="667"/>
+        <location filename="OnlineUpdater.cpp" line="669"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>Visa inte denna uppdatering något mer.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="790"/>
+        <location filename="OnlineUpdater.cpp" line="792"/>
         <source>Downloading updates...</source>
         <translation>Nerladdar uppdateringar...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="816"/>
+        <location filename="OnlineUpdater.cpp" line="818"/>
         <source>invalid parameter</source>
         <translation>ogiltig parameter</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="817"/>
+        <location filename="OnlineUpdater.cpp" line="819"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>lyckades inte nerladda uppdaterad information</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="818"/>
+        <location filename="OnlineUpdater.cpp" line="820"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>lyckades inte ladda uppdaterad json-fil</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="819"/>
+        <location filename="OnlineUpdater.cpp" line="821"/>
         <source>failed to download a particular file</source>
         <translation>lyckades inte nerladda en särskild fil</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="820"/>
+        <location filename="OnlineUpdater.cpp" line="822"/>
         <source>failed to scan existing installation</source>
         <translation>lyckades inte skanna existerande installation</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="821"/>
+        <location filename="OnlineUpdater.cpp" line="823"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>uppdateringssignatur är ogiltig!!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="822"/>
+        <location filename="OnlineUpdater.cpp" line="824"/>
         <source>downloaded file is corrupted</source>
         <translation>nerladdad fil är korrupt</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="823"/>
+        <location filename="OnlineUpdater.cpp" line="825"/>
         <source>internal error</source>
         <translation>internt fel</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="824"/>
+        <location filename="OnlineUpdater.cpp" line="826"/>
         <source>unknown error</source>
         <translation>okänt fel</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="848"/>
+        <location filename="OnlineUpdater.cpp" line="850"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>Lyckades inte nerladda uppdateringar från servern, fel %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="870"/>
+        <location filename="OnlineUpdater.cpp" line="872"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Uppdateringar för Sandboxie-Plus har nerladdats.&lt;/p&gt;&lt;p&gt;Vill du tillämpa dessa uppdateringar? Om några program körs sandlådade, kommer de att avslutas.&lt;/p&gt;</translation>
     </message>
@@ -1688,7 +1688,7 @@ Vill du fortfarande uppdatera?</translation>
         <translation type="vanished">Misslyckades att nedladda fil från: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="972"/>
+        <location filename="OnlineUpdater.cpp" line="974"/>
         <source>Downloading installer...</source>
         <translation>Nerladdar installeraren...</translation>
     </message>
@@ -1697,17 +1697,17 @@ Vill du fortfarande uppdatera?</translation>
         <translation type="vanished">Misslyckades att nerladda installeraren från: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1015"/>
+        <location filename="OnlineUpdater.cpp" line="1017"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;En ny Sandboxie-Plus installerare har nerladdats till följande plats:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Vill du påbörja installationen? Om några program körs sandlådade, kommer de att avslutas.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1083"/>
+        <location filename="OnlineUpdater.cpp" line="1085"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vill du gå till &lt;a href=&quot;%1&quot;&gt;infosidan&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1091"/>
+        <location filename="OnlineUpdater.cpp" line="1093"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Visa inte detta besked i framtiden.</translation>
     </message>
@@ -1716,7 +1716,7 @@ Vill du fortfarande uppdatera?</translation>
         <translation type="vanished">&lt;p&gt;Det finns en ny version av Sandboxie-Plus tillgänglig.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Ny version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="636"/>
+        <location filename="OnlineUpdater.cpp" line="638"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Det finns en ny version av Sandboxie-Plus tillgänglig.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Ny version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
@@ -1725,7 +1725,7 @@ Vill du fortfarande uppdatera?</translation>
         <translation type="vanished">&lt;p&gt;Vill du ladda ner den senaste versionen?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="658"/>
+        <location filename="OnlineUpdater.cpp" line="660"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vill du gå till &lt;a href=&quot;%1&quot;&gt;nerladdningssidan&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
@@ -1734,7 +1734,7 @@ Vill du fortfarande uppdatera?</translation>
         <translation type="vanished">Visa inte detta meddelande något mer.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="509"/>
+        <location filename="OnlineUpdater.cpp" line="511"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>

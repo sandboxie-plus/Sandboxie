@@ -1326,112 +1326,112 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <translation>Güncellemeler denetlenemedi, hata: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="505"/>
+        <location filename="OnlineUpdater.cpp" line="507"/>
         <source>Update Check completed, no new updates</source>
         <translation>Güncelleme denetimi tamamlandı, yeni güncelleme yok</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="650"/>
+        <location filename="OnlineUpdater.cpp" line="652"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Yükleyiciyi indirmek istiyor musunuz?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="654"/>
+        <location filename="OnlineUpdater.cpp" line="656"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Güncellemeleri indirmek istiyor musunuz?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="658"/>
+        <location filename="OnlineUpdater.cpp" line="660"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;a href=&quot;%1&quot;&gt; İndirme sayfasına&lt;/a&gt; gitmek istiyor musunuz?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="667"/>
+        <location filename="OnlineUpdater.cpp" line="669"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>Bu güncellemeyi artık gösterme.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="790"/>
+        <location filename="OnlineUpdater.cpp" line="792"/>
         <source>Downloading updates...</source>
         <translation>Güncellemeler indiriliyor...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="816"/>
+        <location filename="OnlineUpdater.cpp" line="818"/>
         <source>invalid parameter</source>
         <translation>geçersiz parametre</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="817"/>
+        <location filename="OnlineUpdater.cpp" line="819"/>
         <source>failed to download updated information</source>
         <translation>güncelleme bilgisi indirilemedi</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="818"/>
+        <location filename="OnlineUpdater.cpp" line="820"/>
         <source>failed to load updated json file</source>
         <translation>güncel json dosyası yüklenemedi</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="819"/>
+        <location filename="OnlineUpdater.cpp" line="821"/>
         <source>failed to download a particular file</source>
         <translation>belirli bir dosya indirilemedi</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="820"/>
+        <location filename="OnlineUpdater.cpp" line="822"/>
         <source>failed to scan existing installation</source>
         <translation>mevcut kurulum taranamadı</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="821"/>
+        <location filename="OnlineUpdater.cpp" line="823"/>
         <source>updated signature is invalid !!!</source>
         <translation>güncelleme imzası geçersiz!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="822"/>
+        <location filename="OnlineUpdater.cpp" line="824"/>
         <source>downloaded file is corrupted</source>
         <translation>indirilen dosya bozuk</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="823"/>
+        <location filename="OnlineUpdater.cpp" line="825"/>
         <source>internal error</source>
         <translation>iç hata</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="824"/>
+        <location filename="OnlineUpdater.cpp" line="826"/>
         <source>unknown error</source>
         <translation>bilinmeyen hata</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="848"/>
+        <location filename="OnlineUpdater.cpp" line="850"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>Güncellemeler sunucudan indirilemedi, hata %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="870"/>
+        <location filename="OnlineUpdater.cpp" line="872"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus güncellemeleri indirildi.&lt;/p&gt;&lt;p&gt;Bu güncellemeleri uygulamak istiyor musunuz? Herhangi bir program korumalı alanda çalışıyorsa sonlandırılacaktır.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="972"/>
+        <location filename="OnlineUpdater.cpp" line="974"/>
         <source>Downloading installer...</source>
         <translation>Yükleyici indiriliyor...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1015"/>
+        <location filename="OnlineUpdater.cpp" line="1017"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Yeni bir Sandboxie-Plus yükleyicisi şu konuma indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Kuruluma başlamak istiyor musunuz? Herhangi bir program korumalı alanda çalışıyorsa sonlandırılacaktır.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1083"/>
+        <location filename="OnlineUpdater.cpp" line="1085"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Bilgi sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek istiyor musunuz&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1091"/>
+        <location filename="OnlineUpdater.cpp" line="1093"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Bu duyuruyu gelecekte gösterme.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="636"/>
+        <location filename="OnlineUpdater.cpp" line="638"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus&apos;ın yeni bir sürümü mevcut.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Yeni sürüm:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
@@ -1444,7 +1444,7 @@ Do you still want to update?</source>
 Yine de güncellemek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="509"/>
+        <location filename="OnlineUpdater.cpp" line="511"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>

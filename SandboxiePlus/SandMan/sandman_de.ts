@@ -5049,10 +5049,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Dieser Name wird bereits für eine Sandbox verwendet.</translation>
     </message>
     <message>
-        <source>&lt;br /&gt;• ... and %1 more</source>
-        <translation type="vanished">&lt;br /&gt;• ... und %1 weitere</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="1229"/>
         <location filename="Views/SbieView.cpp" line="1299"/>
         <location filename="Views/SbieView.cpp" line="1616"/>
@@ -5065,10 +5061,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="1794"/>
         <source>This Sandbox is empty.</source>
         <translation>Diese Sandbox ist leer.</translation>
-    </message>
-    <message>
-        <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation type="vanished">WARNUNG: Der geöffnete Registrierungseditor befindet sich nicht in einer Sandbox, bitte seien Sie vorsichtig und nehmen nur Änderungen an den vorausgewählten Sandboxorten vor.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1318"/>
@@ -5104,17 +5096,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1190"/>
         <source>&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1192"/>
         <source>... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation>... und %1 weitere</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1317"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>WARNUNG: Der geöffnete Registryeditor ist nicht sandgeboxt, bitte seien Sie vorsichtig und nehmen Sie nur Änderungen an den vorausgewählten Sandboxorten vor.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1448"/>

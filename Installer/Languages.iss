@@ -159,29 +159,30 @@ french.UninstallTaskLabel5=Supprimer les fichiers de configuration et les &bacs 
 french.RefreshBuild=Télécharger les dernières versions de Templates.ini et des traductions
 
 ; German
-german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
-german.AddSandboxedBrowser=Desktop-Verknüpfung erstellen zum Starten des Standard-Webbrowsers mit Sandboxie
+german.AddSandboxedMenu=Füge "Starte Sandgeboxt" zum Kontextmenü hinzu
+german.AddSandboxedBrowser=Erstelle Desktop-Verknüpfung zum Starten des Standard-Webbrowsers mit Sandboxie
 german.SandboxieStartMenu1=Programm mit Sandboxie starten
 german.SandboxieStartMenu2=Webbrowser mit Sandboxie starten
 german.SandboxieStartMenu3=Sandboxie Startmenü
-german.SandboxedBrowser=Sandboxed Web Browser
+german.SandboxedBrowser=Sandgeboxter Webbrowser
 german.CustomPageLabel1=Wählen Sie die Installationsart aus
-german.CustomPageLabel2=Wie soll installiert werden
-german.CustomPageLabel3=Wählen Sie die Installationsmethode
+german.CustomPageLabel2=Wie soll installiert werden?
+german.CustomPageLabel3=Wählen Sie die Installationsmethode aus
 german.CustomPageInstallMode=Installiere {#MyAppName} auf diesem Computer
-german.CustomPageUpgradeMode=Update der bestehenden {#MyAppName} Installation
-german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragbaren Verwendung
-german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
+german.CustomPageUpgradeMode=Aktualisiere bestehende {#MyAppName} Installation
+german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur portablen Verwendung
+german.RequiresWin7OrLater=Sandboxie-Plus erfordert Windows 7 oder neuer.
 german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
-german.RunSandboxedMenu=In &Sandbox ausführen
-german.UninstallTaskLabel1=Wählen Sie die De-Installationsart aus
-german.UninstallTaskLabel2=Wie möchten Sie Sandboxie-Plus de-installieren?
-german.UninstallTaskLabel3=&Konfiguration und Sandboxen behalten%nDies ist die empfohlene Option, wenn Sie vorhaben Sandboxie-Plus erneut zu intallieren, während Sandboxie-Plus alle Sandboxen und Konfigurationsdateien behält.
-german.UninstallTaskLabel4=&Entferne die Konfiguration%nWählen Sie diese Option um die Sandboxie.ini und Sandboxie-Plus.ini Dateien zu entfernen, während die Sandboxen unverändert bleiben.
-german.UninstallTaskLabel5=Entferne die Konfiguration und alle &Sandboxen%nWählen Sie diese Option um alle Konfigurationsdateien und alle Sandboxen, inklusive des Sandboxordners im, durch die Dateisystemquelle, benutzerdefinierten Pfad.
+german.RunSandboxedMenu=Starte &Sandgeboxt
+german.UninstallTaskLabel1=Wählen Sie die Deinstallationsart aus
+german.UninstallTaskLabel2=Wie möchten Sie Sandboxie-Plus deinstallieren?
+german.UninstallTaskLabel3=&Behalte Konfigurationsdateien und Sandboxen%nDies ist die empfohlene Option, wenn Sie vorhaben Sandboxie-Plus erneut zu installieren und dabei Ihre Konfigurationsdateien und Sandboxen behalten möchten.
+german.UninstallTaskLabel4=Entferne &Konfigurationsdateien%nWählen Sie diese Option, um die Konfigurationsdateien Sandboxie.ini und Sandboxie-Plus.ini zu entfernen, während die Sandboxen unverändert bleiben.
+german.UninstallTaskLabel5=Entferne Konfigurationsdateien und &Sandboxen%nWählen Sie diese Option, um alle Konfigurationsdateien und Sandboxen zu entfernen, einschließlich des Sandboxordners im, durch die Einstellung Dateisystemquelle (FileRootPath), benutzerdefinierten Pfad.
+german.RefreshBuild=Neueste Templates.ini und Übersetzungen herunterladen
+german.InstallImDisk=Installiere (oder Aktualisiere) ImDisk 3.0 Treiber (für Ramdisk und verschlüsselte Sandboxen)
 ; Fix issue #1333 with a space inserted before %1
 german.AutoStartProgram=Starte automatisch %1
-german.RefreshBuild=Neueste Templates.ini und Übersetzungen herunterladen
 
 ; Hungarian
 hungarian.AddSandboxedMenu=Az "Izolált módú futtatás" hozzáadása a helyi menühöz

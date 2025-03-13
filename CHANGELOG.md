@@ -8,11 +8,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added 'Creation Time' column to snapshot manager (thanks PenXLa) [#4555](https://github.com/sandboxie-plus/Sandboxie/pull/4555)
 - improved sandbox deletion confirmation prompt (thanks PenXLa) [#4561](https://github.com/sandboxie-plus/Sandboxie/pull/4561)
 - updated online updater
-- added ImDisk 3.0 driver to Sandboxie Plus installer (x64 only)
+- added [ImDisk 3.0](https://github.com/DavidXanatos/ImDisk/releases/tag/v3.0.0) driver to Sandboxie Plus installer (x64 only)
 
 ### Fixed
-- fixed "WriteFilePath" seems to work incorrectly [#4553](https://github.com/sandboxie-plus/Sandboxie/issues/4553)
-- fixed Box Notes deletes matching lines when saved [#4547](https://github.com/sandboxie-plus/Sandboxie/issues/4547)
+- fixed "WriteFilePath" not working correctly [#4553](https://github.com/sandboxie-plus/Sandboxie/issues/4553)
+- fixed an issue where Box Notes deleted matching lines when saved [#4547](https://github.com/sandboxie-plus/Sandboxie/issues/4547)
 
 
 

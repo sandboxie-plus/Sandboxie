@@ -5542,32 +5542,32 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1190"/>
         <source>&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1192"/>
         <source>... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation>... 및 %1개 이상</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1317"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>경고: 열린 레지스트리 편집기는 샌드박스가 적용되지 않으므로 주의해서 미리 선택한 샌드박스 위치에서만 변경을 수행하세요.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1495"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>다음 샌드박스를 정말 제거하시겠습니까?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;경고: 박스 내용도 삭제됩니다!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1560"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>다음 샌드박스의 내용을 삭제하시겠습니까?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1578"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>다음 샌드박스의 콘텐츠를 정말 삭제하시겠습니까?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <source>7-zip Archive (*.7z);;Zip Archive (*.zip)</source>
@@ -6577,7 +6577,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="38"/>
         <source>Creation Time</source>
-        <translation type="unfinished"></translation>
+        <translation>생성 시간</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="56"/>

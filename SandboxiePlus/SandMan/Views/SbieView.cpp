@@ -1182,13 +1182,13 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		for (int i = 0; i < SandBoxes.count() && i < max_displayed; i++)
 		{
 			if (i != 0) name_list.append("<br />");
-			name_list.append(QString::fromWCharArray(L"• "));
+			name_list.append(QString::fromWCharArray(L"\u2022 ")); // Unicode bullet
 			name_list.append("<b>" + SandBoxes[i]->GetName().replace("_", " ") + "</b>");
 		}
 		if (SandBoxes.count() > max_displayed) 
 		{
 			name_list.append(tr("<br />"));
-			name_list.append(QString::fromWCharArray(L"• "));
+			name_list.append(QString::fromWCharArray(L"\u2022 ")); // Unicode bullet
 			name_list.append(tr("... and %1 more").arg(SandBoxes.count() - max_displayed));
 		}
 			

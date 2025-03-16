@@ -5478,17 +5478,17 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1190"/>
         <source>&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1192"/>
         <source>... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation>... 及 %1 项</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1317"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">警告：打开的注册表编辑器没有沙盒化，请小心，并只对预选的沙盒位置进行更改。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1495"/>

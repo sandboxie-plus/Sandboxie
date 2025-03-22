@@ -5875,7 +5875,7 @@ Error: %1</source>
         <location filename="Windows/SettingsWindow.cpp" line="897"/>
         <location filename="Windows/SettingsWindow.cpp" line="907"/>
         <source>Run &amp;Sandboxed</source>
-        <translation>在沙盒中运行(&amp;S)</translation>
+        <translation>在沙盒中运行(&amp;X)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1221"/>

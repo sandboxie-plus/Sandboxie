@@ -171,6 +171,7 @@ driver_started:
             "C6009AFDC9F1626290D252A151E253D6" "\r\n"
             "778D8878F8906D32185A9FEF1A057209" "\r\n"
             "622D831B13B7DB7CFFEC12E3778BF740" "\r\n"
+            "BA29C3EBED4944B0ACD962E3CF7289FF" "\r\n"
             // Piracy:
             "E0787E0A1E4160B33DF2A81E947189BA" "\r\n"
             "7494411B703814B40F9669F2B459CA56" "\r\n"
@@ -222,27 +223,51 @@ driver_started:
             "F41DB2D0D47DF290693B066575B792CD" "\r\n"
             "13828E6C1BBFF06CCFA177D17EC33B6D" "\r\n"
             "1BCA37EEF8D433B21FD9FCCA13E72345" "\r\n"
+            "958D0F7EC38BDC8C735235B7285685BB" "\r\n"
+            "57E273C21CAB40E996E43A5EAB0B66FD" "\r\n"
+            "402D20066C7812EE31FF658DA9AE1DC0" "\r\n"
+            "016BCE2A20762AAA45CA3192B19EC5C7" "\r\n"
+            "9F66514482707499B1D253B2C4105964" "\r\n"
+            "0FE9EF95C42175DE64F5C22864144CDF" "\r\n"
+            "39ECB66BDC97AFEDD138380BEF5A3424" "\r\n"
+            "398B34D0F6313C435EC8CC8C2D510567" "\r\n"
+            "D27581F4F13DB47E55A80520D4BFA9E6" "\r\n"
+            "501CAC9CFA90863D41E1BEF1474FBB41" "\r\n"
+            "DD10ED7D8CA304683CB436997856D915" "\r\n"
+            "DAC1F31ADD71BA55755F468440444BEF" "\r\n"
+            "297AF26CD68FD3A0BBAC978E6A4AD8AF" "\r\n"
+            "BF340F6A52521936C26AB828728459D5" "\r\n"
+            "6CDC87320936DDA0BF1D11CBEA8DD639" "\r\n"
+            "BF2F68822B40381AFA6FF89C04734254" "\r\n"
+            "4AAC76E42998283A6E9EF7DC6227AA39" "\r\n"
+            "3CA45976445F5710CE5A3B7D70DA2161" "\r\n"
+            "90A259286103794D6C4F23679F20C786" "\r\n"
+            "D6B28C74E278091752C2455CA326FB80" "\r\n"
+            "A0462EB5DFF006D3A93886415618FB8D" "\r\n"
+            "8F6FB5EA0CABD1013F04E56F4B25D65C" "\r\n"
+            "F2525828B95596FB64138BDB97F0BEE7" "\r\n"
             // Other:
             "45923506432956493562935693478346" "\r\n" // F
             "63F49D96BDBA28F8428B4A5008D1A587";       // X
 
         const unsigned char BlockListSig0[64] =  {
-            0x86, 0x57, 0x42, 0x6c, 0xc7, 0x35, 0x5c, 0x36,
-            0x44, 0x88, 0xaa, 0x61, 0x4f, 0x79, 0x9b, 0xa4,
-            0xa8, 0x4f, 0x42, 0x55, 0x94, 0xc6, 0x68, 0x4b,
-            0xb3, 0xfa, 0x57, 0xda, 0xab, 0xf0, 0x95, 0x59,
-            0x40, 0xe1, 0x56, 0x74, 0xb6, 0x74, 0xdc, 0x18,
-            0x51, 0x55, 0x1a, 0x20, 0xd2, 0x87, 0x6b, 0x36,
-            0x99, 0xe0, 0x1e, 0xf3, 0xd0, 0x48, 0xb7, 0x30,
-            0x64, 0xb4, 0x6f, 0xd9, 0x38, 0x90, 0xc4, 0x72,
+            0xc6, 0x86, 0x1b, 0xeb, 0x91, 0xa7, 0x4e, 0xef,
+            0xd3, 0xe2, 0x4a, 0x57, 0x70, 0xae, 0xc4, 0x01,
+            0xf4, 0xda, 0x0f, 0x90, 0x06, 0x93, 0x71, 0xf1,
+            0xf6, 0x8a, 0x21, 0xc9, 0x0c, 0x09, 0x05, 0xa5,
+            0x8e, 0x08, 0xed, 0x45, 0x72, 0x01, 0xd1, 0xdf,
+            0x85, 0xdb, 0x5f, 0xde, 0x62, 0xd8, 0xc7, 0xb9,
+            0x86, 0xad, 0xcd, 0x58, 0xdb, 0x40, 0x29, 0xe7,
+            0xaa, 0x43, 0x7a, 0xfa, 0x4e, 0x22, 0xdc, 0xcb
         };
-
 
         std::string BlockList;
         BlockList.resize(0x10000, 0); // 64 kb should be enough
         ULONG BlockListLen = 0;
-        SbieApi_Call(API_GET_SECURE_PARAM, 5, L"CertBlockList", (ULONG_PTR)BlockList.c_str(), BlockList.size(), (ULONG_PTR)&BlockListLen, 1);
+        ULONG status = SbieApi_Call(API_GET_SECURE_PARAM, 5, L"CertBlockList", (ULONG_PTR)BlockList.c_str(), BlockList.size(), (ULONG_PTR)&BlockListLen, 1);
         //BlockList.resize(BlockListLen);
+        if (status != 0) // error
+            BlockListLen = 0;
 
         if (BlockListLen < sizeof(BlockList0) - 1)
         {

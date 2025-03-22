@@ -64,6 +64,7 @@ english.UninstallTaskLabel3=&Keep configuration files and sandboxes%nThis is the
 english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the Sandboxie.ini and Sandboxie-Plus.ini configuration files while keeping the sandboxes unchanged.
 english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath.
 english.RefreshBuild=Download latest Templates.ini and translations
+english.InstallImDisk=Install (or Update) ImDisk 3.0 driver (for RamDisk and Encrypted Sandboxed)
 
 ; Chinese Simplified
 ChineseSimplified.AddSandboxedMenu=添加“在沙盒中运行”右键菜单
@@ -434,6 +435,7 @@ turkish.UninstallTaskLabel3=Yapılandırma dosyalarını ve korumalı alanları 
 turkish.UninstallTaskLabel4=&Yapılandırma dosyalarını kaldır%nSandboxie.ini ve Sandboxie-Plus.ini yapılandırma dosyalarını, korumalı alanları değiştirmeden kaldırmak için bunu seçin.
 turkish.UninstallTaskLabel5=Yapılandırma dosyalarını ve &korumalı alanları kaldır%nFileRootPath ile özel yollarda bulunan Sandbox klasörü dahil tüm yapılandırma dosyalarını ve korumalı alanları kaldırmak için bunu seçin.
 turkish.RefreshBuild=En son Templates.ini ve çeviriler indirilsin
+turkish.InstallImDisk=ImDisk 3.0 sürücüsünü yükleyin (veya güncelleyin) (RamDisk ve Şifrelenmiş Korumalı Alanlar için)
 
 ; Ukrainian
 ukrainian.AddSandboxedMenu=Додати "Виконати в пісочниці" в контекстне меню

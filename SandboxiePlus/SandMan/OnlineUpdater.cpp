@@ -469,8 +469,10 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
         BlockList.resize(0x10000, 0); // 64 kb should be enough
         static quint32 BlockListLen = 0;
 		if (BlockListLen == 0) {
-			theAPI->GetSecureParam("CertBlockList", (void*)BlockList.c_str(), BlockList.size(), &BlockListLen, true);
+			SB_STATUS Status = theAPI->GetSecureParam("CertBlockList", (void*)BlockList.c_str(), BlockList.size(), &BlockListLen, true);
 			//BlockList.resize(BlockListLen);
+			if (Status.IsError()) // error
+				BlockListLen = 0;
 		}
 
         if (BlockListLen < BlockList0.size())

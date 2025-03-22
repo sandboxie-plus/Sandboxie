@@ -271,8 +271,8 @@ driver_started:
 
         if (BlockListLen < sizeof(BlockList0) - 1)
         {
-            SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlockList", BlockList0, sizeof(BlockList0) - 1);
-            SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlockListSig", BlockListSig0, sizeof(BlockListSig0));
+            //SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlockList", BlockList0, sizeof(BlockList0) - 1);
+            //SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlockListSig", BlockListSig0, sizeof(BlockListSig0));
             //BlockListLen = sizeof(BlockList0) - 1;
             //BlockList = BlockList0;
         }

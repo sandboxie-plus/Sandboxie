@@ -3330,8 +3330,8 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="511"/>
         <location filename="SandMan.cpp" line="733"/>
-        <source>&amp;Sandbox</source>
-        <translation>沙盒(&amp;S)</translation>
+        <source>Sandbo&amp;x</source>
+        <translation>沙盒(&amp;X)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="512"/>
@@ -5874,7 +5874,7 @@ Error: %1</source>
         <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <location filename="Windows/SettingsWindow.cpp" line="897"/>
         <location filename="Windows/SettingsWindow.cpp" line="907"/>
-        <source>Run &amp;Sandboxed</source>
+        <source>Run Sandbo&amp;xed</source>
         <translation>在沙盒中运行(&amp;X)</translation>
     </message>
     <message>

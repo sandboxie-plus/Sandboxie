@@ -744,13 +744,22 @@ _FX NTSTATUS Secure_NtDuplicateObject(
     // if we are successful, then make sure the handle gets closed
     //
 
-    status = __sys_NtDuplicateObject(
-        SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
-        DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
+    if (TargetProcessHandle == NULL) {
+            
+        status = __sys_NtDuplicateObject(
+            SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
+            DesiredAccess, HandleAttributes, Options);
+
+    } else {
+        
+        status = __sys_NtDuplicateObject(
+            SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
+            DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
+    }
 
     if (NT_SUCCESS(status)) {
 
-        if (Options & DUPLICATE_CLOSE_SOURCE) {
+        if (TargetProcessHandle != NULL && (Options & DUPLICATE_CLOSE_SOURCE)) {
 
             //
             // issue NtDuplicateObject again with no TargetProcessHandle
@@ -777,7 +786,7 @@ _FX NTSTATUS Secure_NtDuplicateObject(
             }
 
             if (SourceHandle)
-                Key_NtClose(SourceHandle, NULL);
+                Key_NtClose(SourceHandle, NULL); // clear cached state for reg keys
         }
 
     //

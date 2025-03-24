@@ -3,14 +3,24 @@
 #include "SbieProcess.h"
 #include "SandMan.h"
 #include "..\MiscHelpers\Common\Common.h"
+
+#include <ntstatus.h>
+#define WIN32_NO_STATUS
+typedef long NTSTATUS;
+
 #include <windows.h>
 #include <Shlobj_core.h>
+
 #include "BoxMonitor.h"
 #include "..\MiscHelpers\Common\OtherFunctions.h"
 #include "../QSbieAPI/SbieUtils.h"
 #include "../MiscHelpers/Archive/Archive.h"
 #include <QtConcurrent>
 #include "Helpers/WinHelper.h"
+
+#include "..\..\Sandboxie\common\win32_ntddk.h"
+
+#include "../QSbieAPI/Helpers/NtIO.h"
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
@@ -353,6 +363,40 @@ SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName, const QString& Pass
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
 	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, m_FilePath, m_Name, Password);
+	return SB_PROGRESS(OP_ASYNC, pProgress);
+}
+
+SB_STATUS CSandBoxPlus_CopyFolder(const CSbieProgressPtr& pProgress, const QString& SourcePath, const QString& DestinationPath)
+{
+	SNtObject src_dir(L"\\??\\" + SourcePath.toStdWString());
+	SNtObject dest_dir(L"\\??\\" + DestinationPath.toStdWString());
+	NTSTATUS status = NtIo_CopyFolder(&src_dir.attr, &dest_dir.attr, [](const WCHAR* info, void* param) {
+		CSbieProgress* pProgress = (CSbieProgress*)param;
+		pProgress->ShowMessage(CSandBox::tr("Copying folder: %1").arg(QString::fromWCharArray(info)));
+		return !pProgress->IsCanceled();
+	}, pProgress.data());
+	if (!NT_SUCCESS(status) && status != STATUS_OBJECT_NAME_NOT_FOUND && status != STATUS_OBJECT_PATH_NOT_FOUND)
+		return SB_ERR((ESbieMsgCodes)SBX_FailedCopyDir, QVariantList() << SourcePath << DestinationPath, status);
+	return SB_OK;
+}
+
+void CSandBoxPlus::CopyBoxAsync(const CSbieProgressPtr& pProgress, const QString& SrcDir, const QString& DestDir)
+{
+	SB_STATUS Status = CSandBoxPlus_CopyFolder(pProgress, SrcDir, DestDir);
+
+	pProgress->Finish(Status);
+}
+
+SB_PROGRESS CSandBoxPlus::CopyBox(const QString& DestDir)
+{
+	if (theAPI->HasProcesses(m_Name))
+		return SB_ERR(SB_SnapIsRunning); // todo
+
+	if (!IsInitialized())
+		return SB_OK; // nothing to do
+
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+	QtConcurrent::run(CSandBoxPlus::CopyBoxAsync, pProgress, GetFileRoot(), DestDir);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
@@ -1209,6 +1253,12 @@ typedef long NTSTATUS;
 
 void CSbieTemplatesEx::CollectUpdates()
 {
+	if (theConf->GetInt("Options/ScanWindowsUpdates", 1) == 0)
+		return;
+
+	theConf->SetValue("Options/ScanWindowsUpdates", 2);
+	theConf->Sync();
+
 	IUpdateSession* updateSession = NULL;
 	IUpdateSearcher* updateSearcher = NULL;
 	ISearchResult* searchResult = NULL;
@@ -1308,6 +1358,9 @@ cleanup:
 	if (updateSession != NULL) updateSession->Release();
 
 	CoUninitialize();
+
+	theConf->SetValue("Options/ScanWindowsUpdates", 1);
+	theConf->Sync();
 }
 
 void CSbieTemplatesEx::Reset()

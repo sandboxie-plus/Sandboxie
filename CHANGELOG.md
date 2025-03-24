@@ -4,9 +4,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.9 / 5.70.9] - 2025-03-??
 
+### Added
+- Duplicate Sandbox with content from UI [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)
+
+### Changed
+- when no proxy for a given ip type is configured, the connectionis failed
+  - this change prevents IP leckage when runnign dual stack IPv4 and IPv6 but havong only one proxy type configured
+
 ### Fixed
-- fixed the encoding issue with the bullet character in the box delete/remove confirmation dialog [475683e3](https://github.com/sandboxie-plus/Sandboxie/commit/475683e3fada1d97e3a90b4801e6572be3121f9d)
- [#4591](https://github.com/sandboxie-plus/Sandboxie/issues/4591)
+- fixed the encoding issue with the bullet character in the box delete/remove confirmation dialog [#4591](https://github.com/sandboxie-plus/Sandboxie/issues/4591)
+- Changing the box settings/type causes some template settings in the box to be duplicated [#4595](https://github.com/sandboxie-plus/Sandboxie/issues/4595)
+- Added warnign when atemptig to put a sandbox is in the root of a partition [#4582](https://github.com/sandboxie-plus/Sandboxie/issues/4582)
+- fixed Bug when uninstalling [#4540](https://github.com/sandboxie-plus/Sandboxie/issues/4540)
+- fixed Golang Cmd.Run() doesn't return when running in Sandboxie [#4538](https://github.com/sandboxie-plus/Sandboxie/issues/4538)
+  - fixed a generic handle duplication issue which may help many other applications to
+- improved When Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
+- fixed Sandboxie freezes/crashes in certain installation [#4537](https://github.com/sandboxie-plus/Sandboxie/issues/4537)
+  - when sandman hangs and gets terminated it wil ask on next start if to disable update scanning for software comaptybility checks
+
+
+
 
 
 ## [1.15.8 / 5.70.8] - 2025-03-12

@@ -77,10 +77,10 @@ void COptionsWindow::LoadTemplates()
 
 void COptionsWindow::SetTemplate(const QString& Template, bool bEnabled)
 {
-	if(bEnabled)
-		m_BoxTemplates.append(Template);
-	else
+	if(!bEnabled)
 		m_BoxTemplates.removeAll(Template);
+	else if(!m_BoxTemplates.contains(Template))
+		m_BoxTemplates.append(Template);
 	m_TemplatesChanged = true; 
 	OnOptChanged();
 }

@@ -2604,6 +2604,13 @@ void CSandMan::OnStatusChanged()
 			}
 		}
 
+		if (theConf->GetInt("Options/ScanWindowsUpdates", 1) == 2)
+		{
+			auto Ret = QMessageBox::question(NULL, "Sandboxie-Plus", tr("Sandman die not finish enumerating installed windows updates last time, it probably hang.\n"
+				"Do you want to disable Windows Updates scanning from the the software compatibility detection?"), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default);
+			theConf->SetValue("Options/ScanWindowsUpdates", Ret == QMessageBox::Yes ? 0 : 1);
+		}
+
 		if (theConf->GetBool("Options/AutoRunSoftCompat", true) && g_PendingMessage.isEmpty())
 			CheckCompat(this, "OpenCompat");
 	}

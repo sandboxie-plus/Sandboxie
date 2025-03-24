@@ -1039,7 +1039,12 @@ void COptionsWindow::SaveNetProxy()
 			QMessageBox::warning(this, "SandboxiePlus", QString::number(i + 1) + tr(" entry: IP or Port cannot be empty"));
 			continue;
 		}
-		 
+
+		if (QHostAddress(IP).isNull()) {
+			QMessageBox::warning(this, "SandboxiePlus", QString::number(i + 1) + tr(" entry: Address must be IP, not host name"));
+			continue;
+		}
+
 		QStringList Tags;
 
 		if (Program.isEmpty()) Program = "*";

@@ -242,6 +242,7 @@ void CSbieView::CreateMenu()
 	
 	m_pMenuTools = m_pMenuBox->addMenu(CSandMan::GetIcon("Maintenance"), tr("Sandbox Tools"));
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
+		m_pMenuDuplicateEx = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box with Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Box"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport->setEnabled(CArchive::IsInit());
 
@@ -343,6 +344,7 @@ void CSbieView::CreateOldMenu()
 
 		m_pMenuTools->addSeparator();
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox Config"), this, SLOT(OnSandBoxAction()));
+		m_pMenuDuplicateEx = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox with Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Sandbox"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport->setEnabled(CArchive::IsInit());
 
@@ -1368,7 +1370,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			SetForegroundWindow((HWND)pSnapshotsWindow->winId());
 		}
 	}
-	else if (Action == m_pMenuDuplicate)
+	else if (Action == m_pMenuDuplicate || Action == m_pMenuDuplicateEx)
 	{
 		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
 		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the duplicated Sandbox."), QLineEdit::Normal, tr("%1 Copy").arg(OldValue));
@@ -1377,25 +1379,24 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		
 		QString Name = Value.replace(" ", "_");
 		SB_STATUS Status = theAPI->CreateBox(Name, false);
-
+		
+		CSandBoxPtr pSrcBox;
 		if (!Status.IsError())
 		{
-			CSandBoxPtr pBox = theAPI->GetBoxByName(Value);
-
-			QList<QPair<QString, QString>> Settings;
-			CSandBoxPtr pSrcBox = theAPI->GetBoxByName(SandBoxes.first()->GetName());
+			QList<CSbieIni::SbieIniValue> Settings;
+			pSrcBox = theAPI->GetBoxByName(SandBoxes.first()->GetName());
 			qint32 status = 0;
 			if (!pSrcBox.isNull()) Settings = pSrcBox->GetIniSection(&status);
 			if (Settings.isEmpty())
 				Status = SB_ERR(SB_FailedCopyConf, QVariantList() << SandBoxes.first()->GetName() << (quint32)status);
 			else
 			{
-				for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
+				for (QList<CSbieIni::SbieIniValue>::iterator I = Settings.begin(); I != Settings.end(); ++I)
 				{
-					if (I->first == "FileRootPath" && !I->second.toUpper().contains("%SANDBOX%"))
+					if (I->Name == "FileRootPath" && !I->Value.toUpper().contains("%SANDBOX%"))
 						continue; // skip the FileRootPath if it does not contain a %SANDBOX% 
 
-					Status = theAPI->SbieIniSet(Name, I->first, I->second, CSbieAPI::eIniAppend, false);
+					Status = theAPI->SbieIniSet(Name, I->Name, I->Value, CSbieIni::eIniAppend, false);
 					if (Status.IsError())
 						break;
 				}
@@ -1405,6 +1406,25 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			theAPI->ReloadBoxes(true);
 		}
 
+		CSandBoxPtr pDestBox;
+		if (!Status.IsError())
+		{
+			pDestBox = theAPI->GetBoxByName(Name);
+			if(!pDestBox)
+				Status = SB_ERR(SB_FailedCopyConf, QVariantList() << SandBoxes.first()->GetName() << tr("Not Created"));
+		}
+
+		if (Action == m_pMenuDuplicateEx && !Status.IsError())
+		{
+			auto pSrcBoxEx = pSrcBox.objectCast<CSandBoxPlus>();
+			SB_PROGRESS Progress = pSrcBoxEx->CopyBox(pDestBox->GetFileRoot());
+
+			if (Progress.GetStatus() == OP_ASYNC)
+				Status = theGUI->AddAsyncOp(Progress.GetValue(), false, tr("Copying: %1").arg(Value));
+			else
+				Status = Progress;
+		}
+		
 		Results.append(Status);
 	}
 	else if (Action == m_pMenuExport)

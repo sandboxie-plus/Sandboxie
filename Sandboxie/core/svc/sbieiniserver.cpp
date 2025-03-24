@@ -36,6 +36,7 @@
 #define RC4_HEADER_ONLY
 #include "common/rc4.c"
 #include "core/drv/api_defs.h"
+#include "DriverAssist.h"
 
 #ifdef NEW_INI_MODE
 extern "C" {
@@ -522,14 +523,15 @@ bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken)
         return false;
 
     ULONG username_len = sizeof(m_username) / sizeof(WCHAR) - 4;
-    WCHAR domain[256];
-    ULONG domain_len = sizeof(domain) / sizeof(WCHAR) - 4;
-    SID_NAME_USE use;
+    //WCHAR domain[256];
+    //ULONG domain_len = sizeof(domain) / sizeof(WCHAR) - 4;
+    //SID_NAME_USE use;
 
     m_username[0] = L'\0';
 
-    ok = LookupAccountSid(NULL, info.user.User.Sid,
-            m_username, &username_len, domain, &domain_len, &use);
+    //ok = LookupAccountSid(NULL, info.user.User.Sid,
+    //        m_username, &username_len, domain, &domain_len, &use);
+    ok = DriverAssist::LookupSidCached(info.user.User.Sid, m_username, &username_len);
     if (! ok || ! m_username[0])
         return false;
 

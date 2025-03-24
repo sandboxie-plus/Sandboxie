@@ -66,12 +66,14 @@ DriverAssist::DriverAssist()
 
     InitializeCriticalSection(&m_LogMessage_CritSec);
     InitializeCriticalSection(&m_critSecHostInjectedSvcs);
+    InitializeCriticalSection(&m_SidCache_CritSec);
 }
 
 DriverAssist::~DriverAssist()
 {
 	DeleteCriticalSection(&m_LogMessage_CritSec);
 	DeleteCriticalSection(&m_critSecHostInjectedSvcs);
+	DeleteCriticalSection(&m_SidCache_CritSec);
 }
 
 
@@ -374,6 +376,57 @@ void DriverAssist::Thread()
 
 
 //---------------------------------------------------------------------------
+// LookupSidCached
+//---------------------------------------------------------------------------
+
+
+bool DriverAssist::LookupSidCached(const PSID pSid, WCHAR* UserName, ULONG* UserNameLen)
+{
+    bool ok = false;
+    WCHAR domain[256];
+    ULONG domain_len = sizeof(domain) / sizeof(WCHAR) - 4;
+    SID_NAME_USE use;
+
+    LPWSTR pStr;
+    if (!ConvertSidToStringSid(pSid, &pStr))
+        return false;
+
+
+    EnterCriticalSection(&m_instance->m_SidCache_CritSec);
+
+    auto I = m_instance->m_SidCache.find(pStr);
+    if (I != m_instance->m_SidCache.end())
+    {
+        wcscpy_s(UserName, *UserNameLen, I->second.c_str());
+        *UserNameLen = I->second.length();
+        ok = true;
+    }
+    
+    LeaveCriticalSection(&m_instance->m_SidCache_CritSec);
+
+
+    if (!ok) {
+
+        ok = LookupAccountSid(NULL, pSid, UserName, UserNameLen, domain, &domain_len, &use);
+
+        if (ok) {
+
+            EnterCriticalSection(&m_instance->m_SidCache_CritSec);
+
+            m_instance->m_SidCache[pStr] = UserName;
+
+            LeaveCriticalSection(&m_instance->m_SidCache_CritSec);
+        }
+    }
+
+
+    LocalFree(pStr);
+
+    return ok;
+}
+
+
+//---------------------------------------------------------------------------
 // LookupSid
 //---------------------------------------------------------------------------
 
@@ -391,14 +444,15 @@ void DriverAssist::LookupSid(void *_msg)
 
     WCHAR username[256];
     ULONG username_len = sizeof(username) / sizeof(WCHAR) - 4;
-    WCHAR domain[256];
-    ULONG domain_len = sizeof(domain) / sizeof(WCHAR) - 4;
-    SID_NAME_USE use;
+    //WCHAR domain[256];
+    //ULONG domain_len = sizeof(domain) / sizeof(WCHAR) - 4;
+    //SID_NAME_USE use;
 
     username[0] = L'\0';
 
-    b = LookupAccountSid(
-        NULL, pSid, username, &username_len, domain, &domain_len, &use);
+    //b = LookupAccountSid(
+    //    NULL, pSid, username, &username_len, domain, &domain_len, &use);
+    b = LookupSidCached(pSid, username, &username_len);
 
     if ((! b) && GetLastError() == ERROR_NONE_MAPPED) {
 

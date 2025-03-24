@@ -1319,7 +1319,7 @@ void CSandMan::OnRestartAsAdmin()
 	se.lpFile = buf;
 	se.nShow = SW_HIDE;
 	se.fMask = 0;
-	ShellExecuteEx(&se);
+	ShellExecuteExW(&se);
 	m_bExit = true;
 	close();
 }

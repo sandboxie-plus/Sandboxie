@@ -2,7 +2,5 @@
 * Missing Messages in Text-Korean-1042.txt
 *==========
 
-1321;pop;inf;01
-SBIE1321 Program '%2' was forced into sandbox %3
-.
+There are no missing messages.
 

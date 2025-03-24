@@ -443,8 +443,11 @@ NTSTATUS NtIo_CopyReparsePoint(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUT
 
         USHORT substOffset = pReparseData->SymbolicLinkReparseBuffer.SubstituteNameOffset;
         USHORT substLength = pReparseData->SymbolicLinkReparseBuffer.SubstituteNameLength;
-
         std::wstring target(reinterpret_cast<wchar_t*>(pReparseData->SymbolicLinkReparseBuffer.PathBuffer + (substOffset / sizeof(WCHAR))), substLength / sizeof(WCHAR));
+
+		USHORT printOffset = pReparseData->SymbolicLinkReparseBuffer.PrintNameOffset;
+        USHORT printLength = pReparseData->SymbolicLinkReparseBuffer.PrintNameLength;
+		std::wstring display(reinterpret_cast<wchar_t*>(pReparseData->SymbolicLinkReparseBuffer.PathBuffer + (printOffset / sizeof(WCHAR))), printLength / sizeof(WCHAR));
 
         target = NtIo_ResolveObjectPath(target);
 
@@ -452,14 +455,12 @@ NTSTATUS NtIo_CopyReparsePoint(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUT
 
 			std::wstring newTarget = destBase + target.substr(srcBase.size());
 
-			const std::wstring& printName = newTarget;
+			const std::wstring& printName = display;
 			const std::wstring& substName = newTarget;
 
 			const size_t substLen = substName.size() * sizeof(WCHAR);
 			const size_t printLen = printName.size() * sizeof(WCHAR);
-			const size_t pathBufferSize = substLen + printLen;
-			const size_t reparseDataSize = 12 + pathBufferSize;
-			const size_t totalLen = FIELD_OFFSET(REPARSE_DATA_BUFFER, SymbolicLinkReparseBuffer.PathBuffer) + pathBufferSize;
+			const size_t totalLen = FIELD_OFFSET(REPARSE_DATA_BUFFER, SymbolicLinkReparseBuffer.PathBuffer) + substLen + printLen;
 
 			std::vector<BYTE> newReparseBuffer(totalLen);
 			REPARSE_DATA_BUFFER* pBuf = (REPARSE_DATA_BUFFER*)newReparseBuffer.data();
@@ -501,8 +502,11 @@ NTSTATUS NtIo_CopyReparsePoint(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUT
 
         USHORT substOffset = pReparseData->MountPointReparseBuffer.SubstituteNameOffset;
         USHORT substLength = pReparseData->MountPointReparseBuffer.SubstituteNameLength;
-
         std::wstring target(reinterpret_cast<wchar_t*>(pReparseData->MountPointReparseBuffer.PathBuffer + (substOffset / sizeof(WCHAR))), substLength / sizeof(WCHAR));
+
+		USHORT printOffset = pReparseData->MountPointReparseBuffer.PrintNameOffset;
+        USHORT printLength = pReparseData->MountPointReparseBuffer.PrintNameLength;
+		std::wstring display(reinterpret_cast<wchar_t*>(pReparseData->MountPointReparseBuffer.PathBuffer + (printOffset / sizeof(WCHAR))), printLength / sizeof(WCHAR));
 
 		target = NtIo_ResolveObjectPath(target);
 
@@ -510,7 +514,7 @@ NTSTATUS NtIo_CopyReparsePoint(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUT
 
 			std::wstring newTarget = destBase + target.substr(srcBase.size());
 
-			const std::wstring& printName = newTarget;
+			const std::wstring& printName = display;
 			const std::wstring& substName = newTarget;
 
 			const size_t substLen = substName.size() * sizeof(WCHAR);
@@ -608,6 +612,73 @@ NTSTATUS NtIo_CopySecurity(HANDLE src, HANDLE dst)
     return status;
 }
 
+extern "C" {
+
+NTSTATUS NTAPI NtQueryEaFile(
+    HANDLE FileHandle,
+    PIO_STATUS_BLOCK IoStatusBlock,
+    PVOID Buffer,
+    ULONG Length,
+    BOOLEAN ReturnSingleEntry,
+    PVOID EaList OPTIONAL,
+    ULONG EaListLength,
+    PULONG EaIndex OPTIONAL,
+    BOOLEAN RestartScan
+);
+
+NTSTATUS NTAPI NtSetEaFile(
+    HANDLE FileHandle,
+    PIO_STATUS_BLOCK IoStatusBlock,
+    PVOID EaBuffer,
+    ULONG EaBufferSize
+);
+
+}
+
+NTSTATUS NtIo_CopyFile(
+	POBJECT_ATTRIBUTES src_objattrs,
+	POBJECT_ATTRIBUTES dest_objattrs,
+	bool (*cb)(const WCHAR* info, void* param),
+	void* param);
+
+void NtIo_CopyMetadata(HANDLE srcHandle, HANDLE dstHandle,
+                                          POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES dst_objattrs) {
+    IO_STATUS_BLOCK IoStatusBlock;
+
+    // Copy EA
+    void* eaBuffer = malloc(64 * 1024);
+    ULONG eaLength = 0;
+    NTSTATUS status = NtQueryEaFile(srcHandle, &IoStatusBlock, eaBuffer, 64 * 1024, FALSE, NULL, 0, NULL, TRUE);
+    if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_SUCCESS) {
+        eaLength = (ULONG)IoStatusBlock.Information;
+        if (eaLength > 0)
+            NtSetEaFile(dstHandle, &IoStatusBlock, eaBuffer, eaLength);
+    }
+    free(eaBuffer);
+
+    // Copy ADS
+    FILE_STREAM_INFORMATION* streamInfo = (FILE_STREAM_INFORMATION*)malloc(PAGE_SIZE);
+    status = NtQueryInformationFile(srcHandle, &IoStatusBlock, streamInfo, PAGE_SIZE, FileStreamInformation);
+    if (NT_SUCCESS(status) && IoStatusBlock.Information >= sizeof(FILE_STREAM_INFORMATION)) {
+        FILE_STREAM_INFORMATION* entry = streamInfo;
+        while (true) {
+            std::wstring streamName(entry->StreamName, entry->StreamNameLength / sizeof(WCHAR));
+            if (!streamName.empty() && streamName.find(L":") != std::wstring::npos && streamName != L"::$DATA") {
+                std::wstring srcStreamPath = std::wstring(src_objattrs->ObjectName->Buffer) + streamName;
+                std::wstring dstStreamPath = std::wstring(dst_objattrs->ObjectName->Buffer) + streamName;
+
+                SNtObject srcStreamObj(srcStreamPath);
+                SNtObject dstStreamObj(dstStreamPath);
+
+                NtIo_CopyFile(&srcStreamObj.attr, &dstStreamObj.attr, nullptr, nullptr);
+            }
+            if (entry->NextEntryOffset == 0) break;
+            entry = (FILE_STREAM_INFORMATION*)((BYTE*)entry + entry->NextEntryOffset);
+        }
+    }
+    free(streamInfo);
+}
+
 NTSTATUS NtIo_CopyFile(
     POBJECT_ATTRIBUTES src_objattrs,
     POBJECT_ATTRIBUTES dest_objattrs,
@@ -684,9 +755,15 @@ NTSTATUS NtIo_CopyFile(
 		}
 	}
 
-	if (NT_SUCCESS(status)) {
+	const WCHAR* fullName = src_objattrs->ObjectName->Buffer;
+    const WCHAR* lastSlash = wcsrchr(fullName, L'\\');
+    const WCHAR* colon = wcschr(fullName, L':');
+    bool isStream = colon && (!lastSlash || colon > lastSlash);
+
+	if (NT_SUCCESS(status) && !isStream) {
 		NtIo_CopyBasicInfo(src_handle, dst_handle);
 		NtIo_CopySecurity(src_handle, dst_handle);
+        NtIo_CopyMetadata(src_handle, dst_handle, src_objattrs, dest_objattrs);
 	}
 
     NtClose(src_handle);
@@ -726,6 +803,7 @@ NTSTATUS NtIo_CopyFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES des
 
     NtIo_CopyBasicInfo(srcHandle, destFolderHandle);
     NtIo_CopySecurity(srcHandle, destFolderHandle);
+	NtIo_CopyMetadata(srcHandle, destFolderHandle, src_objattrs, dest_objattrs);
 
     std::wstring srcBase = src_objattrs->ObjectName->Buffer;
     std::wstring destBase = dest_objattrs->ObjectName->Buffer;

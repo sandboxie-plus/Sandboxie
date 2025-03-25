@@ -1383,7 +1383,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		CSandBoxPtr pSrcBox;
 		if (!Status.IsError())
 		{
-			QList<CSbieIni::SbieIniValue> Settings;
+			QList<QPair<QString, QString>> Settings;
 			pSrcBox = theAPI->GetBoxByName(SandBoxes.first()->GetName());
 			qint32 status = 0;
 			if (!pSrcBox.isNull()) Settings = pSrcBox->GetIniSection(&status);
@@ -1391,12 +1391,12 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				Status = SB_ERR(SB_FailedCopyConf, QVariantList() << SandBoxes.first()->GetName() << (quint32)status);
 			else
 			{
-				for (QList<CSbieIni::SbieIniValue>::iterator I = Settings.begin(); I != Settings.end(); ++I)
+				for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
 				{
-					if (I->Name == "FileRootPath" && !I->Value.toUpper().contains("%SANDBOX%"))
+					if (I->first == "FileRootPath" && !I->second.toUpper().contains("%SANDBOX%"))
 						continue; // skip the FileRootPath if it does not contain a %SANDBOX% 
 
-					Status = theAPI->SbieIniSet(Name, I->Name, I->Value, CSbieIni::eIniAppend, false);
+					Status = theAPI->SbieIniSet(Name, I->first, I->second, CSbieAPI::eIniAppend, false);
 					if (Status.IsError())
 						break;
 				}

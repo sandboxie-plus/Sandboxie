@@ -200,6 +200,7 @@ private:
 	QAction*				m_pMenuRemove;
 	QMenu*					m_pMenuTools;
 	QAction*				m_pMenuDuplicate;
+	QAction*				m_pMenuDuplicateEx;
 	QAction*				m_pMenuExport;
 	QAction*				m_pMenuMoveUp;
 	//QAction*				m_pMenuMoveBy;

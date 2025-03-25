@@ -511,28 +511,28 @@ _FX ULONG File_GetTempPathW(ULONG nBufferLength, WCHAR *lpBuffer)
 
 //BOOLEAN RpcRt_TestCallingModule(ULONG_PTR pRetAddr, ULONG_PTR hModule);
 
-BOOL File_WriteProcessMemory(
-    HANDLE hProcess,
-    LPVOID lpBaseAddress,
-    LPCVOID lpBuffer,
-    SIZE_T nSize,
-    SIZE_T * lpNumberOfBytesWritten)
-{
-    //
-    // this function is only hooked when Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX
-    //
-
-    // $Workaround$ - 3rd party fix
-    if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
-        lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
-    //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
-    {
-        if (lpNumberOfBytesWritten)
-        {
-            *lpNumberOfBytesWritten = nSize;
-        }
-        return TRUE; // ignore
-    }
-
-    return __sys_WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten);
-}
+//BOOL File_WriteProcessMemory(
+//    HANDLE hProcess,
+//    LPVOID lpBaseAddress,
+//    LPCVOID lpBuffer,
+//    SIZE_T nSize,
+//    SIZE_T * lpNumberOfBytesWritten)
+//{
+//    //
+//    // this function is only hooked when Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX
+//    //
+//
+//    // $Workaround$ - 3rd party fix
+//    if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
+//        lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
+//    //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
+//    {
+//        if (lpNumberOfBytesWritten)
+//        {
+//            *lpNumberOfBytesWritten = nSize;
+//        }
+//        return TRUE; // ignore
+//    }
+//
+//    return __sys_WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten);
+//}

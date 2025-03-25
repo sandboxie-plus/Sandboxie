@@ -1397,7 +1397,7 @@ finish:
         }
 #endif
 		wcscat(dbg_ptr, L"\r\n");
-        SbieApi_MonitorPutMsg(MONITOR_HOOK | MONITOR_TRACE, dbg);
+        SbieApi_MonitorPutMsg(MONITOR_HOOK | MONITOR_TRACE | ((HookStats & HOOK_STAT_SKIPPED) ? MONITOR_OPEN : 0), dbg);
     }
 
     return func;

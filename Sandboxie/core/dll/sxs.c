@@ -104,11 +104,11 @@ static BOOLEAN Sxs_CheckCompatLayer_3(
 
 //---------------------------------------------------------------------------
 
-static NTSTATUS Sxs_NtSetInformationThread(
-    HANDLE          ThreadHandle,
-    THREADINFOCLASS ThreadInformationClass,
-    PVOID           ThreadInformation,
-    ULONG           ThreadInformationLength);
+//static NTSTATUS Sxs_NtSetInformationThread(
+//    HANDLE          ThreadHandle,
+//    THREADINFOCLASS ThreadInformationClass,
+//    PVOID           ThreadInformation,
+//    ULONG           ThreadInformationLength);
 
 static NTSTATUS Sxs_NtCreateTransaction(
     HANDLE *TransactionHandle,
@@ -195,7 +195,7 @@ static P_SetThreadUILanguage        __sys_SetThreadUILanguage       = NULL;
 
 static P_GetUserDefaultUILanguage   __sys_GetUserDefaultUILanguage  = NULL;
 
-P_NtSetInformationThread            __sys_NtSetInformationThread    = NULL;
+//P_NtSetInformationThread            __sys_NtSetInformationThread    = NULL;
 static P_NtCreateTransaction        __sys_NtCreateTransaction       = NULL;
 static P_NtOpenTransaction          __sys_NtOpenTransaction         = NULL;
 static P_NtCommitTransaction        __sys_NtCommitTransaction       = NULL;
@@ -1467,17 +1467,17 @@ _FX void Sxs_QueryActCtxW_2(ULONG *p_len, WCHAR **p_path)
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Sxs_NtSetInformationThread(
-    HANDLE          ThreadHandle,
-    THREADINFOCLASS ThreadInformationClass,
-    PVOID           ThreadInformation,
-    ULONG           ThreadInformationLength)
-{
-    return __sys_NtSetInformationThread(ThreadHandle,
-        ThreadInformationClass,
-        ThreadInformation,
-        ThreadInformationLength);
-}
+//_FX NTSTATUS Sxs_NtSetInformationThread(
+//    HANDLE          ThreadHandle,
+//    THREADINFOCLASS ThreadInformationClass,
+//    PVOID           ThreadInformation,
+//    ULONG           ThreadInformationLength)
+//{
+//    return __sys_NtSetInformationThread(ThreadHandle,
+//        ThreadInformationClass,
+//        ThreadInformation,
+//        ThreadInformationLength);
+//}
 
 
 //---------------------------------------------------------------------------
@@ -1600,7 +1600,7 @@ _FX BOOLEAN Sxs_InitKernel32(void)
 {
     HMODULE module;
     void *CreateActCtxW;
-    void *NtSetInformationThread;
+    //void *NtSetInformationThread;
     void *NtCreateTransaction;
     void *NtOpenTransaction;
     void *NtCommitTransaction;
@@ -1686,12 +1686,16 @@ _FX BOOLEAN Sxs_InitKernel32(void)
     //
     // Opera hooks NtSetInformationThread. SboxDll calls __sys_NtSetInformationThread to bypass Opera hook.
     // See the comment about Thread_SetInformationThread_ChangeNotifyToken in Gui_ConnectToWindowStationAndDesktop
+    // 
+    // Tested with opera 117 and this workaround seams no longer required
+    // 
+    // Note: this hook breaks firefox 137
     //
 
-    NtSetInformationThread = GetProcAddress(Dll_Ntdll, "NtSetInformationThread");
-    if (NtSetInformationThread) {
-        SBIEDLL_HOOK(Sxs_, NtSetInformationThread);
-    }
+    //NtSetInformationThread = GetProcAddress(Dll_Ntdll, "NtSetInformationThread");
+    //if (NtSetInformationThread) {
+    //    SBIEDLL_HOOK(Sxs_, NtSetInformationThread);
+    //}
 
     //
     // place ntdll.dll hooks only if TrustedInstaller

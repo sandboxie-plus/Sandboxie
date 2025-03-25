@@ -99,6 +99,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNetFwTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDnsTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkApiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkHookTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -274,7 +275,8 @@ void COptionsWindow::LoadAdvanced()
 	ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
 	ReadAdvancedCheck("NetFwTrace", ui.chkNetFwTrace, "*");
 	ui.chkDnsTrace->setChecked(m_pBox->GetBool("DnsTrace", false));
-	ui.chkHookTrace->setChecked(m_pBox->GetBool("ApiTrace", false));
+	ui.chkApiTrace->setChecked(m_pBox->GetBool("ApiTrace", false));
+	ui.chkHookTrace->setChecked(m_pBox->GetBool("HookTrace", false));
 	ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 	ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
 
@@ -538,7 +540,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
 	WriteAdvancedCheck(ui.chkNetFwTrace, "NetFwTrace", "*");
 	WriteAdvancedCheck(ui.chkDnsTrace, "DnsTrace", "y");
-	WriteAdvancedCheck(ui.chkHookTrace, "ApiTrace", "y");
+	WriteAdvancedCheck(ui.chkApiTrace, "ApiTrace", "y");
+	WriteAdvancedCheck(ui.chkHookTrace, "HookTrace", "y");
 	WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 	WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
 

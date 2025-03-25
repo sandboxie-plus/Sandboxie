@@ -799,7 +799,7 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
 
     SbieApi_data = data;
 #ifdef _M_ARM64EC
-    // get the pointer to sys_call_list in the SYS_CALL_DATA struct
+    // get the pointer to sys_call_list in the SYSCALL_DATA struct
     SbieApi_SyscallPtr = (ULONG*)((ULONG64)data->syscall_data + sizeof(ULONG) + sizeof(ULONG) + (NATIVE_FUNCTION_SIZE * NATIVE_FUNCTION_COUNT));
 #endif
 

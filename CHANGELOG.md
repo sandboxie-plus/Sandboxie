@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - when no proxy for a given ip type is configured, the connectionis failed
   - this change prevents IP leckage when runnign dual stack IPv4 and IPv6 but havong only one proxy type configured
+- ini editor is no longer reset when saving
 
 ### Fixed
 - fixed the encoding issue with the bullet character in the box delete/remove confirmation dialog [#4591](https://github.com/sandboxie-plus/Sandboxie/issues/4591)
@@ -21,8 +22,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved When Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
 - fixed Sandboxie freezes/crashes in certain installation [#4537](https://github.com/sandboxie-plus/Sandboxie/issues/4537)
   - when sandman hangs and gets terminated it wil ask on next start if to disable update scanning for software comaptybility checks
-
-
+- fixed issue with hook monitor display
+- fixed issue with inis ection editing, eqc no longer closes the window
+- partialy resolved some issues with Firefox 137 Nightly and later [#4522](https://github.com/sandboxie-plus/Sandboxie/issues/4522)
+  - Note: this fix only solves incompatybilities with Green (App Compartment type) Boxes, Yellow are still broken
+  - Note: this change disabled some deprecated hooks for chrome and opera which broke Firefox's own hooks
 
 
 

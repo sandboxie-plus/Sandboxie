@@ -986,12 +986,12 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="705"/>
         <source>A sandbox can not be located at the root fo a partition, please select a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Sandbox kann sich nicht im Stammverzeichnis einer Partition befinden, bitte wählen Sie einen Ordner aus.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="709"/>
         <source>A sandbox can not be located on a network share, please select a local folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Sandbox kann sich nicht auf einer Netzwerkfreigabe befinden, bitte wählen Sie einen lokalen Ordner aus.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="713"/>
@@ -2377,7 +2377,7 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1044"/>
         <source> entry: Address must be IP, not host name</source>
-        <translation type="unfinished"></translation>
+        <translation> Eintrag: Adresse muss eine IP sein, kein Hostname</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1307"/>
@@ -2912,7 +2912,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
         <source>Copying folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiere Ordner: %1</translation>
     </message>
 </context>
 <context>
@@ -3530,7 +3530,8 @@ Nein wählt: %2</translation>
         <location filename="SandMan.cpp" line="2609"/>
         <source>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan hat beim letzten Mal die Ermittlung der installierten Windowsupdates nicht abgeschlossen, es hängt wahrscheinlich.
+Möchten Sie das Scannen von Windowsupdates in der Softwarekompatibilitätserkennung deaktivieren?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2789"/>
@@ -4940,7 +4941,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="245"/>
         <source>Duplicate Box with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliziere Box mit Inhalt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
@@ -5020,7 +5021,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="347"/>
         <source>Duplicate Sandbox with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliziere Sandbox mit Inhalt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="348"/>
@@ -5116,12 +5117,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
         <source>Not Created</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht erstellt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1423"/>
         <source>Copying: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiere: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1580"/>

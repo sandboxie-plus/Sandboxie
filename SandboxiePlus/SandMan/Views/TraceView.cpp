@@ -468,9 +468,11 @@ void CTraceView::Refresh()
 
 		if (bMonitorMode)
 		{
-			CMonitorEntryPtr& pItem = m_MonitorMap[pEntry->GetName().toLower()];
+			QString Name = pEntry->GetName();
+			if (Name.isEmpty())
+				Name = pEntry->GetMessage();
+			CMonitorEntryPtr& pItem = m_MonitorMap[Name.toLower()];
 			if (pItem.data() == NULL) {
-				QString Name = pEntry->GetName();
 				//if (Name.left(9).compare("\\REGISTRY", Qt::CaseInsensitive) == 0) {
 				//	int pos = Name.indexOf("\\", 10);
 				//	Name = Name.left(pos).toUpper() + Name.mid(pos);

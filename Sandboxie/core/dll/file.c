@@ -30,6 +30,7 @@
 #include "core/svc/InteractiveWire.h"
 #include "core/svc/UserWire.h"
 #include "debug.h"
+#include "trace.h"
 
 //---------------------------------------------------------------------------
 // Defines

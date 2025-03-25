@@ -389,7 +389,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         // saved by chrome, rather than the chrome hook itself (32-bit only)
         //
 
-        ZwXxxPtr = Hook_CheckChromeHook(ZwXxxPtr);
+        ZwXxxPtr = Hook_CheckChromeHook(ZwXxxPtr, NULL);
 
         //
         // make the syscall address writable

@@ -219,6 +219,91 @@ WCHAR* Trace_FindModuleByAddress(void* address)
     return found;
 }
 
+BOOLEAN Trace_FindExportByAddress(void* address, WCHAR** pModule, char** pExport, void** pAddress)
+{
+    PLIST_ENTRY Head, Next;
+    PLDR_DATA_TABLE_ENTRY Entry;
+    PPEB peb = (PPEB)NtCurrentPeb();
+
+    EnterCriticalSection((PRTL_CRITICAL_SECTION)peb->LoaderLock);
+
+    Head = &peb->Ldr->InLoadOrderModuleList;
+    Next = Head->Flink;
+
+    while (Next != Head)
+    {
+        Entry = CONTAINING_RECORD(Next, LDR_DATA_TABLE_ENTRY, InLoadOrderLinks);
+        UINT_PTR moduleBase = (UINT_PTR)Entry->DllBase;
+        UINT_PTR moduleEnd  = moduleBase + Entry->SizeOfImage;
+
+        if ((UINT_PTR)address >= moduleBase && (UINT_PTR)address < moduleEnd)
+        {
+            PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)Entry->DllBase;
+            if (dosHeader->e_magic != IMAGE_DOS_SIGNATURE)
+                goto nextModule;
+
+            PIMAGE_NT_HEADERS ntHeaders = (PIMAGE_NT_HEADERS)(moduleBase + dosHeader->e_lfanew);
+            if (ntHeaders->Signature != IMAGE_NT_SIGNATURE)
+                goto nextModule;
+
+            IMAGE_DATA_DIRECTORY exportDirData = ntHeaders->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT];
+            if (exportDirData.VirtualAddress == 0)
+                goto nextModule; 
+
+            PIMAGE_EXPORT_DIRECTORY exportDir = (PIMAGE_EXPORT_DIRECTORY)(moduleBase + exportDirData.VirtualAddress);
+            DWORD* functions = (DWORD*)(moduleBase + exportDir->AddressOfFunctions);
+            DWORD* names     = (DWORD*)(moduleBase + exportDir->AddressOfNames);
+            WORD*  ordinals  = (WORD*)(moduleBase + exportDir->AddressOfNameOrdinals);
+            DWORD  numNames  = exportDir->NumberOfNames;
+
+            UINT_PTR bestFuncAddr = 0;
+            char* bestExportName = NULL;
+
+            // First pass: find the export with the highest address that is <= given address.
+            for (DWORD i = 0; i < numNames; i++)
+            {
+                DWORD funcRVA = functions[ordinals[i]];
+                UINT_PTR funcAddr = moduleBase + funcRVA;
+                if (funcAddr <= (UINT_PTR)address && funcAddr > bestFuncAddr)
+                {
+                    bestFuncAddr = funcAddr;
+                    bestExportName = (char*)(moduleBase + names[i]);
+                }
+            }
+
+            // Second pass: find the next function address after bestFuncAddr.
+            UINT_PTR nextFuncAddr = (UINT_PTR)-1;
+            for (DWORD i = 0; i < numNames; i++)
+            {
+                DWORD funcRVA = functions[ordinals[i]];
+                UINT_PTR funcAddr = moduleBase + funcRVA;
+                if (funcAddr > bestFuncAddr && funcAddr < nextFuncAddr)
+                {
+                    nextFuncAddr = funcAddr;
+                }
+            }
+
+            // Tolerant check: if the given address is before the next export,
+            // then we consider it part of the best matched function.
+            if (bestExportName && ((UINT_PTR)address < nextFuncAddr))
+            {
+                LeaveCriticalSection((PRTL_CRITICAL_SECTION)peb->LoaderLock);
+
+                if (pModule) *pModule = Entry->BaseDllName.Buffer;
+                if (pExport) *pExport = bestExportName;
+                if (pAddress) *pAddress = (void*)bestFuncAddr;
+                return TRUE;
+            }
+        }
+nextModule:
+        Next = Next->Flink;
+    }
+
+    LeaveCriticalSection((PRTL_CRITICAL_SECTION)peb->LoaderLock);
+
+    return FALSE;
+}
+
 
 //---------------------------------------------------------------------------
 // SetInstrumentationCallbackHook
@@ -439,6 +524,27 @@ void __fastcall ApiInstrumentation(const char* pName, void** pStack)
     *sbie_deph -= 1;
 }
 
+
+//---------------------------------------------------------------------------
+// BufferToHexW
+//---------------------------------------------------------------------------
+
+
+void BufferToHexW(const void* lpBuffer, size_t nSize, wchar_t* outBuf, size_t outBufSize)
+{
+    const unsigned char* p = (const unsigned char*)lpBuffer;
+    size_t offset = 0;
+
+    for (size_t i = 0; i < nSize && offset + 4 < outBufSize; ++i)
+    {
+        int written = Sbie_snwprintf(outBuf + offset, outBufSize - offset, L"%02X", p[i]);
+        if (written <= 0 || (size_t)written >= outBufSize - offset)
+            break;
+        offset += written;
+    }
+
+    outBuf[offset] = L'\0';
+}
 
 //---------------------------------------------------------------------------
 // Trace_SbieDrvFunc2Str

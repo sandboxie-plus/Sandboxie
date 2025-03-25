@@ -399,7 +399,7 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
 }
 #endif
 
-_FX void* Hook_CheckChromeHook(void *SourceFunc)
+_FX void* Hook_CheckChromeHook(void *SourceFunc, unsigned char** target)
 {
     if (!SourceFunc)
         return NULL;
@@ -411,6 +411,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc)
      && func[1] == 0xD61F0200) {    // ldr         br          xip0
 
         ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
+        if (target) *target = (unsigned char*)longlongs;
         chrome64Target = findChromeTarget((unsigned char *)longlongs);
     }
     if (chrome64Target) {
@@ -424,6 +425,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc)
         func[1] == 0x48 &&	//mov rax,?
         func[2] == 0xb8) {
         ULONGLONG *longlongs = *(ULONGLONG **)&func[3];
+        if (target) *target = (unsigned char*)longlongs;
         chrome64Target = findChromeTarget((unsigned char *)longlongs);
     }
     // Chrome 49+ 64bit hook
@@ -433,6 +435,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc)
         func[1] == 0xb8 &&
         *(USHORT *)&func[10] == 0xe0ff) /* jmp rax */ {
         ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
+        if (target) *target = (unsigned char*)longlongs;
         chrome64Target = findChromeTarget((unsigned char *)longlongs);
     }
     if (chrome64Target) {
@@ -456,6 +459,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc)
         ULONG i = 0;
         ULONG *longs = *(ULONG **)&func[6];
 
+        if (target) *target = (unsigned char*)longs;
         for (i = 0; i < 20; i++, longs++)
         {
             if (longs[0] == 0x5208EC83 && longs[1] == 0x0C24548B &&

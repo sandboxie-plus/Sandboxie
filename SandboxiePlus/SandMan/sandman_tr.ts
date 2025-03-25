@@ -981,12 +981,12 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="705"/>
         <source>A sandbox can not be located at the root fo a partition, please select a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan bir kök dizinde bulunamaz, lütfen bir alt klasör seçin.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="709"/>
         <source>A sandbox can not be located on a network share, please select a local folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan bir ağ paylaşımında bulunamaz, lütfen yerel bir klasör seçin.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="713"/>
@@ -2049,7 +2049,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1044"/>
         <source> entry: Address must be IP, not host name</source>
-        <translation type="unfinished"></translation>
+        <translation> giriş: Adres IP olmalı, alan adı değil</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1307"/>
@@ -2902,7 +2902,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
         <source>Copying folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klasör kopyalanıyor: %1</translation>
     </message>
 </context>
 <context>
@@ -3510,7 +3510,8 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="2609"/>
         <source>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan yüklü Windows güncellemelerini saymayı bitirememiş, muhtemelen askıda kaldı.
+Yazılım uyumluluğu denetiminden Windows Güncellemeleri taramasını devre dışı bırakmak istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2619"/>
@@ -4893,7 +4894,7 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Views/SbieView.cpp" line="1194"/>
         <source>... and %1 more</source>
-        <translation>... ve %1 daha fazlası</translation>
+        <translation>... ve %1 tane daha</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1319"/>
@@ -5085,7 +5086,7 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Views/SbieView.cpp" line="245"/>
         <source>Duplicate Box with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Yap. İçeriğiyle Çoğalt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="246"/>
@@ -5157,7 +5158,7 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Views/SbieView.cpp" line="347"/>
         <source>Duplicate Sandbox with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alan Yap. İçeriğiyle Çoğalt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="348"/>
@@ -5221,12 +5222,12 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
         <source>Not Created</source>
-        <translation type="unfinished"></translation>
+        <translation>Oluşturulmadı</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1423"/>
         <source>Copying: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopyalanıyor: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1455"/>

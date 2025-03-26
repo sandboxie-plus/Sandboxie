@@ -20,6 +20,13 @@
 // Various generic hooking helpers
 //---------------------------------------------------------------------------
 
+
+/******************************************************
+* WARNING: This code must be position independant !!! *
+*          It is used by the LowLevel.dll shell code! *
+*******************************************************/
+
+
 #ifdef _WIN64
 #define SET_LAST_ERROR(val) __writegsdword(0x68, (val))
 #else
@@ -561,8 +568,8 @@ ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals)
                 LONG delta = *(LONG *)&addr[i + 3];
                 target += delta;
 
-                // must point into g_originals, as of FF 138 it has 20 entries but lets be leniant for future versions
-                if (target >= (ULONG_PTR)g_originals && target <= (ULONG_PTR)(g_originals + sizeof(ULONG_PTR) * 40)) {
+                // must point into g_originals which has INTERCEPTOR_MAX_ID entries (as of FF 138 it 53)
+                if (target >= (ULONG_PTR)g_originals && target <= (ULONG_PTR)(g_originals + sizeof(ULONG_PTR) * 60)) {
 
                     ChromeTarget = *(ULONGLONG**)target;
                     break;
@@ -575,34 +582,33 @@ ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals)
 }
 #endif
 
-_FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase, unsigned char** target)
+_FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
 {
     if (!SourceFunc)
         return NULL;
 #ifdef _M_ARM64
     ULONG *func = (ULONG *)SourceFunc;
-    ULONGLONG *chrome64Target = NULL;
 
     if (func[0] == 0x58000050       // ldr         xip0,ZwCreateFile+8h (07FF99A6FF8C8h)  
      && func[1] == 0xD61F0200) {    // ldr         br          xip0
 
         ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
-        if (target) *target = (unsigned char*)longlongs;
-        chrome64Target = findChromeTarget((unsigned char *)longlongs);
-    }
-    if (chrome64Target) {
-        SourceFunc = chrome64Target;
+        ULONGLONG *chrome64Target = findChromeTarget((unsigned char *)longlongs);
+
+        if (!chrome64Target)
+            return (void*)-1; // failure
+        return chrome64Target;
     }
 #elif _WIN64
     UCHAR *func = (UCHAR *)SourceFunc;
+    ULONGLONG *longlongs = NULL;
     ULONGLONG *chrome64Target = NULL;
 
     if (func[0] == 0x50 &&	//push rax
         func[1] == 0x48 &&	//mov rax,?
         func[2] == 0xb8) 
     {
-        ULONGLONG *longlongs = *(ULONGLONG **)&func[3];
-        if (target) *target = (unsigned char*)longlongs;
+        longlongs = *(ULONGLONG **)&func[3];
         chrome64Target = findChromeTarget((unsigned char *)longlongs);
     }
     // Chrome 49+ 64bit hook
@@ -612,8 +618,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase, unsigned char**
         func[1] == 0xb8 &&
         *(USHORT *)&func[10] == 0xe0ff) //jmp rax
     {
-        ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
-        if (target) *target = (unsigned char*)longlongs;
+        longlongs = *(ULONGLONG **)&func[2];
 
         ULONG uError = 0;
         // Note: A normal string like L"text" would not result in position independent code !!!
@@ -638,14 +643,10 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase, unsigned char**
         func[11] == 0xFF &&
         func[12] == 0xE3) 
     {
-        ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
+        longlongs = *(ULONGLONG **)&func[2];
         chrome64Target = findChromeTarget((unsigned char *)longlongs);
     }*/
-    if (chrome64Target) {
-        SourceFunc = chrome64Target;
-    }
-
-
+    
     /*sboxie 64bit jtable hook signature */
         /* // use this to hook jtable location (useful for debugging)
         //else if(func[0] == 0x51 && func[1] == 0x48 && func[2] == 0xb8 ) {
@@ -655,8 +656,16 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase, unsigned char**
             SourceFunc = (void *) addr;
         }
         */
+
+    if (longlongs) {
+        if (!chrome64Target)
+            return (void*)-1; // failure
+        return chrome64Target;
+    }
 #else
     UCHAR *func = (UCHAR *)SourceFunc;
+    ULONGLONG* chromeTarge = NULL;
+
     if (func[0] == 0xB8 &&                  // mov eax,?
         func[5] == 0xBA &&                  // mov edx,?
         *(USHORT *)&func[10] == 0xE2FF)     // jmp edx
@@ -664,18 +673,21 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase, unsigned char**
         ULONG i = 0;
         ULONG *longs = *(ULONG **)&func[6];
 
-        if (target) *target = (unsigned char*)longs;
         for (i = 0; i < 20; i++, longs++)
         {
             if (longs[0] == 0x5208EC83 && longs[1] == 0x0C24548B &&
                 longs[2] == 0x08245489 && longs[3] == 0x0C2444C7 &&
                 longs[5] == 0x042444C7)
             {
-                SourceFunc = (void *)longs[4];
+                chromeTarge = (void *)longs[4];
                 break;
             }
         }
+
+        if (!chromeTarge)
+            return (void*)-1; // failure
+        return chromeTarge;
     }
 #endif ! _WIN64
-    return SourceFunc;
+    return NULL;
 }

@@ -399,8 +399,8 @@ _FX void *SbieDll_Hook_x86(
 
 #else ! WIN_64
 
-        func = Hook_CheckChromeHook((void *)target, (void*)GET_PEB_IMAGE_BASE, NULL);
-        if (func != (void *)target) {
+        func = Hook_CheckChromeHook((void *)target, (void*)GET_PEB_IMAGE_BASE);
+        if (func && func != (UCHAR*)-1) {
             SourceFunc = func;
             goto skip_e9_rewrite;
         }
@@ -1174,13 +1174,15 @@ _FX void *SbieDll_HookFunc(
     // Chrome sandbox support
     //
 
-    void* OldSourceFunc = SourceFunc;
-    void* ChromeFunc = NULL;
-    SourceFunc = Hook_CheckChromeHook(SourceFunc, (void*)GET_PEB_IMAGE_BASE, &ChromeFunc);
-    if (pHookStats && ChromeFunc) {
-        *pHookStats |= HOOK_STAT_CHROME;
-        if (OldSourceFunc == SourceFunc)
-            *pHookStats |= HOOK_STAT_CHROME_FAIL;
+    void* ChromeFunc = Hook_CheckChromeHook(SourceFunc, (void*)GET_PEB_IMAGE_BASE);
+    if (ChromeFunc) {
+        if (pHookStats) *pHookStats |= HOOK_STAT_CHROME;
+        if (ChromeFunc != (void*)-1)
+            SourceFunc = ChromeFunc;
+        else {
+            SbieApi_Log(2328, _fmt1, SourceFuncName, 1);
+            if (pHookStats) *pHookStats |= HOOK_STAT_CHROME_FAIL;
+        }
     }
 
     //if (OldSourceFunc != SourceFunc) {
@@ -1232,7 +1234,9 @@ _FX void *SbieDll_HookFunc(
         }
         else
         {
-
+            
+            if(strcmp(SourceFuncName, "ShellExecuteExW") != 0) // for these functions its fine
+                SbieApi_Log(2329, _fmt1, SourceFuncName, 1);
             if (pHookStats) *pHookStats |= HOOK_STAT_NO_FFS;
         }
     }
@@ -1395,7 +1399,7 @@ finish:
             dbg_size -= len;
         }
         else if (HookStats & HOOK_STAT_CHROME) {
-            len = Sbie_snwprintf(dbg_ptr, dbg_size, L" (Chrome Hooked)");
+            len = Sbie_snwprintf(dbg_ptr, dbg_size, L" (Chrome Hook Hooked)");
             dbg_ptr += len;
             dbg_size -= len;
         }

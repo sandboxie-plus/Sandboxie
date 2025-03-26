@@ -799,7 +799,7 @@ void CSbieAPI::OnReloadConfig()
 	m_bReloadPending = false;
 	m_bBoxesDirty = true;
 	if (m_IniReLoad) 
-		ReloadConfig();
+		ReloadConfig(true);
 }
 
 extern "C" {

@@ -399,7 +399,7 @@ _FX void *SbieDll_Hook_x86(
 
 #else ! WIN_64
 
-        func = Hook_CheckChromeHook((void *)target, NULL);
+        func = Hook_CheckChromeHook((void *)target, (void*)GET_PEB_IMAGE_BASE, NULL);
         if (func != (void *)target) {
             SourceFunc = func;
             goto skip_e9_rewrite;
@@ -1176,7 +1176,7 @@ _FX void *SbieDll_HookFunc(
 
     void* OldSourceFunc = SourceFunc;
     void* ChromeFunc = NULL;
-    SourceFunc = Hook_CheckChromeHook(SourceFunc, &ChromeFunc);
+    SourceFunc = Hook_CheckChromeHook(SourceFunc, (void*)GET_PEB_IMAGE_BASE, &ChromeFunc);
     if (pHookStats && ChromeFunc) {
         *pHookStats |= HOOK_STAT_CHROME;
         if (OldSourceFunc == SourceFunc)

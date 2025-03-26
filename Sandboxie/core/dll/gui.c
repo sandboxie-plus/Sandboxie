@@ -891,7 +891,7 @@ _FX BOOL DisallowWin32kSystemCallsIsOn()
 // Gui_ConnectToWindowStationAndDesktop
 //---------------------------------------------------------------------------
 
-//extern P_NtSetInformationThread __sys_NtSetInformationThread;
+extern P_NtSetInformationThread __sys_NtSetInformationThread;
 
 _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 {
@@ -1080,16 +1080,16 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
                         rc = 0;
                     else
                         // OriginalToken END
-                        //if (__sys_NtSetInformationThread)
-                        //{
-                        //    rc = __sys_NtSetInformationThread(NtCurrentThread(),
-                        //        ThreadImpersonationToken, &rc, sizeof(rc));
-                        //}
-                        //else
-                        //{
-                        rc = NtSetInformationThread(NtCurrentThread(),
-                            ThreadImpersonationToken, &rc, sizeof(rc));
-                        //}
+                        if (__sys_NtSetInformationThread)
+                        {
+                            rc = __sys_NtSetInformationThread(NtCurrentThread(),
+                                ThreadImpersonationToken, &rc, sizeof(rc));
+                        }
+                        else
+                        {
+                            rc = NtSetInformationThread(NtCurrentThread(),
+                                ThreadImpersonationToken, &rc, sizeof(rc));
+                        }
 
                     Gui_Dummy_WinSta = _GetProcessWindowStation();
 

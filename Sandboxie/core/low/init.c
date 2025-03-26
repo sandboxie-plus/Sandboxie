@@ -51,12 +51,14 @@ typedef long NTSTATUS;
 #define GET_ADDR_OF_PEB __readgsqword(0x60)
 #endif
 //#define GET_ADDR_OF_PROCESS_HEAP ((ULONG_PTR *)(GET_ADDR_OF_PEB + 0x30))
+#define GET_ADDR_OF_PROCESS_BASE (*(ULONG_PTR *)(GET_ADDR_OF_PEB + 0x10))
 
 #else ! _WIN64
 
 // Pointer to 32-bit ProcessHeap is at offset 0x0018 of 32-bit PEB
 #define GET_ADDR_OF_PEB __readfsdword(0x30)
 //#define GET_ADDR_OF_PROCESS_HEAP ((ULONG_PTR *)(GET_ADDR_OF_PEB + 0x18))
+#define GET_ADDR_OF_PROCESS_BASE (*(ULONG_PTR *)(GET_ADDR_OF_PEB + 0x08))
 
 #endif _WIN64
 
@@ -88,8 +90,6 @@ extern void InitInject(SBIELOW_DATA *data, void *DetourCode);
 static void InitSyscalls(SBIELOW_DATA *data, void *);
 
 #ifdef _M_ARM64
-UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName);
-
 static void DisableCHPE(SBIELOW_DATA *data);
 #endif
 
@@ -389,7 +389,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         // saved by chrome, rather than the chrome hook itself (32-bit only)
         //
 
-        ZwXxxPtr = Hook_CheckChromeHook(ZwXxxPtr, NULL);
+        ZwXxxPtr = Hook_CheckChromeHook(ZwXxxPtr, (void*)GET_ADDR_OF_PROCESS_BASE, NULL);
 
         //
         // make the syscall address writable
@@ -597,6 +597,7 @@ _FX void DisableCHPE(SBIELOW_DATA* data)
 {
     SYSCALL_DATA* syscall_data;
     SBIELOW_EXTRA_DATA *extra;
+    ULONG uError = 0;
 
     //
     // Sandboxie on ARM64 requires x86 applications NOT to use the CHPE (Compiled Hybrid Portable Executable)
@@ -627,7 +628,7 @@ _FX void DisableCHPE(SBIELOW_DATA* data)
     extra = (SBIELOW_EXTRA_DATA *) (data->syscall_data + syscall_data->extra_data_offset);
 
     void* RtlImageOptionsEx = FindDllExport((void*)data->ntdll_base, 
-                                    (UCHAR*)extra + extra->RtlImageOptionsEx_offset);
+                                    (UCHAR*)extra + extra->RtlImageOptionsEx_offset, &uError);
     if (!RtlImageOptionsEx)
         return;
 

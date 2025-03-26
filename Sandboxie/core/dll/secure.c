@@ -129,11 +129,11 @@ NTSTATUS Ldr_NtQueryInformationToken(
     ULONG TokenInformationLength,
     ULONG *ReturnLength);
     
-//static BOOL Ldr_NtOpenThreadToken(
-//    HANDLE ThreadHandle, 
-//    DWORD  DesiredAccess, 
-//    BOOL    OpenAsSelf, 
-//    PHANDLE TokenHandle);
+static BOOL Ldr_NtOpenThreadToken(
+    HANDLE ThreadHandle, 
+    DWORD  DesiredAccess, 
+    BOOL    OpenAsSelf, 
+    PHANDLE TokenHandle);
 
 static BOOL Ldr_RtlEqualSid(void * sid1, void * sid2);
 
@@ -208,7 +208,7 @@ static P_NtAccessCheck                  __sys_NtAccessCheck = NULL;
 static P_NtQuerySecurityAttributesToken __sys_NtQuerySecurityAttributesToken = NULL;
 static P_NtQueryInformationToken        __sys_NtQueryInformationToken = NULL;
 static P_NtAccessCheckByTypeResultList  __sys_NtAccessCheckByTypeResultList = NULL;
-//static P_NtOpenThreadToken          __sys_NtOpenThreadToken = NULL;
+static P_NtOpenThreadToken          __sys_NtOpenThreadToken = NULL;
        P_RtlEqualSid                __sys_RtlEqualSid = NULL;
 static P_NtSetInformationToken      __sys_NtSetInformationToken     = NULL;
 static P_NtAdjustPrivilegesToken    __sys_NtAdjustPrivilegesToken   = NULL;
@@ -456,14 +456,9 @@ _FX BOOLEAN Secure_Init(void)
     SBIEDLL_HOOK(Ldr_, NtAccessCheckByTypeResultList);
     SBIEDLL_HOOK(Ldr_, NtQueryInformationToken);
     
-
-    //
-    // Note: this hook breaks firefox 137
-    //
-    
-    //if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
-    //    SBIEDLL_HOOK(Ldr_, NtOpenThreadToken);
-    //}
+    if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
+        SBIEDLL_HOOK(Ldr_, NtOpenThreadToken);
+    }
 
     //
     // check if this is an Internet Explorer 8 tab process
@@ -1234,16 +1229,16 @@ _FX NTSTATUS Ldr_NtAccessCheckByTypeResultList(PSECURITY_DESCRIPTOR SecurityDesc
     return status;
 }
 
-//BOOL Ldr_NtOpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL OpenAsSelf, PHANDLE TokenHandle)
-//{
-//    BOOL rc;
-//
-//    rc = __sys_NtOpenThreadToken(ThreadHandle, DesiredAccess, OpenAsSelf, TokenHandle);
-//    if (DLL_IMAGE_GOOGLE_CHROME == Dll_ImageType && rc == STATUS_ACCESS_DENIED && OpenAsSelf) {
-//        rc = __sys_NtOpenThreadToken(ThreadHandle, DesiredAccess, 0, TokenHandle);
-//    }
-//    return rc;
-//}
+BOOL Ldr_NtOpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL OpenAsSelf, PHANDLE TokenHandle)
+{
+    BOOL rc;
+
+    rc = __sys_NtOpenThreadToken(ThreadHandle, DesiredAccess, OpenAsSelf, TokenHandle);
+    if (DLL_IMAGE_GOOGLE_CHROME == Dll_ImageType && rc == STATUS_ACCESS_DENIED && OpenAsSelf) {
+        rc = __sys_NtOpenThreadToken(ThreadHandle, DesiredAccess, 0, TokenHandle);
+    }
+    return rc;
+}
 
 BOOL Ldr_RtlEqualSid(void * sid1, void * sid2)
 {

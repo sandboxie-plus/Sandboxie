@@ -324,6 +324,8 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
             SbieIniServer::NotifyConfigReloaded();
 #endif
 
+        SbieDll_InjectLow_InitSyscalls(TRUE);
+
         RestartHostInjectedSvcs();
     }
 }

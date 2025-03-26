@@ -142,6 +142,7 @@ struct _PROCESS {
     BOOLEAN protect_host_images;
     BOOLEAN use_security_mode;
     BOOLEAN is_locked_down;
+    BOOLEAN open_all_nt;
 #ifdef USE_MATCH_PATH_EX
     BOOLEAN restrict_devices;
     BOOLEAN use_rule_specificity;

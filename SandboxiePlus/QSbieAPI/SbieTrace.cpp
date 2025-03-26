@@ -74,14 +74,14 @@ CTraceEntry::CTraceEntry(quint64 Timestamp, quint32 ProcessId, quint32 ThreadId,
 		m_Message += ", name=" + m_SubType;
 		m_SubType.clear();
 	}
-	if (m_Type.Type == MONITOR_HOOK)
+	/*if (m_Type.Type == MONITOR_HOOK)
 	{
 		int colon_pos = m_Message.lastIndexOf(':');
 		if (colon_pos != -1) {
 			m_Name = m_Message.mid(colon_pos + 1).trimmed();
 			m_Message = m_Message.left(colon_pos);
 		}
-	}
+	}*/
 
 	m_TimeStamp = Timestamp ? Timestamp : QDateTime::currentDateTime().toMSecsSinceEpoch();
 

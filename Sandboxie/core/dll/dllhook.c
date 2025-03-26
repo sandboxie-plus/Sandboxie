@@ -399,7 +399,7 @@ _FX void *SbieDll_Hook_x86(
 
 #else ! WIN_64
 
-        func = Hook_CheckChromeHook((void *)target);
+        func = Hook_CheckChromeHook((void *)target, NULL);
         if (func != (void *)target) {
             SourceFunc = func;
             goto skip_e9_rewrite;
@@ -1160,8 +1160,9 @@ finish:
 //---------------------------------------------------------------------------
 
 #define HOOK_STAT_CHROME        0x00000001
-#define HOOK_STAT_NO_FFS        0x00000002
-#define HOOK_STAT_SKIPPED       0x00000004
+#define HOOK_STAT_CHROME_FAIL   0x00000002
+#define HOOK_STAT_NO_FFS        0x00000004
+#define HOOK_STAT_SKIPPED       0x00000008
 #define HOOK_STAT_TRACE         0x00000100
 #define HOOK_STAT_SYSCALL       0x00000200 // ARM64 EC only
 #define HOOK_STAT_INTERESTING   0x000000FF
@@ -1174,14 +1175,18 @@ _FX void *SbieDll_HookFunc(
     //
 
     void* OldSourceFunc = SourceFunc;
+    void* ChromeFunc = NULL;
+    SourceFunc = Hook_CheckChromeHook(SourceFunc, &ChromeFunc);
+    if (pHookStats && ChromeFunc) {
+        *pHookStats |= HOOK_STAT_CHROME;
+        if (OldSourceFunc == SourceFunc)
+            *pHookStats |= HOOK_STAT_CHROME_FAIL;
+    }
 
-    SourceFunc = Hook_CheckChromeHook(SourceFunc);
-
-    if (OldSourceFunc != SourceFunc) {
-		if (pHookStats) *pHookStats |= HOOK_STAT_CHROME;
+    //if (OldSourceFunc != SourceFunc) {
     //    WCHAR* ModuleName = Trace_FindModuleByAddress((void*)module);
     //    DbgPrint("Found Chrome Hook on: %S!%s\r\n", ModuleName, SourceFuncName);
-    }
+    //}
     
 
 #ifdef _M_ARM64EC
@@ -1384,7 +1389,12 @@ finish:
             SourceFuncName);
 		dbg_ptr += len;
 		dbg_size -= len;
-        if (HookStats & HOOK_STAT_CHROME) {
+        if (HookStats & HOOK_STAT_CHROME_FAIL) {
+            len = Sbie_snwprintf(dbg_ptr, dbg_size, L" (Chrome Hook Unresolved)");
+            dbg_ptr += len;
+            dbg_size -= len;
+        }
+        else if (HookStats & HOOK_STAT_CHROME) {
             len = Sbie_snwprintf(dbg_ptr, dbg_size, L" (Chrome Hooked)");
             dbg_ptr += len;
             dbg_size -= len;
@@ -1396,7 +1406,6 @@ finish:
             dbg_size -= len;
         }
 #endif
-		wcscat(dbg_ptr, L"\r\n");
         SbieApi_MonitorPutMsg(MONITOR_HOOK | MONITOR_TRACE | ((HookStats & HOOK_STAT_SKIPPED) ? MONITOR_OPEN : 0), dbg);
     }
 

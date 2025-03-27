@@ -28,7 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with inis ection editing, eqc no longer closes the window
 - fixed hooking issues introduced in Firefox 137 Nightly and later [#4522](https://github.com/sandboxie-plus/Sandboxie/issues/4522)
 - fixed issue with insecure debug option 'OriginalToken=y'
-
+- Box Group name accidentally entered carriage return character [#4608](https://github.com/sandboxie-plus/Sandboxie/issues/4608)
 
 
 

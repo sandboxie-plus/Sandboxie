@@ -3221,7 +3221,7 @@ Ao contrário do canal preview, ele não inclui alterações não testadas, pote
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="830"/>
+        <location filename="SbiePlusAPI.cpp" line="831"/>
         <source>Disabled</source>
         <translation>Desativado</translation>
     </message>
@@ -3234,32 +3234,32 @@ Ao contrário do canal preview, ele não inclui alterações não testadas, pote
         <translation type="vanished">NÃO SEGURO (configurar depuração)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="841"/>
+        <location filename="SbiePlusAPI.cpp" line="842"/>
         <source>OPEN Root Access</source>
         <translation>ABRIR Acesso Raiz</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="843"/>
+        <location filename="SbiePlusAPI.cpp" line="844"/>
         <source>Application Compartment</source>
         <translation>Compartimento de Aplicativos</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="845"/>
+        <location filename="SbiePlusAPI.cpp" line="846"/>
         <source>NOT SECURE</source>
         <translation>NÃO SEGURO</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="847"/>
+        <location filename="SbiePlusAPI.cpp" line="848"/>
         <source>Reduced Isolation</source>
         <translation>Isolamento Reduzido</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="849"/>
+        <location filename="SbiePlusAPI.cpp" line="850"/>
         <source>Enhanced Isolation</source>
         <translation>Isolamento Aprimorado</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="852"/>
+        <location filename="SbiePlusAPI.cpp" line="853"/>
         <source>Privacy Enhanced</source>
         <translation>Privacidade Aprimorada</translation>
     </message>
@@ -3268,33 +3268,33 @@ Ao contrário do canal preview, ele não inclui alterações não testadas, pote
         <translation type="vanished">Log de API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="856"/>
+        <location filename="SbiePlusAPI.cpp" line="857"/>
         <source>No INet (with Exceptions)</source>
         <translation>Sem INet (com Exceções)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="858"/>
+        <location filename="SbiePlusAPI.cpp" line="859"/>
         <source>No INet</source>
         <translation>Sem Internet</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="861"/>
+        <location filename="SbiePlusAPI.cpp" line="862"/>
         <source>Net Share</source>
         <translatorcomment>Kept original for lack of good German wording</translatorcomment>
         <translation>Compartilhar Rede</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="863"/>
+        <location filename="SbiePlusAPI.cpp" line="864"/>
         <source>No Admin</source>
         <translation>Sem Administrador</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="866"/>
+        <location filename="SbiePlusAPI.cpp" line="867"/>
         <source>Auto Delete</source>
         <translation>Excluir automaticamente</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="869"/>
+        <location filename="SbiePlusAPI.cpp" line="870"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
@@ -5198,38 +5198,38 @@ Do you want to disable Windows Updates scanning from the the software compatibil
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1270"/>
+        <location filename="SbiePlusAPI.cpp" line="1271"/>
         <source>Failed to initialize COM</source>
         <translation>Falha ao inicializar COM</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1276"/>
+        <location filename="SbiePlusAPI.cpp" line="1277"/>
         <source>Failed to create update session</source>
         <translation>Falha ao criar sessão de atualização</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1282"/>
+        <location filename="SbiePlusAPI.cpp" line="1283"/>
         <source>Failed to create update searcher</source>
         <translation>Falha ao criar pesquisador de atualização</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1288"/>
+        <location filename="SbiePlusAPI.cpp" line="1289"/>
         <source>Failed to set search options</source>
         <translation>Falha ao definir opções de pesquisa</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1296"/>
+        <location filename="SbiePlusAPI.cpp" line="1297"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
         <translation>Falha ao enumerar as atualizações instaladas do Windows</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1302"/>
+        <location filename="SbiePlusAPI.cpp" line="1303"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Falha ao recuperar a lista de atualizações do resultado da pesquisa</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1309"/>
+        <location filename="SbiePlusAPI.cpp" line="1310"/>
         <source>Failed to get update count</source>
         <translation>Falha ao obter contagem de atualizações</translation>
     </message>

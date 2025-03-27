@@ -3206,37 +3206,37 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="830"/>
+        <location filename="SbiePlusAPI.cpp" line="831"/>
         <source>Disabled</source>
         <translation>停用</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="841"/>
+        <location filename="SbiePlusAPI.cpp" line="842"/>
         <source>OPEN Root Access</source>
         <translation>開放 Root 存取權限</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="843"/>
+        <location filename="SbiePlusAPI.cpp" line="844"/>
         <source>Application Compartment</source>
         <translation>應用程式區間</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="845"/>
+        <location filename="SbiePlusAPI.cpp" line="846"/>
         <source>NOT SECURE</source>
         <translation>不安全</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="847"/>
+        <location filename="SbiePlusAPI.cpp" line="848"/>
         <source>Reduced Isolation</source>
         <translation>弱化隔離</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="849"/>
+        <location filename="SbiePlusAPI.cpp" line="850"/>
         <source>Enhanced Isolation</source>
         <translation>增強隔離</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="852"/>
+        <location filename="SbiePlusAPI.cpp" line="853"/>
         <source>Privacy Enhanced</source>
         <translation>隱私增強</translation>
     </message>
@@ -3245,32 +3245,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">API 日誌</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="856"/>
+        <location filename="SbiePlusAPI.cpp" line="857"/>
         <source>No INet (with Exceptions)</source>
         <translation>無網際網路 (允許例外)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="858"/>
+        <location filename="SbiePlusAPI.cpp" line="859"/>
         <source>No INet</source>
         <translation>無網際網路</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="861"/>
+        <location filename="SbiePlusAPI.cpp" line="862"/>
         <source>Net Share</source>
         <translation>區域網路共享</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="863"/>
+        <location filename="SbiePlusAPI.cpp" line="864"/>
         <source>No Admin</source>
         <translation>無管理員</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="866"/>
+        <location filename="SbiePlusAPI.cpp" line="867"/>
         <source>Auto Delete</source>
         <translation>自動刪除</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="869"/>
+        <location filename="SbiePlusAPI.cpp" line="870"/>
         <source>Normal</source>
         <translation>標準</translation>
     </message>
@@ -5002,38 +5002,38 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1270"/>
+        <location filename="SbiePlusAPI.cpp" line="1271"/>
         <source>Failed to initialize COM</source>
         <translation>初始化 COM 物件失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1276"/>
+        <location filename="SbiePlusAPI.cpp" line="1277"/>
         <source>Failed to create update session</source>
         <translation>建立更新工作階段失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1282"/>
+        <location filename="SbiePlusAPI.cpp" line="1283"/>
         <source>Failed to create update searcher</source>
         <translation>建立更新搜尋程式失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1288"/>
+        <location filename="SbiePlusAPI.cpp" line="1289"/>
         <source>Failed to set search options</source>
         <translation>設定搜尋選項失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1296"/>
+        <location filename="SbiePlusAPI.cpp" line="1297"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
         <translation>無法列舉已安裝的 Windows 更新</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1302"/>
+        <location filename="SbiePlusAPI.cpp" line="1303"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>從搜尋結果取得更新清單失敗</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1309"/>
+        <location filename="SbiePlusAPI.cpp" line="1310"/>
         <source>Failed to get update count</source>
         <translation>取得更新計數失敗</translation>
     </message>

@@ -8864,7 +8864,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5238"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation>R√ºckverfolgung der Funktionshooks von SbieDll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5334"/>

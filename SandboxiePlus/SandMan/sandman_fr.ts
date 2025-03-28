@@ -5890,8 +5890,9 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
-        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation>Le nom de bac et le nom de groupe du bac ne peuvent pas utiliser le symbole « ,() ».</translation>
+        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
+        <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
+        <translation type="unfinished">Le nom de bac et le nom de groupe du bac ne peuvent pas utiliser le symbole « ,() ».</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>

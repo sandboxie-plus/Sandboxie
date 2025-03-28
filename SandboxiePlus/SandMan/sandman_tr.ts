@@ -5204,8 +5204,9 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
-        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation>Korumalı Alan adı ve Alan Grubu adı &apos;,()&apos; sembolünü kullanamaz.</translation>
+        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
+        <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
+        <translation type="unfinished">Korumalı Alan adı ve Alan Grubu adı &apos;,()&apos; sembolünü kullanamaz.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1043"/>

@@ -5714,8 +5714,9 @@ Do you want to disable Windows Updates scanning from the the software compatibil
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
-        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation>O nome da Caixa e o nome do Grupo de Caixa não podem usar o símbolo &apos;,()&apos;.</translation>
+        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
+        <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
+        <translation type="unfinished">O nome da Caixa e o nome do Grupo de Caixa não podem usar o símbolo &apos;,()&apos;.</translation>
     </message>
     <message>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>

@@ -5215,8 +5215,9 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
-        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation>A homokozó és a homokózó csoport neve nem használhatja a &apos;,()&apos; szimbólumot.</translation>
+        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
+        <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
+        <translation type="unfinished">A homokozó és a homokózó csoport neve nem használhatja a &apos;,()&apos; szimbólumot.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>

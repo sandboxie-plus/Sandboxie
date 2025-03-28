@@ -5591,8 +5591,9 @@ Error: %1</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
-        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation>⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 等符号</translation>
+        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
+        <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
+        <translation type="unfinished">⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 等符号</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>

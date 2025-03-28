@@ -5226,8 +5226,9 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
-        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation>لا يمكن لاسم صندوق العزل واسم مجموعة الصناديق استخدام الرمز &apos;,()&apos;.</translation>
+        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
+        <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
+        <translation type="unfinished">لا يمكن لاسم صندوق العزل واسم مجموعة الصناديق استخدام الرمز &apos;,()&apos;.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>

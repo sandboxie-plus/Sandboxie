@@ -5804,8 +5804,9 @@ NO seleccionará: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
-        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation>No se puede usar el símbolo &apos;,()&apos; en los nombres de Sandbox y Grupo de Caja.</translation>
+        <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
+        <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
+        <translation type="unfinished">No se puede usar el símbolo &apos;,()&apos; en los nombres de Sandbox y Grupo de Caja.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>

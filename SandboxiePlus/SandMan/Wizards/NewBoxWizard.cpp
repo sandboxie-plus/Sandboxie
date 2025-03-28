@@ -702,7 +702,7 @@ bool CFilesPage::validatePage()
         wizard()->setField("boxLocation", "");
     else {
         if (Location.length() < 4) {
-            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox can not be located at the root fo a partition, please select a folder."));
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox can not be located at the root of a partition, please select a folder."));
             return false;
         }
         if (Location.left(2) == "\\\\") {

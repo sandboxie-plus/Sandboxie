@@ -701,7 +701,8 @@ bool CFilesPage::validatePage()
     if (Location == m_pBoxLocation->itemText(0))
         wizard()->setField("boxLocation", "");
     else {
-        if (Location.length() < 4) {
+        int offset = Location.left(4) == "\\??\\" ? 4 : 0;
+        if (Location.length() < offset + 4) {
             QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located at the root of a partition, please select a folder."));
             return false;
         }
@@ -709,7 +710,7 @@ bool CFilesPage::validatePage()
             QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located on a network share, please select a local folder."));
             return false;
         }
-        if (Location.mid(2).contains(QRegularExpression("[ <>:\"/\\|?*\\[\\]]"))){
+        if (Location.mid(offset + 2).contains(QRegularExpression("[ <>:\"/\\|?*\\[\\]]"))){
             QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location is not a valid path."));
             return false;
         }
@@ -719,7 +720,7 @@ bool CFilesPage::validatePage()
                 "Are you sure you want to use an existing folder?"), QDialogButtonBox::Yes, QDialogButtonBox::No) != QDialogButtonBox::Yes)
                 return false;
         }
-        if (!QDir().exists(Location.left(3))) {
+        if (Location.mid(offset, 13).compare("%SystemDrive%") != 0 && !QDir().exists(Location.mid(offset, 3))) {
             QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location is not placed on a currently available drive."));
             return false;
         }

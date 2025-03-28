@@ -1457,7 +1457,7 @@ _FX BOOLEAN WSA_InitNetProxy()
         return FALSE;
     //
     // even if no proxies were set up due to config error, if any were configured 
-    // enable proxy and fail connections to prevent accidental ip leackage
+    // enable proxy and fail connections to prevent accidental ip leakage
     //
 
     SCertInfo CertInfo = { 0 };

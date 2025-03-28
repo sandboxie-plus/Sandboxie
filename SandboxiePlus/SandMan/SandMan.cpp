@@ -2606,8 +2606,8 @@ void CSandMan::OnStatusChanged()
 
 		if (theConf->GetInt("Options/ScanWindowsUpdates", 1) == 2)
 		{
-			auto Ret = QMessageBox::question(NULL, "Sandboxie-Plus", tr("Sandman die not finish enumerating installed windows updates last time, it probably hang.\n"
-				"Do you want to disable Windows Updates scanning from the the software compatibility detection?"), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default);
+			auto Ret = QMessageBox::question(NULL, "Sandboxie-Plus", tr("Sandman did not finish enumerating installed windows updates last time, it probably hangs.\n"
+				"Do you want to disable Windows Updates scanning from the software compatibility detection?"), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default);
 			theConf->SetValue("Options/ScanWindowsUpdates", Ret == QMessageBox::Yes ? 0 : 1);
 		}
 

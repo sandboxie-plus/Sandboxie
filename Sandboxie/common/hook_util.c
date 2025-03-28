@@ -22,7 +22,7 @@
 
 
 /******************************************************
-* WARNING: This code must be position independant !!! *
+* WARNING: This code must be position independent !!! *
 *          It is used by the LowLevel.dll shell code! *
 *******************************************************/
 
@@ -553,7 +553,7 @@ ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals)
     // mov rax,[target 4 byte offset]
     // mov rdi,[target 4 byte offset]
     // mov r15,[target 4 byte offset]
-    // and check if thay target it within the exported g_originals variable
+    // and check if they target it within the exported g_originals variable
     // 
     // This may change in a future version of firefox
     //

@@ -1149,7 +1149,7 @@ bool CSbieView::TestNameAndWarn(const QString& Name)
 {
 	if (Name.contains(QRegularExpression("[,()\r\n\t]")))
 	{
-		QMessageBox::critical(this, "Sandboxie-Plus", tr("The Sandbox name and Box Group name cannot use the ',()' symbol or control charakters."));
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("The Sandbox name and Box Group name cannot use the ',()' symbol or control characters."));
 		return false;
 	}
 
@@ -1396,7 +1396,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 					if (I->first == "FileRootPath" && !I->second.toUpper().contains("%SANDBOX%"))
 						continue; // skip the FileRootPath if it does not contain a %SANDBOX% 
 					if (I->first == "Enabled")
-						continue; // dont duplocate thats already set on create
+						continue; // don't duplicate that's already set on create
 
 					Status = theAPI->SbieIniSet(Name, I->first, I->second, CSbieAPI::eIniAppend, false);
 					if (Status.IsError())

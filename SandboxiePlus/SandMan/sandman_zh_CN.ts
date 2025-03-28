@@ -5593,7 +5593,7 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="1152"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
-        <translation type="unfinished">⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 等符号</translation>
+        <translation type="unfinished">⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 符号或控制字符。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>
@@ -7607,7 +7607,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="329"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation>当最后一个沙盒内的进程终止后自动删除内容更改</translation>
+        <translation>当沙盒内最后一个进程终止后自动删除更改的内容</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="556"/>

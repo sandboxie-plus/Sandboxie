@@ -198,7 +198,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="884"/>
         <source>On this page advanced sandbox options can be configured.</source>
-        <translation>本页面用于配置沙盒的高级选项</translation>
+        <translation>本页面用于配置沙盒的高级选项。</translation>
     </message>
     <message>
         <source>Network Access</source>
@@ -374,7 +374,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     </message>
     <message>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="vanished">使用自定义沙盒令牌可以更好地将各个沙盒相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙盒。但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题</translation>
+        <translation type="vanished">使用自定义沙盒令牌可以更好地将各个沙盒相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙盒。但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题。</translation>
     </message>
 </context>
 <context>
@@ -553,7 +553,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
         <translation>沙盒可以将主机系统与在沙盒内运行的进程隔离开来，防止它们对计算机中的其它程序和数据进行永久性的更改。
 	隔离级别会影响您的安全性以及与应用程序的兼容性，因此根据所选的沙盒类型会有不同的隔离级别。
-	此外，Sandboxie 还可以保护你的个人数据不被受限制下运行的进程的访问</translation>
+	此外，Sandboxie 还可以保护你的个人数据不被受限制下运行的进程的访问。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
@@ -700,7 +700,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="473"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
-        <translation>在沙盒中所有进程结束后，沙盒中所有数据及沙盒本身将会被删除</translation>
+        <translation>在沙盒中所有进程结束后，沙盒中所有数据及沙盒本身将会被删除。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="478"/>
@@ -718,7 +718,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="848"/>
         <source>Configure web browser template options.</source>
-        <translation>配置网络浏览器模板选项</translation>
+        <translation>配置网络浏览器模板选项。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="858"/>
@@ -782,7 +782,7 @@ This ensures the utmost level of privacy and data protection within the confiden
         <location filename="Wizards/TemplateWizard.cpp" line="521"/>
         <source>Configure your Web Browser&apos;s profile directories.</source>
         <oldsource>Configure your Web Browsers profile directories.</oldsource>
-        <translation>配置网络浏览器的用户资料配置文件目录</translation>
+        <translation>配置网络浏览器的用户资料配置文件目录。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="529"/>
@@ -807,12 +807,12 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="715"/>
         <source>Configure your Gecko based Browsers profile directories.</source>
-        <translation>配置基于 Gecko 内核的浏览器配置文件目录</translation>
+        <translation>配置基于 Gecko 内核的浏览器配置文件目录。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="719"/>
         <source>Configure your Chromium based Browsers profile directories.</source>
-        <translation>配置基于 Chromium 内核的浏览器配置文件目录</translation>
+        <translation>配置基于 Chromium 内核的浏览器配置文件目录。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="799"/>
@@ -822,29 +822,29 @@ Please browse to the correct user profile directory.</source>
         <oldsource>No suitable fodlers have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</oldsource>
-        <translation>没有发现合适的目录
+        <translation>没有发现合适的目录。
 注意：您需要在不使用沙盒的情况下先运行一次浏览器，以便使它们被正确创建。
-请浏览并选择正确的用户资料配置文件目录</translation>
+请浏览并选择正确的用户资料配置文件目录。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="804"/>
         <source>Please choose the correct user profile directory, if it is not listed you may need to browse to it.</source>
-        <translation>请选择正确的用户资料配置文件目录 (如未列出，你可能需要手动浏览并选择)</translation>
+        <translation>请选择正确的用户资料配置文件目录 (如未列出，你可能需要手动浏览并选择)。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="810"/>
         <source>Please ensure the selected directory is correct, the wizard is not confident in all the presented options.</source>
-        <translation>请确保所选的目录都是正确的，向导无法帮你核实所选选项是否配置正确</translation>
+        <translation>请确保所选的目录都是正确的，向导无法帮你核实所选选项是否配置正确。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="813"/>
         <source>Please ensure the selected directory is correct.</source>
-        <translation>请确保所选的目录正确无误</translation>
+        <translation>请确保所选的目录正确无误。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="818"/>
         <source>This path does not look like a valid profile directory.</source>
-        <translation>此路径不是有效的配置文件目录</translation>
+        <translation>此路径不是有效的配置文件目录。</translation>
     </message>
 </context>
 <context>
@@ -858,7 +858,7 @@ Please browse to the correct user profile directory.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="329"/>
         <source>Select your Web Browsers main executable, this will allow Sandboxie to identify the browser.</source>
         <oldsource>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</oldsource>
-        <translation>选择网络浏览器的主程序，以便使 Sandboxie 尝试识别浏览器类别</translation>
+        <translation>选择网络浏览器的主程序，以便使 Sandboxie 尝试识别浏览器类别。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="339"/>
@@ -885,18 +885,18 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="457"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation>该浏览器似乎是基于 Chromium 内核的，例如 Microsoft Edge 或 Google Chrome 及其衍生发行版</translation>
+        <translation>该浏览器似乎是基于 Chromium 内核的，例如 Microsoft Edge 或 Google Chrome 及其衍生发行版。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="460"/>
         <source>Browser could not be recognized, template cannot be created.</source>
-        <translation>无法识别浏览器类型，模板将无法被创建</translation>
+        <translation>无法识别浏览器类型，模板将无法被创建。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="507"/>
         <source>This browser name is already in use, please choose an other one.</source>
         <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
-        <translation>该浏览器名称已被使用，请选择其他名称</translation>
+        <translation>该浏览器名称已被使用，请选择其他名称。</translation>
     </message>
 </context>
 <context>
@@ -909,7 +909,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="249"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
-        <translation>如果你有赞助者许可证，请填入以下字段</translation>
+        <translation>如果你有赞助者许可证，请填入以下字段。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="276"/>
@@ -919,7 +919,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation>在没有赞助者许可证的情况下开始进行有限时间的试用</translation>
+        <translation>在没有赞助者许可证的情况下开始进行有限时间的试用。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="291"/>
@@ -935,7 +935,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="317"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
-        <translation>要在商业环境中使用  &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 高级设置，需要适用于商业用途的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者许可证&lt;/a&gt;。如果你还没有所需的许可证，可以通过&lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com 网络商店&lt;/a&gt;获取许可证</translation>
+        <translation>要在商业环境中使用  &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 高级设置，需要适用于商业用途的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者许可证&lt;/a&gt;。如果你还没有所需的许可证，可以通过&lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com 网络商店&lt;/a&gt;获取许可证。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="331"/>
@@ -959,7 +959,7 @@ Error: %1</source>
         <location filename="Wizards/SetupWizard.cpp" line="389"/>
         <source>Retrieving certificate...</source>
         <oldsource>Retreiving certificate...</oldsource>
-        <translation>正在检索许可证...</translation>
+        <translation>正在检索许可证……</translation>
     </message>
 </context>
 <context>
@@ -1121,8 +1121,8 @@ You can click Finish to close this wizard.</source>
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
 You can use %USER% to save each users sandbox to an own fodler.</oldsource>
-        <translation>本页面用于配置沙盒位置与行为
-可以使用 %USER% 来将用户拥有的沙盒存储到自身的用户目录下</translation>
+        <translation>本页面用于配置沙盒位置与行为。
+可以使用 %USER% 来将用户拥有的沙盒存储到自身的用户目录下。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="603"/>
@@ -1183,7 +1183,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="713"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
-        <translation>所选的沙盒存储路径无效</translation>
+        <translation>所选的沙盒存储路径无效。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="718"/>
@@ -1195,7 +1195,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
-        <translation>所选的沙盒存储路径的所在驱动器当前不可用</translation>
+        <translation>所选的沙盒存储路径的所在驱动器当前不可用。</translation>
     </message>
 </context>
 <context>
@@ -1208,11 +1208,11 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="762"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
-        <translation>设置完成，请点击 &quot;完成&quot;，应用所有选定的选项，并结束此向导</translation>
+        <translation>设置完成，请点击 &quot;完成&quot;，应用所有选定的选项，并结束此向导。</translation>
     </message>
     <message>
         <source>Keep Sandboxie-Plus up to date.</source>
-        <translation type="vanished">保持 Sandboxie-Plus 为最新版本</translation>
+        <translation type="vanished">保持 Sandboxie-Plus 为最新版本。</translation>
     </message>
 </context>
 <context>
@@ -1225,7 +1225,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="950"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
-        <translation>设置完成，请点击“完成”按钮，以创建一个新的网络浏览器模板，并结束此向导</translation>
+        <translation>设置完成，请点击“完成”按钮，以创建一个新的网络浏览器模板，并结束此向导。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="968"/>
@@ -1316,7 +1316,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="174"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
-        <translation>欢迎来到设置向导，本向导将帮助配置你的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 副本。如果你不希望现在就完成向导设置，你可以从 “沙盒 -&gt; 维护”菜单中随时重新启动此向导</translation>
+        <translation>欢迎来到设置向导，本向导将帮助配置你的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 副本。如果你不希望现在就完成向导设置，你可以从 “沙盒 -&gt; 维护”菜单中随时重新启动此向导。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="183"/>
@@ -1517,7 +1517,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="76"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation>该沙盒的文件将会存储在加密的容器文件中，请注意：容器头的任何损坏都可能导致容器内文件不可读取（这等同于损坏硬盘的引导分区）。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份不救济&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担一切风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担全部风险则请选择 [确认], 否则请选择 [取消].</translation>
+        <translation>该沙盒的文件将会存储在加密的容器文件中，请注意：容器头的任何损坏都可能导致容器内文件不可读取（这等同于损坏硬盘的引导分区）。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份不救济&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担一切风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担全部风险则请选择 [确认], 否则请选择 [取消]。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="111"/>
@@ -1540,7 +1540,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="82"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="291"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>不再显示此消息</translation>
+        <translation>不再显示此消息。</translation>
     </message>
 </context>
 <context>
@@ -1561,12 +1561,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="392"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>不再显示此消息</translation>
+        <translation>不再显示此消息。</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="447"/>
         <source>Checking for updates...</source>
-        <translation>正在检查更新...</translation>
+        <translation>正在检查更新……</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="454"/>
@@ -1606,12 +1606,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="669"/>
         <source>Don&apos;t show this update anymore.</source>
-        <translation>不再显示此次更新</translation>
+        <translation>不再显示此次更新。</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="792"/>
         <source>Downloading updates...</source>
-        <translation>正在下载更新...</translation>
+        <translation>正在下载更新……</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="818"/>
@@ -1678,7 +1678,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="974"/>
         <source>Downloading installer...</source>
-        <translation>正在下载安装程序...</translation>
+        <translation>正在下载安装程序……</translation>
     </message>
     <message>
         <source>Failed to download installer from: %1</source>
@@ -1697,7 +1697,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="1093"/>
         <source>Don&apos;t show this announcement in the future.</source>
-        <translation>不再显示此公告</translation>
+        <translation>不再显示此公告。</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="638"/>
@@ -1720,11 +1720,11 @@ Do you still want to update?</source>
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
         <translation>当前没有可用的更新, Sandboxie-Plus 已是最新版本。
 
-注意: 更新检查通常落后于 GitHub 发布的版本，以确保只提供经过测试的更新</translation>
+注意: 更新检查通常落后于 GitHub 发布的版本，以确保只提供经过测试的更新。</translation>
     </message>
     <message>
         <source>Checking for certificate...</source>
-        <translation type="vanished">正在检索许可证...</translation>
+        <translation type="vanished">正在检索许可证……</translation>
     </message>
     <message>
         <source>No certificate found on server!</source>
@@ -1732,7 +1732,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <source>There is no updated certificate available.</source>
-        <translation type="vanished">目前没有可用的许可证更新</translation>
+        <translation type="vanished">目前没有可用的许可证更新。</translation>
     </message>
 </context>
 <context>
@@ -1745,7 +1745,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="63"/>
         <source>Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.</source>
-        <translation>对选定的进程启用 Win32 挂钩(注意：需要先启用全局范围的 Win32k 系统调用挂钩支持)</translation>
+        <translation>对选定的进程启用 Win32 挂钩(注意：需要先启用全局范围的 Win32k 系统调用挂钩支持)。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="64"/>
@@ -1755,7 +1755,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="65"/>
         <source>Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.</source>
-        <translation>始终应用 ElevateCreateProcess 修复，偶尔会被程序兼容性助手(PCA)调用</translation>
+        <translation>始终应用 ElevateCreateProcess 修复，偶尔会被程序兼容性助手(PCA)调用。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="67"/>
@@ -1777,12 +1777,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="72"/>
         <source>Make specified processes think they have admin permissions.</source>
         <oldsource>Make specified processes think thay have admin permissions.</oldsource>
-        <translation>让特定进程认为它们具有管理员权限</translation>
+        <translation>让特定进程认为它们具有管理员权限。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="73"/>
         <source>Force specified processes to wait for a debugger to attach.</source>
-        <translation>强制指定的进程等待调试器附加</translation>
+        <translation>强制指定的进程等待调试器附加。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="75"/>
@@ -2153,7 +2153,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1050"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation>该沙盒已被删除，因此无法保存配置</translation>
+        <translation>该沙盒已被删除，因此无法保存配置。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1114"/>
@@ -2222,7 +2222,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="229"/>
         <source>Please select group first.</source>
-        <translation>请先选择组</translation>
+        <translation>请先选择组。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="131"/>
@@ -2351,47 +2351,47 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="341"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
-        <translation>常规沙盒行为 - 允许读取及写时复制</translation>
+        <translation>常规沙盒行为 - 允许读取及写时复制。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="342"/>
         <source>Allow write-access outside the sandbox.</source>
-        <translation>允许透写到沙盒外(仅当执行写操作的程序位于沙盒外时)</translation>
+        <translation>允许透写到沙盒外(仅当执行写操作的程序位于沙盒外时)。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="343"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
-        <translation>允许透写到沙盒外(无论执行写操作的程序是否位于沙盒内)</translation>
+        <translation>允许透写到沙盒外(无论执行写操作的程序是否位于沙盒内)。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="344"/>
         <source>Don&apos;t rename window classes.</source>
-        <translation>禁止重命名 Windows 窗口类</translation>
+        <translation>禁止重命名 Windows 窗口类。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="345"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
-        <translation>拒绝对主机位置的访问，防止在沙盒内创建相应的副本</translation>
+        <translation>拒绝对主机位置的访问，防止在沙盒内创建相应的副本。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="346"/>
         <source>Block access to WinRT class.</source>
-        <translation>阻止对 WinRT 类的访问</translation>
+        <translation>阻止对 WinRT 类的访问。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="347"/>
         <source>Allow read-only access only.</source>
-        <translation>只允许只读访问</translation>
+        <translation>只允许只读访问。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="348"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
-        <translation>对沙盒内的进程隐藏主机文件、目录或注册表键值</translation>
+        <translation>对沙盒内的进程隐藏主机文件、目录或注册表键值。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="349"/>
         <source>Ignore UIPI restrictions for processes.</source>
-        <translation>忽略对进程的 UIPI（用户界面特权隔离(User Interface Privilege Isolation)） 限制</translation>
+        <translation>忽略对进程的 UIPI（用户界面特权隔离(User Interface Privilege Isolation)） 限制。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="358"/>
@@ -2452,12 +2452,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="561"/>
         <source>RT interfaces must be specified by their name.</source>
-        <translation>RT 接口必须用其名称来指定</translation>
+        <translation>RT 接口必须用其名称来指定。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="575"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
-        <translation>开放 IPC 访问权限的同时也将开放 COM 的访问权限，你是否想继续在沙盒内限制 COM 接口的访问权限?</translation>
+        <translation>开放 IPC 访问权限的同时也将开放 COM 的访问权限，你是否想继续在沙盒内限制 COM 接口的访问权限？</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="576"/>
@@ -2477,12 +2477,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="575"/>
         <source>Template values can not be edited.</source>
-        <translation>模板值不能被编辑</translation>
+        <translation>模板值不能被编辑。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="695"/>
         <source>Template values can not be removed.</source>
-        <translation>模板值无法被移除</translation>
+        <translation>模板值无法被移除。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsRecovery.cpp" line="150"/>
@@ -2551,7 +2551,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="151"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
-        <translation>此模板已全局启用，如需配置，请前往全局选项</translation>
+        <translation>此模板已全局启用，如需配置，请前往全局选项。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="187"/>
@@ -2677,7 +2677,7 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="320"/>
         <source>A non empty program name is required.</source>
-        <translation>程序名不得为空</translation>
+        <translation>程序名不得为空。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="617"/>
@@ -2690,12 +2690,12 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/PopUpWindow.h" line="53"/>
         <source>?</source>
-        <translation>?</translation>
+        <translation>？</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="54"/>
         <source>Visit %1 for a detailed explanation.</source>
-        <translation>访问 %1 以查阅详细说明</translation>
+        <translation>访问 %1 以查阅详细说明。</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="65"/>
@@ -2892,7 +2892,7 @@ The file was written by: %3</source>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="383"/>
         <source>an UNKNOWN process.</source>
-        <translation>未知进程</translation>
+        <translation>未知进程。</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="383"/>
@@ -2934,7 +2934,7 @@ Full path: %4</source>
         <location filename="SandManRecovery.cpp" line="333"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
-        <translation>以下是最近被恢复并移出沙盒的文件</translation>
+        <translation>以下是最近被恢复并移出沙盒的文件。</translation>
     </message>
 </context>
 <context>
@@ -3014,7 +3014,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="299"/>
         <source>There are %1 new files available to recover.</source>
-        <translation>有 %1 个新文件可供恢复</translation>
+        <translation>有 %1 个新文件可供恢复。</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="584"/>
@@ -3025,7 +3025,7 @@ Full path: %4</source>
         <location filename="Windows/RecoveryWindow.cpp" line="590"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <oldsource>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</oldsource>
-        <translation>此沙盒中共有 %1 个文件和 %2 个文件夹，占用了 %3 磁盘空间</translation>
+        <translation>此沙盒中共有 %1 个文件和 %2 个文件夹，占用了 %3 磁盘空间。</translation>
     </message>
 </context>
 <context>
@@ -3033,7 +3033,7 @@ Full path: %4</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
-        <translation>故障排除...</translation>
+        <translation>故障排除……</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -3176,7 +3176,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="698"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>访问最新的兼容性模板和联机故障排除数据库需要有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;.</translation>
+        <translation>访问最新的兼容性模板和联机故障排除数据库需要有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;。</translation>
     </message>
 </context>
 <context>
@@ -3199,7 +3199,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="4506"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation>正在完成快照合并...</translation>
+        <translation>正在完成快照合并……</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
@@ -3824,24 +3824,24 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="3837"/>
         <location filename="SandMan.cpp" line="3853"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>不再显示此消息</translation>
+        <translation>不再显示此消息。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1566"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
         <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
-        <translation>此类沙盒提供增强的安全隔离，它适用于测试不受信任的软件</translation>
+        <translation>此类沙盒提供增强的安全隔离，它适用于测试不受信任的软件。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1570"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
-        <translation>此类沙盒提供标准的隔离，它适用于以安全的方式来运行你的软件</translation>
+        <translation>此类沙盒提供标准的隔离，它适用于以安全的方式来运行你的软件。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1574"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
-        <translation>此类沙盒不执行隔离，它用于将一个应用程序虚拟化</translation>
+        <translation>此类沙盒不执行隔离，它用于将一个应用程序虚拟化。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1582"/>
@@ -3849,7 +3849,7 @@ Do you want to do the clean up?</source>
         <oldsource>
 
 This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</oldsource>
-        <translation>此类沙盒将限制沙盒内程序对沙盒外数据的访问，除非在资源访问选项中明确授权</translation>
+        <translation>此类沙盒将限制沙盒内程序对沙盒外数据的访问，除非在资源访问选项中明确授权。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1750"/>
@@ -4055,7 +4055,7 @@ Please check if there is an update for sandboxie.</oldsource>
     <message>
         <location filename="SandMan.cpp" line="4356"/>
         <source>&amp;Find ...</source>
-        <translation>查找(&amp;F)...</translation>
+        <translation>查找(&amp;F)……</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4357"/>
@@ -4073,7 +4073,7 @@ Please check if there is an update for sandboxie.</oldsource>
     </message>
     <message>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
-        <translation type="vanished">Sandboxie+ 可免费用于个人和其他非商业用途</translation>
+        <translation type="vanished">Sandboxie+ 可免费用于个人和其他非商业用途。</translation>
     </message>
     <message>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
@@ -4087,7 +4087,7 @@ Please check if there is an update for sandboxie.</oldsource>
     <message>
         <location filename="SandMan.cpp" line="176"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
-        <translation>警告: %1 中的 Sandboxie-Plus.ini 不能被写入，设置将不会被保存</translation>
+        <translation>警告: %1 中的 Sandboxie-Plus.ini 不能被写入，设置将不会被保存。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="613"/>
@@ -4115,7 +4115,7 @@ Please check if there is an update for sandboxie.</oldsource>
     <message>
         <location filename="SandMan.cpp" line="1970"/>
         <source>Cleaned up removed templates...</source>
-        <translation>已清理缺失的模板...</translation>
+        <translation>已清理缺失的模板……</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2461"/>
@@ -4134,12 +4134,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2986"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
-        <translation>在沙盒 %2 中启动的程序 %1 将在 5 分钟之后自动终止，因为使用此沙盒被配置为项目赞助者的特供功能</translation>
+        <translation>在沙盒 %2 中启动的程序 %1 将在 5 分钟之后自动终止，因为使用此沙盒被配置为项目赞助者的特供功能。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2988"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
-        <translation>沙盒 %1 被配置为使用项目赞助者专有的沙盒类型，这些预设选项将被忽略</translation>
+        <translation>沙盒 %1 被配置为使用项目赞助者专有的沙盒类型，这些预设选项将被忽略。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2969"/>
@@ -4218,12 +4218,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3257"/>
         <source>Only Administrators can change the config.</source>
-        <translation>仅管理员可更改该配置</translation>
+        <translation>仅管理员可更改该配置。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3267"/>
         <source>Please enter the configuration password.</source>
-        <translation>请输入配置保护密码</translation>
+        <translation>请输入配置保护密码。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3275"/>
@@ -4269,12 +4269,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3394"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
-        <translation>Sandboxie-Plus 正以便携模式启动，需要创建所需的服务，这将会寻求管理员权限</translation>
+        <translation>Sandboxie-Plus 正以便携模式启动，需要创建所需的服务，这将会寻求管理员权限。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3428"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <translation>警告：另一代理程序 (可能是 SbieCtrl.exe) 已接管当前 Sandboxie 会话，请将其关闭，然后尝试重新连接以接管控制</translation>
+        <translation>警告：另一代理程序 (可能是 SbieCtrl.exe) 已接管当前 Sandboxie 会话，请将其关闭，然后尝试重新连接以接管控制。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3432"/>
@@ -4289,19 +4289,19 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3560"/>
         <source>Executing maintenance operation, please wait...</source>
-        <translation>正在执行维护操作，请稍候...</translation>
+        <translation>正在执行维护操作，请稍候……</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3681"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation>在 Plus 视图中，此功能已被整合到主沙盒列表视图</translation>
+        <translation>在 Plus 视图中，此功能已被整合到主沙盒列表视图。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3682"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>使用“沙盒/组”右键菜单，你可以将沙盒在沙盒组之间移动
 同时，你也可以通过 Alt + 方向键或鼠标拖动来整理列表
-另外，你可以通过右键菜单来新建“沙盒/组”</translation>
+另外，你可以通过右键菜单来新建“沙盒/组”。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3750"/>
@@ -4315,22 +4315,22 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
         <translation>您正准备编辑模板配置文件(Templates.ini), 但通常不推荐这么做
-因为该文件是 Sandboxie 的一部分并且所有的更改都将会在下次更新时被丢弃</translation>
+因为该文件是 Sandboxie 的一部分并且所有的更改都将会在下次更新时被丢弃。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3851"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation>更改将在文件被保存时被自动应用</translation>
+        <translation>更改将在文件被保存时被自动应用。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3852"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
-        <translation>编辑器被关闭后，更改将很快自动应用</translation>
+        <translation>编辑器被关闭后，更改将很快自动应用。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4045"/>
         <source>Administrator rights are required for this operation.</source>
-        <translation>此操作需要管理员权限</translation>
+        <translation>此操作需要管理员权限。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4046"/>
@@ -4355,7 +4355,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4050"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
-        <translation>无法找到 Sandboxie 的安装路径</translation>
+        <translation>无法找到 Sandboxie 的安装路径。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4051"/>
@@ -4375,17 +4375,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4054"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
-        <translation>沙盒名称不能超过 32 个字符</translation>
+        <translation>沙盒名称不能超过 32 个字符。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4055"/>
         <source>The sandbox name can not be a device name.</source>
-        <translation>沙盒名称不能为设备名称</translation>
+        <translation>沙盒名称不能为设备名称。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4056"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
-        <translation>沙盒名称只能包含字母、数字和下划线(显示为空格)</translation>
+        <translation>沙盒名称只能包含字母、数字和下划线(显示为空格)。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4057"/>
@@ -4416,7 +4416,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4063"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation>沙盒被删除前必须清空</translation>
+        <translation>沙盒被删除前必须清空。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4064"/>
@@ -4431,7 +4431,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4066"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation>因有进程正在沙盒中运行，此快照操作无法完成</translation>
+        <translation>因有进程正在沙盒中运行，此快照操作无法完成。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4067"/>
@@ -4492,19 +4492,19 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="1669"/>
         <source>The value is not an existing directory or executable.</source>
-        <translation>该目录不存在或不可执行</translation>
+        <translation>该目录不存在或不可执行。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1674"/>
         <location filename="SandMan.cpp" line="1690"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation>你输出了错误的沙盘名称！没有做出任何更改</translation>
+        <translation>你输出了错误的沙盘名称！没有做出任何更改。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1678"/>
         <location filename="SandMan.cpp" line="1694"/>
         <source>User canceled this operation.</source>
-        <translation>用户取消操作</translation>
+        <translation>用户取消操作。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2027"/>
@@ -4632,7 +4632,7 @@ Error: %1</source>
     <message>
         <location filename="SandMan.cpp" line="3355"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation>请输入「停用必沙程序规则」的持续时间 (单位: 秒)</translation>
+        <translation>请输入「停用必沙程序规则」的持续时间 (单位: 秒)。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3535"/>
@@ -4652,7 +4652,7 @@ Error: %1</source>
     <message>
         <location filename="SandMan.cpp" line="4070"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
-        <translation>合并快照目录 &apos;%1&apos; 和 &apos;%2&apos; 出错，快照没有被完全合并</translation>
+        <translation>合并快照目录 &apos;%1&apos; 和 &apos;%2&apos; 出错，快照没有被完全合并。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4071"/>
@@ -4757,7 +4757,7 @@ Error: %1</source>
     <message>
         <location filename="SandMan.cpp" line="4182"/>
         <source>Remember choice for later.</source>
-        <translation>记住选择供之后使用</translation>
+        <translation>记住选择供之后使用。</translation>
     </message>
     <message>
         <location filename="SbieFindWnd.cpp" line="88"/>
@@ -4767,12 +4767,12 @@ Error: %1</source>
     <message>
         <location filename="SbieFindWnd.cpp" line="95"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
-        <translation>选择的窗口并未作为任何沙盒化程序的一部分而运行</translation>
+        <translation>选择的窗口并未作为任何沙盒化程序的一部分而运行。</translation>
     </message>
     <message>
         <location filename="SbieFindWnd.cpp" line="134"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation>拖拽准星到被选窗口上，松开鼠标检查窗口是否来自沙盒化的程序</translation>
+        <translation>拖拽准星到被选窗口上，松开鼠标检查窗口是否来自沙盒化的程序。</translation>
     </message>
     <message>
         <location filename="SbieFindWnd.cpp" line="204"/>
@@ -5500,7 +5500,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="883"/>
         <source>Please enter a new name for the Group.</source>
-        <translation>为此组指定新的名称</translation>
+        <translation>为此组指定新的名称。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="930"/>
@@ -5510,7 +5510,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="978"/>
         <source>A group can not be its own parent.</source>
-        <translation>组不能是自己的父级</translation>
+        <translation>组不能是自己的父级。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1192"/>
@@ -5593,17 +5593,17 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="1152"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</oldsource>
-        <translation type="unfinished">⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 等符号</translation>
+        <translation type="unfinished">⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 符号或控制字符。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>
         <source>This name is already used for a Box Group.</source>
-        <translation>名称已被用于现有的其它沙盒组</translation>
+        <translation>名称已被用于现有的其它沙盒组。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1162"/>
         <source>This name is already used for a Sandbox.</source>
-        <translation>名称已被用于现有的其它沙盒</translation>
+        <translation>名称已被用于现有的其它沙盒。</translation>
     </message>
     <message>
         <source>&lt;br /&gt;• ... and %1 more</source>
@@ -5614,18 +5614,18 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="1301"/>
         <location filename="Views/SbieView.cpp" line="1638"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>不再显示此消息</translation>
+        <translation>不再显示此消息。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1292"/>
         <location filename="Views/SbieView.cpp" line="1312"/>
         <location filename="Views/SbieView.cpp" line="1816"/>
         <source>This Sandbox is empty.</source>
-        <translation>此沙盒是空的</translation>
+        <translation>此沙盒是空的。</translation>
     </message>
     <message>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation type="vanished">警告：打开的注册表编辑器未沙盒化，请审慎且仅对预先选定的沙盒节点进行修改</translation>
+        <translation type="vanished">警告：打开的注册表编辑器未沙盒化，请审慎且仅对预先选定的沙盒节点进行修改。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1320"/>
@@ -5635,7 +5635,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1376"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
-        <translation>请为此复制的沙盒输入一个新名称</translation>
+        <translation>请为此复制的沙盒输入一个新名称。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1376"/>
@@ -5683,7 +5683,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1470"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation>请为该沙盒输入新名称</translation>
+        <translation>请为该沙盒输入新名称。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1470"/>
@@ -5702,7 +5702,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1570"/>
         <source>This Sandbox is already empty.</source>
-        <translation>此沙盒已清空</translation>
+        <translation>此沙盒已清空。</translation>
     </message>
     <message>
         <source>Do you want to delete the content of the selected sandbox?</source>
@@ -5797,7 +5797,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
         <source>Please select a sandbox.</source>
-        <translation>请选择一个沙盒</translation>
+        <translation>请选择一个沙盒。</translation>
     </message>
 </context>
 <context>
@@ -6043,7 +6043,7 @@ Error: %1</source>
         <location filename="Windows/SettingsWindow.cpp" line="1452"/>
         <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Retrieving certificate...</source>
-        <translation>正在检索许可证...</translation>
+        <translation>正在检索许可证……</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1465"/>
@@ -6180,7 +6180,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     </message>
     <message>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">此赞助者许可证已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;</translation>
+        <translation type="vanished">此赞助者许可证已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1337"/>
@@ -6199,7 +6199,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     </message>
     <message>
         <source>Retreiving certificate...</source>
-        <translation type="vanished">正在检索许可证…</translation>
+        <translation type="vanished">正在检索许可证……</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1539"/>
@@ -6306,11 +6306,11 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1341"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
-        <translation>&lt;br /&gt;Plus 附加的高级功能已不再可用</translation>
+        <translation>&lt;br /&gt;Plus 附加的高级功能已不再可用。</translation>
     </message>
     <message>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">此赞助者许可证将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;</translation>
+        <translation type="vanished">此赞助者许可证将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;。</translation>
     </message>
     <message>
         <source>Supporter certificate required</source>
@@ -6339,20 +6339,20 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     </message>
     <message>
         <source>This certificate is unfortunately expired.</source>
-        <translation type="vanished">非常抱歉，此许可证已过期</translation>
+        <translation type="vanished">非常抱歉，此许可证已过期。</translation>
     </message>
     <message>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="vanished">非常抱歉，此许可证已过时</translation>
+        <translation type="vanished">非常抱歉，此许可证已过时。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2081"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
-        <translation>感谢您对 Sandboxie-Plus 开发工作的支持</translation>
+        <translation>感谢您对 Sandboxie-Plus 开发工作的支持。</translation>
     </message>
     <message>
         <source>This support certificate is not valid.</source>
-        <translation type="vanished">此赞助者许可证无效</translation>
+        <translation type="vanished">此赞助者许可证无效。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2142"/>
@@ -6393,17 +6393,17 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2299"/>
         <source>Please enter the new configuration password.</source>
-        <translation>请输入新的配置保护密码</translation>
+        <translation>请输入新的配置保护密码。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2303"/>
         <source>Please re-enter the new configuration password.</source>
-        <translation>请再次输入新的配置保护密码</translation>
+        <translation>请再次输入新的配置保护密码。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2308"/>
         <source>Passwords did not match, please retry.</source>
-        <translation>输入的密码不一致，请重新输入</translation>
+        <translation>输入的密码不一致，请重新输入。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2320"/>
@@ -6451,17 +6451,17 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="45"/>
         <source>The decision you make here will affect which page you get to see next.</source>
-        <translation>你在这里做出的决定将影响你接下来看到的页面内容</translation>
+        <translation>你在这里做出的决定将影响你接下来看到的页面内容。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="48"/>
         <source>This help is likely not to be of any help.</source>
-        <translation>此类帮助很可能没用提供任何实质性帮助</translation>
+        <translation>此类帮助很可能没用提供任何实质性帮助。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="52"/>
         <source>Sorry, I already gave all the help I could.</source>
-        <translation>对不起，我已经提供了所有能给的帮助</translation>
+        <translation>对不起，我已经提供了所有能给的帮助。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="54"/>
@@ -6479,7 +6479,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="523"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
-        <translation>配置 Sandboxie-Plus 应如何与你的系统整合</translation>
+        <translation>配置 Sandboxie-Plus 应如何与你的系统整合。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="527"/>
@@ -6547,7 +6547,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="186"/>
         <source>Please enter a name for the new Snapshot.</source>
-        <translation>请输入新快照的名称</translation>
+        <translation>请输入新快照的名称。</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="186"/>
@@ -6699,7 +6699,7 @@ Try submitting without the log attached.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1032"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
-        <translation>即将就绪, 点击完成按钮结束沙盒创建向导</translation>
+        <translation>即将就绪, 点击完成按钮结束沙盒创建向导。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1041"/>
@@ -6726,21 +6726,21 @@ This box&apos;s content will be DISCARDED when it&apos;s closed, and the box wil
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
         <translation>
-该沙盒中的内容将在所有程序结束后被删除，同时沙盒本身将被移除</translation>
+该沙盒中的内容将在所有程序结束后被删除，同时沙盒本身将被移除。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1076"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
-该沙盒中的内容将在所有程序结束后被删除，因此仅适合临时数据</translation>
+该沙盒中的内容将在所有程序结束后被删除，因此仅适合临时数据。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1078"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
-该沙盒中所有进程将无法访问网络和本地连接，以确保所有可访问的数据不被泄露</translation>
+该沙盒中所有进程将无法访问网络和本地连接，以确保所有可访问的数据不被泄露。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1080"/>
@@ -6749,14 +6749,14 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
         <translation>
-该沙盒允许 MSIServer (*.msi 安装服务) 在沙盒内使用系统令牌运行，这将改善兼容性但会影响安全隔离效果</translation>
+该沙盒允许 MSIServer (*.msi 安装服务) 在沙盒内使用系统令牌运行，这将改善兼容性但会影响安全隔离效果。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1082"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
-该沙盒中所有进程将认为其运行在管理员模式下，即使实际上并没有该权限，这有助于在安全加固型沙盒中运行安装程序</translation>
+该沙盒中所有进程将认为其运行在管理员模式下，即使实际上并没有该权限，这有助于在安全加固型沙盒中运行安装程序。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1084"/>
@@ -6765,7 +6765,7 @@ Processes in this box will be running with a custom process token indicating the
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation>
-该沙盒中的进程将会以沙盒专属的自定义进程证书运行</translation>
+该沙盒中的进程将会以沙盒专属的自定义进程证书运行。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1123"/>
@@ -6858,13 +6858,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/SupportDialog.cpp" line="200"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
         <oldsource>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</oldsource>
-        <translation>请考虑继续 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持该项目&lt;/a&gt;，以续签 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;，从而继续使用新构建版本中的增强功能</translation>
+        <translation>请考虑继续 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持该项目&lt;/a&gt;，以续签 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;，从而继续使用新构建版本中的增强功能。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="203"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;. This pause allows you to consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt; or &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;earning one by contributing&lt;/a&gt; to the project. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
         <oldsource>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</oldsource>
-        <translation>Sandboxie &lt;u&gt;在没有&lt;/u&gt;有效的赞助者许可证时有时会&lt;b&gt;&lt;font color=&apos;red&apos;&gt;弹窗提醒&lt;/font&gt;&lt;/b&gt;，让您考虑是否&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;(但不会中断不需要赞助着许可证的沙盒内的程序)，&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;不仅可以消除这种提醒，还可以 &lt;b&gt;提供特殊的增强功能&lt;b&gt;，实现更好的安全性和兼容性</translation>
+        <translation>Sandboxie &lt;u&gt;在没有&lt;/u&gt;有效的赞助者许可证时有时会&lt;b&gt;&lt;font color=&apos;red&apos;&gt;弹窗提醒&lt;/font&gt;&lt;/b&gt;，让您考虑是否&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;(但不会中断不需要赞助着许可证的沙盒内的程序)，&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;不仅可以消除这种提醒，还可以 &lt;b&gt;提供特殊的增强功能&lt;b&gt;，实现更好的安全性和兼容性。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="233"/>
@@ -7009,7 +7009,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/TestProxyDialog.cpp" line="42"/>
         <location filename="Windows/TestProxyDialog.cpp" line="308"/>
         <source>Testing...</source>
-        <translation>测试中...</translation>
+        <translation>测试中……</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="62"/>
@@ -7073,12 +7073,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="152"/>
         <source>[%1] %2.</source>
-        <translation>[%1] %2</translation>
+        <translation>[%1] %2。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="157"/>
         <source>[%1] Connection through proxy server failed: %2.</source>
-        <translation>[%1] 通过代理服务器连接失败: %2</translation>
+        <translation>[%1] 通过代理服务器连接失败: %2。</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="191"/>
@@ -7369,7 +7369,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="408"/>
         <source>Select the user interface style you prefer.</source>
-        <translation>选择您喜欢的用户界面风格</translation>
+        <translation>选择您喜欢的用户界面风格。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="412"/>
@@ -7405,7 +7405,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
-        <translation type="vanished">沙盒可以使用 Windows 筛选平台 (WFP) 来限制网络访问</translation>
+        <translation type="vanished">沙盒可以使用 Windows 筛选平台 (WFP) 来限制网络访问。</translation>
     </message>
     <message>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
@@ -7415,7 +7415,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 如果不启用 WFP，Sandboxie 仍然能够可靠地完全阻止进程访问网络
 然而，这可能会导致进程崩溃，因为驱动程序会阻止程序访问请求的网络设备端点
 即使禁用 WFP，Sandboxie 也将提供基于 IP/端口 的规则过滤功能，但此时规则只能在用户态下应用，而无法被驱动程序强制执行
-因此，如果不启用 WFP，某些恶意程序可能可以绕过这些规则，但不能绕过整个网络区块</translation>
+因此，如果不启用 WFP，某些恶意程序可能可以绕过这些规则，但不能绕过整个网络区块。</translation>
     </message>
     <message>
         <source>Enable Windows Filtering Platform (WFP) support</source>
@@ -7489,7 +7489,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation>……</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="82"/>
@@ -7509,7 +7509,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="vanished">沙盒将主机系统与在盒内运行的进程隔离开来，可以防止它们对计算机中的其它程序和数据进行永久性的改变，根据所选的沙盒类型，会有不同的隔离程度，隔离的程度影响到主机的安全性以及盒内应用程序的兼容性，此外沙盒还可以保护你的个人数据不被受监督下运行的进程的访问</translation>
+        <translation type="vanished">沙盒将主机系统与在盒内运行的进程隔离开来，可以防止它们对计算机中的其它程序和数据进行永久性的改变，根据所选的沙盒类型，会有不同的隔离程度，隔离的程度影响到主机的安全性以及盒内应用程序的兼容性，此外沙盒还可以保护你的个人数据不被受监督下运行的进程的访问。</translation>
     </message>
     <message>
         <source>Box info</source>
@@ -7576,7 +7576,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3985"/>
         <source>Block network files and folders, unless specifically opened.</source>
-        <translation>拦截对网络文件和文件夹的访问，除非专门开放访问权限</translation>
+        <translation>拦截对网络文件和文件夹的访问，除非专门开放访问权限。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1303"/>
@@ -7607,7 +7607,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="329"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation>当最后一个沙盒内的进程终止后自动删除内容更改</translation>
+        <translation>当沙盒内最后一个进程终止后自动删除更改的内容</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="556"/>
@@ -7678,7 +7678,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1231"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
-        <translation>警告：在内置的管理员用户下运行时，不能撤销进程的管理员权限</translation>
+        <translation>警告：在内置的管理员用户下运行时，不能撤销进程的管理员权限。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="737"/>
@@ -7703,7 +7703,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1247"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation>安全提示：在沙盒监管下运行的程序，若具有管理员或系统权限令牌，将有更多机会绕过沙盒的隔离，并修改沙盒外部的系统</translation>
+        <translation>安全提示：在沙盒监管下运行的程序，若具有管理员或系统权限令牌，将有更多机会绕过沙盒的隔离，并修改沙盒外部的系统。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1218"/>
@@ -7713,7 +7713,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1163"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation>注意：MSI 安装程序的权限豁免不是必须的，但是如果在安装受信任的程序包时遇到问题，此选项可能会有助于成功完成安装，此外也可以尝试关闭「撤销管理员权限」选项</translation>
+        <translation>注意：MSI 安装程序的权限豁免不是必须的，但是如果在安装受信任的程序包时遇到问题，此选项可能会有助于成功完成安装，此外也可以尝试关闭「撤销管理员权限」选项。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="986"/>
@@ -7868,7 +7868,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="76"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;更多沙盒类型&lt;/b&gt;仅&lt;u&gt;项目赞助者&lt;/u&gt;可用，隐私增强沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;保护用户数据免受沙盒化的程序非法访问&lt;/font&gt;&lt;/b&gt;&lt;br /&gt;如果你还不是赞助者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠此项目&lt;/a&gt;，来获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;&lt;br /&gt;当然你也可以直接新建一个这些类型的沙盒进行测试，不过沙盒中运行的程序将在 5 分钟之后自动终止</translation>
+        <translation>&lt;b&gt;更多沙盒类型&lt;/b&gt;仅&lt;u&gt;项目赞助者&lt;/u&gt;可用，隐私增强沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;保护用户数据免受沙盒化的程序非法访问&lt;/font&gt;&lt;/b&gt;&lt;br /&gt;如果你还不是赞助者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠此项目&lt;/a&gt;，来获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;&lt;br /&gt;当然你也可以直接新建一个这些类型的沙盒进行测试，不过沙盒中运行的程序将在 5 分钟之后自动终止。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="128"/>
@@ -7897,12 +7897,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2090"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
-        <translation>可以在此处将应用程序分组并给它们分配一个组名，程序组可用于代替程序名被用于某些设置，在此处定义的沙盒程序组将覆盖模板中定义的程序组</translation>
+        <translation>可以在此处将应用程序分组并给它们分配一个组名，程序组可用于代替程序名被用于某些设置，在此处定义的沙盒程序组将覆盖模板中定义的程序组。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2164"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
-        <translation>此处指定的程序或者指定位置中的程序，将自动进入此沙盒，除非已明确在其它沙盒中启动它</translation>
+        <translation>此处指定的程序或者指定位置中的程序，将自动进入此沙盒，除非已明确在其它沙盒中启动它。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2275"/>
@@ -7952,17 +7952,17 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2712"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
-        <translation>阻止所选的程序在此沙盒中启动</translation>
+        <translation>阻止所选的程序在此沙盒中启动。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2698"/>
         <source>Allow all programs to start in this sandbox.</source>
-        <translation>允许所有程序在此沙盒中启动</translation>
+        <translation>允许所有程序在此沙盒中启动。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2688"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
-        <translation>* 注意：安装在此沙盒里的程序将完全无法启动</translation>
+        <translation>* 注意：安装在此沙盒里的程序将完全无法启动。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3466"/>
@@ -7977,12 +7977,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3514"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
-        <translation>注意：安装在此沙盒中的程序将完全无法访问网络</translation>
+        <translation>注意：安装在此沙盒中的程序将完全无法访问网络。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3500"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
-        <translation>询问用户是否允许例外</translation>
+        <translation>询问用户是否允许例外。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2787"/>
@@ -8061,17 +8061,17 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4194"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
-        <translation>启用快速恢复提示，以便快速恢复创建的文件</translation>
+        <translation>启用快速恢复提示，以便快速恢复创建的文件。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4177"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
-        <translation>可以在此处从快速恢复中排除特定目录和文件类型(扩展名)</translation>
+        <translation>可以在此处从快速恢复中排除特定目录和文件类型(扩展名)。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4110"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation>当快速恢复功能被调用时，检查沙盒内的下列文件夹 </translation>
+        <translation>当快速恢复功能被调用时，检查沙盒内的下列文件夹。 </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4496"/>
@@ -8149,7 +8149,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4951"/>
         <source>Hide host processes from processes running in the sandbox.</source>
-        <translation>对沙盒内运行的进程隐藏宿主的进程</translation>
+        <translation>对沙盒内运行的进程隐藏宿主的进程。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4974"/>
@@ -8281,9 +8281,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
-        <translation>添加用户和用户组到下方列表来仅限这些系统用户使用沙盒，如果列表为空，则所有系统用户均可使用沙盒
+        <translation>添加用户和用户组到下方列表来仅限这些系统用户使用沙盒，如果列表为空，则所有系统用户均可使用沙盒。
 
-注意：沙盒的必沙程序及文件夹设置不适用于不能运行沙盒的系统用户</translation>
+注意：沙盒的必沙程序及文件夹设置不适用于不能运行沙盒的系统用户。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5196"/>
@@ -8384,7 +8384,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1447"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation>注意：各种隔离功能会破坏与某些应用程序的兼容性&lt;br /&gt;如果使用此沙盒&lt;b&gt;不是为了安全性&lt;/b&gt;，而是为了应用程序的可移植性，可通过改变这些选项，以便通过牺牲部分安全性来恢复兼容性</translation>
+        <translation>注意：各种隔离功能会破坏与某些应用程序的兼容性&lt;br /&gt;如果使用此沙盒&lt;b&gt;不是为了安全性&lt;/b&gt;，而是为了应用程序的可移植性，可通过改变这些选项，以便通过牺牲部分安全性来恢复兼容性。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="949"/>
@@ -8429,14 +8429,14 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 为了定义没有此类限制的规则，则必须使用 OpenPipePath 和 OpenConfPath
 
 同样的，通过否定来定义所有的 Closed(File|Key|Ipc)Path 指令
-例如：&apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;将限制沙盒内的程序访问相应资源
+例如：&apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;将限制沙盒内的程序访问相应资源。
 
-这两种限制策略都可以通过“访问策略”页面来禁用
+这两种限制策略都可以通过“访问策略”页面来禁用。
 
-这样做是为了防止沙盒内的流氓进程创建自己的重命名副本并访问受保护的资源
+这样做是为了防止沙盒内的流氓进程创建自己的重命名副本并访问受保护的资源。
 
-另一个漏洞载体是将一个动态链接库注入到一个被授权进程中，以获得对被授权进程所允许访问的一切资源的访问权
-使用主机映像保护，可以通过阻止在沙盒内运行的应用程序（安装在宿主上的）加载来自沙盒的动态链接库来防止此类现象</translation>
+另一个漏洞载体是将一个动态链接库注入到一个被授权进程中，以获得对被授权进程所允许访问的一切资源的访问权。
+使用主机映像保护，可以通过阻止在沙盒内运行的应用程序（安装在宿主上的）加载来自沙盒的动态链接库来防止此类现象。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4453"/>
@@ -8506,8 +8506,8 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>使用自定义沙盒令牌可以更好地将各个沙盒相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙盒
-但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题</translation>
+        <translation>使用自定义沙盒令牌可以更好地将各个沙盒相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙盒。
+但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2020"/>
@@ -8564,8 +8564,8 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <location filename="Forms/OptionsWindow.ui" line="2342"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation>此处设置的程序在启动时将被允许脱离这个沙盒，利用此选项可以将程序捕获到另一个沙盒里
-例如，让网络浏览器总是在一个专门的沙盒里打开</translation>
+        <translation>此处设置的程序在启动时将被允许脱离这个沙盒，利用此选项可以将程序捕获到另一个沙盒里。
+例如，让网络浏览器总是在一个专门的沙盒里打开。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2409"/>
@@ -8580,7 +8580,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2492"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
-        <translation>其它所有程序被终止后，仍在运行的驻留程序将自动终止</translation>
+        <translation>其它所有程序被终止后，仍在运行的驻留程序将自动终止。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2525"/>
@@ -8590,7 +8590,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2591"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation>如果定义了引导进程，其它进程将被视作驻留进程</translation>
+        <translation>如果定义了引导进程，其它进程将被视作驻留进程。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2797"/>
@@ -8601,9 +8601,9 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <location filename="Forms/OptionsWindow.ui" line="2890"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
-        <translation>配置哪些进程可以访问文件、文件夹和管道
-“开放”访问权限只适用于原先已位于沙盒之外的程序二进制文件
-你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为</translation>
+        <translation>配置哪些进程可以访问文件、文件夹和管道，
+“开放”访问权限只适用于原先已位于沙盒之外的程序二进制文件，
+你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2904"/>
@@ -8614,9 +8614,9 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <location filename="Forms/OptionsWindow.ui" line="2997"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
-        <translation>配置哪些进程可以读写注册表
-“开放”访问权限只适用于原先已位于沙盒之外的程序二进制文件
-你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为</translation>
+        <translation>配置哪些进程可以读写注册表，
+“开放”访问权限只适用于原先已位于沙盒之外的程序二进制文件，
+你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3011"/>
@@ -8628,7 +8628,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>配置哪些进程可以访问 NT IPC 对象，如 ALPC 端口及其他进程的内存和相关运行状态环境
-如需指定一个进程，使用“$:program.exe”作为路径值(不含双引号)</translation>
+如需指定一个进程，使用“$:program.exe”作为路径值(不含双引号)。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3118"/>
@@ -8643,7 +8643,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <source>Configure which processes can access desktop objects like windows and alike.</source>
         <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
-        <translation type="vanished">配置哪些进程可以访问桌面对象，如 Windows 或其它类似对象</translation>
+        <translation type="vanished">配置哪些进程可以访问桌面对象，如 Windows 或其它类似对象。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3231"/>
@@ -8658,7 +8658,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3324"/>
         <source>Configure which processes can access COM objects.</source>
-        <translation>配置哪些进程可以访问 COM 对象</translation>
+        <translation>配置哪些进程可以访问 COM 对象。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3336"/>
@@ -8673,7 +8673,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3357"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
-        <translation>将 Close...=!&lt;program&gt;,... 规则，应用到位于沙盒内的所有相关二进制文件</translation>
+        <translation>将 Close...=!&lt;program&gt;,... 规则，应用到位于沙盒内的所有相关二进制文件。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3456"/>
@@ -8744,14 +8744,14 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3723"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
-        <translation>警告：未在此驱动程序启用 Windows 筛选平台，因此以下规则只能在用户模式下生效，无法被强制执行！！！恶意程序可能会绕过这些规则的限制</translation>
+        <translation>警告：未在此驱动程序启用 Windows 筛选平台，因此以下规则只能在用户模式下生效，无法被强制执行！！！恶意程序可能会绕过这些规则的限制。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3440"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>规则的特异度是衡量一个给定规则对特定路径的匹配程度，简单地说，特异度是指从路径的最开始到最后一个匹配的非通配符子串之间的字符长度，一个只匹配 “*.tmp” 这样的文件类型的规则将具有最高的特异性，因为它总是匹配整个文件路径
-进程匹配级别的优先级高于特异度，它描述了一条规则如何适用于一个给定的进程，按进程名称或程序组应用的规则具有最高的匹配级别，其次是否定匹配模式(即适用于匹配除给定进程以外的所有进程的规则)，而匹配级别最低的是全局匹配，即适用于任何进程的规则</translation>
+进程匹配级别的优先级高于特异度，它描述了一条规则如何适用于一个给定的进程，按进程名称或程序组应用的规则具有最高的匹配级别，其次是否定匹配模式(即适用于匹配除给定进程以外的所有进程的规则)，而匹配级别最低的是全局匹配，即适用于任何进程的规则。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3374"/>
@@ -8771,7 +8771,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3364"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
-        <translation>当启用隐私模式时，沙盒进程将只能读取 C:\Windows\* 、 C:\Program Files\* 和注册表 HKLM 节点下的部分内容，除此之外的所有其它位置都需要明确的访问授权才能被读取或写入，在此模式下，专有规则将总是被应用</translation>
+        <translation>当启用隐私模式时，沙盒进程将只能读取 C:\Windows\* 、 C:\Program Files\* 和注册表 HKLM 节点下的部分内容，除此之外的所有其它位置都需要明确的访问授权才能被读取或写入，在此模式下，专有规则将总是被应用。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3433"/>
@@ -8781,7 +8781,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3350"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
-        <translation>只对位于沙盒之外的二进制文件应用文件和密钥权限开放指令</translation>
+        <translation>只对位于沙盒之外的二进制文件应用文件和密钥权限开放指令。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1986"/>
@@ -8814,7 +8814,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1400"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
-        <translation>通过严格限制进程令牌的使用来进行安全隔离是 Sandboxie 执行沙盒化限制的主要手段，当它被禁用时，沙盒将在应用隔间模式下运行，此时将不再提供可靠的安全限制，只是简单进行应用分隔</translation>
+        <translation>通过严格限制进程令牌的使用来进行安全隔离是 Sandboxie 执行沙盒化限制的主要手段，当它被禁用时，沙盒将在应用隔间模式下运行，此时将不再提供可靠的安全限制，只是简单进行应用分隔。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="969"/>
@@ -8858,12 +8858,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1424"/>
         <source>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</source>
-        <translation>安全筛查被 Sandboxie 用来强制执行文件系统和注册表访问限制，以及限制进程访问</translation>
+        <translation>安全筛查被 Sandboxie 用来强制执行文件系统和注册表访问限制，以及限制进程访问。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="903"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
-        <translation>以下选项可以在你未授予管理员权限时安全的使用</translation>
+        <translation>以下选项可以在你未授予管理员权限时安全的使用。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4610"/>
@@ -8907,7 +8907,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4679"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
-        <translation>这些命令只在沙盒被初始化时执行，要使它们再次运行，必须删除沙盒内容</translation>
+        <translation>这些命令只在沙盒被初始化时执行，要使它们再次运行，必须删除沙盒内容。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4682"/>
@@ -8917,7 +8917,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4753"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
-        <translation>在此处可以配置各种沙盒事件中自动执行特定的动作</translation>
+        <translation>在此处可以配置各种沙盒事件中自动执行特定的动作。</translation>
     </message>
     <message>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
@@ -8966,7 +8966,7 @@ instead of &quot;*&quot;.</source>
 &quot;A&quot; - 允许的访问
 &quot;D&quot; - 拒绝的访问
 &quot;I&quot; - 忽略访问请求
-来代替 &quot;*&quot;</translation>
+来代替 &quot;*&quot;。</translation>
     </message>
     <message>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
@@ -9048,9 +9048,9 @@ instead of &quot;*&quot;.</source>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
-        <translation>配置你的其它应用程序所使用的文件夹位置
+        <translation>配置你的其它应用程序所使用的文件夹位置。
 
-请注意，这些值对当前用户的所有沙盒保存</translation>
+请注意，这些值对当前用户的所有沙盒保存。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4579"/>
@@ -9066,7 +9066,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5818"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation>要弥补失去的保护，请参考“限制”设置组中的降低权限部分</translation>
+        <translation>要弥补失去的保护，请参考“限制”设置组中的降低权限部分。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5742"/>
@@ -9159,7 +9159,7 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Sandboxie 不被允许对主机文件进行写入，除非得到用户的允许
 当沙盒化的应用程序试图修改一个文件时，整个文件必须被复制到沙盒中
 对于大文件来说，这可能需要相当长的时间
-Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行配置</translation>
+Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行配置。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="691"/>
@@ -9283,7 +9283,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3218"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation>配置那些进程可以访问桌面组件（例如窗口等）</translation>
+        <translation>配置那些进程可以访问桌面组件（例如窗口等）。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3736"/>
@@ -9438,7 +9438,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1651"/>
         <source>Protect processes in this box from being accessed by specified unsandboxed host processes.</source>
-        <translation>保护此沙盒内的进程不被指定的非沙盒的主机进程访问</translation>
+        <translation>保护此沙盒内的进程不被指定的非沙盒的主机进程访问。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1619"/>
@@ -9459,7 +9459,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/OptionsWindow.ui" line="4558"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
-        <translation>在此处可以配置各个进程的高级选项，以提高兼容性或自定义沙盒的某些行为</translation>
+        <translation>在此处可以配置各个进程的高级选项，以提高兼容性或自定义沙盒的某些行为。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4569"/>
@@ -9573,7 +9573,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5782"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation>以下设置允许 Sandboxie 与辅助功能软件结合，请注意：当这些设置生效时，会使 Sandboxie 的部分保护措施失效</translation>
+        <translation>以下设置允许 Sandboxie 与辅助功能软件结合，请注意：当这些设置生效时，会使 Sandboxie 的部分保护措施失效。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5835"/>
@@ -9716,7 +9716,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="105"/>
         <source>Select the sandbox in which to start the program, installer or document.</source>
-        <translation>选择要用于运行程序、安装程序或打开文件的沙盒</translation>
+        <translation>选择要用于运行程序、安装程序或打开文件的沙盒。</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="64"/>
@@ -9962,7 +9962,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="936"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation>你可以为所有沙盒配置自定义运行菜单条目</translation>
+        <translation>你可以为所有沙盒配置自定义运行菜单条目。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="958"/>
@@ -10060,12 +10060,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <source>New full versions from the selected release channel.</source>
-        <translation type="vanished">来自选定发布通道的新的完整版本</translation>
+        <translation type="vanished">来自选定发布通道的新的完整版本。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1894"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation>针对已安装版本的 Templates.ini 模板和翻译的热更新补丁</translation>
+        <translation>针对已安装版本的 Templates.ini 模板和翻译的热更新补丁。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1024"/>
@@ -10082,7 +10082,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1907"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation>预览版通道包含最新的 GitHub 预发布版本</translation>
+        <translation>预览版通道包含最新的 GitHub 预发布版本。</translation>
     </message>
     <message>
         <source>New Versions</source>
@@ -10091,7 +10091,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2001"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation>稳定版通道包含最新的 GitHub 稳定版本</translation>
+        <translation>稳定版通道包含最新的 GitHub 稳定版本。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2004"/>
@@ -10101,7 +10101,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
         <translatorcomment>感觉用“事业”有点过于夸张，此处用“努力”感觉更贴合</translatorcomment>
-        <translation type="vanished">使 Sandboxie 与 Windows 的滚动更新保持同步，并和主流浏览器保持兼容性，这是一项永无止境的努力，请考虑捐赠以支持这项工作&lt;br /&gt;您可以通过 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal 捐赠&lt;/a&gt; (支持使用信用卡付款)来支持项目的开发&lt;br /&gt;您也可以通过 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 订阅&lt;/a&gt; 来提供持续的捐赠支持</translation>
+        <translation type="vanished">使 Sandboxie 与 Windows 的滚动更新保持同步，并和主流浏览器保持兼容性，这是一项永无止境的努力，请考虑捐赠以支持这项工作&lt;br /&gt;您可以通过 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal 捐赠&lt;/a&gt; (支持使用信用卡付款)来支持项目的开发&lt;br /&gt;您也可以通过 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 订阅&lt;/a&gt; 来提供持续的捐赠支持。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1910"/>
@@ -10114,7 +10114,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">此赞助者许可证已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;</translation>
+        <translation type="vanished">此赞助者许可证已过期，请&lt;a href=&quot;sbie://update/cert&quot;&gt;获取新许可证&lt;/a&gt;。</translation>
     </message>
     <message>
         <source>Check periodically for updates of Sandboxie-Plus</source>
@@ -10275,7 +10275,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2128"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation>……</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2141"/>
@@ -10352,7 +10352,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1075"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation>* 标复选框的显示效果取决于具体的视图模式</translation>
+        <translation>* 标复选框的显示效果取决于具体的视图模式。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="221"/>
@@ -10390,7 +10390,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>This option also enables asynchronous operation when needed and suspends updates.</source>
-        <translation>在暂缓更新或其它需要的情况使用异步操作</translation>
+        <translation>在暂缓更新或其它需要的情况使用异步操作。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="415"/>
@@ -10415,7 +10415,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2460"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>下列程序在沙盒之外启动时，Sandboxie 将提示 SBIE1301 警告</translation>
+        <translation>下列程序在沙盒之外启动时，Sandboxie 将提示 SBIE1301 警告。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2484"/>
@@ -10811,7 +10811,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2674"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>沙盒已检测到系统中安装了以下软件，点击“确定”应用配置，将改进与这些软件的兼容性，这些配置将作用于所有沙盒，包括现存和未来新增的沙盒</translation>
+        <translation>沙盒已检测到系统中安装了以下软件，点击“确定”应用配置，将改进与这些软件的兼容性，这些配置将作用于所有沙盒，包括现存和未来新增的沙盒。</translation>
     </message>
 </context>
 <context>
@@ -10839,7 +10839,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation>当删除一个快照时，它将被回退到此快照创建时的状态，而不是直接清空</translation>
+        <translation>当删除一个快照时，它将被回退到此快照创建时的状态，而不是直接清空。</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="107"/>
@@ -10877,12 +10877,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="69"/>
         <source>Test Settings...</source>
-        <translation>测试设置中...</translation>
+        <translation>测试设置中……</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="82"/>
         <source>Testing...</source>
-        <translation>测试中...</translation>
+        <translation>测试中……</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="117"/>

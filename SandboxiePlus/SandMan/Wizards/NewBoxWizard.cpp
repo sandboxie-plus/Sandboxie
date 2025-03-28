@@ -702,11 +702,11 @@ bool CFilesPage::validatePage()
         wizard()->setField("boxLocation", "");
     else {
         if (Location.length() < 4) {
-            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox can not be located at the root of a partition, please select a folder."));
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located at the root of a partition, please select a folder."));
             return false;
         }
         if (Location.left(2) == "\\\\") {
-            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox can not be located on a network share, please select a local folder."));
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located on a network share, please select a local folder."));
             return false;
         }
         if (Location.mid(2).contains(QRegularExpression("[ <>:\"/\\|?*\\[\\]]"))){

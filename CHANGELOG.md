@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Duplicate Sandbox with content from UI [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)
 - added new insecure debug option 'OpenAllSysCalls=y'
+- added template for WindowGrid
 
 ### Changed
 - when no proxy for a given ip type is configured, the connectionis failed

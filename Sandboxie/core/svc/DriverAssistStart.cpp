@@ -417,9 +417,25 @@ driver_started:
         }
     }
 
-    if (SbieApi_ReloadConf(0, SBIE_CONF_FLAG_RELOAD_CERT) == STATUS_CONTENT_BLOCKED) {
+    NTSTATUS status = SbieApi_ReloadConf(0, SBIE_CONF_FLAG_RELOAD_CERT);
+    if (status == STATUS_CONTENT_BLOCKED) {
+
+        BYTE CertBlocked = 1;
+        SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlocked", &CertBlocked, sizeof(CertBlocked));
 
         m_instance->m_DriverReady = false;
+    }
+    else {
+
+        BYTE CertBlocked = 0;
+        SbieApi_Call(API_GET_SECURE_PARAM, 3, L"CertBlocked", &CertBlocked, sizeof(CertBlocked));
+        if (CertBlocked) {
+            if (NT_SUCCESS(status)) {
+                CertBlocked = 0;
+                SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlocked", &CertBlocked, sizeof(CertBlocked));
+            } else
+                m_instance->m_DriverReady = false;
+        }
     }
 
 

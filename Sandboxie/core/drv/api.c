@@ -1220,6 +1220,9 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
             if (Verify_CertInfo.opt_net)
                 FeatureFlags |= SBIE_FEATURE_FLAG_NET_PROXY;
 
+            if (Verify_CertInfo.type == eCertDeveloper)
+                FeatureFlags |= SBIE_FEATURE_FLAG_NO_SIG;
+
             if (Dyndata_Active) {
 
                 FeatureFlags |= SBIE_FEATURE_FLAG_DYNDATA_OK;

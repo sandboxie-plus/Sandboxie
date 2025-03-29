@@ -24,6 +24,8 @@
 #include "util.h"
 #include "process.h"
 #include "common/my_version.h"
+#define KERNEL_MODE
+#include "verify.h"
 
 
 //---------------------------------------------------------------------------
@@ -467,7 +469,6 @@ _FX BOOLEAN MyIsTestSigning(void)
 // MyIsCallerSigned
 //---------------------------------------------------------------------------
 
-NTSTATUS KphVerifyCurrentProcess();
 
 _FX BOOLEAN MyIsCallerSigned(void)
 {
@@ -475,6 +476,10 @@ _FX BOOLEAN MyIsCallerSigned(void)
 
     // in test signing mode don't verify the signature
     if (Driver_OsTestSigning)
+        return TRUE;
+
+    // if this is a node locked develoepr certificate don't verify the signature
+    if (Verify_CertInfo.type == eCertDeveloper && Verify_CertInfo.active)
         return TRUE;
 
     status = KphVerifyCurrentProcess();

@@ -1539,6 +1539,8 @@ QString CSettingsWindow::GetCertType()
 		CertType = tr("Contributor");
 	else if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
 		CertType = tr("Eternal");
+	else if (g_CertInfo.type == eCertDeveloper)
+		CertType = tr("Developer");
 	else if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
 		CertType = tr("Business");
 	else if (CERT_IS_TYPE(g_CertInfo, eCertPersonal))
@@ -1562,6 +1564,8 @@ QColor CSettingsWindow::GetCertColor()
 {
 	if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
 		return QColor(135, 0, 255, 255);
+	else if (g_CertInfo.type == eCertDeveloper)
+		return QColor(255, 215, 0, 255);
 	else if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
 		return QColor(211, 0, 0, 255);
 	else if (CERT_IS_TYPE(g_CertInfo, eCertPersonal))

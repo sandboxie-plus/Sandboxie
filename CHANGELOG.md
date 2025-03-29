@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Duplicate Sandbox with content from UI [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)
 - added new insecure debug option 'OpenAllSysCalls=y'
 - added template for WindowGrid
+- Added new Certificate type [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/) It deactivates the usermode component verification but can only be used in node-locked form.
+  - Note: All current and future holders of Contributor or Ethernal/Huge certificates are eligible to receive a free Dev Key; please request by email if required.
 
 ### Changed
 - when no proxy for a given ip type is configured, the connectionis failed
@@ -31,7 +33,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with insecure debug option 'OriginalToken=y'
 - Box Group name accidentally entered carriage return character [#4608](https://github.com/sandboxie-plus/Sandboxie/issues/4608)
 - fixed Paths selected from the path selection drop-down menu in the New Box Wizard return a "not a valid path" error [#4611](https://github.com/sandboxie-plus/Sandboxie/issues/4611)
-
 
 
 

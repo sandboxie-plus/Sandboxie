@@ -7,19 +7,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Duplicate Sandbox with content from UI [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)
 - added new insecure debug option 'OpenAllSysCalls=y'
-- Added new Certificate type [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/) it deactivates the usermode component verification, but can only be used in node locked form.
-  - Note: all curreand and future holders of Contributor or Ethernal/Huge certificates are eligable to receive a free Dev Key please request by email if requried.
+- added template for WindowGrid
+- added new Certificate type [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/) It deactivates the usermode component verification but can only be used in node-locked form.
+  - Note: All current and future holders of Contributor or Ethernal/Huge certificates are eligible to receive a free Dev Key; please request by email if required.
 
 ### Changed
 - when no proxy for a given ip type is configured, the connectionis failed
-  - this change prevents IP leckage when runnign dual stack IPv4 and IPv6 but havong only one proxy type configured
+  - this change prevents IP leckage when running dual stack IPv4 and IPv6 but having only one proxy type configured
 - ini editor is no longer reset when saving
 - DisableWinNtHook can now be changed without a driver reload
 
 ### Fixed
 - fixed the encoding issue with the bullet character in the box delete/remove confirmation dialog [#4591](https://github.com/sandboxie-plus/Sandboxie/issues/4591)
 - Changing the box settings/type causes some template settings in the box to be duplicated [#4595](https://github.com/sandboxie-plus/Sandboxie/issues/4595)
-- Added warnign when atemptig to put a sandbox is in the root of a partition [#4582](https://github.com/sandboxie-plus/Sandboxie/issues/4582)
+- Added warning when atemptig to put a sandbox is in the root of a partition [#4582](https://github.com/sandboxie-plus/Sandboxie/issues/4582)
 - fixed Bug when uninstalling [#4540](https://github.com/sandboxie-plus/Sandboxie/issues/4540)
 - fixed Golang Cmd.Run() doesn't return when running in Sandboxie [#4538](https://github.com/sandboxie-plus/Sandboxie/issues/4538)
   - fixed a generic handle duplication issue which may help many other applications to
@@ -32,7 +33,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with insecure debug option 'OriginalToken=y'
 - Box Group name accidentally entered carriage return character [#4608](https://github.com/sandboxie-plus/Sandboxie/issues/4608)
 - fixed Paths selected from the path selection drop-down menu in the New Box Wizard return a "not a valid path" error [#4611](https://github.com/sandboxie-plus/Sandboxie/issues/4611)
-
 
 
 

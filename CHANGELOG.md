@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Duplicate Sandbox with content from UI [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)
 - added new insecure debug option 'OpenAllSysCalls=y'
+- Added new Certificate type [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/) it deactivates the usermode component verification, but can only be used in node locked form.
+  - Note: all curreand and future holders of Contributor or Ethernal/Huge certificates are eligable to receive a free Dev Key please request by email if requried.
 
 ### Changed
 - when no proxy for a given ip type is configured, the connectionis failed

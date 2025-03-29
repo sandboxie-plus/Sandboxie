@@ -847,6 +847,8 @@ _FX NTSTATUS KphValidateCertificate()
             ;
         else if (_wcsicmp(type, L"CONTRIBUTOR") == 0)
             Verify_CertInfo.type = eCertContributor;
+        else if (_wcsicmp(type, L"DEVELOPER") == 0)
+            Verify_CertInfo.type = eCertDeveloper;
         else if (_wcsicmp(type, L"ETERNAL") == 0)
             Verify_CertInfo.type = eCertEternal;
         else if (_wcsicmp(type, L"BUSINESS") == 0)
@@ -877,7 +879,9 @@ _FX NTSTATUS KphValidateCertificate()
 
         if(CertDbg)     DbgPrint("Sbie Cert type: %X\n", Verify_CertInfo.type);
 
-        if (CERT_IS_TYPE(Verify_CertInfo, eCertEternal))
+        if (CERT_IS_TYPE(Verify_CertInfo, eCertEternal)) // includes contributor
+            Verify_CertInfo.level = eCertMaxLevel;
+        else if (CERT_IS_TYPE(Verify_CertInfo, eCertDeveloper))
             Verify_CertInfo.level = eCertMaxLevel;
         else if (CERT_IS_TYPE(Verify_CertInfo, eCertEvaluation)) // in evaluation the level field holds the amount of days to allow evaluation for
         {

@@ -70,7 +70,7 @@ enum ECertType {
 //  eCert               = 0b10010,
 //  eCert               = 0b10011,
             
-//  eCertOther          = 0b10100,
+    eCertDeveloper      = 0b10100,
 //  eCert               = 0b10101, 
 //  eCert               = 0b10110,
 //  eCert               = 0b10111,
@@ -100,4 +100,5 @@ enum ECertLevel {
 #ifdef KERNEL_MODE
 extern SCertInfo Verify_CertInfo;
 NTSTATUS KphVerifyBuffer(PUCHAR Buffer, ULONG BufferSize, PUCHAR Signature, ULONG SignatureSize);
+NTSTATUS KphVerifyCurrentProcess();
 #endif

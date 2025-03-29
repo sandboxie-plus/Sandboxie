@@ -2218,6 +2218,8 @@ QString CSbieAPI::GetFeatureStr()
 		str.append("EBox");		// Encrypted Boxes
 	if (flags & SBIE_FEATURE_FLAG_NET_PROXY)
 		str.append("NetI");		// Network Interception
+	if (flags & SBIE_FEATURE_FLAG_NO_SIG)
+		str.append("DEV");		// Developer
 
 	return str.join(",");
 }

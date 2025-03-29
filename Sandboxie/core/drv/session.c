@@ -420,6 +420,9 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
     if (proc)
         return STATUS_NOT_IMPLEMENTED;
 
+    if (!MyIsCallerSigned())
+        return STATUS_ACCESS_DENIED;
+
     //
     // get status
     //
@@ -518,6 +521,9 @@ _FX NTSTATUS Session_Api_ForceChildren(PROCESS *proc, ULONG64 *parms)
 
     if (proc)
         return STATUS_NOT_IMPLEMENTED;
+
+    if (!MyIsCallerSigned())
+        return STATUS_ACCESS_DENIED;
 
     process_id = (HANDLE)parms[1];
 

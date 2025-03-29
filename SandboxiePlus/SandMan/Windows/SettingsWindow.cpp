@@ -2068,7 +2068,6 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 	{
 		g_FeatureFlags = theAPI->GetFeatureFlags();
 		g_Certificate = Certificate;
-		theGUI->UpdateCertState();
 
 		if (g_CertInfo.expired || g_CertInfo.outdated) {
 			if(g_CertInfo.outdated)

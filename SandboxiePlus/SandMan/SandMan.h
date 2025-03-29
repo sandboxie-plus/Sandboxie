@@ -117,7 +117,6 @@ public:
 	void				UpdateTitleTheme(const HWND& hwnd);
 
 	SB_STATUS			ReloadCert(QWidget* pWidget = NULL);
-	void				UpdateCertState();
 
 	void				SaveMessageLog(QIODevice* pFile);
 

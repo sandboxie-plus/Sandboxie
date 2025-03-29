@@ -2497,7 +2497,6 @@ void CSandMan::OnStatusChanged()
 			if(QFile::exists(CertPath)) // always delete invalid certificates
 				WindowsMoveFile(CertPath.replace("/", "\\"), "");
 		}
-		UpdateCertState();
 
 		uchar UsageFlags = 0;
 		if (theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags))) {
@@ -3095,17 +3094,25 @@ bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 	return false;
 }
 
+void InitCertSlot();
+
 SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
 {
 	SB_STATUS Status = theAPI->ReloadCert();
+
+	theAPI->GetDriverInfo(-1, &g_CertInfo.State, sizeof(g_CertInfo.State));
 
 	if (!Status.IsError())
 	{
 		BYTE CertBlocked = 0;
 		theAPI->GetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
 		if (CertBlocked) {
-			CertBlocked = 0;
-			theAPI->SetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
+			if (g_CertInfo.type == eCertEvaluation)
+				g_CertInfo.active = 0; // no eval when cert blocked
+			else {
+				CertBlocked = 0;
+				theAPI->SetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
+			}
 		}
 	}
 	else if (Status.GetStatus() == 0xC0000804L /*STATUS_CONTENT_BLOCKED*/)
@@ -3131,15 +3138,6 @@ SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
 
 		QMessageBox::critical(pWidget ? pWidget : this, "Sandboxie-Plus", tr("The support certificate is not valid.\nError: %1").arg(Info));
 	}
-
-	return Status;
-}
-
-void InitCertSlot();
-
-void CSandMan::UpdateCertState()
-{
-	theAPI->GetDriverInfo(-1, &g_CertInfo.State, sizeof(g_CertInfo.State));
 
 #ifdef _DEBUG
 	qDebug() << "g_CertInfo" << g_CertInfo.State;
@@ -3217,6 +3215,8 @@ void CSandMan::UpdateCertState()
 	}
 
 	emit CertUpdated();
+
+	return Status;
 }
 
 void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data)

@@ -20,6 +20,7 @@
 // Driver Assistant, start driver
 //---------------------------------------------------------------------------
 
+#include "core/drv/verify.h"
 
 //---------------------------------------------------------------------------
 // Imported Functions
@@ -430,7 +431,8 @@ driver_started:
         BYTE CertBlocked = 0;
         SbieApi_Call(API_GET_SECURE_PARAM, 3, L"CertBlocked", &CertBlocked, sizeof(CertBlocked));
         if (CertBlocked) {
-            if (NT_SUCCESS(status)) {
+            SCertInfo CertInfo = { 0 };
+            if (NT_SUCCESS(status) && NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) && CertInfo.type != eCertEvaluation) {
                 CertBlocked = 0;
                 SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlocked", &CertBlocked, sizeof(CertBlocked));
             } else

@@ -986,20 +986,12 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Sandbox kann sich nicht im Stammverzeichnis einer Partition befinden, bitte wählen Sie einen Ordner aus.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A sandbox can not be located at the root fo a partition, please select a folder.</source>
-        <translation type="vanished">Eine Sandbox kann sich nicht im Stammverzeichnis einer Partition befinden, bitte wählen Sie einen Ordner aus.</translation>
-    </message>
-    <message>
-        <source>A sandbox can not be located on a network share, please select a local folder.</source>
-        <translation type="vanished">Eine Sandbox kann sich nicht auf einer Netzwerkfreigabe befinden, bitte wählen Sie einen lokalen Ordner aus.</translation>
+        <translation>Eine Sandbox kann sich nicht auf einer Netzwerkfreigabe befinden, bitte wählen Sie einen lokalen Ordner aus.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="714"/>
@@ -3538,9 +3530,7 @@ Nein wählt: %2</translation>
         <location filename="SandMan.cpp" line="2609"/>
         <source>Sandman did not finish enumerating installed windows updates last time, it probably hangs.
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
-        <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
-Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation type="unfinished">SandMan hat beim letzten Mal die Ermittlung der installierten Windowsupdates nicht abgeschlossen, es hängt wahrscheinlich.
+        <translation>SandMan hat beim letzten Mal die Ermittlung der installierten Windowsupdates nicht abgeschlossen, es hängt wahrscheinlich.
 Möchten Sie das Scannen von Windowsupdates in der Softwarekompatibilitätserkennung deaktivieren?</translation>
     </message>
     <message>
@@ -5083,8 +5073,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
-        <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
-        <translation type="unfinished">Sandbox- und Boxgruppen- name können nicht die Zeichen &apos;,()&apos; enthalten.</translation>
+        <translation>Sandbox- und Boxgruppennamen können nicht die Zeichen &apos;,()&apos; oder Steuerzeichen enthalten.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>

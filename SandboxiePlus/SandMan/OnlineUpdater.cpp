@@ -117,14 +117,12 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 	//	UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	//if (UpdateKey.isEmpty())
 	//	UpdateKey = "00000000000000000000000000000000";
-	if (!UpdateKey.isEmpty())
-		UpdateKey += "-";
-
+	Query.addQueryItem("update_key", UpdateKey);
+	
 	quint64 RandID = COnlineUpdater::GetRandID();
 	quint32 Hash = theAPI->GetUserSettings()->GetName().mid(13).toInt(NULL, 16);
-
-	UpdateKey += QString::number(Hash, 16).rightJustified(8, '0').toUpper() + QString::number(RandID, 16).rightJustified(16, '0').toUpper();
-	Query.addQueryItem("update_key", UpdateKey);
+	QString HashKey = QString::number(Hash, 16).rightJustified(8, '0').toUpper() + "-" + QString::number(RandID, 16).rightJustified(16, '0').toUpper();
+	Query.addQueryItem("hash_key", HashKey);
 
 	if (Params.contains("channel")) 
 		Query.addQueryItem("channel", Params["channel"].toString());
@@ -234,6 +232,11 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 
 	if(!UpdateKey.isEmpty())
 		Query.addQueryItem("UpdateKey", UpdateKey);
+
+	quint64 RandID = COnlineUpdater::GetRandID();
+	quint32 Hash = theAPI->GetUserSettings()->GetName().mid(13).toInt(NULL, 16);
+	QString HashKey = QString::number(Hash, 16).rightJustified(8, '0').toUpper() + "-" + QString::number(RandID, 16).rightJustified(16, '0').toUpper();
+	Query.addQueryItem("HashKey", HashKey);
 
 	if (Serial.isEmpty() && Params.contains("eMail")) { // Request eval Key
 		Query.addQueryItem("eMail", Params["eMail"].toString());
@@ -481,6 +484,8 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
             theAPI->SetSecureParam("CertBlockListSig", BlockListSig0, BlockListSig0.size());
 			BlockListLen = BlockList0.size();
             //BlockList = BlockList0;
+
+			theGUI->ReloadCert();
         }
 	}
 

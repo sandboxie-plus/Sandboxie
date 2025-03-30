@@ -299,8 +299,7 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 		CloseHandle(hFile);
 	}
 
-	if (!update_key.IsEmpty())
-		update_key += "-";
+	Path += L"&update_key=" + update_key;
 
     QWORD RandID = 0;
     SbieApi_Call(API_GET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
@@ -316,12 +315,9 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 	CSbieIni::GetInstance().GetUser(Section, UserName, IsAdmin);
 	DWORD Hash = wcstoul(Section.Mid(13), NULL, 16);
 
-	wchar_t sHash[25];
-	wsprintf(sHash, L"%08X%08X%08X", Hash, DWORD(RandID >> 32), DWORD(RandID));
-
-	update_key += sHash;
-
-	Path += L"&update_key=" + update_key;
+	wchar_t sHash[26];
+	wsprintf(sHash, L"%08X-%08X%08X", Hash, DWORD(RandID >> 32), DWORD(RandID));
+	Path += L"&hash_key=" + CString(sHash);
 
 	if (!DownloadUpdateData(L"sandboxie-plus.com", Path, &jsonString, NULL)) {
 		Context->ErrorCode = GetLastError();

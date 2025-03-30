@@ -167,6 +167,33 @@ void CGetUpdatesJob::Finish(QNetworkReply* pReply)
 		QByteArray Reply = pReply->readAll();
 
 		Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
+
+		if (Data.contains("cbl"))
+		{
+			QVariantMap CertBL = Data["cbl"].toMap();
+			QByteArray BlockList0 = CertBL["list"].toByteArray();
+			QByteArray BlockListSig0 = QByteArray::fromHex(CertBL["sig"].toByteArray());
+
+			std::string BlockList;
+			BlockList.resize(0x10000, 0); // 64 kb should be enough
+			static quint32 BlockListLen = 0;
+			if (BlockListLen == 0) {
+				SB_STATUS Status = theAPI->GetSecureParam("CertBlockList", (void*)BlockList.c_str(), BlockList.size(), &BlockListLen, true);
+				//BlockList.resize(BlockListLen);
+				if (Status.IsError()) // error
+					BlockListLen = 0;
+			}
+
+			if (BlockListLen < BlockList0.size())
+			{
+				theAPI->SetSecureParam("CertBlockList", BlockList0, BlockList0.size());
+				theAPI->SetSecureParam("CertBlockListSig", BlockListSig0, BlockListSig0.size());
+				BlockListLen = BlockList0.size();
+				//BlockList = BlockList0;
+
+				theGUI->ReloadCert();
+			}
+		}
 	}
 
 	m_pProgress->Finish(SB_OK);
@@ -460,33 +487,6 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 			QMessageBox::critical(theGUI, "Sandboxie-Plus", tr("Failed to check for updates, error: %1").arg(Error));
 		m_CheckMode = eInit;
 		return;
-	}
-
-	if (Data.contains("cbl"))
-	{
-		QVariantMap CertBL = Data["cbl"].toMap();
-		QByteArray BlockList0 = CertBL["list"].toByteArray();
-		QByteArray BlockListSig0 = QByteArray::fromHex(CertBL["sig"].toByteArray());
-
-		std::string BlockList;
-        BlockList.resize(0x10000, 0); // 64 kb should be enough
-        static quint32 BlockListLen = 0;
-		if (BlockListLen == 0) {
-			SB_STATUS Status = theAPI->GetSecureParam("CertBlockList", (void*)BlockList.c_str(), BlockList.size(), &BlockListLen, true);
-			//BlockList.resize(BlockListLen);
-			if (Status.IsError()) // error
-				BlockListLen = 0;
-		}
-
-        if (BlockListLen < BlockList0.size())
-        {
-            theAPI->SetSecureParam("CertBlockList", BlockList0, BlockList0.size());
-            theAPI->SetSecureParam("CertBlockListSig", BlockListSig0, BlockListSig0.size());
-			BlockListLen = BlockList0.size();
-            //BlockList = BlockList0;
-
-			theGUI->ReloadCert();
-        }
 	}
 
 	bool bNothing = true;

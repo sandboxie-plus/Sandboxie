@@ -1038,7 +1038,7 @@ Du kan klicka på Avsluta för att stänga denna guide.</translation>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="23"/>
         <source>Sandboxie-Plus - Sandbox Import</source>
-        <translation>Sandboxie Plus - Sandlådeimport</translation>
+        <translation>Sandboxie-Plus - Sandlådeimport</translation>
     </message>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="39"/>
@@ -1182,12 +1182,12 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>En sandlåda kan inte vara lokaliserad vid en partitions root, vänligen välj en mapp.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>En sandlåda kan inte vara lokaliserad på en nätverksdelning, vänligen välj en lokal mapp.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="714"/>
@@ -1609,7 +1609,7 @@ Vill du fortfarande uppdatera?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="507"/>
         <source>Update Check completed, no new updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdateringskontroll avklarad, inga nya uppdateringar</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="652"/>
@@ -2603,7 +2603,7 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1044"/>
         <source> entry: Address must be IP, not host name</source>
-        <translation type="unfinished"></translation>
+        <translation> entrè: Adressen måste vara IP, inte värdnamn</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
@@ -3269,7 +3269,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade eller experime
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
         <source>Copying folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopierar mapp:%1</translation>
     </message>
 </context>
 <context>
@@ -4441,7 +4441,8 @@ Vänligen kontrollera om det finns en uppdatering för Sandboxie.</translation>
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandman avslutade inte uppräknandet av installerade Windows updates senaste gången, har troligen hängt sig
+Vill du inaktivera Windows updates-skanning hos Software compatibility detection?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2788"/>
@@ -5535,7 +5536,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <location filename="Views/SbieView.cpp" line="245"/>
         <source>Duplicate Box with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiera lådan med innehåll</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
@@ -5650,7 +5651,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <location filename="Views/SbieView.cpp" line="347"/>
         <source>Duplicate Sandbox with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiera sandlådan med innehåll</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="348"/>
@@ -5721,42 +5722,42 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <location filename="Views/SbieView.cpp" line="1192"/>
         <source>&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1194"/>
         <source>... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation>... och %1 mer</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1319"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>VARNING: Den öppnade registerredigeraren är inte sandlådad, vänligen var försiktig och gör endast ändringar till de förvalda sandlådeplatserna.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1416"/>
         <source>Not Created</source>
-        <translation type="unfinished"></translation>
+        <translation>Inte skapad</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1425"/>
         <source>Copying: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopierar: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1517"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vill du verkligen ta bort följande sandlåd(a)(or)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Varning: Lådinnehållet kommer också att raderas!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1582"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vill du radera innehållet hos följande sandlåda?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1600"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vill du verkligen radera innehållet hos följande sandlådor?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1043"/>
@@ -5782,7 +5783,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <location filename="Views/SbieView.cpp" line="1152"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
-        <translation type="unfinished">Sandlådenamnet och lådgruppnamnet kan inte använda &quot;()&quot; symbolen.</translation>
+        <translation>Sandlådenamnet och lådgruppsnamnet kan inte använda &quot;,()&quot; symbolen eller kontrolltecknen.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>
@@ -5975,7 +5976,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <location filename="Engine/ScriptManager.cpp" line="159"/>
         <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation>Fel, felsökningsinstruktionerna kopierade %1 (%2 &lt;-&gt; %3)!</translation>
+        <translation>Fel. Felsökningsinstruktionerna kopierade %1 (%2 &lt;-&gt; %3)!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="245"/>
@@ -6510,7 +6511,7 @@ Du kan begära upp till %3 evalueringscertifikat för varje unikt hårdvaru-ID.<
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Utvecklare</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1555"/>
@@ -6731,7 +6732,7 @@ Du kan begära upp till %3 evalueringscertifikat för varje unikt hårdvaru-ID.<
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="38"/>
         <source>Creation Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapelsetidpunkt</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="56"/>
@@ -9553,7 +9554,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5238"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation>Spåra funktions-hooking via SbieDll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5334"/>

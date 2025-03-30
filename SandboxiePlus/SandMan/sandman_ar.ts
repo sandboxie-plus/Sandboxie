@@ -3487,7 +3487,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>التكوين الحالي: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2602"/>
+        <location filename="SandMan.cpp" line="2601"/>
         <source>Do you want the setup wizard to be omitted?</source>
         <translation>هل تريد حذف معالج الإعداد؟</translation>
     </message>
@@ -3533,17 +3533,17 @@ No will choose: %2</source>
 لا، سيتم اختيار: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2538"/>
+        <location filename="SandMan.cpp" line="2537"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>لم يتم العثور على صندوق العزل الافتراضي؛ جارٍ الإنشاء: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2619"/>
+        <location filename="SandMan.cpp" line="2618"/>
         <source>   -   NOT connected</source>
         <translation>   -   غير متصل</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3079"/>
+        <location filename="SandMan.cpp" line="3078"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>مجموعة الميزات المحددة متاحة فقط لمؤيدي المشروع. سيتم إنهاء العمليات التي بدأت في صندوق مع تمكين مجموعة الميزات هذه دون شهادة داعم بعد 5 دقائق.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;كن داعمًا للمشروع&lt;/a&gt;، واحصل على &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;شهادة داعم&lt;/a&gt;</translation>
     </message>
@@ -3936,17 +3936,17 @@ No will choose: %2</source>
         <translation>دليل البيانات: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2507"/>
+        <location filename="SandMan.cpp" line="2506"/>
         <source> for Personal use</source>
         <translation> للاستخدام الشخصي</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2509"/>
+        <location filename="SandMan.cpp" line="2508"/>
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   -   للاستخدام غير التجاري فقط</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2575"/>
+        <location filename="SandMan.cpp" line="2574"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
@@ -3955,37 +3955,37 @@ Please check if there is an update for sandboxie.</oldsource>
 يرجى التحقق مما إذا كان هناك تحديث لـ Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2584"/>
+        <location filename="SandMan.cpp" line="2583"/>
         <source>Don&apos;t show this message again for the current build.</source>
         <translation>لا تعرض هذه الرسالة مرة أخرى للإصدار الحالي.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2591"/>
+        <location filename="SandMan.cpp" line="2590"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
         <translation>يتجاوز إصدار Windows %1 الخاص بك قدرات الدعم المعروفة حاليًا لإصدار Sandboxie الخاص بك، وسيحاول Sandboxie استخدام آخر الإزاحات المعروفة والتي قد تتسبب في عدم استقرار النظام.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2875"/>
-        <location filename="SandMan.cpp" line="2879"/>
-        <location filename="SandMan.cpp" line="2881"/>
+        <location filename="SandMan.cpp" line="2874"/>
+        <location filename="SandMan.cpp" line="2878"/>
+        <location filename="SandMan.cpp" line="2880"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2986"/>
+        <location filename="SandMan.cpp" line="2985"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>سيتم إنهاء البرنامج %1 الذي بدأ في الصندوق %2 في غضون 5 دقائق لأن الصندوق تم تكوينه لاستخدام الميزات المتوفرة حصريًا لمؤيدي المشروع.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2988"/>
+        <location filename="SandMan.cpp" line="2987"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>تم تكوين الصندوق %1 لاستخدام الميزات المتوفرة حصريًا لمؤيدي المشروع، وسيتم تجاهل هذه الإعدادات المسبقة.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2969"/>
-        <location filename="SandMan.cpp" line="2977"/>
-        <location filename="SandMan.cpp" line="2989"/>
-        <location filename="SandMan.cpp" line="3068"/>
+        <location filename="SandMan.cpp" line="2968"/>
+        <location filename="SandMan.cpp" line="2976"/>
+        <location filename="SandMan.cpp" line="2988"/>
+        <location filename="SandMan.cpp" line="3067"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;كن أحد داعمي المشروع&lt;/a&gt;، واحصل على &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;شهادة داعم&lt;/a&gt;</translation>
     </message>
@@ -4066,7 +4066,7 @@ Please check if there is an update for sandboxie.</oldsource>
         <translation>تنفيذ OnBoxTerminate: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2609"/>
+        <location filename="SandMan.cpp" line="2608"/>
         <source>Sandman did not finish enumerating installed windows updates last time, it probably hangs.
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
@@ -4074,70 +4074,70 @@ Do you want to disable Windows Updates scanning from the the software compatibil
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2789"/>
+        <location filename="SandMan.cpp" line="2788"/>
         <source>Failed to configure hotkey %1, error: %2</source>
         <translation>فشل في تكوين مفتاح التشغيل السريع %1، الخطأ: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2968"/>
+        <location filename="SandMan.cpp" line="2967"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>تم تكوين الصندوق %1 لاستخدام الميزات المتوفرة حصريًا لمؤيدي المشروع.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2973"/>
+        <location filename="SandMan.cpp" line="2972"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>تم تكوين الصندوق %1 لاستخدام الميزات التي تتطلب شهادة مؤيد &lt;b&gt;متقدمة&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2975"/>
-        <location filename="SandMan.cpp" line="3066"/>
+        <location filename="SandMan.cpp" line="2974"/>
+        <location filename="SandMan.cpp" line="3065"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;قم بترقية شهادتك&lt;/a&gt; لفتح قفل الميزات المتقدمة.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3062"/>
+        <location filename="SandMan.cpp" line="3061"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>تتطلب الميزة المحددة شهادة داعم &lt;b&gt;متقدمة&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3064"/>
+        <location filename="SandMan.cpp" line="3063"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;يجب أن تكون على مستوى Patreon العظيم أو أعلى لفتح هذه الميزة.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3076"/>
+        <location filename="SandMan.cpp" line="3075"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>مجموعة الميزات المحددة متاحة فقط لمؤيدي المشروع.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;كن داعمًا للمشروع&lt;/a&gt;، واحصل على &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;شهادة داعم&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3114"/>
+        <location filename="SandMan.cpp" line="3121"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>تم حظر الشهادة التي تحاول استخدامها، مما يعني أنها أصبحت غير صالحة لسبب وجيه. وأي محاولة لاستخدامها تشكل خرقًا لشروط الاستخدام الخاصة بها!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3126"/>
+        <location filename="SandMan.cpp" line="3133"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>توقيع الشهادة غير صالح!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3127"/>
+        <location filename="SandMan.cpp" line="3134"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>الشهادة غير مناسبة لهذا المنتج.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3128"/>
+        <location filename="SandMan.cpp" line="3135"/>
         <source>The Certificate is node locked.</source>
         <translation>الشهادة مقفلة.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3132"/>
+        <location filename="SandMan.cpp" line="3139"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>شهادة الدعم غير صالحة.
 خطأ: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3205"/>
+        <location filename="SandMan.cpp" line="3203"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>انتهت فترة التقييم!!!</translation>
@@ -4425,23 +4425,23 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Sandboxie-Plus هو استمرار مفتوح المصدر لـ Sandboxie.&lt;br /&gt;قم بزيارة &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; لمزيد من المعلومات.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;الميزات: %3&lt;br /&gt;&lt;br /&gt;التثبيت: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;الأيقونات من &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3210"/>
+        <location filename="SandMan.cpp" line="3208"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>شهادة الداعم غير صالحة لهذا الإصدار، يرجى الحصول على شهادة محدثة</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3213"/>
+        <location filename="SandMan.cpp" line="3211"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
         <translation>انتهت صلاحية شهادة الداعم%1، يرجى الحصول على شهادة محدثة</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3214"/>
+        <location filename="SandMan.cpp" line="3212"/>
         <source>, but it remains valid for the current build</source>
         <translation>، لكنها تظل صالحة للإصدار الحالي</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3216"/>
+        <location filename="SandMan.cpp" line="3214"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>ستنتهي صلاحية شهادة الداعم في غضون %1 يوم، يرجى الحصول على شهادة محدثة</translation>
     </message>
@@ -5743,81 +5743,86 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1543"/>
+        <source>Developer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>Business</source>
         <translation>أعمال</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1547"/>
         <source>Personal</source>
         <translation>شخصي</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1547"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1549"/>
         <source>Great Patreon</source>
         <translation>مستخدم رائع على Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1549"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1551"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1551"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1553"/>
         <source>Family</source>
         <translation>عائلي</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1555"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1557"/>
         <source>Evaluation</source>
         <translation>تقييم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1557"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1559"/>
         <source>Type %1</source>
         <translation>النوع %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1585"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1589"/>
         <source>Advanced</source>
         <translation>متقدم</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1591"/>
         <source>Advanced (L)</source>
         <translation>متقدم (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1589"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1593"/>
         <source>Max Level</source>
         <translation>المستوى الأقصى</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1591"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1595"/>
         <source>Level %1</source>
         <translation>المستوى %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1620"/>
         <source>Supporter certificate required for access</source>
         <translation>مطلوب شهادة الداعم للوصول</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1637"/>
         <source>Supporter certificate required for automation</source>
         <translation>مطلوب شهادة الداعم للأتمتة</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2071"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2074"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>هذه الشهادة للأسف غير صالحة للإصدار الحالي، تحتاج إلى الحصول على شهادة جديدة أو الترقية إلى إصدار سابق.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2073"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2076"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>على الرغم من انتهاء صلاحية هذه الشهادة، إلا أن الميزات الإضافية المثبتة حاليًا تظل ممكّنة. ومع ذلك، لن تتمكن بعد الآن من الوصول إلى خدمات Sandboxie-Live، بما في ذلك تحديثات التوافق وقاعدة بيانات استكشاف الأخطاء وإصلاحها عبر الإنترنت.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2075"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2078"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>انتهت صلاحية هذه الشهادة للأسف، تحتاج إلى الحصول على شهادة جديدة.</translation>
     </message>
@@ -5923,123 +5928,123 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>استرداد الشهادة...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1553"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1555"/>
         <source>Home</source>
         <translation>الصفحة الرئيسية</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1740"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1744"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>تشغيل &amp;دون عزل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1748"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1752"/>
         <source>Set Force in Sandbox</source>
         <translation>تعيين فرض العزل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1757"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1761"/>
         <source>Set Open Path in Sandbox</source>
         <translation>تعيين المسار المفتوح في صندوق العزل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2051"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>لا يبدو هذا كشهادة. يُرجى إدخال الشهادة بالكامل، وليس جزءًا منها فقط.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2079"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2082"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>تم تطبيق شهادة التقييم بنجاح. استمتع بالتجربة المجانية!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2081"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2084"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>شكرًا لك على دعم تطوير Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2145"/>
         <source>Update Available</source>
         <translation>التحديث متاح</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2144"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2147"/>
         <source>Installed</source>
         <translation>تم التثبيت</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2149"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2152"/>
         <source>by %1</source>
         <translation>بواسطة %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2157"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2160"/>
         <source>(info website)</source>
         <translation>(موقع معلومات)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2184"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2187"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>هذه الوظيفة الإضافية إلزامية ولا يمكن إزالتها.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2193"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2196"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2342"/>
         <source>Select Directory</source>
         <translation>حدد الدليل</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2222"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2225"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;تحقق الآن&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2299"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2302"/>
         <source>Please enter the new configuration password.</source>
         <translation>الرجاء إدخال كلمة مرور التكوين الجديدة.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2306"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>الرجاء إعادة إدخال كلمة مرور التكوين الجديدة.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2308"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2311"/>
         <source>Passwords did not match, please retry.</source>
         <translation>لم تتطابق كلمات المرور، يرجى إعادة المحاولة.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2320"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2323"/>
         <source>Process</source>
         <translation>العملية</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2320"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2323"/>
         <source>Folder</source>
         <translation>المجلد</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2333"/>
         <source>Please enter a program file name</source>
         <translation>الرجاء إدخال اسم ملف البرنامج</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2398"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2401"/>
         <source>Please enter the template identifier</source>
         <translation>الرجاء إدخال معرف القالب</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2409"/>
         <source>Error: %1</source>
         <translation>خطأ: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2441"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>هل تريد حقًا حذف القالب المحلي المحدد؟</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2646"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2649"/>
         <source>%1 (Current)</source>
         <translation>%1 (الحالي)</translation>
     </message>

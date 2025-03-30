@@ -3492,22 +3492,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Kurulum</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2507"/>
+        <location filename="SandMan.cpp" line="2506"/>
         <source> for Personal use</source>
         <translation> Kişisel kullanım için</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2509"/>
+        <location filename="SandMan.cpp" line="2508"/>
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   -   Ticari Olmayan kullanım için</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2602"/>
+        <location filename="SandMan.cpp" line="2601"/>
         <source>Do you want the setup wizard to be omitted?</source>
         <translation>Kurulum sihirbazının çıkarılmasını istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2609"/>
+        <location filename="SandMan.cpp" line="2608"/>
         <source>Sandman did not finish enumerating installed windows updates last time, it probably hangs.
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
@@ -3516,75 +3516,75 @@ Do you want to disable Windows Updates scanning from the the software compatibil
 Yazılım uyumluluğu denetiminden Windows Güncellemeleri taramasını devre dışı bırakmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2619"/>
+        <location filename="SandMan.cpp" line="2618"/>
         <source>   -   NOT connected</source>
         <translation>   -   Bağlı DEĞİL</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2789"/>
+        <location filename="SandMan.cpp" line="2788"/>
         <source>Failed to configure hotkey %1, error: %2</source>
         <translation>%1 kısayol tuşu yapılandırılamadı, hata: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2968"/>
+        <location filename="SandMan.cpp" line="2967"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>%1 alanı, yalnızca proje destekçilerine sunulan özellikleri kullanacak şekilde yapılandırılmıştır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2973"/>
+        <location filename="SandMan.cpp" line="2972"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>%1 alanı, &lt;b&gt;gelişmiş&lt;/b&gt; destekçi sertifikası gerektiren özellikleri kullanacak şekilde yapılandırılmıştır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2975"/>
-        <location filename="SandMan.cpp" line="3066"/>
+        <location filename="SandMan.cpp" line="2974"/>
+        <location filename="SandMan.cpp" line="3065"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>Gelişmiş özelliklerin kilidini açmak için &lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Sertifikanızı yükseltin&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3062"/>
+        <location filename="SandMan.cpp" line="3061"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>Seçilen özellik, &lt;b&gt;gelişmiş&lt;/b&gt; bir destekçi sertifikası gerektiriyor.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3064"/>
+        <location filename="SandMan.cpp" line="3063"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;Bu özelliğin kilidini açmak için Great Patreon seviyesinde veya daha yüksek bir seviyede olmanız gerekir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3076"/>
+        <location filename="SandMan.cpp" line="3075"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>Seçilen özellik seti yalnızca proje destekçileri tarafından kullanılabilir. &lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Proje destekçisi olmak&lt;/a&gt; için bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; edinin</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3114"/>
+        <location filename="SandMan.cpp" line="3121"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>Kullanmaya çalıştığınız sertifika engellendi, yani geçersiz kılındı. Bunu kullanmaya yönelik herhangi bir girişim, kullanım şartlarının ihlali anlamına gelir!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3126"/>
+        <location filename="SandMan.cpp" line="3133"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>Sertifika İmzası geçersiz!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3127"/>
+        <location filename="SandMan.cpp" line="3134"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>Sertifika bu ürün için uygun değildir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3128"/>
+        <location filename="SandMan.cpp" line="3135"/>
         <source>The Certificate is node locked.</source>
         <translation>Sertifika düğüm kilitli.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3132"/>
+        <location filename="SandMan.cpp" line="3139"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>Destek sertifikası geçerli değil. 
 Hata: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3205"/>
+        <location filename="SandMan.cpp" line="3203"/>
         <source>The evaluation period has expired!!!</source>
         <translation>Deneme süresi dolmuştur!</translation>
     </message>
@@ -3857,7 +3857,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Sandboxie-Plus - Pencere Bulucu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2538"/>
+        <location filename="SandMan.cpp" line="2537"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Varsayılan korumalı alan bulunamadı; oluşturuluyor: %1</translation>
     </message>
@@ -3970,7 +3970,7 @@ Evet şunları seçer: %1
 Hayır şunları seçer: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3079"/>
+        <location filename="SandMan.cpp" line="3078"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>Seçilen özellik seti yalnızca proje destekçileri tarafından kullanılabilir. Bu özellik setinin destekçi sertifikası olmadan etkinleştirildiği bir alanda başlatılan işlemler 5 dakika sonra sonlandırılacaktır.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Proje destekçisi olmak&lt;/a&gt; için bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; edinin</translation>
     </message>
@@ -4205,44 +4205,44 @@ Hayır şunları seçer: %2</translation>
         <translation>Veri Dizini: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2875"/>
-        <location filename="SandMan.cpp" line="2879"/>
-        <location filename="SandMan.cpp" line="2881"/>
+        <location filename="SandMan.cpp" line="2874"/>
+        <location filename="SandMan.cpp" line="2878"/>
+        <location filename="SandMan.cpp" line="2880"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2986"/>
+        <location filename="SandMan.cpp" line="2985"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>%2 korumalı alanında başlatılan programlar 5 dakika içinde sonlandırılacaktır. Çünkü bu korumalı alan yalnızca proje destekçilerine sunulan %1 özelliğini kullanacak şekilde yapılandırılmış.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2988"/>
+        <location filename="SandMan.cpp" line="2987"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>%1 alanı, yalnızca proje destekçilerine sunulan özellikleri kullanacak şekilde yapılandırılmıştır, bu ön ayarlar yok sayılacaktır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2969"/>
-        <location filename="SandMan.cpp" line="2977"/>
-        <location filename="SandMan.cpp" line="2989"/>
-        <location filename="SandMan.cpp" line="3068"/>
+        <location filename="SandMan.cpp" line="2968"/>
+        <location filename="SandMan.cpp" line="2976"/>
+        <location filename="SandMan.cpp" line="2988"/>
+        <location filename="SandMan.cpp" line="3067"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Proje destekçisi olmak&lt;/a&gt; için bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; edinebilirsiniz</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2575"/>
+        <location filename="SandMan.cpp" line="2574"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <translation>Windows derlemeniz %1, Sandboxie sürümünüzün mevcut destek yeteneklerini aşıyor ve belirteç tabanlı güvenlik yalıtımının devre dışı bırakılmasına neden oluyor. Sonuç olarak, tüm uygulamalar güvenlik yalıtımı olmadan Uygulama Bölmesi Modunda çalışacaktır.
 Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2584"/>
+        <location filename="SandMan.cpp" line="2583"/>
         <source>Don&apos;t show this message again for the current build.</source>
         <translation>Mevcut derleme için bu mesajı bir daha gösterme.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2591"/>
+        <location filename="SandMan.cpp" line="2590"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
         <translation>Windows derlemeniz %1, Sandboxie sürümünüzün bilinen mevcut destek yeteneklerini aşıyor; Sandboxie bilinen son ofsetleri kullanmaya çalışacak ve bu da sistem kararsızlığına neden olabilir.</translation>
     </message>
@@ -4322,22 +4322,22 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation>Tüm Sütunlar</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3210"/>
+        <location filename="SandMan.cpp" line="3208"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>Bu destekçi sertifikası bu derleme için geçerli değildir, lütfen yenilenmiş bir sertifika edinin</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3213"/>
+        <location filename="SandMan.cpp" line="3211"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <translation>Bu destekçi sertifikasının süresi dolmuş %1, lütfen yenilenmiş bir sertifika edinin</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3214"/>
+        <location filename="SandMan.cpp" line="3212"/>
         <source>, but it remains valid for the current build</source>
         <translation>, ancak mevcut derleme için geçerli kalır</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3216"/>
+        <location filename="SandMan.cpp" line="3214"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>Destekçi sertifikasının süresi %1 gün içinde dolacak, lütfen yenilenmiş bir sertifika edinin</translation>
     </message>
@@ -5365,28 +5365,28 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2299"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2302"/>
         <source>Please enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2193"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2339"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2196"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2342"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2330"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2333"/>
         <source>Please enter a program file name</source>
         <translation>Lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2320"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2323"/>
         <source>Folder</source>
         <translation>Klasör</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2320"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2323"/>
         <source>Process</source>
         <translation>İşlem</translation>
     </message>
@@ -5550,101 +5550,106 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1543"/>
+        <source>Developer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>Business</source>
         <translation>İş</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1547"/>
         <source>Personal</source>
         <translation>Kişisel</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1547"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1549"/>
         <source>Great Patreon</source>
         <translation>Büyük Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1549"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1551"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1551"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1553"/>
         <source>Family</source>
         <translation>Aile</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1555"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1557"/>
         <source>Evaluation</source>
         <translation>Deneme</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1557"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1559"/>
         <source>Type %1</source>
         <translation>Tür %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1585"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1589"/>
         <source>Advanced</source>
         <translation>Gelişmiş</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1591"/>
         <source>Advanced (L)</source>
         <translation>Gelişmiş (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1589"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1593"/>
         <source>Max Level</source>
         <translation>En Üst Seviye</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1591"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1595"/>
         <source>Level %1</source>
         <translation>Seviye %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1620"/>
         <source>Supporter certificate required for access</source>
         <translation>Erişim için destekçi sertifikası gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1637"/>
         <source>Supporter certificate required for automation</source>
         <translation>Otomasyon için destekçi sertifikası gerekli</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2071"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2074"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Bu sertifika ne yazık ki mevcut derleme için geçerli değil, yeni bir sertifika almanız veya önceki bir derlemeye geçmeniz gerekiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2073"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2076"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Bu sertifikanın süresi dolmuş olsa da, şu anda yüklü olan sürüm için Plus özellikleri etkin durumda kalır. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2075"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2078"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Bu sertifikanın süresi ne yazık ki dolmuş, yeni bir sertifika almanız gerekiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2079"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2082"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Deneme sertifikası başarıyla uygulandı. Ücretsiz denemenizin tadını çıkarın!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2222"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2225"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Şimdi Denetle&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2306"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını tekrar girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2308"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2311"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Parolalar eşleşmedi, lütfen tekrar deneyin.</translation>
     </message>
@@ -5654,7 +5659,7 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>Otomatik Algıla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2081"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2084"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus&apos;ın gelişimini desteklediğiniz için teşekkür ederiz.</translation>
     </message>
@@ -5869,67 +5874,67 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>Sertifika alınıyor...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1553"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1555"/>
         <source>Home</source>
         <translation>Ev</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1740"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1744"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Korumalı Alanın Dışında Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1748"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1752"/>
         <source>Set Force in Sandbox</source>
         <translation>Korumalı Alanda Zorlamaya Ayarla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1757"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1761"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Korumalı Alanda Açık Erişime Ayarla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2145"/>
         <source>Update Available</source>
         <translation>Güncelleme Mevcut</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2144"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2147"/>
         <source>Installed</source>
         <translation>Kurulu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2149"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2152"/>
         <source>by %1</source>
         <translation>%1 tarafından</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2157"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2160"/>
         <source>(info website)</source>
         <translation>(bilgi sitesi)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2184"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2187"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Bu Eklenti zorunludur ve kaldırılamaz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2398"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2401"/>
         <source>Please enter the template identifier</source>
         <translation>Lütfen şablon tanımlayıcısını girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2406"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2409"/>
         <source>Error: %1</source>
         <translation>Hata: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2441"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Seçili yerel şablonları gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2646"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2649"/>
         <source>%1 (Current)</source>
         <translation>%1 (Kullanılan)</translation>
     </message>
@@ -5940,7 +5945,7 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>Korumalı Web Tarayıcısı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2051"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Bu bir sertifikaya benzemiyor. Lütfen sertifikanın sadece bir kısmını değil tamamını girin.</translation>
     </message>

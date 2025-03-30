@@ -3,7 +3,40 @@
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
 
-## [1.15.8 / 5.70.8] - 2025-03-02
+## [1.15.9 / 5.70.9] - 2025-03-??
+
+### 新增
+- 复制沙箱，并从 UI 中获取内容 [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)
+- 添加新的不安全调试选项 'OpenAllSysCalls=y'
+- 添加 WindowGrid 模板
+- 添加新的证书类型 [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/)，它可以禁用用户模式组件验证，但只能以节点锁定的形式使用。
+  - 注意：所有当前和未来的贡献者或 Ethernal/Huge 证书持有者都有资格获得免费的开发密钥；如有需要，请通过电子邮件请求。
+
+### 更改
+- 当未为特定 IP 类型配置代理时，连接将失败
+  - 此更改防止在同时运行双栈 IPv4 和 IPv6 时发生 IP 泄露，但仅配置了一种代理类型
+- 保存时 ini 编辑器不再重置
+- 现在可以在不重新加载驱动程序的情况下更改 DisableWinNtHook
+
+### 修复
+- 修复了框删除/移除确认对话框中与 bullet 字符相关的编码问题 [#4591](https://github.com/sandboxie-plus/Sandboxie/issues/4591)
+- 更改箱的设置/类型会导致一些模板设置在箱中重复 [#4595](https://github.com/sandboxie-plus/Sandboxie/issues/4595)
+- 在尝试将沙箱放置在分区根目录时添加警告 [#4582](https://github.com/sandboxie-plus/Sandboxie/issues/4582)
+- 修复了卸载时的错误 [#4540](https://github.com/sandboxie-plus/Sandboxie/issues/4540)
+- 修复了在 Sandboxie 中运行时 Golang Cmd.Run() 不返回的问题 [#4538](https://github.com/sandboxie-plus/Sandboxie/issues/4538)
+  - 修复了可能帮助许多其他应用程序的通用句柄重复问题
+- 改进了当 Sandboxie.ini 文件过大时，响应速度变差的问题 [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
+- 修复了在特定安装中的 Sandboxie 冻结/崩溃问题 [#4537](https://github.com/sandboxie-plus/Sandboxie/issues/4537)
+  - 当 sandman 挂起并被终止时，下次启动时会询问是否禁用软件兼容性检查的更新扫描
+- 修复了与钩子监视器显示有关的问题
+- 修复了 ini 节区编辑的问题，eqc 不再关闭窗口
+- 修复了在 Firefox 137 Nightly 及后续版本中引入的钩子问题 [#4522](https://github.com/sandboxie-plus/Sandboxie/issues/4522)
+- 修复了不安全调试选项 'OriginalToken=y' 的问题
+- 框组名称意外输入了换行符 [#4608](https://github.com/sandboxie-plus/Sandboxie/issues/4608)
+- 修复了在新箱向导中从路径选择下拉菜单选择的路径返回“不是有效路径”错误的问题 [#4611](https://github.com/sandboxie-plus/Sandboxie/issues/4611)
+
+
+## [1.15.8 / 5.70.8] - 2025-03-12
 
 ### 更改
 - 更新了在线更新程序

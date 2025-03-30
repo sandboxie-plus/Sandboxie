@@ -1152,12 +1152,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>파티션의 루트에 샌드박스를 찾을 수 없습니다. 폴더를 선택해 주세요.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>네트워크 공유에서 샌드박스를 찾을 수 없습니다. 로컬 폴더를 선택해 주세요.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="714"/>
@@ -2505,7 +2505,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1044"/>
         <source> entry: Address must be IP, not host name</source>
-        <translation type="unfinished"></translation>
+        <translation> 항목: 주소는 호스트 이름이 아닌 IP여야 합니다</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
@@ -3231,7 +3231,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
         <source>Copying folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>폴더 복사 중: %1</translation>
     </message>
 </context>
 <context>
@@ -4438,7 +4438,8 @@ No will choose: %2</source>
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>샌드맨이 지난번에 설치된 Windows 업데이트 열거를 완료하지 못해 중단된 것일 수 있습니다.
+소프트웨어 호환성 검색에서 Windows 업데이트 검색을 비활성화하시겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2788"/>
@@ -5322,7 +5323,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="245"/>
         <source>Duplicate Box with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>콘텐츠가 있는 박스 복제</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
@@ -5543,7 +5544,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="347"/>
         <source>Duplicate Sandbox with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>콘텐츠가 있는 샌드박스 복제</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="348"/>
@@ -5595,12 +5596,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1416"/>
         <source>Not Created</source>
-        <translation type="unfinished"></translation>
+        <translation>생성되지 않음</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1425"/>
         <source>Copying: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>복사 중: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1517"/>
@@ -5658,7 +5659,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="1152"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
-        <translation type="unfinished">샌드박스 이름 및 박스 그룹 이름에는 &apos;,(&apos;) 기호를 사용할 수 없습니다.</translation>
+        <translation>샌드박스 이름 및 박스 그룹 이름에는 &apos;,(&apos;) 기호를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>
@@ -6209,7 +6210,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>개발자</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2082"/>
@@ -9727,7 +9728,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5238"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation>SbieDll에 의한 추적 기능 후킹</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5334"/>

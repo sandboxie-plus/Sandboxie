@@ -1372,7 +1372,10 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuDuplicate || Action == m_pMenuDuplicateEx)
 	{
-		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
+		CSandBoxPtr pSrcBox = theAPI->GetBoxByName(SandBoxes.first()->GetName());
+		if (!pSrcBox) return;
+
+		QString OldValue = pSrcBox->GetName().replace("_", " ");
 		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the duplicated Sandbox."), QLineEdit::Normal, tr("%1 Copy").arg(OldValue));
 		if (Value.isEmpty() || Value == OldValue)
 			return;
@@ -1380,31 +1383,11 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		QString Name = Value.replace(" ", "_");
 		SB_STATUS Status = theAPI->CreateBox(Name, false);
 		
-		CSandBoxPtr pSrcBox;
 		if (!Status.IsError())
 		{
-			QList<QPair<QString, QString>> Settings;
-			pSrcBox = theAPI->GetBoxByName(SandBoxes.first()->GetName());
-			qint32 status = 0;
-			if (!pSrcBox.isNull()) Settings = pSrcBox->GetIniSection(&status);
-			if (Settings.isEmpty())
-				Status = SB_ERR(SB_FailedCopyConf, QVariantList() << SandBoxes.first()->GetName() << (quint32)status);
-			else
-			{
-				for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
-				{
-					if (I->first == "FileRootPath" && !I->second.toUpper().contains("%SANDBOX%"))
-						continue; // skip the FileRootPath if it does not contain a %SANDBOX% 
-					if (I->first == "Enabled")
-						continue; // don't duplicate that's already set on create
-
-					Status = theAPI->SbieIniSet(Name, I->first, I->second, CSbieAPI::eIniAppend, false);
-					if (Status.IsError())
-						break;
-				}
-			}
-
-			theAPI->CommitIniChanges();
+			QString Section; 
+			Section = theAPI->SbieIniGetEx(pSrcBox->GetName(), "");
+			Status = theAPI->SbieIniSet(Name, "", Section);
 			theAPI->ReloadBoxes(true);
 		}
 

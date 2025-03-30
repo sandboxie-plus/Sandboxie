@@ -5613,7 +5613,8 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Developer</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1545"/>

@@ -64,7 +64,7 @@ english.UninstallTaskLabel3=&Keep configuration files and sandboxes%nThis is the
 english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the Sandboxie.ini and Sandboxie-Plus.ini configuration files while keeping the sandboxes unchanged.
 english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath.
 english.RefreshBuild=Download latest Templates.ini and translations
-english.InstallImDisk=Install (or Update) ImDisk 3.0 driver (for RamDisk and Encrypted Sandboxed)
+english.InstallImDisk=Install (or Update) ImDisk 3.0 driver (for RamDisk and Encrypted Sandboxes)
 
 ; Chinese Simplified
 ChineseSimplified.AddSandboxedMenu=添加“在沙盒中运行”右键菜单

@@ -1172,12 +1172,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱无法位于分区的根目录下，请选择一个文件夹。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法在网络共享上找到沙箱，请选择本地文件夹。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="714"/>
@@ -2655,7 +2655,7 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1044"/>
         <source> entry: Address must be IP, not host name</source>
-        <translation type="unfinished"></translation>
+        <translation> entry：地址必须是 IP，而不是主机名</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
@@ -3204,7 +3204,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
         <source>Copying folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在复制文件夹： %1</translation>
     </message>
 </context>
 <context>
@@ -3352,7 +3352,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="733"/>
         <source>&amp;Sandbox</source>
         <oldsource>Sandbo&amp;x</oldsource>
-        <translation type="unfinished">沙盒(&amp;X)</translation>
+        <translation>沙盒(&amp;X)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="512"/>
@@ -5480,7 +5480,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="347"/>
         <source>Duplicate Sandbox with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>复制包含内容的沙盒</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="348"/>
@@ -5532,12 +5532,12 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1416"/>
         <source>Not Created</source>
-        <translation type="unfinished"></translation>
+        <translation>未创建</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1425"/>
         <source>Copying: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在复制：%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1517"/>
@@ -5595,7 +5595,7 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="1152"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
-        <translation type="unfinished">⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 符号或控制字符。</translation>
+        <translation>⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 符号或控制字符。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>
@@ -5926,7 +5926,7 @@ Error: %1</source>
         <location filename="Windows/SettingsWindow.cpp" line="909"/>
         <source>Run &amp;Sandboxed</source>
         <oldsource>Run Sandbo&amp;xed</oldsource>
-        <translation type="unfinished">在沙盒中运行(&amp;X)</translation>
+        <translation>在沙盒中运行(&amp;X)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1223"/>

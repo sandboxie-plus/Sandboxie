@@ -7399,7 +7399,7 @@ günlüğe kaydetme özelleştirilebilir.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5388"/>
         <source>Key Trace</source>
-        <translation>Tuş İzleme</translation>
+        <translation>Anahtar İzleme</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5196"/>

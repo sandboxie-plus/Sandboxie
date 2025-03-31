@@ -26,12 +26,15 @@ In order to arrange custom payments with cryptocurrencies, please get in touch b
 
 Contributor certificates do not expire (regardless of how many PCs you own) and are available to all people who open meaningful [pull requests](https://docs.github.com/articles/creating-a-pull-request) or provide continued support to the [Sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) / [Sandboxie](https://github.com/sandboxie-plus/Sandboxie) repositories.
 
-For example:
+To be eligible for a **contributor certificate**, a **non-trivial** contribution is required, as outlined below. Minor contributions (such as small typo fixes, minor UI tweaks, or small translation improvements) are appreciated and will be rewarded with a free [**developer certificate**](https://xanasoft.com/product/sandboxie-plus-developer/), which includes a home-use license valid for 1 year, but they do not qualify for a contributor certificate on their own.
 
-1. You could add a new Sandboxie Plus translation for the language of your country, see also [Localization notes and tips](https://github.com/sandboxie-plus/Sandboxie/discussions/1123#discussioncomment-1203489).
-2. You could help to keep updated our [Sandboxie-docs repository](https://github.com/sandboxie-plus/sandboxie-docs) by providing a number of meaningful changes. More volunteers are needed to keep it constantly updated with the new introduced settings mentioned in the [CHANGELOG.md](./CHANGELOG.md) file.
-3. You could provide new code changes that fix a specific Sandboxie functionality or introducing a new one.
-4. You could offer your availability to become a [collaborator](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-personal-account-settings/permission-levels-for-a-personal-account-repository#collaborator-access-for-a-repository-owned-by-a-personal-account) in the [Sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) / [Sandboxie](https://github.com/sandboxie-plus/Sandboxie) repositories (after proving your continued support with open issues and/or sufficient skills to manage pull requests).
+Examples of **non-trivial contributions** that qualify for a **contributor certificate** include:
+
+1. Adding a new Sandboxie Plus translation for the language of your country, see also [Localization notes and tips](https://github.com/sandboxie-plus/Sandboxie/discussions/1123#discussioncomment-1203489).
+2. Updating an outdated translation where a significant portion of the content must be revised.
+3. Helping to keep our [Sandboxie-docs repository](https://github.com/sandboxie-plus/sandboxie-docs) updated by providing a number of meaningful changes. More volunteers are needed to keep it constantly updated with the new introduced settings mentioned in the [CHANGELOG.md](./CHANGELOG.md) file.
+4. Providing new code that fix a specific Sandboxie issue or introducing a new functionality.
+5. Become a [collaborator](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-personal-account-settings/permission-levels-for-a-personal-account-repository#collaborator-access-for-a-repository-owned-by-a-personal-account) in the [Sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) / [Sandboxie](https://github.com/sandboxie-plus/Sandboxie) repositories, by offering your availability (proving your continued support with open issues and/or sufficient skills to manage pull requests).
 
 If you are willing to become a new contributor or collaborator, please get in touch by [email](https://xanasoft.com/contact/) for further details.
 

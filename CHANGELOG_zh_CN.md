@@ -10,7 +10,7 @@
 - 添加新的不安全调试选项 'OpenAllSysCalls=y'
 - 添加 WindowGrid 模板
 - 添加新的证书类型 [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/)，它可以禁用用户模式组件验证，但只能以节点锁定的形式使用。
-  - 注意：所有当前和未来的贡献者或 Ethernal/Huge 证书持有者都有资格获得免费的开发密钥；如有需要，请通过电子邮件请求。
+  - 注意：所有当前和未来的贡献者或 Eternal/Huge 证书持有者都有资格获得免费的开发密钥；如有需要，请通过电子邮件请求。
 
 ### 更改
 - 当未为特定 IP 类型配置代理时，连接将失败

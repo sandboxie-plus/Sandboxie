@@ -4542,7 +4542,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation >Sandman上次未完成已安装Windows更新的枚举操作，可能发生进程挂起。是否要在软件兼容性检测中禁用Windows更新扫描功能？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2788"/>
@@ -5261,7 +5261,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="245"/>
         <source>Duplicate Box with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>复制整个沙盒（包括内部所有内容）</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
@@ -5527,7 +5527,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1319"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
-        <translation type="unfinished">警告：打开的注册表编辑器没有沙盒化，请小心，并只对预选的沙盒位置进行更改。</translation>
+        <translation>警告：打开的注册表编辑器没有沙盒化，请小心，并只对预选的沙盒位置进行更改。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1399"/>
@@ -6073,7 +6073,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>开发者</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1555"/>
@@ -9560,7 +9560,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5238"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation >通过 SbieDll 追踪函数</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5334"/>

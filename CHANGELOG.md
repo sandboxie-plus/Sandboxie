@@ -5,34 +5,34 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.15.9 / 5.70.9] - 2025-03-??
 
 ### Added
-- Duplicate Sandbox with content from UI [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)
+- added duplicate sandbox with content from UI [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)
 - added new insecure debug option 'OpenAllSysCalls=y'
 - added template for WindowGrid
-- added new Certificate type [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/) It deactivates the usermode component verification but can only be used in node-locked form.
-  - Note: All current and future holders of Contributor or Ethernal/Huge certificates are eligible to receive a free Dev Key; please request by email if required.
+- added new certificate type [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/); it deactivates the user mode component verification, but can only be used in node-locked form
+  - Note: all current and future holders of Contributor or Eternal/Huge certificates are eligible to receive a free Dev Key; please request by email if required
 
 ### Changed
-- when no proxy for a given ip type is configured, the connectionis failed
-  - this change prevents IP leckage when running dual stack IPv4 and IPv6 but having only one proxy type configured
-- ini editor is no longer reset when saving
+- when no proxy for a given IP type is configured, the connections fail
+  - this change prevents IP leakage when running dual stack IPv4 and IPv6, but having only one proxy type configured
+- INI editor is no longer reset when saving
 - DisableWinNtHook can now be changed without a driver reload
 
 ### Fixed
 - fixed the encoding issue with the bullet character in the box delete/remove confirmation dialog [#4591](https://github.com/sandboxie-plus/Sandboxie/issues/4591)
-- Changing the box settings/type causes some template settings in the box to be duplicated [#4595](https://github.com/sandboxie-plus/Sandboxie/issues/4595)
-- Added warning when atemptig to put a sandbox is in the root of a partition [#4582](https://github.com/sandboxie-plus/Sandboxie/issues/4582)
-- fixed Bug when uninstalling [#4540](https://github.com/sandboxie-plus/Sandboxie/issues/4540)
+- fixed changing the box settings/type causes some template settings in the box to be duplicated [#4595](https://github.com/sandboxie-plus/Sandboxie/issues/4595)
+- added warning when attempting to put a sandbox is in the root of a partition [#4582](https://github.com/sandboxie-plus/Sandboxie/issues/4582)
+- fixed bug when uninstalling [#4540](https://github.com/sandboxie-plus/Sandboxie/issues/4540)
 - fixed Golang Cmd.Run() doesn't return when running in Sandboxie [#4538](https://github.com/sandboxie-plus/Sandboxie/issues/4538)
   - fixed a generic handle duplication issue which may help many other applications to
-- improved When Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
-- fixed Sandboxie freezes/crashes in certain installation [#4537](https://github.com/sandboxie-plus/Sandboxie/issues/4537)
-  - when sandman hangs and gets terminated it wil ask on next start if to disable update scanning for software comaptybility checks
+- improved when Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
+- fixed Sandboxie freezes/crashes in certain installations [#4537](https://github.com/sandboxie-plus/Sandboxie/issues/4537)
+  - when SandMan hangs and gets terminated, it will ask on next start if to disable update scanning for software compatibility checks
 - fixed issue with hook monitor display
-- fixed issue with inis ection editing, eqc no longer closes the window
+- fixed issue with INI section editing, esc no longer closes the window
 - fixed hooking issues introduced in Firefox 137 Nightly and later [#4522](https://github.com/sandboxie-plus/Sandboxie/issues/4522)
 - fixed issue with insecure debug option 'OriginalToken=y'
-- Box Group name accidentally entered carriage return character [#4608](https://github.com/sandboxie-plus/Sandboxie/issues/4608)
-- fixed Paths selected from the path selection drop-down menu in the New Box Wizard return a "not a valid path" error [#4611](https://github.com/sandboxie-plus/Sandboxie/issues/4611)
+- fixed box group name accidentally entered carriage return character [#4608](https://github.com/sandboxie-plus/Sandboxie/issues/4608)
+- fixed paths selected from the path selection drop-down menu in the New Box Wizard return a "not a valid path" error [#4611](https://github.com/sandboxie-plus/Sandboxie/issues/4611)
 
 
 

@@ -211,7 +211,7 @@ QDateTime COnlineUpdater::GetLastUpdateDate()
 
 	time_t CurrentDate = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
 	if (UpdateDate > CurrentDate) { // can't be in the future
-		UpdateDate = CurrentDate - 10*24*3600; // reset to 10 days in the past
+		UpdateDate = 0;
 		theAPI->SetSecureParam("LastUpdate", &UpdateDate, sizeof(UpdateDate));
 	}
 
@@ -424,10 +424,11 @@ bool COnlineUpdater::ShowCertWarningIfNeeded()
 
 void COnlineUpdater::Process() 
 {
+	int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
 	QDateTime CurretnDate = QDateTime::currentDateTime();
 	time_t NextUpdateCheck = theConf->GetUInt64("Options/NextCheckForUpdates", 0);
 	if (NextUpdateCheck == 0 || NextUpdateCheck > CurretnDate.addDays(31).toSecsSinceEpoch()) { // no check made yet or invalid value
-		NextUpdateCheck = CurretnDate.addDays(7).toSecsSinceEpoch();
+		NextUpdateCheck = CurretnDate.addSecs(UpdateInterval).toSecsSinceEpoch();
 		theConf->SetValue("Options/NextCheckForUpdates", NextUpdateCheck);
 	}
 
@@ -447,7 +448,7 @@ void COnlineUpdater::Process()
 			}
 
 			if (iCheckUpdates == 0) // no clicked on prompt
-				theConf->SetValue("Options/NextCheckForUpdates", CurretnDate.addDays(7).toSecsSinceEpoch());
+				theConf->SetValue("Options/NextCheckForUpdates", CurretnDate.addSecs(UpdateInterval).toSecsSinceEpoch());
 			else
 			{
 				// schedule next check in 12 h in case this one fails
@@ -474,7 +475,7 @@ void COnlineUpdater::Process()
 					theConf->SetValue("Options/AutoUpdateTemplates", 1);
 					
 			}
-			theConf->SetValue("Options/NextCheckForUpdates", CurretnDate.addDays(7).toSecsSinceEpoch()); // on fail retry in 7 days on success check again in 3 months
+			theConf->SetValue("Options/NextCheckForUpdates", CurretnDate.addSecs(UpdateInterval).toSecsSinceEpoch());
 			if (bCheck)
 				UpdateTemplates();
 		}

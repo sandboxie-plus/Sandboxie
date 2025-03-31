@@ -20,6 +20,8 @@ public:
 
 	static bool m_ReminderShown;
 
+	static QDateTime GetSbieInstallationDate();
+
 private slots:
 	void OnButton();
 

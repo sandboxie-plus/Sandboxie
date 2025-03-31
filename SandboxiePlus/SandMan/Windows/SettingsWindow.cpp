@@ -512,6 +512,13 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.btnAddTemplate->setMenu(pTmplBtnMenu);
 	connect(ui.btnOpenTemplate, SIGNAL(clicked(bool)), this, SLOT(OnOpenTemplate()));
 	connect(ui.btnDelTemplate, SIGNAL(clicked(bool)), this, SLOT(OnDelTemplates()));
+
+	connect(ui.lblUpdateTemplates, &QLabel::linkActivated, this, [=]() {
+		theGUI->m_pUpdater->UpdateTemplates();
+#ifndef _DEBUG
+		ui.lblUpdateTemplates->setVisible(false);
+#endif
+	});
 	//
 
 	// Support

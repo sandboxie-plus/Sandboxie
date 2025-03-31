@@ -1923,7 +1923,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 	m_pBoxView->Refresh();
 
-	if(!IsSilentMode()) // do not check for updates when in presentation/game mode
+	if(!IsSilentMode() && CheckInternet()) // do not check for updates when in presentation/game mode
 		m_pUpdater->Process();
 
 	if (!m_MissingTemplates.isEmpty())
@@ -4160,7 +4160,7 @@ void CSandMan::OpenUrl(const QUrl& url)
 		else if (path == "/installer")
 			m_pUpdater->RunInstaller(false);
 		else if (path == "/apply")
-			m_pUpdater->ApplyUpdate(false);
+			m_pUpdater->ApplyUpdate(COnlineUpdater::eFull, false);
 		else
 			OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
 		return;

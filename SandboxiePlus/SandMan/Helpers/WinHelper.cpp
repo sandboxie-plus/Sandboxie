@@ -193,3 +193,32 @@ bool KillProcessByWnd(const QString& WndName)
     }
     return false;
 }
+
+#include <netlistmgr.h>
+
+bool CheckInternet()
+{
+    bool bRet = false;
+
+    HRESULT hr = CoInitialize(NULL);
+    if (SUCCEEDED(hr))
+    {
+        INetworkListManager* pNetworkListManager = nullptr;
+        hr = CoCreateInstance(CLSID_NetworkListManager, NULL, CLSCTX_ALL, IID_INetworkListManager, (void**)&pNetworkListManager);
+        if (SUCCEEDED(hr)) 
+        {
+            NLM_CONNECTIVITY connectivity = NLM_CONNECTIVITY_DISCONNECTED;
+            hr = pNetworkListManager->GetConnectivity(&connectivity);
+            if (SUCCEEDED(hr)) {
+                if (connectivity & NLM_CONNECTIVITY_IPV4_INTERNET || connectivity & NLM_CONNECTIVITY_IPV6_INTERNET) {
+                    bRet = true;
+                }
+            }
+
+            pNetworkListManager->Release();
+        }
+        CoUninitialize();
+    }
+
+    return bRet;
+}

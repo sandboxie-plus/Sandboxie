@@ -8,7 +8,7 @@
 
 bool CSupportDialog::m_ReminderShown = false;
 
-QDateTime GetSbieInstallationDate()
+QDateTime CSupportDialog::GetSbieInstallationDate()
 {
 	time_t InstalDate = 0;
 	theAPI->GetSecureParam("InstallationDate", &InstalDate, sizeof(InstalDate));

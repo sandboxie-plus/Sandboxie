@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with insecure debug option 'OriginalToken=y'
 - fixed box group name accidentally entered carriage return character [#4608](https://github.com/sandboxie-plus/Sandboxie/issues/4608)
 - fixed paths selected from the path selection drop-down menu in the New Box Wizard return a "not a valid path" error [#4611](https://github.com/sandboxie-plus/Sandboxie/issues/4611)
+- FIXED SECURITY ISSUE new method of exploiting HostInjectDll mechanism for local privilege escalation (thanks hg421)
 
 
 

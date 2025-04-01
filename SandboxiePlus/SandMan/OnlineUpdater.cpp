@@ -1189,8 +1189,20 @@ bool COnlineUpdater::HandleUserMessage(const QVariantMap& Data)
 
 			CCheckableMessageBox mb(theGUI);
 			mb.setWindowTitle("Sandboxie-Plus");
-			QIcon ico(QLatin1String(":/SandMan.png"));
-			mb.setIconPixmap(ico.pixmap(64, 64));
+			
+			QByteArray MsgIcon = QByteArray::fromBase64(Data["msgIcon"].toByteArray());
+			if (!MsgIcon.isEmpty())
+			{
+				QPixmap pixmap;
+				pixmap.loadFromData(MsgIcon, "PNG");
+				mb.setIconPixmap(pixmap);
+			}
+			else
+			{
+				QIcon ico(QLatin1String(":/SandMan.png"));
+				mb.setIconPixmap(ico.pixmap(64, 64));
+			}
+			
 			//mb.setTextFormat(Qt::RichText);
 			mb.setText(UserMsg);
 			mb.setCheckBoxText(tr("Don't show this announcement in the future."));

@@ -1322,12 +1322,12 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="471"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazılımlarınızla en iyi uyumluluğu sağlamak için Sandboxie&apos;nin uyumluluk şablonlarını güncellemesi gerekiyor. Devam etmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="472"/>
         <source>Enable auto template updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Otomatik şablon güncellemelerini etkinleştir</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="521"/>
@@ -1443,7 +1443,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="1138"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni bir Templates.ini dosyası mevcut, indirmek ister misiniz?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1188"/>
@@ -5566,7 +5566,7 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1550"/>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Geliştirici</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1552"/>
@@ -9997,8 +9997,8 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
-        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;sbi://templates&quot;&gt;uyumluluk şablonlarını şimdi güncelle&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2710"/>

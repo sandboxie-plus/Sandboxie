@@ -10,14 +10,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added template for WindowGrid
 - added new certificate type [DEVELOPER](https://xanasoft.com/product/sandboxie-plus-developer/); it deactivates the user mode component verification, but can only be used in node-locked form
   - Note: all current and future holders of Contributor or Eternal/Huge certificates are eligible to receive a free Dev Key; please request by email if required
-- Added mechanism to update only templates.ini 
+- added mechanism to update only Templates.ini
 
 ### Changed
 - when no proxy for a given IP type is configured, the connections fail
   - this change prevents IP leakage when running dual stack IPv4 and IPv6, but having only one proxy type configured
 - INI editor is no longer reset when saving
 - DisableWinNtHook can now be changed without a driver reload
-- Disabled update checks when no internet connectivity is setected
+- disabled update checks when no internet connectivity is detected
 
 ### Fixed
 - fixed the encoding issue with the bullet character in the box delete/remove confirmation dialog [#4591](https://github.com/sandboxie-plus/Sandboxie/issues/4591)

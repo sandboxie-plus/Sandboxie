@@ -1566,12 +1566,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="471"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>为了确保与软件的最佳兼容性，Sandboxie需要更新其兼容性模板。您想继续吗？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="472"/>
         <source>Enable auto template updates</source>
-        <translation type="unfinished"></translation>
+        <translation>启用自动模板更新</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="521"/>
@@ -1702,7 +1702,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="1138"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
-        <translation type="unfinished"></translation>
+        <translation>有一个新的Templates.ini可用，您想下载吗？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1188"/>
@@ -10818,7 +10818,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;现在更新兼容性模板&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2687"/>

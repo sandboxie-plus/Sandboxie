@@ -1327,12 +1327,12 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="OnlineUpdater.cpp" line="471"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Um eine optimale Kompatibilität mit Ihrer Software zu gewährleisten, muss Sandboxie seine Kompatibilitätsvorlagen aktualisieren. Möchten Sie fortfahren?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="472"/>
         <source>Enable auto template updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere automatische Vorlagenupdates</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="521"/>
@@ -1448,7 +1448,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="OnlineUpdater.cpp" line="1138"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist eine neue Templates.ini verfügbar, möchten Sie diese herunterladen?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1188"/>
@@ -10059,8 +10059,8 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
-        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;Kompatibilitätsvorlagen jetzt aktualisieren&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2687"/>

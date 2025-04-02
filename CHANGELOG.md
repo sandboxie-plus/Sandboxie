@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.15.9 / 5.70.9] - 2025-03-??
+## [1.15.9 / 5.70.9] - 2025-04-02
 
 ### Added
 - added duplicate sandbox with content from UI [#4542](https://github.com/sandboxie-plus/Sandboxie/issues/4542)

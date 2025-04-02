@@ -1108,12 +1108,12 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un bac ne peut pas être situé à la racine d&apos;une partition, veuillez choisir un dossier.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un bac ne peut pas être situé sur un réseau partagé, veuillez choisir un dossier local.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="714"/>
@@ -1536,12 +1536,12 @@ Voulez-vous quand même mettre  à jour ?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="471"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Afin d&apos;assurer une compatibilité optimale avec vos logiciels, Sandboxie a besoin de mettre à jour ses modèles de compatibilité. Voulez-vous continuer ?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="472"/>
         <source>Enable auto template updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer la mise à jour auto. des modèles</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="521"/>
@@ -1562,7 +1562,7 @@ Voulez-vous quand même mettre  à jour ?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="556"/>
         <source>Update Check completed, no new updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérification terminée ; il n&apos;y a pas de nouvelle mise à jour.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="701"/>
@@ -1667,7 +1667,7 @@ Voulez-vous quand même mettre  à jour ?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="1138"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Il y a un nouveau « Templates.ini » disponible. Voulez-vous le télécharger ?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1188"/>
@@ -2529,12 +2529,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1039"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation>Saisie : l&apos;IP ou le port ne peut être vide</translation>
+        <translation>Saisie : l&apos;IP ou le port ne peut pas être vide</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1044"/>
         <source> entry: Address must be IP, not host name</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisie : l&apos;adresse doit être une IP, pas un nom d&apos;hôte</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
@@ -3262,7 +3262,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
         <source>Copying folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie du dossier : %1</translation>
     </message>
 </context>
 <context>
@@ -3457,7 +3457,8 @@ Veuillez vérifier s&apos;il y a une mise à jour pour Sandboxie.</translation>
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandman n&apos;a pas terminé d&apos;énumérer les mises à jour de Windows installées la dernière fois, il a probablement planté.
+Voulez-vous désactiver l&apos;analyse des mises à jour Windows lors de la détection de compatibilité des logiciels ?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2788"/>
@@ -4724,7 +4725,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="4059"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
-        <translation>Tous les processus du bac doivent être arrêtés pour que son contenu puisse être supprimé</translation>
+        <translation>Tous les processus du bac doivent être arrêtés pour que son contenu puisse être supprimé.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4068"/>
@@ -5572,7 +5573,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="245"/>
         <source>Duplicate Box with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliquer le bac avec son contenu</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
@@ -5653,7 +5654,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="347"/>
         <source>Duplicate Sandbox with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliquer le bac avec son contenu</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="348"/>
@@ -5718,42 +5719,42 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="1192"/>
         <source>&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1194"/>
         <source>... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation>... et %1 de plus</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1319"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION : L&apos;éditeur de registre n&apos;a pas été ouvert dans un bac ; veuillez faire attention et ne modifiez que les emplacements pré-sélectionnés des bacs.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1399"/>
         <source>Not Created</source>
-        <translation type="unfinished"></translation>
+        <translation>Non créé</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1408"/>
         <source>Copying: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie : %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1500"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le ou les bacs suivants ?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Attention : Le contenu de ces bacs sera aussi supprimé !</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1565"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous supprimer le contenu du bac suivant ?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1583"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le contenu des bacs suivants ?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1043"/>
@@ -5909,7 +5910,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="1152"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
-        <translation type="unfinished">Le nom de bac et le nom de groupe du bac ne peuvent pas utiliser le symbole « ,() ».</translation>
+        <translation>Le nom de bac et le nom de groupe du bac ne peuvent pas utiliser les symboles « , », « ( », « ) », ni les caractères non imprimables.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1157"/>
@@ -6020,7 +6021,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="vanished">Voulez-vous vraiment supprimer le contenu de tous les bacs à sable sélectionnés ?</translation>
+        <translation type="vanished">Voulez-vous vraiment supprimer le contenu de tous les bacs sélectionnés ?</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
@@ -6422,7 +6423,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1550"/>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Développeur</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2089"/>
@@ -6826,7 +6827,7 @@ Vous pouvez demander jusqu&apos;à %3 certificats d&apos;évaluation pour chaque
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="537"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
-        <translation>Ajoute un raccourci sur le bureau pour démarrer le navigateur web dans un bac</translation>
+        <translation>Ajouter un raccourci sur le bureau pour démarrer le navigateur web dans Sandboxie</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="542"/>
@@ -6860,7 +6861,7 @@ Vous pouvez demander jusqu&apos;à %3 certificats d&apos;évaluation pour chaque
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="38"/>
         <source>Creation Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Date de création</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="56"/>
@@ -10037,7 +10038,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5238"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation>Hooking de la fonction de traçage grâce à SbieDll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5334"/>
@@ -11248,7 +11249,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;Mettre immédiatement à jour les modèles de compatibilité&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2756"/>

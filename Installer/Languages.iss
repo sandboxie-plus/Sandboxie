@@ -158,6 +158,7 @@ french.UninstallTaskLabel3=&Conserver les fichiers de configuration et les bacs 
 french.UninstallTaskLabel4=Supprimer les &fichiers de configuration%nSélectionnez cette option pour supprimer les fichiers de configuration « Sandboxie.ini » et « Sandboxie-Plus.ini » tout en conservant les bacs à sable inchangés.
 french.UninstallTaskLabel5=Supprimer les fichiers de configuration et les &bacs à sable%nSélectionnez cette option pour supprimer tous les fichiers de configuration et les bacs à sable, y compris le dossier « Sandbox » situé dans les chemins personnalisés avec « FileRootPath ».
 french.RefreshBuild=Télécharger les dernières versions de Templates.ini et des traductions
+french.InstallImDisk=Installer (ou mettre à jour) le pilote ImDisk 3.0 (pour disque de mémoire vive ou bac à sable chiffré)
 
 ; German
 german.AddSandboxedMenu=Füge "Starte Sandgeboxt" zum Kontextmenü hinzu

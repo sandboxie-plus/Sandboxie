@@ -6,6 +6,11 @@ Please report any found security vulnerability directly to me at xanatosdavid[at
 
 ## Fixed security issues
 
+### SECURITY ISSUE ID-25 (thanks hg421)
+A new method of exploiting HostInjectDll mechanism for local privilege escalation
+
+fixed in: 1.15.9 / 5.70.9
+
 ### SECURITY ISSUE ID-24
 Files stored inside a sandbox folder were accessible to all users on a system, resulting in security issues in multi-user scenarios; see [CVE-2024-49360](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-4chj-3c28-gvmp)
 

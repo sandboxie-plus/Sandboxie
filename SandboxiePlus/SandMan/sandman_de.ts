@@ -1456,7 +1456,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <translation>&lt;p&gt;Möchten Sie zur&lt;a href=&quot;%1&quot;&gt;Infoseite gehen&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1196"/>
+        <location filename="OnlineUpdater.cpp" line="1208"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Diese Ankündigung zukünftig nicht mehr zeigen.</translation>
     </message>

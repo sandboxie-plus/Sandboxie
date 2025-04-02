@@ -1532,7 +1532,7 @@ Do you still want to update?</source>
         <translation>&lt;p&gt;Bạn có muốn truy cập &lt;a href=&quot;%1&quot;&gt;trang thông tin ứng dụng&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1196"/>
+        <location filename="OnlineUpdater.cpp" line="1208"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Không hiện thông báo này trong tương lai.</translation>
     </message>
@@ -10429,7 +10429,8 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
-        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</source>
+        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
+        <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -1675,7 +1675,7 @@ Voulez-vous quand même mettre  à jour ?</translation>
         <translation>&lt;p&gt;Voulez-vous aller à la &lt;a href=&quot;%1&quot;&gt;page d&apos;information&lt;/a&gt; ?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1196"/>
+        <location filename="OnlineUpdater.cpp" line="1208"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Ne plus afficher cette annonce</translation>
     </message>
@@ -11246,7 +11246,8 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
-        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</source>
+        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
+        <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

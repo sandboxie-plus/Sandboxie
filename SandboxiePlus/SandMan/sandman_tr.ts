@@ -1451,7 +1451,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <translation>&lt;p&gt;Bilgi sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek istiyor musunuz&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1196"/>
+        <location filename="OnlineUpdater.cpp" line="1208"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Bu duyuruyu gelecekte gösterme.</translation>
     </message>

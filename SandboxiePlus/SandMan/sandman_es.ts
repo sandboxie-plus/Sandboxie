@@ -1627,7 +1627,7 @@ Do you still want to update?</source>
         <translation>&lt;p&gt;¿Desea ir a la &lt;a href=&quot;%1&quot;&gt;página de información&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1196"/>
+        <location filename="OnlineUpdater.cpp" line="1208"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>No mostrar este anuncio en el futuro.</translation>
     </message>
@@ -10750,7 +10750,8 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
-        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</source>
+        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
+        <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

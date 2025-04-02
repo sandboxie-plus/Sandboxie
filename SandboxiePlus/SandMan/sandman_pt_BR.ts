@@ -1645,7 +1645,7 @@ Você ainda deseja atualizar?</translation>
         <translation>&lt;p&gt;Você quer ir para a &lt;a href=&quot;%1&quot;&gt;página de informações&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1196"/>
+        <location filename="OnlineUpdater.cpp" line="1208"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Não mostrar esse anúncio no futuro.</translation>
     </message>
@@ -11126,7 +11126,8 @@ Ao contrário do canal preview, ele não inclui alterações não testadas, pote
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
-        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</source>
+        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
+        <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

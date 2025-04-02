@@ -1710,7 +1710,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>&lt;p&gt;您是否要前往&lt; &quot;%1&quot;&gt;信息页&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1196"/>
+        <location filename="OnlineUpdater.cpp" line="1208"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>不再显示此公告。</translation>
     </message>
@@ -10817,8 +10817,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
-        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;现在更新兼容性模板&lt;/a&gt;</translation>
+        <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
+        <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
+        <translation type="unfinished">&lt;a href=&quot;sbie://templates&quot;&gt;现在更新兼容性模板&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2687"/>

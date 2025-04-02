@@ -733,6 +733,18 @@ SBIE2326 Cannot prepare registry:  %2
 SBIE2327 Error in COM server:  %2
 .
 
+2328;pop;err;01
+SBIE2328 Failed to resolve chrome sandbox hook %2
+.
+
+2329;pop;err;01
+SBIE2329 Failed to find FFS sequence %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspecified error when hooking %2
+.
+
 2331;pop;err;01
 SBIE2331 Service start failed:  %2
 .
@@ -1017,7 +1029,7 @@ Please terminate programs running in the sandbox before deleting its contents
 .
 
 3222;txt;01
-Delete command failed:  %0
+Delete command failed: %2
 .
 
 # 3231;txt;01

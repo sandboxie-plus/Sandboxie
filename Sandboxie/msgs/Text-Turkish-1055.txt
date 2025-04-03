@@ -210,6 +210,10 @@ SBIE1319 Yazdırma biriktiricisinin dosyaya yazdırması engellendi, %2 %3
 SBIE1320 Yazdırma biriktiricisinin bu işlem için korumalı alanın dışına yazmasına izin vermek istiyorsanız bu mesaj satırına çift tıklayın
 .
 
+1321;pop;inf;01
+SBIE1321 '%2' programı %3 korumalı alanında çalışmaya zorlandı
+.
+
 1399;pop;inf;01
 %0
 .
@@ -615,6 +619,18 @@ SBIE2326 Kayıt hazırlanamıyor: %2
 
 2327;pop;err;01
 SBIE2327 COM sunucusunda hata: %2
+.
+
+2328;pop;err;01
+SBIE2328 Chrome korumalı alan kancası %2 çözülemedi
+.
+
+2329;pop;err;01
+SBIE2329 FFS dizisi %2 bulunamadı
+.
+
+2330;pop;err;01
+SBIE2330 %2 kancalanırken belirtilmemiş hata oluştu
 .
 
 2331;pop;err;01

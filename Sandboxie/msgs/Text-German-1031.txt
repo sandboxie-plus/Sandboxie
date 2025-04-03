@@ -678,6 +678,18 @@ SBIE2326 Kann die Registrierung nicht bereitstellen: %2
 SBIE2327 Fehler beim COM Server: %2
 .
 
+2328;pop;err;01
+SBIE2328 Fehler beim Auflösen des Chrome-Sandbox-Hooks %2
+.
+
+2329;pop;err;01
+SBIE2329 Fehler beim Auffinden der FFS-Sequenz %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspezifizierter Fehler beim Hooking in %2
+.
+
 2331;pop;err;01
 SBIE2331 Start des Dienstes fehlgeschlagen: %2
 .
@@ -913,7 +925,7 @@ Vor dem Löschen der Inhalte bitte alle laufenden Prozesse in dieser Sandbox bee
 .
 
 3222;txt;01
-Löschen-Befehl fehlgeschlagen:  %0
+Löschen-Befehl fehlgeschlagen: %2
 .
 
 3241;txt;01

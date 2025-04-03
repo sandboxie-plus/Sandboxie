@@ -2,5 +2,15 @@
 * Missing Messages in Text-German-1031.txt
 *==========
 
-There are no missing messages.
+2328;pop;err;01
+SBIE2328 Failed to resolve chrome sandbox hook %2
+.
+
+2329;pop;err;01
+SBIE2329 Failed to find FFS sequence %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspecified error when hooking %2
+.
 

@@ -126,6 +126,18 @@ SBIE2244 Failed to mount box image, Password required
 SBIE2246 Failed to mount box image, ImBox error %2
 .
 
+2328;pop;err;01
+SBIE2328 Failed to resolve chrome sandbox hook %2
+.
+
+2329;pop;err;01
+SBIE2329 Failed to find FFS sequence %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspecified error when hooking %2
+.
+
 2360;pop;err;01
 SBIE2360 Failed to inject SOCKS5 proxy:  %2
 .

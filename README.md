@@ -91,6 +91,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 8 April 2020 - [open-source code](https://community.sophos.com/sandboxie/f/forum/119641/important-sandboxie-open-source-code-is-available-for-download) | Sophos Ltd. |
 | 9 April 2020 onwards - project fork | David Xanatos |
 
+Look for the releases of older version?See [History Version](https://github.com/sandboxie-plus/sandboxie-old)
 See the current [roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633).
 
 ## 📌 Project support / sponsorship

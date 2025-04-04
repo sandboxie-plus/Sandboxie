@@ -10819,12 +10819,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2631"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
-        <translation type="unfinished">&lt;a href=&quot;sbie://templates&quot;&gt;现在更新兼容性模板&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;立即更新兼容性模板&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2687"/>
         <source>In the future, don&apos;t check software compatibility</source>
-        <translation>之后不再检查软件兼容性</translation>
+        <translation>以后不再检查软件兼容性</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2667"/>

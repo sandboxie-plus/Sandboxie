@@ -92,6 +92,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 9 April 2020 onwards - project fork | David Xanatos |
 
 Look for the releases of older version?See [History Version](https://github.com/sandboxie-plus/sandboxie-old).
+
 See the current [roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633).
 
 ## 📌 Project support / sponsorship

@@ -5,9 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.15.10 / 5.70.10] - 2025-04-
 
 ### Fixed
-- fixed issue with firefox plugin-container.exe and 
+- fixed Firefox 137.0 generates SBIE2328 notifications in Sandboxie-Plus v1.15.9 [#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4638)[#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4652)[#4640](https://github.com/sandboxie-plus/Sandboxie/issues/4640)
 - fixed ShieShellExt.dll missing in 1.15.9
 - fixed Process_GetCommandLine cause memory leak [#4658](https://github.com/sandboxie-plus/Sandboxie/issues/4658)
+- fixed Thunderbird 102.15.1 does not load all extensions under Sandboxie-Plus v1.15.9 [#4653](https://github.com/sandboxie-plus/Sandboxie/issues/4653)
 
 
 

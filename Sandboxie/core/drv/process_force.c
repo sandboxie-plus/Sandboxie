@@ -569,7 +569,7 @@ _FX void Process_GetStringFromPeb(
     //
 
     if (LocalBuffer)
-        Mem_Free(Driver_Pool, LocalBuffer);
+        Mem_Free(LocalBuffer, LocalBufferLength);
 }
 
 

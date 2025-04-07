@@ -269,7 +269,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation>阻止捕获沙盒中程序的窗口图像。</translation>
+        <translation>阻止捕获沙盒中程序的窗口图像</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="905"/>
@@ -451,7 +451,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="212"/>
         <source>Don&apos;t ask in future</source>
-        <translation>此后不再询问</translation>
+        <translation>以后不再询问</translation>
     </message>
 </context>
 <context>
@@ -869,7 +869,7 @@ Please browse to the correct user profile directory.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="350"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
         <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
-        <translation>主程序 (例如 firefox.exe, chrome.exe, msedge.exe, 等...)：</translation>
+        <translation>主程序 (例如 firefox.exe, chrome.exe, msedge.exe, 等……)：</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="354"/>
@@ -880,7 +880,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
         <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
-        <translation>该浏览器似乎是基于 Gecko 内核的，例如 Mozilla Firefox 及其衍生发行版</translation>
+        <translation>该浏览器似乎是基于 Gecko 内核的，例如 Mozilla Firefox 及其衍生发行版。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="457"/>
@@ -1035,7 +1035,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="34"/>
         <source>Maximum</source>
-        <translation>紧凑压缩</translation>
+        <translation>最大压缩</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="35"/>
@@ -2222,7 +2222,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
         <location filename="Windows/OptionsNetwork.cpp" line="600"/>
         <source>Group: %1</source>
-        <translation>组: %1</translation>
+        <translation>组：%1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="141"/>
@@ -2477,7 +2477,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="576"/>
         <source>Don&apos;t ask in future</source>
-        <translation>此后不再询问</translation>
+        <translation>以后不再询问</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="585"/>
@@ -3645,7 +3645,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="520"/>
         <location filename="SandMan.cpp" line="664"/>
         <source>Lock All Encrypted Boxes</source>
-        <translation>封锁所有加密沙盒</translation>
+        <translation>锁定所有加密沙盒</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="522"/>
@@ -4202,7 +4202,7 @@ No will choose: %2</source>
         <oldsource>The file %1 failed a security check!
 
 %2</oldsource>
-        <translation>文件 %1 未通过安全检查!
+        <translation>文件 %1 未通过安全检查！
 
 %2</translation>
     </message>
@@ -4329,7 +4329,7 @@ No will choose: %2</source>
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
-        <translation>您正准备编辑模板配置文件(Templates.ini), 但通常不推荐这么做
+        <translation>您正准备编辑模板配置文件(Templates.ini), 但通常不推荐这么做。
 因为该文件是 Sandboxie 的一部分并且所有的更改都将会在下次更新时被丢弃。</translation>
     </message>
     <message>
@@ -5522,7 +5522,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="930"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <translation>将项目移动的距离(负数向上移动，正数向下移动):</translation>
+        <translation>将项目移动的距离(负数向上移动，正数向下移动)：</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="978"/>
@@ -6226,7 +6226,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1546"/>
         <source>Contributor</source>
-        <translation>贡献值</translation>
+        <translation>贡献者</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1548"/>
@@ -6522,7 +6522,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <location filename="Wizards/SetupWizard.cpp" line="542"/>
         <source>Only applications with admin rights can change configuration</source>
         <oldsource>Only applications with administrator token can change ini setting.</oldsource>
-        <translation>仅带有管理员令牌的程序可以修改ini设置</translation>
+        <translation>仅带有管理员令牌的程序可以修改ini设置。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="554"/>
@@ -7449,7 +7449,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="14"/>
         <source>Compress Files</source>
-        <translation>文件压缩</translation>
+        <translation>压缩文件</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="58"/>
@@ -7516,7 +7516,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/ExtractDialog.ui" line="82"/>
         <source>Import without encryption</source>
-        <translation>不加密导入</translation>
+        <translation>无加密导入</translation>
     </message>
 </context>
 <context>
@@ -7745,7 +7745,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1110"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
-        <translation>可以在此处为沙盒列表的「运行」菜单配置自定义命令</translation>
+        <translation>可以在此处为沙盒列表的「运行」菜单配置自定义命令。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1059"/>
@@ -8715,17 +8715,17 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3616"/>
         <source>Port:</source>
-        <translation>端口:</translation>
+        <translation>端口：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3629"/>
         <source>IP:</source>
-        <translation>IP:</translation>
+        <translation>IP：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3642"/>
         <source>Protocol:</source>
-        <translation>协议:</translation>
+        <translation>协议：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3655"/>
@@ -9023,7 +9023,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5466"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
-        <translation>警告，这些选项可使核心安全保障失效并且破坏沙盒安全！</translation>
+        <translation>警告，这些选项可使核心安全保障失效并且破坏沙盒安全！！！</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5476"/>
@@ -9631,7 +9631,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="58"/>
         <source>Group: %1</source>
-        <translation>组: %1</translation>
+        <translation>组：%1</translation>
     </message>
 </context>
 <context>
@@ -10217,7 +10217,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="85"/>
         <source>UI Language:</source>
-        <translation>界面语言:</translation>
+        <translation>界面语言：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="722"/>
@@ -10569,7 +10569,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="683"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation>当启动一个新进程时切换到沙盒化桌面。</translation>
+        <translation>当启动一个新进程时切换到沙盒化桌面</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="690"/>
@@ -10920,7 +10920,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="127"/>
         <source>Address:</source>
-        <translation>地址:</translation>
+        <translation>地址：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="134"/>
@@ -10930,7 +10930,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="144"/>
         <source>Protocol:</source>
-        <translation>协议:</translation>
+        <translation>协议：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="151"/>
@@ -10940,7 +10940,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="158"/>
         <source>Authentication:</source>
-        <translation>认证:</translation>
+        <translation>认证：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="165"/>
@@ -10950,7 +10950,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="172"/>
         <source>Login:</source>
-        <translation>登陆:</translation>
+        <translation>登陆：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="179"/>
@@ -10960,7 +10960,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="242"/>
         <source>Timeout (secs):</source>
-        <translation>超时值 (以秒为单位):</translation>
+        <translation>超时值 (以秒为单位)：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="249"/>
@@ -10987,7 +10987,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="330"/>
         <source>Target host:</source>
-        <translation>目标主机:</translation>
+        <translation>目标主机：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="340"/>
@@ -10997,7 +10997,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="350"/>
         <source>Port:</source>
-        <translation>端口:</translation>
+        <translation>端口：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="360"/>
@@ -11012,12 +11012,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation>测试 3 :代理服务器延迟</translation>
+        <translation>测试 3 ：代理服务器延迟</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>
         <source>Ping count:</source>
-        <translation>Ping 数:</translation>
+        <translation>Ping 计数：</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>

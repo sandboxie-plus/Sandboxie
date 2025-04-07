@@ -556,12 +556,20 @@ _FX void Process_GetStringFromPeb(
 
             *OutBuffer = LocalBuffer;
             *OutLength = LocalBufferLength;
+            LocalBuffer = NULL;
         }
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
     }
 
     KeUnstackDetachProcess(&ApcState);
+
+    //
+    // free when not used
+    //
+
+    if (LocalBuffer)
+        Mem_Free(Driver_Pool, LocalBuffer);
 }
 
 

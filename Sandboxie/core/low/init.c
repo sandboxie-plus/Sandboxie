@@ -392,12 +392,14 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
 
         void* ChromeFunc = Hook_CheckChromeHook(ZwXxxPtr, (void*)GET_ADDR_OF_PROCESS_BASE);
         if (ChromeFunc != NULL) {
-            if (ChromeFunc == (void*)-1) { // found chrome sandbox hook but failed to resolve original
-                SbieApi_DebugError(data, 0x60 | (SyscallPtr[0] << 16));
-                SyscallPtr += 2;
-                continue;
+            if (ChromeFunc != (void*)-1)
+                ZwXxxPtr = ChromeFunc;
+            else {
+                if(data->flags.hook_dbg)
+                    SbieApi_DebugError(data, 0x60 | (SyscallPtr[0] << 16));
+                //SyscallPtr += 2;
+                //continue;
             }
-            ZwXxxPtr = ChromeFunc;
         }
 
         //

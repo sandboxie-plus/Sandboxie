@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.15.10 / 5.70.10] - 2025-04-
+
+### Fixed
+- fixed issue with firefox plugin-container.exe and 
+- fixed ShieShellExt.dll missing in 1.15.9
+- fixed Process_GetCommandLine cause memory leak [#4658](https://github.com/sandboxie-plus/Sandboxie/issues/4658)
+
+
+
 ## [1.15.9 / 5.70.9] - 2025-04-02
 
 ### Added

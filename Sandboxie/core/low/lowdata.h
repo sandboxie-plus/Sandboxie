@@ -66,8 +66,9 @@ typedef union _SBIELOW_FLAGS {
             is_chpe32       : 1,
 			reservd_1		: 4,
 
-			long_diff		: 1,
-			reservd_2		: 7,
+            long_diff		: 1,
+            hook_dbg		: 1,
+			reservd_2		: 6,
 
 			bHostInject		: 1,
 			bNoSysHooks		: 1,

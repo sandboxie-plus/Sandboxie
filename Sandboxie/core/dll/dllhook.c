@@ -1180,7 +1180,7 @@ _FX void *SbieDll_HookFunc(
         if (ChromeFunc != (void*)-1)
             SourceFunc = ChromeFunc;
         else {
-            SbieApi_Log(2328, _fmt1, SourceFuncName, 1);
+            //SbieApi_Log(2328, _fmt1, SourceFuncName, 1);
             if (pHookStats) *pHookStats |= HOOK_STAT_CHROME_FAIL;
         }
     }

@@ -89,11 +89,11 @@
 "Sandboxie failed to start a service in the sandbox": "Sandboxie 在沙盒中启动服务失败",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "该消息指示 Sandboxie 无法启动帮助程序 SandboxieRpcSs 或 SandboxieDcomLaunch 之一。消息中记下的名称可为 rpcss 或 dcomlaunch。\n\n您可以在下一页上提交问题报告，以帮助我们分析问题。",
 
-"SBIE2224: Sandboxed program has crashed":"SBIE2224: Sandboxed program has crashed",
-"A Sandboxed program has crashed":"A Sandboxed program has crashed",
-"The Process '%1' crashed":"The Process '%1' crashed",
-"This program is known to work in a Green (App Compartment) type sandbox.":"This program is known to work in a Green (App Compartment) type sandbox.",
-"There is no known workaround for this process. Do you want to report this issue?":"There is no known workaround for this process. Do you want to report this issue?",
+"SBIE2224: Sandboxed program has crashed":"SBIE2224：沙盒内程序已崩溃",
+"A Sandboxed program has crashed":"沙盒中的程序已崩溃",
+"The Process '%1' crashed":"进程 '%1' 已崩溃",
+"This program is known to work in a Green (App Compartment) type sandbox.":"该程序可在绿色（应用隔离）型沙盒中正常运行。",
+"There is no known workaround for this process. Do you want to report this issue?":"该进程暂无已知解决方案。是否要报告此问题？",
 
 "SBIE2313: Could not execute specific process": "SBIE2313: 无法运行一个特定的进程",
 "Sandboxie failed to start a process in the sandbox": "Sandboxie 在沙盒中启动进程失败",
@@ -120,16 +120,16 @@
 "Please enter the SBIEMSG ID you have encountered.": "请输入您遇到的 SBIEMSG ID。",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "SBIE%1 暂时还没有可用的自动故障排除方法。<br />",
 "The full message text is: %1<br />": "完整的消息文本是: %1<br />",
-"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "访问 <a href=\"%1\">在线文档</a> to 了解更多关于这个的信息，以及其他 Sbie 信息。",
+"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "访问 <a href=\"%1\">在线文档</a> to 了解更多关于此信息，以及其他 Sbie 信息。",
 "Would you like to collect some logs to help us resolve the issue.": "是否要收集一些日志来帮助我们解决问题？",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "现在，请再次运行您的应用程序以触发 SBIE 消息。<br /><br />",
 "Press NEXT when you are done collecting logs.": "完成日志收集后按 下一步 。",
 
-"Unknown application crashed":"Unknown application crashed",
-"An Unknown application crashed":"An Unknown application crashed",
-"Do you want to report this issue?":"Do you want to report this issue?",
+"Unknown application crashed":"未知的应用程序已崩溃",
+"An Unknown application crashed":"一个未知的应用程序已崩溃",
+"Do you want to report this issue?":"你要报告此问题吗？",
 
-"Viber crashes on startup":"Viber crashes on startup",
-"The Viber messenger crashes on startup":"The Viber messenger crashes on startup",
-"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox."
+"Viber crashes on startup":"Viber 在启动时崩溃",
+"The Viber messenger crashes on startup":"Viber即时通讯软件在启动时崩溃了",
+"Viber is not compatible with the standard isolation yellow type Sandbox. However is known to work in a Green (App Compartment) type sandbox.":"Viber 与标准隔离的黄色沙盒不兼容。但是在绿色（应用隔离）的沙盒中正常运行。"
 }

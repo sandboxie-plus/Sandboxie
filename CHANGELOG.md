@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SbieShellExt.dll missing in 1.15.9
 - fixed Process_GetCommandLine causing memory leak [#4658](https://github.com/sandboxie-plus/Sandboxie/issues/4658)
 - fixed Thunderbird 102.15.1 does not load all extensions under Sandboxie-Plus v1.15.9 [#4653](https://github.com/sandboxie-plus/Sandboxie/issues/4653)
+- fixed In SandBoxie, Invoke SetParent change window to Message-Only Windows Failed [#4656](https://github.com/sandboxie-plus/Sandboxie/issues/4656)
 
 
 

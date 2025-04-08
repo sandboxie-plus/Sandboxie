@@ -1081,6 +1081,16 @@ _FX BOOLEAN Gui_IsWindowAccessible(HWND hWnd)
     ULONG_PTR idProcess;
 
     //
+    // allow if target special pseudo handle
+    //
+
+    if (hWnd == HWND_MESSAGE || hWnd == HWND_DESKTOP 
+     || hWnd == HWND_BOTTOM || hWnd == HWND_NOTOPMOST || hWnd == HWND_TOPMOST) {
+
+        return TRUE;
+    }
+
+    //
     // allow if target window is part of a process in the same sandbox
     //
 

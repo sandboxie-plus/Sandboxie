@@ -79,6 +79,8 @@ static NTSTATUS Api_QueryDriverInfo(PROCESS *proc, ULONG64 *parms);
 
        NTSTATUS Api_GetSecureParam(PROCESS *proc, ULONG64 *parms);
 
+       NTSTATUS Api_Verify(PROCESS *proc, ULONG64 *parms);
+
 
 //---------------------------------------------------------------------------
 
@@ -201,6 +203,8 @@ _FX BOOLEAN Api_Init(void)
 
     Api_SetFunction(API_SET_SECURE_PARAM,   Api_SetSecureParam);
     Api_SetFunction(API_GET_SECURE_PARAM,   Api_GetSecureParam);
+
+    Api_SetFunction(API_VERIFY,             Api_Verify);
 
     if ((! Api_Functions) || (Api_Functions == (void *)-1))
         return FALSE;
@@ -1325,6 +1329,27 @@ finish:
 // Api_GetSecureParam
 //---------------------------------------------------------------------------
 
+void PrintHexBuffer(const void* Buffer, size_t Length)
+{
+    const unsigned char* Data = (const unsigned char*)Buffer;
+    char Output[128];  // Temporary buffer for formatted output
+    size_t i, j;
+    
+    for (i = 0; i < Length; i += 16)  // Process 16 bytes per line
+    {
+        size_t pos = 0;
+        RtlStringCbPrintfA(Output, sizeof(Output), "%p: ", Data + i);
+
+        for (j = 0; j < 16 && (i + j) < Length; j++) // Print hex bytes
+        {
+            char temp[8];
+            RtlStringCbPrintfA(temp, sizeof(temp), "%02X ", Data[i + j]);
+            RtlStringCbCatA(Output, sizeof(Output), temp);
+        }
+
+        DbgPrint("%s\n", Output); // Output the formatted string
+    }
+}
 
 _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 {
@@ -1382,5 +1407,28 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
         ZwClose(handle);
 
 finish:
+    return status;
+}
+
+
+_FX NTSTATUS Api_Verify(PROCESS *proc, ULONG64 *parms)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    void* data_ptr  = (void*)(ULONG_PTR)parms[1];
+    size_t data_size= (size_t)parms[2];
+    void* sig_ptr   = (void*)(ULONG_PTR)parms[3];
+    size_t sig_size = (size_t)parms[4];
+
+    __try {
+
+        ProbeForRead(data_ptr, data_size, 1);
+        ProbeForRead(sig_ptr, sig_size, 1);
+
+        status = KphVerifyBuffer(data_ptr, data_size, sig_ptr, sig_size);
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
     return status;
 }

@@ -2275,6 +2275,21 @@ SB_STATUS CSbieAPI::GetSecureParam(const QString& Name, void* data, size_t size,
 	return SB_OK;
 }
 
+bool CSbieAPI::TestSignature(const QByteArray& Data, const QByteArray& Signature)
+{
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	parms[0] = API_VERIFY;
+	parms[1] = (ULONG_PTR)Data.constData();
+	parms[2] = Data.size();
+	parms[3] = (ULONG_PTR)Signature.constData();
+	parms[4] = Signature.size();
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return false;
+	return true;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Log
 //

@@ -1657,9 +1657,9 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     P_connect           connect;
     P_WSAConnect        WSAConnect;
 
-    P_listen            listen;
+    /*P_listen            listen;
 
-    /*P_accept            accept;
+    P_accept            accept;
     P_WSAAccept         WSAAccept;*/
 
     P_sendto            sendto;

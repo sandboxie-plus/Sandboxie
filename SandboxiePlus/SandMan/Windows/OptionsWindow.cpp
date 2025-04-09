@@ -383,6 +383,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblACLs, CSandMan::GetIcon("Ampel").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxProtection, CSandMan::GetIcon("BoxConfig").pixmap(size,size));
 	AddIconToLabel(ui.lblNetwork, CSandMan::GetIcon("Network").pixmap(size,size));
+	AddIconToLabel(ui.lblBind, CSandMan::GetIcon("EthSocket2").pixmap(size,size));
 	AddIconToLabel(ui.lblPrinting, CSandMan::GetIcon("Printer").pixmap(size,size));
 	AddIconToLabel(ui.lblOther, CSandMan::GetIcon("NoAccess").pixmap(size,size));
 

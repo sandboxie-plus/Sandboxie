@@ -177,7 +177,7 @@ void CGetUpdatesJob::Finish(QNetworkReply* pReply)
 			if (theAPI->TestSignature(BlockList0, BlockListSig0))
 			{
 				std::string BlockList;
-				BlockList.resize(0x10000, 0); // 64 kb should be enough
+				BlockList.resize(qMax(0x10000, BlockList0.size()), 0); // 64 kb should be enough
 				static quint32 BlockListLen = 0;
 				if (BlockListLen == 0) {
 					SB_STATUS Status = theAPI->GetSecureParam("CertBlockList", (void*)BlockList.c_str(), BlockList.size(), &BlockListLen, true);

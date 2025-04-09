@@ -151,6 +151,9 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
+	connect(ui.txtIPv4, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+	connect(ui.txtIPv6, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+
 	connect(ui.chkSecurityMode, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
 	connect(ui.chkLockDown, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
 	connect(ui.chkRestrictDevices, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
@@ -275,6 +278,17 @@ void COptionsWindow::LoadGeneral()
 
 	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", false));
 	ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
+
+	QStringList BindIPs = m_pBox->GetTextList("BindAdapterIP", false);
+	foreach(const QString& BindIP, BindIPs) {
+		auto ProgIP = Split2(BindIP, ",");
+		if (!ProgIP.second.isEmpty())
+			continue;
+		if (ProgIP.first.contains("."))
+			ui.txtIPv4->setText(ProgIP.first);
+		else if (ProgIP.first.contains(":"))
+			ui.txtIPv6->setText(ProgIP.first);
+	}
 	
 	ui.chkSecurityMode->setChecked(m_pBox->GetBool("UseSecurityMode", false));
 	ui.chkLockDown->setChecked(m_pBox->GetBool("SysCallLockDown", false));
@@ -428,6 +442,21 @@ void COptionsWindow::SaveGeneral()
 
 	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
 	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");
+
+	QStringList BindIPs = m_pBox->GetTextList("BindAdapterIP", false);
+	foreach(const QString& BindIP, BindIPs) {
+		auto ProgIP = Split2(BindIP, ",");
+		if (!ProgIP.second.isEmpty())
+			continue;
+		BindIPs.removeAll(BindIP);
+	}
+	QString IPv4 = ui.txtIPv4->text();
+	if (!IPv4.isEmpty())
+		BindIPs.append(IPv4);
+	QString IPv6 = ui.txtIPv6->text();	
+	if (!IPv6.isEmpty())
+		BindIPs.append(IPv6);
+	m_pBox->UpdateTextList("BindAdapterIP", BindIPs, false);
 
 	WriteAdvancedCheck(ui.chkSecurityMode, "UseSecurityMode", "y", "");
 	WriteAdvancedCheck(ui.chkLockDown, "SysCallLockDown", "y", "");

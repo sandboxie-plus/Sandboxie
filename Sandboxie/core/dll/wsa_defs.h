@@ -106,6 +106,10 @@ typedef int (*P_ConnectEx) (
     LPDWORD         lpdwBytesSent,
     LPOVERLAPPED    lpOverlapped);
 
+typedef int (*P_listen)(
+    SOCKET         s,
+    int            backlog);
+
 typedef SOCKET (*P_accept)(
     SOCKET   s,
     void     *addr,

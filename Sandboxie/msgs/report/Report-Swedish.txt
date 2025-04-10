@@ -179,24 +179,8 @@ Preparing to delete: %2
 Deleting: %2
 .
 
-3505;txt;01
-Contribute to Sandboxie
-.
-
-3506;txt;01
-Get Supporter Certificate
-.
-
-3507;txt;01
-Apply Supporter Certificate
-.
-
 3468;txt;01
 Sandboxie-Plus Migration Guide
-.
-
-3469;txt;01
-What's new in Sandboxie-Plus
 .
 
 6008;pop;err;01

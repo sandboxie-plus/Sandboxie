@@ -69,7 +69,7 @@ public slots:
 	void ok();
 	void apply();
 
-	void showTab(const QString& Name, bool bExclusive = false);
+	void showTab(const QString& Name, bool bExclusive = false, bool bExec = false);
 
 private slots:
 	void OnTab();

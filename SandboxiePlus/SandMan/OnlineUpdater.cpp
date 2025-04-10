@@ -274,7 +274,7 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 
 	QUrlQuery Query;
 
-	bool bHwId = false;
+	bool bHwId = IsLockedRegion();
 	if (!Serial.isEmpty()) {
 		Query.addQueryItem("SN", Serial);
 		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N')
@@ -289,13 +289,11 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 	QString HashKey = QString::number(Hash, 16).rightJustified(8, '0').toUpper() + "-" + QString::number(RandID, 16).rightJustified(16, '0').toUpper();
 	Query.addQueryItem("HashKey", HashKey);
 
-	if (Serial.isEmpty() && Params.contains("eMail")) { // Request eval Key
+	if (Serial.isEmpty() && Params.contains("Name")) { // Request eval Key
+		Query.addQueryItem("Name", Params["Name"].toString()); // for cert
 		Query.addQueryItem("eMail", Params["eMail"].toString());
 		bHwId = true;
 	}
-
-	if (Params.contains("Name"))
-		Query.addQueryItem("Name", Params["Name"].toString());
 
 	if (bHwId) {
 		wchar_t uuid_str[40];
@@ -314,6 +312,23 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 	StartJob(pJob, Url);
 	QObject::connect(pJob, SIGNAL(Certificate(const QByteArray&, const QVariantMap&)), receiver, member, Qt::QueuedConnection);
 	return SB_PROGRESS(OP_ASYNC, pJob->m_pProgress);
+}
+
+bool COnlineUpdater::IsLockedRegion()
+{
+	if (theConf->GetBool("Debug/LockedRegion", false))
+		return true;
+
+	QStringList LockedRegions = QStringList() << "zh_CN";
+
+	QString Lang = theConf->GetString("Options/UiLanguage");
+	if (LockedRegions.contains(Lang, Qt::CaseInsensitive))
+		return true;
+	QString SysLang = QLocale::system().name();
+	if (LockedRegions.contains(SysLang, Qt::CaseInsensitive))
+		return true;
+
+	return false;
 }
 
 void CGetCertJob::Finish(QNetworkReply* pReply)
@@ -480,7 +495,6 @@ void COnlineUpdater::Process()
 					bCheck = false;
 				if (State)
 					theConf->SetValue("Options/AutoUpdateTemplates", 1);
-					
 			}
 			theConf->SetValue("Options/NextCheckForUpdates", CurretnDate.addSecs(UpdateInterval).toSecsSinceEpoch());
 			if (bCheck)

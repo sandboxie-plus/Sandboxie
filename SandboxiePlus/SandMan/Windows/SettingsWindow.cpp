@@ -552,7 +552,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 			ui.txtCertificate->setVisible(true);
 		});
 
-		QString Text = ui.lblSerial->text();
+		/*QString Text = ui.lblSerial->text();
 		ui.lblSerial->setText(QString("<a href=\"_\">%1</a>").arg(Text));
 		ui.txtSerial->setVisible(false);
 		ui.lblHwId->setVisible(false);
@@ -562,7 +562,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 			ui.txtSerial->setVisible(true);
 			ui.lblHwId->setVisible(true);
 			ui.btnGetCert->setVisible(true);
-		});
+		});*/
 	}
 
 	wchar_t uuid_str[40];
@@ -715,7 +715,7 @@ CSettingsWindow::~CSettingsWindow()
 		theConf->SetBlob("SettingsWindow/" + pTree->objectName() + "_Columns", pTree->header()->saveState());
 }
 
-void CSettingsWindow::showTab(const QString& Name, bool bExclusive)
+void CSettingsWindow::showTab(const QString& Name, bool bExclusive, bool bExec)
 {
 	QWidget* pWidget = this->findChild<QWidget*>("tab" + Name);
 
@@ -754,7 +754,11 @@ void CSettingsWindow::showTab(const QString& Name, bool bExclusive)
 		}
 	}
 
-	CSandMan::SafeShow(this);
+	if (bExec)
+		this->exec();
+		//theGUI->SafeExec(this);
+	else
+		CSandMan::SafeShow(this);
 }
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
@@ -2036,8 +2040,8 @@ void CSettingsWindow::SaveSettings()
 bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* widget)
 {
 	QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
-	if (!Certificate.isEmpty()) {
-
+	if (!Certificate.isEmpty()) 
+	{
 		auto Args = GetArguments(Certificate, L'\n', L':');
 
 		bool bLooksOk = true;
@@ -2062,6 +2066,7 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 			QMessageBox::critical(widget, "Sandboxie-Plus", tr("This does not look like a certificate. Please enter the entire certificate, not just a portion of it."));
 			return false;
 		}
+		g_Certificate = Certificate;
 	}
 	else if(!g_Certificate.isEmpty()){
 		g_Certificate.clear();
@@ -2073,9 +2078,6 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 
 	if (!theGUI->ReloadCert(widget).IsError())
 	{
-		g_FeatureFlags = theAPI->GetFeatureFlags();
-		g_Certificate = Certificate;
-
 		if (g_CertInfo.expired || g_CertInfo.outdated) {
 			if(g_CertInfo.outdated)
 				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build."));
@@ -2225,6 +2227,23 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 
 	if (pTab == ui.tabSupport)
 	{
+		if (g_CertInfo.active && COnlineUpdater::IsLockedRegion() && !g_CertInfo.locked) {
+			if (QMessageBox::question(NULL, "Sandboxie-Plus", tr("A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. "
+				"Would you like to download the updated certificate now (Yes), or exit Sandboxie-Plus (No)?")
+				, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No) == QMessageBox::No) {
+				QTimer::singleShot(100, this, SLOT(close()));
+			}
+
+			QVariantMap Params;
+			Params["key"] = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
+
+			SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert("", this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)), Params);
+			if (Status.GetStatus() == OP_ASYNC) {
+				theGUI->AddAsyncOp(Status.GetValue());
+				Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
+			}
+		}
+
 		if (ui.lblCurrent->text().isEmpty()) {
 			if (ui.chkAutoUpdate->checkState())
 				GetUpdates();

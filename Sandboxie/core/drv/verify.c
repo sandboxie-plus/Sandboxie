@@ -747,6 +747,7 @@ _FX NTSTATUS KphValidateCertificate()
                 status = STATUS_FIRMWARE_IMAGE_INVALID;
                 goto CleanupExit;
             }
+            Verify_CertInfo.locked = 1;
         }
             
     next:

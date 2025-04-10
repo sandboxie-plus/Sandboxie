@@ -1809,6 +1809,8 @@ void CSandMan::dropEvent(QDropEvent* e)
 		if (url.isLocalFile())
 			Commands.append(url.toLocalFile().replace("/", "\\"));
 	}
+	if (Commands.isEmpty())
+		return;
 
 	QString BoxName;
 	QList<CSandBoxPtr> Boxes = m_pBoxView->GetSelectedBoxes();
@@ -2744,6 +2746,19 @@ void CSandMan::OnMenuHover(QAction* action)
 
 void CSandMan::CheckSupport()
 {
+	if (g_CertInfo.active && COnlineUpdater::IsLockedRegion() && !g_CertInfo.locked)
+	{
+		static CSettingsWindow* pSettingsWindow = NULL;
+		if (!pSettingsWindow) {
+			pSettingsWindow = new CSettingsWindow(this);
+			pSettingsWindow->showTab("Support", true, true);
+			pSettingsWindow = NULL;
+			if (g_CertInfo.active && COnlineUpdater::IsLockedRegion() && !g_CertInfo.locked)
+				TerminateProcess(GetCurrentProcess(), -1);
+		}
+		return;
+	}
+
 	if (CSupportDialog::CheckSupport())
 		return;
 
@@ -3876,7 +3891,7 @@ void CSandMan::EditIni(const QString& IniPath, bool bPlus)
 	std::wstring iniPath = L"\"" + IniPath.toStdWString() + L"\"";
 
 	SHELLEXECUTEINFOW si = { 0 };
-	si.cbSize = sizeof(SHELLEXECUTEINFO);
+	si.cbSize = sizeof(si);
 	si.fMask = SEE_MASK_NOCLOSEPROCESS;
 	si.hwnd = NULL;
 	si.lpVerb = bIsWritable ? NULL : L"runas"; // plus ini does not require admin privileges
@@ -4086,6 +4101,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SBX_7zOpenFailed:	Message = tr("Failed to open the 7z archive"); break;
 	case SBX_7zExtractFailed: Message = tr("Failed to unpack the box archive"); break;
 	case SBX_NotBoxArchive:	Message = tr("The selected 7z file is NOT a box archive"); break;
+	case SBX_FailedCopyDir: Message = tr("Failed to copy directory '%1' to '%2'"); break;
 
 	default:				return tr("Unknown Error Status: 0x%1").arg((quint32)Error.GetStatus(), 8, 16, QChar('0'));
 	}
@@ -4403,7 +4419,7 @@ void CSandMan::OnAbout()
 	if (sender() == m_pAbout)
 	{
 		if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0){
-			CSupportDialog::CheckSupport();
+			CheckSupport();
 			return;
 		}
 

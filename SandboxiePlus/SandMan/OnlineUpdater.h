@@ -89,6 +89,8 @@ public:
 	SB_PROGRESS			DownloadFile(const QString& Url, QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 	SB_PROGRESS			GetSupportCert(const QString& Serial, QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 
+	static bool			IsLockedRegion();
+
 	static SB_RESULT(int) RunUpdater(const QStringList& Params, bool bSilent, bool Wait = false);
 
 	void				Process();

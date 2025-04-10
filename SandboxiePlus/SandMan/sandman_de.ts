@@ -8871,27 +8871,27 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4001"/>
         <source>Bind to Adapter IP</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindung an Adapter-IP</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4008"/>
         <source>IPv6:</source>
-        <translation type="unfinished"></translation>
+        <translation>IPv6:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4049"/>
         <source>IPv4:</source>
-        <translation type="unfinished"></translation>
+        <translation>IPv4:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4072"/>
         <source>0000:0000:0000:0000:0000:0000:0000:0000</source>
-        <translation type="unfinished">0000:0000:0000:0000:0000:0000:0000:0000</translation>
+        <translation>0000:0000:0000:0000:0000:0000:0000:0000</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4079"/>
         <source>000.000.000.000</source>
-        <translation type="unfinished">000.000.000.000</translation>
+        <translation>000.000.000.000</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4938"/>

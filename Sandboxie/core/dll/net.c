@@ -1619,15 +1619,6 @@ _FX BOOLEAN WSA_InitBindIP()
 
     if (FoundIPs == 0)
         return FALSE;
-    
-    SCertInfo CertInfo = { 0 };
-    if (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !CertInfo.opt_net) {
-
-        const WCHAR* strings[] = { L"BindAdapterIP" , NULL };
-        SbieApi_LogMsgExt(-1, 6009, strings);
-
-        return FALSE;
-    }
 
     return TRUE;
 }

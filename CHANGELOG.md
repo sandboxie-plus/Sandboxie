@@ -5,8 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.15.10 / 5.70.10] - 2025-04-
 
 ### Added
-- Added 'BindAdapterIP=10.0.0.100' to force sandboxed programs to use a defined host ip
+- Added 'BindAdapterIP=192.168.100.123' and/or 'BindAdapterIP=::ffff:c0a8:647b' to force sandboxed programs to use a defined host ip
   - Note: if the IP is not bound to one of the Hosts NICs the connections will fail
+  - The configuration can be set per process like 'BindAdapterIP=program.exe,192.168.100.123' but only in the ini, no UI
 
 ### Fixed
 - fixed Firefox 137.0 generates SBIE2328 notifications in Sandboxie-Plus v1.15.9 [#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4638)[#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4652)[#4640](https://github.com/sandboxie-plus/Sandboxie/issues/4640)

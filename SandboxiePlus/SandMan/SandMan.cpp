@@ -3126,9 +3126,6 @@ SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
 		BYTE CertBlocked = 1;
 		theAPI->SetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
 	}
-	else if (Status.GetStatus() == 0xC000006EL /*STATUS_ACCOUNT_RESTRICTION*/)
-	{
-	}
 	else if (Status.GetStatus() != 0xC0000225L /*STATUS_NOT_FOUND*/)
 	{
 		QString Info;

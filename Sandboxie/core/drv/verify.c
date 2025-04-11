@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 wj32
- * Copyright (C) 2021-2023 David Xanatos, xanasoft.com
+ * Copyright (C) 2021-2025 David Xanatos, xanasoft.com
  *
  * Process Hacker is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

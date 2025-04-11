@@ -2746,25 +2746,13 @@ void CSandMan::OnMenuHover(QAction* action)
 
 void CSandMan::CheckSupport()
 {
-	if (g_CertInfo.active && COnlineUpdater::IsLockedRegion() && !g_CertInfo.locked)
-	{
-		static CSettingsWindow* pSettingsWindow = NULL;
-		if (!pSettingsWindow) {
-			pSettingsWindow = new CSettingsWindow(this);
-			pSettingsWindow->showTab("Support", true, true);
-			pSettingsWindow = NULL;
-			if (g_CertInfo.active && COnlineUpdater::IsLockedRegion() && !g_CertInfo.locked)
-				TerminateProcess(GetCurrentProcess(), -1);
-		}
-		return;
-	}
-
 	if (CSupportDialog::CheckSupport())
 		return;
 
 	static bool ReminderShown = false;
-	if (!ReminderShown && (g_CertInfo.expired || (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))) && !theConf->GetBool("Options/NoSupportCheck", false))
-	{
+	if (CSettingsWindow::CertRefreshRequired() || (!ReminderShown 
+      && (g_CertInfo.expired || (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))) 
+	  && !theConf->GetBool("Options/NoSupportCheck", false)) ) {
 		ReminderShown = true;
 		OpenSettings("Support");
 	}
@@ -3117,6 +3105,8 @@ SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
 
 	theAPI->GetDriverInfo(-1, &g_CertInfo.State, sizeof(g_CertInfo.State));
 
+	g_CertStatus = Status.GetStatus();
+
 	if (!Status.IsError())
 	{
 		BYTE CertBlocked = 0;
@@ -3137,6 +3127,9 @@ SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
 
 		BYTE CertBlocked = 1;
 		theAPI->SetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
+	}
+	else if (Status.GetStatus() == 0xC000006EL /*STATUS_ACCOUNT_RESTRICTION*/)
+	{
 	}
 	else if (Status.GetStatus() != 0xC0000225L /*STATUS_NOT_FOUND*/)
 	{

@@ -9,12 +9,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Note: if the IP is not bound to one of the Hosts NICs the connections will fail
   - The configuration can be set per process like 'BindAdapterIP=program.exe,192.168.100.123' but only in the ini, no UI
 
+### Changed
+- Greately Improved handlign of patreon certificates.
+
 ### Fixed
 - fixed Firefox 137.0 generates SBIE2328 notifications in Sandboxie-Plus v1.15.9 [#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4638)[#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4652)[#4640](https://github.com/sandboxie-plus/Sandboxie/issues/4640)
 - fixed SbieShellExt.dll missing in 1.15.9
 - fixed Process_GetCommandLine causing memory leak [#4658](https://github.com/sandboxie-plus/Sandboxie/issues/4658)
 - fixed Thunderbird 102.15.1 does not load all extensions under Sandboxie-Plus v1.15.9 [#4653](https://github.com/sandboxie-plus/Sandboxie/issues/4653)
 - fixed In SandBoxie, Invoke SetParent change window to Message-Only Windows Failed [#4656](https://github.com/sandboxie-plus/Sandboxie/issues/4656)
+- fixed issue with unicode names when retriving a evaluation certificate
 
 
 

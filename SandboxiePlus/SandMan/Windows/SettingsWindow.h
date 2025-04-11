@@ -52,8 +52,9 @@ public:
 	static bool AddBrowserIcon();
 
 	static bool ApplyCertificate(const QByteArray &Certificate, QWidget* widget);
-
 	static void LoadCertificate(QString CertPath = QString());
+	static bool	TryRefreshCert(QObject* receiver, const char* member);
+	static bool	CertRefreshRequired();
 
 	static QString GetCertType();
 	static QColor GetCertColor();

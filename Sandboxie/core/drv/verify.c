@@ -19,6 +19,8 @@
 #include "driver.h"
 #include "util.h"
 
+NTSTATUS NTAPI ZwQueryInstallUILanguage(LANGID* LanguageId);
+
 #include "api_defs.h"
 NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms);
 

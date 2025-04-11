@@ -3677,7 +3677,7 @@ Fehler: %1</translation>
     <message>
         <location filename="SandMan.cpp" line="4104"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Kopieren des Ordners &apos;%1&apos; nach &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4106"/>
@@ -5928,7 +5928,7 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2231"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now (Yes), or exit Sandboxie-Plus (No)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Für Ihr Sandboxie-Plus Unterstützerzertifikat ist zwingend ein Sicherheitsupdate erforderlich. Möchten Sie das aktualisierte Zertifikat jetzt herunterladen (Ja) oder Sandboxie-Plus beenden (Nein)?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2251"/>

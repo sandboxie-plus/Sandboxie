@@ -1421,7 +1421,11 @@ void CSettingsWindow::UpdateCert()
 
 void CSettingsWindow::OnGetCert()
 {
-	QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
+	QByteArray Certificate;
+	if (!ui.txtCertificate->property("hiden").toBool())
+		Certificate = ui.txtCertificate->toPlainText().toUtf8();
+	else
+		Certificate = g_Certificate;
 	QString Serial = ui.txtSerial->text();
 
 	QString Message;
@@ -1512,7 +1516,10 @@ void CSettingsWindow::ApplyCert()
 {
 	if (!theAPI->IsConnected())
 		return;
-	
+
+	if (ui.txtCertificate->property("hiden").toBool())
+		return;
+
 	QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
 	if (g_Certificate != Certificate) {
 

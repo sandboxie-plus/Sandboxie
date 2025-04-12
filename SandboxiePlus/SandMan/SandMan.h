@@ -108,7 +108,8 @@ public:
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
-
+	
+	bool				SetCertificate(const QByteArray& Certificate);
 	bool				CheckCertificate(QWidget* pWidget, int iType = 0);
 
 	bool				IsAlwaysOnTop() const;
@@ -295,6 +296,8 @@ private slots:
 
 	void				SetUITheme();
 	void				SetTitleTheme(const HWND& hwnd);
+
+    void				OnCertData(const QByteArray& Certificate, const QVariantMap& Params);
 
 	void				AddLogMessage(const QString& Message);
 	void				AddFileRecovered(const QString& BoxName, const QString& FilePath);

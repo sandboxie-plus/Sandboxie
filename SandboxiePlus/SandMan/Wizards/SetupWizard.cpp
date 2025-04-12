@@ -397,11 +397,9 @@ bool CCertificatePage::validatePage()
                 return false;
         }
         if (CSettingsWindow::CertRefreshRequired()) {
-            if (!CSettingsWindow::TryRefreshCert(this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)))) {
+            if (!CSettingsWindow::TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)))) {
                 m_pCertificate->clear();
-                QString CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
-			    if(QFile::exists(CertPath))
-				    WindowsMoveFile(CertPath.replace("/", "\\"), "");
+                theGUI->SetCertificate("");
             }
             return false;
         }

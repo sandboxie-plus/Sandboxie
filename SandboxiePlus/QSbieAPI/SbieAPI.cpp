@@ -638,6 +638,8 @@ void CSbieAPI::SendQueueRpl(quint32 RequestId, const QVariantMap& Result)
 
 	ULONG req_len = sizeof(QUEUE_PUTRPL_REQ) + Data.length();
 	SScoped<QUEUE_PUTRPL_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
+
 	req->h.length = req_len;
 	req->h.msgid = MSGID_QUEUE_PUTRPL;
 	wcscpy(req->queue_name, m->QueueName);
@@ -1213,7 +1215,9 @@ SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, c
 		return SB_ERR();
 	}
 
-	SScoped<SBIE_INI_SETTING_REQ> req(malloc(sizeof(SBIE_INI_SETTING_REQ) + Value.length() * sizeof(WCHAR)));
+	ULONG req_len = sizeof(SBIE_INI_SETTING_REQ) + Value.length() * sizeof(WCHAR);
+	SScoped<SBIE_INI_SETTING_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
 
 	req->refresh = bRefresh ? TRUE : FALSE;
 
@@ -1248,8 +1252,9 @@ QString CSbieAPI::SbieIniGetEx(const QString& Section, const QString& Setting)
 {
 	QString Value;
 
-	SScoped<SBIE_INI_SETTING_REQ> req(malloc(sizeof(SBIE_INI_SETTING_REQ) ));
-	memset(req, 0, sizeof(SBIE_INI_SETTING_REQ));
+	ULONG req_len = sizeof(SBIE_INI_SETTING_REQ);
+	SScoped<SBIE_INI_SETTING_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
 
 	Section.toWCharArray(req->section); // fix-me: potential overflow
 	req->section[Section.length()] = L'\0';
@@ -1851,6 +1856,7 @@ SB_STATUS CSbieAPI::RunSandboxed(const QString& BoxName, const QString& Command,
 
 	ULONG req_len = sizeof(PROCESS_RUN_SANDBOXED_REQ) + (cmd_len + dir_len + env_len + 8) * sizeof(WCHAR);
 	SScoped<PROCESS_RUN_SANDBOXED_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
 
 	req->h.length = req_len;
 	req->h.msgid = MSGID_PROCESS_RUN_SANDBOXED;
@@ -2118,6 +2124,8 @@ bool CSbieAPI::IsConfigLocked()
 SB_STATUS CSbieAPI::UnlockConfig(const QString& Password)
 {
 	SScoped<SBIE_INI_PASSWORD_REQ> req(malloc(REQUEST_LEN));
+	memset(req, 0, REQUEST_LEN);
+
 	req->h.msgid = MSGID_SBIE_INI_TEST_PASSWORD;
 	req->h.length = sizeof(SBIE_INI_PASSWORD_REQ);
 	m->Password = Password;
@@ -2133,6 +2141,8 @@ SB_STATUS CSbieAPI::LockConfig(const QString& NewPassword)
 		return SB_ERR(SB_PasswordBad, STATUS_INVALID_PARAMETER);
 
 	SScoped<SBIE_INI_PASSWORD_REQ> req(malloc(REQUEST_LEN));
+	memset(req, 0, REQUEST_LEN);
+
 	req->h.msgid = MSGID_SBIE_INI_SET_PASSWORD;
 	req->h.length = sizeof(SBIE_INI_PASSWORD_REQ);
 	NewPassword.toWCharArray(req->new_password); // fix-me: potential overflow
@@ -2148,10 +2158,35 @@ void CSbieAPI::ClearPassword()
 	m->Password.clear();
 }
 
+SB_STATUS CSbieAPI::SetDatFile(const QString& FileName, const QByteArray& Data)
+{
+	ULONG req_len = sizeof(SBIE_INI_SETTING_REQ) + Data.length();
+	SScoped<SBIE_INI_SETTING_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
+
+	req->h.msgid = MSGID_SBIE_INI_SET_DAT;
+
+	req->section[0] = L'\0'; // unused
+	FileName.toWCharArray(req->setting); // fix-me: potential overflow
+	req->setting[FileName.length()] = L'\0';
+	memcpy(req->value, Data, Data.length());
+	req->value_len = Data.length();
+	req->h.length = sizeof(SBIE_INI_SETTING_REQ) + req->value_len * sizeof(WCHAR);
+
+	SScoped<MSG_HEADER> rpl;
+	SB_STATUS Status = CallServer(&req->h, &rpl);
+	return Status;
+}
+
+//SB_RESULT(QByteArray) CSbieAPI::GetDatFile(const QString& FileName)
+//{
+//}
+
 SB_RESULT(QByteArray) CSbieAPI::RC4Crypt(const QByteArray& Data)
 {
 	ULONG req_len = sizeof(SBIE_INI_RC4_CRYPT_REQ) + Data.size();
 	SScoped<SBIE_INI_RC4_CRYPT_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
 
 	req->h.length = req_len;
 	req->h.msgid = MSGID_SBIE_INI_RC4_CRYPT;
@@ -2514,6 +2549,7 @@ SB_STATUS CSbieAPI::ImBoxCreate(CSandBox* pBox, quint64 uSizeKb, const QString& 
 	ULONG req_len = sizeof(IMBOX_CREATE_REQ);
 	req_len += file_root.length() * sizeof(wchar_t);
 	SScoped<IMBOX_CREATE_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
 
 	req->h.length = req_len;
 	req->h.msgid = MSGID_IMBOX_CREATE;
@@ -2546,6 +2582,7 @@ SB_STATUS CSbieAPI::ImBoxMount(CSandBox* pBox, const QString& Password, bool bPr
 	ULONG req_len = sizeof(IMBOX_MOUNT_REQ);
 	req_len += file_root.length() * sizeof(wchar_t);
 	SScoped<IMBOX_MOUNT_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
 
 	req->h.length = req_len;
 	req->h.msgid = MSGID_IMBOX_MOUNT;
@@ -2953,6 +2990,7 @@ SB_RESULT(int) CSbieAPI::RunUpdateUtility(const QStringList& Params, quint32 Ele
 
 	ULONG req_len = sizeof(PROCESS_RUN_UPDATER_REQ) + (cmd_len + 8) * sizeof(WCHAR);
 	SScoped<PROCESS_RUN_UPDATER_REQ> req(malloc(req_len));
+	memset(req, 0, req_len);
 
 	req->h.length = req_len;
 	req->h.msgid = MSGID_PROCESS_RUN_UPDATER;

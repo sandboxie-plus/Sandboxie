@@ -20,6 +20,7 @@
 #include "Helpers/TabOrder.h"
 #include "../MiscHelpers/Common/CodeEdit.h"
 #include "Helpers/IniHighlighter.h"
+#include "../MiscHelpers/Common/CheckableMessageBox.h"
 
 
 #include <windows.h>
@@ -1531,7 +1532,7 @@ void CSettingsWindow::ApplyCert()
 		}
 
 		if (CertRefreshRequired())
-			TryRefreshCert(this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+			TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
 
 		if (Certificate.isEmpty())
 			palette.setColor(QPalette::Base, Qt::white);
@@ -2042,7 +2043,6 @@ void CSettingsWindow::SaveSettings()
 
 bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* widget)
 {
-	QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
 	if (!Certificate.isEmpty()) 
 	{
 		auto Args = GetArguments(Certificate, L'\n', L':');
@@ -2055,26 +2055,16 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 		if (Args.value("SIGNATURE").isEmpty()) // absolutely mandatory
 			bLooksOk = false;
 
-		if (bLooksOk) {
-			QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
-			QFile CertFile(TempPath);
-			if (CertFile.open(QFile::WriteOnly)) {
-				CertFile.write(Certificate);
-				CertFile.close();
-			}
-
-			WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
-		}
+		if (bLooksOk)
+			theGUI->SetCertificate(Certificate);
 		else {
 			QMessageBox::critical(widget, "Sandboxie-Plus", tr("This does not look like a certificate. Please enter the entire certificate, not just a portion of it."));
 			return false;
 		}
 		g_Certificate = Certificate;
 	}
-	else if(!g_Certificate.isEmpty()){
-		g_Certificate.clear();
-		WindowsMoveFile(CertPath.replace("/", "\\"), "");
-	}
+	else
+		theGUI->SetCertificate("");
 
 	if (Certificate.isEmpty())
 		return false;
@@ -2118,8 +2108,11 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 bool CSettingsWindow::CertRefreshRequired()
 {
 	if (g_CertInfo.active) {
-		if (COnlineUpdater::IsLockedRegion() && !g_CertInfo.locked && g_CertInfo.type != eCertEternal)
-			return true;
+		if (COnlineUpdater::IsLockedRegion() && g_CertInfo.type != eCertEternal)
+		{
+			if(!g_CertInfo.locked || g_CertInfo.grace_period)
+				return true;
+		}
 	} else {
 		if (g_CertInfo.lock_req && !(g_CertInfo.expired || g_CertInfo.outdated))
 			return true;
@@ -2128,12 +2121,17 @@ bool CSettingsWindow::CertRefreshRequired()
 	return false;
 }
 
-bool CSettingsWindow::TryRefreshCert(QObject* receiver, const char* member)
+bool CSettingsWindow::TryRefreshCert(QWidget* parent, QObject* receiver, const char* member)
 {
-	if (QMessageBox::question(NULL, "Sandboxie-Plus", tr("A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. "
-		"Would you like to download the updated certificate now?")
-		, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No) == QMessageBox::No) {
-		return false;
+ 	if (theConf->GetInt("Options/AskCertRefresh", -1) != 1)
+	{
+		bool State = false;
+		if(CCheckableMessageBox::question(parent, "Sandboxie-Plus", tr("A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?")
+			, tr("Auto update in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes)
+			return false;
+
+		if (State)
+			theConf->SetValue("Options/AskCertRefresh", 1);
 	}
 
 	QVariantMap Params;
@@ -2273,7 +2271,7 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 	if (pTab == ui.tabSupport)
 	{
 		if (CSettingsWindow::CertRefreshRequired())
-			TryRefreshCert(this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+			TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
 
 		if (ui.lblCurrent->text().isEmpty()) {
 			if (ui.chkAutoUpdate->checkState())

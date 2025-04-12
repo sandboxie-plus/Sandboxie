@@ -2405,6 +2405,71 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
 
 
 //---------------------------------------------------------------------------
+// SetDatFile
+//---------------------------------------------------------------------------
+
+
+MSG_HEADER *SbieIniServer::SetDatFile(MSG_HEADER *msg, HANDLE idProcess)
+{
+    HANDLE SessionLeaderPid;
+    SbieApi_SessionLeader(m_session_id, &SessionLeaderPid);
+    if (SessionLeaderPid != idProcess)
+        return SHORT_REPLY(STATUS_ACCESS_DENIED);
+
+    SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)msg;
+    if (req->h.length < sizeof(SBIE_INI_SETTING_REQ))
+        return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    wchar_t* ext = wcsrchr(req->setting, L'.');
+    if (!ext || (_wcsicmp(ext, L".dat") != 0))
+        return SHORT_REPLY(STATUS_INVALID_FILE_FOR_SECTION);
+
+    WCHAR path[768];
+    NTSTATUS status = SbieApi_GetHomePath(path, 768, NULL, 0);
+    if (!NT_SUCCESS(status))
+        return SHORT_REPLY(status);
+    wcscat(path, L"\\");
+    wcscat(path, req->setting);
+
+    UNICODE_STRING objname;
+    RtlInitUnicodeString(&objname, path);
+
+    OBJECT_ATTRIBUTES objattrs;
+    InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    if (req->value_len == 0) {
+
+        NtDeleteFile(&objattrs);
+
+        return SHORT_REPLY(STATUS_SUCCESS);
+    }
+
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    IO_STATUS_BLOCK IoStatusBlock;
+    status = NtCreateFile(&handle, FILE_GENERIC_WRITE, &objattrs, &IoStatusBlock,NULL, 0, FILE_SHARE_VALID_FLAGS, FILE_OVERWRITE_IF, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE, NULL, 0);
+    if (NT_SUCCESS(status)) {
+
+        status = NtWriteFile(handle, NULL, NULL, NULL, &IoStatusBlock, req->value, req->value_len, NULL, NULL);
+
+        NtClose(handle);
+    }
+
+    return SHORT_REPLY(status);
+}
+
+
+//---------------------------------------------------------------------------
+// GetDatFile
+//---------------------------------------------------------------------------
+
+//
+//MSG_HEADER *SbieIniServer::GetDatFile(MSG_HEADER *msg, HANDLE idProcess)
+//{
+//    // ToDo
+//}
+
+
+//---------------------------------------------------------------------------
 // RC4Crypt
 //---------------------------------------------------------------------------
 
@@ -2418,7 +2483,7 @@ MSG_HEADER *SbieIniServer::RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSa
     // as well as the rc4 algorithm for the encryption, applying the same transformation twice 
     // yealds the original plaintext, hence only one function is sufficient.
     // 
-    // Please note that neither the mechanism nor the use of the rc4 algorithm can be consideredÂ 
+    // Please note that neither the mechanism nor the use of the rc4 algorithm can be considered 
     // cryptographically secure by any means.
     // This mechanism is only good for simple obfuscation of non critical data.
     //

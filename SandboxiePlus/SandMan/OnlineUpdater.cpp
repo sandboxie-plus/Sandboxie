@@ -274,7 +274,7 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 
 	QUrlQuery Query;
 
-	bool bHwId = IsLockedRegion();
+	bool bHwId = false;
 	if (!Serial.isEmpty()) {
 		Query.addQueryItem("SN", Serial);
 		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'N')
@@ -292,6 +292,11 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 	if (Serial.isEmpty() && Params.contains("Name")) { // Request eval Key
 		Query.addQueryItem("Name", Params["Name"].toString()); // for cert
 		Query.addQueryItem("eMail", Params["eMail"].toString());
+		bHwId = true;
+	}
+
+	if (IsLockedRegion()) {
+		Query.addQueryItem("LR", "1");
 		bHwId = true;
 	}
 

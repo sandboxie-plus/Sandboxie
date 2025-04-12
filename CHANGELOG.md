@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Greately Improved handlign of patreon certificates.
+- Improved cert tab, serial entry is now always visible, and the cert text edit as well, though it doe snot show the critical infomations UPDATE_KEY/SIGNATURE instead only ... when mouse clicked the full data gets displayed
+- streamlined application of new certificates
 
 ### Fixed
 - fixed Firefox 137.0 generates SBIE2328 notifications in Sandboxie-Plus v1.15.9 [#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4638)[#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4652)[#4640](https://github.com/sandboxie-plus/Sandboxie/issues/4640)

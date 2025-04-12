@@ -170,6 +170,9 @@ public:
 
 	virtual bool			TestSignature(const QByteArray& Data, const QByteArray& Signature);
 
+	virtual SB_STATUS		SetDatFile(const QString& FileName, const QByteArray& Data);
+	//virtual SB_RESULT(QByteArray) GetDatFile(const QString& FileName);
+
 
 	enum ESbieQueuedRequests
 	{

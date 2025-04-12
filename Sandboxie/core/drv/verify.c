@@ -449,6 +449,7 @@ _FX BOOLEAN KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
 {
     TIME_FIELDS timeFiled = { 0 };
     const WCHAR* ptr = date_str;
+    for (; *ptr == ' '; ptr++); // trim left
     const WCHAR* end = wcschr(ptr, L'.');
     if (end) {
         //*end = L'\0';
@@ -559,6 +560,7 @@ _FX NTSTATUS KphValidateCertificate()
     LONG amount = 1;
     WCHAR* key = NULL;
     LARGE_INTEGER cert_date = { 0 };
+    LARGE_INTEGER check_date = { 0 };
     LONG days = 0;
 
     Verify_CertInfo.State = 0; // clear
@@ -687,10 +689,16 @@ _FX NTSTATUS KphValidateCertificate()
             }
             // DD.MM.YYYY
             if (KphParseDate(value, &cert_date)) {
+
                 // DD.MM.YYYY +Days
                 WCHAR* ptr = wcschr(value, L'+');
                 if (ptr)
                     days = _wtol(ptr);
+
+                // DD.MM.YYYY [+Days] / DD.MM.YYYY
+                ptr = wcschr(value, L'/');
+                if (ptr)
+                    KphParseDate(ptr + 1, &check_date);
             }
         }
         else if (_wcsicmp(L"DAYS", name) == 0) {
@@ -814,13 +822,29 @@ _FX NTSTATUS KphValidateCertificate()
 
     Verify_CertInfo.active = 1;
 
-    if(CertDbg) DbgPrint("Sbie Cert type: %S-%S\n", type, level);
+    if (!type && level) { // fix for some early hand crafted contributor certificates
+        type = level;
+        level = NULL;
+    }
+
+    if (CertDbg) {
+        if(level) DbgPrint("Sbie Cert type: %S-%S\n", type, level);
+        else DbgPrint("Sbie Cert type: %S\n", type);
+    }
 
     TIME_FIELDS timeFiled = { 0 };
     if (CertDbg) {
         RtlTimeToTimeFields(&cert_date, &timeFiled);
-        DbgPrint("Sbie Cert date: %02d.%02d.%d\n", timeFiled.Day, timeFiled.Month, timeFiled.Year);
+        DbgPrint("Sbie Cert date: %02d.%02d.%d +%d\n", timeFiled.Day, timeFiled.Month, timeFiled.Year, days);
+
+        if (check_date.QuadPart != 0) {
+            RtlTimeToTimeFields(&check_date, &timeFiled);
+            DbgPrint("Sbie Check date: %02d.%02d.%d\n", timeFiled.Day, timeFiled.Month, timeFiled.Year);
+        }
     }
+
+    if (!check_date.QuadPart) // a freshly created cert may hot have yet been checked
+        check_date.QuadPart = cert_date.QuadPart;
 
     LARGE_INTEGER BuildDate = { 0 };
     KphGetBuildDate(&BuildDate);
@@ -1039,11 +1063,18 @@ _FX NTSTATUS KphValidateCertificate()
     if(NT_SUCCESS(ZwQueryInstallUILanguage(&LangID)) && (LangID == 0x0804))
         Verify_CertInfo.lock_req = 1;
 
-    if (Verify_CertInfo.lock_req && !Verify_CertInfo.locked && Verify_CertInfo.type != eCertEternal)
-        Verify_CertInfo.active = 0;
+    if (Verify_CertInfo.lock_req && Verify_CertInfo.type != eCertEternal) {
+
+        if(!Verify_CertInfo.locked)
+            Verify_CertInfo.active = 0;
+        if (check_date.QuadPart + KphGetDateInterval(0, 4, 0) < LocalTime.QuadPart)
+            Verify_CertInfo.active = 0;
+        else if (check_date.QuadPart + KphGetDateInterval(0, 3, 0) < LocalTime.QuadPart)
+            Verify_CertInfo.grace_period = 1;
+    }
 
 CleanupExit:
-    if(CertDbg)     DbgPrint("Sbie Cert status: %08x\n", status);
+    if(CertDbg)     DbgPrint("Sbie Cert status: %08x; active: %d\n", status, Verify_CertInfo.active);
 
 
     if(path)        Mem_Free(path, path_len);    

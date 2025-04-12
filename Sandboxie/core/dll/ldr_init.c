@@ -214,10 +214,11 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
         }
 
         //
-        // For security reasons we do not allow relative paths
+        // For security reasons we do not allow relative paths, or other files then .dll
         //
 
-        if (wcsstr(path, L"..") != NULL)
+        wchar_t* ext = wcsrchr(path, L'.');
+        if (!ext || _wcsicmp(ext, L".dll") != 0 || wcsstr(path, L"..") != NULL)
             continue;
 
 		//

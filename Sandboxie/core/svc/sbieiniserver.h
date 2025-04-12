@@ -105,6 +105,10 @@ protected:
 
     MSG_HEADER *RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
+    MSG_HEADER *SetDatFile(MSG_HEADER *msg, HANDLE idProcess);
+	
+    //MSG_HEADER *GetDatFile(MSG_HEADER *msg, HANDLE idProcess);
+
     MSG_HEADER *RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
 

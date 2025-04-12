@@ -802,7 +802,7 @@ std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFi
     WCHAR app[768];
     if (!NT_SUCCESS(SbieApi_GetHomePath(NULL, 0, app, 768)))
         return NULL;
-    wcscpy(wcsrchr(app, L'\0'), L"\\ImBox.exe");
+    wcscat(app, L"\\ImBox.exe");
     STARTUPINFO si = { sizeof(STARTUPINFO) };
     PROCESS_INFORMATION pi = { 0 };
     if (CreateProcess(app, (WCHAR*)cmd.c_str(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {

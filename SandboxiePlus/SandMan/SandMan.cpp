@@ -2490,15 +2490,11 @@ void CSandMan::OnStatusChanged()
 
 		theAPI->WatchIni(true, theConf->GetBool("Options/WatchIni", true));
 
-		if (!ReloadCert().IsError())
+		SB_STATUS Status = ReloadCert();
+		if (Status)
 			CSettingsWindow::LoadCertificate();
-		else {
-			g_Certificate.clear();
-
-			QString CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
-			if(QFile::exists(CertPath)) // always delete invalid certificates
-				WindowsMoveFile(CertPath.replace("/", "\\"), "");
-		}
+		else if(Status.GetStatus() != 0xc0000225 /*STATUS_NOT_FOUND*/)
+			SetCertificate(""); // always delete invalid certificates
 
 		uchar UsageFlags = 0;
 		if (theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags))) {
@@ -2521,9 +2517,8 @@ void CSandMan::OnStatusChanged()
 
 		g_FeatureFlags = theAPI->GetFeatureFlags();
 
-		SB_STATUS Status = theAPI->ReloadBoxes(true);
-
-		if (!Status.IsError()) {
+		Status = theAPI->ReloadBoxes(true);
+		if (Status) {
 
 			auto AllBoxes = theAPI->GetAllBoxes();
 
@@ -2750,12 +2745,33 @@ void CSandMan::CheckSupport()
 		return;
 
 	static bool ReminderShown = false;
-	if (CSettingsWindow::CertRefreshRequired() || (!ReminderShown 
-      && (g_CertInfo.expired || (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))) 
-	  && !theConf->GetBool("Options/NoSupportCheck", false)) ) {
+	if (!ReminderShown && (g_CertInfo.expired || (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))) && !theConf->GetBool("Options/NoSupportCheck", false))
+	{
 		ReminderShown = true;
 		OpenSettings("Support");
 	}
+	else if (CSettingsWindow::CertRefreshRequired())
+	{
+		if (!g_CertInfo.active)
+			OpenSettings("Support");
+		if (CSettingsWindow::CertRefreshRequired())
+			CSettingsWindow::TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+	}
+}
+
+void CSandMan::OnCertData(const QByteArray& Certificate, const QVariantMap& Params)
+{
+	if (Certificate.isEmpty())
+	{
+		/*QString Error = Params["error"].toString();
+		qDebug() << Error;
+		QString Message = tr("Error retrieving certificate: %1").arg(Error.isEmpty() ? tr("Unknown Error (probably a network issue)") : Error);
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);*/
+		return;
+	}
+
+	SetCertificate(Certificate);
+	ReloadCert(this);
 }
 
 #define HK_PANIC	1
@@ -3784,6 +3800,8 @@ void CSandMan::OnResetMsgs()
 		theConf->DelValue("Options/WarnWizardOnClose");
 
 		theConf->DelValue("Options/IgnoreUnkBuild");
+
+		theConf->DelValue("Options/AskCertRefresh");
 	}
 
 	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);
@@ -3811,6 +3829,7 @@ void CSandMan::OnResetGUI()
 	theConf->DelValue("SnapshotsWindow/Window_Geometry");
 	theConf->DelValue("FileBrowserWindow/Window_Geometry");
 	theConf->DelValue("RecoveryLogWindow/Window_Geometry");
+	theConf->DelValue("NtObjectBrowserWindow/Window_Geometry");
 
 //	theConf->SetValue("Options/DPIScaling", 1);
 	theConf->SetValue("Options/FontScaling", 100);

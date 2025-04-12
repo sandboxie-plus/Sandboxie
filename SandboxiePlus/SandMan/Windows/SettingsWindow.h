@@ -53,7 +53,7 @@ public:
 
 	static bool ApplyCertificate(const QByteArray &Certificate, QWidget* widget);
 	static void LoadCertificate(QString CertPath = QString());
-	static bool	TryRefreshCert(QObject* receiver, const char* member);
+	static bool	TryRefreshCert(QWidget* parent, QObject* receiver, const char* member);
 	static bool	CertRefreshRequired();
 
 	static QString GetCertType();

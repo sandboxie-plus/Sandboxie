@@ -391,9 +391,11 @@ bool CCertificatePage::validatePage()
         return false;
     }
 
-    if (!Certificate.isEmpty() && Certificate != g_Certificate) {
-        if (CSettingsWindow::ApplyCertificate(Certificate, this))
-            return false;
+    if (!Certificate.isEmpty()) {
+        if (Certificate != g_Certificate) {
+            if (CSettingsWindow::ApplyCertificate(Certificate, this))
+                return false;
+        }
         if (CSettingsWindow::CertRefreshRequired()) {
             if (!CSettingsWindow::TryRefreshCert(this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)))) {
                 m_pCertificate->clear();

@@ -1030,7 +1030,7 @@ _FX NTSTATUS KphValidateCertificate()
     args.param_data.val = &param_data;
     args.param_size.val = sizeof(param_data);
     args.param_size_out.val = NULL;
-    args.param_verify.val = TRUE;
+    args.param_verify.val = FALSE;
 
     if (NT_SUCCESS(Api_GetSecureParam(NULL, (ULONG64*)&args)) && param_data != 0)
         Verify_CertInfo.lock_req = 1;

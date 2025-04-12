@@ -391,8 +391,19 @@ bool CCertificatePage::validatePage()
         return false;
     }
 
-    if (!Certificate.isEmpty() && Certificate != g_Certificate)
-		return CSettingsWindow::ApplyCertificate(Certificate, this);
+    if (!Certificate.isEmpty() && Certificate != g_Certificate) {
+        if (CSettingsWindow::ApplyCertificate(Certificate, this))
+            return false;
+        if (CSettingsWindow::CertRefreshRequired()) {
+            if (!CSettingsWindow::TryRefreshCert(this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)))) {
+                m_pCertificate->clear();
+                QString CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
+			    if(QFile::exists(CertPath))
+				    WindowsMoveFile(CertPath.replace("/", "\\"), "");
+            }
+            return false;
+        }
+    }
 
     return true;
 }

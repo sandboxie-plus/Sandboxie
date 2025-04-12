@@ -2746,25 +2746,13 @@ void CSandMan::OnMenuHover(QAction* action)
 
 void CSandMan::CheckSupport()
 {
-	if (g_CertInfo.active && COnlineUpdater::IsLockedRegion() && !g_CertInfo.locked)
-	{
-		static CSettingsWindow* pSettingsWindow = NULL;
-		if (!pSettingsWindow) {
-			pSettingsWindow = new CSettingsWindow(this);
-			pSettingsWindow->showTab("Support", true, true);
-			pSettingsWindow = NULL;
-			if (g_CertInfo.active && COnlineUpdater::IsLockedRegion() && !g_CertInfo.locked)
-				TerminateProcess(GetCurrentProcess(), -1);
-		}
-		return;
-	}
-
 	if (CSupportDialog::CheckSupport())
 		return;
 
 	static bool ReminderShown = false;
-	if (!ReminderShown && (g_CertInfo.expired || (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))) && !theConf->GetBool("Options/NoSupportCheck", false))
-	{
+	if (CSettingsWindow::CertRefreshRequired() || (!ReminderShown 
+      && (g_CertInfo.expired || (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))) 
+	  && !theConf->GetBool("Options/NoSupportCheck", false)) ) {
 		ReminderShown = true;
 		OpenSettings("Support");
 	}

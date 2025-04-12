@@ -24,10 +24,10 @@ typedef union _SCertInfo {
             active      : 1,    // certificate is active
             expired     : 1,    // certificate is expired but may be active
             outdated    : 1,    // certificate is expired, not anymore valid for the current build
-            unused_1    : 2,    // DEPRECATED
+            reservd_1   : 2,    // DEPRECATED
             grace_period: 1,    // the certificate is expired and or outdated but we keep it valid for 1 extra month to allof wor a seamless renewal
             locked      : 1,
-            reservd_2   : 1,
+            lock_req    : 1,
 
             type        : 5,
             level       : 3,

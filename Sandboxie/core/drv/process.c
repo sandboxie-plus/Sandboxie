@@ -790,7 +790,7 @@ _FX PROCESS *Process_Create(
     // check certificate
     //
 
-    if (!Verify_CertInfo.opt_sec && !proc->image_sbie) {
+    if (!(Verify_CertInfo.active && Verify_CertInfo.opt_sec) && !proc->image_sbie) {
 
         const WCHAR* exclusive_setting = NULL;
         if (proc->use_security_mode)
@@ -821,7 +821,7 @@ _FX PROCESS *Process_Create(
         }
     }
 
-    if (!Verify_CertInfo.opt_enc && !proc->image_sbie) {
+    if (!(Verify_CertInfo.active && Verify_CertInfo.opt_enc) && !proc->image_sbie) {
         
         const WCHAR* exclusive_setting = NULL;
         if (proc->confidential_box)

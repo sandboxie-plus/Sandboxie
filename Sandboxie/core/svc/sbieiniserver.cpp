@@ -159,6 +159,19 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
     if (NT_SUCCESS(status))     // if sandboxed
         return SHORT_REPLY(STATUS_NOT_SUPPORTED);
 
+    //
+    // Get/Set *.dat files in sandboxies home directory
+    //
+
+    if (msg->msgid == MSGID_SBIE_INI_SET_DAT) {
+
+        return SetDatFile(msg, idProcess);
+    }
+    //if (msg->msgid == MSGID_SBIE_INI_GET_DAT) {
+    //
+    //    return GetDatFile(msg, idProcess);
+    //}
+
     if (PipeServer::ImpersonateCaller(&msg) != 0)
         return msg;
 

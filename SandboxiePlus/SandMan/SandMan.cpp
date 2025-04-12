@@ -3069,6 +3069,14 @@ void CSandMan::SaveMessageLog(QIODevice* pFile)
 		pFile->write((Msg.TimeStamp.toString("dd.MM.yyyy hh:mm:ss.zzz")  + "\t" + FormatSbieMessage(Msg.MsgCode, Msg.MsgData, Msg.ProcessName)).toLatin1() + "\n");
 }
 
+bool CSandMan::SetCertificate(const QByteArray& Certificate)
+{
+	g_Certificate = Certificate;
+	SB_STATUS Status = theAPI->SetDatFile("Certificate.dat", Certificate);
+	return Status;
+}
+
+
 bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 {
 	QString Message;

@@ -23,7 +23,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Farsi|Yes|No|No|No|
 |Finnish|Yes|No|No|No|
 |French|Yes - Dec 19, 2024|Yes - Dec 19, 2024|No|Yes - 2024|
-|German|Yes - Apr 03, 2025|Yes - Apr 11, 2025|Yes - Feb 17, 2025|Yes - Mar 13, 2025|
+|German|Yes - Apr 03, 2025|Yes - Apr 12, 2025|Yes - Feb 17, 2025|Yes - Mar 13, 2025|
 |Greek|Yes|No|No|No|
 |Hebrew|Yes|No|No|No|
 |Hungarian|Yes|Yes - Nov 5, 2024|Yes - Nov 5, 2024|Yes - 2024|
@@ -39,6 +39,6 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Slovak|Yes|No|No|No|
 |Spanish|Yes|Yes - Jan 18, 2025|Yes - Jan 5, 2024|Yes - 2024|
 |Swedish|Yes - Aug 10, 2022|Yes - Apr 25, 2024|Yes - Jun 17, 2024|Yes - Mar 30, 2025|
-|Turkish|Yes - Apr 03, 2025|Yes - Apr 11, 2025|Yes - Feb 12, 2025|Yes - Mar 11, 2025|
+|Turkish|Yes - Apr 03, 2025|Yes - Apr 12, 2025|Yes - Feb 12, 2025|Yes - Mar 11, 2025|
 |Ukrainian|Yes - Jul 26, 2022|Yes - Jul 26, 2022|No|Yes - 2024|
 |Vietnamese|No|Yes - Nov 7, 2022|No|Yes - 2024|

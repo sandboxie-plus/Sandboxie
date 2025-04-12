@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Thunderbird 102.15.1 does not load all extensions under Sandboxie-Plus v1.15.9 [#4653](https://github.com/sandboxie-plus/Sandboxie/issues/4653)
 - fixed In SandBoxie, Invoke SetParent change window to Message-Only Windows Failed [#4656](https://github.com/sandboxie-plus/Sandboxie/issues/4656)
 - fixed issue with unicode names when retriving a evaluation certificate
+- fixed Should the delete content message box always on top? [#4673](https://github.com/sandboxie-plus/Sandboxie/issues/4673)
 
 
 

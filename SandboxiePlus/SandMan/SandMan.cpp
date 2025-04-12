@@ -2754,7 +2754,7 @@ void CSandMan::CheckSupport()
 	{
 		if (!g_CertInfo.active)
 			OpenSettings("Support");
-		if (CSettingsWindow::CertRefreshRequired())
+		else if (CSettingsWindow::CertRefreshRequired())
 			CSettingsWindow::TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
 	}
 }

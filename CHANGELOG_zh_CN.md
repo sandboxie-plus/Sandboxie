@@ -2,6 +2,27 @@
 本项目的所有重要更改将在此文件中记录。
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
+## [1.15.10 / 5.70.10] - 2025-04-
+
+### 新增
+- 新增 'BindAdapterIP=192.168.100.123' 和/或 'BindAdapterIP=::ffff:c0a8:647b' 以强制沙盒程序使用指定的主机 IP
+  - 注意：如果该 IP 未绑定到任一主机网络接口，连接将会失败
+  - 配置可以按进程设置，例如 'BindAdapterIP=program.exe,192.168.100.123'，但仅限于 ini 文件，无法通过用户界面配置
+
+### 更改
+- 大幅改善对 Patreon 证书的处理。
+- 改进了证书选项卡，序列号输入框现在总是可见，证书文本编辑框也是如此，尽管它不显示关键信息 UPDATE_KEY/SIGNATURE，而只在鼠标点击时显示完整数据
+- 精简了新证书的应用流程
+
+### 修复
+- 修复了 Firefox 137.0 在 Sandboxie-Plus v1.15.9 中生成 SBIE2328 通知的问题 [#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4638)[#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4652)[#4640](https://github.com/sandboxie-plus/Sandboxie/issues/4640)
+- 修复了 1.15.9 中缺少 SbieShellExt.dll 的问题
+- 修复了 Process_GetCommandLine 导致内存泄漏的问题 [#4658](https://github.com/sandboxie-plus/Sandboxie/issues/4658)
+- 修复了 Thunderbird 102.15.1 在 Sandboxie-Plus v1.15.9 下未加载所有扩展的问题 [#4653](https://github.com/sandboxie-plus/Sandboxie/issues/4653)
+- 修复了在 Sandboxie 中，Invoke SetParent 将窗口更改为仅消息窗口失败的问题 [#4656](https://github.com/sandboxie-plus/Sandboxie/issues/4656)
+- 修复了检索评估证书时处理 Unicode 名称的问题
+- 修复了删除内容消息框是否应始终在最上方的问题 [#4673](https://github.com/sandboxie-plus/Sandboxie/issues/4673)
+
 
 ## [1.15.9 / 5.70.9] - 2025-03-??
 

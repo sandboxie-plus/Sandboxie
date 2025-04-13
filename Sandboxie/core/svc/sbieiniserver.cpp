@@ -2434,7 +2434,7 @@ MSG_HEADER *SbieIniServer::SetDatFile(MSG_HEADER *msg, HANDLE idProcess)
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
 
     wchar_t* ext = wcsrchr(req->setting, L'.');
-    if (!ext || (_wcsicmp(ext, L".dat") != 0))
+    if (!ext || (_wcsicmp(ext, L".dat") != 0) || wcsstr(req->setting, L"..") != NULL)
         return SHORT_REPLY(STATUS_INVALID_FILE_FOR_SECTION);
 
     WCHAR path[768];

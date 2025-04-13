@@ -1392,8 +1392,6 @@ void CSettingsWindow::UpdateCert()
 		else Options.append(QString("<font color='gray'>EBox</font>"));
 		if (g_CertInfo.opt_net) Options.append("NetI");
 		else Options.append(QString("<font color='gray'>NetI</font>"));
-		if (g_CertInfo.opt_desk) Options.append("Desk");
-		else Options.append(QString("<font color='gray'>Desk</font>"));
 		ui.lblCertOpt->setText(tr("Options: %1").arg(Options.join(", ")));
 
 		QStringList OptionsEx;

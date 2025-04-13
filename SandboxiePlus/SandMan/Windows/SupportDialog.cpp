@@ -72,7 +72,7 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 		QString Message = tr("An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. "
 			"You must now purchase a valid certificate, as the usage of the free version has been restricted.");
 
-		CSupportDialog dialog(Message, NoGo, Days);
+		CSupportDialog dialog(Message, true);
 		if(dialog.exec() == QDialog::Rejected)
 			PostQuitMessage(0);
 		return true;
@@ -207,7 +207,7 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 	time_t LastReminder = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
 	theAPI->SetSecureParam("LastReminder", &LastReminder, sizeof(LastReminder));
 
-	CSupportDialog dialog(Message, NoGo);
+	CSupportDialog dialog(Message, NoGo, Wait);
 	return dialog.exec() != QDialog::Rejected;
 }
 
@@ -277,15 +277,11 @@ CSupportDialog::CSupportDialog(const QString& Message, bool NoGo, int Wait, QWid
 		QPushButton* pButton = m_Buttons[(s + i) % 3];
 		pButton->setAutoDefault(false);
 		//pButton->setEnabled(false);
-		if(i == 1 && NoGo)
-			pButton->setEnabled(false);
-		if (i == 2 && NoGo)
-			i = 3;
-		pButton->setProperty("Action", i);
+		pButton->setProperty("Action", (i == 1 && NoGo) ? 3 : i);
 		connect(pButton, SIGNAL(clicked(bool)), this, SLOT(OnButton()));
 	}
 
-	m_CountDown = Wait;
+	m_CountDown = NoGo ? 0 : Wait;
 
 	UpdateButtons();
 

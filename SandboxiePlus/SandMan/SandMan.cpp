@@ -4173,12 +4173,17 @@ void CSandMan::TryFix(quint32 MsgCode, const QStringList& MsgData, const QString
 	});
 }
 
-void CSandMan::OpenUrl(const QUrl& url)
+void CSandMan::OpenUrl(QUrl url)
 {
 	QString scheme = url.scheme();
 	QString host = url.host();
 	QString path = url.path();
 	QString query = url.query();
+
+	if (host == "sandboxie-plus.com" && path == "/go.php") {
+		query += "&language=" + QLocale::system().name();
+		url.setQuery(query);
+	}
 
 	if (scheme == "addon") {
 		m_AddonManager->TryInstallAddon(host, qobject_cast<QWidget*>(sender()));

@@ -236,7 +236,7 @@ public slots:
 
 
 	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
-	void				OpenUrl(const QUrl& url);
+	void				OpenUrl(QUrl url);
 
 	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton, int type, QWidget* pParent);
 	void				ShowMessage(const QString& message, int type);

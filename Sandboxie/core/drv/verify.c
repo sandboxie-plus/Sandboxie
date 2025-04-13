@@ -964,6 +964,7 @@ _FX NTSTATUS KphValidateCertificate()
         
     if(CertDbg)     DbgPrint("Sbie Cert level: %X\n", Verify_CertInfo.level);
 
+    BOOLEAN bNoCR = FALSE;
     if (options) {
 
             if(CertDbg)     DbgPrint("Sbie Cert options: %S\n", options);
@@ -975,8 +976,9 @@ _FX NTSTATUS KphValidateCertificate()
                 if (!end) end = wcschr(option, L'\0');
 
                 //if (CertDbg)   DbgPrint("Sbie Cert option: %.*S\n", end - option, option);
-
-                if (_wcsnicmp(L"SBOX", option, end - option) == 0)
+                if (_wcsnicmp(L"NoSR", option, end - option) == 0)
+                    ; // Disable Support Reminder // .active = 1 with no options enabled
+                else if (_wcsnicmp(L"SBOX", option, end - option) == 0)
                     Verify_CertInfo.opt_sec = 1;
                 else if (_wcsnicmp(L"EBOX", option, end - option) == 0)
                     Verify_CertInfo.opt_enc = 1;
@@ -984,7 +986,10 @@ _FX NTSTATUS KphValidateCertificate()
                     Verify_CertInfo.opt_net = 1;
                 else if (_wcsnicmp(L"DESK", option, end - option) == 0)
                     Verify_CertInfo.opt_desk = 1;
-                else if (CertDbg)   DbgPrint("Sbie Cert UNKNOWN option: %.*S\n", (ULONG)(end - option), option);
+                else if (_wcsnicmp(L"NoCR", option, end - option) == 0)
+                    bNoCR = TRUE; // Disable Certificate Refresh requirement - for air gapped systems
+                else 
+                    if (CertDbg) DbgPrint("Sbie Cert UNKNOWN option: %.*S\n", (ULONG)(end - option), option);
 
                 if (*end == L'\0')
                     break;
@@ -1065,12 +1070,14 @@ _FX NTSTATUS KphValidateCertificate()
 
     if (Verify_CertInfo.lock_req && Verify_CertInfo.type != eCertEternal) {
 
-        if(!Verify_CertInfo.locked)
+        if (!Verify_CertInfo.locked)
             Verify_CertInfo.active = 0;
-        if (check_date.QuadPart + KphGetDateInterval(0, 4, 0) < LocalTime.QuadPart)
-            Verify_CertInfo.active = 0;
-        else if (check_date.QuadPart + KphGetDateInterval(0, 3, 0) < LocalTime.QuadPart)
-            Verify_CertInfo.grace_period = 1;
+        if (!bNoCR) { // Check if a refresh of the cert is required
+            if (check_date.QuadPart + KphGetDateInterval(0, 4, 0) < LocalTime.QuadPart)
+                Verify_CertInfo.active = 0;
+            else if (check_date.QuadPart + KphGetDateInterval(0, 3, 0) < LocalTime.QuadPart)
+                Verify_CertInfo.grace_period = 1;
+        }
     }
 
 CleanupExit:

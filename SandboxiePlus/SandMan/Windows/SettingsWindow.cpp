@@ -2113,7 +2113,7 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 bool CSettingsWindow::CertRefreshRequired()
 {
 	if (g_CertInfo.active) {
-		if (COnlineUpdater::IsLockedRegion() && g_CertInfo.type != eCertEternal)
+		if (COnlineUpdater::IsLockRequired() && g_CertInfo.type != eCertEternal)
 		{
 			if(!g_CertInfo.locked || g_CertInfo.grace_period)
 				return true;

@@ -295,7 +295,7 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 		bHwId = true;
 	}
 
-	if (IsLockedRegion()) {
+	if (IsLockRequired()) {
 		Query.addQueryItem("LR", "1");
 		bHwId = true;
 	}
@@ -321,7 +321,7 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 
 extern "C" NTSTATUS NTAPI NtQueryInstallUILanguage(LANGID* LanguageId);
 
-bool COnlineUpdater::IsLockedRegion()
+bool COnlineUpdater::IsLockRequired()
 {
 	if (theConf->GetBool("Debug/LockedRegion", false))
 		return true;

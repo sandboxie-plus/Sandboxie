@@ -5915,7 +5915,7 @@ Dies ist ein temporäres Patreon-Zertifikat, gültig für 3 Monate. Sobald es si
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2137"/>
         <source>Auto update in future</source>
-        <translation type="unfinished"></translation>
+        <translation>Zukünftig automatisch aktualisieren</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2204"/>

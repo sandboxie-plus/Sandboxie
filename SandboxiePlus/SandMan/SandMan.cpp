@@ -1091,7 +1091,9 @@ void CSandMan::UpdateLabel()
 	}
 	else if (g_Certificate.isEmpty())
 	{
-		LabelText = tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+		LabelText = theConf->GetString("Updater/LabelMessage");
+		if(LabelText.isEmpty())
+			LabelText = tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
 		LabelTip = tr("Click to open web browser");
 
 		//auto neon = new CNeonEffect(10, 4, 240);

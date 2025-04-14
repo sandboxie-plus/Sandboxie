@@ -5997,7 +5997,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2135"/>
         <source>Auto update in future</source>
-        <translation>将来自动更新</translation>
+        <translation>自动更新</translation>
     </message>
     <message>
         <source>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</source>
@@ -11093,7 +11093,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>
         <source>Increase ping count to improve the accuracy of the average latency calculation. More pings help to ensure that the average is representative of typical network conditions.</source>
-        <translation>增加 ping 计数以提高平均延迟计算的准确性。更多 ping 有助于确保平均值代表典型的网络条件。</translation>
+        <translation>增加 ping 次数以提高平均延迟计算的准确性。多次 ping 有助于精确评估网络环境。</translation>
     </message>
 </context>
 </TS>

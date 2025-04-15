@@ -1068,7 +1068,7 @@ _FX NTSTATUS KphValidateCertificate()
     if(NT_SUCCESS(ZwQueryInstallUILanguage(&LangID)) && (LangID == 0x0804))
         Verify_CertInfo.lock_req = 1;
 
-    if (Verify_CertInfo.lock_req && Verify_CertInfo.type != eCertEternal) {
+    if (Verify_CertInfo.lock_req && Verify_CertInfo.type != eCertEternal && Verify_CertInfo.type != eCertContributor) {
 
         if (!Verify_CertInfo.locked)
             Verify_CertInfo.active = 0;

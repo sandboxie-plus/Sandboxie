@@ -1669,7 +1669,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				hwid = std::wstring(uuid_str);
 			}
 		}
-		else // when hwid is specifield manually assum its not for this system
+		else // when hwid is specified manually, assume it's not for this system
 			file_path.clear();
 		if (!hwid.empty())
 			path += L"&HwId=" + hwid;

@@ -2,26 +2,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.15.10 / 5.70.10] - 2025-04-
+## [1.15.10 / 5.70.10] - 2025-04-15
 
 ### Added
-- Added 'BindAdapterIP=192.168.100.123' and/or 'BindAdapterIP=::ffff:c0a8:647b' to force sandboxed programs to use a defined host ip
-  - Note: if the IP is not bound to one of the Hosts NICs the connections will fail
-  - The configuration can be set per process like 'BindAdapterIP=program.exe,192.168.100.123' but only in the ini, no UI
+- added 'BindAdapterIP=192.168.100.123' and/or 'BindAdapterIP=::ffff:c0a8:647b' to force sandboxed programs to use a defined host IP
+  - Note: if the IP is not bound to one of the hosts NICs the connections will fail
+  - the configuration can be set per process like 'BindAdapterIP=program.exe,192.168.100.123', but only in the INI, not in the UI
 
 ### Changed
-- Greately Improved handlign of patreon certificates.
-- Improved cert tab, serial entry is now always visible, and the cert text edit as well, though it doe snot show the critical infomations UPDATE_KEY/SIGNATURE instead only ... when mouse clicked the full data gets displayed
+- greatly improved handling of Patreon certificates
+- improved certificate tab; serial entry is now always visible, and the certificate text edit as well, though it does not show the critical information UPDATE_KEY/SIGNATURE, instead only ... when mouse clicked the full data gets displayed
 - streamlined application of new certificates
 
 ### Fixed
-- fixed Firefox 137.0 generates SBIE2328 notifications in Sandboxie-Plus v1.15.9 [#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4638)[#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4652)[#4640](https://github.com/sandboxie-plus/Sandboxie/issues/4640)
+- fixed Firefox 137.0 generates SBIE2328 notifications in Sandboxie Plus v1.15.9 [#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4638) [#4652](https://github.com/sandboxie-plus/Sandboxie/issues/4652) [#4640](https://github.com/sandboxie-plus/Sandboxie/issues/4640)
 - fixed SbieShellExt.dll missing in 1.15.9
 - fixed Process_GetCommandLine causing memory leak [#4658](https://github.com/sandboxie-plus/Sandboxie/issues/4658)
-- fixed Thunderbird 102.15.1 does not load all extensions under Sandboxie-Plus v1.15.9 [#4653](https://github.com/sandboxie-plus/Sandboxie/issues/4653)
-- fixed In SandBoxie, Invoke SetParent change window to Message-Only Windows Failed [#4656](https://github.com/sandboxie-plus/Sandboxie/issues/4656)
-- fixed issue with unicode names when retriving a evaluation certificate
-- fixed Should the delete content message box always on top? [#4673](https://github.com/sandboxie-plus/Sandboxie/issues/4673)
+- fixed Thunderbird 102.15.1 does not load all extensions under Sandboxie Plus v1.15.9 [#4653](https://github.com/sandboxie-plus/Sandboxie/issues/4653)
+- fixed in Sandboxie, invoke SetParent change window to message-only window failed [#4656](https://github.com/sandboxie-plus/Sandboxie/issues/4656)
+- fixed issue with Unicode names when retrieving an evaluation certificate
+- fixed should the delete content message box always on top? [#4673](https://github.com/sandboxie-plus/Sandboxie/issues/4673)
 
 
 
@@ -58,7 +58,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with insecure debug option 'OriginalToken=y'
 - fixed box group name accidentally entered carriage return character [#4608](https://github.com/sandboxie-plus/Sandboxie/issues/4608)
 - fixed paths selected from the path selection drop-down menu in the New Box Wizard return a "not a valid path" error [#4611](https://github.com/sandboxie-plus/Sandboxie/issues/4611)
-- FIXED SECURITY ISSUE ID-25 new method of exploiting HostInjectDll mechanism for local privilege escalation (thanks hg421)
+- FIXED SECURITY ISSUE ID-25: new method of exploiting HostInjectDll mechanism for local privilege escalation (thanks hg421)
 
 
 
@@ -736,7 +736,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added template providing useful exclusions for confidential boxes
 
 ### Fixed
-- FIXED SECURITY ISSUE ID-23 SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
+- FIXED SECURITY ISSUE ID-23: SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
 - fixed program launch when forcing processes into a confidential box [#3173](https://github.com/sandboxie-plus/Sandboxie/issues/3173)
 
 
@@ -1322,7 +1322,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - added AppContainer support for Compartment type boxes
-- FIXED SECURITY ISSUE ID-22 NtCreateSectionEx was not filtered by the driver
+- FIXED SECURITY ISSUE ID-22: NtCreateSectionEx was not filtered by the driver
 - fixed issue starting services without a system token
 - fixed issues with new file migration settings [#2700](https://github.com/sandboxie-plus/Sandboxie/issues/2700)
 - fixed shell integration on ARM64 [#2685](https://github.com/sandboxie-plus/Sandboxie/issues/2685)
@@ -1609,7 +1609,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with Privacy Enhanced box types [#2342](https://github.com/sandboxie-plus/Sandboxie/issues/2342)
 - fixed issue with boxed object directory initialization [#2342](https://github.com/sandboxie-plus/Sandboxie/issues/2342)
 - Sandboxie no longer leaves behind permanent directory objects
-- FIXED SECURITY ISSUE ID-21 AlpcConnectPortEx was not filtered by the driver [#2396](https://github.com/sandboxie-plus/Sandboxie/issues/2396)
+- FIXED SECURITY ISSUE ID-21: AlpcConnectPortEx was not filtered by the driver [#2396](https://github.com/sandboxie-plus/Sandboxie/issues/2396)
 - fixed issues with program control options [#2395](https://github.com/sandboxie-plus/Sandboxie/issues/2395)
 
 

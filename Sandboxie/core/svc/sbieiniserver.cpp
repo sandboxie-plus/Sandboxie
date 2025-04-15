@@ -160,7 +160,7 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
         return SHORT_REPLY(STATUS_NOT_SUPPORTED);
 
     //
-    // Get/Set *.dat files in sandboxies home directory
+    // Get/Set *.dat files in sandboxie's home directory
     //
 
     if (msg->msgid == MSGID_SBIE_INI_SET_DAT) {

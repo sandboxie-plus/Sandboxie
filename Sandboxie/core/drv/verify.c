@@ -775,6 +775,15 @@ _FX NTSTATUS KphValidateCertificate()
     status = KphVerifySignature(hash, hashSize, signature, signatureSize);
 
     if (NT_SUCCESS(status) && key) {
+        if (_wcsicmp(key, L"46329469461254954325945934569378") == 0  // Y - CC
+          ||_wcsicmp(key, L"63F49D96BDBA28F8428B4A5008D1A587") == 0) // X - H
+        {
+            //DbgPrint("Found Blocked UpdateKey %S\n", key);
+            status = STATUS_CONTENT_BLOCKED;
+        }
+    }
+
+    if (NT_SUCCESS(status) && key) {
 
         ULONG key_len = wcslen(key);
 

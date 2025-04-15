@@ -764,8 +764,8 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 
 	if (source == ui.txtCertificate)
 	{
-		if (event->type() == QEvent::FocusIn && ui.txtCertificate->property("hiden").toBool()) {
-			ui.txtCertificate->setProperty("hiden", false);
+		if (event->type() == QEvent::FocusIn && ui.txtCertificate->property("hidden").toBool()) {
+			ui.txtCertificate->setProperty("hidden", false);
 			ui.txtCertificate->setPlainText(g_Certificate);
 		}
 	}
@@ -1316,7 +1316,7 @@ void CSettingsWindow::UpdateCert()
 	//ui.lblCertLevel->setVisible(!g_Certificate.isEmpty());
 	if (!g_Certificate.isEmpty()) 
 	{
-		ui.txtCertificate->setProperty("hiden", true);
+		ui.txtCertificate->setProperty("hidden", true);
 		int Pos = g_Certificate.indexOf("UPDATEKEY:");
 		ui.txtCertificate->setPlainText(g_Certificate.left(Pos) + "...");
 		//ui.lblSupport->setVisible(false);
@@ -1420,7 +1420,7 @@ void CSettingsWindow::UpdateCert()
 void CSettingsWindow::OnGetCert()
 {
 	QByteArray Certificate;
-	if (!ui.txtCertificate->property("hiden").toBool())
+	if (!ui.txtCertificate->property("hidden").toBool())
 		Certificate = ui.txtCertificate->toPlainText().toUtf8();
 	else
 		Certificate = g_Certificate;
@@ -1505,7 +1505,7 @@ void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMa
 		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
 		return;
 	}
-	ui.txtCertificate->setProperty("hiden", false);
+	ui.txtCertificate->setProperty("hidden", false);
 	ui.txtCertificate->setPlainText(Certificate);
 	ApplyCert();
 }
@@ -1515,7 +1515,7 @@ void CSettingsWindow::ApplyCert()
 	if (!theAPI->IsConnected())
 		return;
 
-	if (ui.txtCertificate->property("hiden").toBool())
+	if (ui.txtCertificate->property("hidden").toBool())
 		return;
 
 	QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	

@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [1.15.11 / 5.70.11] - 2025-04-16
+
+### Fixed
+- fixed issue with SboxHostDll.dll failing to be injected into OfficeClickToRun.exe
+
+
+
 ## [1.15.10 / 5.70.10] - 2025-04-15
 
 ### Added

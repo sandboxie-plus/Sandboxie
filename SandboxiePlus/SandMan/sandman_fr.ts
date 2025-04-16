@@ -4218,7 +4218,7 @@ Erreur : %1</translation>
     <message>
         <location filename="SandMan.cpp" line="4121"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de copie du répertoire « %1 » vers « %2 »</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4219"/>
@@ -6397,12 +6397,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1333"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce certificat d&apos;adhérent a expiré, veuillez &lt;a href=&quot;%1&quot;&gt;en obtenir un à jour&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1385"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
-        <translation type="unfinished"></translation>
+        <translation>; les membres Patreons éligibles peuvent toujours &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtenir un certificat à jour&lt;/a&gt; depuis xanasoft.com</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1411"/>
@@ -6423,23 +6423,24 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="2096"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Ceci est un certificat Patreon temporaire, valable 3 mois. Une fois celui-ci presque expiré, vous pouvez obtenir un nouveau certificat en ligne qui sera valide pour la durée complète.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2134"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Une mise à jour de sécurité obligatoire pour votre certificat d&apos;adhérent à Sandboxie-Plus est nécessaire. Voulez-vous télécharger cette mise à jour du certificat maintenant ?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2135"/>
         <source>Auto update in future</source>
-        <translation type="unfinished"></translation>
+        <translation>Mettre à jour automatiquement désormais</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1346"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
-        <translation type="unfinished">Ce certificat d&apos;adhérent a expiré, veuillez &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;obtenir un certificat à jour&lt;/a&gt;.</translation>
+        <translation>Ce certificat d&apos;adhérent va &lt;font color=&apos;red&apos;&gt;expirer dans %1 jour(s)&lt;/font&gt;, veuillez &lt;a href=&quot;%2&quot;&gt;obtenir un certificat à jour&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1336"/>
@@ -10039,27 +10040,27 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4001"/>
         <source>Bind to Adapter IP</source>
-        <translation type="unfinished"></translation>
+        <translation>Lier à l&apos;IP de l&apos;adaptateur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4008"/>
         <source>IPv6:</source>
-        <translation type="unfinished"></translation>
+        <translation>IPv6 :</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4049"/>
         <source>IPv4:</source>
-        <translation type="unfinished"></translation>
+        <translation>IPv4 :</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4072"/>
         <source>0000:0000:0000:0000:0000:0000:0000:0000</source>
-        <translation type="unfinished">0000:0000:0000:0000:0000:0000:0000:0000</translation>
+        <translation>0000:0000:0000:0000:0000:0000:0000:0000</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4079"/>
         <source>000.000.000.000</source>
-        <translation type="unfinished">000.000.000.000</translation>
+        <translation>000.000.000.000</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4938"/>
@@ -11304,12 +11305,12 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1703"/>
         <source>Cert Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options de certificat</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1818"/>
         <source>Eval Cert</source>
-        <translation type="unfinished"></translation>
+        <translation>Certificat d&apos;évaluation</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2643"/>

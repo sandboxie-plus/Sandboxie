@@ -3601,7 +3601,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="SandMan.cpp" line="518"/>
         <location filename="SandMan.cpp" line="662"/>
         <source>Suspend All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zasuspenduj wszystkie procesy</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="520"/>
@@ -3619,7 +3619,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="SandMan.cpp" line="546"/>
         <location filename="SandMan.cpp" line="702"/>
         <source>Restart As Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponowne uruchomienie jako administrator</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="557"/>
@@ -4047,13 +4047,13 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1654"/>
         <location filename="SandMan.cpp" line="1685"/>
         <source>Which box you want to add in?</source>
-        <translation type="unfinished"></translation>
+        <translation>Do którego pola chcesz dodać?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1654"/>
         <location filename="SandMan.cpp" line="1685"/>
         <source>Type the box name which you are going to set:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz nazwę pola, które zamierzasz ustawić:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1671"/>
@@ -4062,24 +4062,24 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1692"/>
         <location filename="SandMan.cpp" line="1696"/>
         <source>Sandboxie-Plus Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrzeżenie Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1671"/>
         <source>The value is not an existing directory or executable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wartość nie jest istniejącym katalogiem ani plikiem wykonywalnym.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1676"/>
         <location filename="SandMan.cpp" line="1692"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisałeś/aś błędną nazwę pola! Nic nie zostało zmienione.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1680"/>
         <location filename="SandMan.cpp" line="1696"/>
         <source>User canceled this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Użytkownik anulował tę operację.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1752"/>
@@ -4114,7 +4114,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="2375"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wykonuję OnBoxTerminate: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2420"/>
@@ -4152,7 +4152,8 @@ Do you want to do the clean up?</source>
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Twoja wersja systemu Windows o numerze buildu %1 przekracza obecne możliwości obsługi Twojej wersji Sandboxie, co skutkuje wyłączeniem izolacji zabezpieczeń opartej na tokenach. W związku z tym wszystkie aplikacje będą działać w trybie oddzielenia aplikacji bez bezpiecznej izolacji.
+Sprawdź, czy istnieje aktualizacja dla Sandboxie. </translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2582"/>

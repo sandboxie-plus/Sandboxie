@@ -300,6 +300,7 @@ polish.UninstallTaskLabel3=Zachowaj pliki &konfiguracyjne i piaskownice%nJest to
 polish.UninstallTaskLabel4=Usuń pliki konfigura&cyjne%nWybierz tę opcję, aby usunąć pliki konfiguracyjne Sandboxie.ini i Sandboxie-Plus.ini, zachowując piaskownice bez zmian.
 polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz tę opcję, aby usunąć wszystkie pliki konfiguracyjne i piaskownice, w tym folder Sandbox znajdujący się w niestandardowych ścieżkach z FileRootPath.
 polish.RefreshBuild=Pobierz najnowsze Templates.ini i tłumaczenia
+polish.InstallImDisk=Zainstaluj (lub Uaktualnij) sterownik ImDisk 3.0 (dla RamDisk i zaszyfrowanych sandboxów)
 
 ; Brazilian Portuguese
 brazilianportuguese.AddSandboxedMenu=Adicionar "Executar na Caixa de Areia" no menu de contexto

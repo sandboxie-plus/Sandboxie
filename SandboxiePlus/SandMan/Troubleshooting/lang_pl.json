@@ -120,7 +120,7 @@
 "Please enter the SBIEMSG ID you have encountered.": "Proszę wprowadzić identyfikator SBIEMSG, który otrzymałeś.",
 "There is no automated troubleshooting available for SBIE%1 yet.<br />": "Nie ma jeszcze automatycznego rozwiązywania problemów dla SBIE%1.<br />",
 "The full message text is: %1<br />": "Pełny tekst wiadomości to: %1<br />",
-﻿"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Odwiedź naszą <a href="%1">online-documentation,</a> aby dowiedzieć się więcej o tym i innych wiadomościach sbie.",
+﻿"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Odwiedź naszą <a href=\"%1\">online-documentation,</a> aby dowiedzieć się więcej o tym i innych wiadomościach sbie.",
 "Would you like to collect some logs to help us resolve the issue.": "Czy chcesz zebrać niektóre logi, aby pomóc nam rozwiązać problem?",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "Teraz uruchom ponownie swoją aplikację, aby wywołać komunikat Sbie.<br /><br />",
 "Press NEXT when you are done collecting logs.": "Naciśnij DALEJ, gdy zakończysz zbieranie logów.",

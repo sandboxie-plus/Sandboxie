@@ -1316,7 +1316,7 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="769"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapytaj użytkownika, czy ma zostać udzielona wyłączenie z blokuady. </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="775"/>
@@ -1457,13 +1457,13 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="111"/>
         <source>Add your settings after this line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj swoje ustawienia po tej linii.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="113"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="114"/>
         <source>Shared Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Współdzielony szablon</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
@@ -1510,12 +1510,12 @@ Czy nadal chcesz dokonać aktualizacji?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="503"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Aby zapewnić optymalną zgodność z Twoim oprogramowaniem, Sandboxie musi zaktualizować swoje szablony zgodności. Czy chcesz kontynuować? </translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="504"/>
         <source>Enable auto template updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz automatyczne aktualizacje szablonów</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="552"/>
@@ -1536,7 +1536,7 @@ Czy nadal chcesz dokonać aktualizacji?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="587"/>
         <source>Update Check completed, no new updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprawdzenie aktualizacji zostało ukończone. Nie ma dostępnych nowych aktualizacji.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="732"/>
@@ -1641,7 +1641,7 @@ Czy nadal chcesz dokonać aktualizacji?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="1169"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostępny jest nowy plik Templates.ini. Czy chcesz go pobrać?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1219"/>
@@ -1779,13 +1779,13 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Windows/OptionsAdvanced.cpp" line="763"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="772"/>
         <source>bytes (unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>bajty (brak ograniczenia)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="766"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="775"/>
         <source>bytes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>bajty (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="781"/>
@@ -1835,17 +1835,17 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1121"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Po zakończeniu</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1502"/>
         <source>Failed to retrieve firmware table information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się pobrać informacji o tabeli firmware.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1510"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabela oprogramowania układowego została pomyślnie zapisana w rejestrze hosta: HKEY_CURRENT_USERSystemSbieCustom&lt;br /&gt;możesz skopiować ją do rejestru w piaskownicy, aby mieć inną wartość dla każdego pudełka.</translation>
     </message>
     <message>
         <source>On Delete</source>
@@ -2235,12 +2235,12 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsForce.cpp" line="133"/>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Potomcy</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="151"/>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="265"/>
@@ -2259,23 +2259,23 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsForce.cpp" line="327"/>
         <source>Select Document Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz katalog dokumentów</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="331"/>
         <source>Please enter Document File Extension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wprowadzić rozszerzenie pliku dokumentu.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="341"/>
         <source>For security reasons it is not permitted to create entirely wildcard BreakoutDocument presets.</source>
         <oldsource>For security reasons it it not permitted to create entirely wildcard BreakoutDocument presets.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Z powodów bezpieczeństwa nie jest dozwolone tworzenie predefiniowanych ustawień BreakoutDocument z wyłącznie symbolami wieloznacznymi.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="351"/>
         <source>For security reasons the specified extension %1 should not be broken out.</source>
-        <translation type="unfinished"></translation>
+        <translation>Z powodów bezpieczeństwa nie należy uwolnić określonego rozszerzenia %1.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="408"/>
@@ -2616,19 +2616,19 @@ Wybierz folder, który zawiera ten plik.</translation>
         <location filename="Windows/OptionsNetwork.cpp" line="55"/>
         <location filename="Windows/OptionsNetwork.cpp" line="631"/>
         <source>TCP</source>
-        <translation></translation>
+        <translation>TCP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
         <location filename="Windows/OptionsNetwork.cpp" line="632"/>
         <source>UDP</source>
-        <translation></translation>
+        <translation>UDP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="57"/>
         <location filename="Windows/OptionsNetwork.cpp" line="633"/>
         <source>ICMP</source>
-        <translation></translation>
+        <translation>ICMP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="91"/>
@@ -2648,32 +2648,32 @@ Wybierz folder, który zawiera ten plik.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="802"/>
         <source>Please enter a domain to be filtered</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wprowadzić domenę, którą należy zfiltrować.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="832"/>
         <source>Yes</source>
-        <translation type="unfinished">Tak</translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="833"/>
         <source>No</source>
-        <translation type="unfinished">Nie</translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="857"/>
         <source>Please enter IP and Port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wprowadzić adres IP i numer portu.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1039"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation type="unfinished"></translation>
+        <translation> Wpis: Adres IP lub numer portu nie mogą być puste.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1044"/>
         <source> entry: Address must be IP, not host name</source>
-        <translation type="unfinished"></translation>
+        <translation> Wpis: Adres musi być adresem IP, a nie nazwą hosta.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
@@ -3009,7 +3009,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="246"/>
         <source>No Files selected!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie wybrano żadnych plików!</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="250"/>
@@ -3226,7 +3226,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
         <source>Copying folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiowanie folderu: %1</translation>
     </message>
 </context>
 <context>

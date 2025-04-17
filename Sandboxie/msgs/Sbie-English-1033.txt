@@ -1118,6 +1118,22 @@ Option is disabled because the Drop Rights setting is enabled for this sandbox
 Option is disabled because this program is already running with Administrator privileges
 .
 
+3257;txt;01
+Sandboxie Start Prompt
+.
+
+3258;txt;01
+You are starting a program which need to elevate in the box.Please input the administrator account's password.
+.
+
+3259;txt;01
+Something wrong happened.The program will start with normal privallige.
+.
+
+3260;txt;01
+Something wrong happened.The program won't start in built-in administrator account.
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control Common
 #----------------------------------------------------------------------------

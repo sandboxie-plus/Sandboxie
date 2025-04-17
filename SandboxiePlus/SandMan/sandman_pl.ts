@@ -229,8 +229,8 @@ However, if &apos;use as a template&apos; option is selected as the sharing mode
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
 To disable this template for a sandbox, simply uncheck it in the template list.</source>
         <translation>To ustawienie dodaje lokalny szablon lub jego ustawienia do konfiguracji sandboxa, dzięki czemu ustawienia w tym szablonie są współdzielone między sandboxami.
-Jednakże, jeśli opcja "użyj jako szablon" jest wybrana jako tryb współdzielenia, niektóre ustawienia mogą nie być widoczne w interfejsie użytkownika.
-Aby zmienić ustawienia szablonu, po prostu znajdź szablon "%1" na liście Szablony aplikacji w Opcjach sandboxa, a następnie dwukrotnie kliknij na niego, aby go edytować.
+Jednakże, jeśli opcja &quot;użyj jako szablon&quot; jest wybrana jako tryb współdzielenia, niektóre ustawienia mogą nie być widoczne w interfejsie użytkownika.
+Aby zmienić ustawienia szablonu, po prostu znajdź szablon &quot;%1&quot; na liście Szablony aplikacji w Opcjach sandboxa, a następnie dwukrotnie kliknij na niego, aby go edytować.
 Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablonów. </translation>
     </message>
     <message>
@@ -6131,7 +6131,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1414"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Możesz zażądać bezpłatnego certyfikatu testowego na %1 dni, maksymalnie %2 razy na identyfikator sprzętowy.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1346"/>

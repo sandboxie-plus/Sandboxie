@@ -2546,7 +2546,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                <item row="1" column="1" colspan="2">
                 <widget class="QComboBox" name="cmbUsbSandbox">
                  <property name="editable">
-                  <bool>true</bool>
+                  <bool>false</bool>
                  </property>
                 </widget>
                </item>

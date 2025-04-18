@@ -71,12 +71,12 @@ void CBoxPicker::LoadBoxed(const QRegularExpression& Filter, const QString& Sele
 		if (Filter.isValid() && !Filter.match(pBox->GetName()).hasMatch())
 			continue;
 
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
 		QTreeWidgetItem* pParent = GetBoxParent(Groups, GroupItems, m_pTreeBoxes, pBox->GetName());
-		
+
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		pItem->setText(0, pBox->GetName().replace("_", " "));
+		pItem->setText(0, pBoxEx->GetDisplayName());
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
 		QIcon Icon;
 		QString Action = pBox->GetText("DblClickAction");

@@ -302,7 +302,7 @@ QModelIndex CTreeItemModel::FindIndex(const QVariant& ID)
 	return QModelIndex();
 }
 
-QModelIndex CTreeItemModel::Find(STreeNode* pParent, STreeNode* pNode)
+QModelIndex CTreeItemModel::Find(STreeNode* pParent, STreeNode* pNode) const
 {
 	// ''find''
 	ASSERT(pNode->Parent->Children[pNode->Row] == pNode);

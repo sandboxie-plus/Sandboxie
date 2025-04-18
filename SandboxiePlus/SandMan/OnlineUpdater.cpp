@@ -205,7 +205,8 @@ void CGetUpdatesJob::Finish(QNetworkReply* pReply)
 		time_t CurrentDate = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
 		theAPI->SetSecureParam("LastUpdate", &CurrentDate, sizeof(CurrentDate));
 
-		theConf->SetValue("Updater/LabelMessage", Data["labelMsg"].toString());
+		QString LabelMsg = Data["labelMsg"].toString();
+		theConf->SetValue("Updater/LabelMessage", LabelMsg);
 	}
 
 	m_pProgress->Finish(SB_OK);

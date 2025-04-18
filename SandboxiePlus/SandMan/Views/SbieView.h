@@ -101,6 +101,7 @@ private slots:
 
 	void						OnExpanded(const QModelIndex& index) { ChangeExpand(index, true); }
 	void						OnCollapsed(const QModelIndex& index) { ChangeExpand(index, false); }
+	void						UpdateColapsed();
 
 	void						OnMoveItem(const QString& Name, const QString& To, int row);
 

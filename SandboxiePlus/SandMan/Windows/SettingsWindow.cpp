@@ -21,6 +21,7 @@
 #include "../MiscHelpers/Common/CodeEdit.h"
 #include "Helpers/IniHighlighter.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
+#include <QFileIconProvider>
 
 
 #include <windows.h>
@@ -1110,9 +1111,29 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSandboxUsb->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceUsbDrives", false));
 
 		ui.cmbUsbSandbox->clear();
-		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
-			ui.cmbUsbSandbox->addItem(pBox->GetName().replace("_", " "));
-		ui.cmbUsbSandbox->setCurrentText(theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box").replace("_", " "));
+
+		QFileIconProvider IconProvider;
+		bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
+
+		int CurUsbBox = 0;
+		foreach(const CSandBoxPtr& pBox, theAPI->GetAllBoxes()) 
+		{
+			if (theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box") == pBox->GetName())
+				CurUsbBox = ui.cmbUsbSandbox->count();
+
+			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+
+			QIcon Icon;
+			QString Action = pBox->GetText("DblClickAction");
+			if (!Action.isEmpty() && Action.left(1) != "!")
+				Icon = IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
+			else if(ColorIcons)
+				Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
+			else
+				Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
+			ui.cmbUsbSandbox->addItem(Icon, pBoxEx->GetDisplayName(), pBox->GetName());
+		}
+		ui.cmbUsbSandbox->setCurrentIndex(CurUsbBox);
 
 		ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
 		ui.treeVolumes->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
@@ -1956,7 +1977,7 @@ void CSettingsWindow::SaveSettings()
 
 				WriteAdvancedCheck(ui.chkSandboxUsb, "ForceUsbDrives", "y", "");
 
-				QString UsbSandbox = ui.cmbUsbSandbox->currentText().replace(" ", "_");
+				QString UsbSandbox = ui.cmbUsbSandbox->currentData().toString();
 				SB_STATUS Status = theAPI->ValidateName(UsbSandbox);
 				if (Status.IsError())
 					QMessageBox::warning(this, "Sandboxie-Plus", theGUI->FormatError(Status));

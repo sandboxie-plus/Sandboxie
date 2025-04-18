@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SbieCtrl.exe has a constantly 3.2MB/s IO rate in the Process Explorer [#4693](https://github.com/sandboxie-plus/Sandboxie/issues/4693)
 - fixed Template for Tencent TIM cause Drag&Drop not available [#4688](https://github.com/sandboxie-plus/Sandboxie/issues/4688)
 - improved when Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
+- fixed Msi install Can`t create AppData\Romaing\Microsoft folder in Data Protection Box [#4711](https://github.com/sandboxie-plus/Sandboxie/issues/4711)
 
 
 

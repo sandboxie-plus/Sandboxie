@@ -3538,21 +3538,38 @@ _FX void File_CreateBaseFolders()
     //    File_CreateBoxedPath(File_CurrentUser);
     //}
 
-    WCHAR* Folders[] = { L"SystemRoot", L"TEMP", L"USERPROFILE", //L"windir",
-                        L"PUBLIC", L"ProgramData", L"LOCALAPPDATA", L"ALLUSERSPROFILE", L"APPDATA",
-                        L"ProgramFiles", L"ProgramFiles(x86)", L"ProgramW6432",
-                        //L"CommonProgramFiles", L"CommonProgramFiles(x86)", L"CommonProgramW6432", 
-                        NULL };
-    WCHAR path[MAX_PATH];
-    for (WCHAR** Folder = Folders; *Folder; Folder++) {
-        path[0] = 0;
-        GetEnvironmentVariable(*Folder, path, sizeof(path));
-        if (path[0]) {
-            WCHAR* pathNT = File_TranslateDosToNtPath(path);
-            if (pathNT) {
-                File_CreateBoxedPath(pathNT);
-                Dll_Free(pathNT);
-            }
+    const WCHAR* FolderSpecs[] = {
+        L"%SystemRoot%",
+        L"%TEMP%",
+        L"%USERPROFILE%",
+        L"%PUBLIC%",
+        L"%ProgramData%",
+        L"%LOCALAPPDATA%",
+        L"%ALLUSERSPROFILE%",
+        L"%APPDATA%",
+        L"%ProgramFiles%",
+        L"%ProgramFiles(x86)%",
+        L"%ProgramW6432%",
+        L"%LOCALAPPDATA%\\Microsoft",
+        L"%APPDATA%\\Microsoft",
+        L"%ProgramData%\\Microsoft",
+        NULL
+    };
+
+    WCHAR expanded[MAX_PATH];
+    for (const WCHAR** spec = FolderSpecs; *spec; spec++) {
+        
+        DWORD len = ExpandEnvironmentStringsW(*spec, expanded, MAX_PATH);
+        if (len == 0 || len > MAX_PATH)
+            continue;
+
+        if (wcschr(expanded, L'%'))
+            continue;
+
+        WCHAR* pathNT = File_TranslateDosToNtPath(expanded);
+        if (pathNT) {
+            File_CreateBoxedPath(pathNT);
+            Dll_Free(pathNT);
         }
     }
 }

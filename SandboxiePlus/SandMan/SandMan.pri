@@ -132,6 +132,7 @@ TRANSLATIONS += sandman_ar.ts \
     sandman_tr.ts \
     sandman_uk.ts \
     sandman_vi.ts \
+    sandman_id.ts \
     sandman_zh_CN.ts \
     sandman_zh_TW.ts
 

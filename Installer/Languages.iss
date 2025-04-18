@@ -300,6 +300,7 @@ polish.UninstallTaskLabel3=Zachowaj pliki &konfiguracyjne i piaskownice%nJest to
 polish.UninstallTaskLabel4=Usuń pliki konfigura&cyjne%nWybierz tę opcję, aby usunąć pliki konfiguracyjne Sandboxie.ini i Sandboxie-Plus.ini, zachowując piaskownice bez zmian.
 polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz tę opcję, aby usunąć wszystkie pliki konfiguracyjne i piaskownice, w tym folder Sandbox znajdujący się w niestandardowych ścieżkach z FileRootPath.
 polish.RefreshBuild=Pobierz najnowsze Templates.ini i tłumaczenia
+polish.InstallImDisk=Zainstaluj (lub Uaktualnij) sterownik ImDisk 3.0 (dla RamDisk i zaszyfrowanych sandboxów)
 
 ; Brazilian Portuguese
 brazilianportuguese.AddSandboxedMenu=Adicionar "Executar na Caixa de Areia" no menu de contexto
@@ -439,7 +440,7 @@ turkish.UninstallTaskLabel3=Yapılandırma dosyalarını ve korumalı alanları 
 turkish.UninstallTaskLabel4=&Yapılandırma dosyalarını kaldır%nSandboxie.ini ve Sandboxie-Plus.ini yapılandırma dosyalarını, korumalı alanları değiştirmeden kaldırmak için bunu seçin.
 turkish.UninstallTaskLabel5=Yapılandırma dosyalarını ve &korumalı alanları kaldır%nFileRootPath ile özel yollarda bulunan Sandbox klasörü dahil tüm yapılandırma dosyalarını ve korumalı alanları kaldırmak için bunu seçin.
 turkish.RefreshBuild=En son Templates.ini ve çeviriler indirilsin
-turkish.InstallImDisk=ImDisk 3.0 sürücüsünü yükleyin (veya güncelleyin) (RamDisk ve Şifrelenmiş Korumalı Alanlar için)
+turkish.InstallImDisk=ImDisk 3.0 sürücüsü yüklensin (veya güncellensin) (RamDisk ve Şifrelenmiş Korumalı Alanlar için)
 
 ; Ukrainian
 ukrainian.AddSandboxedMenu=Додати "Виконати в пісочниці" в контекстне меню

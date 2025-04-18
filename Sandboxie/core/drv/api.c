@@ -1323,7 +1323,7 @@ _FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
     }
 
     if (name)
-        Mem_Free(name, name_len);
+        Mem_Free(name, (ULONG)name_len);
     if (data)
         Mem_Free(data, data_len);
 
@@ -1366,14 +1366,22 @@ _FX NTSTATUS Api_GetSecureParamImpl(const wchar_t* name, PVOID* data_ptr, ULONG*
 
         if(verify) {
 
-            wcscat(name, L"Sig");
+            ULONG sig_name_len = (wcslen(name) + 3 + 1) * sizeof(wchar_t);
+            wchar_t* sig_name = Mem_Alloc(Driver_Pool, sig_name_len);
+            if (!sig_name)
+                return STATUS_INSUFFICIENT_RESOURCES;
+
+            wcscpy(sig_name, name);
+            wcscat(sig_name, L"Sig");
 
             UCHAR data_sig[128];
             PVOID sig_ptr = data_sig;
             ULONG sig_len = sizeof(data_sig);
-            status = GetRegValue(Api_ParamPath, name, &sig_ptr, &sig_len);
+            status = GetRegValue(Api_ParamPath, sig_name, &sig_ptr, &sig_len);
             if (NT_SUCCESS(status)) 
                 status = KphVerifyBuffer(*data_ptr, *data_len, sig_ptr, sig_len);
+
+            Mem_Free(sig_name, sig_name_len);
         }
     }
     return status;
@@ -1385,7 +1393,6 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
     API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS *)parms;
 	HANDLE handle = NULL;
     WCHAR* name = NULL;
-    SIZE_T  name_len1 = 0;
     SIZE_T  name_len = 0;
     PVOID  data_ptr = NULL;
     ULONG  data_len = 0;
@@ -1402,9 +1409,7 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 
     __try {
 
-        name_len1 = (wcslen(args->param_name.val) + 1) * sizeof(WCHAR);
-        if(args->param_verify.val)
-            name_len = name_len1 + 3 * sizeof(WCHAR); // for Sig sufix
+        name_len = (wcslen(args->param_name.val) + 1) * sizeof(WCHAR);
         data_len = args->param_size.val;
 
         if (name_len > 0x3FFF || data_len > 0x100000)
@@ -1416,7 +1421,7 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
             ProbeForWrite(args->param_size_out.val, sizeof(ULONG), sizeof(ULONG));
 
         name = Mem_Alloc(Driver_Pool, (ULONG)name_len);
-        memcpy(name, args->param_name.val, name_len1);
+        memcpy(name, args->param_name.val, name_len);
 
         data_ptr = args->param_data.val;
 
@@ -1429,7 +1434,7 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
     }
 
     if (name)
-        Mem_Free(name, name_len);
+        Mem_Free(name, (ULONG)name_len);
 
     if(handle)
         ZwClose(handle);

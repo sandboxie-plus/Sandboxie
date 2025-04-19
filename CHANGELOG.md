@@ -4,8 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.15.12 / 5.70.12] - 2025-04-??
 
+### Added
+- added Indonesian translation to the Plus UI [4bad4d1](https://github.com/sandboxie-plus/Sandboxie/commit/4bad4d190a90a6329d549e5a31ca8ee13b4eb9a1) (thanks ???)
+
 ### Changed
 - Weird sort in the Move Sandbox list [#4615](https://github.com/sandboxie-plus/Sandboxie/issues/4615)
+- Name and HwID information in the Support tab is now hidden by default but can be toggled as needed
 
 ### Fixed
 - fixed the 'run in box' selection prompt not show BoxAlias [#4709](https://github.com/sandboxie-plus/Sandboxie/issues/4709)

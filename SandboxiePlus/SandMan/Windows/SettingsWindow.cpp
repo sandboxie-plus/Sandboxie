@@ -540,15 +540,36 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	ui.txtCertificate->setPlaceholderText(
 		"NAME: User Name\n"
-		"TYPE: ULTIMATE\n"
 		"DATE: dd.mm.yyyy\n"
+		"TYPE: ULTIMATE\n"
 		"UPDATEKEY: 00000000000000000000000000000000\n"
 		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
 	);
 
 	wchar_t uuid_str[40];
-	if(theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str)))
-		ui.lblHwId->setText(tr("HwId: %1").arg(QString::fromWCharArray(uuid_str)));
+	if (theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str))) {
+		QString fullHwId = QString::fromWCharArray(uuid_str);
+		QString clickToR = tr("Click to reveal");
+		QString clickToH = tr("Click to hide");
+
+		// Initial state: hidden
+		ui.lblHwId->setText(tr("HwId: <a href=\"%1\">[%2]</a>").arg(fullHwId, clickToR));
+		ui.lblHwId->setToolTip(clickToR);
+
+		// Click handler
+		connect(ui.lblHwId, &QLabel::linkActivated, this, [=]() {
+			if (ui.lblHwId->text().contains(clickToR)) {
+				// Reveal the ID
+				ui.lblHwId->setText(tr("HwId: <a href=\"%1\" style=\"text-decoration:none; color:inherit;\">%1</a>").arg(fullHwId));
+				ui.lblHwId->setToolTip(clickToH);
+			}
+			else {
+				// Hide the ID again
+				ui.lblHwId->setText(tr("HwId: <a href=\"%1\">[%2]</a>").arg(fullHwId, clickToR));
+				ui.lblHwId->setToolTip(clickToR);
+			}
+			});
+	}
 
 	connect(ui.lblEvalCert, SIGNAL(linkActivated(const QString&)), this, SLOT(OnStartEval()));
 
@@ -765,12 +786,36 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 
 	if (source == ui.txtCertificate)
 	{
-		if (event->type() == QEvent::FocusIn && ui.txtCertificate->property("hidden").toBool()) {
+		static bool m_bRightButtonPressed = false;
+
+		if (event->type() == QEvent::FocusIn && ui.txtCertificate->property("hidden").toBool())	{
 			ui.txtCertificate->setProperty("hidden", false);
 			ui.txtCertificate->setPlainText(g_Certificate);
+			ui.txtCertificate->setProperty("modified", false);
+		}
+		else if (event->type() == QEvent::MouseButtonPress && ((QMouseEvent*)event)->button() == Qt::RightButton) {
+			m_bRightButtonPressed = true;
+		}
+		else if (event->type() == QEvent::FocusOut && !ui.txtCertificate->property("hidden").toBool()) {
+			if (!ui.txtCertificate->property("modified").toBool() && !m_bRightButtonPressed) {
+				ui.txtCertificate->setProperty("hidden", true);
+				int Pos = g_Certificate.indexOf("HWID:");
+				if (Pos == -1)
+					Pos = g_Certificate.indexOf("UPDATEKEY:");
+
+				QByteArray truncatedCert = (g_Certificate.left(Pos) + "...");
+				int namePos = truncatedCert.indexOf("NAME:");
+				int datePos = truncatedCert.indexOf("DATE:");
+				if (namePos != -1 && datePos != -1 && datePos > namePos)
+					truncatedCert = truncatedCert.mid(0, namePos + 5) + " ...\n" + truncatedCert.mid(datePos);
+				ui.txtCertificate->setPlainText(truncatedCert);
+			}
+		}
+
+		if (event->type() == QEvent::FocusOut) {
+			m_bRightButtonPressed = false;
 		}
 	}
-
 	return QDialog::eventFilter(source, event);
 }
 
@@ -1335,11 +1380,19 @@ void CSettingsWindow::UpdateCert()
 	ui.lblEvalCert->setVisible(g_Certificate.isEmpty());
 	
 	//ui.lblCertLevel->setVisible(!g_Certificate.isEmpty());
-	if (!g_Certificate.isEmpty()) 
+	if (!g_Certificate.isEmpty())
 	{
 		ui.txtCertificate->setProperty("hidden", true);
-		int Pos = g_Certificate.indexOf("UPDATEKEY:");
-		ui.txtCertificate->setPlainText(g_Certificate.left(Pos) + "...");
+		int Pos = g_Certificate.indexOf("HWID:");
+		if (Pos == -1)
+			Pos = g_Certificate.indexOf("UPDATEKEY:");
+
+		QByteArray truncatedCert = (g_Certificate.left(Pos) + "...");
+		int namePos = truncatedCert.indexOf("NAME:");
+		int datePos = truncatedCert.indexOf("DATE:");
+		if (namePos != -1 && datePos != -1 && datePos > namePos)
+			truncatedCert = truncatedCert.mid(0, namePos + 5) + " ...\n" + truncatedCert.mid(datePos);
+		ui.txtCertificate->setPlainText(truncatedCert);
 		//ui.lblSupport->setVisible(false);
 
 		QString ReNewUrl = "https://sandboxie-plus.com/go.php?to=sbie-renew-cert";
@@ -2776,6 +2829,7 @@ void CSettingsWindow::CertChanged()
 	m_CertChanged = true; 
 	QPalette palette = QApplication::palette();
 	ui.txtCertificate->setPalette(palette);
+	ui.txtCertificate->setProperty("modified", true);
 	OnOptChanged();
 }
 

@@ -199,7 +199,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="897"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation type="unfinished">Zapobieganie ładowaniu dll&apos;ów z piaskownicy przez programy zainstalowane na hoście</translation>
+        <translation>Zapobiegaj instalowanym na hoście programom w otoczeniu sandboxowym wczytywaniu bibliotek DLL z sandboxu</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="898"/>
@@ -271,12 +271,12 @@ Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablo
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="923"/>
         <source>Disabled</source>
-        <translation type="unfinished">Wyłączone</translation>
+        <translation>Wyłączone</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="890"/>
         <source>Advanced Options</source>
-        <translation type="unfinished">Opcje zaawansowane</translation>
+        <translation>Opcje zaawansowane</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
@@ -959,12 +959,12 @@ Możesz kliknąć Zakończ, aby zamknąć tego kreatora.</translation>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="39"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Wybierz katalog</translation>
+        <translation>Wybierz katalog</translation>
     </message>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="61"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation type="unfinished">Ta nazwa jest już używana, proszę wybrać alternatywną nazwę boksu</translation>
+        <translation>Ten nazwa jest już zajęta, proszę wybrać inną nazwę pudełka</translation>
     </message>
 </context>
 <context>
@@ -1212,7 +1212,7 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="OnlineUpdater.cpp" line="163"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
 </context>
 <context>
@@ -1285,22 +1285,22 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
         <source>Network Access</source>
-        <translation type="unfinished">Dostęp do sieci</translation>
+        <translation>Dostęp do sieci</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished">Zezwalaj na dostęp do sieci/internetu</translation>
+        <translation>Pozwól na dostęp do sieci/Internetu</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished">Zablokuj sieć/internet, odmawiając dostępu urządzeniom sieciowym</translation>
+        <translation>Zablokuj dostęp do sieci/Internetu, odmówiając dostępu do urządzeń sieciowych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="757"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished">Zablokuj sieć/internet przy użyciu platformy filtrującej Windows</translation>
+        <translation>Zablokuj dostęp do sieci/Internetu przy użyciu Windows Filtering Platform</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
@@ -4805,12 +4805,12 @@ Ten plik jest częścią Sandboxie i wszystkie zmiany w nim dokonane zostaną co
         <location filename="SandMan.cpp" line="4390"/>
         <source>Case Sensitive</source>
         <translatorcomment>I don&apos;t know what it&apos;s for</translatorcomment>
-        <translation></translation>
+        <translation>Uwzględniaj wielkość liter</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4391"/>
         <source>RegExp</source>
-        <translation></translation>
+        <translation>Wyrażenie regularne</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4392"/>
@@ -5045,7 +5045,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="SbieProcess.cpp" line="67"/>
         <source>Windows Explorer</source>
-        <translation></translation>
+        <translation>Windows Explorer</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="68"/>
@@ -5055,12 +5055,12 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="SbieProcess.cpp" line="70"/>
         <source>Windows Media Player</source>
-        <translation></translation>
+        <translation>Windows Media Player</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="61"/>
         <source>Sbie WuauServ</source>
-        <translation>Sbie wrapper for the Windows Automatic Update Service</translation>
+        <translation>Opakowanie Sbie dla usługi aktualizacji automatycznych systemu Windows</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="64"/>
@@ -5617,7 +5617,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Views/SbieView.cpp" line="1217"/>
         <source>&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1219"/>
@@ -5658,7 +5658,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Views/SbieView.cpp" line="1068"/>
         <location filename="Views/SbieView.cpp" line="1459"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Archiwum 7-Zip (*.7z);; Archiwum zip (*.zip)</translation>
     </message>
     <message>
         <source>This name is already in use, please select an alternative box name</source>
@@ -7241,12 +7241,12 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
         <location filename="Windows/TestProxyDialog.cpp" line="98"/>
         <location filename="Windows/TestProxyDialog.cpp" line="246"/>
         <source>[%1] Test passed.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Test został ukończony pomyślnie.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="103"/>
         <source>[%1] Connection to proxy server failed: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Połączenie z serwerem proxy nie powiodło się: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="104"/>
@@ -7254,52 +7254,52 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
         <location filename="Windows/TestProxyDialog.cpp" line="252"/>
         <location filename="Windows/TestProxyDialog.cpp" line="259"/>
         <source>[%1] Test failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Test nie powiódł się.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="114"/>
         <source>[%1] Starting Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Rozpoczynanie Testu 2: Połączenie poprzez serwer proxy</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="141"/>
         <source>[%1] Authentication was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Uwierzytelnienie zostało wykonane pomyślnie.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="142"/>
         <source>[%1] Connection to %2 established through the proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Połączenie z %2 zostało nawiązane poprzez serwer proxy.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="146"/>
         <source>[%1] Loading a web page to test the proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Wczytywanie strony internetowej w celu testowania serwera proxy.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="152"/>
         <source>[%1] %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="157"/>
         <source>[%1] Connection through proxy server failed: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Połączenie poprzez serwer proxy nie powiodło się: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="191"/>
         <source>[%1] Web page loaded successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Strona internetowa została pomyślnie załadowana.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="196"/>
         <source>Timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas wygaśnięcia</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="197"/>
         <source>[%1] Failed to load web page: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Nie udało się załadować strony internetowej: %2.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="214"/>

@@ -19,7 +19,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 			pBoxEx->m_pRecoveryWnd->AddFile(FilePath, BoxPath);
 
 			pBoxEx->m_pRecoveryWnd->setModal(true);
-			pBoxEx->m_pRecoveryWnd->exec();
+			pBoxEx->m_pRecoveryWnd->show();
 		}
 		else
 		{

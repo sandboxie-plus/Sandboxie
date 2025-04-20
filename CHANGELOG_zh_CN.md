@@ -3,6 +3,22 @@
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
 
+## [1.15.12 / 5.70.12] - 2025-04-??
+
+### 更改
+- 修正了沙盒列表中的异常排序问题 [#4615](https://github.com/sandboxie-plus/Sandboxie/issues/4615)
+
+### 修复
+- 修复了“在沙盒中运行”选择提示未显示 BoxAlias 的问题 [#4709](https://github.com/sandboxie-plus/Sandboxie/issues/4709)
+- 修复了使用 Ctrl+F 后，沙盒分组的展开和关闭记录被打乱的问题 [#4708](https://github.com/sandboxie-plus/Sandboxie/issues/4708)
+- 为注册表的 set/get 函数添加了额外的检查
+- 修复了 Pool_Alloc 中的问题
+- 修复了 SbieCtrl.exe 在 Process Explorer 中持续维持 3.2MB/s IO 速率的问题 [#4693](https://github.com/sandboxie-plus/Sandboxie/issues/4693)
+- 修复了腾讯 TIM 模板导致无法使用拖放功能的问题 [#4688](https://github.com/sandboxie-plus/Sandboxie/issues/4688)
+- 改进了 Sandboxie.ini 文件很大时响应速度变慢的问题 [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
+- 修复了 Msi 安装过程中无法在 Data Protection Box 创建 AppData\Romaing\Microsoft 文件夹的问题 [#4711](https://github.com/sandboxie-plus/Sandboxie/issues/4711)
+
+
 ## [1.15.11 / 5.70.11] - 2025-04-16
 
 ### 修复

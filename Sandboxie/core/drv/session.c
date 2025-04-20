@@ -420,9 +420,6 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
     if (proc)
         return STATUS_NOT_IMPLEMENTED;
 
-    if (!MyIsCallerSigned())
-        return STATUS_ACCESS_DENIED;
-
     //
     // get status
     //
@@ -439,12 +436,16 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
 
     in_flag = args->set_flag.val;
     if (in_flag) {
+
+        if (!MyIsCallerSigned())
+            return STATUS_ACCESS_DENIED;
+
         ProbeForRead(in_flag, sizeof(ULONG), sizeof(ULONG));
         ULONG in_flag_value = *in_flag;
         if (in_flag_value) {
 
             if (! Session_CheckAdminAccess2(L"ForceDisableAdminOnly"))
-                    return STATUS_ACCESS_DENIED;
+                return STATUS_ACCESS_DENIED;
             KeQuerySystemTime(&time);
 
         } else

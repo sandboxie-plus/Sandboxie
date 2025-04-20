@@ -1063,7 +1063,7 @@ bool COptionsWindow::apply()
 	else
 	{
 		if (m_GeneralChanged) {
-			CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+			auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 			if (ui.chkEncrypt->isChecked() && !QFile::exists(pBoxEx->GetBoxImagePath())) {
 				if (m_Password.isEmpty())
 					OnSetPassword();

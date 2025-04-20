@@ -52,10 +52,10 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		SetBool("BlockNetworkFiles", true);
 
 		// recovery
-		InsertText("RecoverFolder", "%Desktop%");
-		//InsertText("RecoverFolder", "%Favorites%"); // obsolete
-		InsertText("RecoverFolder", "%Personal%");
-		InsertText("RecoverFolder", "%{374DE290-123F-4565-9164-39C4925E467B}%"); // %USERPROFILE%\Downloads
+		AppendText("RecoverFolder", "%Desktop%");
+		//AppendText("RecoverFolder", "%Favorites%"); // obsolete
+		AppendText("RecoverFolder", "%Personal%");
+		AppendText("RecoverFolder", "%{374DE290-123F-4565-9164-39C4925E467B}%"); // %USERPROFILE%\Downloads
 
 		SetText("BorderColor", "#00FFFF,ttl"); // "#00FFFF,off"
 	}
@@ -63,25 +63,25 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	if (cfglvl < 6)
 	{
 		// templates L6
-		InsertText("Template", "AutoRecoverIgnore");
-		//InsertText("Template", "Firefox_Phishing_DirectAccess");
-		//InsertText("Template", "Chrome_Phishing_DirectAccess");
-		InsertText("Template", "LingerPrograms");
+		AppendText("Template", "AutoRecoverIgnore");
+		//AppendText("Template", "Firefox_Phishing_DirectAccess");
+		//AppendText("Template", "Chrome_Phishing_DirectAccess");
+		AppendText("Template", "LingerPrograms");
 	}
 
 	if (cfglvl < 7)
 	{
 		// templates L7
-		InsertText("Template", "BlockPorts");
-		//InsertText("Template", "WindowsFontCache"); // since 5.46.3 open by driver
-		InsertText("Template", "qWave");
+		AppendText("Template", "BlockPorts");
+		//AppendText("Template", "WindowsFontCache"); // since 5.46.3 open by driver
+		AppendText("Template", "qWave");
 	}
 
 	if (cfglvl < 8)
 	{
 		// templates L8
-		InsertText("Template", "FileCopy");
-		InsertText("Template", "SkipHook");
+		AppendText("Template", "FileCopy");
+		AppendText("Template", "SkipHook");
 	}
 	
 	if (cfglvl < 9)
@@ -89,7 +89,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		// fix the unfortunate typo
 		if (GetTextList("Template", false).contains("FileCppy"))
 		{
-			InsertText("Template", "FileCopy");
+			AppendText("Template", "FileCopy");
 			DelValue("Template", "FileCppy");
 		}
 
@@ -99,7 +99,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		if (GetBool("DropAdminRights", false) == false) 
 		{
 			// enable those templates only for non hardened boxes
-			InsertText("Template", "OpenBluetooth");
+			AppendText("Template", "OpenBluetooth");
 		}
 	}
 
@@ -108,7 +108,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		// starting with 5.62.3 OpenProtectedStorage is a template
 		if (GetBool("OpenProtectedStorage")) {
 			DelValue("OpenProtectedStorage");
-			InsertText("Template", "OpenProtectedStorage");
+			AppendText("Template", "OpenProtectedStorage");
 		}
 	}
 
@@ -122,13 +122,18 @@ CSandBox::~CSandBox()
 
 void CSandBox::UpdateDetails()
 {
-	auto res = m_pAPI->ImBoxQuery(m_RegPath);
-	if (res.IsError()) {
-		m_Mount.clear();
-		return;
+	if (!GetBool("UseRamDisk") && !GetBool("UseFileImage"))
+	{
+		auto res = m_pAPI->ImBoxQuery(m_RegPath);
+		if (res.IsError()) {
+			m_Mount.clear();
+			return;
+		}
+		QVariantMap Info = res.GetValue();
+		m_Mount = Info["DiskRoot"].toString();
 	}
-	QVariantMap Info = res.GetValue();
-	m_Mount = Info["DiskRoot"].toString();
+	else if(!m_Mount.isEmpty())
+		m_Mount.clear();
 }
 
 void CSandBox::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)

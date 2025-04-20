@@ -205,7 +205,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			Index = Find(m_Root, pNode);
 		}
 
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
 		int Col = 0;
 		bool State = false;
@@ -562,6 +562,16 @@ QVariant CSbieModel::GetID(const QModelIndex &index) const
 		return CSbieModel__RemoveGroupMark(pNode->ID.toString());
 
 	return pNode->ID;
+}
+
+QModelIndex CSbieModel::FindGroupIndex(const QString& Name) const
+{
+	QVariant ID = CSbieModel__AddGroupMark(Name);
+	QHash<QVariant, STreeNode*>::const_iterator I = m_Map.find(ID);
+	if (I == m_Map.end())
+		return QModelIndex();
+
+	return Find(m_Root, I.value());
 }
 
 CSbieModel::ETypes CSbieModel::GetType(const QModelIndex &index) const

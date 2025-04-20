@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.15.12 / 5.70.12] - 2025-04-??
+
+### Changed
+- Weird sort in the Move Sandbox list [#4615](https://github.com/sandboxie-plus/Sandboxie/issues/4615)
+
+### Fixed
+- fixed the 'run in box' selection prompt not show BoxAlias [#4709](https://github.com/sandboxie-plus/Sandboxie/issues/4709)
+- fixed After Ctrl+F, the expansion and closure records of the Box Group were disrupted [#4708](https://github.com/sandboxie-plus/Sandboxie/issues/4708)
+- added additional checks to registry set/get functions
+- fixed issue in Pool_Alloc
+- fixed SbieCtrl.exe has a constantly 3.2MB/s IO rate in the Process Explorer [#4693](https://github.com/sandboxie-plus/Sandboxie/issues/4693)
+- fixed Template for Tencent TIM cause Drag&Drop not available [#4688](https://github.com/sandboxie-plus/Sandboxie/issues/4688)
+- improved when Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
+- fixed Msi install Can`t create AppData\Romaing\Microsoft folder in Data Protection Box [#4711](https://github.com/sandboxie-plus/Sandboxie/issues/4711)
+
+
 
 ## [1.15.11 / 5.70.11] - 2025-04-16
 
@@ -1834,6 +1850,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - the Security Hardened icons are now repurposed for the new Super Extra Security Hardened Box Mode
   - Note: the new enhanced security features require a supporter certificate
 - added browse option to the "force process" tab
+- added support reminder dialog
 
 ### Changed
 - replaced the "DeviceSecurity" template with a dedicated setting "RestrictDevices=y"

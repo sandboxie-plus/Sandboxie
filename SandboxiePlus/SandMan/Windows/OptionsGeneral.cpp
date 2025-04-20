@@ -180,7 +180,7 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbVersion->addItem(tr("Version 1"));
 	ui.cmbVersion->addItem(tr("Version 2"));
 
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 	bool bEmpty = pBoxEx ? pBoxEx->IsEmpty() : true;
 	ui.lblWhenEmpty->setVisible(!bEmpty);
 	ui.lblScheme->setEnabled(bEmpty);
@@ -360,7 +360,7 @@ void COptionsWindow::LoadGeneral()
 		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
 	ui.chkForceProtection->setEnabled(ui.chkEncrypt->isEnabled() && ui.chkEncrypt->isChecked());
 
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx && QFile::exists(pBoxEx->GetBoxImagePath())) 
 	{
 		if (!ui.btnPassword->menu()) {
@@ -1003,7 +1003,7 @@ QString COptionsWindow::GetActionFile()
 	QString Action = ui.cmbDblClick->currentData().toString();
 	if (Action.isEmpty()) Action = ui.cmbDblClick->currentText();
 	if (!Action.isEmpty() && Action.left(1) != "!") {
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+		auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 		if (pBoxEx) {
 			QString Path = pBoxEx->GetCommandFile(Action);
 			ui.btnBorderColor->setIcon(LoadWindowsIcon(Path, 0));
@@ -1044,7 +1044,7 @@ void COptionsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 	
 	QVariantMap Entry;
 	Entry["Name"] = Name;
@@ -1203,7 +1203,7 @@ void COptionsWindow::OnDiskChanged()
 	}
 	else {
 		ui.chkEncrypt->setEnabled(true);
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+		auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 		ui.btnPassword->setEnabled(ui.chkEncrypt->isChecked() && pBoxEx && pBoxEx->GetMountRoot().isEmpty());
 		ui.chkForceProtection->setEnabled(ui.chkEncrypt->isChecked());
 	}
@@ -1234,7 +1234,7 @@ bool COptionsWindow::RunImBox(const QStringList& Arguments)
 
 void COptionsWindow::OnSetPassword()
 {
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 	bool bNew = !QFile::exists(pBoxEx->GetBoxImagePath());
 	CBoxImageWindow window(bNew ? CBoxImageWindow::eNew : CBoxImageWindow::eChange, this);
 	if (bNew) window.SetImageSize(m_ImageSize);
@@ -1260,7 +1260,7 @@ void COptionsWindow::OnSetPassword()
 
 void COptionsWindow::OnBackupHeader()
 {
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 
 	QString FileName = QFileDialog::getSaveFileName(theGUI, tr("Backup Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
 
@@ -1275,7 +1275,7 @@ void COptionsWindow::OnBackupHeader()
 
 void COptionsWindow::OnRestoreHeader()
 {
-	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	auto pBoxEx = m_pBox.objectCast<CSandBoxPlus>();
 
 	QString FileName = QFileDialog::getOpenFileName(theGUI, tr("Restore Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
 

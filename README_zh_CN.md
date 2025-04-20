@@ -75,10 +75,10 @@ Sandboxie Classic 采用了不再开发的基于 MFC 的旧版界面，因此它
 
 Sandboxie 的功能可以通过以下专业工具进行增强：
 
-* [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - 为 Sandboxie 的跟踪日志添加详细输出，列出相关 Windows API 函数的调用情况
-* [SbieHide](https://github.com/VeroFess/SbieHide) - 尝试隐藏 SbieDll.dll 在被沙盒化应用中的存在
-* [SandboxToys2](https://github.com/blap/SandboxToys2) - 允许监控沙盒内的文件和注册表更改
-* [Sbiextra](https://github.com/sandboxie-plus/sbiextra) - 对沙盒进程添加额外的用户模式限制
+  * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - 为 Sandboxie 的跟踪日志添加详细输出，列出相关 Windows API 函数的调用情况
+  * [SbieHide](https://github.com/VeroFess/SbieHide) - 尝试隐藏 SbieDll.dll 在被沙盒化应用中的存在
+  * [SandboxToys2](https://github.com/blap/SandboxToys2) - 允许监控沙盒内的文件和注册表更改
+  * [Sbiextra](https://github.com/sandboxie-plus/sbiextra) - 对沙盒进程添加额外的用户模式限制
 
 
 ## 📌 项目历史

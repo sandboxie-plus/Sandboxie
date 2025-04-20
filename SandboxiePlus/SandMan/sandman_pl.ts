@@ -7304,38 +7304,38 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="214"/>
         <source>[%1] Starting Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Rozpoczynam test 3: Opóźnienie serwera proxy </translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="245"/>
         <source>[%1] Latency through proxy server: %2ms.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Opóźnienie poprzez serwer proxy: %2 ms.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="251"/>
         <source>[%1] Failed to get proxy server latency: Request timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Nie można uzyskać opóźnienia serwera proxy: przekroczono limit czasu żądania.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="258"/>
         <source>[%1] Failed to get proxy server latency.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Nie udało się uzyskać opóźnienia serwera proxy.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="287"/>
         <source>[%1] Test Finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Test zakończony.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="300"/>
         <location filename="Windows/TestProxyDialog.cpp" line="337"/>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatrzymano</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="309"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatrzymaj</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="312"/>
@@ -7344,42 +7344,46 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
 	Address:		%2
 	Protocol:		%3
 	Authentication:	%4%5</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Testy rozpoczęte...
+	Serwer proxy
+	Adres: %2
+	Protokół: %3
+	Uwierzytelnianie: %4%5</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="332"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponów próbę</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="341"/>
         <source>Test Passed</source>
-        <translation type="unfinished"></translation>
+        <translation>Test zaliczony</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="347"/>
         <source>Test Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Test nieudany</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="360"/>
         <source>Invalid Timeout value. Please enter a value between 1 and 60.</source>
-        <translation type="unfinished"></translation>
+        <translation>Błędna wartość czasu限. Proszę wpisać wartość między 1 a 60. </translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="367"/>
         <source>Invalid Port value. Please enter a value between 1 and 65535.</source>
-        <translation type="unfinished"></translation>
+        <translation>Błędna wartość portu. Proszę wpisać wartość między 1 a 65535.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="373"/>
         <source>Invalid Host value. Please enter a valid host name excluding &apos;http[s]://&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieprawidłowa wartość hosta. Podaj prawidłową nazwę hosta z wyłączeniem &apos;http[s]://&apos;.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="379"/>
         <source>Invalid Ping Count value. Please enter a value between 1 and 10.</source>
-        <translation type="unfinished"></translation>
+        <translation>Błędna wartość liczby pingów. Proszę wprowadzić wartość z zakresu od 1 do 10.</translation>
     </message>
 </context>
 <context>
@@ -7654,7 +7658,7 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
         <location filename="Forms/CompressDialog.ui" line="75"/>
         <source>Export Sandbox to an archive, choose your compression rate and customize additional compression settings.</source>
         <oldsource>Export Sandbox to a archive, Choose Your Compression Rate and Customize Additional Compression Settings.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuj piaskownicę do archiwum, wybierz poziom kompresji i dostosuj dodatkowe ustawienia kompresji.</translation>
     </message>
     <message>
         <source>Export Sandbox to a 7z or Zip archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
@@ -7667,33 +7671,33 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Forms/ExtractDialog.ui" line="14"/>
         <source>Extract Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyodrębnij pliki</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="59"/>
         <source>Import Sandbox from an archive</source>
         <oldsource>Export Sandbox from an archive</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Importuj piaskownicę z archiwum</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="49"/>
         <source>Import Sandbox Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa importowanej piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="22"/>
         <source>Box Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Główny folder piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="82"/>
         <source>Import without encryption</source>
-        <translation type="unfinished"></translation>
+        <translation>Import bez szyfrowania</translation>
     </message>
 </context>
 <context>
@@ -7756,7 +7760,7 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Forms/OptionsWindow.ui" line="834"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapobiegaj ingerencji procesów w piaskownicy w operacje związane z zasilaniem (Eksperymentalnie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="737"/>
@@ -7766,12 +7770,12 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Forms/OptionsWindow.ui" line="844"/>
         <source>Prevent interference with the user interface (Experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapobiegaj ingerencji w interfejs użytkownika (Eksperymentalnie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="861"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapobiegaj przechwytywaniu obrazów okien przez procesy w piaskownicy (Eksperymentalnie, może powodować usterki interfejsu użytkownika)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4093"/>
@@ -7909,7 +7913,7 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
         <location filename="Forms/OptionsWindow.ui" line="329"/>
         <source>Auto delete content changes when last sandboxed process terminates</source>
         <oldsource>Auto delete content when last sandboxed process terminates</oldsource>
-        <translation type="unfinished">Automatycznie opróżnij piaskownicę, gdy ostatni program zostanie zakończony</translation>
+        <translation>Automatyczne usuwanie zmian w zawartości po zakończeniu ostatniego procesu w piaskownicy.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="536"/>
@@ -8409,33 +8413,33 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4793"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Te polecenia są uruchamiane poza piaskownicą po zakończeniu wszystkich procesów w piaskownicy.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4997"/>
         <source>Process Hiding</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrywanie procesów</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5141"/>
         <source>Use a custom Locale/LangID</source>
-        <translation type="unfinished"></translation>
+        <translation>Używanie niestandardowego Locale/LangID</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5134"/>
         <source>Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ochröna danych</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5108"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wyeksportuj aktualne tabele firmware do HKCU\System\SbieCustom</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5111"/>
         <source>Dump FW Tables</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyeksportuj tabele FW</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5181"/>
@@ -8769,7 +8773,7 @@ zamiast &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="4486"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
-        <translation type="unfinished">Zapobieganie ładowaniu dll&apos;ów z piaskownicy przez programy zainstalowane na hoście</translation>
+        <translation>Zapobiegaj ładowaniu bibliotek DLL z piaskownicy przez programy działające w piaskownicy, zainstalowane na hoscie.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4425"/>

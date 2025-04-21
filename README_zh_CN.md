@@ -154,7 +154,7 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 ## 🌏 翻译人员
 
 - czoins - 阿拉伯语
-- yuhao2348732、0x391F、nkh0472、yfdyh000、gexgd0419、Zerorigin、UnnamedOrange、DevSplash、Becods、okrc、4rt3mi5、sepcnt、fzxx - 简体中文
+- yuhao2348732、0x391F、nkh0472、yfdyh000、gexgd0419、Zerorigin、UnnamedOrange、DevSplash、Becods、okrc、4rt3mi5、sepcnt、风之暇想 - 简体中文
 - TragicLifeHu、Hulen、xiongsp - 繁体中文
 - RockyTDR - 荷兰语
 - clexanis、Mmoi-Fr、hippalectryon-0、Monsieur Pissou - 法语（通过电子邮件提供）

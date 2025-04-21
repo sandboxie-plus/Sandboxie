@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Indonesian translation to the Plus UI [4bad4d1](https://github.com/sandboxie-plus/Sandboxie/commit/4bad4d190a90a6329d549e5a31ca8ee13b4eb9a1) (thanks ???)
-- added Template for WeType Input Method (IME) [#4715](https://github.com/sandboxie-plus/Sandboxie/pull/4715) (thanks  bot-1450)
+- added Template for WeType Input Method (IME) [#4715](https://github.com/sandboxie-plus/Sandboxie/pull/4715) (thanks bot-1450)
 
 ### Changed
 - Weird sort in the Move Sandbox list [#4615](https://github.com/sandboxie-plus/Sandboxie/issues/4615)
@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Template for Tencent TIM cause Drag&Drop not available [#4688](https://github.com/sandboxie-plus/Sandboxie/issues/4688)
 - improved when Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
 - fixed Msi install Can`t create AppData\Romaing\Microsoft folder in Data Protection Box [#4711](https://github.com/sandboxie-plus/Sandboxie/issues/4711)
-- fixed two errors in Sandboxie about time speeding and add two time function hook [#4721](https://github.com/sandboxie-plus/Sandboxie/pull/4721) (thanks  pwnmelife)
+- fixed two errors in Sandboxie about time speeding and add two time function hook [#4721](https://github.com/sandboxie-plus/Sandboxie/pull/4721) (thanks pwnmelife)
 
 ### Removed
 - removed the not-working "delete content" button [#4720](https://github.com/sandboxie-plus/Sandboxie/pull/4720) (thanks habatake)

@@ -9,14 +9,14 @@
 - 修正了沙盒列表中的异常排序问题 [#4615](https://github.com/sandboxie-plus/Sandboxie/issues/4615)
 
 ### 修复
-- 修复了“在沙盒中运行”选择提示未显示 BoxAlias 的问题 [#4709](https://github.com/sandboxie-plus/Sandboxie/issues/4709)
+- 修复了“在沙盒中运行”选择提示未显示沙盒别名的问题 [#4709](https://github.com/sandboxie-plus/Sandboxie/issues/4709)
 - 修复了使用 Ctrl+F 后，沙盒分组的展开和关闭记录被打乱的问题 [#4708](https://github.com/sandboxie-plus/Sandboxie/issues/4708)
 - 为注册表的 set/get 函数添加了额外的检查
 - 修复了 Pool_Alloc 中的问题
 - 修复了 SbieCtrl.exe 在 Process Explorer 中持续维持 3.2MB/s IO 速率的问题 [#4693](https://github.com/sandboxie-plus/Sandboxie/issues/4693)
 - 修复了腾讯 TIM 模板导致无法使用拖放功能的问题 [#4688](https://github.com/sandboxie-plus/Sandboxie/issues/4688)
 - 改进了 Sandboxie.ini 文件很大时响应速度变慢的问题 [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
-- 修复了 Msi 安装过程中无法在 Data Protection Box 创建 AppData\Romaing\Microsoft 文件夹的问题 [#4711](https://github.com/sandboxie-plus/Sandboxie/issues/4711)
+- 修复了 Msi 安装过程中无法在数据保护沙盒中创建 AppData\Romaing\Microsoft 文件夹的问题 [#4711](https://github.com/sandboxie-plus/Sandboxie/issues/4711)
 
 
 ## [1.15.11 / 5.70.11] - 2025-04-16
@@ -186,7 +186,7 @@
 
 ### 更改
 - 改进支持通知
-- 改进删除 Sandboxie Plus 残余文件的功能 [#4374](https://github.com/sandboxie-plus/Sandboxie/pull/4374)
+- 改进卸载 Sandboxie Plus 残余文件的问题 [#4374](https://github.com/sandboxie-plus/Sandboxie/pull/4374)
 
 ### 修复
 - 修复 ARM64 平台上的 SSL 问题，导致更新程序和证书检索失败
@@ -200,7 +200,7 @@
 - 添加 "DiskSerialNumber=DeviceName,1234-ABCD" 以设置单个沙箱的磁盘序列号（感谢 Yeyixiao)
 - 添加在全局设置的编辑框中隐藏证书的功能（灵感来自 Yeyixiao)
 - 添加同时在多个沙箱中打开程序的功能 [#4231](https://github.com/sandboxie-plus/Sandboxie/issues/4231)
-- 在沙箱设置中添加 "Description" 字段 [#4243](https://github.com/sandboxie-plus/Sandboxie/issues/4243)
+- 在沙箱设置中添加 "描述（Description）" 字段 [#4243](https://github.com/sandboxie-plus/Sandboxie/issues/4243)
 - 添加 "NotifyMsiInstaller=y"，默认启用以在沙箱中运行没有推荐排除项的 MSI 安装程序时显示消息 SBIE2194 [#4330](https://github.com/sandboxie-plus/Sandboxie/issues/4330)
   - SBIE2194： MSI 安装程序需要在 INI 中设置 'MsiInstallerExemptions=y' 选项才能正确工作，然而此选项会削弱隔离。
 - 添加隐藏已安装程序的选项 [#4139](https://github.com/sandboxie-plus/Sandboxie/issues/4139)

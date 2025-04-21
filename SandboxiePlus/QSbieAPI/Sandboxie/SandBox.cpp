@@ -122,7 +122,7 @@ CSandBox::~CSandBox()
 
 void CSandBox::UpdateDetails()
 {
-	if (!GetBool("UseRamDisk") && !GetBool("UseFileImage"))
+	if (!GetBool("UseRamDisk") || !GetBool("UseFileImage"))
 	{
 		auto res = m_pAPI->ImBoxQuery(m_RegPath);
 		if (res.IsError()) {

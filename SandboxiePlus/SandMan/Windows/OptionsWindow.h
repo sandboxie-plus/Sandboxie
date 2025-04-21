@@ -466,6 +466,7 @@ protected:
 	void CloseNetFwEdit(bool bSave = true);
 	void CloseNetFwEdit(QTreeWidgetItem* pItem, bool bSave = true);
 	ENetWfProt GetFwRuleProt(const QString& Value);
+	QString GetFwRuleProtStr(ENetWfProt Prot);
 	ENetWfAction GetFwRuleAction(const QString& Value);
 	QString GetFwRuleActionStr(ENetWfAction Action);
 	void LoadNetFwRules();

@@ -600,6 +600,17 @@ COptionsWindow::ENetWfProt COptionsWindow::GetFwRuleProt(const QString& Value)
 	return eAny;
 }
 
+QString COptionsWindow::GetFwRuleProtStr(ENetWfProt Prot)
+{
+	switch (Prot)
+	{
+	case eTcp:  return "TCP";
+	case eUdp:  return "UDP";
+	case eIcmp: return "ICMP";
+	case eAny:  return "Any";
+	}
+	return "";
+}
 void COptionsWindow::ParseAndAddFwRule(const QString& Value, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
@@ -659,9 +670,10 @@ void COptionsWindow::SaveNetFwRules()
 		ENetWfAction Action = (ENetWfAction)pItem->data(1, Qt::UserRole).toInt();
 		QString Port = pItem->data(2, Qt::UserRole).toString();
 		QString IP = pItem->data(3, Qt::UserRole).toString();
-		QString Prot = pItem->text(4);
+		ENetWfProt Prot = (ENetWfProt)pItem->data(4, Qt::UserRole).toInt();
 
 		QString Temp = GetFwRuleActionStr(Action);
+		QString Protocol = GetFwRuleProtStr(Prot);
 		//if (Program.contains("=") || Program.contains(";") || Program.contains(",")) // todo: make SBIE parses this properly
 		//	Program = "\'" + Program + "\'"; 
 		if (Program.isEmpty())
@@ -670,7 +682,7 @@ void COptionsWindow::SaveNetFwRules()
 		QStringList Tags = QStringList(Temp);
 		if (!Port.isEmpty()) Tags.append("Port=" + Port);
 		if (!IP.isEmpty()) Tags.append("Address=" + IP);
-		if (!Prot.isEmpty()) Tags.append("Protocol=" + Prot);
+		if (!Protocol.isEmpty()) Tags.append("Protocol=" + Protocol);
 
 		if(pItem->checkState(0) == Qt::Checked)
 			Rules.append(Tags.join(";"));

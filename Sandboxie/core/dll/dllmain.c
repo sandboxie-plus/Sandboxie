@@ -150,6 +150,7 @@ const WCHAR *DllName_secur32    = L"secur32.dll";
 const WCHAR *DllName_sspicli    = L"sspicli.dll";
 const WCHAR *DllName_mscoree    = L"mscoree.dll";
 const WCHAR *DllName_ntmarta    = L"ntmarta.dll";
+const WCHAR *DllName_winmm      = L"winmm.dll";
 
 
 //---------------------------------------------------------------------------

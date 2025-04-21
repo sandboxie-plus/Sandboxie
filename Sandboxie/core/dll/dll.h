@@ -350,6 +350,7 @@ extern const WCHAR *DllName_secur32;
 extern const WCHAR *DllName_sspicli;
 extern const WCHAR *DllName_mscoree;
 extern const WCHAR *DllName_ntmarta;
+extern const WCHAR *DllName_winmm;
 
 
 #define DllName_ole32_or_combase \

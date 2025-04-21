@@ -119,8 +119,7 @@ extern POOL* Dll_Pool;
 
 static HASH_MAP Kernel_DiskSN;
 static CRITICAL_SECTION Kernel_DiskSN_CritSec;
-
-
+static ULONG64 Dll_FirstGetTickCountValue = 0;
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -230,6 +229,8 @@ _FX BOOLEAN Kernel_Init()
 	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE)) {
 
 		SBIEDLL_HOOK(Kernel_, GetTickCount);
+		Dll_FirstGetTickCountValue = __sys_GetTickCount();
+
 		void* GetTickCount64 = GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32, "GetTickCount64");
 		if (GetTickCount64) {
 			SBIEDLL_HOOK(Kernel_, GetTickCount64) 
@@ -326,9 +327,13 @@ _FX DWORD Kernel_GetTickCount()
 {
 	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1);
 	ULONG low = SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
-	if (low != 0)
-		return __sys_GetTickCount() * add / low;
-	return __sys_GetTickCount() * add;
+	ULONG64 count = __sys_GetTickCount();
+	
+	if(add != 0 && low != 0) {
+		count = Dll_FirstGetTickCountValue + (count - Dll_FirstGetTickCountValue) * add / low; // multi
+	}
+
+	return (DWORD)count;
 }
 
 
@@ -341,7 +346,7 @@ _FX ULONGLONG Kernel_GetTickCount64()
 {
 	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1);
 	ULONG low = SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
-	if (low != 0)
+	if (add != 0 && low != 0)
 		return __sys_GetTickCount64() * add / low;
 	return __sys_GetTickCount64() * add;
 }
@@ -357,7 +362,7 @@ _FX BOOL Kernel_QueryUnbiasedInterruptTime(PULONGLONG UnbiasedTime)
 	BOOL rtn = __sys_QueryUnbiasedInterruptTime(UnbiasedTime);
 	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTickSpeed", 1);
 	ULONG low = SbieApi_QueryConfNumber(NULL, L"LowTickSpeed", 1);
-	if (low != 0)
+	if (add != 0 && low != 0)
 		*UnbiasedTime *= add / low;
 	else
 		*UnbiasedTime *= add;
@@ -375,7 +380,7 @@ _FX DWORD Kernel_SleepEx(DWORD dwMiSecond, BOOL bAlert)
 	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddSleepSpeed", 1);
 	ULONG low = SbieApi_QueryConfNumber(NULL, L"LowSleepSpeed", 1);
 	if (add != 0 && low != 0)
-		return __sys_SleepEx(dwMiSecond * add / low, bAlert);
+		return __sys_SleepEx(dwMiSecond * low / add, bAlert);
 	return __sys_SleepEx(dwMiSecond, bAlert);
 }
 

@@ -121,6 +121,9 @@ static BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason);
 
 static UINT_PTR Gui_SetTimer(HWND hWnd, UINT_PTR nIDEvent, UINT uElapse, TIMERPROC lpTimerFunc);
 
+static DWORD Wimm_timeGetTime(); 
+
+static MMRESULT Wimm_timeSetEvent(UINT uDelay, UINT uResolution, LPTIMECALLBACK lpTimeProc, DWORD_PTR dwUser, UINT fuEvent);
 //---------------------------------------------------------------------------
 
 
@@ -156,7 +159,7 @@ typedef DPI_AWARENESS_CONTEXT (WINAPI *P_GetThreadDpiAwarenessContext)(
 
 static P_GetThreadDpiAwarenessContext __sys_GetThreadDpiAwarenessContext = NULL;
 
-
+static ULONG64 Dll_FirsttimeGetTimeValue = 0;
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -296,9 +299,26 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
     }
 	
 	if (SbieApi_QueryConfBool(NULL, L"UseChangeSpeed", FALSE)) 	{
-		P_SetTimer SetTimer = Ldr_GetProcAddrNew(DllName_user32, "SetTimer", "SetTimer");
+		P_SetTimer SetTimer = Ldr_GetProcAddrNew(DllName_user32, L"SetTimer", "SetTimer");
         if (SetTimer) {
             SBIEDLL_HOOK(Gui_, SetTimer);
+        }
+
+        // hook winmm timeGetTime and timeSetEvent
+        if(GetModuleHandle(DllName_winmm) == NULL)
+        {
+            LoadLibrary(DllName_winmm);
+        }
+
+        P_timeGetTime timeGetTime = (P_timeGetTime)Ldr_GetProcAddrNew(DllName_winmm, L"timeGetTime", "timeGetTime");
+        if (timeGetTime) {
+            SBIEDLL_HOOK(Wimm_, timeGetTime);
+            Dll_FirsttimeGetTimeValue = __sys_timeGetTime();
+        }
+
+        P_timeSetEvent timeSetEvent = (P_timeSetEvent)Ldr_GetProcAddrNew(DllName_winmm, L"timeSetEvent", "timeSetEvent");
+        if(timeSetEvent) {
+            SBIEDLL_HOOK(Wimm_, timeSetEvent);
         }
 	}
 	
@@ -1658,13 +1678,48 @@ _FX BOOL Gui_ShutdownBlockReasonCreate(HWND hWnd, LPCWSTR pwszReason)
 _FX UINT_PTR Gui_SetTimer(HWND hWnd, UINT_PTR nIDEvent, UINT uElapse, TIMERPROC lpTimerFunc)
 {
 	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1);
-	if (add != 0 && low != 0)
-		return __sys_SetTimer(hWnd, nIDEvent, uElapse * add / low, lpTimerFunc);
-	else
-		return 0;
+	if (add != 0 && low != 0) {
+        UINT64 newElapse = uElapse;
+        newElapse = newElapse * low / add;
+		return __sys_SetTimer(hWnd, nIDEvent, (UINT)newElapse, lpTimerFunc);
+    }
+
+	return 0;
+}
+
+//---------------------------------------------------------------------------
+// WINMM_timeGetTime
+//---------------------------------------------------------------------------
+
+
+_FX DWORD Wimm_timeGetTime()
+{
+    ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1);
+    ULONG64 time = __sys_timeGetTime();
+    if(add != 0 && low != 0) {
+        time = Dll_FirsttimeGetTimeValue + (time - Dll_FirsttimeGetTimeValue) * add / low; // multi
+    }
+    
+    return (DWORD)time;
 }
 
 
+//---------------------------------------------------------------------------
+// WINMM_timeSetEvent
+//---------------------------------------------------------------------------
+
+
+_FX MMRESULT Wimm_timeSetEvent(UINT uDelay, UINT uResolution, LPTIMECALLBACK lpTimeProc, DWORD_PTR dwUser, UINT fuEvent)
+{
+	ULONG add = SbieApi_QueryConfNumber(NULL, L"AddTimerSpeed", 1), low = SbieApi_QueryConfNumber(NULL, L"LowTimerSpeed", 1);
+	if (add != 0 && low != 0) {
+        UINT64 newDelay = uDelay;
+        newDelay = newDelay * low / add;
+        return __sys_timeSetEvent((UINT)newDelay, uResolution, lpTimeProc, dwUser, fuEvent);
+    }
+	
+    return 0;
+}
 //---------------------------------------------------------------------------
 // Gui_ShowCursor
 //---------------------------------------------------------------------------

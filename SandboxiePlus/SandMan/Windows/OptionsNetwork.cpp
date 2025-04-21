@@ -40,6 +40,7 @@ void COptionsWindow::CreateNetwork()
 	connect(ui.btnMoveProxyUp, SIGNAL(clicked(bool)), this, SLOT(OnNetProxyMoveUp()));
 	connect(ui.btnMoveProxyDown, SIGNAL(clicked(bool)), this, SLOT(OnNetProxyMoveDown()));
 	connect(ui.chkProxyResolveHostnames, SIGNAL(clicked(bool)), this, SLOT(OnProxyResolveHostnames()));
+	connect(ui.chkUseProxyThreads, SIGNAL(clicked(bool)), this, SLOT(OnNetworkChanged()));
 	connect(ui.treeProxy, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnNetProxyItemDoubleClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeProxy, SIGNAL(itemSelectionChanged()), this, SLOT(OnNetProxySelectionChanged()));
 	ui.treeProxy->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeProxy, -1, this));
@@ -60,6 +61,14 @@ void COptionsWindow::CreateNetwork()
 	connect(ui.chkBlockDns, SIGNAL(clicked(bool)), this, SLOT(OnBlockDns()));
 	connect(ui.chkBlockSamba, SIGNAL(clicked(bool)), this, SLOT(OnBlockSamba()));
 
+	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnNetworkChanged()));
+	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnNetworkChanged()));
+
+	connect(ui.cmbNIC, SIGNAL(currentIndexChanged(int)), this, SLOT(OnAdapterChanged()));
+
+	connect(ui.txtIPv4, SIGNAL(textChanged(const QString&)), this, SLOT(OnNetworkChanged()));
+	connect(ui.txtIPv6, SIGNAL(textChanged(const QString&)), this, SLOT(OnNetworkChanged()));
+	
 	connect(ui.tabsInternet, SIGNAL(currentChanged(int)), this, SLOT(OnInternetTab()));
 
 	if (!g_CertInfo.opt_net) {
@@ -68,6 +77,8 @@ void COptionsWindow::CreateNetwork()
 	}
 
 	ui.chkProxyResolveHostnames->setVisible(false);
+	if (g_CertInfo.type != eCertDeveloper && !CERT_IS_TYPE(g_CertInfo, eCertEternal))
+		ui.chkUseProxyThreads->setVisible(false);
 }
 
 void COptionsWindow::OnBlockDns()
@@ -78,6 +89,110 @@ void COptionsWindow::OnBlockDns()
 void COptionsWindow::OnBlockSamba()
 { 
 	SetTemplate("BlockPorts", ui.chkBlockSamba->isChecked());
+}
+
+void COptionsWindow::LoadNetwork()
+{
+	ui.chkUseProxyThreads->setChecked(m_pBox->GetBool("UseProxyThreads", false));
+
+	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", false));
+	ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
+	
+	QStringList BindNICs = m_pBox->GetTextList("BindAdapter", false);
+	QString BindAdapter;
+	foreach(const QString& BindNIC, BindNICs) {
+		auto ProgNIC = Split2(BindNIC, ",");
+		if (!ProgNIC.second.isEmpty())
+			continue;
+		BindAdapter = ProgNIC.first;
+	}
+
+	ui.cmbNIC->clear();
+	ui.cmbNIC->addItem(tr("None (Don't bind to adapter)"));
+	QVariantList NICs = EnumNICs();
+	foreach(const QVariant& vNIC, NICs) {
+		QVariantMap NIC = vNIC.toMap();
+		ui.cmbNIC->addItem(NIC["Adapter"].toString(), NIC);
+		if (BindAdapter == NIC["Adapter"].toString())
+			ui.cmbNIC->setCurrentIndex(ui.cmbNIC->count() - 1);
+	}
+
+	OnAdapterChanged();
+
+	QStringList BindIPs = m_pBox->GetTextList("BindAdapterIP", false);
+	foreach(const QString& BindIP, BindIPs) {
+		auto ProgIP = Split2(BindIP, ",");
+		if (!ProgIP.second.isEmpty())
+			continue;
+		if (ProgIP.first.contains("."))
+			ui.txtIPv4->setText(ProgIP.first);
+		else if (ProgIP.first.contains(":"))
+			ui.txtIPv6->setText(ProgIP.first);
+	}
+
+	m_NetworkChanged = false;
+}
+
+void COptionsWindow::SaveNetwork()
+{
+	WriteAdvancedCheck(ui.chkUseProxyThreads, "UseProxyThreads", "y", "");
+	
+	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
+	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");
+
+	QStringList BindNICs = m_pBox->GetTextList("BindAdapter", false);
+	foreach(const QString& BindNIC, BindNICs) {
+		auto ProgNIC = Split2(BindNIC, ",");
+		if (!ProgNIC.second.isEmpty())
+			continue;
+		BindNICs.removeAll(BindNIC);
+	}
+	if (ui.cmbNIC->currentIndex() != 0) {
+		QVariantMap NIC = ui.cmbNIC->currentData().toMap();
+		BindNICs.append(NIC["Adapter"].toString());
+	}
+	m_pBox->UpdateTextList("BindAdapter", BindNICs, false);
+
+	QStringList BindIPs = m_pBox->GetTextList("BindAdapterIP", false);
+	foreach(const QString& BindIP, BindIPs) {
+		auto ProgIP = Split2(BindIP, ",");
+		if (!ProgIP.second.isEmpty())
+			continue;
+		BindIPs.removeAll(BindIP);
+	}
+	if (!ui.txtIPv4->isReadOnly()) {
+		QString IPv4 = ui.txtIPv4->text();
+		if (!IPv4.isEmpty())
+			BindIPs.append(IPv4);
+	}
+	if (!ui.txtIPv6->isReadOnly()) {
+		QString IPv6 = ui.txtIPv6->text();
+		if (!IPv6.isEmpty())
+			BindIPs.append(IPv6);
+	}
+	m_pBox->UpdateTextList("BindAdapterIP", BindIPs, false);
+}
+
+void COptionsWindow::OnAdapterChanged()
+{
+	ui.txtIPv4->setReadOnly(ui.cmbNIC->currentIndex() != 0);
+	ui.txtIPv6->setReadOnly(ui.cmbNIC->currentIndex() != 0);
+
+	if (ui.cmbNIC->currentIndex() != 0) 
+	{
+		QVariantMap NIC = ui.cmbNIC->currentData().toMap();
+		QStringList Ip4 = NIC["Ip4"].toStringList();
+		ui.txtIPv4->setText(Ip4.isEmpty() ? "" : Ip4.first());
+		QStringList Ip6 = NIC["Ip6"].toStringList();
+		ui.txtIPv6->setText(Ip6.isEmpty() ? "" : Ip6.first());
+	}
+	else
+	{
+		ui.txtIPv4->setText("");
+		ui.txtIPv6->setText("");
+	}
+
+	OnNetworkChanged();
 }
 
 void COptionsWindow::LoadINetAccess()
@@ -1040,10 +1155,10 @@ void COptionsWindow::SaveNetProxy()
 			continue;
 		}
 
-		if (QHostAddress(IP).isNull()) {
-			QMessageBox::warning(this, "SandboxiePlus", QString::number(i + 1) + tr(" entry: Address must be IP, not host name"));
-			continue;
-		}
+		//if (QHostAddress(IP).isNull()) {
+		//	QMessageBox::warning(this, "SandboxiePlus", QString::number(i + 1) + tr(" entry: Address must be IP, not host name"));
+		//	continue;
+		//}
 
 		QStringList Tags;
 

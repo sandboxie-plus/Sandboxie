@@ -877,6 +877,7 @@ void COptionsWindow::LoadConfig()
 	LoadNetFwRules();
 	LoadDnsFilter();
 	LoadNetProxy();
+	LoadNetwork();
 
 	LoadAccessList();
 
@@ -1014,6 +1015,8 @@ void COptionsWindow::SaveConfig()
 			SaveDnsFilter();
 		if (m_NetProxyChanged)
 			SaveNetProxy();
+		if (m_NetworkChanged)
+			SaveNetwork();
 
 		if (m_AccessChanged) {
 			SaveAccessList();

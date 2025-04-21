@@ -3459,7 +3459,7 @@ The process match level has a higher priority than the specificity and describes
          <item row="1" column="0">
           <widget class="QTabWidget" name="tabsInternet">
            <property name="currentIndex">
-            <number>3</number>
+            <number>4</number>
            </property>
            <widget class="QWidget" name="tabINet">
             <attribute name="title">
@@ -3715,6 +3715,7 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblNoWfp">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3747,10 +3748,13 @@ The process match level has a higher priority than the specificity and describes
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_65">
-               <item row="1" column="1">
-                <widget class="QPushButton" name="btnAddDns">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_19">
                  <property name="text">
-                  <string>Add Filter</string>
+                  <string>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -3767,20 +3771,10 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_19">
+               <item row="1" column="1">
+                <widget class="QPushButton" name="btnAddDns">
                  <property name="text">
-                  <string>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QPushButton" name="btnDelDns">
-                 <property name="text">
-                  <string>Remove</string>
+                  <string>Add Filter</string>
                  </property>
                 </widget>
                </item>
@@ -3806,6 +3800,13 @@ The process match level has a higher priority than the specificity and describes
                  </column>
                 </widget>
                </item>
+               <item row="3" column="1">
+                <widget class="QPushButton" name="btnDelDns">
+                 <property name="text">
+                  <string>Remove</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
             </layout>
@@ -3826,6 +3827,13 @@ The process match level has a higher priority than the specificity and describes
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_15">
+               <item row="7" column="1">
+                <widget class="QPushButton" name="btnDelProxy">
+                 <property name="text">
+                  <string>Remove</string>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="label_180">
                  <property name="text">
@@ -3833,27 +3841,6 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1">
-                <widget class="QCheckBox" name="chkProxyResolveHostnames">
-                 <property name="text">
-                  <string>Resolve hostnames via proxy</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QPushButton" name="btnTestProxy">
-                 <property name="text">
-                  <string>Test Proxy</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1">
-                <widget class="QPushButton" name="btnDelProxy">
-                 <property name="text">
-                  <string>Remove</string>
                  </property>
                 </widget>
                </item>
@@ -3869,6 +3856,49 @@ The process match level has a higher priority than the specificity and describes
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="4" column="1">
+                <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <property name="spacing">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <item>
+                    <widget class="QPushButton" name="btnMoveProxyUp">
+                     <property name="text">
+                      <string>Move Up</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <item>
+                    <widget class="QPushButton" name="btnMoveProxyDown">
+                     <property name="text">
+                      <string>Move Down</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item row="9" column="0">
+                <widget class="QCheckBox" name="chkProxyResolveHostnames">
+                 <property name="text">
+                  <string>Resolve hostnames via proxy</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QPushButton" name="btnTestProxy">
+                 <property name="text">
+                  <string>Test Proxy</string>
+                 </property>
+                </widget>
                </item>
                <item row="1" column="1">
                 <widget class="QPushButton" name="btnAddProxy">
@@ -3919,35 +3949,6 @@ The process match level has a higher priority than the specificity and describes
                  </column>
                 </widget>
                </item>
-               <item row="4" column="1">
-                <layout class="QVBoxLayout" name="verticalLayout_3">
-                 <property name="spacing">
-                  <number>2</number>
-                 </property>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_4">
-                   <item>
-                    <widget class="QPushButton" name="btnMoveProxyUp">
-                     <property name="text">
-                      <string>Move Up</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_5">
-                   <item>
-                    <widget class="QPushButton" name="btnMoveProxyDown">
-                     <property name="text">
-                      <string>Move Down</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </item>
                <item row="5" column="1">
                 <spacer name="verticalSpacer_41">
                  <property name="orientation">
@@ -3961,6 +3962,13 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
+               <item row="8" column="0">
+                <widget class="QCheckBox" name="chkUseProxyThreads">
+                 <property name="text">
+                  <string>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
             </layout>
@@ -3972,7 +3980,37 @@ The process match level has a higher priority than the specificity and describes
             <layout class="QGridLayout" name="gridLayout_81">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_80">
-               <item row="9" column="2">
+               <item row="10" column="0">
+                <spacer name="verticalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="9" column="1">
+                <widget class="QLineEdit" name="txtIPv6">
+                 <property name="placeholderText">
+                  <string>0000:0000:0000:0000:0000:0000:0000:0000</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="0">
+                <widget class="QLabel" name="label_73">
+                 <property name="text">
+                  <string>IPv6:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="2">
                 <spacer name="horizontalSpacer_18">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -3985,44 +4023,10 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-               <item row="6" column="0">
-                <widget class="QLabel" name="lblBind">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="toolTip">
-                  <string>Protect the system from sandboxed processes</string>
-                 </property>
+               <item row="2" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBlockDns">
                  <property name="text">
-                  <string>Bind to Adapter IP</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="0">
-                <widget class="QLabel" name="label_73">
-                 <property name="text">
-                  <string>IPv6:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="lblPorts">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Port Blocking</string>
+                  <string>Block DNS, UDP port 53</string>
                  </property>
                 </widget>
                </item>
@@ -4043,7 +4047,45 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
-               <item row="7" column="0">
+               <item row="5" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBlockNetParam">
+                 <property name="text">
+                  <string>Prevent change to network and firewall parameters (user mode)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="lblBind">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the system from sandboxed processes</string>
+                 </property>
+                 <property name="text">
+                  <string>Bind to Adapter IP</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1">
+                <widget class="QLineEdit" name="txtIPv4">
+                 <property name="placeholderText">
+                  <string>000.000.000.000</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBlockSamba">
+                 <property name="text">
+                  <string>Block common SAMBA ports</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="0">
                 <widget class="QLabel" name="label_59">
                  <property name="text">
                   <string>IPv4:</string>
@@ -4053,37 +4095,17 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
-               <item row="9" column="0">
-                <spacer name="verticalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblPorts">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="8" column="1">
-                <widget class="QLineEdit" name="txtIPv6">
-                 <property name="placeholderText">
-                  <string>0000:0000:0000:0000:0000:0000:0000:0000</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1">
-                <widget class="QLineEdit" name="txtIPv4">
-                 <property name="placeholderText">
-                  <string>000.000.000.000</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBlockNetParam">
                  <property name="text">
-                  <string>Prevent change to network and firewall parameters (user mode)</string>
+                  <string>Port Blocking</string>
                  </property>
                 </widget>
                </item>
@@ -4094,19 +4116,8 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBlockDns">
-                 <property name="text">
-                  <string>Block DNS, UDP port 53</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBlockSamba">
-                 <property name="text">
-                  <string>Block common SAMBA ports</string>
-                 </property>
-                </widget>
+               <item row="7" column="1">
+                <widget class="QComboBox" name="cmbNIC"/>
                </item>
               </layout>
              </item>

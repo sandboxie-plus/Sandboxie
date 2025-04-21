@@ -13,3 +13,5 @@ QString GetProductVersion(const QString& filePath);
 bool KillProcessByWnd(const QString& WndName);
 
 bool CheckInternet();
+
+QVariantList EnumNICs();

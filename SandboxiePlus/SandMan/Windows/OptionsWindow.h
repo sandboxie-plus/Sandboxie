@@ -155,6 +155,9 @@ private slots:
 
 	void OnBlockDns();
 	void OnBlockSamba();
+
+	void OnNetworkChanged() { m_NetworkChanged = true; OnOptChanged(); }
+	void OnAdapterChanged();
 	//
 	
 	// access
@@ -456,6 +459,9 @@ protected:
 	void LoadINetAccess();
 	void SaveINetAccess();
 
+	void LoadNetwork();
+	void SaveNetwork();
+
 	void ParseAndAddFwRule(const QString& Value, bool disabled = false, const QString& Template = QString());
 	void CloseNetFwEdit(bool bSave = true);
 	void CloseNetFwEdit(QTreeWidgetItem* pItem, bool bSave = true);
@@ -574,6 +580,7 @@ protected:
 	bool m_NetFwRulesChanged;
 	bool m_DnsFilterChanged;
 	bool m_NetProxyChanged;
+	bool m_NetworkChanged;
 	bool m_AccessChanged;
 	bool m_TemplatesChanged;
 	bool m_FoldersChanged;

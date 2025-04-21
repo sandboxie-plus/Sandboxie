@@ -1629,7 +1629,7 @@ void CSettingsWindow::ApplyCert()
 QString CSettingsWindow::GetCertType()
 {
 	QString CertType;
-	if (CERT_IS_TYPE(g_CertInfo, eCertContributor))
+	if (g_CertInfo.type == eCertContributor)
 		CertType = tr("Contributor");
 	else if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
 		CertType = tr("Eternal");

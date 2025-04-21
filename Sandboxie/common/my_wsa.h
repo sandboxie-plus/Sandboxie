@@ -33,7 +33,10 @@
 //---------------------------------------------------------------------------
 
 
+#define INVALID_SOCKET  (SOCKET)(~0)
 #define SOCKET_ERROR            (-1)
+#define SOCKS_SUCCESS           0
+#define SOCKS_GENERAL_FAILURE   1
 
 #define IOC_IN                  0x80000000      /* copy in parameters */
 #define _WSAIOW(x,y)            (IOC_IN|(x)|(y))
@@ -42,6 +45,7 @@
 
 #define WSA_IO_PENDING          (ERROR_IO_PENDING)
 
+#define AF_UNSPEC               0               /* unspecified */
 #define AF_UNIX                 1               /* unix socket available since windows build 17063 */
 #define AF_INET                 2               /* internetwork: UDP, TCP, etc. */
 #define AF_INET6                23              /* internetwork v6: UDP, TCP, etc. */
@@ -51,14 +55,17 @@
 #define IPPROTO_TCP             6               /* tcp */
 #define IPPROTO_UDP             17              /* user datagram protocol */
 
+#define SOCK_STREAM             1               /* stream socket */
+#define SOCK_DGRAM              2               /* datagram socket */
+#define SOCK_RAW                3               /* raw-protocol interface */
+#define SOCK_RDM                4               /* reliably-delivered message */
+#define SOCK_SEQPACKET          5               /* sequenced packet stream */
+
 #define IPPROTO_ANY	            256
 
 #define SD_RECEIVE              0x00
 #define SD_SEND                 0x01
 #define SD_BOTH                 0x02
-
-#define SOCKS_SUCCESS           0
-#define SOCKS_GENERAL_FAILURE   1
 
 #define MSG_WAITALL             0x8             /* do not complete until packet is completely filled */
 
@@ -167,6 +174,57 @@ typedef struct _WSANETWORKEVENTS {
        long lNetworkEvents;
        int iErrorCode[FD_MAX_EVENTS];
 } WSANETWORKEVENTS, FAR * LPWSANETWORKEVENTS;
+
+typedef unsigned int u_int;
+
+#ifndef FD_SETSIZE
+#define FD_SETSIZE      64
+#endif /* FD_SETSIZE */
+
+typedef struct fd_set {
+        u_int fd_count;          /* how many are SET? */
+        SOCKET  fd_array[FD_SETSIZE];   /* an array of SOCKETs */
+} fd_set;
+
+#define FD_CLR(fd, set) do { \
+    u_int __i; \
+    for (__i = 0; __i < ((fd_set FAR *)(set))->fd_count ; __i++) { \
+        if (((fd_set FAR *)(set))->fd_array[__i] == fd) { \
+            while (__i < ((fd_set FAR *)(set))->fd_count-1) { \
+                ((fd_set FAR *)(set))->fd_array[__i] = \
+                    ((fd_set FAR *)(set))->fd_array[__i+1]; \
+                __i++; \
+            } \
+            ((fd_set FAR *)(set))->fd_count--; \
+            break; \
+        } \
+    } \
+} while(0)
+
+#define FD_SET(fd, set) do { \
+    u_int __i; \
+    for (__i = 0; __i < ((fd_set FAR *)(set))->fd_count; __i++) { \
+        if (((fd_set FAR *)(set))->fd_array[__i] == (fd)) { \
+            break; \
+        } \
+    } \
+    if (__i == ((fd_set FAR *)(set))->fd_count) { \
+        if (((fd_set FAR *)(set))->fd_count < FD_SETSIZE) { \
+            ((fd_set FAR *)(set))->fd_array[__i] = (fd); \
+            ((fd_set FAR *)(set))->fd_count++; \
+        } \
+    } \
+} while(0)
+
+#define FD_ZERO(set) (((fd_set FAR *)(set))->fd_count=0)
+
+#define FD_ISSET(fd, set) __sys_WSAFDIsSet((SOCKET)(fd), (fd_set FAR *)(set))
+
+struct timeval {
+        long    tv_sec;         /* seconds */
+        long    tv_usec;        /* and microseconds */
+};
+
 
 #endif
 

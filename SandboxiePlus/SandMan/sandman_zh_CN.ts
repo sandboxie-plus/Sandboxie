@@ -5931,7 +5931,7 @@ Error: %1</source>
     </message>
     <message>
         <source>HwId: %1</source>
-        <translation type="vanished">固件ID: %1</translation>
+        <translation type="vanished">硬件ID: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="670"/>
@@ -10752,7 +10752,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1677"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
-        <translation>固件ID： 00000000-0000-0000-0000-000000000000</translation>
+        <translation>硬件ID： 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="181"/>

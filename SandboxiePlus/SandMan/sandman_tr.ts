@@ -1220,7 +1220,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="802"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğunu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
+        <translation>Özel bir Sandboxie belirteci kullanmak korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğunu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
     </message>
 </context>
 <context>
@@ -3949,7 +3949,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
-        <translation>Sandboxie-Plus taşınabilir modda çalışıyordu, şimdi oluşturulan hizmetleri temizlemesi gerekiyor. Bunun için yönetici ayrıcalıkları isteyecektir.
+        <translation>Sandboxie-Plus taşınabilir modda çalışıyordu, oluşturulmuş bu hizmetleri şimdi temizlemesi gerekiyor. Bunun için yönetici ayrıcalıkları istenecektir.
 
 Temizlik yapmak ister misin?</translation>
     </message>
@@ -5450,23 +5450,23 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="552"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntülemek için tıklayın</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>Click to hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Gizlemek için tıklayın</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="556"/>
         <location filename="Windows/SettingsWindow.cpp" line="568"/>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="563"/>
         <source>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1410"/>
@@ -5823,10 +5823,6 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <location filename="Windows/SettingsWindow.cpp" line="512"/>
         <source>Add %1 Template</source>
         <translation>%1 Şablonu Ekle</translation>
-    </message>
-    <message>
-        <source>HwId: %1</source>
-        <translation type="vanished">HwId: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="609"/>
@@ -7605,7 +7601,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2000"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
-        <translation>Korumalı alandaki hizmetleri bir sistem belirteci kullanarak başlatılmasın (Önerilir)</translation>
+        <translation>Korumalı alan hizmetleri bir sistem belirteci kullanılarak başlatılmasın (Önerilir)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1280"/>
@@ -7965,7 +7961,7 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
+        <translation>Özel bir Sandboxie belirteci kullanmak korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğunu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2122"/>
@@ -8111,7 +8107,7 @@ Kısmen işaretli: Yeni oluşturulan korumalı alan belirtecine hiçbir grup ekl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2034"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation>ConHost.exe İşlem Bütünlüğü Düzeyini Bırak</translation>
+        <translation>ConHost.exe işlem bütünlük seviyesini düşür</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2625"/>
@@ -8842,7 +8838,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1986"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
-        <translation>Korumalı alanlı RpcS&apos;leri bir SİSTEM işlemi olarak başlat (Önerilmez)</translation>
+        <translation>Korumalı alandaki RpcSs&apos;i bir SİSTEM işlemi olarak başlat (Önerilmez)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1910"/>
@@ -8863,7 +8859,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1917"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation>Korumalı SİSTEM işlemlerini ayrıcalıksız işlemlerden koru</translation>
+        <translation>Korumalı alandaki SİSTEM işlemlerini ayrıcalıksız işlemlerden koru</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1400"/>

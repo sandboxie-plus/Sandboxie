@@ -4,7 +4,8 @@
 
 
 ## [1.15.12 / 5.70.12] - 2025-04-??
-
+### 新增
+- 在 Plus 用户界面中新增了印尼语
 ### 更改
 - 修正了沙盒列表中的异常排序问题 [#4615](https://github.com/sandboxie-plus/Sandboxie/issues/4615)
 

@@ -8811,8 +8811,8 @@ zamiast &quot;*&quot;.</translation>
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</oldsource>
-        <translation type="unfinished">Zasady dostępu do zasobów Sandboxa często dyskryminują binarki programów znajdujących się wewnątrz piaskownicy. OpenFilePath i OpenKeyPath działają tylko dla binarek aplikacji znajdujących się natywnie na hoście. Aby zdefiniować regułę bez tego ograniczenia, należy użyć OpenPipePath lub OpenConfPath. Podobnie, wszystkie dyrektywy Closed(File|Key|Ipc)Path, które są zdefiniowane przez negację np. &apos;ClosedFilePath=! iexplore.exe,C:Users*&apos; będą zawsze zamknięte dla binariów znajdujących się wewnątrz sandboxa. Obie polityki ograniczeń mogą być wyłączone na stronie &quot;Zasady dostępu&quot;.
-Ma to zapobiec tworzeniu przez nieuczciwe procesy wewnątrz piaskownicy kopii o zmienionej nazwie i uzyskiwaniu dostępu do chronionych zasobów. Innym wektorem exploitów jest wstrzyknięcie biblioteki do autoryzowanego procesu w celu uzyskania dostępu do wszystkiego, do czego ma dostęp. Dzięki Host Image Protection można temu zapobiec, blokując aplikacjom (zainstalowanym na hoście) działającym wewnątrz piaskownicy możliwość ładowania bibliotek z samej piaskownicy.</translation>
+        <translation>Reguły dostępu do zasobów Sandboxie często dyskryminują pliki binarne programów znajdujące się w piaskownicy. OpenFilePath i OpenKeyPath działają tylko w przypadku plików binarnych aplikacji znajdujących się natywnie na hoście. Aby zdefiniować regułę bez tego ograniczenia, należy użyć OpenPipePath lub OpenConfPath. Podobnie, wszystkie Zamknięte (Plik|Klucz|Ipc)Dyrektywy ścieżki, które są zdefiniowane przez negację, np. &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos; będą zawsze zamknięte dla plików binarnych znajdujących się w piaskownicy. Obie zasady ograniczeń można wyłączyć na stronie &quot;Zasady dostępu&quot;.
+Ma to na celu uniemożliwienie nieuczciwym procesom w piaskownicy tworzenia kopii o zmienionej nazwie i uzyskiwania dostępu do chronionych zasobów. Innym wektorem exploitów jest wstrzyknięcie biblioteki do autoryzowanego procesu w celu uzyskania dostępu do wszystkiego, do czego ma dostęp. Korzystając z ochrony obrazu hosta, można temu zapobiec, blokując aplikacjom (zainstalowanym na hoście) działającym w piaskownicy ładowanie bibliotek z samej piaskownicy.</translation>
     </message>
     <message>
         <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
@@ -8887,7 +8887,7 @@ Ma to zapobiec tworzeniu przez nieuczciwe procesy wewnątrz piaskownicy kopii o 
         <location filename="Forms/OptionsWindow.ui" line="460"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box&apos;s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <oldsource>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</oldsource>
-        <translation type="unfinished">Gdy włączone jest &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Szyfrowanie boksu&lt;/a&gt;, folder główny boksu, w tym gałąź rejestru, jest przechowywany w zaszyfrowanym obrazie dysku przy użyciu &lt;a href=&quot;https:/ /diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; Implementacja AES-XTS.</translation>
+        <translation>Gdy włączona jest opcja &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt;, folder główny urządzenia, w tym gałąź rejestru, jest przechowywany w zaszyfrowanym obrazie dysku, przy użyciu implementacji &lt;a href=&quot;https://diskcryptor.org&gt;Disk Cryptor&lt;/a&gt; implementacji AES-XTS.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="408"/>
@@ -8943,13 +8943,13 @@ Ma to zapobiec tworzeniu przez nieuczciwe procesy wewnątrz piaskownicy kopii o 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="398"/>
         <source>Force protection on mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymuszanie ochrony podczas montowania</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1637"/>
         <source>Prevent processes from capturing window images from sandboxed windows</source>
         <oldsource>Prevents getting an image of the window in the sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zapobiega uzyskiwaniu obrazu okna znajdującego się w sandboxie.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1608"/>
@@ -8959,12 +8959,12 @@ Ma to zapobiec tworzeniu przez nieuczciwe procesy wewnątrz piaskownicy kopii o 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="976"/>
         <source>Open access to Proxy Configurations</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwarty dostęp do konfiguracji proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1296"/>
         <source>File ACLs</source>
-        <translation type="unfinished"></translation>
+        <translation>Listy ACL plików</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1993"/>
@@ -8980,13 +8980,13 @@ Ma to zapobiec tworzeniu przez nieuczciwe procesy wewnątrz piaskownicy kopii o 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2409"/>
         <source>Breakout Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument grupowy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2416"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...) extensions. Please review the security section for each option in the documentation before use.</source>
         <oldsource>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</oldsource>
-        <translation type="unfinished">&lt;b&gt;&lt;font color=&apos;red&apos;&gt;PRZESTROGA DOTYCZĄCA BEZPIECZEŃSTWA&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt; Używanie Breakout Folder&lt;/a&gt; i/lub &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;Breakout Process&lt;/a&gt; w połączeniu z dyrektywami Open[File/Pipe]Path może naruszyć bezpieczeństwo, podobnie jak użycie &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;Breakout Document&lt;/a&gt; pozwalającego na dowolne * lub niezabezpieczone (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;itp...) rozszerzenia. Przed użyciem należy zapoznać się z sekcją bezpieczeństwa dla każdej opcji w dokumentacji.</translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Używanie &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; i/lub &lt;a href=&quot;sbie://docs/breakoutprocess&gt;BreakoutProcess&lt;/a&gt; w połączeniu z dyrektywami Open[File/Pipe]Path może zagrozić bezpieczeństwu,  podobnie jak użycie &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; zezwalając na dowolne * lub niezabezpieczone (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc...). Przed użyciem zapoznaj się z sekcją dotyczącą bezpieczeństwa dla każdej opcji w dokumentacji.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2446"/>
@@ -9011,17 +9011,17 @@ Ma to zapobiec tworzeniu przez nieuczciwe procesy wewnątrz piaskownicy kopii o 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2604"/>
         <source>Stop Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje zatrzymania</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2625"/>
         <source>Use Linger Leniency</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj upustu dla czasu linger</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2635"/>
         <source>Don&apos;t stop lingering processes with windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie zatrzymuj przewlekłych procesów z oknami</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2797"/>
@@ -9216,38 +9216,38 @@ Aby określić proces, użyj jako ścieżki &apos;$:program.exe&apos;.</translat
         <location filename="Forms/OptionsWindow.ui" line="1346"/>
         <source>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable exemptions)</source>
         <oldsource>Use original Access Control Entries for boxed Files and Folders (for MSIServer enable excemptions)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Użyj pierwotnych wpisów kontroli dostępu dla spakowanych plików i folderów (dla serwera MSIServer włącz wyjątki) </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1364"/>
         <source>Run Processes on an own Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchamiaj procesy na własnym izolowanym pulpicie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
         <source>Desktop Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Izolacja pulpitu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1473"/>
         <source>Open Window Station (improves compatibility by reducing desktop isolation)</source>
         <oldsource>Open Window Station (improves compatybility by reducing desktop isolation)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz stację okien (poprawia kompatybilność poprzez zmniejszenie izolacji pulpitu)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2024"/>
         <source>Create a new sandboxed token instead of stripping down the original token</source>
-        <translation type="unfinished"></translation>
+        <translation>Utwórz nowy izolowany token zamiast redukowania oryginalnego tokenu.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2034"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Obniż poziom integralności procesu ConHost.exe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2275"/>
         <source>Force Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymuś podprocesy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3218"/>
@@ -9280,32 +9280,32 @@ Aby określić proces, użyj jako ścieżki &apos;$:program.exe&apos;.</translat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3917"/>
         <source>Bypass IPs</source>
-        <translation type="unfinished"></translation>
+        <translation>Omijaj adresy IP</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4001"/>
         <source>Bind to Adapter IP</source>
-        <translation type="unfinished"></translation>
+        <translation>Powiąż z adresem IP adaptera</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4008"/>
         <source>IPv6:</source>
-        <translation type="unfinished"></translation>
+        <translation>IPv6:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4049"/>
         <source>IPv4:</source>
-        <translation type="unfinished"></translation>
+        <translation>IPv4:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4072"/>
         <source>0000:0000:0000:0000:0000:0000:0000:0000</source>
-        <translation type="unfinished"></translation>
+        <translation>0000:0000:0000:0000:0000:0000:0000:0000</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4079"/>
         <source>000.000.000.000</source>
-        <translation type="unfinished"></translation>
+        <translation>000.000.000.000</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4131"/>
@@ -9475,7 +9475,7 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
         <location filename="Forms/OptionsWindow.ui" line="1400"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
-        <translation type="unfinished">Izolacja bezpieczeństwa poprzez użycie silnie ograniczonego tokena procesu jest podstawowym sposobem Sandboxie wymuszania ograniczeń piaskownicy, gdy Izolacja jest wyłączona to boks działa w trybie komory aplikacji, tj. nie zapewnia już niezawodnego bezpieczeństwa, tylko prosty podział aplikacji na komory.</translation>
+        <translation>Izolacja bezpieczeństwa poprzez użycie silnie ograniczonego tokena procesu jest głównym sposobem Sandboxie do egzekwowania ograniczeń piaskownicy, gdy ta opcja jest wyłączona, skrzynka jest obsługiwana w trybie przedziału aplikacji, tj. nie zapewnia już niezawodnego bezpieczeństwa, a jedynie prostą podział aplikacji na segmenty.</translation>
     </message>
     <message>
         <source>Disable Security Isolation (experimental)</source>
@@ -9617,7 +9617,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3970"/>
         <source>Other Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Inne opcje</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4025"/>

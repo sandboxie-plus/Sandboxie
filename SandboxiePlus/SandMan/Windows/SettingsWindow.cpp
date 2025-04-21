@@ -1094,7 +1094,7 @@ void CSettingsWindow::LoadSettings()
 		
 		ui.cmbDefault->clear();
 		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
-			ui.cmbDefault->addItem(pBox->GetName().replace("_", " "), pBox->GetName());
+			ui.cmbDefault->addItem(pBox.objectCast<CSandBoxPlus>()->GetDisplayName(), pBox->GetName());
 		int pos = ui.cmbDefault->findData(theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox"));
 		if(pos == -1)
 			pos = ui.cmbDefault->findData("DefaultBox");

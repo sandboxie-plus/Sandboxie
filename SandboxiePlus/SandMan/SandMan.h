@@ -356,6 +356,7 @@ private:
 	QVBoxLayout*		m_pMainLayout;
 
 	QToolBar*			m_pToolBar;
+	QMenu*				m_pToolBarContextMenu;
 	QSplitter*			m_pPanelSplitter;
 	QSplitter*			m_pLogSplitter;
 

@@ -1305,13 +1305,13 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
         <source>Allow access to network files and folders</source>
-        <translation type="unfinished">Zezwól na dostęp do plików i folderów sieciowych</translation>
+        <translation>Pozwól na dostęp do plików i folderów sieciowych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="764"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <translation type="unfinished">Ta opcja nie jest zalecana dla wzmocnionych boksów</translation>
+        <translation>Ta opcja nie jest zalecana w przypadku skrzynek hartowanych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="769"/>
@@ -1321,37 +1321,37 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="775"/>
         <source>Admin Options</source>
-        <translation type="unfinished">Opcje administratora</translation>
+        <translation>Opcje administracyjne</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="779"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">Porzuć prawa z grup Administratorzy i Użytkownicy Zaawansowani</translation>
+        <translation>Usuń uprawnienia z grup Administratorów i Użytkowników o wzmacnionych uprawnieniach</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished">Spraw, by aplikacje reagowały jakby były uruchomione z podwyższonym poziomem uprawnień</translation>
+        <translation>Sprawdź, czy aplikacje są uruchamiane z podwyższonymi uprawnieniami</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="790"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished">Zezwól na uruchamianie MSIServer z tokenem systemowym w trybie piaskownicy</translation>
+        <translation>Zezwalaj narzędziu MSIServer na uruchamianie z tokenem systemowym w trybie piaskownicy</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="797"/>
         <source>Box Options</source>
-        <translation type="unfinished">Opcje piaskownicy</translation>
+        <translation>Opcje pudełka</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="801"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Użyj loginu Sandboxie zamiast anonimowego tokena</translation>
+        <translation>Użyj logowania w Sandboxie zamiast anonimowego tokenu</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="802"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished">Użycie niestandardowego tokena sandboxie pozwala na lepsze odizolowanie poszczególnych sandboxów od siebie, a także pokazuje w kolumnie użytkownika w menedżerach zadań nazwę sandboxa, do którego należy dany proces. Niektóre rozwiązania bezpieczeństwa firm trzecich mogą jednak mieć problemy z niestandardowymi tokenami.</translation>
+        <translation>Użycie niestandardowego tokena Sandboxie pozwala lepiej odizolować poszczególne piaskownice od siebie, a w kolumnie użytkownika menedżerów zadań pokazuje nazwę pola, do którego należy proces. Niektóre rozwiązania zabezpieczające innych firm mogą jednak mieć problemy z niestandardowymi tokenami.</translation>
     </message>
 </context>
 <context>
@@ -2633,7 +2633,7 @@ Wybierz folder, który zawiera ten plik.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak (Nie powiązuj z adapterem)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -6146,23 +6146,23 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="552"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij, aby odsłonić</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>Click to hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij, aby ukryć</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="556"/>
         <location filename="Windows/SettingsWindow.cpp" line="568"/>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Identyfikator sprzętowy: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="563"/>
         <source>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Identyfikator sprzętowy: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; kolor:dziedziczyć; &quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1407"/>
@@ -9289,7 +9289,7 @@ Aby określić proces, użyj jako ścieżki &apos;$:program.exe&apos;.</translat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3968"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Używaj wątków serwera proxy wewnątrz procesu zamiast modyfikować gniazdo bezpośrednio (rozwiązuje rzadkie problemy z kompatybilnością)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4070"/>
@@ -9631,85 +9631,85 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4108"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokowanie portów</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4084"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokuj typowe porty SAMBA</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3737"/>
         <source>DNS Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtr DNS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3777"/>
         <source>Add Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj filtr</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3754"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Za pomocą filtra DNS można blokować poszczególne domeny dla każdego procesu osobno. Pozostaw kolumnę IP pustą, aby zablokować domenę, lub wprowadź adres IP, aby przekierować ruch.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3793"/>
         <source>Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>Domena</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3816"/>
         <source>Internet Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy internetowe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3906"/>
         <source>Add Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3899"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprawdź serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3932"/>
         <source>Auth</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoryzacja</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3937"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Logowanie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3942"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3840"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programy uruchomione w sandboksie mogą być zmuszone do użycia wstępnie ustawionego serwera proxy SOCKS5.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="858"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ta funkcja nie blokuje wszystkich sposobów uzyskania zrzutu ekranu, tylko niektóre typowe.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="841"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zapobiegaj poruszaniu myszką, wyświetlaniu okna na wierzchu i podobnym operacjom. Jest to prawdopodobnie przyczyną problemów z grami.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="851"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
         <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zezwalaj na pokrycie pasku zadań przez okna uruchomione w sandboksie.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1661"/>

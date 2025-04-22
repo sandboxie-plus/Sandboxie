@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed an issue where the translation string of the protocol selection was saved in the configuration file
 - fixed box picker icon
 - When the UI Language change, toolbar unchanged [#4726](https://github.com/sandboxie-plus/Sandboxie/issues/4726)
+- PingInfoView gives an error when running in Sandboxie [#4718](https://github.com/sandboxie-plus/Sandboxie/issues/4718)
 
 ### Removed
 - removed the not-working "delete content" button [#4720](https://github.com/sandboxie-plus/Sandboxie/pull/4720) (thanks habatake)

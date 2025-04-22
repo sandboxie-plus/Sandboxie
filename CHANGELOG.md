@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved when Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
 - fixed Msi install Can`t create AppData\Romaing\Microsoft folder in Data Protection Box [#4711](https://github.com/sandboxie-plus/Sandboxie/issues/4711)
 - fixed two errors in Sandboxie about time speeding and add two time function hook [#4721](https://github.com/sandboxie-plus/Sandboxie/pull/4721) (thanks pwnmelife)
+- fixed an issue where the translation string of the protocol selection was saved in the configuration file
 
 ### Removed
 - removed the not-working "delete content" button [#4720](https://github.com/sandboxie-plus/Sandboxie/pull/4720) (thanks habatake)

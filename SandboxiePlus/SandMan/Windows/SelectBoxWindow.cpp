@@ -5,6 +5,7 @@
 #include "../SbiePlusAPI.h"
 #include "../Views/SbieView.h"
 #include "../MiscHelpers/Common/Finder.h"
+#include "../Helpers/WinHelper.h"
 
 #if defined(Q_OS_WIN)
 #include <wtypes.h>
@@ -79,10 +80,14 @@ void CBoxPicker::LoadBoxed(const QRegularExpression& Filter, const QString& Sele
 		pItem->setText(0, pBoxEx->GetDisplayName());
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
 		QIcon Icon;
-		QString Action = pBox->GetText("DblClickAction");
-		if (!Action.isEmpty() && Action.left(1) != "!")
-			Icon = IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
-		else if(ColorIcons)
+		QString BoxIcon = pBox->GetText("BoxIcon");
+		if (!BoxIcon.isEmpty()) {
+			StrPair PathIndex = Split2(BoxIcon, ",");
+			if (!PathIndex.second.isEmpty() && !PathIndex.second.contains("."))
+				Icon = QIcon(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt()));
+			else
+				Icon = QIcon(QPixmap(BoxIcon));
+		} else if(ColorIcons)
 			Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
 		else
 			Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);

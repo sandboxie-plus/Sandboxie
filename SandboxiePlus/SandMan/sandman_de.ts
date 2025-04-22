@@ -2352,7 +2352,7 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine (nicht an Adapter binden)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -2393,10 +2393,6 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
         <location filename="Windows/OptionsNetwork.cpp" line="1154"/>
         <source> entry: IP or Port cannot be empty</source>
         <translation> Eintrag: IP oder Port dürfen nicht leer sein</translation>
-    </message>
-    <message>
-        <source> entry: Address must be IP, not host name</source>
-        <translation type="vanished"> Eintrag: Adresse muss eine IP sein, kein Hostname</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
@@ -5483,10 +5479,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Füge %1 Vorlage hinzu</translation>
     </message>
     <message>
-        <source>HwId: %1</source>
-        <translation type="vanished">HwId: %1</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="824"/>
         <source>Please enter message</source>
         <translation>Bitte Nachricht eingeben</translation>
@@ -5531,23 +5523,23 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="552"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken zum Anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>Click to hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken zum Verbergen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="556"/>
         <location filename="Windows/SettingsWindow.cpp" line="568"/>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="563"/>
         <source>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1455"/>
@@ -8938,7 +8930,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3968"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende prozessinterne Proxy-Relay-Threads, anstatt den Socket direkt zu ändern (löst seltene Kompatibilitätsprobleme)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4077"/>

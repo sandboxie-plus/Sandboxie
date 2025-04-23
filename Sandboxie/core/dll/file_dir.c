@@ -3553,6 +3553,7 @@ _FX void File_CreateBaseFolders()
         L"%LOCALAPPDATA%\\Microsoft",
         L"%APPDATA%\\Microsoft",
         L"%ProgramData%\\Microsoft",
+        L"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs",
         NULL
     };
 

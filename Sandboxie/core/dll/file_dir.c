@@ -3544,24 +3544,29 @@ _FX void File_CreateBaseFolders()
     for (ULONG index = 0; ; ++index) {
 
         status = SbieApi_QueryConf(
-            L"TemplateDefaultFolders", L"DefaultFolder", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+            L"TemplateDefaultFolders", L"DefaultFolder", index | CONF_GET_NO_GLOBAL, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
         if (!NT_SUCCESS(status))
             break;
 
         File_CreateBoxedPath(conf_buf);
+    }
 
-        /*WCHAR expanded[MAX_PATH];
+    for (ULONG index = 0; ; ++index) {
+
+        status = SbieApi_QueryConf(
+            NULL, L"DefaultFolder", index | CONF_GET_NO_EXPAND, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        WCHAR expanded[MAX_PATH];
         DWORD len = ExpandEnvironmentStringsW(conf_buf, expanded, MAX_PATH);
-        if (len == 0 || len > MAX_PATH)
-            continue;
-
-        if (wcschr(expanded, L'%'))
+        if (len == 0 || len > MAX_PATH || wcschr(expanded, L'%'))
             continue;
 
         WCHAR* pathNT = File_TranslateDosToNtPath(expanded);
         if (pathNT) {
             File_CreateBoxedPath(pathNT);
             Dll_Free(pathNT);
-        }*/
+        }
     }
 }

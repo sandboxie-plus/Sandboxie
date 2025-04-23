@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Template for WeType Input Method (IME) [#4715](https://github.com/sandboxie-plus/Sandboxie/pull/4715) (thanks bot-1450)
 - added host name support to proxy configuration (looking up host at WSA_Startup)
 - instead of binding to IP sandboxie can now bind to adapter (resolving IPs at WSA_Startup)
+- added Add support for %ProgramFiles(x86)% variable [#2402](https://github.com/sandboxie-plus/Sandboxie/issues/2402)
+- added TemplateDefaultFolders containing all the default paths to be created in a privacy enchanced box
 
 ### Changed
 - Weird sort in the Move Sandbox list [#4615](https://github.com/sandboxie-plus/Sandboxie/issues/4615)

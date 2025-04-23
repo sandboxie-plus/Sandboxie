@@ -297,6 +297,12 @@ _FX WCHAR *Conf_Expand_Helper(
         L"\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion";
     static const WCHAR *_ProgramFiles = L"ProgramFiles";
     static const WCHAR *_ProgramFilesDir = L"ProgramFilesDir";
+    static const WCHAR *_ProgramFiles32 = L"ProgramFiles(x86)";
+    static const WCHAR *_ProgramFilesDir32 = L"ProgramFilesDir (x86)";
+    static const WCHAR *_CommonProgramFiles = L"CommonProgramFiles";
+    static const WCHAR *_CommonProgramFilesDir = L"CommonFilesDir";
+    static const WCHAR *_CommonProgramFiles32 = L"CommonProgramFiles(x86)";
+    static const WCHAR *_CommonProgramFilesDir32 = L"CommonFilesDir (x86)";
     static const WCHAR *_SystemRoot = L"SystemRoot";
     static const WCHAR *_ProfileList = L"ProfileList";
     static const WCHAR *_homedrive = L"homedrive";
@@ -433,6 +439,21 @@ _FX WCHAR *Conf_Expand_Helper(
         status = Conf_Expand_RegValue(args,
             RTL_REGISTRY_ABSOLUTE, _Windows, _ProgramFilesDir, varvalue);
 
+    } else if (_wcsicmp(varname, _ProgramFiles32) == 0) {
+
+        status = Conf_Expand_RegValue(args,
+            RTL_REGISTRY_ABSOLUTE, _Windows, _ProgramFilesDir32, varvalue);
+
+    } else if (_wcsicmp(varname, _CommonProgramFiles) == 0) {
+
+        status = Conf_Expand_RegValue(args,
+            RTL_REGISTRY_ABSOLUTE, _Windows, _CommonProgramFilesDir, varvalue);
+
+    } else if (_wcsicmp(varname, _CommonProgramFiles32) == 0) {
+
+        status = Conf_Expand_RegValue(args,
+            RTL_REGISTRY_ABSOLUTE, _Windows, _CommonProgramFilesDir32, varvalue);
+
     } else if (_wcsicmp(varname, _SystemRoot) == 0) {
 
         status = Conf_Expand_RegValue(args,
@@ -524,6 +545,10 @@ _FX WCHAR *Conf_Expand_Helper(
                     L"AllUsersProfile", varvalue + PrefixLen);
             }
         }
+
+    } else if (_wcsicmp(varname, L"PUBLIC") == 0) {
+
+        wcscpy(varvalue, L"%SystemDrive%\\Users\\Public");
 
     //
     // environment variables from HKCU\Volatile Environment

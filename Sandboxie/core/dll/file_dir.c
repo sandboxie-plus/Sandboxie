@@ -3527,6 +3527,9 @@ _FX NTSTATUS File_MyQueryDirectoryFile(
 
 _FX void File_CreateBaseFolders()
 {
+    NTSTATUS status;
+    WCHAR conf_buf[2048];
+
     //
     // in privacy mode we need to pre create some folders or else programs may fail
     //
@@ -3538,29 +3541,17 @@ _FX void File_CreateBaseFolders()
     //    File_CreateBoxedPath(File_CurrentUser);
     //}
 
-    const WCHAR* FolderSpecs[] = {
-        L"%SystemRoot%",
-        L"%TEMP%",
-        L"%USERPROFILE%",
-        L"%PUBLIC%",
-        L"%ProgramData%",
-        L"%LOCALAPPDATA%",
-        L"%ALLUSERSPROFILE%",
-        L"%APPDATA%",
-        L"%ProgramFiles%",
-        L"%ProgramFiles(x86)%",
-        L"%ProgramW6432%",
-        L"%LOCALAPPDATA%\\Microsoft",
-        L"%APPDATA%\\Microsoft",
-        L"%ProgramData%\\Microsoft",
-        L"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs",
-        NULL
-    };
+    for (ULONG index = 0; ; ++index) {
 
-    WCHAR expanded[MAX_PATH];
-    for (const WCHAR** spec = FolderSpecs; *spec; spec++) {
-        
-        DWORD len = ExpandEnvironmentStringsW(*spec, expanded, MAX_PATH);
+        status = SbieApi_QueryConf(
+            L"TemplateDefaultFolders", L"DefaultFolder", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        File_CreateBoxedPath(conf_buf);
+
+        /*WCHAR expanded[MAX_PATH];
+        DWORD len = ExpandEnvironmentStringsW(conf_buf, expanded, MAX_PATH);
         if (len == 0 || len > MAX_PATH)
             continue;
 
@@ -3571,6 +3562,6 @@ _FX void File_CreateBaseFolders()
         if (pathNT) {
             File_CreateBoxedPath(pathNT);
             Dll_Free(pathNT);
-        }
+        }*/
     }
 }

@@ -210,7 +210,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="905"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation>Ta funkcja może spowodować pogorszenie doświadczenia użytkownika, ponieważ uniemożliwia również normalne robienie zrzutów ekranu. </translation>
+        <translation>Ta funkcja może spowodować pogorszenie doświadczenia użytkownika, ponieważ uniemożliwia również normalne robienie zrzutów ekranu.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
@@ -231,7 +231,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <translation>To ustawienie dodaje lokalny szablon lub jego ustawienia do konfiguracji sandboxa, dzięki czemu ustawienia w tym szablonie są współdzielone między sandboxami.
 Jednakże, jeśli opcja &quot;użyj jako szablon&quot; jest wybrana jako tryb współdzielenia, niektóre ustawienia mogą nie być widoczne w interfejsie użytkownika.
 Aby zmienić ustawienia szablonu, po prostu znajdź szablon &quot;%1&quot; na liście Szablony aplikacji w Opcjach sandboxa, a następnie dwukrotnie kliknij na niego, aby go edytować.
-Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablonów. </translation>
+Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablonów.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="918"/>
@@ -241,12 +241,12 @@ Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablo
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation>Ta opcja dodaje udostępniony szablon do konfiguracji sandboxa jako lokalny szablon i może również usunąć domyślne ustawienia sandboxa na podstawie ustawień usuwania znajdująących się w szablonie. </translation>
+        <translation>Ta opcja dodaje udostępniony szablon do konfiguracji sandboxa jako lokalny szablon i może również usunąć domyślne ustawienia sandboxa na podstawie ustawień usuwania znajdująących się w szablonie.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="920"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation>Ta opcja dodaje ustawienia z udostępnionego szablonu do konfiguracji sandboxa i może również usunąć domyślne ustawienia sandboxa na podstawie ustawień usuwania znajdująących się w szablonie. </translation>
+        <translation>Ta opcja dodaje ustawienia z udostępnionego szablonu do konfiguracji sandboxa i może również usunąć domyślne ustawienia sandboxa na podstawie ustawień usuwania znajdująących się w szablonie.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="921"/>
@@ -281,7 +281,7 @@ Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablo
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation>Zapobiegaj zrzucaniu ekranu okien uruchomionych w sandboxie.</translation>
+        <translation>Zapobiegaj zrzucaniu ekranu okien uruchomionych w sandboxie</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="925"/>
@@ -433,7 +433,7 @@ This length permits approximately 384 bits of entropy with a passphrase composed
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
         <translation>Hasło jest ograniczone do maksymalnej długości 128 znaków.
 Ta długość pozwala na osiągnięcie około 384 bitów entropii w przypadku frazy hasłowej składającej się z rzeczywistych angielskich słów,
-zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337), a przekracza 768 bitów, gdy składa się całkowicie z losowych drukowalnych znaków ASCII. </translation>
+zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337), a przekracza 768 bitów, gdy składa się całkowicie z losowych drukowalnych znaków ASCII.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="167"/>
@@ -458,7 +458,7 @@ zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337)
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="331"/>
-        <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
+        <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer.</source>
         <translation>Piaskownica izoluje system hosta od procesów uruchomionych w piaskownicy, uniemożliwiając im wprowadzanie trwałych zmian w innych programach i danych na komputerze.</translation>
     </message>
     <message>
@@ -1099,7 +1099,7 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation>Sandbox nie może znajdować się w katalogu głównym partycji, proszę wybrać folder. </translation>
+        <translation>Sandbox nie może znajdować się w katalogu głównym partycji, proszę wybrać folder.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
@@ -1280,7 +1280,7 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation>Na tej stronie można skonfigurować opcje izolacji w puli piaskowej (Sandbox). </translation>
+        <translation>Na tej stronie można skonfigurować opcje izolacji w puli piaskowej (Sandbox).</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
@@ -1316,7 +1316,7 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="769"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation>Zapytaj użytkownika, czy ma zostać udzielona wyłączenie z blokuady. </translation>
+        <translation>Zapytaj użytkownika, czy ma zostać udzielona wyłączenie z blokuady</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="775"/>
@@ -1536,7 +1536,7 @@ Czy nadal chcesz dokonać aktualizacji?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="588"/>
         <source>Update Check completed, no new updates</source>
-        <translation>Sprawdzenie aktualizacji zostało ukończone. Nie ma dostępnych nowych aktualizacji.</translation>
+        <translation>Sprawdzenie aktualizacji zostało ukończone. Nie ma dostępnych nowych aktualizacji</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="733"/>
@@ -2673,7 +2673,7 @@ Wybierz folder, który zawiera ten plik.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation> Wpis: Adres IP lub numer portu nie mogą być puste.</translation>
+        <translation> Wpis: Adres IP lub numer portu nie mogą być puste</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>
@@ -4157,7 +4157,7 @@ Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</oldsource>
         <translation>Twoja wersja systemu Windows o numerze buildu %1 przekracza obecne możliwości obsługi Twojej wersji Sandboxie, co skutkuje wyłączeniem izolacji zabezpieczeń opartej na tokenach. W związku z tym wszystkie aplikacje będą działać w trybie oddzielenia aplikacji bez bezpiecznej izolacji.
-Sprawdź, czy istnieje aktualizacja dla Sandboxie. </translation>
+Sprawdź, czy istnieje aktualizacja dla Sandboxie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2578"/>
@@ -4167,7 +4167,7 @@ Sprawdź, czy istnieje aktualizacja dla Sandboxie. </translation>
     <message>
         <location filename="SandMan.cpp" line="2585"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation>Twoja wersja Windows build %1 przekracza bieżące znane możliwości wsparcia dla Twojej wersji Sandboxie. Sandboxie spróbuje użyć ostatnio znanych przesunięć, co może spowodować niestabilność systemu. </translation>
+        <translation>Twoja wersja Windows build %1 przekracza bieżące znane możliwości wsparcia dla Twojej wersji Sandboxie. Sandboxie spróbuje użyć ostatnio znanych przesunięć, co może spowodować niestabilność systemu.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2603"/>
@@ -5863,7 +5863,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Views/SbieView.cpp" line="1478"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation>Proszę wprowadzić nową alias dla piaskownicy (sandbox). </translation>
+        <translation>Proszę wprowadzić nową alias dla piaskownicy (sandbox).</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1487"/>
@@ -6314,7 +6314,7 @@ Możesz złożyć żądanie dotyczące maksymalnie %3 certyfikatów oprogramowan
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
-To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży się termin jego ważności, możesz uzyskać nowy certyfikat online, który będzie ważny na cały okres. </translation>
+To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży się termin jego ważności, możesz uzyskać nowy certyfikat online, który będzie ważny na cały okres.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2208"/>
@@ -6869,18 +6869,18 @@ Przed wysłaniem można przejrzeć dzienniki w oknie głównym.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="854"/>
-        <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation>Przepraszamy za niedogodności związane z Sandboxie-Plus. </translation>
+        <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus.</source>
+        <translation>Przepraszamy za niedogodności związane z Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="861"/>
-        <source>Unfortunately, the automated troubleshooting procedure failed. </source>
-        <translation>Niestety, automatyczna procedura rozwiązywania problemów nie powiodła się. </translation>
+        <source>Unfortunately, the automated troubleshooting procedure failed.</source>
+        <translation>Niestety, automatyczna procedura rozwiązywania problemów nie powiodła się.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="867"/>
-        <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation>Niestety, nie istnieje zautomatyzowana procedura rozwiązywania problemów dla opisanego problemu. </translation>
+        <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described.</source>
+        <translation>Niestety, nie istnieje zautomatyzowana procedura rozwiązywania problemów dla opisanego problemu.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="872"/>
@@ -7392,7 +7392,7 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="360"/>
         <source>Invalid Timeout value. Please enter a value between 1 and 60.</source>
-        <translation>Błędna wartość czasu限. Proszę wpisać wartość między 1 a 60. </translation>
+        <translation>Błędna wartość czasu限. Proszę wpisać wartość między 1 a 60.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="367"/>
@@ -8333,8 +8333,8 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4174"/>
-        <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation>Po wywołaniu funkcji szybkiego odzyskiwania następujące foldery zostaną sprawdzone pod kątem zawartości w piaskownicy. </translation>
+        <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content.</source>
+        <translation>Po wywołaniu funkcji szybkiego odzyskiwania następujące foldery zostaną sprawdzone pod kątem zawartości w piaskownicy.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4560"/>
@@ -8668,8 +8668,8 @@ zamiast &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5540"/>
-        <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
-        <translation>Te opcje są przeznaczone do debugowania problemów z kompatybilnością, proszę nie używać ich w zastosowaniach produkcyjnych. </translation>
+        <source>These options are intended for debugging compatibility issues, please do not use them in production use.</source>
+        <translation>Te opcje są przeznaczone do debugowania problemów z kompatybilnością, proszę nie używać ich w zastosowaniach produkcyjnych.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5555"/>
@@ -9844,50 +9844,50 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5076"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Prywatność</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5132"/>
         <source>Hide Network Adapter MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrycie adresu MAC karty sieciowej</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5085"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ukrycie informacji o firmware</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5092"/>
         <source>Hide Disk Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrycie numeru seryjnego dysku</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5099"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamaskowanie znanych unikalnych identyfikatorów w rejestrze systemowym</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4962"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Niektóre programy odczytują szczegóły systemu za pośrednictwem WMI (wbudowanej bazy danych systemu Windows) zamiast w normalny sposób. Na przykład &quot;tasklist.exe&quot; może uzyskać pełną listę procesów poprzez dostęp do WMI, nawet jeśli używany jest &quot;HideOtherBoxes&quot;. Włącz tę opcję, aby zatrzymać to zachowanie.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4965"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zapobieganie dostępowi procesów w pudełku piaskowym do szczegółów systemowych poprzez WMI (więcej informacji w etykiecie podpowiedzi)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4995"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie zezwalaj procesom w pudełku piaskowym na widzenie procesów działających poza pudełkami piaskowymi.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5459"/>
         <source>API call Trace (traces all SBIE hooks)</source>
-        <translation type="unfinished"></translation>
+        <translation>Śledzenie wywołań API (śledzenie wszystkich haków SBIE)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5398"/>
@@ -9897,7 +9897,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5302"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation>Śledzenie hakowania funkcji przez SbieDll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5565"/>
@@ -9907,7 +9907,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5678"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz szablon</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5846"/>
@@ -10050,7 +10050,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymuś umieszczenie bezpośrednich procesów potomnych w pudełku piaskowym, ale nie obejmuj pośrednich procesów potomnych otwieranych poprzez interfejsy DCOM i IPC. </translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="108"/>
@@ -10065,7 +10065,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished">Wymuś podprocesy</translation>
+        <translation>Wymuś tryb dla procesów potomnych</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="59"/>
@@ -10130,7 +10130,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
         <location filename="Forms/SettingsWindow.ui" line="162"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Skrót klawiaturowe do zawieszenia wszystkich procesów:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="134"/>
@@ -10145,7 +10145,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/SettingsWindow.ui" line="214"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprawdź status automatycznego usuwania pudełek piaskowych podczas uruchamiania Sandmana</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="389"/>
@@ -10185,7 +10185,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1366"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukryj okna SandMana podczas robienia zrzutu ekranu (wymagane ponowne uruchomienie interfejsu użytkownika)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1380"/>
@@ -10210,7 +10210,7 @@ Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tok
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1818"/>
         <source>Eval Cert</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocena certyfikatu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2302"/>
@@ -10996,7 +10996,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1703"/>
         <source>Cert Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje certyfikatu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1717"/>
@@ -11032,17 +11032,17 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="Forms/SettingsWindow.ui" line="663"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj opcję &apos;Ustaw siłę w piaskownicy&apos; do menu kontekstowego</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="570"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj opcję &apos;Ustaw otwartą ścieżkę w piaskownicy&apos; do menu kontekstowego</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1734"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Przewodnik po użytkowaniu certyfikatu&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1677"/>
@@ -11052,27 +11052,27 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="181"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakończ wszystkie procesy w pudełkach piaskowych podczas wyjścia z programu Sandman</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="676"/>
         <source>Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulpit w piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="683"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="unfinished"></translation>
+        <translation>Przełącz na pulpit w pudełku piaskowym podczas uruchamiania procesu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="690"/>
         <source>Switch to sandboxed desktop with double click</source>
-        <translation type="unfinished"></translation>
+        <translation>Przełącz na pulpit w pudełku piaskowym poprzez podwójne kliknięcie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1661"/>
         <source>Cert Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje o certyfikacie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1872"/>
@@ -11102,17 +11102,17 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2279"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodawanie grupy &quot;SandboxieAll Sandboxes&quot; do tokenu w trybie piaskownicy (eksperymentalnie)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2309"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta funkcja chroni pudełko piaskowe poprzez ograniczanie dostępu, zapobiegając innym użytkownikom dostęp do folderu. Upewnij się, że ścieżka do folderu głównego zawiera makro %USER%, aby każdy użytkownik miał własny dedykowany folder pudełka piaskowego.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2312"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogranicz dostęp do głównego folderu pudełka piaskowego tylko do użytkownika, który utworzył to pudełko piaskowe.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2335"/>
@@ -11122,7 +11122,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2422"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawsze uruchamiaj interfejs użytkownika SandMana jako Admin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2510"/>
@@ -11133,7 +11133,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="Forms/SettingsWindow.ui" line="2531"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetl wiadomość 1321, gdy proces został wymuszony do działania w pudełku piaskowym</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2541"/>

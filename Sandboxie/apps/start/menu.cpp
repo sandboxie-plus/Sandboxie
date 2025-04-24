@@ -671,7 +671,10 @@ _FX void ScanFolder(MENU_DIR *menu, WCHAR *path, UCHAR source)
         BOOLEAN boxed = FALSE;
 
         if (wcscmp(data.cFileName, L".") != 0 &&
-            wcscmp(data.cFileName, L"..") != 0) {
+            wcscmp(data.cFileName, L"..") != 0 &&
+            (data.dwFileAttributes & (
+                FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS | FILE_ATTRIBUTE_RECALL_ON_OPEN | FILE_ATTRIBUTE_OFFLINE
+            )) == 0) {
 
             wcscpy(path_end + 1, data.cFileName);
 

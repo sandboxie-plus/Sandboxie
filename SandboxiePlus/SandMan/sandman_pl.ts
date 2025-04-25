@@ -458,8 +458,9 @@ zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337)
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="331"/>
-        <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer.</source>
-        <translation>Piaskownica izoluje system hosta od procesów uruchomionych w piaskownicy, uniemożliwiając im wprowadzanie trwałych zmian w innych programach i danych na komputerze.</translation>
+        <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
+        <oldsource>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer.</oldsource>
+        <translation type="unfinished">Piaskownica izoluje system hosta od procesów uruchomionych w piaskownicy, uniemożliwiając im wprowadzanie trwałych zmian w innych programach i danych na komputerze.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
@@ -6869,18 +6870,21 @@ Przed wysłaniem można przejrzeć dzienniki w oknie głównym.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="854"/>
-        <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus.</source>
-        <translation>Przepraszamy za niedogodności związane z Sandboxie-Plus.</translation>
+        <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
+        <oldsource>We apologize for the inconvenience you are currently facing with Sandboxie-Plus.</oldsource>
+        <translation type="unfinished">Przepraszamy za niedogodności związane z Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="861"/>
-        <source>Unfortunately, the automated troubleshooting procedure failed.</source>
-        <translation>Niestety, automatyczna procedura rozwiązywania problemów nie powiodła się.</translation>
+        <source>Unfortunately, the automated troubleshooting procedure failed. </source>
+        <oldsource>Unfortunately, the automated troubleshooting procedure failed.</oldsource>
+        <translation type="unfinished">Niestety, automatyczna procedura rozwiązywania problemów nie powiodła się.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="867"/>
-        <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described.</source>
-        <translation>Niestety, nie istnieje zautomatyzowana procedura rozwiązywania problemów dla opisanego problemu.</translation>
+        <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
+        <oldsource>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described.</oldsource>
+        <translation type="unfinished">Niestety, nie istnieje zautomatyzowana procedura rozwiązywania problemów dla opisanego problemu.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="872"/>
@@ -8333,8 +8337,9 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4174"/>
-        <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content.</source>
-        <translation>Po wywołaniu funkcji szybkiego odzyskiwania następujące foldery zostaną sprawdzone pod kątem zawartości w piaskownicy.</translation>
+        <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
+        <oldsource>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content.</oldsource>
+        <translation type="unfinished">Po wywołaniu funkcji szybkiego odzyskiwania następujące foldery zostaną sprawdzone pod kątem zawartości w piaskownicy.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4560"/>
@@ -8668,8 +8673,9 @@ zamiast &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5540"/>
-        <source>These options are intended for debugging compatibility issues, please do not use them in production use.</source>
-        <translation>Te opcje są przeznaczone do debugowania problemów z kompatybilnością, proszę nie używać ich w zastosowaniach produkcyjnych.</translation>
+        <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
+        <oldsource>These options are intended for debugging compatibility issues, please do not use them in production use.</oldsource>
+        <translation type="unfinished">Te opcje są przeznaczone do debugowania problemów z kompatybilnością, proszę nie używać ich w zastosowaniach produkcyjnych.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5555"/>
@@ -11209,7 +11215,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2803"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Otwórz szablon</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2758"/>

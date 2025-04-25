@@ -460,7 +460,7 @@ zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337)
         <location filename="Wizards/NewBoxWizard.cpp" line="331"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
         <oldsource>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer.</oldsource>
-        <translation type="unfinished">Piaskownica izoluje system hosta od procesów uruchomionych w piaskownicy, uniemożliwiając im wprowadzanie trwałych zmian w innych programach i danych na komputerze.</translation>
+        <translation>Piaskownica izoluje system hosta od procesów uruchomionych w piaskownicy, uniemożliwiając im wprowadzanie trwałych zmian w innych programach i danych na komputerze.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
@@ -1791,7 +1791,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="781"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>ograniczony</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="953"/>
@@ -6872,19 +6872,19 @@ Przed wysłaniem można przejrzeć dzienniki w oknie głównym.</translation>
         <location filename="Wizards/BoxAssistant.cpp" line="854"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
         <oldsource>We apologize for the inconvenience you are currently facing with Sandboxie-Plus.</oldsource>
-        <translation type="unfinished">Przepraszamy za niedogodności związane z Sandboxie-Plus.</translation>
+        <translation>Przepraszamy za niedogodności, z którymi obecnie borykasz się w związku z Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="861"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
         <oldsource>Unfortunately, the automated troubleshooting procedure failed.</oldsource>
-        <translation type="unfinished">Niestety, automatyczna procedura rozwiązywania problemów nie powiodła się.</translation>
+        <translation>Niestety, automatyczna procedura rozwiązywania problemów zakończyła się niepowodzeniem.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="867"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
         <oldsource>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described.</oldsource>
-        <translation type="unfinished">Niestety, nie istnieje zautomatyzowana procedura rozwiązywania problemów dla opisanego problemu.</translation>
+        <translation>Niestety, nie ma dostępnej automatycznej procedury rozwiązywania problemów dla konkretnego opisanego problemu.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="872"/>
@@ -8339,7 +8339,7 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
         <location filename="Forms/OptionsWindow.ui" line="4174"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <oldsource>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content.</oldsource>
-        <translation type="unfinished">Po wywołaniu funkcji szybkiego odzyskiwania następujące foldery zostaną sprawdzone pod kątem zawartości w piaskownicy.</translation>
+        <translation>Gdy zostanie wywołana funkcja Szybkiego Odzyskiwania, następujące foldery zostaną sprawdzone pod kątem zawartości znajdującej się w pudełkach piaskowych. </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4560"/>
@@ -8675,7 +8675,7 @@ zamiast &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="5540"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <oldsource>These options are intended for debugging compatibility issues, please do not use them in production use.</oldsource>
-        <translation type="unfinished">Te opcje są przeznaczone do debugowania problemów z kompatybilnością, proszę nie używać ich w zastosowaniach produkcyjnych.</translation>
+        <translation>Te opcje są przeznaczone do debugowania problemów ze zgodnością. Prosimy nie używać ich w środowisku produkcyjnym.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5555"/>
@@ -9677,7 +9677,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3899"/>
         <source>Test Proxy</source>
-        <translation>Sprawdź serwer proxy</translation>
+        <translation>Testuj serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3932"/>
@@ -9796,7 +9796,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <location filename="Forms/OptionsWindow.ui" line="1760"/>
         <location filename="Forms/OptionsWindow.ui" line="1836"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>ograniczony</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1820"/>
@@ -11180,7 +11180,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="Forms/SettingsWindow.ui" line="2643"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;teraz aktualizuj szablony zgodności&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2699"/>
@@ -11215,7 +11215,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2803"/>
         <source>Open Template</source>
-        <translation type="unfinished">Otwórz szablon</translation>
+        <translation>Otwórz szablon</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2758"/>
@@ -11295,129 +11295,129 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="20"/>
         <source>Test Proxy</source>
-        <translation type="unfinished">Sprawdź serwer proxy</translation>
+        <translation>Testuj serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="69"/>
         <source>Test Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia testów...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="82"/>
         <source>Testing...</source>
-        <translation type="unfinished">Trwa testowanie...</translation>
+        <translation>Trwa testowanie...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="117"/>
         <source>Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="127"/>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="134"/>
         <source>127.0.0.1:80</source>
-        <translation type="unfinished">127.0.0.1:80</translation>
+        <translation>127.0.0.1:80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="144"/>
         <source>Protocol:</source>
-        <translation type="unfinished">Protokół:</translation>
+        <translation>Protokół:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="151"/>
         <source>SOCKS 5</source>
-        <translation type="unfinished"></translation>
+        <translation>SOCKS 5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="158"/>
         <source>Authentication:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uwierzytelnienie:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="165"/>
         <source>NO</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="172"/>
         <source>Login:</source>
-        <translation type="unfinished"></translation>
+        <translation>Logowanie:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="179"/>
         <source>username</source>
-        <translation type="unfinished"></translation>
+        <translation>nazwa użytkownika</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="242"/>
         <source>Timeout (secs):</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas wygaśnięcia (sekundy):</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="249"/>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="274"/>
         <source>Test 1: Connection to the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 1: Połączenie z serwerem proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="280"/>
         <location filename="Forms/TestProxyDialog.ui" line="302"/>
         <location filename="Forms/TestProxyDialog.ui" line="388"/>
         <source>Enable this test</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz ten test</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="293"/>
         <source>Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 2: Połączenie poprzez serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="330"/>
         <source>Target host:</source>
-        <translation type="unfinished"></translation>
+        <translation>Host docelowy:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="340"/>
         <source>www.google.com</source>
-        <translation type="unfinished"></translation>
+        <translation>www.google.com</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="350"/>
         <source>Port:</source>
-        <translation type="unfinished">Port:</translation>
+        <translation>Port:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="360"/>
         <source>80</source>
-        <translation type="unfinished">80</translation>
+        <translation>80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="369"/>
         <source>Load a default web page from the host. (There must be a web server running on the host)</source>
-        <translation type="unfinished"></translation>
+        <translation>Załaduj domyślną stronę internetową z hosta. (Na hoście musi być uruchomiony serwer WWW)</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 3: Opóźnienie serwera proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>
         <source>Ping count:</source>
-        <translation type="unfinished"></translation>
+        <translation>Liczba pingów:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>
         <source>Increase ping count to improve the accuracy of the average latency calculation. More pings help to ensure that the average is representative of typical network conditions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwiększ liczbę pingów, aby poprawić precyzję obliczeń średniego opóźnienia. Większa liczba pingów pomaga zapewnić, że średnia jest reprezentatywna dla typowych warunków sieciowych. </translation>
     </message>
 </context>
 </TS>

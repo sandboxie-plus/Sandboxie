@@ -345,6 +345,9 @@ static SOCKADDR_IN      WSA_BindIP4           = {0};
 static SOCKADDR_IN6_LH  WSA_BindIP6           = {0};
 
 typedef struct _WSA_SOCK {
+
+    USHORT af;
+
     ULONG NonBlocking;
 
     BOOLEAN ConnectedSet;
@@ -675,7 +678,12 @@ static SOCKET WSA_WSASocketW(
         }
     }
 
-    return __sys_WSASocketW(af, type, protocol, lpProtocolInfo, g, dwFlags);
+    SOCKET s = __sys_WSASocketW(af, type, protocol, lpProtocolInfo, g, dwFlags);
+
+    if (WSA_ProxyHack || WSA_BindIP)
+        WSA_GetSock(s, TRUE)->af = af;
+
+    return s;
 }
 
 
@@ -800,20 +808,22 @@ _FX int WSA_bind(
 
 
 _FX void WSA_bind_ip(
-    SOCKET         s,
+    SOCKET         s/*,
     const void     *name,
-    int            namelen)
+    int            namelen*/)
 {
     WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
     if (pSock->Bound)
         return;
 
-    if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) {
+    //if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) {
+    if (pSock->af == AF_INET){
 
         __sys_bind(s, &WSA_BindIP4, sizeof(WSA_BindIP4));
         pSock->Bound = TRUE;
     }
-    else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
+    //else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
+    else if (pSock->af == AF_INET6){
 
         __sys_bind(s, &WSA_BindIP6, sizeof(WSA_BindIP6));
         pSock->Bound = TRUE;
@@ -1092,7 +1102,7 @@ _FX int WSA_connect(
 
     if (WSA_BindIP) {
 
-        WSA_bind_ip(s, name, namelen);
+        WSA_bind_ip(s/*, name, namelen*/);
     }
 
     if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
@@ -1155,7 +1165,7 @@ _FX int WSA_WSAConnect(
 
     if (WSA_BindIP) {
 
-        WSA_bind_ip(s, name, namelen);
+        WSA_bind_ip(s/*, name, namelen*/);
     }
 
     if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
@@ -1218,7 +1228,7 @@ _FX int WSA_ConnectEx(
 
     if (WSA_BindIP) {
 
-        WSA_bind_ip(s, name, namelen);
+        WSA_bind_ip(s/*, name, namelen*/);
     }
 
     if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
@@ -1374,7 +1384,7 @@ _FX int WSA_sendto(
 
     if (WSA_BindIP) {
 
-        WSA_bind_ip(s, to, tolen);
+        WSA_bind_ip(s/*, to, tolen*/);
     }
 
     return __sys_sendto(s, buf, len, flags, to, tolen);
@@ -1402,7 +1412,7 @@ _FX int WSA_WSASendTo(
 
     if (WSA_BindIP) {
 
-        WSA_bind_ip(s, lpTo, iTolen);
+        WSA_bind_ip(s/*, lpTo, iTolen*/);
     }
 
     return __sys_WSASendTo(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent,
@@ -1423,15 +1433,24 @@ _FX int WSA_recvfrom(
     void     *from,
     int      *fromlen)
 {
+    if (WSA_BindIP) {
+
+        WSA_bind_ip(s);
+    }
+
+    char buffer[128];
+    int buffer_len = sizeof(buffer);
+    if (!from) {
+        from = buffer;
+        fromlen = &buffer_len;
+    }
+
+    int ret = __sys_recvfrom(s, buf, len, flags, from, fromlen);
+
     if (WSA_IsBlockedTraffic(from, *fromlen, IPPROTO_UDP))
         return SOCKET_ERROR;
 
-    if (WSA_BindIP) {
-
-        WSA_bind_ip(s, from, *fromlen);
-    }
-
-    return __sys_recvfrom(s, buf, len, flags, from, fromlen);
+    return ret;
 }
 
 
@@ -1451,16 +1470,25 @@ _FX int WSA_WSARecvFrom(
     LPWSAOVERLAPPED                    lpOverlapped,
     LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine)
 {
+    if (WSA_BindIP) {
+
+        WSA_bind_ip(s);
+    }
+
+    char buffer[128];
+    int buffer_len = sizeof(buffer);
+    if (!lpFrom) {
+        lpFrom = buffer;
+        lpFromlen = &buffer_len;
+    }
+
+    int ret = __sys_WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd,
+        lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine);
+
     if (WSA_IsBlockedTraffic(lpFrom, *lpFromlen, IPPROTO_UDP))
         return SOCKET_ERROR;
 
-    if (WSA_BindIP) {
-
-        WSA_bind_ip(s, lpFrom, *lpFromlen);
-    }
-
-    return __sys_WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd,
-        lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine);
+    return ret;
 }
 
 

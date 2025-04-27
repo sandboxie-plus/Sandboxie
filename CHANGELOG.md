@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed PingInfoView gives an error when running in Sandboxie [#4718](https://github.com/sandboxie-plus/Sandboxie/issues/4718)
 - fixed CollectProducts() Stuck in Loop When Uninstall Key Not Found [#4753](https://github.com/sandboxie-plus/Sandboxie/issues/4753)
 - fixed crashes with SbieDll.dll [#4754](https://github.com/sandboxie-plus/Sandboxie/issues/4754)
+- fixed Automatically download file when creating shortcut [#4663](https://github.com/sandboxie-plus/Sandboxie/issues/4663) [4750](https://github.com/sandboxie-plus/Sandboxie/pull/4750) (thanks WZ-Tong)
 
 ### Removed
 - removed the not-working "delete content" button [#4720](https://github.com/sandboxie-plus/Sandboxie/pull/4720) (thanks habatake)

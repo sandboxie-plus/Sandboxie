@@ -5,8 +5,18 @@
 
 ## [1.15.12 / 5.70.12] - 2025-04-??
 
+### 新增
+- 为 Plus UI 新增印度尼西亚语翻译 [4bad4d1](https://github.com/sandboxie-plus/Sandboxie/commit/4bad4d190a90a6329d549e5a31ca8ee13b4eb9a1)（感谢 ？？？）
+- 新增 WeType 输入法（IME）模板 [#4715](https://github.com/sandboxie-plus/Sandboxie/pull/4715)（感谢 bot-1450）
+- 在代理配置中新增主机名支持（在 WSA_Startup 时查找主机）
+- Sandboxie 现在支持绑定到适配器，而非仅绑定 IP（在 WSA_Startup 时解析 IP）
+- 新增对 %ProgramFiles(x86)% 变量的支持 [#2402](https://github.com/sandboxie-plus/Sandboxie/issues/2402)
+- 新增 TemplateDefaultFolders，包含所有需在增强隐私盒中创建的默认路径
+
 ### 更改
 - 修正了沙盒列表中的异常排序问题 [#4615](https://github.com/sandboxie-plus/Sandboxie/issues/4615)
+- 支持标签页中的名称与 HwID 信息默认隐藏，可按需切换显示 [#4714](https://github.com/sandboxie-plus/Sandboxie/pull/4714)
+- 新增可选的代理中继实现（不再篡改现有套接字，而是启动中继线程）[实验性]
 
 ### 修复
 - 修复了“在沙盒中运行”选择提示未显示沙盒别名的问题 [#4709](https://github.com/sandboxie-plus/Sandboxie/issues/4709)
@@ -17,6 +27,17 @@
 - 修复了腾讯 TIM 模板导致无法使用拖放功能的问题 [#4688](https://github.com/sandboxie-plus/Sandboxie/issues/4688)
 - 改进了 Sandboxie.ini 文件很大时响应速度变慢的问题 [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)
 - 修复了 Msi 安装过程中无法在数据保护沙盒中创建 AppData\Romaing\Microsoft 文件夹的问题 [#4711](https://github.com/sandboxie-plus/Sandboxie/issues/4711)
+- 修复了 Sandboxie 在时间加速相关的两个错误，并新增了两个时间函数的钩子 [#4721](https://github.com/sandboxie-plus/Sandboxie/pull/4721)（感谢 pwnmelife）
+- 修复了协议选择的翻译字符串被保存到配置文件中的问题
+- 修复了沙盒选择器图标
+- 修复了切换 UI 语言时工具栏未更新的问题 [#4726](https://github.com/sandboxie-plus/Sandboxie/issues/4726)
+- 修复了 PingInfoView 在 Sandboxie 中运行时报错的问题 [#4718](https://github.com/sandboxie-plus/Sandboxie/issues/4718)
+- 修复了卸载注册表项未找到时，CollectProducts() 卡在循环中的问题 [#4753](https://github.com/sandboxie-plus/Sandboxie/issues/4753)
+- 修复了与 SbieDll.dll 相关的崩溃问题 [#4754](https://github.com/sandboxie-plus/Sandboxie/issues/4754)
+- 修复了在创建快捷方式时自动下载文件的问题 [#4663](https://github.com/sandboxie-plus/Sandboxie/issues/4663) [4750](https://github.com/sandboxie-plus/Sandboxie/pull/4750)（感谢 WZ-Tong）
+
+### 移除
+- 移除了无效的“删除内容”按钮 [#4720](https://github.com/sandboxie-plus/Sandboxie/pull/4720)（感谢 habatake）
 
 
 ## [1.15.11 / 5.70.11] - 2025-04-16

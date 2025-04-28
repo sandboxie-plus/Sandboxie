@@ -671,7 +671,14 @@ _FX void ScanFolder(MENU_DIR *menu, WCHAR *path, UCHAR source)
         BOOLEAN boxed = FALSE;
 
         if (wcscmp(data.cFileName, L".") != 0 &&
-            wcscmp(data.cFileName, L"..") != 0) {
+            wcscmp(data.cFileName, L"..") != 0 &&
+            // OneDrive On-Demand feature set both FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS
+            // and FILE_ATTRIBUTE_UNPINNED, to determine an expensive call, it should detect
+            // flags: FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS | FILE_ATTRIBUTE_RECALL_ON_OPEN |
+            // FILE_ATTRIBUTE_OFFLINE.
+            //
+            // This filter only considers the intersection
+            (data.dwFileAttributes & FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS) == 0) {
 
             wcscpy(path_end + 1, data.cFileName);
 

@@ -895,42 +895,38 @@ void CSandMan::OnToolBarMenuItemClicked(const QString& scriptName)
 
 void CSandMan::CreateToolBarConfigMenu(const QList<ToolBarAction>& actions, const QSet<QString>& currentItems)
 {
-	static QMenu* m_pToolBarContextMenu = NULL;
-	if (!m_pToolBarContextMenu)
+	m_pToolBarContextMenu = new QMenu(tr("Toolbar Items"), m_pToolBar);
+
+	m_pToolBarContextMenu->addAction(tr("Reset Toolbar"), this, &CSandMan::OnResetToolBarMenuConfig);
+	m_pToolBarContextMenu->addSeparator();
+
+	for (auto sa : actions)
 	{
-		m_pToolBarContextMenu = new QMenu(tr("Toolbar Items"), this);
-
-		m_pToolBarContextMenu->addAction(tr("Reset Toolbar"), this, &CSandMan::OnResetToolBarMenuConfig);
-		m_pToolBarContextMenu->addSeparator();
-
-		for (auto sa : actions)
-		{
-			if (sa.scriptName == nullptr) {
-				m_pToolBarContextMenu->addSeparator();
-				continue;
-			}
-
-			QString text = sa.scriptName;
-			if (!sa.nameOverride.isEmpty())
-				text = sa.nameOverride;
-			else if (sa.action)
-				text = sa.action->text();  // tr: already localised
-			else
-				qDebug() << "ERROR: Missing display name for " << sa.scriptName;
-
-			auto scriptName = sa.scriptName;
-			//auto menuAction = m_pToolBarContextMenu->addAction(text, this, [scriptName, this]() {
-			auto menuAction = new QCheckBox(text);
-			QWidgetAction* menuEntry = new QWidgetAction(this);
-			menuEntry->setDefaultWidget(menuAction);
-			m_pToolBarContextMenu->addAction(menuEntry);
-			connect(menuAction, &QCheckBox::clicked, this, [scriptName, this]() {
-				OnToolBarMenuItemClicked(scriptName);
-				}
-			);
-			//menuAction->setCheckable(true);
-			menuAction->setChecked(currentItems.contains(sa.scriptName));
+		if (sa.scriptName == nullptr) {
+			m_pToolBarContextMenu->addSeparator();
+			continue;
 		}
+
+		QString text = sa.scriptName;
+		if (!sa.nameOverride.isEmpty())
+			text = sa.nameOverride;
+		else if (sa.action)
+			text = sa.action->text();  // tr: already localised
+		else
+			qDebug() << "ERROR: Missing display name for " << sa.scriptName;
+
+		auto scriptName = sa.scriptName;
+		//auto menuAction = m_pToolBarContextMenu->addAction(text, this, [scriptName, this]() {
+		auto menuAction = new QCheckBox(text);
+		QWidgetAction* menuEntry = new QWidgetAction(this);
+		menuEntry->setDefaultWidget(menuAction);
+		m_pToolBarContextMenu->addAction(menuEntry);
+		connect(menuAction, &QCheckBox::clicked, this, [scriptName, this]() {
+			OnToolBarMenuItemClicked(scriptName);
+			}
+		);
+		//menuAction->setCheckable(true);
+		menuAction->setChecked(currentItems.contains(sa.scriptName));
 	}
 
 	m_pToolBar->setContextMenuPolicy(Qt::CustomContextMenu);

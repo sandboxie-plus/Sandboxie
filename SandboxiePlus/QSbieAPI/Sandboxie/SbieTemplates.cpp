@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (c) 2020, David Xanatos
+ * Copyright (c) 2020-2025, David Xanatos
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -303,7 +303,7 @@ void CSbieTemplates::CollectProducts()
 			HKEY hkey;
 			LONG rc = RegOpenKeyExW(Root, L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", 0, DesiredAccess, &hkey);
 			if (rc != 0)
-				continue;
+				break;
 
 			WCHAR name[128];
 			for (ULONG index = 0; rc != ERROR_NO_MORE_ITEMS; index++)

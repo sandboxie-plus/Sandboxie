@@ -210,7 +210,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="905"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation>Ta funkcja może spowodować pogorszenie doświadczenia użytkownika, ponieważ uniemożliwia również normalne robienie zrzutów ekranu. </translation>
+        <translation>Ta funkcja może spowodować pogorszenie doświadczenia użytkownika, ponieważ uniemożliwia również normalne robienie zrzutów ekranu.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
@@ -231,7 +231,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <translation>To ustawienie dodaje lokalny szablon lub jego ustawienia do konfiguracji sandboxa, dzięki czemu ustawienia w tym szablonie są współdzielone między sandboxami.
 Jednakże, jeśli opcja &quot;użyj jako szablon&quot; jest wybrana jako tryb współdzielenia, niektóre ustawienia mogą nie być widoczne w interfejsie użytkownika.
 Aby zmienić ustawienia szablonu, po prostu znajdź szablon &quot;%1&quot; na liście Szablony aplikacji w Opcjach sandboxa, a następnie dwukrotnie kliknij na niego, aby go edytować.
-Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablonów. </translation>
+Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablonów.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="918"/>
@@ -241,12 +241,12 @@ Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablo
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation>Ta opcja dodaje udostępniony szablon do konfiguracji sandboxa jako lokalny szablon i może również usunąć domyślne ustawienia sandboxa na podstawie ustawień usuwania znajdująących się w szablonie. </translation>
+        <translation>Ta opcja dodaje udostępniony szablon do konfiguracji sandboxa jako lokalny szablon i może również usunąć domyślne ustawienia sandboxa na podstawie ustawień usuwania znajdująących się w szablonie.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="920"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
-        <translation>Ta opcja dodaje ustawienia z udostępnionego szablonu do konfiguracji sandboxa i może również usunąć domyślne ustawienia sandboxa na podstawie ustawień usuwania znajdująących się w szablonie. </translation>
+        <translation>Ta opcja dodaje ustawienia z udostępnionego szablonu do konfiguracji sandboxa i może również usunąć domyślne ustawienia sandboxa na podstawie ustawień usuwania znajdująących się w szablonie.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="921"/>
@@ -281,7 +281,7 @@ Aby wyłączyć ten szablon dla sandboxa, po prostu odznacz go na liście szablo
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation>Zapobiegaj zrzucaniu ekranu okien uruchomionych w sandboxie.</translation>
+        <translation>Zapobiegaj zrzucaniu ekranu okien uruchomionych w sandboxie</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="925"/>
@@ -433,7 +433,7 @@ This length permits approximately 384 bits of entropy with a passphrase composed
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
         <translation>Hasło jest ograniczone do maksymalnej długości 128 znaków.
 Ta długość pozwala na osiągnięcie około 384 bitów entropii w przypadku frazy hasłowej składającej się z rzeczywistych angielskich słów,
-zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337), a przekracza 768 bitów, gdy składa się całkowicie z losowych drukowalnych znaków ASCII. </translation>
+zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337), a przekracza 768 bitów, gdy składa się całkowicie z losowych drukowalnych znaków ASCII.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="167"/>
@@ -444,7 +444,7 @@ zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337)
 <context>
     <name>CBoxPicker</name>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="23"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="24"/>
         <source>Sandbox</source>
         <translation>Piaskownica</translation>
     </message>
@@ -459,6 +459,7 @@ zwiększa się do 512 bitów przy zastosowaniu modyfikacji w języku Leet (L337)
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="331"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
+        <oldsource>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer.</oldsource>
         <translation>Piaskownica izoluje system hosta od procesów uruchomionych w piaskownicy, uniemożliwiając im wprowadzanie trwałych zmian w innych programach i danych na komputerze.</translation>
     </message>
     <message>
@@ -844,7 +845,7 @@ Proszę przejść do właściwego katalogu profilu użytkownika.</translation>
         <location filename="Wizards/SetupWizard.cpp" line="292"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <oldsource>You can request a free %1-day evaluation certificate up to %2 times for any one Hardware ID</oldsource>
-        <translation>Możesz zażądać bezpłatnego certyfikatu testowego na %1 dni, maksymalnie %2 razy na identyfikator sprzętowy.</translation>
+        <translation>Możesz zażądać bezpłatnego certyfikatu testowego na %1 dni, maksymalnie %2 razy na Identyfikator sprzętu.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="317"/>
@@ -1099,7 +1100,7 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation>Sandbox nie może znajdować się w katalogu głównym partycji, proszę wybrać folder. </translation>
+        <translation>Sandbox nie może znajdować się w katalogu głównym partycji, proszę wybrać folder.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
@@ -1280,7 +1281,7 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <source>On this page sandbox isolation options can be configured.</source>
-        <translation>Na tej stronie można skonfigurować opcje izolacji w puli piaskowej (Sandbox). </translation>
+        <translation>Na tej stronie można skonfigurować opcje izolacji w puli piaskowej (Sandbox).</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
@@ -1305,53 +1306,53 @@ Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego w�
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
         <source>Allow access to network files and folders</source>
-        <translation type="unfinished">Zezwól na dostęp do plików i folderów sieciowych</translation>
+        <translation>Pozwól na dostęp do plików i folderów sieciowych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="764"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <translation type="unfinished">Ta opcja nie jest zalecana dla wzmocnionych boksów</translation>
+        <translation>Ta opcja nie jest zalecana w przypadku skrzynek hartowanych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="769"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
-        <translation>Zapytaj użytkownika, czy ma zostać udzielona wyłączenie z blokuady. </translation>
+        <translation>Zapytaj użytkownika, czy ma zostać udzielona wyłączenie z blokuady</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="775"/>
         <source>Admin Options</source>
-        <translation type="unfinished">Opcje administratora</translation>
+        <translation>Opcje administracyjne</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="779"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished">Porzuć prawa z grup Administratorzy i Użytkownicy Zaawansowani</translation>
+        <translation>Usuń uprawnienia z grup Administratorów i Użytkowników o wzmacnionych uprawnieniach</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished">Spraw, by aplikacje reagowały jakby były uruchomione z podwyższonym poziomem uprawnień</translation>
+        <translation>Sprawdź, czy aplikacje są uruchamiane z podwyższonymi uprawnieniami</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="790"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished">Zezwól na uruchamianie MSIServer z tokenem systemowym w trybie piaskownicy</translation>
+        <translation>Zezwalaj narzędziu MSIServer na uruchamianie z tokenem systemowym w trybie piaskownicy</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="797"/>
         <source>Box Options</source>
-        <translation type="unfinished">Opcje piaskownicy</translation>
+        <translation>Opcje pudełka</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="801"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Użyj loginu Sandboxie zamiast anonimowego tokena</translation>
+        <translation>Użyj logowania w Sandboxie zamiast anonimowego tokenu</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="802"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished">Użycie niestandardowego tokena sandboxie pozwala na lepsze odizolowanie poszczególnych sandboxów od siebie, a także pokazuje w kolumnie użytkownika w menedżerach zadań nazwę sandboxa, do którego należy dany proces. Niektóre rozwiązania bezpieczeństwa firm trzecich mogą jednak mieć problemy z niestandardowymi tokenami.</translation>
+        <translation>Użycie niestandardowego tokena Sandboxie pozwala lepiej odizolować poszczególne piaskownice od siebie, a w kolumnie użytkownika menedżerów zadań pokazuje nazwę pola, do którego należy proces. Niektóre rozwiązania zabezpieczające innych firm mogą jednak mieć problemy z niestandardowymi tokenami.</translation>
     </message>
 </context>
 <context>
@@ -1536,7 +1537,7 @@ Czy nadal chcesz dokonać aktualizacji?</translation>
     <message>
         <location filename="OnlineUpdater.cpp" line="588"/>
         <source>Update Check completed, no new updates</source>
-        <translation>Sprawdzenie aktualizacji zostało ukończone. Nie ma dostępnych nowych aktualizacji.</translation>
+        <translation>Sprawdzenie aktualizacji zostało ukończone. Nie ma dostępnych nowych aktualizacji</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="733"/>
@@ -1790,7 +1791,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="781"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>ograniczony</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="953"/>
@@ -2200,8 +2201,8 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Windows/OptionsGeneral.cpp" line="622"/>
         <location filename="Windows/OptionsGeneral.cpp" line="717"/>
         <location filename="Windows/OptionsNetwork.cpp" line="350"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="623"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="715"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="634"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="727"/>
         <source>Group: %1</source>
         <translation>Grupa: %1</translation>
     </message>
@@ -2440,11 +2441,11 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Windows/OptionsAdvanced.cpp" line="1006"/>
         <location filename="Windows/OptionsGeneral.cpp" line="617"/>
         <location filename="Windows/OptionsGeneral.cpp" line="713"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="618"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="711"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="824"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="1028"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="1267"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="629"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="723"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="836"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1040"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1279"/>
         <source>All Programs</source>
         <translation>Wszystkie programy</translation>
     </message>
@@ -2479,7 +2480,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Windows/OptionsGeneral.cpp" line="684"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="690"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="702"/>
         <source>Template values can not be edited.</source>
         <translation>Wartości szablonów nie mogą być zmienione.</translation>
     </message>
@@ -2608,32 +2609,32 @@ Wybierz folder, który zawiera ten plik.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="55"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="745"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="757"/>
         <source>Any</source>
         <translation>każdy</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="56"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="746"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="758"/>
         <source>TCP</source>
         <translation>TCP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="57"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="747"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="759"/>
         <source>UDP</source>
         <translation>UDP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="58"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="748"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="760"/>
         <source>ICMP</source>
         <translation>ICMP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak (Nie powiązuj z adapterem)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -2651,29 +2652,29 @@ Wybierz folder, który zawiera ten plik.</translation>
         <translation>Blokuj, odmawiając dostępu do urządzeń sieciowych</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="917"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="929"/>
         <source>Please enter a domain to be filtered</source>
         <translation>Proszę wprowadzić domenę, którą należy zfiltrować.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="947"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="959"/>
         <source>Yes</source>
         <translation>Tak</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="948"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="960"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="972"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="984"/>
         <source>Please enter IP and Port.</source>
         <translation>Proszę wprowadzić adres IP i numer portu.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="1154"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation> Wpis: Adres IP lub numer portu nie mogą być puste.</translation>
+        <translation> Wpis: Adres IP lub numer portu nie mogą być puste</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>
@@ -2682,7 +2683,7 @@ Wybierz folder, który zawiera ten plik.</translation>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
         <location filename="Windows/OptionsNetwork.cpp" line="328"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="731"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="743"/>
         <source>Allow</source>
         <translation>Pozwól</translation>
     </message>
@@ -2702,7 +2703,7 @@ Wybierz folder, który zawiera ten plik.</translation>
         <translation>Wymagana jest niepusta nazwa programu.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="732"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="744"/>
         <source>Block</source>
         <translation>Blokada</translation>
     </message>
@@ -3208,22 +3209,22 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="4541"/>
+        <location filename="SandMan.cpp" line="4537"/>
         <source>Waiting for folder: %1</source>
         <translation>Oczekiwanie na folder: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4542"/>
+        <location filename="SandMan.cpp" line="4538"/>
         <source>Deleting folder: %1</source>
         <translation>Usuwanie folderu: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4543"/>
+        <location filename="SandMan.cpp" line="4539"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Scalanie folderów: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4544"/>
+        <location filename="SandMan.cpp" line="4540"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Kończenie scalania migawek...</translation>
     </message>
@@ -3313,7 +3314,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <name>CSandMan</name>
     <message>
         <location filename="SandMan.cpp" line="197"/>
-        <location filename="SandMan.cpp" line="2432"/>
+        <location filename="SandMan.cpp" line="2428"/>
         <source>Sandboxie-Plus v%1</source>
         <translation>Sandboxie-Plus v%1</translation>
     </message>
@@ -3328,77 +3329,77 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <translation>Menu Edytuj ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="901"/>
+        <location filename="SandMan.cpp" line="898"/>
         <source>Toolbar Items</source>
         <translation>Elementy paska narzędzi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="903"/>
+        <location filename="SandMan.cpp" line="900"/>
         <source>Reset Toolbar</source>
         <translation>Resetowanie paska narzędzi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1077"/>
+        <location filename="SandMan.cpp" line="1073"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Jest gotowa nowa wersja Sandboxie-Plus %1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1081"/>
+        <location filename="SandMan.cpp" line="1077"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Jest gotowa nowa aktualizacja Sandboxie-Plus %1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1085"/>
+        <location filename="SandMan.cpp" line="1081"/>
         <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update v%1 available&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Dostępna jest nowa aktualizacja Sandboxie-Plus v%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2600"/>
+        <location filename="SandMan.cpp" line="2596"/>
         <source>Do you want the setup wizard to be omitted?</source>
         <translation>Czy chcesz pominąć kreatora konfiguracji?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4219"/>
+        <location filename="SandMan.cpp" line="4215"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
         <translation>Czy chcesz otworzyć %1 w przeglądarce WWW w piaskownicy lub bez piaskownicy?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4223"/>
+        <location filename="SandMan.cpp" line="4219"/>
         <source>Sandboxed</source>
         <translation>W piaskownicy</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4224"/>
+        <location filename="SandMan.cpp" line="4220"/>
         <source>Unsandboxed</source>
         <translation>Bez piaskownicy</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4386"/>
+        <location filename="SandMan.cpp" line="4382"/>
         <source>Reset Columns</source>
         <translation>Zresetuj kolumny</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4387"/>
+        <location filename="SandMan.cpp" line="4383"/>
         <source>Copy Cell</source>
         <translation>Skopiuj komórkę</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4388"/>
+        <location filename="SandMan.cpp" line="4384"/>
         <source>Copy Row</source>
         <translation>Skopiuj linijkę</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4389"/>
+        <location filename="SandMan.cpp" line="4385"/>
         <source>Copy Panel</source>
         <translation>Skopiuj wszystko</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1250"/>
+        <location filename="SandMan.cpp" line="1246"/>
         <source>Time|Message</source>
         <translation>Czas|Wiadomość</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1259"/>
+        <location filename="SandMan.cpp" line="1255"/>
         <source>Sbie Messages</source>
         <translation>Wiadomość Piaskownicy</translation>
     </message>
@@ -3420,8 +3421,8 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     </message>
     <message>
         <location filename="SandMan.cpp" line="512"/>
-        <location filename="SandMan.cpp" line="1005"/>
-        <location filename="SandMan.cpp" line="1006"/>
+        <location filename="SandMan.cpp" line="1001"/>
+        <location filename="SandMan.cpp" line="1002"/>
         <source>Create New Box</source>
         <translation>Utwórz nowy boks</translation>
     </message>
@@ -3561,7 +3562,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     </message>
     <message>
         <location filename="SandMan.cpp" line="195"/>
-        <location filename="SandMan.cpp" line="2430"/>
+        <location filename="SandMan.cpp" line="2426"/>
         <source>Sandboxie-Plus Insider [%1]</source>
         <translation>Tester Sandboxie-Plus [%1]</translation>
     </message>
@@ -3668,8 +3669,8 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="SandMan.cpp" line="632"/>
         <location filename="SandMan.cpp" line="773"/>
-        <location filename="SandMan.cpp" line="1021"/>
-        <location filename="SandMan.cpp" line="1022"/>
+        <location filename="SandMan.cpp" line="1017"/>
+        <location filename="SandMan.cpp" line="1018"/>
         <source>Edit Sandboxie.ini</source>
         <translation>Edytuj Sandboxie.ini</translation>
     </message>
@@ -3778,46 +3779,46 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <translation type="vanished">Kliknij, aby zainstalować aktualizację</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1096"/>
+        <location filename="SandMan.cpp" line="1092"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Sponsoruj Sandboxie-Plus na Patreon&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1097"/>
+        <location filename="SandMan.cpp" line="1093"/>
         <source>Click to open web browser</source>
         <translation>Kliknij, aby otworzyć przeglądarkę www</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1281"/>
+        <location filename="SandMan.cpp" line="1277"/>
         <source>Time|Box Name|File Path</source>
         <translation>Czas|Nazwa boksu|Ścieżka do pliku</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="606"/>
         <location filename="SandMan.cpp" line="716"/>
-        <location filename="SandMan.cpp" line="1291"/>
+        <location filename="SandMan.cpp" line="1287"/>
         <source>Recovery Log</source>
         <translation>Dziennik Przywracania</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1568"/>
+        <location filename="SandMan.cpp" line="1564"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
         <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
         <translation>Ten boks zapewnia &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;ulepszoną izolację bezpieczeństwa&lt;/a&gt;, jest odpowiedni do testowania niezaufanego oprogramowania.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1572"/>
+        <location filename="SandMan.cpp" line="1568"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
         <translation>Ten boks zapewnia standardową izolację, jest odpowiednia do uruchamiania oprogramowania w celu zwiększenia bezpieczeństwa.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1576"/>
+        <location filename="SandMan.cpp" line="1572"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
         <translation>Ten boks nie wymusza izolacji, jest przeznaczona wyłącznie do użytku jako &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;komora aplikacji&lt;/a&gt; do wirtualizacji oprogramowania.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1584"/>
+        <location filename="SandMan.cpp" line="1580"/>
         <source>&lt;br /&gt;&lt;br /&gt;This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</source>
         <oldsource>
 
@@ -3840,47 +3841,47 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation> - Usuwanie zawartości piaskownicy</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2175"/>
+        <location filename="SandMan.cpp" line="2171"/>
         <source>Auto Deleting %1 Content</source>
         <translation>Automatyczne Usuwanie %1 Zawartości</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2446"/>
+        <location filename="SandMan.cpp" line="2442"/>
         <source>Current Config: %1</source>
         <translation>Bieżąca konfiguracja: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3107"/>
+        <location filename="SandMan.cpp" line="3103"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>Wybrany zestaw funkcji jest dostępny tylko dla sponsorów projektu. Procesy rozpoczęte w boksie z włączonym zestawem funkcji bez certyfikatu wsparcia zostaną zakończone po 5 minutach.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get- cert&quot;&gt;Zostań sponsorem&lt;/a&gt; i otrzymaj &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3384"/>
+        <location filename="SandMan.cpp" line="3380"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>Proszę wpisać czas (w sekundach) wyłączenia reguł Programów wymuszonych.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4074"/>
+        <location filename="SandMan.cpp" line="4070"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Kod błędu: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4075"/>
+        <location filename="SandMan.cpp" line="4071"/>
         <source>Unknown</source>
         <translation>Nieznane</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4100"/>
+        <location filename="SandMan.cpp" line="4096"/>
         <source>Failed to copy box data files</source>
         <translation>Błąd przy kopiowaniu plików danych boksu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4105"/>
+        <location filename="SandMan.cpp" line="4101"/>
         <source>Failed to remove old box data files</source>
         <translation>Błąd przy usuwaniu starych plików danych boksu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4123"/>
+        <location filename="SandMan.cpp" line="4119"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Nieznany kod błędu: 0x%1</translation>
     </message>
@@ -3941,17 +3942,17 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation type="vanished">Odśwież plik ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1078"/>
+        <location filename="SandMan.cpp" line="1074"/>
         <source>Click to run installer</source>
         <translation>Kliknij, aby uruchomić instalatora</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1082"/>
+        <location filename="SandMan.cpp" line="1078"/>
         <source>Click to apply update</source>
         <translation>Kliknij, aby zastosować aktualizację</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1271"/>
+        <location filename="SandMan.cpp" line="1267"/>
         <source>Trace Log</source>
         <translation>Dziennik śledzenia</translation>
     </message>
@@ -3996,14 +3997,14 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </message>
     <message>
         <location filename="SandMan.cpp" line="504"/>
-        <location filename="SandMan.cpp" line="4479"/>
+        <location filename="SandMan.cpp" line="4475"/>
         <source>About Sandboxie-Plus</source>
         <translation>O Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="844"/>
-        <location filename="SandMan.cpp" line="993"/>
-        <location filename="SandMan.cpp" line="994"/>
+        <location filename="SandMan.cpp" line="989"/>
+        <location filename="SandMan.cpp" line="990"/>
         <source>Cleanup</source>
         <translation>Wyczyść</translation>
     </message>
@@ -4016,161 +4017,161 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation type="vanished">&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Dostępna jest nowa wersja Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1086"/>
+        <location filename="SandMan.cpp" line="1082"/>
         <source>Click to download update</source>
         <translation>Kliknij, aby pobrać aktualizację</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1358"/>
+        <location filename="SandMan.cpp" line="1354"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>Czy chcesz zakończyć Sandboxie manager?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1375"/>
+        <location filename="SandMan.cpp" line="1371"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
         <translation>Sandboxie-Plus działał w trybie przenośnym, teraz musi wyczyścić utworzone usługi. Do tego będzie potrzebowała uprawnień administracyjnych. Czy chcesz wyczyścić?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1376"/>
-        <location filename="SandMan.cpp" line="1949"/>
-        <location filename="SandMan.cpp" line="2468"/>
-        <location filename="SandMan.cpp" line="3424"/>
-        <location filename="SandMan.cpp" line="3869"/>
-        <location filename="SandMan.cpp" line="3885"/>
+        <location filename="SandMan.cpp" line="1372"/>
+        <location filename="SandMan.cpp" line="1945"/>
+        <location filename="SandMan.cpp" line="2464"/>
+        <location filename="SandMan.cpp" line="3420"/>
+        <location filename="SandMan.cpp" line="3865"/>
+        <location filename="SandMan.cpp" line="3881"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Nie pokazuj ponownie tej wiadomości.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1579"/>
+        <location filename="SandMan.cpp" line="1575"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
         <translation>Ten boks będzie &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;zaszyfrowany&lt;/a&gt;, a &lt;a href=&quot;sbie://docs/black-box&quot;&gt;dostęp do procesów w piaskownicy będzie chroniony&lt;/a &gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1654"/>
-        <location filename="SandMan.cpp" line="1685"/>
+        <location filename="SandMan.cpp" line="1650"/>
+        <location filename="SandMan.cpp" line="1681"/>
         <source>Which box you want to add in?</source>
         <translation>Do którego pola chcesz dodać?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1654"/>
-        <location filename="SandMan.cpp" line="1685"/>
+        <location filename="SandMan.cpp" line="1650"/>
+        <location filename="SandMan.cpp" line="1681"/>
         <source>Type the box name which you are going to set:</source>
         <translation>Wpisz nazwę pola, które zamierzasz ustawić:</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1671"/>
+        <location filename="SandMan.cpp" line="1667"/>
+        <location filename="SandMan.cpp" line="1672"/>
         <location filename="SandMan.cpp" line="1676"/>
-        <location filename="SandMan.cpp" line="1680"/>
+        <location filename="SandMan.cpp" line="1688"/>
         <location filename="SandMan.cpp" line="1692"/>
-        <location filename="SandMan.cpp" line="1696"/>
         <source>Sandboxie-Plus Warning</source>
         <translation>Ostrzeżenie Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1671"/>
+        <location filename="SandMan.cpp" line="1667"/>
         <source>The value is not an existing directory or executable.</source>
         <translation>Wartość nie jest istniejącym katalogiem ani plikiem wykonywalnym.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1676"/>
-        <location filename="SandMan.cpp" line="1692"/>
+        <location filename="SandMan.cpp" line="1672"/>
+        <location filename="SandMan.cpp" line="1688"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
         <translation>Wpisałeś/aś błędną nazwę pola! Nic nie zostało zmienione.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1680"/>
-        <location filename="SandMan.cpp" line="1696"/>
+        <location filename="SandMan.cpp" line="1676"/>
+        <location filename="SandMan.cpp" line="1692"/>
         <source>User canceled this operation.</source>
         <translation>Użytkownik anulował tę operację.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1752"/>
+        <location filename="SandMan.cpp" line="1748"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>Nieznana operacja &apos;%1&apos; zażądana z wiersza poleceń</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1889"/>
+        <location filename="SandMan.cpp" line="1885"/>
         <source>No Force Process</source>
         <translation>Brak procesu wymuszania</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2031"/>
+        <location filename="SandMan.cpp" line="2027"/>
         <source>USB sandbox not found; creating: %1</source>
         <translation>Nie znaleziono piaskownicy USB; tworzenie: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2252"/>
+        <location filename="SandMan.cpp" line="2248"/>
         <source>Removed Shortcut: %1</source>
         <translation>Usunięty skrót: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2341"/>
+        <location filename="SandMan.cpp" line="2337"/>
         <source>Updated Shortcut to: %1</source>
         <translation>Zaktualizowano skrót do: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2343"/>
+        <location filename="SandMan.cpp" line="2339"/>
         <source>Added Shortcut to: %1</source>
         <translation>Dodany skrót: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2375"/>
+        <location filename="SandMan.cpp" line="2371"/>
         <source>Executing OnBoxTerminate: %1</source>
         <translation>Wykonuję OnBoxTerminate: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2420"/>
+        <location filename="SandMan.cpp" line="2416"/>
         <source>Auto removing sandbox %1</source>
         <translation>Automatyczne usuwanie piaskownicy %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2444"/>
+        <location filename="SandMan.cpp" line="2440"/>
         <source>%1 Directory: %2</source>
         <translation>%1 Katalog: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2444"/>
+        <location filename="SandMan.cpp" line="2440"/>
         <source>Application</source>
         <translation>Aplikacja</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2444"/>
+        <location filename="SandMan.cpp" line="2440"/>
         <source>Installation</source>
         <translation>Instalacja</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2506"/>
+        <location filename="SandMan.cpp" line="2502"/>
         <source> for Personal use</source>
         <translation> do użytku osobistego</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2508"/>
+        <location filename="SandMan.cpp" line="2504"/>
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   -    TYLKO do użytku niekomercyjnego</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2573"/>
+        <location filename="SandMan.cpp" line="2569"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</oldsource>
         <translation>Twoja wersja systemu Windows o numerze buildu %1 przekracza obecne możliwości obsługi Twojej wersji Sandboxie, co skutkuje wyłączeniem izolacji zabezpieczeń opartej na tokenach. W związku z tym wszystkie aplikacje będą działać w trybie oddzielenia aplikacji bez bezpiecznej izolacji.
-Sprawdź, czy istnieje aktualizacja dla Sandboxie. </translation>
+Sprawdź, czy istnieje aktualizacja dla Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2582"/>
+        <location filename="SandMan.cpp" line="2578"/>
         <source>Don&apos;t show this message again for the current build.</source>
         <translation>Nie wyświetlaj tej wiadomości ponownie dla bieżącego buildu.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2589"/>
+        <location filename="SandMan.cpp" line="2585"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation>Twoja wersja Windows build %1 przekracza bieżące znane możliwości wsparcia dla Twojej wersji Sandboxie. Sandboxie spróbuje użyć ostatnio znanych przesunięć, co może spowodować niestabilność systemu. </translation>
+        <translation>Twoja wersja Windows build %1 przekracza bieżące znane możliwości wsparcia dla Twojej wersji Sandboxie. Sandboxie spróbuje użyć ostatnio znanych przesunięć, co może spowodować niestabilność systemu.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2607"/>
+        <location filename="SandMan.cpp" line="2603"/>
         <source>Sandman did not finish enumerating installed windows updates last time, it probably hangs.
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
@@ -4179,106 +4180,106 @@ Do you want to disable Windows Updates scanning from the the software compatibil
 Czy chcesz wyłączyć skanowanie aktualizacji Windows podczas wykonywania testu zgodności oprogramowania? </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2809"/>
+        <location filename="SandMan.cpp" line="2805"/>
         <source>Failed to configure hotkey %1, error: %2</source>
         <translation>Nie udało się skonfigurować skrótu klawiaturowego %1, błąd: %2</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="2891"/>
         <location filename="SandMan.cpp" line="2895"/>
-        <location filename="SandMan.cpp" line="2899"/>
-        <location filename="SandMan.cpp" line="2901"/>
+        <location filename="SandMan.cpp" line="2897"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2988"/>
+        <location filename="SandMan.cpp" line="2984"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>Skrzynka %1 jest skonfigurowana do korzystania z funkcji dostępnych wyłącznie dla osób wspierających projekt.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2993"/>
+        <location filename="SandMan.cpp" line="2989"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>Skrzynka %1 jest skonfigurowana do korzystania z funkcji, które wymagają &lt;b&gt;zaawansowanego&lt;/b&gt; certyfikatu wsparcia.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2995"/>
-        <location filename="SandMan.cpp" line="3094"/>
+        <location filename="SandMan.cpp" line="2991"/>
+        <location filename="SandMan.cpp" line="3090"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Uaktualnij swój certyfikat&lt;/a&gt;, aby odblokować zaawansowane funkcje.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3090"/>
+        <location filename="SandMan.cpp" line="3086"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>Wybrana funkcja wymaga &lt;b&gt;zaawansowanego&lt;/b&gt; certyfikatu wsparcia.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3092"/>
+        <location filename="SandMan.cpp" line="3088"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;musisz być na poziomie Wielkiego Patreonu lub wyższym, aby odblokować tę funkcję.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3104"/>
+        <location filename="SandMan.cpp" line="3100"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>Wybrany zestaw funkcji jest dostępny tylko dla osób wspierających projekt.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Zostań osobą wspierającą projekt&lt;/a &gt; i otrzymaj &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3150"/>
+        <location filename="SandMan.cpp" line="3146"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>Certyfikat, którego próbujesz użyć, został zablokowany, co oznacza, że został unieważniony z jakiegoś powodu. Każda próba jego użycia stanowi naruszenie warunków użytkowania!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3162"/>
+        <location filename="SandMan.cpp" line="3158"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>The Certificate Signature is invalid!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3163"/>
+        <location filename="SandMan.cpp" line="3159"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>Certyfikat nie jest odpowiedni dla tego produktu.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3164"/>
+        <location filename="SandMan.cpp" line="3160"/>
         <source>The Certificate is node locked.</source>
         <translation>Certyfikat jest zablokowany w węźle.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3168"/>
+        <location filename="SandMan.cpp" line="3164"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>Certyfikat wsparcia jest nieważny.
 Błąd: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3232"/>
+        <location filename="SandMan.cpp" line="3228"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>Upłynął okres oceny!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3334"/>
-        <location filename="SandMan.cpp" line="3359"/>
+        <location filename="SandMan.cpp" line="3330"/>
+        <location filename="SandMan.cpp" line="3355"/>
         <source>Don&apos;t ask in future</source>
         <translation>Nie pytaj w przyszłości</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3358"/>
+        <location filename="SandMan.cpp" line="3354"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
         <translation>Czy chcesz zakończyć wszystkie procesy w zaszyfrowanych piaskownicach i odmontować je?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3560"/>
-        <location filename="SandMan.cpp" line="3562"/>
-        <location filename="SandMan.cpp" line="4145"/>
+        <location filename="SandMan.cpp" line="3556"/>
+        <location filename="SandMan.cpp" line="3558"/>
+        <location filename="SandMan.cpp" line="4141"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Błąd</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3560"/>
+        <location filename="SandMan.cpp" line="3556"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Błąd przy zatrzymywaniu komponentów Sandboxie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3562"/>
+        <location filename="SandMan.cpp" line="3558"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Błąd w inicjacji komponentów Sandboxie</translation>
     </message>
@@ -4295,17 +4296,17 @@ Błąd: %1</translation>
         <translation type="vanished">Katalog instalacji: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2445"/>
+        <location filename="SandMan.cpp" line="2441"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
         <translation>Wersja Sandboxie-Plus: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2447"/>
+        <location filename="SandMan.cpp" line="2443"/>
         <source>Data Directory: %1</source>
         <translation>Katalog danych: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2536"/>
+        <location filename="SandMan.cpp" line="2532"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Domyślna piaskownica nie znaleziona, więc zostanie odtworzona: %1</translation>
     </message>
@@ -4320,22 +4321,22 @@ Błąd: %1</translation>
         <translation>Resetuj wszystkie opcje GUI</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1947"/>
+        <location filename="SandMan.cpp" line="1943"/>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
         <translation>Brakuje niektórych szablonów zgodności (%1), prawdopodobnie usunięto, czy chcesz je usunąć ze wszystkich boksów?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1974"/>
+        <location filename="SandMan.cpp" line="1970"/>
         <source>Cleaned up removed templates...</source>
         <translation>Wyczyszczono usunięte szablony…</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2150"/>
+        <location filename="SandMan.cpp" line="2146"/>
         <source>Executing OnBoxDelete: %1</source>
         <translation>Wykonywanie przy usuwaniu boksu: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2408"/>
+        <location filename="SandMan.cpp" line="2404"/>
         <source>Auto deleting content of %1</source>
         <translation>Automatyczne usuwanie zawartości %1</translation>
     </message>
@@ -4352,7 +4353,7 @@ Błąd: %1</translation>
         <translation type="vanished">   -   przenośna</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2465"/>
+        <location filename="SandMan.cpp" line="2461"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
@@ -4361,25 +4362,25 @@ Tak, wybierze: %1
 Nie, wybierze: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2617"/>
+        <location filename="SandMan.cpp" line="2613"/>
         <source>   -   NOT connected</source>
         <translation>   -   NIE połączone</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3006"/>
+        <location filename="SandMan.cpp" line="3002"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>Program %1 uruchomiony w boksie %2 zostanie zakończony za 5 minut, ponieważ boks został skonfigurowanya do korzystania z funkcji dostępnych wyłącznie dla sponsorów projektu.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3008"/>
+        <location filename="SandMan.cpp" line="3004"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>Boks %1 jest skonfigurowany do używania funkcji dostępnych wyłącznie dla sponsorów projektu, te wstępne ustawienia będą ignorowane.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2989"/>
-        <location filename="SandMan.cpp" line="2997"/>
-        <location filename="SandMan.cpp" line="3009"/>
-        <location filename="SandMan.cpp" line="3096"/>
+        <location filename="SandMan.cpp" line="2985"/>
+        <location filename="SandMan.cpp" line="2993"/>
+        <location filename="SandMan.cpp" line="3005"/>
+        <location filename="SandMan.cpp" line="3092"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Zostań sponsorem projektu&lt;/a&gt;, i otrzymaj &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;</translation>
     </message>
@@ -4450,17 +4451,17 @@ Nie, wybierze: %2</translation>
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3286"/>
+        <location filename="SandMan.cpp" line="3282"/>
         <source>Only Administrators can change the config.</source>
         <translation>Tylko administratorzy mogą zmieniać ustawienia piaskownicy.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3296"/>
+        <location filename="SandMan.cpp" line="3292"/>
         <source>Please enter the configuration password.</source>
         <translation>Proszę wpisać hasło konfiguracji.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3304"/>
+        <location filename="SandMan.cpp" line="3300"/>
         <source>Login Failed: %1</source>
         <translation>Nieudane logowanie: %1</translation>
     </message>
@@ -4482,7 +4483,7 @@ Nie, wybierze: %2</translation>
         <translation type="vanished">Importowanie: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3333"/>
+        <location filename="SandMan.cpp" line="3329"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Czy chcesz zakończyć wszystkie procesy ww wszystkich piaskowniach?</translation>
     </message>
@@ -4491,62 +4492,62 @@ Nie, wybierze: %2</translation>
         <translation type="vanished">W przyszłości zakańczaj bez pytania</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3399"/>
+        <location filename="SandMan.cpp" line="3395"/>
         <source>No Recovery</source>
         <translation>Brak odzyskiwania</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3405"/>
+        <location filename="SandMan.cpp" line="3401"/>
         <source>No Messages</source>
         <translation>Brak wiadomości</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3423"/>
+        <location filename="SandMan.cpp" line="3419"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus został uruchomiony w trybie przenośnym i musi utworzyć niezbędne usługi. Spowoduje to wyświetlenie pytania o uprawnienia administracyjne.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3457"/>
+        <location filename="SandMan.cpp" line="3453"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>UWAGA: Inny agent (prawdopodobnie SbieCtrl.exe) już zarządza tą sesją Sandboxie, proszę go najpierw zamknąć i połączyć się ponownie, aby przejąć kontrolę.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3461"/>
+        <location filename="SandMan.cpp" line="3457"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;BŁĄD:&lt;/b&gt; Menedżer Sandboxie-Plus (SandMan.exe) nie ma prawidłowego podpisu (SandMan.exe.sig). Pobierz zaufaną wersję z &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;oficjalnej strony pobierania&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3564"/>
+        <location filename="SandMan.cpp" line="3560"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>Operacja konserwacji nie powiodła się  (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3569"/>
+        <location filename="SandMan.cpp" line="3565"/>
         <source>Maintenance operation completed</source>
         <translation>Zakończono operację konserwacji</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3589"/>
+        <location filename="SandMan.cpp" line="3585"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Wykonywanie operacji zarzadzania, proszę czekać…</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3710"/>
+        <location filename="SandMan.cpp" line="3706"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>W interfejsie SB+, funkcjonalność ta została zintegrowana z głównym widokiem listy piaskownicy.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3711"/>
+        <location filename="SandMan.cpp" line="3707"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>Korzystając z menu kontekstowego boksu/grupy, możesz przenosić boksy i grupy do innych grup. Możesz także użyć przeciągania i upuszczania, aby przenosić elementy. Możesz także użyć klawiszy strzałek, przytrzymując klawisz ALT, aby przenosić elementy w górę iw dół w ramach ich grupy.&lt;br /&gt;Możesz tworzyć nowe boksy i grupy z menu piaskownicy.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3779"/>
+        <location filename="SandMan.cpp" line="3775"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Czy chcesz również zresetować ukrywany komunikat boksów (tak) czy tylko wszystkie komunikaty dziennika (nie)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3867"/>
+        <location filename="SandMan.cpp" line="3863"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -4555,244 +4556,244 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Ten plik jest częścią Sandboxie i wszystkie zmiany w nim dokonane zostaną cofnięte przy następnej aktualizacji Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3883"/>
+        <location filename="SandMan.cpp" line="3879"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Zmiany będą zastosowane automatycznie jak tylko plik zostanie zapisany.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3884"/>
+        <location filename="SandMan.cpp" line="3880"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Zmiany będą zastosowane automatycznie jak tylko edytor zostanie zakończony.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3947"/>
+        <location filename="SandMan.cpp" line="3943"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>Konfiguracja piaskownicy została ponownie załadowana</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4077"/>
+        <location filename="SandMan.cpp" line="4073"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Ta operacja wymaga uprawnień administratora.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4078"/>
+        <location filename="SandMan.cpp" line="4074"/>
         <source>Failed to execute: %1</source>
         <translation>Błąd przy wykonywaniu: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4079"/>
+        <location filename="SandMan.cpp" line="4075"/>
         <source>Failed to connect to the driver</source>
         <translation>Błąd przy połączeniu ze sterownikiem</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4080"/>
+        <location filename="SandMan.cpp" line="4076"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Błąd przy komunikacji z usługą: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4081"/>
+        <location filename="SandMan.cpp" line="4077"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>Znaleziono niekompatybilną piaskownicę %1. Kompatybilne wersje: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4082"/>
+        <location filename="SandMan.cpp" line="4078"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Nie można znaleźć ścieżki instalacji Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4083"/>
+        <location filename="SandMan.cpp" line="4079"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>Błąd przy kopiowaniu konfiguracji piaskownicy %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4084"/>
+        <location filename="SandMan.cpp" line="4080"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>Piaskownica o nazwie %1 już istnieje</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4085"/>
+        <location filename="SandMan.cpp" line="4081"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>Błąd przy usuwaniu piaskownicy %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4086"/>
+        <location filename="SandMan.cpp" line="4082"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Nazwy piaskownicy nie mogą być dłuższe niż 32 znaki.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4087"/>
+        <location filename="SandMan.cpp" line="4083"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Nazwy piaskownicy nie mogą być nazwami urządzeń.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4088"/>
+        <location filename="SandMan.cpp" line="4084"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Nazwa piaskownicy może zawierać tylko litery, cyfry i podkreślenia, które są wyświetlane jako spacje.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4089"/>
+        <location filename="SandMan.cpp" line="4085"/>
         <source>Failed to terminate all processes</source>
         <translation>Błąd przy zakańczaniu wszystkich procesów</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4090"/>
+        <location filename="SandMan.cpp" line="4086"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>Ochrona przed usunięciem jest aktywna dla tej piaskownicy</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4091"/>
+        <location filename="SandMan.cpp" line="4087"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Przed usunięciem zawartości skrzynki wszystkie procesy piaskownicy muszą zostać zatrzymane</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4092"/>
+        <location filename="SandMan.cpp" line="4088"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Błąd usuwania foldera piaskownicy: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4093"/>
+        <location filename="SandMan.cpp" line="4089"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>Wszystkie procesy w piaskownicy muszą zostać zatrzymane przed zmianą jej nazwy.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4095"/>
+        <location filename="SandMan.cpp" line="4091"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>Przed usunięciem piaskownicy należy ją opróżnić.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4096"/>
+        <location filename="SandMan.cpp" line="4092"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Błąd przy przenoszeniu foldera %1 do %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4097"/>
+        <location filename="SandMan.cpp" line="4093"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Nie udało się przenieść obrazu skrzynki &apos;%1&apos; do &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4098"/>
+        <location filename="SandMan.cpp" line="4094"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Tej operacji migawki nie można wykonać, gdy procesy są nadal uruchomione w boksie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4099"/>
+        <location filename="SandMan.cpp" line="4095"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Błąd przy tworzeniu foldera dla nowej migawki</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4101"/>
+        <location filename="SandMan.cpp" line="4097"/>
         <source>Snapshot not found</source>
         <translation>Nie znaleziono migawki</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4102"/>
+        <location filename="SandMan.cpp" line="4098"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>Błąd podczas łączenia katalogów migawek „%1” z „%2”, migawka nie została w pełni scalona.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4103"/>
+        <location filename="SandMan.cpp" line="4099"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Błąd przy usuwaniu starego foldera migawki &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4104"/>
+        <location filename="SandMan.cpp" line="4100"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Nie można usunąć migawki, która jest używana przez inne migawki</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4106"/>
+        <location filename="SandMan.cpp" line="4102"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Brak autoryzacji do zmian konfiguracji w tej sekcji &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4107"/>
+        <location filename="SandMan.cpp" line="4103"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>Błąd przy zmianie ustawienia %1 w sekcji %2: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4108"/>
+        <location filename="SandMan.cpp" line="4104"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Nie można utworzyć migawki pustej piaskownicy</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4109"/>
+        <location filename="SandMan.cpp" line="4105"/>
         <source>A sandbox with that name already exists</source>
         <translation>Piaskownica o tej nazwie już istnieje</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4110"/>
+        <location filename="SandMan.cpp" line="4106"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Hasło konfiguracyjne nie może być dłuższe niż 64 znaki</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4111"/>
+        <location filename="SandMan.cpp" line="4107"/>
         <source>The operation was canceled by the user</source>
         <translation>Operacja została anulowana przez użytkownika</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4112"/>
+        <location filename="SandMan.cpp" line="4108"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>Zawartość niezamontowanej piaskownicy nie może zostać usunięta</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4114"/>
+        <location filename="SandMan.cpp" line="4110"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4116"/>
+        <location filename="SandMan.cpp" line="4112"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>Import/Export nie jest dostępny, 7z.dll nie może być załadowany</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4117"/>
+        <location filename="SandMan.cpp" line="4113"/>
         <source>Failed to create the box archive</source>
         <translation>Nie udało się utworzyć archiwum boksu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4118"/>
+        <location filename="SandMan.cpp" line="4114"/>
         <source>Failed to open the 7z archive</source>
         <translation>Nie udało się otworzyć archiwum 7z</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4119"/>
+        <location filename="SandMan.cpp" line="4115"/>
         <source>Failed to unpack the box archive</source>
         <translation>Nie udało się rozpakować archiwum boksu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4120"/>
+        <location filename="SandMan.cpp" line="4116"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>Wybrany plik 7z NIE jest archiwum boksu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4121"/>
+        <location filename="SandMan.cpp" line="4117"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Nie udało się skopiować katalogu &apos;%1&apos; to &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4147"/>
+        <location filename="SandMan.cpp" line="4143"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>Błąd przy wykonywaniu %1 operacji.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4448"/>
+        <location filename="SandMan.cpp" line="4444"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;O Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Wersja %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4456"/>
+        <location filename="SandMan.cpp" line="4452"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>Ta kopia programu Sandboxie-Plus jest certyfikowana dla: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4458"/>
+        <location filename="SandMan.cpp" line="4454"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>Sandboxie-Plus jest darmowe w przypadku użycia osobistego i niekomercyjnego.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4462"/>
+        <location filename="SandMan.cpp" line="4458"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus jest kontynuacją Sandboxie o otwartym kodzie źródłowym.&lt;br /&gt;Więcej informacji można znaleźć na stronie &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Funkcje: %3&lt;br /&gt;&lt;br /&gt;Instalacja: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe:  %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Ikony z &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -4801,38 +4802,38 @@ Ten plik jest częścią Sandboxie i wszystkie zmiany w nim dokonane zostaną co
         <translation type="vanished">Czy przeglądarka WWW z %1 ma być otwarta w piaskownicy (tak), czy poza piaskownicą (nie)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4220"/>
+        <location filename="SandMan.cpp" line="4216"/>
         <source>Remember choice for later.</source>
         <translation>Zapamiętaj wybór na później.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4390"/>
+        <location filename="SandMan.cpp" line="4386"/>
         <source>Case Sensitive</source>
         <translatorcomment>I don&apos;t know what it&apos;s for</translatorcomment>
         <translation>Uwzględniaj wielkość liter</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4391"/>
+        <location filename="SandMan.cpp" line="4387"/>
         <source>RegExp</source>
         <translation>Wyrażenie regularne</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4392"/>
+        <location filename="SandMan.cpp" line="4388"/>
         <source>Highlight</source>
         <translation>Podkreśl</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4393"/>
+        <location filename="SandMan.cpp" line="4389"/>
         <source>Close</source>
         <translation>Zamknij</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4394"/>
+        <location filename="SandMan.cpp" line="4390"/>
         <source>&amp;Find ...</source>
         <translation>&amp;Znajdź...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4395"/>
+        <location filename="SandMan.cpp" line="4391"/>
         <source>All columns</source>
         <translation>Wszystkie kolumny</translation>
     </message>
@@ -4897,22 +4898,22 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">&lt;p&gt;Nowa wersja Sandboxie-Plus zostanie pobrana z:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Czy chcesz rozpocząć instalację? Jeśli jakieś programy działają w trybie piaskownicy, zostaną zakończone.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3237"/>
+        <location filename="SandMan.cpp" line="3233"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>Certyfikat wsparcia jest nieważny dla tej kompilacji, proszę o zaktualizowanie certyfikatu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3240"/>
+        <location filename="SandMan.cpp" line="3236"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <translation>%1Wygasł certyfikat wsparcia, proszę o zaktualizowanie certyfikatu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3241"/>
+        <location filename="SandMan.cpp" line="3237"/>
         <source>, but it remains valid for the current build</source>
         <translation>, ale zachowuje ważność dla obecnej kompilacji</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3243"/>
+        <location filename="SandMan.cpp" line="3239"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>Certyfikat wsparcia wygaśnie za %1 dni, proszę o zaktualizowanie certyfikatu</translation>
     </message>
@@ -5863,7 +5864,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Views/SbieView.cpp" line="1478"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation>Proszę wprowadzić nową alias dla piaskownicy (sandbox). </translation>
+        <translation>Proszę wprowadzić nową alias dla piaskownicy (sandbox).</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1487"/>
@@ -5964,17 +5965,17 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
 <context>
     <name>CSelectBoxWindow</name>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="195"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="200"/>
         <source>Sandboxie-Plus - Run Sandboxed</source>
         <translation>Sandboxie-Plus - Uruchom w piaskownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="248"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="253"/>
         <source>Are you sure you want to run the program outside the sandbox?</source>
         <translation>Czy na pewno chcesz uruchomić program poza piaskownicą?</translation>
     </message>
     <message>
-        <location filename="Windows/SelectBoxWindow.cpp" line="268"/>
+        <location filename="Windows/SelectBoxWindow.cpp" line="273"/>
         <source>Please select a sandbox.</source>
         <translation>Proszę wybrać piaskownicę.</translation>
     </message>
@@ -6000,7 +6001,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Ochrona konfiguracji</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="213"/>
+        <location filename="Windows/SettingsWindow.cpp" line="215"/>
         <source>Auto Detection</source>
         <translation>Wykryj automatycznie</translation>
     </message>
@@ -6009,425 +6010,425 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Brak tłumaczenia</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="233"/>
-        <location filename="Windows/SettingsWindow.cpp" line="237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="235"/>
+        <location filename="Windows/SettingsWindow.cpp" line="239"/>
         <source>Don&apos;t integrate links</source>
         <translation>Nie integruj linków</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="234"/>
-        <location filename="Windows/SettingsWindow.cpp" line="238"/>
+        <location filename="Windows/SettingsWindow.cpp" line="236"/>
+        <location filename="Windows/SettingsWindow.cpp" line="240"/>
         <source>As sub group</source>
         <translation>Jako podgrupa</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="235"/>
-        <location filename="Windows/SettingsWindow.cpp" line="239"/>
+        <location filename="Windows/SettingsWindow.cpp" line="237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="241"/>
         <source>Fully integrate</source>
         <translation>Pełna integracja</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="241"/>
+        <location filename="Windows/SettingsWindow.cpp" line="243"/>
         <source>Don&apos;t show any icon</source>
         <translation>Nie pokazuj żadnej ikony</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="242"/>
+        <location filename="Windows/SettingsWindow.cpp" line="244"/>
         <source>Show Plus icon</source>
         <translation>Pokaż ikonę Plus</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="243"/>
+        <location filename="Windows/SettingsWindow.cpp" line="245"/>
         <source>Show Classic icon</source>
         <translation>Pokaż ikonę klasyczną</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="245"/>
+        <location filename="Windows/SettingsWindow.cpp" line="247"/>
         <source>All Boxes</source>
         <translation>Wszystkie boksy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="246"/>
+        <location filename="Windows/SettingsWindow.cpp" line="248"/>
         <source>Active + Pinned</source>
         <translation>Aktywne + Przypięte</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="247"/>
+        <location filename="Windows/SettingsWindow.cpp" line="249"/>
         <source>Pinned Only</source>
         <translation>Tylko przypięte</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="249"/>
+        <location filename="Windows/SettingsWindow.cpp" line="251"/>
         <source>Close to Tray</source>
         <translation>Zamknij do paska zadań</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="250"/>
+        <location filename="Windows/SettingsWindow.cpp" line="252"/>
         <source>Prompt before Close</source>
         <translation>Pytaj przed zamknięciem</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="253"/>
         <source>Close</source>
         <translation>Zamknij</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="252"/>
+        <location filename="Windows/SettingsWindow.cpp" line="254"/>
         <source>Hide (Run invisible in Background)</source>
         <translation>Ukryj (Uruchom w tle w trybie niewidzialnym)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="254"/>
+        <location filename="Windows/SettingsWindow.cpp" line="256"/>
         <source>None</source>
         <translation>Żaden</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="255"/>
+        <location filename="Windows/SettingsWindow.cpp" line="257"/>
         <source>Native</source>
         <translation>Natywny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="256"/>
+        <location filename="Windows/SettingsWindow.cpp" line="258"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="275"/>
+        <location filename="Windows/SettingsWindow.cpp" line="277"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
         <source>HwId: %1</source>
-        <translation type="vanished">Identyfikator sprzętu (HwId): %1 </translation>
+        <translation type="vanished">Identyfikator sprzętu: %1 </translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="670"/>
+        <location filename="Windows/SettingsWindow.cpp" line="672"/>
         <source>Search for settings</source>
         <translation>Szukaj ustawień</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="943"/>
-        <location filename="Windows/SettingsWindow.cpp" line="944"/>
-        <location filename="Windows/SettingsWindow.cpp" line="954"/>
+        <location filename="Windows/SettingsWindow.cpp" line="945"/>
+        <location filename="Windows/SettingsWindow.cpp" line="946"/>
+        <location filename="Windows/SettingsWindow.cpp" line="956"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Uruchom w pia&amp;skownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1288"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1290"/>
         <source>kilobytes (%1)</source>
         <translation>kilobajty (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1370"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1372"/>
         <source>Volume not attached</source>
         <translation>Niepodłączony wolumin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Użyto certyfikatów oceny %1/%2. Nie można już wygenerować żadnych bezpłatnych certyfikatów.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1489"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Otrzymaj bezpłatny certyfikat oceny&lt;/a&gt; i ciesz się wszystkimi funkcjami premium przez %1 dni.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1490"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Możesz złożyć żądanie dotyczące darmowej certyfikatu oprogramowania na potrzeby testów na okres %1 dni maksymalnie %2 razy na identyfikator sprzętu.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1420"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1422"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>Ten certyfikat wspierający &lt;kolor czcionki=&apos;czerwony&apos;&gt;wygasa za %1 dni&lt;/czcionka&gt;, proszę &lt;a href=&quot;%2&quot;&gt;uzyskaj zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="554"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij, aby odsłonić</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="553"/>
+        <location filename="Windows/SettingsWindow.cpp" line="555"/>
         <source>Click to hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij, aby ukryć</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="556"/>
-        <location filename="Windows/SettingsWindow.cpp" line="568"/>
+        <location filename="Windows/SettingsWindow.cpp" line="558"/>
+        <location filename="Windows/SettingsWindow.cpp" line="570"/>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Identyfikator sprzętu: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="563"/>
+        <location filename="Windows/SettingsWindow.cpp" line="565"/>
         <source>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Identyfikator sprzętu: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; kolor:dziedziczyć; &quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1407"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1409"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Ten certyfikat wsparcia wygasł, proszę &lt;a href=&quot;%1&quot;&gt;pobierz zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1455"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1457"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>Wygasa za: %1 dni</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1459"/>
         <source>Expired: %1 days ago</source>
         <translation>Wygasło hace: %1 dni temu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1459"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1461"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; Uprawnione Patreony zawsze mogą &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt; od xanasoft.com</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1469"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1471"/>
         <source>Options: %1</source>
         <translation>Opcje: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1472"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Ulepszone zabezpieczenia/prywatność i urządzenia z aplikacjami (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1472"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1473"/>
         <location filename="Windows/SettingsWindow.cpp" line="1474"/>
         <location filename="Windows/SettingsWindow.cpp" line="1475"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1476"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Enabled</source>
         <translation>Włączone</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1472"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1473"/>
         <location filename="Windows/SettingsWindow.cpp" line="1474"/>
         <location filename="Windows/SettingsWindow.cpp" line="1475"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1476"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Disabled</source>
         <translation>Niepełnosprawny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1473"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1475"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Szyfrowane obszary testowe (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1476"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Przechwytywanie sieciowe (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1475"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Pulpit Sandboxie (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1506"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1508"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Nie wygląda to jak numer seryjny Sandboxie-Plus.&lt;br /&gt;Jeśli próbowałeś wprowadzić klucz aktualizacji lub podpis z certyfikatu, który nie jest poprawny, wprowadź cały certyfikat w polu tekstowym powyżej.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1513"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1515"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>Próbujesz użyć klucza uaktualnienia funkcji bez wprowadzania istniejącego certyfikatu osoby obsługującej. Należy pamiętać, że ten rodzaj klucza (&lt;b&gt;jak wyraźnie zaznaczono pogrubioną czcionką na stronie internetowej&lt;/b) wymaga posiadania wcześniej ważnego certyfikatu wspierającego; Bez niego jest bezużyteczny.&lt;br /&gt;Jeśli chcesz korzystać z zaawansowanych funkcji, musisz uzyskać zarówno standardowy certyfikat, jak i klucz aktualizacji funkcji, aby odblokować zaawansowane funkcje.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1519"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1521"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>Próbujesz użyć klucza odnowienia bez wprowadzania istniejącego certyfikatu osoby wspierającej. Należy pamiętać, że ten rodzaj klucza (&lt;b&gt;jak wyraźnie zaznaczono pogrubioną czcionką na stronie internetowej&lt;/b) wymaga posiadania wcześniej ważnego certyfikatu wspierającego; Bez niego jest bezużyteczny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1524"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1526"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Jeśli nie przeczytałeś opisu produktu i uzyskałeś ten klucz przez pomyłkę, skontaktuj się z nami za pośrednictwem poczty elektronicznej (podanej na naszej stronie internetowej), aby rozwiązać ten problem.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1564"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2222"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1566"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2224"/>
         <source>Retrieving certificate...</source>
         <translation>Pobieranie certyfikatu...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1554"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - Uzyskaj certyfikat oprogramowania na potrzeby testów (EVALUATION) </translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1552"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1554"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Proszę wprowadzić adres e-mail, aby otrzymać darmowy certyfikat oprogramowania na potrzeby testów na okres %1 dni, który zostanie wydany dla %2 i przypisany do bieżącego sprzętu.
 Możesz złożyć żądanie dotyczące maksymalnie %3 certyfikatów oprogramowania na potrzeby testów dla każdego unikalnego identyfikatora sprzętu.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1580"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>Błąd podczas pobierania certyfikatu: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1580"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Nieznany błąd (prawdopodobnie problem sieciowy)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1637"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1639"/>
         <source>Developer</source>
         <translation>Deweloper</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1649"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1651"/>
         <source>Home</source>
         <translation>Strona główna</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1685"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1687"/>
         <source>Advanced (L)</source>
         <translation>Zaawansowane (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1714"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1716"/>
         <source>Supporter certificate required for access</source>
         <translation>Do uzyskania dostępu wymagany jest certyfikat sponsora</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1731"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1733"/>
         <source>Supporter certificate required for automation</source>
         <translation>Certyfikat sponora wymagany do automatyzacji</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2165"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2167"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Certyfikat oprogramowania na potrzeby testów został pomyślnie zastosowany. Ciesz się swoim darmowym okresem próbnym! </translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2170"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2172"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
-To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży się termin jego ważności, możesz uzyskać nowy certyfikat online, który będzie ważny na cały okres. </translation>
+To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży się termin jego ważności, możesz uzyskać nowy certyfikat online, który będzie ważny na cały okres.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2208"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2210"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>Wymagana jest obowiązkowa aktualizacja zabezpieczeń dla Twojego certyfikatu Sandboxie-Plus Supporter. Czy chcesz teraz pobrać zaktualizowany certyfikat?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2209"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2211"/>
         <source>Auto update in future</source>
         <translation>Automatyczne aktualizacje w przyszłości</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2318"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2320"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Ten dodatek jest obowiązkowy i nie można go usunąć.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="975"/>
+        <location filename="Windows/SettingsWindow.cpp" line="977"/>
         <source>Sandboxed Web Browser</source>
         <translation>Przeglądarka WWW w trybie piaskownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="264"/>
-        <location filename="Windows/SettingsWindow.cpp" line="269"/>
+        <location filename="Windows/SettingsWindow.cpp" line="266"/>
+        <location filename="Windows/SettingsWindow.cpp" line="271"/>
         <source>Notify</source>
         <translation>Powiadom</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="265"/>
         <source>Ignore</source>
         <translation>Ignoruj</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="260"/>
         <source>Every Day</source>
         <translation>Codziennie</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="259"/>
+        <location filename="Windows/SettingsWindow.cpp" line="261"/>
         <source>Every Week</source>
         <translation>Co tydzień</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="260"/>
+        <location filename="Windows/SettingsWindow.cpp" line="262"/>
         <source>Every 2 Weeks</source>
         <translation>Co 2 tygodnie</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="261"/>
+        <location filename="Windows/SettingsWindow.cpp" line="263"/>
         <source>Every 30 days</source>
         <translation>Co 30 dni</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="265"/>
-        <location filename="Windows/SettingsWindow.cpp" line="270"/>
+        <location filename="Windows/SettingsWindow.cpp" line="267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="272"/>
         <source>Download &amp; Notify</source>
         <translation>Pobierz i powiadom</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="266"/>
-        <location filename="Windows/SettingsWindow.cpp" line="271"/>
+        <location filename="Windows/SettingsWindow.cpp" line="268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="273"/>
         <source>Download &amp; Install</source>
         <translation>Pobierz i zainstaluj</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="403"/>
+        <location filename="Windows/SettingsWindow.cpp" line="405"/>
         <source>Browse for Program</source>
         <translation>Przeglądaj w poszukiwaniu programu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="512"/>
+        <location filename="Windows/SettingsWindow.cpp" line="514"/>
         <source>Add %1 Template</source>
         <translation>Dodaj %1 szablon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="609"/>
+        <location filename="Windows/SettingsWindow.cpp" line="611"/>
         <source>Select font</source>
         <translation>Wybierz czcionkę</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="611"/>
+        <location filename="Windows/SettingsWindow.cpp" line="613"/>
         <source>Reset font</source>
         <translation>Zresetuj czcionkę</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="684"/>
+        <location filename="Windows/SettingsWindow.cpp" line="686"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="824"/>
+        <location filename="Windows/SettingsWindow.cpp" line="826"/>
         <source>Please enter message</source>
         <translation>Proszę wpisać wiadomość</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="858"/>
         <source>Select Program</source>
         <translation>Wybierz program</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="858"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Programy (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="860"/>
-        <location filename="Windows/SettingsWindow.cpp" line="876"/>
+        <location filename="Windows/SettingsWindow.cpp" line="862"/>
+        <location filename="Windows/SettingsWindow.cpp" line="878"/>
         <source>Please enter a menu title</source>
         <translation>Proszę wpisać tytuł menu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="872"/>
+        <location filename="Windows/SettingsWindow.cpp" line="874"/>
         <source>Please enter a command</source>
         <translation>Proszę wpisać polecenie</translation>
     </message>
@@ -6436,12 +6437,12 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
         <translation type="vanished">Wygasł ten certyfikat wsparcia, proszę &lt;a href=&quot;sbie://update/cert&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1410"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1412"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Funkcje dodatkowe zostaną wyłączone za %1 dni.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1412"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1414"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;W obecnej kompilacji funkcje Plus pozostają włączone&lt;/font&gt;, ale nie masz już dostępu do usług Sandboxie-Live, w tym aktualizacji zgodności i bazy danych rozwiązywania problemów.</translation>
     </message>
@@ -6450,87 +6451,87 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
         <translation type="vanished">Ten certyfikat sponsora &lt;font color=&apos;red&apos;&gt;wygaśnie za %1 dni&lt;/font&gt;, prosimy o &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;uzyskanie zaktualizowanego certyfikatu&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1635"/>
         <source>Contributor</source>
         <translation>Współtwórca</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1635"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1637"/>
         <source>Eternal</source>
         <translation>Wieczny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1639"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1641"/>
         <source>Business</source>
         <translation>Biznes</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1641"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1643"/>
         <source>Personal</source>
         <translation>Osobisty</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1643"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1645"/>
         <source>Great Patreon</source>
         <translation>Wspaniały Patron</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1645"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1647"/>
         <source>Patreon</source>
         <translation>Patron</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1647"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1649"/>
         <source>Family</source>
         <translation>Rodzina</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1651"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1653"/>
         <source>Evaluation</source>
         <translation>Próbny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1653"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1655"/>
         <source>Type %1</source>
         <translation>Typ %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1683"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1685"/>
         <source>Advanced</source>
         <translation>Zaawansowany</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1687"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1689"/>
         <source>Max Level</source>
         <translation>Poziom maks.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1689"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1691"/>
         <source>Level %1</source>
         <translation>Poziom %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1846"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1848"/>
         <source>Set Force in Sandbox</source>
         <translation>Wymuś w Sandboxie</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1855"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1857"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Ustaw otwieraną ścieżkę w Sandboxie</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2157"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2159"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Ten certyfikat niestety nie jest ważny dla bieżącej kompilacji, musisz uzyskać nowy certyfikat lub przejść na starszą wersję.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2159"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2161"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Chociaż ten certyfikat wygasł, dla obecnie zainstalowanej wersji oraz funkcje pozostają włączone. Jednak nie będziesz już mieć dostępu do usług Sandboxie-Live, w tym aktualizacji zgodności i bazy danych rozwiązywania problemów online.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2161"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2163"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Ten certyfikat niestety wygasł, musisz uzyskać nowy certyfikat.</translation>
     </message>
@@ -6539,7 +6540,7 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;W tej wersji funkcje Plus pozostają włączone.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1414"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1416"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Funkcje Plus nie są już włączone.</translation>
     </message>
@@ -6553,12 +6554,12 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
         <translation type="vanished">Wymagany certyfikat sponsora</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1838"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1840"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Ur&amp;uchom bez piaskownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2140"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>To nie wygląda jak certyfikat. Proszę wpisać cały certyfikat, a nie tylko jego fragment.</translation>
     </message>
@@ -6571,7 +6572,7 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
         <translation type="vanished">Ten certyfikat jest niestety nieaktualny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2168"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2170"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Dziękujemy za wsparcie rozwoju Sandboxie-Plus.</translation>
     </message>
@@ -6580,22 +6581,22 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
         <translation type="vanished">Ten certyfikat pomocy technicznej jest nieważny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2276"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2278"/>
         <source>Update Available</source>
         <translation>Dostępna aktualizacja</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2280"/>
         <source>Installed</source>
         <translation>Zainstalowane</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2283"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2285"/>
         <source>by %1</source>
         <translation>przez %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2291"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2293"/>
         <source>(info website)</source>
         <translation>(strona informacyjna)</translation>
     </message>
@@ -6604,63 +6605,63 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
         <translation type="vanished">Ten dodatek jest obowiązkowy i nie można go usunąć.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2327"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2476"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2329"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2478"/>
         <source>Select Directory</source>
         <translation>Wybierz katalog</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2359"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2361"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Sprawdź teraz&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2436"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2438"/>
         <source>Please enter the new configuration password.</source>
         <translation>Proszę wpisać nowe hasło konfiguracyjne.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2440"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2442"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Wprowadź ponownie nowe hasło konfiguracyjne.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2445"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2447"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Hasła nie zgadzają się, spróbuj ponownie.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2459"/>
         <source>Process</source>
         <translation>Proces</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2459"/>
         <source>Folder</source>
         <translation>Folder</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2467"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2469"/>
         <source>Please enter a program file name</source>
         <translation>Proszę wpisać nazwę pliku programu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2535"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2537"/>
         <source>Please enter the template identifier</source>
         <translation>Proszę wpisać identyfikator szablonu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2543"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2545"/>
         <source>Error: %1</source>
         <translation>Błąd: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2575"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2577"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Czy naprawdę chcesz usunąć wybrany lokalny szablon(-y)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2783"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2785"/>
         <source>%1 (Current)</source>
         <translation>%1 (aktualne)</translation>
     </message>
@@ -6870,17 +6871,20 @@ Przed wysłaniem można przejrzeć dzienniki w oknie głównym.</translation>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="854"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation>Przepraszamy za niedogodności związane z Sandboxie-Plus. </translation>
+        <oldsource>We apologize for the inconvenience you are currently facing with Sandboxie-Plus.</oldsource>
+        <translation>Przepraszamy za niedogodności, z którymi obecnie borykasz się w związku z Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="861"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
-        <translation>Niestety, automatyczna procedura rozwiązywania problemów nie powiodła się. </translation>
+        <oldsource>Unfortunately, the automated troubleshooting procedure failed.</oldsource>
+        <translation>Niestety, automatyczna procedura rozwiązywania problemów zakończyła się niepowodzeniem.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="867"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation>Niestety, nie istnieje zautomatyzowana procedura rozwiązywania problemów dla opisanego problemu. </translation>
+        <oldsource>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described.</oldsource>
+        <translation>Niestety, nie ma dostępnej automatycznej procedury rozwiązywania problemów dla konkretnego opisanego problemu.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="872"/>
@@ -7392,7 +7396,7 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="360"/>
         <source>Invalid Timeout value. Please enter a value between 1 and 60.</source>
-        <translation>Błędna wartość czasu限. Proszę wpisać wartość między 1 a 60. </translation>
+        <translation>Błędna wartość czasu限. Proszę wpisać wartość między 1 a 60.</translation>
     </message>
     <message>
         <location filename="Windows/TestProxyDialog.cpp" line="367"/>
@@ -8334,7 +8338,8 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4174"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation>Po wywołaniu funkcji szybkiego odzyskiwania następujące foldery zostaną sprawdzone pod kątem zawartości w piaskownicy. </translation>
+        <oldsource>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content.</oldsource>
+        <translation>Gdy zostanie wywołana funkcja Szybkiego Odzyskiwania, następujące foldery zostaną sprawdzone pod kątem zawartości znajdującej się w pudełkach piaskowych. </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4560"/>
@@ -8669,7 +8674,8 @@ zamiast &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5540"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
-        <translation>Te opcje są przeznaczone do debugowania problemów z kompatybilnością, proszę nie używać ich w zastosowaniach produkcyjnych. </translation>
+        <oldsource>These options are intended for debugging compatibility issues, please do not use them in production use.</oldsource>
+        <translation>Te opcje są przeznaczone do debugowania problemów ze zgodnością. Prosimy nie używać ich w środowisku produkcyjnym.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5555"/>
@@ -9289,7 +9295,7 @@ Aby określić proces, użyj jako ścieżki &apos;$:program.exe&apos;.</translat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3968"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Używaj wątków serwera proxy wewnątrz procesu zamiast modyfikować gniazdo bezpośrednio (rozwiązuje rzadkie problemy z kompatybilnością)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4070"/>
@@ -9631,112 +9637,112 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4108"/>
         <source>Port Blocking</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokowanie portów</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4084"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokuj typowe porty SAMBA</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3737"/>
         <source>DNS Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtr DNS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3777"/>
         <source>Add Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj filtr</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3754"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Za pomocą filtra DNS można blokować poszczególne domeny dla każdego procesu osobno. Pozostaw kolumnę IP pustą, aby zablokować domenę, lub wprowadź adres IP, aby przekierować ruch.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3793"/>
         <source>Domain</source>
-        <translation type="unfinished"></translation>
+        <translation>Domena</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3816"/>
         <source>Internet Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy internetowe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3906"/>
         <source>Add Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3899"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Testuj serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3932"/>
         <source>Auth</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoryzacja</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3937"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Logowanie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3942"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3840"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programy uruchomione w sandboksie mogą być zmuszone do użycia wstępnie ustawionego serwera proxy SOCKS5.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="858"/>
         <source>This feature does not block all means of obtaining a screen capture, only some common ones.</source>
         <oldsource>This feature does not block all means of optaining a screen capture only some common once.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ta funkcja nie blokuje wszystkich sposobów uzyskania zrzutu ekranu, tylko niektóre typowe.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="841"/>
         <source>Prevent move mouse, bring in front, and similar operations, this is likely to cause issues with games.</source>
         <oldsource>Prevent move mouse, bring in front, and simmilar operations, this is likely to cause issues with games.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zapobiegaj poruszaniu myszką, wyświetlaniu okna na wierzchu i podobnym operacjom. Jest to prawdopodobnie przyczyną problemów z grami.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="851"/>
         <source>Allow sandboxed windows to cover the taskbar</source>
         <oldsource>Allow sandboxed windows to cover taskbar</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zezwalaj na pokrycie pasku zadań przez okna uruchomione w sandboksie.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1661"/>
         <source>Only Administrator user accounts can make changes to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Tylko konta użytkowników administratorów mogą wprowadzać zmiany w tym piaskowniku</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2762"/>
         <source>This setting can be used to prevent programs from running in the sandbox without the user&apos;s knowledge or consent.</source>
         <oldsource>This can be used to prevent a host malicious program from breaking through by launching a pre-designed malicious program into an unlocked encrypted sandbox.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ta ustawienie można użyć do zapobiegania uruchamianiu programów w piaskowniku bez wiedzy ani zgody użytkownika.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2765"/>
         <source>Display a pop-up warning before starting a process in the sandbox from an external source</source>
         <oldsource>A pop-up warning before launching a process into the sandbox from an external source.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetl ostrzeżenie w oknie pomocniczym przed uruchomieniem procesu w piaskowniku pochodzącego z zewnętrznego źródła.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3892"/>
         <source>Resolve hostnames via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozwiązuj nazwy hostów poprzez proxy.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4029"/>
         <source>Block DNS, UDP port 53</source>
-        <translation type="unfinished"></translation>
+        <translation>Zablokuj DNS, port UDP 53</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4349"/>
@@ -9751,63 +9757,64 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1699"/>
         <source>Limit restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ograniczenia ograniczeń</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1712"/>
         <location filename="Forms/OptionsWindow.ui" line="1757"/>
         <location filename="Forms/OptionsWindow.ui" line="1833"/>
         <source>Leave it blank to disable the setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozostaw to pole puste, aby wyłączyć tę ustawienie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1741"/>
         <source>Total Processes Number Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit całkowitej liczby procesów:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1669"/>
         <source>Job Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Obiekt zadania</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1843"/>
         <source>Total Processes Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit pamięci dla całkowitej liczby procesów:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1797"/>
         <source>Single Process Memory Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit pamięci dla pojedynczego procesu:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="301"/>
         <source>Box Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notatki dotyczące piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1715"/>
         <location filename="Forms/OptionsWindow.ui" line="1760"/>
         <location filename="Forms/OptionsWindow.ui" line="1836"/>
         <source>unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>ograniczony</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1820"/>
         <location filename="Forms/OptionsWindow.ui" line="1853"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bajty</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2020"/>
         <source>Checked: A local group will also be added to the newly created sandboxed token, which allows addressing all sandboxes at once. Would be useful for auditing policies.
 Partially checked: No groups will be added to the newly created sandboxed token.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznaczone: Do nowo utworzonego tokenu piaskowniczego zostanie również dodana lokalna grupa, co pozwala na odwoływanie się do wszystkich piaskownic jednocześnie. Byłoby to przydatne w przypadku zasad audytowania.
+Częściowo zaznaczone: Żadne grupy nie będą dodawane do nowo utworzonego tokenu piaskowniczego.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4373"/>
         <source>Restart force process before they begin to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponownie uruchom proces wymuszanie przed rozpoczęciem jego wykonywania.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4517"/>
@@ -9823,70 +9830,70 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4807"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Gdy wszystkie procesy w piaskownicy zostaną zakończone</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4949"/>
         <source>Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Procesy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5059"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta opcja ukrywa ścieżkę rejestru *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, umożliwiając ponowne zainstalowanie oprogramowania zainstalowanego na hoście w piaskownicy. Jednak nie ukrywa plików i folderów specyficznych dla danego oprogramowania. Jeśli instalator nadal napotka problemy, będziesz musiał zdefiniować niestandardowe wpisy WriteFilePath, aby ukryć odpowiednie pliki na dysku.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5062"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukryj klucz odinstalowania oprogramowania hosta (zobacz podpowiedź) </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5076"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Prywatność</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5132"/>
         <source>Hide Network Adapter MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrycie adresu MAC karty sieciowej</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5085"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ukrycie informacji o firmware</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5092"/>
         <source>Hide Disk Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrycie numeru seryjnego dysku</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5099"/>
         <source>Obfuscate known unique identifiers in the registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamaskowanie znanych unikalnych identyfikatorów w rejestrze systemowym</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4962"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Niektóre programy odczytują szczegóły systemu za pośrednictwem WMI (wbudowanej bazy danych systemu Windows) zamiast w normalny sposób. Na przykład &quot;tasklist.exe&quot; może uzyskać pełną listę procesów poprzez dostęp do WMI, nawet jeśli używany jest &quot;HideOtherBoxes&quot;. Włącz tę opcję, aby zatrzymać to zachowanie.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4965"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zapobieganie dostępowi procesów w pudełku piaskowym do szczegółów systemowych poprzez WMI (więcej informacji w etykiecie podpowiedzi)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4995"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie zezwalaj procesom w pudełku piaskowym na widzenie procesów działających poza pudełkami piaskowymi.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5459"/>
         <source>API call Trace (traces all SBIE hooks)</source>
-        <translation type="unfinished"></translation>
+        <translation>Śledzenie wywołań API (śledzenie wszystkich haków SBIE)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5398"/>
@@ -9896,7 +9903,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5302"/>
         <source>Trace function hooking by SbieDll</source>
-        <translation type="unfinished"></translation>
+        <translation>Śledzenie hakowania funkcji przez SbieDll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5565"/>
@@ -9906,7 +9913,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5678"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz szablon</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5846"/>
@@ -9961,27 +9968,27 @@ Partially checked: No groups will be added to the newly created sandboxed token.
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="4531"/>
+        <location filename="SandMan.cpp" line="4527"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4532"/>
+        <location filename="SandMan.cpp" line="4528"/>
         <source>Apply</source>
         <translation>Zastosuj</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4533"/>
+        <location filename="SandMan.cpp" line="4529"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4534"/>
+        <location filename="SandMan.cpp" line="4530"/>
         <source>&amp;Yes</source>
         <translation>&amp;Tak</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4535"/>
+        <location filename="SandMan.cpp" line="4531"/>
         <source>&amp;No</source>
         <translation>&amp;Nie</translation>
     </message>
@@ -10049,7 +10056,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
         <source>Force direct child to be sandboxed, but does not include indirect child processes that are opened through the DCOM and IPC interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymuś umieszczenie bezpośrednich procesów potomnych w pudełku piaskowym, ale nie obejmuj pośrednich procesów potomnych otwieranych poprzez interfejsy DCOM i IPC. </translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="108"/>
@@ -10064,7 +10071,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="48"/>
         <source>Force Children</source>
-        <translation type="unfinished">Wymuś podprocesy</translation>
+        <translation>Wymuś tryb dla procesów potomnych</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="59"/>
@@ -10129,7 +10136,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
         <location filename="Forms/SettingsWindow.ui" line="162"/>
         <source>Hotkey for suspending all processes:</source>
         <oldsource>Hotkey for suspending all process</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Skrót klawiaturowe do zawieszenia wszystkich procesów:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="134"/>
@@ -10144,7 +10151,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/SettingsWindow.ui" line="214"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprawdź status automatycznego usuwania pudełek piaskowych podczas uruchamiania Sandmana</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="389"/>
@@ -10184,7 +10191,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1366"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukryj okna SandMana podczas robienia zrzutu ekranu (wymagane ponowne uruchomienie interfejsu użytkownika)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1380"/>
@@ -10209,7 +10216,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1818"/>
         <source>Eval Cert</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocena certyfikatu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2302"/>
@@ -10995,7 +11002,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1703"/>
         <source>Cert Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje certyfikatu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1717"/>
@@ -11031,47 +11038,47 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="Forms/SettingsWindow.ui" line="663"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj opcję &apos;Ustaw siłę w piaskownicy&apos; do menu kontekstowego</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="570"/>
         <source>Add &apos;Set Open Path in Sandbox&apos; to context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj opcję &apos;Ustaw otwartą ścieżkę w piaskownicy&apos; do menu kontekstowego</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1734"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Certificate usage guide&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-use-cert&quot;&gt;Przewodnik po użytkowaniu certyfikatu&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1677"/>
         <source>HwId: 00000000-0000-0000-0000-000000000000</source>
-        <translation type="unfinished"></translation>
+        <translation>Identyfikator sprzętu: 00000000-0000-0000-0000-000000000000</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="181"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakończ wszystkie procesy w pudełkach piaskowych podczas wyjścia z programu Sandman</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="676"/>
         <source>Sandboxed Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulpit w piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="683"/>
         <source>Switch to sandboxed desktop when starting a process</source>
-        <translation type="unfinished"></translation>
+        <translation>Przełącz na pulpit w pudełku piaskowym podczas uruchamiania procesu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="690"/>
         <source>Switch to sandboxed desktop with double click</source>
-        <translation type="unfinished"></translation>
+        <translation>Przełącz na pulpit w pudełku piaskowym poprzez podwójne kliknięcie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1661"/>
         <source>Cert Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje o certyfikacie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1872"/>
@@ -11101,17 +11108,17 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2279"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodawanie grupy &quot;SandboxieAll Sandboxes&quot; do tokenu w trybie piaskownicy (eksperymentalnie)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2309"/>
         <source>This feature protects the sandbox by restricting access, preventing other users from accessing the folder. Ensure the root folder path contains the %USER% macro so that each user gets a dedicated sandbox folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta funkcja chroni pudełko piaskowe poprzez ograniczanie dostępu, zapobiegając innym użytkownikom dostęp do folderu. Upewnij się, że ścieżka do folderu głównego zawiera makro %USER%, aby każdy użytkownik miał własny dedykowany folder pudełka piaskowego.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2312"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogranicz dostęp do głównego folderu pudełka piaskowego tylko do użytkownika, który utworzył to pudełko piaskowe.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2335"/>
@@ -11121,7 +11128,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2422"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawsze uruchamiaj interfejs użytkownika SandMana jako Admin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2510"/>
@@ -11132,7 +11139,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="Forms/SettingsWindow.ui" line="2531"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetl wiadomość 1321, gdy proces został wymuszony do działania w pudełku piaskowym</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2541"/>
@@ -11173,7 +11180,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="Forms/SettingsWindow.ui" line="2643"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;teraz aktualizuj szablony zgodności&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2699"/>
@@ -11208,7 +11215,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2803"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz szablon</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2758"/>
@@ -11288,129 +11295,129 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="20"/>
         <source>Test Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Testuj serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="69"/>
         <source>Test Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia testów...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="82"/>
         <source>Testing...</source>
-        <translation type="unfinished">Trwa testowanie...</translation>
+        <translation>Trwa testowanie...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="117"/>
         <source>Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="127"/>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="134"/>
         <source>127.0.0.1:80</source>
-        <translation type="unfinished">127.0.0.1:80</translation>
+        <translation>127.0.0.1:80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="144"/>
         <source>Protocol:</source>
-        <translation type="unfinished">Protokół:</translation>
+        <translation>Protokół:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="151"/>
         <source>SOCKS 5</source>
-        <translation type="unfinished"></translation>
+        <translation>SOCKS 5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="158"/>
         <source>Authentication:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uwierzytelnienie:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="165"/>
         <source>NO</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="172"/>
         <source>Login:</source>
-        <translation type="unfinished"></translation>
+        <translation>Logowanie:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="179"/>
         <source>username</source>
-        <translation type="unfinished"></translation>
+        <translation>nazwa użytkownika</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="242"/>
         <source>Timeout (secs):</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas wygaśnięcia (sekundy):</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="249"/>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="274"/>
         <source>Test 1: Connection to the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 1: Połączenie z serwerem proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="280"/>
         <location filename="Forms/TestProxyDialog.ui" line="302"/>
         <location filename="Forms/TestProxyDialog.ui" line="388"/>
         <source>Enable this test</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz ten test</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="293"/>
         <source>Test 2: Connection through the Proxy Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 2: Połączenie poprzez serwer proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="330"/>
         <source>Target host:</source>
-        <translation type="unfinished"></translation>
+        <translation>Host docelowy:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="340"/>
         <source>www.google.com</source>
-        <translation type="unfinished"></translation>
+        <translation>www.google.com</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="350"/>
         <source>Port:</source>
-        <translation type="unfinished">Port:</translation>
+        <translation>Port:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="360"/>
         <source>80</source>
-        <translation type="unfinished">80</translation>
+        <translation>80</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="369"/>
         <source>Load a default web page from the host. (There must be a web server running on the host)</source>
-        <translation type="unfinished"></translation>
+        <translation>Załaduj domyślną stronę internetową z hosta. (Na hoście musi być uruchomiony serwer WWW)</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation type="unfinished"></translation>
+        <translation>Test 3: Opóźnienie serwera proxy</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>
         <source>Ping count:</source>
-        <translation type="unfinished"></translation>
+        <translation>Liczba pingów:</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="457"/>
         <source>Increase ping count to improve the accuracy of the average latency calculation. More pings help to ensure that the average is representative of typical network conditions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwiększ liczbę pingów, aby poprawić precyzję obliczeń średniego opóźnienia. Większa liczba pingów pomaga zapewnić, że średnia jest reprezentatywna dla typowych warunków sieciowych. </translation>
     </message>
 </context>
 </TS>

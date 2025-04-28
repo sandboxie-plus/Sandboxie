@@ -6,7 +6,7 @@
 ## [1.15.12 / 5.70.12] - 2025-04-??
 
 ### 新增
-- 为 Plus UI 新增印度尼西亚语翻译 [4bad4d1](https://github.com/sandboxie-plus/Sandboxie/commit/4bad4d190a90a6329d549e5a31ca8ee13b4eb9a1)（感谢 ？？？）
+- 为 Plus 界面新增印度尼西亚语翻译 [4bad4d1](https://github.com/sandboxie-plus/Sandboxie/commit/4bad4d190a90a6329d549e5a31ca8ee13b4eb9a1)（感谢 ？？？）
 - 新增 WeType 输入法（IME）模板 [#4715](https://github.com/sandboxie-plus/Sandboxie/pull/4715)（感谢 bot-1450）
 - 在代理配置中新增主机名支持（在 WSA_Startup 时查找主机）
 - Sandboxie 现在支持绑定到适配器，而非仅绑定 IP（在 WSA_Startup 时解析 IP）

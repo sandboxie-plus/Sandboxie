@@ -4231,7 +4231,7 @@ No will choose: %2</source>
         <location filename="SandManRecovery.cpp" line="261"/>
         <source>Failed to recover some files:
 </source>
-        <translation>部分文件恢复失败:
+        <translation>部分文件恢复失败：
 </translation>
     </message>
     <message>
@@ -4460,7 +4460,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2441"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation>Sandboxie-Plus 版本: %1 (%2)</translation>
+        <translation>Sandboxie-Plus 版本： %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="518"/>

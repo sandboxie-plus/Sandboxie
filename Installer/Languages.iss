@@ -67,12 +67,12 @@ english.RefreshBuild=Download latest Templates.ini and translations
 english.InstallImDisk=Install (or Update) ImDisk 3.0 driver (for RamDisk and Encrypted Sandboxes)
 
 ; Chinese Simplified
-ChineseSimplified.AddSandboxedMenu=添加“在沙盒中运行”右键菜单
+ChineseSimplified.AddSandboxedMenu=添加“在沙箱中运行”右键菜单
 ChineseSimplified.AddSandboxedBrowser=添加用于在 Sandboxie 下启动网页浏览器的桌面快捷方式
-ChineseSimplified.SandboxieStartMenu1=在沙盒中运行程序
-ChineseSimplified.SandboxieStartMenu2=在沙盒中运行网页浏览器
+ChineseSimplified.SandboxieStartMenu1=在沙箱中运行程序
+ChineseSimplified.SandboxieStartMenu2=在沙箱中运行网页浏览器
 ChineseSimplified.SandboxieStartMenu3=Sandboxie 开始菜单
-ChineseSimplified.SandboxedBrowser=在沙盒中运行网页浏览器
+ChineseSimplified.SandboxedBrowser=在沙箱中运行网页浏览器
 ChineseSimplified.CustomPageLabel1=选择安装方式
 ChineseSimplified.CustomPageLabel2=应当如何安装
 ChineseSimplified.CustomPageLabel3=选择安装模式
@@ -81,14 +81,14 @@ ChineseSimplified.CustomPageUpgradeMode=更新当前已安装的 {#MyAppName}
 ChineseSimplified.CustomPagePortableMode=提取全部文件到指定目录供便携化使用
 ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseSimplified.ClassicFound=检测到已安装 Sandboxie Classic 版本，如要继续安装必须先将其卸载，是否开始卸载？
-ChineseSimplified.RunSandboxedMenu=在沙盒中运行(&X)
+ChineseSimplified.RunSandboxedMenu=在沙箱中运行(&X)
 ChineseSimplified.UninstallTaskLabel1=选择卸载方式
 ChineseSimplified.UninstallTaskLabel2=要如何卸载 Sandboxie-Plus？
-ChineseSimplified.UninstallTaskLabel3=保留配置文件和所有沙盒(&K)%n如果您打算保留当前配置并重新安装 Sandboxie-Plus，请选择此项。
-ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但会保留您在 Sandboxie-Plus 中创建的沙盒。
-ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙盒(&S)%n选择此选项将会移除所有配置文件和沙盒，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
+ChineseSimplified.UninstallTaskLabel3=保留配置文件和所有沙箱(&K)%n如果您打算保留当前配置并重新安装 Sandboxie-Plus，请选择此项。
+ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但会保留您在 Sandboxie-Plus 中创建的沙箱。
+ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙箱(&S)%n选择此选项将会移除所有配置文件和沙箱，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
 ChineseSimplified.RefreshBuild=下载最新的 Templates.ini 模板和翻译
-ChineseSimplified.InstallImDisk=安装（或更新）ImDisk 3.0驱动程序（用于内存盘和加密沙盒）。
+ChineseSimplified.InstallImDisk=安装（或更新）ImDisk 3.0驱动程序（用于内存盘和加密沙箱）。
 
 ; Chinese Traditional
 ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單

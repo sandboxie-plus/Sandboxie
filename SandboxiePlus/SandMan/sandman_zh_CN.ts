@@ -4539,7 +4539,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="1672"/>
         <location filename="SandMan.cpp" line="1688"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation>你输出了错误的沙盘名称！没有做出任何更改。</translation>
+        <translation>你输出了错误的沙箱名称！没有做出任何更改。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1676"/>
@@ -6430,7 +6430,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1857"/>
         <source>Set Open Path in Sandbox</source>
-        <translation>在沙盘中打开目录</translation>
+        <translation>在沙箱中打开目录</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2142"/>
@@ -8611,7 +8611,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>使用自定义沙盘令牌可以更好地将各个沙箱相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙箱。
+        <translation>使用自定义 Sandboxie 令牌可以更好地将各个沙箱相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙箱。
 但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题。</translation>
     </message>
     <message>
@@ -10767,7 +10767,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/SettingsWindow.ui" line="663"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation>添加&apos;强制在沙盘中打开&apos; 到上下文菜单</translation>
+        <translation>添加“强制在沙箱中打开”到上下文菜单</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="570"/>

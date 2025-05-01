@@ -583,7 +583,7 @@ The entire user profile remains hidden, ensuring maximum security.</source>
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories.
 The entire user profile remains hidden, ensuring maximum security.</oldsource>
         <translation>该沙箱类型通过显著减少主机暴露于沙箱进程的攻击面来提供最高级别的保护，并且它严格限制进程对用户数据的访问。
-该沙箱中的进程仅被允许访问 %SystemRoot% （一般为 C:\Windows） 和 %ProgramW6432%（一般为 C:\Program Files）目录。因此，所有用户数据及文件将对沙箱进程保持隐藏状态，确保了它们最大程度的安全性。</translation>
+该沙箱中的进程仅被允许访问 %SystemRoot% （一般为 C:\Windows） 和 %ProgramFiles%（一般为 C:\Program Files）目录。因此，所有用户数据及文件将对沙箱进程保持隐藏状态，确保了它们最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>

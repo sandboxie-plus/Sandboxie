@@ -6902,7 +6902,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="162"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider独占版本构建&lt;/a&gt; 的Sandboxie-Plus。其仅对于等级更高的（如项目贡献者，HUGE supporter许可证拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 赞助者&lt;/a&gt; 可用。</translation>
+        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider独占版本构建&lt;/a&gt; 的Sandboxie-Plus。其仅对于等级更高的（如项目贡献者/HUGE/赞助者许可证拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 赞助者&lt;/a&gt; 可用。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="168"/>

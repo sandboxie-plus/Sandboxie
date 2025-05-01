@@ -515,10 +515,13 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="150"/>
-        <source>The password is constrained to a maximum length of 128 characters.
-This length permits approximately 384 bits of entropy with a passphrase composed of actual English words,
+        <source>The password is constrained to a maximum length of 128 characters. 
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation>密码的最大长度限制为 128 个字符。
+        <oldsource>The password is constrained to a maximum length of 128 characters.
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words,
+increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</oldsource>
+        <translation type="unfinished">密码的最大长度限制为 128 个字符。
 如果密码由实际的英文单词组成，这个长度允许大约 384 位的熵，
 如果使用 Leet(L337) 密语，则增加到 512 位熵，如果完全由随机的可打印 ASCII 字符组成，则允许超过 768 位熵。</translation>
     </message>
@@ -573,10 +576,13 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="401"/>
-        <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.
-It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories.
+        <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
+It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
-        <translation>该沙箱类型通过显著减少主机暴露于沙箱进程的攻击面来提供最高级别的保护，并且它严格限制进程对用户数据的访问。
+        <oldsource>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.
+It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories.
+The entire user profile remains hidden, ensuring maximum security.</oldsource>
+        <translation type="unfinished">该沙箱类型通过显著减少主机暴露于沙箱进程的攻击面来提供最高级别的保护，并且它严格限制进程对用户数据的访问。
 该沙箱中的进程仅被允许访问 %SystemRoot% （一般为 C:\Windows） 和 %ProgramW6432%（一般为 C:\Program Files）目录。因此，所有用户数据及文件将对沙箱进程保持隐藏状态，确保了它们最大程度的安全性。</translation>
     </message>
     <message>
@@ -596,9 +602,11 @@ The entire user profile remains hidden, ensuring maximum security.</source>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
-        <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such,
+        <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation>在该沙箱类型中，任何沙箱进程都将被阻止访问任何个人用户文件和数据。 保护的重点是保护用户数据，因此，该沙箱中运行的进程只能访问 %SystemRoot% （一般为C:\Windows）和 %ProgramW6432%（一般为C:\Program Files）以及Sandboxie安装目录。 这可确保个人文件的安全。</translation>
+        <oldsource>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such,
+only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</oldsource>
+        <translation type="unfinished">在该沙箱类型中，任何沙箱进程都将被阻止访问任何个人用户文件和数据。 保护的重点是保护用户数据，因此，该沙箱中运行的进程只能访问 %SystemRoot% （一般为C:\Windows）和 %ProgramW6432%（一般为C:\Program Files）以及Sandboxie安装目录。 这可确保个人文件的安全。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="409"/>
@@ -607,9 +615,11 @@ only C:\Windows and C:\Program Files directories are accessible to processes run
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="410"/>
-        <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme.
+        <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
-        <translation>该沙箱类型提供 Sandboxie Classic 的默认行为。 它为用户提供了熟悉且可靠的沙箱方案。
+        <oldsource>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme.
+Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</oldsource>
+        <translation type="unfinished">该沙箱类型提供 Sandboxie Classic 的默认行为。 它为用户提供了熟悉且可靠的沙箱方案。
 应用程序可以在该沙箱内运行，并确保它们操作受控且隔离的运行空间。</translation>
     </message>
     <message>
@@ -620,9 +630,11 @@ Applications can be run within this sandbox, ensuring they operate within a cont
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="413"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="416"/>
-        <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments.
+        <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
-        <translation>该沙箱类型优先考虑兼容性，同时仍然提供良好的隔离级别。 它被设计用于在单独隔离的沙箱中运行受信任的应用程序。
+        <oldsource>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments.
+While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</oldsource>
+        <translation type="unfinished">该沙箱类型优先考虑兼容性，同时仍然提供良好的隔离级别。 它被设计用于在单独隔离的沙箱中运行受信任的应用程序。
 虽然与其他沙箱类型相比，其隔离级别有所降低，但它提供了与各种应用程序的更高兼容性，确保该沙箱环境中应用的平稳运行。</translation>
     </message>
     <message>
@@ -641,10 +653,13 @@ While the level of isolation is reduced compared to other box types, it offers i
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="425"/>
-        <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security.
-Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes.
+        <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
+Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
-        <translation>该类型的沙箱使用加密的磁盘映像作为文件根目录，为安全性与隐私性提供了额外的保障。
+        <oldsource>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security.
+Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes.
+This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</oldsource>
+        <translation type="unfinished">该类型的沙箱使用加密的磁盘映像作为文件根目录，为安全性与隐私性提供了额外的保障。
 当虚拟磁盘映像被挂载时，只有沙箱内的程序可以访问它，而其他进程将会被阻止访问。这确保了在该沙箱环境中最高级别的隐私和数据保护。</translation>
     </message>
     <message>
@@ -979,10 +994,13 @@ Error: %1</source>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1086"/>
-        <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation.
+        <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation>感谢您使用 Sandboxie-Plus 的故障排除向导。对于在此过程中给您带来的不便，我们深表歉意。如果您有任何其他问题或需要进一步帮助，请随时联系。我们随时为你悉心服务。感谢您的理解与合作。
+        <oldsource>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation.
+
+You can click Finish to close this wizard.</oldsource>
+        <translation type="unfinished">感谢您使用 Sandboxie-Plus 的故障排除向导。对于在此过程中给您带来的不便，我们深表歉意。如果您有任何其他问题或需要进一步帮助，请随时联系。我们随时为你悉心服务。感谢您的理解与合作。
 
 您可以单击“完成”关闭此向导。</translation>
     </message>
@@ -3143,9 +3161,11 @@ Error: </source>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="669"/>
-        <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
+        <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation>内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定通道的所有相关改进。
+        <oldsource>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
+Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</oldsource>
+        <translation type="unfinished">内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定通道的所有相关改进。
 与预览通道不同，它不包括未经测试的、潜在的破坏性的或可能无法广泛使用的实验性更改。</translation>
     </message>
     <message>
@@ -4229,9 +4249,11 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="261"/>
-        <source>Failed to recover some files:
+        <source>Failed to recover some files: 
 </source>
-        <translation>部分文件恢复失败：
+        <oldsource>Failed to recover some files:
+</oldsource>
+        <translation type="unfinished">部分文件恢复失败：
 </translation>
     </message>
     <message>
@@ -8682,9 +8704,11 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2890"/>
-        <source>Configure which processes can access Files, Folders and Pipes.
+        <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
-        <translation>配置哪些进程可以访问文件、文件夹和管道，
+        <oldsource>Configure which processes can access Files, Folders and Pipes.
+&apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</oldsource>
+        <translation type="unfinished">配置哪些进程可以访问文件、文件夹和管道，
 “开放”访问权限只适用于原先已位于沙箱之外的程序二进制文件，
 你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为。</translation>
     </message>
@@ -8695,9 +8719,11 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2997"/>
-        <source>Configure which processes can access the Registry.
+        <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
-        <translation>配置哪些进程可以读写注册表，
+        <oldsource>Configure which processes can access the Registry.
+&apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</oldsource>
+        <translation type="unfinished">配置哪些进程可以读写注册表，
 “开放”访问权限只适用于原先已位于沙箱之外的程序二进制文件，
 你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为。</translation>
     </message>
@@ -10794,9 +10820,11 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1929"/>
-        <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
+        <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation>内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定通道的所有相关改进。
+        <oldsource>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
+Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</oldsource>
+        <translation type="unfinished">内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定通道的所有相关改进。
 与预览通道不同，它不包括未经测试的、潜在的破坏性的或可能无法广泛使用的实验性更改。</translation>
     </message>
     <message>

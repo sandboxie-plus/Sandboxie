@@ -1,3 +1,4 @@
 # These are supported funding model platforms
 patreon: DavidXanatos
-custom: [afdian.com/a/xanasoft, xanasoft.com/go.php?to=donate]
+#custom: xanasoft.com/go.php?to=donate
+custom: https://afdian.com/a/xanasoft

@@ -374,7 +374,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     </message>
     <message>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="vanished">使用自定义沙箱令牌可以更好地将各个沙箱相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙箱。但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题。</translation>
+        <translation type="vanished">使用自定义 Sandboxie 令牌可以更好地将各个沙箱相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙箱。但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题。</translation>
     </message>
 </context>
 <context>
@@ -521,9 +521,9 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <oldsource>The password is constrained to a maximum length of 128 characters.
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words,
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</oldsource>
-        <translation type="unfinished">密码的最大长度限制为 128 个字符。
-如果密码由实际的英文单词组成，这个长度允许大约 384 位的熵，
-如果使用 Leet(L337) 密语，则增加到 512 位熵，如果完全由随机的可打印 ASCII 字符组成，则允许超过 768 位熵。</translation>
+        <translation>密码的最大长度限制为 128 个字符。
+当使用由英文单词组成的密码短语时，此长度大约可提供 384 位的信息熵，
+如果使用 Leet(L337) 密语，熵可增加至 512 位，如果完全由随机的可打印 ASCII 字符组成，信息熵将超过 768 位。</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="167"/>
@@ -582,8 +582,8 @@ The entire user profile remains hidden, ensuring maximum security.</source>
         <oldsource>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories.
 The entire user profile remains hidden, ensuring maximum security.</oldsource>
-        <translation type="unfinished">该沙箱类型通过显著减少主机暴露于沙箱进程的攻击面来提供最高级别的保护，并且它严格限制进程对用户数据的访问。
-该沙箱中的进程仅被允许访问 %SystemRoot% （一般为 C:\Windows） 和 %ProgramW6432%（一般为 C:\Program Files）目录。因此，所有用户数据及文件将对沙箱进程保持隐藏状态，确保了它们最大程度的安全性。</translation>
+        <translation>该沙箱类型通过显著减少主机暴露于沙箱进程的攻击面来提供最高级别的保护，并且它严格限制进程对用户数据的访问。
+该沙箱中的进程仅被允许访问 %SystemRoot% （一般为 C:\Windows） 和 %ProgramFiles%（一般为 C:\Program Files）目录。因此，所有用户数据及文件将对沙箱进程保持隐藏状态，确保了它们最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>
@@ -606,7 +606,7 @@ The entire user profile remains hidden, ensuring maximum security.</oldsource>
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
         <oldsource>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such,
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</oldsource>
-        <translation type="unfinished">在该沙箱类型中，任何沙箱进程都将被阻止访问任何个人用户文件和数据。 保护的重点是保护用户数据，因此，该沙箱中运行的进程只能访问 %SystemRoot% （一般为C:\Windows）和 %ProgramW6432%（一般为C:\Program Files）以及Sandboxie安装目录。 这可确保个人文件的安全。</translation>
+        <translation>在该沙箱类型中，任何沙箱进程都将被阻止访问任何个人用户文件和数据。 保护的重点是保护用户数据，因此，该沙箱中运行的进程只能访问 %SystemRoot% （一般为C:\Windows）和 %ProgramW6432%（一般为C:\Program Files）以及 Sandboxie 安装目录。 这可确保个人文件的安全。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="409"/>
@@ -619,7 +619,7 @@ only C:\Windows and C:\Program Files directories are accessible to processes run
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
         <oldsource>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme.
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</oldsource>
-        <translation type="unfinished">该沙箱类型提供 Sandboxie Classic 的默认行为。 它为用户提供了熟悉且可靠的沙箱方案。
+        <translation>该沙箱类型提供 Sandboxie 经典版的默认行为。 它为用户提供了熟悉且可靠的沙箱方案。
 应用程序可以在该沙箱内运行，并确保它们操作受控且隔离的运行空间。</translation>
     </message>
     <message>
@@ -634,7 +634,7 @@ Applications can be run within this sandbox, ensuring they operate within a cont
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
         <oldsource>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments.
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</oldsource>
-        <translation type="unfinished">该沙箱类型优先考虑兼容性，同时仍然提供良好的隔离级别。 它被设计用于在单独隔离的沙箱中运行受信任的应用程序。
+        <translation>该沙箱类型优先考虑兼容性，同时仍然提供良好的隔离级别。 它被设计用于在单独隔离的沙箱中运行受信任的应用程序。
 虽然与其他沙箱类型相比，其隔离级别有所降低，但它提供了与各种应用程序的更高兼容性，确保该沙箱环境中应用的平稳运行。</translation>
     </message>
     <message>
@@ -659,8 +659,8 @@ This ensures the utmost level of privacy and data protection within the confiden
         <oldsource>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security.
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes.
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</oldsource>
-        <translation type="unfinished">该类型的沙箱使用加密的磁盘映像作为文件根目录，为安全性与隐私性提供了额外的保障。
-当虚拟磁盘映像被挂载时，只有沙箱内的程序可以访问它，而其他进程将会被阻止访问。这确保了在该沙箱环境中最高级别的隐私和数据保护。</translation>
+        <translation>该类型的沙箱使用加密的磁盘映像作为文件根目录，为安全性与隐私性提供了额外的保障。
+当虚拟磁盘映像被挂载时，只有沙箱内的程序可以访问它，Sandboxie 会阻止主机系统上的其他进程访问沙箱内的进程。这确保了在机密沙箱环境中最高级别的隐私和数据保护。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
@@ -1000,9 +1000,9 @@ You can click Finish to close this wizard.</source>
         <oldsource>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation.
 
 You can click Finish to close this wizard.</oldsource>
-        <translation type="unfinished">感谢您使用 Sandboxie-Plus 的故障排除向导。对于在此过程中给您带来的不便，我们深表歉意。如果您有任何其他问题或需要进一步帮助，请随时联系。我们随时为你悉心服务。感谢您的理解与合作。
+        <translation>感谢您使用 Sandboxie-Plus 的故障排除向导。对于在此过程中给您带来的不便，我们深表歉意。如果您有任何其他问题或需要进一步帮助，请随时联系。我们随时为你悉心服务。感谢您的理解与合作。
 
-您可以单击“完成”关闭此向导。</translation>
+您可以点击“完成”关闭此向导。</translation>
     </message>
     <message>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation.
@@ -3165,8 +3165,8 @@ Error: </source>
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <oldsource>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</oldsource>
-        <translation type="unfinished">内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定通道的所有相关改进。
-与预览通道不同，它不包括未经测试的、潜在的破坏性的或可能无法广泛使用的实验性更改。</translation>
+        <translation>内测版可让用户提前体验新功能和错误修复，以及稳定版的所有相关改进。
+与预览版不同，它不包括未经测试的、潜在的破坏性的或可能无法广泛使用的实验性更改。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="674"/>
@@ -4253,7 +4253,7 @@ No will choose: %2</source>
 </source>
         <oldsource>Failed to recover some files:
 </oldsource>
-        <translation type="unfinished">部分文件恢复失败：
+        <translation>部分文件恢复失败：
 </translation>
     </message>
     <message>
@@ -4539,7 +4539,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="1672"/>
         <location filename="SandMan.cpp" line="1688"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
-        <translation>你输出了错误的沙盘名称！没有做出任何更改。</translation>
+        <translation>你输出了错误的沙箱名称！没有做出任何更改。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1676"/>
@@ -4583,7 +4583,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation>Sandman上次未完成已安装Windows更新的枚举操作，可能发生进程挂起。是否要在软件兼容性检测中禁用Windows更新扫描功能？</translation>
+        <translation>沙盘管理器上次未能完成已安装的 Windows 更新的枚举操作，它很可能处于挂起状态。
+你是否想要从软件兼容性检测中禁用 Windows 更新扫描功能？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2805"/>
@@ -6430,7 +6431,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1857"/>
         <source>Set Open Path in Sandbox</source>
-        <translation>在沙盘中打开目录</translation>
+        <translation>在沙箱中打开目录</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2142"/>
@@ -6588,7 +6589,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="538"/>
         <source>Start UI with Windows</source>
-        <translation>随系统启动沙箱管理器</translation>
+        <translation>随系统启动沙盘管理器</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="543"/>
@@ -6614,11 +6615,11 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="565"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation>启用这个选项会阻止从无管理员权限的用户界面对Sandboxie.ini的配置更改。小心点，因为使用带有普通用户权限的沙箱管理器将可能陷入锁定。为了对配置进行修改，你必须通过点击主窗口中 &apos; 沙箱 &apos; 菜单下的 &apos; 以管理员特权重启 &apos; 菜单项来作为管理员重启沙箱管理器。</translation>
+        <translation>启用这个选项会阻止从无管理员权限的用户界面对Sandboxie.ini的配置更改。小心点，因为使用带有普通用户权限的沙盘管理器将可能陷入锁定。为了对配置进行修改，你必须通过点击主窗口中 &apos; 沙箱 &apos; 菜单下的 &apos; 以管理员特权重启 &apos; 菜单项来作为管理员重启沙盘管理器。</translation>
     </message>
     <message>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
-        <translation type="vanished">当这个选项被设置，以普通用户权限启动的沙箱管理器将不能够去更改配置，这可能造成陷入循环。你需要打开沙箱管理器主窗口，在系统菜单中点击&quot;沙箱(s)&quot;并点击上下文菜单中的&quot;以管理员特权重启&quot;以重新获取配置控制权。</translation>
+        <translation type="vanished">当这个选项被设置，以普通用户权限启动的沙盘管理器将不能够去更改配置，这可能造成陷入循环。你需要打开沙盘管理器主窗口，在系统菜单中点击&quot;沙箱(s)&quot;并点击上下文菜单中的&quot;以管理员特权重启&quot;以重新获取配置控制权。</translation>
     </message>
 </context>
 <context>
@@ -6902,7 +6903,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="162"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider独占版本构建&lt;/a&gt; 的Sandboxie-Plus。其仅对于等级更高的（如项目贡献者，HUGE supporter许可证拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 赞助者&lt;/a&gt; 可用。</translation>
+        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider独占版本构建&lt;/a&gt; 的Sandboxie-Plus。其仅对于等级更高的（如项目贡献者/HUGE/赞助者许可证拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 赞助者&lt;/a&gt; 可用。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="168"/>
@@ -7629,7 +7630,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="32"/>
         <source>SandboxiePlus Options</source>
-        <translation>SandboxiePlus 选项</translation>
+        <translation>Sandboxie Plus 选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="52"/>
@@ -8572,7 +8573,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1933"/>
         <source>Sandboxie token</source>
-        <translation>沙箱令牌</translation>
+        <translation>沙盘令牌</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
@@ -8611,7 +8612,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>使用自定义沙箱令牌可以更好地将各个沙箱相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙箱。
+        <translation>使用自定义 Sandboxie 令牌可以更好地将各个沙箱相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙箱。
 但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题。</translation>
     </message>
     <message>
@@ -8708,7 +8709,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <oldsource>Configure which processes can access Files, Folders and Pipes.
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</oldsource>
-        <translation type="unfinished">配置哪些进程可以访问文件、文件夹和管道，
+        <translation>配置哪些进程可以访问文件、文件夹和管道，
 “开放”访问权限只适用于原先已位于沙箱之外的程序二进制文件，
 你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为。</translation>
     </message>
@@ -8723,7 +8724,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <oldsource>Configure which processes can access the Registry.
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</oldsource>
-        <translation type="unfinished">配置哪些进程可以读写注册表，
+        <translation>配置哪些进程可以读写注册表，
 “开放”访问权限只适用于原先已位于沙箱之外的程序二进制文件，
 你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为。</translation>
     </message>
@@ -9740,7 +9741,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/PopUpWindow.ui" line="32"/>
         <source>SandboxiePlus Notifications</source>
-        <translation>SandboxiePlus 通知</translation>
+        <translation>Sandboxie Plus 通知</translation>
     </message>
 </context>
 <context>
@@ -9792,7 +9793,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
         <source>SandboxiePlus - Recovery</source>
-        <translation>SandboxiePlus - 恢复</translation>
+        <translation>Sandboxie Plus - 恢复</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="167"/>
@@ -9845,7 +9846,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="32"/>
         <source>SandboxiePlus select box</source>
-        <translation>SandboxiePlus 选择沙箱</translation>
+        <translation>Sandboxie Plus 选择沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="45"/>
@@ -9897,7 +9898,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="32"/>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus 设置</translation>
+        <translation>Sandboxie Plus 设置</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="55"/>
@@ -9953,7 +9954,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="78"/>
         <source>SandMan Options</source>
-        <translation>SandMan 选项</translation>
+        <translation>沙盘管理器选项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="270"/>
@@ -10272,7 +10273,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="636"/>
         <source>Start UI with Windows</source>
-        <translation>随系统启动沙箱管理器</translation>
+        <translation>随系统启动沙盘管理器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="472"/>
@@ -10282,7 +10283,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="626"/>
         <source>Start UI when a sandboxed process is started</source>
-        <translation>随沙箱化应用启动沙箱管理器</translation>
+        <translation>随沙箱化应用启动沙盘管理器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="207"/>
@@ -10364,7 +10365,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="485"/>
         <source>Start Sandbox Manager</source>
-        <translation>沙箱管理器启动选项</translation>
+        <translation>沙盘管理器启动选项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2073"/>
@@ -10385,7 +10386,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/SettingsWindow.ui" line="2083"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
-        <translation>保护配置</translation>
+        <translation>沙盘配置</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2368"/>
@@ -10660,7 +10661,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="134"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation>将 Sandman 窗口置顶的快捷键：</translation>
+        <translation>将沙盘管理器的窗口置顶的快捷键：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="148"/>
@@ -10676,7 +10677,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="214"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation>当沙箱管理器启动时检查沙箱的自动删除状态</translation>
+        <translation>当沙盘管理器启动时检查沙箱的自动删除状态</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="554"/>
@@ -10721,7 +10722,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1366"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation>从屏幕捕获中隐藏 SandMan 窗口（需要重新启动UI）</translation>
+        <translation>从屏幕捕获中隐藏沙盘管理器窗口（需要重新启动UI）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1504"/>
@@ -10767,7 +10768,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/SettingsWindow.ui" line="663"/>
         <source>Add &apos;Set Force in Sandbox&apos; to the context menu</source>
         <oldsource>Add ‘Set Force in Sandbox&apos; to the context menu</oldsource>
-        <translation>添加&apos;强制在沙盘中打开&apos; 到上下文菜单</translation>
+        <translation>添加“强制在沙箱中打开”到上下文菜单</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="570"/>
@@ -10792,7 +10793,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="181"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation>当退出沙箱管理器时终止所有沙箱中的所有进程</translation>
+        <translation>当退出沙盘管理器时终止所有沙箱中的所有进程</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1661"/>
@@ -10806,7 +10807,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1841"/>
         <source>Sandboxie Updater</source>
-        <translation>Sandboxie 更新器</translation>
+        <translation>沙盘更新器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1872"/>
@@ -10824,8 +10825,8 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <oldsource>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</oldsource>
-        <translation type="unfinished">内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定通道的所有相关改进。
-与预览通道不同，它不包括未经测试的、潜在的破坏性的或可能无法广泛使用的实验性更改。</translation>
+        <translation>内测版可让用户提前体验新功能和错误修复，以及稳定版的所有相关改进。
+与预览版不同，它不包括未经测试的、潜在的破坏性的或可能无法广泛使用的实验性更改。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1933"/>
@@ -10870,7 +10871,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2279"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation>添加 &quot; Sandboxie\All Sandboxes &quot; 组到沙箱化令牌（实验性）</translation>
+        <translation>将 “沙盘（Sandboxie）\ 所有沙箱（All Sandboxes）” 组添加到沙箱化令牌中（实验性）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2309"/>
@@ -10890,7 +10891,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2422"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation>始终以管理员身份运行SandMan UI</translation>
+        <translation>始终以管理员身份运行沙盘管理器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2434"/>
@@ -10975,7 +10976,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation>SandboxiePlus - 快照</translation>
+        <translation>Sandboxie Plus - 快照</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="60"/>

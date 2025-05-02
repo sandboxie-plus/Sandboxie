@@ -10807,7 +10807,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1841"/>
         <source>Sandboxie Updater</source>
-        <translation>Sandboxie 更新器</translation>
+        <translation>沙盘更新器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1872"/>

@@ -103,8 +103,6 @@ int WinMain(
     _Kernel32   = GetModuleHandle(L"kernel32.dll");
     GetSystemInfo(&_SystemInfo);
 
-    DriverAssist::InitializeSidCache();
-
     WCHAR *cmdline = GetCommandLine();
     if (cmdline) {
 
@@ -142,8 +140,6 @@ int WinMain(
 
     if (! StartServiceCtrlDispatcher(myServiceTable))
         return GetLastError();
-
-	DriverAssist::DestroySidCache();
 
     return NO_ERROR;
 }

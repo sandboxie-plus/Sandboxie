@@ -4583,7 +4583,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation>Sandman上次未完成已安装Windows更新的枚举操作，可能发生进程挂起。是否要在软件兼容性检测中禁用Windows更新扫描功能？</translation>
+        <translation>沙盘管理器上次未能完成已安装的 Windows 更新的枚举操作，它很可能处于挂起状态。
+你是否想要从软件兼容性检测中禁用 Windows 更新扫描功能？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2805"/>
@@ -6588,7 +6589,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="538"/>
         <source>Start UI with Windows</source>
-        <translation>随系统启动沙箱管理器</translation>
+        <translation>随系统启动沙盘管理器</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="543"/>
@@ -6614,11 +6615,11 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="565"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation>启用这个选项会阻止从无管理员权限的用户界面对Sandboxie.ini的配置更改。小心点，因为使用带有普通用户权限的沙箱管理器将可能陷入锁定。为了对配置进行修改，你必须通过点击主窗口中 &apos; 沙箱 &apos; 菜单下的 &apos; 以管理员特权重启 &apos; 菜单项来作为管理员重启沙箱管理器。</translation>
+        <translation>启用这个选项会阻止从无管理员权限的用户界面对Sandboxie.ini的配置更改。小心点，因为使用带有普通用户权限的沙盘管理器将可能陷入锁定。为了对配置进行修改，你必须通过点击主窗口中 &apos; 沙箱 &apos; 菜单下的 &apos; 以管理员特权重启 &apos; 菜单项来作为管理员重启沙盘管理器。</translation>
     </message>
     <message>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
-        <translation type="vanished">当这个选项被设置，以普通用户权限启动的沙箱管理器将不能够去更改配置，这可能造成陷入循环。你需要打开沙箱管理器主窗口，在系统菜单中点击&quot;沙箱(s)&quot;并点击上下文菜单中的&quot;以管理员特权重启&quot;以重新获取配置控制权。</translation>
+        <translation type="vanished">当这个选项被设置，以普通用户权限启动的沙盘管理器将不能够去更改配置，这可能造成陷入循环。你需要打开沙盘管理器主窗口，在系统菜单中点击&quot;沙箱(s)&quot;并点击上下文菜单中的&quot;以管理员特权重启&quot;以重新获取配置控制权。</translation>
     </message>
 </context>
 <context>
@@ -9953,7 +9954,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="78"/>
         <source>SandMan Options</source>
-        <translation>SandMan 选项</translation>
+        <translation>沙盘管理器选项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="270"/>
@@ -10272,7 +10273,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="636"/>
         <source>Start UI with Windows</source>
-        <translation>随系统启动沙箱管理器</translation>
+        <translation>随系统启动沙盘管理器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="472"/>
@@ -10282,7 +10283,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="626"/>
         <source>Start UI when a sandboxed process is started</source>
-        <translation>随沙箱化应用启动沙箱管理器</translation>
+        <translation>随沙箱化应用启动沙盘管理器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="207"/>
@@ -10364,7 +10365,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="485"/>
         <source>Start Sandbox Manager</source>
-        <translation>沙箱管理器启动选项</translation>
+        <translation>沙盘管理器启动选项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2073"/>
@@ -10660,7 +10661,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="134"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation>将 Sandman 窗口置顶的快捷键：</translation>
+        <translation>将沙盘管理器的窗口置顶的快捷键：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="148"/>
@@ -10676,7 +10677,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="214"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation>当沙箱管理器启动时检查沙箱的自动删除状态</translation>
+        <translation>当沙盘管理器启动时检查沙箱的自动删除状态</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="554"/>
@@ -10721,7 +10722,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1366"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation>从屏幕捕获中隐藏 SandMan 窗口（需要重新启动UI）</translation>
+        <translation>从屏幕捕获中隐藏沙盘管理器窗口（需要重新启动UI）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1504"/>
@@ -10792,7 +10793,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="181"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation>当退出沙箱管理器时终止所有沙箱中的所有进程</translation>
+        <translation>当退出沙盘管理器时终止所有沙箱中的所有进程</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1661"/>
@@ -10870,7 +10871,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2279"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</source>
-        <translation>添加 &quot; Sandboxie\All Sandboxes &quot; 组到沙箱化令牌（实验性）</translation>
+        <translation>将 “沙盘（Sandboxie）\ 所有沙箱（All Sandboxes）” 组添加到沙箱化令牌中（实验性）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2309"/>
@@ -10890,7 +10891,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2422"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation>始终以管理员身份运行SandMan UI</translation>
+        <translation>始终以管理员身份运行沙盘管理器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2434"/>

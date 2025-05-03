@@ -557,21 +557,25 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		// Initial state: hidden
 		ui.lblHwId->setText(tr("HwId: <a href=\"%1\">[%2]</a>").arg(fullHwId, clickToR));
 		ui.lblHwId->setToolTip(clickToR);
-
+		ui.btnCopy->setDisabled(true);
 		// Click handler
 		connect(ui.lblHwId, &QLabel::linkActivated, this, [=]() {
 			if (ui.lblHwId->text().contains(clickToR)) {
 				// Reveal the ID
 				ui.lblHwId->setText(tr("HwId: <a href=\"%1\" style=\"text-decoration:none; color:inherit;\">%1</a>").arg(fullHwId));
 				ui.lblHwId->setToolTip(clickToH);
+				ui.btnCopy->setDisabled(false);
 			}
 			else {
 				// Hide the ID again
 				ui.lblHwId->setText(tr("HwId: <a href=\"%1\">[%2]</a>").arg(fullHwId, clickToR));
 				ui.lblHwId->setToolTip(clickToR);
+				ui.btnCopy->setDisabled(true);
 			}
 			});
 	}
+
+	connect(ui.btnCopy,SIGNAL(clicked(bool)), this, SLOT(OnCopyHwId()));
 
 	connect(ui.lblEvalCert, SIGNAL(linkActivated(const QString&)), this, SLOT(OnStartEval()));
 
@@ -1545,6 +1549,15 @@ void CSettingsWindow::OnGetCert()
 void CSettingsWindow::OnStartEval()
 {
 	StartEval(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+}
+
+void CSettingsWindow::OnCopyHwId() {
+    	QClipboard *clipboard = QApplication::clipboard();
+		wchar_t uuid_str[40];
+		if (theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str))) {
+			QString fullHwId = QString::fromWCharArray(uuid_str);
+			clipboard->setText(fullHwId);
+		}
 }
 
 void CSettingsWindow::StartEval(QWidget* parent, QObject* receiver, const char* member)

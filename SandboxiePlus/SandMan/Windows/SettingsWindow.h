@@ -144,6 +144,8 @@ private slots:
 	void UpdateUpdater();
 	void OnStartEval();
 
+	void OnCopyHwId();
+
 	void GetUpdates();
 	void OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);
 	void OnUpdate(const QString& Channel);

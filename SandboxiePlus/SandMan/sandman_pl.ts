@@ -5015,27 +5015,27 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="SbieProcess.cpp" line="58"/>
         <source>Sbie RpcSs</source>
-        <translation></translation>
+        <translation>Sbie RpcSs</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="59"/>
         <source>Sbie DcomLaunch</source>
-        <translation></translation>
+        <translation>Sbie Usługa DcomLaunch</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="60"/>
         <source>Sbie Crypto</source>
-        <translation></translation>
+        <translation>Sbie Kryptografia</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="62"/>
         <source>Sbie BITS</source>
-        <translation></translation>
+        <translation>Sbie Usługa Inteligentnego Transferu w Tle</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="63"/>
         <source>Sbie Svc</source>
-        <translation></translation>
+        <translation>Usługa Sbie</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="65"/>
@@ -5045,7 +5045,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="SbieProcess.cpp" line="66"/>
         <source>Windows Update</source>
-        <translation></translation>
+        <translation>Aktualizacja Windows</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="67"/>
@@ -5090,7 +5090,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="SbieProcess.cpp" line="73"/>
         <source>Windows Live Mail</source>
-        <translation></translation>
+        <translation>Windows Live Mail</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="74"/>
@@ -5111,7 +5111,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="SbieProcess.cpp" line="78"/>
         <source>Windows Ink Services</source>
-        <translation></translation>
+        <translation>Usługi Windows Ink</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="79"/>
@@ -5348,7 +5348,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Views/SbieView.cpp" line="187"/>
         <source>Windows Explorer</source>
-        <translation></translation>
+        <translation>Eksplorator Windows</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="188"/>
@@ -7472,7 +7472,7 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Views/TraceView.cpp" line="269"/>
         <source>PID:</source>
-        <translation></translation>
+        <translation>ID procesu:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="271"/>
@@ -7488,7 +7488,7 @@ Jeśli jesteś już Wielkim Wspierającym na Patreon, Sandboxie może sprawdzić
     <message>
         <location filename="Views/TraceView.cpp" line="276"/>
         <source>TID:</source>
-        <translation></translation>
+        <translation>ID wątku:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="284"/>

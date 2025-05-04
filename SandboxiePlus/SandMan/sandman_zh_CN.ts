@@ -8860,13 +8860,13 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="3440"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
-        <translation>规则的特异度是衡量一个给定规则对特定路径的匹配程度，简单地说，特异度是指从路径的最开始到最后一个匹配的非通配符子串之间的字符长度，一个只匹配 “*.tmp” 这样的文件类型的规则将具有最高的特异性，因为它总是匹配整个文件路径
-进程匹配级别的优先级高于特异度，它描述了一条规则如何适用于一个给定的进程，按进程名称或程序组应用的规则具有最高的匹配级别，其次是否定匹配模式(即适用于匹配除给定进程以外的所有进程的规则)，而匹配级别最低的是全局匹配，即适用于任何进程的规则。</translation>
+        <translation>规则特异性是衡量给定规则与特定路径匹配程度的指标。简而言之，特异性是从路径起点到并包括最后一个匹配的非通配符子字符串的字符长度。仅匹配如 “*.tmp” 这类文件类型的规则将具有最高特异性，因为它始终会匹配整个文件路径。
+进程匹配级别比特异性具有更高的优先级，用于描述规则如何应用于给定进程。按进程名称或进程组应用的规则具有最强的匹配级别，其次是通过取反匹配（即应用于除指定进程外所有进程的规则），而最低匹配级别为全局匹配，也就是应用于任何进程的规则。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3374"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
-        <translation>基于规则的特异度和进程匹配级别对规则进行优先级排序</translation>
+        <translation>根据规则的特异性和进程匹配级别对规则进行优先级排序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3420"/>

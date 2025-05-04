@@ -552,7 +552,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	if (theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str))) {
 		QString fullHwId = QString::fromWCharArray(uuid_str);
 		QString clickToR = tr("Click to reveal");
-		QString clickToH = tr("Click to hide");
+		QString clickToH = tr("Click to hide\nRight-click to copy");
 
 		// Initial state: hidden
 		ui.lblHwId->setText(tr("HwId: <a href=\"%1\">[%2]</a>").arg(fullHwId, clickToR));

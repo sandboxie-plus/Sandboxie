@@ -975,7 +975,8 @@ del Controllo account utente.
 
 3243;txt;01
 Nota: Il programma continuerà ad essere eseguito sotto la supervisione di
-Sandboxie, anche dopo averlo eseguito con i privilegi di amministratore.
+Sandboxie, anche dopo averlo eseguito con i privilegi di amministratore.Tuttavia, se la funzione "SysCallLockDown" non è abilitata, potrebbe verificarsi l'evasione del programma in sandbox! ! ! !
+
 .
 
 3251;txt;01

@@ -1084,7 +1084,7 @@ User Account Control pop-up window.
 
 3243;txt;01
 Note:  The program will continue to execute under the supervision
-of Sandboxie, even after Administrator privileges have been granted.
+of Sandboxie, even after Administrator privileges have been granted.But if SysCallLockDown is not enabled, it could lead to a program escape from the sandbox!!!
 .
 
 3251;txt;01

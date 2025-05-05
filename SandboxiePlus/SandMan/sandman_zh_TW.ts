@@ -1560,7 +1560,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="504"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
-        <translation>為了確保與軟體的最佳相容性，Sandboxie 需要更新其相容性模板。您是否希望繼續進行？</translation>
+        <translation>為了確保與軟體的最佳相容性，Sandboxie 需要更新其相容性範本。是否繼續？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="505"/>
@@ -1696,7 +1696,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="1170"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
-        <translation>有一個新的 Templates.ini 可用，您是否希望下載？</translation>
+        <translation>有一個新的 Templates.ini 可用，是否下載？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1220"/>
@@ -2465,7 +2465,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>無 (不繫結至配接器)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -4327,7 +4327,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1650"/>
         <location filename="SandMan.cpp" line="1681"/>
         <source>Type the box name which you are going to set:</source>
-        <translation>輸入你希望設定的沙箱名稱:</translation>
+        <translation>輸入你將要進行設定的沙箱之名稱:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1667"/>
@@ -5950,7 +5950,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1461"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
-        <translation>; 滿足條件的 Patreon 贊助者始终可以从 xanasoft.com &lt;a href=“https://xanasoft.com/get-supporter-certificate/”&gt;获取新的憑證&lt;/a&gt;</translation>
+        <translation>; 符合資格的 Patreon 贊助者總是可以從 xanasoft.com &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;取得一個更新的憑證&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1487"/>
@@ -5972,17 +5972,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
-這是一個臨時的 Patreon 憑證，有效期為3個月。憑證即將逾期時，您可以在線獲取一份有完整期限的新憑證。</translation>
+這是一個臨時的 Patreon 憑證，有效期為3個月。憑證鄰近逾期時，您可以從線上取得一份具有完整有效期限的新憑證。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2210"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
-        <translation>您的 Sandboxie-Plus 贊助者憑證需要進行一次強制性的安全更新。您現在是否希望下載新的的憑證？</translation>
+        <translation>您的 Sandboxie-Plus 贊助者憑證需要進行一次強制安全性更新。是否現在下載已更新的憑證？</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2211"/>
         <source>Auto update in future</source>
-        <translation>自動更新</translation>
+        <translation>在未來自動更新</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1422"/>
@@ -6250,25 +6250,26 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="554"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>點選以揭示</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
         <source>Click to hide
 Right-click to copy</source>
         <oldsource>Click to hide</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>點選以隱藏
+右鍵點選以複製</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="558"/>
         <location filename="Windows/SettingsWindow.cpp" line="570"/>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>硬體ID: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="565"/>
         <source>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>硬體ID: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="611"/>
@@ -9378,7 +9379,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4070"/>
         <source>Bind to Adapter IP</source>
-        <translation>綁定網路卡IP</translation>
+        <translation>繫結至配接器IP</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4006"/>
@@ -9398,7 +9399,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3968"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>使用處理程序內代理中繼執行緒 (In-process proxy relay thread)，而不是直接修改插座 (解決罕見相容性問題)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4077"/>
@@ -9428,7 +9429,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5132"/>
         <source>Hide Network Adapter MAC Address</source>
-        <translation>隱藏網路介面卡 MAC 位址</translation>
+        <translation>隱藏網路配接器 MAC 位址</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5302"/>
@@ -10697,7 +10698,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2643"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
-        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;立即更新相容性模板&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://templates&quot;&gt;立即更新相容性範本&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2699"/>

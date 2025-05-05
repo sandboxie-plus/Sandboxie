@@ -5458,8 +5458,10 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
-        <source>Click to hide</source>
-        <translation>Gizlemek için tıklayın</translation>
+        <source>Click to hide
+Right-click to copy</source>
+        <oldsource>Click to hide</oldsource>
+        <translation type="unfinished">Gizlemek için tıklayın</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="558"/>

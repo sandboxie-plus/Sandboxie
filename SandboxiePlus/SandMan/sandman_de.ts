@@ -5527,8 +5527,10 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
-        <source>Click to hide</source>
-        <translation>Klicken zum Verbergen</translation>
+        <source>Click to hide
+Right-click to copy</source>
+        <oldsource>Click to hide</oldsource>
+        <translation type="unfinished">Klicken zum Verbergen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="558"/>

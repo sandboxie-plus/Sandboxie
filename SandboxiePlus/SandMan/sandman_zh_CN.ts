@@ -6225,8 +6225,10 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
-        <source>Click to hide</source>
-        <translation>隐藏</translation>
+        <source>Click to hide
+Right-click to copy</source>
+        <oldsource>Click to hide</oldsource>
+        <translation type="unfinished">隐藏</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="558"/>

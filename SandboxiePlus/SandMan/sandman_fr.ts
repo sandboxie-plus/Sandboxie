@@ -6249,7 +6249,9 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
-        <source>Click to hide</source>
+        <source>Click to hide
+Right-click to copy</source>
+        <oldsource>Click to hide</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

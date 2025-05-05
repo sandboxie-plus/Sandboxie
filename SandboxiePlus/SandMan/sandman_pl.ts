@@ -6151,8 +6151,10 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
-        <source>Click to hide</source>
-        <translation>Kliknij, aby ukryć</translation>
+        <source>Click to hide
+Right-click to copy</source>
+        <oldsource>Click to hide</oldsource>
+        <translation type="unfinished">Kliknij, aby ukryć</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="558"/>

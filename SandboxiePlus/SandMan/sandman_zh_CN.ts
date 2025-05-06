@@ -6152,7 +6152,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1651"/>
         <source>Home</source>
-        <translation>主页</translation>
+        <translation>家庭</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2167"/>

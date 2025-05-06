@@ -2064,11 +2064,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation> giriş: IP veya Bağlantı Noktası boş olamaz</translation>
-    </message>
-    <message>
-        <source> entry: Address must be IP, not host name</source>
-        <translation type="vanished"> giriş: Adres IP olmalı, alan adı değil</translation>
+        <translation>. giriş: IP veya Bağlantı Noktası boş olamaz</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
@@ -5460,8 +5456,8 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
         <source>Click to hide
 Right-click to copy</source>
-        <oldsource>Click to hide</oldsource>
-        <translation type="unfinished">Gizlemek için tıklayın</translation>
+        <translation>Gizlemek için tıklayın
+Kopyalamak için sağ tıklayın</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="558"/>

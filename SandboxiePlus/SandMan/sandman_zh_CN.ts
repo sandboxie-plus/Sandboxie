@@ -2688,7 +2688,7 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
         <source> entry: IP or Port cannot be empty</source>
-        <translation>进入：IP或端口号不能为空</translation>
+        <translation> ：IP或端口号不能为空</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>
@@ -4555,7 +4555,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2371"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation>在沙箱内所有进程终止时执行</translation>
+        <translation>在沙箱内所有进程终止时执行: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2442"/>
@@ -4570,7 +4570,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2502"/>
         <source> for Personal use</source>
-        <translation>个人用户</translation>
+        <translation> 仅限个人使用</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2504"/>
@@ -6013,12 +6013,12 @@ Error: %1</source>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
-	这是临时 Patreon 证书，有效期为 3 个月。一旦证书即将到期，您可以在线获取一个在整个期限内有效的新证书。</translation>
+这是临时 Patreon 证书，有效期为 3 个月。一旦证书即将到期，您可以在线获取一个在整个期限内有效的新证书。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2210"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
-        <translation>您的 Sandboxie-Plus 支持者证书需要进行一项强制性的安全更新。您现在想要下载更新后的证书吗？ </translation>
+        <translation>您的 Sandboxie-Plus 支持者证书需要进行一项强制性的安全更新。您现在想要下载更新后的证书吗？</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2211"/>
@@ -6228,8 +6228,8 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <source>Click to hide
 Right-click to copy</source>
         <oldsource>Click to hide</oldsource>
-        <translation>点击隐藏
-右键单击复制</translation>
+        <translation>单击隐藏
+右键复制</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="558"/>
@@ -6608,7 +6608,7 @@ Right-click to copy</source>
         <location filename="Wizards/SetupWizard.cpp" line="553"/>
         <source>Only applications with admin rights can change configuration</source>
         <oldsource>Only applications with administrator token can change ini setting.</oldsource>
-        <translation>仅带有管理员令牌的程序可以修改ini设置。</translation>
+        <translation>仅带有管理员令牌的程序可以修改 ini 设置</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="565"/>
@@ -9334,7 +9334,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1552"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation>当沙箱外程序访问沙箱根目录或沙箱化进程对象时，发出 1318/1317 警告。</translation>
+        <translation>当沙箱外程序尝试访问沙箱根目录或沙箱化进程对象时，发出 1318/1317 警告</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1496"/>
@@ -9411,7 +9411,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3754"/>
         <source>With the DNS filter individual domains can be blocked, on a per process basis. Leave the IP column empty to block or enter an ip to redirect.</source>
-        <translation> 使用 DNS 过滤器可以根据每个进程禁用单个域（域名）。保留 IP 列为空以阻止域名解析或输入 IP 以重定向域名解析。</translation>
+        <translation>使用 DNS 过滤器可以根据每个进程禁用单个域（域名）。保留 IP 列为空以阻止域名解析或输入 IP 以重定向域名解析。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3793"/>
@@ -10031,7 +10031,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="610"/>
         <source>Integrate with Host Start Menu</source>
-        <translation>与主机开始菜单整合：</translation>
+        <translation>与主机开始菜单整合</translation>
     </message>
     <message>
         <source>Icon</source>

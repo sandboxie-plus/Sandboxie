@@ -2480,7 +2480,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>없음 (어댑터에 바인딩하지 않음)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -2521,7 +2521,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
         <oldsource> entry: IP or Port cannot be empty</oldsource>
-        <translation type="unfinished"> 엔트리: IP 또는 포트는 비워 둘 수 없습니다</translation>
+        <translation>항목 %1: IP 또는 포트는 비워둘 수 없습니다</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>
@@ -6407,25 +6407,26 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="554"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>클릭하여 표시</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
         <source>Click to hide
 Right-click to copy</source>
         <oldsource>Click to hide</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>숨기려면 클릭
+복사하려면 오른쪽 클릭</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="558"/>
         <location filename="Windows/SettingsWindow.cpp" line="570"/>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="565"/>
         <source>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="858"/>
@@ -9236,7 +9237,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3968"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>소켓을 직접 수정하는 대신 프로세스 중 프록시 릴레이 스레드 사용 (드물게 발생하는 호환성 문제 해결)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3978"/>

@@ -9,7 +9,7 @@
 - 在捐赠支持页面新增了复制硬件 ID 的选项
 
 
-## [1.15.12 / 5.70.12] - 2025-04-??
+## [1.15.12 / 5.70.12] - 2025-05-01
 
 ### 新增
 - 为 Plus 界面新增印度尼西亚语翻译 [4bad4d1](https://github.com/sandboxie-plus/Sandboxie/commit/4bad4d190a90a6329d549e5a31ca8ee13b4eb9a1)（感谢 ？？？）

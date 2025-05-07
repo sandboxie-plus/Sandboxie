@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [1.15.13 / 5.70.13] - 2025-04-??
+
+### Added
+- added option to copy hwid from the support page
+
+
 ## [1.15.12 / 5.70.12] - 2025-05-01
 
 ### Added

@@ -2684,12 +2684,13 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="984"/>
         <source>Please enter IP and Port.</source>
-        <translation>请输入IP地址与端口。</translation>
+        <translation>请输入 IP 地址与端口。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
-        <source> entry: IP or Port cannot be empty</source>
-        <translation> ：IP或端口号不能为空</translation>
+        <source>Entry %1 : IP or Port cannot be empty</source>
+        <oldsource> entry: IP or Port cannot be empty</oldsource>
+        <translation>第 %1 项：IP 或端口号不能为空</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>

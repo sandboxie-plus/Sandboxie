@@ -2648,8 +2648,9 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
-        <source> entry: IP or Port cannot be empty</source>
-        <translation> entrada: IP o Puerto no pueden estar vacíos</translation>
+        <source>Entry %1 : IP or Port cannot be empty</source>
+        <oldsource> entry: IP or Port cannot be empty</oldsource>
+        <translation type="unfinished"> entrada: IP o Puerto no pueden estar vacíos</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>

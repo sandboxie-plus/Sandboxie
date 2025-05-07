@@ -515,8 +515,8 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="150"/>
-        <source>The password is constrained to a maximum length of 128 characters.
-This length permits approximately 384 bits of entropy with a passphrase composed of actual English words,
+        <source>The password is constrained to a maximum length of 128 characters. 
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
         <oldsource>The password is constrained to a maximum length of 128 characters.
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words,
@@ -576,8 +576,8 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="401"/>
-        <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.
-It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories.
+        <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
+It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
         <oldsource>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories.
@@ -602,7 +602,7 @@ The entire user profile remains hidden, ensuring maximum security.</oldsource>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
-        <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such,
+        <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
         <oldsource>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such,
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</oldsource>
@@ -615,7 +615,7 @@ only C:\Windows and C:\Program Files directories are accessible to processes run
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="410"/>
-        <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme.
+        <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
         <oldsource>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme.
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</oldsource>
@@ -630,7 +630,7 @@ Applications can be run within this sandbox, ensuring they operate within a cont
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="413"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="416"/>
-        <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments.
+        <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
         <oldsource>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments.
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</oldsource>
@@ -653,8 +653,8 @@ While the level of isolation is reduced compared to other box types, it offers i
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="425"/>
-        <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security.
-Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes.
+        <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
+Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
         <oldsource>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security.
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes.
@@ -994,7 +994,7 @@ Error: %1</source>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1086"/>
-        <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation.
+        <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
         <oldsource>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation.
@@ -3161,7 +3161,7 @@ Error: </source>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="669"/>
-        <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
+        <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <oldsource>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</oldsource>
@@ -4249,7 +4249,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="261"/>
-        <source>Failed to recover some files:
+        <source>Failed to recover some files: 
 </source>
         <oldsource>Failed to recover some files:
 </oldsource>
@@ -6058,7 +6058,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1474"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
-        <translation>隐私/安全增强 &amp; 应用沙箱(SBox): %1</translation>
+        <translation>隐私/安全增强&amp; 应用沙箱(SBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1474"/>
@@ -6079,7 +6079,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1475"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
-        <translation>加密沙箱(EBox): %1</translation>
+        <translation>加密沙箱 (EBox): %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1476"/>
@@ -8708,7 +8708,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2890"/>
-        <source>Configure which processes can access Files, Folders and Pipes.
+        <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <oldsource>Configure which processes can access Files, Folders and Pipes.
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</oldsource>
@@ -8723,7 +8723,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2997"/>
-        <source>Configure which processes can access the Registry.
+        <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <oldsource>Configure which processes can access the Registry.
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</oldsource>
@@ -10824,7 +10824,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1929"/>
-        <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
+        <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <oldsource>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel.
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</oldsource>

@@ -1649,22 +1649,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="12" column="1" colspan="4">
-                <widget class="QLabel" name="lblCert">
-                 <property name="font">
-                  <font>
-                   <pointsize>7</pointsize>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Cert Info</string>
-                 </property>
-                 <property name="openExternalLinks">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
                <item row="13" column="4">
                 <widget class="QLabel" name="lblHwId">
                  <property name="font">
@@ -1832,6 +1816,35 @@
                  </property>
                 </spacer>
                </item>
+               <item row="12" column="1" colspan="3">
+                <widget class="QLabel" name="lblCert">
+                 <property name="font">
+                  <font>
+                   <pointsize>7</pointsize>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Cert Info</string>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="4">
+                <widget class="QLabel" name="lblVersion">
+                 <property name="font">
+                  <font>
+                   <pointsize>7</pointsize>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Sandboxie-Plus Version: 0.0.0</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
             </layout>
@@ -1877,6 +1890,7 @@
                 <widget class="QLabel" name="lblUpdates">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>

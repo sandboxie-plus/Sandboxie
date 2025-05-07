@@ -552,26 +552,27 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	if (theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str))) {
 		QString fullHwId = QString::fromWCharArray(uuid_str);
 		QString clickToR = tr("Click to reveal");
-		QString clickToH = tr("Click to hide\nRight-click to copy");
+		QString clickToH = tr("Click to hide");
 
-		// Initial state: hidden
-		ui.lblHwId->setText(tr("HwId: <a href=\"%1\">[%2]</a>").arg(fullHwId, clickToR));
+		ui.lblHwId->setText(tr("HwId: <a href=\"show\">[%1]</a>").arg(clickToR));
 		ui.lblHwId->setToolTip(clickToR);
 
-		// Click handler
-		connect(ui.lblHwId, &QLabel::linkActivated, this, [=]() {
-			if (ui.lblHwId->text().contains(clickToR)) {
-				// Reveal the ID
-				ui.lblHwId->setText(tr("HwId: <a href=\"%1\" style=\"text-decoration:none; color:inherit;\">%1</a>").arg(fullHwId));
+		connect(ui.lblHwId, &QLabel::linkActivated, this, [=](const QString& Link) {
+			if (Link == "show") {
+				ui.lblHwId->setText(tr("HwId: <a href=\"hide\" style=\"text-decoration:none; color:inherit;\">%1</a> <a href=\"copy\">(copy)</a>").arg(fullHwId));
 				ui.lblHwId->setToolTip(clickToH);
 			}
-			else {
-				// Hide the ID again
-				ui.lblHwId->setText(tr("HwId: <a href=\"%1\">[%2]</a>").arg(fullHwId, clickToR));
+			else if (Link == "hide") {
+				ui.lblHwId->setText(tr("HwId: <a href=\"show\">[%1]</a>").arg(clickToR));
 				ui.lblHwId->setToolTip(clickToR);
 			}
-			});
+			else if (Link == "copy") {
+				QApplication::clipboard()->setText(fullHwId);
+			}
+		});
 	}
+
+	ui.lblVersion->setText(tr("Sandboxie-Plus Version: %1").arg(theGUI->GetVersion()));
 
 	connect(ui.lblEvalCert, SIGNAL(linkActivated(const QString&)), this, SLOT(OnStartEval()));
 

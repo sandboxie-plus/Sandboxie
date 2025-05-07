@@ -583,7 +583,7 @@ The entire user profile remains hidden, ensuring maximum security.</source>
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories.
 The entire user profile remains hidden, ensuring maximum security.</oldsource>
         <translation>该沙箱类型通过显著减少主机暴露于沙箱进程的攻击面来提供最高级别的保护，并且它严格限制进程对用户数据的访问。
-该沙箱中的进程仅被允许访问 %SystemRoot% （一般为 C:\Windows） 和 %ProgramFiles%（一般为 C:\Program Files）目录。因此，所有用户数据及文件将对沙箱进程保持隐藏状态，确保了它们最大程度的安全性。</translation>
+该沙箱中的进程仅被允许访问 %SystemRoot% （一般为 C:\Windows） 和 %ProgramW6432%（一般为 C:\Program Files）目录。因此，所有用户数据及文件将对沙箱进程保持隐藏状态，确保了它们最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>
@@ -606,7 +606,7 @@ The entire user profile remains hidden, ensuring maximum security.</oldsource>
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
         <oldsource>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such,
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</oldsource>
-        <translation>在该沙箱类型中，任何沙箱进程都将被阻止访问任何个人用户文件和数据。 保护的重点是保护用户数据，因此，该沙箱中运行的进程只能访问 %SystemRoot% （一般为C:\Windows）和 %ProgramFiles%（一般为C:\Program Files）以及 Sandboxie 安装目录。 这可确保个人文件的安全。</translation>
+        <translation>在该沙箱类型中，任何沙箱进程都将被阻止访问任何个人用户文件和数据。 保护的重点是保护用户数据，因此，该沙箱中运行的进程只能访问 %SystemRoot% （一般为C:\Windows）和 %ProgramW6432%（一般为C:\Program Files）以及 Sandboxie 安装目录。 这可确保个人文件的安全。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="409"/>

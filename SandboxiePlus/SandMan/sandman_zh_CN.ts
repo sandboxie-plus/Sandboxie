@@ -8927,7 +8927,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1400"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it&apos;s no longer providing reliable security, just simple application compartmentalization.</source>
         <oldsource>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</oldsource>
-        <translation>通过严格限制进程令牌的使用来进行安全隔离是 Sandboxie 执行沙箱化限制的主要手段，当它被禁用时，沙箱将在应用隔间模式下运行，此时将不再提供可靠的安全限制，只是简单进行应用分隔。</translation>
+        <translation>通过严格限制进程令牌的使用来进行安全隔离是沙盒执行沙箱化限制的主要手段，当它被禁用时，沙箱将在应用隔间模式下运行，此时将不再提供可靠的安全限制，只是简单进行应用分隔。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="969"/>

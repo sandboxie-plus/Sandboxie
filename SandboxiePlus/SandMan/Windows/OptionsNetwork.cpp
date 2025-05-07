@@ -1163,7 +1163,7 @@ void COptionsWindow::SaveNetProxy()
 		QString Bypass = pItem->data(6, Qt::UserRole).toString();
 
 		if (IP.isEmpty() || Port.isEmpty()) {
-			QMessageBox::warning(this, "SandboxiePlus", QString::number(i + 1) + tr(" entry: IP or Port cannot be empty"));
+			QMessageBox::warning(this, "SandboxiePlus", tr("Entry %1 : IP or Port cannot be empty").arg(QString::number(i + 1)));
 			continue;
 		}
 

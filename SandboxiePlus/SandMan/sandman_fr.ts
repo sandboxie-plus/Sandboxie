@@ -2533,8 +2533,9 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
-        <source> entry: IP or Port cannot be empty</source>
-        <translation>Saisie : l&apos;IP ou le port ne peut pas être vide</translation>
+        <source>Entry %1 : IP or Port cannot be empty</source>
+        <oldsource> entry: IP or Port cannot be empty</oldsource>
+        <translation type="unfinished">Saisie : l&apos;IP ou le port ne peut pas être vide</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>

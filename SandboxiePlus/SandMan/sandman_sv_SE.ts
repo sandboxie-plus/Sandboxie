@@ -2617,8 +2617,9 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
-        <source> entry: IP or Port cannot be empty</source>
-        <translation> entrè: IP eller port kan inte vara tomt</translation>
+        <source>Entry %1 : IP or Port cannot be empty</source>
+        <oldsource> entry: IP or Port cannot be empty</oldsource>
+        <translation type="unfinished"> entrè: IP eller port kan inte vara tomt</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>

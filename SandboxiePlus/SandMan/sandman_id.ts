@@ -2263,8 +2263,9 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
-        <source> entry: IP or Port cannot be empty</source>
-        <translation> entri: IP atau Port tidak boleh kosong</translation>
+        <source>Entry %1 : IP or Port cannot be empty</source>
+        <oldsource> entry: IP or Port cannot be empty</oldsource>
+        <translation type="unfinished"> entri: IP atau Port tidak boleh kosong</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>

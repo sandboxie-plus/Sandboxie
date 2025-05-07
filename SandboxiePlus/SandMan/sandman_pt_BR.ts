@@ -2496,7 +2496,8 @@ Nota: A verificação de atualização geralmente está por trás da versão mai
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
-        <source> entry: IP or Port cannot be empty</source>
+        <source>Entry %1 : IP or Port cannot be empty</source>
+        <oldsource> entry: IP or Port cannot be empty</oldsource>
         <translation type="unfinished"> entrada: IP ou Porta não pode estar vazio</translation>
     </message>
     <message>

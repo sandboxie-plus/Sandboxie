@@ -24,7 +24,7 @@ Sandboxie allows you to create virtually unlimited sandboxes and run them alone 
 
 ## ✨ Changelog
 
-<a href='./CHANGELOG.md'>EN</a> | <a href='./CHANGELOG_zh_CN.md'>中文</a>
+<a href='./CHANGELOG.md'>EN</a>
 
 ## 🚀 Features
 

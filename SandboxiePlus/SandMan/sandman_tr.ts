@@ -2064,8 +2064,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
-        <oldsource> entry: IP or Port cannot be empty</oldsource>
-        <translation type="unfinished">. giriş: IP veya Bağlantı Noktası boş olamaz</translation>
+        <translation>Giriş %1: IP veya Bağlantı Noktası boş olamaz</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1310"/>
@@ -5456,18 +5455,7 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="555"/>
         <source>Click to hide</source>
-        <oldsource>Click to hide
-Right-click to copy</oldsource>
-        <translation type="unfinished">Gizlemek için tıklayın
-Kopyalamak için sağ tıklayın</translation>
-    </message>
-    <message>
-        <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
-        <translation type="vanished">HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="vanished">HwId: &lt;a href=&quot;%1&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt;</translation>
+        <translation>Gizlemek için tıklayın</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1413"/>
@@ -5829,17 +5817,17 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <location filename="Windows/SettingsWindow.cpp" line="557"/>
         <location filename="Windows/SettingsWindow.cpp" line="566"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="562"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="575"/>
         <source>Sandboxie-Plus Version: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus Sürüm: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="612"/>
@@ -9950,7 +9938,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1844"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus Sürüm: 0.0.0</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1854"/>

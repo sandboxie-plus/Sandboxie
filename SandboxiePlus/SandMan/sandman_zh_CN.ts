@@ -8070,7 +8070,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2705"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
-        <translation>仅允许所选程序在此沙箱中启动 *</translation>
+        <translation>仅允许所选程序在此沙箱中启动。 *</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2712"/>
@@ -9088,12 +9088,12 @@ You can customize the logging using the ini by specifying
 instead of &quot;*&quot;.</source>
         <translation>将驱动程序看到的所有访问事件记录到资源访问日志
 
-这些选项将事件掩码设定为 &quot;*&quot; - 所有访问事件
+这些选项将事件掩码设定为 “*” - 所有访问事件
 另外可以通过编辑配置文本来详细自定义日志行为
-&quot;A&quot; - 允许的访问
-&quot;D&quot; - 拒绝的访问
-&quot;I&quot; - 忽略访问请求
-来代替 &quot;*&quot;。</translation>
+“A” - 允许的访问
+“D” - 拒绝的访问
+“I” - 忽略访问请求
+来代替 “*”。</translation>
     </message>
     <message>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
@@ -9203,7 +9203,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="415"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
-        <translation>使用驱动器的卷系列号，例如：\drive\C~1234-ABCD</translation>
+        <translation>使用驱动器的卷序列号，例如：\drive\C~1234-ABCD</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>

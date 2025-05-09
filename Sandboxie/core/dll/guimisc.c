@@ -59,6 +59,10 @@ static BOOL Gui_BlockInput(BOOL fBlockIt);
 
 static UINT Gui_SendInput(ULONG nInputs, LPINPUT pInputs, ULONG cbInput);
 
+static HWND Gui_GetActiveWindow();
+
+static HWND Gui_GetForegroundWindow();
+
 static HDESK Gui_OpenInputDesktop(
     DWORD dwFlags, BOOL fInherit, ACCESS_MASK dwDesiredAccess);
 
@@ -211,6 +215,11 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         SBIEDLL_HOOK_GUI(BringWindowToTop);
         SBIEDLL_HOOK_GUI(SwitchToThisWindow);
         SBIEDLL_HOOK_GUI(SetActiveWindow);
+
+		if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE)) {
+			SBIEDLL_HOOK_GUI(GetForegroundWindow);
+			SBIEDLL_HOOK_GUI(GetActiveWindow);
+		}
 		
         if (Gui_UseBlockCapture) {
             SBIEDLL_HOOK_GUI(GetWindowDC);
@@ -1769,4 +1778,20 @@ _FX void Gui_SwitchToThisWindow(HWND hWnd, BOOL fAlt)
 	if (Gui_BlockInterferenceControl)
 		return;
 	__sys_SwitchToThisWindow(hWnd, fAlt);
+}
+
+//---------------------------------------------------------------------------
+//Gui_GetActiveWindow
+//---------------------------------------------------------------------------
+static HWND Gui_PreviousActiveWindow;
+static HWND Gui_GetActiveWindow() {
+	//if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+	//	return (Gui_PreviousActiveWindow == NULL ? __sys_GetActiveWindow() : Gui_PreviousActiveWindow);
+	return __sys_GetActiveWindow();
+}
+
+static HWND Gui_GetForegroundWindow() {
+	if (SbieApi_QueryConfBool(NULL, L"AlwaysActive", FALSE))
+		return (Gui_PreviousActiveWindow == NULL ? __sys_GetActiveWindow() : Gui_PreviousActiveWindow);
+	return __sys_GetActiveWindow();
 }

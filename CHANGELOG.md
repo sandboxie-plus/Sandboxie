@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added option to copy hwid from the support page
 - added OpenClsid and fixed an issue with OpenClsid handling to enable firefox's hardware acceleration
+- added 'MarkOfTheWebBox=BoxName' option to force all files with the Mark Of the Web set into a preset sandbox
+- added wildcard support with ForceProcess [#2603](https://github.com/sandboxie-plus/Sandboxie/issues/2603)
 
 
 

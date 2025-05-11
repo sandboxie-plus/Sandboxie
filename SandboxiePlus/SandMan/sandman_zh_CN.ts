@@ -3982,7 +3982,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="3943"/>
         <source>Sandboxie config has been reloaded</source>
-        <translation>已重载沙箱配置文件</translation>
+        <translation>已重载沙盒配置文件</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3233"/>

@@ -6027,7 +6027,7 @@ NO seleccionará: %2</translation>
         <translation type="obsolete">Configuración de Protección</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="215"/>
+        <location filename="Windows/SettingsWindow.cpp" line="216"/>
         <source>Auto Detection</source>
         <translation>Detección Automática</translation>
     </message>
@@ -6036,145 +6036,145 @@ NO seleccionará: %2</translation>
         <translation type="vanished">Sin traducción</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="235"/>
-        <location filename="Windows/SettingsWindow.cpp" line="239"/>
+        <location filename="Windows/SettingsWindow.cpp" line="236"/>
+        <location filename="Windows/SettingsWindow.cpp" line="240"/>
         <source>Don&apos;t integrate links</source>
         <translation>No integrar enlaces</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="236"/>
-        <location filename="Windows/SettingsWindow.cpp" line="240"/>
+        <location filename="Windows/SettingsWindow.cpp" line="237"/>
+        <location filename="Windows/SettingsWindow.cpp" line="241"/>
         <source>As sub group</source>
         <translation>Como subgrupo</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="237"/>
-        <location filename="Windows/SettingsWindow.cpp" line="241"/>
+        <location filename="Windows/SettingsWindow.cpp" line="238"/>
+        <location filename="Windows/SettingsWindow.cpp" line="242"/>
         <source>Fully integrate</source>
         <translation>Integrar completamente</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="243"/>
+        <location filename="Windows/SettingsWindow.cpp" line="244"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
         <translation>No mostrar ningún ícono</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="244"/>
+        <location filename="Windows/SettingsWindow.cpp" line="245"/>
         <source>Show Plus icon</source>
         <translation>Mostrar ícono Plus</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="245"/>
+        <location filename="Windows/SettingsWindow.cpp" line="246"/>
         <source>Show Classic icon</source>
         <translation>Mostrar ícono Clásico</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="247"/>
+        <location filename="Windows/SettingsWindow.cpp" line="248"/>
         <source>All Boxes</source>
         <translation>Todas las Cajas</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="248"/>
+        <location filename="Windows/SettingsWindow.cpp" line="249"/>
         <source>Active + Pinned</source>
         <translation>Activo + Fijado</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="249"/>
+        <location filename="Windows/SettingsWindow.cpp" line="250"/>
         <source>Pinned Only</source>
         <translation>Solamente Fijado</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="252"/>
         <source>Close to Tray</source>
         <translation>Cerrar a la Bandeja</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="252"/>
+        <location filename="Windows/SettingsWindow.cpp" line="253"/>
         <source>Prompt before Close</source>
         <translation>Preguntar antes de Cerrar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="253"/>
+        <location filename="Windows/SettingsWindow.cpp" line="254"/>
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="254"/>
+        <location filename="Windows/SettingsWindow.cpp" line="255"/>
         <source>Hide (Run invisible in Background)</source>
         <translation>Ocultar (Ejecutar invisible en Segundo Plano)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="256"/>
+        <location filename="Windows/SettingsWindow.cpp" line="257"/>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="257"/>
+        <location filename="Windows/SettingsWindow.cpp" line="258"/>
         <source>Native</source>
         <translation>Nativo</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="259"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="260"/>
+        <location filename="Windows/SettingsWindow.cpp" line="261"/>
         <source>Every Day</source>
         <translation>Cada Día</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="261"/>
+        <location filename="Windows/SettingsWindow.cpp" line="262"/>
         <source>Every Week</source>
         <translation>Cada Semana</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="262"/>
+        <location filename="Windows/SettingsWindow.cpp" line="263"/>
         <source>Every 2 Weeks</source>
         <translation>Cada 2 Semanas</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="264"/>
         <source>Every 30 days</source>
         <translation>Cada 30 días</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="265"/>
+        <location filename="Windows/SettingsWindow.cpp" line="266"/>
         <source>Ignore</source>
         <translation>Ignorar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="266"/>
-        <location filename="Windows/SettingsWindow.cpp" line="271"/>
+        <location filename="Windows/SettingsWindow.cpp" line="267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="272"/>
         <source>Notify</source>
         <translation>Notificar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="267"/>
-        <location filename="Windows/SettingsWindow.cpp" line="272"/>
+        <location filename="Windows/SettingsWindow.cpp" line="268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="273"/>
         <source>Download &amp; Notify</source>
         <translation>Descargar y Notificar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="268"/>
-        <location filename="Windows/SettingsWindow.cpp" line="273"/>
+        <location filename="Windows/SettingsWindow.cpp" line="269"/>
+        <location filename="Windows/SettingsWindow.cpp" line="274"/>
         <source>Download &amp; Install</source>
         <translation>Descargar e Instalar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="277"/>
+        <location filename="Windows/SettingsWindow.cpp" line="278"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="405"/>
+        <location filename="Windows/SettingsWindow.cpp" line="406"/>
         <source>Browse for Program</source>
         <translation>Buscar programa</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="514"/>
+        <location filename="Windows/SettingsWindow.cpp" line="518"/>
         <source>Add %1 Template</source>
         <translation>Añadir Plantilla %1</translation>
     </message>
@@ -6183,129 +6183,129 @@ NO seleccionará: %2</translation>
         <translation type="vanished">HwId: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="612"/>
+        <location filename="Windows/SettingsWindow.cpp" line="616"/>
         <source>Select font</source>
         <translation>Elegir fuente</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="614"/>
+        <location filename="Windows/SettingsWindow.cpp" line="618"/>
         <source>Reset font</source>
         <translation>Restablecer fuente</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="673"/>
+        <location filename="Windows/SettingsWindow.cpp" line="677"/>
         <source>Search for settings</source>
         <translation>Buscar ajustes</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="687"/>
+        <location filename="Windows/SettingsWindow.cpp" line="691"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="827"/>
+        <location filename="Windows/SettingsWindow.cpp" line="831"/>
         <source>Please enter message</source>
         <translation>Por favor introduzca mensaje</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="859"/>
+        <location filename="Windows/SettingsWindow.cpp" line="863"/>
         <source>Select Program</source>
         <translation>Elegir Programa</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="859"/>
+        <location filename="Windows/SettingsWindow.cpp" line="863"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Ejecutables (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="863"/>
-        <location filename="Windows/SettingsWindow.cpp" line="879"/>
+        <location filename="Windows/SettingsWindow.cpp" line="867"/>
+        <location filename="Windows/SettingsWindow.cpp" line="883"/>
         <source>Please enter a menu title</source>
         <translation>Por favor introduzca un título de menú</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="875"/>
+        <location filename="Windows/SettingsWindow.cpp" line="879"/>
         <source>Please enter a command</source>
         <translation>Por favor ingrese un comando</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="946"/>
-        <location filename="Windows/SettingsWindow.cpp" line="947"/>
-        <location filename="Windows/SettingsWindow.cpp" line="957"/>
+        <location filename="Windows/SettingsWindow.cpp" line="950"/>
+        <location filename="Windows/SettingsWindow.cpp" line="951"/>
+        <location filename="Windows/SettingsWindow.cpp" line="961"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Ejecutar &amp;Sandboxed</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1291"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1308"/>
         <source>kilobytes (%1)</source>
         <translation>kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1373"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1396"/>
         <source>Volume not attached</source>
         <translation>Volumen no adjuntado</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1410"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1433"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1462"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1511"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Has usado %1/%2 certificados de prueba. No se pueden generar más certificados gratuitos.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1490"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1513"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Obtén un certificado de prueba gratuito&lt;/a&gt; y disfrute de todas las funciones premium por %1 días.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1491"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1514"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Puede solicitar un certificado de prueba gratuito de %1 días hasta %2 veces por ID de hardware.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2173"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2205"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2211"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2243"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2212"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2244"/>
         <source>Auto update in future</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1423"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1446"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation type="unfinished">El certificado de patrocinador ha expirado, por favor &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;obten un certificado actualizado&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="558"/>
         <source>Click to reveal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="555"/>
+        <location filename="Windows/SettingsWindow.cpp" line="559"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1415"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1438"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Para la versión actual, las funciones Plus siguen estando activadas&lt;/font&gt;, pero ya no tienes acceso a los servicios de Sandboxie-Live, incluyendo las actualizaciones de compatibilidad y la base de datos de solución de problemas.</translation>
     </message>
@@ -6314,234 +6314,234 @@ Right-click to copy</oldsource>
         <translation type="vanished">Este certificado de patrocinador&lt;font color=&apos;red&apos;&gt;expirará en %1 día(s)&lt;/font&gt;, por favor &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;obtenga un certificado actualizado&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="557"/>
-        <location filename="Windows/SettingsWindow.cpp" line="566"/>
+        <location filename="Windows/SettingsWindow.cpp" line="561"/>
+        <location filename="Windows/SettingsWindow.cpp" line="570"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="562"/>
+        <location filename="Windows/SettingsWindow.cpp" line="566"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="575"/>
+        <location filename="Windows/SettingsWindow.cpp" line="579"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1458"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1481"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>Expira en: %1 días</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1483"/>
         <source>Expired: %1 days ago</source>
         <translation>Expiró hace: %1 días</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1472"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
         <source>Options: %1</source>
         <translation>Opciones: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1475"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1498"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Cajas de Seguridad/Privacidad Mejorada y Compartimentos de Aplicación (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1475"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1476"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1478"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1498"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1500"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
         <source>Enabled</source>
         <translation>Habilitado</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1475"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1476"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1478"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1498"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1500"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
         <source>Disabled</source>
         <translation>Deshabilitado</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1476"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1499"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Cajas Encriptadas (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1477"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1500"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Interceptación de Red (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1478"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1501"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Escritorio Sandboxie (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1509"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1532"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Esto no parece un número de serie de Sandboxie-Plus.&lt;br /&gt;Si ha intentado introducir el UpdateKey o Signature de un certificado, no es correcto, por favor introduzca, en cambio, el certificado completo en el área de texto superior.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1516"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1539"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>Está intentando usar una Clave de Actualización de características sin haber ingresado un certificado de patrocinador preexistente. Tenga en cuenta que este tipo de clave (&lt;b&gt;como se indica claramente en negritas en el sitio web&lt;/b&gt;) requiere que tenga un certificado de patrocinador válido preexistente; es inútil sin uno.&lt;br /&gt;Si desea usar las características avanzadas, necesita obtener tanto un certificado estándar como la clave de actualización de características para desbloquear la funcionalidad avanzada.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1522"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1545"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>Está intentando usar una Clave de Renovación sin haber ingresado un certificado de patrocinador preexistente. Tenga en cuenta que este tipo de clave (&lt;b&gt;como se indica claramente en negritas en el sitio web&lt;/b&gt;) requiere que tenga un certificado de patrocinador válido preexistente; es inútil sin uno.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1527"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1550"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Si no ha leído la descripción del producto y ha obtenido esta clave por error, por favor contáctanos por email (disponible en nuestra web) para resolver esta incidencia.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1542"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1567"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2225"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1565"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1590"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2257"/>
         <source>Retrieving certificate...</source>
         <translation>Obteniendo certificado...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1555"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - Obtener Certificado de PRUEBA</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1555"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Por favor introduzca su e-mail para recibir un certificado de prueba gratuito de %1 día(s), que será emitido a %2 y bloqueado al hardware actual.
 Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1581"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1604"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>Error obteniendo certificado: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1581"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1604"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Error Desconocido (probablemente un problema de red)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1636"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1659"/>
         <source>Contributor</source>
         <translation>Contribuidor</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1638"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1661"/>
         <source>Eternal</source>
         <translation>Eterno</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1640"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1663"/>
         <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1642"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1665"/>
         <source>Business</source>
         <translation>Negocio</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1644"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1667"/>
         <source>Personal</source>
         <translation>Presonal</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1646"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1669"/>
         <source>Great Patreon</source>
         <translation>Gran Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1648"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1671"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1650"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1673"/>
         <source>Family</source>
         <translation>Familia</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1652"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1675"/>
         <source>Home</source>
         <translation>Hogar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1654"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1677"/>
         <source>Evaluation</source>
         <translation>Evaluación</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1656"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1679"/>
         <source>Type %1</source>
         <translation>Tipo %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1709"/>
         <source>Advanced</source>
         <translation>Avanzado</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1688"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1711"/>
         <source>Advanced (L)</source>
         <translation>Avanzado (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1713"/>
         <source>Max Level</source>
         <translation>Nivel máximo</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1692"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1715"/>
         <source>Level %1</source>
         <translation>Nivel %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1717"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1740"/>
         <source>Supporter certificate required for access</source>
         <translation>Certificado de patrocinador requerido para acceso</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1734"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1757"/>
         <source>Supporter certificate required for automation</source>
         <translation>Certificado de patrocinador requerido para automatización</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2160"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2192"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Este certificado es desafortunadamente inválido para la compilación actual, necesita obtener un nuevo certificado o volver a una compilación anterior.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2162"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2194"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Aunque este certificado ha caducado, las funciones adicionales de la versión actualmente instalada siguen habilitadas. Sin embargo, ya no tendrás acceso a los servicios de Sandboxie-Live, incluidas las actualizaciones de compatibilidad y la base de datos de solución de problemas en línea.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2164"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2196"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Este certificado ha desafortunadamente expirado, necesita obtener un nuevo certificado.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2168"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2200"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>El certificado de prueba se ha aplicado con éxito. ¡Disfrute de su periodo de prueba!</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="978"/>
+        <location filename="Windows/SettingsWindow.cpp" line="982"/>
         <source>Sandboxed Web Browser</source>
         <translation>Navegador Web Aislado</translation>
     </message>
@@ -6550,12 +6550,12 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
         <translation type="vanished">Este certificado de patrocinador ha expirado, por favor &lt;a href=&quot;sbie://update/cert&quot;&gt;obtenga un certificado actualizado&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1413"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1436"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Características Plus se deshabilitarán en %1 días.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1417"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1440"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Características Plus ya no están disponibles.</translation>
     </message>
@@ -6564,22 +6564,22 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
         <translation type="vanished">Este certificado de patrocinador &lt;font color=&apos;red&apos;&gt;expirará en %1 días&lt;/font&gt;, por favor &lt;a href=&quot;sbie://update/cert&quot;&gt;obtenga un certificado actualizado&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1841"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1864"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Ejecutar &amp;Sin-Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1849"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1872"/>
         <source>Set Force in Sandbox</source>
         <translation>Establecer Forzar en Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1858"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1881"/>
         <source>Set Open Path in Sandbox</source>
         <translation>Establecer Abrir Ruta en Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2143"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2175"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Esto no parece un certificado. Por favor introduzca el certificado entero, no solo una porción del mismo.</translation>
     </message>
@@ -6592,7 +6592,7 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
         <translation type="vanished">Este certificado esta desactualizado.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2171"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2203"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Gracias por patrocinar el desarrollo de Sandboxie-Plus.</translation>
     </message>
@@ -6601,88 +6601,88 @@ Puede solicitar hasta %3 certificados de prueba por ID de hardware único.</tran
         <translation type="vanished">Este certificado de patrocinador no es válido.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2279"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2311"/>
         <source>Update Available</source>
         <translation>Actualización Disponible</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2281"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2313"/>
         <source>Installed</source>
         <translation>Instalado</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2286"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2318"/>
         <source>by %1</source>
         <translation>por %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2294"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2326"/>
         <source>(info website)</source>
         <translation>(web de información)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2321"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2353"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Esta extensión es obligatoria y no se puede eliminar.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2330"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2479"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2362"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2511"/>
         <source>Select Directory</source>
         <translation>Seleccionar Directorio</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2362"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2394"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Comprobar Ahora&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2439"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2471"/>
         <source>Please enter the new configuration password.</source>
         <translation>Por favor ingrese la nueva clave de configuracion.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2443"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2475"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Por favor re-ingrese la nueva clave de configuracion.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2448"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2480"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Las contraseñas no son iguales, vuelva a intentarlo por favor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2492"/>
         <source>Process</source>
         <translation>Proceso</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2460"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2492"/>
         <source>Folder</source>
         <translation>Carpeta</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2470"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2502"/>
         <source>Please enter a program file name</source>
         <translation>Por favor ingrese un nombre de archivo al programa</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2538"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2570"/>
         <source>Please enter the template identifier</source>
         <translation>Por favor ingrese el identificador de plantilla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2546"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2578"/>
         <source>Error: %1</source>
         <translation>Error: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2610"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>¿Desea realmente borrar la(s) plantilla(s) local(es) seleccionada(s)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2786"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2818"/>
         <source>%1 (Current)</source>
         <translation>%1 (Actual)</translation>
     </message>
@@ -10585,7 +10585,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         <translation>Siempre ejecutar IU de SandMan como Administrador</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2817"/>
+        <location filename="Forms/SettingsWindow.ui" line="2884"/>
         <source>Open Template</source>
         <translation>Abrir Plantilla</translation>
     </message>
@@ -10819,62 +10819,77 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2555"/>
+        <source>Force Process Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="2583"/>
+        <source>Force files with a Mark of The Web into a sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="2603"/>
+        <source>Sandbox for MoTW marked files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="2622"/>
         <source>USB Drive Sandboxing</source>
         <translation>Aislamiento de unidades USB</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2571"/>
+        <location filename="Forms/SettingsWindow.ui" line="2638"/>
         <source>Volume</source>
         <translation>Volumen</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2576"/>
+        <location filename="Forms/SettingsWindow.ui" line="2643"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2584"/>
+        <location filename="Forms/SettingsWindow.ui" line="2651"/>
         <source>Sandbox for USB drives:</source>
         <translation>Sandbox para dispositivos USB:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2600"/>
+        <location filename="Forms/SettingsWindow.ui" line="2667"/>
         <source>Automatically sandbox all attached USB drives</source>
         <translation>Aislar automáticamente todas las unidades USB conectadas</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2627"/>
+        <location filename="Forms/SettingsWindow.ui" line="2694"/>
         <source>App Templates</source>
         <translation>Plantillas de Aplicacion</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2637"/>
+        <location filename="Forms/SettingsWindow.ui" line="2704"/>
         <source>App Compatibility</source>
         <translation>Compatibilidad de aplicación</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2657"/>
+        <location filename="Forms/SettingsWindow.ui" line="2724"/>
         <source>&lt;a href=&quot;sbie://templates&quot;&gt;update compatibility templates now&lt;/a&gt;</source>
         <oldsource>&lt;a href=&quot;sbie://templates&quot;&gt;update compatybility templates now&lt;/a&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2736"/>
+        <location filename="Forms/SettingsWindow.ui" line="2803"/>
         <source>Local Templates</source>
         <translation>Plantillas locales</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2804"/>
+        <location filename="Forms/SettingsWindow.ui" line="2871"/>
         <source>Add Template</source>
         <translation>Agregar Plantilla</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2772"/>
+        <location filename="Forms/SettingsWindow.ui" line="2839"/>
         <source>Text Filter</source>
         <translation>Filtro de Texto</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2782"/>
+        <location filename="Forms/SettingsWindow.ui" line="2849"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>Esta lista contiene plantillas personalizadas creadas por el usuario para las opciones de sandbox</translation>
     </message>
@@ -10896,7 +10911,7 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="958"/>
         <location filename="Forms/SettingsWindow.ui" line="1408"/>
-        <location filename="Forms/SettingsWindow.ui" line="2848"/>
+        <location filename="Forms/SettingsWindow.ui" line="2915"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
@@ -10976,22 +10991,22 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         <translation type="vanished">Compatibilidad</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2875"/>
+        <location filename="Forms/SettingsWindow.ui" line="2942"/>
         <source>Edit ini Section</source>
         <translation>Editar Sección ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2884"/>
+        <location filename="Forms/SettingsWindow.ui" line="2951"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2891"/>
+        <location filename="Forms/SettingsWindow.ui" line="2958"/>
         <source>Edit ini</source>
         <translation>Editar ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2917"/>
+        <location filename="Forms/SettingsWindow.ui" line="2984"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -11215,8 +11230,8 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         <location filename="Forms/SettingsWindow.ui" line="853"/>
         <location filename="Forms/SettingsWindow.ui" line="1429"/>
         <location filename="Forms/SettingsWindow.ui" line="2532"/>
-        <location filename="Forms/SettingsWindow.ui" line="2668"/>
-        <location filename="Forms/SettingsWindow.ui" line="2828"/>
+        <location filename="Forms/SettingsWindow.ui" line="2735"/>
+        <location filename="Forms/SettingsWindow.ui" line="2895"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
@@ -11260,22 +11275,22 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         <translation type="vanished">Compatibilidad de Software</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2713"/>
+        <location filename="Forms/SettingsWindow.ui" line="2780"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>El el futuro, no verificar compatibilidad de software</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2693"/>
+        <location filename="Forms/SettingsWindow.ui" line="2760"/>
         <source>Enable</source>
         <translation>Habilitar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2676"/>
+        <location filename="Forms/SettingsWindow.ui" line="2743"/>
         <source>Disable</source>
         <translation>Deshabilitar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2683"/>
+        <location filename="Forms/SettingsWindow.ui" line="2750"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie ha detectado los siguientes programas en su sistemas.  Haga click en OK para aplicar la configuracion, lo cual mejora la compatibilidad de esos programas.  Estas configuraciones afectan a todas las sandboxes existentes y nuevas.</translation>
     </message>

@@ -10934,17 +10934,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2555"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>强制进程选项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2583"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>将带有网络标记的文件强制纳入沙箱运行</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2603"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>网络标记文件的沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2622"/>

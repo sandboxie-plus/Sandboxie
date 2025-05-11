@@ -2675,7 +2675,7 @@ Wybierz folder, który zawiera ten plik.</translation>
         <location filename="Windows/OptionsNetwork.cpp" line="1166"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
         <oldsource> entry: IP or Port cannot be empty</oldsource>
-        <translation type="unfinished"> Wpis: Adres IP lub numer portu nie mogą być puste</translation>
+        <translation>Wpis %1: Adres IP lub numer portu nie może być pusty</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>
@@ -6155,7 +6155,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
-        <translation type="unfinished">Kliknij, aby ukryć</translation>
+        <translation>Kliknij, aby ukryć</translation>
     </message>
     <message>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
@@ -6395,17 +6395,17 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
         <location filename="Windows/SettingsWindow.cpp" line="561"/>
         <location filename="Windows/SettingsWindow.cpp" line="570"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Identyfikator sprzętu: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="566"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Identyfikator sprzętu: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(skopiuj)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="579"/>
         <source>Sandboxie-Plus Version: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja Sandboxie-Plus: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="616"/>
@@ -11099,7 +11099,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1844"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja Sandboxie-Plus: 0.0.0</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1885"/>
@@ -11165,17 +11165,17 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2555"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje Wymuszania Procesu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2583"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymuś pliki zznaczkami sieciowe na wewnętrzności sandboxa</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2603"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox dla plików oznaczonych MoTW</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2622"/>

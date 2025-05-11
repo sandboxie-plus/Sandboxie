@@ -10110,17 +10110,17 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2555"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwungener Prozess Optionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2583"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwinge Dateien mit einem &quot;Mark of The Web&quot; in eine Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2603"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox für &quot;MoTW&quot; gekennzeichnete Dateien</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2622"/>

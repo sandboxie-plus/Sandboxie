@@ -1508,7 +1508,7 @@ Diese Programme oder Dokumente werden unter der Kontrolle von Sandboxie gestarte
 
 Es wird jedoch empfohlen, Veränderungen des Inhalts der Sandbox über eine Instanz
 des Windows Explorer vorzunehmen, welche mit Sandboxie ausgeführt wird.
-Also über ‘Sandbox’ -> 'In der Sandbox starten' -> 'Windows Explorer starten'.
+Also über 'Sandbox' -> 'In der Sandbox starten' -> 'Windows Explorer starten'.
 .
 
 3535;txt;01

@@ -161,7 +161,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	ui.tabsControl->setCurrentIndex(0);
 	ui.tabsControl->setTabIcon(0, CSandMan::GetIcon("Alarm"));
-	ui.tabsControl->setTabIcon(1, CSandMan::GetIcon("USB"));
+	ui.tabsControl->setTabIcon(1, CSandMan::GetIcon("Force"));
+	ui.tabsControl->setTabIcon(2, CSandMan::GetIcon("USB"));
 
 	ui.tabsTemplates->setCurrentIndex(0);
 	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Program"));
@@ -486,6 +487,9 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnBrowse, SIGNAL(clicked(bool)), this, SLOT(OnBrowse()));
 	m_WarnProgsChanged = false;
 	//
+
+	connect(ui.chkSandboxMoTW, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
+	connect(ui.cmbMoTWSandbox, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
 
 	// USB
 	connect(ui.chkSandboxUsb, SIGNAL(stateChanged(int)), this, SLOT(OnVolumeChanged()));
@@ -1156,18 +1160,26 @@ void CSettingsWindow::LoadSettings()
 
 		m_WarnProgsChanged = false;
 
+		QString MoTWBox = theAPI->GetGlobalSettings()->GetText("MarkOfTheWebBox", "Web_Box");
+		ui.chkSandboxMoTW->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceMarkOfTheWeb", false));
+		QString USBBox = theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box");
 		ui.chkSandboxUsb->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceUsbDrives", false));
 
+		ui.cmbMoTWSandbox->clear();
 		ui.cmbUsbSandbox->clear();
 
 		QFileIconProvider IconProvider;
 		bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
 
 		int CurUsbBox = 0;
+		int CurMoTWBox = 0;
 		foreach(const CSandBoxPtr& pBox, theAPI->GetAllBoxes()) 
 		{
-			if (theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box") == pBox->GetName())
+			if (USBBox == pBox->GetName())
 				CurUsbBox = ui.cmbUsbSandbox->count();
+
+			if (MoTWBox == pBox->GetName())
+				CurMoTWBox = ui.cmbMoTWSandbox->count();
 
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
@@ -1179,10 +1191,13 @@ void CSettingsWindow::LoadSettings()
 				Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
 			else
 				Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
+			ui.cmbMoTWSandbox->addItem(Icon, pBoxEx->GetDisplayName(), pBox->GetName());
 			ui.cmbUsbSandbox->addItem(Icon, pBoxEx->GetDisplayName(), pBox->GetName());
 		}
+		ui.cmbMoTWSandbox->setCurrentIndex(CurMoTWBox);
 		ui.cmbUsbSandbox->setCurrentIndex(CurUsbBox);
-
+		
+		ui.cmbMoTWSandbox->setEnabled(ui.chkSandboxMoTW->isChecked());
 		ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
 		ui.treeVolumes->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
 
@@ -1216,6 +1231,8 @@ void CSettingsWindow::LoadSettings()
 		ui.treeWarnProgs->setEnabled(false);
 		ui.btnAddWarnProg->setEnabled(false);
 		ui.btnDelWarnProg->setEnabled(false);
+		ui.chkSandboxMoTW->setEnabled(false);
+		ui.cmbMoTWSandbox->setEnabled(false);
 		ui.chkSandboxUsb->setEnabled(false);
 		ui.cmbUsbSandbox->setEnabled(false);
 		ui.treeVolumes->setEnabled(false);
@@ -1295,6 +1312,12 @@ void CSettingsWindow::OnRamDiskChange()
 	ui.lblRamLetter->setEnabled(bEnabled && ui.chkRamLetter->isChecked());
 
 	OnGeneralChanged();
+}
+
+void CSettingsWindow::OnMoTWChange()
+{
+	ui.cmbMoTWSandbox->setEnabled(ui.chkSandboxMoTW->isChecked());
+	OnOptChanged();
 }
 
 void CSettingsWindow::OnVolumeChanged() 
@@ -2026,6 +2049,15 @@ void CSettingsWindow::SaveSettings()
 				WriteTextList("AlertProcess", AlertProcess);
 				WriteTextList("AlertFolder", AlertFolder);
 			}
+
+			WriteAdvancedCheck(ui.chkSandboxMoTW, "ForceMarkOfTheWeb", "y", "");
+
+			QString MoTWSandbox = ui.cmbMoTWSandbox->currentData().toString();
+			SB_STATUS Status = theAPI->ValidateName(MoTWSandbox);
+			if (Status.IsError())
+				QMessageBox::warning(this, "Sandboxie-Plus", theGUI->FormatError(Status));
+			else
+				WriteText("MarkOfTheWebBox", MoTWSandbox);
 
 			if (m_VolumeChanged)
 			{

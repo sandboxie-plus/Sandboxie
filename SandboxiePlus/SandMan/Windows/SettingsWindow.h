@@ -113,6 +113,7 @@ private slots:
 	void OnAddWarnFolder();
 	void OnDelWarnProg();
 
+	void OnMoTWChange();
 	void OnVolumeChanged();
 	void UpdateDrives();
 

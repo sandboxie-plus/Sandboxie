@@ -7710,7 +7710,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4436"/>
-        <source>Dlls &amp;&amp; Extensions</source>
+        <source>Dlls &amp; Extensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

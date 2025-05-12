@@ -8533,7 +8533,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4436"/>
         <source>Dlls &amp;&amp; Extensions</source>
-        <translation>Dll &amp;&amp; 扩展</translation>
+        <translation>Dll &amp; 扩展</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4485"/>

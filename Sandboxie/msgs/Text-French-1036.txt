@@ -1015,7 +1015,7 @@ fenêtre de contrôle de compte d'utilisateur.
 
 3243;txt;01
 Remarque : le programme va continuer à s'exécuter dans Sandboxie,
-même après que des droits d'administrateur aient été accordés.
+même après que des droits d'administrateur aient été accordés.Cependant, si la fonction "SysCallLockDown" n'est pas activée, il se peut que le programme en sandbox puisse s'évader ! ! ! !
 .
 
 3251;txt;01

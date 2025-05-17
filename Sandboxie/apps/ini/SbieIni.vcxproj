@@ -137,6 +137,7 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +152,7 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -167,6 +169,7 @@
       </MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -181,6 +184,7 @@
       </FunctionLevelLinking>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -196,6 +200,7 @@
       </FunctionLevelLinking>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -213,6 +218,7 @@
       </MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -235,9 +235,6 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
     // Gui_ConnectToWindowStationAndDesktop
     //
 
-	// NoSbieDesk BEGIN
-	if(!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
-	// NoSbieDesk END
     if (! _Initialized) {
 
         if (! Gui_ConnectToWindowStationAndDesktop(User32))

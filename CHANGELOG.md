@@ -3,13 +3,19 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.16.0 / 5.71.0] - 2025-04-??
+## [1.16.0 / 5.71.0] - 2025-05-??
 
 ### Added
 - added option to copy hwid from the support page
 - added OpenClsid and fixed an issue with OpenClsid handling to enable firefox's hardware acceleration
 - added 'MarkOfTheWebBox=BoxName' option to force all files with the Mark Of the Web set into a preset sandbox
 - added wildcard support with ForceProcess [#2603](https://github.com/sandboxie-plus/Sandboxie/issues/2603)
+- added missing virtualization to EventPair & KeyedEvent objects
+- added filtering and virtualization to Timer objects
+
+### Changed
+enabled /GS for all components
+enabled /CETCOMPAT for the driver
 
 
 

@@ -2174,6 +2174,38 @@ __declspec(dllimport) NTSTATUS __stdcall NtOpenEvent(
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes);
 
+__declspec(dllimport) NTSTATUS __stdcall NtCreateEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+__declspec(dllimport) NTSTATUS __stdcall NtCreateKeyedEvent(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG Flags);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenKeyedEvent(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+__declspec(dllimport) NTSTATUS __stdcall NtCreateTimer(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN TIMER_TYPE TimerType);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenTimer(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
 __declspec(dllimport) NTSTATUS __stdcall NtCreateMutant(
     OUT PHANDLE MutantHandle,
     IN  ACCESS_MASK DesiredAccess,

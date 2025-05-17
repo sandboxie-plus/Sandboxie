@@ -288,7 +288,7 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	m_pTraceType->setNoneCheckedText(tr("[All]"));
 	foreach(quint32 type, CTraceEntry::AllTypes()) 
 		m_pTraceType->addCheckItem(CTraceEntry::GetTypeStr(type), type, Qt::Unchecked);
-	m_pTraceType->setMinimumWidth(100);
+	m_pTraceType->adjustWidthForItems();
 	connect(m_pTraceType, SIGNAL(globalCheckStateChanged(int)), this, SLOT(OnSetFilter()));
 	m_pTraceToolBar->addWidget(m_pTraceType);
 

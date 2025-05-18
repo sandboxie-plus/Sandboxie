@@ -180,6 +180,6 @@ All translators are encouraged to look at the [Localization notes and tips](http
 
 ## 📚 Documentation Translators
 
-- Vstory, GT-Stardust - Simplified Chinese
+- Vstory, GT-Stardust, wzxjohn - Simplified Chinese
 
 All documentation translators are encouraged to look at the [Multilingual Translation Contribution Guide](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519) before sending a translation.

@@ -100,6 +100,7 @@ SbieDll_QueueGetRpl=_SbieDll_QueueGetRpl@16
 SbieDll_QueuePutReq=_SbieDll_QueuePutReq@20
 SbieDll_QueuePutRpl=_SbieDll_QueuePutRpl@16
 
+SbieApi_UpdateConf=_SbieApi_UpdateConf@16
 SbieDll_UpdateConf=_SbieDll_UpdateConf@20
 
 SbieDll_AssocQueryCommand=_SbieDll_AssocQueryCommand@4

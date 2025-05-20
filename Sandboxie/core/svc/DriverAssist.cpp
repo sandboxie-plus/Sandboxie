@@ -36,6 +36,8 @@
 #include "core/drv/api_defs.h"
 #include "sbieiniserver.h"
 #include "MountManager.h"
+#include "GuiWire.h"
+#include "GuiServer.h"
 
 //---------------------------------------------------------------------------
 // Variables
@@ -50,6 +52,8 @@ typedef struct _MSG_DATA
 
 DriverAssist *DriverAssist::m_instance = NULL;
 
+std::map<std::wstring, std::wstring> DriverAssist::m_SidCache;
+CRITICAL_SECTION DriverAssist::m_SidCache_CritSec;
 
 //---------------------------------------------------------------------------
 // Constructor
@@ -66,14 +70,12 @@ DriverAssist::DriverAssist()
 
     InitializeCriticalSection(&m_LogMessage_CritSec);
     InitializeCriticalSection(&m_critSecHostInjectedSvcs);
-    InitializeCriticalSection(&m_SidCache_CritSec);
 }
 
 DriverAssist::~DriverAssist()
 {
 	DeleteCriticalSection(&m_LogMessage_CritSec);
 	DeleteCriticalSection(&m_critSecHostInjectedSvcs);
-	DeleteCriticalSection(&m_SidCache_CritSec);
 }
 
 
@@ -378,6 +380,28 @@ void DriverAssist::Thread()
 
 
 //---------------------------------------------------------------------------
+// InitializeSidCache
+//---------------------------------------------------------------------------
+
+
+void DriverAssist::InitializeSidCache()
+{
+    InitializeCriticalSection(&m_SidCache_CritSec);
+}
+
+
+//---------------------------------------------------------------------------
+// DestroySidCache
+//---------------------------------------------------------------------------
+
+
+void DriverAssist::DestroySidCache()
+{
+    DeleteCriticalSection(&m_SidCache_CritSec);
+}
+
+
+//---------------------------------------------------------------------------
 // LookupSidCached
 //---------------------------------------------------------------------------
 
@@ -394,17 +418,17 @@ bool DriverAssist::LookupSidCached(const PSID pSid, WCHAR* UserName, ULONG* User
         return false;
 
 
-    EnterCriticalSection(&m_instance->m_SidCache_CritSec);
+    EnterCriticalSection(&m_SidCache_CritSec);
 
-    auto I = m_instance->m_SidCache.find(pStr);
-    if (I != m_instance->m_SidCache.end())
+    auto I = m_SidCache.find(pStr);
+    if (I != m_SidCache.end())
     {
         wcscpy_s(UserName, *UserNameLen, I->second.c_str());
         *UserNameLen = I->second.length();
         ok = true;
     }
     
-    LeaveCriticalSection(&m_instance->m_SidCache_CritSec);
+    LeaveCriticalSection(&m_SidCache_CritSec);
 
 
     if (!ok) {
@@ -413,11 +437,11 @@ bool DriverAssist::LookupSidCached(const PSID pSid, WCHAR* UserName, ULONG* User
 
         if (ok) {
 
-            EnterCriticalSection(&m_instance->m_SidCache_CritSec);
+            EnterCriticalSection(&m_SidCache_CritSec);
 
-            m_instance->m_SidCache[pStr] = UserName;
+            m_SidCache[pStr] = UserName;
 
-            LeaveCriticalSection(&m_instance->m_SidCache_CritSec);
+            LeaveCriticalSection(&m_SidCache_CritSec);
         }
     }
 

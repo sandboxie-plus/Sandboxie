@@ -722,6 +722,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\arm64_asm.h" />
+    <ClInclude Include="..\..\common\defines.h" />
     <ClInclude Include="..\..\common\list.h" />
     <ClInclude Include="..\..\common\map.h" />
     <ClInclude Include="..\..\common\my_version.h" />

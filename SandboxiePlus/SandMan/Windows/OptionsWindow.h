@@ -597,7 +597,7 @@ protected:
 	QStringList m_BoxTemplates;
 	QStringList m_BoxFolders;
 
-	QList<QPair<QString, QString>> m_Settings;
+	QList<CSbieIni::SbieIniValue> m_Settings;
 
 	QSharedPointer<CSbieIni> m_pBox;
 

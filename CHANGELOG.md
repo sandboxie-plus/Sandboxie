@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added support for proper text scaling in the 'Type' dropdown on the Trace Log page to prevent truncation when display scaling is applied [#4812](https://github.com/sandboxie-plus/Sandboxie/pull/4812) (thanks wzxjohn)
 - added missing virtualization to EventPair & KeyedEvent objects
 - added filtering and virtualization to Timer objects
+- added option to create virtual sandboxies (no stored in sandboxie ini)
 
 ### Changed
 - refactored **DNS Filter logic** to enable filtering even when no DNS resolution occurs or when no valid IP address is returned [#4811](https://github.com/sandboxie-plus/Sandboxie/pull/4811) (thanks wzxjohn)
@@ -20,7 +21,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - This caused issues such as failed modifications for unresolved domains and potential information leakage due to DNS requests during filtering
 - enabled /GS for all components
 - enabled /CETCOMPAT for the driver
-
+- reworked ini handling [#4492](https://github.com/sandboxie-plus/Sandboxie/issues/4492)
+  - Added ImportBox=C:\path\To\Box.ini
+  - Added mechanism to create virtual config section in the driver without the need for an ini file
+  
 ### Fixed
 - Taskbar remains visible at the top when entering full screen in Firefox 138+ [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
 

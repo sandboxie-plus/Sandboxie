@@ -165,19 +165,6 @@ protected:
 
 	QMap<QString, QSet<QString>> m_MissingTemplates;
 
-	enum EBoxColors
-	{
-		eYellow = 0,
-		eRed,
-		eGreen,
-		eBlue,
-		eCyan,
-		eMagenta,
-		eOrang,
-		eWhite,
-		eMaxColor
-	};
-
 	QMap<int, QRgb> m_BoxColors;
 
 	class UGlobalHotkeys* m_pHotkeyManager;

@@ -1202,15 +1202,15 @@ retry:
 	return SB_ERR(SB_ConfigFailed, QVariantList() << SettingName << SectionName << CSbieAPI__FormatNtStatus(status), status);
 }
 
-SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode, bool bRefresh)
+SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, CSbieIni::ESetMode Mode, bool bRefresh)
 {
 	ULONG msgid = 0;
 	switch (Mode)
 	{
-	case eIniUpdate:	msgid = MSGID_SBIE_INI_SET_SETTING; break;
-	case eIniAppend:	msgid = MSGID_SBIE_INI_ADD_SETTING; break;
-	case eIniInsert:	msgid = MSGID_SBIE_INI_INS_SETTING; break;
-	case eIniDelete:	msgid = MSGID_SBIE_INI_DEL_SETTING; break;
+	case CSbieIni::eIniUpdate:	msgid = MSGID_SBIE_INI_SET_SETTING; break;
+	case CSbieIni::eIniAppend:	msgid = MSGID_SBIE_INI_ADD_SETTING; break;
+	case CSbieIni::eIniInsert:	msgid = MSGID_SBIE_INI_INS_SETTING; break;
+	case CSbieIni::eIniDelete:	msgid = MSGID_SBIE_INI_DEL_SETTING; break;
 	default:
 		return SB_ERR();
 	}
@@ -1225,7 +1225,7 @@ SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, c
 	req->section[Section.length()] = L'\0';
 	Setting.toWCharArray(req->setting); // fix-me: potential overflow
 	req->setting[Setting.length()] = L'\0';
-	Value.toWCharArray(req->value); // fix-me: potential overflow
+	Value.toWCharArray(req->value);
 	req->value[Value.length()] = L'\0';
 	req->value_len = Value.length();
 	req->h.msgid = msgid;
@@ -1235,6 +1235,50 @@ SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, c
 	//if (!Status) 
 	//	emit LogSbieMessage(0xC1020000 | 2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
 	return Status;
+}
+
+SB_STATUS CSbieAPI::SbieIniSetDrv(const QString& Section, const QString& Setting, const QString& Value, CSbieIni::ESetMode Mode)
+{
+	ULONG op = 0;
+	switch (Mode)
+	{
+	case CSbieIni::eIniUpdate:	op = CONF_UPDATE_VALUE; break;
+	case CSbieIni::eIniInsert:	//op = CONF_INSERT_VALUE; break;
+	case CSbieIni::eIniAppend:	op = CONF_APPEND_VALUE; break;
+	case CSbieIni::eIniDelete:	op = CONF_REMOVE_VALUE; break;
+	default:
+		return SB_ERR();
+	}
+
+	std::wstring section = Section.toStdWString();
+	std::wstring setting = Setting.toStdWString();
+	std::wstring value = Value.toStdWString();
+
+	if (op == CONF_UPDATE_VALUE && setting == L"*" && value.empty()) {
+		setting.clear();
+		op = CONF_REMOVE_SECTION;
+	}
+
+	WCHAR out_buffer[CONF_LINE_LEN] = { 0 };
+
+	__declspec(align(8)) UNICODE_STRING64 Input;
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+
+	Input.Length        = value.length() * sizeof(WCHAR);
+	Input.MaximumLength = Input.Length + sizeof(WCHAR);
+	Input.Buffer        = (ULONG64)(ULONG_PTR)value.c_str();
+
+	memset(parms, 0, sizeof(parms));
+	parms[0] = API_UPDATE_CONF;
+	parms[1] = (ULONG64)(ULONG_PTR)op;
+	parms[2] = (ULONG64)(ULONG_PTR)section.c_str();
+	parms[3] = (ULONG64)(ULONG_PTR)setting.c_str();
+	parms[4] = (ULONG64)(ULONG_PTR)(!value.empty() ? &Input : NULL);
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return SB_ERR(status);
+	return SB_OK;
 }
 
 void CSbieAPI::CommitIniChanges()
@@ -1274,12 +1318,12 @@ QString CSbieAPI::SbieIniGetEx(const QString& Section, const QString& Setting)
 	return Value;
 }
 
-QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode)
+QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode, quint32* pType)
 {
 	std::wstring section = Section.toStdWString();
 	std::wstring setting = Setting.toStdWString();
 
-	WCHAR out_buffer[CONF_LINE_LEN] = { 0 };
+	WCHAR out_buffer[CONF_LINE_LEN + 2] = { 0 };
 
 	__declspec(align(8)) UNICODE_STRING64 Output = { 0, sizeof(out_buffer) - 4 , (ULONG64)out_buffer };
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -1290,6 +1334,7 @@ QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, qui
 	parms[2] = (ULONG64)setting.c_str();
 	parms[3] = (ULONG64)&Index;
 	parms[4] = (ULONG64)&Output;
+	parms[5] = (ULONG64)pType;
 
 	NTSTATUS status = m->IoControl(parms);
 	if (ErrCode)

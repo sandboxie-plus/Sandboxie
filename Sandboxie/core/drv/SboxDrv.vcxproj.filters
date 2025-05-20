@@ -247,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="verify.h" />
     <ClInclude Include="dyn_data.h" />
+    <ClInclude Include="..\..\common\defines.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="aulldvrm.asm" />

@@ -189,13 +189,14 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	AddIconToLabel(ui.lblInterface, CSandMan::GetIcon("GUI").pixmap(size,size));
 
 	AddIconToLabel(ui.lblDisplay, CSandMan::GetIcon("Advanced").pixmap(size,size));
-	AddIconToLabel(ui.lblIni, CSandMan::GetIcon("EditIni").pixmap(size,size));
+	AddIconToLabel(ui.lblEditor, CSandMan::GetIcon("EditIni").pixmap(size,size));
 
 	AddIconToLabel(ui.lblDiskImage, CSandMan::GetIcon("Disk").pixmap(size,size));
 
 	AddIconToLabel(ui.lblBoxRoot, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxFeatures, CSandMan::GetIcon("Miscellaneous").pixmap(size,size));
 
+	AddIconToLabel(ui.lblIni, CSandMan::GetIcon("Editor").pixmap(size,size));
 	AddIconToLabel(ui.lblProtection, CSandMan::GetIcon("Lock").pixmap(size,size));
 
 	AddIconToLabel(ui.lblUpdates, CSandMan::GetIcon("Update").pixmap(size,size));
@@ -460,6 +461,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	m_GeneralChanged = false;
 
 	connect(ui.chkWatchConfig, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged())); // not sbie ini
+
+	connect(ui.btnAddBox, SIGNAL(clicked(bool)), this, SLOT(OnImportBox()));
+	connect(ui.btnMkBox, SIGNAL(clicked(bool)), this, SLOT(OnMakeBox()));
+	connect(ui.btnAddRoot, SIGNAL(clicked(bool)), this, SLOT(OnAddRoot()));
+	connect(ui.btnRemBox, SIGNAL(clicked(bool)), this, SLOT(OnRemoveBox()));
+	m_ImportChanged = false;
 
 	connect(ui.chkSkipUAC, SIGNAL(stateChanged(int)), this, SLOT(OnSkipUAC()));
 	ui.chkSkipUAC->setEnabled(IsElevated());
@@ -1134,6 +1141,11 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
 		ui.chkSbieAll->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieAllGroup", false));
 
+		ui.treeImport->clear();
+		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("ImportBox", false))
+			ui.treeImport->addTopLevelItem(new QTreeWidgetItem(QStringList() << Value));
+		m_ImportChanged = false;
+
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkAdminOnly->setEnabled(IsAdminUser());
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
@@ -1223,6 +1235,11 @@ void CSettingsWindow::LoadSettings()
 		ui.chkRamDisk->setEnabled(false);
 		ui.txtRamLimit->setEnabled(false);
 		ui.lblRamLimit->setEnabled(false);
+		ui.treeImport->setEnabled(false);
+		ui.btnAddBox->setEnabled(false);
+		ui.btnMkBox->setEnabled(false);
+		ui.btnAddRoot->setEnabled(false);
+		ui.btnRemBox->setEnabled(false);
 		ui.chkAdminOnly->setEnabled(false);
 		ui.chkPassRequired->setEnabled(false);
 		ui.chkAdminOnlyFP->setEnabled(false);
@@ -2001,6 +2018,17 @@ void CSettingsWindow::SaveSettings()
 				}
 			}
 
+			if (m_ImportChanged)
+			{
+				m_ImportChanged = false;
+
+				QStringList Imports;
+				for (int i = 0; i < ui.treeImport->topLevelItemCount(); i++)
+					Imports.append(ui.treeImport->topLevelItem(i)->text(0));
+
+				WriteTextList("ImportBox", Imports);
+			}
+
 			if (m_ProtectionChanged)
 			{
 				m_ProtectionChanged = false;
@@ -2456,6 +2484,68 @@ void CSettingsWindow::OnCompat()
 		OnCompatChanged();
 
 	LoadTemplates();
+}
+
+void CSettingsWindow::OnImportBox()
+{
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Portable Box ini"), "", tr("Ini Files (*.ini)")).replace("/", "\\");
+	if (Value.isEmpty())
+		return;
+
+	ui.treeImport->addTopLevelItem(new QTreeWidgetItem(QStringList() << Value));
+	OnImportChanged();
+}
+
+void CSettingsWindow::OnMakeBox()
+{
+	QString Value = QFileDialog::getSaveFileName(this, tr("Save new Portable Box ini"), "", tr("Ini Files (*.ini)")).replace("/", "\\");
+	if (Value.isEmpty())
+		return;
+
+	if (QFile::exists(Value)) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("File already exists, please select a different file name."));
+		return;
+	}
+
+	QString Name = Split2(Split2(Value, "\\", true).second, ".").first.replace(" ", "_");
+	if (theAPI->ValidateName(Name).IsError()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Invalid box name"));
+		return;
+	}
+
+	QFile File(Value);
+	if (File.open(QFile::WriteOnly)) {
+		File.write("#\n");
+		File.write("# Portable sandbox configuration file\n");
+		File.write("#\n");
+		File.write("\n");
+		File.write("[" +  Name.toLatin1() + "]\n");
+		File.write("Enabled=y\n");
+		File.close();
+	}
+
+	ui.treeImport->addTopLevelItem(new QTreeWidgetItem(QStringList() << Value));
+	OnImportChanged();
+}
+
+void CSettingsWindow::OnAddRoot()
+{
+	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Root Folder")).replace("/", "\\");
+	if (Value.isEmpty())
+		return;
+
+	ui.treeImport->addTopLevelItem(new QTreeWidgetItem(QStringList() << Value + "\\*"));
+	OnImportChanged();
+}
+
+void CSettingsWindow::OnRemoveBox()
+{
+	QTreeWidgetItem* pItem = ui.treeImport->currentItem();
+	if (!pItem)
+		return;
+
+	delete pItem;
+	OnImportChanged();
 }
 
 void CSettingsWindow::OnProtectionChange()

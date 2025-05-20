@@ -26,6 +26,9 @@ typedef long NTSTATUS;
 
 #include <windows.h>
 #include "..\..\Sandboxie\common\win32_ntddk.h"
+#include "..\..\Sandboxie\core\drv\api_flags.h"
+
+#include "..\..\Sandboxie\common\ini.cpp"
 
 #include "../Helpers/NtIO.h"
 
@@ -38,6 +41,9 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	//m = new SSandBox;
 
 	m_IsEnabled = true;
+
+	m_PortablePath = GetText("IniLocation", "", false, true, false, true);
+	m_pIniFile = NULL;
 
 	m_ActiveProcessCount = 0;
 	m_ActiveProcessDirty = false;
@@ -117,6 +123,8 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 
 CSandBox::~CSandBox()
 {
+	delete m_pIniFile;
+
 	//delete m;
 }
 
@@ -138,6 +146,8 @@ void CSandBox::UpdateDetails()
 
 void CSandBox::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
 {
+	//m_FileNtPath = FilePath;
+	//m_FilePath = FilePath.isEmpty() ? QString() : m_pAPI->Nt2DosPath(FilePath);
 	m_FilePath = FilePath;
 	m_RegPath = RegPath;
 	m_IpcPath = IpcPath;
@@ -332,7 +342,7 @@ QString CSandBox::Expand(const QString& Value)
 		else if (var.compare("BoxName", Qt::CaseInsensitive) == 0)
 			val = this->GetName();
 		else
-			val = m_pAPI->SbieIniGet(this->GetName(), "%" + var + "%", 0x80000000); // CONF_JUST_EXPAND
+			val = m_pAPI->SbieIniGet(this->GetName(), "%" + var + "%", CONF_JUST_EXPAND);
 		Value2.replace("%" + var + "%", val);
 		pos += result.capturedLength();
 	}
@@ -831,4 +841,100 @@ SB_STATUS CSandBox::ImBoxMount(const QString& Password, bool bProtect, bool bAut
 SB_STATUS CSandBox::ImBoxUnmount()
 {
 	return m_pAPI->ImBoxUnmount(this);
+}
+
+SB_STATUS CSandBox::RenameSection(const QString& NewName, bool deleteOld)
+{
+	if (!m_IsVirtual && !m_PortablePath.isEmpty())
+	{
+		return SB_ERR(STATUS_NOT_SUPPORTED);
+	}
+	return CSbieIni::RenameSection(NewName, deleteOld);
+}
+
+SB_STATUS CSandBox::RemoveSection()
+{
+	if (!m_IsVirtual && !m_PortablePath.isEmpty())
+	{
+		m_pAPI->GetGlobalSettings()->DelValue("ImportBox", m_PortablePath);
+		if(!QFile::remove(m_PortablePath))
+			return SB_ERR(STATUS_UNSUCCESSFUL);
+		return SB_OK;
+	}
+	return CSbieIni::RemoveSection();
+}
+
+void CSandBox::CommitIniChanges()
+{
+	if (m_pIniFile)
+	{
+		m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
+		delete m_pIniFile;
+		m_pIniFile = NULL;
+		m_pAPI->ReloadConfig();
+		return;
+	}
+	CSbieIni::CommitIniChanges();
+}
+
+SB_STATUS CSandBox::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode, bool bRefresh)
+{
+	if (!m_IsVirtual && !m_PortablePath.isEmpty())
+	{
+		NTSTATUS status = STATUS_SUCCESS;
+
+		if (!m_pIniFile) {
+			m_pIniFile = new CIniFile();
+			status = m_pIniFile->LoadIni((WCHAR*)m_PortablePath.utf16());
+		}
+
+		if(NT_SUCCESS(status)) {
+			if(Mode == eIniUpdate && Setting == "*" && Value.isEmpty())
+				status = m_pIniFile->RemoveSection((WCHAR*)Section.utf16());
+			else if(Mode == eIniAppend || Mode == eIniInsert)
+				status = m_pIniFile->AddValue((WCHAR*)Section.utf16(), (WCHAR*)Setting.utf16(), (WCHAR*)Value.utf16(), Mode == eIniInsert);
+			else if(Mode == eIniDelete)
+				status = m_pIniFile->RemoveValue((WCHAR*)Section.utf16(), (WCHAR*)Setting.utf16(), (WCHAR*)Value.utf16());
+			else
+				status = m_pIniFile->SetValue((WCHAR*)Section.utf16(), (WCHAR*)Setting.utf16(), (WCHAR*)Value.utf16(), Value.length());
+		}
+
+		if(!NT_SUCCESS(status))
+			return SB_ERR(status);
+
+		if (bRefresh) {
+			m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
+			m_pAPI->ReloadConfig();
+		}
+
+		return SB_OK;
+	}
+	return CSbieIni::SbieIniSet(Section, Setting, Value, Mode, bRefresh);
+}
+
+QString CSandBox::SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode, quint32* pType) const
+{
+	return CSbieIni::SbieIniGet(Section, Setting, Index, ErrCode, pType);
+}
+
+QString CSandBox::SbieIniGetEx(const QString& Section, const QString& Setting) const
+{
+	if (!m_IsVirtual && !m_PortablePath.isEmpty())
+	{
+		NTSTATUS status = STATUS_SUCCESS;
+
+		if (!m_pIniFile) {
+			((CSandBox*)this)->m_pIniFile = new CIniFile();
+			status = m_pIniFile->LoadIni((WCHAR*)m_PortablePath.utf16());
+		}
+
+		std::wstring iniData;
+		if (NT_SUCCESS(status)) {
+			status = m_pIniFile->GetValue((WCHAR*)Section.utf16(), (WCHAR*)Setting.utf16(), iniData);
+			if (NT_SUCCESS(status))
+				return QString::fromStdWString(iniData);
+		}
+		return QString();
+	}
+	return CSbieIni::SbieIniGetEx(Section, Setting);
 }

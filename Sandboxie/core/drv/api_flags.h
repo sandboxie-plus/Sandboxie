@@ -27,7 +27,12 @@
 
 //---------------------------------------------------------------------------
 
-
+#define CONF_INDEX_MASK					0x00FFFFFFL
+#define CONF_FLAG_MASK					0xFF000000L
+#define CONF_FLAG_DEBUG					0x08000000L
+//#define CONF_FLAG_					0x04000000L
+//#define CONF_FLAG_					0x02000000L
+#define CONF_GET_PROPERTY				0x01000000L
 #define CONF_JUST_EXPAND				0x80000000L
 #define CONF_GET_NO_GLOBAL				0x40000000L
 #define CONF_GET_NO_EXPAND				0x20000000L

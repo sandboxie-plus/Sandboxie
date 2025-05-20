@@ -290,7 +290,7 @@ SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName, const QString& Pass
 	if (!IsInitialized())
 		return SB_ERR(SB_SnapIsEmpty); // todo
 
-	QString Section = theAPI->SbieIniGetEx(m_Name, "");
+	QString Section = SbieIniGetEx(m_Name, "");
 
 	QVariantMap vParams;
 	if (!Password.isEmpty())
@@ -827,48 +827,59 @@ bool CSandBoxPlus::CheckUnsecureConfig() const
 
 QString CSandBoxPlus::GetStatusStr() const
 {
+	QString StatusStr;
 	if (!m_IsEnabled)
-		return tr("Disabled");
+		StatusStr = tr("Disabled");
+	else if (!m_StatusStr.isEmpty())
+		StatusStr = m_StatusStr;
+	else
+	{
+		QStringList Status;
 
-	if (!m_StatusStr.isEmpty())
-		return m_StatusStr;
+		//if (m_IsEmpty)
+		//	Status.append(tr("Empty"));
 
-	QStringList Status;
+		if (m_bRootAccessOpen)
+			Status.append(tr("OPEN Root Access"));
+		else if (m_bApplicationCompartment)
+			Status.append(tr("Application Compartment"));
+		else if (m_iUnsecureDebugging == 1)
+			Status.append(tr("NOT SECURE"));
+		else if (m_iUnsecureDebugging == 2)
+			Status.append(tr("Reduced Isolation"));
+		else if (m_bSecurityEnhanced)
+			Status.append(tr("Enhanced Isolation"));
 
-	//if (m_IsEmpty)
-	//	Status.append(tr("Empty"));
+		if (m_bPrivacyEnhanced)
+			Status.append(tr("Privacy Enhanced"));
 
-	if (m_bRootAccessOpen)
-		Status.append(tr("OPEN Root Access"));
-	else if (m_bApplicationCompartment)
-		Status.append(tr("Application Compartment"));
-	else if (m_iUnsecureDebugging == 1)
-		Status.append(tr("NOT SECURE"));
-	else if (m_iUnsecureDebugging == 2)
-		Status.append(tr("Reduced Isolation"));
-	else if(m_bSecurityEnhanced)
-		Status.append(tr("Enhanced Isolation"));
-	
-	if(m_bPrivacyEnhanced)
-		Status.append(tr("Privacy Enhanced"));
+		if (m_bINetBlocked) {
+			if (m_bINetExceptions)
+				Status.append(tr("No INet (with Exceptions)"));
+			else
+				Status.append(tr("No INet"));
+		}
+		if (m_bSharesAllowed)
+			Status.append(tr("Net Share"));
+		if (m_bDropRights && !m_bSecurityEnhanced)
+			Status.append(tr("No Admin"));
 
-	if (m_bINetBlocked) {
-		if(m_bINetExceptions)
-			Status.append(tr("No INet (with Exceptions)"));
+		if (m_BoxDel)
+			Status.append(tr("Auto Delete"));
+
+		if (!Status.isEmpty())
+			StatusStr = Status.join(", ");
 		else
-			Status.append(tr("No INet"));
+			StatusStr = tr("Normal");
 	}
-	if (m_bSharesAllowed)
-		Status.append(tr("Net Share"));
-	if (m_bDropRights && !m_bSecurityEnhanced)
-		Status.append(tr("No Admin"));
 
-	if(m_BoxDel)
-		Status.append(tr("Auto Delete"));
+	if(!m_PortablePath.isEmpty())
+		StatusStr += tr(" (Portable)");
 
-	if (Status.isEmpty())
-		return tr("Normal");
-	return Status.join(", ");
+	if(m_IsVirtual)
+		StatusStr += tr(" (Virtual)");
+
+	return StatusStr;
 }
 
 CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const

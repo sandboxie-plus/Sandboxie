@@ -21,6 +21,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - enabled /GS for all components
 - enabled /CETCOMPAT for the driver
 
+### Fixed
+- Taskbar remains visible at the top when entering full screen in Firefox 138+ [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
+
+
 
 
 ## [1.15.12 / 5.70.12] - 2025-05-01

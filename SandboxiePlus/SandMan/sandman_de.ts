@@ -3001,12 +3001,12 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SbiePlusAPI.cpp" line="877"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Portabel)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="880"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Virtuell)</translation>
     </message>
 </context>
 <context>
@@ -3432,7 +3432,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="852"/>
         <source>Edit-ini Menu</source>
-        <translation>Ini bearbeiten Menü</translation>
+        <translation>INI bearbeiten Menü</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="898"/>
@@ -3530,7 +3530,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Einige Kompatibilitätsvorlagen fehlen:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Wahrscheinlich wurden sie gelöscht. Möchten Sie diese aus allen Boxen entfernen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2036"/>
@@ -3547,7 +3547,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
-        <translation>Sandboxie-Plus wurde im tragbaren Modus gestartet, möchten Sie den Sandboxordner in dessen Überverzeichnis legen?
+        <translation>Sandboxie-Plus wurde im portablen Modus gestartet, möchten Sie den Sandboxordner in dessen Überverzeichnis legen?
 Ja wählt: %1
 Nein wählt: %2</translation>
     </message>
@@ -3920,10 +3920,6 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandMan.cpp" line="3567"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Konnte nicht alle benötigten Sandboxiekomponenten starten</translation>
-    </message>
-    <message>
-        <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="vanished">Einige Kompatibilitätsvorlagen (%1) fehlen, möglicherweise wurden sie gelöscht. Möchten Sie diese aus allen Boxen entfernen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1979"/>
@@ -5985,33 +5981,33 @@ Dies ist ein temporäres Patreon-Zertifikat, gültig für 3 Monate. Sobald es si
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2491"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Portable Box INI auswählen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2491"/>
         <location filename="Windows/SettingsWindow.cpp" line="2501"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>INI Dateien (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2501"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue portable Box INI speichern</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2506"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei existiert bereits, bitte wählen Sie einen anderen Dateinamen.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2512"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Boxname</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2533"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Quellordner auswählen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2561"/>
@@ -9674,7 +9670,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1197"/>
         <source>Ini Editor Font</source>
-        <translation>Ini Editor Schriftart</translation>
+        <translation>INI Editor Schriftart</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1229"/>
@@ -9831,13 +9827,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <translation>Grafikoptionen</translation>
     </message>
     <message>
-        <source>Ini Options</source>
-        <translation type="vanished">Ini-Optionen</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1184"/>
         <source>External Ini Editor</source>
-        <translation>Externer Ini-Editor</translation>
+        <translation>Externer INI Editor</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
@@ -10042,7 +10034,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>INI Editor Optionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1839"/>
@@ -10132,10 +10124,6 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <translation>Beschränke den Zugriff auf den Boxquellordner auf den Benutzer, der diese Sandbox erstellt hat</translation>
     </message>
     <message>
-        <source>Sandboxie.ini Presets</source>
-        <translation type="vanished">Sandboxie.ini Vorlagen</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="241"/>
         <source>Always run SandMan UI as Admin</source>
         <translation>SandMan Benutzeroberfläche immer als Admin ausführen</translation>
@@ -10143,47 +10131,47 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2360"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2372"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Entferne Eintrag</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2380"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Importpfad</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2402"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxkonfiguration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle portable Box</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2441"/>
         <source>Import Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Importiere portable Box</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2503"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Der Konfigurationsschutz gilt nur für die Sandboxie.ini. Die Konfiguration der portablen Boxen ist nicht durch die folgenden Mechanismen geschützt.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2513"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>In der folgenden Liste können Sie Pfade zu den Konfigurationsdateien (INIs) der portablen Boxen hinzufügen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2533"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge portable Quelle hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2545"/>

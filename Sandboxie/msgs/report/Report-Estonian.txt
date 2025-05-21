@@ -74,6 +74,22 @@ SBIE1321 Program '%2' was forced into sandbox %3
 %0
 .
 
+1413;evt;pop;wrn;01
+SBIE1413 The box include folder %3 file cannot be opened, error %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 The following message indicates an error %2 in a box include %3
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Portable box name mismatch (ini name must match box section) in a box include %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Portable box name is already in use by an other box, include %3
+.
+
 2111;pop;inf;01
 SBIE2111 Process is not accessible: %3, call %2
 .

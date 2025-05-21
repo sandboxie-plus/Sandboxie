@@ -288,6 +288,22 @@ SBIE1411 Sandbox %2 verweist auf eine unbekannte Vorlage (Template) %3
 SBIE1412 Im Text: %2
 .
 
+1413;evt;pop;wrn;01
+SBIE1413 Die Datei zum Einbinden einer Box %3 kann nicht geöffnet werden, Fehler %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 Die folgende Meldung weist auf einen Fehler %2 beim Einbinden einer Box %3 hin
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Nicht übereinstimmender Name einer portablen Box (ini-Dateiname muss mit der ini-Sektion der Box übereinstimmen), beim Einbinden %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Name einer portablen Box wird bereits von einer anderen Box verwendet, beim Einbinden %3
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #

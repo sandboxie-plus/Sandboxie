@@ -142,6 +142,7 @@ struct _PROCESS {
     BOOLEAN protect_host_images;
     BOOLEAN use_security_mode;
     BOOLEAN is_locked_down;
+    BOOLEAN open_all_nt;
 #ifdef USE_MATCH_PATH_EX
     BOOLEAN restrict_devices;
     BOOLEAN use_rule_specificity;
@@ -237,9 +238,11 @@ void Process_Unload(BOOLEAN FreeLock);
 
 PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql);
 
+#ifdef XP_SUPPORT
 PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql);
+#endif
 
-PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql);
+//PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql);
 
 // Start supervising a new process
 

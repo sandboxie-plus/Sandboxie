@@ -112,6 +112,8 @@ static NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms);
 
+static NTSTATUS Session_Api_MonitorPutEx(PROCESS *proc, ULONG64 *parms);
+
 //static NTSTATUS Session_Api_MonitorGet(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms);
@@ -147,6 +149,7 @@ _FX BOOLEAN Session_Init(void)
     Api_SetFunction(API_MONITOR_CONTROL,        Session_Api_MonitorControl);
     //Api_SetFunction(API_MONITOR_PUT,            Session_Api_MonitorPut);
     Api_SetFunction(API_MONITOR_PUT2,           Session_Api_MonitorPut2);
+    Api_SetFunction(API_MONITOR_PUT_EX,         Session_Api_MonitorPutEx);
     //Api_SetFunction(API_MONITOR_GET,            Session_Api_MonitorGet);
 	Api_SetFunction(API_MONITOR_GET_EX,			Session_Api_MonitorGetEx);
     Api_SetFunction(API_MONITOR_GET2,            Session_Api_MonitorGet2);
@@ -433,12 +436,16 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
 
     in_flag = args->set_flag.val;
     if (in_flag) {
+
+        if (!MyIsCallerSigned())
+            return STATUS_ACCESS_DENIED;
+
         ProbeForRead(in_flag, sizeof(ULONG), sizeof(ULONG));
         ULONG in_flag_value = *in_flag;
         if (in_flag_value) {
 
             if (! Session_CheckAdminAccess2(L"ForceDisableAdminOnly"))
-                    return STATUS_ACCESS_DENIED;
+                return STATUS_ACCESS_DENIED;
             KeQuerySystemTime(&time);
 
         } else
@@ -515,6 +522,9 @@ _FX NTSTATUS Session_Api_ForceChildren(PROCESS *proc, ULONG64 *parms)
 
     if (proc)
         return STATUS_NOT_IMPLEMENTED;
+
+    if (!MyIsCallerSigned())
+        return STATUS_ACCESS_DENIED;
 
     process_id = (HANDLE)parms[1];
 
@@ -963,6 +973,52 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 
     Mem_Free(name, (max_buff + 4) * sizeof(WCHAR));
 
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// Session_Api_MonitorGet
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Session_Api_MonitorPutEx(PROCESS* proc, ULONG64* parms)
+{
+    API_MONITOR_PUT_EX_ARGS* args = (API_MONITOR_PUT_EX_ARGS*)parms;
+    ULONG log_type;
+    WCHAR *log_data;
+    WCHAR *name;
+    NTSTATUS status;
+    ULONG log_len;
+
+    //
+    // caller must not be sandboxed
+    //
+
+    if (proc)
+        return STATUS_ACCESS_DENIED;
+
+    if (! Session_MonitorCount)
+        return STATUS_SUCCESS;
+
+    log_type = args->log_type.val;
+    if (!log_type)
+        return STATUS_INVALID_PARAMETER;
+
+    log_len = args->log_len.val / sizeof(WCHAR);
+    if (!log_len)
+        return STATUS_INVALID_PARAMETER;
+
+    log_data = args->log_ptr.val;
+    ProbeForRead(log_data, log_len * sizeof(WCHAR), sizeof(WCHAR));
+
+    //
+    // if we don't need to check_object_exists we can use a shortcut
+    //
+
+    const WCHAR* strings[3] = { Driver_Empty, log_data, NULL };
+    ULONG lengths[3] = { 0, log_len, 0 };
+    Session_MonitorPutEx(log_type | MONITOR_USER, strings, lengths, (HANDLE)args->log_pid.val, (HANDLE)args->log_tid.val);
     return STATUS_SUCCESS;
 }
 

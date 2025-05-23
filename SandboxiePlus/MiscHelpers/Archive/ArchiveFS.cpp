@@ -9,6 +9,7 @@
 class C7zFileEngineIterator : public QAbstractFileEngineIterator
 {
 public:
+#if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
     C7zFileEngineIterator(QDir::Filters filters, const QStringList& filterNames, 
         const QStringList& allEntries)
         : QAbstractFileEngineIterator(filters, filterNames), entries(allEntries), index(0) {}
@@ -25,7 +26,21 @@ public:
     {
         return index < entries.size();
     }
+#else
+    C7zFileEngineIterator(const QString &path, QDir::Filters filters, const QStringList& filterNames, 
+        const QStringList& allEntries)
+        : QAbstractFileEngineIterator(path, filters, filterNames), entries(allEntries), index(0) {}
+    ~C7zFileEngineIterator() {}
 
+    bool advance() override
+    {
+        if (index >= entries.size())
+            return false;
+        ++index;
+        return true;
+    }
+#endif
+    
     QString currentFileName() const override
     {
         if (index <= 0 || index > entries.size())
@@ -172,7 +187,11 @@ QAbstractFileEngine::Iterator *C7zFileEngine::beginEntryList(QDir::Filters filte
             allEntries.append(Path);
     }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
     return new C7zFileEngineIterator(filters, filterNames, allEntries);
+#else
+    return new C7zFileEngineIterator("", filters, filterNames, allEntries);
+#endif
 }
 
 QAbstractFileEngine::FileFlags C7zFileEngine::fileFlags(FileFlags type) const
@@ -201,11 +220,19 @@ QString C7zFileEngine::fileName(FileName file) const
 	return _filename;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
 QDateTime C7zFileEngine::fileTime(FileTime time) const
+#else
+QDateTime C7zFileEngine::fileTime(QFile::FileTime time) const
+#endif
 {
     switch (time)
     {
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
     case QAbstractFileEngine::ModificationTime:
+#else
+    case QFile::FileModificationTime:
+#endif
     default:
         return _datetime;
         break;
@@ -316,6 +343,7 @@ void C7zFileEngineHandler::Close()
     m_pArchive = NULL;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
 QAbstractFileEngine* C7zFileEngineHandler::create(const QString& filename) const
 {
     if (m_pArchive && filename.startsWith(m_Scheme))
@@ -323,3 +351,12 @@ QAbstractFileEngine* C7zFileEngineHandler::create(const QString& filename) const
 
     return NULL;
 }
+#else
+std::unique_ptr<QAbstractFileEngine> C7zFileEngineHandler::create(const QString& filename) const
+{
+    if (m_pArchive && filename.startsWith(m_Scheme))
+        return std::unique_ptr<QAbstractFileEngine>(new C7zFileEngine(filename, m_pArchive, &m_Mutex));
+
+    return std::unique_ptr<QAbstractFileEngine>();
+}
+#endif

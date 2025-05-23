@@ -16,6 +16,7 @@ void COptionsWindow::CreateAccess()
 	connect(ui.chkPrivacy, SIGNAL(clicked(bool)), this, SLOT(OnAccessChangedEx()));
 	connect(ui.chkUseSpecificity, SIGNAL(clicked(bool)), this, SLOT(OnAccessChangedEx()));
 	connect(ui.chkBlockWMI, SIGNAL(clicked(bool)), this, SLOT(OnAccessChangedEx()));
+	connect(ui.chkHideHostApps, SIGNAL(clicked(bool)), this, SLOT(OnAccessChangedEx()));
 	connect(ui.chkCloseForBox, SIGNAL(clicked(bool)), this, SLOT(OnAccessChangedEx()));
 	connect(ui.chkNoOpenForBox, SIGNAL(clicked(bool)), this, SLOT(OnAccessChangedEx()));
 	//
@@ -163,6 +164,7 @@ void COptionsWindow::LoadAccessList()
 	ui.chkPrivacy->setChecked(m_pBox->GetBool("UsePrivacyMode", false));
 	ui.chkUseSpecificity->setChecked(m_pBox->GetBool("UseRuleSpecificity", false));
 	ui.chkBlockWMI->setChecked(m_BoxTemplates.contains("BlockAccessWMI"));
+	ui.chkHideHostApps->setChecked(m_BoxTemplates.contains("HideInstalledPrograms"));
 	ui.chkCloseForBox->setChecked(m_pBox->GetBool("AlwaysCloseForBoxed", true));
 	ui.chkNoOpenForBox->setChecked(m_pBox->GetBool("DontOpenForBoxed", true));
 
@@ -378,6 +380,10 @@ void COptionsWindow::OnBrowseFolder()
 	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
+
+	// Add a trailing backslash if it does not exist
+	if (!Value.endsWith("\\"))
+		Value.append("\\");
 
 	AddAccessEntry(eFile, eOpen, "", Value);
 
@@ -698,6 +704,7 @@ void COptionsWindow::SaveAccessList()
 	WriteAdvancedCheck(ui.chkPrivacy, "UsePrivacyMode", "y", "");
 	WriteAdvancedCheck(ui.chkUseSpecificity, "UseRuleSpecificity", "y", "");
 	SetTemplate("BlockAccessWMI", ui.chkBlockWMI->isChecked());
+	SetTemplate("HideInstalledPrograms", ui.chkHideHostApps->isChecked());
 	WriteAdvancedCheck(ui.chkCloseForBox, "AlwaysCloseForBoxed", "", "n");
 	WriteAdvancedCheck(ui.chkNoOpenForBox, "DontOpenForBoxed", "", "n");
 

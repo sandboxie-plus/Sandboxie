@@ -5,6 +5,7 @@
 #include "../SbiePlusAPI.h"
 #include "../Views/SbieView.h"
 #include "../MiscHelpers/Common/Finder.h"
+#include "../Helpers/WinHelper.h"
 
 #if defined(Q_OS_WIN)
 #include <wtypes.h>
@@ -31,15 +32,20 @@ CBoxPicker::CBoxPicker(QString DefaultBox, QWidget* parent)
 	if(DefaultBox.isEmpty() && theAPI->IsConnected())
 		DefaultBox = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 
-	LoadBoxed("", DefaultBox);
+	LoadBoxed(QRegularExpression(), DefaultBox);
 }
 
-void CBoxPicker::SetFilter(const QString& Exp, int iOptions, int Column)
+void CBoxPicker::EnableMultiSel(bool bEnable)
+{
+	m_pTreeBoxes->setSelectionMode(bEnable ? QAbstractItemView::ExtendedSelection : QAbstractItemView::SingleSelection);
+}
+
+void CBoxPicker::SetFilter(const QRegularExpression& Exp, int iOptions, int Column)
 {
 	LoadBoxed(Exp);
 }
 
-void CBoxPicker::LoadBoxed(const QString& Filter, const QString& SelectBox)
+void CBoxPicker::LoadBoxed(const QRegularExpression& Filter, const QString& SelectBox)
 {
 	m_pTreeBoxes->clear();
 
@@ -63,21 +69,25 @@ void CBoxPicker::LoadBoxed(const QString& Filter, const QString& SelectBox)
 		if (!pBox->IsEnabled() || !pBox->GetBool("ShowForRunIn", true))
 			continue;
 
-		if (!Filter.isEmpty() && !pBox->GetName().contains(Filter, Qt::CaseInsensitive))
+		if (Filter.isValid() && !Filter.match(pBox->GetName()).hasMatch())
 			continue;
 
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
 		QTreeWidgetItem* pParent = GetBoxParent(Groups, GroupItems, m_pTreeBoxes, pBox->GetName());
-		
+
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		pItem->setText(0, pBox->GetName().replace("_", " "));
+		pItem->setText(0, pBoxEx->GetDisplayName());
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
 		QIcon Icon;
-		QString Action = pBox->GetText("DblClickAction");
-		if (!Action.isEmpty() && Action.left(1) != "!")
-			Icon = IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
-		else if(ColorIcons)
+		QString BoxIcon = pBox->GetText("BoxIcon");
+		if (!BoxIcon.isEmpty()) {
+			StrPair PathIndex = Split2(BoxIcon, ",");
+			if (!PathIndex.second.isEmpty() && !PathIndex.second.contains("."))
+				Icon = QIcon(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt()));
+			else
+				Icon = QIcon(QPixmap(BoxIcon));
+		} else if(ColorIcons)
 			Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
 		else
 			Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
@@ -99,6 +109,14 @@ QString CBoxPicker::GetBoxName() const
 	auto pItem = m_pTreeBoxes->currentItem();
 	if (!pItem) return QString();
 	return pItem->data(0, Qt::UserRole).toString();
+}
+
+QStringList CBoxPicker::GetBoxNames() const
+{
+	QStringList BoxNames;
+	foreach(auto pItem, m_pTreeBoxes->selectedItems())
+		BoxNames.append(pItem->data(0, Qt::UserRole).toString());
+	return BoxNames;
 }
 
 QTreeWidgetItem* CBoxPicker::GetBoxParent(const QMap<QString, QStringList>& Groups, QMap<QString, QTreeWidgetItem*>& GroupItems, QTreeWidget* treeBoxes, const QString& Name, int Depth)
@@ -192,6 +210,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	connect(ui.buttonBox, SIGNAL(rejected()), SLOT(reject()));
 
 	m_pBoxPicker = new CBoxPicker(BoxName);
+	m_pBoxPicker->EnableMultiSel(true);
 	connect(m_pBoxPicker, SIGNAL(BoxDblClick()), this, SLOT(OnRun()));
 	ui.treeBoxes->parentWidget()->layout()->replaceWidget(ui.treeBoxes, m_pBoxPicker);
 	delete ui.treeBoxes;
@@ -225,7 +244,7 @@ void CSelectBoxWindow::OnBoxType()
 
 void CSelectBoxWindow::OnRun()
 {
-	QString BoxName;
+	QStringList BoxNames;
 	int Flags = CSbieAPI::eStartDefault;
 	if (ui.chkAdmin->isChecked())
 		Flags |= CSbieAPI::eStartElevated;
@@ -233,28 +252,33 @@ void CSelectBoxWindow::OnRun()
 	{
 		if (QMessageBox("Sandboxie-Plus", tr("Are you sure you want to run the program outside the sandbox?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
+
+		BoxNames.append("");
 	}
 	if (ui.radBoxedNew->isChecked())
 	{
-		BoxName = theGUI->GetBoxView()->AddNewBox(true);
+		QString BoxName = theGUI->GetBoxView()->AddNewBox(true);
 		if (BoxName.isEmpty()) {
 			close();
 			return;
 		}
+		BoxNames.append(BoxName);
 	}
 	else if (!ui.radUnBoxed->isChecked() || ui.chkFCP->isChecked())
 	{
 		if (ui.chkFCP->isChecked())
 			Flags |= CSbieAPI::eStartFCP;
-		BoxName = m_pBoxPicker->GetBoxName();
-		if (BoxName.isEmpty()) {
+		BoxNames = m_pBoxPicker->GetBoxNames();
+		if (BoxNames.isEmpty()) {
 			QMessageBox("Sandboxie-Plus", tr("Please select a sandbox."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
 			return;
 		}
 	}
 
-	foreach(const QString& Command, m_Commands)
-		theGUI->RunStart(BoxName, Command, (CSbieAPI::EStartFlags)Flags, m_WrkDir);
+	foreach(const QString & BoxName, BoxNames) {
+		foreach(const QString & Command, m_Commands)
+			theGUI->RunStart(BoxName, Command, (CSbieAPI::EStartFlags)Flags, m_WrkDir);
+	}
 
 	setResult(1);
 	close();

@@ -62,12 +62,12 @@ protected:
 
     bool SetUserSettingsSectionName(HANDLE hToken);
 
+    static bool SetUserSettingsSectionName(HANDLE hToken, WCHAR* m_username, WCHAR* m_sectionname);
+
     bool UserCanEdit(HANDLE hToken);
 
 #ifdef NEW_INI_MODE
     ULONG CacheConfig();
-
-    struct SIniSection* GetIniSection(const WCHAR* section, bool bCanAdd);
 
     MSG_HEADER *GetSetting(MSG_HEADER *msg);
 #endif
@@ -92,8 +92,7 @@ protected:
 
     ULONG RefreshConf();
 
-    bool GetIniPath(WCHAR **IniPath,
-                    BOOLEAN *IsHomePath = NULL, BOOLEAN* IsUTF8 = NULL);
+    bool GetIniPath(WCHAR **IniPath, BOOLEAN *IsHomePath = NULL);
 
     ULONG IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, const WCHAR *Section = NULL);
 
@@ -105,8 +104,15 @@ protected:
 
     MSG_HEADER *RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
+    MSG_HEADER *SetDatFile(MSG_HEADER *msg, HANDLE idProcess);
+	
+    //MSG_HEADER *GetDatFile(MSG_HEADER *msg, HANDLE idProcess);
+
     MSG_HEADER *RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
+public:
+
+    static NTSTATUS RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const WCHAR* CtrlCmd = NULL, size_t CtrlCmdLen = 0);
 
 protected:
 
@@ -115,14 +121,13 @@ protected:
     WCHAR m_username[256];
     WCHAR m_sectionname[128];
 #ifdef NEW_INI_MODE
-    struct SConfigIni* m_pConfigIni;
+    class CIniFile* m_pSbieIni;
 #else
     WCHAR *m_text, *m_text_base;
     ULONG m_text_max_len;
     WCHAR m_line[1500];
     //BOOLEAN m_insertbom;
 #endif
-    BOOLEAN m_admin;
     HANDLE m_hLockFile;
     ULONG m_session_id;
 

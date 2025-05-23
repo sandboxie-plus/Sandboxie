@@ -97,7 +97,7 @@ public:
 		virtual bool IsBlob() const {return true;}
 	};
 
-	CSettings(const QString& AppDir, const QString& AppName, QMap<QString, SSetting> DefaultValues = QMap<QString, SSetting>(), QObject* qObject = NULL);
+	CSettings(const QString& AppDir, const QString& AppName, const QString& GroupName = QString(), QMap<QString, SSetting> DefaultValues = QMap<QString, SSetting>(), QObject* qObject = NULL);
 	virtual ~CSettings();
 
 	void				DelValue(const QString& key);
@@ -128,19 +128,19 @@ public:
 	IMPL_CFG_CACHE_GET(quint64, UInt64, ULongLong);
 #undef IMPL_CFG_CACHE_GET
 
-	const QString		GetString(const QString& key, const QVariant& preset = QVariant())		{return GetValue(key, preset).toString();}
-	const QStringList	GetStringList(const QString& key, const QVariant& preset = QVariant())	{return GetValue(key, preset).toStringList();}
+	QString				GetString(const QString& key, const QVariant& preset = QVariant())		{return GetValue(key, preset).toString();}
+	QStringList			GetStringList(const QString& key, const QVariant& preset = QVariant())	{return GetValue(key, preset).toStringList();}
 
-	const QStringList 	ListSettings()												{QMutexLocker Locker(&m_Mutex); return m_pConf->allKeys();}
-	const QStringList 	ListGroupes()												{QMutexLocker Locker(&m_Mutex); return m_pConf->childGroups();}
-	const QStringList 	ListKeys(const QString& Root);
+	QStringList 		ListSettings()												{QMutexLocker Locker(&m_Mutex); return m_pConf->allKeys();}
+	QStringList 		ListGroupes()												{QMutexLocker Locker(&m_Mutex); return m_pConf->childGroups();}
+	QStringList 		ListKeys(const QString& Root);
 
-	const QString		GetConfigDir()												{QMutexLocker Locker(&m_Mutex); return m_ConfigDir;}
-	const bool			IsPortable()												{QMutexLocker Locker(&m_Mutex); return m_bPortable;}
+	QString				GetConfigDir()												{QMutexLocker Locker(&m_Mutex); return m_ConfigDir;}
+	bool				IsPortable()												{QMutexLocker Locker(&m_Mutex); return m_bPortable;}
 
-	const bool			IsWritable()												{QMutexLocker Locker(&m_Mutex); return m_pConf->isWritable();}
+	bool				IsWritable()												{QMutexLocker Locker(&m_Mutex); return m_pConf->isWritable();}
 
-	const void			Sync()														{QMutexLocker Locker(&m_Mutex); m_ValueCache.clear(); m_pConf->sync();}
+	void				Sync()														{QMutexLocker Locker(&m_Mutex); m_ValueCache.clear(); m_pConf->sync();}
 
 protected:
 	QMutex				m_Mutex;

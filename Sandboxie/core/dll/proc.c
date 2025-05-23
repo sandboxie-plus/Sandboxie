@@ -903,16 +903,6 @@ _FX BOOL Proc_CreateProcessInternalW(
             }
         }
 
-        //
-        // hack:  recent versions of Flash Player use the Chrome sandbox
-        // architecture which conflicts with our restricted process model
-        //
-
-        if (//Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
-            Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
-            Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
-            hToken = NULL;
-
         if (Config_GetSettingsForImageName_bool(L"DeprecatedTokenHacks", FALSE)) // with drop container token, etc this should be obsolete
         {
             //
@@ -935,6 +925,17 @@ _FX BOOL Proc_CreateProcessInternalW(
             && wcsstr(lpCommandLine, L"-sandboxingKind"))
             hToken = NULL;
     }
+
+    //
+    // hack:  recent versions of Flash Player use the Chrome sandbox
+    // architecture which conflicts with our restricted process model
+    //
+
+    if (Config_GetSettingsForImageName_bool(L"DropChildProcessToken", FALSE) ||
+        //Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
+        Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
+        Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
+        hToken = NULL;
 
     //
     // use a copy path for the current directory
@@ -1327,7 +1328,7 @@ _FX BOOL Proc_CreateProcessInternalW(
             if (*arg1 == L'"') temp = wcschr(arg1 + 1, L'"');
             if (!arg1_end) arg1_end = wcschr(arg1, L'\0');
 
-            if (arg1 && arg1 != arg1_end && SH32_BreakoutDocument(arg1, (ULONG)(arg1_end - arg1)))
+            if (arg1 != arg1_end && SH32_BreakoutDocument(arg1, (ULONG)(arg1_end - arg1)))
                 return TRUE;
         }
     }
@@ -1360,7 +1361,8 @@ _FX BOOL Proc_CreateProcessInternalW(
 		    lpProcessAttributes = NULL;
         }
 
-        TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", FALSE));
+        TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0));
+        //TlsData->proc_create_process_fake_admin = (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0;
 
         ok = __sys_CreateProcessInternalW(
             hToken, lpApplicationName, lpCommandLine,
@@ -1439,7 +1441,8 @@ _FX BOOL Proc_CreateProcessInternalW(
         }
     }
 
-    TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", FALSE));
+    TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0));
+    //TlsData->proc_create_process_fake_admin = (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0;
 
     ok = __sys_CreateProcessInternalW(
         NULL, lpApplicationName, lpCommandLine,

@@ -7,15 +7,6 @@ QString QTreeViewEx::m_ResetColumns = "Reset Columns";
 
 bool CTreeItemModel::m_DarkMode = false;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-bool operator < (const QVariant& l, const QVariant& r)
-{
-	auto ret = QVariant::compare(l, r);
-	Q_ASSERT(ret != QPartialOrdering::Unordered);
-	return ret == QPartialOrdering::Less;
-}
-#endif
-
 CTreeItemModel::CTreeItemModel(QObject *parent)
 : QAbstractItemModelEx(parent)
 {
@@ -311,7 +302,7 @@ QModelIndex CTreeItemModel::FindIndex(const QVariant& ID)
 	return QModelIndex();
 }
 
-QModelIndex CTreeItemModel::Find(STreeNode* pParent, STreeNode* pNode)
+QModelIndex CTreeItemModel::Find(STreeNode* pParent, STreeNode* pNode) const
 {
 	// ''find''
 	ASSERT(pNode->Parent->Children[pNode->Row] == pNode);

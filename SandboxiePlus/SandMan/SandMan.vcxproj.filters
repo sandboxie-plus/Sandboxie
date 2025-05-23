@@ -240,6 +240,9 @@
     <ClCompile Include="Helpers\TabOrder.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\IniHighlighter.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -397,6 +400,9 @@
     <QtMoc Include="Windows\ExtractDialog.h">
       <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Helpers\IniHighlighter.h">
+      <Filter>Helpers</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -447,6 +453,9 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
+    <None Include="sandman_ar.ts">
+      <Filter>Translation Files</Filter>
+    </None>
     <None Include="sandman_de.ts">
       <Filter>Translation Files</Filter>
     </None>

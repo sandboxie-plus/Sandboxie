@@ -470,7 +470,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 		// Create a minimalistic driverless data
 		//
 
-		*syscall_data = sizeof(ULONG) + sizeof(ULONG); // + 248; // total_size 4, extra_data_offset 4, work area sizeof(INJECT_DATA)
+		*syscall_data = sizeof(ULONG) + sizeof(ULONG) + (NATIVE_FUNCTION_SIZE * NATIVE_FUNCTION_COUNT); // + 248; // total_size 4, extra_data_offset 4, work area sizeof(INJECT_DATA)
 
 		const char* NtdllExports[] = NATIVE_FUNCTION_NAMES;
 		for (ULONG i = 0; i < NATIVE_FUNCTION_COUNT; ++i) {
@@ -482,7 +482,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	}
 
 	/*
-	struct SYS_CALL_DATA {
+	struct SYSCALL_DATA {
 		ULONG size_of_buffer;
 		ULONG offset_to_extra_data;
 
@@ -604,7 +604,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 
 	wcscpy(ptr, L"kernel32.dll");
 
-	len = wcslen(ptr);
+	len = (ULONG)wcslen(ptr);
 	extra->KernelDll_offset = ULONG_DIFF(ptr, extra);
 	extra->KernelDll_length = len * sizeof(WCHAR);
 	ptr += len + 1;
@@ -957,14 +957,13 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	}
 
 #ifdef _WIN64 
-	void *remote_addr32 = NULL;
 	if (lowdata.flags.is_wow64) {
 
 		//
 		// when this is a 32 bit process running under WoW64, we need to inject also some 32 bit code
 		//
 
-		remote_addr32 = SbieDll_InjectLow_CopyCode(hProcess, m_sbielow32_len, m_sbielow32_len, m_sbielow32_ptr
+		void* remote_addr32 = SbieDll_InjectLow_CopyCode(hProcess, m_sbielow32_len, m_sbielow32_len, m_sbielow32_ptr
 #ifdef _M_ARM64
 			, FALSE
 #endif
@@ -1295,7 +1294,11 @@ _FX BOOLEAN SbieDll_InjectLow_BuildTramp(
 	// distance between ntdll and SbieLow, i.e. on 64-bit Windows 8
 	//
 
-	ULONG code_len = (long_diff ? 7 : 5);
+#ifdef _WIN64
+	ULONG code_len = (long_diff ? 7 : ((Dll_Windows >= 10) ? 6 : 5));
+#else
+	ULONG code_len = 5;
+#endif
 
 	ULONG offset = 0;
 	while (offset < code_len) {

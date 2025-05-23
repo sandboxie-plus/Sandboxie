@@ -41,7 +41,7 @@ namespace ReadDirectoryChangesPrivate
 ///////////////////////////////////////////////////////////////////////////
 // CReadChangesRequest
 
-CReadChangesRequest::CReadChangesRequest(CReadChangesServer* pServer, LPCTSTR sz, BOOL b, DWORD dw, DWORD size)
+CReadChangesRequest::CReadChangesRequest(CReadChangesServer* pServer, LPCWSTR sz, BOOL b, DWORD dw, DWORD size)
 {
 	m_pServer		= pServer;
 	m_dwFilterFlags		= dw;

@@ -251,6 +251,8 @@ _FX PATTERN *Pattern_Create(
 
     pat->level = level;
 
+    pat->aux = NULL;
+
     pat->info.v = 0;
     pat->info.num_cons = (USHORT)num_cons;
 

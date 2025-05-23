@@ -70,7 +70,7 @@ int GetServiceStatus(const wchar_t* name)
 	if (!scm)
 		return -1;
 
-	SC_HANDLE service = OpenService(scm, name, SERVICE_QUERY_STATUS);
+	SC_HANDLE service = OpenServiceW(scm, name, SERVICE_QUERY_STATUS);
 	if (!service) {
 		CloseServiceHandle(scm);
 		return 0;
@@ -211,9 +211,9 @@ SB_RESULT(void*) CSbieUtils::ElevateOps(const QStringList& Ops)
 	std::wstring path = QCoreApplication::applicationFilePath().toStdWString();
 	std::wstring params = L"-assist \"" + Ops.join("\" \"").toStdWString() + L"\"";
 
-	SHELLEXECUTEINFO shex;
-	memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
-	shex.cbSize = sizeof(SHELLEXECUTEINFO);
+	SHELLEXECUTEINFOW shex;
+	memset(&shex, 0, sizeof(shex));
+	shex.cbSize = sizeof(shex);
 	shex.fMask = SEE_MASK_FLAG_NO_UI | SEE_MASK_NOCLOSEPROCESS;
 	shex.hwnd = NULL;
 	shex.lpFile = path.c_str();
@@ -221,7 +221,7 @@ SB_RESULT(void*) CSbieUtils::ElevateOps(const QStringList& Ops)
 	shex.nShow = SW_SHOWNORMAL;
 	shex.lpVerb = L"runas";
 
-	if (!ShellExecuteEx(&shex))
+	if (!ShellExecuteExW(&shex))
 		return SB_ERR(SB_NeedAdmin);
 	return CSbieResult<void*>(OP_ASYNC, shex.hProcess);
 }
@@ -384,14 +384,14 @@ QString CSbieUtils::GetContextMenuStartCmd()
 {
 	const wchar_t* key = L"Software\\Classes\\*\\shell\\sandbox\\command";
 	HKEY hkey;
-	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
+	LONG rc = RegOpenKeyExW(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
 	if (rc != 0)
 		return QString();
 
 	ULONG type;
 	WCHAR path[512];
 	ULONG path_len = sizeof(path) - sizeof(WCHAR) * 4;
-	rc = RegQueryValueEx(hkey, NULL, NULL, &type, (BYTE *)path, &path_len);
+	rc = RegQueryValueExW(hkey, NULL, NULL, &type, (BYTE *)path, &path_len);
 	RegCloseKey(hkey);
 	if (rc != 0)
 		return QString();
@@ -409,12 +409,12 @@ void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr,
 	std::wstring explorer_path(512, L'\0');
 
 	HKEY hkeyWinlogon;
-	LONG rc = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"software\\microsoft\\windows nt\\currentversion\\winlogon", 0, KEY_READ, &hkeyWinlogon);
+	LONG rc = RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"software\\microsoft\\windows nt\\currentversion\\winlogon", 0, KEY_READ, &hkeyWinlogon);
 	if (rc == 0)
 	{
 		ULONG path_len = explorer_path.size() * sizeof(WCHAR);
 		ULONG type;
-		rc = RegQueryValueEx(hkeyWinlogon, L"Shell", NULL, &type, (BYTE *)explorer_path.c_str(), &path_len);
+		rc = RegQueryValueExW(hkeyWinlogon, L"Shell", NULL, &type, (BYTE *)explorer_path.c_str(), &path_len);
 		if (rc == 0 && (type == REG_SZ || type == REG_EXPAND_SZ))
 			explorer_path.resize(path_len / sizeof(WCHAR));
 		RegCloseKey(hkeyWinlogon);
@@ -423,7 +423,7 @@ void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr,
 	// get default explorer path
 	if (*explorer_path.c_str() == L'\0' || _wcsicmp(explorer_path.c_str(), L"explorer.exe") == 0)
 	{
-		GetWindowsDirectory((wchar_t*)explorer_path.c_str(), MAX_PATH);
+		GetWindowsDirectoryW((wchar_t*)explorer_path.c_str(), MAX_PATH);
 		ULONG path_len = wcslen(explorer_path.c_str());
 		explorer_path.resize(path_len);
 		explorer_path.append(L"\\explorer.exe");
@@ -435,22 +435,22 @@ void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr,
 void CSbieUtils::CreateShellEntry(const std::wstring& classname, const std::wstring& key, const std::wstring& cmdtext, const std::wstring& iconpath, const std::wstring& startcmd)
 {
 	HKEY hkey;
-	LONG rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\" + key).c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
+	LONG rc = RegCreateKeyExW(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\" + key).c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
 	if (rc != 0)
 		return;
 
-	RegSetValueEx(hkey, NULL, 0, REG_SZ, (BYTE *)cmdtext.c_str(), (cmdtext.length() + 1) * sizeof(WCHAR));
-	RegSetValueEx(hkey, L"Icon", 0, REG_SZ, (BYTE *)iconpath.c_str(), (iconpath.length() + 1) * sizeof(WCHAR));
+	RegSetValueExW(hkey, NULL, 0, REG_SZ, (BYTE *)cmdtext.c_str(), (cmdtext.length() + 1) * sizeof(WCHAR));
+	RegSetValueExW(hkey, L"Icon", 0, REG_SZ, (BYTE *)iconpath.c_str(), (iconpath.length() + 1) * sizeof(WCHAR));
 
 	RegCloseKey(hkey);
 	if (rc != 0)
 		return;
 
-	rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\"  + key + L"\\command").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
+	rc = RegCreateKeyExW(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\"  + key + L"\\command").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
 	if (rc != 0)
 		return;
 
-	RegSetValueEx(hkey, NULL, 0, REG_SZ, (BYTE *)startcmd.c_str(), (startcmd.length() + 1) * sizeof(WCHAR));
+	RegSetValueExW(hkey, NULL, 0, REG_SZ, (BYTE *)startcmd.c_str(), (startcmd.length() + 1) * sizeof(WCHAR));
 
 	RegCloseKey(hkey);
 }
@@ -465,7 +465,7 @@ bool CSbieUtils::HasContextMenu2()
 {
 	const wchar_t* key = L"Software\\Classes\\*\\shell\\unbox\\command";
 	HKEY hkey;
-	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
+	LONG rc = RegOpenKeyExW(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
 	if (rc != 0)
 		return false;
 
@@ -492,7 +492,7 @@ bool CSbieUtils::HasContextMenu3()
 	const wchar_t* key = L"Software\\Classes\\*\\shell\\addforce\\command";
 	//const wchar_t* key2 = L"Software\\Classes\\*\\Folder\\addforce\\command";
 	HKEY hkey,hKey2;
-	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
+	LONG rc = RegOpenKeyExW(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
 	if (rc != 0)
 		return false;
 
@@ -529,7 +529,7 @@ bool CSbieUtils::HasContextMenu4()
 	const wchar_t* key = L"Software\\Classes\\*\\shell\\addopen\\command";
 	//const wchar_t* key2 = L"Software\\Classes\\*\\Folder\\addforce\\command";
 	HKEY hkey, hKey2;
-	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
+	LONG rc = RegOpenKeyExW(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
 	if (rc != 0)
 		return false;
 
@@ -583,8 +583,8 @@ bool CSbieUtils::CreateShortcut(const QString& StartExe, QString LinkPath, const
 	if (FAILED(hr))
 		return false;
 
-	IShellLink *pShellLink;
-	hr = pUnknown->QueryInterface(IID_IShellLink, (void **)&pShellLink);
+	IShellLinkW *pShellLink;
+	hr = pUnknown->QueryInterface(IID_IShellLinkW, (void **)&pShellLink);
 	if (SUCCEEDED(hr)) 
 	{			
 		pShellLink->SetPath(StartExe.toStdWString().c_str());
@@ -620,8 +620,8 @@ bool CSbieUtils::CreateShortcut(const QString& StartExe, QString LinkPath, const
 bool CSbieUtils::GetStartMenuShortcut(CSbieAPI* pApi, QString &BoxName, QString &LinkPath, QString &IconPath, quint32& IconIndex, QString &WorkDir)
 {
 	WCHAR MapName[128];
-	wsprintf(MapName, SANDBOXIE L"_StartMenu_WorkArea_%08X_%08X", GetCurrentProcessId(), GetTickCount());
-	HANDLE hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 8192, MapName);
+	wsprintfW(MapName, SANDBOXIE L"_StartMenu_WorkArea_%08X_%08X", GetCurrentProcessId(), GetTickCount());
+	HANDLE hMapping = CreateFileMappingW(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 8192, MapName);
 	if (!hMapping)
 		return false;
 
@@ -710,13 +710,13 @@ BOOLEAN SelectFavoriteInRegedit(HWND RegeditWindow, std::wstring FavoriteName)
 
     for (i = 3; i < count; i++) {
 
-        MENUITEMINFO info = { sizeof(MENUITEMINFO) };
+        MENUITEMINFOW info = { sizeof(MENUITEMINFO) };
         WCHAR buffer[MAX_PATH];
 
         info.fMask = MIIM_ID | MIIM_STRING;
         info.dwTypeData = buffer;
         info.cch = RTL_NUMBER_OF(buffer);
-        GetMenuItemInfo(favoritesMenu, i, TRUE, &info);
+        GetMenuItemInfoW(favoritesMenu, i, TRUE, &info);
 
         if (info.cch > 0 && _wcsicmp(FavoriteName.c_str(),buffer) == 0) {
             id = info.wID;
@@ -737,13 +737,13 @@ bool ShellOpenRegKey(const QString& KeyName)
 {
 	std::wstring keyName = KeyName.toStdWString();
 
-    HWND regeditWindow = FindWindow(L"RegEdit_RegEdit", NULL);
+    HWND regeditWindow = FindWindowW(L"RegEdit_RegEdit", NULL);
 
     if (!regeditWindow)
     {
-		RegSetKeyValue(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit", L"LastKey", REG_SZ, keyName.c_str(), (keyName.size() + 1) * sizeof(WCHAR));
+		RegSetKeyValueW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit", L"LastKey", REG_SZ, keyName.c_str(), (keyName.size() + 1) * sizeof(WCHAR));
 
-		SHELLEXECUTEINFO sei = { sizeof(sei) };
+		SHELLEXECUTEINFOW sei = { sizeof(sei) };
 		sei.fMask = 0;
 		sei.lpVerb = NULL;
 		sei.lpFile = L"regedit.exe";
@@ -751,7 +751,7 @@ bool ShellOpenRegKey(const QString& KeyName)
 		sei.hwnd = NULL;
 		sei.nShow = SW_NORMAL;
 	
-		ShellExecuteEx(&sei);
+		ShellExecuteExW(&sei);
 
         return TRUE;
     }
@@ -761,13 +761,13 @@ bool ShellOpenRegKey(const QString& KeyName)
 	QString FavoriteName = "A_Sandbox_" + QString::number((quint32)rand(), 16);
 	std::wstring favoriteName = FavoriteName.toStdWString();
 
-	RegSetKeyValue(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit\\Favorites", favoriteName.c_str(), REG_SZ, keyName.c_str(), (keyName.size() + 1) * sizeof(WCHAR));
+	RegSetKeyValueW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit\\Favorites", favoriteName.c_str(), REG_SZ, keyName.c_str(), (keyName.size() + 1) * sizeof(WCHAR));
 
     BOOLEAN result = SelectFavoriteInRegedit(regeditWindow, favoriteName);
 
 	HKEY key;
-	RegOpenKey(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit\\Favorites", &key);
-	RegDeleteValue(key, favoriteName.c_str());
+	RegOpenKeyW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit\\Favorites", &key);
+	RegDeleteValueW(key, favoriteName.c_str());
 	RegCloseKey(key);
 
     return result;

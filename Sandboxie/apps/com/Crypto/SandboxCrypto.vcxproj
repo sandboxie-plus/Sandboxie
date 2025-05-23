@@ -111,6 +111,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -121,6 +122,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -132,6 +134,7 @@
       <Optimization>Disabled</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -145,6 +148,7 @@
     </Link>
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
@@ -155,6 +159,7 @@
     </Link>
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">
@@ -165,6 +170,7 @@
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

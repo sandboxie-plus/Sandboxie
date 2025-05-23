@@ -20,6 +20,8 @@ MISCHELPERS_EXPORT typedef QPair<QString,QString> StrPair;
 MISCHELPERS_EXPORT StrPair Split2(const QString& String, QString Separator = "=", bool Back = false);
 MISCHELPERS_EXPORT QStringList SplitStr(const QString& String, QString Separator);
 
+MISCHELPERS_EXPORT bool PathStartsWith(const QString& Path, const QString& Start);
+
 typedef MISCHELPERS_EXPORT QMultiMap<QString,QString> TArguments;
 TArguments MISCHELPERS_EXPORT GetArguments(const QString& Arguments, QChar Separator = L';', QChar Assigner = L'=', QString* First = NULL, bool bLowerKeys = false, bool bReadEsc = false);
 
@@ -111,10 +113,6 @@ MISCHELPERS_EXPORT QAction* MakeAction(QMenu* pParent, const QString& Text, cons
 MISCHELPERS_EXPORT QAction* MakeAction(QActionGroup* pGroup, QMenu* pParent, const QString& Text, const QVariant& Data);
 MISCHELPERS_EXPORT void SetPaleteTexture(QPalette& palette, QPalette::ColorRole role, const QImage& image);
 
-#ifdef WIN32
-MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
-#endif
-
 //MISCHELPERS_EXPORT void SafeShow(QWidget* pWidget);
 
 template <typename T>
@@ -122,3 +120,12 @@ QSet<T> ListToSet(const QList<T>& qList) { return QSet<T>(qList.begin(), qList.e
 
 template <typename T>
 QList<T> SetToList(const QSet<T>& qSet) { return QList<T>(qSet.begin(), qSet.end()); }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+bool MISCHELPERS_EXPORT operator < (const QVariant& l, const QVariant& r);
+#endif
+
+
+#ifdef WIN32
+MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
+#endif

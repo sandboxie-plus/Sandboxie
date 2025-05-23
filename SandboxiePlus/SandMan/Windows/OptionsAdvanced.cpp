@@ -44,6 +44,13 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
 	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+#ifdef INSIDER_BUILD
+	connect(ui.chkSbieDesktop, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+#else
+	ui.chkSbieDesktop->setVisible(false);
+#endif
+	connect(ui.chkOpenWndStation, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkOpenDevCMApi, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenSamEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -92,6 +99,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNetFwTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDnsTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkApiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkHookTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -187,6 +195,11 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkNoSecurityIsolation->setChecked(m_pBox->GetBool("NoSecurityIsolation", false));
 	ui.chkNoSecurityFiltering->setChecked(m_pBox->GetBool("NoSecurityFiltering", false));
 
+#ifdef INSIDER_BUILD
+	ui.chkSbieDesktop->setChecked(m_pBox->GetBool("UseSandboxDesktop", false));
+#endif
+	ui.chkOpenWndStation->setChecked(m_pBox->GetBool("OpenWndStation", false));
+
 	ui.chkOpenDevCMApi->setChecked(m_pBox->GetBool("OpenDevCMApi", false));
 	//ui.chkOpenLsaSSPI->setChecked(!m_pBox->GetBool("BlockPassword", true)); // OpenLsaSSPI
 	ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
@@ -262,7 +275,8 @@ void COptionsWindow::LoadAdvanced()
 	ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
 	ReadAdvancedCheck("NetFwTrace", ui.chkNetFwTrace, "*");
 	ui.chkDnsTrace->setChecked(m_pBox->GetBool("DnsTrace", false));
-	ui.chkHookTrace->setChecked(m_pBox->GetBool("ApiTrace", false));
+	ui.chkApiTrace->setChecked(m_pBox->GetBool("ApiTrace", false));
+	ui.chkHookTrace->setChecked(m_pBox->GetBool("HookTrace", false));
 	ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 	ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
 
@@ -442,6 +456,11 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkNoSecurityIsolation, "NoSecurityIsolation", "y", "");
 	WriteAdvancedCheck(ui.chkNoSecurityFiltering, "NoSecurityFiltering", "y", "");
 
+#ifdef INSIDER_BUILD
+	WriteAdvancedCheck(ui.chkSbieDesktop, "UseSandboxDesktop", "y", "");
+#endif
+	WriteAdvancedCheck(ui.chkOpenWndStation, "OpenWndStation", "y", "");
+
 	WriteAdvancedCheck(ui.chkOpenDevCMApi, "OpenDevCMApi", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "n", ""); // OpenLsaSSPI
 	WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "y", "");
@@ -521,7 +540,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
 	WriteAdvancedCheck(ui.chkNetFwTrace, "NetFwTrace", "*");
 	WriteAdvancedCheck(ui.chkDnsTrace, "DnsTrace", "y");
-	WriteAdvancedCheck(ui.chkHookTrace, "ApiTrace", "y");
+	WriteAdvancedCheck(ui.chkApiTrace, "ApiTrace", "y");
+	WriteAdvancedCheck(ui.chkHookTrace, "HookTrace", "y");
 	WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 	WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
 
@@ -785,9 +805,9 @@ void COptionsWindow::OnOpenCOM()
 void COptionsWindow::OnNoWindowRename()
 {
 	if (ui.chkNoWindowRename->isChecked())
-		SetAccessEntry(eWnd, "", eOpen, "#");
+		SetAccessEntry(eWnd, "", eNoRename, "*");
 	else
-		DelAccessEntry(eWnd, "", eOpen, "#");
+		DelAccessEntry(eWnd, "", eNoRename, "*");
 }
 
 void COptionsWindow::OnToggleInjectDll(QTreeWidgetItem* pItem, int Column)

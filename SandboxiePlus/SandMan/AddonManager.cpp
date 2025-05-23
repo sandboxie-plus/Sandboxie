@@ -82,7 +82,7 @@ QList<CAddonInfoPtr> CAddonManager::GetAddons()
 			
 			QString Key = pAddon->GetSpecificEntry("uninstallKey").toString();
 			if (!Key.isEmpty()) {
-				if(CSbieTemplates::CheckRegistryKey(Key)) {
+				if(theGUI->GetCompat()->CheckRegistryKey(Key)) {
 					Installed = true;
 					m_Installed.append(CAddonPtr(new CAddon(pAddon->Data)));
 				}

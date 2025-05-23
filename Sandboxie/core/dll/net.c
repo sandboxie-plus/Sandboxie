@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2024 David Xanatos, xanasoft.com
+ * Copyright 2020-2025 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -36,6 +36,8 @@
 #include "core/drv/api_defs.h"
 #include "core/drv/verify.h"
 #include "common/rbtree.h"
+#define _WINSOCK2API_
+#include <IPTypes.h>
 
 
 //---------------------------------------------------------------------------
@@ -68,9 +70,18 @@ static BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* RuleStr);
 
 static BOOLEAN WSA_InitNetProxy();
 
+static BOOLEAN WSA_InitBindIP();
+
 BOOLEAN WSA_InitNetDnsFilter(HMODULE module);
 
 static int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol);
+
+static int WSA_WSAStartup(
+    WORD wVersionRequested,
+    void* lpWSAData);
+    
+static int WSA_WSACleanup(void);
+
 
 static int WSA_WSAIoctl(
     SOCKET                             s,
@@ -120,6 +131,9 @@ static int WSA_GetAddrInfoW(
     const ADDRINFOW* pHints,
     PADDRINFOW* ppResult);
 
+static void WSA_FreeAddrInfoW(
+    PADDRINFOW      pAddrInfo);
+
 static SOCKET WSA_WSASocketW(
     int                 af,
     int                 type,
@@ -156,7 +170,11 @@ static int WSA_ConnectEx(
     LPDWORD         lpdwBytesSent,
     LPOVERLAPPED    lpOverlapped);
 
-/*static SOCKET WSA_accept(
+/*static int WSA_listen(
+    SOCKET          s,
+    int             backlog);
+
+static SOCKET WSA_accept(
     SOCKET   s,
     void     *addr,
     int      *addrlen);
@@ -197,7 +215,7 @@ static int WSA_WSASendTo(
     LPWSAOVERLAPPED                    lpOverlapped,
     LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 
-/*static int WSA_recvfrom(
+static int WSA_recvfrom(
     SOCKET   s,
     char     *buf,
     int      len,
@@ -214,17 +232,25 @@ static int WSA_WSARecvFrom(
     void                               *lpFrom,
     LPINT                              lpFromlen,
     LPWSAOVERLAPPED                    lpOverlapped,
-    LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);*/
+    LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 
 static int WSA_closesocket(SOCKET s);
 
 
 BOOLEAN socks5_handshake(SOCKET s, BOOLEAN auth, WCHAR login[256], WCHAR pass[256]);
+
 char socks5_request(SOCKET s, const SOCKADDR* addr);
+
+USHORT start_socks5_relay(const SOCKADDR* addr, const SOCKADDR* proxy, BOOLEAN auth, WCHAR login[256], WCHAR pass[256]);
 
 
 //---------------------------------------------------------------------------
 
+static P_WSAStartup         __sys_WSAStartup        = NULL;
+
+static P_WSACleanup         __sys_WSACleanup        = NULL;
+
+       P_socket             __sys_socket            = NULL;
 
 static P_WSAIoctl           __sys_WSAIoctl          = NULL;
 
@@ -235,20 +261,28 @@ static P_ioctlsocket        __sys_ioctlsocket       = NULL;
 static P_WSAAsyncSelect     __sys_WSAAsyncSelect    = NULL;
 static P_WSAEventSelect     __sys_WSAEventSelect    = NULL;
 
+       P_select             __sys_select            = NULL;
+
 static P_WSAEnumNetworkEvents __sys_WSAEnumNetworkEvents = NULL;
 
 static P_WSANSPIoctl        __sys_WSANSPIoctl       = NULL;
 
 static P_WSASocketW         __sys_WSASocketW        = NULL;
 
-static P_bind               __sys_bind              = NULL;
+       P_bind               __sys_bind              = NULL;
 
-static P_connect            __sys_connect           = NULL;
+       P_getsockname        __sys_getsockname       = NULL;
+
+       P_WSAFDIsSet         __sys_WSAFDIsSet        = NULL;
+
+       P_connect            __sys_connect           = NULL;
 static P_WSAConnect         __sys_WSAConnect        = NULL;
 static P_ConnectEx          __sys_ConnectEx         = NULL;
 
-/*static P_accept             __sys_accept            = NULL;
-static P_WSAAccept          __sys_WSAAccept         = NULL;
+       P_listen             __sys_listen            = NULL;
+
+       P_accept             __sys_accept            = NULL;
+/*static P_WSAAccept          __sys_WSAAccept         = NULL;
 static P_AcceptEx           __sys_AcceptEx          = NULL;*/
 
        P_recv               __sys_recv              = NULL;
@@ -257,14 +291,16 @@ static P_AcceptEx           __sys_AcceptEx          = NULL;*/
 static P_sendto             __sys_sendto            = NULL;
 static P_WSASendTo          __sys_WSASendTo         = NULL;
 
-/*static P_recvfrom           __sys_recvfrom          = NULL;
-static P_WSARecvFrom        __sys_WSARecvFrom       = NULL;*/
+static P_recvfrom           __sys_recvfrom          = NULL;
+static P_WSARecvFrom        __sys_WSARecvFrom       = NULL;
 
 static P_shutdown           __sys_shutdown          = NULL;
 
-static P_closesocket        __sys_closesocket       = NULL;
+       P_closesocket        __sys_closesocket       = NULL;
 
 static P_GetAddrInfoW       __sys_GetAddrInfoW      = NULL;
+
+static P_FreeAddrInfoW      __sys_FreeAddrInfoW     = NULL;
 
        P_inet_ntop          __sys_inet_ntop         = NULL;
 
@@ -273,7 +309,7 @@ static P_GetAddrInfoW       __sys_GetAddrInfoW      = NULL;
 //---------------------------------------------------------------------------
 
 struct NETPROXY_RULE {
-    USHORT af;
+    int used;
 
     SOCKADDR_IN     WSA_ProxyAddr;
     SOCKADDR_IN6_LH WSA_ProxyAddr6;
@@ -294,14 +330,24 @@ static BOOLEAN          WSA_WFPisBlocking     = FALSE;
 
 static BOOLEAN          WSA_TraceFlag         = FALSE;
 
+static BOOLEAN          WSA_StartupDone       = FALSE;
 static BOOLEAN          WSA_ProxyEnabled      = FALSE;
+static BOOLEAN          WSA_ProxyThread       = FALSE;
+static BOOLEAN          WSA_ProxyHack         = FALSE;
 static NETPROXY_RULE*   WSA_Proxy4            = NULL;
 static NETPROXY_RULE*   WSA_Proxy6            = NULL;
 #ifdef PROXY_RESOLVE_HOST_NAMES
        HASH_MAP         DNS_LookupMap;
 #endif
 
+static BOOLEAN          WSA_BindIP            = FALSE;
+static SOCKADDR_IN      WSA_BindIP4           = {0};
+static SOCKADDR_IN6_LH  WSA_BindIP6           = {0};
+
 typedef struct _WSA_SOCK {
+
+    USHORT af;
+
     ULONG NonBlocking;
 
     BOOLEAN ConnectedSet;
@@ -314,6 +360,9 @@ typedef struct _WSA_SOCK {
     // WSAEventSelect
     void*   hEventObject;
     long    lNetworkEvents;
+
+    // Binding
+    BOOLEAN Bound;
 
 } WSA_SOCK;
 
@@ -330,8 +379,74 @@ _FX WSA_SOCK* WSA_GetSock(SOCKET s, BOOLEAN bCanAdd)
 {
     WSA_SOCK* pSock = (WSA_SOCK*)map_get(&WSA_SockMap, (void*)s);
     if (pSock == NULL && bCanAdd)
-        pSock = (WSA_SOCK*)map_insert(&WSA_SockMap, (void*)s, NULL, sizeof(WSA_SOCK));
+        pSock = (WSA_SOCK*)map_insert(&WSA_SockMap, (void*)s, NULL, sizeof(WSA_SOCK)); // returns a MemZero'ed object
     return pSock;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_WSAStartup
+//---------------------------------------------------------------------------
+
+
+_FX int WSA_WSAStartup(
+    WORD wVersionRequested,
+    void* lpWSAData)
+{
+    int ret = __sys_WSAStartup(wVersionRequested, lpWSAData);
+    if (ret != 0)
+        return ret;
+
+    if (WSA_StartupDone)
+        return 0;
+    WSA_StartupDone = TRUE;
+
+    //
+    // Initialize network proxy
+    //
+
+    if (WSA_InitNetProxy()) {
+
+        WSA_ProxyEnabled = TRUE;
+
+        SCertInfo CertInfo = { 0 }; // experimental not yet for public
+        if (NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) && (CertInfo.type == eCertDeveloper || CERT_IS_TYPE(CertInfo, eCertEternal)))
+            WSA_ProxyThread = SbieApi_QueryConfBool(NULL, L"UseProxyThreads", FALSE);
+
+        if (!WSA_ProxyThread)
+            WSA_ProxyHack = TRUE;
+    }
+
+    //
+    // Initialize bind
+    //
+
+    if (WSA_InitBindIP()) {
+
+        WSA_BindIP = TRUE;
+    }
+
+    //
+    // Init helper map if needed
+    //
+
+    if (WSA_ProxyHack || WSA_BindIP) {
+
+        map_init(&WSA_SockMap, Dll_Pool);
+    }
+
+    return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_WSACleanup
+//---------------------------------------------------------------------------
+
+
+_FX int WSA_WSACleanup(void)
+{
+    return __sys_WSACleanup();
 }
 
 
@@ -393,7 +508,7 @@ _FX int WSA_ioctlsocket(
     // for now we will only monitor ioctlsocket
     //
 
-    if (WSA_ProxyEnabled && (cmd == FIONBIO) && argp) 
+    if (WSA_ProxyHack && (cmd == FIONBIO) && argp) 
         WSA_GetSock(s, TRUE)->NonBlocking = *argp;
 
     return __sys_ioctlsocket(s, cmd, argp);
@@ -411,7 +526,7 @@ _FX int WSA_WSAAsyncSelect(
     UINT    wMsg,
     long    lEvent)
 {
-    if (WSA_ProxyEnabled) {
+    if (WSA_ProxyHack) {
         WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
 
         pSock->hWnd = hWnd;
@@ -435,7 +550,7 @@ _FX int WSA_WSAEventSelect(
     void*   hEventObject,
     long    lNetworkEvents)
 {
-    if (WSA_ProxyEnabled) {
+    if (WSA_ProxyHack) {
         WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
 
         pSock->hEventObject = hEventObject;
@@ -460,7 +575,7 @@ _FX int WSA_WSAEnumNetworkEvents(
 {
     int ret = __sys_WSAEnumNetworkEvents(s, hEventObject, lpNetworkEvents);
 
-    if (WSA_ProxyEnabled) {
+    if (WSA_ProxyHack) {
         WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
 
         if (pSock->ConnectedSet) {
@@ -563,7 +678,12 @@ static SOCKET WSA_WSASocketW(
         }
     }
 
-    return __sys_WSASocketW(af, type, protocol, lpProtocolInfo, g, dwFlags);
+    SOCKET s = __sys_WSASocketW(af, type, protocol, lpProtocolInfo, g, dwFlags);
+
+    if (WSA_ProxyHack || WSA_BindIP)
+        WSA_GetSock(s, TRUE)->af = af;
+
+    return s;
 }
 
 
@@ -658,11 +778,56 @@ _FX int WSA_bind(
 {
     BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
 
+    if (WSA_BindIP) {
+
+        if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) 
+        {
+            SOCKADDR_IN* addr_in = (SOCKADDR_IN*)name;
+            memcpy(&addr_in->sin_addr, &WSA_BindIP4.sin_addr, sizeof(WSA_BindIP4.sin_addr));
+            WSA_GetSock(s, TRUE)->Bound = TRUE;
+        }
+        else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
+
+            SOCKADDR_IN6_LH* addr6_in = (SOCKADDR_IN6_LH*)name;
+            memcpy(&addr6_in->sin6_addr, &WSA_BindIP6.sin6_addr, sizeof(WSA_BindIP6.sin6_addr));
+            WSA_GetSock(s, TRUE)->Bound = TRUE;
+        }
+    }
+
     int ret = __sys_bind(s, name, namelen);
 
     if (new_name) Dll_Free((void*)name);
 
     return ret;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_begin_connect
+//---------------------------------------------------------------------------
+
+
+_FX void WSA_bind_ip(
+    SOCKET         s/*,
+    const void     *name,
+    int            namelen*/)
+{
+    WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
+    if (pSock->Bound)
+        return;
+
+    //if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) {
+    if (pSock->af == AF_INET){
+
+        __sys_bind(s, &WSA_BindIP4, sizeof(WSA_BindIP4));
+        pSock->Bound = TRUE;
+    }
+    //else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
+    else if (pSock->af == AF_INET6){
+
+        __sys_bind(s, &WSA_BindIP6, sizeof(WSA_BindIP6));
+        pSock->Bound = TRUE;
+    }
 }
 
 
@@ -753,14 +918,14 @@ _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 
 
 //---------------------------------------------------------------------------
-// WSA_GetProxy
+// WSA_BypassProxy
 //---------------------------------------------------------------------------
 
 #define NETFW_MATCH_NONE	0
 
 ULONG NetFw_MatchAddress(rbtree_t* ip_map, IP_ADDRESS* ip);
 
-_FX BOOLEAN WSA_GetProxyImpl(NETPROXY_RULE* WSA_Proxy, const short *addr, int addrlen, void** proxy, int* proxylen)
+_FX BOOLEAN WSA_BypassProxyImpl(NETPROXY_RULE* WSA_Proxy, const short* addr, int addrlen)
 {
     if (!WSA_Proxy)
         return FALSE;
@@ -770,35 +935,85 @@ _FX BOOLEAN WSA_GetProxyImpl(NETPROXY_RULE* WSA_Proxy, const short *addr, int ad
         IP_ADDRESS ip;
         if (WSA_GetIP(addr, addrlen, &ip)) {
             if (NetFw_MatchAddress(&WSA_Proxy->ip_map, &ip) != NETFW_MATCH_NONE)
-                return FALSE;
+                return TRUE;
         }
     }
 
-    const SOCKADDR* name = (SOCKADDR*)addr;
-    if (name->sa_family == AF_INET && WSA_Proxy->af == name->sa_family) {
-        *proxy = &WSA_Proxy->WSA_ProxyAddr;
-        *proxylen = sizeof(SOCKADDR_IN);
-    }
-    else if (name->sa_family == AF_INET6 && WSA_Proxy->af == name->sa_family) {
-        *proxy = &WSA_Proxy->WSA_ProxyAddr6;
-        *proxylen = sizeof(SOCKADDR_IN6_LH);
-    }
-    else
-        return FALSE;
-    return TRUE;
+    return FALSE;
 }
+
+_FX BOOLEAN WSA_BypassProxy(const short *addr, int addrlen)
+{
+    const SOCKADDR* name = (SOCKADDR*)addr;
+    if (name->sa_family == AF_INET) {
+        if (WSA_BypassProxyImpl(WSA_Proxy4, addr, addrlen))
+            return TRUE;
+    } else if (name->sa_family == AF_INET6) {
+        if (WSA_BypassProxyImpl(WSA_Proxy6, addr, addrlen))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_GetProxy
+//---------------------------------------------------------------------------
+
 
 _FX BOOLEAN WSA_GetProxy(const short *addr, int addrlen, void** proxy, int* proxylen, NETPROXY_RULE** pWSA_Proxy)
 {
-    if (WSA_GetProxyImpl(WSA_Proxy4, addr, addrlen, proxy, proxylen)) {
-        *pWSA_Proxy = WSA_Proxy4;
-        return TRUE;
+    //
+    // First try finding an available proxy of the same IP type
+    // if non is matching take ipv6 when prsent else ipv4
+    //
+
+    const SOCKADDR* name = (SOCKADDR*)addr;
+    if (name->sa_family == AF_INET && WSA_Proxy4) {
+        if (WSA_ProxyThread) {
+            *pWSA_Proxy = NULL; // indicate thread mode
+
+            USHORT port = start_socks5_relay(addr, &WSA_Proxy4->WSA_ProxyAddr, WSA_Proxy4->auth, WSA_Proxy4->login, WSA_Proxy4->pass);
+            if (!port)
+                return FALSE;
+
+            *proxy = (void*)addr;
+            *proxylen = addrlen;
+
+            SOCKADDR_IN* v4 = *proxy;
+            v4->sin_addr.S_un.S_addr = _ntohl(0x7F000001); // 127.0.0.1
+            v4->sin_port = port;
+        }
+        else {
+            *pWSA_Proxy = WSA_Proxy4;
+            *proxy = &WSA_Proxy4->WSA_ProxyAddr;
+            *proxylen = sizeof(SOCKADDR_IN);
+        }
     }
-    if (WSA_GetProxyImpl(WSA_Proxy6, addr, addrlen, proxy, proxylen)) {
-        *pWSA_Proxy = WSA_Proxy6;
-        return TRUE;
-    }
-    return FALSE;
+    else if (name->sa_family == AF_INET6 && WSA_Proxy6) {
+        if (WSA_ProxyThread) {
+            *pWSA_Proxy = NULL; // indicate thread mode
+
+            USHORT port = start_socks5_relay(addr, &WSA_Proxy6->WSA_ProxyAddr, WSA_Proxy6->auth, WSA_Proxy6->login, WSA_Proxy6->pass);
+            if (!port)
+                return FALSE;
+
+            *proxy = (void*)addr;
+            *proxylen = addrlen;
+
+            SOCKADDR_IN6_LH* v6 = *proxy;
+            v6->sin6_addr = (struct in6_addr){{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}}; // ::1
+            v6->sin6_port = port;
+        }
+        else {
+            *pWSA_Proxy = WSA_Proxy6;
+            *proxy = &WSA_Proxy6->WSA_ProxyAddr6;
+            *proxylen = sizeof(SOCKADDR_IN6_LH);
+        }
+    } 
+    else 
+        return FALSE; // no proxy found
+    return TRUE;
 }
 
 
@@ -885,22 +1100,34 @@ _FX int WSA_connect(
     int proxylen;
     NETPROXY_RULE* WSA_Proxy;
 
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
+    if (WSA_BindIP) {
 
-        WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
-        if (pSock) WSA_begin_connect(pSock, s);
+        WSA_bind_ip(s/*, name, namelen*/);
+    }
 
-        int ret = __sys_connect(s, proxy, proxylen);
-        if (ret == 0) {
+    if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
 
-            if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
-                ret = SOCKET_ERROR;
+        int ret = SOCKET_ERROR;
 
-            if (ret != 0) 
-                __sys_shutdown(s, SD_BOTH);
+        if (WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
+
+            WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
+            if (WSA_ProxyHack && pSock) WSA_begin_connect(pSock, s);
+
+            ret = __sys_connect(s, proxy, proxylen);
+            if (WSA_Proxy && ret == SOCKS_SUCCESS) {
+
+                if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
+                    ret = SOCKET_ERROR;
+
+                if (ret != SOCKS_SUCCESS)
+                    __sys_shutdown(s, SD_BOTH);
+            }
+
+            if (WSA_ProxyHack && pSock) ret = WSA_end_connect(pSock, s, ret);
         }
-
-        if (pSock) ret = WSA_end_connect(pSock, s, ret);
+        else
+            __sys_WSASetLastError(WSAECONNREFUSED);
 
         return ret;
     }
@@ -936,22 +1163,34 @@ _FX int WSA_WSAConnect(
     int proxylen;
     NETPROXY_RULE* WSA_Proxy;
 
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
+    if (WSA_BindIP) {
 
-        WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
-        if (pSock) WSA_begin_connect(pSock, s);
+        WSA_bind_ip(s/*, name, namelen*/);
+    }
 
-        int ret = __sys_WSAConnect(s, proxy, proxylen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS);
-        if (ret == 0) {
+    if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
 
-            if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
-                ret = SOCKET_ERROR;
+        int ret = SOCKET_ERROR;
 
-            if (ret != 0) 
-                __sys_shutdown(s, SD_BOTH);
+        if (WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
+
+            WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
+            if (WSA_ProxyHack && pSock) WSA_begin_connect(pSock, s);
+
+            ret = __sys_WSAConnect(s, proxy, proxylen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS);
+            if (WSA_Proxy && ret == SOCKS_SUCCESS) {
+
+                if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
+                    ret = SOCKET_ERROR;
+
+                if (ret != SOCKS_SUCCESS)
+                    __sys_shutdown(s, SD_BOTH);
+            }
+
+            if (WSA_ProxyHack && pSock) ret = WSA_end_connect(pSock, s, ret);
         }
-        
-        if (pSock) ret = WSA_end_connect(pSock, s, ret);
+        else
+            __sys_WSASetLastError(WSAECONNREFUSED);
 
         return ret;
     }
@@ -987,32 +1226,52 @@ _FX int WSA_ConnectEx(
     int proxylen;
     NETPROXY_RULE* WSA_Proxy;
 
-    if (WSA_ProxyEnabled && !is_localhost(name) && WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
+    if (WSA_BindIP) {
 
-        WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
-        if (pSock) WSA_begin_connect(pSock, s);
+        WSA_bind_ip(s/*, name, namelen*/);
+    }
 
-        int ret = __sys_connect(s, proxy, proxylen);
-        if (ret == 0) {
+    if (WSA_ProxyEnabled && !is_localhost(name) && !WSA_BypassProxy(name, namelen)) {
 
-            if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
-                ret = SOCKET_ERROR;
+        int ret = SOCKET_ERROR;
 
-            if (ret == 0 && lpSendBuffer) {
-                ret = __sys_send(s, (const char*)lpSendBuffer, dwSendDataLength, 0);
-                if (ret != SOCKET_ERROR) {
-                    *lpdwBytesSent = ret;
-                    ret = 0;
+        if (WSA_GetProxy(name, namelen, &proxy, &proxylen, &WSA_Proxy)) {
+
+            WSA_SOCK* pSock = WSA_GetSock(s, FALSE);
+            if (WSA_ProxyHack && pSock) WSA_begin_connect(pSock, s);
+
+            if (WSA_Proxy) {
+
+                ret = __sys_connect(s, proxy, proxylen);
+                if (ret == SOCKS_SUCCESS) {
+
+                    if (!socks5_handshake(s, WSA_Proxy->auth, WSA_Proxy->login, WSA_Proxy->pass) || socks5_request(s, name) != SOCKS_SUCCESS)
+                        ret = SOCKET_ERROR;
+
+                    if (ret == 0 && lpSendBuffer) {
+                        ret = __sys_send(s, (const char*)lpSendBuffer, dwSendDataLength, 0);
+                        if (ret != SOCKET_ERROR) {
+                            *lpdwBytesSent = ret;
+                            ret = SOCKS_SUCCESS;
+                        }
+                    }
+
+                    if (ret != SOCKS_SUCCESS)
+                        __sys_shutdown(s, SD_BOTH);
                 }
+            } 
+            else {
+
+                if (__sys_ConnectEx(s, proxy, proxylen, lpSendBuffer, dwSendDataLength, lpdwBytesSent, lpOverlapped))
+                    ret = SOCKS_SUCCESS;
             }
 
-            if (ret != 0) 
-                __sys_shutdown(s, SD_BOTH);
+            if (WSA_ProxyHack && pSock) ret = WSA_end_connect(pSock, s, ret);
         }
+        else
+            __sys_WSASetLastError(WSAECONNREFUSED);
 
-        if (pSock) ret = WSA_end_connect(pSock, s, ret);
-
-        return ret == 0;
+        return ret == SOCKS_SUCCESS;
     }
 
     BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
@@ -1025,6 +1284,19 @@ _FX int WSA_ConnectEx(
 }
 
 /*
+//---------------------------------------------------------------------------
+// WSA_accept
+//---------------------------------------------------------------------------
+
+static int WSA_listen(
+    SOCKET          s,
+    int             backlog)
+{
+
+    return  __sys_listen(s, backlog);
+}
+
+
 //---------------------------------------------------------------------------
 // WSA_accept
 //---------------------------------------------------------------------------
@@ -1109,6 +1381,12 @@ _FX int WSA_sendto(
 {
     if (WSA_IsBlockedTraffic(to, tolen, IPPROTO_UDP))
         return SOCKET_ERROR;
+
+    if (WSA_BindIP) {
+
+        WSA_bind_ip(s/*, to, tolen*/);
+    }
+
     return __sys_sendto(s, buf, len, flags, to, tolen);
 }
 
@@ -1131,11 +1409,17 @@ _FX int WSA_WSASendTo(
 {
     if (WSA_IsBlockedTraffic(lpTo, iTolen, IPPROTO_UDP))
         return SOCKET_ERROR;
+
+    if (WSA_BindIP) {
+
+        WSA_bind_ip(s/*, lpTo, iTolen*/);
+    }
+
     return __sys_WSASendTo(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent,
         dwFlags, lpTo, iTolen, lpOverlapped, lpCompletionRoutine);
 }
 
-/*
+
 //---------------------------------------------------------------------------
 // WSA_recvfrom
 //---------------------------------------------------------------------------
@@ -1149,9 +1433,24 @@ _FX int WSA_recvfrom(
     void     *from,
     int      *fromlen)
 {
+    if (WSA_BindIP) {
+
+        WSA_bind_ip(s);
+    }
+
+    char buffer[128];
+    int buffer_len = sizeof(buffer);
+    if (!from) {
+        from = buffer;
+        fromlen = &buffer_len;
+    }
+
+    int ret = __sys_recvfrom(s, buf, len, flags, from, fromlen);
+
     if (WSA_IsBlockedTraffic(from, *fromlen, IPPROTO_UDP))
         return SOCKET_ERROR;
-    return __sys_recvfrom(s, buf, len, flags, from, fromlen);
+
+    return ret;
 }
 
 
@@ -1171,12 +1470,26 @@ _FX int WSA_WSARecvFrom(
     LPWSAOVERLAPPED                    lpOverlapped,
     LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine)
 {
+    if (WSA_BindIP) {
+
+        WSA_bind_ip(s);
+    }
+
+    char buffer[128];
+    int buffer_len = sizeof(buffer);
+    if (!lpFrom) {
+        lpFrom = buffer;
+        lpFromlen = &buffer_len;
+    }
+
+    int ret = __sys_WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd,
+        lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine);
+
     if (WSA_IsBlockedTraffic(lpFrom, *lpFromlen, IPPROTO_UDP))
         return SOCKET_ERROR;
-    return __sys_WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd,
-        lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine);
+
+    return ret;
 }
-*/
 
 
 //---------------------------------------------------------------------------
@@ -1186,7 +1499,7 @@ _FX int WSA_WSARecvFrom(
 
 _FX int WSA_closesocket(SOCKET s)
 {
-    if (WSA_ProxyEnabled)
+    if (WSA_ProxyHack || WSA_BindIP)
         map_remove(&WSA_SockMap, (void*)s);
     return __sys_closesocket(s);
 }
@@ -1200,6 +1513,7 @@ _FX int WSA_closesocket(SOCKET s)
 _FX void WSA_InitNetFwRules()
 {
     WCHAR conf_buf[2048];
+
     for (ULONG index = 0; ; ++index) {
 
         NTSTATUS status = SbieApi_QueryConf(
@@ -1244,15 +1558,36 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
         addr_value[addr_len] = L'\0';
         if (_inet_aton(addr_value, &proxy->WSA_ProxyAddr.sin_addr) == 1) {
             proxy->WSA_ProxyAddr.sin_family = AF_INET;
-            proxy->af = AF_INET;
         }
-        else if (_inet_pton(AF_INET6, addr_value, &proxy->WSA_ProxyAddr6.sin6_addr) == 1)
-        {
+        else if (_inet_pton(AF_INET6, addr_value, &proxy->WSA_ProxyAddr6.sin6_addr) == 1) {
             proxy->WSA_ProxyAddr6.sin6_family = AF_INET6;
-            proxy->af = AF_INET6;
         } 
-        else
-            return FALSE;
+        else { // host name?
+        
+            ADDRINFOW hints = { 0 };
+            hints.ai_family = AF_UNSPEC;       // Allow IPv4 or IPv6
+            hints.ai_socktype = SOCK_STREAM;   // TCP
+            hints.ai_protocol = IPPROTO_TCP;
+
+            ADDRINFOW* res = NULL;
+            int ret = __sys_GetAddrInfoW(addr_value, NULL, &hints, &res);
+            if (ret == SOCKS_SUCCESS) {
+
+                for (ADDRINFOW* ptr = res; ptr != NULL; ptr = ptr->ai_next) {
+                    if (ptr->ai_family == AF_INET && proxy->WSA_ProxyAddr.sin_family == 0) {
+                        memcpy(&proxy->WSA_ProxyAddr, ptr->ai_addr, sizeof(SOCKADDR_IN));
+                    }
+                    else if (ptr->ai_family == AF_INET6 && proxy->WSA_ProxyAddr6.sin6_family == 0) {
+                        memcpy(&proxy->WSA_ProxyAddr6, ptr->ai_addr, sizeof(SOCKADDR_IN6_LH));
+                    }
+                }
+
+                __sys_FreeAddrInfoW(res);
+            }
+
+            if(proxy->WSA_ProxyAddr.sin_family != AF_INET && proxy->WSA_ProxyAddr6.sin6_family != AF_INET6)
+                return FALSE; // no ip found
+        }
         addr_value[addr_len] = L';';
     } 
     else
@@ -1266,10 +1601,8 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
             return FALSE;
 
         USHORT port = _ntohs((USHORT)temp);
-        if (proxy->af == AF_INET6)
-            proxy->WSA_ProxyAddr6.sin6_port = port;
-        else if (proxy->af == AF_INET)
-            proxy->WSA_ProxyAddr.sin_port = port;
+        proxy->WSA_ProxyAddr6.sin6_port = port;
+        proxy->WSA_ProxyAddr.sin_port = port;
     } 
     else
         return FALSE;
@@ -1359,7 +1692,6 @@ BOOLEAN WSA_ParseNetProxy(NETPROXY_RULE* proxy, const WCHAR* found_value)
         }
     }
 
-
     return TRUE;
 }
 
@@ -1377,6 +1709,9 @@ _FX BOOLEAN WSA_InitNetProxy()
 {
     WCHAR proxy_buf[2048];
     
+    ULONG FoundLevel4 = -1;
+    ULONG FoundLevel6 = -1;
+
     for (ULONG index = 0; ; ++index) {
         NTSTATUS status = SbieApi_QueryConf(
             NULL, L"NetworkUseProxy", index, proxy_buf, sizeof(proxy_buf) - 16 * sizeof(WCHAR));
@@ -1389,41 +1724,160 @@ _FX BOOLEAN WSA_InitNetProxy()
             continue;
 
         NETPROXY_RULE* WSA_Proxy = Dll_Alloc(sizeof(NETPROXY_RULE));
+        if (!WSA_Proxy) break;
         memset(WSA_Proxy, 0, sizeof(NETPROXY_RULE));
         rbtree_init(&WSA_Proxy->ip_map, NetFw_IpCmp);
 
         if (WSA_ParseNetProxy(WSA_Proxy, value)) {
-            if (WSA_Proxy->af == AF_INET) {
-                if (WSA_Proxy4 == NULL) {
+
+            if (WSA_Proxy->WSA_ProxyAddr.sin_family == AF_INET) {
+                if (FoundLevel4 > level) {
+                    if(WSA_Proxy4 && --WSA_Proxy4->used == 0)
+                        Dll_Free(WSA_Proxy4);
                     WSA_Proxy4 = WSA_Proxy;
-                    WSA_Proxy = NULL;
+                    WSA_Proxy4->used++;
+                    FoundLevel4 = level;
                 }
             }
-            else if (WSA_Proxy->af == AF_INET6) {
-                if (WSA_Proxy6 == NULL) {
+
+            if (WSA_Proxy->WSA_ProxyAddr6.sin6_family == AF_INET6) {
+                if (FoundLevel6 > level) {
+                    if(WSA_Proxy6 && --WSA_Proxy6->used == 0)
+                        Dll_Free(WSA_Proxy6);
                     WSA_Proxy6 = WSA_Proxy;
-                    WSA_Proxy = NULL;
+                    WSA_Proxy6->used++;
+                    FoundLevel6 = level;
                 }
             }
         }
 
-        if(WSA_Proxy)
+        if(WSA_Proxy->used == 0)
             Dll_Free(WSA_Proxy);
     }
 
-    if (!WSA_Proxy4 && !WSA_Proxy6)
+    if (FoundLevel4 == -1 && FoundLevel6 == -1)
         return FALSE;
+    //
+    // even if no proxies were set up due to config error, if any were configured 
+    // enable proxy and fail connections to prevent accidental ip leakage
+    //
 
     SCertInfo CertInfo = { 0 };
-    if (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !CertInfo.opt_net) {
+    if (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !(CertInfo.active && CertInfo.opt_net)) {
 
         const WCHAR* strings[] = { L"NetworkUseProxy" , NULL };
         SbieApi_LogMsgExt(-1, 6009, strings);
 
-        return FALSE;
+        WSA_Proxy4 = NULL;
+        WSA_Proxy6 = NULL;
     }
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// WSA_InitBindIP
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN WSA_InitBindIP()
+{
+    WCHAR conf_buf[2048];
+
+    IP_ADAPTER_ADDRESSES* adapters = NULL;
+
+    ULONG FoundLevel = -1;
+    for (ULONG index = 0; ; ++index) {
+
+        NTSTATUS status = SbieApi_QueryConf(
+            NULL, L"BindAdapter", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        ULONG level = -1;
+        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
+        if (!value)
+            continue;
+
+        if (FoundLevel < level)
+            continue;
+
+        if (!adapters) {
+            HMODULE Iphlpapi = LoadLibraryW(L"Iphlpapi.dll");
+            if (Iphlpapi) {
+                P_GetAdaptersAddresses GetAdaptersAddresses = (P_GetAdaptersAddresses)GetProcAddress(Iphlpapi, "GetAdaptersAddresses");
+                if (GetAdaptersAddresses) {
+                    ULONG bufferSize = 0;
+                    GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_INCLUDE_PREFIX, NULL, NULL, &bufferSize);
+                    adapters = Dll_Alloc(bufferSize * 10 / 8);
+                    if (adapters) {
+                        if (GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_INCLUDE_PREFIX, NULL, adapters, &bufferSize) != NO_ERROR) {
+                            Dll_Free(adapters);
+                            adapters = NULL;
+                        }
+                    }
+                }
+            }
+            FreeLibrary(Iphlpapi);
+            if (!adapters) break;
+        }
+
+        for (IP_ADAPTER_ADDRESSES* adapter = adapters; adapter != NULL; adapter = adapter->Next) {
+
+            if (_wcsicmp(adapter->FriendlyName, value) != 0)
+                continue;
+
+            for (IP_ADAPTER_UNICAST_ADDRESS* unicast = adapter->FirstUnicastAddress; unicast != NULL; unicast = unicast->Next) {
+
+                if (unicast->Address.lpSockaddr->sa_family == AF_INET) {
+                    memcpy(&WSA_BindIP4, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN));
+                }
+                else if (unicast->Address.lpSockaddr->sa_family == AF_INET6) {
+                    memcpy(&WSA_BindIP6, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN6_LH));
+                }
+
+            }
+
+            FoundLevel = level;
+        }
+    }
+
+    if (adapters)
+        Dll_Free(adapters);
+    
+    if (FoundLevel != -1)
+        return TRUE;
+
+    ULONG FoundLevel4 = -1;
+    ULONG FoundLevel6 = -1;
+    for (ULONG index = 0; ; ++index) {
+
+        NTSTATUS status = SbieApi_QueryConf(
+            NULL, L"BindAdapterIP", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        ULONG level = -1;
+        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
+        if (!value)
+            continue;
+
+        if (_inet_aton(value, &WSA_BindIP4.sin_addr) == 1) {
+            if (FoundLevel4 > level) {
+                WSA_BindIP4.sin_family = AF_INET;
+                FoundLevel4 = level;
+            }
+        }
+        else if(_inet_pton(AF_INET6, value, &WSA_BindIP6.sin6_addr) == 1){
+            if (FoundLevel6 > level) {
+                WSA_BindIP6.sin6_family = AF_INET6;
+                FoundLevel6 = level;
+            }
+        }
+    }
+
+    return FoundLevel4 != -1 || FoundLevel6 != -1;
 }
 
 
@@ -1434,6 +1888,9 @@ _FX BOOLEAN WSA_InitNetProxy()
 
 _FX BOOLEAN WSA_Init(HMODULE module)
 {
+    P_WSAStartup        WSAStartup;
+    P_WSACleanup        WSACleanup;
+
     P_WSAIoctl          WSAIoctl;
 
     P_ioctlsocket       ioctlsocket;
@@ -1450,13 +1907,16 @@ _FX BOOLEAN WSA_Init(HMODULE module)
 
     P_connect           connect;
     P_WSAConnect        WSAConnect;
-    /*P_accept            accept;
+
+    /*P_listen            listen;
+
+    P_accept            accept;
     P_WSAAccept         WSAAccept;*/
 
     P_sendto            sendto;
     P_WSASendTo         WSASendTo;
-    /*P_recvfrom          recvfrom;
-    P_WSARecvFrom       WSARecvFrom;*/
+    P_recvfrom          recvfrom;
+    P_WSARecvFrom       WSARecvFrom;
     P_closesocket       closesocket;
 
 #ifdef PROXY_RESOLVE_HOST_NAMES
@@ -1476,19 +1936,18 @@ _FX BOOLEAN WSA_Init(HMODULE module)
         WSA_InitNetFwRules();
 
     //
-    // Initialize network proxy
-    //
-
-    if (WSA_InitNetProxy()) {
-
-        WSA_ProxyEnabled = TRUE;
-
-        map_init(&WSA_SockMap, Dll_Pool);
-    }
-
-    //
     // hook required WS2 functions
     //
+
+    WSAStartup = (P_WSAStartup)GetProcAddress(module, "WSAStartup"); 
+    if (WSAStartup) {
+        SBIEDLL_HOOK(WSA_, WSAStartup);
+    }
+
+    WSACleanup = (P_WSACleanup)GetProcAddress(module, "WSACleanup"); 
+    if (WSACleanup) {
+        SBIEDLL_HOOK(WSA_, WSACleanup);
+    }
 
     WSAIoctl = (P_WSAIoctl)GetProcAddress(module, "WSAIoctl");
     if (WSAIoctl) {
@@ -1498,43 +1957,43 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     __sys_WSAGetLastError = (P_WSAGetLastError)GetProcAddress(module, "WSAGetLastError");
     __sys_WSASetLastError = (P_WSASetLastError)GetProcAddress(module, "WSASetLastError");
 
-    if (WSA_ProxyEnabled) {
+    //
+    // Note: for our proxy implementation we need to have the sockets in blocking mode
+    // unfortunately windows does not provide a way to query the blocking flag
+    // not even when asking the driver directly :(
+    // Hence we need to monitor the below calls and maintain and cache the blocking state
+    //
+  
+    //int InputBuffer[] = { 2,0,0,0 };
+    //((char*)&InputBuffer[2])[0] = 1;
+    //Status = NtDeviceIoControlFile((HANDLE)sock, NULL, 0i64, 0i64, &IoStatusBlock, /*IOCTL_AFD_SET_INFORMATION*/ 0x1203B, InputBuffer, 0x10u, 0i64, 0);               // Set blocking -> STATUS_SUCCESS
+    //Status = NtDeviceIoControlFile((HANDLE)sock, NULL, 0i64, 0i64, &IoStatusBlock, /*IOCTL_AFD_SET_INFORMATION*/ 0x1207b, InputBuffer, 0x10u, InputBuffer, 0x10u);    // Get blocking -> STATUS_INVALID_PARAMETER :(
 
-        //
-        // Note: for our proxy implementation we need to have the sockets in blocking mode
-        // unfortunately windows does not provide a way to query the blocking flag
-        // not even when asking the driver directly :(
-        // Hence we need to monitor the below calls and maintain and cache the blocking state
-        //
-
-	    //int InputBuffer[] = { 2,0,0,0 };
-	    //((char*)&InputBuffer[2])[0] = 1;
-	    //Status = NtDeviceIoControlFile((HANDLE)sock, NULL, 0i64, 0i64, &IoStatusBlock, /*IOCTL_AFD_SET_INFORMATION*/ 0x1203B, InputBuffer, 0x10u, 0i64, 0);               // Set blocking -> STATUS_SUCCESS
-	    //Status = NtDeviceIoControlFile((HANDLE)sock, NULL, 0i64, 0i64, &IoStatusBlock, /*IOCTL_AFD_SET_INFORMATION*/ 0x1207b, InputBuffer, 0x10u, InputBuffer, 0x10u);    // Get blocking -> STATUS_INVALID_PARAMETER :(
-
-        ioctlsocket = (P_ioctlsocket)GetProcAddress(module, "ioctlsocket");
-        if (ioctlsocket) {
-            SBIEDLL_HOOK(WSA_,ioctlsocket);
-        }
-
-        WSAAsyncSelect = (P_WSAAsyncSelect)GetProcAddress(module, "WSAAsyncSelect");
-        if (WSAAsyncSelect) {
-            SBIEDLL_HOOK(WSA_,WSAAsyncSelect);
-        }
-
-        WSAEventSelect = (P_WSAEventSelect)GetProcAddress(module, "WSAEventSelect");
-        if (WSAEventSelect) {
-            SBIEDLL_HOOK(WSA_,WSAEventSelect);
-        }
-
-        WSAEnumNetworkEvents = (P_WSAEnumNetworkEvents)GetProcAddress(module, "WSAEnumNetworkEvents");
-        if (WSAEnumNetworkEvents) {
-            SBIEDLL_HOOK(WSA_,WSAEnumNetworkEvents);
-        }
-
-        __sys_recv = (P_recv)GetProcAddress(module, "recv");
-        __sys_send = (P_send)GetProcAddress(module, "send");
+    ioctlsocket = (P_ioctlsocket)GetProcAddress(module, "ioctlsocket");
+    if (ioctlsocket) {
+        SBIEDLL_HOOK(WSA_, ioctlsocket);
     }
+
+    WSAAsyncSelect = (P_WSAAsyncSelect)GetProcAddress(module, "WSAAsyncSelect");
+    if (WSAAsyncSelect) {
+        SBIEDLL_HOOK(WSA_, WSAAsyncSelect);
+    }
+
+    WSAEventSelect = (P_WSAEventSelect)GetProcAddress(module, "WSAEventSelect");
+    if (WSAEventSelect) {
+        SBIEDLL_HOOK(WSA_, WSAEventSelect);
+    }
+
+    WSAEnumNetworkEvents = (P_WSAEnumNetworkEvents)GetProcAddress(module, "WSAEnumNetworkEvents");
+    if (WSAEnumNetworkEvents) {
+        SBIEDLL_HOOK(WSA_, WSAEnumNetworkEvents);
+    }
+
+    // +++
+
+    __sys_recv = (P_recv)GetProcAddress(module, "recv");
+
+    __sys_send = (P_send)GetProcAddress(module, "send");
 
     if (!Dll_CompartmentMode) {
         WSANSPIoctl = (P_WSANSPIoctl)GetProcAddress(module, "WSANSPIoctl");
@@ -1548,14 +2007,22 @@ _FX BOOLEAN WSA_Init(HMODULE module)
         SBIEDLL_HOOK(WSA_,bind);
     }
     
+    __sys_socket = (P_socket)GetProcAddress(module, "socket"); // uses WSASocketW
+    
     WSASocketW = (P_WSASocketW)GetProcAddress(module, "WSASocketW");
     if (WSASocketW) {
         SBIEDLL_HOOK(WSA_,WSASocketW);
     }
 
-    //if (! Dll_SkipHook(L"wsaconn")) {
-    
+    __sys_getsockname = (P_getsockname)GetProcAddress(module, "getsockname");
+
+    __sys_WSAFDIsSet = (P_WSAFDIsSet )GetProcAddress(module, "__WSAFDIsSet");
+
+    __sys_select = (P_select)GetProcAddress(module, "select");
+
     // TCP
+    //if (! Dll_SkipHook(L"wsaconn")) {
+   
     connect = (P_connect)GetProcAddress(module, "connect");
     if (connect) {
         SBIEDLL_HOOK(WSA_,connect);
@@ -1568,7 +2035,16 @@ _FX BOOLEAN WSA_Init(HMODULE module)
 
     //}
 
-    /*accept = (P_accept)GetProcAddress(module, "accept");
+    __sys_listen = (P_listen)GetProcAddress(module, "listen");
+
+    __sys_accept = (P_accept)GetProcAddress(module, "accept");
+
+    /*listen = (P_listen)GetProcAddress(module, "listen");
+    if (listen) {
+        SBIEDLL_HOOK(WSA_,listen);
+    }
+
+    accept = (P_accept)GetProcAddress(module, "accept");
     if (accept) {
         SBIEDLL_HOOK(WSA_,accept);
     }
@@ -1590,7 +2066,7 @@ _FX BOOLEAN WSA_Init(HMODULE module)
         SBIEDLL_HOOK(WSA_,WSASendTo);
     }
 
-    /*recvfrom = (P_recvfrom)GetProcAddress(module, "recvfrom");
+    recvfrom = (P_recvfrom)GetProcAddress(module, "recvfrom");
     if (recvfrom) {
         SBIEDLL_HOOK(WSA_,recvfrom);
     }
@@ -1598,12 +2074,16 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     WSARecvFrom = (P_WSARecvFrom)GetProcAddress(module, "WSARecvFrom");
     if (WSARecvFrom) {
         SBIEDLL_HOOK(WSA_,WSARecvFrom);
-    }*/
+    }
     //
         
     __sys_shutdown = (P_shutdown)GetProcAddress(module, "shutdown");
 
     __sys_inet_ntop = (P_inet_ntop)GetProcAddress(module, "inet_ntop");
+
+    __sys_GetAddrInfoW = (P_GetAddrInfoW)GetProcAddress(module, "GetAddrInfoW"); 
+
+    __sys_FreeAddrInfoW = (P_FreeAddrInfoW)GetProcAddress(module, "FreeAddrInfoW");
 
 #ifdef PROXY_RESOLVE_HOST_NAMES
     if(WSA_ProxyEnabled && SbieApi_QueryConfBool(NULL, L"NetworkProxyResolveHostnames", FALSE)) {

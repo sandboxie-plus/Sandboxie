@@ -1635,32 +1635,61 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		return ret;
 	}
-	else if (arguments.size() >= 2 && arguments[0] == L"get_cert")
+	else if (arguments.size() >= 2 && (arguments[0] == L"get_cert" || arguments[0] == L"get_cert_lr"))
 	{
 		int ret = 0;
 
-		std::wstring serial = arguments[1];
-
-		std::wstring path = L"/get_cert.php?SN=" + serial;
-
-		if (serial.length() > 5 && toupper(serial[4]) == 'N') { // node locked business use
-			wchar_t uuid_str[40];
-			GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
-			path += L"&HwId=" + std::wstring(uuid_str);
-		}
-
 		std::wstring file_path = base_dir + L"\\Certificate.dat";
 
-		char* aCert = NULL;
-		if (NT_SUCCESS(MyReadFile((wchar_t*)file_path.c_str(), 1024 * 1024, (PVOID*)&aCert, NULL)) && aCert != NULL) {
-			std::string sCert = aCert;
-			free(aCert);
-			auto Cert = GetArguments(std::wstring(sCert.begin(), sCert.end()), L'\n', L':');
-			auto F = Cert.find(L"UPDATEKEY");
-			if (F != Cert.end())
-				path += L"&UpdateKey=" + F->second;
-		}
+		std::wstring path;
 
+		std::wstring serial;
+
+		std::wstring hwid = GetArgument(arguments, L"hwid");
+
+		if (arguments[0] == L"get_cert_lr") 
+		{
+			path = L"/get_cert.php?LR=1";
+			serial = GetArgument(arguments, L"serial");
+			if(!serial.empty())
+				path += L"&SN=" + serial;
+		}
+		else
+		{
+			serial = arguments[1];
+
+			path = L"/get_cert.php?SN=" + serial;
+		}
+		
+
+		if (hwid.empty()) {
+			if (serial.length() > 5 && toupper(serial[4]) == 'N') { // node locked business use
+				wchar_t uuid_str[40];
+				GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
+				hwid = std::wstring(uuid_str);
+			}
+		}
+		else // when hwid is specified manually, assume it's not for this system
+			file_path.clear();
+		if (!hwid.empty())
+			path += L"&HwId=" + hwid;
+
+		std::wstring update_key = GetArgument(arguments, L"update_key");
+		if (!file_path.empty() && update_key.empty()) {
+			char* aCert = NULL;
+			if (NT_SUCCESS(MyReadFile((wchar_t*)file_path.c_str(), 1024 * 1024, (PVOID*)&aCert, NULL)) && aCert != NULL) {
+				std::string sCert = aCert;
+				free(aCert);
+				auto Cert = GetArguments(std::wstring(sCert.begin(), sCert.end()), L'\n', L':');
+				auto F = Cert.find(L"UPDATEKEY");
+				if (F != Cert.end())
+					update_key = F->second;
+			}
+		}
+		if(!update_key.empty())
+			path += L"&UpdateKey=" + update_key;
+
+		char* aCert = NULL;
 		ULONG lCert = 0;
 		if (WebDownload(_T(UPDATE_DOMAIN), path.c_str(), &aCert, &lCert) && aCert != NULL && *aCert) 
 		{
@@ -1685,8 +1714,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			ret = ERROR_GET_CERT;
 		}
 
-		if (ret == 0 && !NT_SUCCESS(MyWriteFile((wchar_t*)file_path.c_str(), aCert, lCert)))
-			ret = ERROR_INTERNAL;
+		if (ret == 0) 
+		{
+			if (file_path.empty())
+				printf("== CERTIFICATE ==\r\n%s\r\n== END ==", aCert);
+			else if(!NT_SUCCESS(MyWriteFile((wchar_t*)file_path.c_str(), aCert, lCert)))
+				ret = ERROR_INTERNAL;
+		}
 
 		return ret;
 	}

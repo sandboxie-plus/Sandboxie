@@ -235,9 +235,6 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
     // Gui_ConnectToWindowStationAndDesktop
     //
 
-	// NoSbieDesk BEGIN
-	if(!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
-	// NoSbieDesk END
     if (! _Initialized) {
 
         if (! Gui_ConnectToWindowStationAndDesktop(User32))
@@ -867,13 +864,20 @@ _FX BOOLEAN Gdi_InitZero(HMODULE module)
     // ntdll loader, but there are cases where this is not so.
     //
 
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+    GdiDllInitialize = Ldr_GetProcAddrNew(L"gdi32full.dll", L"GdiDllInitialize","GdiDllInitialize");
+#else
     GdiDllInitialize = Ldr_GetProcAddrNew(DllName_gdi32, L"GdiDllInitialize","GdiDllInitialize");
+#endif
 
     if (GdiDllInitialize == Saved_GdiDllInitialize)
         return TRUE;
 
     Saved_GdiDllInitialize = GdiDllInitialize;
 
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+    Gdi_GdiDllInitialize = Gdi_GdiDllInitialize_Vista;
+#else
     if (Dll_OsBuild >= 6000)
         Gdi_GdiDllInitialize = Gdi_GdiDllInitialize_Vista;
 
@@ -883,14 +887,6 @@ _FX BOOLEAN Gdi_InitZero(HMODULE module)
 
     } else
         Gdi_GdiDllInitialize = Gdi_GdiDllInitialize_XP;
-
-#ifdef _M_ARM64EC
-
-    //
-    // set module -1 to not try to find the FFS sequence
-    //
-
-    module = (HMODULE)- 1;
 #endif
 
     SBIEDLL_HOOK(Gdi_,GdiDllInitialize);

@@ -101,6 +101,7 @@ private slots:
 
 	void						OnExpanded(const QModelIndex& index) { ChangeExpand(index, true); }
 	void						OnCollapsed(const QModelIndex& index) { ChangeExpand(index, false); }
+	void						UpdateColapsed();
 
 	void						OnMoveItem(const QString& Name, const QString& To, int row);
 
@@ -200,6 +201,7 @@ private:
 	QAction*				m_pMenuRemove;
 	QMenu*					m_pMenuTools;
 	QAction*				m_pMenuDuplicate;
+	QAction*				m_pMenuDuplicateEx;
 	QAction*				m_pMenuExport;
 	QAction*				m_pMenuMoveUp;
 	//QAction*				m_pMenuMoveBy;

@@ -107,6 +107,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>Disabled</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -120,6 +121,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>Disabled</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -134,6 +136,7 @@
       <Optimization>Disabled</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -148,6 +151,7 @@
       </FunctionLevelLinking>
       <OmitFramePointers />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -163,6 +167,7 @@
       <FunctionLevelLinking>
       </FunctionLevelLinking>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -179,6 +184,7 @@
       </FunctionLevelLinking>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>

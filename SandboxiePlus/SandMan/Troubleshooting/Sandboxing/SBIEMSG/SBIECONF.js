@@ -8,6 +8,14 @@
 
 function openOptions(message, box, page)
 {
+  if (!box) {
+    let form = [
+        { id: 'box', name: tr('Select affected sandbox'), type: 'box' },
+    ];
+    let ret = wizard.showForm(form);
+    boxName = ret.box;
+  }
+
   message += '\n\n' + tr('Do you want to open the box option dialog to change this preset?');
   
   let form = [

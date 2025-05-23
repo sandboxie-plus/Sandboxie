@@ -108,6 +108,8 @@ QString CSbieProcess::GetStatusStr() const
 		Status += tr(" Elevated");
 	if (m_ProcessInfo.IsSystem)
 		Status += tr(" as System");
+	if (m_ProcessInfo.IsFakeAdmin)
+		Status += tr(" fake Admin");
 
 	if(m_SessionId != theAPI->GetSessionID() && m_SessionId != -1)
 		Status += tr(" in session %1").arg(m_SessionId);

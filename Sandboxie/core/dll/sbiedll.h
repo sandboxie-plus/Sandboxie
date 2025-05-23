@@ -137,6 +137,8 @@ SBIEDLL_EXPORT  struct _MSG_HEADER *SbieDll_CallServer(
 SBIEDLL_EXPORT  void *SbieDll_CallServerQueue(
 	const WCHAR* queue, void *req, ULONG req_len, ULONG rpl_min_len);
 
+SBIEDLL_EXPORT  void* SbieDll_AllocMem(ULONG size);
+
 SBIEDLL_EXPORT  void SbieDll_FreeMem(void *data);
 
 SBIEDLL_EXPORT  ULONG SbieDll_QueueCreate(

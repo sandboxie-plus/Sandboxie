@@ -110,6 +110,10 @@ static ULONG_PTR Gui_GetClassLongPtrA(HWND hWnd, int nIndex);
 // Variables
 //---------------------------------------------------------------------------
 
+static BOOLEAN Gui_NonRudeHWND_Hack = FALSE;
+
+static BOOLEAN Gui_HideWndProps = FALSE;
+
        ATOM Gui_DropTargetProp_Atom = 0;
 
        ATOM Gui_WindowProcOldW_Atom = 0;
@@ -160,13 +164,22 @@ _FX BOOLEAN Gui_InitProp(HMODULE module)
         // hook Prop functions that are used to hide drag/drop props
         //
 
-        SBIEDLL_HOOK_GUI(GetPropA);
-        SBIEDLL_HOOK_GUI(GetPropW);
-        SBIEDLL_HOOK_GUI(SetPropA);
-        SBIEDLL_HOOK_GUI(SetPropW);
-        SBIEDLL_HOOK_GUI(RemovePropA);
-        SBIEDLL_HOOK_GUI(RemovePropW);
+        Gui_HideWndProps = TRUE;
     }
+
+    //
+    // without UnrestrictedToken=y fulscreen does not work when NonRudeHWND is set
+    // so unless we are running in appcompartment mode by default we drop that SetProp
+    //
+
+    Gui_NonRudeHWND_Hack = SbieApi_QueryConfBool(NULL, L"UseNonRudeHwndHack", !Dll_CompartmentMode);
+
+    SBIEDLL_HOOK_GUI(GetPropA);
+    SBIEDLL_HOOK_GUI(GetPropW);
+    SBIEDLL_HOOK_GUI(SetPropA);
+    SBIEDLL_HOOK_GUI(SetPropW);
+    SBIEDLL_HOOK_GUI(RemovePropA);
+    SBIEDLL_HOOK_GUI(RemovePropW);
 
     if (! Gui_OpenAllWinClasses) {
 
@@ -401,6 +414,9 @@ _FX HANDLE Gui_GetPropCommon(
 
 _FX HANDLE Gui_GetPropW(HWND hWnd, const WCHAR *lpString)
 {
+    if (!Gui_HideWndProps)
+        return __sys_GetPropW(hWnd, lpString);
+
     if (! Gui_OpenAllWinClasses) {
 
         //
@@ -442,6 +458,9 @@ _FX HANDLE Gui_GetPropW(HWND hWnd, const WCHAR *lpString)
 
 _FX HANDLE Gui_GetPropA(HWND hWnd, const UCHAR *lpString)
 {
+    if (!Gui_HideWndProps)
+        return __sys_GetPropA(hWnd, lpString);
+
     if (! Gui_OpenAllWinClasses) {
 
         //
@@ -483,6 +502,15 @@ _FX HANDLE Gui_GetPropA(HWND hWnd, const UCHAR *lpString)
 
 _FX BOOL Gui_SetPropW(HWND hWnd, const WCHAR *lpString, HANDLE hData)
 {
+    if (Gui_NonRudeHWND_Hack && ((LONG_PTR)lpString & ~0xFFFF) != 0)
+    {
+        if (_wcsicmp(lpString, L"NonRudeHWND") == 0)
+            return TRUE;
+    }
+
+    if (!Gui_HideWndProps)
+        __sys_SetPropW(hWnd, lpString, hData);
+
     if (! Gui_OpenAllWinClasses) {
 
         if (! Gui_IsWindowAccessible(hWnd)) {
@@ -504,6 +532,15 @@ _FX BOOL Gui_SetPropW(HWND hWnd, const WCHAR *lpString, HANDLE hData)
 
 _FX BOOL Gui_SetPropA(HWND hWnd, const UCHAR *lpString, HANDLE hData)
 {
+    if (Gui_NonRudeHWND_Hack && ((LONG_PTR)lpString & ~0xFFFF) != 0)
+    {
+        if (strcmp(lpString, "NonRudeHWND") == 0)
+            return TRUE;
+    }
+
+    if (!Gui_HideWndProps)
+        return __sys_SetPropA(hWnd, lpString, hData);
+
     if (! Gui_OpenAllWinClasses) {
 
         if (! Gui_IsWindowAccessible(hWnd)) {
@@ -525,6 +562,9 @@ _FX BOOL Gui_SetPropA(HWND hWnd, const UCHAR *lpString, HANDLE hData)
 
 _FX HANDLE Gui_RemovePropW(HWND hWnd, const WCHAR *lpString)
 {
+    if (!Gui_HideWndProps)
+        return __sys_RemovePropW(hWnd, lpString);
+
     if (! Gui_OpenAllWinClasses) {
 
         if (! Gui_IsWindowAccessible(hWnd)) {
@@ -546,6 +586,9 @@ _FX HANDLE Gui_RemovePropW(HWND hWnd, const WCHAR *lpString)
 
 _FX HANDLE Gui_RemovePropA(HWND hWnd, const UCHAR *lpString)
 {
+    if (!Gui_HideWndProps)
+        return __sys_RemovePropA(hWnd, lpString);
+
     if (! Gui_OpenAllWinClasses) {
 
         if (! Gui_IsWindowAccessible(hWnd)) {

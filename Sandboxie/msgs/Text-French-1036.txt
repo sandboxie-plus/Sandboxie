@@ -355,7 +355,7 @@ SBIE2104 Échec à la fermeture de cette session Windows - %2
 # .
 
 2108;pop;inf;01
-SBIE2108 Simulation de l'achèvement du programme « %2 » réussi
+SBIE2108 Simulation de l'achèvement du programme « %2 » réussie
 .
 
 2111;pop;inf;01      
@@ -399,7 +399,7 @@ SBIE2193 Assurez-vous d'avoir effacé le bac à sable après le processus de mis
 .
 
 2194;pop;inf;01
-SBIE2194 L'installeur MSI a besoin que l'option %s soit placée dans le fichier ini, ce qui affaiblit cependant l'isolement.
+SBIE2194 L'installeur MSI a besoin que l'option %s soit placée dans le fichier ini, ce qui affaiblit cependant l'isolation.
 .
 
 2195;pop;inf;01
@@ -2755,7 +2755,7 @@ Droits restreints
 .
 
 3943;txt;01
-Sandboxie a désactivé seulement quelques droits en matière de sécurité des programmes qu'il supervise afin de garantir l'isolement.
+Sandboxie a désactivé seulement quelques droits en matière de sécurité des programmes qu'il supervise afin de garantir l'isolation.
 .
 
 3944;txt;01

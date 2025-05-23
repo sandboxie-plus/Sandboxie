@@ -497,17 +497,12 @@ _FX ULONG IpHlp_CommonSend(         ULONG_PTR IcmpHandle,
 
     error = rpl->h.status;
 
-    if (error != ERROR_SUCCESS)
-        len = 0;
-    else {
+    len = rpl->reply_size;
+    if (len > ReplySize)
+        len = ReplySize;
+    memcpy(ReplyBuffer, rpl->reply_data, len);
 
-        len = rpl->reply_size;
-        if (len > ReplySize)
-            len = ReplySize;
-        memcpy(ReplyBuffer, rpl->reply_data, len);
-
-        len = rpl->num_replies;
-    }
+    len = rpl->num_replies;
 
     Dll_Free(rpl);
 
@@ -535,10 +530,12 @@ _FX ULONG IpHlp_CommonSend(         ULONG_PTR IcmpHandle,
 
     if ((! error) && Event) {
         ((ICMP_ECHO_REPLY *)ReplyBuffer)->Reserved = (USHORT)len;
-        len = 0;
         error = ERROR_IO_PENDING;
         SetEvent(Event);
     }
+	
+    if (error != ERROR_SUCCESS)
+        len = 0;
 
     SetLastError(error);
     return len;

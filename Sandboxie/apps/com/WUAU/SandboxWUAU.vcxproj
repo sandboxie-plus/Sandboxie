@@ -117,6 +117,7 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;libucrt.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -129,6 +130,7 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,6 +144,7 @@
       </MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -153,6 +156,7 @@
       </FunctionLevelLinking>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -165,6 +169,7 @@
       </FunctionLevelLinking>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -179,6 +184,7 @@
       </MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>

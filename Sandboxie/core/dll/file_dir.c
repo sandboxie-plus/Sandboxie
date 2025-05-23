@@ -1502,9 +1502,13 @@ _FX NTSTATUS File_MergeDummy(
         Pattern_Free(mask);
 
     if (PrevEntry == NULL) {
+        
         // no dummys created
-        status = STATUS_NO_MORE_ENTRIES;
-        goto finish;
+
+        Pool_Delete(qfile->cache_pool);
+        qfile->cache_pool = NULL;
+
+        return STATUS_NO_MORE_ENTRIES;
     }
     *PrevEntry = 0;
 
@@ -1560,8 +1564,6 @@ _FX NTSTATUS File_MergeDummy(
         info_ptr = (FILE_ID_BOTH_DIR_INFORMATION *)
             ((UCHAR *)info_ptr + info_ptr->NextEntryOffset);
     }
-
-finish:
 
     Pool_Free(info_area, INFO_AREA_LEN);
 
@@ -3525,6 +3527,9 @@ _FX NTSTATUS File_MyQueryDirectoryFile(
 
 _FX void File_CreateBaseFolders()
 {
+    NTSTATUS status;
+    WCHAR conf_buf[2048];
+
     //
     // in privacy mode we need to pre create some folders or else programs may fail
     //
@@ -3536,21 +3541,32 @@ _FX void File_CreateBaseFolders()
     //    File_CreateBoxedPath(File_CurrentUser);
     //}
 
-    WCHAR* Folders[] = { L"SystemRoot", L"TEMP", L"USERPROFILE", //L"windir",
-                        L"PUBLIC", L"ProgramData", L"LOCALAPPDATA", L"ALLUSERSPROFILE", L"APPDATA",
-                        L"ProgramFiles", L"ProgramFiles(x86)", L"ProgramW6432",
-                        //L"CommonProgramFiles", L"CommonProgramFiles(x86)", L"CommonProgramW6432", 
-                        NULL };
-    WCHAR path[MAX_PATH];
-    for (WCHAR** Folder = Folders; *Folder; Folder++) {
-        path[0] = 0;
-        GetEnvironmentVariable(*Folder, path, sizeof(path));
-        if (path[0]) {
-            WCHAR* pathNT = File_TranslateDosToNtPath(path);
-            if (pathNT) {
-                File_CreateBoxedPath(pathNT);
-                Dll_Free(pathNT);
-            }
+    for (ULONG index = 0; ; ++index) {
+
+        status = SbieApi_QueryConf(
+            L"TemplateDefaultFolders", L"DefaultFolder", index | CONF_GET_NO_GLOBAL, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        File_CreateBoxedPath(conf_buf);
+    }
+
+    for (ULONG index = 0; ; ++index) {
+
+        status = SbieApi_QueryConf(
+            NULL, L"DefaultFolder", index | CONF_GET_NO_EXPAND, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        WCHAR expanded[MAX_PATH];
+        DWORD len = ExpandEnvironmentStringsW(conf_buf, expanded, MAX_PATH);
+        if (len == 0 || len > MAX_PATH || wcschr(expanded, L'%'))
+            continue;
+
+        WCHAR* pathNT = File_TranslateDosToNtPath(expanded);
+        if (pathNT) {
+            File_CreateBoxedPath(pathNT);
+            Dll_Free(pathNT);
         }
     }
 }

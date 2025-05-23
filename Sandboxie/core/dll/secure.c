@@ -440,8 +440,7 @@ _FX BOOLEAN Secure_Init(void)
     // note: when running as the built in administrator we should always act as if we have admin rights
     //
 
-    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin())
-        && (_wcsicmp(Dll_ImageName, L"msedge.exe") != 0); // never for msedge.exe
+    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin() || (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0);
 
 
     void* NtAccessCheckByType = GetProcAddress(Dll_Ntdll, "NtAccessCheckByType");
@@ -744,13 +743,22 @@ _FX NTSTATUS Secure_NtDuplicateObject(
     // if we are successful, then make sure the handle gets closed
     //
 
-    status = __sys_NtDuplicateObject(
-        SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
-        DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
+    if (TargetProcessHandle == NULL) {
+            
+        status = __sys_NtDuplicateObject(
+            SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
+            DesiredAccess, HandleAttributes, Options);
+
+    } else {
+        
+        status = __sys_NtDuplicateObject(
+            SourceProcessHandle, SourceHandle, TargetProcessHandle, TargetHandle,
+            DesiredAccess, HandleAttributes, Options & ~DUPLICATE_CLOSE_SOURCE);
+    }
 
     if (NT_SUCCESS(status)) {
 
-        if (Options & DUPLICATE_CLOSE_SOURCE) {
+        if (TargetProcessHandle != NULL && (Options & DUPLICATE_CLOSE_SOURCE)) {
 
             //
             // issue NtDuplicateObject again with no TargetProcessHandle
@@ -777,7 +785,7 @@ _FX NTSTATUS Secure_NtDuplicateObject(
             }
 
             if (SourceHandle)
-                Key_NtClose(SourceHandle, NULL);
+                Key_NtClose(SourceHandle, NULL); // clear cached state for reg keys
         }
 
     //

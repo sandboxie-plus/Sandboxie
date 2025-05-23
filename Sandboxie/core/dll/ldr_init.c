@@ -213,6 +213,14 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
             break;
         }
 
+        //
+        // For security reasons we do not allow relative paths, or other files then .dll
+        //
+
+        wchar_t* ext = wcsrchr(dllname, L'.');
+        if (!ext || _wcsicmp(ext, L".dll") != 0 || wcsstr(dllname, L"..") != NULL)
+            continue;
+
 		//
 		// For expedient use we allow to enter the dll name without a path
 		// starting with \ in that case the DLL is looked for in %SbieHome%

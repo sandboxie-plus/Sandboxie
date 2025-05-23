@@ -110,6 +110,7 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
@@ -121,6 +122,7 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
@@ -134,6 +136,7 @@
       </MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
@@ -143,6 +146,7 @@
     <ClCompile>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
@@ -153,6 +157,7 @@
     <ClCompile>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
@@ -165,6 +170,7 @@
       </MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>

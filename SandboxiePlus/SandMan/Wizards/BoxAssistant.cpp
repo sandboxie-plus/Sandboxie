@@ -512,6 +512,8 @@ void CListPage::LoadIssues()
     QString Filter = m_pFilter->text();
 
     foreach(auto Issue, ((CBoxAssistant*)wizard())->GetIssues(List)) {
+        if(Issue["name"].toString().isEmpty())
+            continue;
         if (Filter.isEmpty()
           || theGUI->GetScripts()->Tr(Issue["name"].toString()).contains(Filter, Qt::CaseInsensitive)
           || theGUI->GetScripts()->Tr(Issue["description"].toString()).contains(Filter, Qt::CaseInsensitive))

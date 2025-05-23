@@ -147,7 +147,7 @@ typedef struct _FLT_RELATED_OBJECTS {
 typedef CONST struct _FLT_RELATED_OBJECTS *PCFLT_RELATED_OBJECTS;
 
 
-#if !defined(_AMD64_) && !defined(_IA64_)
+#if !defined(_AMD64_) && !defined(_IA64_) && !defined(_ARM_) && !defined(_ARM64_)
 #include "pshpack4.h"
 #endif
 
@@ -796,10 +796,20 @@ typedef union _FLT_PARAMETERS {
         LARGE_INTEGER Argument6;
     } Others;
 
+    //
+    // Parameters for IRP_MN_DEVICE_USAGE_NOTIFICATION
+    //
+
+    struct {
+        BOOLEAN InPath;
+        BOOLEAN Reserved[3];
+        DEVICE_USAGE_NOTIFICATION_TYPE POINTER_ALIGNMENT Type;
+    } UsageNotification;
+
 } FLT_PARAMETERS, *PFLT_PARAMETERS;
 
 
-#if !defined(_AMD64_) && !defined(_IA64_)
+#if !defined(_AMD64_) && !defined(_IA64_) && !defined(_ARM_) && !defined(_ARM64_)
 #include "poppack.h"
 #endif
 

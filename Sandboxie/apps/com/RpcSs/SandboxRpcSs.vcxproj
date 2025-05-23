@@ -111,6 +111,7 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;libucrt.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
@@ -123,6 +124,7 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
@@ -136,6 +138,7 @@
       </MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
@@ -145,6 +148,7 @@
     <ClCompile>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
@@ -155,6 +159,7 @@
     <ClCompile>
       <MinimalRebuild />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
@@ -167,6 +172,7 @@
       </MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>

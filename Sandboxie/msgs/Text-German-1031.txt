@@ -226,6 +226,10 @@ SBIE1319 Druckerwarteschlangendruck zu Datei, %2 %3 verhindert
 SBIE1320 Um zu erlauben, dass die Druckerwarteschlange für diesen Prozess außerhalb der Sandbox schreiben darf, doppelklicken Sie bitte auf diese Nachricht
 .
 
+1321;pop;inf;01
+SBIE1321 Programm '%2' wurde in die Sandbox %3 gezwungen
+.
+
 1399;pop;inf;01
 %0
 .
@@ -282,6 +286,22 @@ SBIE1411 Sandbox %2 verweist auf eine unbekannte Vorlage (Template) %3
 
 1412;evt;pop;err;01
 SBIE1412 Im Text: %2
+.
+
+1413;evt;pop;wrn;01
+SBIE1413 Die Datei zum Einbinden einer Box %3 kann nicht geöffnet werden, Fehler %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 Die folgende Meldung weist auf einen Fehler %2 beim Einbinden einer Box %3 hin
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Nicht übereinstimmender Name einer portablen Box (ini-Dateiname muss mit der ini-Sektion der Box übereinstimmen), beim Einbinden %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Name einer portablen Box wird bereits von einer anderen Box verwendet, beim Einbinden %3
 .
 
 #----------------------------------------------------------------------------
@@ -371,7 +391,7 @@ SBIE2193 Die Sandbox nach dem erfolgreichen Aktualisierungsprozess unbedingt lö
 .
 
 2194;pop;inf;01
-SBIE2194 MSI-Installer benötigt die Aktivierung der %2 option in der ini-Datei, was jedoch die Sicherheit schwächen kann.
+SBIE2194 Der MSI-Installer erfordert, um korrekt arbeiten zu können, dass die Option %2 in der ini-Datei gesetzt wird. Diese Option schwächt jedoch die Isolation.
 .
 
 2195;pop;inf;01
@@ -674,6 +694,18 @@ SBIE2326 Kann die Registrierung nicht bereitstellen: %2
 SBIE2327 Fehler beim COM Server: %2
 .
 
+2328;pop;err;01
+SBIE2328 Fehler beim Auflösen des Chrome-Sandbox-Hooks %2
+.
+
+2329;pop;err;01
+SBIE2329 Fehler beim Auffinden der FFS-Sequenz %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspezifizierter Fehler beim Hooking in %2
+.
+
 2331;pop;err;01
 SBIE2331 Start des Dienstes fehlgeschlagen: %2
 .
@@ -909,7 +941,7 @@ Vor dem Löschen der Inhalte bitte alle laufenden Prozesse in dieser Sandbox bee
 .
 
 3222;txt;01
-Löschen-Befehl fehlgeschlagen:  %0
+Löschen-Befehl fehlgeschlagen: %2
 .
 
 3241;txt;01
@@ -1492,7 +1524,7 @@ Diese Programme oder Dokumente werden unter der Kontrolle von Sandboxie gestarte
 
 Es wird jedoch empfohlen, Veränderungen des Inhalts der Sandbox über eine Instanz
 des Windows Explorer vorzunehmen, welche mit Sandboxie ausgeführt wird.
-Also über ‘Sandbox’ -> 'In der Sandbox starten' -> 'Windows Explorer starten'.
+Also über 'Sandbox' -> 'In der Sandbox starten' -> 'Windows Explorer starten'.
 .
 
 3535;txt;01

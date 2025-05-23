@@ -19,9 +19,6 @@
 #include <QtConcurrent>
 #include "SandBox.h"
 #include "../SbieAPI.h"
-#ifdef _DEBUG
-#include <QGuiApplication>
-#endif
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -29,6 +26,9 @@ typedef long NTSTATUS;
 
 #include <windows.h>
 #include "..\..\Sandboxie\common\win32_ntddk.h"
+#include "..\..\Sandboxie\core\drv\api_flags.h"
+
+#include "..\..\Sandboxie\common\ini.cpp"
 
 #include "../Helpers/NtIO.h"
 
@@ -41,6 +41,9 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	//m = new SSandBox;
 
 	m_IsEnabled = true;
+
+	m_PortablePath = GetText("IniLocation", "", false, true, false, true);
+	m_pIniFile = NULL;
 
 	m_ActiveProcessCount = 0;
 	m_ActiveProcessDirty = false;
@@ -55,10 +58,10 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		SetBool("BlockNetworkFiles", true);
 
 		// recovery
-		InsertText("RecoverFolder", "%Desktop%");
-		//InsertText("RecoverFolder", "%Favorites%"); // obsolete
-		InsertText("RecoverFolder", "%Personal%");
-		InsertText("RecoverFolder", "%{374DE290-123F-4565-9164-39C4925E467B}%"); // %USERPROFILE%\Downloads
+		AppendText("RecoverFolder", "%Desktop%");
+		//AppendText("RecoverFolder", "%Favorites%"); // obsolete
+		AppendText("RecoverFolder", "%Personal%");
+		AppendText("RecoverFolder", "%{374DE290-123F-4565-9164-39C4925E467B}%"); // %USERPROFILE%\Downloads
 
 		SetText("BorderColor", "#00FFFF,ttl"); // "#00FFFF,off"
 	}
@@ -66,25 +69,25 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	if (cfglvl < 6)
 	{
 		// templates L6
-		InsertText("Template", "AutoRecoverIgnore");
-		//InsertText("Template", "Firefox_Phishing_DirectAccess");
-		//InsertText("Template", "Chrome_Phishing_DirectAccess");
-		InsertText("Template", "LingerPrograms");
+		AppendText("Template", "AutoRecoverIgnore");
+		//AppendText("Template", "Firefox_Phishing_DirectAccess");
+		//AppendText("Template", "Chrome_Phishing_DirectAccess");
+		AppendText("Template", "LingerPrograms");
 	}
 
 	if (cfglvl < 7)
 	{
 		// templates L7
-		InsertText("Template", "BlockPorts");
-		//InsertText("Template", "WindowsFontCache"); // since 5.46.3 open by driver
-		InsertText("Template", "qWave");
+		AppendText("Template", "BlockPorts");
+		//AppendText("Template", "WindowsFontCache"); // since 5.46.3 open by driver
+		AppendText("Template", "qWave");
 	}
 
 	if (cfglvl < 8)
 	{
 		// templates L8
-		InsertText("Template", "FileCopy");
-		InsertText("Template", "SkipHook");
+		AppendText("Template", "FileCopy");
+		AppendText("Template", "SkipHook");
 	}
 	
 	if (cfglvl < 9)
@@ -92,7 +95,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		// fix the unfortunate typo
 		if (GetTextList("Template", false).contains("FileCppy"))
 		{
-			InsertText("Template", "FileCopy");
+			AppendText("Template", "FileCopy");
 			DelValue("Template", "FileCppy");
 		}
 
@@ -102,7 +105,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		if (GetBool("DropAdminRights", false) == false) 
 		{
 			// enable those templates only for non hardened boxes
-			InsertText("Template", "OpenBluetooth");
+			AppendText("Template", "OpenBluetooth");
 		}
 	}
 
@@ -111,7 +114,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		// starting with 5.62.3 OpenProtectedStorage is a template
 		if (GetBool("OpenProtectedStorage")) {
 			DelValue("OpenProtectedStorage");
-			InsertText("Template", "OpenProtectedStorage");
+			AppendText("Template", "OpenProtectedStorage");
 		}
 	}
 
@@ -120,22 +123,31 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 
 CSandBox::~CSandBox()
 {
+	delete m_pIniFile;
+
 	//delete m;
 }
 
 void CSandBox::UpdateDetails()
 {
-	auto res = m_pAPI->ImBoxQuery(m_RegPath);
-	if (res.IsError()) {
-		m_Mount.clear();
-		return;
+	if (GetBool("UseRamDisk") || GetBool("UseFileImage"))
+	{
+		auto res = m_pAPI->ImBoxQuery(m_RegPath);
+		if (res.IsError()) {
+			m_Mount.clear();
+			return;
+		}
+		QVariantMap Info = res.GetValue();
+		m_Mount = Info["DiskRoot"].toString();
 	}
-	QVariantMap Info = res.GetValue();
-	m_Mount = Info["DiskRoot"].toString();
+	else if(!m_Mount.isEmpty())
+		m_Mount.clear();
 }
 
 void CSandBox::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
 {
+	//m_FileNtPath = FilePath;
+	//m_FilePath = FilePath.isEmpty() ? QString() : m_pAPI->Nt2DosPath(FilePath);
 	m_FilePath = FilePath;
 	m_RegPath = RegPath;
 	m_IpcPath = IpcPath;
@@ -149,10 +161,10 @@ void CSandBox::SetFileRoot(const QString& FilePath)
 
 SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 {
-#ifdef _DEBUG
+/*#ifdef _DEBUG
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
 		return RunSandboxed(Command);
-#endif
+#endif*/
 	return m_pAPI->RunStart(m_Name, Command, Elevated ? CSbieAPI::eStartElevated : CSbieAPI::eStartDefault);
 }
 
@@ -330,7 +342,7 @@ QString CSandBox::Expand(const QString& Value)
 		else if (var.compare("BoxName", Qt::CaseInsensitive) == 0)
 			val = this->GetName();
 		else
-			val = m_pAPI->SbieIniGet(this->GetName(), "%" + var + "%", 0x80000000); // CONF_JUST_EXPAND
+			val = m_pAPI->SbieIniGet(this->GetName(), "%" + var + "%", CONF_JUST_EXPAND);
 		Value2.replace("%" + var + "%", val);
 		pos += result.capturedLength();
 	}
@@ -829,4 +841,100 @@ SB_STATUS CSandBox::ImBoxMount(const QString& Password, bool bProtect, bool bAut
 SB_STATUS CSandBox::ImBoxUnmount()
 {
 	return m_pAPI->ImBoxUnmount(this);
+}
+
+SB_STATUS CSandBox::RenameSection(const QString& NewName, bool deleteOld)
+{
+	if (!m_IsVirtual && !m_PortablePath.isEmpty())
+	{
+		return SB_ERR(STATUS_NOT_SUPPORTED);
+	}
+	return CSbieIni::RenameSection(NewName, deleteOld);
+}
+
+SB_STATUS CSandBox::RemoveSection()
+{
+	if (!m_IsVirtual && !m_PortablePath.isEmpty())
+	{
+		m_pAPI->GetGlobalSettings()->DelValue("ImportBox", m_PortablePath);
+		if(!QFile::remove(m_PortablePath))
+			return SB_ERR(STATUS_UNSUCCESSFUL);
+		return SB_OK;
+	}
+	return CSbieIni::RemoveSection();
+}
+
+void CSandBox::CommitIniChanges()
+{
+	if (m_pIniFile)
+	{
+		m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
+		delete m_pIniFile;
+		m_pIniFile = NULL;
+		m_pAPI->ReloadConfig();
+		return;
+	}
+	CSbieIni::CommitIniChanges();
+}
+
+SB_STATUS CSandBox::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode, bool bRefresh)
+{
+	if (!m_IsVirtual && !m_PortablePath.isEmpty())
+	{
+		NTSTATUS status = STATUS_SUCCESS;
+
+		if (!m_pIniFile) {
+			m_pIniFile = new CIniFile();
+			status = m_pIniFile->LoadIni((WCHAR*)m_PortablePath.utf16());
+		}
+
+		if(NT_SUCCESS(status)) {
+			if(Mode == eIniUpdate && Setting == "*" && Value.isEmpty())
+				status = m_pIniFile->RemoveSection((WCHAR*)Section.utf16());
+			else if(Mode == eIniAppend || Mode == eIniInsert)
+				status = m_pIniFile->AddValue((WCHAR*)Section.utf16(), (WCHAR*)Setting.utf16(), (WCHAR*)Value.utf16(), Mode == eIniInsert);
+			else if(Mode == eIniDelete)
+				status = m_pIniFile->RemoveValue((WCHAR*)Section.utf16(), (WCHAR*)Setting.utf16(), (WCHAR*)Value.utf16());
+			else
+				status = m_pIniFile->SetValue((WCHAR*)Section.utf16(), (WCHAR*)Setting.utf16(), (WCHAR*)Value.utf16(), Value.length());
+		}
+
+		if(!NT_SUCCESS(status))
+			return SB_ERR(status);
+
+		if (bRefresh) {
+			m_pIniFile->SaveIni((WCHAR*)m_PortablePath.utf16());
+			m_pAPI->ReloadConfig();
+		}
+
+		return SB_OK;
+	}
+	return CSbieIni::SbieIniSet(Section, Setting, Value, Mode, bRefresh);
+}
+
+QString CSandBox::SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode, quint32* pType) const
+{
+	return CSbieIni::SbieIniGet(Section, Setting, Index, ErrCode, pType);
+}
+
+QString CSandBox::SbieIniGetEx(const QString& Section, const QString& Setting) const
+{
+	if (!m_IsVirtual && !m_PortablePath.isEmpty())
+	{
+		NTSTATUS status = STATUS_SUCCESS;
+
+		if (!m_pIniFile) {
+			((CSandBox*)this)->m_pIniFile = new CIniFile();
+			status = m_pIniFile->LoadIni((WCHAR*)m_PortablePath.utf16());
+		}
+
+		std::wstring iniData;
+		if (NT_SUCCESS(status)) {
+			status = m_pIniFile->GetValue((WCHAR*)Section.utf16(), (WCHAR*)Setting.utf16(), iniData);
+			if (NT_SUCCESS(status))
+				return QString::fromStdWString(iniData);
+		}
+		return QString();
+	}
+	return CSbieIni::SbieIniGetEx(Section, Setting);
 }

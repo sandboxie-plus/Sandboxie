@@ -118,6 +118,10 @@ static const ULONG Pool_Tag = 'loop';
 #define LARGE_CHUNK_SIZE    PAD_8(sizeof(LARGE_CHUNK))
 
 
+// Maximum possible size for a large chunk
+#define LARGE_CHUNK_MAXIMUM     (0xFFFFFFFFu - (LARGE_CHUNK_SIZE + POOL_PAGE_SIZE))
+
+
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------
@@ -192,7 +196,6 @@ static void *Pool_Alloc_Mem(ULONG size, ULONG tag);
 static void Pool_Free_Mem(void *ptr, ULONG tag);
 
 static PAGE *Pool_Alloc_Page(POOL *pool, ULONG tag);
-static void  Pool_Free_Page(PAGE *page);
 
 static ULONG Pool_Find_Cells(PAGE *page, ULONG size);
 
@@ -645,6 +648,9 @@ ALIGNED ULONG Pool_Delete(POOL *pool)
 
 ALIGNED void *Pool_Alloc(POOL *pool, ULONG size)
 {
+    if (size >= LARGE_CHUNK_MAXIMUM)
+        return NULL;
+
     void *ptr = NULL;
     if (size) {
 

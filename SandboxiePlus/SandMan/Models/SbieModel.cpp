@@ -205,7 +205,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			Index = Find(m_Root, pNode);
 		}
 
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
 		int Col = 0;
 		bool State = false;
@@ -435,6 +435,8 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/SystemShield.png");
 				else if (pProcess->HasElevatedToken())
 					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AdminShield.png");
+				else if (pProcess->HasFakeToken())
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/FakeShield.png");
 				else if (pProcess->HasAppContainerToken())
 					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AppContainer.png"); // AppContainer is also Restricted
 				else if (pProcess->HasRestrictedToken())
@@ -562,6 +564,16 @@ QVariant CSbieModel::GetID(const QModelIndex &index) const
 		return CSbieModel__RemoveGroupMark(pNode->ID.toString());
 
 	return pNode->ID;
+}
+
+QModelIndex CSbieModel::FindGroupIndex(const QString& Name) const
+{
+	QVariant ID = CSbieModel__AddGroupMark(Name);
+	QHash<QVariant, STreeNode*>::const_iterator I = m_Map.find(ID);
+	if (I == m_Map.end())
+		return QModelIndex();
+
+	return Find(m_Root, I.value());
 }
 
 CSbieModel::ETypes CSbieModel::GetType(const QModelIndex &index) const

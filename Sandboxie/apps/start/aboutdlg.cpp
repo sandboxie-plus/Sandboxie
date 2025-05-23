@@ -285,7 +285,7 @@ bool DoAboutDialog(bool bReminder)
     if (g_bReminder) {
 
         SCertInfo CertInfo = { 0 };
-        SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo));
+        SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo));
         if (CertInfo.active)
             return true;
 
@@ -311,9 +311,9 @@ bool DoAboutDialog(bool bReminder)
 
 		    USHORT ReminderShedule[2 * 11] = {
 		    //  days,	itnerval,	
-			    730,	1 * 24,
-			    365,	5 * 24,
-			    182,	10 * 24,
+			    730,	     12,
+			    365,	 1 * 24,
+			    182,	 5 * 24,
 			    30,		30 * 24,
 			    0
 		    };

@@ -802,7 +802,7 @@ std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFi
     WCHAR app[768];
     if (!NT_SUCCESS(SbieApi_GetHomePath(NULL, 0, app, 768)))
         return NULL;
-    wcscpy(wcsrchr(app, L'\0'), L"\\ImBox.exe");
+    wcscat(app, L"\\ImBox.exe");
     STARTUPINFO si = { sizeof(STARTUPINFO) };
     PROCESS_INFORMATION pi = { 0 };
     if (CreateProcess(app, (WCHAR*)cmd.c_str(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
@@ -997,7 +997,7 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
     std::wstring TargetNtPath;
 
     SCertInfo CertInfo = { 0 };
-    if ((UseFileImage || UseRamDisk) && (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !(UseFileImage ? CertInfo.opt_enc : CertInfo.active))) {
+    if ((UseFileImage || UseRamDisk) && (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !(CertInfo.active && (UseFileImage ? CertInfo.opt_enc : CertInfo.opt_sec)))) {
         const WCHAR* strings[] = { boxname, UseFileImage ? L"UseFileImage" : L"UseRamDisk" , NULL };
         SbieApi_LogMsgExt(session_id, UseFileImage ? 6009 : 6008, strings);
         errlvl = 0x66;

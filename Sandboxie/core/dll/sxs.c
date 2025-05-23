@@ -1686,7 +1686,9 @@ _FX BOOLEAN Sxs_InitKernel32(void)
     //
     // Opera hooks NtSetInformationThread. SboxDll calls __sys_NtSetInformationThread to bypass Opera hook.
     // See the comment about Thread_SetInformationThread_ChangeNotifyToken in Gui_ConnectToWindowStationAndDesktop
-    //
+    // 
+    // Tested with opera 117 and this workaround seems no longer required
+    // 
 
     NtSetInformationThread = GetProcAddress(Dll_Ntdll, "NtSetInformationThread");
     if (NtSetInformationThread) {

@@ -24,6 +24,8 @@
 #include "util.h"
 #include "process.h"
 #include "common/my_version.h"
+#define KERNEL_MODE
+#include "verify.h"
 
 
 //---------------------------------------------------------------------------
@@ -316,22 +318,79 @@ NTSTATUS SetRegValue(const WCHAR *KeyPath, const WCHAR *ValueName, const void *D
     UNICODE_STRING keyPath;
     UNICODE_STRING valueName;
     OBJECT_ATTRIBUTES objattrs;
-    ULONG disp;
+    ULONG disposition = 0;
+    PSECURITY_DESCRIPTOR sd = NULL;
+    PACL pEmptyAcl = NULL;
 
     if (!KeyPath || !ValueName || !Data)
         return STATUS_INVALID_PARAMETER;
 
-    RtlInitUnicodeString(&keyPath, KeyPath);
-    InitializeObjectAttributes(&objattrs, &keyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
-    status = ZwCreateKey(&handle, KEY_WRITE, &objattrs, 0, NULL, REG_OPTION_NON_VOLATILE, &disp);
-    if (status == STATUS_SUCCESS) {
-
-        RtlInitUnicodeString(&valueName, ValueName);
-        status = ZwSetValueKey(handle, &valueName, 0, REG_BINARY, (PVOID)Data, uSize);
+    sd = (PSECURITY_DESCRIPTOR)ExAllocatePoolWithTag(PagedPool, SECURITY_DESCRIPTOR_MIN_LENGTH, tzuk);
+    if (!sd) {
+        status = STATUS_INSUFFICIENT_RESOURCES;
+        goto finish;
     }
 
-    if(handle)
+    status = RtlCreateSecurityDescriptor(sd, SECURITY_DESCRIPTOR_REVISION);
+    if (!NT_SUCCESS(status))
+        goto finish;
+
+    //
+    // Define a static SID for S-1-5-100.
+    // Revision = 1, SubAuthorityCount = 1,
+    // IdentifierAuthority = {0,0,0,0,0,5} (SECURITY_NT_AUTHORITY),
+    // and SubAuthority[0] = 100.
+    //
+    SID OwnerSid = { 
+        1,                   // Revision
+        1,                   // SubAuthorityCount
+        {0, 0, 0, 0, 0, 5},  // IdentifierAuthority
+        {100}                // SubAuthority[0]
+    };
+
+    status = RtlSetOwnerSecurityDescriptor(sd, &OwnerSid, FALSE);
+    if (!NT_SUCCESS(status))
+        goto finish;
+
+    pEmptyAcl = (PACL)ExAllocatePoolWithTag(PagedPool, sizeof(ACL), tzuk);
+    if (!pEmptyAcl) {
+        status = STATUS_INSUFFICIENT_RESOURCES;
+        goto finish;
+    }
+
+    status = RtlCreateAcl(pEmptyAcl, sizeof(ACL), ACL_REVISION);
+    if (!NT_SUCCESS(status))
+        goto finish;
+
+    status = RtlSetDaclSecurityDescriptor(sd, TRUE, pEmptyAcl, FALSE);
+    if (!NT_SUCCESS(status))
+        goto finish;
+
+    RtlInitUnicodeString(&keyPath, KeyPath);
+    InitializeObjectAttributes(&objattrs, &keyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, sd);
+
+    status = ZwCreateKey(&handle, KEY_ALL_ACCESS, &objattrs, 0, NULL, REG_OPTION_NON_VOLATILE, &disposition);
+    if (!NT_SUCCESS(status))
+        goto finish;
+
+    if (disposition == REG_OPENED_EXISTING_KEY) {
+        status = ZwSetSecurityObject(handle, OWNER_SECURITY_INFORMATION | DACL_SECURITY_INFORMATION, sd);
+        //if (!NT_SUCCESS(status))
+        //    goto finish;
+    }
+
+    RtlInitUnicodeString(&valueName, ValueName);
+    status = ZwSetValueKey(handle, &valueName, 0, REG_BINARY, (PVOID)Data, uSize);
+
+finish:
+    if (handle)
         ZwClose(handle);
+
+    if (pEmptyAcl)
+        ExFreePoolWithTag(pEmptyAcl, tzuk);
+
+    if (sd)
+        ExFreePoolWithTag(sd, tzuk);
 
     return status;
 }
@@ -467,7 +526,6 @@ _FX BOOLEAN MyIsTestSigning(void)
 // MyIsCallerSigned
 //---------------------------------------------------------------------------
 
-NTSTATUS KphVerifyCurrentProcess();
 
 _FX BOOLEAN MyIsCallerSigned(void)
 {
@@ -475,6 +533,10 @@ _FX BOOLEAN MyIsCallerSigned(void)
 
     // in test signing mode don't verify the signature
     if (Driver_OsTestSigning)
+        return TRUE;
+
+    // if this is a node locked develoepr certificate don't verify the signature
+    if (Verify_CertInfo.type == eCertDeveloper && Verify_CertInfo.active)
         return TRUE;
 
     status = KphVerifyCurrentProcess();

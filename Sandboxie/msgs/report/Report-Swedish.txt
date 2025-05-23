@@ -26,6 +26,26 @@ SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
 SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
 .
 
+1321;pop;inf;01
+SBIE1321 Program '%2' was forced into sandbox %3
+.
+
+1413;evt;pop;wrn;01
+SBIE1413 The box include folder %3 file cannot be opened, error %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 The following message indicates an error %2 in a box include %3
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Portable box name mismatch (ini name must match box section) in a box include %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Portable box name is already in use by an other box, include %3
+.
+
 2113;pop;inf;01
 SBIE2113 File is too large to copy into sandbox, creating empty file - %2
 .
@@ -130,6 +150,18 @@ SBIE2246 Failed to mount box image, ImBox error %2
 SBIE2325 Debug:  %2
 .
 
+2328;pop;err;01
+SBIE2328 Failed to resolve chrome sandbox hook %2
+.
+
+2329;pop;err;01
+SBIE2329 Failed to find FFS sequence %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspecified error when hooking %2
+.
+
 2360;pop;err;01
 SBIE2360 Failed to inject SOCKS5 proxy:  %2
 .
@@ -163,24 +195,8 @@ Preparing to delete: %2
 Deleting: %2
 .
 
-3505;txt;01
-Contribute to Sandboxie
-.
-
-3506;txt;01
-Get Supporter Certificate
-.
-
-3507;txt;01
-Apply Supporter Certificate
-.
-
 3468;txt;01
 Sandboxie-Plus Migration Guide
-.
-
-3469;txt;01
-What's new in Sandboxie-Plus
 .
 
 6008;pop;err;01

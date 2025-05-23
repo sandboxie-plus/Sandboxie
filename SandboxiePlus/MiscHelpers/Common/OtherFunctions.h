@@ -124,6 +124,8 @@ MISCHELPERS_EXPORT QString GetRelativeSharedPath(const QString& fullPath, const 
 
 MISCHELPERS_EXPORT QString NameOfFile(const QString& FileName);
 
+MISCHELPERS_EXPORT QIcon IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
+
 #ifdef _DEBUG
 MISCHELPERS_EXPORT void GlobalTest();
 #endif

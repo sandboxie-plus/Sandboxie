@@ -64,14 +64,15 @@ english.UninstallTaskLabel3=&Keep configuration files and sandboxes%nThis is the
 english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the Sandboxie.ini and Sandboxie-Plus.ini configuration files while keeping the sandboxes unchanged.
 english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath.
 english.RefreshBuild=Download latest Templates.ini and translations
+english.InstallImDisk=Install (or Update) ImDisk 3.0 driver (for RamDisk and Encrypted Sandboxes)
 
 ; Chinese Simplified
-ChineseSimplified.AddSandboxedMenu=添加“在沙盒中运行”右键菜单
+ChineseSimplified.AddSandboxedMenu=添加“在沙箱中运行”右键菜单
 ChineseSimplified.AddSandboxedBrowser=添加用于在 Sandboxie 下启动网页浏览器的桌面快捷方式
-ChineseSimplified.SandboxieStartMenu1=在沙盒中运行程序
-ChineseSimplified.SandboxieStartMenu2=在沙盒中运行网页浏览器
+ChineseSimplified.SandboxieStartMenu1=在沙箱中运行程序
+ChineseSimplified.SandboxieStartMenu2=在沙箱中运行网页浏览器
 ChineseSimplified.SandboxieStartMenu3=Sandboxie 开始菜单
-ChineseSimplified.SandboxedBrowser=在沙盒中运行网页浏览器
+ChineseSimplified.SandboxedBrowser=在沙箱中运行网页浏览器
 ChineseSimplified.CustomPageLabel1=选择安装方式
 ChineseSimplified.CustomPageLabel2=应当如何安装
 ChineseSimplified.CustomPageLabel3=选择安装模式
@@ -80,13 +81,14 @@ ChineseSimplified.CustomPageUpgradeMode=更新当前已安装的 {#MyAppName}
 ChineseSimplified.CustomPagePortableMode=提取全部文件到指定目录供便携化使用
 ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseSimplified.ClassicFound=检测到已安装 Sandboxie Classic 版本，如要继续安装必须先将其卸载，是否开始卸载？
-ChineseSimplified.RunSandboxedMenu=在 Sandboxie 中运行(&S)
+ChineseSimplified.RunSandboxedMenu=在沙箱中运行(&X)
 ChineseSimplified.UninstallTaskLabel1=选择卸载方式
 ChineseSimplified.UninstallTaskLabel2=要如何卸载 Sandboxie-Plus？
-ChineseSimplified.UninstallTaskLabel3=保留配置文件和所有沙盒(&K)%n如果您打算保留当前配置并重新安装 Sandboxie-Plus，请选择此项。
-ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但会保留您在 Sandboxie-Plus 中创建的沙盒。
-ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙盒(&S)%n选择此选项将会移除所有配置文件和沙盒，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
+ChineseSimplified.UninstallTaskLabel3=保留配置文件和所有沙箱(&K)%n如果您打算保留当前配置并重新安装 Sandboxie-Plus，请选择此项。
+ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但会保留您在 Sandboxie-Plus 中创建的沙箱。
+ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙箱(&S)%n选择此选项将会移除所有配置文件和沙箱，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
 ChineseSimplified.RefreshBuild=下载最新的 Templates.ini 模板和翻译
+ChineseSimplified.InstallImDisk=安装（或更新）ImDisk 3.0驱动程序（用于内存盘和加密沙箱）。
 
 ; Chinese Traditional
 ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單
@@ -156,31 +158,33 @@ french.UninstallTaskLabel3=&Conserver les fichiers de configuration et les bacs 
 french.UninstallTaskLabel4=Supprimer les &fichiers de configuration%nSélectionnez cette option pour supprimer les fichiers de configuration « Sandboxie.ini » et « Sandboxie-Plus.ini » tout en conservant les bacs à sable inchangés.
 french.UninstallTaskLabel5=Supprimer les fichiers de configuration et les &bacs à sable%nSélectionnez cette option pour supprimer tous les fichiers de configuration et les bacs à sable, y compris le dossier « Sandbox » situé dans les chemins personnalisés avec « FileRootPath ».
 french.RefreshBuild=Télécharger les dernières versions de Templates.ini et des traductions
+french.InstallImDisk=Installer (ou mettre à jour) le pilote ImDisk 3.0 (pour disque de mémoire vive ou bac à sable chiffré)
 
 ; German
-german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
-german.AddSandboxedBrowser=Desktop-Verknüpfung erstellen zum Starten des Standard-Webbrowsers mit Sandboxie
+german.AddSandboxedMenu=Füge "Starte Sandgeboxt" zum Kontextmenü hinzu
+german.AddSandboxedBrowser=Erstelle Desktop-Verknüpfung zum Starten des Standard-Webbrowsers mit Sandboxie
 german.SandboxieStartMenu1=Programm mit Sandboxie starten
 german.SandboxieStartMenu2=Webbrowser mit Sandboxie starten
 german.SandboxieStartMenu3=Sandboxie Startmenü
-german.SandboxedBrowser=Sandboxed Web Browser
+german.SandboxedBrowser=Sandgeboxter Webbrowser
 german.CustomPageLabel1=Wählen Sie die Installationsart aus
-german.CustomPageLabel2=Wie soll installiert werden
-german.CustomPageLabel3=Wählen Sie die Installationsmethode
+german.CustomPageLabel2=Wie soll installiert werden?
+german.CustomPageLabel3=Wählen Sie die Installationsmethode aus
 german.CustomPageInstallMode=Installiere {#MyAppName} auf diesem Computer
-german.CustomPageUpgradeMode=Update der bestehenden {#MyAppName} Installation
-german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragbaren Verwendung
-german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
+german.CustomPageUpgradeMode=Aktualisiere bestehende {#MyAppName} Installation
+german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur portablen Verwendung
+german.RequiresWin7OrLater=Sandboxie-Plus erfordert Windows 7 oder neuer.
 german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
-german.RunSandboxedMenu=In &Sandbox ausführen
-german.UninstallTaskLabel1=Wählen Sie die De-Installationsart aus
-german.UninstallTaskLabel2=Wie möchten Sie Sandboxie-Plus de-installieren?
-german.UninstallTaskLabel3=&Konfiguration und Sandboxen behalten%nDies ist die empfohlene Option, wenn Sie vorhaben Sandboxie-Plus erneut zu intallieren, während Sandboxie-Plus alle Sandboxen und Konfigurationsdateien behält.
-german.UninstallTaskLabel4=&Entferne die Konfiguration%nWählen Sie diese Option um die Sandboxie.ini und Sandboxie-Plus.ini Dateien zu entfernen, während die Sandboxen unverändert bleiben.
-german.UninstallTaskLabel5=Entferne die Konfiguration und alle &Sandboxen%nWählen Sie diese Option um alle Konfigurationsdateien und alle Sandboxen, inklusive des Sandboxordners im, durch die Dateisystemquelle, benutzerdefinierten Pfad.
+german.RunSandboxedMenu=Starte &Sandgeboxt
+german.UninstallTaskLabel1=Wählen Sie die Deinstallationsart aus
+german.UninstallTaskLabel2=Wie möchten Sie Sandboxie-Plus deinstallieren?
+german.UninstallTaskLabel3=&Behalte Konfigurationsdateien und Sandboxen%nDies ist die empfohlene Option, wenn Sie vorhaben Sandboxie-Plus erneut zu installieren und dabei Ihre Konfigurationsdateien und Sandboxen behalten möchten.
+german.UninstallTaskLabel4=Entferne &Konfigurationsdateien%nWählen Sie diese Option, um die Konfigurationsdateien Sandboxie.ini und Sandboxie-Plus.ini zu entfernen, während die Sandboxen unverändert bleiben.
+german.UninstallTaskLabel5=Entferne Konfigurationsdateien und &Sandboxen%nWählen Sie diese Option, um alle Konfigurationsdateien und Sandboxen zu entfernen, einschließlich des Sandboxordners im, durch die Einstellung Dateisystemquelle (FileRootPath), benutzerdefinierten Pfad.
+german.RefreshBuild=Neueste Templates.ini und Übersetzungen herunterladen
+german.InstallImDisk=Installiere (oder Aktualisiere) ImDisk 3.0 Treiber (für Ramdisk und verschlüsselte Sandboxen)
 ; Fix issue #1333 with a space inserted before %1
 german.AutoStartProgram=Starte automatisch %1
-german.RefreshBuild=Neueste Templates.ini und Übersetzungen herunterladen
 
 ; Hungarian
 hungarian.AddSandboxedMenu=Az "Izolált módú futtatás" hozzáadása a helyi menühöz
@@ -296,6 +300,7 @@ polish.UninstallTaskLabel3=Zachowaj pliki &konfiguracyjne i piaskownice%nJest to
 polish.UninstallTaskLabel4=Usuń pliki konfigura&cyjne%nWybierz tę opcję, aby usunąć pliki konfiguracyjne Sandboxie.ini i Sandboxie-Plus.ini, zachowując piaskownice bez zmian.
 polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz tę opcję, aby usunąć wszystkie pliki konfiguracyjne i piaskownice, w tym folder Sandbox znajdujący się w niestandardowych ścieżkach z FileRootPath.
 polish.RefreshBuild=Pobierz najnowsze Templates.ini i tłumaczenia
+polish.InstallImDisk=Zainstaluj (lub Uaktualnij) sterownik ImDisk 3.0 (dla RamDisk i zaszyfrowanych sandboxów)
 
 ; Brazilian Portuguese
 brazilianportuguese.AddSandboxedMenu=Adicionar "Executar na Caixa de Areia" no menu de contexto
@@ -409,8 +414,9 @@ swedish.UninstallTaskLabel1=Välj avinstallationstyp
 swedish.UninstallTaskLabel2=Hur vill du avinstallera Sandboxie-Plus?
 swedish.UninstallTaskLabel3=&Behåll konfigureringsfiler och sandlådor%nDetta är det rekommenderade alternativet om du tänker installera om Sandboxie-Plus, men vill behålla dina konfigurationsfiler och sandlådor.
 swedish.UninstallTaskLabel4=Ta bort &konfigurationsfilerna%nVälj detta alternativ för att ta bort Sandboxie.ini och Sandboxie-Plus.ini:s konfigurationsfiler men behålla sandlådorna oförändrade.
-swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filroot sökvägen.
+swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filrootsökvägen.
 swedish.RefreshBuild=Nedladda senaste Mallar.ini och översättningar
+swedish.InstallImDisk=Installera (eller uppdatera) ImDisk 3.0-drivrutinen (för RamDisk och krypterade sandlådor)
 
 ; Turkish
 turkish.AddSandboxedMenu=Bağlam menüsüne "Korumalı Alanda Çalıştır" seçeneği ekle
@@ -434,6 +440,7 @@ turkish.UninstallTaskLabel3=Yapılandırma dosyalarını ve korumalı alanları 
 turkish.UninstallTaskLabel4=&Yapılandırma dosyalarını kaldır%nSandboxie.ini ve Sandboxie-Plus.ini yapılandırma dosyalarını, korumalı alanları değiştirmeden kaldırmak için bunu seçin.
 turkish.UninstallTaskLabel5=Yapılandırma dosyalarını ve &korumalı alanları kaldır%nFileRootPath ile özel yollarda bulunan Sandbox klasörü dahil tüm yapılandırma dosyalarını ve korumalı alanları kaldırmak için bunu seçin.
 turkish.RefreshBuild=En son Templates.ini ve çeviriler indirilsin
+turkish.InstallImDisk=ImDisk 3.0 sürücüsü yüklensin (veya güncellensin) (RamDisk ve Şifrelenmiş Korumalı Alanlar için)
 
 ; Ukrainian
 ukrainian.AddSandboxedMenu=Додати "Виконати в пісочниці" в контекстне меню

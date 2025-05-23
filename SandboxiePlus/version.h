@@ -1,8 +1,8 @@
 #pragma once
 
 #define VERSION_MJR		1
-#define VERSION_MIN 	15
-#define VERSION_REV 	1
+#define VERSION_MIN 	16
+#define VERSION_REV 	0
 #define VERSION_UPD 	0
 
 #ifndef STR
@@ -20,5 +20,5 @@
 
 #define MY_PRODUCT_NAME_STRING  "Sandboxie-Plus"
 #define MY_COMPANY_NAME_STRING  "sandboxie-plus.com"
-#define MY_COPYRIGHT_STRING     "Copyright (C) 2020-2024 by David Xanatos (xanasoft.com)"
+#define MY_COPYRIGHT_STRING     "Copyright (C) 2020-2025 by David Xanatos (xanasoft.com)"
 

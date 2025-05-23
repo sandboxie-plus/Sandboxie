@@ -26,8 +26,28 @@ SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
 SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
 .
 
+1321;pop;inf;01
+SBIE1321 Program '%2' was forced into sandbox %3
+.
+
 1399;pop;inf;01
 %0
+.
+
+1413;evt;pop;wrn;01
+SBIE1413 The box include folder %3 file cannot be opened, error %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 The following message indicates an error %2 in a box include %3
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Portable box name mismatch (ini name must match box section) in a box include %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Portable box name is already in use by an other box, include %3
 .
 
 2111;pop;inf;01
@@ -59,7 +79,7 @@ SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
 .
 
 2194;pop;inf;01
-SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+SBIE2194 MSI installer requires %2 option to be set in the ini to be able to work correctly, however this option weakens the isolation.
 .
 
 2195;pop;inf;01
@@ -156,6 +176,18 @@ SBIE2302 Process image configuration conflict: %2
 
 2325;pop;err;01
 SBIE2325 Debug:  %2
+.
+
+2328;pop;err;01
+SBIE2328 Failed to resolve chrome sandbox hook %2
+.
+
+2329;pop;err;01
+SBIE2329 Failed to find FFS sequence %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspecified error when hooking %2
 .
 
 2360;pop;err;01

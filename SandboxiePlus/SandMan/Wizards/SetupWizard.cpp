@@ -151,6 +151,8 @@ void CSetupWizard::ShellUninstall()
 
 	CSettingsWindow::RemoveContextMenu();
 	CSbieUtils::RemoveContextMenu2();
+	CSbieUtils::RemoveContextMenu3();
+	CSbieUtils::RemoveContextMenu4();
 
     // todo: delete desktop browser shortcut and start menu integration
 }
@@ -389,8 +391,19 @@ bool CCertificatePage::validatePage()
         return false;
     }
 
-    if (!Certificate.isEmpty() && Certificate != g_Certificate)
-		return CSettingsWindow::ApplyCertificate(Certificate, this);
+    if (!Certificate.isEmpty()) {
+        if (Certificate != g_Certificate) {
+            if (CSettingsWindow::ApplyCertificate(Certificate, this))
+                return false;
+        }
+        if (CSettingsWindow::CertRefreshRequired()) {
+            if (!CSettingsWindow::TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)))) {
+                m_pCertificate->clear();
+                theGUI->SetCertificate("");
+            }
+            return false;
+        }
+    }
 
     return true;
 }

@@ -73,7 +73,7 @@ SbieDll_FormatMessage=_SbieDll_FormatMessage@8
 SbieDll_FormatMessage0=_SbieDll_FormatMessage0@4
 SbieDll_FormatMessage1=_SbieDll_FormatMessage1@8
 SbieDll_FormatMessage2=_SbieDll_FormatMessage2@12
-SbieDll_FreeMem=_SbieDll_AllocMem@4
+SbieDll_AllocMem=_SbieDll_AllocMem@4
 SbieDll_FreeMem=_SbieDll_FreeMem@4
 
 SbieDll_GetDrivePath=_SbieDll_GetDrivePath@4

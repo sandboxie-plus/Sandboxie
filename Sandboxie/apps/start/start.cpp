@@ -1363,7 +1363,7 @@ LRESULT UacPromptWndProc(
         if (pParams->pkt_len) {
 
             WCHAR* AppName;
-            UacGetParams(pParams->idProcess, pParams->pkt_addr.QuadPart, pParams->pkt_len, &AppName, NULL, NULL);
+            UacGetParams(pParams->idProcess, (ULONG_PTR)pParams->pkt_addr.QuadPart, pParams->pkt_len, &AppName, NULL, NULL);
             if (AppName) {
 
                 if (memcmp(AppName, L"*MSI*", 5 * sizeof(WCHAR)) == 0)

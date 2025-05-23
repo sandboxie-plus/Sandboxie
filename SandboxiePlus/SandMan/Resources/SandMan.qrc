@@ -190,6 +190,7 @@
         <file>Actions/CaseSensitive.png</file>
         <file>Actions/Highlight.png</file>
         <file>Actions/RegExp.png</file>
+        <file>Actions/FakeShield.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Busy">Boxes/BusyOverlay.png</file>

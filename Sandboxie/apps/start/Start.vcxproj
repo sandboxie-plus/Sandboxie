@@ -216,6 +216,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\SecDeskHelper.cpp" />
     <ClCompile Include="aboutdlg.cpp" />
     <ClCompile Include="boxdlg.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Use</PrecompiledHeader>
@@ -286,6 +287,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\SecDeskHelper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

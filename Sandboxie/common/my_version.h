@@ -51,6 +51,8 @@
 #define SANDBOXIE               L"Sandboxie"
 #define SBIE                    L"SBIE"
 
+#define SBIE_RID                100 // must be between 80 and 111 inclusive
+
 #define SANDBOXIE_USER			L"Sandboxie"
 
 #define SBIE_BOXED_             SBIE L"_BOXED_"

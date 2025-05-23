@@ -539,6 +539,7 @@ _FX BOX *Box_Clone(POOL *pool, const BOX *model)
 #undef CLONE_MEMBER
 
     box->session_id = model->session_id;
+    box->fake_admin = model->fake_admin;
 
     if (! Box_InitConfExpandArgs(pool, box)) {
         Box_Free(box);

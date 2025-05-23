@@ -1228,6 +1228,13 @@ BOOL ProcessServer::RunSandboxedStartProcess(
     BOOL ok = TRUE;
     bool CmdAltered = false;
     bool StartProgramInSandbox = true;
+    bool FakeAdmin = false;
+
+    if (crflags & CREATE_SECURE_PROCESS)
+    {
+        FakeAdmin = true;
+        crflags &= ~CREATE_SECURE_PROCESS;
+    }
 
     //
     // create the new process in the target session using the token handle
@@ -1344,7 +1351,12 @@ BOOL ProcessServer::RunSandboxedStartProcess(
 
         if (ok && StartProgramInSandbox) {
 
-            LONG rc = SbieApi_Call(API_START_PROCESS, 2,
+            LONG rc;
+            if(FakeAdmin)
+                rc = SbieApi_Call(API_START_PROCESS, 3,
+                                      (ULONG_PTR)BoxNameOrModelPid, (ULONG_PTR)pi->dwProcessId, TRUE);
+            else
+                rc = SbieApi_Call(API_START_PROCESS, 2,
                                       (ULONG_PTR)BoxNameOrModelPid, (ULONG_PTR)pi->dwProcessId);
             if (rc != 0) {
 
@@ -1911,7 +1923,8 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
 				IsSystem : 1,
 				IsRestricted : 1,
 				IsAppContainer : 1,
-				Spare : 27;
+				IsFakeAdmin : 1,
+				Spare : 26;
 		};
 	} Info;
     Info.Flags = 0;
@@ -1931,6 +1944,7 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
 	    if(IsWow64Process(ProcessHandle, &isTargetWow64Process))
 	        Info.IsWoW64 = isTargetWow64Process;
 
+        // check original token
 	    HANDLE TokenHandle = (HANDLE)SbieApi_QueryProcessInfo((HANDLE)req->dwProcessId, 'ptok');
 	    if (!TokenHandle) // app compartment type box
 		    NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle);
@@ -1963,6 +1977,40 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
 
 		    CloseHandle(TokenHandle);
 	    }
+
+        ULONG64 ProcessFlags = SbieApi_QueryProcessInfo((HANDLE)req->dwProcessId, 0);
+        if ((ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0)
+            Info.IsFakeAdmin = 1;
+
+        // check sandboxed token
+        /*TokenHandle = (HANDLE)SbieApi_QueryProcessInfo((HANDLE)req->dwProcessId, 'ptok');
+	    NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle);
+        if (TokenHandle)
+	    {
+		    ULONG returnLength;
+
+            // Check SID group memberships
+            extern UCHAR SandboxieAdminSid[16];
+            NTSTATUS status = NtQueryInformationToken(TokenHandle, TokenGroups, nullptr, 0, &returnLength);
+            if (status == STATUS_BUFFER_TOO_SMALL || status == STATUS_BUFFER_OVERFLOW) {
+                PTOKEN_GROUPS tokenGroups = (PTOKEN_GROUPS)HeapAlloc(GetProcessHeap(), 0, returnLength);
+                if (tokenGroups) {
+                    status = NtQueryInformationToken(TokenHandle, TokenGroups, tokenGroups, returnLength, &returnLength);
+                    if (NT_SUCCESS(status)) {
+                        for (DWORD i = 0; i < tokenGroups->GroupCount; ++i) {
+                            PSID sid = tokenGroups->Groups[i].Sid;
+                            if (sid && IsValidSid(sid) && EqualSid(sid, (PSID)SandboxieAdminSid) && (tokenGroups->Groups[i].Attributes & SE_GROUP_ENABLED)) {
+                                Info.IsFakeAdmin = 1;
+                                break;
+                            }
+                        }
+                    }
+                    HeapFree(GetProcessHeap(), 0, tokenGroups);
+                }
+            }
+
+		    CloseHandle(TokenHandle);
+	    }*/
     }
 
     if (req->dwInfoClasses & SBIE_PROCESS_EXEC_INFO)

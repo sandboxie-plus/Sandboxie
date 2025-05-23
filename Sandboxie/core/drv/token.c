@@ -164,8 +164,16 @@ UCHAR SandboxieAllSid[16] = { // S-1-5-100-0
     1,                                      // Revision
     2,                                      // SubAuthorityCount
     0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
-    100,0,0,0,                              // SubAuthority[0] = SBIE_RID
+    SBIE_RID,0,0,0,                         // SubAuthority[0] = SBIE_RID
     0,0,0,0                                 // SubAuthority[1] = 0
+};
+
+UCHAR SandboxieAdminSid[16] = { // S-1-5-100-544
+    1,                                      // Revision
+    2,                                      // SubAuthorityCount
+    0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+    SBIE_RID,0,0,0,                         // SubAuthority[0]
+    0x20, 0x02, 0x00, 0x00                  // SubAuthority[1] = 544 (0x220 in little endian = 0x20 0x02 0x00 0x00)
 };
 
 static UCHAR SystemLogonSid[12] = {

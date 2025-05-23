@@ -14,6 +14,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added missing virtualization to EventPair & KeyedEvent objects
 - added filtering and virtualization to Timer objects
 - added option to create virtual sandboxies (no stored in sandboxie ini)
+- added option 'UseSandboxieUAC=y' to use sandboxies own UAC standin prompt instead of the system default one
+  - Note: the new UAC prompt offers also the option to grant only fake admin privileges to the application
 
 ### Changed
 - refactored **DNS Filter logic** to enable filtering even when no DNS resolution occurs or when no valid IP address is returned [#4811](https://github.com/sandboxie-plus/Sandboxie/pull/4811) (thanks wzxjohn)

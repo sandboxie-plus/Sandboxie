@@ -435,6 +435,8 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/SystemShield.png");
 				else if (pProcess->HasElevatedToken())
 					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AdminShield.png");
+				else if (pProcess->HasFakeToken())
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/FakeShield.png");
 				else if (pProcess->HasAppContainerToken())
 					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AppContainer.png"); // AppContainer is also Restricted
 				else if (pProcess->HasRestrictedToken())

@@ -440,8 +440,7 @@ _FX BOOLEAN Secure_Init(void)
     // note: when running as the built in administrator we should always act as if we have admin rights
     //
 
-    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin())
-        && (_wcsicmp(Dll_ImageName, L"msedge.exe") != 0); // never for msedge.exe
+    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin() || (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0);
 
 
     void* NtAccessCheckByType = GetProcAddress(Dll_Ntdll, "NtAccessCheckByType");

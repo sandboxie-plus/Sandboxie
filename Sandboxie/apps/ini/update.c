@@ -22,6 +22,7 @@
 
 #include "global.h"
 #include "core/dll/sbiedll.h"
+#include "common/defines.h"
 #include <wchar.h>
 
 //---------------------------------------------------------------------------
@@ -111,7 +112,27 @@ int DoUpdate(void)
             return 0;
     }
 
-    status = SbieDll_UpdateConf(
+    if (!!CmdOpt(L"drv")) {
+
+        ULONG uOp = 0;
+        if (op == L's')
+            uOp = CONF_UPDATE_VALUE;
+        else if (op == L'a')
+            uOp = CONF_APPEND_VALUE;
+        else if (op == L'i')
+            uOp = CONF_APPEND_VALUE; //CONF_INSERT_VALUE;
+        else if (op == L'd')
+            uOp = CONF_REMOVE_VALUE;
+
+		if(uOp == CONF_UPDATE_VALUE && _wcsicmp(CmdVerb(2), L"*") == 0)
+            uOp = CONF_REMOVE_SECTION;
+
+        status = SbieApi_UpdateConf(
+            uOp, CmdVerb(1), CmdVerb(2), CmdVerb(3));
+    }
+    else
+
+    	status = SbieDll_UpdateConf(
                     op, passwd, CmdVerb(1), CmdVerb(2), CmdVerb(3));
 
     if (status == 0xC000006AL/*STATUS_WRONG_PASSWORD*/) { 

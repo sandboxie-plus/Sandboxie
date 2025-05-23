@@ -55,6 +55,7 @@ public:
 
 	virtual bool			HasElevatedToken() const { return m_ProcessInfo.IsElevated; }
 	virtual bool			HasSystemToken() const { return m_ProcessInfo.IsSystem; }
+	virtual bool			HasFakeToken() const { return m_ProcessInfo.IsFakeAdmin; }
 	virtual bool			HasRestrictedToken() const { return m_ProcessInfo.IsRestricted; }
 	virtual bool			HasAppContainerToken() const { return m_ProcessInfo.IsAppContainer; }
 
@@ -98,7 +99,8 @@ protected:
 				IsSystem : 1,
 				IsRestricted : 1,
 				IsAppContainer : 1,
-				Spare : 27;
+				IsFakeAdmin : 1,
+				Spare : 26;
 		};
 	}						m_ProcessInfo;
 

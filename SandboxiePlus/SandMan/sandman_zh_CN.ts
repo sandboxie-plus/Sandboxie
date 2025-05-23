@@ -3288,12 +3288,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SbiePlusAPI.cpp" line="877"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (便携)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="880"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (虚拟)</translation>
     </message>
     <message>
         <source>API Log</source>
@@ -4561,7 +4561,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>某些兼容性模板缺失：&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;这些模板可能已被删除，您是否希望将它们从所有沙盒中移除？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2036"/>
@@ -6529,33 +6529,33 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2491"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>选择便携沙箱配置文件</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2491"/>
         <location filename="Windows/SettingsWindow.cpp" line="2501"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>配置文件 (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2501"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>保存新的沙箱配置文件</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2506"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>文件已存在，请选择一个不同的文件名。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2512"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>无效的沙箱名称</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2533"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>选择根文件夹</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2561"/>
@@ -10211,7 +10211,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>配置文件编辑器选项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1612"/>
@@ -10237,47 +10237,47 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2360"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini 预设选项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2372"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2380"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>导入路径</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2402"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱配置</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>创建便携沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2441"/>
         <source>Import Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>导入便携沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2503"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;配置保护仅适用于 Sandboxie.ini，便携沙箱的配置不受以下机制保护&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2513"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>在下方的列表中，您可以添加便携沙箱的配置文件路径</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2533"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>添加便携根目录</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2555"/>

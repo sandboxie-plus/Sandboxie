@@ -2506,7 +2506,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsNetwork.cpp" line="1167"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
         <oldsource> entry: IP or Port cannot be empty</oldsource>
-        <translation type="unfinished"> 輸入: IP 位址或連接埠不能為空</translation>
+        <translation>第 %1 項 : IP 位址或連接埠不能為空</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>
@@ -3263,12 +3263,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SbiePlusAPI.cpp" line="877"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (可攜式)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="880"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (虛擬)</translation>
     </message>
     <message>
         <source>API Log</source>
@@ -4368,7 +4368,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>一些相容性範本目前缺失中: &lt;br /&gt; &lt;br /&gt;%1 &lt;br /&gt;可能已被刪除，是否將其自所有沙箱中移除？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2036"/>
@@ -6009,17 +6009,17 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <location filename="Windows/SettingsWindow.cpp" line="568"/>
         <location filename="Windows/SettingsWindow.cpp" line="577"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>硬體ID: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="573"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>硬體ID: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(複製)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="586"/>
         <source>Sandboxie-Plus Version: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 版本: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1455"/>
@@ -6288,8 +6288,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
-        <translation type="unfinished">點選以隱藏
-右鍵點選以複製</translation>
+        <translation>點選以隱藏</translation>
     </message>
     <message>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
@@ -6443,33 +6442,33 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2491"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>選取可攜式沙箱 ini</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2491"/>
         <location filename="Windows/SettingsWindow.cpp" line="2501"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>ini 檔案 (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2501"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存新可攜式沙箱 ini</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2506"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案已存在，請使用不同的檔名。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2512"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>無效的沙箱名稱</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2533"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>選取根資料夾</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2561"/>
@@ -10169,7 +10168,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>ini 編輯器選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1377"/>
@@ -10314,7 +10313,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1855"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 版本: 0.0.0</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2123"/>
@@ -10733,47 +10732,47 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2360"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2372"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>移除條目</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2380"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>匯入路徑</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2402"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱設定組態</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>建立可攜式沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2441"/>
         <source>Import Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>匯入可攜式沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2503"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;僅套用至 Sandboxie.ini 可攜式沙箱之設定組態的組態保護，不受以下機制的保護&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2513"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>在以下清單中，你可以加入可攜式沙箱的設定組態之路徑</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2533"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>加入可攜式根目錄</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2642"/>
@@ -10784,17 +10783,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2652"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>強制處理程序選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2680"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>強制具有網際網路來源標記之檔案在沙箱中開啟</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2700"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>網際網路標記檔案的沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2719"/>

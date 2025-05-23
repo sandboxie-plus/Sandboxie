@@ -3294,12 +3294,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SbiePlusAPI.cpp" line="877"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (포터블)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="880"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (가상)</translation>
     </message>
     <message>
         <source>API Log</source>
@@ -4409,7 +4409,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>일부 호환성 템플릿이 누락되었습니다:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;삭제되었을 가능성이 있습니다. 모든 상자에서 템플릿을 제거하시겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2036"/>
@@ -6060,17 +6060,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="568"/>
         <location filename="Windows/SettingsWindow.cpp" line="577"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="573"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(복사)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="586"/>
         <source>Sandboxie-Plus Version: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 버전: %1</translation>
     </message>
     <message>
         <source>HwId: %1</source>
@@ -6444,8 +6444,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
-        <translation type="unfinished">숨기려면 클릭
-복사하려면 오른쪽 클릭</translation>
+        <translation>숨기려면 클릭</translation>
     </message>
     <message>
         <source>HwId: &lt;a href=&quot;%1&quot;&gt;[%2]&lt;/a&gt;</source>
@@ -6583,33 +6582,33 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2491"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Portable Box ini 선택</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2491"/>
         <location filename="Windows/SettingsWindow.cpp" line="2501"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini 파일 (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2501"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>새 Portable Box ini 저장</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2506"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>파일이 이미 존재합니다. 다른 파일 이름을 선택해 주세요.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2512"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 박스 이름</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2533"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>루트 폴더 선택</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2561"/>
@@ -10418,7 +10417,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini 편집기 옵션</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
@@ -10651,47 +10650,47 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2360"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2372"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>항목 제거</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2380"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>가져오기 경로</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2402"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 구성</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>포터블 박스 만들기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2441"/>
         <source>Import Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>포터블 박스 가져오기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2503"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie.ini 휴대용 상자 구성은 아래 메커니즘에 의해 보호되지 않습니다&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2513"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>아래 목록에서 포터블 박스의 구성 ini에 경로를 추가할 수 있습니다</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2533"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>포터블 루트 추가</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2642"/>
@@ -10702,17 +10701,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2652"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>강제 프로세스 옵션</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2680"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>웹 마크가 있는 파일을 샌드박스에 강제로 넣기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2700"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>MoTW 표시 파일용 샌드박스</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2719"/>
@@ -10809,7 +10808,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1855"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 버전: 0.0.0</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1865"/>

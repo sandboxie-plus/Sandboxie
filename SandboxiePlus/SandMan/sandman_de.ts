@@ -4675,7 +4675,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation> Fake-Admin</</translation>
+        <translation> Fake-Admin</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>

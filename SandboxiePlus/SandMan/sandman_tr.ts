@@ -2484,7 +2484,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/PopUpWindow.h" line="205"/>
         <source>Requesting process terminated</source>
-        <translation>İstek süreci sonlandırıldı</translation>
+        <translation>İstemde bulunan işlem sonlandırıldı</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="129"/>
@@ -2990,12 +2990,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SbiePlusAPI.cpp" line="877"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Taşınabilir)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="880"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Sanal)</translation>
     </message>
 </context>
 <context>
@@ -3474,7 +3474,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bazı uyumluluk şablonları eksik:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Muhtemelen silinmiştir, bunları tüm alanlardan kaldırmak ister misiniz?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2036"/>
@@ -3858,10 +3858,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="SandMan.cpp" line="557"/>
         <source>Show Hidden Boxes</source>
         <translation>Gizli Alanları Göster</translation>
-    </message>
-    <message>
-        <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="vanished">Bazı uyumluluk şablonları (%1) eksik, büyük olasılıkla silinmiş, bunları tüm alanlardan kaldırmak istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3338"/>
@@ -4635,7 +4631,7 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> sahte Yönetici</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="121"/>
@@ -5697,33 +5693,33 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2495"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Taşınabilir Alan INI dosyası seç</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2495"/>
         <location filename="Windows/SettingsWindow.cpp" line="2505"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>INI Dosyaları (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2505"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Taşınabilir Alan INI dosyası kaydet</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2510"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya zaten mevcut, lütfen farklı bir dosya adı seçin.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2516"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçersiz alan adı</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2537"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kök Klasörü Seçin</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2569"/>
@@ -5872,7 +5868,7 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="574"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
-        <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</translation>
+        <translation>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(kopyala)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="587"/>
@@ -9569,10 +9565,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Korumalı Alan Özellikleri</translation>
     </message>
     <message>
-        <source>Sandboxie.ini Presets</source>
-        <translation type="vanished">Sandboxie.ini Ön Ayarları</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="2554"/>
         <source>Program Control</source>
         <translation>Program Denetimi</translation>
@@ -9758,10 +9750,6 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="1239"/>
         <source>Reset font</source>
         <translation>Yazı tipini sıfırla</translation>
-    </message>
-    <message>
-        <source>Ini Options</source>
-        <translation type="vanished">Ini Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1333"/>
@@ -9981,7 +9969,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini Düzenleyici Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1839"/>
@@ -10078,52 +10066,52 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2359"/>
         <source>Use Sandboxies own enhanced UAC prompt (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin kendi gelişmiş UAC istemi kullanılsın (deneysel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2369"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2381"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Girişi Kaldır</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2389"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>İçe Aktarım Yolu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2411"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alan Yapılandırması</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2424"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Taşınabilir Alan Oluştur</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2450"/>
         <source>Import Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Taşınabilir Alanı İçe Aktar</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2512"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Yapılandırma koruması yalnızca Sandboxie.ini yapılandırması için geçerlidir, taşınabilir alan yapılandırması aşağıdaki mekanizmalar tarafından korunmaz&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2522"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Aşağıdaki listeye taşınabilir alan yapılandırmaları için INI yolları ekleyebilirsiniz</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2542"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Taşınabilir Kök Ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2564"/>
@@ -10143,17 +10131,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2661"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Zorunlu İşlem Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2689"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Mark of The Web&apos;e sahip dosyaları bir korumalı alana zorla</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2709"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>MoTW işaretli dosyalar için korumalı alan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2728"/>

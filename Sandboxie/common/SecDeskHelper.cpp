@@ -76,13 +76,11 @@ public:
         if (!m_hWinlogonDesktop)
             return FALSE;
         
-        if (m_hWinlogonDesktop)
+        if (!SetThreadDesktop(m_hWinlogonDesktop) || !SwitchDesktop(m_hWinlogonDesktop))
         {
-            if (!SwitchDesktop(m_hWinlogonDesktop) || !SetThreadDesktop(m_hWinlogonDesktop))
-            {
-                CloseDesktop(m_hWinlogonDesktop);
-                return FALSE;
-            }
+            CloseDesktop(m_hWinlogonDesktop);
+            m_hWinlogonDesktop = NULL;
+            return FALSE;
         }
 
         // Register window class
@@ -98,7 +96,7 @@ public:
         int screenH = GetSystemMetrics(SM_CYSCREEN);
 
         m_BackgroundWnd = CreateWindowExW(
-            WS_EX_TOPMOST,
+            0, //WS_EX_TOPMOST,
             wc.lpszClassName,
             L"",
             WS_POPUP,

@@ -370,11 +370,11 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 	if (!(scanIpc || scanWindow || scanSoftware))
 		return false;
 
-	QList<QPair<QString, QString>> settings = pTemplate->GetIniSection(0, true);
-	for(QList<QPair<QString, QString>>::iterator I = settings.begin(); I != settings.end(); ++I)
+	QList<CSbieIni::SbieIniValue> settings = pTemplate->GetIniSection(0, true);
+	for(QList<CSbieIni::SbieIniValue>::iterator I = settings.begin(); I != settings.end(); ++I)
 	{
-		QString setting = I->first;
-		QString value = I->second;
+		QString setting = I->Name;
+		QString value = I->Value;
 
 		if (scanIpc && ((setting.compare("OpenIpcPath", Qt::CaseInsensitive) == 0) || setting.compare("Tmpl.ScanIpc", Qt::CaseInsensitive) == 0))
 		{

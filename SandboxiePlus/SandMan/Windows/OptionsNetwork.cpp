@@ -611,6 +611,7 @@ QString COptionsWindow::GetFwRuleProtStr(ENetWfProt Prot)
 	}
 	return "";
 }
+
 void COptionsWindow::ParseAndAddFwRule(const QString& Value, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();

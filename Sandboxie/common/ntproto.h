@@ -189,6 +189,38 @@ typedef NTSTATUS (*P_NtCreateKeyTransacted)(
     IN  PVOID Transaction,
     OUT PULONG Disposition OPTIONAL);
 
+typedef NTSTATUS (*P_NtCreateEventPair)(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+typedef NTSTATUS (*P_NtOpenEventPair)(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+typedef NTSTATUS (*P_NtCreateKeyedEvent)(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG Flags);
+
+typedef NTSTATUS (*P_NtOpenKeyedEvent)(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+typedef NTSTATUS (*P_NtCreateTimer)(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN TIMER_TYPE TimerType);
+
+typedef NTSTATUS (*P_NtOpenTimer)(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
 typedef NTSTATUS (*P_NtCreateMutant)(
     OUT PHANDLE MutantHandle,
     IN  ACCESS_MASK DesiredAccess,

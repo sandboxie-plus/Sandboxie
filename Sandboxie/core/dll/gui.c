@@ -2744,6 +2744,12 @@ _FX void *Gui_CallProxyEx(
         }
     }
 
+#ifdef WITH_DEBUG
+#define TIMEOUT (100 * 1000)
+#else
+#define TIMEOUT (10 * 1000)
+#endif
+
     status = SbieDll_QueuePutReq(_QueueName, req, req_len, &req_id, &event);
     if (NT_SUCCESS(status)) {
 
@@ -2763,12 +2769,12 @@ _FX void *Gui_CallProxyEx(
 
                 while (1) {
 
-                    if ((GetTickCount() - StartTime) > (10 * 1000))
+                    if ((GetTickCount() - StartTime) > TIMEOUT)
                         status = WAIT_TIMEOUT;
                     else {
 #ifdef _WIN64
                         status = __sys_MsgWaitForMultipleObjects(
-                            1, &event, FALSE, (10 * 1000), QS_SENDMESSAGE);
+                            1, &event, FALSE, TIMEOUT, QS_SENDMESSAGE);
 #else ! _WIN64
                         // Gui_MsgWaitForMultipleObjects aligns stack
                         // before calling __sys_MsgWaitForMultipleObjects
@@ -2776,7 +2782,7 @@ _FX void *Gui_CallProxyEx(
                         extern Gui_MsgWaitForMultipleObjects(
                             ULONG a, HANDLE *b, ULONG c, ULONG d, ULONG e);
                         status = Gui_MsgWaitForMultipleObjects(
-                            1, &event, FALSE, (10 * 1000), QS_SENDMESSAGE);
+                            1, &event, FALSE, TIMEOUT, QS_SENDMESSAGE);
 #endif _WIN64
                     }
 
@@ -2808,7 +2814,7 @@ _FX void *Gui_CallProxyEx(
             // scenarios where a window message is not expected
             //
 
-            if (WaitForSingleObject(event, 10 * 1000) != 0)
+            if (WaitForSingleObject(event, TIMEOUT) != 0)
                 status = STATUS_TIMEOUT;
         }
 

@@ -27,7 +27,12 @@
 
 //---------------------------------------------------------------------------
 
-
+#define CONF_INDEX_MASK					0x00FFFFFFL
+#define CONF_FLAG_MASK					0xFF000000L
+#define CONF_FLAG_DEBUG					0x08000000L
+//#define CONF_FLAG_					0x04000000L
+//#define CONF_FLAG_					0x02000000L
+#define CONF_GET_PROPERTY				0x01000000L
 #define CONF_JUST_EXPAND				0x80000000L
 #define CONF_GET_NO_GLOBAL				0x40000000L
 #define CONF_GET_NO_EXPAND				0x20000000L
@@ -94,7 +99,7 @@
 #define SBIE_FLAG_IMAGE_FROM_SANDBOX    0x00000040
 #define SBIE_FLAG_DROP_RIGHTS           0x00000080
 #define SBIE_FLAG_RIGHTS_DROPPED        0x00000100
-									  //0x00000200
+#define SBIE_FLAG_FAKE_ADMIN			0x00000200
 									  //0x00000400
 									  //0x00000800
 //#define SBIE_FLAG_BLOCK_FAKE_INPUT    0x00001000

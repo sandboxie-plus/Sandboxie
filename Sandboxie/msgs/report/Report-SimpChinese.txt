@@ -2,5 +2,22 @@
 * Missing Messages in Text-SimpChinese-2052.txt
 *==========
 
-There are no missing messages.
+3244;txt;01
+Application %2 is requesting Administrator privileges in sandbox:
+.
+
+3245;txt;01
+You can allow this request (YES), in which case a UAC prompt may 
+appear depending on your system settings. You can deny Administrator 
+privileges but make the application believe it has them (NO), or you can 
+abort the startup (CANCEL). 
+.
+
+3246;txt;01
+Note:  The program will continue to run under the supervision of Sandboxie even if Administrator 
+privileges are granted. However, granting real Administrator rights may increase the risk of the 
+application exploiting an unpatched Windows vulnerability or a vulnerable driver to escape the 
+sandbox. Therefore, it is generally safer to grant only fake Administrator rights, 
+although this may cause some installers to fail.
+.
 

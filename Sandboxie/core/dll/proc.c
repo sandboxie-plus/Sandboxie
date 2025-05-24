@@ -1361,7 +1361,8 @@ _FX BOOL Proc_CreateProcessInternalW(
 		    lpProcessAttributes = NULL;
         }
 
-        TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", FALSE));
+        TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0));
+        //TlsData->proc_create_process_fake_admin = (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0;
 
         ok = __sys_CreateProcessInternalW(
             hToken, lpApplicationName, lpCommandLine,
@@ -1440,7 +1441,8 @@ _FX BOOL Proc_CreateProcessInternalW(
         }
     }
 
-    TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", FALSE));
+    TlsData->proc_create_process_fake_admin = (Secure_FakeAdmin == FALSE && SbieApi_QueryConfBool(NULL, L"FakeAdminRights", (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0));
+    //TlsData->proc_create_process_fake_admin = (Dll_ProcessFlags & SBIE_FLAG_FAKE_ADMIN) != 0;
 
     ok = __sys_CreateProcessInternalW(
         NULL, lpApplicationName, lpCommandLine,

@@ -212,8 +212,8 @@ SB_RESULT(void*) CSbieUtils::ElevateOps(const QStringList& Ops)
 	std::wstring params = L"-assist \"" + Ops.join("\" \"").toStdWString() + L"\"";
 
 	SHELLEXECUTEINFOW shex;
-	memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
-	shex.cbSize = sizeof(SHELLEXECUTEINFO);
+	memset(&shex, 0, sizeof(shex));
+	shex.cbSize = sizeof(shex);
 	shex.fMask = SEE_MASK_FLAG_NO_UI | SEE_MASK_NOCLOSEPROCESS;
 	shex.hwnd = NULL;
 	shex.lpFile = path.c_str();

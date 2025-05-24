@@ -796,6 +796,16 @@ typedef union _FLT_PARAMETERS {
         LARGE_INTEGER Argument6;
     } Others;
 
+    //
+    // Parameters for IRP_MN_DEVICE_USAGE_NOTIFICATION
+    //
+
+    struct {
+        BOOLEAN InPath;
+        BOOLEAN Reserved[3];
+        DEVICE_USAGE_NOTIFICATION_TYPE POINTER_ALIGNMENT Type;
+    } UsageNotification;
+
 } FLT_PARAMETERS, *PFLT_PARAMETERS;
 
 

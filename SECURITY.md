@@ -6,6 +6,11 @@ Please report any found security vulnerability directly to me at xanatosdavid[at
 
 ## Fixed security issues
 
+### FIXED SECURITY ISSUE ID-26 (thanks sgayou)
+Registry set/get functions were missing some critical safety checks CVE-2025-46713, CVE-2025-46714, CVE-2025-46716, CVE-2025-46715
+
+fixed in: 1.15.12 / 5.70.12
+
 ### SECURITY ISSUE ID-25 (thanks hg421)
 A new method of exploiting HostInjectDll mechanism for local privilege escalation
 

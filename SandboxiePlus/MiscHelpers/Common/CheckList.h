@@ -137,6 +137,28 @@ public:
         return nbChecked == nbRows ? Qt::Checked : nbUnchecked == nbRows ? Qt::Unchecked : Qt::PartiallyChecked;
     }
 
+    /**
+     * @brief Adjust the width based on item text and UI elements
+     */
+    void adjustWidthForItems() {
+        int maxWidth = 0;
+        QFontMetrics fontMetrics(font());
+        for (int i = 0; i < count(); i++) {
+            QString it = itemText(i);
+            int itemWidth = fontMetrics.horizontalAdvance(it);
+            maxWidth = qMax(maxWidth, itemWidth);
+        }
+    
+        const int checkboxWidth = style()->pixelMetric(QStyle::PM_IndicatorWidth);
+        const int scrollBarWidth = style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+        const int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth) * 2;
+        const int horizontalMargin = style()->pixelMetric(QStyle::PM_FocusFrameHMargin) * 4;
+    
+        // totalWidtl = text + checkbox + scroll bar + frame + margin + extra safezone
+        maxWidth += checkboxWidth + scrollBarWidth + frameWidth + horizontalMargin + 10;
+        setMinimumWidth(maxWidth);
+    }
+
 protected:
     /*bool eventFilter(QObject* _object, QEvent* _event)
     {

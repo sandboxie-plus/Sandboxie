@@ -2,15 +2,22 @@
 * Missing Messages in Text-Korean-1042.txt
 *==========
 
-2328;pop;err;01
-SBIE2328 Failed to resolve chrome sandbox hook %2
+3244;txt;01
+Application %2 is requesting Administrator privileges in sandbox:
 .
 
-2329;pop;err;01
-SBIE2329 Failed to find FFS sequence %2
+3245;txt;01
+You can allow this request (YES), in which case a UAC prompt may 
+appear depending on your system settings. You can deny Administrator 
+privileges but make the application believe it has them (NO), or you can 
+abort the startup (CANCEL). 
 .
 
-2330;pop;err;01
-SBIE2330 Unspecified error when hooking %2
+3246;txt;01
+Note:  The program will continue to run under the supervision of Sandboxie even if Administrator 
+privileges are granted. However, granting real Administrator rights may increase the risk of the 
+application exploiting an unpatched Windows vulnerability or a vulnerable driver to escape the 
+sandbox. Therefore, it is generally safer to grant only fake Administrator rights, 
+although this may cause some installers to fail.
 .
 

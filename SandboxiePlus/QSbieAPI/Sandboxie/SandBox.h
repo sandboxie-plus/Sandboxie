@@ -85,6 +85,16 @@ public:
 	virtual SB_STATUS				ImBoxMount(const QString& Password = QString(), bool bProtect = false, bool bAutoUnmount = false);
 	virtual SB_STATUS				ImBoxUnmount();
 
+	virtual bool					IsPortable() const { return !m_PortablePath.isEmpty(); }
+
+	virtual SB_STATUS				RenameSection(const QString& NewName, bool deleteOld = true);
+	virtual SB_STATUS				RemoveSection();
+	virtual void					CommitIniChanges();
+
+	virtual SB_STATUS				SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate, bool bRefresh = true);
+	virtual QString					SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode = NULL, quint32* pType = NULL) const;
+	virtual QString					SbieIniGetEx(const QString& Section, const QString& Setting) const;
+
 	class CSbieAPI*					Api() { return m_pAPI; }
 
 protected:
@@ -99,11 +109,14 @@ protected:
 
 	QString							m_FilePath;
 	QString							m_FileRePath; // reparsed Nt path
+	//QString							m_FileNtPath;
 	QString							m_RegPath;
 	QString							m_IpcPath;
 	QString							m_Mount;
 	
 	bool							m_IsEnabled;
+	QString							m_PortablePath;
+	class CIniFile*					m_pIniFile;
 	
 	QMap<quint32, CBoxedProcessPtr>	m_ProcessList;
 	int								m_ActiveProcessCount;

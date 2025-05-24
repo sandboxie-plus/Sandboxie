@@ -60,7 +60,7 @@ SbieIniServer::SbieIniServer(PipeServer *pipeServer)
 #ifdef NEW_INI_MODE
     m_instance = this;
 
-    m_pConfigIni = NULL;
+    m_pSbieIni = NULL;
 #else
     m_text = NULL;
 #endif
@@ -83,7 +83,7 @@ SbieIniServer::~SbieIniServer()
 
     EnterCriticalSection(&m_instance->m_critsec);
     
-    delete m_pConfigIni;
+    delete m_pSbieIni;
 
     LeaveCriticalSection(&m_instance->m_critsec);
 
@@ -160,7 +160,7 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
         return SHORT_REPLY(STATUS_NOT_SUPPORTED);
 
     //
-    // Get/Set *.dat files in sandboxie's home directory
+    // Get/Set *.dat files in sandboxies home directory
     //
 
     if (msg->msgid == MSGID_SBIE_INI_SET_DAT) {
@@ -174,6 +174,19 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
 
     if (PipeServer::ImpersonateCaller(&msg) != 0)
         return msg;
+
+    //if (msg->msgid == MSGID_SBIE_INI_TEST) {
+    //
+    //    ULONG rpl_len = sizeof(MSG_HEADER) + sizeof(ULONG_PTR) * 8;
+    //    MSG_HEADER *rpl = (MSG_HEADER*)LONG_REPLY(rpl_len);
+    //    if (!rpl) 
+    //        return SHORT_REPLY(STATUS_INSUFFICIENT_RESOURCES);
+    //
+    //    ULONG_PTR* params = (ULONG_PTR*)(rpl + 1);
+    //    memset(params, 0, sizeof(ULONG_PTR) * 8);
+    //    params[0] = 0
+    //    return (MSG_HEADER*)rpl;
+    //}
 
     //
     // handle get version request
@@ -216,7 +229,7 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
     // the below opcodes require the ini to be cached
     //
 
-    if (m_pConfigIni == NULL) {
+    if (m_pSbieIni == NULL) {
 
         if (!NT_SUCCESS(status = CacheConfig()))
             return SHORT_REPLY(status);
@@ -501,13 +514,16 @@ ULONG SbieIniServer::CheckRequest(MSG_HEADER *msg)
 
 bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken)
 {
+    return SetUserSettingsSectionName(hToken, m_username, m_sectionname);
+}
+
+bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken, WCHAR* m_username, WCHAR* m_sectionname)
+{
     union {
         TOKEN_USER user;
         UCHAR space[128];
         WCHAR value[4];
     } info;
-
-    m_admin = FALSE;
 
     //
     // if the UserSettings_Portable section exists, use that
@@ -535,7 +551,7 @@ bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken)
     if (! ok)
         return false;
 
-    ULONG username_len = sizeof(m_username) / sizeof(WCHAR) - 4;
+    ULONG username_len = 256 - 4; // ULONG username_len = sizeof(m_username) / sizeof(WCHAR) - 4;
     //WCHAR domain[256];
     //ULONG domain_len = sizeof(domain) / sizeof(WCHAR) - 4;
     //SID_NAME_USE use;
@@ -548,7 +564,7 @@ bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken)
     if (! ok || ! m_username[0])
         return false;
 
-    m_username[sizeof(m_username) / sizeof(WCHAR) - 4] = L'\0';
+    m_username[256 - 4] = L'\0'; //m_username[sizeof(m_username) / sizeof(WCHAR) - 4] = L'\0';
     _wcslwr(m_username);
 
     //
@@ -791,9 +807,9 @@ void SbieIniServer::NotifyConfigReloaded()
     EnterCriticalSection(&m_instance->m_critsec);
     
     // purge config cache
-    if (m_instance->m_pConfigIni != NULL) {
-        delete m_instance->m_pConfigIni;
-        m_instance->m_pConfigIni = NULL;
+    if (m_instance->m_pSbieIni != NULL) {
+        delete m_instance->m_pSbieIni;
+        m_instance->m_pSbieIni = NULL;
     }
 
     LeaveCriticalSection(&m_instance->m_critsec);
@@ -807,14 +823,13 @@ void SbieIniServer::NotifyConfigReloaded()
 
 ULONG SbieIniServer::CacheConfig()
 {
-    if (m_pConfigIni != NULL) {
-        delete m_pConfigIni;
-        m_pConfigIni = NULL;
+    if (m_pSbieIni != NULL) {
+        delete m_pSbieIni;
+        m_pSbieIni = NULL;
     }
 
     WCHAR *IniPath;
-    BOOLEAN IsUTF8 = FALSE;
-    if (! GetIniPath(&IniPath, NULL, &IsUTF8))
+    if (! GetIniPath(&IniPath))
         return STATUS_INSUFFICIENT_RESOURCES;
 
     WCHAR* iniData = NULL;
@@ -824,174 +839,43 @@ ULONG SbieIniServer::CacheConfig()
     ULONG attrs = GetFileAttributes(IniPath);
     if (attrs == INVALID_FILE_ATTRIBUTES) {
         ULONG LastError = GetLastError();
-        attrs = 0;
         if (LastError != ERROR_FILE_NOT_FOUND) {
             SbieApi_LogEx(m_session_id, 2322, L"[21 / %d]", LastError);
             goto finish;
         }
     }
+    else {
 
-    const ULONG CONFLICTING_ATTRS = (   FILE_ATTRIBUTE_DEVICE |
-                                        FILE_ATTRIBUTE_DIRECTORY |
-                                        FILE_ATTRIBUTE_REPARSE_POINT |
-                                        FILE_ATTRIBUTE_ENCRYPTED |
-                                        FILE_ATTRIBUTE_OFFLINE);
+        const ULONG CONFLICTING_ATTRS = (FILE_ATTRIBUTE_DEVICE |
+            FILE_ATTRIBUTE_DIRECTORY |
+            FILE_ATTRIBUTE_REPARSE_POINT |
+            FILE_ATTRIBUTE_ENCRYPTED |
+            FILE_ATTRIBUTE_OFFLINE);
 
-    if (attrs & CONFLICTING_ATTRS) {
-        SbieApi_LogEx(m_session_id, 2322, L"[22 / %d]", GetLastError());
-        attrs = 0;
-        goto finish;
+        if (attrs & CONFLICTING_ATTRS) {
+            SbieApi_LogEx(m_session_id, 2322, L"[22 / %d]", GetLastError());
+            goto finish;
+        }
     }
-
-    //
-    // open Sandboxie.ini
-    //
 
     UnlockConf();
 
-    hFile = CreateFile(
-        IniPath, FILE_GENERIC_READ,
-        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-        NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-    if (hFile == INVALID_HANDLE_VALUE) {
-        DWORD err = GetLastError();
-        if (err == ERROR_FILE_NOT_FOUND) 
-            status = STATUS_SUCCESS; // the file does not exist that's ok
-        else
-            SbieApi_LogEx(m_session_id, 2322, L"[23 / %d]", err);
-        goto finish;
-    }
-
-    // 
-    // read Sandboxie.ini
+    //
+	// Read the file
     //
 
-    LARGE_INTEGER fileSize;
-    if (!GetFileSizeEx(hFile, &fileSize) || fileSize.QuadPart >= CONF_LINE_LEN * 2 * CONF_MAX_LINES) {
-        status = STATUS_INSUFFICIENT_RESOURCES;
-        SbieApi_LogEx(m_session_id, 2322, L"[24 / %d]", status);
-        goto finish;
+	m_pSbieIni = new CIniFile();
+    status = m_pSbieIni->LoadIni(IniPath);
+    if (!NT_SUCCESS(status)) {
+        SbieApi_LogEx(m_session_id, 2322, L"[99 / 0x%08X]", status);
     }
-
-    if (fileSize.QuadPart == 0) {
-        status = STATUS_SUCCESS;
-        goto finish; // nothing to do
-    }
-
-    iniData = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, (SIZE_T)(fileSize.QuadPart + 128));
-    if (!iniData) {
-        status = STATUS_INSUFFICIENT_RESOURCES;
-        goto finish;
-    }
-
-    DWORD bytesRead;
-    if (!ReadFile(hFile, iniData, (DWORD)fileSize.QuadPart, &bytesRead, NULL) || bytesRead != (DWORD)fileSize.QuadPart) {
-        status = STATUS_NOT_READ_FROM_COPY;
-        SbieApi_LogEx(m_session_id, 2322, L"[25 / %d]", status);
-        goto finish;
-    }
-
-    WCHAR* iniDataPtr = iniData;
-
-    // Decode the BOM if present and andance the iniDataPtr accordingly
-    ULONG encoding = Read_BOM((UCHAR**)&iniDataPtr, &bytesRead);
-
-    if (encoding == 1) { // UTF-8 Signature
-        // decode utf8
-        int ByteSize = MultiByteToWideChar(CP_UTF8, 0, (char*)iniDataPtr, bytesRead, NULL, 0) + 1;
-        WCHAR* tmpData = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, ByteSize * sizeof(wchar_t));
-        if (!tmpData) {
-            status = STATUS_INSUFFICIENT_RESOURCES;
-            goto finish;
-        }
-        bytesRead = MultiByteToWideChar(CP_UTF8, 0, (char*)iniDataPtr, bytesRead, tmpData, ByteSize);
-        // swap buffers
-        HeapFree(GetProcessHeap(), 0, iniData);
-        iniDataPtr = iniData = tmpData;
-    }
-    else {
-        if (encoding == 2) { //Unicode (UTF-16 BE) BOM
-            // swap all bytes
-            UCHAR* tmpData = (UCHAR*)iniDataPtr;
-            for (DWORD i = 0; i < bytesRead - 1; i += 2) {
-                UCHAR tmp = tmpData[i + 1];
-                tmpData[i + 1] = tmpData[i];
-                tmpData[i] = tmp;
-            }
-        }
-        //else if (encoding == 0) //Unicode (UTF-16 LE) BOM
-        bytesRead /= sizeof(wchar_t);
-    }
-
-    iniDataPtr[bytesRead] = L'\0';
-
-    m_pConfigIni = new SConfigIni;
-    m_pConfigIni->Encoding = encoding;
-
-    m_pConfigIni->Sections.push_back(SIniSection{});
-    SIniSection* pSection = &m_pConfigIni->Sections.back();
-    while(*iniDataPtr != L'\0' && pSection != NULL)
-    {
-        Ini_Read_ConfigSection(iniDataPtr, pSection->Entries);
-        if (*iniDataPtr == L'\0')
-            break;
-
-        pSection = Ini_Read_SectionHeader(iniDataPtr, m_pConfigIni);
-    }
-
-    status = STATUS_SUCCESS;
 
 finish:
-    if(iniData != NULL)
-        HeapFree(GetProcessHeap(), 0, iniData);
-
-    if (hFile != INVALID_HANDLE_VALUE)
-        CloseHandle(hFile);
-
     LockConf(IniPath);
 
     HeapFree(GetProcessHeap(), 0, IniPath);
 
-    if (NT_SUCCESS(status) && m_pConfigIni == NULL) {
-
-        m_pConfigIni = new SConfigIni;
-        m_pConfigIni->Encoding = 0;
-
-        // set a ini header with a descriptive comment
-        m_pConfigIni->Sections.push_back(SIniSection{ L"" });
-        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
-        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"# Sandboxie configuration file" });
-        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
-
-        m_pConfigIni->Sections.push_back(SIniSection{ L"GlobalSettings" });
-    }
-
     return status;
-}
-
-
-//---------------------------------------------------------------------------
-// GetIniSection
-//---------------------------------------------------------------------------
-
-
-SIniSection* SbieIniServer::GetIniSection(const WCHAR* section, bool bCanAdd)
-{
-    SIniSection* pSection = NULL;
-    for (auto I = m_pConfigIni->Sections.begin(); I != m_pConfigIni->Sections.end(); ++I)
-    {
-        if (_wcsicmp(I->Name.c_str(), section) == 0) {
-            pSection = &(*I);
-            break;
-        }
-    }
-
-    if (!pSection && bCanAdd) {
-        m_pConfigIni->Sections.push_back(SIniSection{section});
-        pSection = &m_pConfigIni->Sections.back();
-    }
-    return pSection;
 }
 
 
@@ -1007,34 +891,13 @@ MSG_HEADER *SbieIniServer::GetSetting(MSG_HEADER *msg)
     RevertToSelf();
 
     //
-    // Get the relevant ini section object
-    //
-
-    SIniSection* pSection = GetIniSection(req->section, false);
-    if (!pSection)
-        return SHORT_REPLY(STATUS_OBJECT_NAME_NOT_FOUND);
-
-
-    //
     // get the values
     //
 
     std::wstring iniData;
-
-    for (auto I = pSection->Entries.begin(); I != pSection->Entries.end(); ++I)
-    {
-        if (*req->setting == L'\0') { // get section
-            if(I->Name.size() > 0)
-                iniData += I->Name + L"=";
-            iniData += I->Value + L"\r\n";
-        }
-        else if (_wcsicmp(I->Name.c_str(), req->setting) == 0) {
-            if(!iniData.empty()) // string list
-                //iniData.push_back(L'\0');
-                iniData.push_back(L'\n');
-            iniData += I->Value;
-        }
-    }
+    NTSTATUS status = m_pSbieIni->GetValue(req->section, req->setting, iniData);
+    if (!NT_SUCCESS(status))
+        return SHORT_REPLY(status);
 
     //
     // prepare the reply
@@ -1071,97 +934,10 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
 
     if (wcscmp(req->setting, L"*") == 0 && !have_value) 
     {
-        for (auto I = m_pConfigIni->Sections.begin(); I != m_pConfigIni->Sections.end(); ++I)
-        {
-            if (_wcsicmp(I->Name.c_str(), req->section) == 0) {
-                m_pConfigIni->Sections.erase(I);
-                break;
-            }
-        }
-        return STATUS_SUCCESS;
+		return m_pSbieIni->RemoveSection(req->section);
     }
 
-    //
-    // Get the relevant ini section object
-    //
-
-    SIniSection* pSection = GetIniSection(req->section, true);
-
-    //
-    // Check if this is a replace section request and if so execute it
-    //
-
-    if (wcslen(req->setting) == 0 && have_value) 
-    {
-        std::list<SIniEntry> entries;
-
-        WCHAR* iniDataPtr = req->value;
-        Ini_Read_ConfigSection(iniDataPtr, entries);
-        if (*iniDataPtr != L'\0') // there must be no sections inside another section
-            return STATUS_INVALID_PARAMETER;
-
-        pSection->Entries = entries;
-        return STATUS_SUCCESS;
-    }
-
-    //
-    // remove old values and set the new once
-    //
-
-    std::list<SIniEntry>::iterator pos = pSection->Entries.end();
-    for (auto I = pSection->Entries.begin(); I != pSection->Entries.end();)
-    {
-        if (_wcsicmp(I->Name.c_str(), req->setting) == 0) {
-            I = pSection->Entries.erase(I);
-            pos = I;
-        }
-        else
-            ++I;
-    }
-
-    //
-    // set the value(s) if present
-    //
-
-    if (have_value) 
-    {
-        /*for (WCHAR* value = req->value; req->value_len > 0 && *value != L'\0';) 
-        {
-            pSection->Entries.insert(pos, SIniEntry{ req->setting, value });
-
-            ULONG len = wcslen(value);
-            req->value_len -= len;
-            if (req->value_len > 0) {
-                req->value_len -= 1;
-                value += len + 1;
-            }
-        }*/
-
-        //
-        // Note: SbieCtrl passes a \n separated list to replace all values in a string list
-        //
-
-        for (WCHAR* value = req->value; *value != L'\0'; ) 
-        {
-            ULONG cpylen, skiplen;
-            WCHAR *cr = wcschr(value, L'\n');
-            if (cr) {
-                cpylen = (ULONG)(cr - value);
-                skiplen = cpylen + 1;
-            } else {
-                cpylen = wcslen(value);
-                skiplen = cpylen;
-            }
-            if (cpylen > 1900)  // see also CONF_LINE_LEN (2000) in SbieDrv
-                cpylen = 1900;
-
-            pSection->Entries.insert(pos, SIniEntry{ req->setting, std::wstring(value, cpylen) });
-
-            value += skiplen;
-        }
-    }
-
-    return STATUS_SUCCESS;
+	return m_pSbieIni->SetValue(req->section, req->setting, req->value, req->value_len);
 }
 
 
@@ -1180,41 +956,7 @@ ULONG SbieIniServer::AddSetting(MSG_HEADER* msg, bool insert)
     if (! req->value_len)
         return STATUS_SUCCESS;
 
-    bool seen_value = false;
-
-    //
-    // Get the relevant ini section object
-    //
-
-    SIniSection* pSection = GetIniSection(req->section, true);
-
-    //
-    // Find the right place to add the value
-    //
-
-    std::list<SIniEntry>::iterator pos = pSection->Entries.end();
-    for (auto I = pSection->Entries.begin(); I != pSection->Entries.end();++I)
-    {
-        if (_wcsicmp(I->Name.c_str(), req->setting) == 0) {
-            // !insert -> append -> find last entry
-            if (!insert || pos == pSection->Entries.end()) {
-                pos = I;
-                if (!insert) pos++;
-            }
-            //if (_wcsicmp(I->Value.c_str(), req->value) == 0) {
-            //    // this value is already present, so let's abort right here
-            //    return STATUS_SUCCESS;
-            //}
-        }
-    }
-
-    //
-    // add the value to the string list
-    //
-
-    pSection->Entries.insert(pos, SIniEntry{ req->setting, req->value });
-
-    return STATUS_SUCCESS;
+	return m_pSbieIni->AddValue(req->section, req->setting, req->value, insert);
 }
 
 
@@ -1234,29 +976,7 @@ ULONG SbieIniServer::DelSetting(MSG_HEADER* msg)
     if (! req->value_len)
         return SetSetting(msg);
 
-    //
-    // Get the relevant ini section object
-    //
-
-    SIniSection* pSection = GetIniSection(req->section, false);
-    if (!pSection)
-        return STATUS_SUCCESS;
-
-    //
-    // discard setting with the matching the value
-    //
-
-    for (auto I = pSection->Entries.begin(); I != pSection->Entries.end();)
-    {
-        if (_wcsicmp(I->Name.c_str(), req->setting) == 0 && _wcsicmp(I->Value.c_str(), req->value) == 0) {
-            I = pSection->Entries.erase(I);
-            // Note: we could break here, but let's finish in case there is a duplicate
-        }
-        else
-            ++I;
-    }
-
-    return STATUS_SUCCESS;
+	return m_pSbieIni->RemoveValue(req->section, req->setting, req->value);
 }
 #else
 //---------------------------------------------------------------------------
@@ -1932,10 +1652,8 @@ bool SbieIniServer::AddCallerText(WCHAR *setting, WCHAR *value)
 ULONG SbieIniServer::RefreshConf()
 {
 #ifdef NEW_INI_MODE
-    if (!m_pConfigIni)
+    if (!m_pSbieIni)
         return STATUS_UNSUCCESSFUL;
-
-    std::wstring iniData;
 #else
     if (!m_text)
         return STATUS_UNSUCCESSFUL;
@@ -1943,7 +1661,7 @@ ULONG SbieIniServer::RefreshConf()
 
     WCHAR *IniPath;
     BOOLEAN IsUTF8 = FALSE;
-    if (! GetIniPath(&IniPath, NULL, &IsUTF8))
+    if (! GetIniPath(&IniPath))
         return STATUS_INSUFFICIENT_RESOURCES;
 
     WCHAR *TmpPath = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, 2048);
@@ -1956,8 +1674,9 @@ ULONG SbieIniServer::RefreshConf()
     WCHAR *ptr = wcsrchr(TmpPath, L'.');
     wsprintf(ptr, L"-%d.tmp", GetTickCount());
 
-
+#ifndef NEW_INI_MODE
     HANDLE hFile = INVALID_HANDLE_VALUE;
+#endif
     NTSTATUS status = STATUS_UNSUCCESSFUL;
 
     bool RestoreOnError = false;
@@ -2018,6 +1737,12 @@ ULONG SbieIniServer::RefreshConf()
 
     UnlockConf();
 
+#ifdef NEW_INI_MODE
+    status = m_pSbieIni->SaveIni(IniPath);
+    if (!NT_SUCCESS(status)) {
+        SbieApi_LogEx(m_session_id, 2322, L"[99 / 0x%08X]", status);
+    }
+#else
     int retryCnt = 0;
 retry:
     hFile = CreateFile(
@@ -2033,31 +1758,6 @@ retry:
         SbieApi_LogEx(m_session_id, 2322, L"[15 / %d]", GetLastError());
         goto finish;
     }
-
-#ifdef NEW_INI_MODE
-
-    //
-    // rebuild the ini from the cache with new values, if present, 
-    // and keeping comments and most of the formatting
-    //
-
-    for (auto I = m_pConfigIni->Sections.begin(); I != m_pConfigIni->Sections.end(); ++I)
-    {
-        if (I->Name.size() > 0)
-            iniData += L"[" + I->Name + L"]\r\n";
-
-        for (auto J = I->Entries.begin(); J != I->Entries.end(); ++J)
-        {
-            if(J->Name.size() > 0)
-                iniData += J->Name + L"=";
-            iniData += J->Value + L"\r\n";
-        }
-        iniData += L"\r\n";
-    }
-
-    const WCHAR* m_text_base = iniData.c_str();
-    IsUTF8 = m_pConfigIni->Encoding == 1;
-#endif
 
     if (IsUTF8)
     {
@@ -2100,10 +1800,12 @@ retry:
             SbieApi_LogEx(m_session_id, 2322, L"[17 / %d]", GetLastError());
         }
     }
-    CloseHandle(hFile);
-    hFile = INVALID_HANDLE_VALUE;
     if (lenWritten != lenToWrite)
         goto finish;
+
+    CloseHandle(hFile);
+    hFile = INVALID_HANDLE_VALUE;
+#endif
 
     //
     // apply new Sandboxie.ini into the driver
@@ -2113,8 +1815,10 @@ retry:
 
 finish:
 
+#ifndef NEW_INI_MODE
     if (hFile != INVALID_HANDLE_VALUE)
         CloseHandle(hFile);
+#endif
 
     if ((! NT_SUCCESS(status)) && RestoreOnError) {
         if (! CopyFile(TmpPath, IniPath, FALSE))
@@ -2140,8 +1844,7 @@ finish:
 //---------------------------------------------------------------------------
 
 
-bool SbieIniServer::GetIniPath(WCHAR **IniPath,
-                               BOOLEAN *IsHomePath, BOOLEAN* IsUTF8)
+bool SbieIniServer::GetIniPath(WCHAR **IniPath, BOOLEAN *IsHomePath)
 {
     static const WCHAR *_ini = SANDBOXIE_INI;
     WCHAR *path = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, 2048);
@@ -2151,12 +1854,6 @@ bool SbieIniServer::GetIniPath(WCHAR **IniPath,
     // the Sandbox driver tells us if the ini file comes from the
     // program home directory or from the Windows directory, and
     // we use that information to select the output path
-
-    if (IsUTF8 != NULL) {
-        LONG rc = SbieApi_QueryConfAsIs(NULL, L"IniEncoding", 0, path, 8);
-        if (rc == 0 && *path == L'8')
-            *IsUTF8 = TRUE;
-    }
 
     LONG rc = SbieApi_QueryConfAsIs(NULL, L"IniLocation", 0, path, 260 * sizeof(WCHAR));
     if (rc == 0 && *path == L'\\') {
@@ -2260,7 +1957,6 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
     NTSTATUS status = STATUS_UNSUCCESSFUL;
     HANDLE hToken = NULL;
     BOOL ok = TRUE;
-    WCHAR ctrlCmd[128] = { 0 };
 
     //
     // get token from caller session or caller process.  note that on
@@ -2324,29 +2020,56 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
         }
     }
 
+    if (ok)
+    {
+        if(isSandboxed || msg->length <= sizeof(MSG_HEADER))
+            status = RunSbieCtrl(hToken, NULL);
+        else
+            status = RunSbieCtrl(hToken, NULL, (WCHAR*)((UCHAR*)msg + sizeof(MSG_HEADER)), (msg->length - sizeof(MSG_HEADER)) / sizeof(WCHAR));
+    }
+
+    //
+    // finish
+    //
+
+    if (hToken)
+        CloseHandle(hToken);
+
+    return SHORT_REPLY(status);
+}
+
+NTSTATUS SbieIniServer::RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const WCHAR* CtrlCmd, size_t CtrlCmdLen)
+{
+    NTSTATUS status = STATUS_UNSUCCESSFUL;
+    BOOL ok = TRUE;
+
+    WCHAR ctrlCmd[128] = { 0 };
+
     //
     // get the agent binary name
     //
 
-    if (isSandboxed) {
+    if (!CtrlCmd) {
+
+        WCHAR username[256];
+        WCHAR sectionname[128];
 
         const WCHAR* _Setting2 = SBIECTRL_ L"AutoStartAgent";
-        bool ok2 = SetUserSettingsSectionName(hToken);
+        bool ok2 = SetUserSettingsSectionName(hToken, username, sectionname);
         if (ok2) {
             SbieApi_QueryConfAsIs(
-                m_sectionname, _Setting2, 0, ctrlCmd, sizeof(ctrlCmd) - 2);
+                sectionname, _Setting2, 0, ctrlCmd, sizeof(ctrlCmd) - 2);
         }
         else {
-            wcscpy(m_sectionname + 13, L"Default");   // UserSettings_Default
+            wcscpy(sectionname + 13, L"Default");   // UserSettings_Default
             SbieApi_QueryConfAsIs(
-                m_sectionname, _Setting2, 0, ctrlCmd, sizeof(ctrlCmd) - 2);
+                sectionname, _Setting2, 0, ctrlCmd, sizeof(ctrlCmd) - 2);
         }
 
-    } else if (msg->length > sizeof(MSG_HEADER)) {
+    } else if (CtrlCmdLen > 0) {
 
-        ULONG len = (ULONG)(msg->length - sizeof(MSG_HEADER));
-        memcpy(ctrlCmd, (UCHAR*)msg + sizeof(MSG_HEADER), len);
-        ctrlCmd[len / sizeof(WCHAR)] = L'\0';
+        memcpy(ctrlCmd, CtrlCmd, CtrlCmdLen * sizeof(WCHAR));
+        ctrlCmd[CtrlCmdLen] = L'\0';
     }
 
     //
@@ -2385,6 +2108,10 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
             memzero(&si, sizeof(STARTUPINFO));
             si.cb = sizeof(STARTUPINFO);
             si.dwFlags = STARTF_FORCEOFFFEEDBACK;
+            if (DeskName) {
+                si.dwFlags |= STARTF_USESHOWWINDOW;
+                si.lpDesktop = (wchar_t*)DeskName;
+            }
 
             ok = CreateProcessAsUser(
                     hToken, NULL, CmdLine, NULL, NULL, FALSE,
@@ -2406,14 +2133,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
         }
     }
 
-    //
-    // finish
-    //
-
-    if (hToken)
-        CloseHandle(hToken);
-
-    return SHORT_REPLY(status);
+    return status;
 }
 
 

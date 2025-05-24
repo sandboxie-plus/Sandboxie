@@ -351,6 +351,12 @@ LONG SbieApi_QueryDrvInfo(
 SBIEAPI_EXPORT
 LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags);
 
+SBIEAPI_EXPORT
+ULONG SbieApi_UpdateConf(
+    ULONG op, 
+    const WCHAR *section_name,
+    const WCHAR *setting_name, 
+    const WCHAR *value_ptr);
 
 SBIEAPI_EXPORT
 LONG SbieApi_QueryConf(

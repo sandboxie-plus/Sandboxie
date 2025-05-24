@@ -805,9 +805,9 @@ void COptionsWindow::OnOpenCOM()
 void COptionsWindow::OnNoWindowRename()
 {
 	if (ui.chkNoWindowRename->isChecked())
-		SetAccessEntry(eWnd, "", eOpen, "#");
+		SetAccessEntry(eWnd, "", eNoRename, "*");
 	else
-		DelAccessEntry(eWnd, "", eOpen, "#");
+		DelAccessEntry(eWnd, "", eNoRename, "*");
 }
 
 void COptionsWindow::OnToggleInjectDll(QTreeWidgetItem* pItem, int Column)

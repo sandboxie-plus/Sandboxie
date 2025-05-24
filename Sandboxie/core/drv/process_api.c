@@ -175,6 +175,12 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
 
         } else {
 
+            //
+            // third parameter specifies if to grant fake admin rights
+            //
+
+            box->fake_admin = (BOOLEAN)parms[3];
+
             if (!Process_NotifyProcess_Create(
                                 user_pid_parm, Api_ServiceProcessId, Api_ServiceProcessId, box)) {
 
@@ -375,6 +381,8 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
                     flags |= SBIE_FLAG_DROP_RIGHTS;
                 if (proc->rights_dropped)
                     flags |= SBIE_FLAG_RIGHTS_DROPPED;
+                if (proc->box->fake_admin)
+                    flags |= SBIE_FLAG_FAKE_ADMIN;
                 if (proc->untouchable)
                     flags |= SBIE_FLAG_PROTECTED_PROCESS;
                 if (proc->image_sbie)

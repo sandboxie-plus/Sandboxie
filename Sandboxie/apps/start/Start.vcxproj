@@ -112,6 +112,7 @@
     <ClCompile>
       <ExceptionHandling>Sync</ExceptionHandling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libvcruntime.lib;libucrt.lib;ntdll.lib;User32.lib;Shell32.lib;Shlwapi.lib;Kernel32.lib;Gdi32.lib;SbieDll.lib;Ole32.lib;Common.lib;Advapi32.lib;Comctl32.lib;Comdlg32.lib;uuid.lib;Gdiplus.lib</AdditionalDependencies>
@@ -128,6 +129,7 @@
     <ClCompile>
       <ExceptionHandling>Sync</ExceptionHandling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libvcruntime.lib;libucrt.lib;ntdll.lib;User32.lib;Shell32.lib;Shlwapi.lib;Kernel32.lib;Gdi32.lib;SbieDll.lib;Ole32.lib;Common.lib;Advapi32.lib;Comctl32.lib;Comdlg32.lib;uuid.lib;Gdiplus.lib</AdditionalDependencies>
@@ -145,6 +147,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libvcruntime.lib;libucrt.lib;ntdll.lib;User32.lib;Shell32.lib;Shlwapi.lib;Kernel32.lib;Gdi32.lib;SbieDll.lib;Ole32.lib;Common.lib;Advapi32.lib;Comctl32.lib;Comdlg32.lib;uuid.lib;Gdiplus.lib</AdditionalDependencies>
@@ -171,6 +174,7 @@
     <ClCompile>
       <ExceptionHandling>Sync</ExceptionHandling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
@@ -189,6 +193,7 @@
     <ClCompile>
       <ExceptionHandling>Sync</ExceptionHandling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">
@@ -207,9 +212,11 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CallingConvention />
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\SecDeskHelper.cpp" />
     <ClCompile Include="aboutdlg.cpp" />
     <ClCompile Include="boxdlg.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Use</PrecompiledHeader>
@@ -280,6 +287,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\SecDeskHelper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

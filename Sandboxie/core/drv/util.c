@@ -344,7 +344,7 @@ NTSTATUS SetRegValue(const WCHAR *KeyPath, const WCHAR *ValueName, const void *D
     SID OwnerSid = { 
         1,                   // Revision
         1,                   // SubAuthorityCount
-        {0, 0, 0, 0, 0, 5},   // IdentifierAuthority
+        {0, 0, 0, 0, 0, 5},  // IdentifierAuthority
         {100}                // SubAuthority[0]
     };
 

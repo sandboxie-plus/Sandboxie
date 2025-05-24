@@ -43,6 +43,10 @@ public:
 
     static bool IsDriverReady();
 
+    static void InitializeSidCache();
+
+    static void DestroySidCache();
+
     static bool LookupSidCached(const PSID pSid, 
         WCHAR *UserName, ULONG* UserNameLen);
 
@@ -148,7 +152,7 @@ private:
 
 	ULONG m_last_message_number;
 
-    std::map<std::wstring, std::wstring> m_SidCache;
+    static std::map<std::wstring, std::wstring> m_SidCache;
 
     //
     // critical sections
@@ -156,7 +160,7 @@ private:
 
     CRITICAL_SECTION m_LogMessage_CritSec;
     CRITICAL_SECTION m_critSecHostInjectedSvcs;
-    CRITICAL_SECTION m_SidCache_CritSec;
+    static CRITICAL_SECTION m_SidCache_CritSec;
 };
 
 

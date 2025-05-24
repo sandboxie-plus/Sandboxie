@@ -268,6 +268,22 @@ SBIE1411 %2 korumalı alanında bilinmeyen %3 şablonu tanımlı
 SBIE1412 Yazı: %2
 .
 
+1413;evt;pop;wrn;01
+SBIE1413 Alan içe aktarım klasöründeki %3 dosyası açılamıyor, hata %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 %3 alan içe aktarım dosyasında %2 hatasıyla karşılaşıldı
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Alan içe aktarım dosyası adı ve taşınabilir alan adı uyuşmazlığı (INI dosya adı INI içindeki bölüm adıyla eşleşmelidir), hata %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Taşınabilir alan adı başka bir alan tarafından kullanılıyor, hata %3
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -862,6 +878,26 @@ Denetimi (UAC) açılır penceresini etkinleştirin.
 3243;txt;01
 Not: Yönetim yetkileri verildikten sonra dahi program
 Sandboxie gözetimi altında çalıştırılmaya devam edecek.
+.
+
+3244;txt;01
+%2 uygulaması, korumalı alanda Yönetici ayrıcalıkları istiyor:
+.
+
+3245;txt;01
+Bu isteği onaylayabilirsiniz (EVET), bu durumda sistem ayarlarınıza bağlı
+olarak bir UAC (Kullanıcı Hesabı Denetimi) istemi görüntülenebilir.
+İsterseniz, uygulamaya yönetici ayrıcalıkları vermeden (yalnızca sahipmiş
+gibi davranmasını sağlayarak) çalışmasına izin verebilirsiniz (HAYIR)
+veya işlemi tamamen iptal edebilirsiniz (İPTAL).
+.
+
+3246;txt;01
+Not: Yönetici ayrıcalıkları verilse bile program Sandboxie denetimi altında çalışmaya devam
+edecektir. Ancak, gerçek Yönetici hakları verilmesi, uygulamanın yamalanmamış bir Windows
+açığını veya güvenlik açığı olan bir sürücüyü kullanarak korumalı alandan kaçma riskini
+artırabilir. Bu nedenle, genellikle yalnızca sahte Yönetici hakları vermek daha güvenlidir,
+ancak bu bazı yükleyicilerin başarısız olmasına neden olabilir.
 .
 
 3251;txt;01

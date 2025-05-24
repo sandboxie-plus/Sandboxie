@@ -959,6 +959,24 @@ Hinweis: Das Programm wird weiter mit Sandboxie ausgeführt,
 auch nachdem Sie Administratorrechte dafür erlaubt haben.
 .
 
+3244;txt;01
+Programm %2 fordert Administratorrechte an, in der Sandbox:
+.
+
+3245;txt;01
+Sie können diese Anfrage zulassen (JA). In diesem Fall kann, je nach Systemeinstellungen,
+eine UAC Abfrage erscheinen. Sie können Administratorrechte verweigern, aber das Programm
+glauben lassen, dass es sie hat (NEIN). Oder Sie können den Start abbrechen (ABBRECHEN).
+.
+
+3246;txt;01
+Notiz: Das Programm wird weiterhin unter der Aufsicht von Sandboxie ausgeführt, auch wenn
+Administratorrechte gewährt werden. Die Gewährung echter Administratorrechte kann jedoch das
+Risiko erhöhen, dass das Programm eine ungepatchte Windows-Schwachstelle oder einen anfälligen
+Treiber ausnutzt, um aus der Sandbox zu entkommen. Daher ist es im Allgemeinen sicherer, nur
+Fake-Administratorrechte zu gewähren, obwohl dies bei manchen Installern zu Fehlern führen kann.
+.
+
 3251;txt;01
 Außerhalb der Sandbox starten
 .

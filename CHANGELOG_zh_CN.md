@@ -3,10 +3,32 @@
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
 
-## [1.15.13 / 5.70.13] - 2025-04-??
+## [1.16.0 / 5.71.0] - 2025-05-??
 
 ### 新增
-- 在捐赠支持页面新增了复制硬件 ID 的选项
+- 在支持页面新增了复制硬件 ID（hwid）的选项
+- 新增了 OpenClsid，并修复了 OpenClsid 处理相关问题，以启用 Firefox 的硬件加速
+- 新增 `MarkOfTheWebBox=BoxName` 选项，可将所有带有“网络标记”的文件强制放入指定的预设沙盒中
+- 为强制进程新增了通配符支持 [#2603](https://github.com/sandboxie-plus/Sandboxie/issues/2603)
+- 在跟踪日志页面的 “类型” 下拉菜单中，新增了文本缩放的正确支持，防止在应用显示缩放时文本被截断 [#4812](https://github.com/sandboxie-plus/Sandboxie/pull/4812)（感谢 wzxjohn）
+- 新增了对 EventPair 和 KeyedEvent 对象的虚拟化处理
+- 为 Timer 对象新增了筛选和虚拟化功能
+- 新增了创建虚拟沙盘（不会存储在 sandboxie ini 文件中）的选项
+- 新增了 `UseSandboxieUAC=y` 选项，可以使用沙盘内置的 UAC 替代系统默认的 UAC 提示
+  - 注意：新的 UAC 提示还提供仅授予应用程序“伪管理员权限”的选项
+
+### 更改
+- 重构了 **DNS 过滤器逻辑**，即便未发生 DNS 解析，或者未返回有效 IP 地址时也能进行过滤 [#4811](https://github.com/sandboxie-plus/Sandboxie/pull/4811)（感谢 wzxjohn）
+  - 之前只有在发起了 DNS 请求并收到有效响应（如 IP 地址）时，DNS 过滤才会生效
+  - 这会导致诸如未解析域名无法被修改和在过滤期间潜在的信息泄露等问题
+- 所有组件均启用了 `/GS`
+- 驱动程序启用了 `/CETCOMPAT`
+- 重构了 ini 配置文件的处理逻辑 [#4492](https://github.com/sandboxie-plus/Sandboxie/issues/4492)
+  - 新增 `ImportBox=C:\path\To\Box.ini`
+  - 新增了无需 ini 文件即可在驱动层创建虚拟配置区段的机制
+
+### 修复
+- 在 Firefox 138 及以上版本全屏时，任务栏依然显示在顶部的问题 [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
 
 
 ## [1.15.12 / 5.70.12] - 2025-05-01

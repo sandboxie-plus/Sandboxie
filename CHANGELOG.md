@@ -6,30 +6,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.16.0 / 5.71.0] - 2025-05-??
 
 ### Added
-- added option to copy hwid from the support page
-- added OpenClsid and fixed an issue with OpenClsid handling to enable firefox's hardware acceleration
-- added 'MarkOfTheWebBox=BoxName' option to force all files with the Mark Of the Web set into a preset sandbox
+- added option to copy HwID from the support page
+- added OpenClsid and fixed an issue with OpenClsid handling to enable Firefox's hardware acceleration
+- added 'MarkOfTheWebBox=BoxName' option to force all files with the Mark of The Web set into a preset sandbox
 - added wildcard support with ForceProcess [#2603](https://github.com/sandboxie-plus/Sandboxie/issues/2603)
 - added support for proper text scaling in the 'Type' dropdown on the Trace Log page to prevent truncation when display scaling is applied [#4812](https://github.com/sandboxie-plus/Sandboxie/pull/4812) (thanks wzxjohn)
-- added missing virtualization to EventPair & KeyedEvent objects
+- added missing virtualization to EventPair and KeyedEvent objects
 - added filtering and virtualization to Timer objects
-- added option to create virtual sandboxies (no stored in sandboxie ini)
-- added option 'UseSandboxieUAC=y' to use sandboxies own UAC standin prompt instead of the system default one
+- added option to create virtual sandboxes (not stored in Sandboxie.ini)
+- added option 'UseSandboxieUAC=y' to use Sandboxie's own UAC stand-in prompt instead of the system default one
   - Note: the new UAC prompt offers also the option to grant only fake admin privileges to the application
 
 ### Changed
 - refactored **DNS Filter logic** to enable filtering even when no DNS resolution occurs or when no valid IP address is returned [#4811](https://github.com/sandboxie-plus/Sandboxie/pull/4811) (thanks wzxjohn)
-  - Previously, DNS Filter only applied if a DNS request was made and a valid response (e.g., IP address) was received
-  - This caused issues such as failed modifications for unresolved domains and potential information leakage due to DNS requests during filtering
+  - previously, DNS Filter only applied if a DNS request was made and a valid response (e.g. IP address) was received
+  - this caused issues such as failed modifications for unresolved domains and potential information leakage due to DNS requests during filtering
 - enabled /GS for all components
 - enabled /CETCOMPAT for the driver
-- reworked ini handling [#4492](https://github.com/sandboxie-plus/Sandboxie/issues/4492)
-  - Added ImportBox=C:\path\To\Box.ini
-  - Added mechanism to create virtual config section in the driver without the need for an ini file
+- reworked INI handling [#4492](https://github.com/sandboxie-plus/Sandboxie/issues/4492)
+  - added 'ImportBox=C:\path\To\Box.ini'
+  - added mechanism to create virtual config section in the driver without the need for an INI file
   
 ### Fixed
-- Taskbar remains visible at the top when entering full screen in Firefox 138+ [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
-
+- fixed taskbar remains visible at the top when entering full screen in Firefox 138+ [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
 
 
 
@@ -51,7 +50,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed the 'run in box' selection prompt not show BoxAlias [#4709](https://github.com/sandboxie-plus/Sandboxie/issues/4709)
 - fixed after Ctrl+F, the expansion and closure records of the Box Group were disrupted [#4708](https://github.com/sandboxie-plus/Sandboxie/issues/4708)
-- FIXED SECURITY ISSUE ID-26 added security checks to registry set/get functions CVE-2025-46713, CVE-2025-46714, CVE-2025-46716, CVE-2025-46715 [5a6a2f7](https://github.com/sandboxie-plus/Sandboxie/commit/5a6a2f7f8a99eb9d36906b73bc883ebc4c268cc4)
+- FIXED SECURITY ISSUE ID-26: added security checks to registry set/get functions CVE-2025-46713, CVE-2025-46714, CVE-2025-46716, CVE-2025-46715 [5a6a2f7](https://github.com/sandboxie-plus/Sandboxie/commit/5a6a2f7f8a99eb9d36906b73bc883ebc4c268cc4) (thanks sgayou)
 - fixed issues in Pool_Alloc [5a6a2f7](https://github.com/sandboxie-plus/Sandboxie/commit/5a6a2f7f8a99eb9d36906b73bc883ebc4c268cc4)
 - fixed SbieCtrl.exe and SandMan.exe having a constant 3 MB/s IO rate in the Process Explorer [#4693](https://github.com/sandboxie-plus/Sandboxie/issues/4693)
 - fixed template for Tencent TIM causes drag and drop not available [#4688](https://github.com/sandboxie-plus/Sandboxie/issues/4688)

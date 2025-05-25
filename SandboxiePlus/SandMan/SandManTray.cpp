@@ -1,20 +1,4 @@
 
-#include <QStyledItemDelegate>
-class CTrayBoxesItemDelegate : public QStyledItemDelegate
-{
-	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
-	{
-		QStyleOptionViewItem opt(option);
-		if ((opt.state & QStyle::State_MouseOver) != 0)
-			opt.state |= QStyle::State_Selected;
-		else if ((opt.state & QStyle::State_HasFocus) != 0 && m_Hold)
-			opt.state |= QStyle::State_Selected;
-		opt.state &= ~QStyle::State_HasFocus;
-		QStyledItemDelegate::paint(painter, opt, index);
-	}
-public:
-	static bool m_Hold;
-};
 
 bool CTrayBoxesItemDelegate::m_Hold = false;
 

@@ -471,6 +471,7 @@ private:
 	CPopUpWindow*		m_pPopUpWindow;
 
 	bool				m_StartMenuUpdatePending;
+public:
 
 	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;
@@ -482,7 +483,6 @@ private:
 	void				LoadLanguage(const QString& Lang, const QString& Module, int Index);
 	QTranslator			m_Translator[2];
 
-public:
 	class COnlineUpdater*m_pUpdater;
 
 	QString				m_Language;
@@ -531,6 +531,22 @@ class CTreeItemDelegate2 : public CTreeItemDelegate
 		size.setHeight(32);
 		return size;
 	}
+};
+
+class CTrayBoxesItemDelegate : public QStyledItemDelegate
+{
+	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QStyleOptionViewItem opt(option);
+		if ((opt.state & QStyle::State_MouseOver) != 0)
+			opt.state |= QStyle::State_Selected;
+		else if ((opt.state & QStyle::State_HasFocus) != 0 && m_Hold)
+			opt.state |= QStyle::State_Selected;
+		opt.state &= ~QStyle::State_HasFocus;
+		QStyledItemDelegate::paint(painter, opt, index);
+	}
+public:
+	static bool m_Hold;
 };
 
 extern CSandMan* theGUI;

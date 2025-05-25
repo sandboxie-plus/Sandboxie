@@ -92,6 +92,7 @@ private slots:
 	void						OnMenuContextAction();
 
 	void						OnGroupAction();
+	void						OnMoveTo(QTreeWidgetItem* pItem);
 	void						OnGroupAction(QAction* pAction);
 	void						OnSandBoxAction();
 	void						OnSandBoxAction(QAction* pAction);
@@ -115,6 +116,8 @@ protected:
 	virtual void				UpdateStartMenu(CSandBoxPlus* pBoxEx);
 	virtual void				UpdateRunMenu(const CSandBoxPtr& pBox);
 
+	void						OnMoveTo(const QString& Group);
+
 	QMap<QString, QStringList>	m_Groups;
 	QSet<QString>				m_Collapsed;
 	bool						m_HoldExpand;
@@ -122,6 +125,7 @@ protected:
 private:
 
 	void					CreateMenu();
+	void					CreateGroupsMenu();
 	void					CreateOldMenu();
 	void					CreateGroupMenu();
 	void					CreateTrayMenu();
@@ -207,6 +211,8 @@ private:
 	//QAction*				m_pMenuMoveBy;
 	QAction*				m_pMenuMoveDown;
 	QMenu*					m_pMenuMoveTo;
+	QWidgetAction*			m_pGroupList;
+	QTreeWidget*			m_pGroupTree;
 	QAction*				m_pMenuRename;
 
 	QAction*				m_pMenuTerminate;
@@ -228,6 +234,8 @@ private:
 	QMenu*					m_pCtxMenu;
 	QAction*				m_pCtxPinToRun;
 	QAction*				m_pCtxMkLink;
+
+	QMenu*					m_pCurMenu;
 
 	QFileIconProvider		m_IconProvider;
 

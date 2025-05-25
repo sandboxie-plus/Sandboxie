@@ -974,8 +974,11 @@ del Controllo account utente.
 .
 
 3243;txt;01
-Nota: Il programma continuerà ad essere eseguito sotto la supervisione di
-Sandboxie, anche dopo averlo eseguito con i privilegi di amministratore.
+Nota: Il programma continuerà a essere eseguito sotto la supervisione di
+Sandboxie, anche dopo aver concesso i privilegi di amministratore.
+Tuttavia, concedere i diritti di amministratore potrebbe aumentare il
+rischio che l'applicazione sfrutti una vulnerabilità non corretta di
+Windows o un driver vulnerabile per evadere dall'area virtuale.
 .
 
 3251;txt;01

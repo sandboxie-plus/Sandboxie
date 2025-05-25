@@ -454,7 +454,7 @@ SBIE2222 Başlat/Çalıştır Erişim Kısıtlamalarına program eklemek için, 
 .
 
 2223;pop;wrn;01
-SBIE2223 Dosyaları kopyalarken dosya boyut sınırını arttırmak için lütfen bu mesaj satırına çift tıklayın.
+SBIE2223 Dosyaları kopyalarken dosya boyut sınırını artırmak için lütfen bu mesaj satırına çift tıklayın.
 .
 
 2224;pop;wrn;01
@@ -872,12 +872,15 @@ için Yönetici yetkilendirmesi istiyor.
 
 3242;txt;01
 İsteği kabul etmek veya reddetmek için Kullanıcı Hesap
-Denetimi (UAC) açılır penceresini etkinleştirin.
+Denetimi (UAC) açılır penceresini kullanın.
 .
 
 3243;txt;01
-Not: Yönetim yetkileri verildikten sonra dahi program
-Sandboxie gözetimi altında çalıştırılmaya devam edecek.
+Not: Yönetici ayrıcalıkları verilse bile program Sandboxie
+gözetimi altında çalışmaya devam edecektir. Ancak, Yönetici
+hakları verilmesi, uygulamanın yamalanmamış bir Windows
+açığını veya güvenlik açığı olan bir sürücüyü kullanarak
+korumalı alandan kaçma riskini artırabilir.
 .
 
 3244;txt;01
@@ -893,7 +896,7 @@ veya işlemi tamamen iptal edebilirsiniz (İPTAL).
 .
 
 3246;txt;01
-Not: Yönetici ayrıcalıkları verilse bile program Sandboxie denetimi altında çalışmaya devam
+Not: Yönetici ayrıcalıkları verilse bile program Sandboxie gözetimi altında çalışmaya devam
 edecektir. Ancak, gerçek Yönetici hakları verilmesi, uygulamanın yamalanmamış bir Windows
 açığını veya güvenlik açığı olan bir sürücüyü kullanarak korumalı alandan kaçma riskini
 artırabilir. Bu nedenle, genellikle yalnızca sahte Yönetici hakları vermek daha güvenlidir,
@@ -2424,7 +2427,7 @@ Başlatma/Çalıştırma Kısıtlamalarını yönetmek için Korumalı Alan Ayar
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control:  Korumalu Alan Ayarları:  Düşük Seviye Erişimi / Donanım Erişimi
+# Sandboxie Control:  Korumalu Alan Ayarları:  Düşük Düzey Erişimi / Donanım Erişimi
 #----------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------
@@ -2436,7 +2439,7 @@ Hak Bırakma
 .
 
 3943;txt;01
-Sandboxie, yalıtımı sağlayabilmek için denetimindeki programlardan birkaç güvenlik hakkını bırakmalıdır.
+Sandboxie, yalıtımı sağlayabilmek için gözetimindeki programlardan birkaç güvenlik hakkını bırakmalıdır.
 .
 
 3944;txt;01
@@ -3248,12 +3251,12 @@ veya doğrudan en son Sandboxie-Plus yükleyicisini indirmek için <a ID="upgrad
 .
 
 6003;txt;01
-Sandboxie classic'in eski kullanıcı arayüzü, ağ güvenlik duvarı işlevi için destek uygulamaz.
+Sandboxie'nin eski kullanıcı arayüzü, ağ güvenlik duvarı işlevselliğini desteklemez.
 
-Çekirdek bileşenler tarafından desteklenen özelliği ini dosyasını kullanarak yapılandırabilirsiniz, kurallar aşağıdaki gibi yapılandırılmıştır:
-NetworkAccess=iexplorer.exe,İzin Ver; bağlantı noktası=80,443; Adres=192.168.0.1-192.168.100.255; Protokol=TCP
+Ancak bu özelliği, çekirdek bileşenler tarafından sunulan şekilde INI dosyası üzerinden yapılandırabilirsiniz. Kurallar şu şekilde yapılandırılır:
+NetworkAccess=iexplorer.exe,Allow;Port=80,443;Address=192.168.0.1-192.168.100.255;Protocol=TCP
 
-Bu seçenekleri denetlemek için bir UI kullanmayı tercih ederseniz, lütfen tüm yeni özellikler için tam UI desteğine sahip Sandboxie-Plus'a yükseltin.
+Eğer bu ayarları bir kullanıcı arayüzü üzerinden kontrol etmeyi tercih ederseniz, tüm yeni özellikler için tam kullanıcı arayüzü desteği sunan Sandboxie-Plus sürümüne geçebilirsiniz.
 .
 
 6004;pop;err;01
@@ -3265,18 +3268,18 @@ Not: Yönetici ayrıcalıkları olmadan yükleyiciler korumalı alanda başlatı
 .
 
 6006;txt;01
-Sandboxie classic'in eski kullanıcı arayüzü, yalnızca birkaç kısıtlama seçeneği için destek uygular.
+Sandboxie'nin eski kullanıcı arayüzü yalnızca sınırlı sayıda kısıtlama seçeneğini destekler.
 
-"ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" ve çok daha fazlası gibi ek seçenekler bu alanın ini bölümünde ayarlanabilir.
-Modern kullanıcı arabirimi (SandMan.exe), Başlat/Çalıştır ve İnternet erişim kısıtlamaları için daha fazla özelleştirme seçeneği sunar.
+"ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" gibi ek seçenekler ve daha fazlası ilgili korumalı alan için INI dosyasının ilgili bölümüne eklenerek ayarlanabilir.
+Modern arayüz (SandMan.exe) ayrıca Başlat/Çalıştır ve İnternet erişim kısıtlamaları için daha fazla özelleştirme seçeneği sunar.
 
-Bu seçenekleri denetlemek için bir UI kullanmayı tercih ederseniz, lütfen tüm yeni özellikler için tam UI desteğine sahip Sandboxie-Plus'a yükseltin.
+Bu ayarları bir kullanıcı arayüzü üzerinden kontrol etmeyi tercih ederseniz, tüm yeni özellikler için tam kullanıcı arayüzü desteği sunan Sandboxie-Plus sürümüne geçebilirsiniz.
 .
 
 6007;txt;01
-Sandboxie Plus, eski davranışı olan kara listeme modundan - örn. Kapalı Yol veya Yazma Yolu tarafından engellenenler dışında tüm sürücüye okuma erişimi izni vererek - beyaz listeleme moduna geçerek korumalı alandaki programların yalnızca genel sistem konumlarını okumasına izin verir ve çoğu kullanıcı verisini okumak için bu konumlara özellikle okuma erişimi verilmelidir.
+Sandboxie Plus, eski kara liste modundan (tüm sürücüye okuma erişimine izin verip, yalnızca "Closed Path" veya "Write Path" ile engellenenler hariç) beyaz liste moduna geçerek gizlilik korumasını artırır. Bu yeni modda, korumalı alandaki programlar yalnızca genel sistem konumlarını okuyabilirken, kullanıcı verilerine erişim için özel olarak izin verilmesi gerekir.
 
-Sandboxie classic'in eski kullanıcı arayüzü, bu çalışma modu için destek sunmaz. Ini dosyası kullanılarak yapılandırılabilse de, gizliliği artırılmış alanları kullanmak istiyorsanız modern Sandboxie-Plus UI'yi (SandMan.exe) kullanmanız önerilir.
+Sandboxie'nin eski kullanıcı arayüzü bu çalışma modunu desteklemez. Bu mod, INI dosyası üzerinden yapılandırılabilse de, gizliliği artırılmış korumalı alanları kullanmak istiyorsanız, modern Sandboxie-Plus arayüzünü (SandMan.exe) kullanmanız önerilir.
 .
 
 6008;pop;err;01
@@ -3470,11 +3473,11 @@ Lütfen aşağıdaki bilgiye göz atın.
 .
 
 8012;ins;01
-Sandboxie sistem-seviye sürücüsünü kurup etkinleştirmek için İleri'ye tıklayın. Bu sürücü Sandboxie uygulamasının çekirdeğini oluşturmaktadır.
+Sandboxie sistem-düzeyi sürücüsünü kurup etkinleştirmek için İleri'ye tıklayın. Bu sürücü Sandboxie uygulamasının çekirdeğini oluşturmaktadır.
 .
 
 8013;ins;01
-Sistem-seviye sürücüsünün kurulumunu önleyebilecek, sistem koruma araçlarını geçici olarak kapatmak isteyebilirsiniz.
+Sistem-düzeyi sürücüsünün kurulumunu önleyebilecek, sistem koruma araçlarını geçici olarak kapatmak isteyebilirsiniz.
 .
 
 8014;ins;02

@@ -462,7 +462,7 @@ Applications can be run within this sandbox, ensuring they operate within a cont
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
         <translation>Bu alan türü, uyumluluğa öncelik verirken iyi düzeyde yalıtım sağlar. Güvenilir uygulamaları ayrı bölmelerde çalıştırmak için tasarlanmıştır.
-Diğer alan türlerine göre yalıtım seviyesi azalırken, çok çeşitli uygulamalarla uyumluluğu arttırır ve böylece korumalı alanda sorunsuz çalışmalarını sağlar.</translation>
+Diğer alan türlerine göre yalıtım düzeyi azalırken, çok çeşitli uygulamalarla uyumluluğu arttırır ve böylece korumalı alanda sorunsuz çalışmalarını sağlar.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="415"/>
@@ -3577,7 +3577,7 @@ Yazılım uyumluluğu denetiminden Windows Güncellemeleri taramasını devre d�
     <message>
         <location filename="SandMan.cpp" line="3097"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
-        <translation>&lt;br /&gt;Bu özelliğin kilidini açmak için Great Patreon seviyesinde veya daha yüksek bir seviyede olmanız gerekir.</translation>
+        <translation>&lt;br /&gt;Bu özelliğin kilidini açmak için Great Patreon düzeyinde veya daha yüksek bir düzeyde olmanız gerekir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3109"/>
@@ -5643,12 +5643,12 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1733"/>
         <source>Max Level</source>
-        <translation>En Üst Seviye</translation>
+        <translation>En Üst Düzey</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1735"/>
         <source>Level %1</source>
-        <translation>Seviye %1</translation>
+        <translation>Düzey %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1760"/>
@@ -6385,7 +6385,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="162"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation>Bu, Sandboxie-Plus&apos;ın &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;özel bir Insider derlemesidir&lt;/a&gt; ve yalnızca daha yüksek seviyelerdeki &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Destekçileri&lt;/a&gt; ile projeye katkıda bulunanlar ve BÜYÜK bir destekçi sertifikası sahipleri tarafından kullanılabilir.</translation>
+        <translation>Bu, Sandboxie-Plus&apos;ın &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;özel bir Insider derlemesidir&lt;/a&gt; ve yalnızca daha yüksek düzeylerdeki &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Destekçileri&lt;/a&gt; ile projeye katkıda bulunanlar ve BÜYÜK bir destekçi sertifikası sahipleri tarafından kullanılabilir.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="168"/>
@@ -7919,7 +7919,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1496"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
-        <translation>Sandboxie-Plus, yetkisiz gözetime veya ana sistem işlemleri tarafından yapılabilecek müdahalelere karşı sağlam koruma sağlayan gizli korumalı alanlar oluşturabilir. Bu özellik şifrelenmiş bir korumalı alan görüntüsü kullanarak en yüksek düzeyde operasyonel gizlilik sunar ve korumalı alanda çalışan tüm işlemlerin güvenliğini ve bütünlüğünü sağlar.</translation>
+        <translation>Sandboxie-Plus, gizlilik gerektiren işlemler için güçlü bir koruma sağlayarak ana sistem işlemlerinden gelebilecek yetkisiz izleme veya müdahaleye karşı kalkan oluşturabilen şifrelenmiş korumalı alan görüntüleri oluşturabilir. Bu özellik, korumalı alan ortamındaki işlemlerin güvenliğini ve bütünlüğünü sağlama alarak en üst düzeyde çalışma gizliliği sunar.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1644"/>
@@ -8158,7 +8158,7 @@ Kısmen işaretli: Yeni oluşturulan korumalı alan belirtecine hiçbir grup ekl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2034"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation>ConHost.exe işlem bütünlük seviyesini düşür</translation>
+        <translation>ConHost.exe işlem bütünlük düzeyini düşür</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2625"/>

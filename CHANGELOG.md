@@ -26,6 +26,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked INI handling [#4492](https://github.com/sandboxie-plus/Sandboxie/issues/4492)
   - added 'ImportBox=C:\path\To\Box.ini'
   - added mechanism to create virtual config section in the driver without the need for an INI file
+- improved move to menu [#4819](https://github.com/sandboxie-plus/Sandboxie/issues/4819)
+- fixed Redundant options in Multiple Delete Content [#4817](https://github.com/sandboxie-plus/Sandboxie/issues/4817)
   
 ### Fixed
 - fixed taskbar remains visible at the top when entering full screen in Firefox 138+ [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
@@ -51,7 +53,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed the 'run in box' selection prompt not show BoxAlias [#4709](https://github.com/sandboxie-plus/Sandboxie/issues/4709)
 - fixed after Ctrl+F, the expansion and closure records of the Box Group were disrupted [#4708](https://github.com/sandboxie-plus/Sandboxie/issues/4708)
 - FIXED SECURITY ISSUE ID-26: added security checks to registry set/get functions CVE-2025-46713, CVE-2025-46714, CVE-2025-46716, CVE-2025-46715 [5a6a2f7](https://github.com/sandboxie-plus/Sandboxie/commit/5a6a2f7f8a99eb9d36906b73bc883ebc4c268cc4) (thanks sgayou)
-- fixed issues in Pool_Alloc [5a6a2f7](https://github.com/sandboxie-plus/Sandboxie/commit/5a6a2f7f8a99eb9d36906b73bc883ebc4c268cc4)
+- fixed issue in Pool_Alloc [5a6a2f7](https://github.com/sandboxie-plus/Sandboxie/commit/5a6a2f7f8a99eb9d36906b73bc883ebc4c268cc4)
 - fixed SbieCtrl.exe and SandMan.exe having a constant 3 MB/s IO rate in the Process Explorer [#4693](https://github.com/sandboxie-plus/Sandboxie/issues/4693)
 - fixed template for Tencent TIM causes drag and drop not available [#4688](https://github.com/sandboxie-plus/Sandboxie/issues/4688)
 - improved when Sandboxie.ini is huge, the response speed gets worse [#4573](https://github.com/sandboxie-plus/Sandboxie/issues/4573)

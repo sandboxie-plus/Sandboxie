@@ -1725,9 +1725,15 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				
 				if (SandBoxes.first()->HasSnapshots())
 				{
-					if(CCheckableMessageBox::question(this, "Sandboxie-Plus", message
-					, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
-						return;
+					if (!SandBoxes.first()->GetSnapshots().isEmpty()) {
+						if (CCheckableMessageBox::question(this, "Sandboxie-Plus", message
+							, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+							return;
+					} else {
+						if (QMessageBox::question(this, "Sandboxie-Plus", message
+							, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+							return;
+					}
 				}
 				else
 				{
@@ -1739,10 +1745,25 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		else
 		{
 			QString message = tr("Do you really want to delete the content of the following sandboxes?<br /><br />%1")
-				.arg(RenderSandboxNameList_(SandBoxes));
-			if(CCheckableMessageBox::question(this, "Sandboxie-Plus", message
-				, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
-				return;
+					.arg(RenderSandboxNameList_(SandBoxes));
+
+			bool HashSnapshots = false;
+			foreach(const CSandBoxPtr& pBox, SandBoxes) {
+				if (!pBox->GetSnapshots().isEmpty()) {
+					HashSnapshots = true;
+					break;
+				}
+			}
+
+			if (HashSnapshots) {
+				if (CCheckableMessageBox::question(this, "Sandboxie-Plus", message
+					, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+					return;
+			} else {
+				if (QMessageBox::question(this, "Sandboxie-Plus", message
+					, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+					return;
+			}
 		}
 
 		foreach(const CSandBoxPtr& pBox, SandBoxes)

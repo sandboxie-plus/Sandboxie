@@ -5092,7 +5092,7 @@ Error: %1</source>
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translatio>虚拟管理员</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -10242,7 +10242,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2359"/>
         <source>Use Sandboxies own enhanced UAC prompt (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translatio>使用Sandboxie自带的增强型UAC提示（实验性功能）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2369"/>

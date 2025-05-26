@@ -160,7 +160,7 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
         return SHORT_REPLY(STATUS_NOT_SUPPORTED);
 
     //
-    // Get/Set *.dat files in sandboxies home directory
+    // Get/Set *.dat files in Sandboxie's home directory
     //
 
     if (msg->msgid == MSGID_SBIE_INI_SET_DAT) {
@@ -1864,7 +1864,7 @@ bool SbieIniServer::GetIniPath(WCHAR **IniPath, BOOLEAN *IsHomePath)
     else if (rc == 0 && *path == L'H') {
 
         //
-        // Sandboxie.ini was last read from Sandboxie home directory
+        // Sandboxie.ini was last read from Sandboxie's home directory
         //
 
         STARTUPINFOW si;
@@ -2216,7 +2216,7 @@ MSG_HEADER *SbieIniServer::RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSa
     // as well as the rc4 algorithm for the encryption, applying the same transformation twice 
     // yealds the original plaintext, hence only one function is sufficient.
     // 
-    // Please note that neither the mechanism nor the use of the rc4 algorithm can be considered 
+    // Please note that neither the mechanism nor the use of the rc4 algorithm can be consideredÂ 
     // cryptographically secure by any means.
     // This mechanism is only good for simple obfuscation of non critical data.
     //

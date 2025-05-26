@@ -527,7 +527,7 @@ ULONG ServiceServer::UacHandler2(
     ULONG error;
     ULONG errlvl;
     BOOL  ok = TRUE;
-    BOOL  quick = FALSE; // dont use UAC prompt
+    BOOL  quick = FALSE; // don't use UAC prompt
     BOOL  fake = FALSE;
     
     if (SbieApi_QueryConfBool(NULL, L"UseSandboxieUAC", TRUE)) {

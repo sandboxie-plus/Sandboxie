@@ -231,7 +231,7 @@ void CPopUpWindow::ReloadHiddenMessages()
 	// Read configuration from Global settings
 	if (theAPI->GetGlobalSettings() != NULL)
 		HiddenMessages += theAPI->GetGlobalSettings()->GetTextList("SbieCtrl_HideMessage", true);
-	// User's settings overide Global settings
+	// User's settings override Global settings
 	if (theAPI->GetUserSettings() != NULL)
 		HiddenMessages += theAPI->GetUserSettings()->GetTextList("SbieCtrl_HideMessage", true);
 	// If no settings get out

@@ -1049,7 +1049,7 @@ _FX NTSTATUS Conf_Import_Include(CONF_DATA *data, ULONG session_id, const WCHAR*
 		goto finish;
     }
 	WCHAR* dot = wcschr(++file_name, L'.'); // ++ skip L'\\'
-    if (!dot) { // an extension must be present, no mater what but something must be there
+    if (!dot) { // an extension must be present, no matter what but something must be there
         if(fromWildCard) status = STATUS_SUCCESS; // fail silently for folders
         else status = STATUS_OBJECT_NAME_INVALID;
         goto finish;
@@ -1126,7 +1126,7 @@ _FX NTSTATUS Conf_Import_Include(CONF_DATA *data, ULONG session_id, const WCHAR*
             status = STATUS_TOO_MANY_SESSIONS;
 
         //
-        // An inported box has its FileRootPath set to the path of the include file
+        // An imported box has its FileRootPath set to the path of the include file
         //
 
         if (NT_SUCCESS(status) || status == STATUS_TOO_MANY_SESSIONS) {
@@ -1139,7 +1139,7 @@ _FX NTSTATUS Conf_Import_Include(CONF_DATA *data, ULONG session_id, const WCHAR*
 
         //
         // Drop the section if something went wrong, except if there were additional sections,
-		// for future extensability and forwards compatybility we tolerate that case.
+		// for future extensibility and forwards compatibility we tolerate that case.
         //
 
         if (!NT_SUCCESS(status) && status != STATUS_TOO_MANY_SESSIONS)
@@ -2225,7 +2225,7 @@ _FX NTSTATUS Conf_Update(
     }
 
     //
-	// Update tempaltes if needed
+	// Update templates if needed
     //
 
     if (uMode == CONF_UPDATE_TEMPLATES || (setting_name && _wcsicmp(setting_name, Conf_Template) == 0))
@@ -2264,7 +2264,7 @@ _FX NTSTATUS Conf_Update(
             }
         }
 
-		if (uMode == CONF_UPDATE_TEMPLATES || (uMode == CONF_REMOVE_VALUE && value_ptr)) // remove one specific templete, readd all others
+		if (uMode == CONF_UPDATE_TEMPLATES || (uMode == CONF_REMOVE_VALUE && value_ptr)) // remove one specific template, read all others
         {
             status = Conf_Merge_Templates(data, session_id, section, section, section->name); // rebuild all templates
         }

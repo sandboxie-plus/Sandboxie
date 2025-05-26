@@ -5092,7 +5092,7 @@ Error: %1</source>
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> 虚拟管理员权限</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -7661,7 +7661,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/ExtractDialog.ui" line="35"/>
         <source>...</source>
-        <translation>……</translation>
+        <translation>…</translation>
     </message>
     <message>
         <location filename="Forms/ExtractDialog.ui" line="82"/>
@@ -7821,7 +7821,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="698"/>
         <source>Issue message 2102 when a file is too large</source>
-        <translation>文件太大时，提示问题代码 2102</translation>
+        <translation>文件太大时，提示问题代码 SBIE2102</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
@@ -8115,7 +8115,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2755"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>程序启动失败时，提示问题代码 1308</translation>
+        <translation>程序启动失败时，提示问题代码 SBIE1308</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2705"/>
@@ -8145,7 +8145,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3486"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>程序被拒绝访问网络时，提示问题代码 1307</translation>
+        <translation>程序被拒绝访问网络时，提示问题代码 SBIE1307</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3514"/>
@@ -8572,7 +8572,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4504"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation>当一个程序试图加载一个沙箱内部的动态链接库(.dll)文件时，提示问题代码 1305</translation>
+        <translation>当一个程序试图加载一个沙箱内部的动态链接库(.dll)文件时，提示问题代码 SBIE1305</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4497"/>
@@ -8697,7 +8697,7 @@ Partially checked: No groups will be added to the newly created sandboxed token.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2034"/>
         <source>Drop ConHost.exe Process Integrity Level</source>
-        <translation>降低Conhost.exe的进程完整级</translation>
+        <translation>降低 Conhost.exe 的进程完整级</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2122"/>
@@ -9011,7 +9011,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="827"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation>进程被拒绝访问非沙箱进程内存时，提示问题代码 2111</translation>
+        <translation>进程被拒绝访问非沙箱进程内存时，提示问题代码 SBIE2111</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4359"/>
@@ -9306,14 +9306,14 @@ Please note that this values are currently user specific and saved globally for 
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation>2113：待迁移文件的内容被遗弃了
-2114：文件没有被迁移，文件的写入访问被拒绝
-2115：文件没有被迁移，文件将以只读方式打开</translation>
+        <translation>SBIE2113：待迁移文件的内容被遗弃了
+SBIE2114：文件没有被迁移，文件的写入访问被拒绝
+SBIE2115：文件没有被迁移，文件将以只读方式打开</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="588"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation>当一个文件没有被完全迁移时，提示问题代码：2113/2114/2115</translation>
+        <translation>当一个文件没有被完全迁移时，提示问题代码: SBIE2113 / SBIE2114 / SBIE2115</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="612"/>
@@ -9398,7 +9398,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1552"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation>当沙箱外程序尝试访问沙箱根目录或沙箱化进程对象时，发出 1318/1317 警告</translation>
+        <translation>当沙箱外程序尝试访问沙箱根目录或沙箱化进程对象时，发出 SBIE1318 / SBIE1317 警告</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1496"/>
@@ -9685,7 +9685,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/OptionsWindow.ui" line="5119"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
-        <translation>将当前固件表转储到HKCU\System\SbieCustom</translation>
+        <translation>将当前固件表转储到 HKCU\System\SbieCustom</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5122"/>
@@ -9816,7 +9816,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="58"/>
         <source>Group: %1</source>
-        <translation>组：%1</translation>
+        <translation>组: %1</translation>
     </message>
 </context>
 <context>
@@ -10242,7 +10242,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2359"/>
         <source>Use Sandboxies own enhanced UAC prompt (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 Sandboxies 自有的增强型 UAC 提示 (实验性)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2369"/>
@@ -10297,7 +10297,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2609"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation>当必沙进程被禁止时，提示问题代码 1301</translation>
+        <translation>当必沙进程被禁止时，提示问题代码 SBIE1301</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2990"/>
@@ -10703,7 +10703,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/SettingsWindow.ui" line="1146"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
-        <translation>从任务列表中隐藏Sandboxie自身进程</translation>
+        <translation>从任务列表中隐藏 Sandboxie 自身进程</translation>
     </message>
     <message>
         <source>Ini Options</source>
@@ -10712,7 +10712,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1184"/>
         <source>External Ini Editor</source>
-        <translation>外部Ini编辑器</translation>
+        <translation>外部 Ini 编辑器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
@@ -10727,7 +10727,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1409"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
-        <translation>Sandboxie-Plus提供了许多选项，并支持广泛的扩展。在这个页面上，您可以配置插件、插件和其他第三方组件。可选组件可以从网络下载，安装某些扩展可能需要管理员权限。</translation>
+        <translation>Sandboxie-Plus 提供了许多选项，并支持广泛的扩展。在这个页面上，您可以配置插件、插件和其他第三方组件。可选组件可以从网络下载，安装某些扩展可能需要管理员权限。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1445"/>
@@ -11026,13 +11026,13 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2630"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>程序启动失败时，提示问题代码 1308</translation>
+        <translation>程序启动失败时，提示问题代码 SBIE1308</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2651"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
-        <translation>当进程被强制沙箱化时，提示问题代码 1321</translation>
+        <translation>当进程被强制沙箱化时，提示问题代码 SBIE1321</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2661"/>
@@ -11251,7 +11251,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="293"/>
         <source>Test 2: Connection through the Proxy Server</source>
-        <translation>测试2: 通过代理服务器连接</translation>
+        <translation>测试2: 通过代理服务器建立连接</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="330"/>
@@ -11281,7 +11281,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation>测试 3 ：代理服务器延迟</translation>
+        <translation>测试 3 ：代理服务器的链接延迟</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>

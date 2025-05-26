@@ -296,8 +296,11 @@ This startup request does not appear to be invoked by the SANDBOXIE component. A
 .
 
 3243;txt;01
-Note:  The program will continue to execute under the supervision
-of Sandboxie, even after Administrator privileges have been granted.
+Note:  The program will continue to run under the supervision
+of Sandboxie even if Administrator privileges are granted.
+However, granting Administrator rights may increase the risk
+of the application exploiting an unpatched Windows vulnerability
+or a vulnerable driver to escape the sandbox.
 .
 
 3244;txt;01

@@ -10065,8 +10065,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2359"/>
-        <source>Use Sandboxies own enhanced UAC prompt (experimental)</source>
-        <translation>Sandboxie&apos;nin kendi gelişmiş UAC istemi kullanılsın (deneysel)</translation>
+        <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
+        <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
+        <translation type="unfinished">Sandboxie&apos;nin kendi gelişmiş UAC istemi kullanılsın (deneysel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2369"/>

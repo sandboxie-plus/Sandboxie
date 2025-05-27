@@ -16,10 +16,11 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 				pBoxEx->m_pRecoveryWnd = NULL;
 				});
 
-			pBoxEx->m_pRecoveryWnd->AddFile(FilePath, BoxPath);
-
-			pBoxEx->m_pRecoveryWnd->setModal(true);
-			pBoxEx->m_pRecoveryWnd->show();
+			pBoxEx->m_pRecoveryWnd->AddFile(FilePath, BoxPath); // Note: this may invoce close if nothign is found
+			if (pBoxEx->m_pRecoveryWnd) { // if it asnt closed show it
+				pBoxEx->m_pRecoveryWnd->setModal(true);
+				pBoxEx->m_pRecoveryWnd->show();
+			}
 		}
 		else
 		{

@@ -10738,6 +10738,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2359"/>
         <source>Use Sandboxies own enhanced UAC prompt (experimental)</source>
         <translation>使用 Sandboxies 本身的增強 UAC 提示 (實驗性)</translation>
+        <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
+        <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2369"/>

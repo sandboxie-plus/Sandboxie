@@ -71,7 +71,7 @@ SBIE1415 Portable box name mismatch (ini name must match box section) in a box i
 .
 
 1416;evt;pop;wrn;01
-SBIE1416 Portable box name is already in use by an other box, include %3
+SBIE1416 Portable box name is already in use by another box, include %3
 .
 
 2111;pop;inf;01

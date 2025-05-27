@@ -655,7 +655,7 @@ Dies sichert das höchste Level von Privatsphäre und Datenschutz innerhalb der 
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
         <translation>Es wurden keine geeigneten Ordner gefunden.
-Notiz: Sie müssen den Browser außerhalb einer Sandbox starten, damit diese erstellt werden.
+Hinweis: Sie müssen den Browser außerhalb einer Sandbox starten, damit diese erstellt werden.
 Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     </message>
     <message>
@@ -1141,7 +1141,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="196"/>
         <source>Note: this option is persistent</source>
-        <translation>Notiz: Diese Option ist dauerhaft</translation>
+        <translation>Hinweis: Diese Option ist dauerhaft</translation>
     </message>
 </context>
 <context>
@@ -1481,7 +1481,7 @@ Möchten Sie dennoch updaten?</translation>
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
         <translation>Keine neuen Updates gefunden, Ihr Sandboxie-Plus ist aktuell.
 
-Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentlichungen, um sicherzustellen, dass nur getestete Updates angeboten werden.</translation>
+Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentlichungen, um sicherzustellen, dass nur getestete Updates angeboten werden.</translation>
     </message>
 </context>
 <context>
@@ -1489,7 +1489,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="63"/>
         <source>Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.</source>
-        <translation>Aktiviere die Verwendung von win32-Hooks für ausgewählte Prozesse. Notiz: Sie müssen die win32k-Systemaufrufshookunterstützung erst global aktivieren.</translation>
+        <translation>Aktiviere die Verwendung von win32-Hooks für ausgewählte Prozesse. Hinweis: Sie müssen die win32k-Systemaufrufshookunterstützung erst global aktivieren.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="64"/>
@@ -7359,7 +7359,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1247"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation>Sicherheitsnotiz: Programme mit erhöhten Rechten, welche unter der Aufsicht von Sandboxie laufen, und ein Admintoken haben, haben mehr Möglichkeiten die Isolation zu umgehen und das System außerhalb der Sandbox zu verändern.</translation>
+        <translation>Sicherheitshinweis: Programme mit erhöhten Rechten, welche unter der Aufsicht von Sandboxie laufen, und ein Admintoken haben, haben mehr Möglichkeiten die Isolation zu umgehen und das System außerhalb der Sandbox zu verändern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1218"/>
@@ -7369,7 +7369,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1163"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation>Notiz: MSI-Installer-Ausnahmen sollten nicht benötigt werden, aber wenn Sie auf Probleme bei der Installation eines MSI-Paketes haben, welchem Sie vertrauen, kann diese Option hilfreich sein die Installation erfolgreich abzuschließen. Sie können auch versuchen die Rechteabgabe zu deaktivieren.</translation>
+        <translation>Hinweis: MSI-Installer-Ausnahmen sollten nicht benötigt werden, aber wenn Sie auf Probleme bei der Installation eines MSI-Paketes haben, welchem Sie vertrauen, kann diese Option hilfreich sein die Installation erfolgreich abzuschließen. Sie können auch versuchen die Rechteabgabe zu deaktivieren.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="265"/>
@@ -7454,7 +7454,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2688"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
-        <translation>* Notiz: Programme, welche in dieser Sandbox installiert werden, werden nicht in der Lage sein zu starten.</translation>
+        <translation>* Hinweis: Programme, welche in dieser Sandbox installiert werden, werden nicht in der Lage sein zu starten.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3466"/>
@@ -7685,7 +7685,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
         <translation>Füge Nutzerkonten und -gruppen der Liste hinzu, um die Benutzung der Sandbox auf diese Konten zu beschränken. Falls die Liste leer ist, kann die Sandbox von allen Konten genutzt werden.
 
-Notiz: Erzwungene Programme und Ordner für eine Sandbox finden keine Anwendung auf Konten, die diese Sandbox nicht nutzen können.</translation>
+Hinweis: Erzwungene Programme und Ordner für eine Sandbox finden keine Anwendung auf Konten, die diese Sandbox nicht nutzen können.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5260"/>
@@ -10136,8 +10136,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2359"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
-        <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">Verwende Sandboxies eigene erweiterte UAC Abfrage (experimentell)</translation>
+        <translation>Verwende Sandboxies eigene erweiterte UAC Abfrage (experimentell)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2369"/>

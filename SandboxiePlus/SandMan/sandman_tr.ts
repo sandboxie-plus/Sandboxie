@@ -2640,22 +2640,22 @@ Tam yol: %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="324"/>
+        <location filename="SandManRecovery.cpp" line="325"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Kurtarma Günlüğü</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="335"/>
+        <location filename="SandManRecovery.cpp" line="336"/>
         <source>Time|Box Name|File Path</source>
         <translation>Zaman|Alan Adı|Dosya Yolu</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="337"/>
+        <location filename="SandManRecovery.cpp" line="338"/>
         <source>Cleanup Recovery Log</source>
         <translation>Temizleme Kurtarma Günlüğü</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="347"/>
+        <location filename="SandManRecovery.cpp" line="348"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <translation>Şu dosyalar yakın zamanda kurtarıldı ve bir korumalı alandan taşındı.</translation>
     </message>
@@ -3145,13 +3145,13 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Sbie Mesajları</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="123"/>
-        <location filename="SandManRecovery.cpp" line="177"/>
+        <location filename="SandManRecovery.cpp" line="124"/>
+        <location filename="SandManRecovery.cpp" line="178"/>
         <source>Checking file %1</source>
         <translation>%1 dosyası denetleniyor</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="131"/>
+        <location filename="SandManRecovery.cpp" line="132"/>
         <source>The file %1 failed a security check!
 
 %2</source>
@@ -3160,12 +3160,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="139"/>
+        <location filename="SandManRecovery.cpp" line="140"/>
         <source>All files passed the checks</source>
         <translation>Tüm dosyalar denetimi geçti</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="196"/>
+        <location filename="SandManRecovery.cpp" line="197"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -3174,7 +3174,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="261"/>
+        <location filename="SandManRecovery.cpp" line="262"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Bazı dosyalar kurtarılamadı: 
@@ -3186,7 +3186,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>&apos;%1&apos; dizini, &apos;%2&apos; dizinine taşınamadı</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="220"/>
+        <location filename="SandManRecovery.cpp" line="221"/>
         <source>Recovering file %1 to %2</source>
         <translation>%1&apos;dan %2&apos;a dosya kurtarılıyor</translation>
     </message>
@@ -3819,13 +3819,13 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Gerekli Sandboxie bileşenleri başlatılamadı</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="232"/>
+        <location filename="SandManRecovery.cpp" line="233"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>%1 dosyası zaten var, üzerine yazmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="197"/>
-        <location filename="SandManRecovery.cpp" line="233"/>
+        <location filename="SandManRecovery.cpp" line="198"/>
+        <location filename="SandManRecovery.cpp" line="234"/>
         <source>Do this for all files!</source>
         <translation>Bunu tüm dosyalara uygula!</translation>
     </message>

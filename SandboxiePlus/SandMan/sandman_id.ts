@@ -2684,22 +2684,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="324"/>
+        <location filename="SandManRecovery.cpp" line="325"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="335"/>
+        <location filename="SandManRecovery.cpp" line="336"/>
         <source>Time|Box Name|File Path</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="337"/>
+        <location filename="SandManRecovery.cpp" line="338"/>
         <source>Cleanup Recovery Log</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="347"/>
+        <location filename="SandManRecovery.cpp" line="348"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation></translation>
@@ -3572,29 +3572,29 @@ Tidak akan memilih: %2</translation>
         <translation>Fitur yang dipilih hanya tersedia untuk pendukung proyek. Proses yang dijalankan di dalam kotak dengan fitur ini diaktifkan tanpa sertifikat pendukung akan dihentikan setelah 5 menit.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Jadilah pendukung proyek&lt;/a&gt;, dan dapatkan &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;sertifikat pendukung&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="220"/>
+        <location filename="SandManRecovery.cpp" line="221"/>
         <source>Recovering file %1 to %2</source>
         <translation>Memulihkan file %1 ke %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="232"/>
+        <location filename="SandManRecovery.cpp" line="233"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>File %1 sudah ada, apakah Anda ingin menimpanya?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="197"/>
-        <location filename="SandManRecovery.cpp" line="233"/>
+        <location filename="SandManRecovery.cpp" line="198"/>
+        <location filename="SandManRecovery.cpp" line="234"/>
         <source>Do this for all files!</source>
         <translation>Lakukan ini untuk semua file!</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="123"/>
-        <location filename="SandManRecovery.cpp" line="177"/>
+        <location filename="SandManRecovery.cpp" line="124"/>
+        <location filename="SandManRecovery.cpp" line="178"/>
         <source>Checking file %1</source>
         <translation>Memeriksa file %1</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="131"/>
+        <location filename="SandManRecovery.cpp" line="132"/>
         <source>The file %1 failed a security check!
 
 %2</source>
@@ -3603,12 +3603,12 @@ Tidak akan memilih: %2</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="139"/>
+        <location filename="SandManRecovery.cpp" line="140"/>
         <source>All files passed the checks</source>
         <translation>Semua file lolos pemeriksaan</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="196"/>
+        <location filename="SandManRecovery.cpp" line="197"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -3620,7 +3620,7 @@ Tidak akan memilih: %2</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="261"/>
+        <location filename="SandManRecovery.cpp" line="262"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Gagal memulihkan beberapa file: 

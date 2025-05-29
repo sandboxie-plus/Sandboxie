@@ -1723,21 +1723,12 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				QString message = tr("Do you want to delete the content of the following sandbox?<br /><br />%1")
 					.arg(RenderSandboxNameList_(SandBoxes));
 				
-				if (SandBoxes.first()->HasSnapshots())
-				{
-					if (!SandBoxes.first()->GetSnapshots().isEmpty()) {
-						if (CCheckableMessageBox::question(this, "Sandboxie-Plus", message
-							, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
-							return;
-					} else {
-						if (QMessageBox::question(this, "Sandboxie-Plus", message
-							, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
-							return;
-					}
-				}
-				else
-				{
-					if(QMessageBox::question(this, "Sandboxie-Plus", message , QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
+				if (SandBoxes.first()->HasSnapshots()) {
+					if (CCheckableMessageBox::question(this, "Sandboxie-Plus", message
+						, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+						return;
+				} else {
+					if (QMessageBox::question(this, "Sandboxie-Plus", message , QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
 						return;
 				}
 			}
@@ -1749,7 +1740,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 			bool HashSnapshots = false;
 			foreach(const CSandBoxPtr& pBox, SandBoxes) {
-				if (!pBox->GetSnapshots().isEmpty()) {
+				if (pBox->HasSnapshots()) {
 					HashSnapshots = true;
 					break;
 				}
@@ -1760,8 +1751,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 					, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
 					return;
 			} else {
-				if (QMessageBox::question(this, "Sandboxie-Plus", message
-					, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+				if (QMessageBox::question(this, "Sandboxie-Plus", message , QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
 					return;
 			}
 		}

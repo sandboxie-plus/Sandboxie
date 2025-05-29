@@ -5033,7 +5033,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> 虛擬管理員</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -7763,7 +7763,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="698"/>
         <source>Issue message 2102 when a file is too large</source>
-        <translation>當檔案過大時發出錯誤代碼 2102</translation>
+        <translation>當檔案過大時發出錯誤代碼 SBIE2102</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
@@ -8050,7 +8050,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1552"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation>當主機處理程序嘗試存取沙箱化處理程序/沙箱根目錄時發出錯誤代碼 1318/1317</translation>
+        <translation>當主機處理程序嘗試存取沙箱化處理程序/沙箱根目錄時發出錯誤代碼 SBIE1318 / SBIE1317</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1496"/>
@@ -8160,7 +8160,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2755"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>當程式啟動失敗時發出錯誤代碼 1308</translation>
+        <translation>當程式啟動失敗時發出錯誤代碼 SBIE1308</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2705"/>
@@ -8195,7 +8195,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3486"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>當程式被拒絕存取網路時發出錯誤代碼 1307</translation>
+        <translation>當程式被拒絕存取網路時發出錯誤代碼 SBIE1307</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3500"/>
@@ -8242,14 +8242,14 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation>2113: 待遷移檔案的內容被廢棄了
-2114: 檔案沒有被遷移，檔案的寫入存取被拒絕
-2115: 檔案沒有被遷移，檔案將以唯讀方式開啟</translation>
+        <translation>SBIE2113: 待遷移檔案的內容被廢棄了
+SBIE2114: 檔案沒有被遷移，檔案的寫入存取被拒絕
+SBIE2115: 檔案沒有被遷移，檔案將以唯讀方式開啟</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="588"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation>當一個檔案沒有被完全遷移時，發出錯誤代碼 2113/2114/2115</translation>
+        <translation>當一個檔案沒有被完全遷移時，發出錯誤代碼 SBIE2113 / SBIE2114 / SBIE2115</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="612"/>
@@ -8711,7 +8711,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="827"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation>處理程序被拒絕存取非沙箱處理程序記憶體時發出錯誤代碼 2111</translation>
+        <translation>處理程序被拒絕存取非沙箱處理程序記憶體時發出錯誤代碼 SBIE2111</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="526"/>
@@ -10528,7 +10528,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2630"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>當程式啟動失敗時發出錯誤代碼 1308</translation>
+        <translation>當程式啟動失敗時發出錯誤代碼 SBIE1308</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="106"/>
@@ -10588,7 +10588,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2609"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation>當強制沙箱處理程序被停用時，發出錯誤代碼 1301</translation>
+        <translation>當強制沙箱處理程序被停用時，發出錯誤代碼 SBIE1301</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2108"/>
@@ -10736,6 +10736,8 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2359"/>
+        <source>Use Sandboxies own enhanced UAC prompt (experimental)</source>
+        <translation>使用 Sandboxies 本身的增強 UAC 提示 (實驗性)</translation>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
         <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
         <translation type="unfinished"></translation>
@@ -10789,7 +10791,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2651"/>
         <source>Issue message 1321 when a process has been forced into a sandbox</source>
         <oldsource>Issue message 1321 when a processes has been forced in to a sandbox</oldsource>
-        <translation>當程式已被強制執行至一個沙箱時，發出錯誤代碼 1321</translation>
+        <translation>當程式已被強制執行至一個沙箱時，發出錯誤代碼 SBIE1321</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2661"/>
@@ -11031,7 +11033,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="69"/>
         <source>Test Settings...</source>
-        <translation>測試設定中...</translation>
+        <translation>測試設定...</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="82"/>
@@ -11108,7 +11110,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="293"/>
         <source>Test 2: Connection through the Proxy Server</source>
-        <translation>測試2: 透過 Proxy 伺服器連線</translation>
+        <translation>測試2: 透過 Proxy 伺服器建立連線</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="330"/>
@@ -11138,7 +11140,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="382"/>
         <source>Test 3: Proxy Server latency</source>
-        <translation>測試 3 : Proxy 伺服器延遲</translation>
+        <translation>測試 3 : Proxy 伺服器的延遲</translation>
     </message>
     <message>
         <location filename="Forms/TestProxyDialog.ui" line="416"/>

@@ -3279,12 +3279,12 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="SbiePlusAPI.cpp" line="877"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Przenośny)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="880"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Wirtualny)</translation>
     </message>
     <message>
         <source>API Log</source>
@@ -4110,7 +4110,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Brakuje niektórych szablonów kompatybilności:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Prawdopodobnie usunięto, czy chcesz je usunąć ze wszystkich pól?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2036"/>
@@ -5211,7 +5211,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> Fałszywy Admin</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -6653,33 +6653,33 @@ To jest tymczasowy certyfikat Patreon, ważny przez 3 miesiące. Gdy zbliży si�
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2495"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz przenośne pudełko ini</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2495"/>
         <location filename="Windows/SettingsWindow.cpp" line="2505"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pliki Ini (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2505"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz nowy plik ini Portable Box</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2510"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik już istnieje, proszę wybrać inną nazwę pliku.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2516"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieprawidłowa nazwa pudełka</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2537"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz folder główny</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2565"/>
@@ -11143,7 +11143,7 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje edytora ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1839"/>
@@ -11208,52 +11208,52 @@ W przeciwieństwie do kanału podglądu nie zawiera niesprawdzonych, potencjalni
         <location filename="Forms/SettingsWindow.ui" line="2359"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
         <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Użyj własnego ulepszonego monitora UAC Sandboxie&apos;a (eksperymentalne)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2369"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2381"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń wpis</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2389"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ścieżka importu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2411"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2424"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Stwórz przenośną skrzynkę</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2450"/>
         <source>Import Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuj przenośne pudełko</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2512"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ochrona konfiguracji dotyczy tylko pliku Sandboxie.ini, a konfiguracja przenośnej skrzynki nie jest chroniona poniższymi mechanizmami&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2522"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>W poniższej liście można dodać ścieżki do plików konfiguracyjnych ini przenośnych pudełek.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2542"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj przenośny katalog główny</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2630"/>

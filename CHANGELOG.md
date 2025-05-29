@@ -27,8 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - added 'ImportBox=C:\path\To\Box.ini'
   - added mechanism to create virtual config section in the driver without the need for an INI file
 - improved Move Sandbox menu [#4819](https://github.com/sandboxie-plus/Sandboxie/issues/4819)
-- fixed Redundant options in Multiple Delete Content [#4817](https://github.com/sandboxie-plus/Sandboxie/issues/4817)
-  
+
 ### Fixed
 - fixed taskbar remains visible at the top when entering full screen in Firefox 138+ [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
 - fixed redundant options in multiple delete content [#4817](https://github.com/sandboxie-plus/Sandboxie/issues/4817)

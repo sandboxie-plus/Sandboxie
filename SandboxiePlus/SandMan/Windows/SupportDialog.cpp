@@ -33,6 +33,10 @@ bool CSupportDialog::IsBusinessUse()
 
 bool CSupportDialog::CheckSupport(bool bOnRun)
 {
+	// Automatically forgive any previously blocked certificate status on startup
+	BYTE CertBlockedValueToSet = 0;
+	theAPI->SetSecureParam("CertBlocked", &CertBlockedValueToSet, sizeof(CertBlockedValueToSet));
+
 	bool NoGo = false;
 
 #ifdef INSIDER_BUILD

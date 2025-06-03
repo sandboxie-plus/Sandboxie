@@ -26,9 +26,14 @@
 - 重构了 ini 配置文件的处理逻辑 [#4492](https://github.com/sandboxie-plus/Sandboxie/issues/4492)
   - 新增 `ImportBox=C:\path\To\Box.ini`
   - 新增了无需 ini 文件即可在驱动层创建虚拟配置区段的机制
+- 改进了移动沙箱右键菜单 [#4819](https://github.com/sandboxie-plus/Sandboxie/issues/4819)
 
 ### 修复
 - 在 Firefox 138 及以上版本全屏时，任务栏依然显示在顶部的问题 [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
+- 修复了删除多项内容时的多余选项 [#4817](https://github.com/sandboxie-plus/Sandboxie/issues/4817)
+- 修复了 Sandboxie Plus 意外关闭的问题
+- 修复了页面显示异常 [#4810](https://github.com/sandboxie-plus/Sandboxie/issues/4810)
+- 修复了在 Windows 11 上通过右键菜单运行程序时的工作目录问题 [#4844](https://github.com/sandboxie-plus/Sandboxie/pull/4844)（感谢 micbou）
 
 
 ## [1.15.12 / 5.70.12] - 2025-05-01

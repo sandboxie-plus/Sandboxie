@@ -3,11 +3,10 @@
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
 
-## [1.16.0 / 5.71.0] - 2025-05-??
+## [1.16.0 / 5.71.0] - 2025-06-03
 
 ### 新增
 - 在捐赠支持页面新增了复制硬件 ID 的选项
-- 新增了 OpenClsid，并修复了 OpenClsid 处理相关问题，以启用 Firefox 的硬件加速
 - 新增 `MarkOfTheWebBox=BoxName` 选项，可将所有带有“网络标记”的文件强制放入指定的预设沙盒中
 - 为强制进程新增了通配符支持 [#2603](https://github.com/sandboxie-plus/Sandboxie/issues/2603)
 - 在跟踪日志页面的 “类型” 下拉菜单中，新增了文本缩放的正确支持，防止在应用显示缩放时文本被截断 [#4812](https://github.com/sandboxie-plus/Sandboxie/pull/4812)（感谢 wzxjohn）
@@ -26,9 +25,14 @@
 - 重构了 ini 配置文件的处理逻辑 [#4492](https://github.com/sandboxie-plus/Sandboxie/issues/4492)
   - 新增 `ImportBox=C:\path\To\Box.ini`
   - 新增了无需 ini 文件即可在驱动层创建虚拟配置区段的机制
+- 改进了移动沙箱右键菜单 [#4819](https://github.com/sandboxie-plus/Sandboxie/issues/4819)
 
 ### 修复
 - 在 Firefox 138 及以上版本全屏时，任务栏依然显示在顶部的问题 [#4761](https://github.com/sandboxie-plus/Sandboxie/issues/4761)
+- 修复了删除多项内容时的多余选项 [#4817](https://github.com/sandboxie-plus/Sandboxie/issues/4817)
+- 修复了 Sandboxie Plus 意外关闭的问题
+- 修复了页面显示异常 [#4810](https://github.com/sandboxie-plus/Sandboxie/issues/4810)
+- 修复了在 Windows 11 上通过右键菜单运行程序时的工作目录问题 [#4844](https://github.com/sandboxie-plus/Sandboxie/pull/4844)（感谢 micbou）
 
 
 ## [1.15.12 / 5.70.12] - 2025-05-01

@@ -3,11 +3,10 @@
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
 
-## [1.16.0 / 5.71.0] - 2025-05-??
+## [1.16.0 / 5.71.0] - 2025-06-03
 
 ### 新增
 - 在捐赠支持页面新增了复制硬件 ID 的选项
-- 新增了 OpenClsid，并修复了 OpenClsid 处理相关问题，以启用 Firefox 的硬件加速
 - 新增 `MarkOfTheWebBox=BoxName` 选项，可将所有带有“网络标记”的文件强制放入指定的预设沙盒中
 - 为强制进程新增了通配符支持 [#2603](https://github.com/sandboxie-plus/Sandboxie/issues/2603)
 - 在跟踪日志页面的 “类型” 下拉菜单中，新增了文本缩放的正确支持，防止在应用显示缩放时文本被截断 [#4812](https://github.com/sandboxie-plus/Sandboxie/pull/4812)（感谢 wzxjohn）

@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.16.1 / 5.71.1] - 2025-07-??
+
+### Fixed
+- fixed incomplete directory in links when creating shortcuts [#4882](https://github.com/sandboxie-plus/Sandboxie/issues/4882)
+
+
+
 ## [1.16.0 / 5.71.0] - 2025-06-03
 
 ### Added

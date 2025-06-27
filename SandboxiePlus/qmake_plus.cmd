@@ -31,7 +31,7 @@ REM  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt6_version%\msvc2022_64\include\QtCore\%q
   
   set build_arch=x64
   set qt_params= 
-  call "C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+  call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
 )
 IF %1 == ARM64 (
   set qt_path=%~dp0..\..\Qt\%qt6_version%\msvc2022_64
@@ -66,7 +66,7 @@ REM type %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\target_qt.conf
   set qt_params=-qtconf "%~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf"
   
 REM  set VSCMD_DEBUG=3
-call "C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
+call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
 )
 @echo on
 

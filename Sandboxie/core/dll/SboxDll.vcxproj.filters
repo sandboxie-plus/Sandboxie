@@ -526,7 +526,7 @@
     <Object Include="..\..\common\NtCRT\a64ec\libcmt\atomics.obj">
       <Filter>common\NtCRT\libcmt</Filter>
     </Object>
-    <Object Include="..\..\common\NtCRT\a64\atomics.obj">
+    <Object Include="..\..\common\NtCRT\a64\libcmt\atomics.obj">
       <Filter>common\NtCRT\libcmt</Filter>
     </Object>
   </ItemGroup>

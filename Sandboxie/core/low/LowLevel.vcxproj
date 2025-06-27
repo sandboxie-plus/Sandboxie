@@ -141,6 +141,7 @@
     </Link>
     <ClCompile>
       <CallingConvention />
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -169,6 +170,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lowdata.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\common\NtCRT\a64\atomics.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

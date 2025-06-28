@@ -12,14 +12,14 @@ REM IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
 REM IF "%~2" == "" ( set "qt_version=5.15.16" ) ELSE ( set "qt_version=%~2" )
 
 IF %1 == Win32 (
-  set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2019
+  set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2022
 
   REM get private headers for QtCore
-  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt_version%\msvc2019\include\QtCore\%qt_version%\QtCore %~dp0..\..\Qt\%qt_version%\msvc2019\include\QtCore
+  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt_version%\msvc2022\include\QtCore\%qt_version%\QtCore %~dp0..\..\Qt\%qt_version%\msvc2022\include\QtCore
   
   set build_arch=Win32
   set qt_params= 
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
 )
 IF %1 == x64 (
   set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2022_64

@@ -504,7 +504,7 @@ begin
 
         if ExecRet = IDYES then
         begin
-          Exec('cmd.exe', '/c ' + UninstallString, '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
+          Exec(ExpandConstant('{sys}\cmd.exe'), '/c ' + UninstallString, '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
           ExecRet := IDYES;
         end;
 

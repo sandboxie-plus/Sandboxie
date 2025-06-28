@@ -286,7 +286,7 @@ DetourCodeARM64 PROC
 ;    bne	    DetourError
 
 	;
-	; resume execution or original function
+	; resume execution of original function
 	;
 
     ldp     x0, x1, [sp, #0x00]

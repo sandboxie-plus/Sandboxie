@@ -178,14 +178,14 @@ jobs:
       - name: Collect installer assets
         run: Installer\get_assets.cmd
 
-      # - name: Upload installer assets
-        # #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        # uses: actions/upload-artifact@v4.6.2
-        # with:
-          # name: Assets
-          # path: |
-            # Installer/Assets/*
-          # retention-days: 60
+      - name: Upload installer assets
+        #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: Assets
+          path: |
+            Installer/Assets/*
+          retention-days: 60
 
       - name: Upload Sandboxie x64
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'

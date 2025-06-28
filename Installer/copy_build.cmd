@@ -33,6 +33,14 @@ IF %1 == ARM64 (
 REM set redistPath=%VCToolsRedistDir%\%1\Microsoft.VC143.CRT
 set redistPath=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\%VCToolsVersion%\%1\Microsoft.VC143.CRT
 
+echo redistPath
+
+dir C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\
+dir C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\%VCToolsVersion%
+dir C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\%VCToolsVersion%\%1
+dir redistPath
+
+
 @echo on
 
 set srcPath=%~dp0..\SandboxiePlus\Bin\%archPath%\Release

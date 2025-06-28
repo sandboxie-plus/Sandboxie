@@ -46,6 +46,9 @@ jobs:
       - name: Build Sandboxie x64 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
 
+      - name: Build Sandboxie x64 (drv)
+        run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+
     #
     # Prepare Qt Framework
     #
@@ -156,6 +159,9 @@ jobs:
       - name: Build Sandboxie ARM64EC (DLL)
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
 
+      - name: Build Sandboxie ARM64 (drv)
+        run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=ARM64 -maxcpucount:8
+
     #
     # Prepare Qt Framework for ARM64 (we also need Qt x64 for some utilities like qmake)
     #
@@ -246,8 +252,11 @@ jobs:
     # Compile Sandboxie Core
     #
 
-    #  - name: Build Sandboxie x86 (all)
-    #    run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
+      - name: Build Sandboxie x86 (all)
+        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
+
+    #  - name: Build Sandboxie x86 (drv)
+    #    run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
     #
     # Prepare Qt Framework
@@ -327,6 +336,9 @@ jobs:
 
       - name: Build Sandboxie x64 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+        
+      - name: Build Sandboxie x64 (drv)
+        run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
 
     #
     # Prepare Qt Framework

@@ -7,7 +7,7 @@ set "ghSsl_user=xanasoft"
 set "ghSsl_repo=openssl-builds"
 set "ghQtBuilds_user=xanasoft"
 set "ghQtBuilds_repo=qt-builds"
-set "ghQtBuilds_hash_x86=502e9a36a52918af4e116cd74c16c6c260d029087aaeee3775ab0e5d3f6a2705"
+set "ghQtBuilds_hash_x86=6b25cb24755b158e580e73b7889a659e093012cc3d6428d2bfbff8ebad238cf2"
 set "ghQtBuilds_hash_x64=1846e26def03152df2c7f6d2ab6fb4eea5ff8fdcd42a08723e2b9523131b9f91"
 
 REM catch build_qt6

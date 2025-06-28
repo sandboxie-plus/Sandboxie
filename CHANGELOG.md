@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.16.1 / 5.71.1] - 2025-07-??
 
+### Changed
+- updted toolset to MSVC_2022 as the Github CI runner 2019 is being discontinued
+  - Note: this drops Windows 7 and 32-bit OS support as the 2022 toolset no longer supports these targets for driver build
+
 ### Fixed
 - fixed incomplete directory in links when creating shortcuts [#4882](https://github.com/sandboxie-plus/Sandboxie/issues/4882)
 

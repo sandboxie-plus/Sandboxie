@@ -246,8 +246,8 @@ jobs:
     # Compile Sandboxie Core
     #
 
-      - name: Build Sandboxie x86 (all)
-        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
+    #  - name: Build Sandboxie x86 (all)
+    #    run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
     #
     # Prepare Qt Framework

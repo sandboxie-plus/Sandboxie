@@ -35,6 +35,8 @@ VersionInfoCopyright=Copyright (C) 2020-{#CurrentYear} by David Xanatos (xanasof
 VersionInfoVersion={#MyAppVersion}
 SetupIconFile=SandManInstall.ico
 SignTool=sha256
+; Require windows 10 or later
+MinVersion=10.0
 
 ; Handled in code section as always want DirPage for portable mode.
 DisableDirPage=no

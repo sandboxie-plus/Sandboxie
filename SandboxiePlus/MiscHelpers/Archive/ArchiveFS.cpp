@@ -10,8 +10,7 @@ class C7zFileEngineIterator : public QAbstractFileEngineIterator
 {
 public:
 #if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
-    C7zFileEngineIterator(QDir::Filters filters, const QStringList& filterNames, 
-        const QStringList& allEntries)
+    C7zFileEngineIterator(QDir::Filters filters, const QStringList& filterNames, const QStringList& allEntries)
         : QAbstractFileEngineIterator(filters, filterNames), entries(allEntries), index(0) {}
     ~C7zFileEngineIterator() {}
 
@@ -27,8 +26,7 @@ public:
         return index < entries.size();
     }
 #else
-    C7zFileEngineIterator(const QString &path, QDir::Filters filters, const QStringList& filterNames, 
-        const QStringList& allEntries)
+    C7zFileEngineIterator(const QString &path, QDirListing::IteratorFlags filters, const QStringList& filterNames, const QStringList& allEntries)
         : QAbstractFileEngineIterator(path, filters, filterNames), entries(allEntries), index(0) {}
     ~C7zFileEngineIterator() {}
 
@@ -171,7 +169,11 @@ bool C7zFileEngine::isRelativePath() const
     return false;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
 QAbstractFileEngine::Iterator *C7zFileEngine::beginEntryList(QDir::Filters filters, const QStringList &filterNames)
+#else
+C7zFileEngine::IteratorUniquePtr C7zFileEngine::beginEntryList(const QString &path, QDirListing::IteratorFlags filters, const QStringList &filterNames)
+#endif
 {
     QMutexLocker Lock(_pMutex);
 
@@ -190,7 +192,7 @@ QAbstractFileEngine::Iterator *C7zFileEngine::beginEntryList(QDir::Filters filte
 #if QT_VERSION < QT_VERSION_CHECK(6, 8, 0)
     return new C7zFileEngineIterator(filters, filterNames, allEntries);
 #else
-    return new C7zFileEngineIterator("", filters, filterNames, allEntries);
+    return IteratorUniquePtr(new C7zFileEngineIterator(path, filters, filterNames, allEntries));
 #endif
 }
 

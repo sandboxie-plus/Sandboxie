@@ -233,27 +233,28 @@ Italian.UninstallTaskLabel5=Rimuovi i file di configurazione e le &aree virtuali
 Italian.RefreshBuild=Aggiorna Templates.ini e translations.7z
 
 ; Japanese
-japanese.AddSandboxedMenu="サンドボックス化して実行" を右クリックに追加
-japanese.AddSandboxedBrowser=Sandboxie 下で Web ブラウザを起動するショートカットをデスクトップに追加する
-japanese.SandboxieStartMenu1=プログラムを指定してサンドボックス化して実行
-japanese.SandboxieStartMenu2=Web ブラウザをサンドボックス化して実行
+japanese.AddSandboxedMenu=コンテキストメニューに「サンドボックス化して実行」を追加する
+japanese.AddSandboxedBrowser=SandboxieでWebブラウザを起動するためのデスクトップショートカットを追加
+japanese.SandboxieStartMenu1=任意のプログラムをサンドボックス化して実行
+japanese.SandboxieStartMenu2=Webブラウザをサンドボックス化して実行
 japanese.SandboxieStartMenu3=Sandboxie スタートメニュー
-japanese.SandboxedBrowser=サンドボックス化した Web ブラウザ
-japanese.CustomPageLabel1=インストールタイプを選択
+japanese.SandboxedBrowser=サンドボックス化されたWebブラウザ
+japanese.CustomPageLabel1=インストールの種類を選択
 japanese.CustomPageLabel2=どのようにインストールしますか
 japanese.CustomPageLabel3=インストールモードを選択してください
-japanese.CustomPageInstallMode=このコンピューターに {#MyAppName} をインストール
-japanese.CustomPageUpgradeMode=既存の {#MyAppName} インストールを上書き
-japanese.CustomPagePortableMode=ポータブル利用のためにすべてのファイルを展開する
-japanese.RequiresWin7OrLater=Sandboxie-Plus は Windows7 以降が必要です
-japanese.ClassicFound=Sandboxie Classic がインストールされています。最初にそれをアンインストールしなければなりません。今すぐアンインストールしますか？
-japanese.RunSandboxedMenu=サンドボックス化して実行(&S)
+japanese.CustomPageInstallMode=このコンピューターに{#MyAppName}をインストールする
+japanese.CustomPageUpgradeMode=既存の{#MyAppName}インストールを更新する
+japanese.CustomPagePortableMode=ポータブル使用のためにすべてのファイルをディレクトリに展開する
+japanese.RequiresWin7OrLater=Sandboxie-Plusには、Windows 7以降が必要です。
+japanese.ClassicFound=Sandboxie Classicのインストールが検出されました。先にアンインストールする必要があります。今すぐアンインストールしますか？
+japanese.RunSandboxedMenu=サンドボックス内で実行(&S)
 japanese.UninstallTaskLabel1=アンインストールの種類を選択
-japanese.UninstallTaskLabel2=どのように Sandboxie-Plus をアンインストールしますか？
-japanese.UninstallTaskLabel3=構成ファイルとサンドボックスを保持する(&K)%n構成ファイルとサンドボックスを保持したまま Sandboxie-Plus を再インストールする予定なら、これが最も推奨されるオプションです。
-japanese.UninstallTaskLabel4=構成ファイルを削除する(&C)%nSandboxie.ini と Sandboxie-Plus.ini 構成ファイルを削除するには、このオプションを選択します。サンドボックスは変更しません。
-japanese.UninstallTaskLabel5=構成とサンドボックスを削除する(&S)%n全ての構成ファイルとサンドボックスを削除するには、このオプションを選択します。FileRootPath のカスタムパスにサンドボックスフォルダーも含めて削除します。
-japanese.RefreshBuild=最新の Templates.ini と翻訳をダウンロードする
+japanese.UninstallTaskLabel2=Sandboxie-Plusをどのようにアンインストールしますか？
+japanese.UninstallTaskLabel3=構成ファイルとサンドボックスを保持する(&K)%nSandboxie-Plusを再インストールする際に、構成ファイルとサンドボックスを維持したい場合に最も推奨されるオプションです。
+japanese.UninstallTaskLabel4=構成ファイルを削除する(&C)%nこのオプションを選択すると、サンドボックスは変更せずに、Sandboxie.iniとSandboxie-Plus.iniの構成ファイルが削除されます。
+japanese.UninstallTaskLabel5=構成ファイルとサンドボックスを削除する(&S)%nこのオプションを選択すると、すべての構成ファイルとサンドボックスが削除されます。これには、FileRootPathでカスタムパスに指定されたSandboxフォルダも含まれます。
+japanese.RefreshBuild=最新のTemplates.iniと翻訳をダウンロード
+japanese.InstallImDisk=ImDisk 3.0ドライバーをインストール（または更新）する（RamDiskおよび暗号化サンドボックス用）
 
 ; Korean
 Korean.AddSandboxedMenu=상황에 맞는 메뉴에 "샌드박스에서 실행" 추가

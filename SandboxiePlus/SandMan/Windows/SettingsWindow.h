@@ -161,6 +161,9 @@ private slots:
 	void OnSelectIniEditFont();
 	void OnResetIniEditFont();
 
+	void OnSelectUiFont();
+	void OnResetUiFont();
+
 protected:
 	void closeEvent(QCloseEvent *e);
 

@@ -1171,14 +1171,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="3">
+               <item row="3" column="3">
                 <widget class="QLabel" name="label_13">
                  <property name="text">
                   <string>%</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1">
+               <item row="7" column="1">
                 <widget class="QLabel" name="label_26">
                  <property name="text">
                   <string>External Ini Editor</string>
@@ -1191,7 +1191,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1">
+               <item row="6" column="1">
                 <widget class="QLabel" name="label_6">
                  <property name="text">
                   <string>Ini Editor Font</string>
@@ -1201,14 +1201,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="2">
+               <item row="3" column="2">
                 <widget class="QComboBox" name="cmbFontScale">
                  <property name="editable">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="4">
+               <item row="8" column="4">
                 <spacer name="horizontalSpacer_20">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1221,7 +1221,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="5" column="3">
+               <item row="6" column="3">
                 <layout class="QHBoxLayout" name="horizontalLayout_4">
                  <item>
                   <widget class="QPushButton" name="btnSelectIniFont">
@@ -1261,7 +1261,7 @@
                <item row="1" column="2">
                 <widget class="QComboBox" name="cmbDPI"/>
                </item>
-               <item row="7" column="0">
+               <item row="8" column="0">
                 <spacer name="horizontalSpacer_17">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1288,7 +1288,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="7" column="2">
+               <item row="8" column="2">
                 <spacer name="horizontalSpacer_18">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1301,7 +1301,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="7" column="3">
+               <item row="8" column="3">
                 <spacer name="horizontalSpacer_19">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1314,7 +1314,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="2" column="1">
+               <item row="3" column="1">
                 <widget class="QLabel" name="label_24">
                  <property name="text">
                   <string>Font Scaling</string>
@@ -1327,14 +1327,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="2">
+               <item row="6" column="2">
                 <widget class="QLabel" name="lblIniEditFont">
                  <property name="text">
                   <string>#</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1">
+               <item row="8" column="1">
                 <spacer name="verticalSpacer_10">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1347,7 +1347,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="6" column="2" colspan="2">
+               <item row="7" column="2" colspan="2">
                 <widget class="QLineEdit" name="txtEditor"/>
                </item>
                <item row="1" column="3">
@@ -1357,7 +1357,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0">
+               <item row="5" column="0">
                 <widget class="QLabel" name="lblEditor">
                  <property name="font">
                   <font>
@@ -1371,12 +1371,69 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1" colspan="4">
+               <item row="4" column="1" colspan="4">
                 <widget class="QCheckBox" name="chkHide">
                  <property name="text">
                   <string>Hide SandMan windows from screen capture (UI restart required)</string>
                  </property>
                 </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_33">
+                 <property name="text">
+                  <string>UI Font</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>lblUiFont</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QLabel" name="lblUiFont">
+                 <property name="text">
+                  <string>#</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QPushButton" name="btnSelectUiFont">
+                   <property name="toolTip">
+                    <string>Select Font</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnResetUiFont">
+                   <property name="toolTip">
+                    <string>Reset Font</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_23">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
                </item>
               </layout>
              </item>
@@ -3254,7 +3311,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
  </tabstops>
  <resources>
   <include location="../Resources/SandMan.qrc"/>
-  <include location="../../../../../Users/Philipp/.designer/Resources/SandMan.qrc"/>
  </resources>
  <connections/>
 </ui>

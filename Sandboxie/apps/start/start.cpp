@@ -1381,25 +1381,31 @@ LRESULT UacPromptWndProc(
 
         pParams->ButtonY = 300;
 
-        WCHAR bufYes[32], bufNo[32], bufCancel[32];
-        LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_YES,    bufYes,    32);
-        LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_NO,     bufNo,     32);
-        LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_CANCEL, bufCancel, 32);
+        //WCHAR bufYes[32], bufNo[32], bufCancel[32];
+        //LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_YES,    bufYes,    32);
+        //LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_NO,     bufNo,     32);
+        //LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_CANCEL, bufCancel, 32);
 
-        pParams->hYes = CreateWindowW(L"BUTTON", bufYes,
+        WCHAR* pMsg = SbieDll_FormatMessage0(MSG_3115);
+        pParams->hYes = CreateWindowW(L"BUTTON", pMsg,
             WS_VISIBLE | WS_CHILD | WS_TABSTOP | BS_PUSHBUTTON,
             140, pParams->ButtonY, 100, 30, hwnd, (HMENU)IDYES,
             GetModuleHandle(NULL), NULL);
+        LocalFree(pMsg);
 
-        pParams->hNo = CreateWindowW(L"BUTTON", bufNo,
+        pMsg = SbieDll_FormatMessage0(MSG_3116);
+        pParams->hNo = CreateWindowW(L"BUTTON", pMsg,
             WS_VISIBLE | WS_CHILD | WS_TABSTOP | BS_DEFPUSHBUTTON,
             250, pParams->ButtonY, 100, 30, hwnd, (HMENU)IDNO,
             GetModuleHandle(NULL), NULL);
+        LocalFree(pMsg);
 
-        pParams->hCancel = CreateWindowW(L"BUTTON", bufCancel,
+        pMsg = SbieDll_FormatMessage0(MSG_3117);
+        pParams->hCancel = CreateWindowW(L"BUTTON", pMsg,
             WS_VISIBLE | WS_CHILD | WS_TABSTOP | BS_PUSHBUTTON,
             360, pParams->ButtonY, 100, 30, hwnd, (HMENU)IDCANCEL,
             GetModuleHandle(NULL), NULL);
+        LocalFree(pMsg);
 
         SetFocus(pParams->hNo);
 

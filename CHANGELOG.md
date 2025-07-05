@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed BindAdapter doesn't work, can still access internet when bound adapter (VPN) is disabled [#4896](https://github.com/sandboxie-plus/Sandboxie/issues/4896)
 - fixed There's a strange problem when calling GetFullPathName() with a string starting with a (back)slash [#4867](https://github.com/sandboxie-plus/Sandboxie/issues/4867)
 - fixed Some of the UI bound with the Install Language ID [#4859](https://github.com/sandboxie-plus/Sandboxie/issues/4859)
+- fixed Bad UAC Prompt layout [#4863](https://github.com/sandboxie-plus/Sandboxie/issues/4863)
 
 
 

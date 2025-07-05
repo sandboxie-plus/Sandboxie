@@ -369,6 +369,40 @@ _FX WCHAR *Get_Default_Browser(void)
 
 
 //---------------------------------------------------------------------------
+// InitDpiAwareness
+//---------------------------------------------------------------------------
+
+typedef DPI_AWARENESS_CONTEXT (WINAPI *PFN_SetThreadDpiAwarenessContext)(DPI_AWARENESS_CONTEXT);
+
+static BOOL InitDpiAwareness()
+{
+    HMODULE hUser32 = GetModuleHandleW(L"user32.dll");
+    if (!hUser32) {
+        // Should never happen
+        return FALSE;
+    }
+
+    PFN_SetThreadDpiAwarenessContext pSetThreadDpiAwarenessContext =
+        (PFN_SetThreadDpiAwarenessContext)GetProcAddress(hUser32,
+            "SetThreadDpiAwarenessContext");
+    if (!pSetThreadDpiAwarenessContext) {
+        // Function not available (pre-Win10)—cannot change thread DPI context
+        return FALSE;
+    }
+
+    // Switch this thread to UNaware
+    DPI_AWARENESS_CONTEXT prev = pSetThreadDpiAwarenessContext(
+        DPI_AWARENESS_CONTEXT_UNAWARE);
+    if (prev == NULL) {
+        // failed
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
 // Eat_String
 //---------------------------------------------------------------------------
 
@@ -1011,6 +1045,8 @@ BOOL Parse_Command_Line(void)
         /*while (! IsDebuggerPresent())
             Sleep(500);
         __debugbreak();*/
+
+        InitDpiAwareness();
 
         //
         // Open Sandboxie's own UAC Dialog

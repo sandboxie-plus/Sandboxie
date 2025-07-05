@@ -928,6 +928,17 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
     if (wcslen(req->setting) == 0 && !have_value)
         return STATUS_SUCCESS; // dummy request to trigger a refresh
 
+    if (req->section[0] == L'$' && req->section[1] == 0)
+    {
+        if (wcscmp(req->setting, L"Language") == 0)
+        {
+            DWORD Language = _wtoi(req->value);
+            SbieDll_SetServiceRegistryValue(L"Language", REG_DWORD, &Language, sizeof(Language));
+        }
+
+        return STATUS_SUCCESS;
+    }
+
     //
     // check if this is a delete section request and if so execute it
     //

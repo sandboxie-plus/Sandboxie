@@ -1488,7 +1488,9 @@ void CSettingsWindow::WriteTextList(const QString& Setting, const QStringList& L
 
 void CSettingsWindow::SaveSettings()
 {
-	theConf->SetValue("Options/UiLanguage", ui.uiLang->currentData());
+	QString Lang = ui.uiLang->currentData().toString();
+	theConf->SetValue("Options/UiLanguage", Lang);
+	quint32 LangId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
 
 	theConf->SetValue("UIConfig/UIFont", ui.lblUiFont->text());
 	theConf->SetValue("Options/DPIScaling", ui.cmbDPI->currentData());
@@ -1525,6 +1527,9 @@ void CSettingsWindow::SaveSettings()
 		}
 		else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
 			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
+
+		theAPI->SbieIniSet("$", "Language", QString::number(LangId), CSbieIni::eIniUpdate, false);
+		//theAPI->GetGlobalSettings()->SetNum("SbieSvc_Language", LangId);
 	}
 
 	if (ui.chkShellMenu->checkState() != IsContextMenu())

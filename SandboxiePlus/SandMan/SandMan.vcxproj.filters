@@ -69,17 +69,11 @@
     <ClCompile Include="Models\SbieModel.cpp">
       <Filter>Models</Filter>
     </ClCompile>
-    <ClCompile Include="Views\SbieView.cpp">
-      <Filter>Views</Filter>
-    </ClCompile>
     <ClCompile Include="SbiePlusAPI.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
     <ClCompile Include="Helpers\WinAdmin.cpp">
       <Filter>Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Windows\OptionsWindow.cpp">
-      <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Windows\SettingsWindow.cpp">
       <Filter>Windows</Filter>
@@ -101,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="Models\TraceModel.cpp">
       <Filter>Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Views\TraceView.cpp">
-      <Filter>Views</Filter>
     </ClCompile>
     <ClCompile Include="Windows\SelectBoxWindow.cpp">
       <Filter>Windows</Filter>
@@ -232,7 +223,7 @@
       <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Windows\TestProxyDialog.cpp">
-        <Filter>Windows</Filter>
+      <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Windows\ExtractDialog.cpp">
       <Filter>Windows</Filter>
@@ -240,8 +231,17 @@
     <ClCompile Include="Helpers\TabOrder.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Views\TraceView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
     <ClCompile Include="Helpers\IniHighlighter.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\SbieView.cpp">
+      <Filter>Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -395,7 +395,7 @@
       <Filter>Windows</Filter>
     </QtMoc>
     <QtMoc Include="Windows\TestProxyDialog.h">
-        <Filter>Windows</Filter>
+      <Filter>Windows</Filter>
     </QtMoc>
     <QtMoc Include="Windows\ExtractDialog.h">
       <Filter>Windows</Filter>
@@ -453,9 +453,6 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sandman_ar.ts">
-      <Filter>Translation Files</Filter>
-    </None>
     <None Include="sandman_de.ts">
       <Filter>Translation Files</Filter>
     </None>

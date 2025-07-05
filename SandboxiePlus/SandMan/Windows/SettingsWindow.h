@@ -184,6 +184,8 @@ protected:
 	void	SaveIniSection();
 	void    ApplyIniEditFont();
 
+	void	InitSupport();
+
 	bool	m_bRebuildUI;
 	bool	m_HoldChange;
 	int 	m_CompatLoaded;

@@ -396,6 +396,15 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkHide, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
+	// UI Font
+	ui.btnSelectUiFont->setIcon(CSandMan::GetIcon("Font"));
+	ui.btnSelectUiFont->setToolTip(tr("Select font"));
+	ui.btnResetUiFont->setIcon(CSandMan::GetIcon("ResetFont"));
+	ui.btnResetUiFont->setToolTip(tr("Reset font"));
+
+	connect(ui.btnSelectUiFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectUiFont()));
+	connect(ui.btnResetUiFont, SIGNAL(clicked(bool)), this, SLOT(OnResetUiFont()));
+	ui.lblUiFont->setText(QApplication::font().family());
 
 	connect(ui.txtEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnOptChanged()));
 	m_bRebuildUI = false;
@@ -713,6 +722,23 @@ void CSettingsWindow::OnResetIniEditFont()
 {
 	theConf->DelValue("UIConfig/IniFont");
 	ApplyIniEditFont();
+}
+
+
+void CSettingsWindow::OnSelectUiFont()
+{
+	bool ok;
+	auto newFont = QFontDialog::getFont(&ok, QApplication::font(), this);
+	if (!ok) return;
+	ui.lblUiFont->setText(newFont.family());
+	OnChangeGUI();
+}
+
+void CSettingsWindow::OnResetUiFont()
+{
+	QFont defaultFont = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
+	ui.lblUiFont->setText(defaultFont.family());
+	OnChangeGUI();
 }
 
 void CSettingsWindow::OnSetTree()
@@ -1832,6 +1858,7 @@ void CSettingsWindow::SaveSettings()
 {
 	theConf->SetValue("Options/UiLanguage", ui.uiLang->currentData());
 
+	theConf->SetValue("UIConfig/UIFont", ui.lblUiFont->text());
 	theConf->SetValue("Options/DPIScaling", ui.cmbDPI->currentData());
 
 	theConf->SetValue("Options/UseDarkTheme", CSettingsWindow__Chk2Int(ui.chkDarkTheme->checkState()));

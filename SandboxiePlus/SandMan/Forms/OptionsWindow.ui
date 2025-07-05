@@ -5467,6 +5467,7 @@ instead of &quot;*&quot;.</string>
            <widget class="QWidget" name="tabDebug">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -5487,61 +5488,179 @@ instead of &quot;*&quot;.</string>
              <property name="bottomMargin">
               <number>3</number>
              </property>
-             <item row="2" column="0">
-              <widget class="QScrollArea" name="scrollArea">
-               <property name="widgetResizable">
-                <bool>true</bool>
+             <item row="0" column="0">
+              <widget class="QTabWidget" name="tabsDebug">
+               <property name="tabPosition">
+                <enum>QTabWidget::South</enum>
                </property>
-               <widget class="QWidget" name="dbgWidget">
-                <property name="geometry">
-                 <rect>
-                  <x>0</x>
-                  <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
-                 </rect>
-                </property>
-                <layout class="QGridLayout" name="dbgLayout">
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <widget class="QWidget" name="tabDebugConfig">
+                <attribute name="title">
+                 <string>Debug Options</string>
+                </attribute>
+                <layout class="QGridLayout" name="gridLayout_87">
                  <property name="leftMargin">
-                  <number>0</number>
+                  <number>3</number>
                  </property>
                  <property name="topMargin">
-                  <number>0</number>
+                  <number>3</number>
                  </property>
                  <property name="rightMargin">
-                  <number>0</number>
+                  <number>3</number>
                  </property>
                  <property name="bottomMargin">
-                  <number>0</number>
+                  <number>3</number>
                  </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_25">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                     <kerning>true</kerning>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>WARNING, these options can disable core security guarantees and break sandbox security!!!</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_17">
+                   <property name="text">
+                    <string>These options are intended for debugging compatibility issues, please do not use them in production use. </string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QScrollArea" name="scrollArea">
+                   <property name="widgetResizable">
+                    <bool>true</bool>
+                   </property>
+                   <widget class="QWidget" name="dbgWidget">
+                    <property name="geometry">
+                     <rect>
+                      <x>0</x>
+                      <y>0</y>
+                      <width>98</width>
+                      <height>28</height>
+                     </rect>
+                    </property>
+                    <layout class="QGridLayout" name="dbgLayout">
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                    </layout>
+                   </widget>
+                  </widget>
+                 </item>
                 </layout>
                </widget>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_25">
-               <property name="font">
-                <font>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="text">
-                <string>WARNING, these options can disable core security guarantees and break sandbox security!!!</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_17">
-               <property name="text">
-                <string>These options are intended for debugging compatibility issues, please do not use them in production use. </string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
+               <widget class="QWidget" name="tabConfigDump">
+                <attribute name="title">
+                 <string>Config Dump</string>
+                </attribute>
+                <layout class="QGridLayout" name="gridLayout_88">
+                 <property name="leftMargin">
+                  <number>3</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>3</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>3</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>3</number>
+                 </property>
+                 <item row="0" column="4">
+                  <spacer name="horizontalSpacer_25">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QCheckBox" name="chkCfgNoTemplates">
+                   <property name="text">
+                    <string>No Templates</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QCheckBox" name="chkCfgNoGlobal">
+                   <property name="text">
+                    <string>No Global</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QCheckBox" name="chkCfgNoExpand">
+                   <property name="text">
+                    <string>No Expand</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="5">
+                  <widget class="QPushButton" name="btnCfgUpdate">
+                   <property name="text">
+                    <string>Refresh</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" colspan="6">
+                  <widget class="QTreeWidget" name="treeCfgDump">
+                   <column>
+                    <property name="text">
+                     <string>Name</string>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Type</string>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Value</string>
+                    </property>
+                   </column>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
               </widget>
              </item>
             </layout>

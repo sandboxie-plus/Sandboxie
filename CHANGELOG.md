@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed incomplete directory in links when creating shortcuts [#4882](https://github.com/sandboxie-plus/Sandboxie/issues/4882)
 - BindAdapter doesn't work, can still access internet when bound adapter (VPN) is disabled [#4896](https://github.com/sandboxie-plus/Sandboxie/issues/4896)
-
+- There's a strange problem when calling GetFullPathName() with a string starting with a (back)slash [#4867](https://github.com/sandboxie-plus/Sandboxie/issues/4867)
 
 
 

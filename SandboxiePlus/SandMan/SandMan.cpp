@@ -2464,19 +2464,23 @@ void CSandMan::OnStatusChanged()
 			if (PortableRootDir == 2)
 			{
 				QString NtBoxRoot = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", false, false).replace("GlobalSettings", "[BoxName]");
+				QString DosBoxPath = theAPI->Nt2DosPath(NtBoxRoot);
 
-				bool State = false;
-				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus",
-					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\nYes will choose: %1\nNo will choose: %2")
-					.arg(BoxPath + "\\[BoxName]")
-					.arg(theAPI->Nt2DosPath(NtBoxRoot))
-					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
+				if (DosBoxPath != BoxPath + "\\%SANDBOX%")
+				{
+					bool State = false;
+					PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus",
+						tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\nYes will choose: %1\nNo will choose: %2")
+						.arg(BoxPath + "\\[BoxName]")
+						.arg(DosBoxPath)
+						, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
 
-				if (State)
-					theConf->SetValue("Options/PortableRootDir", PortableRootDir);
+					if (State)
+						theConf->SetValue("Options/PortableRootDir", PortableRootDir);
+				}
 			}
 
-			if (PortableRootDir)
+			if (PortableRootDir == 1)
 				theAPI->GetGlobalSettings()->SetText("FileRootPath", BoxPath + "\\%SANDBOX%");
 		}
 

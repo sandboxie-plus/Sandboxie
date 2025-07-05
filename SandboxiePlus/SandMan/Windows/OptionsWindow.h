@@ -264,6 +264,7 @@ private slots:
 	void OnOpenCOM();
 	void OnIsolationChanged();
 	void OnDebugChanged();
+	void OnDumpConfig();
 
 	void SetIniEdit(bool bEnable);
 	void OnEditIni();

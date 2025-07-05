@@ -149,6 +149,22 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.btnAddUser, SIGNAL(clicked(bool)), this, SLOT(OnAddUser()));
 	connect(ui.btnDelUser, SIGNAL(clicked(bool)), this, SLOT(OnDelUser()));
 	connect(ui.chkMonitorAdminOnly, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
+
+	connect(ui.btnCfgUpdate, SIGNAL(clicked(bool)), this, SLOT(OnDumpConfig()));
+	connect(ui.chkCfgNoGlobal, SIGNAL(clicked(bool)), this, SLOT(OnDumpConfig()));
+	connect(ui.chkCfgNoTemplates, SIGNAL(clicked(bool)), this, SLOT(OnDumpConfig()));
+	connect(ui.chkCfgNoExpand, SIGNAL(clicked(bool)), this, SLOT(OnDumpConfig()));
+
+
+	CPanelWidgetEx* pCfgDump = new CPanelWidgetEx(ui.tabAdvanced);
+	pCfgDump->GetTree()->setHeaderLabels(tr("Name|Type|Value").split("|"));
+	ui.treeCfgDump->parentWidget()->layout()->replaceWidget(ui.treeCfgDump, pCfgDump);
+	ui.treeCfgDump->deleteLater();
+	ui.treeCfgDump = pCfgDump->GetTree();
+
+	ui.tabsDebug->setCurrentIndex(0);
+	connect(ui.tabsDebug, &QTabWidget::currentChanged, this, [&](int tab) { if(tab == 1) OnDumpConfig(); });
 }
 
 
@@ -1452,6 +1468,24 @@ void COptionsWindow::SaveDebug()
 			continue;
 		WriteAdvancedCheck(pCheck, DbgOption.Name, DbgOption.Value);
 		DbgOption.Changed = false;
+	}
+}
+
+void COptionsWindow::OnDumpConfig()
+{
+	ui.treeCfgDump->clear();
+
+	QList<CSbieIni::SbieIniValue> AllValues = m_pBox->GetIniSection(NULL, !ui.chkCfgNoTemplates->isChecked(), !ui.chkCfgNoGlobal->isChecked(), ui.chkCfgNoExpand->isChecked());
+	for (QList<CSbieIni::SbieIniValue>::const_iterator I = AllValues.begin(); I != AllValues.end(); ++I)
+	{
+		QTreeWidgetItem* pItem = new QTreeWidgetItem();
+		pItem->setText(0, I->Name);
+		QStringList Type;
+		if (I->Type & 0x40000000L) Type << tr("Global"); // CONF_GET_NO_GLOBAL
+		if (I->Type & 0x10000000L) Type << tr("Template"); // CONF_GET_NO_TEMPLS
+		pItem->setText(1, Type.join(", "));
+		pItem->setText(2, I->Value);
+		ui.treeCfgDump->addTopLevelItem(pItem);
 	}
 }
 

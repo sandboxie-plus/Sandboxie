@@ -114,6 +114,18 @@ SBIE2330 Unspecified error when hooking %2
 SBIE2360 Failed to inject SOCKS5 proxy:  %2
 .
 
+3115;txt;01
+Yes
+.
+
+3116;txt;01
+No
+.
+
+3117;txt;01
+Cancel
+.
+
 3198;txt;01
 Do you want to start a new program in the %2 sandbox?
 You received this message because you set AlertBeforeStart=y.

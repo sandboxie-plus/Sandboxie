@@ -2,5 +2,15 @@
 * Missing Messages in Text-Turkish-1055.txt
 *==========
 
-There are no missing messages.
+3115;txt;01
+Yes
+.
+
+3116;txt;01
+No
+.
+
+3117;txt;01
+Cancel
+.
 

@@ -2,6 +2,18 @@
 * Missing Messages in Text-SimpChinese-2052.txt
 *==========
 
+3115;txt;01
+Yes
+.
+
+3116;txt;01
+No
+.
+
+3117;txt;01
+Cancel
+.
+
 3244;txt;01
 Application %2 is requesting Administrator privileges in sandbox:
 .

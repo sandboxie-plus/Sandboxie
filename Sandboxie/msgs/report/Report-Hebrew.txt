@@ -218,6 +218,18 @@ SBIE2338 Encountered unsupported architecture in process:  %2
 Type the name of a program or path to open the following file in the current sandbox:
 .
 
+3115;txt;01
+Yes
+.
+
+3116;txt;01
+No
+.
+
+3117;txt;01
+Cancel
+.
+
 3198;txt;01
 Do you want to start a new program in the %2 sandbox?
 You received this message because you set AlertBeforeStart=y.

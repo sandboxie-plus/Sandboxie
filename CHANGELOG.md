@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.16.1 / 5.71.1] - 2025-07-??
+## [1.16.1 / 5.71.1] - 2025-07-06
 
 ### Changed
 - updated toolset to MSVC_2022 as the Github CI runner 2019 is being discontinued

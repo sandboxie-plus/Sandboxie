@@ -2956,9 +2956,9 @@ _FX ULONG File_RtlGetFullPathName_U(
     if (ret_len && ret_len <= 8192) {
 
         //
-        // Requesting a path like \MyDir shoudl return the path on the current drive
-        // As in sandbox the current working directory thos the drive can be different then the real one
-        // we check for that case and fix it by getting the right drive letter and setting it.
+        // Requesting a path like \MyDir should return the path on the current drive.
+        // Since in the sandbox the current working directory (thus the drive) can be different from the real one,
+        // we check for that case and fix it by getting the correct drive letter and setting it.
         //
 
         if (src[0] == L'\\' && src[1] != L'\\') {

@@ -778,6 +778,18 @@ Desktop
 Programme
 .
 
+3115;txt;01
+Ja
+.
+
+3116;txt;01
+Nein
+.
+
+3117;txt;01
+Abbrechen
+.
+
 3198;txt;01
 Möchten Sie ein neues Programm in der Sandbox %2 starten?
 Sie haben diese Meldung erhalten, weil Sie AlertBeforeStart=y gesetzt haben.

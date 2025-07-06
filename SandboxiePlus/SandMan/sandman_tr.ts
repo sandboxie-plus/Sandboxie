@@ -2319,7 +2319,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="161"/>
         <source>Name|Type|Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Ad|Tür|Değer</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="779"/>
@@ -2401,12 +2401,12 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1484"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Genel</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1485"/>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Şablon</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1536"/>
@@ -8601,7 +8601,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5059"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
-        <translation>Bu seçenek, *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\* kayıt defteri yolunu gizler ve ana bilgisayara yüklenen yazılımın korumalı alana yeniden yüklenmesine izin verir. Ancak, yazılıma özgü dosyaları ve klasörleri gizlemez. Yükleyici hala sorunlarla karşılaşırsa, diskteki ilgili dosyaları gizlemek için özel WriteFilePath girdileri tanımlamanız gerekir.</translation>
+        <translation>Bu seçenek, *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\* kayıt defteri yollarını gizleyerek ana bilgisayara yüklenmiş yazılımların korumalı alana yeniden yüklenmesine izin verir. Ancak, yazılıma özgü dosyaları ve klasörleri gizlemez. Yükleyici hala sorunlarla karşılaşırsa, diskteki ilgili dosyaları gizlemek için özel WriteFilePath girdileri tanımlamanız gerekir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5062"/>
@@ -8631,32 +8631,32 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5501"/>
         <source>Debug Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Hata Ayıklama Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5578"/>
         <source>Config Dump</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırma Dökümü</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5609"/>
         <source>No Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Şablon Yok</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5619"/>
         <source>No Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Genel Yok</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5629"/>
         <source>No Expand</source>
-        <translation type="unfinished"></translation>
+        <translation>Genişletme Yok</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5639"/>
         <source>Refresh</source>
-        <translation type="unfinished">Yenile</translation>
+        <translation>Yenile</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5768"/>
@@ -9256,7 +9256,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2562"/>
         <source>Clear password when main window becomes hidden</source>
-        <translation>Ana pencere gizlendiğinde parolayı temizle</translation>
+        <translation>Ana pencere gizlendiğinde parola temizlensin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="32"/>
@@ -9266,7 +9266,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2454"/>
         <source>Password must be entered in order to make changes</source>
-        <translation>Değişiklik yapmak için parola iste</translation>
+        <translation>Değişiklik yapmak için parola istensin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="65"/>
@@ -9311,7 +9311,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2586"/>
         <source>Watch Sandboxie.ini for changes</source>
-        <translation>Değişiklikler için Sandboxie.ini dosyasını izle</translation>
+        <translation>Değişiklikler için Sandboxie.ini dosyası izlensin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2943"/>
@@ -9356,7 +9356,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="231"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation>Bu kullanıcı arayüzündeki bağlantıları korumalı alanda aç</translation>
+        <translation>Bu kullanıcı arayüzündeki bağlantılar korumalı alanda açılsın</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2296"/>
@@ -9436,7 +9436,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="150"/>
         <source>Count and display the disk space occupied by each sandbox</source>
-        <translation>Her bir korumalı alanın kapladığı disk alanını hesapla ve görüntüle</translation>
+        <translation>Her korumalı alanın kapladığı disk alanını hesapla ve görüntüle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
@@ -9789,7 +9789,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1197"/>
         <source>Ini Editor Font</source>
-        <translation>Ini Düzenleyici Yazı Tipi</translation>
+        <translation>Ini Düzenleyici yazı tipi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1229"/>
@@ -9930,7 +9930,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1377"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation>SandMan penceresini ekran yakalamadan gizle (Kullanıcı arayüzünün yeniden başlatılması gerekir)</translation>
+        <translation>SandMan penceresini ekran yakalayıcılardan gizle (Kullanıcı arayüzünün yeniden başlatılması gerekir)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1572"/>
@@ -10117,23 +10117,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1384"/>
         <source>UI Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Arayüz yazı tipi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1406"/>
         <source>Select Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipini seç</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1416"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipini sıfırla</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2416"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
-        <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">Sandboxie&apos;nin kendi gelişmiş UAC istemi kullanılsın (deneysel)</translation>
+        <translation>Sandboxie&apos;nin kendi gelişmiş UAC istemini kullan (deneysel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2426"/>

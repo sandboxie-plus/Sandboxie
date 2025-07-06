@@ -344,35 +344,41 @@ _FX BOX *Process_GetForcedStartBox(
 
         if ((! box) && (alert != 1))
             Process_CheckAlertProcess(&boxes, ImageName, ImagePath2, &alert);
-    }
+    
 
-    //
-    // check mark of the web (MoTW)
-    //
+        //
+        // check mark of the web (MoTW)
+        //
 
-    if (! box) {
+        if (! box && (alert != 1)) {
 
-        if (Conf_Get_Boolean(NULL, L"ForceMarkOfTheWeb", 0, FALSE)) {
+            if (Conf_Get_Boolean(NULL, L"ForceMarkOfTheWeb", 0, FALSE)) {
 
-            if (Process_CheckMoTW(ImagePath2) || (DocArg && Process_CheckMoTW(DocArg))) {
+                //
+                // Check the program and check the passed document (except for start.exe)
+                //
 
-                const WCHAR* MoTW_Box = Conf_Get(NULL, L"MarkOfTheWebBox", 0);
-                if (!MoTW_Box || !*MoTW_Box)
-                    MoTW_Box = L"DefaultBox";
+                if (Process_CheckMoTW(ImagePath2) || (!(is_start_exe || _wcsicmp(ImageName, L"sandman.exe") == 0) && DocArg && Process_CheckMoTW(DocArg))) {
 
-                box = (BOX*)-1; // when box not found cancel process
+                    const WCHAR* MoTW_Box = Conf_Get(NULL, L"MarkOfTheWebBox", 0);
+                    if (!MoTW_Box || !*MoTW_Box)
+                        MoTW_Box = L"DefaultBox";
 
-                ULONG MoTW_Box_len = (wcslen(MoTW_Box) + 1) * sizeof(WCHAR);
-                FORCE_BOX* fbox = List_Head(&boxes);
-                while (fbox) {
-                    if (MoTW_Box_len == fbox->box->name_len && _wcsicmp(MoTW_Box, fbox->box->name) == 0) {
-                        box = fbox->box;
-                        break;
+                    box = (BOX*)-1; // when box not found cancel process
+
+                    ULONG MoTW_Box_len = (wcslen(MoTW_Box) + 1) * sizeof(WCHAR);
+                    FORCE_BOX* fbox = List_Head(&boxes);
+                    while (fbox) {
+                        if (MoTW_Box_len == fbox->box->name_len && _wcsicmp(MoTW_Box, fbox->box->name) == 0) {
+                            box = fbox->box;
+                            break;
+                        }
+                        fbox = List_Next(fbox);
                     }
-                    fbox = List_Next(fbox);
                 }
             }
         }
+
     }
 
     //
@@ -2087,7 +2093,7 @@ _FX BOOLEAN Process_CheckMoTW(const WCHAR *path)
     if (!path)
         return FALSE;
 
-    adsPath_len = wcslen(path) * sizeof(WCHAR) + sizeof(ads_suffix);
+    adsPath_len = (wcslen(path) + 1) * sizeof(WCHAR) + sizeof(ads_suffix);
     adsPath = Mem_Alloc(Driver_Pool, adsPath_len);
     if (!adsPath)
         return FALSE;
@@ -2096,7 +2102,7 @@ _FX BOOLEAN Process_CheckMoTW(const WCHAR *path)
     
     RtlInitUnicodeString(&uni, adsPath);
     InitializeObjectAttributes(&objattrs,
-        &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        &uni, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
 
     status = ZwCreateFile(
         &handle,

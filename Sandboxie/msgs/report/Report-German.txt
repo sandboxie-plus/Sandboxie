@@ -2,15 +2,5 @@
 * Missing Messages in Text-German-1031.txt
 *==========
 
-3115;txt;01
-Yes
-.
-
-3116;txt;01
-No
-.
-
-3117;txt;01
-Cancel
-.
+There are no missing messages.
 

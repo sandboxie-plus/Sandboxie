@@ -6,17 +6,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.16.1 / 5.71.1] - 2025-07-06
 
 ### Changed
-- updated toolset to MSVC_2022 as the Github CI runner 2019 is being discontinued
-  - Note: this drops Windows 7 and 32-bit OS support as the 2022 toolset no longer supports these targets for driver build
+- updated toolset to MSVC_2022 as the GitHub CI runner 2019 is being discontinued
+  - Note: **this drops Windows 7 and 32-bit OS support** as the 2022 toolset no longer supports these targets for driver build
 - switching to Qt6 which also does not support Windows 7
 
 ### Fixed
 - fixed incomplete directory in links when creating shortcuts [#4882](https://github.com/sandboxie-plus/Sandboxie/issues/4882)
 - fixed BindAdapter doesn't work, can still access internet when bound adapter (VPN) is disabled [#4896](https://github.com/sandboxie-plus/Sandboxie/issues/4896)
-- fixed There's a strange problem when calling GetFullPathName() with a string starting with a (back)slash [#4867](https://github.com/sandboxie-plus/Sandboxie/issues/4867)
-- fixed Some of the UI bound with the Install Language ID [#4859](https://github.com/sandboxie-plus/Sandboxie/issues/4859)
-- fixed Bad UAC Prompt layout [#4863](https://github.com/sandboxie-plus/Sandboxie/issues/4863)
-- fixed "Run Un-Sandboxed" option ignored when Mark of the Web forcing is enabled [#4856](https://github.com/sandboxie-plus/Sandboxie/issues/4856)
+- fixed there's a strange problem when calling GetFullPathName() with a string starting with a (back)slash [#4867](https://github.com/sandboxie-plus/Sandboxie/issues/4867)
+- fixed some of the UI bound with the install language ID [#4859](https://github.com/sandboxie-plus/Sandboxie/issues/4859)
+- fixed bad UAC prompt layout [#4863](https://github.com/sandboxie-plus/Sandboxie/issues/4863)
+- fixed "Run Un-Sandboxed" option ignored when Mark of The Web forcing is enabled [#4856](https://github.com/sandboxie-plus/Sandboxie/issues/4856)
 
 
 

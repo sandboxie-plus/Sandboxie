@@ -1544,7 +1544,7 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="161"/>
         <source>Name|Type|Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Name|Typ|Wert</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="779"/>
@@ -1640,12 +1640,12 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1484"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1485"/>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorlage</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1536"/>
@@ -9036,32 +9036,32 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5501"/>
         <source>Debug Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Debug-Optionen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5578"/>
         <source>Config Dump</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurationsdump</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5609"/>
         <source>No Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Vorlagen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5619"/>
         <source>No Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Global</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5629"/>
         <source>No Expand</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Erweitert</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5639"/>
         <source>Refresh</source>
-        <translation type="unfinished">Aktualisieren</translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5684"/>
@@ -9725,7 +9725,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1197"/>
         <source>Ini Editor Font</source>
-        <translation>INI Editor Schriftart</translation>
+        <translation>Schriftart INI Editor</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1229"/>
@@ -10187,17 +10187,17 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1384"/>
         <source>UI Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart Benutzeroberfläche</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1406"/>
         <source>Select Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart auswählen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1416"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart zurücksetzen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2416"/>

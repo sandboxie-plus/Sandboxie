@@ -2041,7 +2041,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="161"/>
         <source>Name|Type|Value</source>
-        <translation type="unfinished"></translation>
+        <translation>이름|유형|값</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="779"/>
@@ -2118,12 +2118,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1484"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>전역</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1485"/>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>템플릿</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1536"/>
@@ -3841,7 +3841,7 @@ Sandboxie에 대한 업데이트가 있는지 확인 부탁드립니다.</transl
     <message>
         <location filename="SandMan.cpp" line="2598"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation>Windows 빌드 %1이 현재 알려진 Sandboxie 버전의 지원 기능을 초과합니다. Sandboxie는 시스템 불안정을 유발할 수 있는 마지막으로 알려진 오프셋을 사용하려고 합니다.</translation>
+        <translation>Windows 빌드 %1은 Sandboxie 버전의 현재 알려진 지원 기능을 초과합니다. Sandboxie는 마지막으로 알려진 오프셋을 사용하려고 시도하는데, 이로 인해 시스템이 불안정해질 수 있습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3099"/>
@@ -5145,7 +5145,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> 가짜 관리자</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -9926,32 +9926,32 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5501"/>
         <source>Debug Options</source>
-        <translation type="unfinished"></translation>
+        <translation>디버그 옵션</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5578"/>
         <source>Config Dump</source>
-        <translation type="unfinished"></translation>
+        <translation>구성 덤프</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5609"/>
         <source>No Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>템플릿 없음</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5619"/>
         <source>No Global</source>
-        <translation type="unfinished"></translation>
+        <translation>전역 없음</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5629"/>
         <source>No Expand</source>
-        <translation type="unfinished"></translation>
+        <translation>확장 없음</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5639"/>
         <source>Refresh</source>
-        <translation type="unfinished">새로 고침</translation>
+        <translation>새로 고침</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5684"/>
@@ -10706,23 +10706,23 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1384"/>
         <source>UI Font</source>
-        <translation type="unfinished"></translation>
+        <translation>UI 글꼴</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1406"/>
         <source>Select Font</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 선택</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1416"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 재설정</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2416"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
         <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie만의 향상된 UAC 프롬프트 사용 (실험용)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2426"/>

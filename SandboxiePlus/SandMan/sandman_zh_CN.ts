@@ -1836,7 +1836,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="161"/>
         <source>Name|Type|Value</source>
-        <translation type="unfinished"></translation>
+        <translation>名称 | 类型 | 值</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="779"/>
@@ -1932,12 +1932,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1484"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>全局</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1485"/>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>模板</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1536"/>
@@ -9790,32 +9790,32 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5501"/>
         <source>Debug Options</source>
-        <translation type="unfinished"></translation>
+        <translation>调试选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5578"/>
         <source>Config Dump</source>
-        <translation type="unfinished"></translation>
+        <translation>配置转储</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5609"/>
         <source>No Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用模板</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5619"/>
         <source>No Global</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用全局</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5629"/>
         <source>No Expand</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用扩展</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5639"/>
         <source>Refresh</source>
-        <translation type="unfinished">刷新</translation>
+        <translation>刷新</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5684"/>
@@ -10272,17 +10272,17 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1384"/>
         <source>UI Font</source>
-        <translation type="unfinished"></translation>
+        <translation>UI 字体</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1406"/>
         <source>Select Font</source>
-        <translation type="unfinished"></translation>
+        <translation>字体选择</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1416"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation>重置字体</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1669"/>

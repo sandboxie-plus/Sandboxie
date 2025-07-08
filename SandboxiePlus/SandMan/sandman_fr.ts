@@ -2039,7 +2039,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="161"/>
         <source>Name|Type|Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom|Genre|Valeur</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="779"/>
@@ -2116,12 +2116,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1484"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1485"/>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1536"/>
@@ -2509,7 +2509,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun (ne pas lier à l&apos;adaptateur)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -2550,7 +2550,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsNetwork.cpp" line="1167"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
         <oldsource> entry: IP or Port cannot be empty</oldsource>
-        <translation type="unfinished">Saisie : l&apos;IP ou le port ne peut pas être vide</translation>
+        <translation>Saisie %1 : l&apos;IP ou le port ne peut pas être vide</translation>
     </message>
     <message>
         <source> entry: Address must be IP, not host name</source>
@@ -3333,12 +3333,12 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="SbiePlusAPI.cpp" line="877"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (portable)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="880"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (virtuel)</translation>
     </message>
     <message>
         <source>API Log</source>
@@ -3410,7 +3410,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Certains modèles de compatibilité sont manquants :&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Ils ont probablement été supprimés ; voulez-vous les supprimer de tous les bacs ?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2257"/>
@@ -5330,7 +5330,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> faux admin</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -6280,14 +6280,14 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2543"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer pour révéler</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2544"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer pour masquer</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="932"/>
@@ -6498,17 +6498,17 @@ Ceci est un certificat Patreon temporaire, valable 3 mois. Une fois celui-ci pre
         <location filename="Windows/SettingsWindow.cpp" line="2546"/>
         <location filename="Windows/SettingsWindow.cpp" line="2555"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifiant matériel : &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2551"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifiant matériel : &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copier)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2564"/>
         <source>Sandboxie-Plus Version: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Version de Sandboxie-Plus : %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2633"/>
@@ -6814,33 +6814,33 @@ Vous pouvez demander jusqu&apos;à %3 certificats d&apos;évaluation pour chaque
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2055"/>
         <source>Select Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir l&apos;ini du bac portable</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2055"/>
         <location filename="Windows/SettingsWindow.cpp" line="2065"/>
         <source>Ini Files (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers Ini (*.ini)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2065"/>
         <source>Save new Portable Box ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer le nouvel ini du bac portable</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2070"/>
         <source>File already exists, please select a different file name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce fichier existe déjà ; veuillez choisir un nom différent.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2076"/>
         <source>Invalid box name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de bac invalide</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2097"/>
         <source>Select Root Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le dossier racine</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2125"/>
@@ -9511,7 +9511,7 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="834"/>
         <source>Prevent sandboxed processes from interfering with power operations (Experimental)</source>
-        <translation>Empêcher les processus dans le bac d&apos;interférer avec des opérations d&apos;alimentation (Expérimental)</translation>
+        <translation>Empêcher les processus dans le bac d&apos;interférer avec des opérations d&apos;alimentation (expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="841"/>
@@ -9522,7 +9522,7 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="844"/>
         <source>Prevent interference with the user interface (Experimental)</source>
-        <translation>Empêcher les interférences avec l&apos;interface (Expérimental)</translation>
+        <translation>Empêcher les interférences avec l&apos;interface (expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="851"/>
@@ -9539,7 +9539,7 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="861"/>
         <source>Prevent sandboxed processes from capturing window images (Experimental, may cause UI glitches)</source>
-        <translation>Empêcher les processus dans un bac de capturer des images de la fenêtre (Expérimental, peut provoquer des bogues d&apos;interface)</translation>
+        <translation>Empêcher les processus dans un bac de capturer des images de la fenêtre (expérimental ; peut provoquer des bogues d&apos;interface)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="976"/>
@@ -10162,7 +10162,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3968"/>
         <source>Use in-process proxy relay threads instead of modifying the socket directly (resolves rare compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser des fils de relai de serveur mandataire en cours de processus, au lieu de modifier le socket directement (résout des problèmes de compatibilité rares)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4077"/>
@@ -10213,32 +10213,32 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5501"/>
         <source>Debug Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options de débogage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5578"/>
         <source>Config Dump</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliché de configuration</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5609"/>
         <source>No Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun modèle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5619"/>
         <source>No Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun global</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5629"/>
         <source>No Expand</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;expansion</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5639"/>
         <source>Refresh</source>
-        <translation type="unfinished">Actualiser</translation>
+        <translation>Actualiser</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5684"/>
@@ -10802,7 +10802,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options de l&apos;éditeur ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1448"/>
@@ -11093,68 +11093,68 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1384"/>
         <source>UI Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Police de l&apos;interface</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1406"/>
         <source>Select Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la police</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1416"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser la police</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2416"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
         <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser l&apos;invite améliorée de contrôle de compte d&apos;utilisateur propre à Sandboxie (expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2426"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2438"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer l&apos;entrée</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2446"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer le chemin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2468"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration de bac</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2481"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un bac portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2507"/>
         <source>Import Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer un bac portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2569"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;La protection de configuration s&apos;applique uniquement à « Sandboxie.ini ». La configuration de bac portable n&apos;est pas protégée par les méchanisnmes ci-dessous.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2579"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans la liste ci-dessous, vous pouvez ajouter des chemins vers les ini de configuration des bacs portables</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2599"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une racine portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2708"/>
@@ -11165,17 +11165,17 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2718"/>
         <source>Force Process Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer les options de processus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2746"/>
         <source>Force files with a Mark of The Web into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer les fichiers avec une marque du web dans un bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2766"/>
         <source>Sandbox for MoTW marked files</source>
-        <translation type="unfinished"></translation>
+        <translation>Bac à sable pour les fichiers avec une marque du web</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2785"/>
@@ -11483,7 +11483,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2283"/>
         <source>Default sandbox:</source>
-        <translation>Bac à sable par défaut :</translation>
+        <translation>Bac par défaut :</translation>
     </message>
     <message>
         <source>Compatibility</source>
@@ -11537,7 +11537,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1912"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Version de Sandboxie-Plus : 0.0.0</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2887"/>

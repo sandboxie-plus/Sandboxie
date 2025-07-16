@@ -416,11 +416,19 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 			pTree->setAlternatingRowColors(true);
 	}
 
-	m_pCodeEdit = new CCodeEdit(new CIniHighlighter(theGUI->m_DarkTheme));
+	// Initialize validation flag from config, fallback to checkbox if not set
+	bool defaultValidation = theConf->GetBool("Options/ValidateIniKeys", ui.chkValidateIniKeys->isChecked());
+	ui.chkValidateIniKeys->setChecked(defaultValidation);
+	m_IniValidationEnabled = defaultValidation;
+
+
+	// Create initial highlighter and editor
+	m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, nullptr, m_IniValidationEnabled);
+	m_pCodeEdit = new CCodeEdit(m_pIniHighlighter);
 	m_pCodeEdit->installEventFilter(this);
 	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
 	delete ui.txtIniSection;
-	ui.txtIniSection = NULL;
+	ui.txtIniSection = nullptr;
 	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
 
 	CreateDebug();
@@ -588,6 +596,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ApplyIniEditFont();
 
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
+	connect(ui.chkValidateIniKeys, SIGNAL(stateChanged(int)), this, SLOT(OnIniValidationToggled(int)));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
 	//connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
@@ -1282,6 +1291,31 @@ void COptionsWindow::SetIniEdit(bool bEnable)
 void COptionsWindow::OnEditIni()
 {
 	SetIniEdit(true);
+}
+
+void COptionsWindow::OnIniValidationToggled(int state)
+{
+	m_HoldChange = true;
+
+	m_IniValidationEnabled = (state == Qt::Checked);
+
+	// Save the new value to config
+	theConf->SetValue("Options/ValidateIniKeys", m_IniValidationEnabled);
+
+	// Remove previous highlighter
+	if (m_pIniHighlighter) {
+		delete m_pIniHighlighter;
+		m_pIniHighlighter = nullptr;
+	}
+
+	// Attach new highlighter to the code editor's document
+	QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+	if (pTextEdit) {
+		m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, pTextEdit->document(), m_IniValidationEnabled);
+		m_pIniHighlighter->rehighlight();
+	}
+
+	m_HoldChange = false;
 }
 
 void COptionsWindow::OnSaveIni()

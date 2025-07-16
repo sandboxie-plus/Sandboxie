@@ -48,7 +48,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>6</number>
+        <number>8</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -3105,7 +3105,24 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
          <string>Edit ini Section</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_16">
-         <item row="0" column="2">
+         <item row="1" column="0" colspan="5">
+          <widget class="QPlainTextEdit" name="txtIniSection">
+           <property name="lineWrapMode">
+            <enum>QPlainTextEdit::NoWrap</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QPushButton" name="btnCancelEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
           <widget class="QPushButton" name="btnSaveIni">
            <property name="enabled">
             <bool>false</bool>
@@ -3125,7 +3142,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item row="0" column="2">
           <spacer name="horizontalSpacer_7">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -3138,20 +3155,16 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
            </property>
           </spacer>
          </item>
-         <item row="0" column="3">
-          <widget class="QPushButton" name="btnCancelEdit">
-           <property name="enabled">
-            <bool>false</bool>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="chkValidateIniKeys">
+           <property name="toolTip">
+            <string>When checked, INI keys will be validated and highlighted according to the CSV. Uncheck to disable validation/highlighting.</string>
            </property>
            <property name="text">
-            <string>Cancel</string>
+            <string>Validate</string>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="4">
-          <widget class="QPlainTextEdit" name="txtIniSection">
-           <property name="lineWrapMode">
-            <enum>QPlainTextEdit::NoWrap</enum>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

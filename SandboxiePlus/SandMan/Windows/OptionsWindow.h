@@ -268,6 +268,7 @@ private slots:
 
 	void SetIniEdit(bool bEnable);
 	void OnEditIni();
+	void OnIniValidationToggled(int state);
 	void OnSaveIni();
 	void OnIniChanged();
 	void OnCancelEdit();
@@ -649,6 +650,9 @@ private:
 
 	void InitLangID();
 
-	class CCodeEdit* m_pCodeEdit;
+	class CCodeEdit* m_pCodeEdit = nullptr;
+
+	bool m_IniValidationEnabled = true;
+	class CIniHighlighter* m_pIniHighlighter = nullptr;
 };
 

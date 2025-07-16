@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "IniHighlighter.h"
+#include "../version.h"
 
-CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument *parent)
-    : QSyntaxHighlighter(parent)
+CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument* parent, bool enableValidation)
+	: QSyntaxHighlighter(parent), m_enableValidation(enableValidation)
 {
     // Define colors for light and dark mode
     QColor blue = bDarkMode ? QColor("#87CEFA") : QColor("#0000FF"); // Lighter blue for dark mode
@@ -50,6 +51,24 @@ CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument *parent)
     // Initialize formats for value prefix and first comma
     valuePrefixFormat.setForeground(blue);
     firstCommaFormat.setForeground(red);
+	
+	// Future key format
+	futureKeyFormat.setForeground(QColor("darkCyan"));
+	futureKeyFormat.setBackground(QColor("white"));
+
+	// Removed key format
+	removedKeyFormat.setForeground(QColor("white"));
+	removedKeyFormat.setBackground(QColor("black"));
+	removedKeyFormat.setFontStrikeOut(true);
+
+	// Renamed key format
+	renamedKeyFormat.setForeground(QColor("black"));
+	renamedKeyFormat.setBackground(QColor("yellow"));
+	renamedKeyFormat.setFontItalic(true);
+	
+	// Unknown key format
+	unknownKeyFormat.setUnderlineStyle(QTextCharFormat::SpellCheckUnderline);
+	unknownKeyFormat.setUnderlineColor(red);
 
 #ifdef INI_WITH_JSON
     // Initialize JSON formats
@@ -97,10 +116,65 @@ CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument *parent)
     jsonRule.format = jsonBracesFormat;
     jsonHighlightRules.append(jsonRule);
 #endif
+
+	// Automatically load settings from SbieSettings.csv in the same directory as SandMan.exe
+	QString settingsPath = QCoreApplication::applicationDirPath() + "/SbieSettings.csv";
+	loadSettingsCsv(settingsPath);
+
+	// Use version.h macros for default/current version
+	QString versionStr = QString("%1.%2.%3").arg(VERSION_MJR).arg(VERSION_MIN).arg(VERSION_REV);
+	setCurrentVersion(versionStr); // Set semantic version from macros
 }
 
 CIniHighlighter::~CIniHighlighter()
 {
+}
+
+void CIniHighlighter::setCurrentVersion(const QString& version)
+{
+	m_currentVersion = QVersionNumber::fromString(version);
+}
+
+// Load settings from SbieSettings.csv
+void CIniHighlighter::loadSettingsCsv(const QString& filePath)
+{
+	allowedSettings.clear();
+	QFile file(filePath);
+	if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+		QTextStream in(&file);
+		bool firstLine = true;
+		while (!in.atEnd()) {
+			QString line = in.readLine();
+			if (firstLine) { firstLine = false; continue; } // skip header
+			QStringList parts = line.split(';');
+			if (parts.size() >= 5) { // columns: Name, AddedVersion, RemovedVersion, ReaddedVersion, RenamedVersion
+				SettingInfo info;
+
+				// Only accept [a-zA-Z0-9_.] in name
+				info.name = parts[0].trimmed();
+				info.name.remove(QRegularExpression("[^a-zA-Z0-9_.]"));
+
+				// Only accept [0-9.] in version fields, default to "0.0.0" if empty
+				auto sanitizeVersion = [](const QString& s, bool defaultZero = false) {
+					QString v = s.trimmed();
+					v.remove(QRegularExpression("[^0-9.]"));
+					QRegularExpression rx("^[0-9]+\\.[0-9]+\\.[0-9]+$"); // Exact x.y.z format
+					if (rx.match(v).hasMatch())
+						return v;
+					return defaultZero ? QString("0.0.0") : QString();
+					};
+
+				info.addedVersion = sanitizeVersion(parts[1], true);  // default "0.0.0" if empty
+				info.removedVersion = sanitizeVersion(parts[2]);
+				info.readdedVersion = sanitizeVersion(parts[3]);
+				info.renamedVersion = sanitizeVersion(parts[4]);
+
+				allowedSettings.insert(info.name, info);
+			}
+		}
+		file.close();
+		qDebug() << "Loaded" << allowedSettings.size() << "settings from" << filePath;
+	}
 }
 
 void CIniHighlighter::highlightBlock(const QString &text)
@@ -131,7 +205,51 @@ void CIniHighlighter::highlightBlock(const QString &text)
         }
     }
 
-    // 3. Process the value part for value prefixes and first comma
+	// 3. Highlight keys based on allowedSettings and currentVersion
+	if (m_enableValidation) {
+		QRegularExpression keyRegex("^([^\\s=]+)\\s*=");
+		QRegularExpressionMatch keyMatch = keyRegex.match(text);
+		if (keyMatch.hasMatch()) {
+			QString keyName = keyMatch.captured(1);
+			int start = keyMatch.capturedStart(1);
+			int length = keyName.length();
+
+			if (!allowedSettings.isEmpty()) { // Only check if list is loaded
+				if (allowedSettings.contains(keyName)) {
+					const SettingInfo& info = allowedSettings[keyName];
+					QVersionNumber current = m_currentVersion;
+					QVersionNumber renamed = QVersionNumber::fromString(info.renamedVersion);
+					QVersionNumber readded = QVersionNumber::fromString(info.readdedVersion);
+					QVersionNumber removed = QVersionNumber::fromString(info.removedVersion);
+					QVersionNumber added = QVersionNumber::fromString(info.addedVersion);
+
+					if (!info.renamedVersion.isEmpty() && current >= renamed) {
+						setFormat(start, length, renamedKeyFormat);
+					}
+					else if (!info.readdedVersion.isEmpty() && current >= readded) {
+						setFormat(start, length, keyFormat);
+					}
+					else if (!info.removedVersion.isEmpty() && current >= removed) {
+						setFormat(start, length, removedKeyFormat);
+					}
+					else if (current >= added) {
+						setFormat(start, length, keyFormat);
+					}
+					else if (current < added) {
+						setFormat(start, length, futureKeyFormat);
+					}
+					else {
+						setFormat(start, length, unknownKeyFormat);
+					}
+				}
+				else {
+					setFormat(start, length, unknownKeyFormat); // underline unknown keys
+				}
+			}
+		}
+	}
+
+	// 4. Process the value part for value prefixes and first comma
     // Find the position of '=' to identify the start of the value
     int equalsIndex = text.indexOf('=');
     if (equalsIndex != -1) {

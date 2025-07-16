@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.16.x / 5.7x.x] - 2025-07-xx
+
+### Removed
+- removed obsolete Bullguard Internet Security template
+- removed obsolete Bsecure CloudCare template
+- removed obsolete CyberPatrol template
+
+
+
 ## [1.16.1 / 5.71.1] - 2025-07-06
 
 ### Changed

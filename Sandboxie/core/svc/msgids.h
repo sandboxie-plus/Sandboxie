@@ -101,6 +101,8 @@
 #define MSGID_SBIE_INI_GET_WAIT_HANDLE          0x18AB
 #define MSGID_SBIE_INI_RUN_SBIE_CTRL            0x180A
 #define MSGID_SBIE_INI_RC4_CRYPT                0x180F
+#define MSGID_SBIE_INI_SET_DAT                  0x18D1
+#define MSGID_SBIE_INI_GET_DAT                  0x18D2
 
 //#define MSGID_SBIE_MGR                          0x1900
 

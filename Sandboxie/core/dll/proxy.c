@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 David Xanatos, xanasoft.com
+ * Copyright 2022-2025 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -61,9 +61,18 @@
 #define INET_ADDRSTRLEN             16
 #define INET6_ADDRSTRLEN            46
 
+extern P_socket     __sys_socket;
+extern P_bind       __sys_bind;
+extern P_getsockname __sys_getsockname;
+extern P_WSAFDIsSet __sys_WSAFDIsSet;
+extern P_connect    __sys_connect;
 extern P_recv       __sys_recv;
 extern P_send       __sys_send;
 extern P_inet_ntop  __sys_inet_ntop;
+extern P_select     __sys_select;
+extern P_listen     __sys_listen;
+extern P_accept     __sys_accept;
+extern P_closesocket __sys_closesocket;
 #ifdef PROXY_RESOLVE_HOST_NAMES
 extern HASH_MAP     DNS_LookupMap;
 #endif
@@ -303,4 +312,218 @@ _FX char socks5_request(SOCKET s, const SOCKADDR* addr)
     if (ret != SOCKS_SUCCESS)
         socks5_report_error(ret, req);
     return ret;
+}
+
+//---------------------------------------------------------------------------
+// RELAY_CONFIG
+//---------------------------------------------------------------------------
+
+typedef struct {
+    SOCKET listen_sock;
+    union {
+        SOCKADDR        addr;
+        SOCKADDR_IN     addr4;
+        SOCKADDR_IN6_LH addr6;
+    };
+    union {
+        SOCKADDR        proxy;
+        SOCKADDR_IN     proxy4;
+        SOCKADDR_IN6_LH proxy6;
+    };
+    BOOLEAN auth;
+    WCHAR login[SOCKS_AUTH_MAX_SIZE];
+    WCHAR pass[SOCKS_AUTH_MAX_SIZE];
+} RELAY_CONFIG,* PRELAY_CONFIG;
+
+
+//---------------------------------------------------------------------------
+// run_relay_loop
+//---------------------------------------------------------------------------
+
+#define BUF_SIZE     4096
+
+VOID run_relay_loop(SOCKET a, SOCKET b)
+{
+    char buffer[BUF_SIZE];
+    fd_set readSet;
+    while (1) {
+        FD_ZERO(&readSet);
+        FD_SET(a, &readSet);
+        FD_SET(b, &readSet);
+        SOCKET maxfd = (a > b ? a : b) + 1;
+        int ready = __sys_select((int)maxfd, &readSet, NULL, NULL, NULL);
+        if (ready <= 0) break;
+        if (FD_ISSET(a, &readSet)) {
+            int bytes = __sys_recv(a, buffer, BUF_SIZE, 0);
+            if (bytes <= 0) break;
+            int sent = 0;
+            while (sent < bytes) {
+                int n = __sys_send(b, buffer + sent, bytes - sent, 0);
+                if (n <= 0) return;
+                sent += n;
+            }
+        }
+        if (FD_ISSET(b, &readSet)) {
+            int bytes = __sys_recv(b, buffer, BUF_SIZE, 0);
+            if (bytes <= 0) break;
+            int sent = 0;
+            while (sent < bytes) {
+                int n = __sys_send(a, buffer + sent, bytes - sent, 0);
+                if (n <= 0) return;
+                sent += n;
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------
+// connect_to_proxy
+//---------------------------------------------------------------------------
+
+BOOLEAN connect_to_proxy(PRELAY_CONFIG relay_config, SOCKET* proxy)
+{
+    *proxy = __sys_socket(relay_config->proxy.sa_family, SOCK_STREAM, IPPROTO_TCP);
+    if (*proxy != INVALID_SOCKET) 
+    {
+        int proxylen = relay_config->proxy.sa_family == AF_INET ? sizeof(SOCKADDR_IN) : sizeof(SOCKADDR_IN6_LH);
+        if (__sys_connect(*proxy, &relay_config->proxy, proxylen) == SOCKS_SUCCESS)
+        {
+            if (socks5_handshake(*proxy, relay_config->auth, relay_config->login, relay_config->pass)
+             && socks5_request(*proxy, &relay_config->addr) == SOCKS_SUCCESS)
+                return TRUE;
+        }
+
+        __sys_closesocket(*proxy);
+    }
+    return FALSE;
+}
+
+//---------------------------------------------------------------------------
+// proxy_handle_relay
+//---------------------------------------------------------------------------
+
+DWORD WINAPI proxy_handle_relay(LPVOID param)
+{
+    PRELAY_CONFIG relay_config = (RELAY_CONFIG*)param;
+
+    SOCKET client = INVALID_SOCKET;
+    SOCKET proxy = INVALID_SOCKET;
+
+    fd_set fds;
+    FD_ZERO(&fds);
+    FD_SET(relay_config->listen_sock, &fds);
+
+    struct timeval tv;
+    tv.tv_sec = 5;       // 5 second timeout
+    tv.tv_usec = 0;
+
+    int ret = __sys_select((int)relay_config->listen_sock + 1, &fds, NULL, NULL, &tv);
+    if (ret > 0) { // handle clien        
+        client = __sys_accept(relay_config->listen_sock, NULL, NULL);
+    }
+    /*else if (ret == 0) { // timeout occurred
+    
+    }
+    else { // error
+
+    }*/
+    __sys_closesocket(relay_config->listen_sock);
+
+    if (client != INVALID_SOCKET)
+    {
+        if (connect_to_proxy(relay_config, &proxy)) 
+        {
+            Dll_Free(relay_config);
+            relay_config = NULL;
+            
+            run_relay_loop(client, proxy);
+
+            __sys_closesocket(proxy);
+        }
+
+        __sys_closesocket(client);
+    }
+    
+    if(relay_config)
+        Dll_Free(relay_config);
+    return 0;
+}
+
+//---------------------------------------------------------------------------
+// start_socks5_relay
+//---------------------------------------------------------------------------
+
+USHORT start_socks5_relay(const SOCKADDR* addr, const SOCKADDR* proxy, BOOLEAN auth, WCHAR login[SOCKS_AUTH_MAX_SIZE], WCHAR pass[SOCKS_AUTH_MAX_SIZE])
+{
+    PRELAY_CONFIG relay_config = Dll_Alloc(sizeof(RELAY_CONFIG));
+    if (!relay_config)
+        return 0; // fail
+    relay_config->listen_sock = INVALID_SOCKET;
+
+    if (addr->sa_family == AF_INET)
+    {
+        memcpy(&relay_config->addr4, addr, sizeof(SOCKADDR_IN));
+        memcpy(&relay_config->proxy4, proxy, sizeof(SOCKADDR_IN));
+    }
+    else if (addr->sa_family == AF_INET6)
+    {
+        memcpy(&relay_config->addr6, addr, sizeof(SOCKADDR_IN6_LH));
+        memcpy(&relay_config->proxy6, proxy, sizeof(SOCKADDR_IN6_LH));
+    }
+    else
+        goto fail;
+
+    relay_config->auth = auth;
+    if (auth) {
+        wcscpy_s(relay_config->login, SOCKS_AUTH_MAX_SIZE, login);
+        wcscpy_s(relay_config->pass, SOCKS_AUTH_MAX_SIZE, pass);
+    }
+
+    relay_config->listen_sock = __sys_socket(addr->sa_family, SOCK_STREAM, IPPROTO_TCP);
+    if (relay_config->listen_sock == INVALID_SOCKET)
+        goto fail;
+
+    //DWORD off = 0; // enable IPv4 on IPV6
+    //setsockopt(relay_config->listen_sock, /*IPPROTO_IPV6*/ 41, /*IPV6_V6ONLY*/ 27, (char*)&off, sizeof(off));
+
+    if (addr->sa_family == AF_INET)
+    {
+        struct sockaddr_in addr4 = { 0 };
+        addr4.sin_family = AF_INET;
+        addr4.sin_addr.s_addr = _ntohl(0x7F000001); // 127.0.0.1
+        addr4.sin_port = 0;
+        if (__sys_bind(relay_config->listen_sock, (struct sockaddr*)&addr4, sizeof(addr4)) != 0)
+            goto fail;
+    }
+    else if (addr->sa_family == AF_INET6)
+    {
+        struct sockaddr_in6 addr6 = { 0 };
+        addr6.sin6_family = AF_INET6;
+        addr6.sin6_addr = (struct in6_addr){{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}}; // ::1
+        addr6.sin6_port = 0;
+        if (__sys_bind(relay_config->listen_sock, (struct sockaddr*)&addr6, sizeof(addr6)) != 0)
+            goto fail;
+    }
+
+    if (__sys_listen(relay_config->listen_sock, 1) != 0) // backlog = 1 we only look for one connection
+        goto fail;
+
+    struct sockaddr_in6 bound_addr;
+    int addr_len = sizeof(bound_addr);
+    if (__sys_getsockname(relay_config->listen_sock, (struct sockaddr*)&bound_addr, &addr_len) != 0)
+        goto fail;
+
+    CreateThread(NULL, 0, proxy_handle_relay, relay_config, 0, NULL);
+
+    return bound_addr.sin6_port;
+
+fail:
+
+    if(relay_config->listen_sock != INVALID_SOCKET)
+        __sys_closesocket(relay_config->listen_sock);
+
+    if(relay_config)
+        Dll_Free(relay_config);
+
+    return 0;
 }

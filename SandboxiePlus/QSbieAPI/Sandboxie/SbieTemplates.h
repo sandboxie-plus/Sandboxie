@@ -35,7 +35,7 @@ public:
 
 	QString ExpandPath(QString path);
 
-	static bool CheckRegistryKey(const QString& Value);
+	bool CheckRegistryKey(const QString& Value);
 	bool CheckFile(const QString& Value);
 	bool CheckClasses(const QString& Value);
     bool CheckServices(const QString& Value);

@@ -225,12 +225,19 @@ void CPopUpWindow::AddLogMessage(quint32 MsgCode, const QStringList& MsgData, qu
 
 void CPopUpWindow::ReloadHiddenMessages()
 {
+	QStringList HiddenMessages;
 	m_HiddenMessages.clear();
 
-	if (theAPI->GetUserSettings() == NULL)
+	// Read configuration from Global settings
+	if (theAPI->GetGlobalSettings() != NULL)
+		HiddenMessages += theAPI->GetGlobalSettings()->GetTextList("SbieCtrl_HideMessage", true);
+	// User's settings override Global settings
+	if (theAPI->GetUserSettings() != NULL)
+		HiddenMessages += theAPI->GetUserSettings()->GetTextList("SbieCtrl_HideMessage", true);
+	// If no settings get out
+	if (HiddenMessages.size() == 0)
 		return;
 
-	QStringList HiddenMessages = theAPI->GetUserSettings()->GetTextList("SbieCtrl_HideMessage", true);
 	foreach(const QString& HiddenMessage, HiddenMessages)
 	{
 		if (HiddenMessage == "*") {

@@ -24,6 +24,7 @@ HEADERS += ./stdafx.h \
     ./Helpers/ReadDirectoryChanges.h \
     ./Helpers/ReadDirectoryChangesPrivate.h \
     ./Helpers/TabOrder.h \
+    ./Helpers/IniHighlighter.h \
     ./Windows/RecoveryWindow.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
@@ -74,6 +75,7 @@ SOURCES += ./main.cpp \
     ./Helpers/StorageInfo.cpp \
     ./Helpers/ReadDirectoryChanges.cpp \
     ./Helpers/ReadDirectoryChangesPrivate.cpp \
+    ./Helpers/IniHighlighter.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Helpers/TabOrder.cpp \
     ./Windows/OptionsWindow.cpp \
@@ -112,7 +114,8 @@ FORMS += ./Forms/SelectBoxWindow.ui \
     ./Forms/ExtractDialog.ui \
     ./Forms/TestProxyDialog.ui
 
-TRANSLATIONS += sandman_de.ts \
+TRANSLATIONS += sandman_ar.ts \
+    sandman_de.ts \
     sandman_en.ts \
     sandman_es.ts \
     sandman_fr.ts \
@@ -129,6 +132,7 @@ TRANSLATIONS += sandman_de.ts \
     sandman_tr.ts \
     sandman_uk.ts \
     sandman_vi.ts \
+    sandman_id.ts \
     sandman_zh_CN.ts \
     sandman_zh_TW.ts
 

@@ -1,11 +1,10 @@
 #pragma once
 #include "TreeViewEx.h"
 
+#include "Common.h"
+
 #include "../mischelpers_global.h"
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-bool MISCHELPERS_EXPORT operator < (const QVariant& l, const QVariant& r);
-#endif
 
 class MISCHELPERS_EXPORT CTreeItemModel : public QAbstractItemModelEx
 {
@@ -104,7 +103,7 @@ protected:
 	void			Sync(QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QModelIndex>* pNewBranches = NULL);
 	void			Purge(STreeNode* pParent, const QModelIndex &parent, QHash<QVariant, STreeNode*>& Old);
 	void			Fill(STreeNode* pParent, /*const QModelIndex &parent,*/ const QList<QVariant>& Paths, int PathsIndex, const QList<STreeNode*>& New, QList<QModelIndex>* pNewBranches);
-	QModelIndex		Find(STreeNode* pParent, STreeNode* pNode);
+	QModelIndex		Find(STreeNode* pParent, STreeNode* pNode) const;
 	//int				CountItems(STreeNode* pRoot);
 
 	virtual QVariant GetDefaultIcon() const { return QVariant(); }

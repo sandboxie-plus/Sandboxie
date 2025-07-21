@@ -52,6 +52,7 @@ struct _BOX {
 
     WCHAR *sid;
     ULONG sid_len;                      // in bytes, including NULL
+    BOOLEAN fake_admin;
 
     // 3.  Terminal Services session number
 

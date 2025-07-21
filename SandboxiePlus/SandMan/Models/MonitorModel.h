@@ -71,8 +71,8 @@ public:
 	{
 		eType = 0,
 		eStatus,
-		eValue,
 		eCounter,
+		eValue,
 		eCount
 	};
 

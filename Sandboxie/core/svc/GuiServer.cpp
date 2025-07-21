@@ -1057,6 +1057,14 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 					ok = TRUE;
 				// UnrestrictedToken END
 
+                //
+                // On windows 10 then a process running in a job with JobObjectBasicUIRestrictions set 
+                // tries to call CreateDesktop this will BSOD the system someware in the win32k subsystem.
+                // This behaviour can be easily reproduced outside of sandboxie as well.
+                // 
+                if(SbieApi_QueryConfBool(boxname, L"OpenWndStation", FALSE))
+                    ok = TRUE;
+
                 if (! ok) {
 
                     //
@@ -1090,30 +1098,31 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
                     // hence we no longer prevent breaking away from our job,
                     // instead we re assign the job on each initialization, like it was done for the initial one
                     //
-
-                    if (ok) {
-
-                        JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobELInfo = {0};
-                        jobELInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_BREAKAWAY_OK
-                                                                   | JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK;
-                        SIZE_T TotalMemoryLimit = (SIZE_T)SbieApi_QueryConfNumber64(boxname, L"TotalMemoryLimit", 0);
-                        ULONG ProcessNumberLimit = SbieApi_QueryConfNumber(boxname, L"ProcessNumberLimit", 0);
-                        SIZE_T ProcessMemoryLimit = (SIZE_T)SbieApi_QueryConfNumber64(boxname, L"ProcessMemoryLimit", 0);
-						if (TotalMemoryLimit != 0) {
-							jobELInfo.JobMemoryLimit = TotalMemoryLimit;
-							jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_JOB_MEMORY;
-						}
-						if (ProcessNumberLimit != 0) {
-							jobELInfo.BasicLimitInformation.ActiveProcessLimit = ProcessNumberLimit;
-							jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_ACTIVE_PROCESS;
-						}
-						if (ProcessMemoryLimit != 0) {
-							jobELInfo.ProcessMemoryLimit = ProcessMemoryLimit;
-							jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_PROCESS_MEMORY;
-						}
-						ok = SetInformationJobObject(hJobObject, JobObjectExtendedLimitInformation, &jobELInfo, sizeof(jobELInfo));
-                    }
                 }
+
+                if (ok) {
+
+                    JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobELInfo = {0};
+                    jobELInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_BREAKAWAY_OK
+                                                                | JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK;
+                    SIZE_T TotalMemoryLimit = (SIZE_T)SbieApi_QueryConfNumber64(boxname, L"TotalMemoryLimit", 0);
+                    ULONG ProcessNumberLimit = SbieApi_QueryConfNumber(boxname, L"ProcessNumberLimit", 0);
+                    SIZE_T ProcessMemoryLimit = (SIZE_T)SbieApi_QueryConfNumber64(boxname, L"ProcessMemoryLimit", 0);
+					if (TotalMemoryLimit != 0) {
+						jobELInfo.JobMemoryLimit = TotalMemoryLimit;
+						jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_JOB_MEMORY;
+					}
+					if (ProcessNumberLimit != 0) {
+						jobELInfo.BasicLimitInformation.ActiveProcessLimit = ProcessNumberLimit;
+						jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_ACTIVE_PROCESS;
+					}
+					if (ProcessMemoryLimit != 0) {
+						jobELInfo.ProcessMemoryLimit = ProcessMemoryLimit;
+						jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_PROCESS_MEMORY;
+					}
+					ok = SetInformationJobObject(hJobObject, JobObjectExtendedLimitInformation, &jobELInfo, sizeof(jobELInfo));
+                }
+
                 if (! ok) {
                     // this should not happen
                     ReportError2336(-1, 0x97, GetLastError());

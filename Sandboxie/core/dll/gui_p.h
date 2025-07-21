@@ -25,6 +25,7 @@
 
 
 #include <windows.h>
+#include <mmsystem.h>
 #include "common/win32_ntddk.h"
 #include "dll.h"
 
@@ -106,6 +107,13 @@ typedef UINT_PTR (*P_SetTimer)(
      UINT uElapse,
 	 TIMERPROC lpTimerFunc
 );
+
+
+typedef DWORD (*P_timeGetTime)();
+
+typedef MMRESULT (*P_timeSetEvent)(
+    UINT uDelay, UINT uResolution, LPTIMECALLBACK lpTimeProc,
+    DWORD_PTR dwUser, UINT fuEvent);
 
 typedef BOOL (*P_GetCursorPos)(LPPOINT lpPoint);
 
@@ -626,6 +634,8 @@ GUI_SYS_VAR_2(PostThreadMessage)
 GUI_SYS_VAR_2(DispatchMessage)
 
 GUI_SYS_VAR(SetTimer)
+GUI_SYS_VAR(timeGetTime)
+GUI_SYS_VAR(timeSetEvent)
 
 GUI_SYS_VAR(MapWindowPoints)
 GUI_SYS_VAR(ClientToScreen)

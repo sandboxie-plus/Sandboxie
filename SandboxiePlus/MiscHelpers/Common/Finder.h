@@ -10,15 +10,19 @@ public:
 	CFinder(QObject* pFilterTarget, QWidget *parent = NULL, int iOptions = eRegExp | eCaseSens | eHighLight);
 	~CFinder();
 
+	QAbstractButton*	GetToggleButton();
+
 	void				SetTree(QTreeView* pTree);
 	void				SetModel(QAbstractItemModel* pModel) { m_pModel = pModel; }
+
+	void				SetAlwaysRaw() {m_bAlwaysRaw = true;}
 
 	static void			SetDarkMode(bool bDarkMode) { m_DarkMode = bDarkMode; }
 	static bool			GetDarkMode()				{ return m_DarkMode; }
 
 	static QWidget*		AddFinder(QTreeView* pTree, QObject* pFilterTarget, int iOptions = eRegExp | eCaseSens | eHighLight, CFinder** ppFinder = NULL);
 
-	QRegularExpression	GetSearchExp() const		{ return m_RegExp; }
+	const QRegularExpression& GetSearchExp() const	{ return m_RegExp; }
 
 	enum EOptions
 	{
@@ -26,6 +30,7 @@ public:
 		eCaseSens	= 0x02,
 		eHighLight	= 0x04,
 		eHighLightDefault = eHighLight | 0x08,
+		eDefault    = eRegExp | eCaseSens | eHighLight,
 	};
 
 	static QString m_CaseInsensitive;
@@ -34,14 +39,21 @@ public:
 	static QString m_CloseStr;
 	static QString m_FindStr;
 	static QString m_AllColumns;
+	static QString m_Placeholder;
+	static QString m_ButtonTip;
+
+	static QIcon m_CaseInsensitiveIcon;
+	static QIcon m_RegExpStrIcon;
+	static QIcon m_HighlightIcon;
 
 signals:
-	void				SetFilter(const QString& Exp, int iOptions = 0, int Column = -1);
+	void				SetFilter(const QRegularExpression& RegExp, int iOptions = 0, int Column = -1);
 	void				SelectNext();
 
 public slots:
 	void				Open();
 	void				Close();
+	void				OnToggle(bool checked);
 
 private slots:
 	void				OnUpdate();
@@ -69,17 +81,20 @@ private:
 	QHBoxLayout*		m_pSearchLayout;
 
 	QLineEdit*			m_pSearch;
-	QCheckBox*			m_pCaseSensitive;
-	QCheckBox*			m_pRegExp;
+	QAbstractButton*	m_pCaseSensitive;
+	QAbstractButton*	m_pRegExp;
 	QComboBox*			m_pColumn;
-	QCheckBox*			m_pHighLight;
+	QAbstractButton*	m_pHighLight;
 
 	QRegularExpression	m_RegExp;
+	bool				m_bAlwaysRaw;
 
 	QTreeView*			m_pTree;
 	QAbstractItemModel*	m_pModel;
 
 	QTimer*				m_pTimer;
+
+	QToolButton*		m_pBtnSearch;
 
 	static bool			m_DarkMode;
 };

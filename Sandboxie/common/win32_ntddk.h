@@ -826,6 +826,15 @@ NtQueryInformationFile(
     IN FILE_INFORMATION_CLASS       FileInformationClass
 );
 
+/*__declspec(dllimport) NTSTATUS __stdcall
+NtQueryInformationByName(
+    _In_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _Out_ PIO_STATUS_BLOCK IoStatusBlock,
+    _Out_writes_bytes_(Length) PVOID FileInformation,
+    _In_ ULONG Length,
+    _In_ FILE_INFORMATION_CLASS FileInformationClass
+);*/
+
 __declspec(dllimport) NTSTATUS __stdcall
 NtQueryAttributesFile(
     IN POBJECT_ATTRIBUTES           ObjectAttributes,
@@ -2164,6 +2173,38 @@ __declspec(dllimport) NTSTATUS __stdcall NtOpenEvent(
     OUT PHANDLE EventHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes);
+
+__declspec(dllimport) NTSTATUS __stdcall NtCreateEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+__declspec(dllimport) NTSTATUS __stdcall NtCreateKeyedEvent(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG Flags);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenKeyedEvent(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+__declspec(dllimport) NTSTATUS __stdcall NtCreateTimer(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN TIMER_TYPE TimerType);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenTimer(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
 
 __declspec(dllimport) NTSTATUS __stdcall NtCreateMutant(
     OUT PHANDLE MutantHandle,

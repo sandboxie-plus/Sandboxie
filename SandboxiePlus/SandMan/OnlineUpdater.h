@@ -89,6 +89,8 @@ public:
 	SB_PROGRESS			DownloadFile(const QString& Url, QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 	SB_PROGRESS			GetSupportCert(const QString& Serial, QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 
+	static bool			IsLockRequired();
+
 	static SB_RESULT(int) RunUpdater(const QStringList& Params, bool bSilent, bool Wait = false);
 
 	void				Process();
@@ -98,11 +100,21 @@ public:
 
 	void				CheckForUpdates(bool bManual = false);
 
-	bool				DownloadUpdate(const QVariantMap& Update, bool bAndApply = false);
-	bool				ApplyUpdate(bool bSilent);
+	enum EUpdateScope
+	{
+		eNone = 0,	// No files updated
+		eTmpl,		// Only Templates.ini
+		eMeta,		// Only Templates.ini and/or translations changed
+		eCore,		// Core sandboxie Components Changed
+		eFull		// Plus components changed
+	};
+	bool				DownloadUpdate(const QVariantMap& Update, EUpdateScope Scope, bool bAndApply = false);
+	bool				ApplyUpdate(EUpdateScope Scope, bool bSilent);
 
 	bool				DownloadInstaller(const QVariantMap& Release, bool bAndRun = false);
 	bool				RunInstaller(bool bSilent);
+
+	void				UpdateTemplates();
 
 	static QString		MakeVersionStr(const QVariantMap& Data);
 	static QString		ParseVersionStr(const QString& Str, int* pUpdate = NULL);
@@ -117,12 +129,15 @@ public:
 
 	static quint64		GetRandID();
 
+	static QDateTime	GetLastUpdateDate();
+
 private slots:
 	void				OnRequestFinished();
 
 	void				OnInstallerDownload(const QString& Path, const QVariantMap& Params);
 
 	void				OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);
+	void				OnUpdateDataTmpl(const QVariantMap& Data, const QVariantMap& Params);
 
 	void				OnPrepareOutput();
 	void				OnPrepareError();
@@ -141,13 +156,6 @@ protected:
 	QString				GetOnNewReleaseOption() const;
 	bool				ShowCertWarningIfNeeded();
 
-	enum EUpdateScope
-	{
-		eNone = 0,	// No files updated
-		eMeta,		// Only Templates.ini and/or translations changed
-		eCore,		// Core sandboxie Components Changed
-		eFull		// Plus components changed
-	};
 	EUpdateScope		ScanUpdateFiles(const QVariantMap& Update);
 	EUpdateScope		GetFileScope(const QString& Path);
 

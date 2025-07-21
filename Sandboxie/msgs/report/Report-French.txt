@@ -14,12 +14,56 @@ SBIE1206 Your Windows build (%2) is not yet supported by sandboxie, error: %3
 SBIE1207 Your Windows build (%2) is not yet supported by Sandboxie, which means applications will run without security isolation!
 .
 
+1321;pop;inf;01
+SBIE1321 Program '%2' was forced into sandbox %3
+.
+
+1413;evt;pop;wrn;01
+SBIE1413 The box include folder %3 file cannot be opened, error %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 The following message indicates an error %2 in a box include %3
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Portable box name mismatch (ini name must match box section) in a box include %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Portable box name is already in use by another box, include %3
+.
+
+2328;pop;err;01
+SBIE2328 Failed to resolve chrome sandbox hook %2
+.
+
+2329;pop;err;01
+SBIE2329 Failed to find FFS sequence %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspecified error when hooking %2
+.
+
 2360;pop;err;01
 SBIE2360 Failed to inject SOCKS5 proxy:  %2
 .
 
 3001;txt;01
 &OK
+.
+
+3115;txt;01
+Yes
+.
+
+3116;txt;01
+No
+.
+
+3117;txt;01
+Cancel
 .
 
 3198;txt;01
@@ -29,5 +73,24 @@ You received this message because you set AlertBeforeStart=y.
 
 3199;txt;01
 This startup request does not appear to be invoked by the SANDBOXIE component. Are you sure you want to run it? If this is your action, you can ignore it and choose yes.
+.
+
+3244;txt;01
+Application %2 is requesting Administrator privileges in sandbox:
+.
+
+3245;txt;01
+You can allow this request (YES), in which case a UAC prompt may 
+appear depending on your system settings. You can deny Administrator 
+privileges but make the application believe it has them (NO), or you can 
+abort the startup (CANCEL). 
+.
+
+3246;txt;01
+Note:  The program will continue to run under the supervision of Sandboxie even if Administrator 
+privileges are granted. However, granting real Administrator rights may increase the risk of the 
+application exploiting an unpatched Windows vulnerability or a vulnerable driver to escape the 
+sandbox. Therefore, it is generally safer to grant only fake Administrator rights, 
+although this may cause some installers to fail.
 .
 

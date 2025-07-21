@@ -51,7 +51,17 @@
 #define PAGE_SIZE 4096
 #endif
 
-#define BOXNAME_COUNT				(32 + 2)
+#define BOXNAME_COUNT				(38 + 2)
+
+#define CONF_LINE_LEN               2000
+#define CONF_MAX_LINES              100000
+
+#define CONF_UPDATE_VALUE		    1
+#define CONF_APPEND_VALUE		    2
+//#define CONF_INSERT_VALUE		    3
+#define CONF_REMOVE_VALUE		    4
+#define CONF_REMOVE_SECTION		    5
+#define CONF_UPDATE_TEMPLATES		6
 
 #define DYNAMIC_PORT_NAME_CHARS     96  // number of wchars in an Epmapper dynamic endpoint port name
 #define DYNAMIC_PORT_ID_CHARS       81

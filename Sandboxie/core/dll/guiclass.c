@@ -151,25 +151,6 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
 
         Gui_OpenAllWinClasses = TRUE;
         Gui_RenameClasses = FALSE;
-
-    } else {
-
-        len = 0;
-
-        while (1) {
-
-            WCHAR buf[10];
-            LONG rc = SbieApi_QueryConfAsIs(
-                NULL, L"OpenWinClass", len, buf, 8 * sizeof(WCHAR));
-            ++len;
-            if (rc == 0) {
-                if ((buf[0] == L'*' || buf[0] == L'#') && buf[1] == L'\0') {
-                    Gui_RenameClasses = FALSE;
-                    break;
-                }
-            } else if (rc != STATUS_BUFFER_TOO_SMALL)
-                break;
-        }
     }
 
     //
@@ -192,6 +173,10 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
             pat = List_Next(pat);
         }
     }
+
+    //WCHAR text[128];
+    //Sbie_snwprintf(text, ARRAYSIZE(text), L"Gui_OpenAllWinClasses: %d; Gui_RenameClasses: %d", Gui_OpenAllWinClasses, Gui_RenameClasses);
+    //SbieApi_MonitorPutMsg(MONITOR_DEBUG, text);
 
     Gui_UseProtectScreen = SbieApi_QueryConfBool(NULL, L"CoverBoxedWindows", FALSE);
 
@@ -1037,7 +1022,7 @@ _FX BOOLEAN Gui_IsOpenClass(const WCHAR *ClassName)
 
         if (! Gui_MatchPath_Initialized) {
 
-            mp_flags = SbieDll_MatchPath(L'w', (const WCHAR *)-1);
+            SbieDll_MatchPath(L'w', (const WCHAR *)-1);
 
             Gui_MatchPath_Initialized = TRUE;
         }
@@ -1079,6 +1064,16 @@ _FX BOOLEAN Gui_IsWindowAccessible(HWND hWnd)
 {
     BOOLEAN allow = FALSE;
     ULONG_PTR idProcess;
+
+    //
+    // allow if target special pseudo handle
+    //
+
+    if (hWnd == HWND_MESSAGE || hWnd == HWND_DESKTOP 
+     || hWnd == HWND_BOTTOM || hWnd == HWND_NOTOPMOST || hWnd == HWND_TOPMOST) {
+
+        return TRUE;
+    }
 
     //
     // allow if target window is part of a process in the same sandbox

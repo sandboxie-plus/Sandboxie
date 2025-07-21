@@ -189,6 +189,38 @@ typedef NTSTATUS (*P_NtCreateKeyTransacted)(
     IN  PVOID Transaction,
     OUT PULONG Disposition OPTIONAL);
 
+typedef NTSTATUS (*P_NtCreateEventPair)(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+typedef NTSTATUS (*P_NtOpenEventPair)(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+typedef NTSTATUS (*P_NtCreateKeyedEvent)(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG Flags);
+
+typedef NTSTATUS (*P_NtOpenKeyedEvent)(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+  
+typedef NTSTATUS (*P_NtCreateTimer)(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN TIMER_TYPE TimerType);
+
+typedef NTSTATUS (*P_NtOpenTimer)(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
 typedef NTSTATUS (*P_NtCreateMutant)(
     OUT PHANDLE MutantHandle,
     IN  ACCESS_MASK DesiredAccess,
@@ -789,6 +821,13 @@ typedef NTSTATUS (*P_NtQueryInformationFile)(
     OUT PVOID FileInformation,
     IN  ULONG Length,
     IN  FILE_INFORMATION_CLASS FileInformationClass);
+
+typedef NTSTATUS (*P_NtQueryInformationByName)(
+    _In_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _Out_ PIO_STATUS_BLOCK IoStatusBlock,
+    _Out_writes_bytes_(Length) PVOID FileInformation,
+    _In_ ULONG Length,
+    _In_ FILE_INFORMATION_CLASS FileInformationClass);
 
 typedef NTSTATUS (*P_NtQueryInformationJobObject)(
     IN  HANDLE JobHandle,

@@ -20,6 +20,143 @@
 // Various generic hooking helpers
 //---------------------------------------------------------------------------
 
+
+/******************************************************
+* WARNING: This code must be position independent !!! *
+*          It is used by the LowLevel.dll shell code! *
+*******************************************************/
+
+
+#ifdef _WIN64
+#define SET_LAST_ERROR(val) __writegsdword(0x68, (val))
+#else
+#define SET_LAST_ERROR(val) __readfsdword(0x34, (val))
+#endif
+
+//---------------------------------------------------------------------------
+// FindDllExport2
+//---------------------------------------------------------------------------
+
+
+static UCHAR *FindDllExport2(
+    void *DllBase, IMAGE_DATA_DIRECTORY *dir0, const UCHAR *ProcName, ULONG* pErr)
+{
+    void *proc = NULL;
+    ULONG i, j, n;
+
+    if (dir0->VirtualAddress && dir0->Size) {
+
+        IMAGE_EXPORT_DIRECTORY *exports = (IMAGE_EXPORT_DIRECTORY *)
+            ((UCHAR *)DllBase + dir0->VirtualAddress);
+
+        ULONG *names = (ULONG *)
+            ((UCHAR *)DllBase + exports->AddressOfNames);
+
+        for (n = 0; ProcName[n]; ++n)
+            ;
+
+        for (i = 0; i < exports->NumberOfNames; ++i) {
+
+            UCHAR *name = (UCHAR *)DllBase + names[i];
+            for (j = 0; j < n; ++j) {
+                if (name[j] != ProcName[j])
+                    break;
+            }
+            if (j == n) {
+
+                USHORT *ordinals = (USHORT *)
+                    ((UCHAR *)DllBase + exports->AddressOfNameOrdinals);
+                if (ordinals[i] < exports->NumberOfFunctions) {
+
+                    ULONG *functions = (ULONG *)
+                        ((UCHAR *)DllBase + exports->AddressOfFunctions);
+
+                    proc = (UCHAR *)DllBase + functions[ordinals[i]];
+                    break;
+                }
+            }
+        }
+
+        if (proc && (ULONG_PTR)proc >= (ULONG_PTR)exports
+                 && (ULONG_PTR)proc <  (ULONG_PTR)exports + dir0->Size) {
+
+            //
+            // if the export points inside the export table, then it is a
+            // forwarder entry.  we don't handle these, because none of the
+            // exports we need is a forwarder entry.  if this changes, we
+            // might have to scan LDR tables to find the target dll
+            //
+
+            if (pErr) *pErr = 0xc;
+            proc = NULL;
+        }
+    }
+
+    return proc;
+}
+
+
+//---------------------------------------------------------------------------
+// FindDllExport
+//---------------------------------------------------------------------------
+
+
+_FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName, ULONG* pErr)
+{
+    IMAGE_DOS_HEADER *dos_hdr;
+    IMAGE_NT_HEADERS *nt_hdrs;
+    UCHAR* func_ptr = NULL;
+
+    //
+    // find the DllMain entrypoint for the dll
+    //
+
+    dos_hdr = (void *)DllBase;
+    if (dos_hdr->e_magic != 'MZ' && dos_hdr->e_magic != 'ZM') {
+        if (pErr) *pErr = 0xa;
+        return NULL;
+    }
+    nt_hdrs = (IMAGE_NT_HEADERS *)((UCHAR *)dos_hdr + dos_hdr->e_lfanew);
+    if (nt_hdrs->Signature != IMAGE_NT_SIGNATURE) {     // 'PE\0\0'
+        if (pErr) *pErr = 0xb;
+        return NULL;
+    }
+
+    if (nt_hdrs->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC) {
+
+        IMAGE_NT_HEADERS32 *nt_hdrs_32 = (IMAGE_NT_HEADERS32 *)nt_hdrs;
+        IMAGE_OPTIONAL_HEADER32 *opt_hdr_32 =
+            &nt_hdrs_32->OptionalHeader;
+
+        if (opt_hdr_32->NumberOfRvaAndSizes) {
+
+            IMAGE_DATA_DIRECTORY *dir0 = &opt_hdr_32->DataDirectory[0];
+            func_ptr = FindDllExport2(DllBase, dir0, ProcName, pErr);
+        }
+    }
+
+#ifdef _WIN64
+
+    else if (nt_hdrs->OptionalHeader.Magic ==
+                                         IMAGE_NT_OPTIONAL_HDR64_MAGIC) {
+
+        IMAGE_NT_HEADERS64 *nt_hdrs_64 = (IMAGE_NT_HEADERS64 *)nt_hdrs;
+        IMAGE_OPTIONAL_HEADER64 *opt_hdr_64 =
+            &nt_hdrs_64->OptionalHeader;
+
+        if (opt_hdr_64->NumberOfRvaAndSizes) {
+
+            IMAGE_DATA_DIRECTORY *dir0 = &opt_hdr_64->DataDirectory[0];
+            func_ptr = FindDllExport2(DllBase, dir0, ProcName, pErr);
+        }
+    }
+
+#endif _WIN64
+
+    return func_ptr;
+}
+
+
 #if defined(_M_ARM64) || defined(_M_ARM64EC)
 #include "common/arm64_asm.h"
 
@@ -308,7 +445,9 @@ _FX ULONG Hook_GetSysCallFunc(ULONG* aCode, void** pHandleStubHijack)
 
 
 #ifdef _M_ARM64
+
 #define MAX_FUNC_OPS (0x80/4)
+
 ULONGLONG* findChromeTarget(unsigned char* addr)
 {
     int i, j;
@@ -334,8 +473,11 @@ ULONGLONG* findChromeTarget(unsigned char* addr)
     }
     return ChromeTarget;
 }
+
 #elif _WIN64
+
 #define MAX_FUNC_SIZE 0x76
+
 ULONGLONG * findChromeTarget(unsigned char* addr)
 {
     int i = 0;
@@ -397,33 +539,76 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
 
     return ChromeTarget;
 }
+
+ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals)
+{
+    if (!addr) 
+        return NULL;
+
+    ULONGLONG * ChromeTarget = NULL;
+
+    //
+    // Look for one fo the following opcodes
+    // mov rcx,[target 4 byte offset] 
+    // mov rax,[target 4 byte offset]
+    // mov rdi,[target 4 byte offset]
+    // mov r15,[target 4 byte offset]
+    // and check if they target it within the exported g_originals variable
+    // 
+    // This may change in a future version of firefox
+    //
+
+    for (int i = 0; i < MAX_FUNC_SIZE; i++) {
+
+        if ((*(USHORT *)&addr[i] == 0x8b48) || (*(USHORT *)&addr[i] == 0x8b4c)) {
+
+            if ((addr[i + 2] == 0x0d) || (addr[i + 2] == 0x05) || (addr[i + 2] == 0x3d)) {
+
+                ULONG_PTR target = (ULONG_PTR)(addr + i + 7);
+                LONG delta = *(LONG *)&addr[i + 3];
+                target += delta;
+
+                // must point into g_originals which has INTERCEPTOR_MAX_ID entries (as of FF 138 it 53)
+                if (target >= (ULONG_PTR)g_originals && target <= (ULONG_PTR)(g_originals + sizeof(ULONG_PTR) * 60)) {
+
+                    ChromeTarget = *(ULONGLONG**)target;
+                    break;
+                }
+            }
+        }
+    }
+
+    return ChromeTarget;
+}
 #endif
 
-_FX void* Hook_CheckChromeHook(void *SourceFunc)
+_FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
 {
     if (!SourceFunc)
         return NULL;
 #ifdef _M_ARM64
     ULONG *func = (ULONG *)SourceFunc;
-    ULONGLONG *chrome64Target = NULL;
 
     if (func[0] == 0x58000050       // ldr         xip0,ZwCreateFile+8h (07FF99A6FF8C8h)  
      && func[1] == 0xD61F0200) {    // ldr         br          xip0
 
         ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
-        chrome64Target = findChromeTarget((unsigned char *)longlongs);
-    }
-    if (chrome64Target) {
-        SourceFunc = chrome64Target;
+        ULONGLONG *chrome64Target = findChromeTarget((unsigned char *)longlongs);
+
+        if (!chrome64Target)
+            return (void*)-1; // failure
+        return chrome64Target;
     }
 #elif _WIN64
     UCHAR *func = (UCHAR *)SourceFunc;
+    ULONGLONG *longlongs = NULL;
     ULONGLONG *chrome64Target = NULL;
 
     if (func[0] == 0x50 &&	//push rax
         func[1] == 0x48 &&	//mov rax,?
-        func[2] == 0xb8) {
-        ULONGLONG *longlongs = *(ULONGLONG **)&func[3];
+        func[2] == 0xb8) 
+    {
+        longlongs = *(ULONGLONG **)&func[3];
         chrome64Target = findChromeTarget((unsigned char *)longlongs);
     }
     // Chrome 49+ 64bit hook
@@ -431,13 +616,37 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc)
     // jmp rax 
     else if (func[0] == 0x48 && //mov rax,<target>
         func[1] == 0xb8 &&
-        *(USHORT *)&func[10] == 0xe0ff) /* jmp rax */ {
-        ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
+        *(USHORT *)&func[10] == 0xe0ff) //jmp rax
+    {
+        longlongs = *(ULONGLONG **)&func[2];
+
+        ULONG uError = 0;
+        // Note: A normal string like L"text" would not result in position independent code !!!
+        // hence we create a string array and fill it byte by byte
+        wchar_t s_originals[] = { 'g', '_', 'o', 'r', 'i', 'g', 'i', 'n', 'a', 'l', 's', 0};
+        UCHAR* g_originals = FindDllExport(ProcBase, s_originals, &uError);
+#ifdef _DEBUG
+        if (!g_originals) {
+            SET_LAST_ERROR(uError);
+            __debugbreak();
+        }
+#endif
+        if (g_originals)
+            chrome64Target = findFirefoxTarget((unsigned char*)longlongs, g_originals);
+        else
+            chrome64Target = findChromeTarget((unsigned char *)longlongs);
+    }
+    // firefox sometimes
+    /*else if (func[0] == 0x49 && //mov r11,<target>
+        func[1] == 0xBB &&
+        func[10] == 0x41 && //jmp r11
+        func[11] == 0xFF &&
+        func[12] == 0xE3) 
+    {
+        longlongs = *(ULONGLONG **)&func[2];
         chrome64Target = findChromeTarget((unsigned char *)longlongs);
-    }
-    if (chrome64Target) {
-        SourceFunc = chrome64Target;
-    }
+    }*/
+    
     /*sboxie 64bit jtable hook signature */
         /* // use this to hook jtable location (useful for debugging)
         //else if(func[0] == 0x51 && func[1] == 0x48 && func[2] == 0xb8 ) {
@@ -447,8 +656,16 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc)
             SourceFunc = (void *) addr;
         }
         */
+
+    if (longlongs) {
+        if (!chrome64Target)
+            return (void*)-1; // failure
+        return chrome64Target;
+    }
 #else
     UCHAR *func = (UCHAR *)SourceFunc;
+    ULONGLONG* chromeTarge = NULL;
+
     if (func[0] == 0xB8 &&                  // mov eax,?
         func[5] == 0xBA &&                  // mov edx,?
         *(USHORT *)&func[10] == 0xE2FF)     // jmp edx
@@ -462,11 +679,15 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc)
                 longs[2] == 0x08245489 && longs[3] == 0x0C2444C7 &&
                 longs[5] == 0x042444C7)
             {
-                SourceFunc = (void *)longs[4];
+                chromeTarge = (void *)longs[4];
                 break;
             }
         }
+
+        if (!chromeTarge)
+            return (void*)-1; // failure
+        return chromeTarge;
     }
 #endif ! _WIN64
-    return SourceFunc;
+    return NULL;
 }

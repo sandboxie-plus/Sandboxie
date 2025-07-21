@@ -24,6 +24,7 @@ public:
 	CBoxedProcessPtr GetProcess(const QModelIndex &index) const;
 	QString			GetGroup(const QModelIndex &index) const;
 	QVariant		GetID(const QModelIndex &index) const;
+	QModelIndex		FindGroupIndex(const QString& Name) const;
 
 	enum ETypes
 	{

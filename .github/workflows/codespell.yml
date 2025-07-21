@@ -114,6 +114,7 @@ jobs:
           echo 'lettet->letter' >> dictionary.txt
           echo 'readly->readily' >> dictionary.txt
           echo 'wes->we' >> dictionary.txt
+          echo 'fluch->flush' >> dictionary.txt
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt
@@ -124,7 +125,8 @@ jobs:
           echo "sandboxies->Sandboxie's, sandboxed, " >> dictionary_code.txt
           echo 'reparese->reparse' >> dictionary_code.txt
           echo 'tailing->trailing' >> dictionary_code.txt
+          echo 'hoocked->hooked' >> dictionary_code.txt
           # Only lowercase letters are allowed in --ignore-words-list
           codespell --dictionary=dictionary.txt --dictionary=dictionary_rare.txt --dictionary=dictionary_code.txt \
-          --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient,lite,uis,emai,ws,slanguage,woh,tne,typpos,enew,shft,seh,ser,servent,socio-economic,rime,falt,infor,vor,lets,od,fo,aas,shs," \
+          --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient,lite,uis,emai,ws,slanguage,woh,tne,typpos,enew,shft,seh,ser,servent,socio-economic,rime,falt,infor,vor,lets,od,fo,aas,shs,focusin," \
           --skip="./.git,./.github/workflows/codespell.yml,./dictionary*.txt,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss,./Installer/isl/*.isl,./SandboxiePlus/SandMan/Troubleshooting/lang_*.json,./Sandboxie/install/build.bat,./SandboxieTools/ImBox/dc/crypto_fast/xts_fast.c"

@@ -128,13 +128,11 @@ QV4::ReturnedValue evalCall(const QV4::FunctionObject* b, const QV4::Value* v, c
         return argv[0].asReturnedValue();
 
     QMutexLocker locker(&g_engineMutex);
-    QJSValue ret = g_engineMap.value(v4)->evaluateScript(scode->toQStringNoThrow(), "eval code");
+    auto pEngine = g_engineMap.value(v4);
+    locker.unlock();
+    QJSValue ret = pEngine->evaluateScript(scode->toQStringNoThrow(), "eval code");
     if (ret.isError()) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-		v4->throwError(ret.toString());
-#else
-        v4->throwError(QJSValuePrivate::asReturnedValue(&ret));
-#endif
+        v4->throwError(ret.toString());
         return QV4::Encode::undefined();
     } else {
         QV4::ScopedValue rv(scope, scope.engine->fromVariant(ret.toVariant()));

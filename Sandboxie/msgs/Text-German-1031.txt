@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Initialization errors issued to the System evt Log
+# Initialization errors issued to the System Event Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01
@@ -27,10 +27,6 @@ SBIE1105 Unbekannte Betriebssystem-Version: %2
 1106;evt;err;01
 SBIE1106 Fehler %2, Detail %3
 .
-
-# 1107;evt;err;01
-# SBIE1107 Kein Zugriff auf das Konto "LocalSystem" %2
-# .
 
 1108;evt;err;01
 SBIE1108 Prozedur %2 konnte nicht analysiert werden
@@ -94,6 +90,14 @@ SBIE1152 Trampolin-Zuweisung fehlgeschlagen %2
 SBIE1153 Sandboxie-Initialisierung fehlgeschlagen. Beenden Sie alle Programme und installieren Sie Sandboxie neu ODER starten Sie den Rechner neu.
 .
 
+1205;evt;pop;err;01
+SBIE1205 Ungültige dynamische Daten (DynData) in der Registry gefunden, Fehler: %2
+.
+
+1206;evt;pop;err;01
+SBIE1206 Ihre Windowsversion (%2) wird noch nicht durch Sandboxie unterstützt, Fehler: %3
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -112,14 +116,6 @@ SBIE1203 Kann Pfad-Liste nicht erstellen (Fehler bei %2)
 SBIE1204 Sandbox-Erstellung fehlgeschlagen für %3 %2
 .
 
-1205;evt;pop;err;01
-SBIE1205 Ungültige dynamische Daten (DynData) in der Registry gefunden, Fehler: %2
-.
-
-1206;evt;pop;err;01
-SBIE1206 Ihre Windowsversion (%2) wird noch nicht durch Sandboxie unterstützt, Fehler: %3
-.
-
 1207;pop;err;01
 SBIE1207 Ihre Windowsversion (%2) wird noch nicht durch Sandboxie unterstützt, was bedeutet, dass Applikationen ohne Sicherheitsisolation laufen werden!
 .
@@ -135,14 +131,6 @@ SBIE1212 Verzeichnis kann nicht erstellt werden '%3' %2
 1213;pop;err;01
 SBIE1212 Object-Verzeichnis kann nicht erstellt werden '%3' %2
 .
-
-# 1217;pop;err;01
-# SBIE1217 Kann den übergeordneten Prozess (Parent) nicht finden
-# .
-
-# 1221;pop;err;01
-# SBIE1221 Job kann nicht erstellt werden:  %2
-# .
 
 1222;pop;err;02
 SBIE1222 Fehler mit Sicherheitstoken:  %2
@@ -169,10 +157,6 @@ SBIE1242 Monitor Pufferüberlauf
 1301;pop;inf;01
 SBIE1301 Der Prozess '%2' wurde außerhalb der Sandbox gestartet
 .
-
-# 1302;pop;inf;01
-# SBIE1302 Sandbox '%2' wurde nicht definiert oder aktiviert
-# .
 
 1305;pop;inf;02
 SBIE1305 Blockiert, dass sandgeboxtes Abbild geladen wurde - %2
@@ -226,6 +210,10 @@ SBIE1319 Druckerwarteschlangendruck zu Datei, %2 %3 verhindert
 SBIE1320 Um zu erlauben, dass die Druckerwarteschlange für diesen Prozess außerhalb der Sandbox schreiben darf, doppelklicken Sie bitte auf diese Nachricht
 .
 
+1321;pop;inf;01
+SBIE1321 Programm '%2' wurde in die Sandbox %3 gezwungen
+.
+
 1399;pop;inf;01
 %0
 .
@@ -260,10 +248,6 @@ SBIE1405 Fehler in der Konfigurationsdatei in Zeile %2: Syntaxfehler
 SBIE1406 Falsche oder ungültige Erweiterung für %3: %2
 .
 
-# 1407;evt;pop;err;01
-# SBIE1407 Ungültiger Wert für Einstellung %2, nutze Standardwert
-# .
-
 1408;pop;err;01
 SBIE1408 Unbekannter Benutzer für SID: %2
 .
@@ -284,6 +268,22 @@ SBIE1411 Sandbox %2 verweist auf eine unbekannte Vorlage (Template) %3
 SBIE1412 Im Text: %2
 .
 
+1413;evt;pop;wrn;01
+SBIE1413 Die Datei zum Einbinden einer Box %3 kann nicht geöffnet werden, Fehler %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 Die folgende Meldung weist auf einen Fehler %2 beim Einbinden einer Box %3 hin
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Nicht übereinstimmender Name einer portablen Box (ini-Dateiname muss mit der ini-Sektion der Box übereinstimmen), beim Einbinden %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Name einer portablen Box wird bereits von einer anderen Box verwendet, beim Einbinden %3
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -291,7 +291,7 @@ SBIE1412 Im Text: %2
 #----------------------------------------------------------------------------
 
 2101;pop;inf;01
-SBIE2101 %2
+SBIE2101 Objektname nicht gefunden: %3, Fehler %2
 .
 
 2102;pop;inf;01
@@ -306,29 +306,9 @@ SBIE2103 Laden des Systemtreibers '%2' verweigert
 SBIE2104 Versuch des Beendens dieser Windows-Sitzung verweigert - %2
 .
 
-# 2105;pop;inf;01
-# SBIE2105 Dienst erfolgreich in der Sandbox gestartet: %2
-# .
-
-# 2106;pop;inf;01
-# SBIE2106 Bitte aktivieren Sie die "Ausführen als Administrator UAC" in Sandboxie Control, File menu
-# .
-
-# 2107;pop;inf;01
-# SBIE2107 Vorbereitung des WinSxS Assemblers '%2'
-# .
-
 2108;pop;inf;01
 SBIE2108 Täusche erfolgreiche Ausführung vor für Programm '%2'
 .
-
-# 2109;pop;inf;01
-# SBIE2109 OK klicken, wenn das Programm oder die Installation beendet wurde.
-# .
-
-# 2110;pop;inf;01
-# SBIE2110 Aufbereitung der WinSxS Abhängigkeiten für '%2'
-# .
 
 2111;pop;inf;01
 SBIE2111 Prozess ist nicht zugänglich: %3, Aufruf %2
@@ -358,6 +338,7 @@ SBIE2180 LowLevel.dll Fehler %2
 SBIE2181 Die LowLevel.dll Umleitung konnte SbieDll.dll nicht in den Zielprozess laden.
 .
 
+# %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2 sollte nicht aktualisiert werden, wenn es mit Sandboxie ausgeführt wird.
 .
@@ -371,7 +352,7 @@ SBIE2193 Die Sandbox nach dem erfolgreichen Aktualisierungsprozess unbedingt lö
 .
 
 2194;pop;inf;01
-SBIE2194 MSI-Installer benötigt die Aktivierung der %2 option in der ini-Datei, was jedoch die Sicherheit schwächen kann.
+SBIE2194 Der MSI-Installer erfordert, um korrekt arbeiten zu können, dass die Option %2 in der ini-Datei gesetzt wird. Diese Option schwächt jedoch die Isolation.
 .
 
 2195;pop;inf;01
@@ -399,10 +380,6 @@ SBIE2196 Um den MSI Installer sandgeboxt auszuführen, darf der Zugriff auf die 
 2201;pop;wrn;01
 SBIE2201 %2
 .
-
-# 2202;pop;wrn;01
-# SBIE2202 Liste der installierten Hardware-Geräte nicht gefunden
-# .
 
 2203;pop;wrn;01
 SBIE2203 Fehler bei der Kommunikation mit dem Sandboxie-Dienst: %2
@@ -452,14 +429,6 @@ SBIE2213 Windows Credentials können nicht in der Sandbox gespeichert werden
 SBIE2214 Startanforderung für Service '%2' wurde wegen der eingeschränkten Rechte verweigert
 .
 
-# 2215;pop;wrn;01
-# SBIE2215 Aufbereitung der WinSxS Abhängigkeiten fehlgeschlagen: %2
-# .
-
-# 2216;pop;wrn;01
-# SBIE2216 Fehler beim Aufbereiten des WinSxS Assembly: %2
-# .
-
 2217;pop;wrn;02
 SBIE2217 Als Administrator ausführen wurde wegen der eingeschränkten Rechte verweigert.
 .
@@ -503,6 +472,8 @@ SBIE2226 Prozess konnte wegen fehlenden erhöhten Rechten nicht starten; zur Beh
 2227;pop;wrn;01
 SBIE2227 '%2' befindet sich auf einem Datenträger, welcher nicht das 8.3 Namensschema unterstützt. Dies kann zu Problemen mit älteren Anwendungen und Installationsprogrammen führen.
 .
+
+#----------------------------------------------------------------------------
 
 2230;pop;wrn;01
 SBIE2230 Fehler beim Einhängen der Quelle für %2
@@ -642,14 +613,6 @@ SBIE2317 Kann die Pfadliste '%2' nicht initialisieren
 SBIE2318 DLL Initialisierung fehlgeschlagen für '%2'
 .
 
-# 2319;pop;err;01
-# SBIE2319 WinSxS Activation Context für den Prozess %2 in der Sandbox fehlgeschlagen
-# .
-
-# 2320;pop;err;01
-# SBIE2320 Konnte den Windows Explorer als Desktop-Prozess nicht deaktivieren: %2
-# .
-
 2321;pop;err;01
 SBIE2321 Kann die Laufwerkszuordnung nicht vornehmen: %2
 .
@@ -674,6 +637,18 @@ SBIE2326 Kann die Registrierung nicht bereitstellen: %2
 SBIE2327 Fehler beim COM Server: %2
 .
 
+2328;pop;err;01
+SBIE2328 Fehler beim Auflösen des Chrome-Sandbox-Hooks %2
+.
+
+2329;pop;err;01
+SBIE2329 Fehler beim Auffinden der FFS-Sequenz %2
+.
+
+2330;pop;err;01
+SBIE2330 Unspezifizierter Fehler beim Hooking in %2
+.
+
 2331;pop;err;01
 SBIE2331 Start des Dienstes fehlgeschlagen: %2
 .
@@ -682,12 +657,12 @@ SBIE2331 Start des Dienstes fehlgeschlagen: %2
 SBIE2332 Kann auf die Datei SbiePst.dat nicht zugreifen
 .
 
-# 2333;pop;err;01
-# SBIE2333 Inkompatible Software DLL gefunden: %2
-# .
-
 2335;pop;err;01
 SBIE2335 Initialisierung für Prozess %2 fehlgeschlagen
+.
+
+2360;pop;err;01
+SBIE2360 Fehler beim Injizieren des SOCKS5-Proxy:  %2
 .
 
 2336;pop;err;01
@@ -700,10 +675,6 @@ SBIE2337 Konnte Programm nicht starten:  %2
 
 2338;pop;err;01
 SBIE2338 Nicht unterstützte Architektur in Prozess %2 vorgefunden
-.
-
-2360;pop;err;01
-SBIE2360 Fehler beim Injizieren des SOCKS5-Proxy:  %2
 .
 
 #----------------------------------------------------------------------------
@@ -729,18 +700,6 @@ SBIE9156 Treiberinitialisierung nicht beendet
 9234;evt;err;01
 SBIE9234 Dienststartfehler %2
 .
-
-# 9302;evt;err;01
-# SBIE9302 Erstellung des Bereichs gescheitert (device setup classes)
-# .
-
-# 9304;evt;err;01
-# SBIE9304 Erstellung des Bereichs gescheitert (device id list)
-# .
-
-# 9305;evt;err;01
-# SBIE9305 Alle noch in der Sandbox laufenden Programme beenden
-# .
 
 #----------------------------------------------------------------------------
 # Common Texts
@@ -814,8 +773,21 @@ Desktop
 (Ordner öffnen)
 .
 
+# should match the localized folder name for Programs in the Start Menu folder
 3114;txt;01
 Programme
+.
+
+3115;txt;01
+Ja
+.
+
+3116;txt;01
+Nein
+.
+
+3117;txt;01
+Abbrechen
 .
 
 3198;txt;01
@@ -848,14 +820,6 @@ Das Programm konnte nicht gestartet werden:
 3206;txt;01
 Systemfehler:
 .
-
-# 3207;txt;01
-# Ausführbare Datei des Internet Explorer nicht gefunden
-# .
-
-# 3208;txt;01
-# Ausführbare Datei des Standard-Webbrowsers nicht gefunden
-# .
 
 3209;txt;01
 Ausführbare Datei des Standard-Email-Programms nicht gefunden
@@ -909,7 +873,7 @@ Vor dem Löschen der Inhalte bitte alle laufenden Prozesse in dieser Sandbox bee
 .
 
 3222;txt;01
-Löschen-Befehl fehlgeschlagen:  %0
+Löschen-Befehl fehlgeschlagen: %2
 .
 
 3241;txt;01
@@ -923,8 +887,31 @@ Fenster zur Benutzerkontensteuerung aktivieren
 .
 
 3243;txt;01
-Hinweis: Das Programm wird weiter mit Sandboxie ausgeführt,
-auch nachdem Sie Administratorrechte dafür erlaubt haben.
+Hinweis: Das Programm wird weiterhin unter der Aufsicht von Sandboxie ausgeführt, auch wenn
+Administratorrechte gewährt werden. Die Gewährung echter Administratorrechte kann jedoch
+das Risiko erhöhen, dass das Programm eine ungepatchte Windows-Schwachstelle oder einen
+anfälligen Treiber ausnutzt, um aus der Sandbox zu entkommen.
+.
+
+3244;txt;01
+Programm %2 fordert Administratorrechte an, in der Sandbox:
+.
+
+3245;txt;01
+Sie können diese Anfrage zulassen (JA). In diesem Fall kann, je nach
+Systemeinstellungen, eine UAC Abfrage erscheinen. Sie können
+Administratorrechte verweigern, aber das Programm glauben lassen,
+dass es sie hat (NEIN). Oder Sie können den Start abbrechen
+(ABBRECHEN).
+.
+
+3246;txt;01
+Hinweis: Das Programm wird weiterhin unter der Aufsicht von Sandboxie ausgeführt, auch wenn
+Administratorrechte gewährt werden. Die Gewährung echter Administratorrechte kann jedoch
+das Risiko erhöhen, dass das Programm eine ungepatchte Windows-Schwachstelle oder einen
+anfälligen Treiber ausnutzt, um aus der Sandbox zu entkommen. Daher ist es im Allgemeinen
+sicherer, nur Fake-Administratorrechte zu gewähren, obwohl dies bei manchen Installern zu
+Fehlern führen kann.
 .
 
 3251;txt;01
@@ -990,10 +977,6 @@ Programmabbruch.
 Diese Meldung nicht mehr anzeigen
 .
 
-# 3307;txt;01
-# Programmnamen eingeben
-# .
-
 # translate text but keep hash signs (#)
 3308;txt;01
 Programme#*.EXE#Alle Dateien#*.*##
@@ -1034,20 +1017,6 @@ Bereite das Löschen vor: %2
 3318;txt;01
 Lösche: %2
 .
-
-# 3321;txt;01
-# - Anmeldesitzung in der Sandbox
-# .
-
-# 3322;txt;01
-# Ihre Anmeldesitzung wurde unter der Kontrolle von Sandboxie gestartet.
-# Durch das Löschen der Sandbox-Inhalte gehen alle Änderungen der Sitzung verloren.
-# 
-# Benutzerkonto: %2
-# Sandbox: %3
-# 
-# Möchten Sie wirklich die Inhalte der Sandbox löschen und sich von Windows abmelden?
-# .
 
 3351;txt;01
 &Entfernen
@@ -1185,22 +1154,6 @@ Software-Kompatibilität
 &Konfiguration sperren
 .
 
-3504;txt;01
-&Unterstütze Sandboxie
-.
-
-3505;txt;01
-Zu Sandboxie beitragen
-.
-
-3506;txt;01
-Unterstützerzertifikat holen
-.
-
-3507;txt;01
-Unterstützerzertifikat verwenden
-.
-
 3446;txt;01
 Konfiguration b&earbeiten
 .
@@ -1215,6 +1168,22 @@ Alle Tipp&s anzeigen
 
 3449;txt;01
 &Alle Tipps verbergen
+.
+
+3504;txt;01
+&Unterstütze Sandboxie
+.
+
+3505;txt;01
+Zu Sandboxie beitragen
+.
+
+3506;txt;01
+Unterstützerzertifikat holen
+.
+
+3507;txt;01
+Unterstützerzertifikat verwenden
 .
 
 3451;txt;01
@@ -1340,10 +1309,6 @@ Fenster schließen
 3487;txt;01
 &Fehler anzeigen
 .
-
-# 3488;txt;01
-# San&dbox löschen und abmelden
-# .
 
 3491;txt;01
 Wiederherstellen im gleichen &Ordner
@@ -1492,7 +1457,7 @@ Diese Programme oder Dokumente werden unter der Kontrolle von Sandboxie gestarte
 
 Es wird jedoch empfohlen, Veränderungen des Inhalts der Sandbox über eine Instanz
 des Windows Explorer vorzunehmen, welche mit Sandboxie ausgeführt wird.
-Also über ‘Sandbox’ -> 'In der Sandbox starten' -> 'Windows Explorer starten'.
+Also über 'Sandbox' -> 'In der Sandbox starten' -> 'Windows Explorer starten'.
 .
 
 3535;txt;01
@@ -1530,33 +1495,12 @@ mit "Konfiguration sperren" den Passwortschutz deaktivieren.
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control Dialogs: About/Welcome
+# Sandboxie Control Dialogs: About
 #----------------------------------------------------------------------------
 
 3601;txt;01
 Über Sandboxie
 .
-
-# 3604;txt;01
-# Willkommen bei Sandboxie
-# .
-
-# 3605;txt;01
-# Sandboxie führt Ihre Anwendungen in einem isolierten Bereich, Sandbox genannt, aus.
-# 
-# Anwendungen in der Sandbox können Ihren Computer nicht verändern oder schädigen.
-# 
-# Sie können die Sandbox auch zum Installieren und Testen neuer Anwendungen verwenden.
-# .
-
-# 3606;txt;01
-# Falls Sie Sandboxie das erste Mal benutzen,
-# sollten Sie die Einsteigeranleitung durchlesen.
-# .
-
-# 3607;txt;01
-# &Einleitung zu Sandboxie öffnen
-# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control Dialogs: Update
@@ -2108,10 +2052,6 @@ Sind Sie sicher, dass Sie %2 als erzwungenes Programm starten möchten?
 Sind Sie sicher, dass Sie %2 als erzwungenen Ordner wählen möchten?
 .
 
-# 3774;txt;02
-# Sind Sie sicher, dass Sie %2 als erzwungenen Benutzer wählen möchten?
-# .
-
 3775;txt;02
 Sie haben Änderungen gemacht, die möglicherweise nicht einfach rückgängig gemacht werden können.
 .
@@ -2322,7 +2262,7 @@ Neuen Gruppennamen eingeben
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control:  Sandbox Settings:  Forced Folders/Programs
+# Sandboxie Control:  Sandbox Settings:  Forced Folders/Programs/Users
 #----------------------------------------------------------------------------
 
 3861;txt;02
@@ -2356,22 +2296,6 @@ Erzwungene Programme
 3873;txt;01
 Falls eines der unten aufgelisteten Programme außerhalb der Sandbox aufgerufen wird, so wird dieses automatisch in einer Sandbox gestartet.
 .
-
-# 3962;txt;01
-# Erzwungene Benutzer
-# .
-
-# 3963;txt;01
-# Wenn bei folgenden Benutzerkonten eine Anmeldung erfolgt, wird die gesamte Anmeldesitzung unter der Kontrolle von Sandboxie ausgeführt.
-# .
-
-# 3964;txt;01
-# Um eine Sandbox zu löschen, die einem Erzwungenen Benutzerkonto zugeordnet ist, melden Sie sich bei diesem Konto an und löschen mit der Sandboxie Control die Sandbox.
-# .
-
-# 3965;txt;01
-# Erzwungene Benutzer haben Priorität vor Erzwungene Programme und Erzwungene Ordner.
-# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Linger/Leader Programs
@@ -2512,6 +2436,10 @@ Die Beschränkungen für den Start/Ausführen Zugang können Sie unter Beschrän
 .
 
 #----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Low Level Access / Hardware Access
+#----------------------------------------------------------------------------
+
+#----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Drop Rights
 #----------------------------------------------------------------------------
 
@@ -2538,6 +2466,14 @@ OK klicken zum Deaktivieren der eingeschränkten Rechte für die Sandbox '%2', u
 
 Sie können die Einstellung 'Rechte einschränken' jederzeit über die Sandboxeinstellungen unter 'Beschränkungen' ändern.
 .
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Print Spooler
+#----------------------------------------------------------------------------
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Network Files
+#----------------------------------------------------------------------------
 
 3955;txt;01
 Netzwerkdateien
@@ -2940,16 +2876,6 @@ Blockiere bekannte Telemetrieprozesse
 Filtere Zugriff auf \Devices\
 .
 
-4341;txt;01
-Erlaube direkten Zugriff zu %2 Notizen
-.
-
-4342;txt;01
-Aktiviere %2 Fix für Windows
-.
-
-
-
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3181,6 +3107,14 @@ Direkten Zugriff auf %2 Einstellungen erlauben
 Erlaube direkten Zugriff auf %2 Sitzungsverwaltung
 .
 
+4341;txt;01
+Erlaube direkten Zugriff zu %2 Notizen
+.
+
+4342;txt;01
+Aktiviere %2 Fix für Windows
+.
+
 4356;txt;02
 Direkten Zugriff auf %2 Bookmarks erlauben
 .
@@ -3240,10 +3174,6 @@ Benutzerkonten und Benutzergruppen zur Liste unten hinzufügen. Nur diese haben 
 5103;txt;01
 Hinweis: Einstellungen für Erzwungene Programme und Erzwungene Ordner gelten nicht für Benutzerkonten, die keinen Zugriff auf die Sandbox haben.
 .
-
-# 5105;txt;01
-# Ben&utzer hinzufügen
-# .
 
 5107;txt;01
 Ihr Benutzerkonto kann nun diese Sandbox nicht mehr verwenden
@@ -3314,6 +3244,8 @@ Die Sandboxen in Gruppen anordnen und die Reihenfolge ihrer Auflistung anpassen.
 .
 
 #----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
 
 6001;txt;01
 Das klassische Sandboxie UI (SbieCtrl.exe) hat stark eingeschränkte Ressourcenzugriffsüberwachung- und Ereignisverfolgungsmöglichkeiten.
@@ -3343,7 +3275,7 @@ Die Konfiguration %3 von Box %2 erfordert ein Unterstützerzertifikat. Prozesse 
 .
 
 6005;txt;01
-Notiz: Ohne administrative Privilegien werden Installer in der Sandbox nicht starten können. Sandboxie-Plus bietet eine Option um viele dieser Installer erfolgreich auszuführen, ohne diese Privilegien. Sie können diese Option auch in der klassischen Variante manuell aktivieren, durch hinzufügen von "FakeAdminRights=y" in der ini-Sektion für diese Box.
+Hinweis: Ohne administrative Privilegien werden Installer in der Sandbox nicht starten können. Sandboxie-Plus bietet eine Option um viele dieser Installer erfolgreich auszuführen, ohne diese Privilegien. Sie können diese Option auch in der klassischen Variante manuell aktivieren, durch hinzufügen von "FakeAdminRights=y" in der ini-Sektion für diese Box.
 .
 
 6006;txt;01
@@ -3474,6 +3406,10 @@ Vielen Dank, dass Sie sich für diese Anleitung Zeit nahmen. Für weitere Anleit
 
 Die Standardeinstellungen von Sandboxie bieten vollständigen Schutz. Die Sandboxeinstellungen finden Sie im Menü Sandbox des Sandboxie Control Fensters.
 .
+
+#----------------------------------------------------------------------------
+# License Manager
+#----------------------------------------------------------------------------
 
 7988;txt;01
 Ihr Unterstützerzertifikat ist gültig, Vielen Dank :-)

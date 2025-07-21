@@ -223,6 +223,50 @@ static NTSTATUS Ipc_NtOpenEvent(
 //---------------------------------------------------------------------------
 
 
+static NTSTATUS Ipc_NtCreateEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+static NTSTATUS Ipc_NtOpenEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+
+//---------------------------------------------------------------------------
+
+
+static NTSTATUS Ipc_NtCreateKeyedEvent(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG Flags);
+
+static NTSTATUS Ipc_NtOpenKeyedEvent(
+    OUT PHANDLE KeyedEventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+
+//---------------------------------------------------------------------------
+
+
+static NTSTATUS Ipc_NtCreateTimer(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN TIMER_TYPE TimerType);
+
+static NTSTATUS Ipc_NtOpenTimer(
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+
+//---------------------------------------------------------------------------
+
+
 static NTSTATUS Ipc_NtCreateMutant(
     HANDLE *MutantHandle,
     ACCESS_MASK DesiredAccess,
@@ -341,6 +385,12 @@ static P_NtRequestWaitReplyPort     __sys_NtRequestWaitReplyPort    = NULL;
 static P_NtAlpcSendWaitReceivePort  __sys_NtAlpcSendWaitReceivePort = NULL;
 static P_NtCreateEvent              __sys_NtCreateEvent             = NULL;
 static P_NtOpenEvent                __sys_NtOpenEvent               = NULL;
+static P_NtCreateEventPair          __sys_NtCreateEventPair         = NULL;
+static P_NtOpenEventPair            __sys_NtOpenEventPair           = NULL;
+static P_NtCreateKeyedEvent         __sys_NtCreateKeyedEvent        = NULL;
+static P_NtOpenKeyedEvent           __sys_NtOpenKeyedEvent          = NULL;
+static P_NtCreateTimer              __sys_NtCreateTimer             = NULL;
+static P_NtOpenTimer                __sys_NtOpenTimer               = NULL;
 static P_NtCreateMutant             __sys_NtCreateMutant            = NULL;
 static P_NtOpenMutant               __sys_NtOpenMutant              = NULL;
 static P_NtCreateSemaphore          __sys_NtCreateSemaphore         = NULL;
@@ -461,6 +511,15 @@ _FX BOOLEAN Ipc_Init(void)
 
     SBIEDLL_HOOK(Ipc_,NtCreateEvent);
     SBIEDLL_HOOK(Ipc_,NtOpenEvent);
+
+    SBIEDLL_HOOK(Ipc_,NtCreateEventPair);
+    SBIEDLL_HOOK(Ipc_,NtOpenEventPair);
+
+    SBIEDLL_HOOK(Ipc_,NtCreateKeyedEvent);
+    SBIEDLL_HOOK(Ipc_,NtOpenKeyedEvent);
+
+    SBIEDLL_HOOK(Ipc_,NtCreateTimer);
+    SBIEDLL_HOOK(Ipc_,NtOpenTimer);
 
     SBIEDLL_HOOK(Ipc_,NtCreateMutant);
     SBIEDLL_HOOK(Ipc_,NtOpenMutant);
@@ -2657,6 +2716,681 @@ OpenTruePath:
 
     status = __sys_NtOpenEvent(
         EventHandle, DesiredAccess, &objattrs);
+
+    if (PATH_NOT_OPEN(mp_flags) && (status == STATUS_ACCESS_DENIED))
+        status = STATUS_OBJECT_NAME_NOT_FOUND;
+
+    //
+    // finish
+    //
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    Dll_PopTlsNameBuffer(TlsData);
+    SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtCreateEventPair
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtCreateEventPair(
+    PHANDLE EventPairHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes)
+{
+    ULONG LastError;
+    THREAD_DATA *TlsData;
+
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR *TruePath;
+    WCHAR *CopyPath;
+    ULONG mp_flags;
+
+    //
+    // shortcut processing when object name is not specified
+    //
+
+    if ((! ObjectAttributes) || (! ObjectAttributes->ObjectName)) {
+
+        return __sys_NtCreateEventPair(
+            EventPairHandle, DesiredAccess, ObjectAttributes);
+    }
+
+    //
+    // normal processing
+    //
+
+    TlsData = Dll_GetTlsData(&LastError);
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    __try {
+
+    //
+    // get the full paths for the true and copy objects
+    //
+
+        status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateEventPair");
+    if (! NT_SUCCESS(status))
+        __leave;
+
+    if (! TruePath) {
+
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
+        status = __sys_NtCreateEventPair(
+            EventPairHandle, DesiredAccess, ObjectAttributes);
+
+        __leave;
+    }
+
+    InitializeObjectAttributes(&objattrs,
+        &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, Secure_EveryoneSD);
+
+    //
+    // check if this is an open or closed path
+    //
+
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
+
+    if (PATH_IS_CLOSED(mp_flags)) {
+        status = STATUS_ACCESS_DENIED;
+        __leave;
+    }
+
+    if (PATH_IS_OPEN(mp_flags)) {
+
+        RtlInitUnicodeString(&objname, TruePath);
+        objattrs.SecurityDescriptor = ObjectAttributes->SecurityDescriptor;
+
+        status = __sys_NtCreateEventPair(
+            EventPairHandle, DesiredAccess, &objattrs);
+
+        __leave;
+    }
+
+    //
+    // try to create the object name by its CopyPath, creating the
+    // CopyPath hierarchy if needed
+    //
+
+    RtlInitUnicodeString(&objname, CopyPath);
+
+    status = __sys_NtCreateEventPair(
+            EventPairHandle, DesiredAccess, &objattrs);
+
+    if (status == STATUS_OBJECT_PATH_NOT_FOUND) {
+
+        status = Ipc_CreatePath(TruePath, CopyPath);
+
+        if (NT_SUCCESS(status)) {
+            status = __sys_NtCreateEventPair(
+            EventPairHandle, DesiredAccess, &objattrs);
+        }
+    }
+
+    //
+    // finish
+    //
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    Dll_PopTlsNameBuffer(TlsData);
+    SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtOpenEventPair
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtOpenEventPair(
+    PHANDLE EventPairHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes)
+{
+    ULONG LastError;
+    THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
+
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR *TruePath;
+    WCHAR *CopyPath;
+    ULONG mp_flags;
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    __try {
+
+    //
+    // get the full paths for the true and copy objects
+    //
+
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenEventPair");
+    if (! NT_SUCCESS(status))
+        __leave;
+
+    if (! TruePath) {
+
+        status = __sys_NtOpenEventPair(
+            EventPairHandle, DesiredAccess, ObjectAttributes);
+
+        __leave;
+    }
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, NULL);
+
+    //
+    // check if this is an open or closed path
+    //
+
+    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+
+    if (PATH_IS_CLOSED(mp_flags)) {
+        status = STATUS_ACCESS_DENIED;
+        __leave;
+    }
+
+    if (PATH_IS_OPEN(mp_flags)) goto OpenTruePath;
+
+    //
+    // otherwise open the object by its CopyPath
+    //
+
+    RtlInitUnicodeString(&objname, CopyPath);
+
+    status = __sys_NtOpenEventPair(
+        EventPairHandle, DesiredAccess, &objattrs);
+
+    if (status == STATUS_OBJECT_PATH_NOT_FOUND) {
+
+        status = Ipc_CreatePath(TruePath, CopyPath);
+
+        if (NT_SUCCESS(status))
+            status = STATUS_OBJECT_NAME_NOT_FOUND;
+    }
+
+    __leave;
+
+    //
+    // try the TruePath
+    //
+
+OpenTruePath:
+
+    RtlInitUnicodeString(&objname, TruePath);
+
+    status = __sys_NtOpenEventPair(
+        EventPairHandle, DesiredAccess, &objattrs);
+
+    if (PATH_NOT_OPEN(mp_flags) && (status == STATUS_ACCESS_DENIED))
+        status = STATUS_OBJECT_NAME_NOT_FOUND;
+
+    //
+    // finish
+    //
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    Dll_PopTlsNameBuffer(TlsData);
+    SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtCreateKeyedEvent
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtCreateKeyedEvent(
+    PHANDLE KeyedEventHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    ULONG Flags)
+{
+    ULONG LastError;
+    THREAD_DATA *TlsData;
+
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR *TruePath;
+    WCHAR *CopyPath;
+    ULONG mp_flags;
+
+    //
+    // shortcut processing when object name is not specified
+    //
+
+    if ((! ObjectAttributes) || (! ObjectAttributes->ObjectName)) {
+
+        return __sys_NtCreateKeyedEvent(
+            KeyedEventHandle, DesiredAccess, ObjectAttributes,
+            Flags);
+    }
+
+    //
+    // normal processing
+    //
+
+    TlsData = Dll_GetTlsData(&LastError);
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    __try {
+
+    //
+    // get the full paths for the true and copy objects
+    //
+
+        status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateKeyedEvent");
+    if (! NT_SUCCESS(status))
+        __leave;
+
+    if (! TruePath) {
+
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
+        status = __sys_NtCreateKeyedEvent(
+            KeyedEventHandle, DesiredAccess, ObjectAttributes,
+            Flags);
+
+        __leave;
+    }
+
+    InitializeObjectAttributes(&objattrs,
+        &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, Secure_EveryoneSD);
+
+    //
+    // check if this is an open or closed path
+    //
+
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
+
+    if (PATH_IS_CLOSED(mp_flags)) {
+        status = STATUS_ACCESS_DENIED;
+        __leave;
+    }
+
+    if (PATH_IS_OPEN(mp_flags)) {
+
+        RtlInitUnicodeString(&objname, TruePath);
+        objattrs.SecurityDescriptor = ObjectAttributes->SecurityDescriptor;
+
+        status = __sys_NtCreateKeyedEvent(
+            KeyedEventHandle, DesiredAccess, &objattrs,
+            Flags);
+
+        __leave;
+    }
+
+    //
+    // try to create the object name by its CopyPath, creating the
+    // CopyPath hierarchy if needed
+    //
+
+    RtlInitUnicodeString(&objname, CopyPath);
+
+    status = __sys_NtCreateKeyedEvent(
+            KeyedEventHandle, DesiredAccess, &objattrs,
+            Flags);
+
+    if (status == STATUS_OBJECT_PATH_NOT_FOUND) {
+
+        status = Ipc_CreatePath(TruePath, CopyPath);
+
+        if (NT_SUCCESS(status)) {
+            status = __sys_NtCreateKeyedEvent(
+            KeyedEventHandle, DesiredAccess, &objattrs,
+            Flags);
+        }
+    }
+
+    //
+    // finish
+    //
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    Dll_PopTlsNameBuffer(TlsData);
+    SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtOpenKeyedEvent
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtOpenKeyedEvent(
+    PHANDLE KeyedEventHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes)
+{
+    ULONG LastError;
+    THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
+
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR *TruePath;
+    WCHAR *CopyPath;
+    ULONG mp_flags;
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    __try {
+
+    //
+    // get the full paths for the true and copy objects
+    //
+
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenKeyedEvent");
+    if (! NT_SUCCESS(status))
+        __leave;
+
+    if (! TruePath) {
+
+        status = __sys_NtOpenKeyedEvent(
+            KeyedEventHandle, DesiredAccess, ObjectAttributes);
+
+        __leave;
+    }
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, NULL);
+
+    //
+    // check if this is an open or closed path
+    //
+
+    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+
+    if (PATH_IS_CLOSED(mp_flags)) {
+        status = STATUS_ACCESS_DENIED;
+        __leave;
+    }
+
+    if (PATH_IS_OPEN(mp_flags)) goto OpenTruePath;
+
+    //
+    // otherwise open the object by its CopyPath
+    //
+
+    RtlInitUnicodeString(&objname, CopyPath);
+
+    status = __sys_NtOpenKeyedEvent(
+        KeyedEventHandle, DesiredAccess, &objattrs);
+
+    if (status == STATUS_OBJECT_PATH_NOT_FOUND) {
+
+        status = Ipc_CreatePath(TruePath, CopyPath);
+
+        if (NT_SUCCESS(status))
+            status = STATUS_OBJECT_NAME_NOT_FOUND;
+    }
+
+    __leave;
+
+    //
+    // try the TruePath
+    //
+
+OpenTruePath:
+
+    RtlInitUnicodeString(&objname, TruePath);
+
+    status = __sys_NtOpenKeyedEvent(
+        KeyedEventHandle, DesiredAccess, &objattrs);
+
+    if (PATH_NOT_OPEN(mp_flags) && (status == STATUS_ACCESS_DENIED))
+        status = STATUS_OBJECT_NAME_NOT_FOUND;
+
+    //
+    // finish
+    //
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    Dll_PopTlsNameBuffer(TlsData);
+    SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtCreateTimer
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtCreateTimer(
+    PHANDLE TimerHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    TIMER_TYPE TimerType)
+{
+    ULONG LastError;
+    THREAD_DATA *TlsData;
+
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR *TruePath;
+    WCHAR *CopyPath;
+    ULONG mp_flags;
+
+    //
+    // shortcut processing when object name is not specified
+    //
+
+    if ((! ObjectAttributes) || (! ObjectAttributes->ObjectName)) {
+
+        return __sys_NtCreateTimer(
+            TimerHandle, DesiredAccess, ObjectAttributes,
+            TimerType);
+    }
+
+    //
+    // normal processing
+    //
+
+    TlsData = Dll_GetTlsData(&LastError);
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    __try {
+
+    //
+    // get the full paths for the true and copy objects
+    //
+
+        status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateTimer");
+    if (! NT_SUCCESS(status))
+        __leave;
+
+    if (! TruePath) {
+
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
+        status = __sys_NtCreateTimer(
+            TimerHandle, DesiredAccess, ObjectAttributes,
+            TimerType);
+
+        __leave;
+    }
+
+    InitializeObjectAttributes(&objattrs,
+        &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, Secure_EveryoneSD);
+
+    //
+    // check if this is an open or closed path
+    //
+
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
+
+    if (PATH_IS_CLOSED(mp_flags)) {
+        status = STATUS_ACCESS_DENIED;
+        __leave;
+    }
+
+    if (PATH_IS_OPEN(mp_flags)) {
+
+        RtlInitUnicodeString(&objname, TruePath);
+        objattrs.SecurityDescriptor = ObjectAttributes->SecurityDescriptor;
+
+        status = __sys_NtCreateTimer(
+            TimerHandle, DesiredAccess, &objattrs,
+            TimerType);
+
+        __leave;
+    }
+
+    //
+    // try to create the object name by its CopyPath, creating the
+    // CopyPath hierarchy if needed
+    //
+
+    RtlInitUnicodeString(&objname, CopyPath);
+
+    status = __sys_NtCreateTimer(
+            TimerHandle, DesiredAccess, &objattrs,
+            TimerType);
+
+    if (status == STATUS_OBJECT_PATH_NOT_FOUND) {
+
+        status = Ipc_CreatePath(TruePath, CopyPath);
+
+        if (NT_SUCCESS(status)) {
+            status = __sys_NtCreateTimer(
+            TimerHandle, DesiredAccess, &objattrs,
+            TimerType);
+        }
+    }
+
+    //
+    // finish
+    //
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    Dll_PopTlsNameBuffer(TlsData);
+    SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtOpenTimer
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtOpenTimer(
+    PHANDLE TimerHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes)
+{
+    ULONG LastError;
+    THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
+
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR *TruePath;
+    WCHAR *CopyPath;
+    ULONG mp_flags;
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    __try {
+
+    //
+    // get the full paths for the true and copy objects
+    //
+
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenTimer");
+    if (! NT_SUCCESS(status))
+        __leave;
+
+    if (! TruePath) {
+
+        status = __sys_NtOpenTimer(
+            TimerHandle, DesiredAccess, ObjectAttributes);
+
+        __leave;
+    }
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, NULL);
+
+    //
+    // check if this is an open or closed path
+    //
+
+    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+
+    if (PATH_IS_CLOSED(mp_flags)) {
+        status = STATUS_ACCESS_DENIED;
+        __leave;
+    }
+
+    if (PATH_IS_OPEN(mp_flags)) goto OpenTruePath;
+
+    //
+    // otherwise open the object by its CopyPath
+    //
+
+    RtlInitUnicodeString(&objname, CopyPath);
+
+    status = __sys_NtOpenTimer(
+        TimerHandle, DesiredAccess, &objattrs);
+
+    if (status == STATUS_OBJECT_PATH_NOT_FOUND) {
+
+        status = Ipc_CreatePath(TruePath, CopyPath);
+
+        if (NT_SUCCESS(status))
+            status = STATUS_OBJECT_NAME_NOT_FOUND;
+    }
+
+    __leave;
+
+    //
+    // try the TruePath
+    //
+
+OpenTruePath:
+
+    RtlInitUnicodeString(&objname, TruePath);
+
+    status = __sys_NtOpenTimer(
+        TimerHandle, DesiredAccess, &objattrs);
 
     if (PATH_NOT_OPEN(mp_flags) && (status == STATUS_ACCESS_DENIED))
         status = STATUS_OBJECT_NAME_NOT_FOUND;

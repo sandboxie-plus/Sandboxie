@@ -1390,6 +1390,46 @@ _FX LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags)
 
 
 //---------------------------------------------------------------------------
+// SbieApi_UpdateConf
+//---------------------------------------------------------------------------
+
+
+_FX ULONG SbieApi_UpdateConf(
+    ULONG op, 
+    const WCHAR *section_name,
+    const WCHAR *setting_name, 
+    const WCHAR *value_ptr)
+{
+    NTSTATUS status;
+    __declspec(align(8)) UNICODE_STRING64 Input;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    WCHAR x_section[66];
+    WCHAR x_setting[66];
+
+    memzero(x_section, sizeof(x_section));
+    memzero(x_setting, sizeof(x_setting));
+    if (section_name)
+        wcsncpy(x_section, section_name, 64);
+    if (setting_name)
+        wcsncpy(x_setting, setting_name, 64);
+
+    Input.Length        = wcslen(value_ptr) * sizeof(WCHAR);
+    Input.MaximumLength = Input.Length + sizeof(WCHAR);
+    Input.Buffer        = (ULONG64)(ULONG_PTR)value_ptr;
+
+    memset(parms, 0, sizeof(parms));
+    parms[0] = API_UPDATE_CONF;
+    parms[1] = (ULONG64)(ULONG_PTR)op;
+    parms[2] = (ULONG64)(ULONG_PTR)x_section;
+    parms[3] = (ULONG64)(ULONG_PTR)x_setting;
+    parms[4] = (ULONG64)(ULONG_PTR)(value_ptr ? &Input : NULL);
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // SbieApi_QueryConf
 //---------------------------------------------------------------------------
 
@@ -1713,6 +1753,34 @@ _FX LONG SbieApi_MonitorPut2Ex(
     args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Name;
     args->check_object_exists.val64 = bCheckObjectExists;
     args->is_message.val64          = bIsMessage;
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieApi_MonitorGetEx
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_MonitorPutEx(
+    ULONG Type,
+    ULONG Pid,
+    ULONG Tid,
+    const WCHAR *Message)                    // WCHAR [256]
+{
+    NTSTATUS status;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    API_MONITOR_PUT_EX_ARGS *args = (API_MONITOR_PUT_EX_ARGS *)parms;
+
+    memset(parms, 0, sizeof(parms));
+    args->func_code              = API_MONITOR_PUT_EX;
+    args->log_type.val           = Type;
+    args->log_len.val64          = wcslen(Message) * sizeof(WCHAR);
+    args->log_ptr.val64          = (ULONG64)(ULONG_PTR)Message;
+    args->log_pid.val            = Pid;
+    args->log_tid.val            = Tid;
     status = SbieApi_Ioctl(parms);
 
     return status;

@@ -82,22 +82,15 @@ public:
 	virtual QString			GetBoxedPath(CSandBox* pBox, const QString& Path, const QString& Snapshot = QString());
 	virtual QString			GetRealPath(CSandBox* pBox, const QString& Path);
 
-	enum ESetMode
-	{
-		eIniUpdate = 0,
-		eIniAppend,
-		eIniInsert,
-		eIniDelete
-	};
-
 	// Config
 	virtual SB_STATUS		ReloadConfig(bool ReconfigureDrv = false);
 	virtual SB_STATUS		ReloadCert();
 	virtual void			CommitIniChanges();
-	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL);
+	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL, quint32* pType = NULL);
 	virtual QString			SbieIniGet2(const QString& Section, const QString& Setting, quint32 Index = 0, bool bWithGlobal = false, bool bNoExpand = true, bool withTemplates = false);
 	virtual QString			SbieIniGetEx(const QString& Section, const QString& Setting);
-	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate, bool bRefresh = true);
+	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, CSbieIni::ESetMode Mode = CSbieIni::eIniUpdate, bool bRefresh = true);
+	virtual SB_STATUS		SbieIniSetDrv(const QString& Section, const QString& Setting, const QString& Value, CSbieIni::ESetMode Mode = CSbieIni::eIniUpdate);
 	virtual bool			IsBox(const QString& BoxName, bool& bIsEnabled);
 	virtual QSharedPointer<CSbieIni> GetGlobalSettings() const { return m_pGlobalSection; }
 	virtual QSharedPointer<CSbieIni> GetUserSettings() const { return m_pUserSection; }
@@ -167,6 +160,11 @@ public:
 
 	virtual SB_STATUS		SetSecureParam(const QString& Name, const void* data, size_t size);
 	virtual SB_STATUS		GetSecureParam(const QString& Name, void* data, size_t size, quint32* size_out = NULL, bool bVerify = false);
+
+	virtual bool			TestSignature(const QByteArray& Data, const QByteArray& Signature);
+
+	virtual SB_STATUS		SetDatFile(const QString& FileName, const QByteArray& Data);
+	//virtual SB_RESULT(QByteArray) GetDatFile(const QString& FileName);
 
 
 	enum ESbieQueuedRequests

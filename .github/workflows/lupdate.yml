@@ -51,7 +51,7 @@ jobs:
     name: SBIE reports
     # Skip the job on forks
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
-    runs-on: windows-2019
+    runs-on: windows-2022
     timeout-minutes: 15
 
     steps:

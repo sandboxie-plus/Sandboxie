@@ -161,7 +161,7 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         }
         if (sharedTemplateMode == 1) { // Insert as template
             const QString insertValue = templateFullName.mid(9); // Template_
-            pBox->InsertText("Template", insertValue);
+            pBox->AppendText("Template", insertValue);
         }
         else if (sharedTemplateMode == 2) { // Append template settings to configuration
             for (const QString& tLine : templateSettingsLines) {
@@ -203,8 +203,8 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                     pBox->SetBool("UsePrivacyMode", true);
 		    	case CSandBoxPlus::eAppBox:
 		    		pBox->SetBool("NoSecurityIsolation", true);
-		    		//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
-		    		pBox->InsertText("Template", "RpcPortBindingsExt");
+		    		//pBox->AppendText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
+		    		pBox->AppendText("Template", "RpcPortBindingsExt");
 		    		break;
 		    }
 
@@ -242,14 +242,14 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 pBox->SetBool("AutoRecover", true);
 
             if (field("blockNetwork").toInt() == 1) { // device based
-                //pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
-                pBox->InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
-                //pBox->InsertText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
+                //pBox->AppendText("AllowNetworkAccess", "<BlockNetAccess>,n");
+                pBox->AppendText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
+                //pBox->AppendText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
             }
             else if (field("blockNetwork").toInt() == 2) { // using WFP
-                pBox->InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
-                //pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
-                //pBox->InsertText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
+                pBox->AppendText("AllowNetworkAccess", "!<InternetAccess>,n");
+                //pBox->AppendText("AllowNetworkAccess", "<BlockNetAccess>,n");
+                //pBox->AppendText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
             }
             pBox->SetBool("BlockNetworkFiles", !field("shareAccess").toBool());
 
@@ -701,7 +701,16 @@ bool CFilesPage::validatePage()
     if (Location == m_pBoxLocation->itemText(0))
         wizard()->setField("boxLocation", "");
     else {
-        if (Location.mid(2).contains(QRegularExpression("[ <>:\"/\\|?*\\[\\]]"))){
+        int offset = Location.left(4) == "\\??\\" ? 4 : 0;
+        if (Location.length() < offset + 4) {
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located at the root of a partition, please select a folder."));
+            return false;
+        }
+        if (Location.left(2) == "\\\\") {
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("A sandbox cannot be located on a network share, please select a local folder."));
+            return false;
+        }
+        if (Location.mid(offset + 2).contains(QRegularExpression("[ <>:\"/\\|?*\\[\\]]"))){
             QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location is not a valid path."));
             return false;
         }
@@ -711,7 +720,7 @@ bool CFilesPage::validatePage()
                 "Are you sure you want to use an existing folder?"), QDialogButtonBox::Yes, QDialogButtonBox::No) != QDialogButtonBox::Yes)
                 return false;
         }
-        if (!QDir().exists(Location.left(3))) {
+        if (Location.mid(offset, 13).compare("%SystemDrive%") != 0 && !QDir().exists(Location.mid(offset, 3))) {
             QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location is not placed on a currently available drive."));
             return false;
         }

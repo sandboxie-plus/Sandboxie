@@ -539,7 +539,7 @@ _FX PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql)
 // Process_FindSandboxed
 //---------------------------------------------------------------------------
 
-
+#ifdef XP_SUPPORT
 _FX PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql)
 {
     PROCESS* proc = Process_Find(ProcessId, out_irql);
@@ -552,30 +552,30 @@ _FX PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql)
     }
     return proc;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Process_Find_ByHandle
 //---------------------------------------------------------------------------
 
 
-_FX PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql)
-{
-    NTSTATUS Status;
-    PEPROCESS ProcessObject = NULL;
-    PROCESS* Process = NULL;
-    
-    Status = ObReferenceObjectByHandle(Handle, PROCESS_QUERY_INFORMATION, *PsProcessType, UserMode, (PVOID*)&ProcessObject, NULL);
-    if (NT_SUCCESS(Status)) {
-
-        Process = Process_Find(PsGetProcessId(ProcessObject), out_irql);
-
-        // Dereference the process object
-        ObDereferenceObject(ProcessObject);
-    }
-
-    return Process;
-}
+//_FX PROCESS *Process_Find_ByHandle(HANDLE Handle, KIRQL *out_irql)
+//{
+//    NTSTATUS Status;
+//    PEPROCESS ProcessObject = NULL;
+//    PROCESS* Process = NULL;
+//    
+//    Status = ObReferenceObjectByHandle(Handle, PROCESS_QUERY_INFORMATION, *PsProcessType, UserMode, (PVOID*)&ProcessObject, NULL);
+//    if (NT_SUCCESS(Status)) {
+//
+//        Process = Process_Find(PsGetProcessId(ProcessObject), out_irql);
+//
+//        // Dereference the process object
+//        ObDereferenceObject(ProcessObject);
+//    }
+//
+//    return Process;
+//}
 
 
 //---------------------------------------------------------------------------
@@ -777,6 +777,7 @@ _FX PROCESS *Process_Create(
 
     proc->use_security_mode = Conf_Get_Boolean(proc->box->name, L"UseSecurityMode", 0, FALSE);
     proc->is_locked_down = proc->use_security_mode || Conf_Get_Boolean(proc->box->name, L"SysCallLockDown", 0, FALSE);
+    proc->open_all_nt = Conf_Get_Boolean(proc->box->name, L"OpenAllSysCalls", 0, FALSE);
 #ifdef USE_MATCH_PATH_EX
     proc->restrict_devices = proc->use_security_mode || Conf_Get_Boolean(proc->box->name, L"RestrictDevices", 0, FALSE);
 
@@ -789,7 +790,7 @@ _FX PROCESS *Process_Create(
     // check certificate
     //
 
-    if (!Verify_CertInfo.opt_sec && !proc->image_sbie) {
+    if (!(Verify_CertInfo.active && Verify_CertInfo.opt_sec) && !proc->image_sbie) {
 
         const WCHAR* exclusive_setting = NULL;
         if (proc->use_security_mode)
@@ -820,7 +821,7 @@ _FX PROCESS *Process_Create(
         }
     }
 
-    if (!Verify_CertInfo.opt_enc && !proc->image_sbie) {
+    if (!(Verify_CertInfo.active && Verify_CertInfo.opt_enc) && !proc->image_sbie) {
         
         const WCHAR* exclusive_setting = NULL;
         if (proc->confidential_box)

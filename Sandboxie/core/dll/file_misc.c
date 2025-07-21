@@ -518,20 +518,42 @@ BOOL File_WriteProcessMemory(
     SIZE_T nSize,
     SIZE_T * lpNumberOfBytesWritten)
 {
-    //
-    // this function is only hooked when Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX
-    //
-
-    // $Workaround$ - 3rd party fix
-    if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
-        lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
-    //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
-    {
-        if (lpNumberOfBytesWritten)
+    if (!Dll_CompartmentMode) {
+    
+        // $Workaround$ - 3rd party fix
+        if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
+            lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
+        //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
         {
-            *lpNumberOfBytesWritten = nSize;
+            if (lpNumberOfBytesWritten)
+            {
+                *lpNumberOfBytesWritten = nSize;
+            }
+            return TRUE; // ignore
         }
-        return TRUE; // ignore
+    }
+
+    extern BOOLEAN Dll_HookTrace;
+    if (Dll_HookTrace) {
+
+        WCHAR* pModule = NULL;
+        char* pExport = NULL;
+        LPVOID pAddress = NULL;
+        if (Trace_FindExportByAddress(lpBaseAddress, &pModule, &pExport, &pAddress))
+        {
+            if (_wcsicmp(Dll_ImageName, pModule) != 0) // ignore self
+            {
+                WCHAR dbg[1024];
+                WCHAR* dbg_ptr = dbg;
+                size_t dbg_size = ARRAYSIZE(dbg);
+                int len = Sbie_snwprintf(dbg_ptr, dbg_size, L"Application Hooking: %s!%S+0x%Ix [", pModule, pExport, ((UINT_PTR)lpBaseAddress - (UINT_PTR)pAddress));
+                dbg_ptr += len;
+                dbg_size -= len;
+                BufferToHexW(lpBuffer, nSize, dbg_ptr, dbg_size - 1);
+                wcscat(dbg_ptr, L"]");
+                SbieApi_MonitorPutMsg(MONITOR_HOOK, dbg);
+            }
+        }
     }
 
     return __sys_WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten);

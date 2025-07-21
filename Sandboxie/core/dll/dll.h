@@ -326,6 +326,7 @@ extern const WCHAR *Scm_CryptSvc;
 
 extern BOOLEAN Dll_SbieTrace;
 extern BOOLEAN Dll_ApiTrace;
+extern BOOLEAN Dll_FileTrace;
 
 
 //---------------------------------------------------------------------------
@@ -349,6 +350,7 @@ extern const WCHAR *DllName_secur32;
 extern const WCHAR *DllName_sspicli;
 extern const WCHAR *DllName_mscoree;
 extern const WCHAR *DllName_ntmarta;
+extern const WCHAR *DllName_winmm;
 
 
 #define DllName_ole32_or_combase \
@@ -427,9 +429,6 @@ NTSTATUS Dll_GetCurrentSidString(UNICODE_STRING *SidString);
 //---------------------------------------------------------------------------
 // Functions (dllhook)
 //---------------------------------------------------------------------------
-
-NTSTATUS Dll_GetSettingsForImageName(
-    const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
 
 BOOLEAN Dll_SkipHook(const WCHAR *HookName);
 

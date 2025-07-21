@@ -33,6 +33,10 @@ void Trace_Entry(void);
 
 WCHAR* Trace_FindModuleByAddress(void* address);
 
+BOOLEAN Trace_FindExportByAddress(void* address, WCHAR** pModule, char** pExport, void** pAddress);
+
+void BufferToHexW(const void* lpBuffer, size_t nSize, wchar_t* outBuf, size_t outBufSize);
+
 
 //---------------------------------------------------------------------------
 

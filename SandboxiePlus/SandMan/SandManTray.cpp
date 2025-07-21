@@ -1,20 +1,4 @@
 
-#include <QStyledItemDelegate>
-class CTrayBoxesItemDelegate : public QStyledItemDelegate
-{
-	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
-	{
-		QStyleOptionViewItem opt(option);
-		if ((opt.state & QStyle::State_MouseOver) != 0)
-			opt.state |= QStyle::State_Selected;
-		else if ((opt.state & QStyle::State_HasFocus) != 0 && m_Hold)
-			opt.state |= QStyle::State_Selected;
-		opt.state &= ~QStyle::State_HasFocus;
-		QStyledItemDelegate::paint(painter, opt, index);
-	}
-public:
-	static bool m_Hold;
-};
 
 bool CTrayBoxesItemDelegate::m_Hold = false;
 
@@ -243,7 +227,7 @@ QAction* CSandMan__MakeBoxEntry(QMenu* pMenu, CSandBoxPlus* pBoxEx, QFileIconPro
 {
 	static QMenu* pEmptyMenu = new QMenu();
 
-	QAction* pBoxAction = new QAction(pBoxEx->GetName().replace("_", " "));
+	QAction* pBoxAction = new QAction(pBoxEx->GetDisplayName());
 	if (!iNoIcons) {
 		QIcon Icon;
 		QString Action = pBoxEx->GetText("DblClickAction");
@@ -295,7 +279,7 @@ void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
 		if (!pBox->IsEnabled())
 			continue;
 
-		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
 		if (iSysTrayFilter == 2) { // pinned only
 			if (!pBox->GetBool("PinToTray", false))
@@ -308,7 +292,7 @@ void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
 
 		QMenu* pSubMenu = CSandMan__GetBoxParent(Groups, GroupItems, Icon, iNoIcons, pMenu, pPos, pBox->GetName());
 		
-		QAction* pBoxAction = CSandMan__MakeBoxEntry(pMenu, pBoxEx, IconProvider, iNoIcons, ColorIcons);
+		QAction* pBoxAction = CSandMan__MakeBoxEntry(pMenu, pBoxEx.data(), IconProvider, iNoIcons, ColorIcons);
 		if (pSubMenu)
 			pSubMenu->addAction(pBoxAction);
 		else
@@ -378,7 +362,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					if (!pBox->IsEnabled())
 						continue;
 
-					CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+					auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
 					if (iSysTrayFilter == 2) { // pinned only
 						if (!pBox->GetBool("PinToTray", false))
@@ -390,9 +374,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					}
 
 					QTreeWidgetItem* pParent = CBoxPicker::GetBoxParent(Groups, GroupItems, m_pTrayBoxes, pBox->GetName());
-		
+
 					QTreeWidgetItem* pItem = new QTreeWidgetItem();
-					pItem->setText(0, pBox->GetName().replace("_", " "));
+					pItem->setText(0, pBoxEx->GetDisplayName());
 					pItem->setData(0, Qt::UserRole, pBox->GetName());
 					QIcon Icon;
 					QString Action = pBox->GetText("DblClickAction");
@@ -432,7 +416,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					if (!pBox->IsEnabled())
 						continue;
 
-					CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+					auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
 					if (iSysTrayFilter == 2) { // pinned only
 						if (!pBox->GetBool("PinToTray", false))
@@ -448,7 +432,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					{
 						pItem = new QTreeWidgetItem();
 						pItem->setData(0, Qt::UserRole, pBox->GetName());
-						pItem->setText(0, "  " + pBox->GetName().replace("_", " "));
+						pItem->setText(0, "  " + pBoxEx->GetDisplayName());
 						m_pTrayBoxes->addTopLevelItem(pItem);
 
 						bAdded = true;

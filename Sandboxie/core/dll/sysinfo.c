@@ -246,7 +246,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
             // if not set we return no information, 0 length
             if (RegOpenKeyExW(HKEY_CURRENT_USER, L"System\\SbieCustom", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
                 if (RegQueryValueExW(hKey, L"SMBiosTable", NULL, &type, (LPBYTE)lpData, &dwLen) != ERROR_SUCCESS) {
-                    dwLen = 0;
+                    dwLen = 0; // In case of failure, reset the length
                 }
                 RegCloseKey(hKey);
             }

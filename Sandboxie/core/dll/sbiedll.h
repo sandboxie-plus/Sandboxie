@@ -95,6 +95,9 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_StartSbieSvc(BOOLEAN retry);
 
 SBIEDLL_EXPORT  const WCHAR *SbieDll_GetStartError(void);
 
+SBIEDLL_EXPORT  BOOLEAN SbieDll_SetServiceRegistryValue(
+    const WCHAR *name, ULONG type, const void *data, ULONG dataSize);
+
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetServiceRegistryValue(
     const WCHAR *name, void *kvpi, ULONG sizeof_kvpi);
 
@@ -136,6 +139,8 @@ SBIEDLL_EXPORT  struct _MSG_HEADER *SbieDll_CallServer(
 
 SBIEDLL_EXPORT  void *SbieDll_CallServerQueue(
 	const WCHAR* queue, void *req, ULONG req_len, ULONG rpl_min_len);
+
+SBIEDLL_EXPORT  void* SbieDll_AllocMem(ULONG size);
 
 SBIEDLL_EXPORT  void SbieDll_FreeMem(void *data);
 

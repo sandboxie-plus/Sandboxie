@@ -7,17 +7,33 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 
 	if (theConf->GetBool("Options/InstantRecovery", true))
 	{
-		CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
-		//if (!theGUI->IsAlwaysOnTop()) {
-		//	SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-		//	QTimer::singleShot(100, this, [pWnd]() {
-		//		SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-		//		});
-		//}
+		if (!pBoxEx->m_pRecoveryWnd) {
+			pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, true, this);
+			connect(this, SIGNAL(Closed()), pBoxEx->m_pRecoveryWnd, SLOT(close()));
+			connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
+				pBoxEx->m_pRecoveryWnd = NULL;
+				});
 
-		if (pWnd)
-			pWnd->AddFile(FilePath, BoxPath);
+			pBoxEx->m_pRecoveryWnd->AddFile(FilePath, BoxPath); // Note: this may invoke close if nothing is found
+			if (pBoxEx->m_pRecoveryWnd) { // if it isn't closed, show it
+				pBoxEx->m_pRecoveryWnd->setModal(true);
+				pBoxEx->m_pRecoveryWnd->show();
+			}
+		}
+		else
+		{
+			//if (!theGUI->IsAlwaysOnTop()) {
+			//	SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+			//	QTimer::singleShot(100, this, [pWnd]() {
+			//		SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+			//		});
+			//}
+
+			pBoxEx->m_pRecoveryWnd->AddFile(FilePath, BoxPath);
+		}
+
 	}
 	else
 		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, pBox, ProcessId);
@@ -51,24 +67,23 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool
 	return true;
 }
 
-CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
+CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (!pBoxEx) return NULL;
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
-		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, bFind == false);
+		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, false);
 		connect(this, SIGNAL(Closed()), pBoxEx->m_pRecoveryWnd, SLOT(close()));
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});
 		pBoxEx->m_pRecoveryWnd->show();
 	}
-	else if(bFind) { // We don't want to force window in front on instant recovery 
+	else { // We don't want to force window in front on instant recovery 
 		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 		SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
 	}
-	if(bFind)
-		pBoxEx->m_pRecoveryWnd->FindFiles();
+	pBoxEx->m_pRecoveryWnd->FindFiles();
 	return pBoxEx->m_pRecoveryWnd;
 }
 
@@ -251,10 +266,10 @@ void CSandMan::RecoverFilesAsync(QPair<const CSbieProgressPtr&,QWidget*> pParam,
 		switch (Action)
 		{
 		case 1: // open
-			ShellExecute(NULL, NULL, path.c_str(), NULL, NULL, SW_SHOWNORMAL);
+			ShellExecuteW(NULL, NULL, path.c_str(), NULL, NULL, SW_SHOWNORMAL);
 			break;
 		case 2: // explore
-			ShellExecute(NULL, NULL, L"explorer.exe", (L"/select,\"" + path + L"\"").c_str(), NULL, SW_SHOWNORMAL);
+			ShellExecuteW(NULL, NULL, L"explorer.exe", (L"/select,\"" + path + L"\"").c_str(), NULL, SW_SHOWNORMAL);
 			break;
 		}
 	}
@@ -350,7 +365,7 @@ void CRecoveryLogWnd::closeEvent(QCloseEvent *e)
 
 void CRecoveryLogWnd::OnDblClick(QTreeWidgetItem* pItem)
 {
-	ShellExecute(NULL, NULL, L"explorer.exe", (L"/select,\"" + pItem->text(2).toStdWString() + L"\"").c_str(), NULL, SW_SHOWNORMAL);
+	ShellExecuteW(NULL, NULL, L"explorer.exe", (L"/select,\"" + pItem->text(2).toStdWString() + L"\"").c_str(), NULL, SW_SHOWNORMAL);
 }
 
 void CSandMan::OnRecoveryLog()

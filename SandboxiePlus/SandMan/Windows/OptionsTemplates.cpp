@@ -77,10 +77,10 @@ void COptionsWindow::LoadTemplates()
 
 void COptionsWindow::SetTemplate(const QString& Template, bool bEnabled)
 {
-	if(bEnabled)
-		m_BoxTemplates.append(Template);
-	else
+	if(!bEnabled)
 		m_BoxTemplates.removeAll(Template);
+	else if(!m_BoxTemplates.contains(Template))
+		m_BoxTemplates.append(Template);
 	m_TemplatesChanged = true; 
 	OnOptChanged();
 }
@@ -257,10 +257,10 @@ void COptionsWindow::LoadFolders()
 	{
 		QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + Name, m_pBox->GetAPI()));
 
-		QList<QPair<QString, QString>> AllValues = pTemplate->GetIniSection(NULL, true);
-		for (QList<QPair<QString, QString>>::const_iterator I = AllValues.begin(); I != AllValues.end(); ++I)
+		QList<CSbieIni::SbieIniValue> AllValues = pTemplate->GetIniSection(NULL, true);
+		for (QList<CSbieIni::SbieIniValue>::const_iterator I = AllValues.begin(); I != AllValues.end(); ++I)
 		{
-			QString Value = I->second;
+			QString Value = I->Value;
 
 			int begin = Value.indexOf("%Tmpl.");
 			if (begin == -1) continue;

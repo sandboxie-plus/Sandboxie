@@ -1,8 +1,12 @@
 # Sandboxie Plus / Classic
 
-[![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
+<p align='center'>
+EN | <a href='./README_zh_CN.md'>中文</a>
+</p>
 
-[![Roadmap](https://img.shields.io/badge/Roadmap-Link%20-blue?style=for-the-badge)](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633) [![Join our Discord Server](https://img.shields.io/badge/Join-Our%20Discord%20Server%20for%20bugs,%20feedback%20and%20more!-blue?style=for-the-badge&logo=discord)](https://discord.gg/S4tFu6Enne)
+[![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml) [![WinGet Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/winget.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/winget.yml) [![Gurubase](https://img.shields.io/badge/Gurubase-Ask%20Sandboxie%20Guru-006BFF)](https://gurubase.io/g/sandboxie)
+
+[![Roadmap](https://img.shields.io/badge/Roadmap-Link%20-blue?style=for-the-badge)](https://www.wilderssecurity.com/threads/updated-sandboxie-plus-roadmap.456886/) [![Join our Discord Server](https://img.shields.io/badge/Join-Our%20Discord%20Server%20for%20bugs,%20feedback%20and%20more!-blue?style=for-the-badge&logo=discord)](https://discord.gg/S4tFu6Enne)
 
 |  System requirements  |      Release notes     |     Contribution guidelines   |      Security policy      |      Code of Conduct      |
 |         :---:         |          :---:         |          :---:                |          :---:            |          :---:            |
@@ -18,6 +22,10 @@ Sandboxie allows you to create virtually unlimited sandboxes and run them alone 
 
 [Latest Release](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
 
+## ✨ Changelog
+
+<a href='./CHANGELOG.md'>EN</a>
+
 ## 🚀 Features
 
 Sandboxie is available in two editions, Plus and Classic. They both share the same core components, this means they have the same level of security and compatibility.
@@ -26,7 +34,7 @@ What's different is the availability of features in the user interface.
 Sandboxie Plus has a modern Qt-based UI, which supports all new features that have been added since the project went open source:
 
   * Snapshot Manager - takes a copy of any box in order to be restored when needed
-  * Maintenance mode - allows to uninstall/install/start/stop Sandboxie driver and service when needed
+  * Maintenance menu - allows to uninstall/install/start/stop Sandboxie driver and service when needed
   * Portable mode - you can run the installer and choose to extract all files to a directory
   * Additional UI options to block access to Windows components like printer spooler and clipboard
   * More customization options for Start/Run and Internet access restrictions
@@ -71,6 +79,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
   * [SbieHide](https://github.com/VeroFess/SbieHide) - attempts to hide the presence of SbieDll.dll from the application being sandboxed
   * [SandboxToys2](https://github.com/blap/SandboxToys2) - allows to monitor files and registry changes in a sandbox
   * [Sbiextra](https://github.com/sandboxie-plus/sbiextra) - adds additional user mode restrictions to sandboxed processes
+  * [WrapLocale](https://github.com/UserUnknownFactor/WrapLocale) - provide more flexible locale pretending options than native LangId feature
 
 
 ## 📌 Project history
@@ -83,7 +92,9 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 | 8 April 2020 - [open-source code](https://community.sophos.com/sandboxie/f/forum/119641/important-sandboxie-open-source-code-is-available-for-download) | Sophos Ltd. |
 | 9 April 2020 onwards - project fork | David Xanatos |
 
-See the current [roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/page-8#post-3187633).
+Looking for older Sandboxie versions? Check the [version history](https://github.com/sandboxie-plus/sandboxie-old).
+
+See the current [roadmap](https://www.wilderssecurity.com/threads/updated-sandboxie-plus-roadmap.456886/).
 
 ## 📌 Project support / sponsorship
 
@@ -119,6 +130,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - typpos - UI additions / Documentation / Code fixes
 - Yeyixiao - Feature additions
 - Deezzir - Feature additions
+- wzxjohn - Code fixes, Documentation additions
 - okrc - Code fixes
 - Sapour - Code fixes
 - lmou523 - Code fixes
@@ -145,16 +157,17 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 
 ## 🌏 Translators
 
-- yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt - Simplified Chinese
+- czoins - Arabic
+- yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt, fzxx, Vstory, GT-Stardust - Simplified Chinese
 - TragicLifeHu, Hulen, xiongsp - Traditional Chinese
 - RockyTDR - Dutch
 - clexanis, Mmoi-Fr, hippalectryon-0, Monsieur Pissou - French (provided by email)
 - bastik-1001, APMichael - German
 - timinoun - Hungarian (provided by email)
 - isaak654, DerivativeOfLog7 - Italian
-- takahiro-itou - Japanese
+- takahiro-itou, lllIIIlll - Japanese
 - VenusGirl - Korean
-- 7zip - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
+- 7zip, AndrzejRafalowski - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog, marat2509 - Russian
 - LumitoLuma, sebadamus - Spanish
@@ -164,3 +177,9 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - GunGunGun - Vietnamese
 
 All translators are encouraged to look at the [Localization notes and tips](https://git.io/J9G19) before sending a translation.
+
+## 📚 Documentation Translators
+
+- Vstory, GT-Stardust, wzxjohn - Simplified Chinese
+
+All documentation translators are encouraged to look at the [Multilingual Translation Contribution Guide](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519) before sending a translation.

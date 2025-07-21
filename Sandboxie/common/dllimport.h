@@ -28,7 +28,7 @@ extern "C" {
 
 DWORD64 FindDllBase64(HANDLE hProcess, const WCHAR* dll);
 BYTE* MapRemoteDll(HANDLE hProcess, DWORD64 DllBase);
-DWORD64 FindDllExport(DWORD64 DllBase, const char* ProcName);
+DWORD64 FindDllExportInMem(DWORD64 DllBase, const char* ProcName);
 DWORD64 FindRemoteDllExport(HANDLE hProcess, DWORD64 DllBase, const char* ProcName);
 DWORD64 FindDllExportFromFile(const WCHAR* dll, const char* ProcName);
 

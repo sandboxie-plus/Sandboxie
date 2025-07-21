@@ -23,7 +23,7 @@ static bool IsPlatformFullScreenMode()
     typedef HRESULT(WINAPI* SHQueryUserNotificationStatePtr)(
         QUERY_USER_NOTIFICATION_STATE* state);
 
-    HMODULE shell32_base = ::GetModuleHandle(L"shell32.dll");
+    HMODULE shell32_base = ::GetModuleHandleW(L"shell32.dll");
     if (!shell32_base) {
         return false;
     }

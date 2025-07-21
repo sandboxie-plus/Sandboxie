@@ -71,6 +71,7 @@ struct _SYSCALL_ENTRY {
 #ifdef _M_AMD64
     P_Syscall_Handler3_Support_Procmon_Stack handler3_func_support_procmon;
 #endif
+    UCHAR disabled;
     UCHAR approved;
     USHORT name_len;
     UCHAR name[1];

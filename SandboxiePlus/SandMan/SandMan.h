@@ -108,7 +108,8 @@ public:
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
-
+	
+	bool				SetCertificate(const QByteArray& Certificate);
 	bool				CheckCertificate(QWidget* pWidget, int iType = 0);
 
 	bool				IsAlwaysOnTop() const;
@@ -117,7 +118,6 @@ public:
 	void				UpdateTitleTheme(const HWND& hwnd);
 
 	SB_STATUS			ReloadCert(QWidget* pWidget = NULL);
-	void				UpdateCertState();
 
 	void				SaveMessageLog(QIODevice* pFile);
 
@@ -165,19 +165,6 @@ protected:
 
 	QMap<QString, QSet<QString>> m_MissingTemplates;
 
-	enum EBoxColors
-	{
-		eYellow = 0,
-		eRed,
-		eGreen,
-		eBlue,
-		eCyan,
-		eMagenta,
-		eOrang,
-		eWhite,
-		eMaxColor
-	};
-
 	QMap<int, QRgb> m_BoxColors;
 
 	class UGlobalHotkeys* m_pHotkeyManager;
@@ -208,7 +195,7 @@ public slots:
 	void				OnFileRecovered(const QString& BoxName, const QString& FilePath, const QString& BoxPath);
 
 	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty = false);
-	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
+	class CRecoveryWindow* ShowRecovery(const CSandBoxPtr& pBox);
 
 	void				TryFix(quint32 MsgCode, const QStringList& MsgData, const QString& ProcessName, const QString& BoxName);
 
@@ -228,6 +215,7 @@ public slots:
 	void				OnCancelAsync();
 
 	void				OnBoxAdded(const CSandBoxPtr& pBox);
+	void				OnBoxOpened(const CSandBoxPtr& pBox);
 	void				OnBoxClosed(const CSandBoxPtr& pBox);
 	void				OnBoxCleaned(CSandBoxPlus* pBoxEx);
 
@@ -235,7 +223,7 @@ public slots:
 
 
 	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
-	void				OpenUrl(const QUrl& url);
+	void				OpenUrl(QUrl url);
 
 	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton, int type, QWidget* pParent);
 	void				ShowMessage(const QString& message, int type);
@@ -296,6 +284,8 @@ private slots:
 	void				SetUITheme();
 	void				SetTitleTheme(const HWND& hwnd);
 
+    void				OnCertData(const QByteArray& Certificate, const QVariantMap& Params);
+
 	void				AddLogMessage(const QString& Message);
 	void				AddFileRecovered(const QString& BoxName, const QString& FilePath);
 
@@ -353,6 +343,7 @@ private:
 	QVBoxLayout*		m_pMainLayout;
 
 	QToolBar*			m_pToolBar;
+	QMenu*				m_pToolBarContextMenu;
 	QSplitter*			m_pPanelSplitter;
 	QSplitter*			m_pLogSplitter;
 
@@ -480,6 +471,7 @@ private:
 	CPopUpWindow*		m_pPopUpWindow;
 
 	bool				m_StartMenuUpdatePending;
+public:
 
 	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;
@@ -491,7 +483,6 @@ private:
 	void				LoadLanguage(const QString& Lang, const QString& Module, int Index);
 	QTranslator			m_Translator[2];
 
-public:
 	class COnlineUpdater*m_pUpdater;
 
 	QString				m_Language;
@@ -540,6 +531,22 @@ class CTreeItemDelegate2 : public CTreeItemDelegate
 		size.setHeight(32);
 		return size;
 	}
+};
+
+class CTrayBoxesItemDelegate : public QStyledItemDelegate
+{
+	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QStyleOptionViewItem opt(option);
+		if ((opt.state & QStyle::State_MouseOver) != 0)
+			opt.state |= QStyle::State_Selected;
+		else if ((opt.state & QStyle::State_HasFocus) != 0 && m_Hold)
+			opt.state |= QStyle::State_Selected;
+		opt.state &= ~QStyle::State_HasFocus;
+		QStyledItemDelegate::paint(painter, opt, index);
+	}
+public:
+	static bool m_Hold;
 };
 
 extern CSandMan* theGUI;

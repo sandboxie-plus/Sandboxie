@@ -128,6 +128,8 @@ NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms);
 
 NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms);
 
+NTSTATUS Conf_Api_Set(PROCESS *proc, ULONG64 *parms);
+
 
 //---------------------------------------------------------------------------
 

@@ -25,14 +25,14 @@ int RunElevated(const std::wstring& Params, bool bGetCode)
 {
 	// Launch itself as admin
 	wchar_t szPath[MAX_PATH];
-	if (!GetModuleFileName(NULL, szPath, ARRAYSIZE(szPath)))
+	if (!GetModuleFileNameW(NULL, szPath, ARRAYSIZE(szPath)))
 		return -104;
 	return RunElevated(std::wstring(szPath), Params, bGetCode ? 10000 : 0);
 }
 
 int RunElevated(const std::wstring& binaryPath, const std::wstring& Params, quint32 uTimeOut)
 {
-	SHELLEXECUTEINFO sei = { sizeof(sei) };
+	SHELLEXECUTEINFOW sei = { sizeof(sei) };
 	sei.fMask = SEE_MASK_NOCLOSEPROCESS;
 	sei.lpVerb = L"runas";
 	sei.lpFile = binaryPath.c_str();
@@ -40,7 +40,7 @@ int RunElevated(const std::wstring& binaryPath, const std::wstring& Params, quin
 	sei.hwnd = NULL;
 	sei.nShow = SW_NORMAL;
 
-	if (!ShellExecuteEx(&sei))
+	if (!ShellExecuteExW(&sei))
 	{
 		DWORD dwError = GetLastError();
 		if (dwError == ERROR_CANCELLED)
@@ -115,17 +115,17 @@ bool IsAutorunEnabled()
 	bool result = false;
 
 	HKEY hkey = nullptr;
-	if (ERROR_SUCCESS == RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
+	if (ERROR_SUCCESS == RegOpenKeyExW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
 	{
 		// First, determine the required buffer size, including NUL terminator (in bytes). RegGetValue() always adds
 		// an extra NUL terminator to size, even if one already exists, in case the stored value doesn't have one.
 		DWORD size {0};
-		if (ERROR_SUCCESS == RegGetValue(hkey, nullptr, AUTO_RUN_KEY_NAME, RRF_RT_REG_SZ, nullptr, nullptr, &size))
+		if (ERROR_SUCCESS == RegGetValueW(hkey, nullptr, AUTO_RUN_KEY_NAME, RRF_RT_REG_SZ, nullptr, nullptr, &size))
 		{
 			// Then, allocate the buffer (in WCHARs) and retrieve the auto-run value. If successful, the size
 			// variable will be set to the actual size, without the extra NUL terminator.
 			auto buffer = std::make_unique< WCHAR[] >(size / sizeof(WCHAR));
-			if (ERROR_SUCCESS == RegGetValue(hkey, nullptr, AUTO_RUN_KEY_NAME, RRF_RT_REG_SZ, nullptr, reinterpret_cast<LPBYTE>(buffer.get()), &size))
+			if (ERROR_SUCCESS == RegGetValueW(hkey, nullptr, AUTO_RUN_KEY_NAME, RRF_RT_REG_SZ, nullptr, reinterpret_cast<LPBYTE>(buffer.get()), &size))
 			{
 				result = true; // todo: check path
 			}
@@ -142,22 +142,22 @@ bool AutorunEnable (bool is_enable)
 	bool result = false;
 
 	HKEY hkey = nullptr;
-	if (ERROR_SUCCESS == RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
+	if (ERROR_SUCCESS == RegOpenKeyExW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
 	{
 		if (is_enable)
 		{
 			constexpr size_t MAX_PATH_EX = 32767; // Long file path max length, in characters
 			auto szPath = std::make_unique< WCHAR[] >(MAX_PATH_EX);
-			if (GetModuleFileName(NULL, szPath.get(), MAX_PATH_EX))
+			if (GetModuleFileNameW(NULL, szPath.get(), MAX_PATH_EX))
 			{
 				const std::wstring path = L"\"" + std::wstring(szPath.get()) + L"\" -autorun";
 
-				result = (ERROR_SUCCESS == RegSetValueEx(hkey, AUTO_RUN_KEY_NAME, 0, REG_SZ, reinterpret_cast<const BYTE*>(path.c_str()), static_cast<DWORD>((path.length() + 1) * sizeof(WCHAR))));
+				result = (ERROR_SUCCESS == RegSetValueExW(hkey, AUTO_RUN_KEY_NAME, 0, REG_SZ, reinterpret_cast<const BYTE*>(path.c_str()), static_cast<DWORD>((path.length() + 1) * sizeof(WCHAR))));
 			}
 		}
 		else
 		{
-			result = (ERROR_SUCCESS == RegDeleteValue (hkey, AUTO_RUN_KEY_NAME));
+			result = (ERROR_SUCCESS == RegDeleteValueW(hkey, AUTO_RUN_KEY_NAME));
 		}
 
 		RegCloseKey (hkey);
@@ -231,7 +231,7 @@ bool SkipUacEnable (bool is_enable)
 	IRegisteredTask* registered_task = nullptr;
 
 	wchar_t szPath[MAX_PATH];
-	if (!GetModuleFileName(NULL, szPath, ARRAYSIZE(szPath)))
+	if (!GetModuleFileNameW(NULL, szPath, ARRAYSIZE(szPath)))
 		return false;
     std::wstring::size_type pos = std::wstring(szPath).find_last_of( L"\\/" );
     std::wstring dir = std::wstring(szPath).substr(0, pos);
@@ -372,7 +372,7 @@ bool SkipUacRun (bool test_only)
 	IRunningTask* running_task = nullptr;
 
 	wchar_t szPath[MAX_PATH];
-	if (!GetModuleFileName(NULL, szPath, ARRAYSIZE(szPath)))
+	if (!GetModuleFileNameW(NULL, szPath, ARRAYSIZE(szPath)))
 		return false;
 
 	MBSTR root (L"\\");
@@ -404,7 +404,7 @@ bool SkipUacRun (bool test_only)
 
 											exec_action->get_Path (&path);
 
-											PathUnquoteSpaces (path);
+											PathUnquoteSpacesW(path);
 
 											// check path is to current module
 											if (_wcsicmp (path, szPath) == 0)
@@ -420,7 +420,7 @@ bool SkipUacRun (bool test_only)
 													// get arguments
 													{
 														INT numargs = 0;
-														LPWSTR* arga = CommandLineToArgvW(GetCommandLine(), &numargs);
+														LPWSTR* arga = CommandLineToArgvW(GetCommandLineW(), &numargs);
 
 														for (INT i = 1; i < numargs; i++) {
 															if (i > 1)

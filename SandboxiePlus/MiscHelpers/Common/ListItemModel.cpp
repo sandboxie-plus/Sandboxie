@@ -186,7 +186,7 @@ QVariant CListItemModel::Data(const QModelIndex &index, int role, int section) c
         return QVariant();
 
     //if(role == Qt::SizeHintRole )
-    //    return QSize(64,16); // for fixing height
+    //    return QSize(16,16); // for fixing height
 
 	SListNode* pNode = static_cast<SListNode*>(index.internalPointer());
 

@@ -474,7 +474,7 @@ void RenameSandbox(void)
 //---------------------------------------------------------------------------
 
 
-void LaunchProgram(WCHAR *cmdSrc, bool bWait)
+bool LaunchProgram(WCHAR *cmdSrc, bool bWait)
 {
     WCHAR cmd[768];
     ExpandEnvironmentStrings(cmdSrc, cmd, 760);
@@ -500,12 +500,7 @@ void LaunchProgram(WCHAR *cmdSrc, bool bWait)
             CloseHandle(pi.hProcess);
     }
 
-    if (! ok) {
-        WCHAR txt[1024];
-        wcscpy(txt, SbieDll_FormatMessage0(MSG_3222));
-        wcscat(txt, cmd);
-        Error(txt, 0);
-    }
+    return ok;
 }
 
 
@@ -527,7 +522,11 @@ NOINLINE void LaunchPhase2(void)
         wcscat(cmd, L"_silent");
     wcscat(cmd, L"_phase2");
 
-    LaunchProgram(cmd, FALSE);
+    bool ok = LaunchProgram(cmd, FALSE);
+
+    if (! ok) {
+        Error(SbieDll_FormatMessage1(MSG_3222, cmd), 0);
+    }
 }
 
 
@@ -642,7 +641,11 @@ void DeleteFilesInBox(const WCHAR *boxname)
 
             WCHAR cmd2[1536];
             TranslateCommand(cmd, cmd2, BoxFolder);
-            LaunchProgram(cmd2, TRUE);
+            bool ok = LaunchProgram(cmd2, TRUE);
+
+            if (! ok) {
+                Error(SbieDll_FormatMessage1(MSG_3222, cmd), 0);
+            }
         }
 
         if (! FindNextFile(hFind, &data))
@@ -1162,6 +1165,8 @@ int Delete_All_Sandboxes()
         if (index == -1)
             break;
         WCHAR* buf = GetBoxFilePath(BoxName, 0);
+        if (!buf)
+            continue;
 
         while(*buf)
         {
@@ -1186,6 +1191,10 @@ int Delete_All_Sandboxes()
 
         const WCHAR* BoxFolder = I->c_str();
 
+        DWORD attribs = GetFileAttributesW(BoxFolder);
+        if (attribs == INVALID_FILE_ATTRIBUTES)
+            continue;
+
         SetStatusMsg(MSG_3317, BoxFolder);
         WaitForFolder(BoxFolder, 10);
 
@@ -1198,7 +1207,12 @@ int Delete_All_Sandboxes()
         wcscpy(cmd, L"%SystemRoot%\\System32\\cmd.exe /c rmdir /s /q \"");
         wcscat(cmd, BoxFolder);
         wcscat(cmd, L"\"");
-        LaunchProgram(cmd, TRUE);
+        bool ok = LaunchProgram(cmd, TRUE);
+        
+        if (! ok) {
+            SetStatusMsg(MSG_3222, cmd);
+            Sleep(3000);
+        }
     }
 
     StopStatusDialog();

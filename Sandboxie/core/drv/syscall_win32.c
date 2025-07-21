@@ -29,7 +29,7 @@ static BOOLEAN Syscall_Init_List32(void);
 
 static BOOLEAN Syscall_Init_Table32(void);
 
-void Syscall_Update_Lockdown32();
+void Syscall_Update_Config32();
 
 
 //---------------------------------------------------------------------------
@@ -508,7 +508,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
     // DbgPrint("[syscall] request p=%06d t=%06d - BEGIN %s\n", PsGetCurrentProcessId(), PsGetCurrentThreadId(), entry->name);
 
     if(!proc->is_locked_down || entry->approved)
-        Thread_SetThreadToken(proc);        // may set proc->terminated
+        Thread_SetThreadToken(proc);        // may set proc->terminated // does nothing if !proc->primary_token
 
 //    if (proc->terminated) {
 //
@@ -569,7 +569,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
         }
 #endif
 
-        if (entry->handler1_func) {
+        if (entry->handler1_func && !proc->open_all_nt) {
 
             status = entry->handler1_func(proc, entry, user_args);
 
@@ -629,7 +629,8 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
     // use of the highly restricted primary token in this thread
     //
 
-    Thread_ClearThreadToken();
+    if(proc->primary_token)
+        Thread_ClearThreadToken();
 
     /*if (! NT_SUCCESS(status)) {
         DbgPrint("Process %06d Syscall %04X Status %08X\n", proc->pid, syscall_index, status);
@@ -719,11 +720,11 @@ _FX NTSTATUS Syscall_Api_Query32(PROCESS *proc, ULONG64 *parms)
 }
 
 //---------------------------------------------------------------------------
-// Syscall_Update_Lockdown32
+// Syscall_Update_Config32
 //---------------------------------------------------------------------------
 
 
-_FX void Syscall_Update_Lockdown32()
+_FX void Syscall_Update_Config32()
 {
     SYSCALL_ENTRY *entry;
 

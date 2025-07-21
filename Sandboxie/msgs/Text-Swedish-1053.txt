@@ -1214,6 +1214,18 @@ Ladda om konfigurationen
 &Stöd Sandboxie
 .
 
+3505;txt;01
+Bidra till Sandboxie
+.
+
+3506;txt;01
+Skaffa supportercertifikat
+.
+
+3507;txt;01
+Tillämpa supportercertifikat
+.
+
 3451;txt;01
 &Hjälp
 .
@@ -1280,6 +1292,10 @@ Kör &utforskaren
 
 3467;txt;01
 Uppgradera till Sandboxie-Plus
+.
+
+3469;txt;01
+Vad är nytt i Sandboxie-Plus
 .
 
 3471;txt;01

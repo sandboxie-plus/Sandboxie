@@ -1589,11 +1589,82 @@ LABEL_9:
 }
 */
 
+int hex_digit_value(wchar_t c) {
+    if (c >= (wchar_t)'0' && c <= (wchar_t)'9') {
+        return c - (wchar_t)'0';
+    } else if (c >= (wchar_t)'a' && c <= (wchar_t)'f') {
+        return 10 + (c - (wchar_t)'a');
+    } else if (c >= (wchar_t)'A' && c <= (wchar_t)'F') {
+        return 10 + (c - (wchar_t)'A');
+    } else {
+        return -1; // Invalid hex digit
+    }
+}
+
+BOOL hex_string_to_uint8_array(const wchar_t* str, unsigned char* output_array, size_t* output_length, BOOL swap_bytes)
+{
+    size_t output_index = 0;
+    int digit_high = -1;
+    size_t i = 0;
+    size_t capacity = *output_length;
+
+    // empty string counts as invalid
+    if (!*str)
+        return FALSE;
+
+    while (1) {
+        wchar_t c = str[i++];
+        if (c == 0) {
+            break;
+        }
+        else if (c == (wchar_t)'-') {
+            continue;
+        }
+        else {
+            int value = hex_digit_value(c);
+            if (value == -1) {
+                // Invalid character encountered
+                return FALSE;
+            }
+            if (digit_high == -1) {
+                digit_high = value;
+            }
+            else {
+                int digit_low = value;
+                if (output_index >= capacity) {
+                    // Exceeded capacity of output_array
+                    return FALSE;
+                }
+                output_array[output_index++] = (digit_high << 4) | digit_low;
+                digit_high = -1;
+            }
+        }
+    }
+
+    // Check for incomplete byte (odd number of hex digits)
+    if (digit_high != -1) {
+        return FALSE;
+    }
+
+    // Swap the bytes in output_array to match the expected endianness
+    if (swap_bytes) {
+        size_t j;
+        for (j = 0; j < output_index / 2; j++) {
+            unsigned char temp = output_array[j];
+            output_array[j] = output_array[output_index - 1 - j];
+            output_array[output_index - 1 - j] = temp;
+        }
+    }
+
+    *output_length = output_index;
+    return TRUE;
+}
+
 ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigned int TcpInformationId, void **pAddrEntry, int SizeOfAddrEntry, void **a6, int a7, void **pStateEntry, int SizeOfStateEntry, void **pOwnerEntry, int SizeOfOwnerEntry, DWORD *Count, int a13)
 {
     ULONG ret = __sys_NsiAllocateAndGetTable(a1, NPI_MS_ID, TcpInformationId, pAddrEntry, SizeOfAddrEntry, a6, a7, pStateEntry, SizeOfStateEntry, pOwnerEntry, SizeOfOwnerEntry, Count, a13);
-
-    if (memcmp(NPI_MS_ID, NPI_MS_NDIS_MODULEID, 24) == 0 && pStateEntry)
+	static long num = 0;
+    if (ret == 0 && memcmp(NPI_MS_ID, NPI_MS_NDIS_MODULEID, 24) == 0 && TcpInformationId == 1 && pStateEntry)
     {
         typedef struct _STATE_ENTRY {
             DWORD ThreadCompartmentId;     // 0
@@ -1630,8 +1701,19 @@ ULONG Nsi_NsiAllocateAndGetTable(int a1, struct NPI_MODULEID* NPI_MS_ID, unsigne
                     memcpy(pEntry->Address, lpMac, 8);
 		        else
 		        {
-			        *(DWORD*)&pEntry->Address[0] = Dll_rand();
-                    *(DWORD*)&pEntry->Address[4] = Dll_rand();
+                    WCHAR NicIndex[30] = { 0 };
+                    Sbie_snwprintf(NicIndex, 30, L"%d", num);
+
+                    WCHAR Value[30] = { 0 };
+				    SbieDll_GetSettingsForName(NULL, NicIndex, L"NetworkAdapterMAC", Value, sizeof(Value), L"");
+
+                    size_t AddressLen = 8;
+                    if (!hex_string_to_uint8_array(Value, pEntry->Address, &AddressLen, FALSE)) {
+                        *(DWORD*)&pEntry->Address[0] = Dll_rand();
+						*(DWORD*)&pEntry->Address[4] = Dll_rand();
+                    }
+
+					num++;
 			        map_insert(&Custom_NicMac, (void*)key, pEntry->Address, 8);
 		        }
 
@@ -1798,61 +1880,6 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
 // Custom_ProductID
 //---------------------------------------------------------------------------
 
-/*static wchar_t GetCharFromInt(int a) {
-	switch (a) {
-	case 0:
-		return L'0';
-		break;
-	case 1:
-		return L'1';
-		break;
-	case 2:
-		return L'2';
-		break;
-	case 3:
-		return L'3';
-		break;
-	case 4:
-		return L'4';
-		break;
-	case 5:
-		return L'5';
-		break;
-	case 6:
-		return L'6';
-		break;
-	case 7:
-		return L'7';
-		break;
-	case 8:
-		return L'8';
-		break;
-	case 9:
-		return L'9';
-		break;
-	}
-	return 0;
-}
-
-static int GetIntLen(DWORD n) {
-	int count = 0;
-	while (n != 0)
-	{
-		n = n / 10;
-		count++;
-	}
-	return count;
-}*/
-
-static unsigned long seed = 1;
-
-int my_rand(void)
-{
-	seed = (seed * 214013L
-		+ 2531011L) >> 16;
-	return((unsigned)seed & 0x7fff);
-}
-
 /*char* my_itoa(int num, char* str, int radix)
 {
 	char index[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -1944,11 +1971,10 @@ _FX BOOLEAN  Custom_ProductID(void)
 
 			RtlInitUnicodeString(&uni, L"ProductId");
 
-			seed = GetTickCount();
-			int chain1 = my_rand() % 10000 + 9999,
-				chain2 = my_rand() % 10000 + 9999,
-				chain3 = my_rand() % 10000 + 9999,
-				chain4 = my_rand() % 10000 + 9999
+			int chain1 = Dll_rand() % 10000 + 9999,
+				chain2 = Dll_rand() % 10000 + 9999,
+				chain3 = Dll_rand() % 10000 + 9999,
+				chain4 = Dll_rand() % 10000 + 9999
 				;
 			Sbie_snwprintf(tmp, 34, L"%05d-%05d-%05d-%05d", chain1, chain2, chain3, chain4);
 			

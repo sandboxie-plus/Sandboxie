@@ -11,7 +11,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="96"/>
         <source>kilobytes</source>
-        <translation>Kb</translation>
+        <translation>KB</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="157"/>
@@ -498,7 +498,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>kilobytes (%1)</source>
-        <translation>Kb (%1)</translation>
+        <translation>KB (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="140"/>
@@ -584,7 +584,7 @@ It strictly limits access to user data, allowing processes within this box to on
 The entire user profile remains hidden, ensuring maximum security.</oldsource>
         <translation>该沙箱类型提供了最高级别的保护，能显著减少暴露于沙箱内进程的攻击面。
 它严格限制对用户数据的访问，该沙箱中的进程只能访问 C:\Windows 和两个 C:\Program Files 目录。
-整个用户配置文件被完全隐藏，从而确保了最大程度的安全性。</translation>
+所有用户资料被完全隐藏，从而确保了最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>
@@ -646,7 +646,7 @@ While the level of isolation is reduced compared to other box types, it offers i
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="424"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypt&lt;/a&gt; Box content and set &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;加密&lt;/a&gt; 沙箱内容并设置 &lt;a href=&quot;sbie://docs/black-box&quot;&gt;证书&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;加密&lt;/a&gt; 沙箱内容并启用 &lt;a href=&quot;sbie://docs/black-box&quot;&gt;保密功能&lt;/a&gt;</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypted&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt; Box</source>
@@ -696,7 +696,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="454"/>
         <source>Confidential Encrypted Box</source>
-        <translation>证书加密沙箱</translation>
+        <translation>带有保密功能的加密沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="579"/>
@@ -1191,12 +1191,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation>沙箱无法位于分区的根目录下，请选择一个文件夹。</translation>
+        <translation>无法在分区的根目录下创建沙箱，请选择其他文件夹。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation>无法在网络共享上找到沙箱，请选择本地文件夹。</translation>
+        <translation>无法在网络共享上创建沙箱，请选择本地文件夹。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="714"/>
@@ -4346,7 +4346,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3470"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
-        <translation>&lt;b&gt;错误：&lt;/b&gt;Sandboxie-Plus管理器（SandMan.exe）没有有效的签名（SandMan.exe.sig）。请从&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;官方下载&lt;/a&gt;。</translation>
+        <translation>&lt;b&gt;错误：&lt;/b&gt;Sandboxie-Plus 管理器（SandMan.exe）没有有效的签名（SandMan.exe.sig）。请从&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;官方下载&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3578"/>
@@ -4576,7 +4576,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation>某些兼容性模板缺失：&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;这些模板可能已被删除，您是否希望将它们从所有沙盒中移除？</translation>
+        <translation>某些兼容性模板缺失：&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;这些模板可能已被删除，您是否希望将它们从所有沙箱中移除？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2036"/>
@@ -4614,7 +4614,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation>沙盘管理器上次未能完成已安装的 Windows 更新的枚举操作，它很可能处于挂起状态。
+        <translation>Sandboxie 管理器在上次尝试扫描已安装的 Windows 更新时可能失去响应，从而未能完成该操作。
 你是否想要从软件兼容性检测中禁用 Windows 更新扫描功能？</translation>
     </message>
     <message>
@@ -4946,7 +4946,7 @@ Error: %1</source>
     <message>
         <location filename="SbieProcess.cpp" line="63"/>
         <source>Sbie Svc</source>
-        <translation>沙箱软件服务</translation>
+        <translation>Sbie 沙箱软件服务</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="64"/>
@@ -5231,7 +5231,7 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="212"/>
         <location filename="Views/SbieView.cpp" line="370"/>
         <source>Explore Content</source>
-        <translation>浏览内容</translation>
+        <translation>在 Windows 资源管理器中打开</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="214"/>
@@ -6012,7 +6012,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1302"/>
         <source>kilobytes (%1)</source>
-        <translation>Kb (%1)</translation>
+        <translation>KB (%1)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1390"/>
@@ -6699,7 +6699,7 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="565"/>
         <source>Enabling this option prevents changes to the Sandboxie.ini configuration from the user interface without admin rights. Be careful, as using Sandboxie Manager with normal user rights may result in a lockout. To make changes to the configuration, you must restart Sandboxie Manager as an admin by clicking &apos;Restart as Admin&apos; in the &apos;Sandbox&apos; menu in the main window.</source>
-        <translation>启用这个选项会阻止从无管理员权限的用户界面对Sandboxie.ini的配置更改。小心点，因为使用带有普通用户权限的沙盘管理器将可能陷入锁定。为了对配置进行修改，你必须通过点击主窗口中 &apos; 沙箱 &apos; 菜单下的 &apos; 以管理员特权重启 &apos; 菜单项来作为管理员重启沙盘管理器。</translation>
+        <translation>启用这个选项会阻止无管理员权限的用户通过 Sandboxie 管理器界面对 Sandboxie.ini 进行修改的操作。小心点，因为在普通用户权限下使用 Sandboxie 管理器将可能导致其无法再次被打开。如需要修改配置，你必须通过点击主窗口中 &apos; 沙箱 &apos; 菜单下的 &apos; 以管理员特权重启 &apos; 菜单项来作为管理员重启 Sandboxie 管理器。</translation>
     </message>
     <message>
         <source>When this option is set, Sandbox Manager with normal user permissions will not be able to modify the configuration, which may result in a lock. You need to open the Sandbox Manager main window, click &quot;Sandbox (s)&quot; in the system menu, and then click &quot;Restart as Admin&quot; in the pop - up context menu to gain control of the configuration.</source>
@@ -6954,7 +6954,7 @@ Processes in this box will be running with a custom process token indicating the
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation>
-该沙箱中的进程将会以沙箱专属的自定义进程证书运行。</translation>
+该沙箱中的进程将会以沙箱专属的自定义进程令牌运行。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1124"/>
@@ -6971,7 +6971,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
         <translation>此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊许可证。
-如果你已经在 Patreaon 是 Great Supporter 类型的赞助者，Sandboxie 可以在线检测你的许可证更新。</translation>
+如果你已经在 Patreon 是 Great Supporter 类型的赞助者，Sandboxie 可以在线检测你的许可证更新。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
@@ -6982,7 +6982,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
         <source>An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. You must now purchase a valid certificate, as the usage of the free version has been restricted.</source>
-        <translation>你正试图在此系统上使用被阻止的许可证。此操作违反了支持许可证的使用条款。您现在必须购买有效的许可证，否则将受到免费版本的使用限制。</translation>
+        <translation>你正试图在此系统上使用被封禁的许可证。此操作违反了支持许可证的使用条款。您现在必须购买有效的许可证，否则将受到免费版本的使用限制。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="162"/>
@@ -9423,7 +9423,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1496"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
-        <translation>Sandboxie-Plus 可以创建证书加密沙箱，避免沙箱外潜在的恶意软件篡改或监听沙箱内进程。通过利用加密沙箱映像，该功能提供了高度可靠的操作安全性，保障了沙箱进程的安全与完整性。</translation>
+        <translation>Sandboxie-Plus 可以创建保密沙箱，避免沙箱外潜在的恶意软件篡改或监听沙箱内进程。通过利用加密沙箱映像，该功能提供了高度可靠的操作安全性，保障了沙箱进程的安全与完整性。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1644"/>
@@ -10834,7 +10834,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1555"/>
         <source>kilobytes</source>
-        <translation>Kb</translation>
+        <translation>KB</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1609"/>

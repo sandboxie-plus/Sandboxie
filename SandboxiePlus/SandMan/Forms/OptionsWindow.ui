@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>10</number>
+        <number>12</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -6018,17 +6018,7 @@ Please note that this values are currently user specific and saved globally for 
          <string>Edit ini Section</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QPushButton" name="btnEditIni">
-           <property name="text">
-            <string>Edit ini</string>
-           </property>
-           <property name="checkable">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
+         <item row="0" column="4">
           <widget class="QPushButton" name="btnCancelEdit">
            <property name="enabled">
             <bool>false</bool>
@@ -6038,7 +6028,14 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item row="1" column="0" colspan="5">
+          <widget class="QPlainTextEdit" name="txtIniSection">
+           <property name="lineWrapMode">
+            <enum>QPlainTextEdit::NoWrap</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
           <spacer name="horizontalSpacer_7">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -6051,7 +6048,7 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </spacer>
          </item>
-         <item row="0" column="2">
+         <item row="0" column="3">
           <widget class="QPushButton" name="btnSaveIni">
            <property name="enabled">
             <bool>false</bool>
@@ -6061,10 +6058,38 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="4">
-          <widget class="QPlainTextEdit" name="txtIniSection">
-           <property name="lineWrapMode">
-            <enum>QPlainTextEdit::NoWrap</enum>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btnEditIni">
+           <property name="text">
+            <string>Edit ini</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="chkValidateIniKeys">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;When checked, INI keys will be validated and highlighted according to the CSV. Uncheck to disable validation/highlighting.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Validate</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

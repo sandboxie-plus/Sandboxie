@@ -3310,6 +3310,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
   <tabstop>chkSbieAll</tabstop>
   <tabstop>chkWatchConfig</tabstop>
   <tabstop>chkSkipUAC</tabstop>
+  <tabstop>chkUseW11Style</tabstop>
   <tabstop>chkAdminOnly</tabstop>
   <tabstop>chkPassRequired</tabstop>
   <tabstop>btnSetPassword</tabstop>

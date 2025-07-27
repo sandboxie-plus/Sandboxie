@@ -1,6 +1,29 @@
 #include "stdafx.h"
 #include "IniHighlighter.h"
+#include "../MiscHelpers/Common/Settings.h"
 #include "../version.h"
+
+const QString CIniHighlighter::DEFAULT_SETTINGS_FILE = "SbieSettings.ini";
+const QString CIniHighlighter::DEFAULT_VERSION = "0.0.0";
+
+QVersionNumber CIniHighlighter::s_currentVersion;
+QVersionNumber CIniHighlighter::getCurrentVersion()
+{
+	if (s_currentVersion.isNull()) {
+		QMutexLocker locker(&settingsMutex);
+		if (s_currentVersion.isNull()) {
+			QString versionStr = QString("%1.%2.%3").arg(VERSION_MJR).arg(VERSION_MIN).arg(VERSION_REV);
+			s_currentVersion = QVersionNumber::fromString(versionStr);
+		}
+	}
+	return s_currentVersion;
+}
+QHash<QString, SettingInfo> CIniHighlighter::validSettings;
+QDateTime CIniHighlighter::lastFileModified;
+bool CIniHighlighter::settingsLoaded = false;
+QMutex CIniHighlighter::settingsMutex;
+QHash<QString, QString> CIniHighlighter::tooltipCache;
+QMutex CIniHighlighter::tooltipCacheMutex;
 
 CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument* parent, bool enableValidation)
 	: QSyntaxHighlighter(parent), m_enableValidation(enableValidation)
@@ -117,13 +140,25 @@ CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument* parent, bool ena
     jsonHighlightRules.append(jsonRule);
 #endif
 
-	// Automatically load settings from SbieSettings.csv in the same directory as SandMan.exe
-	QString settingsPath = QCoreApplication::applicationDirPath() + "/SbieSettings.csv";
-	loadSettingsCsv(settingsPath);
+	// Check if we need to load the settings file - with mutex protection
+	QString settingsPath = QCoreApplication::applicationDirPath() + "/" + DEFAULT_SETTINGS_FILE;
+	QFileInfo fileInfo(settingsPath);
 
-	// Use version.h macros for default/current version
-	QString versionStr = QString("%1.%2.%3").arg(VERSION_MJR).arg(VERSION_MIN).arg(VERSION_REV);
-	setCurrentVersion(versionStr); // Set semantic version from macros
+	bool needToLoad = false;
+	{
+		QMutexLocker locker(&settingsMutex); // Lock for checking cache status
+		needToLoad = !settingsLoaded || !fileInfo.exists() || fileInfo.lastModified() > lastFileModified;
+	}
+
+	if (needToLoad) {
+		loadSettingsIni(settingsPath);
+	}
+	else {
+		qDebug() << "[validSettings] Using cached settings (" << validSettings.size() << " entries)";
+	}
+
+	// Use cached version instead of creating a new one each time
+	m_currentVersion = getCurrentVersion();
 }
 
 CIniHighlighter::~CIniHighlighter()
@@ -135,46 +170,416 @@ void CIniHighlighter::setCurrentVersion(const QString& version)
 	m_currentVersion = QVersionNumber::fromString(version);
 }
 
-// Load settings from SbieSettings.csv
-void CIniHighlighter::loadSettingsCsv(const QString& filePath)
+// Load settings from SbieSettings.ini
+void CIniHighlighter::loadSettingsIni(const QString& filePath)
 {
-	allowedSettings.clear();
+	QMutexLocker locker(&settingsMutex); // Lock during the entire load operation
+
+	// Clear tooltip cache when settings are reloaded
+	{
+		QMutexLocker cacheLock(&tooltipCacheMutex);
+		tooltipCache.clear();
+	}
+
 	QFile file(filePath);
 	if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+		validSettings.clear();
 		QTextStream in(&file);
-		bool firstLine = true;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+		// Qt5: use setCodec
+		in.setCodec("UTF-8");
+#endif
+
+		QString currentSection;
+		SettingInfo currentInfo;
+		bool inSection = false;
+
 		while (!in.atEnd()) {
-			QString line = in.readLine();
-			if (firstLine) { firstLine = false; continue; } // skip header
-			QStringList parts = line.split(';');
-			if (parts.size() >= 5) { // columns: Name, AddedVersion, RemovedVersion, ReaddedVersion, RenamedVersion
-				SettingInfo info;
+			QString line = in.readLine().trimmed();
 
-				// Only accept [a-zA-Z0-9_.] in name
-				info.name = parts[0].trimmed();
-				info.name.remove(QRegularExpression("[^a-zA-Z0-9_.]"));
+			// Skip empty lines and comments
+			if (line.isEmpty() || line.startsWith(';') || line.startsWith('#'))
+				continue;
 
-				// Only accept [0-9.] in version fields, default to "0.0.0" if empty
-				auto sanitizeVersion = [](const QString& s, bool defaultZero = false) {
+			// Check if this is a section header [SectionName]
+			QRegularExpression sectionRegex(R"(^\[([^\]]+)\]\s*$)");
+			QRegularExpressionMatch sectionMatch = sectionRegex.match(line);
+
+			if (sectionMatch.hasMatch()) {
+				// If we were already processing a section, save it
+				if (inSection && !currentSection.isEmpty()) {
+					currentInfo.name = currentSection;
+					validSettings.insert(currentInfo.name, currentInfo);
+				}
+
+				// Start a new section
+				currentSection = sectionMatch.captured(1).trimmed();
+				currentInfo = SettingInfo(); // Reset info for new section
+				inSection = true;
+				continue;
+			}
+
+			// If not in a section yet, skip
+			if (!inSection)
+				continue;
+
+			// Process key=value pairs
+			int equalsPos = line.indexOf('=');
+			if (equalsPos > 0) {
+				QString key = line.left(equalsPos).trimmed();
+				QString value = line.mid(equalsPos + 1).trimmed();
+
+				// Helper function to sanitize version strings
+				auto sanitizeVersion = [this](const QString& s, bool defaultZero = false) {
 					QString v = s.trimmed();
 					v.remove(QRegularExpression("[^0-9.]"));
 					QRegularExpression rx("^[0-9]+\\.[0-9]+\\.[0-9]+$"); // Exact x.y.z format
 					if (rx.match(v).hasMatch())
 						return v;
-					return defaultZero ? QString("0.0.0") : QString();
+					return defaultZero ? QString(DEFAULT_VERSION) : QString();
 					};
 
-				info.addedVersion = sanitizeVersion(parts[1], true);  // default "0.0.0" if empty
-				info.removedVersion = sanitizeVersion(parts[2]);
-				info.readdedVersion = sanitizeVersion(parts[3]);
-				info.renamedVersion = sanitizeVersion(parts[4]);
+				// Process special fields
+				if (key.compare("AddedVersion", Qt::CaseInsensitive) == 0)
+					currentInfo.addedVersion = sanitizeVersion(value, true);
+				else if (key.compare("RemovedVersion", Qt::CaseInsensitive) == 0)
+					currentInfo.removedVersion = sanitizeVersion(value);
+				else if (key.compare("ReaddedVersion", Qt::CaseInsensitive) == 0)
+					currentInfo.readdedVersion = sanitizeVersion(value);
+				else if (key.compare("RenamedVersion", Qt::CaseInsensitive) == 0)
+					currentInfo.renamedVersion = sanitizeVersion(value);
+				else if (key.compare("SupersededBy", Qt::CaseInsensitive) == 0)
+					currentInfo.supersededBy = value;
+				else if (key.compare("Category", Qt::CaseInsensitive) == 0)
+					currentInfo.category = value;
+				else if (key.compare("Context", Qt::CaseInsensitive) == 0)
+					currentInfo.context = value;
+				else if (key.compare("Syntax", Qt::CaseInsensitive) == 0) {
+					// Replace \n escape sequences with actual newlines
+					value.replace("\\n", "\n");
+					currentInfo.syntax = value;
+				}
+				else if (key.compare("Description", Qt::CaseInsensitive) == 0) {
+					// Handle main description
+					// Replace \n escape sequences with actual newlines
+					value.replace("\\n", "\n");
 
-				allowedSettings.insert(info.name, info);
+					// If there's already content in the description field,
+					// append this new value with a newline separator
+					if (!currentInfo.description.isEmpty()) {
+						currentInfo.description += "\n" + value;
+					}
+					else {
+						currentInfo.description = value;
+					}
+				}
+				// Handle localized descriptions (Description_XX=value)
+				else if (key.startsWith("Description_", Qt::CaseInsensitive)) {
+					// Modified regex to capture any language code after Description_
+					QRegularExpression langRegex("^Description_(.+)$", QRegularExpression::CaseInsensitiveOption);
+					QRegularExpressionMatch langMatch = langRegex.match(key);
+
+					if (langMatch.hasMatch()) {
+						// Get the language code and normalize to lowercase for consistent matching
+						QString langCode = langMatch.captured(1).toLower();
+						QString localizedDesc = value;
+
+						// Replace \n escape sequences with actual newlines
+						localizedDesc.replace("\\n", "\n");
+
+						// If there's already content for this language, append with newline
+						if (currentInfo.localizedDescriptions.contains(langCode)) {
+							currentInfo.localizedDescriptions[langCode] += "\n" + localizedDesc;
+						}
+						else {
+							currentInfo.localizedDescriptions.insert(langCode, localizedDesc);
+						}
+					}
+				}
+				else if (key.compare("Flags", Qt::CaseInsensitive) == 0)
+					currentInfo.flags = value.toLower().trimmed();
 			}
 		}
+
+		// Don't forget to save the last section
+		if (inSection && !currentSection.isEmpty()) {
+			currentInfo.name = currentSection;
+			// Ensure name contains only valid characters
+			currentInfo.name.remove(QRegularExpression("[^a-zA-Z0-9_.]"));
+			validSettings.insert(currentInfo.name, currentInfo);
+		}
+
 		file.close();
-		qDebug() << "Loaded" << allowedSettings.size() << "settings from" << filePath;
+
+		// Update the cache status after successful load
+		lastFileModified = QFileInfo(filePath).lastModified();
+		settingsLoaded = true;
+
+		qDebug() << "[validSettings] Successfully loaded" << validSettings.size() << "settings from" << filePath;
 	}
+	else {
+		// File couldn't be opened - log the error
+		qWarning() << "[validSettings] Failed to load settings file:" << filePath << "Error:" << file.errorString();
+
+		// Keep settings loaded flag false so we try again next time
+		settingsLoaded = false;
+	}
+}
+
+QString CIniHighlighter::GetSettingTooltip(const QString& settingName)
+{
+	// Early safety check - if settings aren't loaded yet, don't try to access them
+	if (!settingsLoaded || settingName.isEmpty())
+		return QString();
+
+	// Check tooltip cache first (fast path)
+	{
+		QMutexLocker cacheLock(&tooltipCacheMutex);
+		QHash<QString, QString>::const_iterator it = tooltipCache.find(settingName);
+		if (it != tooltipCache.end())
+			return it.value();
+	}
+
+	// Generate tooltip content (requires settings lock)
+	QString tooltip;
+	{
+		QMutexLocker locker(&settingsMutex); // Thread-safe access to shared data
+
+		// Double-check after acquiring the lock
+		if (!settingsLoaded || validSettings.isEmpty() || !validSettings.contains(settingName))
+			return QString();
+
+		const SettingInfo& info = validSettings[settingName];
+
+		// Define the table style once
+		const QString tableStyle = "style='border:none; white-space:nowrap;'";
+
+		// Define the cell style once to avoid repetition
+		const QString labelStyle = "style='text-align:left; padding-right:8px;'";
+		const QString valuePrefix = ": ";
+
+		// Create a table structure for aligned label-value pairs
+		tooltip = "<table " + tableStyle + ">";
+
+		// Add setting name row with merged cells - make the name bold and centered
+		tooltip += "<tr><td colspan='2' style='text-align:left; font-weight:bold;'>" + settingName + "</td></tr>";
+
+		// Add all available fields as rows with aligned labels and values
+		if (!info.addedVersion.isEmpty() && info.addedVersion != DEFAULT_VERSION) {
+			tooltip += "<tr><td " + labelStyle + ">" + tr("Added in version") + "</td>";
+			tooltip += "<td>" + valuePrefix + info.addedVersion + "</td></tr>";
+		}
+
+		if (!info.removedVersion.isEmpty()) {
+			tooltip += "<tr><td " + labelStyle + ">" + tr("Removed in version") + "</td>";
+			tooltip += "<td>" + valuePrefix + info.removedVersion + "</td></tr>";
+		}
+
+		if (!info.readdedVersion.isEmpty()) {
+			tooltip += "<tr><td " + labelStyle + ">" + tr("Re-added in version") + "</td>";
+			tooltip += "<td>" + valuePrefix + info.readdedVersion + "</td></tr>";
+		}
+
+		if (!info.renamedVersion.isEmpty()) {
+			tooltip += "<tr><td " + labelStyle + ">" + tr("Renamed in version") + "</td>";
+			tooltip += "<td>" + valuePrefix + info.renamedVersion + "</td></tr>";
+		}
+
+		if (!info.supersededBy.isEmpty()) {
+			tooltip += "<tr><td " + labelStyle + ">" + tr("Superseded by") + "</td>";
+			tooltip += "<td>" + valuePrefix + info.supersededBy + "</td></tr>";
+		}
+
+		if (!info.category.isEmpty()) {
+			QString categoryDisplay = info.category;
+
+			// Check which category types are present
+			bool hasAdvanced = categoryDisplay.contains('a');
+			bool hasDebug= categoryDisplay.contains('d');
+			bool hasFile = categoryDisplay.contains('f');
+			bool hasGeneral = categoryDisplay.contains('g');
+			bool hasNetwork = categoryDisplay.contains('n');
+			bool hasProgramControl = categoryDisplay.contains('p');
+			bool hasResourceAccess = categoryDisplay.contains('r');
+			bool hasSecurity = categoryDisplay.contains('s');
+			bool hasTemplate = categoryDisplay.contains('t');
+			bool hasVarious = categoryDisplay.contains('v');
+
+			// Build the appropriate category type string
+			QStringList categoryLabels;
+			if (hasAdvanced)
+				categoryLabels.append(tr("Advanced"));
+			if (hasDebug)
+				categoryLabels.append(tr("Debug"));
+			if (hasFile)
+				categoryLabels.append(tr("File"));
+			if (hasGeneral)
+				categoryLabels.append(tr("General"));
+			if (hasNetwork)
+				categoryLabels.append(tr("Network"));
+			if (hasProgramControl)
+				categoryLabels.append(tr("Program Control"));
+			if (hasResourceAccess)
+				categoryLabels.append(tr("Resource Access"));
+			if (hasSecurity)
+				categoryLabels.append(tr("Security"));
+			if (hasTemplate)
+				categoryLabels.append(tr("Template"));
+			if (hasVarious)
+				categoryLabels.append(tr("Various"));
+
+			QString categoryType = categoryLabels.join(" + ");
+
+			// Only display descriptive categories if we recognized some flags
+			if (!categoryType.isEmpty()) {
+				tooltip += "<tr><td " + labelStyle + ">" + tr("Category") + "</td>";
+				tooltip += "<td>" + valuePrefix + categoryType + "</td></tr>";
+			}
+			// Fall back to raw value if no recognized categories
+			else {
+				tooltip += "<tr><td " + labelStyle + ">" + tr("Category") + "</td>";
+				tooltip += "<td>" + valuePrefix + categoryDisplay + "</td></tr>";
+			}
+		}
+
+		if (!info.context.isEmpty()) {
+			QString contextDisplay = info.context;
+
+			// Check which context types are present
+			bool hasGlobal = contextDisplay.contains('g');
+			bool hasTemplate = contextDisplay.contains('t');
+			bool hasSandbox = contextDisplay.contains('s');
+			bool hasUser = contextDisplay.contains('u');
+
+			// Skip showing context if all types are present
+			if (!(hasGlobal && hasTemplate && hasSandbox && hasUser)) {
+				// Build the appropriate context type string
+				QStringList typeLabels;
+				if (hasGlobal)
+					typeLabels.append(tr("Global"));
+				if (hasTemplate)
+					typeLabels.append(tr("Template"));
+				if (hasSandbox)
+					typeLabels.append(tr("Per Sandbox"));
+				if (hasUser)
+					typeLabels.append(tr("User Settings"));
+
+				QString contextType = typeLabels.join(" + ");
+
+				// Only display the tooltip row if we have recognized context types
+				if (!contextType.isEmpty()) {
+					tooltip += "<tr><td " + labelStyle + ">" + tr("Context") + "</td>";
+					tooltip += "<td>" + valuePrefix + "<i>" + contextType + "</i></td></tr>";
+				}
+			}
+		}
+
+		if (!info.syntax.isEmpty()) {
+			// Handle the syntax to preserve its own line breaks
+			QStringList syntaxLines = info.syntax.split('\n');
+			tooltip += "<tr><td " + labelStyle + " style='vertical-align:top;'>" + tr("Syntax") + "</td>";
+			tooltip += "<td>" + valuePrefix + syntaxLines[0];
+
+			// Add additional syntax lines with proper indentation
+			for (int i = 1; i < syntaxLines.size(); i++) {
+				tooltip += "<br>&nbsp;&nbsp;" + syntaxLines[i];
+			}
+			tooltip += "</td></tr>";
+		}
+
+		// Get the current UI language from configuration
+		QString currentLang = theConf->GetString("Options/UiLanguage");
+
+		// Handle special case "native" (use English)
+		if (currentLang.compare("native", Qt::CaseInsensitive) == 0) {
+			currentLang = "en";
+		}
+
+		// If no language is set, determine from system locale
+		if (currentLang.isEmpty()) {
+			currentLang = QLocale::system().name();
+		}
+
+		currentLang = currentLang.toLower();
+
+		// Choose description based on language
+		QString description;
+
+		// First try exact match
+		if (info.localizedDescriptions.contains(currentLang)) {
+			description = info.localizedDescriptions[currentLang];
+		}
+		// Try with just the language part (if it's a locale with country code like "en_US")
+		else if (currentLang.contains('_') &&
+			info.localizedDescriptions.contains(currentLang.left(currentLang.indexOf('_')))) {
+			description = info.localizedDescriptions[currentLang.left(currentLang.indexOf('_'))];
+		}
+		// Fall back to default description
+		else {
+			description = info.description;
+		}
+
+		if (!description.isEmpty()) {
+			// Handle the description to preserve its own line breaks
+			QStringList descLines = description.split('\n');
+			tooltip += "<tr><td " + labelStyle + " style='vertical-align:top;'>" + tr("Description") + "</td>";
+			tooltip += "<td>" + valuePrefix + descLines[0];
+
+			// Add additional description lines with proper indentation
+			for (int i = 1; i < descLines.size(); i++) {
+				tooltip += "<br>&nbsp;&nbsp;" + descLines[i];
+			}
+			tooltip += "</td></tr>";
+		}
+
+		if (!info.flags.isEmpty()) {
+			// Special handling: parse all certificate requirements
+			bool hasStandard = info.flags.contains("s");
+			bool hasAdvanced = info.flags.contains("e");
+			bool hasInsider = info.flags.contains("i");
+
+			// Handle certificate requirements (standard and advanced)
+			if (hasStandard || hasAdvanced) {
+				QStringList certRequirements;
+
+				if (hasStandard)
+					certRequirements.append(tr("Supporter Certificate"));
+
+				if (hasAdvanced)
+					certRequirements.append(tr("Advanced Encryption Pack"));
+
+				QString certMessage = certRequirements.size() > 1
+					? tr("Requires: %1").arg(certRequirements.join(tr(" + ")))
+					: (hasAdvanced ? tr("Requires an Advanced Encryption Pack") : tr("Requires a Supporter Certificate"));
+
+				tooltip += "<tr><td " + labelStyle + " style='color:red;'>" + tr("Certificate") + "</td>";
+				tooltip += "<td style='color:red;'>" + valuePrefix + certMessage + "</td></tr>";
+			}
+
+			// Handle insider build requirement (i) on a separate line
+			if (hasInsider) {
+				tooltip += "<tr><td " + labelStyle + " style='color:red;'>" + tr("Build") + "</td>";
+				tooltip += "<td style='color:red;'>" + valuePrefix + tr("Requires an Insider Build") + "</td></tr>";
+			}
+		}
+
+		tooltip += "</table>";
+	}
+
+	// Store the generated tooltip in cache
+	if (!tooltip.isEmpty()) {
+		QMutexLocker cacheLock(&tooltipCacheMutex);
+		tooltipCache.insert(settingName, tooltip);
+	}
+
+	return tooltip;
+}
+
+bool CIniHighlighter::IsCommentLine(const QString& line)
+{
+	// Skip lines that start with # or ; (after optional whitespace)
+	QString trimmed = line.trimmed();
+	return trimmed.startsWith('#') || trimmed.startsWith(';');
 }
 
 void CIniHighlighter::highlightBlock(const QString &text)
@@ -205,7 +610,7 @@ void CIniHighlighter::highlightBlock(const QString &text)
         }
     }
 
-	// 3. Highlight keys based on allowedSettings and currentVersion
+	// 3. Highlight keys based on validSettings and currentVersion
 	if (m_enableValidation) {
 		QRegularExpression keyRegex("^([^\\s=]+)\\s*=");
 		QRegularExpressionMatch keyMatch = keyRegex.match(text);
@@ -214,9 +619,9 @@ void CIniHighlighter::highlightBlock(const QString &text)
 			int start = keyMatch.capturedStart(1);
 			int length = keyName.length();
 
-			if (!allowedSettings.isEmpty()) { // Only check if list is loaded
-				if (allowedSettings.contains(keyName)) {
-					const SettingInfo& info = allowedSettings[keyName];
+			if (!validSettings.isEmpty()) { // Only check if list is loaded
+				if (validSettings.contains(keyName)) {
+					const SettingInfo& info = validSettings[keyName];
 					QVersionNumber current = m_currentVersion;
 					QVersionNumber renamed = QVersionNumber::fromString(info.renamedVersion);
 					QVersionNumber readded = QVersionNumber::fromString(info.readdedVersion);

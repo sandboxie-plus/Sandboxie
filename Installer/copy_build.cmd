@@ -235,7 +235,7 @@ copy /y %~dp0..\Sandboxie\install\Manifest0.txt %instPath%\
 copy /y %~dp0..\Sandboxie\install\Manifest1.txt %instPath%\
 copy /y %~dp0..\Sandboxie\install\Manifest2.txt %instPath%\
 
-copy /y %~dp0..\Sandboxie\install\SbieSettings.csv %instPath%\
+copy /y %~dp0..\Sandboxie\install\SbieSettings.ini %instPath%\
 
 ECHO Copying Sandboxie Tools
 

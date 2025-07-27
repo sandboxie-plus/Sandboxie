@@ -16,6 +16,13 @@ struct SettingInfo {
 	QString removedVersion;
 	QString readdedVersion;
 	QString renamedVersion;
+	QString supersededBy;
+	QString category;
+	QString context;
+	QString syntax;
+	QString description;
+	QMap<QString, QString> localizedDescriptions;
+	QString flags;
 };
 
 class CIniHighlighter : public QSyntaxHighlighter
@@ -26,11 +33,18 @@ public:
 	explicit CIniHighlighter(bool bDarkMode, QTextDocument* parent = nullptr, bool enableValidation = true);
 	virtual ~CIniHighlighter();
 
-	// Load allowed settings from a CSV file
-	void loadSettingsCsv(const QString& filePath);
+	// Load valid settings from a INI file
+	void loadSettingsIni(const QString& filePath);
 
 	// Set the current semantic version for highlighting
 	void setCurrentVersion(const QString& version);
+
+	// Get tooltip text for a setting based on its version information
+	static QString GetSettingTooltip(const QString& settingName);
+
+	static bool IsSettingsLoaded() { return settingsLoaded; }
+
+	static bool IsCommentLine(const QString& line);
 
 protected:
     void highlightBlock(const QString &text) override;
@@ -68,10 +82,19 @@ private:
     QVector<HighlightRule> jsonHighlightRules;
 #endif
 
-	// Map of allowed settings loaded from CSV file with version info
-	QMap<QString, SettingInfo> allowedSettings;
+	// Settings validation and tooltip handling
+	static const QString DEFAULT_SETTINGS_FILE;
+	static const QString DEFAULT_VERSION;
 
-	// Current semantic version
+	static QVersionNumber s_currentVersion;
+	static QVersionNumber getCurrentVersion();
+	static QHash<QString, SettingInfo> validSettings;
+	static QDateTime lastFileModified;
+	static bool settingsLoaded;
+	static QMutex settingsMutex;
+	static QHash<QString, QString> tooltipCache;
+	static QMutex tooltipCacheMutex;
+
 	QVersionNumber m_currentVersion;
 
 	bool m_enableValidation;

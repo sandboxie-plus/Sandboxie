@@ -6018,7 +6018,24 @@ Please note that this values are currently user specific and saved globally for 
          <string>Edit ini Section</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout">
+         <item row="1" column="0" colspan="6">
+          <widget class="QPlainTextEdit" name="txtIniSection">
+           <property name="lineWrapMode">
+            <enum>QPlainTextEdit::NoWrap</enum>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="4">
+          <widget class="QPushButton" name="btnSaveIni">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Save</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
           <widget class="QPushButton" name="btnCancelEdit">
            <property name="enabled">
             <bool>false</bool>
@@ -6028,14 +6045,7 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="5">
-          <widget class="QPlainTextEdit" name="txtIniSection">
-           <property name="lineWrapMode">
-            <enum>QPlainTextEdit::NoWrap</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
+         <item row="0" column="3">
           <spacer name="horizontalSpacer_7">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -6047,26 +6057,6 @@ Please note that this values are currently user specific and saved globally for 
             </size>
            </property>
           </spacer>
-         </item>
-         <item row="0" column="3">
-          <widget class="QPushButton" name="btnSaveIni">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Save</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QPushButton" name="btnEditIni">
-           <property name="text">
-            <string>Edit ini</string>
-           </property>
-           <property name="checkable">
-            <bool>false</bool>
-           </property>
-          </widget>
          </item>
          <item row="0" column="1">
           <widget class="QCheckBox" name="chkValidateIniKeys">
@@ -6087,6 +6077,30 @@ Please note that this values are currently user specific and saved globally for 
            </property>
            <property name="text">
             <string>Validate</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btnEditIni">
+           <property name="text">
+            <string>Edit ini</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="chkEnableTooltips">
+           <property name="toolTip">
+            <string>Show detailed information tooltips when hovering over configuration settings.
+Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</string>
+           </property>
+           <property name="text">
+            <string>Tooltips</string>
            </property>
            <property name="checked">
             <bool>true</bool>

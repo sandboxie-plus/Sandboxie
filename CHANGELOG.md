@@ -12,6 +12,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.16.2 / 5.71.2] - 2025-07-xx
+
+### Added
+- Add toggleable CSV-based INI key validation [#4915](https://github.com/sandboxie-plus/Sandboxie/pull/4915) (thanks offhub)
+
+### Fixed
+- fixed Windows 11 24H2 build 26100.4770 causes Firefox Portable 140.0.4 / 141.0 to stop responding upon starting it sandboxed [#4920](https://github.com/sandboxie-plus/Sandboxie/issues/4920)
+
+### Removed
+- removed obsolete Bullguard Internet Security template
+- removed obsolete Bsecure CloudCare template
+- removed obsolete CyberPatrol template
+
+
+
+
 ## [1.16.1 / 5.71.1] - 2025-07-06
 
 ### Changed

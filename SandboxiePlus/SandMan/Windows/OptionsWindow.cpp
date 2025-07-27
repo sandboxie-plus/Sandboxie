@@ -420,6 +420,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	bool defaultValidation = theConf->GetBool("Options/ValidateIniKeys", ui.chkValidateIniKeys->isChecked());
 	ui.chkValidateIniKeys->setChecked(defaultValidation);
 	m_IniValidationEnabled = defaultValidation;
+	bool defaultTooltip = theConf->GetBool("Options/EnableIniTooltips", ui.chkEnableTooltips->isChecked());
+	ui.chkEnableTooltips->setChecked(defaultTooltip);
+	m_TooltipsEnabled = defaultTooltip;
 
 
 	// Create initial highlighter and editor
@@ -597,6 +600,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.chkValidateIniKeys, SIGNAL(stateChanged(int)), this, SLOT(OnIniValidationToggled(int)));
+	connect(ui.chkEnableTooltips, SIGNAL(stateChanged(int)), this, SLOT(OnTooltipToggled(int)));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
 	//connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
@@ -801,6 +805,70 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 	if ((ui.treeOptions && source == ui.treeOptions->viewport()) && event->type() == QEvent::MouseButtonPress)
 	{
 		CloseOptionEdit();
+	}
+
+	// Tooltip handling
+	if (source == m_pCodeEdit && event->type() == QEvent::ToolTip) {
+		// If tooltips are disabled, don't show any tooltips
+		if (!m_TooltipsEnabled)
+			return false;
+
+		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
+
+		// Find the text edit widget inside CCodeEdit
+		QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+		if (pTextEdit) {
+			// Convert mouse position to text cursor position
+			QPoint pos = pTextEdit->viewport()->mapFrom(m_pCodeEdit, helpEvent->pos());
+			QTextCursor cursor = pTextEdit->cursorForPosition(pos);
+
+			// Get the current line to check if it's a comment
+			QTextBlock block = cursor.block();
+			QString currentLine = block.text();
+
+			// Don't show tooltips for comment lines
+			if (CIniHighlighter::IsCommentLine(currentLine))
+				return false;
+
+			// Custom word selection that includes dots and underscores
+			int initialPos = cursor.position() - block.position();
+			int startPos = initialPos;
+			int endPos = initialPos;
+
+			// Move to start of the word
+			while (startPos > 0) {
+				QChar c = currentLine[startPos - 1];
+				if (c.isLetterOrNumber() || c == '_' || c == '.')
+					startPos--;
+				else
+					break;
+			}
+
+			// Move to end of the word
+			while (endPos < currentLine.length()) {
+				QChar c = currentLine[endPos];
+				if (c.isLetterOrNumber() || c == '_' || c == '.')
+					endPos++;
+				else
+					break;
+			}
+
+			// Extract the complete identifier including dots
+			QString word = currentLine.mid(startPos, endPos - startPos);
+
+			// Show tooltip if it's a valid setting
+			if (!word.isEmpty() && word.contains(QRegularExpression("^[a-zA-Z0-9_.]+$"))) {
+				// Only try to show tooltips if settings are loaded
+				if (CIniHighlighter::IsSettingsLoaded()) {
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(word);
+					if (!tooltipText.isEmpty()) {
+						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
+						return true;
+					}
+				}
+			}
+			QToolTip::hideText();
+		}
 	}
 
 	return QDialog::eventFilter(source, event);
@@ -1314,6 +1382,18 @@ void COptionsWindow::OnIniValidationToggled(int state)
 		m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, pTextEdit->document(), m_IniValidationEnabled);
 		m_pIniHighlighter->rehighlight();
 	}
+
+	m_HoldChange = false;
+}
+
+void COptionsWindow::OnTooltipToggled(int state)
+{
+	m_HoldChange = true;
+
+	m_TooltipsEnabled = (state == Qt::Checked);
+
+	// Save the new value to config
+	theConf->SetValue("Options/EnableIniTooltips", m_TooltipsEnabled);
 
 	m_HoldChange = false;
 }

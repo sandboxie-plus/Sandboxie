@@ -3,23 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.16.x / 5.7x.x] - 2025-07-xx
-
-### Removed
-- removed obsolete Bullguard Internet Security template
-- removed obsolete Bsecure CloudCare template
-- removed obsolete CyberPatrol template
-
-
-
-
-
-
 ## [1.16.2 / 5.71.2] - 2025-07-xx
 
 ### Added
-- Add toggleable CSV-based INI key validation [#4915](https://github.com/sandboxie-plus/Sandboxie/pull/4915) (thanks offhub)
-- Add option to use the new Qt Windows 11 style on SandMan [#4927](https://github.com/sandboxie-plus/Sandboxie/pull/4927)
+- Add toggleable INI key validation to "Edit ini Section" [#4915](https://github.com/sandboxie-plus/Sandboxie/pull/4915) (thanks offhub)
+  - Add toggleable per-key tooltip support [#4928](https://github.com/sandboxie-plus/Sandboxie/pull/4928) (thanks offhub)
+- Add option to use the new Qt Windows 11 style on SandMan [#4927](https://github.com/sandboxie-plus/Sandboxie/pull/4927) (thanks LumitoLuma)
 
 ### Fixed
 - fixed Windows 11 24H2 build 26100.4770 causes Firefox Portable 140.0.4 / 141.0 to stop responding upon starting it sandboxed [#4920](https://github.com/sandboxie-plus/Sandboxie/issues/4920)
@@ -30,7 +19,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - removed obsolete Bullguard Internet Security template
 - removed obsolete Bsecure CloudCare template
 - removed obsolete CyberPatrol template
-
 
 
 

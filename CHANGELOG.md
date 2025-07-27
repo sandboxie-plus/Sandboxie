@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Windows 11 24H2 build 26100.4770 causes Firefox Portable 140.0.4 / 141.0 to stop responding upon starting it sandboxed [#4920](https://github.com/sandboxie-plus/Sandboxie/issues/4920)
+- fixed Leak of encrypted sandbox key during password change (backported hardened ImBox from MajorPrivacy)
 
 ### Removed
 - removed obsolete Bullguard Internet Security template

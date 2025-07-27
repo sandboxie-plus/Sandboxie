@@ -8407,12 +8407,24 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der CSV-Datei validiert und hervorgehoben.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarzer Text, gelber Hintergrund, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weißer Text, schwarzer Hintergrund, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Blaugrüner Text, weißer Hintergrund&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rote Wellenunterstreichung&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkel-/Hellroter Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6089"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>Validieren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="663"/>
@@ -10361,12 +10373,24 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der CSV-Datei validiert und hervorgehoben.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarzer Text, gelber Hintergrund, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weißer Text, schwarzer Hintergrund, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Blaugrüner Text, weißer Hintergrund&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rote Wellenunterstreichung&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkel-/Hellroter Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3176"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>Validieren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2923"/>

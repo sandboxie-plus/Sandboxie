@@ -81,6 +81,10 @@ int main(int argc, char *argv[])
 	QtSingleApplication app(argc, argv);
 	app.setQuitOnLastWindowClosed(false);
 
+	bool UseW11Style = theConf->GetBool("Options/UseW11Style", false);
+	if (app.style()->name() == "windows11" && !UseW11Style)
+		app.setStyle("windowsvista");
+
 	//InitConsole(false);
 
 	bool IsBoxed = GetModuleHandleW(L"SbieDll.dll") != NULL;

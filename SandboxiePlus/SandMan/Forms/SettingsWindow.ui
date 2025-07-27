@@ -48,7 +48,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>8</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -65,6 +65,45 @@
              <string>General Options</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_8">
+             <item row="14" column="3">
+              <spacer name="horizontalSpacer_14">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="14" column="1">
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>84</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="14" column="2">
+              <spacer name="horizontalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>195</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
              <item row="4" column="1" colspan="2">
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <item>
@@ -79,54 +118,20 @@
                </item>
               </layout>
              </item>
-             <item row="6" column="1" colspan="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <item>
-                <widget class="QCheckBox" name="chkPauseForce">
-                 <property name="text">
-                  <string>Hotkey for suspending process/folder forcing:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QKeySequenceEdit" name="keyPauseForce"/>
-               </item>
-              </layout>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="lblRecovery">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
+             <item row="2" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkSandboxUrls">
                <property name="text">
-                <string>Recovery Options</string>
+                <string>Open urls from this ui sandboxed</string>
+               </property>
+               <property name="tristate">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="13" column="1">
-              <spacer name="verticalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>84</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="uiLang"/>
-             </item>
-             <item row="8" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkAsyncBoxOps">
+             <item row="9" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkAutoTerminate">
                <property name="text">
-                <string>Run box operations asynchronously whenever possible (like content deletion)</string>
+                <string>Terminate all boxed processes when Sandman exits</string>
                </property>
               </widget>
              </item>
@@ -151,98 +156,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1" colspan="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <item>
-                <widget class="QCheckBox" name="chkTop">
-                 <property name="text">
-                  <string>Hotkey for bringing sandman to the top:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QKeySequenceEdit" name="keyTop"/>
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_19">
-               <property name="text">
-                <string>UI Language:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-               <property name="buddy">
-                <cstring>uiLang</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1" colspan="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <item>
-                <widget class="QCheckBox" name="chkSuspend">
-                 <property name="text">
-                  <string>Hotkey for suspending all processes:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QKeySequenceEdit" name="keySuspend"/>
-               </item>
-              </layout>
-             </item>
-             <item row="13" column="2">
-              <spacer name="horizontalSpacer_8">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>195</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="13" column="3">
-              <spacer name="horizontalSpacer_14">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="9" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkAutoTerminate">
-               <property name="text">
-                <string>Terminate all boxed processes when Sandman exits</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkSandboxUrls">
-               <property name="text">
-                <string>Open urls from this ui sandboxed</string>
-               </property>
-               <property name="tristate">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkSkipUAC">
-               <property name="text">
-                <string>Always run SandMan UI as Admin</string>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="1">
+             <item row="13" column="1">
               <layout class="QVBoxLayout" name="verticalLayout_3">
                <property name="bottomMargin">
                 <number>0</number>
@@ -269,6 +183,99 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="lblRecovery">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="text">
+                <string>Recovery Options</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QCheckBox" name="chkTop">
+                 <property name="text">
+                  <string>Hotkey for bringing sandman to the top:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QKeySequenceEdit" name="keyTop"/>
+               </item>
+              </layout>
+             </item>
+             <item row="6" column="1" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QCheckBox" name="chkPauseForce">
+                 <property name="text">
+                  <string>Hotkey for suspending process/folder forcing:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QKeySequenceEdit" name="keyPauseForce"/>
+               </item>
+              </layout>
+             </item>
+             <item row="8" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkAsyncBoxOps">
+               <property name="text">
+                <string>Run box operations asynchronously whenever possible (like content deletion)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_19">
+               <property name="text">
+                <string>UI Language:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>uiLang</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="uiLang"/>
+             </item>
+             <item row="7" column="1" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QCheckBox" name="chkSuspend">
+                 <property name="text">
+                  <string>Hotkey for suspending all processes:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QKeySequenceEdit" name="keySuspend"/>
+               </item>
+              </layout>
+             </item>
+             <item row="10" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkSkipUAC">
+               <property name="text">
+                <string>Always run SandMan UI as Admin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QCheckBox" name="chkUseW11Style">
+               <property name="text">
+                <string>Use the new SandMan style on Windows 11</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>

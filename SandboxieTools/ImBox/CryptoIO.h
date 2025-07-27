@@ -22,6 +22,11 @@ public:
 	static int BackupHeader(CAbstractIO* pIO, const std::wstring& Path);
 	static int RestoreHeader(CAbstractIO* pIO, const std::wstring& Path);
 
+	virtual void SetDataSection(struct SSection* pSection);
+
+	virtual int SetData(const UCHAR* pData, SIZE_T uSize);
+	virtual int GetData(UCHAR* pData, SIZE_T* pSize);
+
 protected:
 	virtual int InitCrypto();
 	virtual int WriteHeader(struct _dc_header* header);

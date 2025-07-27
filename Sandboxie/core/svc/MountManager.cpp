@@ -734,8 +734,84 @@ retry:
 // MountImDisk
 //---------------------------------------------------------------------------
 
+extern "C" NTSYSCALLAPI NTSTATUS NTAPI NtLockVirtualMemory(_In_ HANDLE ProcessHandle, _Inout_ PVOID *BaseAddress, _Inout_ PSIZE_T RegionSize, _In_ ULONG MapType );
 
-std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFile, const wchar_t* pPassword, ULONG64 sizeKb, ULONG session_id, const wchar_t* drvLetter)
+template <typename T, typename S>
+void toHexadecimal(T val, S *buf)
+{
+    int i;
+    for (i = 0; i < sizeof(T) * 2; ++i) 
+    {
+        buf[i] = (val >> (4 * (sizeof(T) * 2 - 1 - i))) & 0xf;
+        if (buf[i] < 10)
+            buf[i] += '0';
+        else
+            buf[i] += 'A' - 10;
+    }
+    buf[i] = 0;
+}
+
+PVOID AllocPasswordMemory(HANDLE hProcess, const wchar_t* pPassword)
+{
+    NTSTATUS status;
+
+    PVOID pMem = NULL;
+    SIZE_T uSize = 0x1000;
+
+    if(!NT_SUCCESS(status = NtAllocateVirtualMemory(hProcess, &pMem, 0, &uSize, MEM_COMMIT, PAGE_READWRITE)))
+        return NULL;
+
+#define VM_LOCK_1                0x0001   // This is used, when calling KERNEL32.DLL VirtualLock routine
+#define VM_LOCK_2                0x0002   // This require SE_LOCK_MEMORY_NAME privilege
+    if(!NT_SUCCESS(status = NtLockVirtualMemory(hProcess, &pMem, &uSize, VM_LOCK_1)))
+        return NULL;
+
+    if (pPassword && *pPassword)
+    {
+        if(!NT_SUCCESS(status = NtWriteVirtualMemory(hProcess, pMem, (PVOID)pPassword, (wcslen(pPassword) + 1) * 2, NULL)))
+            return NULL;
+    }
+
+    return pMem;
+}
+
+NTSTATUS UpdateCommandLine(HANDLE hProcess, NTSTATUS(*Update)(std::wstring& s, PVOID p), PVOID param)
+{
+    NTSTATUS status;
+
+    ULONG processParametersOffset = 0x20;
+    ULONG appCommandLineOffset = 0x70;
+
+    PROCESS_BASIC_INFORMATION pbi;
+    if (!NT_SUCCESS(status = NtQueryInformationProcess(hProcess, ProcessBasicInformation, &pbi, sizeof(PROCESS_BASIC_INFORMATION), NULL)))
+        return status;
+
+    ULONG_PTR procParams;
+    if (!NT_SUCCESS(status = NtReadVirtualMemory(hProcess, (PVOID)((ULONG64)pbi.PebBaseAddress + processParametersOffset), &procParams, sizeof(ULONG_PTR), NULL)))
+        return status;
+
+    UNICODE_STRING us;
+    if (!NT_SUCCESS(status = NtReadVirtualMemory(hProcess, (PVOID)(procParams + appCommandLineOffset), &us, sizeof(UNICODE_STRING), NULL)))
+        return status;
+
+    if ((us.Buffer == 0) || (us.Length == 0))
+        return STATUS_UNSUCCESSFUL;
+
+    std::wstring s;
+    s.resize(us.Length / 2);
+    if (!NT_SUCCESS(status = NtReadVirtualMemory(hProcess, (PVOID)us.Buffer, (PVOID)s.c_str(), s.length() * 2, NULL)))
+        return status;
+
+    if (!NT_SUCCESS(status = Update(s, param)))
+        return status;
+
+    if (!NT_SUCCESS(status = NtWriteVirtualMemory(hProcess, (PVOID)us.Buffer, (PVOID)s.c_str(), s.length() * 2, NULL)))
+        return status;
+
+    return STATUS_SUCCESS;
+}
+
+std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFile, const wchar_t* pPassword, ULONG64 sizeKb, ULONG session_id, const wchar_t* drvLetter, ULONG DeviceNumber)
 {
     bool ok = false;
 
@@ -772,6 +848,7 @@ std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFi
     if (pPassword && *pPassword) cmd += L" cipher=AES";
     //cmd += L" size=" + std::to_wstring(sizeKb * 1024ull) + L" mount=" + std::wstring(Drive) + L" format=ntfs:" SBIEDISK_LABEL;
     cmd += L" size=" + std::to_wstring(sizeKb * 1024ull) + L" mount=" + std::wstring(Drive) + L" format=ntfs";
+    if(DeviceNumber) cmd += L" number=" + std::to_wstring(DeviceNumber);
 
 #ifdef _M_ARM64
 	ULONG64 ctr = _ReadStatusReg(ARM64_CNTVCT);
@@ -787,25 +864,61 @@ std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFi
     HANDLE hEvent = CreateEvent(NULL, TRUE, FALSE, (IMBOX_EVENT + std::wstring(sName)).c_str());
     cmd += L" event=" IMBOX_EVENT + std::wstring(sName);
 
-    WCHAR* pSection = NULL;
-    HANDLE hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 0x1000, (IMBOX_SECTION + std::wstring(sName)).c_str());
-    if (hMapping) {
-        pSection = (WCHAR*)MapViewOfFile(hMapping, FILE_MAP_READ | FILE_MAP_WRITE, 0, 0, 0x1000);
-        memzero(pSection, 0x1000);
-    }
-    cmd += L" section=" IMBOX_SECTION + std::wstring(sName);
+    //SSection* pSection = NULL;
+    //HANDLE hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 0x1000, (IMBOX_SECTION + std::wstring(sName)).c_str());
+    //if (hMapping) {
+    //    pSection = (SSection*)MapViewOfFile(hMapping, FILE_MAP_READ | FILE_MAP_WRITE, 0, 0, 0x1000);
+    //    memset(pSection, 0, 0x1000);
+    //}
+    //cmd += L" section=" IMBOX_SECTION + std::wstring(sName);
+    //
+    //if (pPassword && *pPassword)
+    //    wmemcpy(pSection->in.pass, pPassword, wcslen(pPassword) + 1);
 
-    if (pPassword && *pPassword)
-        wmemcpy(pSection, pPassword, wcslen(pPassword) + 1);
+    cmd += L" mem=0x0000000000000000";
 
+    VOID* pMem = NULL;
 
     WCHAR app[768];
     if (!NT_SUCCESS(SbieApi_GetHomePath(NULL, 0, app, 768)))
         return NULL;
     wcscat(app, L"\\ImBox.exe");
+
     STARTUPINFO si = { sizeof(STARTUPINFO) };
     PROCESS_INFORMATION pi = { 0 };
-    if (CreateProcess(app, (WCHAR*)cmd.c_str(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+    if (CreateProcess(app, (WCHAR*)cmd.c_str(), NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi))
+    {
+        NTSTATUS status = STATUS_SUCCESS;
+
+        pMem = AllocPasswordMemory(pi.hProcess, pPassword);
+        if (!pMem) 
+            status = STATUS_MEMORY_NOT_ALLOCATED;
+        else
+        {
+            status = UpdateCommandLine(pi.hProcess, [](std::wstring& s, PVOID p) {
+                // Note: Do not change the string length, that would require a different update mechanism.
+                size_t pos = s.find(L"mem=0x0000000000000000");
+                if (pos != std::wstring::npos) {
+                    wchar_t Addr[17];
+                    toHexadecimal((ULONG64)p, Addr);
+                    s.replace(pos + 6, 16, Addr);
+                    return STATUS_SUCCESS;
+                }
+                return STATUS_UNSUCCESSFUL;
+                }, pMem);
+        }
+
+        if (!NT_SUCCESS(status)) {
+            TerminateProcess(pi.hProcess, -1);
+            pMem = NULL;
+            CloseHandle(pi.hThread);
+            CloseHandle(pi.hProcess);
+        }
+    }
+
+    if (pMem)
+    {
+        ResumeThread(pi.hThread);
 
         //
         // Wait for ImDisk to be mounted
@@ -834,24 +947,36 @@ std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFi
         }
         else {
 
-            if(_wcsnicmp(pSection, IMDISK_DEVICE, IMDISK_DEVICE_LEN) == 0)
-                pMount->NtPath = std::wstring(pSection);
-            else { // fallback
-                HANDLE handle = ImDiskOpenDeviceByMountPoint(Drive, 0);
-                if (handle != INVALID_HANDLE_VALUE) {
-                    BYTE buffer[MAX_PATH];
-                    DWORD length = sizeof(buffer);
-                    if (NT_SUCCESS(NtQueryObject(handle, ObjectNameInformation, buffer, length, &length))) {
-                        UNICODE_STRING* uni = &((OBJECT_NAME_INFORMATION*)buffer)->Name;
-                        length = uni->Length / sizeof(WCHAR);
-                        if (uni->Buffer) {
-                            uni->Buffer[length] = 0;
-                            pMount->NtPath = uni->Buffer;
-                        }
-                    }
-                    CloseHandle(handle);
-                }
+            //if(_wcsnicmp(pSection, IMDISK_DEVICE, IMDISK_DEVICE_LEN) == 0)
+            //    pMount->NtPath = std::wstring(pSection);
+            union {
+                SSection pSection[1];
+                BYTE pSpace[0x1000];
+            };
+            if (NT_SUCCESS(NtReadVirtualMemory(pi.hProcess, (PVOID)pMem, pSection, 0x1000, NULL)))
+            {
+                if (_wcsnicmp(pSection->out.mount, IMDISK_DEVICE, IMDISK_DEVICE_LEN) == 0)
+                    pMount->NtPath = std::wstring(pSection->out.mount);
             }
+            
+            //if(_wcsnicmp(pSection, IMDISK_DEVICE, IMDISK_DEVICE_LEN) == 0)
+            //    pMount->NtPath = std::wstring(pSection);
+            //else { // fallback
+            //    HANDLE handle = ImDiskOpenDeviceByMountPoint(Drive, 0);
+            //    if (handle != INVALID_HANDLE_VALUE) {
+            //        BYTE buffer[MAX_PATH];
+            //        DWORD length = sizeof(buffer);
+            //        if (NT_SUCCESS(NtQueryObject(handle, ObjectNameInformation, buffer, length, &length))) {
+            //            UNICODE_STRING* uni = &((OBJECT_NAME_INFORMATION*)buffer)->Name;
+            //            length = uni->Length / sizeof(WCHAR);
+            //            if (uni->Buffer) {
+            //                uni->Buffer[length] = 0;
+            //                pMount->NtPath = uni->Buffer;
+            //            }
+            //        }
+            //        CloseHandle(handle);
+            //    }
+            //}
 
             if (!pMount->NtPath.empty()) {
                     
@@ -874,12 +999,12 @@ std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFi
     else
         SbieApi_LogEx(session_id, 2236, L"ImBox");
 
-    if (pSection) {
-        memzero(pSection, 0x1000);
-        UnmapViewOfFile(pSection);
-    }
-    if(hMapping) 
-        CloseHandle(hMapping);
+    //if (pSection) {
+    //    memzero(pSection, 0x1000);
+    //    UnmapViewOfFile(pSection);
+    //}
+    //if(hMapping) 
+    //    CloseHandle(hMapping);
 
     if(hEvent) 
         CloseHandle(hEvent);

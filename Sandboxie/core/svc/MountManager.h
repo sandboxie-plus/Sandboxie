@@ -80,7 +80,7 @@ protected:
     bool RemoveJunction(const std::wstring& FileRootPath, ULONG session_id);
 
     std::shared_ptr<BOX_MOUNT> FindImDisk(const std::wstring& ImageFile, ULONG session_id);
-    std::shared_ptr<BOX_MOUNT> MountImDisk(const std::wstring& ImageFile, const wchar_t* pPassword, ULONG64 sizeKb, ULONG session_id, const wchar_t* drvLetter = NULL);
+    std::shared_ptr<BOX_MOUNT> MountImDisk(const std::wstring& ImageFile, const wchar_t* pPassword, ULONG64 sizeKb, ULONG session_id, const wchar_t* drvLetter = NULL, ULONG DeviceNumber = 0);
     static bool TryUnmountImDisk(const std::wstring& Device, HANDLE hProcess, int iMode = 0);
     static bool UnmountImDisk(const std::wstring& Device, HANDLE hProcess);
     bool UnmountImDiskLocked(const std::shared_ptr<BOX_MOUNT>& pToUnMount, ULONG session_id);

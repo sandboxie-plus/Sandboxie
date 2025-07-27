@@ -132,6 +132,8 @@ public:
 	virtual SB_RESULT(QStringList) ImBoxEnum();
 	virtual SB_RESULT(QVariantMap) ImBoxQuery(const QString& Root = QString());
 	//virtual SB_STATUS		ImBoxUpdate(  // todo
+	virtual SB_STATUS		ExecImDisk(const QString& ImageFile, const QString& Password, const QString& Command, bool bWrite, QByteArray* pBuffer, quint16 uId);
+
 
 	// Monitor
 	virtual SB_STATUS		EnableMonitor(bool Enable);

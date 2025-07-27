@@ -344,6 +344,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkRecoveryTop, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
 	connect(ui.chkUseW11Style, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	QOperatingSystemVersion current = QOperatingSystemVersion::current();
+	ui.chkUseW11Style->setEnabled(current.majorVersion() == 10 && current.microVersion() >= 22000); // Windows 10 22000+ (Windows 11)
 	//
 
 	// Shell Integration
@@ -508,7 +510,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	//
 
 	connect(ui.chkSandboxMoTW, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
-	connect(ui.cmbMoTWSandbox, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
+	connect(ui.cmbMoTWSandbox, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMoTWChange()));
 
 	// USB
 	connect(ui.chkSandboxUsb, SIGNAL(stateChanged(int)), this, SLOT(OnVolumeChanged()));

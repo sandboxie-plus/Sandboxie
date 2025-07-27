@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Add toggleable CSV-based INI key validation [#4915](https://github.com/sandboxie-plus/Sandboxie/pull/4915) (thanks offhub)
+- Add option to use the new Qt Windows 11 style on SandMan [#4927](https://github.com/sandboxie-plus/Sandboxie/pull/4927)
 
 ### Fixed
 - fixed Windows 11 24H2 build 26100.4770 causes Firefox Portable 140.0.4 / 141.0 to stop responding upon starting it sandboxed [#4920](https://github.com/sandboxie-plus/Sandboxie/issues/4920)

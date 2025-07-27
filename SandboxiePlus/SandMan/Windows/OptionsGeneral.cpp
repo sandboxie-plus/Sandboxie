@@ -1207,14 +1207,15 @@ void COptionsWindow::OnSetPassword()
 		}
 		else {
 
-			QStringList Arguments;
-			Arguments.append("type=image");
-			Arguments.append("image=" + pBoxEx->GetBoxImagePath());
-			Arguments.append("key=" + m_Password);
-			Arguments.append("new_key=" + window.GetNewPassword());
-
-			if (RunImBox(Arguments))
+			QString NewPassword = window.GetNewPassword();
+			QByteArray Buffer;
+			Buffer.resize((NewPassword.size() + 1) * sizeof(wchar_t));
+			memcpy(Buffer.data(), NewPassword.utf16(), Buffer.size());
+			SB_STATUS Status = theAPI->ExecImDisk(pBoxEx->GetBoxImagePath(), m_Password, "new_key", true, &Buffer, SECTION_PARAM_ID_KEY);
+			if(Status)
 				QMessageBox::information(this, "Sandboxie-Plus", tr("Image Password Changed"));
+			else
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to Change Password"));
 		}
 	}
 }

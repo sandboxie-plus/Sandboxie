@@ -623,7 +623,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
         ULONG uError = 0;
         // Note: A normal string like L"text" would not result in position independent code !!!
         // hence we create a string array and fill it byte by byte
-        wchar_t s_originals[] = { 'g', '_', 'o', 'r', 'i', 'g', 'i', 'n', 'a', 'l', 's', 0};
+        UCHAR s_originals[] = { 'g', '_', 'o', 'r', 'i', 'g', 'i', 'n', 'a', 'l', 's', 0};
         UCHAR* g_originals = FindDllExport(ProcBase, s_originals, &uError);
 #ifdef _DEBUG
         if (!g_originals) {

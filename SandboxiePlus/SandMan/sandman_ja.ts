@@ -1503,56 +1503,56 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>グループ化</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="486"/>
-        <location filename="Windows/OptionsWindow.cpp" line="492"/>
-        <location filename="Windows/OptionsWindow.cpp" line="507"/>
+        <location filename="Windows/OptionsWindow.cpp" line="494"/>
+        <location filename="Windows/OptionsWindow.cpp" line="500"/>
+        <location filename="Windows/OptionsWindow.cpp" line="515"/>
         <location filename="Windows/OptionsAccess.cpp" line="26"/>
         <source>Browse for File</source>
         <translation>ファイルを参照</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="577"/>
+        <location filename="Windows/OptionsWindow.cpp" line="585"/>
         <source>Add %1 Template</source>
         <translation>%1 テンプレートを追加</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="680"/>
+        <location filename="Windows/OptionsWindow.cpp" line="689"/>
         <source>Search for options</source>
         <translation>オプションを検索</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="837"/>
+        <location filename="Windows/OptionsWindow.cpp" line="846"/>
         <source>Box: %1</source>
         <translation>ボックス: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="838"/>
+        <location filename="Windows/OptionsWindow.cpp" line="847"/>
         <source>Template: %1</source>
         <translation>テンプレート: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="839"/>
+        <location filename="Windows/OptionsWindow.cpp" line="848"/>
         <source>Global: %1</source>
         <translation>グローバル: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="840"/>
+        <location filename="Windows/OptionsWindow.cpp" line="849"/>
         <source>Default: %1</source>
         <translation>デフォルト: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1054"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1063"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>このサンドボックスは削除されたため、設定を保存できません。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1118"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1127"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>一部の変更がまだ保存されていません。本当にこのオプションウィンドウを閉じますか？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1156"/>
-        <location filename="Windows/OptionsWindow.cpp" line="1174"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1165"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1183"/>
         <location filename="Windows/OptionsAccess.cpp" line="422"/>
         <location filename="Windows/OptionsAccess.cpp" line="653"/>
         <location filename="Windows/OptionsGeneral.cpp" line="622"/>
@@ -1564,7 +1564,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>グループ: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1158"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1167"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="948"/>
@@ -1580,7 +1580,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>すべてのプログラム</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1167"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1176"/>
         <source>Enter program:</source>
         <translation>プログラムを入力:</translation>
     </message>
@@ -5440,7 +5440,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <name>CSettingsWindow</name>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="964"/>
+        <location filename="Windows/SettingsWindow.cpp" line="972"/>
         <source>Sandboxed Web Browser</source>
         <translation>サンドボックス化されたWebブラウザ</translation>
     </message>
@@ -5591,18 +5591,18 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>%1 テンプレートを追加</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2546"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2555"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2579"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2588"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation>HWID: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2551"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2584"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation>HWID: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(コピー)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2564"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2597"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation>Sandboxie-Plus バージョン: %1</translation>
     </message>
@@ -5619,91 +5619,91 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>フォントをリセット</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="642"/>
+        <location filename="Windows/SettingsWindow.cpp" line="650"/>
         <source>Search for settings</source>
         <translation>設定を検索</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="656"/>
+        <location filename="Windows/SettingsWindow.cpp" line="664"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="813"/>
+        <location filename="Windows/SettingsWindow.cpp" line="821"/>
         <source>Please enter message</source>
         <translation>メッセージを入力してください</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="845"/>
+        <location filename="Windows/SettingsWindow.cpp" line="853"/>
         <source>Select Program</source>
         <translation>プログラムを選択</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="845"/>
+        <location filename="Windows/SettingsWindow.cpp" line="853"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>実行可能ファイル (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="849"/>
-        <location filename="Windows/SettingsWindow.cpp" line="865"/>
+        <location filename="Windows/SettingsWindow.cpp" line="857"/>
+        <location filename="Windows/SettingsWindow.cpp" line="873"/>
         <source>Please enter a menu title</source>
         <translation>メニュータイトルを入力してください</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="861"/>
+        <location filename="Windows/SettingsWindow.cpp" line="869"/>
         <source>Please enter a command</source>
         <translation>コマンドを入力してください</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="932"/>
-        <location filename="Windows/SettingsWindow.cpp" line="933"/>
-        <location filename="Windows/SettingsWindow.cpp" line="943"/>
+        <location filename="Windows/SettingsWindow.cpp" line="940"/>
+        <location filename="Windows/SettingsWindow.cpp" line="941"/>
+        <location filename="Windows/SettingsWindow.cpp" line="951"/>
         <source>Run &amp;Sandboxed</source>
         <translation>サンドボックス内で実行(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1302"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1310"/>
         <source>kilobytes (%1)</source>
         <translation>キロバイト (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1390"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1398"/>
         <source>Volume not attached</source>
         <translation>ボリュームがアタッチされていません</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2710"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2743"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;評価証明書を%1/%2枚使用しました。これ以上無料の証明書は生成できません。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2712"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2745"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;無料の評価証明書を取得&lt;/a&gt;して、%1日間すべてのプレミアム機能をお楽しみください。&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2643"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2676"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>このサポーター証明書は&lt;font color=&apos;red&apos;&gt;%1日後に有効期限が切れます&lt;/font&gt;。&lt;a href=&quot;%2&quot;&gt;更新された証明書を取得してください&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2633"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2666"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus機能は%1日後に無効化されます。&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2635"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2668"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;現在のビルドではPlus機能は有効なままですが&lt;/font&gt;、互換性アップデートやトラブルシューティングデータベースを含むSandboxie-Liveサービスにはアクセスできなくなります。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2637"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2670"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus機能は利用できなくなりました。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2713"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2746"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>ハードウェアIDごとに、%1日間の無料評価証明書を最大%2回まで請求できます。</translation>
     </message>
@@ -5713,393 +5713,393 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>非表示 (バックグラウンドで実行)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2543"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2576"/>
         <source>Click to reveal</source>
         <translation>クリックして表示</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2544"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2577"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
         <translation>クリックして非表示</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2630"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2663"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>このサポーター証明書は有効期限が切れています。&lt;a href=&quot;%1&quot;&gt;更新された証明書を取得してください&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2678"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2711"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>有効期限まで: %1日</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2680"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2713"/>
         <source>Expired: %1 days ago</source>
         <translation>期限切れ: %1日前</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2682"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2715"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; 対象のPatreonユーザーは、いつでもxanasoft.comから&lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;更新された証明書を取得&lt;/a&gt;できます</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2727"/>
         <source>Options: %1</source>
         <translation>オプション: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2697"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2730"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>セキュリティ/プライバシー強化 &amp; アプリボックス (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2697"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2698"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2699"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2700"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2730"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2731"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2732"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2733"/>
         <source>Enabled</source>
         <translation>有効</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2697"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2698"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2699"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2700"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2730"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2731"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2732"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2733"/>
         <source>Disabled</source>
         <translation>無効</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2698"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2731"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>暗号化サンドボックス (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2699"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2732"/>
         <source>Network Interception (NetI): %1</source>
         <translation>ネットワーク傍受 (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2700"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2733"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Sandboxieデスクトップ (Desk): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2731"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2764"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>これはSandboxie-Plusのシリアル番号ではないようです。&lt;br /&gt;もし証明書からUpdateKeyやSignatureを入力しようとしたのであれば、それは間違いです。代わりに、証明書全体を上のテキストエリアに入力してください。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2738"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2771"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>既存のサポーター証明書を入力せずに、機能アップグレードキーを使用しようとしています。このタイプのキーは（&lt;b&gt;ウェブサイトに太字で明記されている通り&lt;/b&gt;）、既存の有効なサポーター証明書が必要であり、それなしでは無意味ですのでご注意ください。&lt;br /&gt;高度な機能を使用したい場合は、標準の証明書と機能アップグレードキーの両方を取得して、高度な機能をアンロックする必要があります。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2744"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2777"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>既存のサポーター証明書を入力せずに、更新キーを使用しようとしています。このタイプのキーは（&lt;b&gt;ウェブサイトに太字で明記されている通り&lt;/b&gt;）、既存の有効なサポーター証明書が必要であり、それなしでは無意味ですのでご注意ください。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2749"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2782"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;製品説明を読まずに誤ってこのキーを入手した場合は、この問題を解決するため、ウェブサイトに記載されているメールアドレスまでご連絡ください。&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2764"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2792"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3021"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2797"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2825"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3054"/>
         <source>Retrieving certificate...</source>
         <translation>証明書を取得中...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2780"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2813"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - 評価証明書の取得</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2780"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2813"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>%1日間の無料評価証明書を受け取るには、メールアドレスを入力してください。証明書は%2に発行され、現在のハードウェアにロックされます。
 固有のハードウェアIDごとに、最大%3枚の評価証明書を請求できます。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2839"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>証明書の取得エラー: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2839"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>不明なエラー (ネットワークの問題と思われます)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2861"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2894"/>
         <source>Contributor</source>
         <translation>貢献者</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2863"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2896"/>
         <source>Eternal</source>
         <translation>エターナル</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2865"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2898"/>
         <source>Developer</source>
         <translation>開発者</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2867"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2900"/>
         <source>Business</source>
         <translation>ビジネス</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2869"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2902"/>
         <source>Personal</source>
         <translation>パーソナル</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2871"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2904"/>
         <source>Great Patreon</source>
         <translation>Great Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2873"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2906"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2875"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2908"/>
         <source>Family</source>
         <translation>ファミリー</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2877"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2910"/>
         <source>Home</source>
         <translation>ホーム</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2879"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2912"/>
         <source>Evaluation</source>
         <translation>評価版</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2881"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2914"/>
         <source>Type %1</source>
         <translation>タイプ %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2911"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2944"/>
         <source>Advanced</source>
         <translation>アドバンス</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2913"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2946"/>
         <source>Advanced (L)</source>
         <translation>アドバンス (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2915"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2948"/>
         <source>Max Level</source>
         <translation>最大レベル</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2917"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2950"/>
         <source>Level %1</source>
         <translation>レベル %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1418"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1426"/>
         <source>Supporter certificate required for access</source>
         <translation>アクセスにはサポーター証明書が必要です</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1435"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1443"/>
         <source>Supporter certificate required for automation</source>
         <translation>自動化にはサポーター証明書が必要です</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1548"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1556"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>サンドボックスなしで実行(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1556"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1564"/>
         <source>Set Force in Sandbox</source>
         <translation>サンドボックスでの強制実行を設定</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1565"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1573"/>
         <source>Set Open Path in Sandbox</source>
         <translation>サンドボックスにオープンパスを設定</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2939"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2972"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>これは証明書ではないようです。一部だけでなく、証明書全体を入力してください。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2956"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2989"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>残念ながら、この証明書は現在のビルドでは有効ではありません。新しい証明書を取得するか、以前のビルドにダウングレードする必要があります。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2958"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2991"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>この証明書は有効期限が切れていますが、現在インストールされているバージョンではPlus機能は有効なままです。ただし、互換性アップデートやオンラインのトラブルシューティングデータベースといったSandboxie-Liveサービスにはアクセスできなくなります。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2960"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2993"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>残念ながらこの証明書は有効期限が切れているため、新しい証明書を取得する必要があります。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2964"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2997"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>評価証明書が正常に適用されました。無料トライアルをお楽しみください！</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2967"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3000"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plusの開発をサポートしていただきありがとうございます。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2969"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3002"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 これは3ヶ月間有効な、一時的なPatreon証明書です。有効期限が近づきましたら、全期間有効な新しい証明書をオンラインで取得できます。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3007"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3040"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>お使いのSandboxie-Plusサポーター証明書には、必須のセキュリティアップデートが必要です。更新された証明書を今すぐダウンロードしますか？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3008"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3041"/>
         <source>Auto update in future</source>
         <translation>今後自動で更新する</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1903"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1911"/>
         <source>Update Available</source>
         <translation>更新が利用可能です</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1905"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1913"/>
         <source>Installed</source>
         <translation>インストール済み</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1910"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1918"/>
         <source>by %1</source>
         <translation>提供: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1918"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1926"/>
         <source>(info website)</source>
         <translation>(情報サイト)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1945"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1953"/>
         <source>This Add-on is mandatory and can not be removed.</source>
         <translation>このアドオンは必須であり、削除できません。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1954"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2165"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1962"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2173"/>
         <source>Select Directory</source>
         <translation>ディレクトリを選択</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1986"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1994"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;今すぐ確認&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
         <source>Select Portable Box ini</source>
         <translation>ポータブルボックスのiniを選択</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2055"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2065"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2063"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2073"/>
         <source>Ini Files (*.ini)</source>
         <translation>Iniファイル (*.ini)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2065"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2073"/>
         <source>Save new Portable Box ini</source>
         <translation>新しいポータブルボックスのiniを保存</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2070"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2078"/>
         <source>File already exists, please select a different file name.</source>
         <translation>ファイルは既に存在します。別のファイル名を選択してください。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2076"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2084"/>
         <source>Invalid box name</source>
         <translation>無効なボックス名</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2097"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2105"/>
         <source>Select Root Folder</source>
         <translation>ルートフォルダーを選択</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2125"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2133"/>
         <source>Please enter the new configuration password.</source>
         <translation>新しい設定パスワードを入力してください。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2129"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2137"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>新しい設定パスワードを再入力してください。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2134"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2142"/>
         <source>Passwords did not match, please retry.</source>
         <translation>パスワードが一致しませんでした。もう一度お試しください。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2146"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2154"/>
         <source>Process</source>
         <translation>プロセス</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2146"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2154"/>
         <source>Folder</source>
         <translation>フォルダー</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2156"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2164"/>
         <source>Please enter a program file name</source>
         <translation>プログラムのファイル名を入力してください</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2224"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2232"/>
         <source>Please enter the template identifier</source>
         <translation>テンプレート識別子を入力してください</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2232"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2240"/>
         <source>Error: %1</source>
         <translation>エラー: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2264"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2272"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>選択したローカルテンプレートを本当に削除しますか？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2472"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2505"/>
         <source>%1 (Current)</source>
         <translation>%1 (現在)</translation>
     </message>
@@ -8192,6 +8192,28 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>ルールポリシー</translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="6074"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;When checked, INI keys will be validated and highlighted according to the CSV. Uncheck to disable validation/highlighting.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="6089"/>
+        <source>Validate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="3357"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
         <translation>クローズ...=!&lt;program&gt;,... ルールを、サンドボックス内にあるすべてのバイナリにも適用します。</translation>
@@ -9121,17 +9143,17 @@ Please note that this values are currently user specific and saved globally for 
         <translation>iniセクションを編集</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6024"/>
+        <location filename="Forms/OptionsWindow.ui" line="6064"/>
         <source>Edit ini</source>
         <translation>iniを編集</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6037"/>
+        <location filename="Forms/OptionsWindow.ui" line="6027"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6060"/>
+        <location filename="Forms/OptionsWindow.ui" line="6057"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -9704,6 +9726,28 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="1320"/>
         <source>Font Scaling</source>
         <translation>フォントのスケーリング</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="3161"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;When checked, INI keys will be validated and highlighted according to the CSV. Uncheck to disable validation/highlighting.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="3176"/>
+        <source>Validate</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1229"/>
@@ -10371,17 +10415,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>iniセクションを編集</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3114"/>
+        <location filename="Forms/SettingsWindow.ui" line="3131"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3121"/>
+        <location filename="Forms/SettingsWindow.ui" line="3138"/>
         <source>Edit ini</source>
         <translation>iniを編集</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3147"/>
+        <location filename="Forms/SettingsWindow.ui" line="3121"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>

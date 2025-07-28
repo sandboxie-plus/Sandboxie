@@ -6,17 +6,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.16.2 / 5.71.2] - 2025-07-xx
 
 ### Added
-- Add toggleable INI key validation to "Edit ini Section" [#4915](https://github.com/sandboxie-plus/Sandboxie/pull/4915) (thanks offhub)
-  - Add toggleable per-key tooltip support [#4928](https://github.com/sandboxie-plus/Sandboxie/pull/4928) (thanks offhub)
-- Add option to use the new Qt Windows 11 style on SandMan [#4927](https://github.com/sandboxie-plus/Sandboxie/pull/4927) (thanks LumitoLuma)
+- added toggleable INI key validation to "Edit ini Section" [#4915](https://github.com/sandboxie-plus/Sandboxie/pull/4915) (thanks offhub)
+  - added toggleable per-key tooltip support [#4928](https://github.com/sandboxie-plus/Sandboxie/pull/4928) (thanks offhub)
+- added option to use the new Qt Windows 11 style on SandMan [#4927](https://github.com/sandboxie-plus/Sandboxie/pull/4927) (thanks LumitoLuma)
 
 ### Changed
-- ImBox no longer container file tiemstamps when accessing an encrypted box volume
+- ImBox no longer updates container file timestamps when accessing an encrypted box volume
 
 ### Fixed
 - fixed Windows 11 24H2 build 26100.4770 causes Firefox Portable 140.0.4 / 141.0 to stop responding upon starting it sandboxed [#4920](https://github.com/sandboxie-plus/Sandboxie/issues/4920)
-- fixed Leak of encrypted sandbox key during password change (backported hardened ImBox from MajorPrivacy)
-- fixed firefox nightly sandbox hook errors
+- fixed leak of encrypted sandbox key during password change (backported hardened ImBox from MajorPrivacy)
+- fixed Firefox Nightly sandbox hook errors
 
 ### Removed
 - removed obsolete Bullguard Internet Security template
@@ -1581,7 +1581,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Templates.ini loading on first start [#2574](https://github.com/sandboxie-plus/Sandboxie/issues/2574)
 - fixed Cyberpunk 2077 not being able to load mods when sandboxed
 - fixed performance issue in games
-- fixed FFS hooking issue observed in Windows 11 ARM64 Build 22621.819
+- fixed FFS hooking issue observed in Windows 11 ARM64 build 22621.819
 
 
 
@@ -3292,7 +3292,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - since the runas facility is not accessible by default, this did not constitute a security issue
   - to enable runas functionality, add "OpenIpcPath=\RPC Control\SECLOGON" to your Sandboxie.ini
   - please take note that doing so may open other yet unknown issues
-- fixed a driver compatibility issue with Windows 10 32-bit Insider Preview Build 21337
+- fixed a driver compatibility issue with Windows 10 32-bit Insider Preview build 21337
 - fixed issues with driver signature for Windows 7
 
 

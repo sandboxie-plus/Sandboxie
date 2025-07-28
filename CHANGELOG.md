@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.16.2 / 5.71.2] - 2025-07-xx
+## [1.16.2 / 5.71.2] - 2025-07-28
 
 ### Added
 - added toggleable INI key validation to "Edit ini Section" [#4915](https://github.com/sandboxie-plus/Sandboxie/pull/4915) (thanks offhub)

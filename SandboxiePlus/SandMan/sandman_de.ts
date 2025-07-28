@@ -1116,159 +1116,159 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="369"/>
         <source>Added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzugefügt in Version</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="374"/>
         <source>Removed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernt in Version</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="379"/>
         <source>Re-added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Wieder hinzugefügt in Version</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="384"/>
         <source>Renamed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenannt in Version</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="389"/>
         <source>Superseded by</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetzt durch</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="411"/>
         <source>Advanced</source>
-        <translation type="unfinished">Erweitert</translation>
+        <translation>Erweitert</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="413"/>
         <source>Debug</source>
-        <translation type="unfinished">Debug</translation>
+        <translation>Debug</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="415"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="417"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemein</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="419"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerk</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="421"/>
         <source>Program Control</source>
-        <translation type="unfinished">Programmkontrolle</translation>
+        <translation>Programmkontrolle</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="423"/>
         <source>Resource Access</source>
-        <translation type="unfinished">Ressourcenzugriff</translation>
+        <translation>Ressourcenzugriff</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="425"/>
         <source>Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheit</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="427"/>
         <location filename="Helpers/IniHighlighter.cpp" line="461"/>
         <source>Template</source>
-        <translation type="unfinished">Vorlage</translation>
+        <translation>Vorlage</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="429"/>
         <source>Various</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiedenes</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="435"/>
         <location filename="Helpers/IniHighlighter.cpp" line="440"/>
         <source>Category</source>
-        <translation type="unfinished">Kategorie</translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="459"/>
         <source>Global</source>
-        <translation type="unfinished">Global</translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="463"/>
         <source>Per Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro Sandbox</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="465"/>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzereinstellungen</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="471"/>
         <source>Context</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontext</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="480"/>
         <source>Syntax</source>
-        <translation type="unfinished"></translation>
+        <translation>Syntax</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="525"/>
         <source>Description</source>
-        <translation type="unfinished">Beschreibung</translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="546"/>
         <source>Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstützerzertifikat</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="549"/>
         <source>Advanced Encryption Pack</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweitertes Verschlüsselungspaket</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="552"/>
         <source>Requires: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfordert: %1</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="552"/>
         <source> + </source>
-        <translation type="unfinished"></translation>
+        <translation> + </translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="553"/>
         <source>Requires an Advanced Encryption Pack</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfordert ein erweitertes Verschlüsselungspaket</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="553"/>
         <source>Requires a Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfordert ein Unterstützerzertifikat</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="555"/>
         <source>Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Zertifikat</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="561"/>
         <source>Build</source>
-        <translation type="unfinished"></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="562"/>
         <source>Requires an Insider Build</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfordert eine Insiderversion</translation>
     </message>
 </context>
 <context>
@@ -1990,7 +1990,7 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1218"/>
         <source>Failed to Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort konnte nicht geändert werden</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
@@ -8561,40 +8561,13 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         <location filename="Forms/OptionsWindow.ui" line="6099"/>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige detaillierte Informationen in Tooltips an, wenn der Mauszeiger über Konfigurationseinstellungen verweilt.
+Tooltips enthalten Versionsdetails, Syntaxanforderungen und Beschreibungen, die Ihnen helfen, jede Einstellung zu verstehen und korrekt zu konfigurieren.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6103"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;When checked, INI keys will be validated and highlighted according to the CSV. Uncheck to disable validation/highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der CSV-Datei validiert und hervorgehoben.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarzer Text, gelber Hintergrund, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weißer Text, schwarzer Hintergrund, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Blaugrüner Text, weißer Hintergrund&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rote Wellenunterstreichung&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkel-/Hellroter Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>Tooltips</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6079"/>
@@ -9307,7 +9280,19 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der SbieSettings-Datei validiert und hervorgehoben.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarzer Text, gelber Hintergrund, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weißer Text, schwarzer Hintergrund, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Blaugrüner Text, weißer Hintergrund&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rote Wellenunterstreichung&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkel-/Hellroter Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6089"/>
@@ -9590,7 +9575,19 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der SbieSettings-Datei validiert und hervorgehoben.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarzer Text, gelber Hintergrund, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weißer Text, schwarzer Hintergrund, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Blaugrüner Text, weißer Hintergrund&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rote Wellenunterstreichung&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkel-/Hellroter Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3186"/>
@@ -10430,7 +10427,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende den neuen SandMan-Stil unter Windows 11</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
@@ -10576,40 +10573,13 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <location filename="Forms/SettingsWindow.ui" line="3193"/>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige detaillierte Informationen in Tooltips an, wenn der Mauszeiger über Konfigurationseinstellungen verweilt.
+Tooltips enthalten Versionsdetails, Syntaxanforderungen und Beschreibungen, die Ihnen helfen, jede Einstellung zu verstehen und korrekt zu konfigurieren.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3197"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;When checked, INI keys will be validated and highlighted according to the CSV. Uncheck to disable validation/highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der CSV-Datei validiert und hervorgehoben.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarzer Text, gelber Hintergrund, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weißer Text, schwarzer Hintergrund, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Blaugrüner Text, weißer Hintergrund&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rote Wellenunterstreichung&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkel-/Hellroter Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>Tooltips</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3133"/>

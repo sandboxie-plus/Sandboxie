@@ -2900,7 +2900,7 @@ SB_STATUS CSbieAPI::ExecImDisk(const QString& ImageFile, const QString& Password
 				};
 				if (NT_SUCCESS(NtReadVirtualMemory(pi.hProcess, (PVOID)pMem, pSpace, sizeof(pSpace), NULL)))
 				{
-					// todo, dont care
+					// to do, don't care
 				}
 			}
 			Status = SB_OK;

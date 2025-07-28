@@ -672,7 +672,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
         else
             chrome64Target = findChromeTarget((unsigned char *)longlongs);
     }
-    // firefox's winlauncher uses mov r11 but we dont care for this currently
+    // Firefox's winlauncher uses mov r11 but we don't care for this currently
     /*else if (func[0] == 0x49 && func[1] == 0xBB &&                //mov r11,<target>
         func[10] == 0x41 && func[11] == 0xFF && func[12] == 0xE3)   //jmp r11
     {

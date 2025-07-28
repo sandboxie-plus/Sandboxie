@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Add toggleable per-key tooltip support [#4928](https://github.com/sandboxie-plus/Sandboxie/pull/4928) (thanks offhub)
 - Add option to use the new Qt Windows 11 style on SandMan [#4927](https://github.com/sandboxie-plus/Sandboxie/pull/4927) (thanks LumitoLuma)
 
+### Changed
+- ImBox no longer container file tiemstamps when accessing an encrypted box volume
+
 ### Fixed
 - fixed Windows 11 24H2 build 26100.4770 causes Firefox Portable 140.0.4 / 141.0 to stop responding upon starting it sandboxed [#4920](https://github.com/sandboxie-plus/Sandboxie/issues/4920)
 - fixed Leak of encrypted sandbox key during password change (backported hardened ImBox from MajorPrivacy)

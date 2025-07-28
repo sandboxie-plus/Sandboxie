@@ -1330,159 +1330,159 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="369"/>
         <source>Added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>引入于版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="374"/>
         <source>Removed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>移除于版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="379"/>
         <source>Re-added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>重新引入于版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="384"/>
         <source>Renamed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>更名于版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="389"/>
         <source>Superseded by</source>
-        <translation type="unfinished"></translation>
+        <translation>新键名</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="411"/>
         <source>Advanced</source>
-        <translation type="unfinished">高级</translation>
+        <translation>高级</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="413"/>
         <source>Debug</source>
-        <translation type="unfinished">调试</translation>
+        <translation>调试</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="415"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>文件</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="417"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>常规</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="419"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>网络</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="421"/>
         <source>Program Control</source>
-        <translation type="unfinished">程序控制</translation>
+        <translation>程序控制</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="423"/>
         <source>Resource Access</source>
-        <translation type="unfinished">资源访问</translation>
+        <translation>资源访问</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="425"/>
         <source>Security</source>
-        <translation type="unfinished"></translation>
+        <translation>安全性</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="427"/>
         <location filename="Helpers/IniHighlighter.cpp" line="461"/>
         <source>Template</source>
-        <translation type="unfinished">模板</translation>
+        <translation>模板</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="429"/>
         <source>Various</source>
-        <translation type="unfinished"></translation>
+        <translation>其他</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="435"/>
         <location filename="Helpers/IniHighlighter.cpp" line="440"/>
         <source>Category</source>
-        <translation type="unfinished">类别</translation>
+        <translation>类别</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="459"/>
         <source>Global</source>
-        <translation type="unfinished">全局</translation>
+        <translation>全局</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="463"/>
         <source>Per Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱配置</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="465"/>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>用户配置</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="471"/>
         <source>Context</source>
-        <translation type="unfinished"></translation>
+        <translation>上下文</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="480"/>
         <source>Syntax</source>
-        <translation type="unfinished"></translation>
+        <translation>语法</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="525"/>
         <source>Description</source>
-        <translation type="unfinished">说明</translation>
+        <translation>说明</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="546"/>
         <source>Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>赞助者许可证</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="549"/>
         <source>Advanced Encryption Pack</source>
-        <translation type="unfinished"></translation>
+        <translation>高级加密功能许可证</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="552"/>
         <source>Requires: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>需要：%1</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="552"/>
         <source> + </source>
-        <translation type="unfinished"></translation>
+        <translation> + </translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="553"/>
         <source>Requires an Advanced Encryption Pack</source>
-        <translation type="unfinished"></translation>
+        <translation>需要高级加密功能许可证</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="553"/>
         <source>Requires a Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>需要赞助者许可证</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="555"/>
         <source>Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>许可证</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="561"/>
         <source>Build</source>
-        <translation type="unfinished"></translation>
+        <translation>版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="562"/>
         <source>Requires an Insider Build</source>
-        <translation type="unfinished"></translation>
+        <translation>需要使用内部版本</translation>
     </message>
 </context>
 <context>
@@ -2289,7 +2289,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1218"/>
         <source>Failed to Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>密码修改失败</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
@@ -10017,7 +10017,19 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;选中该选项后，管理器将会依据 SbieSettings 定义文件对 INI 配置文件进行校验和高亮。&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黄底黑字斜体&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：更名（当前使用的是已经无效的旧的键名）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底白字划去&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：弃用（该键已被移除）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底深青色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：保留（该键名已被定义但尚未被支持）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;红色波浪线&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：无效（未被定义的键名）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/浅红色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：有效&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;注意&lt;/span&gt;：当前校验器版本仅完成了有效键名的校验功能。但因为管理器不会对全局或每个沙箱的配置进行校验，某些在特定情况（上下文）下实际无效的配置可能会在这些情况下被误标记为有效。&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6089"/>
@@ -10028,12 +10040,13 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/OptionsWindow.ui" line="6099"/>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>鼠标悬停于配置项时显示该配置项的详细信息。
+信息包括版本，语法及功能描述。旨在帮助您正确理解并配置每个项目。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6103"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>提供信息</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
@@ -10462,7 +10475,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">在 Windows 11 上使用原生主题</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="403"/>
@@ -10622,7 +10635,19 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;选中该选项后，管理器将会依据 SbieSettings 定义文件对 INI 配置文件进行校验和高亮。&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黄底黑字斜体&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：更名（当前使用的是已经无效的旧的键名）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底白字划去&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：弃用（该键已被移除）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底深青色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：保留（该键名已被定义但尚未被支持）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;红色波浪线&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：无效（未被定义的键名）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/浅红色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：有效&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;注意&lt;/span&gt;：当前校验器版本仅完成了有效键名的校验功能。但因为管理器不会对全局或每个沙箱的配置进行校验，某些在特定情况（上下文）下实际无效的配置可能会在这些情况下被误标记为有效。&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3186"/>
@@ -10633,12 +10658,13 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <location filename="Forms/SettingsWindow.ui" line="3193"/>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>鼠标悬停于配置项时显示该配置项的详细信息。
+信息包括版本，语法及功能描述。旨在帮助您正确理解并配置每个项目。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3197"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>提供信息</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3173"/>

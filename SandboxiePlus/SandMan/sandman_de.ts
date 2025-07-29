@@ -1156,7 +1156,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="417"/>
         <source>General</source>
-        <translation>Allgemein</translation>
+        <translation>Generell</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="419"/>
@@ -6526,7 +6526,7 @@ Der Inhalt dieser Box wird VERWORFEN, wenn diese geschlossen wird, und die Box w
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1077"/>
         <source>
-This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
+This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
         <translation>
 Diese Box wird ihren Inhalt VERWERFEN, wenn sie geschlossen wird. Sie ist nur für temporäre Daten geeignet.</translation>
     </message>
@@ -7558,7 +7558,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="265"/>
         <source>General Configuration</source>
-        <translation>Allgemeine Konfiguration</translation>
+        <translation>Generelle Konfiguration</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="92"/>
@@ -8561,7 +8561,7 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         <location filename="Forms/OptionsWindow.ui" line="6099"/>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation>Zeige detaillierte Informationen in Tooltips an, wenn der Mauszeiger über Konfigurationseinstellungen verweilt.
+        <translation>Zeigt detaillierte Informationen in Tooltips an, wenn der Mauszeiger über Konfigurationseinstellungen verweilt.
 Tooltips enthalten Versionsdetails, Syntaxanforderungen und Beschreibungen, die Ihnen helfen, jede Einstellung zu verstehen und korrekt zu konfigurieren.</translation>
     </message>
     <message>
@@ -9284,11 +9284,11 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
 &lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der SbieSettings-Datei validiert und hervorgehoben.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarzer Text, gelber Hintergrund, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weißer Text, schwarzer Hintergrund, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Blaugrüner Text, weißer Hintergrund&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rote Wellenunterstreichung&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkel-/Hellroter Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weiß auf Schwarz, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dunkelblaugrün auf Weiß&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rot unterstrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkelrot/Hellrot&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
@@ -9579,11 +9579,11 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
 &lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der SbieSettings-Datei validiert und hervorgehoben.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarzer Text, gelber Hintergrund, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weißer Text, schwarzer Hintergrund, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Blaugrüner Text, weißer Hintergrund&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rote Wellenunterstreichung&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkel-/Hellroter Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weiß auf Schwarz, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dunkelblaugrün auf Weiß&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rot unterstrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkelrot/Hellrot&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
@@ -10573,7 +10573,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <location filename="Forms/SettingsWindow.ui" line="3193"/>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation>Zeige detaillierte Informationen in Tooltips an, wenn der Mauszeiger über Konfigurationseinstellungen verweilt.
+        <translation>Zeigt detaillierte Informationen in Tooltips an, wenn der Mauszeiger über Konfigurationseinstellungen verweilt.
 Tooltips enthalten Versionsdetails, Syntaxanforderungen und Beschreibungen, die Ihnen helfen, jede Einstellung zu verstehen und korrekt zu konfigurieren.</translation>
     </message>
     <message>

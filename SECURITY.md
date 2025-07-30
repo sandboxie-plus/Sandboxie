@@ -6,12 +6,12 @@ Please report any found security vulnerability directly to me at xanatosdavid[at
 
 ## Fixed security issues
 
-### FIXED SECURITY ISSUE ID-27 (thanks love-code-yeyixiao)
+### SECURITY ISSUE ID-27 (thanks love-code-yeyixiao)
 Leak of encrypted sandbox key during password change; see [CVE-2025-54422](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-jp7r-vgv9-43p7)
 
 fixed in: 1.16.2 / 5.71.2
 
-### FIXED SECURITY ISSUE ID-26 (thanks sgayou)
+### SECURITY ISSUE ID-26 (thanks sgayou)
 Registry set/get functions were missing some critical safety checks CVE-2025-46713, CVE-2025-46714, CVE-2025-46716, CVE-2025-46715
 
 fixed in: 1.15.12 / 5.70.12

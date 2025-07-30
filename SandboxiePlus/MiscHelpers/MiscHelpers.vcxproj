@@ -113,7 +113,7 @@
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>6.9.1_msvc2022_64</QtInstall>
-    <QtModules>core;network;widgets</QtModules>
+    <QtModules>core;core-private;network;widgets</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="QtSettings">
     <QtInstall>6.3.1_msvc2019_64</QtInstall>

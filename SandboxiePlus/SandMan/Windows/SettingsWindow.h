@@ -216,7 +216,6 @@ private:
 	class CCodeEdit* m_pCodeEdit = nullptr;
 
 	bool m_IniValidationEnabled = true;
-	bool m_TooltipsEnabled = true;
 	class CIniHighlighter* m_pIniHighlighter = nullptr;
 };
 

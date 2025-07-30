@@ -590,9 +590,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	bool defaultValidation = theConf->GetBool("Options/ValidateIniKeys", ui.chkValidateIniKeys->isChecked());
 	ui.chkValidateIniKeys->setChecked(defaultValidation);
 	m_IniValidationEnabled = defaultValidation;
-	bool defaultTooltip = theConf->GetBool("Options/EnableIniTooltips", ui.chkEnableTooltips->isChecked());
-	ui.chkEnableTooltips->setChecked(defaultTooltip);
-	m_TooltipsEnabled = defaultTooltip;
+
+	int defaultTooltip = theConf->GetInt("Options/EnableIniTooltips", Qt::Checked);
+	ui.chkEnableTooltips->setTristate(true); // Enable tri-state
+	ui.chkEnableTooltips->setCheckState(static_cast<Qt::CheckState>(defaultTooltip));
+	CIniHighlighter::SetTooltipMode(defaultTooltip); // Initialize the mode
 
 	// Create initial highlighter and editor
 	m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, nullptr, m_IniValidationEnabled);
@@ -824,8 +826,8 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 
 	// Tooltip handling
 	if (source == m_pCodeEdit && event->type() == QEvent::ToolTip) {
-		// If tooltips are disabled, don't show any tooltips
-		if (!m_TooltipsEnabled)
+		// Check if tooltips are completely disabled
+		if (CIniHighlighter::GetTooltipMode() == CIniHighlighter::TooltipMode::Disabled)
 			return false;
 
 		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
@@ -844,6 +846,14 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 			// Don't show tooltips for comment lines
 			if (CIniHighlighter::IsCommentLine(currentLine))
 				return false;
+
+			// Check if we're on the value side of the equals sign (after the =)
+			int equalsPos = currentLine.indexOf('=');
+			if (equalsPos >= 0 && (cursor.position() - block.position()) > equalsPos) {
+				// We're in the value part, don't show tooltip
+				QToolTip::hideText();
+				return false;
+			}
 
 			// Custom word selection that includes dots and underscores
 			int initialPos = cursor.position() - block.position();
@@ -885,6 +895,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 			QToolTip::hideText();
 		}
 	}
+
 	return QDialog::eventFilter(source, event);
 }
 
@@ -2435,6 +2446,9 @@ void CSettingsWindow::OnIniValidationToggled(int state)
 	// Save the new value to config
 	theConf->SetValue("Options/ValidateIniKeys", m_IniValidationEnabled);
 
+	// Clear all language-related caches
+	CIniHighlighter::ClearLanguageCache();
+
 	// Remove previous highlighter
 	if (m_pIniHighlighter) {
 		delete m_pIniHighlighter;
@@ -2455,10 +2469,11 @@ void CSettingsWindow::OnTooltipToggled(int state)
 {
 	m_HoldChange = true;
 
-	m_TooltipsEnabled = (state == Qt::Checked);
-
 	// Save the new value to config
-	theConf->SetValue("Options/EnableIniTooltips", m_TooltipsEnabled);
+	theConf->SetValue("Options/EnableIniTooltips", state);
+
+	// Set the tooltip mode in the highlighter
+	CIniHighlighter::SetTooltipMode(state);
 
 	m_HoldChange = false;
 }

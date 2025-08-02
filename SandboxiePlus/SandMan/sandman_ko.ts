@@ -1289,159 +1289,159 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="369"/>
         <source>Added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>버전에 추가됨</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="374"/>
         <source>Removed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>버전에서 제거됨</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="379"/>
         <source>Re-added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>버전에서 다시 추가됨</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="384"/>
         <source>Renamed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>버전으로 이름 변경됨</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="389"/>
         <source>Superseded by</source>
-        <translation type="unfinished"></translation>
+        <translation>대체됨</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="411"/>
         <source>Advanced</source>
-        <translation type="unfinished">고급</translation>
+        <translation>고급</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="413"/>
         <source>Debug</source>
-        <translation type="unfinished">디버그</translation>
+        <translation>디버그</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="415"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>파일</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="417"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>일반</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="419"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>네트워크</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="421"/>
         <source>Program Control</source>
-        <translation type="unfinished">프로그램 제어</translation>
+        <translation>프로그램 제어</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="423"/>
         <source>Resource Access</source>
-        <translation type="unfinished">리소스 액세스</translation>
+        <translation>리소스 액세스</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="425"/>
         <source>Security</source>
-        <translation type="unfinished">보안</translation>
+        <translation>보안</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="427"/>
         <location filename="Helpers/IniHighlighter.cpp" line="461"/>
         <source>Template</source>
-        <translation type="unfinished">템플릿</translation>
+        <translation>템플릿</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="429"/>
         <source>Various</source>
-        <translation type="unfinished"></translation>
+        <translation>여러가지</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="435"/>
         <location filename="Helpers/IniHighlighter.cpp" line="440"/>
         <source>Category</source>
-        <translation type="unfinished">범주</translation>
+        <translation>범주</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="459"/>
         <source>Global</source>
-        <translation type="unfinished">전역</translation>
+        <translation>전역</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="463"/>
         <source>Per Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스당</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="465"/>
         <source>User Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자 설정</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="471"/>
         <source>Context</source>
-        <translation type="unfinished"></translation>
+        <translation>문맥</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="480"/>
         <source>Syntax</source>
-        <translation type="unfinished"></translation>
+        <translation>구문</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="525"/>
         <source>Description</source>
-        <translation type="unfinished">설명</translation>
+        <translation>설명</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="546"/>
         <source>Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>후원자 인증서</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="549"/>
         <source>Advanced Encryption Pack</source>
-        <translation type="unfinished"></translation>
+        <translation>고급 암호화 팩</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="552"/>
         <source>Requires: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>필요사항: %1</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="552"/>
         <source> + </source>
-        <translation type="unfinished"></translation>
+        <translation> + </translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="553"/>
         <source>Requires an Advanced Encryption Pack</source>
-        <translation type="unfinished"></translation>
+        <translation>고급 암호화 팩이 필요합니다</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="553"/>
         <source>Requires a Supporter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>후원자 인증서가 필요합니다</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="555"/>
         <source>Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>인증서</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="561"/>
         <source>Build</source>
-        <translation type="unfinished"></translation>
+        <translation>빌드</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="562"/>
         <source>Requires an Insider Build</source>
-        <translation type="unfinished"></translation>
+        <translation>인사이더 빌드가 필요합니다</translation>
     </message>
 </context>
 <context>
@@ -2502,7 +2502,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="299"/>
         <source>Show Run Dialog</source>
-        <translation>실행 대화 상자 표시</translation>
+        <translation>실행 대화상자 표시</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="327"/>
@@ -2580,7 +2580,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1218"/>
         <source>Failed to Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>암호 변경에 실패했습니다</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
@@ -3818,7 +3818,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="504"/>
         <location filename="SandMan.cpp" line="4488"/>
         <source>About Sandboxie-Plus</source>
-        <translation>Sandboxie-Plus 정보</translation>
+        <translation>Sandboxie-Plus 정보 - 번역: 비너스걸</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="738"/>
@@ -5000,7 +5000,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4457"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
-        <translation>&lt;h3&gt;Sandboxie-Plus 정보&lt;/h3&gt;&lt;p&gt;버전 %1 번역: 비너스걸&lt;/p&gt;&lt;p&gt;</translation>
+        <translation>&lt;h3&gt;Sandboxie-Plus 정보&lt;/h3&gt;&lt;p&gt;버전 %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4465"/>
@@ -9439,17 +9439,18 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="6099"/>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>구성 설정 위에 마우스를 올리면 자세한 정보 도구 설명이 표시됩니다.
+도구 설명에는 버전 정보, 구문 요구 사항, 설명이 포함되어 있어 각 설정을 이해하고 올바르게 구성하는 데 도움이 됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6103"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 설명</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6079"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>검증</translation>
     </message>
     <message>
         <source>Configure which processes can access desktop objects like windows and alike.</source>
@@ -10169,7 +10170,20 @@ Please note that this values are currently user specific and saved globally for 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;이 옵션을 선택하면 SbieSettings 파일에 따라 INI 키가 검증되고 강조 표시됩니다. 이 옵션을 해제하면 검증 및 강조 표시 기능이 비활성화됩니다.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;검정 텍스트, 노란색 배경, 기울임꼴&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 이름이 변경된 키 (이전 이름 - 유효하지 않음)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;흰색 텍스트, 검은색 배경, 취소선&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 제거된 키 (더 이상 사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;진한 청록색 텍스트, 흰색 배경&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 향후 키 (사용 불가)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;빨간색 맞춤법 검사 밑줄&lt;/span&gt;&lt;/td&gt;&lt;td&gt;:유효하지 않거나 알 수 없는 키&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;진한/연한 빨간색 텍스트&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;참고&lt;/span&gt;: 이 버전에서는 유효하거나 알려진 키만 작동합니다. 그러나 전역 또는 박스별 유효성 검사는 수행되지 않습니다. 일부 설정은 유효해 보일 수 있지만 모든 상황에서 작동하지 않을 수 있습니다.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6089"/>
@@ -10870,7 +10884,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2329"/>
         <source>Restrict box root folder access to the the user whom created that sandbox</source>
-        <translation>해당 샌드박스를 만든 사용자에게 상자 루트 폴더 액세스 제한</translation>
+        <translation>해당 샌드박스를 만든 사용자에게 박스 루트 폴더 액세스 제한</translation>
     </message>
     <message>
         <source>Sandboxie.ini Presets</source>
@@ -10904,7 +10918,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows 11에서 새로운 SandMan 스타일 사용</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
@@ -10960,7 +10974,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2576"/>
         <source>&lt;b&gt;Config protection applyess only to Sandboxie.ini portable box configuration is not protected by the below mechanisms&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Sandboxie.ini 휴대용 상자 구성은 아래 메커니즘에 의해 보호되지 않습니다&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Sandboxie.ini 포터블 박스 구성은 아래 메커니즘에 의해 보호되지 않습니다&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2586"/>
@@ -11032,17 +11046,18 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="3193"/>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>구성 설정 위에 마우스를 올리면 자세한 정보 도구 설명이 표시됩니다.
+도구 설명에는 버전 정보, 구문 요구 사항, 설명이 포함되어 있어 각 설정을 이해하고 올바르게 구성하는 데 도움이 됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3197"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 설명</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3133"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>검증</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2528"/>
@@ -11325,7 +11340,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1110"/>
         <source>Use new config dialog layout *</source>
-        <translation>새 구성 대화 상자 레이아웃 사용 *</translation>
+        <translation>새 구성 대화상자 레이아웃 사용 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2628"/>
@@ -11474,7 +11489,19 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;이 옵션을 선택하면 SbieSettings 파일에 따라 INI 키가 검증되고 강조 표시됩니다. 이 옵션을 해제하면 검증 및 강조 표시 기능이 비활성화됩니다.&lt;/p&gt;
+&lt;br/&gt;
+&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;검정 텍스트, 노란색 배경, 기울임꼴&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 이름이 변경된 키 (이전 이름 - 유효하지 않음)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;흰색 텍스트, 검은색 배경, 취소선&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 제거된 키 (더 이상 사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;진한 청록색 텍스트, 흰색 배경&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 향후 키 (사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;빨간색 맞춤법 검사 밑줄&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하지 않거나 알 수 없는 키&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;진한/연한 빨간색 텍스트&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하거나 알려진 키&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: 이 버전에서는 유효하거나 알려진 키만 작동합니다. 그러나 전역 또는 박스별 유효성 검사는 수행되지 않습니다. 일부 설정은 유효해 보이지만 모든 상황에서 작동하지 않을 수 있습니다.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3186"/>

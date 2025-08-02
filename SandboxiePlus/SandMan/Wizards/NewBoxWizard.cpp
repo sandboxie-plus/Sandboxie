@@ -1074,7 +1074,7 @@ void CSummaryPage::initializePage()
     if (field("autoRemove").toBool()) 
         m_pSummary->append(tr("\nThis box's content will be DISCARDED when it's closed, and the box will be removed."));
     else if (field("autoDelete").toBool())
-        m_pSummary->append(tr("\nThis box will DISCARD its content when its closed, its suitable only for temporary data."));
+        m_pSummary->append(tr("\nThis box will DISCARD its content when it's closed, it's suitable only for temporary data."));
     if (field("blockNetwork").toInt())
         m_pSummary->append(tr("\nProcesses in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential."));
     if (field("msiServer").toBool())

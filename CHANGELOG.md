@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+
+## [1.16.3 / 5.71.3] - 2025-08-xx
+
+### Fixed
+- fixed 1.16.2 = Tray Menu Missing in Action [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)
+
+
+
+
+
 ## [1.16.2 / 5.71.2] - 2025-07-28
 
 ### Added

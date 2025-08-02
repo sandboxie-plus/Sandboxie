@@ -194,12 +194,16 @@ int CImageFileIO::Init()
     // This issue also affects DiscUtilsDevio.exe
     //
 
+    bool bCreating = false;
+
 	m->Handle = CreateFile(m->FilePath.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, NULL);
     if (m->Handle == INVALID_HANDLE_VALUE) {
         
         //
         // Create new image, but only if a size was specified
         //
+
+        bCreating = true;
 
         if(m->uSize)
             m->Handle = CreateFile(m->FilePath.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_NEW, FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, NULL);
@@ -246,13 +250,15 @@ int CImageFileIO::Init()
         //}
     }
 
-    FILE_BASIC_INFORMATION FileBasicInfo;
-    IO_STATUS_BLOCK IoStatusBlock;
-
-    NTSTATUS status = NtQueryInformationFile (m->Handle, &IoStatusBlock, &FileBasicInfo, sizeof (FileBasicInfo), FileBasicInformation);
-
-    if (NT_SUCCESS (status))
+    if (!bCreating)
     {
+        FILE_BASIC_INFORMATION FileBasicInfo;
+        IO_STATUS_BLOCK IoStatusBlock;
+
+        NTSTATUS status = NtQueryInformationFile(m->Handle, &IoStatusBlock, &FileBasicInfo, sizeof(FileBasicInfo), FileBasicInformation);
+
+        if (NT_SUCCESS(status))
+        {
             m->fileCreationTime = FileBasicInfo.CreationTime;
             m->fileLastAccessTime = FileBasicInfo.LastAccessTime;
             m->fileLastWriteTime = FileBasicInfo.LastWriteTime;
@@ -265,7 +271,8 @@ int CImageFileIO::Init()
             FileBasicInfo.LastWriteTime.QuadPart = -1;
             FileBasicInfo.ChangeTime.QuadPart = -1;
 
-            NtSetInformationFile (m->Handle, &IoStatusBlock, &FileBasicInfo, sizeof (FileBasicInfo), FileBasicInformation);
+            NtSetInformationFile(m->Handle, &IoStatusBlock, &FileBasicInfo, sizeof(FileBasicInfo), FileBasicInformation);
+        }
     }
 
 	return ERR_OK;

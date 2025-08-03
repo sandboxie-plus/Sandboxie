@@ -3277,7 +3277,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>سجل التتبع</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="29"/>
+        <location filename="SandManTray.cpp" line="47"/>
         <source>Show/Hide</source>
         <translation>إظهار/إخفاء</translation>
     </message>
@@ -3643,17 +3643,17 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>تم طلب عملية غير معروفة &apos;%1&apos; عبر سطر الأوامر</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="90"/>
+        <location filename="SandManTray.cpp" line="108"/>
         <source>Dismiss Update Notification</source>
         <translation>رفض إشعار التحديث</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="166"/>
+        <location filename="SandManTray.cpp" line="184"/>
         <source> - Driver/Service NOT Running!</source>
         <translation> - برنامج التشغيل/الخدمة غير قيد التشغيل!</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="168"/>
+        <location filename="SandManTray.cpp" line="186"/>
         <source> - Deleting Sandbox Content</source>
         <translation> - حذف محتوى صندوق العزل</translation>
     </message>
@@ -6636,8 +6636,10 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1077"/>
         <source>
-This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
-        <translation>
+This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
+        <oldsource>
+This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
+        <translation type="unfinished">
 سيتم إزالة محتوى هذا الصندوق عند إغلاقه، وهو مناسب فقط للبيانات المؤقتة.</translation>
     </message>
     <message>

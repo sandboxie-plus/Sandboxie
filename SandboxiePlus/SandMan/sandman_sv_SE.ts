@@ -4092,7 +4092,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade eller experime
         <translation>Återställningslogg</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="29"/>
+        <location filename="SandManTray.cpp" line="47"/>
         <source>Show/Hide</source>
         <translation>Visa/Dölj</translation>
     </message>
@@ -4147,17 +4147,17 @@ Denna låda förhindrar tillgång till alla användardataplatser, förutom de ut
         <translation>Okänd operation &apos;%1&apos; begärd via kommandorad</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="90"/>
+        <location filename="SandManTray.cpp" line="108"/>
         <source>Dismiss Update Notification</source>
         <translation>Avfärda uppdateringsmeddelande</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="166"/>
+        <location filename="SandManTray.cpp" line="184"/>
         <source> - Driver/Service NOT Running!</source>
         <translation> - Drivrutin/Tjänst körs INTE!</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="168"/>
+        <location filename="SandManTray.cpp" line="186"/>
         <source> - Deleting Sandbox Content</source>
         <translation> - Raderar sandlådeinnehåll</translation>
     </message>
@@ -7242,8 +7242,10 @@ Denna lådas innehåll kommer KASSERAS när den stängs, och lådan tas bort.</t
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1077"/>
         <source>
-This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
-        <translation>
+This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
+        <oldsource>
+This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
+        <translation type="unfinished">
 Denna låda kommer KASSERA dess innehåll när den stängs, den är endast lämplig för temporära data.</translation>
     </message>
     <message>

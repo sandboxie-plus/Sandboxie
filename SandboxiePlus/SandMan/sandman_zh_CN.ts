@@ -7088,7 +7088,7 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
         <oldsource>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
-        <translation type="unfinished">
+        <translation>
 该沙箱中的内容将在所有程序结束后被删除，因此仅适合临时数据。</translation>
     </message>
     <message>
@@ -10477,7 +10477,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished">在 Windows 11 上使用原生主题</translation>
+        <translation>在 Windows 11 上使用新的SandMan主题</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="403"/>

@@ -267,6 +267,19 @@ bool CIniHighlighter::processConfigKeyword(const QString& key, const QString& va
 	return false;
 }
 
+static void UpdateCheckboxesOnAllTopLevels(const QStringList& objectNames, std::function<void(QCheckBox*)> updater)
+{
+	QWidgetList topLevels = QApplication::topLevelWidgets();
+	for (QWidget* widget : topLevels) {
+		for (const QString& name : objectNames) {
+			QCheckBox* box = widget->findChild<QCheckBox*>(name);
+			if (box) {
+				updater(box);
+			}
+		}
+	}
+}
+
 // Load settings from SbieSettings.ini
 void CIniHighlighter::loadSettingsIni(const QString& filePath)
 {
@@ -275,165 +288,167 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
 	ClearLanguageCache();
 
 	QFile file(filePath);
-	if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		validSettings.clear();
-		contextData.clear();
-		categoryData.clear();
-		requirementsData.clear();
+	settingsLoaded = file.open(QIODevice::ReadOnly | QIODevice::Text);
+	
+	if (!settingsLoaded) {
+		qWarning() << "[validSettings] Failed to load settings file:" << filePath << "Error:" << file.errorString();
+		m_enableValidation = false; // Disable validation if loading fails
+	}
 
-		QTextStream in(&file);
+	// Update UI based on whether settings loaded successfully - single conditional check
+	UpdateCheckboxesOnAllTopLevels({QStringLiteral("chkValidateIniKeys"), QStringLiteral("chkEnableTooltips")}, [this](QCheckBox* box) {
+		if (box->objectName() == QLatin1String("chkValidateIniKeys")) {
+			if (settingsLoaded) {
+				box->setEnabled(true);
+				box->setTristate(false);
+			} else {
+				box->setTristate(true);
+				box->setCheckState(Qt::PartiallyChecked); // Use PartiallyChecked for "Failed"
+				box->setText(tr("Validate (Failed)"));
+				box->setEnabled(false);
+			}
+		} else if (box->objectName() == QLatin1String("chkEnableTooltips")) {
+			box->setEnabled(settingsLoaded);
+		}
+	});
+
+	if (!settingsLoaded) {
+		return;
+	}
+
+	validSettings.clear();
+	contextData.clear();
+	categoryData.clear();
+	requirementsData.clear();
+
+	QTextStream in(&file);
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
-		// Qt5: use setCodec
-		in.setCodec("UTF-8");
+	in.setCodec("UTF-8");
 #endif
 
-		QString currentSection;
-		SettingInfo currentInfo;
-		bool inSection = false;
-		bool inConfigSection = false;
+	QString currentSection;
+	SettingInfo currentInfo;
+	bool inSection = false;
+	bool inConfigSection = false;
 
-		while (!in.atEnd()) {
-			QString line = in.readLine().trimmed();
+	QRegularExpression sectionRegex(R"(^\[([^\]]+)\]\s*$)");
 
-			// Skip empty lines and comments
-			if (line.isEmpty() || line.startsWith(';') || line.startsWith('#'))
-				continue;
+	while (!in.atEnd()) {
+		QString line = in.readLine().trimmed();
 
-			// Check if this is a section header [SectionName]
-			QRegularExpression sectionRegex(R"(^\[([^\]]+)\]\s*$)");
-			QRegularExpressionMatch sectionMatch = sectionRegex.match(line);
+		// Skip empty lines and comments
+		if (line.isEmpty() || line.startsWith(';') || line.startsWith('#'))
+			continue;
 
-			if (sectionMatch.hasMatch()) {
-				// If we were already processing a section, save it (except for config section)
-				if (inSection && !currentSection.isEmpty() && !inConfigSection) {
-					currentInfo.name = currentSection;
-					validSettings.insert(currentInfo.name, currentInfo);
-				}
-
-				// Start a new section
-				currentSection = sectionMatch.captured(1).trimmed();
-				inConfigSection = (currentSection == "___SbieSettingsConfig_");
-
-				if (!inConfigSection) {
-					currentInfo = SettingInfo(); // Reset info for new regular section
-					inSection = true;
-				}
-				else {
-					// We're entering the special config section
-					inSection = false;
-				}
-				continue;
+		// Section header
+		QRegularExpressionMatch sectionMatch = sectionRegex.match(line);
+		if (sectionMatch.hasMatch()) {
+			// Save previous section if needed
+			if (inSection && !currentSection.isEmpty() && !inConfigSection) {
+				currentInfo.name = currentSection;
+				validSettings.insert(currentInfo.name, currentInfo);
 			}
 
-			// If not in a section yet, skip
-			if (!inSection && !inConfigSection)
-				continue;
-
-			// Process key=value pairs
-			int equalsPos = line.indexOf('=');
-			if (equalsPos > 0) {
-				QString key = line.left(equalsPos).trimmed();
-				QString value = line.mid(equalsPos + 1).trimmed();
-
-				if (inConfigSection) {
-					// Process configuration settings using helper function
-					if (processConfigKeyword(key, value, "_ContextConf", contextData) ||
-						processConfigKeyword(key, value, "_CategoryConf", categoryData) ||
-						processConfigKeyword(key, value, "_RequirementsConf", requirementsData)) {
-						// Configuration processed successfully
-					}
-				}
-				else {
-					// Process normal setting fields
-					// Helper function to sanitize version strings
-					auto sanitizeVersion = [this](const QString& s, bool defaultZero = false) {
-						QString v = s.trimmed();
-						v.remove(QRegularExpression("[^0-9.]"));
-						QRegularExpression rx("^[0-9]+\\.[0-9]+\\.[0-9]+$"); // Exact x.y.z format
-						if (rx.match(v).hasMatch())
-							return v;
-						return defaultZero ? QString(DEFAULT_VERSION) : QString();
-						};
-
-					// Helper function to process localized text fields
-					auto processLocalizedField = [&](const QString& baseKey, const QString& prefix, 
-													 QString& baseField, QMap<QString, QString>& localizedMap) {
-						if (key.compare(baseKey, Qt::CaseInsensitive) == 0) {
-							baseField = processTextLineOptimized(sanitizeHtmlInput(value), QString());
-							return true;
-						}
-						else if (key.startsWith(prefix, Qt::CaseInsensitive)) {
-							QString langCode = extractLanguageCode(key, prefix.chopped(1)); // Remove trailing '_'
-							if (!langCode.isEmpty()) {
-								QString localizedContent = processTextLineOptimized(sanitizeHtmlInput(value), QString());
-								
-								// If there's already content for this language, append with newline
-								if (localizedMap.contains(langCode)) {
-									localizedMap[langCode] += "\n" + localizedContent;
-								}
-								else {
-									localizedMap.insert(langCode, localizedContent);
-								}
-							}
-							return true;
-						}
-						return false;
-					};
-
-					// Process special fields
-					if (key.compare("AddedVersion", Qt::CaseInsensitive) == 0)
-						currentInfo.addedVersion = sanitizeVersion(value, true);
-					else if (key.compare("RemovedVersion", Qt::CaseInsensitive) == 0)
-						currentInfo.removedVersion = sanitizeVersion(value);
-					else if (key.compare("ReaddedVersion", Qt::CaseInsensitive) == 0)
-						currentInfo.readdedVersion = sanitizeVersion(value);
-					else if (key.compare("RenamedVersion", Qt::CaseInsensitive) == 0)
-						currentInfo.renamedVersion = sanitizeVersion(value);
-					else if (key.compare("SupersededBy", Qt::CaseInsensitive) == 0)
-						currentInfo.supersededBy = value;
-					else if (key.compare("Category", Qt::CaseInsensitive) == 0)
-						currentInfo.category = value;
-					else if (key.compare("Context", Qt::CaseInsensitive) == 0)
-						currentInfo.context = value;
-					else if (processLocalizedField("Syntax", "Syntax_", currentInfo.syntax, currentInfo.localizedSyntax)) {
-					}
-					else if (processLocalizedField("Description", "Description_", currentInfo.description, currentInfo.localizedDescriptions)) {
-					}
-					else if (key.compare("Requirements", Qt::CaseInsensitive) == 0)
-						currentInfo.requirements = value.toLower().trimmed();
-				}
-			}
+			currentSection = sectionMatch.captured(1).trimmed();
+			inConfigSection = (currentSection == "___SbieSettingsConfig_");
+			inSection = !inConfigSection;
+			if (inSection)
+				currentInfo = SettingInfo();
+			continue;
 		}
 
-		// Don't forget to save the last section (if not the config section)
-		if (inSection && !currentSection.isEmpty() && !inConfigSection) {
-			currentInfo.name = currentSection;
-			// Ensure name contains only valid characters
-			currentInfo.name.remove(QRegularExpression("[^a-zA-Z0-9_.]"));
-			validSettings.insert(currentInfo.name, currentInfo);
+		// Skip lines outside any section
+		if (!inSection && !inConfigSection)
+			continue;
+
+		// Key-value pair
+		int equalsPos = line.indexOf('=');
+		if (equalsPos <= 0)
+			continue;
+
+		QString key = line.left(equalsPos).trimmed();
+		QString value = line.mid(equalsPos + 1).trimmed();
+
+		if (inConfigSection) {
+			processConfigKeyword(key, value, "_ContextConf", contextData) ||
+				processConfigKeyword(key, value, "_CategoryConf", categoryData) ||
+				processConfigKeyword(key, value, "_RequirementsConf", requirementsData);
+			continue;
 		}
 
-		file.close();
+		// Helper: sanitize version
+		auto sanitizeVersion = [this](const QString& s, bool defaultZero = false) {
+			QString v = s.trimmed();
+			v.remove(QRegularExpression("[^0-9.]"));
+			QRegularExpression rx("^[0-9]+\\.[0-9]+\\.[0-9]+$");
+			if (rx.match(v).hasMatch())
+				return v;
+			return defaultZero ? QString(DEFAULT_VERSION) : QString();
+			};
 
-		// Update the cache status after successful load
-		lastFileModified = QFileInfo(filePath).lastModified();
-		settingsLoaded = true;
+		// Helper: process localized field
+		auto processLocalizedField = [&](const QString& baseKey, const QString& prefix,
+			QString& baseField, QMap<QString, QString>& localizedMap) {
+				if (key.compare(baseKey, Qt::CaseInsensitive) == 0) {
+					baseField = processTextLineOptimized(sanitizeHtmlInput(value), QString());
+					return true;
+				}
+				if (key.startsWith(prefix, Qt::CaseInsensitive)) {
+					QString langCode = extractLanguageCode(key, prefix.chopped(1));
+					if (!langCode.isEmpty()) {
+						QString localizedContent = processTextLineOptimized(sanitizeHtmlInput(value), QString());
+						if (localizedMap.contains(langCode))
+							localizedMap[langCode] += "\n" + localizedContent;
+						else
+							localizedMap.insert(langCode, localizedContent);
+					}
+					return true;
+				}
+				return false;
+			};
 
-		qDebug() << "[validSettings] Successfully loaded" << validSettings.size() << "settings,"
-			<< contextData.mappings.size() << "context mappings,"
-			<< contextData.localizedMappings.size() << "localized context mappings,"
-			<< categoryData.mappings.size() << "category mappings,"
-			<< categoryData.localizedMappings.size() << "localized category mappings,"
-			<< requirementsData.mappings.size() << "requirements mappings, and"
-			<< requirementsData.localizedMappings.size() << "localized requirements mappings from" << filePath;
+		// Process known fields
+		if (key.compare("AddedVersion", Qt::CaseInsensitive) == 0)
+			currentInfo.addedVersion = sanitizeVersion(value, true);
+		else if (key.compare("RemovedVersion", Qt::CaseInsensitive) == 0)
+			currentInfo.removedVersion = sanitizeVersion(value);
+		else if (key.compare("ReaddedVersion", Qt::CaseInsensitive) == 0)
+			currentInfo.readdedVersion = sanitizeVersion(value);
+		else if (key.compare("RenamedVersion", Qt::CaseInsensitive) == 0)
+			currentInfo.renamedVersion = sanitizeVersion(value);
+		else if (key.compare("SupersededBy", Qt::CaseInsensitive) == 0)
+			currentInfo.supersededBy = value;
+		else if (key.compare("Category", Qt::CaseInsensitive) == 0)
+			currentInfo.category = value;
+		else if (key.compare("Context", Qt::CaseInsensitive) == 0)
+			currentInfo.context = value;
+		else if (processLocalizedField("Syntax", "Syntax_", currentInfo.syntax, currentInfo.localizedSyntax)) {
+		}
+		else if (processLocalizedField("Description", "Description_", currentInfo.description, currentInfo.localizedDescriptions)) {
+		}
+		else if (key.compare("Requirements", Qt::CaseInsensitive) == 0)
+			currentInfo.requirements = value.toLower().trimmed();
 	}
-	else {
-		// File couldn't be opened - log the error
-		qWarning() << "[validSettings] Failed to load settings file:" << filePath << "Error:" << file.errorString();
 
-		// Keep settings loaded flag false so we try again next time
-		settingsLoaded = false;
+	// Save last section if needed
+	if (inSection && !currentSection.isEmpty() && !inConfigSection) {
+		currentInfo.name = currentSection;
+		currentInfo.name.remove(QRegularExpression("[^a-zA-Z0-9_.]"));
+		validSettings.insert(currentInfo.name, currentInfo);
 	}
+
+	file.close();
+
+	// Update cache status
+	lastFileModified = QFileInfo(filePath).lastModified();
+
+	qDebug() << "[validSettings] Successfully loaded" << validSettings.size() << "settings,"
+		<< contextData.mappings.size() << "context mappings,"
+		<< contextData.localizedMappings.size() << "localized context mappings,"
+		<< categoryData.mappings.size() << "category mappings,"
+		<< categoryData.localizedMappings.size() << "localized category mappings,"
+		<< requirementsData.mappings.size() << "requirements mappings, and"
+		<< requirementsData.localizedMappings.size() << "localized requirements mappings from" << filePath;
 }
 
 template<CIniHighlighter::KeywordType Type>
@@ -998,43 +1013,42 @@ void CIniHighlighter::highlightBlock(const QString &text)
 
 	// 3. Highlight keys based on validSettings and currentVersion
 	if (m_enableValidation) {
-		QRegularExpression keyRegex("^([^\\s=]+)\\s*=");
+		QRegularExpression keyRegex(R"(^([^\s=]+)\s*=)");
 		QRegularExpressionMatch keyMatch = keyRegex.match(text);
 		if (keyMatch.hasMatch()) {
 			QString keyName = keyMatch.captured(1);
 			int start = keyMatch.capturedStart(1);
 			int length = keyName.length();
 
-			if (!validSettings.isEmpty()) { // Only check if list is loaded
-				if (validSettings.contains(keyName)) {
-					const SettingInfo& info = validSettings[keyName];
-					QVersionNumber current = m_currentVersion;
-					QVersionNumber renamed = QVersionNumber::fromString(info.renamedVersion);
-					QVersionNumber readded = QVersionNumber::fromString(info.readdedVersion);
-					QVersionNumber removed = QVersionNumber::fromString(info.removedVersion);
-					QVersionNumber added = QVersionNumber::fromString(info.addedVersion);
+			if (validSettings.isEmpty() || !validSettings.contains(keyName)) {
+				setFormat(start, length, unknownKeyFormat); // underline unknown keys
+			}
+			else {
+				const SettingInfo& info = validSettings[keyName];
+				const QVersionNumber current = m_currentVersion;
+				const QVersionNumber added = QVersionNumber::fromString(info.addedVersion);
+				const QVersionNumber removed = QVersionNumber::fromString(info.removedVersion);
+				const QVersionNumber readded = QVersionNumber::fromString(info.readdedVersion);
+				const QVersionNumber renamed = QVersionNumber::fromString(info.renamedVersion);
 
-					if (!info.renamedVersion.isEmpty() && current >= renamed) {
-						setFormat(start, length, renamedKeyFormat);
-					}
-					else if (!info.readdedVersion.isEmpty() && current >= readded) {
-						setFormat(start, length, keyFormat);
-					}
-					else if (!info.removedVersion.isEmpty() && current >= removed) {
-						setFormat(start, length, removedKeyFormat);
-					}
-					else if (current >= added) {
-						setFormat(start, length, keyFormat);
-					}
-					else if (current < added) {
-						setFormat(start, length, futureKeyFormat);
-					}
-					else {
-						setFormat(start, length, unknownKeyFormat);
-					}
+				// Highlight according to version status
+				if (!info.renamedVersion.isEmpty() && current >= renamed) {
+					setFormat(start, length, renamedKeyFormat);
+				}
+				else if (!info.readdedVersion.isEmpty() && current >= readded) {
+					setFormat(start, length, keyFormat);
+				}
+				else if (!info.removedVersion.isEmpty() && current >= removed) {
+					setFormat(start, length, removedKeyFormat);
+				}
+				else if (!info.addedVersion.isEmpty() && current < added) {
+					setFormat(start, length, futureKeyFormat);
+				}
+				else if (current >= added) {
+					setFormat(start, length, keyFormat);
 				}
 				else {
-					setFormat(start, length, unknownKeyFormat); // underline unknown keys
+					setFormat(start, length, unknownKeyFormat);
 				}
 			}
 		}

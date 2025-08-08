@@ -751,6 +751,7 @@ _FX NTSTATUS KphValidateCertificate()
                 goto CleanupExit;
             }
         }
+		/*
         else if (_wcsicmp(L"HWID", name) == 0) { // if HwId is specified it must be the right one
             extern wchar_t g_uuid_str[40];
             if (_wcsicmp(value, g_uuid_str) != 0) {
@@ -759,6 +760,7 @@ _FX NTSTATUS KphValidateCertificate()
             }
             Verify_CertInfo.locked = 1;
         }
+		*/
             
     next:
         status = Conf_Read_Line(stream, line, &line_num);

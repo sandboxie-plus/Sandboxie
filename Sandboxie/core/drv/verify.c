@@ -563,7 +563,7 @@ _FX NTSTATUS KphValidateCertificate()
     LARGE_INTEGER check_date = { 0 };
     LONG days = 0;
 
-    Verify_CertInfo.State = 0; // clear
+    Verify_CertInfo.State = 1; // clear
 
     if(!NT_SUCCESS(status = MyInitHash(&hashObj)))
         goto CleanupExit;
@@ -905,7 +905,7 @@ _FX NTSTATUS KphValidateCertificate()
     // <<< patreon 
     else //if (_wcsicmp(type, L"PERSONAL") == 0 || _wcsicmp(type, L"SUPPORTER") == 0)
     {
-        Verify_CertInfo.type = eCertPersonal;
+        Verify_CertInfo.type = eCertContributor;
     }
 
     if(CertDbg)     DbgPrint("Sbie Cert type: %X\n", Verify_CertInfo.type);

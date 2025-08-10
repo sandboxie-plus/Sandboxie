@@ -49,18 +49,29 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Load Variables from buildVariables.cmd
+      shell: cmd
+      run: |
+        @echo on
+        call "${{ github.workspace }}\Installer\buildVariables.cmd" build_qt6
+        echo qt6_version=%qt6_version% >> %GITHUB_ENV%
+        echo qt_version=%qt6_version% >> %GITHUB_ENV%
+
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v2
 
     # Qt 6 is only required for ARM64 build currently.
-    # - name: Install Qt6 x64
-    #   uses: jurplel/install-qt-action@v3
-    #   with:
+    - name: Install Qt6 x64
+      uses: jurplel/install-qt-action@v4
+      with:
     #     version: '6.3.1'
+         version: '${{ env.qt6_version }}'
     #     arch:  'win64_msvc2019_64'
+         tools: 'tools_opensslv3_x64'
+         cache: true
 
-    - name: Install Qt5 x64
-      run: SandboxiePlus\install_qt.cmd x64
+#    - name: Install Qt5 x64
+#      run: SandboxiePlus\install_qt.cmd x64
 
     - name: Installing Jom
       run: SandboxiePlus\install_jom.cmd
@@ -85,7 +96,7 @@ jobs:
       run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
 
     - name: Build Sandboxie-Plus x64
-      run: SandboxiePlus\qmake_plus.cmd x64
+      run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
 
     - name: Build SbieShell x64
       run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64

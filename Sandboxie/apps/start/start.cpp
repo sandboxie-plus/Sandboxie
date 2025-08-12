@@ -1404,7 +1404,7 @@ LRESULT UacPromptWndProc(
         //LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_NO,     bufNo,     32);
         //LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_CANCEL, bufCancel, 32);
 
-		int buttonX = 140;
+		int buttonX = MulDiv(140, dpiX, 96);
         WCHAR* pMsg = SbieDll_FormatMessage0(MSG_3115);
         pParams->hYes = CreateWindowW(L"BUTTON", pMsg,
             WS_VISIBLE | WS_CHILD | WS_TABSTOP | BS_PUSHBUTTON,

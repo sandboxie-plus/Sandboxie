@@ -24,9 +24,6 @@ public:
 
 	static void		TriggerPathReload();
 
-	void LoadCompletionConsent();
-	void SaveCompletionConsent();
-
 	enum EntryTypes {
 		eUndefined = 0,
 		eProcess,
@@ -35,6 +32,9 @@ public:
 		eTemplate,
 		eParent
 	};
+
+	void LoadCompletionConsent();
+	void SaveCompletionConsent();
 
 signals:
 	//void OptionsChanged();

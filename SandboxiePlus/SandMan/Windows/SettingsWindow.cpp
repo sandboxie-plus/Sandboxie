@@ -3293,10 +3293,10 @@ void WindowsMoveFile(const QString& From, const QString& To)
 // Helper to load/save consent from config
 void CSettingsWindow::LoadCompletionConsent()
 {
-	m_AutoCompletionConsent = theConf->GetBool("Options/EnableCompletionConsent", false);
+	m_AutoCompletionConsent = theConf->GetBool("Options/AutoCompletionConsent", false);
 }
 
 void CSettingsWindow::SaveCompletionConsent()
 {
-	theConf->SetValue("Options/EnableCompletionConsent", m_AutoCompletionConsent);
+	theConf->SetValue("Options/AutoCompletionConsent", m_AutoCompletionConsent);
 }

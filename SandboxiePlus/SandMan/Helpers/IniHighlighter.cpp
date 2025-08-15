@@ -558,7 +558,7 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
 		else if (processLocalizedField("Description", "Description_", currentInfo.description, currentInfo.localizedDescriptions)) {
 		}
 		else if (key.compare("Requirements", Qt::CaseInsensitive) == 0)
-			currentInfo.requirements = value.toLower().trimmed();
+			currentInfo.requirements = value/*.toLower()*/.trimmed();
 	}
 
 	// Save last section if needed
@@ -750,6 +750,7 @@ void CIniHighlighter::appendMultiLineTooltipRow(QString& tooltip, const QString&
 		if (applySpecialFormatting) {
 			processedLine.replace(QStringLiteral("["), QStringLiteral("<span style='color:#2196F3;'>[</span>"));
 			processedLine.replace(QStringLiteral("]"), QStringLiteral("<span style='color:#2196F3;'>]</span>"));
+			processedLine.replace(QStringLiteral("|"), QStringLiteral("<span style='color:#2196F3;'>|</span>"));
 			processedLine = QStringLiteral("<span style='font-family: Consolas, monospace;'>") % processedLine % QStringLiteral("</span>");
 		}
 		
@@ -1303,10 +1304,57 @@ void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingIn
 
 	// Process requirements mappings with action fallback
 	if (!info.requirements.isEmpty()) {
+		// 1. Extract <...> substrings as literal labels
+		QString req = info.requirements;
+		QStringList literalLabels;
+		static const QRegularExpression angleBracketRegex(R"(<([^>]+)>)");
+		int offset = 0;
+		QRegularExpressionMatch match;
+		while ((match = angleBracketRegex.match(req, offset)).hasMatch()) {
+			literalLabels << match.captured(1);
+			// Remove the matched substring from req
+			req.remove(match.capturedStart(), match.capturedLength());
+			offset = match.capturedStart(); // Continue from where we removed
+		}
+		req = req.trimmed();
+
+		// 2. Map the remaining flags to labels as before
 		auto effectiveMappings = getEffectiveMappingsWithActionFallback(requirementsData, currentLang);
-		processKeywordMappings<KeywordInfo<KeywordType::Requirements>>(
-			info.requirements, effectiveMappings, requirementsLabel,
-			labelStyle, HtmlTags::VALUE_PREFIX, requirementsData.tooltipStyle, tooltip);
+		QStringList typeLabels;
+
+		// Collect all matched keywords and their actions
+		for (const auto& keywordInfo : effectiveMappings) {
+			if (req.contains(keywordInfo.keyword)) {
+				typeLabels.append(keywordInfo.displayName);
+			}
+		}
+
+		// 3. Append literal labels
+		typeLabels.append(literalLabels);
+
+		// 4. Only display if we have labels to show
+		if (!typeLabels.isEmpty()) {
+			QString typeText = typeLabels.join(HtmlTags::LABEL_JOINER);
+			QString styledLabelStyle = labelStyle;
+			QString labelStyling = requirementsData.tooltipStyle.left.toHtmlStyle();
+			if (!labelStyling.isEmpty()) {
+				if (labelStyle.contains("style='")) {
+					styledLabelStyle = labelStyle;
+					styledLabelStyle.replace("style='", labelStyling.mid(0, labelStyling.length() - 1) + ";");
+				}
+				else {
+					styledLabelStyle += " " + labelStyling;
+				}
+			}
+			tooltip += HtmlTags::TR_TD_START + styledLabelStyle + HtmlTags::TAG_CLOSE + requirementsLabel + HtmlTags::TD_END;
+			QString valueStyleStr = requirementsData.tooltipStyle.right.toHtmlStyle();
+			if (!valueStyleStr.isEmpty()) {
+				tooltip += HtmlTags::TD_START + valueStyleStr + HtmlTags::TAG_CLOSE + HtmlTags::VALUE_PREFIX + typeText + HtmlTags::TD_END + HtmlTags::TR_END;
+			}
+			else {
+				tooltip += HtmlTags::TD_TAG + HtmlTags::VALUE_PREFIX + typeText + HtmlTags::TD_END + HtmlTags::TR_END;
+			}
+		}
 	}
 }
 

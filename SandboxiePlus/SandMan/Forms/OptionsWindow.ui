@@ -6045,6 +6045,10 @@ Please note that this values are currently user specific and saved globally for 
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
+        • Pipe (|) separates possible values&lt;br&gt;
+        • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</string>
            </property>

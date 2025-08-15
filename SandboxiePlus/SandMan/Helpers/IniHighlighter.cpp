@@ -46,14 +46,17 @@ namespace {
     // Common HTML fragments to reduce repeated QStringLiteral usage
     namespace HtmlTags {
         static const QString TR_TD_START = QStringLiteral("<tr><td ");
+        static const QString TD_TAG = QStringLiteral("<td>");
+        static const QString TD_START = QStringLiteral("<td ");
         static const QString TD_END = QStringLiteral("</td>");
+        static const QString TR_TAG = QStringLiteral("<tr>");
         static const QString TR_END = QStringLiteral("</tr>");
         static const QString TAG_CLOSE = QStringLiteral(">");
-        static const QString TD_TAG = QStringLiteral("<td>");
         static const QString TABLE_START = QStringLiteral("<table ");
         static const QString TABLE_END = QStringLiteral("</table>");
         static const QString VALUE_PREFIX = QStringLiteral(": ");
         static const QString BR_NBSP = QStringLiteral("<br>&nbsp;&nbsp;");
+        static const QString LABEL_JOINER = QStringLiteral(" + ");
     }
     
     // Common text replacements

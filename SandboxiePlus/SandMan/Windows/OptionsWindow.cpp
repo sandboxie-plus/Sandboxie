@@ -426,10 +426,17 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.chkEnableTooltips->setCheckState(static_cast<Qt::CheckState>(defaultTooltip));
 	CIniHighlighter::SetTooltipMode(defaultTooltip); // Initialize the mode
 
+	LoadCompletionConsent();
 	int defaultAutoCompletion = theConf->GetInt("Options/EnableAutoCompletion", Qt::Checked);
-	ui.chkEnableAutoCompletion->setTristate(true); // Enable tri-state
-	ui.chkEnableAutoCompletion->setCheckState(static_cast<Qt::CheckState>(defaultAutoCompletion));
-	CCodeEdit::SetAutoCompletionMode(defaultAutoCompletion); // Initialize the mode
+	if (m_AutoCompletionConsent) {
+		ui.chkEnableAutoCompletion->setTristate(true); // Enable tri-state
+		ui.chkEnableAutoCompletion->setCheckState(static_cast<Qt::CheckState>(defaultAutoCompletion));
+		CCodeEdit::SetAutoCompletionMode(defaultAutoCompletion); // Initialize the mode
+	}
+	else {
+		CCodeEdit::SetAutoCompletionMode(Qt::Unchecked);
+		ui.chkEnableAutoCompletion->setCheckState(Qt::Unchecked);
+	}
 
 	// Create initial highlighter and editor
 	m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, nullptr, m_IniValidationEnabled);
@@ -1457,6 +1464,31 @@ void COptionsWindow::OnAutoCompletionToggled(int state)
 {
 	m_HoldChange = true;
 
+	// Show consent dialog if enabling and not yet accepted
+	if (state != Qt::Unchecked && !m_AutoCompletionConsent) {
+		QMessageBox consentBox(
+			QMessageBox::Warning,
+			tr("Autocomplete Consent Required"),
+			tr("If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software's documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.\n\nDo you wish to enable autocomplete?"),
+			QMessageBox::Yes | QMessageBox::No,
+			this
+		);
+		int result = consentBox.exec();
+		if (result == QMessageBox::Yes) {
+			m_AutoCompletionConsent = true;
+			SaveCompletionConsent();
+			ui.chkEnableAutoCompletion->setEnabled(true);
+			ui.chkEnableAutoCompletion->setTristate(true);
+			ui.chkEnableAutoCompletion->setCheckState(Qt::Checked);
+		}
+		else {
+			// Revert the checkbox and return
+			ui.chkEnableAutoCompletion->setCheckState(Qt::Unchecked);
+			m_HoldChange = false;
+			return;
+		}
+	}
+
 	theConf->SetValue("Options/EnableAutoCompletion", state);
 	CCodeEdit::SetAutoCompletionMode(state); // Use static method like tooltip
 
@@ -1589,4 +1621,15 @@ void COptionsWindow::TriggerPathReload()
 
 	DWORD bsm_app = BSM_APPLICATIONS;
 	BroadcastSystemMessage(BSF_POSTMESSAGE, &bsm_app, WM_DEVICECHANGE, 'sb', 0);
+}
+
+// Helper to load/save consent from config
+void COptionsWindow::LoadCompletionConsent()
+{
+	m_AutoCompletionConsent = theConf->GetBool("Options/AutoCompletionConsent", false);
+}
+
+void COptionsWindow::SaveCompletionConsent()
+{
+	theConf->SetValue("Options/AutoCompletionConsent", m_AutoCompletionConsent);
 }

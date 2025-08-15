@@ -796,8 +796,8 @@ QString CIniHighlighter::processTextLineOptimized(const QString& text, const QSt
 	if (processed.contains(QLatin1Char('['))) {
 		processed.replace(QStringLiteral("[br]"), TextReplacements::NEWLINE)
 			.replace(QStringLiteral("[sbie]"), QStringLiteral("Sandboxie-Plus"))
-			.replace(QStringLiteral("[bY]"), QStringLiteral("[y]|n "))
-			.replace(QStringLiteral("[bN]"), QStringLiteral("y|[n] "));
+			.replace(QStringLiteral("[bY]"), QStringLiteral("[y]|n"))
+			.replace(QStringLiteral("[bN]"), QStringLiteral("y|[n]"));
 
 		if (processed.contains(QStringLiteral("[version]"))) {
 			static const QString versionStr = QStringLiteral("%1.%2.%3").arg(VERSION_MJR).arg(VERSION_MIN).arg(VERSION_REV);

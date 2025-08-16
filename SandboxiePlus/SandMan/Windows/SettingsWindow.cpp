@@ -590,9 +590,23 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	bool defaultValidation = theConf->GetBool("Options/ValidateIniKeys", ui.chkValidateIniKeys->isChecked());
 	ui.chkValidateIniKeys->setChecked(defaultValidation);
 	m_IniValidationEnabled = defaultValidation;
-	bool defaultTooltip = theConf->GetBool("Options/EnableIniTooltips", ui.chkEnableTooltips->isChecked());
-	ui.chkEnableTooltips->setChecked(defaultTooltip);
-	m_TooltipsEnabled = defaultTooltip;
+
+	int defaultTooltip = theConf->GetInt("Options/EnableIniTooltips", Qt::Checked);
+	ui.chkEnableTooltips->setTristate(true); // Enable tri-state
+	ui.chkEnableTooltips->setCheckState(static_cast<Qt::CheckState>(defaultTooltip));
+	CIniHighlighter::SetTooltipMode(defaultTooltip); // Initialize the mode
+
+	LoadCompletionConsent();
+	int defaultAutoCompletion = theConf->GetInt("Options/EnableAutoCompletion", Qt::Checked);
+	if (m_AutoCompletionConsent) {
+		ui.chkEnableAutoCompletion->setTristate(true); // Enable tri-state
+		ui.chkEnableAutoCompletion->setCheckState(static_cast<Qt::CheckState>(defaultAutoCompletion));
+		CCodeEdit::SetAutoCompletionMode(defaultAutoCompletion); // Initialize the mode
+	}
+	else {
+		CCodeEdit::SetAutoCompletionMode(Qt::Unchecked);
+		ui.chkEnableAutoCompletion->setCheckState(Qt::Unchecked);
+	}
 
 	// Create initial highlighter and editor
 	m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, nullptr, m_IniValidationEnabled);
@@ -603,6 +617,35 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.txtIniSection = nullptr;
 	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
 
+	// Set up autocompletion based on mode
+	QCompleter* completer = new QCompleter(this);
+	completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+	completer->setFilterMode(Qt::MatchContains);
+	m_pCodeEdit->SetCompleter(CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled ? completer : nullptr);
+
+	// Set completer based on mode
+	if (CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled) {
+		m_pCodeEdit->SetCompleter(completer);
+	}
+	else {
+		m_pCodeEdit->SetCompleter(nullptr);
+	}
+	
+	m_pCodeEdit->SetCompletionFilterCallback([](const QString& keyName) -> bool {
+		return CIniHighlighter::IsKeyHiddenFromPopup(keyName);
+		});
+	m_pCodeEdit->SetCaseCorrectionCallback([](const QString& wrongKey) -> QString {
+		return CIniHighlighter::FindCaseCorrectedKey(wrongKey);
+		});
+	m_pCodeEdit->SetCaseCorrectionFilterCallback([](const QString& keyName) -> bool {
+		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c');
+		});
+	
+	// Update completion model with current settings if auto completion is enabled
+	if (CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled) {
+		UpdateAutoCompletion();
+	}
+
 	ApplyIniEditFont();
 
 	connect(ui.btnSelectIniFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectIniEditFont()));
@@ -610,6 +653,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.chkValidateIniKeys, SIGNAL(stateChanged(int)), this, SLOT(OnIniValidationToggled(int)));
 	connect(ui.chkEnableTooltips, SIGNAL(stateChanged(int)), this, SLOT(OnTooltipToggled(int)));
+	connect(ui.chkEnableAutoCompletion, SIGNAL(stateChanged(int)), this, SLOT(OnAutoCompletionToggled(int)));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
 	//connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
@@ -634,7 +678,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		QByteArray Columns = theConf->GetBlob("SettingsWindow/" + pTree->objectName() + "_Columns");
 		if (!Columns.isEmpty()) 
 			pTree->header()->restoreState(Columns);
-	}
+		}
 
 	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
 	if (iOptionTree == 2)
@@ -670,6 +714,18 @@ void CSettingsWindow::ApplyIniEditFont()
 		m_pCodeEdit->SetFont(font);
 	}
 	ui.lblIniEditFont->setText(tr("%0, %1 pt").arg(font.family()).arg(font.pointSizeF())); // tr: example: "Calibri, 9.5 pt"
+}
+
+void CSettingsWindow::UpdateAutoCompletion()
+{
+	if (CCodeEdit::GetAutoCompletionMode() == CCodeEdit::AutoCompletionMode::Disabled || !m_pCodeEdit || !m_pCodeEdit->GetCompleter())
+		return;
+
+	// Get completion candidates from the highlighter
+	QStringList candidates = CIniHighlighter::GetCompletionCandidates();
+
+	// Update the completion model
+	m_pCodeEdit->UpdateCompletionModel(candidates);
 }
 
 void CSettingsWindow::OnSelectIniEditFont()
@@ -824,8 +880,8 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 
 	// Tooltip handling
 	if (source == m_pCodeEdit && event->type() == QEvent::ToolTip) {
-		// If tooltips are disabled, don't show any tooltips
-		if (!m_TooltipsEnabled)
+		// Check if tooltips are completely disabled
+		if (CIniHighlighter::GetTooltipMode() == CIniHighlighter::TooltipMode::Disabled)
 			return false;
 
 		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
@@ -844,6 +900,14 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 			// Don't show tooltips for comment lines
 			if (CIniHighlighter::IsCommentLine(currentLine))
 				return false;
+
+			// Check if we're on the value side of the equals sign (after the =)
+			int equalsPos = currentLine.indexOf('=');
+			if (equalsPos >= 0 && (cursor.position() - block.position()) > equalsPos) {
+				// We're in the value part, don't show tooltip
+				QToolTip::hideText();
+				return false;
+			}
 
 			// Custom word selection that includes dots and underscores
 			int initialPos = cursor.position() - block.position();
@@ -885,6 +949,7 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 			QToolTip::hideText();
 		}
 	}
+
 	return QDialog::eventFilter(source, event);
 }
 
@@ -2435,6 +2500,9 @@ void CSettingsWindow::OnIniValidationToggled(int state)
 	// Save the new value to config
 	theConf->SetValue("Options/ValidateIniKeys", m_IniValidationEnabled);
 
+	// Clear all language-related caches
+	CIniHighlighter::ClearLanguageCache();
+
 	// Remove previous highlighter
 	if (m_pIniHighlighter) {
 		delete m_pIniHighlighter;
@@ -2455,10 +2523,66 @@ void CSettingsWindow::OnTooltipToggled(int state)
 {
 	m_HoldChange = true;
 
-	m_TooltipsEnabled = (state == Qt::Checked);
-
 	// Save the new value to config
-	theConf->SetValue("Options/EnableIniTooltips", m_TooltipsEnabled);
+	theConf->SetValue("Options/EnableIniTooltips", state);
+
+	// Set the tooltip mode in the highlighter
+	CIniHighlighter::SetTooltipMode(state);
+
+	m_HoldChange = false;
+}
+
+void CSettingsWindow::OnAutoCompletionToggled(int state)
+{
+	m_HoldChange = true;
+
+	// Show consent dialog if enabling and not yet accepted
+	if (state != Qt::Unchecked && !m_AutoCompletionConsent) {
+		QMessageBox consentBox(
+			QMessageBox::Warning,
+			tr("Autocomplete Consent Required"),
+			tr("If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software's documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.\n\nDo you wish to enable autocomplete?"),
+			QMessageBox::Yes | QMessageBox::No,
+			this
+		);
+		int result = consentBox.exec();
+		if (result == QMessageBox::Yes) {
+			m_AutoCompletionConsent = true;
+			SaveCompletionConsent();
+			ui.chkEnableAutoCompletion->setEnabled(true);
+			ui.chkEnableAutoCompletion->setTristate(true);
+			ui.chkEnableAutoCompletion->setCheckState(Qt::Checked);
+		}
+		else {
+			// Revert the checkbox and return
+			ui.chkEnableAutoCompletion->setCheckState(Qt::Unchecked);
+			m_HoldChange = false;
+			return;
+		}
+	}
+
+	theConf->SetValue("Options/EnableAutoCompletion", state);
+	CCodeEdit::SetAutoCompletionMode(state); // Use static method like tooltip
+
+	// Enable or disable the completer based on mode
+	if (m_pCodeEdit) {
+		if (CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled) {
+			// Create completer if it doesn't exist
+			if (!m_pCodeEdit->GetCompleter()) {
+				QCompleter* completer = new QCompleter(this);
+				completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+				completer->setFilterMode(Qt::MatchContains);
+				m_pCodeEdit->SetCompleter(completer);
+
+				// Update completion model with current settings
+				UpdateAutoCompletion();
+			}
+		}
+		else {
+			// Disable completer
+			m_pCodeEdit->SetCompleter(nullptr);
+		}
+	}
 
 	m_HoldChange = false;
 }
@@ -2495,6 +2619,8 @@ void CSettingsWindow::LoadIniSection()
 	m_HoldChange = true;
 	//ui.txtIniSection->setPlainText(Section);
 	m_pCodeEdit->SetCode(Section);
+	// Update autocompletion after all settings are loaded
+	UpdateAutoCompletion();
 	m_HoldChange = false;
 }
 
@@ -2753,7 +2879,7 @@ void CSettingsWindow::UpdateCert()
 				if (g_CertInfo.grace_period)
 					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
 				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
-					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database."));
+					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database."));
 			} else
 				infoMsg.append(tr("<br />Plus features are no longer enabled."));
 			ui.lblCertExp->setText(infoMsg);
@@ -3162,4 +3288,15 @@ void WindowsMoveFile(const QString& From, const QString& To)
 
     //The Copying Function
     SHFileOperationW(&SHFileOp);
+}
+
+// Helper to load/save consent from config
+void CSettingsWindow::LoadCompletionConsent()
+{
+	m_AutoCompletionConsent = theConf->GetBool("Options/AutoCompletionConsent", false);
+}
+
+void CSettingsWindow::SaveCompletionConsent()
+{
+	theConf->SetValue("Options/AutoCompletionConsent", m_AutoCompletionConsent);
 }

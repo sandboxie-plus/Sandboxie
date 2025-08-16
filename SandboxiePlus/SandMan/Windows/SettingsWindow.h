@@ -62,6 +62,9 @@ public:
 
 	static void StartEval(QWidget* parent, QObject* receiver, const char* member);
 
+	void LoadCompletionConsent();
+	void SaveCompletionConsent();
+
 signals:
 	void OptionsChanged(bool bRebuildUI = false);
 	void Closed();
@@ -140,6 +143,7 @@ private slots:
 	void OnEditIni();
 	void OnIniValidationToggled(int state);
 	void OnTooltipToggled(int state);
+	void OnAutoCompletionToggled(int state);
 	void OnSaveIni();
 	void OnIniChanged();
 	void OnCancelEdit();
@@ -186,6 +190,9 @@ protected:
 	void	SaveIniSection();
 	void    ApplyIniEditFont();
 
+	// Autocompletion support
+	void UpdateAutoCompletion();
+
 	void	InitSupport();
 
 	bool	m_bRebuildUI;
@@ -214,10 +221,10 @@ private:
 	Ui::SettingsWindow ui;
 
 	class CCodeEdit* m_pCodeEdit = nullptr;
+	class CIniHighlighter* m_pIniHighlighter = nullptr;
 
 	bool m_IniValidationEnabled = true;
-	bool m_TooltipsEnabled = true;
-	class CIniHighlighter* m_pIniHighlighter = nullptr;
+	bool m_AutoCompletionConsent;
 };
 
 QVariantMap GetRunEntry(const QString& sEntry);

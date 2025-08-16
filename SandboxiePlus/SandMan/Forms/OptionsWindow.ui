@@ -6018,14 +6018,7 @@ Please note that this values are currently user specific and saved globally for 
          <string>Edit ini Section</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="0" colspan="6">
-          <widget class="QPlainTextEdit" name="txtIniSection">
-           <property name="lineWrapMode">
-            <enum>QPlainTextEdit::NoWrap</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
+         <item row="0" column="5">
           <widget class="QPushButton" name="btnSaveIni">
            <property name="enabled">
             <bool>false</bool>
@@ -6035,34 +6028,43 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </widget>
          </item>
-         <item row="0" column="5">
-          <widget class="QPushButton" name="btnCancelEdit">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Cancel</string>
+         <item row="1" column="0" colspan="7">
+          <widget class="QPlainTextEdit" name="txtIniSection">
+           <property name="lineWrapMode">
+            <enum>QPlainTextEdit::NoWrap</enum>
            </property>
           </widget>
          </item>
-         <item row="0" column="3">
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="chkEnableTooltips">
+           <property name="toolTip">
+            <string>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
+        • Pipe (|) separates possible values&lt;br&gt;
+        • Square brackets ([]) indicate default value or optional values&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</string>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
+           <property name="text">
+            <string>Tooltips</string>
            </property>
-          </spacer>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item row="0" column="1">
           <widget class="QCheckBox" name="chkValidateIniKeys">
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;When checked, INI keys are validated and highlighted according to the SbieSettings file. Uncheck to disable validation and highlighting.&lt;/p&gt;
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
+&lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
   &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
@@ -6093,14 +6095,55 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
-          <widget class="QCheckBox" name="chkEnableTooltips">
-           <property name="toolTip">
-            <string>Show detailed information tooltips when hovering over configuration settings.
-Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</string>
+         <item row="0" column="6">
+          <widget class="QPushButton" name="btnCancelEdit">
+           <property name="enabled">
+            <bool>false</bool>
            </property>
            <property name="text">
-            <string>Tooltips</string>
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="3">
+          <widget class="QCheckBox" name="chkEnableAutoCompletion">
+           <property name="toolTip">
+            <string>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + auto-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; in popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt; to select highlighted item&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Complete</string>
            </property>
            <property name="checked">
             <bool>true</bool>

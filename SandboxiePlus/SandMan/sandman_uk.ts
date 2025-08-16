@@ -1242,7 +1242,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="525"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Опис</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="546"/>
@@ -6280,7 +6280,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <location filename="Windows/SettingsWindow.cpp" line="405"/>
         <location filename="Windows/SettingsWindow.cpp" line="585"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вибрати шрифт</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="407"/>
@@ -8387,7 +8387,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4485"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Опис</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4493"/>
@@ -9801,7 +9801,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5797"/>
         <source>Open Template</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відкрити шаблон</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5965"/>

@@ -2,6 +2,8 @@
 
 #include <QSyntaxHighlighter>
 #include <QVersionNumber>
+#include <QCompleter>
+#include <QStringListModel>
 
 #define INI_WITH_JSON
 
@@ -20,9 +22,10 @@ struct SettingInfo {
 	QString category;
 	QString context;
 	QString syntax;
+	QMap<QString, QString> localizedSyntax;
 	QString description;
 	QMap<QString, QString> localizedDescriptions;
-	QString flags;
+	QString requirements;
 };
 
 class CIniHighlighter : public QSyntaxHighlighter
@@ -33,27 +36,42 @@ public:
 	explicit CIniHighlighter(bool bDarkMode, QTextDocument* parent = nullptr, bool enableValidation = true);
 	virtual ~CIniHighlighter();
 
-	// Load valid settings from a INI file
-	void loadSettingsIni(const QString& filePath);
+	// Settings validation, tooltip handling and auto completion
+	enum class TooltipMode {
+		Disabled = 0,        // Qt::Unchecked - no tooltips
+		BasicInfo = 1,       // Qt::PartiallyChecked - setting name + description only
+		FullTooltip = 2      // Qt::Checked - complete tooltip with all info
+	};
 
-	// Set the current semantic version for highlighting
+	void loadSettingsIni(const QString& filePath);
 	void setCurrentVersion(const QString& version);
 
-	// Get tooltip text for a setting based on its version information
 	static QString GetSettingTooltip(const QString& settingName);
-
 	static bool IsSettingsLoaded() { return settingsLoaded; }
-
 	static bool IsCommentLine(const QString& line);
+
+	static void ClearLanguageCache();
+	static void SetTooltipMode(int checkState);
+	static TooltipMode GetTooltipMode();
+	static QString getCurrentLanguage();
+
+	// Autocompletion support
+	static QStringList GetCompletionCandidates();
+	static QString FindCaseCorrectedKey(const QString& wrongKey);
+	static bool IsValidKey(const QString& keyName);
+	static bool IsKeyHiddenFromPopup(const QString& keyName);
+
+	static QHash<QString, QString> hideConfRules; // setting -> action
+	static QHash<QString, QString> hideConfExclusions; // setting -> action
+	static QMutex hideConfMutex;
+
+	static bool IsKeyHiddenFromContext(const QString& keyName, char context);
+    // End Settings validation, tooltip handling and auto completion
 
 protected:
     void highlightBlock(const QString &text) override;
 
 private:
-    struct HighlightRule {
-        QRegularExpression pattern;
-        QTextCharFormat format;
-    };
     QVector<HighlightRule> highlightRules;
 
     QTextCharFormat sectionFormat;
@@ -82,20 +100,174 @@ private:
     QVector<HighlightRule> jsonHighlightRules;
 #endif
 
-	// Settings validation and tooltip handling
+	// Settings validation, tooltip handling and auto completion
+	QVersionNumber m_currentVersion;
+	bool m_enableValidation;
+
 	static const QString DEFAULT_SETTINGS_FILE;
 	static const QString DEFAULT_VERSION;
 
 	static QVersionNumber s_currentVersion;
-	static QVersionNumber getCurrentVersion();
+	static QString s_currentLanguage;
+	static QMutex s_languageMutex;
 	static QHash<QString, SettingInfo> validSettings;
 	static QDateTime lastFileModified;
 	static bool settingsLoaded;
 	static QMutex settingsMutex;
 	static QHash<QString, QString> tooltipCache;
 	static QMutex tooltipCacheMutex;
+	static TooltipMode s_tooltipMode;
+	static QMutex s_tooltipModeMutex;
 
-	QVersionNumber m_currentVersion;
+	static QVersionNumber getCurrentVersion();
+	static QString normalizeLanguage(const QString& language);
+	static QString sanitizeHtmlInput(const QString& input);
+	static QString GetBasicSettingTooltip(const QString& settingName);
+	static bool isValidForTooltip(const QString& settingName);
+	
+	static QString sanitizeVersion(const QString& versionString, bool useDefaultOnInvalid = false);
+	static QString mergeHtmlStyles(const QString& baseStyle, const QString& additionalStyle);
+	static QTextCharFormat determineKeyFormat(const SettingInfo& info, const QVersionNumber& currentVersion,
+		const QTextCharFormat& keyFormat, const QTextCharFormat& futureKeyFormat, 
+		const QTextCharFormat& removedKeyFormat, const QTextCharFormat& renamedKeyFormat,
+		const QTextCharFormat& unknownKeyFormat);
+	
+	// Generic iterator helper template
+	template<typename ContainerType, typename FunctionType>
+	static void processContainer(const ContainerType& container, FunctionType&& func);
+	
+	template<typename MapType, typename KeyType, typename FunctionType>
+	static void processMapKeys(const MapType& map, const KeyType& keyPrefix, FunctionType&& func);
+	
+	static void addVersionRows(QString& tooltip, const SettingInfo& info, const QString& labelStyle);
+	static void processMappingsOptimized(QString& tooltip, const SettingInfo& info,
+		const QString& currentLang, const QString& labelStyle);
+	static void processContentOptimized(QString& tooltip, const SettingInfo& info,
+		const QString& currentLang, const QString& settingName,
+		const QString& labelStyle);
+	static QString processTextLineOptimized(const QString& text, const QString& settingName);
+	static QString selectLocalizedContentOptimized(const QString& defaultContent,
+		const QMap<QString, QString>& localizedMap,
+		const QString& currentLang);
 
-	bool m_enableValidation;
+	static QString extractLanguageCode(const QString& key, const QString& prefix);
+
+	enum class KeywordType {
+		Context,
+		Category,
+		Requirements
+	};
+
+	template<KeywordType Type>
+	struct KeywordInfo {
+		QString keyword;
+		QString displayName;
+		QString action;
+	};
+
+    struct TooltipStyle {
+        QString color = "";           // red, green, blue, etc.
+        bool bold = false;
+        bool italic = false;
+        bool underline = false;
+
+        QString toHtmlStyle() const {
+            QStringList styles;
+            if (!color.isEmpty()) {
+                styles << QString("color:%1").arg(color);
+            }
+            if (bold) {
+                styles << "font-weight:bold";
+            }
+            if (italic) {
+                styles << "font-style:italic";
+            }
+            if (underline) {
+                styles << "text-decoration:underline";
+            }
+            return styles.isEmpty() ? "" : QString("style='%1'").arg(styles.join(";"));
+        }
+    };
+
+    struct TooltipCellStyles {
+        TooltipStyle left;
+        TooltipStyle right;
+    };
+
+    static TooltipCellStyles parseStyleConfig(const QString& styleConfig);
+
+    struct TooltipThemeCache {
+        bool darkMode = false;
+        QString bgColor;
+        QString textColor;
+        QString tableStyle;
+        QString labelStyle;
+        bool valid = false;
+    };
+    static const TooltipThemeCache& getTooltipThemeCache();
+
+    template<KeywordType Type>
+    using KeywordMappings = QList<KeywordInfo<Type>>;
+    template<KeywordType Type>
+    using LocalizedKeywordMappings = QMap<QString, KeywordMappings<Type>>;
+
+    template<KeywordType Type>
+    struct KeywordGroup {
+        KeywordMappings<Type> mappings;
+        LocalizedKeywordMappings<Type> localizedMappings;
+        TooltipCellStyles tooltipStyle;
+        
+        void clear() {
+            mappings.clear();
+            localizedMappings.clear();
+            tooltipStyle = TooltipCellStyles();
+        }
+    };
+    
+    static KeywordGroup<KeywordType::Context> contextData;
+    static KeywordGroup<KeywordType::Category> categoryData;
+    static KeywordGroup<KeywordType::Requirements> requirementsData;
+
+    static QMap<QString, TooltipCellStyles> genericStyles;
+    static TooltipCellStyles getGenericStyles(const QString& rowType);
+
+	template<KeywordType Type>
+	static KeywordMappings<Type> parseKeywordMappings(const QString& value);
+
+	template<KeywordType Type>
+	static KeywordMappings<Type> getEffectiveMappingsWithActionFallback(
+		const KeywordGroup<Type>& data, const QString& currentLang);
+
+	template<typename KeywordInfoType>
+	static void processKeywordMappings(
+		const QString& displayText,
+		const QList<KeywordInfoType>& effectiveMappings,
+		const QString& labelText,
+		const QString& labelStyle,
+		const QString& valuePrefix,
+		const TooltipCellStyles& cellStyles,
+		QString& tooltip);
+
+    template<KeywordType Type>
+    static bool processConfigKeyword(const QString& key, const QString& value, 
+                                   const QString& baseKey, 
+                                   KeywordGroup<Type>& keywordGroup);
+
+	// Unified tooltip row generation
+	static void appendGenericTooltipRow(QString& tooltip, const QString& label, const QString& value,
+		const QString& labelStyle, const QString& valuePrefix = ": ",
+		const TooltipCellStyles& cellStyles = TooltipCellStyles{});
+	
+	static void appendMultiLineTooltipRow(QString& tooltip, const QString& label, 
+		const QStringList& lines, const QString& labelStyle, const QString& valuePrefix,
+		const QString& settingName, bool applySpecialFormatting = false);
+
+    static void appendTableRowForContent(QString& tooltip, const QString& label, const QString& content, const QString& labelStyle, const QString& valuePrefix, const QString& settingName, bool isSyntax);
+
+    static QString getOrSetTooltipCache(const QString& cacheKey, const std::function<QString()>& generator);
+
+	static void parseHideConfRules(const QString& value, QHash<QString, QString>& rules);
+	static bool matchesWildcard(const QString& pattern, const QString& text);
+	static QString convertWildcardToRegex(const QString& wildcard);
+	// End Settings validation, tooltip handling and auto completion
 };

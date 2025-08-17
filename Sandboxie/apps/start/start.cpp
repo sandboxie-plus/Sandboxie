@@ -369,40 +369,6 @@ _FX WCHAR *Get_Default_Browser(void)
 
 
 //---------------------------------------------------------------------------
-// InitDpiAwareness
-//---------------------------------------------------------------------------
-
-typedef DPI_AWARENESS_CONTEXT (WINAPI *PFN_SetThreadDpiAwarenessContext)(DPI_AWARENESS_CONTEXT);
-
-static BOOL InitDpiAwareness()
-{
-    HMODULE hUser32 = GetModuleHandleW(L"user32.dll");
-    if (!hUser32) {
-        // Should never happen
-        return FALSE;
-    }
-
-    PFN_SetThreadDpiAwarenessContext pSetThreadDpiAwarenessContext =
-        (PFN_SetThreadDpiAwarenessContext)GetProcAddress(hUser32,
-            "SetThreadDpiAwarenessContext");
-    if (!pSetThreadDpiAwarenessContext) {
-        // Function not available (pre-Win10)—cannot change thread DPI context
-        return FALSE;
-    }
-
-    // Switch this thread to UNaware
-    DPI_AWARENESS_CONTEXT prev = pSetThreadDpiAwarenessContext(
-        DPI_AWARENESS_CONTEXT_UNAWARE);
-    if (prev == NULL) {
-        // failed
-        return FALSE;
-    }
-
-    return TRUE;
-}
-
-
-//---------------------------------------------------------------------------
 // Eat_String
 //---------------------------------------------------------------------------
 
@@ -1046,8 +1012,6 @@ BOOL Parse_Command_Line(void)
             Sleep(500);
         __debugbreak();*/
 
-        InitDpiAwareness();
-
         //
         // Open Sandboxie's own UAC Dialog
         // Note: When User Account Control (UAC) is configured to not use the secure desktop, sandboxie does the same.
@@ -1375,6 +1339,7 @@ struct SDialogParams
     WCHAR           ExeName[99];
     WCHAR           AppName[99];
     int             DialogResult;
+	HFONT           hFontButtonText;
 };
 
 LRESULT UacPromptWndProc(
@@ -1415,33 +1380,56 @@ LRESULT UacPromptWndProc(
         // Create Yes/No/Cancel buttons
         //
 
-        pParams->ButtonY = 300;
+		HDC hdc = GetDC(hwnd);
+		const int dpiX = GetDeviceCaps(hdc, LOGPIXELSX);
+		const int dpiY = GetDeviceCaps(hdc, LOGPIXELSY);
+		ReleaseDC(hwnd, hdc);
+
+		const int buttonWidth = MulDiv(100, dpiX, 96);
+		const int buttonHeight = MulDiv(30, dpiY, 96);
+		const int buttonGapWidth = MulDiv(110, dpiX, 96);
+        pParams->ButtonY = MulDiv(300, dpiY, 96);
+
+		// Create a font for the button text.
+		// This font has to be preserved until the window is destroyed.
+		int heightButtonText = MulDiv(12, dpiY, 72);
+		pParams->hFontButtonText = CreateFont(-heightButtonText, 0, 0, 0,
+			FW_NORMAL, FALSE, FALSE, FALSE, ANSI_CHARSET,
+			OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
+			DEFAULT_QUALITY, DEFAULT_PITCH,
+			L"Arial");
 
         //WCHAR bufYes[32], bufNo[32], bufCancel[32];
         //LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_YES,    bufYes,    32);
         //LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_NO,     bufNo,     32);
         //LoadStringW(GetModuleHandleW(L"user32.dll"), IDS_CANCEL, bufCancel, 32);
 
+		int buttonX = MulDiv(140, dpiX, 96);
         WCHAR* pMsg = SbieDll_FormatMessage0(MSG_3115);
         pParams->hYes = CreateWindowW(L"BUTTON", pMsg,
             WS_VISIBLE | WS_CHILD | WS_TABSTOP | BS_PUSHBUTTON,
-            140, pParams->ButtonY, 100, 30, hwnd, (HMENU)IDYES,
+            buttonX, pParams->ButtonY, buttonWidth, buttonHeight, hwnd, (HMENU)IDYES,
             GetModuleHandle(NULL), NULL);
         LocalFree(pMsg);
+		SendMessageW(pParams->hYes, WM_SETFONT, (WPARAM)pParams->hFontButtonText, TRUE);
+		buttonX += buttonGapWidth;
 
         pMsg = SbieDll_FormatMessage0(MSG_3116);
         pParams->hNo = CreateWindowW(L"BUTTON", pMsg,
             WS_VISIBLE | WS_CHILD | WS_TABSTOP | BS_DEFPUSHBUTTON,
-            250, pParams->ButtonY, 100, 30, hwnd, (HMENU)IDNO,
+            buttonX, pParams->ButtonY, buttonWidth, buttonHeight, hwnd, (HMENU)IDNO,
             GetModuleHandle(NULL), NULL);
         LocalFree(pMsg);
+		SendMessageW(pParams->hNo, WM_SETFONT, (WPARAM)pParams->hFontButtonText, TRUE);
+		buttonX += buttonGapWidth;
 
         pMsg = SbieDll_FormatMessage0(MSG_3117);
         pParams->hCancel = CreateWindowW(L"BUTTON", pMsg,
             WS_VISIBLE | WS_CHILD | WS_TABSTOP | BS_PUSHBUTTON,
-            360, pParams->ButtonY, 100, 30, hwnd, (HMENU)IDCANCEL,
+            buttonX, pParams->ButtonY, buttonWidth, buttonHeight, hwnd, (HMENU)IDCANCEL,
             GetModuleHandle(NULL), NULL);
         LocalFree(pMsg);
+		SendMessageW(pParams->hCancel, WM_SETFONT, (WPARAM)pParams->hFontButtonText, TRUE);
 
         SetFocus(pParams->hNo);
 
@@ -1468,6 +1456,7 @@ LRESULT UacPromptWndProc(
         return 0;
 
     case WM_DESTROY:
+		DeleteObject(pParams->hFontButtonText);
         PostQuitMessage(0);
         return 0;
 
@@ -1476,19 +1465,22 @@ LRESULT UacPromptWndProc(
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
 
+		const int dpiX = GetDeviceCaps(hdc, LOGPIXELSX);
+		const int dpiY = GetDeviceCaps(hdc, LOGPIXELSY);
+
         RECT clientRect;
         GetClientRect(hwnd, &clientRect);
-        int width = clientRect.right - 20;
+        int width = clientRect.right - MulDiv(20, dpiX, 96);
 
         // Prepare fonts
-        int heightTitle = MulDiv(12, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+        int heightTitle = MulDiv(12, dpiY, 72);
         HFONT hFontTitle = CreateFont(-heightTitle, 0, 0, 0,
             FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET,
             OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
             DEFAULT_QUALITY, DEFAULT_PITCH,
             L"Arial");
 
-        int heightNormal = MulDiv(9, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+        int heightNormal = MulDiv(9, dpiY, 72);
         HFONT hFontNormal = CreateFont(-heightNormal, 0, 0, 0,
             FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET,
             OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
@@ -1497,7 +1489,7 @@ LRESULT UacPromptWndProc(
 
         SetBkColor(hdc, 0x00404040);
 
-        int y = 10;
+        int y = MulDiv(10, dpiY, 96);
         WCHAR* pMsg = SbieDll_FormatMessage2(3244, pParams->ExeName, pParams->BoxName);
         y = DrawTextWithFont(hdc, y, pMsg, width, hFontTitle, 0x00FFFFFF);
         LocalFree(pMsg);
@@ -1509,14 +1501,14 @@ LRESULT UacPromptWndProc(
         y = DrawTextWithFont(hdc, y, pParams->BoxName, width, hFontTitle, 0x0080FFFF, DT_SINGLELINE);
 
         if (*pParams->AppName) {
-            y += 10;
+            y += MulDiv(10, dpiY, 96);
             pMsg = SbieDll_FormatMessage0(3743);
             y = DrawTextWithFont(hdc, y, pMsg, width, hFontTitle, 0x00FFFFFF, DT_SINGLELINE);
             LocalFree(pMsg);
             y = DrawTextWithFont(hdc, y, pParams->AppName, width, hFontTitle, 0x0080FFFF, DT_SINGLELINE);
         }
 
-        y += 30;
+        y += MulDiv(30, dpiY, 96);
         pMsg = SbieDll_FormatMessage0(3245);
         y = DrawTextWithFont(hdc, y, pMsg, width, hFontTitle, 0x00FFFFFF);
         LocalFree(pMsg);
@@ -1526,7 +1518,7 @@ LRESULT UacPromptWndProc(
 
         // Now draw the last message aligned from the bottom
         pMsg = SbieDll_FormatMessage0(3246);
-        y = clientRect.bottom - MeasureTextHeight(hdc, pMsg, width, hFontNormal, DT_WORDBREAK) - 10;
+        y = clientRect.bottom - MeasureTextHeight(hdc, pMsg, width, hFontNormal, DT_WORDBREAK) - MulDiv(10, dpiY, 96);
         DrawTextWithFont(hdc, y, pMsg, width, hFontNormal, 0x00AAAAAA);
         LocalFree(pMsg);
 
@@ -1657,8 +1649,11 @@ int SecureDialogFunc(HWND hWndParent, void* param)
     BOOLEAN rtl;
     SbieDll_GetLanguage(&rtl);
 
-    const int winWidth = 600;
-    const int winHeight = 500;
+	HDC hScreenDC = GetDC(NULL);
+
+    const int winWidth = MulDiv(600, GetDeviceCaps(hScreenDC, LOGPIXELSX), 96);
+    const int winHeight = MulDiv(500, GetDeviceCaps(hScreenDC, LOGPIXELSY), 96);
+	ReleaseDC(NULL, hScreenDC);
 
     int screenX = (GetSystemMetrics(SM_CXSCREEN) - winWidth) / 2;
     int screenY = (GetSystemMetrics(SM_CYSCREEN) - winHeight) / 2;
@@ -1669,6 +1664,10 @@ int SecureDialogFunc(HWND hWndParent, void* param)
                                WS_SYSMENU | WS_MINIMIZEBOX,
                                screenX, screenY, winWidth, winHeight,
                                hWndParent, NULL, NULL, &Params);
+
+	// disable parent window so that the background window cannot be clicked and activated
+	BOOL isParentEnabled = IsWindowEnabled(hWndParent);
+	EnableWindow(hWndParent, FALSE);
 
     ShowWindow(hWnd, SW_SHOW);
 
@@ -1688,6 +1687,7 @@ int SecureDialogFunc(HWND hWndParent, void* param)
     // Cleanup after window is closed
     //
 
+	EnableWindow(hWndParent, isParentEnabled);
     if (wc.hbrBackground)
         DeleteObject(wc.hbrBackground);
     if (hShieldIcon)

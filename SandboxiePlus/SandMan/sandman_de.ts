@@ -1147,6 +1147,11 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <translation>Ersetzt durch</translation>
     </message>
     <message>
+        <location filename="Helpers/IniHighlighter.cpp" line="1288"/>
+        <source>Category</source>
+        <translation>Kategorie</translation>
+    </message>
+    <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1289"/>
         <source>Context</source>
         <translation>Kontext</translation>

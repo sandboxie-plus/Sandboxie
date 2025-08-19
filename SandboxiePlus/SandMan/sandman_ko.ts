@@ -1289,7 +1289,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="405"/>
         <source>Validate (Failed)</source>
-        <translation type="unfinished"></translation>
+        <translation>검증 (실패)</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="702"/>
@@ -1384,7 +1384,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1290"/>
         <source>Requirements</source>
-        <translation type="unfinished"></translation>
+        <translation>요구 사항</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1464"/>
@@ -2898,14 +2898,16 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1471"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 동의 필요</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1472"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 팝업에 표시되는 설정이 확실하지 않은 경우 진행하기 전에 소프트웨어의 문서 또는 소스 코드를 참조하는 것이 좋습니다. 적절한 이해 없이 이 기능을 활성화하면 의도하지 않은 결과가 발생할 수 있으며, 이에 대한 책임은 전적으로 귀하에게 있습니다.
+
+자동 완성을 활성화하시겠습니까?</translation>
     </message>
     <message>
         <source>Lingerer</source>
@@ -6247,14 +6249,16 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2543"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 동의 필요</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2544"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 팝업에 표시되는 설정이 확실하지 않은 경우 진행하기 전에 소프트웨어의 문서 또는 소스 코드를 참조하는 것이 좋습니다. 적절한 이해 없이 이 기능을 활성화하면 의도하지 않은 결과가 발생할 수 있으며, 이에 대한 책임은 전적으로 귀하에게 있습니다.
+
+자동 완성을 활성화하시겠습니까?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2793"/>
@@ -6328,7 +6332,7 @@ Do you wish to enable autocomplete?</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2882"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;현재 빌드 플러스 기능은 계속 활성화되어 있지만&lt;/font&gt;, 호환성 업데이트와 온라인 문제 해결 데이터베이스를 포함한 Sandboxie 라이브 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2929"/>
@@ -7173,8 +7177,8 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
         <oldsource>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
-        <translation type="unfinished">
-이 박스는 닫히면 내용을 삭제하고 임시 데이터에만 적합합니다.</translation>
+        <translation>
+이 박스는 닫히면 내용이 삭제되며, 임시 데이터에만 적합합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1079"/>
@@ -9471,7 +9475,19 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        설정 위에 마우스를 올리면 자세한 도구 설명이 표시됩니다.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;체크&lt;/span&gt;: 전체 세부 정보 (버전, 구문, 설명 등)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적 체크&lt;/span&gt;: 필수 정보만&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;구문 도우미:&lt;/b&gt;&lt;br&gt;
+        • 파이프(|)는 가능한 값을 분리합니다&lt;br&gt;
+        • 대괄호([])는 기본값 또는 선택적 값을 나타냅니다&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6124"/>
@@ -9495,12 +9511,32 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;자동 완성 및 대소문자 자동 수정&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상의 문자에서 제안 팝업 표시&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;으로 선택&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 선택을 확인하려면 &lt;code&gt;Enter/Return&lt;/code&gt; 입력&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;수동 수정&lt;/u&gt;: 설정 입력 후=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 소문자 수정을 위한 &lt;code&gt;Ctrl+R&lt;/code&gt; 프롬프트&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;표시&lt;/span&gt;: 자동 완성e + 자동 수정&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적 표시&lt;/span&gt;: 수동 &lt;code&gt;Ctrl+R&lt;/code&gt; 수정만&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
+        • 팝업에서 &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;&lt;br&gt;
+        • 강조 표시된 항목을 선택하려면&lt;code&gt;Enter/Return&lt;/code&gt;&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 강제 제안&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6146"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>완성</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <source>Show detailed information tooltips when hovering over configuration settings.
@@ -9528,8 +9564,8 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;이 옵션을 선택하면 SbieSettings 파일에 따라 INI 키가 검증되고 강조 표시됩니다. 이 옵션을 해제하면 검증 및 강조 표시 기능이 비활성화됩니다.&lt;/p&gt;
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;활성화하면 INI 파일을 기반으로 키 이름이 확인되고 강조 표시됩니다. 확인 및 강조 표시를 비활성화하려면 끄세요.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
   &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;검정 텍스트, 노란색 배경, 기울임꼴&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 이름이 변경된 키 (이전 이름 - 유효하지 않음)&lt;/td&gt;&lt;/tr&gt;
@@ -11122,7 +11158,19 @@ Please note that this values are currently user specific and saved globally for 
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        설정 위에 마우스를 올리면 자세한 도구 설명이 표시됩니다.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;표시&lt;/span&gt;: 전체 세부 정보 (버전, 구문, 설명 등)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적 표시&lt;/span&gt;: 필수 정보만&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;구문 도우미:&lt;/b&gt;&lt;br&gt;
+        • 파이프(|)는 가능한 값을 분리합니다&lt;br&gt;
+        • 대괄호([])는 기본값 또는 선택적 값을 나타냅니다&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3218"/>
@@ -11146,12 +11194,31 @@ Please note that this values are currently user specific and saved globally for 
         • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 표시&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;로 선택&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 선택을 확인하려면 &lt;code&gt;Enter/Return&lt;/code&gt;&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;수동 수정&lt;/u&gt;: 설정 입력 후=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 대소문자 수정을 위한 &lt;code&gt;Ctrl+R&lt;/code&gt; 프롬프트&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;체크&lt;/span&gt;: 자동 완성 + 자동 수정&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적 체크&lt;/span&gt;: 수동 &lt;code&gt;Ctrl+R&lt;/code&gt; 수정만&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
+        • 팦업에서 &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;&lt;br&gt;
+        • 강조 표시된 항목을 선택하려 &lt;code&gt;Enter/Return&lt;/code&gt;&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 강제 제안s&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3240"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>완성</translation>
     </message>
     <message>
         <source>Show detailed information tooltips when hovering over configuration settings.
@@ -11612,8 +11679,8 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;이 옵션을 선택하면 SbieSettings 파일에 따라 INI 키가 검증되고 강조 표시됩니다. 이 옵션을 해제하면 검증 및 강조 표시 기능이 비활성화됩니다.&lt;/p&gt;
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;활성화하면 INI 파일을 기반으로 키 이름이 확인되고 강조 표시됩니다. 확인 및 강조 표시를 비활성화하려면 끄세요.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
   &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;검정 텍스트, 노란색 배경, 기울임꼴&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 이름이 변경된 키 (이전 이름 - 유효하지 않음)&lt;/td&gt;&lt;/tr&gt;

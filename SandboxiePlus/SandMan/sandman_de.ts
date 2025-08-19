@@ -1116,7 +1116,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="405"/>
         <source>Validate (Failed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Validieren (fehlgeschlagen)</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="702"/>
@@ -1147,61 +1147,9 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <translation>Ersetzt durch</translation>
     </message>
     <message>
-        <source>Advanced</source>
-        <translation type="vanished">Erweitert</translation>
-    </message>
-    <message>
-        <source>Debug</source>
-        <translation type="vanished">Debug</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="vanished">Datei</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="vanished">Generell</translation>
-    </message>
-    <message>
-        <source>Network</source>
-        <translation type="vanished">Netzwerk</translation>
-    </message>
-    <message>
-        <source>Program Control</source>
-        <translation type="vanished">Programmkontrolle</translation>
-    </message>
-    <message>
-        <source>Resource Access</source>
-        <translation type="vanished">Ressourcenzugriff</translation>
-    </message>
-    <message>
-        <source>Security</source>
-        <translation type="vanished">Sicherheit</translation>
-    </message>
-    <message>
-        <source>Template</source>
-        <translation type="vanished">Vorlage</translation>
-    </message>
-    <message>
-        <source>Various</source>
-        <translation type="vanished">Verschiedenes</translation>
-    </message>
-    <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1288"/>
         <source>Category</source>
         <translation>Kategorie</translation>
-    </message>
-    <message>
-        <source>Global</source>
-        <translation type="vanished">Global</translation>
-    </message>
-    <message>
-        <source>Per Sandbox</source>
-        <translation type="vanished">Pro Sandbox</translation>
-    </message>
-    <message>
-        <source>User Settings</source>
-        <translation type="vanished">Benutzereinstellungen</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1289"/>
@@ -1211,7 +1159,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1290"/>
         <source>Requirements</source>
-        <translation type="unfinished"></translation>
+        <translation>Voraussetzungen</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1464"/>
@@ -1224,42 +1172,6 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <location filename="Helpers/IniHighlighter.cpp" line="1602"/>
         <source>Description</source>
         <translation>Beschreibung</translation>
-    </message>
-    <message>
-        <source>Supporter Certificate</source>
-        <translation type="vanished">Unterstützerzertifikat</translation>
-    </message>
-    <message>
-        <source>Advanced Encryption Pack</source>
-        <translation type="vanished">Erweitertes Verschlüsselungspaket</translation>
-    </message>
-    <message>
-        <source>Requires: %1</source>
-        <translation type="vanished">Erfordert: %1</translation>
-    </message>
-    <message>
-        <source> + </source>
-        <translation type="vanished"> + </translation>
-    </message>
-    <message>
-        <source>Requires an Advanced Encryption Pack</source>
-        <translation type="vanished">Erfordert ein erweitertes Verschlüsselungspaket</translation>
-    </message>
-    <message>
-        <source>Requires a Supporter Certificate</source>
-        <translation type="vanished">Erfordert ein Unterstützerzertifikat</translation>
-    </message>
-    <message>
-        <source>Certificate</source>
-        <translation type="vanished">Zertifikat</translation>
-    </message>
-    <message>
-        <source>Build</source>
-        <translation type="vanished">Version</translation>
-    </message>
-    <message>
-        <source>Requires an Insider Build</source>
-        <translation type="vanished">Erfordert eine Insiderversion</translation>
     </message>
 </context>
 <context>
@@ -2069,14 +1981,16 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1471"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Zustimmung für automatische Vervollständigung erforderlich</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1472"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
+
+Möchten Sie die automatische Vervollständigung aktivieren?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="817"/>
@@ -5721,14 +5635,16 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2543"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Zustimmung für automatische Vervollständigung erforderlich</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2544"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
+
+Möchten Sie die automatische Vervollständigung aktivieren?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2790"/>
@@ -5743,7 +5659,7 @@ Do you wish to enable autocomplete?</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2882"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;In der aktuellen Version bleiben die Plus-Funktionen aktiviert&lt;/font&gt;, aber Sie haben keinen Zugang mehr zu den Sandboxie-Live-Diensten, einschließlich Kompatibilitäts-Updates und der Online-Problemlösungsdatenbank.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2925"/>
@@ -6078,10 +5994,6 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
         <location filename="Windows/SettingsWindow.cpp" line="2960"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Sie können ein kostenloses %1-Tage-Evaluationszertifikat bis zu %2-mal pro Hardware-ID anfordern.</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
-        <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;In der aktuellen Version bleiben die Plus-Funktionen aktiviert&lt;/font&gt;, aber Sie haben keinen Zugang mehr zu den Sandboxie-Live-Diensten, einschließlich Kompatibilitäts-Updates und der Onlineproblemlösungsdatenbank.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2793"/>
@@ -8591,7 +8503,19 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Alle Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;
+        • Pipe (|) trennt mögliche Werte&lt;br&gt;
+        • Eckige Klammern ([]) kennzeichnen Standardwerte oder optionale Werte&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6124"/>
@@ -8615,18 +8539,31 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;Automatische Vervollständigung &amp; Schreikorrektur&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Automatische Vervollständigung&lt;/u&gt;: Popup mit Vorschlägen ab 3 Zeichen&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Aus Popup auswählen, um mit der korrekten Schreibung &lt;u&gt;automatisch einzusetzen&lt;/u&gt;&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt;, um die Auswahl zu bestätigen&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Manuelle Korrektur&lt;/u&gt;: Nach der Eingabe von Einstellung=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Strg+R&lt;/code&gt; Aufforderung zur Schreikorrektur erscheint&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Automatische Vervollständigung + automatische Schreikorrektur&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur manuelle &lt;code&gt;Strg+R&lt;/code&gt; Schreikorrektur&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/Bild↑/Bild↓&lt;/code&gt; im Popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;, um das markierte Element auszuwählen&lt;br&gt;
+        • &lt;code&gt;Strg+Leertaste&lt;/code&gt;: Erzwinge Vorschläge&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6146"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show detailed information tooltips when hovering over configuration settings.
-Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="vanished">Zeigt detaillierte Informationen in Tooltips an, wenn der Mauszeiger über Konfigurationseinstellungen verweilt.
-Tooltips enthalten Versionsdetails, Syntaxanforderungen und Beschreibungen, die Ihnen helfen, jede Einstellung zu verstehen und korrekt zu konfigurieren.</translation>
+        <translation>Vervollständigen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6056"/>
@@ -8648,8 +8585,8 @@ Tooltips enthalten Versionsdetails, Syntaxanforderungen und Beschreibungen, die 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der SbieSettings-Datei validiert und hervorgehoben.&lt;/p&gt;
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
+&lt;p&gt;Wenn diese Option aktiviert ist, werden die Schlüsselnamen basierend auf der INI-Datei überprüft und hervorgehoben.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
   &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
@@ -9359,34 +9296,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <translation>INI Sektion bearbeiten</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;When checked, INI keys are validated and highlighted according to the SbieSettings file. Uncheck to disable validation and highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der SbieSettings-Datei validiert und hervorgehoben.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weiß auf Schwarz, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dunkelblaugrün auf Weiß&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rot unterstrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkelrot/Hellrot&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="6091"/>
         <source>Edit ini</source>
         <translation>INI bearbeiten</translation>
@@ -9667,21 +9576,8 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;When checked, INI keys are validated and highlighted according to the SbieSettings file. Uncheck to disable validation and highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;Wenn diese Option aktiviert ist, werden INI-Schlüssel gemäß der SbieSettings-Datei validiert und hervorgehoben.&lt;/p&gt;
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
+&lt;p&gt;Wenn diese Option aktiviert ist, werden die Schlüsselnamen basierend auf der INI-Datei überprüft und hervorgehoben.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
   &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
@@ -10689,7 +10585,19 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Alle Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;
+        • Pipe (|) trennt mögliche Werte&lt;br&gt;
+        • Eckige Klammern ([]) kennzeichnen Standardwerte oder optionale Werte&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3218"/>
@@ -10713,18 +10621,31 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;Automatische Vervollständigung &amp; Schreikorrektur&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Automatische Vervollständigung&lt;/u&gt;: Popup mit Vorschlägen ab 3 Zeichen&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Aus Popup auswählen, um mit der korrekten Schreibung &lt;u&gt;automatisch einzusetzen&lt;/u&gt;&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt;, um die Auswahl zu bestätigen&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Manuelle Korrektur&lt;/u&gt;: Nach der Eingabe von Einstellung=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Strg+R&lt;/code&gt; Aufforderung zur Schreikorrektur erscheint&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Automatische Vervollständigung + automatische Schreikorrektur&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur manuelle &lt;code&gt;Strg+R&lt;/code&gt; Schreikorrektur&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/Bild↑/Bild↓&lt;/code&gt; im Popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;, um das markierte Element auszuwählen&lt;br&gt;
+        • &lt;code&gt;Strg+Leertaste&lt;/code&gt;: Erzwinge Vorschläge&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3240"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show detailed information tooltips when hovering over configuration settings.
-Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="vanished">Zeigt detaillierte Informationen in Tooltips an, wenn der Mauszeiger über Konfigurationseinstellungen verweilt.
-Tooltips enthalten Versionsdetails, Syntaxanforderungen und Beschreibungen, die Ihnen helfen, jede Einstellung zu verstehen und korrekt zu konfigurieren.</translation>
+        <translation>Vervollständigen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3201"/>

@@ -1330,7 +1330,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="405"/>
         <source>Validate (Failed)</source>
-        <translation type="unfinished"></translation>
+        <translation>校验配置 （失败）</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="702"/>
@@ -1425,7 +1425,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1290"/>
         <source>Requirements</source>
-        <translation type="unfinished"></translation>
+        <translation>请求</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1464"/>
@@ -2368,14 +2368,16 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1471"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>需要同意启用自动完成</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1472"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您不确定如何修改自动完成弹出窗口中显示的设置，我们强烈建议您在继续之前查阅软件的文档或源代码。在没有适当理解的情况下启用此功能可能会导致意想不到的后果，您需对此完全负责。
+
+您想启用自动完成吗？</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="817"/>
@@ -6262,7 +6264,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2882"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;当前的build Plus功能将保持启用&lt;/font&gt;，但是您不再可以访问SandBoxie-Live服务，包括兼容性更新和在线故障排除数据库。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2925"/>
@@ -6799,14 +6801,16 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2543"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>需要同意启用自动完成</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2544"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您不确定如何修改自动完成弹出窗口中显示的设置，我们强烈建议您在继续之前查阅软件的文档或源代码。在没有适当理解的情况下启用此功能可能会导致意想不到的后果，您需对此完全负责。
+
+您想启用自动完成吗？</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2719"/>
@@ -10055,15 +10059,15 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 &lt;p&gt;选中该选项后，管理器将会依据 SbieSettings 定义文件对 INI 配置文件进行校验和高亮。&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黄底黑字斜体&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：更名（当前使用的是已经无效的旧的键名）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底白字划去&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：弃用（该键已被移除）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底深青色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：保留（该键名已被定义但尚未被支持）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;红色波浪线&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：无效（未被定义的键名）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/浅红色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：有效&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黄底黑字斜体&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：已更名（旧的键名无效）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底白字划去&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：已移除（不再可用）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底深青色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：未来保留（尚不可用）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;红色波浪线&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：无效/未知&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/浅红色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：有效/已知&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;注意&lt;/span&gt;：当前校验器版本仅完成了有效键名的校验功能。但因为管理器不会对全局或每个沙箱的配置进行校验，某些在特定情况（上下文）下实际无效的配置可能会在这些情况下被误标记为有效。&lt;/p&gt;
@@ -10096,7 +10100,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6146"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>完成</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
@@ -10742,15 +10746,15 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 &lt;p&gt;选中该选项后，管理器将会依据 SbieSettings 定义文件对 INI 配置文件进行校验和高亮。&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黄底黑字斜体&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：更名（当前使用的是已经无效的旧的键名）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底白字划去&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：弃用（该键已被移除）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底深青色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：保留（该键名已被定义但尚未被支持）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;红色波浪线&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：无效（未被定义的键名）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/浅红色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：有效&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黄底黑字斜体&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：已更名（旧的键名无效）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底白字划去&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：已移除（不再可用）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底深青色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：未来保留（尚不可用）&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;红色波浪线&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：无效/未知&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/浅红色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：有效/已知&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;注意&lt;/span&gt;：当前校验器版本仅完成了有效键名的校验功能。但因为管理器不会对全局或每个沙箱的配置进行校验，某些在特定情况（上下文）下实际无效的配置可能会在这些情况下被误标记为有效。&lt;/p&gt;
@@ -10805,7 +10809,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3240"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>完成</translation>
     </message>
     <message>
         <source>Show detailed information tooltips when hovering over configuration settings.

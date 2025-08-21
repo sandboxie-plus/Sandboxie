@@ -31,21 +31,12 @@ QHash<QString, QString> CIniHighlighter::hideConfExclusions;
 QMutex CIniHighlighter::hideConfMutex;
 
 namespace {
-    template<typename MutexType, typename ResultType, typename FuncType>
-    ResultType withLock(MutexType& mutex, FuncType&& func) {
-        QMutexLocker locker(&mutex);
-        return func();
-    }
-    
-    template<typename MutexType, typename FuncType>
-    void withLock(MutexType& mutex, FuncType&& func) {
-        QMutexLocker locker(&mutex);
-        func();
-    }
-    
-    // Common HTML fragments to reduce repeated QStringLiteral usage
+	// HTML fragments
     namespace HtmlTags {
+        static const QString HTML_START = QStringLiteral("<html><body>");
+        static const QString HTML_END = QStringLiteral("</body><html>");
         static const QString TR_TD_START = QStringLiteral("<tr><td ");
+        static const QString TD_TR_END = QStringLiteral("</td></tr>");
         static const QString TD_TAG = QStringLiteral("<td>");
         static const QString TD_START = QStringLiteral("<td ");
         static const QString TD_END = QStringLiteral("</td>");
@@ -56,18 +47,40 @@ namespace {
         static const QString TABLE_END = QStringLiteral("</table>");
         static const QString VALUE_PREFIX = QStringLiteral(": ");
         static const QString BR_NBSP = QStringLiteral("<br>&nbsp;&nbsp;");
-        static const QString LABEL_JOINER = QStringLiteral(" + ");
+        static const QString TABLE_HEADER = QStringLiteral("<tr><td colspan='2' style='text-align:center; font-weight:bold; color:#FF6347;'>");
+		static const QString SPAN_COLOR_START = QStringLiteral("<span style='color:");
+		static const QString SPAN_COLOR_CLOSE = QStringLiteral(";'>");
+		static const QString SPAN_END = QStringLiteral("</span>");
+		static const QString SPAN_FONT_CONSOLAS = QStringLiteral("<span style='font-family: Consolas, monospace;'>");
     }
+
+	// HTML attributes and styles
+	namespace HtmlAttribs {
+		static const QString TABLE_STYLE = QStringLiteral("style='border:none; white-space:nowrap; background-color:%1; color:%2;'");
+		static const QString LABEL_STYLE = QStringLiteral("style='text-align:left; padding-right:8px; color:%1;'");
+		static const QString STYLE_BOLD = QStringLiteral("font-weight:bold;");
+		static const QString STYLE_ITALIC = QStringLiteral("font-style:italic;");
+		static const QString STYLE_UNDERLINE = QStringLiteral("text-decoration:underline;");
+		static const QString COLOR_VAR = QStringLiteral("color:%1");
+		static const QString STYLE_VAR = QStringLiteral("style='%1'");
+		static const QString STYLE_START = QStringLiteral("style='");
+		static const QString STYLE_TOP = QStringLiteral(" style='vertical-align:top;'");
+		static const QString SEPERATOR = QStringLiteral(";");
+	}
     
     // Common text replacements
     namespace TextReplacements {
+		static const QString LABEL_JOINER = QStringLiteral(" + ");
         static const QString ESCAPE_N = QStringLiteral("\\n");
         static const QString ESCAPE_T = QStringLiteral("\\t");
         static const QString ESCAPE_R = QStringLiteral("\\r");
+        static const QString ESCAPE_S = QStringLiteral("\\s");
         static const QString ESCAPE_BACKSLASH = QStringLiteral("\\\\");
         static const QString NEWLINE = QStringLiteral("\n");
         static const QString TAB = QStringLiteral("\t");
+        static const QString TAB_NBSP = QStringLiteral("&nbsp;&nbsp;&nbsp;&nbsp;");
         static const QString CARRIAGE_RETURN = QStringLiteral("\r");
+        static const QString SPACE = QStringLiteral("&nbsp;");
         static const QString BACKSLASH = QStringLiteral("\\");
     }
     
@@ -199,7 +212,7 @@ CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument* parent, bool ena
 #endif
 
 	// Check if we need to load the settings file - with mutex protection
-	QString settingsPath = QCoreApplication::applicationDirPath() + "/" + DEFAULT_SETTINGS_FILE;
+	QString settingsPath = QCoreApplication::applicationDirPath() % "/" % DEFAULT_SETTINGS_FILE;
 	QFileInfo fileInfo(settingsPath);
 
 	bool needToLoad = false;
@@ -292,12 +305,12 @@ QString CIniHighlighter::mergeHtmlStyles(const QString& baseStyle, const QString
 		return baseStyle;
 	}
 	
-	if (baseStyle.contains("style='")) {
+	if (baseStyle.contains(HtmlAttribs::STYLE_START)) {
 		QString result = baseStyle;
 		// Remove the closing quote and add the additional style
-		return result.replace("style='", additionalStyle.mid(0, additionalStyle.length() - 1) + ";");
+		return result.replace(HtmlAttribs::STYLE_START, additionalStyle.mid(0, additionalStyle.length() - 1) % HtmlAttribs::SEPERATOR);
 	} else {
-		return baseStyle + " " + additionalStyle;
+		return baseStyle % " " % additionalStyle;
 	}
 }
 
@@ -327,7 +340,7 @@ bool CIniHighlighter::processConfigKeyword(const QString& key, const QString& va
 		keywordGroup.mappings = parseKeywordMappings<Type>(value);
 		return true;
 	}
-	else if (key.startsWith(baseKey + "_", Qt::CaseInsensitive)) {
+	else if (key.startsWith(baseKey % "_", Qt::CaseInsensitive)) {
 		// Handle localized mappings
 		QString langCode = extractLanguageCode(key, baseKey);
 		if (!langCode.isEmpty()) {
@@ -363,19 +376,17 @@ static void UpdateCheckboxesOnAllTopLevels(const QStringList& objectNames, std::
 }
 
 // Helper to deduplicate keyword mappings from a merged string
-namespace {
-    template<typename KeywordInfoType>
-    QList<KeywordInfoType> deduplicateKeywordMappings(const QList<KeywordInfoType>& mappings) {
-        QSet<QString> seen;
-        QList<KeywordInfoType> result;
-        for (const auto& info : mappings) {
-            if (!seen.contains(info.keyword)) {
-                result.append(info);
-                seen.insert(info.keyword);
-            }
-        }
-        return result;
-    }
+template<typename KeywordInfoType>
+QList<KeywordInfoType> deduplicateKeywordMappings(const QList<KeywordInfoType>& mappings) {
+	QSet<QString> seen;
+	QList<KeywordInfoType> result;
+	for (const auto& info : mappings) {
+		if (!seen.contains(info.keyword)) {
+			result.append(info);
+			seen.insert(info.keyword);
+		}
+	}
+	return result;
 }
 
 // Load settings from SbieSettings.ini
@@ -532,7 +543,7 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
 					if (!langCode.isEmpty()) {
 						QString localizedContent = processTextLineOptimized(sanitizeHtmlInput(value), QString());
 						if (localizedMap.contains(langCode))
-							localizedMap[langCode] += "\n" + localizedContent;
+							localizedMap[langCode] += "\n" % localizedContent;
 						else
 							localizedMap.insert(langCode, localizedContent);
 					}
@@ -634,7 +645,7 @@ QMap<QString, CIniHighlighter::TooltipCellStyles> CIniHighlighter::genericStyles
 
 CIniHighlighter::TooltipCellStyles CIniHighlighter::getGenericStyles(const QString& rowType)
 {
-    QString key = rowType + "Styles";
+    QString key = rowType % "Styles";
     if (genericStyles.contains(key)) {
         return genericStyles.value(key);
     }
@@ -731,7 +742,7 @@ void CIniHighlighter::appendGenericTooltipRow(QString& tooltip, const QString& l
 	QString styledLabelStyle = mergeHtmlStyles(labelStyle, cellStyles.left.toHtmlStyle());
 	QString valueCellTag = cellStyles.right.toHtmlStyle().isEmpty() ? 
 		HtmlTags::TD_TAG : 
-		QStringLiteral("<td ") + cellStyles.right.toHtmlStyle() + HtmlTags::TAG_CLOSE;
+		HtmlTags::TD_START % cellStyles.right.toHtmlStyle() % HtmlTags::TAG_CLOSE;
 	
 	tooltip += HtmlTags::TR_TD_START % styledLabelStyle % HtmlTags::TAG_CLOSE
 		% label % HtmlTags::TD_END
@@ -744,17 +755,54 @@ void CIniHighlighter::appendMultiLineTooltipRow(QString& tooltip, const QString&
 {
 	if (lines.isEmpty()) return;
 	
-	tooltip += HtmlTags::TR_TD_START % labelStyle % QStringLiteral(" style='vertical-align:top;'") 
+	tooltip += HtmlTags::TR_TD_START % labelStyle % HtmlAttribs::STYLE_TOP 
 		% HtmlTags::TAG_CLOSE % label % HtmlTags::TD_END % HtmlTags::TD_TAG;
 	
 	for (int i = 0; i < lines.size(); ++i) {
 		QString processedLine = processTextLineOptimized(lines[i], settingName);
-		
-		if (applySpecialFormatting) {
-			processedLine.replace(QStringLiteral("["), QStringLiteral("<span style='color:#2196F3;'>[</span>"));
-			processedLine.replace(QStringLiteral("]"), QStringLiteral("<span style='color:#2196F3;'>]</span>"));
-			processedLine.replace(QStringLiteral("|"), QStringLiteral("<span style='color:#2196F3;'>|</span>"));
-			processedLine = QStringLiteral("<span style='font-family: Consolas, monospace;'>") % processedLine % QStringLiteral("</span>");
+
+		// Syntax highlighting for special characters
+		if (applySpecialFormatting) { // Syntax highlighting
+			//// Bracket/parenthesis color definitions (customize as needed)
+			//const QString colorSquare = QStringLiteral("#2196F3");   // blue for [ ]
+			//const QString colorPipe = QStringLiteral("#2196F3");   // blue for |
+			//const QString colorParen = QStringLiteral("#43A047");   // green for ( )
+			//const QString colorCurly = QStringLiteral("#E65100");   // orange for { }
+			//const QString colorAngle = QStringLiteral("#9C27B0");   // purple for < >
+			//const QString colorComma = QStringLiteral("#D32F2F");   // red for ,
+			//const QString colorSemi = QStringLiteral("#D32F2F");   // red for ;
+			//const QString colorEq = QStringLiteral("#1976D2");   // deep blue for =
+
+			//// Step 1: Replace with placeholders
+			//processedLine.replace(QStringLiteral("["), QStringLiteral("__BRACKET_L__"));
+			//processedLine.replace(QStringLiteral("]"), QStringLiteral("__BRACKET_R__"));
+			//processedLine.replace(QStringLiteral("("), QStringLiteral("__PAREN_L__"));
+			//processedLine.replace(QStringLiteral(")"), QStringLiteral("__PAREN_R__"));
+			//processedLine.replace(QStringLiteral("{"), QStringLiteral("__CURLY_L__"));
+			//processedLine.replace(QStringLiteral("}"), QStringLiteral("__CURLY_R__"));
+			//processedLine.replace(QStringLiteral("|"), QStringLiteral("__PIPE__"));
+			//processedLine.replace(QStringLiteral("&lt;"), QStringLiteral("__ANGLE_L__"));
+			//processedLine.replace(QStringLiteral("&gt;"), QStringLiteral("__ANGLE_R__"));
+			//processedLine.replace(QStringLiteral(","), QStringLiteral("__COMMA__"));
+			//processedLine.replace(QStringLiteral("="), QStringLiteral("__EQUAL__"));
+			//// Replace only semicolons not part of an HTML entity
+			//processedLine.replace(QRegularExpression(R"((?<!&[a-zA-Z0-9]{1,10});)"), QStringLiteral("__SEMICOLON__"));
+
+			//// Step 2: Replace placeholders with HTML
+			//processedLine.replace(QStringLiteral("__BRACKET_L__"), QStringLiteral("<span style='color:%1;'>[</span>").arg(colorSquare));
+			//processedLine.replace(QStringLiteral("__BRACKET_R__"), QStringLiteral("<span style='color:%1;'>]</span>").arg(colorSquare));
+			//processedLine.replace(QStringLiteral("__PAREN_L__"), QStringLiteral("<span style='color:%1;'>(</span>").arg(colorParen));
+			//processedLine.replace(QStringLiteral("__PAREN_R__"), QStringLiteral("<span style='color:%1;'>)</span>").arg(colorParen));
+			//processedLine.replace(QStringLiteral("__CURLY_L__"), QStringLiteral("<span style='color:%1;'>{</span>").arg(colorCurly));
+			//processedLine.replace(QStringLiteral("__CURLY_R__"), QStringLiteral("<span style='color:%1;'>}</span>").arg(colorCurly));
+			//processedLine.replace(QStringLiteral("__PIPE__"), QStringLiteral("<span style='color:%1;'>|</span>").arg(colorPipe));
+			//processedLine.replace(QStringLiteral("__ANGLE_L__"), QStringLiteral("<span style='color:%1;'>&lt;</span>").arg(colorAngle));
+			//processedLine.replace(QStringLiteral("__ANGLE_R__"), QStringLiteral("<span style='color:%1;'>&gt;</span>").arg(colorAngle));
+			//processedLine.replace(QStringLiteral("__COMMA__"), QStringLiteral("<span style='color:%1;'>,</span>").arg(colorComma));
+			//processedLine.replace(QStringLiteral("__SEMICOLON__"), QStringLiteral("<span style='color:%1;'>;</span>").arg(colorSemi));
+			//processedLine.replace(QStringLiteral("__EQUAL__"), QStringLiteral("<span style='color:%1;'>=</span>").arg(colorEq));
+
+			processedLine = HtmlTags::SPAN_FONT_CONSOLAS % processedLine % HtmlTags::SPAN_END;
 		}
 		
 		if (i == 0) {
@@ -790,18 +838,51 @@ QString CIniHighlighter::processTextLineOptimized(const QString& text, const QSt
 
 	// Process escape sequences and placeholders
 	if (processed.contains(QLatin1Char('\\'))){
+		// First handle the \s{n} pattern (replace with n &nbsp;)
+		static const QRegularExpression spaceCountRegex(
+			QStringLiteral(R"(\\s\{(\d+)\})"),
+			QRegularExpression::CaseInsensitiveOption
+		);
+
+		int pos = 0;
+		QRegularExpressionMatchIterator it = spaceCountRegex.globalMatch(processed);
+		QString result;
+		result.reserve(processed.length() + 100); // Pre-allocate to avoid reallocations
+
+		while (it.hasNext()) {
+			QRegularExpressionMatch match = it.next();
+			// Append text before the match
+			result += processed.mid(pos, match.capturedStart() - pos);
+			pos = match.capturedEnd();
+
+			int count = match.captured(1).toInt();
+			//QString spaces(count, QChar(0xA0)); // Fill with &nbsp;
+			QString spaces = TextReplacements::SPACE.repeated(count); // Fill with &nbsp;
+			result += spaces;
+		}
+		// Append remaining text after last match
+		result += processed.mid(pos);
+		processed = result;
+
+		// Replace literal backslash escape with a placeholder
+		processed.replace(TextReplacements::ESCAPE_BACKSLASH, QStringLiteral("__ESCAPE_BACKSLASH__"));
+
+		// Replace other escape sequences
 		processed.replace(TextReplacements::ESCAPE_N, TextReplacements::NEWLINE)
-			.replace(TextReplacements::ESCAPE_T, TextReplacements::TAB)
+			.replace(TextReplacements::ESCAPE_T, TextReplacements::TAB_NBSP)
 			.replace(TextReplacements::ESCAPE_R, TextReplacements::CARRIAGE_RETURN)
-			.replace(TextReplacements::ESCAPE_BACKSLASH, TextReplacements::BACKSLASH);
+			.replace(TextReplacements::ESCAPE_S, TextReplacements::SPACE);
+
+		// Restore literal backslash escape
+		processed.replace(QStringLiteral("__ESCAPE_BACKSLASH__"), TextReplacements::ESCAPE_BACKSLASH);
 	}
 
 	// Process other placeholders
 	if (processed.contains(QLatin1Char('['))) {
 		processed.replace(QStringLiteral("[br]"), TextReplacements::NEWLINE)
 			.replace(QStringLiteral("[sbie]"), QStringLiteral("Sandboxie-Plus"))
-			.replace(QStringLiteral("[bY]"), QStringLiteral("[y]|n"))
-			.replace(QStringLiteral("[bN]"), QStringLiteral("y|[n]"));
+			.replace(QStringLiteral("[bY]"), QStringLiteral("([b]Y[/b]|n)"))
+			.replace(QStringLiteral("[bN]"), QStringLiteral("(y|[b]N[/b])"));
 
 		if (processed.contains(QStringLiteral("[version]"))) {
 			static const QString versionStr = QStringLiteral("%1.%2.%3").arg(VERSION_MJR).arg(VERSION_MIN).arg(VERSION_REV);
@@ -849,7 +930,7 @@ QString CIniHighlighter::processTextLineOptimized(const QString& text, const QSt
 
 			// Validate color token strictly
 			if (validColorTokenRegex.match(colorToken).hasMatch()) {
-				result += QStringLiteral("<span style='color:") + colorToken + QStringLiteral(";'>") + innerText + QStringLiteral("</span>");
+				result += HtmlTags::SPAN_COLOR_START % colorToken % HtmlTags::SPAN_COLOR_CLOSE % innerText % HtmlTags::SPAN_END;
 			}
 			else {
 				// Fallback: keep original source
@@ -1259,24 +1340,24 @@ void CIniHighlighter::processKeywordMappings(
         QString labelStyling = cellStyles.left.toHtmlStyle();
         if (!labelStyling.isEmpty()) {
             // Merge with existing labelStyle
-            if (labelStyle.contains("style='")) {
+            if (labelStyle.contains(HtmlAttribs::STYLE_START)) {
                 styledLabelStyle = labelStyle;
-                styledLabelStyle.replace("style='", labelStyling.mid(0, labelStyling.length() - 1) + ";");
+                styledLabelStyle.replace(HtmlAttribs::STYLE_START, labelStyling.mid(0, labelStyling.length() - 1) % HtmlAttribs::SEPERATOR);
             }
             else {
-                styledLabelStyle += " " + labelStyling;
+                styledLabelStyle += " " % labelStyling;
             }
         }
 
-        tooltip += QStringLiteral("<tr><td ") + styledLabelStyle + QStringLiteral(">") + labelText + QStringLiteral("</td>");
+        tooltip += HtmlTags::TR_TD_START % styledLabelStyle % HtmlTags::TAG_CLOSE % labelText % HtmlTags::TD_END;
 
         // Apply styling to value text
         QString valueStyleStr = cellStyles.right.toHtmlStyle();
         if (!valueStyleStr.isEmpty()) {
-            tooltip += QStringLiteral("<td ") + valueStyleStr + QStringLiteral(">") + valuePrefix + typeText + QStringLiteral("</td></tr>");
+            tooltip += HtmlTags::TD_START % valueStyleStr % HtmlTags::TAG_CLOSE % valuePrefix % typeText % HtmlTags::TD_TR_END;
         }
         else {
-            tooltip += QStringLiteral("<td>") + valuePrefix + typeText + QStringLiteral("</td></tr>");
+            tooltip += HtmlTags::TD_TAG % valuePrefix % typeText % HtmlTags::TD_TR_END;
         }
     }
 }
@@ -1337,25 +1418,25 @@ void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingIn
 
 		// 4. Only display if we have labels to show
 		if (!typeLabels.isEmpty()) {
-			QString typeText = typeLabels.join(HtmlTags::LABEL_JOINER);
+			QString typeText = typeLabels.join(TextReplacements::LABEL_JOINER);
 			QString styledLabelStyle = labelStyle;
 			QString labelStyling = requirementsData.tooltipStyle.left.toHtmlStyle();
 			if (!labelStyling.isEmpty()) {
-				if (labelStyle.contains("style='")) {
+				if (labelStyle.contains(HtmlAttribs::STYLE_START)) {
 					styledLabelStyle = labelStyle;
-					styledLabelStyle.replace("style='", labelStyling.mid(0, labelStyling.length() - 1) + ";");
+					styledLabelStyle.replace(HtmlAttribs::STYLE_START, labelStyling.mid(0, labelStyling.length() - 1) % HtmlAttribs::SEPERATOR);
 				}
 				else {
-					styledLabelStyle += " " + labelStyling;
+					styledLabelStyle += " " % labelStyling;
 				}
 			}
-			tooltip += HtmlTags::TR_TD_START + styledLabelStyle + HtmlTags::TAG_CLOSE + requirementsLabel + HtmlTags::TD_END;
+			tooltip += HtmlTags::TR_TD_START % styledLabelStyle % HtmlTags::TAG_CLOSE % requirementsLabel % HtmlTags::TD_END;
 			QString valueStyleStr = requirementsData.tooltipStyle.right.toHtmlStyle();
 			if (!valueStyleStr.isEmpty()) {
-				tooltip += HtmlTags::TD_START + valueStyleStr + HtmlTags::TAG_CLOSE + HtmlTags::VALUE_PREFIX + typeText + HtmlTags::TD_END + HtmlTags::TR_END;
+				tooltip += HtmlTags::TD_START % valueStyleStr % HtmlTags::TAG_CLOSE % HtmlTags::VALUE_PREFIX % typeText % HtmlTags::TD_END % HtmlTags::TR_END;
 			}
 			else {
-				tooltip += HtmlTags::TD_TAG + HtmlTags::VALUE_PREFIX + typeText + HtmlTags::TD_END + HtmlTags::TR_END;
+				tooltip += HtmlTags::TD_TAG % HtmlTags::VALUE_PREFIX % typeText % HtmlTags::TD_END % HtmlTags::TR_END;
 			}
 		}
 	}
@@ -1572,8 +1653,8 @@ QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName)
                 return QString();
             const SettingInfo& info = validSettings[settingName];
             const QString currentLang = getCurrentLanguage();
-            tooltip = HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
-            tooltip += QStringLiteral("<tr><td colspan='2' style='text-align:center; font-weight:bold; color:#FF6347;'>")
+            tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
+			tooltip += HtmlTags::TABLE_HEADER
                 % settingName % HtmlTags::TD_END % HtmlTags::TR_END;
 
             // Helper lambda to append a version row
@@ -1607,9 +1688,9 @@ QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName)
                     }
                 }
             }
-            tooltip += HtmlTags::TABLE_END;
+            tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
         }
-        return tooltip;
+		return tooltip;
     });
 }
 
@@ -1634,15 +1715,15 @@ QString CIniHighlighter::GetSettingTooltip(const QString& settingName)
 				return QString();
             const SettingInfo& info = validSettings[settingName];
             const QString currentLang = getCurrentLanguage();
-            tooltip = HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
-            tooltip += QStringLiteral("<tr><td colspan='2' style='text-align:center; font-weight:bold; color:#FF6347;'>")
+            tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
+			tooltip += HtmlTags::TABLE_HEADER
                 % settingName % HtmlTags::TD_END % HtmlTags::TR_END;
             addVersionRows(tooltip, info, themeCache.labelStyle);
             processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
             processContentOptimized(tooltip, info, currentLang, settingName, themeCache.labelStyle);
-            tooltip += HtmlTags::TABLE_END;
+            tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
         }
-        return tooltip;
+		return tooltip;
     });
 }
 
@@ -1691,9 +1772,9 @@ const CIniHighlighter::TooltipThemeCache& CIniHighlighter::getTooltipThemeCache(
 		themeCache.textColor = themeCache.darkMode ? QStringLiteral("#e0e0e0") : QStringLiteral("#000000");
 
 		// Pre-build styles to avoid repeated string operations
-		themeCache.tableStyle = QStringLiteral("style='border:none; white-space:nowrap; background-color:%1; color:%2;'")
+		themeCache.tableStyle = HtmlAttribs::TABLE_STYLE
 			.arg(themeCache.bgColor, themeCache.textColor);
-		themeCache.labelStyle = QStringLiteral("style='text-align:left; padding-right:8px; color:%1;'")
+		themeCache.labelStyle = HtmlAttribs::LABEL_STYLE
 			.arg(themeCache.textColor);
 		themeCache.valid = true;
 	}
@@ -1835,7 +1916,7 @@ QString CIniHighlighter::convertWildcardToRegex(const QString& wildcard)
 	QString regex = QRegularExpression::escape(wildcard);
 	regex.replace("\\*", ".*");
 	regex.replace("\\?", ".");
-	return "^" + regex + "$";
+	return "^" % regex % "$";
 }
 
 bool CIniHighlighter::IsKeyHiddenFromContext(const QString& keyName, char context)
@@ -1890,4 +1971,21 @@ bool CIniHighlighter::IsKeyHiddenFromContext(const QString& keyName, char contex
 
 	bool result = hideAction.contains(context);
 	return result;
+}
+
+QString CIniHighlighter::TooltipStyle::toHtmlStyle() const {
+	QStringList styles;
+	if (!color.isEmpty()) {
+		styles << HtmlAttribs::COLOR_VAR.arg(color);
+	}
+	if (bold) {
+		styles << HtmlAttribs::STYLE_BOLD;
+	}
+	if (italic) {
+		styles << HtmlAttribs::STYLE_ITALIC;
+	}
+	if (underline) {
+		styles << HtmlAttribs::STYLE_UNDERLINE;
+	}
+	return styles.isEmpty() ? "" : HtmlAttribs::STYLE_VAR.arg(styles.join(";"));
 }

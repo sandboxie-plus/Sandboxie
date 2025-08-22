@@ -517,33 +517,33 @@ HTREEITEM CTreePropSheet::CreatePageTreeItem(LPCTSTR lpszPath, HTREEITEM hParent
 
 CString CTreePropSheet::SplitPageTreePath(CString &strRest)
 {
-    int nSeperatorPos = 0;
+    int nSeparatorPos = 0;
     while (TRUE)
     {
-        nSeperatorPos = strRest.Find(_T("::"), nSeperatorPos);
-        if (nSeperatorPos == -1)
+        nSeparatorPos = strRest.Find(_T("::"), nSeparatorPos);
+        if (nSeparatorPos == -1)
         {
             CString strItem(strRest);
             strRest.Empty();
             return strItem;
         }
-        else if (nSeperatorPos>0)
+        else if (nSeparatorPos>0)
         {
             // if there is an odd number of backslashes in front of the
             // separator, than do not interpret it as separator
             int nBackslashCount = 0;
-            for (int nPos = nSeperatorPos-1; nPos >= 0 && strRest[nPos]==_T('\\'); --nPos, ++nBackslashCount);
+            for (int nPos = nSeparatorPos-1; nPos >= 0 && strRest[nPos]==_T('\\'); --nPos, ++nBackslashCount);
             if (nBackslashCount%2 == 0)
                 break;
             else
-                ++nSeperatorPos;
+                ++nSeparatorPos;
         }
     }
 
-    CString strItem(strRest.Left(nSeperatorPos));
+    CString strItem(strRest.Left(nSeparatorPos));
     strItem.Replace(_T("\\::"), _T("::"));
     strItem.Replace(_T("\\\\"), _T("\\"));
-    strRest = strRest.Mid(nSeperatorPos+2);
+    strRest = strRest.Mid(nSeparatorPos+2);
     return strItem;
 }
 

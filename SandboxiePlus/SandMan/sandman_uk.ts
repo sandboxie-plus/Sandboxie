@@ -278,7 +278,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="30"/>
         <source>Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Майстер усунення несправностей</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="36"/>
@@ -623,7 +623,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="520"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Створити шаблон веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="521"/>
@@ -808,11 +808,66 @@ Error: %1</source>
     </message>
 </context>
 <context>
+    <name>CCheckableComboBox</name>
+    <message>
+        <location filename="../MiscHelpers/Common/CheckableComboBox.cpp" line="12"/>
+        <source>Select Items...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CCheckableMessageBox</name>
+    <message>
+        <location filename="../MiscHelpers/Common/CheckableMessageBox.cpp" line="52"/>
+        <source>Do not ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CCleanUpJob</name>
     <message>
         <location filename="BoxJob.h" line="36"/>
         <source>Deleting Content</source>
         <translation>Видалення вмісту</translation>
+    </message>
+</context>
+<context>
+    <name>CCodeEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="42"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
+        <source>Find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="47"/>
+        <source>FindNext</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="57"/>
+        <source>GoTo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="388"/>
+        <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
+        <source>F3: Find Next
++ Shift: Backward
++ Ctrl: Case Sensitively
++ Alt: Whole Words
+
+Find String:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="923"/>
+        <source>Go to Line:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1145,35 +1200,35 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIniHighlighter</name>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="405"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="416"/>
         <source>Validate (Failed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="702"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="713"/>
         <source>Added in version</source>
         <translation>Додано у версії</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="703"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1588"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="714"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1669"/>
         <source>Removed in version</source>
         <translation>Видалено у версії</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="704"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="715"/>
         <source>Re-added in version</source>
         <translation>Повторно додано у версії</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="705"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1587"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="716"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1668"/>
         <source>Renamed in version</source>
         <translation>Перейменовано у версії</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="706"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1589"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="717"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1670"/>
         <source>Superseded by</source>
         <translation>Замінено на</translation>
     </message>
@@ -1190,29 +1245,29 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="obsolete">Доступ до ресурсів</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1288"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1369"/>
         <source>Category</source>
         <translation>Категорія</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1289"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1370"/>
         <source>Context</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1290"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1371"/>
         <source>Requirements</source>
         <translation>Вимоши</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1464"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1606"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1545"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1687"/>
         <source>Syntax</source>
         <translation>Синтакс</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1465"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1602"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1546"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1683"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
@@ -1336,6 +1391,39 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="802"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CItemChooser</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="7"/>
+        <source>Item Chooser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="12"/>
+        <source>Select items that will be used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="29"/>
+        <source>Add &gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="33"/>
+        <source>&lt; Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="47"/>
+        <source>Move Up</source>
+        <translation type="unfinished">Перемістити вгору</translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
+        <source>Move Down</source>
+        <translation type="unfinished">Перемістити вниз</translation>
     </message>
 </context>
 <context>
@@ -2674,6 +2762,24 @@ Please select a folder which contains this file.</source>
 
 Do you wish to enable autocomplete?</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CPathEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
+        <source>Any File (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
+        <source>Select Directory</source>
+        <translation type="unfinished">Оберіть каталог</translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="38"/>
+        <source>Browse</source>
+        <translation type="unfinished">Огляд</translation>
     </message>
 </context>
 <context>
@@ -4153,7 +4259,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="497"/>
         <source>Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Майстер усунення несправностей</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="522"/>
@@ -4471,7 +4577,7 @@ Error: %1</source>
         <location filename="SandMan.cpp" line="3343"/>
         <location filename="SandMan.cpp" line="3368"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Більше не питати</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3367"/>
@@ -6541,7 +6647,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2413"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ви дійсно бажаєте видалити вибраний(і) локальний(і) шаблон(и)?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2543"/>
@@ -8304,7 +8410,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1993"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Використовувати вхід Sandboxie замість анонімного токена</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3218"/>
@@ -8713,15 +8819,31 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
+        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;br&gt;
         &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
         • Pipe (|) separates possible values&lt;br&gt;
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
-&lt;/html&gt;</source>
+&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6124"/>
+        <location filename="Forms/OptionsWindow.ui" line="6127"/>
         <source>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -8733,29 +8855,30 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + auto-correction&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; in popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt; to select highlighted item&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6146"/>
+        <location filename="Forms/OptionsWindow.ui" line="6150"/>
         <source>Complete</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6056"/>
+        <location filename="Forms/OptionsWindow.ui" line="6059"/>
         <source>Tooltips</source>
         <translation>Підсказки</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6066"/>
+        <location filename="Forms/OptionsWindow.ui" line="6069"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
 &lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
 &lt;br/&gt;
@@ -8772,7 +8895,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6081"/>
+        <location filename="Forms/OptionsWindow.ui" line="6084"/>
         <source>Validate</source>
         <translation>Перевіряти</translation>
     </message>
@@ -9602,7 +9725,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4714"/>
         <source>On File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">При відновленні файлу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4839"/>
@@ -9618,7 +9741,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4772"/>
         <source>On Delete Content</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">При видаленні вмісту</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="834"/>
@@ -9829,12 +9952,12 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Редагувати розділ ini файлу</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6091"/>
+        <location filename="Forms/OptionsWindow.ui" line="6094"/>
         <source>Edit ini</source>
         <translation>Редагувати ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6104"/>
+        <location filename="Forms/OptionsWindow.ui" line="6107"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
@@ -9866,6 +9989,11 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Views/SbieView.cpp" line="1825"/>
         <source>Drive %1</source>
         <translation>Диск %1</translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/FlexError.h" line="21"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10371,7 +10499,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1599"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;a href=&quot;addon://ImDisk&quot;&gt;Встановіть ImDisk&lt;/a&gt;, щоб увімкнути підтримку RAM-диска та образів дисків.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="206"/>
@@ -10671,15 +10799,31 @@ Please note that this values are currently user specific and saved globally for 
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
+        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;br&gt;
         &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
         • Pipe (|) separates possible values&lt;br&gt;
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
-&lt;/html&gt;</source>
+&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3218"/>
+        <location filename="Forms/SettingsWindow.ui" line="3221"/>
         <source>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -10691,24 +10835,25 @@ Please note that this values are currently user specific and saved globally for 
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + auto-correction&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; in popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt; to select highlighted item&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3240"/>
+        <location filename="Forms/SettingsWindow.ui" line="3244"/>
         <source>Complete</source>
         <translation>Завершити</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3201"/>
+        <location filename="Forms/SettingsWindow.ui" line="3204"/>
         <source>Tooltips</source>
         <translation>Підсказки</translation>
     </message>
@@ -10971,7 +11116,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2360"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Використовувати вхід Sandboxie замість анонімного токена</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>

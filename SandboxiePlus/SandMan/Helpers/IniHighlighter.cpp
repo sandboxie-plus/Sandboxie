@@ -65,7 +65,7 @@ namespace {
 		static const QString STYLE_VAR = QStringLiteral("style='%1'");
 		static const QString STYLE_START = QStringLiteral("style='");
 		static const QString STYLE_TOP = QStringLiteral(" style='vertical-align:top;'");
-		static const QString SEPERATOR = QStringLiteral(";");
+		static const QString SEPARATOR = QStringLiteral(";");
 	}
     
     // Common text replacements
@@ -308,7 +308,7 @@ QString CIniHighlighter::mergeHtmlStyles(const QString& baseStyle, const QString
 	if (baseStyle.contains(HtmlAttribs::STYLE_START)) {
 		QString result = baseStyle;
 		// Remove the closing quote and add the additional style
-		return result.replace(HtmlAttribs::STYLE_START, additionalStyle.mid(0, additionalStyle.length() - 1) % HtmlAttribs::SEPERATOR);
+		return result.replace(HtmlAttribs::STYLE_START, additionalStyle.mid(0, additionalStyle.length() - 1) % HtmlAttribs::SEPARATOR);
 	} else {
 		return baseStyle % " " % additionalStyle;
 	}
@@ -1342,7 +1342,7 @@ void CIniHighlighter::processKeywordMappings(
             // Merge with existing labelStyle
             if (labelStyle.contains(HtmlAttribs::STYLE_START)) {
                 styledLabelStyle = labelStyle;
-                styledLabelStyle.replace(HtmlAttribs::STYLE_START, labelStyling.mid(0, labelStyling.length() - 1) % HtmlAttribs::SEPERATOR);
+                styledLabelStyle.replace(HtmlAttribs::STYLE_START, labelStyling.mid(0, labelStyling.length() - 1) % HtmlAttribs::SEPARATOR);
             }
             else {
                 styledLabelStyle += " " % labelStyling;
@@ -1424,7 +1424,7 @@ void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingIn
 			if (!labelStyling.isEmpty()) {
 				if (labelStyle.contains(HtmlAttribs::STYLE_START)) {
 					styledLabelStyle = labelStyle;
-					styledLabelStyle.replace(HtmlAttribs::STYLE_START, labelStyling.mid(0, labelStyling.length() - 1) % HtmlAttribs::SEPERATOR);
+					styledLabelStyle.replace(HtmlAttribs::STYLE_START, labelStyling.mid(0, labelStyling.length() - 1) % HtmlAttribs::SEPARATOR);
 				}
 				else {
 					styledLabelStyle += " " % labelStyling;

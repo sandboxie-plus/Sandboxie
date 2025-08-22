@@ -4000,8 +4000,8 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</oldsource>
-        <translation>Windows 빌드 %1이(가) Sandboxie 버전의 현재 지원 기능을 초과하여 토큰 기반 보안 격리가 해제됩니다. 따라서 모든 응용 프로그램이 보안 격리 없이 응용 프로그램 구획 모드로 작동합니다.
-Sandboxie에 대한 업데이트가 있는지 확인 부탁드립니다.</translation>
+        <translation>Windows 빌드 %1이(가) Sandboxie 버전의 현재 지원 능력을 초과하여 토큰 기반 보안 격리가 비활성화되었습니다. 따라서 모든 응용 프로그램은 보안 격리 없이 응용 프로그램 구획 모드로 작동합니다.
+Sandboxie 업데이트가 있는지 확인해 주세요.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2591"/>
@@ -9491,17 +9491,20 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         설정 위에 마우스를 올리면 자세한 도구 설명이 표시됩니다.&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;체크&lt;/span&gt;: 전체 세부 정보 (버전, 구문, 설명 등)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적 체크&lt;/span&gt;: 필수 정보만&lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 전체 세부 사항 (버전, 구문, 설명 등)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 필수 정보만&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;구문 도우미:&lt;/b&gt;&lt;br&gt;
-        • 파이프(|)는 가능한 값을 분리합니다&lt;br&gt;
-        • 대괄호([])는 기본값 또는 선택적 값을 나타냅니다&lt;br&gt;
+        • &lt;i&gt;파이프&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 대체 값 구분&lt;br&gt;
+        • &lt;i&gt;대괄호&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 선택적 매개변수 표시&lt;br&gt;
+        • &lt;i&gt;괄호&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 유효한 옵션 포함&lt;br&gt;
+        • &lt;i&gt;꺾쇠괄호&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;굵게 표시된 값&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -9528,7 +9531,27 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 팝업 표시&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;로 선택&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 확인.&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;수동 수정&lt;/u&gt;: setting= 입력 후&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키로 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 수동은 &lt;code&gt;Ctrl+R&lt;/code&gt;로 보정만 가능&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: 선택 항목 확인&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 제안 항목 강제 열기&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: 먼저 적용 또는 선택 항목 확인&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;
@@ -11214,17 +11237,20 @@ Please note that this values are currently user specific and saved globally for 
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         설정 위에 마우스를 올리면 자세한 도구 설명이 표시됩니다.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;표시&lt;/span&gt;: 전체 세부 정보 (버전, 구문, 설명 등)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적 표시&lt;/span&gt;: 필수 정보만&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 전체 세부 사항 (버전, 구문, 설명 등)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 필수 정보만&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;구문 도우미:&lt;/b&gt;&lt;br&gt;
-        • 파이프(|)는 가능한 값을 분리합니다&lt;br&gt;
-        • 대괄호([])는 기본값 또는 선택적 값을 나타냅니다&lt;br&gt;
+        • &lt;i&gt;파이프&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 대체 값 구분&lt;br&gt;
+        • &lt;i&gt;대괄호&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 선택적 매개변수 표시&lt;br&gt;
+        • &lt;i&gt;괄호&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 유효한 옵션 포함&lt;&lt;br&gt;
+        • &lt;i&gt;꺾쇠괄호&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 교체 가능한 자리 표시자 표시&lt;br&gt;
+        • &lt;i&gt;굵게 표시된 값&lt;/i&gt; — 기본값 표현 ( 생략 가능)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -11251,7 +11277,27 @@ Please note that this values are currently user specific and saved globally for 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 팝업 표시&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;로 선택&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 확인.&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;수동 수정&lt;/u&gt;: setting= 입력 후&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키로 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 수동은 &lt;code&gt;Ctrl+R&lt;/code&gt;로 보정만 가능&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: 선택 항목 확인&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 제안 항목 강제 열기&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: 먼저 적용 또는 선택 항목 확인&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;

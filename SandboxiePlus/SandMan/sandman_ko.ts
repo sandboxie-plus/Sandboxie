@@ -1287,35 +1287,35 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIniHighlighter</name>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="405"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="416"/>
         <source>Validate (Failed)</source>
         <translation>검증 (실패)</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="702"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="713"/>
         <source>Added in version</source>
         <translation>버전에 추가됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="703"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1588"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="714"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1669"/>
         <source>Removed in version</source>
         <translation>버전에서 제거됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="704"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="715"/>
         <source>Re-added in version</source>
         <translation>버전에서 다시 추가됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="705"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1587"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="716"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1668"/>
         <source>Renamed in version</source>
         <translation>버전으로 이름 변경됨</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="706"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1589"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="717"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1670"/>
         <source>Superseded by</source>
         <translation>대체됨</translation>
     </message>
@@ -1360,7 +1360,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">여러가지</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1288"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1369"/>
         <source>Category</source>
         <translation>범주</translation>
     </message>
@@ -1377,24 +1377,24 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">사용자 설정</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1289"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1370"/>
         <source>Context</source>
         <translation>문맥</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1290"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1371"/>
         <source>Requirements</source>
         <translation>요구 사항</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1464"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1606"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1545"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1687"/>
         <source>Syntax</source>
         <translation>구문</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1465"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1602"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1546"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1683"/>
         <source>Description</source>
         <translation>설명</translation>
     </message>
@@ -9470,12 +9470,28 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
+        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;br&gt;
         &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
         • Pipe (|) separates possible values&lt;br&gt;
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation>&lt;html&gt;
+&lt;/html&gt;</oldsource>
+        <translation type="unfinished">&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         설정 위에 마우스를 올리면 자세한 도구 설명이 표시됩니다.&lt;br&gt;
         &lt;br&gt;
@@ -9490,7 +9506,31 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6124"/>
+        <location filename="Forms/OptionsWindow.ui" line="6127"/>
+        <source>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -9511,7 +9551,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation>&lt;html&gt;
+        <translation type="vanished">&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;자동 완성 및 대소문자 자동 수정&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상의 문자에서 제안 팝업 표시&lt;br&gt;
@@ -9533,7 +9573,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6146"/>
+        <location filename="Forms/OptionsWindow.ui" line="6150"/>
         <source>Complete</source>
         <translatorcomment>완성</translatorcomment>
         <translation></translation>
@@ -9545,12 +9585,12 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 도구 설명에는 버전 정보, 구문 요구 사항, 설명이 포함되어 있어 각 설정을 이해하고 올바르게 구성하는 데 도움이 됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6056"/>
+        <location filename="Forms/OptionsWindow.ui" line="6059"/>
         <source>Tooltips</source>
         <translation>도구 설명</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6066"/>
+        <location filename="Forms/OptionsWindow.ui" line="6069"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
 &lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
 &lt;br/&gt;
@@ -9579,7 +9619,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6081"/>
+        <location filename="Forms/OptionsWindow.ui" line="6084"/>
         <source>Validate</source>
         <translation>검증</translation>
     </message>
@@ -10287,12 +10327,12 @@ Please note that this values are currently user specific and saved globally for 
         <translation>이 섹션 편집</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6091"/>
+        <location filename="Forms/OptionsWindow.ui" line="6094"/>
         <source>Edit ini</source>
         <translation>ini 편집</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6104"/>
+        <location filename="Forms/OptionsWindow.ui" line="6107"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -11153,12 +11193,28 @@ Please note that this values are currently user specific and saved globally for 
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
+        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;br&gt;
         &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
         • Pipe (|) separates possible values&lt;br&gt;
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation>&lt;html&gt;
+&lt;/html&gt;</oldsource>
+        <translation type="unfinished">&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         설정 위에 마우스를 올리면 자세한 도구 설명이 표시됩니다.&lt;br&gt;
         &lt;br&gt;
@@ -11173,7 +11229,31 @@ Please note that this values are currently user specific and saved globally for 
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3218"/>
+        <location filename="Forms/SettingsWindow.ui" line="3221"/>
+        <source>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -11194,7 +11274,7 @@ Please note that this values are currently user specific and saved globally for 
         • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation>&lt;html&gt;
+        <translation type="vanished">&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 표시&lt;br&gt;
@@ -11216,7 +11296,7 @@ Please note that this values are currently user specific and saved globally for 
 &lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3240"/>
+        <location filename="Forms/SettingsWindow.ui" line="3244"/>
         <source>Complete</source>
         <translation>완성</translation>
     </message>
@@ -11227,7 +11307,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 도구 설명에는 버전 정보, 구문 요구 사항, 설명이 포함되어 있어 각 설정을 이해하고 올바르게 구성하는 데 도움이 됩니다.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3201"/>
+        <location filename="Forms/SettingsWindow.ui" line="3204"/>
         <source>Tooltips</source>
         <translation>도구 설명</translation>
     </message>

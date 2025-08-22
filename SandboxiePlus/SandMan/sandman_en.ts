@@ -1117,62 +1117,62 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIniHighlighter</name>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="405"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="416"/>
         <source>Validate (Failed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="702"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="713"/>
         <source>Added in version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="703"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1588"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="714"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1669"/>
         <source>Removed in version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="704"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="715"/>
         <source>Re-added in version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="705"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1587"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="716"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1668"/>
         <source>Renamed in version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="706"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1589"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="717"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1670"/>
         <source>Superseded by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1288"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1369"/>
         <source>Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1289"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1370"/>
         <source>Context</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1290"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1371"/>
         <source>Requirements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1464"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1606"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1545"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1687"/>
         <source>Syntax</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1465"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1602"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1546"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1683"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8234,15 +8234,31 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
+        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;br&gt;
         &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
         • Pipe (|) separates possible values&lt;br&gt;
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
-&lt;/html&gt;</source>
+&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6124"/>
+        <location filename="Forms/OptionsWindow.ui" line="6127"/>
         <source>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -8254,29 +8270,30 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + auto-correction&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; in popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt; to select highlighted item&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6146"/>
+        <location filename="Forms/OptionsWindow.ui" line="6150"/>
         <source>Complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6056"/>
+        <location filename="Forms/OptionsWindow.ui" line="6059"/>
         <source>Tooltips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6066"/>
+        <location filename="Forms/OptionsWindow.ui" line="6069"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
 &lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
 &lt;br/&gt;
@@ -8293,7 +8310,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6081"/>
+        <location filename="Forms/OptionsWindow.ui" line="6084"/>
         <source>Validate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9271,12 +9288,12 @@ Please note that this values are currently user specific and saved globally for 
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6091"/>
+        <location filename="Forms/OptionsWindow.ui" line="6094"/>
         <source>Edit ini</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6104"/>
+        <location filename="Forms/OptionsWindow.ui" line="6107"/>
         <source>Cancel</source>
         <translation></translation>
     </message>
@@ -10452,15 +10469,31 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
+        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;br&gt;
         &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
         • Pipe (|) separates possible values&lt;br&gt;
         • Square brackets ([]) indicate default value or optional values&lt;br&gt;
     &lt;/body&gt;
-&lt;/html&gt;</source>
+&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3218"/>
+        <location filename="Forms/SettingsWindow.ui" line="3221"/>
         <source>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -10472,24 +10505,25 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + auto-correction&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; in popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt; to select highlighted item&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3240"/>
+        <location filename="Forms/SettingsWindow.ui" line="3244"/>
         <source>Complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3201"/>
+        <location filename="Forms/SettingsWindow.ui" line="3204"/>
         <source>Tooltips</source>
         <translation type="unfinished"></translation>
     </message>

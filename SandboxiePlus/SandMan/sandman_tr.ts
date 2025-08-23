@@ -787,7 +787,7 @@ Hata: %1</translation>
     <message>
         <location filename="../MiscHelpers/Common/CheckableComboBox.cpp" line="12"/>
         <source>Select Items...</source>
-        <translation type="unfinished"></translation>
+        <translation>Öğeleri Seçin...</translation>
     </message>
 </context>
 <context>
@@ -795,7 +795,7 @@ Hata: %1</translation>
     <message>
         <location filename="../MiscHelpers/Common/CheckableMessageBox.cpp" line="52"/>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir daha sorma</translation>
     </message>
 </context>
 <context>
@@ -812,22 +812,22 @@ Hata: %1</translation>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="42"/>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Bul</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="47"/>
         <source>FindNext</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="57"/>
         <source>GoTo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="388"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
-        <translation type="unfinished"></translation>
+        <translation>Şunu mu demek istediniz: %1? (Değiştirmek için Ctrl+R&apos;ye basın)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
@@ -837,12 +837,22 @@ Hata: %1</translation>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished"></translation>
+        <translation>F3: Sonrakini Bul
++ Shift: Geri
++ Ctrl: Büyük/Küçük Harfe Duyarlı
++ Alt: Tam Kelimeler
+
+Dize Bul:</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="923"/>
         <source>Go to Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Satıra Git:</translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="923"/>
+        <source></source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -908,6 +918,14 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
         <location filename="Windows/CompressDialog.cpp" line="35"/>
         <source>Ultra</source>
         <translation>Çok yüksek</translation>
+    </message>
+</context>
+<context>
+    <name>CExitDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ExitDialog.h" line="44"/>
+        <source>Yes (%1)</source>
+        <translation>Evet (%1)</translation>
     </message>
 </context>
 <context>
@@ -1166,35 +1184,35 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="416"/>
         <source>Validate (Failed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Doğrula (Başarısız)</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="713"/>
         <source>Added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklendiği sürüm</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="714"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1669"/>
         <source>Removed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaldırıldığı sürüm</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="715"/>
         <source>Re-added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeniden eklendiği sürüm</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="716"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1668"/>
         <source>Renamed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Adının değiştirildiği sürüm</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="717"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1670"/>
         <source>Superseded by</source>
-        <translation type="unfinished"></translation>
+        <translation>Yerine geçen</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -1219,7 +1237,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1369"/>
         <source>Category</source>
-        <translation type="unfinished">Kategori</translation>
+        <translation>Kategori</translation>
     </message>
     <message>
         <source>Global</source>
@@ -1228,24 +1246,24 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1370"/>
         <source>Context</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlam</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1371"/>
         <source>Requirements</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereksinimler</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1545"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1687"/>
         <source>Syntax</source>
-        <translation type="unfinished"></translation>
+        <translation>Söz dizimi</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1546"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1683"/>
         <source>Description</source>
-        <translation type="unfinished">Açıklama</translation>
+        <translation>Açıklama</translation>
     </message>
 </context>
 <context>
@@ -1370,32 +1388,40 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="7"/>
         <source>Item Chooser</source>
-        <translation type="unfinished"></translation>
+        <translation>Öğe Seçici</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="12"/>
         <source>Select items that will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanılacak öğeleri seçin.</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="29"/>
         <source>Add &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekle &gt;</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="33"/>
         <source>&lt; Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaldır &gt;</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="47"/>
         <source>Move Up</source>
-        <translation type="unfinished">Yukarı Taşı</translation>
+        <translation>Yukarı Taşı</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
-        <translation type="unfinished">Aşağı Taşı</translation>
+        <translation>Aşağı Taşı</translation>
+    </message>
+</context>
+<context>
+    <name>CKbpsEdit</name>
+    <message>
+        <location filename="../MiscHelpers/Common/SettingsWidgets.h" line="49"/>
+        <source>Unlimited</source>
+        <translation>Sınırsız</translation>
     </message>
 </context>
 <context>
@@ -1971,14 +1997,16 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1471"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Otomatik Tamamlama Onayı Gerekli</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1472"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Eğer otomatik tamamlama penceresinde görüntülenen ayarlarla ilgili emin değilseniz, bu özellik hakkında işlem yapmadan önce yazılımın dokümantasyonunu veya kaynak kodunu incelemenizi şiddetle tavsiye ederiz. Bu özelliği, doğru bir anlayışa sahip olmadan etkinleştirmeniz, istenmeyen sonuçlara yol açabilir ve bu durumdan yalnızca siz sorumlu olursunuz.
+
+Otomatik tamamlama özelliğini etkinleştirmek ister misiniz?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>
@@ -2426,7 +2454,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1218"/>
         <source>Failed to Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Şifre Değiştirilemedi</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
@@ -2467,6 +2495,15 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
         <location filename="Windows/OptionsAdvanced.cpp" line="65"/>
         <source>Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.</source>
         <translation>Bazen Program Uyumluluk Yardımcısı tarafından uygulandığı gibi her zaman ElevateCreateProcess düzeltmesini kullanır.</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsAdvanced.cpp" line="66"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="70"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="71"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="74"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="332"/>
+        <source></source>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="67"/>
@@ -2625,17 +2662,17 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
         <source>Any File (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi Bir Dosya (*.*)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Dizin Seç</translation>
+        <translation>Dizin Seç</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="38"/>
         <source>Browse</source>
-        <translation type="unfinished">Göz At</translation>
+        <translation>Göz At</translation>
     </message>
 </context>
 <context>
@@ -2863,6 +2900,14 @@ Tam yol: %4</translation>
     </message>
 </context>
 <context>
+    <name>CProgressDialog</name>
+    <message>
+        <location filename="../MiscHelpers/Common/ProgressDialog.h" line="101"/>
+        <source>Close (%1)</source>
+        <translation>Kapat (%1)</translation>
+    </message>
+</context>
+<context>
     <name>CRecoveryLogWnd</name>
     <message>
         <location filename="SandManRecovery.cpp" line="325"/>
@@ -2981,6 +3026,11 @@ Tam yol: %4</translation>
         <location filename="Wizards/BoxAssistant.cpp" line="592"/>
         <source>Troubleshooting ...</source>
         <translation>Sorun giderme ...</translation>
+    </message>
+    <message>
+        <location filename="Wizards/BoxAssistant.cpp" line="593"/>
+        <source></source>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="615"/>
@@ -4722,6 +4772,12 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation>Sbie RpcSs</translation>
     </message>
     <message>
+        <location filename="SbieProcess.cpp" line="57"/>
+        <location filename="SbieProcess.cpp" line="89"/>
+        <source></source>
+        <translation></translation>
+    </message>
+    <message>
         <location filename="SbieProcess.cpp" line="59"/>
         <source>Sbie DcomLaunch</source>
         <translation>Sbie DcomLaunch</translation>
@@ -5690,14 +5746,16 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2543"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Otomatik Tamamlama Onayı Gerekli</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2544"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Eğer otomatik tamamlama penceresinde görüntülenen ayarlarla ilgili emin değilseniz, bu özellik hakkında işlem yapmadan önce yazılımın dokümantasyonunu veya kaynak kodunu incelemenizi şiddetle tavsiye ederiz. Bu özelliği, doğru bir anlayışa sahip olmadan etkinleştirmeniz, istenmeyen sonuçlara yol açabilir ve bu durumdan yalnızca siz sorumlu olursunuz.
+
+Otomatik tamamlama özelliğini etkinleştirmek ister misiniz?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2790"/>
@@ -5717,7 +5775,7 @@ Do you wish to enable autocomplete?</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2882"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Mevcut sürümde Plus özellikleri etkin kalmaya devam ediyor&lt;/font&gt;, ancak uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine artık erişiminiz yok.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2884"/>
@@ -6191,10 +6249,6 @@ Her benzersiz donanım kimliği için %3 kereye kadar deneme sertifikası talep 
         <translation>Donanım Kimliği başına %2 kereye kadar ücretsiz %1 günlük deneme sertifikası talep edebilirsiniz.</translation>
     </message>
     <message>
-        <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
-        <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Şu anda yüklü olan sürüm için Plus özellikleri etkin durumdadır&lt;/font&gt;. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="2877"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;%1&quot;&gt;güncel bir sertifika edinin&lt;/a&gt;.</translation>
@@ -6568,10 +6622,8 @@ Bu alandaki son işlem sona erdikten sonra alanın içeriği ATILACAKTIR ve alan
         <location filename="Wizards/NewBoxWizard.cpp" line="1077"/>
         <source>
 This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
-        <oldsource>
-This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
-        <translation type="unfinished">
-Bu alan kapandığında kendi içeriğini ATACAKTIR, yalnızca geçici veriler için uygundur.</translation>
+        <translation>
+Bu kutu kapatıldığında içindekiler ATILIR, sadece geçici veriler için uygundur.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1079"/>
@@ -7461,20 +7513,22 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        Ayarların üzerine gelindiğinde detaylı ipuçları görüntülenir.&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;b&gt;İpucu Modları:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Tam detaylar (sürümler, sözdizimi, açıklama ve daha fazlası)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi İşaretli&lt;/span&gt;: Sadece temel bilgiler&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
-        • Pipe (|) separates possible values&lt;br&gt;
-        • Square brackets ([]) indicate default value or optional values&lt;br&gt;
+        &lt;b&gt;Söz Dizimi Yardımcıları:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Alternatif değerleri ayırır&lt;br&gt;
+        • &lt;i&gt;Kare parantezler&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — İsteğe bağlı parametreleri belirtir&lt;br&gt;
+        • &lt;i&gt;Parantezler&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Geçerli seçenekleri kapsar&lt;br&gt;
+        • &lt;i&gt;Açı parantezleri&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Değiştirilebilir yer tutucuları belirtir&lt;br&gt;
+        • &lt;i&gt;Kalın değerler&lt;/i&gt; — Varsayılanları temsil eder (opsiyoneldir)&lt;br&gt;
     &lt;/body&gt;
-&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6069"/>
@@ -7491,7 +7545,21 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;p&gt;Etkinleştirildiğinde, ayarlar INI dosyasındaki verilere göre kontrol edilir ve vurgulanır. Kontrol ve vurgulamayı devre dışı bırakmak için işareti kaldırın.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Siyah Yazı, Sarı Arka Plan, İtalik&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Yeniden adlandırılmış ayar (eski adı - geçersiz)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Beyaz Yazı, Siyah Arka Plan, Üstü Çizili&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Kaldırılmış ayar (artık geçerli değil)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Koyu Silah Yeşili Yazı, Beyaz Arka Plan&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gelecek ayar (mevcut sürümde geçerli değil)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Kırmızı Yazım Denetimi Alt Çizgisi&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Geçersiz/bilinmeyen ayar&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Koyu/Açık Kırmızı Yazı&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Geçerli/bilinen ayar&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Not&lt;/span&gt;: Yalnızca geçerli/bilinen ayarlar bu sürümde işlevseldir. Ancak, genel veya alan bağlamında herhangi bir doğrulama yapılmaz. Bazı ayarlar geçerli görünebilir ancak her bağlamda çalışmayabilir.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6107"/>
@@ -8591,22 +8659,42 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;Otomatik Tamamlama ve Büyük/Küçük Harf Düzeltmesi&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Otomatik Tamamlama&lt;/u&gt;: 3+ karakterde öneri penceresi açılır&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Pencereden seçim yaparak &lt;u&gt;otomatik tamamlama&lt;/u&gt; ve doğru büyük/küçük harf kullanımı sağlanır&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; tuşu ile seçimi uygular&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Elle Düzeltme&lt;/u&gt;: Ayar= yazıldıktan sonra&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ büyük/küçük harf düzeltme ipucu görünürse &lt;code&gt;Ctrl+R&lt;/code&gt; tuşu ile düzeltme uygulanabilir&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Tamamlama Modları:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Otomatik Tamamlama + Büyük/Küçük Harf Düzeltme&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi işaretli&lt;/span&gt;: Sadece elle &lt;code&gt;Ctrl+R&lt;/code&gt; düzeltmesi&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Gezinme Tuşları:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Pencerede gezinme&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Seçimi onaylama&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Önerileri zorla açar&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;: İlk seçeneği veya mevcut seçimi uygular&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6150"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamamla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6059"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>İpuçları</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6084"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>Doğrula</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3754"/>
@@ -9423,7 +9511,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="../MiscHelpers/Common/FlexError.h" line="21"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Hata</translation>
     </message>
 </context>
 <context>
@@ -10440,7 +10528,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows 11&apos;de yeni SandMan stili kullanılsın</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
@@ -10605,20 +10693,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
+        Ayarların üzerine gelindiğinde detaylı ipuçları görüntülenir.&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        &lt;b&gt;İpucu Modları:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Tam detaylar (sürümler, sözdizimi, açıklama ve daha fazlası)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi İşaretli&lt;/span&gt;: Sadece temel bilgiler&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
-        • Pipe (|) separates possible values&lt;br&gt;
-        • Square brackets ([]) indicate default value or optional values&lt;br&gt;
+        &lt;b&gt;Söz Dizimi Yardımcıları:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Alternatif değerleri ayırır&lt;br&gt;
+        • &lt;i&gt;Kare parantezler&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — İsteğe bağlı parametreleri belirtir&lt;br&gt;
+        • &lt;i&gt;Parantezler&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Geçerli seçenekleri kapsar&lt;br&gt;
+        • &lt;i&gt;Açı parantezleri&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Değiştirilebilir yer tutucuları belirtir&lt;br&gt;
+        • &lt;i&gt;Kalın değerler&lt;/i&gt; — Varsayılanları temsil eder (opsiyoneldir)&lt;br&gt;
     &lt;/body&gt;
-&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3221"/>
@@ -10643,22 +10733,42 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;Otomatik Tamamlama ve Büyük/Küçük Harf Düzeltmesi&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Otomatik Tamamlama&lt;/u&gt;: 3+ karakterde öneri penceresi açılır&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Pencereden seçim yaparak &lt;u&gt;otomatik tamamlama&lt;/u&gt; ve doğru büyük/küçük harf kullanımı sağlanır&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; tuşu ile seçimi uygular&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Elle Düzeltme&lt;/u&gt;: Ayar= yazıldıktan sonra&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ büyük/küçük harf düzeltme ipucu görünürse &lt;code&gt;Ctrl+R&lt;/code&gt; tuşu ile düzeltme uygulanabilir&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Tamamlama Modları:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Otomatik Tamamlama + Büyük/Küçük Harf Düzeltme&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi işaretli&lt;/span&gt;: Sadece elle &lt;code&gt;Ctrl+R&lt;/code&gt; düzeltmesi&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Gezinme Tuşları:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Pencerede gezinme&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Seçimi onaylama&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Önerileri zorla açar&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;: İlk seçeneği veya mevcut seçimi uygular&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3244"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamamla</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3204"/>
         <source>Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>İpuçları</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3133"/>
         <source>Validate</source>
-        <translation type="unfinished"></translation>
+        <translation>Doğrula</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3009"/>
@@ -10700,20 +10810,21 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;When checked, INI keys are validated and highlighted according to the SbieSettings file. Uncheck to disable validation and highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;p&gt;Etkinleştirildiğinde, ayarlar INI dosyasındaki verilere göre kontrol edilir ve vurgulanır. Kontrol ve vurgulamayı devre dışı bırakmak için işareti kaldırın.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Siyah Yazı, Sarı Arka Plan, İtalik&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Yeniden adlandırılmış ayar (eski adı - geçersiz)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Beyaz Yazı, Siyah Arka Plan, Üstü Çizili&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Kaldırılmış ayar (artık geçerli değil)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Koyu Silah Yeşili Yazı, Beyaz Arka Plan&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gelecek ayar (mevcut sürümde geçerli değil)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Kırmızı Yazım Denetimi Alt Çizgisi&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Geçersiz/bilinmeyen ayar&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Koyu/Açık Kırmızı Yazı&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Geçerli/bilinen ayar&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Not&lt;/span&gt;: Yalnızca geçerli/bilinen ayarlar bu sürümde işlevseldir. Ancak, genel veya alan bağlamında herhangi bir doğrulama yapılmaz. Bazı ayarlar geçerli görünebilir ancak her bağlamda çalışmayabilir.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3146"/>

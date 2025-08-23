@@ -1084,16 +1084,6 @@ void CIniHighlighter::processContainer(const ContainerType& container, FunctionT
 	}
 }
 
-template<typename MapType, typename KeyType, typename FunctionType>
-void CIniHighlighter::processMapKeys(const MapType& map, const KeyType& keyPrefix, FunctionType&& func)
-{
-	for (auto it = map.constBegin(); it != map.constEnd(); ++it) {
-		if (it.key().startsWith(keyPrefix)) {
-			func(it.key(), it.value());
-		}
-	}
-}
-
 void CIniHighlighter::highlightBlock(const QString &text)
 {
     // First, reset all formatting
@@ -1362,6 +1352,53 @@ void CIniHighlighter::processKeywordMappings(
     }
 }
 
+template<typename KeywordInfoType>
+QStringList getVisibleLabelsWithActionHiding(
+	const QString& displayText,
+	const QList<KeywordInfoType>& effectiveMappings)
+{
+	QStringList typeLabels;
+	QList<QPair<QString, QString>> matchedKeywords;
+	QHash<QString, QString> keywordActions;
+
+	for (const KeywordInfoType& keywordInfo : effectiveMappings) {
+		if (displayText.contains(keywordInfo.keyword)) {
+			matchedKeywords.append(qMakePair(keywordInfo.keyword, keywordInfo.displayName));
+			if (!keywordInfo.action.isEmpty()) {
+				keywordActions.insert(keywordInfo.keyword, keywordInfo.action);
+			}
+		}
+	}
+
+	for (const auto& pair : matchedKeywords) {
+		const QString& keyword = pair.first;
+		const QString& displayName = pair.second;
+		bool isHidden = false;
+
+		if (keywordActions.contains(keyword) && keywordActions[keyword].contains(keyword)) {
+			isHidden = true;
+		}
+		if (!isHidden) {
+			for (auto it = keywordActions.constBegin(); it != keywordActions.constEnd(); ++it) {
+				if (it.key() == keyword)
+					continue;
+				for (const QChar& c : it.value()) {
+					if (QString(c) == keyword) {
+						isHidden = true;
+						break;
+					}
+				}
+				if (isHidden)
+					break;
+			}
+		}
+		if (!isHidden && !displayName.isEmpty()) {
+			typeLabels.append(displayName);
+		}
+	}
+	return typeLabels;
+}
+
 void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingInfo& info,
 	const QString& currentLang, const QString& labelStyle)
 {
@@ -1404,14 +1441,8 @@ void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingIn
 
 		// 2. Map the remaining flags to labels as before
 		auto effectiveMappings = getEffectiveMappingsWithActionFallback(requirementsData, currentLang);
-		QStringList typeLabels;
-
-		// Collect all matched keywords and their actions
-		for (const auto& keywordInfo : effectiveMappings) {
-			if (req.contains(keywordInfo.keyword)) {
-				typeLabels.append(keywordInfo.displayName);
-			}
-		}
+		QStringList typeLabels = getVisibleLabelsWithActionHiding<KeywordInfo<KeywordType::Requirements>>(req, effectiveMappings);
+		
 
 		// 3. Append literal labels
 		typeLabels.append(literalLabels);
@@ -1767,7 +1798,16 @@ const CIniHighlighter::TooltipThemeCache& CIniHighlighter::getTooltipThemeCache(
 	static TooltipThemeCache themeCache;
 
 	if (!themeCache.valid) {
-		themeCache.darkMode = theConf->GetBool("Options/DarkTheme", false);
+		bool bDark;
+		int iDark = theConf->GetInt("Options/UseDarkTheme", 2);
+		if (iDark == 2) {
+			QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
+			bDark = (settings.value("AppsUseLightTheme").toInt() == 0);
+		}
+		else
+			bDark = (iDark == 1);
+
+		themeCache.darkMode = bDark;
 		themeCache.bgColor = themeCache.darkMode ? QStringLiteral("#2b2b2b") : QStringLiteral("#ffffff");
 		themeCache.textColor = themeCache.darkMode ? QStringLiteral("#e0e0e0") : QStringLiteral("#000000");
 
@@ -1780,6 +1820,14 @@ const CIniHighlighter::TooltipThemeCache& CIniHighlighter::getTooltipThemeCache(
 	}
 
 	return themeCache;
+}
+
+void CIniHighlighter::ClearThemeCache()
+{
+	// Access the static variable inside getTooltipThemeCache()
+	// by calling the function and using a const_cast to modify it.
+	auto& cache = const_cast<TooltipThemeCache&>(getTooltipThemeCache());
+	cache.valid = false;
 }
 
 QStringList CIniHighlighter::GetCompletionCandidates()

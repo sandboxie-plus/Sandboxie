@@ -2503,6 +2503,9 @@ void CSettingsWindow::OnIniValidationToggled(int state)
 	// Clear all language-related caches
 	CIniHighlighter::ClearLanguageCache();
 
+	// Clear all theme-related caches
+	CIniHighlighter::ClearThemeCache();
+
 	// Remove previous highlighter
 	if (m_pIniHighlighter) {
 		delete m_pIniHighlighter;

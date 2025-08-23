@@ -1435,6 +1435,8 @@ void COptionsWindow::OnIniValidationToggled(int state)
 
 	CIniHighlighter::ClearLanguageCache();
 
+	CIniHighlighter::ClearThemeCache();
+
 	if (m_pIniHighlighter) {
 		delete m_pIniHighlighter;
 		m_pIniHighlighter = nullptr;

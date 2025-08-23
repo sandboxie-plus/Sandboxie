@@ -51,6 +51,7 @@ public:
 	static bool IsCommentLine(const QString& line);
 
 	static void ClearLanguageCache();
+	static void ClearThemeCache();
 	static void SetTooltipMode(int checkState);
 	static TooltipMode GetTooltipMode();
 	static QString getCurrentLanguage();
@@ -135,9 +136,6 @@ private:
 	// Generic iterator helper template
 	template<typename ContainerType, typename FunctionType>
 	static void processContainer(const ContainerType& container, FunctionType&& func);
-	
-	template<typename MapType, typename KeyType, typename FunctionType>
-	static void processMapKeys(const MapType& map, const KeyType& keyPrefix, FunctionType&& func);
 	
 	static void addVersionRows(QString& tooltip, const SettingInfo& info, const QString& labelStyle);
 	static void processMappingsOptimized(QString& tooltip, const SettingInfo& info,

@@ -896,7 +896,7 @@ QString CIniHighlighter::processTextLineOptimized(const QString& text, const QSt
 			.replace(QStringLiteral("[/i]"), QStringLiteral("</i>"))
 			.replace(QStringLiteral("[u]"), QStringLiteral("<u>"))
 			.replace(QStringLiteral("[/u]"), QStringLiteral("</u>"))
-			.replace(QStringLiteral("[code]"), QStringLiteral("<code style='font-family: Consolas, monospace; background-color: #f0f0f0; padding: 1px 3px;'>"))
+			.replace(QStringLiteral("[code]"), QStringLiteral("<code style='font-family: Consolas, monospace; background-color: #ececec; color: #222222; padding: 1px 3px;'>"))
 			.replace(QStringLiteral("[/code]"), QStringLiteral("</code>"));
 	}
 

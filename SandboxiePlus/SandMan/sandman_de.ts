@@ -792,7 +792,7 @@ Fehler: %1</translation>
     <message>
         <location filename="../MiscHelpers/Common/CheckableComboBox.cpp" line="12"/>
         <source>Select Items...</source>
-        <translation type="unfinished"></translation>
+        <translation>Elemente auswählen...</translation>
     </message>
 </context>
 <context>
@@ -800,7 +800,7 @@ Fehler: %1</translation>
     <message>
         <location filename="../MiscHelpers/Common/CheckableMessageBox.cpp" line="52"/>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht erneut fragen</translation>
     </message>
 </context>
 <context>
@@ -817,22 +817,22 @@ Fehler: %1</translation>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="42"/>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="47"/>
         <source>FindNext</source>
-        <translation type="unfinished"></translation>
+        <translation>Weitersuchen</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="57"/>
         <source>GoTo</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehe zu</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="388"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
-        <translation type="unfinished"></translation>
+        <translation>Meinten Sie: %1? (Zum Ersetzen Strg+R drücken)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
@@ -842,12 +842,17 @@ Fehler: %1</translation>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished"></translation>
+        <translation>F3: Weitersuchen
++ Shift: Rückwärts
++ Strg: Groß-/Kleinschreibung
++ Alt: Ganze Wörter
+
+Suchen nach:</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="923"/>
         <source>Go to Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehe zu Zeile:</translation>
     </message>
 </context>
 <context>
@@ -1351,32 +1356,32 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="7"/>
         <source>Item Chooser</source>
-        <translation type="unfinished"></translation>
+        <translation>Elementauswahl</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="12"/>
         <source>Select items that will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie die zu verwendende Elemente aus.</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="29"/>
         <source>Add &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen &gt;</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="33"/>
         <source>&lt; Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt; Entfernen</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="47"/>
         <source>Move Up</source>
-        <translation type="unfinished">Nach oben verschieben</translation>
+        <translation>Nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
-        <translation type="unfinished">Nach unten verschieben</translation>
+        <translation>Nach unten verschieben</translation>
     </message>
 </context>
 <context>
@@ -2612,17 +2617,17 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
         <source>Any File (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien (*.*)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Ordner auswählen</translation>
+        <translation>Ordner auswählen</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="38"/>
         <source>Browse</source>
-        <translation type="unfinished">Navigieren</translation>
+        <translation>Durchsuchen</translation>
     </message>
 </context>
 <context>
@@ -8612,20 +8617,7 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
-        • Pipe (|) separates possible values&lt;br&gt;
-        • Square brackets ([]) indicate default value or optional values&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
         &lt;br&gt;
@@ -8634,8 +8626,11 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;
-        • Pipe (|) trennt mögliche Werte&lt;br&gt;
-        • Eckige Klammern ([]) kennzeichnen Standardwerte oder optionale Werte&lt;br&gt;
+        • &lt;i&gt;Senkrechter Strich&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Trennt alternative Werte&lt;br&gt;
+        • &lt;i&gt;Eckige Klammern&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Kennzeichnen optionale Parameter&lt;br&gt;
+        • &lt;i&gt;Runde Klammern&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Umschließen gültige Optionen&lt;br&gt;
+        • &lt;i&gt;Spitze Klammern&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Kennzeichnen ersetzbare Platzhalter&lt;br&gt;
+        • &lt;i&gt;Werte in Fettschrift&lt;/i&gt; — Stellen Standardwerte dar (können weggelassen werden)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -8662,30 +8657,7 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + auto-correction&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; in popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt; to select highlighted item&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;Automatische Vervollständigung &amp; Schreikorrektur&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;Automatische Vervollständigung&lt;/u&gt;: Popup mit Vorschlägen ab 3 Zeichen&lt;br&gt;
@@ -8696,13 +8668,14 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Strg+R&lt;/code&gt; Aufforderung zur Schreikorrektur erscheint&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Automatische Vervollständigung + automatische Schreikorrektur&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Automatische Vervollständigung + Schreikorrektur&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur manuelle &lt;code&gt;Strg+R&lt;/code&gt; Schreikorrektur&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/Bild↑/Bild↓&lt;/code&gt; im Popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;, um das markierte Element auszuwählen&lt;br&gt;
-        • &lt;code&gt;Strg+Leertaste&lt;/code&gt;: Erzwinge Vorschläge&lt;br&gt;
+        • &lt;code&gt;↑/↓/Bild↑/Bild↓&lt;/code&gt;: Durch Popup navigieren&lt;br&gt;
+        • &lt;code&gt;Eingabetaste&lt;/code&gt;: Auswahl bestätigen&lt;br&gt;
+        • &lt;code&gt;Strg+Leertaste&lt;/code&gt;: Vorschläge erzwingen&lt;br&gt;
+        • &lt;code&gt;Tabulatortaste&lt;/code&gt;: Zuerst anwenden oder Auswahl bestätigen&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -9483,7 +9456,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="../MiscHelpers/Common/FlexError.h" line="21"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
 </context>
 <context>
@@ -10739,20 +10712,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
-        • Pipe (|) separates possible values&lt;br&gt;
-        • Square brackets ([]) indicate default value or optional values&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
         &lt;br&gt;
@@ -10761,8 +10721,11 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;
-        • Pipe (|) trennt mögliche Werte&lt;br&gt;
-        • Eckige Klammern ([]) kennzeichnen Standardwerte oder optionale Werte&lt;br&gt;
+        • &lt;i&gt;Senkrechter Strich&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Trennt alternative Werte&lt;br&gt;
+        • &lt;i&gt;Eckige Klammern&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Kennzeichnen optionale Parameter&lt;br&gt;
+        • &lt;i&gt;Runde Klammern&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Umschließen gültige Optionen&lt;br&gt;
+        • &lt;i&gt;Spitze Klammern&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Kennzeichnen ersetzbare Platzhalter&lt;br&gt;
+        • &lt;i&gt;Werte in Fettschrift&lt;/i&gt; — Stellen Standardwerte dar (können weggelassen werden)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -10789,30 +10752,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + auto-correction&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; in popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt; to select highlighted item&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force suggestions&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         &lt;b&gt;Automatische Vervollständigung &amp; Schreikorrektur&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;Automatische Vervollständigung&lt;/u&gt;: Popup mit Vorschlägen ab 3 Zeichen&lt;br&gt;
@@ -10823,13 +10763,14 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Strg+R&lt;/code&gt; Aufforderung zur Schreikorrektur erscheint&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Automatische Vervollständigung + automatische Schreikorrektur&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Automatische Vervollständigung + Schreikorrektur&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur manuelle &lt;code&gt;Strg+R&lt;/code&gt; Schreikorrektur&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/Bild↑/Bild↓&lt;/code&gt; im Popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;, um das markierte Element auszuwählen&lt;br&gt;
-        • &lt;code&gt;Strg+Leertaste&lt;/code&gt;: Erzwinge Vorschläge&lt;br&gt;
+        • &lt;code&gt;↑/↓/Bild↑/Bild↓&lt;/code&gt;: Durch Popup navigieren&lt;br&gt;
+        • &lt;code&gt;Eingabetaste&lt;/code&gt;: Auswahl bestätigen&lt;br&gt;
+        • &lt;code&gt;Strg+Leertaste&lt;/code&gt;: Vorschläge erzwingen&lt;br&gt;
+        • &lt;code&gt;Tabulatortaste&lt;/code&gt;: Zuerst anwenden oder Auswahl bestätigen&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>

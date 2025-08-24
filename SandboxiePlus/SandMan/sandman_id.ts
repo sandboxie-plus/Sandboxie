@@ -1207,7 +1207,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="714"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1669"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1700"/>
         <source>Removed in version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1218,13 +1218,13 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="716"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1668"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1699"/>
         <source>Renamed in version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="717"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1670"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1701"/>
         <source>Superseded by</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1241,29 +1241,29 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="obsolete">Akses Sumber Daya</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1369"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1406"/>
         <source>Category</source>
         <translation type="unfinished">Kategori</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1370"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1407"/>
         <source>Context</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1371"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1408"/>
         <source>Requirements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1545"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1687"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1576"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1718"/>
         <source>Syntax</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1546"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1683"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1577"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1714"/>
         <source>Description</source>
         <translation type="unfinished">Deskripsi</translation>
     </message>
@@ -2644,12 +2644,12 @@ Silakan pilih folder yang berisi file ini.</translation>
         <translation>Masukkan program:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1471"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1473"/>
         <source>Autocomplete Consent Required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1472"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1474"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
@@ -5818,30 +5818,30 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2543"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2546"/>
         <source>Autocomplete Consent Required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2544"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2547"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2793"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2802"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2796"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2805"/>
         <source>HwId: &lt;a href=&quot;show&quot;&gt;[%1]&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2798"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2801"/>
         <source>HwId: &lt;a href=&quot;hide&quot; style=&quot;text-decoration:none; color:inherit;&quot;&gt;%1&lt;/a&gt; &lt;a href=&quot;copy&quot;&gt;(copy)&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2811"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2814"/>
         <source>Sandboxie-Plus Version: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5868,33 +5868,33 @@ Do you wish to enable autocomplete?</source>
         <translation>Volume tidak terpasang</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2877"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2880"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;%1&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Sertifikat pendukung ini telah kedaluwarsa, silakan &lt;a href=&quot;%1&quot;&gt;dapatkan sertifikat yang diperbarui&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2957"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2960"/>
         <source>&lt;b&gt;You have used %1/%2 evaluation certificates. No more free certificates can be generated.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Anda telah menggunakan %1/%2 sertifikat evaluasi. Tidak ada sertifikat gratis lagi yang dapat dibuat.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2959"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2962"/>
         <source>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Get a free evaluation certificate&lt;/a&gt; and enjoy all premium features for %1 days.&lt;/b&gt;</source>
         <translation>&lt;b&gt;&lt;a href=&quot;_&quot;&gt;Dapatkan sertifikat evaluasi gratis&lt;/a&gt; dan nikmati semua fitur premium selama %1 hari.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2890"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2893"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;%2&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <oldsource>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</oldsource>
         <translation>Sertifikat pendukung ini akan &lt;font color=&apos;red&apos;&gt;kedaluwarsa dalam %1 hari&lt;/font&gt;, silakan &lt;a href=&quot;%2&quot;&gt;dapatkan sertifikat yang diperbarui&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2790"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2793"/>
         <source>Click to reveal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2791"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2794"/>
         <source>Click to hide</source>
         <oldsource>Click to hide
 Right-click to copy</oldsource>
@@ -5905,170 +5905,170 @@ Right-click to copy</oldsource>
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Untuk build saat ini, fitur Plus tetap diaktifkan&lt;/font&gt;, tetapi Anda tidak lagi memiliki akses ke layanan Sandboxie-Live, termasuk pembaruan kompatibilitas dan basis data pemecahan masalah.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2925"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2928"/>
         <source>Expires in: %1 days</source>
         <oldsource>Expires: %1 Days ago</oldsource>
         <translation>Kedaluwarsa dalam: %1 hari</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2929"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2932"/>
         <source>; eligible Patreons can always &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;obtain an updated certificate&lt;/a&gt; from xanasoft.com</source>
         <translation>; Patreon yang memenuhi syarat selalu dapat &lt;a href=&quot;https://xanasoft.com/get-supporter-certificate/&quot;&gt;mendapatkan sertifikat terbaru&lt;/a&gt; dari xanasoft.com</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2941"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2944"/>
         <source>Options: %1</source>
         <translation>Opsi: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2944"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2947"/>
         <source>Security/Privacy Enhanced &amp; App Boxes (SBox): %1</source>
         <translation>Keamanan/Privasi Ditingkatkan &amp; App Boxes (SBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2944"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2945"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2946"/>
         <location filename="Windows/SettingsWindow.cpp" line="2947"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2948"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2949"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2950"/>
         <source>Enabled</source>
         <translation>Diaktifkan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2944"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2945"/>
-        <location filename="Windows/SettingsWindow.cpp" line="2946"/>
         <location filename="Windows/SettingsWindow.cpp" line="2947"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2948"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2949"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2950"/>
         <source>Disabled</source>
         <translation>Dinonaktifkan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2945"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2948"/>
         <source>Encrypted Sandboxes (EBox): %1</source>
         <translation>Sandbox Terenkripsi (EBox): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2946"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2949"/>
         <source>Network Interception (NetI): %1</source>
         <translation>Intersepsi Jaringan (NetI): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2947"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2950"/>
         <source>Sandboxie Desktop (Desk): %1</source>
         <translation>Desktop Sandboxie (Meja): %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2978"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2981"/>
         <source>This does not look like a Sandboxie-Plus Serial Number.&lt;br /&gt;If you have attempted to enter the UpdateKey or the Signature from a certificate, that is not correct, please enter the entire certificate into the text area above instead.</source>
         <translation>Ini tidak tampak seperti Nomor Seri Sandboxie-Plus.&lt;br /&gt;Jika Anda mencoba memasukkan UpdateKey atau Tanda Tangan dari suatu sertifikat, itu tidak benar, silakan masukkan seluruh sertifikat ke dalam area teks di atas.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2985"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2988"/>
         <source>You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.&lt;br /&gt;If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.</source>
         <oldsource>You are attempting to use a feature Upgrade-Key without having entered a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting valid supporter certificate, it is useless without one.&lt;br /&gt;If you want to use the advanced features you need to obtain booth a standard certificate and the feature upgrade key to unlock advanced functionality.</oldsource>
         <translation>Anda mencoba menggunakan fitur Upgrade-Key tanpa memasukkan sertifikat pendukung yang sudah ada sebelumnya. Harap perhatikan bahwa jenis kunci ini (&lt;b&gt;seperti yang dinyatakan dengan jelas dalam huruf tebal di situs web&lt;/b) mengharuskan Anda memiliki sertifikat pendukung yang valid dan sudah ada sebelumnya; tidak ada gunanya tanpa sertifikat tersebut.&lt;br /&gt;Jika Anda ingin menggunakan fitur-fitur tingkat lanjut, Anda perlu memperoleh sertifikat standar dan kunci upgrade fitur untuk membuka fungsionalitas tingkat lanjut.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2991"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2994"/>
         <source>You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. Please note that this type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b) requires you to have a pre-existing valid supporter certificate; it is useless without one.</source>
         <oldsource>You are attempting to use a Renew-Key without having a preexisting supporter certificate. Please note that these type of key (&lt;b&gt;as it is clearly stated in bold on the website&lt;/b&gt;) require you to have a preexisting supporter certificate, it is useless without one.</oldsource>
         <translation>Anda mencoba menggunakan Renew-Key tanpa memasukkan sertifikat pendukung yang sudah ada sebelumnya. Harap perhatikan bahwa jenis kunci ini (&lt;b&gt;seperti yang dinyatakan dengan jelas dalam huruf tebal di situs web&lt;/b) mengharuskan Anda memiliki sertifikat pendukung yang valid dan sudah ada sebelumnya; tidak ada gunanya jika tidak ada sertifikat pendukung.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2996"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2999"/>
         <source>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.&lt;/u&gt;</source>
         <oldsource>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;If you have not read the product description and got this key by mistake, please contact us by email (provided on our website) to resolve this issue.&lt;/u&gt;</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;&lt;u&gt;Jika Anda belum membaca deskripsi produk dan mendapatkan kunci ini secara tidak sengaja, silakan hubungi kami melalui email (yang tertera di situs web kami) untuk menyelesaikan masalah ini.&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3027"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3030"/>
         <source>Sandboxie-Plus - Get EVALUATION Certificate</source>
         <translation>Sandboxie-Plus - Dapatkan Sertifikat EVALUASI</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3027"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3030"/>
         <source>Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.
 You can request up to %3 evaluation certificates for each unique hardware ID.</source>
         <translation>Silakan masukkan alamat email Anda untuk menerima sertifikat evaluasi gratis selama %1 hari, yang akan diterbitkan untuk %2 dan dikunci ke perangkat keras saat ini.
 Anda dapat meminta hingga %3 sertifikat evaluasi untuk setiap ID perangkat keras yang unik.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3053"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3056"/>
         <source>Error retrieving certificate: %1</source>
         <oldsource>Error retriving certificate: %1</oldsource>
         <translation>Kesalahan mengambil sertifikat: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3053"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3056"/>
         <source>Unknown Error (probably a network issue)</source>
         <translation>Kesalahan Tidak Diketahui (mungkin masalah jaringan)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3108"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3111"/>
         <source>Contributor</source>
         <translation>Kontributor</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3110"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3113"/>
         <source>Eternal</source>
         <translation>Abadi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3112"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3115"/>
         <source>Developer</source>
         <translation>Pengembang</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3114"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3117"/>
         <source>Business</source>
         <translation>Bisnis</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3116"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3119"/>
         <source>Personal</source>
         <translation>Pribadi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3118"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3121"/>
         <source>Great Patreon</source>
         <translation>Patreon Hebat</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3120"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3123"/>
         <source>Patreon</source>
         <translation>Patreon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3122"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3125"/>
         <source>Family</source>
         <translation>Keluarga</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3126"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3129"/>
         <source>Evaluation</source>
         <translation>Evaluasi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3128"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3131"/>
         <source>Type %1</source>
         <translation>Ketik %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3158"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3161"/>
         <source>Advanced</source>
         <translation>Lanjutan</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3160"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3163"/>
         <source>Advanced (L)</source>
         <translation>Lanjutan (L)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3162"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3165"/>
         <source>Max Level</source>
         <translation>Tingkat Maksimal</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3164"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3167"/>
         <source>Level %1</source>
         <translation>Tingkat %1</translation>
     </message>
@@ -6083,17 +6083,17 @@ Anda dapat meminta hingga %3 sertifikat evaluasi untuk setiap ID perangkat keras
         <translation>Sertifikat pendukung diperlukan untuk otomatisasi</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3203"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3206"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation>Sertifikat ini sayangnya tidak berlaku untuk build saat ini, Anda perlu mendapatkan sertifikat baru atau menurunkan ke build sebelumnya.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3205"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3208"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation>Meskipun sertifikat ini telah kedaluwarsa, untuk versi yang saat ini terinstal, fitur-fiturnya tetap aktif. Akan tetapi, Anda tidak akan lagi memiliki akses ke layanan Sandboxie-Live, termasuk pembaruan kompatibilitas dan basis data pemecahan masalah daring.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3207"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3210"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation>Sertifikat ini sayangnya telah kedaluwarsa, Anda perlu mendapatkan sertifikat baru.</translation>
     </message>
@@ -6175,39 +6175,39 @@ Anda dapat meminta hingga %3 sertifikat evaluasi untuk setiap ID perangkat keras
         <translation>Silakan masukkan perintah</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2882"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2885"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2960"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2963"/>
         <source>You can request a free %1-day evaluation certificate up to %2 times per hardware ID.</source>
         <translation>Anda dapat meminta sertifikat evaluasi %1 hari gratis hingga %2 kali per ID perangkat keras.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2880"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2883"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Fitur Plus akan dinonaktifkan dalam %1 hari.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2884"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2887"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Fitur Plus tidak lagi diaktifkan.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2927"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2930"/>
         <source>Expired: %1 days ago</source>
         <translation>Kedaluwarsa: %1 hari yang lalu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3011"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3039"/>
-        <location filename="Windows/SettingsWindow.cpp" line="3268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3014"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3042"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3271"/>
         <source>Retrieving certificate...</source>
         <translation>Mengambil sertifikat...</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3124"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3127"/>
         <source>Home</source>
         <translation>Beranda</translation>
     </message>
@@ -6227,34 +6227,34 @@ Anda dapat meminta hingga %3 sertifikat evaluasi untuk setiap ID perangkat keras
         <translation>Atur Jalur Terbuka di Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3186"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3189"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Ini tidak terlihat seperti sertifikat. Silakan masukkan seluruh sertifikat, bukan hanya sebagian.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3211"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3214"/>
         <source>The evaluation certificate has been successfully applied. Enjoy your free trial!</source>
         <translation>Sertifikat evaluasi telah berhasil diterapkan. Nikmati uji coba gratis Anda!</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3214"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3217"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Terima kasih telah mendukung pengembangan Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3216"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3219"/>
         <source>
 This is a temporary Patreon certificate, valid for 3 months. Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.</source>
         <translation>
 Ini adalah sertifikat Patreon sementara, berlaku selama 3 bulan. Setelah mendekati masa kedaluwarsa, Anda dapat memperoleh sertifikat baru secara online yang akan berlaku untuk jangka waktu penuh.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3254"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3257"/>
         <source>A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?</source>
         <translation>Pembaruan keamanan wajib untuk Sertifikat Pendukung Sandboxie-Plus Anda diperlukan. Apakah Anda ingin mengunduh sertifikat yang diperbarui sekarang?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3255"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3258"/>
         <source>Auto update in future</source>
         <translation>Pembaruan otomatis di masa depan</translation>
     </message>
@@ -6371,7 +6371,7 @@ Ini adalah sertifikat Patreon sementara, berlaku selama 3 bulan. Setelah mendeka
         <translation>Apakah Anda benar-benar ingin menghapus template lokal yang dipilih?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2719"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2722"/>
         <source>%1 (Current)</source>
         <translation>%1 (Saat Ini)</translation>
     </message>
@@ -8435,12 +8435,12 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6041"/>
         <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+    &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
@@ -8458,17 +8458,20 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
-        • Pipe (|) separates possible values&lt;br&gt;
-        • Square brackets ([]) indicate default value or optional values&lt;br&gt;
+        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
+        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
+        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
+        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
+        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6127"/>
+        <location filename="Forms/OptionsWindow.ui" line="6129"/>
         <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+    &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
@@ -8479,7 +8482,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
@@ -8491,7 +8494,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6150"/>
+        <location filename="Forms/OptionsWindow.ui" line="6152"/>
         <source>Complete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8502,7 +8505,22 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6069"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
+        <source>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed setting (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed setting (no longer available)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future setting (unavailable)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown setting&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known setting&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known settings are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
 &lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
@@ -8514,11 +8532,11 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
 &lt;/table&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</source>
+&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6084"/>
+        <location filename="Forms/OptionsWindow.ui" line="6086"/>
         <source>Validate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9508,12 +9526,12 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Edit Bagian ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6094"/>
+        <location filename="Forms/OptionsWindow.ui" line="6096"/>
         <source>Edit ini</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6107"/>
+        <location filename="Forms/OptionsWindow.ui" line="6109"/>
         <source>Cancel</source>
         <translation>Batal</translation>
     </message>
@@ -10694,14 +10712,14 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         <translation>Di masa depan, jangan periksa kompatibilitas perangkat lunak</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3186"/>
+        <location filename="Forms/SettingsWindow.ui" line="3188"/>
         <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+    &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
@@ -10711,25 +10729,12 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Syntax helpers:&lt;/b&gt;&lt;br&gt;
-        • Pipe (|) separates possible values&lt;br&gt;
-        • Square brackets ([]) indicate default value or optional values&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3221"/>
+        <location filename="Forms/SettingsWindow.ui" line="3223"/>
         <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+    &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
@@ -10740,7 +10745,7 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
@@ -10752,17 +10757,17 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3244"/>
+        <location filename="Forms/SettingsWindow.ui" line="3246"/>
         <source>Complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3204"/>
+        <location filename="Forms/SettingsWindow.ui" line="3206"/>
         <source>Tooltips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3133"/>
+        <location filename="Forms/SettingsWindow.ui" line="3135"/>
         <source>Validate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10813,21 +10818,23 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3118"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
+        <source>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed setting (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed setting (no longer available)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future setting (unavailable)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown setting&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known setting&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known settings are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
 &lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;When checked, INI keys are validated and highlighted according to the SbieSettings file. Uncheck to disable validation and highlighting.&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
   &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
@@ -10842,17 +10849,17 @@ Tidak seperti saluran pratinjau, saluran ini tidak menyertakan perubahan yang be
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3146"/>
+        <location filename="Forms/SettingsWindow.ui" line="3148"/>
         <source>Save</source>
         <translation>Simpan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3153"/>
+        <location filename="Forms/SettingsWindow.ui" line="3155"/>
         <source>Edit ini</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="3166"/>
+        <location filename="Forms/SettingsWindow.ui" line="3168"/>
         <source>Cancel</source>
         <translation>Batal</translation>
     </message>

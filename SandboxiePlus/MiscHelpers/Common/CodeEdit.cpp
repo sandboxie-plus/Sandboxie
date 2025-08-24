@@ -386,7 +386,7 @@ void CCodeEdit::ShowCaseCorrection(const QString& wrongWord, const QString& corr
 	ScheduleWithDelay(50, [this, correctWord, context]() {
 		QPoint globalPos = m_pSourceCode->mapToGlobal(m_pSourceCode->cursorRect(context.cursor).bottomLeft());
 		QString tooltipText = tr("Did you mean: %1? (Press Ctrl+R to replace)").arg(correctWord);
-		tooltipText = "<span style='color:#333; white-space:nowrap;'>" + tooltipText + "</span>";
+		tooltipText = "<span style='white-space:nowrap;'>" + tooltipText + "</span>";
 		QToolTip::showText(globalPos, tooltipText, m_pSourceCode, QRect(), 5000);
 		}, "ShowCaseCorrectionTooltip");
 }

@@ -9605,13 +9605,13 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         설정 위에 마우스를 올리면 자세한 도구 설명이 표시됩니다.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 전체 세부 사항 (버전, 구문, 설명 등)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 필수 정보만&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 필수 정보만&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;구문 도우미:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;파이프&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 대체 값 구분&lt;br&gt;
@@ -9645,7 +9645,27 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 팝업 표시&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;로 선택&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 확인.&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;수동 수정&lt;/u&gt;: setting= 입력 후&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키로 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 수동은 &lt;code&gt;Ctrl+R&lt;/code&gt;로 보정만 가능&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: 선택 항목 확인&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 제안 항목 강제 열기&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: 먼저 적용 또는 선택 항목 확인&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;
@@ -9780,19 +9800,21 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;활성화하면 INI 파일을 기반으로 키 이름이 확인되고 강조 표시됩니다. 확인 및 강조 표시를 비활성화하려면 끄세요.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;검정 텍스트, 노란색 배경, 기울임꼴&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 이름이 변경된 키 (이전 이름 - 유효하지 않음)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;흰색 텍스트, 검은색 배경, 취소선&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 제거된 키 (더 이상 사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;진한 청록색 텍스트, 흰색 배경&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 향후 키 (사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;빨간색 맞춤법 검사 밑줄&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하지 않거나 알 수 없는 키&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;진한/연한 빨간색 텍스트&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하거나 알려진 키&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: 이 버전에서는 유효하거나 알려진 키만 작동합니다. 그러나 전역 또는 박스별 유효성 검사는 수행되지 않습니다. 일부 설정은 유효해 보이지만 모든 상황에서 작동하지 않을 수 있습니다.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;활성화하면 INI 파일을 기반으로 키 이름이 확인되고 강조 표시됩니다. 확인 및 강조 표시를 비활성화하려면 끄세요.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;검정 텍스트, 노란색 배경, 기울임꼴&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 이름이 변경된 키 (이전 이름 - 유효하지 않음)&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;흰색 텍스트, 검은색 배경, 취소선&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 제거된 키 (더 이상 사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;진한 청록색 텍스트, 흰색 배경&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 향후 키 (사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;빨간색 맞춤법 검사 밑줄&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하지 않거나 알 수 없는 키&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;진한/연한 빨간색 텍스트&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하거나 알려진 키&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: 이 버전에서는 유효하거나 알려진 키만 작동합니다. 그러나 전역 또는 박스별 유효성 검사는 수행되지 않습니다. 일부 설정은 유효해 보이지만 모든 상황에서 작동하지 않을 수 있습니다.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6086"/>
@@ -11382,13 +11404,13 @@ Please note that this values are currently user specific and saved globally for 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body style=&quot;color: #333;&quot;&gt;
         설정 위에 마우스를 올리면 자세한 도구 설명이 표시됩니다.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 전체 세부 사항 (버전, 구문, 설명 등)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 필수 정보만&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 필수 정보만&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;구문 도우미:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;파이프&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 대체 값 구분&lt;br&gt;
@@ -11422,7 +11444,27 @@ Please note that this values are currently user specific and saved globally for 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;
+    &lt;body style=&quot;color: #333;&quot;&gt;
+        &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 팝업 표시&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;로 선택&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 확인.&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;수동 수정&lt;/u&gt;: setting= 입력 후&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키로 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 수동은 &lt;code&gt;Ctrl+R&lt;/code&gt;로 보정만 가능&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: 선택 항목 확인&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 제안 항목 강제 열기&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: 먼저 적용 또는 선택 항목 확인&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;
@@ -12023,19 +12065,21 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;활성화하면 INI 파일을 기반으로 키 이름이 확인되고 강조 표시됩니다. 확인 및 강조 표시를 비활성화하려면 끄세요.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;검정 텍스트, 노란색 배경, 기울임꼴&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 이름이 변경된 키 (이전 이름 - 유효하지 않음)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;흰색 텍스트, 검은색 배경, 취소선&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 제거된 키 (더 이상 사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;진한 청록색 텍스트, 흰색 배경&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 향후 키 (사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;빨간색 맞춤법 검사 밑줄&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하지 않거나 알 수 없는 키&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;진한/연한 빨간색 텍스트&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하거나 알려진 키&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: 이 버전에서는 유효하거나 알려진 키만 작동합니다. 그러나 전역 또는 박스별 유효성 검사는 수행되지 않습니다. 일부 설정은 유효해 보이지만 모든 상황에서 작동하지 않을 수 있습니다.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;활성화하면 INI 파일을 기반으로 키 이름이 확인되고 강조 표시됩니다. 확인 및 강조 표시를 비활성화하려면 끄세요.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;검정 텍스트, 노란색 배경, 기울임꼴&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 이름이 변경된 키 (이전 이름 - 유효하지 않음)&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;흰색 텍스트, 검은색 배경, 취소선&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 제거된 키 (더 이상 사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;진한 청록색 텍스트, 흰색 배경&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 향후 키 (사용할 수 없음)&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;빨간색 맞춤법 검사 밑줄&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하지 않거나 알 수 없는 키&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;진한/연한 빨간색 텍스트&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 유효하거나 알려진 키&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: 이 버전에서는 유효하거나 알려진 키만 작동합니다. 그러나 전역 또는 박스별 유효성 검사는 수행되지 않습니다. 일부 설정은 유효해 보이지만 모든 상황에서 작동하지 않을 수 있습니다.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3148"/>

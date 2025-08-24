@@ -8617,29 +8617,13 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
-        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
-        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
-        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
-        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Alle Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;Senkrechter Strich&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Trennt alternative Werte&lt;br&gt;
@@ -8673,32 +8657,8 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
-       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         &lt;b&gt;Automatische Vervollständigung &amp; Schreikorrektur&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;Automatische Vervollständigung&lt;/u&gt;: Popup mit Vorschlägen ab 3 Zeichen&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Aus Popup auswählen, um mit der korrekten Schreibung &lt;u&gt;automatisch einzusetzen&lt;/u&gt;&lt;br&gt;
@@ -8709,7 +8669,7 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         &lt;br&gt;
         &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Automatische Vervollständigung + Schreikorrektur&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur manuelle &lt;code&gt;Strg+R&lt;/code&gt; Schreikorrektur&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur manuelle &lt;code&gt;Strg+R&lt;/code&gt; Schreikorrektur&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/Bild↑/Bild↓&lt;/code&gt;: Durch Popup navigieren&lt;br&gt;
@@ -8746,32 +8706,21 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known settings are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
-&lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
-&lt;p&gt;Wenn diese Option aktiviert ist, werden die Schlüsselnamen basierend auf der INI-Datei überprüft und hervorgehoben.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weiß auf Schwarz, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dunkelblaugrün auf Weiß&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rot unterstrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkelrot/Hellrot&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;Wenn diese Option aktiviert ist, werden die Einstellungen basierend auf der INI-Datei überprüft und hervorgehoben.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannte Einstellung (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weiß auf Schwarz, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Entfernte Einstellung (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dunkelblaugrün auf Weiß&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftige Einstellung (noch nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rot unterstrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültige/unbekannte Einstellung&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkelrot/Hellrot&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültige/bekannte Einstellung&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Einstellungen sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Einstellungen können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6086"/>
@@ -9757,32 +9706,21 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known settings are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
-&lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
-&lt;p&gt;Wenn diese Option aktiviert ist, werden die Schlüsselnamen basierend auf der INI-Datei überprüft und hervorgehoben.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannter Schlüssel (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weiß auf Schwarz, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Schlüssel entfernt (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dunkelblaugrün auf Weiß&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftiger Schlüssel (nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rot unterstrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültiger/unbekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkelrot/Hellrot&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültiger/bekannter Schlüssel&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Schlüssel sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Schlüssel können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;Wenn diese Option aktiviert ist, werden die Einstellungen basierend auf der INI-Datei überprüft und hervorgehoben.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Schwarz auf Gelb, kursiv&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Umbenannte Einstellung (alter Name - ungültig)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;Weiß auf Schwarz, durchgestrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Entfernte Einstellung (nicht mehr verfügbar)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dunkelblaugrün auf Weiß&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Zukünftige Einstellung (noch nicht verfügbar)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Rot unterstrichen&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Ungültige/unbekannte Einstellung&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dunkelrot/Hellrot&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Gültige/bekannte Einstellung&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Hinweis&lt;/span&gt;: Nur gültige/bekannte Einstellungen sind in dieser Version funktionsfähig. Allerdings wird keine globale oder boxspezifische Validierung durchgeführt. Manche Einstellungen können daher gültig erscheinen, funktionieren aber möglicherweise nicht in jedem Kontext.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3148"/>
@@ -10782,13 +10720,13 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Alle Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;Senkrechter Strich&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Trennt alternative Werte&lt;br&gt;
@@ -10822,66 +10760,8 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
-        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
-        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
-        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
-        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Alle Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;Senkrechter Strich&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Trennt alternative Werte&lt;br&gt;
-        • &lt;i&gt;Eckige Klammern&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Kennzeichnen optionale Parameter&lt;br&gt;
-        • &lt;i&gt;Runde Klammern&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Umschließen gültige Optionen&lt;br&gt;
-        • &lt;i&gt;Spitze Klammern&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Kennzeichnen ersetzbare Platzhalter&lt;br&gt;
-        • &lt;i&gt;Werte in Fettschrift&lt;/i&gt; — Stellen Standardwerte dar (können weggelassen werden)&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
-       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         &lt;b&gt;Automatische Vervollständigung &amp; Schreikorrektur&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;Automatische Vervollständigung&lt;/u&gt;: Popup mit Vorschlägen ab 3 Zeichen&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Aus Popup auswählen, um mit der korrekten Schreibung &lt;u&gt;automatisch einzusetzen&lt;/u&gt;&lt;br&gt;
@@ -10892,7 +10772,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         &lt;br&gt;
         &lt;b&gt;Arten:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Automatische Vervollständigung + Schreikorrektur&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur manuelle &lt;code&gt;Strg+R&lt;/code&gt; Schreikorrektur&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur manuelle &lt;code&gt;Strg+R&lt;/code&gt; Schreikorrektur&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/Bild↑/Bild↓&lt;/code&gt;: Durch Popup navigieren&lt;br&gt;

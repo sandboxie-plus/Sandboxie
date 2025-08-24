@@ -404,22 +404,23 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
         m_enableValidation = false; // Disable validation if loading fails
     }
 
-    // Update UI based on whether settings loaded successfully - single conditional check
-    UpdateCheckboxesOnAllTopLevels({QStringLiteral("chkValidateIniKeys"), QStringLiteral("chkEnableTooltips")}, [this](QCheckBox* box) {
-        if (box->objectName() == QLatin1String("chkValidateIniKeys")) {
-            if (settingsLoaded) {
-                box->setEnabled(true);
-                box->setTristate(false);
-            } else {
-                box->setTristate(true);
-                box->setCheckState(Qt::PartiallyChecked); // Use PartiallyChecked for "Failed"
-                box->setText(tr("Validate (Failed)"));
-                box->setEnabled(false);
-            }
-        } else if (box->objectName() == QLatin1String("chkEnableTooltips")) {
-            box->setEnabled(settingsLoaded);
-        }
-    });
+    // Update UI based on whether settings loaded successfully
+	UpdateCheckboxesOnAllTopLevels({
+	QStringLiteral("chkValidateIniKeys"),
+	QStringLiteral("chkEnableTooltips"),
+	QStringLiteral("chkEnableAutoCompletion")
+		}, [this](QCheckBox* box) {
+			const QString& objName = box->objectName();
+			if (settingsLoaded) {
+				box->setEnabled(true);
+			}
+			else {
+				box->setEnabled(false);
+				if (objName == QLatin1String("chkValidateIniKeys")) {
+					box->setText(tr("Validate (Failed)"));
+				}
+			}
+		});
 
     if (!settingsLoaded) {
         return;

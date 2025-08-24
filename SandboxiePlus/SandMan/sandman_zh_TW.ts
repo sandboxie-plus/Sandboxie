@@ -969,7 +969,7 @@ Error: %1</source>
     <message>
         <location filename="../MiscHelpers/Common/CheckableMessageBox.cpp" line="52"/>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>不再詢問</translation>
     </message>
 </context>
 <context>
@@ -986,17 +986,17 @@ Error: %1</source>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="42"/>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">尋找</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="47"/>
         <source>FindNext</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">尋找下一个</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="57"/>
         <source>GoTo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">轉到</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="388"/>
@@ -1011,12 +1011,17 @@ Error: %1</source>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F3：尋找下一個
++ Shift： 向後
++ Ctrl： 區分大小寫
++ Alt： 全字匹配
+
+尋找字串:</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="923"/>
         <source>Go to Line:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">轉到行:</translation>
     </message>
 </context>
 <context>
@@ -1360,29 +1365,29 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="416"/>
         <source>Validate (Failed)</source>
-        <translation type="unfinished"></translation>
+        <translation>配置校驗 (失敗)</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="713"/>
         <source>Added in version</source>
-        <translation type="unfinished">引入於版本</translation>
+        <translation>引入於版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="714"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1700"/>
         <source>Removed in version</source>
-        <translation type="unfinished">移除於版本</translation>
+        <translation>移除於版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="715"/>
         <source>Re-added in version</source>
-        <translation type="unfinished">重新引入於版本</translation>
+        <translation>重新引入於版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="716"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1699"/>
         <source>Renamed in version</source>
-        <translation type="unfinished">重命名於版本</translation>
+        <translation>重命名於版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="717"/>
@@ -1446,7 +1451,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1407"/>
         <source>Context</source>
-        <translation type="unfinished">上下文</translation>
+        <translation>上下文</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1408"/>
@@ -1457,7 +1462,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Helpers/IniHighlighter.cpp" line="1576"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1718"/>
         <source>Syntax</source>
-        <translation type="unfinished">句法</translation>
+        <translation>句法</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1577"/>
@@ -2959,14 +2964,16 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1473"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>需要同意啓用自動完成</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1474"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您對自動完成彈出視窗中顯示的設定不確定，我們強烈建議您在繼續操作之前先查閱軟體的說明文件或原始碼。在沒有正確瞭解的情況下啟用此功能，可能會導致意想不到的後果，您必須自行負責。
+
+您希望啟用自動完成功能嗎？</translation>
     </message>
 </context>
 <context>
@@ -2974,7 +2981,7 @@ Do you wish to enable autocomplete?</source>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
         <source>Any File (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">任何檔案 (*.*)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
@@ -6255,7 +6262,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2885"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;對於目前版本，Plus 功能仍然啟用&lt;/font&gt;，但您無法再存取 Sandboxie-Live 服務，包括相容性更新和疑難排解資料庫。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2932"/>
@@ -6814,14 +6821,15 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2546"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>需要同意啓用自動完成</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2547"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您對自動完成彈出窗口中顯示的設置不確定，我們強烈建議在繼續之前查閱軟件的文檔或源代碼。未經適當理解啟用此功能可能會導致意想不到的後果，您將對此負全責。
+您是否希望啟用自動完成？</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2722"/>
@@ -7122,7 +7130,7 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
         <oldsource>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
-        <translation type="unfinished">
+        <translation>
 該沙箱中的內容將在其關閉後被廢棄，僅適合暫存的臨時資料。</translation>
     </message>
     <message>
@@ -9905,7 +9913,22 @@ instead of &quot;*&quot;.</source>
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;
+    &lt;body&gt;
+        懸停在設置上時顯示詳細的工具提示。&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;：完整詳細信息（版本、語法、描述等）&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;：僅顯示基本信息&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;語法幫助：&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
+        • &lt;i&gt;方括號&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可選參數&lt;br&gt;
+        • &lt;i&gt;圓括號&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效選項&lt;br&gt;
+        • &lt;i&gt;尖括號&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替換的佔位符&lt;br&gt;
+        • &lt;i&gt;粗體值&lt;/i&gt; — 代表默認值（可以省略）&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6129"/>
@@ -9930,12 +9953,32 @@ instead of &quot;*&quot;.</source>
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;自動完成 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;自動完成&lt;/u&gt;：在輸入3個或以上字符時彈出建議&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 從彈出窗口中選擇以&lt;u&gt;自動應用&lt;/u&gt;正確的大小寫&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt;確認選擇&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;手動修正&lt;/u&gt;：在輸入設定後=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt;提示出現以進行大小寫修正&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;：自動完成 + 大小寫修正&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;：僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;導航：&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;：在彈出窗口中移動&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;：確認選擇&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;：強制打開建議&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;：應用第一個或確認選擇&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6152"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>完成</translation>
     </message>
     <message>
         <source>Show detailed information tooltips when hovering over configuration settings.
@@ -10194,7 +10237,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="../MiscHelpers/Common/FlexError.h" line="21"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>錯誤</translation>
     </message>
 </context>
 <context>
@@ -11378,7 +11421,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;
+    &lt;body&gt;
+        懸停在設置上時顯示詳細的工具提示。&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;：完整詳細信息（版本、語法、描述等）&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;：僅顯示基本信息&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;語法幫助：&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
+        • &lt;i&gt;方括號&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可選參數&lt;br&gt;
+        • &lt;i&gt;圓括號&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效選項&lt;br&gt;
+        • &lt;i&gt;尖括號&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替換的佔位符&lt;br&gt;
+        • &lt;i&gt;粗體值&lt;/i&gt; — 代表默認值（可以省略）&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3223"/>
@@ -11403,12 +11461,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;自動完成 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;自動完成&lt;/u&gt;：在輸入3個或以上字符時彈出建議&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 從彈出窗口中選擇以&lt;u&gt;自動應用&lt;/u&gt;正確的大小寫&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt;確認選擇&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;手動修正&lt;/u&gt;：在輸入設定後=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt;提示出現以進行大小寫修正&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;：自動完成 + 大小寫修正&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;：僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;導航：&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;：在彈出窗口中移動&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;：確認選擇&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;：強制打開建議&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;：應用第一個或確認選擇&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3246"/>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>完成</translation>
     </message>
     <message>
         <source>Show detailed information tooltips when hovering over configuration settings.

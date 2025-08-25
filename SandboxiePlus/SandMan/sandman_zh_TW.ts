@@ -1363,35 +1363,35 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIniHighlighter</name>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="416"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="420"/>
         <source>Validate (Failed)</source>
         <translation>配置校驗 (失敗)</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="713"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="714"/>
         <source>Added in version</source>
         <translation>引入於版本</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="714"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1700"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="715"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1701"/>
         <source>Removed in version</source>
         <translation>移除於版本</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="715"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="716"/>
         <source>Re-added in version</source>
         <translation>重新引入於版本</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="716"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1699"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="717"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1700"/>
         <source>Renamed in version</source>
         <translation>重命名於版本</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="717"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1701"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="718"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1702"/>
         <source>Superseded by</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1436,7 +1436,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="obsolete">其他</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1406"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1407"/>
         <source>Category</source>
         <translation>類別</translation>
     </message>
@@ -1449,24 +1449,24 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="obsolete">用戶設定</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1407"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1408"/>
         <source>Context</source>
         <translation>上下文</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1408"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1409"/>
         <source>Requirements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1576"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1718"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1577"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1719"/>
         <source>Syntax</source>
         <translation>句法</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1577"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1714"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1578"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1715"/>
         <source>Description</source>
         <translation>說明</translation>
     </message>

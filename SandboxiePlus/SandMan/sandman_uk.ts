@@ -1200,35 +1200,35 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIniHighlighter</name>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="416"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="420"/>
         <source>Validate (Failed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="713"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="714"/>
         <source>Added in version</source>
         <translation>Додано у версії</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="714"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1700"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="715"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1701"/>
         <source>Removed in version</source>
         <translation>Видалено у версії</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="715"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="716"/>
         <source>Re-added in version</source>
         <translation>Повторно додано у версії</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="716"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1699"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="717"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1700"/>
         <source>Renamed in version</source>
         <translation>Перейменовано у версії</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="717"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1701"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="718"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1702"/>
         <source>Superseded by</source>
         <translation>Замінено на</translation>
     </message>
@@ -1245,29 +1245,29 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="obsolete">Доступ до ресурсів</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1406"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1407"/>
         <source>Category</source>
         <translation>Категорія</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1407"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1408"/>
         <source>Context</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1408"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1409"/>
         <source>Requirements</source>
         <translation>Вимоши</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1576"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1718"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1577"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1719"/>
         <source>Syntax</source>
         <translation>Синтакс</translation>
     </message>
     <message>
-        <location filename="Helpers/IniHighlighter.cpp" line="1577"/>
-        <location filename="Helpers/IniHighlighter.cpp" line="1714"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1578"/>
+        <location filename="Helpers/IniHighlighter.cpp" line="1715"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>

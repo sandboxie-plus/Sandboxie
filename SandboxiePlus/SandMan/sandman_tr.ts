@@ -921,13 +921,6 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
     </message>
 </context>
 <context>
-    <name>CExitDialog</name>
-    <message>
-        <source>Yes (%1)</source>
-        <translation type="vanished">Evet (%1)</translation>
-    </message>
-</context>
-<context>
     <name>CExtractDialog</name>
     <message>
         <location filename="Windows/ExtractDialog.cpp" line="23"/>
@@ -1214,33 +1207,9 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <translation>Yerine geçen</translation>
     </message>
     <message>
-        <source>Advanced</source>
-        <translation type="obsolete">Gelişmiş</translation>
-    </message>
-    <message>
-        <source>Debug</source>
-        <translation type="obsolete">Hata Ayıklama</translation>
-    </message>
-    <message>
-        <source>Program Control</source>
-        <translation type="obsolete">Program Denetimi</translation>
-    </message>
-    <message>
-        <source>Resource Access</source>
-        <translation type="obsolete">Kaynak Erişimi</translation>
-    </message>
-    <message>
-        <source>Template</source>
-        <translation type="obsolete">Şablon</translation>
-    </message>
-    <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1407"/>
         <source>Category</source>
         <translation>Kategori</translation>
-    </message>
-    <message>
-        <source>Global</source>
-        <translation type="obsolete">Genel</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1408"/>
@@ -1413,13 +1382,6 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
         <translation>Aşağı Taşı</translation>
-    </message>
-</context>
-<context>
-    <name>CKbpsEdit</name>
-    <message>
-        <source>Unlimited</source>
-        <translation type="vanished">Sınırsız</translation>
     </message>
 </context>
 <context>
@@ -2002,9 +1964,9 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation>Eğer otomatik tamamlama penceresinde görüntülenen ayarlarla ilgili emin değilseniz, bu özellik hakkında işlem yapmadan önce yazılımın dokümantasyonunu veya kaynak kodunu incelemenizi şiddetle tavsiye ederiz. Bu özelliği, doğru bir anlayışa sahip olmadan etkinleştirmeniz, istenmeyen sonuçlara yol açabilir ve bu durumdan yalnızca siz sorumlu olursunuz.
+        <translation>Otomatik tamamlama özelliğini etkinleştirmeden önce, ayarlar hakkında yeterli bilgiye sahip olmadığınızı düşünüyorsanız, yazılımın dokümantasyonuna veya kaynak koduna başvurmanızı öneririz. Bu özelliği etkinleştirmeniz durumunda oluşabilecek tüm sonuçlar ve sorumluluklar size aittir.
 
-Otomatik tamamlama özelliğini etkinleştirmek ister misiniz?</translation>
+Otomatik tamamlama özelliğini etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>
@@ -2895,13 +2857,6 @@ Dosyayı yazan: %3</translation>
 Full path: %4</source>
         <translation>%1 boyutundaki dosya %2 korumalı alanına taşınıyor, %3 kaldı.
 Tam yol: %4</translation>
-    </message>
-</context>
-<context>
-    <name>CProgressDialog</name>
-    <message>
-        <source>Close (%1)</source>
-        <translation type="vanished">Kapat (%1)</translation>
     </message>
 </context>
 <context>
@@ -5750,9 +5705,9 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation>Eğer otomatik tamamlama penceresinde görüntülenen ayarlarla ilgili emin değilseniz, bu özellik hakkında işlem yapmadan önce yazılımın dokümantasyonunu veya kaynak kodunu incelemenizi şiddetle tavsiye ederiz. Bu özelliği, doğru bir anlayışa sahip olmadan etkinleştirmeniz, istenmeyen sonuçlara yol açabilir ve bu durumdan yalnızca siz sorumlu olursunuz.
+        <translation>Otomatik tamamlama özelliğini etkinleştirmeden önce, ayarlar hakkında yeterli bilgiye sahip olmadığınızı düşünüyorsanız, yazılımın dokümantasyonuna veya kaynak koduna başvurmanızı öneririz. Bu özelliği etkinleştirmeniz durumunda oluşabilecek tüm sonuçlar ve sorumluluklar size aittir.
 
-Otomatik tamamlama özelliğini etkinleştirmek ister misiniz?</translation>
+Otomatik tamamlama özelliğini etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2793"/>
@@ -7510,29 +7465,13 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
-        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
-        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
-        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
-        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         Ayarların üzerine gelindiğinde detaylı ipuçları görüntülenir.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;İpucu Modları:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Tam detaylar (sürümler, sözdizimi, açıklama ve daha fazlası)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi İşaretli&lt;/span&gt;: Sadece temel bilgiler&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Kısmi İşaretli&lt;/span&gt;: Sadece temel bilgiler&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Söz Dizimi Yardımcıları:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Alternatif değerleri ayırır&lt;br&gt;
@@ -7560,21 +7499,8 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known settings are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
-&lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         &lt;p&gt;Etkinleştirildiğinde, ayarlar INI dosyasındaki verilere göre kontrol edilir ve vurgulanır. Kontrol ve vurgulamayı devre dışı bırakmak için işareti kaldırın.&lt;/p&gt;
         &lt;br/&gt;
         &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
@@ -8687,32 +8613,8 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
-       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         &lt;b&gt;Otomatik Tamamlama ve Büyük/Küçük Harf Düzeltmesi&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;Otomatik Tamamlama&lt;/u&gt;: 3+ karakterde öneri penceresi açılır&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Pencereden seçim yaparak &lt;u&gt;otomatik tamamlama&lt;/u&gt; ve doğru büyük/küçük harf kullanımı sağlanır&lt;br&gt;
@@ -8723,7 +8625,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         &lt;br&gt;
         &lt;b&gt;Tamamlama Modları:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Otomatik Tamamlama + Büyük/Küçük Harf Düzeltme&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi işaretli&lt;/span&gt;: Sadece elle &lt;code&gt;Ctrl+R&lt;/code&gt; düzeltmesi&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Kısmi işaretli&lt;/span&gt;: Sadece elle &lt;code&gt;Ctrl+R&lt;/code&gt; düzeltmesi&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Gezinme Tuşları:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Pencerede gezinme&lt;br&gt;
@@ -10745,13 +10647,13 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         Ayarların üzerine gelindiğinde detaylı ipuçları görüntülenir.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;İpucu Modları:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Tam detaylar (sürümler, sözdizimi, açıklama ve daha fazlası)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi İşaretli&lt;/span&gt;: Sadece temel bilgiler&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Kısmi İşaretli&lt;/span&gt;: Sadece temel bilgiler&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Söz Dizimi Yardımcıları:&lt;/b&gt;&lt;br&gt;
         • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Alternatif değerleri ayırır&lt;br&gt;
@@ -10785,66 +10687,8 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Displays detailed tooltips when hovering over settings.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Full details (versions, syntax, description and more)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Essential information only&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Syntax Helpers:&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Separates alternative values&lt;br&gt;
-        • &lt;i&gt;Square brackets&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — Denote optional parameters&lt;br&gt;
-        • &lt;i&gt;Parentheses&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Enclose valid options&lt;br&gt;
-        • &lt;i&gt;Angle brackets&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Indicate replaceable placeholders&lt;br&gt;
-        • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        Ayarların üzerine gelindiğinde detaylı ipuçları görüntülenir.&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;İpucu Modları:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Tam detaylar (sürümler, sözdizimi, açıklama ve daha fazlası)&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi İşaretli&lt;/span&gt;: Sadece temel bilgiler&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Söz Dizimi Yardımcıları:&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;Pipe&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — Alternatif değerleri ayırır&lt;br&gt;
-        • &lt;i&gt;Kare parantezler&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — İsteğe bağlı parametreleri belirtir&lt;br&gt;
-        • &lt;i&gt;Parantezler&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — Geçerli seçenekleri kapsar&lt;br&gt;
-        • &lt;i&gt;Açı parantezleri&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — Değiştirilebilir yer tutucuları belirtir&lt;br&gt;
-        • &lt;i&gt;Kalın değerler&lt;/i&gt; — Varsayılanları temsil eder (opsiyoneldir)&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
-       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         &lt;b&gt;Otomatik Tamamlama ve Büyük/Küçük Harf Düzeltmesi&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;Otomatik Tamamlama&lt;/u&gt;: 3+ karakterde öneri penceresi açılır&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Pencereden seçim yaparak &lt;u&gt;otomatik tamamlama&lt;/u&gt; ve doğru büyük/küçük harf kullanımı sağlanır&lt;br&gt;
@@ -10855,7 +10699,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         &lt;br&gt;
         &lt;b&gt;Tamamlama Modları:&lt;/b&gt;&lt;br&gt;
         ✓ &lt;span style=&quot;color: #009900;&quot;&gt;İşaretli&lt;/span&gt;: Otomatik Tamamlama + Büyük/Küçük Harf Düzeltme&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #FF8000;&quot;&gt;Kısmi işaretli&lt;/span&gt;: Sadece elle &lt;code&gt;Ctrl+R&lt;/code&gt; düzeltmesi&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Kısmi işaretli&lt;/span&gt;: Sadece elle &lt;code&gt;Ctrl+R&lt;/code&gt; düzeltmesi&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Gezinme Tuşları:&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Pencerede gezinme&lt;br&gt;
@@ -10922,21 +10766,8 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known settings are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body style=&quot;color: #333;&quot;&gt;
-&lt;p&gt;When enabled, key names will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
-&lt;br/&gt;
-&lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed key (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed key (no longer available)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future key (unavailable)&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown key&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known key&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
+        <translation>&lt;html&gt;
+    &lt;body&gt;
         &lt;p&gt;Etkinleştirildiğinde, ayarlar INI dosyasındaki verilere göre kontrol edilir ve vurgulanır. Kontrol ve vurgulamayı devre dışı bırakmak için işareti kaldırın.&lt;/p&gt;
         &lt;br/&gt;
         &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;

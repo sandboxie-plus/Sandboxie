@@ -264,7 +264,7 @@
     </message>
     <message>
         <source>Prevents the sandboxed window from being captured.</source>
-        <translation type="vanished">阻止沙箱化窗口被捕获图像。</translation>
+        <translation type="vanished">阻止捕获沙箱化窗口的图像。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
@@ -274,7 +274,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="905"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation>这个功能可能造成用户体验下降，因为它也阻止正常的屏幕截图。</translation>
+        <translation>此功能可能造成用户体验下降，因为它同时阻止正常的屏幕截图。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
@@ -426,7 +426,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
         <oldsource>Downloaded troubleshooting instructions are currupted!</oldsource>
-        <translation type="vanished">下载的故障排除说明已损坏！</translation>
+        <translation>下载的故障排除指导损坏了！</translation>
     </message>
     <message>
         <source>Fatal error, failed to load troubleshooting instructions!</source>
@@ -488,12 +488,12 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation>输入磁盘映像加密密码以导出映像备份：</translation>
+        <translation>输入磁盘映像密码以导出映像备份：</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation>输入磁盘映像加密密码以导入映像备份：</translation>
+        <translation>输入磁盘映像密码以导入映像备份：</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
@@ -511,7 +511,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
         <translation>警告：短密码非常容易被暴力破解！
-        推荐使用长度至少为 20 字符以上的密码。或者，您仍要使用短密码吗？</translation>
+        推荐使用至少包含 20 字符的密码。或者，您仍要使用短密码吗？</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="150"/>
@@ -583,8 +583,8 @@ The entire user profile remains hidden, ensuring maximum security.</source>
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories.
 The entire user profile remains hidden, ensuring maximum security.</oldsource>
         <translation>该沙箱类型提供了最高级别的保护，能显著减少暴露于沙箱内进程的攻击面。
-它严格限制对用户数据的访问，该沙箱中的进程只能访问 C:\Windows 和两个 C:\Program Files 目录。
-所有用户资料被完全隐藏，从而确保了最大程度的安全性。</translation>
+它严格限制对用户数据的访问，该沙箱中的进程只能访问 C:\Windows 和 C:\Program Files 两个目录。
+所有用户资料被完全隐藏，确保了它们最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>
@@ -594,7 +594,7 @@ The entire user profile remains hidden, ensuring maximum security.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="405"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
-        <translation>该沙箱类型提供了最高级别的保护，能显著减少暴露于沙箱内进程的攻击面。</translation>
+        <translation>该沙箱类型大大减少暴露于沙箱内进程的攻击面，提供最高级别的保护。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="406"/>
@@ -607,7 +607,8 @@ The entire user profile remains hidden, ensuring maximum security.</oldsource>
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
         <oldsource>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such,
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</oldsource>
-        <translation>在该沙箱类型中，任何沙箱内的进程都将被阻止访问任何个人用户文件和数据。 该类型的重点是保护用户数据，因此沙箱内的进程只能访问 C:\Windows 和两个 C:\Program Files 目录。 这可确保个人文件的安全。</translation>
+        <translation>在该沙箱类型中，任何沙箱内的进程都将被阻止访问任何个人用户文件和数据。 
+	因为这一类型的沙箱重点保护用户数据，所有在该种沙箱内运行的进程只能访问 C:\Windows 和 C:\Program Files 两个目录。 这可确保个人文件的安全。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="409"/>
@@ -620,7 +621,7 @@ only C:\Windows and C:\Program Files directories are accessible to processes run
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
         <oldsource>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme.
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</oldsource>
-        <translation>该沙箱类型提供 Sandboxie 经典版的默认行为。 它为用户提供了熟悉且可靠的沙箱方案。
+        <translation>该沙箱类型提供 Sandboxie Classic 的默认行为。 它为用户提供了熟悉且可靠的沙箱方案。
 应用程序可以在该沙箱内运行，确保它们始终在一个受控且隔离的环境中执行。</translation>
     </message>
     <message>
@@ -635,8 +636,8 @@ Applications can be run within this sandbox, ensuring they operate within a cont
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
         <oldsource>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments.
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</oldsource>
-        <translation>该沙箱类型优先考虑兼容性，同时仍然提供良好的隔离级别。 它被设计用于在单独隔离的沙箱中运行受信任的应用程序。
-虽然与其他沙箱类型相比，其隔离级别有所降低，但它提供了与各种应用程序的更高兼容性，确保该沙箱环境中应用的平稳运行。</translation>
+        <translation>该沙箱类型优先考虑兼容性，但仍然提供良好的隔离级别。 它适用于将受信任的应用程序与真实系统隔离开来运行。
+虽然与其他沙箱类型相比，其隔离级别有所降低，但它能更好地兼容各种应用程序，确保该沙箱环境中应用的稳定运行。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="415"/>
@@ -661,7 +662,7 @@ This ensures the utmost level of privacy and data protection within the confiden
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes.
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</oldsource>
         <translation>该类型的沙箱使用加密的磁盘映像作为文件根目录，为安全性与隐私性提供了额外的保障。
-当虚拟磁盘映像被挂载时，只有沙箱内的程序可以访问它，Sandboxie 会阻止主机系统上的其他进程访问沙箱内的进程。这确保了在机密沙箱环境中最高级别的隐私和数据保护。</translation>
+当虚拟磁盘映像被挂载时，只有沙箱内的程序可以访问它，Sandboxie 会阻止主机系统上的其他进程访问沙箱内的进程。这确保了在加密沙箱环境中最高级别的隐私和数据保护。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
@@ -885,13 +886,13 @@ Please browse to the correct user profile directory.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="350"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
         <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
-        <translation>主程序 (例如 firefox.exe, chrome.exe, msedge.exe, 等……)：</translation>
+        <translation>主程序 (例如 firefox.exe, chrome.exe, msedge.exe, 等等……)：</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="354"/>
         <source>Browser executable (*.exe)</source>
         <oldsource>Browser Executable (*.exe)</oldsource>
-        <translation>浏览可执行程序 (*.exe)</translation>
+        <translation>浏览器的可执行程序 (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
@@ -925,7 +926,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="249"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
-        <translation>如果你有赞助者许可证，请填入以下字段。</translation>
+        <translation>如果你有赞助者许可证，请将它填入下面的空格。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="276"/>
@@ -935,7 +936,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation>在没有赞助者许可证的情况下开始进行有限时间的试用。</translation>
+        <translation>在没有赞助者许可证的情况下试用一小段时间。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="291"/>
@@ -983,7 +984,7 @@ Error: %1</source>
     <message>
         <location filename="../MiscHelpers/Common/CheckableComboBox.cpp" line="12"/>
         <source>Select Items...</source>
-        <translation type="unfinished"></translation>
+        <translation>选择项目···</translation>
     </message>
 </context>
 <context>
@@ -1008,22 +1009,22 @@ Error: %1</source>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="42"/>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
         <source>Find</source>
-        <translation>查找</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="47"/>
         <source>FindNext</source>
-        <translation>查找下一个</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="57"/>
         <source>GoTo</source>
-        <translation>跳转</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="388"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
-        <translation type="unfinished"></translation>
+        <translation>您是否是指：%1? （按下 Ctrl+R 来替换）</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
@@ -1033,17 +1034,12 @@ Error: %1</source>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished">F3: 查找下一个
-+ Shift: 反向
-+ Ctrl: 区分大小写
-+ Alt: 完全匹配
-
-查找字符串:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="923"/>
         <source>Go to Line:</source>
-        <translation>跳转到行:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1256,7 +1252,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation>无法在网络共享上创建沙箱，请选择本地文件夹。</translation>
+        <translation>无法在网络共享文件夹上创建沙箱，请选择本地文件夹。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="714"/>
@@ -1291,7 +1287,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <source>Keep Sandboxie-Plus up to date.</source>
-        <translation type="vanished">保持 Sandboxie-Plus 为最新版本。</translation>
+        <translation>保持 Sandboxie-Plus 为最新版本。</translation>
     </message>
 </context>
 <context>
@@ -1594,12 +1590,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation>通过阻止访问网络设备禁用网络权限</translation>
+        <translation>通过阻止访问网络设备来禁用网络权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="757"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation>通过 Windows 筛选平台 (WFP) 禁用网络权限</translation>
+        <translation>使用 Windows 筛选平台 (WFP) 禁用网络权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
@@ -3007,12 +3003,12 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
         <source>Any File (*.*)</source>
-        <translation type="unfinished">任意文件 (*.*)</translation>
+        <translation>所有文件 (*.*)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
         <source>Select Directory</source>
-        <translation type="unfinished">选择目录</translation>
+        <translation>选择一个目录</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="38"/>
@@ -10172,22 +10168,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body&gt;
-        悬停在设置上时显示详细的工具提示。&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已选中&lt;/span&gt;：完整详细信息（版本、语法、描述等）&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;：仅显示必要信息&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;语法帮助：&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
-        • &lt;i&gt;方括号&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可选参数&lt;br&gt;
-        • &lt;i&gt;圆括号&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效选项&lt;br&gt;
-        • &lt;i&gt;尖括号&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替换的占位符&lt;br&gt;
-        • &lt;i&gt;加粗值&lt;/i&gt; — 表示默认值（可省略）&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6069"/>
@@ -10256,27 +10237,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body&gt;
-        &lt;b&gt;自动补全 &amp; 大小写修正&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;自动补全&lt;/u&gt;: 在输入3个及以上字符时弹出建议&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ 从弹出菜单中选择以&lt;u&gt;自动应用&lt;/u&gt;正确的大小写&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;回车/Return键&lt;/code&gt;确认选择&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;手动修正&lt;/u&gt;: 输入设置后=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt;出现大小写修正提示&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已选中&lt;/span&gt;: 自动补全 + 大小写修正&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;: 仅手动&lt;code&gt;Ctrl+R&lt;/code&gt;修正&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;导航:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在弹出菜单中移动&lt;br&gt;
-        • &lt;code&gt;回车/Return&lt;/code&gt;: 确认选择&lt;br&gt;
-        • &lt;code&gt;Ctrl+空格&lt;/code&gt;: 强制打开建议&lt;br&gt;
-        • &lt;code&gt;Tab&lt;/code&gt;: 应用第一个或确认选择&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6152"/>
@@ -10397,7 +10358,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="../MiscHelpers/Common/FlexError.h" line="21"/>
         <source>Error</source>
-        <translation>错误</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10971,22 +10932,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body&gt;
-        悬停在设置上时显示详细的工具提示。&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已选中&lt;/span&gt;：完整详细信息（版本、语法、描述等）&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;：仅显示必要信息&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;语法帮助：&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
-        • &lt;i&gt;方括号&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可选参数&lt;br&gt;
-        • &lt;i&gt;圆括号&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效选项&lt;br&gt;
-        • &lt;i&gt;尖括号&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替换的占位符&lt;br&gt;
-        • &lt;i&gt;加粗值&lt;/i&gt; — 表示默认值（可省略）&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3223"/>
@@ -11011,27 +10957,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body&gt;
-        &lt;b&gt;自动补全 &amp; 大小写修正&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;自动补全&lt;/u&gt;: 在输入3个及以上字符时弹出建议&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ 从弹出菜单中选择以&lt;u&gt;自动应用&lt;/u&gt;正确的大小写&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;回车/Return键&lt;/code&gt;确认选择&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;手动修正&lt;/u&gt;: 输入设置后=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt;出现大小写修正提示&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已选中&lt;/span&gt;: 自动补全 + 大小写修正&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分选中&lt;/span&gt;: 仅手动&lt;code&gt;Ctrl+R&lt;/code&gt;修正&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;导航:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在弹出菜单中移动&lt;br&gt;
-        • &lt;code&gt;回车/Return&lt;/code&gt;: 确认选择&lt;br&gt;
-        • &lt;code&gt;Ctrl+空格&lt;/code&gt;: 强制打开建议&lt;br&gt;
-        • &lt;code&gt;Tab&lt;/code&gt;: 应用第一个或确认选择&lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3246"/>

@@ -1654,6 +1654,8 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/UseOverlayIcons", ui.chkOverlayIcons->isChecked());
 	theConf->SetValue("Options/HideSbieProcesses", ui.chkHideCore->isChecked());
 
+	CIniHighlighter::ClearLanguageCache();
+
 	int Scaling = ui.cmbFontScale->currentText().toInt();
 	if (Scaling < 75)
 		Scaling = 75;

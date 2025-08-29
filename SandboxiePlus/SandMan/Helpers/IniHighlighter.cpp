@@ -26,6 +26,9 @@ QMutex CIniHighlighter::tooltipCacheMutex;
 CIniHighlighter::TooltipMode CIniHighlighter::s_tooltipMode = TooltipMode::BasicInfo;
 QMutex CIniHighlighter::s_tooltipModeMutex;
 
+QString CIniHighlighter::s_tooltipBgColorDark, CIniHighlighter::s_tooltipBgColorLight;
+QString CIniHighlighter::s_tooltipTextColorDark, CIniHighlighter::s_tooltipTextColorLight;
+
 CIniHighlighter::KeywordGroup<CIniHighlighter::KeywordType::Context> CIniHighlighter::contextData;
 CIniHighlighter::KeywordGroup<CIniHighlighter::KeywordType::Category> CIniHighlighter::categoryData;
 CIniHighlighter::KeywordGroup<CIniHighlighter::KeywordType::Requirements> CIniHighlighter::requirementsData;
@@ -414,6 +417,24 @@ static void parseIniFile(QTextStream& in, std::function<void(const QString&, con
 	}
 }
 
+static void ParseTooltipColorOverride(const QString& key, const QString& value)
+{
+	if (key.compare("_TooltipBgColor", Qt::CaseInsensitive) == 0) {
+		auto parts = value.split(',');
+		if (parts.size() == 2) {
+			CIniHighlighter::s_tooltipBgColorDark = parts[0].trimmed();
+			CIniHighlighter::s_tooltipBgColorLight = parts[1].trimmed();
+		}
+	}
+	else if (key.compare("_TooltipTextColor", Qt::CaseInsensitive) == 0) {
+		auto parts = value.split(',');
+		if (parts.size() == 2) {
+			CIniHighlighter::s_tooltipTextColorDark = parts[0].trimmed();
+			CIniHighlighter::s_tooltipTextColorLight = parts[1].trimmed();
+		}
+	}
+}
+
 // Load settings from SbieSettings.ini
 void CIniHighlighter::loadSettingsIni(const QString& filePath)
 {
@@ -515,6 +536,8 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
 			return;
 
 		if (inConfigSection) {
+			ParseTooltipColorOverride(key, value);
+
 			if (key.compare("___Version", Qt::CaseInsensitive) == 0) {
 				s_masterVersion = value;
 			}
@@ -657,6 +680,7 @@ void CIniHighlighter::applyUserIniOverrides(const QString& masterVersion, const 
 		for (const auto& pair : userLines) {
 			const QString& key = pair.first;
 			const QString& value = pair.second;
+			ParseTooltipColorOverride(key, value);
 			if (key.endsWith("Styles", Qt::CaseInsensitive)) {
 				QString styleKey = key;
 				if (styleKey.startsWith("_")) styleKey = styleKey.mid(1);
@@ -1805,8 +1829,12 @@ const CIniHighlighter::TooltipThemeCache& CIniHighlighter::getTooltipThemeCache(
 			bDark = (iDark == 1);
 
 		themeCache.darkMode = bDark;
-		themeCache.bgColor = themeCache.darkMode ? QStringLiteral("#2b2b2b") : QStringLiteral("#ffffff");
-		themeCache.textColor = themeCache.darkMode ? QStringLiteral("#e0e0e0") : QStringLiteral("#000000");
+		themeCache.bgColor = themeCache.darkMode
+			? (!s_tooltipBgColorDark.isEmpty() ? s_tooltipBgColorDark : QStringLiteral("#2b2b2b"))
+			: (!s_tooltipBgColorLight.isEmpty() ? s_tooltipBgColorLight : QStringLiteral("#ffffff"));
+		themeCache.textColor = themeCache.darkMode
+			? (!s_tooltipTextColorDark.isEmpty() ? s_tooltipTextColorDark : QStringLiteral("#e0e0e0"))
+			: (!s_tooltipTextColorLight.isEmpty() ? s_tooltipTextColorLight : QStringLiteral("#000000"));
 
 		// Pre-build styles to avoid repeated string operations
 		themeCache.tableStyle = HtmlAttribs::TABLE_STYLE

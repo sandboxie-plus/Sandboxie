@@ -76,6 +76,9 @@ public:
 	static void MarkSettingsDirty();
 	static void MarkUserSettingsDirty();
 
+	static QString s_tooltipBgColorDark, s_tooltipBgColorLight;
+	static QString s_tooltipTextColorDark, s_tooltipTextColorLight;
+
     // End Settings validation, tooltip handling and auto completion
 
 protected:

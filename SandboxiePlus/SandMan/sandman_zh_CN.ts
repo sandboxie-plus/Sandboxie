@@ -983,7 +983,7 @@ Error: %1</source>
     <message>
         <location filename="../MiscHelpers/Common/CheckableComboBox.cpp" line="12"/>
         <source>Select Items...</source>
-        <translation type="unfinished"></translation>
+        <translation>选择条目…</translation>
     </message>
 </context>
 <context>
@@ -1023,7 +1023,7 @@ Error: %1</source>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="388"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
-        <translation type="unfinished"></translation>
+        <translation>您是否想要：%1？（按 Ctrl+R进行替换）</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="897"/>
@@ -1033,7 +1033,7 @@ Error: %1</source>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished">F3: 查找下一个
+        <translation>F3: 查找下一个
 + Shift: 反向
 + Ctrl: 区分大小写
 + Alt: 完全匹配
@@ -1658,32 +1658,32 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="7"/>
         <source>Item Chooser</source>
-        <translation type="unfinished"></translation>
+        <translation>条目选择器</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="12"/>
         <source>Select items that will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>将使用所选的条目。</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="29"/>
         <source>Add &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>添加&gt;</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="33"/>
         <source>&lt; Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;移除</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="47"/>
         <source>Move Up</source>
-        <translation type="unfinished">上移</translation>
+        <translation>上移</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
-        <translation type="unfinished">下移</translation>
+        <translation>下移</translation>
     </message>
 </context>
 <context>
@@ -3007,17 +3007,17 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
         <source>Any File (*.*)</source>
-        <translation type="unfinished">任意文件 (*.*)</translation>
+        <translation>任意文件 (*.*)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
         <source>Select Directory</source>
-        <translation type="unfinished">选择目录</translation>
+        <translation>选择目录</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="38"/>
         <source>Browse</source>
-        <translation type="unfinished">浏览</translation>
+        <translation>浏览</translation>
     </message>
 </context>
 <context>

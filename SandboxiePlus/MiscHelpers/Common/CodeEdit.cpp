@@ -71,6 +71,17 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 		if (!m_pCompleter)
 			return;
 		m_pCompleter->setCompletionPrefix(m_pendingPrefix);
+
+		// Check if only one completion and it matches the prefix
+        if (m_pCompleter->completionCount() == 1) {
+            QString onlyCompletion = m_pCompleter->currentCompletion();
+            if (onlyCompletion.compare(m_pendingPrefix, Qt::CaseSensitive) == 0) {
+                HidePopupSafely();
+                return;
+            }
+        }
+
+		// Only show popup if there are completions available
 		if (m_pCompleter->completionCount() > 0) {
 			QRect rect = m_pSourceCode->cursorRect();
 			rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
@@ -326,18 +337,28 @@ bool CCodeEdit::IsInKeyPosition(const CursorContext& context) const
 	return context.position <= equalsPos;
 }
 
+// Helper method: Check if word starts from beginning of line (ignoring whitespace)
+bool CCodeEdit::IsWordAtLineStart(const CursorContext& context) const
+{
+	// Find the start of the current word
+	WordBoundaries boundaries = FindWordBoundaries(context.text, context.position);
+
+	// Check if there are only whitespace characters before the word start
+	QString beforeWord = context.text.left(boundaries.start);
+	return beforeWord.trimmed().isEmpty();
+}
+
 // Helper method: Get completion word considering key/value context
 QString CCodeEdit::GetCompletionWord() const
 {
 	CursorContext context = GetCursorContext();
 
-	// Treat lines starting with comment markers (# or ;) as non-completable
-	if (context.text.startsWith('#') || context.text.startsWith(';'))
-		return QString();
-
-	// Handle lines starting with '='
-	if (context.text.startsWith('=')) {
-		return QString(); // Return an empty string to show all completions
+	// Only allow completion if the first character is completable character
+	if (!context.text.isEmpty()) {
+		QChar firstChar = context.text.at(0);
+		if (!IsWordCharacter(firstChar)) {
+			return QString(); // Non-completable
+		}
 	}
 
 	// Check if we're editing an existing key in a key=value line
@@ -348,10 +369,18 @@ QString CCodeEdit::GetCompletionWord() const
 
 	// Standard detection for new keys - only if we're in key position
 	if (IsInKeyPosition(context)) {
-		return ExtractWordAtCursor(context);
+		QString word = ExtractWordAtCursor(context);
+
+		// Only allow completion if the word starts from the beginning of the line (ignoring whitespace)
+		if (!word.isEmpty() && IsWordAtLineStart(context)) {
+			return word;
+		}
+
+		// For manual completion (Ctrl+Space), allow even if not at line start
+		// This will be handled separately in HandleManualCompletionTrigger
 	}
 
-	return QString(); // We're in value position, no completion
+	return QString(); // We're in value position or word doesn't start from line beginning
 }
 
 void CCodeEdit::ShowCaseCorrection(const QString& wrongWord, const QString& correctWord)
@@ -360,8 +389,20 @@ void CCodeEdit::ShowCaseCorrection(const QString& wrongWord, const QString& corr
 		return;
 
 	CursorContext context = GetCursorContext();
-	int searchPos = context.position - 1;
 
+	// Prevent tooltip if in value part (after first '=')
+	int equalsPos = context.text.indexOf('=');
+	if (equalsPos != -1 && context.position > equalsPos)
+		return;
+
+	// Only allow if line starts with a completable character
+	if (!context.text.isEmpty()) {
+		QChar firstChar = context.text.at(0);
+		if (!IsWordCharacter(firstChar))
+			return;
+	}
+
+	int searchPos = context.position - 1;
 	while (searchPos >= 0 && (context.text[searchPos].isSpace() || context.text[searchPos] == '=')) {
 		searchPos--;
 	}
@@ -478,6 +519,7 @@ bool CCodeEdit::eventFilter(QObject* obj, QEvent* event)
 	
 	if (event->type() == QEvent::KeyPress) {
 		QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+		m_lastKeyPressed = keyEvent->key();
 
 		// Handle Backspace key
 		if (keyEvent->key() == Qt::Key_Backspace) {
@@ -577,7 +619,7 @@ bool CCodeEdit::HandleTextEditKeyPress(QKeyEvent* keyEvent)
 		return HandleKeyPressWithPopupVisible(keyEvent);
 	}
 
-	// Delete key handling (suppress popup for leading '#' / ';')
+	// Delete key handling (suppress popup for leading non-completers)
 	if (keyEvent->key() == Qt::Key_Delete) {
 		return HandleDeleteForCompletion(keyEvent);
 	}
@@ -654,7 +696,8 @@ bool CCodeEdit::HandleManualCompletionTrigger(QKeyEvent* keyEvent)
 		if (!IsInKeyPosition(context))
 			return false;
 
-		QString wordUnderCursor = GetCompletionWord();
+		// For manual trigger, get word even if it doesn't start from line beginning
+		QString wordUnderCursor = ExtractWordAtCursor(context);
 
 		// Even if word is empty, show all completions for manual trigger
 		m_pCompleter->setCompletionPrefix(wordUnderCursor);
@@ -724,10 +767,17 @@ bool CCodeEdit::HandleBackspaceForCompletion(QKeyEvent* keyEvent)
 		int relPos = cursor.position() - block.position();
 
 		// If cursor is just after first character and that first char is # or ; we are deleting it
-		if (relPos == 1 && !lineText.isEmpty() && (lineText.at(0) == '#' || lineText.at(0) == ';')) {
+		if (relPos == 1 && !lineText.isEmpty() && !IsWordCharacter(lineText.at(0))) {
 			// Suppress any immediate autocompletion once the character is removed
 			m_suppressNextAutoCompletion = true;
 			// Also ensure any visible popup is hidden
+			HidePopupSafely();
+			return false;
+		}
+
+		// Suppress completion if backspace at start of line
+		if (relPos == 0) {
+			m_suppressNextAutoCompletion = true;
 			HidePopupSafely();
 			return false;
 		}
@@ -767,11 +817,14 @@ bool CCodeEdit::HandleDeleteForCompletion(QKeyEvent* keyEvent)
 		QString lineText = block.text();
 		int relPos = cursor.position() - block.position();
 
-		// If cursor is at column 0 and first character is # or ; Delete will remove it
-		if (relPos == 0 && !lineText.isEmpty() && (lineText.at(0) == '#' || lineText.at(0) == ';')) {
-			m_suppressNextAutoCompletion = true;
-			HidePopupSafely();
-			return false; // allow deletion to proceed
+		// If cursor is at column 0 and first character is non-completer Delete will remove it
+		if (relPos == 0 && !lineText.isEmpty()) {
+			QChar c = lineText.at(0);
+			if (!(IsWordCharacter(c) || c == '=')) {
+				m_suppressNextAutoCompletion = true;
+				HidePopupSafely();
+				return false; // allow deletion to proceed
+			}
 		}
 
 		// Schedule recompute similarly to backspace (reuse task name for dedup)
@@ -839,35 +892,28 @@ void CCodeEdit::OnInsertCompletion(const QString& completion)
 		}
 	}
 
-	// Check if there's already an = after the current word position
-	QString restOfLine = context.text.mid(context.position);
-	bool hasEqualsAfter = restOfLine.contains('=');
-
-	if (hasEqualsAfter) {
-		// There's already an = sign after cursor, so just replace the current word
-		// without adding another =
-		WordBoundaries boundaries = FindWordBoundaries(context.text, context.position);
-
-		// Select the word and replace it
-		QTextCursor cursor = context.cursor;
-		cursor.setPosition(context.block.position() + boundaries.start);
-		cursor.setPosition(context.block.position() + boundaries.end, QTextCursor::KeepAnchor);
-		cursor.insertText(completion);
-		m_pSourceCode->setTextCursor(cursor);
-
-		// Reset flag after a brief delay to allow text change events to settle
-		ResetFlagAfterDelay(m_completionInsertInProgress, 50);
-		return;
-	}
-
-	// Standard completion for new keys - only add = if there isn't one already
+	// For all other cases, replace from start of line to end of current word
 	WordBoundaries boundaries = FindWordBoundaries(context.text, context.position);
 
-	// Select the word and replace it with completion + =
+	// Check if there's already an = after the current word position
+	QString restOfLine = context.text.mid(boundaries.end);
+	bool hasEqualsAfter = restOfLine.contains('=');
+
 	QTextCursor cursor = context.cursor;
-	cursor.setPosition(context.block.position() + boundaries.start);
+
+	// Select from start of line to end of current word
+	cursor.movePosition(QTextCursor::StartOfLine);
 	cursor.setPosition(context.block.position() + boundaries.end, QTextCursor::KeepAnchor);
-	cursor.insertText(completion + "=");
+
+	if (hasEqualsAfter) {
+		// There's already an = sign after the word, so just replace with completion
+		cursor.insertText(completion);
+	}
+	else {
+		// No equals sign after, so add one
+		cursor.insertText(completion + "=");
+	}
+
 	m_pSourceCode->setTextCursor(cursor);
 
 	// Reset flag after a brief delay to allow text change events to settle
@@ -939,19 +985,41 @@ void CCodeEdit::ReplaceLastCorrection()
 		return;
 
 	// Validate that the correction is still available
-	if (m_lastWrongWord.isEmpty() || m_lastCorrectWord.isEmpty() || 
+	if (m_lastWrongWord.isEmpty() || m_lastCorrectWord.isEmpty() ||
 		m_lastWordStart < 0 || m_lastWordEnd < 0)
 		return;
-	
+
 	if (!IsKeyAvailableInCompletionModel(m_lastCorrectWord)) {
 		// Clear tracking if the correction is no longer valid
 		ClearCaseCorrectionTracking();
 		return;
 	}
-	
+
+	// Get the line text at the correction position
+	QTextBlock correctionBlock = m_pSourceCode->document()->findBlock(m_lastWordStart);
+	QString lineText = correctionBlock.text();
+	int equalsPos = lineText.indexOf('=');
+
+	// Do not trigger case correction if the correction is in the value part (after first '=')
+	int correctionRelativePos = m_lastWordStart - correctionBlock.position();
+	if (equalsPos != -1 && correctionRelativePos > equalsPos) {
+		// In value part, do not trigger correction
+		ClearCaseCorrectionTracking();
+		return;
+	}
+
+	// Only allow correction if the first character is completable character
+	if (!lineText.isEmpty()) {
+		QChar firstChar = lineText.at(0);
+		if (!IsWordCharacter(firstChar)) {
+			ClearCaseCorrectionTracking();
+			return;
+		}
+	}
+
 	// Hide completion popup if it's visible before making the replacement
 	HidePopupSafely();
-	
+
 	// Set flag to prevent completion re-triggering during case correction
 	m_caseCorrectionInProgress = true;
 
@@ -959,37 +1027,29 @@ void CCodeEdit::ReplaceLastCorrection()
 	QTextCursor cursor = m_pSourceCode->textCursor();
 	cursor.setPosition(m_lastWordStart);
 	cursor.setPosition(m_lastWordEnd, QTextCursor::KeepAnchor);
-	
+
 	// Verify the selected text matches what we expect (case insensitive)
 	QString selectedText = cursor.selectedText();
 	if (selectedText.compare(m_lastWrongWord, Qt::CaseInsensitive) == 0) {
-		
-		// Determine if we're working with an existing key=value line
-		// Get the line text at the correction position
-		QTextBlock correctionBlock = m_pSourceCode->document()->findBlock(m_lastWordStart);
-		QString lineText = correctionBlock.text();
-		int equalsPos;
-		
+
 		// Check if this is an existing key=value line and we're correcting the key part
-		if (IsExistingKeyValueLine(lineText, m_lastWordStart - correctionBlock.position(), equalsPos)) {
-			// Get relative position of the correction within the line
-			int correctionRelativePos = m_lastWordStart - correctionBlock.position();
-			
+		int equalsPos2;
+		if (IsExistingKeyValueLine(lineText, correctionRelativePos, equalsPos2)) {
 			// If the correction is before the equals sign, we're correcting a key in an existing key=value line
-			if (correctionRelativePos < equalsPos) {
+			if (correctionRelativePos < equalsPos2) {
 				// This is an existing key=value line - just replace the key, don't add =
 				cursor.insertText(m_lastCorrectWord);
-			} else {
+			}
+			else {
 				// This is a value correction or something else - just replace
 				cursor.insertText(m_lastCorrectWord);
 			}
-		} else {
+		}
+		else {
 			// No equals sign in the line - this might be a new key, check if we should add =
-			
-			// Check if there's an equals sign after the correction position on the same line
 			int correctionLinePos = m_lastWordStart - correctionBlock.position();
-			QString replacementText = GetTextReplacement(m_lastWrongWord, m_lastCorrectWord, 
-														lineText, correctionLinePos, true);
+			QString replacementText = GetTextReplacement(m_lastWrongWord, m_lastCorrectWord,
+				lineText, correctionLinePos, true);
 			cursor.insertText(replacementText);
 		}
 
@@ -1009,14 +1069,14 @@ void CCodeEdit::ReplaceLastCorrection()
 			cursor.movePosition(QTextCursor::Right);
 			m_pSourceCode->setTextCursor(cursor);
 		}
-		
+
 		// Clear tracking after replacement
 		ClearCaseCorrectionTracking();
-		
+
 		// Ensure popup stays hidden after correction is applied
 		HidePopupSafely();
 	}
-	
+
 	// Reset flag after a brief delay to allow text change events to settle
 	ResetFlagAfterDelay(m_caseCorrectionInProgress, 100);
 }
@@ -1026,6 +1086,12 @@ void CCodeEdit::OnTextChanged()
 	if (m_suppressNextAutoCompletion) {
 		// Consume one suppression cycle (prevents popup right after deleting # or ;)
 		m_suppressNextAutoCompletion = false;
+		return;
+	}
+
+	// Suppress completion if last key was Enter/Return
+	if (m_lastKeyPressed == Qt::Key_Enter || m_lastKeyPressed == Qt::Key_Return) {
+		m_lastKeyPressed = 0; // reset
 		return;
 	}
 

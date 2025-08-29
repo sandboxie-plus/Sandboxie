@@ -5,7 +5,7 @@
 
 
 // Settings validation, tooltip handling and auto completion
-const QString CIniHighlighter::DEFAULT_SETTINGS_FILE = "SbieSettings.ini";
+const QString CIniHighlighter::DEFAULT_SETTINGS_FILE = "SbieSettings";
 const QString CIniHighlighter::DEFAULT_VERSION = "0.0.0";
 
 QVersionNumber CIniHighlighter::s_currentVersion;
@@ -14,12 +14,16 @@ QMutex CIniHighlighter::s_languageMutex;
 
 QHash<QString, SettingInfo> CIniHighlighter::validSettings;
 QDateTime CIniHighlighter::lastFileModified;
+QDateTime CIniHighlighter::lastUserFileModified;
 bool CIniHighlighter::settingsLoaded = false;
+bool CIniHighlighter::userIniLoaded = false;
 QMutex CIniHighlighter::settingsMutex;
+QMutex CIniHighlighter::userSettingsMutex;
+QString CIniHighlighter::s_masterVersion;
 
 QHash<QString, QString> CIniHighlighter::tooltipCache;
 QMutex CIniHighlighter::tooltipCacheMutex;
-CIniHighlighter::TooltipMode CIniHighlighter::s_tooltipMode = TooltipMode::FullTooltip;
+CIniHighlighter::TooltipMode CIniHighlighter::s_tooltipMode = TooltipMode::BasicInfo;
 QMutex CIniHighlighter::s_tooltipModeMutex;
 
 CIniHighlighter::KeywordGroup<CIniHighlighter::KeywordType::Context> CIniHighlighter::contextData;
@@ -29,6 +33,12 @@ CIniHighlighter::KeywordGroup<CIniHighlighter::KeywordType::Requirements> CIniHi
 QHash<QString, QString> CIniHighlighter::hideConfRules;
 QHash<QString, QString> CIniHighlighter::hideConfExclusions;
 QMutex CIniHighlighter::hideConfMutex;
+
+int CIniHighlighter::s_maxSettingNameLength = 64;
+bool CIniHighlighter::s_maxSettingNameLengthValid = false;
+
+bool CIniHighlighter::settingsDirty = true;
+bool CIniHighlighter::userSettingsDirty = true;
 
 namespace {
 	// HTML fragments
@@ -47,7 +57,7 @@ namespace {
         static const QString TABLE_END = QStringLiteral("</table>");
         static const QString VALUE_PREFIX = QStringLiteral(": ");
         static const QString BR_NBSP = QStringLiteral("<br>&nbsp;&nbsp;");
-        static const QString TABLE_HEADER = QStringLiteral("<tr><td colspan='2' style='text-align:center; font-weight:bold; color:#FF6347;'>");
+        static const QString TABLE_HEADER_START = QStringLiteral("<tr><td colspan='2' ");
 		static const QString SPAN_COLOR_START = QStringLiteral("<span style='color:");
 		static const QString SPAN_COLOR_CLOSE = QStringLiteral(";'>");
 		static const QString SPAN_END = QStringLiteral("</span>");
@@ -61,6 +71,7 @@ namespace {
 		static const QString STYLE_BOLD = QStringLiteral("font-weight:bold;");
 		static const QString STYLE_ITALIC = QStringLiteral("font-style:italic;");
 		static const QString STYLE_UNDERLINE = QStringLiteral("text-decoration:underline;");
+		static const QString STYLE_ALIGNMENT = QStringLiteral("text-align:%1;");
 		static const QString COLOR_VAR = QStringLiteral("color:%1");
 		static const QString STYLE_VAR = QStringLiteral("style='%1'");
 		static const QString STYLE_START = QStringLiteral("style='");
@@ -212,21 +223,14 @@ CIniHighlighter::CIniHighlighter(bool bDarkMode, QTextDocument* parent, bool ena
 #endif
 
 	// Check if we need to load the settings file - with mutex protection
-	QString settingsPath = QCoreApplication::applicationDirPath() % "/" % DEFAULT_SETTINGS_FILE;
+	QString settingsPath = QCoreApplication::applicationDirPath() % "/" % DEFAULT_SETTINGS_FILE % ".ini";
 	QFileInfo fileInfo(settingsPath);
+	reloadSettingsIniIfNeeded(settingsPath, fileInfo);
 
-	bool needToLoad = false;
-	{
-		QMutexLocker locker(&settingsMutex); // Lock for checking cache status
-		needToLoad = !settingsLoaded || !fileInfo.exists() || fileInfo.lastModified() > lastFileModified;
-	}
-
-	if (needToLoad) {
-		loadSettingsIni(settingsPath);
-	}
-	else {
-		qDebug() << "[validSettings] Using cached settings (" << validSettings.size() << " entries)";
-	}
+	// Check if we need to load the settings file - with mutex protection
+	QString userIniPath = QCoreApplication::applicationDirPath() % "/" % DEFAULT_SETTINGS_FILE % ".user.ini";
+	QFileInfo userFileInfo(userIniPath);
+	reloadUserIniIfNeeded(userIniPath, userFileInfo);
 
 	// Use cached version instead of creating a new one each time
 	m_currentVersion = getCurrentVersion();
@@ -389,12 +393,34 @@ QList<KeywordInfoType> deduplicateKeywordMappings(const QList<KeywordInfoType>& 
 	return result;
 }
 
+// Utility function to parse INI files and yield (section, key, value) tuples
+static void parseIniFile(QTextStream& in, std::function<void(const QString&, const QString&, const QString&)> handler) {
+	QString currentSection;
+	while (!in.atEnd()) {
+		QString line = in.readLine().trimmed();
+		if (line.isEmpty() || line.startsWith(';') || line.startsWith('#'))
+			continue;
+		QRegularExpressionMatch sectionMatch = CompiledRegex::SECTION_REGEX.match(line);
+		if (sectionMatch.hasMatch()) {
+			currentSection = sectionMatch.captured(1).trimmed();
+			continue;
+		}
+		int eq = line.indexOf('=');
+		if (eq <= 0)
+			continue;
+		QString key = line.left(eq).trimmed();
+		QString value = line.mid(eq + 1).trimmed();
+		handler(currentSection, key, value);
+	}
+}
+
 // Load settings from SbieSettings.ini
 void CIniHighlighter::loadSettingsIni(const QString& filePath)
 {
     QMutexLocker locker(&settingsMutex);
 
-    ClearLanguageCache();
+	// Invalidate cached max length on reload
+	s_maxSettingNameLengthValid = false;
 
     QFile file(filePath);
     settingsLoaded = file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -432,6 +458,9 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
     categoryData.clear();
     requirementsData.clear();
     genericStyles.clear();
+	s_masterVersion.clear();
+	ClearLanguageCache();
+	ClearHideConfCache();
 
     // Accumulate config lines for deduplication
     QMap<QString, QStringList> configLines;
@@ -466,71 +495,52 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
         return false;
     };
 
-    while (!in.atEnd()) {
-        QString line = in.readLine().trimmed();
+	parseIniFile(in, [&](const QString& section, const QString& key, const QString& value) {
+		// Section header logic
+		if (section != currentSection) {
+			// Save previous section if needed
+			if (inSection && !currentSection.isEmpty() && !inConfigSection) {
+				currentInfo.name = currentSection;
+				validSettings.insert(currentInfo.name, std::move(currentInfo));
+			}
+			currentSection = section;
+			inConfigSection = (currentSection == "___SbieSettingsConfig_");
+			inSection = !inConfigSection;
+			if (inSection)
+				currentInfo = SettingInfo();
+		}
 
-        // Skip empty lines and comments
-        if (line.isEmpty() || line.startsWith(';') || line.startsWith('#'))
-            continue;
+		// Skip lines outside any section
+		if (!inSection && !inConfigSection)
+			return;
 
-        // Section header - use compiled regex
-        QRegularExpressionMatch sectionMatch = CompiledRegex::SECTION_REGEX.match(line);
-        if (sectionMatch.hasMatch()) {
-            // Save previous section if needed
-            if (inSection && !currentSection.isEmpty() && !inConfigSection) {
-                currentInfo.name = currentSection;
-                validSettings.insert(currentInfo.name, std::move(currentInfo));
-            }
-
-            currentSection = sectionMatch.captured(1).trimmed();
-            inConfigSection = (currentSection == "___SbieSettingsConfig_");
-            inSection = !inConfigSection;
-            if (inSection)
-                currentInfo = SettingInfo();
-            continue;
-        }
-
-        // Skip lines outside any section
-        if (!inSection && !inConfigSection)
-            continue;
-
-        // Key-value pair
-        int equalsPos = line.indexOf('=');
-        if (equalsPos <= 0)
-            continue;
-
-        QString key = line.left(equalsPos).trimmed();
-        QString value = line.mid(equalsPos + 1).trimmed();
-
-        if (inConfigSection) {
-            if (accumulateConfig(key, value, "_ContextConf", configLines, localizedConfigLines, extractLanguageCode) ||
-                accumulateConfig(key, value, "_CategoryConf", configLines, localizedConfigLines, extractLanguageCode) ||
-                accumulateConfig(key, value, "_RequirementsConf", configLines, localizedConfigLines, extractLanguageCode)) {
-                continue;
-            }
-
-			// Process _HideConf and _HideConfExclusions 
+		if (inConfigSection) {
+			if (key.compare("___Version", Qt::CaseInsensitive) == 0) {
+				s_masterVersion = value;
+			}
+			if (accumulateConfig(key, value, "_ContextConf", configLines, localizedConfigLines, extractLanguageCode) ||
+				accumulateConfig(key, value, "_CategoryConf", configLines, localizedConfigLines, extractLanguageCode) ||
+				accumulateConfig(key, value, "_RequirementsConf", configLines, localizedConfigLines, extractLanguageCode)) {
+				return;
+			}
 			if (key.compare("_HideConf", Qt::CaseInsensitive) == 0) {
 				parseHideConfRules(value, hideConfRules);
-				continue;
+				return;
 			}
-			else if (key.compare("_HideConfExclusions", Qt::CaseInsensitive) == 0) {
+			if (key.compare("_HideConfExclusions", Qt::CaseInsensitive) == 0) {
 				parseHideConfRules(value, hideConfExclusions);
-				continue;
+				return;
 			}
-
-            // Styles
-            processConfigKeyword(key, value, "_ContextConf", contextData);
-            processConfigKeyword(key, value, "_CategoryConf", categoryData);
-            processConfigKeyword(key, value, "_RequirementsConf", requirementsData);
-            // Generic xxxStyles
-            if (key.endsWith("Styles", Qt::CaseInsensitive)) {
-                QString styleKey = key;
-                if (styleKey.startsWith("_")) styleKey = styleKey.mid(1);
-                genericStyles[styleKey] = parseStyleConfig(value);
-            }
-            continue;
-        }
+			processConfigKeyword(key, value, "_ContextConf", contextData);
+			processConfigKeyword(key, value, "_CategoryConf", categoryData);
+			processConfigKeyword(key, value, "_RequirementsConf", requirementsData);
+			if (key.endsWith("Styles", Qt::CaseInsensitive)) {
+				QString styleKey = key;
+				if (styleKey.startsWith("_")) styleKey = styleKey.mid(1);
+				genericStyles[styleKey] = parseStyleConfig(value);
+			}
+			return;
+		}
 
 		// Helper: process localized field
 		auto processLocalizedField = [&](const QString& baseKey, const QString& prefix,
@@ -574,7 +584,7 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
 		}
 		else if (key.compare("Requirements", Qt::CaseInsensitive) == 0)
 			currentInfo.requirements = value/*.toLower()*/.trimmed();
-	}
+		});
 
 	// Save last section if needed
 	if (inSection && !currentSection.isEmpty() && !inConfigSection) {
@@ -599,6 +609,9 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
         requirementsData.localizedMappings[it.key()] = deduplicateKeywordMappings(parseKeywordMappings<CIniHighlighter::KeywordType::Requirements>(it.value().join(";")));
     }
 
+	QString userIniPath = QCoreApplication::applicationDirPath() % "/" % DEFAULT_SETTINGS_FILE % ".user.ini";
+	applyUserIniOverrides(s_masterVersion, userIniPath);
+
     // Update cache status
     lastFileModified = QFileInfo(filePath).lastModified();
 
@@ -614,6 +627,52 @@ void CIniHighlighter::loadSettingsIni(const QString& filePath)
 		<< hideConfExclusions.size() << "hideConf exclusions,"
 		<< genericStyles.size() << "generic styles,"
 		<< filePath;
+}
+
+void CIniHighlighter::applyUserIniOverrides(const QString& masterVersion, const QString& userIniPath)
+{
+	QFile userFile(userIniPath);
+	if (!userFile.exists() || !userFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		return;
+
+	QTextStream userIn(&userFile);
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+	userIn.setCodec("UTF-8");
+#endif
+	QString userVersion;
+	QList<QPair<QString, QString>> userLines;
+	parseIniFile(userIn, [&](const QString& section, const QString& key, const QString& value) {
+		if (section != "___SbieSettingsConfig_")
+			return;
+		if (key.compare("___Version", Qt::CaseInsensitive) == 0) {
+			userVersion = value;
+		}
+		userLines.append(qMakePair(key, value));
+		});
+	userFile.close();
+
+	// Only process user ini if version matches
+	if (!masterVersion.isEmpty() && !userVersion.isEmpty() && s_masterVersion == userVersion) {
+		ClearHideConfCache();
+		for (const auto& pair : userLines) {
+			const QString& key = pair.first;
+			const QString& value = pair.second;
+			if (key.endsWith("Styles", Qt::CaseInsensitive)) {
+				QString styleKey = key;
+				if (styleKey.startsWith("_")) styleKey = styleKey.mid(1);
+				genericStyles[styleKey] = parseStyleConfig(value);
+			}
+			else if (key.compare("_HideConf", Qt::CaseInsensitive) == 0) {
+				parseHideConfRules(value, hideConfRules);
+			}
+			else if (key.compare("_HideConfExclusions", Qt::CaseInsensitive) == 0) {
+				parseHideConfRules(value, hideConfExclusions);
+			}
+		}
+		qDebug() << "[validSettings] Successfully loaded user overrides from"
+			<< userIniPath
+			<< "with" << userLines.size() << "entries";
+	}
 }
 
 template<CIniHighlighter::KeywordType Type>
@@ -695,6 +754,9 @@ CIniHighlighter::TooltipCellStyles CIniHighlighter::parseStyleConfig(const QStri
                 else if (fmt == "underline") {
                     style.underline = true;
                 }
+				else if (fmt == "center" || fmt == "left" || fmt == "right") {
+					style.alignment = fmt;
+				}
             }
         }
         // Parse font (third part) - currently not used in TooltipStyle but could be extended
@@ -711,11 +773,11 @@ CIniHighlighter::TooltipCellStyles CIniHighlighter::parseStyleConfig(const QStri
 
 void CIniHighlighter::addVersionRows(QString& tooltip, const SettingInfo& info, const QString& labelStyle)
 {
-    static const QString addedVersionLabel = tr("Added in version");
-    static const QString removedVersionLabel = tr("Removed in version");
-    static const QString readdedVersionLabel = tr("Re-added in version");
-    static const QString renamedVersionLabel = tr("Renamed in version");
-    static const QString supersededByLabel = tr("Superseded by");
+    const QString addedVersionLabel = tr("Added in version");
+    const QString removedVersionLabel = tr("Removed in version");
+    const QString readdedVersionLabel = tr("Re-added in version");
+    const QString renamedVersionLabel = tr("Renamed in version");
+    const QString supersededByLabel = tr("Superseded by");
 
     struct RowInfo { QString label; QString value; QString styleKey; };
     QList<RowInfo> rows = {
@@ -741,6 +803,7 @@ void CIniHighlighter::appendGenericTooltipRow(QString& tooltip, const QString& l
 	if (value.isEmpty()) return;
 	
 	QString styledLabelStyle = mergeHtmlStyles(labelStyle, cellStyles.left.toHtmlStyle());
+
 	QString valueCellTag = cellStyles.right.toHtmlStyle().isEmpty() ? 
 		HtmlTags::TD_TAG : 
 		HtmlTags::TD_START % cellStyles.right.toHtmlStyle() % HtmlTags::TAG_CLOSE;
@@ -1266,79 +1329,14 @@ void CIniHighlighter::processKeywordMappings(
     const TooltipCellStyles& cellStyles,
     QString& tooltip)
 {
-    QStringList typeLabels;
-
-    // Create a temporary collection of all matched keywords with their info
-    QList<QPair<QString, QString>> matchedKeywords; // keyword, displayName
-    QHash<QString, QString> keywordActions; // keyword -> action
-
-    // Collect all matched keywords and their actions
-    for (const KeywordInfoType& keywordInfo : effectiveMappings) {
-        if (displayText.contains(keywordInfo.keyword)) {
-            matchedKeywords.append(qMakePair(keywordInfo.keyword, keywordInfo.displayName));
-            if (!keywordInfo.action.isEmpty()) {
-                keywordActions.insert(keywordInfo.keyword, keywordInfo.action);
-            }
-        }
-    }
-
-    // Process each matched keyword to determine if it should be shown
-    for (const auto& pair : matchedKeywords) {
-        const QString& keyword = pair.first;
-        const QString& displayName = pair.second;
-        bool isHidden = false;
-
-        // Check if this keyword should be hidden (by itself or others)
-
-        // 1. Check if it hides itself (its action contains itself)
-        if (keywordActions.contains(keyword) &&
-            keywordActions[keyword].contains(keyword)) {
-            isHidden = true;
-        }
-
-        // 2. Check if any other keyword's action hides this one
-        if (!isHidden) {
-            for (auto it = keywordActions.constBegin(); it != keywordActions.constEnd(); ++it) {
-                // Skip checking against itself
-                if (it.key() == keyword)
-                    continue;
-
-                // If any character in another keyword's action matches this keyword, hide it
-                for (const QChar& c : it.value()) {
-                    if (QString(c) == keyword) {
-                        isHidden = true;
-                        break;
-                    }
-                }
-
-                if (isHidden)
-                    break;
-            }
-        }
-
-        // Add to display labels if not hidden
-        if (!isHidden && !displayName.isEmpty()) {
-            typeLabels.append(displayName);
-        }
-    }
+	QStringList typeLabels = getVisibleLabelsWithActionHiding(displayText, effectiveMappings);
 
     // Only display if we have labels to show
     if (!typeLabels.isEmpty()) {
         QString typeText = typeLabels.join(" + ");
 
         // Apply styling to label if specified
-        QString styledLabelStyle = labelStyle;
-        QString labelStyling = cellStyles.left.toHtmlStyle();
-        if (!labelStyling.isEmpty()) {
-            // Merge with existing labelStyle
-            if (labelStyle.contains(HtmlAttribs::STYLE_START)) {
-                styledLabelStyle = labelStyle;
-                styledLabelStyle.replace(HtmlAttribs::STYLE_START, labelStyling.mid(0, labelStyling.length() - 1) % HtmlAttribs::SEPARATOR);
-            }
-            else {
-                styledLabelStyle += " " % labelStyling;
-            }
-        }
+		QString styledLabelStyle = mergeHtmlStyles(labelStyle, cellStyles.left.toHtmlStyle());
 
         tooltip += HtmlTags::TR_TD_START % styledLabelStyle % HtmlTags::TAG_CLOSE % labelText % HtmlTags::TD_END;
 
@@ -1403,10 +1401,9 @@ QStringList getVisibleLabelsWithActionHiding(
 void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingInfo& info,
 	const QString& currentLang, const QString& labelStyle)
 {
-	// Cache translated strings to avoid repeated tr() calls
-	static const QString categoryLabel = tr("Category");
-	static const QString contextLabel = tr("Context");
-	static const QString requirementsLabel = tr("Requirements");
+	const QString categoryLabel = tr("Category");
+	const QString contextLabel = tr("Context");
+	const QString requirementsLabel = tr("Requirements");
 
 	// Process category mappings with action fallback
 	if (!info.category.isEmpty()) {
@@ -1451,18 +1448,11 @@ void CIniHighlighter::processMappingsOptimized(QString& tooltip, const SettingIn
 		// 4. Only display if we have labels to show
 		if (!typeLabels.isEmpty()) {
 			QString typeText = typeLabels.join(TextReplacements::LABEL_JOINER);
-			QString styledLabelStyle = labelStyle;
-			QString labelStyling = requirementsData.tooltipStyle.left.toHtmlStyle();
-			if (!labelStyling.isEmpty()) {
-				if (labelStyle.contains(HtmlAttribs::STYLE_START)) {
-					styledLabelStyle = labelStyle;
-					styledLabelStyle.replace(HtmlAttribs::STYLE_START, labelStyling.mid(0, labelStyling.length() - 1) % HtmlAttribs::SEPARATOR);
-				}
-				else {
-					styledLabelStyle += " " % labelStyling;
-				}
-			}
+
+			QString styledLabelStyle = mergeHtmlStyles(labelStyle, requirementsData.tooltipStyle.left.toHtmlStyle());
+
 			tooltip += HtmlTags::TR_TD_START % styledLabelStyle % HtmlTags::TAG_CLOSE % requirementsLabel % HtmlTags::TD_END;
+
 			QString valueStyleStr = requirementsData.tooltipStyle.right.toHtmlStyle();
 			if (!valueStyleStr.isEmpty()) {
 				tooltip += HtmlTags::TD_START % valueStyleStr % HtmlTags::TAG_CLOSE % HtmlTags::VALUE_PREFIX % typeText % HtmlTags::TD_END % HtmlTags::TR_END;
@@ -1573,9 +1563,8 @@ void CIniHighlighter::processContentOptimized(QString& tooltip, const SettingInf
 	const QString& currentLang, const QString& settingName,
 	const QString& labelStyle)
 {
-	// Cache translated strings
-	static const QString syntaxLabel = tr("Syntax");
-	static const QString descriptionLabel = tr("Description");
+	const QString syntaxLabel = tr("Syntax");
+	const QString descriptionLabel = tr("Description");
 
 	// Process syntax
 	QString syntax = selectLocalizedContentOptimized(info.syntax, info.localizedSyntax, currentLang);
@@ -1611,7 +1600,10 @@ void CIniHighlighter::ClearLanguageCache()
 		QMutexLocker cacheLock(&tooltipCacheMutex);
 		tooltipCache.clear();
 	}
+}
 
+void CIniHighlighter::ClearHideConfCache()
+{
 	// Clear hide configuration cache
 	{
 		QMutexLocker hideConfLock(&hideConfMutex);
@@ -1651,7 +1643,7 @@ CIniHighlighter::TooltipMode CIniHighlighter::GetTooltipMode()
 bool CIniHighlighter::isValidForTooltip(const QString& settingName)
 {
 	// Add input validation with compiled regex for better performance
-	if (settingName.isEmpty() || settingName.length() > 64) {
+	if (settingName.isEmpty() || settingName.length() > getMaxSettingNameLengthOrDefault()) {
 		return false;
 	}
 	
@@ -1686,8 +1678,10 @@ QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName)
             const SettingInfo& info = validSettings[settingName];
             const QString currentLang = getCurrentLanguage();
             tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
-			tooltip += HtmlTags::TABLE_HEADER
-                % settingName % HtmlTags::TD_END % HtmlTags::TR_END;
+			TooltipCellStyles headerStyles = getGenericStyles("Header");
+			QString headerStyleStr = headerStyles.left.toHtmlStyle();
+			tooltip += HtmlTags::TABLE_HEADER_START % headerStyleStr % HtmlTags::TAG_CLOSE
+				% settingName % HtmlTags::TD_END % HtmlTags::TR_END;
 
             // Helper lambda to append a version row
             auto appendVersionRow = [&](const QString& label, const QString& value, const QString& styleKey) {
@@ -1748,8 +1742,10 @@ QString CIniHighlighter::GetSettingTooltip(const QString& settingName)
             const SettingInfo& info = validSettings[settingName];
             const QString currentLang = getCurrentLanguage();
             tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
-			tooltip += HtmlTags::TABLE_HEADER
-                % settingName % HtmlTags::TD_END % HtmlTags::TR_END;
+			TooltipCellStyles headerStyles = getGenericStyles("Header");
+			QString headerStyleStr = headerStyles.left.toHtmlStyle();
+			tooltip += HtmlTags::TABLE_HEADER_START % headerStyleStr % HtmlTags::TAG_CLOSE
+				% settingName % HtmlTags::TD_END % HtmlTags::TR_END;
             addVersionRows(tooltip, info, themeCache.labelStyle);
             processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
             processContentOptimized(tooltip, info, currentLang, settingName, themeCache.labelStyle);
@@ -2036,5 +2032,128 @@ QString CIniHighlighter::TooltipStyle::toHtmlStyle() const {
 	if (underline) {
 		styles << HtmlAttribs::STYLE_UNDERLINE;
 	}
-	return styles.isEmpty() ? "" : HtmlAttribs::STYLE_VAR.arg(styles.join(";"));
+	if (!alignment.isEmpty()) {
+		styles << HtmlAttribs::STYLE_ALIGNMENT.arg(alignment);
+	}
+
+	QStringList cleanStyles;
+	for (const QString& s : styles) {
+		QString trimmed = s.trimmed();
+		if (!trimmed.isEmpty()) {
+			// Ensure each style ends with a single semicolon
+			if (!trimmed.endsWith(';'))
+				trimmed += ';';
+			cleanStyles << trimmed;
+		}
+	}
+	return cleanStyles.isEmpty() ? "" : HtmlAttribs::STYLE_VAR.arg(cleanStyles.join(""));
+}
+
+bool CIniHighlighter::IsValidTooltipContext(const QString& hoveredText)
+{
+	if (hoveredText.isEmpty() || hoveredText.length() > getMaxSettingNameLengthOrDefault())
+		return false;
+
+	// Check for exact match at start of line
+	if (isValidForTooltip(hoveredText))
+		return true;
+
+	// Check for SettingName= (no trailing content), must be at start of line
+	if (hoveredText.endsWith('=') && hoveredText.length() > 1) {
+		QString name = hoveredText.left(hoveredText.length() - 1);
+		if (isValidForTooltip(name))
+			return true;
+	}
+
+	// If there is any non-empty prefix before the setting name, do not show tooltip
+	// (e.g. ",SettingName", ".SettingName", " xSettingName")
+	// This is already handled by the above logic, as isValidForTooltip will only match valid keys
+	// at the start of the string, and not with any prefix.
+
+	return false;
+}
+
+int CIniHighlighter::getMaxSettingNameLengthOrDefault()
+{
+	if (s_maxSettingNameLengthValid) {
+		return s_maxSettingNameLength;
+	}
+
+	int maxLength = 0;
+
+	for (const auto& key : validSettings.keys()) {
+		int currentLength = key.length();
+		if (currentLength > maxLength) {
+			//qDebug() << "Key:" << key << "Length:" << currentLength;
+			maxLength = currentLength;
+		}
+	}
+
+	s_maxSettingNameLength = (maxLength > 0) ? maxLength : 32;
+	s_maxSettingNameLengthValid = true;
+
+	return s_maxSettingNameLength;
+}
+
+void CIniHighlighter::reloadSettingsIniIfNeeded(const QString& settingsPath, const QFileInfo& fileInfo)
+{
+	if (!settingsDirty) {
+		qDebug() << "[validSettings] Skipping reload, settingsDirty is false";
+		return;
+	}
+
+	bool needToLoad = false;
+	{
+		QMutexLocker locker(&settingsMutex);
+		needToLoad = !settingsLoaded
+			|| !fileInfo.exists()
+			|| fileInfo.lastModified() > lastFileModified;
+	}
+
+	if (needToLoad) {
+		loadSettingsIni(settingsPath);
+	}
+	else {
+		qDebug() << "[validSettings] Using cached settings (" << validSettings.size() << " entries)";
+	}
+
+	settingsDirty = false;
+}
+
+void CIniHighlighter::reloadUserIniIfNeeded(const QString& userIniPath, const QFileInfo& userFileInfo)
+{
+	if (!userSettingsDirty) {
+		qDebug() << "[validSettings] Skipping user INI reload, userSettingsDirty is false";
+		return;
+	}
+
+	bool needToLoadUserIni = false;
+	{
+		QMutexLocker locker(&userSettingsMutex); // Lock for checking cache status
+		needToLoadUserIni = !userIniLoaded
+			|| !userFileInfo.exists()
+			|| userFileInfo.lastModified() > lastUserFileModified
+			|| !settingsLoaded;
+	}
+
+	if (needToLoadUserIni) {
+		applyUserIniOverrides(s_masterVersion, userIniPath);
+		lastUserFileModified = userFileInfo.lastModified();
+		userIniLoaded = true;
+	}
+	else {
+		qDebug() << "[validSettings] Using cached user overrides";
+	}
+
+	userSettingsDirty = false;
+}
+
+void CIniHighlighter::MarkSettingsDirty()
+{
+	settingsDirty = true;
+}
+
+void CIniHighlighter::MarkUserSettingsDirty()
+{
+	userSettingsDirty = true;
 }

@@ -591,13 +591,13 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.chkValidateIniKeys->setChecked(defaultValidation);
 	m_IniValidationEnabled = defaultValidation;
 
-	int defaultTooltip = theConf->GetInt("Options/EnableIniTooltips", Qt::Checked);
+	int defaultTooltip = theConf->GetInt("Options/EnableIniTooltips", static_cast<int>(CIniHighlighter::GetTooltipMode()));
 	ui.chkEnableTooltips->setTristate(true); // Enable tri-state
 	ui.chkEnableTooltips->setCheckState(static_cast<Qt::CheckState>(defaultTooltip));
 	CIniHighlighter::SetTooltipMode(defaultTooltip); // Initialize the mode
 
 	LoadCompletionConsent();
-	int defaultAutoCompletion = theConf->GetInt("Options/EnableAutoCompletion", Qt::Checked);
+	int defaultAutoCompletion = theConf->GetInt("Options/EnableAutoCompletion", static_cast<int>(CCodeEdit::GetAutoCompletionMode()));
 	if (m_AutoCompletionConsent) {
 		ui.chkEnableAutoCompletion->setTristate(true); // Enable tri-state
 		ui.chkEnableAutoCompletion->setCheckState(static_cast<Qt::CheckState>(defaultAutoCompletion));
@@ -932,14 +932,14 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 					break;
 			}
 
-			// Extract the complete identifier including dots
-			QString word = currentLine.mid(startPos, endPos - startPos);
-
 			// Show tooltip if it's a valid setting
-			if (!word.isEmpty() && word.contains(QRegularExpression("^[a-zA-Z0-9_.]+$"))) {
+			if (CIniHighlighter::IsValidTooltipContext(currentLine.left(endPos))) {
 				// Only try to show tooltips if settings are loaded
 				if (CIniHighlighter::IsSettingsLoaded()) {
-					QString tooltipText = CIniHighlighter::GetSettingTooltip(word);
+					QString settingName = currentLine.mid(startPos, endPos - startPos);
+					if (settingName.endsWith('='))
+						settingName.chop(1);
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName);
 					if (!tooltipText.isEmpty()) {
 						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
 						return true;
@@ -2497,14 +2497,13 @@ void CSettingsWindow::OnIniValidationToggled(int state)
 
 	m_IniValidationEnabled = (state == Qt::Checked);
 
-	// Save the new value to config
 	theConf->SetValue("Options/ValidateIniKeys", m_IniValidationEnabled);
 
-	// Clear all language-related caches
 	CIniHighlighter::ClearLanguageCache();
-
-	// Clear all theme-related caches
 	CIniHighlighter::ClearThemeCache();
+
+	CIniHighlighter::MarkSettingsDirty();
+	CIniHighlighter::MarkUserSettingsDirty();
 
 	// Remove previous highlighter
 	if (m_pIniHighlighter) {

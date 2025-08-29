@@ -77,6 +77,7 @@ protected:
 	WordBoundaries FindWordBoundaries(const QString& text, int position) const;
 	QString ExtractWordAtCursor(const CursorContext& context) const;
 	bool IsInKeyPosition(const CursorContext& context) const;
+	bool IsWordAtLineStart(const CursorContext& context) const;
 	QString GetCompletionWord() const;
 	void TriggerCompletion(const QString& prefix, int minimumLength = 3);
 	void HandleCaseCorrection(const QString& word, bool wasPopupVisible);
@@ -163,6 +164,8 @@ private:
 	QStringList m_caseCorrectionCandidates; // Keys hidden from popup but available for case correction
 
 	bool m_suppressNextAutoCompletion = false;
+
+	int m_lastKeyPressed = 0;
 
 	private slots:
 		void OnCursorPositionChanged();

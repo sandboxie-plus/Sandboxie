@@ -15,7 +15,6 @@
 #include "../Wizards/TemplateWizard.h"
 #include "../AddonManager.h"
 #include <qfontdialog.h>
-#include <QJsonDocument>
 #include <QJsonObject>
 #include "Helpers/TabOrder.h"
 #include "../MiscHelpers/Common/CodeEdit.h"
@@ -1655,6 +1654,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/HideSbieProcesses", ui.chkHideCore->isChecked());
 
 	CIniHighlighter::ClearLanguageCache();
+	CIniHighlighter::ClearThemeCache();
 
 	int Scaling = ui.cmbFontScale->currentText().toInt();
 	if (Scaling < 75)

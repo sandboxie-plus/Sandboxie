@@ -5,12 +5,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.3 / 5.71.3] - 2025-08-xx
+## [1.16.3 / 5.71.3] - 2025-09-xx
+
+### Changed
+- updated GitHub build action to use [Qt 6.9.2](https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.9.2/release-note.md)
 
 ### Fixed
 - fixed 1.16.2 = Tray Menu Missing in Action [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)
-
-
+- fixed UAC prompt layout at higher DPI in secure desktop [#4953](https://github.com/sandboxie-plus/Sandboxie/issues/4953) (thanks gexgd0419)
+- fixed RTL layout for Arabic in UAC prompt dialog [#4957](https://github.com/sandboxie-plus/Sandboxie/pull/4957) (thanks gexgd0419)
+- fixed Network options cannot be persisted during editing [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
 
 
 
@@ -37,6 +41,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [1.16.1 / 5.71.1] - 2025-07-06
+
+### Added
+- added UI Font in settings windows [#4894](https://github.com/sandboxie-plus/Sandboxie/pull/4894) (thanks srdr0p)
 
 ### Changed
 - updated toolset to MSVC_2022 as the GitHub CI runner 2019 is being discontinued

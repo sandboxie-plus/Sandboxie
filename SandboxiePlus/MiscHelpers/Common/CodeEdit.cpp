@@ -521,6 +521,32 @@ bool CCodeEdit::eventFilter(QObject* obj, QEvent* event)
 		QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
 		m_lastKeyPressed = keyEvent->key();
 
+		// Intercept Shift+Enter on the text edit to avoid Qt inserting U+2028
+		if (obj == m_pSourceCode &&
+			(keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) &&
+			(keyEvent->modifiers() & Qt::ShiftModifier)) {
+
+			// Hide popup if visible (so it doesn't stay open across blocks)
+			HidePopupSafely();
+
+			// Clear any pending case-correction tracking (positions would shift after block insertion)
+			ClearCaseCorrectionTracking();
+
+			// Insert a real paragraph/block (behaves like a hard Enter) and make it a single undo step
+			QTextCursor cursor = m_pSourceCode->textCursor();
+			cursor.beginEditBlock();
+			cursor.insertBlock();
+			cursor.endEditBlock();
+			m_pSourceCode->setTextCursor(cursor);
+
+			// Suppress any immediate auto-completion that could be triggered by the textChanged() fired by insertBlock()
+			m_suppressNextAutoCompletion = true;
+			ResetFlagAfterDelay(m_suppressNextAutoCompletion, 50);
+
+			// Consume event so QTextEdit won't insert U+2028
+			return true;
+		}
+
 		// Handle Backspace key
 		if (keyEvent->key() == Qt::Key_Backspace) {
 			if (m_pCompleter && m_pCompleter->popup() && m_pCompleter->popup()->isVisible()) {
@@ -816,6 +842,15 @@ bool CCodeEdit::HandleDeleteForCompletion(QKeyEvent* keyEvent)
 		QTextBlock block = cursor.block();
 		QString lineText = block.text();
 		int relPos = cursor.position() - block.position();
+
+		// If current line is empty and cursor is at column 0,
+		// the user pressed Delete to remove the empty line (merge next line up).
+		// Suppress any immediate autocompletion and hide popup — do not trigger popup.
+		if (relPos == 0 && lineText.isEmpty()) {
+			m_suppressNextAutoCompletion = true;
+			HidePopupSafely();
+			return false; // allow deletion to proceed but prevent popup
+		}
 
 		// If cursor is at column 0 and first character is non-completer Delete will remove it
 		if (relPos == 0 && !lineText.isEmpty()) {

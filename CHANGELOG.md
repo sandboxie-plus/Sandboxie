@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed 1.16.2 = Tray Menu Missing in Action [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)
 - fixed UAC prompt layout at higher DPI in secure desktop [#4953](https://github.com/sandboxie-plus/Sandboxie/issues/4953) (thanks gexgd0419)
 - fixed RTL layout for Arabic in UAC prompt dialog [#4957](https://github.com/sandboxie-plus/Sandboxie/pull/4957) (thanks gexgd0419)
+- fixed 1.16.1 Dark mode help popup window with light color background [#4903](https://github.com/sandboxie-plus/Sandboxie/issues/4903)
 - fixed Network options cannot be persisted during editing [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
 
 

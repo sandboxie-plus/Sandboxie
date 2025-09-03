@@ -4,8 +4,390 @@
 
 #define TAB_SPACES "   "
 
+// Anonymous namespace helpers for fuzzy matching
+namespace {
+
+	// Compute Damerau-Levenshtein distance (optimal string alignment allowing transpositions)
+	static int DamerauLevenshtein(const QString& aIn, const QString& bIn)
+	{
+		QString a = aIn.toLower();
+		QString b = bIn.toLower();
+
+		int m = a.length();
+		int n = b.length();
+		if (m == 0) return n;
+		if (n == 0) return m;
+
+		const int INF = m + n;
+		std::vector<std::vector<int>> H(m + 2, std::vector<int>(n + 2, 0));
+		H[0][0] = INF;
+		for (int i = 0; i <= m; ++i) {
+			H[i + 1][1] = i;
+			H[i + 1][0] = INF;
+		}
+		for (int j = 0; j <= n; ++j) {
+			H[1][j + 1] = j;
+			H[0][j + 1] = INF;
+		}
+
+		std::unordered_map<quint32, int> DA; // map from QChar.unicode() to last row seen
+		DA.reserve(m + n);
+		for (int i = 0; i < m; ++i) DA[static_cast<quint32>(a[i].unicode())] = 0;
+		for (int j = 0; j < n; ++j) DA[static_cast<quint32>(b[j].unicode())] = 0;
+
+		for (int i = 1; i <= m; ++i) {
+			int db = 0;
+			for (int j = 1; j <= n; ++j) {
+				int i1 = DA[static_cast<quint32>(b[j - 1].unicode())];
+				int j1 = db;
+				int cost = (a[i - 1] == b[j - 1]) ? 0 : 1;
+				if (cost == 0) db = j;
+				int substitution = H[i][j] + cost;
+				int insertion = H[i + 1][j] + 1;
+				int deletion = H[i][j + 1] + 1;
+				int transposition = H[i1][j1] + (i - i1 - 1) + 1 + (j - j1 - 1);
+				H[i + 1][j + 1] = std::min({ substitution, insertion, deletion, transposition });
+			}
+			DA[static_cast<quint32>(a[i - 1].unicode())] = i;
+		}
+
+		return H[m + 1][n + 1];
+	}
+
+	// Check if 'small' is a subsequence of 'large' (case-insensitive)
+	static bool IsSubsequenceCI(const QString& smallIn, const QString& largeIn)
+	{
+		QString small = smallIn.toLower();
+		QString large = largeIn.toLower();
+		int si = 0, li = 0;
+		while (si < small.length() && li < large.length()) {
+			if (small[si] == large[li]) {
+				++si;
+			}
+			++li;
+		}
+		return si == small.length();
+	}
+
+	// Compare prefix to substrings of candidate and return minimal Damerau-Levenshtein distance.
+	// This improves matching when candidate is longer than the short prefix.
+	static int MinDistanceToCandidateSubstrings(const QString& pref, const QString& cand, int maxLenDelta = 2)
+	{
+		QString p = pref.toLower();
+		QString c = cand.toLower();
+		int pLen = p.length();
+		int cLen = c.length();
+		if (pLen == 0) return 0;
+		int minD = INT_MAX;
+
+		// Try substrings of candidate with lengths around prefix length to handle missing/extra letters.
+		int startLen = std::max(1, pLen - maxLenDelta);
+		int endLen = std::min(cLen, pLen + maxLenDelta);
+
+		for (int len = startLen; len <= endLen; ++len) {
+			for (int i = 0; i + len <= cLen; ++i) {
+				QString sub = c.mid(i, len);
+				int d = DamerauLevenshtein(p, sub);
+				if (d < minD) minD = d;
+				if (minD == 0) return 0; // best possible
+			}
+		}
+
+		// fallback compare to whole candidate if nothing better found
+		int whole = DamerauLevenshtein(p, c);
+		minD = std::min(minD, whole);
+
+		if (minD == INT_MAX) return pLen;
+		return minD;
+	}
+
+	// Find earliest subsequence start index of `pref` inside `cand`.
+	// Returns -1 if no subsequence exists.
+	static int FindSubsequenceStart(const QString& pref, const QString& cand)
+	{
+		if (pref.isEmpty() || cand.isEmpty()) return -1;
+		QString p = pref.toLower();
+		QString c = cand.toLower();
+
+		for (int start = 0; start < c.length(); ++start) {
+			if (c[start] != p[0]) continue;
+			int pi = 0;
+			int ci = start;
+			while (pi < p.length() && ci < c.length()) {
+				if (p[pi] == c[ci]) {
+					++pi;
+				}
+				++ci;
+			}
+			if (pi == p.length())
+				return start; // subsequence starting at 'start' works
+		}
+		return -1;
+	}
+
+	// Build a fuzzy-sorted candidate list from supplied candidates given prefix
+	static QStringList BuildFuzzyMatches(const QStringList& candidates, const QString& prefix)
+	{
+		QString pref = prefix.toLower();
+
+		// Added hasSubstr flag so exact substring matches can be boosted
+		// matchedLen is added to prefer candidates that match a larger portion of the prefix
+		// tokenScore boosts token-boundary / token-equality matches (helps prefer 'Enabled' over 'NormalFilePathDisabled')
+		// coverage prefers compact matches where matchedLen covers a larger fraction of the candidate.
+		struct Entry { QString text; int dist; int pos; int len; bool hasSubstr; int matchedLen; int tokenScore; int coverage; };
+		std::vector<Entry> matches;
+		matches.reserve(candidates.size());
+
+		// adaptive threshold: allow more errors for longer inputs.
+		// Map prefix length minPrefix..maxPrefix -> maxDist 1..maxCap (linear).
+		int pLen = pref.length();
+		const int minPrefix = CCodeEdit::AUTO_COMPLETE_MIN_LENGTH;
+		const int maxPrefix = CCodeEdit::GetMaxFuzzyPrefixLength();
+		const int maxCap = 3; // maximum allowed distance for longest prefixes
+
+		// helper: longest common substring length (O(m*n) DP but small inputs)
+		auto LongestCommonSubstring = [](const QString& a, const QString& b) -> int {
+			int m = a.length();
+			int n = b.length();
+			if (m == 0 || n == 0) return 0;
+			std::vector<int> prev(n + 1, 0), cur(n + 1, 0);
+			int best = 0;
+			for (int i = 1; i <= m; ++i) {
+				for (int j = 1; j <= n; ++j) {
+					if (a[i - 1] == b[j - 1]) {
+						cur[j] = prev[j - 1] + 1;
+						if (cur[j] > best) best = cur[j];
+					}
+					else {
+						cur[j] = 0;
+					}
+				}
+				std::fill(prev.begin(), prev.end(), 0);
+				prev.swap(cur);
+			}
+			return best;
+			};
+
+		// helper: token match score (tokens by upper-case transitions, '_' and '.')
+		auto TokenMatchScore = [](const QString& cand, const QString& prefLower) -> int {
+			// split into tokens
+			std::vector<QString> tokens;
+			int n = cand.length();
+			int start = 0;
+			for (int i = 0; i < n; ++i) {
+				QChar c = cand[i];
+				bool boundary = false;
+				if (c == '_' || c == '.') boundary = true;
+				else if (i > 0 && cand[i].isUpper() && cand[i - 1].isLower()) boundary = true;
+				if (boundary) {
+					if (i - start > 0) tokens.push_back(cand.mid(start, i - start));
+					start = i;
+				}
+			}
+			if (start < n) tokens.push_back(cand.mid(start));
+
+			int best = 0;
+			for (const QString& t : tokens) {
+				QString tl = t.toLower();
+				if (tl == prefLower) return 100;            // exact token match -> big boost
+				if (tl.startsWith(prefLower)) best = std::max(best, 60); // token starts with prefix
+				if (tl.endsWith(prefLower)) best = std::max(best, 50); // token ends with suffix
+				if (tl.contains(prefLower)) best = std::max(best, 40);   // token contains prefix
+			}
+
+			// acronym match: take initials (e.g. NormalFilePathDisabled -> NFPD) and compare prefix
+			QString initials;
+			for (const QString& t : tokens) {
+				if (!t.isEmpty())
+					initials.append(t[0].toUpper());
+			}
+			if (!initials.isEmpty()) {
+				if (initials.toLower().startsWith(prefLower)) best = std::max(best, 30);
+			}
+
+			return best;
+			};
+
+		auto computeCoverage = [](int matchedLen, int candLen) -> int {
+			if (candLen <= 0) return 0;
+			// scale by 1000 to keep integer precision
+			return (matchedLen * 1000) / candLen;
+			};
+
+		// sort & return:
+		// 1) distance (all 0 here),
+		// 2) prefer hasSubstr (true),
+		// 3) prefer coverage (compactness of match),
+		// 4) prefer larger matchedLen,
+		// 5) prefer tokenScore,
+		// 6) earliest position,
+		// 7) shorter candidate,
+		// 8) alphabetical
+		auto EntryComparator = [](const Entry& a, const Entry& b) -> bool {
+			if (a.dist != b.dist) return a.dist < b.dist;
+			if (a.hasSubstr != b.hasSubstr) return a.hasSubstr > b.hasSubstr; // true first
+			if (a.coverage != b.coverage) return a.coverage > b.coverage;
+			if (a.matchedLen != b.matchedLen) return a.matchedLen > b.matchedLen; // prefer larger coverage of prefix
+			if (a.tokenScore != b.tokenScore) return a.tokenScore > b.tokenScore;
+			if (a.pos != b.pos) return a.pos < b.pos;
+			if (a.len != b.len) return a.len < b.len;
+			return a.text.toLower() < b.text.toLower();
+			};
+
+		// If prefix is non-empty but shorter than configured (minPrefix), do NOT run fuzzy
+		// distance matching — only accept strict contains matches. This avoids
+		// single-char noise (e.g. "=") producing many fuzzy matches.
+		if (!pref.isEmpty() && pLen < minPrefix) {
+			for (const QString& cand : candidates) {
+				// Use contains to match non-fuzzy behavior used elsewhere (Ctrl+Space, short prefixes)
+				if (cand.toLower().contains(pref)) {
+					int candLen = cand.length();
+					int matchedLen = pLen;
+					int tokenScore = TokenMatchScore(cand, pref);
+					int coverage = computeCoverage(matchedLen, candLen);
+					matches.push_back(Entry{ cand, 0, 0, candLen, true, matchedLen, tokenScore, coverage });
+				}
+			}
+
+			// sort & return (use shared comparator)
+			std::sort(matches.begin(), matches.end(), EntryComparator);
+			QStringList out;
+			out.reserve(matches.size());
+			for (const auto& e : matches) out.append(e.text);
+			return out;
+		}
+
+		int maxDist;
+		if (pLen <= minPrefix) {
+			maxDist = 1;
+		}
+		else if (pLen >= maxPrefix) {
+			maxDist = maxCap;
+		}
+		else {
+			// Linear interpolation between 1 and maxCap
+			int span = std::max(1, maxPrefix - minPrefix);
+			double scale = double(pLen - minPrefix) / double(span); // 0..1
+			maxDist = 1 + int(std::round(scale * (maxCap - 1)));
+		}
+
+		for (const QString& cand : candidates) {
+			QString candLower = cand.toLower();
+			int candLen = candLower.length();
+
+			// Fast accept: startsWith (case-insensitive)
+			if (!pref.isEmpty() && candLower.startsWith(pref)) {
+				int matchedLen = pLen;
+				int tokenScore = TokenMatchScore(cand, pref);
+				int coverage = computeCoverage(matchedLen, candLen);
+				matches.push_back(Entry{ cand, 0, 0, candLen, true, matchedLen, tokenScore, coverage });
+				continue;
+			}
+
+			// Exact substring match (anywhere) should be preferred
+			if (!pref.isEmpty()) {
+				int subPos = candLower.indexOf(pref);
+				if (subPos >= 0) {
+					// exact substring -> distance 0, mark hasSubstr true
+					int matchedLen = pLen;
+					int tokenScore = TokenMatchScore(cand, pref);
+					int coverage = computeCoverage(matchedLen, candLen);
+					matches.push_back(Entry{ cand, 0, subPos, candLen, true, matchedLen, tokenScore, coverage });
+					continue;
+				}
+			}
+
+			// If prefix is empty, include all (manual completion case)
+			if (pref.isEmpty()) {
+				matches.push_back(Entry{ cand, 0, 0, candLen, false, 0, 0, 0 });
+				continue;
+			}
+
+			// If prefix is a subsequence of candidate, accept with low distance
+			if (IsSubsequenceCI(pref, candLower)) {
+				// Smaller pseudo-distance based on how sparse the match is
+				int score = 1 + std::max(0, int(candLower.length() - pref.length()) / 4);
+				score = std::min(score, maxDist);
+				int pos = FindSubsequenceStart(pref, candLower);
+				if (pos < 0) pos = INT_MAX / 2;
+				int lcs = LongestCommonSubstring(pref, candLower);
+				int matchedLen = std::max(1, pLen - score); // approximate matched prefix portion
+				int tokenScore = TokenMatchScore(cand, pref);
+				// boost matchedLen with actual LCS info
+				matchedLen = std::max(matchedLen, lcs);
+				int coverage = computeCoverage(matchedLen, candLen);
+				matches.push_back(Entry{ cand, score, pos, candLen, false, matchedLen, tokenScore, coverage });
+				continue;
+			}
+
+			// Compute minimal Damerau-Levenshtein distance against candidate substrings
+			int d = MinDistanceToCandidateSubstrings(pref, candLower, 2);
+			if (d <= maxDist) {
+				// compute an approximate favorable position: try to find exact substring match of a short slice
+				int pos = -1;
+				int probeLen = std::min(3, pLen);
+				if (probeLen > 0) {
+					QString probe = pref.left(probeLen);
+					pos = candLower.indexOf(probe);
+				}
+				if (pos < 0) {
+					// fallback to subsequence start (may still be -1)
+					pos = FindSubsequenceStart(pref, candLower);
+				}
+				if (pos < 0) pos = INT_MAX / 2;
+				// matchedLen = how much of prefix is effectively matched (approx)
+				int lcs = LongestCommonSubstring(pref, candLower);
+				int matchedLen = std::max(0, pLen - d);
+				matchedLen = std::max(matchedLen, lcs);
+				int tokenScore = TokenMatchScore(cand, pref);
+				int coverage = computeCoverage(matchedLen, candLen);
+				matches.push_back(Entry{ cand, d, pos, candLen, false, matchedLen, tokenScore, coverage });
+				continue;
+			}
+
+			// For very short prefixes, allow single-char edits
+			if (pref.length() <= 2 && d <= 1) {
+				int pos = FindSubsequenceStart(pref, candLower);
+				if (pos < 0) pos = INT_MAX / 2;
+				int lcs = LongestCommonSubstring(pref, candLower);
+				int matchedLen = std::max(0, pLen - d);
+				matchedLen = std::max(matchedLen, lcs);
+				int tokenScore = TokenMatchScore(cand, pref);
+				int coverage = computeCoverage(matchedLen, candLen);
+				matches.push_back(Entry{ cand, d, pos, candLen, false, matchedLen, tokenScore, coverage });
+				continue;
+			}
+		}
+
+		// Sort by distance then prefer exact substring matches, then coverage (compactness),
+		// then larger matchedLen, then tokenScore, then earliest match position, then shorter candidate then alphabetically
+		std::sort(matches.begin(), matches.end(), EntryComparator);
+
+		//// Debug: show aggregate info + top matches (helps tune thresholds)
+		//{
+		//	int logCount = std::min<int>((int)matches.size(), 10);
+		//	qDebug() << "[Fuzzy] prefix=" << pref << "pLen=" << pLen
+		//		<< "minPrefix=" << minPrefix << "maxPrefix=" << maxPrefix
+		//		<< "maxDist=" << maxDist << "matches=" << matches.size();
+		//	for (int i = 0; i < logCount; ++i) {
+		//		qDebug() << "  [Fuzzy] #" << i << matches[i].text << "dist=" << matches[i].dist << "pos=" << matches[i].pos << "len=" << matches[i].len << "hasSubstr=" << matches[i].hasSubstr << "matchedLen=" << matches[i].matchedLen << "tokenScore=" << matches[i].tokenScore << "coverage=" << matches[i].coverage;
+		//	}
+		//}
+
+		QStringList out;
+		out.reserve(matches.size());
+		for (const auto& e : matches) out.append(e.text);
+		return out;
+	}
+
+} // namespace
+
 CCodeEdit::AutoCompletionMode CCodeEdit::s_autoCompletionMode = AutoCompletionMode::FullAuto;
 QMutex CCodeEdit::s_autoCompletionModeMutex;
+
+bool CCodeEdit::s_fuzzyMatchingEnabled = false;
+int CCodeEdit::s_minFuzzyPrefixLength = 4;
+int CCodeEdit::s_maxFuzzyPrefixLength = 32;
 
 CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	: QWidget(pParent), m_pCompleter(nullptr), m_lastWordStart(-1), m_lastWordEnd(-1),
@@ -70,26 +452,50 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	connect(m_completionDebounceTimer, &QTimer::timeout, this, [this]() {
 		if (!m_pCompleter)
 			return;
-		m_pCompleter->setCompletionPrefix(m_pendingPrefix);
 
-		// Check if only one completion and it matches the prefix
-        if (m_pCompleter->completionCount() == 1) {
-            QString onlyCompletion = m_pCompleter->currentCompletion();
-            if (onlyCompletion.compare(m_pendingPrefix, Qt::CaseSensitive) == 0) {
-                HidePopupSafely();
-                return;
-            }
-        }
+		// If fuzzy matching is enabled use our fuzzy model for this prefix,
+		// otherwise rely on QCompleter's built-in filtering behavior.
+		if (GetFuzzyMatchingEnabled()) {
+			QStringList fuzzy = ApplyFuzzyModelForPrefix(m_pendingPrefix);
 
-		// Only show popup if there are completions available
-		if (m_pCompleter->completionCount() > 0) {
-			QRect rect = m_pSourceCode->cursorRect();
-			rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
-				+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
-			m_pCompleter->complete(rect);
-		}
-		else {
-			HidePopupSafely();
+			// Check if only one completion and it matches the prefix exactly
+			if (fuzzy.size() == 1 && fuzzy[0].compare(m_pendingPrefix, Qt::CaseSensitive) == 0) {
+				HidePopupSafely();
+				return;
+			}
+
+			// Show popup if there are results
+			if (!fuzzy.isEmpty()) {
+				QRect rect = m_pSourceCode->cursorRect();
+				rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
+					+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
+				m_pCompleter->complete(rect);
+			} else {
+				HidePopupSafely();
+			}
+		} else {
+			// default behavior
+			m_pCompleter->setCompletionPrefix(m_pendingPrefix);
+
+			// Check if only one completion and it matches the prefix
+			if (m_pCompleter->completionCount() == 1) {
+				QString onlyCompletion = m_pCompleter->currentCompletion();
+				if (onlyCompletion.compare(m_pendingPrefix, Qt::CaseSensitive) == 0) {
+					HidePopupSafely();
+					return;
+				}
+			}
+
+			// Only show popup if there are completions available
+			if (m_pCompleter->completionCount() > 0) {
+				QRect rect = m_pSourceCode->cursorRect();
+				rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
+					+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
+				m_pCompleter->complete(rect);
+			}
+			else {
+				HidePopupSafely();
+			}
 		}
 		});
 
@@ -129,6 +535,13 @@ void CCodeEdit::SetCompleter(QCompleter* completer)
 	// This ensures we capture key events BEFORE the popup processes them
 	if (m_pCompleter->popup()) {
 		m_pCompleter->popup()->installEventFilter(this);
+	}
+	// remember base model if present
+	m_baseModel = qobject_cast<QStringListModel*>(m_pCompleter->model());
+	// clear any temp model reference
+	if (m_tempFuzzyModel) {
+		delete m_tempFuzzyModel;
+		m_tempFuzzyModel = nullptr;
 	}
 }
 
@@ -477,7 +890,36 @@ void CCodeEdit::HandleCaseCorrection(const QString& word, bool wasPopupVisible)
 
 	QString correctedWord = m_caseCorrectionCallback(word);
 
-	if (!correctedWord.isEmpty() && IsKeyAvailableInCompletionModel(correctedWord)) {
+	// If the callback didn't find a correction and fuzzy matching is enabled,
+	// try a fuzzy lookup among candidates (case-correction candidates + visible ones).
+	if (correctedWord.isEmpty() && GetFuzzyMatchingEnabled()) {
+		// Build unified candidate list (preserve case from original lists)
+		QStringList all = m_caseCorrectionCandidates;
+		for (const QString& v : m_visibleCandidates) {
+			bool found = false;
+			for (const QString& a : all) {
+				if (a.compare(v, Qt::CaseInsensitive) == 0) { found = true; break; }
+			}
+			if (!found) all.append(v);
+		}
+
+		if (!all.isEmpty()) {
+			// BuildFuzzyMatches returns sorted candidates by fuzzy distance.
+			QStringList fuzzy = BuildFuzzyMatches(all, word);
+
+			if (!fuzzy.isEmpty()) {
+				// Validate top fuzzy candidate with a small distance threshold before proposing it.
+				const QString candidate = fuzzy.first();
+				int dist = MinDistanceToCandidateSubstrings(word, candidate, 2);
+				const int MAX_ACCEPTABLE_FUZZY_DIST = 2; // tunable: allow up to 2 edits for case-correction suggestion
+				if (dist <= MAX_ACCEPTABLE_FUZZY_DIST) {
+					correctedWord = candidate;
+				}
+			}
+		}
+	}
+
+	if (!correctedWord.isEmpty() && IsKeyAvailableConsideringFuzzy(correctedWord, word)) {
 		// Check if the corrected word should be hidden from case correction using callback
 		if (m_caseCorrectionFilterCallback && m_caseCorrectionFilterCallback(correctedWord)) {
 			return; // Don't show case correction for hidden keys
@@ -726,14 +1168,43 @@ bool CCodeEdit::HandleManualCompletionTrigger(QKeyEvent* keyEvent)
 		QString wordUnderCursor = ExtractWordAtCursor(context);
 
 		// Even if word is empty, show all completions for manual trigger
-		m_pCompleter->setCompletionPrefix(wordUnderCursor);
+		if (GetFuzzyMatchingEnabled()) {
+			// Build fuzzy matches (fuzzy-ranked)
+			QStringList fuzzy = BuildFuzzyMatches(m_visibleCandidates, wordUnderCursor);
 
-		if (m_pCompleter->completionCount() > 0) {
-			QRect rect = m_pSourceCode->cursorRect();
-			rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
-				+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
-			m_pCompleter->complete(rect);
-			return true;
+			// Preserve fuzzy ranking when the user has typed a prefix.
+			// Only present an alphabetical list for the "show all" case (empty prefix).
+			if (wordUnderCursor.isEmpty()) {
+				std::sort(fuzzy.begin(), fuzzy.end(), [](const QString& a, const QString& b) {
+					return a.compare(b, Qt::CaseInsensitive) < 0;
+					});
+			}
+
+			if (!fuzzy.isEmpty()) {
+				// Create a temporary model parented to this so we can control its lifetime
+				if (m_tempFuzzyModel) {
+					delete m_tempFuzzyModel;
+					m_tempFuzzyModel = nullptr;
+				}
+				m_tempFuzzyModel = new QStringListModel(fuzzy, this);
+				m_pCompleter->setModel(m_tempFuzzyModel);
+
+				QRect rect = m_pSourceCode->cursorRect();
+				rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
+					+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
+				m_pCompleter->complete(rect);
+				return true;
+			}
+		}
+		else {
+			m_pCompleter->setCompletionPrefix(wordUnderCursor);
+			if (m_pCompleter->completionCount() > 0) {
+				QRect rect = m_pSourceCode->cursorRect();
+				rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
+					+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
+				m_pCompleter->complete(rect);
+				return true;
+			}
 		}
 	}
 	return false;
@@ -1024,7 +1495,8 @@ void CCodeEdit::ReplaceLastCorrection()
 		m_lastWordStart < 0 || m_lastWordEnd < 0)
 		return;
 
-	if (!IsKeyAvailableInCompletionModel(m_lastCorrectWord)) {
+	// Use fuzzy-aware availability check so Ctrl+R works when fuzzy is enabled
+	if (!IsKeyAvailableConsideringFuzzy(m_lastCorrectWord, m_lastWrongWord)) {
 		// Clear tracking if the correction is no longer valid
 		ClearCaseCorrectionTracking();
 		return;
@@ -1178,7 +1650,7 @@ void CCodeEdit::ValidateCaseCorrection()
 	// Combine all checks into a single condition
 	if (!block.isValid() || cursor.position() == 0 ||
 		cursor.position() < m_lastWordStart - 10 || cursor.position() > m_lastWordEnd + 10 ||
-		!IsKeyAvailableInCompletionModel(m_lastCorrectWord) ||
+		!IsKeyAvailableConsideringFuzzy(m_lastCorrectWord, m_lastWrongWord) ||
 		block.text().mid(m_lastWordStart - block.position(), m_lastWordEnd - m_lastWordStart)
 		.compare(m_lastWrongWord, Qt::CaseInsensitive) != 0) {
 		ClearCaseCorrectionTracking();
@@ -1232,6 +1704,8 @@ void CCodeEdit::HidePopupSafely()
 	if (m_pCompleter && m_pCompleter->popup() && m_pCompleter->popup()->isVisible()) {
 		m_pCompleter->popup()->hide();
 	}
+	// If we used a temporary fuzzy model, restore the base model
+	RestoreBaseCompletionModel();
 }
 
 // Helper method: Check if we're dealing with an existing key=value line
@@ -1347,4 +1821,100 @@ void CCodeEdit::OnCursorPositionChanged()
 	if (!IsInKeyPosition(context)) {
 		HidePopupSafely();
 	}
+}
+
+// Helper: apply a fuzzy-model for the given prefix and return the fuzzy result list.
+// This creates a temporary QStringListModel (owned by 'this') and assigns it to the completer.
+QStringList CCodeEdit::ApplyFuzzyModelForPrefix(const QString& prefix)
+{
+	if (!m_pCompleter)
+		return QStringList();
+
+	// Build fuzzy matches from visible candidates
+	QStringList fuzzy = BuildFuzzyMatches(m_visibleCandidates, prefix);
+
+	// Create temporary model parented to this so we can control its lifetime
+	if (m_tempFuzzyModel) {
+		delete m_tempFuzzyModel;
+		m_tempFuzzyModel = nullptr;
+	}
+	m_tempFuzzyModel = new QStringListModel(fuzzy, this);
+	m_pCompleter->setModel(m_tempFuzzyModel);
+	return fuzzy;
+}
+
+// Restore completer's model back to the base (visible) model and free any temporary model
+void CCodeEdit::RestoreBaseCompletionModel()
+{
+	if (!m_pCompleter)
+		return;
+
+	// If a temp fuzzy model is active, remove it and restore base model
+	if (m_tempFuzzyModel) {
+		m_pCompleter->setModel(m_baseModel);
+		delete m_tempFuzzyModel;
+		m_tempFuzzyModel = nullptr;
+	}
+}
+
+bool CCodeEdit::IsKeyAvailableConsideringFuzzy(const QString& key, const QString& wordForFuzzy) const
+{
+	// First keep original fast path
+	if (IsKeyAvailableInCompletionModel(key))
+		return true;
+
+	// If fuzzy matching not enabled, respect original behavior
+	if (!GetFuzzyMatchingEnabled())
+		return false;
+
+	// Build candidate set: include both visible and case-correction candidates (unique)
+	QStringList all = m_visibleCandidates;
+	for (const QString& c : m_caseCorrectionCandidates) {
+		if (!all.contains(c, Qt::CaseInsensitive))
+			all.append(c);
+	}
+
+	if (all.isEmpty())
+		return false;
+
+	QStringList fuzzy = BuildFuzzyMatches(all, wordForFuzzy);
+	for (const QString& f : fuzzy) {
+		if (f.compare(key, Qt::CaseInsensitive) == 0)
+			return true;
+	}
+	return false;
+}
+
+void CCodeEdit::SetMaxFuzzyPrefixLength(int length)
+{
+	if (length < 4) length = 4; // minimum sensible bound
+	s_maxFuzzyPrefixLength = length;
+	//qDebug() << "[CodeEdit] s_maxFuzzyPrefixLength set to" << s_maxFuzzyPrefixLength;
+}
+
+int CCodeEdit::GetMaxFuzzyPrefixLength()
+{
+	return s_maxFuzzyPrefixLength;
+}
+
+void CCodeEdit::SetMinFuzzyPrefixLength(int length)
+{
+	if (length < 1) length = 1; // sensible lower bound
+	s_minFuzzyPrefixLength = length;
+	//qDebug() << "[CodeEdit] s_minFuzzyPrefixLength set to" << s_minFuzzyPrefixLength;
+}
+
+int CCodeEdit::GetMinFuzzyPrefixLength()
+{
+	return s_minFuzzyPrefixLength;
+}
+
+void CCodeEdit::SetFuzzyMatchingEnabled(bool bEnabled)
+{
+	s_fuzzyMatchingEnabled = bEnabled;
+}
+
+bool CCodeEdit::GetFuzzyMatchingEnabled()
+{
+	return s_fuzzyMatchingEnabled;
 }

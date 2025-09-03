@@ -72,6 +72,7 @@ public:
 	static bool IsValidTooltipContext(const QString& hoveredText);
 
 	static int getMaxSettingNameLengthOrDefault();
+	static int getMinSettingNameLengthOrDefault();
 
 	static void MarkSettingsDirty();
 	static void MarkUserSettingsDirty();
@@ -272,6 +273,8 @@ private:
 
 	static int s_maxSettingNameLength;
 	static bool s_maxSettingNameLengthValid;
+	static int s_minSettingNameLength;
+	static bool s_minSettingNameLengthValid;
 
 	void reloadSettingsIniIfNeeded(const QString& userIniPath, const QFileInfo& userFileInfo);
 	void reloadUserIniIfNeeded(const QString& userIniPath, const QFileInfo& userFileInfo);

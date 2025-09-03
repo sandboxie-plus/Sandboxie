@@ -39,6 +39,8 @@ QMutex CIniHighlighter::hideConfMutex;
 
 int CIniHighlighter::s_maxSettingNameLength = 64;
 bool CIniHighlighter::s_maxSettingNameLengthValid = false;
+int CIniHighlighter::s_minSettingNameLength = 1;
+bool CIniHighlighter::s_minSettingNameLengthValid = false;
 
 bool CIniHighlighter::settingsDirty = true;
 bool CIniHighlighter::userSettingsDirty = true;
@@ -2121,6 +2123,29 @@ int CIniHighlighter::getMaxSettingNameLengthOrDefault()
 	s_maxSettingNameLengthValid = true;
 
 	return s_maxSettingNameLength;
+}
+
+int CIniHighlighter::getMinSettingNameLengthOrDefault()
+{
+	if (s_minSettingNameLengthValid) {
+		return s_minSettingNameLength;
+	}
+
+	int minLength = INT_MAX;
+
+	for (const auto& key : validSettings.keys()) {
+		int currentLength = key.length();
+		if (currentLength < minLength) {
+			qDebug() << "[validSettings] Found shorter key:" << key << "Length:" << currentLength;
+			minLength = currentLength;
+		}
+	}
+
+	// sensible fallback
+	s_minSettingNameLength = (minLength != INT_MAX && minLength > 0) ? minLength : 1;
+	s_minSettingNameLengthValid = true;
+
+	return s_minSettingNameLength;
 }
 
 void CIniHighlighter::reloadSettingsIniIfNeeded(const QString& settingsPath, const QFileInfo& fileInfo)

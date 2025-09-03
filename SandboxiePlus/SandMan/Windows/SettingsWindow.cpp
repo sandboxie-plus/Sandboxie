@@ -616,6 +616,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.txtIniSection = nullptr;
 	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
 
+	// set fuzzy prefix length bounds from settings data
+	CCodeEdit::SetMaxFuzzyPrefixLength(CIniHighlighter::getMaxSettingNameLengthOrDefault());
+	CCodeEdit::SetMinFuzzyPrefixLength(CIniHighlighter::getMinSettingNameLengthOrDefault());
+	// Pass fuzzy matching toggle from config (no UI checkbox required)
+	m_pCodeEdit->SetFuzzyMatchingEnabled(theConf->GetBool("Options/EnableFuzzyMatching", false));
+
 	// Set up autocompletion based on mode
 	QCompleter* completer = new QCompleter(this);
 	completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
@@ -2498,7 +2504,6 @@ void CSettingsWindow::OnIniValidationToggled(int state)
 	m_HoldChange = true;
 
 	m_IniValidationEnabled = (state == Qt::Checked);
-
 	theConf->SetValue("Options/ValidateIniKeys", m_IniValidationEnabled);
 
 	CIniHighlighter::ClearLanguageCache();

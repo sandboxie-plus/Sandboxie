@@ -105,11 +105,12 @@ NTSTATUS Stream_Open(
 
     *out_stream = NULL;
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
-    stream = ExAllocatePool2(POOL_FLAG_PAGED, PAGE_SIZE, tzuk);
-#else
+//#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+//    stream = ExAllocatePool2(POOL_FLAG_PAGED, PAGE_SIZE, tzuk);
+//#else
+#pragma warning(suppress: 4996) // suppress deprecation warning
     stream = ExAllocatePoolWithTag(PagedPool, PAGE_SIZE, tzuk);
-#endif
+//#endif
     if (! stream)
         return STATUS_INSUFFICIENT_RESOURCES;
 

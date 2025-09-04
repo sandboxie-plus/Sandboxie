@@ -49,11 +49,12 @@ int NetFw_IpCmp(const void * l, const void * r)
 NETFW_RULE* NetFw_AllocRule(POOL* pool, int MatchLevel)
 {
 #ifdef KERNEL_MODE
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
-	NETFW_RULE* rule = ExAllocatePool2(POOL_FLAG_NON_PAGED, sizeof(NETFW_RULE), tzuk);
-#else
+//#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+//	NETFW_RULE* rule = ExAllocatePool2(POOL_FLAG_NON_PAGED, sizeof(NETFW_RULE), tzuk);
+//#else
+#pragma warning(suppress: 4996) // suppress deprecation warning
 	NETFW_RULE* rule = ExAllocatePoolWithTag(NonPagedPool, sizeof(NETFW_RULE), tzuk);
-#endif
+//#endif
 #else
     NETFW_RULE* rule = Pool_Alloc(pool, sizeof(NETFW_RULE));
 #endif
@@ -99,11 +100,12 @@ typedef struct _NETFW_PORTS
 void NetFw_RuleAddPortRange(rbtree_t* tree, USHORT PortBegin, USHORT PortEnd, POOL* pool)
 {
 #ifdef KERNEL_MODE
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
-	NETFW_PORTS* node = ExAllocatePool2(POOL_FLAG_NON_PAGED, sizeof(NETFW_PORTS), tzuk);
-#else
+//#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+//	NETFW_PORTS* node = ExAllocatePool2(POOL_FLAG_NON_PAGED, sizeof(NETFW_PORTS), tzuk);
+//#else
+#pragma warning(suppress: 4996) // suppress deprecation warning
 	NETFW_PORTS* node = ExAllocatePoolWithTag(NonPagedPool, sizeof(NETFW_PORTS), tzuk);
-#endif
+//#endif
 #else
 	NETFW_PORTS* node = Pool_Alloc(pool, sizeof(NETFW_PORTS));
 #endif
@@ -191,11 +193,12 @@ typedef struct _NETFW_IPS
 void NetFw_RuleAddIpRange(rbtree_t* tree, IP_ADDRESS* IpBegin, IP_ADDRESS* IpEnd, POOL* pool)
 {
 #ifdef KERNEL_MODE
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
-	NETFW_IPS* node = ExAllocatePool2(POOL_FLAG_NON_PAGED, sizeof(NETFW_IPS), tzuk);
-#else
+//#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+//	NETFW_IPS* node = ExAllocatePool2(POOL_FLAG_NON_PAGED, sizeof(NETFW_IPS), tzuk);
+//#else
+#pragma warning(suppress: 4996) // suppress deprecation warning
 	NETFW_IPS* node = ExAllocatePoolWithTag(NonPagedPool, sizeof(NETFW_IPS), tzuk);
-#endif
+//#endif
 #else
 	NETFW_IPS* node = Pool_Alloc(pool, sizeof(NETFW_IPS));
 #endif

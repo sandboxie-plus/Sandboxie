@@ -1391,7 +1391,6 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 {
     NTSTATUS status = STATUS_SUCCESS;
     API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS *)parms;
-	HANDLE handle = NULL;
     WCHAR* name = NULL;
     SIZE_T  name_len = 0;
     PVOID  data_ptr = NULL;
@@ -1435,9 +1434,6 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 
     if (name)
         Mem_Free(name, (ULONG)name_len);
-
-    if(handle)
-        ZwClose(handle);
 
 finish:
     return status;

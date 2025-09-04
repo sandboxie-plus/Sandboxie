@@ -402,7 +402,6 @@ NTSTATUS GetRegValue(const WCHAR *KeyPath, const WCHAR *ValueName, PVOID* ppData
     UNICODE_STRING keyPath;
     UNICODE_STRING valueName;
     OBJECT_ATTRIBUTES objattrs;
-    ULONG disp;
     ULONG length;
     UCHAR buffer[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + 2048];
     UCHAR* data = buffer;

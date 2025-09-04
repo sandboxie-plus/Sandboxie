@@ -136,7 +136,7 @@ void WFP_classify(
 	const FWPS_INCOMING_METADATA_VALUES * inMetaValues,
 	void * layerData,
 	const void * classifyContext,
-	const FWPS_FILTER * filter,
+	const FWPS_FILTER1 * filter, // FWPS_FILTER1 is the latest supported by windows 7
 	UINT64 flowContext,
 	FWPS_CLASSIFY_OUT * classifyOut);
 
@@ -148,7 +148,7 @@ http://msdn.microsoft.com/en-us/library/windows/hardware/ff568804(v=vs.85).aspx
 NTSTATUS WFP_notify(
 	FWPS_CALLOUT_NOTIFY_TYPE notifyType,
 	const GUID * filterKey,
-	const FWPS_FILTER * filter);
+	const FWPS_FILTER1* filter); // FWPS_FILTER1 is the latest supported by windows 7
 
 /*	The "flowDeleteFn" callout function for this Callout.
 This function doesn't do anything.
@@ -233,7 +233,7 @@ _FX BOOLEAN WFP_Init(void)
 	WFP_Processes.func_malloc = &WFP_Alloc;
 	WFP_Processes.func_free = &WFP_Free;
 
-	KeInitializeSpinLock(&WFP_MapLock);
+	WFP_MapLock = 0; //KeInitializeSpinLock(&WFP_MapLock); // w7 build compiles to *Lock = 0; w11 build calls a kernel function which does the same
 
 	WPF_MapInitialized = TRUE;
 
@@ -524,12 +524,12 @@ NTSTATUS WFP_RegisterCallout(const GUID* calloutKey, const GUID* applicableLayer
 		return STATUS_INVALID_HANDLE;
 
 	// Register a new Callout with the Filter Engine using the provided callout functions
-	FWPS_CALLOUT s_callout = { 0 };
+	FWPS_CALLOUT1 s_callout = { 0 }; // FWPS_CALLOUT1 is the latest supported by windows 7
 	s_callout.calloutKey = *calloutKey;
 	s_callout.classifyFn = WFP_classify;
 	s_callout.notifyFn = WFP_notify;
 	s_callout.flowDeleteFn = WFP_flow_delete;
-	status = FwpsCalloutRegister((void *)Api_DeviceObject, &s_callout, callout_id);
+	status = FwpsCalloutRegister1((void *)Api_DeviceObject, &s_callout, callout_id); // FwpsCalloutRegister1 is the latest supported by windows 7
 	if (!NT_SUCCESS(status)){
 		//DbgPrint("Failed to register callout functions for sbie callout, status 0x%08x\r\n", status);
 		goto Exit;
@@ -783,7 +783,7 @@ void WFP_classify(
 	const FWPS_INCOMING_METADATA_VALUES * inMetaValues,
 	void * layerData,
 	const void * classifyContext,
-	const FWPS_FILTER * filter,
+	const FWPS_FILTER1 * filter, // FWPS_FILTER1 is the latest supported by windows 7
 	UINT64 flowContext,
 	FWPS_CLASSIFY_OUT * classifyOut)
 {
@@ -933,7 +933,7 @@ void WFP_classify(
 NTSTATUS WFP_notify(
 	FWPS_CALLOUT_NOTIFY_TYPE notifyType,
 	const GUID * filterKey,
-	const FWPS_FILTER * filter)
+	const FWPS_FILTER1* filter) // FWPS_FILTER1 is the latest supported by windows 7
 {
 	UNREFERENCED_PARAMETER(notifyType);
 	UNREFERENCED_PARAMETER(filterKey);

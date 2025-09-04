@@ -125,10 +125,98 @@ namespace {
 		return -1;
 	}
 
+	// Small thread-safe cache used by BuildFuzzyMatches (LRU by simple list)
+	static const int FUZZY_CACHE_MAX_ENTRIES = 64;
+	static QHash<QString, QStringList> s_fuzzyCache;
+	static QList<QString> s_cacheOrder;
+	static QMutex s_fuzzyCacheMutex;
+
+	// Try to get value and move entry to MRU; returns true on hit and fills out.
+	static bool FuzzyCacheGet(const QString& key, QStringList& out)
+	{
+		QMutexLocker lk(&s_fuzzyCacheMutex);
+		auto it = s_fuzzyCache.find(key);
+		if (it == s_fuzzyCache.end())
+			return false;
+
+		// Move key to MRU (optimized: we know key exists from the hash)
+		int idx = s_cacheOrder.indexOf(key);
+		if (idx >= 0) {
+			s_cacheOrder.removeAt(idx);
+			s_cacheOrder.append(key);
+		}
+
+		out = it.value();
+		return true;
+	}
+
+	// Insert or update value and evict LRU if over capacity
+	static void FuzzyCacheInsert(const QString& key, const QStringList& value)
+	{
+		QMutexLocker lk(&s_fuzzyCacheMutex);
+
+		auto it = s_fuzzyCache.find(key);
+		if (it != s_fuzzyCache.end()) {
+			// Update existing in-place and move to MRU
+			it.value() = value;
+			int idx = s_cacheOrder.indexOf(key);
+			if (idx >= 0) {
+				s_cacheOrder.removeAt(idx);
+				s_cacheOrder.append(key);
+			}
+			//qDebug() << "[FuzzyCache] UPDATE key=" << key << "cacheSize=" << s_fuzzyCache.size();
+		}
+		else {
+			// Insert new entry
+			s_fuzzyCache.insert(key, value);
+			s_cacheOrder.append(key);
+
+			// Evict if needed
+			if (s_cacheOrder.size() > FUZZY_CACHE_MAX_ENTRIES) {
+				QString old = s_cacheOrder.takeFirst();
+				s_fuzzyCache.remove(old);
+				//qDebug() << "[FuzzyCache] EVICT key=" << old << "newCacheSize=" << s_fuzzyCache.size();
+			}
+			//qDebug() << "[FuzzyCache] INSERT key=" << key << "cacheSize=" << s_fuzzyCache.size() << "storedEntries=" << value.size();
+		}
+	}
+
 	// Build a fuzzy-sorted candidate list from supplied candidates given prefix
 	static QStringList BuildFuzzyMatches(const QStringList& candidates, const QString& prefix)
 	{
 		QString pref = prefix.toLower();
+
+		// Compute a cheap fingerprint for the candidates set (order-sensitive).
+		auto CandidatesFingerprint = [](const QStringList& list) -> quint64 {
+			const quint64 FNV_OFFSET = 1469598103934665603ULL;
+			const quint64 FNV_PRIME = 1099511628211ULL;
+			quint64 h = FNV_OFFSET;
+			for (const QString& s : list) {
+				quint32 v = qHash(s);
+				h ^= static_cast<quint64>(v);
+				h *= FNV_PRIME;
+			}
+			// mix length in
+			h ^= static_cast<quint64>(list.size());
+			h *= FNV_PRIME;
+			return h;
+			};
+
+		quint64 fingerprint = CandidatesFingerprint(candidates);
+		const QString cacheKey = QString::number(fingerprint) + QLatin1Char('|') + pref;
+		QStringList cached;
+		//if (FuzzyCacheGet(cacheKey, cached)) {
+		//	// Debug: show cache hit and small sample of cached value
+		//	const int sampleLimit = 20;
+		//	QString sample = cached.size() > sampleLimit ? (cached.mid(0, sampleLimit).join(", ") + "...") : cached.join(", ");
+		//	{
+		//		QMutexLocker lk(&s_fuzzyCacheMutex); // protect order read for consistent output
+		//		qDebug() << "[FuzzyCache] HIT key=" << cacheKey << "cacheSize=" << s_fuzzyCache.size() << "orderSize=" << s_cacheOrder.size();
+		//		qDebug() << "[FuzzyCache] keys(order) =" << s_cacheOrder;
+		//	}
+		//	qDebug() << "[FuzzyCache] valueSample =" << sample;
+		//	return cached;
+		//}
 
 		// Added hasSubstr flag so exact substring matches can be boosted
 		// matchedLen is added to prefer candidates that match a larger portion of the prefix
@@ -214,7 +302,7 @@ namespace {
 			return (matchedLen * 1000) / candLen;
 			};
 
-		// sort & return:
+		// sort comparator
 		// 1) distance (all 0 here),
 		// 2) prefer hasSubstr (true),
 		// 3) prefer coverage (compactness of match),
@@ -254,6 +342,9 @@ namespace {
 			QStringList out;
 			out.reserve(matches.size());
 			for (const auto& e : matches) out.append(e.text);
+
+			// store in cache and return via helper
+			FuzzyCacheInsert(cacheKey, out);
 			return out;
 		}
 
@@ -313,8 +404,7 @@ namespace {
 				int lcs = LongestCommonSubstring(pref, candLower);
 				int matchedLen = std::max(1, pLen - score); // approximate matched prefix portion
 				int tokenScore = TokenMatchScore(cand, pref);
-				// boost matchedLen with actual LCS info
-				matchedLen = std::max(matchedLen, lcs);
+				matchedLen = std::max(matchedLen, lcs); // boost matchedLen with actual LCS info
 				int coverage = computeCoverage(matchedLen, candLen);
 				matches.push_back(Entry{ cand, score, pos, candLen, false, matchedLen, tokenScore, coverage });
 				continue;
@@ -330,10 +420,7 @@ namespace {
 					QString probe = pref.left(probeLen);
 					pos = candLower.indexOf(probe);
 				}
-				if (pos < 0) {
-					// fallback to subsequence start (may still be -1)
-					pos = FindSubsequenceStart(pref, candLower);
-				}
+				if (pos < 0) pos = FindSubsequenceStart(pref, candLower); // fallback to subsequence start (may still be -1)
 				if (pos < 0) pos = INT_MAX / 2;
 				// matchedLen = how much of prefix is effectively matched (approx)
 				int lcs = LongestCommonSubstring(pref, candLower);
@@ -359,24 +446,14 @@ namespace {
 			}
 		}
 
-		// Sort by distance then prefer exact substring matches, then coverage (compactness),
-		// then larger matchedLen, then tokenScore, then earliest match position, then shorter candidate then alphabetically
 		std::sort(matches.begin(), matches.end(), EntryComparator);
-
-		//// Debug: show aggregate info + top matches (helps tune thresholds)
-		//{
-		//	int logCount = std::min<int>((int)matches.size(), 10);
-		//	qDebug() << "[Fuzzy] prefix=" << pref << "pLen=" << pLen
-		//		<< "minPrefix=" << minPrefix << "maxPrefix=" << maxPrefix
-		//		<< "maxDist=" << maxDist << "matches=" << matches.size();
-		//	for (int i = 0; i < logCount; ++i) {
-		//		qDebug() << "  [Fuzzy] #" << i << matches[i].text << "dist=" << matches[i].dist << "pos=" << matches[i].pos << "len=" << matches[i].len << "hasSubstr=" << matches[i].hasSubstr << "matchedLen=" << matches[i].matchedLen << "tokenScore=" << matches[i].tokenScore << "coverage=" << matches[i].coverage;
-		//	}
-		//}
 
 		QStringList out;
 		out.reserve(matches.size());
 		for (const auto& e : matches) out.append(e.text);
+
+		// store in cache and return via helper
+		FuzzyCacheInsert(cacheKey, out);
 		return out;
 	}
 

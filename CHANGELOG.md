@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - updated GitHub build action to use [Qt 6.9.2](https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.9.2/release-note.md)
-- reworked driver imports to despite of being build with VS2022 allow it to load on windows 7
+- reworked driver imports to despite of being build with VS2022 allow it to load on windows 7 [#4942](https://github.com/sandboxie-plus/Sandboxie/issues/4942)
 
 ### Fixed
 - fixed 1.16.2 = Tray Menu Missing in Action [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)

@@ -40,6 +40,17 @@ public:
 	static void SetAutoCompletionMode(int checkState);
 	static AutoCompletionMode GetAutoCompletionMode();
 	
+	// Fuzzy matching control (OptionsWindow / SettingsWindow will call these)
+	static void SetFuzzyMatchingEnabled(bool bEnabled);
+	static bool GetFuzzyMatchingEnabled();
+	// Dynamic control for fuzzy prefix length (defaults)
+	static void SetMaxFuzzyPrefixLength(int length);
+	static int GetMaxFuzzyPrefixLength();
+	static void SetMinFuzzyPrefixLength(int length);
+	static int GetMinFuzzyPrefixLength();
+	static int s_maxFuzzyPrefixLength;
+	static int s_minFuzzyPrefixLength;
+
 	void ScheduleWithDelay(int delayMs, std::function<void()> task, const QString& taskName);
 
 signals:
@@ -77,6 +88,7 @@ protected:
 	WordBoundaries FindWordBoundaries(const QString& text, int position) const;
 	QString ExtractWordAtCursor(const CursorContext& context) const;
 	bool IsInKeyPosition(const CursorContext& context) const;
+	bool IsWordAtLineStart(const CursorContext& context) const;
 	QString GetCompletionWord() const;
 	void TriggerCompletion(const QString& prefix, int minimumLength = 3);
 	void HandleCaseCorrection(const QString& word, bool wasPopupVisible);
@@ -108,6 +120,10 @@ private:
 	QGridLayout* m_pMainLayout;
 	QTextEdit* m_pSourceCode;
 	QCompleter* m_pCompleter;
+
+	// Track the base model (visible candidates) and temporary fuzzy model when fuzzy is active
+	QStringListModel* m_baseModel = nullptr;
+	QStringListModel* m_tempFuzzyModel = nullptr;
 
 	// Find/Replace actions
 	QAction*			m_pFind;
@@ -142,6 +158,9 @@ private:
 	// Static autocompletion mode (similar to tooltip mode)
 	static AutoCompletionMode s_autoCompletionMode;
 	static QMutex s_autoCompletionModeMutex;
+
+	// Fuzzy matching toggle
+	static bool s_fuzzyMatchingEnabled;
 	
 	// Helper methods for common operations
 	void ResetFlagAfterDelay(bool& flag, int delayMs = 100);
@@ -149,6 +168,12 @@ private:
 	void ClearCaseCorrectionTracking();
 	void UpdateCaseCorrectionTracking(const QString& wrongWord, const QString& correctWord, int wordStart, int wordEnd);
 	bool IsKeyAvailableInCompletionModel(const QString& key) const;
+
+	// Fuzzy-specific helpers (private)
+	QStringList ApplyFuzzyModelForPrefix(const QString& prefix);
+	void RestoreBaseCompletionModel();
+	bool IsKeyAvailableConsideringFuzzy(const QString& key, const QString& wordForFuzzy) const;
+
 	bool IsExistingKeyValueLine(const QString& lineText, int cursorPosition, int& equalsPosition) const;
 	QString GetTextReplacement(const QString& originalWord, const QString& replacement, 
 							  const QString& lineText, int wordPosition, bool addEquals) const;
@@ -163,6 +188,8 @@ private:
 	QStringList m_caseCorrectionCandidates; // Keys hidden from popup but available for case correction
 
 	bool m_suppressNextAutoCompletion = false;
+
+	int m_lastKeyPressed = 0;
 
 	private slots:
 		void OnCursorPositionChanged();

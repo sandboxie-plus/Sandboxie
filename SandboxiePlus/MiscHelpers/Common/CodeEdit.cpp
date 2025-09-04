@@ -1038,7 +1038,11 @@ bool CCodeEdit::eventFilter(QObject* obj, QEvent* event)
 	
 	if (event->type() == QEvent::KeyPress) {
 		QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-		m_lastKeyPressed = keyEvent->key();
+
+		// Record last key only for the source text edit (prevents popup keys from
+		// affecting OnTextChanged suppression logic).
+		if (obj == m_pSourceCode)
+			m_lastKeyPressed = keyEvent->key();
 
 		// Intercept Shift+Enter on the text edit to avoid Qt inserting U+2028
 		if (obj == m_pSourceCode &&
@@ -1137,7 +1141,9 @@ bool CCodeEdit::HandleEnterKeyInPopup(QKeyEvent* keyEvent)
 {
 	if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Tab) {
 		// Only accept completion if there are no modifiers (no Ctrl, Alt, etc.)
-		if (keyEvent->modifiers() == Qt::NoModifier || keyEvent->modifiers() == Qt::KeypadModifier) {
+		// Allow the keypad modifier alone (some keyboards/reporters set KeypadModifier for NumPad Enter).
+		Qt::KeyboardModifiers mods = keyEvent->modifiers();
+		if ((mods & ~Qt::KeypadModifier) == Qt::NoModifier) {
 			QModelIndex currentIndex = m_pCompleter->popup()->currentIndex();
 			// If nothing is selected, select the first item
 			if (!currentIndex.isValid() && m_pCompleter->completionCount() > 0) {
@@ -1176,7 +1182,10 @@ bool CCodeEdit::HandleTextEditKeyPress(QKeyEvent* keyEvent)
 	
 	// Handle text input for auto-completion and case correction
 	if (keyEvent->text().length() == 1) {
-		return HandleSingleCharacterInput(keyEvent);
+		QChar ch = keyEvent->text().at(0);
+		if (!ch.isNull() && ch.isPrint()) {
+			return HandleSingleCharacterInput(keyEvent);
+		}
 	}
 	
 	// Handle backspace to update completion
@@ -1222,8 +1231,10 @@ bool CCodeEdit::HandleBackspaceKeyInPopup()
 
 bool CCodeEdit::HandleDefaultKeyInPopup(QKeyEvent* keyEvent)
 {
-	if (keyEvent->text().length() == 1 && IsWordCharacter(keyEvent->text().at(0))) {
-		return false; // Let the keystroke process normally
+	if (!keyEvent->text().isEmpty()) {
+		QChar ch = keyEvent->text().at(0);
+		if (!ch.isNull() && IsWordCharacter(ch))
+			return false; // Let the keystroke process normally
 	}
 	HidePopupSafely();
 	return false;
@@ -1297,13 +1308,28 @@ bool CCodeEdit::HandleSingleCharacterInput(QKeyEvent* keyEvent)
 
 	inputProcessed = true; // Mark input as processed
 
-	QChar inputChar = keyEvent->text().at(0);
+	QChar inputChar = keyEvent->text().isEmpty() ? QChar() : keyEvent->text().at(0);
 
 	// Capture popup state BEFORE any popup manipulation happens
 	bool popupWasVisible = (m_pCompleter && m_pCompleter->popup()->isVisible());
 
+	// Only treat delimiters as "plain" delimiters if there are no modifiers
+	// (allow NumPad/Keypad modifier as an exception).
+	Qt::KeyboardModifiers mods = keyEvent->modifiers();
+	Qt::KeyboardModifiers modsNoKeypad = mods & ~Qt::KeypadModifier;
+
+	int key = keyEvent->key();
+	bool isSpaceKey = (key == Qt::Key_Space);
+	bool isEqualsKey = (key == Qt::Key_Equal);
+	bool isEnterKey = (key == Qt::Key_Return || key == Qt::Key_Enter);
+	bool isTabKey = (key == Qt::Key_Tab);
+
+	// treat Enter/Tab via key instead of relying on text() == '\n' or '\t'
+	bool isPlainDelimiter = (modsNoKeypad == Qt::NoModifier) &&
+		(isSpaceKey || isEqualsKey || isEnterKey || isTabKey);
+
 	// Handle case correction BEFORE any other processing for delimiters
-	if (inputChar == ' ' || inputChar == '=' || inputChar == '\n' || inputChar == '\t') {
+	if (isPlainDelimiter) {
 		QString wordForCaseCorrection = GetWordBeforeCursor();
 		if (!wordForCaseCorrection.isEmpty()) {
 			HandleCaseCorrection(wordForCaseCorrection, popupWasVisible);
@@ -1311,12 +1337,13 @@ bool CCodeEdit::HandleSingleCharacterInput(QKeyEvent* keyEvent)
 	}
 
 	// Close popup when = is pressed (AFTER capturing word for case correction)
-	if (inputChar == '=') {
+	// Only close for plain '=' (no Ctrl/Alt/etc).
+	if (isEqualsKey && modsNoKeypad == Qt::NoModifier) {
 		HidePopupSafely();
 	}
 
 	// Trigger auto-completion for letter/number input (only in FullAuto mode)
-	if (m_pCompleter && IsWordCharacter(inputChar) && ShouldTriggerAutoCompletion()) {
+	if (m_pCompleter && !inputChar.isNull() && IsWordCharacter(inputChar) && ShouldTriggerAutoCompletion()) {
 		// Let the keystroke process first, then trigger completion
 		ScheduleWithDelay(10, [this]() {
 			QString wordForCompletion = GetCompletionWord();

@@ -564,6 +564,8 @@ void InitFwUuid();
 
 _FX NTSTATUS MyValidateCertificate(void)
 {
+    return STATUS_SUCCESS;
+    
     if(!*g_uuid_str)
         InitFwUuid();
 

@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - updated GitHub build action to use [Qt 6.9.2](https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.9.2/release-note.md)
 - reworked driver imports to despite of being build with VS2022 allow it to load on windows 7 [#4942](https://github.com/sandboxie-plus/Sandboxie/issues/4942)
 - improved dark mode collor pattern
+- switched to Qt 6.8.3 with [windows 7 compatybility patches](https://github.com/crystalidea/qt6windows7)
  
 
 ### Fixed

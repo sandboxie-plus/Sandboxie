@@ -71,9 +71,6 @@ typedef struct _FORCE_PROCESS {
 
 typedef struct _FORCE_PROCESS_2 {
 
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif
     HANDLE pid;
     BOOLEAN silent;
 
@@ -82,9 +79,6 @@ typedef struct _FORCE_PROCESS_2 {
 
 typedef struct _FORCE_PROCESS_3 {
 
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif
     HANDLE pid;
     WCHAR boxname[BOXNAME_COUNT];
 
@@ -1832,11 +1826,7 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
         proc->pid = ProcessId;
         proc->silent = FALSE;
 
-#ifdef USE_PROCESS_MAP
         map_insert(&Process_MapDfp, ProcessId, proc, 0);
-#else
-        List_Insert_After(&Process_ListDfp, NULL, proc);
-#endif
 
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
@@ -1853,34 +1843,16 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
 
         added = FALSE;
 
-#ifdef USE_PROCESS_MAP
         proc = map_get(&Process_MapDfp, ParentId);
         if (proc) {
-#else
-        proc = List_Head(&Process_ListDfp);
-        while (proc) {
 
-            if (proc->pid == ParentId) {
-#endif
+            proc = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS_2));
+            proc->pid = ProcessId;
+            proc->silent = FALSE;
 
-                proc = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS_2));
-                proc->pid = ProcessId;
-                proc->silent = FALSE;
+            map_insert(&Process_MapDfp, ProcessId, proc, 0);
 
-#ifdef USE_PROCESS_MAP
-                map_insert(&Process_MapDfp, ProcessId, proc, 0);
-#else
-                List_Insert_After(&Process_ListDfp, NULL, proc);
-#endif
-
-                added = TRUE;
-
-#ifndef USE_PROCESS_MAP
-                break;
-            }
-
-            proc = List_Next(proc);
-#endif
+            added = TRUE;
         }
     }
 
@@ -1897,25 +1869,8 @@ _FX void Process_DfpDelete(HANDLE ProcessId)
 {
     FORCE_PROCESS_2 *proc;
 
-#ifdef USE_PROCESS_MAP
     if(map_take(&Process_MapDfp, ProcessId, &proc, 0))
         Mem_Free(proc, sizeof(FORCE_PROCESS_2));
-#else
-    proc = List_Head(&Process_ListDfp);
-    while (proc) {
-
-        if (proc->pid == ProcessId) {
-
-            List_Remove(&Process_ListDfp, proc);
-
-            Mem_Free(proc, sizeof(FORCE_PROCESS_2));
-
-            return;
-        }
-
-        proc = List_Next(proc);
-    }
-#endif
 }
 
 
@@ -1933,28 +1888,15 @@ _FX BOOLEAN Process_DfpCheck(HANDLE ProcessId, BOOLEAN *silent)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
-#ifdef USE_PROCESS_MAP
     proc = map_get(&Process_MapDfp, ProcessId);
     if (proc) {
-#else
-    proc = List_Head(&Process_ListDfp);
-    while (proc) {
 
-        if (proc->pid == ProcessId) {
-#endif
+        if (*silent)
+            proc->silent = TRUE;
+        else
+            *silent = proc->silent;
 
-            if (*silent)
-                proc->silent = TRUE;
-            else
-                *silent = proc->silent;
-
-            found = TRUE;
-#ifndef USE_PROCESS_MAP
-            break;
-        }
-
-        proc = List_Next(proc);
-#endif
+        found = TRUE;
     }
 
     ExReleaseResourceLite(Process_ListLock);
@@ -1987,11 +1929,7 @@ _FX VOID Process_FcpInsert(HANDLE ProcessId, const WCHAR* boxname)
     proc->pid = ProcessId;
     wmemcpy(proc->boxname, boxname, BOXNAME_COUNT);
 
-#ifdef USE_PROCESS_MAP
     map_insert(&Process_MapFcp, ProcessId, proc, 0);
-#else
-    List_Insert_After(&Process_ListFcp, NULL, proc);
-#endif
 
     ExReleaseResourceLite(Process_ListLock);
     KeLowerIrql(irql);
@@ -2009,25 +1947,8 @@ _FX void Process_FcpDelete(HANDLE ProcessId)
 {
     FORCE_PROCESS_3 *proc;
 
-#ifdef USE_PROCESS_MAP
     if(map_take(&Process_MapFcp, ProcessId, &proc, 0))
         Mem_Free(proc, sizeof(FORCE_PROCESS_3));
-#else
-    proc = List_Head(&Process_ListFcp);
-    while (proc) {
-
-        if (proc->pid == ProcessId) {
-
-            List_Remove(&Process_ListFcp, proc);
-
-            Mem_Free(proc, sizeof(FORCE_PROCESS_3));
-
-            return;
-        }
-
-        proc = List_Next(proc);
-    }
-#endif
 }
 
 
@@ -2045,25 +1966,13 @@ _FX BOOLEAN Process_FcpCheck(HANDLE ProcessId, WCHAR* boxname)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
-#ifdef USE_PROCESS_MAP
     proc = map_get(&Process_MapFcp, ProcessId);
     if (proc) {
-#else
-    proc = List_Head(&Process_ListFcp);
-    while (proc) {
 
-        if (proc->pid == ProcessId) {
-#endif
-            if(boxname)
-                wmemcpy(boxname, proc->boxname, BOXNAME_COUNT);
+        if(boxname)
+            wmemcpy(boxname, proc->boxname, BOXNAME_COUNT);
 
-            found = TRUE;
-#ifndef USE_PROCESS_MAP
-            break;
-        }
-
-        proc = List_Next(proc);
-#endif
+        found = TRUE;
     }
 
     ExReleaseResourceLite(Process_ListLock);

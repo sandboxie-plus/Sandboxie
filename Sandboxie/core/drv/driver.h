@@ -68,8 +68,6 @@
 #define TRACE_DENY              2
 #define TRACE_IGNORE            4
 
-#define USE_PROCESS_MAP
-
 #define USE_MATCH_PATH_EX
 
 #define USE_TEMPLATE_PATHS

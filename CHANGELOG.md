@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked driver imports to despite of being build with VS2022 allow it to load on windows 7 [#4942](https://github.com/sandboxie-plus/Sandboxie/issues/4942)
 - improved dark mode collor pattern
 - switched to Qt 6.8.3 with [windows 7 compatibility patches](https://github.com/crystalidea/qt6windows7)
- 
+- validated compatibility with Windows build 27934 and updated DynData
 
 ### Fixed
 - fixed 1.16.2 = Tray Menu Missing in Action [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)
@@ -22,6 +22,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Network options cannot be persisted during editing [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
 - fixed Cleanup on Aisle Qt5 - Installer should remove obsolete files after Sandboxie 1.16.x [#4934](https://github.com/sandboxie-plus/Sandboxie/issues/4934)
 - fixed on restart as admin windows was not shown
+
+### Removed
+- remove obsolete code whcih was long superseeded by new implementations
 
 
 

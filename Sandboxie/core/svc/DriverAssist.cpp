@@ -312,8 +312,6 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
     }
     else if (msgid == SVC_CONFIG_UPDATED) {
 
-#ifdef NEW_INI_MODE
-
         //
         // In case the ini was edited externally, i.e. by notepad.exe 
         // we update the ini cache each time the driver reloads the ini file.
@@ -324,7 +322,6 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
 
         if(data_len < sizeof(ULONG) || *(ULONG*)data_ptr != GetCurrentProcessId())
             SbieIniServer::NotifyConfigReloaded();
-#endif
 
         SbieDll_InjectLow_InitSyscalls(TRUE);
 

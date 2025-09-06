@@ -38,14 +38,12 @@
 #include "core/drv/api_defs.h"
 #include "DriverAssist.h"
 
-#ifdef NEW_INI_MODE
 extern "C" {
     #include "common/stream.h"
 }
 #include "common/ini.h"
 
 SbieIniServer* SbieIniServer::m_instance = NULL;
-#endif
 
 
 //---------------------------------------------------------------------------
@@ -57,13 +55,9 @@ SbieIniServer::SbieIniServer(PipeServer *pipeServer)
 {
     InitializeCriticalSection(&m_critsec);
 
-#ifdef NEW_INI_MODE
     m_instance = this;
 
     m_pSbieIni = NULL;
-#else
-    m_text = NULL;
-#endif
 
     m_hLockFile = INVALID_HANDLE_VALUE;
     LockConf(NULL);
@@ -103,23 +97,7 @@ MSG_HEADER *SbieIniServer::Handler(void *_this, MSG_HEADER *msg)
 
     EnterCriticalSection(&pThis->m_critsec);
 
-#ifndef NEW_INI_MODE
-    pThis->m_text = NULL;
-    pThis->m_text_base = NULL;
-    pThis->m_text_max_len = 0;
-    //pThis->m_insertbom = FALSE;
-#endif
-
     MSG_HEADER *rpl = pThis->Handler2(msg);
-
-#ifndef NEW_INI_MODE
-    if (pThis->m_text)
-        HeapFree(GetProcessHeap(), 0, pThis->m_text_base);
-
-    pThis->m_text = NULL;
-    pThis->m_text_base = NULL;
-    pThis->m_text_max_len = 0;
-#endif
 
     LeaveCriticalSection(&pThis->m_critsec);
 
@@ -793,7 +771,6 @@ ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, co
 }
 
 
-#ifdef NEW_INI_MODE
 //---------------------------------------------------------------------------
 // NotifyConfigReloaded
 //---------------------------------------------------------------------------
@@ -989,379 +966,7 @@ ULONG SbieIniServer::DelSetting(MSG_HEADER* msg)
 
 	return m_pSbieIni->RemoveValue(req->section, req->setting, req->value);
 }
-#else
-//---------------------------------------------------------------------------
-// SetSetting
-//---------------------------------------------------------------------------
 
-
-ULONG SbieIniServer::SetSetting(MSG_HEADER *msg)
-{
-    SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)msg;
-    BOOLEAN have_value = (req->value_len != 0);
-
-    //
-    // for each section ...
-    //
-
-    WCHAR bracked_section_name[78];
-
-    NTSTATUS status;
-    WCHAR *setting = m_line;
-    ULONG setting_idx;
-    ULONG value_idx;
-    bool setting_match = false;
-    bool any_section_match = false;
-
-    bool delete_section_request =
-        (*req->setting == L'*' && (! have_value)) ? true : false;
-
-    WCHAR section_name[70];
-    ULONG section_idx = -1;
-
-    while (1) {
-
-        if (section_idx == -1) {
-
-            wcscpy(section_name, L"GlobalSettings");
-
-        } else {
-
-            status = SbieApi_QueryConfAsIs(
-                NULL, NULL, section_idx | CONF_GET_NO_TEMPLS,
-                section_name, sizeof(WCHAR) * 66);
-
-            if (! NT_SUCCESS(status)) {
-                if (status == STATUS_RESOURCE_NAME_NOT_FOUND)
-                    status = STATUS_SUCCESS;
-                if (! NT_SUCCESS(status))
-                    return status;
-                break;
-            }
-        }
-
-        ++section_idx;
-
-        //
-        // write the section header
-        //
-
-        bool section_match =
-            (_wcsicmp(section_name, req->section) == 0);
-
-        if (section_match)
-            any_section_match = true;
-
-        if (section_match && delete_section_request)
-            continue;
-
-        wcscpy(bracked_section_name, L"[");
-        wcscat(bracked_section_name, section_name);
-        wcscat(bracked_section_name, L"]");
-
-        if (! AddText(L""))
-            return STATUS_INSUFFICIENT_RESOURCES;
-        if (! AddText(bracked_section_name))
-            return STATUS_INSUFFICIENT_RESOURCES;
-        if (! AddText(L""))
-            return STATUS_INSUFFICIENT_RESOURCES;
-
-        //
-        // for each setting in each section ...
-        //
-
-        setting_idx = 0;
-
-        while (1) {
-
-            status = SbieApi_QueryConfAsIs(
-                section_name, NULL, setting_idx | CONF_GET_NO_TEMPLS,
-                setting, sizeof(WCHAR) * 66);
-
-            if (! NT_SUCCESS(status)) {
-                if (status != STATUS_RESOURCE_NAME_NOT_FOUND)
-                    return status;
-                break;
-            }
-
-            ++setting_idx;
-
-            //
-            // replace setting if matches request parameters
-            //
-
-            if (section_match && _wcsicmp(setting, req->setting) == 0) {
-
-                if (have_value && (! setting_match)) {
-                    if (! AddCallerText(setting, req->value))
-                        return STATUS_INSUFFICIENT_RESOURCES;
-                }
-
-                setting_match = true;
-                continue;
-            }
-
-            //
-            // else for each index of each setting in each section ...
-            //
-
-            WCHAR *ptr = setting + wcslen(setting);
-
-            value_idx = 0;
-
-            while (1) {
-
-                ULONG remaining_buf_len = sizeof(m_line) - sizeof(WCHAR) * 4
-                                        - (ptr + 1 - setting) * sizeof(WCHAR);
-
-                status = SbieApi_QueryConfAsIs(
-                    section_name, setting,
-                    value_idx | CONF_GET_NO_GLOBAL | CONF_GET_NO_TEMPLS,
-                    ptr + 1, remaining_buf_len);
-
-                if (! NT_SUCCESS(status)) {
-                    if (status != STATUS_RESOURCE_NAME_NOT_FOUND)
-                        return status;
-                    break;
-                }
-
-                if (NT_SUCCESS(status)) {
-
-                    *ptr = L'=';
-
-                    if (! AddText(setting))
-                        return STATUS_INSUFFICIENT_RESOURCES;
-
-                    *ptr = L'\0';
-                }
-
-                ++value_idx;
-            }
-        }
-
-        //
-        // if setting was not replaced, it must be added
-        //
-
-        if (section_match && (! setting_match) && have_value) {
-            wcscpy(setting, req->setting);
-            if (! AddCallerText(setting, req->value))
-                return STATUS_INSUFFICIENT_RESOURCES;
-        }
-    }
-
-    //
-    // if section was not found, add it, and then add the setting
-    //
-
-    if ((! any_section_match) && delete_section_request)
-        any_section_match = true;
-
-    if ((! any_section_match) && req->section[0]) {
-
-        wcscpy(bracked_section_name, L"[");
-        wcscat(bracked_section_name, req->section);
-        wcscat(bracked_section_name, L"]");
-
-        if (! AddText(L""))
-            return STATUS_INSUFFICIENT_RESOURCES;
-        if (! AddText(bracked_section_name))
-            return STATUS_INSUFFICIENT_RESOURCES;
-        if (! AddText(L""))
-            return STATUS_INSUFFICIENT_RESOURCES;
-
-        if (have_value) {
-
-            wcscpy(setting, req->setting);
-            if (! AddCallerText(setting, req->value))
-                return STATUS_INSUFFICIENT_RESOURCES;
-        }
-    }
-
-    return STATUS_SUCCESS;
-}
-
-
-//---------------------------------------------------------------------------
-// AddSetting
-//---------------------------------------------------------------------------
-
-
-ULONG SbieIniServer::AddSetting(MSG_HEADER *msg, bool insert)
-{
-    //
-    // if a value was not specified, do nothing
-    //
-
-    SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)msg;
-    if (! req->value_len)
-        return STATUS_SUCCESS;
-
-    //
-    // add the new setting and collect others
-    //
-
-    NTSTATUS status;
-    WCHAR *setting = m_line;
-    ULONG setting_len;
-    WCHAR *text = NULL;
-    ULONG text_len = 0;
-    ULONG index = (insert ? -1 : 0);
-    ULONG seen_value = 0;
-
-    while (1) {
-
-        if (index == -1) {
-
-            wcscpy(setting, req->value);
-            index = 0;
-
-        } else {
-
-            status = SbieApi_QueryConfAsIs(
-                req->section, req->setting,
-                index | CONF_GET_NO_GLOBAL | CONF_GET_NO_TEMPLS,
-                setting, sizeof(m_line) - sizeof(WCHAR) * 4);
-
-            if (! NT_SUCCESS(status)) {
-
-                if (insert)
-                    break;
-
-                wcscpy(setting, req->value);
-                index = -1;
-
-            } else
-                ++index;
-        }
-
-        setting_len = wcslen(setting);
-
-        if (setting_len >= req->value_len) {
-            if (_wcsicmp(setting, req->value) == 0)
-                ++seen_value;
-        }
-
-        text_len += (setting_len + 2) * sizeof(WCHAR);
-        if (text) {
-
-            WCHAR *text2 =
-                (WCHAR *)HeapReAlloc(GetProcessHeap(), 0, text, text_len);
-            if (! text2) {
-                HeapFree(GetProcessHeap(), 0, text);
-                return STATUS_INSUFFICIENT_RESOURCES;
-            }
-            text = text2;
-            wcscat(text, L"\n");
-            wcscat(text, setting);
-
-        } else {
-
-            text = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, text_len);
-            if (! text)
-                return STATUS_INSUFFICIENT_RESOURCES;
-            wcscpy(text, setting);
-        }
-
-        if (index == -1)
-            break;
-    }
-
-    //
-    // if the value already existed, don't bother, otherwise apply setting
-    //
-
-    if (seen_value > 1) {
-        if (text)
-            HeapFree(GetProcessHeap(), 0, text);
-        return STATUS_SUCCESS;
-    }
-
-    return CallSetSetting(text, msg);
-}
-
-
-//---------------------------------------------------------------------------
-// DelSetting
-//---------------------------------------------------------------------------
-
-
-ULONG SbieIniServer::DelSetting(MSG_HEADER *msg)
-{
-    //
-    // if a value was not specified, go directly to SetSetting,
-    // which will discard all instances of the setting
-    //
-
-    SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)msg;
-    if (! req->value_len)
-        return SetSetting(msg);
-
-    //
-    // collect the setting and discard the instances matching the value
-    //
-
-    NTSTATUS status;
-    WCHAR *setting = m_line;
-    ULONG setting_len;
-    WCHAR *text = NULL;
-    ULONG text_len = 0;
-    ULONG index = 0;
-    BOOLEAN seen_value = FALSE;
-
-    while (1) {
-
-        status = SbieApi_QueryConfAsIs(
-            req->section, req->setting,
-            index | CONF_GET_NO_GLOBAL | CONF_GET_NO_TEMPLS,
-            setting, sizeof(m_line) - sizeof(WCHAR) * 4);
-        if (! NT_SUCCESS(status))
-            break;
-        ++index;
-
-        setting_len = wcslen(setting);
-        if (setting_len == req->value_len) {
-            if (_wcsicmp(setting, req->value) == 0) {
-                seen_value = TRUE;
-                continue;
-            }
-        }
-
-        text_len += (setting_len + 2) * sizeof(WCHAR);
-        if (text) {
-
-            WCHAR *text2 =
-                (WCHAR *)HeapReAlloc(GetProcessHeap(), 0, text, text_len);
-            if (! text2) {
-                HeapFree(GetProcessHeap(), 0, text);
-                return STATUS_INSUFFICIENT_RESOURCES;
-            }
-            text = text2;
-            wcscat(text, L"\n");
-            wcscat(text, setting);
-
-        } else {
-
-            text = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, text_len);
-            if (! text)
-                return STATUS_INSUFFICIENT_RESOURCES;
-            wcscpy(text, setting);
-        }
-    }
-
-    //
-    // if the value wasn't there, don't bother, otherwise apply setting
-    //
-
-    if (! seen_value) {
-        if (text)
-            HeapFree(GetProcessHeap(), 0, text);
-        return STATUS_SUCCESS;
-    }
-
-    return CallSetSetting(text, msg);
-}
-#endif
 
 //---------------------------------------------------------------------------
 // SetTemplate
@@ -1515,145 +1120,6 @@ ULONG SbieIniServer::SetOrTestPassword(MSG_HEADER *msg)
     return status;
 }
 
-#ifndef NEW_INI_MODE
-//---------------------------------------------------------------------------
-// CallSetSetting
-//---------------------------------------------------------------------------
-
-
-ULONG SbieIniServer::CallSetSetting(WCHAR *text, MSG_HEADER *msg)
-{
-    SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)msg;
-
-    //
-    // build a new request and call SetSetting
-    //
-
-    ULONG status;
-    ULONG text_len = 0;
-    if (text)
-        text_len = (wcslen(text) + 1) * sizeof(WCHAR);
-    ULONG req2_len = sizeof(SBIE_INI_SETTING_REQ) + text_len;
-
-    SBIE_INI_SETTING_REQ *req2 =
-        (SBIE_INI_SETTING_REQ *)HeapAlloc(GetProcessHeap(), 0, req2_len);
-    if (! req2)
-        status = STATUS_INSUFFICIENT_RESOURCES;
-    else {
-
-        req2->h.msgid = MSGID_SBIE_INI_SET_SETTING;
-        req2->h.length = req2_len;
-
-        wcscpy(req2->section, req->section);
-        wcscpy(req2->setting, req->setting);
-
-        if (text) {
-            wcscpy(req2->value,   text);
-            req2->value_len = wcslen(text);
-        } else {
-            req2->value[0] = L'\0';
-            req2->value_len = 0;
-        }
-
-        status = SetSetting(&req2->h);
-
-        HeapFree(GetProcessHeap(), 0, req2);
-    }
-
-    if (text)
-        HeapFree(GetProcessHeap(), 0, text);
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// AddText
-//---------------------------------------------------------------------------
-
-
-bool SbieIniServer::AddText(const WCHAR *line)
-{
-    //static const WCHAR *_ByteOrderMark = L"ByteOrderMark=";
-    //static ULONG _ByteOrderMarkLen = 0;
-
-    ULONG line_len = wcslen(line);
-
-    if ((! m_text_base) ||
-        (m_text - m_text_base + line_len + 32 > m_text_max_len)) {
-
-        ULONG text_max_len = m_text_max_len + line_len + 1024;
-        WCHAR *text_base = (WCHAR *)HeapAlloc(
-            GetProcessHeap(), 0, text_max_len * sizeof(WCHAR));
-        if (! text_base)
-            return false;
-
-        if (m_text_base) {
-            wmemcpy(text_base, m_text_base, m_text - m_text_base);
-            HeapFree(GetProcessHeap(), 0, m_text_base);
-        }
-
-        m_text = (m_text - m_text_base) + text_base;
-        m_text_base = text_base;
-        m_text_max_len = text_max_len;
-    }
-
-    wmemcpy(m_text, line, line_len);
-    m_text += line_len;
-    m_text[0] = L'\r';
-    m_text[1] = L'\n';
-    m_text[2] = L'\0';
-    m_text += 2;
-
-    //if (! _ByteOrderMarkLen)
-    //    _ByteOrderMarkLen = wcslen(_ByteOrderMark);
-    //if (_wcsnicmp(line, _ByteOrderMark, _ByteOrderMarkLen) == 0) {
-    //    const WCHAR ch = line[_ByteOrderMarkLen];
-    //    if (ch == L'y' || ch == L'Y')
-    //        m_insertbom = TRUE;
-    //}
-
-    return true;
-}
-
-
-//---------------------------------------------------------------------------
-// AddCallerText
-//---------------------------------------------------------------------------
-
-
-bool SbieIniServer::AddCallerText(WCHAR *setting, WCHAR *value)
-{
-    WCHAR *ptr = setting + wcslen(setting);
-    *ptr = L'=';
-    ++ptr;
-
-    while (*value) {
-
-        ULONG cpylen, skiplen;
-        WCHAR *cr = wcschr(value, L'\n');
-        if (cr) {
-            cpylen = (ULONG)(cr - value);
-            skiplen = cpylen + 1;
-        } else {
-            cpylen = wcslen(value);
-            skiplen = cpylen;
-        }
-        if (cpylen > 1900)  // see also CONF_LINE_LEN (2000) in SbieDrv
-            cpylen = 1900;
-        wmemcpy(ptr, value, cpylen);
-        ptr[cpylen] = L'\0';
-
-        if (! AddText(setting))
-            return false;
-
-        value += skiplen;
-    }
-
-    return true;
-}
-#endif
-
 
 //---------------------------------------------------------------------------
 // RefreshConf
@@ -1662,13 +1128,8 @@ bool SbieIniServer::AddCallerText(WCHAR *setting, WCHAR *value)
 
 ULONG SbieIniServer::RefreshConf()
 {
-#ifdef NEW_INI_MODE
     if (!m_pSbieIni)
         return STATUS_UNSUCCESSFUL;
-#else
-    if (!m_text)
-        return STATUS_UNSUCCESSFUL;
-#endif
 
     WCHAR *IniPath;
     BOOLEAN IsUTF8 = FALSE;
@@ -1685,9 +1146,6 @@ ULONG SbieIniServer::RefreshConf()
     WCHAR *ptr = wcsrchr(TmpPath, L'.');
     wsprintf(ptr, L"-%d.tmp", GetTickCount());
 
-#ifndef NEW_INI_MODE
-    HANDLE hFile = INVALID_HANDLE_VALUE;
-#endif
     NTSTATUS status = STATUS_UNSUCCESSFUL;
 
     bool RestoreOnError = false;
@@ -1748,75 +1206,10 @@ ULONG SbieIniServer::RefreshConf()
 
     UnlockConf();
 
-#ifdef NEW_INI_MODE
     status = m_pSbieIni->SaveIni(IniPath);
     if (!NT_SUCCESS(status)) {
         SbieApi_LogEx(m_session_id, 2322, L"[99 / 0x%08X]", status);
     }
-#else
-    int retryCnt = 0;
-retry:
-    hFile = CreateFile(
-        IniPath, FILE_GENERIC_WRITE,
-        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-        NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-
-    if (hFile == INVALID_HANDLE_VALUE) {
-        if (GetLastError() == ERROR_SHARING_VIOLATION && retryCnt++ < 10) {
-            Sleep(100);
-            goto retry;
-        }
-        SbieApi_LogEx(m_session_id, 2322, L"[15 / %d]", GetLastError());
-        goto finish;
-    }
-
-    if (IsUTF8)
-    {
-        // UTF-8 Signature
-        static const UCHAR bom[3] = { 0xEF, 0xBB, 0xBF };
-        ULONG lenDummy;
-        WriteFile(hFile, bom, sizeof(bom), &lenDummy, NULL);
-    }
-    else
-    //if (m_insertbom) 
-    {
-        // UNICODE Byte Order Mark (little endian)
-        static const UCHAR bom[2] = { 0xFF, 0xFE };
-        ULONG lenDummy;
-        WriteFile(hFile, bom, sizeof(bom), &lenDummy, NULL);
-    }
-
-    ULONG lenToWrite = wcslen(m_text_base) * sizeof(WCHAR);
-    
-    char* text_utf8 = NULL;
-    if (IsUTF8)
-    {
-        ULONG utf8_len = WideCharToMultiByte(CP_UTF8, 0, m_text_base, lenToWrite / sizeof(WCHAR), NULL, 0, NULL, NULL);
-        text_utf8 = (char*)HeapAlloc(GetProcessHeap(), 0, utf8_len);
-        lenToWrite = WideCharToMultiByte(CP_UTF8, 0, m_text_base, lenToWrite / sizeof(WCHAR), text_utf8, utf8_len, NULL, NULL);
-    }
-
-    ULONG lenWritten = 0;
-    if (! WriteFile(hFile, text_utf8 ? (void*)text_utf8 : (void*)m_text_base, lenToWrite, &lenWritten, NULL))
-        lenWritten = -1;
-
-    if(text_utf8)
-        HeapFree(GetProcessHeap(), 0, text_utf8);
-
-    if (lenWritten != lenToWrite)
-        SbieApi_LogEx(m_session_id, 2322, L"[16 / %d]", GetLastError());
-    else {
-        if (! SetEndOfFile(hFile)) {
-            lenWritten = -1;
-            SbieApi_LogEx(m_session_id, 2322, L"[17 / %d]", GetLastError());
-        }
-    }
-    if (lenWritten != lenToWrite)
-        goto finish;
-
-    CloseHandle(hFile);
-    hFile = INVALID_HANDLE_VALUE;
-#endif
 
     //
     // apply new Sandboxie.ini into the driver
@@ -1825,11 +1218,6 @@ retry:
     status = SbieApi_ReloadConf(m_session_id, 0);
 
 finish:
-
-#ifndef NEW_INI_MODE
-    if (hFile != INVALID_HANDLE_VALUE)
-        CloseHandle(hFile);
-#endif
 
     if ((! NT_SUCCESS(status)) && RestoreOnError) {
         if (! CopyFile(TmpPath, IniPath, FALSE))

@@ -205,7 +205,7 @@ namespace {
 		quint64 fingerprint = CandidatesFingerprint(candidates);
 		const QString cacheKey = QString::number(fingerprint) + QLatin1Char('|') + pref;
 		QStringList cached;
-		//if (FuzzyCacheGet(cacheKey, cached)) {
+		if (FuzzyCacheGet(cacheKey, cached)) {
 		//	// Debug: show cache hit and small sample of cached value
 		//	const int sampleLimit = 20;
 		//	QString sample = cached.size() > sampleLimit ? (cached.mid(0, sampleLimit).join(", ") + "...") : cached.join(", ");
@@ -215,8 +215,8 @@ namespace {
 		//		qDebug() << "[FuzzyCache] keys(order) =" << s_cacheOrder;
 		//	}
 		//	qDebug() << "[FuzzyCache] valueSample =" << sample;
-		//	return cached;
-		//}
+		return cached;
+		}
 
 		// Added hasSubstr flag so exact substring matches can be boosted
 		// matchedLen is added to prefer candidates that match a larger portion of the prefix

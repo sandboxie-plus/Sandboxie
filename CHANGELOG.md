@@ -21,6 +21,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed 1.16.1 Dark mode help popup window with light color background [#4903](https://github.com/sandboxie-plus/Sandboxie/issues/4903)
 - fixed Network options cannot be persisted during editing [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
 - fixed Cleanup on Aisle Qt5 - Installer should remove obsolete files after Sandboxie 1.16.x [#4934](https://github.com/sandboxie-plus/Sandboxie/issues/4934)
+- fixed on restart as admin windows was nto shown
+
 
 
 ## [1.16.2 / 5.71.2] - 2025-07-28

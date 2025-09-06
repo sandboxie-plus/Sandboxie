@@ -188,15 +188,17 @@ namespace {
 
 		// Compute a cheap fingerprint for the candidates set (order-sensitive).
 		auto CandidatesFingerprint = [](const QStringList& list) -> quint64 {
-			const quint64 FNV_OFFSET = 1469598103934665603ULL;
+			const quint64 FNV_OFFSET = 14695981039346656037ULL;
 			const quint64 FNV_PRIME = 1099511628211ULL;
 			quint64 h = FNV_OFFSET;
+
 			for (const QString& s : list) {
-				quint32 v = qHash(s);
-				h ^= static_cast<quint64>(v);
+				quint64 v = static_cast<quint64>(qHash(s));
+				h ^= v;
 				h *= FNV_PRIME;
 			}
-			// mix length in
+
+			// Mix length in
 			h ^= static_cast<quint64>(list.size());
 			h *= FNV_PRIME;
 			return h;
@@ -2021,4 +2023,12 @@ void CCodeEdit::SetFuzzyMatchingEnabled(bool bEnabled)
 bool CCodeEdit::GetFuzzyMatchingEnabled()
 {
 	return s_fuzzyMatchingEnabled;
+}
+
+void CCodeEdit::ClearFuzzyCache()
+{
+	QMutexLocker lk(&s_fuzzyCacheMutex);
+	s_fuzzyCache.clear();
+	s_cacheOrder.clear();
+	//qDebug() << "[FuzzyCache] CLEARED";
 }

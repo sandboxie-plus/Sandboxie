@@ -1440,11 +1440,10 @@ void COptionsWindow::OnIniValidationToggled(int state)
 	m_IniValidationEnabled = (state == Qt::Checked);
 	theConf->SetValue("Options/ValidateIniKeys", m_IniValidationEnabled);
 
-	CIniHighlighter::ClearLanguageCache();
-	CIniHighlighter::ClearThemeCache();
-
-	CIniHighlighter::MarkSettingsDirty();
-	CIniHighlighter::MarkUserSettingsDirty();
+	if (state == Qt::Unchecked) {
+		CIniHighlighter::MarkSettingsDirty();
+		CIniHighlighter::MarkUserSettingsDirty();
+	}
 
 	if (m_pIniHighlighter) {
 		delete m_pIniHighlighter;
@@ -1467,6 +1466,11 @@ void COptionsWindow::OnTooltipToggled(int state)
 	theConf->SetValue("Options/EnableIniTooltips", state);
 
 	CIniHighlighter::SetTooltipMode(state);
+
+	if (state == Qt::Unchecked) {
+		CIniHighlighter::ClearLanguageCache();
+		CIniHighlighter::ClearThemeCache();
+	}
 
 	m_HoldChange = false;
 }
@@ -1520,6 +1524,7 @@ void COptionsWindow::OnAutoCompletionToggled(int state)
 		else {
 			// Disable completer
 			m_pCodeEdit->SetCompleter(nullptr);
+			CCodeEdit::ClearFuzzyCache();
 		}
 	}
 

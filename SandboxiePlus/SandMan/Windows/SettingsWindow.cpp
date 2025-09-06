@@ -2506,11 +2506,10 @@ void CSettingsWindow::OnIniValidationToggled(int state)
 	m_IniValidationEnabled = (state == Qt::Checked);
 	theConf->SetValue("Options/ValidateIniKeys", m_IniValidationEnabled);
 
-	CIniHighlighter::ClearLanguageCache();
-	CIniHighlighter::ClearThemeCache();
-
-	CIniHighlighter::MarkSettingsDirty();
-	CIniHighlighter::MarkUserSettingsDirty();
+	if (state == Qt::Unchecked) {
+		CIniHighlighter::MarkSettingsDirty();
+		CIniHighlighter::MarkUserSettingsDirty();
+	}
 
 	// Remove previous highlighter
 	if (m_pIniHighlighter) {
@@ -2537,6 +2536,11 @@ void CSettingsWindow::OnTooltipToggled(int state)
 
 	// Set the tooltip mode in the highlighter
 	CIniHighlighter::SetTooltipMode(state);
+
+	if (state == Qt::Unchecked) {
+		CIniHighlighter::ClearLanguageCache();
+		CIniHighlighter::ClearThemeCache();
+	}
 
 	m_HoldChange = false;
 }
@@ -2571,7 +2575,7 @@ void CSettingsWindow::OnAutoCompletionToggled(int state)
 	}
 
 	theConf->SetValue("Options/EnableAutoCompletion", state);
-	CCodeEdit::SetAutoCompletionMode(state); // Use static method like tooltip
+	CCodeEdit::SetAutoCompletionMode(state);
 
 	// Enable or disable the completer based on mode
 	if (m_pCodeEdit) {
@@ -2590,6 +2594,7 @@ void CSettingsWindow::OnAutoCompletionToggled(int state)
 		else {
 			// Disable completer
 			m_pCodeEdit->SetCompleter(nullptr);
+			CCodeEdit::ClearFuzzyCache();
 		}
 	}
 

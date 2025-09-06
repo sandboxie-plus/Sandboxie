@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - updated GitHub build action to use [Qt 6.9.2](https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.9.2/release-note.md)
 - reworked driver imports to despite of being build with VS2022 allow it to load on windows 7 [#4942](https://github.com/sandboxie-plus/Sandboxie/issues/4942)
 - improved dark mode collor pattern
-- switched to Qt 6.8.3 with [windows 7 compatybility patches](https://github.com/crystalidea/qt6windows7)
+- switched to Qt 6.8.3 with [windows 7 compatibility patches](https://github.com/crystalidea/qt6windows7)
  
 
 ### Fixed
@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed 1.16.1 Dark mode help popup window with light color background [#4903](https://github.com/sandboxie-plus/Sandboxie/issues/4903)
 - fixed Network options cannot be persisted during editing [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
 - fixed Cleanup on Aisle Qt5 - Installer should remove obsolete files after Sandboxie 1.16.x [#4934](https://github.com/sandboxie-plus/Sandboxie/issues/4934)
-- fixed on restart as admin windows was nto shown
+- fixed on restart as admin windows was not shown
 
 
 

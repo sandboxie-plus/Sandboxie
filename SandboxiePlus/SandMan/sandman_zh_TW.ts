@@ -961,7 +961,7 @@ Error: %1</source>
     <message>
         <location filename="../MiscHelpers/Common/CheckableComboBox.cpp" line="12"/>
         <source>Select Items...</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇項目...</translation>
     </message>
 </context>
 <context>
@@ -986,17 +986,17 @@ Error: %1</source>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="503"/>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1555"/>
         <source>Find</source>
-        <translation type="unfinished">尋找</translation>
+        <translation>尋找</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="508"/>
         <source>FindNext</source>
-        <translation type="unfinished">尋找下一个</translation>
+        <translation>尋找下一个</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="518"/>
         <source>GoTo</source>
-        <translation type="unfinished">轉到</translation>
+        <translation>轉到</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="921"/>
@@ -1011,7 +1011,7 @@ Error: %1</source>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished">F3：尋找下一個
+        <translation>F3：尋找下一個
 + Shift： 向後
 + Ctrl： 區分大小寫
 + Alt： 全字匹配
@@ -1021,7 +1021,7 @@ Find String:</source>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1581"/>
         <source>Go to Line:</source>
-        <translation type="unfinished">轉到行:</translation>
+        <translation>轉到行:</translation>
     </message>
 </context>
 <context>
@@ -1629,32 +1629,32 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="7"/>
         <source>Item Chooser</source>
-        <translation type="unfinished"></translation>
+        <translation>項目選擇器</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="12"/>
         <source>Select items that will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>將應用所選項目。</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="29"/>
         <source>Add &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>加入&gt;</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="33"/>
         <source>&lt; Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;移除</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="47"/>
         <source>Move Up</source>
-        <translation type="unfinished">向上移</translation>
+        <translation>向上移</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
-        <translation type="unfinished">向下移</translation>
+        <translation>向下移</translation>
     </message>
 </context>
 <context>
@@ -2981,17 +2981,17 @@ Do you wish to enable autocomplete?</source>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
         <source>Any File (*.*)</source>
-        <translation type="unfinished">任何檔案 (*.*)</translation>
+        <translation>任何檔案 (*.*)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
         <source>Select Directory</source>
-        <translation type="unfinished">選擇目錄</translation>
+        <translation>選擇目錄</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="38"/>
         <source>Browse</source>
-        <translation type="unfinished">瀏覽</translation>
+        <translation>瀏覽</translation>
     </message>
 </context>
 <context>
@@ -11278,7 +11278,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">在 Windows 11 上使用新的 SandMan 風格</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>

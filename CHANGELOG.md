@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed on restart as admin windows was not shown
 
 ### Removed
-- remove obsolete code whcih was long superseeded by new implementations
+- remove obsolete code which was long superseded by new implementations
 
 
 

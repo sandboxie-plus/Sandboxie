@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.3 / 5.71.3] - 2025-09-xx
+## [1.16.3 / 5.71.3] - 2025-09-08
 
 ### Changed
 - updated GitHub build action to use [Qt 6.9.2](https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.9.2/release-note.md)

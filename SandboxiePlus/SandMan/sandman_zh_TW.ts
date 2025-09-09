@@ -261,7 +261,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="898"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <translation>該功能可能對相容性造成影響，因為它阻止了沙箱所屬處理程序向主機所屬處理程序寫入資料，或是將其啟動。</translation>
+        <translation>該功能可能對相容性造成影響，因其阻止了沙箱所屬處理程序向主機所屬處理程序寫入資料，或是將其啟動。</translation>
     </message>
     <message>
         <source>Prevents the sandboxed window from being captured.</source>
@@ -356,9 +356,9 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
     To change the template&apos;s settings, simply locate and edit the &apos;SharedTemplate&apos; template in the App Templates list under Sandbox Options.
     To disable this template for a sandbox, simply uncheck it in the template list.</source>
-        <translation type="vanished">此設定將本機範本新增至沙箱組態中，以便此範本中的設定在沙箱之間共享。 但是，新增到範本的某些設置可能不會反映在用戶界面中。
-    要更改範本的設置，只需在沙箱選項下的應用程式範本列表中找到並編輯“SharedTemplate”範本即可。
-    要為沙箱禁用此範本，只需在範本列表中取消選中它即可。</translation>
+        <translation type="vanished">此設定將本機範本新增至沙箱組態中，以便此範本中的設定在沙箱之間共用。但是，追加到範本的某些變更可能不會反映在使用者介面中。
+    要變更範本設定，只需在沙箱選項下的應用程式範本清單中找到並編輯「SharedTemplate」範本即可。
+    要為沙箱禁用此範本，只需在範本清單中將其取消選中即可。</translation>
     </message>
     <message>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
@@ -538,7 +538,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="331"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation>沙箱將您的主機系統與沙箱內運作的處理程序相隔離，防止它們對電腦中的其它程式和資料進行永久更改。 </translation>
+        <translation>沙箱將您的主機系統與沙箱內運作的處理程序相隔離，防止它們對電腦中的其它程式和資料進行永久變更。 </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
@@ -996,12 +996,12 @@ Error: %1</source>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="518"/>
         <source>GoTo</source>
-        <translation>轉到</translation>
+        <translation>移至</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="921"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
-        <translation type="unfinished"></translation>
+        <translation>您是不是在指: %1？ (按下 Ctrl+R 以替換)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1555"/>
@@ -1013,15 +1013,15 @@ Error: %1</source>
 Find String:</source>
         <translation>F3：尋找下一個
 + Shift： 向後
-+ Ctrl： 區分大小寫
-+ Alt： 全字匹配
++ Ctrl： 大小寫相符
++ Alt： 全文字相符
 
 尋找字串:</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1581"/>
         <source>Go to Line:</source>
-        <translation>轉到行:</translation>
+        <translation>移至行:</translation>
     </message>
 </context>
 <context>
@@ -1365,7 +1365,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="469"/>
         <source>Validate (Failed)</source>
-        <translation>配置校驗 (失敗)</translation>
+        <translation>驗證 (失敗)</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="802"/>
@@ -1387,13 +1387,13 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Helpers/IniHighlighter.cpp" line="805"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1720"/>
         <source>Renamed in version</source>
-        <translation>重命名於版本</translation>
+        <translation>重新命名於版本</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="806"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1722"/>
         <source>Superseded by</source>
-        <translation type="unfinished"></translation>
+        <translation>取代為</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -1446,7 +1446,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <source>User Settings</source>
-        <translation type="obsolete">用戶設定</translation>
+        <translation type="obsolete">使用者設定</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1431"/>
@@ -1456,19 +1456,19 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1432"/>
         <source>Requirements</source>
-        <translation type="unfinished"></translation>
+        <translation>需求</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1592"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1739"/>
         <source>Syntax</source>
-        <translation>句法</translation>
+        <translation>語法</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1593"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1735"/>
         <source>Description</source>
-        <translation>說明</translation>
+        <translation>描述</translation>
     </message>
     <message>
         <source>Supporter Certificate</source>
@@ -2645,7 +2645,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1218"/>
         <source>Failed to Change Password</source>
-        <translation>密碼修改失敗</translation>
+        <translation>密碼變更失敗</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
@@ -4245,7 +4245,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3892"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation>每當檔案儲存後更改將自動套用。</translation>
+        <translation>當檔案儲存後變更將自動套用。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3893"/>
@@ -4310,7 +4310,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="4401"/>
         <source>Highlight</source>
-        <translation>醒目提示</translation>
+        <translation>強調顯示</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4402"/>
@@ -6828,8 +6828,8 @@ Right-click to copy</oldsource>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation>如果您對自動完成彈出窗口中顯示的設置不確定，我們強烈建議在繼續之前查閱軟件的文檔或源代碼。未經適當理解啟用此功能可能會導致意想不到的後果，您將對此負全責。
-您是否希望啟用自動完成？</translation>
+        <translation>如果您對自動補全跳出視窗中展示的設定存在疑慮，我們強烈建議在繼續之前查閱軟體的文件或原始碼。未經適當理解啟用此功能可能會導致意想不到的後果，您將為此承擔全部責任。
+是否繼續啟用自動補全？</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2733"/>
@@ -9913,20 +9913,20 @@ instead of &quot;*&quot;.</source>
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body&gt;
-        懸停在設置上時顯示詳細的工具提示。&lt;br&gt;
+        懸浮在設定文字時顯示詳細的工具提示。&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;：完整詳細信息（版本、語法、描述等）&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;：僅顯示基本信息&lt;br&gt;
+        &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 完整內容 (版本、語法、描述等)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;: 僅顯示基本資訊&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;語法幫助：&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
-        • &lt;i&gt;方括號&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可選參數&lt;br&gt;
+        &lt;b&gt;語法小助手:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分離替代值&lt;br&gt;
+        • &lt;i&gt;方括號&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 指示可選參數&lt;br&gt;
         • &lt;i&gt;圓括號&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效選項&lt;br&gt;
-        • &lt;i&gt;尖括號&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替換的佔位符&lt;br&gt;
-        • &lt;i&gt;粗體值&lt;/i&gt; — 代表默認值（可以省略）&lt;br&gt;
+        • &lt;i&gt;角括號&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替換佔位字元&lt;br&gt;
+        • &lt;i&gt;粗體值&lt;/i&gt; — 代表預設值 (可以省略)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -9953,25 +9953,25 @@ instead of &quot;*&quot;.</source>
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body&gt;
-        &lt;b&gt;自動完成 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;自動完成&lt;/u&gt;：在輸入3個或以上字符時彈出建議&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ 從彈出窗口中選擇以&lt;u&gt;自動應用&lt;/u&gt;正確的大小寫&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt;確認選擇&lt;br&gt;
+        &lt;b&gt;自動補全 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;自動補全&lt;/u&gt;: 在輸入3個或以上字元時彈出建議&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 從跳出視窗中選擇以&lt;u&gt;自動套用&lt;/u&gt;正確的大小寫&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Enter/Return&lt;/code&gt; 確認選擇&lt;br&gt;
         &lt;br&gt;
-        • &lt;u&gt;手動修正&lt;/u&gt;：在輸入設定後=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt;提示出現以進行大小寫修正&lt;br&gt;
+        • &lt;u&gt;手動修正&lt;/u&gt;: 在輸入設定後=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Ctrl+R&lt;/code&gt; 將跳出提示以進行大小寫修正&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;：自動完成 + 大小寫修正&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;：僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
+        &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 自動補全 + 大小寫修正&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;: 僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;導航：&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;：在彈出窗口中移動&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;：確認選擇&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;：強制打開建議&lt;br&gt;
-        • &lt;code&gt;Tab&lt;/code&gt;：應用第一個或確認選擇&lt;br&gt;
+        &lt;b&gt;導覽:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在跳出視窗中移動&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: 確認選擇&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 強制開啟建議&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;: 套用首個或確認選擇&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -9989,7 +9989,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6059"/>
         <source>Tooltips</source>
-        <translation>提供訊息</translation>
+        <translation>工具提示</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6069"/>
@@ -10021,24 +10021,24 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;選中該選項後，管理器將會依據 SbieSettings 對 INI 配置文件進行校驗和高亮顯示。&lt;/p&gt;
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;當啟用後，基於INI檔案，設定項將被檢查和強調顯示。將其關閉以停用檢查和強調顯示。&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黃底黑字斜體&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：更名（目前使用的是已經無效的舊鍵名）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底白字劃去&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：棄用（該鍵已被移除）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底深青色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：保留（該鍵名已被定義但尚未被支持）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;紅色波浪線&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：無效（未被定義的鍵名）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/淺紅色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：有效&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黃底、黑字、斜體&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 重新命名 (舊名稱無效)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底、白字、刪除線&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 已移除 (不再可用)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底、深青綠文字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 未來保留 (暫不可用)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;紅色拼字檢查底線&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 無效/未知&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/淺紅文字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 有效/已知&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 &lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;注意&lt;/span&gt;：目前的校驗器版本僅完成了有效鍵名的校驗功能。但因為管理器不會對全局或每個沙箱的配置進行校驗，某些在特定情況（上下文）下實際無效的配置可能會在這些情況下被誤標記為有效。&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;注意&lt;/span&gt;: 目前版本僅有效/已知設定項可正常檢查。因全域或單沙箱驗證不會進行，某些設定項可能顯示有效但不能在全部環境中工作。&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6086"/>
         <source>Validate</source>
-        <translation>配置校驗</translation>
+        <translation>驗證</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5768"/>
@@ -11278,7 +11278,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished">在 Windows 11 上使用新的 SandMan 風格</translation>
+        <translation>在 Windows 11 上使用新的沙箱管理員風格</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
@@ -11421,20 +11421,20 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         • &lt;i&gt;Bold values&lt;/i&gt; — Represent defaults (can be omitted)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body&gt;
-        懸停在設置上時顯示詳細的工具提示。&lt;br&gt;
+        懸浮在設定文字時顯示詳細的工具提示。&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;：完整詳細信息（版本、語法、描述等）&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;：僅顯示基本信息&lt;br&gt;
+        &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 完整內容 (版本、語法、描述等)&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;: 僅顯示基本資訊&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;語法幫助：&lt;/b&gt;&lt;br&gt;
-        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分隔替代值&lt;br&gt;
-        • &lt;i&gt;方括號&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 表示可選參數&lt;br&gt;
+        &lt;b&gt;語法小助手:&lt;/b&gt;&lt;br&gt;
+        • &lt;i&gt;管道&lt;/i&gt; &lt;code&gt;|&lt;/code&gt; — 分離替代值&lt;br&gt;
+        • &lt;i&gt;方括號&lt;/i&gt; &lt;code&gt;[ ]&lt;/code&gt; — 指示可選參數&lt;br&gt;
         • &lt;i&gt;圓括號&lt;/i&gt; &lt;code&gt;( )&lt;/code&gt; — 包含有效選項&lt;br&gt;
-        • &lt;i&gt;尖括號&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替換的佔位符&lt;br&gt;
-        • &lt;i&gt;粗體值&lt;/i&gt; — 代表默認值（可以省略）&lt;br&gt;
+        • &lt;i&gt;角括號&lt;/i&gt; &lt;code&gt;&amp;lt; &amp;gt;&lt;/code&gt; — 表示可替換佔位字元&lt;br&gt;
+        • &lt;i&gt;粗體值&lt;/i&gt; — 代表預設值 (可以省略)&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -11461,25 +11461,25 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body&gt;
-        &lt;b&gt;自動完成 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;自動完成&lt;/u&gt;：在輸入3個或以上字符時彈出建議&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ 從彈出窗口中選擇以&lt;u&gt;自動應用&lt;/u&gt;正確的大小寫&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt;確認選擇&lt;br&gt;
+        &lt;b&gt;自動補全 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;自動補全&lt;/u&gt;: 在輸入3個或以上字元時彈出建議&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 從跳出視窗中選擇以&lt;u&gt;自動套用&lt;/u&gt;正確的大小寫&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Enter/Return&lt;/code&gt; 確認選擇&lt;br&gt;
         &lt;br&gt;
-        • &lt;u&gt;手動修正&lt;/u&gt;：在輸入設定後=&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt;提示出現以進行大小寫修正&lt;br&gt;
+        • &lt;u&gt;手動修正&lt;/u&gt;: 在輸入設定後=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Ctrl+R&lt;/code&gt; 將跳出提示以進行大小寫修正&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;模式：&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;：自動完成 + 大小寫修正&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;：僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
+        &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 自動補全 + 大小寫修正&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;: 僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
         &lt;br&gt;
-        &lt;b&gt;導航：&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;：在彈出窗口中移動&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;：確認選擇&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;：強制打開建議&lt;br&gt;
-        • &lt;code&gt;Tab&lt;/code&gt;：應用第一個或確認選擇&lt;br&gt;
+        &lt;b&gt;導覽:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在跳出視窗中移動&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: 確認選擇&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 強制開啟建議&lt;br&gt;
+        • &lt;code&gt;Tab&lt;/code&gt;: 套用首個或確認選擇&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -11491,7 +11491,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <source>Show detailed information tooltips when hovering over configuration settings.
 Tooltips include version details, syntax requirements, and descriptions to help you understand and correctly configure each setting.</source>
-        <translation type="vanished">滑鼠懸停於配置項時，會顯示該配置項的詳細資訊。
+        <translation type="vanished">滑鼠懸浮於設定項時，會顯示該配置項的詳細資訊。
 資訊包括版本、語法及功能描述，旨在幫助您正確理解並配置每個項目。</translation>
     </message>
     <message>
@@ -11502,7 +11502,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3135"/>
         <source>Validate</source>
-        <translation>配置校驗</translation>
+        <translation>驗證</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2930"/>
@@ -11583,18 +11583,18 @@ Tooltips include version details, syntax requirements, and descriptions to help 
 &lt;br/&gt;
 &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known keys are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-&lt;p&gt;選中該選項後，管理器將會依據 SbieSettings 對 INI 配置文件進行校驗和高亮顯示。&lt;/p&gt;
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p&gt;當啟用後，基於INI檔案，設定項將被檢查和強調顯示。將其關閉以停用檢查和強調顯示。&lt;/p&gt;
 &lt;br/&gt;
 &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黃底黑字斜體&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：更名（目前使用的是已經無效的舊鍵名）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底白字劃去&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：棄用（該鍵已被移除）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底深青色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：保留（該鍵名已被定義但尚未被支持）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;紅色波浪線&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：無效（未被定義的鍵名）&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/淺紅色字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;：有效&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;黃底、黑字、斜體&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 重新命名 (舊名稱無效)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;黑底、白字、刪除線&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 已移除 (不再可用)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;白底、深青綠文字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 未來保留 (暫不可用)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;紅色拼字檢查底線&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 無效/未知&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;深/淺紅文字&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: 有效/已知&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 &lt;br/&gt;
-&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;注意&lt;/span&gt;：目前的校驗器版本僅完成了有效鍵名的校驗功能。但因為管理器不會對全局或每個沙箱的配置進行校驗，某些在特定情況（上下文）下實際無效的配置可能會在這些情況下被誤標記為有效。&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;注意&lt;/span&gt;: 目前版本僅有效/已知設定項可正常檢查。因全域或單沙箱驗證不會進行，某些設定項可能顯示有效但不能在全部環境中工作。&lt;/p&gt;
 &lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>

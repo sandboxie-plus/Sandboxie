@@ -1773,7 +1773,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="538"/>
         <location filename="Windows/OptionsWindow.cpp" line="544"/>
         <location filename="Windows/OptionsWindow.cpp" line="550"/>
         <location filename="Windows/OptionsWindow.cpp" line="565"/>
@@ -3199,7 +3198,7 @@ Error: </source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="659"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Стабільний канал містить останні стабільні випуски з GitHub.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="663"/>

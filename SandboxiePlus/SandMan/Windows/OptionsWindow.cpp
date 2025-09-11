@@ -447,11 +447,14 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.txtIniSection = nullptr;
 	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
 
-	// set fuzzy prefix length bounds from settings data
+	// Set fuzzy prefix length bounds from settings data
 	CCodeEdit::SetMaxFuzzyPrefixLength(CIniHighlighter::getMaxSettingNameLengthOrDefault());
 	CCodeEdit::SetMinFuzzyPrefixLength(CIniHighlighter::getMinSettingNameLengthOrDefault());
 	// Pass fuzzy matching toggle from config (no UI checkbox required)
 	m_pCodeEdit->SetFuzzyMatchingEnabled(theConf->GetBool("Options/EnableFuzzyMatching", false));
+
+	// Show tooltips when navigating with keyboard
+	CCodeEdit::SetPopupTooltipsEnabled(theConf->GetBool("Options/EnablePopupTooltips", true));
 
 	// Set up autocompletion based on mode
 	QCompleter* completer = new QCompleter(this);
@@ -474,6 +477,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		});
 	m_pCodeEdit->SetCaseCorrectionFilterCallback([](const QString& keyName) -> bool {
 		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c');
+		});
+	m_pCodeEdit->SetTooltipCallback([](const QString& keyName) -> QString {
+		return CIniHighlighter::GetSettingTooltip(keyName);
 		});
 	
 	// Update completion model with current settings if auto completion is enabled

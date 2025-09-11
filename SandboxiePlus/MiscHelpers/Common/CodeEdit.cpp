@@ -1,8 +1,42 @@
 #include "stdafx.h"
 #include "CodeEdit.h"
+#include <QStyledItemDelegate>
 
 
 #define TAB_SPACES "   "
+
+class CompletionItemDelegate : public QStyledItemDelegate {
+public:
+	CompletionItemDelegate(const std::function<QString(const QString&)>& tooltipCallback, QObject* parent = nullptr)
+		: QStyledItemDelegate(parent), m_tooltipCallback(tooltipCallback) {
+	}
+
+	bool helpEvent(QHelpEvent* event, QAbstractItemView* view,
+		const QStyleOptionViewItem& option, const QModelIndex& index) override {
+		if (event->type() == QEvent::ToolTip) {
+			// Check if popup tooltips are enabled globally
+			if (!CCodeEdit::GetPopupTooltipsEnabled())
+				return false; // Skip tooltips if disabled globally
+
+			if (index.isValid() && m_tooltipCallback) {
+				QString completionText = index.data().toString();
+				// Use the callback instead of direct CIniHighlighter call
+				QString tooltipText = m_tooltipCallback(completionText);
+				if (!tooltipText.isEmpty()) {
+					QToolTip::showText(event->globalPos(), tooltipText, view);
+					return true;
+				}
+				else {
+					QToolTip::hideText();
+				}
+			}
+		}
+		return QStyledItemDelegate::helpEvent(event, view, option, index);
+	}
+
+private:
+	std::function<QString(const QString&)> m_tooltipCallback;
+};
 
 // Anonymous namespace helpers for fuzzy matching
 namespace {
@@ -472,6 +506,8 @@ bool CCodeEdit::s_fuzzyMatchingEnabled = false;
 int CCodeEdit::s_minFuzzyPrefixLength = 4;
 int CCodeEdit::s_maxFuzzyPrefixLength = 32;
 
+bool CCodeEdit::s_popupTooltipsEnabled = true;
+
 CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	: QWidget(pParent), m_pCompleter(nullptr), m_lastWordStart(-1), m_lastWordEnd(-1),
 	m_caseCorrectionInProgress(false), m_completionInsertInProgress(false),
@@ -600,25 +636,40 @@ void CCodeEdit::SetCompleter(QCompleter* completer)
 		// Remove event filter from old popup
 		if (m_pCompleter->popup()) {
 			m_pCompleter->popup()->removeEventFilter(this);
+			// Disconnect any existing selection change signals
+			if (m_pCompleter->popup()->selectionModel())
+				m_pCompleter->popup()->selectionModel()->disconnect(this);
 		}
 	}
-	
+
 	m_pCompleter = completer;
-	
+
 	if (!m_pCompleter)
 		return;
-	
+
 	m_pCompleter->setWidget(m_pSourceCode);
 	m_pCompleter->setCompletionMode(QCompleter::PopupCompletion);
 	m_pCompleter->setCaseSensitivity(Qt::CaseInsensitive);
 	connect(m_pCompleter, QOverload<const QString&>::of(&QCompleter::activated),
-			this, &CCodeEdit::OnInsertCompletion);
-	
+		this, &CCodeEdit::OnInsertCompletion);
+
 	// Install event filter on the popup widget itself
 	// This ensures we capture key events BEFORE the popup processes them
 	if (m_pCompleter->popup()) {
 		m_pCompleter->popup()->installEventFilter(this);
+
+		// Connect to selection changes to show tooltips during keyboard navigation
+		connect(m_pCompleter->popup()->selectionModel(),
+			&QItemSelectionModel::currentChanged,
+			this,
+			&CCodeEdit::OnPopupSelectionChanged);
+
+		// Install our custom delegate for tooltips using the tooltip callback
+		if (m_tooltipCallback) {
+			m_pCompleter->popup()->setItemDelegate(new CompletionItemDelegate(m_tooltipCallback, m_pCompleter->popup()));
+		}
 	}
+
 	// remember base model if present
 	m_baseModel = qobject_cast<QStringListModel*>(m_pCompleter->model());
 	// clear any temp model reference
@@ -936,6 +987,17 @@ void CCodeEdit::SetCaseCorrectionCallback(std::function<QString(const QString&)>
 void CCodeEdit::SetCompletionFilterCallback(std::function<bool(const QString&)> callback)
 {
     m_completionFilterCallback = std::move(callback);
+}
+
+void CCodeEdit::SetTooltipCallback(std::function<QString(const QString&)> tooltipCallback)
+{
+	m_tooltipCallback = std::move(tooltipCallback);
+
+	// If we already have a completer with a popup, update its delegate
+	if (m_pCompleter && m_pCompleter->popup()) {
+		// Replace the existing delegate with a new one that uses the tooltip callback
+		m_pCompleter->popup()->setItemDelegate(new CompletionItemDelegate(m_tooltipCallback, m_pCompleter->popup()));
+	}
 }
 
 // Helper method: Handle completion trigger logic with improved reliability
@@ -2059,4 +2121,59 @@ void CCodeEdit::ClearFuzzyCache()
 	s_fuzzyCache.clear();
 	s_cacheOrder.clear();
 	//qDebug() << "[FuzzyCache] CLEARED";
+}
+
+// Helper method to show tooltip for the currently selected item in the completion popup
+void CCodeEdit::ShowPopupTooltipForCurrentItem()
+{
+	if (!m_pCompleter || !m_pCompleter->popup() || !m_tooltipCallback)
+		return;
+
+	// Get the currently selected item in the popup
+	QModelIndex currentIndex = m_pCompleter->popup()->currentIndex();
+	if (!currentIndex.isValid() && m_pCompleter->completionCount() > 0) {
+		// If nothing is selected, use the first item
+		currentIndex = m_pCompleter->popup()->model()->index(0, 0);
+	}
+
+	if (currentIndex.isValid()) {
+		QString completionText = m_pCompleter->popup()->model()->data(currentIndex).toString();
+		QString tooltipText = m_tooltipCallback(completionText);
+
+		if (!tooltipText.isEmpty()) {
+			// Calculate position - place tooltip below the selected item
+			QRect itemRect = m_pCompleter->popup()->visualRect(currentIndex);
+			QPoint globalPos = m_pCompleter->popup()->mapToGlobal(
+				QPoint(itemRect.right(), itemRect.bottom()));
+
+			// Show the tooltip
+			QToolTip::showText(globalPos, tooltipText, m_pCompleter->popup());
+		}
+	}
+}
+
+void CCodeEdit::SetPopupTooltipsEnabled(bool bEnabled)
+{
+	s_popupTooltipsEnabled = bEnabled;
+}
+
+bool CCodeEdit::GetPopupTooltipsEnabled()
+{
+	return s_popupTooltipsEnabled;
+}
+
+void CCodeEdit::OnPopupSelectionChanged(const QModelIndex& current, const QModelIndex& previous)
+{
+	if (!s_popupTooltipsEnabled || !m_tooltipCallback || !current.isValid())
+		return;
+
+	// Only show tooltips when navigating with keyboard (not during mouse movements)
+	// This prevents duplicate tooltips when moving the mouse over items
+	if (QApplication::mouseButtons() != Qt::NoButton)
+		return;
+
+	// Add a short delay to avoid flickering tooltips during rapid navigation
+	ScheduleWithDelay(150, [this]() {
+		ShowPopupTooltipForCurrentItem();
+		}, "ShowTooltipOnSelectionChange");
 }

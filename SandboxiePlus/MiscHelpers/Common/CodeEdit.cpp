@@ -188,15 +188,17 @@ namespace {
 
 		// Compute a cheap fingerprint for the candidates set (order-sensitive).
 		auto CandidatesFingerprint = [](const QStringList& list) -> quint64 {
-			const quint64 FNV_OFFSET = 1469598103934665603ULL;
+			const quint64 FNV_OFFSET = 14695981039346656037ULL;
 			const quint64 FNV_PRIME = 1099511628211ULL;
 			quint64 h = FNV_OFFSET;
+
 			for (const QString& s : list) {
-				quint32 v = qHash(s);
-				h ^= static_cast<quint64>(v);
+				quint64 v = static_cast<quint64>(qHash(s));
+				h ^= v;
 				h *= FNV_PRIME;
 			}
-			// mix length in
+
+			// Mix length in
 			h ^= static_cast<quint64>(list.size());
 			h *= FNV_PRIME;
 			return h;
@@ -205,7 +207,7 @@ namespace {
 		quint64 fingerprint = CandidatesFingerprint(candidates);
 		const QString cacheKey = QString::number(fingerprint) + QLatin1Char('|') + pref;
 		QStringList cached;
-		//if (FuzzyCacheGet(cacheKey, cached)) {
+		if (FuzzyCacheGet(cacheKey, cached)) {
 		//	// Debug: show cache hit and small sample of cached value
 		//	const int sampleLimit = 20;
 		//	QString sample = cached.size() > sampleLimit ? (cached.mid(0, sampleLimit).join(", ") + "...") : cached.join(", ");
@@ -215,8 +217,8 @@ namespace {
 		//		qDebug() << "[FuzzyCache] keys(order) =" << s_cacheOrder;
 		//	}
 		//	qDebug() << "[FuzzyCache] valueSample =" << sample;
-		//	return cached;
-		//}
+		return cached;
+		}
 
 		// Added hasSubstr flag so exact substring matches can be boosted
 		// matchedLen is added to prefer candidates that match a larger portion of the prefix
@@ -2021,4 +2023,12 @@ void CCodeEdit::SetFuzzyMatchingEnabled(bool bEnabled)
 bool CCodeEdit::GetFuzzyMatchingEnabled()
 {
 	return s_fuzzyMatchingEnabled;
+}
+
+void CCodeEdit::ClearFuzzyCache()
+{
+	QMutexLocker lk(&s_fuzzyCacheMutex);
+	s_fuzzyCache.clear();
+	s_cacheOrder.clear();
+	//qDebug() << "[FuzzyCache] CLEARED";
 }

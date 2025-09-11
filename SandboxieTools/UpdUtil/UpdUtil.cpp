@@ -1470,8 +1470,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			std::wstring framework = GetArgument(arguments, L"framework");
 			if (framework.empty()) {
-				framework = GetFileVersion(base_dir + L"\\Qt5Core.dll");
-				if (framework.empty()) framework = GetFileVersion(base_dir + L"\\Qt6Core.dll");
+				/*framework = GetFileVersion(base_dir + L"\\Qt5Core.dll");
+				if (framework.empty())*/ framework = GetFileVersion(base_dir + L"\\Qt6Core.dll");
 				if (!framework.empty()) framework = L"qt" + framework + L"_" + agent_arch;
 			}
 

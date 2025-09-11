@@ -30,6 +30,7 @@
 #include "common/my_version.h"
 #define NO_IP_DEFS
 #include "common/my_wsa.h"
+#include "util.h"
 
 
 extern DEVICE_OBJECT *Api_DeviceObject;
@@ -233,7 +234,7 @@ _FX BOOLEAN WFP_Init(void)
 	WFP_Processes.func_malloc = &WFP_Alloc;
 	WFP_Processes.func_free = &WFP_Free;
 
-	WFP_MapLock = 0; //KeInitializeSpinLock(&WFP_MapLock); // w7 build compiles to *Lock = 0; w11 build calls a kernel function which does the same
+	MyInitializeSpinLock(&WFP_MapLock);
 
 	WPF_MapInitialized = TRUE;
 

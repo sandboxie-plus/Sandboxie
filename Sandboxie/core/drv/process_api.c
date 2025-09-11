@@ -1008,8 +1008,6 @@ _FX NTSTATUS Process_Enumerate(
 
         num = 0;
 
-#ifdef USE_PROCESS_MAP
-
         //
         // quick shortcut for global count retrieval
         //
@@ -1023,10 +1021,7 @@ _FX NTSTATUS Process_Enumerate(
 	    map_iter_t iter = map_iter();
 	    while (map_next(&Process_Map, &iter)) {
             proc1 = iter.value;
-#else
-        proc1 = List_Head(&Process_List);
-        while (proc1) {
-#endif
+
             BOX *box1 = proc1->box;
             if (box1 && !proc1->bHostInject) {
                 BOOLEAN same_box =
@@ -1042,15 +1037,9 @@ _FX NTSTATUS Process_Enumerate(
                     ++num;
                 }
             }
-
-#ifndef USE_PROCESS_MAP
-            proc1 = (PROCESS *)List_Next(proc1);
-#endif
         }
 
-#ifdef USE_PROCESS_MAP
-        done:
-#endif
+    done:
         *count = num;
 
         status = STATUS_SUCCESS;

@@ -137,7 +137,7 @@ CAddonPtr CAddonManager::GetAddon(const QString& Id, EState State)
 {
 	QString Key = pAddon->GetSpecificEntry("uninstallKey").toString();
 	if (!Key.isEmpty())
-		return CSbieTemplates::CheckRegistryKey(Key);
+		return theGUI->GetCompat()->CheckRegistryKey(Key);
 	
 	/ *QStringList Files = pAddon->GetSpecificEntry("files").toStringList();
 	foreach(const QString & File, Files) {

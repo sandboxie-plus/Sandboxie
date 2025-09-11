@@ -51,50 +51,17 @@ copy "%redistPath%\*" %instPath%\
 
 
 ECHO Copying Qt libraries
-
-if "%qt_version:~0,1%" == "5" (
-    echo Copying Qt5 libraries...
-    IF NOT %archPath% == ARM64 (
-        REM If not ARM64 (e.g., x86 or x64)
-        echo Copying Qt5Core.dll
-        copy %qtPath%\bin\Qt5Core.dll %instPath%\
-        echo Copying Qt5Gui.dll
-        copy %qtPath%\bin\Qt5Gui.dll %instPath%\
-        echo Copying Qt5Network.dll
-        copy %qtPath%\bin\Qt5Network.dll %instPath%\
-        echo Copying Qt5Widgets.dll
-        copy %qtPath%\bin\Qt5Widgets.dll %instPath%\
-        echo Copying Qt5WinExtras.dll
-        copy %qtPath%\bin\Qt5WinExtras.dll %instPath%\
-        echo Copying Qt5Qml.dll
-        copy %qtPath%\bin\Qt5Qml.dll %instPath%\
-    ) ELSE (
-        REM If ARM64, using Qt6
-        echo Copying Qt6Core.dll
-        copy %qtPath%\bin\Qt6Core.dll %instPath%\
-        echo Copying Qt6Gui.dll
-        copy %qtPath%\bin\Qt6Gui.dll %instPath%\
-        echo Copying Qt6Network.dll
-        copy %qtPath%\bin\Qt6Network.dll %instPath%\
-        echo Copying Qt6Widgets.dll
-        copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
-        echo Copying Qt6Qml.dll
-        copy %qtPath%\bin\Qt6Qml.dll %instPath%\
-    )
-) else (
-    REM If not Qt5, assuming Qt6
-    echo Copying Qt6 libraries...
-    echo Copying Qt6Core.dll
-    copy %qtPath%\bin\Qt6Core.dll %instPath%\
-    echo Copying Qt6Gui.dll
-    copy %qtPath%\bin\Qt6Gui.dll %instPath%\
-    echo Copying Qt6Network.dll
-    copy %qtPath%\bin\Qt6Network.dll %instPath%\
-    echo Copying Qt6Widgets.dll
-    copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
-    echo Copying Qt6Qml.dll
-    copy %qtPath%\bin\Qt6Qml.dll %instPath%\
-)
+echo Copying Qt6 libraries...
+echo Copying Qt6Core.dll
+copy %qtPath%\bin\Qt6Core.dll %instPath%\
+echo Copying Qt6Gui.dll
+copy %qtPath%\bin\Qt6Gui.dll %instPath%\
+echo Copying Qt6Network.dll
+copy %qtPath%\bin\Qt6Network.dll %instPath%\
+echo Copying Qt6Widgets.dll
+copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
+echo Copying Qt6Qml.dll
+copy %qtPath%\bin\Qt6Qml.dll %instPath%\
 
 echo Done copying libraries.
 
@@ -105,23 +72,13 @@ copy %qtPath%\plugins\platforms\qoffscreen.dll %instPath%\platforms\
 copy %qtPath%\plugins\platforms\qwindows.dll %instPath%\platforms\
 
 mkdir %instPath%\styles
-copy %qtPath%\plugins\styles\qwindowsvistastyle.dll %instPath%\styles\
 rem Qt 6.7+
 copy %qtPath%\plugins\styles\qmodernwindowsstyle.dll %instPath%\styles\
 
-IF %archPath% == ARM64 (
 mkdir %instPath%\tls
 copy %qtPath%\plugins\tls\qcertonlybackend.dll %instPath%\tls\
 copy %qtPath%\plugins\tls\qopensslbackend.dll %instPath%\tls\
 copy %qtPath%\plugins\tls\qschannelbackend.dll %instPath%\tls\
-)
-
-IF %archPath% == x64 (
-    if "%qt_version:~0,1%" == "6" (
-        mkdir %instPath%\tls
-        copy %qtPath%\plugins\tls\qopensslbackend.dll %instPath%\tls\
-    )
-)
 
 ECHO Copying OpenSSL libraries
 IF %archPath% == Win32 (

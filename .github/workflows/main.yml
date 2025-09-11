@@ -90,7 +90,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v5
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd
@@ -120,20 +120,20 @@ jobs:
     # Prepare Qt Framework
     #
 
-      - name: Install Qt6 x64
-        uses: jurplel/install-qt-action@v4.3.0
-        with:
-      #    version: '6.2.4'
-          version: '${{ env.qt6_version }}'
-      #    dir: ..
-      #    arch:  ${{ matrix.qt-target }}
-          arch:  'win64_msvc2022_64'
-      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-          tools: 'tools_opensslv3_x64'
-          cache: true
+#      - name: Install Qt6 x64
+#        uses: jurplel/install-qt-action@v4.3.0
+#        with:
+#      #    version: '6.2.4'
+#          version: '${{ env.qt6_version }}'
+#      #    dir: ..
+#      #    arch:  ${{ matrix.qt-target }}
+#          arch:  'win64_msvc2022_64'
+#      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
+#          tools: 'tools_opensslv3_x64'
+#          cache: true
 
-#      - name: Install Qt5 x64
-#        run: SandboxiePlus\install_qt.cmd x64
+      - name: Install Qt6 x64
+        run: SandboxiePlus\install_qt.cmd x64
 
       - name: Installing Jom
       #  if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -205,7 +205,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v5
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd

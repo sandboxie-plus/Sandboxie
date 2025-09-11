@@ -50,6 +50,7 @@ public:
 	static int GetMinFuzzyPrefixLength();
 	static int s_maxFuzzyPrefixLength;
 	static int s_minFuzzyPrefixLength;
+	static void ClearFuzzyCache();
 
 	void ScheduleWithDelay(int delayMs, std::function<void()> task, const QString& taskName);
 

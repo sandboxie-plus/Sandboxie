@@ -5,13 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.3 / 5.71.3] - 2025-09-xx
+## [1.16.3 / 5.71.3] - 2025-09-08
 
 ### Changed
-- updated GitHub build action to use [Qt 6.9.2](https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.9.2/release-note.md)
 - reworked driver imports to despite of being build with VS2022 allow it to load on windows 7 [#4942](https://github.com/sandboxie-plus/Sandboxie/issues/4942)
-- improved dark mode collor pattern
- 
+- improved dark mode color pattern
+- switched to Qt 6.8.3 with [windows 7 compatibility patches](https://github.com/crystalidea/qt6windows7)
+- validated compatibility with Windows build 27934 and updated DynData
 
 ### Fixed
 - fixed 1.16.2 = Tray Menu Missing in Action [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)
@@ -19,6 +19,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed RTL layout for Arabic in UAC prompt dialog [#4957](https://github.com/sandboxie-plus/Sandboxie/pull/4957) (thanks gexgd0419)
 - fixed 1.16.1 Dark mode help popup window with light color background [#4903](https://github.com/sandboxie-plus/Sandboxie/issues/4903)
 - fixed Network options cannot be persisted during editing [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
+- fixed Cleanup on Aisle Qt5 - Installer should remove obsolete files after Sandboxie 1.16.x [#4934](https://github.com/sandboxie-plus/Sandboxie/issues/4934)
+- fixed on restart as admin windows was not shown
+
+### Removed
+- remove obsolete code which was long superseded by new implementations
 
 
 

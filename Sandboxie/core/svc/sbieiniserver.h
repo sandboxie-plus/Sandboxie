@@ -27,7 +27,6 @@
 
 #include "PipeServer.h"
 
-#define NEW_INI_MODE
 
 class SbieIniServer
 {
@@ -38,9 +37,7 @@ public:
 
     ~SbieIniServer();
 
-#ifdef NEW_INI_MODE
     static void NotifyConfigReloaded();
-#endif
 
     static bool TokenIsAdmin(HANDLE hToken, bool OnlyFull = false);
 
@@ -66,11 +63,9 @@ protected:
 
     bool UserCanEdit(HANDLE hToken);
 
-#ifdef NEW_INI_MODE
     ULONG CacheConfig();
 
     MSG_HEADER *GetSetting(MSG_HEADER *msg);
-#endif
 
     ULONG SetSetting(MSG_HEADER *msg);
 
@@ -81,14 +76,6 @@ protected:
     ULONG SetTemplate(MSG_HEADER *msg);
 
     ULONG SetOrTestPassword(MSG_HEADER *msg);
-
-#ifndef NEW_INI_MODE
-    ULONG CallSetSetting(WCHAR *text, MSG_HEADER *msg);
-
-    bool AddText(const WCHAR *line);
-
-    bool AddCallerText(WCHAR *setting, WCHAR *value);
-#endif
 
     ULONG RefreshConf();
 
@@ -120,14 +107,7 @@ protected:
     static SbieIniServer* m_instance;
     WCHAR m_username[256];
     WCHAR m_sectionname[128];
-#ifdef NEW_INI_MODE
     class CIniFile* m_pSbieIni;
-#else
-    WCHAR *m_text, *m_text_base;
-    ULONG m_text_max_len;
-    WCHAR m_line[1500];
-    //BOOLEAN m_insertbom;
-#endif
     HANDLE m_hLockFile;
     ULONG m_session_id;
 

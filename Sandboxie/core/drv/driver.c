@@ -847,11 +847,7 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
     ok = FALSE;
-#ifdef USE_PROCESS_MAP
     if (Process_Map.nnodes == 0) {
-#else
-    if (! List_Count(&Process_List)) {
-#endif
         if (Api_Disable())
             ok = TRUE;
     }

@@ -51,10 +51,6 @@
 
 struct _THREAD {
 
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif 
-
     HANDLE tid;
 
     void *token_object;

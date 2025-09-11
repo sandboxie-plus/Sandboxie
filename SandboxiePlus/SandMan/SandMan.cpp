@@ -543,6 +543,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 
 		m_pMenuFile->addSeparator();
 		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Shield9"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
+		m_pRestart->setEnabled(!IsElevated());
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 
@@ -1314,7 +1315,7 @@ void CSandMan::OnRestartAsAdmin()
 	se.cbSize = sizeof(se);
 	se.lpVerb = L"runas";
 	se.lpFile = buf;
-	se.nShow = SW_HIDE;
+	se.nShow = SW_SHOWNORMAL;
 	se.fMask = 0;
 	ShellExecuteExW(&se);
 	m_bExit = true;

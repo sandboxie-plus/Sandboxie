@@ -31,8 +31,6 @@
 #include "common/pool.h"
 #include "msgids.h"
 
-#define USE_PROCESS_MAP
-
 /* Recommended maximum length for any single element in a request packet. */
 
 #define PIPE_MAX_DATA_LEN   0x00FFFFFF
@@ -225,11 +223,7 @@ protected:
     void PortFindClientUnsafe(const CLIENT_ID& ClientId, struct tagCLIENT_PROCESS *&clientProcess, struct tagCLIENT_THREAD *&clientThread);
 
     LIST m_targets;
-#ifdef USE_PROCESS_MAP
     HASH_MAP m_client_map;
-#else
-    LIST m_clients;
-#endif
     CRITICAL_SECTION m_lock;
     POOL *m_pool;
     ULONG m_TlsIndex;

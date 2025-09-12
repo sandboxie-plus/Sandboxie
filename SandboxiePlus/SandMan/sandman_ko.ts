@@ -969,28 +969,28 @@ Error: %1</source>
 <context>
     <name>CCodeEdit</name>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="503"/>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1555"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="507"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1562"/>
         <source>Find</source>
         <translation>찾기</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="508"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="512"/>
         <source>FindNext</source>
         <translation>다음 찾기</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="518"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="522"/>
         <source>GoTo</source>
         <translation>이동</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="921"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="925"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
         <translation>%1을 의미하셨나요? (Ctrl+R 키를 눌러 교체하세요)</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1555"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1562"/>
         <source>F3: Find Next
 + Shift: Backward
 + Ctrl: Case Sensitively
@@ -1005,7 +1005,7 @@ Find String:</source>
 찾을 문자열:</translation>
     </message>
     <message>
-        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1581"/>
+        <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1588"/>
         <source>Go to Line:</source>
         <translation>줄로 가기:</translation>
     </message>

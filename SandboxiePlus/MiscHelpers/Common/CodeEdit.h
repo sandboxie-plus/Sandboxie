@@ -35,6 +35,7 @@ public:
 	void SetCaseCorrectionCallback(std::function<QString(const QString&)> callback);
 	void SetCompletionFilterCallback(std::function<bool(const QString&)> callback);
 	void SetCaseCorrectionFilterCallback(std::function<bool(const QString&)> callback);
+	void SetTooltipCallback(std::function<QString(const QString&)> tooltipCallback);
 
 	// Static autocompletion mode control (similar to tooltip mode)
 	static void SetAutoCompletionMode(int checkState);
@@ -53,6 +54,11 @@ public:
 	static void ClearFuzzyCache();
 
 	void ScheduleWithDelay(int delayMs, std::function<void()> task, const QString& taskName);
+
+	static bool s_popupTooltipsEnabled;
+	static void SetPopupTooltipsEnabled(bool bEnabled);
+	static bool GetPopupTooltipsEnabled();
+	void ShowPopupTooltipForCurrentItem();
 
 signals:
 	void textChanged();
@@ -155,6 +161,8 @@ private:
 	std::function<bool(const QString&)> m_completionFilterCallback;
 	std::function<bool(const QString&)> m_caseCorrectionFilterCallback;
 	bool ShouldHideKeyFromCompletion(const QString& keyName) const;
+
+	std::function<QString(const QString&)> m_tooltipCallback;
 	
 	// Static autocompletion mode (similar to tooltip mode)
 	static AutoCompletionMode s_autoCompletionMode;
@@ -195,4 +203,5 @@ private:
 
 	private slots:
 		void OnCursorPositionChanged();
+		void OnPopupSelectionChanged(const QModelIndex& current, const QModelIndex& previous);
 };

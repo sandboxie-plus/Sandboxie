@@ -13,7 +13,7 @@ class MISCHELPERS_EXPORT CCodeEdit : public QWidget
 public:
 	CCodeEdit(QSyntaxHighlighter* pHighlighter = NULL, QWidget* pParent = NULL);
 
-	static constexpr int AUTO_COMPLETE_MIN_LENGTH = 3;  // Minimum chars to trigger autocompletion
+	static constexpr int AUTO_COMPLETE_MIN_LENGTH = 2;  // Minimum chars to trigger autocompletion
 
 	// Autocompletion mode enumeration
 	enum class AutoCompletionMode {
@@ -53,11 +53,21 @@ public:
 	static int s_minFuzzyPrefixLength;
 	static void ClearFuzzyCache();
 
+	// Fuzzy cache logging control
+	static void SetFuzzyCacheLoggingEnabled(bool bEnabled);
+	static bool GetFuzzyCacheLoggingEnabled();
+	static bool s_fuzzyCacheLoggingEnabled;
+
+	// Token cache logging control
+	static void SetTokenCacheLoggingEnabled(bool bEnabled);
+	static bool GetTokenCacheLoggingEnabled();
+	static bool s_tokenCacheLoggingEnabled;
+
 	void ScheduleWithDelay(int delayMs, std::function<void()> task, const QString& taskName);
 
-	static bool s_popupTooltipsEnabled;
-	static void SetPopupTooltipsEnabled(bool bEnabled);
-	static bool GetPopupTooltipsEnabled();
+	static int s_popupTooltipsMode;
+	static void SetPopupTooltipsEnabled(int checkState);
+	static int GetPopupTooltipsEnabled();
 	void ShowPopupTooltipForCurrentItem();
 
 signals:
@@ -172,7 +182,8 @@ private:
 	static bool s_fuzzyMatchingEnabled;
 	
 	// Helper methods for common operations
-	void ResetFlagAfterDelay(bool& flag, int delayMs = 100);
+	void ResetFlagAfterDelay(bool& flag, int delayMs = 100, const QString& flagName = "unnamed");
+
 	void HidePopupSafely();
 	void ClearCaseCorrectionTracking();
 	void UpdateCaseCorrectionTracking(const QString& wrongWord, const QString& correctWord, int wordStart, int wordEnd);
@@ -183,6 +194,8 @@ private:
 	QStringList ApplyFuzzyModelForPrefix(const QString& prefix);
 	void RestoreBaseCompletionModel();
 	bool IsKeyAvailableConsideringFuzzy(const QString& key, const QString& wordForFuzzy) const;
+	void ResetPopupScrollState();
+	void ShowCompletionPopup(bool resetScroll = true);
 
 	bool IsExistingKeyValueLine(const QString& lineText, int cursorPosition, int& equalsPosition) const;
 	QString GetTextReplacement(const QString& originalWord, const QString& replacement, 

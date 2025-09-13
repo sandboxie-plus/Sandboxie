@@ -1692,6 +1692,7 @@ QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName)
     }
     if (!isValidForTooltip(settingName))
         return QString();
+
     QString cacheKey = settingName % QStringLiteral("_basic");
     return getOrSetTooltipCache(cacheKey, [=]() {
         const TooltipThemeCache& themeCache = getTooltipThemeCache();
@@ -1703,6 +1704,7 @@ QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName)
                 return QString();
             const SettingInfo& info = validSettings[settingName];
             const QString currentLang = getCurrentLanguage();
+
             tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
 			TooltipCellStyles headerStyles = getGenericStyles("Header");
 			QString headerStyleStr = headerStyles.left.toHtmlStyle();
@@ -1748,37 +1750,143 @@ QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName)
 
 QString CIniHighlighter::GetSettingTooltip(const QString& settingName)
 {
-    TooltipMode mode = GetTooltipMode();
-    if (mode == TooltipMode::Disabled) {
-        return QString();
-    }
-    if (mode == TooltipMode::BasicInfo) {
-        return GetBasicSettingTooltip(settingName);
-    }
+	TooltipMode mode = GetTooltipMode();
+
+	// When hover tooltips are disabled we still want the completion popup
+	// to be able to show helpful content. Use the popup-specific generator
+	// as a fallback in that case.
+	if (mode == TooltipMode::Disabled) {
+		return GetSettingTooltipForPopup(settingName);
+	}
+
+	if (mode == TooltipMode::BasicInfo) {
+		return GetBasicSettingTooltip(settingName);
+	}
+
 	if (!isValidForTooltip(settingName))
 		return QString();
-    return getOrSetTooltipCache(settingName, [=]() {
-        const TooltipThemeCache& themeCache = getTooltipThemeCache();
-        QString tooltip;
-        tooltip.reserve(2048);
-        {
-            QMutexLocker locker(&settingsMutex);
+
+	return getOrSetTooltipCache(settingName, [=]() {
+		const TooltipThemeCache& themeCache = getTooltipThemeCache();
+		QString tooltip;
+		tooltip.reserve(2048);
+		{
+			QMutexLocker locker(&settingsMutex);
 			if (!isValidForTooltip(settingName))
 				return QString();
-            const SettingInfo& info = validSettings[settingName];
-            const QString currentLang = getCurrentLanguage();
-            tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
+
+			const SettingInfo& info = validSettings[settingName];
+			const QString currentLang = getCurrentLanguage();
+
+			tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
 			TooltipCellStyles headerStyles = getGenericStyles("Header");
 			QString headerStyleStr = headerStyles.left.toHtmlStyle();
 			tooltip += HtmlTags::TABLE_HEADER_START % headerStyleStr % HtmlTags::TAG_CLOSE
 				% settingName % HtmlTags::TD_END % HtmlTags::TR_END;
-            addVersionRows(tooltip, info, themeCache.labelStyle);
-            processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
-            processContentOptimized(tooltip, info, currentLang, settingName, themeCache.labelStyle);
-            tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
-        }
+
+			addVersionRows(tooltip, info, themeCache.labelStyle);
+			processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
+			processContentOptimized(tooltip, info, currentLang, settingName, themeCache.labelStyle);
+
+			tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
+		}
 		return tooltip;
-    });
+		});
+}
+
+// Helper to build popup tooltip content for Basic or Full popup modes.
+QString CIniHighlighter::BuildPopupTooltip(const QString& settingName, bool basic)
+{
+	// Guard: invalid key or not loaded
+	if (!isValidForTooltip(settingName))
+		return QString();
+
+	const TooltipThemeCache& themeCache = getTooltipThemeCache();
+	QString tooltip;
+	tooltip.reserve(basic ? 1024 : 2048);
+
+	{
+		// Use settingsMutex while reading validSettings to avoid races with reload
+		QMutexLocker locker(&settingsMutex);
+		if (!isValidForTooltip(settingName))
+			return QString();
+
+		const SettingInfo& info = validSettings[settingName];
+		const QString currentLang = getCurrentLanguage();
+
+		tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
+		TooltipCellStyles headerStyles = getGenericStyles("Header");
+		QString headerStyleStr = headerStyles.left.toHtmlStyle();
+		tooltip += HtmlTags::TABLE_HEADER_START % headerStyleStr % HtmlTags::TAG_CLOSE
+			% settingName % HtmlTags::TD_END % HtmlTags::TR_END;
+
+		// Version rows (same for basic & full)
+		addVersionRows(tooltip, info, themeCache.labelStyle);
+
+		if (basic) {
+			// Basic: prefer Description, otherwise Syntax (same logic as original)
+			QString description = selectLocalizedContentOptimized(info.description, info.localizedDescriptions, currentLang);
+			if (!description.isEmpty()) {
+				appendTableRowForContent(tooltip, tr("Description"), description, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, settingName, false);
+			}
+			else {
+				QString syntax = selectLocalizedContentOptimized(info.syntax, info.localizedSyntax, currentLang);
+				if (!syntax.isEmpty()) {
+					appendTableRowForContent(tooltip, tr("Syntax"), syntax, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, settingName, true);
+				}
+			}
+		}
+		else {
+			// Full: include mappings and full content
+			processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
+			processContentOptimized(tooltip, info, currentLang, settingName, themeCache.labelStyle);
+		}
+
+		tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
+	}
+
+	return tooltip;
+}
+
+QString CIniHighlighter::GetSettingTooltipForPopup(const QString& settingName)
+{
+	// Determine configured modes
+	int iniMode = theConf->GetInt("Options/EnableIniTooltips", static_cast<int>(GetTooltipMode()));
+	int popupMode = theConf->GetInt("Options/EnablePopupTooltips", static_cast<int>(GetTooltipMode()));
+
+	// Apply user rule:
+	// - If EnableIniTooltips == 0 -> use EnablePopupTooltips (0/1/2) as the effective popup mode.
+	// - If EnableIniTooltips != 0 -> popup is disabled only when EnablePopupTooltips == 0;
+	//   otherwise popup follows the iniMode (basic/full).
+	int effectiveMode;
+	if (iniMode == Qt::Unchecked) {
+		effectiveMode = popupMode;
+	}
+	else {
+		effectiveMode = (popupMode == Qt::Unchecked) ? Qt::Unchecked : iniMode;
+	}
+
+	// Disabled
+	if (effectiveMode == Qt::Unchecked)
+		return QString();
+
+	// Always return nothing for invalid/unknown keys or when settings not loaded.
+	if (!isValidForTooltip(settingName))
+		return QString();
+
+	// Basic popup tooltip
+	if (effectiveMode == Qt::PartiallyChecked) {
+		QString cacheKey = QStringLiteral("popup_basic_") + settingName;
+		return getOrSetTooltipCache(cacheKey, [=]() {
+			return BuildPopupTooltip(settingName, /*basic=*/true);
+			});
+	}
+
+	// Full popup tooltip
+	QString cacheKey = QStringLiteral("popup_") + settingName;
+	return getOrSetTooltipCache(cacheKey, [=]() {
+		return BuildPopupTooltip(settingName, /*basic=*/false);
+		});
 }
 
 // Helper for tooltip cache get-or-set pattern

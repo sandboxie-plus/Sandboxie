@@ -5,6 +5,18 @@
 
 #define TAB_SPACES "   "
 
+CCodeEdit::AutoCompletionMode CCodeEdit::s_autoCompletionMode = AutoCompletionMode::FullAuto;
+QMutex CCodeEdit::s_autoCompletionModeMutex;
+
+bool CCodeEdit::s_fuzzyCacheLoggingEnabled = false;
+bool CCodeEdit::s_tokenCacheLoggingEnabled = false;
+
+int CCodeEdit::s_popupTooltipsMode = Qt::Checked;
+bool CCodeEdit::s_fuzzyMatchingEnabled = true;
+
+int CCodeEdit::s_minFuzzyPrefixLength = 2;
+int CCodeEdit::s_maxFuzzyPrefixLength = 32;
+
 class CompletionItemDelegate : public QStyledItemDelegate {
 public:
 	CompletionItemDelegate(const std::function<QString(const QString&)>& tooltipCallback, QObject* parent = nullptr)
@@ -14,8 +26,8 @@ public:
 	bool helpEvent(QHelpEvent* event, QAbstractItemView* view,
 		const QStyleOptionViewItem& option, const QModelIndex& index) override {
 		if (event->type() == QEvent::ToolTip) {
-			// Check if popup tooltips are enabled globally
-			if (!CCodeEdit::GetPopupTooltipsEnabled())
+			// Check if popup tooltips are disabled (Qt::Unchecked)
+			if (CCodeEdit::GetPopupTooltipsEnabled() == Qt::Unchecked)
 				return false; // Skip tooltips if disabled globally
 
 			if (index.isValid() && m_tooltipCallback) {
@@ -160,66 +172,313 @@ namespace {
 		return -1;
 	}
 
-	// Small thread-safe cache used by BuildFuzzyMatches (LRU by simple list)
-	static const int FUZZY_CACHE_MAX_ENTRIES = 64;
-	static QHash<QString, QStringList> s_fuzzyCache;
-	static QList<QString> s_cacheOrder;
-	static QMutex s_fuzzyCacheMutex;
-
-	// Try to get value and move entry to MRU; returns true on hit and fills out.
-	static bool FuzzyCacheGet(const QString& key, QStringList& out)
-	{
-		QMutexLocker lk(&s_fuzzyCacheMutex);
-		auto it = s_fuzzyCache.find(key);
-		if (it == s_fuzzyCache.end())
-			return false;
-
-		// Move key to MRU (optimized: we know key exists from the hash)
-		int idx = s_cacheOrder.indexOf(key);
-		if (idx >= 0) {
-			s_cacheOrder.removeAt(idx);
-			s_cacheOrder.append(key);
+	// Small thread-safe LRU cache helper used by fuzzy/token caches.
+	// Encapsulates QHash<QString,QStringList>, MRU order list and a mutex.
+	class LRUCache {
+	public:
+		LRUCache(int maxEntries = 64, int logSample = 8, const QString& label = QString())
+			: m_maxEntries(maxEntries), m_logSample(logSample), m_label(label) {
 		}
 
-		out = it.value();
+		// Try to get value and move entry to MRU; returns true on hit and fills out.
+		bool get(const QString& key, QStringList& out) {
+			QMutexLocker lk(&m_mutex);
+			auto it = m_map.find(key);
+			if (it == m_map.end())
+				return false;
+			int idx = m_order.indexOf(key);
+			if (idx >= 0) {
+				m_order.removeAt(idx);
+				m_order.append(key);
+			}
+			out = it.value();
+			return true;
+		}
+
+		// Insert or update value; returns optional evicted pair if eviction occurred.
+		std::optional<std::pair<QString, QStringList>> insert(const QString& key, const QStringList& value) {
+			QMutexLocker lk(&m_mutex);
+			bool existed = m_map.contains(key);
+			if (existed) {
+				m_map[key] = value;
+				int idx = m_order.indexOf(key);
+				if (idx >= 0) {
+					m_order.removeAt(idx);
+					m_order.append(key);
+				}
+				return std::nullopt;
+			}
+			else {
+				m_map.insert(key, value);
+				m_order.append(key);
+				if (m_order.size() > m_maxEntries) {
+					QString old = m_order.takeFirst();
+					QStringList evicted = m_map.value(old);
+					m_map.remove(old);
+					return std::make_optional(std::make_pair(old, evicted));
+				}
+				return std::nullopt;
+			}
+		}
+
+		void clear() {
+			QMutexLocker lk(&m_mutex);
+			m_map.clear();
+			m_order.clear();
+		}
+
+		int size() const {
+			QMutexLocker lk(&m_mutex);
+			return static_cast<int>(m_map.size());
+		}
+
+		int orderSize() const {
+			QMutexLocker lk(&m_mutex);
+			return m_order.size();
+		}
+
+		QString summarizeOrder(int maxKeys = 8) const {
+			QMutexLocker lk(&m_mutex);
+			QStringList sample;
+			int n = m_order.size();
+			for (int i = 0; i < std::min(n, maxKeys); ++i)
+				sample.append(m_order[i]);
+			QString res = sample.join(", ");
+			if (n > maxKeys)
+				res += QString(" ...(%1 more)").arg(n - maxKeys);
+			return res;
+		}
+
+		QStringList sampleValues(const QString& key, int limit) const {
+			QMutexLocker lk(&m_mutex);
+			auto it = m_map.find(key);
+			if (it == m_map.end()) return QStringList();
+			if (it->size() > limit) return it->mid(0, limit);
+			return it.value();
+		}
+
+		QString firstKey() const {
+			QMutexLocker lk(&m_mutex);
+			return m_order.isEmpty() ? QString() : m_order.first();
+		}
+
+		int logSample() const { return m_logSample; }
+		QString label() const { return m_label; }
+
+	private:
+		mutable QMutex m_mutex;
+		QHash<QString, QStringList> m_map;
+		QList<QString> m_order;
+		int m_maxEntries;
+		int m_logSample;
+		QString m_label;
+	};
+
+	// Instantiate caches
+	static const int FUZZY_CACHE_MAX_ENTRIES = 64;
+	static const int FUZZY_CACHE_LOG_SAMPLE = 12;
+	static LRUCache s_fuzzyCache(FUZZY_CACHE_MAX_ENTRIES, FUZZY_CACHE_LOG_SAMPLE, QStringLiteral("FuzzyCache"));
+
+	static const int TOKEN_CACHE_MAX_ENTRIES = 1024;
+	static const int TOKEN_CACHE_LOG_SAMPLE = 8;
+	static LRUCache s_tokenCache(TOKEN_CACHE_MAX_ENTRIES, TOKEN_CACHE_LOG_SAMPLE, QStringLiteral("TokenCache"));
+
+	// Unified cache logger used by both fuzzy and token caches.
+	static void LogCacheLocked(const LRUCache& cache, const QString& action, const QString& key, const QStringList* valueSample = nullptr, int storedEntries = -1) {
+		// Respect per-cache logging switches
+		if (cache.label() == QStringLiteral("FuzzyCache") && !CCodeEdit::GetFuzzyCacheLoggingEnabled())
+			return;
+		if (cache.label() == QStringLiteral("TokenCache") && !CCodeEdit::GetTokenCacheLoggingEnabled())
+			return;
+
+		QString orderSummary = cache.summarizeOrder(8);
+		QString sampleStr;
+		if (valueSample) {
+			int limit = cache.logSample();
+			if (valueSample->size() > limit)
+				sampleStr = valueSample->mid(0, limit).join(", ") + "...";
+			else
+				sampleStr = valueSample->join(", ");
+		}
+
+		int effectiveStored = storedEntries;
+		if (effectiveStored < 0) {
+			if (valueSample)
+				effectiveStored = valueSample->size();
+			else
+				effectiveStored = cache.size();
+		}
+
+		qDebug() << "[" << cache.label() << "]" << action
+			<< "key=" << key
+			<< "cacheSize=" << cache.size()
+			<< "orderSize=" << cache.orderSize()
+			<< "orderSample=" << orderSummary
+			<< "storedEntries=" << QString::number(effectiveStored)
+			<< "valueSample=" << sampleStr;
+	}
+
+	// Backwards-compatible wrappers that mirror original API but delegate to LRUCache.
+	static bool TokenCacheGet(const QString& key, QStringList& out)
+	{
+		QStringList tmp;
+		if (!s_tokenCache.get(key, tmp)) {
+			// Miss — log concise info
+			LogCacheLocked(s_tokenCache, QStringLiteral("MISS"), key, nullptr, -1);
+			return false;
+		}
+		out = tmp;
+		LogCacheLocked(s_tokenCache, QStringLiteral("HIT"), key, &out, out.size());
 		return true;
 	}
 
-	// Insert or update value and evict LRU if over capacity
-	static void FuzzyCacheInsert(const QString& key, const QStringList& value)
+	static void TokenCacheInsert(const QString& key, const QStringList& value)
 	{
-		QMutexLocker lk(&s_fuzzyCacheMutex);
+		// Determine whether this is an update or insert; LRUCache::insert returns evicted pair if any.
+		bool existed = false;
+		{
+			// quick check
+			QStringList tmp;
+			if (s_tokenCache.get(key, tmp)) existed = true;
+		}
 
-		auto it = s_fuzzyCache.find(key);
-		if (it != s_fuzzyCache.end()) {
-			// Update existing in-place and move to MRU
-			it.value() = value;
-			int idx = s_cacheOrder.indexOf(key);
-			if (idx >= 0) {
-				s_cacheOrder.removeAt(idx);
-				s_cacheOrder.append(key);
-			}
-			//qDebug() << "[FuzzyCache] UPDATE key=" << key << "cacheSize=" << s_fuzzyCache.size();
+		auto evictedOpt = s_tokenCache.insert(key, value);
+		if (existed) {
+			LogCacheLocked(s_tokenCache, QStringLiteral("UPDATE"), key, &value, value.size());
 		}
 		else {
-			// Insert new entry
-			s_fuzzyCache.insert(key, value);
-			s_cacheOrder.append(key);
-
-			// Evict if needed
-			if (s_cacheOrder.size() > FUZZY_CACHE_MAX_ENTRIES) {
-				QString old = s_cacheOrder.takeFirst();
-				s_fuzzyCache.remove(old);
-				//qDebug() << "[FuzzyCache] EVICT key=" << old << "newCacheSize=" << s_fuzzyCache.size();
-			}
-			//qDebug() << "[FuzzyCache] INSERT key=" << key << "cacheSize=" << s_fuzzyCache.size() << "storedEntries=" << value.size();
+			LogCacheLocked(s_tokenCache, QStringLiteral("INSERT"), key, &value, value.size());
+		}
+		if (evictedOpt) {
+			const auto& p = *evictedOpt;
+			LogCacheLocked(s_tokenCache, QStringLiteral("EVICT"), p.first, &p.second, p.second.size());
 		}
 	}
 
-	// Build a fuzzy-sorted candidate list from supplied candidates given prefix
+	static void ClearTokenCache()
+	{
+		s_tokenCache.clear();
+		// Token cache logging intentionally quiet in original; keep minimal debug output if needed:
+		//LogCacheLocked(s_tokenCache, QStringLiteral("CLEARED"), QString(), nullptr, 0);
+	}
+
+	// Split into tokens (uppercase transitions, '_' and '.') with token-cache
+	static QStringList SplitIntoTokensCached(const QString& cand)
+	{
+		// Try token cache first
+		QStringList cached;
+		if (TokenCacheGet(cand, cached)) {
+			return cached;
+		}
+
+		QStringList tokens;
+		int n = cand.length();
+		int start = 0;
+		for (int i = 0; i < n; ++i) {
+			QChar c = cand[i];
+			bool boundary = false;
+
+			// explicit separators
+			if (c == '_' || c == '.') {
+				boundary = true;
+			}
+			else if (i > 0) {
+				QChar prev = cand[i - 1];
+				QChar next = (i + 1 < n) ? cand[i + 1] : QChar();
+
+				// Standard camel-case boundary: Upper after lower (e.g. "myVar" -> "my","Var")
+				if (c.isUpper() && prev.isLower())
+					boundary = true;
+
+				// Acronym handling: split before the last upper in a run when it's followed by a lower.
+				// Example: "IEEmbedding" -> boundary at the 'E' that precedes 'm' so we get "IE","Embedding".
+				else if (c.isUpper() && prev.isUpper() && next.isLower())
+					boundary = true;
+			}
+
+			if (boundary) {
+				if (i - start > 0)
+					tokens.push_back(cand.mid(start, i - start));
+				start = i;
+			}
+		}
+		if (start < n) tokens.push_back(cand.mid(start));
+
+		// Insert into token cache
+		TokenCacheInsert(cand, tokens);
+		return tokens;
+	}
+
+	// Fuzzy cache wrappers
+	static bool FuzzyCacheGet(const QString& key, QStringList& out)
+	{
+		QStringList tmp;
+		if (!s_fuzzyCache.get(key, tmp)) {
+			// Miss — log concise info
+			LogCacheLocked(s_fuzzyCache, QStringLiteral("MISS"), key, nullptr, -1);
+			return false;
+		}
+		out = tmp;
+		LogCacheLocked(s_fuzzyCache, QStringLiteral("HIT"), key, &out, out.size());
+		return true;
+	}
+
+	static void FuzzyCacheInsert(const QString& key, const QStringList& value)
+	{
+		bool existed = false;
+		{
+			QStringList tmp;
+			if (s_fuzzyCache.get(key, tmp)) existed = true;
+		}
+
+		auto evictedOpt = s_fuzzyCache.insert(key, value);
+		if (existed) {
+			LogCacheLocked(s_fuzzyCache, QStringLiteral("UPDATE"), key, &value, value.size());
+		}
+		else {
+			LogCacheLocked(s_fuzzyCache, QStringLiteral("INSERT"), key, &value, value.size());
+		}
+		if (evictedOpt) {
+			const auto& p = *evictedOpt;
+			LogCacheLocked(s_fuzzyCache, QStringLiteral("EVICT"), p.first, &p.second, p.second.size());
+		}
+	}
+
+	static QString NormalizePrefixForFuzzy(const QString& raw)
+	{
+		QString p = raw.trimmed();
+		// drop leading non-word characters (keep letters, digits, '_' and '.')
+		int i = 0;
+		while (i < p.length()) {
+			QChar c = p[i];
+			if (c.isLetterOrNumber() || c == '_' || c == '.')
+				break;
+			++i;
+		}
+		if (i > 0)
+			p = p.mid(i);
+		// return lowercase to be consistent with BuildFuzzyMatches' internal handling
+		return p.toLower();
+	}
+
 	static QStringList BuildFuzzyMatches(const QStringList& candidates, const QString& prefix)
 	{
 		QString pref = prefix.toLower();
+
+		// Tunable parameters (centralized, easy to adjust)
+		static constexpr double kNonExactMinCoverage = 0.20;    // coverage ratio required to consider non-exact token heuristics
+		static constexpr int    kTokenFuzzyMaxDist = 1;     // token-level edit-distance allowed for fuzzy-token match
+		static constexpr int    kSingleTokenFuzzyBoost = 60;    // boost for single-token fuzzy matches (e.g. "trce" -> "trace")
+		static constexpr int    kTotalExactBoost = 100;   // total distributed boost for exact-token matches
+		static constexpr int    kTotalAcronymBoost = 30;    // total boost budget for initials/acronym matches
+		static constexpr int    kInitialsExactBoost = 150;   // extra boost when prefix exactly equals initials
+		static constexpr int    kLowCoveragePercent = 25;    // coverage <= this (%) considered "low"
+		static constexpr int    kStrongTokenThreshold = 50;    // tokenScore >= this is considered "strong"
+		static constexpr int    kCoverageScale = 1000;  // integer scale for coverage computations
+		static constexpr int    kCoverageThreshold = (kCoverageScale * 2) / 3; // coverage threshold (2/3)
+		static constexpr int    kSubseqBoostPos1 = 80;    // subseq boost when match starts at pos <= 1
+		static constexpr int    kSubseqBoostPos3 = 50;    // subseq boost when match starts at pos <= 3
+		static constexpr int    kSubseqBoostPos6 = 30;    // subseq boost when match starts at pos <= 6
 
 		// Compute a cheap fingerprint for the candidates set (order-sensitive).
 		auto CandidatesFingerprint = [](const QStringList& list) -> quint64 {
@@ -244,34 +503,41 @@ namespace {
 		const QString cacheKey = QString::number(fingerprint) + QLatin1Char('|') + pref;
 		QStringList cached;
 		if (FuzzyCacheGet(cacheKey, cached)) {
-		//	// Debug: show cache hit and small sample of cached value
-		//	const int sampleLimit = 20;
-		//	QString sample = cached.size() > sampleLimit ? (cached.mid(0, sampleLimit).join(", ") + "...") : cached.join(", ");
-		//	{
-		//		QMutexLocker lk(&s_fuzzyCacheMutex); // protect order read for consistent output
-		//		qDebug() << "[FuzzyCache] HIT key=" << cacheKey << "cacheSize=" << s_fuzzyCache.size() << "orderSize=" << s_cacheOrder.size();
-		//		qDebug() << "[FuzzyCache] keys(order) =" << s_cacheOrder;
-		//	}
-		//	qDebug() << "[FuzzyCache] valueSample =" << sample;
-		return cached;
+			// FuzzyCacheGet already logs a concise HIT and a sample; return cached result.
+			return cached;
 		}
 
-		// Added hasSubstr flag so exact substring matches can be boosted
-		// matchedLen is added to prefer candidates that match a larger portion of the prefix
-		// tokenScore boosts token-boundary / token-equality matches (helps prefer 'Enabled' over 'NormalFilePathDisabled')
-		// coverage prefers compact matches where matchedLen covers a larger fraction of the candidate.
+		// Entry: descriptor used by BuildFuzzyMatches to score and sort candidate strings.
+		// Fields:
+		//   text       - the original candidate string.
+		//   dist       - pseudo-distance (0 = exact startsWith or substring, >0 = edit/subsequence distance).
+		//                Lower is better; used as the primary sort key in the default branch.
+		//   pos        - earliest match start index inside the candidate (smaller = earlier = better).
+		//   len        - length of the candidate string (used to prefer shorter candidates).
+		//   hasSubstr  - true when the prefix is an exact substring of the candidate (preferred).
+		//   matchedLen - how many characters of the prefix are effectively matched (used to compute coverage).
+		//   tokenScore - heuristic boost for token/initial/acronym matches (higher = stronger token match).
+		//   coverage   - matchedLen scaled against cand length (higher = more compact match).
+		//
+		// Sorting note (canonical, lexicographic): The code builds a canonical sort-key (tuple) in MakeSortKey
+		// and sorts entries by that tuple. There are multiple branches in MakeSortKey:
+		//  - shortPrefix branch (when pLen <= minPrefix): prioritize tokenScore first for very short user input.
+		//  - strongToken branch: if a candidate already has tokenScore >= kStrongTokenThreshold, tokenScore is primary.
+		//  - lowCoverageToken branch: when coverage is low and tokenScore > 0, promote tokenScore first.
+		//  - distanceFirst (default): order by dist, hasSubstr, tokenScore, coverage, matchedLen, pos, len, text.
+		//
+		// The GetSortKeyDescription debug helper prints which branch was used and the numeric tuple.
 		struct Entry { QString text; int dist; int pos; int len; bool hasSubstr; int matchedLen; int tokenScore; int coverage; };
 		std::vector<Entry> matches;
 		matches.reserve(candidates.size());
 
 		// adaptive threshold: allow more errors for longer inputs.
-		// Map prefix length minPrefix..maxPrefix -> maxDist 1..maxCap (linear).
 		int pLen = pref.length();
 		const int minPrefix = CCodeEdit::AUTO_COMPLETE_MIN_LENGTH;
 		const int maxPrefix = CCodeEdit::GetMaxFuzzyPrefixLength();
 		const int maxCap = 3; // maximum allowed distance for longest prefixes
 
-		// helper: longest common substring length (O(m*n) DP but small inputs)
+		// helper: longest common substring length
 		auto LongestCommonSubstring = [](const QString& a, const QString& b) -> int {
 			int m = a.length();
 			int n = b.length();
@@ -294,109 +560,196 @@ namespace {
 			return best;
 			};
 
-		// helper: token match score (tokens by upper-case transitions, '_' and '.')
-		auto TokenMatchScore = [](const QString& cand, const QString& prefLower) -> int {
-			// split into tokens
-			std::vector<QString> tokens;
-			int n = cand.length();
-			int start = 0;
-			for (int i = 0; i < n; ++i) {
-				QChar c = cand[i];
-				bool boundary = false;
-				if (c == '_' || c == '.') boundary = true;
-				else if (i > 0 && cand[i].isUpper() && cand[i - 1].isLower()) boundary = true;
-				if (boundary) {
-					if (i - start > 0) tokens.push_back(cand.mid(start, i - start));
-					start = i;
+		// helper: token match score (uses centralized tunables)
+		// Notes:
+		//  - This produces an integer tokenScore that captures:
+		//     * exact-token distributed boosts (for multi-token candidates),
+		//     * non-exact token heuristics (startsWith/endsWith/contains when coverage adequate),
+		//     * fuzzy-token detection (token within small edit distance),
+		//     * initials/acronym matching.
+		//  - tokenScore is deliberately kept orthogonal to 'dist' so the canonical sort key can decide
+		//    when token evidence should outrank raw edit-distance/substr matches.
+		auto TokenMatchScore = [&](const QString& cand, const QString& prefLower) -> int {
+			QStringList tokens = SplitIntoTokensCached(cand);
+
+			int prefLen = prefLower.length();
+			int candLenTotal = cand.length();
+			double coverageRatio = 0.0;
+			if (candLenTotal > 0 && prefLen > 0) {
+				int matchedLenProxy = std::min(prefLen, candLenTotal); // conservative proxy
+				coverageRatio = double(matchedLenProxy) / double(candLenTotal);
+			}
+
+			int nonExactBest = 0;
+			if (coverageRatio >= kNonExactMinCoverage) {
+				for (const QString& t : tokens) {
+					QString tl = t.toLower();
+					if (tl.startsWith(prefLower)) nonExactBest = std::max(nonExactBest, 60);
+					if (tl.endsWith(prefLower)) nonExactBest = std::max(nonExactBest, 50);
+					if (tl.contains(prefLower)) nonExactBest = std::max(nonExactBest, 40);
+				}
+
+				// fuzzy token match using centralized threshold
+				if (nonExactBest == 0) {
+					for (const QString& t : tokens) {
+						QString tl = t.toLower();
+						int d = MinDistanceToCandidateSubstrings(prefLower, tl, 1);
+						if (d <= kTokenFuzzyMaxDist) {
+							nonExactBest = std::max(nonExactBest, 60);
+							break;
+						}
+					}
 				}
 			}
-			if (start < n) tokens.push_back(cand.mid(start));
 
-			int best = 0;
-			for (const QString& t : tokens) {
-				QString tl = t.toLower();
-				if (tl == prefLower) return 100;            // exact token match -> big boost
-				if (tl.startsWith(prefLower)) best = std::max(best, 60); // token starts with prefix
-				if (tl.endsWith(prefLower)) best = std::max(best, 50); // token ends with suffix
-				if (tl.contains(prefLower)) best = std::max(best, 40);   // token contains prefix
+			// single-token fuzzy boost
+			int tokenCount = static_cast<int>(tokens.size());
+			if (tokenCount == 1 && prefLen >= 2) {
+				QString single = tokens[0].toLower();
+				int d = MinDistanceToCandidateSubstrings(prefLower, single, 1);
+				if (d <= kTokenFuzzyMaxDist) {
+					return std::max(nonExactBest, kSingleTokenFuzzyBoost);
+				}
 			}
 
-			// acronym match: take initials (e.g. NormalFilePathDisabled -> NFPD) and compare prefix
+			// exact-token distributed boost
+			int exactScore = 0;
+			if (tokenCount >= 2) {
+				int per = std::max(1, kTotalExactBoost / tokenCount);
+				for (const QString& t : tokens) {
+					QString tl = t.toLower();
+					int tokenLen = tl.length();
+					if (tl == prefLower) {
+						exactScore += per;
+						continue;
+					}
+					if (prefLen > 0 && prefLen >= tokenLen && prefLower.startsWith(tl)) {
+						int scaled = (per * tokenLen) / std::max(1, prefLen);
+						if (scaled < 1) scaled = 1;
+						exactScore += scaled;
+						continue;
+					}
+				}
+				if (exactScore > kTotalExactBoost) exactScore = kTotalExactBoost;
+			}
+
+			// acronym/initials scoring
+			int acronymScore = 0;
 			QString initials;
-			for (const QString& t : tokens) {
-				if (!t.isEmpty())
-					initials.append(t[0].toUpper());
-			}
-			if (!initials.isEmpty()) {
-				if (initials.toLower().startsWith(prefLower)) best = std::max(best, 30);
-				if (initials.toLower().endsWith(prefLower)) best = std::max(best, 20);
-				if (initials.toLower().contains(prefLower)) best = std::max(best, 10);
+			for (const QString& t : tokens) if (!t.isEmpty()) initials.append(t[0].toUpper());
+			int initialsLen = initials.length();
+
+			if (tokenCount >= 2 && initialsLen >= 2 && prefLen >= 2) {
+				QString initialsLower = initials.toLower();
+				int common = std::min(prefLen, initialsLen);
+				auto scaledBoost = [&](int numeratorDivisor) -> int {
+					int numer = std::max(1, common);
+					int denom = std::max(1, initialsLen * numeratorDivisor);
+					int v = (kTotalAcronymBoost * numer) / denom;
+					return std::max(1, v);
+					};
+
+				// Allow exact-initial matches regardless of coverage
+				if (prefLen == initialsLen && initialsLower == prefLower) {
+					acronymScore = kTotalAcronymBoost + kInitialsExactBoost;
+				}
+				else {
+					// Allow prefix-match of initials even when coverageRatio is low (users commonly type initial prefixes)
+					if (initialsLower.startsWith(prefLower)) {
+						acronymScore = scaledBoost(1);
+					}
+					else if (coverageRatio >= kNonExactMinCoverage) {
+						// Otherwise require coverage guard for less-direct initials matches
+						if (initialsLower.endsWith(prefLower)) acronymScore = scaledBoost(2);
+						else if (initialsLower.contains(prefLower)) acronymScore = scaledBoost(3);
+					}
+				}
+
+				const int acronymMaxClamp = kTotalAcronymBoost + 150;
+				if (acronymScore > acronymMaxClamp) acronymScore = acronymMaxClamp;
 			}
 
+			int best = std::max({ exactScore, nonExactBest, acronymScore });
 			return best;
 			};
 
+		// coverage helper (uses centralized kCoverageScale / kCoverageThreshold)
 		auto computeCoverage = [](int matchedLen, int candLen) -> int {
 			if (candLen <= 0) return 0;
-			// scale by 1000 to keep integer precision
-			return (matchedLen * 1000) / candLen;
+			int base = (matchedLen * kCoverageScale) / candLen;
+			if (base <= kCoverageThreshold) return base;
+			const int maxBonus = kCoverageScale / 3;
+			int surplus = base - kCoverageThreshold;
+			int range = kCoverageScale - kCoverageThreshold;
+			int bonus = (range > 0) ? (surplus * maxBonus) / range : 0;
+			if (bonus > maxBonus) bonus = maxBonus;
+			return base + bonus;
 			};
 
-		// sort comparator
-		// 1) distance (all 0 here),
-		// 2) prefer hasSubstr (true),
-		// 3) prefer tokenScore,
-		// 4) prefer coverage (compactness of match),
-		// 5) prefer larger matchedLen,
-		// 6) earliest position,
-		// 7) shorter candidate,
-		// 8) alphabetical
-		auto EntryComparator = [](const Entry& a, const Entry& b) -> bool {
-			if (a.dist != b.dist) return a.dist < b.dist;
-			if (a.hasSubstr != b.hasSubstr) return a.hasSubstr > b.hasSubstr;
-			if (a.tokenScore != b.tokenScore) return a.tokenScore > b.tokenScore;
-			if (a.coverage != b.coverage) return a.coverage > b.coverage;
-			if (a.matchedLen != b.matchedLen) return a.matchedLen > b.matchedLen;
-			if (a.pos != b.pos) return a.pos < b.pos;
-			if (a.len != b.len) return a.len < b.len;
-			return a.text.toLower() < b.text.toLower();
-			};
-
-		// If prefix is non-empty but shorter than configured (minPrefix), do NOT run fuzzy
-		// distance matching — only accept strict contains matches. This avoids
-		// single-char noise (e.g. "=") producing many fuzzy matches.
-		if (!pref.isEmpty() && pLen < minPrefix) {
-			for (const QString& cand : candidates) {
-				// Use contains to match non-fuzzy behavior used elsewhere (Ctrl+Space, short prefixes)
-				if (cand.toLower().contains(pref)) {
-					int candLen = cand.length();
-					int matchedLen = pLen;
-					int tokenScore = TokenMatchScore(cand, pref);
-					int coverage = computeCoverage(matchedLen, candLen);
-					matches.push_back(Entry{ cand, 0, 0, candLen, true, matchedLen, tokenScore, coverage });
-				}
+		// Centralized sort key builder (lexicographic ordering).
+		// IMPORTANT: MakeSortKey implements the canonical ordering logic used by std::sort.
+		// The returned tuple values are compared lexicographically; smaller tuples come first.
+		// Branches:
+		//  - "shortPrefix": when the user typed very little, prioritize tokenScore (user intent).
+		//  - "strongToken": when candidate already has a strong tokenScore, promote it.
+		//  - "lowCoverageToken": when coverage is low but a tokenScore exists, promote tokenScore.
+		//  - "distanceFirst": default: prefer lower dist (better textual match/substr).
+		auto MakeSortKey = [pLen, minPrefix](const Entry& e) {
+			int hasSubstrKey = e.hasSubstr ? 0 : 1;
+			int lowCoverageThreshold = (kCoverageScale * kLowCoveragePercent) / 100;
+			if (pLen <= minPrefix) {
+				return std::make_tuple(
+					-e.tokenScore,
+					e.dist,
+					hasSubstrKey,
+					-e.coverage,
+					-e.matchedLen,
+					e.pos,
+					e.len,
+					e.text.toLower()
+				);
 			}
+			if (e.tokenScore >= kStrongTokenThreshold) {
+				return std::make_tuple(
+					-e.tokenScore,
+					e.dist,
+					hasSubstrKey,
+					-e.coverage,
+					-e.matchedLen,
+					e.pos,
+					e.len,
+					e.text.toLower()
+				);
+			}
+			if (e.coverage <= lowCoverageThreshold && e.tokenScore > 0) {
+				return std::make_tuple(
+					-e.tokenScore,
+					e.dist,
+					hasSubstrKey,
+					-e.coverage,
+					-e.matchedLen,
+					e.pos,
+					e.len,
+					e.text.toLower()
+				);
+			}
+			return std::make_tuple(
+				e.dist,
+				hasSubstrKey,
+				-e.tokenScore,
+				-e.coverage,
+				-e.matchedLen,
+				e.pos,
+				e.len,
+				e.text.toLower()
+			);
+			};
 
-			// sort & return (use shared comparator)
-			std::sort(matches.begin(), matches.end(), EntryComparator);
-			QStringList out;
-			out.reserve(matches.size());
-			for (const auto& e : matches) out.append(e.text);
-
-			// store in cache and return via helper
-			FuzzyCacheInsert(cacheKey, out);
-			return out;
-		}
-
+		// compute maxDist (unchanged)
 		int maxDist;
-		if (pLen <= minPrefix) {
-			maxDist = 1;
-		}
-		else if (pLen >= maxPrefix) {
-			maxDist = maxCap;
-		}
+		if (pLen <= minPrefix) maxDist = 1;
+		else if (pLen >= maxPrefix) maxDist = maxCap;
 		else {
-			// Linear interpolation between 1 and maxCap
 			int span = std::max(1, maxPrefix - minPrefix);
 			double scale = double(pLen - minPrefix) / double(span); // 0..1
 			maxDist = 1 + int(std::round(scale * (maxCap - 1)));
@@ -415,54 +768,74 @@ namespace {
 				continue;
 			}
 
-			// Exact substring match (anywhere) should be preferred
+			// Exact substring match
 			if (!pref.isEmpty()) {
 				int subPos = candLower.indexOf(pref);
 				if (subPos >= 0) {
-					// exact substring -> distance 0, mark hasSubstr true
+					auto IsTokenBoundaryAt = [](const QString& s, int pos) -> bool {
+						if (pos <= 0) return true;
+						QChar prev = s[pos - 1];
+						QChar cur = s[pos];
+						if (prev == '_' || prev == '.') return true;
+						if (cur.isUpper() && prev.isLower()) return true;
+						return false;
+						};
+
+					bool atBoundary = IsTokenBoundaryAt(cand, subPos);
 					int matchedLen = pLen;
 					int tokenScore = TokenMatchScore(cand, pref);
 					int coverage = computeCoverage(matchedLen, candLen);
-					matches.push_back(Entry{ cand, 0, subPos, candLen, true, matchedLen, tokenScore, coverage });
+
+					if (atBoundary) {
+						matches.push_back(Entry{ cand, 0, subPos, candLen, true, matchedLen, tokenScore, coverage });
+					}
+					else {
+						matches.push_back(Entry{ cand, 1, subPos, candLen, false, matchedLen, tokenScore, coverage });
+					}
 					continue;
 				}
 			}
 
-			// If prefix is empty, include all (manual completion case)
+			// Empty prefix -> include all
 			if (pref.isEmpty()) {
 				matches.push_back(Entry{ cand, 0, 0, candLen, false, 0, 0, 0 });
 				continue;
 			}
 
-			// If prefix is a subsequence of candidate, accept with low distance
+			// Subsequence path
 			if (IsSubsequenceCI(pref, candLower)) {
-				// Smaller pseudo-distance based on how sparse the match is
 				int score = 1 + std::max(0, int(candLower.length() - pref.length()) / 4);
 				score = std::min(score, maxDist);
 				int pos = FindSubsequenceStart(pref, candLower);
 				if (pos < 0) pos = POS_UNKNOWN / 2;
 				int lcs = LongestCommonSubstring(pref, candLower);
-				int matchedLen = std::max(1, pLen - score); // approximate matched prefix portion
+				int matchedLen = std::max(1, pLen - score);
 				int tokenScore = TokenMatchScore(cand, pref);
-				matchedLen = std::max(matchedLen, lcs); // boost matchedLen with actual LCS info
+				matchedLen = std::max(matchedLen, lcs);
 				int coverage = computeCoverage(matchedLen, candLen);
+
+				// Promote full subsequence matches that start early when tokenScore is zero.
+				if (tokenScore == 0 && matchedLen >= pLen) {
+					if (pos <= 1) tokenScore += kSubseqBoostPos1;
+					else if (pos <= 3) tokenScore += kSubseqBoostPos3;
+					else if (pos <= 6) tokenScore += kSubseqBoostPos6;
+				}
+
 				matches.push_back(Entry{ cand, score, pos, candLen, false, matchedLen, tokenScore, coverage });
 				continue;
 			}
 
-			// Compute minimal Damerau-Levenshtein distance against candidate substrings
+			// Damerau-Levenshtein distance against candidate substrings
 			int d = MinDistanceToCandidateSubstrings(pref, candLower, 2);
 			if (d <= maxDist) {
-				// compute an approximate favorable position: try to find exact substring match of a short slice
 				int pos = -1;
 				int probeLen = std::min(3, pLen);
 				if (probeLen > 0) {
 					QString probe = pref.left(probeLen);
 					pos = candLower.indexOf(probe);
 				}
-				if (pos < 0) pos = FindSubsequenceStart(pref, candLower); // fallback to subsequence start (may still be -1)
+				if (pos < 0) pos = FindSubsequenceStart(pref, candLower);
 				if (pos < 0) pos = POS_UNKNOWN / 2;
-				// matchedLen = how much of prefix is effectively matched (approx)
 				int lcs = LongestCommonSubstring(pref, candLower);
 				int matchedLen = std::max(0, pLen - d);
 				matchedLen = std::max(matchedLen, lcs);
@@ -472,7 +845,7 @@ namespace {
 				continue;
 			}
 
-			// For very short prefixes, allow single-char edits
+			// Very short prefixes: allow single-char edits
 			if (pref.length() <= 2 && d <= 1) {
 				int pos = FindSubsequenceStart(pref, candLower);
 				if (pos < 0) pos = POS_UNKNOWN / 2;
@@ -486,27 +859,117 @@ namespace {
 			}
 		}
 
-		std::sort(matches.begin(), matches.end(), EntryComparator);
+		// sort using centralized lexicographic sort key
+		std::sort(matches.begin(), matches.end(), [&](const Entry& a, const Entry& b) {
+			return MakeSortKey(a) < MakeSortKey(b);
+			});
+
+		// Debug: show aggregate info + top matches (includes tunable values)
+		if (CCodeEdit::GetFuzzyCacheLoggingEnabled()) {
+			{
+				int logCount = std::min<int>((int)matches.size(), 25);
+				qDebug() << "[Fuzzy] prefix=" << pref << "pLen=" << pLen
+					<< "minPrefix=" << minPrefix << "maxPrefix=" << maxPrefix
+					<< "maxDist=" << maxDist << "matches=" << matches.size()
+					<< "(tokenFuzzyMaxDist=" << kTokenFuzzyMaxDist
+					<< " singleTokenBoost=" << kSingleTokenFuzzyBoost
+					<< " lowCoverage%=" << kLowCoveragePercent
+					<< " strongTokenThreshold=" << kStrongTokenThreshold << ")";
+
+				if (logCount > 0) {
+					auto ExtractTokensAndInitials = [&](const QString& cand) -> std::pair<QStringList, QString> {
+						QStringList tokens = SplitIntoTokensCached(cand);
+						QString initials;
+						for (const QString& t : tokens) if (!t.isEmpty()) initials.append(t[0].toUpper());
+						return { tokens, initials };
+						};
+
+					// Helper: produce a compact description of which sort-branch is used and the canonical sort key
+					auto GetSortKeyDescription = [&](const Entry& e) -> QString {
+						int hasSubstrKey = e.hasSubstr ? 0 : 1;
+						int lowCoverageThreshold = (kCoverageScale * kLowCoveragePercent) / 100;
+
+						QString mode;
+						QString keyStr;
+
+						// Build numeric representation depending on branch used in MakeSortKey
+						if (pLen <= minPrefix) {
+							mode = "shortPrefix";
+							keyStr = QString("(%1,%2,%3,%4,%5,%6,%7,%8)")
+								.arg(-e.tokenScore).arg(e.dist).arg(hasSubstrKey).arg(-e.coverage)
+								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.text.toLower());
+						}
+						else if (e.tokenScore >= kStrongTokenThreshold) {
+							mode = "strongToken";
+							keyStr = QString("(%1,%2,%3,%4,%5,%6,%7,%8)")
+								.arg(-e.tokenScore).arg(e.dist).arg(hasSubstrKey).arg(-e.coverage)
+								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.text.toLower());
+						}
+						else if (e.coverage <= lowCoverageThreshold && e.tokenScore > 0) {
+							mode = "lowCoverageToken";
+							keyStr = QString("(%1,%2,%3,%4,%5,%6,%7,%8)")
+								.arg(-e.tokenScore).arg(e.dist).arg(hasSubstrKey).arg(-e.coverage)
+								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.text.toLower());
+						}
+						else {
+							mode = "distanceFirst";
+							keyStr = QString("(%1,%2,%3,%4,%5,%6,%7,%8)")
+								.arg(e.dist).arg(hasSubstrKey).arg(-e.tokenScore).arg(-e.coverage)
+								.arg(-e.matchedLen).arg(e.pos).arg(e.len).arg(e.text.toLower());
+						}
+
+						return QString("%1 %2").arg(mode, keyStr);
+						};
+
+					QStringList topSummaries;
+					topSummaries.reserve(logCount);
+					for (int i = 0; i < logCount; ++i) {
+						const Entry& e = matches[i];
+						auto pair = ExtractTokensAndInitials(e.text);
+						const QStringList& toks = pair.first;
+						const QString& initials = pair.second;
+						QString tokenPreview = toks.isEmpty() ? QStringLiteral("<none>") : toks.join(",");
+						QString sortDesc = GetSortKeyDescription(e);
+						topSummaries.append(QString::fromLatin1("#%1:%2(dist=%3,pos=%4,len=%5,hasSubstr=%6,matchedLen=%7,tokenScore=%8,coverage=%9,initials=%10,tokens=%11,sort=%12)")
+							.arg(i)
+							.arg(e.text)
+							.arg(e.dist)
+							.arg(e.pos)
+							.arg(e.len)
+							.arg(e.hasSubstr ? 1 : 0)
+							.arg(e.matchedLen)
+							.arg(e.tokenScore)
+							.arg(e.coverage)
+							.arg(initials)
+							.arg(tokenPreview)
+							.arg(sortDesc));
+					}
+					qDebug() << "[Fuzzy] top =" << topSummaries.join(" | ");
+				}
+			}
+		}
+		// Debug End
 
 		QStringList out;
 		out.reserve(matches.size());
 		for (const auto& e : matches) out.append(e.text);
 
 		// store in cache and return via helper
-		FuzzyCacheInsert(cacheKey, out);
+		// skip caching prefixes that contain no word characters (they are most likely punctuation-only)
+		bool hasWordChar = std::any_of(pref.begin(), pref.end(), [](QChar c) {
+			return c.isLetterOrNumber() || c == '_' || c == '.';
+			});
+		if (hasWordChar) {
+			FuzzyCacheInsert(cacheKey, out);
+		}
+		else {
+			// Use centralized logger (it will lock internally)
+			LogCacheLocked(s_fuzzyCache, QStringLiteral("SKIP"), cacheKey, &out, out.size());
+		}
 		return out;
-	}
+	};
 
 } // namespace
-
-CCodeEdit::AutoCompletionMode CCodeEdit::s_autoCompletionMode = AutoCompletionMode::FullAuto;
-QMutex CCodeEdit::s_autoCompletionModeMutex;
-
-bool CCodeEdit::s_fuzzyMatchingEnabled = false;
-int CCodeEdit::s_minFuzzyPrefixLength = 4;
-int CCodeEdit::s_maxFuzzyPrefixLength = 32;
-
-bool CCodeEdit::s_popupTooltipsEnabled = true;
 
 CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	: QWidget(pParent), m_pCompleter(nullptr), m_lastWordStart(-1), m_lastWordEnd(-1),
@@ -514,7 +977,7 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	m_suppressNextAutoCompletion(false)
 {
 	m_pMainLayout = new QGridLayout(this);
-	m_pMainLayout->setContentsMargins(0,0,0,0);
+	m_pMainLayout->setContentsMargins(0, 0, 0, 0);
 	setLayout(m_pMainLayout);
 
 	m_pSourceCode = new QTextEdit();
@@ -523,13 +986,13 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	Font.setPointSize(10);
 	m_pSourceCode->setFont(Font);
 	m_pSourceCode->setLineWrapMode(QTextEdit::NoWrap);
-	if(pHighlighter)
+	if (pHighlighter)
 		pHighlighter->setDocument(m_pSourceCode->document());
 	//m_pSourceCode->setTabStopWidth (QFontMetrics(Font).width(TAB_SPACES));
 	m_pMainLayout->addWidget(m_pSourceCode, 0, 0);
 
 	connect(m_pSourceCode, SIGNAL(textChanged()), this, SIGNAL(textChanged()));
-	
+
 	// Connect to textChanged for real-time completion updates
 	connect(m_pSourceCode, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
 
@@ -540,12 +1003,12 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	connect(m_pSourceCode, &QTextEdit::cursorPositionChanged, this, &CCodeEdit::OnCursorPositionChanged);
 
 	// hot keys
-	m_pFind = new QAction(tr("Find"),this);
+	m_pFind = new QAction(tr("Find"), this);
 	m_pFind->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_F));
 	connect(m_pFind, SIGNAL(triggered()), this, SLOT(OnFind()));
 	m_pSourceCode->addAction(m_pFind);
 
-	m_pFindNext = new QAction(tr("FindNext"),this);
+	m_pFindNext = new QAction(tr("FindNext"), this);
 	QList<QKeySequence> Finds;
 	Finds << QKeySequence(Qt::Key_F3);
 	Finds << QKeySequence(Qt::SHIFT | Qt::Key_F3) << QKeySequence(Qt::CTRL | Qt::Key_F3) << QKeySequence(Qt::ALT | Qt::Key_F3);
@@ -555,13 +1018,13 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	connect(m_pFindNext, SIGNAL(triggered()), this, SLOT(OnFindNext()));
 	m_pSourceCode->addAction(m_pFindNext);
 
-	m_pGoTo = new QAction(tr("GoTo"),this);
+	m_pGoTo = new QAction(tr("GoTo"), this);
 	m_pGoTo->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_G));
 	connect(m_pGoTo, SIGNAL(triggered()), this, SLOT(OnGoTo()));
 	m_pSourceCode->addAction(m_pGoTo);
 
 	// Case correction replacement
-	m_pReplaceCorrection = new QAction("Replace with correction",this);
+	m_pReplaceCorrection = new QAction("Replace with correction", this);
 	m_pReplaceCorrection->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_R));
 	connect(m_pReplaceCorrection, SIGNAL(triggered()), this, SLOT(ReplaceLastCorrection()));
 	m_pSourceCode->addAction(m_pReplaceCorrection);
@@ -585,14 +1048,13 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 
 			// Show popup if there are results
 			if (!fuzzy.isEmpty()) {
-				QRect rect = m_pSourceCode->cursorRect();
-				rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
-					+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
-				m_pCompleter->complete(rect);
-			} else {
+				ShowCompletionPopup(/*resetScroll=*/true);
+			}
+			else {
 				HidePopupSafely();
 			}
-		} else {
+		}
+		else {
 			// default behavior
 			m_pCompleter->setCompletionPrefix(m_pendingPrefix);
 
@@ -607,10 +1069,7 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 
 			// Only show popup if there are completions available
 			if (m_pCompleter->completionCount() > 0) {
-				QRect rect = m_pSourceCode->cursorRect();
-				rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
-					+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
-				m_pCompleter->complete(rect);
+				ShowCompletionPopup(/*resetScroll=*/true);
 			}
 			else {
 				HidePopupSafely();
@@ -736,6 +1195,9 @@ void CCodeEdit::UpdateCompletionModel(const QStringList& candidates)
 	m_visibleCandidates = filteredCandidates;
 	m_caseCorrectionCandidates = caseCorrectionCandidates;
 
+	// Keep token cache consistent with new candidate set
+	ClearTokenCache();
+
 	QStringListModel* model = qobject_cast<QStringListModel*>(m_pCompleter->model());
 	if (model) {
 		if (model->stringList() == filteredCandidates)
@@ -793,17 +1255,17 @@ CCodeEdit::WordBoundaries CCodeEdit::FindWordBoundaries(const QString& text, int
 	WordBoundaries boundaries;
 	boundaries.start = position;
 	boundaries.end = position;
-	
+
 	// Move to start of word
 	while (boundaries.start > 0 && IsWordCharacter(text[boundaries.start - 1])) {
 		boundaries.start--;
 	}
-	
+
 	// Move to end of word
 	while (boundaries.end < text.length() && IsWordCharacter(text[boundaries.end])) {
 		boundaries.end++;
 	}
-	
+
 	return boundaries;
 }
 
@@ -812,40 +1274,40 @@ QString CCodeEdit::ExtractWordAtCursor(const CursorContext& context) const
 {
 	QTextCursor cursor = context.cursor;
 	int originalPos = cursor.position();
-	
+
 	// Move to start of word
 	cursor.movePosition(QTextCursor::StartOfWord);
 	int startPos = cursor.position();
-	
+
 	// Move to end of word  
 	cursor.movePosition(QTextCursor::EndOfWord);
 	int endPos = cursor.position();
-	
+
 	// If no word boundary found, try manual detection for INI keys
 	if (startPos == endPos) {
 		WordBoundaries boundaries = FindWordBoundaries(context.text, context.position);
 		return context.text.mid(boundaries.start, boundaries.end - boundaries.start);
 	}
-	
+
 	// Get the word from start to end position
 	cursor.setPosition(startPos);
 	cursor.setPosition(endPos, QTextCursor::KeepAnchor);
 	QString word = cursor.selectedText();
-	
+
 	// Extend the word to include dots and underscores that Qt might not include
 	int relativeStart = startPos - context.block.position();
 	int relativeEnd = endPos - context.block.position();
-	
+
 	// Extend backward
 	while (relativeStart > 0 && (context.text[relativeStart - 1] == '_' || context.text[relativeStart - 1] == '.')) {
 		relativeStart--;
 	}
-	
+
 	// Extend forward
 	while (relativeEnd < context.text.length() && (context.text[relativeEnd] == '_' || context.text[relativeEnd] == '.')) {
 		relativeEnd++;
 	}
-	
+
 	return context.text.mid(relativeStart, relativeEnd - relativeStart);
 }
 
@@ -858,17 +1320,17 @@ QString CCodeEdit::GetWordUnderCursor() const
 QString CCodeEdit::GetWordBeforeCursor() const
 {
 	CursorContext context = GetCursorContext();
-	
+
 	// Find word boundaries going backwards from cursor position
 	WordBoundaries boundaries = FindWordBoundaries(context.text, context.position);
-	
+
 	// Adjust to get word before cursor
 	boundaries.end = context.position;
-	
+
 	// If we're already at a word boundary, return empty
 	if (boundaries.start == boundaries.end)
 		return QString();
-	
+
 	return context.text.mid(boundaries.start, boundaries.end - boundaries.start);
 }
 
@@ -986,7 +1448,7 @@ void CCodeEdit::SetCaseCorrectionCallback(std::function<QString(const QString&)>
 
 void CCodeEdit::SetCompletionFilterCallback(std::function<bool(const QString&)> callback)
 {
-    m_completionFilterCallback = std::move(callback);
+	m_completionFilterCallback = std::move(callback);
 }
 
 void CCodeEdit::SetTooltipCallback(std::function<QString(const QString&)> tooltipCallback)
@@ -1018,7 +1480,7 @@ void CCodeEdit::TriggerCompletion(const QString& prefix, int minimumLength)
 	m_completionDebounceTimer->start(30); // 30ms debounce
 
 	// Reset the flag after a short delay
-	ResetFlagAfterDelay(completionTriggered, 50);
+	ResetFlagAfterDelay(m_completionInsertInProgress, 50, "TriggerCompletion/m_completionInsertInProgress");
 }
 
 // Helper method: Handle case correction for delimiter input
@@ -1050,7 +1512,7 @@ void CCodeEdit::HandleCaseCorrection(const QString& word, bool wasPopupVisible)
 
 		if (!all.isEmpty()) {
 			// BuildFuzzyMatches returns sorted candidates by fuzzy distance.
-			QStringList fuzzy = BuildFuzzyMatches(all, word);
+			QStringList fuzzy = BuildFuzzyMatches(all, NormalizePrefixForFuzzy(word));
 
 			if (!fuzzy.isEmpty()) {
 				// Validate top fuzzy candidate with a small distance threshold before proposing it.
@@ -1103,7 +1565,7 @@ bool CCodeEdit::eventFilter(QObject* obj, QEvent* event)
 	// Handle events from both the text edit and the popup
 	if (obj != m_pSourceCode && (!m_pCompleter || obj != m_pCompleter->popup()))
 		return QWidget::eventFilter(obj, event);
-	
+
 	if (event->type() == QEvent::KeyPress) {
 		QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
 
@@ -1132,7 +1594,7 @@ bool CCodeEdit::eventFilter(QObject* obj, QEvent* event)
 
 			// Suppress any immediate auto-completion that could be triggered by the textChanged() fired by insertBlock()
 			m_suppressNextAutoCompletion = true;
-			ResetFlagAfterDelay(m_suppressNextAutoCompletion, 50);
+			ResetFlagAfterDelay(m_caseCorrectionInProgress, 100, "eventFilter/m_caseCorrectionInProgress");
 
 			// Consume event so QTextEdit won't insert U+2028
 			return true;
@@ -1149,7 +1611,7 @@ bool CCodeEdit::eventFilter(QObject* obj, QEvent* event)
 				return HandleBackspaceForCompletion(keyEvent);
 			}
 		}
-		
+
 		// Handle = key from POPUP widget directly
 		if (m_pCompleter && obj == m_pCompleter->popup() && keyEvent->key() == Qt::Key_Equal) {
 			return HandleEqualsKeyInPopup(keyEvent);
@@ -1159,13 +1621,13 @@ bool CCodeEdit::eventFilter(QObject* obj, QEvent* event)
 		if (m_pCompleter && obj == m_pCompleter->popup()) {
 			return HandleEnterKeyInPopup(keyEvent);
 		}
-		
+
 		// Continue with existing text edit event handling...
 		if (obj == m_pSourceCode) {
 			return HandleTextEditKeyPress(keyEvent);
 		}
 	}
-	
+
 	return QWidget::eventFilter(obj, event);
 }
 
@@ -1242,12 +1704,12 @@ bool CCodeEdit::HandleTextEditKeyPress(QKeyEvent* keyEvent)
 	if (keyEvent->key() == Qt::Key_Delete) {
 		return HandleDeleteForCompletion(keyEvent);
 	}
-	
+
 	// Check for autocompletion trigger (always allow manual trigger if completer exists)
 	if (HandleManualCompletionTrigger(keyEvent)) {
 		return true;
 	}
-	
+
 	// Handle text input for auto-completion and case correction
 	if (keyEvent->text().length() == 1) {
 		QChar ch = keyEvent->text().at(0);
@@ -1255,10 +1717,10 @@ bool CCodeEdit::HandleTextEditKeyPress(QKeyEvent* keyEvent)
 			return HandleSingleCharacterInput(keyEvent);
 		}
 	}
-	
+
 	// Handle backspace to update completion
 	HandleBackspaceForCompletion(keyEvent);
-	
+
 	return false;
 }
 
@@ -1270,10 +1732,13 @@ bool CCodeEdit::HandleKeyPressWithPopupVisible(QKeyEvent* keyEvent)
 	case Qt::Key_Return:
 	case Qt::Key_Tab:
 		return HandleEnterKeyInPopup(keyEvent);
+
 	case Qt::Key_Backspace:
 		return HandleBackspaceKeyInPopup();
+
 	case Qt::Key_Equal:
 		return HandleEqualsKeyInPopup(keyEvent);
+
 	default:
 		return HandleDefaultKeyInPopup(keyEvent);
 	}
@@ -1323,14 +1788,26 @@ bool CCodeEdit::HandleManualCompletionTrigger(QKeyEvent* keyEvent)
 		// For manual trigger, get word even if it doesn't start from line beginning
 		QString wordUnderCursor = ExtractWordAtCursor(context);
 
+		// Determine prefix to use for fuzzy ranking:
+		// If there's an equals sign and the cursor is left of it, use the entire key (start..'='),
+		// otherwise normalize the extracted word for fuzzy lookup.
+		QString fuzzyPrefix;
+		int equalsPos = context.text.indexOf('=');
+		if (equalsPos != -1 && context.position <= equalsPos) {
+			fuzzyPrefix = context.text.left(context.position).trimmed();
+		}
+		else {
+			fuzzyPrefix = NormalizePrefixForFuzzy(wordUnderCursor);
+		}
+
 		// Even if word is empty, show all completions for manual trigger
 		if (GetFuzzyMatchingEnabled()) {
 			// Build fuzzy matches (fuzzy-ranked)
-			QStringList fuzzy = BuildFuzzyMatches(m_visibleCandidates, wordUnderCursor);
+			QStringList fuzzy = BuildFuzzyMatches(m_visibleCandidates, fuzzyPrefix);
 
 			// Preserve fuzzy ranking when the user has typed a prefix.
-			// Only present an alphabetical list for the "show all" case (empty prefix).
-			if (wordUnderCursor.isEmpty()) {
+			// Only present an alphabetical list for the "show all" case (empty fuzzyPrefix).
+			if (fuzzyPrefix.isEmpty()) {
 				std::sort(fuzzy.begin(), fuzzy.end(), [](const QString& a, const QString& b) {
 					return a.compare(b, Qt::CaseInsensitive) < 0;
 					});
@@ -1345,20 +1822,14 @@ bool CCodeEdit::HandleManualCompletionTrigger(QKeyEvent* keyEvent)
 				m_tempFuzzyModel = new QStringListModel(fuzzy, this);
 				m_pCompleter->setModel(m_tempFuzzyModel);
 
-				QRect rect = m_pSourceCode->cursorRect();
-				rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
-					+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
-				m_pCompleter->complete(rect);
+				ShowCompletionPopup(/*resetScroll=*/true);
 				return true;
 			}
 		}
 		else {
 			m_pCompleter->setCompletionPrefix(wordUnderCursor);
 			if (m_pCompleter->completionCount() > 0) {
-				QRect rect = m_pSourceCode->cursorRect();
-				rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
-					+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
-				m_pCompleter->complete(rect);
+				ShowCompletionPopup(/*resetScroll=*/true);
 				return true;
 			}
 		}
@@ -1423,7 +1894,7 @@ bool CCodeEdit::HandleSingleCharacterInput(QKeyEvent* keyEvent)
 	}
 
 	// Reset the flag after a short delay
-	ResetFlagAfterDelay(inputProcessed, 50);
+	ResetFlagAfterDelay(inputProcessed, 50, "HandleSingleCharacterInput/inputProcessed");
 	return false; // Let the character be processed normally
 }
 
@@ -1568,7 +2039,7 @@ void CCodeEdit::OnInsertCompletion(const QString& completion)
 			ConsolidateEqualsSignsAfterCursor(cursor, false);
 
 			// Reset flag after a brief delay to allow text change events to settle
-			ResetFlagAfterDelay(m_completionInsertInProgress, 50);
+			ResetFlagAfterDelay(m_completionInsertInProgress, 50, "OnInsertCompletion1/m_completionInsertInProgress");
 			return;
 		}
 	}
@@ -1598,7 +2069,7 @@ void CCodeEdit::OnInsertCompletion(const QString& completion)
 	m_pSourceCode->setTextCursor(cursor);
 
 	// Reset flag after a brief delay to allow text change events to settle
-	ResetFlagAfterDelay(m_completionInsertInProgress, 50);
+	ResetFlagAfterDelay(m_completionInsertInProgress, 50, "OnInsertCompletion2/m_completionInsertInProgress");
 }
 
 void CCodeEdit::SetFont(const QFont& Font)
@@ -1621,7 +2092,7 @@ void CCodeEdit::OnFind()
 {
 	static QStringList Finds;
 	bool bOK = false;
-	m_CurFind = QInputDialog::getItem (this, tr("Find"),tr("F3: Find Next\n+ Shift: Backward\n+ Ctrl: Case Sensitively\n+ Alt: Whole Words\n\nFind String:") + QString(160,' '), Finds, 0, true, &bOK);
+	m_CurFind = QInputDialog::getItem(this, tr("Find"), tr("F3: Find Next\n+ Shift: Backward\n+ Ctrl: Case Sensitively\n+ Alt: Whole Words\n\nFind String:") + QString(160, ' '), Finds, 0, true, &bOK);
 	if (!bOK)
 		return;
 	ADD_HISTORY(Finds, m_CurFind);
@@ -1630,16 +2101,16 @@ void CCodeEdit::OnFind()
 
 void CCodeEdit::OnFindNext()
 {
-	if(m_CurFind.isEmpty())
+	if (m_CurFind.isEmpty())
 		return;
 
 	QTextDocument::FindFlags Flags = QTextDocument::FindFlags();
 	Qt::KeyboardModifiers Mods = QApplication::keyboardModifiers();
-	if(Mods & Qt::ShiftModifier)
+	if (Mods & Qt::ShiftModifier)
 		Flags |= QTextDocument::FindBackward;
-	if(Mods & Qt::ControlModifier)
+	if (Mods & Qt::ControlModifier)
 		Flags |= QTextDocument::FindCaseSensitively;
-	if(Mods & Qt::AltModifier)
+	if (Mods & Qt::AltModifier)
 		Flags |= QTextDocument::FindWholeWords;
 
 	m_pSourceCode->find(m_CurFind, Flags);
@@ -1647,13 +2118,13 @@ void CCodeEdit::OnFindNext()
 
 void CCodeEdit::OnGoTo()
 {
-	int iLine = QInputDialog::getText(this, tr("Go to Line:"),tr(""), QLineEdit::Normal, "").toInt();
-	if(!iLine)
+	int iLine = QInputDialog::getText(this, tr("Go to Line:"), tr(""), QLineEdit::Normal, "").toInt();
+	if (!iLine)
 		return;
-	
-	QTextCursor Cursor = m_pSourceCode->textCursor();   
+
+	QTextCursor Cursor = m_pSourceCode->textCursor();
 	Cursor.movePosition(QTextCursor::Start);
-	while(iLine-- > 1)
+	while (iLine-- > 1)
 		Cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor);
 	//Cursor.select(QTextCursor::LineUnderCursor);
 	m_pSourceCode->setTextCursor(Cursor);
@@ -1745,7 +2216,7 @@ void CCodeEdit::ReplaceLastCorrection()
 	}
 
 	// Reset flag after a brief delay to allow text change events to settle
-	ResetFlagAfterDelay(m_caseCorrectionInProgress, 100);
+	ResetFlagAfterDelay(m_caseCorrectionInProgress, 100, "ReplaceLastCorrection/m_caseCorrectionInProgress");
 }
 
 void CCodeEdit::OnTextChanged()
@@ -1820,42 +2291,43 @@ void CCodeEdit::ValidateCaseCorrection()
 QString CCodeEdit::GetKeyFromCurrentLine() const
 {
 	CursorContext context = GetCursorContext();
-	
+
 	// Check if there's an equals sign on this line
 	int equalsPos = context.text.indexOf('=');
 	if (equalsPos == -1) {
 		return QString(); // No equals sign, not a key=value line
 	}
-	
+
 	// If cursor is after the equals sign, we're editing the value
 	if (context.position > equalsPos) {
 		return QString(); // We're in the value part
 	}
-	
+
 	// Extract the key part (everything before the equals sign, but don't trim yet)
 	QString keyPartRaw = context.text.left(equalsPos);
-	
+
 	// Check if cursor is within the raw key part
 	if (context.position > keyPartRaw.length()) {
 		return QString(); // Cursor is beyond the key part (shouldn't happen, but safety check)
 	}
-	
+
 	// Find word boundaries within the raw key part at the cursor position
 	WordBoundaries boundaries = FindWordBoundaries(keyPartRaw, context.position);
-	
+
 	if (boundaries.start == boundaries.end) {
 		return QString(); // No word found
 	}
-	
+
 	return keyPartRaw.mid(boundaries.start, boundaries.end - boundaries.start);
 }
 
-// Helper method: Reset flag after a specified delay to reduce code duplication
-void CCodeEdit::ResetFlagAfterDelay(bool& flag, int delayMs)
+// Helper method: Reset flag after a specified delay
+void CCodeEdit::ResetFlagAfterDelay(bool& flag, int delayMs, const QString& flagName)
 {
-	ScheduleWithDelay(delayMs, [&flag]() {
+	ScheduleWithDelay(delayMs, [&flag, flagName]() {
+		//qDebug() << "Flag reset:" << flagName;
 		flag = false;
-		}, "ResetFlagAfterDelay");
+		}, QString("ResetFlag_%1").arg(flagName));
 }
 
 // Helper method: Safely hide popup with null checks
@@ -1876,13 +2348,13 @@ bool CCodeEdit::IsExistingKeyValueLine(const QString& lineText, int cursorPositi
 }
 
 // Helper method: Generate appropriate text replacement based on context
-QString CCodeEdit::GetTextReplacement(const QString& originalWord, const QString& replacement, 
-									 const QString& lineText, int wordPosition, bool addEquals) const
+QString CCodeEdit::GetTextReplacement(const QString& originalWord, const QString& replacement,
+	const QString& lineText, int wordPosition, bool addEquals) const
 {
 	// Check if there's already an equals sign after the word position
 	QString restOfLine = lineText.mid(wordPosition + replacement.length());
 	bool hasEqualsAfter = restOfLine.contains('=');
-	
+
 	if (addEquals && !hasEqualsAfter) {
 		return replacement + "=";
 	}
@@ -1994,6 +2466,7 @@ void CCodeEdit::ScheduleWithDelay(int delayMs, std::function<void()> task, const
 {
 	// Check if the task is already scheduled
 	if (m_scheduledTasks.contains(taskName)) {
+		//qDebug() << "Task already scheduled, skipping:" << taskName;
 		return; // Skip scheduling duplicate tasks
 	}
 
@@ -2011,6 +2484,44 @@ void CCodeEdit::ScheduleWithDelay(int delayMs, std::function<void()> task, const
 		});
 }
 
+// Reset popup view/scroll state so the popup always opens at top with first item selected.
+void CCodeEdit::ResetPopupScrollState()
+{
+	if (!m_pCompleter || !m_pCompleter->popup())
+		return;
+
+	QAbstractItemView* popup = m_pCompleter->popup();
+	QAbstractItemModel* model = popup->model();
+	if (!model || model->rowCount() == 0) {
+		if (popup->verticalScrollBar())
+			popup->verticalScrollBar()->setValue(popup->verticalScrollBar()->minimum());
+		return;
+	}
+
+	QModelIndex first = model->index(0, 0);
+	if (popup->selectionModel())
+		popup->selectionModel()->setCurrentIndex(first, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
+	popup->scrollTo(first, QAbstractItemView::PositionAtTop);
+	if (popup->verticalScrollBar())
+		popup->verticalScrollBar()->setValue(popup->verticalScrollBar()->minimum());
+}
+
+// Centralized helper to compute popup rect, optionally reset its scroll/selection and show it.
+void CCodeEdit::ShowCompletionPopup(bool resetScroll)
+{
+	if (!m_pCompleter || !m_pCompleter->popup())
+		return;
+
+	QRect rect = m_pSourceCode->cursorRect();
+	rect.setWidth(m_pCompleter->popup()->sizeHintForColumn(0)
+		+ m_pCompleter->popup()->verticalScrollBar()->sizeHint().width());
+
+	if (resetScroll)
+		ResetPopupScrollState();
+
+	m_pCompleter->complete(rect);
+}
+
 void CCodeEdit::OnCursorPositionChanged()
 {
 	CursorContext context = GetCursorContext();
@@ -2026,8 +2537,23 @@ QStringList CCodeEdit::ApplyFuzzyModelForPrefix(const QString& prefix)
 	if (!m_pCompleter)
 		return QStringList();
 
+	// Prefer using the full key segment when the cursor is in the key area
+	CursorContext context = GetCursorContext();
+	QString usePrefix;
+
+	int equalsPos = context.text.indexOf('=');
+	if (equalsPos != -1 && context.position <= equalsPos) {
+		// Cursor is left of '=' -> use the whole text from line start up to '=' as the fuzzy prefix.
+		// Trim whitespace but preserve tokens/characters (don't strip leading punctuation here).
+		usePrefix = context.text.left(equalsPos).trimmed();
+	}
+	else {
+		// Default: normalize the provided prefix (remove leading non-word chars)
+		usePrefix = NormalizePrefixForFuzzy(prefix);
+	}
+
 	// Build fuzzy matches from visible candidates
-	QStringList fuzzy = BuildFuzzyMatches(m_visibleCandidates, prefix);
+	QStringList fuzzy = BuildFuzzyMatches(m_visibleCandidates, usePrefix);
 
 	// Create temporary model parented to this so we can control its lifetime
 	if (m_tempFuzzyModel) {
@@ -2073,7 +2599,7 @@ bool CCodeEdit::IsKeyAvailableConsideringFuzzy(const QString& key, const QString
 	if (all.isEmpty())
 		return false;
 
-	QStringList fuzzy = BuildFuzzyMatches(all, wordForFuzzy);
+	QStringList fuzzy = BuildFuzzyMatches(all, NormalizePrefixForFuzzy(wordForFuzzy));
 	for (const QString& f : fuzzy) {
 		if (f.compare(key, Qt::CaseInsensitive) == 0)
 			return true;
@@ -2117,10 +2643,25 @@ bool CCodeEdit::GetFuzzyMatchingEnabled()
 
 void CCodeEdit::ClearFuzzyCache()
 {
-	QMutexLocker lk(&s_fuzzyCacheMutex);
+	// Capture a representative key and a small sample of its values for logging
+	QString keySample = s_fuzzyCache.firstKey();
+	QStringList valueSample;
+	if (!keySample.isEmpty()) {
+		valueSample = s_fuzzyCache.sampleValues(keySample, s_fuzzyCache.logSample());
+	}
+
+	// Log before clearing using the captured sample (uses unified logger)
+	LogCacheLocked(s_fuzzyCache, QStringLiteral("CLEAR_BEFORE"), keySample,
+		valueSample.isEmpty() ? nullptr : &valueSample, s_fuzzyCache.size());
+
+	// Clear fuzzy cache
 	s_fuzzyCache.clear();
-	s_cacheOrder.clear();
-	//qDebug() << "[FuzzyCache] CLEARED";
+
+	// Log after clearing
+	LogCacheLocked(s_fuzzyCache, QStringLiteral("CLEARED"), QString(), nullptr, 0);
+
+	// Also clear token cache to avoid stale tokenizations
+	ClearTokenCache();
 }
 
 // Helper method to show tooltip for the currently selected item in the completion popup
@@ -2152,19 +2693,20 @@ void CCodeEdit::ShowPopupTooltipForCurrentItem()
 	}
 }
 
-void CCodeEdit::SetPopupTooltipsEnabled(bool bEnabled)
+void CCodeEdit::SetPopupTooltipsEnabled(int checkState)
 {
-	s_popupTooltipsEnabled = bEnabled;
+	// Accept Qt::CheckState values to allow Disabled/Basic/Full behavior
+	s_popupTooltipsMode = checkState;
 }
 
-bool CCodeEdit::GetPopupTooltipsEnabled()
+int CCodeEdit::GetPopupTooltipsEnabled()
 {
-	return s_popupTooltipsEnabled;
+	return s_popupTooltipsMode;
 }
 
 void CCodeEdit::OnPopupSelectionChanged(const QModelIndex& current, const QModelIndex& previous)
 {
-	if (!s_popupTooltipsEnabled || !m_tooltipCallback || !current.isValid())
+	if (CCodeEdit::GetPopupTooltipsEnabled() == Qt::Unchecked || !m_tooltipCallback || !current.isValid())
 		return;
 
 	// Only show tooltips when navigating with keyboard (not during mouse movements)
@@ -2176,4 +2718,26 @@ void CCodeEdit::OnPopupSelectionChanged(const QModelIndex& current, const QModel
 	ScheduleWithDelay(150, [this]() {
 		ShowPopupTooltipForCurrentItem();
 		}, "ShowTooltipOnSelectionChange");
+}
+
+void CCodeEdit::SetFuzzyCacheLoggingEnabled(bool bEnabled)
+{
+	s_fuzzyCacheLoggingEnabled = bEnabled;
+	//qDebug() << "[CodeEdit] s_fuzzyCacheLoggingEnabled =" << bEnabled;
+}
+
+bool CCodeEdit::GetFuzzyCacheLoggingEnabled()
+{
+	return s_fuzzyCacheLoggingEnabled;
+}
+
+void CCodeEdit::SetTokenCacheLoggingEnabled(bool bEnabled)
+{
+	s_tokenCacheLoggingEnabled = bEnabled;
+	//qDebug() << "[CodeEdit] s_tokenCacheLoggingEnabled =" << bEnabled;
+}
+
+bool CCodeEdit::GetTokenCacheLoggingEnabled()
+{
+	return s_tokenCacheLoggingEnabled;
 }

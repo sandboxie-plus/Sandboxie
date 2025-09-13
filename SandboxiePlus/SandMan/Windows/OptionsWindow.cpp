@@ -454,7 +454,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	m_pCodeEdit->SetFuzzyMatchingEnabled(theConf->GetBool("Options/EnableFuzzyMatching", false));
 
 	// Show tooltips when navigating with keyboard
-	CCodeEdit::SetPopupTooltipsEnabled(theConf->GetBool("Options/EnablePopupTooltips", true));
+	int defaultPopupMode = theConf->GetInt("Options/EnablePopupTooltips", static_cast<int>(CIniHighlighter::GetTooltipMode()));
+	CCodeEdit::SetPopupTooltipsEnabled(defaultPopupMode);
 
 	// Set up autocompletion based on mode
 	QCompleter* completer = new QCompleter(this);
@@ -1472,6 +1473,13 @@ void COptionsWindow::OnTooltipToggled(int state)
 	theConf->SetValue("Options/EnableIniTooltips", state);
 
 	CIniHighlighter::SetTooltipMode(state);
+
+	{
+		int iniMode = theConf->GetInt("Options/EnableIniTooltips", static_cast<int>(CIniHighlighter::GetTooltipMode()));
+		int popupMode = theConf->GetInt("Options/EnablePopupTooltips", static_cast<int>(Qt::PartiallyChecked));
+		int effectiveMode = (iniMode == Qt::Unchecked) ? popupMode : (popupMode == Qt::Unchecked ? Qt::Unchecked : iniMode);
+		CCodeEdit::SetPopupTooltipsEnabled(effectiveMode);
+	}
 
 	if (state == Qt::Unchecked) {
 		CIniHighlighter::ClearLanguageCache();

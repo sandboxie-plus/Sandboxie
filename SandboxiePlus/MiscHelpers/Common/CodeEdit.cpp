@@ -6,6 +6,7 @@
 
 // Anonymous namespace helpers for fuzzy matching
 namespace {
+	constexpr int POS_UNKNOWN = std::numeric_limits<int>::max();
 
 	// Compute Damerau-Levenshtein distance (optimal string alignment allowing transpositions)
 	static int DamerauLevenshtein(const QString& aIn, const QString& bIn)
@@ -78,7 +79,7 @@ namespace {
 		int pLen = p.length();
 		int cLen = c.length();
 		if (pLen == 0) return 0;
-		int minD = INT_MAX;
+		int minD = POS_UNKNOWN;
 
 		// Try substrings of candidate with lengths around prefix length to handle missing/extra letters.
 		int startLen = std::max(1, pLen - maxLenDelta);
@@ -97,7 +98,7 @@ namespace {
 		int whole = DamerauLevenshtein(p, c);
 		minD = std::min(minD, whole);
 
-		if (minD == INT_MAX) return pLen;
+		if (minD == POS_UNKNOWN) return pLen;
 		return minD;
 	}
 
@@ -201,6 +202,7 @@ namespace {
 			// Mix length in
 			h ^= static_cast<quint64>(list.size());
 			h *= FNV_PRIME;
+
 			return h;
 			};
 
@@ -293,6 +295,8 @@ namespace {
 			}
 			if (!initials.isEmpty()) {
 				if (initials.toLower().startsWith(prefLower)) best = std::max(best, 30);
+				if (initials.toLower().endsWith(prefLower)) best = std::max(best, 20);
+				if (initials.toLower().contains(prefLower)) best = std::max(best, 10);
 			}
 
 			return best;
@@ -307,18 +311,18 @@ namespace {
 		// sort comparator
 		// 1) distance (all 0 here),
 		// 2) prefer hasSubstr (true),
-		// 3) prefer coverage (compactness of match),
-		// 4) prefer larger matchedLen,
-		// 5) prefer tokenScore,
+		// 3) prefer tokenScore,
+		// 4) prefer coverage (compactness of match),
+		// 5) prefer larger matchedLen,
 		// 6) earliest position,
 		// 7) shorter candidate,
 		// 8) alphabetical
 		auto EntryComparator = [](const Entry& a, const Entry& b) -> bool {
 			if (a.dist != b.dist) return a.dist < b.dist;
-			if (a.hasSubstr != b.hasSubstr) return a.hasSubstr > b.hasSubstr; // true first
-			if (a.coverage != b.coverage) return a.coverage > b.coverage;
-			if (a.matchedLen != b.matchedLen) return a.matchedLen > b.matchedLen; // prefer larger coverage of prefix
+			if (a.hasSubstr != b.hasSubstr) return a.hasSubstr > b.hasSubstr;
 			if (a.tokenScore != b.tokenScore) return a.tokenScore > b.tokenScore;
+			if (a.coverage != b.coverage) return a.coverage > b.coverage;
+			if (a.matchedLen != b.matchedLen) return a.matchedLen > b.matchedLen;
 			if (a.pos != b.pos) return a.pos < b.pos;
 			if (a.len != b.len) return a.len < b.len;
 			return a.text.toLower() < b.text.toLower();
@@ -402,7 +406,7 @@ namespace {
 				int score = 1 + std::max(0, int(candLower.length() - pref.length()) / 4);
 				score = std::min(score, maxDist);
 				int pos = FindSubsequenceStart(pref, candLower);
-				if (pos < 0) pos = INT_MAX / 2;
+				if (pos < 0) pos = POS_UNKNOWN / 2;
 				int lcs = LongestCommonSubstring(pref, candLower);
 				int matchedLen = std::max(1, pLen - score); // approximate matched prefix portion
 				int tokenScore = TokenMatchScore(cand, pref);
@@ -423,7 +427,7 @@ namespace {
 					pos = candLower.indexOf(probe);
 				}
 				if (pos < 0) pos = FindSubsequenceStart(pref, candLower); // fallback to subsequence start (may still be -1)
-				if (pos < 0) pos = INT_MAX / 2;
+				if (pos < 0) pos = POS_UNKNOWN / 2;
 				// matchedLen = how much of prefix is effectively matched (approx)
 				int lcs = LongestCommonSubstring(pref, candLower);
 				int matchedLen = std::max(0, pLen - d);
@@ -437,7 +441,7 @@ namespace {
 			// For very short prefixes, allow single-char edits
 			if (pref.length() <= 2 && d <= 1) {
 				int pos = FindSubsequenceStart(pref, candLower);
-				if (pos < 0) pos = INT_MAX / 2;
+				if (pos < 0) pos = POS_UNKNOWN / 2;
 				int lcs = LongestCommonSubstring(pref, candLower);
 				int matchedLen = std::max(0, pLen - d);
 				matchedLen = std::max(matchedLen, lcs);
@@ -1327,7 +1331,8 @@ bool CCodeEdit::HandleSingleCharacterInput(QKeyEvent* keyEvent)
 	bool isTabKey = (key == Qt::Key_Tab);
 
 	// treat Enter/Tab via key instead of relying on text() == '\n' or '\t'
-	bool isPlainDelimiter = (modsNoKeypad == Qt::NoModifier) &&
+	bool isPlainDelimiter = ((modsNoKeypad == Qt::NoModifier) ||
+		(isEqualsKey && modsNoKeypad == Qt::ShiftModifier)) &&
 		(isSpaceKey || isEqualsKey || isEnterKey || isTabKey);
 
 	// Handle case correction BEFORE any other processing for delimiters
@@ -1339,8 +1344,8 @@ bool CCodeEdit::HandleSingleCharacterInput(QKeyEvent* keyEvent)
 	}
 
 	// Close popup when = is pressed (AFTER capturing word for case correction)
-	// Only close for plain '=' (no Ctrl/Alt/etc).
-	if (isEqualsKey && modsNoKeypad == Qt::NoModifier) {
+	// Only close for plain '=' (no Ctrl/Alt/etc, but allow Shift for typing equals).
+	if (isEqualsKey && (modsNoKeypad == Qt::NoModifier || modsNoKeypad == Qt::ShiftModifier)) {
 		HidePopupSafely();
 	}
 
@@ -1497,6 +1502,8 @@ void CCodeEdit::OnInsertCompletion(const QString& completion)
 			// Replace with the completion (no extra = needed since it exists)
 			cursor.insertText(completion);
 			m_pSourceCode->setTextCursor(cursor);
+
+			ConsolidateEqualsSignsAfterCursor(cursor, false);
 
 			// Reset flag after a brief delay to allow text change events to settle
 			ResetFlagAfterDelay(m_completionInsertInProgress, 50);
@@ -1666,22 +1673,7 @@ void CCodeEdit::ReplaceLastCorrection()
 			cursor.insertText(replacementText);
 		}
 
-		int pos = cursor.position();
-		QTextBlock block = cursor.block();
-		QString text = block.text();
-		int relPos = pos - block.position();
-		// If there are two '=' after the current position, remove one
-		if (relPos < text.length() && text[relPos] == '=' && text[relPos + 1] == '=') {
-			cursor.setPosition(block.position() + relPos);
-			cursor.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, 1);
-			cursor.removeSelectedText();
-			m_pSourceCode->setTextCursor(cursor);
-		}
-		// Move cursor past '=' if it exists right after the corrected key
-		if (relPos < text.length() && text[relPos] == '=') {
-			cursor.movePosition(QTextCursor::Right);
-			m_pSourceCode->setTextCursor(cursor);
-		}
+		ConsolidateEqualsSignsAfterCursor(cursor, true);
 
 		// Clear tracking after replacement
 		ClearCaseCorrectionTracking();
@@ -1874,6 +1866,42 @@ bool CCodeEdit::IsKeyAvailableInCompletionModel(const QString& key) const
 	}
 
 	return false;
+}
+
+// Helper method: Consolidate multiple consecutive equals signs into one
+// and optionally move the cursor past the equals sign
+void CCodeEdit::ConsolidateEqualsSignsAfterCursor(QTextCursor& cursor, bool moveCursorPastEquals)
+{
+	int pos = cursor.position();
+	QTextBlock block = cursor.block();
+	QString text = block.text();
+	int relPos = pos - block.position();
+
+	// Check for any equals signs after the current position
+	int equalCount = 0;
+	int i = relPos;
+	while (i < text.length() && text[i] == '=') {
+		equalCount++;
+		i++;
+	}
+
+	// If we have more than one equals sign, remove all and add back just one
+	if (equalCount > 1) {
+		cursor.setPosition(block.position() + relPos);
+		cursor.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, equalCount);
+		cursor.insertText("=");
+		m_pSourceCode->setTextCursor(cursor);
+
+		// Update text and position after modification
+		text = block.text();
+		relPos = cursor.position() - block.position();
+	}
+
+	// Move cursor past '=' if requested and if there is an equals sign after the cursor
+	if (moveCursorPastEquals && relPos < text.length() && text[relPos] == '=') {
+		cursor.movePosition(QTextCursor::Right);
+		m_pSourceCode->setTextCursor(cursor);
+	}
 }
 
 void CCodeEdit::SetAutoCompletionMode(int checkState)

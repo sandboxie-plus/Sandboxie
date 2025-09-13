@@ -169,6 +169,7 @@ private:
 	void ClearCaseCorrectionTracking();
 	void UpdateCaseCorrectionTracking(const QString& wrongWord, const QString& correctWord, int wordStart, int wordEnd);
 	bool IsKeyAvailableInCompletionModel(const QString& key) const;
+	void ConsolidateEqualsSignsAfterCursor(QTextCursor& cursor, bool moveCursorPastEquals = true);
 
 	// Fuzzy-specific helpers (private)
 	QStringList ApplyFuzzyModelForPrefix(const QString& prefix);

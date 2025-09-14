@@ -5,6 +5,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.16.4 / 5.71.4] - 2025-09-xx
+
+### Added
+
+### Changed
+
+### Fixed
+- Sandboxie-Plus 1.16.3 Fails to Connect to Driver on Windows Preview Build 27943 [#5003](https://github.com/sandboxie-plus/Sandboxie/issues/5003)
+
+
+
+
 ## [1.16.3 / 5.71.3] - 2025-09-08
 
 ### Changed

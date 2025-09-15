@@ -1683,69 +1683,21 @@ bool CIniHighlighter::isValidForTooltip(const QString& settingName)
 
 QString CIniHighlighter::GetBasicSettingTooltip(const QString& settingName)
 {
-    TooltipMode mode = GetTooltipMode();
-    if (mode == TooltipMode::Disabled) {
-        return QString();
-    }
-    if (mode == TooltipMode::FullTooltip) {
-        return GetSettingTooltip(settingName);
-    }
-    if (!isValidForTooltip(settingName))
-        return QString();
+	TooltipMode mode = GetTooltipMode();
+	if (mode == TooltipMode::Disabled) {
+		return QString();
+	}
+	if (mode == TooltipMode::FullTooltip) {
+		return GetSettingTooltip(settingName);
+	}
+	if (!isValidForTooltip(settingName))
+		return QString();
 
-    QString cacheKey = settingName % QStringLiteral("_basic");
-    return getOrSetTooltipCache(cacheKey, [=]() {
-        const TooltipThemeCache& themeCache = getTooltipThemeCache();
-        QString tooltip;
-        tooltip.reserve(1024);
-        {
-            QMutexLocker locker(&settingsMutex);
-            if (!isValidForTooltip(settingName))
-                return QString();
-            const SettingInfo& info = validSettings[settingName];
-            const QString currentLang = getCurrentLanguage();
-
-            tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
-			TooltipCellStyles headerStyles = getGenericStyles("Header");
-			QString headerStyleStr = headerStyles.left.toHtmlStyle();
-			tooltip += HtmlTags::TABLE_HEADER_START % headerStyleStr % HtmlTags::TAG_CLOSE
-				% settingName % HtmlTags::TD_END % HtmlTags::TR_END;
-
-            // Helper lambda to append a version row
-            auto appendVersionRow = [&](const QString& label, const QString& value, const QString& styleKey) {
-                if (!value.isEmpty()) {
-                    TooltipCellStyles styles = getGenericStyles(styleKey);
-                    appendGenericTooltipRow(tooltip, label, value, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, styles);
-                }
-            };
-
-            static const QString renamedVersionLabel = tr("Renamed in version");
-            static const QString removedVersionLabel = tr("Removed in version");
-            static const QString supersededByLabel = tr("Superseded by");
-
-            if (!info.renamedVersion.isEmpty()) {
-                appendVersionRow(renamedVersionLabel, info.renamedVersion, "RenamedVersion");
-                appendVersionRow(supersededByLabel, info.supersededBy, "SupersededBy");
-            }
-            else if (!info.removedVersion.isEmpty() && (info.readdedVersion.isEmpty() || QVersionNumber::fromString(info.removedVersion) > QVersionNumber::fromString(info.readdedVersion))) {
-				appendVersionRow(removedVersionLabel, info.removedVersion, "RemovedVersion");
-				appendVersionRow(supersededByLabel, info.supersededBy, "SupersededBy");
-			} else {
-                appendVersionRow(supersededByLabel, info.supersededBy, "SupersededBy");
-                QString description = selectLocalizedContentOptimized(info.description, info.localizedDescriptions, currentLang);
-                if (!description.isEmpty()) {
-                    appendTableRowForContent(tooltip, tr("Description"), description, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, settingName, false);
-                } else {
-                    QString syntax = selectLocalizedContentOptimized(info.syntax, info.localizedSyntax, currentLang);
-                    if (!syntax.isEmpty()) {
-                        appendTableRowForContent(tooltip, tr("Syntax"), syntax, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, settingName, true);
-                    }
-                }
-            }
-            tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
-        }
-		return tooltip;
-    });
+	QString cacheKey = settingName % QStringLiteral("_basic");
+	// basic tooltip: only version rows + description (or syntax if description missing) with special-case logic
+	return getOrSetTooltipCache(cacheKey, [=]() {
+		return BuildTooltipCore(settingName, /*includeMappings=*/false, /*includeContent=*/false, /*reserveSize=*/1024, /*preferDescriptionFirst=*/true);
+		});
 }
 
 QString CIniHighlighter::GetSettingTooltip(const QString& settingName)
@@ -1766,86 +1718,26 @@ QString CIniHighlighter::GetSettingTooltip(const QString& settingName)
 	if (!isValidForTooltip(settingName))
 		return QString();
 
+	// full tooltip: include mappings + full content
 	return getOrSetTooltipCache(settingName, [=]() {
-		const TooltipThemeCache& themeCache = getTooltipThemeCache();
-		QString tooltip;
-		tooltip.reserve(2048);
-		{
-			QMutexLocker locker(&settingsMutex);
-			if (!isValidForTooltip(settingName))
-				return QString();
-
-			const SettingInfo& info = validSettings[settingName];
-			const QString currentLang = getCurrentLanguage();
-
-			tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
-			TooltipCellStyles headerStyles = getGenericStyles("Header");
-			QString headerStyleStr = headerStyles.left.toHtmlStyle();
-			tooltip += HtmlTags::TABLE_HEADER_START % headerStyleStr % HtmlTags::TAG_CLOSE
-				% settingName % HtmlTags::TD_END % HtmlTags::TR_END;
-
-			addVersionRows(tooltip, info, themeCache.labelStyle);
-			processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
-			processContentOptimized(tooltip, info, currentLang, settingName, themeCache.labelStyle);
-
-			tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
-		}
-		return tooltip;
+		return BuildTooltipCore(settingName, /*includeMappings=*/true, /*includeContent=*/true, /*reserveSize=*/2048, /*preferDescriptionFirst=*/true);
 		});
 }
 
 // Helper to build popup tooltip content for Basic or Full popup modes.
 QString CIniHighlighter::BuildPopupTooltip(const QString& settingName, bool basic)
 {
-	// Guard: invalid key or not loaded
+	// Popup basic == same semantics as hover basic (selective version rows + description/syntax)
+	// Popup full == full tooltip (mappings + content)
 	if (!isValidForTooltip(settingName))
 		return QString();
 
-	const TooltipThemeCache& themeCache = getTooltipThemeCache();
-	QString tooltip;
-	tooltip.reserve(basic ? 1024 : 2048);
-
-	{
-		// Use settingsMutex while reading validSettings to avoid races with reload
-		QMutexLocker locker(&settingsMutex);
-		if (!isValidForTooltip(settingName))
-			return QString();
-
-		const SettingInfo& info = validSettings[settingName];
-		const QString currentLang = getCurrentLanguage();
-
-		tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
-		TooltipCellStyles headerStyles = getGenericStyles("Header");
-		QString headerStyleStr = headerStyles.left.toHtmlStyle();
-		tooltip += HtmlTags::TABLE_HEADER_START % headerStyleStr % HtmlTags::TAG_CLOSE
-			% settingName % HtmlTags::TD_END % HtmlTags::TR_END;
-
-		// Version rows (same for basic & full)
-		addVersionRows(tooltip, info, themeCache.labelStyle);
-
-		if (basic) {
-			// Basic: prefer Description, otherwise Syntax (same logic as original)
-			QString description = selectLocalizedContentOptimized(info.description, info.localizedDescriptions, currentLang);
-			if (!description.isEmpty()) {
-				appendTableRowForContent(tooltip, tr("Description"), description, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, settingName, false);
-			}
-			else {
-				QString syntax = selectLocalizedContentOptimized(info.syntax, info.localizedSyntax, currentLang);
-				if (!syntax.isEmpty()) {
-					appendTableRowForContent(tooltip, tr("Syntax"), syntax, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, settingName, true);
-				}
-			}
-		}
-		else {
-			// Full: include mappings and full content
-			processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
-			processContentOptimized(tooltip, info, currentLang, settingName, themeCache.labelStyle);
-		}
-
-		tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
+	if (basic) {
+		return BuildTooltipCore(settingName, /*includeMappings=*/false, /*includeContent=*/false, /*reserveSize=*/1024, /*preferDescriptionFirst=*/true);
 	}
-
-	return tooltip;
+	else {
+		return BuildTooltipCore(settingName, /*includeMappings=*/true, /*includeContent=*/true, /*reserveSize=*/2048, /*preferDescriptionFirst=*/true);
+	}
 }
 
 QString CIniHighlighter::GetSettingTooltipForPopup(const QString& settingName)
@@ -1887,6 +1779,84 @@ QString CIniHighlighter::GetSettingTooltipForPopup(const QString& settingName)
 	return getOrSetTooltipCache(cacheKey, [=]() {
 		return BuildPopupTooltip(settingName, /*basic=*/false);
 		});
+}
+
+QString CIniHighlighter::BuildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize, bool preferDescriptionFirst)
+{
+	// Common guard
+	if (!isValidForTooltip(settingName))
+		return QString();
+
+	const TooltipThemeCache& themeCache = getTooltipThemeCache();
+	QString tooltip;
+	tooltip.reserve(reserveSize);
+
+	QMutexLocker locker(&settingsMutex);
+	if (!isValidForTooltip(settingName))
+		return QString();
+
+	const SettingInfo& info = validSettings[settingName];
+	const QString currentLang = getCurrentLanguage();
+
+	// Header
+	tooltip = HtmlTags::HTML_START % HtmlTags::TABLE_START % themeCache.tableStyle % HtmlTags::TAG_CLOSE;
+	TooltipCellStyles headerStyles = getGenericStyles("Header");
+	QString headerStyleStr = headerStyles.left.toHtmlStyle();
+	tooltip += HtmlTags::TABLE_HEADER_START % headerStyleStr % HtmlTags::TAG_CLOSE
+		% settingName % HtmlTags::TD_END % HtmlTags::TR_END;
+
+	// Basic (no includeContent) special-case: selective version rows and content fallback
+	if (!includeContent) {
+		// Helper lambda to append a version row
+		auto appendVersionRow = [&](const QString& label, const QString& value, const QString& styleKey) {
+			if (!value.isEmpty()) {
+				TooltipCellStyles styles = getGenericStyles(styleKey);
+				appendGenericTooltipRow(tooltip, label, value, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, styles);
+			}
+			};
+
+		static const QString renamedVersionLabel = tr("Renamed in version");
+		static const QString removedVersionLabel = tr("Removed in version");
+		static const QString supersededByLabel = tr("Superseded by");
+
+		// Preserve original GetBasicSettingTooltip behavior:
+		// If renamedVersion present => show renamed + superseded
+		// else if removedVersion present and (readdedVersion empty OR removed > readded) => show removed + superseded
+		// else => show superseded + description (fallback to syntax)
+		if (!info.renamedVersion.isEmpty()) {
+			appendVersionRow(renamedVersionLabel, info.renamedVersion, "RenamedVersion");
+			appendVersionRow(supersededByLabel, info.supersededBy, "SupersededBy");
+		}
+		else if (!info.removedVersion.isEmpty() &&
+			(info.readdedVersion.isEmpty() || QVersionNumber::fromString(info.removedVersion) > QVersionNumber::fromString(info.readdedVersion))) {
+			appendVersionRow(removedVersionLabel, info.removedVersion, "RemovedVersion");
+			appendVersionRow(supersededByLabel, info.supersededBy, "SupersededBy");
+		}
+		else {
+			// show superseded then description or syntax
+			appendVersionRow(supersededByLabel, info.supersededBy, "SupersededBy");
+			QString description = selectLocalizedContentOptimized(info.description, info.localizedDescriptions, currentLang);
+			if (!description.isEmpty()) {
+				appendTableRowForContent(tooltip, tr("Description"), description, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, settingName, false);
+			}
+			else {
+				QString syntax = selectLocalizedContentOptimized(info.syntax, info.localizedSyntax, currentLang);
+				if (!syntax.isEmpty()) {
+					appendTableRowForContent(tooltip, tr("Syntax"), syntax, themeCache.labelStyle, HtmlTags::VALUE_PREFIX, settingName, true);
+				}
+			}
+		}
+	}
+	else {
+		// Full tooltip: include all version rows + mappings + content (existing behavior)
+		addVersionRows(tooltip, info, themeCache.labelStyle);
+		if (includeMappings)
+			processMappingsOptimized(tooltip, info, currentLang, themeCache.labelStyle);
+		processContentOptimized(tooltip, info, currentLang, settingName, themeCache.labelStyle);
+	}
+
+	tooltip += HtmlTags::TABLE_END % HtmlTags::HTML_END;
+	return tooltip;
 }
 
 // Helper for tooltip cache get-or-set pattern

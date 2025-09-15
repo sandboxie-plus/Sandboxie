@@ -2635,6 +2635,7 @@ SB_STATUS CSbieAPI::ImBoxMount(CSandBox* pBox, const QString& Password, bool bPr
 	req->h.msgid = MSGID_IMBOX_MOUNT;
 	wcscpy(req->password, password.c_str());
 	req->protect_root = bProtect;
+	req->admin_only = pBox->GetBool("ProtectAdminOnly", true, true, true);
 	req->auto_unmount = bAutoUnmount;
 	wcscpy(req->reg_root, root.c_str());
 	wcscpy(req->file_root, file_root.c_str());

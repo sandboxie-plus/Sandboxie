@@ -270,7 +270,10 @@ MSG_HEADER *MountManager::MountHandler(MSG_HEADER *msg)
     std::wstring TargetNtPath = pMount->NtPath;
 
     if (req->protect_root) {
-        if (NT_SUCCESS(SbieApi_Call(API_PROTECT_ROOT, 2, req->reg_root, TargetNtPath.c_str())))
+
+        ULONG admin_only = req->admin_only ? 1 : 0;
+
+        if (NT_SUCCESS(SbieApi_Call(API_PROTECT_ROOT, 3, req->reg_root, TargetNtPath.c_str(), admin_only)))
             pMount->Protected = true;
     }
 

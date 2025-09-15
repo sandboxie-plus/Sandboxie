@@ -18,6 +18,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+## [1.16.4 / 5.71.4] - 2025-09-xx
+
+### Added
+- added option to block non administrative session leader (sandman.exe or sbiectrl.exe) from accessing encrypted box data
+  - Note: this is now enabled by default to disable it use 'ProtectAdminOnly=n'
+
+### Changed
+- improved checks in Thread_CheckObject_CommonEx for encrypted boxes
+
+
+
+
+
 ## [1.16.3 / 5.71.3] - 2025-09-08
 
 ### Changed

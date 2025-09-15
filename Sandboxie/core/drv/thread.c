@@ -1027,6 +1027,30 @@ finish:
 
 
 //---------------------------------------------------------------------------
+// Process_IsSbieImage
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Thread_IsSystemImage(const WCHAR* image_path, WCHAR* image)
+{
+    if (image_path) {
+
+        ULONG len = (ULONG)wcslen(image_path);
+        if ((len > Driver_SystemRootPathNt_Len) &&
+            (_wcsnicmp(image_path, Driver_SystemRootPathNt, Driver_SystemRootPathNt_Len) == 0)) {
+
+            if (_wcsicmp(image_path + Driver_SystemRootPathNt_Len, image) == 0) {
+
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // Thread_CheckObject_CommonEx
 //---------------------------------------------------------------------------
 
@@ -1088,6 +1112,7 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                     if (WriteAccess || proc2->confidential_box) {
 
                         protect_process = Process_GetConfEx_bool(proc2->box, nptr, L"DenyHostAccess", proc2->confidential_box);
+						BOOLEAN admin_only = Process_GetConfEx_bool(proc2->box, nptr, L"ProtectAdminOnly", FALSE);
 
                         //
                         // in case use specified wildcard "*" always grant access to sbiesvc.exe and csrss.exe
@@ -1095,14 +1120,17 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                         //
 
                         if (protect_process /*&& MyIsProcessRunningAsSystemAccount(cur_pid)*/) {
-                            if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) 
+                            if (Util_IsSystemProcess(cur_pid, "sbiesvc.exe")
                                 || Util_IsSystemProcess(cur_pid, "csrss.exe")
                                 || Util_IsSystemProcess(cur_pid, "lsass.exe")
                                 || Util_IsProtectedProcess(cur_pid)
-                                || (_wcsicmp(nptr, L"conhost.exe") == 0)
-                                || (_wcsicmp(nptr, L"taskmgr.exe") == 0) || (_wcsicmp(nptr, L"sandman.exe") == 0))
+                                || Thread_IsSystemImage(((UNICODE_STRING *)nbuf)->Buffer, L"\\System32\\conhost.exe")
+                                || Thread_IsSystemImage(((UNICODE_STRING *)nbuf)->Buffer, L"\\System32\\taskmgr.exe")
+                                || (Session_GetLeadSession(cur_pid) != 0 && (!admin_only || Session_CheckAdminAccess(TRUE))))
                                 protect_process = FALSE;
                         }
+
+                        //DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_INFO_LEVEL, "ProtectProcess: %d from %S (%d) requesting 0x%08X\n", protect_process, ((UNICODE_STRING *)nbuf)->Buffer, (ULONG)cur_pid, DesiredAccess);
 
                         if (protect_process && cur_pid == proc2->starter_id && !proc2->initialized)
                             protect_process = FALSE;

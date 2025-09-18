@@ -47,7 +47,11 @@ public:
 	void applyUserIniOverrides(const QString& masterVersion, const QString& userIniPath);
 	void setCurrentVersion(const QString& version);
 
+	static QString BuildPopupTooltip(const QString& settingName, bool basic);
+	static QString BuildTooltipCore(const QString& settingName, bool includeMappings, bool includeContent, int reserveSize = 2048, bool preferDescriptionFirst = true);
+	static QString GetBasicSettingTooltip(const QString& settingName);
 	static QString GetSettingTooltip(const QString& settingName);
+	static QString GetSettingTooltipForPopup(const QString& settingName);
 	static bool IsSettingsLoaded() { return settingsLoaded; }
 	static bool IsCommentLine(const QString& line);
 
@@ -140,7 +144,6 @@ private:
 	static QVersionNumber getCurrentVersion();
 	static QString normalizeLanguage(const QString& language);
 	static QString sanitizeHtmlInput(const QString& input);
-	static QString GetBasicSettingTooltip(const QString& settingName);
 	static bool isValidForTooltip(const QString& settingName);
 	
 	static QString sanitizeVersion(const QString& versionString, bool useDefaultOnInvalid = false);

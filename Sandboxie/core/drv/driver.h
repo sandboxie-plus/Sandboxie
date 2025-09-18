@@ -143,6 +143,9 @@ extern BOOLEAN Driver_OsTestSigning;
 
 extern POOL *Driver_Pool;
 
+extern WCHAR *Driver_SystemRootPathNt;
+extern ULONG  Driver_SystemRootPathNt_Len;
+
 extern WCHAR *Driver_RegistryPath;
 
 extern WCHAR *Driver_HomePathDos;

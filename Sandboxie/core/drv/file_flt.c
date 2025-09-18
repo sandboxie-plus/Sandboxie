@@ -35,6 +35,7 @@ typedef struct _PROTECTED_ROOT {
 
     LIST_ELEM list_elem;
     
+    BOOLEAN admin_only;
     ULONG reg_root_len;
     WCHAR reg_root[MAX_REG_ROOT_LEN];
     ULONG file_root_len;
@@ -496,6 +497,7 @@ check:
             //DbgPrint("IRP_MJ_CREATE: %S\n", Name->Name.Buffer);
 
             BOOLEAN protect_root = FALSE;
+            BOOLEAN admin_only = FALSE;
 
             KIRQL irql;
             KeRaiseIrql(APC_LEVEL, &irql);
@@ -512,6 +514,7 @@ check:
                     //DbgPrint("IRP_MJ_CREATE: %S\n", root->file_root);
 
                     protect_root = TRUE;
+					admin_only = root->admin_only;
                     break;
                 }
 
@@ -527,7 +530,7 @@ check:
 
                 if (Util_IsSystemProcess(cur_pid, "csrss.exe") // csrss.exe needs access to binaries of starting up processes.
                     || cur_pid == Api_ServiceProcessId // always allow the service
-                    || Session_GetLeadSession(cur_pid) != 0) // allow the session leader
+                    || (Session_GetLeadSession(cur_pid) != 0 && (!admin_only || Session_CheckAdminAccess(TRUE)))) // allow the session leader
                     protect_root = FALSE;
                 else
                 {
@@ -1016,6 +1019,8 @@ _FX NTSTATUS File_Api_ProtectRoot(PROCESS *proc, ULONG64 *parms)
     PROTECTED_ROOT *root = Mem_Alloc(Driver_Pool, len);
     if (root) {
         
+		root->admin_only = (parms[3] != 0);
+
         root->file_root_len = path_len;
         wmemcpy(root->file_root, file_root, path_len);
         root->file_root[path_len] = L'\0';

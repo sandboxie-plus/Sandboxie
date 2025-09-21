@@ -31,7 +31,6 @@ jobs:
     steps:
       - name: Check Sandboxie-Plus version
         id: check_plus
-        shell: pwsh
         run: |
           # Skip if not a release event
           if ("${{ github.event_name }}" -eq "release") {
@@ -40,6 +39,7 @@ jobs:
             Write-Host "Plus publish is only executed on release runs; skipping on manual run."
             echo "ready=false" >> $env:GITHUB_OUTPUT
           }
+        shell: pwsh
       - name: Get Sandboxie-Plus version
         id: get_version
         run: |
@@ -61,7 +61,6 @@ jobs:
     steps:
       - name: Check Sandboxie-Classic version
         id: check_classic
-        shell: pwsh
         run: |
           # Skip if not a release event
           if ("${{ github.event_name }}" -eq "release") {
@@ -70,6 +69,7 @@ jobs:
             Write-Host "Classic publish is only executed on release runs; skipping on manual run."
             echo "ready=false" >> $env:GITHUB_OUTPUT
           }
+        shell: pwsh
       - name: Get Sandboxie-Classic version
         id: get_version
         run: |

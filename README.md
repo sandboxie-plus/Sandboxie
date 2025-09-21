@@ -154,12 +154,14 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - wilders-soccerfan - Documentation additions
 - LepordCat - Documentation additions
 - stdedos - Documentation additions
+- habatake - UI additions, Code fixes
+- Polyester6719 - Documentation additions
 
 ## 🌏 Translators
 
 - czoins - Arabic
-- yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt, fzxx, Vstory, GT-Stardust - Simplified Chinese
-- TragicLifeHu, Hulen, xiongsp - Traditional Chinese
+- yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt, fzxx, Vstory, GT-Stardust, habatake - Simplified Chinese
+- TragicLifeHu, Hulen, xiongsp, habatake - Traditional Chinese
 - RockyTDR - Dutch
 - clexanis, Mmoi-Fr, hippalectryon-0, Monsieur Pissou - French (provided by email)
 - bastik-1001, APMichael - German
@@ -180,6 +182,6 @@ All translators are encouraged to look at the [Localization notes and tips](http
 
 ## 📚 Documentation Translators
 
-- Vstory, GT-Stardust, wzxjohn - Simplified Chinese
+- Vstory, GT-Stardust, wzxjohn, SOLEADO20, habatake - Simplified Chinese
 
 All documentation translators are encouraged to look at the [Multilingual Translation Contribution Guide](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519) before sending a translation.

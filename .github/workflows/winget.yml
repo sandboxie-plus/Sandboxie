@@ -29,42 +29,28 @@ jobs:
     needs: sync-upstream-winget-pkgs
     runs-on: windows-latest # action can only be run on Windows
     steps:
-      - name: Decide if we should publish Plus now (check)
+      - name: Check Sandboxie-Plus version
         id: check_plus
-        shell: pwsh
         run: |
-          # On release event, always publish
+          # Skip if not a release event
           if ("${{ github.event_name }}" -eq "release") {
-            "ready=true" >> $env:GITHUB_OUTPUT
-            exit 0
+            echo "ready=true" >> $env:GITHUB_OUTPUT
+          } else {
+            Write-Host "Plus publish is only executed on release runs; skipping on manual run."
+            echo "ready=false" >> $env:GITHUB_OUTPUT
           }
-          # On manual runs: check essential prerequisites
-          if (-not "${{ secrets.WINGET_TOKEN }}") {
-            Write-Warning "Missing WINGET_TOKEN; skipping Plus publish."
-            "ready=false" >> $env:GITHUB_OUTPUT
-            exit 0
-          }
-          try {
-            $resp = Invoke-RestMethod -Method GET -Uri "https://api.github.com/repos/sandboxie-plus/Sandboxie/releases/latest" -Headers @{ "Accept"="application/vnd.github+json" }
-            $hasAsset = $false
-            foreach ($a in $resp.assets) {
-              if ($a.name -match 'Sandboxie-Plus.*.exe$') { $hasAsset = $true; break }
-            }
-            if ($hasAsset) {
-              "ready=true" >> $env:GITHUB_OUTPUT
-            } else {
-              Write-Warning "No Sandboxie-Plus .exe asset found in latest release; skipping Plus publish."
-              "ready=false" >> $env:GITHUB_OUTPUT
-            }
-          } catch {
-            Write-Warning ("Could not inspect latest release: " + $_.Exception.Message + " ; skipping Plus publish.")
-            "ready=false" >> $env:GITHUB_OUTPUT
-          }
-
+        shell: pwsh
+      - name: Get Sandboxie-Plus version
+        id: get_version
+        run: |
+          $VERSION="${{ github.event.release.tag_name }}" -replace '^v'
+          echo "PLUS_VER=$VERSION" >> $env:GITHUB_OUTPUT
+        shell: pwsh
       - name: Publish Sandboxie-Plus
         if: steps.check_plus.outputs.ready == 'true'
         uses: vedantmgoyal9/winget-releaser@main
         with:
+          version: ${{ steps.get_version.outputs.PLUS_VER }}
           identifier: Sandboxie.Plus
           installers-regex: "Sandboxie-Plus.*.exe$"
           token: ${{ secrets.WINGET_TOKEN }}
@@ -73,26 +59,23 @@ jobs:
     needs: sync-upstream-winget-pkgs
     runs-on: windows-latest
     steps:
-      - name: Decide if we should publish Classic now (check)
+      - name: Check Sandboxie-Classic version
         id: check_classic
-        shell: pwsh
         run: |
-          # Classic requires the version from the release; run only on release event
+          # Skip if not a release event
           if ("${{ github.event_name }}" -eq "release") {
-            "ready=true" >> $env:GITHUB_OUTPUT
+            echo "ready=true" >> $env:GITHUB_OUTPUT
           } else {
             Write-Host "Classic publish is only executed on release runs; skipping on manual run."
-            "ready=false" >> $env:GITHUB_OUTPUT
+            echo "ready=false" >> $env:GITHUB_OUTPUT
           }
-
+        shell: pwsh
       - name: Get Sandboxie-Classic version
-        if: steps.check_classic.outputs.ready == 'true'
         id: get_version
         run: |
           $VERSION="${{ github.event.release.name }}" -replace '^.*/ '
-          "CLASSIC_VER=$VERSION" >> $env:GITHUB_OUTPUT
+          echo "CLASSIC_VER=$VERSION" >> $env:GITHUB_OUTPUT
         shell: pwsh
-
       - name: Publish Sandboxie-Classic
         if: steps.check_classic.outputs.ready == 'true'
         uses: vedantmgoyal9/winget-releaser@main

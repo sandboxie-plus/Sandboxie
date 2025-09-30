@@ -3,7 +3,7 @@ name: Publish to WinGet
 on:
   release:
     types: [released]
-  # Optional: allow manual runs for testing the sync
+  # Optional: allow manual runs for testing the sync or to retry publishing
   workflow_dispatch:
 
 jobs:
@@ -29,9 +29,28 @@ jobs:
     needs: sync-upstream-winget-pkgs
     runs-on: windows-latest # action can only be run on Windows
     steps:
+      - name: Check Sandboxie-Plus version
+        id: check_plus
+        run: |
+          # Skip if not a release event
+          if ("${{ github.event_name }}" -eq "release") {
+            echo "ready=true" >> $env:GITHUB_OUTPUT
+          } else {
+            Write-Host "Plus publish is only executed on release runs; skipping on manual run."
+            echo "ready=false" >> $env:GITHUB_OUTPUT
+          }
+        shell: pwsh
+      - name: Get Sandboxie-Plus version
+        id: get_version
+        run: |
+          $VERSION="${{ github.event.release.tag_name }}" -replace '^v'
+          echo "PLUS_VER=$VERSION" >> $env:GITHUB_OUTPUT
+        shell: pwsh
       - name: Publish Sandboxie-Plus
+        if: steps.check_plus.outputs.ready == 'true'
         uses: vedantmgoyal9/winget-releaser@main
         with:
+          version: ${{ steps.get_version.outputs.PLUS_VER }}
           identifier: Sandboxie.Plus
           installers-regex: "Sandboxie-Plus.*.exe$"
           token: ${{ secrets.WINGET_TOKEN }}
@@ -40,13 +59,25 @@ jobs:
     needs: sync-upstream-winget-pkgs
     runs-on: windows-latest
     steps:
+      - name: Check Sandboxie-Classic version
+        id: check_classic
+        run: |
+          # Skip if not a release event
+          if ("${{ github.event_name }}" -eq "release") {
+            echo "ready=true" >> $env:GITHUB_OUTPUT
+          } else {
+            Write-Host "Classic publish is only executed on release runs; skipping on manual run."
+            echo "ready=false" >> $env:GITHUB_OUTPUT
+          }
+        shell: pwsh
       - name: Get Sandboxie-Classic version
         id: get_version
         run: |
           $VERSION="${{ github.event.release.name }}" -replace '^.*/ '
-          "CLASSIC_VER=$VERSION" >> $env:GITHUB_OUTPUT
+          echo "CLASSIC_VER=$VERSION" >> $env:GITHUB_OUTPUT
         shell: pwsh
       - name: Publish Sandboxie-Classic
+        if: steps.check_classic.outputs.ready == 'true'
         uses: vedantmgoyal9/winget-releaser@main
         with:
           version: ${{ steps.get_version.outputs.CLASSIC_VER }}

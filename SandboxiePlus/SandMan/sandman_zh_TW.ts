@@ -9935,7 +9935,7 @@ instead of &quot;*&quot;.</source>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 2+ chars&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
         &lt;br&gt;
@@ -9953,7 +9953,28 @@ instead of &quot;*&quot;.</source>
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation>&lt;html&gt;
+        <oldsource>&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</oldsource>
+        <translation type="unfinished">&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;自動補全 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;自動補全&lt;/u&gt;: 在輸入3個或以上字元時彈出建議&lt;br&gt;
@@ -11443,7 +11464,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 2+ chars&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
         &lt;br&gt;
@@ -11461,7 +11482,28 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</source>
-        <translation>&lt;html&gt;
+        <oldsource>&lt;html&gt;
+    &lt;body&gt;
+        &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Auto-complete&lt;/u&gt;: Suggestions popup at 3+ chars&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ Select from popup to &lt;u&gt;auto-apply&lt;/u&gt; with correct case&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; to confirm selection&lt;br&gt;
+        &lt;br&gt;
+        • &lt;u&gt;Manual correction&lt;/u&gt;: After typing setting=&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; prompt appears for case correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Modes:&lt;/b&gt;&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Checked&lt;/span&gt;: Auto-complete + Case-correction&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partially Checked&lt;/span&gt;: Only manual &lt;code&gt;Ctrl+R&lt;/code&gt; correction&lt;br&gt;
+        &lt;br&gt;
+        &lt;b&gt;Navigation:&lt;/b&gt;&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: Move through popup&lt;br&gt;
+        • &lt;code&gt;Enter/Return&lt;/code&gt;: Confirm selection&lt;br&gt;
+        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: Force-open suggestions&lt;br&gt;
+       • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</oldsource>
+        <translation type="unfinished">&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;自動補全 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
         • &lt;u&gt;自動補全&lt;/u&gt;: 在輸入3個或以上字元時彈出建議&lt;br&gt;

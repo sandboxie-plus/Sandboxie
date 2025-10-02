@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.4 / 5.71.4] - 2025-09-xx
+## [1.16.4 / 5.71.4] - 2025-10-02
 
 ### Added
 - added option to block non administrative session leader (sandman.exe or sbiectrl.exe) from accessing encrypted box data

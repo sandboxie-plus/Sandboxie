@@ -4403,17 +4403,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="4228"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
-        <translation>샌드박스한 웹 브라우저 또는 샌드박스 안 한 웹 브라우저에서 %1을(를) 여시겠습니까?</translation>
+        <translation>%1을 샌드박스 또는 샌드박스 해제된 웹 브라우저에서 열겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4232"/>
         <source>Sandboxed</source>
-        <translation>샌드박스함</translation>
+        <translation>샌드박스</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4233"/>
         <source>Unsandboxed</source>
-        <translation>샌드박스 안 함</translation>
+        <translation>샌드박스 해제</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4399"/>
@@ -9666,26 +9666,26 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 팝업 표시&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;로 선택&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 확인.&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;수동 수정&lt;/u&gt;: setting= 입력 후&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키로 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 수동은 &lt;code&gt;Ctrl+R&lt;/code&gt;로 보정만 가능&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;: 선택 항목 확인&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 제안 항목 강제 열기&lt;br&gt;
-       • &lt;code&gt;Tab&lt;/code&gt;: 먼저 적용 또는 선택 항목 확인&lt;br&gt;
-    &lt;/body&gt;
+        <translation>&lt;html&gt;
+&lt;body&gt;
+&lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
+• &lt;u&gt;자동 완성&lt;/u&gt;: 2자 이상 입력 시 제안 팝업 표시&lt;br&gt;
+&amp;nbsp;&amp;nbsp;→ 팝업에서 대소문자를 정확하게 입력하여 &lt;u&gt;자동 적용&lt;/u&gt;할 항목 선택&lt;br&gt;
+&amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 내용 확인&lt;br&gt;
+&lt;br&gt;
+• &lt;u&gt;수동 수정&lt;/u&gt;: 설정 입력 후=&lt;br&gt;
+&amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키를 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
+◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 확인됨: &lt;code&gt;Ctrl+R&lt;/code&gt; 수동 수정만 가능&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
+• &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;
+• &lt;code&gt;Enter/Return&lt;/code&gt;: 선택 항목 확인&lt;br&gt;
+• &lt;code&gt;Ctrl+Space&lt;/code&gt;: 제안 항목 강제 열기&lt;br&gt;
+• &lt;code&gt;Tab&lt;/code&gt;: 먼저 적용 또는 선택 항목 확인&lt;br&gt;
+&lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
     <message>
@@ -11486,26 +11486,26 @@ Please note that this values are currently user specific and saved globally for 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
-    &lt;body style=&quot;color: #333;&quot;&gt;
-        &lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;자동 완성&lt;/u&gt;: 3자 이상 입력 시 제안 팝업 표시&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ 팝업에서 올바른 대문자로 &lt;u&gt;자동 적용&lt;/u&gt;로 선택&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 확인.&lt;br&gt;
-        &lt;br&gt;
-        • &lt;u&gt;수동 수정&lt;/u&gt;: setting= 입력 후&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키로 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 선택됨&lt;/span&gt;: 수동은 &lt;code&gt;Ctrl+R&lt;/code&gt;로 보정만 가능&lt;br&gt;
-        &lt;br&gt;
-        &lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;
-        • &lt;code&gt;Enter/Return&lt;/code&gt;: 선택 항목 확인&lt;br&gt;
-        • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 제안 항목 강제 열기&lt;br&gt;
-       • &lt;code&gt;Tab&lt;/code&gt;: 먼저 적용 또는 선택 항목 확인&lt;br&gt;
-    &lt;/body&gt;
+        <translation>&lt;html&gt;
+&lt;body&gt;
+&lt;b&gt;자동 완성 및 대소문자 수정&lt;/b&gt;&lt;br&gt;
+• &lt;u&gt;자동 완성&lt;/u&gt;: 2자 이상 입력 시 제안 팝업 표시&lt;br&gt;
+&amp;nbsp;&amp;nbsp;→ 팝업에서 대소문자를 정확하게 입력하여 &lt;u&gt;자동 적용&lt;/u&gt;할 항목 선택&lt;br&gt;
+&amp;nbsp;&amp;nbsp;→ &lt;code&gt;Enter/Return&lt;/code&gt; 키를 눌러 선택 내용 확인&lt;br&gt;
+&lt;br&gt;
+• &lt;u&gt;수동 수정&lt;/u&gt;: setting= 입력 후&lt;br&gt;
+&amp;nbsp;&amp;nbsp;→ &lt;code&gt;Ctrl+R&lt;/code&gt; 키를 눌러 대소문자 수정 프롬프트 표시&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;모드:&lt;/b&gt;&lt;br&gt;
+✓ &lt;span style=&quot;color: #009900;&quot;&gt;선택됨&lt;/span&gt;: 자동 완성 + 대소문자 수정&lt;br&gt;
+◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;부분적으로 확인됨: &lt;code&gt;Ctrl+R&lt;/code&gt; 수동 수정만 가능&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;탐색:&lt;/b&gt;&lt;br&gt;
+• &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 팝업을 통해 이동&lt;br&gt;
+• &lt;code&gt;Enter/Return&lt;/code&gt;: 선택 항목 확인&lt;br&gt;
+• &lt;code&gt;Ctrl+Space&lt;/code&gt;: 제안 항목 강제 열기&lt;br&gt;
+• &lt;code&gt;Tab&lt;/code&gt;: 먼저 적용 또는 선택 항목 확인&lt;br&gt;
+&lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
     <message>

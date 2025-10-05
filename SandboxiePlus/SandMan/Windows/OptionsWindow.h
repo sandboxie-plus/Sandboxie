@@ -56,6 +56,7 @@ private slots:
 	bool OnPickIcon();
 	void OnPickColor();
 	void OnColorSlider(int value);
+	void OnColorReset();
 
 	void OnBoxTypChanged();
 	void UpdateBoxType();
@@ -577,6 +578,8 @@ protected:
 	bool m_ConfigDirty;
 	QColor m_BorderColor;
 	QString m_BoxIcon;
+	bool m_CustomColor;
+	bool m_SliderCustomColor;
 
 	bool m_HoldBoxType;
 
@@ -648,6 +651,7 @@ private:
 	QCheckBox* m_pUseIcon;
 	QToolButton* m_pPickIcon;
 	QSlider* m_pColorSlider;
+	QToolButton* m_pColorReset;
 
 	struct SDbgOpt {
 		QString Name;

@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.4 / 5.71.4] - 2025-09-xx
+## [1.16.4 / 5.71.4] - 2025-10-02
 
 ### Added
 - added option to block non administrative session leader (sandman.exe or sbiectrl.exe) from accessing encrypted box data
@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Sandboxie-Plus 1.16.3 Fails to Connect to Driver on Windows Preview Build 27943 [#5003](https://github.com/sandboxie-plus/Sandboxie/issues/5003)
+- fixed latest signal crashing
 
 ### Changed
 - improved checks in Thread_CheckObject_CommonEx for encrypted boxes

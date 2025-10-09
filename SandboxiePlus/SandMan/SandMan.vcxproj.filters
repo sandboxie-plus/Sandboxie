@@ -243,6 +243,9 @@
     <ClCompile Include="Views\SbieView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\EditorSettingsWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -403,6 +406,9 @@
     <QtMoc Include="Helpers\IniHighlighter.h">
       <Filter>Helpers</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\EditorSettingsWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -449,6 +455,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\ExtractDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\EditorSettingsWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

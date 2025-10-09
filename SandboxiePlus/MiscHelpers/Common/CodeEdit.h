@@ -35,7 +35,7 @@ public:
 	void SetCaseCorrectionCallback(std::function<QString(const QString&)> callback);
 	void SetCompletionFilterCallback(std::function<bool(const QString&)> callback);
 	void SetCaseCorrectionFilterCallback(std::function<bool(const QString&)> callback);
-	void SetTooltipCallback(std::function<QString(const QString&)> tooltipCallback);
+	void SetPopupTooltipCallback(std::function<QString(const QString&)> tooltipCallback);
 
 	// Static autocompletion mode control (similar to tooltip mode)
 	static void SetAutoCompletionMode(int checkState);

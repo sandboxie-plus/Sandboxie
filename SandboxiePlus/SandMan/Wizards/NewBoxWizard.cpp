@@ -11,6 +11,7 @@
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include "../Windows/BoxImageWindow.h"
 #include "../AddonManager.h"
+#include <QElapsedTimer>
 
 
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)

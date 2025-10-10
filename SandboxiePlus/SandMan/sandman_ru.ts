@@ -131,42 +131,42 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="884"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="885"/>
         <source>Advanced Sandbox options</source>
         <translation>Расширенные опции песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="885"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="886"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>На этой странице можно настроить дополнительные опции песочницы.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="897"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="898"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <translation>Запретить программам в песочнице на хосте, загружать DLL из песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="898"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="899"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <translation>Эта функция может снизить совместимость, поскольку она также не позволяет процессам, расположенным в песочнице, записывать данные в процессы, расположенные на хосте, и даже запускать их.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="905"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="906"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
         <translation>Эта функция может привести к ухудшению пользовательского опыта, поскольку она также не позволяет делать обычные снимки экрана.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="910"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="911"/>
         <source>Shared Template</source>
         <translation>Общий шаблон</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="911"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
         <source>Shared template mode</source>
         <translation>Режим общего шаблона</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="912"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="913"/>
         <source>This setting adds a local template or its settings to the sandbox configuration so that the settings in that template are shared between sandboxes.
 However, if &apos;use as a template&apos; option is selected as the sharing mode, some settings may not be reflected in the user interface.
 To change the template&apos;s settings, simply locate the &apos;%1&apos; template in the App Templates list under Sandbox Options, then double-click on it to edit it.
@@ -177,62 +177,62 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
 Чтобы отключить этот шаблон для песочницы, просто снимите флажок с него в списке шаблонов.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="918"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
         <source>This option does not add any settings to the box configuration and does not remove the default box settings based on the removal settings within the template.</source>
         <translation>Эта опция не добавляет никаких настроек в конфигурацию песочницы и не удаляет настройки песочницы по умолчанию на основе настроек удаления в шаблоне.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="919"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="920"/>
         <source>This option adds the shared template to the box configuration as a local template and may also remove the default box settings based on the removal settings within the template.</source>
         <translation>Эта опция добавляет общий шаблон в конфигурацию песочницы в качестве локального шаблона, а также может удалить настройки песочницы по умолчанию на основе настроек удаления в шаблоне.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="920"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="921"/>
         <source>This option adds the settings from the shared template to the box configuration and may also remove the default box settings based on the removal settings within the template.</source>
         <translation>Эта опция добавляет настройки из общего шаблона в конфигурацию песочницы, а также может удалить настройки песочницы по умолчанию на основе настроек удаления в шаблоне.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="921"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="922"/>
         <source>This option does not add any settings to the box configuration, but may remove the default box settings based on the removal settings within the template.</source>
         <translation>Эта опция не добавляет никаких настроек в конфигурацию песочницы, но может удалить настройки песочницы по умолчанию на основе настроек удаления в шаблоне.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="929"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="930"/>
         <source>Remove defaults if set</source>
         <translation>Удалить настройки по умолчанию, если они установлены</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="936"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="937"/>
         <source>Shared template selection</source>
         <translation>Секция общего шаблона</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="958"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="959"/>
         <source>This option specifies the template to be used in shared template mode. (%1)</source>
         <translation>Эта опция указывает шаблон, который будет использоваться в режиме общего шаблона. (%1)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="923"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="924"/>
         <source>Disabled</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="890"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="891"/>
         <source>Advanced Options</source>
         <translation>Расширенные опции</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="904"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="905"/>
         <source>Prevent sandboxed windows from being captured</source>
         <translation>Предотвращение захвата окон из песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="925"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="926"/>
         <source>Use as a template</source>
         <translation>Использовать как шаблон</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="927"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="928"/>
         <source>Append to the configuration</source>
         <translation>Добавить в конфигурацию</translation>
     </message>
@@ -383,37 +383,37 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
 <context>
     <name>CBoxTypePage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="319"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="320"/>
         <source>Create new Sandbox</source>
         <translation>Создать новую песочницу</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="331"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="332"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
         <translation>Песочница изолирует вашу хост-систему от процессов, выполняющихся внутри нее, и не позволяет им вносить необратимые изменения в другие программы и данные на вашем компьютере. </translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
         <translation>Песочница изолирует вашу хост-систему от процессов, запущенных в ней, и не позволяет им вносить постоянные изменения в другие программы и данные на вашем компьютере. Уровень изоляции влияет на вашу безопасность, а также на совместимость с приложениями, поэтому от типа выбранной песочницы зависит уровень ее изоляции. Sandboxie также может защитить ваши личные данные от доступа со стороны процессов, запущенных под его контролем.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="346"/>
         <source>Enter box name:</source>
         <translation>Введите имя песочницы:</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="360"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="361"/>
         <source>Select box type:</source>
         <translation>Выберите тип песочницы:</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="400"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="401"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation>Песочница с &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;усиленной безопасностью&lt;/a&gt; и &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;защитой данных&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="401"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="402"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
@@ -422,59 +422,59 @@ The entire user profile remains hidden, ensuring maximum security.</source>
 Весь профиль пользователя остается скрытым, что обеспечивает максимальную безопасность.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="404"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="405"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
         <translation>Песочница с &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;усиленной безопасностью&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="405"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="406"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
         <translation>Этот тип песочницы обеспечивает высочайший уровень защиты за счет значительного уменьшения поверхности атаки, подверженной процессам в песочнице.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="406"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation>Песочница с &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;защитой данных&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="408"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
         <translation>В этом типе песочницы процессам в песочнице запрещается доступ к каким-либо личным файлам или данным пользователя. Основное внимание уделяется защите пользовательских данных, поэтому
 только каталоги C:\Windows и C:\Program Files доступны процессам, работающим в этой песочнице. Это гарантирует, что личные файлы останутся в безопасности.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="409"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="410"/>
         <source>Standard Sandbox</source>
         <translation>Стандартная песочница</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="410"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="411"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
         <translation>Этот тип песочницы предлагает поведение по умолчанию, как в Sandboxie classic. Он предоставляет пользователям знакомую и надежную схему песочницы. 
 Приложения можно запускать в этой песочнице, гарантируя, что они будут работать в контролируемом и изолированном пространстве.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="412"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="413"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Контейнер для приложений&lt;/a&gt; с &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;защитой данных&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="413"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="416"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="414"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="417"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
         <translation>Этот тип песочницы отдает приоритет совместимости, обеспечивая при этом хороший уровень изоляции. Он предназначен для запуска доверенных приложений в отдельных контейнерах.
 Хотя уровень изоляции снижен по сравнению с другими типами песочниц, он обеспечивает улучшенную совместимость с широким спектром приложений, обеспечивая бесперебойную работу в песочнице.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="415"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="416"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
         <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Контейнер для приложений&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="425"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="426"/>
         <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
@@ -483,62 +483,62 @@ This ensures the utmost level of privacy and data protection within the confiden
 Это обеспечивает максимальный уровень конфиденциальности и защиты данных в конфиденциальной песочнице.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="448"/>
         <source>Hardened Sandbox with Data Protection</source>
         <translation>Песочница с усиленной изоляцией и защитой данных</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="448"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="449"/>
         <source>Security Hardened Sandbox</source>
         <translation>Песочница с усиленной изоляцией</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="449"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="450"/>
         <source>Sandbox with Data Protection</source>
         <translation>Песочница с защитой данных</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="450"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>Standard Isolation Sandbox (Default)</source>
         <translation>Песочница со стандартной изоляцией (по умолчанию)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="453"/>
         <source>Application Compartment with Data Protection</source>
         <translation>Контейнер для приложений с защитой данных</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="453"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="454"/>
         <source>Application Compartment Box</source>
         <translation>Контейнер для приложений</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="454"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="455"/>
         <source>Confidential Encrypted Box</source>
         <translation>Конфиденциальная зашифрованная песочница</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="579"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="580"/>
         <source>To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
         <translation>Для использования зашифрованных песочниц необходимо установить драйвер ImDisk, хотите его скачать и установить?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="472"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="473"/>
         <source>Remove after use</source>
         <translation>Удалить после использования</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="424"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="425"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypt&lt;/a&gt; Box content and set &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Зашифруйте&lt;/a&gt; содержимое песочницы и установите &lt;a href=&quot;sbie://docs/black-box&quot;&gt;конфиденциальность&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="473"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="474"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
         <translation>После завершения последнего процесса в песочнице, эта песочница и все данные в ней будут удалены.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="478"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="479"/>
         <source>Configure advanced options</source>
         <translation>Настроить дополнительные опции</translation>
     </message>
@@ -981,84 +981,84 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFilesPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="597"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="598"/>
         <source>Sandbox location and behavior</source>
         <translation>Местоположение и поведение песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="598"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="599"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
         <translation>На этой странице можно настроить расположение песочницы и ее поведение.
 Вы можете использовать %USER%, чтобы сохранить песочницу каждого пользователя в отдельной папке.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="603"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="604"/>
         <source>Sandboxed Files</source>
         <translation>Файлы в песочнице</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="626"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="627"/>
         <source>Select Directory</source>
         <translation>Выбрать каталог</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="634"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="635"/>
         <source>Virtualization scheme</source>
         <translation>Схема виртуализации</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="638"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="639"/>
         <source>Version 1</source>
         <translation>Версия 1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="639"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="640"/>
         <source>Version 2</source>
         <translation>Версия 2</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="645"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="646"/>
         <source>Separate user folders</source>
         <translation>Раздельные папки пользователей</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="650"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="651"/>
         <source>Use volume serial numbers for drives</source>
         <translation>Использовать серийные номера томов для дисков</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="655"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="656"/>
         <source>Auto delete content when last process terminates</source>
         <translation>Автоматическое удаление содержимого при завершении последнего процесса</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="662"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="663"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
         <translation>Включить немедленное восстановление файлов из мест восстановления</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="706"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="707"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
         <translation>Песочница не может быть расположена в корне раздела, пожалуйста, выберите папку.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="710"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="711"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
         <translation>Песочница не может быть расположена на сетевом ресурсе, выберите локальную папку.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="714"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
         <source>The selected box location is not a valid path.</source>
         <translation>Выбранное расположение песочницы не является допустимым путем.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="719"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="720"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <translation>Выбранное местоположение песочницы существует и не является пустым, рекомендуется выбрать новую или пустую папку. Вы уверены, что хотите использовать существующую папку?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="724"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="725"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <translation>Выбранное расположение песочницы не размещено на доступном в данный момент диске.</translation>
     </message>
@@ -1280,83 +1280,83 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CIsolationPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="740"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <source>Sandbox Isolation options</source>
         <translation>Опции изоляции песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="742"/>
         <source>On this page sandbox isolation options can be configured.</source>
         <translation>На этой странице можно настроить опции изоляции песочницы.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="746"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="747"/>
         <source>Network Access</source>
         <translation>Доступ к сети</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
         <source>Allow network/internet access</source>
         <translation>Разрешить доступ к сети/интернету</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="755"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="756"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>Блокировать доступ к сети/интернету, запрещая доступ к сетевым устройствам</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="757"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="758"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>Блокировать доступ к сети/интернету с помощью Windows Filtering Platform</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="763"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="764"/>
         <source>Allow access to network files and folders</source>
         <translation>Разрешить доступ к сетевым файлам и папкам</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="764"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="765"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="792"/>
         <source>This option is not recommended for Hardened boxes</source>
         <translation>Эта опция не рекомендуется для песочниц с усиленной изоляцией</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="769"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="770"/>
         <source>Prompt user whether to allow an exemption from the blockade</source>
         <translation>Предложить пользователю разрешить исключение из блокировки</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="775"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="776"/>
         <source>Admin Options</source>
         <translation>Опции администратора</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="779"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation>Снятие прав с групп Администраторы и Power Users</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="785"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="786"/>
         <source>Make applications think they are running elevated</source>
         <translation>Заставить приложения думать, что они работают с повышенными правами</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="790"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="791"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>Разрешить запуск MSIServer с системным токеном песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="797"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="798"/>
         <source>Box Options</source>
         <translation>Опции песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="801"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="802"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Использовать логин Sandboxie вместо анонимного токена</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="802"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="803"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>Использование пользовательского токена Sandboxie позволяет лучше изолировать отдельные песочницы друг от друга, а также показывает в колонке пользователя диспетчера задач имя песочницы, к которой принадлежит процесс. Однако у некоторых сторонних решений безопасности могут быть проблемы с пользовательскими токенами.</translation>
     </message>
@@ -1438,34 +1438,34 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CNewBoxWizard</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="33"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="34"/>
         <source>New Box Wizard</source>
         <translation>Мастер создания новой песочницы</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="76"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="77"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <translation>Содержимое этой песочницы будет помещено в зашифрованный файл-контейнер. Обратите внимание, что любое повреждение заголовка контейнера сделает все его содержимое навсегда недоступным. Повреждение может произойти в результате BSOD, сбоя оборудования хранения или перезаписи случайных файлов вредоносным приложением. Эта функция предоставляется в соответствии со строгой политикой &lt;b&gt;Нет резервного копирования, нет пощады&lt;/b&gt;. ВЫ, пользователь, несете ответственность за данные, которые вы помещаете в зашифрованную песочницу. &lt;br /&gt;&lt;br /&gt;ЕСЛИ ВЫ СОГЛАСНЫ НЕСТИ ПОЛНУЮ ОТВЕТСТВЕННОСТЬ ЗА ВАШИ ДАННЫЕ, НАЖМИТЕ [ДА], В противном случае НАЖМИТЕ [НЕТ].</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="111"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="112"/>
         <source>Add your settings after this line.</source>
         <translation>Добавьте свои настройки после этой строки.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="113"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="114"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="115"/>
         <source>Shared Template</source>
         <translation>Общий шаблон</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="289"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <translation>Новая песочница была создана с использованием новой &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;схемы виртуализации версии&#xa0;2&lt;/a&gt;, если у вас возникнут какие-либо непредвиденные проблемы с этой песочницей, переключитесь на схему виртуализации до версии 1 и сообщите о проблеме, возможность изменить этот пресет можно найти в опциях песочницы в группе &quot;Структура песочницы&quot;.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="82"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="291"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="83"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="292"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Больше не показывать это сообщение.</translation>
     </message>
@@ -6533,41 +6533,41 @@ Try submitting without the log attached.</source>
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1022"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1023"/>
         <source>Create the new Sandbox</source>
         <translation>Создать новую песочницу</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1033"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1034"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>Почти завершено, нажмите &quot;Готово&quot;, чтобы создать новую песочницу и завершить работу мастера.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1042"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1043"/>
         <source>Save options as new defaults</source>
         <translation>Сохранить опции как новые значения по умолчанию</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1053"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1054"/>
         <source>Skip this summary page when advanced options are not set</source>
         <translation>Пропустить эту страницу сводки, если расширенные опции не установлены</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1072"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1073"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 Эта песочница будет сохранена в: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1075"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1076"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <translation>
 Содержимое этой песочницы будет ПОТЕРЯНО, когда она будет закрыта, и песочница будет удалена.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1077"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1078"/>
         <source>
 This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
         <oldsource>
@@ -6576,35 +6576,35 @@ This box will DISCARD its content when its closed, its suitable only for tempora
 Эта песочница ТЕРЯЕТ свое содержимое, при закрытии, она подходит только для временных данных.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1079"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1080"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 Процессы в этой песочнице не смогут получить доступ к Интернету или локальной сети, это гарантирует, что все данные, к которым осуществляется доступ, останутся конфиденциальными.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1081"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1082"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <translation>
 В этой песочнице будет запускаться MSIServer (служба установщика *.msi) с системным токеном, это улучшает совместимость, но снижает изоляцию безопасности.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1083"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1084"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 Процессы в этой песочнице будут думать, что они запущены с правами администратора, но на самом деле не имеют их, поэтому установщики можно использовать даже в защищенной песочнице.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1085"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1086"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <translation>
 Процессы в этой песочнице будут запускаться с пользовательским токеном процесса, указывающим на песочницу, к которой они принадлежат.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="1124"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="1125"/>
         <source>Failed to create new box: %1</source>
         <translation>Не удалось создать новую песочницу: %1</translation>
     </message>

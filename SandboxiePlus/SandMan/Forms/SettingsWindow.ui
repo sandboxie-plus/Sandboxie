@@ -3112,75 +3112,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
          <string>Edit ini Section</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_16">
-         <item row="0" column="1">
-          <widget class="QCheckBox" name="chkValidateIniKeys">
-           <property name="toolTip">
-            <string>&lt;html&gt;
-    &lt;body&gt;
-        &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
-        &lt;br/&gt;
-        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
-            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed setting (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed setting (no longer available)&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future setting (unavailable)&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown setting&lt;/td&gt;&lt;/tr&gt;
-            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known setting&lt;/td&gt;&lt;/tr&gt;
-        &lt;/table&gt;
-        &lt;br/&gt;
-        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known settings are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>Validate</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
+         <item row="1" column="0" colspan="8">
+          <widget class="QPlainTextEdit" name="txtIniSection">
+           <property name="lineWrapMode">
+            <enum>QPlainTextEdit::LineWrapMode::NoWrap</enum>
            </property>
           </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="QPushButton" name="btnSaveIni">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Save</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QPushButton" name="btnEditIni">
-           <property name="text">
-            <string>Edit ini</string>
-           </property>
-           <property name="checkable">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="6">
-          <widget class="QPushButton" name="btnCancelEdit">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Cancel</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Orientation::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item row="0" column="2">
           <widget class="QCheckBox" name="chkEnableTooltips">
@@ -3210,10 +3147,23 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="7">
-          <widget class="QPlainTextEdit" name="txtIniSection">
-           <property name="lineWrapMode">
-            <enum>QPlainTextEdit::LineWrapMode::NoWrap</enum>
+         <item row="0" column="7">
+          <widget class="QPushButton" name="btnCancelEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btnEditIni">
+           <property name="text">
+            <string>Edit ini</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -3247,6 +3197,72 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
            </property>
            <property name="checked">
             <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="6">
+          <widget class="QPushButton" name="btnSaveIni">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Save</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="chkValidateIniKeys">
+           <property name="toolTip">
+            <string>&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
+        &lt;br/&gt;
+        &lt;table cellspacing=&quot;3&quot; cellpadding=&quot;0&quot;&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;font-style: italic; color:#000000; background-color:#ffff00;&quot;&gt;Black Text, Yellow BG, Italic&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Renamed setting (old name - invalid)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: line-through; color:#ffffff; background-color:#000000;&quot;&gt;White Text, Black BG, Strikeout&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Removed setting (no longer available)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#008b8b; background-color:#ffffff;&quot;&gt;Dark Cyan Text, White BG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Future setting (unavailable)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;text-decoration: underline; color: #ff0000;&quot;&gt;Red Spell Check Underline&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Invalid/unknown setting&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td style=&quot;white-space: nowrap;&quot;&gt;- &lt;span style=&quot;color:#c03224;&quot;&gt;Dark/Light Red Text&lt;/span&gt;&lt;/td&gt;&lt;td&gt;: Valid/known setting&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;
+        &lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;Note&lt;/span&gt;: Only valid/known settings are functional in this version. However, no global or per-box validation is performed. Some settings may appear valid but might not work in all contexts.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Validate</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QPushButton" name="btnEditorSettings">
+           <property name="maximumSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Editor settings</string>
+           </property>
+           <property name="text">
+            <string>⚙</string>
            </property>
           </widget>
          </item>

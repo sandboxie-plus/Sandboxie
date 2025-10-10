@@ -5,7 +5,7 @@
 
 #define TAB_SPACES "   "
 
-CCodeEdit::AutoCompletionMode CCodeEdit::s_autoCompletionMode = AutoCompletionMode::FullAuto;
+CCodeEdit::AutoCompletionMode CCodeEdit::s_autoCompletionMode = AutoCompletionMode::Disabled;
 QMutex CCodeEdit::s_autoCompletionModeMutex;
 
 bool CCodeEdit::s_fuzzyCacheLoggingEnabled = false;
@@ -1451,7 +1451,7 @@ void CCodeEdit::SetCompletionFilterCallback(std::function<bool(const QString&)> 
 	m_completionFilterCallback = std::move(callback);
 }
 
-void CCodeEdit::SetTooltipCallback(std::function<QString(const QString&)> tooltipCallback)
+void CCodeEdit::SetPopupTooltipCallback(std::function<QString(const QString&)> tooltipCallback)
 {
 	m_tooltipCallback = std::move(tooltipCallback);
 

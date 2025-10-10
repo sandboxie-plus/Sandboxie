@@ -30,6 +30,7 @@ HEADERS += ./stdafx.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
+    ./Windows/EditorSettingsWindow.h \
     ./Windows/SelectBoxWindow.h \
     ./Windows/SupportDialog.h \
     ./Windows/TestProxyDialog.h \
@@ -79,6 +80,7 @@ SOURCES += ./main.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Helpers/TabOrder.cpp \
     ./Windows/OptionsWindow.cpp \
+    ./Windows/EditorSettingsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
     ./Windows/SettingsWindow.cpp \
@@ -103,7 +105,8 @@ SOURCES += ./main.cpp \
     ./Engine/SysObject.cpp \
     ./AddonManager.cpp
 
-FORMS += ./Forms/SelectBoxWindow.ui \
+FORMS += ./Forms/EditorSettingsWindow.ui \
+    ./Forms/SelectBoxWindow.ui \
     ./Forms/OptionsWindow.ui \
     ./Forms/PopUpWindow.ui \
     ./Forms/RecoveryWindow.ui \

@@ -64,6 +64,7 @@ public:
 
 	void LoadCompletionConsent();
 	void SaveCompletionConsent();
+	int ShowConsentDialog(); // Returns: 0=Unchecked, 1=PartiallyChecked(Basic), 2=Checked(Full)
 
 signals:
 	void OptionsChanged(bool bRebuildUI = false);
@@ -141,6 +142,7 @@ private slots:
 
 	void SetIniEdit(bool bEnable);
 	void OnEditIni();
+	void OnEditorSettings();
 	void OnIniValidationToggled(int state);
 	void OnTooltipToggled(int state);
 	void OnAutoCompletionToggled(int state);
@@ -197,6 +199,7 @@ protected:
 
 	bool	m_bRebuildUI;
 	bool	m_HoldChange;
+	bool	m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
 	int 	m_CompatLoaded;
 	QString m_NewPassword;
 	bool	m_MessagesChanged;

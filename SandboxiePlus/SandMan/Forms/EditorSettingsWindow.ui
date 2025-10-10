@@ -93,7 +93,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Control</string>
+       <string>State</string>
       </property>
      </column>
      <column>

@@ -35,7 +35,7 @@
 3. 持续维护我们的 [Sandboxie-docs 仓库](https://github.com/sandboxie-plus/sandboxie-docs)，提交多项有意义的修改。我们急需更多志愿者，确保文档能及时跟进 [CHANGELOG.md](./CHANGELOG.md) 中提到的新设置。  
 4. 提交可修复特定问题或引入全新功能的代码。  
 5. 若想成为在 [Sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) 或 [Sandboxie](https://github.com/sandboxie-plus/Sandboxie) 仓库的 [协作者](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-personal-account-settings/permission-levels-for-a-personal-account-repository#collaborator-access-for-a-repository-owned-by-a-personal-account)
-需通过诸如（持续为打开的议题（issues）提供帮助和/或娴熟处理拉取请求（pull requests））的方式证明自己的能力
+需通过诸如"持续为打开的议题（issues）提供帮助"和/或"娴熟处理拉取请求（pull requests）"的方式证明自己的能力
 
 如果你愿意成为新贡献者或协作者，请通过[该邮箱](https://xanasoft.com/contact/)联系我们，以获取更多详情。
 

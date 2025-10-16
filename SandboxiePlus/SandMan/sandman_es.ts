@@ -877,7 +877,7 @@ Error: %1</translation>
     <message>
         <location filename="../MiscHelpers/Common/CheckableComboBox.cpp" line="12"/>
         <source>Select Items...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar elementos...</translation>
     </message>
 </context>
 <context>
@@ -885,7 +885,7 @@ Error: %1</translation>
     <message>
         <location filename="../MiscHelpers/Common/CheckableMessageBox.cpp" line="52"/>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>No preguntar de nuevo</translation>
     </message>
 </context>
 <context>
@@ -902,22 +902,22 @@ Error: %1</translation>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1006"/>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2095"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1011"/>
         <source>FindNext</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar Siguiente</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1021"/>
         <source>GoTo</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir A</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="1438"/>
         <source>Did you mean: %1? (Press Ctrl+R to replace)</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Quisiste decir: %1? (Presione Ctrl+R para reemplazar)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2095"/>
@@ -927,12 +927,17 @@ Error: %1</translation>
 + Alt: Whole Words
 
 Find String:</source>
-        <translation type="unfinished"></translation>
+        <translation>F3: Buscar Siguiente
++ Shift: Hacia atrás
++ Ctrl: Diferenciando mayúsculas y minúsculas
++ Alt: Palabras completas
+
+Buscar Cadena:</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/CodeEdit.cpp" line="2121"/>
         <source>Go to Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir a Línea:</translation>
     </message>
 </context>
 <context>
@@ -1146,12 +1151,12 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="707"/>
         <source>A sandbox cannot be located at the root of a partition, please select a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Una sandbox no se puede ubicar en la raíz de una partición, por favor elija una carpeta.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="711"/>
         <source>A sandbox cannot be located on a network share, please select a local folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Una sandbox no se puede situar en una ubicación en red, por favor elija una carpeta local.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="715"/>
@@ -1279,35 +1284,35 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="469"/>
         <source>Validate (Failed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Validar (Fallido)</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="802"/>
         <source>Added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Agragado en versión</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="803"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1819"/>
         <source>Removed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminado en versión</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="804"/>
         <source>Re-added in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Re-agregado en versión</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="805"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1818"/>
         <source>Renamed in version</source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrado en versión</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="806"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1820"/>
         <source>Superseded by</source>
-        <translation type="unfinished"></translation>
+        <translation>Reemplazado por</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -1328,29 +1333,29 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1430"/>
         <source>Category</source>
-        <translation type="unfinished">Categoria</translation>
+        <translation>Categoría</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1431"/>
         <source>Context</source>
-        <translation type="unfinished"></translation>
+        <translation>Contexto</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1432"/>
         <source>Requirements</source>
-        <translation type="unfinished"></translation>
+        <translation>Requisitos</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1592"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1845"/>
         <source>Syntax</source>
-        <translation type="unfinished"></translation>
+        <translation>Sintaxis</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1593"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1840"/>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
 </context>
 <context>
@@ -1475,32 +1480,32 @@ Puedes usar %USER% para guardar la sandbox de cada usuario en su propia carpeta.
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="7"/>
         <source>Item Chooser</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionador de Elemento</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="12"/>
         <source>Select items that will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione los elementos que serán usados.</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="29"/>
         <source>Add &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar &gt;</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="33"/>
         <source>&lt; Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt; Quitar</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="47"/>
         <source>Move Up</source>
-        <translation type="unfinished">Mover Arriba</translation>
+        <translation>Mover Arriba</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/ItemChooser.cpp" line="51"/>
         <source>Move Down</source>
-        <translation type="unfinished">Mover Abajo</translation>
+        <translation>Mover Abajo</translation>
     </message>
 </context>
 <context>
@@ -1670,12 +1675,12 @@ Do you still want to update?</source>
     <message>
         <location filename="OnlineUpdater.cpp" line="504"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Para asegurar una compatibilidad óptima con su software, Sandboxie necesita actualizar sus plantillas de compatibilidad. ¿Desea proceder?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="505"/>
         <source>Enable auto template updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar actualizaciones automáticas de plantillas</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="553"/>
@@ -1696,7 +1701,7 @@ Do you still want to update?</source>
     <message>
         <location filename="OnlineUpdater.cpp" line="588"/>
         <source>Update Check completed, no new updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprobación de Actualizaciones terminada, no hay actualizaciones</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="733"/>
@@ -1786,7 +1791,7 @@ Do you still want to update?</source>
     <message>
         <location filename="OnlineUpdater.cpp" line="1170"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hay una nueva Templates.ini disponible, ¿desea descargarla?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1220"/>
@@ -1917,7 +1922,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="161"/>
         <source>Name|Type|Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre|Tipo|Variable</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="779"/>
@@ -1984,12 +1989,12 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1484"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1485"/>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Plantilla</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1536"/>
@@ -2210,7 +2215,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1218"/>
         <source>Failed to Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al Cambiar Contraseña</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1227"/>
@@ -2298,14 +2303,16 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1500"/>
         <source>Autocomplete Consent Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Consentimiento de Autocompletar Requerido</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1501"/>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Do you wish to enable autocomplete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si tiene dudas acerca de los ajustes mostrados en la ventana de autocompletar, recomendamos encarecidamente que consulte la documentación del software o su código fuente antes de continuar. Activar esta función sin entenderla correctamente puede conllevar consecuencias indeseadas, de las cuales usted será responsable.
+
+¿Desea habilitar autocompletar?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="817"/>
@@ -2808,7 +2815,7 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="111"/>
         <source>None (Don&apos;t bind to adapter)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno (No unir al adaptador)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="206"/>
@@ -2849,7 +2856,7 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
         <location filename="Windows/OptionsNetwork.cpp" line="1167"/>
         <source>Entry %1 : IP or Port cannot be empty</source>
         <oldsource> entry: IP or Port cannot be empty</oldsource>
-        <translation type="unfinished"> entrada: IP o Puerto no pueden estar vacíos</translation>
+        <translation>Entrada %1: IP o Puerto no pueden estar vacíos</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1326"/>
@@ -2884,17 +2891,17 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="31"/>
         <source>Any File (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cualquier Archivo (*.*)</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="37"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Directorio</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/SettingsWidgets.cpp" line="38"/>
         <source>Browse</source>
-        <translation type="unfinished">Navegar</translation>
+        <translation>Navegar</translation>
     </message>
 </context>
 <context>
@@ -3446,7 +3453,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SbiePlusAPI.cpp" line="375"/>
         <source>Copying folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiando carpeta: %1</translation>
     </message>
 </context>
 <context>
@@ -3497,12 +3504,12 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SbiePlusAPI.cpp" line="877"/>
         <source> (Portable)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Portable)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="880"/>
         <source> (Virtual)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Virtual)</translation>
     </message>
     <message>
         <source>API Log</source>
@@ -4136,7 +4143,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="1949"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltan algunas plantillas de compatibilidad:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probablemente eliminadas, ¿desea quitarlas de todas las cajas?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2036"/>
@@ -4154,7 +4161,8 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandman no terminó de enumerar las actualizaciones de Windows la última vez, probablemente se quedó colgado.
+¿Desea desactivar el escaneo de actualizaciones de Windows de la detección del software de compatibilidad?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2818"/>
@@ -4267,7 +4275,7 @@ Error: %1</translation>
     <message>
         <location filename="SandMan.cpp" line="4130"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al copiar directorio &apos;%1&apos; a &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4228"/>
@@ -5429,7 +5437,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="112"/>
         <source> fake Admin</source>
-        <translation type="unfinished"></translation>
+        <translation> falso Administrador</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="115"/>
@@ -5550,7 +5558,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="246"/>
         <source>Duplicate Box with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicar Caja con Contenido</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="247"/>
@@ -5813,7 +5821,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="381"/>
         <source>Duplicate Sandbox with Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicar Sandbox con Contenido</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="382"/>
@@ -5898,27 +5906,27 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1350"/>
         <source>&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1352"/>
         <source>... and %1 more</source>
-        <translation type="unfinished"></translation>
+        <translation>... y %1 más</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1477"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>ADVERTENCIA: El editor del registro abierto no está aislado, sea cauteloso y únicamente haga cambios a las ubicaciones de sandbox preseleccionadas.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1557"/>
         <source>Not Created</source>
-        <translation type="unfinished"></translation>
+        <translation>No Creado</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1566"/>
         <source>Copying: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiando %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1611"/>
@@ -5933,17 +5941,17 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1658"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Está seguro de que desea eliminar la(s) siguiente(s) caja(s)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Advertencia: ¡El contenido de la caja también será eliminado!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1723"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Desea eliminar el contenido de la siguiente caja?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1738"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Está seguro de que desea eliminar el contenido de las siguientes cajas?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1868"/>
@@ -6065,7 +6073,7 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="1310"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
-        <translation type="unfinished">No se puede usar el símbolo &apos;,()&apos; en los nombres de Sandbox y Grupo de Caja.</translation>
+        <translation>Ni el nombre de la Sandbox ni el del Grupo de Cajas pueden usar el símbolo &apos;,()&apos; ni caracteres de control.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1315"/>
@@ -7059,7 +7067,7 @@ Do you wish to enable autocomplete?</source>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="38"/>
         <source>Creation Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de Creación</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="56"/>
@@ -10481,7 +10489,7 @@ Por favor note que estos valores son especificos para usuario y guardados global
     <message>
         <location filename="../MiscHelpers/Common/FlexError.h" line="21"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
 </context>
 <context>
@@ -11238,32 +11246,32 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar el nuevo estilo de SandMan en Windows 11</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1377"/>
         <source>Ini Editor Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de editor ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
         <source>UI Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuente de IU</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1413"/>
         <source>Select Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Elegir Tipografía</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1423"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Reestablecer Tipografía</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1762"/>
         <source>Cert Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de Certificado</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1844"/>
@@ -11273,12 +11281,12 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1877"/>
         <source>Eval Cert</source>
-        <translation type="unfinished"></translation>
+        <translation>Probar Certificado</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1919"/>
         <source>Sandboxie-Plus Version: 0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus Versión: 0.0.0</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>
@@ -11294,37 +11302,37 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
         <location filename="Forms/SettingsWindow.ui" line="2423"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</source>
         <oldsource>Use Sandboxies own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Usar el mensaje de Cuentas de Usuario (UAC) mejorado propio de Sandboxie (experimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2433"/>
         <source>Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2445"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar Entrada</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2453"/>
         <source>Import Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Ruta</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2475"/>
         <source>Sandbox Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2488"/>
         <source>Create Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear Caja Portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2514"/>
         <source>Import Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Caja Portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2576"/>
@@ -11334,12 +11342,12 @@ A diferencia del canal de vista previa, no incluye cambios no probados, potencia
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2586"/>
         <source>In the below list you can add paths to configuration inis of portable boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>En la lista inferior puede agragar rutas a las configuraciones ini de las cajas portables</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2606"/>
         <source>Add Portable Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir Raíz Portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2715"/>

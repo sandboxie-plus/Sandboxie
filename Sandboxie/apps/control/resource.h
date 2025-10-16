@@ -16,6 +16,8 @@
 #define ID_SANDBOX_RUN_EXPLORER         13
 #define ID_SANDBOX_MENU_SIZE            15
 #define ID_BORDER_WIDTH                 1001
+#define ID_BORDER_ALPHA                 1002
+#define ID_BORDER_ALPHA_LABEL           1003
 #define ID_SANDBOX_REVEAL               9990
 #define ID_SANDBOX_SET_LAYOUT           9997
 #define ID_SANDBOX_SET_FOLDER           9998

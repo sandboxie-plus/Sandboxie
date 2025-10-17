@@ -1127,7 +1127,7 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器设置</translation>
     </message>
 </context>
 <context>
@@ -2474,7 +2474,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1767"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>自动完成功能需要您的同意才能继续。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1769"/>
@@ -2483,37 +2483,41 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 Choose autocomplete mode:
 • Basic: Manual completion (Ctrl+Space) with case correction
 • Full: Automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您不确定自动完成弹出窗口中显示的设置，我们强烈建议您在继续之前查阅软件的文档或源代码。 在没有正确理解的情况下启用此功能可能会导致意想不到的后果，您将对此承担全部责任。
+
+选择自动完成模式：
+• 基本：手动完成（Ctrl+空格）并进行大小写更正
+• 完整：键入时自动完成并进行大小写更正</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1775"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>基本</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1776"/>
         <source>Enable manual completion only (Ctrl+Space) with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>仅启用手动完成 (Ctrl+Space) 并进行大小写更正</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1778"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>完整</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1779"/>
         <source>Enable automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>在键入时启用自动完成并进行大小写更正</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1781"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1782"/>
         <source>Keep autocomplete disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>保持自动完成功能处于禁用状态</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -6551,7 +6555,7 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3346"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>自动完成功能需要您的同意才能继续。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3348"/>
@@ -6560,37 +6564,41 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
 Choose autocomplete mode:
 • Basic: Manual completion (Ctrl+Space) with case correction
 • Full: Automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您不确定自动完成弹出窗口中显示的设置，我们强烈建议您在继续之前查阅软件的文档或源代码。 在没有正确理解的情况下启用此功能可能会导致意想不到的后果，您将对此承担全部责任。
+
+选择自动完成模式：
+• 基本：手动完成（Ctrl+空格）并进行大小写更正
+• 完整：键入时自动完成并进行大小写更正</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3354"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>基本</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3355"/>
         <source>Enable manual completion only (Ctrl+Space) with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>仅启用手动完成 (Ctrl+Space) 并进行大小写更正</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3357"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>完整</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3358"/>
         <source>Enable automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>在键入时启用自动完成并进行大小写更正</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3360"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3361"/>
         <source>Keep autocomplete disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>保持自动完成功能处于禁用状态</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
@@ -8053,7 +8061,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器设置</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
@@ -8063,42 +8071,42 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="91"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="96"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>状态</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="101"/>
         <source>Unchecked/Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>未选中/禁用</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="106"/>
         <source>Partial/Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>部分/基本</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="111"/>
         <source>Checked/Full</source>
-        <translation type="unfinished"></translation>
+        <translation>已选中/完整</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="116"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>重置</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="126"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>全部重置为默认值</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="129"/>
         <source>Reset all settings to their default values and remove custom config entries</source>
-        <translation type="unfinished"></translation>
+        <translation>将所有设置重置为默认值并删除自定义配置条目</translation>
     </message>
 </context>
 <context>
@@ -10383,12 +10391,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6168"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器设置</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6171"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6092"/>
@@ -11129,12 +11137,12 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3262"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器设置</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3265"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3209"/>

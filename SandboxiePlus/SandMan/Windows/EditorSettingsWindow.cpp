@@ -25,23 +25,23 @@ static EditorSettingInfo GetSettingInfo(int index)
 {
 	static const EditorSettingInfo settings[SETTING_COUNT] = {
 		// ValidateIniKeys
-		{"Options/ValidateIniKeys", "Validate INI Keys", false, 2, 
-		 "No validation", "-", "Full validation (default)"},
+		{"Options/ValidateIniKeys", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Validate INI Keys"), false, 2, 
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "No validation"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Full validation (default)")},
 		// EnableIniTooltips
-		{"Options/EnableIniTooltips", "Enable INI Tooltips", true, 1,
-		 "No tooltips", "Basic info (default)", "Full details"},
+		{"Options/EnableIniTooltips", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable INI Tooltips"), true, 1,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "No tooltips"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Basic info (default)"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Full details")},
 		// EnablePopupTooltips
-		{"Options/EnablePopupTooltips", "Enable Popup Tooltips", true, 1,
-		 "No tooltips", "Basic info (default)", "Full details"},
+		{"Options/EnablePopupTooltips", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable Popup Tooltips"), true, 1,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "No tooltips"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Basic info (default)"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Full details")},
 		// AutoCompletionConsent
-		{"Options/AutoCompletionConsent", "Auto Completion Consent", false, 0,
-		 "Not consented (default)", "-", "Consented"},
+		{"Options/AutoCompletionConsent", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Auto Completion Consent"), false, 0,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Not consented (default)"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Consented")},
 		// EnableAutoCompletion
-		{"Options/EnableAutoCompletion", "Enable Auto Completion", true, 0,
-		 "Disabled (default)", "Manual/Case", "Auto/Case"},
+		{"Options/EnableAutoCompletion", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable Auto Completion"), true, 0,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Disabled (default)"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Manual"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "While Typing")},
 		// EnableFuzzyMatching
-		{"Options/EnableFuzzyMatching", "Enable Fuzzy Matching", false, 0,
-		 "Disabled (default)", "-", "Enabled"}
+		{"Options/EnableFuzzyMatching", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable Fuzzy Matching"), false, 0,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Disabled (default)"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enabled")}
 	};
 	
 	return (index >= 0 && index < SETTING_COUNT) ? settings[index] : settings[0];
@@ -164,7 +164,7 @@ void CEditorSettingsWindow::InitializeTable()
 	ui.settingsTable->setColumnCount(6);
 	
 	QStringList headers;
-	headers << "Setting" << "State" << "Unchecked/Disabled" << "Partial/Basic" << "Checked/Full" << "Reset";
+	headers << tr("Setting") << tr("State") << tr("Unchecked") << tr("Partial") << tr("Checked") << tr("Reset");
 	ui.settingsTable->setHorizontalHeaderLabels(headers);
 	
 	// Create checkboxes based on setting metadata
@@ -190,17 +190,17 @@ void CEditorSettingsWindow::InitializeTable()
 		
 		// Column 1: State (checkbox)
 		ui.settingsTable->setCellWidget(i, 1, checkboxes[i]);
-		
+
 		// Column 5: Reset button
-		QPushButton* resetBtn = new QPushButton("Reset", this);
-		resetBtn->setToolTip("Reset this setting to default value");
+		QPushButton* resetBtn = new QPushButton(tr("Reset"), this);
+		resetBtn->setToolTip(tr("Reset this setting to default value"));
 		resetBtn->setMaximumWidth(60);
 		ui.settingsTable->setCellWidget(i, 5, resetBtn);
-		
+
 		// Connect reset button
 		connect(resetBtn, &QPushButton::clicked, this, [this, i]() {
 			ResetIndividualSetting(i);
-		});
+			});
 		
 		// Connect checkbox signals
 		connect(checkboxes[i], SIGNAL(stateChanged(int)), this, SLOT(ClearResetFlags()));

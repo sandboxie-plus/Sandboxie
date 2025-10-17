@@ -98,17 +98,17 @@
      </column>
      <column>
       <property name="text">
-       <string>Unchecked/Disabled</string>
+       <string>Unchecked</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Partial/Basic</string>
+       <string>Partial</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Checked/Full</string>
+       <string>Checked</string>
       </property>
      </column>
      <column>

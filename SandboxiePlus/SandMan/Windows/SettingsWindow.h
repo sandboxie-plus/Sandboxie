@@ -64,6 +64,7 @@ public:
 
 	void LoadCompletionConsent();
 	void SaveCompletionConsent();
+	QString localizedCompletionShortcut();
 	int ShowConsentDialog(); // Returns: 0=Unchecked, 1=PartiallyChecked(Basic), 2=Checked(Full)
 
 signals:

@@ -925,7 +925,7 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoreinstellungen</translation>
     </message>
 </context>
 <context>
@@ -2087,7 +2087,7 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1767"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Funktion zur automatischen Vervollständigung erfordert Ihre Zustimmung, um fortzufahren.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1769"/>
@@ -2096,45 +2096,41 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
 Choose autocomplete mode:
 • Basic: Manual completion (Ctrl+Space) with case correction
 • Full: Automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
+
+Wählen Sie den Modus der automatischen Vervollständigung:
+• Grundlegend: Manuelle Vervollständigung (Strg+Leertaste) mit Schreikorrektur
+• Vollständig: Automatische Vervollständigung während der Eingabe mit Schreikorrektur</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1775"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Grundlegend</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1776"/>
         <source>Enable manual completion only (Ctrl+Space) with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere nur die manuelle Vervollständigung (Strg+Leertaste) mit Schreikorrektur</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1778"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollständig</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1779"/>
         <source>Enable automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere die automatische Vervollständigung während der Eingabe mit Schreikorrektur</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1781"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1782"/>
         <source>Keep autocomplete disabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
-
-Do you wish to enable autocomplete?</source>
-        <translation type="vanished">Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
-
-Möchten Sie die automatische Vervollständigung aktivieren?</translation>
+        <translation>Behalte die automatische Vervollständigung deaktiviert</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="837"/>
@@ -5800,14 +5796,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Zustimmung für automatische Vervollständigung erforderlich</translation>
     </message>
     <message>
-        <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
-
-Do you wish to enable autocomplete?</source>
-        <translation type="vanished">Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
-
-Möchten Sie die automatische Vervollständigung aktivieren?</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="2825"/>
         <source>Click to reveal</source>
         <translation>Klicken zum Anzeigen</translation>
@@ -5997,7 +5985,7 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3346"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Funktion zur automatischen Vervollständigung erfordert Ihre Zustimmung, um fortzufahren.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3348"/>
@@ -6006,37 +5994,41 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
 Choose autocomplete mode:
 • Basic: Manual completion (Ctrl+Space) with case correction
 • Full: Automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
+
+Wählen Sie den Modus der automatischen Vervollständigung:
+• Grundlegend: Manuelle Vervollständigung (Strg+Leertaste) mit Schreikorrektur
+• Vollständig: Automatische Vervollständigung während der Eingabe mit Schreikorrektur</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3354"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Grundlegend</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3355"/>
         <source>Enable manual completion only (Ctrl+Space) with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere nur die manuelle Vervollständigung (Strg+Leertaste) mit Schreikorrektur</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3357"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollständig</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3358"/>
         <source>Enable automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere die automatische Vervollständigung während der Eingabe mit Schreikorrektur</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3360"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3361"/>
         <source>Keep autocomplete disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Behalte die automatische Vervollständigung deaktiviert</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1583"/>
@@ -7355,52 +7347,52 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoreinstellungen</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Editoreinstellungen konfigurieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Verwenden Sie die Checkboxen in der Tabelle, um die einzelnen Einstellungen zu konfigurieren. Die Tabelle zeigt, was die einzelnen Zustände bedeuten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="91"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellung</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="96"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Zustand</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="101"/>
         <source>Unchecked/Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht angehakt/Deaktiviert</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="106"/>
         <source>Partial/Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Teilweise angehakt/Grundlegend</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="111"/>
         <source>Checked/Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Angehakt/Vollständig</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="116"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="126"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles auf Standardwerte zurücksetzen</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="129"/>
         <source>Reset all settings to their default values and remove custom config entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Einstellungen auf ihre Standardwerte zurücksetzen und benutzerdefinierte Konfigurationseinträge entfernen</translation>
     </message>
 </context>
 <context>
@@ -8834,12 +8826,12 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6168"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoreinstellungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6171"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6042"/>
@@ -10947,12 +10939,12 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3262"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoreinstellungen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3265"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3143"/>

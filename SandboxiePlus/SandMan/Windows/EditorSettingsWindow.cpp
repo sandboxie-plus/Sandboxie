@@ -70,6 +70,10 @@ CEditorSettingsWindow::CEditorSettingsWindow(QWidget *parent)
 	LoadSettings();
 	StoreOriginalValues();
 	UpdateTable();
+
+	// Set Reset All button text and tooltip from code so translations are sourced here
+	ui.btnResetAll->setText(tr("Reset All to Defaults"));
+	ui.btnResetAll->setToolTip(tr("Reset all settings to their default values and remove custom config entries."));
 	
 	// Initialize previous consent state after loading settings
 	m_previousConsentState = chkAutoCompletionConsent->isChecked();
@@ -189,7 +193,11 @@ void CEditorSettingsWindow::InitializeTable()
 		ui.settingsTable->setItem(i, 0, nameItem);
 		
 		// Column 1: State (checkbox)
-		ui.settingsTable->setCellWidget(i, 1, checkboxes[i]);
+		QWidget* cbContainer = new QWidget(this);
+		QHBoxLayout* cbLayout = new QHBoxLayout(cbContainer);
+		cbLayout->setContentsMargins(0, 0, 0, 0);
+		cbLayout->addWidget(checkboxes[i], 0, Qt::AlignCenter);
+		ui.settingsTable->setCellWidget(i, 1, cbContainer);
 
 		// Column 5: Reset button
 		QPushButton* resetBtn = new QPushButton(tr("Reset"), this);
@@ -303,6 +311,9 @@ void CEditorSettingsWindow::OnSettingChanged()
 		}
 	}
 	
+	// Decide whether the app is using a dark palette so we can pick contrasting highlight colors
+	bool darkMode = (QApplication::palette().color(QPalette::Window).lightness() < 128);
+
 	// Highlight current states with color-coded backgrounds
 	for (int i = 0; i < SETTING_COUNT && i < ui.settingsTable->rowCount(); ++i) {
 		QCheckBox* cb = GetCheckBoxByIndex(i);
@@ -311,26 +322,47 @@ void CEditorSettingsWindow::OnSettingChanged()
 		int state = cb->checkState();
 		int col = 2; // Default to unchecked column (index 2)
 		QColor highlightColor;
+		QColor fgColor = QApplication::palette().color(QPalette::Text);
 		
 		if (state == Qt::Checked) {
 			col = 4; // Checked column (index 4)
-			highlightColor = QColor(144, 238, 144); // Light green for enabled/checked
+			if (darkMode) {
+				highlightColor = QColor(0, 150, 0, 160); // semi-transparent green for dark mode
+				fgColor = QColor(255, 255, 255);
+			} else {
+				highlightColor = QColor(144, 238, 144); // Light green for enabled/checked
+				fgColor = QColor(0, 0, 0);
+			}
 		} else if (state == Qt::PartiallyChecked) {
 			col = 3; // Partial column (index 3)
-			highlightColor = QColor(255, 255, 153); // Light yellow for partial/basic
+			if (darkMode) {
+				highlightColor = QColor(200, 200, 0, 160); // darker yellow for dark mode
+				fgColor = QColor(0, 0, 0);
+			} else {
+				highlightColor = QColor(255, 255, 153); // Light yellow for partial/basic
+				fgColor = QColor(0, 0, 0);
+			}
 		} else {
 			col = 2; // Unchecked column (index 2)
-			highlightColor = QColor(255, 182, 193); // Light red/pink for disabled/unchecked
+			if (darkMode) {
+				highlightColor = QColor(200, 50, 50, 160); // reddish tint for dark mode
+				fgColor = QColor(255, 255, 255);
+			} else {
+				highlightColor = QColor(255, 182, 193); // Light red/pink for disabled/unchecked
+				fgColor = QColor(0, 0, 0);
+			}
 		}
 		
 		QTableWidgetItem* item = ui.settingsTable->item(i, col);
 		if (item && item->text() != "-") {
 			// Apply color-coded highlighting
-			item->setData(Qt::BackgroundRole, highlightColor);
+			item->setData(Qt::BackgroundRole, QBrush(highlightColor));
 			// Also make the text bold for better visibility
 			QFont font = item->font();
 			font.setBold(true);
 			item->setFont(font);
+			// Set foreground to ensure contrast in dark mode
+			item->setForeground(QBrush(fgColor));
 		}
 	}
 	

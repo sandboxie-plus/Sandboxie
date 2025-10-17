@@ -88,32 +88,32 @@
      </attribute>
      <column>
       <property name="text">
-       <string>Setting</string>
+      <string notr="true">Setting</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>State</string>
+      <string notr="true">State</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Unchecked</string>
+      <string notr="true">Unchecked</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Partial</string>
+      <string notr="true">Partial</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Checked</string>
+      <string notr="true">Checked</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Reset</string>
+      <string notr="true">Reset</string>
       </property>
      </column>
     </widget>
@@ -123,10 +123,10 @@
      <item>
       <widget class="QPushButton" name="btnResetAll">
        <property name="text">
-        <string>Reset All to Defaults</string>
+      <string notr="true">Reset All to Defaults</string>
        </property>
        <property name="toolTip">
-        <string>Reset all settings to their default values and remove custom config entries</string>
+      <string notr="true">Reset all settings to their default values and remove custom config entries</string>
        </property>
       </widget>
      </item>

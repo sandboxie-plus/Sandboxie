@@ -41,6 +41,26 @@ std::wstring GetArgument(const std::vector<std::wstring>& arguments, std::wstrin
 	return L"";
 }
 
+struct SArgument
+{
+    bool IsSet = false;
+    std::wstring Value;
+};
+
+SArgument GetArgumentEx(const std::vector<std::wstring>& arguments, std::wstring name)
+{
+    SArgument arg;
+    for (size_t i = 0; i < arguments.size(); i++) {
+        if (_wcsicmp(arguments[i].substr(0, name.length()).c_str(), name.c_str()) == 0) {
+            arg.IsSet = true;
+            if(arguments[i].length() > name.length() + 1)
+                arg.Value = arguments[i].substr(name.length() + 1);
+            return arg;
+        }
+    }
+    return arg;
+}
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPWSTR    lpCmdLine,
@@ -60,6 +80,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //bool bUpdate = HasFlag(arguments, L"update");
 
     std::wstring mount = GetArgument(arguments, L"mount");
+    UINT number = _wtoi(GetArgument(arguments, L"number").c_str());
     std::wstring type = GetArgument(arguments, L"type");
     std::wstring size = GetArgument(arguments, L"size");
     std::wstring image = GetArgument(arguments, L"image");
@@ -68,13 +89,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     std::wstring format = GetArgument(arguments, L"format");
     std::wstring params = GetArgument(arguments, L"params");
 
-    std::wstring new_key = GetArgument(arguments, L"new_key");
+    SArgument new_key = GetArgumentEx(arguments, L"new_key");
     std::wstring backup = GetArgument(arguments, L"backup");
     std::wstring restore = GetArgument(arguments, L"restore");
 
     std::wstring proxy = GetArgument(arguments, L"proxy");
     std::wstring event = GetArgument(arguments, L"event");
     std::wstring section = GetArgument(arguments, L"section");
+    std::wstring mem = GetArgument(arguments, L"mem");
+
+    SArgument set_data = GetArgumentEx(arguments, L"set_data");
+    SArgument get_data = GetArgumentEx(arguments, L"get_data");
 
     ULONG64 uSize = 0;
     if(size.empty())
@@ -104,26 +129,75 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return CCryptoIO::RestoreHeader(pIO, restore);
 
     HANDLE hMapping = NULL;
-    WCHAR* pSection = NULL;
+    SSection* pSection = NULL;
     if (!section.empty()) {
         HANDLE hMapping = OpenFileMapping(FILE_MAP_READ | FILE_MAP_WRITE, FALSE, section.c_str());
         if (hMapping)
-            pSection = (WCHAR *)MapViewOfFile(hMapping, FILE_MAP_WRITE, 0, 0, 0x1000);
+            pSection = (SSection*)MapViewOfFile(hMapping, FILE_MAP_WRITE, 0, 0, 0x1000);
     }
+    if(!mem.empty()) {
+		if (pSection)
+			return ERR_INVALID_PARAM;
+		pSection = (SSection*)wcstoull(mem.c_str()+2, NULL, 16);
+	}
 
-    if (!key.empty() || !cipher.empty()) {
-        if (key.empty()) {
-            if (!pSection)
-                return ERR_KEY_REQUIRED;
-            pIO = new CCryptoIO(pIO, pSection, cipher);
-            memset(pSection, 0, 0x1000);
+    if (!key.empty() || pSection) {
+        CCryptoIO* pCrypto;
+        if (pSection) {
+            pCrypto = new CCryptoIO(pIO, pSection->in.pass, cipher);
+            memset(pSection, 0, sizeof(pSection->buffer)); // clear
         }
         else
-            pIO = new CCryptoIO(pIO, key.c_str(), cipher);
+            pCrypto = new CCryptoIO(pIO, key.c_str(), cipher);
+        pIO = pCrypto;
 
-        if (!new_key.empty()) {
-            return ((CCryptoIO*)pIO)->ChangePassword(new_key.c_str());
+        if (new_key.IsSet) {
+            if (!new_key.Value.empty())
+                return pCrypto->ChangePassword(new_key.Value.c_str());
+            else if (pSection && pSection->magic == SECTION_MAGIC && pSection->id == SECTION_PARAM_ID_KEY)
+                return pCrypto->ChangePassword((const WCHAR*)pSection->data);
+			else
+				return ERR_INVALID_PARAM;
         }
+
+        if (set_data.IsSet) 
+        {
+            const UCHAR* pData = NULL;
+            SIZE_T uSize = 0;
+
+            if (!set_data.Value.empty()) {
+                pData = (const UCHAR*)set_data.Value.c_str();
+                uSize = set_data.Value.length() * sizeof(WCHAR);
+            } else if (pSection && pSection->magic == SECTION_MAGIC && pSection->id == SECTION_PARAM_ID_DATA) {
+                pData = pSection->data;
+				uSize = pSection->size;
+			} else
+				return ERR_INVALID_PARAM;
+            
+            return pCrypto->SetData(pData, uSize);
+        }
+        else if(get_data.IsSet) 
+        {
+			UCHAR pData[1024];
+			SIZE_T uSize = 0;
+
+			int ret = pCrypto->GetData(pData, &uSize);
+			if (ret)
+				return ret;
+
+			if (pSection) {
+                pSection->magic = SECTION_MAGIC;
+                pSection->id = SECTION_PARAM_ID_DATA;
+				pSection->size = (USHORT)uSize;
+				memcpy(pSection->data, pData, uSize);
+			} else
+				wprintf(L"\n%.*s\n", (int)(uSize / sizeof(WCHAR)), (WCHAR*)pData);
+
+			return ERR_OK;
+		}
+
+        if (pSection)
+            pCrypto->SetDataSection(pSection);
     }
 
     int ret = pIO ? pIO->Init() : ERR_UNKNOWN_TYPE;
@@ -131,7 +205,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return ret;
 
 
-    CImDiskIO* pImDisk = new CImDiskIO(pIO, mount, format, params);
+    CImDiskIO* pImDisk = new CImDiskIO(pIO, mount, number, format, params);
 
     if (!proxy.empty())
         pImDisk->SetProxyName(proxy);

@@ -778,6 +778,18 @@ Desktop
 Programme
 .
 
+3115;txt;01
+Ja
+.
+
+3116;txt;01
+Nein
+.
+
+3117;txt;01
+Abbrechen
+.
+
 3198;txt;01
 Möchten Sie ein neues Programm in der Sandbox %2 starten?
 Sie haben diese Meldung erhalten, weil Sie AlertBeforeStart=y gesetzt haben.
@@ -876,9 +888,9 @@ Fenster zur Benutzerkontensteuerung aktivieren
 
 3243;txt;01
 Hinweis: Das Programm wird weiterhin unter der Aufsicht von Sandboxie ausgeführt, auch wenn
-Administratorrechte gewährt werden. Die Gewährung echter Administratorrechte kann jedoch das
-Risiko erhöhen, dass das Programm eine ungepatchte Windows-Schwachstelle oder einen anfälligen
-Treiber ausnutzt, um aus der Sandbox zu entkommen.
+Administratorrechte gewährt werden. Die Gewährung echter Administratorrechte kann jedoch
+das Risiko erhöhen, dass das Programm eine ungepatchte Windows-Schwachstelle oder einen
+anfälligen Treiber ausnutzt, um aus der Sandbox zu entkommen.
 .
 
 3244;txt;01
@@ -886,17 +898,20 @@ Programm %2 fordert Administratorrechte an, in der Sandbox:
 .
 
 3245;txt;01
-Sie können diese Anfrage zulassen (JA). In diesem Fall kann, je nach Systemeinstellungen,
-eine UAC Abfrage erscheinen. Sie können Administratorrechte verweigern, aber das Programm
-glauben lassen, dass es sie hat (NEIN). Oder Sie können den Start abbrechen (ABBRECHEN).
+Sie können diese Anfrage zulassen (JA). In diesem Fall kann, je nach
+Systemeinstellungen, eine UAC Abfrage erscheinen. Sie können
+Administratorrechte verweigern, aber das Programm glauben lassen,
+dass es sie hat (NEIN). Oder Sie können den Start abbrechen
+(ABBRECHEN).
 .
 
 3246;txt;01
 Hinweis: Das Programm wird weiterhin unter der Aufsicht von Sandboxie ausgeführt, auch wenn
-Administratorrechte gewährt werden. Die Gewährung echter Administratorrechte kann jedoch das
-Risiko erhöhen, dass das Programm eine ungepatchte Windows-Schwachstelle oder einen anfälligen
-Treiber ausnutzt, um aus der Sandbox zu entkommen. Daher ist es im Allgemeinen sicherer, nur
-Fake-Administratorrechte zu gewähren, obwohl dies bei manchen Installern zu Fehlern führen kann.
+Administratorrechte gewährt werden. Die Gewährung echter Administratorrechte kann jedoch
+das Risiko erhöhen, dass das Programm eine ungepatchte Windows-Schwachstelle oder einen
+anfälligen Treiber ausnutzt, um aus der Sandbox zu entkommen. Daher ist es im Allgemeinen
+sicherer, nur Fake-Administratorrechte zu gewähren, obwohl dies bei manchen Installern zu
+Fehlern führen kann.
 .
 
 3251;txt;01

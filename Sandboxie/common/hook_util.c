@@ -39,7 +39,7 @@
 
 
 static UCHAR *FindDllExport2(
-    void *DllBase, IMAGE_DATA_DIRECTORY *dir0, const UCHAR *ProcName, ULONG* pErr)
+    void *DllBase, IMAGE_DATA_DIRECTORY *dir0, const UCHAR *ProcName, ULONG* pErr, ULONG* pMaxLen)
 {
     void *proc = NULL;
     ULONG i, j, n;
@@ -51,6 +51,12 @@ static UCHAR *FindDllExport2(
 
         ULONG *names = (ULONG *)
             ((UCHAR *)DllBase + exports->AddressOfNames);
+
+        USHORT *ordinals = (USHORT *)
+            ((UCHAR *)DllBase + exports->AddressOfNameOrdinals);
+
+        ULONG *functions = (ULONG *)
+            ((UCHAR *)DllBase + exports->AddressOfFunctions);
 
         for (n = 0; ProcName[n]; ++n)
             ;
@@ -64,12 +70,7 @@ static UCHAR *FindDllExport2(
             }
             if (j == n) {
 
-                USHORT *ordinals = (USHORT *)
-                    ((UCHAR *)DllBase + exports->AddressOfNameOrdinals);
                 if (ordinals[i] < exports->NumberOfFunctions) {
-
-                    ULONG *functions = (ULONG *)
-                        ((UCHAR *)DllBase + exports->AddressOfFunctions);
 
                     proc = (UCHAR *)DllBase + functions[ordinals[i]];
                     break;
@@ -90,6 +91,27 @@ static UCHAR *FindDllExport2(
             if (pErr) *pErr = 0xc;
             proc = NULL;
         }
+
+        if (proc && pMaxLen)
+        {
+            //
+			// We want to find the max possible length of the export, we do this by finding the export
+			// closest after the export we found, and then subtracting the address of the export we found
+            //
+
+            void* next = (void*)(UINT_PTR)-1;
+            for (i = 0; i < exports->NumberOfNames; ++i) {
+
+                if (ordinals[i] < exports->NumberOfFunctions) {
+
+                    void *cur = (UCHAR *)DllBase + functions[ordinals[i]];
+                    if (cur > proc && cur < next)
+						next = cur;
+                }
+            }
+
+            *pMaxLen = (ULONG)((UCHAR*)next - (UCHAR*)proc);
+        }
     }
 
     return proc;
@@ -101,7 +123,7 @@ static UCHAR *FindDllExport2(
 //---------------------------------------------------------------------------
 
 
-_FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName, ULONG* pErr)
+_FX UCHAR *FindDllExportEx(void *DllBase, const UCHAR *ProcName, ULONG* pErr, ULONG* pMaxLen)
 {
     IMAGE_DOS_HEADER *dos_hdr;
     IMAGE_NT_HEADERS *nt_hdrs;
@@ -131,7 +153,7 @@ _FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName, ULONG* pErr)
         if (opt_hdr_32->NumberOfRvaAndSizes) {
 
             IMAGE_DATA_DIRECTORY *dir0 = &opt_hdr_32->DataDirectory[0];
-            func_ptr = FindDllExport2(DllBase, dir0, ProcName, pErr);
+            func_ptr = FindDllExport2(DllBase, dir0, ProcName, pErr, pMaxLen);
         }
     }
 
@@ -147,13 +169,24 @@ _FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName, ULONG* pErr)
         if (opt_hdr_64->NumberOfRvaAndSizes) {
 
             IMAGE_DATA_DIRECTORY *dir0 = &opt_hdr_64->DataDirectory[0];
-            func_ptr = FindDllExport2(DllBase, dir0, ProcName, pErr);
+            func_ptr = FindDllExport2(DllBase, dir0, ProcName, pErr, pMaxLen);
         }
     }
 
 #endif _WIN64
 
     return func_ptr;
+}
+
+
+//---------------------------------------------------------------------------
+// FindDllExport
+//---------------------------------------------------------------------------
+
+
+_FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName, ULONG* pErr)
+{
+    return FindDllExportEx(DllBase, ProcName, pErr, NULL);
 }
 
 
@@ -540,7 +573,7 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
     return ChromeTarget;
 }
 
-ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals)
+ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals, ULONG MaxLen)
 {
     if (!addr) 
         return NULL;
@@ -569,7 +602,8 @@ ULONGLONG * findFirefoxTarget(unsigned char* addr, unsigned char* g_originals)
                 target += delta;
 
                 // must point into g_originals which has INTERCEPTOR_MAX_ID entries (as of FF 138 it 53)
-                if (target >= (ULONG_PTR)g_originals && target <= (ULONG_PTR)(g_originals + sizeof(ULONG_PTR) * 60)) {
+                //if (target >= (ULONG_PTR)g_originals && target <= (ULONG_PTR)(g_originals + sizeof(ULONG_PTR) * 60)) {
+                if (target >= (ULONG_PTR)g_originals && target < (ULONG_PTR)(g_originals + MaxLen)) {
 
                     ChromeTarget = *(ULONGLONG**)target;
                     break;
@@ -604,6 +638,7 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
     ULONGLONG *longlongs = NULL;
     ULONGLONG *chrome64Target = NULL;
 
+    // deprecated
     if (func[0] == 0x50 &&	//push rax
         func[1] == 0x48 &&	//mov rax,?
         func[2] == 0xb8) 
@@ -623,8 +658,9 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
         ULONG uError = 0;
         // Note: A normal string like L"text" would not result in position independent code !!!
         // hence we create a string array and fill it byte by byte
-        wchar_t s_originals[] = { 'g', '_', 'o', 'r', 'i', 'g', 'i', 'n', 'a', 'l', 's', 0};
-        UCHAR* g_originals = FindDllExport(ProcBase, s_originals, &uError);
+        UCHAR s_originals[] = { 'g', '_', 'o', 'r', 'i', 'g', 'i', 'n', 'a', 'l', 's', 0};
+        ULONG MaxLen = 0;
+        UCHAR* g_originals = FindDllExportEx(ProcBase, s_originals, &uError, &MaxLen);
 #ifdef _DEBUG
         if (!g_originals) {
             SET_LAST_ERROR(uError);
@@ -632,30 +668,27 @@ _FX void* Hook_CheckChromeHook(void *SourceFunc, void* ProcBase)
         }
 #endif
         if (g_originals)
-            chrome64Target = findFirefoxTarget((unsigned char*)longlongs, g_originals);
+            chrome64Target = findFirefoxTarget((unsigned char*)longlongs, g_originals, MaxLen);
         else
             chrome64Target = findChromeTarget((unsigned char *)longlongs);
     }
-    // firefox sometimes
-    /*else if (func[0] == 0x49 && //mov r11,<target>
-        func[1] == 0xBB &&
-        func[10] == 0x41 && //jmp r11
-        func[11] == 0xFF &&
-        func[12] == 0xE3) 
+    // Firefox's winlauncher uses mov r11 but we don't care for this currently
+    /*else if (func[0] == 0x49 && func[1] == 0xBB &&                //mov r11,<target>
+        func[10] == 0x41 && func[11] == 0xFF && func[12] == 0xE3)   //jmp r11
     {
         longlongs = *(ULONGLONG **)&func[2];
-        chrome64Target = findChromeTarget((unsigned char *)longlongs);
+        //...
     }*/
     
     /*sboxie 64bit jtable hook signature */
-        /* // use this to hook jtable location (useful for debugging)
-        //else if(func[0] == 0x51 && func[1] == 0x48 && func[2] == 0xb8 ) {
-        else if(func[0] == 0x90 && func[1] == 0x48 && func[2] == 0xb8 ) {
-            long long addr;
-            addr = (ULONG_PTR) *(ULONGLONG **)&func[3] ;
-            SourceFunc = (void *) addr;
-        }
-        */
+    /* // use this to hook jtable location (useful for debugging)
+    //else if(func[0] == 0x51 && func[1] == 0x48 && func[2] == 0xb8 ) {
+    else if(func[0] == 0x90 && func[1] == 0x48 && func[2] == 0xb8 ) {
+        long long addr;
+        addr = (ULONG_PTR) *(ULONGLONG **)&func[3] ;
+        SourceFunc = (void *) addr;
+    }
+    */
 
     if (longlongs) {
         if (!chrome64Target)

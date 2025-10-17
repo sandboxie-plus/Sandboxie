@@ -1,5 +1,6 @@
 #pragma once
 #include "AbstractIO.h"
+#include "ImBox.h"
 
 #define DEF_BUFFER_SIZE (1 << 20)
 #define MINIMAL_MEM (100 << 20)
@@ -7,12 +8,12 @@
 class CImDiskIO
 {
 public:
-	CImDiskIO(CAbstractIO* pIO, const std::wstring& Mount, const std::wstring& Format, const std::wstring& Params = L"");
+	CImDiskIO(CAbstractIO* pIO, const std::wstring& Mount, UINT Number, const std::wstring& Format, const std::wstring& Params = L"");
 	~CImDiskIO();
 
 	void		SetProxyName(const std::wstring& Name);
 	void		SetMountEvent(HANDLE hEvent);
-	void		SetMountSection(HANDLE hMapping, WCHAR* pSection);
+	void		SetMountSection(HANDLE hMapping, SSection* pSection);
 
 	int			DoComm();
 

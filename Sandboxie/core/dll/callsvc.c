@@ -141,6 +141,8 @@ _FX NTSTATUS SbieDll_ConnectPort()
 // SbieDll_CallServer
 //---------------------------------------------------------------------------
 
+extern P_NtOpenThreadToken __sys_NtOpenThreadToken;
+extern P_NtSetInformationThread __sys_NtSetInformationThread;
 
 _FX MSG_HEADER *SbieDll_CallServer(MSG_HEADER *req)
 {
@@ -189,7 +191,32 @@ _FX MSG_HEADER *SbieDll_CallServer(MSG_HEADER *req)
         BOOLEAN Silent = (req->msgid == MSGID_SBIE_INI_GET_VERSION ||
                           req->msgid == MSGID_SBIE_INI_GET_USER ||
                           req->msgid == MSGID_PROCESS_CHECK_INIT_COMPLETE);
+
+        HANDLE hSavedToken = NULL;
+        if (Dll_CompartmentMode) {
+
+            if (__sys_NtOpenThreadToken)
+                __sys_NtOpenThreadToken(GetCurrentThread(), TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE, FALSE, &hSavedToken);
+            else
+                NtOpenThreadToken(GetCurrentThread(), TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE, FALSE, &hSavedToken);
+            if (hSavedToken) { // RevertToSelf
+                if (__sys_NtSetInformationThread)
+                    __sys_NtSetInformationThread(GetCurrentThread(), ThreadImpersonationToken, NULL, 0);
+                else
+                    NtSetInformationThread(GetCurrentThread(), ThreadImpersonationToken, NULL, 0);
+            }
+        }
+
         status = SbieDll_ConnectPort();
+
+        if (hSavedToken) { // ImpersonateLoggedOnUser
+            if (__sys_NtSetInformationThread)
+                __sys_NtSetInformationThread(GetCurrentThread(), ThreadImpersonationToken, &hSavedToken, sizeof(HANDLE));
+            else
+                NtSetInformationThread(GetCurrentThread(), ThreadImpersonationToken, &hSavedToken, sizeof(HANDLE));
+            NtClose(hSavedToken);
+        }
+
         if (!NT_SUCCESS(status)) {
             if (!Dll_AppContainerToken && !Silent) // todo: fix me make service available for appcontainer processes
                 SbieApi_Log(2203, L"connect %08X (msg_id 0x%04X)", status, req->msgid);

@@ -10,9 +10,9 @@ EN | <a href='./README_zh_CN.md'>中文</a>
 
 |  System requirements  |      Release notes     |     Contribution guidelines   |      Security policy      |      Code of Conduct      |
 |         :---:         |          :---:         |          :---:                |          :---:            |          :---:            |
-| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](./CHANGELOG.md)  |  [CONTRIBUTING.md](./CONTRIBUTING.md)  |   [SECURITY.md](./SECURITY.md)  |  [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)  |
+| Windows 7 or higher (64-bit) |  [CHANGELOG.md](./CHANGELOG.md)  |  [CONTRIBUTING.md](./CONTRIBUTING.md)  |   [SECURITY.md](./SECURITY.md)  |  [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)  |
 
-Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
+Sandboxie is a sandbox-based isolation software for Windows NT-based operating systems that creates a secure operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
 
 Sandboxie allows you to create virtually unlimited sandboxes and run them alone or simultaneously to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
 
@@ -154,18 +154,20 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - wilders-soccerfan - Documentation additions
 - LepordCat - Documentation additions
 - stdedos - Documentation additions
+- habatake - UI additions, Code fixes
+- Polyester6719 - Documentation additions
 
 ## 🌏 Translators
 
 - czoins - Arabic
-- yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt, fzxx, Vstory, GT-Stardust - Simplified Chinese
-- TragicLifeHu, Hulen, xiongsp - Traditional Chinese
+- yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt, fzxx, Vstory, GT-Stardust, habatake - Simplified Chinese
+- TragicLifeHu, Hulen, xiongsp, habatake - Traditional Chinese
 - RockyTDR - Dutch
 - clexanis, Mmoi-Fr, hippalectryon-0, Monsieur Pissou - French (provided by email)
 - bastik-1001, APMichael - German
 - timinoun - Hungarian (provided by email)
 - isaak654, DerivativeOfLog7 - Italian
-- takahiro-itou - Japanese
+- takahiro-itou, lllIIIlll - Japanese
 - VenusGirl - Korean
 - 7zip, AndrzejRafalowski - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
 - JNylson - Portuguese and Brazilian Portuguese
@@ -180,6 +182,6 @@ All translators are encouraged to look at the [Localization notes and tips](http
 
 ## 📚 Documentation Translators
 
-- Vstory, GT-Stardust, wzxjohn - Simplified Chinese
+- Vstory, GT-Stardust, wzxjohn, SOLEADO20, habatake - Simplified Chinese
 
 All documentation translators are encouraged to look at the [Multilingual Translation Contribution Guide](https://github.com/sandboxie-plus/sandboxie-docs/issues/175#issuecomment-2840258519) before sending a translation.

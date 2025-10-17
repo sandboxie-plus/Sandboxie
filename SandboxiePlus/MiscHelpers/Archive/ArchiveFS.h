@@ -49,7 +49,11 @@ public:
 
     bool isOpened() const;
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
     QAbstractFileEngine::Iterator* beginEntryList(QDir::Filters filters, const QStringList& filterNames);
+#else
+    IteratorUniquePtr beginEntryList(const QString &path, QDirListing::IteratorFlags filters, const QStringList &filterNames) override;
+#endif
 
     QFile::FileError error() const;
     QString errorString() const;

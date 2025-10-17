@@ -35,6 +35,8 @@ VersionInfoCopyright=Copyright (C) 2020-{#CurrentYear} by David Xanatos (xanasof
 VersionInfoVersion={#MyAppVersion}
 SetupIconFile=SandManInstall.ico
 SignTool=sha256
+; Require windows 10 or later
+;MinVersion=10.0
 
 ; Handled in code section as always want DirPage for portable mode.
 DisableDirPage=no
@@ -115,6 +117,14 @@ Type: files; Name: "{app}\libssl-1_1-x64.dll"
 Type: dirifempty; Name: "{localappdata}\{#MyAppName}"
 ; Delete existing .pdb files before installing new ones.
 Type: files; Name: "{app}\*.pdb"
+; No longer used since 1.16.1
+Type: files; Name: "{app}\styles\qwindowsvistastyle.dll"
+Type: files; Name: "{app}\Qt5Core.dll"
+Type: files; Name: "{app}\Qt5Gui.dll"
+Type: files; Name: "{app}\Qt5Network.dll"
+Type: files; Name: "{app}\Qt5Qml.dll"
+Type: files; Name: "{app}\Qt5Widgets.dll"
+Type: files; Name: "{app}\Qt5WinExtras.dll"
 
 
 [Registry]
@@ -504,7 +514,7 @@ begin
 
         if ExecRet = IDYES then
         begin
-          Exec('cmd.exe', '/c ' + UninstallString, '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
+          Exec(ExpandConstant('{sys}\cmd.exe'), '/c ' + UninstallString, '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
           ExecRet := IDYES;
         end;
 

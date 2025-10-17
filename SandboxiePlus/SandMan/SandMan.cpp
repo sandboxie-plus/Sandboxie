@@ -24,7 +24,6 @@
 #include "Wizards/SetupWizard.h"
 #include "Helpers/WinAdmin.h"
 #include "../MiscHelpers/Common/OtherFunctions.h"
-#include "../MiscHelpers/Common/Common.h"
 #include "Windows/SupportDialog.h"
 #include "../MiscHelpers/Archive/Archive.h"
 #include "../MiscHelpers/Archive/ArchiveFS.h"
@@ -150,7 +149,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_DarkPalett.setColor(QPalette::WindowText, Qt::white);
 	m_DarkPalett.setColor(QPalette::Base, QColor(25, 25, 25));
 	m_DarkPalett.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
-	m_DarkPalett.setColor(QPalette::ToolTipBase, Qt::lightGray);
+	m_DarkPalett.setColor(QPalette::ToolTipBase, QColor(53, 53, 53));
 	m_DarkPalett.setColor(QPalette::ToolTipText, Qt::white);
 	m_DarkPalett.setColor(QPalette::Text, Qt::white);
 	m_DarkPalett.setColor(QPalette::Button, QColor(53, 53, 53));
@@ -544,6 +543,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 
 		m_pMenuFile->addSeparator();
 		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Shield9"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
+		m_pRestart->setEnabled(!IsElevated());
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 
@@ -1315,7 +1315,7 @@ void CSandMan::OnRestartAsAdmin()
 	se.cbSize = sizeof(se);
 	se.lpVerb = L"runas";
 	se.lpFile = buf;
-	se.nShow = SW_HIDE;
+	se.nShow = SW_SHOWNORMAL;
 	se.fMask = 0;
 	ShellExecuteExW(&se);
 	m_bExit = true;
@@ -2464,19 +2464,23 @@ void CSandMan::OnStatusChanged()
 			if (PortableRootDir == 2)
 			{
 				QString NtBoxRoot = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", false, false).replace("GlobalSettings", "[BoxName]");
+				QString DosBoxPath = theAPI->Nt2DosPath(NtBoxRoot);
 
-				bool State = false;
-				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus",
-					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\nYes will choose: %1\nNo will choose: %2")
-					.arg(BoxPath + "\\[BoxName]")
-					.arg(theAPI->Nt2DosPath(NtBoxRoot))
-					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
+				if (DosBoxPath != BoxPath + "\\%SANDBOX%")
+				{
+					bool State = false;
+					PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus",
+						tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\nYes will choose: %1\nNo will choose: %2")
+						.arg(BoxPath + "\\[BoxName]")
+						.arg(DosBoxPath)
+						, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
 
-				if (State)
-					theConf->SetValue("Options/PortableRootDir", PortableRootDir);
+					if (State)
+						theConf->SetValue("Options/PortableRootDir", PortableRootDir);
+				}
 			}
 
-			if (PortableRootDir)
+			if (PortableRootDir == 1)
 				theAPI->GetGlobalSettings()->SetText("FileRootPath", BoxPath + "\\%SANDBOX%");
 		}
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SettingsWindow.h"
+#include "EditorSettingsWindow.h"
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "../MiscHelpers/Common/Common.h"
@@ -15,7 +16,6 @@
 #include "../Wizards/TemplateWizard.h"
 #include "../AddonManager.h"
 #include <qfontdialog.h>
-#include <QJsonDocument>
 #include <QJsonObject>
 #include "Helpers/TabOrder.h"
 #include "../MiscHelpers/Common/CodeEdit.h"
@@ -287,6 +287,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	}
 
 	m_HoldChange = false;
+	m_SkipSaveOnToggle = false;
 
 	DWORD logical_drives = GetLogicalDrives();
 	for (CHAR search = 'D'; search <= 'Z'; search++) {
@@ -342,6 +343,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkShowRecovery, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkCheckDelete, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkRecoveryTop, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
+	connect(ui.chkUseW11Style, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	QOperatingSystemVersion current = QOperatingSystemVersion::current();
+	ui.chkUseW11Style->setEnabled(current.majorVersion() == 10 && current.microVersion() >= 22000); // Windows 10 22000+ (Windows 11)
 	//
 
 	// Shell Integration
@@ -396,6 +401,15 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkHide, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
+	// UI Font
+	ui.btnSelectUiFont->setIcon(CSandMan::GetIcon("Font"));
+	ui.btnSelectUiFont->setToolTip(tr("Select font"));
+	ui.btnResetUiFont->setIcon(CSandMan::GetIcon("ResetFont"));
+	ui.btnResetUiFont->setToolTip(tr("Reset font"));
+
+	connect(ui.btnSelectUiFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectUiFont()));
+	connect(ui.btnResetUiFont, SIGNAL(clicked(bool)), this, SLOT(OnResetUiFont()));
+	ui.lblUiFont->setText(QApplication::font().family());
 
 	connect(ui.txtEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnOptChanged()));
 	m_bRebuildUI = false;
@@ -497,7 +511,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	//
 
 	connect(ui.chkSandboxMoTW, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
-	connect(ui.cmbMoTWSandbox, SIGNAL(stateChanged(int)), this, SLOT(OnMoTWChange()));
+	connect(ui.cmbMoTWSandbox, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMoTWChange()));
 
 	// USB
 	connect(ui.chkSandboxUsb, SIGNAL(stateChanged(int)), this, SLOT(OnVolumeChanged()));
@@ -538,59 +552,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	//
 
 	// Support
-	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
-	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
-	connect(ui.lblCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
-	connect(ui.lblCertExp, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
-	connect(ui.lblCertGuide, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
-	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
-
-	m_CertChanged = false;
-	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
-	ui.txtCertificate->installEventFilter(this);
-	connect(ui.txtSerial, SIGNAL(textChanged(const QString&)), this, SLOT(KeyChanged()));
-	ui.btnGetCert->setEnabled(false);
-	connect(theGUI, SIGNAL(CertUpdated()), this, SLOT(UpdateCert()));
-
-	ui.txtCertificate->setPlaceholderText(
-		"NAME: User Name\n"
-		"DATE: dd.mm.yyyy\n"
-		"TYPE: ULTIMATE\n"
-		"UPDATEKEY: 00000000000000000000000000000000\n"
-		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
-	);
-
-	wchar_t uuid_str[40];
-	if (theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str))) {
-		QString fullHwId = QString::fromWCharArray(uuid_str);
-		QString clickToR = tr("Click to reveal");
-		QString clickToH = tr("Click to hide");
-
-		ui.lblHwId->setText(tr("HwId: <a href=\"show\">[%1]</a>").arg(clickToR));
-		ui.lblHwId->setToolTip(clickToR);
-
-		connect(ui.lblHwId, &QLabel::linkActivated, this, [=](const QString& Link) {
-			if (Link == "show") {
-				ui.lblHwId->setText(tr("HwId: <a href=\"hide\" style=\"text-decoration:none; color:inherit;\">%1</a> <a href=\"copy\">(copy)</a>").arg(fullHwId));
-				ui.lblHwId->setToolTip(clickToH);
-			}
-			else if (Link == "hide") {
-				ui.lblHwId->setText(tr("HwId: <a href=\"show\">[%1]</a>").arg(clickToR));
-				ui.lblHwId->setToolTip(clickToR);
-			}
-			else if (Link == "copy") {
-				QApplication::clipboard()->setText(fullHwId);
-			}
-		});
-	}
-
-	ui.lblVersion->setText(tr("Sandboxie-Plus Version: %1").arg(theGUI->GetVersion()));
-
-	connect(ui.lblEvalCert, SIGNAL(linkActivated(const QString&)), this, SLOT(OnStartEval()));
-
-	connect(ui.btnGetCert, SIGNAL(clicked(bool)), this, SLOT(OnGetCert()));
-
-	connect(ui.chkNoCheck, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	InitSupport();
 
 	//
 
@@ -625,18 +587,91 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.btnResetIniFont->setIcon(CSandMan::GetIcon("ResetFont"));
 	ui.btnResetIniFont->setToolTip(tr("Reset font"));
 
-	m_pCodeEdit = new CCodeEdit(new CIniHighlighter(theGUI->m_DarkTheme));
+	// Initialize validation flag from config, fallback to checkbox if not set
+	bool defaultValidation = theConf->GetBool("Options/ValidateIniKeys", ui.chkValidateIniKeys->isChecked());
+	ui.chkValidateIniKeys->setChecked(defaultValidation);
+	m_IniValidationEnabled = defaultValidation;
+
+	int defaultTooltip = theConf->GetInt("Options/EnableIniTooltips", static_cast<int>(CIniHighlighter::GetTooltipMode()));
+	ui.chkEnableTooltips->setTristate(true); // Enable tri-state
+	ui.chkEnableTooltips->setCheckState(static_cast<Qt::CheckState>(defaultTooltip));
+	CIniHighlighter::SetTooltipMode(defaultTooltip); // Initialize the mode
+
+	LoadCompletionConsent();
+	int defaultAutoCompletion = theConf->GetInt("Options/EnableAutoCompletion", static_cast<int>(CCodeEdit::GetAutoCompletionMode()));
+	if (m_AutoCompletionConsent) { // Consented
+		ui.chkEnableAutoCompletion->setTristate(true); // Enable tri-state
+		ui.chkEnableAutoCompletion->setCheckState(static_cast<Qt::CheckState>(defaultAutoCompletion));
+		CCodeEdit::SetAutoCompletionMode(defaultAutoCompletion); // Initialize the mode
+	}
+	else {
+		CCodeEdit::SetAutoCompletionMode(Qt::Unchecked);
+		ui.chkEnableAutoCompletion->setCheckState(Qt::Unchecked);
+	}
+
+	// Create initial highlighter and editor
+	m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, nullptr, m_IniValidationEnabled);
+	m_pCodeEdit = new CCodeEdit(m_pIniHighlighter);
 	m_pCodeEdit->installEventFilter(this);
 	ui.txtIniSection->parentWidget()->layout()->replaceWidget(ui.txtIniSection, m_pCodeEdit);
 	delete ui.txtIniSection;
-	ui.txtIniSection = NULL;
+	ui.txtIniSection = nullptr;
 	connect(m_pCodeEdit, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
+
+	// Set fuzzy prefix length bounds from settings data
+	CCodeEdit::SetMaxFuzzyPrefixLength(CIniHighlighter::getMaxSettingNameLengthOrDefault());
+	CCodeEdit::SetMinFuzzyPrefixLength(CIniHighlighter::getMinSettingNameLengthOrDefault());
+	// Pass fuzzy matching toggle from config (no UI checkbox required)
+	m_pCodeEdit->SetFuzzyMatchingEnabled(theConf->GetBool("Options/EnableFuzzyMatching", false));
+
+	// Show tooltips when navigating with keyboard
+	{
+		int iniMode = theConf->GetInt("Options/EnableIniTooltips", static_cast<int>(CIniHighlighter::GetTooltipMode()));
+		int popupMode = theConf->GetInt("Options/EnablePopupTooltips", iniMode);
+		CCodeEdit::SetPopupTooltipsEnabled(popupMode);
+	}
+
+	// Set up autocompletion based on mode
+	QCompleter* completer = new QCompleter(this);
+	completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+	completer->setFilterMode(Qt::MatchContains);
+	m_pCodeEdit->SetCompleter(CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled ? completer : nullptr);
+
+	// Set completer based on mode
+	if (CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled) {
+		m_pCodeEdit->SetCompleter(completer);
+	}
+	else {
+		m_pCodeEdit->SetCompleter(nullptr);
+	}
+	
+	m_pCodeEdit->SetCompletionFilterCallback([](const QString& keyName) -> bool {
+		return CIniHighlighter::IsKeyHiddenFromPopup(keyName);
+		});
+	m_pCodeEdit->SetCaseCorrectionCallback([](const QString& wrongKey) -> QString {
+		return CIniHighlighter::FindCaseCorrectedKey(wrongKey);
+		});
+	m_pCodeEdit->SetCaseCorrectionFilterCallback([](const QString& keyName) -> bool {
+		return CIniHighlighter::IsKeyHiddenFromContext(keyName, 'c');
+		});
+	m_pCodeEdit->SetPopupTooltipCallback([](const QString& keyName) -> QString {
+		return CIniHighlighter::GetSettingTooltipForPopup(keyName);
+		});
+	
+	// Update completion model with current settings if auto completion is enabled
+	if (CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled) {
+		UpdateAutoCompletion();
+	}
 
 	ApplyIniEditFont();
 
 	connect(ui.btnSelectIniFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectIniEditFont()));
 	connect(ui.btnResetIniFont, SIGNAL(clicked(bool)), this, SLOT(OnResetIniEditFont()));
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
+	connect(ui.btnEditorSettings, SIGNAL(clicked(bool)), this, SLOT(OnEditorSettings()));
+	connect(ui.chkValidateIniKeys, SIGNAL(stateChanged(int)), this, SLOT(OnIniValidationToggled(int)));
+	connect(ui.chkEnableTooltips, SIGNAL(stateChanged(int)), this, SLOT(OnTooltipToggled(int)));
+	connect(ui.chkEnableAutoCompletion, SIGNAL(stateChanged(int)), this, SLOT(OnAutoCompletionToggled(int)));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
 	//connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
@@ -661,7 +696,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		QByteArray Columns = theConf->GetBlob("SettingsWindow/" + pTree->objectName() + "_Columns");
 		if (!Columns.isEmpty()) 
 			pTree->header()->restoreState(Columns);
-	}
+		}
 
 	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
 	if (iOptionTree == 2)
@@ -699,6 +734,18 @@ void CSettingsWindow::ApplyIniEditFont()
 	ui.lblIniEditFont->setText(tr("%0, %1 pt").arg(font.family()).arg(font.pointSizeF())); // tr: example: "Calibri, 9.5 pt"
 }
 
+void CSettingsWindow::UpdateAutoCompletion()
+{
+	if (CCodeEdit::GetAutoCompletionMode() == CCodeEdit::AutoCompletionMode::Disabled || !m_pCodeEdit || !m_pCodeEdit->GetCompleter())
+		return;
+
+	// Get completion candidates from the highlighter
+	QStringList candidates = CIniHighlighter::GetCompletionCandidates();
+
+	// Update the completion model
+	m_pCodeEdit->UpdateCompletionModel(candidates);
+}
+
 void CSettingsWindow::OnSelectIniEditFont()
 {
 	bool ok;
@@ -713,6 +760,23 @@ void CSettingsWindow::OnResetIniEditFont()
 {
 	theConf->DelValue("UIConfig/IniFont");
 	ApplyIniEditFont();
+}
+
+
+void CSettingsWindow::OnSelectUiFont()
+{
+	bool ok;
+	auto newFont = QFontDialog::getFont(&ok, QApplication::font(), this);
+	if (!ok) return;
+	ui.lblUiFont->setText(newFont.family());
+	OnChangeGUI();
+}
+
+void CSettingsWindow::OnResetUiFont()
+{
+	QFont defaultFont = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
+	ui.lblUiFont->setText(defaultFont.family());
+	OnChangeGUI();
 }
 
 void CSettingsWindow::OnSetTree()
@@ -831,6 +895,79 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 			m_bRightButtonPressed = false;
 		}
 	}
+
+	// Tooltip handling
+	if (source == m_pCodeEdit && event->type() == QEvent::ToolTip) {
+		// Check if tooltips are completely disabled
+		if (CIniHighlighter::GetTooltipMode() == CIniHighlighter::TooltipMode::Disabled)
+			return false;
+
+		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
+
+		// Find the text edit widget inside CCodeEdit
+		QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+		if (pTextEdit) {
+			// Convert mouse position to text cursor position
+			QPoint pos = pTextEdit->viewport()->mapFrom(m_pCodeEdit, helpEvent->pos());
+			QTextCursor cursor = pTextEdit->cursorForPosition(pos);
+
+			// Get the current line to check if it's a comment
+			QTextBlock block = cursor.block();
+			QString currentLine = block.text();
+
+			// Don't show tooltips for comment lines
+			if (CIniHighlighter::IsCommentLine(currentLine))
+				return false;
+
+			// Check if we're on the value side of the equals sign (after the =)
+			int equalsPos = currentLine.indexOf('=');
+			if (equalsPos >= 0 && (cursor.position() - block.position()) > equalsPos) {
+				// We're in the value part, don't show tooltip
+				QToolTip::hideText();
+				return false;
+			}
+
+			// Custom word selection that includes dots and underscores
+			int initialPos = cursor.position() - block.position();
+			int startPos = initialPos;
+			int endPos = initialPos;
+
+			// Move to start of the word
+			while (startPos > 0) {
+				QChar c = currentLine[startPos - 1];
+				if (c.isLetterOrNumber() || c == '_' || c == '.')
+					startPos--;
+				else
+					break;
+			}
+
+			// Move to end of the word
+			while (endPos < currentLine.length()) {
+				QChar c = currentLine[endPos];
+				if (c.isLetterOrNumber() || c == '_' || c == '.')
+					endPos++;
+				else
+					break;
+			}
+
+			// Show tooltip if it's a valid setting
+			if (CIniHighlighter::IsValidTooltipContext(currentLine.left(endPos))) {
+				// Only try to show tooltips if settings are loaded
+				if (CIniHighlighter::IsSettingsLoaded()) {
+					QString settingName = currentLine.mid(startPos, endPos - startPos);
+					if (settingName.endsWith('='))
+						settingName.chop(1);
+					QString tooltipText = CIniHighlighter::GetSettingTooltip(settingName);
+					if (!tooltipText.isEmpty()) {
+						QToolTip::showText(helpEvent->globalPos(), tooltipText, pTextEdit);
+						return true;
+					}
+				}
+			}
+			QToolTip::hideText();
+		}
+	}
+
 	return QDialog::eventFilter(source, event);
 }
 
@@ -1086,6 +1223,8 @@ void CSettingsWindow::LoadSettings()
 	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 	ui.chkMinimize->setChecked(theConf->GetBool("Options/MinimizeToTray", false));
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
+
+	ui.chkUseW11Style->setChecked(theConf->GetBool("Options/UseW11Style", false));
 
 	OnLoadAddon();
 
@@ -1420,322 +1559,6 @@ void CSettingsWindow::UpdateDrives()
 //void ScanForSeats();
 //int CountSeats();
 
-void CSettingsWindow::UpdateCert()
-{
-	ui.lblCertExp->setVisible(false);
-	ui.lblEvalCert->setVisible(g_Certificate.isEmpty());
-	
-	//ui.lblCertLevel->setVisible(!g_Certificate.isEmpty());
-	if (!g_Certificate.isEmpty())
-	{
-		ui.txtCertificate->setProperty("hidden", true);
-		int Pos = g_Certificate.indexOf("HWID:");
-		if (Pos == -1)
-			Pos = g_Certificate.indexOf("UPDATEKEY:");
-
-		QByteArray truncatedCert = (g_Certificate.left(Pos) + "...");
-		int namePos = truncatedCert.indexOf("NAME:");
-		int datePos = truncatedCert.indexOf("DATE:");
-		if (namePos != -1 && datePos != -1 && datePos > namePos)
-			truncatedCert = truncatedCert.mid(0, namePos + 5) + " ...\n" + truncatedCert.mid(datePos);
-		ui.txtCertificate->setPlainText(truncatedCert);
-		//ui.lblSupport->setVisible(false);
-
-		QString ReNewUrl = "https://sandboxie-plus.com/go.php?to=sbie-renew-cert";
-		if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
-			ReNewUrl = "https://xanasoft.com/get-supporter-certificate/";
-
-		QPalette palette = QApplication::palette();
-		if (theGUI->m_DarkTheme)
-			palette.setColor(QPalette::Text, Qt::black);
-		if (g_CertInfo.expired) {
-			palette.setColor(QPalette::Base, QColor(255, 255, 192));
-			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"%1\">get an updated certificate</a>.").arg(ReNewUrl);
-			if (g_CertInfo.active) {
-				if (g_CertInfo.grace_period)
-					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
-				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
-					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database."));
-			} else
-				infoMsg.append(tr("<br />Plus features are no longer enabled."));
-			ui.lblCertExp->setText(infoMsg);
-			ui.lblCertExp->setVisible(true);
-		}
-		else {
-			if (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30)) {
-				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"%2\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)).arg(ReNewUrl));
-				ui.lblCertExp->setVisible(true);
-			}
-/*#ifdef _DEBUG
-			else {
-				ui.lblCertExp->setText(tr("This supporter certificate is valid, <a href=\"%1\">check for an updated certificate</a>.").arg(ReNewUrl));
-				ui.lblCertExp->setVisible(true);
-			}
-#endif*/
-			palette.setColor(QPalette::Base, QColor(192, 255, 192));
-		}
-		ui.txtCertificate->setPalette(palette);
-
-		//ui.lblCertLevel->setText(tr("Feature Level: %1").arg(GetCertLevel()));
-		//
-		//QStringList Infos;
-		//Infos += tr("Type: %1").arg(GetCertType());
-		//if (CERT_IS_INSIDER(g_CertInfo))
-		//	Infos += tr("Insider release capable");
-		//ui.lblCertLevel->setToolTip(Infos.join("\n"));
-
-		//if (CERT_IS_TYPE(g_CertInfo, eCertBusiness)) {
-		//	ScanForSeats();
-		//	QTimer::singleShot(1000, this, [=]() {
-		//		QString CntInfo = QString::number(CountSeats());
-		//		QString Amount = GetArguments(g_Certificate, L'\n', L':').value("AMOUNT");
-		//		if (!Amount.isEmpty())
-		//			CntInfo += "/" + Amount;
-		//		ui.lblCertCount->setText(CntInfo);
-		//		ui.lblCertCount->setToolTip(tr("Count of certificates in use"));
-		//	});
-		//}
-
-		QString ExpInfo;
-		if(g_CertInfo.expirers_in_sec > 0)
-			ExpInfo = tr("Expires in: %1 days").arg(g_CertInfo.expirers_in_sec / (60*60*24));
-		else if(g_CertInfo.expirers_in_sec < 0)
-			ExpInfo = tr("Expired: %1 days ago").arg(-g_CertInfo.expirers_in_sec / (60*60*24));
-		if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
-			ExpInfo += tr("; eligible Patreons can always <a href=\"https://xanasoft.com/get-supporter-certificate/\">obtain an updated certificate</a> from xanasoft.com");
-		ui.lblCert->setText(ExpInfo);
-
-		QStringList Options;
-		if (g_CertInfo.opt_sec) Options.append("SBox");
-		else Options.append(QString("<font color='gray'>SBox</font>"));
-		if (g_CertInfo.opt_enc) Options.append("EBox");
-		else Options.append(QString("<font color='gray'>EBox</font>"));
-		if (g_CertInfo.opt_net) Options.append("NetI");
-		else Options.append(QString("<font color='gray'>NetI</font>"));
-		ui.lblCertOpt->setText(tr("Options: %1").arg(Options.join(", ")));
-
-		QStringList OptionsEx;
-		OptionsEx.append(tr("Security/Privacy Enhanced & App Boxes (SBox): %1").arg(g_CertInfo.opt_sec ? tr("Enabled") : tr("Disabled")));
-		OptionsEx.append(tr("Encrypted Sandboxes (EBox): %1").arg(g_CertInfo.opt_enc ? tr("Enabled") : tr("Disabled")));
-		OptionsEx.append(tr("Network Interception (NetI): %1").arg(g_CertInfo.opt_net ? tr("Enabled") : tr("Disabled")));
-		OptionsEx.append(tr("Sandboxie Desktop (Desk): %1").arg(g_CertInfo.opt_desk ? tr("Enabled") : tr("Disabled")));
-		ui.lblCertOpt->setToolTip(OptionsEx.join("\n"));
-	}
-	else
-	{
-		ui.lblCert->clear();
-		ui.lblCertOpt->clear();
-
-		int EvalCount = theConf->GetInt("User/EvalCount", 0);
-		if(EvalCount >= EVAL_MAX)
-			ui.lblEvalCert->setText(tr("<b>You have used %1/%2 evaluation certificates. No more free certificates can be generated.</b>").arg(EvalCount).arg(EVAL_MAX));
-		else
-			ui.lblEvalCert->setText(tr("<b><a href=\"_\">Get a free evaluation certificate</a> and enjoy all premium features for %1 days.</b>").arg(EVAL_DAYS));
-		ui.lblEvalCert->setToolTip(tr("You can request a free %1-day evaluation certificate up to %2 times per hardware ID.").arg(EVAL_DAYS).arg(EVAL_MAX));
-	}
-
-	ui.radInsider->setEnabled(CERT_IS_INSIDER(g_CertInfo));
-}
-
-void CSettingsWindow::OnGetCert()
-{
-	QByteArray Certificate;
-	if (!ui.txtCertificate->property("hidden").toBool())
-		Certificate = ui.txtCertificate->toPlainText().toUtf8();
-	else
-		Certificate = g_Certificate;
-	QString Serial = ui.txtSerial->text();
-
-	QString Message;
-
-	if (Serial.length() < 4 || Serial.left(4).compare("SBIE", Qt::CaseInsensitive) != 0) {
-		Message = tr("This does not look like a Sandboxie-Plus Serial Number.<br />"
-		"If you have attempted to enter the UpdateKey or the Signature from a certificate, "
-		"that is not correct, please enter the entire certificate into the text area above instead.");
-	}
-	else if(Certificate.isEmpty())
-	{
-		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'U') {
-			Message = tr("You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. "
-				"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one."
-				"<br />If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.");
-		}
-
-		else if (Serial.length() > 5 && Serial.at(4).toUpper() == 'R') {
-			Message = tr("You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. "
-				"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one.");
-		}
-
-		if (!Message.isEmpty()) 
-			Message += tr("<br /><br /><u>If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.</u>");
-	}
-	
-	if (!Message.isEmpty()) {
-		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
-		return;
-	}
-
-	QVariantMap Params;
-	if(!Certificate.isEmpty())
-		Params["key"] = GetArguments(Certificate, L'\n', L':').value("UPDATEKEY");
-
-	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(Serial, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)), Params);
-	if (Status.GetStatus() == OP_ASYNC) {
-		theGUI->AddAsyncOp(Status.GetValue());
-		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
-	}
-}
-
-void CSettingsWindow::OnStartEval()
-{
-	StartEval(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
-}
-
-void CSettingsWindow::StartEval(QWidget* parent, QObject* receiver, const char* member)
-{
-	QString Name = theConf->GetString("User/Name", QString::fromLocal8Bit(qgetenv("USERNAME")));
-
-	QString eMail = QInputDialog::getText(parent, tr("Sandboxie-Plus - Get EVALUATION Certificate"), tr("Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.\n"
-													"You can request up to %3 evaluation certificates for each unique hardware ID.").arg(EVAL_DAYS).arg(Name).arg(EVAL_MAX), QLineEdit::Normal, theConf->GetString("User/eMail"));
-	if (eMail.isEmpty()) return;
-	theConf->SetValue("User/eMail", eMail);
-
-	QVariantMap Params;
-	Params["eMail"] = eMail;
-	Params["Name"] = Name;
-
-	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert("", receiver, member, Params);
-	if (Status.GetStatus() == OP_ASYNC) {
-		theGUI->AddAsyncOp(Status.GetValue());
-		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
-	}
-}
-
-void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMap& Params)
-{
-	if (Certificate.isEmpty())
-	{
-		QString Error = Params["error"].toString();
-		qDebug() << Error;
-		if (Error == "max eval reached") {
-			if (theConf->GetInt("User/EvalCount", 0) < EVAL_MAX) 
-				theConf->SetValue("User/EvalCount", EVAL_MAX);
-		}
-		QString Message = tr("Error retrieving certificate: %1").arg(Error.isEmpty() ? tr("Unknown Error (probably a network issue)") : Error);
-		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
-		return;
-	}
-	ui.txtCertificate->setProperty("hidden", false);
-	ui.txtCertificate->setPlainText(Certificate);
-	ApplyCert();
-}
-
-void CSettingsWindow::ApplyCert()
-{
-	if (!theAPI->IsConnected())
-		return;
-
-	if (ui.txtCertificate->property("hidden").toBool())
-		return;
-
-	QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
-	if (g_Certificate != Certificate) {
-
-		QPalette palette = QApplication::palette();
-
-		if (theGUI->m_DarkTheme)
-			palette.setColor(QPalette::Text, Qt::black);
-
-		ui.lblCertExp->setVisible(false);
-
-		bool bRet = ApplyCertificate(Certificate, this);
-
-		if (bRet && CERT_IS_TYPE(g_CertInfo, eCertEvaluation)) {
-			int EvalCount = theConf->GetInt("User/EvalCount", 0);
-			EvalCount++;
-			theConf->SetValue("User/EvalCount", EvalCount);
-		}
-
-		if (CertRefreshRequired())
-			TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
-
-		if (Certificate.isEmpty())
-			palette.setColor(QPalette::Base, Qt::white);
-		else if (!bRet) 
-			palette.setColor(QPalette::Base, QColor(255, 192, 192));
-		else 
-			palette.setColor(QPalette::Base, QColor(192, 255, 192));
-
-		ui.txtCertificate->setPalette(palette);
-	}
-
-	m_CertChanged = false;
-}
-
-QString CSettingsWindow::GetCertType()
-{
-	QString CertType;
-	if (g_CertInfo.type == eCertContributor)
-		CertType = tr("Contributor");
-	else if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
-		CertType = tr("Eternal");
-	else if (g_CertInfo.type == eCertDeveloper)
-		CertType = tr("Developer");
-	else if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
-		CertType = tr("Business");
-	else if (CERT_IS_TYPE(g_CertInfo, eCertPersonal))
-		CertType = tr("Personal");
-	else if (g_CertInfo.type == eCertGreatPatreon)
-		CertType = tr("Great Patreon");
-	else if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
-		CertType = tr("Patreon");
-	else if (g_CertInfo.type == eCertFamily)
-		CertType = tr("Family");
-	else if (CERT_IS_TYPE(g_CertInfo, eCertHome))
-		CertType = tr("Home");
-	else if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
-		CertType = tr("Evaluation");
-	else
-		CertType = tr("Type %1").arg(g_CertInfo.type);
-	return CertType;
-}
-
-QColor CSettingsWindow::GetCertColor()
-{
-	if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
-		return QColor(135, 0, 255, 255);
-	else if (g_CertInfo.type == eCertDeveloper)
-		return QColor(255, 215, 0, 255);
-	else if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
-		return QColor(211, 0, 0, 255);
-	else if (CERT_IS_TYPE(g_CertInfo, eCertPersonal))
-		return QColor(38, 127, 0, 255);
-	else if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
-		return QColor(38, 127, 0, 255);
-	else if (g_CertInfo.type == eCertFamily)
-		return QColor(0, 38, 255, 255);
-	else if (CERT_IS_TYPE(g_CertInfo, eCertHome))
-		return QColor(255, 106, 0, 255);
-	else if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
-		return Qt::gray;
-	else
-		return Qt::black;
-}
-
-QString CSettingsWindow::GetCertLevel()
-{
-	QString CertLevel;
-	if (g_CertInfo.level == eCertAdvanced)
-		CertLevel = tr("Advanced");
-	else if (g_CertInfo.level == eCertAdvanced1)
-		CertLevel = tr("Advanced (L)");
-	else if (g_CertInfo.level == eCertMaxLevel)
-		CertLevel = tr("Max Level");
-	else if (g_CertInfo.level != eCertStandard && g_CertInfo.level != eCertStandard2)
-		CertLevel = tr("Level %1").arg(g_CertInfo.level);
-	return CertLevel;
-}
-
 void CSettingsWindow::UpdateUpdater()
 {
 	bool bOk = (g_CertInfo.active && !g_CertInfo.expired);
@@ -1830,8 +1653,11 @@ void CSettingsWindow::WriteTextList(const QString& Setting, const QStringList& L
 
 void CSettingsWindow::SaveSettings()
 {
-	theConf->SetValue("Options/UiLanguage", ui.uiLang->currentData());
+	QString Lang = ui.uiLang->currentData().toString();
+	theConf->SetValue("Options/UiLanguage", Lang);
+	quint32 LangId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
 
+	theConf->SetValue("UIConfig/UIFont", ui.lblUiFont->text());
 	theConf->SetValue("Options/DPIScaling", ui.cmbDPI->currentData());
 
 	theConf->SetValue("Options/UseDarkTheme", CSettingsWindow__Chk2Int(ui.chkDarkTheme->checkState()));
@@ -1845,6 +1671,9 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
 	theConf->SetValue("Options/UseOverlayIcons", ui.chkOverlayIcons->isChecked());
 	theConf->SetValue("Options/HideSbieProcesses", ui.chkHideCore->isChecked());
+
+	CIniHighlighter::ClearLanguageCache();
+	CIniHighlighter::ClearThemeCache();
 
 	int Scaling = ui.cmbFontScale->currentText().toInt();
 	if (Scaling < 75)
@@ -1866,6 +1695,9 @@ void CSettingsWindow::SaveSettings()
 		}
 		else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
 			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
+
+		theAPI->SbieIniSet("$", "Language", QString::number(LangId), CSbieIni::eIniUpdate, false);
+		//theAPI->GetGlobalSettings()->SetNum("SbieSvc_Language", LangId);
 	}
 
 	if (ui.chkShellMenu->checkState() != IsContextMenu())
@@ -1960,6 +1792,8 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
+
+	theConf->SetValue("Options/UseW11Style", ui.chkUseW11Style->isChecked());
 
 	if (theAPI->IsConnected())
 	{
@@ -2187,110 +2021,6 @@ void CSettingsWindow::SaveSettings()
 	emit OptionsChanged(m_bRebuildUI);
 }
 
-bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* widget)
-{
-	if (!Certificate.isEmpty()) 
-	{
-		auto Args = GetArguments(Certificate, L'\n', L':');
-
-		bool bLooksOk = true;
-		if (Args.value("NAME").isEmpty()) // mandatory
-			bLooksOk = false;
-		//if (Args.value("UPDATEKEY").isEmpty())
-		//	bLooksOk = false;
-		if (Args.value("SIGNATURE").isEmpty()) // absolutely mandatory
-			bLooksOk = false;
-
-		if (bLooksOk)
-			theGUI->SetCertificate(Certificate);
-		else {
-			QMessageBox::critical(widget, "Sandboxie-Plus", tr("This does not look like a certificate. Please enter the entire certificate, not just a portion of it."));
-			return false;
-		}
-		g_Certificate = Certificate;
-	}
-	else
-		theGUI->SetCertificate("");
-
-	if (Certificate.isEmpty())
-		return false;
-
-	SB_STATUS Status = theGUI->ReloadCert(widget);
-
-	if (!Status.IsError())
-	{
-		if (g_CertInfo.expired || g_CertInfo.outdated) {
-			if(g_CertInfo.outdated)
-				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build."));
-			else if(g_CertInfo.active && !g_CertInfo.grace_period)
-				QMessageBox::information(widget, "Sandboxie-Plus", tr("Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database."));
-			else
-				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate has unfortunately expired, you need to get a new certificate."));
-		}
-		else {
-			if(CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
-				QMessageBox::information(widget, "Sandboxie-Plus", tr("The evaluation certificate has been successfully applied. Enjoy your free trial!"));
-			else
-			{
-				QString Message = tr("Thank you for supporting the development of Sandboxie-Plus.");
-				if (g_CertInfo.type == eCertEntryPatreon)
-					Message += tr("\nThis is a temporary Patreon certificate, valid for 3 months. "
-						"Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.");
-				QMessageBox::information(widget, "Sandboxie-Plus", Message);
-			}
-		}
-
-		return true;
-	}
-	else
-	{
-		g_CertInfo.State = 0;
-		if (Status.GetStatus() != 0xC000006EL /*STATUS_ACCOUNT_RESTRICTION*/)
-			g_Certificate.clear();
-		return false;
-	}
-}
-
-bool CSettingsWindow::CertRefreshRequired()
-{
-	if (g_CertInfo.active) {
-		if (COnlineUpdater::IsLockRequired() && g_CertInfo.type != eCertEternal && g_CertInfo.type != eCertContributor)
-		{
-			if(!g_CertInfo.locked || g_CertInfo.grace_period)
-				return true;
-		}
-	} else {
-		if (g_CertInfo.lock_req && !(g_CertInfo.expired || g_CertInfo.outdated))
-			return true;
-	}
-
-	return false;
-}
-
-bool CSettingsWindow::TryRefreshCert(QWidget* parent, QObject* receiver, const char* member)
-{
- 	if (theConf->GetInt("Options/AskCertRefresh", -1) != 1)
-	{
-		bool State = false;
-		if(CCheckableMessageBox::question(parent, "Sandboxie-Plus", tr("A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?")
-			, tr("Auto update in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes)
-			return false;
-
-		if (State)
-			theConf->SetValue("Options/AskCertRefresh", 1);
-	}
-
-	QVariantMap Params;
-	Params["key"] = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
-
-	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert("", receiver, member, Params);
-	if (Status.GetStatus() == OP_ASYNC) {
-		theGUI->AddAsyncOp(Status.GetValue());
-		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
-	}
-	
-	return true;
-}
 
 void CSettingsWindow::apply()
 {
@@ -2782,6 +2512,116 @@ void CSettingsWindow::OnEditIni()
 	SetIniEdit(true);
 }
 
+void CSettingsWindow::OnIniValidationToggled(int state)
+{
+	m_HoldChange = true;
+
+	m_IniValidationEnabled = (state == Qt::Checked);
+	
+	// Only save to config if not in a reset-skip context
+	if (!m_SkipSaveOnToggle) {
+		theConf->SetValue("Options/ValidateIniKeys", m_IniValidationEnabled);
+	}
+
+	if (state == Qt::Unchecked) {
+		CIniHighlighter::MarkSettingsDirty();
+		CIniHighlighter::MarkUserSettingsDirty();
+	}
+
+	// Remove previous highlighter
+	if (m_pIniHighlighter) {
+		delete m_pIniHighlighter;
+		m_pIniHighlighter = nullptr;
+	}
+
+	// Attach new highlighter to the code editor's document
+	QTextEdit* pTextEdit = m_pCodeEdit->findChild<QTextEdit*>();
+	if (pTextEdit) {
+		m_pIniHighlighter = new CIniHighlighter(theGUI->m_DarkTheme, pTextEdit->document(), m_IniValidationEnabled);
+		m_pIniHighlighter->rehighlight();
+	}
+
+	m_HoldChange = false;
+}
+
+void CSettingsWindow::OnTooltipToggled(int state)
+{
+	m_HoldChange = true;
+
+	// Only save to config if not in a reset-skip context
+	if (!m_SkipSaveOnToggle) {
+		theConf->SetValue("Options/EnableIniTooltips", state);
+	}
+
+	CIniHighlighter::SetTooltipMode(state);
+
+	{
+		int iniMode = theConf->GetInt("Options/EnableIniTooltips", static_cast<int>(CIniHighlighter::GetTooltipMode()));
+		int popupMode = theConf->GetInt("Options/EnablePopupTooltips", iniMode);
+		CCodeEdit::SetPopupTooltipsEnabled(popupMode);
+	}
+
+	if (state == Qt::Unchecked) {
+		CIniHighlighter::ClearLanguageCache();
+		CIniHighlighter::ClearThemeCache();
+	}
+
+	m_HoldChange = false;
+}
+
+void CSettingsWindow::OnAutoCompletionToggled(int state)
+{
+	m_HoldChange = true;
+
+	// Show consent dialog if enabling and not yet consented
+	if (state != Qt::Unchecked && !m_AutoCompletionConsent) {
+		int chosenState = ShowConsentDialog();
+		
+		if (chosenState == Qt::Unchecked) {
+			// Cancel - revert the checkbox and return
+			ui.chkEnableAutoCompletion->setCheckState(Qt::Unchecked);
+			m_HoldChange = false;
+			return;
+		}
+		
+		// Consent was given, update UI and state
+		ui.chkEnableAutoCompletion->setEnabled(true);
+		ui.chkEnableAutoCompletion->setTristate(true);
+		ui.chkEnableAutoCompletion->setCheckState(static_cast<Qt::CheckState>(chosenState));
+		state = chosenState;
+	}
+
+	// Only save to config if not in a reset-skip context
+	if (!m_SkipSaveOnToggle) {
+		theConf->SetValue("Options/EnableAutoCompletion", state);
+	}
+
+	CCodeEdit::SetAutoCompletionMode(state);
+
+	// Enable or disable the completer based on mode
+	if (m_pCodeEdit) {
+		if (CCodeEdit::GetAutoCompletionMode() != CCodeEdit::AutoCompletionMode::Disabled) {
+			// Create completer if it doesn't exist
+			if (!m_pCodeEdit->GetCompleter()) {
+				QCompleter* completer = new QCompleter(this);
+				completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+				completer->setFilterMode(Qt::MatchContains);
+				m_pCodeEdit->SetCompleter(completer);
+
+				// Update completion model with current settings
+				UpdateAutoCompletion();
+			}
+		}
+		else {
+			// Disable completer
+			m_pCodeEdit->SetCompleter(nullptr);
+			CCodeEdit::ClearFuzzyCache();
+		}
+	}
+
+	m_HoldChange = false;
+}
+
 void CSettingsWindow::OnSaveIni()
 {
 	SaveIniSection();
@@ -2814,6 +2654,8 @@ void CSettingsWindow::LoadIniSection()
 	m_HoldChange = true;
 	//ui.txtIniSection->setPlainText(Section);
 	m_pCodeEdit->SetCode(Section);
+	// Update autocompletion after all settings are loaded
+	UpdateAutoCompletion();
 	m_HoldChange = false;
 }
 
@@ -2953,6 +2795,63 @@ void CSettingsWindow::OnUpdate(const QString& Channel)
 // Support
 //
 
+void CSettingsWindow::InitSupport()
+{
+	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblCertExp, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblCertGuide, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+
+	m_CertChanged = false;
+	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
+	ui.txtCertificate->installEventFilter(this);
+	connect(ui.txtSerial, SIGNAL(textChanged(const QString&)), this, SLOT(KeyChanged()));
+	ui.btnGetCert->setEnabled(false);
+	connect(theGUI, SIGNAL(CertUpdated()), this, SLOT(UpdateCert()));
+
+	ui.txtCertificate->setPlaceholderText(
+		"NAME: User Name\n"
+		"DATE: dd.mm.yyyy\n"
+		"TYPE: ULTIMATE\n"
+		"UPDATEKEY: 00000000000000000000000000000000\n"
+		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+	);
+
+	wchar_t uuid_str[40];
+	if (theAPI->GetDriverInfo(-2, uuid_str, sizeof(uuid_str))) {
+		QString fullHwId = QString::fromWCharArray(uuid_str);
+		QString clickToR = tr("Click to reveal");
+		QString clickToH = tr("Click to hide");
+
+		ui.lblHwId->setText(tr("HwId: <a href=\"show\">[%1]</a>").arg(clickToR));
+		ui.lblHwId->setToolTip(clickToR);
+
+		connect(ui.lblHwId, &QLabel::linkActivated, this, [=](const QString& Link) {
+			if (Link == "show") {
+				ui.lblHwId->setText(tr("HwId: <a href=\"hide\" style=\"text-decoration:none; color:inherit;\">%1</a> <a href=\"copy\">(copy)</a>").arg(fullHwId));
+				ui.lblHwId->setToolTip(clickToH);
+			}
+			else if (Link == "hide") {
+				ui.lblHwId->setText(tr("HwId: <a href=\"show\">[%1]</a>").arg(clickToR));
+				ui.lblHwId->setToolTip(clickToR);
+			}
+			else if (Link == "copy") {
+				QApplication::clipboard()->setText(fullHwId);
+			}
+			});
+	}
+
+	ui.lblVersion->setText(tr("Sandboxie-Plus Version: %1").arg(theGUI->GetVersion()));
+
+	connect(ui.lblEvalCert, SIGNAL(linkActivated(const QString&)), this, SLOT(OnStartEval()));
+
+	connect(ui.btnGetCert, SIGNAL(clicked(bool)), this, SLOT(OnGetCert()));
+
+	connect(ui.chkNoCheck, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+}
+
 void CSettingsWindow::CertChanged()
 { 
 	m_CertChanged = true; 
@@ -2979,6 +2878,434 @@ void CSettingsWindow::LoadCertificate(QString CertPath)
 	}
 }
 
+
+void CSettingsWindow::UpdateCert()
+{
+	ui.lblCertExp->setVisible(false);
+	ui.lblEvalCert->setVisible(g_Certificate.isEmpty());
+
+	//ui.lblCertLevel->setVisible(!g_Certificate.isEmpty());
+	if (!g_Certificate.isEmpty())
+	{
+		ui.txtCertificate->setProperty("hidden", true);
+		int Pos = g_Certificate.indexOf("HWID:");
+		if (Pos == -1)
+			Pos = g_Certificate.indexOf("UPDATEKEY:");
+
+		QByteArray truncatedCert = (g_Certificate.left(Pos) + "...");
+		int namePos = truncatedCert.indexOf("NAME:");
+		int datePos = truncatedCert.indexOf("DATE:");
+		if (namePos != -1 && datePos != -1 && datePos > namePos)
+			truncatedCert = truncatedCert.mid(0, namePos + 5) + " ...\n" + truncatedCert.mid(datePos);
+		ui.txtCertificate->setPlainText(truncatedCert);
+		//ui.lblSupport->setVisible(false);
+
+		QString ReNewUrl = "https://sandboxie-plus.com/go.php?to=sbie-renew-cert";
+		if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
+			ReNewUrl = "https://xanasoft.com/get-supporter-certificate/";
+
+		QPalette palette = QApplication::palette();
+		if (theGUI->m_DarkTheme)
+			palette.setColor(QPalette::Text, Qt::black);
+		if (g_CertInfo.expired) {
+			palette.setColor(QPalette::Base, QColor(255, 255, 192));
+			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"%1\">get an updated certificate</a>.").arg(ReNewUrl);
+			if (g_CertInfo.active) {
+				if (g_CertInfo.grace_period)
+					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
+				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
+					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database."));
+			} else
+				infoMsg.append(tr("<br />Plus features are no longer enabled."));
+			ui.lblCertExp->setText(infoMsg);
+			ui.lblCertExp->setVisible(true);
+		}
+		else {
+			if (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30)) {
+				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"%2\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)).arg(ReNewUrl));
+				ui.lblCertExp->setVisible(true);
+			}
+			/*#ifdef _DEBUG
+			else {
+			ui.lblCertExp->setText(tr("This supporter certificate is valid, <a href=\"%1\">check for an updated certificate</a>.").arg(ReNewUrl));
+			ui.lblCertExp->setVisible(true);
+			}
+			#endif*/
+			palette.setColor(QPalette::Base, QColor(192, 255, 192));
+		}
+		ui.txtCertificate->setPalette(palette);
+
+		//ui.lblCertLevel->setText(tr("Feature Level: %1").arg(GetCertLevel()));
+		//
+		//QStringList Infos;
+		//Infos += tr("Type: %1").arg(GetCertType());
+		//if (CERT_IS_INSIDER(g_CertInfo))
+		//	Infos += tr("Insider release capable");
+		//ui.lblCertLevel->setToolTip(Infos.join("\n"));
+
+		//if (CERT_IS_TYPE(g_CertInfo, eCertBusiness)) {
+		//	ScanForSeats();
+		//	QTimer::singleShot(1000, this, [=]() {
+		//		QString CntInfo = QString::number(CountSeats());
+		//		QString Amount = GetArguments(g_Certificate, L'\n', L':').value("AMOUNT");
+		//		if (!Amount.isEmpty())
+		//			CntInfo += "/" + Amount;
+		//		ui.lblCertCount->setText(CntInfo);
+		//		ui.lblCertCount->setToolTip(tr("Count of certificates in use"));
+		//	});
+		//}
+
+		QString ExpInfo;
+		if(g_CertInfo.expirers_in_sec > 0)
+			ExpInfo = tr("Expires in: %1 days").arg(g_CertInfo.expirers_in_sec / (60*60*24));
+		else if(g_CertInfo.expirers_in_sec < 0)
+			ExpInfo = tr("Expired: %1 days ago").arg(-g_CertInfo.expirers_in_sec / (60*60*24));
+		if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
+			ExpInfo += tr("; eligible Patreons can always <a href=\"https://xanasoft.com/get-supporter-certificate/\">obtain an updated certificate</a> from xanasoft.com");
+		ui.lblCert->setText(ExpInfo);
+
+		QStringList Options;
+		if (g_CertInfo.opt_sec) Options.append("SBox");
+		else Options.append(QString("<font color='gray'>SBox</font>"));
+		if (g_CertInfo.opt_enc) Options.append("EBox");
+		else Options.append(QString("<font color='gray'>EBox</font>"));
+		if (g_CertInfo.opt_net) Options.append("NetI");
+		else Options.append(QString("<font color='gray'>NetI</font>"));
+		if (g_CertInfo.opt_desk) Options.append("Desk");
+		else Options.append(QString("<font color='gray'>Desk</font>"));
+		ui.lblCertOpt->setText(tr("Options: %1").arg(Options.join(", ")));
+
+		QStringList OptionsEx;
+		OptionsEx.append(tr("Security/Privacy Enhanced & App Boxes (SBox): %1").arg(g_CertInfo.opt_sec ? tr("Enabled") : tr("Disabled")));
+		OptionsEx.append(tr("Encrypted Sandboxes (EBox): %1").arg(g_CertInfo.opt_enc ? tr("Enabled") : tr("Disabled")));
+		OptionsEx.append(tr("Network Interception (NetI): %1").arg(g_CertInfo.opt_net ? tr("Enabled") : tr("Disabled")));
+		OptionsEx.append(tr("Sandboxie Desktop (Desk): %1").arg(g_CertInfo.opt_desk ? tr("Enabled") : tr("Disabled")));
+		ui.lblCertOpt->setToolTip(OptionsEx.join("\n"));
+	}
+	else
+	{
+		ui.lblCert->clear();
+		ui.lblCertOpt->clear();
+
+		int EvalCount = theConf->GetInt("User/EvalCount", 0);
+		if(EvalCount >= EVAL_MAX)
+			ui.lblEvalCert->setText(tr("<b>You have used %1/%2 evaluation certificates. No more free certificates can be generated.</b>").arg(EvalCount).arg(EVAL_MAX));
+		else
+			ui.lblEvalCert->setText(tr("<b><a href=\"_\">Get a free evaluation certificate</a> and enjoy all premium features for %1 days.</b>").arg(EVAL_DAYS));
+		ui.lblEvalCert->setToolTip(tr("You can request a free %1-day evaluation certificate up to %2 times per hardware ID.").arg(EVAL_DAYS).arg(EVAL_MAX));
+	}
+
+	ui.radInsider->setEnabled(CERT_IS_INSIDER(g_CertInfo));
+}
+
+void CSettingsWindow::OnGetCert()
+{
+	QByteArray Certificate;
+	if (!ui.txtCertificate->property("hidden").toBool())
+		Certificate = ui.txtCertificate->toPlainText().toUtf8();
+	else
+		Certificate = g_Certificate;
+	QString Serial = ui.txtSerial->text();
+
+	QString Message;
+
+	if (Serial.length() < 4 || Serial.left(4).compare("SBIE", Qt::CaseInsensitive) != 0) {
+		Message = tr("This does not look like a Sandboxie-Plus Serial Number.<br />"
+			"If you have attempted to enter the UpdateKey or the Signature from a certificate, "
+			"that is not correct, please enter the entire certificate into the text area above instead.");
+	}
+	else if(Certificate.isEmpty())
+	{
+		if (Serial.length() > 5 && Serial.at(4).toUpper() == 'U') {
+			Message = tr("You are attempting to use a feature Upgrade-Key without having entered a pre-existing supporter certificate. "
+				"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one."
+				"<br />If you want to use the advanced features, you need to obtain both a standard certificate and the feature upgrade key to unlock advanced functionality.");
+		}
+
+		else if (Serial.length() > 5 && Serial.at(4).toUpper() == 'R') {
+			Message = tr("You are attempting to use a Renew-Key without having entered a pre-existing supporter certificate. "
+				"Please note that this type of key (<b>as it is clearly stated in bold on the website</b) requires you to have a pre-existing valid supporter certificate; it is useless without one.");
+		}
+
+		if (!Message.isEmpty()) 
+			Message += tr("<br /><br /><u>If you have not read the product description and obtained this key by mistake, please contact us via email (provided on our website) to resolve this issue.</u>");
+	}
+
+	if (!Message.isEmpty()) {
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
+		return;
+	}
+
+	QVariantMap Params;
+	if(!Certificate.isEmpty())
+		Params["key"] = GetArguments(Certificate, L'\n', L':').value("UPDATEKEY");
+
+	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(Serial, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)), Params);
+	if (Status.GetStatus() == OP_ASYNC) {
+		theGUI->AddAsyncOp(Status.GetValue());
+		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
+	}
+}
+
+void CSettingsWindow::OnStartEval()
+{
+	StartEval(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+}
+
+void CSettingsWindow::StartEval(QWidget* parent, QObject* receiver, const char* member)
+{
+	QString Name = theConf->GetString("User/Name", QString::fromLocal8Bit(qgetenv("USERNAME")));
+	//#ifdef _DEBUG
+	//	Name = QInputDialog::getText(parent, tr("Sandboxie-Plus - Get EVALUATION Certificate"), tr("Please enter your Name"), QLineEdit::Normal, Name);
+	//#endif
+
+	QString eMail = QInputDialog::getText(parent, tr("Sandboxie-Plus - Get EVALUATION Certificate"), tr("Please enter your email address to receive a free %1-day evaluation certificate, which will be issued to %2 and locked to the current hardware.\n"
+		"You can request up to %3 evaluation certificates for each unique hardware ID.").arg(EVAL_DAYS).arg(Name).arg(EVAL_MAX), QLineEdit::Normal, theConf->GetString("User/eMail"));
+	if (eMail.isEmpty()) return;
+	theConf->SetValue("User/eMail", eMail);
+
+	QVariantMap Params;
+	Params["eMail"] = eMail;
+	Params["Name"] = Name;
+
+	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert("", receiver, member, Params);
+	if (Status.GetStatus() == OP_ASYNC) {
+		theGUI->AddAsyncOp(Status.GetValue());
+		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
+	}
+}
+
+void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMap& Params)
+{
+	if (Certificate.isEmpty())
+	{
+		QString Error = Params["error"].toString();
+		qDebug() << Error;
+		if (Error == "max eval reached") {
+			if (theConf->GetInt("User/EvalCount", 0) < EVAL_MAX) 
+				theConf->SetValue("User/EvalCount", EVAL_MAX);
+		}
+		QString Message = tr("Error retrieving certificate: %1").arg(Error.isEmpty() ? tr("Unknown Error (probably a network issue)") : Error);
+		CSandMan::ShowMessageBox(this, QMessageBox::Critical, Message);
+		return;
+	}
+	ui.txtCertificate->setProperty("hidden", false);
+	ui.txtCertificate->setPlainText(Certificate);
+	ApplyCert();
+}
+
+void CSettingsWindow::ApplyCert()
+{
+	if (!theAPI->IsConnected())
+		return;
+
+	if (ui.txtCertificate->property("hidden").toBool())
+		return;
+
+	QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
+	if (g_Certificate != Certificate) {
+
+		QPalette palette = QApplication::palette();
+
+		if (theGUI->m_DarkTheme)
+			palette.setColor(QPalette::Text, Qt::black);
+
+		ui.lblCertExp->setVisible(false);
+
+		bool bRet = ApplyCertificate(Certificate, this);
+
+		if (bRet && CERT_IS_TYPE(g_CertInfo, eCertEvaluation)) {
+			int EvalCount = theConf->GetInt("User/EvalCount", 0);
+			EvalCount++;
+			theConf->SetValue("User/EvalCount", EvalCount);
+		}
+
+		if (CertRefreshRequired())
+			TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+
+		if (Certificate.isEmpty())
+			palette.setColor(QPalette::Base, Qt::white);
+		else if (!bRet) 
+			palette.setColor(QPalette::Base, QColor(255, 192, 192));
+		else 
+			palette.setColor(QPalette::Base, QColor(192, 255, 192));
+
+		ui.txtCertificate->setPalette(palette);
+	}
+
+	m_CertChanged = false;
+}
+
+QString CSettingsWindow::GetCertType()
+{
+	QString CertType;
+	if (g_CertInfo.type == eCertContributor)
+		CertType = tr("Contributor");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
+		CertType = tr("Eternal");
+	else if (g_CertInfo.type == eCertDeveloper)
+		CertType = tr("Developer");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
+		CertType = tr("Business");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertPersonal))
+		CertType = tr("Personal");
+	else if (g_CertInfo.type == eCertGreatPatreon)
+		CertType = tr("Great Patreon");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
+		CertType = tr("Patreon");
+	else if (g_CertInfo.type == eCertFamily)
+		CertType = tr("Family");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertHome))
+		CertType = tr("Home");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
+		CertType = tr("Evaluation");
+	else
+		CertType = tr("Type %1").arg(g_CertInfo.type);
+	return CertType;
+}
+
+QColor CSettingsWindow::GetCertColor()
+{
+	if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
+		return QColor(135, 0, 255, 255);
+	else if (g_CertInfo.type == eCertDeveloper)
+		return QColor(255, 215, 0, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
+		return QColor(211, 0, 0, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertPersonal))
+		return QColor(38, 127, 0, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
+		return QColor(38, 127, 0, 255);
+	else if (g_CertInfo.type == eCertFamily)
+		return QColor(0, 38, 255, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertHome))
+		return QColor(255, 106, 0, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
+		return Qt::gray;
+	else
+		return Qt::black;
+}
+
+QString CSettingsWindow::GetCertLevel()
+{
+	QString CertLevel;
+	if (g_CertInfo.level == eCertAdvanced)
+		CertLevel = tr("Advanced");
+	else if (g_CertInfo.level == eCertAdvanced1)
+		CertLevel = tr("Advanced (L)");
+	else if (g_CertInfo.level == eCertMaxLevel)
+		CertLevel = tr("Max Level");
+	else if (g_CertInfo.level != eCertStandard && g_CertInfo.level != eCertStandard2)
+		CertLevel = tr("Level %1").arg(g_CertInfo.level);
+	return CertLevel;
+}
+
+
+bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* widget)
+{
+	if (!Certificate.isEmpty()) 
+	{
+		auto Args = GetArguments(Certificate, L'\n', L':');
+
+		bool bLooksOk = true;
+		if (Args.value("NAME").isEmpty()) // mandatory
+			bLooksOk = false;
+		//if (Args.value("UPDATEKEY").isEmpty())
+		//	bLooksOk = false;
+		if (Args.value("SIGNATURE").isEmpty()) // absolutely mandatory
+			bLooksOk = false;
+
+		if (bLooksOk)
+			theGUI->SetCertificate(Certificate);
+		else {
+			QMessageBox::critical(widget, "Sandboxie-Plus", tr("This does not look like a certificate. Please enter the entire certificate, not just a portion of it."));
+			return false;
+		}
+		g_Certificate = Certificate;
+	}
+	else
+		theGUI->SetCertificate("");
+
+	if (Certificate.isEmpty())
+		return false;
+
+	SB_STATUS Status = theGUI->ReloadCert(widget);
+
+	if (!Status.IsError())
+	{
+		if (g_CertInfo.expired || g_CertInfo.outdated) {
+			if(g_CertInfo.outdated)
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build."));
+			else if(g_CertInfo.active && !g_CertInfo.grace_period)
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database."));
+			else
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate has unfortunately expired, you need to get a new certificate."));
+		}
+		else {
+			if(CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("The evaluation certificate has been successfully applied. Enjoy your free trial!"));
+			else
+			{
+				QString Message = tr("Thank you for supporting the development of Sandboxie-Plus.");
+				if (g_CertInfo.type == eCertEntryPatreon)
+					Message += tr("\nThis is a temporary Patreon certificate, valid for 3 months. "
+						"Once it nears expiration, you can obtain a new certificate online that will be valid for the full term.");
+				QMessageBox::information(widget, "Sandboxie-Plus", Message);
+			}
+		}
+
+		return true;
+	}
+	else
+	{
+		g_CertInfo.State = 0;
+		if (Status.GetStatus() != 0xC000006EL /*STATUS_ACCOUNT_RESTRICTION*/)
+			g_Certificate.clear();
+		return false;
+	}
+}
+
+bool CSettingsWindow::CertRefreshRequired()
+{
+	if (g_CertInfo.active) {
+		if (COnlineUpdater::IsLockRequired() && g_CertInfo.type != eCertEternal && g_CertInfo.type != eCertContributor)
+		{
+			if(!g_CertInfo.locked || g_CertInfo.grace_period)
+				return true;
+		}
+	} else {
+		if (g_CertInfo.lock_req && !(g_CertInfo.expired || g_CertInfo.outdated))
+			return true;
+	}
+
+	return false;
+}
+
+bool CSettingsWindow::TryRefreshCert(QWidget* parent, QObject* receiver, const char* member)
+{
+	if (theConf->GetInt("Options/AskCertRefresh", -1) != 1)
+	{
+		bool State = false;
+		if(CCheckableMessageBox::question(parent, "Sandboxie-Plus", tr("A mandatory security update for your Sandboxie-Plus Supporter Certificate is required. Would you like to download the updated certificate now?")
+			, tr("Auto update in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes)
+			return false;
+
+		if (State)
+			theConf->SetValue("Options/AskCertRefresh", 1);
+	}
+
+	QVariantMap Params;
+	Params["key"] = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
+
+	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert("", receiver, member, Params);
+	if (Status.GetStatus() == OP_ASYNC) {
+		theGUI->AddAsyncOp(Status.GetValue());
+		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
+	}
+
+	return true;
+}
+
 void WindowsMoveFile(const QString& From, const QString& To)
 {
 	std::wstring from = From.toStdWString();
@@ -2996,4 +3323,145 @@ void WindowsMoveFile(const QString& From, const QString& To)
 
     //The Copying Function
     SHFileOperationW(&SHFileOp);
+}
+
+// Helper to load/save consent from config
+void CSettingsWindow::LoadCompletionConsent()
+{
+	m_AutoCompletionConsent = theConf->GetBool("Options/AutoCompletionConsent", false);
+}
+
+void CSettingsWindow::SaveCompletionConsent()
+{
+	theConf->SetValue("Options/AutoCompletionConsent", m_AutoCompletionConsent);
+}
+
+// Show consent dialog and return the chosen autocomplete state
+// Returns: Qt::Unchecked (0) if cancelled, Qt::PartiallyChecked (1) for Basic, Qt::Checked (2) for Full
+int CSettingsWindow::ShowConsentDialog()
+{
+	QMessageBox consentBox(this);
+	consentBox.setWindowTitle(tr("Autocomplete Consent Required"));
+	consentBox.setIcon(QMessageBox::Question);
+	consentBox.setText(tr("Autocomplete feature requires your consent to proceed."));
+	consentBox.setInformativeText(
+		tr("If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software's documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.\n\n"
+		   "Choose autocomplete mode:\n"
+		   "• Basic: Manual completion (Ctrl+Space) with case correction\n"
+		   "• Full: Automatic completion while typing with case correction")
+	);
+	
+	QPushButton* basicButton = consentBox.addButton(tr("Basic"), QMessageBox::YesRole);
+	basicButton->setToolTip(tr("Enable manual completion only (Ctrl+Space) with case correction"));
+	
+	QPushButton* fullButton = consentBox.addButton(tr("Full"), QMessageBox::YesRole);
+	fullButton->setToolTip(tr("Enable automatic completion while typing with case correction"));
+	
+	QPushButton* cancelButton = consentBox.addButton(tr("Cancel"), QMessageBox::NoRole);
+	cancelButton->setToolTip(tr("Keep autocomplete disabled"));
+	
+	consentBox.setDefaultButton(basicButton);
+	
+	consentBox.exec();
+	QAbstractButton* clickedButton = consentBox.clickedButton();
+	
+	if (clickedButton == basicButton) {
+		m_AutoCompletionConsent = true;
+		SaveCompletionConsent();
+		return Qt::PartiallyChecked; // Basic mode
+	}
+	else if (clickedButton == fullButton) {
+		m_AutoCompletionConsent = true;
+		SaveCompletionConsent();
+		return Qt::Checked; // Full mode
+	}
+	else { // Cancel
+		m_AutoCompletionConsent = false;
+		SaveCompletionConsent();
+		return Qt::Unchecked; // Cancelled
+	}
+}
+
+void CSettingsWindow::OnEditorSettings()
+{
+	CEditorSettingsWindow editorWindow(this);
+	if (editorWindow.exec() == QDialog::Accepted) {
+		// Settings were saved by the dialog, now update the current UI to reflect changes
+		bool previousConsent = m_AutoCompletionConsent;
+		LoadCompletionConsent();
+		bool newConsent = m_AutoCompletionConsent;
+		
+		// If consent was just granted (changed from false to true), show the consent dialog
+		if (!previousConsent && newConsent) {
+			int chosenState = ShowConsentDialog();
+			
+			// Save the chosen autocomplete mode to config
+			theConf->SetValue("Options/EnableAutoCompletion", chosenState);
+		}
+		
+		// Update the current checkboxes to reflect the new settings
+		// Note: SettingsWindow only has UI checkboxes for 3 settings:
+		// - ValidateIniKeys (ui.chkValidateIniKeys)
+		// - EnableIniTooltips (ui.chkEnableTooltips)
+		// - EnableAutoCompletion (ui.chkEnableAutoCompletion)
+		// The other 3 settings (EnablePopupTooltips, EnableFuzzyMatching, AutoCompletionConsent)
+		// are managed by EditorSettings but don't have corresponding UI in SettingsWindow
+		
+		// Block signals while updating checkboxes to prevent toggle handlers from being called prematurely
+		ui.chkValidateIniKeys->blockSignals(true);
+		ui.chkEnableTooltips->blockSignals(true);
+		ui.chkEnableAutoCompletion->blockSignals(true);
+		
+		// Read current values from config (will be defaults if settings were reset/deleted)
+		bool defaultValidation = theConf->GetBool("Options/ValidateIniKeys", true);
+		ui.chkValidateIniKeys->setChecked(defaultValidation);
+		
+		int defaultTooltip = theConf->GetInt("Options/EnableIniTooltips", 1); // 1 = BasicInfo
+		ui.chkEnableTooltips->setCheckState(static_cast<Qt::CheckState>(defaultTooltip));
+		
+		int defaultAutoCompletion = theConf->GetInt("Options/EnableAutoCompletion", 0); // 0 = Disabled
+		if (m_AutoCompletionConsent) { // Consented
+			ui.chkEnableAutoCompletion->setTristate(true);
+			ui.chkEnableAutoCompletion->setCheckState(static_cast<Qt::CheckState>(defaultAutoCompletion));
+		}
+		else {
+			ui.chkEnableAutoCompletion->setTristate(false);
+			ui.chkEnableAutoCompletion->setCheckState(Qt::Unchecked);
+		}
+		
+		// Unblock signals before calling toggle handlers manually
+		ui.chkValidateIniKeys->blockSignals(false);
+		ui.chkEnableTooltips->blockSignals(false);
+		ui.chkEnableAutoCompletion->blockSignals(false);
+		
+		// Apply the settings immediately
+		// Set skip flag for reset settings to prevent re-saving them to config
+		// For non-reset settings, allow normal save behavior
+		
+		// ValidateIniKeys
+		m_SkipSaveOnToggle = editorWindow.WasValidateIniKeysReset();
+		OnIniValidationToggled(defaultValidation ? Qt::Checked : Qt::Unchecked);
+		m_SkipSaveOnToggle = false;
+		
+		// EnableIniTooltips
+		m_SkipSaveOnToggle = editorWindow.WasEnableIniTooltipsReset();
+		OnTooltipToggled(defaultTooltip);
+		m_SkipSaveOnToggle = false;
+		
+		// EnableAutoCompletion
+		m_SkipSaveOnToggle = editorWindow.WasEnableAutoCompletionReset();
+		OnAutoCompletionToggled(defaultAutoCompletion);
+		m_SkipSaveOnToggle = false;
+		
+		// Apply settings that don't have UI checkboxes in SettingsWindow
+		// These are managed via EditorSettings only
+		if (editorWindow.HasResetOccurred()) {
+			// If any reset occurred, update these settings from config
+			bool fuzzyEnabled = theConf->GetBool("Options/EnableFuzzyMatching", false);
+			m_pCodeEdit->SetFuzzyMatchingEnabled(fuzzyEnabled);
+		}
+		
+		// Always update autocompletion list regardless of reset status
+		UpdateAutoCompletion();
+	}
 }

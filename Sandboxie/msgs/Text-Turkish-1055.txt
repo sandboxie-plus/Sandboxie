@@ -778,6 +778,18 @@ Masaüstü
 Programlar
 .
 
+3115;txt;01
+Evet
+.
+
+3116;txt;01
+Hayır
+.
+
+3117;txt;01
+İptal
+.
+
 3198;txt;01
 %2 korumalı alanında yeni bir program başlatmak istiyor musunuz?
 Bu mesajı AlertBeforeStart=y ayarından dolayı aldınız.

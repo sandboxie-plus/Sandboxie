@@ -215,6 +215,41 @@ _FX int Dll_NlsStrCmp(const WCHAR *s1, const WCHAR *s2, ULONG len)
 
 
 //---------------------------------------------------------------------------
+// SbieDll_SetServiceRegistryValue
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN SbieDll_SetServiceRegistryValue(
+    const WCHAR *name, ULONG type, const void *data, ULONG dataSize)
+{
+    NTSTATUS          status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING    objname;
+    HANDLE            handle;
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL );
+
+    RtlInitUnicodeString(&objname, Support_SbieSvcKeyPath);
+
+    status = NtOpenKey(&handle, KEY_SET_VALUE, &objattrs);
+    if (!NT_SUCCESS(status))
+        return FALSE;
+
+    RtlInitUnicodeString(&objname, name);
+
+    status = NtSetValueKey(handle, &objname, 0, type, (PVOID)data, dataSize);
+
+    NtClose(handle);
+
+    if (! NT_SUCCESS(status))
+        return FALSE;
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
 // SbieDll_GetServiceRegistryValue
 //---------------------------------------------------------------------------
 
@@ -315,7 +350,8 @@ _FX ULONG SbieDll_GetLanguage(BOOLEAN *rtl)
     }
 
     if (rtl) {
-        if (lang == 1037)               /* Hebrew */
+        if (lang == 1037 ||             /* Hebrew */
+			lang == 1025)               /* Arabic */
             *rtl = TRUE;
         else
             *rtl = FALSE;

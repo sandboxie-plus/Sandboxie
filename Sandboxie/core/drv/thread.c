@@ -240,19 +240,10 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
 
         ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
-#ifdef USE_PROCESS_MAP
         if (Create)
             thrd = map_get(&proc->thread_map, ThreadId);
         else // remove
             map_take(&proc->thread_map, ThreadId, &thrd, 0);
-#else
-        thrd = List_Head(&proc->threads);
-        while (thrd) {
-            if (thrd->tid == ThreadId)
-                break;
-            thrd = List_Next(thrd);
-        }
-#endif
 
         if (thrd) {
 
@@ -266,9 +257,6 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
                 TokenObject = InterlockedExchangePointer(
                                             &thrd->token_object, NULL);
 
-#ifndef USE_PROCESS_MAP
-                List_Remove(&proc->threads, thrd);
-#endif
                 Mem_Free(thrd, sizeof(THREAD));
             }
         }
@@ -296,12 +284,8 @@ _FX BOOLEAN Thread_InitProcess(PROCESS *proc)
 
     if (! proc->threads_lock) {
 
-#ifdef USE_PROCESS_MAP
         map_init(&proc->thread_map, proc->pool);
 	    map_resize(&proc->thread_map, 32); // prepare some buckets for better performance
-#else
-        List_Init(&proc->threads);
-#endif
 
         ok = Mem_GetLockResource(&proc->threads_lock, FALSE);
         if (! ok)
@@ -337,23 +321,14 @@ _FX void Thread_ReleaseProcess(PROCESS *proc)
             KeRaiseIrql(APC_LEVEL, &irql);
             ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
-#ifdef USE_PROCESS_MAP
 	        map_iter_t iter = map_iter();
 	        while (map_next(&proc->thread_map, &iter)) {
                 thrd = iter.value;
-#else
-            thrd = List_Head(&proc->threads);
-            while (thrd) {
-#endif
 
                 TokenObject = InterlockedExchangePointer(
                                             &thrd->token_object, NULL);
                 if (TokenObject)
                     break;
-
-#ifndef USE_PROCESS_MAP
-                thrd = List_Next(thrd);
-#endif
             }
 
             ExReleaseResourceLite(proc->threads_lock);
@@ -487,16 +462,7 @@ _FX THREAD *Thread_GetByThreadId(PROCESS *proc, HANDLE tid)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
-#ifdef USE_PROCESS_MAP
     thrd = map_get(&proc->thread_map, tid);
-#else
-    thrd = List_Head(&proc->threads);
-    while (thrd) {
-        if (thrd->tid == tid)
-            break;
-        thrd = List_Next(thrd);
-    }
-#endif
 
     ExReleaseResourceLite(proc->threads_lock);
     KeLowerIrql(irql);
@@ -516,27 +482,14 @@ _FX THREAD *Thread_GetOrCreate(PROCESS *proc, HANDLE tid, BOOLEAN create)
     if (! tid)
         tid = PsGetCurrentThreadId();
 
-#ifdef USE_PROCESS_MAP
     thrd = map_get(&proc->thread_map, tid);
-#else
-    thrd = List_Head(&proc->threads);
-    while (thrd) {
-        if (thrd->tid == tid)
-            break;
-        thrd = List_Next(thrd);
-    }
-#endif
 
     if ((! thrd) && create) {
         thrd = Mem_Alloc(proc->pool, sizeof(THREAD));
         if (thrd) {
             memzero(thrd, sizeof(THREAD));
             thrd->tid = tid;
-#ifdef USE_PROCESS_MAP
             map_insert(&proc->thread_map, tid, thrd, 0);
-#else
-            List_Insert_After(&proc->threads, NULL, thrd);
-#endif
         }
     }
 
@@ -1074,6 +1027,30 @@ finish:
 
 
 //---------------------------------------------------------------------------
+// Process_IsSbieImage
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Thread_IsSystemImage(const WCHAR* image_path, WCHAR* image)
+{
+    if (image_path) {
+
+        ULONG len = (ULONG)wcslen(image_path);
+        if ((len > Driver_SystemRootPathNt_Len) &&
+            (_wcsnicmp(image_path, Driver_SystemRootPathNt, Driver_SystemRootPathNt_Len) == 0)) {
+
+            if (_wcsicmp(image_path + Driver_SystemRootPathNt_Len, image) == 0) {
+
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // Thread_CheckObject_CommonEx
 //---------------------------------------------------------------------------
 
@@ -1135,6 +1112,7 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                     if (WriteAccess || proc2->confidential_box) {
 
                         protect_process = Process_GetConfEx_bool(proc2->box, nptr, L"DenyHostAccess", proc2->confidential_box);
+						BOOLEAN admin_only = Process_GetConfEx_bool(proc2->box, nptr, L"ProtectAdminOnly", FALSE);
 
                         //
                         // in case use specified wildcard "*" always grant access to sbiesvc.exe and csrss.exe
@@ -1142,14 +1120,17 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                         //
 
                         if (protect_process /*&& MyIsProcessRunningAsSystemAccount(cur_pid)*/) {
-                            if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) 
+                            if (Util_IsSystemProcess(cur_pid, "sbiesvc.exe")
                                 || Util_IsSystemProcess(cur_pid, "csrss.exe")
                                 || Util_IsSystemProcess(cur_pid, "lsass.exe")
                                 || Util_IsProtectedProcess(cur_pid)
-                                || (_wcsicmp(nptr, L"conhost.exe") == 0)
-                                || (_wcsicmp(nptr, L"taskmgr.exe") == 0) || (_wcsicmp(nptr, L"sandman.exe") == 0))
+                                || Thread_IsSystemImage(((UNICODE_STRING *)nbuf)->Buffer, L"\\System32\\conhost.exe")
+                                || Thread_IsSystemImage(((UNICODE_STRING *)nbuf)->Buffer, L"\\System32\\taskmgr.exe")
+                                || (Session_GetLeadSession(cur_pid) != 0 && (!admin_only || Session_CheckAdminAccess(TRUE))))
                                 protect_process = FALSE;
                         }
+
+                        //DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_INFO_LEVEL, "ProtectProcess: %d from %S (%d) requesting 0x%08X\n", protect_process, ((UNICODE_STRING *)nbuf)->Buffer, (ULONG)cur_pid, DesiredAccess);
 
                         if (protect_process && cur_pid == proc2->starter_id && !proc2->initialized)
                             protect_process = FALSE;

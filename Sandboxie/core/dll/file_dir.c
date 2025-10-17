@@ -2956,6 +2956,28 @@ _FX ULONG File_RtlGetFullPathName_U(
     if (ret_len && ret_len <= 8192) {
 
         //
+        // Requesting a path like \MyDir should return the path on the current drive.
+        // Since in the sandbox the current working directory (thus the drive) can be different from the real one,
+        // we check for that case and fix it by getting the correct drive letter and setting it.
+        //
+
+        if (src[0] == L'\\' && src[1] != L'\\') {
+
+            RTL_USER_PROCESS_PARAMETERS* ProcessParms = Proc_GetRtlUserProcessParameters();
+            if (ProcessParms->CurrentDirectoryPath.Buffer && ProcessParms->CurrentDirectoryPath.Buffer[0] == temp_buf[0]) {
+
+                WCHAR *TruePath = File_GetTruePathForBoxedPath(ProcessParms->CurrentDirectoryPath.Buffer, TRUE);
+
+                if (TruePath) {
+
+                    temp_buf[0] = TruePath[0];
+
+                    Dll_Free(TruePath);
+                }
+            }
+        }
+
+        //
         // if the path we got is inside the sandbox, change it to
         // the corresponding path outside the sandbox
         //

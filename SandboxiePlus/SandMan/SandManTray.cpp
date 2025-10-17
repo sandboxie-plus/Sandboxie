@@ -1,4 +1,22 @@
 
+class CTrayTreeWidget : public QTreeWidget 
+{	
+public:
+	using QTreeWidget::QTreeWidget;
+
+protected:
+	void mousePressEvent(QMouseEvent* event) override {
+		if (event->button() == Qt::RightButton) {
+			auto item = itemAt(event->pos());
+			if (item)
+				setCurrentItem(item);
+			emit customContextMenuRequested(event->pos());
+		} else {
+			QTreeWidget::mousePressEvent(event);
+		}
+	}
+};
+
 
 bool CTrayBoxesItemDelegate::m_Hold = false;
 
@@ -48,7 +66,7 @@ void CSandMan::CreateTrayMenu()
 		pLayout->setContentsMargins(0,0,0,0);
 		pWidget->setLayout(pLayout);
 
-		m_pTrayBoxes = new QTreeWidget();
+		m_pTrayBoxes = new CTrayTreeWidget();
 
 		m_pTrayBoxes->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
 		m_pTrayBoxes->setRootIsDecorated(false);

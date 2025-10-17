@@ -83,20 +83,22 @@ env:
   #ghQtBuilds_hash_x64: 673c288feeabd11ec66f9f454d49cde3945cbd3e3f71283b7a6c4df0893b19f2
 
 jobs:
-  Build_x64:
-    runs-on: windows-2019
+          
+  Build_x64_Qt6:
+    runs-on: windows-2022
     timeout-minutes: 45
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v5
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd
         run: |
           @echo on
-          call "${{ github.workspace }}\Installer\buildVariables.cmd"
+          call "${{ github.workspace }}\Installer\buildVariables.cmd" build_qt6
           echo qt6_version=%qt6_version% >> %GITHUB_ENV%
+          echo qt_version=%qt6_version% >> %GITHUB_ENV%
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2
@@ -110,23 +112,27 @@ jobs:
 
       - name: Build Sandboxie x64 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+        
+      - name: Build Sandboxie x64 (drv)
+        run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
 
     #
     # Prepare Qt Framework
     #
 
 #      - name: Install Qt6 x64
-#        uses: jurplel/install-qt-action@v4.2.1
+#        uses: jurplel/install-qt-action@v4.3.0
 #        with:
 #      #    version: '6.2.4'
-#          version: '6.3.1'
+#          version: '${{ env.qt6_version }}'
 #      #    dir: ..
 #      #    arch:  ${{ matrix.qt-target }}
-#          arch:  'win64_msvc2019_64'
+#          arch:  'win64_msvc2022_64'
 #      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
+#          tools: 'tools_opensslv3_x64'
 #          cache: true
 
-      - name: Install Qt5 x64
+      - name: Install Qt6 x64
         run: SandboxiePlus\install_qt.cmd x64
 
       - name: Installing Jom
@@ -138,7 +144,7 @@ jobs:
     #
 
       - name: Build Sandboxie-Plus x64
-        run: SandboxiePlus\qmake_plus.cmd x64
+        run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
 
       - name: Build SbieShell x64
         run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
@@ -157,8 +163,8 @@ jobs:
 #      - name: Add Windows 7 compatible Qt6 DLLs
 #        run: Installer\fix_qt6_win7.cmd
 
-      - name: Add missing languages for Qt5 (issue 1528)
-        run: Installer\fix_qt5_languages.cmd x64
+      - name: Add missing languages for Qt6 (issue 1528)
+        run: Installer\fix_qt5_languages.cmd x64 build_qt6
 
       - name: Get openssl binaries
         run: Installer\get_openssl.cmd
@@ -167,7 +173,7 @@ jobs:
         run: Installer\get_7zip.cmd
 
       - name: Merging Build
-        run: Installer\copy_build.cmd x64
+        run: Installer\copy_build.cmd x64 build_qt6
 
       - name: Collect installer assets
         run: Installer\get_assets.cmd
@@ -190,13 +196,16 @@ jobs:
             Installer/SbiePlus_x64/*
           retention-days: 60
 
-  Build_ARM64:
-    runs-on: windows-2019
+
+
+
+  Build_ARM64_Qt6:
+    runs-on: windows-2022
     timeout-minutes: 45
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v5
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd
@@ -221,30 +230,33 @@ jobs:
       - name: Build Sandboxie ARM64EC (DLL)
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
 
+      - name: Build Sandboxie ARM64 (drv)
+        run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=ARM64 -maxcpucount:8
+
     #
     # Prepare Qt Framework for ARM64 (we also need Qt x64 for some utilities like qmake)
     #
 
       - name: Install Qt6 x64
-        uses: jurplel/install-qt-action@v4.2.1
+        uses: jurplel/install-qt-action@v4.3.0
         with:
       #    version: '6.2.4'
           version: '${{ env.qt6_version }}'
       #    dir: ..
       #    arch:  ${{ matrix.qt-target }}
-          arch:  'win64_msvc2019_64'
+          arch:  'win64_msvc2022_64'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
           tools: 'tools_opensslv3_x64'
           cache: true
 
       - name: Install Qt6 ARM64
-        uses: jurplel/install-qt-action@v4.2.1
+        uses: jurplel/install-qt-action@v4.3.0
         with:
       #    version: '6.2.4'
           version: '${{ env.qt6_version }}'
       #    dir: ..
       #    arch:  ${{ matrix.qt-target }}
-          arch:  'win64_msvc2019_arm64'
+          arch:  'win64_msvc2022_arm64_cross_compiled'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
           tools: 'tools_opensslv3_x64'
           cache: true
@@ -294,181 +306,3 @@ jobs:
           path: |
             Installer/SbiePlus_a64/*
           retention-days: 60
-
-  Build_x86:
-    runs-on: windows-2019
-    timeout-minutes: 45
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.7
-
-      - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v2
-
-    #
-    # Compile Sandboxie Core
-    #
-
-      - name: Build Sandboxie x86 (all)
-        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
-
-    #
-    # Prepare Qt Framework
-    #
-
-      - name: Install Qt5 x86
-        run: SandboxiePlus\install_qt.cmd Win32
-
-      - name: Installing Jom
-      #  if: steps.cache-qt.outputs.cache-hit != 'true'
-        run: SandboxiePlus\install_jom.cmd
-
-    #
-    # Compile Sandboxie Plus
-    #
-
-      - name: Build Sandboxie-Plus x86
-        run: SandboxiePlus\qmake_plus.cmd Win32
-
-    #
-    # Compile Sandboxie Tools
-    #
-
-      - name: Build Sandboxie-Tools x86
-        run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x86 -maxcpucount:8
-
-    #
-    # Merge everything together
-    #
-
-      - name: Add missing languages for Qt5 (issue 1528)
-        run: Installer\fix_qt5_languages.cmd Win32
-
-      - name: Get openssl binaries
-        run: Installer\get_openssl.cmd
-
-      - name: Get 7z binaries
-        run: Installer\get_7zip.cmd
-
-      - name: Merging Build
-        run: Installer\copy_build.cmd x86
-
-      - name: Upload Sandboxie x86
-        #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4.6.2
-        with:
-          name: Sandboxie_x86
-          path: |
-            Installer/SbiePlus_x86/*
-          retention-days: 60
-
-  Build_x64_Qt6:
-    runs-on: windows-2019
-    timeout-minutes: 45
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.7
-
-      - name: Load Variables from buildVariables.cmd
-        shell: cmd
-        run: |
-          @echo on
-          call "${{ github.workspace }}\Installer\buildVariables.cmd" build_qt6
-          echo qt6_version=%qt6_version% >> %GITHUB_ENV%
-          echo qt_version=%qt6_version% >> %GITHUB_ENV%
-
-      - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v2
-
-    #
-    # Compile Sandboxie Core
-    #
-
-      - name: Build Sandboxie x86 (DLLs & svc)
-        run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
-
-      - name: Build Sandboxie x64 (all)
-        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
-
-    #
-    # Prepare Qt Framework
-    #
-
-      - name: Install Qt6 x64
-        uses: jurplel/install-qt-action@v4.2.1
-        with:
-      #    version: '6.2.4'
-          version: '${{ env.qt6_version }}'
-      #    dir: ..
-      #    arch:  ${{ matrix.qt-target }}
-          arch:  'win64_msvc2019_64'
-      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-          tools: 'tools_opensslv3_x64'
-          cache: true
-
-#      - name: Install Qt5 x64
-#        run: SandboxiePlus\install_qt.cmd x64
-
-      - name: Installing Jom
-      #  if: steps.cache-qt.outputs.cache-hit != 'true'
-        run: SandboxiePlus\install_jom.cmd
-
-    #
-    # Compile Sandboxie Plus
-    #
-
-      - name: Build Sandboxie-Plus x64
-        run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
-
-      - name: Build SbieShell x64
-        run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
-
-    #
-    # Compile Sandboxie Tools
-    #
-
-      - name: Build Sandboxie-Tools x64
-        run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8
-
-    #
-    # Merge everything together
-    #
-
-#      - name: Add Windows 7 compatible Qt6 DLLs
-#        run: Installer\fix_qt6_win7.cmd
-
-      - name: Add missing languages for Qt6 (issue 1528)
-        run: Installer\fix_qt5_languages.cmd x64 build_qt6
-
-      - name: Get openssl binaries
-        run: Installer\get_openssl.cmd
-
-      - name: Get 7z binaries
-        run: Installer\get_7zip.cmd
-
-      - name: Merging Build
-        run: Installer\copy_build.cmd x64 build_qt6
-
-      - name: Collect installer assets
-        run: Installer\get_assets.cmd
-
-      # - name: Upload installer assets
-        # #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        # uses: actions/upload-artifact@v4.6.2
-        # with:
-          # name: Assets
-          # path: |
-            # Installer/Assets/*
-          # retention-days: 60
-
-      - name: Upload Sandboxie x64 Qt6
-        #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4.6.2
-        with:
-          name: Sandboxie_x64_Qt6
-          path: |
-            Installer/SbiePlus_x64/*
-          retention-days: 60
-

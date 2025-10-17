@@ -71,9 +71,6 @@ typedef struct _FORCE_PROCESS {
 
 typedef struct _FORCE_PROCESS_2 {
 
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif
     HANDLE pid;
     BOOLEAN silent;
 
@@ -82,9 +79,6 @@ typedef struct _FORCE_PROCESS_2 {
 
 typedef struct _FORCE_PROCESS_3 {
 
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif
     HANDLE pid;
     WCHAR boxname[BOXNAME_COUNT];
 
@@ -344,35 +338,41 @@ _FX BOX *Process_GetForcedStartBox(
 
         if ((! box) && (alert != 1))
             Process_CheckAlertProcess(&boxes, ImageName, ImagePath2, &alert);
-    }
+    
 
-    //
-    // check mark of the web (MoTW)
-    //
+        //
+        // check mark of the web (MoTW)
+        //
 
-    if (! box) {
+        if (! box && (alert != 1)) {
 
-        if (Conf_Get_Boolean(NULL, L"ForceMarkOfTheWeb", 0, FALSE)) {
+            if (Conf_Get_Boolean(NULL, L"ForceMarkOfTheWeb", 0, FALSE)) {
 
-            if (Process_CheckMoTW(ImagePath2) || (DocArg && Process_CheckMoTW(DocArg))) {
+                //
+                // Check the program and check the passed document (except for start.exe)
+                //
 
-                const WCHAR* MoTW_Box = Conf_Get(NULL, L"MarkOfTheWebBox", 0);
-                if (!MoTW_Box || !*MoTW_Box)
-                    MoTW_Box = L"DefaultBox";
+                if (Process_CheckMoTW(ImagePath2) || (!(is_start_exe || _wcsicmp(ImageName, L"sandman.exe") == 0) && DocArg && Process_CheckMoTW(DocArg))) {
 
-                box = (BOX*)-1; // when box not found cancel process
+                    const WCHAR* MoTW_Box = Conf_Get(NULL, L"MarkOfTheWebBox", 0);
+                    if (!MoTW_Box || !*MoTW_Box)
+                        MoTW_Box = L"DefaultBox";
 
-                ULONG MoTW_Box_len = (wcslen(MoTW_Box) + 1) * sizeof(WCHAR);
-                FORCE_BOX* fbox = List_Head(&boxes);
-                while (fbox) {
-                    if (MoTW_Box_len == fbox->box->name_len && _wcsicmp(MoTW_Box, fbox->box->name) == 0) {
-                        box = fbox->box;
-                        break;
+                    box = (BOX*)-1; // when box not found cancel process
+
+                    ULONG MoTW_Box_len = (wcslen(MoTW_Box) + 1) * sizeof(WCHAR);
+                    FORCE_BOX* fbox = List_Head(&boxes);
+                    while (fbox) {
+                        if (MoTW_Box_len == fbox->box->name_len && _wcsicmp(MoTW_Box, fbox->box->name) == 0) {
+                            box = fbox->box;
+                            break;
+                        }
+                        fbox = List_Next(fbox);
                     }
-                    fbox = List_Next(fbox);
                 }
             }
         }
+
     }
 
     //
@@ -1826,11 +1826,7 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
         proc->pid = ProcessId;
         proc->silent = FALSE;
 
-#ifdef USE_PROCESS_MAP
         map_insert(&Process_MapDfp, ProcessId, proc, 0);
-#else
-        List_Insert_After(&Process_ListDfp, NULL, proc);
-#endif
 
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
@@ -1847,34 +1843,16 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
 
         added = FALSE;
 
-#ifdef USE_PROCESS_MAP
         proc = map_get(&Process_MapDfp, ParentId);
         if (proc) {
-#else
-        proc = List_Head(&Process_ListDfp);
-        while (proc) {
 
-            if (proc->pid == ParentId) {
-#endif
+            proc = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS_2));
+            proc->pid = ProcessId;
+            proc->silent = FALSE;
 
-                proc = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS_2));
-                proc->pid = ProcessId;
-                proc->silent = FALSE;
+            map_insert(&Process_MapDfp, ProcessId, proc, 0);
 
-#ifdef USE_PROCESS_MAP
-                map_insert(&Process_MapDfp, ProcessId, proc, 0);
-#else
-                List_Insert_After(&Process_ListDfp, NULL, proc);
-#endif
-
-                added = TRUE;
-
-#ifndef USE_PROCESS_MAP
-                break;
-            }
-
-            proc = List_Next(proc);
-#endif
+            added = TRUE;
         }
     }
 
@@ -1891,25 +1869,8 @@ _FX void Process_DfpDelete(HANDLE ProcessId)
 {
     FORCE_PROCESS_2 *proc;
 
-#ifdef USE_PROCESS_MAP
     if(map_take(&Process_MapDfp, ProcessId, &proc, 0))
         Mem_Free(proc, sizeof(FORCE_PROCESS_2));
-#else
-    proc = List_Head(&Process_ListDfp);
-    while (proc) {
-
-        if (proc->pid == ProcessId) {
-
-            List_Remove(&Process_ListDfp, proc);
-
-            Mem_Free(proc, sizeof(FORCE_PROCESS_2));
-
-            return;
-        }
-
-        proc = List_Next(proc);
-    }
-#endif
 }
 
 
@@ -1927,28 +1888,15 @@ _FX BOOLEAN Process_DfpCheck(HANDLE ProcessId, BOOLEAN *silent)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
-#ifdef USE_PROCESS_MAP
     proc = map_get(&Process_MapDfp, ProcessId);
     if (proc) {
-#else
-    proc = List_Head(&Process_ListDfp);
-    while (proc) {
 
-        if (proc->pid == ProcessId) {
-#endif
+        if (*silent)
+            proc->silent = TRUE;
+        else
+            *silent = proc->silent;
 
-            if (*silent)
-                proc->silent = TRUE;
-            else
-                *silent = proc->silent;
-
-            found = TRUE;
-#ifndef USE_PROCESS_MAP
-            break;
-        }
-
-        proc = List_Next(proc);
-#endif
+        found = TRUE;
     }
 
     ExReleaseResourceLite(Process_ListLock);
@@ -1981,11 +1929,7 @@ _FX VOID Process_FcpInsert(HANDLE ProcessId, const WCHAR* boxname)
     proc->pid = ProcessId;
     wmemcpy(proc->boxname, boxname, BOXNAME_COUNT);
 
-#ifdef USE_PROCESS_MAP
     map_insert(&Process_MapFcp, ProcessId, proc, 0);
-#else
-    List_Insert_After(&Process_ListFcp, NULL, proc);
-#endif
 
     ExReleaseResourceLite(Process_ListLock);
     KeLowerIrql(irql);
@@ -2003,25 +1947,8 @@ _FX void Process_FcpDelete(HANDLE ProcessId)
 {
     FORCE_PROCESS_3 *proc;
 
-#ifdef USE_PROCESS_MAP
     if(map_take(&Process_MapFcp, ProcessId, &proc, 0))
         Mem_Free(proc, sizeof(FORCE_PROCESS_3));
-#else
-    proc = List_Head(&Process_ListFcp);
-    while (proc) {
-
-        if (proc->pid == ProcessId) {
-
-            List_Remove(&Process_ListFcp, proc);
-
-            Mem_Free(proc, sizeof(FORCE_PROCESS_3));
-
-            return;
-        }
-
-        proc = List_Next(proc);
-    }
-#endif
 }
 
 
@@ -2039,25 +1966,13 @@ _FX BOOLEAN Process_FcpCheck(HANDLE ProcessId, WCHAR* boxname)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
-#ifdef USE_PROCESS_MAP
     proc = map_get(&Process_MapFcp, ProcessId);
     if (proc) {
-#else
-    proc = List_Head(&Process_ListFcp);
-    while (proc) {
 
-        if (proc->pid == ProcessId) {
-#endif
-            if(boxname)
-                wmemcpy(boxname, proc->boxname, BOXNAME_COUNT);
+        if(boxname)
+            wmemcpy(boxname, proc->boxname, BOXNAME_COUNT);
 
-            found = TRUE;
-#ifndef USE_PROCESS_MAP
-            break;
-        }
-
-        proc = List_Next(proc);
-#endif
+        found = TRUE;
     }
 
     ExReleaseResourceLite(Process_ListLock);
@@ -2087,7 +2002,7 @@ _FX BOOLEAN Process_CheckMoTW(const WCHAR *path)
     if (!path)
         return FALSE;
 
-    adsPath_len = wcslen(path) * sizeof(WCHAR) + sizeof(ads_suffix);
+    adsPath_len = (wcslen(path) + 1) * sizeof(WCHAR) + sizeof(ads_suffix);
     adsPath = Mem_Alloc(Driver_Pool, adsPath_len);
     if (!adsPath)
         return FALSE;
@@ -2096,7 +2011,7 @@ _FX BOOLEAN Process_CheckMoTW(const WCHAR *path)
     
     RtlInitUnicodeString(&uni, adsPath);
     InitializeObjectAttributes(&objattrs,
-        &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        &uni, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
 
     status = ZwCreateFile(
         &handle,

@@ -22,7 +22,7 @@ jobs:
           sudo apt-get install --no-install-recommends qtbase5-dev qttools5-dev-tools
 
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Sync Sbie Plus language strings (.ts files)
         id: check
@@ -30,7 +30,28 @@ jobs:
         working-directory: SandboxiePlus/SandMan
         run: |
           set +e
-          lupdate SandMan.pri
+          lupdate SandMan.pri ../MiscHelpers/MiscHelpers.pri \
+            -ts sandman_ar.ts \
+            -ts sandman_de.ts \
+            -ts sandman_en.ts \
+            -ts sandman_es.ts \
+            -ts sandman_fr.ts \
+            -ts sandman_hu.ts \
+            -ts sandman_it.ts \
+            -ts sandman_ja.ts \
+            -ts sandman_ko.ts \
+            -ts sandman_nl.ts \
+            -ts sandman_pl.ts \
+            -ts sandman_pt_BR.ts \
+            -ts sandman_pt_PT.ts \
+            -ts sandman_ru.ts \
+            -ts sandman_sv_SE.ts \
+            -ts sandman_tr.ts \
+            -ts sandman_uk.ts \
+            -ts sandman_vi.ts \
+            -ts sandman_id.ts \
+            -ts sandman_zh_CN.ts \
+            -ts sandman_zh_TW.ts
           git diff --exit-code
           echo "deploy=$?" >> $GITHUB_OUTPUT
 
@@ -51,13 +72,13 @@ jobs:
     name: SBIE reports
     # Skip the job on forks
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
-    runs-on: windows-2019
+    runs-on: windows-2022
     timeout-minutes: 15
 
     steps:
 
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2

@@ -33,6 +33,10 @@ public:
 		eParent
 	};
 
+	void LoadCompletionConsent();
+	void SaveCompletionConsent();
+	int ShowConsentDialog(); // Returns: 0=Unchecked, 1=PartiallyChecked(Basic), 2=Checked(Full)
+
 signals:
 	//void OptionsChanged();
 	void Closed();
@@ -53,6 +57,7 @@ private slots:
 	bool OnPickIcon();
 	void OnPickColor();
 	void OnColorSlider(int value);
+	void OnColorReset();
 
 	void OnBoxTypChanged();
 	void UpdateBoxType();
@@ -264,9 +269,14 @@ private slots:
 	void OnOpenCOM();
 	void OnIsolationChanged();
 	void OnDebugChanged();
+	void OnDumpConfig();
 
 	void SetIniEdit(bool bEnable);
 	void OnEditIni();
+	void OnIniValidationToggled(int state);
+	void OnTooltipToggled(int state);
+	void OnAutoCompletionToggled(int state);
+	void OnEditorSettings();
 	void OnSaveIni();
 	void OnIniChanged();
 	void OnCancelEdit();
@@ -559,14 +569,21 @@ protected:
 	void SaveIniSection();
 
 	void ApplyIniEditFont();
+	
+	// Autocompletion support
+	void UpdateAutoCompletion();
 
 	QString GetCategoryName(const QString& Category);
 
 	bool m_HoldChange;
+	bool m_SkipSaveOnToggle; // Skip saving to config when applying reset settings
 
 	bool m_ConfigDirty;
 	QColor m_BorderColor;
+	int m_BorderAlpha;
 	QString m_BoxIcon;
+	bool m_CustomColor;
+	bool m_SliderCustomColor;
 
 	bool m_HoldBoxType;
 
@@ -638,6 +655,7 @@ private:
 	QCheckBox* m_pUseIcon;
 	QToolButton* m_pPickIcon;
 	QSlider* m_pColorSlider;
+	QToolButton* m_pColorReset;
 
 	struct SDbgOpt {
 		QString Name;
@@ -648,6 +666,10 @@ private:
 
 	void InitLangID();
 
-	class CCodeEdit* m_pCodeEdit;
+	class CCodeEdit* m_pCodeEdit = nullptr;
+	class CIniHighlighter* m_pIniHighlighter = nullptr;
+
+	bool m_IniValidationEnabled = true;
+	bool m_AutoCompletionConsent;
 };
 

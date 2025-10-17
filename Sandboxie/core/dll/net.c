@@ -1787,6 +1787,7 @@ _FX BOOLEAN WSA_InitBindIP()
 
     IP_ADAPTER_ADDRESSES* adapters = NULL;
 
+    int State = 0;
     ULONG FoundLevel = -1;
     for (ULONG index = 0; ; ++index) {
 
@@ -1802,6 +1803,9 @@ _FX BOOLEAN WSA_InitBindIP()
 
         if (FoundLevel < level)
             continue;
+
+        if(!State)
+            State = 1; // set
 
         if (!adapters) {
             HMODULE Iphlpapi = LoadLibraryW(L"Iphlpapi.dll");
@@ -1837,6 +1841,7 @@ _FX BOOLEAN WSA_InitBindIP()
                     memcpy(&WSA_BindIP6, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN6_LH));
                 }
 
+                State = 2; // and found
             }
 
             FoundLevel = level;
@@ -1846,6 +1851,22 @@ _FX BOOLEAN WSA_InitBindIP()
     if (adapters)
         Dll_Free(adapters);
     
+    if (State == 1) { // set but not present in the system
+
+        // Later in your code, before bind():
+        WSA_BindIP4.sin_family      = AF_INET;
+        WSA_BindIP4.sin_port        = 0;
+        WSA_BindIP4.sin_addr.s_addr = 0x0100007f;
+
+        WSA_BindIP6.sin6_family     = AF_INET6;
+        WSA_BindIP6.sin6_port       = 0;
+        WSA_BindIP6.sin6_flowinfo   = 0;
+        WSA_BindIP6.sin6_addr.u.Byte[15] = 1;
+        WSA_BindIP6.sin6_scope_id   = 0;
+
+        return TRUE;
+    }
+
     if (FoundLevel != -1)
         return TRUE;
 

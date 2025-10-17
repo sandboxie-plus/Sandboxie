@@ -3,6 +3,115 @@
 #include "ImBox.h"
 #include "..\Common\helpers.h"
 
+typedef enum _FILE_INFORMATION_CLASS_ {
+    // end_wdm
+    FileDirectoryInformation_         = 1,
+    FileFullDirectoryInformation,   // 2
+    FileBothDirectoryInformation,   // 3
+    FileBasicInformation,           // 4  wdm
+    FileStandardInformation,        // 5  wdm
+    FileInternalInformation,        // 6
+    FileEaInformation,              // 7
+    FileAccessInformation,          // 8
+    FileNameInformation,            // 9
+    FileRenameInformation,          // 10
+    FileLinkInformation,            // 11
+    FileNamesInformation,           // 12
+    FileDispositionInformation,     // 13
+    FilePositionInformation,        // 14 wdm
+    FileFullEaInformation,          // 15
+    FileModeInformation,            // 16
+    FileAlignmentInformation,       // 17
+    FileAllInformation,             // 18
+    FileAllocationInformation,      // 19
+    FileEndOfFileInformation,       // 20 wdm
+    FileAlternateNameInformation,   // 21
+    FileStreamInformation,          // 22
+    FilePipeInformation,            // 23
+    FilePipeLocalInformation,       // 24
+    FilePipeRemoteInformation,      // 25
+    FileMailslotQueryInformation,   // 26
+    FileMailslotSetInformation,     // 27
+    FileCompressionInformation,     // 28
+    FileObjectIdInformation,        // 29
+    FileCompletionInformation,      // 30
+    FileMoveClusterInformation,     // 31
+    FileQuotaInformation,           // 32
+    FileReparsePointInformation,    // 33
+    FileNetworkOpenInformation,     // 34
+    FileAttributeTagInformation,    // 35
+    FileTrackingInformation,        // 36
+    FileIdBothDirectoryInformation, // 37
+    FileIdFullDirectoryInformation, // 38
+    FileValidDataLengthInformation, // 39
+    FileShortNameInformation,       // 40
+    FileIoCompletionNotificationInformation, // 41
+    FileIoStatusBlockRangeInformation,       // 42
+    FileIoPriorityHintInformation,           // 43
+    FileSfioReserveInformation,              // 44
+    FileSfioVolumeInformation,               // 45
+    FileHardLinkInformation,                 // 46
+    FileProcessIdsUsingFileInformation,      // 47
+    FileNormalizedNameInformation,           // 48
+    FileNetworkPhysicalNameInformation,      // 49
+    FileIdGlobalTxDirectoryInformation,      // 50
+    FileIsRemoteDeviceInformation,           // 51
+    FileAttributeCacheInformation,           // 52
+    FileNumaNodeInformation,                 // 53
+    FileStandardLinkInformation,             // 54
+    FileRemoteProtocolInformation,           // 55
+    FileRenameInformationBypassAccessCheck,  // 56 - kernel mode only
+    FileLinkInformationBypassAccessCheck,    // 57 - kernel mode only
+    FileVolumeNameInformation,               // 58
+    FileIdInformation,                       // 59
+    FileIdExtdDirectoryInformation,          // 60
+    FileReplaceCompletionInformation,
+    FileHardLinkFullIdInformation,
+    FileIdExtdBothDirectoryInformation,
+    FileDispositionInformationEx,
+    FileRenameInformationEx,                        // 65
+    FileRenameInformationExBypassAccessCheck,       // 66 - kernel mode only
+    FileDesiredStorageClassInformation,             // 67
+    FileStatInformation,                            // 68
+    FileMemoryPartitionInformation,                 // 69
+    FileStatLxInformation,                          // 70
+    FileCaseSensitiveInformation,                   // 71
+    FileLinkInformationEx,                          // 72
+    FileLinkInformationExBypassAccessCheck,         // 73 - kernel mode only
+    FileStorageReserveIdInformation,                // 74
+    FileCaseSensitiveInformationForceAccessCheck,   // 75
+
+    FileMaximumInformation
+} FILE_INFORMATION_CLASS_, *PFILE_INFORMATION_CLASS_;
+
+
+// FileBasicInformation
+typedef struct _FILE_BASIC_INFORMATION {
+    LARGE_INTEGER CreationTime;
+    LARGE_INTEGER LastAccessTime;
+    LARGE_INTEGER LastWriteTime;
+    LARGE_INTEGER ChangeTime;
+    ULONG FileAttributes;
+} FILE_BASIC_INFORMATION, *PFILE_BASIC_INFORMATION;
+
+extern "C" __declspec(dllimport) NTSTATUS __stdcall
+NtQueryInformationFile(
+    IN HANDLE                       FileHandle,
+    OUT PIO_STATUS_BLOCK            IoStatusBlock,
+    OUT PVOID                       FileInformation,
+    IN ULONG                        Length,
+    IN FILE_INFORMATION_CLASS_       FileInformationClass
+);
+
+extern "C" __declspec(dllimport) NTSTATUS __stdcall
+NtSetInformationFile(
+    IN HANDLE                       FileHandle,
+    OUT PIO_STATUS_BLOCK            IoStatusBlock,
+    IN PVOID                        FileInformation,
+    IN ULONG                        Length,
+    IN FILE_INFORMATION_CLASS_       FileInformationClass
+);
+
 BOOL GetSparseRanges(HANDLE hFile);
 
 struct SImageFileIO
@@ -10,6 +119,12 @@ struct SImageFileIO
 	std::wstring FilePath;
     ULONG64 uSize = 0;
 	HANDLE Handle = INVALID_HANDLE_VALUE;
+
+    LARGE_INTEGER fileCreationTime = { 0, 0 };
+    LARGE_INTEGER fileLastAccessTime = { 0, 0 };
+    LARGE_INTEGER fileLastWriteTime = { 0, 0 };
+    LARGE_INTEGER fileLastChangeTime = { 0, 0 };
+    BOOL bTimeStampValid = FALSE;
 };
 
 CImageFileIO::CImageFileIO(std::wstring& FilePath, ULONG64 uSize)
@@ -21,8 +136,27 @@ CImageFileIO::CImageFileIO(std::wstring& FilePath, ULONG64 uSize)
 
 CImageFileIO::~CImageFileIO()
 {
-	if (m->Handle != INVALID_HANDLE_VALUE)
-		CloseHandle(m->Handle);
+    if (m->Handle != INVALID_HANDLE_VALUE)
+    {
+        FILE_BASIC_INFORMATION FileBasicInfo;
+        IO_STATUS_BLOCK IoStatusBlock;
+
+        if (m->bTimeStampValid)
+        {
+            NTSTATUS status = NtQueryInformationFile (m->Handle, &IoStatusBlock, &FileBasicInfo, sizeof (FileBasicInfo), FileBasicInformation);
+            if (NT_SUCCESS (status))
+            {
+                FileBasicInfo.CreationTime = m->fileCreationTime;
+                FileBasicInfo.LastAccessTime = m->fileLastAccessTime;
+                FileBasicInfo.LastWriteTime = m->fileLastWriteTime;
+                FileBasicInfo.ChangeTime = m->fileLastChangeTime;
+
+                NtSetInformationFile(m->Handle, &IoStatusBlock, &FileBasicInfo, sizeof (FileBasicInfo), FileBasicInformation);
+			}
+        }
+
+        CloseHandle(m->Handle);
+    }
 	delete m;
 }
 
@@ -60,12 +194,16 @@ int CImageFileIO::Init()
     // This issue also affects DiscUtilsDevio.exe
     //
 
+    bool bCreating = false;
+
 	m->Handle = CreateFile(m->FilePath.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, NULL);
     if (m->Handle == INVALID_HANDLE_VALUE) {
         
         //
         // Create new image, but only if a size was specified
         //
+
+        bCreating = true;
 
         if(m->uSize)
             m->Handle = CreateFile(m->FilePath.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_NEW, FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, NULL);
@@ -110,6 +248,31 @@ int CImageFileIO::Init()
         //else {
         //    GetSparseRanges(m->Handle);
         //}
+    }
+
+    if (!bCreating)
+    {
+        FILE_BASIC_INFORMATION FileBasicInfo;
+        IO_STATUS_BLOCK IoStatusBlock;
+
+        NTSTATUS status = NtQueryInformationFile(m->Handle, &IoStatusBlock, &FileBasicInfo, sizeof(FileBasicInfo), FileBasicInformation);
+
+        if (NT_SUCCESS(status))
+        {
+            m->fileCreationTime = FileBasicInfo.CreationTime;
+            m->fileLastAccessTime = FileBasicInfo.LastAccessTime;
+            m->fileLastWriteTime = FileBasicInfo.LastWriteTime;
+            m->fileLastChangeTime = FileBasicInfo.ChangeTime;
+            m->bTimeStampValid = TRUE;
+
+            // we tell the system not to update LastAccessTime, LastWriteTime, and ChangeTime
+            FileBasicInfo.CreationTime.QuadPart = 0;
+            FileBasicInfo.LastAccessTime.QuadPart = -1;
+            FileBasicInfo.LastWriteTime.QuadPart = -1;
+            FileBasicInfo.ChangeTime.QuadPart = -1;
+
+            NtSetInformationFile(m->Handle, &IoStatusBlock, &FileBasicInfo, sizeof(FileBasicInfo), FileBasicInformation);
+        }
     }
 
 	return ERR_OK;

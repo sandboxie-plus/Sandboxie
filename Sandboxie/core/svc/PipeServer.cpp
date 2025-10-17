@@ -55,24 +55,14 @@ typedef struct tagTARGET
 
 typedef struct tagCLIENT_PROCESS
 {
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif
     HANDLE idProcess;
     LARGE_INTEGER CreateTime;
-#ifdef USE_PROCESS_MAP
     HASH_MAP thread_map;
-#else
-    LIST threads;
-#endif
 } CLIENT_PROCESS;
 
 
 typedef struct tagCLIENT_THREAD
 {
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif
     HANDLE idThread;
     BOOLEAN replying;
     volatile BOOLEAN in_use;
@@ -136,11 +126,7 @@ PipeServer::PipeServer()
 {
     InitializeCriticalSectionAndSpinCount(&m_lock, 1000);
     List_Init(&m_targets);
-#ifdef USE_PROCESS_MAP
     map_init(&m_client_map, NULL);
-#else
-    List_Init(&m_clients);
-#endif
 
     m_hServerPort = NULL;
 
@@ -164,10 +150,8 @@ bool PipeServer::Init()
     if (!m_instance->m_pool)
         return false;
 
-#ifdef USE_PROCESS_MAP
     m_client_map.mem_pool = m_pool;
 	map_resize(&m_client_map, 128); // prepare some buckets for better performance
-#endif
 
     return true;
 }
@@ -440,15 +424,10 @@ void PipeServer::PortConnect(PORT_MESSAGE *msg)
         if (clientProcess) {
 
             clientProcess->idProcess = msg->ClientId.UniqueProcess;
-#ifdef USE_PROCESS_MAP
             map_init(&clientProcess->thread_map, m_pool);
 	        map_resize(&clientProcess->thread_map, 16); // prepare some buckets for better performance
 
             map_insert(&m_client_map, msg->ClientId.UniqueProcess, clientProcess, 0);
-#else
-            List_Init(&clientProcess->threads);
-            List_Insert_After(&m_clients, NULL, clientProcess);
-#endif
 
             //
             // prepare for the case where a disconnect message only
@@ -487,11 +466,7 @@ void PipeServer::PortConnect(PORT_MESSAGE *msg)
 
             memset(clientThread, 0, sizeof(CLIENT_THREAD));
             clientThread->idThread = msg->ClientId.UniqueThread;
-#ifdef USE_PROCESS_MAP
             map_insert(&clientProcess->thread_map, msg->ClientId.UniqueThread, clientThread, 0);
-#else
-            List_Insert_After(&clientProcess->threads, NULL, clientThread);
-#endif
         }
     }
 
@@ -559,11 +534,8 @@ void PipeServer::PortDisconnectHelper(CLIENT_PROCESS *clientProcess, CLIENT_THRE
         while (clientThread->in_use)
             Sleep(3);
 
-#ifdef USE_PROCESS_MAP
         map_remove(&clientProcess->thread_map, clientThread->idThread);
-#else
-        List_Remove(&clientProcess->threads, clientThread);
-#endif
+
         NtClose(clientThread->hPort);
         if (clientThread->buf_hdr)
             FreeMsg(clientThread->buf_hdr);
@@ -571,19 +543,12 @@ void PipeServer::PortDisconnectHelper(CLIENT_PROCESS *clientProcess, CLIENT_THRE
     }
 
     
-#ifdef USE_PROCESS_MAP
     if (clientProcess->thread_map.nnodes == 0) {
-#else
-    if (! List_Head(&clientProcess->threads)) {
-#endif
 
         NotifyTargets(clientProcess->idProcess);
 
-#ifdef USE_PROCESS_MAP
         map_remove(&m_client_map, clientProcess->idProcess);
-#else
-        List_Remove(&m_clients, clientProcess);
-#endif
+
         Pool_Free(clientProcess, sizeof(CLIENT_PROCESS));
     }
 }
@@ -667,29 +632,18 @@ void PipeServer::PortDisconnectByCreateTime(LARGE_INTEGER *CreateTime)
 
     CLIENT_PROCESS *clientProcess = NULL;
     CLIENT_THREAD *clientThread = NULL;
-#ifdef USE_PROCESS_MAP
     map_iter_t iter = map_iter();
 	while (map_next(&m_client_map, &iter)) {
 
         clientProcess = (CLIENT_PROCESS *)iter.value;
-#else
-    clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
-
-    while (clientProcess) {
-#endif
         if (clientProcess->CreateTime.HighPart == CreateTime->HighPart &&
             clientProcess->CreateTime.LowPart  == CreateTime->LowPart) {
 
-#ifdef USE_PROCESS_MAP
             map_iter_t sub_iter = map_iter();
 	        while (map_next(&clientProcess->thread_map, &sub_iter)) {
 
                 clientThread = (CLIENT_THREAD *)sub_iter.value;
-#else
-            clientThread = (CLIENT_THREAD *)List_Head(&clientProcess->threads);
 
-            while (clientThread) {
-#endif
                 //
                 // for each thread in the process, assume it is stale,
                 // unless we can open it, and it still has the same
@@ -718,21 +672,13 @@ void PipeServer::PortDisconnectByCreateTime(LARGE_INTEGER *CreateTime)
                     break;
                 }
 
-#ifndef USE_PROCESS_MAP
-                clientThread = (CLIENT_THREAD *)List_Next(clientThread);
-#else
                 clientThread = NULL;
-#endif
             }
 
             break;
         }
 
-#ifndef USE_PROCESS_MAP
-        clientProcess = (CLIENT_PROCESS *)List_Next(clientProcess);
-#else
         clientProcess = NULL;
-#endif
     }
 
     PortDisconnectHelper(clientProcess, clientThread);
@@ -818,32 +764,8 @@ void PipeServer::PortFindClientUnsafe(const CLIENT_ID& ClientId, CLIENT_PROCESS 
     // Note: this is not thread safe, you must lock m_lock before calling this function
     //
 
-#ifdef USE_PROCESS_MAP
     clientProcess = (CLIENT_PROCESS *)map_get(&m_client_map, ClientId.UniqueProcess);
     clientThread = clientProcess ? (CLIENT_THREAD *)map_get(&clientProcess->thread_map, ClientId.UniqueThread) : NULL;
-#else
-    clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
-    clientThread = NULL;
-
-    while (clientProcess) {
-
-        if (clientProcess->idProcess == ClientId.UniqueProcess) {
-
-            clientThread =
-                (CLIENT_THREAD *)List_Head(&clientProcess->threads);
-            while (clientThread) {
-
-                if (clientThread->idThread == ClientId.UniqueThread)
-                    break;
-                clientThread = (CLIENT_THREAD *)List_Next(clientThread);
-            }
-
-            break;
-        }
-
-        clientProcess = (CLIENT_PROCESS *)List_Next(clientProcess);
-    }
-#endif
 }
 
 

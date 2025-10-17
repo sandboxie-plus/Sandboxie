@@ -4,8 +4,8 @@ REM echo %*
 REM IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
 REM IF "%~2" == "" ( set "qt_version=5.15.16" ) ELSE ( set "qt_version=%~2" )
 
-if %1 == x64 if exist %~dp0..\..\Qt\%qt_version%\msvc2019_64\bin\lrelease.exe set PATH=%PATH%;%~dp0..\..\Qt\%qt_version%\msvc2019_64\bin\
-if %1 == Win32 if exist %~dp0..\..\Qt\%qt_version%\msvc2019\bin\lrelease.exe set PATH=%PATH%;%~dp0..\..\Qt\%qt_version%\msvc2019\bin\
+if %1 == x64 if exist %~dp0..\..\Qt\%qt_version%\msvc2022_64\bin\lrelease.exe set PATH=%PATH%;%~dp0..\..\Qt\%qt_version%\msvc2022_64\bin\
+if %1 == Win32 if exist %~dp0..\..\Qt\%qt_version%\msvc2022\bin\lrelease.exe set PATH=%PATH%;%~dp0..\..\Qt\%qt_version%\msvc2022\bin\
 mkdir %~dp0qttranslations
 mkdir %~dp0qttranslations\ts
 mkdir %~dp0qttranslations\qm

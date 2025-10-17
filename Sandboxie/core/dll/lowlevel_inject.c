@@ -221,7 +221,7 @@ _FX ULONG SbieDll_InjectLow_LoadLow(BOOLEAN arch_64bit, void **sbielow_ptr, ULON
 	ULONG zzzzz = 1;
 #ifdef _M_ARM64
 	if (arch_64bit) 
-		zzzzz = 4; // ARM64 only
+		zzzzz = 3; // ARM64 only
 	else
 #endif
 	if (imageBase != 0) // x64 or x86

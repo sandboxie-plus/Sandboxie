@@ -904,7 +904,7 @@ _FX LONG SbieApi_EnumProcessEx(
     parms[5] = (ULONG64)(LONG_PTR)boxed_count;
     status = SbieApi_Ioctl(parms);
 
-    if (! NT_SUCCESS(status))
+    if (!NT_SUCCESS(status) && boxed_pids)
         boxed_pids[0] = 0;
 
     return status;

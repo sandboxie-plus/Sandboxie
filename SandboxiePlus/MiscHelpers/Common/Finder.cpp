@@ -41,7 +41,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	m_pSearchLayout->setSpacing(3);
 	m_pSearchLayout->setAlignment(Qt::AlignLeft);
 
-	m_bAlwaysRaw = true;
+	m_bAlwaysRaw = false;
 
 	m_pSearch = new QLineEdit();
 	m_pSearch->setPlaceholderText(m_Placeholder);

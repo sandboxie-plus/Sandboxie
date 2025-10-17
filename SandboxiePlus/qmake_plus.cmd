@@ -12,61 +12,61 @@ REM IF "%~3" == "" ( set "qt6_version=6.3.1" ) ELSE ( set "qt6_version=%~3" )
 REM IF "%~2" == "" ( set "qt_version=5.15.16" ) ELSE ( set "qt_version=%~2" )
 
 IF %1 == Win32 (
-  set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2019
+  set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2022
 
   REM get private headers for QtCore
-  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt_version%\msvc2019\include\QtCore\%qt_version%\QtCore %~dp0..\..\Qt\%qt_version%\msvc2019\include\QtCore
+  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt_version%\msvc2022\include\QtCore\%qt_version%\QtCore %~dp0..\..\Qt\%qt_version%\msvc2022\include\QtCore
   
   set build_arch=Win32
   set qt_params= 
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
 )
 IF %1 == x64 (
-  set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2019_64
-REM  set qt_path=%~dp0..\..\Qt\%qt6_version%\msvc2019_64
+  set qt_path=%~dp0..\..\Qt\%qt_version%\msvc2022_64
+REM  set qt_path=%~dp0..\..\Qt\%qt6_version%\msvc2022_64
   
   REM get private headers for QtCore
-  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt_version%\msvc2019_64\include\QtCore\%qt_version%\QtCore %~dp0..\..\Qt\%qt_version%\msvc2019_64\include\QtCore
-REM  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt6_version%\msvc2019_64\include\QtCore\%qt6_version%\QtCore %~dp0..\..\Qt\%qt6_version%\msvc2019_64\include\QtCore
+  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt_version%\msvc2022_64\include\QtCore\%qt_version%\QtCore %~dp0..\..\Qt\%qt_version%\msvc2022_64\include\QtCore
+REM  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt6_version%\msvc2022_64\include\QtCore\%qt6_version%\QtCore %~dp0..\..\Qt\%qt6_version%\msvc2022_64\include\QtCore
   
   set build_arch=x64
   set qt_params= 
-  call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+  call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
 )
 IF %1 == ARM64 (
-  set qt_path=%~dp0..\..\Qt\%qt6_version%\msvc2019_64
+  set qt_path=%~dp0..\..\Qt\%qt6_version%\msvc2022_64
   
   REM get private headers for QtCore
-  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\include\QtCore\%qt6_version%\QtCore %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\include\QtCore
+  Xcopy /E /I /Y /Q %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\include\QtCore\%qt6_version%\QtCore %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\include\QtCore
   
   set build_arch=ARM64
   
-REM  set qt_params=-qtconf "%~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\target_qt.conf"
+REM  set qt_params=-qtconf "%~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\target_qt.conf"
   
-REM type %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\target_qt.conf
+REM type %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\target_qt.conf
   
   REM
-  REM The target_qt.conf as provided by the windows-2019 github action runner
+  REM The target_qt.conf as provided by the windows-2022 github action runner
   REM is non functional, hence we create our own working edition here.
   REM
   
-  echo [DevicePaths] > %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo Prefix=C:/Qt/Qt-%qt6_version% >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo [Paths] >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo Prefix=../ >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo HostPrefix=../../msvc2019_64 >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo HostData=../msvc2019_arm64 >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo Sysroot= >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo SysrootifyPrefix=false >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo TargetSpec=win32-arm64-msvc >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo HostSpec=win32-msvc >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo Documentation=../../Docs/Qt-%qt6_version% >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
-  echo Examples=../../Examples/Qt-%qt6_version% >> %~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf
+  echo [DevicePaths] > %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo Prefix=C:/Qt/Qt-%qt6_version% >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo [Paths] >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo Prefix=../ >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo HostPrefix=../../msvc2022_64 >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo HostData=../msvc2022_arm64 >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo Sysroot= >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo SysrootifyPrefix=false >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo TargetSpec=win32-arm64-msvc >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo HostSpec=win32-msvc >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo Documentation=../../Docs/Qt-%qt6_version% >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
+  echo Examples=../../Examples/Qt-%qt6_version% >> %~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf
   
-  set qt_params=-qtconf "%~dp0..\..\Qt\%qt6_version%\msvc2019_arm64\bin\my_target_qt.conf"
+  set qt_params=-qtconf "%~dp0..\..\Qt\%qt6_version%\msvc2022_arm64\bin\my_target_qt.conf"
   
 REM  set VSCMD_DEBUG=3
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
+call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
 )
 @echo on
 

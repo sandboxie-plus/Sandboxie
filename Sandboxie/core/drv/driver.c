@@ -47,6 +47,8 @@
 #include "wfp.h"
 #include "dyn_data.h"
 
+NTSTATUS File_TranslateSymlinks(WCHAR *name, ULONG max_len);
+
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -59,6 +61,8 @@ NTSTATUS DriverEntry(
 static BOOLEAN Driver_CheckOsVersion(void);
 
 static BOOLEAN Driver_InitPublicSecurity(void);
+
+static BOOLEAN Driver_FindSystemRoot();
 
 static BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath);
 
@@ -77,6 +81,7 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, DriverEntry)
 #pragma alloc_text (INIT, Driver_CheckOsVersion)
+#pragma alloc_text (INIT, Driver_FindSystemRoot)
 #pragma alloc_text (INIT, Driver_FindHomePath)
 #pragma alloc_text (INIT, Driver_FindMissingServices)
 #ifdef _M_ARM64
@@ -111,6 +116,9 @@ const WCHAR *Driver_Sandbox = L"\\Sandbox";
 const WCHAR *Driver_Empty = L"";
 
 //const WCHAR *Driver_OpenProtectedStorage = L"OpenProtectedStorage";
+
+WCHAR *Driver_SystemRootPathNt = NULL;
+ULONG  Driver_SystemRootPathNt_Len = 0;
 
 WCHAR *Driver_RegistryPath;
 
@@ -197,6 +205,9 @@ _FX NTSTATUS DriverEntry(
 
     if (ok)
         Dyndata_Init();
+
+    if (ok)
+        ok = Driver_FindSystemRoot();
 
     if (ok)
         ok = Driver_FindHomePath(RegistryPath);
@@ -471,6 +482,30 @@ _FX BOOLEAN Driver_InitPublicSecurity(void)
     return TRUE;
 
 #undef MyAddAccessAllowedAce
+}
+
+
+//---------------------------------------------------------------------------
+// Driver_FindSystemRoot
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Driver_FindSystemRoot()
+{
+    ULONG max_len = 256;
+    Driver_SystemRootPathNt = Mem_Alloc(Driver_Pool, (max_len + 2) * sizeof(WCHAR));
+    if (! Driver_SystemRootPathNt)
+        return FALSE;
+
+	wcscpy(Driver_SystemRootPathNt, L"\\SystemRoot");
+
+
+    if(!NT_SUCCESS(File_TranslateSymlinks(Driver_SystemRootPathNt, max_len)))
+        return FALSE;
+
+	Driver_SystemRootPathNt_Len = wcslen(Driver_SystemRootPathNt);
+	//DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "SbieDrv: SystemRoot path is %ws\n", Driver_SystemRootPathNt);
+    return TRUE;
 }
 
 
@@ -847,11 +882,7 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
     ok = FALSE;
-#ifdef USE_PROCESS_MAP
     if (Process_Map.nnodes == 0) {
-#else
-    if (! List_Count(&Process_List)) {
-#endif
         if (Api_Disable())
             ok = TRUE;
     }

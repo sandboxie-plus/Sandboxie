@@ -20,6 +20,19 @@
 // Low Level DLL initialization code
 //---------------------------------------------------------------------------
 
+#pragma function(memcpy)
+#include <stddef.h>     // for size_t
+
+void* __cdecl memcpy(void* dest, const void* src, size_t count)
+{
+	unsigned char* d = (unsigned char*)dest;
+	const unsigned char* s = (const unsigned char*)src;
+	while (count--) {
+		*d++ = *s++;
+	}
+	return dest;
+}
+
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
 typedef long NTSTATUS;

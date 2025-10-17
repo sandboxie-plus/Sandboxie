@@ -360,7 +360,7 @@ _DetourCode:
 ;		jnz	DetourError
 
 		;
-		; resume execution or original function
+		; resume execution of original function
 		;
 
 		mov	rcx, qword ptr [rsp+4*8]
@@ -401,7 +401,7 @@ _DetourCode:
 ;		jnz	DetourError
 
 		;
-		; resume execution or original function
+		; resume execution of original function
 		;
 
 		mov	eax, dword ptr [esi].InjectData.RtlFindActCtx

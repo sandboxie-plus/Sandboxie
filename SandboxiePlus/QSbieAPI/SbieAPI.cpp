@@ -41,6 +41,8 @@ typedef long NTSTATUS;
 #include "..\..\Sandboxie\core\svc\InteractiveWire.h"
 #include "..\..\Sandboxie\core\svc\MountManagerWire.h"
 
+#include "../../SandboxieTools/ImBox/ImBox.h"
+
 int _SB_STATUS_type = qRegisterMetaType<SB_STATUS>("SB_STATUS");
 
 struct SSbieAPI
@@ -2633,6 +2635,7 @@ SB_STATUS CSbieAPI::ImBoxMount(CSandBox* pBox, const QString& Password, bool bPr
 	req->h.msgid = MSGID_IMBOX_MOUNT;
 	wcscpy(req->password, password.c_str());
 	req->protect_root = bProtect;
+	req->admin_only = pBox->GetBool("ProtectAdminOnly", true, true, true);
 	req->auto_unmount = bAutoUnmount;
 	wcscpy(req->reg_root, root.c_str());
 	wcscpy(req->file_root, file_root.c_str());
@@ -2724,6 +2727,192 @@ SB_RESULT(QVariantMap) CSbieAPI::ImBoxQuery(const QString& Root)
 	return CSbieResult<QVariantMap>(Info);
 }
 
+extern "C" NTSYSCALLAPI NTSTATUS NTAPI NtLockVirtualMemory(_In_ HANDLE ProcessHandle, _Inout_ PVOID *BaseAddress, _Inout_ PSIZE_T RegionSize, _In_ ULONG MapType );
+
+template <typename T, typename S>
+void toHexadecimal(T val, S *buf)
+{
+	int i;
+	for (i = 0; i < sizeof(T) * 2; ++i) 
+	{
+		buf[i] = (val >> (4 * (sizeof(T) * 2 - 1 - i))) & 0xf;
+		if (buf[i] < 10)
+			buf[i] += '0';
+		else
+			buf[i] += 'A' - 10;
+	}
+	buf[i] = 0;
+}
+
+PVOID AllocPasswordMemory(HANDLE hProcess, const wchar_t* pPassword)
+{
+	NTSTATUS status;
+
+	PVOID pMem = NULL;
+	SIZE_T uSize = 0x1000;
+
+	if(!NT_SUCCESS(status = NtAllocateVirtualMemory(hProcess, &pMem, 0, &uSize, MEM_COMMIT, PAGE_READWRITE)))
+		return NULL;
+
+#define VM_LOCK_1                0x0001   // This is used, when calling KERNEL32.DLL VirtualLock routine
+#define VM_LOCK_2                0x0002   // This require SE_LOCK_MEMORY_NAME privilege
+	if(!NT_SUCCESS(status = NtLockVirtualMemory(hProcess, &pMem, &uSize, VM_LOCK_1)))
+		return NULL;
+
+	if (pPassword && *pPassword)
+	{
+		if(!NT_SUCCESS(status = NtWriteVirtualMemory(hProcess, pMem, (PVOID)pPassword, (wcslen(pPassword) + 1) * 2, NULL)))
+			return NULL;
+	}
+
+	return pMem;
+}
+
+NTSTATUS UpdateCommandLine(HANDLE hProcess, NTSTATUS(*Update)(std::wstring& s, PVOID p), PVOID param)
+{
+	NTSTATUS status;
+
+	ULONG processParametersOffset = 0x20;
+	ULONG appCommandLineOffset = 0x70;
+
+	PROCESS_BASIC_INFORMATION pbi;
+	if (!NT_SUCCESS(status = NtQueryInformationProcess(hProcess, ProcessBasicInformation, &pbi, sizeof(PROCESS_BASIC_INFORMATION), NULL)))
+		return status;
+
+	ULONG_PTR procParams;
+	if (!NT_SUCCESS(status = NtReadVirtualMemory(hProcess, (PVOID)((ULONG64)pbi.PebBaseAddress + processParametersOffset), &procParams, sizeof(ULONG_PTR), NULL)))
+		return status;
+
+	UNICODE_STRING us;
+	if (!NT_SUCCESS(status = NtReadVirtualMemory(hProcess, (PVOID)(procParams + appCommandLineOffset), &us, sizeof(UNICODE_STRING), NULL)))
+		return status;
+
+	if ((us.Buffer == 0) || (us.Length == 0))
+		return STATUS_UNSUCCESSFUL;
+
+	std::wstring s;
+	s.resize(us.Length / 2);
+	if (!NT_SUCCESS(status = NtReadVirtualMemory(hProcess, (PVOID)us.Buffer, (PVOID)s.c_str(), s.length() * 2, NULL)))
+		return status;
+
+	if (!NT_SUCCESS(status = Update(s, param)))
+		return status;
+
+	if (!NT_SUCCESS(status = NtWriteVirtualMemory(hProcess, (PVOID)us.Buffer, (PVOID)s.c_str(), s.length() * 2, NULL)))
+		return status;
+
+	return STATUS_SUCCESS;
+}
+
+SB_STATUS CSbieAPI::ExecImDisk(const QString& ImageFile, const QString& Password, const QString& Command, bool bWrite, QByteArray* pBuffer, quint16 uId)
+{
+	SB_STATUS Status = SB_ERR(STATUS_UNSUCCESSFUL);
+
+	std::wstring cmd;
+	/*if (ImageFile.empty()) cmd = L"ImBox type=ram";
+	else*/ cmd = L"ImBox type=img image=\"" + ImageFile.toStdWString() + L"\"";
+	cmd += L" " + Command.toStdWString();
+
+#ifdef _M_ARM64
+	ULONG64 ctr = _ReadStatusReg(ARM64_CNTVCT);
+#else
+	ULONG64 ctr = __rdtsc();
+#endif
+
+	WCHAR sName[32];
+	wsprintfW(sName, L"_%08X_%08X%08X", GetCurrentProcessId(), (ULONG)(ctr >> 32), (ULONG)ctr);
+
+	cmd += L" mem=0x0000000000000000";
+
+	VOID* pMem = NULL;
+
+	std::wstring app = m_SbiePath.toStdWString() + L"\\ImBox.exe";
+	STARTUPINFOW si = { sizeof(STARTUPINFOW) };
+	PROCESS_INFORMATION pi = { 0 };
+    if (CreateProcessW(app.c_str(), (WCHAR*)cmd.c_str(), NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi))
+	{
+        NTSTATUS status = STATUS_SUCCESS;
+
+        pMem = AllocPasswordMemory(pi.hProcess, NULL);
+        if (!pMem) 
+            status = STATUS_MEMORY_NOT_ALLOCATED;
+        else
+        {
+            status = UpdateCommandLine(pi.hProcess, [](std::wstring& s, PVOID p) {
+                // Note: Do not change the string length, that would require a different update mechanism.
+                size_t pos = s.find(L"mem=0x0000000000000000");
+                if (pos != std::wstring::npos) {
+                    wchar_t Addr[17];
+                    toHexadecimal((ULONG64)p, Addr);
+                    s.replace(pos + 6, 16, Addr);
+                    return STATUS_SUCCESS;
+                }
+                return STATUS_UNSUCCESSFUL;
+                }, pMem);
+        }
+
+		if (NT_SUCCESS(status) && pBuffer && bWrite) 
+		{
+			union {
+				SSection pSection[1];
+				BYTE pSpace[0x1000];
+			};
+			memset(pSpace, 0, sizeof(pSpace));
+
+			memcpy(pSection->in.pass, Password.utf16(), (Password.length() + 1) * sizeof(wchar_t));
+			pSection->magic = SECTION_MAGIC;
+			pSection->id = uId;
+			pSection->size = (USHORT)pBuffer->size();
+			memcpy(pSection->data, pBuffer->constData(), pSection->size);
+
+			status = NtWriteVirtualMemory(pi.hProcess, pMem, (PVOID)pSpace, sizeof(pSpace), NULL);
+		}
+
+        if (!NT_SUCCESS(status)) {
+            TerminateProcess(pi.hProcess, -1);
+            pMem = NULL;
+            CloseHandle(pi.hThread);
+            CloseHandle(pi.hProcess);
+        }
+    }
+
+    if (pMem)
+    {
+        ResumeThread(pi.hThread);
+
+
+		HANDLE hEvents[] = { /*hEvent,*/ pi.hProcess };
+		DWORD dwEvent = WaitForMultipleObjects(ARRAYSIZE(hEvents), hEvents, FALSE, 40 * 1000);
+		//if (dwEvent != WAIT_OBJECT_0)
+
+		DWORD ret;
+		GetExitCodeProcess(pi.hProcess, &ret);
+		if (ret == STILL_ACTIVE)
+			Status = SB_ERR(STATUS_TIMEOUT);
+		else if(ret != ERR_OK)
+			Status = SB_ERR(STATUS_UNSUCCESSFUL);
+		else
+		{
+			if (pBuffer && !bWrite) 
+			{
+				union {
+					SSection pSection[1];
+					BYTE pSpace[0x1000];
+				};
+				if (NT_SUCCESS(NtReadVirtualMemory(pi.hProcess, (PVOID)pMem, pSpace, sizeof(pSpace), NULL)))
+				{
+					// to do, don't care
+				}
+			}
+			Status = SB_OK;
+		}
+
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
+	}
+
+	return Status;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Monitor

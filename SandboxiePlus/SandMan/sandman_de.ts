@@ -925,91 +925,91 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Validiere INI-Schlüssel</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>No validation</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Validierung</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>Full validation (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollständige Validierung (Standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
         <source>Enable INI Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere INI-Tooltips</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>No tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Tooltips</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Basic info (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Grundlegende Informationen (Standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollständige Details</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
         <source>Enable Popup Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere Popup-Tooltips</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
         <source>Auto Completion Consent</source>
-        <translation type="unfinished"></translation>
+        <translation>Zustimmung automatische Vervollständigung</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Not consented (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht zugestimmt (Standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Consented</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugestimmt</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
         <source>Enable Auto Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere automatische Vervollständigung</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Disabled (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviert (Standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuell</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Während der Eingabe</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere unscharfer Abgleich</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Enabled</source>
-        <translation type="unfinished">Aktiviert</translation>
+        <translation>Aktiviert</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
@@ -1019,48 +1019,48 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished">Alles auf Standardwerte zurücksetzen</translation>
+        <translation>Alles auf Standardwerte zurücksetzen</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Einstellungen auf ihre Standardwerte zurücksetzen und benutzerdefinierte Konfigurationseinträge entfernen.</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Setting</source>
-        <translation type="unfinished">Einstellung</translation>
+        <translation>Einstellung</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>State</source>
-        <translation type="unfinished">Zustand</translation>
+        <translation>Zustand</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht angehakt</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Teilweise angehakt</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>Angehakt</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
         <source>Reset</source>
-        <translation type="unfinished">Zurücksetzen</translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
         <source>Reset this setting to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Einstellung auf den Standardwert zurücksetzen</translation>
     </message>
 </context>
 <context>
@@ -2231,69 +2231,41 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
+
+Wählen Sie den Modus der automatischen Vervollständigung:
+%1 Manuell: Vorschläge der automatischen Vervollständigung mit %2.
+%1 Während der Eingabe: Vorschläge der automatischen Vervollständigung während der Eingabe.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1783"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuell</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1784"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löst Vorschläge der automatischen Vervollständigung aus, mit %1.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1786"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Während der Eingabe</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1787"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löst Vorschläge der automatischen Vervollständigung während der Eingabe aus.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1790"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
-
-Choose autocomplete mode:
-• Basic: Manual completion (Ctrl+Space) with case correction
-• Full: Automatic completion while typing with case correction</source>
-        <translation type="vanished">Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
-
-Wählen Sie den Modus der automatischen Vervollständigung:
-• Grundlegend: Manuelle Vervollständigung (Strg+Leertaste) mit Schreikorrektur
-• Vollständig: Automatische Vervollständigung während der Eingabe mit Schreikorrektur</translation>
-    </message>
-    <message>
-        <source>Basic</source>
-        <translation type="vanished">Grundlegend</translation>
-    </message>
-    <message>
-        <source>Enable manual completion only (Ctrl+Space) with case correction</source>
-        <translation type="vanished">Aktiviere nur die manuelle Vervollständigung (Strg+Leertaste) mit Schreikorrektur</translation>
-    </message>
-    <message>
-        <source>Full</source>
-        <translation type="vanished">Vollständig</translation>
-    </message>
-    <message>
-        <source>Enable automatic completion while typing with case correction</source>
-        <translation type="vanished">Aktiviere die automatische Vervollständigung während der Eingabe mit Schreikorrektur</translation>
+        <translation>Behält Vorschläge der automatischen Vervollständigung deaktiviert.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1789"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>Keep autocomplete disabled</source>
-        <translation type="vanished">Behalte die automatische Vervollständigung deaktiviert</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="837"/>
@@ -6157,69 +6129,41 @@ Sie können bis zu %3 Evaluationszertifikate für jede eindeutige Hardware-ID an
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
+
+Wählen Sie den Modus der automatischen Vervollständigung:
+%1 Manuell: Vorschläge der automatischen Vervollständigung mit %2.
+%1 Während der Eingabe: Vorschläge der automatischen Vervollständigung während der Eingabe.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3362"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuell</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3363"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löst Vorschläge der automatischen Vervollständigung aus, mit %1.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3365"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Während der Eingabe</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3366"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löst Vorschläge der automatischen Vervollständigung während der Eingabe aus.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3369"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
-
-Choose autocomplete mode:
-• Basic: Manual completion (Ctrl+Space) with case correction
-• Full: Automatic completion while typing with case correction</source>
-        <translation type="vanished">Wenn Sie sich hinsichtlich der im Popup der automatischen Vervollständigung angezeigten Einstellungen unsicher sind, empfehlen wir Ihnen dringend die Dokumentation oder den Quellcode der Software zu konsultieren, bevor Sie fortfahren. Die Aktivierung dieser Funktion ohne ausreichendes Verständnis kann zu unbeabsichtigten Folgen führen, für die Sie allein verantwortlich sind.
-
-Wählen Sie den Modus der automatischen Vervollständigung:
-• Grundlegend: Manuelle Vervollständigung (Strg+Leertaste) mit Schreikorrektur
-• Vollständig: Automatische Vervollständigung während der Eingabe mit Schreikorrektur</translation>
-    </message>
-    <message>
-        <source>Basic</source>
-        <translation type="vanished">Grundlegend</translation>
-    </message>
-    <message>
-        <source>Enable manual completion only (Ctrl+Space) with case correction</source>
-        <translation type="vanished">Aktiviere nur die manuelle Vervollständigung (Strg+Leertaste) mit Schreikorrektur</translation>
-    </message>
-    <message>
-        <source>Full</source>
-        <translation type="vanished">Vollständig</translation>
-    </message>
-    <message>
-        <source>Enable automatic completion while typing with case correction</source>
-        <translation type="vanished">Aktiviere die automatische Vervollständigung während der Eingabe mit Schreikorrektur</translation>
+        <translation>Behält Vorschläge der automatischen Vervollständigung deaktiviert.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3368"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>Keep autocomplete disabled</source>
-        <translation type="vanished">Behalte die automatische Vervollständigung deaktiviert</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1583"/>
@@ -7544,38 +7488,6 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Editoreinstellungen konfigurieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Verwenden Sie die Checkboxen in der Tabelle, um die einzelnen Einstellungen zu konfigurieren. Die Tabelle zeigt, was die einzelnen Zustände bedeuten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Setting</source>
-        <translation type="vanished">Einstellung</translation>
-    </message>
-    <message>
-        <source>State</source>
-        <translation type="vanished">Zustand</translation>
-    </message>
-    <message>
-        <source>Unchecked/Disabled</source>
-        <translation type="vanished">Nicht angehakt/Deaktiviert</translation>
-    </message>
-    <message>
-        <source>Partial/Basic</source>
-        <translation type="vanished">Teilweise angehakt/Grundlegend</translation>
-    </message>
-    <message>
-        <source>Checked/Full</source>
-        <translation type="vanished">Angehakt/Vollständig</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation type="vanished">Zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Reset All to Defaults</source>
-        <translation type="vanished">Alles auf Standardwerte zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Reset all settings to their default values and remove custom config entries</source>
-        <translation type="vanished">Alle Einstellungen auf ihre Standardwerte zurücksetzen und benutzerdefinierte Konfigurationseinträge entfernen</translation>
     </message>
 </context>
 <context>
@@ -8944,7 +8856,7 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
         Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modi:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Alle Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Vollständige Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;
@@ -11057,7 +10969,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         Zeigt detaillierte Tooltips an, wenn der Mauszeiger über Einstellungen verweilt.&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modi:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Alle Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Angehakt&lt;/span&gt;: Vollständige Details (Versionen, Syntax, Beschreibung und mehr)&lt;br&gt;
         ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Teilweise angehakt&lt;/span&gt;: Nur wesentliche Informationen&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Syntax-Hilfen:&lt;/b&gt;&lt;br&gt;

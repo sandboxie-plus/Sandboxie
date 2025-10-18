@@ -6,7 +6,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="26"/>
         <source>Form</source>
-        <translation>다음에서</translation>
+        <translation>양식</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="96"/>
@@ -1088,142 +1088,142 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>INI 키 검증</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>No validation</source>
-        <translation type="unfinished"></translation>
+        <translation>검증 없음</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>Full validation (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>전체 검증 (기본값)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
         <source>Enable INI Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>INI 도구 팁 사용</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>No tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 팁 없음</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Basic info (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 정보 (기본값)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>자세한 내용</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
         <source>Enable Popup Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>팝업 도구 팁 사용함</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
         <source>Auto Completion Consent</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완료 동의</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Not consented (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>동의하지 않음 (기본값)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Consented</source>
-        <translation type="unfinished"></translation>
+        <translation>동의</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
         <source>Enable Auto Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완료 사용함</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Disabled (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>사용 안 함 (기본값)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>수동</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>타이핑하는 동안</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>퍼지 매칭 사용함</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Enabled</source>
-        <translation type="unfinished">사용함</translation>
+        <translation>사용함</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>편집기 설정</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>모두 기본값으로 재설정</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 설정을 기본값으로 재설정하고 사용자 지정 구성 항목을 제거합니다.</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>설정</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>상태</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>선택되지 않음</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>부분적</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>선택됨</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>재설정</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
         <source>Reset this setting to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>이 설정을 기본값으로 재설정</translation>
     </message>
 </context>
 <context>
@@ -3139,7 +3139,7 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1773"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 기능을 사용하려면 사용자의 동의가 필요합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1775"/>
@@ -3148,37 +3148,42 @@ Please select a folder which contains this file.</source>
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 팝업에 표시되는 설정이 확실하지 않은 경우 진행하기 전에 소프트웨어의 문서 또는 소스 코드를 참조하는 것이 좋습니다. 적절한 이해 없이 이 기능을 활성화하면 의도하지 않은 결과가 발생할 수 있으며, 이에 대한 책임은 전적으로 귀하에게 있습니다.
+
+자동 완성 모드 선택:
+
+%1 매뉴얼: %2로 제안을 자동으로 완료합니다.
+입력하는 동안 %1: 입력하는 동안 제안 사항을 자동으로 완료합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1783"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>수동</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1784"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1로 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1786"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>타이핑하는 동안</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1787"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>입력하는 동안 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1790"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 제안을 비활성화합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1789"/>
         <source>Cancel</source>
-        <translation type="unfinished">취소</translation>
+        <translation>취소</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -6551,7 +6556,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3352"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 기능을 사용하려면 사용자의 동의가 필요합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3354"/>
@@ -6560,37 +6565,41 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 팝업에 표시되는 설정이 확실하지 않은 경우 진행하기 전에 소프트웨어의 문서 또는 소스 코드를 참조하는 것이 좋습니다. 적절한 이해 없이 이 기능을 활성화하면 의도하지 않은 결과가 발생할 수 있으며, 이에 대한 책임은 전적으로 귀하에게 있습니다.
+
+자동 완성 모드 선택:
+%1 매뉴얼: %2로 제안을 자동으로 완료합니다.
+입력하는 동안 %1: 입력하는 동안 제안 사항을 자동으로 완료합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3362"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>수동</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3363"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1로 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3365"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>타이핑하는 동안</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3366"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>입력하는 동안 자동 완성 제안을 트리거합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3369"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 완성 제안을 비활성화합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3368"/>
         <source>Cancel</source>
-        <translation type="unfinished">취소</translation>
+        <translation>취소</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -8257,12 +8266,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>편집기 설정</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;편집기 설정 구성&lt;/span&gt;&lt;/p&gt;&lt;p&gt;표의 확인란을 사용하여 각 설정을 구성합니다. 표에는 각 상태의 의미가 표시되어 있습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -9933,12 +9942,12 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6168"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>편집기 설정</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6171"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <source>&lt;html&gt;
@@ -11763,12 +11772,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3262"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>편집기 설정</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3265"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <source>&lt;html&gt;

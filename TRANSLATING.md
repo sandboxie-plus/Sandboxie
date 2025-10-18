@@ -23,7 +23,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Farsi|Yes|No|No|No|
 |Finnish|Yes|No|No|No|
 |French|Yes - Dec 19, 2024|Yes - Dec 19, 2024|No|Yes - 2024|
-|German|Yes - Jul 7, 2025|Yes - Oct 17, 2025|Yes - Feb 17, 2025|Yes - Mar 13, 2025|
+|German|Yes - Jul 7, 2025|Yes - Oct 18, 2025|Yes - Feb 17, 2025|Yes - Mar 13, 2025|
 |Greek|Yes|No|No|No|
 |Hebrew|Yes|No|No|No|
 |Hungarian|Yes|Yes - Nov 5, 2024|Yes - Nov 5, 2024|Yes - 2024|

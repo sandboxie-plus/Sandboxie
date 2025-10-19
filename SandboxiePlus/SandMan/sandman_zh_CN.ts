@@ -1127,45 +1127,45 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>校验 INI 键</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>No validation</source>
-        <translation type="unfinished"></translation>
+        <translation>不校验</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>Full validation (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>完全校验（默认）</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
         <source>Enable INI Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>启用 INI 提示信息</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>No tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>不启用提示信息</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Basic info (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>基本信息 (默认)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>完整信息</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
         <source>Enable Popup Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>启用弹出式提示信息</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
@@ -1185,33 +1185,33 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
         <source>Enable Auto Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>启用自动补全</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Disabled (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用 (默认)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">手动</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">输入时</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>启用模糊匹配</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Enabled</source>
-        <translation type="unfinished">启用</translation>
+        <translation>启用</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
@@ -1221,17 +1221,17 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished">全部重置为默认值</translation>
+        <translation>全部重置为默认值</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>全部重置为默认值并移除自定义配置项。</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Setting</source>
-        <translation type="unfinished">设置</translation>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
@@ -1241,28 +1241,28 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未选中</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">部分选中</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">已选中</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
         <source>Reset</source>
-        <translation type="unfinished">重置</translation>
+        <translation>重置</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
         <source>Reset this setting to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>重置设置为默认值</translation>
     </message>
 </context>
 <context>
@@ -6732,7 +6732,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3362"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">手动</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3363"/>
@@ -6742,17 +6742,17 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3365"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">输入时</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3366"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">输入时触发自动补全建议。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3369"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">保持自动补全建议处于禁用状态。</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -8257,7 +8257,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;配置编辑器设置&lt;/span&gt;&lt;/p&gt;&lt;p&gt;使用表格中的复选框来配置每个设置。表格显示了每种状态的含义。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Setting</source>

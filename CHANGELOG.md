@@ -5,6 +5,33 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.16.5 / 5.71.5] - 2025-10-xx
+
+### Added
+- **Enhanced INI Editor:** Major improvements to the "Edit INI Section" dialog.
+  - **Dedicated Editor Settings:** A new "Editor Settings" window for configuring all INI editor behavior.
+  - **Setting Validation:** INI keys are now visually validated against `SbieSettings.ini` to catch configuration errors. (1.16.2)
+  - **Contextual Tooltips:** Tooltips for INI keys with metadata sourced from `SbieSettings.ini`, and configurable verbosity levels. (1.16.2, 1.16.4)
+  - **Auto-completion:** Auto-completion for INI keys using `SbieSettings.ini` as a reference, with a consent-based opt-in system. (1.16.3)
+
+  - **New Configuration Options:** [`Sandboxie-Plus.ini`]
+    - `Options/ValidateIniKeys` bool - enable/disable INI key validation (default: true) (1.16.2)
+    - `Options/EnableIniTooltips` int - control INI tooltip verbosity: 0=No tooltips, 1=Basic info, 2=Full details (1.16.2)
+    - `Options/EnablePopupTooltips` int - control popup tooltip verbosity: 0=No tooltips, 1=Basic info, 2=Full details (1.16.4)
+    - `Options/AutoCompletionConsent` bool - user consent for the auto-completion feature (1.16.3)
+    - `Options/EnableAutoCompletion` int - auto-completion mode: 0=Disabled, 1=Manual/Case, 2=Auto/Case (1.16.3)
+    - `Options/EnableFuzzyMatching` bool - enable fuzzy matching for auto-completion (1.16.3)
+
+  - **Customization via `SbieSettings.user.ini`:**
+    - Users can now make additional customizations using the `SbieSettings.user.ini` file to fine-tune the configuration further. (1.16.3)
+    
+    - For more detailed guidance on configuring these options, please refer to the comments in the `SbieSettings.ini` file. This includes explanations of all new and existing settings, providing clarity for advanced configurations.
+
+- **Preserve Custom Box Colors:** Custom colors set for a sandbox will now persist even after changing the `Box Type Preset`. [#5025](https://github.com/sandboxie-plus/Sandboxie/pull/5025) (thanks Pinefone)
+- added alpha transparency to sandbox border settings. [#5037](https://github.com/sandboxie-plus/Sandboxie/pull/5037)
+
+
+
 ## [1.16.4 / 5.71.4] - 2025-10-02
 
 ### Added
@@ -17,6 +44,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved checks in Thread_CheckObject_CommonEx for encrypted boxes
+
 
 
 

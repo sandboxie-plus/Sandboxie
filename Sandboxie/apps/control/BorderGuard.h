@@ -54,6 +54,7 @@ class CBorderGuard
     BOOL m_border_visible;
     HBRUSH m_border_brush;
     COLORREF m_border_brush_color;
+    int m_border_alpha;
 
     int m_thumb_width;
     int m_thumb_height;

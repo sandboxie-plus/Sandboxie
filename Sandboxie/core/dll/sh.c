@@ -590,7 +590,7 @@ _FX BOOL SH32_Shell_NotifyIconW(
         }
 
         COLORREF color;
-        if (SbieDll_GetBorderColor(NULL, &color, NULL, NULL))
+        if (SbieDll_GetBorderColor(NULL, &color, NULL, NULL, NULL))
         {
             HICON newIcon = SH32_BorderToIcon(lpData->hIcon, color);
             if (newIcon) {

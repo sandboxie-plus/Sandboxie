@@ -157,6 +157,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.spinBorderAlpha, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkPinToTray, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
@@ -268,6 +269,12 @@ void COptionsWindow::LoadGeneral()
 	int BorderWidth = BorderCfg.count() >= 3 ? BorderCfg[2].toInt() : 0;
 	if (!BorderWidth) BorderWidth = 6;
 	ui.spinBorderWidth->setValue(BorderWidth);
+	// Read alpha value (4th parameter) - default to 192 (75% opacity)
+	bool alphaOk = false;
+	m_BorderAlpha = BorderCfg.count() >= 4 ? BorderCfg[3].toInt(&alphaOk) : 192;
+	if (!alphaOk || m_BorderAlpha < 0 || m_BorderAlpha > 255)
+		m_BorderAlpha = 192;
+	ui.spinBorderAlpha->setValue(m_BorderAlpha);
 
 	m_BoxIcon = m_pBox->GetText("BoxIcon");
 	m_pUseIcon->setChecked(!m_BoxIcon.isEmpty());
@@ -419,6 +426,7 @@ void COptionsWindow::SaveGeneral()
 	BorderCfg.append(QString("#%1%2%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
 	BorderCfg.append(ui.cmbBoxBorder->currentData().toString());
 	BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
+	BorderCfg.append(QString::number(ui.spinBorderAlpha->value())); // Get alpha from spinner
 	WriteText("BorderColor", BorderCfg.join(","));
 
 	if(m_pUseIcon->isChecked())

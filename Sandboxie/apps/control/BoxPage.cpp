@@ -102,6 +102,7 @@ BEGIN_MESSAGE_MAP(CBoxPage, CPropertyPage)
     ON_COMMAND(ID_BORDER_COLOR,                 Appearance_OnBorderColor)
     ON_COMMAND(ID_BORDER_TITLE,                 Appearance_OnBorderTitle)
     ON_CONTROL(EN_CHANGE, ID_BORDER_WIDTH,      OnModified)
+    ON_CONTROL(EN_CHANGE, ID_BORDER_ALPHA,      OnModified)
 
     ON_COMMAND(ID_DELETE_AUTO,                  AutoDelete_OnAuto)
     ON_COMMAND(ID_DELETE_NEVER,                 AutoDelete_OnNever)
@@ -916,6 +917,7 @@ void CBoxPage::Appearance_OnInitDialog(CBox &box)
     GetDlgItem(ID_PAGE_LABEL_3)->SetWindowText(CMyMsg(MSG_3816));
     GetDlgItem(ID_SHOW_BORDER)->SetWindowText(CMyMsg(MSG_3817));
     GetDlgItem(ID_BORDER_TITLE)->SetWindowText(CMyMsg(MSG_3819));
+    GetDlgItem(ID_BORDER_ALPHA_LABEL)->SetWindowText(CMyMsg(MSG_3820));
 
     CenterControl(ID_HIDE_INDICATOR);
     CenterControl(ID_BOXNAMETITLE);
@@ -939,15 +941,23 @@ void CBoxPage::Appearance_OnInitDialog(CBox &box)
 
     BOOL title;
     int width;
-    BOOL enabled = box.GetBorder(&Appearance_BorderColor, &title, &width);
+    int alpha = 192;
+    BOOL enabled = box.GetBorder(&Appearance_BorderColor, &title, &width, &alpha);
     if (! enabled)
         GetDlgItem(ID_BORDER_COLOR)->ShowWindow(SW_HIDE);
+
+    Appearance_BorderAlpha = alpha;
 
     CEdit* edit = (CEdit*)GetDlgItem(ID_BORDER_WIDTH);
     edit->SetLimitText(3);
     CString str;
     str.Format(L"%d", width);
     edit->SetWindowText(str);
+
+    CEdit* editAlpha = (CEdit*)GetDlgItem(ID_BORDER_ALPHA);
+    editAlpha->SetLimitText(3);
+    str.Format(L"%d", alpha);
+    editAlpha->SetWindowText(str);
 
     Appearance_SetBorderColor();
 
@@ -985,7 +995,16 @@ void CBoxPage::Appearance_OnOK(CBox &box)
         CString str;
         GetDlgItem(ID_BORDER_WIDTH)->GetWindowText(str);
         int width = _wtoi(str);
-        ok = box.SetBorder(enable, Appearance_BorderColor, title, width);
+        GetDlgItem(ID_BORDER_ALPHA)->GetWindowText(str);
+        
+        // Validate alpha is a valid number
+        WCHAR* endptr;
+        int alpha = wcstol(str, &endptr, 10);
+        if (*endptr != L'\0' || endptr == (LPCWSTR)str || alpha < 0 || alpha > 255) {
+            alpha = 192; // Default to 75% opacity if invalid format or out of range
+        }
+        
+        ok = box.SetBorder(enable, Appearance_BorderColor, title, width, alpha);
     }
 
     if (ok)

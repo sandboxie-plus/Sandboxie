@@ -2483,6 +2483,10 @@ Click to change border colour
 Display the border only when the mouse cursor is in the window title
 .
 
+3820;txt;01
+Alpha
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Recovery
 #----------------------------------------------------------------------------

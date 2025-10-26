@@ -703,11 +703,14 @@ void CEditorSettingsWindow::SetRowEnabled(int row, bool enabled)
 			}
 			item->setFlags(flags);
 			
-			// Visually indicate disabled state with gray text
+			// Use the application's palette to choose readable foreground colors for enabled/disabled states
+			QPalette pal = QApplication::palette();
+			QColor fgEnabled = pal.color(QPalette::Text);
+			QColor fgDisabled = pal.color(QPalette::Disabled, QPalette::Text);
 			if (!enabled) {
-				item->setForeground(QBrush(QColor(128, 128, 128))); // Gray text
+				item->setForeground(QBrush(fgDisabled));
 			} else {
-				item->setForeground(QBrush(QColor(0, 0, 0))); // Black text
+				item->setForeground(QBrush(fgEnabled));
 			}
 		}
 	}

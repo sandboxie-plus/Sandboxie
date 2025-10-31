@@ -312,6 +312,23 @@
                  </property>
                 </widget>
                </item>
+               <item row="1" column="6">
+                <widget class="QSpinBox" name="spinBorderAlpha">
+                 <property name="maximum">
+                  <number>255</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <widget class="QLabel" name="label_75">
+                 <property name="text">
+                  <string>Alpha</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>spinBorderAlpha</cstring>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
             </layout>

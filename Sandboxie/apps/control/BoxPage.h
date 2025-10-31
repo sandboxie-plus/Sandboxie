@@ -81,6 +81,7 @@ class CBoxPage : public CPropertyPage
     //
 
     COLORREF Appearance_BorderColor;
+    int Appearance_BorderAlpha;
     HBITMAP Appearance_Bitmap;
 
     CToolTipButton Appearance_ColorButton;

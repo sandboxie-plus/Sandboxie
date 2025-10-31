@@ -35,6 +35,7 @@ struct SBoxBorder
 	COLORREF BorderColor;
 	int BorderMode;
 	int BorderWidth;
+	int BorderAlpha;
 
 	ULONG ActivePid;
 	HWND ActiveWnd;
@@ -94,6 +95,7 @@ void CBoxBorder::ThreadFunc()
 	m->BorderColor = RGB(0, 0, 0);
 	m->BorderMode = 0;
 	m->BorderWidth = 0;
+	m->BorderAlpha = 192; // Default to 75% opacity (192/255)
 
 	m->ActivePid = 0;
 	m->ActiveWnd = NULL;
@@ -136,6 +138,7 @@ void CBoxBorder::ThreadFunc()
 	if (!m->BorderWnd)
 		return;
 
+	// Initially set to 75% opacity, will be updated when border is configured
 	SetLayeredWindowAttributes(m->BorderWnd, 0, 192, LWA_ALPHA);
 	::ShowWindow(m->BorderWnd, SW_HIDE);
 
@@ -189,6 +192,7 @@ void CBoxBorder::TimerProc()
 			m->BorderMode = 1;
 			m->BorderColor = RGB(255, 255, 0);
 			m->BorderWidth = 6;
+			m->BorderAlpha = 192; // Default to 75% opacity
 
 			QStringList BorderCfg = pProcessBox->GetText("BorderColor").split(",");
 			if (BorderCfg.first().left(1) == L'#')
@@ -214,6 +218,19 @@ void CBoxBorder::TimerProc()
 						if (!m->BorderWidth)
 							m->BorderWidth = 6;
 					}
+
+					// Parse alpha value (4th parameter) - default to 192 (75% opacity) for backward compatibility
+					if (BorderCfg.count() >= 4)
+					{
+						bool alphaOk = false;
+						m->BorderAlpha = BorderCfg.at(3).toInt(&alphaOk);
+						if (!alphaOk || m->BorderAlpha < 0 || m->BorderAlpha > 255)
+							m->BorderAlpha = 192;
+					}
+					else
+					{
+						m->BorderAlpha = 192; // 75% opacity by default (192/255)
+					}
 				}
 			}
 
@@ -222,6 +239,9 @@ void CBoxBorder::TimerProc()
 			if (m->BorderBrush)
 				DeleteObject(m->BorderBrush);
 			m->BorderBrush = hbr;
+
+			// Apply alpha transparency setting
+			SetLayeredWindowAttributes(m->BorderWnd, 0, m->BorderAlpha, LWA_ALPHA);
 		}
 	}
 

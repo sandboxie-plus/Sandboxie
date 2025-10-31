@@ -562,6 +562,8 @@ _FX NTSTATUS KphValidateCertificate()
     LARGE_INTEGER cert_date = { 0 };
     LARGE_INTEGER check_date = { 0 };
     LONG days = 0;
+    BOOLEAN node_lock = FALSE;
+    BOOLEAN node_pass = FALSE;
 
     Verify_CertInfo.State = 0; // clear
 
@@ -751,13 +753,11 @@ _FX NTSTATUS KphValidateCertificate()
                 goto CleanupExit;
             }
         }
-        else if (_wcsicmp(L"HWID", name) == 0) { // if HwId is specified it must be the right one
+        else if (_wcsicmp(L"HWID", name) == 0) { // if HwId is specified it must be the right one, new format allows for multiple hwids in one cert, only one entry must match
+            node_lock = TRUE;
             extern wchar_t g_uuid_str[40];
-            if (_wcsicmp(value, g_uuid_str) != 0) {
-                status = STATUS_FIRMWARE_IMAGE_INVALID;
-                goto CleanupExit;
-            }
-            Verify_CertInfo.locked = 1;
+            if (_wcsicmp(value, g_uuid_str) == 0)
+                node_pass = TRUE;
         }
             
     next:
@@ -789,7 +789,7 @@ _FX NTSTATUS KphValidateCertificate()
 
         CHAR* blocklist = NULL;
         ULONG blocklist_size = 0;
-        if (NT_SUCCESS(Api_GetSecureParamImpl(L"CertBlockList", &blocklist, &blocklist_size, TRUE)))
+        if (NT_SUCCESS(Api_GetSecureParamImpl(L"CertBlockList", &blocklist, &blocklist_size, TRUE))) // allocs blocklist
         {
             //DbgPrint("BAM: found valid blocklist, size: %d", blocklist_size);
 
@@ -821,6 +821,16 @@ _FX NTSTATUS KphValidateCertificate()
 
     if (!NT_SUCCESS(status))
         goto CleanupExit;
+
+    // signature OK
+    if (node_lock) {
+        Verify_CertInfo.locked = 1;
+        if (!node_pass) {
+            status = STATUS_FIRMWARE_IMAGE_INVALID;
+            goto CleanupExit;
+        }
+    }
+    
 
     Verify_CertInfo.active = 1;
 

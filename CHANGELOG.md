@@ -8,13 +8,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.16.5 / 5.71.5] - 2025-10-xx
 
 ### Added
-- **Enhanced INI Editor:** Major improvements to the "Edit INI Section" dialog.
-  - **Dedicated Editor Settings:** A new "Editor Settings" window for configuring all INI editor behavior.
-  - **Setting Validation:** INI keys are now visually validated against `SbieSettings.ini` to catch configuration errors. (1.16.2)
-  - **Contextual Tooltips:** Tooltips for INI keys with metadata sourced from `SbieSettings.ini`, and configurable verbosity levels. (1.16.2, 1.16.4)
-  - **Auto-completion:** Auto-completion for INI keys using `SbieSettings.ini` as a reference, with a consent-based opt-in system. (1.16.3)
+- Enhanced INI Editor: Major improvements to the "Edit INI Section" dialog.
+  - Dedicated Editor Settings: A new "Editor Settings" window for configuring all INI editor behavior.
+  - Setting Validation: INI keys are now visually validated against `SbieSettings.ini` to catch configuration errors. (1.16.2)
+  - Contextual Tooltips: Tooltips for INI keys with metadata sourced from `SbieSettings.ini`, and configurable verbosity levels. (1.16.2, 1.16.4)
+  - Auto-completion: Auto-completion for INI keys using `SbieSettings.ini` as a reference, with a consent-based opt-in system. (1.16.3)
 
-  - **New Configuration Options:** [`Sandboxie-Plus.ini`]
+  - New Configuration Options: [`Sandboxie-Plus.ini`]
     - `Options/ValidateIniKeys` bool - enable/disable INI key validation (default: true) (1.16.2)
     - `Options/EnableIniTooltips` int - control INI tooltip verbosity: 0=No tooltips, 1=Basic info, 2=Full details (1.16.2)
     - `Options/EnablePopupTooltips` int - control popup tooltip verbosity: 0=No tooltips, 1=Basic info, 2=Full details (1.16.4)
@@ -22,12 +22,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
     - `Options/EnableAutoCompletion` int - auto-completion mode: 0=Disabled, 1=Manual/Case, 2=Auto/Case (1.16.3)
     - `Options/EnableFuzzyMatching` bool - enable fuzzy matching for auto-completion (1.16.3)
 
-  - **Customization via `SbieSettings.user.ini`:**
+  - Customization via `SbieSettings.user.ini`:
     - Users can now make additional customizations using the `SbieSettings.user.ini` file to fine-tune the configuration further. (1.16.3)
     
     - For more detailed guidance on configuring these options, please refer to the comments in the `SbieSettings.ini` file. This includes explanations of all new and existing settings, providing clarity for advanced configurations.
 
-- **Preserve Custom Box Colors:** Custom colors set for a sandbox will now persist even after changing the `Box Type Preset`. [#5025](https://github.com/sandboxie-plus/Sandboxie/pull/5025) (thanks Pinefone)
+- Preserve Custom Box Colors: Custom colors set for a sandbox will now persist even after changing the `Box Type Preset`. [#5025](https://github.com/sandboxie-plus/Sandboxie/pull/5025) (thanks Pinefone)
 - added alpha transparency to sandbox border settings. [#5037](https://github.com/sandboxie-plus/Sandboxie/pull/5037)
 
 ### Changed
@@ -35,8 +35,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - context menu icon upgrade [#5038](https://github.com/sandboxie-plus/Sandboxie/issues/5038)
 
 ### Fixed
-- WOW6432Node bug, becomes "HKLM\SOFTWARE\WOW6432Node\WOW6432Node" upon necessary creation of a 2nd non-existent subkey [#5057](https://github.com/sandboxie-plus/Sandboxie/issues/5057)
-
+- fixed WOW6432Node bug, becomes "HKLM\SOFTWARE\WOW6432Node\WOW6432Node" upon necessary creation of a 2nd non-existent subkey [#5057](https://github.com/sandboxie-plus/Sandboxie/issues/5057)
+- fixed Powershell is able to launch an executable inside a folder added to Program control [#5027](https://github.com/sandboxie-plus/Sandboxie/issues/5027)
 
 
 ## [1.16.4 / 5.71.4] - 2025-10-02

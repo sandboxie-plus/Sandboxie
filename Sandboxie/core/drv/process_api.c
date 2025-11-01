@@ -182,7 +182,7 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
             box->fake_admin = (BOOLEAN)parms[3];
 
             if (!Process_NotifyProcess_Create(
-                                user_pid_parm, Api_ServiceProcessId, Api_ServiceProcessId, box)) {
+                                user_pid_parm, Api_ServiceProcessId, Api_ServiceProcessId, NULL, 0, box)) {
 
                 status = STATUS_INTERNAL_ERROR;
             }

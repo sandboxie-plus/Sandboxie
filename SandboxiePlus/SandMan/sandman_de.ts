@@ -8652,7 +8652,7 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="325"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alpha</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1381"/>

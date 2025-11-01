@@ -2144,6 +2144,10 @@ Zum Ändern der Rahmenfarbe hier klicken
 Den Rahmen nur anzeigen, wenn der Mauszeiger in der Titelleiste ist
 .
 
+3820;txt;01
+Alpha
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Recovery
 #----------------------------------------------------------------------------
@@ -3646,3 +3650,4 @@ Dies ist der dritte und letzte Versuch.
 Folgende Programme müssen vor dem Fortsetzen der Installation geschlossen werden.
 Mit OK die Programme schließen und fortsetzen. Mit Abbrechen die Installation beenden.
 .
+

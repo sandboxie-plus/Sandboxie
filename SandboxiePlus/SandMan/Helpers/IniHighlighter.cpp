@@ -1744,22 +1744,10 @@ QString CIniHighlighter::GetSettingTooltipForPopup(const QString& settingName)
 {
 	// Determine configured modes
 	int iniMode = theConf->GetInt("Options/EnableIniTooltips", static_cast<int>(GetTooltipMode()));
-	int popupMode = theConf->GetInt("Options/EnablePopupTooltips", static_cast<int>(GetTooltipMode()));
-
-	// Apply user rule:
-	// - If EnableIniTooltips == 0 -> use EnablePopupTooltips (0/1/2) as the effective popup mode.
-	// - If EnableIniTooltips != 0 -> popup is disabled only when EnablePopupTooltips == 0;
-	//   otherwise popup follows the iniMode (basic/full).
-	int effectiveMode;
-	if (iniMode == Qt::Unchecked) {
-		effectiveMode = popupMode;
-	}
-	else {
-		effectiveMode = (popupMode == Qt::Unchecked) ? Qt::Unchecked : iniMode;
-	}
+	int popupMode = theConf->GetInt("Options/EnablePopupTooltips", iniMode);
 
 	// Disabled
-	if (effectiveMode == Qt::Unchecked)
+	if (popupMode == Qt::Unchecked)
 		return QString();
 
 	// Always return nothing for invalid/unknown keys or when settings not loaded.
@@ -1767,7 +1755,7 @@ QString CIniHighlighter::GetSettingTooltipForPopup(const QString& settingName)
 		return QString();
 
 	// Basic popup tooltip
-	if (effectiveMode == Qt::PartiallyChecked) {
+	if (popupMode == Qt::PartiallyChecked) {
 		QString cacheKey = QStringLiteral("popup_basic_") + settingName;
 		return getOrSetTooltipCache(cacheKey, [=]() {
 			return BuildPopupTooltip(settingName, /*basic=*/true);

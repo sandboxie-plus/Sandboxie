@@ -294,6 +294,10 @@ What's new in Sandboxie-Plus
 Resource Access
 .
 
+3820;txt;01
+Alpha
+.
+
 4104;txt;01
 Resource Access::Network Access
 .

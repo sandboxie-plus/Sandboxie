@@ -154,6 +154,10 @@ sandbox. Therefore, it is generally safer to grant only fake Administrator right
 although this may cause some installers to fail.
 .
 
+3820;txt;01
+Alpha
+.
+
 6008;pop;err;01
 The configuration %3 of box %2 requires a supporter certificate and can not be used without it.
 .

@@ -39,6 +39,7 @@ struct BoxBorderParms {
     COLORREF color;
     BOOL title;
     int width;
+    int alpha;
 };
 
 
@@ -86,6 +87,7 @@ CBorderGuard::CBorderGuard()
     m_border_hwnd = NULL;
     m_border_brush = NULL;
     m_border_brush_color = RGB(0,0,0);
+    m_border_alpha = 192;
     m_border_visible = FALSE;
 
     m_thumb_width  = GetSystemMetrics(SM_CXHTHUMB);
@@ -431,15 +433,24 @@ void CBorderGuard::RefreshBorder(
     //
 
     if ((! m_border_brush) ||
-            boxparm->color != m_border_brush_color) {
+            boxparm->color != m_border_brush_color ||
+            boxparm->alpha != m_border_alpha) {
 
-        HBRUSH hbr = CreateSolidBrush(boxparm->color);
-        SetClassLongPtr(m_border_hwnd, GCLP_HBRBACKGROUND, (LONG_PTR)hbr);
-        if (m_border_brush)
-            DeleteObject(m_border_brush);
-        m_border_brush = hbr;
+        // Only recreate brush if color changed
+        if ((! m_border_brush) || boxparm->color != m_border_brush_color) {
+            HBRUSH hbr = CreateSolidBrush(boxparm->color);
+            SetClassLongPtr(m_border_hwnd, GCLP_HBRBACKGROUND, (LONG_PTR)hbr);
+            if (m_border_brush)
+                DeleteObject(m_border_brush);
+            m_border_brush = hbr;
+            m_border_brush_color = boxparm->color;
+        }
 
-        m_border_brush_color = boxparm->color;
+        // Always update alpha if it changed
+        if (boxparm->alpha != m_border_alpha) {
+            SetLayeredWindowAttributes(m_border_hwnd, 0, boxparm->alpha, LWA_ALPHA);
+            m_border_alpha = boxparm->alpha;
+        }
     }
 
     //
@@ -604,13 +615,15 @@ void CBorderGuard::RefreshConf2()
             COLORREF color;
             BOOL title;
             int width;
-            BOOL enabled = box.GetBorder(&color, &title, &width);
+            int alpha;
+            BOOL enabled = box.GetBorder(&color, &title, &width, &alpha);
             if (enabled) {
                 boxparm = new BoxBorderParms;
                 wcscpy(boxparm->boxname, box.GetName());
                 boxparm->color = color;
                 boxparm->title = title;
                 boxparm->width = width;
+                boxparm->alpha = alpha;
                 m_boxes.Add(boxparm);
             }
         }

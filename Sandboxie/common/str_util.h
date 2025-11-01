@@ -28,6 +28,8 @@ VOID SbieDll_EnumTagValues(const WCHAR* string, SbieDll_TagEnumProc enumProc, vo
 BOOLEAN SbieDll_FindTagValue(const WCHAR* string, const WCHAR* name, WCHAR* value, ULONG value_size, WCHAR eq, WCHAR sep);
 BOOLEAN SbieDll_FindTagValuePtr(const WCHAR* string, const WCHAR* name, const WCHAR** value, ULONG* value_len, WCHAR eq, WCHAR sep);
 
+wchar_t* wcsistr(const wchar_t* str, const wchar_t* what);
+
 #ifdef __cplusplus
 }
 #endif

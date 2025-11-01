@@ -129,13 +129,27 @@ void COptionsWindow::CreateGeneral()
     pActionWidget->setDefaultWidget(pIconWidget);
 	pColorMenu->addAction(pActionWidget);
 	pColorMenu->addSeparator();
+
+	QWidget* pSliderWidget = new QWidget(this);
+	QHBoxLayout* pSliderLayout = new QHBoxLayout(pSliderWidget);
+	pSliderLayout->setContentsMargins(0, 0, 0, 0);
+	pSliderLayout->setSpacing(0);
 	m_pColorSlider = new QSlider(Qt::Horizontal, this);
 	m_pColorSlider->setMinimum(0);
 	m_pColorSlider->setMaximum(359);
 	m_pColorSlider->setMinimumHeight(16);
+	m_pColorSlider->setMinimumWidth(120);
 	connect(m_pColorSlider, SIGNAL(valueChanged(int)), this, SLOT(OnColorSlider(int)));
+	m_pColorReset = new QToolButton(this);
+	m_pColorReset->setText(QChar(0x21BA));
+	connect(m_pColorReset, SIGNAL(clicked(bool)), this, SLOT(OnColorReset()));
+	int maxButtonWidth = qMax(m_pPickIcon->sizeHint().width(), m_pColorReset->sizeHint().width());
+	m_pPickIcon->setMinimumWidth(maxButtonWidth);
+	m_pColorReset->setMinimumWidth(maxButtonWidth);
+	pSliderLayout->addWidget(m_pColorSlider);
+	pSliderLayout->addWidget(m_pColorReset);
 	pActionWidget = new QWidgetAction(this);
-    pActionWidget->setDefaultWidget(m_pColorSlider);
+    pActionWidget->setDefaultWidget(pSliderWidget);
 	pColorMenu->addAction(pActionWidget);
 	ui.btnBorderColor->setMenu(pColorMenu);
 
@@ -143,6 +157,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.spinBorderAlpha, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkPinToTray, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
@@ -254,10 +269,18 @@ void COptionsWindow::LoadGeneral()
 	int BorderWidth = BorderCfg.count() >= 3 ? BorderCfg[2].toInt() : 0;
 	if (!BorderWidth) BorderWidth = 6;
 	ui.spinBorderWidth->setValue(BorderWidth);
+	// Read alpha value (4th parameter) - default to 192 (75% opacity)
+	bool alphaOk = false;
+	m_BorderAlpha = BorderCfg.count() >= 4 ? BorderCfg[3].toInt(&alphaOk) : 192;
+	if (!alphaOk || m_BorderAlpha < 0 || m_BorderAlpha > 255)
+		m_BorderAlpha = 192;
+	ui.spinBorderAlpha->setValue(m_BorderAlpha);
 
 	m_BoxIcon = m_pBox->GetText("BoxIcon");
 	m_pUseIcon->setChecked(!m_BoxIcon.isEmpty());
 	m_pPickIcon->setEnabled(!m_BoxIcon.isEmpty());
+	m_CustomColor = m_pBox->GetBool("CustomColor", false);
+	m_pColorReset->setEnabled(m_CustomColor);
 	StrPair PathIndex = Split2(m_BoxIcon, ",");
 	if (!PathIndex.second.isEmpty() && !PathIndex.second.contains("."))
 		ui.btnBorderColor->setIcon(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt()));
@@ -403,13 +426,18 @@ void COptionsWindow::SaveGeneral()
 	BorderCfg.append(QString("#%1%2%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
 	BorderCfg.append(ui.cmbBoxBorder->currentData().toString());
 	BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
+	BorderCfg.append(QString::number(ui.spinBorderAlpha->value())); // Get alpha from spinner
 	WriteText("BorderColor", BorderCfg.join(","));
 
 	if(m_pUseIcon->isChecked())
 		WriteText("BoxIcon", m_BoxIcon);
 	else
 		m_pBox->DelValue("BoxIcon");
-		
+
+	if (m_CustomColor)
+		WriteText("CustomColor", "y");
+	else
+		m_pBox->DelValue("CustomColor");
 
 	WriteAdvancedCheck(ui.chkShowForRun, "ShowForRunIn", "", "n");
 	WriteAdvancedCheck(ui.chkPinToTray, "PinToTray", "y", "");
@@ -925,6 +953,7 @@ void COptionsWindow::OnPickColor()
 	QColor color = QColorDialog::getColor(m_BorderColor, this, tr("Select color"));
 	if (!color.isValid())
 		return;
+	m_CustomColor = true;
 	m_GeneralChanged = true;
 	OnOptChanged();
 	SetBoxColor(color);
@@ -937,8 +966,11 @@ void COptionsWindow::SetBoxColor(const QColor& color)
 	QRgb qrgb = color.rgba();
 	my_rgb rgb = { (double)qRed(qrgb), (double)qGreen(qrgb), (double)qBlue(qrgb) };
 	my_hsv hsv = rgb2hsv(rgb);
+	m_SliderCustomColor = !m_CustomColor || m_SliderCustomColor;
 	m_pColorSlider->setValue((int)hsv.h);
+	m_SliderCustomColor = false;
 	m_BorderColor = color;
+	m_pColorReset->setEnabled(m_CustomColor);
 	UpdateBoxColor();
 }
 
@@ -946,9 +978,18 @@ void COptionsWindow::OnColorSlider(int value)
 {
 	my_hsv hsv = { (double)value, 1, 255 };
 	my_rgb rgb = hsv2rgb(hsv);
+	m_CustomColor = !m_SliderCustomColor || m_CustomColor;
 	m_GeneralChanged = true;
 	OnOptChanged();
 	SetBoxColor(qRgb(rgb.r, rgb.g, rgb.b));
+}
+
+void COptionsWindow::OnColorReset()
+{
+	m_CustomColor = false;
+	SetBoxColor(theGUI->GetBoxColor(ui.cmbBoxType->currentData().toInt()));
+	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::UpdateBoxColor()
@@ -1128,7 +1169,8 @@ void COptionsWindow::OnBoxTypChanged()
 		break;
 	}
 
-	SetBoxColor(theGUI->GetBoxColor(BoxType));
+	if (!m_CustomColor)
+		SetBoxColor(theGUI->GetBoxColor(BoxType));
 
 	m_GeneralChanged = true;
 	m_AccessChanged = true;

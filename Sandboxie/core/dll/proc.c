@@ -30,7 +30,7 @@
 #include "core/svc/ServiceWire.h"
 #include "core/drv/api_defs.h"
 #include "msgs/msgs.h"
-
+#include "common/str_util.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -890,8 +890,8 @@ _FX BOOL Proc_CreateProcessInternalW(
             {
                 WCHAR* backslash = wcsrchr(lpApplicationName, L'\\');
                 if ((backslash && _wcsicmp(backslash + 1, Dll_ImageName) == 0)
-                    && wcsstr(lpCommandLine, L" --type=gpu-process")
-                    && !wcsstr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
+                    && wcsistr(lpCommandLine, L" --type=gpu-process")
+                    && !wcsistr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
 
                     lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
 
@@ -911,7 +911,7 @@ _FX BOOL Proc_CreateProcessInternalW(
             //
 
             if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && lpCommandLine
-                && wcsstr(lpCommandLine, L"--service-sandbox-type"))
+                && wcsistr(lpCommandLine, L"--service-sandbox-type"))
                 hToken = NULL;
         }
 
@@ -921,8 +921,8 @@ _FX BOOL Proc_CreateProcessInternalW(
         //
 
         if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && lpCommandLine
-            // && wcsstr(lpCommandLine, L"-contentproc")
-            && wcsstr(lpCommandLine, L"-sandboxingKind"))
+            // && wcsistr(lpCommandLine, L"-contentproc")
+            && wcsistr(lpCommandLine, L"-sandboxingKind"))
             hToken = NULL;
     }
 
@@ -1559,7 +1559,7 @@ _FX BOOL Proc_CreateProcessInternalW(
             if (resume_thread)
             {
                 // WerFault has some design flaws.  If we want crash DMPs we have to make adjustments
-                if (lpApplicationName && (wcsstr(lpApplicationName, L"WerFault.exe")))
+                if (lpApplicationName && (wcsistr(lpApplicationName, L"WerFault.exe")))
                 {
                     // Windows will start WerFault 3 times.  So to prevent duplicate DMPs, filter them out here.
                     if (g_boolWasWerFaultLastProcess == TRUE)
@@ -1709,7 +1709,7 @@ _FX BOOL Proc_AlternateCreateProcess(
     }
 
     if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH && lpApplicationName
-            && wcsstr(lpApplicationName, L"klwtblfs.exe")) {
+            && wcsistr(lpApplicationName, L"klwtblfs.exe")) {
         // don't start Kaspersky Anti Virus klwtblfs.exe component
         // because Kaspersky protects the process and we can't put
         // it into a job or inject SbieLow and so on
@@ -1717,7 +1717,7 @@ _FX BOOL Proc_AlternateCreateProcess(
         return TRUE;        // exit CreateProcessInternal
     }
     if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH && lpCommandLine
-        && wcsstr(lpCommandLine, L"smartscreen.exe")) {
+        && wcsistr(lpCommandLine, L"smartscreen.exe")) {
 
         SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of smartscreen.exe");
         return TRUE;        // exit CreateProcessInternal

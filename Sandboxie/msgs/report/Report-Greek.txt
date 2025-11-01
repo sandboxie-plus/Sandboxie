@@ -346,6 +346,10 @@ What's new in Sandboxie-Plus
 Resource Access
 .
 
+3820;txt;01
+Alpha
+.
+
 3955;txt;01
 Network Files
 .

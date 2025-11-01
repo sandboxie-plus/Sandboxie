@@ -29,6 +29,7 @@
 #include "core/drv/api_defs.h"
 #include <stdio.h>
 #include "debug.h"
+#include "common/str_util.h"
 
 //---------------------------------------------------------------------------
 // Defines
@@ -1075,11 +1076,11 @@ _FX NTSTATUS Key_FixNameWow64_2(WCHAR **OutTruePath, WCHAR **OutCopyPath)
 _FX BOOLEAN Key_FixNameWow64_3(WCHAR **OutPath)
 {
     WCHAR *ptr1, *ptr2;
-    ptr1 = wcsstr(*OutPath, Key_Wow6432Node);
+    ptr1 = wcsistr(*OutPath, Key_Wow6432Node);
     if (! ptr1)
         return FALSE;
     ptr2 = ptr1 + 12;
-    if (wcsncmp(ptr2, Key_Wow6432Node, 12) != 0)
+    if (_wcsnicmp(ptr2, Key_Wow6432Node, 12) != 0)
         return FALSE;
     ptr1 = ptr2 + 12;
     wmemmove(ptr2, ptr1, wcslen(ptr1) + 1);
@@ -1107,7 +1108,7 @@ _FX ACCESS_MASK Key_GetWow64Flag(
         if (Dll_OsBuild >= 7600)
             DesiredAccess |= KEY_WOW64_64KEY;
 
-        else if (wcsstr(TruePath, Key_Wow6432Node))
+        else if (wcsistr(TruePath, Key_Wow6432Node))
             DesiredAccess |= KEY_WOW64_32KEY;
 
         else

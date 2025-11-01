@@ -165,19 +165,19 @@ public:
                     params += itemName;
                     params += L"\"";
 
-		    // Since the program is run from rundll32.exe, the working directory needs to be set to the program's one.
-		    // Otherwise, the rundll32.exe's one will be used (usually "C:\Windows\System32").
-		    std::vector<wchar_t> drive(_MAX_DRIVE), dir(_MAX_DIR);
-		    _wsplitpath_s(itemName, drive.data(), drive.size(), dir.data(), dir.size(), nullptr, 0, nullptr, 0);
-		    std::wstring currentDirectory(drive.data());
-		    currentDirectory += dir.data();
+                    // Since the program is run from rundll32.exe, the working directory needs to be set to the program's one.
+                    // Otherwise, the rundll32.exe's one will be used (usually "C:\Windows\System32").
+                    std::vector<wchar_t> drive(_MAX_DRIVE), dir(_MAX_DIR);
+                    _wsplitpath_s(itemName, drive.data(), drive.size(), dir.data(), dir.size(), nullptr, 0, nullptr, 0);
+                    std::wstring currentDirectory(drive.data());
+                    currentDirectory += dir.data();
 
                     SHELLEXECUTEINFO shExecInfo = { sizeof(SHELLEXECUTEINFO) };
                     shExecInfo.hwnd = nullptr;
                     shExecInfo.lpVerb = L"open";
                     shExecInfo.lpFile = file.c_str();
                     shExecInfo.lpParameters = params.c_str();
-		    shExecInfo.lpDirectory = currentDirectory.c_str();
+                    shExecInfo.lpDirectory = currentDirectory.c_str();
                     shExecInfo.nShow = SW_NORMAL;
                     ShellExecuteEx(&shExecInfo);
 

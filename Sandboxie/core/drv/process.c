@@ -663,6 +663,24 @@ _FX PROCESS *Process_Create(
 
     proc->create_time = PsGetProcessCreateTimeQuadPart(ProcessObject);
 
+    if(IsWin32KFilterEnabledForProcess && IsWin32KFilterEnabledForProcess(ProcessObject)) {
+
+        DbgPrint("Sandboxie: Process %u has Win32KFilterEnabled\n", (DWORD)ProcessId);
+
+        //
+        // Windows Internals 7th Edition:
+        // This is set through an internal process creation attribute flag, which can 
+        // define one out of three possible sets  of Win32k filters that are enabled. 
+        // However, because the filter sets are  hard-coded, this mitigation is re
+        // served for Microsoft internal usage.
+        //
+        // Hence it is of littel use to enable it by default it might be only of use or msedge
+        //
+
+        if(Conf_Get_Boolean(proc->box->name, L"UseWin32kFilterTable", 0, FALSE))
+            proc->filter_win32k_syscalls = TRUE;
+	}
+
     ObDereferenceObject(ProcessObject);
 
     proc->integrity_level = tzuk;   // default to no integrity level

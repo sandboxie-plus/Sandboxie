@@ -66,6 +66,7 @@ struct _SYSCALL_ENTRY {
     USHORT param_count;
     ULONG ntdll_offset;
     void *ntos_func;
+    void *ntos_func2; // TableFilter entry Win32k only
     P_Syscall_Handler1 handler1_func;
     P_Syscall_Handler2 handler2_func;
 #ifdef _M_AMD64
@@ -85,6 +86,8 @@ struct _SYSCALL_ENTRY {
 
 
 void *Syscall_GetServiceTable(void);
+
+void *Syscall_GetServiceTableFilter(void);
 
 BOOLEAN Syscall_Init(void);
 

@@ -233,6 +233,7 @@ _FX void *Syscall_GetMasterServiceTable(void)
                     //test operand 2 is in register range
                     if (ptr[2] < 0x20 && nt && nt == (LONG_PTR)(ptr + 7) + delta) {
                         nt -= 0x20;
+                        DbgPrint("Found KeServiceDescriptorTableShadow = %p\n", nt);
                         return (void*)nt;
                     }
                     break;
@@ -302,6 +303,7 @@ _FX void *Syscall_GetMasterServiceTable(void)
                         else {
                             nt += 0x20;
                         }
+                        DbgPrint("Found KeServiceDescriptorTableShadow = %p\n", nt);
                         return (void *)nt;
                     }
                     break;
@@ -406,6 +408,7 @@ _FX void *Syscall_GetMasterServiceTable(void)
 
         MasterTable = (void*)(nt + ofs32a);
 
+        DbgPrint("Found KeServiceDescriptorTableShadow = %p\n", MasterTable);
         return MasterTable;
     }
 #endif
@@ -477,6 +480,145 @@ _FX void *Syscall_GetServiceTable(void)
     // DbgPrint("MASTER %p SHADOW %p DIFF %p\n", MasterTable, ShadowTable, (ULONG)((ULONG_PTR)ShadowTable - (ULONG_PTR)MasterTable));
 
     return ShadowTable;
+}
+
+
+//---------------------------------------------------------------------------
+// Syscall_GetMasterServiceTableFilter
+//---------------------------------------------------------------------------
+
+
+_FX void *Syscall_GetMasterServiceTableFilter(void)
+{
+    NTSTATUS status;
+    void *MasterTable;
+
+    UNICODE_STRING uni;
+    UCHAR *ptr;
+    ULONG i;
+    ULONG_PTR kernel_base;
+
+    //
+    // if NTOSKRNL exports KeServiceDescriptorTable, use that
+    //
+
+    RtlInitUnicodeString(&uni, L"KeServiceDescriptorTableFilter");
+    MasterTable = MmGetSystemRoutineAddress(&uni);
+
+    if (MasterTable)
+        return MasterTable;
+
+    // else we find it ourselves.  first find where the NT kernel was loaded.
+    // this may be variable on Vista
+    //
+
+    kernel_base = Syscall_GetKernelBase();
+    if (!kernel_base)
+        return NULL;
+
+    //
+    // next, analyze KeAddSystemServiceTable to learn where shadow table is
+    //
+
+    RtlInitUnicodeString(&uni, L"KeAddSystemServiceTable");
+    ptr = (UCHAR*)MmGetSystemRoutineAddress(&uni);
+    if (! ptr)
+        return NULL;
+
+#ifdef _M_ARM64
+
+    //TableFilter lookup for windows 11 on arm64
+
+	// TODO
+
+#else
+
+    //TableFilter lookup for windows 10
+    if (Driver_OsBuild >= 10041) {
+
+        DbgPrint("Trying KeAddSystemServiceTable = %p, OS = %d, Pattern = LEA LEA SHL\n", ptr, Driver_OsBuild);
+
+        ULONG_PTR nt = 0;
+        //Look for the following instruction pattern
+        // Windows 11
+		// lea     rax, KeServiceDescriptorTableFilter  : 48 8D 05 XX XX XX XX
+        // lea     ecx, [rdx-1]                         : 8D 4A FF 
+        // shl     rcx, 5                               : 48 C1 E1 05
+        // 
+        // mov     [rcx+rax], r10                       : 4C 89 14 01
+        // mov     [rcx+rax+10h], r8d                   : 44 89 44 01 10
+        // mov     [rcx+rax+18h], r9                    : 4C 89 4C 01 18
+        // 
+        // Windows 10
+		// lea     rax, KeServiceDescriptorTableFilter  : 48 8D 05 XX XX XX XX
+		// lea     ecx, [rdx-1]                         : 8D 4A FF
+		// shl     rcx, 5                               : 48 C1 E1 05
+        // 
+		// mov     [rcx+rax], r11                       : 4C 89 1C 01
+		// mov     [rcx+rax+10h], ebx                   : 89 5C 01 10
+		// mov     [rcx+rax+18h], r10                   : 4C 89 54 01 18
+        //
+
+        for (i = 0; i < 0x200; i++, ptr++) {
+
+            // LEA rax, [rip + offset]: 48 8D 05 XX XX XX XX            
+            if (ptr[0] == 0x48 && ptr[1] == 0x8D && ptr[2] == 0x05) {
+
+                // LEA ecx, [rdx-1]: 8D 4A FF
+                // SHL rcx, 5: 48 C1 E1 05
+                if (ptr[7] == 0x8D && ptr[8] == 0x4A && ptr[9] == 0xFF &&
+                    ptr[10] == 0x48 && ptr[11] == 0xC1 && ptr[12] == 0xE1 && ptr[13] == 0x05) {
+
+                    LONG delta;
+                    ULONG_PTR FilterTableAddress;
+
+                    delta = *(LONG*)(ptr + 3);
+
+                    FilterTableAddress = (ULONG_PTR)(ptr + 7) + delta;
+
+                    DbgPrint("Found KeServiceDescriptorTableFilter = %p\n", FilterTableAddress);
+                    return (void*)FilterTableAddress;
+                }
+            }
+        }
+    }
+
+#endif
+
+    return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// Syscall_GetServiceTableFilter
+//---------------------------------------------------------------------------
+
+
+_FX void *Syscall_GetServiceTableFilter(void)
+{
+    static SERVICE_DESCRIPTOR *FilterTable = NULL;
+
+    if (FilterTable)
+        return FilterTable;
+
+    // $Offset$
+    /*if (Dyndata_Active && Dyndata_Config.ServiceTableFilter_offset != -1) {
+
+        ULONG_PTR kernel_base = Syscall_GetKernelBase();
+        if (!kernel_base)
+            return NULL;
+
+        FilterTable = (SERVICE_DESCRIPTOR *)(kernel_base + Dyndata_Config.ServiceTableFilter_offset);
+        return FilterTable;
+    }*/
+
+    FilterTable = (SERVICE_DESCRIPTOR *)Syscall_GetMasterServiceTableFilter();
+
+    if (!FilterTable) {
+        Log_Msg1(MSG_1113, L"FILTER TABLE");
+        return NULL;
+    }
+    return FilterTable;
 }
 
 

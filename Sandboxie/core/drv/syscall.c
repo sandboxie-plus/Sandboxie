@@ -106,6 +106,7 @@ static BOOLEAN Syscall_GetKernelAddr(
 #pragma alloc_text (INIT, Syscall_GetIndexFromNtdll)
 #pragma alloc_text (INIT, Syscall_GetKernelAddr)
 #pragma alloc_text (INIT, Syscall_GetServiceTable)
+#pragma alloc_text (INIT, Syscall_GetServiceTableFilter)
 #endif // ALLOC_PRAGMA
 
 #include "syscall_util.c"
@@ -341,6 +342,7 @@ _FX BOOLEAN Syscall_Init_List(void)
         entry->param_count = (USHORT)param_count;
         entry->ntdll_offset = proc_offset;
         entry->ntos_func = ntos_addr;
+        entry->ntos_func2 = NULL;
         entry->handler1_func = NULL;
         entry->handler2_func = NULL;
 #ifdef _M_AMD64

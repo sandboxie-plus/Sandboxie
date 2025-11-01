@@ -208,6 +208,8 @@ struct _PROCESS {
     LIST open_win_classes;
     ULONG gui_trace;
 
+    BOOLEAN filter_win32k_syscalls;
+
     BOOLEAN bHostInject;
 
 };

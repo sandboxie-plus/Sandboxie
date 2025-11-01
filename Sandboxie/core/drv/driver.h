@@ -114,6 +114,9 @@ extern P_NtCreateToken                  ZwCreateToken;
 extern P_NtCreateTokenEx                ZwCreateTokenEx;
 #endif
 
+typedef BOOLEAN(*P_PsIsWin32KFilterEnabledForProcess)(EPROCESS);
+extern P_PsIsWin32KFilterEnabledForProcess IsWin32KFilterEnabledForProcess;
+
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------

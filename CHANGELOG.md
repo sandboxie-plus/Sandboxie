@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Support Certificates can now contain multiple HWID's to simplify handling
 - context menu icon upgrade [#5038](https://github.com/sandboxie-plus/Sandboxie/issues/5038)
+- improved win32 syscall handling (experimental) when "UseWin32kFilterTable=y" is set the KeServiceDescriptorTableFilter willbe used instead of KeServiceDescriptorTableShadow where apropriate
 
 ### Fixed
 - fixed WOW6432Node bug, becomes "HKLM\SOFTWARE\WOW6432Node\WOW6432Node" upon necessary creation of a 2nd non-existent subkey [#5057](https://github.com/sandboxie-plus/Sandboxie/issues/5057)

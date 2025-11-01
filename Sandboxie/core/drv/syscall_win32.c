@@ -89,10 +89,12 @@ ULONG Syscall_MaxIndex32 = 0;
 
 typedef struct _KSERVICE_TABLE_DESCRIPTOR
 {
-    unsigned long *Base;
-    unsigned long *Reserved1;
-    unsigned long Limit;
-    unsigned char *Number;
+    unsigned long *Base;            // 0
+    unsigned long *Reserved1;       // 8
+	unsigned long Limit;            // 16
+                                    // 20
+	unsigned char *Number;          // 24
+                                    // 32
 } KSERVICE_TABLE_DESCRIPTOR, *PKSERVICE_TABLE_DESCRIPTOR ;
 
 #ifdef _WIN64
@@ -146,14 +148,19 @@ _FX BOOLEAN Syscall_Init_List32(void)
 {
     BOOLEAN success = FALSE;
     UCHAR *name, *win32k_code;
-    void *ntos_addr;
+    void *ntos_addr, *ntos_addr2;
     DLL_ENTRY *dll;
     SYSCALL_ENTRY *entry;
-    ULONG proc_index, proc_offset, syscall_index, param_count;
+    ULONG proc_index, proc_offset, syscall_index, param_count, param_count2;
     ULONG name_len, entry_len;
-    ULONG* base_copy = NULL;
+    KSERVICE_TABLE_DESCRIPTOR *ShadowTable = NULL;
+    ULONG* shadow_base_copy = NULL;
 #ifndef _WIN64
-    UCHAR* number_copy = NULL;
+    UCHAR* shadow_number_copy = NULL;
+#endif
+    KSERVICE_TABLE_DESCRIPTOR *FilterTable = NULL;
+#ifdef _WIN64
+    ULONG* filter_base_copy = NULL;
 #endif
 
     List_Init(&Syscall_List32);
@@ -176,7 +183,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
     // get the syscall table
     //
 
-    KSERVICE_TABLE_DESCRIPTOR *ShadowTable = (KSERVICE_TABLE_DESCRIPTOR *)Syscall_GetServiceTable();
+    ShadowTable = (KSERVICE_TABLE_DESCRIPTOR *)Syscall_GetServiceTable();
     if (!ShadowTable) {
         Log_Msg1(MSG_1113, L"SHADOW_TABLE");
         goto finish;
@@ -189,11 +196,32 @@ _FX BOOLEAN Syscall_Init_List32(void)
         Log_Msg1(MSG_1113, L"SHADOW_TABLE");
         goto finish;
     }
-    
+
+#ifdef _WIN64
+    if (Conf_Get_Boolean(NULL, L"UseWin32kFilterTable", 0, FALSE)) {
+        FilterTable = (KSERVICE_TABLE_DESCRIPTOR*)Syscall_GetServiceTableFilter();
+        if (!FilterTable)
+            Log_Msg1(MSG_1113, L"FILTER_TABLE");
+        else {
+            //DbgPrint(" ntoskrln.exe SysCalls: %d %p %p\n", FilterTable->Limit, FilterTable->Base, FilterTable->Number);
+            FilterTable += 1; // ServiceDescriptorTableFilter[0] -> ntoskrnl.exe, ServiceDescriptorTableFilter[1] -> win32k.sys
+            //DbgPrint(" win32k.sys SysCalls: %d %p %p\n", FilterTable->Limit, FilterTable->Base, FilterTable->Number);
+
+            if (ShadowTable->Limit > 0xFFF) { // not plausible
+                Log_Msg1(MSG_1113, L"FILTER_TABLE");
+                FilterTable = NULL;
+            }
+        }
+    }
+#endif
+
+
     //
     // We can not read ShadowTable->Base bemory, without being in a GUI thread
     // hence we grab csrss.exe and attach to it, create a copy of this memory
     // and use it in the loop below instead
+    // 
+	// On 25H2 this seams no longer be nececery, but we keep it for compatibility
     //
 
     HANDLE csrssId = Util_GetProcessPidByName(L"csrss.exe");
@@ -202,30 +230,50 @@ _FX BOOLEAN Syscall_Init_List32(void)
         goto finish;
     }
 
-    base_copy = (ULONG*)Mem_AllocEx(Driver_Pool, ShadowTable->Limit * sizeof(long), TRUE);
-    if (!base_copy)
+    shadow_base_copy = (ULONG*)Mem_AllocEx(Driver_Pool, ShadowTable->Limit * sizeof(long), TRUE);
+    if (!shadow_base_copy)
         goto finish;
 #ifndef _WIN64
-    number_copy = (UCHAR*)Mem_AllocEx(Driver_Pool, ShadowTable->Limit * sizeof(char), TRUE);
-    if (!number_copy)
+    shadow_number_copy = (UCHAR*)Mem_AllocEx(Driver_Pool, ShadowTable->Limit * sizeof(char), TRUE);
+    if (!shadow_number_copy)
         goto finish;
+#endif
+
+#ifdef _WIN64
+    if (FilterTable)
+        filter_base_copy = (ULONG*)Mem_AllocEx(Driver_Pool, FilterTable->Limit * sizeof(long), TRUE);
 #endif
 
     PEPROCESS ProcessObject;
     if (NT_SUCCESS(PsLookupProcessByProcessId(csrssId,&ProcessObject))) {
         KAPC_STATE ApcState;
         KeStackAttachProcess(ProcessObject, &ApcState);
+
         if (MmIsAddressValid(ShadowTable->Base)
 #ifndef _WIN64
              && MmIsAddressValid(ShadowTable->Number)
 #endif
         ) {
-            memcpy(base_copy, ShadowTable->Base, ShadowTable->Limit * sizeof(long));
+            memcpy(shadow_base_copy, ShadowTable->Base, ShadowTable->Limit * sizeof(long));
 #ifndef _WIN64
-            memcpy(number_copy, ShadowTable->Number, ShadowTable->Limit * sizeof(char));
+            memcpy(shadow_number_copy, ShadowTable->Number, ShadowTable->Limit * sizeof(char));
 #endif
             success = TRUE;
         }
+
+#ifdef _WIN64
+        if (filter_base_copy) {
+            SIZE_T bytesRead = 0;
+            MM_COPY_ADDRESS src = { .VirtualAddress = FilterTable->Base };
+            NTSTATUS st = MmCopyMemory(filter_base_copy, src, FilterTable->Limit * sizeof(long), MM_COPY_MEMORY_VIRTUAL, &bytesRead);
+            if (!NT_SUCCESS(st) || bytesRead < FilterTable->Limit * sizeof(long)) {
+                Log_Msg1(MSG_1113, L"FILTER_TABLE");
+                Mem_Free(filter_base_copy, FilterTable->Limit * sizeof(long));
+                filter_base_copy = NULL;
+            }
+        }
+#endif
+
         KeUnstackDetachProcess(&ApcState);
         ObDereferenceObject(ProcessObject);
     }
@@ -308,8 +356,8 @@ _FX BOOLEAN Syscall_Init_List32(void)
         // analyze each NtXxx export to find the service index number
         //
 
-        ntos_addr = NULL;
-        param_count = 0;
+        ntos_addr = ntos_addr2 = NULL;
+        param_count = param_count2 = 0;
 
         win32k_code = Dll_RvaToAddr(dll, proc_offset);
         if (win32k_code) {
@@ -325,9 +373,9 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
             if (syscall_index != -1) {
 
-                Syscall_GetWin32kAddr(ShadowTable, base_copy,
+                Syscall_GetWin32kAddr(ShadowTable, shadow_base_copy,
 #ifndef _WIN64
-                                                               number_copy,
+                                                                    shadow_number_copy,
 #endif
                             syscall_index, &ntos_addr, &param_count);
 
@@ -337,6 +385,16 @@ _FX BOOLEAN Syscall_Init_List32(void)
                 //KeUnstackDetachProcess(&ApcState);
                 //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d; addr: %p %s\r\n", name, param_count, syscall_index, ntos_addr, test ? "valid" : "invalid");
                 //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d; addr: %p\r\n", name, param_count, syscall_index, ntos_addr);
+
+#ifdef _WIN64
+                if (filter_base_copy)
+                {
+                    Syscall_GetWin32kAddr(FilterTable, filter_base_copy,
+                        syscall_index, &ntos_addr2, &param_count2);
+
+                    //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d; addr: %p\r\n", name, param_count2, syscall_index, ntos_addr2);
+                }
+#endif
             }
         }
 
@@ -361,6 +419,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
         entry->param_count = (USHORT)param_count;
         entry->ntdll_offset = proc_offset;
         entry->ntos_func = ntos_addr;
+        entry->ntos_func2 = ntos_addr2;
         entry->handler1_func = NULL;
         entry->handler2_func = NULL;
 #ifdef _M_AMD64
@@ -414,11 +473,15 @@ finish:
 
     Syscall_FreeHookMap(&approved_syscalls);
 
-    if (base_copy)
-        Mem_Free(base_copy, ShadowTable->Limit * sizeof(long));
+    if (shadow_base_copy)
+        Mem_Free(shadow_base_copy, ShadowTable->Limit * sizeof(long));
 #ifndef _WIN64
-    if (number_copy)
-        Mem_Free(number_copy, ShadowTable->Limit * sizeof(char));
+    if (shadow_number_copy)
+        Mem_Free(shadow_number_copy, ShadowTable->Limit * sizeof(char));
+#endif
+#ifdef _WIN64
+    if (filter_base_copy)
+        Mem_Free(filter_base_copy, FilterTable->Limit * sizeof(long));
 #endif
 
     return success;
@@ -457,6 +520,38 @@ _FX BOOLEAN Syscall_Init_Table32(void)
     }
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Syscall_Invoke32
+//---------------------------------------------------------------------------
+
+NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG count, void* args);
+
+_FX NTSTATUS Syscall_Invoke32(PROCESS* proc, SYSCALL_ENTRY *entry, ULONG_PTR *stack)
+{
+    NTSTATUS status;
+
+    //
+    // Note: when directly calling win32k functions with "Core Isolation" (HVCI) enabled
+    //  the nt!guard_dispatch_icall will cause a bugcheck!
+    //  Hence we use a call proxy Sbie_InvokeSyscall_asm instead of a direct call
+    //  alternatively we could disable "Control Flow Guard" for this file
+    //
+
+    __try {
+
+        if (proc->filter_win32k_syscalls && entry->ntos_func2)
+            status = Sbie_InvokeSyscall_asm(entry->ntos_func2, entry->param_count, stack);
+        else
+            status = Sbie_InvokeSyscall_asm(entry->ntos_func, entry->param_count, stack);
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    return status;
 }
 
 
@@ -580,10 +675,11 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
             // gui mode could still issue a syscall to a win32k and cause a BSOD otherwise
             //
 
-            if (MmIsAddressValid(entry->ntos_func)) {
+            //if (MmIsAddressValid(entry->ntos_func)) {
+            if (PsGetProcessWin32Process(PsGetCurrentProcess())) { // HasWin32kInitialized
 
                 //DbgPrint("   SysCall32 %d -> %p\r\n", syscall_index, entry->ntos_func);
-                status = Syscall_Invoke(entry, user_args);
+                status = Syscall_Invoke32(proc, entry, user_args);
 
             } else {
 

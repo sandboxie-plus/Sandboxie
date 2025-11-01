@@ -90,3 +90,7 @@ sandbox. Therefore, it is generally safer to grant only fake Administrator right
 although this may cause some installers to fail.
 .
 
+3820;txt;01
+Alpha
+.
+

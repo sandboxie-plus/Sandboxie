@@ -194,6 +194,10 @@ although this may cause some installers to fail.
 What's new in Sandboxie-Plus
 .
 
+3820;txt;01
+Alpha
+.
+
 6004;pop;err;01
 The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
 .

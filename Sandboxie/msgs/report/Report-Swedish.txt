@@ -230,6 +230,10 @@ Deleting: %2
 Sandboxie-Plus Migration Guide
 .
 
+3820;txt;01
+Alpha
+.
+
 6008;pop;err;01
 The configuration %3 of box %2 requires a supporter certificate and can not be used without it.
 .

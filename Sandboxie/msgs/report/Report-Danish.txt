@@ -498,6 +498,10 @@ Click to change border colour
 Display the border only when the mouse cursor is in the window title
 .
 
+3820;txt;01
+Alpha
+.
+
 3909;txt;01
 The File Migration setting limits the maximum size of a file that can be copied into the sandbox.
 

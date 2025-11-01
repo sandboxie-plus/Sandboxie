@@ -258,6 +258,10 @@ Sandboxie-Plus Migration Guide
 What's new in Sandboxie-Plus
 .
 
+3820;txt;01
+Alpha
+.
+
 4342;txt;01
 Enable %2 compatibility workaround
 .

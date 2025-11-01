@@ -378,6 +378,10 @@ Error:  Duplicate sandbox name entered.  The name is already used by a hidden sa
 Open %2 in sandbox %3
 .
 
+3820;txt;01
+Alpha
+.
+
 3955;txt;01
 Network Files
 .

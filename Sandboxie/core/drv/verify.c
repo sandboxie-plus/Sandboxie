@@ -883,6 +883,7 @@ _FX NTSTATUS KphValidateCertificate()
 
 
     LARGE_INTEGER expiration_date = { 0 };
+    BOOLEAN bNoCR = FALSE;
 
     if (!type) // type is mandatory 
         ;
@@ -929,6 +930,7 @@ _FX NTSTATUS KphValidateCertificate()
         if(days) expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(days), 0, 0);
         else expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(level ? _wtoi(level) : 7), 0, 0); // x days, default 7
         Verify_CertInfo.level = eCertMaxLevel;
+		bNoCR = TRUE;
     }
     else if (!level || _wcsicmp(level, L"STANDARD") == 0) // not used, default does not have explicit level
         Verify_CertInfo.level = eCertStandard;
@@ -976,7 +978,6 @@ _FX NTSTATUS KphValidateCertificate()
         
     if(CertDbg)     DbgPrint("Sbie Cert level: %X\n", Verify_CertInfo.level);
 
-    BOOLEAN bNoCR = FALSE;
     if (options) {
 
             if(CertDbg)     DbgPrint("Sbie Cert options: %S\n", options);
@@ -1068,7 +1069,7 @@ _FX NTSTATUS KphValidateCertificate()
     UCHAR param_data = 0;
     UCHAR* param_ptr = &param_data;
     ULONG param_len = sizeof(param_data);
-    if (NT_SUCCESS(Api_GetSecureParamImpl(L"RequireLock", &param_ptr, &param_len, FALSE)) && param_data != 0)
+    if (NT_SUCCESS(Api_GetSecureParamImpl(L"RequireLock", &param_ptr, &param_len, FALSE)) && param_data != 0) // uses alocated param_ptr
         Verify_CertInfo.lock_req = 1;
 
     LANGID LangID = 0;

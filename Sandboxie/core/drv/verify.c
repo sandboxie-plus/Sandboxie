@@ -1075,17 +1075,14 @@ _FX NTSTATUS KphValidateCertificate()
     if(NT_SUCCESS(ZwQueryInstallUILanguage(&LangID)) && (LangID == 0x0804))
         Verify_CertInfo.lock_req = 1;
 
-    if (Verify_CertInfo.lock_req && Verify_CertInfo.type != eCertEternal && Verify_CertInfo.type != eCertContributor) {
-
-        if (!Verify_CertInfo.locked)
+    if (Verify_CertInfo.lock_req && !bNoCR && Verify_CertInfo.type != eCertEternal && Verify_CertInfo.type != eCertContributor) {
+        // Check if a refresh of the cert is required
+        if (check_date.QuadPart + KphGetDateInterval(0, 4, 0) < LocalTime.QuadPart || !Verify_CertInfo.locked)
             Verify_CertInfo.active = 0;
-        if (!bNoCR) { // Check if a refresh of the cert is required
-            if (check_date.QuadPart + KphGetDateInterval(0, 4, 0) < LocalTime.QuadPart)
-                Verify_CertInfo.active = 0;
-            else if (check_date.QuadPart + KphGetDateInterval(0, 3, 0) < LocalTime.QuadPart)
-                Verify_CertInfo.grace_period = 1;
-        }
+        else if (check_date.QuadPart + KphGetDateInterval(0, 3, 0) < LocalTime.QuadPart)
+            Verify_CertInfo.grace_period = 1;
     }
+
 
 CleanupExit:
     if(CertDbg)     DbgPrint("Sbie Cert status: %08x; active: %d\n", status, Verify_CertInfo.active);

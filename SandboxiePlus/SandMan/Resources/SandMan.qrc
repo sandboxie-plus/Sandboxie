@@ -108,6 +108,57 @@
         <file>Actions/Design.png</file>
         <file>Actions/Objects.png</file>
         <file>Actions/Program.png</file>
+        <file>NtObjects/ADAPTER.png</file>
+        <file>NtObjects/CALLBACK.png</file>
+        <file>NtObjects/COMPOSITION.png</file>
+        <file>NtObjects/CONTROLLER.png</file>
+        <file>NtObjects/DEBUGOBJECT.png</file>
+        <file>NtObjects/DESKTOP.png</file>
+        <file>NtObjects/DEVICE.png</file>
+        <file>NtObjects/DIRECTORY.png</file>
+        <file>NtObjects/DRIVER.png</file>
+        <file>NtObjects/DXOBJECT.png</file>
+        <file>NtObjects/ETWCONSUMER.png</file>
+        <file>NtObjects/ETWREGISTRATION.png</file>
+        <file>NtObjects/EVENT.png</file>
+        <file>NtObjects/EVENTPAIR.png</file>
+        <file>NtObjects/FILE.png</file>
+        <file>NtObjects/FLTCOMMPORT.png</file>
+        <file>NtObjects/FLTCONNPORT.png</file>
+        <file>NtObjects/FOLDER.png</file>
+        <file>NtObjects/HALDMA.png</file>
+        <file>NtObjects/IOCOMPLETION.png</file>
+        <file>NtObjects/IRTIMER.png</file>
+        <file>NtObjects/JOB.png</file>
+        <file>NtObjects/KEY.png</file>
+        <file>NtObjects/KEYEDEVENT.png</file>
+        <file>NtObjects/MailSlot.png</file>
+        <file>NtObjects/MEMORYPARTITION.png</file>
+        <file>NtObjects/MUTANT.png</file>
+        <file>NtObjects/PCWOBJECT.png</file>
+        <file>NtObjects/Pipe.png</file>
+        <file>NtObjects/PORT.png</file>
+        <file>NtObjects/POWERREQUEST.png</file>
+        <file>NtObjects/PROCESS.png</file>
+        <file>NtObjects/PROFILE.png</file>
+        <file>NtObjects/SECTION.png</file>
+        <file>NtObjects/SEMAPHORE.png</file>
+        <file>NtObjects/SESSION.png</file>
+        <file>NtObjects/SYMLINK.png</file>
+        <file>NtObjects/THREAD.png</file>
+        <file>NtObjects/TIMER.png</file>
+        <file>NtObjects/TMEN.png</file>
+        <file>NtObjects/TMRM.png</file>
+        <file>NtObjects/TMTM.png</file>
+        <file>NtObjects/TMTX.png</file>
+        <file>NtObjects/TOKEN.png</file>
+        <file>NtObjects/TPWORKERFACTORY.png</file>
+        <file>NtObjects/TYPE.png</file>
+        <file>NtObjects/UNKNOWN.png</file>
+        <file>NtObjects/WAITABLEPORT.png</file>
+        <file>NtObjects/WINSTATION.png</file>
+        <file>NtObjects/WMIGUID.png</file>
+        <file>NtObjects/VALUE.png</file>
         <file>Actions/Proxy.png</file>
         <file>Actions/DNS.png</file>
         <file>Actions/Alarm.png</file>
@@ -191,6 +242,7 @@
         <file>Actions/Highlight.png</file>
         <file>Actions/RegExp.png</file>
         <file>Actions/FakeShield.png</file>
+        <file>Actions/Expand.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Busy">Boxes/BusyOverlay.png</file>

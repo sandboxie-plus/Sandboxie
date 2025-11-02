@@ -255,6 +255,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
 	ui.cmbOnClose->addItem(tr("Hide (Run invisible in Background)"), "Hide");
 
+	ui.cmbGrouping->addItem(tr("Remember previouse state"), 0);
+	ui.cmbGrouping->addItem(tr("Expand all groups"), 1);
+	ui.cmbGrouping->addItem(tr("Collapse all groups"), 2);
+
 	ui.cmbDPI->addItem(tr("None"), 0);
 	ui.cmbDPI->addItem(tr("Native"), 1);
 	ui.cmbDPI->addItem(tr("Qt"), 2);
@@ -395,6 +399,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkOverlayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkHideCore, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbGrouping, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 
 
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
@@ -1168,6 +1173,8 @@ void CSettingsWindow::LoadSettings()
 	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
 	ui.chkOverlayIcons->setChecked(theConf->GetBool("Options/UseOverlayIcons", true));
 	ui.chkHideCore->setChecked(theConf->GetBool("Options/HideSbieProcesses", false));
+	ui.cmbGrouping->setCurrentIndex(theConf->GetInt("Options/BoxGroupHandling", 0));
+	
 
 
 	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
@@ -1671,6 +1678,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
 	theConf->SetValue("Options/UseOverlayIcons", ui.chkOverlayIcons->isChecked());
 	theConf->SetValue("Options/HideSbieProcesses", ui.chkHideCore->isChecked());
+	theConf->SetValue("Options/BoxGroupHandling", ui.cmbGrouping->currentIndex());
 
 	CIniHighlighter::ClearLanguageCache();
 	CIniHighlighter::ClearThemeCache();

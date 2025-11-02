@@ -29,11 +29,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Preserve Custom Box Colors: Custom colors set for a sandbox will now persist even after changing the `Box Type Preset`. [#5025](https://github.com/sandboxie-plus/Sandboxie/pull/5025) (thanks Pinefone)
 - added alpha transparency to sandbox border settings. [#5037](https://github.com/sandboxie-plus/Sandboxie/pull/5037)
+- User-Interface: Start with all groups collapsed [#5052](https://github.com/sandboxie-plus/Sandboxie/issues/5052)
+- User-Interface: Add menu option to collapse/uncollapse groups [#5053](https://github.com/sandboxie-plus/Sandboxie/issues/5053)
 
 ### Changed
 - Support Certificates can now contain multiple HWID's to simplify handling
 - context menu icon upgrade [#5038](https://github.com/sandboxie-plus/Sandboxie/issues/5038)
 - improved win32 syscall handling (experimental) when "UseWin32kFilterTable=y" is set the KeServiceDescriptorTableFilter willbe used instead of KeServiceDescriptorTableShadow where apropriate
+- improved default toolbar loadout
 
 ### Fixed
 - fixed WOW6432Node bug, becomes "HKLM\SOFTWARE\WOW6432Node\WOW6432Node" upon necessary creation of a 2nd non-existent subkey [#5057](https://github.com/sandboxie-plus/Sandboxie/issues/5057)

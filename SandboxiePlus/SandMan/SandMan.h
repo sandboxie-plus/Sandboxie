@@ -78,6 +78,7 @@ public:
 
 	bool				IsShowHidden() { return m_pShowHidden && m_pShowHidden->isChecked(); }
 	bool				KeepTerminated();
+	bool				IsAutoExpand() { return m_pAutoExpand && m_pAutoExpand->isChecked(); }
 	bool				ShowAllSessions() { return m_pShowAllSessions && m_pShowAllSessions->isChecked(); }
 	bool				IsSilentMode();
 	bool				IsDisableRecovery() {return IsSilentMode() || m_pDisableRecovery && m_pDisableRecovery->isChecked();}
@@ -259,6 +260,7 @@ private slots:
 	void				OnRefresh();
 	void				OnCleanUp();
 	void				OnProcView();
+	void				OnAutoExpand();
 	void				OnRecoveryLog();
 
 	void				OnSettings();
@@ -336,7 +338,7 @@ private:
 
 	// per 1.9.3 menu. no whitespace!
 	const QStringList	DefaultToolBarItems = QString(
-						  "Settings,KeepTerminated,CleanUpMenu,BrowseFiles,EditIni,EnableMonitor"
+						  "ReloadIni,EditIniMenu,Settings,RunBoxed,NewBoxMenu,EnableMonitor,TerminateAll,CleanUpMenu,BrowseFiles,KeepTerminated"
 						).split(',');
 
 	QWidget*			m_pMainWidget;
@@ -412,6 +414,7 @@ private:
 	QToolButton*		m_pEditIniButton;
 	//QToolButton*		m_pEditButton;
 	QAction*			m_pKeepTerminated;
+	QAction*			m_pAutoExpand;
 	QAction*			m_pShowAllSessions;
 	QAction*			m_pArrangeGroups;
 

@@ -1608,7 +1608,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Views/NtObjectView.cpp" line="213"/>
         <source>%1 - NT Object Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - NT Object Namespace</translation>
     </message>
 </context>
 <context>
@@ -1616,17 +1616,17 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Models/NtObjectModel.cpp" line="726"/>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="727"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="728"/>
         <source>Access</source>
-        <translation type="unfinished">Zugriff</translation>
+        <translation>Zugriff</translation>
     </message>
 </context>
 <context>
@@ -3843,7 +3843,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="592"/>
         <source>Auto Expand Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Baumstruktur automatisch aufklappen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="840"/>
@@ -5398,7 +5398,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="246"/>
         <location filename="Views/SbieView.cpp" line="383"/>
         <source>Browse NT Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>NT Namespace durchsuchen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="249"/>
@@ -5975,17 +5975,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
         <source>Remember previouse state</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorherigen Zustand merken</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="259"/>
         <source>Expand all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Gruppen aufklappen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="260"/>
         <source>Collapse all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Gruppen zuklappen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2834"/>
@@ -10866,7 +10866,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1153"/>
         <source>Group state on start</source>
-        <translation type="unfinished"></translation>
+        <translation>Zustand der Gruppen beim Start</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1389"/>

@@ -2,7 +2,5 @@
 * Missing Messages in Text-German-1031.txt
 *==========
 
-3820;txt;01
-Alpha
-.
+There are no missing messages.
 

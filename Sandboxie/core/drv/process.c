@@ -674,7 +674,7 @@ _FX PROCESS *Process_Create(
         // However, because the filter sets are  hard-coded, this mitigation is re
         // served for Microsoft internal usage.
         //
-        // Hence it is of littel use to enable it by default it might be only of use or msedge
+        // Hence it is of little use to enable it by default, it might be only of use for msedge
         //
 
         if(Conf_Get_Boolean(proc->box->name, L"UseWin32kFilterTable", 0, FALSE))

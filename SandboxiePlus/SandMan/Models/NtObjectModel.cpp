@@ -305,9 +305,9 @@ bool MatchPathListEx(const QString& Path, const QList<SAccessRule>& list, ULONG*
     cur_wildc = *pwildc;
     cur_len = MatchPathList(Path, list, &cur_level, &cur_flags, &cur_wildc, found);
     if (cur_level <= *plevel && (
-        ((*pflags & MATCH_FLAG_EXACT) == 0 && (cur_flags & MATCH_FLAG_EXACT) != 0) || // an exact match overrules any non exact match
-        ((*pflags & MATCH_FLAG_AUX) != 0 && (cur_flags & MATCH_FLAG_AUX) == 0) || // a rule with a primary match overrules auxyliary matches
-        (cur_len > *pmatch_len) || // the longer the match the mroe specific teh rule, hence the highest priority it has
+        ((*pflags & MATCH_FLAG_EXACT) == 0 && (cur_flags & MATCH_FLAG_EXACT) != 0) || // an exact match overrules any non-exact match
+        ((*pflags & MATCH_FLAG_AUX) != 0 && (cur_flags & MATCH_FLAG_AUX) == 0) || // a rule with a primary match overrules auxiliary matches
+        (cur_len > *pmatch_len) || // the longer the match the more specific the rule, hence the highest priority it has
         ((cur_len == *pmatch_len && cur_len > 0) && (cur_wildc < *pwildc)) // given the same match length, a rule with less wildcards wins
         )) {
         *plevel = cur_level;

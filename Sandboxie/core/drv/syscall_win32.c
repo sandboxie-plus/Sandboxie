@@ -221,7 +221,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
     // hence we grab csrss.exe and attach to it, create a copy of this memory
     // and use it in the loop below instead
     // 
-	// On 25H2 this seams no longer be nececery, but we keep it for compatibility
+	// On 25H2 this seems no longer be necessary, but we keep it for compatibility
     //
 
     HANDLE csrssId = Util_GetProcessPidByName(L"csrss.exe");

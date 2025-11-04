@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.5 / 5.71.5] - 2025-10-xx
+## [1.16.5 / 5.71.5] - 2025-11-04
 
 ### Added
 - Enhanced INI Editor: Major improvements to the "Edit INI Section" dialog.

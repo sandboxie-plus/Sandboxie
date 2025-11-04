@@ -114,6 +114,15 @@ extern P_NtCreateToken                  ZwCreateToken;
 extern P_NtCreateTokenEx                ZwCreateTokenEx;
 #endif
 
+typedef NTSTATUS(*P_MmCopyMemory) (
+    _Out_writes_bytes_ (NumberOfBytes) PVOID TargetAddress,
+    _In_ MM_COPY_ADDRESS SourceAddress,
+    _In_ SIZE_T NumberOfBytes,
+    _In_ ULONG Flags,
+    _Out_ PSIZE_T NumberOfBytesTransferred
+);
+extern P_MmCopyMemory MyMmCopyMemory;
+
 typedef BOOLEAN(*P_PsIsWin32KFilterEnabledForProcess)(EPROCESS);
 extern P_PsIsWin32KFilterEnabledForProcess IsWin32KFilterEnabledForProcess;
 

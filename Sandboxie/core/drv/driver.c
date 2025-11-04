@@ -159,6 +159,9 @@ P_NtCreateToken                 ZwCreateToken               = NULL;
 P_NtCreateTokenEx               ZwCreateTokenEx             = NULL;
 #endif
 
+
+P_MmCopyMemory MyMmCopyMemory = NULL;
+
 P_PsIsWin32KFilterEnabledForProcess IsWin32KFilterEnabledForProcess = NULL;
 
 
@@ -810,8 +813,10 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 	}
 #endif
 
-    RtlInitUnicodeString(&uni, L"PsIsWin32KFilterEnabledForProcess");
+    RtlInitUnicodeString(&uni, L"MmCopyMemory"); // not present in windows 7
+    MyMmCopyMemory = (P_MmCopyMemory) MmGetSystemRoutineAddress(&uni);
 
+    RtlInitUnicodeString(&uni, L"PsIsWin32KFilterEnabledForProcess");
     IsWin32KFilterEnabledForProcess = (P_PsIsWin32KFilterEnabledForProcess) MmGetSystemRoutineAddress(&uni);
 
     return TRUE;

@@ -240,7 +240,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
 #endif
 
 #ifdef _WIN64
-    if (FilterTable)
+    if (FilterTable && MyMmCopyMemory)
         filter_base_copy = (ULONG*)Mem_AllocEx(Driver_Pool, FilterTable->Limit * sizeof(long), TRUE);
 #endif
 
@@ -265,7 +265,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
         if (filter_base_copy) {
             SIZE_T bytesRead = 0;
             MM_COPY_ADDRESS src = { .VirtualAddress = FilterTable->Base };
-            NTSTATUS st = MmCopyMemory(filter_base_copy, src, FilterTable->Limit * sizeof(long), MM_COPY_MEMORY_VIRTUAL, &bytesRead);
+            NTSTATUS st = MyMmCopyMemory(filter_base_copy, src, FilterTable->Limit * sizeof(long), MM_COPY_MEMORY_VIRTUAL, &bytesRead);
             if (!NT_SUCCESS(st) || bytesRead < FilterTable->Limit * sizeof(long)) {
                 Log_Msg1(MSG_1113, L"FILTER_TABLE");
                 Mem_Free(filter_base_copy, FilterTable->Limit * sizeof(long));

@@ -1069,7 +1069,7 @@ _FX NTSTATUS KphValidateCertificate()
     UCHAR param_data = 0;
     UCHAR* param_ptr = &param_data;
     ULONG param_len = sizeof(param_data);
-    if (NT_SUCCESS(Api_GetSecureParamImpl(L"RequireLock", &param_ptr, &param_len, FALSE)) && param_data != 0) // uses alocated param_ptr
+    if (NT_SUCCESS(Api_GetSecureParamImpl(L"RequireLock", &param_ptr, &param_len, FALSE)) && param_data != 0) // uses allocated param_ptr
         Verify_CertInfo.lock_req = 1;
 
     LANGID LangID = 0;

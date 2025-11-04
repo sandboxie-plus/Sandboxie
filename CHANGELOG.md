@@ -13,7 +13,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Setting Validation: INI keys are now visually validated against `SbieSettings.ini` to catch configuration errors. (1.16.2)
   - Contextual Tooltips: Tooltips for INI keys with metadata sourced from `SbieSettings.ini`, and configurable verbosity levels. (1.16.2, 1.16.4)
   - Auto-completion: Auto-completion for INI keys using `SbieSettings.ini` as a reference, with a consent-based opt-in system. (1.16.3)
-
   - New Configuration Options: [`Sandboxie-Plus.ini`]
     - `Options/ValidateIniKeys` bool - enable/disable INI key validation (default: true) (1.16.2)
     - `Options/EnableIniTooltips` int - control INI tooltip verbosity: 0=No tooltips, 1=Basic info, 2=Full details (1.16.2)
@@ -21,64 +20,61 @@ This project adheres to [Semantic Versioning](http://semver.org/).
     - `Options/AutoCompletionConsent` bool - user consent for the auto-completion feature (1.16.3)
     - `Options/EnableAutoCompletion` int - auto-completion mode: 0=Disabled, 1=Manual/Case, 2=Auto/Case (1.16.3)
     - `Options/EnableFuzzyMatching` bool - enable fuzzy matching for auto-completion (1.16.3)
-
   - Customization via `SbieSettings.user.ini`:
     - Users can now make additional customizations using the `SbieSettings.user.ini` file to fine-tune the configuration further. (1.16.3)
-    
     - For more detailed guidance on configuring these options, please refer to the comments in the `SbieSettings.ini` file. This includes explanations of all new and existing settings, providing clarity for advanced configurations.
-
-- Preserve Custom Box Colors: Custom colors set for a sandbox will now persist even after changing the `Box Type Preset`. [#5025](https://github.com/sandboxie-plus/Sandboxie/pull/5025) (thanks Pinefone)
-- added alpha transparency to sandbox border settings. [#5037](https://github.com/sandboxie-plus/Sandboxie/pull/5037)
-- User-Interface: Start with all groups collapsed [#5052](https://github.com/sandboxie-plus/Sandboxie/issues/5052)
-- User-Interface: Add menu option to collapse/uncollapse groups [#5053](https://github.com/sandboxie-plus/Sandboxie/issues/5053)
+- preserve custom box colors: custom colors set for a sandbox will now persist even after changing the `Box Type Preset` [#5025](https://github.com/sandboxie-plus/Sandboxie/pull/5025) (thanks Pinefone)
+- added alpha transparency to sandbox border settings [#5037](https://github.com/sandboxie-plus/Sandboxie/pull/5037)
+- user interface: start with all groups collapsed [#5052](https://github.com/sandboxie-plus/Sandboxie/issues/5052)
+- user interface: add menu option to collapse/expand groups [#5053](https://github.com/sandboxie-plus/Sandboxie/issues/5053)
 
 ### Changed
-- Support Certificates can now contain multiple HWID's to simplify handling
+- support certificates can now contain multiple HwID's to simplify handling
 - context menu icon upgrade [#5038](https://github.com/sandboxie-plus/Sandboxie/issues/5038)
-- improved win32 syscall handling (experimental) when `UseWin32kFilterTable=y` is set the `KeServiceDescriptorTableFilter` will be used instead of `KeServiceDescriptorTableShadow` where apropriate
+- improved Win32 syscall handling (experimental) when `UseWin32kFilterTable=y` is set the `KeServiceDescriptorTableFilter` will be used instead of `KeServiceDescriptorTableShadow` where appropriate
 - improved default toolbar loadout
 
 ### Fixed
-- fixed BindAdapter reliability when VPN/bound adapter is disconnected. [#5055](https://github.com/sandboxie-plus/Sandboxie/pull/5055) [#4896](https://github.com/sandboxie-plus/Sandboxie/issues/4896)
+- fixed BindAdapter reliability when VPN/bound adapter is disconnected [#5055](https://github.com/sandboxie-plus/Sandboxie/pull/5055) [#4896](https://github.com/sandboxie-plus/Sandboxie/issues/4896)
 - fixed WOW6432Node bug, becomes `HKLM\SOFTWARE\WOW6432Node\WOW6432Node` upon necessary creation of a 2nd non-existent subkey [#5057](https://github.com/sandboxie-plus/Sandboxie/issues/5057)
-- fixed Powershell is able to launch an executable inside a folder added to Program control [#5027](https://github.com/sandboxie-plus/Sandboxie/issues/5027)
+- fixed PowerShell is able to launch an executable inside a folder added to program control [#5027](https://github.com/sandboxie-plus/Sandboxie/issues/5027)
 
 
 
 ## [1.16.4 / 5.71.4] - 2025-10-02
 
 ### Added
-- added option to block non administrative session leader (sandman.exe or sbiectrl.exe) from accessing encrypted box data
+- added option to block non administrative session leader (SandMan.exe or SbieCtrl.exe) from accessing encrypted box data
   - Note: this is now enabled by default to disable it use `ProtectAdminOnly=n`
-
-### Fixed
-- Sandboxie-Plus 1.16.3 Fails to Connect to Driver on Windows Preview Build 27943 [#5003](https://github.com/sandboxie-plus/Sandboxie/issues/5003)
-- fixed latest signal crashing
 
 ### Changed
 - improved checks in `Thread_CheckObject_CommonEx` for encrypted boxes
+
+### Fixed
+- fixed Sandboxie-Plus 1.16.3 fails to connect to driver on Windows Preview build 27943 [#5003](https://github.com/sandboxie-plus/Sandboxie/issues/5003)
+- fixed latest Signal crashing
 
 
 
 ## [1.16.3 / 5.71.3] - 2025-09-08
 
 ### Changed
-- reworked driver imports to despite of being build with VS2022 allow it to load on windows 7 [#4942](https://github.com/sandboxie-plus/Sandboxie/issues/4942)
+- reworked driver imports to despite of being build with VS2022 allow it to load on Windows 7 [#4942](https://github.com/sandboxie-plus/Sandboxie/issues/4942)
 - improved dark mode color pattern
-- switched to Qt 6.8.3 with [windows 7 compatibility patches](https://github.com/crystalidea/qt6windows7)
+- switched to Qt 6.8.3 with [Windows 7 compatibility patches](https://github.com/crystalidea/qt6windows7)
 - validated compatibility with Windows build 27934 and updated DynData
 
 ### Fixed
-- fixed 1.16.2 = Tray Menu Missing in Action [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)
+- fixed 1.16.2 = tray menu missing in action [#4940](https://github.com/sandboxie-plus/Sandboxie/issues/4940)
 - fixed UAC prompt layout at higher DPI in secure desktop [#4953](https://github.com/sandboxie-plus/Sandboxie/issues/4953) (thanks gexgd0419)
 - fixed RTL layout for Arabic in UAC prompt dialog [#4957](https://github.com/sandboxie-plus/Sandboxie/pull/4957) (thanks gexgd0419)
-- fixed 1.16.1 Dark mode help popup window with light color background [#4903](https://github.com/sandboxie-plus/Sandboxie/issues/4903)
-- fixed Network options cannot be persisted during editing [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
-- fixed Cleanup on Aisle Qt5 - Installer should remove obsolete files after Sandboxie 1.16.x [#4934](https://github.com/sandboxie-plus/Sandboxie/issues/4934)
+- fixed 1.16.1 dark mode help popup window with light color background [#4903](https://github.com/sandboxie-plus/Sandboxie/issues/4903)
+- fixed network options cannot be persisted during editing [#4899](https://github.com/sandboxie-plus/Sandboxie/issues/4899)
+- fixed cleanup on aisle Qt5 - installer should remove obsolete files after Sandboxie 1.16.x [#4934](https://github.com/sandboxie-plus/Sandboxie/issues/4934)
 - fixed on restart as admin windows was not shown
 
 ### Removed
-- remove obsolete code which was long superseded by new implementations
+- removed obsolete code which was long superseded by new implementations
 
 
 

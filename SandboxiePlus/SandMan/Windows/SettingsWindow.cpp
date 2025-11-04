@@ -255,7 +255,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
 	ui.cmbOnClose->addItem(tr("Hide (Run invisible in Background)"), "Hide");
 
-	ui.cmbGrouping->addItem(tr("Remember previouse state"), 0);
+	ui.cmbGrouping->addItem(tr("Remember previous state"), 0);
 	ui.cmbGrouping->addItem(tr("Expand all groups"), 1);
 	ui.cmbGrouping->addItem(tr("Collapse all groups"), 2);
 

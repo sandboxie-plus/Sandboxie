@@ -5990,7 +5990,8 @@ File ini adalah bagian dari Sandboxie dan semua perubahan yang dilakukan padanya
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
-        <source>Remember previouse state</source>
+        <source>Remember previous state</source>
+        <oldsource>Remember previouse state</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

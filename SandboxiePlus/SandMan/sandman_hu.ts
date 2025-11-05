@@ -6535,7 +6535,8 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
-        <source>Remember previouse state</source>
+        <source>Remember previous state</source>
+        <oldsource>Remember previouse state</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

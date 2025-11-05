@@ -5974,8 +5974,9 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
-        <source>Remember previouse state</source>
-        <translation>Vorherigen Zustand merken</translation>
+        <source>Remember previous state</source>
+        <oldsource>Remember previouse state</oldsource>
+        <translation type="unfinished">Vorherigen Zustand merken</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="259"/>

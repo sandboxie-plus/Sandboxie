@@ -7185,7 +7185,8 @@ Detta är ett tillfälligt Patreon certifikat, giltigt för 3 månader. När det
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
-        <source>Remember previouse state</source>
+        <source>Remember previous state</source>
+        <oldsource>Remember previouse state</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -1917,7 +1917,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Views/NtObjectView.cpp" line="213"/>
         <source>%1 - NT Object Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - NT 개체 네임스페이스</translation>
     </message>
 </context>
 <context>
@@ -1925,17 +1925,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="726"/>
         <source>Name</source>
-        <translation type="unfinished">이름</translation>
+        <translation>이름</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="727"/>
         <source>Type</source>
-        <translation type="unfinished">유형</translation>
+        <translation>유형</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="728"/>
         <source>Access</source>
-        <translation type="unfinished">액세스</translation>
+        <translation>액세스</translation>
     </message>
 </context>
 <context>
@@ -4339,7 +4339,7 @@ Sandboxie 업데이트가 있는지 확인해 주세요.</translation>
     <message>
         <location filename="SandMan.cpp" line="2606"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation>Windows 빌드 %1은 Sandboxie 버전의 현재 알려진 지원 기능을 초과합니다. Sandboxie는 마지막으로 알려진 오프셋을 사용하려고 시도하는데, 이로 인해 시스템이 불안정해질 수 있습니다.</translation>
+        <translation>귀하의 Windows 빌드 %1은 현재 알려진 Sandboxie 버전의 지원 범위를 초과합니다. Sandboxie는 마지막으로 알려진 오프셋을 사용하려 시도할 것이며, 이는 시스템 불안정성을 초래할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3107"/>
@@ -4759,7 +4759,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="592"/>
         <source>Auto Expand Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 확장 트리</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="637"/>
@@ -5886,7 +5886,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="246"/>
         <location filename="Views/SbieView.cpp" line="383"/>
         <source>Browse NT Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>NT 네임스페이스 찾아보기</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="249"/>
@@ -6538,17 +6538,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>이전 상태 기억</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="259"/>
         <source>Expand all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 그룹 확장</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="260"/>
         <source>Collapse all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 그룹 축소</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="262"/>
@@ -9755,7 +9755,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="325"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>알파</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="993"/>
@@ -11607,7 +11607,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1153"/>
         <source>Group state on start</source>
-        <translation type="unfinished"></translation>
+        <translation>시작 시 그룹 상태</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1389"/>

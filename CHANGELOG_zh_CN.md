@@ -3,81 +3,114 @@
 本项目遵循 [语义化版本控制](http://semver.org/)。
 
 
+
+## [1.16.5 / 5.71.5] - 2025-11-04
+
+### 新增
+- 增强 INI 编辑器：对“编辑 INI 部分”对话框进行了重大改进
+  - 专用编辑器设置：新增“编辑器设置”窗口，可配置所有 INI 编辑器行为
+  - 设置验证：INI 键值现可根据 `SbieSettings.ini` 进行可视化验证，以便发现配置错误（1.16.2）
+  - 上下文提示：为 INI 键值提供来自 `SbieSettings.ini` 的元数据提示，并可配置提示详细程度（1.16.2，1.16.4）
+  - 自动补全：基于 `SbieSettings.ini` 进行 INI 键值自动补全，并采用用户手动授权的机制（1.16.3）
+  - 新增配置选项：[`Sandboxie-Plus.ini`]
+    - `Options/ValidateIniKeys` bool — 启用/禁用 INI 键值验证（默认：true）（1.16.2）
+    - `Options/EnableIniTooltips` int — 控制 INI 提示详细程度：0=无提示，1=基本信息，2=完整详情（1.16.2）
+    - `Options/EnablePopupTooltips` int — 控制弹窗提示详细程度：0=无提示，1=基本信息，2=完整详情（1.16.4）
+    - `Options/AutoCompletionConsent` bool — 用户同意启用自动补全功能（1.16.3）
+    - `Options/EnableAutoCompletion` int — 自动补全模式：0=禁用，1=手动/区分大小写，2=自动/区分大小写（1.16.3）
+    - `Options/EnableFuzzyMatching` bool — 启用自动补全的模糊匹配（1.16.3）
+  - 通过 `SbieSettings.user.ini` 自定义：
+    - 用户现在可以使用 `SbieSettings.user.ini` 文件进一步微调配置（1.16.3）
+    - 有关这些选项的详细配置指南，请参阅 `SbieSettings.ini` 文件中的注释，其中包含所有新旧设置的说明，为高级配置提供参考
+- 保留自定义沙盒颜色：为沙盒设置的自定义颜色在更改 `Box Type Preset` 后仍将保留 [#5025](https://github.com/sandboxie-plus/Sandboxie/pull/5025)（感谢 Pinefone）
+- 为沙盒边框设置新增 Alpha 透明度 [#5037](https://github.com/sandboxie-plus/Sandboxie/pull/5037)
+- 用户界面：启动时默认折叠所有分组 [#5052](https://github.com/sandboxie-plus/Sandboxie/issues/5052)
+- 用户界面：新增菜单选项，可折叠/展开分组 [#5053](https://github.com/sandboxie-plus/Sandboxie/issues/5053)
+
+### 变更
+- 支持证书可包含多个 HwID，以简化处理
+- 右键菜单图标升级 [#5038](https://github.com/sandboxie-plus/Sandboxie/issues/5038)
+- 改进 Win32 系统调用处理（实验性），当设置 `UseWin32kFilterTable=y` 时，将在适用情况下使用 `KeServiceDescriptorTableFilter` 代替 `KeServiceDescriptorTableShadow`
+- 改进默认工具栏布局
+
+### 修复
+- 修复当 VPN/绑定适配器断开连接时 BindAdapter 的可靠性问题 [#5055](https://github.com/sandboxie-plus/Sandboxie/pull/5055) [#4896](https://github.com/sandboxie-plus/Sandboxie/issues/4896)
+- 修复 WOW6432Node 错误，在必要创建第二个不存在的子键时变为 `HKLM\SOFTWARE\WOW6432Node\WOW6432Node` [#5057](https://github.com/sandboxie-plus/Sandboxie/issues/5057)
+- 修复 PowerShell 能够在添加到程序控制的文件夹中启动可执行文件的问题 [#5027](https://github.com/sandboxie-plus/Sandboxie/issues/5027)
+
+
 ## [1.16.4 / 5.71.4] - 2025-10-02
 
 ### 新增
-- 新增选项，可阻止非管理员会话主进程（`sandman.exe` 或 `sbiectrl.exe`）访问加密沙盒数据  
+- 新增选项，可阻止非管理员会话主进程（`sandman.exe` 或 `sbiectrl.exe`）访问加密沙盒数据
   **注意**：该功能现已默认启用，如需禁用，请使用 `ProtectAdminOnly=n`
 
 ### 修复
-- 修复 **Sandboxie-Plus 1.16.3** 在 Windows 预览版 Build 27943 无法连接驱动的问题 (#5003)  
-- 修复最新版本 Signal 崩溃的问题  
+- 修复 **Sandboxie-Plus 1.16.3** 在 Windows 预览版 Build 27943 无法连接驱动的问题 (#5003)
+- 修复最新版本 Signal 崩溃的问题
 
 ### 变更
-- 改进了 `Thread_CheckObject_CommonEx` 对加密沙盒的检查  
+- 改进了 `Thread_CheckObject_CommonEx` 对加密沙盒的检查
 
----
 
 ## [1.16.3 / 5.71.3] - 2025-09-08
 ### 变更
-- 重构驱动导入机制，尽管使用 VS2022 构建，仍可在 Windows 7 上加载 (#4942)  
-- 改进深色模式配色方案  
-- 切换到 Qt 6.8.3，并加入 Windows 7 兼容补丁  
-- 验证了与 Windows Build 27934 的兼容性，并更新了 DynData  
+- 重构驱动导入机制，尽管使用 VS2022 构建，仍可在 Windows 7 上加载 (#4942)
+- 改进深色模式配色方案
+- 切换到 Qt 6.8.3，并加入 Windows 7 兼容补丁
+- 验证了与 Windows Build 27934 的兼容性，并更新了 DynData
 
 ### 修复
-- 修复 1.16.2 版本托盘菜单缺失的问题 (#4940)  
-- 修复高 DPI 安全桌面下的 UAC 提示布局问题 (#4953，感谢 gexgd0419)  
-- 修复 UAC 提示框中阿拉伯语的 RTL（从右到左）布局问题 (#4957，感谢 gexgd0419)  
-- 修复 1.16.1 深色模式下帮助弹窗背景颜色错误的问题 (#4903)  
-- 修复网络选项在编辑时无法保存的问题 (#4899)  
-- 修复安装程序未清理旧版 Sandboxie 1.16.x 遗留文件的问题 (#4934)  
-- 修复以管理员身份重启时未显示窗口的问题  
+- 修复 1.16.2 版本托盘菜单缺失的问题 (#4940)
+- 修复高 DPI 安全桌面下的 UAC 提示布局问题 (#4953，感谢 gexgd0419)
+- 修复 UAC 提示框中阿拉伯语的 RTL（从右到左）布局问题 (#4957，感谢 gexgd0419)
+- 修复 1.16.1 深色模式下帮助弹窗背景颜色错误的问题 (#4903)
+- 修复网络选项在编辑时无法保存的问题 (#4899)
+- 修复安装程序未清理旧版 Sandboxie 1.16.x 遗留文件的问题 (#4934)
+- 修复以管理员身份重启时未显示窗口的问题
 
 ### 移除
-- 移除早已被新实现替代的过时代码  
+- 移除早已被新实现替代的过时代码
 
----
 
 ## [1.16.2 / 5.71.2] - 2025-07-28
 ### 新增
-- 在“编辑 ini 配置节”中新增可切换的 INI 键验证功能 (#4915，感谢 offhub)  
-- 新增可切换的逐键工具提示支持 (#4928，感谢 offhub)  
-- 新增在 SandMan 中使用全新 Qt Windows 11 风格 的选项 (#4927，感谢 LumitoLuma)  
+- 在“编辑 ini 配置节”中新增可切换的 INI 键验证功能 (#4915，感谢 offhub)
+- 新增可切换的逐键工具提示支持 (#4928，感谢 offhub)
+- 新增在 SandMan 中使用全新 Qt Windows 11 风格 的选项 (#4927，感谢 LumitoLuma)
 
 ### 变更
-- ImBox 在访问加密沙盒卷时，不再更新容器文件的时间戳  
+- ImBox 在访问加密沙盒卷时，不再更新容器文件的时间戳
 
 ### 修复
-- 修复 Windows 11 24H2 Build 26100.4770 导致 Firefox Portable 140.0.4 / 141.0 在沙盒中启动时无响应的问题 (#4920)  
-- 修复安全问题 ID-27：密码更改时加密沙盒密钥泄漏（回移植了 MajorPrivacy 的强化版 ImBox）CVE-2025-54422（感谢 love-code-yeyixiao）  
-- 修复 Firefox Nightly 沙盒挂钩错误  
+- 修复 Windows 11 24H2 Build 26100.4770 导致 Firefox Portable 140.0.4 / 141.0 在沙盒中启动时无响应的问题 (#4920)
+- 修复安全问题 ID-27：密码更改时加密沙盒密钥泄漏（回移植了 MajorPrivacy 的强化版 ImBox）CVE-2025-54422（感谢 love-code-yeyixiao）
+- 修复 Firefox Nightly 沙盒挂钩错误
 
 ### 移除
 - 移除已废弃的 Bullguard Internet Security 模板
-- 移除已废弃的 Bsecure CloudCare 模板  
+- 移除已废弃的 Bsecure CloudCare 模板
 - 移除已废弃的 CyberPatrol 模板
 
----
 
 ## [1.16.1 / 5.71.1] - 2025-07-06
 ### 新增
-- 新增“设置窗口中的 UI 字体”选项 (#4894，感谢 srdr0p)  
+- 新增“设置窗口中的 UI 字体”选项 (#4894，感谢 srdr0p)
 
 ### 变更
-- 更新工具链至 MSVC 2022，因 GitHub CI runner 2019 已停止支持  
-  **注意**：此变更导致不再支持 Windows 7 和 32 位操作系统，因为 2022 工具链不再支持这些目标驱动构建  
-- 切换到 Qt6，同时也不再支持 Windows 7  
+- 更新工具链至 MSVC 2022，因 GitHub CI runner 2019 已停止支持
+  **注意**：此变更导致不再支持 Windows 7 和 32 位操作系统，因为 2022 工具链不再支持这些目标驱动构建
+- 切换到 Qt6，同时也不再支持 Windows 7
 
 ### 修复
-- 修复创建快捷方式时链接目录不完整的问题 (#4882)  
-- 修复 `BindAdapter` 无效的问题（即使绑定的适配器/VPN 被禁用，仍可访问互联网）(#4896)  
-- 修复 `GetFullPathName()` 使用以反斜杠开头的字符串时出现的异常问题 (#4867)  
-- 修复部分 UI 绑定安装语言 ID 的问题 (#4859)  
-- 修复 UAC 提示框布局异常的问题 (#4863)  
+- 修复创建快捷方式时链接目录不完整的问题 (#4882)
+- 修复 `BindAdapter` 无效的问题（即使绑定的适配器/VPN 被禁用，仍可访问互联网）(#4896)
+- 修复 `GetFullPathName()` 使用以反斜杠开头的字符串时出现的异常问题 (#4867)
+- 修复部分 UI 绑定安装语言 ID 的问题 (#4859)
+- 修复 UAC 提示框布局异常的问题 (#4863)
 - 修复启用 “Mark of The Web 强制” 时忽略“非沙盒运行”选项的问题 (#4856)
 
-  
+
 ## [1.16.0 / 5.71.0] - 2025-06-03
 
 ### 新增

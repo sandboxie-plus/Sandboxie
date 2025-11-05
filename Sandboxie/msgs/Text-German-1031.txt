@@ -129,7 +129,7 @@ SBIE1212 Verzeichnis kann nicht erstellt werden '%3' %2
 .
 
 1213;pop;err;01
-SBIE1212 Object-Verzeichnis kann nicht erstellt werden '%3' %2
+SBIE1213 Object-Verzeichnis kann nicht erstellt werden '%3' %2
 .
 
 1222;pop;err;02

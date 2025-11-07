@@ -2,7 +2,5 @@
 * Missing Messages in Text-Turkish-1055.txt
 *==========
 
-3820;txt;01
-Alpha
-.
+There are no missing messages.
 

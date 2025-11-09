@@ -5,6 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.16.6 / 5.71.6] - 2025-11-??
+
+### Fixed
+- fixed Failed to connect to the driver on windows 7 [#5068](https://github.com/sandboxie-plus/Sandboxie/issues/5068)
+- fixed Actual Budget no longer working [#5071](https://github.com/sandboxie-plus/Sandboxie/issues/5071)
+
+### Changed
+- 'UseWin32kHooks=y' is now the default for all processes greately imprving compatybility with electron apps
+
+
+
 ## [1.16.5 / 5.71.5] - 2025-11-04
 
 ### Added
@@ -38,7 +50,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed BindAdapter reliability when VPN/bound adapter is disconnected [#5055](https://github.com/sandboxie-plus/Sandboxie/pull/5055) [#4896](https://github.com/sandboxie-plus/Sandboxie/issues/4896)
 - fixed WOW6432Node bug, becomes `HKLM\SOFTWARE\WOW6432Node\WOW6432Node` upon necessary creation of a 2nd non-existent subkey [#5057](https://github.com/sandboxie-plus/Sandboxie/issues/5057)
 - fixed PowerShell is able to launch an executable inside a folder added to program control [#5027](https://github.com/sandboxie-plus/Sandboxie/issues/5027)
-- fixed Actual Budget no longer working [#5071](https://github.com/sandboxie-plus/Sandboxie/issues/5071)
 
 
 ## [1.16.4 / 5.71.4] - 2025-10-02

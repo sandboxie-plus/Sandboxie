@@ -224,7 +224,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="899"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <translation>该功能可能对降低兼容性，因为它会阻止沙盒内的进程向主机进程写入数据，甚至启动它们。</translation>
+        <translation>该功能可能会降低兼容性，因为它会阻止沙盒内的进程向主机进程写入数据，甚至启动它们。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="905"/>

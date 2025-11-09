@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed Failed to connect to the driver on windows 7 [#5068](https://github.com/sandboxie-plus/Sandboxie/issues/5068)
 - fixed Actual Budget no longer working [#5071](https://github.com/sandboxie-plus/Sandboxie/issues/5071)
+- fixed incompatybility with firefox nightly 146
 
 ### Changed
 - 'UseWin32kHooks=y' is now the default for all processes greately imprving compatybility with electron apps

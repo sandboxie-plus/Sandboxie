@@ -2255,6 +2255,103 @@ __declspec(dllimport) NTSTATUS __stdcall NtMapViewOfSection(
     IN  ULONG AllocationType,
     IN  ULONG Protect);
 
+
+typedef enum _SECTION_INFORMATION_CLASS
+{
+    SectionBasicInformation, // q; SECTION_BASIC_INFORMATION
+    SectionImageInformation, // q; SECTION_IMAGE_INFORMATION
+    SectionRelocationInformation, // q; PVOID RelocationAddress // name:wow64:whNtQuerySection_SectionRelocationInformation // since WIN7
+    SectionOriginalBaseInformation, // PVOID BaseAddress
+    SectionInternalImageInformation, // SECTION_INTERNAL_IMAGE_INFORMATION // since REDSTONE2
+    MaxSectionInfoClass
+} SECTION_INFORMATION_CLASS;
+
+typedef struct _SECTION_BASIC_INFORMATION
+{
+    PVOID BaseAddress;
+    ULONG AllocationAttributes;
+    LARGE_INTEGER MaximumSize;
+} SECTION_BASIC_INFORMATION, *PSECTION_BASIC_INFORMATION;
+
+// symbols
+typedef struct _SECTION_IMAGE_INFORMATION
+{
+    PVOID TransferAddress;
+    ULONG ZeroBits;
+    SIZE_T MaximumStackSize;
+    SIZE_T CommittedStackSize;
+    ULONG SubSystemType;
+    union
+    {
+        struct
+        {
+            USHORT SubSystemMinorVersion;
+            USHORT SubSystemMajorVersion;
+        };
+        ULONG SubSystemVersion;
+    };
+    union
+    {
+        struct
+        {
+            USHORT MajorOperatingSystemVersion;
+            USHORT MinorOperatingSystemVersion;
+        };
+        ULONG OperatingSystemVersion;
+    };
+    USHORT ImageCharacteristics;
+    USHORT DllCharacteristics;
+    USHORT Machine;
+    BOOLEAN ImageContainsCode;
+    union
+    {
+        UCHAR ImageFlags;
+        struct
+        {
+            UCHAR ComPlusNativeReady : 1;
+            UCHAR ComPlusILOnly : 1;
+            UCHAR ImageDynamicallyRelocated : 1;
+            UCHAR ImageMappedFlat : 1;
+            UCHAR BaseBelow4gb : 1;
+            UCHAR ComPlusPrefer32bit : 1;
+            UCHAR Reserved : 2;
+        };
+    };
+    ULONG LoaderFlags;
+    ULONG ImageFileSize;
+    ULONG CheckSum;
+} SECTION_IMAGE_INFORMATION, *PSECTION_IMAGE_INFORMATION;
+
+// symbols
+typedef struct _SECTION_INTERNAL_IMAGE_INFORMATION
+{
+    SECTION_IMAGE_INFORMATION SectionInformation;
+    union
+    {
+        ULONG ExtendedFlags;
+        struct
+        {
+            ULONG ImageExportSuppressionEnabled : 1;
+            ULONG ImageCetShadowStacksReady : 1; // 20H1
+            ULONG ImageXfgEnabled : 1; // 20H2
+            ULONG ImageCetShadowStacksStrictMode : 1;
+            ULONG ImageCetSetContextIpValidationRelaxedMode : 1;
+            ULONG ImageCetDynamicApisAllowInProc : 1;
+            ULONG ImageCetDowngradeReserved1 : 1;
+            ULONG ImageCetDowngradeReserved2 : 1;
+            ULONG Reserved : 24;
+        };
+    };
+} SECTION_INTERNAL_IMAGE_INFORMATION, *PSECTION_INTERNAL_IMAGE_INFORMATION;
+
+NTSYSCALLAPI NTSTATUS NTAPI NtQuerySection(
+    _In_ HANDLE SectionHandle,
+    _In_ SECTION_INFORMATION_CLASS SectionInformationClass,
+    _Out_writes_bytes_(SectionInformationLength) PVOID SectionInformation,
+    _In_ SIZE_T SectionInformationLength,
+    _Out_opt_ PSIZE_T ReturnLength
+);
+
 __declspec(dllimport) NTSTATUS __stdcall NtNotifyChangeDirectoryFile(
     IN  HANDLE FileHandle,
     IN  HANDLE Event OPTIONAL,

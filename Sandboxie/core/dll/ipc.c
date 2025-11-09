@@ -323,6 +323,18 @@ static NTSTATUS Ipc_NtOpenSection(
     ACCESS_MASK DesiredAccess,
     OBJECT_ATTRIBUTES *ObjectAttributes);
 
+static NTSTATUS Ipc_NtMapViewOfSection(
+    IN  HANDLE SectionHandle,
+    IN  HANDLE ProcessHandle,
+    IN  OUT PVOID *BaseAddress,
+    IN  ULONG_PTR ZeroBits,
+    IN  SIZE_T CommitSize,
+    IN  OUT PLARGE_INTEGER SectionOffset OPTIONAL,
+    IN  OUT PSIZE_T ViewSize,
+    IN  ULONG InheritDisposition,
+    IN  ULONG AllocationType,
+    IN  ULONG Protect);
+
 
 //---------------------------------------------------------------------------
 
@@ -398,6 +410,7 @@ static P_NtOpenSemaphore            __sys_NtOpenSemaphore           = NULL;
 static P_NtCreateSection            __sys_NtCreateSection           = NULL;
 static P_NtCreateSectionEx          __sys_NtCreateSectionEx         = NULL;
 static P_NtOpenSection              __sys_NtOpenSection             = NULL;
+static P_NtMapViewOfSection         __sys_NtMapViewOfSection        = NULL;
 
 static P_NtCreateSymbolicLinkObject __sys_NtCreateSymbolicLinkObject= NULL;
 static P_NtOpenSymbolicLinkObject   __sys_NtOpenSymbolicLinkObject  = NULL;
@@ -533,6 +546,8 @@ _FX BOOLEAN Ipc_Init(void)
         SBIEDLL_HOOK(Ipc_, NtCreateSectionEx);
     }
     SBIEDLL_HOOK(Ipc_,NtOpenSection);
+
+    SBIEDLL_HOOK(Ipc_,NtMapViewOfSection);
 
     SBIEDLL_HOOK(Ipc_,NtCreateSymbolicLinkObject);
     SBIEDLL_HOOK(Ipc_,NtOpenSymbolicLinkObject);
@@ -4246,6 +4261,58 @@ OpenTruePath:
     Dll_PopTlsNameBuffer(TlsData);
     SetLastError(LastError);
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtMapViewOfSection
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtMapViewOfSection(
+    IN  HANDLE SectionHandle,
+    IN  HANDLE ProcessHandle,
+    IN  OUT PVOID *BaseAddress,
+    IN  ULONG_PTR ZeroBits,
+    IN  SIZE_T CommitSize,
+    IN  OUT PLARGE_INTEGER SectionOffset OPTIONAL,
+    IN  OUT PSIZE_T ViewSize,
+    IN  ULONG InheritDisposition,
+    IN  ULONG AllocationType,
+    IN  ULONG Protect)
+{
+    NTSTATUS status;
+
+    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) { // Firefox 146+
+    
+        HANDLE currentProcess = NtCurrentProcess();
+        if (ProcessHandle != currentProcess && ProcessHandle != INVALID_HANDLE_VALUE) {
+
+            if (Protect == PAGE_EXECUTE_READ) {
+
+                SECTION_BASIC_INFORMATION sbi;
+                NTSTATUS status = NtQuerySection(SectionHandle, SectionBasicInformation, &sbi, sizeof(sbi), NULL);
+
+                if (NT_SUCCESS(status) &&  (sbi.AllocationAttributes & SEC_IMAGE) == 0) {
+
+                    // Not an image section, likely the thunk allocation
+					// Upgrade to RWX so that the SbieDll.dll in the child can install the required hooks
+                    // else NtProtectVirtualMemory will bug out with STATUS_SECTION_PROTECTION !
+
+                    //SbieApi_MonitorPutMsg(MONITOR_HOOK, L"BAM: Firefox NtMapViewOfSection hack");
+
+                    Protect = PAGE_EXECUTE_READWRITE;
+                }
+            }
+        }
+    }
+
+    status = __sys_NtMapViewOfSection(
+        SectionHandle, ProcessHandle, BaseAddress, ZeroBits,
+        CommitSize, SectionOffset, ViewSize,
+        InheritDisposition, AllocationType, Protect);
+   
+	return status;
 }
 
 

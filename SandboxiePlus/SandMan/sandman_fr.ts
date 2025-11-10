@@ -1024,142 +1024,142 @@ Vous pouvez appuyer sur « Terminer » pour fermer cet assistant.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Clés INI</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>No validation</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune validation</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>Full validation (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Validation complète (par défaut)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
         <source>Enable INI Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Infobulles de l&apos;INI</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>No tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune infobulle</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Basic info (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Informations basiques (par défaut)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>Détails complets</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
         <source>Enable Popup Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Infobulles surgissantes</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
         <source>Auto Completion Consent</source>
-        <translation type="unfinished"></translation>
+        <translation>Consentement de saisie automatique</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Not consented (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun (par défaut)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Consented</source>
-        <translation type="unfinished"></translation>
+        <translation>Accordé</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
         <source>Enable Auto Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>Activation de la saisie automatique</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Disabled (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactivée (par défaut)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuelle</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lors de la frappe</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>Correspondance floue</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Enabled</source>
-        <translation type="unfinished">Activé</translation>
+        <translation>Activée</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de l&apos;éditeur</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout réinitialiser aux valeurs par défaut</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialise tous les paramètres à leur valeur par défaut et supprime les saisies de configuration personnalisées.</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètre</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>État</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>Non coché</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Partiellement coché</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>Coché</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
         <source>Reset this setting to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialise ce paramètre à sa valeur par défaut</translation>
     </message>
 </context>
 <context>
@@ -1833,7 +1833,7 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="Views/NtObjectView.cpp" line="213"/>
         <source>%1 - NT Object Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - espace de nom d&apos;objet NT</translation>
     </message>
 </context>
 <context>
@@ -1841,17 +1841,17 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="Models/NtObjectModel.cpp" line="726"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="727"/>
         <source>Type</source>
-        <translation type="unfinished">Type</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="728"/>
         <source>Access</source>
-        <translation type="unfinished">Accès</translation>
+        <translation>Accès</translation>
     </message>
 </context>
 <context>
@@ -3062,7 +3062,7 @@ Veuillez choisir un dossier contenant ce fichier.</translation>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="191"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
-        <translation>Sandboxie Plus - Paramètres de « %1 »</translation>
+        <translation>Sandboxie-Plus - Paramètres de « %1 »</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="301"/>
@@ -3123,12 +3123,12 @@ Veuillez choisir un dossier contenant ce fichier.</translation>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1771"/>
         <source>Autocomplete Consent Required</source>
-        <translation>Consentement de saisie semi-automatique requis</translation>
+        <translation>Consentement de saisie automatique nécessaire</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1773"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>La fonction de saisie automatique a besoin de votre autorisation pour continuer.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1775"/>
@@ -3137,37 +3137,41 @@ Veuillez choisir un dossier contenant ce fichier.</translation>
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous n&apos;êtes pas sûr des paramètres affichés dans la fenêtre surgissante de saisie automatique, nous recommandons vivement de consulter la documentation du logiciel ou le code source avant de continuer. Activer cette fonction sans une bonne compréhension pourrait entrainer des conséquences imprévues, dont vous serez seul responsable.
+
+Choisir le mode de saisie automatique :
+%1 Manuel : Suggestions de saisie automatique avec %2.
+%1 Lors de la frappe : Suggestions de saisie automatique lors de la saisie.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1783"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuel</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1784"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Déclenche les suggestions de saisie automatique avec %1.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1786"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lors de la frappe</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1787"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Déclenche les suggestions de saisie automatique lors de la frappe.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1790"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Conserve les suggestions de saisie automatique désactivées.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1789"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -3925,7 +3929,7 @@ Veuillez vérifier s&apos;il y a une mise à jour pour Sandboxie.</translation>
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
 Do you want to disable Windows Updates scanning from the the software compatibility detection?</oldsource>
-        <translation>Sandman n&apos;a pas terminé d&apos;énumérer les mises à jour de Windows installées la dernière fois, il a probablement planté.
+        <translation>Le gestionnaire de Sandboxie n&apos;a pas terminé d&apos;énumérer les mises à jour de Windows installées la dernière fois. Il a probablement planté.
 Voulez-vous désactiver l&apos;analyse des mises à jour Windows lors de la détection de compatibilité des logiciels ?</translation>
     </message>
     <message>
@@ -4372,7 +4376,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="592"/>
         <source>Auto Expand Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Développer automatiquement l&apos;arborescence</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="637"/>
@@ -4664,7 +4668,7 @@ Erreur : %1</translation>
     <message>
         <location filename="SandMan.cpp" line="3478"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
-        <translation>&lt;b&gt;ERREUR :&lt;/b&gt; Le gestionnaire de Sandboxie-Plus (SandMan.exe) n&apos;a pas une signature valide (SandMan.exe.sig). Veuillez télécharger une version fiable depuis la &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;page de téléchargement officielle&lt;/a&gt;.</translation>
+        <translation>&lt;b&gt;ERREUR :&lt;/b&gt; Le gestionnaire de Sandboxie (SandMan.exe) n&apos;a pas une signature valide (SandMan.exe.sig). Veuillez télécharger une version fiable depuis la &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;page de téléchargement officielle&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4120"/>
@@ -4749,7 +4753,7 @@ Erreur : %1</translation>
     <message>
         <location filename="SandMan.cpp" line="1100"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Soutenez Sandboxie Plus sur Patreon&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Soutenez Sandboxie-Plus sur Patreon&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1101"/>
@@ -6056,7 +6060,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="246"/>
         <location filename="Views/SbieView.cpp" line="383"/>
         <source>Browse NT Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir l&apos;espace de nom NT</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="249"/>
@@ -6607,7 +6611,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="115"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie Plus - Settings</oldsource>
-        <translation>Sandboxie Plus - Paramètres généraux</translation>
+        <translation>Sandboxie-Plus - Paramètres généraux</translation>
     </message>
     <message>
         <source>Advanced Config</source>
@@ -6699,17 +6703,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Se souvenir de l&apos;état précédent</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="259"/>
         <source>Expand all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Développer tous les groupes</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="260"/>
         <source>Collapse all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Réduire tous les groupes</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="262"/>
@@ -7354,12 +7358,12 @@ Vous pouvez demander jusqu&apos;à %3 certificats d&apos;évaluation pour chaque
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3358"/>
         <source>Autocomplete Consent Required</source>
-        <translation>Consentement de saisie semi-automatique requis</translation>
+        <translation>Consentement de saisie automatique nécessaire</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3360"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>La fonction de saisie automatique a besoin de votre autorisation pour continuer.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3362"/>
@@ -7368,37 +7372,41 @@ Vous pouvez demander jusqu&apos;à %3 certificats d&apos;évaluation pour chaque
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous n&apos;êtes pas sûr des paramètres affichés dans la fenêtre surgissante de saisie automatique, nous recommandons vivement de consulter la documentation du logiciel ou le code source avant de continuer. Activer cette fonction sans une bonne compréhension pourrait entrainer des conséquences imprévues, dont vous serez seul responsable.
+
+Choisir le mode de saisie automatique :
+%1 Manuel : Suggestions de saisie automatique avec %2.
+%1 Lors de la frappe : Suggestions de saisie automatique lors de la saisie.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3370"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuel</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3371"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Déclenche les suggestions de saisie automatique avec %1.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3373"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lors de la frappe</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3374"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Déclenche les suggestions de saisie automatique lors de la frappe.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3377"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Conserve les suggestions de saisie automatique désactivées.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3376"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -8448,12 +8456,12 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de l&apos;éditeur</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configurez ici les paramètres de l&apos;éditeur.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Utilisez les cases à cocher dans la table pour configurer chaque paramètre. La table montre ce que chaque état signifie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -8634,7 +8642,7 @@ Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;arch
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1333"/>
         <source>(Recommended)</source>
-        <translation>(Recommandé)</translation>
+        <translation>(recommandé)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="155"/>
@@ -9316,7 +9324,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="325"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alpha</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1363"/>
@@ -9541,17 +9549,17 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
 &lt;/html&gt;</oldsource>
         <translation>&lt;html&gt;
     &lt;body&gt;
-        &lt;b&gt;Saisie semi-automatique &amp; correction de casse&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Saisie semi-automatique&lt;/u&gt; : les suggestions surgissent à 2+ caractères&lt;br&gt;
+        &lt;b&gt;Saisie automatique &amp; correction de casse&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Saisie automatique&lt;/u&gt; : les suggestions surgissent à 2+ caractères&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Choisir depuis la fenêtre surgissante pour &lt;u&gt;auto-appliquer&lt;/u&gt; avec une casse valide&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Entrée&lt;/code&gt; pour confirmer la sélection&lt;br&gt;
         &lt;br&gt;
-        • &lt;u&gt;Correction manuelle&lt;/u&gt; : Après la saisie du paramètre=&lt;br&gt;
+        • &lt;u&gt;Correction manuelle&lt;/u&gt; : Après la saisie du caractère =&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;L&apos;invite Ctrl + R&lt;/code&gt; apparait pour la correction de casse&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes :&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Coché&lt;/span&gt; : Saisie semi-automatique + correction de casse&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partiellement coché&lt;/span&gt; : Correction manuelle &lt;code&gt;Ctrl+R&lt;/code&gt; seulement&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Coché&lt;/span&gt; : Saisie automatique + correction de casse&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partiellement coché&lt;/span&gt; : Correction manuelle &lt;code&gt;(Ctrl + R)&lt;/code&gt; seulement&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation :&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; : Se déplacer dans la fenêtre&lt;br&gt;
@@ -9569,12 +9577,12 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6185"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de l&apos;éditeur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6188"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6059"/>
@@ -11351,7 +11359,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="147"/>
         <source>SandMan Options</source>
-        <translation>Options du gestionnaire de Sandboxie-Plus</translation>
+        <translation>Options du gestionnaire de Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="282"/>
@@ -11480,7 +11488,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation>Raccourci pour amener le gestionnaire de Sandboxie-Plus au premier plan :</translation>
+        <translation>Raccourci pour amener le gestionnaire de Sandboxie au premier plan :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="218"/>
@@ -11636,7 +11644,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1862"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
-        <translation>Récupérer/Mettre à jour/Renouveler un certificat en utilisant son numéro de série</translation>
+        <translation>Obtenir/Mettre à jour/Renouveler un certificat en utilisant son numéro de série :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1807"/>
@@ -11666,7 +11674,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="173"/>
         <source>Check sandboxes&apos; auto-delete status when Sandman starts</source>
-        <translation>Vérifier l&apos;état d&apos;auto-suppression des bacs à sable lors du démarrage de Sandman</translation>
+        <translation>Vérifier l&apos;état d&apos;auto-suppression des bacs à sable lors du démarrage du gestionnaire de Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="673"/>
@@ -11682,7 +11690,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1382"/>
         <source>Hide SandMan windows from screen capture (UI restart required)</source>
-        <translation>Masquer les fenêtres de SandMan lors des captures d&apos;écran (redémarrage de l&apos;interface nécessaire)</translation>
+        <translation>Masquer les fenêtres du gestionnaire de Sandboxie lors des captures d&apos;écran (redémarrage de l&apos;interface nécessaire)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1656"/>
@@ -11707,7 +11715,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="134"/>
         <source>Terminate all boxed processes when Sandman exits</source>
-        <translation>Arrêter tous les processus dans les bacs lors de la fermeture de Sandman</translation>
+        <translation>Arrêter tous les processus dans les bacs lors de la fermeture du gestionnaire de Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="686"/>
@@ -11822,17 +11830,17 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="267"/>
         <source>Always run SandMan UI as Admin</source>
-        <translation>Toujours exécuter l&apos;interface de SandMan en tant qu&apos;administrateur</translation>
+        <translation>Toujours exécuter l&apos;interface du gestionnaire de Sandboxie en tant qu&apos;administrateur</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="274"/>
         <source>Use the new SandMan style on Windows 11</source>
-        <translation>Utiliser le nouveau style de SandMan dans Windows 11</translation>
+        <translation>Utiliser le nouveau style de gestionnaire de Sandboxie dans Windows 11</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1153"/>
         <source>Group state on start</source>
-        <translation type="unfinished"></translation>
+        <translation>État des groupes au démarrage :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1389"/>
@@ -11853,7 +11861,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
         <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">Utiliser l&apos;invite améliorée de contrôle de compte d&apos;utilisateur propre à Sandboxie (expérimental)</translation>
+        <translation>Utiliser l&apos;invite améliorée de contrôle de compte d&apos;utilisateur propre à Sandboxie (recommandé)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2425"/>
@@ -12037,17 +12045,17 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
 &lt;/html&gt;</oldsource>
         <translation>&lt;html&gt;
     &lt;body&gt;
-        &lt;b&gt;Saisie semi-automatique &amp; correction de casse&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;Saisie semi-automatique&lt;/u&gt; : les suggestions surgissent à 2+ caractères&lt;br&gt;
+        &lt;b&gt;Saisie automatique &amp; correction de casse&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;Saisie automatique&lt;/u&gt; : les suggestions surgissent à 2+ caractères&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ Choisir depuis la fenêtre surgissante pour &lt;u&gt;auto-appliquer&lt;/u&gt; avec une casse valide&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;Entrée&lt;/code&gt; pour confirmer la sélection&lt;br&gt;
         &lt;br&gt;
-        • &lt;u&gt;Correction manuelle&lt;/u&gt; : Après la saisie du paramètre=&lt;br&gt;
+        • &lt;u&gt;Correction manuelle&lt;/u&gt; : Après la saisie du caractère =&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ &lt;code&gt;L&apos;invite Ctrl + R&lt;/code&gt; apparait pour la correction de casse&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Modes :&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Coché&lt;/span&gt; : Saisie semi-automatique + correction de casse&lt;br&gt;
-        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partiellement coché&lt;/span&gt; : Correction manuelle &lt;code&gt;Ctrl+R&lt;/code&gt; seulement&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;Coché&lt;/span&gt; : Saisie automatique + correction de casse&lt;br&gt;
+        ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;Partiellement coché&lt;/span&gt; : Correction manuelle &lt;code&gt;(Ctrl + R)&lt;/code&gt; seulement&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;Navigation :&lt;/b&gt;&lt;br&gt;
         • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt; : Se déplacer dans la fenêtre&lt;br&gt;
@@ -12065,12 +12073,12 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3252"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de l&apos;éditeur</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3255"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3133"/>
@@ -12200,7 +12208,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
         <location filename="Forms/SettingsWindow.ui" line="2329"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">Accrocher les appels systèmes Win32k sélectionnés pour permettre l&apos;accélération du processeur graphique (expérimental)</translation>
+        <translation>Accrocher les appels systèmes Win32k sélectionnés pour permettre l&apos;accélération du processeur graphique (nécessaire pour Chrome et Firefox, entre autres)</translation>
     </message>
     <message>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>

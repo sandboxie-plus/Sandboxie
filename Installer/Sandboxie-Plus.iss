@@ -501,13 +501,7 @@ begin
   if (Version.Major = 10) and (Version.Minor = 0) and
      (Version.Build >= 10240) and (Version.Build <= 14393) then
   begin
-    if MsgBox(
-    'Qt 6 framework does not support Windows 10 versions 1507, 1511, or 1607 (LTSB).' + #13#10 +
-    'Please update to Windows LTSC 2019 (build 17763) or newer.' + #13#10 +
-    'See issue #5079 for details:' + #13#10 +
-    'https://github.com/sandboxie-plus/Sandboxie/issues/5079' + #13#10 +
-    'Do you want to continue with the installation?',
-    mbInformation, MB_YESNO) = IDNO then
+    if MsgBox(CustomMessage('Qt6Win10Unsupported'), mbInformation, MB_YESNO) = IDNO then
     begin
     Result := False;
     exit;

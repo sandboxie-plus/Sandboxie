@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.16.7 / 5.71.7] - 2025-11-??
+
+### Fixed
+
+### Changed
+- reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
+
+
+
 
 
 ## [1.16.6 / 5.71.6] - 2025-11-10

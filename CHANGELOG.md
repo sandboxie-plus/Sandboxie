@@ -8,13 +8,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.16.6 / 5.71.6] - 2025-11-10
 
-### Fixed
-- fixed Failed to connect to the driver on windows 7 [#5068](https://github.com/sandboxie-plus/Sandboxie/issues/5068)
-- fixed Actual Budget no longer working [#5071](https://github.com/sandboxie-plus/Sandboxie/issues/5071)
-- fixed incompatybility with firefox nightly 146
-
 ### Changed
-- 'UseWin32kHooks=y' is now the default for all processes greately imprving compatybility with electron apps
+- 'UseWin32kHooks=y' is now the default for all processes, greatly improving compatibility with Electron apps
+
+### Fixed
+- fixed failed to connect to the driver on Windows 7 [#5068](https://github.com/sandboxie-plus/Sandboxie/issues/5068)
+- fixed Actual Budget no longer working [#5071](https://github.com/sandboxie-plus/Sandboxie/issues/5071)
+- fixed incompatibility with Firefox Nightly 146
 
 
 
@@ -53,10 +53,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed PowerShell is able to launch an executable inside a folder added to program control [#5027](https://github.com/sandboxie-plus/Sandboxie/issues/5027)
 
 
+
 ## [1.16.4 / 5.71.4] - 2025-10-02
 
 ### Added
-- added option to block non administrative session leader (SandMan.exe or SbieCtrl.exe) from accessing encrypted box data
+- added option to block non-administrative session leader (SandMan.exe or SbieCtrl.exe) from accessing encrypted box data
   - Note: this is now enabled by default to disable it use `ProtectAdminOnly=n`
 
 ### Changed
@@ -1960,7 +1961,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added creation of all default folders in privacy box type [#2218](https://github.com/sandboxie-plus/Sandboxie/issues/2218)
 
 ### Changed
-- improved SandMan settings behaviour for non admin users [#2123](https://github.com/sandboxie-plus/Sandboxie/issues/2123)
+- improved SandMan settings behaviour for non-admin users [#2123](https://github.com/sandboxie-plus/Sandboxie/issues/2123)
 
 ### Fixed
 - fixed issues with group moving via drag and drop
@@ -3398,7 +3399,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - greatly improved trace log performance
 - MSI Server can now run with the "FakeAdminRights=y" and "DropAdminRights=y" options [#600](https://github.com/sandboxie-plus/Sandboxie/issues/600)
   - special service allowance for the MSI Server can be disabled with "MsiInstallerExemptions=n"
-- changed SCM access check behaviour; non elevated users can now start services with a user token
+- changed SCM access check behaviour; non-elevated users can now start services with a user token
   - elevation is now only required to start services with a system token
 - reworked the trace log mechanism to be more verbose
 - reworked RPC mechanism to be more flexible
@@ -3561,7 +3562,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue child window closing terminating application when main was hidden [#349](https://github.com/sandboxie-plus/Sandboxie/issues/349)
-- fixed issues with non modal windows [#349](https://github.com/sandboxie-plus/Sandboxie/issues/349)
+- fixed issues with non-modal windows [#349](https://github.com/sandboxie-plus/Sandboxie/issues/349)
 - fixed issues connecting to driver in portable mode
 - fixed minor issues with snapshot window
 - fixed missing error message when attempting to create an already existing sandbox [#359](https://github.com/sandboxie-plus/Sandboxie/issues/359)
@@ -4021,7 +4022,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed missing initialization in service server that caused sandboxed programs to crash when querying service status
 - fixed many bugs that caused the SbieDrv.sys to BSoD when running with Driver Verifier enabled [#57](https://github.com/sandboxie-plus/Sandboxie/issues/57)
   - 0xF6 in GetThreadTokenOwnerPid and File_Api_Rename
-  - missing non optional parameter for FltGetFileNameInformation in File_PreOperation
+  - missing non-optional parameter for FltGetFileNameInformation in File_PreOperation
   - 0xE3 in Key_StoreValue and Key_PreDataInject
 
 
@@ -4075,8 +4076,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Sbie driver now first checks the home path for the configuration file Sandboxie.ini before checking SystemRoot
 
 ### Fixed
-- FIXED SECURITY ISSUE ID-1: sandboxed processes could obtain a write handle on non sandboxed processes (thanks Diversenok)
-  - this allowed to inject code in non sandboxed processes
+- FIXED SECURITY ISSUE ID-1: sandboxed processes could obtain a write handle on non-sandboxed processes (thanks Diversenok)
+  - this allowed to inject code in non-sandboxed processes
 - fixed issue boxed services not starting when the path contained a space
 - NtQueryInformationProcess now returns the proper sandboxed path for sandboxed processes
 

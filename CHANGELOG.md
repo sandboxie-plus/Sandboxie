@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.6 / 5.71.6] - 2025-11-??
+## [1.16.6 / 5.71.6] - 2025-11-10
 
 ### Fixed
 - fixed Failed to connect to the driver on windows 7 [#5068](https://github.com/sandboxie-plus/Sandboxie/issues/5068)

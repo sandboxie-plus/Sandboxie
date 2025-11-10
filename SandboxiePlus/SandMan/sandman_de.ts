@@ -9958,8 +9958,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2329"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
-        <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">In ausgewählte Win32k Systemaufrufe einklinken um (GPU-)Hardwarebeschleunigung zu ermöglichen (experimentell)</translation>
+        <translation>In ausgewählte Win32k-Systemaufrufe einklinken um (GPU-)Hardwarebeschleunigung zu ermöglichen (benötigt für Chrome, Firefox und mehr)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1872"/>
@@ -10887,8 +10886,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
-        <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">Verwende Sandboxies eigene erweiterte UAC Abfrage (experimentell)</translation>
+        <translation>Verwende Sandboxies eigene erweiterte UAC-Abfrage (empfohlen)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2425"/>

@@ -238,7 +238,7 @@ Italian.UninstallTaskLabel3=&Mantieni i file di configurazione e le aree virtual
 Italian.UninstallTaskLabel4=Rimuovi i file di &configurazione%nSelezionare questa opzione per rimuovere i file di configurazione Sandboxie.ini e Sandboxie-Plus.ini, lasciando invariate le aree virtuali presenti.
 Italian.UninstallTaskLabel5=Rimuovi i file di configurazione e le &aree virtuali%nSelezionare questa opzione per rimuovere tutti i file di configurazione e le aree virtuali, inclusa la cartella Sandbox nei percorsi personalizzati mediante FileRootPath.
 Italian.RefreshBuild=Aggiorna Templates.ini e translations.7z
-Italian.Qt6Win10Unsupported=Il framework Qt 6 non supporta le versioni di Windows 10 1507, 1511 o 1607 (LTSB).%nSi prega di aggiornare a Windows LTSC 2019 (build 17763) o versioni successive.%nPer ulteriori dettagli:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nContinuare comunque con l’installazione?
+Italian.Qt6Win10Unsupported=Il framework Qt 6 non supporta le versioni di Windows 10 1507, 1511 o 1607 (LTSB).%nSi prega di aggiornare a Windows LTSC 2019 (build 17763) o versioni successive.%nPer ulteriori dettagli:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nContinuare comunque con l'installazione?
 
 ; Japanese
 japanese.AddSandboxedMenu=コンテキストメニューに「サンドボックス化して実行」を追加する

@@ -246,6 +246,12 @@
     <ClCompile Include="Windows\EditorSettingsWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Models\NtObjectModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\NtObjectView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -408,6 +414,12 @@
     </QtMoc>
     <QtMoc Include="Windows\EditorSettingsWindow.h">
       <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\NtObjectModel.h">
+      <Filter>Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Views\NtObjectView.h">
+      <Filter>Views</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

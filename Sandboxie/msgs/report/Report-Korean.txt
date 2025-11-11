@@ -2,7 +2,5 @@
 * Missing Messages in Text-Korean-1042.txt
 *==========
 
-3820;txt;01
-Alpha
-.
+There are no missing messages.
 

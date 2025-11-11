@@ -78,6 +78,11 @@
         <translation>未找到加载项，请尝试在全局设置中更新加载项列表！</translation>
     </message>
     <message>
+        <location filename="AddonManager.cpp" line="209"/>
+        <source>Add-on not found!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="AddonManager.cpp" line="229"/>
         <source>Add-on Not Found</source>
         <translation>未找到加载项</translation>
@@ -1711,7 +1716,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>撤销 管理员 和用户组 "Power Users" 的权限</translation>
+        <translation>撤销 管理员 和用户组 &quot;Power Users&quot; 的权限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="786"/>

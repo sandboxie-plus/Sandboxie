@@ -261,7 +261,7 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
     // this however with some other software causes issues, presumably as then other syscalls would need to have the same token
     //
 
-    BOOLEAN useByDefualt = (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME);
+    BOOLEAN useByDefualt = (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME || Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX);
     if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"UseWin32kHooks", useByDefualt)) {
 
         // disable Electron Workaround when we are ready to hook the required win32k syscalls

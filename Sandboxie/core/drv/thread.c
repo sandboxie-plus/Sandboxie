@@ -1112,7 +1112,7 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                     if (WriteAccess || proc2->confidential_box) {
 
                         protect_process = Process_GetConfEx_bool(proc2->box, nptr, L"DenyHostAccess", proc2->confidential_box);
-						BOOLEAN admin_only = Process_GetConfEx_bool(proc2->box, nptr, L"ProtectAdminOnly", FALSE);
+						BOOLEAN admin_only = Process_GetConfEx_bool(proc2->box, nptr, L"ProtectAdminOnly", TRUE);
 
                         //
                         // in case use specified wildcard "*" always grant access to sbiesvc.exe and csrss.exe

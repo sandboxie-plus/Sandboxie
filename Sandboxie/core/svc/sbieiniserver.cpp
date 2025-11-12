@@ -1624,6 +1624,9 @@ MSG_HEADER *SbieIniServer::RC4Crypt(MSG_HEADER *msg, HANDLE idProcess, bool isSa
     if (req->h.length < sizeof(SBIE_INI_RC4_CRYPT_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
 
+	if (req->value_len > (ULONG_MAX - sizeof(SBIE_INI_RC4_CRYPT_RPL)))
+		return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+	
     ULONG rpl_len = sizeof(SBIE_INI_RC4_CRYPT_RPL) + req->value_len;
     SBIE_INI_RC4_CRYPT_RPL *rpl = (SBIE_INI_RC4_CRYPT_RPL *)LONG_REPLY(rpl_len);
     if (!rpl) 

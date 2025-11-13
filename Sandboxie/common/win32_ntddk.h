@@ -158,6 +158,12 @@ typedef struct _UNICODE_STRING64 {
     __declspec(align(8)) unsigned __int64 Buffer;
 } UNICODE_STRING64;
 
+typedef struct _ANSI_STRING64 {
+    USHORT Length;
+    USHORT MaximumLength;
+    __declspec(align(8)) unsigned __int64 Buffer;
+} ANSI_STRING64;
+
 //---------------------------------------------------------------------------
 
 #define OBJ_INHERIT             0x00000002L

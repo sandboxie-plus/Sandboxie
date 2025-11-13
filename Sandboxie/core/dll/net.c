@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2004-2020 Sandboxie Holdings, LLC
  * Copyright 2020-2025 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -72,7 +72,11 @@ static BOOLEAN WSA_InitNetProxy();
 
 static BOOLEAN WSA_InitBindIP();
 
+static BOOLEAN WSA_GetStrictBindIP();
+
 static BOOLEAN WSA_IsBindIPValid();
+
+static BOOLEAN WSA_RefreshBindIPState();
 
 BOOLEAN WSA_InitNetDnsFilter(HMODULE module);
 
@@ -346,6 +350,10 @@ static BOOLEAN          WSA_BindIP            = FALSE;
 static SOCKADDR_IN      WSA_BindIP4           = {0};
 static SOCKADDR_IN6_LH  WSA_BindIP6           = {0};
 
+// Track which IP versions are explicitly configured
+static BOOLEAN          WSA_BindIPv4Configured = FALSE;  // TRUE if IPv4 BindAdapterIP or BindAdapter is set
+static BOOLEAN          WSA_BindIPv6Configured = FALSE;  // TRUE if IPv6 BindAdapterIP or BindAdapter is set
+
 // Track adapter name for BindAdapter validation (vs BindAdapterIP which uses IP)
 static WCHAR            WSA_BindAdapterName[256] = {0};
 static BOOLEAN          WSA_UseBindAdapter   = FALSE;  // TRUE = BindAdapter, FALSE = BindAdapterIP
@@ -374,6 +382,21 @@ typedef struct _WSA_SOCK {
 
 static HASH_MAP   WSA_SockMap;
 
+//---------------------------------------------------------------------------
+// Debug helpers (controlled by NetFwTrace setting)
+//---------------------------------------------------------------------------
+
+// Helper macro that uses Sbie_snwprintf to build BindIP-prefixed trace messages
+// Since Sbie_snwprintf doesn't have a va_list variant, we use a macro to inject the prefix
+#define WSA_DebugBindMsg(fmt, ...) \
+    do { \
+        if (WSA_TraceFlag) { \
+            wchar_t _msg[512]; \
+            int _res = Sbie_snwprintf(_msg, sizeof(_msg)/sizeof(_msg[0]), L"BindIP; " fmt, ##__VA_ARGS__); \
+            if (_res >= 0) \
+                SbieApi_MonitorPutMsg(MONITOR_OTHER, _msg); \
+        } \
+    } while (0)
 
 
 //---------------------------------------------------------------------------
@@ -785,6 +808,11 @@ _FX int WSA_bind(
     BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
 
     if (WSA_BindIP) {
+        const SOCKADDR* sa = (const SOCKADDR*)name;
+        int fam = (name && namelen >= (int)sizeof(USHORT)) ? sa->sa_family : -1;
+        BOOLEAN StrictBindIP = WSA_GetStrictBindIP();
+        WSA_DebugBindMsg(L"bind: req_af=%d strict=%d useAdapter=%d cfg(v4=%d,v6=%d)\n",
+                fam, (int)StrictBindIP, (int)WSA_UseBindAdapter, (int)WSA_BindIPv4Configured, (int)WSA_BindIPv6Configured);
         
         // Validate that the configured bind IP is still available on the system
         // If not available, fail the bind to prevent fallback to default adapter
@@ -794,17 +822,124 @@ _FX int WSA_bind(
             return SOCKET_ERROR;
         }
 
+        // When StrictBindIP is enabled, block binds for IP families that aren't configured
+        // This ensures: IPv4 configured + IPv6 not configured = block IPv6 binds
+        //               IPv6 configured + IPv4 not configured = block IPv4 binds
+        if (StrictBindIP) {
+            if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) {
+                // Treat wildcard configured IPv4 (0.0.0.0) as effectively "not configured" when StrictBindIP is on
+                BOOLEAN cfg_is_wildcard_v4 = (WSA_BindIP4.sin_family == AF_INET && WSA_BindIP4.sin_addr.S_un.S_addr == 0);
+                if (!WSA_BindIPv4Configured || cfg_is_wildcard_v4) {
+                    if (cfg_is_wildcard_v4)
+                        WSA_DebugBindMsg(L"bind: StrictBindIP - IPv4 configured as wildcard (0.0.0.0) -> BLOCKED\n%s", L"");
+                    else
+                        WSA_DebugBindMsg(L"bind: StrictBindIP - IPv4 not configured - BLOCKED\n%s", L"");
+                    if (new_name) Dll_Free((void*)name);
+                    __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                    return SOCKET_ERROR;
+                }
+            }
+            else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
+                // Treat wildcard configured IPv6 (::) as effectively "not configured" when StrictBindIP is on
+                BOOLEAN cfg_is_wildcard_v6 = FALSE;
+                if (WSA_BindIP6.sin6_family == AF_INET6) {
+                    BYTE* cfg = WSA_BindIP6.sin6_addr.u.Byte;
+                    cfg_is_wildcard_v6 = (cfg[0]|cfg[1]|cfg[2]|cfg[3]|cfg[4]|cfg[5]|cfg[6]|cfg[7]|cfg[8]|cfg[9]|cfg[10]|cfg[11]|cfg[12]|cfg[13]|cfg[14]|cfg[15]) == 0;
+                }
+                if (!WSA_BindIPv6Configured || cfg_is_wildcard_v6) {
+                    if (cfg_is_wildcard_v6)
+                        WSA_DebugBindMsg(L"bind: StrictBindIP - IPv6 configured as wildcard (::) -> BLOCKED\n%s", L"");
+                    else
+                        WSA_DebugBindMsg(L"bind: StrictBindIP - IPv6 not configured - BLOCKED\n%s", L"");
+                    if (new_name) Dll_Free((void*)name);
+                    __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                    return SOCKET_ERROR;
+                }
+            }
+        }
+
         if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) 
         {
             SOCKADDR_IN* addr_in = (SOCKADDR_IN*)name;
-            memcpy(&addr_in->sin_addr, &WSA_BindIP4.sin_addr, sizeof(WSA_BindIP4.sin_addr));
-            WSA_GetSock(s, TRUE)->Bound = TRUE;
+            BOOLEAN app_is_wildcard = (addr_in->sin_addr.S_un.S_addr == 0);  // Application binding to 0.0.0.0?
+            BOOLEAN cfg_is_wildcard = (WSA_BindIP4.sin_family == AF_INET && WSA_BindIP4.sin_addr.S_un.S_addr == 0);
+            
+            WSA_DebugBindMsg(L"bind: IPv4 app=%d.%d.%d.%d (wildcard=%d) cfg_wildcard=%d cfg_v4=%d\n",
+                addr_in->sin_addr.S_un.S_un_b.s_b1, addr_in->sin_addr.S_un.S_un_b.s_b2,
+                addr_in->sin_addr.S_un.S_un_b.s_b3, addr_in->sin_addr.S_un.S_un_b.s_b4,
+                (int)app_is_wildcard, (int)cfg_is_wildcard, (int)WSA_BindIPv4Configured);
+            
+            // If configured IP is wildcard (0.0.0.0), only block when StrictBindIP is enabled (treat as not configured)
+                    if (StrictBindIP && WSA_BindIPv4Configured && cfg_is_wildcard) {
+                WSA_DebugBindMsg(L"bind: StrictBindIP - IPv4 wildcard config (0.0.0.0) treated as not configured - BLOCKED\n%s", L"");
+                if (new_name) Dll_Free((void*)name);
+                __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                return SOCKET_ERROR;
+            }
+            // If IPv4 is configured with non-wildcard address, replace app's address
+            else if (WSA_BindIPv4Configured && WSA_BindIP4.sin_family == AF_INET && !cfg_is_wildcard) {
+                // Create writable copy if needed (name might be const/read-only)
+                if (!new_name) {
+                    void* writable_copy = Dll_Alloc(namelen);
+                    memcpy(writable_copy, name, namelen);
+                    name = writable_copy;
+                    new_name = TRUE;
+                    addr_in = (SOCKADDR_IN*)name;  // Update pointer to writable copy
+                }
+                WSA_DebugBindMsg(L"bind: replace IPv4 %d.%d.%d.%d -> %d.%d.%d.%d\n",
+                    addr_in->sin_addr.S_un.S_un_b.s_b1, addr_in->sin_addr.S_un.S_un_b.s_b2,
+                    addr_in->sin_addr.S_un.S_un_b.s_b3, addr_in->sin_addr.S_un.S_un_b.s_b4,
+                    ((BYTE*)&WSA_BindIP4.sin_addr)[0], ((BYTE*)&WSA_BindIP4.sin_addr)[1],
+                    ((BYTE*)&WSA_BindIP4.sin_addr)[2], ((BYTE*)&WSA_BindIP4.sin_addr)[3]);
+                memcpy(&addr_in->sin_addr, &WSA_BindIP4.sin_addr, sizeof(WSA_BindIP4.sin_addr));
+                WSA_GetSock(s, TRUE)->Bound = TRUE;
+            }
         }
         else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
-
             SOCKADDR_IN6_LH* addr6_in = (SOCKADDR_IN6_LH*)name;
-            memcpy(&addr6_in->sin6_addr, &WSA_BindIP6.sin6_addr, sizeof(WSA_BindIP6.sin6_addr));
-            WSA_GetSock(s, TRUE)->Bound = TRUE;
+            BYTE* app_bytes = addr6_in->sin6_addr.u.Byte;
+            BOOLEAN app_is_wildcard = (app_bytes[0] == 0 && app_bytes[1] == 0 && app_bytes[2] == 0 && app_bytes[3] == 0 &&
+                                       app_bytes[4] == 0 && app_bytes[5] == 0 && app_bytes[6] == 0 && app_bytes[7] == 0 &&
+                                       app_bytes[8] == 0 && app_bytes[9] == 0 && app_bytes[10] == 0 && app_bytes[11] == 0 &&
+                                       app_bytes[12] == 0 && app_bytes[13] == 0 && app_bytes[14] == 0 && app_bytes[15] == 0);
+            
+            BOOLEAN cfg_is_wildcard = FALSE;
+            if (WSA_BindIP6.sin6_family == AF_INET6) {
+                BYTE* cfg_bytes = WSA_BindIP6.sin6_addr.u.Byte;
+                cfg_is_wildcard = (cfg_bytes[0] == 0 && cfg_bytes[1] == 0 && cfg_bytes[2] == 0 && cfg_bytes[3] == 0 &&
+                                   cfg_bytes[4] == 0 && cfg_bytes[5] == 0 && cfg_bytes[6] == 0 && cfg_bytes[7] == 0 &&
+                                   cfg_bytes[8] == 0 && cfg_bytes[9] == 0 && cfg_bytes[10] == 0 && cfg_bytes[11] == 0 &&
+                                   cfg_bytes[12] == 0 && cfg_bytes[13] == 0 && cfg_bytes[14] == 0 && cfg_bytes[15] == 0);
+            }
+            
+            WSA_DebugBindMsg(L"bind: IPv6 app_wildcard=%d cfg_wildcard=%d cfg_v6=%d\n",
+                (int)app_is_wildcard, (int)cfg_is_wildcard, (int)WSA_BindIPv6Configured);
+            
+            // If configured IP is wildcard (::), only block when StrictBindIP is enabled (treat as not configured)
+                    if (StrictBindIP && WSA_BindIPv6Configured && cfg_is_wildcard) {
+                WSA_DebugBindMsg(L"bind: StrictBindIP - IPv6 wildcard config (::) treated as not configured - BLOCKED\n%s", L"");
+                if (new_name) Dll_Free((void*)name);
+                __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                return SOCKET_ERROR;
+            }
+            // If IPv6 is configured with non-wildcard address, replace app's address
+            else if (WSA_BindIPv6Configured && WSA_BindIP6.sin6_family == AF_INET6 && !cfg_is_wildcard) {
+                // Create writable copy if needed (name might be const/read-only)
+                if (!new_name) {
+                    void* writable_copy = Dll_Alloc(namelen);
+                    memcpy(writable_copy, name, namelen);
+                    name = writable_copy;
+                    new_name = TRUE;
+                    addr6_in = (SOCKADDR_IN6_LH*)name;  // Update pointer to writable copy
+                }
+                BYTE* orig = addr6_in->sin6_addr.u.Byte;
+                BYTE* repl = WSA_BindIP6.sin6_addr.u.Byte;
+                WSA_DebugBindMsg(L"bind: replace IPv6 %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x -> %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x\n",
+                    orig[0],orig[1],orig[2],orig[3],orig[4],orig[5],orig[6],orig[7],orig[8],orig[9],orig[10],orig[11],orig[12],orig[13],orig[14],orig[15],
+                    repl[0],repl[1],repl[2],repl[3],repl[4],repl[5],repl[6],repl[7],repl[8],repl[9],repl[10],repl[11],repl[12],repl[13],repl[14],repl[15]);
+                memcpy(&addr6_in->sin6_addr, &WSA_BindIP6.sin6_addr, sizeof(WSA_BindIP6.sin6_addr));
+                WSA_GetSock(s, TRUE)->Bound = TRUE;
+            }
         }
     }
 
@@ -821,31 +956,74 @@ _FX int WSA_bind(
 //---------------------------------------------------------------------------
 
 
-_FX void WSA_bind_ip(
+_FX int WSA_bind_ip(
     SOCKET         s/*,
     const void     *name,
     int            namelen*/)
 {
     WSA_SOCK* pSock = WSA_GetSock(s, TRUE);
     if (pSock->Bound)
-        return;
+        return 0;
 
     // Validate that the configured bind IP is still available
-    if (!WSA_IsBindIPValid())
-        return;  // Don't bind if IP is not available, let the connection fail properly
+    // Only fail if StrictBindIP is enabled - otherwise allow fallback for compatibility
+        BOOLEAN StrictBindIP = WSA_GetStrictBindIP();
+    BOOLEAN __bind_valid = WSA_IsBindIPValid();
+    WSA_DebugBindMsg(L"bind_ip: sock_af=%d valid=%d strict=%d useAdapter=%d cfg(v4=%d,v6=%d)\n",
+            (int)pSock->af, (int)__bind_valid, (int)StrictBindIP, (int)WSA_UseBindAdapter, (int)WSA_BindIPv4Configured, (int)WSA_BindIPv6Configured);
+    if (!__bind_valid) {
+            if (StrictBindIP) {
+            __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+            return -1;  // Fail when StrictBindIP enabled and adapter unavailable
+        }
+        return 0;  // Allow connection without binding when StrictBindIP disabled
+    }
 
     //if (namelen >= sizeof(SOCKADDR_IN) && name && ((short*)name)[0] == AF_INET) {
     if (pSock->af == AF_INET){
-
-        __sys_bind(s, &WSA_BindIP4, sizeof(WSA_BindIP4));
-        pSock->Bound = TRUE;
+        WSA_DebugBindMsg(L"bind_ip: attempt IPv4 cfg_v4=%d struct_family=%d\n",
+            (int)WSA_BindIPv4Configured, (int)WSA_BindIP4.sin_family);
+        // With StrictBindIP enabled, check if IPv4 is actually configured
+            if (StrictBindIP) {
+            // Treat wildcard configured IPv4 (0.0.0.0) as not configured when StrictBindIP is on
+            BOOLEAN ipv4_is_wildcard = (WSA_BindIP4.sin_family == AF_INET && WSA_BindIP4.sin_addr.S_un.S_addr == 0);
+            BOOLEAN ipv4_allowed = WSA_BindIPv4Configured && !ipv4_is_wildcard;
+            if (!ipv4_allowed) {
+                __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                return -1;
+            }
+        }
+        // Double-check the structure is valid before binding
+        if (WSA_BindIP4.sin_family == AF_INET) {
+            __sys_bind(s, &WSA_BindIP4, sizeof(WSA_BindIP4));
+            pSock->Bound = TRUE;
+        }
     }
     //else if (namelen >= sizeof(SOCKADDR_IN6_LH) && name && ((short*)name)[0] == AF_INET6) {
     else if (pSock->af == AF_INET6){
-
-        __sys_bind(s, &WSA_BindIP6, sizeof(WSA_BindIP6));
-        pSock->Bound = TRUE;
+        WSA_DebugBindMsg(L"bind_ip: attempt IPv6 cfg_v6=%d struct_family=%d\n",
+            (int)WSA_BindIPv6Configured, (int)WSA_BindIP6.sin6_family);
+        // With StrictBindIP enabled, check if IPv6 is actually configured
+            if (StrictBindIP) {
+            // Treat wildcard configured IPv6 (::) as not configured when StrictBindIP is on
+            BOOLEAN ipv6_is_wildcard = FALSE;
+            if (WSA_BindIP6.sin6_family == AF_INET6) {
+                BYTE* cfg = WSA_BindIP6.sin6_addr.u.Byte;
+                ipv6_is_wildcard = (cfg[0]|cfg[1]|cfg[2]|cfg[3]|cfg[4]|cfg[5]|cfg[6]|cfg[7]|cfg[8]|cfg[9]|cfg[10]|cfg[11]|cfg[12]|cfg[13]|cfg[14]|cfg[15]) == 0;
+            }
+            BOOLEAN ipv6_allowed = WSA_BindIPv6Configured && !ipv6_is_wildcard;
+            if (!ipv6_allowed) {
+                __sys_WSASetLastError(WSAEADDRNOTAVAIL);
+                return -1;
+            }
+        }
+        // Double-check the structure is valid before binding
+        if (WSA_BindIP6.sin6_family == AF_INET6) {
+            __sys_bind(s, &WSA_BindIP6, sizeof(WSA_BindIP6));
+            pSock->Bound = TRUE;
+        }
     }
+    return 0;
 }
 
 
@@ -1114,13 +1292,27 @@ _FX int WSA_connect(
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
 
-    // If BindIP is configured, verify it's still available before connecting
+    // If BindIP is configured, try to bind the socket to the configured adapter
+    // When StrictBindIP=n, we allow connections even if adapter is unavailable
+    // When StrictBindIP=y, we block if adapter is down (security-first approach)
     if (WSA_BindIP) {
-        if (!WSA_IsBindIPValid()) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        // If adapter is unavailable and StrictBindIP is enabled, fail immediately
+        if (!bind_valid && strict) {
             __sys_WSASetLastError(WSAEADDRNOTAVAIL);
             return SOCKET_ERROR;
         }
-        WSA_bind_ip(s/*, name, namelen*/);
+        
+        // If adapter is available, bind to it (regardless of strict mode)
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+        // If adapter unavailable but StrictBindIP=n, continue without binding
+        // This allows proxy to work as fallback when VPN is down
     }
 
     void* proxy;
@@ -1181,13 +1373,27 @@ _FX int WSA_WSAConnect(
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
 
-    // If BindIP is configured, verify it's still available before connecting
+    // If BindIP is configured, try to bind the socket to the configured adapter
+    // When StrictBindIP=n, we allow connections even if adapter is unavailable
+    // When StrictBindIP=y, we block if adapter is down (security-first approach)
     if (WSA_BindIP) {
-        if (!WSA_IsBindIPValid()) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        // If adapter is unavailable and StrictBindIP is enabled, fail immediately
+        if (!bind_valid && strict) {
             __sys_WSASetLastError(WSAEADDRNOTAVAIL);
             return SOCKET_ERROR;
         }
-        WSA_bind_ip(s/*, name, namelen*/);
+        
+        // If adapter is available, bind to it (regardless of strict mode)
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+        // If adapter unavailable but StrictBindIP=n, continue without binding
+        // This allows proxy to work as fallback when VPN is down
     }
 
     void* proxy;
@@ -1248,13 +1454,27 @@ _FX int WSA_ConnectEx(
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
 
-    // If BindIP is configured, verify it's still available before connecting
+    // If BindIP is configured, try to bind the socket to the configured adapter
+    // When StrictBindIP=n, we allow connections even if adapter is unavailable
+    // When StrictBindIP=y, we block if adapter is down (security-first approach)
     if (WSA_BindIP) {
-        if (!WSA_IsBindIPValid()) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        // If adapter is unavailable and StrictBindIP is enabled, fail immediately
+        if (!bind_valid && strict) {
             __sys_WSASetLastError(WSAEADDRNOTAVAIL);
             return SOCKET_ERROR;
         }
-        WSA_bind_ip(s/*, name, namelen*/);
+        
+        // If adapter is available, bind to it (regardless of strict mode)
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
+        // If adapter unavailable but StrictBindIP=n, continue without binding
+        // This allows proxy to work as fallback when VPN is down
     }
 
     void* proxy;
@@ -1315,7 +1535,7 @@ _FX int WSA_ConnectEx(
 
 /*
 //---------------------------------------------------------------------------
-// WSA_accept
+// WSA_listen
 //---------------------------------------------------------------------------
 
 static int WSA_listen(
@@ -1330,7 +1550,6 @@ static int WSA_listen(
 //---------------------------------------------------------------------------
 // WSA_accept
 //---------------------------------------------------------------------------
-
 
 _FX SOCKET WSA_accept(
     SOCKET   s,
@@ -1412,13 +1631,22 @@ _FX int WSA_sendto(
     if (WSA_IsBlockedTraffic(to, tolen, IPPROTO_UDP))
         return SOCKET_ERROR;
 
-    // If BindIP is configured, verify it's still available before sending
+    // If BindIP is configured, try to bind the socket
+    // With StrictBindIP=n, allow sending even if adapter unavailable
     if (WSA_BindIP) {
-        if (!WSA_IsBindIPValid()) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        if (!bind_valid && strict) {
             __sys_WSASetLastError(WSAEADDRNOTAVAIL);
             return SOCKET_ERROR;
         }
-        WSA_bind_ip(s/*, to, tolen*/);
+        
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
     }
 
     return __sys_sendto(s, buf, len, flags, to, tolen);
@@ -1444,13 +1672,22 @@ _FX int WSA_WSASendTo(
     if (WSA_IsBlockedTraffic(lpTo, iTolen, IPPROTO_UDP))
         return SOCKET_ERROR;
 
-    // If BindIP is configured, verify it's still available before sending
+    // If BindIP is configured, try to bind the socket
+    // With StrictBindIP=n, allow sending even if adapter unavailable
     if (WSA_BindIP) {
-        if (!WSA_IsBindIPValid()) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        if (!bind_valid && strict) {
             __sys_WSASetLastError(WSAEADDRNOTAVAIL);
             return SOCKET_ERROR;
         }
-        WSA_bind_ip(s/*, lpTo, iTolen*/);
+        
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
     }
 
     return __sys_WSASendTo(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent,
@@ -1471,13 +1708,22 @@ _FX int WSA_recvfrom(
     void     *from,
     int      *fromlen)
 {
-    // If BindIP is configured, verify it's still available
+    // If BindIP is configured, try to bind the socket
+    // With StrictBindIP=n, allow receiving even if adapter unavailable
     if (WSA_BindIP) {
-        if (!WSA_IsBindIPValid()) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        if (!bind_valid && strict) {
             __sys_WSASetLastError(WSAEADDRNOTAVAIL);
             return SOCKET_ERROR;
         }
-        WSA_bind_ip(s);
+        
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
     }
 
     char buffer[128];
@@ -1512,13 +1758,22 @@ _FX int WSA_WSARecvFrom(
     LPWSAOVERLAPPED                    lpOverlapped,
     LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine)
 {
-    // If BindIP is configured, verify it's still available
+    // If BindIP is configured, try to bind the socket
+    // With StrictBindIP=n, allow receiving even if adapter unavailable
     if (WSA_BindIP) {
-        if (!WSA_IsBindIPValid()) {
+        BOOLEAN bind_valid = WSA_IsBindIPValid();
+        BOOLEAN strict = WSA_GetStrictBindIP();
+        
+        if (!bind_valid && strict) {
             __sys_WSASetLastError(WSAEADDRNOTAVAIL);
             return SOCKET_ERROR;
         }
-        WSA_bind_ip(s);
+        
+        if (bind_valid) {
+            if (WSA_bind_ip(s) != 0) {
+                return SOCKET_ERROR;
+            }
+        }
     }
 
     char buffer[128];
@@ -1823,15 +2078,18 @@ _FX BOOLEAN WSA_InitNetProxy()
 
 
 //---------------------------------------------------------------------------
-// WSA_IsBindIPValid
+// WSA_GetStrictBindIP
 //---------------------------------------------------------------------------
 
-_FX BOOLEAN WSA_IsBindIPValid()
+_FX BOOLEAN WSA_GetStrictBindIP()
 {
-    // This function validates if the currently configured bind IP addresses
-    // are still valid on the system. This is important to prevent fallback
-    // to default adapter when VPN/bound adapter is disconnected.
+    // Query StrictBindIP with per-process matching support
+    // Default: TRUE (strict mode enabled by default for security)
+    return Config_GetSettingsForImageName_bool(L"StrictBindIP", TRUE);
+}
 
+_FX BOOLEAN WSA_RefreshBindIPState()
+{
     HMODULE Iphlpapi = LoadLibraryW(L"Iphlpapi.dll");
     if (!Iphlpapi)
         return FALSE;
@@ -1853,70 +2111,156 @@ _FX BOOLEAN WSA_IsBindIPValid()
 
     BOOLEAN bResult = FALSE;
 
+    // Log refresh start and current configured flags
+    WSA_DebugBindMsg(L"Refresh: mode=%ls adapter='%ls' cfg_before v4=%d v6=%d\n",
+        WSA_UseBindAdapter ? L"BindAdapter" : L"BindAdapterIP",
+        WSA_BindAdapterName,
+        (int)WSA_BindIPv4Configured,
+        (int)WSA_BindIPv6Configured);
+
     if (GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_INCLUDE_PREFIX, NULL, adapters, &bufferSize) == NO_ERROR) {
-        
         if (WSA_UseBindAdapter) {
-            // BindAdapter mode: check if the configured adapter name exists
-            // Safety check: ensure adapter name is not empty
             if (wcslen(WSA_BindAdapterName) > 0) {
                 for (IP_ADAPTER_ADDRESSES* adapter = adapters; adapter != NULL; adapter = adapter->Next) {
                     if (_wcsicmp(adapter->FriendlyName, WSA_BindAdapterName) == 0) {
-                        // Adapter found - update the cached IPs and return TRUE
+                        // SECURITY: Only accept adapters that are UP (IfOperStatusUp = 1)
+                        // Disconnected adapters often get APIPA addresses (169.254.x.x) which should NOT be used
+                        if (adapter->OperStatus != 1) {  // IfOperStatusUp
+                            WSA_DebugBindMsg(L"Refresh: Adapter '%ls' found but status=%d (not UP=1)\n",
+                                adapter->FriendlyName, (int)adapter->OperStatus);
+                            bResult = FALSE;
+                            break;
+                        }
+                        
+                        // Found target adapter: update cached addresses, but don't broaden configured IP families.
+                        BOOLEAN has_ipv4 = FALSE;
+                        BOOLEAN has_ipv6 = FALSE;
                         for (IP_ADAPTER_UNICAST_ADDRESS* unicast = adapter->FirstUnicastAddress; unicast != NULL; unicast = unicast->Next) {
                             if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET) {
+                                SOCKADDR_IN* addr = (SOCKADDR_IN*)unicast->Address.lpSockaddr;
+                                // Skip APIPA addresses (169.254.x.x) - these indicate disconnected/failed DHCP
+                                if ((addr->sin_addr.S_un.S_addr & 0x0000FFFF) == 0x0000FEA9) {  // 169.254.0.0/16 in network byte order
+                                    WSA_DebugBindMsg(L"Refresh: Skipping APIPA address 169.254.x.x\n");
+                                    continue;
+                                }
                                 memcpy(&WSA_BindIP4, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN));
-                            }
-                            else if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET6) {
+                                has_ipv4 = TRUE;
+                            } else if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET6) {
+                                // Skip link-local IPv6 addresses (fe80::/10) - these are auto-configured and not routable
+                                SOCKADDR_IN6_LH* addr = (SOCKADDR_IN6_LH*)unicast->Address.lpSockaddr;
+                                if ((addr->sin6_addr.u.Byte[0] == 0xfe) && ((addr->sin6_addr.u.Byte[1] & 0xc0) == 0x80)) {
+                                    WSA_DebugBindMsg(L"Refresh: Skipping link-local IPv6 fe80::/10\n");
+                                    continue;
+                                }
                                 memcpy(&WSA_BindIP6, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN6_LH));
+                                has_ipv6 = TRUE;
                             }
                         }
-                        bResult = TRUE;
+                        WSA_DebugBindMsg(L"Refresh: Adapter '%ls' UP: has_v4=%d has_v6=%d\n",
+                            adapter->FriendlyName, (int)has_ipv4, (int)has_ipv6);
+                        // Zero-out unavailable families to avoid stale addresses
+                        if (!has_ipv4) memset(&WSA_BindIP4, 0, sizeof(WSA_BindIP4));
+                        if (!has_ipv6) memset(&WSA_BindIP6, 0, sizeof(WSA_BindIP6));
+
+                        // Update configured flags to reflect what's actually available on the adapter
+                        WSA_BindIPv4Configured = has_ipv4;
+                        WSA_BindIPv6Configured = has_ipv6;
+
+                        WSA_DebugBindMsg(L"Refresh: Adapter present: cfg_after v4=%d v6=%d\n",
+                            (int)WSA_BindIPv4Configured, (int)WSA_BindIPv6Configured);
+                        bResult = TRUE; // adapter is present
                         break;
                     }
                 }
-            }
-        }
-        else {
-            // BindAdapterIP mode: check if ALL configured IP addresses exist
-            BOOLEAN bIPv4Found = FALSE;
-            BOOLEAN bIPv6Found = FALSE;
-            BOOLEAN bIPv4Configured = (WSA_BindIP4.sin_family == AF_INET);
-            BOOLEAN bIPv6Configured = (WSA_BindIP6.sin6_family == AF_INET6);
-
-            for (IP_ADAPTER_ADDRESSES* adapter = adapters; adapter != NULL; adapter = adapter->Next) {
-                
-                for (IP_ADAPTER_UNICAST_ADDRESS* unicast = adapter->FirstUnicastAddress; unicast != NULL; unicast = unicast->Next) {
-                    
-                    if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET && bIPv4Configured) {
-                        SOCKADDR_IN* addr = (SOCKADDR_IN*)unicast->Address.lpSockaddr;
-                        if (addr->sin_addr.s_addr == WSA_BindIP4.sin_addr.s_addr) {
-                            bIPv4Found = TRUE;
-                        }
-                    }
-                    else if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET6 && bIPv6Configured) {
-                        SOCKADDR_IN6_LH* addr6 = (SOCKADDR_IN6_LH*)unicast->Address.lpSockaddr;
-                        if (memcmp(&addr6->sin6_addr, &WSA_BindIP6.sin6_addr, sizeof(addr6->sin6_addr)) == 0) {
-                            bIPv6Found = TRUE;
-                        }
-                    }
+                if (!bResult) {
+                    WSA_DebugBindMsg(L"Refresh: Adapter '%ls' NOT found or not UP\n", WSA_BindAdapterName);
                 }
             }
-
-            // Return TRUE only if ALL configured IPs are found
-            // If IPv4 is configured, it must be found
-            // If IPv6 is configured, it must be found
-            bResult = TRUE;
-            if (bIPv4Configured && !bIPv4Found)
-                bResult = FALSE;
-            if (bIPv6Configured && !bIPv6Found)
-                bResult = FALSE;
+        } else {
+            // BindAdapterIP mode: verify the configured IP addresses are actually present on the system
+            BOOLEAN ipv4_found = FALSE;
+            BOOLEAN ipv6_found = FALSE;
+            
+            // Check if we have configured IPs to search for
+            BOOLEAN search_ipv4 = (WSA_BindIP4.sin_family == AF_INET);
+            BOOLEAN search_ipv6 = (WSA_BindIP6.sin6_family == AF_INET6);
+            
+            if (search_ipv4 || search_ipv6) {
+                // Scan all adapters to find the configured IP addresses
+                for (IP_ADAPTER_ADDRESSES* adapter = adapters; adapter != NULL; adapter = adapter->Next) {
+                    // SECURITY: Only check adapters that are UP (IfOperStatusUp = 1)
+                    // Skip disconnected/down adapters to prevent using APIPA or stale addresses
+                    if (adapter->OperStatus != 1) {  // IfOperStatusUp
+                        continue;
+                    }
+                    
+                    for (IP_ADAPTER_UNICAST_ADDRESS* unicast = adapter->FirstUnicastAddress; unicast != NULL; unicast = unicast->Next) {
+                        if (!unicast->Address.lpSockaddr)
+                            continue;
+                            
+                        if (search_ipv4 && !ipv4_found && unicast->Address.lpSockaddr->sa_family == AF_INET) {
+                            SOCKADDR_IN* addr = (SOCKADDR_IN*)unicast->Address.lpSockaddr;
+                            if (addr->sin_addr.S_un.S_addr == WSA_BindIP4.sin_addr.S_un.S_addr) {
+                                ipv4_found = TRUE;
+                                WSA_DebugBindMsg(L"Refresh: IPv4 %d.%d.%d.%d found on UP adapter '%ls'\n",
+                                    ((BYTE*)&addr->sin_addr)[0], ((BYTE*)&addr->sin_addr)[1],
+                                    ((BYTE*)&addr->sin_addr)[2], ((BYTE*)&addr->sin_addr)[3],
+                                    adapter->FriendlyName);
+                            }
+                        }
+                        else if (search_ipv6 && !ipv6_found && unicast->Address.lpSockaddr->sa_family == AF_INET6) {
+                            SOCKADDR_IN6_LH* addr = (SOCKADDR_IN6_LH*)unicast->Address.lpSockaddr;
+                            if (memcmp(&addr->sin6_addr, &WSA_BindIP6.sin6_addr, sizeof(addr->sin6_addr)) == 0) {
+                                ipv6_found = TRUE;
+                                BYTE* b = addr->sin6_addr.u.Byte;
+                                WSA_DebugBindMsg(L"Refresh: IPv6 %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x found on UP adapter '%ls'\n",
+                                    b[0],b[1],b[2],b[3],b[4],b[5],b[6],b[7],b[8],b[9],b[10],b[11],b[12],b[13],b[14],b[15],
+                                    adapter->FriendlyName);
+                            }
+                        }
+                        
+                        // Early exit if both found
+                        if ((!search_ipv4 || ipv4_found) && (!search_ipv6 || ipv6_found))
+                            break;
+                    }
+                    if ((!search_ipv4 || ipv4_found) && (!search_ipv6 || ipv6_found))
+                        break;
+                }
+            }
+            
+            // Result is valid only if all configured IPs were found
+            bResult = (!search_ipv4 || ipv4_found) && (!search_ipv6 || ipv6_found);
+            WSA_DebugBindMsg(L"Refresh: search(v4=%d,v6=%d) found(v4=%d,v6=%d) valid=%d\n",
+                (int)search_ipv4, (int)search_ipv6, (int)ipv4_found, (int)ipv6_found, (int)bResult);
         }
     }
 
     Dll_Free(adapters);
     FreeLibrary(Iphlpapi);
-
     return bResult;
+}
+
+_FX BOOLEAN WSA_IsBindIPValid()
+{
+    static BOOLEAN cachedValid = FALSE;
+    static DWORD lastRefreshTime = 0;
+    
+    DWORD now = GetTickCount();
+    
+    // Refresh every 5 seconds to detect network changes (VPN connect/disconnect, etc.)
+    // SECURITY: Always re-check if cached result was FALSE to prevent IP leakage
+    // Only use cache when last check was successful AND within time window
+    if (lastRefreshTime == 0 || (now - lastRefreshTime) > 5000 || !cachedValid) {
+        cachedValid = WSA_RefreshBindIPState();
+        lastRefreshTime = now;
+        
+        // If refresh failed, invalidate the cache immediately
+        if (!cachedValid) {
+            lastRefreshTime = 0;
+        }
+    }
+    
+    return cachedValid;
 }
 
 
@@ -1982,20 +2326,53 @@ _FX BOOLEAN WSA_InitBindIP()
             if (_wcsicmp(adapter->FriendlyName, value) != 0)
                 continue;
 
+            // SECURITY: Only accept adapters that are UP (IfOperStatusUp = 1)
+            // Skip disconnected adapters during initialization to avoid APIPA addresses
+            if (adapter->OperStatus != 1) {  // IfOperStatusUp
+                WSA_DebugBindMsg(L"Init: Adapter '%ls' found but status=%d (not UP=1) - skipping\n",
+                    adapter->FriendlyName, (int)adapter->OperStatus);
+                continue;  // Keep searching in case adapter comes up later
+            }
+
             // Found matching adapter - store the name for runtime validation
             wcsncpy_s(WSA_BindAdapterName, sizeof(WSA_BindAdapterName) / sizeof(WCHAR), adapter->FriendlyName, _TRUNCATE);
 
             State = 2; // Adapter found (mark before checking addresses - adapters without IPs are still valid)
 
+            // Check which IP versions are actually available on this adapter
+            BOOLEAN has_ipv4 = FALSE;
+            BOOLEAN has_ipv6 = FALSE;
             for (IP_ADAPTER_UNICAST_ADDRESS* unicast = adapter->FirstUnicastAddress; unicast != NULL; unicast = unicast->Next) {
 
                 if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET) {
+                    SOCKADDR_IN* addr = (SOCKADDR_IN*)unicast->Address.lpSockaddr;
+                    // Skip APIPA addresses (169.254.x.x) - these indicate disconnected/failed DHCP
+                    if ((addr->sin_addr.S_un.S_addr & 0x0000FFFF) == 0x0000FEA9) {  // 169.254.0.0/16 in network byte order
+                        WSA_DebugBindMsg(L"Init: Skipping APIPA address 169.254.x.x\n");
+                        continue;
+                    }
                     memcpy(&WSA_BindIP4, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN));
+                    has_ipv4 = TRUE;
                 }
                 else if (unicast->Address.lpSockaddr && unicast->Address.lpSockaddr->sa_family == AF_INET6) {
+                    SOCKADDR_IN6_LH* addr = (SOCKADDR_IN6_LH*)unicast->Address.lpSockaddr;
+                    // Skip link-local IPv6 addresses (fe80::/10) - these are auto-configured and not routable
+                    if ((addr->sin6_addr.u.Byte[0] == 0xfe) && ((addr->sin6_addr.u.Byte[1] & 0xc0) == 0x80)) {
+                        WSA_DebugBindMsg(L"Init: Skipping link-local IPv6 fe80::/10\n");
+                        continue;
+                    }
                     memcpy(&WSA_BindIP6, unicast->Address.lpSockaddr, sizeof(SOCKADDR_IN6_LH));
+                    has_ipv6 = TRUE;
                 }
             }
+
+            // Track which IP versions are actually available on this adapter
+            WSA_BindIPv4Configured = has_ipv4;
+            WSA_BindIPv6Configured = has_ipv6;
+            
+            // Completely zero out structures for unavailable IP versions to prevent any accidental use
+            if (!has_ipv4) memset(&WSA_BindIP4, 0, sizeof(WSA_BindIP4));
+            if (!has_ipv6) memset(&WSA_BindIP6, 0, sizeof(WSA_BindIP6));
 
             FoundLevel = level;
         }
@@ -2024,17 +2401,32 @@ _FX BOOLEAN WSA_InitBindIP()
         memset(&WSA_BindIP6.sin6_addr, 0, sizeof(WSA_BindIP6.sin6_addr)); // Will be checked at runtime
         WSA_BindIP6.sin6_scope_id   = 0;
 
+        // Adapter not yet available - will be detected at runtime via WSA_IsBindIPValid()
+        // Initially mark both as potentially available, runtime checks will determine actual availability
+        WSA_BindIPv4Configured = FALSE;
+        WSA_BindIPv6Configured = FALSE;
+
         return TRUE;  // Enable BindIP, let runtime validation handle adapter presence
     }
 
     if (FoundLevel != -1) {
         // Adapter found - we're using BindAdapter mode
+        // The IP versions that are available have already been detected in the loop above
+        // WSA_BindIPv4Configured and WSA_BindIPv6Configured are already set correctly
         WSA_UseBindAdapter = TRUE;
         return TRUE;
     }
 
+    BOOLEAN bFoundIPv4 = FALSE;
+    BOOLEAN bFoundIPv6 = FALSE;
     ULONG FoundLevel4 = -1;
     ULONG FoundLevel6 = -1;
+    
+    // Reset the configured flags before checking BindAdapterIP settings
+    // This ensures that if only IPv6 is configured, IPv4 stays FALSE
+    WSA_BindIPv4Configured = FALSE;
+    WSA_BindIPv6Configured = FALSE;
+    
     for (ULONG index = 0; ; ++index) {
 
         NTSTATUS status = SbieApi_QueryConf(
@@ -2047,18 +2439,39 @@ _FX BOOLEAN WSA_InitBindIP()
         if (!value)
             continue;
 
-        if (_inet_aton(value, &WSA_BindIP4.sin_addr) == 1) {
-            if (FoundLevel4 > level) {
+        SOCKADDR_IN tempIPv4;
+        SOCKADDR_IN6_LH tempIPv6;
+        
+        if (_inet_aton(value, &tempIPv4.sin_addr) == 1) {
+            // Accept any IPv4 address including 0.0.0.0 (INADDR_ANY)
+            // If user specifies 0.0.0.0, they want to listen on all IPv4 interfaces
+            // Only accept first IPv4 address, or one with higher priority (lower level)
+            if (!bFoundIPv4 || FoundLevel4 > level) {
                 WSA_BindIP4.sin_family = AF_INET;
+                WSA_BindIP4.sin_addr = tempIPv4.sin_addr;
                 FoundLevel4 = level;
                 WSA_UseBindAdapter = FALSE;  // Using BindAdapterIP mode
+                WSA_BindIPv4Configured = TRUE;  // Mark IPv4 as explicitly configured
+                bFoundIPv4 = TRUE;
+                BYTE* b = (BYTE*)&WSA_BindIP4.sin_addr;
+                WSA_DebugBindMsg(L"Init: parsed IPv4 '%ls' -> %d.%d.%d.%d\n",
+                    value, b[0], b[1], b[2], b[3]);
             }
         }
-        else if(_inet_pton(AF_INET6, value, &WSA_BindIP6.sin6_addr) == 1){
-            if (FoundLevel6 > level) {
+        else if(_inet_pton(AF_INET6, value, &tempIPv6.sin6_addr) == 1){
+            // Accept any IPv6 address including :: (in6addr_any)
+            // If user specifies ::, they want to listen on all IPv6 interfaces
+            // Only accept first IPv6 address, or one with higher priority (lower level)
+            if (!bFoundIPv6 || FoundLevel6 > level) {
                 WSA_BindIP6.sin6_family = AF_INET6;
+                WSA_BindIP6.sin6_addr = tempIPv6.sin6_addr;
                 FoundLevel6 = level;
                 WSA_UseBindAdapter = FALSE;  // Using BindAdapterIP mode
+                WSA_BindIPv6Configured = TRUE;  // Mark IPv6 as explicitly configured
+                bFoundIPv6 = TRUE;
+                BYTE* b = WSA_BindIP6.sin6_addr.u.Byte;
+                WSA_DebugBindMsg(L"Init: parsed IPv6 '%ls' -> %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x\n",
+                    value, b[0],b[1],b[2],b[3],b[4],b[5],b[6],b[7],b[8],b[9],b[10],b[11],b[12],b[13],b[14],b[15]);
             }
         }
     }

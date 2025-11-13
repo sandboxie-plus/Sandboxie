@@ -644,10 +644,27 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     if (syscall_index == 0xFFF && parms[3] != 0) {
         __try {
 
-            entry = Syscall_GetByName((UCHAR*)parms[3]);
+            ANSI_STRING64* uni = (ANSI_STRING64*)parms[3];
+            SIZE_T callNameLen = 0;
+            UCHAR* callNameBuff = 0;
+            UCHAR callName[64];
 
-            if(parms[4]) // return found index to the caller to be re used later
-                *(USHORT*)parms[4] = entry->syscall_index; 
+            ProbeForRead(uni, sizeof(ANSI_STRING64), sizeof(ULONG_PTR));
+            callNameLen = uni->Length;
+            callNameBuff = (UCHAR*)uni->Buffer;
+            ProbeForRead(callNameBuff, callNameLen, sizeof(UCHAR));
+            if(callNameLen >= sizeof(callName))
+                ExRaiseStatus(STATUS_INVALID_PARAMETER_3);
+            memcpy(callName, callNameBuff, callNameLen);
+            callName[callNameLen] = '\0';
+
+            entry = Syscall_GetByName(callName);
+
+            USHORT* CallIndexPtr = (USHORT*)parms[4];
+            if (CallIndexPtr) { // return found index to the caller to be re used later if requested
+                ProbeForWrite(CallIndexPtr, sizeof(USHORT), sizeof(USHORT));
+                *CallIndexPtr = entry ? entry->syscall_index : 0;
+            }
 
         } __except (EXCEPTION_EXECUTE_HANDLER) {
             entry = NULL;

@@ -9,10 +9,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed 'OpenWndStation=y' not working with 'SandboxieAllGroup=y'
 - fixed missing parameter validation in SbieIniServer
-
+- fixed issue with certificate parsing
+- fixed an issue retreiving driver info
+ 
 ### Changed
 - reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
-
+- improved named syscall invocation when using wow64
 
 
 

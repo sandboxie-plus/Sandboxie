@@ -549,7 +549,7 @@ _FX NTSTATUS KphValidateCertificate()
     ULONG signatureSize = 0;
     PUCHAR signature = NULL;
 
-    const int line_size = 1024 * sizeof(WCHAR);
+    const int line_size = (CONF_LINE_LEN + 2) * sizeof(WCHAR);
     WCHAR *line = NULL; //512 wchars
     char *temp = NULL; //1024 chars, utf8 encoded
     int line_num = 0;

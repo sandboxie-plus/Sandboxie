@@ -57,7 +57,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="83"/>
         <source>Lock the box when all processes stop.</source>
-        <translation>当所有进程停止时锁定沙箱。</translation>
+        <translation>当所有进程停止后锁定沙箱。</translation>
     </message>
 </context>
 <context>
@@ -120,31 +120,6 @@
         <source>Updater failed to perform add-on operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
         <translation>加载项更新失败，错误： %1</translation>
-    </message>
-    <message>
-        <source>Downloading Add-on %1</source>
-        <translation type="vanished">正在下载加载项%1</translation>
-    </message>
-    <message>
-        <source>Download signature is not valid!</source>
-        <translation type="vanished">下载项的签名无效！</translation>
-    </message>
-    <message>
-        <source>Installing Add-on %1</source>
-        <translation type="vanished">正在安装加载项 %1</translation>
-    </message>
-    <message>
-        <source>Running Installer for %1</source>
-        <translation type="vanished">正在运行 %1 的安装程序</translation>
-    </message>
-    <message>
-        <source>Failed to start installer (%1)!</source>
-        <oldsource>Failes to start installer (%1)!</oldsource>
-        <translation type="vanished">无法启动安装程序（%1）！</translation>
-    </message>
-    <message>
-        <source>Copying Files for %1</source>
-        <translation type="vanished">正在复制 %1 的文件</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="169"/>

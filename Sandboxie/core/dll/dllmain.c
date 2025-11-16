@@ -174,9 +174,6 @@ _FX BOOL WINAPI DllMain(
 
         Dll_FreeTlsData();
 
-        if(!SbieApi_data && SbieApi_DeviceHandle != INVALID_HANDLE_VALUE)
-            NtClose(SbieApi_DeviceHandle);
-
     } else if (dwReason == DLL_PROCESS_ATTACH) {
 
         // $Workaround$ - 3rd party fix
@@ -212,6 +209,8 @@ _FX BOOL WINAPI DllMain(
             Gui_ResetClipCursor();
         }
 
+        if(!SbieApi_data && SbieApi_DeviceHandle != INVALID_HANDLE_VALUE)
+            NtClose(SbieApi_DeviceHandle);
     }
 
     return TRUE;

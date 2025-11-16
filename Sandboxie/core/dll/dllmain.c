@@ -55,6 +55,7 @@ SBIELOW_DATA* SbieApi_data = NULL;
 #ifdef _M_ARM64EC
 ULONG* SbieApi_SyscallPtr = NULL;
 #endif
+extern HANDLE SbieApi_DeviceHandle;
 
 HINSTANCE Dll_Instance = NULL;
 HMODULE Dll_Ntdll = NULL;
@@ -172,6 +173,9 @@ _FX BOOL WINAPI DllMain(
     } else if (dwReason == DLL_THREAD_DETACH) {
 
         Dll_FreeTlsData();
+
+        if(!SbieApi_data && SbieApi_DeviceHandle != INVALID_HANDLE_VALUE)
+            NtClose(SbieApi_DeviceHandle);
 
     } else if (dwReason == DLL_PROCESS_ATTACH) {
 
@@ -804,7 +808,6 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
     SbieApi_SyscallPtr = (ULONG*)((ULONG64)data->syscall_data + sizeof(ULONG) + sizeof(ULONG) + (NATIVE_FUNCTION_SIZE * NATIVE_FUNCTION_COUNT));
 #endif
 
-    extern HANDLE SbieApi_DeviceHandle;
     SbieApi_DeviceHandle = (HANDLE)data->api_device_handle;
 
     //

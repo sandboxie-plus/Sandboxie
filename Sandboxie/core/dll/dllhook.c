@@ -112,8 +112,6 @@ _FX void SbieDll_HookInit()
     InitializeCriticalSection(&Dll_ModuleHooks_CritSec);
     List_Init(&Dll_ModuleHooks);
 
-    Dll_HookTrace = SbieApi_QueryConfBool(NULL, L"HookTrace", FALSE);
-
 #ifdef _M_ARM64EC
     __sys_NtAllocateVirtualMemoryEx = (P_NtAllocateVirtualMemoryEx)GetProcAddress(Dll_Ntdll, "NtAllocateVirtualMemoryEx");
 #endif

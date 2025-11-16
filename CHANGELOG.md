@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.7 / 5.71.7] - 2025-11-??
+## [1.16.7 / 5.71.7] - 2025-11-16
 
 ### Added
 - added checkbox for 'NoRestartOnPCA=y' to the box options

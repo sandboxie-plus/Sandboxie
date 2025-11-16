@@ -53,12 +53,19 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Protections of sandboxes against the host, including the prevention of taking screenshots
   * A trigger system to perform actions, when a sandbox goes through different stages, like initialization, box start, termination or file recovery
   * Make a process not sandboxed, but its child processes sandboxed
-  * Sandboxing as a unit of control to force programs to automatically use the SOCKS5 proxy
-  * DNS resolution control with sandboxing as control granularity
-  * Limit the number of processes in the sandbox and the total amount of memory space they can occupy, and You can limit the total number of sandboxed processes per box
+  * Force programs to automatically use a user-provided SOCKS5 proxy
+  * DNS control by blocking or redirecting
+  * Limit the amount of memory space a single process in the sandbox can occupy and the total amount of memory space all processes can occupy, and You can limit the total number of sandboxed processes per box
   * A completely different token creation mechanism from Sandboxie's pre-open-source version makes sandboxes more independent in the system
   * Encrypted Sandbox - an AES-based reliable data storage solution
   * Prevent sandboxed programs from generating unnecessary unique identifier in the normal way
+  * An internal INI editor that aids the user with visual hints and tooltips on the settings they have configured or want to add
+  * The ability to configure an external text editor, beside the system default
+  * Control over the alpha transparency of the border
+  * A custom UAC-dialog, allowing to fake permission, grant them or cancel the elevation attempt
+  * Modern icons, while you can use the old-school ones in certain places
+  * You can change the font of the user interface
+  * Custom colors or icons can be used for sandboxes or groups
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 

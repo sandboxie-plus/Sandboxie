@@ -6,16 +6,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.16.7 / 5.71.7] - 2025-11-??
 
+### Added
+- added checkbox for 'NoRestartOnPCA=y' to the box options
+
+### Changed
+- reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
+- improved named syscall invocation when using wow64
+
 ### Fixed
 - fixed 'OpenWndStation=y' not working with 'SandboxieAllGroup=y'
 - fixed missing parameter validation in SbieIniServer
 - fixed issue with certificate parsing
 - fixed an issue retreiving driver info
 - fixed Potential Handle Leak in SbieDll.dll Related to SbieApi_DeviceHandle [#5097](https://github.com/sandboxie-plus/Sandboxie/issues/5097)
-
-### Changed
-- reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
-- improved named syscall invocation when using wow64
 
 
 

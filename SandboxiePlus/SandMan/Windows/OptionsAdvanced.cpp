@@ -40,6 +40,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkForceRestart, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkNoRestartOnPCA, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
 	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -204,6 +205,7 @@ void COptionsWindow::LoadAdvanced()
 	//ui.chkNotUntrusted->setChecked(m_pBox->GetBool("NoUntrustedToken", false));
 
 	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
+	ui.chkNoRestartOnPCA->setChecked(m_pBox->GetBool("NoRestartOnPCA", false));
 
 	CheckOpenCOM();
 	ui.chkComTimeout->setChecked(!m_pBox->GetBool("RpcMgmtSetComTimeout", true));
@@ -468,6 +470,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 
 	WriteAdvancedCheck(ui.chkForceRestart, "ForceRestartAll", "y", "");
+	WriteAdvancedCheck(ui.chkNoRestartOnPCA, "NoRestartOnPCA", "y", "");
 
 	WriteAdvancedCheck(ui.chkNoSecurityIsolation, "NoSecurityIsolation", "y", "");
 	WriteAdvancedCheck(ui.chkNoSecurityFiltering, "NoSecurityFiltering", "y", "");
@@ -800,6 +803,9 @@ void COptionsWindow::UpdateJobOptions()
 		ui.lblTotalNumber->setText("");
 	}
 	ui.txtTotalNumber->setEnabled(bUseJobObject);
+
+
+	ui.chkNoRestartOnPCA->setEnabled(!ui.chkForceRestart->isChecked());
 }
 
 void COptionsWindow::CheckOpenCOM()

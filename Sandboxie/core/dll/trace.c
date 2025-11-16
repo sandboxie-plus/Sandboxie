@@ -76,6 +76,8 @@ BOOLEAN Dll_FileTrace = FALSE;
 
 _FX int Trace_Init(void)
 {
+    Dll_HookTrace = SbieApi_QueryConfBool(NULL, L"HookTrace", FALSE);
+
     Dll_SbieTrace = SbieApi_QueryConfBool(NULL, L"SbieTrace", FALSE);
 
     Dll_ApiTrace = Config_GetSettingsForImageName_bool(L"ApiTrace", FALSE);

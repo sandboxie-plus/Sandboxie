@@ -11,7 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed missing parameter validation in SbieIniServer
 - fixed issue with certificate parsing
 - fixed an issue retreiving driver info
- 
+- fixed Potential Handle Leak in SbieDll.dll Related to SbieApi_DeviceHandle [#5097](https://github.com/sandboxie-plus/Sandboxie/issues/5097)
+
 ### Changed
 - reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
 - improved named syscall invocation when using wow64

@@ -80,7 +80,7 @@
     <message>
         <location filename="AddonManager.cpp" line="209"/>
         <source>Add-on not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到加载项！</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="229"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="AddonManager.cpp" line="233"/>
         <source>Failed to delete a file during add-on removal</source>
-        <translation>移除加载项时删除文件失败</translation>
+        <translation>移除加载项时无法删除文件</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="247"/>
@@ -161,36 +161,6 @@
         <translation type="vanished">通过 Windows 筛选平台 (WFP) 禁用网络权限</translation>
     </message>
     <message>
-        <source>Allow access to network files and folders</source>
-        <oldsource>Allow access to network files and fodlers</oldsource>
-        <translation type="vanished">允许访问网络文件与文件夹</translation>
-    </message>
-    <message>
-        <source>This option is not recommended for Hardened boxes</source>
-        <oldsource>This option is not recomended for Hardened boxes</oldsource>
-        <translation type="vanished">不推荐加固型沙箱启用该选项</translation>
-    </message>
-    <message>
-        <source>Admin Options</source>
-        <translation type="vanished">管理员选项</translation>
-    </message>
-    <message>
-        <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="vanished">撤销管理员和 Power Users 用户组的权限</translation>
-    </message>
-    <message>
-        <source>Make applications think they are running elevated</source>
-        <translation type="vanished">让应用认为自身在管理员权限下运行</translation>
-    </message>
-    <message>
-        <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="vanished">允许 MSIServer 在沙箱内使用系统令牌运行</translation>
-    </message>
-    <message>
-        <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="vanished">使用 Sandboxie 限权用户替代匿名令牌</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="891"/>
         <source>Advanced Options</source>
         <translation>高级选项</translation>
@@ -199,22 +169,22 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="898"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation>阻止宿主上的沙箱化程序加载沙箱化动态链接库(.dll)文件</translation>
+        <translation>阻止主机上的沙箱化程序加载沙箱化的动态链接库(.dll)文件</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="899"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <translation>该功能可能会降低兼容性，因为它会阻止沙箱内的进程向主机进程写入数据，甚至启动它们。</translation>
+        <translation>该功能可能会降低兼容性，因为它会阻止沙箱内的进程向主机进程进行写入操作，甚至启动它们。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="905"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation>阻止捕获沙箱中程序的窗口图像</translation>
+        <translation>阻止捕获沙箱化程序的窗口图像</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="906"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation>此功能可能造成用户体验的下降，因为它也阻止正常的屏幕截图。</translation>
+        <translation>此功能可能造成用户体验下降，因为它同样阻止正常的屏幕截图。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="911"/>
@@ -295,10 +265,6 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
         <location filename="Wizards/NewBoxWizard.cpp" line="928"/>
         <source>Append to the configuration</source>
         <translation>追加到配置中</translation>
-    </message>
-    <message>
-        <source>Use a shared local template</source>
-        <translation type="vanished">使用共享的本地模板</translation>
     </message>
     <message>
         <source>This setting adds a local template to the sandbox configuration so that the settings in that template are shared between sandboxes. However, some settings added to the template may not be reflected in the user interface.
@@ -438,7 +404,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
         <translation>警告：短密码非常容易被暴力破解！
-        推荐使用长度至少为 20 字符以上的密码。或者，您仍要使用短密码吗？</translation>
+        推荐使用长度至少为 20字符 以上的密码。或者，您仍要使用短密码吗？</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="150"/>
@@ -455,7 +421,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="167"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
-        <translation>磁盘映像大小至少为 256 MB，推荐设置为 2GB。</translation>
+        <translation>磁盘映像大小至少为 256MB，推荐设置为 2GB。</translation>
     </message>
 </context>
 <context>
@@ -482,8 +448,8 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
         <translation>沙箱可以将主机系统与在沙箱内运行的进程隔离开来，防止它们对计算机中的其它程序和数据进行永久性的更改。
-	隔离级别会影响您的安全性以及与应用程序的兼容性，因此根据所选的沙箱类型会有不同的隔离级别。
-	此外，Sandboxie 还可以保护你的个人数据不被受限制下运行的进程的访问。</translation>
+	隔离级别会影响您的安全性以及与应用程序的兼容性。因此，不同的沙箱类型会有不同的隔离级别。
+	此外，Sandboxie 还可以保护你的个人数据不被沙箱化的进程访问。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="346"/>
@@ -511,7 +477,7 @@ It strictly limits access to user data, allowing processes within this box to on
 The entire user profile remains hidden, ensuring maximum security.</oldsource>
         <translation>该沙箱类型通过显著减少暴露于沙箱内进程的攻击面，提供了最高级别的保护。
 它严格限制对用户数据的访问，该沙箱中的进程只能访问 C:\Windows and C:\Program Files 两个目录。
-所有的用户资料被完全隐藏，确保最大程度的安全性。</translation>
+所有的用户个人数据被完全隐藏，确保最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="405"/>
@@ -534,7 +500,7 @@ The entire user profile remains hidden, ensuring maximum security.</oldsource>
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
         <oldsource>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such,
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</oldsource>
-        <translation>在该沙箱类型中，任何沙箱内的进程都将被阻止访问任何用户文件和数据。 重点保护用户数据，因此沙箱内的进程只能访问 C:\Windows 和 C:\Program Files 两个目录，确保个人文件的安全。</translation>
+        <translation>在该沙箱类型中，沙箱内的进程将被阻止访问任何用户数据。 重点是保护用户个人数据。因此，沙箱内的进程只能访问 C:\Windows 和 C:\Program Files 两个目录，确保用户个人数据的安全。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="410"/>
@@ -593,17 +559,17 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="448"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>带有数据保护功能的加固型沙箱</translation>
+        <translation>具备数据保护功能的加固型沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="449"/>
         <source>Security Hardened Sandbox</source>
-        <translation>安全防护加固型沙箱</translation>
+        <translation>安全加固型沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="450"/>
         <source>Sandbox with Data Protection</source>
-        <translation>带有数据保护功能的沙箱</translation>
+        <translation>具备数据保护功能的沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
@@ -613,7 +579,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="453"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>带有数据保护功能的应用隔间</translation>
+        <translation>具备数据保护功能的应用程序隔离沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="454"/>
@@ -623,13 +589,13 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="455"/>
         <source>Confidential Encrypted Box</source>
-        <translation>带有加密功能的沙箱</translation>
+        <translation>具备加密功能的沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="580"/>
         <source>To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
         <oldsource>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</oldsource>
-        <translation>若要使用加密沙箱，需要安装 ImDisk 驱动，您要下载安装它吗？</translation>
+        <translation>若要使用具备加密功能的沙箱，需要安装 ImDisk 驱动，您要下载安装它吗？</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="473"/>
@@ -987,14 +953,6 @@ You can click Finish to close this wizard.</oldsource>
         <translation>感谢您使用 Sandboxie-Plus 的故障排除向导。对于在此过程中给您带来的不便，我们深表歉意。如果您有任何其他问题或需要进一步帮助，请随时联系。我们随时为你悉心服务。感谢您的理解与合作。
 
 您可以点击“完成”关闭此向导。</translation>
-    </message>
-    <message>
-        <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation.
-
-You can click Finish to close this wizard.</source>
-        <translation type="vanished">感谢您使用 Sandboxie-Plus 的故障排除向导。对于在此过程中给您带来的不便，我们深表歉意。如果您有任何其他问题或需要进一步帮助，请随时联系。我们随时为你悉心服务。感谢您的理解与合作。
-
-您可以单击“完成”关闭此向导。</translation>
     </message>
 </context>
 <context>
@@ -1805,37 +1763,6 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
 </context>
 <context>
-    <name>CNewBoxWindow</name>
-    <message>
-        <source>Sandboxie-Plus - Create New Box</source>
-        <translation type="vanished">Sandboxie-Plus - 新建沙箱</translation>
-    </message>
-    <message>
-        <source>Hardened Sandbox with Data Protection</source>
-        <translation type="vanished">带数据保护的加固型沙箱</translation>
-    </message>
-    <message>
-        <source>Security Hardened Sandbox</source>
-        <translation type="vanished">安全防护加固型沙箱</translation>
-    </message>
-    <message>
-        <source>Sandbox with Data Protection</source>
-        <translation type="vanished">带数据保护的沙箱</translation>
-    </message>
-    <message>
-        <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="vanished">标准隔离沙箱(默认)</translation>
-    </message>
-    <message>
-        <source>Application Compartment with Data Protection</source>
-        <translation type="vanished">带数据保护的应用隔间</translation>
-    </message>
-    <message>
-        <source>Application Compartment (NO Isolation)</source>
-        <translation type="vanished">应用隔间(无隔离防护)</translation>
-    </message>
-</context>
-<context>
     <name>CNewBoxWizard</name>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="34"/>
@@ -1846,7 +1773,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="77"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation>该沙箱的文件将会存储在加密的容器文件中，请注意：容器头的任何损坏都可能导致容器内文件不可读取（这等同于损坏硬盘的引导分区）。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙箱中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份不救济&lt;br /&gt;的形式提供，您需要自行为该加密沙箱中的文件承担一切风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担全部风险则请选择 [确认], 否则请选择 [取消]。</translation>
+        <translation>该沙箱的文件将会存储在加密的容器文件中，请注意：容器头文件的任何损坏都可能导致容器内文件不可读取。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙箱中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份不救济&lt;br /&gt;的形式提供，您需要自行为该加密沙箱中的文件承担一切风险。 &lt;br /&gt;&lt;br /&gt;如果您真的同意为该加密沙箱中的文件承担一切风险，那么请选择 [确认], 否则请选择 [取消]。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="112"/>
@@ -1911,7 +1838,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="476"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation>您是否想检查 Sandboxie-Plus 的版本更新？</translation>
+        <translation>您要检查 Sandboxie-Plus 的版本更新吗？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="477"/>
@@ -1921,7 +1848,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="504"/>
         <source>To ensure optimal compatibility with your software, Sandboxie needs to update its compatibility templates. Do you want to proceed?</source>
-        <translation>为了确保与软件的最佳兼容性，Sandboxie需要更新其兼容性模板。您想继续吗？</translation>
+        <translation>为了确保与软件的最佳兼容性，Sandboxie 需要更新其兼容性模板。您想继续吗？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="505"/>
@@ -1947,7 +1874,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="588"/>
         <source>Update Check completed, no new updates</source>
-        <translation>检查完成，暂无新的版本更新</translation>
+        <translation>检查完成，未发现更新</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="733"/>
@@ -2037,27 +1964,19 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>&lt;p&gt;Sandboxie-Plus 的更新已下载。&lt;/p&gt;&lt;p&gt;是否要安装更新？本操作需要终止所有沙箱中运行的程序。&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Failed to download file from: %1</source>
-        <translation type="vanished">未能从以下位置下载文件: %1</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="1066"/>
         <source>Downloading installer...</source>
         <translation>正在下载安装程序……</translation>
     </message>
     <message>
-        <source>Failed to download installer from: %1</source>
-        <translation type="vanished">从 %1 下载安装程序失败</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="1109"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;一个新的 Sandboxie-Plus 安装程序已被下载到以下位置：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否安装？本操作需要终止沙箱中运行的所有程序。&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;一个新版本的 Sandboxie-Plus 安装程序已被下载到：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否安装？本操作需要终止所有沙箱中运行的所有程序。&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1170"/>
         <source>There is a new Templates.ini available, do you want to download it?</source>
-        <translation>有一个新的Templates.ini可用，您想下载吗？</translation>
+        <translation>有一个新的 Templates.ini 可用，您想下载吗？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1220"/>
@@ -2318,7 +2237,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show only when title is in focus</source>
-        <translation>仅在标题栏获取焦点时显示</translation>
+        <translation>仅在标题栏处于焦点时显示</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
@@ -2328,17 +2247,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>带数据保护的加固型沙箱</translation>
+        <translation>具备数据保护的加固型沙箱</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Security Hardened Sandbox</source>
-        <translation>安全防护加固型沙箱</translation>
+        <translation>安全加固型沙箱</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Sandbox with Data Protection</source>
-        <translation>带数据保护功能的沙箱</translation>
+        <translation>具备数据保护功能的沙箱</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="66"/>
@@ -2348,11 +2267,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>带有数据保护功能的应用隔间</translation>
-    </message>
-    <message>
-        <source>Application Compartment (NO Isolation)</source>
-        <translation type="vanished">应用隔间(无隔离防护)</translation>
+        <translation>具备数据保护功能的应用程序隔离沙箱</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="23"/>

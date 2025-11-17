@@ -1102,142 +1102,142 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>驗證 INI 鍵值</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>No validation</source>
-        <translation type="unfinished"></translation>
+        <translation>無驗證</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>Full validation (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>完整驗證 (預設)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
         <source>Enable INI Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用 INI 工具提示</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>No tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>無工具提示</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Basic info (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>基本資訊 (預設)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>完整內容</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
         <source>Enable Popup Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用跳出式工具提示</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
         <source>Auto Completion Consent</source>
-        <translation type="unfinished"></translation>
+        <translation>同意啟用自動完成</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Not consented (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>未同意 (預設)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Consented</source>
-        <translation type="unfinished"></translation>
+        <translation>已同意</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
         <source>Enable Auto Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用自動完成</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Disabled (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>停用 (預設)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>手動</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>當輸入時</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用模糊比對</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Enabled</source>
-        <translation type="unfinished">啟用</translation>
+        <translation>已啟用</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯器設定</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>全部重設為預設值</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>重設全部設定至其預設值並移除自訂組態條目。</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>狀態</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>未選中</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>部分選中</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>已選中</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>重設</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
         <source>Reset this setting to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>重設此設定為預設值</translation>
     </message>
 </context>
 <context>
@@ -1925,7 +1925,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Views/NtObjectView.cpp" line="213"/>
         <source>%1 - NT Object Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - NT物件名稱空間</translation>
     </message>
 </context>
 <context>
@@ -1933,17 +1933,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="726"/>
         <source>Name</source>
-        <translation type="unfinished">名稱</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="727"/>
         <source>Type</source>
-        <translation type="unfinished">類型</translation>
+        <translation>類型</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="728"/>
         <source>Access</source>
-        <translation type="unfinished">存取</translation>
+        <translation>存取</translation>
     </message>
 </context>
 <context>
@@ -3133,12 +3133,12 @@ Please select a folder which contains this file.</source>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1771"/>
         <source>Autocomplete Consent Required</source>
-        <translation>需要同意啓用自動完成</translation>
+        <translation>需要同意啟用自動完成</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1773"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>自動完成功能需要您的同意以繼續。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1775"/>
@@ -3147,37 +3147,41 @@ Please select a folder which contains this file.</source>
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您不確定自動完成之跳出式視窗中顯示的設定，我們強烈建議您在繼續之前查閱此軟體的文件或原始碼。在沒有正確理解的情況下啟用此功能可能會導致預期外的後果，而您將對此承擔全部責任。
+
+選擇自動完成模式:
+%1 手動: 使用 %2 自動完成建議。
+%1 輸入時: 當輸入時自動完成建議。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1783"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>手動</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1784"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 %1 觸發自動完成建議。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1786"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入時</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1787"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>當輸入時觸發自動完成建議。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1790"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>保持自動完成建議為停用狀態。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1789"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -4829,7 +4833,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="592"/>
         <source>Auto Expand Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>自動展開樹狀結構</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1583"/>
@@ -5780,7 +5784,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="246"/>
         <location filename="Views/SbieView.cpp" line="383"/>
         <source>Browse NT Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽 NT 名稱空間</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="249"/>
@@ -6409,17 +6413,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>記住之前的狀態</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="259"/>
         <source>Expand all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>展開全部分組</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="260"/>
         <source>Collapse all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>摺疊全部分組</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="262"/>
@@ -7060,12 +7064,12 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3358"/>
         <source>Autocomplete Consent Required</source>
-        <translation>需要同意啓用自動完成</translation>
+        <translation>需要同意啟用自動完成</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3360"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>自動完成功能需要您的同意以繼續。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3362"/>
@@ -7074,37 +7078,41 @@ Right-click to copy</oldsource>
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您不確定自動完成之跳出式視窗中顯示的設定，我們強烈建議您在繼續之前查閱此軟體的文件或原始碼。在沒有正確理解的情況下啟用此功能可能會導致預期外的後果，而您將對此承擔全部責任。
+
+選擇自動完成模式:
+%1 手動: 使用 %2 自動完成建議。
+%1 輸入時: 當輸入時自動完成建議。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3370"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>手動</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3371"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 %1 觸發自動完成建議。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3373"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入時</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3374"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>當輸入時觸發自動完成建議。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3377"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>保持自動完成建議為停用狀態。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3376"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -8152,12 +8160,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯器設定</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;調整編輯器設定&lt;/span&gt;&lt;/p&gt;&lt;p&gt;使用表格中的核取方塊以調整各個設定。表格會展示各個狀態之含義。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -10072,7 +10080,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="325"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alpha 通道</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3985"/>
@@ -10087,7 +10095,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4417"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation>重新啟動曾在 PCA (程式相容性助理) 工作物件中啟動的強制處理程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4973"/>
@@ -10279,10 +10287,10 @@ instead of &quot;*&quot;.</source>
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body&gt;
-        &lt;b&gt;自動補全 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;自動補全&lt;/u&gt;: 在輸入3個或以上字元時彈出建議&lt;br&gt;
+        &lt;b&gt;自動完成 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;自動完成&lt;/u&gt;: 在輸入3個或以上字元時彈出建議&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 從跳出視窗中選擇以&lt;u&gt;自動套用&lt;/u&gt;正確的大小寫&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Enter/Return&lt;/code&gt; 確認選擇&lt;br&gt;
         &lt;br&gt;
@@ -10290,7 +10298,7 @@ instead of &quot;*&quot;.</source>
         &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Ctrl+R&lt;/code&gt; 將跳出提示以進行大小寫修正&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 自動補全 + 大小寫修正&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 自動完成 + 大小寫修正&lt;br&gt;
         ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;: 僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;導覽:&lt;/b&gt;&lt;br&gt;
@@ -10309,12 +10317,12 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6192"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯器設定</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6195"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <source>Show detailed information tooltips when hovering over configuration settings.
@@ -11276,7 +11284,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="2329"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">為選取的 Win32k 系統呼叫進行勾點以啟用 GPU 加速 (實驗性)</translation>
+        <translation>為選取的 Win32k 系統呼叫進行勾點以啟用 GPU 加速 (Chrome, Firefox 和其他瀏覽器必需)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="154"/>
@@ -11620,7 +11628,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1153"/>
         <source>Group state on start</source>
-        <translation type="unfinished"></translation>
+        <translation>啟動時分組狀態</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1389"/>
@@ -11641,7 +11649,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">使用 Sandboxie 自有增強型 UAC 提示視窗 (實驗性)</translation>
+        <translation>使用 Sandboxie 自有增強型 UAC 提示視窗 (建議使用)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2425"/>
@@ -11824,22 +11832,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
        • &lt;code&gt;Tab&lt;/code&gt;: Apply first or confirm selection&lt;br&gt;
     &lt;/body&gt;
 &lt;/html&gt;</oldsource>
-        <translation type="unfinished">&lt;html&gt;
+        <translation>&lt;html&gt;
     &lt;body&gt;
-        &lt;b&gt;自動補全 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
-        • &lt;u&gt;自動補全&lt;/u&gt;: 在輸入3個或以上字元時彈出建議&lt;br&gt;
-        &amp;nbsp;&amp;nbsp;→ 從跳出視窗中選擇以&lt;u&gt;自動套用&lt;/u&gt;正確的大小寫&lt;br&gt;
+        &lt;b&gt;自動完成 &amp; 大小寫修正&lt;/b&gt;&lt;br&gt;
+        • &lt;u&gt;自動完成&lt;/u&gt;: 在輸入3個或以上字元時彈出建議&lt;br&gt;
+        &amp;nbsp;&amp;nbsp;→ 從跳出式視窗中選擇以&lt;u&gt;自動套用&lt;/u&gt;正確的大小寫&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Enter/Return&lt;/code&gt; 確認選擇&lt;br&gt;
         &lt;br&gt;
         • &lt;u&gt;手動修正&lt;/u&gt;: 在輸入設定後=&lt;br&gt;
         &amp;nbsp;&amp;nbsp;→ 按下 &lt;code&gt;Ctrl+R&lt;/code&gt; 將跳出提示以進行大小寫修正&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;模式:&lt;/b&gt;&lt;br&gt;
-        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 自動補全 + 大小寫修正&lt;br&gt;
+        ✓ &lt;span style=&quot;color: #009900;&quot;&gt;已選中&lt;/span&gt;: 自動完成 + 大小寫修正&lt;br&gt;
         ◐ &lt;span style=&quot;color: #BE4C00;&quot;&gt;部分選中&lt;/span&gt;: 僅手動 &lt;code&gt;Ctrl+R&lt;/code&gt; 修正&lt;br&gt;
         &lt;br&gt;
         &lt;b&gt;導覽:&lt;/b&gt;&lt;br&gt;
-        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在跳出視窗中移動&lt;br&gt;
+        • &lt;code&gt;↑/↓/PgUp/PgDn&lt;/code&gt;: 在跳出式視窗中移動&lt;br&gt;
         • &lt;code&gt;Enter/Return&lt;/code&gt;: 確認選擇&lt;br&gt;
         • &lt;code&gt;Ctrl+Space&lt;/code&gt;: 強制開啟建議&lt;br&gt;
         • &lt;code&gt;Tab&lt;/code&gt;: 套用首個或確認選擇&lt;br&gt;
@@ -11854,12 +11862,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3252"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯器設定</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3255"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <source>Show detailed information tooltips when hovering over configuration settings.

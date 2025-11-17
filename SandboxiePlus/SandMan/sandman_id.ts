@@ -2008,8 +2008,8 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <location filename="Windows/OptionsWindow.cpp" line="1319"/>
         <location filename="Windows/OptionsAccess.cpp" line="417"/>
         <location filename="Windows/OptionsAccess.cpp" line="649"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="948"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1022"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="954"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1028"/>
         <location filename="Windows/OptionsGeneral.cpp" line="645"/>
         <location filename="Windows/OptionsGeneral.cpp" line="741"/>
         <location filename="Windows/OptionsNetwork.cpp" line="630"/>
@@ -2060,7 +2060,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="998"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1004"/>
         <location filename="Windows/OptionsGeneral.cpp" line="712"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
@@ -2074,175 +2074,175 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation>Nilai template tidak dapat dihapus.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="63"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="64"/>
         <source>Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.</source>
         <translation>Aktifkan penggunaan hook win32 untuk proses yang dipilih. Catatan: Anda perlu mengaktifkan dukungan hook syscall win32k secara global terlebih dahulu.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="64"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="65"/>
         <source>Enable crash dump creation in the sandbox folder</source>
         <translation>Aktifkan pembuatan crash dump di folder sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="65"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="66"/>
         <source>Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.</source>
         <translation>Selalu gunakan perbaikan ElevateCreateProcess, seperti yang kadang diterapkan oleh Program Compatibility Assistant.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="67"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="68"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
         <translation>Aktifkan perilaku PreferExternalManifest khusus yang tidak konsisten, sesuai kebutuhan untuk beberapa perbaikan Edge</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="68"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="69"/>
         <source>Set RpcMgmtSetComTimeout usage for specific processes</source>
         <translation>Atur penggunaan RpcMgmtSetComTimeout untuk layanan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="69"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="70"/>
         <source>Makes a write open call to a file that won&apos;t be copied fail instead of turning it read-only.</source>
         <translation>Membuat panggilan buka tulis ke file yang tidak akan disalin menjadi gagal, alih-alih mengubahnya menjadi hanya-baca.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="72"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="73"/>
         <source>Make specified processes think they have admin permissions.</source>
         <oldsource>Make specified processes think thay have admin permissions.</oldsource>
         <translation>Membuat proses tertentu berpikir bahwa mereka memiliki izin admin.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="73"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="74"/>
         <source>Force specified processes to wait for a debugger to attach.</source>
         <translation>Paksa proses yang ditentukan untuk menunggu debugger terpasang.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="75"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="76"/>
         <source>Sandbox file system root</source>
         <translation>Root sistem file sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="76"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="77"/>
         <source>Sandbox registry root</source>
         <translation>Root registri sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="77"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="78"/>
         <source>Sandbox ipc root</source>
         <translation>Root ipc sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="161"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="162"/>
         <source>Name|Type|Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="779"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="788"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="782"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="791"/>
         <source>bytes (unlimited)</source>
         <translation>byte (tidak terbatas)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="782"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="791"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="785"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="794"/>
         <source>bytes (%1)</source>
         <translation>byte (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="797"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="800"/>
         <source>unlimited</source>
         <translation>tidak terbatas</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="969"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="975"/>
         <source>Add special option:</source>
         <translation>Tambahkan opsi khusus:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1117"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1121"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1123"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1127"/>
         <source>On Start</source>
         <translation>Saat Mulai</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1118"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1126"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1130"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1134"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1138"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1124"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1132"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1136"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1140"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1144"/>
         <source>Run Command</source>
         <translation>Jalankan Perintah</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1122"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1128"/>
         <source>Start Service</source>
         <translation>Mulai Layanan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1125"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1131"/>
         <source>On Init</source>
         <translation>Saat Inisialisasi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1129"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1135"/>
         <source>On File Recovery</source>
         <translation>Saat Pemulihan Berkas</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1133"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1139"/>
         <source>On Delete Content</source>
         <translation>Saat Menghapus Konten</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1137"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1143"/>
         <source>On Terminate</source>
         <translation>Saat Dihentikan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1151"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1171"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1181"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1191"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1201"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1157"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1177"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1187"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1197"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1207"/>
         <source>Please enter the command line to be executed</source>
         <translation>Silakan masukkan baris perintah yang akan dijalankan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1235"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1241"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
         <translation>Silakan masukkan nama file program untuk mengizinkan akses ke kotak pasir ini</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1246"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1252"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
         <translation>Harap masukkan nama file program untuk menolak akses ke kotak pasir ini</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1326"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1332"/>
         <source>Deny</source>
         <translation>Tolak</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1429"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1435"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1484"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1490"/>
         <source>Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1485"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1491"/>
         <source>Template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1536"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1542"/>
         <source>Failed to retrieve firmware table information.</source>
         <translation>Gagal mengambil informasi tabel firmware.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1544"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1550"/>
         <source>Firmware table saved successfully to host registry: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;you can copy it to the sandboxed registry to have a different value for each box.</source>
         <translation>Tabel firmware berhasil disimpan ke registri host: HKEY_CURRENT_USER\System\SbieCustom&lt;br /&gt;Anda dapat menyalinnya ke registri sandbox untuk memiliki nilai yang berbeda di setiap kotak.</translation>
     </message>
@@ -2519,7 +2519,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation>Header Citra Dipulihkan</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1161"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1167"/>
         <source>Please enter a service identifier</source>
         <translation>Silakan masukkan pengenal layanan</translation>
     </message>
@@ -2624,7 +2624,7 @@ Catatan: Pemeriksaan pembaruan seringkali tertinggal dari rilis GitHub terbaru u
         <translation type="vanished"> entri: Alamat harus berupa IP, bukan nama host</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1326"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1332"/>
         <location filename="Windows/OptionsNetwork.cpp" line="328"/>
         <location filename="Windows/OptionsNetwork.cpp" line="744"/>
         <source>Allow</source>
@@ -7902,10 +7902,10 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <location filename="Forms/OptionsWindow.ui" line="3555"/>
         <location filename="Forms/OptionsWindow.ui" line="4183"/>
         <location filename="Forms/OptionsWindow.ui" line="4299"/>
-        <location filename="Forms/OptionsWindow.ui" line="4497"/>
-        <location filename="Forms/OptionsWindow.ui" line="5664"/>
-        <location filename="Forms/OptionsWindow.ui" line="5765"/>
-        <location filename="Forms/OptionsWindow.ui" line="5906"/>
+        <location filename="Forms/OptionsWindow.ui" line="4504"/>
+        <location filename="Forms/OptionsWindow.ui" line="5671"/>
+        <location filename="Forms/OptionsWindow.ui" line="5772"/>
+        <location filename="Forms/OptionsWindow.ui" line="5913"/>
         <source>Name</source>
         <translation></translation>
     </message>
@@ -7939,11 +7939,11 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <location filename="Forms/OptionsWindow.ui" line="3850"/>
         <location filename="Forms/OptionsWindow.ui" line="4221"/>
         <location filename="Forms/OptionsWindow.ui" line="4307"/>
-        <location filename="Forms/OptionsWindow.ui" line="4632"/>
-        <location filename="Forms/OptionsWindow.ui" line="4721"/>
-        <location filename="Forms/OptionsWindow.ui" line="5062"/>
-        <location filename="Forms/OptionsWindow.ui" line="5257"/>
-        <location filename="Forms/OptionsWindow.ui" line="5746"/>
+        <location filename="Forms/OptionsWindow.ui" line="4639"/>
+        <location filename="Forms/OptionsWindow.ui" line="4728"/>
+        <location filename="Forms/OptionsWindow.ui" line="5069"/>
+        <location filename="Forms/OptionsWindow.ui" line="5264"/>
+        <location filename="Forms/OptionsWindow.ui" line="5753"/>
         <source>Remove</source>
         <translation>Hapus</translation>
     </message>
@@ -7955,7 +7955,7 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <location filename="Forms/OptionsWindow.ui" line="3085"/>
         <location filename="Forms/OptionsWindow.ui" line="3205"/>
         <location filename="Forms/OptionsWindow.ui" line="3279"/>
-        <location filename="Forms/OptionsWindow.ui" line="5669"/>
+        <location filename="Forms/OptionsWindow.ui" line="5676"/>
         <source>Type</source>
         <translation>Tipe</translation>
     </message>
@@ -8012,9 +8012,9 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <location filename="Forms/OptionsWindow.ui" line="3727"/>
         <location filename="Forms/OptionsWindow.ui" line="4214"/>
         <location filename="Forms/OptionsWindow.ui" line="4321"/>
-        <location filename="Forms/OptionsWindow.ui" line="4668"/>
-        <location filename="Forms/OptionsWindow.ui" line="4901"/>
-        <location filename="Forms/OptionsWindow.ui" line="4972"/>
+        <location filename="Forms/OptionsWindow.ui" line="4675"/>
+        <location filename="Forms/OptionsWindow.ui" line="4908"/>
+        <location filename="Forms/OptionsWindow.ui" line="4979"/>
         <source>Show Templates</source>
         <translation>Tampilkan Template</translation>
     </message>
@@ -8328,43 +8328,43 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <translation>Konfigurasikan proses mana yang dapat mengakses objek Desktop seperti Windows dan sejenisnya.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4366"/>
+        <location filename="Forms/OptionsWindow.ui" line="4400"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
         <translation>Ketika hotkey global ditekan 3 kali secara berurutan dalam waktu singkat, pengecualian ini akan diabaikan.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4369"/>
+        <location filename="Forms/OptionsWindow.ui" line="4403"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
         <translation>Kecualikan sandbox ini dari penghentian saat &quot;Hentikan Semua Proses&quot; dijalankan.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4483"/>
+        <location filename="Forms/OptionsWindow.ui" line="4490"/>
         <source>Image Protection</source>
         <translation>Perlindungan Citra</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4521"/>
+        <location filename="Forms/OptionsWindow.ui" line="4528"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>Tampilkan pesan 1305 saat program mencoba memuat dll dalam sandbox</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4514"/>
+        <location filename="Forms/OptionsWindow.ui" line="4521"/>
         <source>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</source>
         <oldsource>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</oldsource>
         <translation>Cegah program sandbox yang diinstal di host memuat DLL dari sandbox</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4453"/>
+        <location filename="Forms/OptionsWindow.ui" line="4460"/>
         <source>Dlls &amp;&amp; Extensions</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4502"/>
+        <location filename="Forms/OptionsWindow.ui" line="4509"/>
         <source>Description</source>
         <translation>Deskripsi</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4510"/>
+        <location filename="Forms/OptionsWindow.ui" line="4517"/>
         <source>Sandboxie&apos;s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. &apos;ClosedFilePath=!iexplore.exe,C:Users*&apos; will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the &quot;Access policies&quot; page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <oldsource>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
@@ -8373,7 +8373,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 Ini dilakukan untuk mencegah proses jahat di dalam sandbox membuat salinan dirinya sendiri dengan nama lain dan mengakses sumber daya yang dilindungi. Vektor eksploitasi lain adalah injeksi pustaka ke dalam proses yang diizinkan untuk mendapatkan akses ke semua yang dapat diaksesnya. Dengan menggunakan Host Image Protection, hal ini dapat dicegah dengan memblokir aplikasi (yang diinstal di host) yang berjalan di dalam sandbox agar tidak memuat pustaka dari sandbox itu sendiri.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4534"/>
+        <location filename="Forms/OptionsWindow.ui" line="4541"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
         <translation>Fungsionalitas Sandboxie dapat ditingkatkan dengan menggunakan DLL opsional yang dapat dimuat ke setiap proses sandbox saat dimulai oleh file SbieDll.dll. Manajer add-on di pengaturan global menawarkan beberapa ekstensi yang berguna, setelah diinstal, ekstensi tersebut dapat diaktifkan di sini untuk kotak saat ini.</translation>
@@ -8721,7 +8721,12 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <translation>Tambah Aturan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6041"/>
+        <location filename="Forms/OptionsWindow.ui" line="4417"/>
+        <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="6048"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         Displays detailed tooltips when hovering over settings.&lt;br&gt;
@@ -8757,7 +8762,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6109"/>
+        <location filename="Forms/OptionsWindow.ui" line="6116"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;b&gt;Auto-Completion &amp; Case Correction&lt;/b&gt;&lt;br&gt;
@@ -8803,27 +8808,27 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6132"/>
+        <location filename="Forms/OptionsWindow.ui" line="6139"/>
         <source>Complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6185"/>
+        <location filename="Forms/OptionsWindow.ui" line="6192"/>
         <source>Editor settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6188"/>
+        <location filename="Forms/OptionsWindow.ui" line="6195"/>
         <source>⚙</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6059"/>
+        <location filename="Forms/OptionsWindow.ui" line="6066"/>
         <source>Tooltips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6142"/>
+        <location filename="Forms/OptionsWindow.ui" line="6149"/>
         <source>&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;When enabled, settings will be checked and highlighted based on the INI file. Turn off to disable checking and highlighting.&lt;/p&gt;
@@ -8855,7 +8860,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6159"/>
+        <location filename="Forms/OptionsWindow.ui" line="6166"/>
         <source>Validate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8869,7 +8874,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <location filename="Forms/OptionsWindow.ui" line="3699"/>
         <location filename="Forms/OptionsWindow.ui" line="3805"/>
         <location filename="Forms/OptionsWindow.ui" line="3934"/>
-        <location filename="Forms/OptionsWindow.ui" line="4655"/>
+        <location filename="Forms/OptionsWindow.ui" line="4662"/>
         <source>Program</source>
         <translation>Program</translation>
     </message>
@@ -8877,7 +8882,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <location filename="Forms/OptionsWindow.ui" line="680"/>
         <location filename="Forms/OptionsWindow.ui" line="1641"/>
         <location filename="Forms/OptionsWindow.ui" line="3704"/>
-        <location filename="Forms/OptionsWindow.ui" line="4808"/>
+        <location filename="Forms/OptionsWindow.ui" line="4815"/>
         <source>Action</source>
         <translation>Aksi</translation>
     </message>
@@ -9110,12 +9115,12 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <translation>Saat fungsi Pemulihan Cepat dijalankan, folder berikut akan diperiksa untuk konten sandbox. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4577"/>
+        <location filename="Forms/OptionsWindow.ui" line="4584"/>
         <source>Advanced Options</source>
         <translation>Opsi Lanjutan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4593"/>
+        <location filename="Forms/OptionsWindow.ui" line="4600"/>
         <source>Miscellaneous</source>
         <translation>Lain-lain</translation>
     </message>
@@ -9137,7 +9142,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <location filename="Forms/OptionsWindow.ui" line="1804"/>
         <location filename="Forms/OptionsWindow.ui" line="1947"/>
         <location filename="Forms/OptionsWindow.ui" line="1993"/>
-        <location filename="Forms/OptionsWindow.ui" line="4480"/>
+        <location filename="Forms/OptionsWindow.ui" line="4487"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>Lindungi integritas sandbox itu sendiri</translation>
     </message>
@@ -9158,7 +9163,7 @@ Untuk menentukan proses, gunakan &apos;$:program.exe&apos; sebagai path.</transl
         <translation>Lindungi proses SYSTEM dalam sandbox dari proses tanpa hak istimewa</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4423"/>
+        <location filename="Forms/OptionsWindow.ui" line="4410"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>Paksa penggunaan file Manifest dummy khusus (perilaku lama)</translation>
     </message>
@@ -9211,7 +9216,7 @@ Tingkat kecocokan proses memiliki prioritas lebih tinggi daripada spesifisitas d
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4351"/>
-        <location filename="Forms/OptionsWindow.ui" line="4416"/>
+        <location filename="Forms/OptionsWindow.ui" line="4372"/>
         <source>Compatibility</source>
         <translation>Kompatibilitas</translation>
     </message>
@@ -9221,7 +9226,7 @@ Tingkat kecocokan proses memiliki prioritas lebih tinggi daripada spesifisitas d
         <translation>Tambahkan proses sandbox ke objek job (disarankan)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4430"/>
+        <location filename="Forms/OptionsWindow.ui" line="4379"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>Emulasikan window station sandbox untuk semua proses</translation>
     </message>
@@ -9252,7 +9257,7 @@ Tingkat kecocokan proses memiliki prioritas lebih tinggi daripada spesifisitas d
         <translation>Izinkan membaca memori proses di luar sandbox (tidak disarankan)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4376"/>
+        <location filename="Forms/OptionsWindow.ui" line="4437"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>Nonaktifkan penggunaan RpcMgmtSetComTimeout secara default (ini mungkin dapat mengatasi masalah kompatibilitas)</translation>
     </message>
@@ -9277,41 +9282,41 @@ Tingkat kecocokan proses memiliki prioritas lebih tinggi daripada spesifisitas d
         <translation>Opsi-opsi di bawah ini dapat digunakan dengan aman jika Anda tidak memberikan hak admin.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4691"/>
+        <location filename="Forms/OptionsWindow.ui" line="4698"/>
         <source>Triggers</source>
         <translation>Pemicu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4803"/>
+        <location filename="Forms/OptionsWindow.ui" line="4810"/>
         <source>Event</source>
         <translation>Peristiwa</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4753"/>
-        <location filename="Forms/OptionsWindow.ui" line="4894"/>
-        <location filename="Forms/OptionsWindow.ui" line="4939"/>
-        <location filename="Forms/OptionsWindow.ui" line="4958"/>
+        <location filename="Forms/OptionsWindow.ui" line="4760"/>
+        <location filename="Forms/OptionsWindow.ui" line="4901"/>
+        <location filename="Forms/OptionsWindow.ui" line="4946"/>
+        <location filename="Forms/OptionsWindow.ui" line="4965"/>
         <source>Run Command</source>
         <translation>Jalankan Perintah</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4920"/>
+        <location filename="Forms/OptionsWindow.ui" line="4927"/>
         <source>Start Service</source>
         <translation>Mulai Layanan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4866"/>
+        <location filename="Forms/OptionsWindow.ui" line="4873"/>
         <source>These events are executed each time a box is started</source>
         <translation>Peristiwa-peristiwa ini dijalankan setiap kali sebuah沙盒启动</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4869"/>
+        <location filename="Forms/OptionsWindow.ui" line="4876"/>
         <source>On Box Start</source>
         <translation>Saat Kotak Dimulai</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4728"/>
-        <location filename="Forms/OptionsWindow.ui" line="4786"/>
+        <location filename="Forms/OptionsWindow.ui" line="4735"/>
+        <location filename="Forms/OptionsWindow.ui" line="4793"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>Perintah-perintah ini dijalankan di luar沙盒 tepat sebelum konten kotak dihapus</translation>
     </message>
@@ -9321,27 +9326,27 @@ Tingkat kecocokan proses memiliki prioritas lebih tinggi daripada spesifisitas d
         <translation>Izinkan penggunaan objek job bertingkat (berfungsi di Windows 8 ke atas)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4760"/>
+        <location filename="Forms/OptionsWindow.ui" line="4767"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>Perintah-perintah ini hanya dijalankan saat sebuah沙盒初始化。Untuk menjalankannya lagi, konten kotak harus dihapus.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4763"/>
+        <location filename="Forms/OptionsWindow.ui" line="4770"/>
         <source>On Box Init</source>
         <translation>Saat Inisialisasi Kotak</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4834"/>
+        <location filename="Forms/OptionsWindow.ui" line="4841"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>Di sini Anda dapat menentukan tindakan yang akan dijalankan secara otomatis pada berbagai peristiwa kotak.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5069"/>
+        <location filename="Forms/OptionsWindow.ui" line="5076"/>
         <source>Add Process</source>
         <translation>Tambah Proses</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5032"/>
+        <location filename="Forms/OptionsWindow.ui" line="5039"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>Sembunyikan proses host dari proses yang berjalan di dalam sandbox.</translation>
     </message>
@@ -9356,43 +9361,43 @@ Tingkat kecocokan proses memiliki prioritas lebih tinggi daripada spesifisitas d
         <translation>Berbagai Opsi</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4359"/>
+        <location filename="Forms/OptionsWindow.ui" line="4393"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>Terapkan Solusi ElevateCreateProcess (perilaku lama)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4383"/>
+        <location filename="Forms/OptionsWindow.ui" line="4359"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>Gunakan solusi objek desktop untuk semua proses</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4891"/>
+        <location filename="Forms/OptionsWindow.ui" line="4898"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>Perintah ini akan dijalankan sebelum konten kotak dihapus</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4731"/>
+        <location filename="Forms/OptionsWindow.ui" line="4738"/>
         <source>On File Recovery</source>
         <translation>Saat Pemulihan File</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4856"/>
+        <location filename="Forms/OptionsWindow.ui" line="4863"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>Perintah ini akan dijalankan sebelum file dipulihkan dan path file akan diteruskan sebagai argumen pertama. Jika perintah ini mengembalikan nilai selain 0, pemulihan akan diblokir</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4859"/>
+        <location filename="Forms/OptionsWindow.ui" line="4866"/>
         <source>Run File Checker</source>
         <translation>Jalankan Pemeriksa File</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4789"/>
+        <location filename="Forms/OptionsWindow.ui" line="4796"/>
         <source>On Delete Content</source>
         <translation>Saat Menghapus Konten</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5055"/>
+        <location filename="Forms/OptionsWindow.ui" line="5062"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>Jangan izinkan proses sandbox melihat proses yang berjalan di kotak lain</translation>
     </message>
@@ -9403,27 +9408,27 @@ Tingkat kecocokan proses memiliki prioritas lebih tinggi daripada spesifisitas d
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1636"/>
-        <location filename="Forms/OptionsWindow.ui" line="4999"/>
+        <location filename="Forms/OptionsWindow.ui" line="5006"/>
         <source>Process</source>
         <translation>Proses</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5209"/>
+        <location filename="Forms/OptionsWindow.ui" line="5216"/>
         <source>Users</source>
         <translation>Pengguna</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5227"/>
+        <location filename="Forms/OptionsWindow.ui" line="5234"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>Batasi monitor Akses Sumber Daya hanya untuk administrator</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5234"/>
+        <location filename="Forms/OptionsWindow.ui" line="5241"/>
         <source>Add User</source>
         <translation>Tambah Pengguna</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5264"/>
+        <location filename="Forms/OptionsWindow.ui" line="5271"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -9432,7 +9437,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 Catatan: Pengaturan Program Paksa dan Folder Paksa untuk sandbox tidak berlaku untuk akun pengguna yang tidak dapat menggunakan sandbox.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4625"/>
+        <location filename="Forms/OptionsWindow.ui" line="4632"/>
         <source>Add Option</source>
         <translation>Tambah Opsi</translation>
     </message>
@@ -9442,97 +9447,97 @@ Catatan: Pengaturan Program Paksa dan Folder Paksa untuk sandbox tidak berlaku u
         <translation>Lewati IP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4639"/>
+        <location filename="Forms/OptionsWindow.ui" line="4646"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation>Di sini Anda dapat mengonfigurasi opsi lanjutan per proses untuk meningkatkan kompatibilitas dan/atau menyesuaikan perilaku sandbox.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4650"/>
+        <location filename="Forms/OptionsWindow.ui" line="4657"/>
         <source>Option</source>
         <translation>Opsi</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4821"/>
+        <location filename="Forms/OptionsWindow.ui" line="4828"/>
         <source>These commands are run UNBOXED after all processes in the sandbox have finished.</source>
         <translation>Perintah-perintah ini dijalankan di luar沙盒 setelah semua proses di dalam沙盒 selesai.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5093"/>
+        <location filename="Forms/OptionsWindow.ui" line="5100"/>
         <source>Privacy</source>
         <translation>Privasi</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5102"/>
+        <location filename="Forms/OptionsWindow.ui" line="5109"/>
         <source>Hide Firmware Information</source>
         <oldsource>Hide Firmware Informations</oldsource>
         <translation>Sembunyikan Informasi Firmware</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4979"/>
+        <location filename="Forms/OptionsWindow.ui" line="4986"/>
         <source>Some programs read system details through WMI (a Windows built-in database) instead of normal ways. For example, &quot;tasklist.exe&quot; could get full processes list through accessing WMI, even if &quot;HideOtherBoxes&quot; is used. Enable this option to stop this behaviour.</source>
         <oldsource>Some programs read system deatils through WMI(A Windows built-in database) instead of normal ways. For example,&quot;tasklist.exe&quot; could get full processes list even if &quot;HideOtherBoxes&quot; is opened through accessing WMI. Enable this option to stop these behaviour.</oldsource>
         <translation>Beberapa program membaca detail sistem melalui WMI (database bawaan Windows) alih-alih cara normal. Misalnya, &quot;tasklist.exe&quot; dapat memperoleh daftar proses lengkap melalui akses WMI, bahkan jika &quot;HideOtherBoxes&quot; digunakan. Aktifkan opsi ini untuk menghentikan perilaku tersebut.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4982"/>
+        <location filename="Forms/OptionsWindow.ui" line="4989"/>
         <source>Prevent sandboxed processes from accessing system details through WMI (see tooltip for more info)</source>
         <oldsource>Prevent sandboxed processes from accessing system deatils through WMI (see tooltip for more Info)</oldsource>
         <translation>Cegah proses sandbox mengakses detail sistem melalui WMI (lihat tooltip untuk info lebih lanjut)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5025"/>
+        <location filename="Forms/OptionsWindow.ui" line="5032"/>
         <source>Process Hiding</source>
         <translation>Penyembunyian Proses</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5169"/>
+        <location filename="Forms/OptionsWindow.ui" line="5176"/>
         <source>Use a custom Locale/LangID</source>
         <translation>Gunakan Locale/LangID khusus</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5162"/>
+        <location filename="Forms/OptionsWindow.ui" line="5169"/>
         <source>Data Protection</source>
         <translation>Perlindungan Data</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5136"/>
+        <location filename="Forms/OptionsWindow.ui" line="5143"/>
         <source>Dump the current Firmware Tables to HKCU\System\SbieCustom</source>
         <oldsource>Dump the current Firmare Tables to HKCU\System\SbieCustom</oldsource>
         <translation>Ekspor Tabel Firmware saat ini ke HKCU\System\SbieCustom</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5139"/>
+        <location filename="Forms/OptionsWindow.ui" line="5146"/>
         <source>Dump FW Tables</source>
         <translation>Ekspor Tabel FW</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5277"/>
+        <location filename="Forms/OptionsWindow.ui" line="5284"/>
         <source>Tracing</source>
         <translation>Pelacakan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5408"/>
+        <location filename="Forms/OptionsWindow.ui" line="5415"/>
         <source>Pipe Trace</source>
         <translation>Pelacakan Pipe</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5476"/>
+        <location filename="Forms/OptionsWindow.ui" line="5483"/>
         <source>API call Trace (traces all SBIE hooks)</source>
         <translation>Pelacakan Panggilan API (melacak semua hook SBIE)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5462"/>
+        <location filename="Forms/OptionsWindow.ui" line="5469"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>Catat semua SetError ke log jejak (menghasilkan banyak output)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5367"/>
+        <location filename="Forms/OptionsWindow.ui" line="5374"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>Catat Output Debug ke Log Jejak</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5429"/>
+        <location filename="Forms/OptionsWindow.ui" line="5436"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -9551,108 +9556,108 @@ Anda dapat menyesuaikan pencatatan menggunakan file ini dengan menentukan
 sebagai pengganti &quot;*&quot;.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5422"/>
+        <location filename="Forms/OptionsWindow.ui" line="5429"/>
         <source>File Trace</source>
         <translation>Pelacakan File</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5285"/>
+        <location filename="Forms/OptionsWindow.ui" line="5292"/>
         <source>Disable Resource Access Monitor</source>
         <translation>Nonaktifkan Monitor Akses Sumber Daya</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5292"/>
+        <location filename="Forms/OptionsWindow.ui" line="5299"/>
         <source>IPC Trace</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5326"/>
+        <location filename="Forms/OptionsWindow.ui" line="5333"/>
         <source>GUI Trace</source>
         <translation>Pelacakan GUI</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5388"/>
+        <location filename="Forms/OptionsWindow.ui" line="5395"/>
         <source>Resource Access Monitor</source>
         <translation>Monitor Akses Sumber Daya</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5340"/>
+        <location filename="Forms/OptionsWindow.ui" line="5347"/>
         <source>Access Tracing</source>
         <translation>Pelacakan Akses</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5374"/>
+        <location filename="Forms/OptionsWindow.ui" line="5381"/>
         <source>COM Class Trace</source>
         <translation>Pelacakan Kelas COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5469"/>
+        <location filename="Forms/OptionsWindow.ui" line="5476"/>
         <source>Key Trace</source>
         <translation>Pelacakan Kunci</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6018"/>
+        <location filename="Forms/OptionsWindow.ui" line="6025"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>Untuk mengimbangi perlindungan yang hilang, silakan lihat halaman pengaturan Drop Rights di grup pengaturan Pembatasan.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3588"/>
-        <location filename="Forms/OptionsWindow.ui" line="5347"/>
+        <location filename="Forms/OptionsWindow.ui" line="5354"/>
         <source>Network Firewall</source>
         <translation>Firewall Jaringan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5493"/>
+        <location filename="Forms/OptionsWindow.ui" line="5500"/>
         <source>Debug</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5543"/>
+        <location filename="Forms/OptionsWindow.ui" line="5550"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>PERINGATAN, opsi-opsi ini dapat menonaktifkan jaminan keamanan inti dan merusak keamanan sandbox!!!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5553"/>
+        <location filename="Forms/OptionsWindow.ui" line="5560"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>Opsi-opsi ini ditujukan untuk debug masalah kompatibilitas, jangan gunakan di lingkungan produksi. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5691"/>
+        <location filename="Forms/OptionsWindow.ui" line="5698"/>
         <source>App Templates</source>
         <translation>Template Aplikasi</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5721"/>
+        <location filename="Forms/OptionsWindow.ui" line="5728"/>
         <source>Filter Categories</source>
         <translation>Kategori Filter</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5795"/>
+        <location filename="Forms/OptionsWindow.ui" line="5802"/>
         <source>Text Filter</source>
         <translation>Filter Teks</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5785"/>
+        <location filename="Forms/OptionsWindow.ui" line="5792"/>
         <source>Add Template</source>
         <translation>Tambah Template</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5821"/>
+        <location filename="Forms/OptionsWindow.ui" line="5828"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Daftar ini berisi banyak template peningkat kompatibilitas sandbox</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5760"/>
+        <location filename="Forms/OptionsWindow.ui" line="5767"/>
         <source>Category</source>
         <translation>Kategori</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5860"/>
+        <location filename="Forms/OptionsWindow.ui" line="5867"/>
         <source>Template Folders</source>
         <translation>Folder Template</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5880"/>
+        <location filename="Forms/OptionsWindow.ui" line="5887"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -9661,9 +9666,9 @@ Please note that this values are currently user specific and saved globally for 
 Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan secara global untuk semua kotak.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4660"/>
-        <location filename="Forms/OptionsWindow.ui" line="5674"/>
-        <location filename="Forms/OptionsWindow.ui" line="5911"/>
+        <location filename="Forms/OptionsWindow.ui" line="4667"/>
+        <location filename="Forms/OptionsWindow.ui" line="5681"/>
+        <location filename="Forms/OptionsWindow.ui" line="5918"/>
         <source>Value</source>
         <translation>Nilai</translation>
     </message>
@@ -9695,27 +9700,27 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation>Batas Memori Proses Tunggal:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4390"/>
+        <location filename="Forms/OptionsWindow.ui" line="4386"/>
         <source>Restart force process before they begin to execute</source>
         <translation>Mulai ulang proses paksa sebelum mereka mulai berjalan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4824"/>
+        <location filename="Forms/OptionsWindow.ui" line="4831"/>
         <source>On Box Terminate</source>
         <translation>Saat Penghentian Kotak</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5109"/>
+        <location filename="Forms/OptionsWindow.ui" line="5116"/>
         <source>Hide Disk Serial Number</source>
         <translation>Sembunyikan Nomor Seri Disk</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5116"/>
+        <location filename="Forms/OptionsWindow.ui" line="5123"/>
         <source>Obfuscate known unique identifiers in the registry</source>
         <translation>Samarkan pengenal unik yang diketahui di registry</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5012"/>
+        <location filename="Forms/OptionsWindow.ui" line="5019"/>
         <source>Don&apos;t allow sandboxed processes to see processes running outside any boxes</source>
         <translation>Jangan izinkan proses sandbox melihat proses yang berjalan di luar kotak mana pun</translation>
     </message>
@@ -9750,112 +9755,112 @@ Harap perhatikan bahwa nilai ini saat ini bersifat khusus pengguna dan disimpan 
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4966"/>
+        <location filename="Forms/OptionsWindow.ui" line="4973"/>
         <source>Processes</source>
         <translation>Proses</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5076"/>
+        <location filename="Forms/OptionsWindow.ui" line="5083"/>
         <source>This option hides the registry path *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, allowing software installed on the host to be reinstalled in the sandbox. However, it does not hide software-specific files and folders. If the installer still encounters issues, you will need to define custom WriteFilePath entries to hide the relevant files on disk.</source>
         <translation>Opsi ini menyembunyikan path registry *\Software*\Microsoft\Windows\CurrentVersion\Uninstall\*, sehingga perangkat lunak yang terpasang di host dapat diinstal ulang di sandbox. Namun, ini tidak menyembunyikan file dan folder khusus perangkat lunak. Jika penginstal masih mengalami masalah, Anda perlu mendefinisikan entri WriteFilePath khusus untuk menyembunyikan file terkait di disk.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5079"/>
+        <location filename="Forms/OptionsWindow.ui" line="5086"/>
         <source>Hide the host software&apos;s uninstall key (see tooltip)</source>
         <translation>Sembunyikan kunci uninstall perangkat lunak host (lihat tooltip)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5149"/>
+        <location filename="Forms/OptionsWindow.ui" line="5156"/>
         <source>Hide Network Adapter MAC Address</source>
         <translation>Sembunyikan Alamat MAC Adapter Jaringan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5299"/>
+        <location filename="Forms/OptionsWindow.ui" line="5306"/>
         <source>DNS Request Logging</source>
         <translation>Pencatatan Permintaan DNS</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5319"/>
+        <location filename="Forms/OptionsWindow.ui" line="5326"/>
         <source>Trace function hooking by SbieDll</source>
         <translation>Pelacakan pengait fungsi oleh SbieDll</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5415"/>
+        <location filename="Forms/OptionsWindow.ui" line="5422"/>
         <source>Syscall Trace (creates a lot of output)</source>
         <translation>Pelacakan Syscall (menghasilkan banyak output)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5518"/>
+        <location filename="Forms/OptionsWindow.ui" line="5525"/>
         <source>Debug Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5595"/>
+        <location filename="Forms/OptionsWindow.ui" line="5602"/>
         <source>Config Dump</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5626"/>
+        <location filename="Forms/OptionsWindow.ui" line="5633"/>
         <source>No Templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5636"/>
+        <location filename="Forms/OptionsWindow.ui" line="5643"/>
         <source>No Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5646"/>
+        <location filename="Forms/OptionsWindow.ui" line="5653"/>
         <source>No Expand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5656"/>
+        <location filename="Forms/OptionsWindow.ui" line="5663"/>
         <source>Refresh</source>
         <translation type="unfinished">Segarkan</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5701"/>
+        <location filename="Forms/OptionsWindow.ui" line="5708"/>
         <source>Templates</source>
         <translation>Template</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5814"/>
+        <location filename="Forms/OptionsWindow.ui" line="5821"/>
         <source>Open Template</source>
         <translation>Buka Template</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5922"/>
+        <location filename="Forms/OptionsWindow.ui" line="5929"/>
         <source>Accessibility</source>
         <translation>Aksesibilitas</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5942"/>
+        <location filename="Forms/OptionsWindow.ui" line="5949"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Pembaca Layar: JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="5982"/>
+        <location filename="Forms/OptionsWindow.ui" line="5989"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>Pengaturan berikut memungkinkan penggunaan Sandboxie bersama perangkat lunak aksesibilitas. Harap dicatat bahwa beberapa perlindungan Sandboxie akan hilang saat pengaturan ini diaktifkan.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6035"/>
+        <location filename="Forms/OptionsWindow.ui" line="6042"/>
         <source>Edit ini Section</source>
         <translation>Edit Bagian ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6069"/>
+        <location filename="Forms/OptionsWindow.ui" line="6076"/>
         <source>Edit ini</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6095"/>
+        <location filename="Forms/OptionsWindow.ui" line="6102"/>
         <source>Cancel</source>
         <translation>Batal</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="6172"/>
+        <location filename="Forms/OptionsWindow.ui" line="6179"/>
         <source>Save</source>
         <translation>Simpan</translation>
     </message>

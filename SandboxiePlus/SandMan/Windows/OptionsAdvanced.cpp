@@ -205,7 +205,7 @@ void COptionsWindow::LoadAdvanced()
 	//ui.chkNotUntrusted->setChecked(m_pBox->GetBool("NoUntrustedToken", false));
 
 	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
-	ui.chkNoRestartOnPCA->setChecked(m_pBox->GetBool("NoRestartOnPCA", false));
+	ui.chkNoRestartOnPCA->setChecked(!m_pBox->GetBool("NoRestartOnPCA", false));
 
 	CheckOpenCOM();
 	ui.chkComTimeout->setChecked(!m_pBox->GetBool("RpcMgmtSetComTimeout", true));

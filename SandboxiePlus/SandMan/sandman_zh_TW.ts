@@ -9695,7 +9695,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="920"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
-        <translation>以下選項可以在您未授予管理員許可時安全的使用。</translation>
+        <translation>以下選項可以在您未授予管理員許可時安全地使用。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4698"/>
@@ -11857,7 +11857,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3186"/>
         <source>Complete</source>
-        <translation>完成</translation>
+        <translation>自動完成</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3252"/>

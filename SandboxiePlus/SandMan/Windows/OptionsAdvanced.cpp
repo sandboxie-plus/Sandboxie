@@ -470,7 +470,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 
 	WriteAdvancedCheck(ui.chkForceRestart, "ForceRestartAll", "y", "");
-	WriteAdvancedCheck(ui.chkNoRestartOnPCA, "NoRestartOnPCA", "y", "");
+	WriteAdvancedCheck(ui.chkNoRestartOnPCA, "NoRestartOnPCA", "", "y");
 
 	WriteAdvancedCheck(ui.chkNoSecurityIsolation, "NoSecurityIsolation", "y", "");
 	WriteAdvancedCheck(ui.chkNoSecurityFiltering, "NoSecurityFiltering", "y", "");

@@ -1814,7 +1814,7 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="64"/>
         <source>Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.</source>
-        <translation>Aktiviere die Verwendung von win32-Hooks für ausgewählte Prozesse. Hinweis: Sie müssen die win32k-Systemaufrufshookunterstützung erst global aktivieren.</translation>
+        <translation>Aktiviere die Verwendung von Win32k-Hooks für ausgewählte Prozesse. Hinweis: Sie müssen die Win32k-Systemaufrufshookunterstützung erst global aktivieren.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="65"/>
@@ -8893,7 +8893,7 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4417"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte erzwungene Prozesse neu, die innerhalb eines PCA-Job-Objekts (Program Compatibility Assistant) gestartet wurden</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6048"/>
@@ -9963,7 +9963,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2329"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
-        <translation>In ausgewählte Win32k-Systemaufrufe einklinken um (GPU-)Hardwarebeschleunigung zu ermöglichen (benötigt für Chrome, Firefox und mehr)</translation>
+        <translation>In ausgewählte Win32k-Systemaufrufe einklinken, um (GPU-)Hardwarebeschleunigung zu ermöglichen (benötigt für Chrome, Firefox und mehr)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1872"/>

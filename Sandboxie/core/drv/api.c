@@ -1244,18 +1244,12 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
         }
         else if (args->info_class.val == -1) {
 
-            if (args->info_len.val >= sizeof(ULONGLONG)) {
-                ULONGLONG* data = args->info_data.val;
-                ProbeForWrite(data, args->info_len.val, sizeof(ULONGLONG));
+            ProbeForWrite(args->info_data.val, args->info_len.val, sizeof(ULONG));
 
-                *data = Verify_CertInfo.State;
-            }
-            else if (args->info_len.val == sizeof(ULONG)) {
-                ULONG* data = args->info_data.val;
-                ProbeForWrite(data, args->info_len.val, sizeof(ULONG));
-
-                *data = (ULONG)(Verify_CertInfo.State & 0xFFFFFFFF); // drop optional data
-            }
+            if (args->info_len.val >= sizeof(ULONGLONG))
+                *((ULONGLONG*)args->info_data.val) = Verify_CertInfo.State;
+            else if (args->info_len.val == sizeof(ULONG))
+                *((ULONG*)args->info_data.val) = (ULONG)(Verify_CertInfo.State & 0xFFFFFFFF); // drop optional data
             else
                 status = STATUS_BUFFER_TOO_SMALL;
         }

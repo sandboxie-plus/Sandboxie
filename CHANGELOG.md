@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.16.8 / 5.71.8] - 2025-11-??
+
+### Fixed
+- fixed issue with SbieApi_QueryDrvInfo in 32 bit sbiedll.dll causing inpropper certificate warning
+
+
+
+
 ## [1.16.7 / 5.71.7] - 2025-11-16
 
 ### Added

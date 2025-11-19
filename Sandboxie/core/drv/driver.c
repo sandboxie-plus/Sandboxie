@@ -175,8 +175,9 @@ _FX NTSTATUS DriverEntry(
     IN  UNICODE_STRING *RegistryPath)
 {
     BOOLEAN ok = TRUE;
-
-	ExInitializeDriverRuntime(DrvRtPoolNxOptIn);
+    #if (NTDDI_VERSION >= NTDDI_WIN10)
+    ExInitializeDriverRuntime(DrvRtPoolNxOptIn);
+    #endif
 
     //
     // initialize global driver variables

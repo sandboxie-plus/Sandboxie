@@ -645,7 +645,7 @@ ULONG UserServer::OpenFile(WorkerArgs *args)
         return STATUS_ACCESS_DENIED;
     }
 
-    SCertInfo CertInfo = { 0 };
+    __declspec(align(8)) SCertInfo CertInfo = { 0 };
     if (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !(CertInfo.active && CertInfo.opt_enc)) {
         const WCHAR* strings[] = { boxname, L"EnableEFS", NULL };
         SbieApi_LogMsgExt(session_id, 6004, strings);

@@ -433,7 +433,7 @@ driver_started:
         BYTE CertBlocked = 0;
         SbieApi_Call(API_GET_SECURE_PARAM, 3, L"CertBlocked", &CertBlocked, sizeof(CertBlocked));
         if (CertBlocked) {
-            SCertInfo CertInfo = { 0 };
+            __declspec(align(8)) SCertInfo CertInfo = { 0 };
             if (NT_SUCCESS(status) && NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) && CertInfo.type != eCertEvaluation) {
                 CertBlocked = 0;
                 SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlocked", &CertBlocked, sizeof(CertBlocked));

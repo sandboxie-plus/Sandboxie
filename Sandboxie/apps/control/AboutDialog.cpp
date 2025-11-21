@@ -157,7 +157,7 @@ BOOL CAboutDialog::OnInitDialog()
     text.Format(L"%S\r\n%S", MY_COPYRIGHT_STRING, MY_COPYRIGHT_STRING_OLD);
     GetDlgItem(ID_ABOUT_COPYRIGHT)->SetWindowText(text);
 
-    SCertInfo CertInfo = { 0 };
+    __declspec(align(8)) SCertInfo CertInfo = { 0 };
     SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo));
     if (CertInfo.active)
         GetDlgItem(ID_ABOUT_INFO)->SetWindowText(CMyMsg(MSG_7988));

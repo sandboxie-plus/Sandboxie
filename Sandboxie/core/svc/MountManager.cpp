@@ -1124,7 +1124,7 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
 
     std::wstring TargetNtPath;
 
-    SCertInfo CertInfo = { 0 };
+    __declspec(align(8)) SCertInfo CertInfo = { 0 };
     if ((UseFileImage || UseRamDisk) && (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !(CertInfo.active && (UseFileImage ? CertInfo.opt_enc : CertInfo.opt_sec)))) {
         const WCHAR* strings[] = { boxname, UseFileImage ? L"UseFileImage" : L"UseRamDisk" , NULL };
         SbieApi_LogMsgExt(session_id, UseFileImage ? 6009 : 6008, strings);

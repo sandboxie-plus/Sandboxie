@@ -438,7 +438,7 @@ _FX int WSA_WSAStartup(
 
         WSA_ProxyEnabled = TRUE;
 
-        SCertInfo CertInfo = { 0 }; // experimental not yet for public
+        __declspec(align(8)) SCertInfo CertInfo = { 0 }; // experimental not yet for public
         if (NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) && (CertInfo.type == eCertDeveloper || CERT_IS_TYPE(CertInfo, eCertEternal)))
             WSA_ProxyThread = SbieApi_QueryConfBool(NULL, L"UseProxyThreads", FALSE);
 
@@ -2063,7 +2063,7 @@ _FX BOOLEAN WSA_InitNetProxy()
     // enable proxy and fail connections to prevent accidental ip leakage
     //
 
-    SCertInfo CertInfo = { 0 };
+    __declspec(align(8)) SCertInfo CertInfo = { 0 };
     if (!NT_SUCCESS(SbieApi_QueryDrvInfo(-1, &CertInfo, sizeof(CertInfo))) || !(CertInfo.active && CertInfo.opt_net)) {
 
         const WCHAR* strings[] = { L"NetworkUseProxy" , NULL };

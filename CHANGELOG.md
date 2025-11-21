@@ -9,8 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.16.8 / 5.71.8] - 2025-11-??
 
 ### Fixed
-- fixed issue with SbieApi_QueryDrvInfo in 32 bit sbiedll.dll causing inpropper certificate warning
-
+- fixed issue with SbieApi_QueryDrvInfo in 32-bit SbieDll.dll causing improper certificate warning
 
 
 
@@ -21,15 +20,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
-- improved named syscall invocation when using wow64
+- improved named syscall invocation when using WoW64
 
 ### Fixed
 - fixed 'OpenWndStation=y' not working with 'SandboxieAllGroup=y'
 - fixed missing parameter validation in SbieIniServer
 - fixed issue with certificate parsing
 - fixed an issue retrieving driver info
-- fixed Potential Handle Leak in SbieDll.dll Related to SbieApi_DeviceHandle [#5097](https://github.com/sandboxie-plus/Sandboxie/issues/5097)
-
+- fixed potential handle leak in SbieDll.dll related to SbieApi_DeviceHandle [#5097](https://github.com/sandboxie-plus/Sandboxie/issues/5097)
 
 
 
@@ -3840,7 +3838,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - terminated boxed processes are now kept listed for a couple of seconds
 - reworked sandbox deletion mechanism of the new UI
 - restructured sandbox options window
-- SbieDLL.dll can now be compiled with an up to date ntdll.lib (Thanks to TechLord from Team-IRA for help)
+- SbieDll.dll can now be compiled with an up to date ntdll.lib (Thanks to TechLord from Team-IRA for help)
 - improved automated driver self repair
 
 ### Fixed
@@ -3906,7 +3904,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - moved code injection mechanism from SbieSvc to SbieDll
 - moved function hooking mechanism from SbieDrv to SbieDll
-- introduced a new driverless method to resolve wow64 ntdll base address
+- introduced a new driverless method to resolve WoW64 ntdll base address
 
 ### Removed
 - removed support for Windows Vista x64

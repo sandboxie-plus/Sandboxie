@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.16.8 / 5.71.8] - 2025-11-??
 
+### Added
+- added file search/filter to file panel can be opened with Ctrl+F in the file panel
+
 ### Fixed
 - fixed issue with SbieApi_QueryDrvInfo in 32-bit SbieDll.dll causing improper certificate warning
 

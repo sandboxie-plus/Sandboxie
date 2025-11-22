@@ -169,22 +169,22 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="898"/>
         <source>Prevent sandboxed programs on the host from loading sandboxed DLLs</source>
         <oldsource>Prevent sandboxed programs installed on the host from loading DLLs from the sandbox</oldsource>
-        <translation>阻止主机上的沙箱化程序加载沙箱化的动态链接库(.dll)文件</translation>
+        <translation>阻止主机上的沙箱化程序加载沙箱内的动态链接库(.dll)文件</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="899"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <translation>该功能可能会降低兼容性，因为它会阻止沙箱内的进程向主机进程进行写入操作，甚至启动它们。</translation>
+        <translation>该功能可能会降低兼容性，因为它阻止沙箱内的进程向主机进程进行写入操作，甚至启动它们。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="905"/>
         <source>Prevent sandboxed windows from being captured</source>
-        <translation>阻止捕获沙箱化程序的窗口图像</translation>
+        <translation>阻止捕获沙箱中程序的窗口图像</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="906"/>
         <source>This feature can cause a decline in the user experience because it also prevents normal screenshots.</source>
-        <translation>此功能可能造成用户体验下降，因为它同样阻止正常的屏幕截图。</translation>
+        <translation>此功能可能造成用户体验下降，因为它也阻止正常的屏幕截图。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="911"/>
@@ -404,7 +404,7 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
         <translation>警告：短密码非常容易被暴力破解！
-        推荐使用长度至少为 20字符 以上的密码。或者，您仍要使用短密码吗？</translation>
+        推荐使用长度至少为 20 字符及以上的密码。或者，您仍要使用短密码吗？</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="150"/>
@@ -421,7 +421,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="167"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
-        <translation>磁盘映像大小至少为 256MB，推荐设置为 2GB。</translation>
+        <translation>磁盘映像大小至少为 256 MB，推荐设置为 2GB。</translation>
     </message>
 </context>
 <context>
@@ -442,14 +442,14 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="332"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation>沙箱将您的主机系统与沙箱内运行的进程隔离开来，防止它们对计算机中的其他程序和数据进行永久更改。</translation>
+        <translation>沙箱将您的主机系统与沙箱内运行的进程隔离，防止它们对计算机中的其他程序和数据进行永久更改。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>沙箱可以将主机系统与在沙箱内运行的进程隔离开来，防止它们对计算机中的其它程序和数据进行永久性的更改。
-	隔离级别会影响您的安全性以及与应用程序的兼容性。因此，不同的沙箱类型会有不同的隔离级别。
-	此外，Sandboxie 还可以保护你的个人数据不被沙箱化的进程访问。</translation>
+        <translation>沙箱可以将主机系统与沙箱内运行的进程隔离，防止它们对计算机中的其它程序和数据进行永久性的更改。
+	隔离级别会影响您的安全性以及与应用程序的兼容性。因此，不同类型沙箱的隔离级别不同。
+	此外，Sandboxie 还可以保护你的个人数据不被受限制下运行的进程访问。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="346"/>
@@ -477,7 +477,7 @@ It strictly limits access to user data, allowing processes within this box to on
 The entire user profile remains hidden, ensuring maximum security.</oldsource>
         <translation>该沙箱类型通过显著减少暴露于沙箱内进程的攻击面，提供了最高级别的保护。
 它严格限制对用户数据的访问，该沙箱中的进程只能访问 C:\Windows and C:\Program Files 两个目录。
-所有的用户个人数据被完全隐藏，确保最大程度的安全性。</translation>
+所有的个人数据被完全隐藏，确保最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="405"/>
@@ -487,7 +487,7 @@ The entire user profile remains hidden, ensuring maximum security.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="406"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
-        <translation>该沙箱类型提供了最高级别的保护，能显著减少暴露于沙箱内进程的攻击面。</translation>
+        <translation>该沙箱类型通过显著减少暴露于沙箱内进程的攻击面，提供了最高级别的保护。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
@@ -1773,7 +1773,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="77"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation>该沙箱的文件将会存储在加密的容器文件中，请注意：容器头文件的任何损坏都可能导致容器内文件不可读取。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙箱中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份不救济&lt;br /&gt;的形式提供，您需要自行为该加密沙箱中的文件承担一切风险。 &lt;br /&gt;&lt;br /&gt;如果您真的同意为该加密沙箱中的文件承担一切风险，那么请选择 [确认], 否则请选择 [取消]。</translation>
+        <translation>该沙箱的文件将会存储在加密的容器文件中，请注意：容器头文件的任何损坏都可能导致容器内文件不可读取。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙箱中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份不救济&lt;br /&gt;的形式提供，您需要自行为该加密沙箱中的文件承担一切风险。 &lt;br /&gt;&lt;br /&gt;如果您真的同意为您的数据承担一切风险，那么请选择 [确认], 否则请选择 [取消]。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="112"/>
@@ -1838,7 +1838,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="476"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation>您要检查 Sandboxie-Plus 的版本更新吗？</translation>
+        <translation>您要检查 Sandboxie-Plus 的更新吗？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="477"/>
@@ -1971,7 +1971,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="1109"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;一个新版本的 Sandboxie-Plus 安装程序已被下载到：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否安装？本操作需要终止所有沙箱中运行的所有程序。&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;一个新版本的 Sandboxie-Plus 安装程序已被下载到：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否安装？本操作将会终止沙箱中运行的所有程序。&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1170"/>
@@ -1998,7 +1998,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation>您的 Sandboxie-Plus 赞助者许可证已过期。您的许可证在当前版本中将保持有效。但当您进行更新后，赞助者独占功能将被禁用。
+        <translation>您的 Sandboxie-Plus 赞助者许可证已过期。您的许可证在当前版本中仍将有效。但当您进行更新后，赞助者独占功能将被禁用。
 
 您确定要进行更新吗？</translation>
     </message>

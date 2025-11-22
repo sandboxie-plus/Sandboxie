@@ -595,7 +595,7 @@ This ensures the utmost level of privacy and data protection within the confiden
         <location filename="Wizards/NewBoxWizard.cpp" line="580"/>
         <source>To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
         <oldsource>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</oldsource>
-        <translation>若要使用具备加密功能的沙箱，需要安装 ImDisk 驱动，您要下载安装它吗？</translation>
+        <translation>若要使用加密沙箱，需要安装 ImDisk 驱动，您要下载并安装它吗？</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="473"/>

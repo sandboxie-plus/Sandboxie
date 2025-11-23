@@ -1108,8 +1108,8 @@ void CSettingsWindow::AddContextMenu(bool bAlwaysClassic)
 	}
 
 	CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
-		CSettingsWindow::tr("Run &Sandboxed"), //CSettingsWindow::tr("Explore &Sandboxed"),
-			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+		CSettingsWindow::tr("Run &Sandboxed")/*, //CSettingsWindow::tr("Explore &Sandboxed"),
+			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe"*/);
 }
 
 void CSettingsWindow::RemoveContextMenu()
@@ -1729,8 +1729,8 @@ void CSettingsWindow::SaveSettings()
 	if (ui.chkShellMenu3->isChecked() != CSbieUtils::HasContextMenu3()) {
 		if (ui.chkShellMenu3->isChecked()) {
 			CSbieUtils::AddContextMenu3(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
-				tr("Set Force in Sandbox"),
-				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+				tr("Set Force in Sandbox")/*,
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe"*/);
 		}
 		else
 			CSbieUtils::RemoveContextMenu3();
@@ -1738,8 +1738,8 @@ void CSettingsWindow::SaveSettings()
 	if (ui.chkShellMenu4->isChecked() != CSbieUtils::HasContextMenu4()) {
 		if (ui.chkShellMenu4->isChecked()) {
 			CSbieUtils::AddContextMenu4(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
-				tr("Set Open Path in Sandbox"),
-				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+				tr("Set Open Path in Sandbox")/*,
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe"*/);
 		}
 		else
 			CSbieUtils::RemoveContextMenu4();

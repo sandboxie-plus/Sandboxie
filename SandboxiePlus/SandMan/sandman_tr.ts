@@ -1084,7 +1084,7 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="481"/>
+        <location filename="Views/FileView.cpp" line="748"/>
         <source>%1 - Files</source>
         <translation>%1 - Dosyalar</translation>
     </message>
@@ -1092,37 +1092,37 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="248"/>
+        <location filename="Views/FileView.cpp" line="513"/>
         <source>Create Shortcut</source>
         <translation>Kısayol Oluştur</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="271"/>
+        <location filename="Views/FileView.cpp" line="536"/>
         <source>Pin to Box Run Menu</source>
         <translation>Alanın Çalıştır Menüsüne Sabitle</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="278"/>
+        <location filename="Views/FileView.cpp" line="543"/>
         <source>Recover to Any Folder</source>
         <translation>Herhangi Bir Klasöre Kurtar</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="280"/>
+        <location filename="Views/FileView.cpp" line="545"/>
         <source>Recover to Same Folder</source>
         <translation>Aynı Klasöre Kurtar</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="284"/>
+        <location filename="Views/FileView.cpp" line="549"/>
         <source>Run Recovery Checks</source>
         <translation>Kurtarma Denetimlerini Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="367"/>
+        <location filename="Views/FileView.cpp" line="633"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="436"/>
+        <location filename="Views/FileView.cpp" line="702"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>%1 korumalı alanına kısayol oluştur</translation>
     </message>

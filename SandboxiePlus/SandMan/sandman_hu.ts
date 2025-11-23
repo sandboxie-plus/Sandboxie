@@ -1100,7 +1100,7 @@ A varázsló bezárásához kattintson a &quot;Befejezés&quot; gombra.</transla
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="481"/>
+        <location filename="Views/FileView.cpp" line="748"/>
         <source>%1 - Files</source>
         <translation>%1 - fájlok</translation>
     </message>
@@ -1108,37 +1108,37 @@ A varázsló bezárásához kattintson a &quot;Befejezés&quot; gombra.</transla
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="248"/>
+        <location filename="Views/FileView.cpp" line="513"/>
         <source>Create Shortcut</source>
         <translation>Parancsikon létrehozása</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="271"/>
+        <location filename="Views/FileView.cpp" line="536"/>
         <source>Pin to Box Run Menu</source>
         <translation>Rögzítés a homokozó &quot;Futtatás&quot; menühöz</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="278"/>
+        <location filename="Views/FileView.cpp" line="543"/>
         <source>Recover to Any Folder</source>
         <translation>Visszaállítás mappába</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="280"/>
+        <location filename="Views/FileView.cpp" line="545"/>
         <source>Recover to Same Folder</source>
         <translation>Visszaállítás ugyanabba a mappába</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="284"/>
+        <location filename="Views/FileView.cpp" line="549"/>
         <source>Run Recovery Checks</source>
         <translation>Helyreállítási ellenőrzések futtatása</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="367"/>
+        <location filename="Views/FileView.cpp" line="633"/>
         <source>Select Directory</source>
         <translation>Könyvtár kiválasztása</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="436"/>
+        <location filename="Views/FileView.cpp" line="702"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Parancsikon létrehozása %1 sandboxhoz</translation>
     </message>

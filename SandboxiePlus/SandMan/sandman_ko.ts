@@ -1247,7 +1247,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="481"/>
+        <location filename="Views/FileView.cpp" line="748"/>
         <source>%1 - Files</source>
         <translation>%1 - 파일</translation>
     </message>
@@ -1255,37 +1255,37 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="248"/>
+        <location filename="Views/FileView.cpp" line="513"/>
         <source>Create Shortcut</source>
         <translation>바로가기 만들기</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="271"/>
+        <location filename="Views/FileView.cpp" line="536"/>
         <source>Pin to Box Run Menu</source>
         <translation>박스 실행 메뉴에 고정</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="278"/>
+        <location filename="Views/FileView.cpp" line="543"/>
         <source>Recover to Any Folder</source>
         <translation>임의의 폴더로 복구</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="280"/>
+        <location filename="Views/FileView.cpp" line="545"/>
         <source>Recover to Same Folder</source>
         <translation>동일한 폴더로 복구</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="284"/>
+        <location filename="Views/FileView.cpp" line="549"/>
         <source>Run Recovery Checks</source>
         <translation>복구 검사 실행</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="367"/>
+        <location filename="Views/FileView.cpp" line="633"/>
         <source>Select Directory</source>
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="436"/>
+        <location filename="Views/FileView.cpp" line="702"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>sandbox %1로 바로가기 만들기</translation>
     </message>

@@ -1100,7 +1100,7 @@ Anda dapat mengklik Selesai untuk menutup panduan ini.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="481"/>
+        <location filename="Views/FileView.cpp" line="748"/>
         <source>%1 - Files</source>
         <translation>%1 - Berkas</translation>
     </message>
@@ -1108,37 +1108,37 @@ Anda dapat mengklik Selesai untuk menutup panduan ini.</translation>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="248"/>
+        <location filename="Views/FileView.cpp" line="513"/>
         <source>Create Shortcut</source>
         <translation>Buat Pintasan</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="271"/>
+        <location filename="Views/FileView.cpp" line="536"/>
         <source>Pin to Box Run Menu</source>
         <translation>Sematkan ke Menu Jalankan Kotak</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="278"/>
+        <location filename="Views/FileView.cpp" line="543"/>
         <source>Recover to Any Folder</source>
         <translation>Pulihkan ke Folder Mana Saja</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="280"/>
+        <location filename="Views/FileView.cpp" line="545"/>
         <source>Recover to Same Folder</source>
         <translation>Pulihkan ke Folder yang Sama</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="284"/>
+        <location filename="Views/FileView.cpp" line="549"/>
         <source>Run Recovery Checks</source>
         <translation>Jalankan Pemeriksaan Pemulihan</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="367"/>
+        <location filename="Views/FileView.cpp" line="633"/>
         <source>Select Directory</source>
         <translation>Pilih Direktori</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="436"/>
+        <location filename="Views/FileView.cpp" line="702"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Buat Pintasan ke sandbox %1</translation>
     </message>

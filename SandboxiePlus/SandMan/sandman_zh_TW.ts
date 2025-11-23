@@ -1261,7 +1261,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="481"/>
+        <location filename="Views/FileView.cpp" line="748"/>
         <source>%1 - Files</source>
         <translation>%1 - 檔案</translation>
     </message>
@@ -1269,37 +1269,37 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="248"/>
+        <location filename="Views/FileView.cpp" line="513"/>
         <source>Create Shortcut</source>
         <translation>建立捷徑</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="271"/>
+        <location filename="Views/FileView.cpp" line="536"/>
         <source>Pin to Box Run Menu</source>
         <translation>釘選至沙箱執行選單</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="278"/>
+        <location filename="Views/FileView.cpp" line="543"/>
         <source>Recover to Any Folder</source>
         <translation>復原至任意資料夾</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="280"/>
+        <location filename="Views/FileView.cpp" line="545"/>
         <source>Recover to Same Folder</source>
         <translation>復原至相同資料夾</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="284"/>
+        <location filename="Views/FileView.cpp" line="549"/>
         <source>Run Recovery Checks</source>
         <translation>執行復原檢查</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="367"/>
+        <location filename="Views/FileView.cpp" line="633"/>
         <source>Select Directory</source>
         <translation>選擇目錄</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="436"/>
+        <location filename="Views/FileView.cpp" line="702"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>為沙箱 %1 建立捷徑</translation>
     </message>

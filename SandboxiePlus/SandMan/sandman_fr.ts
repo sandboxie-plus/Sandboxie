@@ -9351,7 +9351,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1685"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>Lorsque la racine du bac est protégée, le gestionnaire de Sandboxie doit s&apos;exécuter en tant qu&apos;administrateur afin d&apos;accéder aux fichiers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2017"/>
@@ -9460,7 +9460,7 @@ Pour définir un processus, utiliser « $:programme.exe » comme chemin.</transl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4424"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation>Redémarrer les processus forcés qui ont été lancés au sein d&apos;un objet de travail de l&apos;assistant de compatibilité des programmes</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6055"/>
@@ -10681,7 +10681,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <location filename="Forms/OptionsWindow.ui" line="4548"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
-        <translation>Les fonctions de Sandboxie peuvent être améliorées en utilisant des DLL optionnels qui peuvent être chargés dans chaque processus d&apos;un bac lors de leur démarrage par SbieDll.dll. Le gestionnaire de modules dans les paramètres généraux offre quelques extensions utiles ; une fois installées, celles-ci peuvent être activées ici pour le bac actuel.</translation>
+        <translation>Les fonctions de Sandboxie peuvent être améliorées en utilisant des DLL optionnelles qui peuvent être chargées dans chaque processus d&apos;un bac lors de leur démarrage par SbieDll.dll. Le gestionnaire de modules dans les paramètres généraux offre quelques extensions utiles ; une fois installées, celles-ci peuvent être activées ici pour le bac actuel.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2248"/>

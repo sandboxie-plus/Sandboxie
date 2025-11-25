@@ -22,7 +22,7 @@ jobs:
           sudo apt-get install --no-install-recommends qtbase5-dev qttools5-dev-tools
 
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Sync Sbie Plus language strings (.ts files)
         id: check
@@ -78,7 +78,7 @@ jobs:
     steps:
 
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v2

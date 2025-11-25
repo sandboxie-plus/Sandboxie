@@ -8724,7 +8724,7 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1685"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfordere, wenn die Boxquelle geschützt ist, dass SandMan als Administrator ausgeführt wird, um auf die Dateien zugreifen zu können</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1844"/>

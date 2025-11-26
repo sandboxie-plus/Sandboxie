@@ -6252,7 +6252,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="1207"/>
         <location filename="Views/SbieView.cpp" line="1604"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation>Archive 7-Zip (*.7z) ; Archive Zip (*.zip)</translation>
+        <translation>Archive 7-Zip (*.7z);;Archive Zip (*.zip)</translation>
     </message>
     <message>
         <source>This name is already in use, please select an alternative box name</source>

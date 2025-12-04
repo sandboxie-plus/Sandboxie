@@ -80,7 +80,7 @@
     <message>
         <location filename="AddonManager.cpp" line="209"/>
         <source>Add-on not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到加载项！</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="229"/>
@@ -3559,7 +3559,7 @@ Full path: %4</source>
 Error: </source>
         <translation>
 
-错误：</translation>
+错误: </translation>
     </message>
 </context>
 <context>
@@ -10368,7 +10368,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1685"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">当沙箱根目录受到保护时，沙盘管理器需要以管理员身份运行才能访问这些文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3992"/>
@@ -10383,7 +10383,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4424"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">重启在 PCA（程序兼容性助手）作业对象中启动的必沙进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4980"/>
@@ -10953,7 +10953,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <location filename="Forms/SettingsWindow.ui" line="2329"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">Hook 选定的 Win32k 系统调用钩子以启用 GPU 加速 (实验性)</translation>
+        <translation type="unfinished">Hook 选定的 Win32k 系统调用以启用 GPU 加速（此功能对于 Chrome、Firefox 等浏览器是必需的）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="195"/>
@@ -11211,7 +11211,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <location filename="Forms/SettingsWindow.ui" line="2415"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">使用Sandboxie自带的增强型UAC提示（实验性功能）</translation>
+        <translation type="unfinished">使用 Sandboxie 自带的增强版 UAC 提示（推荐）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2425"/>

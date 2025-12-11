@@ -28,9 +28,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed 'OpenWndStation=y' not working with 'SandboxieAllGroup=y'
-- fixed missing parameter validation in SbieIniServer
-- fixed issue with certificate parsing
-- fixed an issue retrieving driver info
+- FIXED SECURITY ISSUE ID-28 missing parameter validation in SbieIniServer (thanks DepthFirstDisclosures)
+- FIXED SECURITY ISSUE ID-29 issue with certificate parsing (thanks pentester.z)
+- FIXED SECURITY ISSUE ID-30 an issue retrieving driver info (thanks pentester.z)
 - fixed potential handle leak in SbieDll.dll related to SbieApi_DeviceHandle [#5097](https://github.com/sandboxie-plus/Sandboxie/issues/5097)
 
 

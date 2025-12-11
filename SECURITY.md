@@ -7,6 +7,18 @@ Please do not submit unverified AI-generated reports. While they may appear vali
 
 ## Fixed security issues
 
+### SECURITY ISSUE ID-30 (thanks pentester.z)
+missing safety checjs when retrieving driver info
+fixed in: 1.16.7 / 5.71.7
+
+### SECURITY ISSUE ID-29 (thanks pentester.z)
+possible buffer overflow when parsing certificates
+fixed in: 1.16.7 / 5.71.7
+
+### SECURITY ISSUE ID-28 (thanks DepthFirstDisclosures)
+Buffer overflow in SbieIniServer (CVE-2025-64721)
+fixed in: 1.16.7 / 5.71.7
+
 ### SECURITY ISSUE ID-27 (thanks love-code-yeyixiao)
 Leak of encrypted sandbox key during password change; see [CVE-2025-54422](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-jp7r-vgv9-43p7)
 

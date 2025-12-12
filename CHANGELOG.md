@@ -30,7 +30,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
-- FIXED SECURITY ISSUE ID-31 improved named syscall invocation when using WoW64
+- FIXED SECURITY ISSUE ID-31 improved named syscall invocation when using WoW64 (thanks pentester.z)
 
 ### Fixed
 - fixed 'OpenWndStation=y' not working with 'SandboxieAllGroup=y'

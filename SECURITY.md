@@ -7,6 +7,10 @@ Please do not submit unverified AI-generated reports. While they may appear vali
 
 ## Fixed security issues
 
+### SECURITY ISSUE ID-31 (thanks pentester.z)
+missing parameter validation within named syscall invocation when using WoW64
+fixed in: 1.16.7 / 5.71.7
+
 ### SECURITY ISSUE ID-30 (thanks pentester.z)
 missing safety checjs when retrieving driver info
 fixed in: 1.16.7 / 5.71.7

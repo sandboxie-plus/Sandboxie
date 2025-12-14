@@ -234,7 +234,7 @@ SBIE1309 Denied attempt to change account password
 # SBIE1310 Extended features are disabled until the license is reactivated
 # .
 
-#1311;pop;inf;01
+# 1311;pop;inf;01
 #SBIE1311 Blocked request to change desktop wallpaper by process '%2'
 #.
 
@@ -773,7 +773,7 @@ SBIE2332 Cannot access file SbiePst.dat
 # SBIE2333 Incompatible software DLL found:  %2
 # .
 
-#2334;pop;err;01
+# 2334;pop;err;01
 #SBIE2334 Cannot load DLL file:  %2
 #.
 
@@ -1064,7 +1064,7 @@ Delete command failed: %2
 # You have installed Sandboxie more than 30 days ago.
 # .
 
-#3232;txt;01
+# 3232;txt;01
 #Personal use of Sandboxie is permitted free of charge for as long as you wish.
 #.
 
@@ -1118,7 +1118,7 @@ of the application exploiting an unpatched Windows vulnerability
 or a vulnerable driver to escape the sandbox.
 .
 
-#3244;txt;01
+# 3244;txt;01
 #Application %2 is requesting Administrator privileges in box %3. 
 #You can allow this request (YES), in which case a UAC prompt may appear depending on your system settings. 
 #You can deny Administrator privileges but make the application believe it has them (NO), or you can abort the startup (CANCEL). 
@@ -4325,3 +4325,4 @@ This is the third and last retry.
 The following programs must be closed before the installation can continue.
 Click OK to close these programs and continue.  Click Cancel to abort the installation.
 .
+

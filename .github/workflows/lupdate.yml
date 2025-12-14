@@ -40,6 +40,7 @@ jobs:
             -ts sandman_it.ts \
             -ts sandman_ja.ts \
             -ts sandman_ko.ts \
+            -ts sandman_nb_NO.ts \
             -ts sandman_nl.ts \
             -ts sandman_pl.ts \
             -ts sandman_pt_BR.ts \

@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.16.9 / 5.71.9] - 2025-11-
 
+### Added
+- added Norwegian Bokmål translations [#5141](https://github.com/sandboxie-plus/Sandboxie/issues/5141) (thanks divinity76)
+
 ### Changed
 - added ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39} block ShellWindows to the default com tempalte
 

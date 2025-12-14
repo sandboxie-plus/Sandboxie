@@ -292,6 +292,7 @@ begin
     'italian': Result := 'it';
     'japanese': Result := 'ja';
     'korean': Result := 'ko';
+    'norwegian': Result := 'nb_NO';
     'polish': Result := 'pl';
     'brazilianportuguese': Result := 'pt_BR';
     'portuguese': Result := 'pt_PT';

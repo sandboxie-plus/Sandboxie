@@ -1,0 +1,4337 @@
+#----------------------------------------------------------------------------
+# SbieDrv
+#
+# Initialization errors issued to the System event Log
+#----------------------------------------------------------------------------
+
+1101;evt;inf;01
+SBIE1101 Sandboxie driver (SbieDrv) versjon %2 Startet
+.
+
+1102;evt;inf;01
+SBIE1102 Sandboxie driver (SbieDrv) avslutter
+.
+
+1103;evt;err;01
+SBIE1103 Sandboxie driver (SbieDrv) versjon %2 Kunne ikke starte
+.
+
+1104;evt;err;01
+SBIE1104 Utilstrekkelige systemressurser til å fullføre initialisering
+.
+
+1105;evt;err;01
+SBIE1105 Ukjent operativsystemversjon:  %2
+.
+
+1106;evt;err;01
+SBIE1106 feil %2, detaljer %3
+.
+
+# 1107;evt;err;01
+# SBIE1107 Cannot access LocalSystem account %2
+# .
+
+1108;evt;err;01
+SBIE1108 prosedyre %2 kunne ikke analyseres
+.
+
+# 1109;evt;err;01
+# SBIE1109 Invalid license information:  %2
+# .
+
+1110;evt;err;01
+SBIE1110 kan ikke avlytte type %3, feil %2
+.
+
+1111;evt;err;01
+SBIE1111 System DLL %3 Kunne ikke lastes %2
+.
+
+1112;evt;err;01
+SBIE1112 prosedyre %2 kunne ikke være lokalisert
+.
+
+1113;evt;err;01
+SBIE1113 kan ikke finne Nt system tjeneste, grunn %2
+.
+
+1114;evt;err;01
+SBIE1114 kan ikke finne Zw system service, grunn %2
+.
+
+1116;evt;err;01
+SBIE1116 Driver klarte ikke å registrere prosessvarsling rutine %2
+.
+
+1119;evt;err;01
+SBIE1119 kan ikke opprette API-enhet %2
+.
+
+1120;evt;err;01
+SBIE1120 Mismatch i bruk %2
+.
+
+1121;evt;err;01
+SBIE1121 Hook mislyktes for service %2
+.
+
+1122;evt;err;01
+SBIE1122 Feil:  %2
+.
+
+#----------------------------------------------------------------------------
+# SbieDrv
+#
+# Error Messages to both Event and Popup Logs
+#----------------------------------------------------------------------------
+
+1151;evt;pop;err;01
+SBIE1151 kan ikke håndtere instruksjoner %2
+.
+
+1152;evt;pop;err;01
+SBIE1152 Trampoline tildeling mislyktes %2
+.
+
+1153;evt;pop;err;01
+SBIE1153 Sandboxie initialisering mislyktes. Lukk alle programmer og installer deretter Sandboxie eller start datamaskinen på nytt.
+.
+
+1205;evt;pop;err;01
+SBIE1205 Ugyldig DynData funnet i registeret, feil: %2
+.
+
+1206;evt;pop;err;01
+SBIE1206 Din Windows-bygging (%2) er ennå ikke støttet av sandboxie, feil: %3
+.
+
+#----------------------------------------------------------------------------
+# SbieDrv
+#
+# Error Messages to Popup Log
+#----------------------------------------------------------------------------
+
+1201;pop;err;01
+SBIE1201 Ikke nok minne
+.
+
+# 1202;pop;err;01
+# SBIE1202 Cannot update license information:  %2
+# .
+
+1203;pop;err;01
+SBIE1203 Kan ikke bygge baneliste (feil i %2)
+.
+
+1204;pop;err;01
+SBIE1204 Sandbox opprettelse mislyktes for %3 %2
+.
+
+1207;pop;err;01
+SBIE1207 Din Windows-bygging (%2) er ennå ikke støttet av Sandboxie, noe som betyr at programmer vil kjøres uten sikkerhetsisolasjon!
+.
+
+1211;pop;err;01
+SBIE1211 Kunne ikke starte sandkasse for prosess %2
+.
+
+1212;pop;err;01
+SBIE1212 Kan ikke opprette katalog '%3' %2
+.
+
+1213;pop;err;01
+SBIE1213 Kan ikke opprette objektkatalog '%3' %2
+.
+
+# 1214;pop;err;01
+# SBIE1214 Cannot inject SbieDll %2
+# .
+
+# 1215;pop;err;01
+# SBIE1215 Cannot resolve path to process image %2
+# .
+
+# 1216;pop;err;01
+# SBIE1216 Could not query security ID %2
+# .
+
+# 1217;pop;err;01
+# SBIE1217 Could not find parent process
+# .
+
+# 1221;pop;err;01
+# SBIE1221 Cannot create job:  %2
+# .
+
+1222;pop;err;02
+SBIE1222 Feil med sikkerhetssymbol:  %2
+.
+
+# 1223;pop;err;01
+# SBIE1223 Cannot replace token:  %2
+# .
+
+# 1224;pop;err;01
+# SBIE1224 Cannot query token:  %2
+# .
+
+1231;pop;err;01
+SBIE1231 initialisering mislyktes for prosess '%3' %2
+.
+
+1241;pop;err;01
+SBIE1241 kan ikke montere registerkuve:  %2
+.
+
+1242;pop;err;01
+SBIE1242 Skjermbufferoverflyt
+.
+
+#----------------------------------------------------------------------------
+# SbieDrv
+#
+# Informational Messages to Popup Log
+#----------------------------------------------------------------------------
+
+1301;pop;inf;01
+SBIE1301 Program '%2' ble lansert utenfor sandkassen
+.
+
+# 1302;pop;inf;01
+# SBIE1302 Sandbox '%2' is not defined or not enabled
+# .
+
+# 1303;pop;inf;01
+# SBIE1303 Only one sandbox can be active at a time
+# .
+
+# 1304;pop;inf;01
+# SBIE1304 Blocked simulated keyboard or mouse input by process '%2'
+# .
+
+1305;pop;inf;02
+SBIE1305 Blokkert sandkasset bilde fra å bli lastet - %2
+.
+
+1306;pop;inf;01
+SBIE1306 Sandboxie driver (SbieDrv) kan ikke lastes ut nå
+.
+
+1307;pop;inf;02
+SBIE1307 Program kan ikke få tilgang til Internett på grunn av restriksjoner - %2
+.
+
+1308;pop;inf;02
+SBIE1308 Program kan ikke starte på grunn av restriksjoner - %2
+.
+
+1309;pop;inf;01
+SBIE1309 Avslått forsøk på å endre passord på kontoen
+.
+
+# 1310;pop;inf;01
+# SBIE1310 Extended features are disabled until the license is reactivated
+# .
+
+#1311;pop;inf;01
+#SBIE1311 Blocked request to change desktop wallpaper by process '%2'
+#.
+
+1312;pop;inf;01
+SBIE1312 Blokkert forespørsel om å starte et 16-bit DOS-program i sandkassen
+.
+
+1313;pop;inf;01
+SBIE1313 Blokkert direkte disktilgang ved prosess '%2'
+.
+
+1314;pop;inf;01
+SBIE1314 Blokkert forespørsel om å endre innstillinger for nettverks/brannvegg etter prosess '%2'
+.
+
+# 1315;pop;inf;01
+# SBIE1315 Possibly due to conflict with software:  %2
+# .
+
+1316;pop;inf;01
+SBIE1316 Blokkert forespørsel om å generere enhetshendelse i sandkassen
+.
+
+1317;pop;inf;02
+SBIE1317 blokkert '%2' fra å prøve å få tilgang til sandkassefilrot '%3'
+.
+
+1318;pop;inf;02
+SBIE1318 blokkert '%2' fra prøver å få tilgang til sandkasseprosess '%3'
+.
+
+1319;pop;inf;01
+SBIE1319 Blokkert spooler utskrift til fil, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 Hvis du vil tillate print spooler å skrive utenfor sandkassen for denne prosessen, må du dobbeltklikke på denne meldingslinjen
+.
+
+1321;pop;inf;01
+SBIE1321 Program '%2' ble tvunget inn i sandkasse %3
+.
+
+1399;pop;inf;01
+%0
+.
+
+#----------------------------------------------------------------------------
+# SbieDrv
+#
+# Configuration Error Messages to both Event and Popup Logs
+#----------------------------------------------------------------------------
+
+1401;evt;pop;inf;01
+SBIE1401 Configuration fil ikke funnet, bruker standard
+.
+
+1402;evt;pop;wrn;01
+SBIE1402 Configuration file feil i linje %3: %2
+.
+
+1403;evt;pop;wrn;01
+SBIE1403 Konfigurasjonsfilfeil i linje %2: linje for lang
+.
+
+1404;evt;pop;wrn;01
+SBIE1404 Konfigurasjonsfilfeil i linje %2: For mange linjer
+.
+
+1405;evt;pop;wrn;01
+SBIE1405 Configuration file feil i linje %2: Syntaksfeil
+.
+
+1406;evt;pop;err;01
+SBIE1406 mangler eller ugyldig utvidelse for %3:  %2
+.
+
+# 1407;evt;pop;err;01
+# SBIE1407 Invalid value for setting %2, using default
+# .
+
+1408;pop;err;01
+SBIE1408 Ukjent brukernavn for SID:  %2
+.
+
+1409;evt;pop;wrn;01
+SBIE1409 Malene.ini-filen kan ikke åpnes %2
+.
+
+1410;evt;pop;wrn;01
+SBIE1410 Følgende melding indikerer en feil i Males.ini-filen
+.
+
+1411;evt;pop;wrn;01
+SBIE1411 Sandkasse %2 angir ukjent mal %3
+.
+
+1412;evt;pop;err;01
+SBIE1412 I tekst: %2
+.
+
+1413;evt;pop;wrn;01
+SBIE1413 Boksen inkluderer mappe %3 filen kan ikke åpnes, feil %2
+.
+
+1414;evt;pop;wrn;01
+SBIE1414 Følgende melding indikerer en feil %2 I en boks inkluderer %3
+.
+
+1415;evt;pop;wrn;01
+SBIE1415 Portable boks navnefeil (ini navn må matche boks avsnitt) i en boks inkluderer %3
+.
+
+1416;evt;pop;wrn;01
+SBIE1416 Bærbar boksnavn er allerede i bruk av en annen boks, inkludert %3
+.
+
+#----------------------------------------------------------------------------
+# SbieDrv
+#
+# Messages from user mode -- informational -- 2101 through 2199
+#----------------------------------------------------------------------------
+
+2101;pop;inf;01
+SBIE2101 Objektnavn ikke funnet: %3, feil %2
+.
+
+2102;pop;inf;01
+SBIE2102 File er for stor til å kopiere i sandkasse - %2
+.
+
+2103;pop;inf;01
+SBIE2103 Avslått forsøk på å laste systemdriver '%2'
+.
+
+2104;pop;inf;02
+SBIE2104 Nektet forsøk på å avslutte denne Windows-økten - %2
+.
+
+# 2105;pop;inf;01
+# SBIE2105 Sandboxed service successfully started:  %2
+# .
+
+# 2106;pop;inf;01
+# SBIE2106 Please enable "Run As UAC Administrator" in Sandboxie Control, File menu
+# .
+
+# 2107;pop;inf;01
+# SBIE2107 Preparing WinSxS assembly '%2'
+# .
+
+2108;pop;inf;01
+SBIE2108 Faking vellykket ferdigstillelse for programmet '%2'
+.
+
+# 2109;pop;inf;01
+# SBIE2109 Click OK when the program or installation has completed.
+# .
+
+# 2110;pop;inf;01
+# SBIE2110 Preparing WinSxS dependencies for '%2'
+# .
+
+2111;pop;inf;01
+SBIE2111 Prosessen er ikke tilgjengelig: %3, ring %2
+.
+
+2112;pop;inf;01
+SBIE2112 Objekt er ikke tilgjengelig: %3, ring %2
+.
+
+2113;pop;inf;01
+SBIE2113 Filen er for stor til å kopiere i sandkasse, og oppretter tom fil - %2
+.
+
+2114;pop;inf;01
+SBIE2114 Filen er for stor til å kopiere i sandkasse, nekte tilgang - %2
+.
+
+2115;pop;inf;01
+SBIE2115 Filen er for stor til å kopiere til sandkasse, åpning i kun-lesning: %2
+.
+
+2180;pop;inf;01
+SBIE2180 LowLevel.dll feil %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll detour klarte ikke å laste SbieDll.dll til målprosess.
+.
+
+# %2 = Mozilla Firefox
+2191;pop;inf;01
+SBIE2191 %2 bør ikke oppdateres under drift under Sandboxie.
+.
+
+2192;pop;inf;01
+SBIE2192 For å oppdatere programmet, kjøre det utenfor tilsyn med Sandboxie.
+.
+
+2193;pop;inf;01
+SBIE2193 Sørg for å slette sandkassen etter å ha fullført oppdateringsprosessen.
+.
+
+2194;pop;inf;01
+SBIE2194 MSI installer krever %2 muligheten for å bli satt i ini for å kunne fungere riktig,%nmen dette alternativet svekker isolasjonen.
+.
+
+2195;pop;inf;01
+For å kjøre Explorer.exe sandkasset, må tilgangen til COM-infrastruktur ikke være åpen.
+.
+
+2196;pop;inf;01
+SBIE2196 For å kjøre MSI Installer-sandkassen, må tilgangen til COM-infrastruktur ikke være åpen.
+.
+
+2198;pop;inf;01
+%0
+.
+
+2199;pop;inf;01
+%0
+.
+
+#----------------------------------------------------------------------------
+# SbieDrv
+#
+# Messages from user mode -- warning -- 2201 through 2299
+#----------------------------------------------------------------------------
+
+2201;pop;wrn;01
+SBIE2201 %2
+.
+
+# 2202;pop;wrn;01
+# SBIE2202 Missing list of installed hardware devices
+# .
+
+2203;pop;wrn;01
+SBIE2203 klarte ikke å kommunisere med Sandboxie Service:  %2
+.
+
+2204;pop;wrn;01
+SBIE2204 Kan ikke starte sandkasse tjeneste %2
+.
+
+2205;pop;wrn;01
+SBIE2205 Service ikke implementert:  %2
+.
+
+2206;pop;wrn;01
+SBIE2206 Klarte ikke å behandle AutoExec-innstilling %2
+.
+
+2207;pop;wrn;01
+SBIE2207 Ugyldig verdi for innstilling '%2', bruker standard
+.
+
+2208;pop;wrn;01
+SBIE2208 kan ikke fjerne registerhive:  %2
+.
+
+2209;pop;wrn;01
+SBIE2209 Kan ikke oversette SID til brukernavn:  %2
+.
+
+2210;pop;wrn;01
+SBIE2210 Kan ikke starte Windows Explorer for:  %2
+.
+
+2211;pop;wrn;01
+SBIE2211 Sandboxed-tjenesten startet ikke:  %2
+.
+
+2212;pop;wrn;01
+SBIE2212 E-postleser '%2' er ikke konfigurert til å kjøre sandkasset
+.
+
+2213;pop;wrn;01
+SBIE2213 Windows-bekreftelser kan ikke lagres i sandkassen
+.
+
+2214;pop;wrn;01
+SBIE2214 Forespørsel om å starte tjenesten '%2' ble nektet på grunn av droppede rettigheter
+.
+
+# 2215;pop;wrn;01
+# SBIE2215 Failed to prepare WinSxS dependencies:  %2
+# .
+
+# 2216;pop;wrn;01
+# SBIE2216 Error preparing WinSxS assembly:  %2
+# .
+
+2217;pop;wrn;02
+SBIE2217 Forespørsel om å kjøre som administrator ble nektet på grunn av droppede rettigheter
+.
+
+2218;pop;wrn;01
+SBIE2218 Klarte ikke å få høyere privilegier:  %2
+.
+
+2219;pop;wrn;01
+SBIE2219 Forespørsel ble utstedt av programmet %2
+.
+
+2220;pop;wrn;01
+SBIE2220 For å tillate bruk av Administrators privilegier, må du dobbeltklikke på denne meldingslinjen
+.
+
+2221;pop;wrn;01
+Hvis du vil legge til programmet i Internett-tilgangsbegrensningene, dobbeltklikk på denne meldingslinjen.
+.
+
+2222;pop;wrn;01
+Hvis du vil legge til programmet i Start/Kjør-tilgangsbegrensningene, dobbeltklikk på denne meldingslinjen.
+.
+
+2223;pop;wrn;01
+SBIE2223 For å øke filstørrelsesgrensen for kopiering av filer, må du dobbeltklikke på denne meldingslinjen
+.
+
+2224;pop;wrn;01
+SBIE2224 Sandboxed-programmet har krasjet: %2
+.
+
+2225;pop;wrn;01
+SBIE2225 Det ble forsøkt å få tilgang til en EFS-fil: %2
+.
+
+2226;pop;wrn;01
+SBIE2226 Prosessen klarte ikke å starte på grunn av manglende høyde, for å løse,
+legg til "ApplyElevateCreateProcessFix=y" til ini-delen for denne boksen %2
+.
+
+2227;pop;wrn;01
+SBIE2227 '%2' er plassert på et volum som ikke støtter 8.3 navn. Dette kan føre til problemer med eldre programmer og installatører.
+.
+
+#----------------------------------------------------------------------------
+
+2230;pop;wrn;01
+SBIE2230 Klarte ikke å montere rot for %2
+.
+
+2231;pop;wrn;01
+SBIE2231 Junction Target feil %2
+.
+
+2232;pop;wrn;01
+SBIE2232 ImDisk driveren er ikke lastet
+.
+
+2233;pop;wrn;01
+SBIE2233 kan ikke styre ImDisk driveren: %2
+.
+
+2234;pop;wrn;01
+Ingen gratis Drive bokstav funnet for midlertidig montering
+.
+
+2235;pop;wrn;01
+SBIE2235 Feil undefining midlertidig kjørebrev: "%2"
+.
+
+2236;pop;wrn;01
+SBIE2236 %2 Kunne ikke påkalles (kanskje det ikke er installert?)
+.
+
+2237;pop;wrn;01
+SBIE2237 Mislyktes å avmontere rot %2
+.
+
+2238;pop;wrn;01
+SBIE2238 Ram Diskstørrelse er ikke konfigurert, eller for liten, sett RamDiskSizeKb=1048576 (1GB i Kilobytes) i [GlobalConfigures] ini-delen.
+.
+
+2239;pop;wrn;01
+SBIE2239 Rotmappen til sandkasse %2 må være tom for å kunne montere et volum der.
+.
+
+2240;pop;wrn;01
+SBIE2240 Tidsavbrudd ved forsøk på å montere ImDisk-volum %2
+.
+
+2241;pop;wrn;01
+SBIE2241 Box bildefil %2 kunne ikke åpnes
+.
+
+2242;pop;wrn;01
+SBIE2242 Klarte ikke å montere boksbilde, Den angitte krypteringsmetoden støttes ikke
+.
+
+2243;pop;wrn;01
+SBIE2243 Klarte ikke å montere boksbilde, feil passord
+.
+
+2244;pop;wrn;01
+SBIE2244 Klarte ikke å montere boksbilde, passord kreves
+.
+
+2246;pop;wrn;01
+SBIE2246 Klarte ikke å montere boksbilde, ImBox-feil %2
+.
+
+#----------------------------------------------------------------------------
+# SbieDrv
+#
+# Messages from user mode -- error -- 2301 through 2399
+#----------------------------------------------------------------------------
+
+2301;pop;err;01
+SBIE2301 %2
+.
+
+2302;pop;err;01
+SBIE2302 Prosessbildekonfigurasjon konflikt: %2
+.
+
+2303;pop;err;01
+SBIE2303 Klarte ikke kroke %2
+.
+
+2304;pop;err;01
+SBIE2304 initialisering mislyktes for prosess %2
+.
+
+2305;pop;err;01
+SBIE2305 Ut av minnet
+.
+
+2306;pop;err;01
+SBIE2306 Klarte ikke finne brukerkatalog:  %2
+.
+
+2307;pop;err;01
+SBIE2307 Kunne ikke kartlegge disk %2
+.
+
+2308;pop;err;01
+SBIE2308 Kunne ikke opprette objektmappe:  %2
+.
+
+2309;pop;err;01
+SBIE2309 Klarte ikke å deaktivere COM+/DCOM:  %2
+.
+
+2310;pop;err;01
+SBIE2310 Navnbuffer nærmer seg overflod (%2)
+.
+
+2311;pop;err;01
+SBIE2311 Kunne ikke deaktivere søplekassen (BitBucket):  %2
+.
+
+2312;pop;err;01
+SBIE2312 Kunne ikke aktivere BrowseNewProcess innstilling:  %2
+.
+
+2313;pop;err;01
+SBIE2313 Klarte ikke utføre %2
+.
+
+2314;pop;err;01
+SBIE2314 Avbryt prosessen %2
+.
+
+# 2315;pop;err;01
+# SBIE2315 Could not fix executable image
+# .
+
+2316;pop;err;01
+SBIE2316 minne ødelagt
+.
+
+2317;pop;err;01
+SBIE2317 kan ikke starte banelisten '%2'
+.
+
+2318;pop;err;01
+SBIE2318 DLL initialisering mislyktes for '%2'
+.
+
+# 2319;pop;err;01
+# SBIE2319 Activation context fails for sandboxed process %2
+# .
+
+# 2320;pop;err;01
+# SBIE2320 Could not disable Windows Explorer as desktop process:  %2
+# .
+
+2321;pop;err;01
+SBIE2321 Kan ikke administrere enhetskart:  %2
+.
+
+2322;pop;err;01
+SBIE2322 kan ikke skrive om Sandboxie.ini:  %2
+.
+
+2323;pop;err;01
+SBIE2323 Cryptografifeil:  %2
+.
+
+2325;pop;err;01
+SBIE2325 Feilsøking:  %2
+.
+
+2326;pop;err;01
+SBIE2326 kan ikke forberede registeret:  %2
+.
+
+2327;pop;err;01
+SBIE2327 Feil i COM-server:  %2
+.
+
+2328;pop;err;01
+SBIE2328 Mislyktes å løse chrome sandkasse krok %2
+.
+
+2329;pop;err;01
+SBIE2329 fant ikke FFS-sekvens %2
+.
+
+2330;pop;err;01
+SBIE2330 Uspesifisert feil ved tilkobling %2
+.
+
+2331;pop;err;01
+SBIE2331 Servicestart mislyktes:  %2
+.
+
+2332;pop;err;01
+SBIE2332 Kan ikke få tilgang til fil SbiePst.dat
+.
+
+# 2333;pop;err;01
+# SBIE2333 Incompatible software DLL found:  %2
+# .
+
+#2334;pop;err;01
+#SBIE2334 Cannot load DLL file:  %2
+#.
+
+2335;pop;err;01
+SBIE2335 Initialisering mislyktes for prosess %2
+.
+
+2360;pop;err;01
+SBIE2360 Klarte ikke å injisere SOCKS5-proxy:  %2
+.
+
+2336;pop;err;01
+SBIE2336 Feil i GUI-server:  %2
+.
+
+2337;pop;err;01
+SBIE2337 Klarte ikke å starte programmet:  %2
+.
+
+2338;pop;err;01
+SBIE2338 Besøkt arkitektur i prosess:  %2
+.
+
+# 2398;txt;01
+# SBIE2398 Service suffers exception ... at address ...
+# .
+
+# 2399;txt;01
+# SBIE2399 Service fails with error ...
+# .
+
+#----------------------------------------------------------------------------
+# SbieSvc
+#----------------------------------------------------------------------------
+
+9101;evt;err;01
+SBIE9101 Utilstrekkelige systemressurser
+.
+
+9153;evt;err;01
+SBIE9153 Kan ikke starte driveren (SbieDrv)
+.
+
+9154;evt;err;01
+SBIE9154 Driver (SbieDrv) og service (SbieSvc) har forskjellige versjonsnummer
+.
+
+9156;evt;err;01
+SBIE9156 Driver initialisering ikke fullført
+.
+
+9234;evt;err;01
+SBIE9234 Service oppstartsfeil %2
+.
+
+# 9201;evt;err;01
+# SBIE9201 Token error
+# .
+
+# 9202;evt;err;01
+# SBIE9202 Token error
+# .
+
+# 9203;evt;err;01
+# SBIE9203 Token error
+# .
+
+# 9204;evt;err;01
+# SBIE9204 Security descriptor error
+# .
+
+# 9205;evt;err;01
+# SBIE9205 Security descriptor error
+# .
+
+# 9206;evt;err;01
+# SBIE9206 Security descriptor error
+# .
+
+# 9207;evt;err;01
+# SBIE9207 Security descriptor error
+# .
+
+# 9208;evt;err;01
+# SBIE9208 Cannot enable SeRestorePrivilege
+# .
+
+# 9251;evt;err;01
+# SBIE9251 Port event creation failed
+# .
+
+# 9252;evt;err;01
+# SBIE9252 Port creation failed
+# .
+
+# 9253;evt;err;01
+# SBIE9253 Port thread creation failed
+# .
+
+#----------------------------------------------------------------------------
+# Common Texts
+#----------------------------------------------------------------------------
+
+3001;txt;01
+&OK
+.
+
+3002;txt;01
+&Avbryt
+.
+
+3003;txt;01
+&Bla gjennom...
+.
+
+3004;txt;01
+&Lukk
+.
+
+3005;txt;01
+Cu&t
+.
+
+3051;txt;01
+Slett beskyttelse er aktivert for sandkassen
+.
+
+3052;txt;01
+Kjør Sandboxed
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Start
+#----------------------------------------------------------------------------
+
+3101;txt;01
+Sandboxie Start
+.
+
+3103;txt;01
+Skriv inn navnet på et program eller mappe og Sandboxie vil åpne det for deg.
+.
+
+3104;txt;01
+Skriv . (punkttegnet) for å utforske skrivebordet med Sandboxie.
+.
+
+3105;txt;01
+Fjern kommando fra kommandologgen
+.
+
+3106;txt;01
+Velg sandkassen der programmet eller dokumentet skal startes.
+.
+
+3107;txt;01
+Skriv inn navnet på et program eller bane for å åpne følgende fil i gjeldende sandkasse:
+.
+
+3111;txt;01
+      Sandboxie Startmeny - %2  %0
+.
+
+3112;txt;01
+Skrivebord
+.
+
+3113;txt;01
+(utforsk mappe)
+.
+
+# should match the localized folder name for Programs in the Start Menu folder
+3114;txt;01
+Programmer
+.
+
+3115;txt;01
+Ja
+.
+
+3116;txt;01
+Nei
+.
+
+3117;txt;01
+Avbryt
+.
+
+3198;txt;01
+Vil du starte et nytt program i %2 Sandkasse?
+Du mottok denne meldingen fordi du satte AlertBeforeStart=y.
+.
+
+3199;txt;01
+Denne oppstartsforespørselen ser ikke ut til å påkalles av SANDBOXIE-komponenten. Er du sikker på at du vil kjøre den? Hvis dette er din handling, kan du ignorere det og velge ja.
+.
+
+3202;txt;01
+Ugyldig kommandolinjeparameter:  %2
+.
+
+3203;txt;01
+Bruk: Start.exe <program name>
+.
+
+3204;txt;01
+Ugyldig boksnavnparameter:  %2
+.
+
+3205;txt;01
+Kunne ikke starte programmet:
+
+%2
+.
+
+3206;txt;01
+Systemfeilkode:
+.
+
+# 3207;txt;01
+# Cannot find the Internet Explorer executable
+# .
+
+# 3208;txt;01
+# Cannot find the executable for the default Web browser
+# .
+
+3209;txt;01
+Kan ikke finne kjørbar for standard e- postagent
+.
+
+3210;txt;01
+Kunne ikke starte Sandboxie Control-programmet
+.
+
+# 3211;txt;01
+# Version mismatch in Sandboxie.  Try re-installing.
+# .
+
+3212;txt;01
+Sandboxie driveren (SbieDrv) er ikke tilgjengelig for sandbox programmer.
+Pass på at både driveren og Sandboxie-tjenesten (SbieSvc) har begynt.
+.
+
+3213;txt;01
+Kunne ikke starte Sandboxie COM-tjenester
+.
+
+3214;txt;01
+Slett Sandbox %2:  %0
+.
+
+3215;txt;01
+Objektet (fil eller mappe) kan være i bruk av et annet program.
+Lukk alle programmer eller vinduer som kan hindre tilgangen.
+.
+
+3216;txt;01
+Kunne ikke finne sandkassemappen
+.
+
+3217;txt;01
+Kunne ikke åpne sandkassemappe
+.
+
+3218;txt;01
+Kunne ikke åpne mappe som inneholder sandkassemappen
+.
+
+3219;txt;01
+Kunne ikke flytte sandkassemappen ut av veien
+.
+
+3220;txt;01
+Feil ved endring av navn på et av de lange filnavnene i sandkassen.
+Innholdet i sandkassen vil ikke bli slettet.
+.
+
+3221;txt;01
+Avslutt programmer som kjører i sandkassen før du sletter innholdet
+.
+
+3222;txt;01
+Sletting av kommando mislyktes: %2
+.
+
+# 3231;txt;01
+# You have installed Sandboxie more than 30 days ago.
+# .
+
+# 3232;txt;01
+#Personal use of Sandboxie is permitted free of charge for as long as you wish.
+#.
+
+# 3233;txt;01
+# However, the free version will now pause for a few seconds.
+# .
+
+# 3234;txt;01
+# However, the free version permits use of one sandbox at a time.
+# .
+
+# 3235;txt;01
+# This restriction is removed in the paid version of Sandboxie.
+# .
+
+# 3236;txt;01
+# In addition, the paid version enables automatic sandboxing for selected programs.
+# .
+
+# 3237;txt;01
+# For more information and to purchase the software, please click the following link:
+# .
+
+# 3238;txt;01
+# Please wait %2 more seconds
+# .
+
+# 3239;txt;01
+# Click to close this window and continue
+# .
+
+# 3240;txt;01
+# Click to close this window and stop
+# .
+
+3241;txt;01
+Sandboxie ber om administratorrettigheter
+på vegne av et program som kjører i en sandkasse.
+.
+
+3242;txt;01
+Hvis du vil godta eller avbryte forespørselen, aktiverer du
+Brukerkontokontroll popupvindu.
+.
+
+3243;txt;01
+Merk: Programmet vil fortsette å kjøre under tilsyn
+Sandboxie selv om administrator privilegier er gitt.
+Administratorrettigheter kan imidlertid øke risikoen
+av programmer som utnytter en eldre Windows sårbarhet
+eller en sårbar driver for å unnslippe sandkassen.
+.
+
+# 3244;txt;01
+#Application %2 is requesting Administrator privileges in box %3. 
+#You can allow this request (YES), in which case a UAC prompt may appear depending on your system settings. 
+#You can deny Administrator privileges but make the application believe it has them (NO), or you can abort the startup (CANCEL). 
+#
+#Note: The program will continue to run under the supervision of Sandboxie even if Administrator privileges are granted. 
+#However, granting real Administrator rights may increase the risk of the application exploiting an unpatched Windows vulnerability or a vulnerable driver to escape the sandbox. 
+#Therefore, it is generally safer to grant only fake Administrator rights, although this may cause some installers to fail.
+#.
+
+3244;txt;01
+Søknad %2 ber om administratorprivilegier i sandkasse:
+.
+
+3245;txt;01
+Du kan tillate denne forespørselen (YES), i hvilket tilfelle en UAC-prompt kan 
+vises avhengig av systeminnstillingene. Du kan nekte administrator 
+privilegier, men la søknaden tro det har dem (NO), eller du kan 
+Avbryt oppstarten (CANCEL). 
+.
+
+3246;txt;01
+Merk: Programmet vil fortsette å kjøre under tilsyn av Sandboxie selv om Administrator 
+Det gis privilegier. Å gi reelle administratorrettigheter kan imidlertid øke risikoen for 
+applikasjon som utnytter en eldre Windows sårbarhet eller en sårbar driver for å unnslippe 
+Sandkasse. Derfor er det generelt tryggere å gi bare falske administratorrettigheter, 
+Selv om dette kan føre til at enkelte installasjoner mislykkes.
+.
+
+3251;txt;01
+Run Outside Sandbox
+.
+
+3252;txt;01
+Start programmet uttrykkelig utenfor tilsyn med
+Sandboxie, selv om programmet er tvunget til å kjøre under
+Sandboxie. Dette unntak fra sandkassen strekker seg også
+til alle andre programmer som startes av dette programmet.
+
+Du kan også velge dette alternativet ved å holde Ctrl og
+Skift tastene ned når du klikker på kommandoen Kjør Sandboxed.
+.
+
+3253;txt;01
+Er du sikker på at du vil kjøre programmet utenfor sandkassen?
+.
+
+3254;txt;01
+Hvis du vil hoppe over dette valgvinduet i sandkassen, kan du holde Ctrl
+taste ned når du klikker på kommandoen Kjør sandkasse.
+.
+
+3255;txt;01
+Alternativet er deaktivert fordi innstillingen Drop Rights er aktivert for denne sandkassen
+.
+
+3256;txt;01
+Alternativet er deaktivert fordi dette programmet allerede kjører med Administrator-privilegier
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Common
+#----------------------------------------------------------------------------
+
+3301;txt;01
+Sandboxie Control
+.
+
+3302;txt;01
+Utgave %2
+.
+
+3303;txt;01
+  - Initiering
+.
+
+3304;txt;01
+Utgavefeil i Sandboxie:
+
+Sandboxie Control: Versjon %2
+Tjeneste (SbieSvc): Versjon %3
+Driver (SbieDrv): Versjon %4
+
+Installer Sandboxie på nytt for å løse dette problemet.
+
+Stopper.
+.
+
+# 3305;txt;01
+# Could not install tray icon.  Aborting.
+# .
+
+3306;txt;01
+I fremtiden, ikke vis denne meldingen
+.
+
+# 3307;txt;01
+# Enter Program Name
+# .
+
+# translate text but keep hash signs (#)
+3308;txt;01
+Programmer#.EXE#Alle filer#*.*##
+.
+
+3309;txt;01
+  - Slette Sandbox
+.
+
+3311;txt;01
+Klarte ikke ta opp konfigurasjonsinnstilling %3 i delen %2: %4
+.
+
+3312;txt;01
+Du er ikke autorisert til å oppdatere konfigurasjonen i delen %2
+.
+
+3313;txt;01
+Ukjent bruker, konfigurasjonsinnstillinger vil ikke bli lagret
+.
+
+3314;txt;01
+Det oppstod en feil ved bruk av standardinnstillinger for sandkasse '%2'
+.
+
+3315;txt;01
+Sletter innhold i Sandbox
+.
+
+3316;txt;01
+Vil du avbryte operasjonen?
+.
+
+3317;txt;01
+Forbereder deg på å slette: %2
+.
+
+3318;txt;01
+Sletter: %2
+.
+
+# 3321;txt;01
+#   -  Logon session is sandboxed
+# .
+
+# 3322;txt;01
+# Your logon session is running under the supervision of Sandboxie.
+# Deleting the contents of the sandbox will discard all changes made in the session.
+# 
+# User Account: %2
+# Sandbox: %3
+# 
+# Are you sure you wish to delete the contents of the sandbox and log off Windows?
+# .
+
+3351;txt;01
+&Fjern
+.
+
+3352;txt;01
+&Legg til
+.
+
+3353;txt;01
+Re&diger/ Legg til
+.
+
+3354;txt;01
+Redi&ger
+.
+
+3355;txt;01
+Legg til &Programmer
+.
+
+# 3356;txt;01
+# Add By &Name
+# .
+
+# 3357;txt;01
+# Add By &File
+# .
+
+3358;txt;01
+Legg til &Mappe
+.
+
+3359;txt;01
+Legg til &Bruker
+.
+
+3360;txt;01
+Velg &Alle
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Menus
+#----------------------------------------------------------------------------
+
+3411;txt;01
+&Fil
+.
+
+3412;txt;01
+Avslutt &Alle programmer
+.
+
+3413;txt;01
+Deaktiver &Tvangsprogrammer
+.
+
+3414;txt;01
+Kjør som &UAC Administrator
+.
+
+3415;txt;01
+Er &Windows Sandboxed?
+.
+
+3416;txt;01
+Ressurstilgang og &overvåkning
+.
+
+3417;txt;01
+# todo: https://github.com/sandboxie-plus/Sandboxie/issues/5140
+Avs&lutt
+.
+
+3421;txt;01
+&Vis
+.
+
+3422;txt;01
+&Programmer
+.
+
+3423;txt;01
+&Filer og mapper
+.
+
+3424;txt;01
+&Kontekstmeny%2Shift+F10
+.
+
+3425;txt;01
+Recovery &Log
+.
+
+3426;txt;01
+&Alltid på toppen
+.
+
+3431;txt;01
+Sand&boks
+.
+
+3432;txt;01
+Opprett ny sandkasse
+.
+
+3433;txt;01
+Sett kontainermappe
+.
+
+3434;txt;01
+Oppdag skjult sandkasse
+.
+
+3435;txt;01
+Sett layout og grupper
+.
+
+3441;txt;01
+&Konfigurer
+.
+
+3442;txt;01
+&Programvarsler
+.
+
+3443;txt;01
+Windows Shell &Integrasjon
+.
+
+3501;txt;01
+Programvare og kompatibilitet
+.
+
+# 3503;txt;01
+# Experimental Protection (64-bit)
+# .
+
+3444;txt;01
+Glem skjulte &Meldinger
+.
+
+3445;txt;02
+&Tips
+.
+
+3502;txt;01
+# todo: https://github.com/sandboxie-plus/Sandboxie/issues/5140
+Lås &konfigurasjon
+.
+
+3446;txt;01
+&Rediger oppsett
+.
+
+3447;txt;01
+Last &om oppsett
+.
+
+3448;txt;01
+&Vis alle tips
+.
+
+3449;txt;01
+Sk&jul alle tips
+.
+
+3504;txt;01
+&Støtte Sandboxie med donasjoner
+.
+
+3505;txt;01
+Bidrag til Sandboxie
+.
+
+3506;txt;01
+Få kundesertifikat
+.
+
+3507;txt;01
+Bruk støttesertifikat
+.
+
+3451;txt;01
+&Hjelp
+.
+
+3452;txt;01
+&Hjelpemne (Web)
+.
+
+3453;txt;02
+Komme i gang og &Guide
+.
+
+3454;txt;01
+Sjekk etter &Oppdateringer
+.
+
+# 3455;txt;01
+# &Register Sandboxie
+# .
+
+3456;txt;01
+O&m Sandboxie
+.
+
+3457;txt;01
+&Sandboxie Forum (Web)
+.
+
+# 3458;txt;01
+# Allow direct access to Windows Font Cache
+# .
+
+3459;txt;01
+Tillat direkte tilgang til qWave driver (Google Hangouts)
+.
+
+3460;txt;01
+Funksjon tilkobling tilpasninger
+.
+
+3461;txt;01
+&Kjør sandkasse
+.
+
+3462;txt;01
+Kjør &Nettleser
+.
+
+3463;txt;01
+Kjør &E-postleser
+.
+
+3464;txt;01
+Kjør &Alle programmer
+.
+
+3465;txt;01
+Kjør fra start og meny
+.
+
+3466;txt;01
+Kjør &Windows Explorer
+.
+
+3467;txt;01
+Oppgrader til Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migrasjonsveiledning
+.
+
+3469;txt;01
+- områder i Sandboxie-Plus
+.
+
+3471;txt;01
+&Terminere programmer
+.
+
+3472;txt;01
+&Rask gjenoppretting
+.
+
+3473;txt;01
+&Slett innhold
+.
+
+3474;txt;01
+&Utforsk innhold
+.
+
+3475;txt;01
+Sandkasse og innstillinger
+.
+
+3476;txt;01
+&Gi nytt navn til sandkasse
+.
+
+3477;txt;01
+&Fjern sandkasse
+.
+
+3481;txt;01
+Terminer &programmet
+.
+
+3482;txt;01
+Program og &innstillinger
+.
+
+3483;txt;01
+&Ressurstilgang
+.
+
+3484;txt;01
+Ressurstilgang
+.
+
+3485;txt;01
+Vis vindu
+.
+
+3486;txt;01
+Skjul vinduet
+.
+
+3487;txt;01
+&Vis feil
+.
+
+# 3488;txt;01
+# &Delete Contents of Sandbox and Log Off
+# .
+
+3491;txt;01
+Gjeno&pprett til samme mappe
+
+.
+
+3492;txt;01
+Gjenopprett til &valgfri mappe
+.
+
+3493;txt;01
+Legg til &mappe til rask gjenoppretting
+.
+
+3494;txt;01
+Fjer&n mappen fra rask gjenoppretting
+.
+
+3495;txt;01
+Opprett skrivebordssnarvei
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Main Window
+#----------------------------------------------------------------------------
+
+3511;txt;01
+Sandboxie Control vil nå skjule vinduet, men vil
+Fortsette å løpe. For å vise vinduet, dobbeltklikk på 
+det gule Sandboxie-ikonet i systemvarslingsområdet.
+.
+
+3512;txt;01
+Rediger endringer i konfigurasjonsfilen Sandboxie.ini
+i tekstredigeringsvinduet som nå ble åpnet.
+
+Den reviderte konfigurasjonen vil tre i kraft først etter
+funksjonen Last inn konfigurasjon på nytt.
+
+I de fleste tilfeller er funksjonen Reload Configuration
+Brukes automatisk så snart du lukker teksten
+redaktørvindu.
+
+Du kan også instruere Sandboxie Control til
+Last innstillingen på nytt når som helst.
+.
+
+3513;txt;01
+Sandboxie-konfigurasjonen har blitt oppdatert og
+vil gjelde for sandkasse programmer som de starter.
+
+Hvis noen programmer allerede kjører sandkasset,
+Den nye konfigurasjonen gjelder ikke for dem.
+.
+
+3514;txt;01
+Det var et problem å lese konfigurasjonsfilen.
+Sandboxie-konfigurasjonen er ikke oppdatert.
+.
+
+3515;txt;01
+Sandbox %2
+.
+
+3516;txt;01
+Aktiv
+.
+
+3517;txt;01
+Programnavn
+.
+
+3518;txt;01
+PID
+.
+
+3519;txt;01
+Vindustittel
+.
+
+3520;txt;01
+Rask gjenopprettingsmapper
+.
+
+3521;txt;01
+Alle filer og mapper
+.
+
+3522;txt;01
+disker
+.
+
+3523;txt;01
+nettverksaksjer
+.
+
+3524;txt;01
+Brukerfiler
+.
+
+3525;txt;01
+Personlig
+.
+
+3526;txt;01
+Alle brukere
+.
+
+3527;txt;01
+Slett innholdet i sandkassen %2 Før vi tar denne kommandoen.
+.
+
+3528;txt;01
+Skriv inn et nytt navn på sandkassen.
+.
+
+3529;txt;01
+Er du sikker på at du vil fjerne sandkasse %2?
+.
+
+3530;txt;01
+Det er ingen prosesser å avslutte.
+.
+
+3531;txt;01
+ADVARSEL: Prosessen eller prosessen som skal avsluttes
+vil ikke bli gitt muligheten til å lagre tilstand eller data.
+
+Er du sikker på at du vil fortsette med prosessavslutning?
+.
+
+3532;txt;01
+I fremtiden, avslutte prosessene uten å spørre
+.
+
+3533;txt;01
+Du kan kopiere og kutte filer og mapper fra et sandkasset Windows Explorer-
+mappevindu, og lime dem direkte inn i et usandkasset mappevindu.
+.
+
+3534;txt;01
+Du vil utforske innholdet i sandkassen ved hjelp av et Windows Explorer-
+vindu som ikke kjører under tilsyn av Sandboxie.
+
+Du kan åpne programmer eller dokumenter som bor i sandkassen.
+Programmet eller dokumentet vil starte under tilsyn av Sandboxie.
+
+Manipulere innholdet i sandkassen ved hjelp av
+Windows Explorer kjører under Sandboxie. For å gjøre dette, bruk
+kommando: Sandkasse > Kjør Sandkasse > Kjør Windows Explorer.
+.
+
+3535;txt;01
+En feil oppstod under tilgang til sandkassemappen.
+.
+
+3536;txt;01
+\"Skjult\" indikator er fjernet fra alle meldinger.
+.
+
+3537;txt;01
+Indikatoren \"Ikke vis denne meldingen\" er fjernet fra alle tips.
+.
+
+3538;txt;01
+Indikatoren \"Ikke vis denne meldingen\" gjelder nå alle tips.
+.
+
+3539;txt;01
+Sandbox '%2' ble opprettet for %3 dag(er) siden.
+
+Vurder å slette innholdet i sandkassen fra tid til annen.
+
+Hvis du vil konfigurere automatisk sletting, kan du bruke kommandoen Sandbox innstillinger fra
+Sandbox-menyen i Sandboxie Control.
+.
+
+3540;txt;01
+Konfigurasjonsfilen Sandboxie.ini kan ikke redigeres fordi
+Den er passordbeskyttet. Hvis du vil redigere filen, bruk 
+Lås-oppsettskommando for å deaktivere passordbeskyttelse.
+.
+
+3541;txt;01
+Offentlig
+.
+
+# 3542;txt;01
+# The Experimental Protection mode enhances the protection
+# offered by 64-bit Sandboxie, and brings it to the same
+# level as the protection offered by 32-bit Sandboxie.
+# 
+# IMPORTANT:  Experimental Protection uses undocumented
+# features of the Windows kernel.  Future updates to
+# Windows might interfere with the Experimental Protection
+# mode, and might cause system instability.
+# 
+# USE AT YOUR OWN RISK.
+# 
+# To activate the Experimental Protection mode, you must
+# restart your computer now.
+# .
+
+# 3543;txt;01
+# To disable the Experimental Protection mode, you must
+# restart your computer now.
+# 
+# Please note that the Drop Rights setting will be enabled
+# in all sandboxes.
+# .
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: About
+#----------------------------------------------------------------------------
+
+3601;txt;01
+Om Sandboxie
+.
+
+# 3604;txt;01
+# Welcome to Sandboxie
+# .
+
+# 3605;txt;01
+# 
+# Sandboxie runs your applications in a protective isolation area called a sandbox.
+# 
+# Applications trapped in the sandbox are not allowed to make changes or harm your computer.
+# 
+# You can also use the sandbox to install and test new applications.
+# .
+
+# 3606;txt;01
+# If you are new to Sandboxie,
+# please take a moment to read the Getting Started tutorial.
+# .
+
+# 3607;txt;01
+# &Getting Started with Sandboxie
+# .
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Update
+#----------------------------------------------------------------------------
+
+3621;txt;01
+Sjekk etter oppdateringer
+.
+
+3622;txt;01
+Koble til Sandboxie-nettstedet for å sjekke om en nyere versjon av programmet er tilgjengelig?
+.
+
+3623;txt;01
+&Nå
+.
+
+3624;txt;01
+Neste &Uke
+.
+
+3625;txt;01
+&Aldri
+.
+
+3626;txt;01
+I fremtiden, sjekk for oppdateringer uten å spørre
+.
+
+3627;txt;01
+Personvernerklæring: Dine personlige opplysninger verken samles inn eller overføres av Sandboxie.
+.
+
+3628;txt;01
+Oppdateringskontrollen pågår allerede. Vent.
+.
+
+3629;txt;01
+Sandboxie-nettstedet rapporterer ingen nyere versjon av Sandboxie.
+.
+
+3630;txt;01
+Sandboxie %2 er tilgjengelig for nedlasting.
+.
+
+3631;txt;01
+Last ned nå?
+
+Merk: Last ned tar omtrent et minutt.
+Du vil bli varslet når nedlastingen er ferdig.
+.
+
+3632;txt;01
+Logg deg på en brukerkonto for å laste ned og installere den nye versjonen
+med administrative privilegier, og påkall denne kommandoen igjen.
+.
+
+3633;txt;01
+Sandboxie %2 har blitt lastet ned til følgende sted:
+
+%3
+
+Klikk OK for å starte installasjonen. Hvis noen programmer er
+Running av sandkasse, de vil bli avsluttet.
+.
+
+3634;txt;01
+Oppdatert feil: En feil oppstod under kommunikasjon med Sandboxie-nettstedet.
+.
+
+3635;txt;01
+Last ned ny versjon
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Run Browser
+#----------------------------------------------------------------------------
+
+3641;txt;01
+Åpne nettleser
+.
+
+3642;txt;01
+Velg om du vil åpne følgende webadresse i en sandkasset eller usandkasset nettleser.
+.
+
+3643;txt;01
+&Sandkasset
+.
+
+3644;txt;01
+&Usandkasset
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Message Dialog
+#----------------------------------------------------------------------------
+
+3645;txt;01
+Meldinger fra Sandboxie
+.
+
+3646;txt;01
+&Skjul
+.
+
+3647;txt;01
+Å skjule en melding vil forhindre at meldingen vises
+i fremtiden. Å skjule en melding løser egentlig ikke
+problemer som har ført til at meldingen vises.
+
+Er du sikker på at du vil slå av rapportering for melding %2?
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Disable Forced Programs
+#----------------------------------------------------------------------------
+
+3651;txt;01
+Avslå midlertidig tvangsprogrammer
+.
+
+3652;txt;01
+Deaktiver midlertidig tvangsprogrammer for
+.
+
+3653;txt;01
+sekunder
+.
+
+3654;txt;01
+Når du klikker på OK, vil Forced Programs-mekanismen bli midlertidig deaktivert,
+i en varighet av antall sekunder angitt ovenfor, 
+eller til du velger denne funksjonen igjen.
+.
+
+3599;txt;01
+Du kan deaktivere å tvinge til et bestemt program ved å holde Ctrl- og Shift-tastene nede når du klikker på kommandoen 'Kjør Sandkasset' for det programmet.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Resource Access Monitor
+#----------------------------------------------------------------------------
+
+3655;txt;01
+Ressurstilgangsmåler
+.
+
+3656;txt;01
+Dette verktøyet overvåker programmer som kjører under tilsyn av Sandboxie, og viser ressursene de får tilgang til. Vennligst les dokumentasjonen før du bruker dette verktøyet.
+.
+
+3657;txt;01
+Kopier innhold til utklippstavlen og lukk vinduet
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Is Window Sandboxed
+#----------------------------------------------------------------------------
+
+3661;txt;01
+Er Vindu sandkasset?
+.
+
+3662;txt;01
+Dra Finder Tool over et vindu for å velge det, og slepp deretter musen for å sjekke om vinduet er sandkasset.
+
+Trykk ESC for å avbryte.
+.
+
+3663;txt;01
+Det valgte vinduet kjører som en del av programmet %2 i sandkasse %3..
+.
+
+3664;txt;01
+Det valgte vinduet kjører ikke som en del av noe sandkasset program.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Create New Sandbox
+#----------------------------------------------------------------------------
+
+3665;txt;01
+Opprett en ny sandkasse
+.
+
+3666;txt;01
+Skriv inn et navn på den nye sandkassen.
+.
+
+3667;txt;01
+Feil: Ugyldig sandkassenavn angitt. Bruk bare bokstaver og siffer. Rom og andre spesielle tegn er ikke tillatt. Navnet kan ikke overstige 32 tegn i lengd.
+.
+
+3668;txt;01
+Feil: Duplisert sandkassenavn skrevet inn. Skriv inn et navn som ikke allerede er i bruk av en annen sandkasse.
+.
+
+3669;txt;01
+Kopier innstillinger fra eksisterende sandkasse:
+.
+
+4665;txt;01
+Feil: Duplisert sandkassenavn skrevet inn. Navnet er allerede brukt av en skjult sandkasse. Bruk kommandoen "Oppdag skjult sandkasse" fra Sandbox-menyen.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Set Container Folder
+#----------------------------------------------------------------------------
+
+3671;txt;01
+Sett kontainermappe
+.
+
+3672;txt;01
+Velg den stasjonen der sandkassene opprettes og lagres.
+.
+
+3673;txt;01
+For maksimal kompatibilitet med andre programmer anbefales det at du forlater sandkassen på standardplasseringen i den enheten du velger.
+.
+
+3674;txt;01
+Du kan imidlertid også bruke redigeringsboksen nedenfor for å overstyre standardplasseringen:
+.
+
+3675;txt;01
+Merk: Du anbefales å slette innhold i alle sandkasser, før du endrer containermappen.
+.
+
+3676;txt;01
+Disk %2
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Alerts
+#----------------------------------------------------------------------------
+
+3681;txt;01
+Programvarsler
+.
+
+3682;txt;01
+Når noen av følgende programmer lanseres utenfor en hvilken som helst sandkasse, vil Sandboxie utstede melding SBIE1301.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control Dialogs: Shell Integration
+#----------------------------------------------------------------------------
+
+3685;txt;01
+Windows Shell-integrasjon
+.
+
+3686;txt;01
+Start Sandboxie kontroll
+.
+
+3687;txt;01
+Når Windows starter
+.
+
+3688;txt;02
+Når et program starter i sandkassen
+.
+
+3689;txt;01
+Snarveisikon
+.
+
+3690;txt;01
+Legg til skrivebordssnarvei for å starte nettleser under Sandboxie
+.
+
+3691;txt;01
+Legg til hurtigstartssnarvei for å starte nettleser under Sandboxie
+.
+
+3692;txt;01
+Klikk for å legge til flere skrivebordssnarveiikoner:
+.
+
+3693;txt;01
+Legg til snarveisikon
+.
+
+3694;txt;01
+"Run Sandboxed" Handlinger
+.
+
+3695;txt;01
+Legg til høyreklikk handling "Kjør Sandkasset" i filer og mapper
+.
+
+3696;txt;01
+Legg til sandkasser som mål for "Send til" handling
+.
+
+3697;txt;01
+Sandboxie Start-menyen vises nå. Velg en
+program fra menyen, og Sandboxie vil opprette en ny
+snarveisikon på det virkelige skrivebordet, som du kan bruke til
+påkall den valgte søknaden under tilsyn av
+Sandboxie.
+.
+
+3698;txt;01
+Nettleser.lnk
+.
+
+3699;txt;01
+Kjør &sandkasset
+.
+
+4491;txt;01
+Åpne %2 i sandkasse %3
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Delete Sandbox / Quick Recovery / Immediate Recovery
+#----------------------------------------------------------------------------
+
+3711;txt;01
+Slette innhold
+.
+
+3712;txt;01
+Filene under er kvalifisert for rask gjenoppretting fra sandkassen. Velg en fil eller mappe og klikk på en av knappene Gjenopprett nedenfor for å gjenopprette det valgte elementet.
+.
+
+3713;txt;01
+Klikk på Slett innhold for å avslutte alle prosesser som kjører i sandkassen, og slett innholdet.
+.
+
+3714;txt;01
+&Slett innhold
+.
+
+3715;txt;01
+Umiddelbar gjenoppretting
+.
+
+3716;txt;02
+Følgende filer er kvalifisert for umiddelbar gjenoppretting og kan flyttes ut av sandkassen.
+.
+
+3717;txt;01
+Velg først filer fra listen ovenfor og velg deretter en målmappe.
+.
+
+3718;txt;01
+G&jenopprett
+.
+
+3719;txt;01
+Ikke trykk igjen for umiddelbar gjenoppretting før alle programmer i denne sandkassen er avsluttet
+.
+
+3720;txt;01
+Gjeno&pprett til samme mappe
+.
+
+3721;txt;01
+Gjenopprett til
+&Valgfri mappe
+.
+
+3722;txt;01
+Det er %2 filer og %3 mapper i sandkassen, okkupasjon %4 bytes diskplass.
+.
+
+3723;txt;01
+Velg en mappe der filen eller mappen vil bli gjenopprettet.
+.
+
+3724;txt;01
+Eller velg en mappe fra en tidligere gjenoppretting.
+.
+
+3725;txt;01
+Utvalgte mapper vil bli lagret for senere bruk
+.
+
+3726;txt;01
+Velg en mappe som skal legges til i listen over hurtiggjenopprettingsmapper.
+.
+
+3727;txt;01
+Mappen ble lagt til i listen over Quick Recovery-mapper.
+
+Men på dette tidspunktet er det ingen sandkassede elementer som kan
+bli gjenopprettet fra mappen.
+.
+
+3728;txt;01
+Ingen filer har blitt valgt for gjenoppretting.
+.
+
+3729;txt;01
+Recovery mislyktes. Følgende element kan ikke flyttes ut av sandkassen:
+.
+
+3730;txt;01
+Sandkassen er tom. Det er ingenting å slette.
+.
+
+3731;txt;01
+Noen sandkasse programmer kunne ikke stoppes. Innholdet i sandkassen vil ikke bli slettet.
+.
+
+3732;txt;01
+Det er ingen filer å gjenopprette på dette tidspunktet.
+.
+
+3733;txt;01
+Filen kan ikke gjenopprettes fordi navnet på destinasjonsmappen er for lang.
+Velg en annen destinasjonsmappe.
+.
+
+3734;txt;01
+Høyreklikk på listen over mapper for flere alternativer
+.
+
+3735;txt;02
+Bytt ut alle filer uten ytterligere spørsmål
+.
+
+3736;txt;01
+G&jenopprett && Utforsk
+.
+
+3737;txt;01
+Gjenopprett && &kjør
+.
+
+3981;txt;01
+&Åpne mappe i Windows Explorer utenfor sandkassen
+.
+
+3982;txt;01
+Fjern denne mappen fra listen
+.
+
+3983;txt;01
+Fjern alle mapper fra listen
+.
+
+3986;txt;01
+Recovery Log
+.
+
+3987;txt;01
+Følgende filer ble nylig gjenopprettet og flyttet ut av sandkasser.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Program Settings
+#----------------------------------------------------------------------------
+
+3741;txt;01
+Programinnstillinger
+.
+
+3742;txt;01
+Sandkasse:
+.
+
+3743;txt;01
+Program:
+.
+
+3744;txt;01
+Vis side 1
+.
+
+3745;txt;01
+Vis side 2
+.
+
+3751;txt;01
+Program Start
+.
+
+3752;txt;01
+Når dette programmet starter utenfor en sandkasse:
+.
+
+3753;txt;01
+Utspurt varslingsmelding SBIE1301
+.
+
+3754;txt;01
+Tving programmet til å kjøre i denne sandkassen
+.
+
+3755;txt;01
+Program Stopp
+.
+
+3756;txt;01
+Stopp dette programmet hvis det holder seg i sandkassen etter at andre programmer er avsluttet
+.
+
+3757;txt;01
+Stopp andre programmer etter at dette lederprogrammet er avsluttet
+.
+
+3761;txt;01
+Internettbegrensninger
+.
+
+3762;txt;01
+Alle programmer som kjører i denne sandkassen kan koble til Internett.
+.
+
+3763;txt;01
+Programmer som kan koble til Internett i denne sandkassen:
+.
+
+3764;txt;01
+Aktiver restriksjoner og la dette programmet koble til Internett.
+.
+
+3765;txt;01
+Start/kjør restriksjoner
+.
+
+3766;txt;01
+Alle programmer kan startes i denne sandkassen.
+.
+
+3767;txt;01
+Programmer som kan startes i denne sandkassen:
+.
+
+3768;txt;01
+Aktiver restriksjoner og la dette programmet starte.
+.
+
+3769;txt;01
+(Ingen)
+.
+
+3770;txt;01
+De nye innstillingene gjelder ikke for sandkassen
+Program som allerede kjører. Innstillinger
+vil gjelde neste gang dette programmet starter.
+.
+
+# 3771;txt;01
+# (This feature is only available in the registered version of Sandboxie)
+# .
+
+3772;txt;02
+Er du sikker på at du vil sette %2 Som et tvangsprogram?
+.
+
+3773;txt;02
+Er du sikker på at du vil sette %2 som en tvangsmappe?
+.
+
+# 3774;txt;02
+# Are you sure you want to set %2 as a forced user?
+# .
+
+3775;txt;02
+Du har gjort en endring som kanskje ikke er lett å angre.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings
+#----------------------------------------------------------------------------
+
+3801;txt;01
+Sandkasseinnstillinger - %2
+.
+
+3802;txt;01
+Denne siden etterlot seg blank
+.
+
+3803;txt;01
+Du må bruke endringene på denne siden før du kan fortsette.
+.
+
+3804;txt;01
+Bruk endringer når du bytter til en annen side.
+.
+
+3805;txt;01
+Alle programmer
+.
+
+3806;txt;02
+Listen nedenfor gjelder
+.
+
+3807;txt;01
+Velg en fil eller mappe som skal legges til i listen over filtilgang.
+.
+
+3808;txt;01
+Legg til ressursnavn
+.
+
+3809;txt;01
+Rediger ressursnavn
+.
+
+3551;txt;01
+(Alle programmer unntatt %2)
+.
+
+3552;txt;01
+Reverser betydningen av det aktuelle utvalget
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Appearance
+#----------------------------------------------------------------------------
+
+3811;txt;01
+Utseende
+.
+
+3812;txt;01
+Sandkasset programmer som kjører under tilsyn av Sandboxie vil vise Sandboxie [#] indikatoren i vindutittelen.
+.
+
+3813;txt;01
+Hvis følgende innstilling er slått på, vil vindutittelen også vise navnet på denne sandkassen.
+.
+
+3814;txt;01
+Vis sandkassenavn i vindutittel
+.
+
+3815;txt;01
+Vis ikke Sandboxie-indikator i vindutittelen
+.
+
+3816;txt;01
+Sandboxie kan vise en tykk kant rundt et vindu som tilhører et sandkasset program.
+.
+
+3817;txt;01
+Vis en kant rundt vinduet
+.
+
+3818;txt;01
+Klikk for å endre grensefarge
+.
+
+3819;txt;01
+Vis kant bare når musemarkøren er i vindustittelen
+.
+
+3820;txt;01
+Alfa
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Recovery
+#----------------------------------------------------------------------------
+
+# 3821;txt;01
+# Recovery::Quick Recovery
+# .
+
+3821;txt;02
+Recovery
+.
+
+3822;txt;01
+Rask gjenoppretting
+.
+
+3823;txt;01
+Før innholdet i sandkassen slettes, eller når du manuelt påkaller Quick Recovery-funksjonen, vil følgende mapper bli merket for sandfelt innhold. Hvis noen filer er funnet, vil du få en sjanse til å enkelt gjenopprette dem ut av sandkassen.
+.
+
+# 3831;txt;01
+# Recovery::Immediate Recovery
+# .
+
+3832;txt;01
+Umiddelbart gjenoppretting forbedrer Quick Recovery ved å automatisk invoking gjenopprette funksjonen så snart filer er opprettet.
+.
+
+3833;txt;01
+Aktiver øyeblikkelig gjenoppretting
+.
+
+3834;txt;01
+Følgende mapper og filtyper (eller filtyper) vil bli utelukket fra umiddelbar gjenoppretting.
+.
+
+3835;txt;01
+Legg til &Type
+.
+
+3836;txt;01
+Velg en mappe som skal ekskluderes fra øyeblikkelig gjenoppretting.
+.
+
+3837;txt;01
+Skrive inn en filtype (eller filenavn type) for å utelukke fra umiddelbar gjenoppretting
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Delete
+#----------------------------------------------------------------------------
+
+# 3841;txt;01
+# Delete::Invocation
+# .
+
+3841;txt;02
+Slett
+.
+
+3842;txt;01
+Slette induksjon
+.
+
+3843;txt;01
+Innholdet i denne sandkassen kan automatisk slettes når det siste sandkasseprogrammet slutter og sandkassen blir inaktiv.
+.
+
+3844;txt;01
+Slett innholdet i sandkassen automatisk
+.
+
+3845;txt;01
+Hvis noen sandkassede filer er kvalifisert til gjenoppretting, vil Quick Recovery bli påkalt i stedet for automatisk sletting.
+.
+
+3846;txt;01
+Alternativt kan denne sandkassen beskyttes mot fjerning og sletting, både manuell og automatisk, som initieres av Sandboxie.
+.
+
+3847;txt;01
+Aldri fjerne denne sandkassen eller slette innholdet
+.
+
+# 3851;txt;01
+# Delete::Command
+# .
+
+3852;txt;01
+Slett kommando
+.
+
+3853;txt;01
+For både automatisk og manuell sletting vil følgende systemkommando bli brukt til å slette innholdet i sandkassen. Hvis venstre blank, er standardkommandoen RMMIR (fjern mappe).
+.
+
+3854;txt;01
+Hvis du endrer denne innstillingen, inkludere teksten "%%SANDBOX%%" (med sitatmerker). Når kommandoen utføres, vil denne teksten bli erstattet med plasseringen av sandkassemappen.
+.
+
+3855;txt;01
+Eller velg en forhåndsdefinert slettekommando:
+.
+
+3856;txt;01
+Slettekommandoen angir ikke "%%SANDBOX%%" (med sitatmerker).
+Er du sikker på at du vil akseptere denne slettekommandoen?
+.
+
+3857;txt;01
+Vennligst naviger til og velg programmet - %2
+.
+
+#----------------------------------------------------------------------------
+# Program Groups
+#----------------------------------------------------------------------------
+
+3971;txt;01
+Programgrupper
+.
+
+3972;txt;01
+Du kan gruppere en rekke programmer sammen og gi dem et gruppenavn. Programgrupper kan brukes med noen av innstillingene som aksepterer programnavn.
+.
+
+3974;txt;01
+Legg til &gruppe
+.
+
+3975;txt;01
+Skriv inn nytt gruppenavn
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Forced Folders/Programs/Users
+#----------------------------------------------------------------------------
+
+# 3861;txt;01
+# Program Start::Forced Folders
+# .
+
+3861;txt;02
+Program Start
+.
+
+3862;txt;01
+Tvungne mapper
+.
+
+3863;txt;01
+Hvis noe program starter utenfor sandkasse fra en av følgende mapper, vil det bli tvunget til å kjøre i denne sandkassen. Dette gjelder ikke om programmet eksplisitt startes i en annen sandkasse.
+.
+
+3864;txt;01
+Du kan tvinge Windows CD/DVD AutoRun til å kjøre sandkasset, ved å inkludere CD-ROM og DVD-ROM-stasjons bokstaver i følgende liste.
+.
+
+3865;txt;01
+Tvungne mapper har forrang over tvangsprogrammer.
+.
+
+3866;txt;01
+Velg en mappe som skal legges til i listen over tvangsmapper.
+.
+
+# 3871;txt;01
+# Program Start::Forced Programs
+# .
+
+3872;txt;01
+Tvungne programmer
+.
+
+3873;txt;01
+Hvis noen av følgende programmer starter unsandboxed, vil det bli tvunget til å kjøre i denne sandkassen. Dette gjelder ikke om programmet eksplisitt startes i en annen sandkasse.
+.
+
+# 3961;txt;01
+# Program Start::Forced Users
+# .
+
+# 3962;txt;01
+# Forced Users
+# .
+
+# 3963;txt;01
+# If any of the following user accounts logs into this computer, the entire logon session will be forced to run in this sandbox.
+# .
+
+# 3964;txt;01
+# To delete a sandbox associated with a forced user account, log on to Windows as that user, and use Sandboxie Control to delete the sandbox.
+# .
+
+# 3965;txt;01
+# Forced Users take precedence over Forced Programs and Forced Folders.
+# .
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Linger/Leader Programs
+#----------------------------------------------------------------------------
+
+# 3881;txt;01
+# Program Stop::Lingering Programs
+# .
+
+3881;txt;02
+Program Stopp
+.
+
+3882;txt;01
+Lingrende programmer
+.
+
+3883;txt;01
+Følgende programmer vil automatisk bli avsluttet hvis de fortsatt kjører i denne sandkassen etter at alle andre programmer er avsluttet.
+.
+
+# 3891;txt;01
+# Program Stop::Leader Programs
+# .
+
+3892;txt;01
+Lederprogrammer
+.
+
+3893;txt;01
+Følgende programmer anses som primære programmer i denne sandkassen. Å avslutte disse programmene vil føre til at alle andre programmer som fortsatt utføres i denne sandkassen avsluttes.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  File Migration
+#----------------------------------------------------------------------------
+
+3901;txt;01
+Fil Migrasjon
+.
+
+3903;txt;01
+Filene må overføres (kopieres) til sandkassen før de kan endres av programmer som kjører i den sandkassen. Men for svært store filer tar migrasjonsprosessen lang tid.
+.
+
+3904;txt;01
+Følgende tall bestemmer størrelsen på en migrasjonsfil. Filer større enn den størrelsen vil aldri bli migrert i sandkassen, og vil ikke bli modifiserbar av programmer som kjører i sandkassen.
+.
+
+3905;txt;01
+Ikke migrer filer større enn
+.
+
+3906;txt;01
+kilobytes
+.
+
+3907;txt;01
+Når en fil er for stor til å bli migrert, vil meldingen SBIE2102 bli utstedt, med mindre følgende alternativ er kontrollert.
+.
+
+3908;txt;01
+Ikke utsett en melding når en fil er for stor til å migrere
+.
+
+3909;txt;01
+Fil Migration-innstillingen begrenser den maksimale størrelsen på en fil som kan kopieres i sandkassen.
+
+Innstillingen er satt til %3 kilobytes i sandkasse '%2'.
+
+Klikk OK for å justere denne størrelsesgrensen til %4 kilobyte.
+
+Du kan også endre denne grensen ved å åpne vinduet Sandbox innstillinger og utvide siden Fil Migration innstillinger.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Internet/Start Restrictions
+#----------------------------------------------------------------------------
+
+# 3911;txt;01
+# Restrictions::Internet Access
+# .
+
+3911;txt;02
+Begrensninger
+.
+
+3912;txt;01
+Internett-tilgang
+.
+
+3913;txt;01
+Følgende programmer vil være de eneste programmene i denne sandkassen som kan få tilgang til Internett.
+.
+
+3914;txt;01
+Når denne funksjonen er aktivert, vil programmer som er installert (eller lastet ned) i denne sandkassen aldri få tilgang til Internett, selv om de samsvarer med programnavnet angitt ovenfor.
+.
+
+3915;txt;01
+Problemmelding SBIE%2 når tilgangen nektes
+.
+
+3916;txt;01
+&Lås alle programmer
+.
+
+3917;txt;01
+&Tillat alle programmer
+.
+
+3918;txt;01
+Alle programmer kan få tilgang til Internett
+.
+
+3919;txt;01
+Ingen programmer kan få tilgang til Internett
+.
+
+3920;txt;01
+Internett-tilgangsbegrensninger er aktivert i sandkassen '%2' og hindrer dette programmet i å få tilgang til Internett.
+
+Klikk OK for å legge til programmet '%3' i Internett-tilgangsbegrensningene for sandkassen '%2'.
+
+Hvis du vil administrere Internett-restriksjoner, åpner du vinduet Sandkasseinnstillinger og utvider innstillingene for restriksjoner.
+.
+
+# 3921;txt;01
+# Restrictions::Start/Run Access
+# .
+
+3922;txt;01
+Start/Kjør-tilgang
+.
+
+3923;txt;01
+Følgende programmer vil være de eneste programmer i denne sandkassen som kan starte og kjøre.
+.
+
+3924;txt;01
+Når denne funksjonen er aktivert, vil programmer som er installert (eller lastet ned) i denne sandkassen aldri få lov til å starte eller kjøre, selv om de passer til programnavnet som er angitt ovenfor.
+.
+
+3928;txt;01
+Alle programmer kan starte og kjøre
+.
+
+3930;txt;01
+Start/Kjør-tilgangsbegrensninger er aktivert i sandkassen '%2' og hindrer dette programmet i å starte og kjøre.
+
+Klikk OK for å la programmet '%3' starte/kjøre med tilgang i sandkassen '%2'.
+
+Hvis du vil administrere Start/Kjør-tilgangsbegrensninger, åpner du vinduet Sandkasseinnstillinger og utvider innstillingene for restriksjoner.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Low Level Access / Hardware Access
+#----------------------------------------------------------------------------
+
+# 3931;txt;01
+# Restrictions::Low-Level Access
+# .
+
+# 3932;txt;01
+# Low-Level Access
+# .
+
+# 3933;txt;01
+# The following settings weaken the protection afforded by Sandboxie.  Enabling any or all of these settings is not recommended.
+# .
+
+# 3934;txt;01
+# Permit programs to load kernel mode drivers into the operating system
+# .
+
+# 3935;txt;01
+# Permit programs to load application (Win32) hooks into other programs
+# .
+
+# 3936;txt;01
+# Permit programs to simulate keyboard and mouse input
+# .
+
+# 3937;txt;01
+# Permit programs to change desktop wallpapers and other system parameters
+# .
+
+# 3938;txt;01
+# Permit programs to manage hardware device configuration
+# .
+
+# 3951;txt;01
+# Restrictions::Hardware Access
+# .
+
+# 3952;txt;01
+# Hardware Access
+# .
+
+# 3953;txt;01
+# Permit programs to change user account password
+# .
+
+# 3954;txt;01
+# Permit programs to alter network and firewall parameters
+# .
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Drop Rights
+#----------------------------------------------------------------------------
+
+# 3941;txt;01
+# Restrictions::Drop Rights
+# .
+
+3942;txt;01
+Drop Rights
+.
+
+3943;txt;01
+Sandboxie må deaktivere bare noen få sikkerhetsrettigheter fra programmene den overvåker for å garantere isolasjon.
+.
+
+3944;txt;01
+Hvis du imidlertid bruker en administrasjons- eller strømbrukerkonto, kan Sandboxie deaktivere flere sikkerhetsrettigheter som tilsvarer effekten av DropMyRights-verktøyet.
+.
+
+3945;txt;01
+Drop rettigheter fra administratorer og strømbrukere grupper
+.
+
+# 3946;txt;01
+# It is recommended that you keep this setting enabled, as compensation for some measure of Sandboxie protection that is not available in 64-bit editions of Windows.
+# .
+
+# 3947;txt;01
+# To activate enhanced protection on 64-bit Windows, please use the Experimental Protection command from the Configure menu.
+# .
+
+3949;txt;01
+Innstillingen Drop Rights er aktivert i sandkasse '%2', og hindrer bruk av Administrator privilegier.
+
+Klikk på OK for å deaktivere innstillingen Drop Rights i sandkassen '%2', og tillater bruk av Administrator privilegier i sandkassen.
+
+Du kan alltid endre innstillingen Drop Rights ved å åpne vinduet Sandbox-innstillinger, og utvide innstillingene for restriksjoner.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Print Spooler
+#----------------------------------------------------------------------------
+
+# 3950;txt;01
+# Print Spooler
+# .
+
+# 3951;txt;01
+# The Windows Print Spooler runs outside of Sandboxie's supervision.  A sandboxed application that requests the Print Spooler print to a file will be blocked, because this file would be written outside the sandbox.
+# .
+
+# 3952;txt;01
+# If you wish to allow the Print Spooler to print to a file, you can enable this setting. It is recommended that you enable this option only when needed.
+# .
+
+# 3953;txt;01
+# Allow the Windows Print Spooler to print to file.
+# .
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Network Files
+#----------------------------------------------------------------------------
+
+3955;txt;01
+Nettverksfiler
+.
+
+3956;txt;01
+Nettverksfiler og mapper er vanligvis synlige for sandkassede programmer.
+.
+
+3957;txt;01
+Hvis du ønsker å blokkere sandkasse programmer fra å få tilgang til filer og mapper på nettverket, kan du aktivere denne innstillingen. Individuelle filer og mapper kan åpnes for sandkassede programmer ved å legge dem under Ressource Access -> Filtilgang.
+.
+
+3958;txt;01
+Blokker nettverksfiler og -mapper med mindre det er spesielt åpnet.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Resource Access
+#----------------------------------------------------------------------------
+
+4001;txt;01
+Ressurstilgang::Filtilgang::Direct Access
+.
+
+4002;txt;01
+Direkte filtilgang (OpenFilePath)
+.
+
+4003;txt;01
+Følgende filer og mapper vil være direkte tilgjengelige for programmer som kjører i denne sandkassen, uten noen effekt av sandkasse.
+.
+
+4004;txt;01
+Dette gjelder ikke programmer som er installert eller lastet ned i sandkassen.
+Se også: Full adgangsinnstilling.
+.
+
+4011;txt;01
+Ressurstilgang::Filtilgang::Full adgang
+.
+
+4012;txt;01
+Full filtilgang (OpenPipePath)
+.
+
+4013;txt;01
+Følgende filer og mapper vil være direkte tilgjengelige for programmer som kjører i denne sandkassen, uten noen effekt av sandkasse.
+.
+
+4014;txt;01
+I motsetning til innstillingen Direkte tilgang gjelder denne innstillingen alle programmer, inkludert de som er installert eller lastet ned i sandkassen.
+.
+
+4021;txt;01
+Ressurstilgang::Filtilgang::Blokkert Tilgang
+.
+
+4022;txt;01
+Blokkert filtilgang (lukketFilePath)
+.
+
+4023;txt;01
+Følgende filer og mapper vil ikke være tilgjengelig i det hele tatt for programmer som kjører i denne sandkassen.
+.
+
+4024;txt;01
+Hvis en fil eller mappe passer til andre filtilgangsinnstillinger, men også til enhver blokkert tilgangsinnstilling, vil blokkert tilgangsinnstilling ha forrang.
+.
+
+4025;txt;01
+Windows-fildeling kan brukes til å omgå innstillingene for blokkert filtilgang.
+Derfor ble det lagt til en innstilling for å blokkere tilgang til Windows-fildelingstjenesten.
+.
+
+4031;txt;01
+Ressurstilgang::Filtilgang::Lesetilgang
+.
+
+4032;txt;01
+Lesebeskyttet filtilgang (ReadFilePath)
+.
+
+4033;txt;01
+Følgende filer og mapper kan ikke endres til programmer som kjører i denne sandkassen.
+.
+
+4111;txt;01
+Resurstilgang::Filtilgang::Bare tilgang
+.
+
+4112;txt;01
+Skrivebeskyttet filtilgang (WriteFilePath)
+.
+
+4113;txt;01
+Følgende mapper vil vises tomme for programmer som kjører i denne sandkassen, men programmene kan opprette nye filer i disse mappene i sandkassen.
+.
+
+4041;txt;01
+Ressurstilgang::Register Adgang::Direkte Adgang
+.
+
+4042;txt;01
+Direkte registertilgang (OpenKeyPath)
+.
+
+4043;txt;01
+Følgende registernøkler vil være direkte tilgjengelig for programmer som kjører i denne sandkassen, uten konsekvenser av sandkasse.
+.
+
+4044;txt;01
+Dette gjelder ikke programmer som er installert eller lastet ned i sandkassen.
+.
+
+4051;txt;01
+Ressurstilgang::Registry Access:: Låst tilgang
+.
+
+4052;txt;01
+Blokkert registertilgang (lukketKeyPath)
+.
+
+4053;txt;01
+Følgende registernøkler vil ikke være tilgjengelige i det hele tatt for programmer som kjører i denne sandkassen.
+.
+
+4054;txt;01
+Hvis en registernøkkel passer til andre registertilgangsinnstillinger,
+ men også passer til alle blokkerte tilgangsinnstillinger,
+ vil blokkert tilgangsinnstilling ha forrang.
+.
+
+4061;txt;01
+Ressurstilgang::Lesetilgang
+.
+
+4062;txt;01
+Lesbare registertilgang (ReadKeyPath)
+.
+
+4063;txt;01
+Følgende registernøkler kan ikke endres til programmer som kjører i denne sandkassen.
+.
+
+4121;txt;01
+Ressurstilgang::Register Adgang::Kun-skrive Tilgang
+.
+
+4122;txt;01
+Kun-Skrive registertilgang (WriteKeyPath)
+.
+
+4123;txt;01
+Følgende registernøkler vil virke tomme for programmer som kjører i denne sandkassen, men programmene kan skrive nye data i disse registernøklene i sandkassen.
+.
+
+4071;txt;01
+Ressurstilgang::IPC Tilgang::Direkte Adgang
+.
+
+4072;txt;01
+Direkte IPC Adgang (OpenIpcPath)
+.
+
+4073;txt;01
+Følgende NT IPC-objekter vil være direkte tilgjengelig for programmer som kjører i denne sandkassen, uten effekter av sandkasse.
+.
+
+4074;txt;01
+Denne innstillingen gjelder alle programmer, inkludert de som er installert eller lastet ned i sandkassen.
+.
+
+4081;txt;01
+Ressurstilgang::IPC Tilgang::Blokkert Adgang
+.
+
+4082;txt;01
+Blokkert IPC-tilgang (lukketIpcPath)
+.
+
+4083;txt;01
+Følgende NT IPC-objekter vil ikke være tilgjengelige i det hele tatt for programmer som kjører i denne sandkassen.
+.
+
+4084;txt;01
+Hvis et NT IPC-objekt passer til alle andre IPC Access-innstillinger, men også passer til alle blokkerte Access-innstillinger, vil Blocked Access-innstillingen ha forrang.
+.
+
+4091;txt;01
+Ressurstilgang::Vindu Tilgang
+.
+
+4092;txt;01
+Vindutilgang (OpenWinClass)
+.
+
+4093;txt;01
+Sandkasse programmer kan ikke kommunisere med vinduer som tilhører programmer som kjører utenfor sandkassen, med mindre vinduet ble opprettet med en av følgende vindu klasser.
+.
+
+4101;txt;01
+Ressurstilgang::COM Tilgang
+.
+
+4102;txt;01
+COM-tilgang (OpenClid)
+.
+
+4103;txt;01
+Sandboxed programmer kan ikke kommunisere med COM-objekter som tilhører programmer som kjører utenfor sandkassen, med mindre COM klasse-ID matcher en av følgende klasse-ID-er.
+.
+
+4104;txt;01
+Ressurstilgang::Nettverkstilgang
+.
+
+4105;txt;01
+Nettverkstilgang (Brannmur)
+.
+
+#----------------------------------------------------------------------------
+# Applications - General
+#----------------------------------------------------------------------------
+
+4201;txt;01
+Søknader
+.
+
+4202;txt;01
+&Vis kode
+.
+
+4203;txt;01
+Åpne &Nettsted
+.
+
+4204;txt;01
+Opprett n&y
+.
+
+4205;txt;01
+Denne programkonfigurasjonen inneholder ikke en webadresse.
+.
+
+4206;txt;01
+Diverse
+.
+
+4207;txt;01
+Forbedre bruken av Sandboxie med de andre programmene ved å velge dem fra listen nedenfor.
+.
+
+# 4208;txt;01
+# Applications::Folders
+# .
+
+4209;txt;01
+Mapper
+.
+
+4210;txt;01
+Konfigurer mappeplasseringene som brukes av de andre programmene.
+.
+
+4211;txt;01
+Velg mappe for
+.
+
+4212;txt;01
+Standard plassering:
+.
+
+4213;txt;01
+Alternativ plassering:
+.
+
+4214;txt;02
+En alternativ plassering for '%2'
+skal inneholde følgende fil:
+
+%3
+
+Den valgte plasseringen inneholder ikke denne filen.
+
+Velg en mappe som inneholder denne filen.
+.
+
+4215;txt;01
+Velg mappen som brukes av '%2'..
+.
+
+4216;txt;01
+Innstillingene under komponerer programkonfigurasjonen '%2'.
+.
+
+4217;txt;01
+Skriv inn eller lim inn innstillinger, og klikk deretter OK for å opprette en ny lokal programkonfigurasjon.
+.
+
+4218;txt;01
+Lokalt
+.
+
+4219;txt;01
+Dine lokale (uoffisielle) programkonfigurasjoner.
+.
+
+4220;txt;01
+Den angitte koden inneholder én eller flere feil.
+Kan ikke opprette programoppsett.
+.
+
+4221;txt;01
+Hvis du vil angi mappesteder for applikasjonene, kan du se mappesiden.
+.
+
+4222;txt;02
+Denne innstillingen kan ikke redigeres eller fjernes fordi det er en
+en del av en programkonfigurasjon:
+
+%2
+
+For å fjerne applikasjonskonfigurasjonen fra sandkassen,
+se Programmer-sidene i Sandbox innstillingsvinduet.
+.
+
+4223;txt;01
+Lokalt programoppsett '%2' Nå fjernes i alle sandkasser.
+Vil du fullstendig slette denne programkonfigurasjonen?
+.
+
+4224;txt;01
+PDF/utskrift
+.
+
+4226;txt;02
+Sikkerhet/Personlighet
+.
+
+4228;txt;01
+Skrivebordsverktøy
+.
+
+4230;txt;01
+Last ned ledere
+.
+
+4288;txt;01
+Alle programmer
+.
+
+4289;txt;01
+Liste over alle programkonfigurasjoner, sortert i alfabetisk rekkefølge. Listen inkluderer ikke de lokale (uoffisielle) programkonfigurasjonene.
+.
+
+4291;txt;01
+Standard utelukkelser for umiddelbar gjenoppretting
+.
+
+4292;txt;01
+Standardliste over Lingering-programmer
+.
+
+4293;txt;01
+Standard liste over blokkerte TCP/IP-porter
+.
+
+4294;txt;01
+Tillat programmer til å oppdatere hopplister i Windows 7 oppgavelinjen
+.
+
+4295;txt;01
+Standard utelukkelser Fil Migrationsinnstillinger
+.
+
+4296;txt;01
+Standard RPC portbindinger
+.
+
+4297;txt;01
+Åpne Bluetooth RPC-port
+.
+
+4298;txt;01
+Åpne Smart Card RPC port
+.
+
+4299;txt;01
+Åpne Simple Service Discovery Protocol (SDP, UPnP) RPC-port
+.
+
+4300;txt;01
+Åpne ytterligere RPC-portbindinger
+.
+
+4306;txt;01
+Åpne RPC-portbindinger for UAC
+.
+
+4307;txt;01
+Blokkere vanlige telemetriprosesser
+.
+
+4308;txt;01
+# todo check that Norwegian Bokmål localized Windows does not 
+# translate \Devices\ to \Enheter\ (pretty sure it doesn't)
+Filtrer tilgang til \Devices\
+.
+
+#----------------------------------------------------------------------------
+# Applications - Software Compatibility
+#----------------------------------------------------------------------------
+
+4251;txt;01
+Programvarekompatibilitet
+.
+
+4252;txt;01
+Sandboxie har oppdaget følgende programvarer i systemet ditt.
+.
+
+4253;txt;01
+Klikk OK for å bruke innstillingsinnstillinger som vil forbedre kompatibiliteten med disse programmene.
+.
+
+4254;txt;01
+Disse innstillingsinnstillingene vil ha effekt i alle eksisterende sandkasser og i alle nye sandkasser.
+.
+
+4255;txt;01
+I fremtiden, ikke sjekk programvarekompatibilitet
+.
+
+4256;txt;01
+Denne programinnstillingen kan ikke fjernes fordi den brukes på alle sandkasser.
+Hvis du vil fjerne dette programkonfigurasjonen, kan du bruke programvarekompatibilitetsverktøyet fra menyen Konfigurer.
+.
+
+4257;txt;01
+Fjern &gamle innstillinger
+.
+
+4258;txt;01
+Følgende kompatibilitetsinnstillinger er ikke lenger i bruk:
+
+%2
+
+Klikk OK for å kaste disse kompatibilitetsinnstillingene.
+.
+
+4451;txt;01
+Sandboxie har oppdaget følgende motstridende
+programmer i systemet ditt. Disse programmene kan
+forstyrre riktig drift av Sandboxie.
+
+%2
+
+Vennligst se på siden Knowled Conflicts på Sandboxie
+Nettstedet for mer informasjon og løsninger.
+
+Vil du åpne den kjente Conflicts-siden nå?
+.
+
+4452;txt;01
+&Kjenner til konflikter
+.
+
+#----------------------------------------------------------------------------
+# Lock Configuration
+#----------------------------------------------------------------------------
+
+4261;txt;01
+Lås oppsett
+.
+
+4262;txt;01
+Sandboxie kan beskytte global konfigurasjon og Sandbox-innstillinger mot uautoriserte endringer. Velg beskyttelsesmodus for å aktivere eller deaktivere.
+.
+
+4263;txt;01
+Kun &Administrator brukerkontoer kan gjøre endringer
+.
+
+4264;txt;01
+&Passord må skrives inn for å gjøre endringer
+.
+
+4265;txt;01
+&Glem passord når Sandboxie Control-vinduet blir skjult
+.
+
+4266;txt;01
+&Endre passord
+.
+
+4267;txt;01
+Kun Administrator brukerkontoer kan bruke &Deaktivert program-kommandoer
+.
+
+4269;txt;01
+Vennligst overvei å lese Sandboxie-dokumentasjonssiden om
+beskyttelse av konfigurasjonen. Vil du åpne denne siden nå?
+.
+
+4271;txt;01
+Sandboxie-konfigurasjonen er beskyttet av et passord. Skriv inn passordet nå.
+.
+
+4272;txt;01
+Skriv inn et nytt passord for å beskytte Sandboxie-konfigurasjonen.
+.
+
+4273;txt;01
+Skriv det samme passordet igjen for å bekrefte det.
+.
+
+4274;txt;01
+Feil passord angitt. Prøve igjen?
+.
+
+#----------------------------------------------------------------------------
+# Program Selector
+#----------------------------------------------------------------------------
+
+4281;txt;01
+Velg et programnavn
+.
+
+4282;txt;01
+Velg et programnavn eller en programgruppe
+.
+
+4283;txt;01
+Programmer som nylig ble startet
+.
+
+4284;txt;01
+Programmer som vises i Sandbox innstillinger
+.
+
+4285;txt;01
+Programgrupper
+.
+
+4286;txt;01
+Velg eller skriv inn et program:
+.
+
+4287;txt;01
+Åpne / Velg &fil
+.
+
+#----------------------------------------------------------------------------
+# Applications - Accessibility
+#----------------------------------------------------------------------------
+
+# 4301;txt;01
+# Applications::Accessibility
+# .
+
+4302;txt;01
+Tilgjengelighet
+.
+
+4303;txt;01
+Følgende innstillinger muliggjør bruk av Sandboxie i kombinasjon med tilgjengelighet programvare. Vær oppmerksom på at noen tiltak for beskyttelse av Sandboxie er nødvendigvis tapt når disse innstillingene er i kraft.
+.
+
+4304;txt;01
+Hvis du vil kompensere for den tapte beskyttelsen, kan du lese siden Drop Rights-innstillingene i kategorien Restriksjonsinnstillinger.
+.
+
+4305;txt;03
+Skjermlesere:  %2
+.
+
+#----------------------------------------------------------------------------
+# Applications - Web Browser and Email Reader
+#----------------------------------------------------------------------------
+
+4321;txt;01
+Nettleser
+.
+
+4322;txt;01
+Følgende utelukkelser tillater nettlesere som kjører i denne sandkassen å gjøre endringer utenfor sandkassen, og dermed å ofre litt sikkerhet og personvern for større bekvemmelighet.
+.
+
+4323;txt;01
+Tving '%2' til å kjøre i denne sandkassen
+.
+
+4324;txt;02
+Tillat direkte tilgang til %2 synkroniser data
+.
+
+4325;txt;02
+Tillat direkte tilgang til %2 for
+.
+
+4326;txt;02
+Tillat direkte tilgang til %2 favoritter
+.
+
+4327;txt;01
+Legg til Internet Explorer favoritter til Quick Recovery mapper
+.
+
+4328;txt;01
+Tillat direkte tilgang til %2 Informasjonskapsler
+.
+
+4329;txt;01
+Lagre utenfor sandkasse: Historie av søkestrenger og påsøkte kommandoer
+.
+
+4330;txt;01
+Lagre utenfor sandkasse: Kontoinformasjon for Hotmail and Messenger
+.
+
+4331;txt;01
+Tillat direkte tilgang til %2 passord
+.
+
+4336;txt;02
+Tillat direkte tilgang til %2 bokmerke og historiedatabase
+.
+
+4337;txt;02
+Tillat direkte tilgang til %2 phishing database
+.
+
+4338;txt;02
+Tillat direkte tilgang til hele %2 profilmappe
+.
+
+4339;txt;02
+Tillat direkte tilgang til %2 innstillinger
+.
+
+4340;txt;01
+Tillat direkte tilgang til %2 sesjonsledelse
+.
+
+4341;txt;01
+Tillat direkte tilgang til %2 notater
+.
+
+4342;txt;01
+Slå på %2 kompatibilitetsarbeid
+.
+
+4356;txt;02
+Tillat direkte tilgang til %2 bokmerke
+.
+
+4357;txt;02
+Andre
+.
+
+4358;txt;02
+Tillegg
+.
+
+4391;txt;01
+E-postleser
+.
+
+4392;txt;01
+Følgende utelukkelser tillater e-postlesere som kjører i denne sandkassen for å få tilgang til postkassefiler utenfor sandkassen.
+.
+
+4393;txt;01
+Media-spillere
+.
+
+4394;txt;01
+Følgende utelukkelser gjør det mulig for mediespillere som kjører i denne sandkassen å få tilgang til filer utenfor sandkassen.
+.
+
+4395;txt;01
+Tillat %2 direkte tilgang til Bilde-mappen for enklere skjermopptak.
+.
+
+4396;txt;01
+Torrent-klienter
+.
+
+4397;txt;01
+Følgende utelukkelser tillater Torrent-klienter som kjører i denne sandkassen å få tilgang til filer utenfor sandkassen.
+.
+
+4398;txt;01
+Tillat %2 direkte tilgang til musikkmappen for enklere musikkbibliotekshåndtering.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  User Accounts
+#----------------------------------------------------------------------------
+
+5101;txt;01
+Brukerkontoer
+.
+
+5102;txt;01
+Legg til brukerkontoer og brukergrupper til listen nedenfor for å begrense bruken av sandkassen til bare disse kontoene. Hvis listen er tom, kan sandkassen brukes av alle brukerkontoer.
+.
+
+5103;txt;01
+Merk: Tvungne programmer og tvangsmapper for en sandkasse gjelder ikke for brukerkontoer som ikke kan bruke sandkassen.
+.
+
+# 5105;txt;01
+# Add &User
+# .
+
+5107;txt;01
+Din brukerkonto har nå blitt begrenset fra å bruke denne sandkassen, og
+Sandkassen vil bli fjernet fra skjermen i hovedvinduet.
+
+For å gjøre sandkassen synlig og brukbar, bruk "Reveal Hidden Sandbox"
+kommando fra Sandbox-menyen.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Reveal Hidden Sandbox
+#----------------------------------------------------------------------------
+
+5122;txt;01
+Din brukerkonto er utelukket fra å bruke noen av sandkassene som er oppført nedenfor.
+.
+
+5123;txt;01
+Følgende brukerkontoer er tillatt å bruke den valgte sandkassen på dette tidspunktet.
+.
+
+5124;txt;01
+Klikk på OK-knappen for å legge til din brukerkonto '%2' til sandkassen og ha sandkassen vises i hovedvinduet.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Set Layout and Groups
+#----------------------------------------------------------------------------
+
+5142;txt;01
+Ordne sandkasser i grupper og tilpasse rekkefølgen de er oppført i. Bruk høyreklikk-kontekstmenyen til å administrere oppføringer i layouttreet nedenfor.
+.
+
+5143;txt;01
+(Topp)
+.
+
+5145;txt;01
+&Gjenopprett standardutforming
+.
+
+5146;txt;01
+Sett inn &gruppe
+.
+
+5147;txt;01
+&Gi nytt navn
+.
+
+5148;txt;01
+&Slett
+.
+
+5151;txt;01
+&Flytt
+.
+
+5152;txt;01
+Flytt &Opp
+.
+
+5153;txt;01
+Flytt &ned
+.
+
+5154;txt;01
+Flytt &til
+.
+
+#----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+Den klassiske Sandboxie UI (SbieCtrl.exe) har svært begrenset
+ressursovervåking og hendelsessporing.
+
+For optimal feilsøking er det svært tilrådelig 
+å installere den nye UI, Sandboxie-Plus (SandMan.exe),
+som gir utmerket sporings- og overvåkingskapasitet.
+
+Vil du laste ned Sandboxie-Plus nå?
+.
+
+6002;txt;01
+Besøk <a ID="whats_new">Sandboxie-plus.com</a> å lære om den nye funksjonen til Sandboxie-Plus,
+eller direkte klikk <a ID="upgrade">her</a> å laste ned den nyeste Sandboxie-Plus installasjonsprogrammet.
+.
+
+6003;txt;01
+Den gamle UI av Sandboxie klassisk implementerer ikke støtte for nettverksmurfunksjonaliteten.
+
+Du kan selv konfigurere funksjonen som støttes av kjernekomponenter ved hjelp av ini-filen, regler er strukturert som følgende:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+Hvis du foretrekker å bruke en UI til å styre disse alternativene, vennligst oppgrader til Sandboxie-Plus, som har full UI-støtte for alle nye funksjoner.
+.
+
+6004;pop;err;01
+Konfigurasjonen %3 av boks %2 krever et støttesertifikat. Prosessene i denne boksen vil bli avsluttet etter 5 minutter. For langvarig bruk må du vurdere å støtte dette prosjektet.
+.
+
+6005;txt;01
+Merk: Uten administrative privilegier vil installatører ikke starte i sandkassen. Sandboxie-Plus tilbyr et alternativ for å gjøre mange installatører lykkes uten disse privilegier. Du kan aktivere dette alternativet også i den klassiske bygge manuelt, ved å legge til "FakeAdminRights=y" til ini-delen for denne boksen.
+.
+
+6006;txt;01
+Den gamle UI av Sandboxie klassisk implementerer bare støtte for et par restriksjonsalternativer.
+
+Andre alternativer som "ClosePrintSpooler=y", "OpenClipboard=n " "BlockNetParam=n" og mye mer kan settes i ini-seksjonen for denne boksen.
+Den moderne UI (SandMan.exe) tilbyr også flere tilpasningsalternativer for Start/Run og internett tilgangsbegrensninger.
+
+Hvis du foretrekker å bruke en UI til å styre disse alternativene, vennligst oppgrader til Sandboxie-Plus, som har full UI-støtte for alle nye funksjoner.
+.
+
+6007;txt;01
+Sandboxie Plus tilbyr forbedret personvern ved å endre den gamle oppførselen fra svarteliste-modus, dvs. å tillate leseadgang til hele disken, bortsett fra det som blokkeres av Closed Path eller Write Path, til en hvitliste-modus der programmer i sandkassen bare får lese generiske systemområder og lesetilgang til det meste av brukerdata må først gis eksplisitt.
+
+Den gamle brukergrensesnittet i Sandboxie Classic støtter ikke denne driftsmåten. Selv om det kan konfigureres via ini-filen, anbefales det å bruke det moderne Sandboxie-Plus-grensesnittet (SandMan.exe) hvis du vil bruke personvernforbedrede bokser.
+
+.
+
+6008;pop;err;01
+Konfigurasjonen %3 av boks %2 krever et støttesertifikat og kan ikke brukes uten det.
+.
+
+6009;pop;err;01
+Konfigurasjonen %3 av boks %2 krever et avansert støttesertifikat.
+.
+
+6010;txt;01
+Du har hatt Sandboxie installert i over %2 dager.
+
+Synes du David og bidragsyterne gjør en god jobb?
+
+Vurder å støtte prosjektet ved å skaffe et Supporter-sertifikat.
+
+Uten et gyldig supporter-sertifikat vil Sandboxie nå ta en kort pause, slik at du kan vurdere om du vil støtte prosjektet.
+.
+
+6011;txt;01
+Vent
+.
+
+6012;txt;01
+Fortsett
+.
+
+6013;txt;01
+Avslutt
+.
+
+6014;txt;01
+Hent sertifikat
+.
+
+#----------------------------------------------------------------------------
+# Getting Started Wizard
+#----------------------------------------------------------------------------
+
+7850;txt;01
+Komme i gang Guide - Sandboxie
+.
+
+7851;txt;01
+Komme i gang med Sandboxie
+.
+
+7852;txt;01
+Velkommen til Sandboxie!
+
+Sandboxie kjører programmene dine i et isolert rom som hindrer dem i å gjøre permanente endringer i andre programmer og data i datamaskinen.
+
+Denne guiden forklarer kort de grunnleggende prinsippene for å bruke Sandboxie.
+.
+
+7853;txt;01
+Merk: Denne guiden er designet for bruk med standard sandkasse, DefaultBox.
+.
+
+7854;txt;01
+Hvordan Sandboxie fungerer (Illustration)
+.
+
+7855;txt;01
+Start din Internett-nettleser under Sandboxie
+.
+
+7856;txt;01
+Finn snarveien på skrivebordet og dobbelklikk den for å kjøre nettleseren i standard sandkasse, DefaultBox.
+.
+
+7857;txt;01
+Klikk her for å skjule dette vinduet og vise skrivebordet
+.
+
+7858;txt;01
+Nettleseren din kjører nå i sandkassen
+.
+
+7859;txt;01
+Programmer i sandkassen kan bare endre innholdet i sandkassen.
+
+Når du lagrer eller laster ned filer, går de inn i sandkassen. Hvis du lagrer en fil til mappene Skrivebord, dokumenter eller nedlastinger, tilbyr Sandboxie å flytte filen ut av sandkassen.
+
+Prøv det nå: Last ned en fil i nettleseren til skrivebordsmappen din (i sandkassen), og gjenopprett filen til ditt virkelige skrivebord.
+.
+
+7860;txt;01
+Slett innholdet i sandkassen
+.
+
+7861;txt;01
+Du kan tenke på sandkassen som et stykke gjennomsiktig papir plassert mellom programmet og datamaskinen. Å slette innholdet i sandkassen er som å kaste et brukt papir og erstatte det med en ren.
+.
+
+7862;txt;01
+Prøv det nå: Slett innholdet i standardboksen. Finn det gule Sandboxie-ikonet i det uthevede hjørnet av skjermen, og klikk:
+.
+
+7863;txt;01
+Høyreklikk på den gule Sandboxie-ikonet,
+
+Velg deretter Standardboks og påkall innhold.
+.
+
+7864;txt;01
+Klar til å gå!
+.
+
+7865;txt;01
+Takk for at du tar deg tid til å gå gjennom denne opplæringen. Du kan besøke Sandboxie nettstedet for mer opplæring og tips.
+
+Standardinnstillingene i Sandboxie gir full beskyttelse, men du kan se på innstillingskommandoene i Sandbox-menyen i programmet Sandboxie Control.
+.
+
+# 7866;txt;01
+# On a 64-bit Windows system, you should enable Experimental Protection.  See the Configure menu in Sandboxie Control.
+# .
+
+#----------------------------------------------------------------------------
+# License Manager
+#----------------------------------------------------------------------------
+
+# 7901;txt;01
+# Sandboxie License Manager
+# .
+
+# 7902;txt;01
+# System Code %2
+# .
+
+# 7903;txt;01
+# In the future, activate the license without asking
+# .
+
+#----------------------------------------------------------------------------
+
+# 7921;txt;01
+# Sandboxie is registered and the license is activated.
+# .
+
+# 7922;txt;01
+# Sandboxie is registered but the license should be reactivated now.
+# .
+
+# was 3603;txt;01
+# 7923;txt;01
+# Unregistered copy.  Register today!
+# .
+
+# 7924;txt;01
+# The license for Sandboxie will have to be reactivated in %2 days.
+# .
+
+# 7925;txt;01
+# The license for Sandboxie has now been activated.
+# .
+
+# 7926;txt;01
+# The expiration date of your Product Key is %2.
+# .
+
+# 7927;txt;01
+# Your Product Key does not have an expiration date.
+# .
+
+#----------------------------------------------------------------------------
+
+# 7931;txt;01
+# Your copy of Sandboxie is registered with an obsolete Registration Key.
+# .
+
+# 7932;txt;01
+# Please permit the License Manager to connect to the License Server and upgrade your old Registration Key to a new Product Key.  You will not be charged any fees for this upgrade.
+# .
+
+# 7933;txt;01
+# Your Registration Key is not recognized by the License Server.
+# .
+
+# 7934;txt;01
+# For licensing questions please contact: support@sandboxie.com
+# .
+
+# 7935;txt;01
+# Your new Product Key is:
+# .
+
+# 7936;txt;01
+# Please make sure to record this Product Key in a safe place for future reference.  Use the button below to copy your Product Key to the clipboard, from which you can paste it into a document and print it.
+# .
+
+# 7937;txt;01
+# &Upgrade Registration Key to Product Key
+# .
+
+#----------------------------------------------------------------------------
+
+# was 3612;txt;01
+# 7941;txt;01
+# Sandboxie registration is made through a third-party payment processor.  Begin the registration process by visiting the Sandboxie web site at the link below.
+# .
+
+# 7942;txt;01
+# To activate your license for Sandboxie, enter the Product Key which appears in your receipt for payment, then click the button to activate your license.
+# .
+
+# 7943;txt;01
+# Do you wish to enter a new Product Key now?
+# .
+
+# 7944;txt;01
+# &Activate License
+# .
+
+# was first line of 3617;txt;01
+# 7945;txt;01
+# Your copy of Sandboxie is now registered.
+# .
+
+# was second line of 3617;txt;01
+# 7946;txt;01
+# Thank you for supporting Sandboxie!
+# .
+
+#----------------------------------------------------------------------------
+
+# 7951;txt;01
+# Do you wish to activate the license now?
+# .
+
+# 7952;txt;01
+# Please visit the Sandboxie web site at the link below to order a new Product Key.
+# .
+
+# 7961;txt;01
+# Clear License &Information
+# .
+
+# 7962;txt;01
+# Are you sure you wish to clear the license information in Sandboxie?
+#
+# You can activate your license at any time by entering a Product Key.
+# .
+
+#----------------------------------------------------------------------------
+
+# 7971;txt;01
+# This is not a valid Product Key.
+# .
+
+# 7972;txt;01
+# This is not a valid System Code.
+# .
+
+# 7973;txt;01
+# This is not a valid Activation Key.  [%2]
+# .
+
+# 7974;txt;01
+# Invalid response from the License Server.
+# .
+
+# 7975;txt;01
+# Product activation failed:
+# .
+
+# 7976;txt;01
+# Would you like to try again now?
+# .
+
+# 7977;txt;01
+# If you need to activate Sandboxie on a computer that does not have Internet access,
+# please see the Sandboxie Licensing FAQ for information about Offline Activation.
+# .
+
+# 7978;txt;01
+# Current date (%2) is later than date sent from the License Server (%3).
+# .
+
+# 7982;txt;01
+# The License Server did not specify reason for failure of activation.
+# .
+
+# 7983;txt;01
+# Product Key is not recognized by the License Server.
+# .
+
+# 7984;txt;01
+# Product Key cannot be used beyond its expiration date of %2.
+# .
+
+# 7985;txt;01
+# Product Key was activated on too many computers.
+# .
+
+# 7986;txt;01
+# Product Key was cancelled because it was made public on the Internet.
+# .
+
+# 7987;txt;01
+# Product Key was cancelled because the order was refunded.
+# .
+
+7988;txt;01
+Ditt støttekort er gyldig, takk :-)
+.
+
+7989;txt;01
+Kundesertifikatet er utløpt :'(
+.
+
+7990;txt;01
+Kopier hele Kundesertifikatet til utklippstavlen og trykk OK.
+.
+
+7991;txt;01
+Klarte ikke å lagre sertifikat til fil.
+.
+
+7992;txt;01
+Sertifikatet er ikke gyldig.
+.
+
+7993;txt;01
+Sertifikatet er gyldig og har blitt anvendt.
+.
+
+#----------------------------------------------------------------------------
+# SandboxieInstall
+#----------------------------------------------------------------------------
+
+8001;ins;01
+Velg installasjonstype
+.
+
+8002;ins;01
+Velg Overskriv eller avinstaller modus.
+.
+
+8003;ins;01
+Start
+.
+
+8004;ins;01
+Du har en eksisterende installasjon av Sandboxie i følgende mappe:
+.
+
+8005;ins;01
+Vennligst velg hvordan du fortsetter:
+.
+
+8006;ins;01
+Overskriv (oppgrader) den eksisterende installasjonen
+.
+
+8007;ins;01
+Avinstaller (fjerne) eksisterende installasjon og innstillinger
+.
+
+8008;ins;01
+Klikk Start når du er klar til å fortsette.
+.
+
+8009;ins;01
+Før du installerer, bruk Sandboxie Control til å slette innholdet i sandkassen.
+.
+
+8010;ins;01
+Driverinstallasjon
+.
+
+8011;ins;01
+Vennligst les informasjonen nedenfor.
+.
+
+8012;ins;01
+Klikk ved siden av for å installere og aktivere driveren på Sandboxie. Denne driveren er kjernen i Sandboxie-programmet.
+.
+
+8013;ins;01
+Du må kanskje midlertidig deaktivere eventuelle systembeskyttelsesverktøy som kjører, da de kan hindre installasjonen av en driver på systemnivå.
+.
+
+8014;ins;02
+Hvis dette trinnet mislykkes og datamaskinen låser opp eller starter på nytt, vennligst start datamaskinen på nytt i Safe Mode, så kjør dette installasjonsprogrammet for å fjerne Sandboxie.
+.
+
+8015;ins;01
+Driveren installerer på de fleste systemer.
+.
+
+8016;ins;01
+Vent mens Sandboxie avinstalleres.
+.
+
+8021;ins;01
+Kjør alle programmer sandboxed.lnk
+.
+
+8022;ins;01
+Kjøre ethvert program under tilsyn av Sandboxie
+.
+
+8023;ins;01
+Sandboxie Start Menu.lnk
+.
+
+8024;ins;01
+Velg et program fra Start-menyen for å kjøre under tilsyn av Sandboxie
+.
+
+8025;ins;01
+Kjøre nettleser sandboxed.lnk
+.
+
+8026;ins;01
+Kjør standardnettleseren under tilsyn av Sandboxie
+.
+
+8027;ins;01
+Kjør Windows Explorer sandboxed.lnk
+.
+
+8028;ins;01
+Utforsk det lokale skrivebordet og datamaskinen under tilsyn av Sandboxie
+.
+
+8029;ins;01
+Sandboxie Control.lnk
+.
+
+8030;ins;01
+Åpne kontrollpanelet Sandboxie
+.
+
+8031;ins;01
+Avinstallere Sandboxie.lnk
+.
+
+8032;ins;01
+Avinstaller Sandboxie
+.
+
+8033;ins;01
+=copy:3698
+.
+
+8041;ins;01
+Sandboxie kan bare installeres på følgende versjoner av Microsoft Windows:
+.
+
+8042;ins;01
+Sandboxie må installeres gjennom en brukerkonto som har
+Administratorprivilegier i systemet.
+
+Hvis du bruker Windows med Brukerkontokontroll (UAC)
+aktivert, sørge for at du starter installasjonspakken
+ved å bruke kommandoen Kjør som administrator.
+.
+
+8043;ins;01
+32-biters versjon av Sandboxie kan ikke installeres på et 64-biters operativsystem.
+.
+
+8044;ins;01
+64-biters versjon av Sandboxie kan ikke installeres på et 32-biters operativsystem.
+.
+
+8051;ins;01
+Sandboxie Control programmet kjører.
+
+Klikk OK for å lukke den, og fortsett deretter installasjonen.
+
+Klikk Avbryt for å avbryte installasjonen.
+.
+
+8052;ins;01
+Kan ikke opprette eller oppdatere Sandboxie-programfiler.
+
+Vennligst sørg for at Sandboxie Control ikke kjører,
+og at ingen programmer kjører sandkasse.
+
+Klikk deretter på OK for å prøve installasjonen på nytt.
+
+Ellers klikker du Avbryt for å avbryte installasjonen.
+.
+
+8053;ins;01
+*** KmdUtil mislyktes. Installasjon eller ikke-installasjon kan ikke fullføres. ***
+.
+
+8054;ins;01
+Vil du beholde konfigurasjonsfilen til Sandboxie.ini?
+
+Velg JA for å holde innstillingsinnstillingene i Sandboxie.ini-filen.
+
+Velg NEI for å slette Sandboxie.ini-filen og miste konfigurasjonsinnstillingene.
+.
+
+8055;ins;01
+Det er en online oppdatering av Templates.ini og/eller oversettelsene for denne versjonen av Sandboxie tilgjengelig, vil du installere den?
+.
+
+#----------------------------------------------------------------------------
+# KmdUtil
+#----------------------------------------------------------------------------
+
+8101;txt;01
+Kan ikke installere driveren på dette tidspunktet.
+
+Vennligst start datamaskinen på nytt.
+Deretter kjører du installasjonsprosessen på nytt.
+
+Feilfunksjon er: %2
+.
+
+8102;txt;01
+Kan ikke stoppe tjenesten på dette tidspunktet.
+Tjenesten '%2' er opptatt.
+
+Vennligst klikk OK for å prøve igjen.
+.
+
+8103;txt;01
+Dette er den første av tre ting.
+.
+
+8104;txt;01
+Dette er det andre av tre ting.
+.
+
+8105;txt;01
+Dette er det tredje og siste forsøket.
+.
+
+8106;txt;02
+Følgende programmer må lukkes før installasjonen kan fortsette.
+Klikk OK for å stenge disse programmene og fortsette. Klikk Avbryt for å avbryte installasjonen.
+.

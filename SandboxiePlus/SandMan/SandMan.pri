@@ -130,6 +130,7 @@ TRANSLATIONS += sandman_ar.ts \
     sandman_it.ts \
     sandman_ja.ts \
     sandman_ko.ts \
+    sandman_nb_NO.ts \
     sandman_nl.ts \
     sandman_pl.ts \
     sandman_pt_BR.ts \

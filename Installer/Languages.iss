@@ -35,7 +35,7 @@ Name: "vietnamese"; MessagesFile: "isl\Vietnamese.isl"
 ;Name: "finnish"; MessagesFile: "compiler:Languages\Finnish.isl"
 ;Name: "hebrew"; MessagesFile: "compiler:Languages\Hebrew.isl"
 ;Name: "icelandic"; MessagesFile: "compiler:Languages\Icelandic.isl"
-;Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
+Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
 ;Name: "slovak"; MessagesFile: "compiler:Languages\Slovak.isl"
 ;Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
 
@@ -66,6 +66,31 @@ english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect th
 english.RefreshBuild=Download latest Templates.ini and translations
 english.InstallImDisk=Install (or Update) ImDisk 3.0 driver (for RamDisk and Encrypted Sandboxes)
 english.Qt6Win10Unsupported=Qt 6 framework does not support Windows 10 versions 1507, 1511, or 1607 (LTSB).%nPlease update to Windows LTSC 2019 (build 17763) or newer.%nSee issue #5079 for details:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nDo you still want to continue with the installation?
+
+; Norwegian
+norwegian.AddSandboxedMenu=Legg til «Kjør i sandkasse» i kontekstmenyen
+norwegian.AddSandboxedBrowser=Legg til en skrivebordssnarvei for å starte nettleseren under Sandboxie
+norwegian.SandboxieStartMenu1=Kjør ethvert program i sandkasse
+norwegian.SandboxieStartMenu2=Kjør nettleseren i sandkasse
+norwegian.SandboxieStartMenu3=Sandboxie-startmeny
+norwegian.SandboxedBrowser=Nettleser i sandkasse
+norwegian.CustomPageLabel1=Velg installasjonstype
+norwegian.CustomPageLabel2=Hvordan skal den installeres
+norwegian.CustomPageLabel3=Velg installasjonsmodus
+norwegian.CustomPageInstallMode=Installer {#MyAppName} på denne datamaskinen
+norwegian.CustomPageUpgradeMode=Oppdater eksisterende {#MyAppName}-installasjon
+norwegian.CustomPagePortableMode=Pakk ut alle filer til en mappe for bærbar bruk
+norwegian.RequiresWin7OrLater=Sandboxie-Plus krever Windows 7 eller nyere.
+norwegian.ClassicFound=Sandboxie Classic-installasjon oppdaget, den må avinstalleres først. Vil du avinstallere den nå?
+norwegian.RunSandboxedMenu=Kjør i sandkasse
+norwegian.UninstallTaskLabel1=Velg avinstalleringstype
+norwegian.UninstallTaskLabel2=Hvordan vil du avinstallere Sandboxie-Plus?
+norwegian.UninstallTaskLabel3=&Behold konfigurasjonsfiler og sandkasser%nDette er det mest anbefalte alternativet hvis du planlegger å installere Sandboxie-Plus på nytt og beholde konfigurasjonen.
+norwegian.UninstallTaskLabel4=Fjern &konfigurasjonsfiler%nVelg dette alternativet for å fjerne Sandboxie.ini og Sandboxie-Plus.ini, men beholde sandkassene uendret.
+norwegian.UninstallTaskLabel5=Fjern konfigurasjonsfiler og &sandkasser%nVelg dette alternativet for å fjerne alle konfigurasjonsfiler og sandkasser, inkludert mappen Sandbox i egendefinerte stier med FileRootPath.
+norwegian.RefreshBuild=Last ned nyeste Templates.ini og oversettelser
+norwegian.InstallImDisk=Installer (eller oppdater) ImDisk 3.0-driveren (for RAM-disk og krypterte sandkasser)
+norwegian.Qt6Win10Unsupported=Qt 6-rammeverket støtter ikke Windows 10-versjonene 1507, 1511 eller 1607 (LTSB).%nOppdater til Windows LTSC 2019 (bygg 17763) eller nyere.%nSe sak #5079 for detaljer:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVil du likevel fortsette installasjonen?
 
 ; Chinese Simplified
 ChineseSimplified.AddSandboxedMenu=添加“在沙箱中运行”右键菜单

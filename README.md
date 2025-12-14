@@ -176,6 +176,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - isaak654, DerivativeOfLog7 - Italian
 - takahiro-itou, lllIIIlll - Japanese
 - VenusGirl - Korean
+- divinity76 - Norwegian Bokmål
 - 7zip, AndrzejRafalowski - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog, marat2509 - Russian

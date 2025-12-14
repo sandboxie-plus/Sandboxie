@@ -32,6 +32,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |Japanese|Yes - Jun 30, 2025|Yes - Jun 30, 2025|Yes - Jun 30, 2025|Yes - Jun 30, 2025|
 |Korean|Yes - Jul 7, 2025|Yes - Jul 7, 2025|No|Yes - Jul 7, 2025|
 |Macedonian|Yes|No|No|No|
+|Norwegian Bokmål|Yes - Dec 14, 2025|Yes - Dec 14, 2025|Yes - Dec 14, 2025|Yes - Dec 14, 2025| 
 |Polish|Yes|Yes - Apr 16, 2025|Yes - Apr 16, 2025|Yes - Apr 16, 2025|
 |Portuguese|Yes|Yes - Feb 2, 2025|Feb 2, 2025|Yes - 2024|
 |PortugueseBr|Yes - Feb 14, 2023|Yes - Feb 3, 2025|No|Yes - 2024|

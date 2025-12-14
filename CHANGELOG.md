@@ -7,11 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.16.9 / 5.71.9] - 2025-11-
 
+### Changed
+- added ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39} block ShellWindows to the default com tempalte
+
 ### Fixed
 - fixed incompatibility with thunderbird 146 
 - fixed no sound in confidential boxes without the "less confidential template"
 - fixed issues with proxy tester (failed on non english windows due to the localization of ping.exe)
-
+- fixed WinMerge keeps freezing because of registry reading issues [#5122](https://github.com/sandboxie-plus/Sandboxie/issues/5122)
 
 
 

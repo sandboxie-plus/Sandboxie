@@ -2711,7 +2711,7 @@ _FX NTSTATUS Key_NtDeleteValueKey(
 
             Key_MarkDeletedEx_v2(TruePath, ValueName->Buffer);
 
-            __sys_NtDeleteValueKey(KeyHandle, ValueName);
+            status = __sys_NtDeleteValueKey(KeyHandle, ValueName);
 
         } else {
 

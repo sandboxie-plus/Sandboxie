@@ -4,6 +4,54 @@
 
 
 
+## [1.16.9 / 5.71.9] - 2025-11-
+
+### 修复
+- 修复与 Thunderbird 146 的不兼容问题
+
+
+
+## [1.16.8 / 5.71.8] - 2025-11-24
+
+### 新增
+- 在文件面板新增了文件搜索/筛选功能，可通过 Ctrl+F 打开
+- 为 'ProtectAdminOnly=y/n' 增加界面支持
+
+### 修复
+- 修复 32 位 SbieDll.dll 中 SbieApi_QueryDrvInfo 的问题，该问题会导致证书状态被错误地提示为异常
+
+
+
+## [1.16.7 / 5.71.7] - 2025-11-16
+
+### 新增
+- 在箱选项中增加 'NoRestartOnPCA=y' 的复选框
+
+### 变更
+- 将默认 'UseWin32kHooks' 从 'y' 恢复为 'n'，因为该配置会导致其他应用程序出现异常
+- 修复安全问题 ID-31，改进在 WoW64 下的命名系统调用（感谢 pentester.z）
+
+### 修复
+- 修复在启用 'SandboxieAllGroup=y' 时，'OpenWndStation=y' 配置项不生效的问题
+- 修复安全问题 ID-28：SbieIniServer 中缺失参数校验（感谢 DepthFirstDisclosures）
+- 修复安全问题 ID-29：证书解析问题（感谢 pentester.z）
+- 修复安全问题 ID-30：获取驱动信息的问题（感谢 pentester.z）
+- 修复 SbieDll.dll 中与 SbieApi_DeviceHandle 相关的潜在句柄泄漏问题。 [#5097](https://github.com/sandboxie-plus/Sandboxie/issues/5097)
+
+
+
+## [1.16.6 / 5.71.6] - 2025-11-10
+
+### 变更
+- 现已将 'UseWin32kHooks=y' 设为所有进程的默认配置，大幅提升了对 Electron 应用的兼容性。
+
+### 修复
+- 修复在 Windows 7 上无法连接驱动的问题 [#5068](https://github.com/sandboxie-plus/Sandboxie/issues/5068)
+- 修复 'Actual Budget' 不再工作的问题 [#5071](https://github.com/sandboxie-plus/Sandboxie/issues/5071)
+- 修复与 Firefox Nightly 146 的不兼容问题
+
+
+
 ## [1.16.5 / 5.71.5] - 2025-11-04
 
 ### 新增

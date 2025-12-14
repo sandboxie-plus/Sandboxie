@@ -544,7 +544,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pMenuFile->addSeparator();
 		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Shield9"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
 		m_pRestart->setEnabled(!IsElevated());
-		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
+		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Quit"), tr("Exit"), this, SLOT(OnExit()));
 
 
 	m_pMenuView = m_pMenuBar->addMenu(tr("&View"));
@@ -706,7 +706,7 @@ void CSandMan::CreateOldMenus()
 		}
 		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Shield9"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
 		m_pRestart->setEnabled(!IsElevated());
-		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
+		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Quit"), tr("Exit"), this, SLOT(OnExit()));
 
 	m_pMenuView = m_pMenuBar->addMenu(tr("&View"));
 

@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed incompatibility with thunderbird 146 
+- fixed no sound in confidential boxes without the "less confidential template"
+- fixed issues with proxy tester (failed on non english windows due to the localization of ping.exe)
+
 
 
 

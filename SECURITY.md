@@ -8,28 +8,32 @@ Please do not submit unverified AI-generated reports. While they may appear vali
 ## Fixed security issues
 
 ### SECURITY ISSUE ID-31 (thanks pentester.z)
-missing parameter validation within named syscall invocation when using WoW64
+Missing parameter validation within named syscall invocation when using WoW64
+
 fixed in: 1.16.7 / 5.71.7
 
 ### SECURITY ISSUE ID-30 (thanks pentester.z)
-missing safety checjs when retrieving driver info
+Missing safety checks when retrieving driver information
+
 fixed in: 1.16.7 / 5.71.7
 
 ### SECURITY ISSUE ID-29 (thanks pentester.z)
-possible buffer overflow when parsing certificates
+Possible buffer overflow when parsing certificates
+
 fixed in: 1.16.7 / 5.71.7
 
 ### SECURITY ISSUE ID-28 (thanks DepthFirstDisclosures)
 Buffer overflow in SbieIniServer (CVE-2025-64721)
+
 fixed in: 1.16.7 / 5.71.7
 
 ### SECURITY ISSUE ID-27 (thanks love-code-yeyixiao)
-Leak of encrypted sandbox key during password change; see [CVE-2025-54422](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-jp7r-vgv9-43p7)
+Leak of encrypted sandbox key during password change ([CVE-2025-54422](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-jp7r-vgv9-43p7))
 
 fixed in: 1.16.2 / 5.71.2
 
 ### SECURITY ISSUE ID-26 (thanks sgayou)
-Registry set/get functions were missing some critical safety checks CVE-2025-46713, CVE-2025-46714, CVE-2025-46716, CVE-2025-46715
+Registry set/get functions were missing some critical safety checks (CVE-2025-46713, CVE-2025-46714, CVE-2025-46716, CVE-2025-46715)
 
 fixed in: 1.15.12 / 5.70.12
 
@@ -39,7 +43,7 @@ A new method of exploiting HostInjectDll mechanism for local privilege escalatio
 fixed in: 1.15.9 / 5.70.9
 
 ### SECURITY ISSUE ID-24
-Files stored inside a sandbox folder were accessible to all users on a system, resulting in security issues in multi-user scenarios; see [CVE-2024-49360](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-4chj-3c28-gvmp)
+Files stored inside a sandbox folder were accessible to all users on a system, resulting in security issues in multi-user scenarios ([CVE-2024-49360](https://github.com/sandboxie-plus/Sandboxie/security/advisories/GHSA-4chj-3c28-gvmp))
 
 fixed in: 1.15.0 / 5.70.0
 

@@ -16,7 +16,7 @@ Sandboxie 是一种基于沙盒的隔离软件，适用于 Windows NT 操作系�
 
 Sandboxie 允许您创建几乎无限的沙盒，并单独或同时运行它们，以隔离程序与主机及彼此的访问，同时还允许您在单个沙盒中同时运行尽可能多的程序。
 
-**注意：这是一个社区分支，发生在 Sandboxie 源代码发布后，并不是之前开发的官方延续（请参见 [项目历史](./README.md#-project-history) 和 [#2926](https://github.com/sandboxie-plus/Sandboxie/issues/2926)）。**
+**注意：这是一个社区分支，发生在 Sandboxie 源代码发布后，并不是之前开发的官方延续（请参见 [项目历史](#project-history) 和 [#2926](https://github.com/sandboxie-plus/Sandboxie/issues/2926)）。**
 
 ## ⏬ 下载
 
@@ -80,7 +80,7 @@ Sandboxie 的功能可以通过以下专业工具进行增强：
   * [SandboxToys2](https://github.com/blap/SandboxToys2) - 允许监控沙盒内的文件和注册表更改
   * [Sbiextra](https://github.com/sandboxie-plus/sbiextra) - 对沙盒进程添加额外的用户模式限制
 
-
+<a id="project-history"></a>
 ## 📌 项目历史
 
 |      时间线       |    维护者    |

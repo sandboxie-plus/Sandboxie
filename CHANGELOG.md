@@ -11,12 +11,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Norwegian Bokmål translations [#5141](https://github.com/sandboxie-plus/Sandboxie/issues/5141) (thanks divinity76)
 
 ### Changed
-- added ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39} block ShellWindows to the default com tempalte
+- added 'ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39}' to the default COM template to block ShellWindows
 
 ### Fixed
-- fixed incompatibility with thunderbird 146 
+- fixed incompatibility with Thunderbird 146
 - fixed no sound in confidential boxes without the "less confidential template"
-- fixed issues with proxy tester (failed on non english windows due to the localization of ping.exe)
+- fixed issues with proxy tester (failed on non-English windows due to the localization of ping.exe)
 - fixed WinMerge keeps freezing because of registry reading issues [#5122](https://github.com/sandboxie-plus/Sandboxie/issues/5122)
 
 
@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.16.8 / 5.71.8] - 2025-11-24
 
 ### Added
-- added file search/filter to file panel can be opened with Ctrl+F in the file panel
+- added file search/filter to file panel, can be opened with Ctrl+F in the file panel
 - added UI for 'ProtectAdminOnly=y/n'
 
 ### Fixed
@@ -39,13 +39,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
-- FIXED SECURITY ISSUE ID-31 improved named syscall invocation when using WoW64 (thanks pentester.z)
+- FIXED SECURITY ISSUE ID-31: improved named syscall invocation when using WoW64 (thanks pentester.z)
 
 ### Fixed
 - fixed 'OpenWndStation=y' not working with 'SandboxieAllGroup=y'
-- FIXED SECURITY ISSUE ID-28 missing parameter validation in SbieIniServer (thanks DepthFirstDisclosures)
-- FIXED SECURITY ISSUE ID-29 issue with certificate parsing (thanks pentester.z)
-- FIXED SECURITY ISSUE ID-30 an issue retrieving driver info (thanks pentester.z)
+- FIXED SECURITY ISSUE ID-28: missing parameter validation in SbieIniServer (thanks DepthFirstDisclosures)
+- FIXED SECURITY ISSUE ID-29: issue with certificate parsing (thanks pentester.z)
+- FIXED SECURITY ISSUE ID-30: an issue retrieving driver info (thanks pentester.z)
 - fixed potential handle leak in SbieDll.dll related to SbieApi_DeviceHandle [#5097](https://github.com/sandboxie-plus/Sandboxie/issues/5097)
 
 

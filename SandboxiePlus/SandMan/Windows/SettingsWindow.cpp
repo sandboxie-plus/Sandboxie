@@ -359,6 +359,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	
 	connect(ui.chkShellMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkAlwaysDefault, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkRememberLast, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu2, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu3, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu4, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
@@ -1159,6 +1160,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkShellMenu3->setChecked(CSbieUtils::HasContextMenu3());
 	ui.chkShellMenu4->setChecked(CSbieUtils::HasContextMenu4());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
+	ui.chkRememberLast->setChecked(theConf->GetBool("Options/RememberLastBox", false));
 
 	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
 
@@ -1745,6 +1747,7 @@ void CSettingsWindow::SaveSettings()
 			CSbieUtils::RemoveContextMenu4();
 	}
 	theConf->SetValue("Options/RunInDefaultBox", ui.chkAlwaysDefault->isChecked());
+	theConf->SetValue("Options/RememberLastBox", ui.chkRememberLast->isChecked());
 
 	theConf->SetValue("Options/CheckSilentMode", ui.chkSilentMode->isChecked());
 	theConf->SetValue("Options/ShowMigrationProgress", ui.chkCopyProgress->isChecked());

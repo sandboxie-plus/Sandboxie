@@ -701,6 +701,13 @@
                </property>
               </widget>
              </item>
+             <item row="5" column="3">
+              <widget class="QCheckBox" name="chkRememberLast">
+               <property name="text">
+                <string>Remember last used box</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="tabTray">

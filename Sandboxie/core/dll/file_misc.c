@@ -522,7 +522,10 @@ BOOL File_WriteProcessMemory(
     
         // $Workaround$ - 3rd party fix
         if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
-            lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
+            lpBaseAddress && (
+                lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread")
+			 || lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtMapViewOfSection")
+            ))
         //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
         {
             if (lpNumberOfBytesWritten)

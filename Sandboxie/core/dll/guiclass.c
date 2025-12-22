@@ -945,11 +945,15 @@ _FX BOOLEAN Gui_IsWellKnownClass(const WCHAR *iptr)
         return TRUE;
 
     //
-    // all Windows.UI.*
+	// all Windows.UI.* and Microsoft.UI.* classes
     // 
 
     if (_wcsnicmp(iptr, L"Windows.UI.", 11) == 0)
         return TRUE;
+
+    if (_wcsnicmp(iptr, L"Microsoft.UI.", 13) == 0)
+        return TRUE;
+
 
     //
     // finish

@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed WinMerge keeps freezing because of registry reading issues [#5122](https://github.com/sandboxie-plus/Sandboxie/issues/5122)
 - fixed Running Firefox under Sandboxie causes AppModel-Runtime error(s) in event viewer. [#5135](https://github.com/sandboxie-plus/Sandboxie/issues/5135)
 - fixed Tor browser tabs crash in highest sec mode [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
+- fixed Chrome portable window tooltip gets stuck [#5051](https://github.com/sandboxie-plus/Sandboxie/issues/5051)
 
  
 

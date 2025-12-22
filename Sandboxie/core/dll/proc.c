@@ -639,6 +639,13 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 		}
 	}
 
+    if (!Dll_CompartmentMode) // see UserEnv_CreateAppContainerProfile
+    if (Attribute == 0x00020009) //PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES
+    {
+        SECURITY_CAPABILITIES* sc = lpValue;
+        return TRUE;
+    }
+
 	return __sys_UpdateProcThreadAttribute(lpAttributeList, dwFlags, Attribute, lpValue, cbSize, lpPreviousValue, lpReturnSize);
 }
 

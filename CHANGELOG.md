@@ -5,21 +5,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.9 / 5.71.9] - 2025-11-
+## [1.16.9 / 5.71.9] - 2025-12-
 
 ### Added
 - added Norwegian Bokmål translations [#5141](https://github.com/sandboxie-plus/Sandboxie/issues/5141) (thanks divinity76)
 
 ### Changed
-- added 'ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39}' to the default COM template to block ShellWindows
+- added ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39} block ShellWindows to the default com tempalte
 
 ### Fixed
 - fixed incompatibility with Thunderbird 146
 - fixed no sound in confidential boxes without the "less confidential template"
 - fixed issues with proxy tester (failed on non-English windows due to the localization of ping.exe)
 - fixed WinMerge keeps freezing because of registry reading issues [#5122](https://github.com/sandboxie-plus/Sandboxie/issues/5122)
+- fixed Running Firefox under Sandboxie causes AppModel-Runtime error(s) in event viewer. [#5135](https://github.com/sandboxie-plus/Sandboxie/issues/5135)
 
-
+ 
 
 ## [1.16.8 / 5.71.8] - 2025-11-24
 

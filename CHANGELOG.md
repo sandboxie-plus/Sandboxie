@@ -9,21 +9,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Norwegian Bokmål translations [#5141](https://github.com/sandboxie-plus/Sandboxie/issues/5141) (thanks divinity76)
-- added User-Interface: Highlight last used box [#5054](https://github.com/sandboxie-plus/Sandboxie/issues/5054)
+- added user interface: highlight last used box [#5054](https://github.com/sandboxie-plus/Sandboxie/issues/5054)
 
 ### Changed
-- added ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39} block ShellWindows to the default com tempalte
+- added 'ClosedClsid={9BA05972-F6A8-11CF-A442-00A0C90A8F39}' to the default COM template to block ShellWindows
 
 ### Fixed
 - fixed incompatibility with Thunderbird 146
 - fixed no sound in confidential boxes without the "less confidential template"
-- fixed issues with proxy tester (failed on non-English windows due to the localization of ping.exe)
+- fixed issues with proxy tester (failed on non-English Windows due to the localization of ping.exe)
 - fixed WinMerge keeps freezing because of registry reading issues [#5122](https://github.com/sandboxie-plus/Sandboxie/issues/5122)
-- fixed Running Firefox under Sandboxie causes AppModel-Runtime error(s) in event viewer. [#5135](https://github.com/sandboxie-plus/Sandboxie/issues/5135)
-- fixed Tor browser tabs crash in highest sec mode [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
-- fixed Chrome portable window tooltip gets stuck [#5051](https://github.com/sandboxie-plus/Sandboxie/issues/5051)
+- fixed running Firefox under Sandboxie causes AppModel-Runtime error(s) in Event Viewer [#5135](https://github.com/sandboxie-plus/Sandboxie/issues/5135)
+- fixed Tor Browser tabs crash in highest sec mode [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
+- fixed Chrome Portable window tooltip gets stuck [#5051](https://github.com/sandboxie-plus/Sandboxie/issues/5051)
 
- 
+
 
 ## [1.16.8 / 5.71.8] - 2025-11-24
 

@@ -10876,7 +10876,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>Zuletzt verwendete Box merken</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1160"/>

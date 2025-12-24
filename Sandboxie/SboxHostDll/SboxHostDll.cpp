@@ -144,7 +144,7 @@ BOOL SboxHostDll_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHA
 
 BOOLEAN InitHook( HINSTANCE hSbieDll )
 {
-    if (hSbieDll)
+    if (hSbieDll && !__sys_OpenProcessToken) // in case the ini entry is repeated and we end up her a second time
     {
         HMODULE module = GetModuleHandle(L"Advapi32.dll");
 

@@ -23,6 +23,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Tor Browser tabs crash in highest sec mode [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
 - fixed Chrome Portable window tooltip gets stuck [#5051](https://github.com/sandboxie-plus/Sandboxie/issues/5051)
 - fixed BSOD (0x50) in SbieDrv.sys during high-load GPU process creation on Windows Server 2022 [#5149](https://github.com/sandboxie-plus/Sandboxie/issues/5149)
+- fixed OfficeClickToRun.exe always crash, WINWORD.EXE can not work properly. [#5153](github.com/sandboxie-plus/Sandboxie/issues/5153)
+
+
 
 
 ## [1.16.8 / 5.71.8] - 2025-11-24

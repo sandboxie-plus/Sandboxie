@@ -448,7 +448,7 @@ _FX BOOLEAN Box_ExpandString(
         while (ptr[0]) {
             if (ptr[0] == L'\\' && ptr[1] == L'\\') {
 
-                ULONG move_len = len - (ULONG)(ptr - value2) + 1;
+                ULONG move_len = len - (ULONG)(ptr - value2);
                 wmemmove(ptr, ptr + 1, move_len);
                 --len;
 

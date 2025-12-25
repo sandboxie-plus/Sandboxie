@@ -117,8 +117,8 @@ static NTSTATUS Key_GetMergedValue(
     ULONG Length,
     ULONG *ResultLength);
 
-static void Key_DiscardMergeByHandle(
-    THREAD_DATA *TlsData, HANDLE KeyHandle, BOOLEAN Recurse);
+static void Key_UpdateMergeByHandle(
+    THREAD_DATA *TlsData, HANDLE KeyHandle, BOOLEAN Removed);
 
 NTSTATUS File_NtCloseImpl(HANDLE FileHandle);
 
@@ -1525,11 +1525,110 @@ _FX NTSTATUS Key_GetMergedValue(
 
 
 //---------------------------------------------------------------------------
-// Key_DiscardMergeByPath
+// Key_RemoveSubkeyFromParentMerge
 //---------------------------------------------------------------------------
 
 
-_FX void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse)
+_FX void Key_RemoveSubkeyFromParentMerge(LIST* list, 
+    const WCHAR *ParentPath, const WCHAR *SubkeyName)
+{
+    ULONG ParentPath_len;
+    KEY_MERGE *merge;
+    KEY_MERGE_SUBKEY *subkey;
+
+    ParentPath_len = wcslen(ParentPath) * sizeof(WCHAR);
+
+    merge = List_Head(list);
+    while (merge) {
+
+        KEY_MERGE *next = List_Next(merge);
+
+        if (merge->name_len == ParentPath_len && _wcsnicmp(
+                merge->name, ParentPath, ParentPath_len / sizeof(WCHAR)) == 0) {
+
+            subkey = List_Head(&merge->subkeys);
+            while (subkey) {
+                if (_wcsicmp(subkey->name, SubkeyName) == 0) {
+                    List_Remove(&merge->subkeys, subkey);
+                    Dll_Free(subkey);
+                    break;
+                }
+                subkey = List_Next(subkey);
+            }
+        }
+
+        merge = next;
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// Key_AddSubkeyToParentMerge
+//---------------------------------------------------------------------------
+
+
+_FX void Key_AddSubkeyToParentMerge(LIST* list, 
+    const WCHAR *ParentPath, const WCHAR *SubkeyName)
+{
+    ULONG ParentPath_len;
+    ULONG name_len;
+    KEY_MERGE *merge;
+    KEY_MERGE_SUBKEY *subkey, *subkey2;
+    ULONG len;
+
+    ParentPath_len = wcslen(ParentPath) * sizeof(WCHAR);
+    name_len = wcslen(SubkeyName) * sizeof(WCHAR);
+
+    merge = List_Head(list);
+    while (merge) {
+
+        KEY_MERGE *next = List_Next(merge);
+
+        if (merge->name_len == ParentPath_len && _wcsnicmp(
+                merge->name, ParentPath, ParentPath_len / sizeof(WCHAR)) == 0) {
+
+            len = sizeof(KEY_MERGE_SUBKEY) + name_len + sizeof(WCHAR);
+            subkey = Dll_Alloc(len);
+
+            subkey->name_len = name_len;
+            memcpy(subkey->name, SubkeyName, name_len);
+            subkey->name[name_len / sizeof(WCHAR)] = L'\0';
+
+            subkey->LastWriteTime.QuadPart = 0;
+            subkey->TitleOrClass = FALSE;
+
+            subkey2 = List_Head(&merge->subkeys);
+            while (subkey2) {
+                int cmp = _wcsicmp(subkey2->name, subkey->name);
+                if (cmp == 0) {
+                    Dll_Free(subkey);
+                    subkey = NULL;
+                    break;
+                }
+                if (cmp > 0)
+                    break;
+                subkey2 = List_Next(subkey2);
+            }
+
+            if (subkey) {
+                if (subkey2)
+                    List_Insert_Before(&merge->subkeys, subkey2, subkey);
+                else
+                    List_Insert_After(&merge->subkeys, NULL, subkey);
+            }
+        }
+
+        merge = next;
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// Key_UpdateMergeByPath
+//---------------------------------------------------------------------------
+
+
+_FX void Key_UpdateMergeByPath(const WCHAR *TruePath, BOOLEAN Removed, BOOLEAN Added)
 {
     ULONG TruePath_len;
     KEY_MERGE *merge;
@@ -1539,6 +1638,21 @@ _FX void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse)
     if (! TryEnterCriticalSection(&Key_Handles_CritSec))
         return;
 
+    if (Key_Delete_v2) {
+        WCHAR* backslash = wcsrchr(TruePath, L'\\');
+        if (backslash) {
+            *backslash = L'\0';
+            WCHAR* name = backslash + 1;
+            if (Removed) {
+                Key_RemoveSubkeyFromParentMerge(&Key_Handles, TruePath, name);
+                Key_RemoveSubkeyFromParentMerge(&Key_MergeCacheList, TruePath, name);
+            }
+            if (Added)
+                Key_AddSubkeyToParentMerge(&Key_Handles, TruePath, name);
+            *backslash = L'\\';
+        }
+    }
+
     merge = List_Head(&Key_Handles);
     while (merge) {
 
@@ -1547,11 +1661,11 @@ _FX void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse)
         if (merge->name_len == TruePath_len && _wcsnicmp(
                 merge->name, TruePath, TruePath_len / sizeof(WCHAR)) == 0) {
 
-            if (Recurse) {
+            if (!Key_Delete_v2 && (Removed || Added)) {
                 WCHAR *backslash = wcsrchr(merge->name, L'\\');
                 if (backslash) {
                     *backslash = L'\0';
-                    Key_DiscardMergeByPath(merge->name, FALSE);
+                    Key_UpdateMergeByPath(merge->name, FALSE, FALSE);
                     *backslash = L'\\';
                     next = List_Next(merge);
                 }
@@ -1570,12 +1684,12 @@ _FX void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse)
 
 
 //---------------------------------------------------------------------------
-// Key_DiscardMergeByHandle
+// Key_UpdateMergeByHandle
 //---------------------------------------------------------------------------
 
 
-_FX void Key_DiscardMergeByHandle(
-    THREAD_DATA *TlsData, HANDLE KeyHandle, BOOLEAN Recurse)
+_FX void Key_UpdateMergeByHandle(
+    THREAD_DATA *TlsData, HANDLE KeyHandle, BOOLEAN Removed)
 {
     NTSTATUS status;
     UNICODE_STRING objname;
@@ -1590,7 +1704,7 @@ _FX void Key_DiscardMergeByHandle(
 
     status = Key_GetName(KeyHandle, &objname, &TruePath, &CopyPath, NULL);
     if (NT_SUCCESS(status))
-        Key_DiscardMergeByPath(TruePath, Recurse);
+        Key_UpdateMergeByPath(TruePath, Removed, FALSE);
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();

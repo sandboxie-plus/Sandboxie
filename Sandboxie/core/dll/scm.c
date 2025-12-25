@@ -370,7 +370,7 @@ static P_CloseEventLog          __sys_CloseEventLog             = NULL;
 
 
 static const WCHAR *Scm_ServicesKeyPath =
-    L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\";
+    L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services";
 
 static const WCHAR *Scm_MsiServer     = L"MSIServer";
        const WCHAR *Scm_CryptSvc      = L"cryptsvc";
@@ -1300,6 +1300,7 @@ _FX HANDLE Scm_OpenKeyForService(const WCHAR *ServiceName, BOOLEAN ForWrite)
     ULONG error;
 
     wcscpy(keyname, Scm_ServicesKeyPath);
+    wcscat(keyname, L"\\");
     wcscat(keyname, ServiceName);
     RtlInitUnicodeString(&objname, keyname);
 
@@ -1358,8 +1359,10 @@ _FX void Scm_DiscardKeyCache(const WCHAR *ServiceName)
 {
     WCHAR *keyname = Dll_AllocTemp(sizeof(WCHAR) * 256);
     wcscpy(keyname, Scm_ServicesKeyPath);
+    Key_UpdateMergeByPath(keyname, FALSE, FALSE);
+    wcscat(keyname, L"\\");
     wcscat(keyname, ServiceName);
-    Key_DiscardMergeByPath(keyname, TRUE);
+    Key_UpdateMergeByPath(keyname, FALSE, FALSE);
     Dll_Free(keyname);
 }
 

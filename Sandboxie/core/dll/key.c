@@ -1935,7 +1935,7 @@ SkipReadOnlyCheck:
     //
 
     if (CopyPathCreated)
-        Key_DiscardMergeByPath(TruePath, TRUE);
+        Key_UpdateMergeByPath(TruePath, FALSE, TRUE);
 
     //
     // Relocation, if we opened a relocated location we need to 
@@ -2559,7 +2559,7 @@ _FX NTSTATUS Key_MarkDeletedAndClose(HANDLE KeyHandle)
         if (NT_SUCCESS(status)) {
             Key_MarkDeletedEx_v2(TruePath, NULL);
 
-            Key_DiscardMergeByPath(TruePath, TRUE);
+            Key_UpdateMergeByPath(TruePath, TRUE, FALSE);
         }
 
         __sys_NtDeleteKey(KeyHandle);
@@ -2579,7 +2579,7 @@ _FX NTSTATUS Key_MarkDeletedAndClose(HANDLE KeyHandle)
         // refresh all merges
         //
 
-        Key_DiscardMergeByHandle(TlsData, KeyHandle, TRUE);
+        Key_UpdateMergeByHandle(TlsData, KeyHandle, TRUE);
     }
 
     //
@@ -2831,7 +2831,7 @@ _FX NTSTATUS Key_NtSetValueKey(
     // refresh all merges
     //
 
-    Key_DiscardMergeByHandle(TlsData, KeyHandle, FALSE);
+    Key_UpdateMergeByHandle(TlsData, KeyHandle, FALSE);
 
     SetLastError(LastError);
 
@@ -4655,9 +4655,8 @@ _FX NTSTATUS Key_NtRenameKey(
         Key_SetRelocation(TruePath, NewTruePath);
     }
 
-    //*TruePathSlash = L'\0';
-    //Key_DiscardMergeByPath(TruePath, TRUE); // fix-me: act on Key_MergeCacheList
-    //*TruePathSlash = L'\\';
+    Key_UpdateMergeByPath(TruePath, TRUE, FALSE);
+    Key_UpdateMergeByPath(NewTruePath, FALSE, TRUE);
 
     status = STATUS_SUCCESS;
 

@@ -516,7 +516,7 @@ NTSTATUS Key_NtDeleteKeyTreeImpl(HANDLE KeyHandle, BOOLEAN DeleteTree);
 
 NTSTATUS Key_MarkDeletedAndClose(HANDLE KeyHandle);
 
-void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse);
+void Key_UpdateMergeByPath(const WCHAR *TruePath, BOOLEAN Removed, BOOLEAN Added);
 
 void Key_NtClose(HANDLE KeyHandle, void* CloseParams);
 

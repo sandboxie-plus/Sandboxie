@@ -23,8 +23,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Tor Browser tabs crash in highest sec mode [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
 - fixed Chrome Portable window tooltip gets stuck [#5051](https://github.com/sandboxie-plus/Sandboxie/issues/5051)
 - fixed BSOD (0x50) in SbieDrv.sys during high-load GPU process creation on Windows Server 2022 [#5149](https://github.com/sandboxie-plus/Sandboxie/issues/5149)
-- fixed OfficeClickToRun.exe always crash, WINWORD.EXE can not work properly. [#5153](github.com/sandboxie-plus/Sandboxie/issues/5153)
-- fixed [Performance Issue] Regarding prolonged lag when uninstalling/deleting software installed exclusively within the sandbox environment [#5028](github.com/sandboxie-plus/Sandboxie/issues/5028)
+- fixed OfficeClickToRun.exe always crash, WINWORD.EXE can not work properly [#5153](https://github.com/sandboxie-plus/Sandboxie/issues/5153)
+- fixed prolonged lag when uninstalling/deleting software installed exclusively within the sandbox environment [#5028](https://github.com/sandboxie-plus/Sandboxie/issues/5028)
 
 
 

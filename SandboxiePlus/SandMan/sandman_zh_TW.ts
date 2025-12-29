@@ -10085,7 +10085,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1685"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>當沙箱根目錄受保護時，需要以管理員權限執行 SandMan 才能訪問這些文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3992"/>
@@ -11633,7 +11633,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>記住上次使用的沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1160"/>

@@ -234,7 +234,7 @@ _FX BOOLEAN WFP_Init(void)
 	WFP_Processes.func_malloc = &WFP_Alloc;
 	WFP_Processes.func_free = &WFP_Free;
 
-	MyInitializeSpinLock(&WFP_MapLock);
+	KeInitializeSpinLock(&WFP_MapLock);
 
 	WPF_MapInitialized = TRUE;
 

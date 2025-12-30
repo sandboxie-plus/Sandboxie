@@ -95,8 +95,6 @@ NTSTATUS SetRegValue(const WCHAR *KeyPath, const WCHAR *ValueName, const void *D
 NTSTATUS GetRegValue(const WCHAR *KeyPath, const WCHAR *ValueName, PVOID* pData, ULONG* pSize);
 void *memmem(const void *pSearchBuf, size_t nBufSize, const void *pPattern, size_t nPatternSize);
 
-VOID MyInitializeSpinLock(_Out_ PKSPIN_LOCK SpinLock);
-
 //
 // return TRUE if the system accepts self signed drivers
 //

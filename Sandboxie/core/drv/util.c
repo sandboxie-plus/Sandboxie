@@ -492,35 +492,6 @@ void *memmem(const void *pSearchBuf,
     return NULL;
 }
 
-typedef VOID(*P_KeInitializeSpinLock)(
-    _Out_ PKSPIN_LOCK SpinLock
-);
-
-VOID MyInitializeSpinLock(_Out_ PKSPIN_LOCK SpinLock)
-{
-    UNICODE_STRING uni;
-    volatile static P_KeInitializeSpinLock pKeInitializeSpinLock = (P_KeInitializeSpinLock)-1;
-
-    //
-    // Windows 7 build compiles to *Lock = 0; 
-    // Windows 10 build calls a kernel function which does the same
-	// So we try to dynamically get the address of the function and call it if available,
-	// else we fall back to the static Windows 7 implementation.
-    //
-
-    if (pKeInitializeSpinLock == (P_KeInitializeSpinLock)-1) 
-    {
-        RtlInitUnicodeString(&uni, L"KeInitializeSpinLock");
-        pKeInitializeSpinLock = (P_KeInitializeSpinLock)MmGetSystemRoutineAddress(&uni);
-    }
-
-    if(pKeInitializeSpinLock)
-		pKeInitializeSpinLock(SpinLock);
-    else
-        *SpinLock = 0; // Windows 7 implementation
-}
-
-
 //---------------------------------------------------------------------------
 // MyIsTestSigning
 //---------------------------------------------------------------------------

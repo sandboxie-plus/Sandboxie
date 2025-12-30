@@ -160,7 +160,7 @@
       <AdditionalOptions>/Wv:18 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
-      <PreprocessorDefinitions>POOL_NX_OPTIN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>POOL_NX_OPTIN=1;WIN9X_COMPAT_SPINLOCK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <WarningLevel>Level4</WarningLevel>
@@ -200,7 +200,7 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <AdditionalOptions>/Wv:18 %(AdditionalOptions)</AdditionalOptions>
-      <PreprocessorDefinitions>POOL_NX_OPTIN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>POOL_NX_OPTIN=1;WIN9X_COMPAT_SPINLOCK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
@@ -296,7 +296,7 @@
     <ClCompile>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
-      <PreprocessorDefinitions>POOL_NX_OPTIN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>POOL_NX_OPTIN=1;WIN9X_COMPAT_SPINLOCK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
@@ -331,7 +331,7 @@
     <ClCompile>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
-      <PreprocessorDefinitions>POOL_NX_OPTIN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>POOL_NX_OPTIN=1;WIN9X_COMPAT_SPINLOCK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>

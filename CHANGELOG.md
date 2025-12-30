@@ -20,7 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with proxy tester (failed on non-English Windows due to the localization of ping.exe)
 - fixed WinMerge keeps freezing because of registry reading issues [#5122](https://github.com/sandboxie-plus/Sandboxie/issues/5122)
 - fixed running Firefox under Sandboxie causes AppModel-Runtime error(s) in Event Viewer [#5135](https://github.com/sandboxie-plus/Sandboxie/issues/5135)
-- fixed Tor Browser tabs crash in highest sec mode [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
+- fixed Tor Browser tabs crash in highest security level [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
 - fixed Chrome Portable window tooltip gets stuck [#5051](https://github.com/sandboxie-plus/Sandboxie/issues/5051)
 - fixed BSOD (0x50) in SbieDrv.sys during high-load GPU process creation on Windows Server 2022 [#5149](https://github.com/sandboxie-plus/Sandboxie/issues/5149)
 - fixed OfficeClickToRun.exe always crash, WINWORD.EXE can not work properly [#5153](https://github.com/sandboxie-plus/Sandboxie/issues/5153)

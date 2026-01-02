@@ -10383,7 +10383,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4424"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished">重启在 PCA（程序兼容性助手）作业对象中启动的必沙进程</translation>
+        <translation type="unfinished">重新启动在 PCA（程序兼容性助手）作业对象中启动的强制进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4980"/>
@@ -11143,7 +11143,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>记住上次使用的沙箱</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1160"/>

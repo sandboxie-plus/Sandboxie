@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.9 / 5.71.9] - 2025-01-02
+## [1.16.9 / 5.71.9] - 2026-01-02
 
 ### Added
 - added Norwegian Bokmål translations [#5141](https://github.com/sandboxie-plus/Sandboxie/issues/5141) (thanks divinity76)

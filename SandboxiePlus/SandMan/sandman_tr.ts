@@ -8747,7 +8747,7 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1685"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan kök koruması etkinken, SandMan’in bu alandaki dosyalara yalnızca yönetici olarak çalıştırıldığında erişebilmesine izin ver</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1693"/>
@@ -8893,7 +8893,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4424"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation>PCA (Program Uyumluluk Yardımcısı) iş nesnesi içinde başlatılan zorunlu işlemleri yeniden başlat</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6123"/>
@@ -10348,7 +10348,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="2336"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">GPU hızlandırmayı etkinleştirmek için seçilmiş win32k sistem çağrılarını kancala (Deneysel)</translation>
+        <translation>GPU hızlandırmayı etkinleştirmek için seçilmiş win32k sistem çağrılarını kancala</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="230"/>
@@ -10803,7 +10803,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>Son kullanılan kutuyu hatırla</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1160"/>
@@ -10829,7 +10829,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2422"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">Sandboxie&apos;nin kendi gelişmiş UAC istemini kullan (deneysel)</translation>
+        <translation>Sandboxie&apos;nin kendi gelişmiş UAC istemini kullan (önerilir)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2432"/>

@@ -9770,7 +9770,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1685"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 루트가 보호되는 경우 파일에 액세스하려면 SandMan이 관리자로 실행되어야 합니다</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2017"/>
@@ -11617,7 +11617,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>마지막으로 사용한 박스 기억</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1160"/>

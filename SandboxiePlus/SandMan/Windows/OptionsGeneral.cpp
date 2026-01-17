@@ -55,6 +55,10 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxIndicator->addItem(tr("Display [#] indicator only"), "n");
 	ui.cmbBoxIndicator->addItem(tr("Display box name in title"), "y");
 
+	ui.cmbBoxBorderText->addItem(tr("Don't show in border"), "no");
+	ui.cmbBoxBorderText->addItem(tr("Show within the border"), "in");
+	ui.cmbBoxBorderText->addItem(tr("Show above the border"), "out");
+
 	ui.cmbBoxBorder->addItem(tr("Border disabled"), "off");
 	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus"), "ttl");
 	ui.cmbBoxBorder->addItem(tr("Always show"), "on");
@@ -155,6 +159,7 @@ void COptionsWindow::CreateGeneral()
 
 	connect(ui.cmbBoxIndicator, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.cmbBoxBorderText, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.spinBorderAlpha, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
@@ -275,6 +280,8 @@ void COptionsWindow::LoadGeneral()
 	if (!alphaOk || m_BorderAlpha < 0 || m_BorderAlpha > 255)
 		m_BorderAlpha = 192;
 	ui.spinBorderAlpha->setValue(m_BorderAlpha);
+	QString labelMode = BorderCfg.count() >= 5 ? BorderCfg[4].toLower() : "down";
+	ui.cmbBoxBorderText->setCurrentIndex(ui.cmbBoxBorderText->findData(labelMode));
 
 	m_BoxIcon = m_pBox->GetText("BoxIcon");
 	m_pUseIcon->setChecked(!m_BoxIcon.isEmpty());
@@ -427,6 +434,7 @@ void COptionsWindow::SaveGeneral()
 	BorderCfg.append(ui.cmbBoxBorder->currentData().toString());
 	BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
 	BorderCfg.append(QString::number(ui.spinBorderAlpha->value())); // Get alpha from spinner
+	BorderCfg.append(ui.cmbBoxBorderText->currentData().toString());
 	WriteText("BorderColor", BorderCfg.join(","));
 
 	if(m_pUseIcon->isChecked())

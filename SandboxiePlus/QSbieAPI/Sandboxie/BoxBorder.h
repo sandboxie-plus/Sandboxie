@@ -31,6 +31,7 @@ public:
 
 	void		ThreadFunc();
 	void		TimerProc();
+	struct SBoxBorder* GetBorderData() { return m; }
 
 protected:
 

@@ -11,17 +11,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.17.0 / 5.72.0] - 2026-01-??
 
 ### Added
-- Add icons to Sandboxie service applications [#5160](https://github.com/sandboxie-plus/Sandboxie/issues/5160#issuecomment-3706138019)
-- AddedShow name of sandbox in the border [#3746](https://github.com/sandboxie-plus/Sandboxie/issues/3746)
-
-### Fixed
-- fixed failure to mount registry when starting an UWP application sandboxed
+- added icons to Sandboxie service applications [#5160](https://github.com/sandboxie-plus/Sandboxie/issues/5160#issuecomment-3706138019)
+- added name of sandbox in the border [#3746](https://github.com/sandboxie-plus/Sandboxie/issues/3746)
 
 ### Changed
 - validated compatibility with Windows build 28020 and updated DynData
-- when 'UseCreateToken=y' we always 'CopyTokenAttributes=y' to fix UWP issues
-  - to force 'UseCreateToken=y' 'SandboxieAllGroup=y' is the new default
+- when 'UseCreateToken=y', we always use 'CopyTokenAttributes=y' to fix UWP issues
+  - to force 'UseCreateToken=y', 'SandboxieAllGroup=y' is the new default
 - 'NoUntrustedToken=y' can now be set in box options
+
+### Fixed
+- fixed failure to mount registry when starting a UWP application sandboxed
 
 
 

@@ -203,8 +203,6 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkDropConHostIntegrity->setChecked(m_pBox->GetBool("DropConHostIntegrity", false));
 
 
-	//ui.chkNotUntrusted->setChecked(m_pBox->GetBool("NoUntrustedToken", false));
-
 	ui.chkForceRestart->setChecked(m_pBox->GetBool("ForceRestartAll", false));
 	ui.chkRestartOnPCA->setChecked(!m_pBox->GetBool("NoRestartOnPCA", false));
 
@@ -467,7 +465,6 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
 	WriteAdvancedCheck(ui.chkDropConHostIntegrity, "DropConHostIntegrity", "y", "");
 
-	//WriteAdvancedCheck(ui.chkNotUntrusted, "NoUntrustedToken", "y", "");
 
 	WriteAdvancedCheck(ui.chkComTimeout, "RpcMgmtSetComTimeout", "n", "");
 
@@ -533,10 +530,10 @@ void COptionsWindow::SaveAdvanced()
 	bool bGlobalSbieLogon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieLogon", false);
 	WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", bGlobalSbieLogon ? "" : "y", bGlobalSbieLogon ? "n" : "");
 
-	bool bGlobalSandboxGroup = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieAllGroup", false);
+	bool bGlobalSandboxGroup = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieAllGroup", true);
 	bool bGlobalCreateToken = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("UseCreateToken", false);
 	if (ui.chkCreateToken->checkState() == Qt::Checked) {
-		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "" : "y");
+		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "n" : "");
 		m_pBox->DelValue("UseCreateToken");
 	}
 	else if (ui.chkCreateToken->checkState() == Qt::PartiallyChecked) {
@@ -544,9 +541,10 @@ void COptionsWindow::SaveAdvanced()
 		m_pBox->SetText("UseCreateToken", "y");
 	}
 	else {
-		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "" : "y", bGlobalSandboxGroup ? "n" : "");
+		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "n" : "", bGlobalSandboxGroup ? "" : "y");
 		WriteAdvancedCheck(ui.chkCreateToken, "UseCreateToken", bGlobalCreateToken ? "" : "y", bGlobalCreateToken ? "n" : "");
 	}
+	WriteAdvancedCheck(ui.chkNotUntrusted, "NoUntrustedToken", "y", "");
 
 	SaveOptionList();
 
@@ -738,13 +736,14 @@ void COptionsWindow::UpdateBoxIsolation()
 	else {
 		ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 
-		if (m_pBox->GetBool("SandboxieAllGroup", false, true))
+		if (m_pBox->GetBool("SandboxieAllGroup", true, true))
 			ui.chkCreateToken->setCheckState(Qt::Checked);
 		else if (m_pBox->GetBool("UseCreateToken", false, true))
 			ui.chkCreateToken->setCheckState(Qt::PartiallyChecked);
 		else
 			ui.chkCreateToken->setCheckState(Qt::Unchecked);
 	}
+	ui.chkNotUntrusted->setChecked(m_pBox->GetBool("NoUntrustedToken", false));
 }
 
 void COptionsWindow::OnSysSvcChanged()

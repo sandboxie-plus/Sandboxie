@@ -810,6 +810,7 @@ bool CSandBoxPlus::CheckUnsecureConfig() const
 {
 	//if (GetBool("UnsafeTemplate", false, true, true)) return true;
 	if (GetBool("OriginalToken", false, true, true)) return true;
+	if (GetBool("ReplicateToken", false, true, true)) return true; // same access as original but rebuild from scratch
 	if (GetBool("OpenAllSysCalls", false, true, true)) return true;
 	//if (GetBool("OpenToken", false, true, true)) return true; // not present
 		if(GetBool("UnrestrictedToken", false, true, true)) return true;

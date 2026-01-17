@@ -2194,7 +2194,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                <item row="11" column="1" colspan="6">
                 <widget class="QCheckBox" name="chkSbieAll">
                  <property name="text">
-                  <string>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</string>
+                  <string>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</string>
                  </property>
                 </widget>
                </item>

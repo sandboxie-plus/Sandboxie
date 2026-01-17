@@ -18,7 +18,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - validated compatibility with Windows build 28020 and updated DynData
-
+- when 'UseCreateToken=y' we always 'CopyTokenAttributes=y' to fix UWP issues
+  - to force 'UseCreateToken=y' 'SandboxieAllGroup=y' is the new default
+- 'NoUntrustedToken=y' can now be set in box options
 
 
 

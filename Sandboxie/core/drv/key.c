@@ -1126,11 +1126,11 @@ VOID LoadHiveSystemThread(PVOID Context)
     //if (!NT_SUCCESS(ctx->Status)) goto cleanup;
 
     // Add ACEs - Everyone with READ and WRITE
-    ctx->Status = RtlAddAccessAllowedAce(dacl, ACL_REVISION,  KEY_READ | KEY_WRITE | KEY_EXECUTE, everyoneSid);
+    ctx->Status = RtlAddAccessAllowedAce(dacl, ACL_REVISION,  KEY_ALL_ACCESS, everyoneSid);
     if (!NT_SUCCESS(ctx->Status)) goto cleanup;
 
     // Authenticated Users with READ and WRITE
-    ctx->Status = RtlAddAccessAllowedAce(dacl, ACL_REVISION, KEY_READ | KEY_WRITE | KEY_EXECUTE, authenticatedUsersSid);
+    ctx->Status = RtlAddAccessAllowedAce(dacl, ACL_REVISION, KEY_ALL_ACCESS, authenticatedUsersSid);
     if (!NT_SUCCESS(ctx->Status)) goto cleanup;
 
     // Create security descriptor
@@ -1238,7 +1238,7 @@ _FX BOOLEAN Key_MountHive4(
     status = LoadHiveSynchronous(target, source);
 
     if (! NT_SUCCESS(status))
-        Log_Status(MSG_MOUNT_FAILED, 0x22, status);
+        Log_Status(MSG_MOUNT_FAILED, 0x23, status);
     else {
         ok = TRUE;
 

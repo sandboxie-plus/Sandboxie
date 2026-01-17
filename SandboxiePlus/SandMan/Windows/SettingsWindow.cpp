@@ -1288,7 +1288,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", true));
 		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", true));
 		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
-		ui.chkSbieAll->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieAllGroup", false));
+		ui.chkSbieAll->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieAllGroup", true));
 		ui.chkSbieUAC->setChecked(theAPI->GetGlobalSettings()->GetBool("UseSandboxieUAC", true));
 
 		ui.treeImport->clear();
@@ -1858,7 +1858,7 @@ void CSettingsWindow::SaveSettings()
 				WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");
 				WriteAdvancedCheck(ui.chkWin32k, "EnableWin32kHooks", "", "n");
 				WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
-				WriteAdvancedCheck(ui.chkSbieAll, "SandboxieAllGroup", "y", "");
+				WriteAdvancedCheck(ui.chkSbieAll, "SandboxieAllGroup", "", "n");
 				WriteAdvancedCheck(ui.chkSbieUAC, "UseSandboxieUAC", "", "n");
 
 				if (m_FeaturesChanged) {

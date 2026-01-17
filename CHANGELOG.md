@@ -6,12 +6,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.16.10 / 5.71.10] - 2026-01-??
+
+
+## [1.17.0 / 5.72.0] - 2026-01-??
 
 ### Added
 - Add icons to Sandboxie service applications #5160https://github.com/sandboxie-plus/Sandboxie/issues/5160#issuecomment-3706138019
 
- 
+### Fixed
+- fixed failure to mount registry when starting an UWP application sandboxed
+
+### Changed
+- validated compatibility with Windows build 28020 and updated DynData
+
+
+
 
 ## [1.16.9 / 5.71.9] - 2026-01-02
 

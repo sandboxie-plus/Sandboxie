@@ -11850,7 +11850,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>Se souvenir du dernier bac utilisé</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1160"/>

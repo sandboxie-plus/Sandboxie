@@ -125,6 +125,8 @@ struct _PROCESS {
     BOOLEAN in_pca_job;
     BOOLEAN can_use_jobs;
 
+    BOOLEAN in_app_pkg;
+
     UCHAR   create_console_flag;
 
     BOOLEAN disable_monitor;
@@ -487,6 +489,8 @@ VOID Process_IsSbieImage(const WCHAR *image_path, BOOLEAN *image_sbie, BOOLEAN *
 // Program Compatibility Assistant (PCA) job
 
 BOOLEAN Process_IsInPcaJob(HANDLE ProcessId);
+
+BOOLEAN Process_IsInAppPkg(HANDLE ProcessId);
 
 
 void Process_SetTerminated(PROCESS *proc, ULONG reason);

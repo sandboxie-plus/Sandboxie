@@ -34,7 +34,7 @@ const wchar_t Parameters[] = L"\\Parameters";
 #define IMAGE_FILE_MACHINE_ARM64             0xAA64  // ARM64 Little-Endian
 #endif
 
-#define WIN11_LATEST    27943 // <----- latest windows 11
+#define WIN11_LATEST    28020 // <----- latest windows 11
 #define SVR2025         26040
 #define WIN11_FIRST     22000
 #define SVR2022         20348

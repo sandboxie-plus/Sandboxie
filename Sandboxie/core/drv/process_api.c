@@ -391,6 +391,8 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
                     flags |= SBIE_FLAG_IMAGE_FROM_SANDBOX;
                 if (proc->in_pca_job)
                     flags |= SBIE_FLAG_PROCESS_IN_PCA_JOB;
+                if (proc->in_app_pkg)
+                    flags |= SBIE_FLAG_PROCESS_IN_APP_PKG;
 
                 if (proc->create_console_flag == 'S')
                     flags |= SBIE_FLAG_CREATE_CONSOLE_SHOW;

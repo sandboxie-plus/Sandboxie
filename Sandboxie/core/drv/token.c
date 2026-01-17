@@ -2280,7 +2280,7 @@ _FX void* Token_CreateToken(void* TokenObject, PROCESS* proc)
                 }
 
 				if ((LocalGroups->Groups[i].Attributes & SE_GROUP_LOGON_ID)) {
-					if(!KeepLogonSession)
+					if(!KeepLogonSession && !OpenWndStation)
 						LocalGroups->Groups[i].Attributes = SE_GROUP_LOGON_ID | SE_GROUP_USE_FOR_DENY_ONLY;
 					continue;
 				}

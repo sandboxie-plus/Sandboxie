@@ -1505,6 +1505,15 @@ _FX BOOLEAN Process_NotifyProcess_Create(
                     new_proc->in_pca_job = TRUE;
                     new_proc->untouchable = TRUE;
                 }
+
+                //
+				// check if process was started in an app container
+                //
+
+                if (Process_IsInAppPkg(pid)) {
+
+                    new_proc->in_app_pkg = TRUE;
+                }
             }
 
             //

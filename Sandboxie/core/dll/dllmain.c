@@ -854,10 +854,12 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
         // workaround for Program Compatibility Assistant (PCA), we have
         // to start a second instance of this process outside the PCA job,
         // see also Proc_RestartProcessOutOfPcaJob
+        // 
+		// note: restart fails if running as AppContainer
         //
 
         int MustRestartProcess = 0;
-        if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
+        if ((Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) && !(Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_APP_PKG)) {
             if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPCA", FALSE))
                 MustRestartProcess = 1;
         }

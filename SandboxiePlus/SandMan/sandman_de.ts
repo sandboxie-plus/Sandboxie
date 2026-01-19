@@ -8774,7 +8774,7 @@ Durch Aktivieren dieser Option wird stattdessen ein Token mit GERINGER Integrit�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation>Verwende Token mit GERINGER Integrität anstelle von nicht vertrauenswürdigem Token (verringert die Isolation)</translation>
+        <translation>Verwende Token mit GERINGER Integrität anstelle von NICHT VERTRAUENSWÜRDIGEN Token (verringert die Isolation)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2327"/>

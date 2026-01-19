@@ -8769,12 +8769,12 @@ Teilweise angehakt: Dem neu erstellten sandgeboxten Token werden keine lokalen G
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
         <translation>Standardmäßig führt Sandboxie Prozesse mit einem NICHT VERTRAUENSWÜRDIGEN Integritätstoken aus, um eine maximale Isolation zu gewährleisten.
-Durch Aktivieren dieser Option wird stattdessen ein Token mit GERINGER Integrität verwendet, was die Kompatibilität verbessern kann, jedoch die Sandbox-Isolation und Sicherheit verringert.</translation>
+Durch Aktivieren dieser Option wird stattdessen ein Token mit NIEDRIGER Integrität verwendet, was die Kompatibilität verbessern kann, jedoch die Sandbox-Isolation und Sicherheit verringert.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation>Verwende Token mit GERINGER Integrität anstelle von NICHT VERTRAUENSWÜRDIGEN Token (verringert die Isolation)</translation>
+        <translation>Verwende Token mit NIEDRIGER Integrität anstelle von NICHT VERTRAUENSWÜRDIGEN Token (verringert die Isolation)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2327"/>

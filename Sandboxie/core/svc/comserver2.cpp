@@ -305,7 +305,7 @@ ULONG ComServer::CryptProtectDataSlave(void *Buffer)
         memcpy(rpl->data, DataOut.pbData, rpl->data_len);
 
         rpl->descr_len = descr_len;
-        memcpy(rpl->data + rpl->data_len, DataDescr, descr_len);
+        wmemcpy((WCHAR*)(rpl->data + rpl->data_len), DataDescr, descr_len);
     }
 
     if (DataDescr)

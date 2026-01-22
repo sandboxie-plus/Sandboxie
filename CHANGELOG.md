@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added icons to Sandboxie service applications [#5160](https://github.com/sandboxie-plus/Sandboxie/issues/5160#issuecomment-3706138019)
 - added name of sandbox in the border [#3746](https://github.com/sandboxie-plus/Sandboxie/issues/3746)
-- added glboal option "ForceBoxDocs=y" allows to force all programs opening a file from a Boxed Path to the apropriate sandbox
+- added global option 'ForceBoxDocs=y', allows to force all programs opening a file from a boxed path to the appropriate sandbox
 
 ### Changed
 - validated compatibility with Windows build 28020 and updated DynData
@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed failure to mount registry when starting a UWP application sandboxed
-- fixed The API CryptUnprotectData always returns a wrong ppszDataDescr [#5191](https://github.com/sandboxie-plus/Sandboxie/issues/5191)
+- fixed API CryptUnprotectData always returns a wrong ppszDataDescr [#5191](https://github.com/sandboxie-plus/Sandboxie/issues/5191)
 
 
 
@@ -44,8 +44,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed running Firefox under Sandboxie causes AppModel-Runtime error(s) in Event Viewer [#5135](https://github.com/sandboxie-plus/Sandboxie/issues/5135)
 - fixed Tor Browser tabs crash in highest security level [#5116](https://github.com/sandboxie-plus/Sandboxie/issues/5116)
 - fixed Chrome Portable window tooltip gets stuck [#5051](https://github.com/sandboxie-plus/Sandboxie/issues/5051)
-- fixed BSOD (0x50) in SbieDrv.sys during high-load GPU process creation on Windows Server 2022 [#5149](https://github.com/sandboxie-plus/Sandboxie/issues/5149)
-- fixed OfficeClickToRun.exe always crash, WINWORD.EXE can not work properly [#5153](https://github.com/sandboxie-plus/Sandboxie/issues/5153)
+- fixed BSoD (0x50) in SbieDrv.sys during high-load GPU process creation on Windows Server 2022 [#5149](https://github.com/sandboxie-plus/Sandboxie/issues/5149)
+- fixed OfficeClickToRun.exe always crash, WINWORD.EXE cannot work properly [#5153](https://github.com/sandboxie-plus/Sandboxie/issues/5153)
 - fixed prolonged lag when uninstalling/deleting software installed exclusively within the sandbox environment [#5028](https://github.com/sandboxie-plus/Sandboxie/issues/5028)
 
 

@@ -2052,17 +2052,17 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht im Rahmen anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Innerhalb des Rahmens anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
         <source>Show above the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberhalb des Rahmens anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
@@ -5117,10 +5117,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="SbieProcess.cpp" line="115"/>
         <source> in session %1</source>
         <translation> in Sitzung %1</translation>
-    </message>
-    <message>
-        <source> (%1)</source>
-        <translation type="vanished"> (%1)</translation>
     </message>
 </context>
 <context>
@@ -8723,7 +8719,7 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="342"/>
         <source>and/or on border</source>
-        <translation type="unfinished"></translation>
+        <translation>und/oder auf dem Rahmen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1398"/>
@@ -8772,12 +8768,13 @@ Teilweise angehakt: Dem neu erstellten sandgeboxten Token werden keine lokalen G
         <location filename="Forms/OptionsWindow.ui" line="2082"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardmäßig führt Sandboxie Prozesse mit einem NICHT VERTRAUENSWÜRDIGEN Integritätstoken aus, um eine maximale Isolation zu gewährleisten.
+Durch Aktivieren dieser Option wird stattdessen ein Token mit NIEDRIGER Integrität verwendet, was die Kompatibilität verbessern kann, jedoch die Sandbox-Isolation und Sicherheit verringert.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende Token mit NIEDRIGER Integrität anstelle von NICHT VERTRAUENSWÜRDIGEN Token (verringert die Isolation)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2327"/>
@@ -10881,8 +10878,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2197"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
-        <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
-        <translation type="unfinished">Füge die Gruppe &quot;Sandboxie\All Sandboxes&quot; zum sandgeboxten Token hinzu (experimentell)</translation>
+        <translation>Füge die Gruppe &quot;Sandboxie\All Sandboxes&quot; zum sandgeboxten Token hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>

@@ -1098,142 +1098,142 @@ Du kan klicka på Avsluta för att stänga denna guide.</translation>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
         <source>Validate INI Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Giltigförklara INI-nycklar</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>No validation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen giltigförklaring</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
         <source>Full validation (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Full giltigförklaring (standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
         <source>Enable INI Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera INI-verktygstips</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>No tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga verktygstips</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Basic info (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Grundläggande info (standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
         <source>Full details</source>
-        <translation type="unfinished"></translation>
+        <translation>Fulla detaljer</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
         <source>Enable Popup Tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera popup-verktygstips</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
         <source>Auto Completion Consent</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoavslutningsmedgivande</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Not consented (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Inte medgivet (standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
         <source>Consented</source>
-        <translation type="unfinished"></translation>
+        <translation>Medgivet</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
         <source>Enable Auto Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera autoavslutning</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Disabled (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Inaktiverad (standard)</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuellt</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Medans skrivandes</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
         <source>Enable Fuzzy Matching</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera otydlig matchning</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
         <source>Enabled</source>
-        <translation type="unfinished">Aktiverad</translation>
+        <translation>Aktiverad</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigerarinställningar</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Återställ alla till standard</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
         <source>Reset all settings to their default values and remove custom config entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Återställ alla inställningar till deras standardvärden och ta bort anpassade konfigurationsentrèer.</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Inställning</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Skick</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Unchecked</source>
-        <translation type="unfinished"></translation>
+        <translation>Okontrollerad</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Delvis</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <source>Checked</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrollerad</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
         <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Återställ</translation>
     </message>
     <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
         <source>Reset this setting to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>Återställ denna inställning till standardvärdet</translation>
     </message>
 </context>
 <context>
@@ -1893,7 +1893,7 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     <message>
         <location filename="Views/NtObjectView.cpp" line="213"/>
         <source>%1 - NT Object Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - NT-objekt Namnutrymme</translation>
     </message>
 </context>
 <context>
@@ -1901,17 +1901,17 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     <message>
         <location filename="Models/NtObjectModel.cpp" line="726"/>
         <source>Name</source>
-        <translation type="unfinished">Namn</translation>
+        <translation>Namn</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="727"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="Models/NtObjectModel.cpp" line="728"/>
         <source>Access</source>
-        <translation type="unfinished">Tillgång</translation>
+        <translation>Tillgång</translation>
     </message>
 </context>
 <context>
@@ -2238,7 +2238,7 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1773"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoavslutningsegenskapen kräver ditt medgivande för att fortsätta.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1775"/>
@@ -2247,37 +2247,41 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Om du är osäker angående de visade inställningarna i autoavslutnings-popupen, rekommenderar vi starkt att konsultera programmets dokumentation eller källkod före fortsättande. Aktivera denna egenskap utan ordentlig förståelse kan leda till oavsedda konsekvenser, för vilka du enbart blir ansvarig.
+
+Välj autoavslutningsläge:
+%1 Manuellt: Autoavslutningsförslag med %2.
+%1 Medans skrivande: Autoavslutningsförslag medans skrivande.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1783"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuellt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1784"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utlöser autoavslutningsförslag med %1.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1786"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Medans skrivande</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1787"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utlöser autoavslutningsförslag medans skrivande.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1789"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1790"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Håll autoavslutningsförslag inaktiverat.</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -2815,17 +2819,17 @@ Vill du aktivera autoavsluta?</translation>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa inte i gränsen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa inom gränsen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
         <source>Show above the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa ovanför gränsen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
@@ -4774,7 +4778,7 @@ Nej väljer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="592"/>
         <source>Auto Expand Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoexpandera träd</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="637"/>
@@ -6048,7 +6052,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <location filename="Views/SbieView.cpp" line="246"/>
         <location filename="Views/SbieView.cpp" line="383"/>
         <source>Browse NT Namespace</source>
-        <translation type="unfinished"></translation>
+        <translation>Bläddra NT-namnutrymme</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="249"/>
@@ -7114,7 +7118,7 @@ Du kan begära upp till %3 evalueringscertifikat för varje unikt hårdvaru-ID.<
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3363"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoavslutningsegenskapen kräver ditt medgivande för att fortsätta.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3365"/>
@@ -7123,37 +7127,41 @@ Du kan begära upp till %3 evalueringscertifikat för varje unikt hårdvaru-ID.<
 Choose autocomplete mode:
 %1 Manual: Autocomplete suggestions with %2.
 %1 While Typing: Autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Om du är osäker angående de visade inställningarna i autoavslutnings-popupen, rekommenderar vi starkt att konsultera programmets dokumentation eller källkod före fortsättande. Aktivera denna egenskap utan ordentlig förståelse kan leda till oavsedda konsekvenser, för vilka enbart du blir ansvarig.
+
+Välj autoavslutningsläge:
+%1 Manuellt: Autoavslutningsförslag med %2.
+%1 Medans skrivande: Autoavslutningsförslag medans skrivande.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3373"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuellt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3374"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utlöser autoavslutningsförslag med %1.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3376"/>
         <source>While Typing</source>
-        <translation type="unfinished"></translation>
+        <translation>Medansss skrivande</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3377"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utlöser autoavslutningsförslag medans skrivande.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3379"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3380"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Håll autoavslutningsförslag inaktiverat.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1592"/>
@@ -7201,17 +7209,17 @@ Detta är ett tillfälligt Patreon certifikat, giltigt för 3 månader. När det
         <location filename="Windows/SettingsWindow.cpp" line="258"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Kom ihåg tidigare skick</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="259"/>
         <source>Expand all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandera alla grupper</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="260"/>
         <source>Collapse all groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Dra ihop alla grupper</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2086"/>
@@ -8359,12 +8367,12 @@ Om du redan är en Great Supporter on Patreon, kan Sandboxie söka på nätet f�
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigerarinställningar</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure Editor Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the checkboxes in the table to configure each setting. The table shows what each state means.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Konfigurera redigerarinställningar&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Använd kontrollboxarna i tabellen för att konfigurera varje inställning. Tabellen visar vad varje skick betyder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -9440,12 +9448,12 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
     <message>
         <location filename="Forms/OptionsWindow.ui" line="70"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alpha</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="342"/>
         <source>and/or on border</source>
-        <translation type="unfinished"></translation>
+        <translation>och/eller på gränsen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1010"/>
@@ -9460,7 +9468,7 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1702"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished"></translation>
+        <translation>När lådroten är skyddad krävs att SandMan körs som Administrator för att tillgå filerna</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1991"/>
@@ -9471,12 +9479,13 @@ Detta görs för att  förhindra Rogue-processer inuti sandlådan från att skap
         <location filename="Forms/OptionsWindow.ui" line="2082"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Via standard, Sandboxie kör processer med integritetstecknet OBETRODD för maximal isolering.
+Aktivering av detta alternativ använder ett LÅG-integritetstecken istället, vilket kan förbättra kompatibilitet men reducerar sandlådeisolering och säkerhet.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd LÅG-integritetstecken istället för OBETRODD (reducerar isolering)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2461"/>
@@ -9585,7 +9594,7 @@ För att specificera en process, använd &apos;$:program.exe&apos; som sökväg.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4452"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta om tvingade processer som startades inom ett PCA (Program Compatibility Assistant) jobbobjekt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6083"/>
@@ -9712,12 +9721,12 @@ För att specificera en process, använd &apos;$:program.exe&apos; som sökväg.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6227"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigerarinställningar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6230"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6101"/>
@@ -11328,7 +11337,7 @@ istället för &quot;*&quot;.</translation>
         <location filename="Forms/SettingsWindow.ui" line="2336"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">Haka fast valda Win32k systemanrop för att aktivera GPU-accelerering (experimentell)</translation>
+        <translation>Haka fast valda Win32k systemanrop för att aktivera GPU-accelerering (krävs för Chrome, Firefox och fler)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2319"/>
@@ -11893,7 +11902,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
         <location filename="Forms/SettingsWindow.ui" line="2197"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
-        <translation type="unfinished">Addera gruppen &quot;Sandboxie\Alla sandlådor&quot; till det sandlådade tecknet (experimentell)</translation>
+        <translation>Addera gruppen &quot;Sandboxie\Alla sandlådor&quot; till det sandlådade tecknet</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>
@@ -12059,12 +12068,12 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Remember last used box</source>
-        <translation type="unfinished"></translation>
+        <translation>Kom ihåg senast använda låda</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1160"/>
         <source>Group state on start</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppera skick vid start</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1396"/>
@@ -12100,7 +12109,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
         <location filename="Forms/SettingsWindow.ui" line="2422"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">Använd Sandboxie`s egna utökade UAC-meddelare (experimentell)</translation>
+        <translation>Använd Sandboxie`s egna utökade UAC-meddelare (rekommenderad)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2432"/>
@@ -12232,12 +12241,12 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3259"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigerarinställningar</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3262"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3206"/>

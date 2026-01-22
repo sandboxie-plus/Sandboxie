@@ -269,6 +269,9 @@ _FX BOX *Process_GetForcedStartBox(
         if ((! box) && CurDir && !is_start_exe)
             box = Process_CheckBoxPath(&boxes, CurDir);
 
+        if ((! box) && DocArg && !is_start_exe && Conf_Get_Boolean(NULL, L"ForceBoxDocs", 0, FALSE))
+            box = Process_CheckBoxPath(&boxes, DocArg);
+
         if (!box) {
 
             box = Process_CheckForceFolder(

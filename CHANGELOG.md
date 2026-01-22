@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added icons to Sandboxie service applications [#5160](https://github.com/sandboxie-plus/Sandboxie/issues/5160#issuecomment-3706138019)
 - added name of sandbox in the border [#3746](https://github.com/sandboxie-plus/Sandboxie/issues/3746)
+- added glboal option "ForceBoxDocs=y" allows to force all programs opening a file from a Boxed Path to the apropriate sandbox
 
 ### Changed
 - validated compatibility with Windows build 28020 and updated DynData

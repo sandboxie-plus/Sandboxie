@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2021-2026 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -35,7 +36,7 @@
 //---------------------------------------------------------------------------
 
 
-#define MAX_REQUEST_LENGTH      (2048 * 1024)
+#define MAX_REQUEST_LENGTH      (0x40000000) // 1GB
 #define MSG_DATA_LEN            (MAX_PORTMSG_LENGTH - sizeof(PORT_MESSAGE))
 
 
@@ -43,7 +44,7 @@
 // Structures
 //---------------------------------------------------------------------------
 
-
+#ifndef USE_NEW_LPC_IMPL
 typedef struct tagTARGET
 {
     LIST_ELEM list_elem;
@@ -71,7 +72,7 @@ typedef struct tagCLIENT_THREAD
     MSG_HEADER *buf_hdr;
     UCHAR *buf_ptr;
 } CLIENT_THREAD;
-
+#endif
 
 typedef struct tagCLIENT_TLS_DATA
 {
@@ -125,8 +126,10 @@ PipeServer *PipeServer::GetPipeServer()
 PipeServer::PipeServer()
 {
     InitializeCriticalSectionAndSpinCount(&m_lock, 1000);
+#ifndef USE_NEW_LPC_IMPL
     List_Init(&m_targets);
     map_init(&m_client_map, NULL);
+#endif
 
     m_hServerPort = NULL;
 
@@ -150,8 +153,10 @@ bool PipeServer::Init()
     if (!m_instance->m_pool)
         return false;
 
+#ifndef USE_NEW_LPC_IMPL
     m_client_map.mem_pool = m_pool;
 	map_resize(&m_client_map, 128); // prepare some buckets for better performance
+#endif
 
     return true;
 }
@@ -214,6 +219,9 @@ PipeServer::~PipeServer()
 
 void PipeServer::Register(ULONG serverId, void *context, Handler handler)
 {
+#ifdef USE_NEW_LPC_IMPL
+	m_Targets[serverId] = { serverId, context, handler };
+#else
     TARGET *target = (TARGET *)Pool_Alloc(m_pool, sizeof(TARGET));
     if (target) {
         target->serverId = serverId;
@@ -221,6 +229,7 @@ void PipeServer::Register(ULONG serverId, void *context, Handler handler)
         target->handler = handler;
         List_Insert_After(&m_targets, NULL, target);
     }
+#endif
 }
 
 
@@ -311,6 +320,7 @@ void PipeServer::Thread()
     PORT_MESSAGE *msg = (PORT_MESSAGE *)space;
     HANDLE hReplyPort;
     PORT_MESSAGE *ReplyMsg;
+    PVOID PortContext;
 
     //
     // initially we have no reply to send.  we will also revert to
@@ -336,7 +346,7 @@ void PipeServer::Thread()
             ReplyMsg = (PORT_MESSAGE *)spaceReply;
         }
 
-        status = NtReplyWaitReceivePort(hReplyPort, NULL, ReplyMsg, msg);
+        status = NtReplyWaitReceivePort(hReplyPort, &PortContext, ReplyMsg, msg);
 
         if (! m_hServerPort)    // service is shutting down
             break;
@@ -364,7 +374,11 @@ void PipeServer::Thread()
 
         } else if (msg->u2.s2.Type == LPC_REQUEST) {
 
+#ifdef USE_NEW_LPC_IMPL
+            SClientPtr client = PortFindClient(PortContext);
+#else
             CLIENT_THREAD *client = (CLIENT_THREAD *)PortFindClient(msg);
+#endif
             if (! client)
                 continue;
 
@@ -388,7 +402,11 @@ void PipeServer::Thread()
         } else if (msg->u2.s2.Type == LPC_PORT_CLOSED ||
                    msg->u2.s2.Type == LPC_CLIENT_DIED) {
 
+#ifdef USE_NEW_LPC_IMPL
+            PortDisconnect(PortContext);
+#else
             PortDisconnect(msg);
+#endif
         }
     }
 }
@@ -399,6 +417,53 @@ void PipeServer::Thread()
 //---------------------------------------------------------------------------
 
 
+#ifdef USE_NEW_LPC_IMPL
+void PipeServer::PortConnect(PORT_MESSAGE* msg)
+{
+    NTSTATUS status;
+
+    SClientPtr client = std::make_shared<SClient>();
+    PVOID PortContext = client.get();
+
+    //
+    // if we couldn't create a new connection (not enough memory)
+    // reject the new connection
+    //
+    if (!client) {
+
+        HANDLE hPort;
+        NtAcceptConnectPort(&hPort, NULL, msg, FALSE, NULL, NULL);
+        return;
+    }
+
+    client->idThread = msg->ClientId.UniqueThread;
+    client->replying = FALSE;
+    client->in_use = FALSE;
+    client->sequence = 0;
+    client->hPort = NULL;
+    client->buf_hdr = NULL;
+    client->buf_ptr = NULL;
+
+    //
+	// accept the connection, set the address of the client structure as PortContext
+	// Note: PortContext is returned in NtReplyWaitReceivePort for all subsequet messages for this connection
+    //
+    status = NtAcceptConnectPort(&client->hPort, PortContext, msg, TRUE, NULL, NULL);
+    if (!NT_SUCCESS(status))
+        return;
+    
+    status = NtCompleteConnectPort(client->hPort);
+        
+    //
+    // store the client info
+    //
+    EnterCriticalSection(&m_lock);
+
+    m_Clients[PortContext] = client;
+
+	LeaveCriticalSection(&m_lock);
+}
+#else
 void PipeServer::PortConnect(PORT_MESSAGE *msg)
 {
     NTSTATUS status;
@@ -518,12 +583,14 @@ void PipeServer::PortConnect(PORT_MESSAGE *msg)
 
     LeaveCriticalSection(&m_lock);
 }
+#endif
 
 
 //---------------------------------------------------------------------------
 // PortDisconnectHelper
 //---------------------------------------------------------------------------
 
+#ifndef USE_NEW_LPC_IMPL
 void PipeServer::PortDisconnectHelper(CLIENT_PROCESS *clientProcess, CLIENT_THREAD *clientThread)
 {
     if (!clientProcess)
@@ -552,12 +619,26 @@ void PipeServer::PortDisconnectHelper(CLIENT_PROCESS *clientProcess, CLIENT_THRE
         Pool_Free(clientProcess, sizeof(CLIENT_PROCESS));
     }
 }
+#endif
+
 
 //---------------------------------------------------------------------------
 // PortDisconnect
 //---------------------------------------------------------------------------
 
 
+#ifdef USE_NEW_LPC_IMPL
+void PipeServer::PortDisconnect(PVOID PortContext)
+{
+    EnterCriticalSection(&m_lock);
+
+    auto F = m_Clients.find(PortContext);
+    if (F != m_Clients.end())
+		m_Clients.erase(F);
+
+    LeaveCriticalSection(&m_lock);
+}
+#else
 void PipeServer::PortDisconnect(PORT_MESSAGE *msg)
 {
     CLIENT_PROCESS *clientProcess;
@@ -590,6 +671,7 @@ void PipeServer::PortDisconnect(PORT_MESSAGE *msg)
 
     LeaveCriticalSection(&m_lock);
 }
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -597,6 +679,7 @@ void PipeServer::PortDisconnect(PORT_MESSAGE *msg)
 //---------------------------------------------------------------------------
 
 
+#ifndef USE_NEW_LPC_IMPL
 void PipeServer::PortDisconnectByCreateTime(LARGE_INTEGER *CreateTime)
 {
     typedef HANDLE (*P_GetProcessIdOfThread)(HANDLE Thread);
@@ -685,6 +768,7 @@ void PipeServer::PortDisconnectByCreateTime(LARGE_INTEGER *CreateTime)
 
     LeaveCriticalSection(&m_lock);
 }
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -692,10 +776,15 @@ void PipeServer::PortDisconnectByCreateTime(LARGE_INTEGER *CreateTime)
 //---------------------------------------------------------------------------
 
 
-void PipeServer::PortRequest(
-    HANDLE PortHandle, PORT_MESSAGE *msg, void *voidClient)
+#ifdef USE_NEW_LPC_IMPL
+void PipeServer::PortRequest(HANDLE PortHandle, PORT_MESSAGE *msg, const SClientPtr& client)
+#else
+void PipeServer::PortRequest(HANDLE PortHandle, PORT_MESSAGE *msg, void *voidClient)
+#endif
 {
+#ifndef USE_NEW_LPC_IMPL
     CLIENT_THREAD *client = (CLIENT_THREAD *)voidClient;
+#endif
     ULONG buf_len;
     void *buf_ptr = NULL;
 
@@ -758,6 +847,7 @@ finish:
 //---------------------------------------------------------------------------
 
 
+#ifndef USE_NEW_LPC_IMPL
 void PipeServer::PortFindClientUnsafe(const CLIENT_ID& ClientId, CLIENT_PROCESS *&clientProcess, CLIENT_THREAD *&clientThread)
 {
     //
@@ -767,6 +857,7 @@ void PipeServer::PortFindClientUnsafe(const CLIENT_ID& ClientId, CLIENT_PROCESS 
     clientProcess = (CLIENT_PROCESS *)map_get(&m_client_map, ClientId.UniqueProcess);
     clientThread = clientProcess ? (CLIENT_THREAD *)map_get(&clientProcess->thread_map, ClientId.UniqueThread) : NULL;
 }
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -774,6 +865,24 @@ void PipeServer::PortFindClientUnsafe(const CLIENT_ID& ClientId, CLIENT_PROCESS 
 //---------------------------------------------------------------------------
 
 
+#ifdef USE_NEW_LPC_IMPL
+PipeServer::SClientPtr PipeServer::PortFindClient(PVOID PortContext)
+{
+    SClientPtr clientThread;
+
+    EnterCriticalSection(&m_lock);
+
+	auto F = m_Clients.find(PortContext);
+    if (F != m_Clients.end()){
+		clientThread = F->second;
+        clientThread->in_use = TRUE;
+    }
+
+    LeaveCriticalSection(&m_lock);
+
+    return clientThread;
+}
+#else
 void *PipeServer::PortFindClient(PORT_MESSAGE *msg)
 {
     CLIENT_PROCESS *clientProcess;
@@ -790,6 +899,7 @@ void *PipeServer::PortFindClient(PORT_MESSAGE *msg)
 
     return clientThread;
 }
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -805,18 +915,28 @@ MSG_HEADER *PipeServer::CallTarget(
     // don't let a caller specify a NOTIFICATION message id
     //
 
+#ifdef USE_NEW_LPC_IMPL
+	SPipeTarget* target = NULL;
+#else
     TARGET *target = NULL;
+#endif
 
     ULONG msgid = msg->msgid;
     if ((msgid & 0xFF) != 0xFF) {
 
         ULONG serverId = msgid & 0xFFFFFF00;
+#ifdef USE_NEW_LPC_IMPL
+        auto F = m_Targets.find(serverId);
+        if (F != m_Targets.end())
+            target = &F->second;
+#else
         target = (TARGET *)List_Head(&m_targets);
         while (target) {
             if (target->serverId == serverId)
                 break;
             target = (TARGET *)List_Next(target);
         }
+#endif
     }
 
     if (! target)
@@ -855,9 +975,15 @@ MSG_HEADER *PipeServer::CallTarget(
 //---------------------------------------------------------------------------
 
 
+#ifdef USE_NEW_LPC_IMPL
+void PipeServer::PortReply(PORT_MESSAGE *msg, const SClientPtr& client)
+#else
 void PipeServer::PortReply(PORT_MESSAGE *msg, void *voidClient)
+#endif
 {
+#ifndef USE_NEW_LPC_IMPL
     CLIENT_THREAD *client = (CLIENT_THREAD *)voidClient;
+#endif
     ULONG buf_len;
 
     if (! client->buf_ptr) {
@@ -910,6 +1036,16 @@ void PipeServer::NotifyTargets(HANDLE idProcess)
     MSG_HEADER msg;
     msg.length = sizeof(MSG_HEADER);
 
+#ifdef USE_NEW_LPC_IMPL
+    for (auto& pair : m_Targets) 
+    {
+        SPipeTarget& target = pair.second;
+        
+        msg.msgid = target.serverId | 0xFF;
+
+        (*target.handler)(target.context, &msg);
+	}
+#else
     TARGET *target = (TARGET *)List_Head(&m_targets);
     while (target) {
 
@@ -919,6 +1055,7 @@ void PipeServer::NotifyTargets(HANDLE idProcess)
 
         target = (TARGET *)List_Next(target);
     }
+#endif
 }
 
 

@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - when 'UseCreateToken=y', we always use 'CopyTokenAttributes=y' to fix UWP issues
   - to force 'UseCreateToken=y', 'SandboxieAllGroup=y' is the new default
 - 'NoUntrustedToken=y' can now be set in box options
+- reworked LPC server implementation in SbieSvc, todo: switch to ALPC
 
 ### Fixed
 - fixed failure to mount registry when starting a UWP application sandboxed

@@ -2362,17 +2362,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>不显示在边框中</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>显示在边框中</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
         <source>Show above the border</source>
-        <translation type="unfinished"></translation>
+        <translation>显示在边框上方</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
@@ -10382,23 +10382,24 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="342"/>
         <source>and/or on border</source>
-        <translation type="unfinished"></translation>
+        <translation>和/或在边框上</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1702"/>
         <source>When box root is protected require SandMan to run as Administrator in order to access the files</source>
-        <translation type="unfinished">当沙箱根目录受到保护时，沙盘管理器需要以管理员身份运行才能访问这些文件</translation>
+        <translation>当沙箱根目录受到保护时，沙盘管理器需要以管理员身份运行才能访问这些文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2082"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，Sandboxie 使用 不受信任的完整性令牌 运行进程，以实现最大程度的隔离。
+启用此选项会使用 低完整性令牌 ，这可能会提高兼容性，但会降低沙箱隔离和安全性。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 低完整性令牌 而不是 不受信任的完整性令牌（会降低隔离）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4020"/>
@@ -10413,7 +10414,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4452"/>
         <source>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</source>
-        <translation type="unfinished">重新启动在 PCA（程序兼容性助手）作业对象中启动的强制进程</translation>
+        <translation>重新启动在 PCA（程序兼容性助手）作业对象中启动的强制进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5008"/>
@@ -10983,7 +10984,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <location filename="Forms/SettingsWindow.ui" line="2336"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (required for chrome, firefox and more)</source>
         <oldsource>Hook selected Win32k system calls to enable GPU acceleration (experimental)</oldsource>
-        <translation type="unfinished">Hook 选定的 Win32k 系统调用以启用 GPU 加速（此功能对于 Chrome、Firefox 等浏览器是必需的）</translation>
+        <translation>Hook 选定的 Win32k 系统调用以启用 GPU 加速（此功能对于 Chrome、Firefox 等浏览器是必需的）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="195"/>
@@ -11246,7 +11247,7 @@ Tooltips include version details, syntax requirements, and descriptions to help 
         <location filename="Forms/SettingsWindow.ui" line="2422"/>
         <source>Use Sandboxie&apos;s own enhanced UAC prompt (recommended)</source>
         <oldsource>Use Sandboxie&apos;s own enhanced UAC prompt (experimental)</oldsource>
-        <translation type="unfinished">使用 Sandboxie 自带的增强版 UAC 提示（推荐）</translation>
+        <translation>使用 Sandboxie 自带的增强版 UAC 提示（推荐）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2432"/>
@@ -12206,7 +12207,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2197"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
-        <translation type="unfinished">将 “沙盘（Sandboxie）\ 所有沙箱（All Sandboxes）” 组添加到沙箱化令牌中（实验性）</translation>
+        <translation>将 “沙箱\ 所有沙箱” 组添加到沙箱化令牌中</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>

@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed failure to mount registry when starting a UWP application sandboxed
 - fixed The API CryptUnprotectData always returns a wrong ppszDataDescr [#5191](https://github.com/sandboxie-plus/Sandboxie/issues/5191)
+- added missign serial support to sbiectrl
 
 
 

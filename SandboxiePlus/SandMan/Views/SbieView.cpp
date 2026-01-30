@@ -48,6 +48,15 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pSbieTree->setExpandsOnDoubleClick(false);
 	//m_pSbieTree->setItemDelegate(theGUI->GetItemDelegate());
 
+	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
+	if (Columns.isEmpty()) {
+		m_pSbieTree->setColumnWidth(0, 300);
+		m_pSbieTree->setColumnWidth(1, 70);
+		m_pSbieTree->setColumnWidth(2, 70);
+		m_pSbieTree->setColumnWidth(3, 70);
+	} else
+		m_pSbieTree->restoreState(Columns);
+
 	m_pSbieTree->setModel(m_pSortProxy);
 
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
@@ -66,8 +75,12 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pSbieTree->setSortingEnabled(false);
 	//m_pSbieTree->header()->setSortIndicatorShown(true);
 	//m_pSbieTree->header()->setSectionsClickable(true);
-	if(iViewMode != 2)
+	if (iViewMode != 2) {
 		connect(m_pSbieTree->header(), SIGNAL(sectionClicked(int)), this, SLOT(OnCustomSortByColumn(int)));
+		connect(m_pSbieTree->header(), SIGNAL(sectionClicked(int)), this, SLOT(OnHeaderChange()));
+		connect(m_pSbieTree->header(), SIGNAL(sectionMoved(int, int, int)), this, SLOT(OnHeaderChange()));
+		connect(m_pSbieTree->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(OnHeaderChange()));
+	}
 
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pSbieTree->setStyle(pStyle);
@@ -116,14 +129,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	CreateGroupMenu();
 	CreateTrayMenu();
 
-	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
-	if (Columns.isEmpty()) {
-		m_pSbieTree->setColumnWidth(0, 300);
-		m_pSbieTree->setColumnWidth(1, 70);
-		m_pSbieTree->setColumnWidth(2, 70);
-		m_pSbieTree->setColumnWidth(3, 70);
-	} else
-		m_pSbieTree->restoreState(Columns);
 	if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false) || iViewMode == 2)
 		SetCustomOrder();
 
@@ -616,9 +621,10 @@ void CSbieView::OnCustomSortByColumn(int column)
 		if (m_pSortProxy->sortRole() == Qt::InitialSortOrderRole) {
 			m_pSortProxy->sort(0, Qt::AscendingOrder);
 			m_pSortProxy->setSortRole(Qt::EditRole);
-			theConf->SetValue("MainWindow/BoxTree_UseOrder", false);
+			m_pSbieTree->header()->setSortIndicator(0, Qt::AscendingOrder);
 			m_pSbieTree->header()->setSortIndicatorShown(true);
-		} else if (order == Qt::DescendingOrder) {
+			theConf->SetValue("MainWindow/BoxTree_UseOrder", false);
+		} else if (order == Qt::AscendingOrder) {
 			SetCustomOrder();
 			theConf->SetValue("MainWindow/BoxTree_UseOrder", true);
 		}
@@ -626,7 +632,13 @@ void CSbieView::OnCustomSortByColumn(int column)
 	else {
 		m_pSortProxy->setSortRole(Qt::EditRole);
 		m_pSbieTree->header()->setSortIndicatorShown(true);
+		theConf->SetValue("MainWindow/BoxTree_UseOrder", false);
 	}
+}
+
+void CSbieView::OnHeaderChange()
+{
+	SaveState();
 }
 
 bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount, bool bBoxBusy, bool bBoxNotMounted)

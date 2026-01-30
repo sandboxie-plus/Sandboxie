@@ -83,6 +83,7 @@ private slots:
 	void						OnToolTipCallback(const QVariant& ID, QString& ToolTip);
 
 	void						OnCustomSortByColumn(int column);
+	void                        OnHeaderChange();
 
 	void						OnDoubleClicked(const QModelIndex& index);
 	void						OnClicked(const QModelIndex& index);

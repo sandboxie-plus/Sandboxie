@@ -548,6 +548,35 @@ The certificate is not valid.
 The certificate is valid and has been successfully applied.
 .
 
+7994;txt;01
+You are attempting to use a feature Upgrade-Key without having an existing supporter certificate.
+This type of key requires you to have a pre-existing valid supporter certificate.
+Please enter your current certificate first, then apply the upgrade key.
+.
+
+7995;txt;01
+You are attempting to use a Renewal-Key without having an existing supporter certificate.
+This type of key requires you to have a pre-existing valid supporter certificate.
+Please enter your current certificate first, then apply the renewal key.
+.
+
+7996;txt;01
+Failed to retrieve certificate from server.
+%1
+.
+
+7997;txt;01
+Failed to connect to server. Please check your internet connection.
+.
+
+7998;txt;01
+Empty response from server.
+.
+
+7999;txt;01
+Unknown server error.
+.
+
 *==========
 * Extraneous Messages in Text-Hungarian-1038.txt
 *==========

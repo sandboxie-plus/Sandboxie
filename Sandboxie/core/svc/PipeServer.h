@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2021-2026 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -30,6 +31,8 @@
 #include "common/map.h"
 #include "common/pool.h"
 #include "msgids.h"
+#include <unordered_map>
+#include <memory>
 
 /* Recommended maximum length for any single element in a request packet. */
 
@@ -38,6 +41,7 @@
 #define LONG_REPLY(ln)  (PipeServer::GetPipeServer()->AllocMsg(ln))
 #define SHORT_REPLY(st) (PipeServer::GetPipeServer()->AllocShortMsg(st))
 
+#define USE_NEW_LPC_IMPL
 
 extern "C" const ULONG tzuk;
 
@@ -142,6 +146,27 @@ public:
 
 protected:
 
+#ifdef USE_NEW_LPC_IMPL
+    struct SPipeTarget
+    {
+        ULONG serverId;
+        void *context;
+        PipeServer::Handler handler;
+    };
+
+    struct SClient
+    {
+        HANDLE idThread;
+        BOOLEAN replying;
+        volatile BOOLEAN in_use;
+        UCHAR sequence;
+        HANDLE hPort;
+        MSG_HEADER *buf_hdr;
+        UCHAR *buf_ptr;
+    };
+    typedef std::shared_ptr<SClient> SClientPtr;
+#endif
+
     /*
      * Private constructor
      */
@@ -176,7 +201,11 @@ protected:
      * Port Disconnect
      */
 
+#ifdef USE_NEW_LPC_IMPL
+    void PortDisconnect(PVOID PortContext);
+#else
     void PortDisconnect(PORT_MESSAGE *msg);
+#endif
 
     /*
      * Port Disconnect using process creation time
@@ -188,20 +217,31 @@ protected:
      * Port Request
      */
 
-    void PortRequest(
-        HANDLE PortHandle, PORT_MESSAGE *msg, void *voidClient);
+#ifdef USE_NEW_LPC_IMPL
+    void PortRequest(HANDLE PortHandle, PORT_MESSAGE *msg, const SClientPtr& client);
+#else
+    void PortRequest(HANDLE PortHandle, PORT_MESSAGE *msg, void *voidClient);
+#endif
 
     /*
      * Port Reply
      */
 
+#ifdef USE_NEW_LPC_IMPL
+    void PortReply(PORT_MESSAGE *msg, const SClientPtr& client);
+#else
     void PortReply(PORT_MESSAGE *msg, void *voidClient);
+#endif
 
     /*
      * Port Find Client
      */
 
+#ifdef USE_NEW_LPC_IMPL
+    SClientPtr PortFindClient(PVOID PortContext);
+#else
     void *PortFindClient(PORT_MESSAGE *msg);
+#endif
 
     /*
      * Call a registered sub-server
@@ -218,12 +258,19 @@ protected:
 
 protected:
 
+#ifndef USE_NEW_LPC_IMPL
     void PortDisconnectHelper(struct tagCLIENT_PROCESS* clientProcess, struct tagCLIENT_THREAD* clientThread);
 
     void PortFindClientUnsafe(const CLIENT_ID& ClientId, struct tagCLIENT_PROCESS *&clientProcess, struct tagCLIENT_THREAD *&clientThread);
+#endif
 
+#ifdef USE_NEW_LPC_IMPL
+	std::unordered_map<ULONG, SPipeTarget> m_Targets;
+    std::unordered_map<void*, SClientPtr> m_Clients;
+#else
     LIST m_targets;
     HASH_MAP m_client_map;
+#endif
     CRITICAL_SECTION m_lock;
     POOL *m_pool;
     ULONG m_TlsIndex;

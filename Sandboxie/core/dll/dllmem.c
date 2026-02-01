@@ -292,6 +292,11 @@ _FX void Dll_FreeTlsData(void)
     if (! data)
         return;
 
+    if (data->PortHandle) {
+        NtClose(data->PortHandle);
+        data->PortHandle = NULL;
+	}
+
     TlsSetValue(Dll_TlsIndex, NULL);
 
     for (depth = 0; depth < NAME_BUFFER_DEPTH; ++depth) {

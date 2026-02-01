@@ -3439,6 +3439,35 @@ Das Zertifikat ist nicht gültig.
 Das Zertifikat ist gültig und wurde erfolgreich übernommen.
 .
 
+7994;txt;01
+Sie versuchen einen Funktions-Upgrade-Schlüssel zu verwenden, ohne über ein bestehendes Unterstützerzertifikat zu verfügen.
+Diese Art von Schlüssel erfordert, dass Sie über ein bereits bestehendes gültiges Unterstützerzertifikat verfügen.
+Bitte geben Sie zuerst Ihr aktuelles Zertifikat ein und wenden Sie dann den Upgrade-Schlüssel an.
+.
+
+7995;txt;01
+Sie versuchen einen Erneuerungsschlüssel zu verwenden, ohne über ein bestehendes Unterstützerzertifikat zu verfügen.
+Diese Art von Schlüssel erfordert, dass Sie über ein bereits bestehendes gültiges Unterstützerzertifikat verfügen.
+Bitte geben Sie zuerst Ihr aktuelles Zertifikat ein und wenden Sie dann den Erneuerungsschlüssel an.
+.
+
+7996;txt;01
+Abrufen des Zertifikats vom Server fehlgeschlagen.
+%1
+.
+
+7997;txt;01
+Verbindung zum Server fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung.
+.
+
+7998;txt;01
+Leere Antwort vom Server.
+.
+
+7999;txt;01
+Unbekannter Serverfehler.
+.
+
 #----------------------------------------------------------------------------
 # SandboxieInstall
 #----------------------------------------------------------------------------

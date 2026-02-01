@@ -65,7 +65,7 @@ english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to r
 english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath.
 english.RefreshBuild=Download latest Templates.ini and translations
 english.InstallImDisk=Install (or Update) ImDisk 3.0 driver (for RamDisk and Encrypted Sandboxes)
-english.Qt6Win10Unsupported=Qt 6 framework does not support Windows 10 versions 1507, 1511, or 1607 (LTSB).%nPlease update to Windows LTSC 2019 (build 17763) or newer.%nSee issue #5079 for details:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nDo you still want to continue with the installation?
+english.Qt6Win10Unsupported=Qt 6 framework does not support Windows 10 versions 1507, 1511, or 1607.%nPlease update to Windows 10 1809 (build 17763) or newer.%nSee issue #5079 for details:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nDo you still want to continue with the installation?
 
 ; Norwegian
 norwegian.AddSandboxedMenu=Legg til «Kjør i sandkasse» i kontekstmenyen
@@ -90,7 +90,7 @@ norwegian.UninstallTaskLabel4=Fjern &konfigurasjonsfiler%nVelg dette alternative
 norwegian.UninstallTaskLabel5=Fjern konfigurasjonsfiler og &sandkasser%nVelg dette alternativet for å fjerne alle konfigurasjonsfiler og sandkasser, inkludert mappen Sandbox i egendefinerte stier med FileRootPath.
 norwegian.RefreshBuild=Last ned nyeste Templates.ini og oversettelser
 norwegian.InstallImDisk=Installer (eller oppdater) ImDisk 3.0-driveren (for RAM-disk og krypterte sandkasser)
-norwegian.Qt6Win10Unsupported=Qt 6-rammeverket støtter ikke Windows 10-versjonene 1507, 1511 eller 1607 (LTSB).%nOppdater til Windows LTSC 2019 (bygg 17763) eller nyere.%nSe sak #5079 for detaljer:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVil du likevel fortsette installasjonen?
+norwegian.Qt6Win10Unsupported=Qt 6-rammeverket støtter ikke Windows 10-versjonene 1507, 1511 eller 1607.%nOppdater til Windows 10 1809 (bygg 17763) eller nyere.%nSe sak #5079 for detaljer:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVil du likevel fortsette installasjonen?
 
 ; Chinese Simplified
 ChineseSimplified.AddSandboxedMenu=添加“在沙箱中运行”右键菜单
@@ -115,7 +115,7 @@ ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将
 ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙箱(&S)%n选择此选项将会移除所有配置文件和沙箱，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
 ChineseSimplified.RefreshBuild=下载最新的 Templates.ini 模板和翻译
 ChineseSimplified.InstallImDisk=安装（或更新）ImDisk 3.0驱动程序（用于内存盘和加密沙箱）。
-ChineseSimplified.Qt6Win10Unsupported=Qt 6 框架不支持 Windows 10 版本 1507、1511 或 1607（LTSB）。%n请升级到 Windows LTSC 2019（版本 17763）或更高版本。%n详情请参阅问题 #5079：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n您仍想继续安装吗？
+ChineseSimplified.Qt6Win10Unsupported=Qt 6 框架不支持 Windows 10 版本 1507、1511 或 1607。%n请升级到 Windows 10 1809（版本 17763）或更高版本。%n详情请参阅问题 #5079：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n您仍想继续安装吗？
 
 ; Chinese Traditional
 ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單
@@ -139,7 +139,7 @@ ChineseTraditional.UninstallTaskLabel3=保留設定檔和沙箱(&K)%n如果您�
 ChineseTraditional.UninstallTaskLabel4=刪除設定檔案(&C)%n選擇此選項可刪除 Sandboxie.ini 和 Sandboxie-Plus.ini 設定檔，並完整保留沙箱。
 ChineseTraditional.UninstallTaskLabel5=刪除設定檔和沙箱(&S)%n選擇此選項可刪除所有設定檔和沙箱，包含位於 FileRootPath 自訂路徑中的 Sandbox 資料夾。
 ChineseTraditional.RefreshBuild=下載最新的 Templates.ini 和翻譯
-ChineseTraditional.Qt6Win10Unsupported=Qt 6 框架不支援 Windows 10 版本 1507、1511 或 1607（LTSB）。%n請升級到 Windows LTSC 2019（版本 17763）或更高版本。%n詳情請參閱問題 #5079：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n您仍想繼續安裝嗎？
+ChineseTraditional.Qt6Win10Unsupported=Qt 6 框架不支援 Windows 10 版本 1507、1511 或 1607。%n請升級到 Windows 10 1809（版本 17763）或更高版本。%n詳情請參閱問題 #5079：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n您仍想繼續安裝嗎？
 
 ; Dutch
 dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
@@ -163,7 +163,7 @@ dutch.UninstallTaskLabel3=Configuratiebestanden en sandboxen behouden%nDit is de
 dutch.UninstallTaskLabel4=Configuratiebestanden verwijderen%nSelecteer deze optie om de configuratiebestanden Sandboxie.ini en Sandboxie-Plus.ini wilt verwijderen en de sandboxen ongewijzigd wilt laten.
 dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelecteer deze optie om alle configuratiebestanden en sandboxen te verwijderen, inclusief de Sandbox-map die zich in aangepaste paden met FileRootPath bevindt.
 dutch.RefreshBuild=Download de nieuwste Templates.ini en vertalingen
-dutch.Qt6Win10Unsupported=Qt 6-framework ondersteunt Windows 10-versies 1507, 1511 of 1607 (LTSB) niet.%nWerk bij naar Windows LTSC 2019 (build 17763) of nieuwer.%nZie issue #5079 voor meer details:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nWilt u nog steeds doorgaan met de installatie?
+dutch.Qt6Win10Unsupported=Qt 6-framework ondersteunt Windows 10-versies 1507, 1511 of 1607 niet.%nWerk bij naar Windows 10 1809 (build 17763) of nieuwer.%nZie issue #5079 voor meer details:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nWilt u nog steeds doorgaan met de installatie?
 
 ; French
 french.AddSandboxedMenu=Ajouter « Exécuter dans un bac à sable » au menu contextuel
@@ -188,7 +188,7 @@ french.UninstallTaskLabel4=Supprimer les &fichiers de configuration%nSélectionn
 french.UninstallTaskLabel5=Supprimer les fichiers de configuration et les &bacs à sable%nSélectionnez cette option pour supprimer tous les fichiers de configuration et les bacs à sable, y compris le dossier « Sandbox » situé dans les chemins personnalisés avec « FileRootPath ».
 french.RefreshBuild=Télécharger les dernières versions de Templates.ini et des traductions
 french.InstallImDisk=Installer (ou mettre à jour) le pilote ImDisk 3.0 (pour disque de mémoire vive ou bac à sable chiffré)
-french.Qt6Win10Unsupported=Le framework Qt 6 ne prend pas en charge les versions 1507, 1511 ou 1607 (LTSB) de Windows 10.%nVeuillez mettre à jour vers Windows LTSC 2019 (build 17763) ou une version ultérieure.%nVoir le problème #5079 pour plus de détails :%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVoulez-vous toujours continuer l'installation ?
+french.Qt6Win10Unsupported=Le framework Qt 6 ne prend pas en charge les versions 1507, 1511 ou 1607 de Windows 10.%nVeuillez mettre à jour vers Windows 10 1809 (build 17763) ou une version ultérieure.%nVoir le problème #5079 pour plus de détails :%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVoulez-vous toujours continuer l'installation ?
 
 ; German
 german.AddSandboxedMenu=Füge "Starte Sandgeboxt" zum Kontextmenü hinzu
@@ -213,7 +213,7 @@ german.UninstallTaskLabel4=Entferne &Konfigurationsdateien%nWählen Sie diese Op
 german.UninstallTaskLabel5=Entferne Konfigurationsdateien und &Sandboxen%nWählen Sie diese Option, um alle Konfigurationsdateien und Sandboxen zu entfernen, einschließlich des Sandboxordners im, durch die Einstellung Dateisystemquelle (FileRootPath), benutzerdefinierten Pfad.
 german.RefreshBuild=Neueste Templates.ini und Übersetzungen herunterladen
 german.InstallImDisk=Installiere (oder Aktualisiere) ImDisk 3.0 Treiber (für Ramdisk und verschlüsselte Sandboxen)
-german.Qt6Win10Unsupported=Das Qt 6-Framework unterstützt die Windows 10-Versionen 1507, 1511 oder 1607 (LTSB) nicht.%nBitte aktualisieren Sie auf Windows LTSC 2019 (Build 17763) oder neuer.%nSiehe Issue #5079 für Details:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nMöchten Sie trotzdem mit der Installation fortfahren?
+german.Qt6Win10Unsupported=Das Qt 6-Framework unterstützt die Windows 10-Versionen 1507, 1511 oder 1607 nicht.%nBitte aktualisieren Sie auf Windows 10 1809 (Build 17763) oder neuer.%nSiehe Issue #5079 für Details:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nMöchten Sie trotzdem mit der Installation fortfahren?
 ; Fix issue #1333 with a space inserted before %1
 german.AutoStartProgram=Starte automatisch %1
 
@@ -239,7 +239,7 @@ hungarian.UninstallTaskLabel3=A konfigurációs fájlok és homokozók megtartá
 hungarian.UninstallTaskLabel4=A konfigurációs fájlok eltávolítása%nVálassza ezt a lehetőséget a Sandboxie.ini és a Sandboxie-Plus.ini konfigurációs fájlok eltávolításához, miközben a homokozók változatlanok maradnak.
 hungarian.UninstallTaskLabel5=A konfigurációs fájlok és homokozók eltávolítása%nVálassza ezt a lehetőséget az összes konfigurációs fájl és homokozó eltávolításához, beleértve a Sandbox mappát is, amely a FileRootPath egyéni elérési útjain található.
 hungarian.RefreshBuild=Töltse le a legújabb Templates.ini-t és a fordításokat
-hungarian.Qt6Win10Unsupported=A Qt 6 keretrendszer nem támogatja a Windows 10 1507, 1511 vagy 1607 (LTSB) verzióit.%nFrissítsen Windows LTSC 2019-re (17763-as build) vagy újabbra.%nRészletekért lásd a 5079-es problémát:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nSzeretné még mindig folytatni a telepítést?
+hungarian.Qt6Win10Unsupported=A Qt 6 keretrendszer nem támogatja a Windows 10 1507, 1511 vagy 1607 verzióit.%nFrissítsen Windows 10 1809-re (17763-as build) vagy újabbra.%nRészletekért lásd a 5079-es problémát:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nSzeretné még mindig folytatni a telepítést?
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale
@@ -263,7 +263,7 @@ Italian.UninstallTaskLabel3=&Mantieni i file di configurazione e le aree virtual
 Italian.UninstallTaskLabel4=Rimuovi i file di &configurazione%nSelezionare questa opzione per rimuovere i file di configurazione Sandboxie.ini e Sandboxie-Plus.ini, lasciando invariate le aree virtuali presenti.
 Italian.UninstallTaskLabel5=Rimuovi i file di configurazione e le &aree virtuali%nSelezionare questa opzione per rimuovere tutti i file di configurazione e le aree virtuali, inclusa la cartella Sandbox nei percorsi personalizzati mediante FileRootPath.
 Italian.RefreshBuild=Aggiorna Templates.ini e translations.7z
-Italian.Qt6Win10Unsupported=Il framework Qt 6 non supporta le versioni di Windows 10 1507, 1511 o 1607 (LTSB).%nSi prega di aggiornare a Windows LTSC 2019 (build 17763) o versioni successive.%nPer ulteriori dettagli:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nContinuare comunque con l'installazione?
+Italian.Qt6Win10Unsupported=Il framework Qt 6 non supporta le versioni di Windows 10 1507, 1511 o 1607.%nSi prega di aggiornare a Windows 10 1809 (build 17763) o versioni successive.%nPer maggiori dettagli:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nContinuare comunque con l'installazione?
 
 ; Japanese
 japanese.AddSandboxedMenu=コンテキストメニューに「サンドボックス化して実行」を追加する
@@ -288,7 +288,7 @@ japanese.UninstallTaskLabel4=構成ファイルを削除する(&C)%nこのオプ
 japanese.UninstallTaskLabel5=構成ファイルとサンドボックスを削除する(&S)%nこのオプションを選択すると、すべての構成ファイルとサンドボックスが削除されます。これには、FileRootPathでカスタムパスに指定されたSandboxフォルダも含まれます。
 japanese.RefreshBuild=最新のTemplates.iniと翻訳をダウンロード
 japanese.InstallImDisk=ImDisk 3.0ドライバーをインストール（または更新）する（RamDiskおよび暗号化サンドボックス用）
-japanese.Qt6Win10Unsupported=Qt 6 フレームワークは Windows 10 のバージョン 1507、1511 または 1607（LTSB）をサポートしていません。%nWindows LTSC 2019（ビルド 17763）以降にアップデートしてください。%n問題 #5079 の詳細はこちら：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nそれでもインストールを続行しますか？
+japanese.Qt6Win10Unsupported=Qt 6 フレームワークは Windows 10 のバージョン 1507、1511 または 1607をサポートしていません。%nWindows 10 1809（ビルド 17763）以降にアップデートしてください。%n問題 #5079 の詳細はこちら：%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nそれでもインストールを続行しますか？
 
 ; Korean
 Korean.AddSandboxedMenu=상황에 맞는 메뉴에 "샌드박스에서 실행" 추가
@@ -313,7 +313,7 @@ Korean.UninstallTaskLabel4=구성 파일 제거(&C)%n샌드박스를 변경하�
 Korean.UninstallTaskLabel5=구성 파일 및 샌드박스 제거(&S)%nFileRootPath를 사용하여 사용자 지정 경로에 있는 샌드박스 폴더를 포함하여 모든 구성 파일과 샌드박스를 제거하려면 이 옵션을 선택하세요.
 Korean.RefreshBuild=최신 Templates.ini 및 번역 다운로드
 Korean.InstallImDisk=ImDisk 3.0 드라이버 설치 (또는 업데이트) (RamDisk 및 암호화된 샌드박스용)
-Korean.Qt6Win10Unsupported=Qt 6 프레임워크는 Windows 10 버전 1507, 1511 또는 1607 (LTSB)을 지원하지 않습니다.%nWindows LTSC 2019 (빌드 17763) 이상으로 업데이트하십시오.%n자세한 내용은 이슈 #5079를 참조하세요:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n계속 그래도 설치를 진행하시겠습니까?
+Korean.Qt6Win10Unsupported=Qt 6 프레임워크는 Windows 10 버전 1507, 1511 또는 1607을 지원하지 않습니다.%nWindows 10 1809 (빌드 17763) 이상으로 업데이트하십시오.%n자세한 내용은 이슈 #5079를 참조하세요:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n계속 그래도 설치를 진행하시겠습니까?
 
 ; Polish
 polish.AddSandboxedMenu=Dodaj "Uruchom w piaskownicy" do menu kontekstowego
@@ -338,7 +338,7 @@ polish.UninstallTaskLabel4=Usuń pliki konfigura&cyjne%nWybierz tę opcję, aby 
 polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz tę opcję, aby usunąć wszystkie pliki konfiguracyjne i piaskownice, w tym folder Sandbox znajdujący się w niestandardowych ścieżkach z FileRootPath.
 polish.RefreshBuild=Pobierz najnowsze Templates.ini i tłumaczenia
 polish.InstallImDisk=Zainstaluj (lub Uaktualnij) sterownik ImDisk 3.0 (dla RamDisk i zaszyfrowanych sandboxów)
-polish.Qt6Win10Unsupported=Framework Qt 6 nie obsługuje wersji Windows 10 1507, 1511 lub 1607 (LTSB).%nZaktualizuj system do Windows LTSC 2019 (build 17763) lub nowszej wersji.%nZobacz problem #5079, aby uzyskać szczegóły:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nCzy nadal chcesz kontynuować instalację?
+polish.Qt6Win10Unsupported=Framework Qt 6 nie obsługuje wersji Windows 10 1507, 1511 lub 1607.%nZaktualizuj system do Windows 10 1809 (build 17763) lub nowszej wersji.%nZobacz problem #5079, aby uzyskać szczegóły:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nCzy nadal chcesz kontynuować instalację?
 
 ; Brazilian Portuguese
 brazilianportuguese.AddSandboxedMenu=Adicionar "Executar na Caixa de Areia" no menu de contexto
@@ -362,7 +362,7 @@ brazilianportuguese.UninstallTaskLabel3=&Manter os arquivos de configuração do
 brazilianportuguese.UninstallTaskLabel4=&Remover arquivos de configuração%nSelecione essa opção para remover os arquivos de configuração Sandboxie.ini e Sandboxie-Plus.ini mantendo as caixas de areia inalteradas.
 brazilianportuguese.UninstallTaskLabel5=Remover arquivos de configuração e &caixas de areia%nSelecione essa opção para remover todos os arquivos de configuração e caixas de areia, incluindo a pasta Sandbox localizada em caminhos personalizados com FileRootPath.
 brazilianportuguese.RefreshBuild=Baixar mais recentes Templates.ini e traduções
-brazilianportuguese.Qt6Win10Unsupported=O framework Qt 6 não oferece suporte às versões 1507, 1511 ou 1607 (LTSB) do Windows 10.%nAtualize para Windows LTSC 2019 (build 17763) ou superior.%nConsulte o problema #5079 para obter detalhes:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVocê ainda deseja continuar com a instalação?
+brazilianportuguese.Qt6Win10Unsupported=O framework Qt 6 não oferece suporte às versões 1507, 1511 ou 1607 do Windows 10.%nAtualize para Windows 10 1809 (build 17763) ou superior.%nConsulte o problema #5079 para obter detalhes:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVocê ainda deseja continuar com a instalação?
 
 ; Portuguese
 portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
@@ -386,7 +386,7 @@ portuguese.UninstallTaskLabel3=&Manter os ficheiro de definição do sandboxes%n
 portuguese.UninstallTaskLabel4=&Remover ficheiro de definição%nSelecione essa opção para remover os ficheiro de definição Sandboxie.ini e Sandboxie-Plus.ini mantendo as caixas de areia inalteradas.
 portuguese.UninstallTaskLabel5=Remover ficheiro de definição e &caixas de areia%nSelecione essa opção para remover todos os ficheiro de definição e caixas de areia, incluindo a pasta Sandbox localizada em caminhos personalizados com FileRootPath.
 portuguese.RefreshBuild=Descarregar mais novos Templates.ini e traduções
-portuguese.Qt6Win10Unsupported=O framework Qt 6 não suporta as versões 1507, 1511 ou 1607 (LTSB) do Windows 10.%nAtualize para o Windows LTSC 2019 (build 17763) ou superior.%nConsulte o problema #5079 para obter detalhes:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVocê ainda deseja continuar com a instalação?
+portuguese.Qt6Win10Unsupported=O framework Qt 6 não suporta as versões 1507, 1511 ou 1607 do Windows 10.%nAtualize para o Windows 10 1809 (build 17763) ou superior.%nConsulte o problema #5079 para obter detalhes:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVocê ainda deseja continuar com a instalação?
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню
@@ -410,7 +410,7 @@ russian.UninstallTaskLabel3=Сохранять файлы конфигураци
 russian.UninstallTaskLabel4=Удалить файлы конфигурации (&C)%nВыберите этот параметр, чтобы удалить файлы конфигурации Sandboxie.ini и Sandboxie-Plus.ini, оставив файлы песочницы без изменений.
 russian.UninstallTaskLabel5=Удалить файлы конфигурации и песочницы (&S)%nВыберите этот параметр, чтобы удалить все файлы конфигурации и песочницы, включая папку Sandbox, расположение которой заданно в FileRootPath.
 russian.RefreshBuild=Скачать последние Templates.ini и переводы
-russian.Qt6Win10Unsupported=Фреймворк Qt 6 не поддерживает версии Windows 10 1507, 1511 или 1607 (LTSB).%nПожалуйста, обновитесь до Windows LTSC 2019 (сборка 17763) или новее.%nСмотрите проблему #5079 для деталей:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nВы по-прежнему хотите продолжить установку?
+russian.Qt6Win10Unsupported=Фреймворк Qt 6 не поддерживает версии Windows 10 1507, 1511 или 1607.%nПожалуйста, обновитесь до Windows 10 1809 (сборка 17763) или новее.%nСмотрите проблему #5079 для деталей:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nВы по-прежнему хотите продолжить установку?
 
 ; Spanish
 spanish.AddSandboxedMenu=Agregar "Ejecutar Aislado en una Sandbox" al menú contextual
@@ -434,7 +434,7 @@ spanish.UninstallTaskLabel3=&Mantenga los archivos de configuración y las sandb
 spanish.UninstallTaskLabel4=Eliminar archivos de &configuración%nSeleccione esta opción para eliminar los archivos de configuración Sandboxie.ini y Sandboxie-Plus.ini manteniendo las sandboxes sin cambios.
 spanish.UninstallTaskLabel5=Eliminar archivos de configuración y las &sandboxes%nSeleccione esta opción para eliminar todos los archivos de configuración y las sandboxes, incluida la carpeta Sandbox ubicada en rutas personalizadas mediante FileRootPath.
 spanish.RefreshBuild=Descargar la última versión de Templates.ini y traducciones
-spanish.Qt6Win10Unsupported=El framework Qt 6 no es compatible con las versiones 1507, 1511 o 1607 (LTSB) de Windows 10.%nActualice a Windows LTSC 2019 (compilación 17763) o superior.%nConsulte el problema #5079 para obtener más detalles:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n¿Todavía desea continuar con la instalación?
+spanish.Qt6Win10Unsupported=El framework Qt 6 no es compatible con las versiones 1507, 1511 o 1607 de Windows 10.%nActualice a Windows 10 1809 (compilación 17763) o superior.%nConsulte el problema #5079 para obtener más detalles:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%n¿Todavía desea continuar con la instalación?
 
 ; Swedish
 swedish.AddSandboxedMenu=Lägg till Kör sandlådad, till snabbmenyn
@@ -459,7 +459,7 @@ swedish.UninstallTaskLabel4=Ta bort &konfigurationsfilerna%nVälj detta alternat
 swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filrootsökvägen.
 swedish.RefreshBuild=Nedladda senaste Mallar.ini och översättningar
 swedish.InstallImDisk=Installera (eller uppdatera) ImDisk 3.0-drivrutinen (för RamDisk och krypterade sandlådor)
-swedish.Qt6Win10Unsupported=Qt 6-ramverket stöder inte Windows 10 versionerna 1507, 1511 eller 1607 (LTSB).%nUppdatera till Windows LTSC 2019 (build 17763) eller senare.%nSe ärende #5079 för detaljer:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVill du fortfarande fortsätta med installationen?
+swedish.Qt6Win10Unsupported=Qt 6-ramverket stöder inte Windows 10 versionerna 1507, 1511 eller 1607.%nUppdatera till Windows 10 1809 (build 17763) eller senare.%nSe ärende #5079 för detaljer:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nVill du fortfarande fortsätta med installationen?
 
 ; Turkish
 turkish.AddSandboxedMenu=Bağlam menüsüne "Korumalı Alanda Çalıştır" seçeneği ekle
@@ -484,7 +484,7 @@ turkish.UninstallTaskLabel4=&Yapılandırma dosyalarını kaldır%nSandboxie.ini
 turkish.UninstallTaskLabel5=Yapılandırma dosyalarını ve &korumalı alanları kaldır%nFileRootPath ile özel yollarda bulunan Sandbox klasörü dahil tüm yapılandırma dosyalarını ve korumalı alanları kaldırmak için bunu seçin.
 turkish.RefreshBuild=En son Templates.ini ve çeviriler indirilsin
 turkish.InstallImDisk=ImDisk 3.0 sürücüsü yüklensin (veya güncellensin) (RamDisk ve Şifrelenmiş Korumalı Alanlar için)
-turkish.Qt6Win10Unsupported=Qt 6 çerçevesi, Windows 10 sürümleri 1507, 1511 veya 1607 (LTSB) sürümlerini desteklememektedir.%nLütfen Windows LTSC 2019 (yapı 17763) veya üstüne güncelleyin.%nAyrıntılar için sorun #5079'a bakın:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nYine de kuruluma devam etmek istiyor musunuz?
+turkish.Qt6Win10Unsupported=Qt 6 çerçevesi, Windows 10 sürümleri 1507, 1511 veya 1607 sürümlerini desteklememektedir.%nLütfen Windows 10 1809 (yapı 17763) veya üstüne güncelleyin.%nAyrıntılar için sorun #5079'a bakın:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nYine de kuruluma devam etmek istiyor musunuz?
 
 ; Ukrainian
 ukrainian.AddSandboxedMenu=Додати "Виконати в пісочниці" в контекстне меню
@@ -508,7 +508,7 @@ ukrainian.UninstallTaskLabel3=Зберігти файли конфігураці
 ukrainian.UninstallTaskLabel4=Видалити файли конфігурації (&C)%nОберіть цей параметр, щоб видалити файли конфігурації Sandboxie.ini та Sandboxie-Plus.ini, залишивши файли пісочниць без змін.
 ukrainian.UninstallTaskLabel5=Видалити файли конфігурації та пісочниць (&S)%nОберіть цей параметр, щоб видалити всі файли конфігурації та пісочниць, включаючи папку Sandbox, яка має місцерозташування в FileRootPath.
 ukrainian.RefreshBuild=Завантажити останні Templates.ini та переклади
-ukrainian.Qt6Win10Unsupported=Фреймворк Qt 6 не підтримує версії Windows 10 1507, 1511 або 1607 (LTSB).%nОновіть до Windows LTSC 2019 (збірка 17763) або новіше.%nДив. проблему #5079 для деталей:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nВи все ще хочете продовжити встановлення?
+ukrainian.Qt6Win10Unsupported=Фреймворк Qt 6 не підтримує версії Windows 10 1507, 1511 або 1607.%nОновіть до Windows 10 1809 (збірка 17763) або новіше.%nДив. проблему #5079 для деталей:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nВи все ще хочете продовжити встановлення?
 
 ; Vietnamese
 vietnamese.AddSandboxedMenu=Thêm "Chạy trong Sandbox" vào menu ngữ cảnh
@@ -532,4 +532,4 @@ vietnamese.UninstallTaskLabel3=&Giữ các tệp cấu hình và Sandbox%nĐây 
 vietnamese.UninstallTaskLabel4=Xoá &tập tin cấu hình%nChọn tùy chọn này để xóa các tệp cấu hình Sandboxie.ini và Sandboxie-Plus.ini trong khi vẫn giữ nguyên các Sandbox.
 vietnamese.UninstallTaskLabel5=Xóa các tệp cấu hình và các &Sandbox%nChọn tùy chọn này để xóa tất cả các tệp cấu hình và Sandbox, bao gồm cả thư mục Sandbox nằm trong đường dẫn tùy chỉnh với FileRootPath.
 vietnamese.RefreshBuild=Tải xuống Templates.ini mới nhất và các bản dịch
-vietnamese.Qt6Win10Unsupported=Khung Qt 6 không hỗ trợ các phiên bản Windows 10 1507, 1511 hoặc 1607 (LTSB).%nVui lòng cập nhật lên Windows LTSC 2019 (bản dựng 17763) hoặc mới hơn.%nXem vấn đề #5079 để biết chi tiết:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nBạn vẫn muốn tiếp tục cài đặt không?
+vietnamese.Qt6Win10Unsupported=Khung Qt 6 không hỗ trợ các phiên bản Windows 10 1507, 1511 hoặc 1607.%nVui lòng cập nhật lên Windows 10 1809 (bản dựng 17763) hoặc mới hơn.%nXem vấn đề #5079 để biết chi tiết:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nBạn vẫn muốn tiếp tục cài đặt không?

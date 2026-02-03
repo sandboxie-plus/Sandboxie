@@ -54,7 +54,6 @@ public:
 	void						OnDoubleClicked(const CSandBoxPtr &pBox);
 
 	virtual QString				AddNewBox(bool bAlowTemp = false);
-	virtual QString				ImportSandbox();
 	virtual QString				AddNewGroup();
 	virtual bool				TestNameAndWarn(const QString& Name);
 	virtual void				SelectBox(const QString& Name);

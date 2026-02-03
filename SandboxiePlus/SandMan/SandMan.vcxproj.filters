@@ -213,6 +213,9 @@
     <ClCompile Include="AddonManager.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
+    <ClCompile Include="BoxTransfer.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\SandboxieTools\Common\verify.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -395,6 +398,9 @@
       <Filter>Engine</Filter>
     </QtMoc>
     <QtMoc Include="AddonManager.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="BoxTransfer.h">
       <Filter>SandMan</Filter>
     </QtMoc>
     <QtMoc Include="Engine\ScriptManager.h">

@@ -312,6 +312,7 @@
     <ClCompile Include="Models\SbieModel.cpp" />
     <ClCompile Include="OnlineUpdater.cpp" />
     <ClCompile Include="AddonManager.cpp" />
+    <ClCompile Include="BoxTransfer.cpp" />
     <ClCompile Include="SandMan.cpp" />
     <ClCompile Include="SandManRecovery.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -550,9 +551,10 @@
     <ClInclude Include="Helpers\ThreadSafeQueue.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
     <QtMoc Include="Models\MonitorModel.h" />
+    <QtMoc Include="Models\NtObjectModel.h" />
     <ClInclude Include="Helpers\WinHelper.h" />
     <QtMoc Include="AddonManager.h" />
-    <QtMoc Include="Models\NtObjectModel.h" />
+    <QtMoc Include="BoxTransfer.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="SbiePlusAPI.h" />
     <QtMoc Include="SbieProcess.h" />

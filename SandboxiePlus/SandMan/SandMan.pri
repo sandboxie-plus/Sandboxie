@@ -54,7 +54,8 @@ HEADERS += ./stdafx.h \
     ./Engine/JSEngineExt.h \
     ./Engine/WizardObject.h \
     ./CustomStyles.h \
-    ./AddonManager.h
+    ./AddonManager.h \
+    ./BoxTransfer.h
 
 SOURCES += ./main.cpp \
     ../../SandboxieTools/Common/verify.c \
@@ -107,7 +108,8 @@ SOURCES += ./main.cpp \
     ./Engine/SbieObject.cpp \
     ./Engine/JSEngineExt.cpp \
     ./Engine/SysObject.cpp \
-    ./AddonManager.cpp
+    ./AddonManager.cpp \
+    ./BoxTransfer.cpp
 
 FORMS += ./Forms/EditorSettingsWindow.ui \
     ./Forms/SelectBoxWindow.ui \

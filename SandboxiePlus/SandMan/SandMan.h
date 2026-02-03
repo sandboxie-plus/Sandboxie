@@ -370,7 +370,8 @@ private:
 	QAction*			m_pRunBoxed;
 	QAction*			m_pNewBox;
 	QAction*			m_pNewGroup;
-	QAction*			m_pImportBox;
+	QAction*			m_pImportBoxes;
+	QAction*			m_pExportBoxes;
 	QAction*			m_pPauseAll;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pLockAll;

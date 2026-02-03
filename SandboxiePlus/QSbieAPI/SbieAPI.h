@@ -121,6 +121,8 @@ public:
 	virtual QString			GetFeatureStr();
 	virtual int				IsDyndataActive();
 
+	virtual bool			HasProcesses(const QString& BoxName);
+
 	// Forced Processes
 	virtual SB_STATUS		DisableForceProcess(bool Set, int Seconds = 0);
 	virtual bool			AreForceProcessDisabled();
@@ -217,8 +219,6 @@ protected:
 	virtual QString			GetSbieHome() const;
 	virtual QString			GetIniPath(bool* IsHome) const;
 	virtual QString			GetUserSection(QString* pUserName = NULL, bool* pIsAdmin = NULL) const;
-
-	virtual bool			HasProcesses(const QString& BoxName);
 
 	virtual bool			GetQueueReq();
 	virtual bool			GetLog();

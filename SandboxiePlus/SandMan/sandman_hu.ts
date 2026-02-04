@@ -390,6 +390,151 @@ Ez a hosszúság körülbelül 384 bites entrópiát tesz lehetővé egy valódi
     </message>
 </context>
 <context>
+    <name>CBoxTransferDialog</name>
+    <message>
+        <location filename="BoxTransfer.cpp" line="71"/>
+        <location filename="BoxTransfer.cpp" line="404"/>
+        <source>Export Sandboxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="73"/>
+        <source>Import Sandboxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="80"/>
+        <source>Box Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="80"/>
+        <source>Status</source>
+        <translation type="unfinished">Állapot</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="83"/>
+        <source>Archive Box Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="83"/>
+        <source>Import As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="83"/>
+        <source>Conflict</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="93"/>
+        <source>Export Global Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="93"/>
+        <source>Import Global Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="97"/>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="101"/>
+        <source>Select None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="130"/>
+        <source>Running</source>
+        <translation type="unfinished">Futás alatt</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="132"/>
+        <source>Encrypted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="134"/>
+        <source>Empty</source>
+        <translation type="unfinished">Üres</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="186"/>
+        <source>Exists!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="354"/>
+        <location filename="BoxTransfer.cpp" line="639"/>
+        <source>Select file name</source>
+        <translation type="unfinished">Fájlnév kiválasztása</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="354"/>
+        <location filename="BoxTransfer.cpp" line="406"/>
+        <location filename="BoxTransfer.cpp" line="640"/>
+        <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
+        <translation type="unfinished">7-zip archívum (*.7z);;Zip archívum (*.zip)</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="360"/>
+        <location filename="BoxTransfer.cpp" line="453"/>
+        <source>Exporting: %1</source>
+        <translation type="unfinished">Exportálás: %1</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="366"/>
+        <location filename="BoxTransfer.cpp" line="634"/>
+        <source>7-Zip library is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="385"/>
+        <source>Nothing selected for export.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="419"/>
+        <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="621"/>
+        <location filename="BoxTransfer.cpp" line="771"/>
+        <source>Importing: %1</source>
+        <translation type="unfinished">Importálás: %1</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="657"/>
+        <source>Failed to open archive, wrong password?</source>
+        <translation type="unfinished">Nem sikerült megnyitni az archívumot, rossz jelszó?</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="666"/>
+        <source>Failed to open archive (%1)!</source>
+        <translation type="unfinished">Nem sikerült megnyitni az archívumot (%1) !</translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="707"/>
+        <source>The archive does not contain any sandbox data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="721"/>
+        <source>Nothing selected for import.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="BoxTransfer.cpp" line="737"/>
+        <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CBoxTypePage</name>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="320"/>
@@ -3383,22 +3528,22 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="4574"/>
+        <location filename="SandMan.cpp" line="4582"/>
         <source>Waiting for folder: %1</source>
         <translation>Várakozás a mappára: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4575"/>
+        <location filename="SandMan.cpp" line="4583"/>
         <source>Deleting folder: %1</source>
         <translation>Mappa törlése: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4576"/>
+        <location filename="SandMan.cpp" line="4584"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Mappák egyesítése: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4577"/>
+        <location filename="SandMan.cpp" line="4585"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Pillanatkép-egyesítés befejezése...</translation>
     </message>
@@ -3489,43 +3634,43 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
 <context>
     <name>CSandMan</name>
     <message>
-        <location filename="SandMan.cpp" line="195"/>
-        <location filename="SandMan.cpp" line="2451"/>
+        <location filename="SandMan.cpp" line="196"/>
+        <location filename="SandMan.cpp" line="2456"/>
         <source>Sandboxie-Plus v%1</source>
         <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4419"/>
+        <location filename="SandMan.cpp" line="4427"/>
         <source>Reset Columns</source>
         <translation>Oszlopok visszaállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4420"/>
+        <location filename="SandMan.cpp" line="4428"/>
         <source>Copy Cell</source>
         <translation>Cella másolása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4421"/>
+        <location filename="SandMan.cpp" line="4429"/>
         <source>Copy Row</source>
         <translation>Sor másolása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4422"/>
+        <location filename="SandMan.cpp" line="4430"/>
         <source>Copy Panel</source>
         <translation>Panel másolása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1254"/>
+        <location filename="SandMan.cpp" line="1259"/>
         <source>Time|Message</source>
         <translation>Idő|üzenet</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1263"/>
+        <location filename="SandMan.cpp" line="1268"/>
         <source>Sbie Messages</source>
         <translation>Sbie üzenetek</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1275"/>
+        <location filename="SandMan.cpp" line="1280"/>
         <source>Trace Log</source>
         <translation>Nyomkövetési napló</translation>
     </message>
@@ -3535,319 +3680,319 @@ Az előnézeti csatornától eltérően ez nem tartalmaz teszteletlen, potenciá
         <translation>Megjelenítés vagy elrejtés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="618"/>
-        <location filename="SandMan.cpp" line="620"/>
-        <location filename="SandMan.cpp" line="670"/>
-        <location filename="SandMan.cpp" line="672"/>
+        <location filename="SandMan.cpp" line="621"/>
+        <location filename="SandMan.cpp" line="623"/>
+        <location filename="SandMan.cpp" line="673"/>
+        <location filename="SandMan.cpp" line="675"/>
         <source>Pause Forcing Programs</source>
         <translation>Kényszerített programok szüneteltetése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="510"/>
-        <location filename="SandMan.cpp" line="740"/>
+        <location filename="SandMan.cpp" line="511"/>
+        <location filename="SandMan.cpp" line="743"/>
         <source>&amp;Sandbox</source>
         <translation>&amp;Homokozó</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="511"/>
-        <location filename="SandMan.cpp" line="1009"/>
-        <location filename="SandMan.cpp" line="1010"/>
+        <location filename="SandMan.cpp" line="512"/>
+        <location filename="SandMan.cpp" line="1014"/>
+        <location filename="SandMan.cpp" line="1015"/>
         <source>Create New Box</source>
         <translation>Új homokozó létrehozása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="512"/>
+        <location filename="SandMan.cpp" line="513"/>
         <source>Create Box Group</source>
         <translation>Homokozó csoport létrehozása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="518"/>
-        <location filename="SandMan.cpp" line="668"/>
+        <location filename="SandMan.cpp" line="521"/>
+        <location filename="SandMan.cpp" line="671"/>
         <source>Terminate All Processes</source>
         <translation>Minden folyamat leállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="624"/>
+        <location filename="SandMan.cpp" line="627"/>
         <source>Disable File Recovery</source>
         <translation>Fájl helyreállítás tiltása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="436"/>
+        <location filename="SandMan.cpp" line="437"/>
         <source>&amp;Maintenance</source>
         <translation>&amp;Karbantartás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="437"/>
+        <location filename="SandMan.cpp" line="438"/>
         <source>Connect</source>
         <translation>Kapcsolódás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="438"/>
+        <location filename="SandMan.cpp" line="439"/>
         <source>Disconnect</source>
         <translation>Leválasztás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="440"/>
+        <location filename="SandMan.cpp" line="441"/>
         <source>Stop All</source>
         <translation>Mind leállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="441"/>
+        <location filename="SandMan.cpp" line="442"/>
         <source>&amp;Advanced</source>
         <translation>&amp;Speciális</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="442"/>
+        <location filename="SandMan.cpp" line="443"/>
         <source>Install Driver</source>
         <translation>Driver telepítése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="443"/>
+        <location filename="SandMan.cpp" line="444"/>
         <source>Start Driver</source>
         <translation>Driver elindítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="444"/>
+        <location filename="SandMan.cpp" line="445"/>
         <source>Stop Driver</source>
         <translation>Driver leállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="445"/>
+        <location filename="SandMan.cpp" line="446"/>
         <source>Uninstall Driver</source>
         <translation>Driver eltávolítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="447"/>
+        <location filename="SandMan.cpp" line="448"/>
         <source>Install Service</source>
         <translation>Szolgáltatás telepítése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="448"/>
+        <location filename="SandMan.cpp" line="449"/>
         <source>Start Service</source>
         <translation>Szolgáltatás indítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="449"/>
+        <location filename="SandMan.cpp" line="450"/>
         <source>Stop Service</source>
         <translation>Szolgáltatás leállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="450"/>
+        <location filename="SandMan.cpp" line="451"/>
         <source>Uninstall Service</source>
         <translation>Szolgáltatás eltávolítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="467"/>
+        <location filename="SandMan.cpp" line="468"/>
         <source>Setup Wizard</source>
         <translation>Beállítási varázsló</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="470"/>
+        <location filename="SandMan.cpp" line="471"/>
         <source>Uninstall All</source>
         <translation>Mind eltávolítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="547"/>
-        <location filename="SandMan.cpp" line="709"/>
+        <location filename="SandMan.cpp" line="550"/>
+        <location filename="SandMan.cpp" line="712"/>
         <source>Exit</source>
         <translation>Kilépés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="550"/>
-        <location filename="SandMan.cpp" line="711"/>
+        <location filename="SandMan.cpp" line="553"/>
+        <location filename="SandMan.cpp" line="714"/>
         <source>&amp;View</source>
         <translation>&amp;Nézet</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="476"/>
+        <location filename="SandMan.cpp" line="477"/>
         <source>Simple View</source>
         <translation>Eyszerű nézet</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="477"/>
+        <location filename="SandMan.cpp" line="478"/>
         <source>Advanced View</source>
         <translation>Speciális nézet</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="482"/>
+        <location filename="SandMan.cpp" line="483"/>
         <source>Always on Top</source>
         <translation>Mindig felül</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="557"/>
+        <location filename="SandMan.cpp" line="560"/>
         <source>Show Hidden Boxes</source>
         <translation>Elrejtett homokozók megjelenítése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="559"/>
+        <location filename="SandMan.cpp" line="562"/>
         <source>Show All Sessions</source>
         <translation>Minden munkafolyamat megjelenítése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="576"/>
+        <location filename="SandMan.cpp" line="579"/>
         <source>Refresh View</source>
         <translation>Nézet frissítése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="582"/>
+        <location filename="SandMan.cpp" line="585"/>
         <source>Clean Up</source>
         <translation>Tisztítás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="583"/>
+        <location filename="SandMan.cpp" line="586"/>
         <source>Cleanup Processes</source>
         <translation>Tisztítási folyamatok</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="585"/>
+        <location filename="SandMan.cpp" line="588"/>
         <source>Cleanup Message Log</source>
         <translation>Üzenetnapló törlése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="586"/>
+        <location filename="SandMan.cpp" line="589"/>
         <source>Cleanup Trace Log</source>
         <translation>Nyomkövetési napló törlése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="587"/>
+        <location filename="SandMan.cpp" line="590"/>
         <source>Cleanup Recovery Log</source>
         <translation>Helyreállítási napló törlése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="589"/>
+        <location filename="SandMan.cpp" line="592"/>
         <source>Keep terminated</source>
         <translation>A folyamatok befejezett állapotának fenntartása </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="614"/>
+        <location filename="SandMan.cpp" line="617"/>
         <source>&amp;Options</source>
         <translation>&amp;Beállítások</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="615"/>
-        <location filename="SandMan.cpp" line="762"/>
+        <location filename="SandMan.cpp" line="618"/>
+        <location filename="SandMan.cpp" line="767"/>
         <source>Global Settings</source>
         <translation>Általános beállítások</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="649"/>
-        <location filename="SandMan.cpp" line="772"/>
+        <location filename="SandMan.cpp" line="652"/>
+        <location filename="SandMan.cpp" line="777"/>
         <source>Reset all hidden messages</source>
         <translation>Az összes rejtett üzenet visszaállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="650"/>
-        <location filename="SandMan.cpp" line="773"/>
+        <location filename="SandMan.cpp" line="653"/>
+        <location filename="SandMan.cpp" line="778"/>
         <source>Reset all GUI options</source>
         <translation>Minden GUI beállítás visszaállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="607"/>
+        <location filename="SandMan.cpp" line="610"/>
         <source>Trace Logging</source>
         <translation>Nyomkövetés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="488"/>
+        <location filename="SandMan.cpp" line="489"/>
         <source>&amp;Help</source>
         <translation>&amp;Súgó</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="498"/>
+        <location filename="SandMan.cpp" line="499"/>
         <source>Visit Support Forum</source>
         <translation>Támogatási fórum felkeresése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="497"/>
+        <location filename="SandMan.cpp" line="498"/>
         <source>Online Documentation</source>
         <translation>Online dokumentáció</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="500"/>
+        <location filename="SandMan.cpp" line="501"/>
         <source>Check for Updates</source>
         <translation>Frissítések keresése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="502"/>
+        <location filename="SandMan.cpp" line="503"/>
         <source>About the Qt Framework</source>
         <translation>Qt Framework névjegye</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="503"/>
-        <location filename="SandMan.cpp" line="4512"/>
+        <location filename="SandMan.cpp" line="504"/>
+        <location filename="SandMan.cpp" line="4520"/>
         <source>About Sandboxie-Plus</source>
         <translation>Sandboxie-Plus névjegye</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="745"/>
+        <location filename="SandMan.cpp" line="748"/>
         <source>Create New Sandbox</source>
         <translation>Új homokozó létrehozása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="746"/>
+        <location filename="SandMan.cpp" line="749"/>
         <source>Create New Group</source>
         <translation>Új csoport létrehozása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="851"/>
-        <location filename="SandMan.cpp" line="997"/>
-        <location filename="SandMan.cpp" line="998"/>
+        <location filename="SandMan.cpp" line="856"/>
+        <location filename="SandMan.cpp" line="1002"/>
+        <location filename="SandMan.cpp" line="1003"/>
         <source>Cleanup</source>
         <translation>Takarítás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1081"/>
+        <location filename="SandMan.cpp" line="1086"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Elérhető egy új Sandboxie-Plus kiadás: %1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1085"/>
+        <location filename="SandMan.cpp" line="1090"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update %1 ready&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Elérhető egy új Sandboxie-Plus frissítés %1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1089"/>
+        <location filename="SandMan.cpp" line="1094"/>
         <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update v%1 available&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Elérhető egy új Sandboxie-Plus frissítés, v%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1100"/>
+        <location filename="SandMan.cpp" line="1105"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Sandboxie-Plus támogatása a Patreon-on&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1101"/>
+        <location filename="SandMan.cpp" line="1106"/>
         <source>Click to open web browser</source>
         <translation>Kattintás a webböngésző megnyitásához</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1285"/>
+        <location filename="SandMan.cpp" line="1290"/>
         <source>Time|Box Name|File Path</source>
         <translation>Idő|Homokozó neve|Fájl elérési útja</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="611"/>
-        <location filename="SandMan.cpp" line="722"/>
-        <location filename="SandMan.cpp" line="1295"/>
+        <location filename="SandMan.cpp" line="614"/>
+        <location filename="SandMan.cpp" line="725"/>
+        <location filename="SandMan.cpp" line="1300"/>
         <source>Recovery Log</source>
         <translation>Helyreállítási napló</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1082"/>
+        <location filename="SandMan.cpp" line="1087"/>
         <source>Click to run installer</source>
         <translation>Kattintson a telepítő futtatásához</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1086"/>
+        <location filename="SandMan.cpp" line="1091"/>
         <source>Click to apply update</source>
         <translation>Kattintson a frissítés alkalmazásához</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1362"/>
+        <location filename="SandMan.cpp" line="1367"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>Bezárja a Sandboxie-Manager alkalmazást?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1379"/>
+        <location filename="SandMan.cpp" line="1384"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
@@ -3856,34 +4001,34 @@ Do you want to do the clean up?</source>
 Elvégzi a takarítást?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1380"/>
-        <location filename="SandMan.cpp" line="1965"/>
-        <location filename="SandMan.cpp" line="2490"/>
-        <location filename="SandMan.cpp" line="3447"/>
-        <location filename="SandMan.cpp" line="3902"/>
-        <location filename="SandMan.cpp" line="3918"/>
+        <location filename="SandMan.cpp" line="1385"/>
+        <location filename="SandMan.cpp" line="1970"/>
+        <location filename="SandMan.cpp" line="2495"/>
+        <location filename="SandMan.cpp" line="3455"/>
+        <location filename="SandMan.cpp" line="3910"/>
+        <location filename="SandMan.cpp" line="3926"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Ne jelenjen meg többet ez az üzenet.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1572"/>
+        <location filename="SandMan.cpp" line="1577"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
         <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
         <translation>Ez a homokozó &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;javított biztonsági elkülönítést kínál&lt;/a&gt;, alkalmas nem megbízható szoftverek tesztelésére.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1576"/>
+        <location filename="SandMan.cpp" line="1581"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
         <translation>Ez a homokozó szabványos elkülönítést biztosít, alkalmas a szoftver futtatására a biztonság fokozása érdekében.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1580"/>
+        <location filename="SandMan.cpp" line="1585"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
         <translation>Ez a homokozó nem kényszeríti ki az elkülönítést, csak &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;alkalmazás rekeszként&lt;/a&gt; használható szoftvervirtualizációhoz.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1588"/>
+        <location filename="SandMan.cpp" line="1593"/>
         <source>&lt;br /&gt;&lt;br /&gt;This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</source>
         <oldsource>
 
@@ -3891,7 +4036,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>&lt;br /&gt;&lt;br /&gt;Ez a homokozó &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;megakadályozza az összes felhasználói adathelyhez való hozzáférést&lt;/a&gt;, kivéve, ha az erőforrás-hozzáférési beállításokban kifejezetten engedélyezett.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1756"/>
+        <location filename="SandMan.cpp" line="1761"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>Ismeretlen &apos;%1&apos; művelet parancssoron keresztül</translation>
     </message>
@@ -3911,64 +4056,64 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation> - Homokozó tartalom törlése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2169"/>
+        <location filename="SandMan.cpp" line="2174"/>
         <source>Executing OnBoxDelete: %1</source>
         <translation>OnBoxDelet végrehajtása: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2194"/>
+        <location filename="SandMan.cpp" line="2199"/>
         <source>Auto Deleting %1 Content</source>
         <translation>%1 tartalom automatikus törlése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2427"/>
+        <location filename="SandMan.cpp" line="2432"/>
         <source>Auto deleting content of %1</source>
         <translation>%1 tartlmának automatikus törlése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2463"/>
+        <location filename="SandMan.cpp" line="2468"/>
         <source>%1 Directory: %2</source>
         <translation>%1 könyvtár: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2463"/>
+        <location filename="SandMan.cpp" line="2468"/>
         <source>Application</source>
         <translation>Alkalmazás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2463"/>
+        <location filename="SandMan.cpp" line="2468"/>
         <source>Installation</source>
         <translation>Telepítés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2465"/>
+        <location filename="SandMan.cpp" line="2470"/>
         <source>Current Config: %1</source>
         <translation>Jelenlegi konfiguráció: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2623"/>
+        <location filename="SandMan.cpp" line="2628"/>
         <source>Do you want the setup wizard to be omitted?</source>
         <translation>&gt;Valóban kihagyja a telepítővarázslót?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3583"/>
-        <location filename="SandMan.cpp" line="3585"/>
-        <location filename="SandMan.cpp" line="4178"/>
+        <location filename="SandMan.cpp" line="3591"/>
+        <location filename="SandMan.cpp" line="3593"/>
+        <location filename="SandMan.cpp" line="4186"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - hiba</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3583"/>
+        <location filename="SandMan.cpp" line="3591"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Nem sikerült leállítani minden Sandboxie komponenst</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3585"/>
+        <location filename="SandMan.cpp" line="3593"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>A szükséges Sandboxie komponensek elindítása sikertelen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="174"/>
+        <location filename="SandMan.cpp" line="175"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
         <translation>FIGYELEM: %1 Sandboxie-Plus.ini fájlba nem lehet írni, a beállítások nem kerülnek mentésre.</translation>
     </message>
@@ -3977,12 +4122,12 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation type="vanished">Néhány kompabilitási sablon (%1) hiányzik, feltehetően törlésre kerültek. Eltávolítja őket minden homokozóbl?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1993"/>
+        <location filename="SandMan.cpp" line="1998"/>
         <source>Cleaned up removed templates...</source>
         <translation>Eltávolított sablonok törlése...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2487"/>
+        <location filename="SandMan.cpp" line="2492"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
@@ -3991,17 +4136,17 @@ Igen választás: %1
 Nem választás: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2559"/>
+        <location filename="SandMan.cpp" line="2564"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Az alapértelmezett homokozó nem található; létrehozás: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2640"/>
+        <location filename="SandMan.cpp" line="2645"/>
         <source>   -   NOT connected</source>
         <translation>   -   NINCS kapcsolat</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3130"/>
+        <location filename="SandMan.cpp" line="3136"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>A kiválasztott funkciókészlet csak a projekt támogatói számára érhető el. A támogatói tanúsítvány nélkül engedélyezett funkciókészlettel elindított folyamatok 5 perc múlva leállnak.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Legyen támogatónk&lt;/a&gt;, és kap egy &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítványt&lt;/a&gt;</translation>
     </message>
@@ -4059,350 +4204,348 @@ Nem választás: %2</translation>
         <translation>Néhány fájlt nem sikerült helyreállítani: </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3309"/>
+        <location filename="SandMan.cpp" line="3315"/>
         <source>Only Administrators can change the config.</source>
         <translation>Csak a rendszergazda módosíthatja a konfigurációt.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3319"/>
+        <location filename="SandMan.cpp" line="3325"/>
         <source>Please enter the configuration password.</source>
         <translation>Kérjük, adja meg a konfigurációs jelszót.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3327"/>
+        <location filename="SandMan.cpp" line="3333"/>
         <source>Login Failed: %1</source>
         <translation>Belépés sikertelen: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3356"/>
+        <location filename="SandMan.cpp" line="3364"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Leállít minden folyamatot az összes homokozóban?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3446"/>
+        <location filename="SandMan.cpp" line="3454"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>A Sandboxie-Plus hordozható módban indult, és létre kell hoznia a szükséges szolgáltatásokat. Ez rendszergazdai jogosultságokat kér.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3480"/>
+        <location filename="SandMan.cpp" line="3488"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>VIGYÁZAT: Egy másik ügynök (valószínűleg SbieCtrl.exe) már kezeli ezt a Sandboxie-munkamenetet. Kérjük, előbb zárja be, majd csatlakozzon újra, hogy átvegye az irányítást.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3612"/>
+        <location filename="SandMan.cpp" line="3620"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Karbantartási művelet van folyamatban. Kérjük, várjon...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3812"/>
+        <location filename="SandMan.cpp" line="3820"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Visszaállítja a rejtett üzenet mezőket (Igen) vagy csak az összes naplóüzenetet (Nem)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3916"/>
+        <location filename="SandMan.cpp" line="3924"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>A változtatások automatikusan érvénybe lépnek, amikor a fájl mentésre kerül.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3917"/>
+        <location filename="SandMan.cpp" line="3925"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>A módosítások automatikusan érvénybe lépnek, amikor a szerkesztő bezárul.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4107"/>
+        <location filename="SandMan.cpp" line="4115"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Állapot hiba: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4108"/>
+        <location filename="SandMan.cpp" line="4116"/>
         <source>Unknown</source>
         <translation>Ismeretlen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4128"/>
+        <location filename="SandMan.cpp" line="4136"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>A homokozót a törlés előtt ki kell üríteni.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4133"/>
+        <location filename="SandMan.cpp" line="4141"/>
         <source>Failed to copy box data files</source>
         <translation>A homokó adatfájljainak másolása sikertelen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4138"/>
+        <location filename="SandMan.cpp" line="4146"/>
         <source>Failed to remove old box data files</source>
         <translation>A régi homokozó adatfájljainak eltávolítása sikertelen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4156"/>
+        <location filename="SandMan.cpp" line="4164"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Ismeretlen hiba állapot: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4252"/>
+        <location filename="SandMan.cpp" line="4260"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
         <translation>Megnyitja %1-t egy homokozós vagy nem homokozós webböngészőben?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4256"/>
+        <location filename="SandMan.cpp" line="4264"/>
         <source>Sandboxed</source>
         <translation>Izolált</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4257"/>
+        <location filename="SandMan.cpp" line="4265"/>
         <source>Unsandboxed</source>
         <translation>Nem izolált</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4423"/>
+        <location filename="SandMan.cpp" line="4431"/>
         <source>Case Sensitive</source>
         <translation>Kis- és nagybetű megkülönböztetése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4424"/>
+        <location filename="SandMan.cpp" line="4432"/>
         <source>RegExp</source>
         <translation>RegExp</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4425"/>
+        <location filename="SandMan.cpp" line="4433"/>
         <source>Highlight</source>
         <translation>Kiemelt</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4426"/>
+        <location filename="SandMan.cpp" line="4434"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4427"/>
+        <location filename="SandMan.cpp" line="4435"/>
         <source>&amp;Find ...</source>
         <translation>&amp;Keresés...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4428"/>
+        <location filename="SandMan.cpp" line="4436"/>
         <source>All columns</source>
         <translation>Minden oszlop</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4110"/>
+        <location filename="SandMan.cpp" line="4118"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Ehhez a művelethez rendszergazdai jogosultság szükséges.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="478"/>
+        <location filename="SandMan.cpp" line="479"/>
         <source>Vintage View (like SbieCtrl)</source>
         <translation>Klasszikus nézet (mint SbieCtrl)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="495"/>
+        <location filename="SandMan.cpp" line="496"/>
         <source>Contribute to Sandboxie-Plus</source>
         <translation>Hozzájárulás a Sandboxie-Plushoz</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="513"/>
         <source>Import Box</source>
-        <translation>Homokozó importálása</translation>
+        <translation type="vanished">Homokozó importálása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="516"/>
-        <location filename="SandMan.cpp" line="666"/>
+        <location filename="SandMan.cpp" line="519"/>
+        <location filename="SandMan.cpp" line="669"/>
         <source>Run Sandboxed</source>
         <translation>Izolált futtatás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="627"/>
+        <location filename="SandMan.cpp" line="630"/>
         <source>Disable Message Popup</source>
         <translation>Felugró üzenetablak tiltása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="521"/>
-        <location filename="SandMan.cpp" line="682"/>
+        <location filename="SandMan.cpp" line="524"/>
+        <location filename="SandMan.cpp" line="685"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
         <translation>Ez egy homokozó ablak?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="193"/>
-        <location filename="SandMan.cpp" line="2449"/>
+        <location filename="SandMan.cpp" line="194"/>
+        <location filename="SandMan.cpp" line="2454"/>
         <source>Sandboxie-Plus Insider [%1]</source>
         <translation>Sandboxie-Plus Insider [%1]</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="496"/>
+        <location filename="SandMan.cpp" line="497"/>
         <source>Troubleshooting Wizard</source>
         <translation>Hibaelhárító varázsló</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="568"/>
+        <location filename="SandMan.cpp" line="571"/>
         <source>Show File Panel</source>
         <translation>Fájl-panel megjelenítése, elrejtése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="637"/>
-        <location filename="SandMan.cpp" line="780"/>
-        <location filename="SandMan.cpp" line="1025"/>
-        <location filename="SandMan.cpp" line="1026"/>
+        <location filename="SandMan.cpp" line="640"/>
+        <location filename="SandMan.cpp" line="785"/>
+        <location filename="SandMan.cpp" line="1030"/>
+        <location filename="SandMan.cpp" line="1031"/>
         <source>Edit Sandboxie.ini</source>
         <translation>Sandboxie.ini szerkesztése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="640"/>
+        <location filename="SandMan.cpp" line="643"/>
         <source>Edit Templates.ini</source>
         <translation>Templates.ini szerkesztése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="642"/>
+        <location filename="SandMan.cpp" line="645"/>
         <source>Edit Sandboxie-Plus.ini</source>
         <translation>Sandboxie-Plus.ini szerkesztése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="646"/>
-        <location filename="SandMan.cpp" line="783"/>
+        <location filename="SandMan.cpp" line="649"/>
+        <location filename="SandMan.cpp" line="788"/>
         <source>Reload configuration</source>
         <translation>Konfiguráció újrabetöltése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="665"/>
+        <location filename="SandMan.cpp" line="668"/>
         <source>&amp;File</source>
         <translation>&amp;Fájl</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="683"/>
+        <location filename="SandMan.cpp" line="686"/>
         <source>Resource Access Monitor</source>
         <translation>Erőforrás-hozzáférés figyelő</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="717"/>
+        <location filename="SandMan.cpp" line="720"/>
         <source>Programs</source>
         <translation>Programok</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="718"/>
+        <location filename="SandMan.cpp" line="721"/>
         <source>Files and Folders</source>
         <translation>Fájlok és mappák</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="747"/>
         <source>Import Sandbox</source>
-        <translation>Homokozó importálása</translation>
+        <translation type="vanished">Homokozó importálása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="750"/>
+        <location filename="SandMan.cpp" line="755"/>
         <source>Set Container Folder</source>
         <translation>Tárolómappa beállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="753"/>
+        <location filename="SandMan.cpp" line="758"/>
         <source>Set Layout and Groups</source>
         <translation>Elrendezés és csoportok beállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="755"/>
+        <location filename="SandMan.cpp" line="760"/>
         <source>Reveal Hidden Boxes</source>
         <translation>Rejtett homokozók feltárása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="761"/>
+        <location filename="SandMan.cpp" line="766"/>
         <source>&amp;Configure</source>
         <translation>&amp;Beállítás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="765"/>
+        <location filename="SandMan.cpp" line="770"/>
         <source>Program Alerts</source>
         <translation>Program figyelmeztetések</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="767"/>
+        <location filename="SandMan.cpp" line="772"/>
         <source>Windows Shell Integration</source>
         <translation>Windows Shell integráció</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="769"/>
+        <location filename="SandMan.cpp" line="774"/>
         <source>Software Compatibility</source>
         <translation>Szoftver kompatibilitás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="778"/>
+        <location filename="SandMan.cpp" line="783"/>
         <source>Lock Configuration</source>
         <translation>Konfiguráció zárolása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="797"/>
+        <location filename="SandMan.cpp" line="802"/>
         <source>Sandbox %1</source>
         <translation>%1 homokozó</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="840"/>
+        <location filename="SandMan.cpp" line="845"/>
         <source>New-Box Menu</source>
         <translation>Új homokozó menü</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="860"/>
+        <location filename="SandMan.cpp" line="865"/>
         <source>Edit-ini Menu</source>
         <translation>Szerkesztés-ini menü</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="906"/>
+        <location filename="SandMan.cpp" line="911"/>
         <source>Toolbar Items</source>
         <translation>Eszköztár elemek</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="908"/>
+        <location filename="SandMan.cpp" line="913"/>
         <source>Reset Toolbar</source>
         <translation>Eszköztár visszaállítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1090"/>
+        <location filename="SandMan.cpp" line="1095"/>
         <source>Click to download update</source>
         <translation>Kattintson ide a frissítés letöltéséhez</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1899"/>
+        <location filename="SandMan.cpp" line="1904"/>
         <source>No Force Process</source>
         <translation>Nincs kényszerítés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2271"/>
+        <location filename="SandMan.cpp" line="2276"/>
         <source>Removed Shortcut: %1</source>
         <translation>Eltávolított parancsikon: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2360"/>
+        <location filename="SandMan.cpp" line="2365"/>
         <source>Updated Shortcut to: %1</source>
         <translation>Parancsikon fissítve erre: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2362"/>
+        <location filename="SandMan.cpp" line="2367"/>
         <source>Added Shortcut to: %1</source>
         <translation>Parancsikon hozzáadva ehhez: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2439"/>
+        <location filename="SandMan.cpp" line="2444"/>
         <source>Auto removing sandbox %1</source>
         <translation>%1 homokozó automatikus eltávolítása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2464"/>
+        <location filename="SandMan.cpp" line="2469"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
         <translation>Sandboxie-Plus verzió: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2466"/>
+        <location filename="SandMan.cpp" line="2471"/>
         <source>Data Directory: %1</source>
         <translation>Adatkönyvtár %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2529"/>
+        <location filename="SandMan.cpp" line="2534"/>
         <source> for Personal use</source>
         <translation> személyes használatra</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2531"/>
+        <location filename="SandMan.cpp" line="2536"/>
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   –   CSAK nem kereskedelmi használatra</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2596"/>
+        <location filename="SandMan.cpp" line="2601"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
@@ -4411,128 +4554,148 @@ Please check if there is an update for sandboxie.</oldsource>
 Kérjük, ellenőrizze, hogy van-e frissítés a sandboxie-hoz.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2605"/>
+        <location filename="SandMan.cpp" line="2610"/>
         <source>Don&apos;t show this message again for the current build.</source>
         <translation>Ne jelenítse meg újra ezt az üzenetet az aktuális build esetében</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2612"/>
+        <location filename="SandMan.cpp" line="2617"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
         <translation>A Windows build %1 meghaladja a Sandboxie verzió jelenlegi ismert támogatási lehetőségeit, a Sandboxie megpróbálja használni az utolsó ismert eltolásokat, amelyek a rendszer instabilitását okozhatják.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2918"/>
-        <location filename="SandMan.cpp" line="2922"/>
         <location filename="SandMan.cpp" line="2924"/>
+        <location filename="SandMan.cpp" line="2928"/>
+        <location filename="SandMan.cpp" line="2930"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3029"/>
+        <location filename="SandMan.cpp" line="3035"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>%1 program, amely %2 homokozóban indult, 5 percen belül leáll, mert a homokozó úgy lett beállítva, hogy kizárólag a projekttámogatók számára elérhető szolgáltatásokat használja.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3031"/>
+        <location filename="SandMan.cpp" line="3037"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>%1 homokozó úgy van beállítva, hogy kizárólag a projekt támogatói számára elérhető szolgáltatásokat használja, ezeket az előre beállított értékeket figyelmen kívül hagyja.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3012"/>
-        <location filename="SandMan.cpp" line="3020"/>
-        <location filename="SandMan.cpp" line="3032"/>
-        <location filename="SandMan.cpp" line="3119"/>
+        <location filename="SandMan.cpp" line="3018"/>
+        <location filename="SandMan.cpp" line="3026"/>
+        <location filename="SandMan.cpp" line="3038"/>
+        <location filename="SandMan.cpp" line="3125"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Legyen támogatónk&lt;/a&gt;, és kap egy &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói anúsítványt&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="455"/>
+        <location filename="SandMan.cpp" line="456"/>
         <source>Virtual Disks</source>
         <translation>Virtuális lemez</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="517"/>
-        <location filename="SandMan.cpp" line="667"/>
+        <location filename="SandMan.cpp" line="514"/>
+        <source>Import Boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="516"/>
+        <source>Export Boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="520"/>
+        <location filename="SandMan.cpp" line="670"/>
         <source>Suspend All Processes</source>
         <translation>Minden folyamat felfüggesztése</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="519"/>
-        <location filename="SandMan.cpp" line="669"/>
+        <location filename="SandMan.cpp" line="522"/>
+        <location filename="SandMan.cpp" line="672"/>
         <source>Lock All Encrypted Boxes</source>
         <translation>Összes titkosított doboz zárolása</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="545"/>
-        <location filename="SandMan.cpp" line="707"/>
+        <location filename="SandMan.cpp" line="548"/>
+        <location filename="SandMan.cpp" line="710"/>
         <source>Restart As Admin</source>
         <translation>Újraindítás rendszergazdaként</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="592"/>
+        <location filename="SandMan.cpp" line="595"/>
         <source>Auto Expand Tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1583"/>
+        <location filename="SandMan.cpp" line="750"/>
+        <source>Import Sandboxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="752"/>
+        <source>Export Sandboxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1588"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
         <translation>Ez a homokozó &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;titkosítottt&lt;/a&gt; és &lt;a href=&quot;sbie://docs/black-box&quot;&gt;a hozzáférést homokozós folyamatokhoz őrzi&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1658"/>
-        <location filename="SandMan.cpp" line="1689"/>
+        <location filename="SandMan.cpp" line="1663"/>
+        <location filename="SandMan.cpp" line="1694"/>
         <source>Which box you want to add in?</source>
         <translation>Melyik homokozóhoz adná hozzá?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1658"/>
-        <location filename="SandMan.cpp" line="1689"/>
+        <location filename="SandMan.cpp" line="1663"/>
+        <location filename="SandMan.cpp" line="1694"/>
         <source>Type the box name which you are going to set:</source>
         <translation>Írja be a beállítani kívánt homokozó nevét:</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1675"/>
         <location filename="SandMan.cpp" line="1680"/>
-        <location filename="SandMan.cpp" line="1684"/>
-        <location filename="SandMan.cpp" line="1696"/>
-        <location filename="SandMan.cpp" line="1700"/>
+        <location filename="SandMan.cpp" line="1685"/>
+        <location filename="SandMan.cpp" line="1689"/>
+        <location filename="SandMan.cpp" line="1701"/>
+        <location filename="SandMan.cpp" line="1705"/>
         <source>Sandboxie-Plus Warning</source>
         <translation>Sandboxie-Plus figyelmeztetés</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1675"/>
+        <location filename="SandMan.cpp" line="1680"/>
         <source>The value is not an existing directory or executable.</source>
         <translation>Az érték nem létező könyvtár vagy végrehajtható fájl.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1680"/>
-        <location filename="SandMan.cpp" line="1696"/>
+        <location filename="SandMan.cpp" line="1685"/>
+        <location filename="SandMan.cpp" line="1701"/>
         <source>You typed a wrong box name! Nothing was changed.</source>
         <translation>Rossz homokozó nevet írt be! Semmi sem változott.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1684"/>
-        <location filename="SandMan.cpp" line="1700"/>
+        <location filename="SandMan.cpp" line="1689"/>
+        <location filename="SandMan.cpp" line="1705"/>
         <source>User canceled this operation.</source>
         <translation>A felhasználó megszakította ezt a műveletet.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1963"/>
+        <location filename="SandMan.cpp" line="1968"/>
         <source>Some compatibility templates are missing:&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;Probably deleted, do you want to remove them from all boxes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2050"/>
+        <location filename="SandMan.cpp" line="2055"/>
         <source>USB sandbox not found; creating: %1</source>
         <translation>USB-homokozó nem található; létrehozás: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2394"/>
+        <location filename="SandMan.cpp" line="2399"/>
         <source>Executing OnBoxTerminate: %1</source>
         <translation>Az OnBoxTerminate végrehajtása: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2630"/>
+        <location filename="SandMan.cpp" line="2635"/>
         <source>Sandman did not finish enumerating installed windows updates last time, it probably hangs.
 Do you want to disable Windows Updates scanning from the software compatibility detection?</source>
         <oldsource>Sandman die not finish enumerating installed windows updates last time, it probably hang.
@@ -4540,127 +4703,127 @@ Do you want to disable Windows Updates scanning from the the software compatibil
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2832"/>
+        <location filename="SandMan.cpp" line="2838"/>
         <source>Failed to configure hotkey %1, error: %2</source>
         <translation>Nem sikerült konfigurálni %1 gyorsbillentyűt, hiba: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3011"/>
+        <location filename="SandMan.cpp" line="3017"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
         <translation>%1 homokozó úgy van beállítva, hogy kizárólag a projekt támogatói számára elérhető szolgáltatásokat használja.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3016"/>
+        <location filename="SandMan.cpp" line="3022"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>%1 homokozó úgy van beállítva, hogy olyan funkciókat használjon, amelyekhez &lt;b&gt;speciális&lt;/b&gt; támogató tanúsítvány szükséges.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3018"/>
-        <location filename="SandMan.cpp" line="3117"/>
+        <location filename="SandMan.cpp" line="3024"/>
+        <location filename="SandMan.cpp" line="3123"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Tanúsítvány frissítése&lt;/a&gt; a speciális funkciók feloldásához.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3113"/>
+        <location filename="SandMan.cpp" line="3119"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
         <translation>A kiválasztott funkció egy &lt;b&gt;speciális&lt;/b&gt; támogatói tanúsítvényt követel.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3115"/>
+        <location filename="SandMan.cpp" line="3121"/>
         <source>&lt;br /&gt;you need to be on the Great Patreon level or higher to unlock this feature.</source>
         <translation>&lt;br /&gt;A funkció feloldásához a Great Patreon vagy magasabb szinten kell lennie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3127"/>
+        <location filename="SandMan.cpp" line="3133"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>A kiválasztott funkciókészlet csak a projekt támogatói számára érhető el.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Legyen projekttámogató&lt;/a&gt;, és kap egy &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;támogatói tanúsítványt&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3173"/>
+        <location filename="SandMan.cpp" line="3179"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
         <translation>A használni kívánt tanúsítványt blokkolták, vagyis ok miatt érvénytelenítették. Minden felhasználási kísérlet a felhasználási feltételek megsértését jelenti!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3185"/>
+        <location filename="SandMan.cpp" line="3191"/>
         <source>The Certificate Signature is invalid!</source>
         <translation>A tanúsítvány aláírása érvénytelen!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3186"/>
+        <location filename="SandMan.cpp" line="3192"/>
         <source>The Certificate is not suitable for this product.</source>
         <translation>A tanúsítvány nem alkalmas ehhez a termékhez.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3187"/>
+        <location filename="SandMan.cpp" line="3193"/>
         <source>The Certificate is node locked.</source>
         <translation>A tanúsítvány csomópont zárolva van.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3191"/>
+        <location filename="SandMan.cpp" line="3197"/>
         <source>The support certificate is not valid.
 Error: %1</source>
         <translation>A támogatási tanúsítvány nem érvényes
 Hiba: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3255"/>
+        <location filename="SandMan.cpp" line="3261"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>A próbaidőszak lejárt!!!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3357"/>
-        <location filename="SandMan.cpp" line="3382"/>
+        <location filename="SandMan.cpp" line="3365"/>
+        <location filename="SandMan.cpp" line="3390"/>
         <source>Don&apos;t ask in future</source>
         <translation>A jövőben ne kérdezzen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3381"/>
+        <location filename="SandMan.cpp" line="3389"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
         <translation>Leállítja az összes folyamatot a titkosított homokozókban, és leválasztja őket?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3407"/>
+        <location filename="SandMan.cpp" line="3415"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>Kérjük, adja meg a &quot;Kényszerített programok&quot; szabályainak letiltásához szükséges időtartamot másodpercben.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3422"/>
+        <location filename="SandMan.cpp" line="3430"/>
         <source>No Recovery</source>
         <translation>Nincs helyreállítás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3428"/>
+        <location filename="SandMan.cpp" line="3436"/>
         <source>No Messages</source>
         <translation>Nincsenek üzenetek</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3484"/>
+        <location filename="SandMan.cpp" line="3492"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;HIBA:&lt;/b&gt; a Sandboxie-Plus Manager (SandMan.exe) nem rendelkezik érvényes aláírással (SandMan.exe.sig). Kérjük, töltsön le egy megbízható kiadást a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;hivatalos letöltési oldalról&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3587"/>
+        <location filename="SandMan.cpp" line="3595"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>A karbantartási művelet sikertelen (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3592"/>
+        <location filename="SandMan.cpp" line="3600"/>
         <source>Maintenance operation completed</source>
         <translation>A karbantartási művelet befejeződött</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3743"/>
+        <location filename="SandMan.cpp" line="3751"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>A Plus felhasználói felületen ez a funkció a fő homokozó listanézetbe integrálva lett.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3744"/>
+        <location filename="SandMan.cpp" line="3752"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>A homokozó/csoport helyi menü használatával áthelyezhet homokozókat és csoportokat más csoportokba. A fogd és vidd módszerrel is mozgathatja az elemeket. Alternatív megoldásként használhatja a nyílbillentyűket, miközben lenyomva tartja az ALT billentyűt, hogy fel-le mozgassa az elemeket a csoporton belül.&lt;br /&gt;Új homokozókat és csoportokat hozhat létre a Sandbox menüből.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3900"/>
+        <location filename="SandMan.cpp" line="3908"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -4669,250 +4832,250 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza lesz állítva a Sandboxie következő frissítésekor.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3980"/>
+        <location filename="SandMan.cpp" line="3988"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>A Sandboxie konfigurációja újratöltve</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4111"/>
+        <location filename="SandMan.cpp" line="4119"/>
         <source>Failed to execute: %1</source>
         <translation>Végrehajtás sikertelen: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4112"/>
+        <location filename="SandMan.cpp" line="4120"/>
         <source>Failed to connect to the driver</source>
         <translation>Kapcsolódás a driverhez sikertelen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4113"/>
+        <location filename="SandMan.cpp" line="4121"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Kommunikáció a homokozó szolgáltatással sikertelen: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4114"/>
+        <location filename="SandMan.cpp" line="4122"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>%1 nem-kompatibilis Sandboxie verzió található. Kompatibilis verziók: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4115"/>
+        <location filename="SandMan.cpp" line="4123"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Sandboxie telepítési útvonala nem található.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4116"/>
+        <location filename="SandMan.cpp" line="4124"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>Nem sikerült másolni a konfigurációt %1 homokozóból: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4117"/>
+        <location filename="SandMan.cpp" line="4125"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>%1 néven már létezik egy homokozó</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4118"/>
+        <location filename="SandMan.cpp" line="4126"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>Nem sikerült törölni %1 homokozót: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4119"/>
+        <location filename="SandMan.cpp" line="4127"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>A homokozó neve nem lehet hosszabb 32 karakternél.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4120"/>
+        <location filename="SandMan.cpp" line="4128"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>A homokozó neve nem lehet egy eszköz neve.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4121"/>
+        <location filename="SandMan.cpp" line="4129"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>A homokozó neve csak betűket, számokat és aláhúzásokat tartalmazhat, amelyek szóközként jelennek meg.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4122"/>
+        <location filename="SandMan.cpp" line="4130"/>
         <source>Failed to terminate all processes</source>
         <translation>Nem sikerült minden folyamatot leállítani</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4123"/>
+        <location filename="SandMan.cpp" line="4131"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>A törlésvédelem engedélyezve van a homokozóban</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4124"/>
+        <location filename="SandMan.cpp" line="4132"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Minden homokozói folyamatot le kell állítani a homokozó tartalmának törlése előtt</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4125"/>
+        <location filename="SandMan.cpp" line="4133"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Hiba történt a homokozó mappa törlésekor: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4126"/>
+        <location filename="SandMan.cpp" line="4134"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>A homokozóban lévő összes folyamatot le kell állítani, mielőtt átnevezné.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4129"/>
+        <location filename="SandMan.cpp" line="4137"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>&apos;%1&apos; könyvtár átmozgatása sikertelen ide: &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4130"/>
+        <location filename="SandMan.cpp" line="4138"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Nem sikerült áthelyezni &apos;%1&apos; homokozó képet ide: &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4131"/>
+        <location filename="SandMan.cpp" line="4139"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Ez a pillanatkép nem hajtható végre, amíg a folyamat még fut a homokozóban.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4132"/>
+        <location filename="SandMan.cpp" line="4140"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Könyvtár létrehozása az új pillanatkép részére sikertelen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4134"/>
+        <location filename="SandMan.cpp" line="4142"/>
         <source>Snapshot not found</source>
         <translation>Pillanatkép nem található</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4135"/>
+        <location filename="SandMan.cpp" line="4143"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>Hiba történt a pillanatkép könyvtárak egyesítésekor: &apos;%1&apos; ezzel: &apos;%2&apos;, a pillanatkép nincs teljesen összevonva.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4136"/>
+        <location filename="SandMan.cpp" line="4144"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>A régi &apos;%1&apos; pillanatkép könyvtár eltávolítása sikertelen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4137"/>
+        <location filename="SandMan.cpp" line="4145"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Nem lehet eltávolítani azt a pillanatképet, amelyet több későbbi pillanatkép is megoszt</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4139"/>
+        <location filename="SandMan.cpp" line="4147"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Nem jogosult a konfiguráció frissítésére &apos;%1&apos; szakaszban</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4140"/>
+        <location filename="SandMan.cpp" line="4148"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>%1 konfigurációs beállítások beállítása sikertelen %2 szakaszban: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4141"/>
+        <location filename="SandMan.cpp" line="4149"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Nem lehet pillanatképet készíteni egy üres homokozóról</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4142"/>
+        <location filename="SandMan.cpp" line="4150"/>
         <source>A sandbox with that name already exists</source>
         <translation>Már létezik ilyen nevű homokozó</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4143"/>
+        <location filename="SandMan.cpp" line="4151"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>A konfigurációs jelszó nem lehet 64 karakternél hosszabb</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4144"/>
+        <location filename="SandMan.cpp" line="4152"/>
         <source>The operation was canceled by the user</source>
         <translation>A műveletet a felhasználó törölte</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4145"/>
+        <location filename="SandMan.cpp" line="4153"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>A leválasztott homokozó tartalma nem törölhető</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4147"/>
+        <location filename="SandMan.cpp" line="4155"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4149"/>
+        <location filename="SandMan.cpp" line="4157"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>Az importálás/exportálás nem érhető el, a 7z.dll nem tölthető be</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4150"/>
+        <location filename="SandMan.cpp" line="4158"/>
         <source>Failed to create the box archive</source>
         <translation>Nem sikerült létrehozni a homokozó archívumot</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4151"/>
+        <location filename="SandMan.cpp" line="4159"/>
         <source>Failed to open the 7z archive</source>
         <translation>Nem sikerült megnyitni a 7z archívumot</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4152"/>
+        <location filename="SandMan.cpp" line="4160"/>
         <source>Failed to unpack the box archive</source>
         <translation>Nem sikerült kicsomagolni a homokozó archívumot</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4153"/>
+        <location filename="SandMan.cpp" line="4161"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>A kiválasztott 7z fájl NEM egy homokozó archívum</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4154"/>
+        <location filename="SandMan.cpp" line="4162"/>
         <source>Failed to copy directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4180"/>
+        <location filename="SandMan.cpp" line="4188"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>%1 elemre vonatkozó művelet sikertelen.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4253"/>
+        <location filename="SandMan.cpp" line="4261"/>
         <source>Remember choice for later.</source>
         <translation>A választás megjegyzése.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4481"/>
+        <location filename="SandMan.cpp" line="4489"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;</source>
         <translation>&lt;h3&gt;Sandboxie-Plus névjegye&lt;/h3&gt;&lt;p&gt;Verzió %1&lt;/p&gt;&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4489"/>
+        <location filename="SandMan.cpp" line="4497"/>
         <source>This copy of Sandboxie-Plus is certified for: %1</source>
         <translation>A Sandboxie-Plus ezen példánya a következőhöz van hitelesítve: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4491"/>
+        <location filename="SandMan.cpp" line="4499"/>
         <source>Sandboxie-Plus is free for personal and non-commercial use.</source>
         <translation>A Sandboxie-Plus személyes és nem kereskedelmi használatra ingyenes.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4495"/>
+        <location filename="SandMan.cpp" line="4503"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Features: %3&lt;br /&gt;&lt;br /&gt;Installation: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus a Sandboxie nyílt forráskódú folytatása.&lt;br /&gt;Keresee fel &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; weblapot további információkért.&lt;br /&gt;&lt;br /&gt;%2&lt;br /&gt;&lt;br /&gt;Funkciók: %3&lt;br /&gt;&lt;br /&gt;Telepítés: %1&lt;br /&gt;SbieDrv.sys: %4&lt;br /&gt; SbieSvc.exe: %5&lt;br /&gt; SbieDll.dll: %6&lt;br /&gt;&lt;br /&gt;Ikonok innen: &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3260"/>
+        <location filename="SandMan.cpp" line="3266"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>A támogatói tanúsítvány nem érvényes ehhez a buildhez, kérjük, szerezzen be frissített tanúsítványt</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3263"/>
+        <location filename="SandMan.cpp" line="3269"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
         <translation>A támogatói tanúsítvány %1 napja lejárt. Kérjük, szerezzen be frissített tanúsítványt</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3264"/>
+        <location filename="SandMan.cpp" line="3270"/>
         <source>, but it remains valid for the current build</source>
         <translation>, de érvényes marad a jelenlegi buildre</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3266"/>
+        <location filename="SandMan.cpp" line="3272"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>A támogatói tanúsítvány %1 nap múlva lejár. Kérjük, hosszabítsa meg</translation>
     </message>
@@ -5233,503 +5396,508 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="162"/>
-        <location filename="Views/SbieView.cpp" line="332"/>
+        <location filename="Views/SbieView.cpp" line="163"/>
+        <location filename="Views/SbieView.cpp" line="334"/>
         <source>Create New Box</source>
         <translation>Új homokozó létrehozása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="461"/>
+        <location filename="Views/SbieView.cpp" line="463"/>
         <source>Remove Group</source>
         <translation>Csoport eltávolítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="173"/>
-        <location filename="Views/SbieView.cpp" line="343"/>
+        <location filename="Views/SbieView.cpp" line="174"/>
+        <location filename="Views/SbieView.cpp" line="345"/>
         <source>Run</source>
         <translation>Futtatás</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="178"/>
+        <location filename="Views/SbieView.cpp" line="179"/>
         <source>Run Program</source>
         <translation>Program indítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="179"/>
+        <location filename="Views/SbieView.cpp" line="180"/>
         <source>Run from Start Menu</source>
         <translation>Indítás a &quot;Startmenü&quot;-ből</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Default Web Browser</source>
         <translation>Alapértelmezett webböngésző</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="191"/>
+        <location filename="Views/SbieView.cpp" line="192"/>
         <source>Default eMail Client</source>
         <translation>Alapértelmezett e-mail kliens</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="193"/>
+        <location filename="Views/SbieView.cpp" line="194"/>
         <source>Windows Explorer</source>
         <translation>Windows Intéző</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="194"/>
+        <location filename="Views/SbieView.cpp" line="195"/>
         <source>Registry Editor</source>
         <translation>Rendszerleíróadatbázis-szerkesztő</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="195"/>
+        <location filename="Views/SbieView.cpp" line="196"/>
         <source>Programs and Features</source>
         <translation>Programok és szolgáltatások</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="206"/>
+        <location filename="Views/SbieView.cpp" line="207"/>
         <source>Terminate All Programs</source>
         <translation>Minden program leállítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="121"/>
-        <location filename="Views/SbieView.cpp" line="216"/>
-        <location filename="Views/SbieView.cpp" line="280"/>
-        <location filename="Views/SbieView.cpp" line="398"/>
-        <location filename="Views/SbieView.cpp" line="440"/>
+        <location filename="Views/SbieView.cpp" line="122"/>
+        <location filename="Views/SbieView.cpp" line="217"/>
+        <location filename="Views/SbieView.cpp" line="282"/>
+        <location filename="Views/SbieView.cpp" line="400"/>
+        <location filename="Views/SbieView.cpp" line="442"/>
         <source>Create Shortcut</source>
         <translation>Parancsikon létrehozása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="218"/>
-        <location filename="Views/SbieView.cpp" line="378"/>
+        <location filename="Views/SbieView.cpp" line="219"/>
+        <location filename="Views/SbieView.cpp" line="380"/>
         <source>Explore Content</source>
         <translation>Tartalom megjelenítése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="220"/>
-        <location filename="Views/SbieView.cpp" line="385"/>
+        <location filename="Views/SbieView.cpp" line="221"/>
+        <location filename="Views/SbieView.cpp" line="387"/>
         <source>Snapshots Manager</source>
         <translation>Pillanatkép kezelő</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="210"/>
+        <location filename="Views/SbieView.cpp" line="211"/>
         <source>Recover Files</source>
         <translation>Fájlok helyreállítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="211"/>
-        <location filename="Views/SbieView.cpp" line="377"/>
+        <location filename="Views/SbieView.cpp" line="212"/>
+        <location filename="Views/SbieView.cpp" line="379"/>
         <source>Delete Content</source>
         <translation>Tartalom törlése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="227"/>
+        <location filename="Views/SbieView.cpp" line="228"/>
         <source>Sandbox Presets</source>
         <translation>Homokozó előbeállítások</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="229"/>
+        <location filename="Views/SbieView.cpp" line="230"/>
         <source>Ask for UAC Elevation</source>
         <translation>UAC jogosultságemelés kérése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="230"/>
+        <location filename="Views/SbieView.cpp" line="231"/>
         <source>Drop Admin Rights</source>
         <translation>Rendszergazdai jogok elvetése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="231"/>
+        <location filename="Views/SbieView.cpp" line="232"/>
         <source>Emulate Admin Rights</source>
         <translation>Rendszergazdai jogok emulálása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="239"/>
+        <location filename="Views/SbieView.cpp" line="240"/>
         <source>Block Internet Access</source>
         <translation>Internetelérés blokkolása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="241"/>
+        <location filename="Views/SbieView.cpp" line="242"/>
         <source>Allow Network Shares</source>
         <translation>Hálózati megosztások engedélyezése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="222"/>
+        <location filename="Views/SbieView.cpp" line="223"/>
         <source>Sandbox Options</source>
         <translation>Homokozó beállítások</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="189"/>
+        <location filename="Views/SbieView.cpp" line="190"/>
         <source>Standard Applications</source>
         <translation>Normál alkalmazások</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="213"/>
+        <location filename="Views/SbieView.cpp" line="214"/>
         <source>Browse Files</source>
         <translation>Fájlok tallózása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="250"/>
-        <location filename="Views/SbieView.cpp" line="383"/>
+        <location filename="Views/SbieView.cpp" line="251"/>
+        <location filename="Views/SbieView.cpp" line="385"/>
         <source>Sandbox Tools</source>
         <translation>Homokozó eszközök</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="253"/>
+        <location filename="Views/SbieView.cpp" line="254"/>
         <source>Duplicate Box Config</source>
         <translation>Homokozó konfig. megkettőzése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="258"/>
-        <location filename="Views/SbieView.cpp" line="401"/>
+        <location filename="Views/SbieView.cpp" line="260"/>
+        <location filename="Views/SbieView.cpp" line="403"/>
         <source>Rename Sandbox</source>
         <translation>Homokozó átnevezése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="259"/>
-        <location filename="Views/SbieView.cpp" line="402"/>
+        <location filename="Views/SbieView.cpp" line="261"/>
+        <location filename="Views/SbieView.cpp" line="404"/>
         <source>Move Sandbox</source>
         <translation>Homokozó áthelyezése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="273"/>
-        <location filename="Views/SbieView.cpp" line="416"/>
+        <location filename="Views/SbieView.cpp" line="275"/>
+        <location filename="Views/SbieView.cpp" line="418"/>
         <source>Remove Sandbox</source>
         <translation>Homokozó eltávolítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="278"/>
-        <location filename="Views/SbieView.cpp" line="438"/>
+        <location filename="Views/SbieView.cpp" line="280"/>
+        <location filename="Views/SbieView.cpp" line="440"/>
         <source>Terminate</source>
         <translation>Befejezés</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="281"/>
+        <location filename="Views/SbieView.cpp" line="283"/>
         <source>Preset</source>
         <translation>Előbeállítás</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="119"/>
-        <location filename="Views/SbieView.cpp" line="282"/>
+        <location filename="Views/SbieView.cpp" line="120"/>
+        <location filename="Views/SbieView.cpp" line="284"/>
         <source>Pin to Run Menu</source>
         <translation>Rögzítés a Startmenübe</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="284"/>
+        <location filename="Views/SbieView.cpp" line="165"/>
+        <location filename="Views/SbieView.cpp" line="336"/>
+        <source>Import Boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="256"/>
+        <source>Export Boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="286"/>
         <source>Block and Terminate</source>
         <translation>Blokkolás és befejezés</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="288"/>
+        <location filename="Views/SbieView.cpp" line="290"/>
         <source>Allow internet access</source>
         <translation>Internethozzáférés engedélyezése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="290"/>
+        <location filename="Views/SbieView.cpp" line="292"/>
         <source>Force into this sandbox</source>
         <translation>Kényszerítse ezt a homokozót</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="292"/>
+        <location filename="Views/SbieView.cpp" line="294"/>
         <source>Set Linger Process</source>
         <translation>Elhúzódó folyamat (LingerProcess) beállítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="294"/>
+        <location filename="Views/SbieView.cpp" line="296"/>
         <source>Set Leader Process</source>
         <translation>Fő folyamat beállítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="600"/>
+        <location filename="Views/SbieView.cpp" line="602"/>
         <source>    File root: %1
 </source>
         <translation>    Fájlgyökér: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="601"/>
+        <location filename="Views/SbieView.cpp" line="603"/>
         <source>    Registry root: %1
 </source>
         <translation>    Registry-gyökér: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="602"/>
+        <location filename="Views/SbieView.cpp" line="604"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC-gyökér: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="606"/>
+        <location filename="Views/SbieView.cpp" line="608"/>
         <source>Options:
     </source>
         <translation>Beállítások:    </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="900"/>
+        <location filename="Views/SbieView.cpp" line="907"/>
         <source>[None]</source>
         <translation>[Nincs]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1302"/>
+        <location filename="Views/SbieView.cpp" line="1241"/>
         <source>Please enter a new group name</source>
         <translation>Kérjük, adja meg az új csoport nevét</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1052"/>
+        <location filename="Views/SbieView.cpp" line="1074"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Biztos benne, hogy eltávolítja a kiválasztott csoporto(ka)t?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="163"/>
-        <location filename="Views/SbieView.cpp" line="333"/>
+        <location filename="Views/SbieView.cpp" line="164"/>
+        <location filename="Views/SbieView.cpp" line="335"/>
         <source>Create Box Group</source>
         <translation>Homokozó csoport létrehozása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="459"/>
+        <location filename="Views/SbieView.cpp" line="461"/>
         <source>Rename Group</source>
         <translation>Ceoport átnevezése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="169"/>
-        <location filename="Views/SbieView.cpp" line="339"/>
+        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="341"/>
         <source>Stop Operations</source>
         <translation>Műveletek leállítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="198"/>
+        <location filename="Views/SbieView.cpp" line="199"/>
         <source>Command Prompt</source>
         <translation>Parancssor</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="199"/>
+        <location filename="Views/SbieView.cpp" line="200"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Parancssor (rendszergazdaként)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="203"/>
+        <location filename="Views/SbieView.cpp" line="204"/>
         <source>Command Prompt (32-bit)</source>
         <translation>Parancssor (32-bit)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="188"/>
+        <location filename="Views/SbieView.cpp" line="189"/>
         <source>Execute Autorun Entries</source>
         <translation>Automatikus indítási bejegyzések végrehajtása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="384"/>
+        <location filename="Views/SbieView.cpp" line="386"/>
         <source>Browse Content</source>
         <translation>Homokozó tallózása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="212"/>
+        <location filename="Views/SbieView.cpp" line="213"/>
         <source>Box Content</source>
         <translation>Homokozó tartalma</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="219"/>
+        <location filename="Views/SbieView.cpp" line="220"/>
         <source>Open Registry</source>
         <translation>Reg. adatbázis megnyitása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="215"/>
-        <location filename="Views/SbieView.cpp" line="397"/>
+        <location filename="Views/SbieView.cpp" line="216"/>
+        <location filename="Views/SbieView.cpp" line="399"/>
         <source>Refresh Info</source>
         <translation>Információ frissítése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="164"/>
-        <location filename="Views/SbieView.cpp" line="334"/>
         <source>Import Box</source>
-        <translation>Homokozó importálása</translation>
+        <translation type="vanished">Homokozó importálása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
-        <location filename="Views/SbieView.cpp" line="354"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
+        <location filename="Views/SbieView.cpp" line="356"/>
         <source>(Host) Start Menu</source>
         <translation>(Host) Startnenü</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="208"/>
-        <location filename="Views/SbieView.cpp" line="374"/>
+        <location filename="Views/SbieView.cpp" line="209"/>
+        <location filename="Views/SbieView.cpp" line="376"/>
         <source>Mount Box Image</source>
         <translation>Homokozókép csatolása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="209"/>
-        <location filename="Views/SbieView.cpp" line="375"/>
+        <location filename="Views/SbieView.cpp" line="210"/>
+        <location filename="Views/SbieView.cpp" line="377"/>
         <source>Unmount Box Image</source>
         <translation>Homokozókép leválasztása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="245"/>
+        <location filename="Views/SbieView.cpp" line="246"/>
         <source>Immediate Recovery</source>
         <translation>Azonnali helyreállítás</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="247"/>
+        <location filename="Views/SbieView.cpp" line="248"/>
         <source>Disable Force Rules</source>
         <translation>Kényszerszabályok letiltása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="251"/>
-        <location filename="Views/SbieView.cpp" line="388"/>
+        <location filename="Views/SbieView.cpp" line="252"/>
+        <location filename="Views/SbieView.cpp" line="390"/>
         <source>Browse NT Namespace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="254"/>
+        <location filename="Views/SbieView.cpp" line="255"/>
         <source>Duplicate Box with Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="255"/>
         <source>Export Box</source>
-        <translation>Homokozó exportálása</translation>
+        <translation type="vanished">Homokozó exportálása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="260"/>
-        <location filename="Views/SbieView.cpp" line="403"/>
+        <location filename="Views/SbieView.cpp" line="262"/>
+        <location filename="Views/SbieView.cpp" line="405"/>
         <source>Move Up</source>
         <translation>Mozgatás felfelé</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="265"/>
-        <location filename="Views/SbieView.cpp" line="408"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="410"/>
         <source>Move Down</source>
         <translation>Mozgatás lefelé</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="296"/>
+        <location filename="Views/SbieView.cpp" line="298"/>
         <source>Suspend</source>
         <translation>Felfüggesztés</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="297"/>
+        <location filename="Views/SbieView.cpp" line="299"/>
         <source>Resume</source>
         <translation>Folytatás</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="348"/>
+        <location filename="Views/SbieView.cpp" line="350"/>
         <source>Run Web Browser</source>
         <translation>Webböngésző futtatása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="349"/>
+        <location filename="Views/SbieView.cpp" line="351"/>
         <source>Run eMail Reader</source>
         <translation>E-mail olvasó futtatása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="350"/>
+        <location filename="Views/SbieView.cpp" line="352"/>
         <source>Run Any Program</source>
         <translation>Bármelyik program futtatása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="351"/>
+        <location filename="Views/SbieView.cpp" line="353"/>
         <source>Run From Start Menu</source>
         <translation>Futtatás a Start menüből</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="359"/>
+        <location filename="Views/SbieView.cpp" line="361"/>
         <source>Run Windows Explorer</source>
         <translation>Windows intéző futtatása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="373"/>
+        <location filename="Views/SbieView.cpp" line="375"/>
         <source>Terminate Programs</source>
         <translation>Programok leállítása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="376"/>
+        <location filename="Views/SbieView.cpp" line="378"/>
         <source>Quick Recover</source>
         <translation>Gyors helyreállítás</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="381"/>
+        <location filename="Views/SbieView.cpp" line="383"/>
         <source>Sandbox Settings</source>
         <translation>Homokozó beállításai</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="391"/>
+        <location filename="Views/SbieView.cpp" line="393"/>
         <source>Duplicate Sandbox Config</source>
         <translation>Homokozó konfiguráció megkettőzése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="392"/>
+        <location filename="Views/SbieView.cpp" line="394"/>
         <source>Duplicate Sandbox with Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="393"/>
+        <location filename="Views/SbieView.cpp" line="395"/>
         <source>Export Sandbox</source>
         <translation>Homokozó exportálása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="460"/>
+        <location filename="Views/SbieView.cpp" line="462"/>
         <source>Move Group</source>
         <translation>Csoport áthelyezése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="604"/>
+        <location filename="Views/SbieView.cpp" line="606"/>
         <source>    Disk root: %1
 </source>
         <translation>    Lemezgyökér: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1042"/>
+        <location filename="Views/SbieView.cpp" line="1064"/>
         <source>Please enter a new name for the Group.</source>
         <translation>A csoport új nevének megadása.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1089"/>
+        <location filename="Views/SbieView.cpp" line="1111"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Bejegyzések mozgatása (a negatív értékek felfelé, a pozitív értékek lefelé):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1164"/>
+        <location filename="Views/SbieView.cpp" line="1186"/>
         <source>A group can not be its own parent.</source>
         <translation>Egy csoport nem lehet saját szülője.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1236"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation>Nem sikerült megnyitni az archívumot, rossz jelszó?</translation>
+        <translation type="vanished">Nem sikerült megnyitni az archívumot, rossz jelszó?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1245"/>
         <source>Failed to open archive (%1)!</source>
-        <translation>Nem sikerült megnyitni az archívumot (%1) !</translation>
+        <translation type="vanished">Nem sikerült megnyitni az archívumot (%1) !</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1288"/>
         <source>Importing: %1</source>
-        <translation>Importálás: %1</translation>
+        <translation type="vanished">Importálás: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1328"/>
+        <location filename="Views/SbieView.cpp" line="1267"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
         <translation type="unfinished">A homokozó és a homokózó csoport neve nem használhatja a &apos;,()&apos; szimbólumot.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1333"/>
+        <location filename="Views/SbieView.cpp" line="1272"/>
         <source>This name is already used for a Box Group.</source>
         <translation>Ezt a nevet már egy homokozó csoport használja.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1338"/>
+        <location filename="Views/SbieView.cpp" line="1277"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>Ezt a nevet már egy homokozó használja.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1407"/>
-        <location filename="Views/SbieView.cpp" line="1483"/>
-        <location filename="Views/SbieView.cpp" line="1814"/>
+        <location filename="Views/SbieView.cpp" line="1346"/>
+        <location filename="Views/SbieView.cpp" line="1422"/>
+        <location filename="Views/SbieView.cpp" line="1728"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Ne jelenjen meg többet ez az üzenet.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1474"/>
-        <location filename="Views/SbieView.cpp" line="1494"/>
-        <location filename="Views/SbieView.cpp" line="1992"/>
+        <location filename="Views/SbieView.cpp" line="1413"/>
+        <location filename="Views/SbieView.cpp" line="1433"/>
+        <location filename="Views/SbieView.cpp" line="1906"/>
         <source>This Sandbox is empty.</source>
         <translation>Ez a homokozó üres.</translation>
     </message>
@@ -5738,89 +5906,84 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation type="vanished">FIGYELEM: a megnyitott rendszerleíróadatbázis-szerkesztő nincs a homokozóban. Legyen óvatos, és csak az előre kiválasztott homokozó helyeken végezzen változtatásokat.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1502"/>
+        <location filename="Views/SbieView.cpp" line="1441"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>A jövöben ne jelenjen meg többet ez a figyelmeztetés</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1561"/>
+        <location filename="Views/SbieView.cpp" line="1500"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>A duplikált homokzó nevének megadása.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1561"/>
+        <location filename="Views/SbieView.cpp" line="1500"/>
         <source>%1 Copy</source>
         <translation>%1 másolat</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1682"/>
+        <location filename="Views/SbieView.cpp" line="1596"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1747"/>
+        <location filename="Views/SbieView.cpp" line="1661"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1762"/>
+        <location filename="Views/SbieView.cpp" line="1676"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1219"/>
-        <location filename="Views/SbieView.cpp" line="1616"/>
         <source>Select file name</source>
-        <translation>Fájlnév kiválasztása</translation>
+        <translation type="vanished">Fájlnév kiválasztása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1219"/>
-        <location filename="Views/SbieView.cpp" line="1616"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation>7-zip archívum (*.7z);;Zip archívum (*.zip)</translation>
+        <translation type="vanished">7-zip archívum (*.7z);;Zip archívum (*.zip)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1368"/>
+        <location filename="Views/SbieView.cpp" line="1307"/>
         <source>&lt;br /&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1370"/>
+        <location filename="Views/SbieView.cpp" line="1309"/>
         <source>... and %1 more</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1501"/>
+        <location filename="Views/SbieView.cpp" line="1440"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1581"/>
+        <location filename="Views/SbieView.cpp" line="1520"/>
         <source>Not Created</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1590"/>
+        <location filename="Views/SbieView.cpp" line="1529"/>
         <source>Copying: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1622"/>
         <source>Exporting: %1</source>
-        <translation>Exportálás: %1</translation>
+        <translation type="vanished">Exportálás: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1635"/>
+        <location filename="Views/SbieView.cpp" line="1549"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Kérjük, adja meg a homokozó új nevét.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1635"/>
+        <location filename="Views/SbieView.cpp" line="1549"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation>Kérjük, adjon meg egy új aliast a homokozó számára.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1644"/>
+        <location filename="Views/SbieView.cpp" line="1558"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation>A beírt név érvénytelen, beállítja helyette aliasként?</translation>
     </message>
@@ -5830,7 +5993,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation type="vanished">Biztos benne, hogy eltávolítja a kiválasztott homokozó(ka)t?&lt;br /&gt;&lt;br /&gt;Figyelem: a homokozó tartalma is törlődik!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1735"/>
+        <location filename="Views/SbieView.cpp" line="1649"/>
         <source>This Sandbox is already empty.</source>
         <translation>Ez a homokozó már üres.</translation>
     </message>
@@ -5839,8 +6002,8 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation type="vanished">Törli a kijelölt homokozó tartalmát?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1752"/>
-        <location filename="Views/SbieView.cpp" line="1775"/>
+        <location filename="Views/SbieView.cpp" line="1666"/>
+        <location filename="Views/SbieView.cpp" line="1689"/>
         <source>Also delete all Snapshots</source>
         <translation>Az összes pillatfelvétel törlése</translation>
     </message>
@@ -5849,46 +6012,46 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation type="vanished">Az összes kiválasztott homokozó tartalmát is törli?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1796"/>
+        <location filename="Views/SbieView.cpp" line="1710"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Leállít minden folyamatot a kiválasztott homokozó(k)ban?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1797"/>
-        <location filename="Views/SbieView.cpp" line="1893"/>
+        <location filename="Views/SbieView.cpp" line="1711"/>
+        <location filename="Views/SbieView.cpp" line="1807"/>
         <source>Terminate without asking</source>
         <translation>Befejezés kérés nélkül</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1812"/>
+        <location filename="Views/SbieView.cpp" line="1726"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>A Sandboxie Startmenüje most megjelenik. Válasszon ki egy alkalmazást a menüből, és a Sandboxie létrehoz egy új parancsikont a valódi asztalon, amellyel meghívhatja a kiválasztott alkalmazást a Sandboxie felügyelete alatt.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1867"/>
-        <location filename="Views/SbieView.cpp" line="1921"/>
+        <location filename="Views/SbieView.cpp" line="1781"/>
+        <location filename="Views/SbieView.cpp" line="1835"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Parancsikon létrehozása %1 homokozóhoz</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1892"/>
+        <location filename="Views/SbieView.cpp" line="1806"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>Leállítja a következőt: %1?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1892"/>
+        <location filename="Views/SbieView.cpp" line="1806"/>
         <source>the selected processes</source>
         <translation>kiválasztott folyamatokat</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1951"/>
+        <location filename="Views/SbieView.cpp" line="1865"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Ebben a homokozóban nincsenek internetkorlátozások. Engedélyezi a korlátozást?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="2042"/>
+        <location filename="Views/SbieView.cpp" line="1956"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation>Ez a homokozó jelenleg le van tiltva, vagy meghatározott csoportokra vagy felhasználókra korlátozódik. Engedélyezi mindenki számára a hozzáférést?</translation>
@@ -9934,7 +10097,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1849"/>
+        <location filename="Views/SbieView.cpp" line="1763"/>
         <source>Drive %1</source>
         <translation>Lemez %1</translation>
     </message>
@@ -9947,27 +10110,27 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="4564"/>
+        <location filename="SandMan.cpp" line="4572"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4565"/>
+        <location filename="SandMan.cpp" line="4573"/>
         <source>Apply</source>
         <translation>Alkalmazás</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4566"/>
+        <location filename="SandMan.cpp" line="4574"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4567"/>
+        <location filename="SandMan.cpp" line="4575"/>
         <source>&amp;Yes</source>
         <translation>&amp;Igen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="4568"/>
+        <location filename="SandMan.cpp" line="4576"/>
         <source>&amp;No</source>
         <translation>&amp;Nem</translation>
     </message>

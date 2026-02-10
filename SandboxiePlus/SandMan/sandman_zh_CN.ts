@@ -472,143 +472,143 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
         <location filename="BoxTransfer.cpp" line="71"/>
         <location filename="BoxTransfer.cpp" line="404"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>导出沙箱</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="73"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>导入沙箱</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱名称</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Status</source>
-        <translation type="unfinished">状态</translation>
+        <translation>状态</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Archive Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>存档的沙箱名称</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Import As</source>
-        <translation type="unfinished"></translation>
+        <translation>导入沙箱为</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>冲突</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Export Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>导出全局配置</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Import Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>导入全局配置</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="97"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>全选</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="101"/>
         <source>Select None</source>
-        <translation type="unfinished"></translation>
+        <translation>取消选中</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Running</source>
-        <translation type="unfinished">正在运行</translation>
+        <translation>正在运行</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="132"/>
         <source>Encrypted</source>
-        <translation type="unfinished"></translation>
+        <translation>已加密</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="134"/>
         <source>Empty</source>
-        <translation type="unfinished">空</translation>
+        <translation>空</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="186"/>
         <source>Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>已存在！</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="639"/>
         <source>Select file name</source>
-        <translation type="unfinished">选择文件名</translation>
+        <translation>选择文件名</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="406"/>
         <location filename="BoxTransfer.cpp" line="640"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished">7-zip 压缩包 (*.7z);;Zip 压缩包 (*.zip)</translation>
+        <translation>7-zip 压缩包 (*.7z);;Zip 压缩包 (*.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="360"/>
         <location filename="BoxTransfer.cpp" line="453"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished">正在导出：%1</translation>
+        <translation>正在导出：%1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="366"/>
         <location filename="BoxTransfer.cpp" line="634"/>
         <source>7-Zip library is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip 库不可用。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="385"/>
         <source>Nothing selected for export.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有选择要导出的内容。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="419"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱“%1”有正在运行的进程。 跳过它？</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="621"/>
         <location filename="BoxTransfer.cpp" line="771"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">正在导入：%1</translation>
+        <translation>正在导入：%1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="657"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished">无法打开备份，可能是密码不正确？</translation>
+        <translation>无法打开存档，可能是密码不正确？</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="666"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished">无法打开备份 (%1)！</translation>
+        <translation>无法打开存档 (%1)！</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="707"/>
         <source>The archive does not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>该存档不包含任何沙箱数据。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="721"/>
         <source>Nothing selected for import.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有选择要导入的内容。</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="737"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱“%1”已存在。 其配置将被覆盖。 继续？</translation>
     </message>
 </context>
 <context>
@@ -4652,22 +4652,22 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="514"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>导入沙箱</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="516"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>导出沙箱</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="750"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>导入沙箱</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="752"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>导出沙箱</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2601"/>
@@ -5979,7 +5979,7 @@ Error: %1</source>
         <location filename="Views/SbieView.cpp" line="165"/>
         <location filename="Views/SbieView.cpp" line="336"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>导入沙箱</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="252"/>
@@ -5995,7 +5995,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>导出沙箱</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="286"/>

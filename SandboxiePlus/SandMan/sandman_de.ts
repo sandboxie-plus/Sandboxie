@@ -387,143 +387,143 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
         <location filename="BoxTransfer.cpp" line="71"/>
         <location filename="BoxTransfer.cpp" line="404"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxen exportieren</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="73"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxen importieren</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxname</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Archive Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivboxname</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Import As</source>
-        <translation type="unfinished"></translation>
+        <translation>Importieren als</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>Konflikt</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Export Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Globale Konfiguration exportieren</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Import Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Globale Konfiguration importieren</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="97"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle auswählen</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="101"/>
         <source>Select None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine auswählen</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Running</source>
-        <translation type="unfinished">Laufend</translation>
+        <translation>Laufend</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="132"/>
         <source>Encrypted</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschlüsselt</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="134"/>
         <source>Empty</source>
-        <translation type="unfinished">Leer</translation>
+        <translation>Leer</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="186"/>
         <source>Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Existiert!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="639"/>
         <source>Select file name</source>
-        <translation type="unfinished">Dateinamen auswählen</translation>
+        <translation>Dateinamen auswählen</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="406"/>
         <location filename="BoxTransfer.cpp" line="640"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished">7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
+        <translation>7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="360"/>
         <location filename="BoxTransfer.cpp" line="453"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished">Exportiere: %1</translation>
+        <translation>Exportiere: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="366"/>
         <location filename="BoxTransfer.cpp" line="634"/>
         <source>7-Zip library is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip-Bibliothek ist nicht verfügbar.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="385"/>
         <source>Nothing selected for export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nichts für den Export ausgewählt.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="419"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &apos;%1&apos; hat laufende Prozesse. Überspringen?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="621"/>
         <location filename="BoxTransfer.cpp" line="771"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">Importiere: %1</translation>
+        <translation>Importiere: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="657"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished">Fehler beim Öffnen des Archivs, falsches Passwort?</translation>
+        <translation>Fehler beim Öffnen des Archivs, falsches Passwort?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="666"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished">Fehler beim Öffnen des Archivs (%1)!</translation>
+        <translation>Fehler beim Öffnen des Archivs (%1)!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="707"/>
         <source>The archive does not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Archiv enthält keine Sandboxdaten.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="721"/>
         <source>Nothing selected for import.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nichts für den Import ausgewählt.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="737"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &apos;%1&apos; existiert bereits. Die Konfiguration wird überschrieben. Fortfahren?</translation>
     </message>
 </context>
 <context>
@@ -3756,10 +3756,6 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <translation>Zu Sandboxie-Plus beitragen</translation>
     </message>
     <message>
-        <source>Import Box</source>
-        <translation type="vanished">Box importieren</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="519"/>
         <location filename="SandMan.cpp" line="669"/>
         <source>Run Sandboxed</source>
@@ -3984,12 +3980,12 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="514"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxen importieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="516"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxen exportieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="520"/>
@@ -4017,12 +4013,12 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="750"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxen importieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="752"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxen exportieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="845"/>
@@ -4690,10 +4686,6 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandMan.cpp" line="175"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
         <translation>WARNUNG: Sandboxie-Plus.ini in %1 kann nicht geschrieben werden, Einstellungen werden nicht gespeichert.</translation>
-    </message>
-    <message>
-        <source>Import Sandbox</source>
-        <translation type="vanished">Sandbox importieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1095"/>
@@ -5550,10 +5542,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>An das Starten-Menü anheften</translation>
     </message>
     <message>
-        <source>Import Box</source>
-        <translation type="vanished">Box importieren</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="209"/>
         <location filename="Views/SbieView.cpp" line="376"/>
         <source>Mount Box Image</source>
@@ -5579,7 +5567,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxen exportieren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="286"/>
@@ -5694,18 +5682,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Eine Gruppe kann nicht seine eigene Quelle sein.</translation>
     </message>
     <message>
-        <source>Failed to open archive, wrong password?</source>
-        <translation type="vanished">Fehler beim Öffnen des Archivs, falsches Passwort?</translation>
-    </message>
-    <message>
-        <source>Failed to open archive (%1)!</source>
-        <translation type="vanished">Fehler beim Öffnen des Archivs (%1)!</translation>
-    </message>
-    <message>
-        <source>Importing: %1</source>
-        <translation type="vanished">Importiere: %1</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="1267"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <translation>Sandbox- und Boxgruppennamen können nicht die Zeichen &apos;,()&apos; oder Steuerzeichen enthalten.</translation>
@@ -5768,10 +5744,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="1676"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>Möchten Sie wirklich den Inhalt der folgenden Sandboxen löschen?&lt;br /&gt;&lt;br /&gt;%1</translation>
-    </message>
-    <message>
-        <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="vanished">7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1307"/>
@@ -5855,7 +5827,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="165"/>
         <location filename="Views/SbieView.cpp" line="336"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxen importieren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="189"/>
@@ -5932,22 +5904,10 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Dupliziere Boxkonfiguration</translation>
     </message>
     <message>
-        <source>Export Box</source>
-        <translation type="vanished">Box exportieren</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="261"/>
         <location filename="Views/SbieView.cpp" line="404"/>
         <source>Move Sandbox</source>
         <translation>Bewege Sandbox</translation>
-    </message>
-    <message>
-        <source>Select file name</source>
-        <translation type="vanished">Dateinamen auswählen</translation>
-    </message>
-    <message>
-        <source>Exporting: %1</source>
-        <translation type="vanished">Exportiere: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1549"/>

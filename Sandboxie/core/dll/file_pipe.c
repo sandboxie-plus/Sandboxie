@@ -179,6 +179,9 @@ static ULONG *File_ProxyPipes = NULL;
 static const WCHAR *File_NamedPipe = L"\\device\\namedpipe\\";
 static const WCHAR *File_MailSlot  = L"\\device\\mailslot\\";
 
+static const WCHAR *File_ACON_tag = L"AppContainerNamedObjects\\";
+static const ULONG File_ACON_tag_len = 25;
+
 
 //---------------------------------------------------------------------------
 // File_IsPipeSuffix
@@ -530,7 +533,10 @@ _FX NTSTATUS File_NtCreateNamedPipeFile(
     }
 
     RtlInitUnicodeString(&objname, name);
-    objattrs.SecurityDescriptor = Secure_EveryoneSD;
+    if (Dll_CompartmentMode)
+        objattrs.SecurityDescriptor = ObjectAttributes->SecurityDescriptor;
+    else 
+        objattrs.SecurityDescriptor = Secure_EveryoneSD;
 
     status = __sys_NtCreateNamedPipeFile(
         FileHandle, DesiredAccess, &objattrs, IoStatusBlock,
@@ -538,7 +544,7 @@ _FX NTSTATUS File_NtCreateNamedPipeFile(
         NamedPipeType, ReadMode, CompletionMode, MaximumInstances,
         InboundQuota, OutboundQuota, DefaultTimeout);
 
-    if (status == STATUS_PRIVILEGE_NOT_HELD) {
+    if (status == STATUS_PRIVILEGE_NOT_HELD && !Dll_CompartmentMode) {
 
         objattrs.SecurityDescriptor = NULL;
 
@@ -658,6 +664,9 @@ _FX NTSTATUS File_NtCreateFilePipe(
 
     RtlInitUnicodeString(objattrs->ObjectName, name);
 
+    if (Dll_CompartmentMode)
+        objattrs->SecurityDescriptor = SecurityDescriptor;
+
     objattrs->SecurityQualityOfService = SecurityQualityOfService;
 
     status = __sys_NtCreateFile(
@@ -710,22 +719,75 @@ _FX void *File_GetBoxedPipeName(
     else
         return NULL;
 
-    len = (Dll_BoxIpcPathLen + 1 + wcslen(suffix) + 1) * sizeof(WCHAR);
+    //
+    // Check if this is an AppContainerNamedObjects path.
+    // Pattern: Sessions\<N>\AppContainerNamedObjects\<SID>\<rest>
+    // For such paths, we insert the sandbox prefix after the <SID>\
+    // so that AppContainer isolation is preserved within the sandbox.
+    //
+
+    WCHAR *ACON_split = NULL;
+
+    WCHAR *s;
+    for (s = suffix; *s; s++) {
+        if (_wcsnicmp(s, File_ACON_tag, File_ACON_tag_len) == 0) {
+            WCHAR *sid_start = s + File_ACON_tag_len;
+            WCHAR *sid_end = wcschr(sid_start, L'\\');
+            if (sid_end) {
+                ACON_split = sid_end + 1;
+            } else {
+                // Directory creation for the SID itself, point to end of string so entire suffix
+                // becomes the AppContainer prefix and pipe_name is empty
+                ACON_split = wcschr(sid_start, L'\0');
+            }
+            break;
+        }
+    }
+    
+    ULONG ACON_prefix_len = ACON_split ? (ULONG)(ACON_split - suffix) : 0;
+    WCHAR *pipe_name = ACON_split ? ACON_split : suffix;
+
+    len = ((suffix - TruePath) + ACON_prefix_len + Dll_BoxIpcPathLen + 1 + wcslen(pipe_name)) * sizeof(WCHAR);
     name = Dll_GetTlsNameBuffer(TlsData, COPY_NAME_BUFFER, len);
 
     //
     // place a prefix, \Device\NamedPipe\ or \Device\MailSlot\ .
     //
 
-    wcscpy(name, L"\\device\\");
     if (PipeType == TYPE_NAMED_PIPE)
-        wcscat(name, L"namedpipe");
+        wcscpy(name, File_NamedPipe);
     else
-        wcscat(name, L"mailslot");
-
+        wcscpy(name, File_MailSlot);
     ptr = name + wcslen(name);
-    *ptr = L'\\';
-    ++ptr;
+
+    //
+    // For AppContainer paths, copy everything up to and including
+    // the SID backslash before inserting the sandbox prefix.
+    //
+
+    if (ACON_split) {
+        wmemcpy(ptr, suffix, ACON_prefix_len);
+        ptr += ACON_prefix_len;
+        if (ACON_prefix_len > 0 && *(ptr - 1) != L'\\') {
+            *ptr = L'\\';
+            ++ptr;
+        }
+    }
+
+    //
+    // Preserve LOCAL\ before the sandbox prefix so npfs can
+    // recognize it and strip it during AppContainer redirection.
+    // 
+    // Don't do that when on normal mode as the driver will block it then
+    //
+
+    if (Dll_CompartmentMode) {
+        if (_wcsnicmp(pipe_name, L"LOCAL\\", 6) == 0) {
+            pipe_name += 6;
+            wcscpy(ptr, L"LOCAL\\");
+            ptr += 6;
+        }
+    }
 
     //
     // translate Dll_BoxIpcPath to BoxPipePath by replacing
@@ -733,8 +795,7 @@ _FX void *File_GetBoxedPipeName(
     //
 
     BoxPipePath = ptr;
-
-    wcscpy(ptr, Dll_BoxIpcPath);
+    wcscpy(ptr, Dll_BoxIpcPath); // \Sandbox\DefaultBox\Session_1
     while (*ptr) {
         WCHAR *ptr2 = wcschr(ptr, L'\\');
         if (ptr2) {
@@ -743,27 +804,27 @@ _FX void *File_GetBoxedPipeName(
         } else
             ptr += wcslen(ptr);
     }
-
-    *ptr = L'\\';
-    ++ptr;
+    if (*pipe_name) {
+        *ptr = L'\\';
+        ++ptr;
+    }
 
     //
-    // TruePath begins with \Device\NamedPipe\ or \Device\MailSlot\ .
-    // if the rest of TruePath begins the same as BoxPipePath, then
-    // this is already a sandboxed pipe name
+    // if pipe_name already begins with BoxPipePath, then
+    // this is already a sandboxed pipe name, skip the prefix
+    // to avoid double-sandboxing
     //
 
     *ptr = L'\0';
-
     len = wcslen(BoxPipePath);
-    if (_wcsnicmp(suffix, BoxPipePath, len) == 0)
-        suffix += len;
+    if (_wcsnicmp(pipe_name, BoxPipePath, len) == 0)
+        pipe_name += len;
 
     //
     // now append the (unsandboxed) pipe name past the BoxPipePath prefix
     //
 
-    wcscpy(ptr, suffix);
+    wcscpy(ptr, pipe_name);
 
     return name;
 }

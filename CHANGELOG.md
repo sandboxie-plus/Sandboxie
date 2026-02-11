@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.0 / 5.72.0] - 2026-01-??
+## [1.17.0 / 5.72.0] - 2026-02-??
 
 ### Added
 - added icons to Sandboxie service applications [#5160](https://github.com/sandboxie-plus/Sandboxie/issues/5160#issuecomment-3706138019)
@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed API CryptUnprotectData always returns a wrong ppszDataDescr [#5191](https://github.com/sandboxie-plus/Sandboxie/issues/5191)
 - added missing serial support to SbieCtrl
 - fixed handle leak in SbieDll.dll
+- fixed MSEdge 144 crashes in Applicaiton Compartment [#5188](https://github.com/sandboxie-plus/Sandboxie/issues/5188)
 
 
 

@@ -552,13 +552,16 @@ _FX BOOLEAN Ipc_Init(void)
     SBIEDLL_HOOK(Ipc_,NtCreateSymbolicLinkObject);
     SBIEDLL_HOOK(Ipc_,NtOpenSymbolicLinkObject);
 
-    SBIEDLL_HOOK(Ipc_,NtCreateDirectoryObject);
-	void* NtCreateDirectoryObjectEx = GetProcAddress(Dll_Ntdll, "NtCreateDirectoryObjectEx");
-    if (NtCreateDirectoryObjectEx) { // windows 8
-	    SBIEDLL_HOOK(Ipc_,NtCreateDirectoryObjectEx);
-	}
-    SBIEDLL_HOOK(Ipc_,NtOpenDirectoryObject);
-    SBIEDLL_HOOK(Ipc_,NtQueryDirectoryObject);
+    if (!Dll_AlernateIpcNaming) // alternate naming does not need an own namespace
+    {
+        SBIEDLL_HOOK(Ipc_, NtCreateDirectoryObject);
+        void* NtCreateDirectoryObjectEx = GetProcAddress(Dll_Ntdll, "NtCreateDirectoryObjectEx");
+        if (NtCreateDirectoryObjectEx) { // windows 8
+            SBIEDLL_HOOK(Ipc_, NtCreateDirectoryObjectEx);
+        }
+        SBIEDLL_HOOK(Ipc_, NtOpenDirectoryObject);
+        SBIEDLL_HOOK(Ipc_, NtQueryDirectoryObject);
+    }
 
     // OriginalToken BEGIN
     if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
@@ -568,7 +571,7 @@ _FX BOOLEAN Ipc_Init(void)
         SBIEDLL_HOOK(Ipc_, NtImpersonateThread);
     }
 
-    //if (!Dll_AlernateIpcNaming) // alternate naming does not need an own namespace
+    if (!Dll_AlernateIpcNaming) // alternate naming does not need an own namespace
     if (Dll_FirstProcessInBox) {
         Ipc_CreateObjects();
     }
@@ -828,19 +831,19 @@ _FX NTSTATUS Ipc_GetName(
         objname_len = ObjectName->Length & ~1;
         objname_buf = ObjectName->Buffer;
 
-        //if (Dll_AlernateIpcNaming) {
-        //    
-        //    //
-        //    // Since in this mode we don't call Ipc_CreateObjects we don't have a boxed namespace
-        //    // and are using existing namespaces only with a name suffix
-        //    // hence we can't use Global without system privileges, so we strip it
-        //    //
-        //
-        //    if (_wcsnicmp(objname_buf, L"Global\\", 7) == 0) {
-        //        objname_len -= 7;
-        //        objname_buf += 7;
-        //    }
-        //}
+        if (Dll_AlernateIpcNaming) {
+
+            //
+            // Since in this mode we don't call Ipc_CreateObjects we don't have a boxed namespace
+            // and are using existing namespaces only with a name suffix
+            // hence we can't use Global without system privileges, so we strip it
+            //
+
+            if (_wcsnicmp(objname_buf, L"Global\\", 7) == 0) {
+                objname_len -= 7 * sizeof(WCHAR);
+                objname_buf += 7;
+            }
+        }
 
     } else {
         objname_len = 0;
@@ -982,21 +985,21 @@ _FX NTSTATUS Ipc_GetName(
 
 check_sandbox_prefix:
 
-    //if (Dll_AlernateIpcNaming)
-    //{
-    //    if (length >= Dll_BoxIpcPathLen &&
-    //        0 == Dll_NlsStrCmp(
-    //            &(*OutTruePath)[length - Dll_BoxIpcPathLen], Dll_BoxIpcPath, Dll_BoxIpcPathLen))
-    //    {
-    //        (*OutTruePath)[length - Dll_BoxIpcPathLen] = L'\0';
-    //        length -= Dll_BoxIpcPathLen;
-    //        if (OutIsBoxedPath)
-    //            *OutIsBoxedPath = TRUE;
-    //
-    //        goto check_sandbox_prefix;
-    //    }
-    //}
-    //else
+    if (Dll_AlernateIpcNaming)
+    {
+        if (length >= Dll_BoxIpcPathLen &&
+            0 == Dll_NlsStrCmp(
+                &(*OutTruePath)[length - Dll_BoxIpcPathLen], Dll_BoxIpcPath, Dll_BoxIpcPathLen))
+        {
+            (*OutTruePath)[length - Dll_BoxIpcPathLen] = L'\0';
+            length -= Dll_BoxIpcPathLen;
+            if (OutIsBoxedPath)
+                *OutIsBoxedPath = TRUE;
+    
+            goto check_sandbox_prefix;
+        }
+    }
+    else
     if (length >= Dll_BoxIpcPathLen &&
             0 == Dll_NlsStrCmp(
                 *OutTruePath, Dll_BoxIpcPath, Dll_BoxIpcPathLen))
@@ -1020,15 +1023,15 @@ check_sandbox_prefix:
 
     *OutCopyPath = name;
 
-    //if (Dll_AlernateIpcNaming)
-    //{
-    //    wmemcpy(name, *OutTruePath, length);
-    //    name += length;
-    //
-    //    wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
-    //    name += Dll_BoxIpcPathLen;
-    //}
-    //else
+    if (Dll_AlernateIpcNaming)
+    {
+        wmemcpy(name, *OutTruePath, length);
+        name += length;
+    
+        wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
+        name += Dll_BoxIpcPathLen;
+    }
+    else
     {
         wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
         name += Dll_BoxIpcPathLen;
@@ -1235,8 +1238,8 @@ _FX NTSTATUS Ipc_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
     UNICODE_STRING objname;
     WCHAR *backslash;
 
-    //if (Dll_AlernateIpcNaming)
-    //    return STATUS_OBJECT_PATH_NOT_FOUND;
+    if (Dll_AlernateIpcNaming)
+        return STATUS_OBJECT_PATH_NOT_FOUND;
 
     //
     // open the TruePath object directory containing the object
@@ -5825,20 +5828,18 @@ _FX ULONG Ipc_NtQueryObjectName(UNICODE_STRING *ObjectName, ULONG MaxLen)
     ULONG Len = ObjectName->Length;
     WCHAR *Buf = ObjectName->Buffer;
 
-    //if (Dll_AlernateIpcNaming)
-    //{
-    //    if (Len >= Dll_BoxIpcPathLen * sizeof(WCHAR) &&
-    //            0 == Dll_NlsStrCmp(&Buf[Len - Dll_BoxIpcPathLen], Dll_BoxIpcPath, Dll_BoxIpcPathLen)) {
-    //
-    //        Buf[Len - Dll_BoxIpcPathLen] = L'\0';
-    //
-    //        ObjectName->Length -= (USHORT)Dll_BoxIpcPathLen;
-    //        ObjectName->MaximumLength = ObjectName->Length + sizeof(WCHAR);
-    //
-    //        return ObjectName->MaximumLength;
-    //    }
-    //}
-    //else
+    if (Dll_AlernateIpcNaming) {
+    if (Len >= Dll_BoxIpcPathLen * sizeof(WCHAR) &&
+            0 == Dll_NlsStrCmp(&Buf[Len / sizeof(WCHAR) - Dll_BoxIpcPathLen], Dll_BoxIpcPath, Dll_BoxIpcPathLen)) {
+
+        Buf[Len / sizeof(WCHAR) - Dll_BoxIpcPathLen] = L'\0';
+
+        ObjectName->Length -= (USHORT)(Dll_BoxIpcPathLen * sizeof(WCHAR));
+        ObjectName->MaximumLength = ObjectName->Length + sizeof(WCHAR);
+
+        return ObjectName->MaximumLength;
+    }
+    } else
     if (Len >= Dll_BoxIpcPathLen * sizeof(WCHAR) &&
             0 == Dll_NlsStrCmp(Buf, Dll_BoxIpcPath, Dll_BoxIpcPathLen)) {
 

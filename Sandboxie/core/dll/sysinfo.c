@@ -132,7 +132,7 @@ _FX BOOLEAN SysInfo_Init(void)
     }
 
     extern BOOLEAN Gui_OpenAllWinClasses;
-    SysInfo_UseSbieJob = !Gui_OpenAllWinClasses && !SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE);
+    SysInfo_UseSbieJob = !Gui_OpenAllWinClasses && !SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE) && !Dll_CompartmentMode;
 
     if (Dll_OsBuild >= 8400)
         SysInfo_CanUseJobs = SbieApi_QueryConfBool(NULL, L"AllowBoxedJobs", FALSE);
@@ -554,9 +554,13 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
     *OutCopyPath = NULL;
 
     if (ObjectAttributes && ObjectAttributes->ObjectName) {
-        objname_len = ObjectAttributes->ObjectName->Length & ~1;
+        objname_len = ObjectAttributes->ObjectName->Length / sizeof(WCHAR);
         objname_buf = ObjectAttributes->ObjectName->Buffer;
-    } else {
+    } 
+    else { // unnamed job
+
+        if (Dll_CompartmentMode) 
+            return STATUS_BAD_INITIAL_PC;
 
         ULONG jobCounter = InterlockedIncrement(&JobCounter);
         Sbie_snwprintf(dummy_name, MAX_PATH, L"%s_DummyJob_%s_p%d_t%d_c%d",
@@ -567,20 +571,17 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
     }
 
 
-    name = Dll_GetTlsNameBuffer(TlsData, COPY_NAME_BUFFER, Dll_BoxIpcPathLen + objname_len);
+    name = Dll_GetTlsNameBuffer(TlsData, COPY_NAME_BUFFER, (Dll_BoxIpcPathLen + objname_len) * sizeof(WCHAR));
 
     *OutCopyPath = name;
 
-    //if (Dll_AlernateIpcNaming)
-    //{
-    //    wmemcpy(name, objname_buf, objname_len);
-    //    name += objname_len;
-    //
-    //    wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
-    //    name += Dll_BoxIpcPathLen;
-    //}
-    //else
-    {
+    if (Dll_AlernateIpcNaming) {
+        wmemcpy(name, objname_buf, objname_len);
+        name += objname_len;
+    
+        wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
+        name += Dll_BoxIpcPathLen;
+    } else {
         wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
         name += Dll_BoxIpcPathLen;
 

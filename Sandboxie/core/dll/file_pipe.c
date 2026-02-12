@@ -713,9 +713,9 @@ _FX void *File_GetBoxedPipeName(
     ULONG len;
 
     if (PipeType == TYPE_NAMED_PIPE)
-        suffix = TruePath + 18;
+        suffix = TruePath + 18 - 1;
     else if (PipeType == TYPE_MAIL_SLOT)
-        suffix = TruePath + 17;
+        suffix = TruePath + 17 - 1;
     else
         return NULL;
 
@@ -734,7 +734,7 @@ _FX void *File_GetBoxedPipeName(
             WCHAR *sid_start = s + File_ACON_tag_len;
             WCHAR *sid_end = wcschr(sid_start, L'\\');
             if (sid_end) {
-                ACON_split = sid_end + 1;
+                ACON_split = sid_end;
             } else {
                 // Directory creation for the SID itself, point to end of string so entire suffix
                 // becomes the AppContainer prefix and pipe_name is empty
@@ -758,7 +758,7 @@ _FX void *File_GetBoxedPipeName(
         wcscpy(name, File_NamedPipe);
     else
         wcscpy(name, File_MailSlot);
-    ptr = name + wcslen(name);
+    ptr = name + wcslen(name) - 1; // drop last \
 
     //
     // For AppContainer paths, copy everything up to and including
@@ -768,10 +768,6 @@ _FX void *File_GetBoxedPipeName(
     if (ACON_split) {
         wmemcpy(ptr, suffix, ACON_prefix_len);
         ptr += ACON_prefix_len;
-        if (ACON_prefix_len > 0 && *(ptr - 1) != L'\\') {
-            *ptr = L'\\';
-            ++ptr;
-        }
     }
 
     //
@@ -782,11 +778,27 @@ _FX void *File_GetBoxedPipeName(
     //
 
     if (Dll_CompartmentMode) {
-        if (_wcsnicmp(pipe_name, L"LOCAL\\", 6) == 0) {
+        if (_wcsnicmp(pipe_name, L"\\LOCAL", 6) == 0) {
             pipe_name += 6;
-            wcscpy(ptr, L"LOCAL\\");
+            wcscpy(ptr, L"\\LOCAL");
             ptr += 6;
         }
+    }
+
+    if (Dll_AlernateIpcNaming) {
+
+		*ptr = L'\0';
+
+        if (*pipe_name) {
+
+            wcscpy(ptr, pipe_name);
+
+            if (wcsstr(pipe_name, Dll_BoxIpcPath) == NULL) {
+                wcscat(ptr, Dll_BoxIpcPath);
+            }
+        }
+
+        return name;
     }
 
     //
@@ -794,6 +806,8 @@ _FX void *File_GetBoxedPipeName(
     // backslashes characters with underline characters
     //
 
+    *ptr = L'\\';
+    ++ptr;
     BoxPipePath = ptr;
     wcscpy(ptr, Dll_BoxIpcPath); // \Sandbox\DefaultBox\Session_1
     while (*ptr) {
@@ -803,10 +817,6 @@ _FX void *File_GetBoxedPipeName(
             *ptr = L'_';
         } else
             ptr += wcslen(ptr);
-    }
-    if (*pipe_name) {
-        *ptr = L'\\';
-        ++ptr;
     }
 
     //

@@ -302,7 +302,7 @@ extern BOOLEAN Dll_AppContainerToken;
 extern BOOLEAN Dll_ChromeSandbox;
 extern BOOLEAN Dll_FirstProcessInBox;
 extern BOOLEAN Dll_CompartmentMode;
-//extern BOOLEAN Dll_AlernateIpcNaming;
+extern BOOLEAN Dll_AlernateIpcNaming;
 
 extern ULONG Dll_ImageType;
 

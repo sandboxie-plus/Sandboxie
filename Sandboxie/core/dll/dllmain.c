@@ -111,7 +111,7 @@ BOOLEAN Dll_AppContainerToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
 BOOLEAN Dll_FirstProcessInBox = FALSE;
 BOOLEAN Dll_CompartmentMode = FALSE;
-//BOOLEAN Dll_AlernateIpcNaming = FALSE;
+BOOLEAN Dll_AlernateIpcNaming = FALSE;
 
 ULONG Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
@@ -330,7 +330,7 @@ _FX void Dll_InitInjected(void)
 
     Dll_ProcessFlags = SbieApi_QueryProcessInfo(0, 0);
 
-    Dll_CompartmentMode = (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
+    Dll_CompartmentMode = SbieApi_QueryConfBool(NULL, L"SetCompartmentMode", (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0);
 
     //
     // check for restricted token types
@@ -377,27 +377,27 @@ _FX void Dll_InitInjected(void)
     Dll_BoxKeyPathLen = wcslen(Dll_BoxKeyPath);
     Dll_BoxIpcPathLen = wcslen(Dll_BoxIpcPath);
 
-  //  Dll_AlernateIpcNaming = SbieApi_QueryConfBool(NULL, L"UseAlernateIpcNaming", FALSE);
-  //  if (Dll_AlernateIpcNaming) {
-  //
-  //      //
-  //      // instead of using a separate namespace
-  //		// just replace all \ with _ and use it as a suffix rather then an actual path
-  //      // similar to what is done for named pipes already
-  //      // this approach can help to reduce the footprint when running in portable mode
-  //      // alternatively we could create volatile entries under AppContainerNamedObjects 
-  //      //
-  //
-  //      WCHAR* ptr = (WCHAR*)Dll_BoxIpcPath;
-  //      while (*ptr) {
-  //          WCHAR *ptr2 = wcschr(ptr, L'\\');
-  //          if (ptr2) {
-  //              ptr = ptr2;
-  //              *ptr = L'_';
-  //          } else
-  //              ptr += wcslen(ptr);
-  //      }
-  //  }
+    Dll_AlernateIpcNaming = SbieApi_QueryConfBool(NULL, L"UseAlernateIpcNaming", FALSE);
+    if (Dll_AlernateIpcNaming) {
+  
+        //
+        // instead of using a separate namespace
+  		// just replace all \ with _ and use it as a suffix rather then an actual path
+        // similar to what is done for named pipes already
+        // this approach can help to reduce the footprint when running in portable mode
+        // alternatively we could create volatile entries under AppContainerNamedObjects 
+        //
+  
+        WCHAR* ptr = (WCHAR*)Dll_BoxIpcPath;
+        while (*ptr) {
+            WCHAR *ptr2 = wcschr(ptr, L'\\');
+            if (ptr2) {
+                ptr = ptr2;
+                *ptr = L'_';
+            } else
+                break;
+        }
+    }
 
 
 #ifdef WITH_DEBUG

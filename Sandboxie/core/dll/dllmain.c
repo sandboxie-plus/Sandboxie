@@ -111,7 +111,7 @@ BOOLEAN Dll_AppContainerToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
 BOOLEAN Dll_FirstProcessInBox = FALSE;
 BOOLEAN Dll_CompartmentMode = FALSE;
-BOOLEAN Dll_AlernateIpcNaming = FALSE;
+BOOLEAN Dll_AlternateIpcNaming = FALSE;
 
 ULONG Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
@@ -377,8 +377,8 @@ _FX void Dll_InitInjected(void)
     Dll_BoxKeyPathLen = wcslen(Dll_BoxKeyPath);
     Dll_BoxIpcPathLen = wcslen(Dll_BoxIpcPath);
 
-    Dll_AlernateIpcNaming = SbieApi_QueryConfBool(NULL, L"UseAlernateIpcNaming", FALSE);
-    if (Dll_AlernateIpcNaming) {
+    Dll_AlternateIpcNaming = SbieApi_QueryConfBool(NULL, L"UseAlternateIpcNaming", FALSE);
+    if (Dll_AlternateIpcNaming) {
   
         //
         // instead of using a separate namespace

@@ -552,7 +552,7 @@ _FX BOOLEAN Ipc_Init(void)
     SBIEDLL_HOOK(Ipc_,NtCreateSymbolicLinkObject);
     SBIEDLL_HOOK(Ipc_,NtOpenSymbolicLinkObject);
 
-    if (!Dll_AlernateIpcNaming) // alternate naming does not need an own namespace
+    if (!Dll_AlternateIpcNaming) // alternate naming does not need an own namespace
     {
         SBIEDLL_HOOK(Ipc_, NtCreateDirectoryObject);
         void* NtCreateDirectoryObjectEx = GetProcAddress(Dll_Ntdll, "NtCreateDirectoryObjectEx");
@@ -571,7 +571,7 @@ _FX BOOLEAN Ipc_Init(void)
         SBIEDLL_HOOK(Ipc_, NtImpersonateThread);
     }
 
-    if (!Dll_AlernateIpcNaming) // alternate naming does not need an own namespace
+    if (!Dll_AlternateIpcNaming) // alternate naming does not need an own namespace
     if (Dll_FirstProcessInBox) {
         Ipc_CreateObjects();
     }
@@ -831,7 +831,7 @@ _FX NTSTATUS Ipc_GetName(
         objname_len = ObjectName->Length & ~1;
         objname_buf = ObjectName->Buffer;
 
-        if (Dll_AlernateIpcNaming) {
+        if (Dll_AlternateIpcNaming) {
 
             //
             // Since in this mode we don't call Ipc_CreateObjects we don't have a boxed namespace
@@ -985,7 +985,7 @@ _FX NTSTATUS Ipc_GetName(
 
 check_sandbox_prefix:
 
-    if (Dll_AlernateIpcNaming)
+    if (Dll_AlternateIpcNaming)
     {
         if (length >= Dll_BoxIpcPathLen &&
             0 == Dll_NlsStrCmp(
@@ -1023,7 +1023,7 @@ check_sandbox_prefix:
 
     *OutCopyPath = name;
 
-    if (Dll_AlernateIpcNaming)
+    if (Dll_AlternateIpcNaming)
     {
         wmemcpy(name, *OutTruePath, length);
         name += length;
@@ -1238,7 +1238,7 @@ _FX NTSTATUS Ipc_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
     UNICODE_STRING objname;
     WCHAR *backslash;
 
-    if (Dll_AlernateIpcNaming)
+    if (Dll_AlternateIpcNaming)
         return STATUS_OBJECT_PATH_NOT_FOUND;
 
     //
@@ -5828,7 +5828,7 @@ _FX ULONG Ipc_NtQueryObjectName(UNICODE_STRING *ObjectName, ULONG MaxLen)
     ULONG Len = ObjectName->Length;
     WCHAR *Buf = ObjectName->Buffer;
 
-    if (Dll_AlernateIpcNaming) {
+    if (Dll_AlternateIpcNaming) {
     if (Len >= Dll_BoxIpcPathLen * sizeof(WCHAR) &&
             0 == Dll_NlsStrCmp(&Buf[Len / sizeof(WCHAR) - Dll_BoxIpcPathLen], Dll_BoxIpcPath, Dll_BoxIpcPathLen)) {
 

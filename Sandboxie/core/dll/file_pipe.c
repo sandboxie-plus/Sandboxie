@@ -785,7 +785,7 @@ _FX void *File_GetBoxedPipeName(
         }
     }
 
-    if (Dll_AlernateIpcNaming) {
+    if (Dll_AlternateIpcNaming) {
 
 		*ptr = L'\0';
 

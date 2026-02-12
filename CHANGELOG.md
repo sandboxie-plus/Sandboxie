@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added global option 'ForceBoxDocs=y', allows to force all programs opening a file from a boxed path to the appropriate sandbox
 - added new box border mode 'all', when active the border is shown for all windows of sandboxed processes, not only for the one in focus
 - added mechanism to export/import multiple boxes at once
-- added UseAlernateIpcNaming=y instead of using a separated NT Object namespace in this mode sandboxed objects get a name suffix
+- added UseAlternateIpcNaming=y instead of using a separated NT Object namespace in this mode sandboxed objects get a name suffix
   - Note: this mode can only be used with App Compartment boxes, as else the sbiedrv would block the accesses.
 
 ### Changed

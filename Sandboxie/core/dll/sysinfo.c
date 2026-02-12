@@ -575,7 +575,7 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
 
     *OutCopyPath = name;
 
-    if (Dll_AlernateIpcNaming) {
+    if (Dll_AlternateIpcNaming) {
         wmemcpy(name, objname_buf, objname_len);
         name += objname_len;
     

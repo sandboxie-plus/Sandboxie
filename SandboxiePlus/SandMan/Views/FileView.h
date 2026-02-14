@@ -52,17 +52,28 @@ public:
 	void ClearFilter();
 	void ClearPathFilter() { m_PathFilter.clear(); }
 	void SetRootPath(const QString& path);
+	void RefreshFilter();
 	bool IsFilterActive() const { return m_bFilterActive; }
+
+	void setSourceModel(QAbstractItemModel* sourceModel) override;
+
+signals:
+	void filterUpdated();
 
 public slots:
 	void AddPathFilter(const QString& path);
+	void SetSearchInProgress(bool inProgress) { m_bSearchInProgress = inProgress; }
 
 protected:
 	bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
+	void beginFilterUpdate();
+	void endFilterUpdate();
+
 	QRegularExpression m_SearchPattern;
 	bool m_bFilterActive;
+	bool m_bSearchInProgress = false;
 	QString m_RootPath;
 
 	QSet<QString> m_PathFilter;

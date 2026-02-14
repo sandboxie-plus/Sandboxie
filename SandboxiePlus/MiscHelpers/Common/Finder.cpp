@@ -110,6 +110,19 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	else
 		m_pHighLight = NULL;
 
+	// Expand/Collapse controls for tree navigation
+	m_pExpandAll = new QToolButton();
+	m_pExpandAll->setText("+");
+	m_pExpandAll->setToolTip(tr("Expand all"));
+	m_pSearchLayout->addWidget(m_pExpandAll);
+	connect(m_pExpandAll, SIGNAL(clicked()), this, SLOT(OnExpandAll()));
+
+	m_pCollapseAll = new QToolButton();
+	m_pCollapseAll->setText("-");
+	m_pCollapseAll->setToolTip(tr("Collapse all"));
+	m_pSearchLayout->addWidget(m_pCollapseAll);
+	connect(m_pCollapseAll, SIGNAL(clicked()), this, SLOT(OnCollapseAll()));
+
 	QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	m_pSearchLayout->addWidget(pSpacer);
@@ -361,6 +374,18 @@ void CFinder::OnSelectNext()
 		m_pTree->setCurrentIndex(idx);
 	else
 		QApplication::beep();
+}
+
+void CFinder::OnExpandAll()
+{
+	if (m_pTree)
+		m_pTree->expandAll();
+}
+
+void CFinder::OnCollapseAll()
+{
+	if (m_pTree)
+		m_pTree->collapseAll();
 }
 
 void CFinder::SetProgress(int value, int maximum)

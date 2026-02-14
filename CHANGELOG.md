@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed failure to mount registry when starting a UWP application sandboxed
 - fixed API CryptUnprotectData always returns a wrong ppszDataDescr [#5191](https://github.com/sandboxie-plus/Sandboxie/issues/5191)
 - fixed handle leak in SbieDll.dll
+- fixed the issue with switching sandbox sorting in the view [#5201](https://github.com/sandboxie-plus/Sandboxie/pull/5201) (thanks Catreap)
 - fixed Microsoft Edge 144 crashes in Application Compartment boxes [#5188](https://github.com/sandboxie-plus/Sandboxie/issues/5188)
 - fixed File Searching bar crash when performing multiple searches within a sandbox [#5166](https://github.com/sandboxie-plus/Sandboxie/issues/5166) [#5221](https://github.com/sandboxie-plus/Sandboxie/pull/5221)
 

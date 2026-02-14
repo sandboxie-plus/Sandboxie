@@ -30,10 +30,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed failure to mount registry when starting a UWP application sandboxed
 - fixed API CryptUnprotectData always returns a wrong ppszDataDescr [#5191](https://github.com/sandboxie-plus/Sandboxie/issues/5191)
-- added missing serial support to SbieCtrl
+- added missing serial number support to SbieCtrl
 - fixed handle leak in SbieDll.dll
-- fixed MSEdge 144 crashes in Applicaiton Compartment [#5188](https://github.com/sandboxie-plus/Sandboxie/issues/5188)
-- improved App Compartment ipc handling
+- fixed Microsoft Edge 144 crashes in Application Compartment boxes [#5188](https://github.com/sandboxie-plus/Sandboxie/issues/5188)
+- improved App Compartment IPC handling
 
 
 

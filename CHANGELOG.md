@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - to force 'UseCreateToken=y', 'SandboxieAllGroup=y' is the new default
 - 'NoUntrustedToken=y' can now be set in box options
 - reworked LPC server implementation in SbieSvc, to-do: switch to ALPC
+- improved RenameSection handling to preserve comments and original section order [#5220](https://github.com/sandboxie-plus/Sandboxie/issues/5220)
 
 ### Fixed
 - fixed failure to mount registry when starting a UWP application sandboxed

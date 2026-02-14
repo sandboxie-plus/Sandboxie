@@ -27,13 +27,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - 'NoUntrustedToken=y' can now be set in box options
 - reworked LPC server implementation in SbieSvc, to-do: switch to ALPC
 - improved App Compartment IPC handling
-- improved RenameSection handling to preserve comments and original section order [#5220](https://github.com/sandboxie-plus/Sandboxie/issues/5220)
+- improved RenameSection handling to preserve comments and original section order [#5220](https://github.com/sandboxie-plus/Sandboxie/pull/5220)
 
 ### Fixed
 - fixed failure to mount registry when starting a UWP application sandboxed
 - fixed API CryptUnprotectData always returns a wrong ppszDataDescr [#5191](https://github.com/sandboxie-plus/Sandboxie/issues/5191)
 - fixed handle leak in SbieDll.dll
 - fixed Microsoft Edge 144 crashes in Application Compartment boxes [#5188](https://github.com/sandboxie-plus/Sandboxie/issues/5188)
+- fixed File Searching bar crash when performing multiple searches within a sandbox [#5166](https://github.com/sandboxie-plus/Sandboxie/issues/5166) [#5221](https://github.com/sandboxie-plus/Sandboxie/pull/5221)
 
 
 

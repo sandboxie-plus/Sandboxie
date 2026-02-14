@@ -65,6 +65,8 @@ private slots:
 	void				OnReturn();
 
 	void				OnSelectNext();
+	void				OnExpandAll();
+	void				OnCollapseAll();
 
 protected:
 	bool				GetCaseSensitive() const	{ return m_pCaseSensitive ? m_pCaseSensitive->isChecked() : false; }
@@ -89,6 +91,8 @@ private:
 	QAbstractButton*	m_pRegExp;
 	QComboBox*			m_pColumn;
 	QAbstractButton*	m_pHighLight;
+	QAbstractButton*	m_pExpandAll;
+	QAbstractButton*	m_pCollapseAll;
 	QProgressBar*		m_pProgressBar;
 
 	QRegularExpression	m_RegExp;

@@ -1245,7 +1245,7 @@ Anda dapat mengklik Selesai untuk menutup panduan ini.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="748"/>
+        <location filename="Views/FileView.cpp" line="821"/>
         <source>%1 - Files</source>
         <translation>%1 - Berkas</translation>
     </message>
@@ -1253,37 +1253,37 @@ Anda dapat mengklik Selesai untuk menutup panduan ini.</translation>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="513"/>
+        <location filename="Views/FileView.cpp" line="586"/>
         <source>Create Shortcut</source>
         <translation>Buat Pintasan</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="536"/>
+        <location filename="Views/FileView.cpp" line="609"/>
         <source>Pin to Box Run Menu</source>
         <translation>Sematkan ke Menu Jalankan Kotak</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="543"/>
+        <location filename="Views/FileView.cpp" line="616"/>
         <source>Recover to Any Folder</source>
         <translation>Pulihkan ke Folder Mana Saja</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="545"/>
+        <location filename="Views/FileView.cpp" line="618"/>
         <source>Recover to Same Folder</source>
         <translation>Pulihkan ke Folder yang Sama</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="549"/>
+        <location filename="Views/FileView.cpp" line="622"/>
         <source>Run Recovery Checks</source>
         <translation>Jalankan Pemeriksaan Pemulihan</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="633"/>
+        <location filename="Views/FileView.cpp" line="706"/>
         <source>Select Directory</source>
         <translation>Pilih Direktori</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="702"/>
+        <location filename="Views/FileView.cpp" line="775"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Buat Pintasan ke sandbox %1</translation>
     </message>
@@ -1376,6 +1376,19 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>Lokasi kotak yang dipilih tidak ditempatkan pada drive yang tersedia saat ini.</translation>
+    </message>
+</context>
+<context>
+    <name>CFinder</name>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
+        <source>Expand all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
+        <source>Collapse all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

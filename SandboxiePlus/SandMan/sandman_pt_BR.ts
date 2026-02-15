@@ -1307,7 +1307,7 @@ Você pode clicar em Concluir para fechar esse assistente.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="748"/>
+        <location filename="Views/FileView.cpp" line="821"/>
         <source>%1 - Files</source>
         <translation>%1 - Arquivos</translation>
     </message>
@@ -1335,37 +1335,37 @@ Você pode clicar em Concluir para fechar esse assistente.</translation>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="513"/>
+        <location filename="Views/FileView.cpp" line="586"/>
         <source>Create Shortcut</source>
         <translation>Criar atalho</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="536"/>
+        <location filename="Views/FileView.cpp" line="609"/>
         <source>Pin to Box Run Menu</source>
         <translation>Fixar no Menu Executar da Caixa</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="543"/>
+        <location filename="Views/FileView.cpp" line="616"/>
         <source>Recover to Any Folder</source>
         <translation>Recuperar para qualquer pasta</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="545"/>
+        <location filename="Views/FileView.cpp" line="618"/>
         <source>Recover to Same Folder</source>
         <translation>Recuperar para a mesma pasta</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="549"/>
+        <location filename="Views/FileView.cpp" line="622"/>
         <source>Run Recovery Checks</source>
         <translation>Executar verificações de recuperação</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="633"/>
+        <location filename="Views/FileView.cpp" line="706"/>
         <source>Select Directory</source>
         <translation>Selecionar diretório</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="702"/>
+        <location filename="Views/FileView.cpp" line="775"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Criar atalho para a Caixa %1</translation>
     </message>
@@ -1459,6 +1459,19 @@ Você pode usar %USER% para salvar a caixa de proteção de cada usuário em uma
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>O local da caixa selecionada não foi colocado em uma unidade disponível no momento.</translation>
+    </message>
+</context>
+<context>
+    <name>CFinder</name>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
+        <source>Expand all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
+        <source>Collapse all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1245,7 +1245,7 @@ Du kan klikke Avslutt for å lukke denne veiviseren.</translation>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="748"/>
+        <location filename="Views/FileView.cpp" line="821"/>
         <source>%1 - Files</source>
         <translation>%1 - Filer</translation>
     </message>
@@ -1253,37 +1253,37 @@ Du kan klikke Avslutt for å lukke denne veiviseren.</translation>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="513"/>
+        <location filename="Views/FileView.cpp" line="586"/>
         <source>Create Shortcut</source>
         <translation>Opprett Snarvei</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="536"/>
+        <location filename="Views/FileView.cpp" line="609"/>
         <source>Pin to Box Run Menu</source>
         <translation>Pin til bokskjøremeny</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="543"/>
+        <location filename="Views/FileView.cpp" line="616"/>
         <source>Recover to Any Folder</source>
         <translation>Gjenopprett til alle mapper</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="545"/>
+        <location filename="Views/FileView.cpp" line="618"/>
         <source>Recover to Same Folder</source>
         <translation>Gjenopprett til samme mappe</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="549"/>
+        <location filename="Views/FileView.cpp" line="622"/>
         <source>Run Recovery Checks</source>
         <translation>Kjør gjenopprettingskontroll</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="633"/>
+        <location filename="Views/FileView.cpp" line="706"/>
         <source>Select Directory</source>
         <translation>Velg mappe</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="702"/>
+        <location filename="Views/FileView.cpp" line="775"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Opprett snarvei til sandkasse %1</translation>
     </message>
@@ -1377,6 +1377,19 @@ Du kan bruke %USER% for å lagre hver brukersandkasse til en egen mappe.</transl
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>Den valgte boks plasseringen er ikke plassert på en for tiden tilgjengelig stasjon.</translation>
+    </message>
+</context>
+<context>
+    <name>CFinder</name>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
+        <source>Expand all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
+        <source>Collapse all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

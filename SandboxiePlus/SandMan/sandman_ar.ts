@@ -1245,7 +1245,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="748"/>
+        <location filename="Views/FileView.cpp" line="821"/>
         <source>%1 - Files</source>
         <translation>%1 - ملفات</translation>
     </message>
@@ -1253,37 +1253,37 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="513"/>
+        <location filename="Views/FileView.cpp" line="586"/>
         <source>Create Shortcut</source>
         <translation>إنشاء اختصار</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="536"/>
+        <location filename="Views/FileView.cpp" line="609"/>
         <source>Pin to Box Run Menu</source>
         <translation>تثبيت في قائمة تشغيل الصندوق</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="543"/>
+        <location filename="Views/FileView.cpp" line="616"/>
         <source>Recover to Any Folder</source>
         <translation>استرداد إلى أي مجلد</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="545"/>
+        <location filename="Views/FileView.cpp" line="618"/>
         <source>Recover to Same Folder</source>
         <translation>استرداد إلى نفس المجلد</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="549"/>
+        <location filename="Views/FileView.cpp" line="622"/>
         <source>Run Recovery Checks</source>
         <translation>تشغيل فحوصات الاسترداد</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="633"/>
+        <location filename="Views/FileView.cpp" line="706"/>
         <source>Select Directory</source>
         <translation>حدد الدليل</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="702"/>
+        <location filename="Views/FileView.cpp" line="775"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>إنشاء اختصار إلى صندوق العزل %1</translation>
     </message>
@@ -1377,6 +1377,19 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>موقع الصندوق المحدد غير موجود على محرك أقراص متوفر حاليًا.</translation>
+    </message>
+</context>
+<context>
+    <name>CFinder</name>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
+        <source>Expand all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
+        <source>Collapse all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

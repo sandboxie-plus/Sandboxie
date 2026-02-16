@@ -461,143 +461,143 @@ Cette longueur permet environ 384 bits d&apos;entropie avec une phrase secrète 
         <location filename="BoxTransfer.cpp" line="71"/>
         <location filename="BoxTransfer.cpp" line="404"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter des bacs</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="73"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer des bacs</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du bac</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Status</source>
-        <translation type="unfinished">État</translation>
+        <translation>État</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Archive Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom d&apos;archive de bac</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Import As</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer comme</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>Conflit</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Export Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter la configuration générale</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Import Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer la configuration générale</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="97"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout sélectionner</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="101"/>
         <source>Select None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne rien sélectionner</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Running</source>
-        <translation type="unfinished">En cours d&apos;exécution</translation>
+        <translation>En cours d&apos;exécution</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="132"/>
         <source>Encrypted</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiffré</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="134"/>
         <source>Empty</source>
-        <translation type="unfinished">Vide</translation>
+        <translation>Vide</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="186"/>
         <source>Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Existe !</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="639"/>
         <source>Select file name</source>
-        <translation type="unfinished">Choisir un nom de fichier</translation>
+        <translation>Choisir un nom de fichier</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="406"/>
         <location filename="BoxTransfer.cpp" line="640"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished">Archive 7-Zip (*.7z);;Archive Zip (*.zip)</translation>
+        <translation>Archive 7-Zip (*.7z) ;; Archive Zip (*.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="360"/>
         <location filename="BoxTransfer.cpp" line="453"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished">Exportation : %1</translation>
+        <translation>Exportation : %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="366"/>
         <location filename="BoxTransfer.cpp" line="634"/>
         <source>7-Zip library is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>La bibliothèque 7-Zip n&apos;est pas disponible.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="385"/>
         <source>Nothing selected for export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rien n&apos;a été sélectionné pour l&apos;exportation.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="419"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le bac « %1 » a des processus en cours d&apos;exécution. L&apos;ignorer ?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="621"/>
         <location filename="BoxTransfer.cpp" line="771"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">Importation : %1</translation>
+        <translation>Importation : %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="657"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished">Échec d&apos;ouverture de l&apos;archive ; mot de passe erroné ?</translation>
+        <translation>Échec d&apos;ouverture de l&apos;archive ; mot de passe erroné ?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="666"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished">Échec d&apos;ouverture de l&apos;archive (%1) !</translation>
+        <translation>Échec d&apos;ouverture de l&apos;archive (%1) !</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="707"/>
         <source>The archive does not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;archive ne contient aucune donnée de bac à sable.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="721"/>
         <source>Nothing selected for import.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rien n&apos;a été sélectionné pour l&apos;importation.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="737"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le bac « %1 » existe déjà. Sa configuration sera écrasée. Continuer ?</translation>
     </message>
 </context>
 <context>
@@ -1487,12 +1487,12 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
         <source>Expand all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout développer</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
         <source>Collapse all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout réduire</translation>
     </message>
 </context>
 <context>
@@ -2811,17 +2811,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas afficher sur la bordure</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher dans la bordure</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
         <source>Show above the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher au-dessus de la bordure</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
@@ -4338,12 +4338,12 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="514"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer des bacs</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="516"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter des bacs</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="550"/>
@@ -4956,12 +4956,12 @@ Erreur : %1</translation>
     <message>
         <location filename="SandMan.cpp" line="750"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer des bacs</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="752"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter des bacs</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1087"/>
@@ -6041,7 +6041,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="165"/>
         <location filename="Views/SbieView.cpp" line="336"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer des bacs</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="179"/>
@@ -6264,7 +6264,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter des bacs</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="286"/>
@@ -9519,7 +9519,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="342"/>
         <source>and/or on border</source>
-        <translation type="unfinished"></translation>
+        <translation>et/ou sur le bord</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1380"/>
@@ -9557,12 +9557,13 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
         <location filename="Forms/OptionsWindow.ui" line="2082"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut, Sandboxie exécute les processus avec un jeton à intégrité NON FIABLE, pour une isolation maximale.
+Activer cette option permet d&apos;utiliser un jeton à intégrité FAIBLE, ce qui peut améliorer la compatibilité, mais réduit l&apos;isolation et la sécurité du bac.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser un jeton à intégrité FAIBLE plutôt que NON FIABLE (réduit l&apos;isolation)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2468"/>
@@ -12023,7 +12024,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les modifications no
         <location filename="Forms/SettingsWindow.ui" line="2197"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
-        <translation type="unfinished">Ajouter le groupe « Sandboxie\Tous les bacs à sable » au jeton d&apos;un bac (expérimental)</translation>
+        <translation>Ajouter le groupe « Sandboxie\Tous les bacs à sable » au jeton de bac</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>

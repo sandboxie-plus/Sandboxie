@@ -386,10 +386,8 @@ void CSbieView::CreateOldMenu()
 		m_pMenuBrowse = m_pMenuTools->addAction(CSandMan::GetIcon("Tree"), tr("Browse Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuSnapshots = m_pMenuTools->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
 		m_pMenuTools->addSeparator();
-#ifdef _DEBUG
 		m_pMenuBrowseNT = m_pMenuTools->addAction(CSandMan::GetIcon("Objects"), tr("Browse NT Namespace"), this, SLOT(OnSandBoxAction()));
 		m_pMenuTools->addSeparator();
-#endif
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox Config"), this, SLOT(OnSandBoxAction()));
 		m_pMenuDuplicateEx = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox with Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Sandbox"), this, SLOT(OnSandBoxAction()));

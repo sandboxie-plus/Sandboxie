@@ -8,6 +8,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.17.1 / 5.72.1] - 2026-02-16
+
+### Fixed
+- fixed regression sbiesvc IPC failing on windows 10 intriduced in 1.17.0 [#5226](https://github.com/sandboxie-plus/Sandboxie/issues/5226)
+- fixed crash in vintage view
+
+
 ## [1.17.0 / 5.72.0] - 2026-02-16
 
 ### Added

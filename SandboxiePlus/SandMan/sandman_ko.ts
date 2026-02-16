@@ -27,22 +27,22 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="187"/>
         <source>Show Password</source>
-        <translation>암호 표시</translation>
+        <translation>비밀번호 표시</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="144"/>
         <source>Enter Password</source>
-        <translation>암호 입력</translation>
+        <translation>비밀번호 입력</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="70"/>
         <source>New Password</source>
-        <translation>새 암호</translation>
+        <translation>새 비밀번호</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="34"/>
         <source>Repeat Password</source>
-        <translation>암호 반복</translation>
+        <translation>비밀번호 반복</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="174"/>
@@ -447,32 +447,32 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Password Entry</source>
-        <translation>Sandboxie-Plus - 암호 입력</translation>
+        <translation>Sandboxie-Plus - 비밀번호 입력</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation>새 박스 이미지를 만드는 중 보안 암호를 입력하고 디스크 이미지 크기를 선택하세요.</translation>
+        <translation>새 박스 이미지를 만드는 중 보안 비밀번호를 입력하고 디스크 이미지 크기를 선택하세요.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
         <source>Enter Box Image password:</source>
-        <translation>박스 이미지 암호 입력:</translation>
+        <translation>박스 이미지 비밀번호 입력:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="45"/>
         <source>Enter Box Image passwords:</source>
-        <translation>박스 이미지 암호 입력:</translation>
+        <translation>박스 이미지 비밀번호 입력:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation>압축파일 내보내기를 위한 암호화 암호 입력:</translation>
+        <translation>압축파일 내보내기를 위한 암호화 비밀번호 입력:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation>압축파일 가져오기를 위한 암호화 암호 입력:</translation>
+        <translation>압축파일 가져오기를 위한 암호화 비밀번호 입력:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
@@ -482,25 +482,25 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="140"/>
         <source>Passwords don&apos;t match!!!</source>
-        <translation>암호가 일치하지 않습니다!!!</translation>
+        <translation>비밀번호가 일치하지 않습니다!!!</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="144"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation>경고: 짧은 암호는 단순한 강제 기술을 사용하여 해독하기 쉽습니다!
+        <translation>경고: 짧은 비밀번호는 단순한 강제 기술을 사용하여 해독하기 쉽습니다!
 
-20자 이상으로 구성된 암호를 선택하는 것이 좋습니다. 짧은 암호를 사용하시겠습니까?</translation>
+20자 이상으로 구성된 비밀번호를 선택하는 것이 좋습니다. 짧은 비밀번호를 사용하시겠습니까?</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="150"/>
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation>암호는 최대 128자로 제한됩니다.
-이 길이는 실제 영어 단어로 구성된 암호 문구와 함께 약 384비트의 엔트로피를 허용합니다,
-Leet (L337) 말하기 수정을 적용하면 512비트로 증가하며, 완전히 무작위로 인쇄 가능한 ASCII 문자로 구성하면 768비트를 초과합니다.</translation>
+        <translation>비밀번호는 최대 128자로 제한됩니다.
+이 길이는 실제 영어 단어로 구성된 암호로 약 384비트의 엔트로피를 허용합니다,
+리트 (L337) 음성 수정을 적용하면 512비트로 증가하며, 완전히 무작위로 인쇄할 수 있는 ASCII 문자로 구성된 경우 768비트를 초과합니다.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="167"/>
@@ -522,143 +522,143 @@ Leet (L337) 말하기 수정을 적용하면 512비트로 증가하며, 완전�
         <location filename="BoxTransfer.cpp" line="71"/>
         <location filename="BoxTransfer.cpp" line="404"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 내보내기</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="73"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 가져오기</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 이름</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Status</source>
-        <translation type="unfinished">상태</translation>
+        <translation>상태</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Archive Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>압축파일 박스 이름</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Import As</source>
-        <translation type="unfinished"></translation>
+        <translation>다름 이름으로 가져오기</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>갈등</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Export Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>전역 구성 내보내기</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Import Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>전역 구성 가져오기</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="97"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>모두 선택</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="101"/>
         <source>Select None</source>
-        <translation type="unfinished"></translation>
+        <translation>선택 없음</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Running</source>
-        <translation type="unfinished">실행</translation>
+        <translation>실행</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="132"/>
         <source>Encrypted</source>
-        <translation type="unfinished"></translation>
+        <translation>암호화됨</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="134"/>
         <source>Empty</source>
-        <translation type="unfinished">비어 있음</translation>
+        <translation>비어 있음</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="186"/>
         <source>Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>존재합니다!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="639"/>
         <source>Select file name</source>
-        <translation type="unfinished">파일 이름 선택</translation>
+        <translation>파일 이름 선택</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="406"/>
         <location filename="BoxTransfer.cpp" line="640"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished">7-Zip 압축파일 (*.7z);;Zip 압축파일 (*.zip)</translation>
+        <translation>7-Zip 압축파일 (*.7z);;Zip 압축파일 (*.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="360"/>
         <location filename="BoxTransfer.cpp" line="453"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished">내보내기: %1</translation>
+        <translation>내보내기: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="366"/>
         <location filename="BoxTransfer.cpp" line="634"/>
         <source>7-Zip library is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip 라이브러리를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="385"/>
         <source>Nothing selected for export.</source>
-        <translation type="unfinished"></translation>
+        <translation>내보내기에 선택된 항목이 없습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="419"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 &apos;%1&apos;에 실행 중인 프로세스가 있습니다. 건너뛰시겠습니까?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="621"/>
         <location filename="BoxTransfer.cpp" line="771"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">가져오기: %1</translation>
+        <translation>가져오기: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="657"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished">압축파일을 열지 못했습니다. 암호가 잘못되었습니까?</translation>
+        <translation>압축 파일을 열 수 없습니다. 비밀번호가 잘못되었습니까?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="666"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished">압축파일 (%1)를 열지 못했습니다!</translation>
+        <translation>압축파일 (%1)를 열지 못했습니다!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="707"/>
         <source>The archive does not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>압축파일에는 샌드박스 데이터가 포함되어 있지 않습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="721"/>
         <source>Nothing selected for import.</source>
-        <translation type="unfinished"></translation>
+        <translation>가져오기에 선택된 항목이 없습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="737"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 &apos;%1&apos;이 이미 존재합니다. 해당 구성이 덮어쓰게 됩니다. 계속하시겠습니까?</translation>
     </message>
 </context>
 <context>
@@ -883,7 +883,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="882"/>
         <source>Allow direct access to Web Browser&apos;s passwords</source>
-        <translation>웹 브라우저의 암호에 대한 직접 액세스 허용</translation>
+        <translation>웹 브라우저의 비밀번호에 대한 직접 액세스 허용</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="886"/>
@@ -1531,12 +1531,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
         <source>Expand all</source>
-        <translation type="unfinished"></translation>
+        <translation>모두 확장</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
         <source>Collapse all</source>
-        <translation type="unfinished"></translation>
+        <translation>모두 접기</translation>
     </message>
 </context>
 <context>
@@ -2873,17 +2873,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 안에 표시하지 않음</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 안에 표시함</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
         <source>Show above the border</source>
-        <translation type="unfinished"></translation>
+        <translation>테두리 위에 표시함</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="73"/>
@@ -2948,7 +2948,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="382"/>
         <source>Change Password</source>
-        <translation>암호 변경</translation>
+        <translation>비밀번호 변경</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="625"/>
@@ -2991,7 +2991,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1237"/>
         <source>The password is wrong</source>
-        <translation>암호가 잘못되었습니다</translation>
+        <translation>비밀번호가 잘못되었습니다</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1238"/>
@@ -3001,12 +3001,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1266"/>
         <source>Image Password Changed</source>
-        <translation>이미지 암호 변경됨</translation>
+        <translation>이미지 비밀번호 변경됨</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1268"/>
         <source>Failed to Change Password</source>
-        <translation>암호 변경에 실패했습니다</translation>
+        <translation>비밀번호 변경에 실패했습니다</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1277"/>
@@ -4185,12 +4185,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="514"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 가져오기</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="516"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 내보내기</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="550"/>
@@ -4584,12 +4584,12 @@ Sandboxie 업데이트가 있는지 확인해 주세요.</translation>
     <message>
         <location filename="SandMan.cpp" line="750"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 가져오기</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="752"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 내보내기</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="845"/>
@@ -4734,7 +4734,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3325"/>
         <source>Please enter the configuration password.</source>
-        <translation>구성 암호를 입력하세요.</translation>
+        <translation>구성 비밀번호를 입력하세요.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3333"/>
@@ -5473,7 +5473,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="4151"/>
         <source>The config password must not be longer than 64 characters</source>
-        <translation>구성 암호는 64자를 초과할 수 없습니다</translation>
+        <translation>구성 비밀번호는 64자를 초과할 수 없습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4152"/>
@@ -6076,7 +6076,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="165"/>
         <location filename="Views/SbieView.cpp" line="336"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 가져오기</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="252"/>
@@ -6092,7 +6092,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 내보내기</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="286"/>
@@ -7415,17 +7415,17 @@ Right-click to copy</oldsource>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2306"/>
         <source>Please enter the new configuration password.</source>
-        <translation>새 구성 암호를 입력하세요.</translation>
+        <translation>새 구성 비밀번호를 입력하세요.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2310"/>
         <source>Please re-enter the new configuration password.</source>
-        <translation>새 구성 암호를 다시 입력하세요.</translation>
+        <translation>새 구성 비밀번호를 다시 입력하세요.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2315"/>
         <source>Passwords did not match, please retry.</source>
-        <translation>암호가 일치하지 않습니다. 다시 시도하세요.</translation>
+        <translation>비밀번호가 일치하지 않습니다. 다시 시도하세요.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2327"/>
@@ -7995,7 +7995,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Wizards/TemplateWizard.cpp" line="136"/>
         <location filename="Wizards/TemplateWizard.cpp" line="199"/>
         <source>Allow direct access to %1 passwords</source>
-        <translation>%1 암호에 대한 직접 액세스 허용</translation>
+        <translation>%1 비밀번호에 대한 직접 액세스 허용</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="146"/>
@@ -8475,7 +8475,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
-        <translation>이 옵션을 선택하면 확인을 클릭한 후 암호를 입력하라는 메시지가 표시됩니다</translation>
+        <translation>이 옵션을 선택하면 확인을 클릭한 후 비밀번호를 입력하라는 메시지가 표시됩니다</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="41"/>
@@ -9878,7 +9878,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="473"/>
         <source>Set Password</source>
-        <translation>암호 설정</translation>
+        <translation>비밀번호 설정</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1451"/>
@@ -9950,7 +9950,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="342"/>
         <source>and/or on border</source>
-        <translation type="unfinished"></translation>
+        <translation>및/또는 테두리에서</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1010"/>
@@ -9976,12 +9976,13 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="2082"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>기본적으로 샌드박스는 최대 격리를 위해 UNTRUSTED 무결성 토큰으로 프로세스를 실행합니다.
+이 옵션을 활성화하면 LOW 무결성 토큰이 사용되며, 이는 호환성을 향상시킬 수 있지만 샌드박스 격리 수준과 보안을 저하시킵니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>UNTRUSTED 대신 LOW 무결성 토큰 사용(격리 수준 저하)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2394"/>
@@ -10942,7 +10943,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3994"/>
         <source>Password</source>
-        <translation>암호</translation>
+        <translation>비밀번호</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3892"/>
@@ -11384,7 +11385,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2566"/>
         <source>Clear password when main window becomes hidden</source>
-        <translation>기본 창이 숨겨질 때 암호 지우기</translation>
+        <translation>기본 창이 숨겨질 때 비밀번호 지우기</translation>
     </message>
     <message>
         <source>Separate user folders</source>
@@ -11775,7 +11776,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="2197"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
-        <translation type="unfinished">샌드박스 토큰에 &quot;Sandboxie\All Sandboxes&quot; 그룹 추가 (실험적)</translation>
+        <translation>샌드박스 토큰에 &quot;Sandboxie\All Sandboxes&quot; 그룹 추가</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>
@@ -11794,12 +11795,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2546"/>
         <source>Change Password</source>
-        <translation>암호 변경</translation>
+        <translation>비밀번호 변경</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2460"/>
         <source>Password must be entered in order to make changes</source>
-        <translation>변경하려면 암호 입력</translation>
+        <translation>변경하려면 비밀번호 입력</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2519"/>

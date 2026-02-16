@@ -41,7 +41,7 @@
 #define LONG_REPLY(ln)  (PipeServer::GetPipeServer()->AllocMsg(ln))
 #define SHORT_REPLY(st) (PipeServer::GetPipeServer()->AllocShortMsg(st))
 
-#define USE_NEW_LPC_IMPL
+//#define USE_NEW_LPC_IMPL
 
 extern "C" const ULONG tzuk;
 

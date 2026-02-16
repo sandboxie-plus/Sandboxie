@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed regression sbiesvc IPC failing on windows 10 intriduced in 1.17.0 [#5226](https://github.com/sandboxie-plus/Sandboxie/issues/5226)
+- fixed regression edge failing to fully terminate on close
 - fixed crash in vintage view
 
 

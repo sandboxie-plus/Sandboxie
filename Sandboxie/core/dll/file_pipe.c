@@ -827,8 +827,8 @@ _FX void *File_GetBoxedPipeName(
 
     *ptr = L'\0';
     len = wcslen(BoxPipePath);
-    if (_wcsnicmp(pipe_name, BoxPipePath, len) == 0)
-        pipe_name += len;
+    if (_wcsnicmp(pipe_name + 1, BoxPipePath, len) == 0)
+        pipe_name += 1 + len;
 
     //
     // now append the (unsandboxed) pipe name past the BoxPipePath prefix

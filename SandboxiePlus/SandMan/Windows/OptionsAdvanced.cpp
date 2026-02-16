@@ -34,7 +34,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkDropConHostIntegrity, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	//Do not force untrusted integrity level on the sanboxed token (reduces desktop isolation)
-	//connect(ui.chkNotUntrusted, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkNotUntrusted, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -533,7 +533,7 @@ void COptionsWindow::SaveAdvanced()
 	bool bGlobalSandboxGroup = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("SandboxieAllGroup", true);
 	bool bGlobalCreateToken = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("UseCreateToken", false);
 	if (ui.chkCreateToken->checkState() == Qt::Checked) {
-		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "n" : "");
+		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "" : "y");
 		m_pBox->DelValue("UseCreateToken");
 	}
 	else if (ui.chkCreateToken->checkState() == Qt::PartiallyChecked) {
@@ -541,7 +541,7 @@ void COptionsWindow::SaveAdvanced()
 		m_pBox->SetText("UseCreateToken", "y");
 	}
 	else {
-		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "n" : "", bGlobalSandboxGroup ? "" : "y");
+		WriteAdvancedCheck(ui.chkCreateToken, "SandboxieAllGroup", bGlobalSandboxGroup ? "" : "y", bGlobalSandboxGroup ? "n" : "");
 		WriteAdvancedCheck(ui.chkCreateToken, "UseCreateToken", bGlobalCreateToken ? "" : "y", bGlobalCreateToken ? "n" : "");
 	}
 	WriteAdvancedCheck(ui.chkNotUntrusted, "NoUntrustedToken", "y", "");
@@ -738,7 +738,7 @@ void COptionsWindow::UpdateBoxIsolation()
 
 		if (m_pBox->GetBool("SandboxieAllGroup", true, true))
 			ui.chkCreateToken->setCheckState(Qt::Checked);
-		else if (m_pBox->GetBool("UseCreateToken", false, true))
+		else if (!m_pBox->GetBool("SandboxieAllGroup", true, true) && m_pBox->GetBool("UseCreateToken", false, true))
 			ui.chkCreateToken->setCheckState(Qt::PartiallyChecked);
 		else
 			ui.chkCreateToken->setCheckState(Qt::Unchecked);

@@ -19,6 +19,7 @@
 #include "../Windows/SettingsWindow.h"
 #include "../Windows/CompressDialog.h"
 #include "../Windows/ExtractDialog.h"
+#include "../Windows/RenameSandboxDialog.h"
 #include "../BoxTransfer.h"
 
 #include "qt_windows.h"
@@ -1538,38 +1539,64 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	else if (Action == m_pMenuRename)
 	{
 		auto pBox = SandBoxes.first();
-		QString OldValue = pBox->GetName().replace("_", " ");
-		QString Alias = pBox->GetText("BoxAlias");
-		bool bAlias = false;
-		if (bAlias = !Alias.isEmpty())
-			OldValue = Alias;
-		bool bOk = false;
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", bAlias ? tr("Please enter a new alias for the Sandbox.") : tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue, &bOk);
-		if (!bOk || Value == OldValue)
-			return;
-		if (!Value.isEmpty() && !TestNameAndWarn(Value))
+		QString oldNameDisplay = pBox->GetName().replace("_", " ");
+		QString oldAliasDisabledValue = pBox->GetText("BoxAliasDisabled");
+		QString oldAliasNormalValue = pBox->GetText("BoxAlias");
+		QString oldAlias = !oldAliasDisabledValue.isEmpty() ? oldAliasDisabledValue : oldAliasNormalValue;
+		bool oldAliasDisabled = !oldAliasDisabledValue.isEmpty();
+		bool hasAliasSetting = !oldAliasDisabledValue.isEmpty() || !oldAliasNormalValue.isEmpty();
+
+		CRenameSandboxDialog dlg(oldNameDisplay, oldAlias, oldAliasDisabled, hasAliasSetting, this);
+		if (dlg.exec() != QDialog::Accepted)
 			return;
 
-		bool bError = false;
-		if (bAlias || (bError = CSbieAPI::ValidateName(QString(Value).replace(" ", "_")).IsError()))
+		QString newNameDisplay = dlg.GetBoxName();
+		QString newAlias = dlg.GetAlias();
+		bool newAliasDisabled = dlg.IsAliasDisabled();
+
+		if (newNameDisplay.isEmpty())
+			return;
+
+		QString oldName = oldNameDisplay.replace(" ", "_");
+		QString newName = newNameDisplay.replace(" ", "_");
+
+		if (newName.compare(oldName, Qt::CaseInsensitive) != 0)
 		{
-			if (!bAlias && QMessageBox::question(this, "Sandboxie-Plus", tr("The entered name is not valid, do you want to set it as an alias instead?"), QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
+			if (!TestNameAndWarn(newNameDisplay))
 				return;
-			if (Value.isEmpty()) pBox->DelValue("BoxAlias");
-			else pBox->SetText("BoxAlias", Value);
-			pBox->UpdateDetails();
+			SB_STATUS validateStatus = CSbieAPI::ValidateName(newName);
+			if (validateStatus.IsError()) {
+				theGUI->CheckResults(QList<SB_STATUS>() << validateStatus, this);
+				return;
+			}
 		}
-		else
+
+		if (newAlias.isEmpty()) {
+			pBox->DelValue("BoxAlias");
+			pBox->DelValue("BoxAliasDisabled");
+		}
+		else if (newAliasDisabled) {
+			pBox->DelValue("BoxAlias");
+			pBox->SetText("BoxAliasDisabled", newAlias);
+		}
+		else {
+			pBox->SetText("BoxAlias", newAlias);
+			pBox->DelValue("BoxAliasDisabled");
+		}
+
+		if (newName.compare(oldName, Qt::CaseInsensitive) != 0)
 		{
-			SB_STATUS Status = pBox->RenameBox(Value.replace(" ", "_"));
+			SB_STATUS Status = pBox->RenameBox(newName);
 			if (!Status.IsError())
 			{
-				RenameItem(OldValue.replace(" ", "_"), Value.replace(" ", "_"));
-				if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(OldValue.replace(" ", "_"), Qt::CaseInsensitive) == 0)
-					theAPI->GetGlobalSettings()->SetText("DefaultBox", Value.replace(" ", "_"));
+				RenameItem(oldName, newName);
+				if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(oldName, Qt::CaseInsensitive) == 0)
+					theAPI->GetGlobalSettings()->SetText("DefaultBox", newName);
 			}
 			Results.append(Status);
 		}
+		else
+			pBox->UpdateDetails();
 
 		SaveBoxGrouping();
 	}

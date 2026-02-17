@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved border mode UI labels and exposed `all` mode in the selector
+- reworked `Rename Sandbox` dialog in SandMan: added dedicated alias controls, persisted `Hide alias` preference, improved stable/dynamic dialog resizing, and disabled alias is now saved as `BoxAliasDisabled` [#4657](https://github.com/sandboxie-plus/Sandboxie/pull/4657) [#5231](https://github.com/sandboxie-plus/Sandboxie/pull/5231)
 
 ### Fixed
 - fixed border overlay getting stuck when border label text is disabled (`no` mode) [#5230](https://github.com/sandboxie-plus/Sandboxie/pull/5230)
@@ -29,6 +30,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed regression SbieSvc IPC failing on Windows 10 introduced in 1.17.0 [#5226](https://github.com/sandboxie-plus/Sandboxie/issues/5226)
 - fixed regression Microsoft Edge failing to fully terminate on close
 - fixed crash in Vintage View mode
+- fixed logic for chkNotUntrusted and chkCreateToken
 
 
 

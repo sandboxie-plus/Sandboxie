@@ -14,7 +14,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added border label alias support
 
 ### Changed
-
 - improved border mode UI labels and exposed `all` mode in the selector
 
 ### Fixed

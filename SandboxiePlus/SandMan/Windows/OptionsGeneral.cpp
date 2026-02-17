@@ -61,7 +61,8 @@ void COptionsWindow::CreateGeneral()
 
 	ui.cmbBoxBorder->addItem(tr("Border disabled"), "off");
 	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus"), "ttl");
-	ui.cmbBoxBorder->addItem(tr("Always show"), "on");
+	ui.cmbBoxBorder->addItem(tr("Always show (focused window only)"), "on");
+	ui.cmbBoxBorder->addItem(tr("Show for all windows in this box"), "all");
 
 
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
@@ -280,8 +281,11 @@ void COptionsWindow::LoadGeneral()
 	if (!alphaOk || m_BorderAlpha < 0 || m_BorderAlpha > 255)
 		m_BorderAlpha = 192;
 	ui.spinBorderAlpha->setValue(m_BorderAlpha);
-	QString labelMode = BorderCfg.count() >= 5 ? BorderCfg[4].toLower() : "down";
-	ui.cmbBoxBorderText->setCurrentIndex(ui.cmbBoxBorderText->findData(labelMode));
+	QString labelMode = BorderCfg.count() >= 5 ? BorderCfg[4].toLower() : "in";
+	int labelModeIndex = ui.cmbBoxBorderText->findData(labelMode);
+	if (labelModeIndex < 0)
+		labelModeIndex = ui.cmbBoxBorderText->findData("in");
+	ui.cmbBoxBorderText->setCurrentIndex(labelModeIndex);
 
 	m_BoxIcon = m_pBox->GetText("BoxIcon");
 	m_pUseIcon->setChecked(!m_BoxIcon.isEmpty());

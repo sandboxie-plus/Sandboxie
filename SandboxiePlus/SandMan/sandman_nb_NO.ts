@@ -5408,7 +5408,7 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <translation>Opprett ny boks</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="463"/>
+        <location filename="Views/SbieView.cpp" line="461"/>
         <source>Remove Group</source>
         <translation>Fjern gruppe</translation>
     </message>
@@ -5462,8 +5462,8 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <location filename="Views/SbieView.cpp" line="122"/>
         <location filename="Views/SbieView.cpp" line="217"/>
         <location filename="Views/SbieView.cpp" line="282"/>
-        <location filename="Views/SbieView.cpp" line="400"/>
-        <location filename="Views/SbieView.cpp" line="442"/>
+        <location filename="Views/SbieView.cpp" line="398"/>
+        <location filename="Views/SbieView.cpp" line="440"/>
         <source>Create Shortcut</source>
         <translation>Opprett Snarvei</translation>
     </message>
@@ -5548,25 +5548,25 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="260"/>
-        <location filename="Views/SbieView.cpp" line="403"/>
+        <location filename="Views/SbieView.cpp" line="401"/>
         <source>Rename Sandbox</source>
         <translation>Gje nytt navn til sandkasse</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="261"/>
-        <location filename="Views/SbieView.cpp" line="404"/>
+        <location filename="Views/SbieView.cpp" line="402"/>
         <source>Move Sandbox</source>
         <translation>Flytt sandkasse</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="275"/>
-        <location filename="Views/SbieView.cpp" line="418"/>
+        <location filename="Views/SbieView.cpp" line="416"/>
         <source>Remove Sandbox</source>
         <translation>Fjern Sandkasse</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="280"/>
-        <location filename="Views/SbieView.cpp" line="440"/>
+        <location filename="Views/SbieView.cpp" line="438"/>
         <source>Terminate</source>
         <translation>Terminat</translation>
     </message>
@@ -5618,45 +5618,45 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <translation>Sett lederprosess</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="602"/>
+        <location filename="Views/SbieView.cpp" line="600"/>
         <source>    File root: %1
 </source>
         <translation>    Filrot: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="603"/>
+        <location filename="Views/SbieView.cpp" line="601"/>
         <source>    Registry root: %1
 </source>
         <translation>    Registreringsrot: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="604"/>
+        <location filename="Views/SbieView.cpp" line="602"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC- rot: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="608"/>
+        <location filename="Views/SbieView.cpp" line="606"/>
         <source>Options:
     </source>
         <translation>Valg:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="907"/>
+        <location filename="Views/SbieView.cpp" line="905"/>
         <source>[None]</source>
         <translation>[Ingen]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1241"/>
+        <location filename="Views/SbieView.cpp" line="1239"/>
         <source>Please enter a new group name</source>
         <translation>Skriv inn et nytt gruppenavn</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1074"/>
+        <location filename="Views/SbieView.cpp" line="1072"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Vil du virkelig fjerne den valgte gruppen(e)?</translation>
     </message>
@@ -5667,7 +5667,7 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <translation>Opprett boksgruppe</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="461"/>
+        <location filename="Views/SbieView.cpp" line="459"/>
         <source>Rename Group</source>
         <translation>Endre navn på gruppe</translation>
     </message>
@@ -5714,7 +5714,7 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="216"/>
-        <location filename="Views/SbieView.cpp" line="399"/>
+        <location filename="Views/SbieView.cpp" line="397"/>
         <source>Refresh Info</source>
         <translation>Oppfrisk informasjon</translation>
     </message>
@@ -5752,7 +5752,7 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="252"/>
-        <location filename="Views/SbieView.cpp" line="390"/>
+        <location filename="Views/SbieView.cpp" line="389"/>
         <source>Browse NT Namespace</source>
         <translation>Bla gjennom NT Namespace</translation>
     </message>
@@ -5767,13 +5767,13 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="262"/>
-        <location filename="Views/SbieView.cpp" line="405"/>
+        <location filename="Views/SbieView.cpp" line="403"/>
         <source>Move Up</source>
         <translation>Flytt opp</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="267"/>
-        <location filename="Views/SbieView.cpp" line="410"/>
+        <location filename="Views/SbieView.cpp" line="408"/>
         <source>Move Down</source>
         <translation>Flytt ned</translation>
     </message>
@@ -5828,44 +5828,44 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <translation>Sandkasseinnstillinger</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="393"/>
+        <location filename="Views/SbieView.cpp" line="391"/>
         <source>Duplicate Sandbox Config</source>
         <translation>Duplisert Sandbox-oppsett</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="394"/>
+        <location filename="Views/SbieView.cpp" line="392"/>
         <source>Duplicate Sandbox with Content</source>
         <translation>Duplisert sandkasse med innhold</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="395"/>
+        <location filename="Views/SbieView.cpp" line="393"/>
         <source>Export Sandbox</source>
         <translation>Eksporter Sandkasse</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="462"/>
+        <location filename="Views/SbieView.cpp" line="460"/>
         <source>Move Group</source>
         <translation>Flytt gruppe</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="606"/>
+        <location filename="Views/SbieView.cpp" line="604"/>
         <source>    Disk root: %1
 </source>
         <translation>    Diskrot: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1064"/>
+        <location filename="Views/SbieView.cpp" line="1062"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Skriv inn et nytt navn til gruppen.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1111"/>
+        <location filename="Views/SbieView.cpp" line="1109"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Flytt oppføringer med (negative verdier beveger seg opp, positive verdier beveger seg ned):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1186"/>
+        <location filename="Views/SbieView.cpp" line="1184"/>
         <source>A group can not be its own parent.</source>
         <translation>En gruppe kan ikke være sin egen forelder.</translation>
     </message>
@@ -5882,72 +5882,72 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <translation type="vanished">Importerer: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1267"/>
+        <location filename="Views/SbieView.cpp" line="1265"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
         <translation>Navnet Sandkasse og Box Group kan ikke bruke symbolet eller kontrolltegnene.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1272"/>
+        <location filename="Views/SbieView.cpp" line="1270"/>
         <source>This name is already used for a Box Group.</source>
         <translation>Dette navnet brukes allerede i en boksgruppe.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1277"/>
+        <location filename="Views/SbieView.cpp" line="1275"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>Dette navnet brukes allerede til en sandkasse.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1346"/>
-        <location filename="Views/SbieView.cpp" line="1422"/>
-        <location filename="Views/SbieView.cpp" line="1728"/>
+        <location filename="Views/SbieView.cpp" line="1344"/>
+        <location filename="Views/SbieView.cpp" line="1420"/>
+        <location filename="Views/SbieView.cpp" line="1726"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Ikke vis denne meldingen igjen.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1413"/>
-        <location filename="Views/SbieView.cpp" line="1433"/>
-        <location filename="Views/SbieView.cpp" line="1906"/>
+        <location filename="Views/SbieView.cpp" line="1411"/>
+        <location filename="Views/SbieView.cpp" line="1431"/>
+        <location filename="Views/SbieView.cpp" line="1904"/>
         <source>This Sandbox is empty.</source>
         <translation>Denne sandkassen er tom.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1441"/>
+        <location filename="Views/SbieView.cpp" line="1439"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Ikke vis denne advarselen i fremtiden</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1500"/>
+        <location filename="Views/SbieView.cpp" line="1498"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Vennligst skriv inn et nytt navn for duplisert Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1500"/>
+        <location filename="Views/SbieView.cpp" line="1498"/>
         <source>%1 Copy</source>
         <translation>%1 Kopier</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1520"/>
+        <location filename="Views/SbieView.cpp" line="1518"/>
         <source>Not Created</source>
         <translation>Ikke opprettet</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1529"/>
+        <location filename="Views/SbieView.cpp" line="1527"/>
         <source>Copying: %1</source>
         <translation>Kopiering: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1596"/>
+        <location filename="Views/SbieView.cpp" line="1594"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Vil du virkelig fjerne følgende sandkasse(r)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Advarsel: Boksinnholdet vil også bli slettet!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1661"/>
+        <location filename="Views/SbieView.cpp" line="1659"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>Vil du slette innholdet i følgende sandkasse?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1676"/>
+        <location filename="Views/SbieView.cpp" line="1674"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>Vil du virkelig slette innholdet i følgende sandkasser?&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
@@ -5960,17 +5960,17 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <translation type="vanished">7-Zip Archive (*.7z);;Zip Archive (*.zip)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1307"/>
+        <location filename="Views/SbieView.cpp" line="1305"/>
         <source>&lt;br /&gt;</source>
         <translation>&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1309"/>
+        <location filename="Views/SbieView.cpp" line="1307"/>
         <source>... and %1 more</source>
         <translation>... og %1 mer</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1440"/>
+        <location filename="Views/SbieView.cpp" line="1438"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
         <translation>ADVARSEL: Den åpne registerredigeringen er ikke sandkasset, vær forsiktig og bare gjør endringer i de forhåndsvalgte sandkasseplasseringene.</translation>
     </message>
@@ -5979,72 +5979,72 @@ Denne filen er en del av Sandboxie, og all endring gjort til den vil bli returne
         <translation type="vanished">Eksporterer: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1549"/>
+        <location filename="Views/SbieView.cpp" line="1547"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Vennligst skriv inn et nytt navn til Sandkassen.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1549"/>
+        <location filename="Views/SbieView.cpp" line="1547"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation>Vennligst skriv inn et nytt alias til Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1558"/>
+        <location filename="Views/SbieView.cpp" line="1556"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation>Det angitte navnet er ikke gyldig, vil du angi det som et alias i stedet?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1649"/>
+        <location filename="Views/SbieView.cpp" line="1647"/>
         <source>This Sandbox is already empty.</source>
         <translation>Denne sandkassen er allerede tom.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1666"/>
-        <location filename="Views/SbieView.cpp" line="1689"/>
+        <location filename="Views/SbieView.cpp" line="1664"/>
+        <location filename="Views/SbieView.cpp" line="1687"/>
         <source>Also delete all Snapshots</source>
         <translation>Slett også alle Snapshots</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1710"/>
+        <location filename="Views/SbieView.cpp" line="1708"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Vil du avslutte alle prosesser i den valgte sandkassen?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1711"/>
-        <location filename="Views/SbieView.cpp" line="1807"/>
+        <location filename="Views/SbieView.cpp" line="1709"/>
+        <location filename="Views/SbieView.cpp" line="1805"/>
         <source>Terminate without asking</source>
         <translation>Avslutt uten å spørre</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1726"/>
+        <location filename="Views/SbieView.cpp" line="1724"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Sandboxie Start-menyen vises nå. Velg et program fra menyen, og Sandboxie vil opprette et nytt snarveisikon på ditt ekte skrivebord, som du kan bruke til å påkalle det valgte programmet under tilsyn av Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1781"/>
-        <location filename="Views/SbieView.cpp" line="1835"/>
+        <location filename="Views/SbieView.cpp" line="1779"/>
+        <location filename="Views/SbieView.cpp" line="1833"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Opprett snarvei til sandkasse %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1806"/>
+        <location filename="Views/SbieView.cpp" line="1804"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>Ønsker du å avslutte %1?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1806"/>
+        <location filename="Views/SbieView.cpp" line="1804"/>
         <source>the selected processes</source>
         <translation>de valgte prosessene</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1865"/>
+        <location filename="Views/SbieView.cpp" line="1863"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Denne boksen har ikke internettbegrensninger på plass, vil du aktivere dem?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1956"/>
+        <location filename="Views/SbieView.cpp" line="1954"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation>Denne sandkassen er for tiden deaktivert eller begrenset til bestemte grupper eller brukere. Vil du gi tilgang til alle?</translation>
@@ -10134,7 +10134,7 @@ Vær oppmerksom på at disse verdiene er brukerspesifikke og lagret globalt for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1763"/>
+        <location filename="Views/SbieView.cpp" line="1761"/>
         <source>Drive %1</source>
         <translation>Drive %1</translation>
     </message>

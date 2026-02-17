@@ -5360,8 +5360,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="122"/>
         <location filename="Views/SbieView.cpp" line="217"/>
         <location filename="Views/SbieView.cpp" line="282"/>
-        <location filename="Views/SbieView.cpp" line="400"/>
-        <location filename="Views/SbieView.cpp" line="442"/>
+        <location filename="Views/SbieView.cpp" line="398"/>
+        <location filename="Views/SbieView.cpp" line="440"/>
         <source>Create Shortcut</source>
         <translation>ショートカットを作成</translation>
     </message>
@@ -5476,7 +5476,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="216"/>
-        <location filename="Views/SbieView.cpp" line="399"/>
+        <location filename="Views/SbieView.cpp" line="397"/>
         <source>Refresh Info</source>
         <translation>情報を更新</translation>
     </message>
@@ -5579,7 +5579,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="252"/>
-        <location filename="Views/SbieView.cpp" line="390"/>
+        <location filename="Views/SbieView.cpp" line="389"/>
         <source>Browse NT Namespace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5604,37 +5604,37 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="260"/>
-        <location filename="Views/SbieView.cpp" line="403"/>
+        <location filename="Views/SbieView.cpp" line="401"/>
         <source>Rename Sandbox</source>
         <translation>サンドボックスの名前を変更</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="261"/>
-        <location filename="Views/SbieView.cpp" line="404"/>
+        <location filename="Views/SbieView.cpp" line="402"/>
         <source>Move Sandbox</source>
         <translation>サンドボックスを移動</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="262"/>
-        <location filename="Views/SbieView.cpp" line="405"/>
+        <location filename="Views/SbieView.cpp" line="403"/>
         <source>Move Up</source>
         <translation>上へ移動</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="267"/>
-        <location filename="Views/SbieView.cpp" line="410"/>
+        <location filename="Views/SbieView.cpp" line="408"/>
         <source>Move Down</source>
         <translation>下へ移動</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="275"/>
-        <location filename="Views/SbieView.cpp" line="418"/>
+        <location filename="Views/SbieView.cpp" line="416"/>
         <source>Remove Sandbox</source>
         <translation>サンドボックスを削除</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="280"/>
-        <location filename="Views/SbieView.cpp" line="440"/>
+        <location filename="Views/SbieView.cpp" line="438"/>
         <source>Terminate</source>
         <translation>強制終了</translation>
     </message>
@@ -5724,92 +5724,92 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>コンテンツを参照</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="393"/>
+        <location filename="Views/SbieView.cpp" line="391"/>
         <source>Duplicate Sandbox Config</source>
         <translation>サンドボックス設定を複製</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="394"/>
+        <location filename="Views/SbieView.cpp" line="392"/>
         <source>Duplicate Sandbox with Content</source>
         <translation>コンテンツごとサンドボックスを複製</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="395"/>
+        <location filename="Views/SbieView.cpp" line="393"/>
         <source>Export Sandbox</source>
         <translation>サンドボックスをエクスポート</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="461"/>
+        <location filename="Views/SbieView.cpp" line="459"/>
         <source>Rename Group</source>
         <translation>グループの名前を変更</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="462"/>
+        <location filename="Views/SbieView.cpp" line="460"/>
         <source>Move Group</source>
         <translation>グループを移動</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="463"/>
+        <location filename="Views/SbieView.cpp" line="461"/>
         <source>Remove Group</source>
         <translation>グループを削除</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="602"/>
+        <location filename="Views/SbieView.cpp" line="600"/>
         <source>    File root: %1
 </source>
         <translation>    ファイルルート: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="603"/>
+        <location filename="Views/SbieView.cpp" line="601"/>
         <source>    Registry root: %1
 </source>
         <translation>    レジストリルート: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="604"/>
+        <location filename="Views/SbieView.cpp" line="602"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPCルート: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="606"/>
+        <location filename="Views/SbieView.cpp" line="604"/>
         <source>    Disk root: %1
 </source>
         <translation>    ディスクルート: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="608"/>
+        <location filename="Views/SbieView.cpp" line="606"/>
         <source>Options:
     </source>
         <translation>オプション:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="907"/>
+        <location filename="Views/SbieView.cpp" line="905"/>
         <source>[None]</source>
         <translation>[なし]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1064"/>
+        <location filename="Views/SbieView.cpp" line="1062"/>
         <source>Please enter a new name for the Group.</source>
         <translation>グループの新しい名前を入力してください。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1074"/>
+        <location filename="Views/SbieView.cpp" line="1072"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>選択したグループを本当に削除しますか？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1111"/>
+        <location filename="Views/SbieView.cpp" line="1109"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>エントリを移動 (負の値は上へ、正の値は下へ移動):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1186"/>
+        <location filename="Views/SbieView.cpp" line="1184"/>
         <source>A group can not be its own parent.</source>
         <translation>グループは自分自身の親として設定できません。</translation>
     </message>
@@ -5830,77 +5830,77 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">インポート中: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1241"/>
+        <location filename="Views/SbieView.cpp" line="1239"/>
         <source>Please enter a new group name</source>
         <translation>新しいグループ名を入力してください</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1267"/>
+        <location filename="Views/SbieView.cpp" line="1265"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <oldsource>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control charakters.</oldsource>
         <translation>サンドボックス名とボックスグループ名には、「,()」の記号や制御文字を使用できません。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1272"/>
+        <location filename="Views/SbieView.cpp" line="1270"/>
         <source>This name is already used for a Box Group.</source>
         <translation>この名前は既にボックスグループとして使用されています。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1277"/>
+        <location filename="Views/SbieView.cpp" line="1275"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>この名前は既にサンドボックスとして使用されています。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1346"/>
-        <location filename="Views/SbieView.cpp" line="1422"/>
-        <location filename="Views/SbieView.cpp" line="1728"/>
+        <location filename="Views/SbieView.cpp" line="1344"/>
+        <location filename="Views/SbieView.cpp" line="1420"/>
+        <location filename="Views/SbieView.cpp" line="1726"/>
         <source>Don&apos;t show this message again.</source>
         <translation>今後このメッセージを表示しない。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1413"/>
-        <location filename="Views/SbieView.cpp" line="1433"/>
-        <location filename="Views/SbieView.cpp" line="1906"/>
+        <location filename="Views/SbieView.cpp" line="1411"/>
+        <location filename="Views/SbieView.cpp" line="1431"/>
+        <location filename="Views/SbieView.cpp" line="1904"/>
         <source>This Sandbox is empty.</source>
         <translation>このサンドボックスは空です。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1441"/>
+        <location filename="Views/SbieView.cpp" line="1439"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>今後この警告を表示しない</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1500"/>
+        <location filename="Views/SbieView.cpp" line="1498"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>複製されたサンドボックスの新しい名前を入力してください。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1500"/>
+        <location filename="Views/SbieView.cpp" line="1498"/>
         <source>%1 Copy</source>
         <translation>%1 のコピー</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1520"/>
+        <location filename="Views/SbieView.cpp" line="1518"/>
         <source>Not Created</source>
         <translation>作成されていません</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1529"/>
+        <location filename="Views/SbieView.cpp" line="1527"/>
         <source>Copying: %1</source>
         <translation>コピー中: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1596"/>
+        <location filename="Views/SbieView.cpp" line="1594"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>以下のサンドボックスを本当に削除しますか？&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;警告: ボックスのコンテンツも削除されます！</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1661"/>
+        <location filename="Views/SbieView.cpp" line="1659"/>
         <source>Do you want to delete the content of the following sandbox?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>以下のサンドボックスのコンテンツを削除しますか？&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1676"/>
+        <location filename="Views/SbieView.cpp" line="1674"/>
         <source>Do you really want to delete the content of the following sandboxes?&lt;br /&gt;&lt;br /&gt;%1</source>
         <translation>以下のサンドボックスのコンテンツを削除しますか？&lt;br /&gt;&lt;br /&gt;%1</translation>
     </message>
@@ -5909,17 +5909,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">7-Zip アーカイブ (.7z);;Zip アーカイブ (.zip)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1307"/>
+        <location filename="Views/SbieView.cpp" line="1305"/>
         <source>&lt;br /&gt;</source>
         <translation>&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1309"/>
+        <location filename="Views/SbieView.cpp" line="1307"/>
         <source>... and %1 more</source>
         <translation>...他 %1 件</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1440"/>
+        <location filename="Views/SbieView.cpp" line="1438"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the preselected sandbox locations.</source>
         <translation>警告: 開かれたレジストリエディターはサンドボックス化されていません。注意して、事前に選択されたサンドボックスの場所にのみ変更を加えてください。</translation>
     </message>
@@ -5928,17 +5928,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">エクスポート中: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1549"/>
+        <location filename="Views/SbieView.cpp" line="1547"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>サンドボックスの新しい名前を入力してください。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1549"/>
+        <location filename="Views/SbieView.cpp" line="1547"/>
         <source>Please enter a new alias for the Sandbox.</source>
         <translation>サンドボックスの新しいエイリアスを入力してください。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1558"/>
+        <location filename="Views/SbieView.cpp" line="1556"/>
         <source>The entered name is not valid, do you want to set it as an alias instead?</source>
         <translation>入力された名前は無効です。代わりにエイリアスとして設定しますか？</translation>
     </message>
@@ -5947,7 +5947,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">選択したサンドボックスを削除します。本当によろしいですか？&lt;br /&gt;&lt;br /&gt;警告：ボックスの内容物も一緒に削除されます！</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1649"/>
+        <location filename="Views/SbieView.cpp" line="1647"/>
         <source>This Sandbox is already empty.</source>
         <translation>このサンドボックスは既に空です。</translation>
     </message>
@@ -5956,8 +5956,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">選択したサンドボックスの全ての内容を削除してもよろしいですか？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1666"/>
-        <location filename="Views/SbieView.cpp" line="1689"/>
+        <location filename="Views/SbieView.cpp" line="1664"/>
+        <location filename="Views/SbieView.cpp" line="1687"/>
         <source>Also delete all Snapshots</source>
         <translation>すべてのスナップショットも削除する</translation>
     </message>
@@ -5966,44 +5966,44 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation type="vanished">選択したサンドボックスの全ての内容を削除します。本当によろしいですか？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1710"/>
+        <location filename="Views/SbieView.cpp" line="1708"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>選択したサンドボックス内のすべてのプロセスを強制終了しますか？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1711"/>
-        <location filename="Views/SbieView.cpp" line="1807"/>
+        <location filename="Views/SbieView.cpp" line="1709"/>
+        <location filename="Views/SbieView.cpp" line="1805"/>
         <source>Terminate without asking</source>
         <translation>確認なしで強制終了する</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1726"/>
+        <location filename="Views/SbieView.cpp" line="1724"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation>Sandboxie スタートメニューが表示されます。メニューからアプリケーションを選択すると、Sandboxieは実際のデスクトップに新しいショートカットアイコンを作成します。このショートカットを使用すると、選択したアプリケーションをSandboxieの監視下で起動できます。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1781"/>
-        <location filename="Views/SbieView.cpp" line="1835"/>
+        <location filename="Views/SbieView.cpp" line="1779"/>
+        <location filename="Views/SbieView.cpp" line="1833"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>サンドボックス %1 へのショートカットを作成</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1806"/>
+        <location filename="Views/SbieView.cpp" line="1804"/>
         <source>Do you want to terminate %1?</source>
         <translation>%1 を強制終了しますか？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1806"/>
+        <location filename="Views/SbieView.cpp" line="1804"/>
         <source>the selected processes</source>
         <translation>選択されたプロセス</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1865"/>
+        <location filename="Views/SbieView.cpp" line="1863"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>このボックスにはインターネット制限が設定されていません。有効にしますか？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1956"/>
+        <location filename="Views/SbieView.cpp" line="1954"/>
         <source>This sandbox is currently disabled or restricted to specific groups or users. Would you like to allow access for everyone?</source>
         <oldsource>This sandbox is disabled or restricted to a group/user, do you want to allow box for everybody ?</oldsource>
         <translation>このサンドボックスは現在無効化されているか、特定のグループまたはユーザーにアクセスが制限されています。すべてのユーザーにアクセスを許可しますか？</translation>
@@ -10018,7 +10018,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1763"/>
+        <location filename="Views/SbieView.cpp" line="1761"/>
         <source>Drive %1</source>
         <translation>ドライブ %1</translation>
     </message>

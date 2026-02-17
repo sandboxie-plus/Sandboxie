@@ -23,7 +23,7 @@ CRenameSandboxDialog::CRenameSandboxDialog(const QString& boxName, const QString
 	ui.chkAliasDisabled->setToolTip(tr("When enabled, alias display is disabled for this sandbox."));
 	ui.chkHideAlias->setToolTip(tr("Hide alias input in this dialog. This preference is remembered."));
 
-	const bool hideAlias = theConf->GetBool("Options/HideAliasInput", false);
+	const bool hideAlias = theConf->GetBool("Options/HideAliasInput", true);
 	ui.chkHideAlias->setChecked(hideAlias);
 
 	connect(ui.chkHideAlias, SIGNAL(toggled(bool)), this, SLOT(OnHideAliasToggled(bool)));

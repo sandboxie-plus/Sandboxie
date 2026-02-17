@@ -8,6 +8,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.17.2 / 5.72.2] - 2026-02-??
+
+### Added
+- added border label alias support
+
+### Changed
+
+- improved border mode UI labels and exposed `all` mode in the selector
+
+### Fixed
+- fixed border overlay getting stuck when border label text is disabled (`no` mode) [#5230](https://github.com/sandboxie-plus/Sandboxie/issues/5230)
+- fixed stale focused-window border visibility when foreground window becomes invalid/invisible
+- fixed `all` border mode opacity updates to consistently apply configured alpha
+
+
+
 ## [1.17.1 / 5.72.1] - 2026-02-16
 
 ### Fixed

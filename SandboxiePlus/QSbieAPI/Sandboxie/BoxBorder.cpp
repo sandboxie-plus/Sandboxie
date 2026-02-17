@@ -270,11 +270,11 @@ LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 	if (uMsg == WM_PAINT) 
 	{
 		SBoxBorderWnd* pBorder = GetBorderWndByHwnd(m, hwnd);
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hwnd, &ps);
+
 		if (pBorder && pBorder->labelMode != 0 && !pBorder->boxName.empty() && pBorder->labelFont && !pBorder->labelRects.empty()) 
 		{
-			PAINTSTRUCT ps;
-			HDC hdc = BeginPaint(hwnd, &ps);
-
 			// Draw label at each stored rect (one per window in this box)
 			for (const RECT& labelRect : pBorder->labelRects) 
 			{
@@ -290,8 +290,9 @@ LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 				DrawTextW(hdc, pBorder->boxName.c_str(), -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 				SelectObject(hdc, hOldFont);
 			}
-			EndPaint(hwnd, &ps);
 		}
+
+		EndPaint(hwnd, &ps);
 
 		return 0;
 	}
@@ -494,6 +495,18 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 	return true;
 }
 
+static std::wstring GetBoxDisplayName(CSandBox* pBox)
+{
+	if (!pBox)
+		return std::wstring();
+
+	QString alias = pBox->GetText("BoxAlias").trimmed();
+	if (!alias.isEmpty())
+		return alias.toStdWString();
+
+	return pBox->GetName().toStdWString();
+}
+
 static HRGN CreateBorderRegion(const RECT* rect, int borderWidth)
 {
 	// Create outer rectangle region
@@ -529,11 +542,23 @@ void CBoxBorder::TimerProc()
 	}
 
 	HWND hWnd = GetForegroundWindow();
-	if (!hWnd)
+	if (!hWnd) {
+		if (m->MainBorder.visible)
+		{
+			::ShowWindow(m->MainBorder.hWnd, SW_HIDE);
+			m->MainBorder.visible = FALSE;
+		}
 		return;
+	}
 	ULONG Style = GetWindowLong(hWnd, GWL_STYLE);
-	if (!(Style & WS_VISIBLE))
+	if (!(Style & WS_VISIBLE)) {
+		if (m->MainBorder.visible)
+		{
+			::ShowWindow(m->MainBorder.hWnd, SW_HIDE);
+			m->MainBorder.visible = FALSE;
+		}
 		return;
+	}
 	ULONG pid = 0;
 	GetWindowThreadProcessId(hWnd, &pid);
 
@@ -571,7 +596,7 @@ void CBoxBorder::TimerProc()
 			SetLayeredWindowAttributes(m->MainBorder.hWnd, 0, m->MainBorder.alpha, LWA_ALPHA);
 
 			// Store sandbox name and create label font
-			m->MainBorder.boxName = pProcessBox->GetName().toStdWString();
+			m->MainBorder.boxName = GetBoxDisplayName(pProcessBox.data());
 			UpdateBorderLabelFont(m->MainBorder, m->MainBorder.hWnd);
 		}
 	}
@@ -867,7 +892,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				data.width = width;
 				data.alpha = alpha;
 				data.labelMode = labelMode;
-				data.boxName = ((CSandBox*)wnd.pBox)->GetName().toStdWString();
+				data.boxName = GetBoxDisplayName((CSandBox*)wnd.pBox);
 				data.hasWindows = false;
 				boxBorders[wnd.pBox] = data;
 			}
@@ -984,12 +1009,9 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			InvalidateRect(bwnd.hWnd, NULL, TRUE);
 		}
 
-		// Update alpha if changed
-		if (bwnd.alpha != data.alpha)
-		{
-			SetLayeredWindowAttributes(bwnd.hWnd, 0, data.alpha, LWA_ALPHA);
-			bwnd.alpha = data.alpha;
-		}
+		// Keep alpha in sync every refresh (region/window updates may otherwise leave stale opacity)
+		SetLayeredWindowAttributes(bwnd.hWnd, 0, data.alpha, LWA_ALPHA);
+		bwnd.alpha = data.alpha;
 
 		// Update label settings
 		bwnd.boxName = data.boxName;

@@ -159,10 +159,12 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkCfgNoExpand, SIGNAL(clicked(bool)), this, SLOT(OnDumpConfig()));
 
 
-	CPanelWidgetEx* pCfgDump = new CPanelWidgetEx(ui.tabAdvanced);
+	QTreeWidget* pOldCfgDumpTree = ui.treeCfgDump;
+	CPanelWidgetEx* pCfgDump = new CPanelWidgetEx();
 	pCfgDump->GetTree()->setHeaderLabels(tr("Name|Type|Value").split("|"));
-	ui.treeCfgDump->parentWidget()->layout()->replaceWidget(ui.treeCfgDump, pCfgDump);
-	ui.treeCfgDump->deleteLater();
+	pOldCfgDumpTree->parentWidget()->layout()->replaceWidget(pOldCfgDumpTree, pCfgDump);
+	pOldCfgDumpTree->hide();
+	pOldCfgDumpTree->deleteLater();
 	ui.treeCfgDump = pCfgDump->GetTree();
 
 	ui.tabsDebug->setCurrentIndex(0);

@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.2 / 5.72.2] - 2026-02-??
+## [1.17.2 / 5.72.2] - 2026-02-18
 
 ### Added
 - added border label alias support

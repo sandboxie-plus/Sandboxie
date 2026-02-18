@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed border overlay getting stuck when border label text is disabled (`no` mode) [#5230](https://github.com/sandboxie-plus/Sandboxie/pull/5230)
 - fixed stale focused-window border visibility when foreground window becomes invalid/invisible
 - fixed `all` border mode opacity updates to consistently apply configured alpha
+- fixed duplicate Name column appearing in the Config Dump tab under Template Settings [#4900](https://github.com/sandboxie-plus/Sandboxie/issues/4900)  [#5232](https://github.com/sandboxie-plus/Sandboxie/pull/5232)
 
 
 

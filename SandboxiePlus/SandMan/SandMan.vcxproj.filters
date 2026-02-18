@@ -231,6 +231,9 @@
     <ClCompile Include="Windows\ExtractDialog.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\RenameSandboxDialog.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
     <ClCompile Include="Helpers\TabOrder.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
@@ -415,6 +418,9 @@
     <QtMoc Include="Windows\ExtractDialog.h">
       <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\RenameSandboxDialog.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
     <QtMoc Include="Helpers\IniHighlighter.h">
       <Filter>Helpers</Filter>
     </QtMoc>
@@ -473,6 +479,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\ExtractDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\RenameSandboxDialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\EditorSettingsWindow.ui">

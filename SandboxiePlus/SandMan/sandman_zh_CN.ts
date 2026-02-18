@@ -1493,12 +1493,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
         <source>Expand all</source>
-        <translation type="unfinished"></translation>
+        <translation>展开所有</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
         <source>Collapse all</source>
-        <translation type="unfinished"></translation>
+        <translation>折叠所有</translation>
     </message>
 </context>
 <context>
@@ -2534,12 +2534,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Always show (focused window only)</source>
-        <translation type="unfinished"></translation>
+        <translation>始终显示（仅聚焦的窗口）</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Show for all windows in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>为本沙箱中的所有窗口显示</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>

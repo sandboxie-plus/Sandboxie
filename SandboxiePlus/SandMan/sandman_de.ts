@@ -2169,12 +2169,8 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Show only when title is in focus</source>
-        <translatorcomment>Extended the word title with the German word for Window to make sure it is understood.</translatorcomment>
-        <translation>Nur Anzeigen, wenn der Fenstertitel im Fokus ist</translation>
-    </message>
-    <message>
-        <source>Always show</source>
-        <translation type="vanished">Immer anzeigen</translation>
+        <translatorcomment>Extended the word title with the German word for window to make sure it is understood.</translatorcomment>
+        <translation>Nur anzeigen, wenn Fenstertitel im Fokus ist</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
@@ -2224,12 +2220,12 @@ Hinweis: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffen
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Always show (focused window only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Immer anzeigen (nur aktives Fenster)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Show for all windows in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Für alle Fenster in dieser Box anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="74"/>

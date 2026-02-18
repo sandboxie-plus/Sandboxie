@@ -1494,6 +1494,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	{
 		CSandBoxPtr pSrcBox = theAPI->GetBoxByName(SandBoxes.first()->GetName());
 		if (!pSrcBox) return;
+		QString sourceGroup = FindParent(pSrcBox->GetName());
 
 		QString OldValue = pSrcBox->GetName().replace("_", " ");
 		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the duplicated Sandbox."), QLineEdit::Normal, tr("%1 Copy").arg(OldValue));
@@ -1517,6 +1518,10 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			pDestBox = theAPI->GetBoxByName(Name);
 			if(!pDestBox)
 				Status = SB_ERR(SB_FailedCopyConf, QVariantList() << SandBoxes.first()->GetName() << tr("Not Created"));
+			else {
+				MoveItem(Name, sourceGroup);
+				SaveBoxGrouping();
+			}
 		}
 
 		if (Action == m_pMenuDuplicateEx && !Status.IsError())

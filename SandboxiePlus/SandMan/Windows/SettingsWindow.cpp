@@ -337,34 +337,30 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
 	ui.cmbOnClose->addItem(tr("Hide (Run invisible in Background)"), "Hide");
 
-	CAddMonitorComboItem(ui.cmbLaunchMonitor, tr("Keep current monitor"), -1, true);
-	CAddMonitorComboItem(ui.cmbLaunchMonitor, tr("Active monitor"), -3);
-	CAddMonitorComboItem(ui.cmbLaunchMonitor, tr("Primary monitor"), 0);
+	const QString sameAsMainLabel = tr("Same as main");
+	const QString keepCurrentLabel = tr("Keep current monitor");
+	const QString activeMonitorLabel = tr("Active monitor");
+	const QString primaryMonitorLabel = tr("Primary monitor");
 
-	CAddMonitorComboItem(ui.cmbNonMainLaunchMonitor, tr("Same as main"), -2);
-	CAddMonitorComboItem(ui.cmbNonMainLaunchMonitor, tr("Keep current monitor"), -1, true);
-	CAddMonitorComboItem(ui.cmbNonMainLaunchMonitor, tr("Active monitor"), -3);
-	CAddMonitorComboItem(ui.cmbNonMainLaunchMonitor, tr("Primary monitor"), 0);
+	auto addWindowMonitorOptions = [&](QComboBox* pCombo, bool includeSameAsMain)
+	{
+		if (includeSameAsMain)
+			CAddMonitorComboItem(pCombo, sameAsMainLabel, -2);
+		CAddMonitorComboItem(pCombo, keepCurrentLabel, -1, true);
+		CAddMonitorComboItem(pCombo, activeMonitorLabel, -3);
+		CAddMonitorComboItem(pCombo, primaryMonitorLabel, 0);
+	};
 
-	CAddMonitorComboItem(ui.cmbRecoveryLaunchMonitor, tr("Same as main"), -2);
-	CAddMonitorComboItem(ui.cmbRecoveryLaunchMonitor, tr("Keep current monitor"), -1, true);
-	CAddMonitorComboItem(ui.cmbRecoveryLaunchMonitor, tr("Active monitor"), -3);
-	CAddMonitorComboItem(ui.cmbRecoveryLaunchMonitor, tr("Primary monitor"), 0);
-
-	CAddMonitorComboItem(ui.cmbNotificationLaunchMonitor, tr("Same as main"), -2);
-	CAddMonitorComboItem(ui.cmbNotificationLaunchMonitor, tr("Keep current monitor"), -1, true);
-	CAddMonitorComboItem(ui.cmbNotificationLaunchMonitor, tr("Active monitor"), -3);
-	CAddMonitorComboItem(ui.cmbNotificationLaunchMonitor, tr("Primary monitor"), 0);
-
-	CAddMonitorComboItem(ui.cmbSupportDialogLaunchMonitor, tr("Same as main"), -2);
-	CAddMonitorComboItem(ui.cmbSupportDialogLaunchMonitor, tr("Keep current monitor"), -1, true);
-	CAddMonitorComboItem(ui.cmbSupportDialogLaunchMonitor, tr("Active monitor"), -3);
-	CAddMonitorComboItem(ui.cmbSupportDialogLaunchMonitor, tr("Primary monitor"), 0);
+	addWindowMonitorOptions(ui.cmbLaunchMonitor, false);
+	addWindowMonitorOptions(ui.cmbNonMainLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbRecoveryLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbNotificationLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbSupportDialogLaunchMonitor, true);
 
 	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, tr("Disabled"), -4);
-	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, tr("Same as main"), -2);
-	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, tr("Active monitor"), -3, true);
-	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, tr("Primary monitor"), 0);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, sameAsMainLabel, -2);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, activeMonitorLabel, -3, true);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, primaryMonitorLabel, 0);
 
 	QList<QScreen*> screens = QGuiApplication::screens();
 	QList<int> windowsDisplayIds;

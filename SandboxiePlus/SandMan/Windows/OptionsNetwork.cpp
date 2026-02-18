@@ -274,6 +274,9 @@ QString COptionsWindow::INetModeToGroup(int Mode)
 
 void COptionsWindow::LoadBlockINet()
 {
+	bool holdChange = m_HoldChange;
+	m_HoldChange = true;
+
 	if (IsAccessEntrySet(eFile, "!<InternetAccess>", eClosed, "InternetAccessDevices"))
 		ui.cmbBlockINet->setCurrentIndex(ui.cmbBlockINet->findData(2));
 	else if (theGUI->IsWFPEnabled() && (FindEntryInSettingList("AllowNetworkAccess", "!<InternetAccess>,n") 
@@ -319,6 +322,9 @@ void COptionsWindow::LoadBlockINet()
 
 	ui.chkBlockDns->setChecked(m_BoxTemplates.contains("BlockDNS"));
 	ui.chkBlockSamba->setChecked(m_BoxTemplates.contains("BlockPorts"));
+
+	m_HoldChange = holdChange;
+	m_INetBlockChanged = false;
 }
 
 QString COptionsWindow::GetINetModeStr(int Mode)
@@ -374,6 +380,9 @@ void COptionsWindow::OnINetItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
 
 void COptionsWindow::OnINetChanged(QTreeWidgetItem* pItem, int Column)
 {
+	if (m_HoldChange)
+		return;
+
 	if (Column != 0)
 		return;
 
@@ -987,7 +996,7 @@ void COptionsWindow::OnTestNetProxy()
 	}
 
 	CTestProxyDialog* dialog = new CTestProxyDialog(IP, Port, AuthMode, Login, Pass, this);
-	dialog->show();
+	CSandMan::SafeShow(dialog);
 }
 
 void COptionsWindow::OnNetProxyMoveUp()

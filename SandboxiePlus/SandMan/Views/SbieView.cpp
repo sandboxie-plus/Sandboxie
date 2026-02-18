@@ -1547,7 +1547,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		bool hasAliasSetting = !oldAliasDisabledValue.isEmpty() || !oldAliasNormalValue.isEmpty();
 
 		CRenameSandboxDialog dlg(oldNameDisplay, oldAlias, oldAliasDisabled, hasAliasSetting, this);
-		if (dlg.exec() != QDialog::Accepted)
+		if (theGUI->SafeExec(&dlg) != QDialog::Accepted)
 			return;
 
 		QString newNameDisplay = dlg.GetBoxName();

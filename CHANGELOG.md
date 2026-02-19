@@ -13,10 +13,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added configurable window location settings to control which monitor main, non-main, file recovery, and notification windows open on, including a selectable fallback mode. [#4536](https://github.com/sandboxie-plus/Sandboxie/issues/4536) [#5238](https://github.com/sandboxie-plus/Sandboxie/pull/5238)
   - Global Settings > Interface Config > Window Options
+- added "Label only" border mode option (`onlbl`, `ttllbl`, `alllbl`) that hides the colored border frame and shows only the sandbox name (or alias) label [#5239](https://github.com/sandboxie-plus/Sandboxie/pull/5239)
 
 ### Fixed
 - fixed false "Some changes haven't been saved yet" prompt when leaving Network Options with unlisted-process network mode set to non-default
 - fixed duplicated boxes not preserving the original box group assignment
+- reduced constant GUI CPU usage by caching custom `BoxIcon` resolution in the sandbox model instead of reloading icon resources on refresh
+- throttled internet connectivity check in SandMan main timer to once every 60 seconds and cache the result; updater only runs when device has internet connectivity, eliminating wasted network attempts and reducing repeated `HKLM\\SYSTEM\\Setup\\SystemSetupInProgress` registry checks
 
 
 

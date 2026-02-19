@@ -486,6 +486,8 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_bOnTop = false;
 	m_bExit = false;
+	m_LastCheckInternetMs = 0;
+	m_bHasInternet = true;
 
 	m_ImDiskReady = true;
 
@@ -2253,8 +2255,17 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 	m_pBoxView->Refresh();
 
-	if(!IsSilentMode() && CheckInternet()) // do not check for updates when in presentation/game mode
-		m_pUpdater->Process();
+	if(!IsSilentMode()) // do not check for updates when in presentation/game mode
+	{
+		quint64 CurrentTimeMs = QDateTime::currentMSecsSinceEpoch();
+		if (CurrentTimeMs - m_LastCheckInternetMs >= 60000) // check internet every 60 seconds
+		{
+			m_LastCheckInternetMs = CurrentTimeMs;
+			m_bHasInternet = CheckInternet();
+		}
+		if (m_bHasInternet)
+			m_pUpdater->Process();
+	}
 
 	if (!m_MissingTemplates.isEmpty())
 	{

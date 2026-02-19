@@ -548,8 +548,6 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 			mode = eBorderAllWindowsLabelOnly;
 		else if (StrMode.compare("onlbl", Qt::CaseInsensitive) == 0)
 			mode = eBorderLabelOnly;
-		else if (StrMode.compare("lbl", Qt::CaseInsensitive) == 0) // backward compat
-			mode = eBorderLabelOnly;
 		// else default is eBorderNormal
 	}
 

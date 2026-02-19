@@ -45,7 +45,7 @@
         <enum>QTabWidget::TabPosition::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>5</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -55,7 +55,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsGeneral">
            <property name="currentIndex">
-            <number>0</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="tabOptions">
             <attribute name="title">
@@ -64,17 +64,88 @@
             <layout class="QGridLayout" name="gridLayout_27">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_8">
-               <item row="3" column="7">
-                <widget class="QLabel" name="label_75">
+               <item row="2" column="10">
+                <widget class="QToolButton" name="btnBorderColor">
                  <property name="text">
-                  <string>Alpha</string>
-                 </property>
-                 <property name="buddy">
-                  <cstring>spinBorderAlpha</cstring>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3" colspan="6">
+               <item row="3" column="6">
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>px Width</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>spinBorderWidth</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="1" colspan="10">
+                <widget class="QLabel" name="lblSupportCert">
+                 <property name="text">
+                  <string>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color='red'&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::TextFormat::RichText</enum>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="0">
+                <widget class="QLabel" name="lblNotes">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Box Notes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="1" colspan="10">
+                <widget class="QLabel" name="lblBoxInfo">
+                 <property name="text">
+                  <string>Box info</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::TextFormat::AutoText</enum>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="4">
+                <spacer name="horizontalSpacer_26">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Policy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="6" column="3" colspan="8">
                 <widget class="QComboBox" name="cmbDblClick">
                  <property name="editable">
                   <bool>true</bool>
@@ -94,54 +165,150 @@
                  </property>
                 </widget>
                </item>
-               <item row="10" column="1" colspan="8">
-                <widget class="QLabel" name="lblBoxInfo">
-                 <property name="text">
-                  <string>Box info</string>
+               <item row="3" column="5">
+                <widget class="QSpinBox" name="spinBorderWidth">
+                 <property name="minimum">
+                  <number>1</number>
                  </property>
-                 <property name="textFormat">
-                  <enum>Qt::TextFormat::AutoText</enum>
+                 <property name="maximum">
+                  <number>10</number>
                  </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                 <property name="openExternalLinks">
-                  <bool>true</bool>
+                 <property name="value">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="8">
-                <widget class="QToolButton" name="btnBorderColor">
+               <item row="5" column="1" colspan="10">
+                <widget class="QCheckBox" name="chkPinToTray">
+                 <property name="text">
+                  <string>Always show this sandbox in the systray list (Pinned)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="11">
+                <widget class="QLabel" name="label_77">
                  <property name="text">
                   <string/>
                  </property>
                 </widget>
                </item>
-               <item row="14" column="2" colspan="6">
-                <spacer name="horizontalSpacer_2">
+               <item row="14" column="1">
+                <spacer name="verticalSpacer_17">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>20</width>
                    <height>0</height>
                   </size>
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="4">
-                <widget class="QLabel" name="label_14">
+               <item row="2" column="0" colspan="3">
+                <widget class="QLabel" name="label_21">
                  <property name="text">
-                  <string>px Width</string>
+                  <string>Sandboxed window border:</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                  </property>
                  <property name="buddy">
-                  <cstring>spinBorderWidth</cstring>
+                  <cstring>cmbBoxBorder</cstring>
                  </property>
                 </widget>
+               </item>
+               <item row="1" column="3" colspan="3">
+                <widget class="QComboBox" name="cmbBoxIndicator"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_76">
+                 <property name="text">
+                  <string>and/or on border</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="8" colspan="3">
+                <widget class="QComboBox" name="cmbBoxBorderText"/>
+               </item>
+               <item row="6" column="0" colspan="3">
+                <widget class="QLabel" name="label_70">
+                 <property name="text">
+                  <string>Double click action:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbDblClick</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="8">
+                <widget class="QSpinBox" name="spinBorderAlpha">
+                 <property name="maximum">
+                  <number>255</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="0" colspan="3">
+                <widget class="QLabel" name="lblBoxType">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>General Configuration</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="1" colspan="10">
+                <widget class="QLabel" name="label_58">
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="3" colspan="3">
+                <widget class="QComboBox" name="cmbBoxType"/>
+               </item>
+               <item row="8" column="0" colspan="3">
+                <widget class="QLabel" name="label_57">
+                 <property name="text">
+                  <string>Box Type Preset:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbBoxType</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3">
+                <widget class="QCheckBox" name="chkBorderLabelOnly">
+                 <property name="toolTip">
+                  <string>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</string>
+                 </property>
+                 <property name="text">
+                  <string>Label only</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="9">
+                <widget class="QLabel" name="label_75">
+                 <property name="text">
+                  <string>Alpha</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>spinBorderAlpha</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3" colspan="7">
+                <widget class="QComboBox" name="cmbBoxBorder"/>
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="label_30">
@@ -162,18 +329,35 @@
                  </property>
                 </widget>
                </item>
-               <item row="14" column="1">
-                <spacer name="verticalSpacer_17">
+               <item row="4" column="1" colspan="10">
+                <widget class="QCheckBox" name="chkShowForRun">
+                 <property name="text">
+                  <string>Show this box in the 'run in box' selection prompt</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="14" column="2" colspan="8">
+                <spacer name="horizontalSpacer_2">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Vertical</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>20</width>
+                   <width>40</width>
                    <height>0</height>
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="13" column="1" colspan="10">
+                <widget class="QPlainTextEdit" name="txtNotes">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>100</height>
+                  </size>
+                 </property>
+                </widget>
                </item>
                <item row="1" column="0" colspan="3">
                 <widget class="QLabel" name="label_20">
@@ -188,163 +372,21 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3">
-                <widget class="QSpinBox" name="spinBorderWidth">
-                 <property name="minimum">
-                  <number>1</number>
+               <item row="3" column="7">
+                <spacer name="horizontalSpacer_27">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
-                 <property name="maximum">
-                  <number>10</number>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Policy::Minimum</enum>
                  </property>
-                 <property name="value">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3" colspan="5">
-                <widget class="QComboBox" name="cmbBoxBorder"/>
-               </item>
-               <item row="1" column="3" colspan="2">
-                <widget class="QComboBox" name="cmbBoxIndicator"/>
-               </item>
-               <item row="3" column="5" colspan="2">
-                <widget class="QSpinBox" name="spinBorderAlpha">
-                 <property name="maximum">
-                  <number>255</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="0" colspan="3">
-                <widget class="QLabel" name="label_70">
-                 <property name="text">
-                  <string>Double click action:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-                 </property>
-                 <property name="buddy">
-                  <cstring>cmbDblClick</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="0" colspan="3">
-                <widget class="QLabel" name="label_57">
-                 <property name="text">
-                  <string>Box Type Preset:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-                 </property>
-                 <property name="buddy">
-                  <cstring>cmbBoxType</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0" colspan="3">
-                <widget class="QLabel" name="label_21">
-                 <property name="text">
-                  <string>Sandboxed window border:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-                 </property>
-                 <property name="buddy">
-                  <cstring>cmbBoxBorder</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item row="13" column="1" colspan="8">
-                <widget class="QPlainTextEdit" name="txtNotes">
-                 <property name="maximumSize">
+                 <property name="sizeHint" stdset="0">
                   <size>
-                   <width>16777215</width>
-                   <height>100</height>
+                   <width>40</width>
+                   <height>20</height>
                   </size>
                  </property>
-                </widget>
-               </item>
-               <item row="4" column="1" colspan="8">
-                <widget class="QCheckBox" name="chkShowForRun">
-                 <property name="text">
-                  <string>Show this box in the 'run in box' selection prompt</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="11" column="1" colspan="8">
-                <widget class="QLabel" name="lblSupportCert">
-                 <property name="text">
-                  <string>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color='red'&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</string>
-                 </property>
-                 <property name="textFormat">
-                  <enum>Qt::TextFormat::RichText</enum>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                 <property name="openExternalLinks">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="1" colspan="8">
-                <widget class="QLabel" name="label_58">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1" colspan="8">
-                <widget class="QCheckBox" name="chkPinToTray">
-                 <property name="text">
-                  <string>Always show this sandbox in the systray list (Pinned)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="3" colspan="2">
-                <widget class="QComboBox" name="cmbBoxType"/>
-               </item>
-               <item row="1" column="9">
-                <widget class="QLabel" name="label_77">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="12" column="0">
-                <widget class="QLabel" name="lblNotes">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Box Notes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="0" colspan="3">
-                <widget class="QLabel" name="lblBoxType">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>General Configuration</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QLabel" name="label_76">
-                 <property name="text">
-                  <string>and/or on border</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="6" colspan="3">
-                <widget class="QComboBox" name="cmbBoxBorderText"/>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -403,7 +445,7 @@
                <item row="16" column="1">
                 <spacer name="verticalSpacer_2">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -544,7 +586,7 @@
                <item row="16" column="2" colspan="5">
                 <spacer name="horizontalSpacer_4">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -657,7 +699,7 @@
                <item row="5" column="4" colspan="2">
                 <spacer name="horizontalSpacer_17">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -670,7 +712,7 @@
                <item row="8" column="6">
                 <spacer name="verticalSpacer_37">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -899,7 +941,7 @@
              <item row="18" column="1">
               <spacer name="verticalSpacer_12">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -912,7 +954,7 @@
              <item row="18" column="2" colspan="2">
               <spacer name="horizontalSpacer_5">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -958,7 +1000,7 @@
                <item row="6" column="1">
                 <spacer name="horizontalSpacer_21">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -987,7 +1029,7 @@
                <item row="6" column="0">
                 <spacer name="verticalSpacer_43">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1073,7 +1115,7 @@
              <item row="3" column="1">
               <spacer name="verticalSpacer_15">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1151,7 +1193,7 @@
              <item row="6" column="1">
               <spacer name="verticalSpacer_38">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1223,7 +1265,7 @@
                <item row="13" column="3" colspan="3">
                 <spacer name="horizontalSpacer_10">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1236,7 +1278,7 @@
                <item row="13" column="1">
                 <spacer name="verticalSpacer_29">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1402,7 +1444,7 @@
                <item row="9" column="2">
                 <spacer name="horizontalSpacer_8">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1465,7 +1507,7 @@
                <item row="9" column="1">
                 <spacer name="verticalSpacer_25">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1715,7 +1757,7 @@
                <item row="7" column="0">
                 <spacer name="verticalSpacer_45">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1845,7 +1887,7 @@
                <item row="7" column="5">
                 <spacer name="horizontalSpacer_23">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2112,7 +2154,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
            <item row="3" column="1">
             <spacer name="verticalSpacer_7">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -2189,7 +2231,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
          <item row="0" column="1">
           <widget class="QTabWidget" name="tabsForce">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabForceProgs">
             <attribute name="title">
@@ -2280,7 +2322,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="5" column="1">
                 <spacer name="verticalSpacer_5">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2371,7 +2413,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="5" column="1">
                 <spacer name="verticalSpacer_26">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2558,7 +2600,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="3" column="1">
                 <spacer name="verticalSpacer_6">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2606,7 +2648,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="2" column="1">
                 <spacer name="verticalSpacer_27">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2691,7 +2733,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="3" column="1">
                 <spacer name="horizontalSpacer_20">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2704,7 +2746,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="3" column="0">
                 <spacer name="verticalSpacer_40">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2777,7 +2819,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
            <item row="2" column="1">
             <spacer name="verticalSpacer_8">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -2842,7 +2884,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsAccess">
            <property name="currentIndex">
-            <number>5</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabFiles">
             <attribute name="title">
@@ -2926,7 +2968,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="2" column="1">
                 <spacer name="verticalSpacer_11">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -3033,7 +3075,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="2" column="1">
                 <spacer name="verticalSpacer_18">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -3140,7 +3182,7 @@ Enabling this option uses a LOW integrity token instead, which may improve compa
                <item row="2" column="1">
                 <spacer name="verticalSpacer_21">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -3220,7 +3262,7 @@ To specify a process use '$:program.exe' as path.</string>
                <item row="2" column="1">
                 <spacer name="verticalSpacer_34">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -3360,7 +3402,7 @@ To specify a process use '$:program.exe' as path.</string>
                <item row="2" column="1">
                 <spacer name="verticalSpacer_35">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -3430,7 +3472,7 @@ To specify a process use '$:program.exe' as path.</string>
              <item row="8" column="1">
               <spacer name="verticalSpacer_24">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -3456,7 +3498,7 @@ To specify a process use '$:program.exe' as path.</string>
              <item row="8" column="2">
               <spacer name="horizontalSpacer_9">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -3511,7 +3553,7 @@ The process match level has a higher priority than the specificity and describes
          <item row="1" column="0">
           <widget class="QTabWidget" name="tabsInternet">
            <property name="currentIndex">
-            <number>4</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabINet">
             <attribute name="title">
@@ -3570,7 +3612,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="4" column="1">
                 <spacer name="verticalSpacer_9">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -3637,7 +3679,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="2" column="1">
                 <spacer name="verticalSpacer_23">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -3767,7 +3809,6 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblNoWfp">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3813,7 +3854,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="2" column="1">
                 <spacer name="verticalSpacer_32">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -3899,7 +3940,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="3" column="1">
                 <spacer name="verticalSpacer_33">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4004,7 +4045,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="5" column="1">
                 <spacer name="verticalSpacer_41">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4035,7 +4076,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="10" column="0">
                 <spacer name="verticalSpacer_10">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4058,14 +4099,14 @@ The process match level has a higher priority than the specificity and describes
                   <string>IPv6:</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
                <item row="10" column="2">
                 <spacer name="horizontalSpacer_18">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4086,7 +4127,6 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblNetwork">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -4110,7 +4150,6 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblBind">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -4143,7 +4182,7 @@ The process match level has a higher priority than the specificity and describes
                   <string>IPv4:</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
@@ -4151,7 +4190,6 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblPorts">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -4233,7 +4271,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="7" column="1">
                 <spacer name="verticalSpacer_13">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4314,7 +4352,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="4" column="1">
                 <spacer name="verticalSpacer_3">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4379,7 +4417,7 @@ The process match level has a higher priority than the specificity and describes
             </font>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="tabCompat">
             <attribute name="title">
@@ -4500,7 +4538,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="6" column="1">
                 <spacer name="verticalSpacer_36">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4583,7 +4621,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                <item row="2" column="2">
                 <spacer name="horizontalSpacer_16">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4596,7 +4634,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                <item row="1" column="3">
                 <spacer name="verticalSpacer_39">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4714,7 +4752,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                <item row="2" column="1">
                 <spacer name="verticalSpacer_30">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -4773,7 +4811,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                 <string>On File Recovery</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignCenter</set>
+                <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -4805,14 +4843,14 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                 <string>On Box Init</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignCenter</set>
+                <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
              <item row="19" column="1">
               <spacer name="verticalSpacer_4">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -4831,7 +4869,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                 <string>On Delete Content</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignCenter</set>
+                <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -4866,7 +4904,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                 <string>On Box Terminate</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignCenter</set>
+                <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -4911,7 +4949,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                 <string>On Box Start</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignCenter</set>
+                <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -5030,7 +5068,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                <property name="minimumSize">
                 <size>
                  <width>258</width>
-                 <height>200</height>
+                 <height>258</height>
                 </size>
                </property>
                <property name="sortingEnabled">
@@ -5081,7 +5119,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="5" column="2">
               <spacer name="verticalSpacer_16">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -5162,7 +5200,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="2" column="3">
               <spacer name="horizontalSpacer_24">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -5215,7 +5253,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="6" column="1" colspan="4">
               <spacer name="horizontalSpacer_22">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -5228,7 +5266,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="6" column="0">
               <spacer name="verticalSpacer_44">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -5280,7 +5318,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              <item row="2" column="1">
               <spacer name="verticalSpacer_14">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -5345,7 +5383,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                <item row="15" column="4">
                 <spacer name="horizontalSpacer">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -5373,7 +5411,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                 <widget class="QLabel" name="lblTracing">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -5393,7 +5430,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                <item row="15" column="5">
                 <spacer name="horizontalSpacer_3">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -5421,7 +5458,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                 <widget class="QLabel" name="lblMonitor">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -5478,7 +5514,7 @@ You can customize the logging using the ini by specifying
 instead of &quot;*&quot;.</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -5488,7 +5524,7 @@ instead of &quot;*&quot;.</string>
                <item row="15" column="0">
                 <spacer name="verticalSpacer_19">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -5526,7 +5562,6 @@ instead of &quot;*&quot;.</string>
            <widget class="QWidget" name="tabDebug">
             <property name="font">
              <font>
-              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -5550,7 +5585,7 @@ instead of &quot;*&quot;.</string>
              <item row="0" column="0">
               <widget class="QTabWidget" name="tabsDebug">
                <property name="tabPosition">
-                <enum>QTabWidget::South</enum>
+                <enum>QTabWidget::TabPosition::South</enum>
                </property>
                <property name="currentIndex">
                 <number>0</number>
@@ -5576,7 +5611,6 @@ instead of &quot;*&quot;.</string>
                   <widget class="QLabel" name="label_25">
                    <property name="font">
                     <font>
-                     <weight>75</weight>
                      <bold>true</bold>
                      <kerning>true</kerning>
                     </font>
@@ -5609,8 +5643,8 @@ instead of &quot;*&quot;.</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>98</width>
-                      <height>28</height>
+                      <width>78</width>
+                      <height>16</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="dbgLayout">
@@ -5652,7 +5686,7 @@ instead of &quot;*&quot;.</string>
                  <item row="0" column="4">
                   <spacer name="horizontalSpacer_25">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -5757,19 +5791,6 @@ instead of &quot;*&quot;.</string>
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_3">
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_6">
-                 <property name="text">
-                  <string>Filter Categories</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="buddy">
-                  <cstring>cmbCategories</cstring>
-                 </property>
-                </widget>
-               </item>
                <item row="6" column="4">
                 <widget class="QToolButton" name="btnDelTemplate">
                  <property name="sizePolicy">
@@ -5787,26 +5808,6 @@ instead of &quot;*&quot;.</string>
                  <property name="text">
                   <string>Remove</string>
                  </property>
-                </widget>
-               </item>
-               <item row="2" column="0" rowspan="6" colspan="4">
-                <widget class="QTreeWidget" name="treeTemplates">
-                 <property name="selectionMode">
-                  <enum>QAbstractItemView::ExtendedSelection</enum>
-                 </property>
-                 <property name="sortingEnabled">
-                  <bool>true</bool>
-                 </property>
-                 <column>
-                  <property name="text">
-                   <string>Category</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text">
-                   <string>Name</string>
-                  </property>
-                 </column>
                 </widget>
                </item>
                <item row="2" column="4">
@@ -5828,9 +5829,6 @@ instead of &quot;*&quot;.</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="cmbCategories"/>
-               </item>
                <item row="1" column="2">
                 <widget class="QLabel" name="label_15">
                  <property name="text">
@@ -5841,8 +5839,67 @@ instead of &quot;*&quot;.</string>
                  </property>
                 </widget>
                </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>Filter Categories</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>cmbCategories</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="cmbCategories"/>
+               </item>
                <item row="1" column="3">
                 <widget class="QLineEdit" name="txtTemplates"/>
+               </item>
+               <item row="5" column="4">
+                <spacer name="verticalSpacer_42">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0" colspan="4">
+                <widget class="QLabel" name="label_13">
+                 <property name="text">
+                  <string>This list contains a large amount of sandbox compatibility enhancing templates</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" rowspan="6" colspan="4">
+                <widget class="QTreeWidget" name="treeTemplates">
+                 <property name="selectionMode">
+                  <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
+                 </property>
+                 <property name="sortingEnabled">
+                  <bool>true</bool>
+                 </property>
+                 <column>
+                  <property name="text">
+                   <string>Category</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Name</string>
+                  </property>
+                 </column>
+                </widget>
                </item>
                <item row="4" column="4">
                 <widget class="QToolButton" name="btnOpenTemplate">
@@ -5857,33 +5914,13 @@ instead of &quot;*&quot;.</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0" colspan="4">
-                <widget class="QLabel" name="label_13">
-                 <property name="text">
-                  <string>This list contains a large amount of sandbox compatibility enhancing templates</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
                <item row="3" column="4">
                 <spacer name="verticalSpacer_20">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="5" column="4">
-                <spacer name="verticalSpacer_42">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Policy::Minimum</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -5928,7 +5965,7 @@ Please note that this values are currently user specific and saved globally for 
                <item row="0" column="1">
                 <spacer name="verticalSpacer_22">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -5995,7 +6032,7 @@ Please note that this values are currently user specific and saved globally for 
                <item row="1" column="0">
                 <spacer name="horizontalSpacer_6">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -6008,7 +6045,7 @@ Please note that this values are currently user specific and saved globally for 
                <item row="1" column="4">
                 <spacer name="horizontalSpacer_11">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -6031,7 +6068,7 @@ Please note that this values are currently user specific and saved globally for 
                <item row="2" column="1">
                 <spacer name="horizontalSpacer_15">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -6044,7 +6081,7 @@ Please note that this values are currently user specific and saved globally for 
                <item row="2" column="3">
                 <spacer name="horizontalSpacer_14">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -6240,7 +6277,7 @@ Please note that this values are currently user specific and saved globally for 
        <item>
         <widget class="QDialogButtonBox" name="buttonBox">
          <property name="standardButtons">
-          <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+          <set>QDialogButtonBox::StandardButton::Apply|QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
          </property>
         </widget>
        </item>
@@ -6255,8 +6292,6 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>tabsGeneral</tabstop>
   <tabstop>cmbBoxIndicator</tabstop>
   <tabstop>cmbBoxBorder</tabstop>
-  <tabstop>btnBorderColor</tabstop>
-  <tabstop>spinBorderWidth</tabstop>
   <tabstop>chkShowForRun</tabstop>
   <tabstop>chkPinToTray</tabstop>
   <tabstop>cmbDblClick</tabstop>

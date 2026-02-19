@@ -3359,17 +3359,17 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="17"/>
         <source>Sandboxie-Plus - Rename Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Sandbox umbenennen</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="23"/>
         <source>When enabled, alias display is disabled for this sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn diese Option aktiviert ist, wird die Anzeige des Alias für diese Sandbox deaktiviert.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="24"/>
         <source>Hide alias input in this dialog. This preference is remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbirgt die Eingabe des Alias in diesem Dialog. Diese Einstellung wird dauerhaft gespeichert.</translation>
     </message>
 </context>
 <context>
@@ -5797,14 +5797,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>WARNUNG: Der geöffnete Registryeditor ist nicht sandgeboxt, bitte seien Sie vorsichtig und nehmen Sie nur Änderungen an den vorausgewählten Sandboxorten vor.</translation>
     </message>
     <message>
-        <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="vanished">Bitte geben Sie einen neuen Alias für die Sandbox ein.</translation>
-    </message>
-    <message>
-        <source>The entered name is not valid, do you want to set it as an alias instead?</source>
-        <translation type="vanished">Der eingegebene Name ist nicht gültig. Möchten Sie ihn stattdessen als Alias festlegen?</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="1621"/>
         <source>Do you really want to remove the following sandbox(es)?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Möchten Sie wirklich die folgende(n) Sandbox(en) entfernen?&lt;br /&gt;&lt;br /&gt;%1&lt;br /&gt;&lt;br /&gt;Warnung: Der Boxinhalt wird ebenfalls gelöscht!</translation>
@@ -5942,10 +5934,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="403"/>
         <source>Move Sandbox</source>
         <translation>Bewege Sandbox</translation>
-    </message>
-    <message>
-        <source>Please enter a new name for the Sandbox.</source>
-        <translation type="vanished">Bitte einen Namen für die neue Sandbox eingeben.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1691"/>
@@ -10043,27 +10031,27 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="20"/>
         <source>Rename Sandbox</source>
-        <translation type="unfinished">Sandbox umbenennen</translation>
+        <translation>Sandbox umbenennen</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="31"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished">Bitte einen Namen für die neue Sandbox eingeben.</translation>
+        <translation>Bitte geben Sie einen neuen Namen für die Sandbox ein.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="38"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished">Bitte geben Sie einen neuen Alias für die Sandbox ein.</translation>
+        <translation>Bitte geben Sie einen neuen Alias für die Sandbox ein.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="52"/>
         <source>Disable alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviere Alias</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="59"/>
         <source>Hide alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge Alias</translation>
     </message>
 </context>
 <context>

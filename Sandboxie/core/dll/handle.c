@@ -51,6 +51,7 @@ typedef struct _HANDLE_STATE {
     BOOLEAN DeleteOnClose;
     LIST    CloseHandlers;
     WCHAR*  RelocationPath;
+    ACCESS_MASK KeyWow64Flags;
 
 } HANDLE_STATE;
 
@@ -149,6 +150,46 @@ _FX WCHAR* Handle_GetRelocationPath(HANDLE FileHandle, ULONG ExtraLength)
     LeaveCriticalSection(&Handle_StatusData_CritSec);
 
     return name;
+}
+
+
+//---------------------------------------------------------------------------
+// Handle_SetKeyWow64Flags
+//---------------------------------------------------------------------------
+
+
+_FX VOID Handle_SetKeyWow64Flags(HANDLE FileHandle, ACCESS_MASK Wow64Flags)
+{
+    EnterCriticalSection(&Handle_StatusData_CritSec);
+
+    HANDLE_STATE* state = map_get(&Handle_StatusData, FileHandle);
+    if (!state)
+        state = map_insert(&Handle_StatusData, FileHandle, NULL, sizeof(HANDLE_STATE));
+
+    state->KeyWow64Flags = Wow64Flags & (KEY_WOW64_32KEY | KEY_WOW64_64KEY);
+
+    LeaveCriticalSection(&Handle_StatusData_CritSec);
+}
+
+
+//---------------------------------------------------------------------------
+// Handle_GetKeyWow64Flags
+//---------------------------------------------------------------------------
+
+
+_FX ACCESS_MASK Handle_GetKeyWow64Flags(HANDLE FileHandle)
+{
+    ACCESS_MASK wow64Flags = 0;
+
+    EnterCriticalSection(&Handle_StatusData_CritSec);
+
+    HANDLE_STATE* state = map_get(&Handle_StatusData, FileHandle);
+    if (state)
+        wow64Flags = state->KeyWow64Flags & (KEY_WOW64_32KEY | KEY_WOW64_64KEY);
+
+    LeaveCriticalSection(&Handle_StatusData_CritSec);
+
+    return wow64Flags;
 }
 
 
@@ -283,6 +324,9 @@ _FX void Handle_SetupDuplicate(HANDLE OldFileHandle, HANDLE NewFileHandle)
 
         if(state->RelocationPath)
             Handle_SetRelocationPath(NewFileHandle, state->RelocationPath);
+
+        if (state->KeyWow64Flags)
+            Handle_SetKeyWow64Flags(NewFileHandle, state->KeyWow64Flags);
 
         HANDLE_HANDLER* handler = List_Head(&state->CloseHandlers);
         while (handler) 

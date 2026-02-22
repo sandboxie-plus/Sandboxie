@@ -4,7 +4,65 @@
 
 
 
-## [1.16.9 / 5.71.9] - 2025-11-
+## [1.17.2 / 5.72.2] - 2026-02-18
+
+### 新增
+- 新增边框标签别名支持
+
+### 变更
+- 改进了边框模式 UI 标签，并在选择器中公开了 `all` 模式
+- 重构了 SandMan 中的 `重命名沙箱` 对话框：添加了专用的别名控制项，持久化保存了 `隐藏别名` 偏好设置，改进了稳定/动态对话框大小调整，现在禁用的别名将以 `BoxAliasDisabled` 的形式保存 [#4657](https://github.com/sandboxie-plus/Sandboxie/pull/4657) [#5231](https://github.com/sandboxie-plus/Sandboxie/pull/5231)
+
+### 修复
+- 修复了当边框标签文本被禁用（`no` 模式）时，边框覆盖无法消除的问题 [#5230](https://github.com/sandboxie-plus/Sandboxie/pull/5230)
+- 修复了当前聚焦窗口变为无效/不可见时，边框仍然显示的问题
+- 修复了 `all` 边框模式下透明度更新无法一致应用所配置 alpha 的问题
+- 修复了在模板设置的 Config Dump 标签下出现重复的 Name 列的问题 [#4900](https://github.com/sandboxie-plus/Sandboxie/issues/4900) [#5232](https://github.com/sandboxie-plus/Sandboxie/pull/5232)
+
+
+
+## [1.17.1 / 5.72.1] - 2026-02-16
+
+### 修复
+- 修复了在 Windows 10 上由 1.17.0 版本引入的 SbieSvc IPC 回归问题 [#5226](https://github.com/sandboxie-plus/Sandboxie/issues/5226)
+- 修复了 Microsoft Edge 关闭时无法完全终止的回归问题
+- 修复了经典视图模式下的崩溃问题
+- 修复了 chkNotUntrusted 和 chkCreateToken 的相关逻辑
+
+
+
+## [1.17.0 / 5.72.0] - 2026-02-16
+
+### 新增
+- 为 Sandboxie 服务应用程序添加了图标 [#5160](https://github.com/sandboxie-plus/Sandboxie/issues/5160#issuecomment-3706138019)
+- 在边框中添加了沙箱名称 [#3746](https://github.com/sandboxie-plus/Sandboxie/issues/3746)
+- 新增全局选项 'ForceBoxDocs=y'，允许强制所有从沙箱路径打开文件的程序进入相应的沙箱
+- 新增沙箱边框模式 'all'，启用后沙箱进程的所有窗口都会显示边框，而不仅仅是当前聚焦的窗口
+- 为 SbieCtrl 添加了缺失的序列号支持
+- 新增一次性导出/导入多个沙箱的机制
+- 新增 'UseAlternateIpcNaming=y'，此模式下沙盒对象名字会被添加后缀，而不是在单独的 NT Object 命名空间中
+  - 注意：此模式仅支持应用隔离沙箱，否则 SbieDrv 会阻止访问
+
+### 变更
+- 验证了与 Windows build 28020 的兼容性并更新了 DynData
+- 启用 'UseCreateToken=y' 时，总是使用 'CopyTokenAttributes=y' 以修复 UWP 问题
+  - 要强制使用 'UseCreateToken=y'，'SandboxieAllGroup=y' 现在是新默认值
+- 现在可以在沙箱选项中设置 'NoUntrustedToken=y'
+- 重构了 SbieSvc 中的 LPC 服务器实现，后续将切换为 ALPC
+- 改进了 Application Compartment 的 IPC 处理
+- 改进了 RenameSection 的处理，以保留注释和原始节顺序 [#5220](https://github.com/sandboxie-plus/Sandboxie/pull/5220)
+
+### 修复
+- 修复了启动 UWP 应用沙箱时注册表挂载失败的问题
+- 修复了 API CryptUnprotectData 始终返回错误的 ppszDataDescr [#5191](https://github.com/sandboxie-plus/Sandboxie/issues/5191)
+- 修复了 SbieDll.dll 中的句柄泄漏问题
+- 修复了视图中切换沙箱排序的相关问题 [#5201](https://github.com/sandboxie-plus/Sandboxie/pull/5201)（感谢 Catreap）
+- 修复了 Microsoft Edge 144 在应用隔离沙箱中崩溃的问题 [#5188](https://github.com/sandboxie-plus/Sandboxie/issues/5188)
+- 修复了在沙箱中进行多次文件搜索时文件搜索栏崩溃的问题 [#5166](https://github.com/sandboxie-plus/Sandboxie/issues/5166) [#5221](https://github.com/sandboxie-plus/Sandboxie/pull/5221)
+
+
+
+## [1.16.9 / 5.71.9] - 2026-01-02
 
 ### 修复
 - 修复与 Thunderbird 146 的不兼容问题

@@ -22,10 +22,92 @@
 #include "Helpers/IniHighlighter.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include <QFileIconProvider>
+#include <QScreen>
+#include <QSet>
 
 
 #include <windows.h>
 #include <shellapi.h>
+
+static int CGetWindowsMonitorNumber(const QString& screenName)
+{
+	int markerPos = screenName.lastIndexOf("DISPLAY", -1, Qt::CaseInsensitive);
+	if (markerPos < 0)
+		return -1;
+
+	QString tail = screenName.mid(markerPos + 7);
+	if (tail.isEmpty())
+		return -1;
+
+	int digitCount = 0;
+	while (digitCount < tail.length() && tail[digitCount].isDigit())
+		digitCount++;
+	if (digitCount == 0)
+		return -1;
+
+	bool ok = false;
+	int number = tail.left(digitCount).toInt(&ok);
+	return ok ? number : -1;
+}
+
+static int CGetDisplayNumberForScreen(QScreen* screen)
+{
+	if (!screen)
+		return -1;
+
+	QRect geometry = screen->geometry();
+	QPoint center = geometry.center();
+	POINT point = { center.x(), center.y() };
+	HMONITOR monitor = MonitorFromPoint(point, MONITOR_DEFAULTTONEAREST);
+	if (!monitor)
+		return -1;
+
+	MONITORINFOEXW monitorInfo;
+	memset(&monitorInfo, 0, sizeof(monitorInfo));
+	monitorInfo.cbSize = sizeof(monitorInfo);
+	if (!GetMonitorInfoW(monitor, &monitorInfo))
+		return -1;
+
+	QString deviceName = QString::fromWCharArray(monitorInfo.szDevice);
+	int displayNumber = CGetWindowsMonitorNumber(deviceName);
+	if (displayNumber > 0)
+		return displayNumber;
+
+	return -1;
+}
+
+static constexpr int c_MonitorLabelBaseRole = Qt::UserRole + 100;
+static constexpr int c_MonitorLabelDefaultRole = Qt::UserRole + 101;
+
+static QString CBuildMonitorOptionLabel(const QString& baseLabel, bool isDefault, bool isFallback)
+{
+	QString label = baseLabel;
+	if (isDefault)
+		label = QObject::tr("%1 (%2)").arg(label, QObject::tr("default"));
+	if (isFallback)
+		label = QObject::tr("%1 (%2)").arg(label, QObject::tr("fallback"));
+	return label;
+}
+
+static void CAddMonitorComboItem(QComboBox* pCombo, const QString& baseLabel, int value, bool isDefault = false)
+{
+	pCombo->addItem(CBuildMonitorOptionLabel(baseLabel, isDefault, false), value);
+	int idx = pCombo->count() - 1;
+	pCombo->setItemData(idx, baseLabel, c_MonitorLabelBaseRole);
+	pCombo->setItemData(idx, isDefault, c_MonitorLabelDefaultRole);
+}
+
+static void CUpdateMonitorComboFallbackLabel(QComboBox* pCombo, int fallbackIndex, bool markFallback)
+{
+	for (int i = 0; i < pCombo->count(); i++) {
+		QString baseLabel = pCombo->itemData(i, c_MonitorLabelBaseRole).toString();
+		if (baseLabel.isEmpty())
+			baseLabel = pCombo->itemText(i);
+		bool isDefault = pCombo->itemData(i, c_MonitorLabelDefaultRole).toBool();
+		bool isFallback = markFallback && i == fallbackIndex;
+		pCombo->setItemText(i, CBuildMonitorOptionLabel(baseLabel, isDefault, isFallback));
+	}
+}
 
 
 void FixTriStateBoxPallete(QWidget* pWidget)
@@ -255,6 +337,89 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
 	ui.cmbOnClose->addItem(tr("Hide (Run invisible in Background)"), "Hide");
 
+	const QString sameAsMainLabel = tr("Same as main");
+	const QString keepCurrentLabel = tr("Keep current monitor");
+	const QString activeMonitorLabel = tr("Active monitor");
+	const QString primaryMonitorLabel = tr("Primary monitor");
+
+	auto addWindowMonitorOptions = [&](QComboBox* pCombo, bool includeSameAsMain)
+	{
+		if (includeSameAsMain)
+			CAddMonitorComboItem(pCombo, sameAsMainLabel, -2);
+		CAddMonitorComboItem(pCombo, keepCurrentLabel, -1, true);
+		CAddMonitorComboItem(pCombo, activeMonitorLabel, -3);
+		CAddMonitorComboItem(pCombo, primaryMonitorLabel, 0);
+	};
+
+	addWindowMonitorOptions(ui.cmbLaunchMonitor, false);
+	addWindowMonitorOptions(ui.cmbNonMainLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbRecoveryLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbNotificationLaunchMonitor, true);
+	addWindowMonitorOptions(ui.cmbSupportDialogLaunchMonitor, true);
+
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, tr("Disabled"), -4);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, sameAsMainLabel, -2);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, activeMonitorLabel, -3, true);
+	CAddMonitorComboItem(ui.cmbFallbackActiveMonitor, primaryMonitorLabel, 0);
+
+	QList<QScreen*> screens = QGuiApplication::screens();
+	QList<int> windowsDisplayIds;
+	for (int i = 0; i < screens.count(); i++) {
+		int displayId = CGetDisplayNumberForScreen(screens[i]);
+		if (displayId > 0 && !windowsDisplayIds.contains(displayId))
+			windowsDisplayIds.append(displayId);
+	}
+	std::sort(windowsDisplayIds.begin(), windowsDisplayIds.end());
+
+	struct SDisplayEntry {
+		int labelNumber;
+		int monitorSettingData;
+		QString label;
+	};
+
+	QList<SDisplayEntry> displayEntries;
+	int fallbackLabelNumber = windowsDisplayIds.count() + 1;
+	for (int i = 0; i < screens.count(); i++) {
+		QScreen* screen = screens[i];
+		int displayId = CGetDisplayNumberForScreen(screen);
+
+		int displayLabelNumber = -1;
+		if (displayId > 0) {
+			int labelIndex = windowsDisplayIds.indexOf(displayId);
+			if (labelIndex >= 0)
+				displayLabelNumber = labelIndex + 1;
+		}
+		if (displayLabelNumber < 1)
+			displayLabelNumber = fallbackLabelNumber++;
+
+		QString displayName = screen->model().trimmed();
+		if (displayName.isEmpty())
+			displayName = screen->name();
+		if (displayName.isEmpty())
+			displayName = tr("Unknown Display");
+
+		QString label = tr("Display %1: %2").arg(displayLabelNumber).arg(displayName);
+		if (screen == QGuiApplication::primaryScreen())
+			label += tr(" (Primary)");
+
+		int monitorSettingData = (displayId > 0) ? displayId : (i + 1);
+		displayEntries.append({ displayLabelNumber, monitorSettingData, label });
+	}
+
+	std::sort(displayEntries.begin(), displayEntries.end(), [](const SDisplayEntry& left, const SDisplayEntry& right) {
+		if (left.labelNumber != right.labelNumber)
+			return left.labelNumber < right.labelNumber;
+		return left.label < right.label;
+	});
+
+	for (const SDisplayEntry& entry : displayEntries) {
+		CAddMonitorComboItem(ui.cmbLaunchMonitor, entry.label, entry.monitorSettingData);
+		CAddMonitorComboItem(ui.cmbNonMainLaunchMonitor, entry.label, entry.monitorSettingData);
+		CAddMonitorComboItem(ui.cmbRecoveryLaunchMonitor, entry.label, entry.monitorSettingData);
+		CAddMonitorComboItem(ui.cmbNotificationLaunchMonitor, entry.label, entry.monitorSettingData);
+		CAddMonitorComboItem(ui.cmbSupportDialogLaunchMonitor, entry.label, entry.monitorSettingData);
+	}
+
 	ui.cmbGrouping->addItem(tr("Remember previous state"), 0);
 	ui.cmbGrouping->addItem(tr("Expand all groups"), 1);
 	ui.cmbGrouping->addItem(tr("Collapse all groups"), 2);
@@ -401,6 +566,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkOverlayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkHideCore, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbGrouping, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbNonMainLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbRecoveryLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbNotificationLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbSupportDialogLaunchMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbFallbackActiveMonitor, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 
 
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
@@ -842,8 +1013,7 @@ void CSettingsWindow::showTab(const QString& Name, bool bExclusive, bool bExec)
 	}
 
 	if (bExec)
-		this->exec();
-		//theGUI->SafeExec(this);
+		theGUI->SafeExec(this);
 	else
 		CSandMan::SafeShow(this);
 }
@@ -1231,6 +1401,58 @@ void CSettingsWindow::LoadSettings()
 	ui.chkBoxOpsNotify->setChecked(theConf->GetBool("Options/AutoBoxOpsNotify", false));
 	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 	ui.chkMinimize->setChecked(theConf->GetBool("Options/MinimizeToTray", false));
+	m_WindowMonitorRawSettings.clear();
+	m_WindowMonitorResolvedFallback.clear();
+
+	int mainMonitorSetting = theConf->GetInt("Options/WindowTargetMonitor", -1);
+	int nonMainMonitorSetting = theConf->GetInt("Options/NonMainWindowTargetMonitor", -1);
+	int recoveryMonitorSetting = theConf->GetInt("Options/RecoveryWindowTargetMonitor", nonMainMonitorSetting);
+	int notificationMonitorSetting = theConf->GetInt("Options/NotificationWindowTargetMonitor", nonMainMonitorSetting);
+	int supportDialogMonitorSetting = theConf->GetInt("Options/SupportDialogWindowTargetMonitor", nonMainMonitorSetting);
+	int fallbackSetting = theConf->GetInt("Options/WindowMonitorFallback", -3);
+	if (fallbackSetting != -4 && fallbackSetting != -2 && fallbackSetting != -3 && fallbackSetting != 0)
+		fallbackSetting = -3;
+	int mainFallbackSetting = (fallbackSetting == 0 || fallbackSetting == -3) ? fallbackSetting : -1;
+	int nonMainFallbackSetting = fallbackSetting == -4 ? -1 : fallbackSetting;
+
+	QList<QScreen*> screens = QGuiApplication::screens();
+	auto loadMonitorSetting = [&](QComboBox* pCombo, int rawSetting, int fallbackValue, const QString& settingName)
+	{
+		int monitorIndex = pCombo->findData(rawSetting);
+		if (monitorIndex < 0 && rawSetting > 0 && rawSetting <= screens.count()) {
+			int migratedDisplayNumber = CGetDisplayNumberForScreen(screens[rawSetting - 1]);
+			if (migratedDisplayNumber > 0)
+				monitorIndex = pCombo->findData(migratedDisplayNumber);
+		}
+
+		bool unresolvedSetting = monitorIndex < 0;
+		if (unresolvedSetting)
+			monitorIndex = pCombo->findData(fallbackValue);
+		if (monitorIndex < 0)
+			monitorIndex = 0;
+
+		CUpdateMonitorComboFallbackLabel(pCombo, monitorIndex, unresolvedSetting);
+		pCombo->setCurrentIndex(monitorIndex);
+
+		m_WindowMonitorRawSettings.insert(settingName, rawSetting);
+		if (unresolvedSetting)
+			m_WindowMonitorResolvedFallback.insert(settingName, pCombo->itemData(monitorIndex).toInt());
+		else
+			m_WindowMonitorResolvedFallback.remove(settingName);
+	};
+
+	loadMonitorSetting(ui.cmbLaunchMonitor, mainMonitorSetting, mainFallbackSetting, "Options/WindowTargetMonitor");
+	loadMonitorSetting(ui.cmbNonMainLaunchMonitor, nonMainMonitorSetting, nonMainFallbackSetting, "Options/NonMainWindowTargetMonitor");
+	loadMonitorSetting(ui.cmbRecoveryLaunchMonitor, recoveryMonitorSetting, nonMainFallbackSetting, "Options/RecoveryWindowTargetMonitor");
+	loadMonitorSetting(ui.cmbNotificationLaunchMonitor, notificationMonitorSetting, nonMainFallbackSetting, "Options/NotificationWindowTargetMonitor");
+	loadMonitorSetting(ui.cmbSupportDialogLaunchMonitor, supportDialogMonitorSetting, nonMainFallbackSetting, "Options/SupportDialogWindowTargetMonitor");
+
+	int fallbackIndex = ui.cmbFallbackActiveMonitor->findData(fallbackSetting);
+	if (fallbackIndex < 0)
+		fallbackIndex = ui.cmbFallbackActiveMonitor->findData(-3);
+	if (fallbackIndex < 0)
+		fallbackIndex = 0;
+	ui.cmbFallbackActiveMonitor->setCurrentIndex(fallbackIndex);
 	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
 	ui.chkUseW11Style->setChecked(theConf->GetBool("Options/UseW11Style", false));
@@ -1802,6 +2024,28 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/AutoBoxOpsNotify", ui.chkBoxOpsNotify->isChecked());
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
+	auto getPersistedMonitorSetting = [&](QComboBox* pCombo, const QString& settingName)
+	{
+		int selectedValue = pCombo->currentData().toInt();
+		if (m_WindowMonitorResolvedFallback.contains(settingName) && m_WindowMonitorRawSettings.contains(settingName)) {
+			int autoResolvedFallbackValue = m_WindowMonitorResolvedFallback.value(settingName);
+			if (selectedValue == autoResolvedFallbackValue)
+				return m_WindowMonitorRawSettings.value(settingName);
+		}
+		return selectedValue;
+	};
+
+	int mainMonitorSetting = getPersistedMonitorSetting(ui.cmbLaunchMonitor, "Options/WindowTargetMonitor");
+	int nonMainMonitorSetting = getPersistedMonitorSetting(ui.cmbNonMainLaunchMonitor, "Options/NonMainWindowTargetMonitor");
+	int recoveryMonitorSetting = getPersistedMonitorSetting(ui.cmbRecoveryLaunchMonitor, "Options/RecoveryWindowTargetMonitor");
+	int notificationMonitorSetting = getPersistedMonitorSetting(ui.cmbNotificationLaunchMonitor, "Options/NotificationWindowTargetMonitor");
+	int supportDialogMonitorSetting = getPersistedMonitorSetting(ui.cmbSupportDialogLaunchMonitor, "Options/SupportDialogWindowTargetMonitor");
+	theConf->SetValue("Options/WindowTargetMonitor", mainMonitorSetting);
+	theConf->SetValue("Options/NonMainWindowTargetMonitor", nonMainMonitorSetting);
+	theConf->SetValue("Options/RecoveryWindowTargetMonitor", recoveryMonitorSetting);
+	theConf->SetValue("Options/NotificationWindowTargetMonitor", notificationMonitorSetting);
+	theConf->SetValue("Options/SupportDialogWindowTargetMonitor", supportDialogMonitorSetting);
+	theConf->SetValue("Options/WindowMonitorFallback", ui.cmbFallbackActiveMonitor->currentData().toInt());
 	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
 
 	theConf->SetValue("Options/UseW11Style", ui.chkUseW11Style->isChecked());

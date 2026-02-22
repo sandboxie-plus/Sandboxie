@@ -1341,7 +1341,7 @@ QString COptionsWindow::SelectProgram(bool bOrGroup)
 
 	progDialog.setValue("");
 
-	if (!progDialog.exec())
+	if (theGUI->SafeExec(&progDialog) != QDialog::Accepted)
 		return QString();
 
 	// Note: pressing enter adds the value to the combo list !
@@ -1557,7 +1557,7 @@ void COptionsWindow::OnAutoCompletionToggled(int state)
 void COptionsWindow::OnEditorSettings()
 {
 	CEditorSettingsWindow editorWindow(this);
-	if (editorWindow.exec() == QDialog::Accepted) {
+	if (theGUI->SafeExec(&editorWindow) == QDialog::Accepted) {
 		// Settings were saved by the dialog, now update the current UI to reflect changes
 		bool previousConsent = m_AutoCompletionConsent;
 		LoadCompletionConsent();

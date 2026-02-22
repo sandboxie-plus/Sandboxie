@@ -984,7 +984,7 @@ void COptionsWindow::OnAddOption()
 
 	progDialog.setValue("EnableMiniDump");
 
-	if (!progDialog.exec())
+	if (theGUI->SafeExec(&progDialog) != QDialog::Accepted)
 		return;
 
 	QString Name = progDialog.value(); 

@@ -177,7 +177,7 @@ void COptionsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
 	COptionsWindow OptionsWindow(pTemplate, pItem->text(1));
 	QPoint ParentPos = mapToGlobal(rect().topLeft());
 	OptionsWindow.move(ParentPos.x() + 30, ParentPos.y() + 10);
-	OptionsWindow.exec();
+	theGUI->SafeExec(&OptionsWindow);
 
 	// todo update name if it changed
 }
@@ -202,7 +202,7 @@ void COptionsWindow::OnAddTemplates()
 	pTemplate->SetText("Tmpl.Class", "Local");
 
 	COptionsWindow OptionsWindow(pTemplate, Value);
-	OptionsWindow.exec();
+	theGUI->SafeExec(&OptionsWindow);
 
 	LoadTemplates();
 }

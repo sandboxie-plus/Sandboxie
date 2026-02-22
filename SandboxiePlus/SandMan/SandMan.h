@@ -475,6 +475,8 @@ private:
 	CPopUpWindow*		m_pPopUpWindow;
 
 	bool				m_StartMenuUpdatePending;
+	quint64				m_LastCheckInternetMs;
+	bool				m_bHasInternet;
 public:
 
 	bool				m_ThemeUpdatePending;

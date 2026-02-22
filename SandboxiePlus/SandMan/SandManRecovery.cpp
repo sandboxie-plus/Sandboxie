@@ -19,7 +19,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 			pBoxEx->m_pRecoveryWnd->AddFile(FilePath, BoxPath); // Note: this may invoke close if nothing is found
 			if (pBoxEx->m_pRecoveryWnd) { // if it isn't closed, show it
 				pBoxEx->m_pRecoveryWnd->setModal(true);
-				pBoxEx->m_pRecoveryWnd->show();
+				CSandMan::SafeShow(pBoxEx->m_pRecoveryWnd);
 			}
 		}
 		else
@@ -60,7 +60,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});
-		if (pBoxEx->m_pRecoveryWnd->exec() != 1)
+		if (SafeExec(pBoxEx->m_pRecoveryWnd) != 1)
 			return false;
 	}
 	DeleteSnapshots = pRecoveryWnd->IsDeleteSnapshots();
@@ -77,7 +77,7 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox)
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});
-		pBoxEx->m_pRecoveryWnd->show();
+		CSandMan::SafeShow(pBoxEx->m_pRecoveryWnd);
 	}
 	else { // We don't want to force window in front on instant recovery 
 		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);

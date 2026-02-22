@@ -61,6 +61,7 @@
 - 修复了在沙箱中进行多次文件搜索时文件搜索栏崩溃的问题 [#5166](https://github.com/sandboxie-plus/Sandboxie/issues/5166) [#5221](https://github.com/sandboxie-plus/Sandboxie/pull/5221)
 
 
+
 ## [1.16.9 / 5.71.9] - 2026-01-02
 
 ### 修复

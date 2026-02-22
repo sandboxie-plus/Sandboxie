@@ -47,16 +47,27 @@ struct SBoxBorderWnd
 	std::vector<RECT> labelRects; // Label positions (one per window for per-box, one for main)
 };
 
-enum EBorderMode { eBorderOff = 0, eBorderNormal = 1, eBorderTitleOnly = 2, eBorderAllWindows = 3 };
+enum EBorderMode { eBorderOff = 0, eBorderNormal = 1, eBorderTitleOnly = 2, eBorderAllWindows = 3, eBorderLabelOnly = 4, eBorderAllWindowsLabelOnly = 5, eBorderTitleOnlyLabelOnly = 6 };
 
 struct SBoxBorder
 {
 	HANDLE hThread;
 	UINT_PTR dwTimerId;
 	int FastTimerStartTicks;
+	int CurrentTimerIntervalMs;
+	int AdaptiveOtherModeMs;
+	int AdaptiveGlobalAllModeCheckMs;
+	int AdaptiveSceneRefreshMs;
+	DWORD LastAllModeCheckTick;
+	bool CachedHasGlobalAllMode;
+	bool CachedGlobalAllMode;
+	ULONGLONG LastAllBordersSceneHash;
+	int LastAllBordersWindowCount;
+	DWORD LastAllBordersRenderTick;
 
 	CSandBox* pCurrentBox;
 	EBorderMode BorderMode;
+	EBorderMode CachedFocusBoxMode; // last boxMode read for pCurrentBox; detects setting changes for the same box
 
 	ULONG ActivePid;
 	HWND ActiveWnd;
@@ -79,11 +90,50 @@ struct SBoxBorder
 
 const WCHAR *Sandboxie_WindowClassName = L"Sandboxie_BorderWindow";
 
+static const int kAdaptiveFastMs = 100;
+static const int kAdaptiveMaxMs = 5000;
+static const int kFastMoveTimerMs = 10;
+
+static inline void HashMix64(ULONGLONG& hash, ULONGLONG value)
+{
+	hash ^= value + 0x9e3779b97f4a7c15ULL + (hash << 6) + (hash >> 2);
+}
+
+static inline void HashMixWString(ULONGLONG& hash, const std::wstring& value)
+{
+	for (wchar_t ch : value)
+		HashMix64(hash, (ULONGLONG)(unsigned short)ch);
+	HashMix64(hash, (ULONGLONG)value.size());
+}
+
+static inline int NextAdaptiveIntervalMs(int currentMs)
+{
+	int nextMs = currentMs * 2;
+	return (nextMs < kAdaptiveMaxMs) ? nextMs : kAdaptiveMaxMs;
+}
+
 
 void WINAPI CBoxBorder__TimerProc(HWND hwnd, UINT uMsg, UINT_PTR dwTimerID, DWORD dwTime)
 {
 	CBoxBorder* This = (CBoxBorder*)GetWindowLongPtr(hwnd, 0);
+	if (!This)
+		return;
 	This->TimerProc();
+}
+
+static void SetBorderTimerInterval(SBoxBorder* m, int intervalMs)
+{
+	if (m->CurrentTimerIntervalMs == intervalMs)
+		return;
+	if (!m->MainBorder.hWnd || !IsWindow(m->MainBorder.hWnd))
+		return;
+
+	UINT_PTR timerId = SetTimer(m->MainBorder.hWnd, m->dwTimerId, intervalMs, CBoxBorder__TimerProc);
+	if (!timerId)
+		return;
+
+	m->dwTimerId = timerId;
+	m->CurrentTimerIntervalMs = intervalMs;
 }
 
 // Calculates centered label rect for a window, clamped to border width
@@ -312,16 +362,28 @@ CBoxBorder::CBoxBorder(CSbieAPI* pApi, QObject* parent) : QObject(parent)
 	m_Api = pApi;
 
 	m = new SBoxBorder;
+	m->hThread = NULL;
 
 	m->hThread = CreateThread(NULL, 0, CBoxBorder__ThreadFunc, this, 0, NULL);
 }
 
 CBoxBorder::~CBoxBorder()
 {
-	PostThreadMessage(GetThreadId(m->hThread), WM_QUIT, 0, 0);
+	if (m->hThread)
+	{
+		DWORD threadId = GetThreadId(m->hThread);
+		if (threadId)
+			PostThreadMessage(threadId, WM_QUIT, 0, 0);
 
-	if(WaitForSingleObject(m->hThread, 10*1000) == WAIT_TIMEOUT)
-		TerminateThread(m->hThread, 0);
+		if (WaitForSingleObject(m->hThread, 10 * 1000) == WAIT_TIMEOUT)
+		{
+			TerminateThread(m->hThread, 0);
+			WaitForSingleObject(m->hThread, 1000);
+		}
+
+		CloseHandle(m->hThread);
+		m->hThread = NULL;
+	}
 
 	delete m;
 }
@@ -347,8 +409,9 @@ static HWND CreateBoxBorderWindow()
 void CBoxBorder::ThreadFunc()
 {
 	m->pCurrentBox = NULL;
-	m->MainBorder.color = RGB(0, 0, 0);
 	m->BorderMode = eBorderOff;
+	m->CachedFocusBoxMode = eBorderOff;
+	m->MainBorder.color = RGB(0, 0, 0);
 	m->MainBorder.width = 0;
 	m->MainBorder.alpha = 192; // Default to 75% opacity (192/255)
 
@@ -364,7 +427,16 @@ void CBoxBorder::ThreadFunc()
 	m->MainBorder.labelPadding = 8;
 	m->MainBorder.labelMode = -1; // Default to outside (above border)
 	m->MainBorder.labelRects.clear();
-	m->MainBorder.labelRects.push_back({ 0, 0, 0, 0 });
+	m->CurrentTimerIntervalMs = kAdaptiveFastMs;
+	m->AdaptiveOtherModeMs = kAdaptiveFastMs;
+	m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
+	m->AdaptiveSceneRefreshMs = kAdaptiveFastMs;
+	m->LastAllModeCheckTick = 0;
+	m->CachedHasGlobalAllMode = false;
+	m->CachedGlobalAllMode = false;
+	m->LastAllBordersSceneHash = 0;
+	m->LastAllBordersWindowCount = -1;
+	m->LastAllBordersRenderTick = 0;
 
 	m->ThumbWidth = GetSystemMetrics(SM_CXHTHUMB);
 	m->ThumbHeight = GetSystemMetrics(SM_CYVTHUMB);
@@ -410,10 +482,13 @@ void CBoxBorder::ThreadFunc()
 		DispatchMessage(&msg);
 	}
 
-	KillTimer(m->MainBorder.hWnd, m->dwTimerId);
+	if (m->MainBorder.hWnd && m->dwTimerId)
+		KillTimer(m->MainBorder.hWnd, m->dwTimerId);
+	m->dwTimerId = 0;
 
 	if (m->MainBorder.hWnd)
 	{
+		SetWindowLongPtr(m->MainBorder.hWnd, 0, 0);
 		DestroyWindow(m->MainBorder.hWnd);
 		m->MainBorder.hWnd = NULL;
 	}
@@ -465,8 +540,14 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 		}
 		else if (StrMode.compare("ttl", Qt::CaseInsensitive) == 0)
 			mode = eBorderTitleOnly;
+		else if (StrMode.compare("ttllbl", Qt::CaseInsensitive) == 0)
+			mode = eBorderTitleOnlyLabelOnly;
 		else if (StrMode.compare("all", Qt::CaseInsensitive) == 0)
 			mode = eBorderAllWindows;
+		else if (StrMode.compare("alllbl", Qt::CaseInsensitive) == 0)
+			mode = eBorderAllWindowsLabelOnly;
+		else if (StrMode.compare("onlbl", Qt::CaseInsensitive) == 0)
+			mode = eBorderLabelOnly;
 		// else default is eBorderNormal
 	}
 
@@ -529,15 +610,49 @@ static HRGN CreateBorderRegion(const RECT* rect, int borderWidth)
 
 void CBoxBorder::TimerProc()
 {
+	DWORD now = GetTickCount();
+
     if (m->FastTimerStartTicks && GetTickCount() - m->FastTimerStartTicks >= 1000) {
         m->FastTimerStartTicks = 0;
-        m->dwTimerId = SetTimer(m->MainBorder.hWnd, m->dwTimerId, 100, CBoxBorder__TimerProc);
+		m->AdaptiveOtherModeMs = kAdaptiveFastMs;
+		SetBorderTimerInterval(m, kAdaptiveFastMs);
 		return;
     }
 
 	// Check if any box has AllBordersMode enabled - draw borders for those boxes
-	if (!m->BoxBorderWnds.empty() || CheckGlobalAllBordersMode())
+	bool shouldDrawAllBorders = !m->BoxBorderWnds.empty();
+	if (!shouldDrawAllBorders)
 	{
+		bool shouldProbeGlobalAllMode = !m->CachedHasGlobalAllMode ||
+			(now - m->LastAllModeCheckTick >= (DWORD)m->AdaptiveGlobalAllModeCheckMs);
+
+		if (shouldProbeGlobalAllMode)
+		{
+			bool hadCachedValue = m->CachedHasGlobalAllMode;
+			bool previousGlobalAllMode = m->CachedGlobalAllMode;
+			m->CachedGlobalAllMode = CheckGlobalAllBordersMode();
+			m->CachedHasGlobalAllMode = true;
+			m->LastAllModeCheckTick = now;
+
+			if (!hadCachedValue || previousGlobalAllMode != m->CachedGlobalAllMode)
+				m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
+			else
+			{
+				int nextMs = m->AdaptiveGlobalAllModeCheckMs * 2;
+				m->AdaptiveGlobalAllModeCheckMs = (nextMs < kAdaptiveMaxMs) ? nextMs : kAdaptiveMaxMs;
+			}
+		}
+		shouldDrawAllBorders = m->CachedGlobalAllMode;
+	}
+	else
+	{
+		m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
+	}
+
+	if (shouldDrawAllBorders)
+	{
+		m->AdaptiveOtherModeMs = kAdaptiveFastMs;
+		SetBorderTimerInterval(m, kAdaptiveFastMs);
 		DrawAllSandboxedBorders();
 	}
 
@@ -571,22 +686,32 @@ void CBoxBorder::TimerProc()
 	if (pProcessBox)
 		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode);
 
-	if (m->pCurrentBox != pProcessBox.data())
+	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode)
 	{
 		m->pCurrentBox = pProcessBox.data();
+		m->CachedFocusBoxMode = boxMode;
+		// Force full re-evaluation: reset cached position so the border is redrawn
+		m->ActiveWnd = NULL;
+		m->ActivePid = 0;
 		if (!m->pCurrentBox || boxMode == eBorderOff)
 		{
 			m->BorderMode = eBorderOff;
 		}
-		else if (boxMode == eBorderAllWindows)
+		else if (boxMode == eBorderAllWindows || boxMode == eBorderAllWindowsLabelOnly)
 		{
-			// This box uses "all" mode, skip single-window border (handled by DrawAllSandboxedBorders)
+			// This box uses "all"/"alllbl" mode, skip single-window border (handled by DrawAllSandboxedBorders)
 			m->BorderMode = eBorderOff;
+			m->CachedHasGlobalAllMode = true;
+			m->CachedGlobalAllMode = true;
+			m->LastAllModeCheckTick = now;
+			m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
 		}
 		else
 		{
-			// Normal or title-only mode
-			m->BorderMode = (boxMode == eBorderTitleOnly) ? eBorderTitleOnly : eBorderNormal;
+			// Normal, title-only, label-only, or title-only-label-only mode
+			m->BorderMode = (boxMode == eBorderTitleOnly) ? eBorderTitleOnly :
+				(boxMode == eBorderTitleOnlyLabelOnly) ? eBorderTitleOnlyLabelOnly :
+				(boxMode == eBorderLabelOnly) ? eBorderLabelOnly : eBorderNormal;
 			m->MainBorder.color = boxColor;
 			m->MainBorder.width = boxWidth;
 			m->MainBorder.alpha = boxAlpha;
@@ -619,14 +744,26 @@ void CBoxBorder::TimerProc()
 
 		if (pid == m->ActivePid && hWnd == m->ActiveWnd) {
 			if (memcmp(&rect, &m->ActiveRect, sizeof(RECT)) == 0) { // sane rect
-				if (!m->TitleState || m->TitleState == (CheckMousePointer() ? 1 : -1))
+				if (!m->TitleState || m->TitleState == (CheckMousePointer() ? 1 : -1)) {
+					if (!m->FastTimerStartTicks && !shouldDrawAllBorders)
+					{
+						m->AdaptiveOtherModeMs = NextAdaptiveIntervalMs(m->AdaptiveOtherModeMs);
+						SetBorderTimerInterval(m, m->AdaptiveOtherModeMs);
+					}
 					return;
+				}
 			} 
 			else { // window is being moved, increase refresh speed
                 if (! m->FastTimerStartTicks)
-                    m->dwTimerId = SetTimer(m->MainBorder.hWnd, m->dwTimerId, 10, CBoxBorder__TimerProc);
+					SetBorderTimerInterval(m, kFastMoveTimerMs);
                 m->FastTimerStartTicks = GetTickCount();
             }
+		}
+
+		if (!m->FastTimerStartTicks && !shouldDrawAllBorders)
+		{
+			m->AdaptiveOtherModeMs = kAdaptiveFastMs;
+			SetBorderTimerInterval(m, kAdaptiveFastMs);
 		}
 
 		if (m->MainBorder.visible)
@@ -645,9 +782,9 @@ void CBoxBorder::TimerProc()
 		if (!ShouldDrawBorderForWindow(hWnd, rect, Style, &Monitor))
 			return;
 
-		if (m->BorderMode == eBorderTitleOnly) {
+		if (m->BorderMode == eBorderTitleOnly || m->BorderMode == eBorderTitleOnlyLabelOnly) {
 			const RECT* Desktop = &Monitor.rcMonitor;
-			if(!IsMounseOnTitle(hWnd, &rect, Desktop))
+			if(!IsMouseOnTitle(hWnd, &rect, Desktop))
 				return;
 		}
 
@@ -664,16 +801,28 @@ void CBoxBorder::TimerProc()
 			labelOffset = m->MainBorder.labelHeight;
 		}
 
-		// Create border frame region in window coordinates
-		RECT frameRect = { 0, labelOffset, rectWidth, labelOffset + rectHeight };
-		HRGN hrgnBorder = CreateBorderRegion(&frameRect, m->MainBorder.width);
+		// For label-only modes with no label configured, nothing to show
+		bool isLabelOnlyMode = (m->BorderMode == eBorderLabelOnly || m->BorderMode == eBorderTitleOnlyLabelOnly);
+		if (isLabelOnlyMode && (m->MainBorder.labelMode == 0 || m->MainBorder.labelHeight <= 0))
+			return;
+
+		// Create border frame region in window coordinates (empty for label-only modes)
+		HRGN hrgnBorder;
+		if (isLabelOnlyMode) {
+			hrgnBorder = CreateRectRgn(0, 0, 0, 0); // No frame; only the label rect will be added below
+		} else {
+			RECT frameRect = { 0, labelOffset, rectWidth, labelOffset + rectHeight };
+			hrgnBorder = CreateBorderRegion(&frameRect, m->MainBorder.width);
+		}
 
 		// Add label region if enabled
 		m->MainBorder.labelRects.clear();
 		if (m->MainBorder.labelMode != 0 && m->MainBorder.labelHeight > 0)
 		{
 			// Calculate label rect in screen coordinates using shared helper
-			RECT labelRectScr = CalculateLabelRect(adjustedRect, m->MainBorder.width, m->MainBorder.labelWidth, m->MainBorder.labelHeight, m->MainBorder.labelMode);
+			// In label-only modes there is no border frame, so don't offset by border width
+			int lblBorderWidth = isLabelOnlyMode ? 0 : m->MainBorder.width;
+			RECT labelRectScr = CalculateLabelRect(adjustedRect, lblBorderWidth, m->MainBorder.labelWidth, m->MainBorder.labelHeight, m->MainBorder.labelMode);
 
 			// Convert to window-relative coordinates
 			RECT labelRect;
@@ -717,7 +866,7 @@ void CBoxBorder::GetActiveWindowRect(struct HWND__* hWnd, struct tagRECT* rect)
 	GetWindowRect(hWnd, rect);
 }
 
-bool CBoxBorder::IsMounseOnTitle(struct HWND__* hWnd, struct tagRECT* rect, const struct tagRECT* Desktop)
+bool CBoxBorder::IsMouseOnTitle(struct HWND__* hWnd, struct tagRECT* rect, const struct tagRECT* Desktop)
 {
 	TITLEBARINFO TitleBarInfo;
 	TitleBarInfo.cbSize = sizeof(TITLEBARINFO);
@@ -869,9 +1018,23 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		int labelMode;
 		std::wstring boxName;
 		bool hasWindows;
+		bool labelOnly; // true = "alllbl" mode: show label but no border frame
 		std::vector<SBoxWindowInfo> windows; // Individual windows for per-window labels
 	};
 	std::map<CSandBox*, SBoxBorderData> boxBorders;
+	ULONGLONG sceneHash = 1469598103934665603ULL;
+	ULONGLONG settingsHash = 1469598103934665603ULL;
+
+	for (const auto& wnd : allWindows)
+	{
+		HashMix64(sceneHash, (ULONGLONG)(ULONG_PTR)wnd.hWnd);
+		HashMix64(sceneHash, (ULONGLONG)(LONG_PTR)wnd.rect.left);
+		HashMix64(sceneHash, (ULONGLONG)(LONG_PTR)wnd.rect.top);
+		HashMix64(sceneHash, (ULONGLONG)(LONG_PTR)wnd.rect.right);
+		HashMix64(sceneHash, (ULONGLONG)(LONG_PTR)wnd.rect.bottom);
+		HashMix64(sceneHash, (ULONGLONG)(ULONG_PTR)wnd.pBox);
+		HashMix64(sceneHash, (ULONGLONG)wnd.zOrder);
+	}
 
 	// Initialize border regions for each active box that has "all" mode enabled
 	for (const auto& wnd : allWindows)
@@ -882,11 +1045,11 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			int width, alpha, labelMode;
 			EBorderMode mode;
 
-			// Only add boxes that have "all" mode enabled
-			if (GetBoxBorderSettings(wnd.pBox, color, width, alpha, mode, labelMode) && mode == eBorderAllWindows)
+			// Only add boxes that have "all" or "alllbl" mode enabled
+			if (GetBoxBorderSettings(wnd.pBox, color, width, alpha, mode, labelMode) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			{
 				SBoxBorderData data;
-				data.hrgnBorder = CreateRectRgn(0, 0, 0, 0);
+				data.hrgnBorder = NULL;
 				data.boundingRect = { 0, 0, 0, 0 };
 				data.color = color;
 				data.width = width;
@@ -894,10 +1057,51 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				data.labelMode = labelMode;
 				data.boxName = GetBoxDisplayName((CSandBox*)wnd.pBox);
 				data.hasWindows = false;
+				data.labelOnly = (mode == eBorderAllWindowsLabelOnly);
 				boxBorders[wnd.pBox] = data;
+
+				HashMix64(settingsHash, (ULONGLONG)(ULONG_PTR)wnd.pBox);
+				HashMix64(settingsHash, (ULONGLONG)data.color);
+				HashMix64(settingsHash, (ULONGLONG)data.width);
+				HashMix64(settingsHash, (ULONGLONG)data.alpha);
+				HashMix64(settingsHash, (ULONGLONG)data.labelMode);
+				HashMix64(settingsHash, (ULONGLONG)data.labelOnly);
+				HashMixWString(settingsHash, data.boxName);
 			}
 		}
 	}
+
+	HashMix64(sceneHash, settingsHash);
+	HashMix64(sceneHash, (ULONGLONG)boxBorders.size());
+
+	if (boxBorders.empty())
+	{
+		m->CachedHasGlobalAllMode = true;
+		m->CachedGlobalAllMode = false;
+		m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
+	}
+
+	DWORD now = GetTickCount();
+	bool sceneUnchanged =
+		sceneHash == m->LastAllBordersSceneHash &&
+		(int)allWindows.size() == m->LastAllBordersWindowCount;
+
+	if (sceneUnchanged)
+	{
+		if (now - m->LastAllBordersRenderTick < (DWORD)m->AdaptiveSceneRefreshMs)
+			return;
+
+		int nextMs = m->AdaptiveSceneRefreshMs * 2;
+		m->AdaptiveSceneRefreshMs = (nextMs < kAdaptiveMaxMs) ? nextMs : kAdaptiveMaxMs;
+	}
+	else
+	{
+		m->AdaptiveSceneRefreshMs = kAdaptiveFastMs;
+	}
+
+	m->LastAllBordersSceneHash = sceneHash;
+	m->LastAllBordersWindowCount = (int)allWindows.size();
+	m->LastAllBordersRenderTick = now;
 
 	// Track covered area (all windows processed so far, from top to bottom)
 	HRGN hrgnCovered = CreateRectRgn(0, 0, 0, 0);
@@ -912,21 +1116,25 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			if (it != boxBorders.end())
 			{
 				SBoxBorderData& data = it->second;
+				if (!data.hrgnBorder)
+					data.hrgnBorder = CreateRectRgn(0, 0, 0, 0);
 
 				// Apply edge clipping and taskbar adjustment if we have monitor info
 				RECT adjustedRect = wnd.rect;
 				if (wnd.monitorInfo.cbSize != 0)
 					adjustedRect = AdjustRectToDesktop(wnd.rect, wnd.monitorInfo, data.width);
 
-				// Create border region for this window (using adjusted rect)
-				HRGN hrgnBorder = CreateBorderRegion(&adjustedRect, data.width);
+				// Create border region for this window (skip for label-only mode)
+				if (!data.labelOnly) {
+					HRGN hrgnBorder = CreateBorderRegion(&adjustedRect, data.width);
 
-				// Subtract the covered area (all windows above) from this border
-				CombineRgn(hrgnBorder, hrgnBorder, hrgnCovered, RGN_DIFF);
+					// Subtract the covered area (all windows above) from this border
+					CombineRgn(hrgnBorder, hrgnBorder, hrgnCovered, RGN_DIFF);
 
-				// Add this border to the box's combined border region
-				CombineRgn(data.hrgnBorder, data.hrgnBorder, hrgnBorder, RGN_OR);
-				DeleteObject(hrgnBorder);
+					// Add this border to the box's combined border region
+					CombineRgn(data.hrgnBorder, data.hrgnBorder, hrgnBorder, RGN_OR);
+					DeleteObject(hrgnBorder);
+				}
 
 				// Track this window for per-window labels (using adjusted rect)
 				SBoxWindowInfo winInfo;
@@ -966,7 +1174,8 @@ void CBoxBorder::DrawAllSandboxedBorders()
 
 		if (!data.hasWindows)
 		{
-			DeleteObject(data.hrgnBorder);
+			if (data.hrgnBorder)
+				DeleteObject(data.hrgnBorder);
 			// Clean up any window info (shouldn't have any, but just in case)
 			for (auto& winInfo : data.windows) {
 				if (winInfo.hrgnCoveredAbove)
@@ -983,6 +1192,8 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		{
 			SBoxBorderWnd bwnd;
 			bwnd.hWnd = CreateBoxBorderWindow();
+			if (!bwnd.hWnd)
+				continue;
 			SetWindowLongPtr(bwnd.hWnd, 0, ULONG_PTR(this));
 			bwnd.color = 0;
 			bwnd.width = 0;
@@ -1009,11 +1220,14 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			InvalidateRect(bwnd.hWnd, NULL, TRUE);
 		}
 
-		// Keep alpha in sync every refresh (region/window updates may otherwise leave stale opacity)
-		SetLayeredWindowAttributes(bwnd.hWnd, 0, data.alpha, LWA_ALPHA);
-		bwnd.alpha = data.alpha;
+		// Update alpha only when changed
+		if (bwnd.alpha != data.alpha) {
+			SetLayeredWindowAttributes(bwnd.hWnd, 0, data.alpha, LWA_ALPHA);
+			bwnd.alpha = data.alpha;
+		}
 
-		// Update label settings
+		// Update label settings (recreate font only when relevant settings change)
+		bool fontDirty = (bwnd.boxName != data.boxName || bwnd.labelMode != data.labelMode || bwnd.width != data.width);
 		bwnd.boxName = data.boxName;
 		bwnd.labelMode = data.labelMode;
 		bwnd.width = data.width;
@@ -1021,10 +1235,10 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		// Store original bounding rect values before any modifications
 		int originalBoundingLeft = data.boundingRect.left;
 		int originalBoundingTop = data.boundingRect.top;
-		int windowWidth = data.boundingRect.right - data.boundingRect.left;
 
 		// Create/update label font and calculate dimensions
-		UpdateBorderLabelFont(bwnd);
+		if (fontDirty || !bwnd.labelFont)
+			UpdateBorderLabelFont(bwnd);
 
 		// For outside mode, extend window upward to make room for label
 		if (bwnd.labelMode == -1 && bwnd.labelHeight > 0)
@@ -1052,7 +1266,9 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			for (auto& winInfo : data.windows)
 			{
 				// Calculate label rect in screen coordinates using shared helper
-				RECT labelRectScr = CalculateLabelRect(winInfo.rect, data.width, bwnd.labelWidth, bwnd.labelHeight, bwnd.labelMode);
+				// In label-only mode there is no border frame, so don't offset by border width
+				int lblBorderWidth = data.labelOnly ? 0 : data.width;
+				RECT labelRectScr = CalculateLabelRect(winInfo.rect, lblBorderWidth, bwnd.labelWidth, bwnd.labelHeight, bwnd.labelMode);
 
 				// Create label region in screen coordinates
 				HRGN hrgnLabelScr = CreateRectRgn(labelRectScr.left, labelRectScr.top, labelRectScr.right, labelRectScr.bottom);
@@ -1149,7 +1365,7 @@ bool CBoxBorder::CheckGlobalAllBordersMode()
 		int width, alpha, labelMode;
 		EBorderMode mode;
 
-		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode) && mode == eBorderAllWindows)
+		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			return true;
 	}
 

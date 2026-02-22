@@ -41,7 +41,7 @@ private:
 	struct SBoxBorder* m;
 
 	void		GetActiveWindowRect(struct HWND__* hWnd, struct tagRECT* rect);
-	bool		IsMounseOnTitle(struct HWND__* hWnd, struct tagRECT* rect, const struct tagRECT* Desktop);
+	bool		IsMouseOnTitle(struct HWND__* hWnd, struct tagRECT* rect, const struct tagRECT* Desktop);
 	bool		CheckMousePointer();
 
 	void		DrawAllSandboxedBorders();

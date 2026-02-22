@@ -97,6 +97,7 @@ typedef struct _WFP_PROCESS {
 	HANDLE ProcessId;
 	BOOLEAN LogTraffic;
 	BOOLEAN BlockInternet;
+	BOOLEAN BlockLoopback;
 	LIST NetFwRules;
 
 } WFP_PROCESS;
@@ -687,6 +688,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 	HANDLE processId = proc->pid;
 	BOOLEAN LogTraffic = FALSE;
 	BOOLEAN BlockInternet = FALSE;
+	BOOLEAN BlockLoopback = FALSE;
 	LIST NewNetFwRules, OldNetFwRules;
 	
 	List_Init(&NewNetFwRules);
@@ -708,6 +710,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 			BlockInternet = TRUE; // on roule failure we lust block everything
 			// todo: log error
 		}
+		BlockLoopback = Process_GetConf_bool(proc, L"BlockLoopback", FALSE);
 	}
 
 #ifdef _WIN64
@@ -721,6 +724,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 
 		wfp_proc->LogTraffic = LogTraffic;
 		wfp_proc->BlockInternet = BlockInternet;
+		wfp_proc->BlockLoopback = BlockLoopback;
 
 		if (ok) {
 			memcpy(&OldNetFwRules, &wfp_proc->NetFwRules, sizeof(LIST));
@@ -773,6 +777,38 @@ void WFP_DeleteProcess(PROCESS* proc)
 		WFP_Free(NULL, wfp_proc);
 	}
 }
+
+//---------------------------------------------------------------------------
+// WFP_isLoopback
+//---------------------------------------------------------------------------
+BOOLEAN WFP_isLoopback(const IP_ADDRESS* ip)
+{
+	// Check IPv6 ::1
+	int allzero = TRUE;
+	for (int i = 0; i < 15; i++) {
+		if (ip->Data[i] != 0) {
+			allzero = FALSE;
+			break;
+		}
+	}
+	if (allzero && ip->Data[15] == 1) {
+		return TRUE;
+	}
+
+	// Check IPv4-mapped IPv6 ::FFFF:127.0.0.1
+	if (ip->Data32[0] == 0 &&
+		ip->Data32[1] == 0 &&
+		ip->Data32[2] == 0xFFFF0000 &&
+		((ip->Data32[3] & 0xFF000000) == 0x7F000000)) // 127.x.x.x
+	{
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+
+
 
 //---------------------------------------------------------------------------
 // WFP_classify
@@ -840,6 +876,8 @@ void WFP_classify(
 
 		BOOLEAN log = FALSE;
 		BOOLEAN block = FALSE;
+		BOOLEAN noloop = FALSE;
+		BOOLEAN isloopback = FALSE;
 
 
 		KIRQL irql; 
@@ -857,6 +895,11 @@ void WFP_classify(
 
 			log = wfp_proc->LogTraffic;
 			block = wfp_proc->BlockInternet;
+			noloop = wfp_proc->BlockLoopback;
+			isloopback = WFP_isLoopback(&remote_ip);
+			if (isloopback && noloop) {
+				block = TRUE;
+			}
 
 			if (!block) {
 

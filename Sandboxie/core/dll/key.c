@@ -1357,6 +1357,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     ULONG mp_flags;
     BOOLEAN CopyPathCreated;
     BOOLEAN TruePathExists;
+    ACCESS_MASK ResultWow64Flags;
     PSECURITY_DESCRIPTOR *OverrideSecurityDescriptor;
     ULONG TruePathFlags;
     WCHAR* OriginalPath;
@@ -1399,8 +1400,15 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
     CopyPathCreated = FALSE;
     TruePathExists = FALSE;
+    ResultWow64Flags = DesiredAccess & (KEY_WOW64_32KEY | KEY_WOW64_64KEY);
     OriginalPath = NULL;
     TrueOpened = FALSE;
+
+    if (Dll_IsWin64 && ObjectAttributes && ObjectAttributes->RootDirectory && !ResultWow64Flags) {
+        ResultWow64Flags = Handle_GetKeyWow64Flags(ObjectAttributes->RootDirectory);
+        if (ResultWow64Flags)
+            DesiredAccess |= ResultWow64Flags;
+    }
 
     TlsData->key_NtCreateKey_lock = TRUE;
 
@@ -1945,6 +1953,10 @@ SkipReadOnlyCheck:
     if (TrueOpened && OriginalPath) {
 
         Handle_SetRelocationPath(*KeyHandle, OriginalPath);
+    }
+
+    if (NT_SUCCESS(status) && KeyHandle && *KeyHandle && ResultWow64Flags) {
+        Handle_SetKeyWow64Flags(*KeyHandle, ResultWow64Flags);
     }
 
 #undef __sys_NtCreateKeyX

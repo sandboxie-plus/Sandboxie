@@ -97,6 +97,7 @@ typedef struct _WFP_PROCESS {
 	HANDLE ProcessId;
 	BOOLEAN LogTraffic;
 	BOOLEAN BlockInternet;
+	BOOLEAN BlockPrivateNet;
 	LIST NetFwRules;
 
 } WFP_PROCESS;
@@ -140,6 +141,8 @@ void WFP_classify(
 	const FWPS_FILTER1 * filter, // FWPS_FILTER1 is the latest supported by windows 7
 	UINT64 flowContext,
 	FWPS_CLASSIFY_OUT * classifyOut);
+
+BOOLEAN WFP_isPrivateNet(const IP_ADDRESS* ip);
 
 /*	The "notifyFn" callout function for this Callout.
 This function manages setting up global resources and a worker thread
@@ -672,6 +675,40 @@ finish:
 
 
 //---------------------------------------------------------------------------
+// WFP_isPrivateNet
+//---------------------------------------------------------------------------
+BOOLEAN WFP_isPrivateNet(const IP_ADDRESS* ip)
+{
+	if (ip->Data32[0] == 0 &&
+		ip->Data32[1] == 0 &&
+		ip->Data32[2] == 0xFFFF0000)
+	{
+		UINT32 ipv4_host = ip->Data32[3];  
+
+		if ((ipv4_host & 0xFF000000) == 0x0A000000)
+			return TRUE;
+		// 172.16.0.0/12
+		if ((ipv4_host & 0xFFF00000) == 0xAC100000)
+			return TRUE;
+		// 192.168.0.0/16
+		if ((ipv4_host & 0xFFFF0000) == 0xC0A80000)
+			return TRUE;
+		// Á´Â·±¾µØ 169.254.0.0/16
+		if ((ipv4_host & 0xFFFF0000) == 0xA9FE0000)
+			return TRUE;
+		return FALSE;
+	}
+
+	if ((ip->Data[0] & 0xFE) == 0xFC)
+		return TRUE;
+
+	if (ip->Data[0] == 0xFE && (ip->Data[1] & 0xC0) == 0x80)
+		return TRUE;
+
+	return FALSE;
+}
+
+//---------------------------------------------------------------------------
 // WFP_UpdateProcess
 //---------------------------------------------------------------------------
 
@@ -687,6 +724,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 	HANDLE processId = proc->pid;
 	BOOLEAN LogTraffic = FALSE;
 	BOOLEAN BlockInternet = FALSE;
+	BOOLEAN BlockPrivateNet = FALSE;
 	LIST NewNetFwRules, OldNetFwRules;
 	
 	List_Init(&NewNetFwRules);
@@ -708,6 +746,8 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 			BlockInternet = TRUE; // on roule failure we lust block everything
 			// todo: log error
 		}
+		BlockPrivateNet = Process_GetConf_bool(proc, L"BlockPrivateNet", FALSE);
+
 	}
 
 #ifdef _WIN64
@@ -721,6 +761,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 
 		wfp_proc->LogTraffic = LogTraffic;
 		wfp_proc->BlockInternet = BlockInternet;
+		wfp_proc->BlockPrivateNet = BlockPrivateNet;
 
 		if (ok) {
 			memcpy(&OldNetFwRules, &wfp_proc->NetFwRules, sizeof(LIST));
@@ -840,7 +881,8 @@ void WFP_classify(
 
 		BOOLEAN log = FALSE;
 		BOOLEAN block = FALSE;
-
+		BOOLEAN private = FALSE;
+		BOOLEAN isprivate = FALSE;
 
 		KIRQL irql; 
 		WFP_PROCESS* wfp_proc;
@@ -857,6 +899,12 @@ void WFP_classify(
 
 			log = wfp_proc->LogTraffic;
 			block = wfp_proc->BlockInternet;
+
+			private = wfp_proc->BlockPrivateNet;
+			isprivate = WFP_isPrivateNet(&remote_ip);
+			if (isprivate && private) {
+				block = TRUE;
+			}
 
 			if (!block) {
 

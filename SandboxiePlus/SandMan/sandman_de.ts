@@ -4532,41 +4532,42 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandManTray.cpp" line="496"/>
         <source>    Alias: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Alias: %1
+</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="497"/>
         <source>    File root: %1
 </source>
-        <translation type="unfinished">    Dateiquelle: %1
+        <translation>    Dateiquelle: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="498"/>
         <source>    Registry root: %1
 </source>
-        <translation type="unfinished">    Registry-Quelle: %1
+        <translation>    Registry-Quelle: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="499"/>
         <source>    IPC root: %1
 </source>
-        <translation type="unfinished">    IPC-Quelle: %1
+        <translation>    IPC-Quelle: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="501"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished">    Diskquelle: %1
+        <translation>    Diskquelle: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="502"/>
         <source>Options:
     </source>
-        <translation type="unfinished">Optionen:
+        <translation>Optionen:
     </translation>
     </message>
     <message>
@@ -6235,52 +6236,52 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="334"/>
         <location filename="Windows/SettingsWindow.cpp" line="572"/>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="335"/>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="342"/>
         <source>Same as main</source>
-        <translation type="unfinished"></translation>
+        <translation>Gleich wie Hauptfenster</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="343"/>
         <source>Keep current monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuellen Monitor beibehalten</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>Active monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver Monitor</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="345"/>
         <source>Primary monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Primärer Monitor</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="401"/>
         <source>Unknown Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Bildschirm</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="403"/>
         <source>Display %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildschirm %1: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="405"/>
         <source> (Primary)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Primär)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="573"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dreistufiges Verhalten: nicht angehakt = niemals, teilweise angehakt = nur bei gedrückter %1-Taste (Standard), angehakt = immer.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3290"/>
@@ -8963,12 +8964,12 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
     <message>
         <location filename="Forms/OptionsWindow.ui" line="293"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn diese Option aktiviert ist, wird der farbige Rahmen ausgeblendet und nur der Name oder Alias der Sandbox als Beschriftung angezeigt. Erfordert, dass die Beschriftungsoption aktiviert ist.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Label only</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur Beschriftung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1440"/>
@@ -10053,17 +10054,17 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Windows/SettingsWindow.cpp" line="86"/>
         <location filename="Windows/SettingsWindow.cpp" line="88"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="86"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="88"/>
         <source>fallback</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückfall</translation>
     </message>
 </context>
 <context>
@@ -10426,7 +10427,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="723"/>
         <source>Show boxes in tray list:</source>
-        <translation>Zeige Boxen in der Tray-Liste:</translation>
+        <translation>Zeige Boxen in der Trayliste:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="666"/>
@@ -11201,32 +11202,32 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="844"/>
         <source>Show custom box icons in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige benutzerdefinierte Boxicons in der Trayliste</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="851"/>
         <source>Show overlay icons for boxes in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Overlayicons für Boxen in der Trayliste</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
         <source>Show box alias name instead of box name in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Aliasnamen anstelle von Boxnamen in der Trayliste</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="865"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximal angezeigte Zeichen für kompakte Tray-Aliase. Wird ignoriert, wenn die Alias-Anzeige deaktiviert ist (die Namensbegrenzung ist auf 32 festgelegt).</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="884"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dreistufiges Verhalten: nicht angehakt = niemals, teilweise angehakt = nur bei gedrückter Strg-Taste (Standard), angehakt = immer.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="887"/>
         <source>Show sandbox status as tooltip in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Sandbox-Status als Tooltip in der Trayliste</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1213"/>
@@ -11251,47 +11252,47 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1509"/>
         <source>Window Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Fensteroptionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1520"/>
         <source>Support Dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfedialog:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1533"/>
         <source>File Recovery:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiwiederherstellung:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1546"/>
         <source>Fallback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückfall:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1591"/>
         <source>Non-main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterfenster:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1607"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinweis: Spezifische Fenstereinstellungen überschreiben Unterfenstereinstellungen. Rückfall wird verwendet, wenn der Zielmonitor nicht verwendet werden kann. Wenn diese Option deaktiviert ist, fällt jedes Fenster auf sein Standardverhalten für den aktuellen Monitor zurück.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1629"/>
         <source>Window Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Fensterpositionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1636"/>
         <source>Notifications:</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1649"/>
         <source>Main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauptfenster:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>

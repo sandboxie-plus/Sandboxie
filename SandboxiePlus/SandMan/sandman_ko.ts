@@ -3775,17 +3775,17 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="17"/>
         <source>Sandboxie-Plus - Rename Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 샌드박스 이름 바꾸기</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="23"/>
         <source>When enabled, alias display is disabled for this sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션을 활성화하면 해당 샌드박스의 별칭 표시가 비활성화됩니다.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="24"/>
         <source>Hide alias input in this dialog. This preference is remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 대화 상자에서 별칭 입력을 숨깁니다. 이 설정은 저장됩니다.</translation>
     </message>
 </context>
 <context>
@@ -4501,41 +4501,42 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <location filename="SandManTray.cpp" line="496"/>
         <source>    Alias: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    별칭: %1
+</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="497"/>
         <source>    File root: %1
 </source>
-        <translation type="unfinished">    파일 루트: %1
+        <translation>    파일 루트: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="498"/>
         <source>    Registry root: %1
 </source>
-        <translation type="unfinished">    레지스트리 루트: %1
+        <translation>    레지스트리 루트: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="499"/>
         <source>    IPC root: %1
 </source>
-        <translation type="unfinished">    IPC 루트: %1
+        <translation>    IPC 루트: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="501"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished">    디스트 루트: %1
+        <translation>    디스트 루트: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="502"/>
         <source>Options:
     </source>
-        <translation type="unfinished">옵션:
+        <translation>옵션:
     </translation>
     </message>
     <message>
@@ -6775,12 +6776,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="334"/>
         <location filename="Windows/SettingsWindow.cpp" line="572"/>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="335"/>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="337"/>
@@ -6805,37 +6806,37 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="342"/>
         <source>Same as main</source>
-        <translation type="unfinished"></translation>
+        <translation>기본과 동일</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="343"/>
         <source>Keep current monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 모니터 유지</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>Active monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>활성 모니터</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="345"/>
         <source>Primary monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 모니터</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="401"/>
         <source>Unknown Display</source>
-        <translation type="unfinished"></translation>
+        <translation>알 수 없는 디스플레이</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="403"/>
         <source>Display %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>디스플레이 %1: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="405"/>
         <source> (Primary)</source>
-        <translation type="unfinished"></translation>
+        <translation> (기본)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="425"/>
@@ -6902,7 +6903,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="573"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>삼중 상태 동작: 선택 해제됨 = 절대 안 함, 부분적으로 선택됨 = %1이 유지되는 동안에만 (기본값), 선택됨 = 항상.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="747"/>
@@ -10074,12 +10075,12 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="293"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>선택하면 색상 테두리 프레임을 숨기고 샌드박스 이름이나 별칭만 레이블로 표시합니다. 레이블 옵션을 활성화해야 합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Label only</source>
-        <translation type="unfinished"></translation>
+        <translation>레이블만</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1052"/>
@@ -11258,17 +11259,17 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Windows/SettingsWindow.cpp" line="86"/>
         <location filename="Windows/SettingsWindow.cpp" line="88"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="86"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>기본값</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="88"/>
         <source>fallback</source>
-        <translation type="unfinished"></translation>
+        <translation>폴백</translation>
     </message>
 </context>
 <context>
@@ -11357,27 +11358,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="20"/>
         <source>Rename Sandbox</source>
-        <translation type="unfinished">샌드박스 이름 바꾸기</translation>
+        <translation>샌드박스 이름 바꾸기</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="31"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished">샌드박스의 새 이름을 입력하세요.</translation>
+        <translation>샌드박스의 새 이름을 입력하세요.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="38"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished">샌드박스의 새 별칭을 입력하세요.</translation>
+        <translation>샌드박스의 새 별칭을 입력하세요.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="52"/>
         <source>Disable alias</source>
-        <translation type="unfinished"></translation>
+        <translation>별칭 사용 안 함</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="59"/>
         <source>Hide alias</source>
-        <translation type="unfinished"></translation>
+        <translation>별칭 숨기기</translation>
     </message>
 </context>
 <context>
@@ -12003,32 +12004,32 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="844"/>
         <source>Show custom box icons in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>트레이 목록에 사용자 지정 박스 아이콘 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="851"/>
         <source>Show overlay icons for boxes in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>트레이 목록에 있는 박스에 오버레이 아이콘 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
         <source>Show box alias name instead of box name in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>트레이 목록에서 박스 이름 대신 박스 별칭 이름 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="865"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
-        <translation type="unfinished"></translation>
+        <translation>컴팩트 트레이 별칭의 최대 표시 문자 수. 별칭 표시가 비활성화되면 무시됩니다 (이름 제한은 32로 고정됨).</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="884"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>삼중 상태 동작:: 선택 해제 = 절대 안 함, 부분적으로 선택됨 = Ctrl 키를 누르고 있는 동안에만 (기본값), 선택됨 = 항상.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="887"/>
         <source>Show sandbox status as tooltip in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>트레이 목록에서 도구 설명으로 샌드박스 상태 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1213"/>
@@ -12053,47 +12054,47 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1509"/>
         <source>Window Options</source>
-        <translation type="unfinished"></translation>
+        <translation>창 옵션</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1520"/>
         <source>Support Dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>지원 대화상자:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1533"/>
         <source>File Recovery:</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 복구:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1546"/>
         <source>Fallback:</source>
-        <translation type="unfinished"></translation>
+        <translation>폴백:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1591"/>
         <source>Non-main:</source>
-        <translation type="unfinished"></translation>
+        <translation>비기본:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1607"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>힌트: 특정 창 설정은 비기본 설정보다 우선합니다. 폴백은 대상 모니터를 사용할 수 없을 때 사용되며, 비활성화되면 각 창은 기본 현재 모니터 동작으로 돌아갑니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1629"/>
         <source>Window Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>창 위치</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1636"/>
         <source>Notifications:</source>
-        <translation type="unfinished"></translation>
+        <translation>알림:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1649"/>
         <source>Main:</source>
-        <translation type="unfinished"></translation>
+        <translation>기본:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>

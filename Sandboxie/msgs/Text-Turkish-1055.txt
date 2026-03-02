@@ -1889,7 +1889,7 @@ Hızlı Kurtarma klasörlerinin listesine eklemek için bir klasör seçin.
 Klasör, Hızlı Kurtarma listesine eklendi.
 
 Ancak, şu anda korumalı alandaki klasörden kurtarılacak
-bir öğe bulunamadı.
+bir öge bulunamadı.
 .
 
 3728;txt;01
@@ -1897,7 +1897,7 @@ Kurtarma için bir dosya seçilmemiş.
 .
 
 3729;txt;01
-Kurtarma başarısız. Aşağıdaki öğe korumalı alan dışına taşınamadı:
+Kurtarma başarısız. Aşağıdaki öge korumalı alan dışına taşınamadı:
 .
 
 3730;txt;01
@@ -3438,6 +3438,35 @@ Sertifika geçerli değil.
 
 7993;txt;01
 Sertifika geçerli ve başarıyla uygulandı.
+.
+
+7994;txt;01
+Mevcut bir destekçi sertifikanız olmadan bir Yükseltme Anahtarı özelliğini kullanmaya çalışıyorsunuz.
+Bu tür bir anahtar, önceden geçerli bir destekçi sertifikanızın olmasını gerektirir.
+Lütfen önce mevcut sertifikanızı girin, ardından yükseltme anahtarını uygulayın.
+.
+
+7995;txt;01
+Mevcut bir destekçi sertifikanız olmadan bir Yenileme Anahtarı kullanmaya çalışıyorsunuz.
+Bu tür bir anahtar, önceden geçerli bir destekçi sertifikanızın olmasını gerektirir.
+Lütfen önce mevcut sertifikanızı girin, ardından yenileme anahtarını uygulayın.
+.
+
+7996;txt;01
+Sertifika sunucudan alınamadı.
+%1
+.
+
+7997;txt;01
+Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edin.
+.
+
+7998;txt;01
+Sunucudan boş yanıt alındı.
+.
+
+7999;txt;01
+Bilinmeyen sunucu hatası.
 .
 
 #----------------------------------------------------------------------------

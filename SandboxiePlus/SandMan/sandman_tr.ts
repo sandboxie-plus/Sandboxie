@@ -382,143 +382,143 @@ Leet (L337) Konuşma değişikliklerinin uygulanmasıyla 512 bit&apos;e çıkar 
         <location filename="BoxTransfer.cpp" line="71"/>
         <location filename="BoxTransfer.cpp" line="404"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanları Dışa Aktar</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="73"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanları İçe Aktar</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Adı</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="80"/>
         <source>Status</source>
-        <translation type="unfinished">Durum</translation>
+        <translation>Durum</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Archive Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşiv Alan Adı</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Import As</source>
-        <translation type="unfinished"></translation>
+        <translation>Farklı İçe Aktar</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>Çakışma</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Export Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Genel Ayarları Dışa Aktar</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
         <source>Import Global Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Genel Ayarları İçe Aktar</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="97"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tümünü Seç</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="101"/>
         <source>Select None</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiçbirini Seçme</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="130"/>
         <source>Running</source>
-        <translation type="unfinished">Çalışıyor</translation>
+        <translation>Çalışıyor</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="132"/>
         <source>Encrypted</source>
-        <translation type="unfinished"></translation>
+        <translation>Şifreli</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="134"/>
         <source>Empty</source>
-        <translation type="unfinished">Boş</translation>
+        <translation>Boş</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="186"/>
         <source>Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Mevcut!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="639"/>
         <source>Select file name</source>
-        <translation type="unfinished">Dosya adı seçin</translation>
+        <translation>Dosya adı seçin</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="354"/>
         <location filename="BoxTransfer.cpp" line="406"/>
         <location filename="BoxTransfer.cpp" line="640"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="unfinished">7-Zip Arşivi (*.7z);;Zip Arşivi (*.zip)</translation>
+        <translation>7-Zip Arşivi (*.7z);;Zip Arşivi (*.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="360"/>
         <location filename="BoxTransfer.cpp" line="453"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished">Dışa aktarılıyor: %1</translation>
+        <translation>Dışa aktarılıyor: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="366"/>
         <location filename="BoxTransfer.cpp" line="634"/>
         <source>7-Zip library is not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip kütüphanesi kullanılamıyor.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="385"/>
         <source>Nothing selected for export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dışa aktarılacak hiçbir şey seçilmedi.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="419"/>
         <source>Sandbox &apos;%1&apos; has running processes. Skip it?</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; numaralı korumalı alanda çalışan işlemler var. Atlansın mı?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="621"/>
         <location filename="BoxTransfer.cpp" line="771"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">İçe aktarılıyor: %1</translation>
+        <translation>İçe aktarılıyor: %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="657"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished">Arşiv açılamadı, yanlış parola mı?</translation>
+        <translation>Arşiv açılamadı, yanlış parola mı girdiniz?</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="666"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished">Arşiv açılamadı (%1)!</translation>
+        <translation>Arşiv açılamadı (%1)!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="707"/>
         <source>The archive does not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşivde herhangi bir korumalı alan verisi bulunmamaktadır.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="721"/>
         <source>Nothing selected for import.</source>
-        <translation type="unfinished"></translation>
+        <translation>İçe aktarılacak hiçbir şey seçilmedi.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="737"/>
         <source>Sandbox &apos;%1&apos; already exists. Its configuration will be overwritten. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; numaralı korumalı alan zaten mevcut. Yapılandırmanın üzerine yazılacak. Devam edilsin mi?</translation>
     </message>
 </context>
 <context>
@@ -1362,12 +1362,12 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="116"/>
         <source>Expand all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tümünü genişlet</translation>
     </message>
     <message>
         <location filename="../MiscHelpers/Common/Finder.cpp" line="122"/>
         <source>Collapse all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tümünü daralt</translation>
     </message>
 </context>
 <context>
@@ -1968,10 +1968,6 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
 </context>
 <context>
     <name>COptionsWindow</name>
-    <message>
-        <source>Always show</source>
-        <translation type="vanished">Her zaman göster</translation>
-    </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="628"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="1008"/>
@@ -2653,27 +2649,27 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
         <source>Don&apos;t show in border</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlık ile gösterme</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show within the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlık içinde göster</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
         <source>Show above the border</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenarlık üstünde göster</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="64"/>
         <source>Always show (focused window only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Her zaman göster (odaktayken)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="65"/>
         <source>Show for all windows in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Alandaki tüm pencereler için göster</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="68"/>
@@ -3369,17 +3365,17 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="17"/>
         <source>Sandboxie-Plus - Rename Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Korumalı Alanı Yeniden Adlandır</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="23"/>
         <source>When enabled, alias display is disabled for this sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkinleştirildiğinde, bu korumalı alan için takma ad görüntüleme devre dışı bırakılır.</translation>
     </message>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="24"/>
         <source>Hide alias input in this dialog. This preference is remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu iletişim kutusunda takma ad girişini gizle. Bu tercih kaydedilir.</translation>
     </message>
 </context>
 <context>
@@ -4023,10 +4019,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Sanal Diskler</translation>
     </message>
     <message>
-        <source>Import Box</source>
-        <translation type="vanished">Alanı İçe Aktar</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="838"/>
         <location filename="SandMan.cpp" line="988"/>
         <source>Suspend All Processes</source>
@@ -4053,10 +4045,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="948"/>
         <source>Disable Message Popup</source>
         <translation>Açılır Mesaj Penceresini Devre Dışı Bırak</translation>
-    </message>
-    <message>
-        <source>Import Sandbox</source>
-        <translation type="vanished">Korumalı Alanı İçe Aktar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1413"/>
@@ -4103,12 +4091,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="832"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanları İçe Aktar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="834"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanları Dışa Aktar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="913"/>
@@ -4118,12 +4106,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="1068"/>
         <source>Import Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanları İçe Aktar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1070"/>
         <source>Export Sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanları Dışa Aktar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2005"/>
@@ -5076,41 +5064,42 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <location filename="SandManTray.cpp" line="496"/>
         <source>    Alias: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Takma ad: %1
+</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="497"/>
         <source>    File root: %1
 </source>
-        <translation type="unfinished">    Dosya kökü: %1
+        <translation>    Dosya kökü: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="498"/>
         <source>    Registry root: %1
 </source>
-        <translation type="unfinished">    Kayıt kökü: %1
+        <translation>    Kayıt kökü: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="499"/>
         <source>    IPC root: %1
 </source>
-        <translation type="unfinished">    IPC kökü: %1
+        <translation>    IPC kökü: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="501"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished">    Disk kökü: %1
+        <translation>    Disk kökü: %1
 </translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="502"/>
         <source>Options:
     </source>
-        <translation type="unfinished">Seçenekler:
+        <translation>Seçenekler:
     </translation>
     </message>
     <message>
@@ -5341,10 +5330,6 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation> sahte Yönetici</translation>
     </message>
     <message>
-        <source> (%1)</source>
-        <translation type="vanished"> (%1)</translation>
-    </message>
-    <message>
         <location filename="SbieProcess.cpp" line="64"/>
         <source>MSI Installer</source>
         <translation>MSI Yükleyici</translation>
@@ -5497,10 +5482,6 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation>[Yok]</translation>
     </message>
     <message>
-        <source>Please enter a new name for the Sandbox.</source>
-        <translation type="vanished">Lütfen Korumalı Alan için yeni bir ad girin.</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="213"/>
         <location filename="Views/SbieView.cpp" line="380"/>
         <source>Delete Content</source>
@@ -5620,12 +5601,12 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <location filename="Views/SbieView.cpp" line="166"/>
         <location filename="Views/SbieView.cpp" line="337"/>
         <source>Import Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanları İçe Aktar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="257"/>
         <source>Export Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanları Dışa Aktar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="291"/>
@@ -5790,10 +5771,6 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation>Bilgileri Yenile</translation>
     </message>
     <message>
-        <source>Import Box</source>
-        <translation type="vanished">Alanı İçe Aktar</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="184"/>
         <location filename="Views/SbieView.cpp" line="357"/>
         <source>(Host) Start Menu</source>
@@ -5842,10 +5819,6 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Duplicate Box with Content</source>
         <translation>Alan Yap. İçeriğiyle Çoğalt</translation>
-    </message>
-    <message>
-        <source>Export Box</source>
-        <translation type="vanished">Alanı Dışa Aktar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="263"/>
@@ -5942,29 +5915,9 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation>Girişleri hareket ettir (negatif değerler yukarı, pozitif değerler aşağı hareket eder):</translation>
     </message>
     <message>
-        <source>Failed to open archive, wrong password?</source>
-        <translation type="vanished">Arşiv açılamadı, yanlış parola mı?</translation>
-    </message>
-    <message>
-        <source>Failed to open archive (%1)!</source>
-        <translation type="vanished">Arşiv açılamadı (%1)!</translation>
-    </message>
-    <message>
-        <source>Importing: %1</source>
-        <translation type="vanished">İçe aktarılıyor: %1</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="1266"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol or control characters.</source>
         <translation>Korumalı Alan ve Alan Grubu adlarında &apos;,()&apos; veya kontrol karakterleri kullanılamaz.</translation>
-    </message>
-    <message>
-        <source>Select file name</source>
-        <translation type="vanished">Dosya adı seçin</translation>
-    </message>
-    <message>
-        <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
-        <translation type="vanished">7-Zip Arşivi (*.7z);;Zip Arşivi (*.zip)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1522"/>
@@ -5976,18 +5929,6 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <location filename="Views/SbieView.cpp" line="1542"/>
         <source>Copying: %1</source>
         <translation>Kopyalanıyor: %1</translation>
-    </message>
-    <message>
-        <source>Exporting: %1</source>
-        <translation type="vanished">Dışa aktarılıyor: %1</translation>
-    </message>
-    <message>
-        <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="vanished">Lütfen korumalı alan için yeni bir takma ad girin.</translation>
-    </message>
-    <message>
-        <source>The entered name is not valid, do you want to set it as an alias instead?</source>
-        <translation type="vanished">Girilen ad geçerli değil, bunu bir takma ad olarak ayarlamak ister misiniz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1635"/>
@@ -6249,52 +6190,52 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <location filename="Windows/SettingsWindow.cpp" line="334"/>
         <location filename="Windows/SettingsWindow.cpp" line="572"/>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="335"/>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="342"/>
         <source>Same as main</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana pencere ile aynı</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="343"/>
         <source>Keep current monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Mevcut monitörde tut</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>Active monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkin monitör</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="345"/>
         <source>Primary monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Birincil monitör</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="401"/>
         <source>Unknown Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilinmeyen Ekran</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="403"/>
         <source>Display %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekran %1: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="405"/>
         <source> (Primary)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Birincil)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="573"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while %1 is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Üç durumlu davranış: işaretlenmemiş = asla, kısmen işaretlenmiş = yalnızca %1 basılı tutulduğu sürece (varsayılan), işaretlenmiş = her zaman.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3290"/>
@@ -7954,7 +7895,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="365"/>
         <source>Sandbox Indicator in title:</source>
-        <translation>Başlıktaki korumalı alan göstergesi:</translation>
+        <translation>Başlık göstergesi:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5570"/>
@@ -8218,7 +8159,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="211"/>
         <source>Sandboxed window border:</source>
-        <translation>Korumalı alana sahip pencere kenarlığı:</translation>
+        <translation>Pencere kenarlığı:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2806"/>
@@ -9026,17 +8967,17 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="227"/>
         <source>and/or on border</source>
-        <translation type="unfinished"></translation>
+        <translation>ve/veya kenarlıkta</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="293"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>İşaretlendiğinde, renkli kenarlığı gizler ve yalnızca korumalı alan veya alan takma adını etiket olarak gösterir. Etiket seçeneğinin etkinleştirilmesi gerekir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="296"/>
         <source>Label only</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnızca etiket</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="927"/>
@@ -9107,12 +9048,13 @@ Kısmen işaretli: Yeni oluşturulan korumalı alan belirtecine hiçbir grup ekl
         <location filename="Forms/OptionsWindow.ui" line="2124"/>
         <source>By default, Sandboxie runs processes with an UNTRUSTED integrity token for maximum isolation.
 Enabling this option uses a LOW integrity token instead, which may improve compatibility but reduces sandbox isolation and security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan olarak, Sandboxie en yüksek yalıtım için işlemleri GÜVENİLMEZ bütünlük belirteciyle çalıştırır.
+Bu seçeneği etkinleştirmek, bunun yerine DÜŞÜK bütünlük belirteci kullanır; bu ayar, uyumluluğu artırabilir ancak korumalı alan yalıtımını ve güvenliğini azaltır.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>GÜVENİLMEZ yerine DÜŞÜK bütünlük belirteci kullanın (yalıtımı azaltır).</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2719"/>
@@ -10121,17 +10063,17 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Windows/SettingsWindow.cpp" line="86"/>
         <location filename="Windows/SettingsWindow.cpp" line="88"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="86"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>varsayılan</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="88"/>
         <source>fallback</source>
-        <translation type="unfinished"></translation>
+        <translation>son çare</translation>
     </message>
 </context>
 <context>
@@ -10220,27 +10162,27 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="20"/>
         <source>Rename Sandbox</source>
-        <translation type="unfinished">Korumalı Alanı Yeniden Adlandır</translation>
+        <translation>Korumalı Alanı Yeniden Adlandır</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="31"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished">Lütfen Korumalı Alan için yeni bir ad girin.</translation>
+        <translation>Lütfen Korumalı Alan için yeni bir ad girin.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="38"/>
         <source>Please enter a new alias for the Sandbox.</source>
-        <translation type="unfinished">Lütfen korumalı alan için yeni bir takma ad girin.</translation>
+        <translation>Lütfen korumalı alan için yeni bir takma ad girin.</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="52"/>
         <source>Disable alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Takma adı kapat</translation>
     </message>
     <message>
         <location filename="Forms/RenameSandboxDialog.ui" line="59"/>
         <source>Hide alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Takma adı gizle</translation>
     </message>
 </context>
 <context>
@@ -11158,7 +11100,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2406"/>
         <source>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token</source>
         <oldsource>Add &quot;Sandboxie\All Sandboxes&quot; group to the sandboxed token (experimental)</oldsource>
-        <translation type="unfinished">Korumalı alan belirtecine &quot;Sandboxie\All Sandboxes&quot; grubunu ekle (deneysel)</translation>
+        <translation>Korumalı alan belirtecine &quot;Sandboxie\All Sandboxes&quot; grubunu ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2535"/>
@@ -11188,32 +11130,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="844"/>
         <source>Show custom box icons in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tepsi listesinde özel alan simgelerini göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="851"/>
         <source>Show overlay icons for boxes in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tepsi listesindeki alanlar için simge bindirmelerini göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="858"/>
         <source>Show box alias name instead of box name in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tepsi listesinde alan adı yerine alan takma adını göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="865"/>
         <source>Maximum displayed characters for compact tray aliases. Ignored when alias display is disabled (name limit is fixed to 32).</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompakt tepsi takma adları için görüntülenecek maksimum karakter sayısı. Takma ad görüntüleme devre dışı bırakıldığında bu değer yok sayılır. (ad sınırı sabit 32 karakterdir).</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="884"/>
         <source>Tri-state behavior: unchecked = never, partially checked = only while Ctrl is held (default), checked = always.</source>
-        <translation type="unfinished"></translation>
+        <translation>Üç durumlu davranış: işaretlenmemiş = asla, kısmen işaretlenmiş = yalnızca Ctrl tuşu basılı tutulduğu sürece (varsayılan), işaretlenmiş = her zaman.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="887"/>
         <source>Show sandbox status as tooltip in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tepsi listesinde korumalı alan durumunu ipucu olarak göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1213"/>
@@ -11238,47 +11180,47 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1509"/>
         <source>Window Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Pencere Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1520"/>
         <source>Support Dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>Destek Diyalogları:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1533"/>
         <source>File Recovery:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya Kurtarma:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1546"/>
         <source>Fallback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Son Çare:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1591"/>
         <source>Non-main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Pencereler:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1607"/>
         <source>Hint: Specific window settings override non-main settings. Fallback is used when the target monitor cannot be used; when disabled, each window falls back to its default current-monitor behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>İpucu: Belirli pencere ayarları, diğer pencere seçeneklerini geçersiz kılar. Hedef monitör kullanılamadığında son çare seçeneği kullanılır; devre dışı bırakıldığında, her pencere varsayılan geçerli monitör davranışına geri döner.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1629"/>
         <source>Window Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Pencere Konumları</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1636"/>
         <source>Notifications:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildirimler:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1649"/>
         <source>Main:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana Pencere:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2631"/>

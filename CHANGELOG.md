@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed duplicate sandbox behavior so active box aliases also receive the "Copy" suffix on duplication
 - changed tray sandbox/group ordering to mirror sandbox list mode (manual / ascending / descending), including group ordering
 - improved tray/sandbox submenu icon caching by resolving `DblClickAction` target paths (`GetCommandFile`) only on cache misses and caching `LoadWindowsIcon(path,index)` results for Run/Start menu entries, reducing repeated system icon extraction when opening menus
+- improved border rendering
 
 ### Fixed
 - fixed false "Some changes haven't been saved yet" prompt when leaving Network Options with unlisted-process network mode set to non-default

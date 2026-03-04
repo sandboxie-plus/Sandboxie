@@ -39,6 +39,11 @@ typedef HRESULT(WINAPI *P_DwmGetWindowAttribute)(HWND hWnd, DWORD dwAttribute, v
 #define DWMWA_CLOAKED 14
 #endif
 
+// Added in Windows 10 version 2004 (SDK may be older on some build machines)
+#ifndef WDA_EXCLUDEFROMCAPTURE
+#define WDA_EXCLUDEFROMCAPTURE 0x00000011
+#endif
+
 // Structure to hold border window data (used for both main and per-box borders)
 struct SBoxBorderWnd
 {
@@ -55,6 +60,7 @@ struct SBoxBorderWnd
 	int labelPadding;
 	std::vector<RECT> labelRects; // Label positions (one per window for per-box, one for main)
 	ULONGLONG sceneHash;   // per-box hash at last render; used to skip rebuilding unchanged boxes
+	bool affinityEnabled;  // last value passed to SetWindowDisplayAffinity; avoids redundant calls
 };
 
 struct SWindowRoleCacheEntry
@@ -65,6 +71,13 @@ struct SWindowRoleCacheEntry
 	bool isTransientPopup;
 	bool isMainWindow;
 	DWORD lastSeenTick;   // GetTickCount() when this entry was last accessed; used for stale eviction
+};
+
+struct SCoverBoxedWindowsCacheEntry
+{
+	bool enabled;
+	DWORD lastRefreshTick;
+	DWORD lastSeenTick;
 };
 
 enum EBorderMode { eBorderOff = 0, eBorderNormal = 1, eBorderTitleOnly = 2, eBorderAllWindows = 3, eBorderLabelOnly = 4, eBorderAllWindowsLabelOnly = 5, eBorderTitleOnlyLabelOnly = 6 };
@@ -116,6 +129,7 @@ struct SBoxBorder
 	std::unordered_map<HWND, SBoxBorderWnd> AllBorderWnds;     // key: target app window HWND
 	std::unordered_map<HWND, HWND> AllBorderWndIndex;          // key: overlay HWND -> value: target app window HWND
 	std::unordered_map<HWND, SWindowRoleCacheEntry> WindowRoleCache; // key: target HWND -> cached class/role traits
+	std::unordered_map<CSandBox*, SCoverBoxedWindowsCacheEntry> CoverBoxedWindowsCache; // key: box ptr -> cached CoverBoxedWindows flag
 };
 
 const WCHAR *Sandboxie_WindowClassName = L"Sandboxie_BorderWindow";
@@ -127,6 +141,8 @@ static const int kAdaptiveMaxEnumMs = 500;  // max backoff for window enumeratio
 static const int kFastMoveTimerMs = 10; // minimum floor for frame-aligned fast timer
 static const int kFocusRaisePulseMs = 250; // short z-raise window after click/focus change
 static const ULONGLONG kHashSeed = 1469598103934665603ULL; // hash initialiser (FNV-inspired)
+static const DWORD kCoverBoxedWindowsCacheRefreshMs = 1000;
+static const DWORD kCoverBoxedWindowsCacheStaleMs = 30000;
 
 static inline void HashMix64(ULONGLONG& hash, ULONGLONG value)
 {
@@ -201,6 +217,7 @@ static void InitializeBorderWindowData(SBoxBorderWnd& bwnd)
 	bwnd.labelPadding = 8;
 	bwnd.labelRects.clear();
 	bwnd.sceneHash = 0;
+	bwnd.affinityEnabled = false;
 }
 
 static void HideBorderWindow(SBoxBorderWnd& bwnd)
@@ -554,6 +571,8 @@ CBoxBorder::~CBoxBorder()
 	delete m;
 }
 
+static void ApplyCaptureExclusionAffinity(HWND hWnd, bool enabled);
+
 static HWND CreateBoxBorderWindow()
 {
 	// Create a border window (used for both main border and per-box borders)
@@ -566,10 +585,26 @@ static HWND CreateBoxBorderWindow()
 		NULL, NULL, NULL, NULL
 	);
 	if (hWnd) {
+		// New windows start with WDA_NONE by default; no need to set it explicitly.
 		SetLayeredWindowAttributes(hWnd, 0, 192, LWA_ALPHA);
 		::ShowWindow(hWnd, SW_HIDE);
 	}
 	return hWnd;
+}
+
+static void ApplyCaptureExclusionAffinity(HWND hWnd, bool enabled)
+{
+	if (!hWnd || !IsWindow(hWnd))
+		return;
+	if (!enabled)
+	{
+		SetWindowDisplayAffinity(hWnd, WDA_NONE);
+		return;
+	}
+
+	// WDA_EXCLUDEFROMCAPTURE is preferred; on older OS builds fallback to WDA_MONITOR.
+	if (!SetWindowDisplayAffinity(hWnd, WDA_EXCLUDEFROMCAPTURE))
+		SetWindowDisplayAffinity(hWnd, WDA_MONITOR);
 }
 
 void CBoxBorder::ThreadFunc()
@@ -772,6 +807,43 @@ static std::wstring GetBoxDisplayName(CSandBox* pBox)
 	return pBox->GetName().toStdWString();
 }
 
+static bool IsCoverBoxedWindowsEnabled(SBoxBorder* m, CSandBox* pBox, DWORD nowTick)
+{
+	if (!m || !pBox)
+		return false;
+
+	auto it = m->CoverBoxedWindowsCache.find(pBox);
+	if (it != m->CoverBoxedWindowsCache.end())
+	{
+		it->second.lastSeenTick = nowTick;
+		if (nowTick - it->second.lastRefreshTick < kCoverBoxedWindowsCacheRefreshMs)
+			return it->second.enabled;
+
+		it->second.enabled = pBox->GetBool("CoverBoxedWindows", false);
+		it->second.lastRefreshTick = nowTick;
+		return it->second.enabled;
+	}
+
+	SCoverBoxedWindowsCacheEntry entry = {};
+	entry.enabled = pBox->GetBool("CoverBoxedWindows", false);
+	entry.lastRefreshTick = nowTick;
+	entry.lastSeenTick = nowTick;
+	m->CoverBoxedWindowsCache.insert(std::make_pair(pBox, entry));
+
+	if (m->CoverBoxedWindowsCache.size() > 512)
+	{
+		for (auto cacheIt = m->CoverBoxedWindowsCache.begin(); cacheIt != m->CoverBoxedWindowsCache.end(); )
+		{
+			if (nowTick - cacheIt->second.lastSeenTick > kCoverBoxedWindowsCacheStaleMs)
+				cacheIt = m->CoverBoxedWindowsCache.erase(cacheIt);
+			else
+				++cacheIt;
+		}
+	}
+
+	return entry.enabled;
+}
+
 static HRGN CreateBorderRegion(const RECT* rect, int borderWidth)
 {
 	// Create outer rectangle region
@@ -834,6 +906,7 @@ void CBoxBorder::TimerProc()
 
 			HideBorderWindow(m->MainBorder);
 			DestroyPerBoxBorderWindows(m);
+			m->CoverBoxedWindowsCache.clear();
 
 			// Mark the cache as stale so the global-all-mode probe fires immediately
 			// on the first active tick after idle, avoiding the ~5 s backoff delay.
@@ -921,6 +994,7 @@ void CBoxBorder::TimerProc()
 	GetWindowThreadProcessId(hWnd, &pid);
 
 	CSandBoxPtr pProcessBox = m_Api->GetBoxByProcessId(pid);
+	bool coverBoxedWindows = pProcessBox && IsCoverBoxedWindowsEnabled(m, pProcessBox.data(), now);
 
 	// Get border settings for the focused window's box
 	COLORREF boxColor;
@@ -983,6 +1057,12 @@ void CBoxBorder::TimerProc()
 		if (pid == m->ActivePid && hWnd == m->ActiveWnd) {
 			if (RectEquals(rect, m->ActiveRect)) {
 				if (!m->TitleState || m->TitleState == (CheckMousePointer() ? 1 : -1)) {
+					// Affinity may have changed even if geometry is unchanged; apply now so we don't
+					// need to wait for a move/resize event to pick up a CoverBoxedWindows change.
+					if (coverBoxedWindows != m->MainBorder.affinityEnabled) {
+						ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, coverBoxedWindows);
+						m->MainBorder.affinityEnabled = coverBoxedWindows;
+					}
 					if (!m->FastTimerStartTicks && !shouldDrawAllBorders)
 					{
 						m->AdaptiveOtherModeMs = NextAdaptiveIntervalMs(m->AdaptiveOtherModeMs);
@@ -1112,6 +1192,8 @@ void CBoxBorder::TimerProc()
 		// pulse after foreground changed.
 		if (!SetWindowRgn(m->MainBorder.hWnd, hrgnBorder, FALSE))
 			DeleteObject(hrgnBorder); // SetWindowRgn only owns the region on success
+		ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, coverBoxedWindows);
+		m->MainBorder.affinityEnabled = coverBoxedWindows;
 		bool focusRaisePulseActive = m->FocusRaisePulseStartTick &&
 			(now - m->FocusRaisePulseStartTick <= (DWORD)kFocusRaisePulseMs);
 		bool raiseDuringInteraction = focusRaisePulseActive;
@@ -1564,6 +1646,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 
 		if (eligible)
 		{
+			bool applyCaptureAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
 			enabledWindowCount++;
 			activeTargets.insert(wnd.hWnd);
 			bool overlayAvailable = true;
@@ -1635,6 +1718,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(perWindowHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
 				HashMixWString(perWindowHash, style.boxName);
 				HashMix64(perWindowHash, rollingCoverageHash);
+				HashMix64(perWindowHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL)); // cover state change invalidates skip-rebuild
 
 				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != style.labelMode || bwnd.width != style.width);
 				bwnd.boxName = style.boxName;
@@ -1736,6 +1820,8 @@ void CBoxBorder::DrawAllSandboxedBorders()
 						{
 							if (!SetWindowRgn(bwnd.hWnd, hrgnOverlay, FALSE))
 								DeleteObject(hrgnOverlay);
+							ApplyCaptureExclusionAffinity(bwnd.hWnd, applyCaptureAffinity);
+							bwnd.affinityEnabled = applyCaptureAffinity;
 
 							// Keep steady-state z-order unless short focus pulse is active for this target.
 							bool raiseThisWindow = focusRaisePulseActive && (wnd.hWnd == focusedWnd);
@@ -1790,8 +1876,10 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				else
 				{
 					// Hash unchanged: only optional focus pulse raise.
-					if (focusRaisePulseActive && (wnd.hWnd == focusedWnd))
+					if (focusRaisePulseActive && (wnd.hWnd == focusedWnd)) {
+						ApplyCaptureExclusionAffinity(bwnd.hWnd, applyCaptureAffinity);
 						SetWindowPos(bwnd.hWnd, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+					}
 				}
 				}
 			}

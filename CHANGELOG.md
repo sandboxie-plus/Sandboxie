@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.3 / 5.72.3] - 2026-02-??
+## [1.17.3 / 5.72.3] - 2026-03-??
 
 ### Added
 - added configurable window location settings to control which monitor main, non-main, file recovery, and notification windows open on, including a selectable fallback mode. [#4536](https://github.com/sandboxie-plus/Sandboxie/issues/4536) [#5238](https://github.com/sandboxie-plus/Sandboxie/pull/5238)

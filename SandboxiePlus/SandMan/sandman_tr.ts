@@ -5062,6 +5062,21 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
     </message>
     <message>
         <location filename="SandManTray.cpp" line="496"/>
+        <source>No pinned sandboxes to show.</source>
+        <translation>Gösterilecek sabitlenmiş alan yok.</translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="304"/>
+        <source>No active or pinned sandboxes to show.</source>
+        <translation>Gösterilecek etkin veya sabitlenmiş alan yok.</translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="305"/>
+        <source>No sandboxes to show.</source>
+        <translation>Gösterilecek alan yok.</translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="508"/>
         <source>    Alias: %1
 </source>
         <translation>    Takma ad: %1
@@ -9054,7 +9069,7 @@ Bu seçeneği etkinleştirmek, bunun yerine DÜŞÜK bütünlük belirteci kulla
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>Use LOW integrity token instead of UNTRUSTED (reduces isolation)</source>
-        <translation>GÜVENİLMEZ yerine DÜŞÜK bütünlük belirteci kullanın (yalıtımı azaltır).</translation>
+        <translation>GÜVENİLMEZ yerine DÜŞÜK bütünlük belirteci kullanılsın (yalıtımı azaltır)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2719"/>

@@ -242,6 +242,8 @@ static int WSA_WSARecvFrom(
 
 static int WSA_closesocket(SOCKET s);
 
+static int WSA_IsLocalLoop(const short* addr, int addrlen);
+
 
 BOOLEAN socks5_handshake(SOCKET s, BOOLEAN auth, WCHAR login[256], WCHAR pass[256]);
 
@@ -382,6 +384,8 @@ typedef struct _WSA_SOCK {
 
 static HASH_MAP   WSA_SockMap;
 
+BOOLEAN WSA_isBlockLocalLoop = FALSE;
+
 //---------------------------------------------------------------------------
 // Debug helpers (controlled by NetFwTrace setting)
 //---------------------------------------------------------------------------
@@ -454,7 +458,7 @@ _FX int WSA_WSAStartup(
 
         WSA_BindIP = TRUE;
     }
-
+	WSA_isBlockLocalLoop = SbieApi_QueryConfBool(NULL, L"BlockLocalLoop", FALSE);
     //
     // Init helper map if needed
     //
@@ -1076,6 +1080,41 @@ _FX void WSA_DumpIP(ADDRESS_FAMILY af, IP_ADDRESS* pIP, wchar_t* pStr)
         Sbie_snwprintf(pStr, 5 + 10, L"; %d: ???", af);
 }
 
+//---------------------------------------------------------------------------
+// WSA_IsLocalLoop
+//---------------------------------------------------------------------------
+static _FX ULONG WSA_htonl(ULONG x) {
+	return ((x & 0x000000FF) << 24) |
+		((x & 0x0000FF00) << 8) |
+		((x & 0x00FF0000) >> 8) |
+		((x & 0xFF000000) >> 24);
+}
+
+_FX int WSA_IsLocalLoop(const short* addr, int addrlen) {
+	if (!WSA_isBlockLocalLoop || !addr || addrlen < sizeof(USHORT) * 2)
+		return 0;
+
+	IP_ADDRESS ip;
+	if (!WSA_GetIP(addr, addrlen, &ip))
+		return 0;
+
+	// 判断是否为 IPv4-mapped IPv6 的 127.x.x.x
+	if (ip.Data32[0] == 0 &&
+		ip.Data32[1] == 0 &&
+		ip.Data32[2] == WSA_htonl(0xFFFF) &&
+		(ip.Data[12] == 127)) {
+		return 1;
+	}
+
+	// 判断是否为 IPv6 回环地址 ::1
+	static const BYTE loop6[16] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 };
+	if (memcmp(ip.Data, loop6, 16) == 0) {
+		return 1;
+	}
+
+	return 0;
+}
+
 
 //---------------------------------------------------------------------------
 // WSA_IsBlockedTraffic
@@ -1084,7 +1123,10 @@ _FX void WSA_DumpIP(ADDRESS_FAMILY af, IP_ADDRESS* pIP, wchar_t* pStr)
 
 _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 {
-
+	if (WSA_isBlockLocalLoop && WSA_IsLocalLoop(addr, addrlen)) {
+		SetLastError(WSAECONNREFUSED);
+		return 1;
+	}
     if (WSA_FwList.count > 0 && addrlen >= sizeof(USHORT) * 2 && addr && (addr[0] == AF_INET || addr[0] == AF_INET6)) {
 
         USHORT port = _ntohs(addr[1]);
@@ -1291,6 +1333,9 @@ _FX int WSA_connect(
 {
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
+	if (WSA_isBlockLocalLoop && WSA_IsLocalLoop(name, namelen)) {
+		 return SOCKET_ERROR;
+	}
 
     // If BindIP is configured, try to bind the socket to the configured adapter
     // When StrictBindIP=n, we allow connections even if adapter is unavailable

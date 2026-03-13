@@ -5061,22 +5061,19 @@ Lütfen Sandboxie için herhangi bir güncelleme olup olmadığını denetleyin.
         <translation> - Korumalı Alan İçeriğini Silme</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="496"/>
         <source>No pinned sandboxes to show.</source>
-        <translation>Gösterilecek sabitlenmiş alan yok.</translation>
+        <translation type="vanished">Gösterilecek sabitlenmiş alan yok.</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="304"/>
         <source>No active or pinned sandboxes to show.</source>
-        <translation>Gösterilecek etkin veya sabitlenmiş alan yok.</translation>
+        <translation type="vanished">Gösterilecek etkin veya sabitlenmiş alan yok.</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="305"/>
         <source>No sandboxes to show.</source>
-        <translation>Gösterilecek alan yok.</translation>
+        <translation type="vanished">Gösterilecek alan yok.</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="508"/>
+        <location filename="SandManTray.cpp" line="496"/>
         <source>    Alias: %1
 </source>
         <translation>    Takma ad: %1

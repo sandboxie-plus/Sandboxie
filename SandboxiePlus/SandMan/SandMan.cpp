@@ -3693,11 +3693,11 @@ void CSandMan::OnSandBoxAction()
 	QAction* pAction = qobject_cast<QAction*>(sender());
 
 	if (pAction == m_pNewBox)
-		GetBoxView()->AddNewBox();
+		GetBoxView()->AddNewBoxAction();
 	else if (pAction == m_pNewGroup)
-		GetBoxView()->AddNewGroup();
+		GetBoxView()->AddNewGroupAction();
 	else if (pAction == m_pImportBoxes)
-		ImportMultiBoxes(this);
+		GetBoxView()->ImportBoxesAction();
 	else if (pAction == m_pExportBoxes)
 		ExportMultiBoxes(this);
 	else if (pAction == m_pRunBoxed)

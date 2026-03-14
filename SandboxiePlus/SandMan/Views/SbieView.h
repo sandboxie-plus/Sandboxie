@@ -54,7 +54,10 @@ public:
 	void						OnDoubleClicked(const CSandBoxPtr &pBox);
 
 	virtual QString				AddNewBox(bool bAlowTemp = false);
+	virtual void				AddNewBoxAction();
 	virtual QString				AddNewGroup();
+	virtual void				AddNewGroupAction();
+	virtual void				ImportBoxesAction();
 	virtual bool				TestNameAndWarn(const QString& Name);
 	virtual void				SelectBox(const QString& Name);
 	virtual void				SelectBoxes(const QStringList& Names);
@@ -149,6 +152,7 @@ private:
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
 	QStringList				GetSelectedBoxNames();
 	void					RestoreBoxSelectionLater(const QStringList& Names, int Delay = 50);
+	void					RestoreNameSelectionLater(const QStringList& Names, int Delay = 50);
 
 	QMenu*					GetMenuFolder(const QString& Folder, QMenu* pParent, QMap<QString, QMenu*>& Folders);
 
@@ -250,6 +254,7 @@ private:
 	bool					m_MoveBatchPending;
 	bool					m_MoveBatchChanged;
 	QStringList				m_MoveBatchFocusBoxes;
+	QStringList				m_MoveBatchFocusNames;
 
 	QList<CSandBoxPtr>		m_CurSandBoxes;
 	QList<CBoxedProcessPtr>	m_CurProcesses;

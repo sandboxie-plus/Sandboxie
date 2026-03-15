@@ -38,6 +38,7 @@ Name: "vietnamese"; MessagesFile: "isl\Vietnamese.isl"
 Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
 ;Name: "slovak"; MessagesFile: "compiler:Languages\Slovak.isl"
 ;Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
+Name: "indonesian"; MessagesFile: "compiler:Languages\Indonesian.isl"
 
 
 [CustomMessages]
@@ -533,3 +534,28 @@ vietnamese.UninstallTaskLabel4=Xoá &tập tin cấu hình%nChọn tùy chọn n
 vietnamese.UninstallTaskLabel5=Xóa các tệp cấu hình và các &Sandbox%nChọn tùy chọn này để xóa tất cả các tệp cấu hình và Sandbox, bao gồm cả thư mục Sandbox nằm trong đường dẫn tùy chỉnh với FileRootPath.
 vietnamese.RefreshBuild=Tải xuống Templates.ini mới nhất và các bản dịch
 vietnamese.Qt6Win10Unsupported=Khung Qt 6 không hỗ trợ các phiên bản Windows 10 1507, 1511 hoặc 1607.%nVui lòng cập nhật lên Windows 10 1809 (bản dựng 17763) hoặc mới hơn.%nXem vấn đề #5079 để biết chi tiết:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nBạn vẫn muốn tiếp tục cài đặt không?
+
+; Indonesian
+indonesian.AddSandboxedMenu=Tambahkan "Jalankan di Sandbox" ke menu konteks
+indonesian.AddSandboxedBrowser=Tambahkan pintasan desktop untuk memulai browser Web di bawah Sandboxie
+indonesian.SandboxieStartMenu1=Jalankan program apa pun di dalam sandbox
+indonesian.SandboxieStartMenu2=Jalankan browser Web di dalam sandbox
+indonesian.SandboxieStartMenu3=Menu Mulai Sandboxie
+indonesian.SandboxedBrowser=Browser Web di dalam Sandbox
+indonesian.CustomPageLabel1=Pilih Tipe Instalasi
+indonesian.CustomPageLabel2=Metode instalasi yang diinginkan
+indonesian.CustomPageLabel3=Pilih mode instalasi
+indonesian.CustomPageInstallMode=Instal {#MyAppName} di komputer ini
+indonesian.CustomPageUpgradeMode=Perbarui instalasi {#MyAppName} yang sudah ada
+indonesian.CustomPagePortableMode=Ekstrak semua file ke direktori untuk penggunaan portabel
+indonesian.RequiresWin7OrLater=Sandboxie-Plus memerlukan Windows 7 atau versi yang lebih baru.
+indonesian.ClassicFound=Instalasi Sandboxie Classic terdeteksi, program tersebut harus dihapus (uninstal) terlebih dahulu. Apakah Anda ingin menghapusnya sekarang?
+indonesian.RunSandboxedMenu=Jalankan di &Sandbox
+indonesian.UninstallTaskLabel1=Pilih Tipe Uninstal
+indonesian.UninstallTaskLabel2=Bagaimana Anda ingin menghapus Sandboxie-Plus?
+indonesian.UninstallTaskLabel3=&Simpan file konfigurasi dan sandbox%nIni adalah opsi yang paling direkomendasikan jika Anda berencana untuk menginstal ulang Sandboxie-Plus dengan tetap mempertahankan file konfigurasi dan sandbox Anda.
+indonesian.UninstallTaskLabel4=Hapus file &konfigurasi%nPilih opsi ini untuk menghapus file konfigurasi Sandboxie.ini dan Sandboxie-Plus.ini tanpa mengubah sandbox yang ada.
+indonesian.UninstallTaskLabel5=Hapus file konfigurasi dan &sandbox%nPilih opsi ini untuk menghapus semua file konfigurasi dan sandbox, termasuk folder Sandbox yang terletak di jalur khusus dengan FileRootPath.
+indonesian.RefreshBuild=Unduh Templates.ini dan terjemahan terbaru
+indonesian.InstallImDisk=Instal (atau Perbarui) driver ImDisk 3.0 (untuk RamDisk dan Sandbox Terenkripsi)
+indonesian.Qt6Win10Unsupported=Framework Qt 6 tidak mendukung Windows 10 versi 1507, 1511, atau 1607.%nSilakan perbarui ke Windows 10 1809 (build 17763) atau yang lebih baru.%nLihat isu #5079 untuk detail selengkapnya:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nApakah Anda tetap ingin melanjutkan instalasi?

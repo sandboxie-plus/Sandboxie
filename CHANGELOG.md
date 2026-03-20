@@ -16,6 +16,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - "Show box alias name instead of box name in tray" (`Options/TrayUseAlias`) — displays the configured alias/display name in both compact and regular tray menus.
   - "Show sandbox status as tooltip in tray list" (`Options/TrayStatusTip`) now supports tri-state behavior: unchecked = never, partial = while Ctrl or Shift is held (default), checked = always.
   - "Show overlay icons for boxes in tray list" (`Options/TrayOverlayIcons`) — shows the same box-state overlays used in the main sandbox list (no-force, disk image mounted/unmounted, RAM disk, auto-delete) on tray icons in both the compact widget and the regular context menu.
+- added border capture exclusion via `HideBordersFromCapture`
+  - keeps border frames and labels out of screenshots and screen recordings; defaults to `CoverBoxedWindows`
+- added border label width and taskbar clipping options
+  - configurable via `BorderColor` label width and `BorderExcludeTaskbar`
 
 ### Changed
 - reduced constant GUI CPU usage by caching custom `BoxIcon` resolution in the sandbox model instead of reloading icon resources on refresh

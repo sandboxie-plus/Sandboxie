@@ -51,6 +51,7 @@ struct SBoxBorderWnd
 	COLORREF color;
 	int width;
 	int alpha;
+	int labelBorderWidth;
 	bool visible;
 	std::wstring boxName;
 	HFONT labelFont;
@@ -208,6 +209,7 @@ static void InitializeBorderWindowData(SBoxBorderWnd& bwnd)
 	bwnd.color = 0;
 	bwnd.width = 0;
 	bwnd.alpha = 0;
+	bwnd.labelBorderWidth = 0;
 	bwnd.visible = false;
 	bwnd.boxName.clear();
 	bwnd.labelFont = NULL;
@@ -344,7 +346,7 @@ static void UpdateBorderLabelFont(SBoxBorderWnd& bwnd, HWND hWndForDC = NULL)
 	// size on every monitor regardless of the Windows scaling factor.
 	int dpi = GetDeviceCaps(hdc, LOGPIXELSY);
 	if (dpi <= 0) dpi = 96;
-	int fontHeight = MulDiv(bwnd.width + 8, dpi, 96);
+	int fontHeight = MulDiv(bwnd.labelBorderWidth + 8, dpi, 96);
 
 	bwnd.labelFont = CreateFontW(fontHeight, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
@@ -453,6 +455,90 @@ static RECT AdjustRectToDesktop(const RECT& rect, const MONITORINFO& monitor, in
 		adjBottom -= 1;
 
 	return { adjLeft, adjTop, adjRight, adjBottom };
+}
+
+// Add a rectangle to an aggregate region using OR composition.
+static void AddRectToRegion(HRGN hrgnAggregate, const RECT& rect)
+{
+	if (!hrgnAggregate)
+		return;
+
+	if (rect.right <= rect.left || rect.bottom <= rect.top)
+		return;
+
+	HRGN hrgnPart = CreateRectRgn(rect.left, rect.top, rect.right, rect.bottom);
+	if (!hrgnPart)
+		return;
+
+	if (CombineRgn(hrgnAggregate, hrgnAggregate, hrgnPart, RGN_OR) == ERROR)
+	{
+		// On failure the destination region becomes undefined - reset to empty.
+		CombineRgn(hrgnAggregate, hrgnPart, hrgnPart, RGN_DIFF);
+	}
+
+	DeleteObject(hrgnPart);
+}
+
+struct STaskbarOcclusionBuildCtx
+{
+	HRGN hrgnCovered;
+};
+
+static BOOL CALLBACK BuildTaskbarOcclusionEnumProc(HMONITOR hMonitor, HDC, LPRECT, LPARAM lParam)
+{
+	STaskbarOcclusionBuildCtx* ctx = reinterpret_cast<STaskbarOcclusionBuildCtx*>(lParam);
+	if (!ctx || !ctx->hrgnCovered)
+		return TRUE;
+
+	MONITORINFO monitor = {};
+	monitor.cbSize = sizeof(MONITORINFO);
+	if (!GetMonitorInfo(hMonitor, &monitor))
+		return TRUE;
+
+	const RECT& mon = monitor.rcMonitor;
+	const RECT& work = monitor.rcWork;
+
+	// Left appbar strip.
+	if (work.left > mon.left)
+	{
+		RECT r = { mon.left, mon.top, work.left, mon.bottom };
+		AddRectToRegion(ctx->hrgnCovered, r);
+	}
+
+	// Right appbar strip.
+	if (work.right < mon.right)
+	{
+		RECT r = { work.right, mon.top, mon.right, mon.bottom };
+		AddRectToRegion(ctx->hrgnCovered, r);
+	}
+
+	// Top appbar strip.
+	if (work.top > mon.top)
+	{
+		RECT r = { mon.left, mon.top, mon.right, work.top };
+		AddRectToRegion(ctx->hrgnCovered, r);
+	}
+
+	// Bottom appbar strip (classic taskbar area).
+	if (work.bottom < mon.bottom)
+	{
+		RECT r = { mon.left, work.bottom, mon.right, mon.bottom };
+		AddRectToRegion(ctx->hrgnCovered, r);
+	}
+
+	return TRUE;
+}
+
+// Build occlusion for monitor work-area exclusions (taskbar / appbars) and merge into the
+// cumulative coverage region, so overlay border fragments are clipped in those areas.
+static void MergeTaskbarOcclusionIntoCoveredRegion(HRGN hrgnCovered)
+{
+	if (!hrgnCovered)
+		return;
+
+	STaskbarOcclusionBuildCtx ctx = {};
+	ctx.hrgnCovered = hrgnCovered;
+	EnumDisplayMonitors(NULL, NULL, BuildTaskbarOcclusionEnumProc, reinterpret_cast<LPARAM>(&ctx));
 }
 
 LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -728,7 +814,7 @@ void CBoxBorder::ThreadFunc()
 	}
 }
 
-static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode)
+static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode, int& labelWidth)
 {
 	// Default values
 	color = RGB(255, 255, 0);
@@ -736,6 +822,7 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 	alpha = 192;
 	mode = eBorderNormal;
 	labelMode = 1; // Default to inside
+	labelWidth = 0;
 
 	if (!pBox)
 		return false;
@@ -791,6 +878,15 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 		else // "in" or default
 			labelMode = 1;
 	}
+
+	if (BorderCfg.count() >= 6) {
+		labelWidth = BorderCfg.at(5).toInt();
+		if (labelWidth <= 0)
+			labelWidth = width;
+	}
+
+	if (labelWidth <= 0)
+		labelWidth = width;
 
 	return true;
 }
@@ -995,13 +1091,14 @@ void CBoxBorder::TimerProc()
 
 	CSandBoxPtr pProcessBox = m_Api->GetBoxByProcessId(pid);
 	bool coverBoxedWindows = pProcessBox && IsCoverBoxedWindowsEnabled(m, pProcessBox.data(), now);
+	bool hideBordersFromCapture = pProcessBox ? pProcessBox->GetBool("HideBordersFromCapture", coverBoxedWindows, true) : coverBoxedWindows;
 
 	// Get border settings for the focused window's box
 	COLORREF boxColor;
-	int boxWidth, boxAlpha, boxLabelMode;
+	int boxWidth, boxAlpha, boxLabelMode, boxLabelWidth;
 	EBorderMode boxMode = eBorderOff;
 	if (pProcessBox)
-		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode);
+		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode, boxLabelWidth);
 
 	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode)
 	{
@@ -1031,6 +1128,7 @@ void CBoxBorder::TimerProc()
 				(boxMode == eBorderLabelOnly) ? eBorderLabelOnly : eBorderNormal;
 			m->MainBorder.color = boxColor;
 			m->MainBorder.width = boxWidth;
+			m->MainBorder.labelBorderWidth = boxLabelWidth;
 			m->MainBorder.alpha = boxAlpha;
 			m->MainBorder.labelMode = boxLabelMode;
 
@@ -1058,10 +1156,10 @@ void CBoxBorder::TimerProc()
 			if (RectEquals(rect, m->ActiveRect)) {
 				if (!m->TitleState || m->TitleState == (CheckMousePointer() ? 1 : -1)) {
 					// Affinity may have changed even if geometry is unchanged; apply now so we don't
-					// need to wait for a move/resize event to pick up a CoverBoxedWindows change.
-					if (coverBoxedWindows != m->MainBorder.affinityEnabled) {
-						ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, coverBoxedWindows);
-						m->MainBorder.affinityEnabled = coverBoxedWindows;
+					// need to wait for a move/resize event to pick up a CoverBoxedWindows/HideBordersFromCapture change.
+					if (hideBordersFromCapture != m->MainBorder.affinityEnabled) {
+						ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, hideBordersFromCapture);
+						m->MainBorder.affinityEnabled = hideBordersFromCapture;
 					}
 					if (!m->FastTimerStartTicks && !shouldDrawAllBorders)
 					{
@@ -1192,8 +1290,8 @@ void CBoxBorder::TimerProc()
 		// pulse after foreground changed.
 		if (!SetWindowRgn(m->MainBorder.hWnd, hrgnBorder, FALSE))
 			DeleteObject(hrgnBorder); // SetWindowRgn only owns the region on success
-		ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, coverBoxedWindows);
-		m->MainBorder.affinityEnabled = coverBoxedWindows;
+		ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, hideBordersFromCapture);
+		m->MainBorder.affinityEnabled = hideBordersFromCapture;
 		bool focusRaisePulseActive = m->FocusRaisePulseStartTick &&
 			(now - m->FocusRaisePulseStartTick <= (DWORD)kFocusRaisePulseMs);
 		bool raiseDuringInteraction = focusRaisePulseActive;
@@ -1370,6 +1468,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		int width;
 		int alpha;
 		int labelMode;
+		int labelWidth;
 		std::wstring boxName;
 	};
 
@@ -1542,11 +1641,12 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		style.width = 6;
 		style.alpha = 192;
 		style.labelMode = 1;
+		style.labelWidth = style.width;
 
 		if (pBox)
 		{
 			EBorderMode mode = eBorderOff;
-			if (GetBoxBorderSettings(pBox, style.color, style.width, style.alpha, mode, style.labelMode) &&
+			if (GetBoxBorderSettings(pBox, style.color, style.width, style.alpha, mode, style.labelMode, style.labelWidth) &&
 				(mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			{
 				style.enabled = true;
@@ -1558,6 +1658,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(settingsHash, (ULONGLONG)style.width);
 				HashMix64(settingsHash, (ULONGLONG)style.alpha);
 				HashMix64(settingsHash, (ULONGLONG)style.labelMode);
+				HashMix64(settingsHash, (ULONGLONG)style.labelWidth);
 				HashMix64(settingsHash, (ULONGLONG)style.labelOnly);
 				HashMixWString(settingsHash, style.boxName);
 			}
@@ -1566,6 +1667,8 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		auto inserted = styleCache.insert(std::make_pair(pBox, style));
 		return inserted.first->second;
 	};
+
+	bool globalBorderExcludeTaskbar = m_Api->GetGlobalSettings()->GetBool("BorderExcludeTaskbar", true);
 
 	// Global scene hash: drives adaptive timer/enumeration backoff.
 	ULONGLONG sceneHash = kHashSeed;
@@ -1583,6 +1686,14 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			const SAllStyle& style = getAllStyleForBox(wnd.pBox);
 			HashMix64(sceneHash, (ULONGLONG)(style.enabled ? 1ULL : 0ULL));
 			HashMix64(sceneHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
+			if (style.enabled)
+			{
+				bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
+				bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
+				bool excludeTaskbar = wnd.pBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar);
+				HashMix64(sceneHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL));
+				HashMix64(sceneHash, (ULONGLONG)(excludeTaskbar ? 1ULL : 0ULL));
+			}
 		}
 	}
 	HashMix64(sceneHash, settingsHash);
@@ -1624,6 +1735,11 @@ void CBoxBorder::DrawAllSandboxedBorders()
 	if (!hrgnCovered)
 		return;
 
+	// Build taskbar occlusion region separately so BorderExcludeTaskbar can be overridden per-box.
+	HRGN hrgnTaskbar = CreateRectRgn(0, 0, 0, 0);
+	if (hrgnTaskbar)
+		MergeTaskbarOcclusionIntoCoveredRegion(hrgnTaskbar);
+
 	ULONGLONG rollingCoverageHash = kHashSeed;
 	// Active target app windows (not overlay HWNDs) for stale-overlay cleanup.
 	std::set<HWND> activeTargets;
@@ -1646,7 +1762,9 @@ void CBoxBorder::DrawAllSandboxedBorders()
 
 		if (eligible)
 		{
-			bool applyCaptureAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
+			bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
+			bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
+			bool excludeTaskbar = wnd.pBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar);
 			enabledWindowCount++;
 			activeTargets.insert(wnd.hWnd);
 			bool overlayAvailable = true;
@@ -1715,15 +1833,18 @@ void CBoxBorder::DrawAllSandboxedBorders()
 				HashMix64(perWindowHash, (ULONGLONG)style.width);
 				HashMix64(perWindowHash, (ULONGLONG)style.alpha);
 				HashMix64(perWindowHash, (ULONGLONG)style.labelMode);
+				HashMix64(perWindowHash, (ULONGLONG)style.labelWidth);
 				HashMix64(perWindowHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
 				HashMixWString(perWindowHash, style.boxName);
 				HashMix64(perWindowHash, rollingCoverageHash);
 				HashMix64(perWindowHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL)); // cover state change invalidates skip-rebuild
+				HashMix64(perWindowHash, (ULONGLONG)(excludeTaskbar ? 1ULL : 0ULL)); // per-box taskbar exclusion setting
 
-				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != style.labelMode || bwnd.width != style.width);
+				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != style.labelMode || bwnd.labelBorderWidth != style.labelWidth);
 				bwnd.boxName = style.boxName;
 				bwnd.labelMode = style.labelMode;
 				bwnd.width = style.width;
+				bwnd.labelBorderWidth = style.labelWidth;
 
 				if (fontDirty || !bwnd.labelFont)
 					UpdateBorderLabelFont(bwnd, bwnd.hWnd);
@@ -1740,6 +1861,24 @@ void CBoxBorder::DrawAllSandboxedBorders()
 					if (bwnd.labelMode == -1 && bwnd.labelHeight > 0)
 						boundingRect.top -= bwnd.labelHeight;
 
+					// Build effective clip region: hrgnCovered plus taskbar areas if BorderExcludeTaskbar is set for this box.
+					HRGN hrgnEffective = hrgnCovered;
+					bool hrgnEffectiveOwned = false;
+					if (excludeTaskbar && hrgnTaskbar)
+					{
+						HRGN hrgnTemp = CreateRectRgn(0, 0, 0, 0);
+						if (hrgnTemp)
+						{
+							if (CombineRgn(hrgnTemp, hrgnCovered, hrgnTaskbar, RGN_OR) != ERROR)
+							{
+								hrgnEffective = hrgnTemp;
+								hrgnEffectiveOwned = true;
+							}
+							else
+								DeleteObject(hrgnTemp);
+						}
+					}
+
 					HRGN hrgnOverlay = CreateRectRgn(0, 0, 0, 0);
 					if (hrgnOverlay)
 					{
@@ -1751,7 +1890,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 							HRGN hrgnFrame = CreateBorderRegion(&adjustedRect, style.width);
 							if (hrgnFrame)
 							{
-								if (CombineRgn(hrgnFrame, hrgnFrame, hrgnCovered, RGN_DIFF) == ERROR)
+								if (CombineRgn(hrgnFrame, hrgnFrame, hrgnEffective, RGN_DIFF) == ERROR)
 									rgnFailed = true;
 								else
 								{
@@ -1775,7 +1914,7 @@ void CBoxBorder::DrawAllSandboxedBorders()
 							HRGN hrgnLabel = CreateRectRgn(labelRectScr.left, labelRectScr.top, labelRectScr.right, labelRectScr.bottom);
 							if (hrgnLabel)
 							{
-								if (CombineRgn(hrgnLabel, hrgnLabel, hrgnCovered, RGN_DIFF) == ERROR)
+								if (CombineRgn(hrgnLabel, hrgnLabel, hrgnEffective, RGN_DIFF) == ERROR)
 									rgnFailed = true;
 								else
 								{
@@ -1872,6 +2011,8 @@ void CBoxBorder::DrawAllSandboxedBorders()
 						HideBorderWindow(bwnd);
 						bwnd.labelRects.clear();
 					}
+					if (hrgnEffectiveOwned)
+						DeleteObject(hrgnEffective);
 				}
 				else
 				{
@@ -1929,6 +2070,8 @@ void CBoxBorder::DrawAllSandboxedBorders()
 	}
 
 	// Done with cumulative occlusion region.
+	if (hrgnTaskbar)
+		DeleteObject(hrgnTaskbar);
 	DeleteObject(hrgnCovered);
 }
 
@@ -1949,10 +2092,10 @@ bool CBoxBorder::CheckGlobalAllBordersMode()
 		checkedBoxes.insert(pBox);
 
 		COLORREF color;
-		int width, alpha, labelMode;
+		int width, alpha, labelMode, labelWidth;
 		EBorderMode mode;
 
-		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
+		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode, labelWidth) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			return true;
 	}
 

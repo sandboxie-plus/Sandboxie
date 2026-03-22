@@ -9603,7 +9603,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Sandboxed window label:</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱窗口标签：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1037"/>

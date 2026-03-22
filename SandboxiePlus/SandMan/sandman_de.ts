@@ -8958,10 +8958,6 @@ Dies wird gemacht, um bösartige Prozesse innerhalb der Sandbox daran zu hindern
         <translation>Alpha</translation>
     </message>
     <message>
-        <source>and/or on border</source>
-        <translation type="vanished">und/oder auf dem Rahmen</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="366"/>
         <source>When checked, hides the colored border frame and shows only the sandbox name or alias as a label. Requires the label option to be enabled.</source>
         <translation>Wenn diese Option aktiviert ist, wird der farbige Rahmen ausgeblendet und nur der Name oder Alias der Sandbox als Beschriftung angezeigt. Erfordert, dass die Beschriftungsoption aktiviert ist.</translation>
@@ -9924,7 +9920,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Sandboxed window label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftung des Sandboxfensters:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4046"/>
@@ -11262,7 +11258,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1520"/>
         <source>Support Dialog:</source>
-        <translation>Hilfedialog:</translation>
+        <translation>Unterstützungsdialog:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1533"/>

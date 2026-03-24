@@ -35,7 +35,7 @@ jobs:
           echo qt6_version=%qt6_version% >> %GITHUB_ENV%
 
       - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
     #
     # Compile Sandboxie Core
@@ -139,7 +139,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
     #
     # Compile Sandboxie Core

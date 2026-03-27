@@ -9278,7 +9278,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Sandboxed window label:</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 창 레이블:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="201"/>

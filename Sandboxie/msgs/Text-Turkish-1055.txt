@@ -2841,7 +2841,7 @@ Varsayılan engellenmiş TCP/IP bağlantı noktaları listesi
 .
 
 4294;txt;01
-Windows 7 görev çubuğunda zıplama listelerini güncellemelerine izin ver.
+Windows görev çubuğunda zıplama listelerini güncellemelerine izin ver.
 .
 
 4295;txt;01

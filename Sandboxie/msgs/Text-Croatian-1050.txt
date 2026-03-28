@@ -2903,7 +2903,7 @@ Zadana lista blokiranih TCP/IP portova
 .
 
 4294;txt;01
-Dopustite programima da osvježe skočnu listu na Windows 7 taskbaru
+Dopustite programima da osvježe skočnu listu na Windows taskbaru
 .
 
 #----------------------------------------------------------------------------

@@ -3327,7 +3327,7 @@ Standard liste over blokkerte TCP/IP-porter
 .
 
 4294;txt;01
-Tillat programmer til å oppdatere hopplister i Windows 7 oppgavelinjen
+Tillat programmer til å oppdatere hopplister i Windows oppgavelinjen
 .
 
 4295;txt;01

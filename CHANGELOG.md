@@ -40,7 +40,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed parsing logic for `ClosedClsid` and `ClosedRT` settings [#5263](https://github.com/sandboxie-plus/Sandboxie/pull/5263)
 - fixed Local Denial of Service (DoS) Vulnerability Exploitable by Sandboxed Process CVE-2026-32603
 - fixed Sandboxie-Plus EditAdminOnly Bypass via INI CRLF Injection CVE-...
-
+- fixed issues with GetRawInputDeviceInfoSlave (thanks sammy12342)
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18

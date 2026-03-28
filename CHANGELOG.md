@@ -38,11 +38,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed WOW64 registry view inheritance for relative key opens in `SbieDll`, preserving parent `KEY_WOW64_32KEY/KEY_WOW64_64KEY` semantics across `NtOpenKey`/`NtCreateKey` [#5171](https://github.com/sandboxie-plus/Sandboxie/issue/7171) [#5244](https://github.com/sandboxie-plus/Sandboxie/pull/5244)
 - fixed handle leak in `ScanStartMenu`: `IShellLinkW` and `IPersistFile` COM interfaces were never released in `ResolveShortcut`, permanently retaining handles (file, registry, icon) for every `.lnk` shortcut scanned; replaced raw pointers with `CComPtr` to ensure `Release()` on all exit paths
 - fixed parsing logic for `ClosedClsid` and `ClosedRT` settings [#5263](https://github.com/sandboxie-plus/Sandboxie/pull/5263)
-- fixed Local Denial of Service (DoS) Vulnerability Exploitable by Sandboxed Process CVE-2026-32603
-- fixed Sandboxie-Plus EditAdminOnly Bypass via INI CRLF Injection CVE-...
-- fixed issues with GetRawInputDeviceInfoSlave (thanks sammy12342)
-- fixed an issue with RunSbieCtrl (thanks Yanchon918s)
-- fixed name validation in ProcessServer handlers (thanks Yanchon918s)
+- fixed Local Denial of Service (DoS) Vulnerability Exploitable by Sandboxed Process CVE-2026-32603 (reported by sammy12342)
+- fixed Sandboxie-Plus EditAdminOnly Bypass via INI CRLF Injection (reported by sammy12342)
+- fixed issues with GetRawInputDeviceInfoSlave (reported by sammy12342)
+- fixed an issue with RunSbieCtrl (reported by Yanchon918s)
+- fixed name validation in ProcessServer handlers (reported by Yanchon918s)
+- fixed parameter validation in NamedPipeServer (reported by Yanchon918s)
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18

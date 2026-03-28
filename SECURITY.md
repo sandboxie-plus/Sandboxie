@@ -10,6 +10,12 @@
 
 ## Fixed vulnerabilities
 
+### SECURITY ISSUE ID-32
+EditPassword hash entropy loss: new passwords will be salted SHA-256 and base64-encoded
+- Note: existing passwords remain weak
+
+fixed in: 1.17.3 / 5.72.3
+
 ### SECURITY ISSUE ID-31 (thanks pentester.z)
 Missing parameter validation within named syscall invocation when using WoW64
 

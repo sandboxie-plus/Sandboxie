@@ -38,6 +38,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed WOW64 registry view inheritance for relative key opens in `SbieDll`, preserving parent `KEY_WOW64_32KEY/KEY_WOW64_64KEY` semantics across `NtOpenKey`/`NtCreateKey` [#5171](https://github.com/sandboxie-plus/Sandboxie/issue/7171) [#5244](https://github.com/sandboxie-plus/Sandboxie/pull/5244)
 - fixed handle leak in `ScanStartMenu`: `IShellLinkW` and `IPersistFile` COM interfaces were never released in `ResolveShortcut`, permanently retaining handles (file, registry, icon) for every `.lnk` shortcut scanned; replaced raw pointers with `CComPtr` to ensure `Release()` on all exit paths
 - fixed parsing logic for `ClosedClsid` and `ClosedRT` settings [#5263](https://github.com/sandboxie-plus/Sandboxie/pull/5263)
+- FIXED SECURITY ISSUE ID-32: EditPassword Hash Entropy Loss, new passwords will ne salted SHA256 and base64 encoded
+  - Note: the fix only takes effect when the password is being set, existing passwords remain weak
 - fixed Local Denial of Service (DoS) Vulnerability Exploitable by Sandboxed Process CVE-2026-32603 (reported by sammy12342)
 - fixed Sandboxie-Plus EditAdminOnly Bypass via INI CRLF Injection (reported by sammy12342)
 - fixed issues with GetRawInputDeviceInfoSlave (reported by sammy12342)

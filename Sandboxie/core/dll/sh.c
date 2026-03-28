@@ -3611,7 +3611,7 @@ _FX HRESULT WINAPI SH32_IShellWindows_FindWindowSW(
             // runs inside this sandbox.  When OpenClsid allows the real
             // IShellWindows, FindWindowSW returns the HOST desktop dispatch
             // (which also satisfies SH32_IsUsableShellDispatch), but it must
-            // not be used as the in-sandbox dispatch — fall through to S5.
+            // not be used as the in-sandbox dispatch - fall through to S5.
             BOOLEAN ownerInSandbox = FALSE;
             if (phwnd && *phwnd) {
                 ULONG ownerPid = 0;
@@ -3619,7 +3619,7 @@ _FX HRESULT WINAPI SH32_IShellWindows_FindWindowSW(
                 if (__sys_GetWindowThreadProcessId)
                     __sys_GetWindowThreadProcessId((HWND)(LONG_PTR)*phwnd, &ownerPid);
                 if (ownerPid) {
-                    WCHAR sbxname[34];
+                    WCHAR sbxname[BOXNAME_COUNT];
                     LONG st = SbieApi_QueryProcess(
                         (HANDLE)(ULONG_PTR)ownerPid, sbxname, NULL, NULL, NULL);
                     ownerInSandbox = NT_SUCCESS(st) && sbxname[0] != L'\0';
@@ -3711,7 +3711,7 @@ _FX HRESULT WINAPI SH32_IShellWindows_FindWindowSW(
                             }
                         }
 
-                        // No real shell window found in the sandbox –
+                        // No real shell window found in the sandbox
                         // synthesise the full IShellDispatch2 chain ourselves.
                         if (! *ppdispOut) {
                             *ppdispOut = (IDispatch *)SH32_FakeDesktop_Create();

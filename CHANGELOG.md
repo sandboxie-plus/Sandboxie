@@ -41,6 +41,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Local Denial of Service (DoS) Vulnerability Exploitable by Sandboxed Process CVE-2026-32603
 - fixed Sandboxie-Plus EditAdminOnly Bypass via INI CRLF Injection CVE-...
 - fixed issues with GetRawInputDeviceInfoSlave (thanks sammy12342)
+- fixed an issue with RunSbieCtrl (thanks Yanchon918s)
+- fixed name validation in ProcessServer handlers (thanks Yanchon918s)
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18

@@ -1467,6 +1467,10 @@ NTSTATUS SbieIniServer::RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const 
 
     } else if (CtrlCmdLen > 0) {
 
+        if (CtrlCmdLen >= ARRAYSIZE(ctrlCmd) - 1) {
+            return STATUS_INVALID_PARAMETER;
+        }
+
         memcpy(ctrlCmd, CtrlCmd, CtrlCmdLen * sizeof(WCHAR));
         ctrlCmd[CtrlCmdLen] = L'\0';
     }

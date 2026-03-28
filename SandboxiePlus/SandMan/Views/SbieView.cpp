@@ -33,6 +33,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	this->setLayout(m_pMainLayout);
 
 	m_HoldExpand = false;
+	m_MoveBatchPending = false;
+	m_MoveBatchChanged = false;
 
 	m_pSbieModel = new CSbieModel(this);
 	m_pSbieModel->SetTree(true);
@@ -529,6 +531,8 @@ QString CSbieView__SerializeGroup(QMap<QString, QStringList>& m_Groups, const QS
 
 void CSbieView::Refresh()
 {
+	NormalizeGroups();
+
 	QList<QVariant> Added = m_pSbieModel->Sync(theAPI->GetAllBoxes(), m_Groups, theGUI->IsShowHidden());
 
 	if (m_pSbieModel->IsTree())
@@ -1023,34 +1027,50 @@ void CSbieView::OnGroupAction()
 
 void CSbieView::OnGroupAction(QAction* Action)
 {
+	QStringList FocusBoxes = GetSelectedBoxNames();
+	QStringList FocusGroups = GetSelectedGroups();
+	QStringList FocusNames;
+	QStringList DeleteMovedBoxes;
+	bool bRestoreFocus = false;
+	bool bRestoreNameFocus = false;
+	bool bRestoreRootFocus = false;
+
 	if (Action == m_pNewBox || Action == m_pAddGroupe)
 	{
+		QString TargetGroup;
+		QStringList SelectedGroups = GetSelectedGroups();
+		if (!SelectedGroups.isEmpty())
+			TargetGroup = SelectedGroups.first();
+
 		QString Name = Action == m_pNewBox ? AddNewBox() : AddNewGroup();
 		if (Name.isEmpty())
 			return;
 
-		QStringList List = GetSelectedGroups();
-		if (List.isEmpty())
-			return;
-		m_Groups[""].removeAll(Name);
-		m_Groups[List.first()].removeAll(Name);
-		m_Groups[List.first()].append(Name);
+		if (!TargetGroup.isEmpty() && TargetGroup != Name)
+			MoveItem(Name, TargetGroup);
+
+		if (Action == m_pAddGroupe) {
+			bRestoreNameFocus = true;
+			FocusNames.append(Name);
+		}
 	}
 	else if (Action == m_pImportBox)
 	{
+		QString TargetGroup;
+		QStringList SelectedGroups = GetSelectedGroups();
+		if (!SelectedGroups.isEmpty())
+			TargetGroup = SelectedGroups.first();
+
 		QStringList BoxNames = ImportMultiBoxes(theGUI);
 		if (BoxNames.isEmpty())
 			return;
 
-		QStringList List = GetSelectedGroups();
-		if (List.isEmpty())
-			return;
-		foreach(const QString& Name, BoxNames)
-		{
-			m_Groups[""].removeAll(Name);
-			m_Groups[List.first()].removeAll(Name);
-			m_Groups[List.first()].append(Name);
-		}
+		if (!TargetGroup.isEmpty())
+			foreach(const QString& Name, BoxNames)
+				MoveItem(Name, TargetGroup);
+
+		bRestoreFocus = true;
+		FocusBoxes = BoxNames;
 	}
 	else if (Action == m_pRenGroupe)
 	{
@@ -1067,11 +1087,17 @@ void CSbieView::OnGroupAction(QAction* Action)
 			return;
 
 		RenameGroup(OldValue, Value);
+		bRestoreNameFocus = true;
+		FocusNames.append(Value);
 	}
 	else if (Action == m_pDelGroupe)
 	{
 		if (QMessageBox("Sandboxie-Plus", tr("Do you really want to remove the selected group(s)?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
+
+		QStringList SelectedGroups = GetSelectedGroups();
+		QString PrimaryDeletedGroup = SelectedGroups.isEmpty() ? QString() : SelectedGroups.first();
+		QString ParentGroup = PrimaryDeletedGroup.isEmpty() ? QString() : FindParent(PrimaryDeletedGroup);
 
 		foreach(const QModelIndex& Index, m_pSbieTree->selectedRows())
 		{
@@ -1081,6 +1107,12 @@ void CSbieView::OnGroupAction(QAction* Action)
 				QString Group = m_pSbieModel->GetID(ModelIndex).toString();
 
 				QStringList Items = m_Groups.take(Group); // remove group
+				if (Group == PrimaryDeletedGroup) {
+					foreach(const QString& Name, Items) {
+						if (!theAPI->GetBoxByName(Name).isNull() && !DeleteMovedBoxes.contains(Name))
+							DeleteMovedBoxes.append(Name);
+					}
+				}
 		
 				// remove from parents
 				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
@@ -1093,9 +1125,26 @@ void CSbieView::OnGroupAction(QAction* Action)
 				m_Collapsed.remove(Group);
 			}
 		}
+
+		if (!ParentGroup.isEmpty() && m_Groups.contains(ParentGroup)) {
+			bRestoreNameFocus = true;
+			FocusNames.append(ParentGroup);
+		}
+		else if (!DeleteMovedBoxes.isEmpty()) {
+			bRestoreFocus = true;
+			FocusBoxes = DeleteMovedBoxes;
+		}
+		else {
+			bRestoreRootFocus = true;
+		}
 	}
 	else if (Action == m_pMenuMoveUp /*|| Action == m_pMenuMoveBy*/ || Action == m_pMenuMoveDown)
 	{
+		bRestoreFocus = true;
+		if (FocusBoxes.isEmpty() && !FocusGroups.isEmpty()) {
+			bRestoreNameFocus = true;
+			FocusNames = FocusGroups;
+		}
 		if (!theConf->GetBool("MainWindow/BoxTree_UseOrder", false)) {
 			SetCustomOrder();
 			theConf->SetValue("MainWindow/BoxTree_UseOrder", true);
@@ -1150,6 +1199,11 @@ void CSbieView::OnGroupAction(QAction* Action)
 	}
 	else // move to group
 	{
+		bRestoreFocus = true;
+		if (FocusBoxes.isEmpty() && !FocusGroups.isEmpty()) {
+			bRestoreNameFocus = true;
+			FocusNames = FocusGroups;
+		}
 		OnMoveTo(Action->data().toString());
 	}
 
@@ -1161,10 +1215,34 @@ void CSbieView::OnGroupAction(QAction* Action)
 	UpdateMoveMenu();
 
 	SaveBoxGrouping();
+
+	if (bRestoreFocus)
+		RestoreBoxSelectionLater(FocusBoxes);
+	if (bRestoreNameFocus && !FocusNames.isEmpty()) {
+		RestoreNameSelectionLater(FocusNames);
+	}
+	if (bRestoreRootFocus) {
+		QTimer::singleShot(50, this, [this]() {
+			m_pSbieTree->clearSelection();
+			QModelIndex First = m_pSortProxy->index(0, 0);
+			if (First.isValid()) {
+				m_pSbieTree->setCurrentIndex(First);
+				m_pSbieTree->setFocus(Qt::OtherFocusReason);
+				m_pSbieTree->scrollTo(First, QAbstractItemView::PositionAtTop);
+			}
+			else {
+				m_pSbieTree->setFocus(Qt::OtherFocusReason);
+				m_pSbieTree->scrollToTop();
+			}
+		});
+	}
 }
 
 void CSbieView::OnMoveTo(QTreeWidgetItem* pItem)
 {
+	QStringList FocusBoxes = GetSelectedBoxNames();
+	QStringList FocusNames = GetSelectedGroups();
+
 	OnMoveTo(pItem->data(0, Qt::UserRole).toString());
 
 	m_pCurMenu->close();
@@ -1175,6 +1253,9 @@ void CSbieView::OnMoveTo(QTreeWidgetItem* pItem)
 	UpdateMoveMenu();
 
 	SaveBoxGrouping();
+
+	RestoreBoxSelectionLater(FocusBoxes);
+	RestoreNameSelectionLater(FocusNames);
 }
 
 void CSbieView::OnMoveTo(const QString& Group)
@@ -1230,9 +1311,35 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 	if (!BoxName.isEmpty()) {
 		theAPI->ReloadBoxes();
 		Refresh();
-		SelectBox(BoxName);
+		// Two things prevent a direct SelectBox() call from working here:
+		//
+		// 1. The proxy model (QSortFilterProxyModel with dynamicSortFilter=true) reacts to
+		//    layoutChanged from the source model by resetting itself via beginResetModel/
+		//    endResetModel. The view's QAbstractItemView::reset() is called synchronously,
+		//    which in turn calls scheduleDelayedItemsLayout() – a 0 ms QBasicTimer that
+		//    recomputes the layout and scrolls back to the top.
+		//    Qt docs explicitly state: "the ordering between zero timers and other sources
+		//    of events is unspecified", so a singleShot(0) for SelectBox races with this
+		//    0 ms layout-reset timer and can lose.
+		//
+		// 2. Refresh() already queues a singleShot(10 ms) to expand newly-added items.
+		//    Expanding items recomputes the row layout and shifts the scroll position,
+		//    undoing any scrollTo() that ran before it.
+		//
+		// Solution: use a > 10 ms real timer so that:
+		//   – the layout-reset (0 ms timer) has already fired and scrolled to top,
+		//   – the singleShot(10 ms) expansion inside Refresh() has already fired,
+		//   – SelectBox() runs last and wins.
+		QTimer::singleShot(50, this, [this, BoxName]() {
+			SelectBox(BoxName);
+		});
 	}
 	return BoxName;
+}
+
+void CSbieView::AddNewBoxAction()
+{
+	OnGroupAction(m_pNewBox);
 }
 
 QString CSbieView::AddNewGroup()
@@ -1244,19 +1351,23 @@ QString CSbieView::AddNewGroup()
 		return "";
 
 	m_Groups[Name] = QStringList();
-
-	QModelIndex ModelIndex = m_pSortProxy->mapToSource(m_pSbieTree->currentIndex());
-	QString Parent;
-	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
-		Parent = m_pSbieModel->GetID(ModelIndex).toString();
-
-	m_Groups[Parent].append(Name);
+	m_Groups[""].append(Name);
 
 	UpdateMoveMenu();
 
 	SaveBoxGrouping();
 
 	return Name;
+}
+
+void CSbieView::AddNewGroupAction()
+{
+	OnGroupAction(m_pAddGroupe);
+}
+
+void CSbieView::ImportBoxesAction()
+{
+	OnGroupAction(m_pImportBox);
 }
 
 bool CSbieView::TestNameAndWarn(const QString& Name)
@@ -2317,7 +2428,11 @@ void CSbieView::SelectBox(const QString& Name)
 		Refresh();
 
 	QModelIndex Index = m_pSbieModel->FindIndex(Name);
+	if (!Index.isValid())
+		return;
 	QModelIndex ModelIndex = m_pSortProxy->mapFromSource(Index);
+	if (!ModelIndex.isValid())
+		return;
 
 	QModelIndex ModelL = m_pSortProxy->index(ModelIndex.row(), 0, ModelIndex.parent());
 	QModelIndex ModelR = m_pSortProxy->index(ModelIndex.row(), m_pSortProxy->columnCount() - 1, ModelIndex.parent());
@@ -2326,8 +2441,204 @@ void CSbieView::SelectBox(const QString& Name)
 	SelectedItems.append(QItemSelectionRange(ModelL, ModelR));
 
 	m_pSbieTree->setCurrentIndex(ModelIndex);
+	m_pSbieTree->setFocus(Qt::OtherFocusReason);
 	m_pSbieTree->scrollTo(ModelL);
 	m_pSbieTree->selectionModel()->select(SelectedItems, QItemSelectionModel::ClearAndSelect);
+}
+
+void CSbieView::SelectBoxes(const QStringList& Names)
+{
+	if (Names.size() == 1) {
+		SelectBox(Names.first());
+		return;
+	}
+
+	if (m_pSbieModel->Count() == 0)
+		Refresh();
+
+	QItemSelection SelectedItems;
+	QModelIndex FirstModelIndex;
+	QList<QPersistentModelIndex> SelectedIndexes;
+
+	foreach (const QString& Name, Names)
+	{
+		QModelIndex Index = m_pSbieModel->FindIndex(Name);
+		if (!Index.isValid())
+			continue;
+
+		QModelIndex ModelIndex = m_pSortProxy->mapFromSource(Index);
+		if (!ModelIndex.isValid())
+			continue;
+
+		if (!FirstModelIndex.isValid())
+			FirstModelIndex = ModelIndex;
+		SelectedIndexes.append(QPersistentModelIndex(ModelIndex));
+
+		QModelIndex ModelL = m_pSortProxy->index(ModelIndex.row(), 0, ModelIndex.parent());
+		QModelIndex ModelR = m_pSortProxy->index(ModelIndex.row(), m_pSortProxy->columnCount() - 1, ModelIndex.parent());
+		SelectedItems.append(QItemSelectionRange(ModelL, ModelR));
+	}
+
+	if (!FirstModelIndex.isValid() || SelectedItems.isEmpty() || SelectedIndexes.isEmpty())
+		return;
+
+	m_pSbieTree->setCurrentIndex(FirstModelIndex);
+	m_pSbieTree->setFocus(Qt::OtherFocusReason);
+	m_pSbieTree->scrollTo(FirstModelIndex, QAbstractItemView::PositionAtCenter);
+	m_pSbieTree->selectionModel()->select(SelectedItems, QItemSelectionModel::ClearAndSelect);
+
+	// Keep the full multi-selection in view when possible.
+	QTimer::singleShot(0, this, [this, SelectedIndexes]() {
+		if (SelectedIndexes.isEmpty())
+			return;
+
+		int Top = INT_MAX;
+		int Bottom = INT_MIN;
+		int Count = 0;
+		QModelIndex TopIndex;
+		QModelIndex BottomIndex;
+
+		foreach (const QPersistentModelIndex& PIndex, SelectedIndexes) {
+			if (!PIndex.isValid())
+				continue;
+			QRect Rect = m_pSbieTree->visualRect(PIndex);
+			if (!Rect.isValid() || Rect.isEmpty())
+				continue;
+			if (Rect.top() < Top) {
+				Top = Rect.top();
+				TopIndex = PIndex;
+			}
+			if (Rect.bottom() > Bottom) {
+				Bottom = Rect.bottom();
+				BottomIndex = PIndex;
+			}
+			Count++;
+		}
+
+		if (Count == 0)
+			return;
+
+		int ViewHeight = m_pSbieTree->viewport()->height();
+		if (Top >= 0 && Bottom < ViewHeight)
+			return;
+
+		if (TopIndex.isValid())
+			m_pSbieTree->scrollTo(TopIndex, QAbstractItemView::PositionAtTop);
+		if (BottomIndex.isValid())
+			m_pSbieTree->scrollTo(BottomIndex, QAbstractItemView::PositionAtBottom);
+	});
+}
+
+void CSbieView::SelectNames(const QStringList& Names)
+{
+	if (Names.isEmpty())
+		return;
+
+	if (m_pSbieModel->Count() == 0)
+		Refresh();
+
+	QItemSelection SelectedItems;
+	QModelIndex FirstModelIndex;
+	QList<QPersistentModelIndex> SelectedIndexes;
+
+	foreach (const QString& Name, Names)
+	{
+		QModelIndex Index = m_pSbieModel->FindIndex(Name); // box
+		if (!Index.isValid())
+			Index = m_pSbieModel->FindIndex("!" + Name); // group
+		if (!Index.isValid())
+			continue;
+
+		QModelIndex ModelIndex = m_pSortProxy->mapFromSource(Index);
+		if (!ModelIndex.isValid())
+			continue;
+
+		if (!FirstModelIndex.isValid())
+			FirstModelIndex = ModelIndex;
+		SelectedIndexes.append(QPersistentModelIndex(ModelIndex));
+
+		QModelIndex ModelL = m_pSortProxy->index(ModelIndex.row(), 0, ModelIndex.parent());
+		QModelIndex ModelR = m_pSortProxy->index(ModelIndex.row(), m_pSortProxy->columnCount() - 1, ModelIndex.parent());
+		SelectedItems.append(QItemSelectionRange(ModelL, ModelR));
+	}
+
+	if (!FirstModelIndex.isValid() || SelectedItems.isEmpty() || SelectedIndexes.isEmpty())
+		return;
+
+	m_pSbieTree->setCurrentIndex(FirstModelIndex);
+	m_pSbieTree->setFocus(Qt::OtherFocusReason);
+	m_pSbieTree->scrollTo(FirstModelIndex, QAbstractItemView::PositionAtCenter);
+	m_pSbieTree->selectionModel()->select(SelectedItems, QItemSelectionModel::ClearAndSelect);
+
+	QTimer::singleShot(0, this, [this, SelectedIndexes]() {
+		if (SelectedIndexes.isEmpty())
+			return;
+
+		int Top = INT_MAX;
+		int Bottom = INT_MIN;
+		int Count = 0;
+		QModelIndex TopIndex;
+		QModelIndex BottomIndex;
+
+		foreach (const QPersistentModelIndex& PIndex, SelectedIndexes) {
+			if (!PIndex.isValid())
+				continue;
+			QRect Rect = m_pSbieTree->visualRect(PIndex);
+			if (!Rect.isValid() || Rect.isEmpty())
+				continue;
+			if (Rect.top() < Top) {
+				Top = Rect.top();
+				TopIndex = PIndex;
+			}
+			if (Rect.bottom() > Bottom) {
+				Bottom = Rect.bottom();
+				BottomIndex = PIndex;
+			}
+			Count++;
+		}
+
+		if (Count == 0)
+			return;
+
+		int ViewHeight = m_pSbieTree->viewport()->height();
+		if (Top >= 0 && Bottom < ViewHeight)
+			return;
+
+		if (TopIndex.isValid())
+			m_pSbieTree->scrollTo(TopIndex, QAbstractItemView::PositionAtTop);
+		if (BottomIndex.isValid())
+			m_pSbieTree->scrollTo(BottomIndex, QAbstractItemView::PositionAtBottom);
+	});
+}
+
+QStringList CSbieView::GetSelectedBoxNames()
+{
+	QStringList FocusBoxes;
+	foreach (const QString& Name, GetSelectedGroups(true)) {
+		if (!theAPI->GetBoxByName(Name).isNull() && !FocusBoxes.contains(Name))
+			FocusBoxes.append(Name);
+	}
+	return FocusBoxes;
+}
+
+void CSbieView::RestoreBoxSelectionLater(const QStringList& Names, int Delay)
+{
+	if (Names.isEmpty())
+		return;
+
+	QTimer::singleShot(Delay, this, [this, Names]() {
+		SelectBoxes(Names);
+	});
+}
+
+void CSbieView::RestoreNameSelectionLater(const QStringList& Names, int Delay)
+{
+	if (Names.isEmpty())
+		return;
+
+	QTimer::singleShot(Delay, this, [this, Names]() {
+		SelectNames(Names);
+	});
 }
 
 void CSbieView::PopUpMenu(const QString& Name)
@@ -2412,6 +2723,7 @@ void CSbieView::ReloadUserConfig()
 			Grouping = theAPI->GetUserSettings()->GetText("BoxDisplayOrder");
 		CSbieView__ParseGroup(Grouping, m_Groups);
 	}
+	NormalizeGroups();
 
 	UpdateMoveMenu();
 
@@ -2433,6 +2745,98 @@ void CSbieView::ReloadUserConfig()
 	}
 
 	ClearUserUIConfig();
+}
+
+bool CSbieView::NormalizeGroups()
+{
+	bool Changed = false;
+
+	if (!m_Groups.contains("")) {
+		m_Groups[""] = QStringList();
+		Changed = true;
+	}
+
+	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+		QSet<QString> Seen;
+		QStringList Sanitized;
+		foreach(const QString& Name, I.value()) {
+			if (Name.isEmpty() || Name == I.key() || Seen.contains(Name)) {
+				Changed = true;
+				continue;
+			}
+			Seen.insert(Name);
+			Sanitized.append(Name);
+		}
+		if (Sanitized != I.value())
+			I.value() = Sanitized;
+	}
+
+	QSet<QString> GroupKeys = ListToSet(m_Groups.keys());
+
+	QHash<QString, QString> ParentOf;
+	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+		QStringList UniqueOwners;
+		foreach(const QString& Name, I.value()) {
+			auto KnownParent = ParentOf.find(Name);
+			if (KnownParent == ParentOf.end()) {
+				ParentOf.insert(Name, I.key());
+				UniqueOwners.append(Name);
+			}
+			else if (KnownParent.value() == I.key())
+				UniqueOwners.append(Name);
+			else
+				Changed = true;
+		}
+		if (UniqueOwners != I.value())
+			I.value() = UniqueOwners;
+	}
+
+	auto FindParent = [this](const QString& Group) -> QString {
+		for (auto J = m_Groups.constBegin(); J != m_Groups.constEnd(); ++J) {
+			if (J.value().contains(Group))
+				return J.key();
+		}
+		return QString();
+	};
+
+	foreach(const QString& Group, GroupKeys) {
+		if (Group.isEmpty())
+			continue;
+
+		QSet<QString> Visited;
+		QString Current = Group;
+		while (!Current.isEmpty()) {
+			if (Visited.contains(Current)) {
+				QString Parent = FindParent(Current);
+				if (!Parent.isEmpty()) {
+					m_Groups[Parent].removeAll(Current);
+					Changed = true;
+				}
+				break;
+			}
+			Visited.insert(Current);
+			Current = FindParent(Current);
+		}
+	}
+
+	QSet<QString> ReferencedGroups;
+	for (auto I = m_Groups.constBegin(); I != m_Groups.constEnd(); ++I) {
+		foreach(const QString& Name, I.value()) {
+			if (GroupKeys.contains(Name))
+				ReferencedGroups.insert(Name);
+		}
+	}
+
+	foreach(const QString& Group, GroupKeys) {
+		if (Group.isEmpty())
+			continue;
+		if (!ReferencedGroups.contains(Group) && !m_Groups[""].contains(Group)) {
+			m_Groups[""].append(Group);
+			Changed = true;
+		}
+	}
+
+	return Changed;
 }
 
 void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes) 
@@ -2466,6 +2870,8 @@ void CSbieView::SaveBoxGrouping()
 	if (!theAPI->IsConnected())
 		return;
 
+	NormalizeGroups();
+
 	theAPI->GetUserSettings()->SetRefreshOnChange(false);
 
 	auto Groups = m_Groups;
@@ -2484,6 +2890,15 @@ void CSbieView::SaveBoxGrouping()
 
 void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
 {
+	if (!theAPI->GetBoxByName(Name).isNull()) {
+		if (!m_MoveBatchFocusBoxes.contains(Name))
+			m_MoveBatchFocusBoxes.append(Name);
+	}
+	else {
+		if (!m_MoveBatchFocusNames.contains(Name))
+			m_MoveBatchFocusNames.append(Name);
+	}
+
 	QModelIndex index;
 	if (!To.isEmpty()) { // only groups can be parents so add the group marker "!"
 		QModelIndex index0 = m_pSbieModel->FindIndex("!" + To);
@@ -2492,14 +2907,35 @@ void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
 		index = m_pSbieModel->index(row, 0);
 	QModelIndex index2 = m_pSortProxy->mapFromSource(index);
 	int row2 = index2.row();
-	if (MoveItem(Name, To, row2)) {
+	m_MoveBatchChanged = MoveItem(Name, To, row2) || m_MoveBatchChanged;
+
+	if (m_MoveBatchPending)
+		return;
+
+	m_MoveBatchPending = true;
+	QTimer::singleShot(0, this, [this]() {
+		m_MoveBatchPending = false;
+
+		bool bChanged = m_MoveBatchChanged;
+		m_MoveBatchChanged = false;
+
+		QStringList FocusBoxes = m_MoveBatchFocusBoxes;
+		m_MoveBatchFocusBoxes.clear();
+		QStringList FocusNames = m_MoveBatchFocusNames;
+		m_MoveBatchFocusNames.clear();
+
+		if (!bChanged)
+			return;
+
 		m_pSbieModel->Clear(); //todo improve that
 		Refresh();
-	}
 
-	UpdateMoveMenu();
+		UpdateMoveMenu();
+		SaveBoxGrouping();
 
-	SaveBoxGrouping();
+		RestoreBoxSelectionLater(FocusBoxes);
+		RestoreNameSelectionLater(FocusNames);
+	});
 }
 
 void CSbieView::OnRemoveItem() 

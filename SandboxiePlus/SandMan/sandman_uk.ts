@@ -6850,7 +6850,7 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3673"/>
         <source>Triggers autocomplete suggestions with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показує підказки автозаповнення для %1.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3675"/>
@@ -6860,12 +6860,12 @@ Choose autocomplete mode:
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3676"/>
         <source>Triggers autocomplete suggestions while typing.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показує підказки автозаповнення під час введення.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3679"/>
         <source>Keeps autocomplete suggestions disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Залишає автозаповнення вимкненим.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="3678"/>
@@ -12208,7 +12208,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2218"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Канал preview містить останні попередні релізи з GitHub.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2312"/>

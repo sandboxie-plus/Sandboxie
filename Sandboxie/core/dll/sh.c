@@ -2063,15 +2063,15 @@ _FX void SH32_ComAddRef(void *pUnknown)
 // Synthetic fake COM objects for the IShellWindows dispatch chain.
 //
 // The caller walks the chain:
-//   FindWindowSW → FakeDesktop (IDispatch)
-//     →QI→ FakeServiceProvider (IServiceProvider)
-//       →QueryService(SID_STopLevelBrowser, IShellBrowser) → FakeBrowserView
-//         →QueryActiveShellView [vtbl 15] → FakeShellView (IShellView)
-//           →GetItemObject(SVGIO_BACKGROUND, IID_IDispatch) [vtbl 15] → FakeFolderView
-//             →QI→ IShellFolderViewDual (self)
-//               →get_Application [vtbl 7] → FakeShellApp (IDispatch)
-//                 →QI→ IShellDispatch2 (self)
-//                   →ShellExecute [vtbl 31] → SH32_FakeApp_ShellExecute → SH32_ShellExecuteExW
+//   FindWindowSW -> FakeDesktop (IDispatch)
+//     ->QI-> FakeServiceProvider (IServiceProvider)
+//       ->QueryService(SID_STopLevelBrowser, IShellBrowser) -> FakeBrowserView
+//         ->QueryActiveShellView [vtbl 15] -> FakeShellView (IShellView)
+//           ->GetItemObject(SVGIO_BACKGROUND, IID_IDispatch) [vtbl 15] -> FakeFolderView
+//             ->QI-> IShellFolderViewDual (self)
+//               ->get_Application [vtbl 7] -> FakeShellApp (IDispatch)
+//                 ->QI-> IShellDispatch2 (self)
+//                   ->ShellExecute [vtbl 31] -> SH32_FakeApp_ShellExecute -> SH32_ShellExecuteExW
 //
 // Identity guarantees inside the synthetic desktop loop:
 //   - FakeDesktop.Parent and FakeDesktop.Windows return the same desktop identity.
@@ -3079,7 +3079,7 @@ static HRESULT WINAPI SH32_FakeFolderView_Invoke(
 
 // IShellFolderViewDual vtable: 16 entries [0..15]
 // Stub arity note:
-//   PopupItemMenu(FolderItem*,VARIANT,VARIANT,BSTR*) = 1+4+4+1 = 10 slots → Stub10
+//   PopupItemMenu(FolderItem*,VARIANT,VARIANT,BSTR*) = 1+4+4+1 = 10 slots -> Stub10
 static const ULONG_PTR SH32_FakeFolderView_Vtbl[] = {
     (ULONG_PTR)SH32_FakeFolderView_QI,              // [0]  QueryInterface
     (ULONG_PTR)SH32_FakeBase_AddRef,                // [1]  AddRef
@@ -3301,10 +3301,10 @@ static HRESULT WINAPI SH32_FakeApp_Invoke(
 // IShellDispatch2 vtable: 39 entries [0..38]
 // Stub arity notes:
 //   VARIANT passed by value = 16 bytes on x86 = 4 DWORD slots.
-//   NameSpace(VARIANT,ptr)            = 4+1     = 5 slots → Stub5
-//   BrowseForFolder(long,BSTR,long,VARIANT,ptr) = 1+1+1+4+1 = 8 slots → Stub8
-//   ServiceStart/Stop(BSTR,VARIANT,VARIANT*)    = 1+4+1   = 6 slots → Stub6
-//   ShowBrowserBar(BSTR,VARIANT,VARIANT*)       = 1+4+1   = 6 slots → Stub6
+//   NameSpace(VARIANT,ptr)            = 4+1     = 5 slots -> Stub5
+//   BrowseForFolder(long,BSTR,long,VARIANT,ptr) = 1+1+1+4+1 = 8 slots -> Stub8
+//   ServiceStart/Stop(BSTR,VARIANT,VARIANT*)    = 1+4+1   = 6 slots -> Stub6
+//   ShowBrowserBar(BSTR,VARIANT,VARIANT*)       = 1+4+1   = 6 slots -> Stub6
 //   ShellExecute(BSTR,VARIANT,VARIANT,VARIANT,VARIANT) = 1+4+4+4+4 = 17 slots (live impl, no stub needed)
 //   Open/Explore(VARIANT)             = 4       = 4 slots (live impls, no stub needed)
 static const ULONG_PTR SH32_FakeApp_Vtbl[] = {

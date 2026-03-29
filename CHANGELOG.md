@@ -46,6 +46,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed an issue with RunSbieCtrl (reported by Yanchon918s)
 - fixed name validation in ProcessServer handlers (reported by Yanchon918s)
 - fixed parameter validation in NamedPipeServer (reported by Yanchon918s)
+- fixed file integrity issues with updater (reported by sammy12342)
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18

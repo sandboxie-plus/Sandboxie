@@ -4531,17 +4531,17 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandManTray.cpp" line="302"/>
         <source>No pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine angehefteten Sandboxen zum Anzeigen vorhanden.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="304"/>
         <source>No active or pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine aktiven oder angehefteten Sandboxen zum Anzeigen vorhanden.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="305"/>
         <source>No sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Sandboxen zum Anzeigen vorhanden.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="508"/>

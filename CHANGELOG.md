@@ -20,6 +20,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - keeps border frames and labels out of screenshots and screen recordings; defaults to `CoverBoxedWindows`
 - added border label width and taskbar clipping options
   - configurable via `BorderColor` label width and `BorderExcludeTaskbar`
+- added `UseFakeShellDispatch` option to provide synthetic `IShellDispatch` fallback (may fix some WebView2 issues)
+  - can be disabled per process via `UseFakeShellDispatch=process,n`
+- added `Template_OnScreenKeyboard` (Windows 11) to fix On-Screen Keyboard freezes when used with sandboxed programs
 
 ### Changed
 - reduced constant GUI CPU usage by caching custom `BoxIcon` resolution in the sandbox model instead of reloading icon resources on refresh

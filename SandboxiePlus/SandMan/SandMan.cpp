@@ -47,6 +47,50 @@
 
 CSbiePlusAPI* theAPI = NULL;
 
+static QString CSandMan__ResolveDocsUrl(QString path)
+{
+	const QString docsRoot = "https://sandboxie-plus.github.io/sandboxie-docs/";
+
+	if (path.startsWith("/"))
+		path.remove(0, 1);
+	if (path.isEmpty())
+		return docsRoot;
+
+	const QString upper = path.toUpper();
+	if (upper.length() == 8 && upper.startsWith("SBIE")) {
+		bool ok = true;
+		for (int i = 4; i < upper.length(); ++i) {
+			if (!upper[i].isDigit()) {
+				ok = false;
+				break;
+			}
+		}
+		if (ok)
+			return docsRoot + "Content/" + upper + "/";
+	}
+
+	static const QMap<QString, QString> docsMap = {
+		{ "black-box", "PlusContent/black-box/" },
+		{ "boxencryption", "PlusContent/BoxEncryption.html" },
+		{ "breakoutdocument", "Content/BreakoutDocument/" },
+		{ "breakoutfolder", "Content/BreakoutFolder.html" },
+		{ "breakoutprocess", "Content/BreakoutProcess/" },
+		{ "compartment-mode", "PlusContent/compartment-mode/" },
+		{ "filerootpath", "Content/FileRootPath.html" },
+		{ "ipcrootpath", "Content/IpcRootPath/" },
+		{ "keyrootpath", "Content/KeyRootPath.html" },
+		{ "privacy-mode", "PlusContent/privacy-mode/" },
+		{ "sbiemessages", "Content/SBIEMessages/" },
+		{ "security-mode", "PlusContent/security-mode/" }
+	};
+
+	const auto it = docsMap.constFind(path.toLower());
+	if (it != docsMap.constEnd())
+		return docsRoot + it.value();
+
+	return docsRoot;
+}
+
 #include <wtypes.h>
 #include <QAbstractNativeEventFilter>
 #include <dbt.h>
@@ -4588,6 +4632,8 @@ void CSandMan::OpenUrl(QUrl url)
 			m_pUpdater->RunInstaller(false);
 		else if (path == "/apply")
 			m_pUpdater->ApplyUpdate(COnlineUpdater::eFull, false);
+		else if (path.startsWith("/docs/", Qt::CaseInsensitive))
+			OpenUrl(CSandMan__ResolveDocsUrl(path.mid(6)));
 		else
 			OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
 		return;

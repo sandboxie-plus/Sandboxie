@@ -26,6 +26,7 @@ To achieve this goal, Sandboxie has established a translation program that enabl
 |German|Yes - Feb 1, 2026|Yes - Mar 29, 2026|Yes - Feb 17, 2025|Yes - Mar 13, 2025|
 |Greek|Yes|No|No|No|
 |Hebrew|Yes|No|No|No|
+|Hindi|No|Yes - Apr 2, 2026|Yes - Apr 2, 2026|Yes - Apr 2, 2026|
 |Hungarian|Yes|Yes - Nov 5, 2024|Yes - Nov 5, 2024|Yes - 2024|
 |Indonesian|Yes|Yes - Apr 17, 2025|No|No|
 |Italian|Yes - Aug 9, 2023|Yes - Aug 16, 2023|No|Yes - 2024|

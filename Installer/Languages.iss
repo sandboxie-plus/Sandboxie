@@ -13,6 +13,7 @@ Name: "ChineseTraditional"; MessagesFile: "isl\ChineseTraditional.isl"
 Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
+Name: "hindi"; MessagesFile: "isl\Hindi.islu"
 Name: "hungarian"; MessagesFile: "compiler:Languages\Hungarian.isl"
 Name: "Italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
@@ -67,6 +68,31 @@ english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect th
 english.RefreshBuild=Download latest Templates.ini and translations
 english.InstallImDisk=Install (or Update) ImDisk 3.0 driver (for RamDisk and Encrypted Sandboxes)
 english.Qt6Win10Unsupported=Qt 6 framework does not support Windows 10 versions 1507, 1511, or 1607.%nPlease update to Windows 10 1809 (build 17763) or newer.%nSee issue #5079 for details:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nDo you still want to continue with the installation?
+
+; Hindi
+hindi.AddSandboxedMenu=संदर्भ मेनू में "सैंडबॉक्स में चलाएँ" जोड़ें
+hindi.AddSandboxedBrowser=Sandboxie के अंतर्गत वेब ब्राउज़र शुरू करने के लिए डेस्कटॉप शॉर्टकट जोड़ें
+hindi.SandboxieStartMenu1=किसी भी प्रोग्राम को सैंडबॉक्स में चलाएँ
+hindi.SandboxieStartMenu2=वेब ब्राउज़र को सैंडबॉक्स में चलाएँ
+hindi.SandboxieStartMenu3=Sandboxie स्टार्ट मेनू
+hindi.SandboxedBrowser=सैंडबॉक्स्ड वेब ब्राउज़र
+hindi.CustomPageLabel1=इंस्टॉलेशन प्रकार चुनें
+hindi.CustomPageLabel2=कैसे इंस्टॉल किया जाए
+hindi.CustomPageLabel3=इंस्टॉलेशन मोड चुनें
+hindi.CustomPageInstallMode=इस कंप्यूटर पर {#MyAppName} इंस्टॉल करें
+hindi.CustomPageUpgradeMode=मौजूदा {#MyAppName} इंस्टॉलेशन अपडेट करें
+hindi.CustomPagePortableMode=पोर्टेबल उपयोग के लिए सभी फ़ाइलें किसी फ़ोल्डर में निकालें
+hindi.RequiresWin7OrLater=Sandboxie-Plus के लिए Windows 7 या बाद का संस्करण आवश्यक है।
+hindi.ClassicFound=Sandboxie Classic इंस्टॉलेशन मिला है; आगे बढ़ने से पहले उसे अनइंस्टॉल करना होगा। क्या आप अभी अनइंस्टॉल करना चाहते हैं?
+hindi.RunSandboxedMenu=&सैंडबॉक्स में चलाएँ
+hindi.UninstallTaskLabel1=अनइंस्टॉल प्रकार चुनें
+hindi.UninstallTaskLabel2=आप Sandboxie-Plus को कैसे अनइंस्टॉल करना चाहते हैं?
+hindi.UninstallTaskLabel3=&कॉन्फ़िगरेशन फ़ाइलें और सैंडबॉक्स रखें%nयदि आप कॉन्फ़िगरेशन फ़ाइलें और सैंडबॉक्स सुरक्षित रखते हुए Sandboxie-Plus को फिर से इंस्टॉल करना चाहते हैं, तो यह सबसे अनुशंसित विकल्प है।
+hindi.UninstallTaskLabel4=&कॉन्फ़िगरेशन फ़ाइलें हटाएँ%nइस विकल्प से Sandboxie.ini और Sandboxie-Plus.ini कॉन्फ़िगरेशन फ़ाइलें हटेंगी, जबकि सैंडबॉक्स यथावत रहेंगे।
+hindi.UninstallTaskLabel5=कॉन्फ़िगरेशन फ़ाइलें और &सैंडबॉक्स हटाएँ%nइस विकल्प से सभी कॉन्फ़िगरेशन फ़ाइलें और सैंडबॉक्स हट जाएंगे, जिनमें FileRootPath के साथ कस्टम पथ में स्थित Sandbox फ़ोल्डर भी शामिल है।
+hindi.RefreshBuild=नवीनतम Templates.ini और अनुवाद डाउनलोड करें
+hindi.InstallImDisk=ImDisk 3.0 ड्राइवर इंस्टॉल करें (या अपडेट करें) (RamDisk और एन्क्रिप्टेड सैंडबॉक्स के लिए)
+hindi.Qt6Win10Unsupported=Qt 6 फ्रेमवर्क Windows 10 संस्करण 1507, 1511 या 1607 का समर्थन नहीं करता।%nकृपया Windows 10 1809 (बिल्ड 17763) या नया संस्करण इंस्टॉल करें।%nविवरण के लिए issue #5079 देखें:%nhttps://github.com/sandboxie-plus/Sandboxie/issues/5079%nक्या आप फिर भी इंस्टॉलेशन जारी रखना चाहते हैं?
 
 ; Norwegian
 norwegian.AddSandboxedMenu=Legg til «Kjør i sandkasse» i kontekstmenyen

@@ -1,4 +1,4 @@
-name: Update Copyright Year
+name: Update copyright year
 
 on:
   workflow_dispatch:
@@ -59,6 +59,16 @@ jobs:
           # Covers "2020 - XXXX David Xanatos"
           sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
             Sandboxie/install/LICENSE.TXT
+
+          # SandboxiePlus/SandMan/LICENSE
+          # Covers "2020 - XXXX David Xanatos"
+          sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
+            SandboxiePlus/SandMan/LICENSE
+
+          # LICENSE.Plus (Sandboxie Plus repository root license)
+          # Covers "2020 - XXXX David Xanatos"
+          sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
+            LICENSE.Plus
 
           git diff --exit-code && deploy=0 || deploy=1
           echo "deploy=$deploy" >> $GITHUB_OUTPUT

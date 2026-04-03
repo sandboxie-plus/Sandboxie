@@ -1,0 +1,76 @@
+name: Update Copyright Year
+
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: 'Copyright year to update to (defaults to current year)'
+        required: false
+        default: ''
+  schedule:
+    - cron: '0 0 1 1 *'  # January 1st at midnight UTC
+
+jobs:
+  update-copyright:
+    name: Update copyright year
+    # Skip scheduled runs on forks
+    if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      - name: Determine copyright year
+        id: year
+        run: |
+          if [ -n "${{ github.event.inputs.year }}" ]; then
+            YEAR="${{ github.event.inputs.year }}"
+          else
+            YEAR=$(date +%Y)
+          fi
+          echo "year=$YEAR" >> $GITHUB_OUTPUT
+          echo "Using copyright year: $YEAR"
+
+      - name: Update copyright year in canonical files
+        id: check
+        run: |
+          YEAR=${{ steps.year.outputs.year }}
+
+          # Sandboxie/common/my_version.h
+          # Covers the file header comment ("2020-XXXX David Xanatos")
+          # and MY_COPYRIGHT_STRING ("2020-XXXX by David Xanatos")
+          sed -i -E "s/(20[0-9]{2}-)20[0-9]{2}( (by )?David Xanatos)/\1${YEAR}\2/g" \
+            Sandboxie/common/my_version.h
+
+          # SandboxiePlus/version.h
+          # Covers MY_COPYRIGHT_STRING ("2020-XXXX by David Xanatos")
+          sed -i -E "s/(20[0-9]{2}-)20[0-9]{2}( by David Xanatos)/\1${YEAR}\2/g" \
+            SandboxiePlus/version.h
+
+          # Installer/license.txt (Sandboxie Plus installer)
+          # Covers "2020 - XXXX David Xanatos"
+          sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
+            Installer/license.txt
+
+          # Sandboxie/install/LICENSE.TXT (Sandboxie Classic installer)
+          # Covers "2020 - XXXX David Xanatos"
+          sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
+            Sandboxie/install/LICENSE.TXT
+
+          git diff --exit-code && deploy=0 || deploy=1
+          echo "deploy=$deploy" >> $GITHUB_OUTPUT
+
+      - name: Commit copyright year updates
+        if: steps.check.outputs.deploy == '1'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Update copyright year to ${{ steps.year.outputs.year }}"
+          git pull --rebase=merges
+          git push
+          commit=$(git rev-parse HEAD)
+          echo "Created commit: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$commit"

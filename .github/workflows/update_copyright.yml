@@ -34,21 +34,14 @@ jobs:
           REPO="${REPOSITORY#*/}"
           TARGET_LOGIN="DavidXanatos"
 
-          # Manual runs should never be blocked by the "recent maintainer commits" check.
-          if [[ "${{ github.event_name }}" != "schedule" ]]; then
-            echo "should_update=true" >> "$GITHUB_OUTPUT"
-            echo "reason=manual_run" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          # Only allow scheduled updates on the upstream repository owner (avoid forks running scheduled writes).
+          # Only allow updates on the upstream repository owner (avoid forks running writes)
           if [[ "$OWNER" != "sandboxie-plus" ]]; then
             echo "should_update=false" >> "$GITHUB_OUTPUT"
-            echo "reason=scheduled_run_not_on_upstream_owner" >> "$GITHUB_OUTPUT"
+            echo "reason=not_on_upstream_owner" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Use GitHub Search API to check if TARGET_LOGIN pushed any commit in the last ~60 days.
+          # Use GitHub Search API to check if TARGET_LOGIN pushed any commit in the last ~60 days
           SINCE_DATE="$(date -u -d '60 days ago' +%Y-%m-%d)"
           echo "since_iso=${SINCE_DATE}T00:00:00Z" >> "$GITHUB_OUTPUT"
 
@@ -77,8 +70,8 @@ jobs:
   update-copyright:
     name: Update copyright year
     needs: activity-check
-    # Only run on upstream and keep the schedule activity check
-    if: github.repository_owner == 'sandboxie-plus' && (github.event_name != 'schedule' || needs.activity-check.outputs.should_update == 'true')
+    # Always require passing activity-check (manual runs included), and only run on upstream
+    if: github.repository_owner == 'sandboxie-plus' && needs.activity-check.outputs.should_update == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write

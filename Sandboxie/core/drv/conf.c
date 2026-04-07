@@ -27,6 +27,7 @@
 #include "api_flags.h"
 #include "obj.h"
 #include "util.h"
+#include "session.h"
 
 #define KERNEL_MODE
 #include "common/stream.h"

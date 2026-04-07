@@ -11,10 +11,74 @@ on:
     - cron: '0 0 1 1 *'  # January 1st at midnight UTC
 
 jobs:
+  activity-check:
+    name: Check recent maintainer activity
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      should_update: ${{ steps.check.outputs.should_update }}
+      reason: ${{ steps.check.outputs.reason }}
+      since_iso: ${{ steps.check.outputs.since_iso }}
+    steps:
+      - name: Decide whether to update
+        id: check
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }} # "owner/repo"
+        run: |
+          set -euo pipefail
+
+          OWNER="${REPOSITORY%%/*}"
+          REPO="${REPOSITORY#*/}"
+          TARGET_LOGIN="DavidXanatos"
+
+          # Manual runs should never be blocked by the "recent maintainer commits" check.
+          if [[ "${{ github.event_name }}" != "schedule" ]]; then
+            echo "should_update=true" >> "$GITHUB_OUTPUT"
+            echo "reason=manual_run" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Only allow scheduled updates on the upstream repository owner (avoid forks running scheduled writes).
+          if [[ "$OWNER" != "sandboxie-plus" ]]; then
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            echo "reason=scheduled_run_not_on_upstream_owner" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Use GitHub Search API to check if TARGET_LOGIN pushed any commit in the last ~60 days.
+          SINCE_DATE="$(date -u -d '60 days ago' +%Y-%m-%d)"
+          echo "since_iso=${SINCE_DATE}T00:00:00Z" >> "$GITHUB_OUTPUT"
+
+          Q="repo:${OWNER}/${REPO}+author:${TARGET_LOGIN}+committer-date:>=${SINCE_DATE}"
+          API_URL="$GITHUB_API_URL/search/commits?q=$Q&per_page=1"
+
+          TOTAL="$(curl -fsSL \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$API_URL" | jq -r '.total_count')"
+
+          if [[ "$TOTAL" -ge 1 ]]; then
+            echo "should_update=true" >> "$GITHUB_OUTPUT"
+            echo "reason=target_login_has_recent_commits" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            echo "reason=no_recent_target_login_commits" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Print decision
+        run: |
+          echo "should_update=${{ steps.check.outputs.should_update }}"
+          echo "reason=${{ steps.check.outputs.reason }}"
+          echo "since_iso=${{ steps.check.outputs.since_iso }}"
+
   update-copyright:
     name: Update copyright year
-    # Skip scheduled runs on forks
-    if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
+    needs: activity-check
+    # Only run on upstream and keep the schedule activity check
+    if: github.repository_owner == 'sandboxie-plus' && (github.event_name != 'schedule' || needs.activity-check.outputs.should_update == 'true')
     runs-on: ubuntu-latest
     permissions:
       contents: write

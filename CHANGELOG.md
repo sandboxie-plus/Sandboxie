@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.17.4 / 5.72.4] - 2026-04-??
+
+### Fixed
+- fixed issue with volatile config update
+
 
 
 ## [1.17.3 / 5.72.3] - 2026-03-29

@@ -2149,11 +2149,10 @@ _FX NTSTATUS Conf_Api_Update(PROCESS *proc, ULONG64 *parms)
     if (proc)
         return STATUS_ACCESS_DENIED;
 
-    // todo: uncomment
-    //if (PsGetCurrentProcessId() != Api_ServiceProcessId) {
-    //    if (Session_GetLeadSession(PsGetCurrentProcessId()) == 0)
-    //        return STATUS_ACCESS_DENIED;
-    //}
+    if (PsGetCurrentProcessId() != Api_ServiceProcessId) {
+        if (Session_GetLeadSession(PsGetCurrentProcessId()) == 0)
+            return STATUS_ACCESS_DENIED;
+    }
 
     //
     // prepare parameters

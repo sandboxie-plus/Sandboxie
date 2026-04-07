@@ -4595,17 +4595,17 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandManTray.cpp" line="302"/>
         <source>No pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有能显示的固定的沙箱。</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="304"/>
         <source>No active or pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有能显示的活动或固定的沙箱。</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="305"/>
         <source>No sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有能显示的沙箱。</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="508"/>

@@ -131,6 +131,7 @@ TRANSLATIONS += sandman_ar.ts \
     sandman_en.ts \
     sandman_es.ts \
     sandman_fr.ts \
+    sandman_hi.ts \
     sandman_hu.ts \
     sandman_it.ts \
     sandman_ja.ts \

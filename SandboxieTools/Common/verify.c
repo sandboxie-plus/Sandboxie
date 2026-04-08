@@ -219,11 +219,12 @@ CleanupExit:
     return status;
 }
 
-
-NTSTATUS MyHashFile(
+NTSTATUS MyHashFileEx(
     _In_ PCWSTR FileName,
     _Out_ PVOID* Hash,
-    _Out_ PULONG HashSize
+    _Out_ PULONG HashSize,
+    _In_ ULONG CreateOptions,
+    _Out_opt_ PHANDLE FileHandle
     )
 {
     NTSTATUS status;
@@ -232,10 +233,21 @@ NTSTATUS MyHashFile(
     IO_STATUS_BLOCK iosb;
     MY_HASH_OBJ hashObj;
 
+    // Determine access rights based on create options
+    // SYNCHRONIZE is required for FILE_SYNCHRONOUS_IO_NONALERT
+    ACCESS_MASK desiredAccess = FILE_READ_DATA | FILE_READ_ATTRIBUTES | SYNCHRONIZE;
+    ULONG shareAccess = FILE_SHARE_READ;
+    if (CreateOptions & FILE_DELETE_ON_CLOSE) {
+        desiredAccess |= FILE_EXECUTE | DELETE;
+        shareAccess |= FILE_SHARE_DELETE;
+    }
+
     if (!NT_SUCCESS(status = MyInitHash(&hashObj)))
         goto CleanupExit;
 
-    if (!NT_SUCCESS(status = MyCreateFile(&fileHandle, FileName, FILE_GENERIC_READ, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE)))
+    if (!NT_SUCCESS(status = MyCreateFile(&fileHandle, FileName,
+        desiredAccess, FILE_ATTRIBUTE_NORMAL, shareAccess, FILE_OPEN,
+        FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE | CreateOptions)))
         goto CleanupExit;
 
     buffer = malloc(FILE_BUFFER_SIZE);
@@ -264,11 +276,28 @@ NTSTATUS MyHashFile(
 CleanupExit:
     if(buffer)
         free(buffer);
-    if(fileHandle != INVALID_HANDLE_VALUE)
-        NtClose(fileHandle);
+    if(fileHandle != INVALID_HANDLE_VALUE) {
+        if (FileHandle && NT_SUCCESS(status)) {
+            // Return handle to caller - they are responsible for closing it
+            *FileHandle = fileHandle;
+        } else {
+            NtClose(fileHandle);
+            if (FileHandle)
+                *FileHandle = INVALID_HANDLE_VALUE;
+        }
+    }
     MyFreeHash(&hashObj);
 
     return status;
+}
+
+NTSTATUS MyHashFile(
+    _In_ PCWSTR FileName,
+    _Out_ PVOID* Hash,
+    _Out_ PULONG HashSize
+)
+{
+    return MyHashFileEx(FileName, Hash, HashSize, 0, NULL);
 }
 
 NTSTATUS MyHashBuffer(
@@ -396,22 +425,31 @@ CleanupExit:
 }
 
 
-NTSTATUS VerifyFileSignature(const wchar_t* FilePath)
+NTSTATUS VerifyFileSignature(const wchar_t* FilePath, const wchar_t* SigFile)
 {
     NTSTATUS status;
     ULONG signatureSize;
     PVOID signature = NULL;
     WCHAR* signatureFileName = NULL;
 
-
-    // Read the signature.
-    signatureFileName = (WCHAR*)malloc((wcslen(FilePath) + 4 + 1) * sizeof(WCHAR));
-    if(!signatureFileName) {
-        status = STATUS_INSUFFICIENT_RESOURCES;
-        goto CleanupExit;
+    // Determine signature file path
+    if (SigFile) {
+        signatureFileName = (WCHAR*)malloc((wcslen(SigFile) + 1) * sizeof(WCHAR));
+        if (!signatureFileName) {
+            status = STATUS_INSUFFICIENT_RESOURCES;
+            goto CleanupExit;
+        }
+        wcscpy(signatureFileName, SigFile);
+    } else {
+        // Default: FilePath + ".sig"
+        signatureFileName = (WCHAR*)malloc((wcslen(FilePath) + 4 + 1) * sizeof(WCHAR));
+        if (!signatureFileName) {
+            status = STATUS_INSUFFICIENT_RESOURCES;
+            goto CleanupExit;
+        }
+        wcscpy(signatureFileName, FilePath);
+        wcscat(signatureFileName, L".sig");
     }
-    wcscpy(signatureFileName, FilePath);
-    wcscat(signatureFileName, L".sig");
 
     // Read the signature file.
 

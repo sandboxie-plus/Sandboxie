@@ -20,6 +20,7 @@ on:
       - '.github/workflows/lupdate.yml'
       - '.github/workflows/stale.yml'
       - '.github/workflows/test.yml'
+      - '.github/workflows/update_copyright.yml'
       - '.github/workflows/winget.yml'
       - '.github/FUNDING.yml'
       - '.github/dependabot.yml'
@@ -52,6 +53,7 @@ on:
       - '.github/workflows/lupdate.yml'
       - '.github/workflows/stale.yml'
       - '.github/workflows/test.yml'
+      - '.github/workflows/update_copyright.yml'
       - '.github/workflows/winget.yml'
       - '.github/FUNDING.yml'
       - '.github/dependabot.yml'
@@ -101,7 +103,7 @@ jobs:
           echo qt_version=%qt6_version% >> %GITHUB_ENV%
 
       - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
     #
     # Compile Sandboxie Core
@@ -180,7 +182,7 @@ jobs:
 
       - name: Upload installer assets
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v6.0.0
+        uses: actions/upload-artifact@v7.0.0
         with:
           name: Assets
           path: |
@@ -189,7 +191,7 @@ jobs:
 
       - name: Upload Sandboxie x64
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v6.0.0
+        uses: actions/upload-artifact@v7.0.0
         with:
           name: Sandboxie_x64
           path: |
@@ -215,7 +217,7 @@ jobs:
           echo qt6_version=%qt6_version% >> %GITHUB_ENV%
 
       - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
     #
     # Compile Sandboxie Core
@@ -300,7 +302,7 @@ jobs:
 
       - name: Upload Sandboxie ARM64
         #if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v6.0.0
+        uses: actions/upload-artifact@v7.0.0
         with:
           name: Sandboxie_ARM64
           path: |

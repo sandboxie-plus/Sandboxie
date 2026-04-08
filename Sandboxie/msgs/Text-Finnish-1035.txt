@@ -2909,7 +2909,7 @@ Oletuslista estetyistä TCP/IP-porteista
 .
 
 4294;txt;01
-Salli ohjelmien päivittää Windows 7 tehtäväpalkin pikaluetteloita
+Salli ohjelmien päivittää Windows tehtäväpalkin pikaluetteloita
 .
 
 #----------------------------------------------------------------------------

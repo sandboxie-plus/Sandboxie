@@ -35,6 +35,8 @@
 #include "common/crc.c"
 #define RC4_HEADER_ONLY
 #include "common/rc4.c"
+//#define BASE64_HEADER_ONLY
+#include "common/base64.c"
 #include "core/drv/api_defs.h"
 #include "DriverAssist.h"
 
@@ -678,7 +680,7 @@ bool SbieIniServer::HashPassword(const WCHAR *Password, WCHAR *Hash41)
 
     for (i = 0; i < 20; ++i) {
 
-        UCHAR NibbleH = (data[i] & 0xF0) >> 8;
+        UCHAR NibbleH = (data[i] & 0xF0) >> 8; // bug bug should be >> 4
         UCHAR NibbleL = (data[i] & 0x0F);
 
         if (NibbleH >= 10)
@@ -723,13 +725,124 @@ finish:
 
 
 //---------------------------------------------------------------------------
+// GenerateSalt (returns 16 raw bytes)
+//---------------------------------------------------------------------------
+
+
+bool SbieIniServer::GenerateSalt(UCHAR Salt[16])
+{
+    HCRYPTPROV hCryptProv = NULL;
+    BOOL ok;
+
+    ok = CryptAcquireContext(
+                &hCryptProv, NULL, MS_ENH_RSA_AES_PROV, PROV_RSA_AES,
+                CRYPT_VERIFYCONTEXT | CRYPT_SILENT);
+    if (!ok)
+        return false;
+
+    ok = CryptGenRandom(hCryptProv, 16, Salt);
+    CryptReleaseContext(hCryptProv, 0);
+
+    return ok ? true : false;
+}
+
+
+//---------------------------------------------------------------------------
+// HashPassword2 (SHA256 with raw salt, returns 32 raw bytes)
+//---------------------------------------------------------------------------
+
+
+bool SbieIniServer::HashPassword2(const WCHAR *Password, const UCHAR Salt[16], UCHAR Hash[32])
+{
+    HCRYPTPROV hCryptProv;
+    HCRYPTHASH hCryptHash;
+    ULONG data_len;
+    BOOL ok;
+    ULONG ErrorLevel;
+
+    hCryptProv = NULL;
+    hCryptHash = NULL;
+
+    //
+    // Acquire crypto context with SHA256 support
+    //
+
+    ok = CryptAcquireContext(
+                &hCryptProv, NULL, MS_ENH_RSA_AES_PROV, PROV_RSA_AES,
+                CRYPT_VERIFYCONTEXT | CRYPT_SILENT);
+    if (! ok) {
+        ErrorLevel = 0x21;
+        goto finish;
+    }
+
+    ok = CryptCreateHash(hCryptProv, CALG_SHA_256, 0, 0, &hCryptHash);
+    if (! ok) {
+        ErrorLevel = 0x22;
+        goto finish;
+    }
+
+    //
+    // Hash: salt || password
+    //
+
+    ok = CryptHashData(hCryptHash, Salt, 16, 0);
+    if (! ok) {
+        ErrorLevel = 0x31;
+        goto finish;
+    }
+
+    data_len = (ULONG)wcslen(Password);
+    if (data_len > 64)
+        data_len = 64;
+    data_len *= sizeof(WCHAR);
+
+    ok = CryptHashData(hCryptHash, (BYTE *)Password, data_len, 0);
+    if (! ok) {
+        ErrorLevel = 0x32;
+        goto finish;
+    }
+
+    //
+    // Get hash result (32 bytes for SHA256)
+    //
+
+    data_len = 32;
+    ok = CryptGetHashParam(hCryptHash, HP_HASHVAL, Hash, &data_len, 0);
+    if (! ok) {
+        ErrorLevel = 0x41;
+        goto finish;
+    }
+
+    ok = TRUE;
+    ErrorLevel = 0;
+
+finish:
+
+    ULONG LastError = GetLastError();
+
+    if (hCryptHash)
+        CryptDestroyHash(hCryptHash);
+
+    if (hCryptProv)
+        CryptReleaseContext(hCryptProv, 0);
+
+    if (! ok) {
+        SbieApi_LogEx(
+            m_session_id, 2323, L"[%d / %08X]", ErrorLevel, LastError);
+    }
+
+    return (ok ? true : false);
+}
+
+
+//---------------------------------------------------------------------------
 // IsCallerAuthorized
 //---------------------------------------------------------------------------
 
 
 ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, const WCHAR *Section)
 {
-    WCHAR buf[42], buf2[42];
+    WCHAR buf[68], buf2[48];
 
     //
     // check for Administrator-only access
@@ -745,19 +858,37 @@ ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, co
 
     //
     // check for password protection
+    // Format: old = 40 hex chars (SHA1)
+    //         new = 64 base64 chars encoding [16 byte salt][32 byte SHA256 hash]
     //
 
-    buf[41] = L'\0';
+    buf[65] = L'\0';
     SbieApi_QueryConfAsIs(
-        NULL, L"EditPassword", 0, buf, 41 * sizeof(WCHAR));
+        NULL, L"EditPassword", 0, buf, ARRAYSIZE(buf));
     if (! buf[0])
         return STATUS_SUCCESS;
 
     bool access_granted = false;
-    if (wcslen(buf) == 40)
+    ULONG len = (ULONG)wcslen(buf);
+
+    if (len == 40) {
+
         if (HashPassword(Password, buf2))
             if (wmemcmp(buf, buf2, 40) == 0)
                 access_granted = true;
+
+    } else if (len == 64) {
+
+        UCHAR combined[48];
+        if (b64_decode(buf, combined, sizeof(combined))) {
+
+            UCHAR computedHash[32];
+            if (HashPassword2(Password, combined, computedHash)) {
+                if (memcmp(combined + 16, computedHash, 32) == 0)
+                    access_granted = true;
+            }
+        }
+    }
 
     SecureZeroMemory(buf2, sizeof(buf2));
     SecureZeroMemory(buf, sizeof(buf));
@@ -1100,19 +1231,30 @@ ULONG SbieIniServer::SetOrTestPassword(MSG_HEADER *msg)
 
             wcscpy(req2->setting, L"EditPassword");
 
-            req2->value_len = 40;
-            if (HashPassword(req->new_password, req2->value)) {
+            if (! *req->new_password) {
 
-                if (! *req->new_password) {
-                    req2->value_len = 0;
-                    req2->value[0] = L'\0';
-                }
-
+                req2->value_len = 0;
+                req2->value[0] = L'\0';
                 status = SetSetting(&req2->h);
 
-            } else
-                status = STATUS_ACCESS_DENIED;
+            } else {
 
+                UCHAR combined[48];
+
+                if (!GenerateSalt(combined) 
+				 || !HashPassword2(req->new_password, combined, combined + 16)) {
+                    status = STATUS_UNSUCCESSFUL;
+                    goto cleanup;
+                }
+
+                b64_encode(combined, 48, req2->value, 65);
+                req2->value[64] = L'\0';
+                req2->value_len = 64;
+
+                status = SetSetting(&req2->h);
+            }
+
+cleanup:
             HeapFree(GetProcessHeap(), 0, req2);
         }
     }
@@ -1466,6 +1608,10 @@ NTSTATUS SbieIniServer::RunSbieCtrl(HANDLE hToken, const WCHAR* DeskName, const 
         }
 
     } else if (CtrlCmdLen > 0) {
+
+        if (CtrlCmdLen >= ARRAYSIZE(ctrlCmd) - 1) {
+            return STATUS_INVALID_PARAMETER;
+        }
 
         memcpy(ctrlCmd, CtrlCmd, CtrlCmdLen * sizeof(WCHAR));
         ctrlCmd[CtrlCmdLen] = L'\0';

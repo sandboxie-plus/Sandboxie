@@ -1,0 +1,143 @@
+name: Update copyright year
+
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: 'Copyright year to update to (defaults to current year)'
+        required: false
+        default: ''
+  schedule:
+    - cron: '0 0 1 1 *'  # January 1st at midnight UTC
+
+jobs:
+  activity-check:
+    name: Check recent maintainer activity
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      should_update: ${{ steps.check.outputs.should_update }}
+      reason: ${{ steps.check.outputs.reason }}
+      since_iso: ${{ steps.check.outputs.since_iso }}
+    steps:
+      - name: Decide whether to update
+        id: check
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }} # "owner/repo"
+        run: |
+          set -euo pipefail
+
+          OWNER="${REPOSITORY%%/*}"
+          REPO="${REPOSITORY#*/}"
+          TARGET_LOGIN="DavidXanatos"
+
+          # Only allow updates on the upstream repository owner (avoid forks running writes)
+          if [[ "$OWNER" != "sandboxie-plus" ]]; then
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            echo "reason=not_on_upstream_owner" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Use GitHub Search API to check if TARGET_LOGIN pushed any commit in the last ~60 days
+          SINCE_DATE="$(date -u -d '60 days ago' +%Y-%m-%d)"
+          echo "since_iso=${SINCE_DATE}T00:00:00Z" >> "$GITHUB_OUTPUT"
+
+          Q="repo:${OWNER}/${REPO}+author:${TARGET_LOGIN}+committer-date:>=${SINCE_DATE}"
+          API_URL="$GITHUB_API_URL/search/commits?q=$Q&per_page=1"
+
+          TOTAL="$(curl -fsSL \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$API_URL" | jq -r '.total_count')"
+
+          if [[ "$TOTAL" -ge 1 ]]; then
+            echo "should_update=true" >> "$GITHUB_OUTPUT"
+            echo "reason=target_login_has_recent_commits" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            echo "reason=no_recent_target_login_commits" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Print decision
+        run: |
+          echo "should_update=${{ steps.check.outputs.should_update }}"
+          echo "reason=${{ steps.check.outputs.reason }}"
+          echo "since_iso=${{ steps.check.outputs.since_iso }}"
+
+  update-copyright:
+    name: Update copyright year
+    needs: activity-check
+    # Always require passing activity-check (manual runs included), and only run on upstream
+    if: github.repository_owner == 'sandboxie-plus' && needs.activity-check.outputs.should_update == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      - name: Determine copyright year
+        id: year
+        run: |
+          if [ -n "${{ github.event.inputs.year }}" ]; then
+            YEAR="${{ github.event.inputs.year }}"
+          else
+            YEAR=$(date +%Y)
+          fi
+          echo "year=$YEAR" >> $GITHUB_OUTPUT
+          echo "Using copyright year: $YEAR"
+
+      - name: Update copyright year in canonical files
+        id: check
+        run: |
+          YEAR=${{ steps.year.outputs.year }}
+
+          # Sandboxie/common/my_version.h
+          # Covers the file header comment ("2020-XXXX David Xanatos")
+          # and MY_COPYRIGHT_STRING ("2020-XXXX by David Xanatos")
+          sed -i -E "s/(20[0-9]{2}-)20[0-9]{2}( (by )?David Xanatos)/\1${YEAR}\2/g" \
+            Sandboxie/common/my_version.h
+
+          # SandboxiePlus/version.h
+          # Covers MY_COPYRIGHT_STRING ("2020-XXXX by David Xanatos")
+          sed -i -E "s/(20[0-9]{2}-)20[0-9]{2}( by David Xanatos)/\1${YEAR}\2/g" \
+            SandboxiePlus/version.h
+
+          # Installer/license.txt (Sandboxie Plus installer)
+          # Covers "2020 - XXXX David Xanatos"
+          sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
+            Installer/license.txt
+
+          # Sandboxie/install/LICENSE.TXT (Sandboxie Classic installer)
+          # Covers "2020 - XXXX David Xanatos"
+          sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
+            Sandboxie/install/LICENSE.TXT
+
+          # SandboxiePlus/SandMan/LICENSE
+          # Covers "2020 - XXXX David Xanatos"
+          sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
+            SandboxiePlus/SandMan/LICENSE
+
+          # LICENSE.Plus (Sandboxie Plus repository root license)
+          # Covers "2020 - XXXX David Xanatos"
+          sed -i -E "s/(20[0-9]{2} - )20[0-9]{2}( David Xanatos)/\1${YEAR}\2/g" \
+            LICENSE.Plus
+
+          git diff --exit-code && deploy=0 || deploy=1
+          echo "deploy=$deploy" >> $GITHUB_OUTPUT
+
+      - name: Commit copyright year updates
+        if: steps.check.outputs.deploy == '1'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Update copyright year to ${{ steps.year.outputs.year }}"
+          git pull --rebase=merges
+          git push
+          commit=$(git rev-parse HEAD)
+          echo "Created commit: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$commit"

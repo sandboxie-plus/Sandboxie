@@ -80,6 +80,57 @@ static NTSTATUS SH32_LdrGetDllHandleEx(
 
 static ULONG SH_WindowMonitorThread(void *lpParameter);
 
+static HRESULT WINAPI SH32_IShellWindows_FindWindowSW(
+    void *pShellWindows,
+    VARIANT *pvarLoc, VARIANT *pvarLocRoot,
+    int swClass, long *phwnd, int swfwOptions,
+    IDispatch **ppdispOut
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+    , ULONG_PTR *StubData
+#endif
+);
+
+static void SH32_ComRelease(void *pUnknown);
+
+static void SH32_ComAddRef(void *pUnknown);
+
+static BOOLEAN SH32_IsUsableShellDispatch(IDispatch *pDispatch);
+
+static HRESULT SH32_IShellWindows_ItemDispatch(
+    void *pShellWindows, LONG index, IDispatch **ppDispatch);
+
+static HRESULT SH32_IShellWindows_GetCount(
+    void *pShellWindows, long *pCount);
+
+static void *SH32_FakeDesktop_Create(void);
+static void *SH32_FakeServiceProvider_Create(void *pDesktop);
+static void *SH32_FakeBrowserView_Create(void);
+static void *SH32_FakeShellView_Create(void);
+static void *SH32_FakeFolderView_Create(void);
+static void *SH32_FakeShellApp_Create(void);
+
+static const GUID SH32_IID_IServiceProvider =
+{ 0x6d5140c1, 0x7436, 0x11ce,{ 0x80, 0x34, 0x00, 0xaa, 0x00, 0x60, 0x09, 0xfa } };
+
+static const GUID SH32_IID_IShellBrowser =
+{ 0x000214e2, 0x0000, 0x0000,{ 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46 } };
+
+static const GUID SH32_SID_STopLevelBrowser =
+{ 0x4c96be40, 0x915c, 0x11cf,{ 0x99, 0xd3, 0x00, 0xaa, 0x00, 0x4a, 0xe8, 0x37 } };
+
+static const GUID SH32_IID_IShellWindows =
+{ 0x85cb6900, 0x4d95, 0x11cf,{ 0x96, 0x0c, 0x00, 0x80, 0xc7, 0xf4, 0xee, 0x85 } };
+
+static const GUID SH32_IID_IShellFolderViewDual =
+{ 0xE7A1AF80, 0x4D96, 0x11CF,{ 0x96, 0x0C, 0x00, 0x80, 0xC7, 0xF4, 0xEE, 0x85 } };
+
+// {D8F015C0-C278-11CE-A49E-444553540000}  IShellDispatch
+static const GUID SH32_IID_IShellDispatch =
+{ 0xD8F015C0, 0xC278, 0x11CE,{ 0xA4, 0x9E, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00 } };
+
+static const GUID SH32_IID_IShellDispatch2 =
+{ 0xA4C6892C, 0x3BA9, 0x11D2,{ 0x9D, 0xEA, 0x00, 0xC0, 0x4F, 0xB1, 0x61, 0x62 } };
+
 
 //---------------------------------------------------------------------------
 
@@ -403,7 +454,7 @@ _FX BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo)
                 FreePath = TRUE;
         }
 
-        if (SbieDll_IsDirectory(path))
+        if (path && SbieDll_IsDirectory(path))
             CallSystem = FALSE;
     }
 
@@ -590,7 +641,7 @@ _FX BOOL SH32_Shell_NotifyIconW(
         }
 
         COLORREF color;
-        if (SbieDll_GetBorderColor(NULL, &color, NULL, NULL, NULL))
+        if (lpData && SbieDll_GetBorderColor(NULL, &color, NULL, NULL, NULL))
         {
             HICON newIcon = SH32_BorderToIcon(lpData->hIcon, color);
             if (newIcon) {
@@ -1444,7 +1495,7 @@ _FX ULONG SH_GetInternetExplorerVersion(void)
     HANDLE handle;
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING objname;
-    ULONG version;
+    ULONG version = 0;
 
     if (Dll_ImageType != DLL_IMAGE_INTERNET_EXPLORER)
         return 0;
@@ -1718,7 +1769,8 @@ _FX void SH32_RouteTheCall(
 
     RtlInitString(&ansi, Path);
     uni.Buffer = NULL;
-    RtlAnsiStringToUnicodeString(&uni, &ansi, TRUE);
+    if (!NT_SUCCESS(RtlAnsiStringToUnicodeString(&uni, &ansi, TRUE)) || !uni.Buffer)
+        ExitProcess(0);
 
     iptr = uni.Buffer;
     optr = uni.Buffer;
@@ -1820,9 +1872,23 @@ _FX void SH32_IContextMenu_HookVtbl(void *lpVtbl, int index, void *func)
     // hooking, we check if we already hooked the specified vtbl
     //
 
-    ULONG_PTR *vtbl = *(ULONG_PTR **)lpVtbl;
-    void *xold = (void *)vtbl[index];
+    ULONG_PTR *vtbl;
+    void *xold;
     void *xnew;
+
+    if (!lpVtbl || !func || index < 0)
+        return;
+
+    __try {
+        vtbl = *(ULONG_PTR **)lpVtbl;
+        if (!vtbl || !vtbl[index])
+            return;
+        xold = (void *)vtbl[index];
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        return;
+    }
+
     ULONG_PTR *StubData = Dll_JumpStubDataForCode(xold);
     if (StubData && StubData[2] == tzuk)
         xnew = NULL;
@@ -1927,4 +1993,1807 @@ _FX void SH32_IContextMenu_Hook(REFCLSID rclsid, void *pContextMenu)
             pContextMenu, 0, SH32_IContextMenuHook_QueryInterface);
     }
 }
+
+
+//---------------------------------------------------------------------------
+// IShellWindows support
+//---------------------------------------------------------------------------
+
+
+#define SH32_SWC_DESKTOP            0x8
+#define SH32_SWC_EXPLORER           0x0
+#define SH32_SWFO_NEEDDISPATCH      0x1
+#define SH32_SWFO_INCLUDEPENDING    0x2
+#define SH32_E_POINTER              ((HRESULT)0x80004003L)
+
+
+_FX BOOLEAN SH32_ComGetVtbl(void *pUnknown, ULONG requiredSlot, ULONG_PTR **ppVtbl)
+{
+    ULONG_PTR *vtbl;
+
+    if (!ppVtbl)
+        return FALSE;
+
+    *ppVtbl = NULL;
+
+    if (!pUnknown)
+        return FALSE;
+
+    __try {
+        vtbl = *(ULONG_PTR **)pUnknown;
+        if (!vtbl)
+            return FALSE;
+        if (!vtbl[requiredSlot])
+            return FALSE;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        return FALSE;
+    }
+
+    *ppVtbl = vtbl;
+    return TRUE;
+}
+
+
+_FX void SH32_ComRelease(void *pUnknown)
+{
+    if (pUnknown) {
+        ULONG_PTR *vtbl = NULL;
+        typedef ULONG (STDMETHODCALLTYPE *P_Release)(void *);
+        if (!SH32_ComGetVtbl(pUnknown, 2, &vtbl))
+            return;
+        ((P_Release)vtbl[2])(pUnknown);
+    }
+}
+
+
+_FX void SH32_ComAddRef(void *pUnknown)
+{
+    if (pUnknown) {
+        ULONG_PTR *vtbl = NULL;
+        typedef ULONG (STDMETHODCALLTYPE *P_AddRef)(void *);
+        if (!SH32_ComGetVtbl(pUnknown, 1, &vtbl))
+            return;
+        ((P_AddRef)vtbl[1])(pUnknown);
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// Synthetic fake COM objects for the IShellWindows dispatch chain.
+//
+// The caller walks the chain:
+//   FindWindowSW -> FakeDesktop (IDispatch)
+//     ->QI-> FakeServiceProvider (IServiceProvider)
+//       ->QueryService(SID_STopLevelBrowser, IShellBrowser) -> FakeBrowserView
+//         ->QueryActiveShellView [vtbl 15] -> FakeShellView (IShellView)
+//           ->GetItemObject(SVGIO_BACKGROUND, IID_IDispatch) [vtbl 15] -> FakeFolderView
+//             ->QI-> IShellFolderViewDual (self)
+//               ->get_Application [vtbl 7] -> FakeShellApp (IDispatch)
+//                 ->QI-> IShellDispatch2 (self)
+//                   ->ShellExecute [vtbl 31] -> SH32_FakeApp_ShellExecute -> SH32_ShellExecuteExW
+//
+// Identity guarantees inside the synthetic desktop loop:
+//   - FakeDesktop.Parent and FakeDesktop.Windows return the same desktop identity.
+//   - FakeDesktop.Application is cached per desktop.
+//   - That desktop-owned FakeShellApp routes Windows back to the same desktop,
+//     so desktop.Application.Windows round-trips to desktop.
+//---------------------------------------------------------------------------
+
+
+// Base object struct shared by the five fake objects that carry their own ref
+// count: FakeDesktop, FakeBrowserView, FakeShellView, FakeFolderView, and
+// FakeShellApp.  FakeServiceProvider borrows the desktop's ref count and uses
+// a distinct layout (SH32_FakeServiceProviderData).
+typedef struct _SH32_FakeCOM {
+    const ULONG_PTR *vtbl;
+    LONG             refCount;
+} SH32_FakeCOM;
+
+typedef HRESULT (*SH32_FakeDispPropGetter)(SH32_FakeCOM *pThis, VARIANT *pResult);
+typedef HRESULT (*SH32_FakeDispMethod)(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult);
+
+typedef struct _SH32_FakeDispEntry {
+    const WCHAR           *name;
+    DISPID                 dispid;
+    SH32_FakeDispPropGetter getProp;
+    SH32_FakeDispMethod     callMethod;
+} SH32_FakeDispEntry;
+
+#define SH32_DISPID_APPLICATION   200
+#define SH32_DISPID_PARENT        201
+#define SH32_DISPID_WINDOWS       300
+#define SH32_DISPID_FOLDER        301
+#define SH32_DISPID_SCRIPT        302
+#define SH32_DISPID_VIEWOPTIONS   303
+#define SH32_DISPID_SHELLEXECUTE  601
+#define SH32_DISPID_OPEN          602
+#define SH32_DISPID_EXPLORE       603
+#define SH32_DISPID_CONTROLPANELITEM 604
+
+static HRESULT WINAPI SH32_FakeDisp_GetTypeInfoCount(void *pThis, UINT *pctinfo);
+static HRESULT WINAPI SH32_FakeDisp_GetTypeInfo(void *pThis, UINT iTInfo, LCID lcid, ITypeInfo **ppTInfo);
+static HRESULT SH32_FakeDisp_GetIDsOfNamesImpl(
+    const SH32_FakeDispEntry *entries, REFIID riid, LPOLESTR *rgszNames, UINT cNames, DISPID *rgDispId);
+static HRESULT SH32_FakeDisp_InvokeImpl(
+    SH32_FakeCOM *pThis, const SH32_FakeDispEntry *entry,
+    REFIID riid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, UINT *puArgErr);
+static HRESULT SH32_FakeDisp_ReturnDispatch(VARIANT *pResult, void *pDispatch);
+static HRESULT SH32_FakeDisp_GetApplication(SH32_FakeCOM *pThis, VARIANT *pResult);
+static HRESULT SH32_FakeDisp_GetSelf(SH32_FakeCOM *pThis, VARIANT *pResult);
+static HRESULT SH32_FakeDisp_ShellExecute(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult);
+static HRESULT SH32_FakeDisp_Open(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult);
+static HRESULT SH32_FakeDisp_Explore(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult);
+static HRESULT SH32_FakeDisp_ControlPanelItem(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult);
+static HRESULT SH32_FakeDisp_GetFolderNotImpl(SH32_FakeCOM *pThis, VARIANT *pResult);
+static HRESULT SH32_FakeDisp_GetViewOptions(SH32_FakeCOM *pThis, VARIANT *pResult);
+static const VARIANT *SH32_FakeDisp_GetArg(DISPPARAMS *pDispParams, UINT index);
+static HRESULT WINAPI SH32_FakeApp_get_Application(SH32_FakeCOM *pThis, IDispatch **ppid);
+static HRESULT WINAPI SH32_FakeApp_ShellExecute(SH32_FakeCOM *pThis, BSTR bstrFile,
+    VARIANT vArgs, VARIANT vDir, VARIANT vOperation, VARIANT vShow);
+static void SH32_FakeDisp_VariantInit(VARIANT *pVariant);
+static void SH32_FakeDisp_VariantSetError(VARIANT *pVariant, HRESULT hr);
+static void SH32_FakeDisp_VariantSetI4(VARIANT *pVariant, LONG value);
+static BOOLEAN SH32_FakeDisp_CopyVariantShallow(const VARIANT *pSrc, VARIANT *pDst);
+static BOOLEAN SH32_FakeDisp_CopyOptionalArg(DISPPARAMS *pDispParams, UINT index, VARIANT *pDst);
+static const WCHAR *SH32_FakeDisp_GetString(const VARIANT *pVariant);
+static void SH32_FakeDisp_TraceName(const WCHAR *objectName, const WCHAR *memberName, HRESULT hr);
+static void SH32_FakeDisp_TraceInvoke(const WCHAR *objectName, const WCHAR *memberName, WORD wFlags, HRESULT hr);
+static HRESULT SH32_FakeDisp_DoShellExecute(const WCHAR *verb, DISPPARAMS *pDispParams, VARIANT *pResult);
+static HRESULT WINAPI SH32_FakeFolderView_get_Parent(SH32_FakeCOM *pThis, IDispatch **ppid);
+static HRESULT WINAPI SH32_FakeFolderView_get_Script(SH32_FakeCOM *pThis, IDispatch **ppid);
+static HRESULT WINAPI SH32_FakeFolderView_get_ViewOptions(SH32_FakeCOM *pThis, long *plViewOptions);
+static HRESULT WINAPI SH32_FakeApp_get_Parent(SH32_FakeCOM *pThis, IDispatch **ppid);
+static HRESULT WINAPI SH32_FakeApp_Windows(SH32_FakeCOM *pThis, IDispatch **ppid);
+static HRESULT WINAPI SH32_FakeApp_Open(SH32_FakeCOM *pThis, VARIANT vDir);
+static HRESULT WINAPI SH32_FakeApp_Explore(SH32_FakeCOM *pThis, VARIANT vDir);
+static HRESULT WINAPI SH32_FakeApp_ControlPanelItem(SH32_FakeCOM *pThis, BSTR bstrDir);
+static void *SH32_FakeShellApp_CreateForDesktop(void *pDesktop);
+static void *SH32_FakeChildCache_Get(void **ppSlot, void *(*createFunc)(void));
+static HRESULT SH32_FakeDesktop_GetApplication(SH32_FakeCOM *pThis, VARIANT *pResult);
+
+// Arity-correct __stdcall stubs for unused vtable slots.
+// On x86, WINAPI (__stdcall) is callee-cleanup: the compiler emits "ret N"
+// where N = (argcount * sizeof(DWORD)), derived from the C function signature.
+// A single-arity stub placed in a slot with a different arity would corrupt
+// the stack on x86. We cover the required arities (0-10).
+static HRESULT WINAPI SH32_FakeCOM_Stub0(void *p) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub1(void *p, ULONG_PTR a1) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub2(void *p, ULONG_PTR a1, ULONG_PTR a2) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub3(void *p, ULONG_PTR a1, ULONG_PTR a2, ULONG_PTR a3) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub4(void *p, ULONG_PTR a1, ULONG_PTR a2, ULONG_PTR a3, ULONG_PTR a4) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub5(void *p, ULONG_PTR a1, ULONG_PTR a2, ULONG_PTR a3, ULONG_PTR a4, ULONG_PTR a5) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub6(void *p, ULONG_PTR a1, ULONG_PTR a2, ULONG_PTR a3, ULONG_PTR a4, ULONG_PTR a5, ULONG_PTR a6) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub7(void *p, ULONG_PTR a1, ULONG_PTR a2, ULONG_PTR a3, ULONG_PTR a4, ULONG_PTR a5, ULONG_PTR a6, ULONG_PTR a7) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub8(void *p, ULONG_PTR a1, ULONG_PTR a2, ULONG_PTR a3, ULONG_PTR a4, ULONG_PTR a5, ULONG_PTR a6, ULONG_PTR a7, ULONG_PTR a8) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub9(void *p, ULONG_PTR a1, ULONG_PTR a2, ULONG_PTR a3, ULONG_PTR a4, ULONG_PTR a5, ULONG_PTR a6, ULONG_PTR a7, ULONG_PTR a8, ULONG_PTR a9) { return E_NOTIMPL; }
+static HRESULT WINAPI SH32_FakeCOM_Stub10(void *p, ULONG_PTR a1, ULONG_PTR a2, ULONG_PTR a3, ULONG_PTR a4, ULONG_PTR a5, ULONG_PTR a6, ULONG_PTR a7, ULONG_PTR a8, ULONG_PTR a9, ULONG_PTR a10) { return E_NOTIMPL; }
+
+static HRESULT WINAPI SH32_FakeDisp_GetTypeInfoCount(void *pThis, UINT *pctinfo)
+{
+    UNREFERENCED_PARAMETER(pThis);
+
+    if (!pctinfo)
+        return E_POINTER;
+
+    *pctinfo = 0;
+    return S_OK;
+}
+
+static HRESULT WINAPI SH32_FakeDisp_GetTypeInfo(void *pThis, UINT iTInfo, LCID lcid, ITypeInfo **ppTInfo)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    UNREFERENCED_PARAMETER(iTInfo);
+    UNREFERENCED_PARAMETER(lcid);
+
+    if (!ppTInfo)
+        return E_POINTER;
+
+    *ppTInfo = NULL;
+    return DISP_E_BADINDEX;
+}
+
+static void SH32_FakeDisp_VariantInit(VARIANT *pVariant)
+{
+    if (pVariant)
+        memzero(pVariant, sizeof(VARIANT));
+}
+
+static void SH32_FakeDisp_VariantSetError(VARIANT *pVariant, HRESULT hr)
+{
+    SH32_FakeDisp_VariantInit(pVariant);
+    if (pVariant) {
+        pVariant->vt = VT_ERROR;
+        pVariant->scode = hr;
+    }
+}
+
+static void SH32_FakeDisp_VariantSetI4(VARIANT *pVariant, LONG value)
+{
+    SH32_FakeDisp_VariantInit(pVariant);
+    if (pVariant) {
+        pVariant->vt = VT_I4;
+        pVariant->lVal = value;
+    }
+}
+
+static BOOLEAN SH32_FakeDisp_CopyVariantShallow(const VARIANT *pSrc, VARIANT *pDst)
+{
+    if (!pSrc || !pDst)
+        return FALSE;
+
+    SH32_FakeDisp_VariantInit(pDst);
+
+    if ((pSrc->vt & VT_BYREF) && (pSrc->vt & VT_TYPEMASK) == VT_VARIANT)
+        return pSrc->pvarVal ? SH32_FakeDisp_CopyVariantShallow(pSrc->pvarVal, pDst) : FALSE;
+
+    switch (pSrc->vt) {
+    case VT_EMPTY:
+    case VT_NULL:
+    case VT_ERROR:
+    case VT_BSTR:
+    case VT_I2:
+    case VT_I4:
+    case VT_I8:
+    case VT_UI4:
+    case VT_BOOL:
+    case VT_DISPATCH:
+    case VT_UNKNOWN:
+        *pDst = *pSrc;
+        return TRUE;
+    case (VT_BSTR | VT_BYREF):
+        pDst->vt = VT_BSTR;
+        pDst->bstrVal = pSrc->pbstrVal ? *pSrc->pbstrVal : NULL;
+        return TRUE;
+    case (VT_I2 | VT_BYREF):
+        pDst->vt = VT_I2;
+        pDst->iVal = pSrc->piVal ? *pSrc->piVal : 0;
+        return TRUE;
+    case (VT_I4 | VT_BYREF):
+        pDst->vt = VT_I4;
+        pDst->lVal = pSrc->plVal ? *pSrc->plVal : 0;
+        return TRUE;
+    case (VT_I8 | VT_BYREF):
+        pDst->vt = VT_I8;
+        pDst->llVal = pSrc->pllVal ? *pSrc->pllVal : 0;
+        return TRUE;
+    case (VT_UI4 | VT_BYREF):
+        pDst->vt = VT_UI4;
+        pDst->ulVal = pSrc->pulVal ? *pSrc->pulVal : 0;
+        return TRUE;
+    case (VT_BOOL | VT_BYREF):
+        pDst->vt = VT_BOOL;
+        pDst->boolVal = pSrc->pboolVal ? *pSrc->pboolVal : VARIANT_FALSE;
+        return TRUE;
+    case (VT_DISPATCH | VT_BYREF):
+        pDst->vt = VT_DISPATCH;
+        pDst->pdispVal = pSrc->ppdispVal ? *pSrc->ppdispVal : NULL;
+        return TRUE;
+    case (VT_UNKNOWN | VT_BYREF):
+        pDst->vt = VT_UNKNOWN;
+        pDst->punkVal = pSrc->ppunkVal ? *pSrc->ppunkVal : NULL;
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static BOOLEAN SH32_FakeDisp_CopyOptionalArg(DISPPARAMS *pDispParams, UINT index, VARIANT *pDst)
+{
+    const VARIANT *pArg = SH32_FakeDisp_GetArg(pDispParams, index);
+    if (!pArg)
+        return FALSE;
+    return SH32_FakeDisp_CopyVariantShallow(pArg, pDst);
+}
+
+static const WCHAR *SH32_FakeDisp_GetString(const VARIANT *pVariant)
+{
+    if (!pVariant)
+        return NULL;
+
+    return (pVariant->vt == VT_BSTR && pVariant->bstrVal) ? pVariant->bstrVal : NULL;
+}
+
+static void SH32_FakeDisp_TraceName(const WCHAR *objectName, const WCHAR *memberName, HRESULT hr)
+{
+    WCHAR text[192];
+
+    Sbie_snwprintf(text, 192, L"UseFakeShellDispatch[D0]: %s.GetIDsOfNames(%s) -> %08X",
+        objectName ? objectName : L"?",
+        memberName ? memberName : L"?",
+        (ULONG)hr);
+    SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE, text, FALSE);
+}
+
+static void SH32_FakeDisp_TraceInvoke(const WCHAR *objectName, const WCHAR *memberName, WORD wFlags, HRESULT hr)
+{
+    WCHAR text[192];
+
+    Sbie_snwprintf(text, 192, L"UseFakeShellDispatch[D1]: %s.Invoke(%s,%04X) -> %08X",
+        objectName ? objectName : L"?",
+        memberName ? memberName : L"?",
+        (ULONG)wFlags,
+        (ULONG)hr);
+    SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE, text, FALSE);
+}
+
+static const SH32_FakeDispEntry *SH32_FakeDisp_FindName(
+    const SH32_FakeDispEntry *entries, const WCHAR *name)
+{
+    const SH32_FakeDispEntry *entry;
+
+    if (!entries || !name)
+        return NULL;
+
+    for (entry = entries; entry->name; ++entry) {
+        if (_wcsicmp(entry->name, name) == 0)
+            return entry;
+    }
+
+    return NULL;
+}
+
+static const SH32_FakeDispEntry *SH32_FakeDisp_FindEntry(
+    const SH32_FakeDispEntry *entries, DISPID dispidMember)
+{
+    const SH32_FakeDispEntry *entry;
+
+    if (!entries)
+        return NULL;
+
+    for (entry = entries; entry->name; ++entry) {
+        if (entry->dispid == dispidMember)
+            return entry;
+    }
+
+    return NULL;
+}
+
+static HRESULT SH32_FakeDisp_GetIDsOfNamesImpl(
+    const SH32_FakeDispEntry *entries, REFIID riid, LPOLESTR *rgszNames, UINT cNames, DISPID *rgDispId)
+{
+    UINT index;
+
+    if (!rgDispId)
+        return E_POINTER;
+
+    if (!rgszNames || cNames == 0)
+        return DISP_E_UNKNOWNNAME;
+
+    if (riid && memcmp(riid, &GUID_NULL, sizeof(GUID)) != 0)
+        return DISP_E_UNKNOWNINTERFACE;
+
+    for (index = 0; index < cNames; ++index)
+        rgDispId[index] = DISPID_UNKNOWN;
+
+    for (index = 0; index < cNames; ++index) {
+        const SH32_FakeDispEntry *entry = SH32_FakeDisp_FindName(entries, rgszNames[index]);
+        if (!entry)
+            return DISP_E_UNKNOWNNAME;
+        rgDispId[index] = entry->dispid;
+    }
+
+    return S_OK;
+}
+
+static HRESULT SH32_FakeDisp_ReturnDispatch(VARIANT *pResult, void *pDispatch)
+{
+    if (!pResult) {
+        SH32_ComRelease(pDispatch);
+        return S_OK;
+    }
+
+    SH32_FakeDisp_VariantInit(pResult);
+    pResult->vt = VT_DISPATCH;
+    pResult->pdispVal = (IDispatch *)pDispatch;
+    return S_OK;
+}
+
+static HRESULT SH32_FakeDisp_GetApplication(SH32_FakeCOM *pThis, VARIANT *pResult)
+{
+    IDispatch *pDispatch = NULL;
+    HRESULT hr = SH32_FakeApp_get_Application(pThis, &pDispatch);
+    if (FAILED(hr))
+        return hr;
+    return SH32_FakeDisp_ReturnDispatch(pResult, pDispatch);
+}
+
+static HRESULT SH32_FakeDisp_GetSelf(SH32_FakeCOM *pThis, VARIANT *pResult)
+{
+    SH32_ComAddRef(pThis);
+    return SH32_FakeDisp_ReturnDispatch(pResult, pThis);
+}
+
+static HRESULT SH32_FakeDisp_GetFolderNotImpl(SH32_FakeCOM *pThis, VARIANT *pResult)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    SH32_FakeDisp_VariantSetError(pResult, DISP_E_MEMBERNOTFOUND);
+    return DISP_E_MEMBERNOTFOUND;
+}
+
+static HRESULT SH32_FakeDisp_GetViewOptions(SH32_FakeCOM *pThis, VARIANT *pResult)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    SH32_FakeDisp_VariantSetI4(pResult, 0);
+    return S_OK;
+}
+
+static const VARIANT *SH32_FakeDisp_GetArg(DISPPARAMS *pDispParams, UINT index)
+{
+    if (!pDispParams || index >= pDispParams->cArgs)
+        return NULL;
+
+    return &pDispParams->rgvarg[pDispParams->cArgs - 1 - index];
+}
+
+static HRESULT SH32_FakeDisp_DoShellExecute(const WCHAR *verb, DISPPARAMS *pDispParams, VARIANT *pResult)
+{
+    VARIANT vFile = { 0 };
+    VARIANT vArgs = { 0 };
+    VARIANT vDir = { 0 };
+    VARIANT vOperation = { 0 };
+    VARIANT vShow = { 0 };
+    const WCHAR *fileName;
+
+    if (!pDispParams || pDispParams->cNamedArgs != 0)
+        return DISP_E_BADPARAMCOUNT;
+
+    if (pDispParams->cArgs < 1 || pDispParams->cArgs > 5)
+        return DISP_E_BADPARAMCOUNT;
+
+    // vFile is already VT_EMPTY from = { 0 }; no VariantInit needed.
+    SH32_FakeDisp_VariantSetError(&vArgs, DISP_E_PARAMNOTFOUND);
+    SH32_FakeDisp_VariantSetError(&vDir, DISP_E_PARAMNOTFOUND);
+    SH32_FakeDisp_VariantSetError(&vOperation, DISP_E_PARAMNOTFOUND);
+    SH32_FakeDisp_VariantSetError(&vShow, DISP_E_PARAMNOTFOUND);
+
+    if (!SH32_FakeDisp_CopyOptionalArg(pDispParams, 0, &vFile))
+        return DISP_E_BADPARAMCOUNT;
+
+    fileName = SH32_FakeDisp_GetString(&vFile);
+    if (!fileName)
+        return DISP_E_TYPEMISMATCH;
+
+    SH32_FakeDisp_CopyOptionalArg(pDispParams, 1, &vArgs);
+    SH32_FakeDisp_CopyOptionalArg(pDispParams, 2, &vDir);
+
+    if (!verb)
+        SH32_FakeDisp_CopyOptionalArg(pDispParams, 3, &vOperation);
+    else {
+        // verb is a WCHAR string literal, not a heap-allocated BSTR.  Setting
+        // vt=VT_BSTR is intentional: SH32_FakeApp_ShellExecute only reads
+        // bstrVal as LPCWSTR (sei.lpVerb) and never calls SysStringLen/Free.
+        vOperation.vt = VT_BSTR;
+        vOperation.bstrVal = (BSTR)verb;
+    }
+
+    SH32_FakeDisp_CopyOptionalArg(pDispParams, verb ? 3 : 4, &vShow);
+
+    if (pResult)
+        SH32_FakeDisp_VariantInit(pResult);
+
+    return SH32_FakeApp_ShellExecute(NULL, (BSTR)fileName, vArgs, vDir, vOperation, vShow);
+}
+
+static HRESULT SH32_FakeDisp_ShellExecute(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    return SH32_FakeDisp_DoShellExecute(NULL, pDispParams, pResult);
+}
+
+static HRESULT SH32_FakeDisp_Open(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    return SH32_FakeDisp_DoShellExecute(L"open", pDispParams, pResult);
+}
+
+static HRESULT SH32_FakeDisp_Explore(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    return SH32_FakeDisp_DoShellExecute(L"explore", pDispParams, pResult);
+}
+
+static HRESULT SH32_FakeDisp_ControlPanelItem(SH32_FakeCOM *pThis, DISPPARAMS *pDispParams, VARIANT *pResult)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    return SH32_FakeDisp_DoShellExecute(L"open", pDispParams, pResult);
+}
+
+static HRESULT SH32_FakeDisp_InvokeImpl(
+    SH32_FakeCOM *pThis, const SH32_FakeDispEntry *entry,
+    REFIID riid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, UINT *puArgErr)
+{
+    if (puArgErr)
+        *puArgErr = 0;
+
+    if (riid && memcmp(riid, &GUID_NULL, sizeof(GUID)) != 0)
+        return DISP_E_UNKNOWNINTERFACE;
+
+    if (!entry)
+        return DISP_E_MEMBERNOTFOUND;
+
+    // When both DISPATCH_PROPERTYGET and DISPATCH_METHOD are set (e.g. VBScript
+    // late binding), prefer the property getter if one exists, then fall through
+    // to the method handler.  Previously this path returned DISP_E_MEMBERNOTFOUND
+    // for method-only entries (ShellExecute, Open, Explore, ControlPanelItem)
+    // whenever DISPATCH_PROPERTYGET happened to be set alongside DISPATCH_METHOD.
+    if ((wFlags & DISPATCH_PROPERTYGET) != 0 && entry->getProp)
+        return entry->getProp(pThis, pVarResult);
+
+    if ((wFlags & DISPATCH_METHOD) != 0) {
+        if (!entry->callMethod)
+            return DISP_E_MEMBERNOTFOUND;
+        return entry->callMethod(pThis, pDispParams, pVarResult);
+    }
+
+    // DISPATCH_PROPERTYGET with no getter registered, or an unsupported wFlags
+    // combination (e.g. DISPATCH_PROPERTYPUT/PUTREF).  No properties are
+    // settable on any fake object, so all such cases are MEMBERNOTFOUND.
+    return DISP_E_MEMBERNOTFOUND;
+}
+
+static ULONG WINAPI SH32_FakeBase_AddRef(SH32_FakeCOM *pThis)
+{
+    return (ULONG)InterlockedIncrement(&pThis->refCount);
+}
+
+static ULONG WINAPI SH32_FakeBase_Release(SH32_FakeCOM *pThis)
+{
+    LONG r = InterlockedDecrement(&pThis->refCount);
+    if (r == 0) Dll_Free(pThis);
+    return (ULONG)(r < 0 ? 0 : r);
+}
+
+// ---- FakeDesktop (IDispatch face returned by FindWindowSW) ----
+
+// {00000000-0000-0000-C000-000000000046}  IUnknown
+static const GUID SH32_IID_IUnknown =
+{ 0x00000000, 0x0000, 0x0000,{ 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46 } };
+// {00020400-0000-0000-C000-000000000046}  IDispatch
+static const GUID SH32_IID_IDispatch =
+{ 0x00020400, 0x0000, 0x0000,{ 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46 } };
+
+// Extended struct for FakeDesktop: caches the IServiceProvider tear-off and
+// the desktop-owned Application dispatch object so repeated property reads
+// preserve COM identity.  The Windows property returns self directly, so no
+// separate pWindows slot is needed here.
+// vtbl and refCount MUST remain the first two fields to be layout-compatible
+// with SH32_FakeCOM and SH32_FakeBase_AddRef.
+typedef struct _SH32_FakeDesktopData {
+    const ULONG_PTR *vtbl;
+    LONG             refCount;
+    void            *pSP;   // cached FakeServiceProvider; NULL until first QI
+    void            *pApplication;
+} SH32_FakeDesktopData;
+
+typedef struct _SH32_FakeServiceProviderData {
+    const ULONG_PTR      *vtbl;
+    SH32_FakeDesktopData *pDesktop;
+} SH32_FakeServiceProviderData;
+
+// FakeFolderView only needs to stabilize its Application child.  Parent is
+// self-backed (returns pThis).  Script is NOT self-backed: it delegates to
+// SH32_FakeFolderView_GetApplication and preserves identity via the same
+// pApplication cache as Application.
+typedef struct _SH32_FakeFolderViewData {
+    const ULONG_PTR *vtbl;
+    LONG             refCount;
+    void            *pApplication;
+} SH32_FakeFolderViewData;
+
+// When created from FakeDesktop.Application, pDesktopOwner links the shell app
+// back to that desktop so Windows returns the same desktop identity.
+typedef struct _SH32_FakeShellAppData {
+    const ULONG_PTR *vtbl;
+    LONG             refCount;
+    void            *pDesktopOwner;
+    void            *pWindows;
+} SH32_FakeShellAppData;
+
+static void *SH32_FakeChildCache_Get(void **ppSlot, void *(*createFunc)(void))
+{
+    void *pChild = *ppSlot;
+
+    if (!pChild) {
+        void *pNew = createFunc();
+        if (!pNew)
+            return NULL;
+
+        pChild = InterlockedCompareExchangePointer(ppSlot, pNew, NULL);
+        if (!pChild)
+            pChild = pNew;
+        else
+            SH32_ComRelease(pNew);
+    }
+
+    return pChild;
+}
+
+static HRESULT SH32_FakeDesktop_GetApplication(SH32_FakeCOM *pThis, VARIANT *pResult)
+{
+    SH32_FakeDesktopData *pDesktop = (SH32_FakeDesktopData *)pThis;
+    void *pDispatch = pDesktop->pApplication;
+
+    if (!pDispatch) {
+        void *pNew = SH32_FakeShellApp_CreateForDesktop(pDesktop);
+        if (!pNew)
+            return E_OUTOFMEMORY;
+
+        pDispatch = InterlockedCompareExchangePointer(&pDesktop->pApplication, pNew, NULL);
+        if (!pDispatch)
+            pDispatch = pNew;
+        else
+            SH32_ComRelease(pNew);
+    }
+
+    SH32_ComAddRef(pDispatch);
+    return SH32_FakeDisp_ReturnDispatch(pResult, pDispatch);
+}
+
+static HRESULT SH32_FakeFolderView_GetApplication(SH32_FakeCOM *pThis, VARIANT *pResult)
+{
+    SH32_FakeFolderViewData *pFolderView = (SH32_FakeFolderViewData *)pThis;
+    void *pDispatch = SH32_FakeChildCache_Get(&pFolderView->pApplication, SH32_FakeShellApp_Create);
+
+    if (!pDispatch)
+        return E_OUTOFMEMORY;
+
+    SH32_ComAddRef(pDispatch);
+    return SH32_FakeDisp_ReturnDispatch(pResult, pDispatch);
+}
+
+static HRESULT SH32_FakeShellApp_GetWindows(SH32_FakeCOM *pThis, VARIANT *pResult)
+{
+    SH32_FakeShellAppData *pApp = (SH32_FakeShellAppData *)pThis;
+    void *pDispatch;
+
+    // Snapshot pDesktopOwner once to avoid a TOCTOU race: SH32_FakeDesktop_Release
+    // can null this field from another thread after we pass the null-check.
+    pDispatch = pApp->pDesktopOwner;
+    if (pDispatch) {
+        SH32_ComAddRef(pDispatch);
+        return SH32_FakeDisp_ReturnDispatch(pResult, pDispatch);
+    }
+
+    pDispatch = SH32_FakeChildCache_Get(&pApp->pWindows, SH32_FakeDesktop_Create);
+
+    if (!pDispatch)
+        return E_OUTOFMEMORY;
+
+    SH32_ComAddRef(pDispatch);
+    return SH32_FakeDisp_ReturnDispatch(pResult, pDispatch);
+}
+
+static HRESULT WINAPI SH32_FakeDesktop_QI(SH32_FakeDesktopData *pThis, REFIID riid, void **ppv)
+{
+    void *pSP;
+
+    if (!ppv) return E_POINTER;
+    if (memcmp(riid, &SH32_IID_IServiceProvider, sizeof(GUID)) == 0) {
+        // Cache a tear-off IServiceProvider so repeated QI calls return the
+        // same interface pointer while IUnknown identity remains the desktop.
+        pSP = pThis->pSP;
+        if (!pSP) {
+            void *pNew = SH32_FakeServiceProvider_Create(pThis);
+            if (!pNew) return E_OUTOFMEMORY;
+
+            pSP = InterlockedCompareExchangePointer(&pThis->pSP, pNew, NULL);
+            if (!pSP)
+                pSP = pNew;
+            else
+                Dll_Free(pNew);
+        }
+        InterlockedIncrement(&pThis->refCount);
+        *ppv = pSP;
+        return S_OK;
+    }
+    // Accept IUnknown and IDispatch as self
+    if (memcmp(riid, &SH32_IID_IUnknown,  sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IDispatch, sizeof(GUID)) == 0) {
+        *ppv = pThis;
+        InterlockedIncrement(&pThis->refCount);
+        return S_OK;
+    }
+    *ppv = NULL;
+    return E_NOINTERFACE;
+}
+
+static ULONG WINAPI SH32_FakeDesktop_Release(SH32_FakeDesktopData *pThis)
+{
+    LONG r = InterlockedDecrement(&pThis->refCount);
+    if (r == 0) {
+        // The cached service provider is a tear-off that shares the desktop
+        // object's refcount, so it can be freed directly here.
+        if (pThis->pSP) {
+            Dll_Free(pThis->pSP);
+            pThis->pSP = NULL;
+        }
+        if (pThis->pApplication) {
+            ((SH32_FakeShellAppData *)pThis->pApplication)->pDesktopOwner = NULL;
+            SH32_ComRelease(pThis->pApplication);
+            pThis->pApplication = NULL;
+        }
+        Dll_Free(pThis);
+    }
+    return (ULONG)(r < 0 ? 0 : r);
+}
+
+static const SH32_FakeDispEntry SH32_FakeDesktop_DispEntries[] = {
+    { L"Application", SH32_DISPID_APPLICATION, SH32_FakeDesktop_GetApplication, NULL },
+    { L"Parent", SH32_DISPID_PARENT, SH32_FakeDisp_GetSelf, NULL },
+    // Shell automation expects desktop.Windows to refer to the desktop window set,
+    // not to a second synthetic desktop object.
+    { L"Windows", SH32_DISPID_WINDOWS, SH32_FakeDisp_GetSelf, NULL },
+    { L"ShellExecute", SH32_DISPID_SHELLEXECUTE, NULL, SH32_FakeDisp_ShellExecute },
+    { L"Open", SH32_DISPID_OPEN, NULL, SH32_FakeDisp_Open },
+    { L"Explore", SH32_DISPID_EXPLORE, NULL, SH32_FakeDisp_Explore },
+    { L"ControlPanelItem", SH32_DISPID_CONTROLPANELITEM, NULL, SH32_FakeDisp_ControlPanelItem },
+    { NULL, DISPID_UNKNOWN, NULL, NULL },
+};
+
+static HRESULT WINAPI SH32_FakeDesktop_GetIDsOfNames(
+    SH32_FakeDesktopData *pThis, REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    UNREFERENCED_PARAMETER(lcid);
+    {
+        HRESULT hr = SH32_FakeDisp_GetIDsOfNamesImpl(SH32_FakeDesktop_DispEntries, riid, rgszNames, cNames, rgDispId);
+        SH32_FakeDisp_TraceName(L"FakeDesktop", (rgszNames && cNames) ? rgszNames[0] : NULL, hr);
+        return hr;
+    }
+}
+
+static HRESULT WINAPI SH32_FakeDesktop_Invoke(
+    SH32_FakeDesktopData *pThis, DISPID dispidMember, REFIID riid, LCID lcid, WORD wFlags,
+    DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr)
+{
+    UNREFERENCED_PARAMETER(lcid);
+    UNREFERENCED_PARAMETER(pExcepInfo);
+    {
+        const SH32_FakeDispEntry *entry = SH32_FakeDisp_FindEntry(SH32_FakeDesktop_DispEntries, dispidMember);
+        HRESULT hr = SH32_FakeDisp_InvokeImpl((SH32_FakeCOM *)pThis, entry,
+            riid, wFlags, pDispParams, pVarResult, puArgErr);
+        SH32_FakeDisp_TraceInvoke(L"FakeDesktop", entry ? entry->name : L"?", wFlags, hr);
+        return hr;
+    }
+}
+
+// IDispatch vtable: 7 entries [0..6]
+static const ULONG_PTR SH32_FakeDesktop_Vtbl[] = {
+    (ULONG_PTR)SH32_FakeDesktop_QI,      // [0] QueryInterface
+    (ULONG_PTR)SH32_FakeBase_AddRef,     // [1] AddRef
+    (ULONG_PTR)SH32_FakeDesktop_Release, // [2] Release  (specialized: frees cached pSP)
+    (ULONG_PTR)SH32_FakeDisp_GetTypeInfoCount, // [3] GetTypeInfoCount
+    (ULONG_PTR)SH32_FakeDisp_GetTypeInfo,      // [4] GetTypeInfo
+    (ULONG_PTR)SH32_FakeDesktop_GetIDsOfNames, // [5] GetIDsOfNames
+    (ULONG_PTR)SH32_FakeDesktop_Invoke,        // [6] Invoke
+};
+
+_FX void *SH32_FakeDesktop_Create(void)
+{
+    SH32_FakeDesktopData *p = Dll_Alloc(sizeof(SH32_FakeDesktopData));
+    if (p) {
+        p->vtbl = SH32_FakeDesktop_Vtbl;
+        p->refCount = 1;
+        p->pSP = NULL;
+        p->pApplication = NULL;
+    }
+    return p;
+}
+
+// ---- FakeServiceProvider (IServiceProvider) ----
+
+static ULONG WINAPI SH32_FakeSP_AddRef(SH32_FakeServiceProviderData *pThis)
+{
+    return (ULONG)InterlockedIncrement(&pThis->pDesktop->refCount);
+}
+
+static ULONG WINAPI SH32_FakeSP_Release(SH32_FakeServiceProviderData *pThis)
+{
+    return SH32_FakeDesktop_Release(pThis->pDesktop);
+}
+
+static HRESULT WINAPI SH32_FakeSP_QI(SH32_FakeServiceProviderData *pThis, REFIID riid, void **ppv)
+{
+    if (!ppv) return E_POINTER;
+    if (memcmp(riid, &SH32_IID_IUnknown, sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IDispatch, sizeof(GUID)) == 0) {
+        *ppv = pThis->pDesktop;
+        InterlockedIncrement(&pThis->pDesktop->refCount);
+        return S_OK;
+    }
+    if (memcmp(riid, &SH32_IID_IServiceProvider, sizeof(GUID)) == 0) {
+        *ppv = pThis;
+        InterlockedIncrement(&pThis->pDesktop->refCount);
+        return S_OK;
+    }
+    *ppv = NULL;
+    return E_NOINTERFACE;
+}
+
+static HRESULT WINAPI SH32_FakeSP_QueryService(SH32_FakeServiceProviderData *pThis, REFGUID guidSvc, REFIID riid, void **ppv)
+{
+    UNREFERENCED_PARAMETER(pThis);
+
+    if (!ppv) return E_POINTER;
+    *ppv = NULL;
+    if (memcmp(guidSvc, &SH32_SID_STopLevelBrowser, sizeof(GUID)) == 0 &&
+        memcmp(riid, &SH32_IID_IShellBrowser, sizeof(GUID)) == 0) {
+        void *pBrowser = SH32_FakeBrowserView_Create();
+        if (!pBrowser) return E_OUTOFMEMORY;
+        *ppv = pBrowser;
+        return S_OK;
+    }
+    return E_NOINTERFACE;
+}
+
+// IServiceProvider vtable: 4 entries [0..3]
+static const ULONG_PTR SH32_FakeSP_Vtbl[] = {
+    (ULONG_PTR)SH32_FakeSP_QI,           // [0] QueryInterface
+    (ULONG_PTR)SH32_FakeSP_AddRef,        // [1] AddRef
+    (ULONG_PTR)SH32_FakeSP_Release,       // [2] Release
+    (ULONG_PTR)SH32_FakeSP_QueryService,  // [3] QueryService
+};
+
+_FX void *SH32_FakeServiceProvider_Create(void *pDesktop)
+{
+    SH32_FakeServiceProviderData *p = Dll_Alloc(sizeof(SH32_FakeServiceProviderData));
+    if (p) {
+        p->vtbl = SH32_FakeSP_Vtbl;
+        p->pDesktop = (SH32_FakeDesktopData *)pDesktop;
+    }
+    return p;
+}
+
+// ---- FakeBrowserView (IShellBrowser, QueryActiveShellView at vtbl[15]) ----
+
+static HRESULT WINAPI SH32_FakeBrowser_QI(SH32_FakeCOM *pThis, REFIID riid, void **ppv)
+{
+    if (!ppv) return E_POINTER;
+    if (memcmp(riid, &SH32_IID_IUnknown,     sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IShellBrowser, sizeof(GUID)) == 0) {
+        *ppv = pThis;
+        InterlockedIncrement(&pThis->refCount);
+        return S_OK;
+    }
+    *ppv = NULL;
+    return E_NOINTERFACE;
+}
+
+static HRESULT WINAPI SH32_FakeBrowser_QueryActiveShellView(SH32_FakeCOM *pThis, void **ppshv)
+{
+    void *pView;
+    if (!ppshv) return E_POINTER;
+    *ppshv = NULL;
+    pView = SH32_FakeShellView_Create();
+    if (!pView) return E_OUTOFMEMORY;
+    *ppshv = pView;
+    return S_OK;
+}
+
+// IShellBrowser vtable: 18 entries [0..17]
+static const ULONG_PTR SH32_FakeBrowser_Vtbl[] = {
+    (ULONG_PTR)SH32_FakeBrowser_QI,                   // [0]  QueryInterface
+    (ULONG_PTR)SH32_FakeBase_AddRef,                   // [1]  AddRef
+    (ULONG_PTR)SH32_FakeBase_Release,                  // [2]  Release
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                     // [3]  GetWindow              (HWND*)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                     // [4]  ContextSensitiveHelp   (BOOL)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,                     // [5]  InsertMenusSB          (HMENU,LPOLEMENUGROUPWIDTHS)
+    (ULONG_PTR)SH32_FakeCOM_Stub3,                     // [6]  SetMenuSB              (HMENU,HOLEMENU,HWND)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                     // [7]  RemoveMenusSB          (HMENU)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                     // [8]  SetStatusTextSB        (LPCWSTR)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                     // [9]  EnableModelessSB       (BOOL)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,                     // [10] TranslateAcceleratorSB (MSG*,WORD)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,                     // [11] BrowseObject           (PCUIDLIST_RELATIVE,UINT)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,                     // [12] GetViewStateStream     (DWORD,IStream**)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,                     // [13] GetControlWindow       (UINT,HWND*)
+    (ULONG_PTR)SH32_FakeCOM_Stub5,                     // [14] SendControlMsg         (UINT,UINT,WPARAM,LPARAM,LRESULT*)
+    (ULONG_PTR)SH32_FakeBrowser_QueryActiveShellView,  // [15] QueryActiveShellView
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                     // [16] OnViewWindowActive     (IShellView*)
+    (ULONG_PTR)SH32_FakeCOM_Stub3,                     // [17] SetToolbarItems        (LPTBBUTTONSB,UINT,UINT)
+};
+
+_FX void *SH32_FakeBrowserView_Create(void)
+{
+    SH32_FakeCOM *p = Dll_Alloc(sizeof(SH32_FakeCOM));
+    if (p) { p->vtbl = SH32_FakeBrowser_Vtbl; p->refCount = 1; }
+    return p;
+}
+
+// ---- FakeShellView (IShellView, GetItemObject at vtbl[15]) ----
+
+// {000214E3-0000-0000-C000-000000000046}  IShellView
+static const GUID SH32_IID_IShellView =
+{ 0x000214E3, 0x0000, 0x0000,{ 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46 } };
+
+static HRESULT WINAPI SH32_FakeView_QI(SH32_FakeCOM *pThis, REFIID riid, void **ppv)
+{
+    if (!ppv) return E_POINTER;
+    if (memcmp(riid, &SH32_IID_IUnknown,  sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IShellView, sizeof(GUID)) == 0) {
+        *ppv = pThis;
+        InterlockedIncrement(&pThis->refCount);
+        return S_OK;
+    }
+    *ppv = NULL;
+    return E_NOINTERFACE;
+}
+
+static HRESULT WINAPI SH32_FakeView_GetItemObject(SH32_FakeCOM *pThis, UINT uItem, REFIID riid, void **ppv)
+{
+    void *pApp;
+    if (!ppv) return E_POINTER;
+    *ppv = NULL;
+
+    if (uItem != SVGIO_BACKGROUND)
+        return E_NOINTERFACE;
+
+    if (memcmp(riid, &SH32_IID_IDispatch, sizeof(GUID)) != 0 &&
+        memcmp(riid, &SH32_IID_IUnknown,  sizeof(GUID)) != 0)
+        return E_NOINTERFACE;
+
+    pApp = SH32_FakeFolderView_Create();
+    if (!pApp) return E_OUTOFMEMORY;
+    *ppv = pApp;
+    return S_OK;
+}
+
+// IShellView vtable: 16 entries [0..15]
+static const ULONG_PTR SH32_FakeView_Vtbl[] = {
+    (ULONG_PTR)SH32_FakeView_QI,              // [0]  QueryInterface
+    (ULONG_PTR)SH32_FakeBase_AddRef,          // [1]  AddRef
+    (ULONG_PTR)SH32_FakeBase_Release,         // [2]  Release
+    (ULONG_PTR)SH32_FakeCOM_Stub1,            // [3]  GetWindow            (HWND*)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,            // [4]  ContextSensitiveHelp (BOOL)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,            // [5]  TranslateAccelerator (MSG*)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,            // [6]  EnableModeless       (BOOL)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,            // [7]  UIActivate           (UINT)
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [8]  Refresh              ()
+    (ULONG_PTR)SH32_FakeCOM_Stub5,            // [9]  CreateViewWindow     (IShellView*,LPCFOLDERSETTINGS,IShellBrowser*,RECT*,HWND*)
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [10] DestroyViewWindow    ()
+    (ULONG_PTR)SH32_FakeCOM_Stub1,            // [11] GetCurrentInfo       (LPFOLDERSETTINGS)
+    (ULONG_PTR)SH32_FakeCOM_Stub3,            // [12] AddPropertySheetPages(DWORD,LPFNADDPROPSHEETPAGE,LPARAM)
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [13] SaveViewState        ()
+    (ULONG_PTR)SH32_FakeCOM_Stub2,            // [14] SelectItem           (LPCITEMIDLIST,SVSIF)
+    (ULONG_PTR)SH32_FakeView_GetItemObject,   // [15] GetItemObject
+};
+
+_FX void *SH32_FakeShellView_Create(void)
+{
+    SH32_FakeCOM *p = Dll_Alloc(sizeof(SH32_FakeCOM));
+    if (p) { p->vtbl = SH32_FakeView_Vtbl; p->refCount = 1; }
+    return p;
+}
+
+// ---- FakeFolderView (IShellFolderViewDual) ----
+//
+// vtbl[7]  = get_Application
+
+static HRESULT WINAPI SH32_FakeFolderView_QI(SH32_FakeFolderViewData *pThis, REFIID riid, void **ppv)
+{
+    if (!ppv) return E_POINTER;
+    if (memcmp(riid, &SH32_IID_IUnknown,           sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IDispatch,          sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IShellFolderViewDual, sizeof(GUID)) == 0) {
+        *ppv = pThis;
+        InterlockedIncrement(&pThis->refCount);
+        return S_OK;
+    }
+    *ppv = NULL;
+    return E_NOINTERFACE;
+}
+
+static HRESULT WINAPI SH32_FakeFolderView_get_Application(SH32_FakeCOM *pThis, IDispatch **ppid)
+{
+    SH32_FakeFolderViewData *pFolderView = (SH32_FakeFolderViewData *)pThis;
+    void *pDispatch;
+
+    if (!ppid) return E_POINTER;
+
+    pDispatch = SH32_FakeChildCache_Get(&pFolderView->pApplication, SH32_FakeShellApp_Create);
+    if (!pDispatch) {
+        *ppid = NULL;
+        return E_OUTOFMEMORY;
+    }
+
+    SH32_ComAddRef(pDispatch);
+    *ppid = (IDispatch *)pDispatch;
+    return S_OK;
+}
+
+static ULONG WINAPI SH32_FakeFolderView_Release(SH32_FakeFolderViewData *pThis)
+{
+    LONG r = InterlockedDecrement(&pThis->refCount);
+    if (r == 0) {
+        if (pThis->pApplication) {
+            SH32_ComRelease(pThis->pApplication);
+            pThis->pApplication = NULL;
+        }
+        Dll_Free(pThis);
+    }
+    return (ULONG)(r < 0 ? 0 : r);
+}
+
+static HRESULT WINAPI SH32_FakeFolderView_get_Parent(SH32_FakeCOM *pThis, IDispatch **ppid)
+{
+    // This synthetic implementation returns self for get_Parent (we have no
+    // real parent shell object to surface).  SH32_FakeApp_get_Application is
+    // reused because it simply returns pThis as IDispatch with an AddRef,
+    // which is exactly the "return self" semantic needed here.
+    return SH32_FakeApp_get_Application(pThis, ppid);
+}
+
+static HRESULT WINAPI SH32_FakeFolderView_get_Script(SH32_FakeCOM *pThis, IDispatch **ppid)
+{
+    // Script returns the same cached FakeShellApp as Application, matching real IShellFolderViewDual.
+    return SH32_FakeFolderView_get_Application(pThis, ppid);
+}
+
+static HRESULT WINAPI SH32_FakeFolderView_get_ViewOptions(SH32_FakeCOM *pThis, long *plViewOptions)
+{
+    UNREFERENCED_PARAMETER(pThis);
+
+    if (!plViewOptions)
+        return E_POINTER;
+
+    *plViewOptions = 0;
+    return S_OK;
+}
+
+static const SH32_FakeDispEntry SH32_FakeFolderView_DispEntries[] = {
+    { L"Application", SH32_DISPID_APPLICATION, SH32_FakeFolderView_GetApplication, NULL },
+    { L"Parent", SH32_DISPID_PARENT, SH32_FakeDisp_GetSelf, NULL },
+    { L"Folder", SH32_DISPID_FOLDER, SH32_FakeDisp_GetFolderNotImpl, NULL },
+    // Script returns the same cached FakeShellApp as Application (matching real IShellFolderViewDual).
+    { L"Script", SH32_DISPID_SCRIPT, SH32_FakeFolderView_GetApplication, NULL },
+    { L"ViewOptions", SH32_DISPID_VIEWOPTIONS, SH32_FakeDisp_GetViewOptions, NULL },
+    { NULL, DISPID_UNKNOWN, NULL, NULL },
+};
+
+static HRESULT WINAPI SH32_FakeFolderView_GetIDsOfNames(
+    SH32_FakeCOM *pThis, REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    UNREFERENCED_PARAMETER(lcid);
+    {
+        HRESULT hr = SH32_FakeDisp_GetIDsOfNamesImpl(SH32_FakeFolderView_DispEntries, riid, rgszNames, cNames, rgDispId);
+        SH32_FakeDisp_TraceName(L"FakeFolderView", (rgszNames && cNames) ? rgszNames[0] : NULL, hr);
+        return hr;
+    }
+}
+
+static HRESULT WINAPI SH32_FakeFolderView_Invoke(
+    SH32_FakeCOM *pThis, DISPID dispidMember, REFIID riid, LCID lcid, WORD wFlags,
+    DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr)
+{
+    UNREFERENCED_PARAMETER(lcid);
+    UNREFERENCED_PARAMETER(pExcepInfo);
+    {
+        const SH32_FakeDispEntry *entry = SH32_FakeDisp_FindEntry(SH32_FakeFolderView_DispEntries, dispidMember);
+        HRESULT hr = SH32_FakeDisp_InvokeImpl(pThis, entry,
+            riid, wFlags, pDispParams, pVarResult, puArgErr);
+        SH32_FakeDisp_TraceInvoke(L"FakeFolderView", entry ? entry->name : L"?", wFlags, hr);
+        return hr;
+    }
+}
+
+// IShellFolderViewDual vtable: 16 entries [0..15]
+// Stub arity note:
+//   PopupItemMenu(FolderItem*,VARIANT,VARIANT,BSTR*) = 1+4+4+1 = 10 slots -> Stub10
+static const ULONG_PTR SH32_FakeFolderView_Vtbl[] = {
+    (ULONG_PTR)SH32_FakeFolderView_QI,              // [0]  QueryInterface
+    (ULONG_PTR)SH32_FakeBase_AddRef,                // [1]  AddRef
+    (ULONG_PTR)SH32_FakeFolderView_Release,         // [2]  Release
+    (ULONG_PTR)SH32_FakeDisp_GetTypeInfoCount,      // [3]  GetTypeInfoCount
+    (ULONG_PTR)SH32_FakeDisp_GetTypeInfo,           // [4]  GetTypeInfo
+    (ULONG_PTR)SH32_FakeFolderView_GetIDsOfNames,   // [5]  GetIDsOfNames
+    (ULONG_PTR)SH32_FakeFolderView_Invoke,          // [6]  Invoke
+    (ULONG_PTR)SH32_FakeFolderView_get_Application, // [7]  get_Application
+    (ULONG_PTR)SH32_FakeFolderView_get_Parent,      // [8]  get_Parent
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                  // [9]  get_Folder            (Folder**)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                  // [10] SelectedItems         (FolderItems**)
+    (ULONG_PTR)SH32_FakeCOM_Stub1,                  // [11] get_FocusedItem       (FolderItem**)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,                  // [12] SelectItem            (VARIANT*,int)
+    (ULONG_PTR)SH32_FakeCOM_Stub10,                 // [13] PopupItemMenu         (FolderItem*,VARIANT,VARIANT,BSTR*)
+    (ULONG_PTR)SH32_FakeFolderView_get_Script,      // [14] get_Script
+    (ULONG_PTR)SH32_FakeFolderView_get_ViewOptions, // [15] get_ViewOptions
+};
+
+_FX void *SH32_FakeFolderView_Create(void)
+{
+    SH32_FakeFolderViewData *p = Dll_Alloc(sizeof(SH32_FakeFolderViewData));
+    if (p) {
+        p->vtbl = SH32_FakeFolderView_Vtbl;
+        p->refCount = 1;
+        p->pApplication = NULL;
+    }
+    return p;
+}
+
+// ---- FakeShellApp (IShellDispatch2) ----
+//
+// vtbl[7]  = get_Application
+// vtbl[31] = ShellExecute
+
+static HRESULT WINAPI SH32_FakeApp_QI(SH32_FakeShellAppData *pThis, REFIID riid, void **ppv)
+{
+    if (!ppv) return E_POINTER;
+    // Only accept the interfaces whose vtable slots we actually implement.
+    // Returning self for IShellDispatch3/4/5/6 would be wrong: those interfaces
+    // add vtable slots beyond our 39-entry table, causing out-of-bounds access.
+    // IShellDispatch (without suffix) is safe: its 30 slots are a strict subset
+    // of the 39 we expose for IShellDispatch2.
+    if (memcmp(riid, &SH32_IID_IUnknown,           sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IDispatch,          sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IShellDispatch,     sizeof(GUID)) == 0 ||
+        memcmp(riid, &SH32_IID_IShellDispatch2,    sizeof(GUID)) == 0) {
+        *ppv = pThis;
+        InterlockedIncrement(&pThis->refCount);
+        return S_OK;
+    }
+    *ppv = NULL;
+    return E_NOINTERFACE;
+}
+
+static HRESULT WINAPI SH32_FakeApp_get_Application(SH32_FakeCOM *pThis, IDispatch **ppid)
+{
+    if (!ppid) return E_POINTER;
+    *ppid = (IDispatch *)pThis;
+    InterlockedIncrement(&pThis->refCount);
+    return S_OK;
+}
+
+static HRESULT WINAPI SH32_FakeApp_get_Parent(SH32_FakeCOM *pThis, IDispatch **ppid)
+{
+    return SH32_FakeApp_get_Application(pThis, ppid);
+}
+
+static HRESULT WINAPI SH32_FakeApp_Windows(SH32_FakeCOM *pThis, IDispatch **ppid)
+{
+    SH32_FakeShellAppData *pApp = (SH32_FakeShellAppData *)pThis;
+    void *pDispatch;
+
+    if (!ppid)
+        return E_POINTER;
+
+    // Snapshot pDesktopOwner once to avoid a TOCTOU race: SH32_FakeDesktop_Release
+    // can null this field from another thread after we pass the null-check.
+    pDispatch = pApp->pDesktopOwner;
+    if (pDispatch) {
+        SH32_ComAddRef(pDispatch);
+        *ppid = (IDispatch *)pDispatch;
+        return S_OK;
+    }
+
+    pDispatch = SH32_FakeChildCache_Get(&pApp->pWindows, SH32_FakeDesktop_Create);
+    if (!pDispatch) {
+        *ppid = NULL;
+        return E_OUTOFMEMORY;
+    }
+
+    SH32_ComAddRef(pDispatch);
+    *ppid = (IDispatch *)pDispatch;
+    return S_OK;
+}
+
+static ULONG WINAPI SH32_FakeApp_Release(SH32_FakeShellAppData *pThis)
+{
+    LONG r = InterlockedDecrement(&pThis->refCount);
+    if (r == 0) {
+        if (pThis->pWindows) {
+            SH32_ComRelease(pThis->pWindows);
+            pThis->pWindows = NULL;
+        }
+        Dll_Free(pThis);
+    }
+    return (ULONG)(r < 0 ? 0 : r);
+}
+
+static HRESULT WINAPI SH32_FakeApp_Open(SH32_FakeCOM *pThis, VARIANT vDir)
+{
+    DISPPARAMS dispParams = { 0 };
+
+    UNREFERENCED_PARAMETER(pThis);
+
+    dispParams.rgvarg = &vDir;
+    dispParams.cArgs = 1;
+    return SH32_FakeDisp_DoShellExecute(L"open", &dispParams, NULL);
+}
+
+static HRESULT WINAPI SH32_FakeApp_Explore(SH32_FakeCOM *pThis, VARIANT vDir)
+{
+    DISPPARAMS dispParams = { 0 };
+
+    UNREFERENCED_PARAMETER(pThis);
+
+    dispParams.rgvarg = &vDir;
+    dispParams.cArgs = 1;
+    return SH32_FakeDisp_DoShellExecute(L"explore", &dispParams, NULL);
+}
+
+static HRESULT WINAPI SH32_FakeApp_ControlPanelItem(SH32_FakeCOM *pThis, BSTR bstrDir)
+{
+    VARIANT vDir = { 0 };     // already VT_EMPTY; no VariantInit needed.
+    DISPPARAMS dispParams = { 0 };
+
+    UNREFERENCED_PARAMETER(pThis);
+
+    vDir.vt = VT_BSTR;
+    vDir.bstrVal = bstrDir;
+
+    dispParams.rgvarg = &vDir;
+    dispParams.cArgs = 1;
+    return SH32_FakeDisp_DoShellExecute(L"open", &dispParams, NULL);
+}
+
+static HRESULT WINAPI SH32_FakeApp_ShellExecute(SH32_FakeCOM *pThis, BSTR bstrFile,
+    VARIANT vArgs,
+    VARIANT vDir,
+    VARIANT vOperation,
+    VARIANT vShow)
+{
+    SHELLEXECUTEINFOW sei;
+    BOOL ok;
+    DWORD err;
+    UNREFERENCED_PARAMETER(pThis);
+    memzero(&sei, sizeof(sei));
+    sei.cbSize  = sizeof(sei);
+    sei.fMask   = SEE_MASK_FLAG_NO_UI;
+    sei.lpFile  = bstrFile;
+    if (vArgs.vt      == VT_BSTR && vArgs.bstrVal)      sei.lpParameters = vArgs.bstrVal;
+    if (vDir.vt       == VT_BSTR && vDir.bstrVal)       sei.lpDirectory  = vDir.bstrVal;
+    if (vOperation.vt == VT_BSTR && vOperation.bstrVal) sei.lpVerb       = vOperation.bstrVal;
+    sei.nShow = (vShow.vt == VT_I4)  ? vShow.lVal         :
+                (vShow.vt == VT_I2)  ? (int)vShow.iVal    :
+                (vShow.vt == VT_I8)  ? (int)vShow.llVal   :
+                (vShow.vt == VT_UI4) ? (int)vShow.ulVal   : SW_SHOWNORMAL;
+    ok = SH32_ShellExecuteExW(&sei);
+    if (ok)
+        return S_OK;
+
+    err = GetLastError();
+    if (err)
+        return HRESULT_FROM_WIN32(err);
+
+    return E_FAIL;
+}
+
+static const SH32_FakeDispEntry SH32_FakeApp_DispEntries[] = {
+    { L"Application", SH32_DISPID_APPLICATION, SH32_FakeDisp_GetApplication, NULL },
+    { L"Parent", SH32_DISPID_PARENT, SH32_FakeDisp_GetSelf, NULL },
+    // For desktop-owned apps this returns the owning desktop; standalone fake
+    // apps still synthesize and cache their own Windows object.
+    { L"Windows", SH32_DISPID_WINDOWS, SH32_FakeShellApp_GetWindows, NULL },
+    { L"ShellExecute", SH32_DISPID_SHELLEXECUTE, NULL, SH32_FakeDisp_ShellExecute },
+    { L"Open", SH32_DISPID_OPEN, NULL, SH32_FakeDisp_Open },
+    { L"Explore", SH32_DISPID_EXPLORE, NULL, SH32_FakeDisp_Explore },
+    { L"ControlPanelItem", SH32_DISPID_CONTROLPANELITEM, NULL, SH32_FakeDisp_ControlPanelItem },
+    { NULL, DISPID_UNKNOWN, NULL, NULL },
+};
+
+static HRESULT WINAPI SH32_FakeApp_GetIDsOfNames(
+    SH32_FakeCOM *pThis, REFIID riid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId)
+{
+    UNREFERENCED_PARAMETER(pThis);
+    UNREFERENCED_PARAMETER(lcid);
+    {
+        HRESULT hr = SH32_FakeDisp_GetIDsOfNamesImpl(SH32_FakeApp_DispEntries, riid, rgszNames, cNames, rgDispId);
+        SH32_FakeDisp_TraceName(L"FakeShellApp", (rgszNames && cNames) ? rgszNames[0] : NULL, hr);
+        return hr;
+    }
+}
+
+static HRESULT WINAPI SH32_FakeApp_Invoke(
+    SH32_FakeCOM *pThis, DISPID dispidMember, REFIID riid, LCID lcid, WORD wFlags,
+    DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr)
+{
+    UNREFERENCED_PARAMETER(lcid);
+    UNREFERENCED_PARAMETER(pExcepInfo);
+    {
+        const SH32_FakeDispEntry *entry = SH32_FakeDisp_FindEntry(SH32_FakeApp_DispEntries, dispidMember);
+        HRESULT hr = SH32_FakeDisp_InvokeImpl(pThis, entry,
+            riid, wFlags, pDispParams, pVarResult, puArgErr);
+        SH32_FakeDisp_TraceInvoke(L"FakeShellApp", entry ? entry->name : L"?", wFlags, hr);
+        return hr;
+    }
+}
+
+// IShellDispatch2 vtable: 39 entries [0..38]
+// Stub arity notes:
+//   VARIANT passed by value = 16 bytes on x86 = 4 DWORD slots.
+//   NameSpace(VARIANT,ptr)            = 4+1     = 5 slots -> Stub5
+//   BrowseForFolder(long,BSTR,long,VARIANT,ptr) = 1+1+1+4+1 = 8 slots -> Stub8
+//   ServiceStart/Stop(BSTR,VARIANT,VARIANT*)    = 1+4+1   = 6 slots -> Stub6
+//   ShowBrowserBar(BSTR,VARIANT,VARIANT*)       = 1+4+1   = 6 slots -> Stub6
+//   ShellExecute(BSTR,VARIANT,VARIANT,VARIANT,VARIANT) = 1+4+4+4+4 = 17 slots (live impl, no stub needed)
+//   Open/Explore(VARIANT)             = 4       = 4 slots (live impls, no stub needed)
+static const ULONG_PTR SH32_FakeApp_Vtbl[] = {
+    (ULONG_PTR)SH32_FakeApp_QI,               // [0]  QueryInterface
+    (ULONG_PTR)SH32_FakeBase_AddRef,          // [1]  AddRef
+    (ULONG_PTR)SH32_FakeApp_Release,          // [2]  Release
+    (ULONG_PTR)SH32_FakeDisp_GetTypeInfoCount, // [3]  GetTypeInfoCount
+    (ULONG_PTR)SH32_FakeDisp_GetTypeInfo,      // [4]  GetTypeInfo
+    (ULONG_PTR)SH32_FakeApp_GetIDsOfNames,     // [5]  GetIDsOfNames
+    (ULONG_PTR)SH32_FakeApp_Invoke,            // [6]  Invoke
+    (ULONG_PTR)SH32_FakeApp_get_Application,  // [7]  get_Application
+    (ULONG_PTR)SH32_FakeApp_get_Parent,       // [8]  get_Parent
+    (ULONG_PTR)SH32_FakeCOM_Stub5,            // [9]  NameSpace             (VARIANT,Folder**)
+    (ULONG_PTR)SH32_FakeCOM_Stub8,            // [10] BrowseForFolder       (long,BSTR,long,VARIANT,Folder**)
+    (ULONG_PTR)SH32_FakeApp_Windows,          // [11] Windows
+    (ULONG_PTR)SH32_FakeApp_Open,             // [12] Open
+    (ULONG_PTR)SH32_FakeApp_Explore,          // [13] Explore
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [14] MinimizeAll           ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [15] UndoMinimizeALL       ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [16] FileRun               ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [17] CascadeWindows        ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [18] TileVertically        ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [19] TileHorizontally      ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [20] ShutdownWindows       ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [21] Suspend               ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [22] EjectPC               ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [23] SetTime               ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [24] TrayProperties        ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [25] Help                  ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [26] FindFiles             ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [27] FindComputer          ()
+    (ULONG_PTR)SH32_FakeCOM_Stub0,            // [28] RefreshMenu           ()
+    (ULONG_PTR)SH32_FakeApp_ControlPanelItem, // [29] ControlPanelItem
+    (ULONG_PTR)SH32_FakeCOM_Stub3,            // [30] IsRestricted          (BSTR,BSTR,long*)
+    (ULONG_PTR)SH32_FakeApp_ShellExecute,     // [31] ShellExecute
+    (ULONG_PTR)SH32_FakeCOM_Stub3,            // [32] FindPrinter           (BSTR,BSTR,BSTR)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,            // [33] GetSystemInformation  (BSTR,VARIANT*)
+    (ULONG_PTR)SH32_FakeCOM_Stub6,            // [34] ServiceStart          (BSTR,VARIANT,VARIANT*)
+    (ULONG_PTR)SH32_FakeCOM_Stub6,            // [35] ServiceStop           (BSTR,VARIANT,VARIANT*)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,            // [36] IsServiceRunning      (BSTR,VARIANT*)
+    (ULONG_PTR)SH32_FakeCOM_Stub2,            // [37] CanStartStopService   (BSTR,VARIANT*)
+    (ULONG_PTR)SH32_FakeCOM_Stub6,            // [38] ShowBrowserBar        (BSTR,VARIANT,VARIANT*)
+};
+
+_FX void *SH32_FakeShellApp_Create(void)
+{
+    return SH32_FakeShellApp_CreateForDesktop(NULL);
+}
+
+static void *SH32_FakeShellApp_CreateForDesktop(void *pDesktop)
+{
+    SH32_FakeShellAppData *p = Dll_Alloc(sizeof(SH32_FakeShellAppData));
+    if (p) {
+        p->vtbl = SH32_FakeApp_Vtbl;
+        p->refCount = 1;
+        p->pDesktopOwner = pDesktop;
+        p->pWindows = NULL;
+    }
+    return p;
+}
+
+
+_FX BOOLEAN SH32_IsUsableShellDispatch(IDispatch *pDispatch)
+{
+    typedef HRESULT (STDMETHODCALLTYPE *P_QueryInterface)(void *, REFIID, void **);
+    typedef HRESULT (STDMETHODCALLTYPE *P_QueryService)(void *, REFGUID, REFIID, void **);
+    typedef HRESULT (STDMETHODCALLTYPE *P_QueryActiveShellView)(void *, void **);
+    typedef HRESULT (STDMETHODCALLTYPE *P_GetItemObject)(void *, UINT, REFIID, void **);
+    typedef HRESULT (STDMETHODCALLTYPE *P_get_Application)(void *, IDispatch **);
+
+    IServiceProvider *pServiceProvider = NULL;
+    void *pShellBrowser = NULL;
+    void *pShellView = NULL;
+    IDispatch *pViewDispatch = NULL;
+    void *pFolderViewDual = NULL;
+    void *pShellDispatch2 = NULL;
+
+    if (! pDispatch)
+        return FALSE;
+
+    {
+        ULONG_PTR *vtbl = NULL;
+        if (!SH32_ComGetVtbl(pDispatch, 0, &vtbl))
+            return FALSE;
+        HRESULT hr = ((P_QueryInterface)vtbl[0])(
+            pDispatch, &SH32_IID_IServiceProvider, (void **)&pServiceProvider);
+        if (FAILED(hr) || ! pServiceProvider)
+            return FALSE;
+    }
+
+    {
+        ULONG_PTR *vtbl = NULL;
+        if (!SH32_ComGetVtbl(pServiceProvider, 3, &vtbl)) {
+            SH32_ComRelease(pServiceProvider);
+            pServiceProvider = NULL;
+            return FALSE;
+        }
+        HRESULT hr = ((P_QueryService)vtbl[3])(
+            pServiceProvider,
+            &SH32_SID_STopLevelBrowser,
+            &SH32_IID_IShellBrowser,
+            &pShellBrowser);
+
+        SH32_ComRelease(pServiceProvider);
+        pServiceProvider = NULL;
+
+        if (FAILED(hr) || ! pShellBrowser)
+            return FALSE;
+    }
+
+    {
+        ULONG_PTR *vtbl = NULL;
+        if (!SH32_ComGetVtbl(pShellBrowser, 15, &vtbl)) {
+            SH32_ComRelease(pShellBrowser);
+            pShellBrowser = NULL;
+            return FALSE;
+        }
+        HRESULT hr = ((P_QueryActiveShellView)vtbl[15])(
+            pShellBrowser, &pShellView);
+
+        SH32_ComRelease(pShellBrowser);
+        pShellBrowser = NULL;
+
+        if (FAILED(hr) || ! pShellView)
+            return FALSE;
+    }
+
+    {
+        ULONG_PTR *vtbl = NULL;
+        if (!SH32_ComGetVtbl(pShellView, 15, &vtbl)) {
+            SH32_ComRelease(pShellView);
+            pShellView = NULL;
+            return FALSE;
+        }
+        HRESULT hr = ((P_GetItemObject)vtbl[15])(
+            pShellView, SVGIO_BACKGROUND, &SH32_IID_IDispatch, (void **)&pViewDispatch);
+
+        SH32_ComRelease(pShellView);
+        pShellView = NULL;
+
+        if (FAILED(hr) || ! pViewDispatch)
+            return FALSE;
+    }
+
+    {
+        ULONG_PTR *vtbl = NULL;
+        if (!SH32_ComGetVtbl(pViewDispatch, 0, &vtbl)) {
+            SH32_ComRelease(pViewDispatch);
+            pViewDispatch = NULL;
+            return FALSE;
+        }
+        HRESULT hr = ((P_QueryInterface)vtbl[0])(
+            pViewDispatch, &SH32_IID_IShellFolderViewDual, &pFolderViewDual);
+
+        SH32_ComRelease(pViewDispatch);
+        pViewDispatch = NULL;
+
+        if (FAILED(hr) || ! pFolderViewDual)
+            return FALSE;
+    }
+
+    {
+        ULONG_PTR *vtbl = NULL;
+        IDispatch *pApp = NULL;
+
+        if (!SH32_ComGetVtbl(pFolderViewDual, 7, &vtbl)) {
+            SH32_ComRelease(pFolderViewDual);
+            pFolderViewDual = NULL;
+            return FALSE;
+        }
+
+        HRESULT hr = ((P_get_Application)vtbl[7])(pFolderViewDual, &pApp);
+
+        SH32_ComRelease(pFolderViewDual);
+        pFolderViewDual = NULL;
+
+        if (FAILED(hr) || ! pApp)
+            return FALSE;
+
+        {
+            ULONG_PTR *vtbl2 = NULL;
+            if (!SH32_ComGetVtbl(pApp, 0, &vtbl2)) {
+                SH32_ComRelease(pApp);
+                return FALSE;
+            }
+            hr = ((P_QueryInterface)vtbl2[0])(
+                pApp, &SH32_IID_IShellDispatch2, &pShellDispatch2);
+            SH32_ComRelease(pApp);
+            if (FAILED(hr) || ! pShellDispatch2)
+                return FALSE;
+        }
+    }
+
+    SH32_ComRelease(pShellDispatch2);
+    return TRUE;
+}
+
+
+_FX HRESULT SH32_IShellWindows_ItemDispatch(
+    void *pShellWindows, LONG index, IDispatch **ppDispatch)
+{
+    VARIANT vIndex;
+    ULONG_PTR *vtbl;
+
+    typedef HRESULT (STDMETHODCALLTYPE *P_Item)(void *, VARIANT, IDispatch **);
+
+    if (! ppDispatch)
+        return SH32_E_POINTER;
+
+    *ppDispatch = NULL;
+
+    if (! pShellWindows)
+        return E_NOINTERFACE;
+
+    memzero(&vIndex, sizeof(vIndex));
+    vIndex.vt = VT_I4;
+    vIndex.lVal = index;
+
+    if (!SH32_ComGetVtbl(pShellWindows, 8, &vtbl))
+        return E_NOINTERFACE;
+
+    return ((P_Item)vtbl[8])(pShellWindows, vIndex, ppDispatch);
+}
+
+
+_FX HRESULT SH32_IShellWindows_GetCount(
+    void *pShellWindows, long *pCount)
+{
+    ULONG_PTR *vtbl;
+    typedef HRESULT (STDMETHODCALLTYPE *P_get_Count)(void *, long *);
+
+    if (! pCount)
+        return SH32_E_POINTER;
+
+    *pCount = 0;
+
+    if (! pShellWindows)
+        return E_NOINTERFACE;
+
+    if (!SH32_ComGetVtbl(pShellWindows, 7, &vtbl))
+        return E_NOINTERFACE;
+
+    return ((P_get_Count)vtbl[7])(pShellWindows, pCount);
+}
+
+
+_FX HRESULT WINAPI SH32_IShellWindows_FindWindowSW(
+    void *pShellWindows,
+    VARIANT *pvarLoc, VARIANT *pvarLocRoot,
+    int swClass, long *phwnd, int swfwOptions,
+    IDispatch **ppdispOut
+#if !defined(_M_ARM64) && !defined(_M_ARM64EC)
+    )
+{
+    ULONG_PTR *StubData = Dll_JumpStubData();
+#else
+    , ULONG_PTR *StubData)
+{
+#endif
+    typedef HRESULT (STDMETHODCALLTYPE *P_FindWindowSW)(
+        void *, VARIANT *, VARIANT *, int, long *, int, IDispatch **);
+
+    if (!StubData || !StubData[1])
+        return E_NOINTERFACE;
+
+    if (ppdispOut)
+        *ppdispOut = NULL;
+
+    HRESULT hr = ((P_FindWindowSW)StubData[1])(
+        pShellWindows, pvarLoc, pvarLocRoot,
+        swClass, phwnd, swfwOptions, ppdispOut);
+
+    if (swClass != SH32_SWC_DESKTOP)
+        return hr;
+
+    // UseFakeShellDispatch=n leaves desktop shell dispatch untouched.
+    // When enabled, Sandboxie keeps the forced synthetic path in compartment
+    // mode, but otherwise prefers a usable real desktop dispatch first and
+    // falls back to the synthetic chain only when the real shell path is not
+    // available or not usable.
+    if (! Config_GetSettingsForImageName_bool(L"UseFakeShellDispatch", TRUE))
+        return hr;
+
+    if ((swfwOptions & SH32_SWFO_NEEDDISPATCH) && ppdispOut) {
+
+        // In compartment mode we still force the synthetic dispatch chain so
+        // ShellExecute remains routed through Sandboxie-controlled code.
+        if (Dll_CompartmentMode) {
+            if (*ppdispOut) {
+                SH32_ComRelease(*ppdispOut);
+                *ppdispOut = NULL;
+            }
+            *ppdispOut = (IDispatch *)SH32_FakeDesktop_Create();
+            if (*ppdispOut)
+                SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE,
+                    L"UseFakeShellDispatch[S0]: enabled in compartment mode -> synthetic dispatch", FALSE);
+            return *ppdispOut ? S_OK : E_OUTOFMEMORY;
+        }
+
+        BOOLEAN valid_dispatch = SH32_IsUsableShellDispatch(*ppdispOut);
+
+        if (valid_dispatch) {
+            // Accept this only if the shell window is owned by a process that
+            // runs inside this sandbox.  When OpenClsid allows the real
+            // IShellWindows, FindWindowSW returns the HOST desktop dispatch
+            // (which also satisfies SH32_IsUsableShellDispatch), but it must
+            // not be used as the in-sandbox dispatch - fall through to S5.
+            BOOLEAN ownerInSandbox = FALSE;
+            if (phwnd && *phwnd) {
+                ULONG ownerPid = 0;
+                extern DWORD (*__sys_GetWindowThreadProcessId)(HWND hWnd, ULONG *ppid);
+                if (__sys_GetWindowThreadProcessId)
+                    __sys_GetWindowThreadProcessId((HWND)(LONG_PTR)*phwnd, &ownerPid);
+                if (ownerPid) {
+                    WCHAR sbxname[BOXNAME_COUNT];
+                    LONG st = SbieApi_QueryProcess(
+                        (HANDLE)(ULONG_PTR)ownerPid, sbxname, NULL, NULL, NULL);
+                    ownerInSandbox = NT_SUCCESS(st) && sbxname[0] != L'\0';
+                }
+            }
+            if (ownerInSandbox) {
+                SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE,
+                    L"UseFakeShellDispatch[S1A]: desktop dispatch already usable", FALSE);
+            } else {
+                valid_dispatch = FALSE;
+                SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE,
+                    L"UseFakeShellDispatch[S1A]: hwnd not in sandbox -> fallback", FALSE);
+            }
+        }
+
+        if (! valid_dispatch) {
+            SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE,
+                L"UseFakeShellDispatch[S1]: desktop dispatch unusable, trying fallbacks", FALSE);
+
+            IDispatch *pDispatch2 = NULL;
+            HRESULT hr2;
+            long hwnd2 = 0;
+
+            if (*ppdispOut) {
+                SH32_ComRelease(*ppdispOut);
+                *ppdispOut = NULL;
+            }
+
+            hr2 = ((P_FindWindowSW)StubData[1])(
+                pShellWindows, pvarLoc, pvarLocRoot,
+                SH32_SWC_EXPLORER,
+                &hwnd2,
+                swfwOptions | SH32_SWFO_INCLUDEPENDING,
+                &pDispatch2);
+
+            if (SUCCEEDED(hr2) && SH32_IsUsableShellDispatch(pDispatch2)) {
+                *ppdispOut = pDispatch2;
+                if (phwnd)
+                    *phwnd = hwnd2;
+                hr = hr2;
+                SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE,
+                    L"UseFakeShellDispatch[S2]: explorer fallback yielded usable dispatch", FALSE);
+            }
+            else {
+                SH32_ComRelease(pDispatch2);
+                pDispatch2 = NULL;
+
+                hr2 = SH32_IShellWindows_ItemDispatch(
+                    pShellWindows, 0, &pDispatch2);
+
+                if (SUCCEEDED(hr2) && SH32_IsUsableShellDispatch(pDispatch2)) {
+                    *ppdispOut = pDispatch2;
+                    hr = S_OK;
+                    // *phwnd is not updated here: IShellWindows::Item() returns no window
+                    // handle.  The tail GetShellWindow() call below fills it in.
+                    SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE,
+                        L"UseFakeShellDispatch[S3]: Item(0) fallback yielded usable dispatch", FALSE);
+                }
+                else {
+                    SH32_ComRelease(pDispatch2);
+                    pDispatch2 = NULL;
+
+                    {
+                        long count = 0;
+                        long index;
+
+                        hr2 = SH32_IShellWindows_GetCount(pShellWindows, &count);
+                        if (SUCCEEDED(hr2) && count > 0) {
+
+                            for (index = 0; index < count; ++index) {
+
+                                hr2 = SH32_IShellWindows_ItemDispatch(
+                                    pShellWindows, index, &pDispatch2);
+
+                                if (FAILED(hr2) || ! pDispatch2)
+                                    continue;
+
+                                if (SH32_IsUsableShellDispatch(pDispatch2)) {
+                                    *ppdispOut = pDispatch2;
+                                    hr = S_OK;
+                                    // *phwnd is not updated here for the same reason as S3.
+                                    SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE,
+                                        L"UseFakeShellDispatch[S4]: Item(n) fallback yielded usable dispatch", FALSE);
+                                    break;
+                                }
+
+                                SH32_ComRelease(pDispatch2);
+                                pDispatch2 = NULL;
+                            }
+                        }
+
+                        // No real shell window found in the sandbox
+                        // synthesise the full IShellDispatch2 chain ourselves.
+                        if (! *ppdispOut) {
+                            *ppdispOut = (IDispatch *)SH32_FakeDesktop_Create();
+                            if (*ppdispOut)
+                                SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE,
+                                    L"UseFakeShellDispatch[S5]: no usable real dispatch -> synthetic dispatch", FALSE);
+                            hr = *ppdispOut ? S_OK : E_OUTOFMEMORY;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (SUCCEEDED(hr) && phwnd && *phwnd)
+        return hr;
+
+    typedef HWND (*P_GetShellWindow)(void);
+    P_GetShellWindow pGetShellWindow = (P_GetShellWindow)
+        Ldr_GetProcAddrNew(DllName_user32, L"GetShellWindow", "GetShellWindow");
+
+    HWND hDesktop = pGetShellWindow ? pGetShellWindow() : NULL;
+
+    if (! hDesktop)
+        return hr;
+
+    if (phwnd)
+        *phwnd = (long)(LONG_PTR)hDesktop;
+
+    if (swfwOptions & SH32_SWFO_NEEDDISPATCH) {
+
+        if (! ppdispOut)
+            return SH32_E_POINTER;
+
+        if (! *ppdispOut)
+            return FAILED(hr) ? hr : SH32_E_POINTER;
+    }
+
+    return S_OK;
+}
+
+
+_FX void SH32_IShellWindows_Hook(REFCLSID rclsid, REFIID riid, void *pUnknown)
+{
+    static const WCHAR *TraceMsg =
+        L"UseFakeShellDispatch[H0]: IShellWindows hook sanity check failed";
+    ULONG_PTR *vtbl;
+    IUnknown *pIsw;
+    HRESULT hr;
+    typedef HRESULT (STDMETHODCALLTYPE *P_QueryInterface)(void *, REFIID, void **);
+
+    UNREFERENCED_PARAMETER(rclsid);
+
+    if (! pUnknown)
+        return;
+
+    if (memcmp(riid, &SH32_IID_IShellWindows, sizeof(GUID)) != 0)
+        return;
+
+    if (!SH32_ComGetVtbl(pUnknown, 15, &vtbl)) {
+        SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE, TraceMsg, FALSE);
+        return;
+    }
+
+    pIsw = NULL;
+    hr = ((P_QueryInterface)vtbl[0])(
+        pUnknown, &SH32_IID_IShellWindows, (void **)&pIsw);
+    if (FAILED(hr) || !pIsw) {
+        SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE, TraceMsg, FALSE);
+        return;
+    }
+
+    if (!SH32_ComGetVtbl(pIsw, 15, &vtbl)) {
+        SbieApi_MonitorPut2(MONITOR_COMCLASS | MONITOR_TRACE, TraceMsg, FALSE);
+        SH32_ComRelease(pIsw);
+        return;
+    }
+
+    SH32_IContextMenu_HookVtbl(
+        pIsw, 15, SH32_IShellWindows_FindWindowSW);
+
+    SH32_ComRelease(pIsw);
+}
+
 

@@ -3050,7 +3050,7 @@ Standaard lijst van geblokkeerde TCP/IP-poorten
 .
 
 4294;txt;01
-Programma's toestaan om jumplists in de taakbalk van Windows 7 bij te werken
+Programma's toestaan om jumplists in de taakbalk van Windows bij te werken
 .
 
 4295;txt;01

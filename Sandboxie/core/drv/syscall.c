@@ -513,7 +513,7 @@ _FX SYSCALL_ENTRY *Syscall_GetByName(const UCHAR *name)
         entry = List_Next(entry);
     }
 
-    Syscall_ErrorForAsciiName(name);
+    //Syscall_ErrorForAsciiName(name);
     return NULL;
 }
 
@@ -647,7 +647,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
             ANSI_STRING64* uni = (ANSI_STRING64*)parms[3];
             SIZE_T callNameLen = 0;
             UCHAR* callNameBuff = 0;
-            UCHAR callName[64];
+            UCHAR callName[66];
 
             ProbeForRead(uni, sizeof(ANSI_STRING64), sizeof(ULONG_PTR));
             callNameLen = uni->Length;

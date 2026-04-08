@@ -736,6 +736,9 @@ _FX HRESULT Com_CoCreateInstance(
         hr = __sys_CoCreateInstance(rclsid, pUnkOuter, clsctx, riid, ppv);
     }
 
+    if (SUCCEEDED(hr) && (! ppv || ! *ppv))
+        hr = E_NOINTERFACE;
+
     Com_Trace2(TraceType, NULL, rclsid, riid, 0, clsctx, hr, monflag);
     if ((clsctx & CLSCTX_LOCAL_SERVER) != 0 || monflag) {
         if (!Com_TraceFlag) Com_Monitor(rclsid, monflag);
@@ -750,6 +753,12 @@ _FX HRESULT Com_CoCreateInstance(
 
         extern void SH32_IContextMenu_Hook(REFCLSID, void *);
         SH32_IContextMenu_Hook(rclsid, *ppv);
+    }
+
+    if (SUCCEEDED(hr)) {
+
+        extern void SH32_IShellWindows_Hook(REFCLSID, REFIID, void *);
+        SH32_IShellWindows_Hook(rclsid, riid, *ppv);
     }
 
     //
@@ -846,12 +855,44 @@ _FX HRESULT Com_CoCreateInstanceEx(
                             rclsid, pUnkOuter, clsctx, pServerInfo, cmq, pmqs);
     }
 
-    
+    {
+        ULONG good = 0;
+        ULONG bad = 0;
+
+        for (i = 0; i < cmq; ++i) {
+            MULTI_QI *mqi = &pmqs[i];
+
+            if (SUCCEEDED(mqi->hr) && ! mqi->pItf)
+                mqi->hr = E_NOINTERFACE;
+
+            if (FAILED(mqi->hr))
+                ++bad;
+            else
+                ++good;
+        }
+
+        if (good == cmq)
+            hr = S_OK;
+        else if (bad == cmq)
+            hr = E_NOINTERFACE;
+        else
+            hr = CO_S_NOTALLINTERFACES;
+    }
+
     for (i = 0; i < cmq; ++i) {
         MULTI_QI *mqi = &pmqs[i];
         Com_Trace2(TraceType, NULL, rclsid, mqi->pIID, 0, clsctx, mqi->hr, monflag);
         if ((clsctx & CLSCTX_LOCAL_SERVER) != 0 || monflag) {
             if (!Com_TraceFlag) Com_Monitor(rclsid, monflag);
+        }
+    }
+
+    {
+        extern void SH32_IShellWindows_Hook(REFCLSID, REFIID, void *);
+        for (i = 0; i < cmq; ++i) {
+            MULTI_QI *mqi = &pmqs[i];
+            if (SUCCEEDED(mqi->hr) && mqi->pItf)
+                SH32_IShellWindows_Hook(rclsid, mqi->pIID, mqi->pItf);
         }
     }
 

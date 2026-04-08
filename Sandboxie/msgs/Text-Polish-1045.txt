@@ -3209,7 +3209,7 @@ Domyślna lista blokowanych portów TCP/IP
 .
 
 4294;txt;01
-Zezwalaj programom na aktualizację listy szybkiego dostępu na pasku zadań Windows 7
+Zezwalaj programom na aktualizację listy szybkiego dostępu na pasku zadań Windows
 .
 
 4295;txt;01

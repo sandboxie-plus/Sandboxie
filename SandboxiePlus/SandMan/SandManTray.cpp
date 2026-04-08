@@ -167,24 +167,27 @@ void CSandMan::CreateTrayMenu()
 		m_pTrayList = new QWidgetAction(m_pTrayMenu);
 
 		QWidget* pWidget = new CActionWidget();
+		pWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
 		QHBoxLayout* pLayout = new QHBoxLayout();
 		pLayout->setContentsMargins(0,0,0,0);
+		pLayout->setSpacing(0);
 		pWidget->setLayout(pLayout);
 
 		m_pTrayBoxes = new CTrayTreeWidget();
 
-		m_pTrayBoxes->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+		m_pTrayBoxes->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
 		m_pTrayBoxes->setRootIsDecorated(false);
 		//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
 		m_pTrayBoxes->setHeaderHidden(true);
 		m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
+		m_pTrayBoxes->setTextElideMode(Qt::ElideRight);
 		//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
 		//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
 		m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
 
 		m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
 
-		pLayout->insertSpacing(0, 1);// 32);
+		pLayout->insertSpacing(0, 0);// keep left edge aligned with menu text
 
 		//QFrame* vFrame = new QFrame;
 		//vFrame->setFixedWidth(1);
@@ -291,6 +294,15 @@ QString CSandMan::GetTrayText(bool isConnected)
 		Text += tr(" - Deleting Sandbox Content");
 
 	return Text;
+}
+
+static QString CSandMan__GetTrayEmptyText(int iSysTrayFilter)
+{
+	if (iSysTrayFilter == 2)
+		return CSandMan::tr("No pinned sandboxes to show.");
+	if (iSysTrayFilter == 1)
+		return CSandMan::tr("No active or pinned sandboxes to show.");
+	return CSandMan::tr("No sandboxes to show.");
 }
 
 void CSandMan::OnShowHide()
@@ -419,7 +431,7 @@ static QTreeWidgetItem* CSandMan__GetBoxParentTree(const QMap<QString, QStringLi
 			fnt.setBold(true);
 			pParent->setFont(0, fnt);
 
-			if (QTreeWidgetItem* pParent2 = CSandMan__GetBoxParentTree(Groups, GroupItems, pTree, I.key(), sortMode, ++Depth))
+			if (QTreeWidgetItem* pParent2 = CSandMan__GetBoxParentTree(Groups, GroupItems, pTree, I.key(), sortMode, Depth + 1))
 				CSandMan__InsertGroupItemSorted(pTree, pParent2, pParent, I.key(), sortMode, Groups);
 			else
 				CSandMan__InsertGroupItemSorted(pTree, nullptr, pParent, I.key(), sortMode, Groups);
@@ -448,7 +460,7 @@ QMenu* CSandMan__GetBoxParent(const QMap<QString, QStringList>& Groups, QMap<QSt
 				pParent->setToolTipsVisible(true);
 				if(!iNoIcons) pParent->setIcon(Icon);
 				QAction* pMenuAction = NULL;
-				if (QMenu* pParent2 = CSandMan__GetBoxParent(Groups, GroupItems, Icon, iNoIcons, pMenu, pPos, I.key(), sortMode, ++Depth))
+				if (QMenu* pParent2 = CSandMan__GetBoxParent(Groups, GroupItems, Icon, iNoIcons, pMenu, pPos, I.key(), sortMode, Depth + 1))
 					pMenuAction = CSandMan__InsertGroupMenuSorted(pParent2, nullptr, pParent, I.key(), sortMode, Groups);
 				else
 					pMenuAction = CSandMan__InsertGroupMenuSorted(pMenu, pPos, pParent, I.key(), sortMode, Groups);
@@ -475,7 +487,7 @@ double CSandMan__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QSt
 			value = double(Pos) + value / 10.0;
 			if (I.key().isEmpty())
 				return value;
-			return CSandMan__GetBoxOrder(Groups, I.key(), value, ++Depth);
+			return CSandMan__GetBoxOrder(Groups, I.key(), value, Depth + 1);
 		}
 	}
 	return 1000000000;
@@ -647,6 +659,7 @@ void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
 	}
 
 	QMap<QString, QMenu*> GroupItems;
+	bool bAnyBoxAdded = false;
 	foreach(const CSandBoxPtr &pBox, Boxes) 
 	{
 		if (!pBox->IsEnabled())
@@ -672,6 +685,14 @@ void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
 			pSubMenu->addAction(pBoxAction);
 		else
 			pMenu->insertAction(pPos, pBoxAction);
+		bAnyBoxAdded = true;
+	}
+
+	if (!bAnyBoxAdded) {
+		QAction* pEmptyAction = new QAction(CSandMan__GetTrayEmptyText(iSysTrayFilter), pMenu);
+		pEmptyAction->setEnabled(false);
+		pEmptyAction->setData("empty:");
+		pMenu->insertAction(pPos, pEmptyAction);
 	}
 }
 
@@ -782,6 +803,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				}
 
 				QMap<QString, QTreeWidgetItem*> GroupItems;
+				bool bHasVisibleBoxes = false;
 				foreach(const CSandBoxPtr &pBox, Boxes) 
 				{
 					if (!pBox->IsEnabled())
@@ -829,6 +851,15 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 						pParent->addChild(pItem);
 					else
 						m_pTrayBoxes->addTopLevelItem(pItem);
+
+					bHasVisibleBoxes = true;
+				}
+
+				if (!bHasVisibleBoxes) {
+					QTreeWidgetItem* pEmptyItem = new QTreeWidgetItem();
+					pEmptyItem->setText(0, CSandMan__GetTrayEmptyText(iSysTrayFilter));
+					pEmptyItem->setFlags(Qt::NoItemFlags);
+					m_pTrayBoxes->addTopLevelItem(pEmptyItem);
 				}
 
 				m_pTrayBoxes->expandAll();
@@ -940,7 +971,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					int Width = maxItemWidth + scrollBarWidth + qRound(4 * dpiScale);
 					int MaxWidth = scrRect.width() / 3;
 					if (Width > MaxWidth) Width = MaxWidth;
-					m_pTrayBoxes->setFixedWidth(Width);
+					m_pTrayBoxes->setMinimumWidth(Width);
 
 					m_pTrayMenu->removeAction(m_pTrayList);
 					QAction* pInsertPos = (m_iTrayPos >= 0 && m_iTrayPos < m_pTrayMenu->actions().count())
@@ -1000,9 +1031,12 @@ void CSandMan::OnBoxMenu(const QPoint& point)
 	if (!m_pTrayBoxes || !m_pBoxView)
 		return;
 	QTreeWidgetItem* pItem = m_pTrayBoxes->currentItem();
-	if (!pItem)
+	if (!pItem || !m_pBoxView)
+		return;
+	QString Name = pItem->data(0, Qt::UserRole).toString();
+	if (Name.isEmpty() || !theAPI || theAPI->GetBoxByName(Name).isNull())
 		return;
 	CTrayBoxesItemDelegate::m_Hold = true;
-	m_pBoxView->PopUpMenu(pItem->data(0, Qt::UserRole).toString());
+	m_pBoxView->PopUpMenu(Name);
 	CTrayBoxesItemDelegate::m_Hold = false;
 }

@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <stdio.h>*/
 
+size_t b64_encoded_size(size_t inlen);
+int b64_encode(const unsigned char *in, size_t inlen, wchar_t *out, size_t outlen);
+size_t b64_decoded_size(const wchar_t *in);
+int b64_decode(const wchar_t *in, unsigned char *out, size_t outlen);
+
+#ifndef BASE64_HEADER_ONLY
+
 size_t b64_encoded_size(size_t inlen)
 {
 	size_t ret;
@@ -138,3 +145,4 @@ int b64_decode(const wchar_t *in, unsigned char *out, size_t outlen)
 	return 1;
 }
 
+#endif /* BASE64_HEADER_ONLY */

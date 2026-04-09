@@ -1654,6 +1654,11 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			else
 				Status = Progress;
 		}
+
+		if (!Status.IsError()) {
+			Refresh();
+			RestoreBoxSelectionLater(QStringList() << Name);
+		}
 		
 		Results.append(Status);
 	}

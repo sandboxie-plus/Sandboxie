@@ -8,21 +8,36 @@ on:
       - '**.c'
       - '**.cpp'
       - '**.h'
+      - '**.hpp'
+      - '**.def'
+      - '**.rc'
+      - '**.idl'
+      - '**.sln'
+      - '**.vcxproj'
+      - '**.vcxproj.filters'
+      - '**.props'
   pull_request:
     types:
       - opened
-    # The branches below must be a subset of the branches above.
     branches: [ 'master' ]
     paths:
       - '**.c'
       - '**.cpp'
       - '**.h'
+      - '**.hpp'
+      - '**.def'
+      - '**.rc'
+      - '**.idl'
+      - '**.sln'
+      - '**.vcxproj'
+      - '**.vcxproj.filters'
+      - '**.props'
   schedule:
     - cron: '33 7 * * 6'
 
 jobs:
-  analyze:
-    name: Analyze
+  analyze-cpp:
+    name: Analyze (C/C++)
     if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     runs-on: windows-2022
     timeout-minutes: 60
@@ -32,68 +47,49 @@ jobs:
       contents: read
       security-events: write
 
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'cpp' ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-        # Use only 'java' to analyze code written in Java, Kotlin or both.
-        # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both.
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-
     steps:
-    - name: Cleanup build folder
-      run: |
-        rm -r -Force ${{ github.workspace }}\*
-
     - name: Checkout repository
       uses: actions/checkout@v6
+      with:
+        clean: true
+
+    - name: Initialize CodeQL (C/C++)
+      uses: github/codeql-action/init@v4
+      with:
+        languages: c-cpp
+        build-mode: manual
+        config-file: ./.github/codeql/codeql-config.yml
 
     - name: Load Variables from buildVariables.cmd
+      id: vars
       shell: cmd
       run: |
         @echo on
         call "${{ github.workspace }}\Installer\buildVariables.cmd" build_qt6
-        echo qt6_version=%qt6_version% >> %GITHUB_ENV%
-        echo qt_version=%qt6_version% >> %GITHUB_ENV%
+        echo qt6_version=%qt6_version% >> "%GITHUB_OUTPUT%"
 
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v3
 
-    # Qt 6 is only required for ARM64 build currently.
     - name: Install Qt6 x64
       uses: jurplel/install-qt-action@v4
       with:
-    #     version: '6.3.1'
-         version: '${{ env.qt6_version }}'
-    #     arch:  'win64_msvc2019_64'
+         version: ${{ steps.vars.outputs.qt6_version }}
+         arch:  'win64_msvc2022_64'
          tools: 'tools_opensslv3_x64'
          cache: true
-
-#    - name: Install Qt5 x64
-#      run: SandboxiePlus\install_qt.cmd x64
 
     - name: Installing Jom
       run: SandboxiePlus\install_jom.cmd
 
-    # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v4
-      with:
-        languages: ${{ matrix.language }}
-        config-file: ./.github/codeql/codeql-config.yml
-        # If you wish to specify custom queries, you can do so here or in a config file.
-        # By default, queries listed here will override any specified in a config file.
-        # Prefix the list here with "+" to use these queries and those in the config file.
-
-        # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-        # queries: security-extended,security-and-quality
-
-    - name: Build Sandboxie x86 (Dll)
+    - name: Build Sandboxie x86 (DLLs & svc)
       run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
-    - name: Build Sandboxie x64
+    - name: Build Sandboxie x64 (all)
       run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+
+    - name: Build Sandboxie x64 (drv)
+      run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
 
     - name: Build Sandboxie-Plus x64
       run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
@@ -104,7 +100,38 @@ jobs:
     - name: Build Sandboxie-Tools x64
       run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8
 
-    - name: Perform CodeQL Analysis
+    - name: Perform CodeQL Analysis (C/C++)
       uses: github/codeql-action/analyze@v4
       with:
-        category: "/language:${{matrix.language}}"
+        category: "/language:c-cpp"
+
+  analyze-other:
+    name: Analyze
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ actions, javascript-typescript ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - name: Initialize CodeQL (${{ matrix.language }})
+      uses: github/codeql-action/init@v4
+      with:
+        languages: ${{ matrix.language }}
+        config-file: ./.github/codeql/codeql-config.yml
+
+    - name: Perform CodeQL Analysis (${{ matrix.language }})
+      uses: github/codeql-action/analyze@v4
+      with:
+        category: "/language:${{ matrix.language }}"

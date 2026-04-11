@@ -265,6 +265,55 @@ void CSbieAPI::GetUserPaths()
 	}
 }
 
+std::wstring GetWindowTextTimeout(HWND hWnd, UINT timeout) 
+{
+	DWORD_PTR length = 0;
+
+	if (SendMessageTimeoutW(hWnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, timeout, &length) == 0)
+		return L""; 
+	if (length == 0)
+		return L""; 
+
+	std::vector<wchar_t> buffer(length + 1);
+	if (SendMessageTimeoutW(hWnd, WM_GETTEXT, length + 1, reinterpret_cast<LPARAM>(buffer.data()), SMTO_ABORTIFHUNG, timeout, &length) == 0)
+		return L""; 
+	return std::wstring(buffer.data(), length); 
+}
+
+BOOL CALLBACK CSbiePlusAPI__WindowEnum(HWND hwnd, LPARAM lParam)
+{
+	if (!IsWindowVisible(hwnd))
+		return TRUE;
+
+	QMap<quint32, CSbieAPI::SWndInfo>& m_WindowMap = *((QMap<quint32, CSbieAPI::SWndInfo>*)(lParam));
+
+	ULONG pid;
+	GetWindowThreadProcessId(hwnd, &pid);
+
+	m_WindowMap[pid].hWnds.append((quint32)(ULONG_PTR)hwnd);
+
+	if (GetParent(hwnd) || GetWindow(hwnd, GW_OWNER))
+		return TRUE;
+
+	ULONG style = GetWindowLong(hwnd, GWL_STYLE);
+	if ((style & (WS_CAPTION | WS_SYSMENU)) != (WS_CAPTION | WS_SYSMENU))
+		return TRUE;
+	/*
+	if ((style & WS_OVERLAPPEDWINDOW) != WS_OVERLAPPEDWINDOW &&
+		(style & WS_POPUPWINDOW)      != WS_POPUPWINDOW)
+		return TRUE;
+	*/
+
+	m_WindowMap[pid].Title = QString::fromStdWString(GetWindowTextTimeout(hwnd, 10));
+	return TRUE;
+}
+
+void CSbieAPI::UpdateWindowMap()
+{
+	m_WindowMap.clear();
+	EnumWindows(CSbiePlusAPI__WindowEnum, (LPARAM)&m_WindowMap);
+}
+
 SB_STATUS CSbieAPI::Connect(bool takeOver, bool withQueue)
 {
 	if (IsConnected())

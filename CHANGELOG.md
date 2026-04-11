@@ -2,22 +2,36 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.17.4 / 5.72.4] - 2026-04-??
+
+### Added
+- added ‘BlockLocalLoop=y', interprecation to local loopback connection
+
+### Fixed
+- fixed issue with volatile config update
+- fixed, added missing WaitServiceState resolves "LINE fails to launch" / NO_SIGNATURE [#5306](https://github.com/sandboxie-plus/Sandboxie/issues/5306)
 
 
-## [1.17.3 / 5.72.3] - 2026-02-??
+
+## [1.17.3 / 5.72.3] - 2026-03-29
 
 ### Added
 - added configurable window location settings to control which monitor main, non-main, file recovery, and notification windows open on, including a selectable fallback mode. [#4536](https://github.com/sandboxie-plus/Sandboxie/issues/4536) [#5238](https://github.com/sandboxie-plus/Sandboxie/pull/5238)
   - Global Settings > Interface Config > Window Options
 - added "Label only" border mode option (`onlbl`, `ttllbl`, `alllbl`) that hides the colored border frame and shows only the sandbox name (or alias) label [#5239](https://github.com/sandboxie-plus/Sandboxie/pull/5239)
 - added MIDI workaround template for Windows 11 [#5183](https://github.com/sandboxie-plus/Sandboxie/issues/5183) [#5203](https://github.com/sandboxie-plus/Sandboxie/issues/5203#issuecomment-3938495163) (thanks xsmolasses)
-- added "Label only" border mode option (`onlbl`, `ttllbl`, `alllbl`) that hides the colored border frame and shows only the sandbox name (or alias) label [#5239](https://github.com/sandboxie-plus/Sandboxie/pull/5239)
 - added new tray customization options (Global Settings > Shell Integration > System Tray): [#5254](https://github.com/sandboxie-plus/Sandboxie/pull/5254)
   - "Show icons in tray context menu" (`Options/TrayIcons`) — controls whether custom sandbox icons are displayed in the tray menu.
   - "Show box alias name instead of box name in tray" (`Options/TrayUseAlias`) — displays the configured alias/display name in both compact and regular tray menus.
   - "Show sandbox status as tooltip in tray list" (`Options/TrayStatusTip`) now supports tri-state behavior: unchecked = never, partial = while Ctrl or Shift is held (default), checked = always.
   - "Show overlay icons for boxes in tray list" (`Options/TrayOverlayIcons`) — shows the same box-state overlays used in the main sandbox list (no-force, disk image mounted/unmounted, RAM disk, auto-delete) on tray icons in both the compact widget and the regular context menu.
-- added ‘BlockLocalLoop=y', interprecation to local loopback connection
+- added border capture exclusion via `HideBordersFromCapture`
+  - keeps border frames and labels out of screenshots and screen recordings; defaults to `CoverBoxedWindows`
+- added border label width and taskbar clipping options
+  - configurable via `BorderColor` label width and `BorderExcludeTaskbar`
+- added `UseFakeShellDispatch` option to provide synthetic `IShellDispatch` fallback (may fix some WebView2 issues)
+  - can be disabled per process via `UseFakeShellDispatch=process,n`
+- added `Template_OnScreenKeyboard` (Windows 11) to fix On-Screen Keyboard freezes when used with sandboxed programs
 
 ### Changed
 - reduced constant GUI CPU usage by caching custom `BoxIcon` resolution in the sandbox model instead of reloading icon resources on refresh
@@ -26,6 +40,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed duplicate sandbox behavior so active box aliases also receive the "Copy" suffix on duplication
 - changed tray sandbox/group ordering to mirror sandbox list mode (manual / ascending / descending), including group ordering
 - improved tray/sandbox submenu icon caching by resolving `DblClickAction` target paths (`GetCommandFile`) only on cache misses and caching `LoadWindowsIcon(path,index)` results for Run/Start menu entries, reducing repeated system icon extraction when opening menus
+- improved border rendering
 
 ### Fixed
 - fixed false "Some changes haven't been saved yet" prompt when leaving Network Options with unlisted-process network mode set to non-default
@@ -34,7 +49,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed compact tray box list clipping long sandbox names; width is now measured precisely per item using font metrics and scales correctly at any DPI [#5254](https://github.com/sandboxie-plus/Sandboxie/pull/5254)
 - fixed WOW64 registry view inheritance for relative key opens in `SbieDll`, preserving parent `KEY_WOW64_32KEY/KEY_WOW64_64KEY` semantics across `NtOpenKey`/`NtCreateKey` [#5171](https://github.com/sandboxie-plus/Sandboxie/issue/7171) [#5244](https://github.com/sandboxie-plus/Sandboxie/pull/5244)
 - fixed handle leak in `ScanStartMenu`: `IShellLinkW` and `IPersistFile` COM interfaces were never released in `ResolveShortcut`, permanently retaining handles (file, registry, icon) for every `.lnk` shortcut scanned; replaced raw pointers with `CComPtr` to ensure `Release()` on all exit paths
-
+- fixed parsing logic for `ClosedClsid` and `ClosedRT` settings [#5263](https://github.com/sandboxie-plus/Sandboxie/pull/5263)
+- FIXED SECURITY ISSUE ID-32: EditPassword Hash Entropy Loss, new passwords will ne salted SHA256 and base64 encoded
+  - Note: the fix only takes effect when the password is being set, existing passwords remain weak
+- fixed Local Denial of Service (DoS) Vulnerability Exploitable by Sandboxed Process CVE-2026-32603 (reported by sammy12342)
+- fixed Sandboxie-Plus EditAdminOnly Bypass via INI CRLF Injection (reported by sammy12342)
+- fixed issues with GetRawInputDeviceInfoSlave (reported by sammy12342)
+- fixed an issue with RunSbieCtrl (reported by Yanchon918s)
+- fixed name validation in ProcessServer handlers (reported by Yanchon918s)
+- fixed parameter validation in NamedPipeServer (reported by Yanchon918s)
+- fixed file integrity issues with updater (reported by sammy12342)
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18

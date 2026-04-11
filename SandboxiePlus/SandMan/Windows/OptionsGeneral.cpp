@@ -164,6 +164,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.spinBorderAlpha, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.spinLabelWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBorderLabelOnly, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkPinToTray, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -291,6 +292,7 @@ void COptionsWindow::LoadGeneral()
 	if (!alphaOk || m_BorderAlpha < 0 || m_BorderAlpha > 255)
 		m_BorderAlpha = 192;
 	ui.spinBorderAlpha->setValue(m_BorderAlpha);
+
 	QString labelMode = BorderCfg.count() >= 5 ? BorderCfg[4].toLower() : "in";
 	int labelModeIndex = ui.cmbBoxBorderText->findData(labelMode);
 	if (labelModeIndex < 0)
@@ -299,6 +301,12 @@ void COptionsWindow::LoadGeneral()
 	// Set after cmbBoxBorderText is loaded: OnGeneralChanged (fired by spinners) reads
 	// cmbBoxBorderText to decide whether to uncheck, so we must apply this value last.
 	ui.chkBorderLabelOnly->setChecked(borderLabelOnly);
+
+	// Optional per-label width values (legacy config falls back to border values).
+	int labelWidth = BorderCfg.count() >= 6 ? BorderCfg[5].toInt() : BorderWidth;
+	if (labelWidth <= 0)
+		labelWidth = BorderWidth;
+	ui.spinLabelWidth->setValue(labelWidth);
 
 	m_BoxIcon = m_pBox->GetText("BoxIcon");
 	m_pUseIcon->setChecked(!m_BoxIcon.isEmpty());
@@ -456,6 +464,7 @@ void COptionsWindow::SaveGeneral()
 	BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
 	BorderCfg.append(QString::number(ui.spinBorderAlpha->value())); // Get alpha from spinner
 	BorderCfg.append(ui.cmbBoxBorderText->currentData().toString());
+	BorderCfg.append(QString::number(ui.spinLabelWidth->value()));
 	WriteText("BorderColor", BorderCfg.join(","));
 
 	if(m_pUseIcon->isChecked())

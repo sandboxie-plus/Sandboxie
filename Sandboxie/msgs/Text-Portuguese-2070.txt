@@ -2909,7 +2909,7 @@ Lista predefinida de portas TCP/IP bloqueadas
 .
 
 4294;txt;01
-Permitir que os programas atualizem as listas de atalhos na barra de tarefas do Windows 7
+Permitir que os programas atualizem as listas de atalhos na barra de tarefas do Windows
 .
 
 #----------------------------------------------------------------------------

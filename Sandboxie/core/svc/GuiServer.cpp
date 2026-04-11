@@ -3550,6 +3550,15 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
         }
     }
 
+    ULONG max_data = MAX_RPL_BUF_SIZE - sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+    if (lenData > max_data)
+        return STATUS_INVALID_PARAMETER;
+
+    if (reqData && lenData > 0) {
+        if (args->req_len < sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) + lenData)
+            return STATUS_INFO_LENGTH_MISMATCH;
+    }
+
     SetLastError(ERROR_SUCCESS);
     if (req->unicode) {
         rpl->retval = GetRawInputDeviceInfoW((HANDLE)req->hDevice, req->uiCommand, reqData, &req->cbSize);
@@ -3569,7 +3578,9 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
     else
         rpl->hasData = FALSE;
 
-    args->rpl_len = args->req_len;
+    args->rpl_len = sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+    if (lenData)
+        args->rpl_len += lenData;
 
     return STATUS_SUCCESS;
 }

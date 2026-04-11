@@ -2841,7 +2841,7 @@ Standardliste der gesperrten TCP/IP Ports
 .
 
 4294;txt;01
-Programme dürfen die Sprunglisten der Windows 7 Taskleiste aktualisieren
+Programme dürfen die Sprunglisten der Windows Taskleiste aktualisieren
 .
 
 4295;txt;01

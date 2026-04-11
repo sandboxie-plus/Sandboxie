@@ -50,7 +50,7 @@ struct tagPROCESS_KILL_ALL_REQ
 {
     MSG_HEADER h;
     ULONG session_id;
-    WCHAR boxname[34];
+    WCHAR boxname[BOXNAME_COUNT];
 };
 
 typedef struct tagPROCESS_KILL_ALL_REQ PROCESS_KILL_ALL_REQ;
@@ -93,7 +93,7 @@ typedef struct tagPROCESS_OPEN_DEVICE_MAP_REQ PROCESS_OPEN_DEVICE_MAP_REQ;
 struct tagPROCESS_RUN_SANDBOXED_REQ
 {
     MSG_HEADER h;
-    WCHAR boxname[34];
+    WCHAR boxname[BOXNAME_COUNT];
     ULONG cmd_ofs;
     ULONG cmd_len;
     ULONG dir_ofs;
@@ -197,7 +197,7 @@ struct tagPROCESS_SUSPEND_RESUME_ALL_REQ
 {
     MSG_HEADER h;
     ULONG session_id;
-    WCHAR boxname[34];
+    WCHAR boxname[BOXNAME_COUNT];
     BOOLEAN suspend;
 };
 

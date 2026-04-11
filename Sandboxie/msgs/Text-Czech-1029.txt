@@ -2866,7 +2866,7 @@ Výchozí seznam blokovaných TCP/IP portů
 .
 
 4294;txt;01
-Povolit programům aktualizovat Seznamy odkazů v hlavním panelu Windows 7
+Povolit programům aktualizovat Seznamy odkazů v hlavním panelu Windows
 .
 
 #----------------------------------------------------------------------------

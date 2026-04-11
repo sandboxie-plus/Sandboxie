@@ -692,15 +692,31 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 	
 	ui.treeCopy->viewport()->installEventFilter(this);
+	ui.treeRun->viewport()->installEventFilter(this);
+	ui.treeGroups->viewport()->installEventFilter(this);
+	ui.treeForced->viewport()->installEventFilter(this);
+	ui.treeBreakout->viewport()->installEventFilter(this);
+	ui.treeStop->viewport()->installEventFilter(this);
+	ui.treeLeader->viewport()->installEventFilter(this);
+	ui.treeStart->viewport()->installEventFilter(this);
 	ui.treeINet->viewport()->installEventFilter(this);
 	ui.treeNetFw->viewport()->installEventFilter(this);
+	ui.treeDns->viewport()->installEventFilter(this);
+	ui.treeProxy->viewport()->installEventFilter(this);
 	ui.treeFiles->viewport()->installEventFilter(this);
 	ui.treeKeys->viewport()->installEventFilter(this);
 	ui.treeIPC->viewport()->installEventFilter(this);
 	ui.treeWnd->viewport()->installEventFilter(this);
 	ui.treeCOM->viewport()->installEventFilter(this);
+	ui.treeRecovery->viewport()->installEventFilter(this);
+	ui.treeRecIgnore->viewport()->installEventFilter(this);
 	//ui.treeAccess->viewport()->installEventFilter(this);
 	if(ui.treeOptions) ui.treeOptions->viewport()->installEventFilter(this);
+	ui.treeTriggers->viewport()->installEventFilter(this);
+	ui.treeHideProc->viewport()->installEventFilter(this);
+	ui.treeHostProc->viewport()->installEventFilter(this);
+	ui.lstUsers->viewport()->installEventFilter(this);
+	ui.treeTemplates->viewport()->installEventFilter(this);
 	this->installEventFilter(this); // prevent enter from closing the dialog
 
 	restoreGeometry(theConf->GetBlob("OptionsWindow/Window_Geometry"));
@@ -811,6 +827,10 @@ void COptionsWindow::closeEvent(QCloseEvent *e)
 
 bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
+	auto isTreeViewport = [source](QAbstractItemView* view) {
+		return view && source == view->viewport();
+	};
+
 	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
 		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier
 		&& source == m_pCodeEdit)
@@ -843,8 +863,48 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		CloseNetFwEdit(true);
 		CloseAccessEdit(true);
 		CloseOptionEdit(true);
-        CloseNetProxyEdit(true);
+		CloseNetProxyEdit(true);
 		return true; // cancel event
+	}
+
+	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Delete
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	{
+		CloseCopyEdit(true);
+		CloseINetEdit(true);
+		CloseNetFwEdit(true);
+		CloseAccessEdit(true);
+		CloseOptionEdit(true);
+		CloseNetProxyEdit(true);
+
+		if (isTreeViewport(ui.treeCopy))				OnDelCopyRule();
+		else if (isTreeViewport(ui.treeRun))			OnDelCommand();
+		else if (isTreeViewport(ui.treeGroups))		OnDelProg();
+		else if (isTreeViewport(ui.treeForced))		OnDelForce();
+		else if (isTreeViewport(ui.treeBreakout))		OnDelBreakout();
+		else if (isTreeViewport(ui.treeStop))			OnDelStopProg();
+		else if (isTreeViewport(ui.treeLeader))		OnDelLeader();
+		else if (isTreeViewport(ui.treeStart))		OnDelStartProg();
+		else if (isTreeViewport(ui.treeINet))			OnDelINetProg();
+		else if (isTreeViewport(ui.treeNetFw))		OnDelNetFwRule();
+		else if (isTreeViewport(ui.treeDns))			OnDelDnsFilter();
+		else if (isTreeViewport(ui.treeProxy))		OnDelNetProxy();
+		else if (isTreeViewport(ui.treeFiles))		OnDelFile();
+		else if (isTreeViewport(ui.treeKeys))			OnDelKey();
+		else if (isTreeViewport(ui.treeIPC))			OnDelIPC();
+		else if (isTreeViewport(ui.treeWnd))			OnDelWnd();
+		else if (isTreeViewport(ui.treeCOM))			OnDelCOM();
+		else if (isTreeViewport(ui.treeRecovery))		OnDelRecEntry();
+		else if (isTreeViewport(ui.treeRecIgnore))	OnDelRecIgnoreEntry();
+		else if (ui.treeOptions && isTreeViewport(ui.treeOptions)) OnDelOption();
+		else if (isTreeViewport(ui.treeTriggers))		OnDelAuto();
+		else if (isTreeViewport(ui.treeHideProc))		OnDelProcess();
+		else if (isTreeViewport(ui.treeHostProc))		OnDelHostProcess();
+		else if (isTreeViewport(ui.lstUsers))			OnDelUser();
+		else if (isTreeViewport(ui.treeTemplates))	OnDelTemplates();
+		else return QDialog::eventFilter(source, event);
+
+		return true;
 	}
 	
 	if (source == ui.treeCopy->viewport() && event->type() == QEvent::MouseButtonPress)

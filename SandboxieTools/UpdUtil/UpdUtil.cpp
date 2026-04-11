@@ -33,10 +33,11 @@ extern "C" {
 
 	NTSTATUS SignHash(_In_ PVOID Hash, _In_ ULONG HashSize, _In_ PVOID PrivKey, _In_ ULONG PrivKeySize, _Out_ PVOID* Signature, _Out_ ULONG* SignatureSize);
 	NTSTATUS VerifyHashSignature(PVOID Hash, ULONG HashSize, PVOID Signature, ULONG SignatureSize);
-	NTSTATUS VerifyFileSignature(const wchar_t* FilePath);
+	NTSTATUS VerifyFileSignature(const wchar_t* FilePath, const wchar_t* SigFile);
 
 	NTSTATUS MyHashBuffer(_In_ PVOID pData, _In_ SIZE_T uSize, _Out_ PVOID* Hash, _Out_ PULONG HashSize);
 	NTSTATUS MyHashFile(_In_ PCWSTR FileName, _Out_ PVOID* Hash, _Out_ PULONG HashSize);
+	NTSTATUS MyHashFileEx(_In_ PCWSTR FileName, _Out_ PVOID* Hash, _Out_ PULONG HashSize, _In_ ULONG CreateOptions, _Out_opt_ PHANDLE FileHandle);
 
 	NTSTATUS MyReadFile(_In_ PWSTR FileName, _In_ ULONG FileSizeLimit, _Out_ PVOID* Buffer, _Out_ PULONG FileSize);
 	NTSTATUS MyWriteFile(_In_ PWSTR FileName, _In_ PVOID Buffer, _In_ ULONG BufferSize);
@@ -338,6 +339,107 @@ bool DeleteDirectoryRecursively(const std::wstring& root, const std::wstring& pa
 
 	return !!RemoveDirectoryW((root + path).c_str());
 }
+
+std::wstring GetSecureTempPath()
+{
+	wchar_t winTemp[MAX_PATH];
+	GetWindowsDirectoryW(winTemp, MAX_PATH);
+	//wchar_t pid[16];
+	//_itow_s(GetCurrentProcessId(), pid, 16, 10);
+	//return std::wstring(winTemp) + L"\\Temp\\sandboxie-updater-" + pid;
+	return std::wstring(winTemp) + L"\\Temp\\sandboxie-updater";
+}
+
+bool CopyToSecureTemp(const std::wstring& src_dir, const std::wstring& secure_dir,
+                      std::shared_ptr<SFiles> pFiles, std::vector<HANDLE>& deleteOnCloseHandles)
+{
+	// Copy all files to secure temp and verify hashes
+	for (auto I = pFiles->Map.begin(); I != pFiles->Map.end(); ++I) {
+		if (I->second->State != SFile::ePending && I->second->State != SFile::eChanged)
+			continue;
+
+		std::wstring src = src_dir + L"\\" + I->second->Path;
+		std::wstring dest = secure_dir + L"\\" + I->second->Path;
+
+		auto path_name = SplitName(I->second->Path);
+		if (!path_name.first.empty())
+			CreateDirectoryTree(secure_dir, path_name.first);
+
+		// Copy file to secure location
+		if (!CopyFileW(src.c_str(), dest.c_str(), FALSE))
+			return false;
+
+		// Hash file and get handle with FILE_DELETE_ON_CLOSE in one atomic operation
+		// This eliminates TOCTOU window between hashing and opening with delete-on-close
+		// Handle allows read/execute but prevents writing
+		ULONG hashSize;
+		PVOID hash = NULL;
+		HANDLE hFile = INVALID_HANDLE_VALUE;
+		if (!NT_SUCCESS(MyHashFileEx((wchar_t*)dest.c_str(), &hash, &hashSize, FILE_DELETE_ON_CLOSE, &hFile))) {
+			DeleteFileW(dest.c_str());
+			return false;
+		}
+
+		std::wstring computedHash = hexStr((unsigned char*)hash, hashSize);
+		free(hash);
+
+		if (I->second->Hash != computedHash) {
+			// Tampering detected - hash mismatch
+			CloseHandle(hFile); // This will auto-delete the file
+			return false;
+		}
+
+		deleteOnCloseHandles.push_back(hFile);
+	}
+
+	return true;
+}
+
+void CloseSecureTemp(std::vector<HANDLE>& deleteOnCloseHandles, const std::wstring& secure_dir)
+{
+	// Close all delete-on-close handles - files are automatically deleted
+	for (auto h : deleteOnCloseHandles)
+		CloseHandle(h);
+	deleteOnCloseHandles.clear();
+
+	// Remove empty secure temp directory
+	RemoveDirectoryW(secure_dir.c_str());
+}
+
+//void CleanupSecureTempFolders()
+//{
+//	// Clean up any leftover secure temp directories from previous runs
+//	wchar_t winTemp[MAX_PATH];
+//	GetWindowsDirectoryW(winTemp, MAX_PATH);
+//	wcscat_s(winTemp, MAX_PATH, L"\\Temp\\");
+//	std::wstring secureTempBase = winTemp;
+//
+//	std::vector<std::wstring> Entries;
+//	ListDir(secureTempBase, Entries);
+//
+//	for (size_t i = 0; i < Entries.size(); i++)
+//	{
+//		// Only process directories (entries ending with backslash)
+//		if (Entries[i].back() != L'\\')
+//			continue;
+//
+//		// Extract folder name from full path
+//		std::wstring folderPath = Entries[i];
+//		folderPath.pop_back(); // Remove trailing backslash
+//		size_t lastSlash = folderPath.find_last_of(L'\\');
+//		if (lastSlash == std::wstring::npos)
+//			continue;
+//
+//		std::wstring folderName = folderPath.substr(lastSlash + 1);
+//
+//		// Check if it matches our secure temp pattern
+//		if (folderName.find(L"sandboxie-updater-") == 0)
+//		{
+//			// Delete this directory and all contents
+//			DeleteDirectoryRecursively(Entries[i], L"", true);
+//		}
+//	}
+//}
 
 
 std::shared_ptr<SRelease> ScanDir(std::wstring Path) 
@@ -688,6 +790,18 @@ int ApplyUpdate(std::wstring base_dir, std::wstring temp_dir, std::shared_ptr<SF
 {
 	std::wcout << L"Applying updates" << std::endl;
 
+	// Create secure temp directory in Windows\Temp to prevent TOCTOU attacks
+	std::wstring secure_dir = GetSecureTempPath();
+	CreateDirectoryW(secure_dir.c_str(), NULL);
+
+	// Copy all pending files to secure temp with hash verification
+	std::vector<HANDLE> deleteOnCloseHandles;
+	if (!CopyToSecureTemp(temp_dir, secure_dir, pNewFiles, deleteOnCloseHandles)) {
+		CloseSecureTemp(deleteOnCloseHandles, secure_dir);
+		std::wcout << L"Failed to secure update files - possible tampering detected" << std::endl;
+		return ERROR_INTERNAL;
+	}
+
 	int Count = 0;
 	for (auto I = pNewFiles->Map.begin(); I != pNewFiles->Map.end(); ++I)
 	{
@@ -701,18 +815,18 @@ int ApplyUpdate(std::wstring base_dir, std::wstring temp_dir, std::shared_ptr<SF
 
 		std::wcout << L"\tInstalling: " << I->second->Path << L" ...";
 
-		std::wstring src = temp_dir + L"\\" + I->second->Path;
+		std::wstring secure_src = secure_dir + L"\\" + I->second->Path;
 		std::wstring dest = base_dir + L"\\" + I->second->Path;
 
 		if (!path_name.first.empty())
 			CreateDirectoryTree(base_dir, path_name.first);
 
-		if (MoveFileExW(src.c_str(), dest.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_COPY_ALLOWED)) {
+		if (MoveFileExW(secure_src.c_str(), dest.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_COPY_ALLOWED)) {
 
 			// inherit parent folder permissions
 			ACL g_null_acl = { 0 };
 			InitializeAcl(&g_null_acl, sizeof(g_null_acl), ACL_REVISION);
-			DWORD error = SetNamedSecurityInfoW((wchar_t*)dest.c_str(), SE_FILE_OBJECT, DACL_SECURITY_INFORMATION | UNPROTECTED_DACL_SECURITY_INFORMATION, NULL, NULL, (PACL)&g_null_acl, NULL);
+			SetNamedSecurityInfoW((wchar_t*)dest.c_str(), SE_FILE_OBJECT, DACL_SECURITY_INFORMATION | UNPROTECTED_DACL_SECURITY_INFORMATION, NULL, NULL, (PACL)&g_null_acl, NULL);
 
 			std::wcout << L" done" << std::endl;
 		} else
@@ -723,6 +837,7 @@ int ApplyUpdate(std::wstring base_dir, std::wstring temp_dir, std::shared_ptr<SF
 	//std::wstring dest = base_dir + L"\\" _T(UPDATE_FILE);
 	//MoveFileExW(src.c_str(), dest.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_COPY_ALLOWED);
 
+	CloseSecureTemp(deleteOnCloseHandles, secure_dir);
 	return Count;
 }
 
@@ -958,6 +1073,23 @@ int InstallAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& temp_dir, c
 
 	if (!pAddon->Installer.empty() && FileExists((temp_dir + L"\\" + pAddon->Id + pAddon->Installer).c_str())) {
 
+		// Copy addon files to secure system temp to prevent TOCTOU attacks
+		std::wstring secure_base = GetSecureTempPath();
+		std::wstring secure_dir = secure_base + L"\\" + pAddon->Id;
+		CreateDirectoryW(secure_base.c_str(), NULL);
+		CreateDirectoryTree(secure_base, pAddon->Id);
+
+		// Mark all files as pending for CopyToSecureTemp
+		for (auto I = pAddon->Map.begin(); I != pAddon->Map.end(); ++I)
+			I->second->State = SFile::ePending;
+
+		std::vector<HANDLE> deleteOnCloseHandles;
+		if (!CopyToSecureTemp(temp_dir + L"\\" + pAddon->Id, secure_dir, pAddon, deleteOnCloseHandles)) {
+			CloseSecureTemp(deleteOnCloseHandles, secure_base);
+			std::wcout << L"Failed to secure addon files - possible tampering detected" << std::endl;
+			return ERROR_BAD_ADDON2;
+		}
+
 		LPWCH environmentStrings = GetEnvironmentStrings();
 
 		DWORD environmentLen = 0;
@@ -966,7 +1098,7 @@ int InstallAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& temp_dir, c
 
 		LPWCH modifiedEnvironment = (LPWCH)LocalAlloc(0, (environmentLen + 32 + base_dir.length() + 1 + 1) * sizeof(wchar_t));
 		memcpy(modifiedEnvironment, environmentStrings, (environmentLen + 1) * sizeof(wchar_t));
-				
+
 		FreeEnvironmentStrings(environmentStrings);
 
 		LPWCH modifiedEnvironmentEnd = modifiedEnvironment + environmentLen;
@@ -979,7 +1111,7 @@ int InstallAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& temp_dir, c
 
 		STARTUPINFO si = { sizeof(si), 0 };
 		PROCESS_INFORMATION pi = { 0 };
-		std::wstring cmdLine = temp_dir + L"\\" + pAddon->Id + pAddon->Installer;
+		std::wstring cmdLine = secure_dir + L"\\" + pAddon->Installer;
 		if (CreateProcessW(NULL, (wchar_t*)cmdLine.c_str(), NULL, NULL, FALSE, CREATE_UNICODE_ENVIRONMENT, modifiedEnvironment, NULL, &si, &pi))
 		{
 			while (WaitForSingleObject(pi.hProcess, 1000) == WAIT_TIMEOUT);
@@ -997,6 +1129,7 @@ int InstallAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& temp_dir, c
 				ret = ERROR_BAD_ADDON2; // it means the installation failed
 		}
 
+		CloseSecureTemp(deleteOnCloseHandles, secure_base);
 		return ret;
 	}
 
@@ -1167,6 +1300,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	InitOsVersionInfo();
 
+	//CleanupSecureTempFolders();
+
 	wchar_t szPath[MAX_PATH];
 	GetModuleFileNameW(NULL, szPath, ARRAYSIZE(szPath));
 	*wcsrchr(szPath, L'\\') = L'\0';
@@ -1242,26 +1377,48 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		std::wstring wFile = arguments[1];
 
-		if(!NT_SUCCESS(VerifyFileSignature(wFile.c_str())))
-			return ERROR_SIGN;
+		// Copy setup to secure temp to prevent TOCTOU attacks
+		std::wstring secure_dir = GetSecureTempPath();
+		CreateDirectoryW(secure_dir.c_str(), NULL);
 
+		std::wstring wFileName = wFile.substr(wFile.find_last_of(L'\\') + 1);
+		std::wstring wSecureFile = secure_dir + L"\\" + wFileName;
+
+		if (!CopyFileW(wFile.c_str(), wSecureFile.c_str(), FALSE)) {
+			RemoveDirectoryW(secure_dir.c_str());
+			return ERROR_INTERNAL;
+		}
+
+		// Verify signature of secure copy using original .sig file
+		std::wstring wSigFile = wFile + L".sig";
+		if (!NT_SUCCESS(VerifyFileSignature(wSecureFile.c_str(), wSigFile.c_str()))) {
+			DeleteFileW(wSecureFile.c_str());
+			RemoveDirectoryW(secure_dir.c_str());
+			return ERROR_SIGN;
+		}
+
+		// Build installer parameters
 		std::wstring wParams;
 		wParams = L"/open_agent";
 		if (HasFlag(arguments, L"embedded"))
-			wParams = L" /SILENT";
+			wParams += L" /SILENT";
+
+		// Run via CMD which waits for installer, then cleans up
+		// CMD's & operator waits for previous command to finish
+		std::wstring cmdLine = L"/c \"\"" + wSecureFile + L"\" " + wParams +
+			L" & del \"" + wSecureFile + L"\" & rmdir \"" + secure_dir + L"\"\"";
 
 		SHELLEXECUTEINFO si = { sizeof(SHELLEXECUTEINFO) };
-		//si.lpVerb = L"runas";
-		si.lpFile = wFile.c_str();
-		si.lpParameters = wParams.c_str();
-		si.nShow = SW_SHOW;
+		si.lpFile = L"cmd.exe";
+		si.lpParameters = cmdLine.c_str();
+		si.nShow = SW_HIDE;
 
 		if (!ShellExecuteEx(&si)) {
-			//DWORD dwError = GetLastError();
-			//if (dwError == ERROR_CANCELLED)
-			//	return ERROR_CANCELED;
+			DeleteFileW(wSecureFile.c_str());
+			RemoveDirectoryW(secure_dir.c_str());
 			return ERROR_EXEC;
 		}
+
 		return 0;
 	}
 	else if ((arguments.size() >= 2 && (arguments[0] == L"update" || arguments[0] == L"upgrade" || arguments[0] == L"install")) || (arguments.size() >= 1 && arguments[0] == L"modify"))
@@ -1651,7 +1808,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			path = L"/get_cert.php?LR=1";
 			serial = GetArgument(arguments, L"serial");
-			if(!serial.empty())
+			if(!serial.empty()) // serial is optional update key is used instead
 				path += L"&SN=" + serial;
 		}
 		else

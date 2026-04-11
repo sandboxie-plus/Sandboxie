@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (c) 2020-2022, David Xanatos
+ * Copyright (c) 2020-2026, David Xanatos
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,8 +28,8 @@
 #include <set>
 #include <unordered_map>
 
-typedef HRESULT(*P_DwmIsCompositionEnabled)(BOOL *enabled);
-typedef HRESULT(*P_DwmGetWindowAttribute)(HWND hWnd, DWORD dwAttribute, void *pvAttribute, DWORD cbAttribute);
+typedef HRESULT(WINAPI *P_DwmIsCompositionEnabled)(BOOL *enabled);
+typedef HRESULT(WINAPI *P_DwmGetWindowAttribute)(HWND hWnd, DWORD dwAttribute, void *pvAttribute, DWORD cbAttribute);
 
 // DWMWA_CLOAKED (14) is defined in <dwmapi.h> (SDK 8.1+) but we load dwmapi.dll dynamically
 // so we don't include that header.  Define it ourselves if the SDK didn't already provide it.
@@ -39,6 +39,11 @@ typedef HRESULT(*P_DwmGetWindowAttribute)(HWND hWnd, DWORD dwAttribute, void *pv
 #define DWMWA_CLOAKED 14
 #endif
 
+// Added in Windows 10 version 2004 (SDK may be older on some build machines)
+#ifndef WDA_EXCLUDEFROMCAPTURE
+#define WDA_EXCLUDEFROMCAPTURE 0x00000011
+#endif
+
 // Structure to hold border window data (used for both main and per-box borders)
 struct SBoxBorderWnd
 {
@@ -46,6 +51,7 @@ struct SBoxBorderWnd
 	COLORREF color;
 	int width;
 	int alpha;
+	int labelBorderWidth;
 	bool visible;
 	std::wstring boxName;
 	HFONT labelFont;
@@ -55,7 +61,24 @@ struct SBoxBorderWnd
 	int labelPadding;
 	std::vector<RECT> labelRects; // Label positions (one per window for per-box, one for main)
 	ULONGLONG sceneHash;   // per-box hash at last render; used to skip rebuilding unchanged boxes
-	DWORD lastChangeTick;  // GetTickCount() when this box's scene last changed (for timer management)
+	bool affinityEnabled;  // last value passed to SetWindowDisplayAffinity; avoids redundant calls
+};
+
+struct SWindowRoleCacheEntry
+{
+	ULONG style;
+	ULONG exStyle;
+	HWND owner;
+	bool isTransientPopup;
+	bool isMainWindow;
+	DWORD lastSeenTick;   // GetTickCount() when this entry was last accessed; used for stale eviction
+};
+
+struct SCoverBoxedWindowsCacheEntry
+{
+	bool enabled;
+	DWORD lastRefreshTick;
+	DWORD lastSeenTick;
 };
 
 enum EBorderMode { eBorderOff = 0, eBorderNormal = 1, eBorderTitleOnly = 2, eBorderAllWindows = 3, eBorderLabelOnly = 4, eBorderAllWindowsLabelOnly = 5, eBorderTitleOnlyLabelOnly = 6 };
@@ -64,7 +87,7 @@ struct SBoxBorder
 {
 	HANDLE hThread;
 	UINT_PTR dwTimerId;
-	int FastTimerStartTicks;
+	DWORD FastTimerStartTicks;
 	int FastTimerMs;           // 1000/refreshRate, floored at kFastMoveTimerMs (10 ms)
 	int CurrentTimerIntervalMs;
 	int AdaptiveOtherModeMs;
@@ -80,6 +103,9 @@ struct SBoxBorder
 	int AdaptiveEnumIntervalMs;    // how often to run the window enumeration (backs off when stable)
 	HWND LastForegroundWnd;        // last observed foreground window (for click/focus pulse detection)
 	DWORD FocusRaisePulseStartTick;// tick when foreground changed; used for short z-raise pulse
+
+	POINT LastMousePos;            // cursor position at last DrawAllSandboxedBorders call
+	bool  LastButtonHeld;          // was LMB or RMB held on the previous tick (for release detection)
 
 	CSandBox* pCurrentBox;
 	EBorderMode BorderMode;
@@ -101,17 +127,23 @@ struct SBoxBorder
 	SBoxBorderWnd MainBorder;
 
 	// Per-box border windows for AllBordersMode
-	std::map<CSandBox*, SBoxBorderWnd> BoxBorderWnds;
-	std::unordered_map<HWND, CSandBox*> BoxBorderWndIndex;
+	std::unordered_map<HWND, SBoxBorderWnd> AllBorderWnds;     // key: target app window HWND
+	std::unordered_map<HWND, HWND> AllBorderWndIndex;          // key: overlay HWND -> value: target app window HWND
+	std::unordered_map<HWND, SWindowRoleCacheEntry> WindowRoleCache; // key: target HWND -> cached class/role traits
+	std::unordered_map<CSandBox*, SCoverBoxedWindowsCacheEntry> CoverBoxedWindowsCache; // key: box ptr -> cached CoverBoxedWindows flag
 };
 
 const WCHAR *Sandboxie_WindowClassName = L"Sandboxie_BorderWindow";
 
 static const int kAdaptiveFastMs = 100;
-static const int kAdaptiveMaxMs = 5000;
+static const int kAdaptiveMaxMs = 5000;     // max backoff for repaint cadence (truly idle)
+static const int kAdaptiveMaxEnumMs = 500;  // max backoff for window enumeration (capped low so
+                                            // a sudden move is never stale for more than ~0.5 s)
 static const int kFastMoveTimerMs = 10; // minimum floor for frame-aligned fast timer
 static const int kFocusRaisePulseMs = 250; // short z-raise window after click/focus change
 static const ULONGLONG kHashSeed = 1469598103934665603ULL; // hash initialiser (FNV-inspired)
+static const DWORD kCoverBoxedWindowsCacheRefreshMs = 1000;
+static const DWORD kCoverBoxedWindowsCacheStaleMs = 30000;
 
 static inline void HashMix64(ULONGLONG& hash, ULONGLONG value)
 {
@@ -177,6 +209,7 @@ static void InitializeBorderWindowData(SBoxBorderWnd& bwnd)
 	bwnd.color = 0;
 	bwnd.width = 0;
 	bwnd.alpha = 0;
+	bwnd.labelBorderWidth = 0;
 	bwnd.visible = false;
 	bwnd.boxName.clear();
 	bwnd.labelFont = NULL;
@@ -186,7 +219,7 @@ static void InitializeBorderWindowData(SBoxBorderWnd& bwnd)
 	bwnd.labelPadding = 8;
 	bwnd.labelRects.clear();
 	bwnd.sceneHash = 0;
-	bwnd.lastChangeTick = 0;
+	bwnd.affinityEnabled = false;
 }
 
 static void HideBorderWindow(SBoxBorderWnd& bwnd)
@@ -218,14 +251,26 @@ static void DestroyBorderWindowResources(SBoxBorderWnd& bwnd)
 
 static void DestroyPerBoxBorderWindows(SBoxBorder* m)
 {
-	for (auto& pair : m->BoxBorderWnds)
+	for (auto& pair : m->AllBorderWnds)
 	{
 		if (pair.second.hWnd)
-			m->BoxBorderWndIndex.erase(pair.second.hWnd);
+			m->AllBorderWndIndex.erase(pair.second.hWnd);
 		DestroyBorderWindowResources(pair.second);
 	}
-	m->BoxBorderWnds.clear();
-	m->BoxBorderWndIndex.clear();
+	m->AllBorderWnds.clear();
+	m->AllBorderWndIndex.clear();
+}
+
+static void RemoveAllModeOverlayForTarget(SBoxBorder* m, HWND targetWnd)
+{
+	auto it = m->AllBorderWnds.find(targetWnd);
+	if (it == m->AllBorderWnds.end())
+		return;
+
+	if (it->second.hWnd)
+		m->AllBorderWndIndex.erase(it->second.hWnd);
+	DestroyBorderWindowResources(it->second);
+	m->AllBorderWnds.erase(it);
 }
 
 // Calculates centered label rect for a window, clamped to border width
@@ -241,6 +286,11 @@ static RECT CalculateLabelRect(const RECT& windowRect, int borderWidth, int labe
 	// Calculate centered horizontal position, clamped to available space
 	int availLeft  = windowRect.left  + borderWidth;
 	int availRight = windowRect.right - borderWidth;
+
+	// Window narrower than 2*borderWidth: no room for a label.
+	if (availLeft >= availRight)
+		return { windowRect.left, windowRect.top, windowRect.left, windowRect.top }; // empty rect
+
 	int labelLeft = windowRect.left + (winWidth - labelWidth) / 2;
 	if (labelLeft < availLeft)
 		labelLeft = availLeft;
@@ -282,28 +332,34 @@ static void UpdateBorderLabelFont(SBoxBorderWnd& bwnd, HWND hWndForDC = NULL)
 		return;
 	}
 
-	// Create font sized to fit in the border
-	int fontHeight = bwnd.width + 8;
+	// Acquire the DC first so we can query the monitor DPI before creating the font.
+	// NULL hWndForDC gives the screen DC, which reports the primary-monitor DPI.
+	HDC hdc = GetDC(hWndForDC);
+	if (!hdc) {
+		// GetDC failed (window hidden/not ready); report no label size.
+		bwnd.labelWidth = 0;
+		bwnd.labelHeight = 0;
+		return;
+	}
+
+	// Scale font height by the DC's vertical DPI so text renders at the same physical
+	// size on every monitor regardless of the Windows scaling factor.
+	int dpi = GetDeviceCaps(hdc, LOGPIXELSY);
+	if (dpi <= 0) dpi = 96;
+	int fontHeight = MulDiv(bwnd.labelBorderWidth + 8, dpi, 96);
+
 	bwnd.labelFont = CreateFontW(fontHeight, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
 		CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_SWISS, L"Segoe UI");
 
 	if (!bwnd.labelFont) {
+		ReleaseDC(hWndForDC, hdc);
 		bwnd.labelWidth = 0;
 		bwnd.labelHeight = 0;
 		return;
 	}
 
 	// Calculate text dimensions
-	HDC hdc = GetDC(hWndForDC); // NULL = screen DC
-	if (!hdc) {
-		// GetDC failed (window hidden/not ready); discard the font and report no label size
-		DeleteObject(bwnd.labelFont);
-		bwnd.labelFont = NULL;
-		bwnd.labelWidth = 0;
-		bwnd.labelHeight = 0;
-		return;
-	}
 	HFONT hOldFont = (HFONT)SelectObject(hdc, bwnd.labelFont);
 	SIZE textSize;
 	GetTextExtentPoint32W(hdc, bwnd.boxName.c_str(), (int)bwnd.boxName.length(), &textSize);
@@ -321,11 +377,13 @@ static SBoxBorderWnd* GetBorderWndByHwnd(SBoxBorder* m, HWND hWnd)
 		return &m->MainBorder;
 
 	// Check per-box border windows via O(1) index
-	auto idxIt = m->BoxBorderWndIndex.find(hWnd);
-	if (idxIt != m->BoxBorderWndIndex.end()) {
-		auto boxIt = m->BoxBorderWnds.find(idxIt->second);
-		if (boxIt != m->BoxBorderWnds.end() && boxIt->second.hWnd == hWnd)
-			return &boxIt->second;
+	auto idxIt = m->AllBorderWndIndex.find(hWnd);
+	if (idxIt != m->AllBorderWndIndex.end()) {
+		auto wndIt = m->AllBorderWnds.find(idxIt->second);
+		if (wndIt != m->AllBorderWnds.end() && wndIt->second.hWnd == hWnd)
+			return &wndIt->second;
+		// Stale index entry: target/overlay mapping no longer valid.
+		m->AllBorderWndIndex.erase(idxIt);
 	}
 
 	return NULL;
@@ -371,32 +429,116 @@ static RECT AdjustRectToDesktop(const RECT& rect, const MONITORINFO& monitor, in
 	const RECT* desktop = &monitor.rcMonitor;
 
 	// Clip to desktop edges if window is slightly off-screen (within borderWidth + 4 pixels)
-	int ax = rect.left;
+	int adjLeft = rect.left;
 	if (rect.left < desktop->left && (desktop->left - rect.left) < (borderWidth + 4))
-		ax = desktop->left;
+		adjLeft = desktop->left;
 
-	int ay = rect.top;
+	int adjTop = rect.top;
 	if (rect.top < desktop->top && (desktop->top - rect.top) < (borderWidth + 4))
-		ay = desktop->top;
+		adjTop = desktop->top;
 
-	int aw = -ax;
+	int adjRight;
 	if (rect.right > desktop->right && (rect.right - desktop->right) < (borderWidth + 4))
-		aw += desktop->right;
+		adjRight = desktop->right;
 	else
-		aw += rect.right;
+		adjRight = rect.right;
 
-	int ah = -ay;
+	int adjBottom;
 	if (rect.bottom > desktop->bottom && (rect.bottom - desktop->bottom) < (borderWidth + 4))
-		ah += desktop->bottom;
+		adjBottom = desktop->bottom;
 	else
-		ah += rect.bottom;
+		adjBottom = rect.bottom;
 
 	// Taskbar workaround for Windows 10/11:
 	// If window bottom matches work area bottom, reduce by 1px to avoid hiding auto-hide taskbar
 	if (rect.bottom == monitor.rcWork.bottom)
-		ah -= 1;
+		adjBottom -= 1;
 
-	return { ax, ay, ax + aw, ay + ah };
+	return { adjLeft, adjTop, adjRight, adjBottom };
+}
+
+// Add a rectangle to an aggregate region using OR composition.
+static void AddRectToRegion(HRGN hrgnAggregate, const RECT& rect)
+{
+	if (!hrgnAggregate)
+		return;
+
+	if (rect.right <= rect.left || rect.bottom <= rect.top)
+		return;
+
+	HRGN hrgnPart = CreateRectRgn(rect.left, rect.top, rect.right, rect.bottom);
+	if (!hrgnPart)
+		return;
+
+	if (CombineRgn(hrgnAggregate, hrgnAggregate, hrgnPart, RGN_OR) == ERROR)
+	{
+		// On failure the destination region becomes undefined - reset to empty.
+		CombineRgn(hrgnAggregate, hrgnPart, hrgnPart, RGN_DIFF);
+	}
+
+	DeleteObject(hrgnPart);
+}
+
+struct STaskbarOcclusionBuildCtx
+{
+	HRGN hrgnCovered;
+};
+
+static BOOL CALLBACK BuildTaskbarOcclusionEnumProc(HMONITOR hMonitor, HDC, LPRECT, LPARAM lParam)
+{
+	STaskbarOcclusionBuildCtx* ctx = reinterpret_cast<STaskbarOcclusionBuildCtx*>(lParam);
+	if (!ctx || !ctx->hrgnCovered)
+		return TRUE;
+
+	MONITORINFO monitor = {};
+	monitor.cbSize = sizeof(MONITORINFO);
+	if (!GetMonitorInfo(hMonitor, &monitor))
+		return TRUE;
+
+	const RECT& mon = monitor.rcMonitor;
+	const RECT& work = monitor.rcWork;
+
+	// Left appbar strip.
+	if (work.left > mon.left)
+	{
+		RECT r = { mon.left, mon.top, work.left, mon.bottom };
+		AddRectToRegion(ctx->hrgnCovered, r);
+	}
+
+	// Right appbar strip.
+	if (work.right < mon.right)
+	{
+		RECT r = { work.right, mon.top, mon.right, mon.bottom };
+		AddRectToRegion(ctx->hrgnCovered, r);
+	}
+
+	// Top appbar strip.
+	if (work.top > mon.top)
+	{
+		RECT r = { mon.left, mon.top, mon.right, work.top };
+		AddRectToRegion(ctx->hrgnCovered, r);
+	}
+
+	// Bottom appbar strip (classic taskbar area).
+	if (work.bottom < mon.bottom)
+	{
+		RECT r = { mon.left, work.bottom, mon.right, mon.bottom };
+		AddRectToRegion(ctx->hrgnCovered, r);
+	}
+
+	return TRUE;
+}
+
+// Build occlusion for monitor work-area exclusions (taskbar / appbars) and merge into the
+// cumulative coverage region, so overlay border fragments are clipped in those areas.
+static void MergeTaskbarOcclusionIntoCoveredRegion(HRGN hrgnCovered)
+{
+	if (!hrgnCovered)
+		return;
+
+	STaskbarOcclusionBuildCtx ctx = {};
+	ctx.hrgnCovered = hrgnCovered;
+	EnumDisplayMonitors(NULL, NULL, BuildTaskbarOcclusionEnumProc, reinterpret_cast<LPARAM>(&ctx));
 }
 
 LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -407,24 +549,9 @@ LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 
 	SBoxBorder* m = This->GetBorderData();
 
-	// Handle WM_ERASEBKGND to paint the border with the correct color
-	// Works for both the main in-focus border window and per-box border windows
-	if (uMsg == WM_ERASEBKGND) 
-	{
-		SBoxBorderWnd* pBorder = GetBorderWndByHwnd(m, hwnd);
-		if (pBorder)
-		{
-			HDC hdc = (HDC)wParam;
-			RECT rc;
-			GetClientRect(hwnd, &rc);
-
-			HBRUSH hBrush = CreateSolidBrush(pBorder->color);
-			FillRect(hdc, &rc, hBrush);
-			DeleteObject(hBrush);
-		}
-
-		return 1; // We handled it
-	}
+	// Suppress the default system erase; all painting is done atomically in WM_PAINT.
+	if (uMsg == WM_ERASEBKGND)
+		return 1;
 
 	if (uMsg == WM_PAINT) 
 	{
@@ -432,27 +559,60 @@ LRESULT CALLBACK CBoxBorder__WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hwnd, &ps);
 
-		if (pBorder && pBorder->labelMode != 0 && !pBorder->boxName.empty() && pBorder->labelFont && !pBorder->labelRects.empty()) 
+		// Paint everything via an off-screen memory DC so background fill and
+		// text appear in one atomic blit, eliminating the erase-then-draw flicker.
+		RECT clientRC;
+		GetClientRect(hwnd, &clientRC);
+		int cw = clientRC.right - clientRC.left;
+		int ch = clientRC.bottom - clientRC.top;
+
+		HDC hdcMem = CreateCompatibleDC(hdc);
+		HBITMAP hbmMem = CreateCompatibleBitmap(hdc, cw, ch);
+
+		// Guard against GDI resource exhaustion: if either allocation failed, skip
+		// the off-screen pass entirely rather than cascading null handles into
+		// SelectObject / FillRect / BitBlt.
+		if (hdcMem && hbmMem)
 		{
-			// Draw label at each stored rect (one per window in this box)
-			for (const RECT& labelRect : pBorder->labelRects) 
+			HBITMAP hbmOld = (HBITMAP)SelectObject(hdcMem, hbmMem);
+
+			if (pBorder)
 			{
-				HFONT hOldFont = (HFONT)SelectObject(hdc, pBorder->labelFont);
-				SetBkMode(hdc, TRANSPARENT);
-				// Use contrasting text color based on border color luminance
-				int r = GetRValue(pBorder->color);
-				int g = GetGValue(pBorder->color);
-				int b = GetBValue(pBorder->color);
-				int luminance = (r * 299 + g * 587 + b * 114) / 1000;
-				SetTextColor(hdc, luminance > 128 ? RGB(0, 0, 0) : RGB(255, 255, 255));
-				RECT rc = labelRect; // DrawText may modify the rect
-				DrawTextW(hdc, pBorder->boxName.c_str(), -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-				SelectObject(hdc, hOldFont);
+				// Fill background with border colour
+				HBRUSH hBrush = CreateSolidBrush(pBorder->color);
+				FillRect(hdcMem, &clientRC, hBrush);
+				DeleteObject(hBrush);
+
+				// Draw label text on top in the same DC
+				if (pBorder->labelMode != 0 && !pBorder->boxName.empty() && pBorder->labelFont && !pBorder->labelRects.empty())
+				{
+					int r = GetRValue(pBorder->color);
+					int g = GetGValue(pBorder->color);
+					int b = GetBValue(pBorder->color);
+					int luminance = (r * 299 + g * 587 + b * 114) / 1000;
+					COLORREF textColor = luminance > 128 ? RGB(0, 0, 0) : RGB(255, 255, 255);
+					for (const RECT& labelRect : pBorder->labelRects)
+					{
+						HFONT hOldFont = (HFONT)SelectObject(hdcMem, pBorder->labelFont);
+						SetBkMode(hdcMem, TRANSPARENT);
+						SetTextColor(hdcMem, textColor);
+						RECT rc = labelRect;
+						DrawTextW(hdcMem, pBorder->boxName.c_str(), -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+						SelectObject(hdcMem, hOldFont);
+					}
+				}
 			}
+
+			// Blit the completed off-screen frame to the window in one operation
+			BitBlt(hdc, 0, 0, cw, ch, hdcMem, 0, 0, SRCCOPY);
+
+			SelectObject(hdcMem, hbmOld);
 		}
 
-		EndPaint(hwnd, &ps);
+		if (hbmMem) DeleteObject(hbmMem);
+		if (hdcMem) DeleteDC(hdcMem);
 
+		EndPaint(hwnd, &ps);
 		return 0;
 	}
 
@@ -497,6 +657,8 @@ CBoxBorder::~CBoxBorder()
 	delete m;
 }
 
+static void ApplyCaptureExclusionAffinity(HWND hWnd, bool enabled);
+
 static HWND CreateBoxBorderWindow()
 {
 	// Create a border window (used for both main border and per-box borders)
@@ -509,10 +671,26 @@ static HWND CreateBoxBorderWindow()
 		NULL, NULL, NULL, NULL
 	);
 	if (hWnd) {
+		// New windows start with WDA_NONE by default; no need to set it explicitly.
 		SetLayeredWindowAttributes(hWnd, 0, 192, LWA_ALPHA);
 		::ShowWindow(hWnd, SW_HIDE);
 	}
 	return hWnd;
+}
+
+static void ApplyCaptureExclusionAffinity(HWND hWnd, bool enabled)
+{
+	if (!hWnd || !IsWindow(hWnd))
+		return;
+	if (!enabled)
+	{
+		SetWindowDisplayAffinity(hWnd, WDA_NONE);
+		return;
+	}
+
+	// WDA_EXCLUDEFROMCAPTURE is preferred; on older OS builds fallback to WDA_MONITOR.
+	if (!SetWindowDisplayAffinity(hWnd, WDA_EXCLUDEFROMCAPTURE))
+		SetWindowDisplayAffinity(hWnd, WDA_MONITOR);
 }
 
 void CBoxBorder::ThreadFunc()
@@ -541,9 +719,16 @@ void CBoxBorder::ThreadFunc()
 	m->AdaptiveEnumIntervalMs = kAdaptiveFastMs;
 	m->LastForegroundWnd = NULL;
 	m->FocusRaisePulseStartTick = 0;
+	m->LastMousePos = { 0, 0 };
+	m->LastButtonHeld = false;
 
 	m->ThumbWidth = GetSystemMetrics(SM_CXHTHUMB);
 	m->ThumbHeight = GetSystemMetrics(SM_CYVTHUMB);
+
+	// Zero-init before load so call sites can safely guard on non-null;
+	// if LoadLibraryW fails these remain null and both guards below stay false.
+	m->DwmIsCompositionEnabled = nullptr;
+	m->DwmGetWindowAttribute   = nullptr;
 
 	HMODULE dwmapi = LoadLibraryW(L"dwmapi.dll");
 	if (dwmapi) {
@@ -592,6 +777,15 @@ void CBoxBorder::ThreadFunc()
 	}
 
 	m->dwTimerId = SetTimer(m->MainBorder.hWnd, 0, 100, CBoxBorder__TimerProc);
+	if (!m->dwTimerId)
+	{
+		// Without a timer the border thread would loop forever pumping messages
+		// but never updating; bail out so the destructor can clean up the window.
+		SetWindowLongPtr(m->MainBorder.hWnd, 0, 0);
+		DestroyWindow(m->MainBorder.hWnd);
+		m->MainBorder.hWnd = NULL;
+		return;
+	}
 
 	MSG  msg;
 	while (GetMessage(&msg, NULL, 0, 0))
@@ -620,7 +814,7 @@ void CBoxBorder::ThreadFunc()
 	}
 }
 
-static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode)
+static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, int& alpha, EBorderMode& mode, int& labelMode, int& labelWidth)
 {
 	// Default values
 	color = RGB(255, 255, 0);
@@ -628,6 +822,7 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 	alpha = 192;
 	mode = eBorderNormal;
 	labelMode = 1; // Default to inside
+	labelWidth = 0;
 
 	if (!pBox)
 		return false;
@@ -664,7 +859,7 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 
 	if (BorderCfg.count() >= 3) {
 		width = BorderCfg.at(2).toInt();
-		if (!width) width = 6;
+		if (width <= 0) width = 6;  // reject zero and negative values
 	}
 
 	if (BorderCfg.count() >= 4) {
@@ -684,6 +879,15 @@ static bool GetBoxBorderSettings(CSandBox* pBox, COLORREF& color, int& width, in
 			labelMode = 1;
 	}
 
+	if (BorderCfg.count() >= 6) {
+		labelWidth = BorderCfg.at(5).toInt();
+		if (labelWidth <= 0)
+			labelWidth = width;
+	}
+
+	if (labelWidth <= 0)
+		labelWidth = width;
+
 	return true;
 }
 
@@ -699,6 +903,43 @@ static std::wstring GetBoxDisplayName(CSandBox* pBox)
 	return pBox->GetName().toStdWString();
 }
 
+static bool IsCoverBoxedWindowsEnabled(SBoxBorder* m, CSandBox* pBox, DWORD nowTick)
+{
+	if (!m || !pBox)
+		return false;
+
+	auto it = m->CoverBoxedWindowsCache.find(pBox);
+	if (it != m->CoverBoxedWindowsCache.end())
+	{
+		it->second.lastSeenTick = nowTick;
+		if (nowTick - it->second.lastRefreshTick < kCoverBoxedWindowsCacheRefreshMs)
+			return it->second.enabled;
+
+		it->second.enabled = pBox->GetBool("CoverBoxedWindows", false);
+		it->second.lastRefreshTick = nowTick;
+		return it->second.enabled;
+	}
+
+	SCoverBoxedWindowsCacheEntry entry = {};
+	entry.enabled = pBox->GetBool("CoverBoxedWindows", false);
+	entry.lastRefreshTick = nowTick;
+	entry.lastSeenTick = nowTick;
+	m->CoverBoxedWindowsCache.insert(std::make_pair(pBox, entry));
+
+	if (m->CoverBoxedWindowsCache.size() > 512)
+	{
+		for (auto cacheIt = m->CoverBoxedWindowsCache.begin(); cacheIt != m->CoverBoxedWindowsCache.end(); )
+		{
+			if (nowTick - cacheIt->second.lastSeenTick > kCoverBoxedWindowsCacheStaleMs)
+				cacheIt = m->CoverBoxedWindowsCache.erase(cacheIt);
+			else
+				++cacheIt;
+		}
+	}
+
+	return entry.enabled;
+}
+
 static HRGN CreateBorderRegion(const RECT* rect, int borderWidth)
 {
 	// Create outer rectangle region
@@ -706,18 +947,33 @@ static HRGN CreateBorderRegion(const RECT* rect, int borderWidth)
 	if (!hrgnOuter)
 		return NULL;
 
-	// Create inner rectangle region (the hollow part)
-	HRGN hrgnInner = CreateRectRgn(
-		rect->left + borderWidth,
-		rect->top + borderWidth,
-		rect->right - borderWidth,
-		rect->bottom - borderWidth
-	);
-	if (!hrgnInner)
-		return hrgnOuter; // Fall back to solid rect rather than crashing
+	// If the window is smaller than 2*borderWidth in either dimension the inner rect
+	// would be inverted, meaning the entire window is effectively the border frame.
+	// Return the outer region as-is (correct full-fill for a tiny window).
+	LONG innerLeft  = rect->left  + borderWidth;
+	LONG innerTop   = rect->top   + borderWidth;
+	LONG innerRight = rect->right - borderWidth;
+	LONG innerBottom= rect->bottom- borderWidth;
+	if (innerRight <= innerLeft || innerBottom <= innerTop)
+		return hrgnOuter; // window too thin to hollow out – paint the entire rect as border
 
-	// Subtract inner from outer to create frame
-	CombineRgn(hrgnOuter, hrgnOuter, hrgnInner, RGN_DIFF);
+	// Create inner rectangle region (the hollow part)
+	HRGN hrgnInner = CreateRectRgn(innerLeft, innerTop, innerRight, innerBottom);
+	if (!hrgnInner)
+	{
+		// GDI resource failure; skip this tick rather than painting a solid block.
+		DeleteObject(hrgnOuter);
+		return NULL;
+	}
+
+	// Subtract inner from outer to create frame.
+	// On GDI failure hrgnOuter is undefined; discard both regions and report failure.
+	if (CombineRgn(hrgnOuter, hrgnOuter, hrgnInner, RGN_DIFF) == ERROR)
+	{
+		DeleteObject(hrgnInner);
+		DeleteObject(hrgnOuter);
+		return NULL;
+	}
 	DeleteObject(hrgnInner);
 
 	return hrgnOuter;
@@ -735,7 +991,7 @@ void CBoxBorder::TimerProc()
 	if (!hasActiveProcess)
 	{
 		// Transition: clean up borders on the first idle tick, then fast-return on all subsequent ones.
-		if (m->BorderMode != eBorderOff || m->MainBorder.visible || !m->BoxBorderWnds.empty())
+		if (m->BorderMode != eBorderOff || m->MainBorder.visible || !m->AllBorderWnds.empty())
 		{
 			m->pCurrentBox = NULL;
 			m->BorderMode = eBorderOff;
@@ -746,11 +1002,14 @@ void CBoxBorder::TimerProc()
 
 			HideBorderWindow(m->MainBorder);
 			DestroyPerBoxBorderWindows(m);
+			m->CoverBoxedWindowsCache.clear();
 
-			m->CachedHasGlobalAllMode = true;
+			// Mark the cache as stale so the global-all-mode probe fires immediately
+			// on the first active tick after idle, avoiding the ~5 s backoff delay.
+			m->CachedHasGlobalAllMode = false;
 			m->CachedGlobalAllMode = false;
 			m->LastAllModeCheckTick = now;
-			m->AdaptiveGlobalAllModeCheckMs = kAdaptiveMaxMs;
+			m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
 			m->AdaptiveSceneRefreshMs = kAdaptiveFastMs;
 			m->LastAllBordersSceneHash = 0;
 			m->LastAllBordersWindowCount = -1;
@@ -772,7 +1031,7 @@ void CBoxBorder::TimerProc()
 		m->FocusRaisePulseStartTick = now;
 	}
 
-	bool shouldDrawAllBorders = !m->BoxBorderWnds.empty();
+	bool shouldDrawAllBorders = !m->AllBorderWnds.empty();
 	if (!shouldDrawAllBorders)
 	{
 		bool shouldProbeGlobalAllMode = !m->CachedHasGlobalAllMode ||
@@ -789,10 +1048,7 @@ void CBoxBorder::TimerProc()
 			if (!hadCachedValue || previousGlobalAllMode != m->CachedGlobalAllMode)
 				m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
 			else
-			{
-				int nextMs = m->AdaptiveGlobalAllModeCheckMs * 2;
-				m->AdaptiveGlobalAllModeCheckMs = (nextMs < kAdaptiveMaxMs) ? nextMs : kAdaptiveMaxMs;
-			}
+				m->AdaptiveGlobalAllModeCheckMs = NextAdaptiveIntervalMs(m->AdaptiveGlobalAllModeCheckMs);
 		}
 		shouldDrawAllBorders = m->CachedGlobalAllMode;
 	}
@@ -834,13 +1090,15 @@ void CBoxBorder::TimerProc()
 	GetWindowThreadProcessId(hWnd, &pid);
 
 	CSandBoxPtr pProcessBox = m_Api->GetBoxByProcessId(pid);
+	bool coverBoxedWindows = pProcessBox && IsCoverBoxedWindowsEnabled(m, pProcessBox.data(), now);
+	bool hideBordersFromCapture = pProcessBox ? pProcessBox->GetBool("HideBordersFromCapture", coverBoxedWindows, true) : coverBoxedWindows;
 
 	// Get border settings for the focused window's box
 	COLORREF boxColor;
-	int boxWidth, boxAlpha, boxLabelMode;
+	int boxWidth, boxAlpha, boxLabelMode, boxLabelWidth;
 	EBorderMode boxMode = eBorderOff;
 	if (pProcessBox)
-		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode);
+		GetBoxBorderSettings(pProcessBox.data(), boxColor, boxWidth, boxAlpha, boxMode, boxLabelMode, boxLabelWidth);
 
 	if (m->pCurrentBox != pProcessBox.data() || m->CachedFocusBoxMode != boxMode)
 	{
@@ -870,6 +1128,7 @@ void CBoxBorder::TimerProc()
 				(boxMode == eBorderLabelOnly) ? eBorderLabelOnly : eBorderNormal;
 			m->MainBorder.color = boxColor;
 			m->MainBorder.width = boxWidth;
+			m->MainBorder.labelBorderWidth = boxLabelWidth;
 			m->MainBorder.alpha = boxAlpha;
 			m->MainBorder.labelMode = boxLabelMode;
 
@@ -896,6 +1155,12 @@ void CBoxBorder::TimerProc()
 		if (pid == m->ActivePid && hWnd == m->ActiveWnd) {
 			if (RectEquals(rect, m->ActiveRect)) {
 				if (!m->TitleState || m->TitleState == (CheckMousePointer() ? 1 : -1)) {
+					// Affinity may have changed even if geometry is unchanged; apply now so we don't
+					// need to wait for a move/resize event to pick up a CoverBoxedWindows/HideBordersFromCapture change.
+					if (hideBordersFromCapture != m->MainBorder.affinityEnabled) {
+						ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, hideBordersFromCapture);
+						m->MainBorder.affinityEnabled = hideBordersFromCapture;
+					}
 					if (!m->FastTimerStartTicks && !shouldDrawAllBorders)
 					{
 						m->AdaptiveOtherModeMs = NextAdaptiveIntervalMs(m->AdaptiveOtherModeMs);
@@ -984,6 +1249,7 @@ void CBoxBorder::TimerProc()
 		}
 
 		// Add label region if enabled
+		std::vector<RECT> prevLabelRects = m->MainBorder.labelRects;
 		m->MainBorder.labelRects.clear();
 		if (m->MainBorder.labelMode != 0 && m->MainBorder.labelHeight > 0)
 		{
@@ -1004,17 +1270,28 @@ void CBoxBorder::TimerProc()
 			// Add label region to border
 			HRGN hrgnLabel = CreateRectRgn(labelRect.left, labelRect.top, labelRect.right, labelRect.bottom);
 			if (hrgnLabel) {
-				CombineRgn(hrgnBorder, hrgnBorder, hrgnLabel, RGN_OR);
-				DeleteObject(hrgnLabel);
+				if (CombineRgn(hrgnBorder, hrgnBorder, hrgnLabel, RGN_OR) == ERROR) {
+					// hrgnBorder is undefined; abandon this tick to avoid setting a corrupt region.
+					DeleteObject(hrgnLabel);
+					DeleteObject(hrgnBorder);
+					hrgnBorder = NULL;
+				} else {
+					DeleteObject(hrgnLabel);
+				}
 			}
 		}
+
+		if (!hrgnBorder)
+			return; // GDI region combination failed; leave border as-is for this tick
 
 		// Position and show the border window.
 		// Keep SWP_NOZORDER during stable focus mode so we don't permanently fight other
 		// always-on-top overlays.  Temporarily re-raise only for a short click/focus
 		// pulse after foreground changed.
-		if (!SetWindowRgn(m->MainBorder.hWnd, hrgnBorder, TRUE))
+		if (!SetWindowRgn(m->MainBorder.hWnd, hrgnBorder, FALSE))
 			DeleteObject(hrgnBorder); // SetWindowRgn only owns the region on success
+		ApplyCaptureExclusionAffinity(m->MainBorder.hWnd, hideBordersFromCapture);
+		m->MainBorder.affinityEnabled = hideBordersFromCapture;
 		bool focusRaisePulseActive = m->FocusRaisePulseStartTick &&
 			(now - m->FocusRaisePulseStartTick <= (DWORD)kFocusRaisePulseMs);
 		bool raiseDuringInteraction = focusRaisePulseActive;
@@ -1022,12 +1299,35 @@ void CBoxBorder::TimerProc()
 		if (!raiseDuringInteraction)
 			mainSwpFlags |= SWP_NOZORDER;
 		if (!m->MainBorder.visible) mainSwpFlags |= SWP_SHOWWINDOW;
-		SetWindowPos(m->MainBorder.hWnd, raiseDuringInteraction ? HWND_TOP : NULL,
-			windowRect.left, windowRect.top,
-			windowRect.right - windowRect.left,
-			windowRect.bottom - windowRect.top,
-			mainSwpFlags);
-		InvalidateRect(m->MainBorder.hWnd, NULL, TRUE);
+
+		bool needSetWindowPos = true;
+		if (m->MainBorder.visible && !raiseDuringInteraction)
+		{
+			RECT currentRect = { 0, 0, 0, 0 };
+			if (GetWindowRect(m->MainBorder.hWnd, &currentRect))
+			{
+				if (currentRect.left == windowRect.left &&
+					currentRect.top == windowRect.top &&
+					currentRect.right == windowRect.right &&
+					currentRect.bottom == windowRect.bottom)
+				{
+					needSetWindowPos = false;
+				}
+			}
+		}
+
+		if (needSetWindowPos)
+		{
+			SetWindowPos(m->MainBorder.hWnd, raiseDuringInteraction ? HWND_TOP : NULL,
+				windowRect.left, windowRect.top,
+				windowRect.right - windowRect.left,
+				windowRect.bottom - windowRect.top,
+				mainSwpFlags);
+		}
+
+		bool labelRectsChanged = !RectVectorEquals(prevLabelRects, m->MainBorder.labelRects);
+		if (!m->MainBorder.visible || needSetWindowPos || labelRectsChanged)
+			InvalidateRect(m->MainBorder.hWnd, NULL, FALSE);
 
 		m->MainBorder.visible = true;
 	}
@@ -1089,57 +1389,123 @@ bool CBoxBorder::CheckMousePointer()
 
 void CBoxBorder::DrawAllSandboxedBorders()
 {
-	// Rate-limit the window enumeration independently of the timer rate.
-	// During fast-timer cool-down the timer fires every 10 ms, but if the scene
-	// hasn't changed we back off AdaptiveEnumIntervalMs quickly (doubles each stable
-	// check: 10→20→40→80→100 ms), so only ~5-7 enumerations happen per cool-down
-	// period instead of ~100.
+	// Scavenge stale overlay-index entries (overlay HWND destroyed/recycled, target removed).
+	for (auto it = m->AllBorderWndIndex.begin(); it != m->AllBorderWndIndex.end(); )
+	{
+		HWND overlayHwnd = it->first;
+		HWND targetHwnd = it->second;
+		auto wndIt = m->AllBorderWnds.find(targetHwnd);
+		if (!overlayHwnd || !IsWindow(overlayHwnd) ||
+			wndIt == m->AllBorderWnds.end() ||
+			wndIt->second.hWnd != overlayHwnd)
+		{
+			it = m->AllBorderWndIndex.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+
 	DWORD nowEnum = GetTickCount();
+
+	// --- Activity detection: snap the enum interval back to fast if the user is doing anything ---
+	// This prevents a fully backed-off timer from leaving borders stale during window moves,
+	// resizes, or focus changes even when the global scene hash appeared stable.
+	{
+		POINT pt = { 0, 0 };
+		GetCursorPos(&pt);
+		bool mouseActive = (pt.x != m->LastMousePos.x || pt.y != m->LastMousePos.y);
+		bool buttonHeld  = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0 ||
+		                   (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
+		// Also snap on button-release so we catch end-of-drag immediately.
+		if (mouseActive || buttonHeld || m->LastButtonHeld)
+		{
+			m->AdaptiveEnumIntervalMs = m->FastTimerMs;
+			m->AdaptiveSceneRefreshMs = kAdaptiveFastMs;
+		}
+		m->LastMousePos   = pt;
+		m->LastButtonHeld = buttonHeld;
+	}
+
+	// Foreground/focus pulse: snap back immediately so z-order raise propagates without
+	// waiting for the next enum window.
+	HWND focusedWnd = GetForegroundWindow();
+	bool focusRaisePulseActive = m->FocusRaisePulseStartTick &&
+		(nowEnum - m->FocusRaisePulseStartTick <= (DWORD)kFocusRaisePulseMs);
+	if (focusRaisePulseActive)
+	{
+		m->AdaptiveEnumIntervalMs = m->FastTimerMs;
+		m->AdaptiveSceneRefreshMs = kAdaptiveFastMs;
+	}
+
+	// Rate-limit the window enumeration independently of the timer rate.
+	// During fast-timer cool-down the timer may fire every ~10 ms; this limiter avoids
+	// re-enumerating top-level windows on every single tick when the scene is stable.
 	if (nowEnum - m->LastAllBordersEnumTick < (DWORD)m->AdaptiveEnumIntervalMs)
 		return;
 	m->LastAllBordersEnumTick = nowEnum;
 
-	HWND focusedWnd = GetForegroundWindow();
-	ULONG focusedPid = 0;
-	CSandBox* pFocusedBox = NULL;
-	if (focusedWnd)
-	{
-		GetWindowThreadProcessId(focusedWnd, &focusedPid);
-		CSandBoxPtr pFocusBox = m_Api->GetBoxByProcessId(focusedPid);
-		pFocusedBox = pFocusBox.data();
-	}
-	bool focusRaisePulseActive = m->FocusRaisePulseStartTick &&
-		(nowEnum - m->FocusRaisePulseStartTick <= (DWORD)kFocusRaisePulseMs);
-
-	// Structure to hold window info for all-borders mode
+	// Raw top-level window snapshot entry in Z-order.
 	struct SWindowInfo
 	{
 		HWND hWnd;
 		RECT rect;
-		MONITORINFO monitorInfo; // Monitor info for edge clipping
-		int zOrder; // Lower value = higher in Z-order (on top)
+		MONITORINFO monitorInfo;
+		int zOrder;
 		ULONG pid;
-		CSandBox* pBox; // NULL if not sandboxed or not border-eligible
+		CSandBox* pBox;
+		ULONG style;
+		ULONG exStyle;
 	};
 
-	// Collect ALL windows (sandboxed and non-sandboxed) in Z-order
-	std::vector<SWindowInfo> allWindows;
+	// Cached "all/alllbl" visual settings per sandbox.
+	struct SAllStyle
+	{
+		bool enabled;
+		bool labelOnly;
+		COLORREF color;
+		int width;
+		int alpha;
+		int labelMode;
+		int labelWidth;
+		std::wstring boxName;
+	};
 
-	// Enumerate all top-level windows in Z-order
+	std::vector<SWindowInfo> allWindows;
+	std::unordered_map<ULONG, CSandBoxPtr> pidBoxCache;
+	std::map<CSandBox*, SAllStyle> styleCache;
+	ULONGLONG settingsHash = kHashSeed;
+	// Evict stale/dead entries when the cache grows large.
+	// Prefer selective eviction (dead HWNDs + entries unseen for > 30 s) over a wholesale
+	// clear to avoid reclassifying all live windows in a single tick.
+	if (m->WindowRoleCache.size() > 512)
+	{
+		const DWORD kRoleCacheStaleMs = 30000;
+		for (auto it = m->WindowRoleCache.begin(); it != m->WindowRoleCache.end(); )
+		{
+			if ((nowEnum - it->second.lastSeenTick) > kRoleCacheStaleMs || !IsWindow(it->first))
+				it = m->WindowRoleCache.erase(it);
+			else
+				++it;
+		}
+		if (m->WindowRoleCache.size() > 1024)
+			m->WindowRoleCache.clear(); // last resort: still above hard cap after selective sweep
+	}
+
+	// Enumerate ALL top-level windows in current Z-order (sandboxed + non-sandboxed).
+	// Non-sandboxed windows still matter because they occlude overlays under them.
 	int zOrder = 0;
 	HWND hWnd = GetTopWindow(NULL);
 	while (hWnd)
 	{
-		// Skip our border windows
+		// Skip our own overlay windows to avoid recursive self-coverage.
 		bool isBorderWnd = (hWnd == m->MainBorder.hWnd) ||
-			(m->BoxBorderWndIndex.find(hWnd) != m->BoxBorderWndIndex.end());
+			(m->AllBorderWndIndex.find(hWnd) != m->AllBorderWndIndex.end());
 
 		if (!isBorderWnd && IsWindowVisible(hWnd) && !IsIconic(hWnd))
 		{
-			// Skip DWM-cloaked windows (e.g. "Peek at Desktop", virtual desktop transitions).
-			// Cloaked windows are IsWindowVisible==TRUE but are not actually rendered on screen.
-			// Excluding them ensures the coverage hash changes on peek/unpeek transitions so
-			// border regions rebuild correctly the moment the desktop peek ends.
+			// Skip DWM-cloaked windows (Peek/Desktop transitions, virtual desktop switch).
 			if (m->DwmGetWindowAttribute) {
 				DWORD cloaked = 0;
 				if (SUCCEEDED(m->DwmGetWindowAttribute(hWnd, DWMWA_CLOAKED, &cloaked, sizeof(cloaked))) && cloaked) {
@@ -1153,95 +1519,107 @@ void CBoxBorder::DrawAllSandboxedBorders()
 			ULONG ExStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
 			if (Style & WS_VISIBLE)
 			{
-				// Skip menus, tooltips, and other transient popup windows
-				// Check window class name for known popup types
-				WCHAR className[64] = { 0 };
-				GetClassNameW(hWnd, className, 64);
-
+				HWND ownerWnd = GetWindow(hWnd, GW_OWNER);
 				bool isTransientPopup = false;
-				// #32768 = Menu, ComboLBox = Combo dropdown, tooltips_class32 = Tooltips
-				if (wcscmp(className, L"#32768") == 0 ||           // Menu
-					wcscmp(className, L"ComboLBox") == 0 ||        // Combo box dropdown
-					wcscmp(className, L"tooltips_class32") == 0 || // Tooltips
-					wcscmp(className, L"SysShadow") == 0 ||        // Shadow windows
-					wcscmp(className, L"DropDown") == 0)           // Generic dropdowns
+				bool isMainWindow = true;
+
+				auto roleIt = m->WindowRoleCache.find(hWnd);
+				if (roleIt != m->WindowRoleCache.end() &&
+					roleIt->second.style == Style &&
+					roleIt->second.exStyle == ExStyle &&
+					roleIt->second.owner == ownerWnd)
 				{
-					isTransientPopup = true;
+					isTransientPopup = roleIt->second.isTransientPopup;
+					isMainWindow = roleIt->second.isMainWindow;
+					roleIt->second.lastSeenTick = nowEnum; // refresh LRU timestamp
 				}
-
-				// Also skip tool windows and popup windows without caption (likely menus/dropdowns)
-				if ((ExStyle & WS_EX_TOOLWINDOW) && !(Style & WS_CAPTION))
-					isTransientPopup = true;
-
-				// Skip windows marked as not activatable with no caption (transient popups)
-				if ((ExStyle & WS_EX_NOACTIVATE) && (Style & WS_POPUP) && !(Style & WS_CAPTION))
-					isTransientPopup = true;
-
-				if (!isTransientPopup)
+				else
 				{
-					SWindowInfo wnd;
-					wnd.hWnd = hWnd;
-					wnd.zOrder = zOrder;
-					wnd.pid = 0;
-					GetActiveWindowRect(hWnd, &wnd.rect);
-					memset(&wnd.monitorInfo, 0, sizeof(MONITORINFO));
+					WCHAR className[64] = { 0 };
+					GetClassNameW(hWnd, className, 64);
 
-					// Check if this is a sandboxed window
-					GetWindowThreadProcessId(hWnd, &wnd.pid);
-					CSandBoxPtr pBox = m_Api->GetBoxByProcessId(wnd.pid);
-					wnd.pBox = pBox.data();
-
-					// For sandboxed windows, check fullscreen and get monitor info
-					// Skip fullscreen sandboxed windows (no border) but still track for Z-order
-					if (wnd.pBox)
+					if (wcscmp(className, L"#32768") == 0 ||
+						wcscmp(className, L"ComboLBox") == 0 ||
+						wcscmp(className, L"tooltips_class32") == 0 ||
+						wcscmp(className, L"SysShadow") == 0 ||
+						wcscmp(className, L"DropDown") == 0)
 					{
-						// Exclude secondary/helper windows using three checks in order:
-						//
-						// 1. GW_OWNER != NULL  ->  owned window (dialog, toolbar shown via
-						//    Show(owner), child-like popup). WinForms Show(IWin32Window owner)
-						//    calls SetWindowLong(GWL_HWNDPARENT), so owned WinForms windows
-						//    (e.g. ShapeManagerMenu toolbar shown via menuForm.Show(Form))
-						//    are reliably caught here.
-						//
-						// 2. WS_EX_TOOLWINDOW without WS_EX_APPWINDOW  ->  classic hidden-from-
-						//    taskbar windows (WinForms ShowInTaskbar=false legacy path, tray
-						//    icons, floating panels).
-						//
-						// 3. WS_POPUP + no WS_CAPTION + no WS_EX_APPWINDOW  ->  unowned borderless
-						//    popup. WinForms ShowInTaskbar=false (modern path) parks the form under
-						//    a hidden parking window and does NOT set WS_EX_TOOLWINDOW, so tests 1
-						//    and 2 may both miss it; this catches the rest.
-						//
-						// Normal captioned windows (browsers, editors) never match any of these.
-						// Fullscreen games / WS_EX_APPWINDOW popups pass all three checks.
-
-						bool isMainWindow = true;
-						if (GetWindow(hWnd, GW_OWNER) != NULL && !(Style & WS_CAPTION))
-							// Owned + no caption = toolbar/overlay/popup helper. Exclude.
-							// Owned + caption = proper dialog (Open File, Save, Print...). Allow.
-							isMainWindow = false;
-						else if ((ExStyle & WS_EX_TOOLWINDOW) && !(ExStyle & WS_EX_APPWINDOW))
-							isMainWindow = false;
-						else if ((Style & WS_POPUP) && !(Style & WS_CAPTION) && !(ExStyle & WS_EX_APPWINDOW))
-							isMainWindow = false;
-
-						if (!isMainWindow)
-							wnd.pBox = NULL;
+						isTransientPopup = true;
 					}
 
-					if (wnd.pBox)
-					{
-						if (!ShouldDrawBorderForWindow(hWnd, wnd.rect, Style, &wnd.monitorInfo))
-						{
-							// Fullscreen sandboxed window - track for Z-order but don't draw border
-							wnd.pBox = NULL;
-						}
-					}
+					if ((ExStyle & WS_EX_TOOLWINDOW) && !(Style & WS_CAPTION))
+						isTransientPopup = true;
 
-					// Only add if window has valid size
-					if (wnd.rect.right - wnd.rect.left > 2 && wnd.rect.bottom - wnd.rect.top > 2)
-						allWindows.push_back(wnd);
+					if ((ExStyle & WS_EX_NOACTIVATE) && (Style & WS_POPUP) && !(Style & WS_CAPTION))
+						isTransientPopup = true;
+
+					bool isSystemDialog = (wcscmp(className, L"#32770") == 0);
+					if (ownerWnd != NULL && !(Style & WS_CAPTION) && !isSystemDialog)
+						isMainWindow = false;
+					else if ((ExStyle & WS_EX_TOOLWINDOW) && !(ExStyle & WS_EX_APPWINDOW))
+						isMainWindow = false;
+					else if ((Style & WS_POPUP) && !(Style & WS_CAPTION) && !(ExStyle & WS_EX_APPWINDOW) && !isSystemDialog)
+						isMainWindow = false;
+
+					SWindowRoleCacheEntry roleEntry;
+					roleEntry.style = Style;
+					roleEntry.exStyle = ExStyle;
+					roleEntry.owner = ownerWnd;
+					roleEntry.isTransientPopup = isTransientPopup;
+					roleEntry.isMainWindow = isMainWindow;
+					roleEntry.lastSeenTick = nowEnum;
+					m->WindowRoleCache.insert_or_assign(hWnd, roleEntry);
 				}
+
+				if (isTransientPopup)
+				{
+					zOrder++;
+					hWnd = GetNextWindow(hWnd, GW_HWNDNEXT);
+					continue;
+				}
+
+				SWindowInfo wnd;
+				wnd.hWnd = hWnd;
+				wnd.zOrder = zOrder;
+				wnd.pid = 0;
+				wnd.style = Style;
+				wnd.exStyle = ExStyle;
+				wnd.pBox = NULL;
+				memset(&wnd.monitorInfo, 0, sizeof(MONITORINFO));
+
+				GetWindowThreadProcessId(hWnd, &wnd.pid);
+				auto pidIt = pidBoxCache.find(wnd.pid);
+				if (pidIt != pidBoxCache.end())
+				{
+					wnd.pBox = pidIt->second.data();
+				}
+				else
+				{
+					CSandBoxPtr resolved = m_Api->GetBoxByProcessId(wnd.pid);
+					wnd.pBox = resolved.data();
+					pidBoxCache.insert(std::make_pair(wnd.pid, std::move(resolved)));
+				}
+
+				if (wnd.pBox && !isMainWindow)
+				{
+					zOrder++;
+					hWnd = GetNextWindow(hWnd, GW_HWNDNEXT);
+					continue;
+				}
+
+				// Defer geometry lookup until after cheap eligibility checks.
+				GetActiveWindowRect(hWnd, &wnd.rect);
+
+				if (wnd.pBox)
+				{
+					// Skip fullscreen/no-monitor-eligible windows for border drawing.
+					if (!ShouldDrawBorderForWindow(hWnd, wnd.rect, Style, &wnd.monitorInfo))
+						wnd.pBox = NULL;
+				}
+
+				// Ignore degenerate rectangles.
+				if (wnd.rect.right - wnd.rect.left > 2 && wnd.rect.bottom - wnd.rect.top > 2)
+					allWindows.push_back(wnd);
 			}
 		}
 
@@ -1249,31 +1627,51 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		hWnd = GetNextWindow(hWnd, GW_HWNDNEXT);
 	}
 
-	// Collect per-box border regions
-	// Map from box to its border region and settings
-	struct SBoxWindowInfo {
-		RECT rect;
-		HRGN hrgnCoveredAbove; // Covered area above this specific window
-	};
-	struct SBoxBorderData {
-		HRGN hrgnBorder;
-		RECT boundingRect;
-		COLORREF color;
-		int width;
-		int alpha;
-		int labelMode;
-		std::wstring boxName;
-		bool hasWindows;
-		bool labelOnly;     // true = "alllbl" mode: show label but no border frame
-		std::vector<SBoxWindowInfo> windows; // Individual windows for per-window labels
-		std::vector<RECT> newLabelRects;     // label rects built this tick; compared against bwnd.labelRects
-		ULONGLONG perBoxHash; // hash of settings + coverage-above + own windows
-		bool skipRebuild;     // true when perBoxHash matches persisted bwnd.sceneHash
-	};
-	std::map<CSandBox*, SBoxBorderData> boxBorders;
-	ULONGLONG sceneHash = kHashSeed;
-	ULONGLONG settingsHash = kHashSeed;
+	// Lazy style cache so each sandbox setting is parsed once per tick.
+	auto getAllStyleForBox = [&](CSandBox* pBox) -> const SAllStyle&
+	{
+		auto it = styleCache.find(pBox);
+		if (it != styleCache.end())
+			return it->second;
 
+		SAllStyle style = {};
+		style.enabled = false;
+		style.labelOnly = false;
+		style.color = RGB(255, 255, 0);
+		style.width = 6;
+		style.alpha = 192;
+		style.labelMode = 1;
+		style.labelWidth = style.width;
+
+		if (pBox)
+		{
+			EBorderMode mode = eBorderOff;
+			if (GetBoxBorderSettings(pBox, style.color, style.width, style.alpha, mode, style.labelMode, style.labelWidth) &&
+				(mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
+			{
+				style.enabled = true;
+				style.labelOnly = (mode == eBorderAllWindowsLabelOnly);
+				style.boxName = GetBoxDisplayName(pBox);
+
+				HashMix64(settingsHash, (ULONGLONG)(ULONG_PTR)pBox);
+				HashMix64(settingsHash, (ULONGLONG)style.color);
+				HashMix64(settingsHash, (ULONGLONG)style.width);
+				HashMix64(settingsHash, (ULONGLONG)style.alpha);
+				HashMix64(settingsHash, (ULONGLONG)style.labelMode);
+				HashMix64(settingsHash, (ULONGLONG)style.labelWidth);
+				HashMix64(settingsHash, (ULONGLONG)style.labelOnly);
+				HashMixWString(settingsHash, style.boxName);
+			}
+		}
+
+		auto inserted = styleCache.insert(std::make_pair(pBox, style));
+		return inserted.first->second;
+	};
+
+	bool globalBorderExcludeTaskbar = m_Api->GetGlobalSettings()->GetBool("BorderExcludeTaskbar", true);
+
+	// Global scene hash: drives adaptive timer/enumeration backoff.
+	ULONGLONG sceneHash = kHashSeed;
 	for (const auto& wnd : allWindows)
 	{
 		HashMix64(sceneHash, (ULONGLONG)(ULONG_PTR)wnd.hWnd);
@@ -1283,106 +1681,22 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		HashMix64(sceneHash, (ULONGLONG)(LONG_PTR)wnd.rect.bottom);
 		HashMix64(sceneHash, (ULONGLONG)(ULONG_PTR)wnd.pBox);
 		HashMix64(sceneHash, (ULONGLONG)wnd.zOrder);
-	}
-
-	// Initialize border regions for each active box that has "all" mode enabled
-	for (const auto& wnd : allWindows)
-	{
-		if (wnd.pBox && boxBorders.find(wnd.pBox) == boxBorders.end())
+		if (wnd.pBox)
 		{
-			COLORREF color;
-			int width, alpha, labelMode;
-			EBorderMode mode;
-
-			// Only add boxes that have "all" or "alllbl" mode enabled
-			if (GetBoxBorderSettings(wnd.pBox, color, width, alpha, mode, labelMode) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
+			const SAllStyle& style = getAllStyleForBox(wnd.pBox);
+			HashMix64(sceneHash, (ULONGLONG)(style.enabled ? 1ULL : 0ULL));
+			HashMix64(sceneHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
+			if (style.enabled)
 			{
-				SBoxBorderData data;
-				data.hrgnBorder = NULL;
-				data.boundingRect = { 0, 0, 0, 0 };
-				data.color = color;
-				data.width = width;
-				data.alpha = alpha;
-				data.labelMode = labelMode;
-				data.boxName = GetBoxDisplayName((CSandBox*)wnd.pBox);
-				data.hasWindows = false;
-				data.labelOnly = (mode == eBorderAllWindowsLabelOnly);
-				// Seed per-box hash with settings; window data is mixed in during the hash-computation pass below
-				data.perBoxHash = kHashSeed;
-				HashMix64(data.perBoxHash, (ULONGLONG)(ULONG_PTR)wnd.pBox);
-				HashMix64(data.perBoxHash, (ULONGLONG)data.color);
-				HashMix64(data.perBoxHash, (ULONGLONG)data.width);
-				HashMix64(data.perBoxHash, (ULONGLONG)data.alpha);
-				HashMix64(data.perBoxHash, (ULONGLONG)data.labelMode);
-				HashMix64(data.perBoxHash, (ULONGLONG)(data.labelOnly ? 1ULL : 0ULL));
-				HashMixWString(data.perBoxHash, data.boxName);
-				data.skipRebuild = false;
-				boxBorders[wnd.pBox] = data;
-
-				HashMix64(settingsHash, (ULONGLONG)(ULONG_PTR)wnd.pBox);
-				HashMix64(settingsHash, (ULONGLONG)data.color);
-				HashMix64(settingsHash, (ULONGLONG)data.width);
-				HashMix64(settingsHash, (ULONGLONG)data.alpha);
-				HashMix64(settingsHash, (ULONGLONG)data.labelMode);
-				HashMix64(settingsHash, (ULONGLONG)data.labelOnly);
-				HashMixWString(settingsHash, data.boxName);
+				bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
+				bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
+				bool excludeTaskbar = wnd.pBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar);
+				HashMix64(sceneHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL));
+				HashMix64(sceneHash, (ULONGLONG)(excludeTaskbar ? 1ULL : 0ULL));
 			}
 		}
 	}
-
 	HashMix64(sceneHash, settingsHash);
-	HashMix64(sceneHash, (ULONGLONG)boxBorders.size());
-
-	// Per-box hash pass: mix each box's own window positions + the rolling coverage of all
-	// windows above them into data.perBoxHash.  This runs before the early-return check so
-	// we can mark individual boxes as skipRebuild even when the global hash changed.
-	{
-		ULONGLONG rollingCovHash = kHashSeed;
-		for (const auto& wnd : allWindows)
-		{
-			if (wnd.pBox)
-			{
-				auto it = boxBorders.find(wnd.pBox);
-				if (it != boxBorders.end())
-				{
-					SBoxBorderData& data = it->second;
-					// First window of this box: capture coverage accumulated above it
-					if (!data.hasWindows) {
-						HashMix64(data.perBoxHash, rollingCovHash);
-						data.hasWindows = true; // repurposed here; reset below
-					}
-					HashMix64(data.perBoxHash, (ULONGLONG)(ULONG_PTR)wnd.hWnd);
-					HashMix64(data.perBoxHash, (ULONGLONG)(LONG_PTR)wnd.rect.left);
-					HashMix64(data.perBoxHash, (ULONGLONG)(LONG_PTR)wnd.rect.top);
-					HashMix64(data.perBoxHash, (ULONGLONG)(LONG_PTR)wnd.rect.right);
-					HashMix64(data.perBoxHash, (ULONGLONG)(LONG_PTR)wnd.rect.bottom);
-					HashMix64(data.perBoxHash, (ULONGLONG)wnd.zOrder);
-				}
-			}
-			// Roll all windows (sandboxed or not) into the coverage hash
-			HashMix64(rollingCovHash, (ULONGLONG)(ULONG_PTR)wnd.hWnd);
-			HashMix64(rollingCovHash, (ULONGLONG)(LONG_PTR)wnd.rect.left);
-			HashMix64(rollingCovHash, (ULONGLONG)(LONG_PTR)wnd.rect.top);
-			HashMix64(rollingCovHash, (ULONGLONG)(LONG_PTR)wnd.rect.right);
-			HashMix64(rollingCovHash, (ULONGLONG)(LONG_PTR)wnd.rect.bottom);
-		}
-		// Reset hasWindows (region-building loop uses it for boundingRect init)
-		// and decide which boxes can skip rebuilding based on persisted scene hashes.
-		for (auto& pair : boxBorders)
-		{
-			pair.second.hasWindows = false;
-			auto bwndIt = m->BoxBorderWnds.find(pair.first);
-			pair.second.skipRebuild = (bwndIt != m->BoxBorderWnds.end()) &&
-			                          (bwndIt->second.sceneHash == pair.second.perBoxHash);
-		}
-	}
-
-	if (boxBorders.empty())
-	{
-		m->CachedHasGlobalAllMode = true;
-		m->CachedGlobalAllMode = false;
-		m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
-	}
 
 	bool sceneUnchanged =
 		sceneHash == m->LastAllBordersSceneHash &&
@@ -1390,10 +1704,11 @@ void CBoxBorder::DrawAllSandboxedBorders()
 
 	if (sceneUnchanged)
 	{
-		// Scene is stable: back off the enumeration interval, capped at kAdaptiveFastMs (100 ms).
-		// Capping at 100 ms (not kAdaptiveMaxMs) ensures movement is detected within 100 ms at worst.
+		// Stable scene: progressively back off checks and repaint cadence.
+		// Enum gets a lower ceiling (kAdaptiveMaxEnumMs) so cursor activity is never
+		// stale for more than ~0.5 s.  Repaint can back off all the way to kAdaptiveMaxMs.
 		int nextMs = m->AdaptiveEnumIntervalMs * 2;
-		m->AdaptiveEnumIntervalMs = (nextMs < kAdaptiveFastMs) ? nextMs : kAdaptiveFastMs;
+		m->AdaptiveEnumIntervalMs = (nextMs < kAdaptiveMaxEnumMs) ? nextMs : kAdaptiveMaxEnumMs;
 
 		int nextRefMs = m->AdaptiveSceneRefreshMs * 2;
 		m->AdaptiveSceneRefreshMs = (nextRefMs < kAdaptiveMaxMs) ? nextRefMs : kAdaptiveMaxMs;
@@ -1403,322 +1718,342 @@ void CBoxBorder::DrawAllSandboxedBorders()
 	}
 	else
 	{
-		// Scene changed: enumerate at frame rate and keep the timer at FastTimerMs.
+		// Scene changed: snap back to fast cadence to track movement smoothly.
 		m->AdaptiveEnumIntervalMs = m->FastTimerMs;
 		m->AdaptiveSceneRefreshMs = kAdaptiveFastMs;
 		if (!m->FastTimerStartTicks)
 			SetBorderTimerInterval(m, m->FastTimerMs);
-		m->FastTimerStartTicks = (int)nowEnum;
-		// Note: individual per-box skipRebuild flags are already set correctly by the
-		// per-box hash pass above (which folds in rollingCovHash = coverage of all windows
-		// above each box).  Do NOT clear them here: doing so would force every all-border
-		// window to rebuild every tick whenever any unrelated window (e.g. a focus-mode
-		// border) moves, causing label flicker.
+		m->FastTimerStartTicks = nowEnum;
 	}
 
 	m->LastAllBordersSceneHash = sceneHash;
 	m->LastAllBordersWindowCount = (int)allWindows.size();
 	m->LastAllBordersRenderTick = nowEnum;
 
-	// Track covered area (all windows processed so far, from top to bottom)
+	// Cumulative occlusion region of windows already processed (top -> bottom).
 	HRGN hrgnCovered = CreateRectRgn(0, 0, 0, 0);
 	if (!hrgnCovered)
-		return; // GDI resource failure; skip rendering for this tick
+		return;
 
-	// Process windows from top to bottom (already in Z-order)
+	// Build taskbar occlusion region separately so BorderExcludeTaskbar can be overridden per-box.
+	HRGN hrgnTaskbar = CreateRectRgn(0, 0, 0, 0);
+	if (hrgnTaskbar)
+		MergeTaskbarOcclusionIntoCoveredRegion(hrgnTaskbar);
+
+	ULONGLONG rollingCoverageHash = kHashSeed;
+	// Active target app windows (not overlay HWNDs) for stale-overlay cleanup.
+	std::set<HWND> activeTargets;
+	int enabledWindowCount = 0;
+
+	// Per-window overlay build: each target HWND gets its own independent overlay.
 	for (const auto& wnd : allWindows)
 	{
+		bool eligible = false;
+		SAllStyle style = {};
 		if (wnd.pBox)
 		{
-			// This is a sandboxed window - create its border
-			auto it = boxBorders.find(wnd.pBox);
-			if (it != boxBorders.end())
+			const SAllStyle& cached = getAllStyleForBox(wnd.pBox);
+			if (cached.enabled)
 			{
-				SBoxBorderData& data = it->second;
-
-				if (!data.skipRebuild)
-				{
-				if (!data.hrgnBorder)
-					data.hrgnBorder = CreateRectRgn(0, 0, 0, 0);
-
-					// Apply edge clipping and taskbar adjustment if we have monitor info
-					// Guard: skip this window's contribution if the accumulator region is unavailable
-					if (data.hrgnBorder)
-					{
-						RECT adjustedRect = wnd.rect;
-						if (wnd.monitorInfo.cbSize != 0)
-							adjustedRect = AdjustRectToDesktop(wnd.rect, wnd.monitorInfo, data.width);
-	
-						// Create border region for this window (skip for label-only mode)
-						if (!data.labelOnly) {
-							HRGN hrgnBorder = CreateBorderRegion(&adjustedRect, data.width);
-							if (hrgnBorder) {
-								// Subtract the covered area (all windows above) from this border
-								CombineRgn(hrgnBorder, hrgnBorder, hrgnCovered, RGN_DIFF);
-	
-								// Add this border to the box's combined border region
-								CombineRgn(data.hrgnBorder, data.hrgnBorder, hrgnBorder, RGN_OR);
-								DeleteObject(hrgnBorder);
-							}
-						}
-	
-						// Track this window for per-window labels (using adjusted rect)
-						SBoxWindowInfo winInfo;
-						winInfo.rect = adjustedRect;
-						// Save covered area ABOVE this window for label clipping
-						winInfo.hrgnCoveredAbove = CreateRectRgn(0, 0, 0, 0);
-						if (winInfo.hrgnCoveredAbove)
-							CombineRgn(winInfo.hrgnCoveredAbove, hrgnCovered, hrgnCovered, RGN_COPY);
-						data.windows.push_back(winInfo);
-	
-						// Update bounding rect (using adjusted rect)
-						if (!data.hasWindows) {
-							data.boundingRect = adjustedRect;
-							data.hasWindows = true;
-						} else {
-							if (adjustedRect.left < data.boundingRect.left) data.boundingRect.left = adjustedRect.left;
-							if (adjustedRect.top < data.boundingRect.top) data.boundingRect.top = adjustedRect.top;
-							if (adjustedRect.right > data.boundingRect.right) data.boundingRect.right = adjustedRect.right;
-							if (adjustedRect.bottom > data.boundingRect.bottom) data.boundingRect.bottom = adjustedRect.bottom;
-						}
-					} // end if (data.hrgnBorder)
-				} // end if (!data.skipRebuild)
-				else
-				{
-					// Box unchanged: just mark it as having windows so its border isn't destroyed
-					data.hasWindows = true;
-				}
-			} // end if (it != boxBorders.end())
-		} // end if (wnd.pBox)
-
-		// Add this window's rectangle to covered area (both sandboxed and non-sandboxed)
-		HRGN hrgnWindow = CreateRectRgn(wnd.rect.left, wnd.rect.top, wnd.rect.right, wnd.rect.bottom);
-		if (hrgnWindow) {
-			CombineRgn(hrgnCovered, hrgnCovered, hrgnWindow, RGN_OR);
-			DeleteObject(hrgnWindow);
-		}
-	}
-
-	// Note: Don't delete hrgnCovered yet - we need it to clip label regions
-
-	// Update per-box border windows
-	std::set<CSandBox*> activeBoxes;
-	for (auto& pair : boxBorders)
-	{
-		CSandBox* pBox = pair.first;
-		SBoxBorderData& data = pair.second;
-
-		if (!data.hasWindows)
-		{
-			if (data.hrgnBorder)
-				DeleteObject(data.hrgnBorder);
-			// Clean up any window info (shouldn't have any, but just in case)
-			for (auto& winInfo : data.windows) {
-				if (winInfo.hrgnCoveredAbove)
-					DeleteObject(winInfo.hrgnCoveredAbove);
+				eligible = true;
+				style = cached;
 			}
-			continue;
 		}
 
-		activeBoxes.insert(pBox);
-
-		// Get or create border window for this box
-		auto it = m->BoxBorderWnds.find(pBox);
-		if (it == m->BoxBorderWnds.end())
+		if (eligible)
 		{
-			SBoxBorderWnd bwnd;
-			InitializeBorderWindowData(bwnd);
-			bwnd.hWnd = CreateBoxBorderWindow();
-			if (!bwnd.hWnd)
+			bool coverForAffinity = IsCoverBoxedWindowsEnabled(m, wnd.pBox, nowEnum);
+			bool applyCaptureAffinity = wnd.pBox->GetBool("HideBordersFromCapture", coverForAffinity, true);
+			bool excludeTaskbar = wnd.pBox->GetBool("BorderExcludeTaskbar", globalBorderExcludeTaskbar);
+			enabledWindowCount++;
+			activeTargets.insert(wnd.hWnd);
+			bool overlayAvailable = true;
+
+			auto it = m->AllBorderWnds.find(wnd.hWnd);
+			if (it == m->AllBorderWnds.end())
 			{
-				// Clean up GDI resources that were already built for this box before bailing out
-				if (data.hrgnBorder)
+				// First time this target window is seen: create overlay window.
+				SBoxBorderWnd bwnd;
+				InitializeBorderWindowData(bwnd);
+				bwnd.hWnd = CreateBoxBorderWindow();
+				if (bwnd.hWnd)
 				{
-					DeleteObject(data.hrgnBorder);
-					data.hrgnBorder = NULL;
+					SetWindowLongPtr(bwnd.hWnd, 0, ULONG_PTR(this));
+					auto inserted = m->AllBorderWnds.insert(std::make_pair(wnd.hWnd, bwnd));
+					it = inserted.first;
+					m->AllBorderWndIndex[it->second.hWnd] = wnd.hWnd;
 				}
-				for (auto& winInfo : data.windows)
+			}
+
+			if (it != m->AllBorderWnds.end())
+			{
+				SBoxBorderWnd& bwnd = it->second;
+
+				// Safety: overlay HWND may be externally destroyed; recreate defensively.
+				if (!bwnd.hWnd || !IsWindow(bwnd.hWnd))
 				{
-					if (winInfo.hrgnCoveredAbove)
+					// Clean up stale index entry and free any leftover resources before recreating.
+					if (bwnd.hWnd)
+						m->AllBorderWndIndex.erase(bwnd.hWnd);
+					DestroyBorderWindowResources(bwnd);
+					bwnd.hWnd = CreateBoxBorderWindow();
+					if (!bwnd.hWnd)
 					{
-						DeleteObject(winInfo.hrgnCoveredAbove);
-						winInfo.hrgnCoveredAbove = NULL;
+						// GDI window creation failed; drop this entry cleanly.
+						// Note: bwnd resources are already freed above; erase the map entry
+						// directly to avoid a second DestroyBorderWindowResources call, and
+						// do NOT dereference bwnd after this point (iterator invalidated).
+						m->AllBorderWnds.erase(it);
+						activeTargets.erase(wnd.hWnd);
+						overlayAvailable = false;
+					}
+					else
+					{
+						SetWindowLongPtr(bwnd.hWnd, 0, ULONG_PTR(this));
+						m->AllBorderWndIndex[bwnd.hWnd] = wnd.hWnd;
 					}
 				}
-				continue;
-			}
-			SetWindowLongPtr(bwnd.hWnd, 0, ULONG_PTR(this));
-			m->BoxBorderWnds[pBox] = bwnd;
-			it = m->BoxBorderWnds.find(pBox);
-			if (it != m->BoxBorderWnds.end() && it->second.hWnd)
-				m->BoxBorderWndIndex[it->second.hWnd] = pBox;
-		}
 
-		SBoxBorderWnd& bwnd = it->second;
+				if (!overlayAvailable)
+				{
+					// Continue with coverage/hash tracking below so lower windows still clip correctly.
+				}
+				else
+				{
+				// Per-window scene hash (target geom + style + coverage above). This isolates
+				// rebuilds so moving one window doesn't force unrelated overlays to repaint.
+				ULONGLONG perWindowHash = kHashSeed;
+				HashMix64(perWindowHash, (ULONGLONG)(ULONG_PTR)wnd.hWnd);
+				HashMix64(perWindowHash, (ULONGLONG)(ULONG_PTR)wnd.pBox);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.rect.left);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.rect.top);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.rect.right);
+				HashMix64(perWindowHash, (ULONGLONG)(LONG_PTR)wnd.rect.bottom);
+				HashMix64(perWindowHash, (ULONGLONG)style.color);
+				HashMix64(perWindowHash, (ULONGLONG)style.width);
+				HashMix64(perWindowHash, (ULONGLONG)style.alpha);
+				HashMix64(perWindowHash, (ULONGLONG)style.labelMode);
+				HashMix64(perWindowHash, (ULONGLONG)style.labelWidth);
+				HashMix64(perWindowHash, (ULONGLONG)(style.labelOnly ? 1ULL : 0ULL));
+				HashMixWString(perWindowHash, style.boxName);
+				HashMix64(perWindowHash, rollingCoverageHash);
+				HashMix64(perWindowHash, (ULONGLONG)(applyCaptureAffinity ? 1ULL : 0ULL)); // cover state change invalidates skip-rebuild
+				HashMix64(perWindowHash, (ULONGLONG)(excludeTaskbar ? 1ULL : 0ULL)); // per-box taskbar exclusion setting
 
-		// Per-box skip: windows + settings + coverage above are identical to last render.
-		if (data.skipRebuild)
-			continue;
+				bool fontDirty = (bwnd.boxName != style.boxName || bwnd.labelMode != style.labelMode || bwnd.labelBorderWidth != style.labelWidth);
+				bwnd.boxName = style.boxName;
+				bwnd.labelMode = style.labelMode;
+				bwnd.width = style.width;
+				bwnd.labelBorderWidth = style.labelWidth;
 
-		// Commit the new per-box hash so this render becomes the new baseline.
-		bwnd.sceneHash = data.perBoxHash;
-		bwnd.lastChangeTick = nowEnum; // record when this box last changed for timer management
+				if (fontDirty || !bwnd.labelFont)
+					UpdateBorderLabelFont(bwnd, bwnd.hWnd);
 
-		// Update color if changed (painting is handled in WM_ERASEBKGND)
-		if (bwnd.color != data.color)
-		{
-			bwnd.color = data.color;
-			// Force repaint with new color
-			InvalidateRect(bwnd.hWnd, NULL, TRUE);
-		}
+				bool skipRebuild = (bwnd.sceneHash == perWindowHash) && bwnd.visible;
+				if (!skipRebuild)
+				{
+					// Rect normalization (desktop edge clipping + taskbar workaround).
+					RECT adjustedRect = wnd.rect;
+					if (wnd.monitorInfo.cbSize != 0)
+						adjustedRect = AdjustRectToDesktop(wnd.rect, wnd.monitorInfo, style.width);
 
-		// Update alpha only when changed
-		if (bwnd.alpha != data.alpha) {
-			SetLayeredWindowAttributes(bwnd.hWnd, 0, data.alpha, LWA_ALPHA);
-			bwnd.alpha = data.alpha;
-		}
+					RECT boundingRect = adjustedRect;
+					if (bwnd.labelMode == -1 && bwnd.labelHeight > 0)
+						boundingRect.top -= bwnd.labelHeight;
 
-		// Update label settings (recreate font only when relevant settings change)
-		bool fontDirty = (bwnd.boxName != data.boxName || bwnd.labelMode != data.labelMode || bwnd.width != data.width);
-		bwnd.boxName = data.boxName;
-		bwnd.labelMode = data.labelMode;
-		bwnd.width = data.width;
+					// Build effective clip region: hrgnCovered plus taskbar areas if BorderExcludeTaskbar is set for this box.
+					HRGN hrgnEffective = hrgnCovered;
+					bool hrgnEffectiveOwned = false;
+					if (excludeTaskbar && hrgnTaskbar)
+					{
+						HRGN hrgnTemp = CreateRectRgn(0, 0, 0, 0);
+						if (hrgnTemp)
+						{
+							if (CombineRgn(hrgnTemp, hrgnCovered, hrgnTaskbar, RGN_OR) != ERROR)
+							{
+								hrgnEffective = hrgnTemp;
+								hrgnEffectiveOwned = true;
+							}
+							else
+								DeleteObject(hrgnTemp);
+						}
+					}
 
-		// Store original bounding rect values before any modifications
-		int originalBoundingLeft = data.boundingRect.left;
-		int originalBoundingTop = data.boundingRect.top;
+					HRGN hrgnOverlay = CreateRectRgn(0, 0, 0, 0);
+					if (hrgnOverlay)
+					{
+						bool rgnFailed = false;
 
-		// Create/update label font and calculate dimensions
-		if (fontDirty || !bwnd.labelFont)
-			UpdateBorderLabelFont(bwnd);
+						// Border frame contribution (disabled in label-only mode), clipped by coverage above.
+						if (!style.labelOnly)
+						{
+							HRGN hrgnFrame = CreateBorderRegion(&adjustedRect, style.width);
+							if (hrgnFrame)
+							{
+								if (CombineRgn(hrgnFrame, hrgnFrame, hrgnEffective, RGN_DIFF) == ERROR)
+									rgnFailed = true;
+								else
+								{
+									OffsetRgn(hrgnFrame, -boundingRect.left, -boundingRect.top);
+									if (CombineRgn(hrgnOverlay, hrgnOverlay, hrgnFrame, RGN_OR) == ERROR)
+										rgnFailed = true;
+								}
+								DeleteObject(hrgnFrame);
+							}
+						}
 
-		// For outside mode, extend window upward to make room for label
-		if (bwnd.labelMode == -1 && bwnd.labelHeight > 0)
-		{
-			data.boundingRect.top -= bwnd.labelHeight;
-		}
+						std::vector<RECT> newLabelRects;
+						bool hasDrawableContent = !style.labelOnly && !rgnFailed;
+						if (!rgnFailed && bwnd.labelMode != 0 && bwnd.labelHeight > 0 && bwnd.labelFont)
+						{
+							hasDrawableContent = true;
+							// One label per overlay (since this is now per-target-window mode).
+							int lblBorderWidth = style.labelOnly ? 0 : style.width;
+							RECT labelRectScr = CalculateLabelRect(adjustedRect, lblBorderWidth, bwnd.labelWidth, bwnd.labelHeight, bwnd.labelMode);
 
-		// Offset the border region to window-relative coordinates
-		// Border region was created in screen coordinates around the ORIGINAL boundingRect
-		// Use original coordinates for offset, not the modified ones
+							HRGN hrgnLabel = CreateRectRgn(labelRectScr.left, labelRectScr.top, labelRectScr.right, labelRectScr.bottom);
+							if (hrgnLabel)
+							{
+								if (CombineRgn(hrgnLabel, hrgnLabel, hrgnEffective, RGN_DIFF) == ERROR)
+									rgnFailed = true;
+								else
+								{
+									OffsetRgn(hrgnLabel, -boundingRect.left, -boundingRect.top);
+									if (CombineRgn(hrgnOverlay, hrgnOverlay, hrgnLabel, RGN_OR) == ERROR)
+										rgnFailed = true;
+								}
+								DeleteObject(hrgnLabel);
+							}
 
-		// Guard: if data.hrgnBorder is NULL (GDI allocation failed during window loop), skip this box
-		if (!data.hrgnBorder)
-		{
-			for (auto& winInfo : data.windows) {
-				if (winInfo.hrgnCoveredAbove) {
-					DeleteObject(winInfo.hrgnCoveredAbove);
-					winInfo.hrgnCoveredAbove = NULL;
+							if (rgnFailed)
+								hasDrawableContent = false;
+							else
+							{
+								RECT labelRectWnd = {
+									labelRectScr.left - boundingRect.left,
+									labelRectScr.top - boundingRect.top,
+									labelRectScr.right - boundingRect.left,
+									labelRectScr.bottom - boundingRect.top
+								};
+								newLabelRects.push_back(labelRectWnd);
+							}
+						}
+
+						if (bwnd.color != style.color)
+							bwnd.color = style.color;
+
+						if (bwnd.alpha != style.alpha)
+						{
+							SetLayeredWindowAttributes(bwnd.hWnd, 0, style.alpha, LWA_ALPHA);
+							bwnd.alpha = style.alpha;
+						}
+
+						if (rgnFailed || !hasDrawableContent)
+						{
+							DeleteObject(hrgnOverlay);
+							HideBorderWindow(bwnd);
+							bwnd.labelRects.clear();
+							bwnd.sceneHash = perWindowHash;
+						}
+						else
+						{
+							if (!SetWindowRgn(bwnd.hWnd, hrgnOverlay, FALSE))
+								DeleteObject(hrgnOverlay);
+							ApplyCaptureExclusionAffinity(bwnd.hWnd, applyCaptureAffinity);
+							bwnd.affinityEnabled = applyCaptureAffinity;
+
+							// Keep steady-state z-order unless short focus pulse is active for this target.
+							bool raiseThisWindow = focusRaisePulseActive && (wnd.hWnd == focusedWnd);
+							DWORD swpFlags = SWP_NOACTIVATE;
+							if (!raiseThisWindow)
+								swpFlags |= SWP_NOZORDER;
+							if (!bwnd.visible)
+								swpFlags |= SWP_SHOWWINDOW;
+
+							bool needSetWindowPos = true;
+							if (bwnd.visible && !raiseThisWindow)
+							{
+								RECT currentRect = { 0, 0, 0, 0 };
+								if (GetWindowRect(bwnd.hWnd, &currentRect))
+								{
+									if (currentRect.left == boundingRect.left &&
+										currentRect.top == boundingRect.top &&
+										currentRect.right == boundingRect.right &&
+										currentRect.bottom == boundingRect.bottom)
+									{
+										needSetWindowPos = false;
+									}
+								}
+							}
+
+							if (needSetWindowPos)
+							{
+								SetWindowPos(bwnd.hWnd, raiseThisWindow ? HWND_TOP : NULL,
+									boundingRect.left,
+									boundingRect.top,
+									boundingRect.right - boundingRect.left,
+									boundingRect.bottom - boundingRect.top,
+									swpFlags);
+							}
+
+							bool labelRectsChanged = !RectVectorEquals(bwnd.labelRects, newLabelRects);
+							if (labelRectsChanged || !bwnd.visible || !skipRebuild)
+								InvalidateRect(bwnd.hWnd, NULL, FALSE);
+
+							bwnd.labelRects = newLabelRects;
+							bwnd.visible = true;
+							bwnd.sceneHash = perWindowHash;
+						}
+					}
+					else
+					{
+						// Region creation failed: hide stale overlay to avoid presenting obsolete geometry.
+						HideBorderWindow(bwnd);
+						bwnd.labelRects.clear();
+					}
+					if (hrgnEffectiveOwned)
+						DeleteObject(hrgnEffective);
+				}
+				else
+				{
+					// Hash unchanged: only optional focus pulse raise.
+					if (focusRaisePulseActive && (wnd.hWnd == focusedWnd)) {
+						ApplyCaptureExclusionAffinity(bwnd.hWnd, applyCaptureAffinity);
+						SetWindowPos(bwnd.hWnd, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+					}
+				}
 				}
 			}
-			continue;
 		}
 
-		OffsetRgn(data.hrgnBorder, -originalBoundingLeft, -originalBoundingTop);
-
-		// For outside mode, shift border down by labelHeight since window now extends above the original top
-		if (bwnd.labelMode == -1 && bwnd.labelHeight > 0)
+		// Extend the cumulative occlusion region by this window's visible rectangle.
+		HRGN hrgnWindow = CreateRectRgn(wnd.rect.left, wnd.rect.top, wnd.rect.right, wnd.rect.bottom);
+		if (hrgnWindow)
 		{
-			OffsetRgn(data.hrgnBorder, 0, bwnd.labelHeight);
-		}
-
-		// Add label region for EACH window in this box
-		// Each window gets its own label centered on that window's border
-		if (bwnd.labelMode != 0 && bwnd.labelHeight > 0 && bwnd.labelFont)
-		{
-			// Add a label for each window in this box
-			for (auto& winInfo : data.windows)
+			if (CombineRgn(hrgnCovered, hrgnCovered, hrgnWindow, RGN_OR) == ERROR)
 			{
-				// Calculate label rect in screen coordinates using shared helper
-				// In label-only mode there is no border frame, so don't offset by border width
-				int lblBorderWidth = data.labelOnly ? 0 : data.width;
-				RECT labelRectScr = CalculateLabelRect(winInfo.rect, lblBorderWidth, bwnd.labelWidth, bwnd.labelHeight, bwnd.labelMode);
-
-				// Convert to window coordinates (relative to border window origin)
-				// Note: data.boundingRect.top was already extended upward for outside mode,
-				// so subtracting it gives the correct window-relative position
-				RECT labelRectWnd = {
-					labelRectScr.left - data.boundingRect.left,
-					labelRectScr.top - data.boundingRect.top,
-					labelRectScr.right - data.boundingRect.left,
-					labelRectScr.bottom - data.boundingRect.top
-				};
-
-				// Accumulate into data.newLabelRects; assigned to bwnd.labelRects only after
-				// the comparison that decides whether to invalidate (prevents unnecessary repaints)
-				data.newLabelRects.push_back(labelRectWnd);
-
-				// Create label region in screen coordinates, clip, offset, and add to border region
-				HRGN hrgnLabelScr = CreateRectRgn(labelRectScr.left, labelRectScr.top, labelRectScr.right, labelRectScr.bottom);
-				if (hrgnLabelScr) {
-					// Clip against windows ABOVE this specific window
-					if (winInfo.hrgnCoveredAbove)
-						CombineRgn(hrgnLabelScr, hrgnLabelScr, winInfo.hrgnCoveredAbove, RGN_DIFF);
-
-					// Offset and add the region
-					OffsetRgn(hrgnLabelScr, -data.boundingRect.left, -data.boundingRect.top);
-					CombineRgn(data.hrgnBorder, data.hrgnBorder, hrgnLabelScr, RGN_OR);
-					DeleteObject(hrgnLabelScr);
-				}
+				// hrgnCovered is undefined; reset to empty so subsequent windows aren't over-clipped.
+				DeleteObject(hrgnCovered);
+				hrgnCovered = CreateRectRgn(0, 0, 0, 0);
 			}
+			DeleteObject(hrgnWindow);
 		}
 
-		// Clean up the per-window covered area regions
-		for (auto& winInfo : data.windows)
-		{
-			if (winInfo.hrgnCoveredAbove)
-			{
-				DeleteObject(winInfo.hrgnCoveredAbove);
-				winInfo.hrgnCoveredAbove = NULL;
-			}
-		}
-
-		// Position and show the border window.
-		// Pass FALSE to SetWindowRgn so it doesn't force a full repaint by itself;
-		// we'll invalidate only the parts that actually changed below.
-		if (!SetWindowRgn(bwnd.hWnd, data.hrgnBorder, FALSE))
-			DeleteObject(data.hrgnBorder); // SetWindowRgn only owns the region on success
-		data.hrgnBorder = NULL;
-
-		// All-border windows stay SWP_NOZORDER in steady state.  Temporarily re-raise only
-		// for the box that owns the newly-focused window (short focus pulse), so third-party
-		// topmost borders don't hide the active box while avoiding global z-order jumps.
-		bool raiseThisBox = focusRaisePulseActive && pFocusedBox && (pBox == pFocusedBox);
-		DWORD swpFlags = SWP_NOACTIVATE;
-		if (!raiseThisBox)
-			swpFlags |= SWP_NOZORDER;
-		if (!bwnd.visible) swpFlags |= SWP_SHOWWINDOW;
-		SetWindowPos(bwnd.hWnd, raiseThisBox ? HWND_TOP : NULL,
-			data.boundingRect.left,
-			data.boundingRect.top,
-			data.boundingRect.right - data.boundingRect.left,
-			data.boundingRect.bottom - data.boundingRect.top,
-			swpFlags);
-
-		// Invalidate when label rects changed, on first show, or whenever the region was
-		// rebuilt (skipRebuild=false).  The region rebuild case is critical after events like
-		// Peek at Desktop ending: SetWindowRgn(FALSE) clips to the new shape instantly but
-		// newly-revealed pixels (previously hidden behind a covering window) are unpainted
-		// until an explicit InvalidateRect forces WM_ERASEBKGND to fill them with the border color.
-		bool labelRectsChanged = !RectVectorEquals(bwnd.labelRects, data.newLabelRects);
-		if (labelRectsChanged || !bwnd.visible || !data.skipRebuild)
-			InvalidateRect(bwnd.hWnd, NULL, TRUE);
-
-		bwnd.labelRects = data.newLabelRects;
-		bwnd.visible = true;
-		// Note: data.hrgnBorder is now owned by the window (on success), don't delete it
+		HashMix64(rollingCoverageHash, (ULONGLONG)(ULONG_PTR)wnd.hWnd);
+		HashMix64(rollingCoverageHash, (ULONGLONG)(LONG_PTR)wnd.rect.left);
+		HashMix64(rollingCoverageHash, (ULONGLONG)(LONG_PTR)wnd.rect.top);
+		HashMix64(rollingCoverageHash, (ULONGLONG)(LONG_PTR)wnd.rect.right);
+		HashMix64(rollingCoverageHash, (ULONGLONG)(LONG_PTR)wnd.rect.bottom);
 	}
 
-	// Destroy and remove border windows for boxes that no longer have visible windows
-	for (auto it = m->BoxBorderWnds.begin(); it != m->BoxBorderWnds.end(); )
+	// Destroy overlays whose target windows disappeared or are no longer all-mode eligible.
+	for (auto it = m->AllBorderWnds.begin(); it != m->AllBorderWnds.end(); )
 	{
-		if (activeBoxes.find(it->first) == activeBoxes.end())
+		if (activeTargets.find(it->first) == activeTargets.end())
 		{
-			// Destroy the window and clean up resources
-			if (it->second.hWnd)
-				m->BoxBorderWndIndex.erase(it->second.hWnd);
-			DestroyBorderWindowResources(it->second);
-			it = m->BoxBorderWnds.erase(it);
+			HWND targetWnd = it->first;
+			++it;
+			RemoveAllModeOverlayForTarget(m, targetWnd);
 		}
 		else
 		{
@@ -1726,7 +2061,17 @@ void CBoxBorder::DrawAllSandboxedBorders()
 		}
 	}
 
-	// Clean up the covered area region
+	if (enabledWindowCount == 0)
+	{
+		// No active all-mode targets this tick: refresh the global-mode probe soon.
+		m->CachedHasGlobalAllMode = true;
+		m->CachedGlobalAllMode = false;
+		m->AdaptiveGlobalAllModeCheckMs = kAdaptiveFastMs;
+	}
+
+	// Done with cumulative occlusion region.
+	if (hrgnTaskbar)
+		DeleteObject(hrgnTaskbar);
 	DeleteObject(hrgnCovered);
 }
 
@@ -1747,10 +2092,10 @@ bool CBoxBorder::CheckGlobalAllBordersMode()
 		checkedBoxes.insert(pBox);
 
 		COLORREF color;
-		int width, alpha, labelMode;
+		int width, alpha, labelMode, labelWidth;
 		EBorderMode mode;
 
-		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
+		if (GetBoxBorderSettings(pBox, color, width, alpha, mode, labelMode, labelWidth) && (mode == eBorderAllWindows || mode == eBorderAllWindowsLabelOnly))
 			return true;
 	}
 

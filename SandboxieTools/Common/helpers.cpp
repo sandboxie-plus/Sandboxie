@@ -56,12 +56,18 @@ bool ListDir(std::wstring Path, std::vector<std::wstring>& Entries)
 		return false;
 
 	dirent* e;
-	while ((e = readdir(d)) != NULL) 
+	while ((e = readdir(d)) != NULL)
 	{
 		std::string aName = e->d_name;
 		std::wstring Name = std::wstring(aName.begin(), aName.end());
 
-		switch (e->d_type) 
+		// Skip symlinks and directory junctions (reparse points) to prevent attacks
+		std::wstring fullPath = Path + Name;
+		DWORD attrs = GetFileAttributesW(fullPath.c_str());
+		if (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_REPARSE_POINT))
+			continue;
+
+		switch (e->d_type)
 		{
 			case DT_DIR:
 				if(Name.compare(L"..") == 0 || Name.compare(L".") == 0)

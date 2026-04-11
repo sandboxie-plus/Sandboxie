@@ -54,9 +54,14 @@ public:
 	void						OnDoubleClicked(const CSandBoxPtr &pBox);
 
 	virtual QString				AddNewBox(bool bAlowTemp = false);
+	virtual void				AddNewBoxAction();
 	virtual QString				AddNewGroup();
+	virtual void				AddNewGroupAction();
+	virtual void				ImportBoxesAction();
 	virtual bool				TestNameAndWarn(const QString& Name);
 	virtual void				SelectBox(const QString& Name);
+	virtual void				SelectBoxes(const QStringList& Names);
+	virtual void				SelectNames(const QStringList& Names);
 
 	virtual void				PopUpMenu(const QString& Name);
 	virtual QMenu*				GetMenu(const QString& Name);
@@ -136,6 +141,7 @@ private:
 	void					UpdateMoveMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
 	void					RenameItem(const QString OldName, const QString NewName);
+	bool					NormalizeGroups();
 
 	void					SetCustomOrder();
 	bool					MoveItem(const QString& Name, const QString& To, int pos = -1);
@@ -144,6 +150,9 @@ private:
 	bool					IsParentOf(const QString& Name, const QString& Group);
 
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
+	QStringList				GetSelectedBoxNames();
+	void					RestoreBoxSelectionLater(const QStringList& Names, int Delay = 50);
+	void					RestoreNameSelectionLater(const QStringList& Names, int Delay = 50);
 
 	QMenu*					GetMenuFolder(const QString& Folder, QMenu* pParent, QMap<QString, QMenu*>& Folders);
 
@@ -241,6 +250,11 @@ private:
 	QFileIconProvider		m_IconProvider;
 	QMap<QString, QIcon>	m_RunMenuWinIconCache;
 	QMap<QString, QIcon>	m_RunMenuFileIconCache;
+
+	bool					m_MoveBatchPending;
+	bool					m_MoveBatchChanged;
+	QStringList				m_MoveBatchFocusBoxes;
+	QStringList				m_MoveBatchFocusNames;
 
 	QList<CSandBoxPtr>		m_CurSandBoxes;
 	QList<CBoxedProcessPtr>	m_CurProcesses;

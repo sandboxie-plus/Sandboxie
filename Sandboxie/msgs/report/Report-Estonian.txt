@@ -594,7 +594,7 @@ Network Access (Firewall)
 .
 
 4294;txt;01
-Permit programs to update jump lists in the Windows 7 taskbar
+Permit programs to update jump lists in the Windows taskbar
 .
 
 4295;txt;01

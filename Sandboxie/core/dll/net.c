@@ -433,6 +433,8 @@ _FX int WSA_WSAStartup(
     if (WSA_StartupDone)
         return 0;
     WSA_StartupDone = TRUE;
+	
+	WSA_isBlockLocalLoop = SbieApi_QueryConfBool(NULL, L"BlockLocalLoop", FALSE);
 
     //
     // Initialize network proxy
@@ -458,7 +460,7 @@ _FX int WSA_WSAStartup(
 
         WSA_BindIP = TRUE;
     }
-	WSA_isBlockLocalLoop = SbieApi_QueryConfBool(NULL, L"BlockLocalLoop", FALSE);
+	
     //
     // Init helper map if needed
     //
@@ -1098,7 +1100,7 @@ _FX int WSA_IsLocalLoop(const short* addr, int addrlen) {
 	if (!WSA_GetIP(addr, addrlen, &ip))
 		return 0;
 
-	// 判断是否为 IPv4-mapped IPv6 的 127.x.x.x
+	// Determine if it is an IPv4-mapped IPv6 address 127.x.x.x
 	if (ip.Data32[0] == 0 &&
 		ip.Data32[1] == 0 &&
 		ip.Data32[2] == WSA_htonl(0xFFFF) &&
@@ -1106,7 +1108,7 @@ _FX int WSA_IsLocalLoop(const short* addr, int addrlen) {
 		return 1;
 	}
 
-	// 判断是否为 IPv6 回环地址 ::1
+	// Determine if it is an IPv6 loopback address ::1
 	static const BYTE loop6[16] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 };
 	if (memcmp(ip.Data, loop6, 16) == 0) {
 		return 1;
@@ -1127,6 +1129,7 @@ _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 		SetLastError(WSAECONNREFUSED);
 		return 1;
 	}
+	
     if (WSA_FwList.count > 0 && addrlen >= sizeof(USHORT) * 2 && addr && (addr[0] == AF_INET || addr[0] == AF_INET6)) {
 
         USHORT port = _ntohs(addr[1]);
@@ -1333,6 +1336,7 @@ _FX int WSA_connect(
 {
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
+		
 	if (WSA_isBlockLocalLoop && WSA_IsLocalLoop(name, namelen)) {
 		 return SOCKET_ERROR;
 	}

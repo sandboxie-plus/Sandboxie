@@ -710,6 +710,7 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 			BlockInternet = TRUE; // on roule failure we lust block everything
 			// todo: log error
 		}
+		
 		BlockLoopback = Process_GetConf_bool(proc, L"BlockLocalLoop", FALSE);
 	}
 
@@ -781,6 +782,7 @@ void WFP_DeleteProcess(PROCESS* proc)
 //---------------------------------------------------------------------------
 // WFP_isLoopback
 //---------------------------------------------------------------------------
+
 BOOLEAN WFP_isLoopback(const IP_ADDRESS* ip)
 {
 	// Check IPv6 ::1

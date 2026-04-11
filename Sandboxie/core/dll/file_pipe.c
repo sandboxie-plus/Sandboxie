@@ -1367,8 +1367,24 @@ _FX NTSTATUS File_WaitNamedPipe(
                 // create the sandboxed pipe name
                 // _sandbox_ipc_path\CallerPipeName
                 //
+                // In compartment mode, preserve LOCAL\ before the sandbox
+                // prefix to match File_GetBoxedPipeName behavior
+                //
+
+                WCHAR *caller_pipe_name = ib->Name;
+                ULONG caller_name_len = name_len;
 
                 ptr1 = ob->Name;
+
+                if (Dll_CompartmentMode) {
+                    if (caller_name_len >= 6 && _wcsnicmp(caller_pipe_name, L"LOCAL\\", 6) == 0) {
+                        wcscpy(ptr1, L"LOCAL\\");
+                        ptr1 += 6;
+                        caller_pipe_name += 6;
+                        caller_name_len -= 6;
+                    }
+                }
+
                 ptr2 = Dll_BoxIpcPath;
                 for (; *ptr2; ++ptr1, ++ptr2) {
                     if (*ptr2 == L'\\')
@@ -1380,8 +1396,8 @@ _FX NTSTATUS File_WaitNamedPipe(
                 *ptr1 = L'\\';
                 ++ptr1;
 
-                wmemcpy(ptr1, ib->Name, name_len);
-                ptr1[name_len] = L'\0';
+                wmemcpy(ptr1, caller_pipe_name, caller_name_len);
+                ptr1[caller_name_len] = L'\0';
 
                 //
                 // initialize the rest of the new input buffer

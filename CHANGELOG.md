@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed The user interfaces of all WebView2 applications built with Tauri are unresponsive. [#5327](https://github.com/sandboxie-plus/Sandboxie/issues/5327)
 - fixed race condition BSOD during driver unload [#5329](https://github.com/sandboxie-plus/Sandboxie/pull/5329)
 - fixed Key_MergeSubkeys logic verification [#5301](https://github.com/sandboxie-plus/Sandboxie/issues/5301)
+- fixed issue with File_WaitNamedPipe in Application Compartment mode
 
 
 ## [1.17.3 / 5.72.3] - 2026-03-29

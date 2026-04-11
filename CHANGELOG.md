@@ -7,13 +7,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added ‘BlockLocalLoop=y' to block local loopback connections
 
+### Changed
+- Hardware info protection can now be switched per process [#5271](https://github.com/sandboxie-plus/Sandboxie/issues/5271)
+
 ### Fixed
 - fixed issue with volatile configuration update
 - fixed, added missing WaitServiceState resolves "LINE fails to launch" / NO_SIGNATURE [#5306](https://github.com/sandboxie-plus/Sandboxie/issues/5306)
 - fix(ipc): release Ipc_Handles_CritSec on Ipc_GetName failure in NtQueryDirectoryObject [#5326](https://github.com/sandboxie-plus/Sandboxie/pull/5326)
 - fixed The user interfaces of all WebView2 applications built with Tauri are unresponsive. [#5327](https://github.com/sandboxie-plus/Sandboxie/issues/5327)
-- Fixed race condition BSOD during driver unload [#5329](https://github.com/sandboxie-plus/Sandboxie/pull/5329)
-- 
+- fixed race condition BSOD during driver unload [#5329](https://github.com/sandboxie-plus/Sandboxie/pull/5329)
+- fixed Key_MergeSubkeys logic verification [#5301](https://github.com/sandboxie-plus/Sandboxie/issues/5301)
 
 
 ## [1.17.3 / 5.72.3] - 2026-03-29

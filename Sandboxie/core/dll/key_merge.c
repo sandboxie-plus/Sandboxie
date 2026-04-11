@@ -1061,9 +1061,8 @@ _FX NTSTATUS Key_MergeSubkeys(
     if (! TrueMerge)
         goto TrueHandleFinish;
 
-    if (TrueMerge->last_write_time.QuadPart >
-                                            merge->last_write_time.QuadPart)
-        merge->last_write_time.QuadPart = info->LastWriteTime.QuadPart;
+    if (TrueMerge->last_write_time.QuadPart > merge->last_write_time.QuadPart)
+        merge->last_write_time.QuadPart = TrueMerge->last_write_time.QuadPart;
 
     //
     // the true merge contains the list of all subkeys in the true key,

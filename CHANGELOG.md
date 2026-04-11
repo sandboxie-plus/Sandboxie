@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with volatile config update
 - fixed, added missing WaitServiceState resolves "LINE fails to launch" / NO_SIGNATURE [#5306](https://github.com/sandboxie-plus/Sandboxie/issues/5306)
 - fix(ipc): release Ipc_Handles_CritSec on Ipc_GetName failure in NtQueryDirectoryObject [#5326](https://github.com/sandboxie-plus/Sandboxie/pull/5326)
+- fixed The user interfaces of all WebView2 applications built with Tauri are unresponsive. [#5327](https://github.com/sandboxie-plus/Sandboxie/issues/5327)
+
 
 
 ## [1.17.3 / 5.72.3] - 2026-03-29

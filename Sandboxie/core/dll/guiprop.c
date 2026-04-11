@@ -157,7 +157,7 @@ _FX BOOLEAN Gui_InitProp(HMODULE module)
     // DisableComProxy BEGIN
     if (!SbieApi_QueryConfBool(NULL, L"DisableComProxy", FALSE))
     // DisableComProxy END
-    if (! SbieDll_IsOpenCOM()) {
+    if (!SbieDll_IsOpenCOM()) {
 
         //
         // if there is access to the real COM epmapper, then don't
@@ -509,7 +509,7 @@ _FX BOOL Gui_SetPropW(HWND hWnd, const WCHAR *lpString, HANDLE hData)
     }
 
     if (!Gui_HideWndProps)
-        __sys_SetPropW(hWnd, lpString, hData);
+        return __sys_SetPropW(hWnd, lpString, hData);
 
     if (! Gui_OpenAllWinClasses) {
 
@@ -573,9 +573,13 @@ _FX HANDLE Gui_RemovePropW(HWND hWnd, const WCHAR *lpString)
         }
     }
 
-    lpString = Gui_ReplaceAtom(lpString);
+    const void *lpString2 = Gui_ReplaceAtom(lpString);
 
-    return __sys_RemovePropW(hWnd, lpString);
+    // fix for WebView2 applications
+    if(lpString2 == (void*)Gui_Sandbox_OleEndPointID_Atom && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME)
+        return NULL;
+
+    return __sys_RemovePropW(hWnd, lpString2);
 }
 
 
@@ -597,9 +601,13 @@ _FX HANDLE Gui_RemovePropA(HWND hWnd, const UCHAR *lpString)
         }
     }
 
-    lpString = Gui_ReplaceAtom(lpString);
+    const void *lpString2 = Gui_ReplaceAtom(lpString);
 
-    return __sys_RemovePropA(hWnd, lpString);
+    // fix for WebView2 applications
+    if(lpString2 == (void*)Gui_Sandbox_OleEndPointID_Atom && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME)
+        return NULL;
+
+    return __sys_RemovePropA(hWnd, lpString2);
 }
 
 

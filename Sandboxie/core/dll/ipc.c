@@ -5203,6 +5203,7 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 		LeaveCriticalSection(&Ipc_Handles_CritSec);
         return STATUS_MORE_ENTRIES;
 	}
+	
 	LeaveCriticalSection(&Ipc_Handles_CritSec);
     return STATUS_SUCCESS;
 }

@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.17.4 / 5.72.4] - 2026-04-??
 
+### Added
+- added ‘BlockLocalLoop=y', interprecation to local loopback connection
+
 ### Fixed
 - fixed issue with volatile config update
 - fixed, added missing WaitServiceState resolves "LINE fails to launch" / NO_SIGNATURE [#5306](https://github.com/sandboxie-plus/Sandboxie/issues/5306)

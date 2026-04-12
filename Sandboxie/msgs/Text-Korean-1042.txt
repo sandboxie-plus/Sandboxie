@@ -426,6 +426,10 @@ SBIE2180 LowLevel.dll 오류 %2
 SBIE2181 LowLevel.dll 우회가 SbieDll.dll을 대상 프로세스로 로드하지 못했습니다.
 .
 
+2189;pop;inf;01
+SBIE2189 %2는 Chromium 기반 응용 프로그램일 가능성이 높지만 이미지 유형이 Chrome이 아니므로 실패할 가능성이 높습니다.
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2은(는) Sandboxie에서 실행되는 동안에는 업데이트하면 안됩니다.
@@ -3320,7 +3324,7 @@ PDF/인쇄
 .
 
 4294;txt;01
-프로그램이 Windows 작업 표시줄의 점프 목록을 업데이트하도록 프로그램 허용
+프로그램이 Windows 작업 표시줄에서 점프 목록 업데이트 허용
 .
 
 4295;txt;01

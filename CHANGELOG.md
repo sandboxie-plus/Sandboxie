@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.17.4 / 5.72.4] - 2026-04-??
+## [1.17.4 / 5.72.4] - 2026-04-12
 
 ### Added
 - added 'BlockLocalLoop=y' to block local loopback connections

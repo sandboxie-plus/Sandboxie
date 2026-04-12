@@ -422,13 +422,26 @@ void CResourceView::Refresh()
 			++it;
 	}
 
-	// Update tree - try to preserve expansion state
+	// Update tree - try to preserve expansion, selection and scroll state
 	QSet<QString> expandedBoxes;
+	QSet<QString> selectedBoxes;
+	QSet<quint32> selectedPids;
+
 	for (int i = 0; i < m_pTree->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = m_pTree->topLevelItem(i);
+		QString boxName = pItem->data(0, Qt::UserRole).toString();
 		if (pItem->isExpanded())
-			expandedBoxes.insert(pItem->data(0, Qt::UserRole).toString());
+			expandedBoxes.insert(boxName);
+		if (pItem->isSelected())
+			selectedBoxes.insert(boxName);
+
+		for (int j = 0; j < pItem->childCount(); j++) {
+			QTreeWidgetItem* pChild = pItem->child(j);
+			if (pChild->isSelected())
+				selectedPids.insert(pChild->text(1).toUInt());
+		}
 	}
+	int vScrollPos = m_pTree->verticalScrollBar()->value();
 
 	m_pTree->clear();
 
@@ -531,12 +544,25 @@ void CResourceView::Refresh()
 		pBoxItem->setTextAlignment(3, Qt::AlignRight | Qt::AlignVCenter);
 		pBoxItem->setTextAlignment(4, Qt::AlignRight | Qt::AlignVCenter);
 
+		if (selectedBoxes.contains(box.BoxName))
+			pBoxItem->setSelected(true);
+
 		m_pTree->addTopLevelItem(pBoxItem);
 
 		// Restore expansion state; auto-expand active boxes
 		if (box.ProcessCount > 0 || expandedBoxes.contains(box.BoxName))
 			pBoxItem->setExpanded(true);
+		
+		// Restore specific child selection
+		for (int i = 0; i < pBoxItem->childCount(); ++i) {
+			QTreeWidgetItem* pChild = pBoxItem->child(i);
+			if (selectedPids.contains(pChild->text(1).toUInt()))
+				pChild->setSelected(true);
+		}
 	}
+
+	// Restore scroll position
+	m_pTree->verticalScrollBar()->setValue(vScrollPos);
 }
 
 void CResourceView::Clear()

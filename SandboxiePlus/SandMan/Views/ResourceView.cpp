@@ -92,7 +92,6 @@ CResourceView::CResourceView(QWidget* parent) : QWidget(parent)
 	connect(m_pTree, &QTreeWidget::customContextMenuRequested, this, &CResourceView::OnContextMenu);
 	connect(m_pTree, &QTreeWidget::itemSelectionChanged, this, [this]() {
 		QList<QTreeWidgetItem*> selectedItems = m_pTree->selectedItems();
-		bool hasSelection = !selectedItems.isEmpty();
 		bool hasProcessSelected = false;
 		bool hasBoxSelected = false;
 
@@ -255,7 +254,7 @@ bool CResourceView::MatchesFilter(const QString& boxName, const QList<SProcessSt
 	return false;
 }
 
-static QString FormatSize(quint64 size)
+static QString FormatMemSize(quint64 size)
 {
 	if (size == 0)
 		return "0 B";
@@ -406,7 +405,7 @@ void CResourceView::Refresh()
 
 	// Update summary bar
 	m_pSummaryLabel->setText(tr("Boxes: %1 (%2 active)  |  Processes: %3  |  Total Memory: %4")
-		.arg(totalBoxes).arg(totalActiveBoxes).arg(totalProcesses).arg(FormatSize(totalMemory)));
+		.arg(totalBoxes).arg(totalActiveBoxes).arg(totalProcesses).arg(FormatMemSize(totalMemory)));
 
 	// Clean up stale CPU entries
 	QSet<quint32> activePids;
@@ -474,8 +473,8 @@ void CResourceView::Refresh()
 
 		if (box.ProcessCount > 0) {
 			pBoxItem->setText(2, QString("%1%").arg(box.TotalCpuUsage, 0, 'f', 1));
-			pBoxItem->setText(3, FormatSize(box.TotalWorkingSet));
-			pBoxItem->setText(4, FormatSize(box.TotalPrivateBytes));
+			pBoxItem->setText(3, FormatMemSize(box.TotalWorkingSet));
+			pBoxItem->setText(4, FormatMemSize(box.TotalPrivateBytes));
 			pBoxItem->setText(5, tr("Active"));
 
 			// Bold font for active boxes
@@ -517,8 +516,8 @@ void CResourceView::Refresh()
 			pProcItem->setText(0, proc.ProcessName);
 			pProcItem->setText(1, QString::number(proc.ProcessId));
 			pProcItem->setText(2, QString("%1%").arg(proc.CpuUsage, 0, 'f', 1));
-			pProcItem->setText(3, FormatSize(proc.WorkingSetSize));
-			pProcItem->setText(4, FormatSize(proc.PrivateBytes));
+			pProcItem->setText(3, FormatMemSize(proc.WorkingSetSize));
+			pProcItem->setText(4, FormatMemSize(proc.PrivateBytes));
 			pProcItem->setText(5, tr("Running"));
 
 			// Color-code high CPU processes

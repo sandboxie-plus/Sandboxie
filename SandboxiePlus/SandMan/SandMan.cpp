@@ -18,6 +18,7 @@
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/ListItemModel.h"
 #include "Views/TraceView.h"
+#include "Views/ResourceView.h"
 #include "Windows/SelectBoxWindow.h"
 #include "../UGlobalHotkey/uglobalhotkeys.h"
 #include "Wizards/SetupWizard.h"
@@ -1534,6 +1535,7 @@ void CSandMan::CreateView(int iViewMode)
 
 		m_pMessageLog = NULL;
 		m_pTraceView = NULL;
+		m_pResourceView = NULL;
 		m_pRecoveryLog = NULL;
 
 		return;
@@ -1617,6 +1619,11 @@ void CSandMan::CreateView(int iViewMode)
 
 		m_pLogTabs->addTab(m_pRecoveryLog, tr("Recovery Log"));
 		//
+
+		// Resource Monitor
+		m_pResourceView = new CResourceView(this);
+		m_pLogTabs->addTab(m_pResourceView, tr("Resource Monitor"));
+		//
 	}
 	else {
 		m_pLogSplitter = NULL;
@@ -1625,6 +1632,7 @@ void CSandMan::CreateView(int iViewMode)
 
 		m_pMessageLog = NULL;
 		m_pTraceView = NULL;
+		m_pResourceView = NULL;
 		m_pRecoveryLog = NULL;
 	}
 }

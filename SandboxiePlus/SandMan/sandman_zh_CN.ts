@@ -3717,6 +3717,59 @@ Full path: %4</source>
     </message>
 </context>
 <context>
+    <name>CResourceView</name>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="22"/>
+        <source>Sandbox / Process</source>
+        <translation>沙箱 / 进程</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="22"/>
+        <source>PID</source>
+        <translation>进程 ID</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="22"/>
+        <source>CPU</source>
+        <translation>CPU</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="22"/>
+        <source>Working Set</source>
+        <translation>工作集</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="22"/>
+        <source>Private Bytes</source>
+        <translation>私有字节</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="22"/>
+        <source>Status</source>
+        <translation>状态</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="199"/>
+        <source>Active</source>
+        <translation>活跃</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="207"/>
+        <source>Inactive</source>
+        <translation>空闲</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="207"/>
+        <source>Empty</source>
+        <translation>空</translation>
+    </message>
+    <message>
+        <location filename="Views/ResourceView.cpp" line="215"/>
+        <source>Running</source>
+        <translation>运行中</translation>
+    </message>
+</context>
+<context>
     <name>CRenameSandboxDialog</name>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="17"/>
@@ -4517,6 +4570,11 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="1618"/>
         <source>Recovery Log</source>
         <translation>恢复日志</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1625"/>
+        <source>Resource Monitor</source>
+        <translation>资源监控</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1413"/>

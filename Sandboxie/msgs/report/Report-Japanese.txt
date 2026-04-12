@@ -2,6 +2,10 @@
 * Missing Messages in Text-Japanese-1041.txt
 *==========
 
+2189;pop;inf;01
+SBIE2189 %2 is likely a Chromium-based application, but the image type is not Chrome; it will likely fail.
+.
+
 3115;txt;01
 Yes
 .

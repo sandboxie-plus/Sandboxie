@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added 'BlockLocalLoop=y' to block local loopback connections
 - added electron detection and SBIE2189 Message with a trouble shooting option to set 'SpecialImage=chrome,program.exe' for the encountered application
+- added automated electron app detection heuristic on by default it can be disabled with 'UseElectronDetection=n'
 
 ### Changed
 - Hardware info protection can now be switched per process [#5271](https://github.com/sandboxie-plus/Sandboxie/issues/5271)
@@ -20,6 +21,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed race condition BSOD during driver unload [#5329](https://github.com/sandboxie-plus/Sandboxie/pull/5329)
 - fixed Key_MergeSubkeys logic verification [#5301](https://github.com/sandboxie-plus/Sandboxie/issues/5301)
 - fixed issue with File_WaitNamedPipe in Application Compartment mode
+
+### Removed
+- removed deprecated 'UseElectronWorkaround=y' option
 
 
 ## [1.17.3 / 5.72.3] - 2026-03-29

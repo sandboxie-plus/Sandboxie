@@ -4402,7 +4402,7 @@ The process match level has a higher priority than the specificity and describes
             </font>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabCompat">
             <attribute name="title">
@@ -4411,13 +4411,6 @@ The process match level has a higher priority than the specificity and describes
             <layout class="QGridLayout" name="gridLayout_63">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_62">
-               <item row="4" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkUseSbieDeskHack">
-                 <property name="text">
-                  <string>Use desktop object workaround for all processes</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="lblCompatibility">
                  <property name="font">
@@ -4431,37 +4424,6 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkUseSbieWndStation">
-                 <property name="text">
-                  <string>Emulate sandboxed window station for all processes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkForceRestart">
-                 <property name="text">
-                  <string>Restart force process before they begin to execute</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkElevateCreateProcessFix">
-                 <property name="text">
-                  <string>Apply ElevateCreateProcess Workaround (legacy behaviour)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkNoPanic">
-                 <property name="toolTip">
-                  <string>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</string>
-                 </property>
-                 <property name="text">
-                  <string>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</string>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkPreferExternalManifest">
                  <property name="text">
@@ -4469,14 +4431,21 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
-               <item row="8" column="2">
+               <item row="9" column="2">
                 <widget class="QCheckBox" name="chkRestartOnPCA">
                  <property name="text">
                   <string>Restart forced processes that were launched within a PCA (Program Compatibility Assistant) job object</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="2">
+               <item row="5" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkUseSbieWndStation">
+                 <property name="text">
+                  <string>Emulate sandboxed window station for all processes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="2">
                 <spacer name="horizontalSpacer_12">
                  <property name="orientation">
                   <enum>Qt::Orientation::Horizontal</enum>
@@ -4489,14 +4458,38 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-               <item row="6" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkComTimeout">
+               <item row="0" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkNoPanic">
+                 <property name="toolTip">
+                  <string>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</string>
+                 </property>
                  <property name="text">
-                  <string>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</string>
+                  <string>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1">
+               <item row="8" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkForceRestart">
+                 <property name="text">
+                  <string>Restart force process before they begin to execute</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkUseSbieDeskHack">
+                 <property name="text">
+                  <string>Use desktop object workaround for all processes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkElevateCreateProcessFix">
+                 <property name="text">
+                  <string>Apply ElevateCreateProcess Workaround (legacy behaviour)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="1">
                 <spacer name="verticalSpacer_28">
                  <property name="orientation">
                   <enum>Qt::Orientation::Vertical</enum>
@@ -4508,6 +4501,20 @@ The process match level has a higher priority than the specificity and describes
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="7" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkComTimeout">
+                 <property name="text">
+                  <string>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkUseElectronDetection">
+                 <property name="text">
+                  <string>Use heuristics to identify Electron/Chromium based processes</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>

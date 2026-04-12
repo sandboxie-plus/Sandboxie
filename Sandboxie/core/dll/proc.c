@@ -350,7 +350,7 @@ static HANDLE Proc_LastCreatedProcessHandle = NULL;
 
 static BOOL     g_boolWasWerFaultLastProcess = FALSE;
 
-BOOL            Dll_ElectronWorkaround = FALSE;
+//BOOL            Dll_ElectronWorkaround = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -366,7 +366,7 @@ _FX BOOLEAN Proc_Init(void)
     ANSI_STRING ansi;
     NTSTATUS status;
 
-    Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
+    //Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
 
     //
     // abort if we should not hook any process creation functions
@@ -639,7 +639,7 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 		}
 	}
 
-    if (!Dll_CompartmentMode) // see UserEnv_CreateAppContainerProfile
+    if (!Config_GetSettingsForImageName_bool(L"FakeAppContainerToken", Dll_CompartmentMode ? FALSE : TRUE)) // see UserEnv_CreateAppContainerProfile
     if (Attribute == 0x00020009) //PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES
     {
         SECURITY_CAPABILITIES* sc = lpValue;
@@ -927,20 +927,20 @@ _FX BOOL Proc_CreateProcessInternalW(
                 //
 
                 // $Workaround$ - 3rd party fix
-                if (Dll_ElectronWorkaround)
-                {
-                    if ((name && _wcsicmp(name + 1, Dll_ImageName) == 0)
-                        && wcsistr(lpCommandLine, L" --type=gpu-process")
-                        && !wcsistr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
+                //if (Dll_ElectronWorkaround)
+                //{
+                //    if ((name && _wcsicmp(name + 1, Dll_ImageName) == 0)
+                //        && wcsistr(lpCommandLine, L" --type=gpu-process")
+                //        && !wcsistr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
 
-                        lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
+                //        lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
 
-                        wcscpy(lpAlteredCommandLine, lpCommandLine);
-                        wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
+                //        wcscpy(lpAlteredCommandLine, lpCommandLine);
+                //        wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
 
-                        lpCommandLine = lpAlteredCommandLine;
-                    }
-                }
+                //        lpCommandLine = lpAlteredCommandLine;
+                //    }
+                //}
             }
         }
 

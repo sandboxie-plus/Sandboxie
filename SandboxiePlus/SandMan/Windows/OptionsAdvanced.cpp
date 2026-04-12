@@ -25,6 +25,8 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkUseSbieDeskHack, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkUseSbieWndStation, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+	connect(ui.chkUseElectronDetection, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkAddToJob, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSCM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkRestrictServices, SIGNAL(clicked(bool)), this, SLOT(OnSysSvcChanged()));
@@ -196,6 +198,8 @@ void COptionsWindow::LoadAdvanced()
 
 	ui.chkUseSbieDeskHack->setChecked(m_pBox->GetBool("UseSbieDeskHack", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
+
+	ui.chkUseElectronDetection->setChecked(m_pBox->GetBool("UseElectronDetection", true));
 
 	ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 	ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
@@ -438,6 +442,8 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkUseSbieDeskHack, "UseSbieDeskHack", "", "n");
 	WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "", "n");
+
+	WriteAdvancedCheck(ui.chkUseElectronDetection, "UseElectronDetection", "", "n");
 
 	WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 	WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");

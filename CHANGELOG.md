@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Hardware info protection can now be switched per process [#5271](https://github.com/sandboxie-plus/Sandboxie/issues/5271)
+- Driver now verifies vertificates using UTC tiem instead of local time [#4241](https://github.com/sandboxie-plus/Sandboxie/issues/4241) [#5316](https://github.com/sandboxie-plus/Sandboxie/issues/5316)
 
 ### Fixed
 - fixed issue with volatile configuration update

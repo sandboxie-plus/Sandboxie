@@ -5,7 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.17.4 / 5.72.4] - 2026-04-??
 
 ### Added
-- added ‘BlockLocalLoop=y' to block local loopback connections
+- added 'BlockLocalLoop=y' to block local loopback connections
+- added electron detection and SBIE2189 Message with a trouble shooting option to set 'SpecialImage=chrome,program.exe' for the encountered application
 
 ### Changed
 - Hardware info protection can now be switched per process [#5271](https://github.com/sandboxie-plus/Sandboxie/issues/5271)

@@ -781,6 +781,29 @@ _FX const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments)
 
 
 //---------------------------------------------------------------------------
+// Proc_IsLikelyElectronProcess
+//---------------------------------------------------------------------------
+
+
+BOOLEAN Proc_IsLikelyElectronProcess(const WCHAR *cmd)
+{
+    int score = 0;
+
+    if (wcsstr(cmd, L"--type=") != NULL) score++;
+    if (wcsstr(cmd, L"--user-data-dir=") != NULL) score++;
+    if (wcsstr(cmd, L"--mojo-platform-channel-handle=") != NULL) score++;
+    if (wcsstr(cmd, L"--field-trial-handle=") != NULL) score++;
+    if (wcsstr(cmd, L"--utility-sub-type=") != NULL) score++;
+    if (wcsstr(cmd, L"--gpu-preferences=") != NULL) score++;
+    if (wcsstr(cmd, L"--enable-features=") != NULL) score++;
+    if (wcsstr(cmd, L"--disable-features=") != NULL) score++;
+    if (wcsstr(cmd, L"--app-user-model-id=") != NULL) score++;
+
+    /* require multiple Chromium/Electron indicators */
+    return score >= 2;
+}
+
+//---------------------------------------------------------------------------
 // Proc_CreateProcessInternalW
 //---------------------------------------------------------------------------
 
@@ -884,28 +907,39 @@ _FX BOOL Proc_CreateProcessInternalW(
     {
         // $Workaround$ - 3rd party fix
         
-        //
-        // Electron based applications which work like Chrome seem to fail with HW acceleration, even when 
-        // they get the same treatment as Chrome and Chromium derivatives.
-        // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
-        //
-
-        // $Workaround$ - 3rd party fix
-        if ((Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/) && Dll_ElectronWorkaround)
+        if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/)
         {
             if (lpApplicationName && lpCommandLine)
             {
-                WCHAR* backslash = wcsrchr(lpApplicationName, L'\\');
-                if ((backslash && _wcsicmp(backslash + 1, Dll_ImageName) == 0)
-                    && wcsistr(lpCommandLine, L" --type=gpu-process")
-                    && !wcsistr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
+                WCHAR* name = wcsrchr(lpApplicationName, L'\\');
 
-                    lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
+                if (Proc_IsLikelyElectronProcess(lpCommandLine))
+                {
+                    const WCHAR* strings[] = { (name && *name) ? name + 1 : L"unnamed", lpApplicationName, NULL };
+                    SbieApi_LogMsgExt(-1, 2189, strings);
+                }
 
-                    wcscpy(lpAlteredCommandLine, lpCommandLine);
-                    wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
 
-                    lpCommandLine = lpAlteredCommandLine;
+                //
+                // Electron based applications which work like Chrome seem to fail with HW acceleration, even when 
+                // they get the same treatment as Chrome and Chromium derivatives.
+                // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
+                //
+
+                // $Workaround$ - 3rd party fix
+                if (Dll_ElectronWorkaround)
+                {
+                    if ((name && _wcsicmp(name + 1, Dll_ImageName) == 0)
+                        && wcsistr(lpCommandLine, L" --type=gpu-process")
+                        && !wcsistr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
+
+                        lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
+
+                        wcscpy(lpAlteredCommandLine, lpCommandLine);
+                        wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
+
+                        lpCommandLine = lpAlteredCommandLine;
+                    }
                 }
             }
         }

@@ -426,6 +426,10 @@ SBIE2180 LowLevel.dll error %2
 SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
 .
 
+2189;pop;inf;01
+SBIE2189 %2 is likely a Chromium-based application, but the image type is not Chrome; it will likely fail.
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2 should not be updated while running under Sandboxie.

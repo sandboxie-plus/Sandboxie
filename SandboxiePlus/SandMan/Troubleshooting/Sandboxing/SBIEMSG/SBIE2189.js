@@ -2,7 +2,7 @@
 *	group: other
 *	class: sandboxing
 * name: SBIE2189: Application is likely chromium based
-* description: Application is likely chromium based but its image type is not set chrome
+* description: Application is likely chromium based but its image type is not set to chrome
 *
 */
 
@@ -16,7 +16,11 @@ if (typeof boxName === 'undefined' || !boxName) {
   processName = ret.process;
 }
 
-let message = tr('The Process "%1" is likely chromium based but it its image type is nto set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?', processName.toLowerCase());
+if (typeof msgData === 'undefined' || !msgData[0]) {
+  msgData = [processName, processName];
+}
+
+let message = tr('The Process "%1" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?', processName.toLowerCase());
 
 // Known Fix set Image Type
   

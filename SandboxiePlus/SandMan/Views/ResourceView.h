@@ -3,8 +3,14 @@
 #include <QWidget>
 #include <QTreeWidget>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QTimer>
 #include <QMap>
+#include <QLabel>
+#include <QLineEdit>
+#include <QToolBar>
+#include <QAction>
+#include <QMenu>
 
 class CResourceView : public QWidget
 {
@@ -20,6 +26,14 @@ public slots:
 protected:
 	void		timerEvent(QTimerEvent* pEvent);
 	int			m_uTimerID;
+
+private slots:
+	void		OnTerminateProcess();
+	void		OnTerminateBox();
+	void		OnExpandAll();
+	void		OnCollapseAll();
+	void		OnFilterChanged(const QString& text);
+	void		OnContextMenu(const QPoint& pos);
 
 private:
 
@@ -48,8 +62,26 @@ private:
 
 	void		UpdateProcessStats(SProcessStats& Stats);
 	double		CalcCpuUsage(quint32 pid, quint64 kernelTime, quint64 userTime);
+	bool		MatchesFilter(const QString& boxName, const QList<SProcessStats>& processes) const;
 
 	QMap<quint32, QPair<quint64, quint64>> m_LastTimes; // pid -> (kernel+user, timestamp)
+
+	// Toolbar
+	QToolBar*		m_pToolBar;
+	QAction*		m_pRefreshAction;
+	QAction*		m_pTerminateAction;
+	QAction*		m_pTerminateBoxAction;
+	QAction*		m_pExpandAllAction;
+	QAction*		m_pCollapseAllAction;
+
+	// Filter
+	QLineEdit*		m_pFilterEdit;
+
+	// Summary bar
+	QLabel*			m_pSummaryLabel;
+
+	// Context menu
+	QMenu*			m_pContextMenu;
 
 	QVBoxLayout*	m_pMainLayout;
 	QTreeWidget*	m_pTree;

@@ -3719,54 +3719,100 @@ Full path: %4</source>
 <context>
     <name>CResourceView</name>
     <message>
-        <location filename="Views/ResourceView.cpp" line="22"/>
+        <source>Refresh</source>
+        <translation>刷新</translation>
+    </message>
+    <message>
+        <source>Refresh resource data now</source>
+        <translation>立即刷新资源数据</translation>
+    </message>
+    <message>
+        <source>Terminate Process</source>
+        <translation>终止进程</translation>
+    </message>
+    <message>
+        <source>Terminate the selected process</source>
+        <translation>终止选中的进程</translation>
+    </message>
+    <message>
+        <source>Terminate All in Box</source>
+        <translation>终止沙箱中全部进程</translation>
+    </message>
+    <message>
+        <source>Terminate all processes in the selected sandbox</source>
+        <translation>终止选中沙箱中的所有进程</translation>
+    </message>
+    <message>
+        <source>Expand All</source>
+        <translation>全部展开</translation>
+    </message>
+    <message>
+        <source>Collapse All</source>
+        <translation>全部折叠</translation>
+    </message>
+    <message>
+        <source>Filter:</source>
+        <translation>筛选:</translation>
+    </message>
+    <message>
+        <source>Search sandbox or process...</source>
+        <translation>搜索沙箱或进程...</translation>
+    </message>
+    <message>
         <source>Sandbox / Process</source>
         <translation>沙箱 / 进程</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="22"/>
         <source>PID</source>
         <translation>进程 ID</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="22"/>
         <source>CPU</source>
         <translation>CPU</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="22"/>
         <source>Working Set</source>
         <translation>工作集</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="22"/>
         <source>Private Bytes</source>
         <translation>私有字节</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="22"/>
         <source>Status</source>
         <translation>状态</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="199"/>
         <source>Active</source>
         <translation>活跃</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="207"/>
         <source>Inactive</source>
         <translation>空闲</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="207"/>
         <source>Empty</source>
         <translation>空</translation>
     </message>
     <message>
-        <location filename="Views/ResourceView.cpp" line="215"/>
         <source>Running</source>
         <translation>运行中</translation>
+    </message>
+    <message>
+        <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Total Memory: %4</source>
+        <translation>沙箱: %1 (%2 活跃)  |  进程: %3  |  总内存: %4</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to terminate %1 process(es)?</source>
+        <translation>确定要终止 %1 个进程吗？</translation>
+    </message>
+    <message>
+        <source>Terminate Sandbox</source>
+        <translation>终止沙箱</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to terminate all processes in %1 sandbox(es)?</source>
+        <translation>确定要终止 %1 个沙箱中的所有进程吗？</translation>
     </message>
 </context>
 <context>

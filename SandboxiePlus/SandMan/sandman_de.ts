@@ -9191,7 +9191,7 @@ Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tr
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4515"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende Heuristiken, um Electron-/Chromium-basierte Prozesse zu identifizieren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6112"/>

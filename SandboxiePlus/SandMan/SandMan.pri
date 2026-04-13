@@ -17,7 +17,6 @@ HEADERS += ./stdafx.h \
     ./Views/SbieView.h \
     ./Views/FileView.h \
     ./Views/TraceView.h \
-
     ./Views/StackView.h \
     ./Helpers/FindTool.h \
     ./Helpers/FullScreen.h \
@@ -75,7 +74,6 @@ SOURCES += ./main.cpp \
     ./Views/SbieView.cpp \
     ./Views/FileView.cpp \
     ./Views/TraceView.cpp \
-
     ./Views/StackView.cpp \
     ./Helpers/FindTool.cpp \
     ./Helpers/FullScreen.cpp \

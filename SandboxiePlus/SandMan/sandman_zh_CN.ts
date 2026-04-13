@@ -4125,6 +4125,11 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>没有必沙程序</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1509"/>
+        <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
+        <translation>沙箱: %1（%2 活跃）  |  进程: %3  |  内存: %4</translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="4775"/>
         <source>Reset Columns</source>
         <translation>重置列</translation>
@@ -5737,6 +5742,21 @@ Error: %1</source>
         <location filename="Models/SbieModel.cpp" line="618"/>
         <source>Info</source>
         <translation>信息</translation>
+    </message>
+    <message>
+        <location filename="Models/SbieModel.cpp" line="815"/>
+        <source>CPU</source>
+        <translation>CPU</translation>
+    </message>
+    <message>
+        <location filename="Models/SbieModel.cpp" line="816"/>
+        <source>Memory</source>
+        <translation>内存</translation>
+    </message>
+    <message>
+        <location filename="Models/SbieModel.cpp" line="817"/>
+        <source>Private Bytes</source>
+        <translation>私有字节</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="622"/>

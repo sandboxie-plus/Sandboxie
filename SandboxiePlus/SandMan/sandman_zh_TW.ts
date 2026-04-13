@@ -4027,6 +4027,11 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>重設欄</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1509"/>
+        <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
+        <translation>沙箱：%1（%2 個活躍）  |  處理程序：%3  |  記憶體：%4</translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="4776"/>
         <source>Copy Cell</source>
         <translation>複製單元格</translation>
@@ -5619,6 +5624,21 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Models/SbieModel.cpp" line="618"/>
         <source>Info</source>
         <translation>資訊</translation>
+    </message>
+    <message>
+        <location filename="Models/SbieModel.cpp" line="815"/>
+        <source>CPU</source>
+        <translation>CPU</translation>
+    </message>
+    <message>
+        <location filename="Models/SbieModel.cpp" line="816"/>
+        <source>Memory</source>
+        <translation>記憶體</translation>
+    </message>
+    <message>
+        <location filename="Models/SbieModel.cpp" line="817"/>
+        <source>Private Bytes</source>
+        <translation>私有位元組</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="622"/>

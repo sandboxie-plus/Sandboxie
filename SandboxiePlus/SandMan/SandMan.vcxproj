@@ -365,7 +365,7 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
     <ClCompile Include="Views\StackView.cpp" />
-    <ClCompile Include="Views\ResourceView.cpp" />
+
     <ClCompile Include="Views\TraceView.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">%(Filename).moc</QtMocFileName>
@@ -521,7 +521,7 @@
     <QtMoc Include="Wizards\SetupWizard.h" />
     <QtMoc Include="Windows\SelectBoxWindow.h" />
     <QtMoc Include="Views\TraceView.h" />
-    <QtMoc Include="Views\ResourceView.h" />
+
     <QtMoc Include="Windows\RecoveryWindow.h" />
     <QtMoc Include="Windows\PopUpWindow.h" />
     <QtMoc Include="Windows\SnapshotsWindow.h" />

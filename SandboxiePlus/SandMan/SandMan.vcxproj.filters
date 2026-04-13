@@ -240,9 +240,7 @@
     <ClCompile Include="Views\TraceView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
-    <ClCompile Include="Views\ResourceView.cpp">
-      <Filter>Views</Filter>
-    </ClCompile>
+
     <ClCompile Include="Windows\OptionsWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
@@ -340,9 +338,7 @@
     <QtMoc Include="Views\TraceView.h">
       <Filter>Views</Filter>
     </QtMoc>
-    <QtMoc Include="Views\ResourceView.h">
-      <Filter>Views</Filter>
-    </QtMoc>
+
     <QtMoc Include="Windows\SelectBoxWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>

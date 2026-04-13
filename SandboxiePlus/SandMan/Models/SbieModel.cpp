@@ -146,10 +146,13 @@ void CSbieModel::RefreshResourceStats()
 					pProcNode->CpuUsage       = cpu;
 
 					pProcNode->Values[eCPU].Raw       = cpu;
+					pProcNode->Values[eCPU].SortKey   = cpu;
 					pProcNode->Values[eCPU].Formatted = QString("%1%").arg(cpu, 0, 'f', 1);
-					pProcNode->Values[eMemory].Raw       = ws;
+					pProcNode->Values[eMemory].Raw       = (quint64)ws;
+					pProcNode->Values[eMemory].SortKey   = (quint64)ws;
 					pProcNode->Values[eMemory].Formatted = FormatSize(ws);
-					pProcNode->Values[ePrivBytes].Raw       = pb;
+					pProcNode->Values[ePrivBytes].Raw       = (quint64)pb;
+					pProcNode->Values[ePrivBytes].SortKey   = (quint64)pb;
 					pProcNode->Values[ePrivBytes].Formatted = FormatSize(pb);
 
 					QModelIndex idx = Find(m_Root, pProcNode);
@@ -172,10 +175,13 @@ void CSbieModel::RefreshResourceStats()
 
 				if (activeProcs > 0) {
 					pBoxNode->Values[eCPU].Raw       = boxCpu;
+					pBoxNode->Values[eCPU].SortKey   = boxCpu;
 					pBoxNode->Values[eCPU].Formatted = QString("%1%").arg(boxCpu, 0, 'f', 1);
-					pBoxNode->Values[eMemory].Raw       = boxWS;
+					pBoxNode->Values[eMemory].Raw       = (quint64)boxWS;
+					pBoxNode->Values[eMemory].SortKey   = (quint64)boxWS;
 					pBoxNode->Values[eMemory].Formatted = FormatSize(boxWS);
-					pBoxNode->Values[ePrivBytes].Raw       = boxPB;
+					pBoxNode->Values[ePrivBytes].Raw       = (quint64)boxPB;
+					pBoxNode->Values[ePrivBytes].SortKey   = (quint64)boxPB;
 					pBoxNode->Values[ePrivBytes].Formatted = FormatSize(boxPB);
 				} else {
 					pBoxNode->Values[eCPU].Raw.clear();
@@ -531,6 +537,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				case eCPU:
 				case eMemory:
 				case ePrivBytes:		Value = pNode->Values[section].Raw; break; // managed by RefreshResourceStats()
+				case eDiskSize:			Value = bWatchSize ? pBoxEx->GetSize() : 0; break;
 				case ePath:				Value = pBox->GetFileRoot(); break;
 			}
 
@@ -546,6 +553,12 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				{
 				//case eName:				ColValue.Formatted = Value.toString().replace("_", " "); break;
 				case eInfo:				ColValue.Formatted = Value.toULongLong() == -2 ? tr("Empty") : (Value.toULongLong() > 0 ? FormatSize(Value.toULongLong()) : ""); break;
+				case eDiskSize: {
+					quint64 sz = Value.toULongLong();
+					ColValue.Formatted = sz > 0 ? FormatSize(sz) : "";
+					ColValue.SortKey = sz;
+					break;
+				}
 				}
 			}
 
@@ -669,6 +682,7 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			case eCPU:
 			case eMemory:
 			case ePrivBytes:		Value = pNode->Values[section].Raw; break; // managed by RefreshResourceStats()
+			case eDiskSize:			break; // box-only column, not applicable to processes
 			//case ePath:				Value = pProcess->GetFileName(); break;
 			case ePath: {
 								QString CmdLine = pProcess->GetCommandLine(); 
@@ -715,6 +729,25 @@ QVariant CSbieModel::NodeData(STreeNode* pNode, int role, int section) const
 	if (section == 0 && role == Qt::InitialSortOrderRole) {
 		return ((SSandBoxNode*)pNode)->OrderNumber;
 	}
+
+	SSandBoxNode* pSandNode = static_cast<SSandBoxNode*>(pNode);
+
+	if (section == eCPU && role == Qt::ForegroundRole) {
+		double cpu = pSandNode->CpuUsage;
+		if (cpu > 50.0)
+			return QBrush(QColor(220, 50, 50));
+		if (cpu > 20.0)
+			return QBrush(QColor(200, 140, 0));
+	}
+
+	if (section == eCPU && role == Qt::FontRole) {
+		if (pSandNode->CpuUsage > 50.0) {
+			QFont fnt;
+			fnt.setBold(true);
+			return fnt;
+		}
+	}
+
 	return CTreeItemModel::NodeData(pNode, role, section);
 }
 
@@ -815,6 +848,7 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 			case eCPU:				return tr("CPU");
 			case eMemory:			return tr("Memory");
 			case ePrivBytes:		return tr("Private Bytes");
+			case eDiskSize:			return tr("Disk Size");
 			case ePath:				return tr("Path / Command Line");
 		}
 	}

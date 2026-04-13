@@ -5641,6 +5641,10 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>私有位元組</translation>
     </message>
     <message>
+        <source>Disk Size</source>
+        <translation>磁碟佔用</translation>
+    </message>
+    <message>
         <location filename="Models/SbieModel.cpp" line="622"/>
         <source>Path / Command Line</source>
         <translation>路徑 / 命令列</translation>
@@ -6147,6 +6151,30 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </source>
         <translation>選項:
     </translation>
+    </message>
+    <message>
+        <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
+</source>
+        <translation>    CPU: %1  |  記憶體: %2  |  私有位元組: %3
+</translation>
+    </message>
+    <message>
+        <source>    Sandbox: %1
+</source>
+        <translation>    沙箱: %1
+</translation>
+    </message>
+    <message>
+        <source>    Image: %1
+</source>
+        <translation>    映像檔: %1
+</translation>
+    </message>
+    <message>
+        <source>    Start Time: %1
+</source>
+        <translation>    啟動時間: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="910"/>

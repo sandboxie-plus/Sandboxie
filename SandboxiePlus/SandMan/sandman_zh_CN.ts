@@ -5759,6 +5759,10 @@ Error: %1</source>
         <translation>私有字节</translation>
     </message>
     <message>
+        <source>Disk Size</source>
+        <translation>磁盘占用</translation>
+    </message>
+    <message>
         <location filename="Models/SbieModel.cpp" line="622"/>
         <source>Path / Command Line</source>
         <translation>路径 / 命令行</translation>
@@ -6270,6 +6274,30 @@ Error: %1</source>
     </source>
         <translation>选项:
     </translation>
+    </message>
+    <message>
+        <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
+</source>
+        <translation>    CPU: %1  |  内存: %2  |  私有字节: %3
+</translation>
+    </message>
+    <message>
+        <source>    Sandbox: %1
+</source>
+        <translation>    沙箱: %1
+</translation>
+    </message>
+    <message>
+        <source>    Image: %1
+</source>
+        <translation>    映像: %1
+</translation>
+    </message>
+    <message>
+        <source>    Start Time: %1
+</source>
+        <translation>    启动时间: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="910"/>

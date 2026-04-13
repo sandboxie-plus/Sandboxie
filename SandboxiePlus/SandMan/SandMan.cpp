@@ -18,7 +18,6 @@
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/ListItemModel.h"
 #include "Views/TraceView.h"
-//#include "Views/ResourceView.h" // removed: resource stats integrated into main view columns
 #include "Windows/SelectBoxWindow.h"
 #include "../UGlobalHotkey/uglobalhotkeys.h"
 #include "Wizards/SetupWizard.h"

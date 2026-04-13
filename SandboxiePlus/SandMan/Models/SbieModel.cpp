@@ -172,9 +172,15 @@ void CSbieModel::RefreshResourceStats()
 					pBoxNode->Values[ePrivBytes].Raw       = boxPB;
 					pBoxNode->Values[ePrivBytes].Formatted = FormatSize(boxPB);
 				} else {
-					pBoxNode->Values[eCPU]      = STreeNode::SValue{};
-					pBoxNode->Values[eMemory]   = STreeNode::SValue{};
-					pBoxNode->Values[ePrivBytes]= STreeNode::SValue{};
+					pBoxNode->Values[eCPU].Raw.clear();
+					pBoxNode->Values[eCPU].SortKey.clear();
+					pBoxNode->Values[eCPU].Formatted.clear();
+					pBoxNode->Values[eMemory].Raw.clear();
+					pBoxNode->Values[eMemory].SortKey.clear();
+					pBoxNode->Values[eMemory].Formatted.clear();
+					pBoxNode->Values[ePrivBytes].Raw.clear();
+					pBoxNode->Values[ePrivBytes].SortKey.clear();
+					pBoxNode->Values[ePrivBytes].Formatted.clear();
 				}
 
 				QModelIndex idx = Find(m_Root, pBoxNode);

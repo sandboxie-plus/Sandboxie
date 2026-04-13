@@ -578,7 +578,7 @@ void CSbieView::Refresh()
 	if (!Added.isEmpty()) {
 		bool bChanged = false;
 		foreach(const QVariant& ID, Added) {
-			if (ID.type() == QVariant::String) {
+			if (ID.metaType().id() == QMetaType::QString) {
 				QString id = ID.toString();
 				if (id.left(1) != "!") {
 					bChanged = true;
@@ -594,7 +594,7 @@ void CSbieView::Refresh()
 
 void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 {
-	if (ID.type() == QVariant::String)
+	if (ID.metaType().id() == QMetaType::QString)
 	{
 		QString BoxName = ID.toString();
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);

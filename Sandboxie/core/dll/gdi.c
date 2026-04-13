@@ -182,8 +182,6 @@ static CRITICAL_SECTION Gdi_CritSec;
 
 static WCHAR *Gdi_LastFontPath = NULL;
 
-static HDESK Gdi_ProcessDesktop = NULL;
-
 static const WCHAR *Gdi_SplWow64InUseEventName =
     SBIE_BOXED_ L"SplWow64InUse";
 

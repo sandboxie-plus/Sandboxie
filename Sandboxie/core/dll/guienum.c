@@ -566,6 +566,17 @@ _FX HDESK Gui_OpenDesktopW(
     void *lpszDesktop, ULONG dwFlags, BOOL fInherit,
     ACCESS_MASK dwDesiredAccess)
 {
+    if (lpszDesktop && _wcsicmp((WCHAR *)lpszDesktop, L"Default") == 0) {
+        if (Gui_ProcessDesktop && Gui_ProcessDesktop != (HDESK)-1) {
+            HANDLE hDuplicate = NULL;
+            if (DuplicateHandle(GetCurrentProcess(), Gui_ProcessDesktop,
+                                GetCurrentProcess(), &hDuplicate,
+                                0, fInherit, DUPLICATE_SAME_ACCESS)) {
+                return (HDESK)hDuplicate;
+            }
+        }
+    }
+
     SbieApi_Log(2205, L"OpenDesktop");
     return CreateEvent(NULL, FALSE, FALSE, NULL);
 }
@@ -580,6 +591,17 @@ _FX HDESK Gui_OpenDesktopA(
     void *lpszDesktop, ULONG dwFlags, BOOL fInherit,
     ACCESS_MASK dwDesiredAccess)
 {
+    if (lpszDesktop && _stricmp((char *)lpszDesktop, "Default") == 0) {
+        if (Gui_ProcessDesktop && Gui_ProcessDesktop != (HDESK)-1) {
+            HANDLE hDuplicate = NULL;
+            if (DuplicateHandle(GetCurrentProcess(), Gui_ProcessDesktop,
+                                GetCurrentProcess(), &hDuplicate,
+                                0, fInherit, DUPLICATE_SAME_ACCESS)) {
+                return (HDESK)hDuplicate;
+            }
+        }
+    }
+
     SbieApi_Log(2205, L"OpenDesktop");
     return CreateEvent(NULL, FALSE, FALSE, NULL);
 }

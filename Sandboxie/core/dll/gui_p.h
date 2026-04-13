@@ -530,6 +530,7 @@ extern ATOM Gui_DropTargetProp_Atom;
 extern ATOM Gui_WindowProcOldW_Atom;
 extern ATOM Gui_WindowProcOldA_Atom;
 
+extern HDESK Gui_ProcessDesktop;
 
 //---------------------------------------------------------------------------
 // Undo Unicode defines from windows.h

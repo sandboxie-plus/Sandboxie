@@ -521,16 +521,6 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			Changed = 2; // set change for all columns
 		}
 
-		// Disk size is now a dedicated column: trigger on-demand scan when needed,
-		// even if legacy WatchBoxSize is disabled.
-		if (IsColumnEnabled(eDiskSize)
-			&& !pBoxEx->IsSizePending()
-			&& !pBoxEx->IsEmptyCached()
-			&& pBoxEx->GetSize() == 0)
-		{
-			pBoxEx->UpdateSize(false);
-		}
-
 		for(int section = 0; section < columnCount(); section++)
 		{
 			if (!IsColumnEnabled(section))
@@ -547,7 +537,6 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				case eCPU:
 				case eMemory:
 				case ePrivBytes:		Value = pNode->Values[section].Raw; break; // managed by RefreshResourceStats()
-				case eDiskSize:			Value = pBoxEx->GetSize(); break;
 				case ePath:				Value = pBox->GetFileRoot(); break;
 			}
 
@@ -563,15 +552,6 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				{
 				//case eName:				ColValue.Formatted = Value.toString().replace("_", " "); break;
 				case eInfo:				ColValue.Formatted = Value.toULongLong() == -2 ? tr("Empty") : (Value.toULongLong() > 0 ? FormatSize(Value.toULongLong()) : ""); break;
-				case eDiskSize: {
-					quint64 sz = Value.toULongLong();
-					if (pBoxEx->IsSizePending())
-						ColValue.Formatted = tr("Pending...");
-					else
-						ColValue.Formatted = sz > 0 ? FormatSize(sz) : (pBoxEx->IsEmptyCached() ? tr("Empty") : "0 B");
-					ColValue.SortKey = sz;
-					break;
-				}
 				}
 			}
 
@@ -695,7 +675,6 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			case eCPU:
 			case eMemory:
 			case ePrivBytes:		Value = pNode->Values[section].Raw; break; // managed by RefreshResourceStats()
-			case eDiskSize:			break; // box-only column, not applicable to processes
 			//case ePath:				Value = pProcess->GetFileName(); break;
 			case ePath: {
 								QString CmdLine = pProcess->GetCommandLine(); 
@@ -860,9 +839,8 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 			//case eTimeStamp:		return tr("Start Time");
 			case eCPU:				return tr("CPU");
 			case eMemory:			return tr("Memory");
-			case ePrivBytes:		return tr("Private Bytes");
-			case eDiskSize:			return tr("Disk Size");
-			case ePath:				return tr("Path / Command Line");
+		case ePrivBytes:		return tr("Private Bytes");
+		case ePath:				return tr("Path / Command Line");
 		}
 	}
     return QVariant();

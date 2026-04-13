@@ -58,7 +58,6 @@ public:
 		eCPU,
 		eMemory,
 		ePrivBytes,
-		eDiskSize,
 		ePath,
 		eCount
 	};

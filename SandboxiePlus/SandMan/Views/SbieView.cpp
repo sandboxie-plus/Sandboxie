@@ -61,7 +61,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pSbieTree->setColumnWidth(CSbieModel::eCPU,       60);
 		m_pSbieTree->setColumnWidth(CSbieModel::eMemory,    90);
 		m_pSbieTree->setColumnWidth(CSbieModel::ePrivBytes, 90);
-		m_pSbieTree->setColumnWidth(CSbieModel::eDiskSize,  90);
 	} else
 		m_pSbieTree->restoreState(Columns);
 

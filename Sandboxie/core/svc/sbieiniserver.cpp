@@ -864,7 +864,7 @@ ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password, co
 
     buf[65] = L'\0';
     SbieApi_QueryConfAsIs(
-        NULL, L"EditPassword", 0, buf, ARRAYSIZE(buf));
+        NULL, L"EditPassword", 0, buf, sizeof(buf));
     if (! buf[0])
         return STATUS_SUCCESS;
 

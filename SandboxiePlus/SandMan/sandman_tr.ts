@@ -1505,7 +1505,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <location filename="Helpers/IniHighlighter.cpp" line="806"/>
         <location filename="Helpers/IniHighlighter.cpp" line="1808"/>
         <source>Superseded by</source>
-        <translation>Yerine geçen</translation>
+        <translation>Yerini alan</translation>
     </message>
     <message>
         <location filename="Helpers/IniHighlighter.cpp" line="1430"/>
@@ -2724,7 +2724,7 @@ Lütfen bu dosyayı içeren bir klasör seçin.</translation>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="353"/>
         <source>Start File Recovery</source>
-        <translation>Dosya Kurtarmayı Başlatın</translation>
+        <translation>Dosya Kurtarmayı Başlat</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="354"/>
@@ -8642,7 +8642,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Sandboxed window label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pencere etiketi:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="483"/>
@@ -9195,7 +9195,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4515"/>
         <source>Use heuristics to identify Electron/Chromium based processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Electron/Chromium tabanlı işlemleri belirlemek için sezgisel yöntemleri kullan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6180"/>

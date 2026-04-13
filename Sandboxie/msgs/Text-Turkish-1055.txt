@@ -338,6 +338,10 @@ SBIE2180 LowLevel.dll hatası %2
 SBIE2181 LowLevel.dll dolambaçlı yoldan SbieDll.dll'yi hedef işleme yükleyemedi.
 .
 
+2189;pop;inf;01
+SBIE2189 %2 muhtemelen Chromium tabanlı bir uygulama, ancak görüntü türü Chrome değildir; bu nedenle büyük olasılıkla çalışmayacaktır.
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2, Sandboxie altında çalışırken güncellenmemelidir.

@@ -2864,7 +2864,7 @@ Predvolený zoznam blokovaných TCP/IP portov
 .
 
 4294;txt;01
-Povoliť programom, aby sa aktualizovali zoznamy odkazov na hlavnom panely vo Windows 7
+Povoliť programom, aby sa aktualizovali zoznamy odkazov na hlavnom panely vo Windows
 .
 
 #----------------------------------------------------------------------------

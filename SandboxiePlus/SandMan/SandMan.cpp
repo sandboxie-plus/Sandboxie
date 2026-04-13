@@ -43,6 +43,7 @@
 #include "AddonManager.h"
 #include "Windows/PopUpWindow.h"
 #include "CustomStyles.h"
+#include <QScreen>
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -99,8 +100,15 @@ public:
 			else if (msg->message == WM_SHOWWINDOW && msg->wParam)
 			{
 				QWidget* pWidget = QWidget::find((WId)msg->hwnd);
-				if (theGUI && pWidget && (pWidget->windowType() | Qt::Dialog) == Qt::Dialog)
-					theGUI->UpdateTitleTheme(msg->hwnd);
+				if (theGUI && pWidget) {
+					if (theConf->GetBool("Options/CoverWindows", false) && pWidget->isWindow()) {
+						ProtectWindow((HWND)pWidget->winId(), 0x0);    // Clear
+						ProtectWindow((HWND)pWidget->winId());         // Apply protection
+					}
+
+					if (pWidget && (pWidget->windowType() | Qt::Dialog) == Qt::Dialog)
+						theGUI->UpdateTitleTheme(msg->hwnd);
+				}
 			}
 		}
 		return false;
@@ -112,6 +120,314 @@ HWND MainWndHandle = NULL;
 CSandMan* theGUI = NULL;
 
 extern QString g_PendingMessage;
+
+static int CGetTargetMonitorSetting()
+{
+	return theConf->GetInt("Options/WindowTargetMonitor", -1);
+}
+
+static int CGetNonMainTargetMonitorSetting()
+{
+	return theConf->GetInt("Options/NonMainWindowTargetMonitor", -1);
+}
+
+static int CGetMonitorFallbackSetting()
+{
+	int fallbackSetting = theConf->GetInt("Options/WindowMonitorFallback", -3);
+	if (fallbackSetting != -4 && fallbackSetting != -2 && fallbackSetting != -3 && fallbackSetting != 0)
+		fallbackSetting = -3;
+	return fallbackSetting;
+}
+
+static int CGetRecoveryTargetMonitorSetting()
+{
+	return theConf->GetInt("Options/RecoveryWindowTargetMonitor", CGetNonMainTargetMonitorSetting());
+}
+
+static int CGetNotificationTargetMonitorSetting()
+{
+	return theConf->GetInt("Options/NotificationWindowTargetMonitor", CGetNonMainTargetMonitorSetting());
+}
+
+static int CGetSupportDialogTargetMonitorSetting()
+{
+	return theConf->GetInt("Options/SupportDialogWindowTargetMonitor", CGetNonMainTargetMonitorSetting());
+}
+
+static int CGetWindowsMonitorNumber(const QString& screenName)
+{
+	int markerPos = screenName.lastIndexOf("DISPLAY", -1, Qt::CaseInsensitive);
+	if (markerPos < 0)
+		return -1;
+
+	QString tail = screenName.mid(markerPos + 7);
+	if (tail.isEmpty())
+		return -1;
+
+	int digitCount = 0;
+	while (digitCount < tail.length() && tail[digitCount].isDigit())
+		digitCount++;
+	if (digitCount == 0)
+		return -1;
+	bool ok = false;
+	int number = tail.left(digitCount).toInt(&ok);
+	return ok ? number : -1;
+}
+
+static QScreen* CGetTargetMonitorBySetting(int monitorSetting);
+
+static int CGetDisplayNumberForScreen(QScreen* pScreen)
+{
+	if (!pScreen)
+		return -1;
+
+	QRect geometry = pScreen->geometry();
+	QPoint center = geometry.center();
+	POINT point = { center.x(), center.y() };
+	HMONITOR monitor = MonitorFromPoint(point, MONITOR_DEFAULTTONEAREST);
+	if (!monitor)
+		return -1;
+
+	MONITORINFOEXW monitorInfo;
+	memset(&monitorInfo, 0, sizeof(monitorInfo));
+	monitorInfo.cbSize = sizeof(monitorInfo);
+	if (!GetMonitorInfoW(monitor, &monitorInfo))
+		return -1;
+
+	QString deviceName = QString::fromWCharArray(monitorInfo.szDevice);
+	return CGetWindowsMonitorNumber(deviceName);
+}
+
+static bool CIsMonitorAttachedToDesktop(HMONITOR monitor)
+{
+	if (!monitor)
+		return false;
+
+	MONITORINFOEXW monitorInfo;
+	memset(&monitorInfo, 0, sizeof(monitorInfo));
+	monitorInfo.cbSize = sizeof(monitorInfo);
+	if (!GetMonitorInfoW(monitor, &monitorInfo))
+		return false;
+
+	DISPLAY_DEVICEW displayDevice;
+	memset(&displayDevice, 0, sizeof(displayDevice));
+	displayDevice.cb = sizeof(displayDevice);
+	if (!EnumDisplayDevicesW(monitorInfo.szDevice, 0, &displayDevice, 0))
+		return false;
+
+	return (displayDevice.StateFlags & DISPLAY_DEVICE_ATTACHED_TO_DESKTOP) != 0;
+}
+
+static bool CIsScreenUsable(QScreen* pScreen)
+{
+	if (!pScreen)
+		return false;
+
+	QRect geometry = pScreen->geometry();
+	if (!geometry.isValid())
+		return false;
+
+	QPoint center = geometry.center();
+	POINT point = { center.x(), center.y() };
+	HMONITOR monitor = MonitorFromPoint(point, MONITOR_DEFAULTTONULL);
+	if (!monitor)
+		return false;
+
+	return CIsMonitorAttachedToDesktop(monitor);
+}
+
+static QScreen* CGetScreenFromMonitorHandle(HMONITOR monitor)
+{
+	if (!monitor)
+		return NULL;
+
+	MONITORINFOEXW monitorInfo;
+	memset(&monitorInfo, 0, sizeof(monitorInfo));
+	monitorInfo.cbSize = sizeof(monitorInfo);
+	if (!GetMonitorInfoW(monitor, &monitorInfo))
+		return NULL;
+
+	int displayNumber = CGetWindowsMonitorNumber(QString::fromWCharArray(monitorInfo.szDevice));
+	if (displayNumber > 0)
+		return CGetTargetMonitorBySetting(displayNumber);
+
+	QPoint center((monitorInfo.rcMonitor.left + monitorInfo.rcMonitor.right) / 2, (monitorInfo.rcMonitor.top + monitorInfo.rcMonitor.bottom) / 2);
+	QScreen* screen = QGuiApplication::screenAt(center);
+	if (screen)
+		return screen;
+
+	return QGuiApplication::primaryScreen();
+}
+
+static QScreen* CGetActiveScreen()
+{
+	POINT cursorPos;
+	if (GetCursorPos(&cursorPos)) {
+		HMONITOR monitor = MonitorFromPoint(cursorPos, MONITOR_DEFAULTTONEAREST);
+		QScreen* screen = CGetScreenFromMonitorHandle(monitor);
+		if (screen)
+			return screen;
+	}
+
+	HWND foregroundWindow = GetForegroundWindow();
+	if (foregroundWindow) {
+		HMONITOR monitor = MonitorFromWindow(foregroundWindow, MONITOR_DEFAULTTONULL);
+		QScreen* screen = CGetScreenFromMonitorHandle(monitor);
+		if (screen)
+			return screen;
+	}
+
+	return QGuiApplication::primaryScreen();
+}
+
+static QScreen* CGetTargetMonitorBySetting(int monitorSetting)
+{
+	if (monitorSetting < 0)
+		return NULL;
+
+	if (monitorSetting == 0)
+		return QGuiApplication::primaryScreen();
+
+	QList<QScreen*> screens = QGuiApplication::screens();
+	for (int i = 0; i < screens.count(); i++) {
+		if (CGetDisplayNumberForScreen(screens[i]) == monitorSetting)
+			return screens[i];
+	}
+
+	int legacyIndex = monitorSetting - 1;
+	if (legacyIndex >= 0 && legacyIndex < screens.count())
+		return screens[legacyIndex];
+
+	return NULL;
+}
+
+static QScreen* CGetMainWindowScreen()
+{
+	if (!theGUI)
+		return QGuiApplication::primaryScreen();
+
+	QRect frame = theGUI->frameGeometry();
+	QScreen* pScreen = QGuiApplication::screenAt(frame.center());
+	if (!pScreen)
+		pScreen = theGUI->screen();
+	if (!pScreen)
+		pScreen = QGuiApplication::primaryScreen();
+	return pScreen;
+}
+
+static QScreen* CGetConfiguredFallbackScreen(QWidget* pWidget, QScreen* pSourceScreen)
+{
+	int fallbackSetting = CGetMonitorFallbackSetting();
+	if (fallbackSetting == -4) {
+		if (pSourceScreen && CIsScreenUsable(pSourceScreen))
+			return pSourceScreen;
+		return NULL;
+	}
+
+	if (fallbackSetting == -2) {
+		if (pWidget != theGUI) {
+			QScreen* pMainScreen = CGetMainWindowScreen();
+			if (pMainScreen)
+				return pMainScreen;
+		}
+		if (pSourceScreen)
+			return pSourceScreen;
+		return CGetMainWindowScreen();
+	}
+
+	if (fallbackSetting == 0)
+		return QGuiApplication::primaryScreen();
+
+	if (fallbackSetting == -3)
+		return CGetActiveScreen();
+
+	return CGetActiveScreen();
+}
+
+static void CApplyConfiguredMonitorPlacement(QWidget* pWidget)
+{
+	if (!pWidget || !pWidget->isWindow())
+		return;
+
+	QRect frame = pWidget->frameGeometry();
+	if (!frame.isValid())
+		return;
+
+	QScreen* pSourceScreen = QGuiApplication::screenAt(frame.center());
+	if (!pSourceScreen)
+		pSourceScreen = pWidget->screen();
+	if (!pSourceScreen)
+		pSourceScreen = QGuiApplication::primaryScreen();
+	if (!pSourceScreen)
+		return;
+
+	int monitorSetting = -1;
+	if (pWidget == theGUI)
+		monitorSetting = CGetTargetMonitorSetting();
+	else if (qobject_cast<CPopUpWindow*>(pWidget))
+		monitorSetting = CGetNotificationTargetMonitorSetting();
+	else if (qobject_cast<CSupportDialog*>(pWidget))
+		monitorSetting = CGetSupportDialogTargetMonitorSetting();
+	else if (qobject_cast<CRecoveryWindow*>(pWidget) || qobject_cast<CRecoveryLogWnd*>(pWidget))
+		monitorSetting = CGetRecoveryTargetMonitorSetting();
+	else
+		monitorSetting = CGetNonMainTargetMonitorSetting();
+
+	if (monitorSetting < 0 && monitorSetting != -2 && monitorSetting != -3) {
+		QScreen* currentScreen = pSourceScreen;
+		if (currentScreen && CIsScreenUsable(currentScreen))
+			return;
+
+		QScreen* fallbackScreen = CGetConfiguredFallbackScreen(pWidget, pSourceScreen);
+		if (!fallbackScreen)
+			return;
+
+		QRect targetArea = fallbackScreen->availableGeometry();
+		int minX = targetArea.left();
+		int minY = targetArea.top();
+		int maxX = targetArea.left() + qMax(0, targetArea.width() - frame.width());
+		int maxY = targetArea.top() + qMax(0, targetArea.height() - frame.height());
+		int newX = qBound(minX, frame.left(), maxX);
+		int newY = qBound(minY, frame.top(), maxY);
+		pWidget->move(newX, newY);
+		return;
+}
+
+	QScreen* pTargetScreen = NULL;
+	if (monitorSetting == -2) {
+		if (pWidget == theGUI)
+			return;
+		pTargetScreen = CGetMainWindowScreen();
+	}
+	else if (monitorSetting == -3)
+		pTargetScreen = CGetActiveScreen();
+	else
+		pTargetScreen = CGetTargetMonitorBySetting(monitorSetting);
+
+	if (pTargetScreen && !CIsScreenUsable(pTargetScreen))
+		pTargetScreen = CGetConfiguredFallbackScreen(pWidget, pSourceScreen);
+
+	if (!pTargetScreen)
+		pTargetScreen = CGetConfiguredFallbackScreen(pWidget, pSourceScreen);
+	if (!pTargetScreen)
+		return;
+
+	QRect sourceArea = pSourceScreen->availableGeometry();
+	QRect targetArea = pTargetScreen->availableGeometry();
+
+	int relX = frame.left() - sourceArea.left();
+	int relY = frame.top() - sourceArea.top();
+
+	int minX = targetArea.left();
+	int minY = targetArea.top();
+	int maxX = targetArea.left() + qMax(0, targetArea.width() - frame.width());
+	int maxY = targetArea.top() + qMax(0, targetArea.height() - frame.height());
+
+	int newX = qBound(minX, targetArea.left() + relX, maxX);
+	int newY = qBound(minY, targetArea.top() + relY, maxY);
+
+	pWidget->move(newX, newY);
+}
 
 
 CSandMan::CSandMan(QWidget *parent)
@@ -177,6 +493,8 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_bOnTop = false;
 	m_bExit = false;
+	m_LastCheckInternetMs = 0;
+	m_bHasInternet = true;
 
 	m_ImDiskReady = true;
 
@@ -1632,6 +1950,8 @@ void CSandMan::SafeShow(QWidget* pWidget)
 		Lock = false;
 	} else
 		pWidget->show();
+
+	CApplyConfiguredMonitorPlacement(pWidget);
 	pWidget->setProperty("windowOpacity", 1.0);
 }
 
@@ -1942,8 +2262,17 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 	m_pBoxView->Refresh();
 
-	if(!IsSilentMode() && CheckInternet()) // do not check for updates when in presentation/game mode
-		m_pUpdater->Process();
+	if(!IsSilentMode()) // do not check for updates when in presentation/game mode
+	{
+		quint64 CurrentTimeMs = QDateTime::currentMSecsSinceEpoch();
+		if (CurrentTimeMs - m_LastCheckInternetMs >= 60000) // check internet every 60 seconds
+		{
+			m_LastCheckInternetMs = CurrentTimeMs;
+			m_bHasInternet = CheckInternet();
+		}
+		if (m_bHasInternet)
+			m_pUpdater->Process();
+	}
 
 	if (!m_MissingTemplates.isEmpty())
 	{
@@ -2160,6 +2489,11 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 	}
 
 	m_iDeletingContent++;
+	if (m_pTrayIcon) {
+		bool isConnected = theAPI->IsConnected();
+		m_pTrayIcon->setIcon(GetTrayIcon(isConnected));
+		m_pTrayIcon->setToolTip(GetTrayText(isConnected));
+	}
 
 	if (Mode != eForDelete) {
 
@@ -2202,7 +2536,12 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 	}
 
 finish:
-	m_iDeletingContent--;
+	m_iDeletingContent = qMax(0, m_iDeletingContent - 1);
+	if (m_pTrayIcon) {
+		bool isConnected = theAPI->IsConnected();
+		m_pTrayIcon->setIcon(GetTrayIcon(isConnected));
+		m_pTrayIcon->setToolTip(GetTrayText(isConnected));
+	}
 	return Ret;
 }
 
@@ -2717,6 +3056,7 @@ void CSandMan::UpdateState()
 	m_iIconDisabled = -1;
 	m_bIconBusy = false;
 	m_bIconSun = false;
+	m_iDeletingContent = 0;
 
 	m_pRunBoxed->setEnabled(isConnected);
 	m_pNewBox->setEnabled(isConnected);
@@ -3337,7 +3677,15 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 
 void CSandMan::OnBoxDblClick(QTreeWidgetItem* pItem)
 {
-	m_pBoxView->OnDoubleClicked(theAPI->GetBoxByName(pItem->data(0, Qt::UserRole).toString()));
+	if (!pItem || !m_pBoxView || !theAPI)
+		return;
+	QString Name = pItem->data(0, Qt::UserRole).toString();
+	if (Name.isEmpty())
+		return;
+	CSandBoxPtr pBox = theAPI->GetBoxByName(Name);
+	if (pBox.isNull())
+		return;
+	m_pBoxView->OnDoubleClicked(pBox);
 }
 
 void CSandMan::OnSandBoxAction()
@@ -3345,11 +3693,11 @@ void CSandMan::OnSandBoxAction()
 	QAction* pAction = qobject_cast<QAction*>(sender());
 
 	if (pAction == m_pNewBox)
-		GetBoxView()->AddNewBox();
+		GetBoxView()->AddNewBoxAction();
 	else if (pAction == m_pNewGroup)
-		GetBoxView()->AddNewGroup();
+		GetBoxView()->AddNewGroupAction();
 	else if (pAction == m_pImportBoxes)
-		ImportMultiBoxes(this);
+		GetBoxView()->ImportBoxesAction();
 	else if (pAction == m_pExportBoxes)
 		ExportMultiBoxes(this);
 	else if (pAction == m_pRunBoxed)

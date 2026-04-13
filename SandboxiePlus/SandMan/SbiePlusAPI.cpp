@@ -54,54 +54,6 @@ CBoxedProcessPtr CSbiePlusAPI::OnProcessBoxed(quint32 ProcessId, const QString& 
 	return pProcess;
 }
 
-std::wstring GetWindowTextTimeout(HWND hWnd, UINT timeout) 
-{
-	DWORD_PTR length = 0;
-
-    if (SendMessageTimeoutW(hWnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, timeout, &length) == 0)
-        return L""; 
-    if (length == 0)
-        return L""; 
-
-    std::vector<wchar_t> buffer(length + 1);
-    if (SendMessageTimeoutW(hWnd, WM_GETTEXT, length + 1, reinterpret_cast<LPARAM>(buffer.data()), SMTO_ABORTIFHUNG, timeout, &length) == 0)
-        return L""; 
-    return std::wstring(buffer.data(), length); 
-}
-
-BOOL CALLBACK CSbiePlusAPI__WindowEnum(HWND hwnd, LPARAM lParam)
-{
-	if (GetParent(hwnd) || GetWindow(hwnd, GW_OWNER))
-		return TRUE;
-	ULONG style = GetWindowLong(hwnd, GWL_STYLE);
-	if ((style & (WS_CAPTION | WS_SYSMENU)) != (WS_CAPTION | WS_SYSMENU))
-		return TRUE;
-	if (!IsWindowVisible(hwnd))
-		return TRUE;
-	/*
-	if ((style & WS_OVERLAPPEDWINDOW) != WS_OVERLAPPEDWINDOW &&
-		(style & WS_POPUPWINDOW)      != WS_POPUPWINDOW)
-		return TRUE;
-	*/
-
-	ULONG pid;
-	GetWindowThreadProcessId(hwnd, &pid);
-
-	QMultiMap<quint32, QString>& m_WindowMap = *((QMultiMap<quint32, QString>*)(lParam));
-
-	QString name = QString::fromStdWString(GetWindowTextTimeout(hwnd, 10));
-
-	m_WindowMap.insert(pid, name);
-
-	return TRUE;
-}
-
-void CSbiePlusAPI::UpdateWindowMap()
-{
-	m_WindowMap.clear();
-	EnumWindows(CSbiePlusAPI__WindowEnum, (LPARAM)&m_WindowMap);
-}
-
 bool CSbiePlusAPI::IsRunningAsAdmin()
 {
 	if (m_UserSid.left(9) != "S-1-5-21-")

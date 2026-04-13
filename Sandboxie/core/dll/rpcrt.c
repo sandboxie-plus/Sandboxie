@@ -914,9 +914,10 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
 RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSeq,TCHAR *NetworkAddr,TCHAR *EndPoint,TCHAR *Options,TCHAR **StringBinding) 
 {
     ULONG_PTR hSppc =  (ULONG_PTR)GetModuleHandle(L"sppc.dll");
+	ULONG_PTR hSppcs =  (ULONG_PTR)GetModuleHandle(L"sppcs.dll");
     ULONG_PTR pRetAddr = (ULONG_PTR)_ReturnAddress();
 
-    if (RpcRt_TestCallingModule(pRetAddr, hSppc))
+    if (RpcRt_TestCallingModule(pRetAddr, hSppc) || RpcRt_TestCallingModule(pRetAddr, hSppcs))
     {
         EndPoint = L"SPPCTransportEndpoint-00001";
         Scm_Start_Sppsvc();

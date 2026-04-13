@@ -495,6 +495,9 @@
     <None Include="sandman_fr.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="sandman_hi.ts">
+      <Filter>Translation Files</Filter>
+    </None>
     <None Include="sandman_pt_BR.ts">
       <Filter>Translation Files</Filter>
     </None>

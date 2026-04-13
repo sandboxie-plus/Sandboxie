@@ -5091,7 +5091,10 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
         NTSTATUS status = Ipc_GetName(DirectoryHandle, (UNICODE_STRING*)-1, &TruePath, &CopyPath, NULL);
 
         if (!NT_SUCCESS(status))
+		{
+			LeaveCriticalSection(&Ipc_Handles_CritSec);
             return status;
+		}
 
         Ipc_MergeDirectoryObject(merge, TruePath, FALSE);
 
@@ -5113,7 +5116,10 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
             entry = List_Next(entry);
     }
     if (!entry)
-        return STATUS_NO_MORE_ENTRIES;
+	{
+		LeaveCriticalSection(&Ipc_Handles_CritSec);
+		return STATUS_NO_MORE_ENTRIES;
+	}
 
     //
     // count the buffer space
@@ -5141,6 +5147,7 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 
     if (!Buffer) {
         if (ReturnLength) *ReturnLength = TotalLength;
+		LeaveCriticalSection(&Ipc_Handles_CritSec);
         return STATUS_BUFFER_TOO_SMALL;
     }
 
@@ -5192,7 +5199,12 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
     if (ReturnLength) *ReturnLength = TotalLength;
     if (Context) *Context = indexCounter;
     if (indexCounter < (ULONG)merge->objects.count)
+	{
+		LeaveCriticalSection(&Ipc_Handles_CritSec);
         return STATUS_MORE_ENTRIES;
+	}
+	
+	LeaveCriticalSection(&Ipc_Handles_CritSec);
     return STATUS_SUCCESS;
 }
 

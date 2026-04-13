@@ -212,7 +212,7 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
 {
     NTSTATUS status;
 
-    if ((SystemInformationClass == SystemFirmwareTableInformation) && SbieApi_QueryConfBool(NULL, L"HideFirmwareInfo", FALSE)) {
+    if ((SystemInformationClass == SystemFirmwareTableInformation) && Config_GetSettingsForImageName_bool(L"HideFirmwareInfo", FALSE)) {
 
         PSYSTEM_FIRMWARE_TABLE_INFORMATION firmwareTableInfo = (PSYSTEM_FIRMWARE_TABLE_INFORMATION)Buffer;
 

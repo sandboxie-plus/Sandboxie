@@ -43,6 +43,10 @@ VOID Handle_SetRelocationPath(HANDLE FileHandle, WCHAR* RelocationPath);
 
 WCHAR* Handle_GetRelocationPath(HANDLE FileHandle, ULONG ExtraLength);
 
+VOID Handle_SetKeyWow64Flags(HANDLE FileHandle, ACCESS_MASK Wow64Flags);
+
+ACCESS_MASK Handle_GetKeyWow64Flags(HANDLE FileHandle);
+
 VOID Handle_ExecuteCloseHandler(HANDLE FileHandle, BOOLEAN* DeleteOnClose);
 
 

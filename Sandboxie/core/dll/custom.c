@@ -1417,7 +1417,7 @@ static CRITICAL_SECTION Custom_NicMac_CritSec;
 
 _FX BOOLEAN Nsi_Init(HMODULE module)
 {
-    if (SbieApi_QueryConfBool(NULL, L"HideNetworkAdapterMAC", FALSE)) {
+    if (Config_GetSettingsForImageName_bool(L"HideNetworkAdapterMAC", FALSE)) {
 
         InitializeCriticalSection(&Custom_NicMac_CritSec);
 		map_init(&Custom_NicMac, Dll_Pool);
@@ -1933,7 +1933,7 @@ wchar_t* GuidToString(const GUID guid)
 
 _FX BOOLEAN  Custom_ProductID(void) 
 {
-	if (SbieApi_QueryConfBool(NULL, L"RandomRegUID", FALSE)) {
+	if (Config_GetSettingsForImageName_bool(L"RandomRegUID", FALSE)) {
 		NTSTATUS status;
 		UNICODE_STRING uni;
 		OBJECT_ATTRIBUTES objattrs;

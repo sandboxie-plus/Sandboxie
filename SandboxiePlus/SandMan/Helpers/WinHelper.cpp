@@ -13,91 +13,92 @@
 
 #include <Shlwapi.h>
 #include <Shlobj.h>
+#include <atlbase.h>    // CComPtr - ensures Release() on every exit path
 
 
 QVariantMap ResolveShortcut(const QString& LinkPath)
 {
+    // Caller must have COM initialized on this thread (e.g. via CoInitialize /
+    // CoInitializeEx).  ScanStartMenu() runs on the GUI thread which satisfies
+    // this requirement through Qt's implicit CoInitializeEx call.
     QVariantMap Link;
 
-    HRESULT hRes = E_FAIL;
-    IShellLinkW* psl = NULL;
-
-    // buffer that receives the null-terminated string
-    // for the drive and path
     WCHAR szPath[0x1000];
-    // structure that receives the information about the shortcut
-    WIN32_FIND_DATAW wfd;
 
-    // Get a pointer to the IShellLink interface
-    hRes = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (void**)&psl);
+    // CComPtr calls Release() automatically on every exit path (return, throw,
+    // scope end), which was previously missing and caused a COM handle leak:
+    // every .lnk file processed by ScanStartMenu leaked one IShellLinkW and
+    // one IPersistFile reference, retaining all handles those objects held
+    // (icon files, executables, registry keys, internal COM events, ...).
+    CComPtr<IShellLinkW>  psl;
+    CComPtr<IPersistFile> ppf;
 
-    if (SUCCEEDED(hRes))
+    HRESULT hRes = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER,
+                                    IID_IShellLink, (void**)&psl);
+    if (FAILED(hRes))
+        return Link;
+
+    hRes = psl->QueryInterface(IID_IPersistFile, (void**)&ppf);
+    if (FAILED(hRes))
+        return Link;
+
+    hRes = ppf->Load(LinkPath.toStdWString().c_str(), STGM_READ);
+    if (FAILED(hRes))
+        return Link;
+
+    // Resolve with all flags that prevent file-system searches and UI.
+    // We pass SLR_NOTRACK | SLR_NOLINKINFO as well so Shell32 skips
+    // opening the target file entirely (avoids temporary handle creation).
+    psl->Resolve(NULL, SLR_NO_UI | SLR_NOSEARCH | SLR_NOUPDATE | SLR_NOTRACK | SLR_NOLINKINFO);
+
+    // Get the path to the shortcut target
+    hRes = psl->GetPath(szPath, ARRAYSIZE(szPath), NULL, SLGP_RAWPATH);
+    if (hRes == S_OK)
     {
-        // Get a pointer to the IPersistFile interface
-        IPersistFile*  ppf     = NULL;
-        psl->QueryInterface(IID_IPersistFile, (void **) &ppf);
-
-        // Open the shortcut file and initialize it from its contents
-        hRes = ppf->Load(LinkPath.toStdWString().c_str(), STGM_READ);
+        Link["Path"] = QString::fromWCharArray(szPath);
+    }
+    else
+    {
+        PIDLIST_ABSOLUTE pidl = nullptr;
+        hRes = psl->GetIDList(&pidl);
         if (SUCCEEDED(hRes))
         {
-            hRes = psl->Resolve(NULL, SLR_NO_UI | SLR_NOSEARCH | SLR_NOUPDATE);
-            if (SUCCEEDED(hRes))
+            LPWSTR url = nullptr;
+            SHGetNameFromIDList(pidl, SIGDN_URL, &url);
+            if (url)
             {
-                // Get the path to the shortcut target
-                hRes = psl->GetPath(szPath, ARRAYSIZE(szPath), &wfd, SLGP_RAWPATH);
-                if (hRes == S_OK)
-                    Link["Path"] = QString::fromWCharArray(szPath);
+                QUrl Url = QString::fromWCharArray(url);
+                if (Url.isLocalFile())
+                    Link["Path"] = Url.toLocalFile();  // handles UNC (\\server\share) correctly
                 else
-                {
-                    PIDLIST_ABSOLUTE pidl;
-                    hRes = psl->GetIDList(&pidl);
-
-                    if (SUCCEEDED(hRes)) 
-                    {
-                        LPWSTR url = nullptr;
-                        SHGetNameFromIDList(pidl, SIGDN_URL, &url);
-                    
-                        if (url) 
-                        {
-                            QUrl Url = QString::fromWCharArray(url);
-
-                            if (Url.isLocalFile())
-                                Link["Path"] = Url.path().mid(1).replace("/", "\\");
-                            else
-                                Link["Path"] = Url.toString();
-                        
-                            CoTaskMemFree(url);
-                        }
-
-                        CoTaskMemFree(pidl);
-                    }
-                }
-
-                hRes = psl->GetArguments(szPath, ARRAYSIZE(szPath));
-                if (!FAILED(hRes))
-                    Link["Arguments"] = QString::fromWCharArray(szPath);
-
-                hRes = psl->GetWorkingDirectory(szPath, ARRAYSIZE(szPath));
-                if (!FAILED(hRes))
-				    Link["WorkingDir"] = QString::fromWCharArray(szPath);
-
-				int IconIndex;
-                hRes = psl->GetIconLocation(szPath, ARRAYSIZE(szPath), &IconIndex);
-                if (FAILED(hRes))
-                    return Link;
-				Link["IconPath"] = QString::fromWCharArray(szPath);
-				Link["IconIndex"] = IconIndex;
-
-                // Get the description of the target
-                hRes = psl->GetDescription(szPath, ARRAYSIZE(szPath));
-                if (FAILED(hRes))
-                    return Link;
-                Link["Info"] = QString::fromWCharArray(szPath);
+                    Link["Path"] = Url.toString();
+                CoTaskMemFree(url);
             }
+            CoTaskMemFree(pidl);
         }
     }
 
+    hRes = psl->GetArguments(szPath, ARRAYSIZE(szPath));
+    if (!FAILED(hRes))
+        Link["Arguments"] = QString::fromWCharArray(szPath);
+
+    hRes = psl->GetWorkingDirectory(szPath, ARRAYSIZE(szPath));
+    if (!FAILED(hRes))
+        Link["WorkingDir"] = QString::fromWCharArray(szPath);
+
+    int IconIndex = 0;
+    hRes = psl->GetIconLocation(szPath, ARRAYSIZE(szPath), &IconIndex);
+    if (!FAILED(hRes))
+    {
+        Link["IconPath"] = QString::fromWCharArray(szPath);
+        Link["IconIndex"] = IconIndex;
+    }
+
+    hRes = psl->GetDescription(szPath, ARRAYSIZE(szPath));
+    if (!FAILED(hRes))
+        Link["Info"] = QString::fromWCharArray(szPath);
+
+    // psl and ppf go out of scope here — CComPtr calls Release() automatically
     return Link;
 }
 
@@ -123,14 +124,14 @@ bool PickWindowsIcon(QWidget* pParent, QString& Path, quint32& Index)
 	return !!Ret;
 }
 
-void ProtectWindow(void* hWnd)
+void ProtectWindow(void* hWnd, unsigned long affinity)
 {
     typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
     static LPSETWINDOWDISPLAYAFFINITY pSetWindowDisplayAffinity = NULL;
     if (!pSetWindowDisplayAffinity)
         pSetWindowDisplayAffinity = (LPSETWINDOWDISPLAYAFFINITY)GetProcAddress(LoadLibraryA("user32.dll"), "SetWindowDisplayAffinity");
     if (pSetWindowDisplayAffinity)
-        pSetWindowDisplayAffinity((HWND)hWnd, 0x00000011);
+        pSetWindowDisplayAffinity((HWND)hWnd, (DWORD)affinity);
 }
 
 QString GetProductVersion(const QString &filePath) 

@@ -155,7 +155,7 @@ bool CBoxAssistant::StartEngine()
                 //connect(pDebugger, SIGNAL(detach()), this, ...);
                 m_pDebugger->resize(1024, 640);
                 m_pDebugger->restoreGeometry(theConf->GetBlob("DebuggerWindow/Window_Geometry"));
-                m_pDebugger->show();
+                CSandMan::SafeShow(m_pDebugger);
             }
             else {
                 QMessageBox::critical(this, "Sandboxie-Plus", tr("V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened."));

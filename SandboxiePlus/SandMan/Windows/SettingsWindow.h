@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QMap>
 #include "ui_SettingsWindow.h"
 #include "../../MiscHelpers/Common/SettingsWidgets.h"
 
@@ -229,6 +230,8 @@ private:
 
 	bool m_IniValidationEnabled = true;
 	bool m_AutoCompletionConsent;
+	QMap<QString, int> m_WindowMonitorRawSettings;
+	QMap<QString, int> m_WindowMonitorResolvedFallback;
 };
 
 QVariantMap GetRunEntry(const QString& sEntry);

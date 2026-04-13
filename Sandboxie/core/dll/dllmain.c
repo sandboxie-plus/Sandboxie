@@ -628,6 +628,106 @@ _FX void Dll_InitExeEntry(void)
 
 
 //---------------------------------------------------------------------------
+// Dll_TryDetectElectron
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Dll_TryDetectElectron()
+{
+    //
+    // Detect Electron/Chromium apps by checking for characteristic files.
+    // These files can be in the executable's directory or in subdirectories.
+    //
+
+    static const WCHAR* SubDirs[] = {
+        L"",
+        L"app\\",
+        L"resources\\",
+        NULL
+    };
+
+    static const WCHAR* FileNames[] = {
+        L"chrome_100_percent.pak",
+        L"chrome_200_percent.pak",
+        L"resources.pak",
+        L"chrome_elf.dll",
+        NULL
+    };
+
+    BOOLEAN result = FALSE;
+    RTL_USER_PROCESS_PARAMETERS *ProcessParams;
+    WCHAR *ImagePath;
+    WCHAR *DirEnd;
+    WCHAR *FilePath;
+    ULONG DirLen;
+    ULONG ImagePathLen;
+    UNICODE_STRING objname;
+    OBJECT_ATTRIBUTES objattrs;
+    FILE_BASIC_INFORMATION fileInfo;
+    ULONG i, j;
+
+    ProcessParams = Proc_GetRtlUserProcessParameters();
+    if (!ProcessParams)
+        return FALSE;
+
+    ImagePath = ProcessParams->ImagePathName.Buffer;
+    ImagePathLen = ProcessParams->ImagePathName.Length / sizeof(WCHAR);
+    if (!ImagePath || ImagePathLen == 0)
+        return FALSE;
+
+    //
+    // Find the last backslash to get the directory
+    // Note: ImagePath may not be null-terminated, so we search within bounds
+    //
+
+    DirEnd = NULL;
+    for (i = ImagePathLen; i > 0; i--) {
+        if (ImagePath[i - 1] == L'\\') {
+            DirEnd = &ImagePath[i - 1];
+            break;
+        }
+    }
+    if (!DirEnd)
+        return FALSE;
+
+    DirLen = (ULONG)(DirEnd - ImagePath + 1);
+
+    //
+    // Allocate buffer for NT path: "\??" (4) + dir + subdir + filename + null
+    //
+
+    FilePath = Dll_AllocTemp((4 + DirLen + 64) * sizeof(WCHAR));
+    if (!FilePath)
+        return FALSE;
+
+    wmemcpy(FilePath, L"\\??\\", 4);
+    wmemcpy(FilePath + 4, ImagePath, DirLen);
+
+    //
+    // Try each subdirectory and filename combination
+    //
+
+    for (i = 0; SubDirs[i] && !result; i++) {
+        for (j = 0; FileNames[j] && !result; j++) {
+
+            wcscpy(FilePath + 4 + DirLen, SubDirs[i]);
+            wcscat(FilePath + 4 + DirLen, FileNames[j]);
+
+            RtlInitUnicodeString(&objname, FilePath);
+            InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+            if (NT_SUCCESS(NtQueryAttributesFile(&objattrs, &fileInfo)))
+                result = TRUE;
+        }
+    }
+
+    Dll_Free(FilePath);
+
+    return result;
+}
+
+
+//---------------------------------------------------------------------------
 // Dll_GetImageType
 //---------------------------------------------------------------------------
 
@@ -725,6 +825,12 @@ _FX ULONG Dll_GetImageType(const WCHAR *ImageName)
                 ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
                 break;
             }
+        }
+    }
+
+    if (ImageType == DLL_IMAGE_UNSPECIFIED && SbieApi_QueryConfBool(NULL, L"UseElectronDetection", TRUE)) {
+        if (Dll_TryDetectElectron()) {
+			ImageType = DLL_IMAGE_GOOGLE_CHROME;
         }
     }
 

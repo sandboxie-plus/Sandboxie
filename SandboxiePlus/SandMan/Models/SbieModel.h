@@ -77,6 +77,7 @@ protected:
 			boxColor = 0; 
 			OrderNumber = 0; 
 			MountState = eNone;
+			CachedBoxIcon = QIcon();
 		}
 
 		CSandBoxPtr	pBox;
@@ -88,6 +89,7 @@ protected:
 		int			boxColor;
 		int			OrderNumber;
 		QString		BoxIcon;
+		QIcon		CachedBoxIcon;
 		enum EMountState{
 			eNone = 0,
 			eMounted,

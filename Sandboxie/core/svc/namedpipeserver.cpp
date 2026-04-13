@@ -167,6 +167,9 @@ MSG_HEADER *NamedPipeServer::OpenHandler(MSG_HEADER *msg, HANDLE idProcess)
     if (req->h.length < sizeof(NAMED_PIPE_OPEN_REQ))
         return SHORT_REPLY(STATUS_INVALID_PARAMETER);
 
+    req->name[ARRAYSIZE(req->name) - 1] = L'\0';
+    req->server[ARRAYSIZE(req->server) - 1] = L'\0';
+
     bool permitted = false;
     if (_wcsicmp(req->name, L"lsarpc")      == 0 ||
         _wcsicmp(req->name, L"srvsvc")      == 0 ||

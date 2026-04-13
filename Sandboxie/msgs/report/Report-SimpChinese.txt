@@ -2,5 +2,7 @@
 * Missing Messages in Text-SimpChinese-2052.txt
 *==========
 
-There are no missing messages.
+2189;pop;inf;01
+SBIE2189 %2 is likely a Chromium-based application, but the image type is not Chrome; it will likely fail.
+.
 

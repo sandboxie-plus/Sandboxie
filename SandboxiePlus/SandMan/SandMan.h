@@ -459,6 +459,7 @@ private:
 	QWidgetAction*		m_pTrayList;
 	QTreeWidget*		m_pTrayBoxes;
 	int					m_iTrayPos;
+
 	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
 	int					m_iIconDisabled;
@@ -475,8 +476,10 @@ private:
 	CPopUpWindow*		m_pPopUpWindow;
 
 	bool				m_StartMenuUpdatePending;
+	quint64				m_LastCheckInternetMs;
+	bool				m_bHasInternet;
 public:
-
+	QMap<QString, QPair<QString, QIcon>> m_TrayIconCache; // boxName -> (configKey, icon)
 	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;
 	QPalette			m_DefaultPalett;
@@ -539,9 +542,17 @@ class CTreeItemDelegate2 : public CTreeItemDelegate
 
 class CTrayBoxesItemDelegate : public QStyledItemDelegate
 {
+	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QSize size = QStyledItemDelegate::sizeHint(option, index);
+		size.setHeight(qMax(size.height(), 20));
+		return size;
+	}
+
 	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 	{
 		QStyleOptionViewItem opt(option);
+		opt.displayAlignment = Qt::AlignLeft | Qt::AlignVCenter;
 		if ((opt.state & QStyle::State_MouseOver) != 0)
 			opt.state |= QStyle::State_Selected;
 		else if ((opt.state & QStyle::State_HasFocus) != 0 && m_Hold)

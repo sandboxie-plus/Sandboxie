@@ -249,15 +249,23 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		QString BoxIcon = pBox->GetText("BoxIcon");
 		if (!BoxIcon.isEmpty())
 		{
-			if (pNode->BoxIcon != BoxIcon || (pNode->busyState || Busy) || pNode->boxDel != boxDel || pNode->boxNoForce != boxNoForce) 
+			if (pNode->BoxIcon != BoxIcon)
 			{
 				StrPair PathIndex = Split2(BoxIcon, ",");
 				if (!PathIndex.second.isEmpty() && !PathIndex.second.contains("."))
-					Icon = QIcon(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt()));
+					pNode->CachedBoxIcon = QIcon(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt()));
 				else
-					Icon = QIcon(QPixmap(BoxIcon));
+					pNode->CachedBoxIcon = QIcon(QPixmap(BoxIcon));
 				pNode->BoxIcon = BoxIcon;
+				Icon = pNode->CachedBoxIcon;
 			}
+
+			if (Icon.isNull() && ((pNode->busyState || Busy) || pNode->boxDel != boxDel || pNode->boxNoForce != boxNoForce || pNode->MountState != mountState))
+				Icon = pNode->CachedBoxIcon;
+
+			pNode->boxDel = boxDel;
+			pNode->boxNoForce = boxNoForce;
+			pNode->MountState = mountState;
 		}
 		else if (pNode->inUse != inUse || 
 			(pNode->busyState || Busy) || 
@@ -280,6 +288,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			else
 				Icon = theGUI->GetBoxIcon(boxType, inUse);
 			pNode->BoxIcon.clear();
+			pNode->CachedBoxIcon = QIcon();
 			pNode->MountState = mountState;
 		}
 

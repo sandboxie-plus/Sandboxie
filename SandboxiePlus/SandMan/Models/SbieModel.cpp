@@ -521,6 +521,16 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			Changed = 2; // set change for all columns
 		}
 
+		// Disk size is now a dedicated column: trigger on-demand scan when needed,
+		// even if legacy WatchBoxSize is disabled.
+		if (IsColumnEnabled(eDiskSize)
+			&& !pBoxEx->IsSizePending()
+			&& !pBoxEx->IsEmptyCached()
+			&& pBoxEx->GetSize() == 0)
+		{
+			pBoxEx->UpdateSize(false);
+		}
+
 		for(int section = 0; section < columnCount(); section++)
 		{
 			if (!IsColumnEnabled(section))
@@ -537,7 +547,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				case eCPU:
 				case eMemory:
 				case ePrivBytes:		Value = pNode->Values[section].Raw; break; // managed by RefreshResourceStats()
-				case eDiskSize:			Value = bWatchSize ? pBoxEx->GetSize() : 0; break;
+				case eDiskSize:			Value = pBoxEx->GetSize(); break;
 				case ePath:				Value = pBox->GetFileRoot(); break;
 			}
 
@@ -555,7 +565,10 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				case eInfo:				ColValue.Formatted = Value.toULongLong() == -2 ? tr("Empty") : (Value.toULongLong() > 0 ? FormatSize(Value.toULongLong()) : ""); break;
 				case eDiskSize: {
 					quint64 sz = Value.toULongLong();
-					ColValue.Formatted = sz > 0 ? FormatSize(sz) : "";
+					if (pBoxEx->IsSizePending())
+						ColValue.Formatted = tr("Pending...");
+					else
+						ColValue.Formatted = sz > 0 ? FormatSize(sz) : (pBoxEx->IsEmptyCached() ? tr("Empty") : "0 B");
 					ColValue.SortKey = sz;
 					break;
 				}

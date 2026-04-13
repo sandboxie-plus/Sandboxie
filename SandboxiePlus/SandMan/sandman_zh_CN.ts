@@ -5763,6 +5763,10 @@ Error: %1</source>
         <translation>磁盘占用</translation>
     </message>
     <message>
+        <source>Pending...</source>
+        <translation>处理中...</translation>
+    </message>
+    <message>
         <location filename="Models/SbieModel.cpp" line="622"/>
         <source>Path / Command Line</source>
         <translation>路径 / 命令行</translation>

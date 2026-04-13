@@ -5645,6 +5645,10 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>磁碟佔用</translation>
     </message>
     <message>
+        <source>Pending...</source>
+        <translation>處理中...</translation>
+    </message>
+    <message>
         <location filename="Models/SbieModel.cpp" line="622"/>
         <source>Path / Command Line</source>
         <translation>路徑 / 命令列</translation>

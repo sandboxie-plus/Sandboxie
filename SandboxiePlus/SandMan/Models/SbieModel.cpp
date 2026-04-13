@@ -8,6 +8,12 @@
 #include <psapi.h>
 #pragma comment(lib, "psapi.lib")
 
+// windows.h defines GetCommandLine as a macro (-> GetCommandLineW/A),
+// which can break CSbieProcess::GetCommandLine() member calls.
+#ifdef GetCommandLine
+#undef GetCommandLine
+#endif
+
 CSbieModel::CSbieModel(QObject *parent)
 : CTreeItemModel(parent)
 {

@@ -54,10 +54,13 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
 	if (Columns.isEmpty()) {
-		m_pSbieTree->setColumnWidth(0, 300);
-		m_pSbieTree->setColumnWidth(1, 70);
-		m_pSbieTree->setColumnWidth(2, 70);
-		m_pSbieTree->setColumnWidth(3, 70);
+		m_pSbieTree->setColumnWidth(CSbieModel::eName,      300);
+		m_pSbieTree->setColumnWidth(CSbieModel::eProcessId, 60);
+		m_pSbieTree->setColumnWidth(CSbieModel::eTitle,     70);
+		m_pSbieTree->setColumnWidth(CSbieModel::eStatus,    70);
+		m_pSbieTree->setColumnWidth(CSbieModel::eCPU,       60);
+		m_pSbieTree->setColumnWidth(CSbieModel::eMemory,    90);
+		m_pSbieTree->setColumnWidth(CSbieModel::ePrivBytes, 90);
 	} else
 		m_pSbieTree->restoreState(Columns);
 

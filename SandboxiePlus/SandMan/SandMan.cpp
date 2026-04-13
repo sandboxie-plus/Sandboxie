@@ -18,7 +18,7 @@
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/ListItemModel.h"
 #include "Views/TraceView.h"
-#include "Views/ResourceView.h"
+//#include "Views/ResourceView.h" // removed: resource stats integrated into main view columns
 #include "Windows/SelectBoxWindow.h"
 #include "../UGlobalHotkey/uglobalhotkeys.h"
 #include "Wizards/SetupWizard.h"
@@ -551,6 +551,12 @@ CSandMan::CSandMan(QWidget *parent)
 
 	CreateUI();
 	setCentralWidget(m_pMainWidget);
+
+	m_iRefreshTick = 0;
+
+	m_pSummaryInfo = new QLabel();
+	m_pSummaryInfo->setContentsMargins(4, 0, 8, 0);
+	statusBar()->addPermanentWidget(m_pSummaryInfo, 1); // stretch=1 → left-aligned summary
 
 	m_pTraceInfo = new QLabel();
 	m_pDisabledForce = new QLabel();
@@ -1497,6 +1503,12 @@ void CSandMan::CreateView(int iViewMode)
 {
 	m_pBoxView = new CSbieView();
 	connect(m_pBoxView, SIGNAL(BoxSelected()), this, SLOT(OnBoxSelected()));
+	connect(m_pBoxView->GetSbieModel(), &CSbieModel::ResourceStatsUpdated,
+		this, [this](int total, int active, int procs, quint64 mem) {
+		if (m_pSummaryInfo)
+			m_pSummaryInfo->setText(tr("Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4")
+				.arg(total).arg(active).arg(procs).arg(FormatSize(mem)));
+	});
 	m_pFileView = new CFileView();
 
 	if (iViewMode != 1) {
@@ -1535,7 +1547,6 @@ void CSandMan::CreateView(int iViewMode)
 
 		m_pMessageLog = NULL;
 		m_pTraceView = NULL;
-		m_pResourceView = NULL;
 		m_pRecoveryLog = NULL;
 
 		return;
@@ -1620,9 +1631,6 @@ void CSandMan::CreateView(int iViewMode)
 		m_pLogTabs->addTab(m_pRecoveryLog, tr("Recovery Log"));
 		//
 
-		// Resource Monitor
-		m_pResourceView = new CResourceView(this);
-		m_pLogTabs->addTab(m_pResourceView, tr("Resource Monitor"));
 		//
 	}
 	else {
@@ -1632,7 +1640,6 @@ void CSandMan::CreateView(int iViewMode)
 
 		m_pMessageLog = NULL;
 		m_pTraceView = NULL;
-		m_pResourceView = NULL;
 		m_pRecoveryLog = NULL;
 	}
 }
@@ -2181,6 +2188,10 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
 		UpdateProcesses();
+
+		// Refresh CPU/memory columns in the main view every 2 seconds
+		if (m_pBoxView && (++m_iRefreshTick % 2 == 0))
+			m_pBoxView->GetSbieModel()->RefreshResourceStats();
 
 		bForceProcessDisabled = theAPI->AreForceProcessDisabled();
 		m_pDisableForce->setChecked(bForceProcessDisabled);

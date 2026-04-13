@@ -44,6 +44,7 @@ public:
 	virtual void				SaveState();
 
 	virtual QTreeViewEx*		GetTree() { return m_pSbieTree; }
+	CSbieModel*					GetSbieModel() { return m_pSbieModel; }
 
 	virtual QList<CSandBoxPtr>	GetSelectedBoxes();
 	virtual QList<CBoxedProcessPtr>	GetSelectedProcesses();

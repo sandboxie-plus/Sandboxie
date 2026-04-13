@@ -20,7 +20,6 @@ class CFileView;
 class CBoxBorder;
 class CSbieTemplatesEx;
 class CTraceView;
-class CResourceView;
 class CScriptManager;
 class CAddonManager;
 
@@ -360,7 +359,6 @@ private:
 	QTabWidget*			m_pLogTabs;
 	CPanelWidgetEx*		m_pMessageLog;
 	CTraceView*			m_pTraceView;
-	CResourceView*		m_pResourceView;
 	CPanelWidgetEx*		m_pRecoveryLog;
 	class CRecoveryLogWnd* m_pRecoveryLogWnd;
 
@@ -451,6 +449,8 @@ private:
 	QLabel*				m_pDisabledRecovery;
 	QLabel*				m_pDisabledMessages;
 	QLabel*				m_pRamDiskInfo;
+	QLabel*				m_pSummaryInfo;
+	int					m_iRefreshTick;
 
 	// for old menu
 	QMenu*				m_pSandbox;

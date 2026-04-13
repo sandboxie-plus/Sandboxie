@@ -338,6 +338,10 @@ SBIE2180 LowLevel.dll Fehler %2
 SBIE2181 Die LowLevel.dll Umleitung konnte SbieDll.dll nicht in den Zielprozess laden.
 .
 
+2189;pop;inf;01
+SBIE2189 %2 ist wahrscheinlich eine auf Chromium basierende Anwendung, aber der Image-Typ ist nicht Chrome. Das Ausführen der Anwendung wird wahrscheinlich scheitern.
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2 sollte nicht aktualisiert werden, wenn es mit Sandboxie ausgeführt wird.

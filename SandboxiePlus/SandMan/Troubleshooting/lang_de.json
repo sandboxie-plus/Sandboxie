@@ -85,6 +85,12 @@
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "Die DACLs wurden angepasst. Bitte versuchen Sie, Ihre Anwendung erneut auszuführen und geben Sie an, ob das Problem behoben wurde.",
 "DACLs fix did not resolve the issue": "Reparatur der DACLs hat das Problem nicht behoben",
 
+"SBIE2189: Application is likely chromium based": "SBIE2189: Die Anwendung basiert wahrscheinlich auf Chromium",
+"Application is likely chromium based but its image type is not set to chrome": "Die Anwendung basiert wahrscheinlich auf Chromium, aber ihr Image-Typ ist nicht auf Chrome gesetzt",
+"The Process \"%1\" is likely chromium based but its image type is not set to chrome, it is likely to fail. Do you want to set its ImageType setting to chrome for this box?": "Der Prozess \"%1\" basiert wahrscheinlich auf Chromium, aber sein Image-Typ ist nicht auf Chrome gesetzt. Das Ausführen des Prozesses wird wahrscheinlich scheitern. Möchten Sie für dieses Box seinen Image-Typ auf Chrome setzen?",
+"Yes, add \"%1\" to Sandboxie.ini": "Ja, füge \"%1\" der Sandboxie.ini hinzu",
+"No, report application to sbie devs": "Nein, melde die Anwendung den Sandboxie-Entwicklern",
+
 "SBIE2204: Cannot start a specific sandboxed service": "SBIE2204: Kann einen bestimmten sandgeboxten Dienst nicht starten",
 "Sandboxie failed to start a service in the sandbox": "Sandboxie konnte einen Dienst in der Sandbox nicht starten",
 "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Die Nachricht zeigt an, dass Sandboxie nicht in der Lage war, eines der Hilfsprogramme SandboxieRpcSs oder SandboxieDcomLaunch zu starten. Der in der Nachricht angegebene Name kann rpcss oder dcomlaunch sein.\n\nAuf der nächsten Seite können Sie einen Problembericht einreichen, um uns bei der Analyse des Problems zu helfen.",

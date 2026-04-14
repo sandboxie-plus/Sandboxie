@@ -1829,6 +1829,39 @@
                  </property>
                 </widget>
                </item>
+               <item row="8" column="1" colspan="2">
+                <widget class="QLabel" name="label_cpu_limit">
+                 <property name="text">
+                  <string>Total CPU Rate Limit (%):</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>txtCpuRateLimit</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="3">
+                <widget class="QLineEdit" name="txtCpuRateLimit">
+                 <property name="maximumSize">
+                  <size>
+                   <width>125</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Leave it blank to disable the setting (1-100)</string>
+                 </property>
+                 <property name="placeholderText">
+                  <string>unlimited</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="5">
+                <widget class="QLabel" name="lblCpuRateLimit">
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+               </item>
                <item row="2" column="2" colspan="4">
                 <widget class="QCheckBox" name="chkNestedJobs">
                  <property name="text">

@@ -3717,6 +3717,105 @@ Full path: %4</source>
     </message>
 </context>
 <context>
+    <name>CResourceView</name>
+    <message>
+        <source>Refresh</source>
+        <translation>刷新</translation>
+    </message>
+    <message>
+        <source>Refresh resource data now</source>
+        <translation>立即刷新资源数据</translation>
+    </message>
+    <message>
+        <source>Terminate Process</source>
+        <translation>终止进程</translation>
+    </message>
+    <message>
+        <source>Terminate the selected process</source>
+        <translation>终止选中的进程</translation>
+    </message>
+    <message>
+        <source>Terminate All in Box</source>
+        <translation>终止沙箱中全部进程</translation>
+    </message>
+    <message>
+        <source>Terminate all processes in the selected sandbox</source>
+        <translation>终止选中沙箱中的所有进程</translation>
+    </message>
+    <message>
+        <source>Expand All</source>
+        <translation>全部展开</translation>
+    </message>
+    <message>
+        <source>Collapse All</source>
+        <translation>全部折叠</translation>
+    </message>
+    <message>
+        <source>Filter:</source>
+        <translation>筛选:</translation>
+    </message>
+    <message>
+        <source>Search sandbox or process...</source>
+        <translation>搜索沙箱或进程...</translation>
+    </message>
+    <message>
+        <source>Sandbox / Process</source>
+        <translation>沙箱 / 进程</translation>
+    </message>
+    <message>
+        <source>PID</source>
+        <translation>进程 ID</translation>
+    </message>
+    <message>
+        <source>CPU</source>
+        <translation>CPU</translation>
+    </message>
+    <message>
+        <source>Working Set</source>
+        <translation>工作集</translation>
+    </message>
+    <message>
+        <source>Private Bytes</source>
+        <translation>私有字节</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>状态</translation>
+    </message>
+    <message>
+        <source>Active</source>
+        <translation>活跃</translation>
+    </message>
+    <message>
+        <source>Inactive</source>
+        <translation>空闲</translation>
+    </message>
+    <message>
+        <source>Empty</source>
+        <translation>空</translation>
+    </message>
+    <message>
+        <source>Running</source>
+        <translation>运行中</translation>
+    </message>
+    <message>
+        <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Total Memory: %4</source>
+        <translation>沙箱: %1 (%2 活跃)  |  进程: %3  |  总内存: %4</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to terminate %1 process(es)?</source>
+        <translation>确定要终止 %1 个进程吗？</translation>
+    </message>
+    <message>
+        <source>Terminate Sandbox</source>
+        <translation>终止沙箱</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to terminate all processes in %1 sandbox(es)?</source>
+        <translation>确定要终止 %1 个沙箱中的所有进程吗？</translation>
+    </message>
+</context>
+<context>
     <name>CRenameSandboxDialog</name>
     <message>
         <location filename="Windows/RenameSandboxDialog.cpp" line="17"/>
@@ -4024,6 +4123,11 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="2224"/>
         <source>No Force Process</source>
         <translation>没有必沙程序</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1509"/>
+        <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
+        <translation>沙箱: %1（%2 活跃）  |  进程: %3  |  内存: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4775"/>
@@ -4517,6 +4621,11 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="1618"/>
         <source>Recovery Log</source>
         <translation>恢复日志</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1625"/>
+        <source>Resource Monitor</source>
+        <translation>资源监控</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1413"/>
@@ -5635,6 +5744,21 @@ Error: %1</source>
         <translation>信息</translation>
     </message>
     <message>
+        <location filename="Models/SbieModel.cpp" line="815"/>
+        <source>CPU</source>
+        <translation>CPU</translation>
+    </message>
+    <message>
+        <location filename="Models/SbieModel.cpp" line="816"/>
+        <source>Memory</source>
+        <translation>内存</translation>
+    </message>
+    <message>
+        <location filename="Models/SbieModel.cpp" line="817"/>
+        <source>Private Bytes</source>
+        <translation>私有字节</translation>
+    </message>
+    <message>
         <location filename="Models/SbieModel.cpp" line="622"/>
         <source>Path / Command Line</source>
         <translation>路径 / 命令行</translation>
@@ -6146,6 +6270,30 @@ Error: %1</source>
     </source>
         <translation>选项:
     </translation>
+    </message>
+    <message>
+        <source>    CPU: %1  |  Memory: %2  |  Private Bytes: %3
+</source>
+        <translation>    CPU: %1  |  内存: %2  |  私有字节: %3
+</translation>
+    </message>
+    <message>
+        <source>    Sandbox: %1
+</source>
+        <translation>    沙箱: %1
+</translation>
+    </message>
+    <message>
+        <source>    Image: %1
+</source>
+        <translation>    映像: %1
+</translation>
+    </message>
+    <message>
+        <source>    Start Time: %1
+</source>
+        <translation>    启动时间: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="910"/>

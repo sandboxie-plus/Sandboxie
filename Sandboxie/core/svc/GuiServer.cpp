@@ -940,6 +940,23 @@ bool GuiServer::QueueCallbackSlave2(void)
 // GetJobObjectForAssign
 //---------------------------------------------------------------------------
 
+#ifndef JOB_OBJECT_CPU_RATE_CONTROL_ENABLE
+#define JOB_OBJECT_CPU_RATE_CONTROL_ENABLE 0x1
+#define JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP 0x4
+#define JobObjectCpuRateControlInformation (JOBOBJECTINFOCLASS)15
+
+typedef struct _JOBOBJECT_CPU_RATE_CONTROL_INFORMATION {
+    ULONG ControlFlags;
+    union {
+        ULONG CpuRate;
+        ULONG Weight;
+        struct {
+            USHORT MinRate;
+            USHORT MaxRate;
+        } DUMMYSTRUCTNAME;
+    } DUMMYUNIONNAME;
+} JOBOBJECT_CPU_RATE_CONTROL_INFORMATION;
+#endif
 
 HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 {
@@ -1121,6 +1138,16 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 						jobELInfo.BasicLimitInformation.LimitFlags |= JOB_OBJECT_LIMIT_PROCESS_MEMORY;
 					}
 					ok = SetInformationJobObject(hJobObject, JobObjectExtendedLimitInformation, &jobELInfo, sizeof(jobELInfo));
+                }
+
+                if (ok) {
+                    ULONG CpuRateLimit = SbieApi_QueryConfNumber(boxname, L"CpuRateLimit", 0);
+                    if (CpuRateLimit > 0 && CpuRateLimit <= 100) {
+                        JOBOBJECT_CPU_RATE_CONTROL_INFORMATION cpuRateInfo = {0};
+                        cpuRateInfo.ControlFlags = JOB_OBJECT_CPU_RATE_CONTROL_ENABLE | JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP;
+                        cpuRateInfo.CpuRate = CpuRateLimit * 100; // 1% = 100
+                        SetInformationJobObject(hJobObject, JobObjectCpuRateControlInformation, &cpuRateInfo, sizeof(cpuRateInfo));
+                    }
                 }
 
                 if (! ok) {

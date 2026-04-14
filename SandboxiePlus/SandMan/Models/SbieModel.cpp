@@ -4,6 +4,16 @@
 #include "../SandMan.h"
 #include "../Helpers/WinHelper.h"
 
+#include <windows.h>
+#include <psapi.h>
+#pragma comment(lib, "psapi.lib")
+
+// windows.h defines GetCommandLine as a macro (-> GetCommandLineW/A),
+// which can break CSbieProcess::GetCommandLine() member calls.
+#ifdef GetCommandLine
+#undef GetCommandLine
+#endif
+
 CSbieModel::CSbieModel(QObject *parent)
 : CTreeItemModel(parent)
 {
@@ -23,6 +33,189 @@ CSbieModel::~CSbieModel()
 {
 	FreeNode(m_Root);
 	m_Root = NULL;
+}
+
+double CSbieModel::CalcCpuUsage(quint32 pid, quint64 kernelTime, quint64 userTime)
+{
+	quint64 totalTime = kernelTime + userTime;
+	quint64 now = GetTickCount64() * 10000ULL; // ms → 100-ns intervals
+
+	auto it = m_LastCpuTimes.find(pid);
+	if (it == m_LastCpuTimes.end()) {
+		m_LastCpuTimes[pid] = qMakePair(totalTime, now);
+		return 0.0;
+	}
+
+	quint64 prevTotal     = it->first;
+	quint64 prevTimestamp = it->second;
+	quint64 elapsedTime   = now - prevTimestamp;
+
+	if (elapsedTime == 0)
+		return 0.0;
+
+	static int nProcessors = 0;
+	if (nProcessors == 0) {
+		SYSTEM_INFO si;
+		GetSystemInfo(&si);
+		nProcessors = (si.dwNumberOfProcessors > 0) ? (int)si.dwNumberOfProcessors : 1;
+	}
+
+	quint64 cpuDelta = totalTime - prevTotal;
+	double usage = (double)cpuDelta / (double)elapsedTime * 100.0 / nProcessors;
+	usage = qBound(0.0, usage, 100.0);
+
+	m_LastCpuTimes[pid] = qMakePair(totalTime, now);
+	return usage;
+}
+
+void CSbieModel::RefreshResourceStats()
+{
+	if (!theAPI || !theAPI->IsConnected())
+		return;
+
+	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+	QSet<quint32> activePids;
+
+	int totalBoxes      = 0;
+	int totalActive     = 0;
+	int totalProcesses  = 0;
+	quint64 grandTotalWS = 0;
+
+	for (auto I = Boxes.constBegin(); I != Boxes.constEnd(); ++I)
+	{
+		CSandBoxPtr pBox = I.value();
+		if (!pBox->IsEnabled())
+			continue;
+		totalBoxes++;
+
+		// Locate box node
+		SSandBoxNode* pBoxNode = nullptr;
+		auto boxIt = m_Map.find(pBox->GetName());
+		if (boxIt != m_Map.end())
+			pBoxNode = static_cast<SSandBoxNode*>(boxIt.value());
+
+		QMap<quint32, CBoxedProcessPtr> procs = pBox->GetProcessList();
+		quint64 boxWS  = 0, boxPB  = 0;
+		double  boxCpu = 0.0;
+		int     activeProcs = 0;
+
+		for (auto J = procs.constBegin(); J != procs.constEnd(); ++J)
+		{
+			CBoxedProcessPtr pProcess = J.value();
+			if (pProcess->IsTerminated())
+				continue;
+
+			quint32 pid = pProcess->GetProcessId();
+			activePids.insert(pid);
+			activeProcs++;
+
+			quint64 ws = 0, pb = 0;
+			double  cpu = 0.0;
+
+			HANDLE hProc = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ, FALSE, pid);
+			if (hProc) {
+				PROCESS_MEMORY_COUNTERS_EX pmc = {};
+				pmc.cb = sizeof(pmc);
+				if (GetProcessMemoryInfo(hProc, (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc))) {
+					ws = pmc.WorkingSetSize;
+					pb = pmc.PrivateUsage;
+				}
+				FILETIME ftCreation, ftExit, ftKernel, ftUser;
+				if (GetProcessTimes(hProc, &ftCreation, &ftExit, &ftKernel, &ftUser)) {
+					quint64 kernelTime = ((quint64)ftKernel.dwHighDateTime << 32) | ftKernel.dwLowDateTime;
+					quint64 userTime   = ((quint64)ftUser.dwHighDateTime  << 32) | ftUser.dwLowDateTime;
+					cpu = CalcCpuUsage(pid, kernelTime, userTime);
+				}
+				CloseHandle(hProc);
+			}
+
+			boxWS  += ws;
+			boxPB  += pb;
+			boxCpu += cpu;
+
+			// Update process node
+			auto procIt = m_Map.find(pid);
+			if (procIt != m_Map.end()) {
+				SSandBoxNode* pProcNode = static_cast<SSandBoxNode*>(procIt.value());
+				bool changed = (pProcNode->WorkingSetSize != ws
+					|| pProcNode->PrivateBytes != pb
+					|| qAbs(pProcNode->CpuUsage - cpu) > 0.05);
+				if (changed) {
+					pProcNode->WorkingSetSize = ws;
+					pProcNode->PrivateBytes   = pb;
+					pProcNode->CpuUsage       = cpu;
+
+					pProcNode->Values[eCPU].Raw       = cpu;
+					pProcNode->Values[eCPU].SortKey   = cpu;
+					pProcNode->Values[eCPU].Formatted = QString("%1%").arg(cpu, 0, 'f', 1);
+					pProcNode->Values[eMemory].Raw       = (quint64)ws;
+					pProcNode->Values[eMemory].SortKey   = (quint64)ws;
+					pProcNode->Values[eMemory].Formatted = FormatSize(ws);
+					pProcNode->Values[ePrivBytes].Raw       = (quint64)pb;
+					pProcNode->Values[ePrivBytes].SortKey   = (quint64)pb;
+					pProcNode->Values[ePrivBytes].Formatted = FormatSize(pb);
+
+					QModelIndex idx = Find(m_Root, pProcNode);
+					if (idx.isValid())
+						emit dataChanged(createIndex(idx.row(), eCPU, pProcNode),
+						                 createIndex(idx.row(), ePrivBytes, pProcNode));
+				}
+			}
+		}
+
+		// Update box-level aggregate
+		if (pBoxNode) {
+			bool changed = (pBoxNode->WorkingSetSize != boxWS
+				|| pBoxNode->PrivateBytes != boxPB
+				|| qAbs(pBoxNode->CpuUsage - boxCpu) > 0.05);
+			if (changed) {
+				pBoxNode->WorkingSetSize = boxWS;
+				pBoxNode->PrivateBytes   = boxPB;
+				pBoxNode->CpuUsage       = boxCpu;
+
+				if (activeProcs > 0) {
+					pBoxNode->Values[eCPU].Raw       = boxCpu;
+					pBoxNode->Values[eCPU].SortKey   = boxCpu;
+					pBoxNode->Values[eCPU].Formatted = QString("%1%").arg(boxCpu, 0, 'f', 1);
+					pBoxNode->Values[eMemory].Raw       = (quint64)boxWS;
+					pBoxNode->Values[eMemory].SortKey   = (quint64)boxWS;
+					pBoxNode->Values[eMemory].Formatted = FormatSize(boxWS);
+					pBoxNode->Values[ePrivBytes].Raw       = (quint64)boxPB;
+					pBoxNode->Values[ePrivBytes].SortKey   = (quint64)boxPB;
+					pBoxNode->Values[ePrivBytes].Formatted = FormatSize(boxPB);
+				} else {
+					pBoxNode->Values[eCPU].Raw.clear();
+					pBoxNode->Values[eCPU].SortKey.clear();
+					pBoxNode->Values[eCPU].Formatted.clear();
+					pBoxNode->Values[eMemory].Raw.clear();
+					pBoxNode->Values[eMemory].SortKey.clear();
+					pBoxNode->Values[eMemory].Formatted.clear();
+					pBoxNode->Values[ePrivBytes].Raw.clear();
+					pBoxNode->Values[ePrivBytes].SortKey.clear();
+					pBoxNode->Values[ePrivBytes].Formatted.clear();
+				}
+
+				QModelIndex idx = Find(m_Root, pBoxNode);
+				if (idx.isValid())
+					emit dataChanged(createIndex(idx.row(), eCPU, pBoxNode),
+					                 createIndex(idx.row(), ePrivBytes, pBoxNode));
+			}
+		}
+
+		if (activeProcs > 0) totalActive++;
+		totalProcesses += activeProcs;
+		grandTotalWS   += boxWS;
+	}
+
+	// Remove stale CPU entries for terminated processes
+	for (auto it = m_LastCpuTimes.begin(); it != m_LastCpuTimes.end(); ) {
+		if (!activePids.contains(it.key()))
+			it = m_LastCpuTimes.erase(it);
+		else
+			++it;
+	}
+
+	emit ResourceStatsUpdated(totalBoxes, totalActive, totalProcesses, grandTotalWS);
 }
 
 QList<QVariant> CSbieModel::MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList)
@@ -341,6 +534,9 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				case eStatus:			Value = pBox.objectCast<CSandBoxPlus>()->GetStatusStr(); break;
 				case eTitle:			break;
 				case eInfo:				Value = pBox.objectCast<CSandBoxPlus>()->IsEmptyCached() ? -2 : (bWatchSize ? pBox.objectCast<CSandBoxPlus>()->GetSize() : 0); break;
+				case eCPU:
+				case eMemory:
+				case ePrivBytes:		Value = pNode->Values[section].Raw; break; // managed by RefreshResourceStats()
 				case ePath:				Value = pBox->GetFileRoot(); break;
 			}
 
@@ -476,12 +672,15 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			case eTitle:			Value = theAPI->GetProcessTitle(pProcess->GetProcessId()); break;
 			//case eLogCount:			break; // todo Value = pProcess->GetResourceLog().count(); break;
 			case eInfo:				Value = pProcess->GetTimeStamp(); break;
+			case eCPU:
+			case eMemory:
+			case ePrivBytes:		Value = pNode->Values[section].Raw; break; // managed by RefreshResourceStats()
 			//case ePath:				Value = pProcess->GetFileName(); break;
 			case ePath: {
-									QString CmdLine = pProcess->GetCommandLine(); 
-									Value = CmdLine.isEmpty() ? pProcess->GetFileName() : CmdLine;
-									break;
-						}
+								QString CmdLine = pProcess->GetCommandLine(); 
+								Value = CmdLine.isEmpty() ? pProcess->GetFileName() : CmdLine;
+								break;
+					}
 			}
 
 			SSandBoxNode::SValue& ColValue = pNode->Values[section];
@@ -522,6 +721,25 @@ QVariant CSbieModel::NodeData(STreeNode* pNode, int role, int section) const
 	if (section == 0 && role == Qt::InitialSortOrderRole) {
 		return ((SSandBoxNode*)pNode)->OrderNumber;
 	}
+
+	SSandBoxNode* pSandNode = static_cast<SSandBoxNode*>(pNode);
+
+	if (section == eCPU && role == Qt::ForegroundRole) {
+		double cpu = pSandNode->CpuUsage;
+		if (cpu > 50.0)
+			return QBrush(QColor(220, 50, 50));
+		if (cpu > 20.0)
+			return QBrush(QColor(200, 140, 0));
+	}
+
+	if (section == eCPU && role == Qt::FontRole) {
+		if (pSandNode->CpuUsage > 50.0) {
+			QFont fnt;
+			fnt.setBold(true);
+			return fnt;
+		}
+	}
+
 	return CTreeItemModel::NodeData(pNode, role, section);
 }
 
@@ -619,7 +837,10 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 			//case eSize:				return tr("Size");
 			//case eLogCount:			return tr("Log Count");
 			//case eTimeStamp:		return tr("Start Time");
-			case ePath:				return tr("Path / Command Line");
+			case eCPU:				return tr("CPU");
+			case eMemory:			return tr("Memory");
+		case ePrivBytes:		return tr("Private Bytes");
+		case ePath:				return tr("Path / Command Line");
 		}
 	}
     return QVariant();

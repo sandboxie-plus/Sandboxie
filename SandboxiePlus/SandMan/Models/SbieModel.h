@@ -55,13 +55,19 @@ public:
 		//eSize,
 		//eLogCount,
 		//eTimeStamp,
+		eCPU,
+		eMemory,
+		ePrivBytes,
 		ePath,
 		eCount
 	};
 
+	void			RefreshResourceStats();
+
 signals:
 	void			MoveBox(const QString& Name, const QString& To, int row);
 	void			MoveGroup(const QString& Name, const QString& To, int row);
+	void			ResourceStatsUpdated(int totalBoxes, int activeBoxes, int processes, quint64 totalMemory);
 
 protected:
 	bool			Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>& Added);
@@ -78,6 +84,9 @@ protected:
 			OrderNumber = 0; 
 			MountState = eNone;
 			CachedBoxIcon = QIcon();
+			WorkingSetSize = 0;
+			PrivateBytes = 0;
+			CpuUsage = 0.0;
 		}
 
 		CSandBoxPtr	pBox;
@@ -90,6 +99,12 @@ protected:
 		int			OrderNumber;
 		QString		BoxIcon;
 		QIcon		CachedBoxIcon;
+
+		// Resource stats (per-process or box-aggregate), updated by RefreshResourceStats()
+		quint64		WorkingSetSize;
+		quint64		PrivateBytes;
+		double		CpuUsage;
+
 		enum EMountState{
 			eNone = 0,
 			eMounted,
@@ -115,6 +130,9 @@ protected:
 	//virtual QVariant		GetDefaultIcon() const;
 
 private:
+
+	double								CalcCpuUsage(quint32 pid, quint64 kernelTime, quint64 userTime);
+	QMap<quint32, QPair<quint64,quint64>> m_LastCpuTimes; // pid -> (totalCpuTime_100ns, timestamp_100ns)
 
 	bool								m_bTree;
 	bool m_LargeIcons;

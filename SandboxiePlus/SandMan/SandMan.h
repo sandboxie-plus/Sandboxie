@@ -449,6 +449,8 @@ private:
 	QLabel*				m_pDisabledRecovery;
 	QLabel*				m_pDisabledMessages;
 	QLabel*				m_pRamDiskInfo;
+	QLabel*				m_pSummaryInfo;
+	int					m_iRefreshTick;
 
 	// for old menu
 	QMenu*				m_pSandbox;

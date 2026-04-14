@@ -54,14 +54,24 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
 	if (Columns.isEmpty()) {
-		m_pSbieTree->setColumnWidth(0, 300);
-		m_pSbieTree->setColumnWidth(1, 70);
-		m_pSbieTree->setColumnWidth(2, 70);
-		m_pSbieTree->setColumnWidth(3, 70);
+		m_pSbieTree->setColumnWidth(CSbieModel::eName,      300);
+		m_pSbieTree->setColumnWidth(CSbieModel::eProcessId, 60);
+		m_pSbieTree->setColumnWidth(CSbieModel::eTitle,     70);
+		m_pSbieTree->setColumnWidth(CSbieModel::eStatus,    70);
+		m_pSbieTree->setColumnWidth(CSbieModel::eCPU,       60);
+		m_pSbieTree->setColumnWidth(CSbieModel::eMemory,    90);
+		m_pSbieTree->setColumnWidth(CSbieModel::ePrivBytes, 90);
 	} else
 		m_pSbieTree->restoreState(Columns);
 
 	m_pSbieTree->setModel(m_pSortProxy);
+
+	bool bShowResColumns = theConf->GetBool("Options/ShowResourceColumns", true);
+	if (!bShowResColumns) {
+		m_pSbieTree->SetColumnHidden(CSbieModel::eCPU,       true);
+		m_pSbieTree->SetColumnHidden(CSbieModel::eMemory,    true);
+		m_pSbieTree->SetColumnHidden(CSbieModel::ePrivBytes, true);
+	}
 
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 	int iLargeIcons = theConf->GetInt("Options/LargeIcons", 2);
@@ -575,7 +585,7 @@ void CSbieView::Refresh()
 	if (!Added.isEmpty()) {
 		bool bChanged = false;
 		foreach(const QVariant& ID, Added) {
-			if (ID.type() == QVariant::String) {
+			if (ID.metaType().id() == QMetaType::QString) {
 				QString id = ID.toString();
 				if (id.left(1) != "!") {
 					bChanged = true;
@@ -591,7 +601,7 @@ void CSbieView::Refresh()
 
 void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 {
-	if (ID.type() == QVariant::String)
+	if (ID.metaType().id() == QMetaType::QString)
 	{
 		QString BoxName = ID.toString();
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
@@ -613,7 +623,27 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 	}
 	else if (quint32 ProcessId = ID.toUInt())
 	{
-		// todo proc info
+		CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
+		if (pProcess.isNull())
+			return;
+
+		ToolTip = QString("%1 (PID: %2)\n").arg(pProcess->GetProcessName()).arg(ProcessId);
+
+		QModelIndex srcIdx = m_pSbieModel->FindIndex(ProcessId);
+		if (srcIdx.isValid()) {
+			QString cpuStr  = m_pSbieModel->data(m_pSbieModel->index(srcIdx.row(), CSbieModel::eCPU, srcIdx.parent()), Qt::DisplayRole).toString();
+			QString memStr  = m_pSbieModel->data(m_pSbieModel->index(srcIdx.row(), CSbieModel::eMemory, srcIdx.parent()), Qt::DisplayRole).toString();
+			QString privStr = m_pSbieModel->data(m_pSbieModel->index(srcIdx.row(), CSbieModel::ePrivBytes, srcIdx.parent()), Qt::DisplayRole).toString();
+			if (!cpuStr.isEmpty() || !memStr.isEmpty())
+				ToolTip += tr("    CPU: %1  |  Memory: %2  |  Private Bytes: %3\n").arg(cpuStr, memStr, privStr);
+		}
+
+		ToolTip += tr("    Sandbox: %1\n").arg(pProcess->GetBoxName());
+		if (!pProcess->GetFileName().isEmpty())
+			ToolTip += tr("    Image: %1\n").arg(pProcess->GetFileName());
+		QDateTime startTime = pProcess->GetTimeStamp();
+		if (startTime.isValid())
+			ToolTip += tr("    Start Time: %1\n").arg(startTime.toString("yyyy-MM-dd hh:mm:ss"));
 	}
 }
 

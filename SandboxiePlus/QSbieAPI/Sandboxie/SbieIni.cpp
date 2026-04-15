@@ -359,7 +359,7 @@ SB_STATUS CSbieIni::RenameSection(const QString& NewName, bool deleteOld) // Not
 
 do_write:
 	// Write the entire raw section to preserve comments and order
-	Status = SbieIniSet(NewName, "", RawSection, eIniInsert, true);
+	Status = SbieIniSet(NewName, "", RawSection, eIniUpdate, true);
 	if (Status.IsError())
 		return Status;
 

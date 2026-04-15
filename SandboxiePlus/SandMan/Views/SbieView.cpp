@@ -1752,6 +1752,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				RenameItem(oldName, newName);
 				if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(oldName, Qt::CaseInsensitive) == 0)
 					theAPI->GetGlobalSettings()->SetText("DefaultBox", newName);
+				Refresh();
+				RestoreBoxSelectionLater(QStringList() << newName);
 			}
 			Results.append(Status);
 		}

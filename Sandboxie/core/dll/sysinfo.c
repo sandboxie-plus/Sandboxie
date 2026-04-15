@@ -556,6 +556,17 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
     if (ObjectAttributes && ObjectAttributes->ObjectName) {
         objname_len = ObjectAttributes->ObjectName->Length / sizeof(WCHAR);
         objname_buf = ObjectAttributes->ObjectName->Buffer;
+
+        // Normalize Win32 BaseNamedObjects prefixes to plain names before
+        // constructing the sandbox object path.
+        if (objname_len >= 7 && _wcsnicmp(objname_buf, L"Global\\", 7) == 0) {
+            objname_len -= 7;
+            objname_buf += 7;
+        }
+        else if (objname_len >= 6 && _wcsnicmp(objname_buf, L"Local\\", 6) == 0) {
+            objname_len -= 6;
+            objname_buf += 6;
+        }
     } 
     else { // unnamed job
 

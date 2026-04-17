@@ -32,6 +32,7 @@
 #include "common/my_shlwapi.h"
 #include "msgs/msgs.h"
 #include "gui_p.h"
+#include "core/svc/GuiWire.h"
 #include "core/svc/UserWire.h"
 
 //---------------------------------------------------------------------------
@@ -49,6 +50,14 @@ static BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo);
 
 static BOOL SH32_Shell_NotifyIconW(
     DWORD dwMessage, PNOTIFYICONDATAW lpData);
+
+static ULONG SH32_wcsnlen(const WCHAR *src, ULONG maxChars);
+
+static ULONG SH32_NotifyIconMaxChars(
+    DWORD cbSize, ULONG fieldOffsetBytes, ULONG fieldCapacityChars);
+
+static BOOLEAN SH32_Shell_NotifyIcon_ProxyCall(
+    DWORD dwMessage, PNOTIFYICONDATAW lpData, BOOL *ret);
 
 //static HRESULT SH32_SHGetFolderPathW(
 //    HWND hwnd, int csidl, HANDLE hToken, DWORD dwFlags, LPWSTR pszPath);
@@ -192,6 +201,8 @@ extern P_LdrGetDllHandleEx      __sys_LdrGetDllHandleEx;
 
 
 extern const WCHAR *File_BQQB;
+
+static const WCHAR *SH32_UseShellNotifyIconProxy = L"UseShellNotifyIconProxy";
 
 
 //---------------------------------------------------------------------------
@@ -604,6 +615,130 @@ HICON SH32_BorderToIcon(HICON hIcon, COLORREF color)
 
 
 //---------------------------------------------------------------------------
+// SH32_wcsnlen
+//---------------------------------------------------------------------------
+
+
+static ULONG SH32_wcsnlen(const WCHAR *src, ULONG maxChars)
+{
+    ULONG len = 0;
+
+    if (!src)
+        return 0;
+
+    while (len < maxChars && src[len] != L'\0')
+        ++len;
+
+    return len;
+}
+
+
+//---------------------------------------------------------------------------
+// SH32_NotifyIconMaxChars
+//---------------------------------------------------------------------------
+
+
+static ULONG SH32_NotifyIconMaxChars(
+    DWORD cbSize, ULONG fieldOffsetBytes, ULONG fieldCapacityChars)
+{
+    ULONG chars;
+
+    if (cbSize <= fieldOffsetBytes)
+        return 0;
+
+    chars = (cbSize - fieldOffsetBytes) / sizeof(WCHAR);
+    if (chars > fieldCapacityChars)
+        chars = fieldCapacityChars;
+
+    return chars;
+}
+
+
+//---------------------------------------------------------------------------
+// SH32_Shell_NotifyIcon_ProxyCall
+//---------------------------------------------------------------------------
+
+
+static BOOLEAN SH32_Shell_NotifyIcon_ProxyCall(
+    DWORD dwMessage, PNOTIFYICONDATAW lpData, BOOL *ret)
+{
+    if (! lpData)
+        return FALSE;
+
+    GUI_SHELL_NOTIFY_ICON_REQ *req =
+        (GUI_SHELL_NOTIFY_ICON_REQ *)Dll_AllocTemp(sizeof(GUI_SHELL_NOTIFY_ICON_REQ));
+    if (! req)
+        return FALSE;
+
+    memzero(req, sizeof(*req));
+    req->msgid     = GUI_SHELL_NOTIFY_ICON;
+    req->dwMessage = dwMessage;
+
+    req->cbSize           = lpData->cbSize;
+    req->hWnd             = (ULONG)(ULONG_PTR)lpData->hWnd;
+    req->uID              = lpData->uID;
+    req->uFlags           = lpData->uFlags;
+    req->uCallbackMessage = lpData->uCallbackMessage;
+    req->hIcon            = (ULONG)(ULONG_PTR)lpData->hIcon;
+
+    ULONG tipChars = SH32_NotifyIconMaxChars(
+        lpData->cbSize,
+        FIELD_OFFSET(NOTIFYICONDATAW, szTip),
+        ARRAYSIZE(req->szTip));
+
+    if (tipChars) {
+        wmemcpy(req->szTip, lpData->szTip, tipChars);
+        req->szTip[tipChars - 1] = L'\0';
+    }
+
+    if (lpData->cbSize >= (DWORD)NOTIFYICONDATAW_V2_SIZE) {
+
+        req->dwState     = lpData->dwState;
+        req->dwStateMask = lpData->dwStateMask;
+
+        wmemcpy(req->szInfo, lpData->szInfo, ARRAYSIZE(req->szInfo) - 1);
+        req->szInfo[ARRAYSIZE(req->szInfo) - 1] = L'\0';
+
+        req->uVersion = lpData->uVersion;
+
+        wmemcpy(req->szInfoTitle, lpData->szInfoTitle, ARRAYSIZE(req->szInfoTitle) - 1);
+        req->szInfoTitle[ARRAYSIZE(req->szInfoTitle) - 1] = L'\0';
+
+        req->dwInfoFlags = lpData->dwInfoFlags;
+    }
+
+#if (NTDDI_VERSION >= NTDDI_VISTA)
+    if (lpData->cbSize >= (DWORD)NOTIFYICONDATAW_V3_SIZE) {
+        req->guidItem = lpData->guidItem;
+    }
+
+    if (lpData->cbSize >= (DWORD)(NOTIFYICONDATAW_V3_SIZE + sizeof(HICON))) {
+        req->hBalloonIcon = (ULONG)(ULONG_PTR)lpData->hBalloonIcon;
+    }
+#else
+    if (lpData->cbSize >= (DWORD)(NOTIFYICONDATAW_V2_SIZE + sizeof(GUID))) {
+        req->guidItem = lpData->guidItem;
+    }
+#endif
+
+    GUI_SHELL_NOTIFY_ICON_RPL *rpl =
+        Gui_CallProxy(req, sizeof(*req), sizeof(*rpl));
+
+    Dll_Free(req);
+
+    if (! rpl)
+        return FALSE;
+
+    if (ret)
+        *ret = rpl->result ? TRUE : FALSE;
+
+    SetLastError(rpl->error);
+    Dll_Free(rpl);
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
 // SH32_Shell_NotifyIconW
 //---------------------------------------------------------------------------
 
@@ -611,32 +746,51 @@ HICON SH32_BorderToIcon(HICON hIcon, COLORREF color)
 _FX BOOL SH32_Shell_NotifyIconW(
     DWORD dwMessage, PNOTIFYICONDATAW lpData)
 {
-    BOOL ret;
+    BOOL ret = FALSE;
     HICON icon = NULL;
 
     if (dwMessage == NIM_ADD || dwMessage == NIM_MODIFY)
     {
-        if (!Gui_DisableTitle && lpData && lpData->cbSize >= sizeof(PNOTIFYICONDATAW))
+        if (!Gui_DisableTitle && lpData)
         {
-            ULONG len = wcslen(lpData->szTip);
+            ULONG tipChars = SH32_NotifyIconMaxChars(
+                lpData->cbSize,
+                FIELD_OFFSET(NOTIFYICONDATAW, szTip),
+                ARRAYSIZE(lpData->szTip));
 
-            if (Gui_BoxNameTitleLen != 0 && (len + Gui_BoxNameTitleLen + 2) <= 127)
+            if (tipChars > 1)
             {
-                wmemmove(lpData->szTip + Gui_BoxNameTitleLen + 2, lpData->szTip, len + 1);
-                wmemcpy(lpData->szTip, Gui_BoxNameTitleW, Gui_BoxNameTitleLen);
-                wmemcpy(lpData->szTip + Gui_BoxNameTitleLen, L"\r\n", 2);
-            }
-            else
-            {
-                if (len + 8 > 127) {
-                    lpData->szTip[127 - 8 - 3] = L'\0';
-                    wcscat(lpData->szTip, L"...");
-                    len = 127 - 8;
+                ULONG tipMaxLen = tipChars - 1;
+                ULONG len = SH32_wcsnlen(lpData->szTip, tipMaxLen);
+                lpData->szTip[len] = L'\0';
+
+                if (Gui_BoxNameTitleLen != 0 && (len + Gui_BoxNameTitleLen + 2) <= tipMaxLen)
+                {
+                    wmemmove(lpData->szTip + Gui_BoxNameTitleLen + 2, lpData->szTip, len + 1);
+                    wmemcpy(lpData->szTip, Gui_BoxNameTitleW, Gui_BoxNameTitleLen);
+                    wmemcpy(lpData->szTip + Gui_BoxNameTitleLen, L"\r\n", 2);
                 }
+                else
+                {
+                    if (tipMaxLen >= 8) {
 
-                wmemmove(lpData->szTip + 4, lpData->szTip, len + 1);
-                wmemcpy(lpData->szTip, L"[#] ", 4);
-                wcscat(lpData->szTip, L" [#]");
+                        if (len + 8 > tipMaxLen) {
+                            if (tipMaxLen > 11) {
+                                lpData->szTip[tipMaxLen - 8 - 3] = L'\0';
+                                wcscat(lpData->szTip, L"...");
+                                len = tipMaxLen - 8;
+                            }
+                            else {
+                                lpData->szTip[0] = L'\0';
+                                len = 0;
+                            }
+                        }
+
+                        wmemmove(lpData->szTip + 4, lpData->szTip, len + 1);
+                        wmemcpy(lpData->szTip, L"[#] ", 4);
+                        wcscat(lpData->szTip, L" [#]");
+                    }
+                }
             }
         }
 
@@ -651,7 +805,23 @@ _FX BOOL SH32_Shell_NotifyIconW(
         }
     }
 
-    ret = __sys_Shell_NotifyIconW(dwMessage, lpData);
+    if (Gui_OpenAllWinClasses && Gui_UseProxyService
+        && Config_GetSettingsForImageName_bool(SH32_UseShellNotifyIconProxy, TRUE)) {
+
+        //
+        // When OpenWinClass=* is set, FindWindowW/SendMessageW hooks are not
+        // installed, so Shell_NotifyIconW cannot locate Shell_TrayWnd on the
+        // Sandboxie desktop.  Route the call through the GUI proxy, which
+        // runs on the real desktop and can invoke Shell_NotifyIconW there.
+        //
+
+        if (! SH32_Shell_NotifyIcon_ProxyCall(dwMessage, lpData, &ret))
+            ret = __sys_Shell_NotifyIconW(dwMessage, lpData);
+
+    } else {
+
+        ret = __sys_Shell_NotifyIconW(dwMessage, lpData);
+    }
 
     if (icon) 
     {

@@ -30,6 +30,7 @@
 #include "core/drv/api_defs.h"
 #include "common/my_version.h"
 #include <stdlib.h>
+#include <shellapi.h>
 #include <sddl.h>
 #include <aclapi.h>
 #include <dde.h>
@@ -787,6 +788,7 @@ bool GuiServer::CreateQueueSlave(const WCHAR *cmdline)
     m_SlaveFuncs[GUI_GET_CLIPBOARD_METAFILE] = &GuiServer::GetClipboardMetaFileSlave;
     m_SlaveFuncs[GUI_SEND_POST_MESSAGE]     = &GuiServer::SendPostMessageSlave;
     m_SlaveFuncs[GUI_SEND_COPYDATA]         = &GuiServer::SendCopyDataSlave;
+    m_SlaveFuncs[GUI_SHELL_NOTIFY_ICON]     = &GuiServer::ShellNotifyIconSlave;
     m_SlaveFuncs[GUI_CLIP_CURSOR]           = &GuiServer::ClipCursorSlave;
     m_SlaveFuncs[GUI_SET_FOREGROUND_WINDOW] = &GuiServer::SetForegroundWindowSlave;
     m_SlaveFuncs[GUI_MONITOR_FROM_WINDOW]   = &GuiServer::MonitorFromWindowSlave;
@@ -3119,6 +3121,85 @@ ULONG GuiServer::SendCopyDataSlave(SlaveArgs *args)
     rpl->error = GetLastError();
 
     args->rpl_len = sizeof(GUI_SEND_COPYDATA_RPL);
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// ShellNotifyIconSlave
+//---------------------------------------------------------------------------
+
+
+ULONG GuiServer::ShellNotifyIconSlave(SlaveArgs *args)
+{
+    GUI_SHELL_NOTIFY_ICON_REQ *req = (GUI_SHELL_NOTIFY_ICON_REQ *)args->req_buf;
+    GUI_SHELL_NOTIFY_ICON_RPL *rpl = (GUI_SHELL_NOTIFY_ICON_RPL *)args->rpl_buf;
+
+    if (args->req_len < sizeof(GUI_SHELL_NOTIFY_ICON_REQ))
+        return STATUS_INFO_LENGTH_MISMATCH;
+
+    //
+    // resolve Shell_NotifyIconW dynamically to avoid a static shell32 dependency
+    //
+
+    typedef BOOL (WINAPI *P_Shell_NotifyIconW)(DWORD, PNOTIFYICONDATAW);
+    static P_Shell_NotifyIconW fnShellNotifyIconW = NULL;
+    if (!fnShellNotifyIconW) {
+        HMODULE hShell32 = GetModuleHandleW(L"shell32.dll");
+        if (!hShell32)
+            hShell32 = LoadLibraryW(L"shell32.dll");
+        if (hShell32)
+            fnShellNotifyIconW = (P_Shell_NotifyIconW)GetProcAddress(hShell32, "Shell_NotifyIconW");
+    }
+
+    if (!fnShellNotifyIconW) {
+        rpl->error  = ERROR_PROC_NOT_FOUND;
+        rpl->result = 0;
+        args->rpl_len = sizeof(*rpl);
+        return STATUS_SUCCESS;
+    }
+
+    //
+    // reconstruct NOTIFYICONDATAW from the platform-neutral wire format
+    //
+
+    NOTIFYICONDATAW nid;
+    memset(&nid, 0, sizeof(nid));
+    nid.cbSize = req->cbSize;
+    if (nid.cbSize < (DWORD)NOTIFYICONDATAW_V1_SIZE)
+        nid.cbSize = (DWORD)NOTIFYICONDATAW_V1_SIZE;
+#if (NTDDI_VERSION >= NTDDI_VISTA)
+    if (nid.cbSize > (DWORD)sizeof(nid))
+        nid.cbSize = (DWORD)sizeof(nid);
+#else
+    if (nid.cbSize > (DWORD)NOTIFYICONDATAW_V2_SIZE)
+        nid.cbSize = (DWORD)NOTIFYICONDATAW_V2_SIZE;
+#endif
+    nid.hWnd             = (HWND)(ULONG_PTR)req->hWnd;
+    nid.uID              = req->uID;
+    nid.uFlags           = req->uFlags;
+    nid.uCallbackMessage = req->uCallbackMessage;
+    nid.hIcon            = (HICON)(ULONG_PTR)req->hIcon;
+    wmemcpy(nid.szTip, req->szTip, ARRAYSIZE(nid.szTip) - 1);
+    nid.szTip[ARRAYSIZE(nid.szTip) - 1] = L'\0';
+    nid.dwState          = req->dwState;
+    nid.dwStateMask      = req->dwStateMask;
+    wmemcpy(nid.szInfo, req->szInfo, ARRAYSIZE(nid.szInfo) - 1);
+    nid.szInfo[ARRAYSIZE(nid.szInfo) - 1] = L'\0';
+    nid.uVersion         = req->uVersion;
+    wmemcpy(nid.szInfoTitle, req->szInfoTitle, ARRAYSIZE(nid.szInfoTitle) - 1);
+    nid.szInfoTitle[ARRAYSIZE(nid.szInfoTitle) - 1] = L'\0';
+    nid.dwInfoFlags      = req->dwInfoFlags;
+    nid.guidItem         = req->guidItem;
+#if (NTDDI_VERSION >= NTDDI_VISTA)
+    nid.hBalloonIcon     = (HICON)(ULONG_PTR)req->hBalloonIcon;
+#endif
+
+    BOOL result = fnShellNotifyIconW(req->dwMessage, &nid);
+
+    rpl->error  = GetLastError();
+    rpl->result = result ? 1 : 0;
+    args->rpl_len = sizeof(*rpl);
     return STATUS_SUCCESS;
 }
 

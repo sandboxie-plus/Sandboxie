@@ -63,6 +63,7 @@ enum {
     GUI_WND_HOOK_NOTIFY,
     GUI_WND_HOOK_REGISTER,
     GUI_KILL_JOB,
+    GUI_SHELL_NOTIFY_ICON,
     GUI_MAX_REQUEST_CODE
 };
 
@@ -769,6 +770,44 @@ struct tagGUI_KILL_JOB_REQ
 };
 
 typedef struct tagGUI_KILL_JOB_REQ GUI_KILL_JOB_REQ;
+
+//---------------------------------------------------------------------------
+// Shell Notify Icon (tray icon proxy for OpenWinClass=* mode)
+//---------------------------------------------------------------------------
+
+// Platform-neutral representation of NOTIFYICONDATAW fields
+struct tagGUI_SHELL_NOTIFY_ICON_REQ
+{
+    ULONG msgid;
+    ULONG dwMessage;        // NIM_ADD, NIM_MODIFY, NIM_DELETE, etc.
+    ULONG cbSize;           // original cbSize from caller
+    ULONG hWnd;             // HWND as 32-bit (user handles fit in 32 bits)
+    ULONG uID;
+    ULONG uFlags;
+    ULONG uCallbackMessage;
+    ULONG hIcon;            // HICON as 32-bit (user handles fit in 32 bits)
+    WCHAR szTip[128];
+    DWORD dwState;
+    DWORD dwStateMask;
+    WCHAR szInfo[256];
+    UINT  uVersion;
+    WCHAR szInfoTitle[64];
+    DWORD dwInfoFlags;
+    GUID  guidItem;
+    ULONG hBalloonIcon;     // HICON as 32-bit
+    ULONG pad;
+};
+
+struct tagGUI_SHELL_NOTIFY_ICON_RPL
+{
+    ULONG status;
+    ULONG error;
+    ULONG result;           // BOOL return value from Shell_NotifyIconW
+    ULONG pad;
+};
+
+typedef struct tagGUI_SHELL_NOTIFY_ICON_REQ GUI_SHELL_NOTIFY_ICON_REQ;
+typedef struct tagGUI_SHELL_NOTIFY_ICON_RPL GUI_SHELL_NOTIFY_ICON_RPL;
 
 //---------------------------------------------------------------------------
 

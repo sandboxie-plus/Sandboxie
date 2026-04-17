@@ -426,6 +426,9 @@ SBIE2180 LowLevel.dll 错误 %2
 SBIE2181 LowLevel.dll 绕行无法将 SbieDll.dll 加载到目标进程中。
 .
 
+2189;pop;inf;01
+SBIE2189 %2 很可能是一个基于 Chromium 的应用程序，但其镜像类型并非 Chrome；因此很可能会执行失败。
+.
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 不建议更新在沙箱中运行的 %2
@@ -1048,7 +1051,8 @@ Sandboxie 驱动程序 (SbieDrv) 无法使用。
 .
 
 3220;txt;01
-重命名沙箱中的一个长文件名出错。沙箱内容将不会被删除。
+重命名沙箱中的一个长文件名出错。
+沙箱内容将不会被删除。
 .
 
 3221;txt;01

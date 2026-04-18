@@ -148,6 +148,8 @@ protected:
 
     ULONG SendCopyDataSlave(SlaveArgs *args);
 
+    ULONG ShellNotifyIconSlave(SlaveArgs *args);
+
     ULONG ClipCursorSlave(SlaveArgs *args);
 
     ULONG SetForegroundWindowSlave(SlaveArgs *args);

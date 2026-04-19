@@ -2220,7 +2220,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="1220"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;您是否要前往&lt; &quot;%1&quot;&gt;信息页&lt;/a&gt;？&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;您是否要前往&lt;a href=&quot;%1&quot;&gt;信息页&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1240"/>
@@ -8113,7 +8113,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/SupportDialog.cpp" line="204"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;. This pause allows you to consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt; or &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;earning one by contributing&lt;/a&gt; to the project. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
         <oldsource>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</oldsource>
-        <translation>Sandboxie &lt;u&gt;在没有&lt;/u&gt;有效的赞助者许可证时有时会&lt;b&gt;&lt;font color=&apos;red&apos;&gt;弹窗提醒&lt;/font&gt;&lt;/b&gt;，让您考虑是否&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;(但不会中断不需要赞助着许可证的沙箱内的程序)，&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;不仅可以消除这种提醒，还可以 &lt;b&gt;提供特殊的增强功能&lt;b&gt;，实现更好的安全性和兼容性。</translation>
+        <translation>Sandboxie &lt;u&gt;在没有&lt;/u&gt;有效的赞助者许可证时有时会&lt;b&gt;&lt;font color=&apos;red&apos;&gt;弹窗提醒&lt;/font&gt;&lt;/b&gt;，让您考虑是否&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;(但不会中断不需要赞助着许可证的沙箱内的程序)，&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者许可证&lt;/a&gt;不仅可以消除这种提醒，还可以 &lt;b&gt;提供特殊的增强功能&lt;/b&gt;，实现更好的安全性和兼容性。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="235"/>

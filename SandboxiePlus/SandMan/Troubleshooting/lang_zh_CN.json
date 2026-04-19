@@ -73,7 +73,7 @@
 "SBIE2113: File is too large to copy into sandbox, creating empty file": "SBIE2113: 复制进沙箱中的文件太大, 正在创建空文件",
 "File is too large to copy into sandbox, creating empty file": "复制进沙箱中的文件太大, 正在创建空文件",
 
-"SBIE2114: File is too large to copy into sandbox, denying access": "SBIE2114: 复制进沙箱中的文件太大, 正在拒绝访问"
+"SBIE2114: File is too large to copy into sandbox, denying access": "SBIE2114: 复制进沙箱中的文件太大, 正在拒绝访问",
 "File is too large to copy into sandbox, denying access": "复制进沙箱中的文件太大, 正在拒绝访问",
 
 "SBIE2115: File is too large to copy into sandbox, opening in read only": "SBIE2115: 复制进沙箱中的文件太大, 正在以只读模式打开",
@@ -94,6 +94,8 @@
 "The Process '%1' crashed":"进程 '%1' 已崩溃",
 "This program is known to work in a Green (App Compartment) type sandbox.":"该程序可在绿色（应用隔离）型沙箱中正常运行。",
 "There is no known workaround for this process. Do you want to report this issue?":"该进程暂无已知解决方案。是否要报告此问题？",
+
+"No, report application to sbie devs":"不，向 Sandboxie 开发者报告此问题",
 
 "SBIE2313: Could not execute specific process": "SBIE2313: 无法运行一个特定的进程",
 "Sandboxie failed to start a process in the sandbox": "Sandboxie 在沙箱中启动进程失败",

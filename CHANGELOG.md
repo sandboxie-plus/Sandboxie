@@ -24,6 +24,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - note: when `BreakoutProcess` uses path-based rules, `ForceFolder` or wildcard `ForceProcess` rules can still force unmatched child processes spawned by a breakout-launched parent
 - changed ForceChildren-origin propagation to persist across child process inheritance and model-pid starts (including PCA restart path), enabling consistent breakout arbitration after restart
 
+### Fixed
+- fixed Sandboxie breakout argument rewriting dropping quotes around translated document paths, which could split file arguments at spaces
+
 
   
 ## [1.17.5 / 5.72.5] - 2026-05-02

@@ -1406,6 +1406,8 @@ _FX BOOL Proc_CreateProcessInternalW(
                             WCHAR* end = (WCHAR*)SbieDll_FindArgumentEnd(ptr);
                             ULONG len = (ULONG)(end - ptr);
                             if (len > 0) {
+                                BOOLEAN quote_translated_arg = FALSE;
+                                BOOLEAN arg_was_quoted = (ptr[0] == L'\"');
                                 WCHAR savechar = *end;
                                 *end = L'\0';
 
@@ -1427,6 +1429,7 @@ _FX BOOL Proc_CreateProcessInternalW(
                                             SbieDll_TranslateNtToDosPath(temp);
                                             ptr = temp;
                                             len = wcslen(ptr);
+                                            quote_translated_arg = arg_was_quoted;
                                         } 
 
                                         CloseHandle(hFile);
@@ -1434,8 +1437,16 @@ _FX BOOL Proc_CreateProcessInternalW(
 
                                 }
 
-                                wmemcpy(mybuff2, ptr, len);
-                                mybuff2 += len;
+                                if (quote_translated_arg) {
+                                    *mybuff2++ = L'\"';
+                                    wmemcpy(mybuff2, ptr, len);
+                                    mybuff2 += len;
+                                    *mybuff2++ = L'\"';
+                                }
+                                else {
+                                    wmemcpy(mybuff2, ptr, len);
+                                    mybuff2 += len;
+                                }
 
                                 *end = savechar;
                             }

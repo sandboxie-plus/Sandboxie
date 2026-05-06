@@ -19,6 +19,7 @@ typedef long NTSTATUS;
 #include <stdio.h>
 #include <stdarg.h>
 #include <fileapi.h>
+#include <strsafe.h>
 
 
 __declspec(dllimport) NTSTATUS __stdcall
@@ -83,39 +84,35 @@ static NTSTATUS MyCreateFile(_Out_ PHANDLE FileHandle, _In_ PCWSTR FileName, _In
 	return NtCreateFile(FileHandle, DesiredAccess, &attr, &Iosb, NULL, FileAttributes, ShareAccess, CreateDisposition, CreateOptions, NULL, 0);
 }
 
-NTSTATUS MyReadFile(
-    _In_ PWSTR FileName,
-    _In_ ULONG FileSizeLimit,
-    _Out_ PVOID* Buffer,
-    _Out_ PULONG FileSize
-    )
+static NTSTATUS MyCreateFile(
+    _Out_ PHANDLE FileHandle, 
+    _In_ PCWSTR FileName, 
+    _In_ ACCESS_MASK DesiredAccess,
+    _In_opt_ ULONG FileAttributes, 
+    _In_ ULONG ShareAccess, 
+    _In_ ULONG CreateDisposition, 
+    _In_ ULONG CreateOptions
+)
 {
     NTSTATUS status;
-    HANDLE fileHandle = INVALID_HANDLE_VALUE;
-    LARGE_INTEGER fileSize;
-    PVOID buffer;
-    IO_STATUS_BLOCK iosb;
+    UNICODE_STRING uni;
+    OBJECT_ATTRIBUTES attr;
+    WCHAR wszBuffer[MAX_PATH];
+    HRESULT hr;
 
-    if (!NT_SUCCESS(status = MyCreateFile(&fileHandle, FileName, FILE_GENERIC_READ, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE)))
-        goto CleanupExit;
+    hr = StringCchPrintfW(wszBuffer, MAX_PATH, L"\\??\\%s", FileName);
+    
+    if (FAILED(hr)) {
+        return STATUS_NAME_TOO_LONG;
+    }
 
-    if (!GetFileSizeEx(fileHandle, &fileSize) || fileSize.QuadPart > FileSizeLimit)
-        goto CleanupExit;
+    RtlInitUnicodeString(&uni, wszBuffer);
+    InitializeObjectAttributes(&attr, &uni, OBJ_CASE_INSENSITIVE, NULL, 0);
 
-    buffer = malloc((ULONG)fileSize.QuadPart + 1);
-    if (!NT_SUCCESS(status = NtReadFile(fileHandle, NULL, NULL, NULL, &iosb, buffer, (ULONG)fileSize.QuadPart, NULL, NULL)))
-        goto CleanupExit;
-
-    ((char*)buffer)[fileSize.QuadPart] = 0;
-
-    *Buffer = buffer;
-    if(FileSize) *FileSize = (ULONG)fileSize.QuadPart;
-
-CleanupExit:
-    if(fileHandle != INVALID_HANDLE_VALUE)
-        NtClose(fileHandle);
-
-    return status;
+    IO_STATUS_BLOCK Iosb;
+    return NtCreateFile(FileHandle, DesiredAccess, &attr, &Iosb, NULL, 
+                          FileAttributes, ShareAccess, CreateDisposition, 
+                          CreateOptions, NULL, 0);	
 }
 
 NTSTATUS MyWriteFile(

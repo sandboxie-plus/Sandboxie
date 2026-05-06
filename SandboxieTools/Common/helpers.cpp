@@ -59,7 +59,7 @@ bool ListDir(std::wstring Path, std::vector<std::wstring>& Entries)
 	while ((e = readdir(d)) != NULL)
 	{
 		std::string aName = e->d_name;
-		std::wstring Name = std::wstring(aName.begin(), aName.end());
+		std::wstring Name = g_str_conv.from_bytes(aName);
 
 		// Skip symlinks and directory junctions (reparse points) to prevent attacks
 		std::wstring fullPath = Path + Name;
@@ -131,7 +131,7 @@ void DbgPrint(const wchar_t* format, ...)
     
     wchar_t tmp1[510];
 
-    _vsnwprintf(tmp1, sizeof(tmp1), format, va_args);
+    _vsnwprintf(tmp1, _countof(tmp1), format, va_args);
 
     OutputDebugStringW(tmp1);
 

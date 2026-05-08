@@ -34,7 +34,15 @@ void GetWebPayload(PVOID RequestHandle, PSTR* pData, ULONG* pDataLength)
 		if (allocatedLength < dataLength + returnLength)
 		{
 			allocatedLength *= 2;
-			*pData = (PSTR)realloc(*pData, allocatedLength);
+			PSTR pTemp = (PSTR)realloc(*pData, newAllocatedLength);
+        
+            if (!pTemp) {
+                free(*pData);
+                *pData = NULL;
+                return;
+            }
+            *pData = pTemp;
+            allocatedLength = newAllocatedLength;
 		}
 
 		memcpy(*pData + dataLength, buffer, returnLength);

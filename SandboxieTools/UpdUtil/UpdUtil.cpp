@@ -21,6 +21,8 @@
 #include <fcntl.h>
 #include <aclapi.h>
 #include <iostream>
+#include <memory>
+#include <cstdlib>
 #include "../Common/helpers.h"
 #include "../Common/WebUtils.h"
 #include "../Common/json/JSON.h"
@@ -753,7 +755,8 @@ int DownloadUpdate(std::wstring temp_dir, std::shared_ptr<SFiles> pNewFiles)
 		char* pData = NULL;
 		ULONG uDataLen = 0;
 		if (WebDownload(I->second->Url, &pData, &uDataLen)) {
-
+        std::unique_ptr<unsigned char[], void(*)(void*)> sigPtr((unsigned char*)signature, std::free);
+			
 			ULONG hashSize;
 			PVOID hash = NULL;
 			if(NT_SUCCESS(MyHashBuffer(pData, uDataLen, &hash, &hashSize)))

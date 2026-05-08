@@ -138,7 +138,7 @@ void DbgPrint(const wchar_t* format, ...)
     va_end(va_args);
 }
 
-std::multimap<std::wstring, std::wstring> GetArguments(const std::wstring& Arguments, wchar_t Separator, wchar_t Assigner, std::wstring* First, bool bLowerKeys, bool bReadEsc)
+std::multimap<std::wstring, std::wstring> GetArguments(const std::wstring_view Arguments, wchar_t Separator, wchar_t Assigner, std::wstring* First, bool bLowerKeys, bool bReadEsc)
 {
     std::multimap<std::wstring, std::wstring> ArgumentList;
 

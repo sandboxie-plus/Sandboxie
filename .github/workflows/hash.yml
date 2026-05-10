@@ -19,10 +19,35 @@ jobs:
 
     env:
       HASH_FILE: "sha256-checksums.txt"  # Name of the file for storing SHA256 hashes
-      GITHUB_API_VERSION: "2022-11-28"   # Define the GitHub API version as a variable
+      GITHUB_API_VERSION: "2026-03-10"   # Define the GitHub API version as a variable
 
     steps:
+      - name: Check release mutability
+        id: check_mutability
+        run: |
+          # Fetch the release and read the immutable boolean from the API response.
+          IS_IMMUTABLE=$(curl -sSL \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: ${{ env.GITHUB_API_VERSION }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}" \
+            | jq -r '.immutable // false')
+
+          echo "immutable=$IS_IMMUTABLE"
+          echo "immutable=$IS_IMMUTABLE" >> $GITHUB_OUTPUT
+
+      - name: Diagnostic (release is immutable)
+        if: steps.check_mutability.outputs.immutable == 'true'
+        run: |
+          echo "## Workflow Skipped: Release Is Immutable" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Release:** \`${{ github.event.release.tag_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Reason:** The release is marked as immutable and cannot be modified." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Hash calculation and upload have been skipped." >> $GITHUB_STEP_SUMMARY
+
       - name: Download release assets
+        if: steps.check_mutability.outputs.immutable != 'true'
         run: |
           mkdir -p assets  # Create a directory for downloaded assets
           TAG=${{ github.event.release.tag_name }}  # Get the release tag name
@@ -48,19 +73,20 @@ jobs:
           done
 
       - name: Check for downloaded assets
+        if: steps.check_mutability.outputs.immutable != 'true'
         id: check_assets
         run: |
           # Check if any assets were downloaded (excluding the hash file)
           if [ "$(ls -A assets | grep -v ${{ env.HASH_FILE }})" ]; then
             echo "Assets downloaded."
-            echo "assets_downloaded=true" >> $GITHUB_ENV
+            echo "assets_downloaded=true" >> $GITHUB_OUTPUT
           else
             echo "No assets downloaded."
-            echo "assets_downloaded=false" >> $GITHUB_ENV
+            echo "assets_downloaded=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Calculate file hashes
-        if: env.assets_downloaded == 'true'  # Only run if assets were downloaded
+        if: steps.check_assets.outputs.assets_downloaded == 'true'  # Only run if assets were downloaded
         run: |
           cd assets  # Change to the assets directory
           ls -la  # List files for debugging
@@ -81,7 +107,7 @@ jobs:
           cat "${{ env.HASH_FILE }}"  # Display the contents of the new hash file
 
       - name: Check and upload hashes to release
-        if: env.assets_downloaded == 'true'  # Only run if assets were downloaded
+        if: steps.check_assets.outputs.assets_downloaded == 'true'  # Only run if assets were downloaded
         run: |
           # Get the Release ID using the GitHub API
           RELEASE_ID=$(curl -sL \

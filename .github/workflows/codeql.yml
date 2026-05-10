@@ -3,7 +3,7 @@ name: "CodeQL"
 on:
   workflow_dispatch:
   push:
-    branches: [ 'master' ]
+    branches: [master]
     paths:
       - '**.c'
       - '**.cpp'
@@ -18,7 +18,7 @@ on:
       - '**.props'
   pull_request:
     types: [opened, reopened, synchronize]
-    branches: [ 'master' ]
+    branches: [master]
     paths:
       - '**.c'
       - '**.cpp'
@@ -35,7 +35,7 @@ on:
     - cron: '33 7 * * 6'
 
 concurrency:
-  group: codeql-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 env:

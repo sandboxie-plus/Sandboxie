@@ -35,6 +35,9 @@ on:
   schedule:
     - cron: '33 7 * * 6'
 
+env:
+  CODEQL_ACTION_FILE_COVERAGE_ON_PRS: true
+
 jobs:
   analyze-cpp:
     name: Analyze (C/C++)

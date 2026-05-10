@@ -17,8 +17,7 @@ on:
       - '**.vcxproj.filters'
       - '**.props'
   pull_request:
-    types:
-      - opened
+    types: [opened, reopened, synchronize]
     branches: [ 'master' ]
     paths:
       - '**.c'
@@ -34,6 +33,10 @@ on:
       - '**.props'
   schedule:
     - cron: '33 7 * * 6'
+
+concurrency:
+  group: codeql-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 env:
   CODEQL_ACTION_FILE_COVERAGE_ON_PRS: true

@@ -19,6 +19,7 @@ typedef long NTSTATUS;
 #include <stdio.h>
 #include <stdarg.h>
 #include <fileapi.h>
+#include <errno.h>
 
 
 __declspec(dllimport) NTSTATUS __stdcall
@@ -75,7 +76,15 @@ static NTSTATUS MyCreateFile(_Out_ PHANDLE FileHandle, _In_ PCWSTR FileName, _In
     UNICODE_STRING uni;
 	OBJECT_ATTRIBUTES attr;
     WCHAR wszBuffer[MAX_PATH];
-    _snwprintf_s(wszBuffer, _countof(wszBuffer), _TRUNCATE, L"\\??\\%s", FileName);
+    int written = _snwprintf_s(wszBuffer, _countof(wszBuffer), _TRUNCATE, L"\\??\\%s", FileName);
+    if (written < 0)
+    {
+        if (errno == ERANGE) {
+            return STATUS_NAME_TOO_LONG; // 0xC0000106L
+        } else {
+            return STATUS_INVALID_PARAMETER; // 0xC000000DL
+        }
+    }
 	RtlInitUnicodeString(&uni, wszBuffer);
 	InitializeObjectAttributes(&attr, &uni, OBJ_CASE_INSENSITIVE, NULL, 0);
 

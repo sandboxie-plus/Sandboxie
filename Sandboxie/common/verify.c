@@ -60,7 +60,11 @@ static NTSTATUS MyCreateFile(_Out_ PHANDLE FileHandle, _In_ PCWSTR FileName, _In
     UNICODE_STRING uni;
 	OBJECT_ATTRIBUTES attr;
     WCHAR wszBuffer[MAX_PATH];
-    _snwprintf(wszBuffer, MAX_PATH, L"\\??\\%s", FileName);
+
+    int ret = _snwprintf_s(wszBuffer, MAX_PATH, _TRUNCATE, L"\\??\\%s", FileName);
+    if (ret < 0)
+        return STATUS_NAME_TOO_LONG;
+
 	RtlInitUnicodeString(&uni, wszBuffer);
 	InitializeObjectAttributes(&attr, &uni, OBJ_CASE_INSENSITIVE, NULL, 0);
 

@@ -294,13 +294,16 @@ void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	{
 		QFile File(RootPath + "\\" + "BoxConfig.ini");
 		if (File.open(QFile::ReadOnly)) {
+			QString configContent = QString::fromUtf8(File.readAll());
+			File.close();
+
+			// Remove FileRootPath= entries as the path should be determined by the new box location
+			configContent.remove(QRegularExpression("(?m)^FileRootPath=.*$\\n?"));
 
 			QMetaObject::invokeMethod(theAPI, "SbieIniSetSection", Qt::BlockingQueuedConnection, // run this in the main thread
 				Q_ARG(QString, BoxName),
-				Q_ARG(QString, QString::fromUtf8(File.readAll()))
+				Q_ARG(QString, configContent)
 			);
-
-			File.close();
 		}
 		File.remove();
 	}

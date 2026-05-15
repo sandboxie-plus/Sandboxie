@@ -723,6 +723,9 @@ static void ImportMultiBoxesAsync(const CSbieProgressPtr& pProgress, const QStri
 				QString configContent = QString::fromUtf8(File.readAll());
 				File.close();
 
+				// Remove FileRootPath= entries as the path should be determined by the new box location
+				configContent.remove(QRegularExpression("(?m)^FileRootPath=.*$\\n?"));
+
 				// Replace box name in section header if renamed
 				// The section header is typically [BoxName] on the first line
 				// We need to handle the case where the archive box name differs from the new name

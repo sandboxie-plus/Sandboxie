@@ -513,6 +513,8 @@ CSandMan::CSandMan(QWidget *parent)
 #else
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 #endif
+	if (IsElevated())
+		appTitle.append(tr(" (Administrator)"));
 
 	this->setWindowTitle(appTitle);
 

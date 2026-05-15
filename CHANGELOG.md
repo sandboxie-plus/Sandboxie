@@ -15,7 +15,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed high CPU usage caused by DWM with applications using custom titlebars (e.g., Delphi VCL)
 
 ### Changed
-- improved box import/export behavioure [#5362](https://github.com/sandboxie-plus/Sandboxie/issues/5362)
+- improved box import/export behaviour [#5362](https://github.com/sandboxie-plus/Sandboxie/issues/5362)
+- changed export/import format to store box config as `BoxName.ini` with `[BoxName]` section header instead of `BoxName/BoxConfig.ini`
+  - import supports both old and new formats for backward compatibility
+  - the new format is 1:1 compatible with portable boxes allowing to just unpack an export archive and add the boxes as portable.
+
 
 
 

@@ -70,9 +70,6 @@ public:
 
 	virtual QString			GetDisplayName() const;
 
-	SB_PROGRESS				ExportBox(const QString& FileName, const QString& Password = "", int Level = 5, bool Solid = false);
-	SB_PROGRESS				ImportBox(const QString& FileName, const QString& Password);
-
 	SB_PROGRESS				CopyBox(const QString& DestDir);
 
 	virtual void			UpdateDetails();
@@ -219,9 +216,6 @@ protected:
 
 	void					AddJobToQueue(CBoxJob* pJob);
 	void					StartNextJob();
-
-	static void				ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QVariantMap& Params);
-	static void				ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName, const QString& Password);
 
 	static void				CopyBoxAsync(const CSbieProgressPtr& pProgress, const QString& SrcDir, const QString& DestDir);
 

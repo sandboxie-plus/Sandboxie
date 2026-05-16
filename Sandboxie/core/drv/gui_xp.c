@@ -1392,7 +1392,7 @@ _FX ULONG_PTR Gui_NtUserSendInput(
                     proc2 = Process_Find(idProcess, NULL);
                 else
                     proc2 = NULL;   // probably, window is outside job
-                if (proc2)
+                if (proc2 && proc2->box == proc->box)
                     is_active_window_sandboxed = TRUE;
             }
 

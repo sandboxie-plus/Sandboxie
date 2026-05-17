@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.6 / 5.72.6] - 2026-05-??
+## [1.17.6 / 5.72.6] - 2026-05-17
 
 ### Added
 - added "(Administrator)" to the main window title when running with elevated privileges

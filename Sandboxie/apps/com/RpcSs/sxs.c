@@ -416,16 +416,6 @@ _FX void Sxs_Generate(UCHAR *buf, ULONG buf_len, HANDLE *hSection)
     if (buf_len < 16)
         return;
 
-    //
-    // force null termination at the end of the buffer so that even if
-    // the producer omitted terminators, the string scans below cannot
-    // read past the allocation
-    //
-
-    buf[buf_len - 1] = '\0';
-    if (buf_len >= 2)
-        buf[buf_len - 2] = '\0';
-
     buf_end = buf + buf_len;
 
     ptr4 = (ULONG *)buf;

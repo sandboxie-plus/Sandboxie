@@ -6,12 +6,16 @@ on:
 
 jobs:
   lock-announcements:
+    name: Lock previous announcement(s)
     runs-on: ubuntu-latest
     permissions:
       contents: read
       discussions: write
 
     steps:
+      - name: Wait for tag propagation
+        run: sleep 30
+
       - name: Lock previous announcement(s)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

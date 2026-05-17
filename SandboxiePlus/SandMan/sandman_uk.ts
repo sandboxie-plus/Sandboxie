@@ -336,22 +336,22 @@ To disable this template for a sandbox, simply uncheck it in the template list.<
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
         <source>Enter Box Image password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть пароль для образу контейнера:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="45"/>
         <source>Enter Box Image passwords:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть паролі для образу контейнера:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть паролі шифрування для експорту архіву:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть паролі шифрування для імпорту архіву:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
@@ -418,7 +418,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Archive Box Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я архіву контейнера</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
@@ -433,7 +433,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Джерело</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
@@ -448,7 +448,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="98"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортувати кожен контейнер в окремий файл</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="103"/>
@@ -499,7 +499,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="251"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Дублікат!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="429"/>
@@ -510,12 +510,12 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="444"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо експортувати: у пісочниці запущені процеси.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="449"/>
         <source>Cannot export: Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо експортувати: пісочниця порожня.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="468"/>
@@ -525,7 +525,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="473"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вибрано контейнерів для окремого експорту у файл.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="515"/>
@@ -540,37 +540,37 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="583"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished">Експортувати пісочницю</translation>
+        <translation>Експортувати пісочницю</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="863"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль для %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="878"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося відкрити архів (%1): %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="936"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати архіви</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="937"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip Архів (*.7z);;Zip Архів (*.zip);;Усі Архіви (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="973"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрані архіви не містять даних пісочниці.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="999"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо імпортувати кілька контейнерів з однаковою назвою &apos;%1&apos;. Спочатку перейменуйте їх.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1065"/>
@@ -1411,7 +1411,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="663"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути негайне відновлення файлів із місць відновлення</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="707"/>
@@ -2469,7 +2469,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="833"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1005"/>
@@ -4358,17 +4358,17 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandManTray.cpp" line="302"/>
         <source>No pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає закріплених пісочниць для відображення.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="304"/>
         <source>No active or pinned sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає активних або закріплених пісочниць для відображення.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="305"/>
         <source>No sandboxes to show.</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає пісочниць для відображення.</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="508"/>
@@ -4961,7 +4961,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="517"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Адміністратор)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
@@ -5014,7 +5014,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="1510"/>
         <source>Boxes: %1 (%2 active)  |  Processes: %3  |  Memory: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнери: %1 (%2 активні)  |  Процеси: %3  |  Пам&apos;ять: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1922"/>
@@ -5582,12 +5582,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Models/SbieModel.cpp" line="840"/>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>ЦП</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="841"/>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Пам&apos;ять</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="842"/>
@@ -6179,7 +6179,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="641"/>
         <source>    Sandbox: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Пісочниця: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="643"/>
@@ -6614,7 +6615,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Windows/SettingsWindow.cpp" line="320"/>
         <location filename="Windows/SettingsWindow.cpp" line="324"/>
         <source>As sub group</source>
-        <translation type="unfinished"></translation>
+        <translation>Як підгрупа</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="321"/>
@@ -6772,7 +6773,7 @@ This is a temporary Patreon certificate, valid for 3 months. Once it nears expir
         <location filename="Windows/SettingsWindow.cpp" line="425"/>
         <source>Remember previous state</source>
         <oldsource>Remember previouse state</oldsource>
-        <translation type="unfinished">Запам&apos;ятати попередній стан</translation>
+        <translation>Запам&apos;ятати попередній стан</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="426"/>
@@ -6832,12 +6833,12 @@ Right-click to copy</oldsource>
         <location filename="Windows/SettingsWindow.cpp" line="334"/>
         <location filename="Windows/SettingsWindow.cpp" line="572"/>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="335"/>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="342"/>
@@ -7671,7 +7672,8 @@ This Sandbox will be saved to: %1</source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+Вміст цього контейнера буде ВИДАЛЕНО після його закриття, а сам контейнер буде видалено.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1078"/>
@@ -7679,7 +7681,8 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 This box will DISCARD its content when it&apos;s closed, it&apos;s suitable only for temporary data.</source>
         <oldsource>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+Цей контейнер буде ВИДАЛЯТИ свій вміст після закриття, він підходить лише для тимчасових даних.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="1080"/>
@@ -9385,7 +9388,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1835"/>
         <source>Total CPU Rate Limit (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Загальний ліміт використання CPU (%):</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1851"/>
@@ -9395,7 +9398,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1861"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1921"/>
@@ -9701,7 +9704,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6236"/>
         <source>Complete</source>
-        <translation></translation>
+        <translation>Завершити</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6289"/>
@@ -9711,7 +9714,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6292"/>
         <source>⚙</source>
-        <translation></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6163"/>
@@ -10476,7 +10479,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5727"/>
         <source>No Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає шаблонів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5737"/>
@@ -10652,7 +10655,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4193"/>
         <source>Block common SAMBA ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокувати стандартні порти SAMBA</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3848"/>
@@ -10707,7 +10710,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3951"/>
         <source>Sandboxed programs can be forced to use a preset SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програми в пісочниці можуть бути примусово налаштовані на використання заданого SOCKS5 проксі.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4003"/>
@@ -10722,7 +10725,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1767"/>
         <source>Limit restrictions</source>
-        <translation></translation>
+        <translation>Обмеження ліміту</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1780"/>
@@ -10759,7 +10762,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5214"/>
         <source>Hide Disk Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Приховати серійний номер диска</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5221"/>
@@ -10799,7 +10802,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5404"/>
         <source>DNS Request Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Журналювання DNS запитів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="5802"/>
@@ -11413,7 +11416,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1813"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished">&lt;a href=&quot;addon://ImDisk&quot;&gt;Встановіть ImDisk&lt;/a&gt;, щоб увімкнути підтримку RAM-диска та образів дисків.</translation>
+        <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;Встановіть ImDisk&lt;/a&gt;, щоб увімкнути підтримку RAM-диска та образів дисків.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
@@ -11580,7 +11583,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="844"/>
         <source>Show custom box icons in tray list</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати власні іконки контейнерів у списку в системному треї</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="851"/>
@@ -11686,7 +11689,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2674"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати портативний контейнер</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2704"/>
@@ -11872,7 +11875,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3471"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3349"/>
@@ -12170,7 +12173,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="2382"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
-        <translation type="unfinished">Захист конфігурації</translation>
+        <translation>Конфігурація Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="422"/>
@@ -12367,7 +12370,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2218"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished">Канал preview містить останні попередні релізи з GitHub.</translation>
+        <translation>Канал preview містить останні попередні релізи з GitHub.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2312"/>

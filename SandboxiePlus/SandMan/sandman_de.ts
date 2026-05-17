@@ -421,7 +421,7 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Quelle</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
@@ -436,7 +436,7 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="98"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportiere jede Box in eine eigene Datei</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="103"/>
@@ -469,10 +469,6 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
         <translation>Existiert!</translation>
     </message>
     <message>
-        <source>Select file name</source>
-        <translation type="vanished">Dateinamen auswählen</translation>
-    </message>
-    <message>
         <location filename="BoxTransfer.cpp" line="585"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip)</source>
         <translation>7-Zip Archiv (*.7z);;Zip Archiv (*.zip)</translation>
@@ -487,7 +483,7 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="251"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplikat!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="429"/>
@@ -498,12 +494,12 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="444"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportieren nicht möglich: Sandbox hat laufende Prozesse.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="449"/>
         <source>Cannot export: Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportieren nicht möglich: Sandbox ist leer.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="468"/>
@@ -513,7 +509,7 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="473"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Boxen für den separaten Dateiexport ausgewählt.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="515"/>
@@ -523,42 +519,42 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
     <message>
         <location filename="BoxTransfer.cpp" line="549"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportordner auswählen</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="583"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished">Sandbox exportieren</translation>
+        <translation>Sandbox exportieren</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="863"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort für %1</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="878"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Öffnen des Archivs (%1): %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="936"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Archive auswählen</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="937"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip Archiv (*.7z);;Zip Archiv (*.zip);;Alle Archive (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="973"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die ausgewählten Archive enthalten keine Sandboxdaten.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="999"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es können nicht mehrere Boxen mit dem gleichen Namen &apos;%1&apos; importiert werden. Bitte benennen Sie diese zuerst um.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1065"/>
@@ -570,14 +566,6 @@ Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Spea
         <location filename="BoxTransfer.cpp" line="869"/>
         <source>Failed to open archive, wrong password?</source>
         <translation>Fehler beim Öffnen des Archivs, falsches Passwort?</translation>
-    </message>
-    <message>
-        <source>Failed to open archive (%1)!</source>
-        <translation type="vanished">Fehler beim Öffnen des Archivs (%1)!</translation>
-    </message>
-    <message>
-        <source>The archive does not contain any sandbox data.</source>
-        <translation type="vanished">Das Archiv enthält keine Sandboxdaten.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="987"/>
@@ -4076,7 +4064,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="517"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Administrator)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
@@ -11467,7 +11455,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2674"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge portable Box hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2704"/>
@@ -11488,10 +11476,6 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <location filename="Forms/SettingsWindow.ui" line="2746"/>
         <source>Create Portable Box</source>
         <translation>Erstelle portable Box</translation>
-    </message>
-    <message>
-        <source>Import Portable Box</source>
-        <translation type="vanished">Importiere portable Box</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2688"/>

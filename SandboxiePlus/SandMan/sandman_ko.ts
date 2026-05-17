@@ -556,7 +556,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="83"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>소스</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="93"/>
@@ -571,7 +571,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="98"/>
         <source>Export each box to its own file</source>
-        <translation type="unfinished"></translation>
+        <translation>각 박스를 자체 파일로 내보내기</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="103"/>
@@ -622,7 +622,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="251"/>
         <source>Duplicate!</source>
-        <translation type="unfinished"></translation>
+        <translation>중복!</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="429"/>
@@ -633,12 +633,12 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="444"/>
         <source>Cannot export: Sandbox has running processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>내보낼 수 없습니다: 샌드박스에 실행 중인 프로세스가 있습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="449"/>
         <source>Cannot export: Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>내보낼 수 없습니다: 샌드박스가 비어 있습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="468"/>
@@ -648,7 +648,7 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="473"/>
         <source>No boxes selected for separate file export.</source>
-        <translation type="unfinished"></translation>
+        <translation>별도의 파일 내보내기를 위해 선택된 박스가 없습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="515"/>
@@ -658,42 +658,42 @@ increases to 512 bits with the application of Leet (L337) speak modifications, a
     <message>
         <location filename="BoxTransfer.cpp" line="549"/>
         <source>Select Export Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>폴더 내보내기 선택</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="583"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished">샌드박스 내보내기</translation>
+        <translation>샌드박스 내보내기</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="863"/>
         <source>Password for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1의 비밀번호</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="878"/>
         <source>Failed to open archive (%1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>압축파일 (%1)를 열 수 없습니다: %2</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="936"/>
         <source>Select Archives</source>
-        <translation type="unfinished"></translation>
+        <translation>압축파일 선택</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="937"/>
         <source>7-Zip Archive (*.7z);;Zip Archive (*.zip);;All Archives (*.7z *.zip)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip 압축파일 (*.7z);;Zip 압축파일 (*.zip);;모든 압축파일 (*.7z *.zip)</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="973"/>
         <source>The selected archives do not contain any sandbox data.</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 압축파일에는 샌드박스 데이터가 포함되어 있지 않습니다.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="999"/>
         <source>Cannot import multiple boxes with the same name &apos;%1&apos;. Please rename them first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos;이라는 이름을 가진 여러 박스를 가져올 수 없습니다. 먼저 이름을 변경해 주세요.</translation>
     </message>
     <message>
         <location filename="BoxTransfer.cpp" line="1065"/>
@@ -4212,7 +4212,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="517"/>
         <source> (Administrator)</source>
-        <translation type="unfinished"></translation>
+        <translation> (관리자)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="764"/>
@@ -12271,7 +12271,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2674"/>
         <source>Add Portable Box</source>
-        <translation type="unfinished"></translation>
+        <translation>포터블 박스 추가</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2704"/>

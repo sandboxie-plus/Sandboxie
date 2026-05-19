@@ -2797,6 +2797,11 @@ typedef BOOL (*P_DefineDosDevice)(
     void *DeviceName,
     void *TargetPath);
 
+typedef ULONG (*P_QueryDosDevice)(
+    const WCHAR *DeviceName,
+    WCHAR *TargetPath,
+    ULONG Max);
+
 typedef HMODULE (*P_LoadLibraryEx)(
     const void *lpFileName, HANDLE hFile, DWORD dwFlags);
 

@@ -78,7 +78,6 @@ static P_MoveFileWithProgress       __sys_MoveFileWithProgressW     = NULL;
 static P_MoveFileWithProgress       __sys_MoveFileWithProgressA     = NULL;
 static P_ReplaceFile                __sys_ReplaceFileW              = NULL;
 static P_DefineDosDevice            __sys_DefineDosDeviceW          = NULL;
-typedef ULONG (*P_QueryDosDevice)(const WCHAR *DeviceName, WCHAR *TargetPath, ULONG Max);
 static P_QueryDosDevice             __sys_QueryDosDeviceW           = NULL;
 
 static P_GetVolumeInformation       __sys_GetVolumeInformationW     = NULL;

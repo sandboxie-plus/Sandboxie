@@ -5,6 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.17.7 / 5.72.7] - 2026-05-??
+
+### Fixed
+- fixed VMware Workstation Pro 26H1 QueryDosDevice crash [#5390](https://github.com/sandboxie-plus/Sandboxie/issues/5390)
+
+
+
 ## [1.17.6 / 5.72.6] - 2026-05-17
 
 ### Added

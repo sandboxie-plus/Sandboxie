@@ -50,6 +50,11 @@ static void File_ReplaceFileW_3(
 static BOOL File_DefineDosDeviceW(
     ULONG Flags, void *DevName, void *TargetPath);
 
+static ULONG File_QueryDosDeviceW(
+    const WCHAR *DeviceName, WCHAR *TargetPath, ULONG Max);
+
+static ULONG File_BuildSafeDosDeviceList(WCHAR *TargetPath, ULONG Max);
+
 static BOOL File_GetVolumeInformationW(
     const WCHAR *lpRootPathName,
     WCHAR *lpVolumeNameBuffer, ULONG nVolumeNameSize,
@@ -73,6 +78,8 @@ static P_MoveFileWithProgress       __sys_MoveFileWithProgressW     = NULL;
 static P_MoveFileWithProgress       __sys_MoveFileWithProgressA     = NULL;
 static P_ReplaceFile                __sys_ReplaceFileW              = NULL;
 static P_DefineDosDevice            __sys_DefineDosDeviceW          = NULL;
+typedef ULONG (*P_QueryDosDevice)(const WCHAR *DeviceName, WCHAR *TargetPath, ULONG Max);
+static P_QueryDosDevice             __sys_QueryDosDeviceW           = NULL;
 
 static P_GetVolumeInformation       __sys_GetVolumeInformationW     = NULL;
 static P_WriteProcessMemory         __sys_WriteProcessMemory        = NULL;
@@ -376,6 +383,68 @@ _FX BOOL File_DefineDosDeviceW(ULONG Flags, void *DevName, void *TargetPath)
 {
     SetLastError(ERROR_ACCESS_DENIED);
     return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_QueryDosDeviceW
+//---------------------------------------------------------------------------
+
+
+_FX ULONG File_QueryDosDeviceW(const WCHAR *DeviceName, WCHAR *TargetPath, ULONG Max)
+{
+    // VMware 26 can crash in QueryDosDeviceW during host SCSI device discovery.
+    // Guard the native call and provide a safe fallback when it faults.
+    if (_wcsicmp(Dll_ImageName, L"vmware.exe") == 0) {
+        __try {
+            return __sys_QueryDosDeviceW(DeviceName, TargetPath, Max);
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            if (!DeviceName)
+                return File_BuildSafeDosDeviceList(TargetPath, Max);
+
+            SetLastError(ERROR_FILE_NOT_FOUND);
+            return 0;
+        }
+    }
+
+    return __sys_QueryDosDeviceW(DeviceName, TargetPath, Max);
+}
+
+
+//---------------------------------------------------------------------------
+// File_BuildSafeDosDeviceList
+//---------------------------------------------------------------------------
+
+
+_FX ULONG File_BuildSafeDosDeviceList(WCHAR *TargetPath, ULONG Max)
+{
+    ULONG needed = 1; // final extra null terminator
+    DWORD drives = GetLogicalDrives();
+    int i;
+
+    for (i = 0; i < 26; ++i) {
+        if (drives & (1u << i))
+            needed += 3; // "X:" + null
+    }
+
+    if (!TargetPath || Max < needed) {
+        SetLastError(ERROR_INSUFFICIENT_BUFFER);
+        return 0;
+    }
+
+    {
+        WCHAR *p = TargetPath;
+        for (i = 0; i < 26; ++i) {
+            if (drives & (1u << i)) {
+                *p++ = (WCHAR)(L'A' + i);
+                *p++ = L':';
+                *p++ = L'\0';
+            }
+        }
+        *p = L'\0';
+    }
+
+    return needed;
 }
 
 

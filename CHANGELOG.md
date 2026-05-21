@@ -7,8 +7,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-Disable rich text acceptance in CodeEdit
-
 ## [1.17.7 / 5.72.7] - 2026-05-??
 
 ### Changed

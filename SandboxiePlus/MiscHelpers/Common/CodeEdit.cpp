@@ -985,6 +985,7 @@ CCodeEdit::CCodeEdit(QSyntaxHighlighter* pHighlighter, QWidget* pParent)
 	Font.setFamily("Courier New");
 	Font.setPointSize(10);
 	m_pSourceCode->setFont(Font);
+	m_pSourceCode->setAcceptRichText(false);
 	m_pSourceCode->setLineWrapMode(QTextEdit::NoWrap);
 	if (pHighlighter)
 		pHighlighter->setDocument(m_pSourceCode->document());
